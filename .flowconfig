@@ -1,0 +1,12 @@
+[ignore]
+.*/build/.*
+.*/contents/.*
+
+[libs]
+flow/
+core_modules/d2-tracker/flow/
+
+[options]
+suppress_comment= \\(.\\|\n\\)*\\$FlowSuppress
+module.system.node.resolve_dirname=core_modules
+module.name_mapper='^d2-tracker' ->'<PROJECT_ROOT>/src/core_modules/d2-tracker/src'
