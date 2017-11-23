@@ -1,14 +1,19 @@
 /* eslint-disable */
 'use strict';
 
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { compose } = require('react-app-rewired');
 const webpack = require('webpack');
 const path = require('path');
 const fs = require('fs');
-const customAlias = require('./devAlias.config');
-let auth;
+const customAlias = require('./alias.config');
 
-function getDhisConfig(fileContents) {
+const isDevBuild = process.argv[1].indexOf('start.js') !== -1;
+
+let auth;
+let devConfig;
+
+function getDhisConfigFromTextFile(fileContents) {
     let convertedConfig = {};    
     let lines = fileContents.split(/\r?\n/);
 
@@ -50,14 +55,29 @@ function fileExists(filePath) {
 function getFileContents(filePath) {
     if(fs.existsSync(filePath)) {
         var data = fs.readFileSync(filePath, 'utf8');    
-        return getDhisConfig(data);    
+        return getDhisConfigFromTextFile(data);    
     }
     return null;    
 }
 
+function bypass(req, res, opt) {
+    req.headers.Authorization = auth;
+    console.log('[PROXY]' + req.url);
+}
+
 function getDhisConfig() {
-    let dhisConfig;
     
+    if(devConfig){
+        return devConfig;
+    }
+
+    if(!isDevBuild){
+        devConfig = {};
+        return devConfig;
+    }
+
+    let dhisConfig;
+        
     const dhisAppDevConfigPath = process.env.DHIS2_HOME && `${process.env.DHIS2_HOME}/appDev.config`;
     try {
         dhisConfig = getFileContents(dhisAppDevConfigPath);
@@ -79,10 +99,11 @@ function getDhisConfig() {
         }
     }
     
-    return dhisConfig;
+    devConfig = dhisConfig;
+    return devConfig;
 }
 
-function rewireDefinePlugin(config) {
+function rewirePlugins(config) {
     const dhisConfig = getDhisConfig();
     const updatedPlugins = config.plugins.map(plugin => {
         if(plugin instanceof webpack.DefinePlugin){
@@ -91,27 +112,22 @@ function rewireDefinePlugin(config) {
             });
         }
         return plugin;
-    });
+    });    
     
+    const scriptPrefix = (isDevBuild ? dhisConfig.baseUrl : '..');
+    updatedPlugins.push(new HTMLWebpackPlugin({
+        template: './public/index.html',
+        vendorScripts: [
+            //`${scriptPrefix}/dhis-web-core-resource/dhis/dhis2-util-1554e6a5ab.js`,
+            //`${scriptPrefix}/dhis-web-core-resource/dhis/dhis2-storage-memory-992eeb1c0e.js`,
+        ]
+        .map(script => {            
+            return (`<script src="${script}"></script>`);
+        })
+    })); 
+   
     config.plugins = updatedPlugins;
     return config;
-}
-
-function rewireDevServerProxy(config) {
-    const dhisConfig = getDhisConfig();
-    auth = dhisConfig.authorization;
-
-    config.proxy = [
-        { path: '/dhis-web-commons/**', target: dhisConfig.baseUrl, bypass: bypass },
-        { path: '/api/*', target: dhisConfig.baseUrl, bypass: bypass },
-        { path: '/icons/**', target: dhisConfig.baseUrl, bypass: bypass },
-    ];
-    return config;
-}
-
-function bypass(req, res, opt) {
-    req.headers.Authorization = auth;
-    console.log('[PROXY]' + req.url);
 }
 
 function rewireAliases(config) {
@@ -119,12 +135,53 @@ function rewireAliases(config) {
     return config;
 }
 
+function rewireModules(config){
+    /*
+    const jqueryLoader = {
+        test: require.resolve('jquery'),
+        loader: "expose-loader?jQuery!expose-loader?$"
+    };
+
+    config.module.rules.push(jqueryLoader);
+    */
+    return config;
+}
+
+function rewireDevTool(config){
+    config.devtool = 'source-map';
+    return config;
+}
+
 function rewire(config) {
     const rewires = compose(
         rewireAliases,
-        rewireDefinePlugin
+        rewirePlugins,
+        rewireModules,
+        rewireDevTool
     );
     return rewires(config);
+}
+
+function rewireDevServerProxy(config) {
+    const dhisConfig = getDhisConfig();
+    auth = dhisConfig.authorization;
+
+    config.proxy = [
+        {  
+            context: [
+                '/api/**',
+                '/dhis-web-commons/**',
+                '/dhis-web-core-resource/**',
+                '/icons/**',
+                '/css/**',
+                '/images/**',
+            ],
+            target: dhisConfig.baseUrl,
+            changeOrigin: true,
+            bypass,
+        }   
+    ];
+    return config;
 }
 
 function rewireDevServer(config) {
@@ -135,6 +192,6 @@ function rewireDevServer(config) {
 }
 
 module.exports = {
-    rewire: rewire,
-    rewireDevServer: rewireDevServer
+    webpack: rewire,
+    devServer: rewireDevServer
 };

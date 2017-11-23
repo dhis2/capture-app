@@ -4,6 +4,8 @@ import log from 'loglevel';
 import { init, config, getUserSettings, getManifest } from 'd2/lib/d2';
 import environments from 'd2-tracker/constants/environments';
 
+import IndexedDBAdapter from 'd2-tracker/storage/IndexedDBAdapter';
+
 function setLogLevel() {
     const levels = {
         [environments.dev]: log.levels.DEBUG,
@@ -21,21 +23,34 @@ function setLogLevel() {
     log.setLevel(level);
 }
 
-async function initializeManifest(dhisDevConfig: DhisDevConfig) {
+async function initializeManifest() {
     const manifest = await getManifest('./manifest.webapp');
-    const baseUrl = process.env.NODE_ENV === environments.prod ? manifest.getBaseUrl() : dhisDevConfig.baseUrl;
-    // USING THIS -> REALLY SHOULD WORK, NEED TO LOOK AT THIS const baseUrl = manifest.getBaseUrl();
+    const baseUrl = manifest.getBaseUrl();
     config.baseUrl = `${baseUrl}/api`;
     log.info(`Loading: ${manifest.name} v${manifest.version}`);
 }
 
 export async function initializeD2() {
     setLogLevel();
-    // $FlowSuppress     
-    const dhisDevConfig: DhisDevConfig = DHIS_CONFIG; // eslint-disable-line 
-    const d2 = await initializeManifest(dhisDevConfig)
+
+    const d2 = await initializeManifest()
         .then(getUserSettings)
         .then(init);
+    
+    const idbAdapter = new IndexedDBAdapter({ name: 'test', version: 2, keyPath: 'id', objectStore: ['testStore'] });
+    try {
+        await idbAdapter.open();
 
+        //idbAdapter.set('testStore', { id: '534tgge', testContents: 'ccc' });
+                
+        await idbAdapter.setAll('testStore', [{ id: '534tgge', testContents: '654w646' }]);
+        const x = await idbAdapter.getKeys('testStore');
+        await idbAdapter.destroy();
+        
+        
+    } catch (error) {
+        console.log(error);
+    }
+    
     return d2;
 }

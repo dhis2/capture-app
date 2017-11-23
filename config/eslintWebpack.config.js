@@ -1,5 +1,5 @@
 /* eslint-disable */
-const customAlias = require('./devAlias.config');
+const customAlias = require('./alias.config');
 
 const webpackConfig = { resolve: {
     alias: customAlias

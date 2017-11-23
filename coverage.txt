@@ -1,0 +1,64 @@
+yarn run v1.2.0
+$ react-app-rewired test --env=jsdom --coverage
+
+ RUNS  ...IndexedDBAdapter.test.js
+[K[1A[K[1A
+ RUNS  ...IndexedDBAdapter.test.js
+[K[1A[K[1A
+ RUNS  ...IndexedDBAdapter.test.js
+[K[1A[K[1A
+ RUNS  ...IndexedDBAdapter.test.js
+[K[1A[K[1A
+ RUNS  ...App.test.js
+[K[1A[K[1A
+ RUNS  ...App.test.js
+[K[1A[K[1A
+ RUNS  ...App.test.js
+[K[1A[K[1A
+ RUNS  ...App.test.js
+[K[1A[K[1A-----------------------------------------------|----------|----------|----------|----------|----------------|
+File                                           |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
+-----------------------------------------------|----------|----------|----------|----------|----------------|
+All files                                      |    40.04 |    33.33 |    42.74 |       50 |                |
+ src                                           |     4.76 |        0 |        0 |     6.25 |                |
+  index.js                                     |        0 |      100 |      100 |        0 |              1 |
+  setupTests.js                                |      100 |      100 |      100 |      100 |                |
+  store.js                                     |        0 |        0 |        0 |        0 |... 15,16,21,23 |
+ src/components/App                            |    43.48 |        0 |    33.33 |    55.56 |                |
+  App.component.js                             |    85.71 |      100 |       75 |      100 |                |
+  App.container_DELETE_MAYBE.js                |        0 |        0 |        0 |        0 |1,2,3,6,7,12,13 |
+  AppContents.component.js                     |    66.67 |      100 |        0 |       80 |             21 |
+ src/core_modules/d2-tracker/flow              |      100 |      100 |      100 |      100 |                |
+  typeDeclarations.js                          |      100 |      100 |      100 |      100 |                |
+ src/core_modules/d2-tracker/src/HOC           |       50 |        0 |    44.44 |       50 |                |
+  withD2InContext.js                           |       50 |      100 |       50 |    33.33 |          12,18 |
+  withStateBoundLoadingIndicator.js            |       50 |        0 |       40 |    54.55 | 14,16,17,22,35 |
+ src/core_modules/d2-tracker/src/actions       |        0 |        0 |        0 |        0 |                |
+  actions.utils.js                             |        0 |        0 |        0 |        0 |        1,13,15 |
+ src/core_modules/d2-tracker/src/constants     |        0 |      100 |      100 |        0 |                |
+  environments.js                              |        0 |      100 |      100 |        0 |              1 |
+ src/core_modules/d2-tracker/src/d2            |       20 |        0 |        0 |       20 |                |
+  d2Instance.js                                |       20 |        0 |        0 |       20 |     7,11,12,14 |
+ src/core_modules/d2-tracker/src/storage       |    70.18 |    56.98 |    65.08 |    70.18 |                |
+  DBStorage.js                                 |        0 |      100 |        0 |        0 |           1,15 |
+  IndexedDBAdapter.js                          |     70.8 |    56.98 |    68.33 |     70.8 |... 462,465,466 |
+ src/core_modules/d2-tracker/src/tracker-redux |        0 |        0 |        0 |        0 |                |
+  trackerReducer.js                            |        0 |        0 |        0 |        0 |... 101,102,103 |
+ src/core_modules/d2-tracker/src/utils         |      100 |      100 |      100 |      100 |                |
+  errorCreator.js                              |      100 |      100 |      100 |      100 |                |
+ src/epics                                     |        0 |      100 |      100 |        0 |                |
+  trackerCapture.epics.js                      |        0 |      100 |      100 |        0 |          1,2,4 |
+ src/init                                      |        0 |        0 |        0 |        0 |                |
+  entry.actions.js                             |        0 |      100 |        0 |        0 |    1,3,5,10,11 |
+  entry.epics.js                               |        0 |        0 |        0 |        0 |... 10,11,12,13 |
+  entry.js                                     |        0 |        0 |        0 |        0 |... 33,34,37,41 |
+  init.js                                      |        0 |        0 |        0 |        0 |... 47,48,52,55 |
+  react16Temp.js                               |        0 |        0 |        0 |        0 |   1,5,6,7,9,11 |
+ src/reducers/descriptions                     |        0 |      100 |        0 |        0 |                |
+  app.reducerDescription.js                    |        0 |      100 |        0 |        0 |... 6,8,9,10,11 |
+  trackerCapture.reducerDescriptions.js        |        0 |      100 |      100 |        0 |            1,2 |
+ src/styles                                    |      100 |      100 |      100 |      100 |                |
+  uiTheme.js                                   |      100 |      100 |      100 |      100 |                |
+  uiThemeLegacy.js                             |      100 |      100 |      100 |      100 |                |
+-----------------------------------------------|----------|----------|----------|----------|----------------|
+Done in 3.58s.

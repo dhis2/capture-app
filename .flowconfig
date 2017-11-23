@@ -4,7 +4,7 @@
 
 [libs]
 flow/
-core_modules/d2-tracker/flow/
+src/core_modules/d2-tracker/flow/
 
 [options]
 suppress_comment= \\(.\\|\n\\)*\\$FlowSuppress

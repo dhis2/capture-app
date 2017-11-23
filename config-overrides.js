@@ -1,15 +1,22 @@
 /* eslint-disable */
-const dev = require('./config/dev.config.js');
-const DEV_ENV = 'development';
+const rewires = require('./config/rewire.config.js');
+var fs = require('fs');
+
 
 module.exports = {
     webpack: function (config, env) {
-        if(env === DEV_ENV){
-            config = dev.rewire(config);
-        }       
+        config = rewires.webpack(config);               
         return config;
     },
-    jest: function (config) {
+    jest: function (config) {       
+        config.transformIgnorePatterns = [
+            "/node_modules/(?!d2-ui).+(js|jsx|mjs)$"
+        ];
+
+        config.moduleNameMapper = Object.assign({}, config.moduleNameMapper, {
+            "^d2-tracker(.*)$": "<rootDir>/src/core_modules/d2-tracker/src$1"
+        });
+        
         return config;
     },
     // configFunction is the original react-scripts function that creates the
@@ -21,7 +28,7 @@ module.exports = {
     devServer: function (configFunction) {
         return function(proxy, allowedHost) {
         let config = configFunction(proxy, allowedHost);
-        config = dev.rewireDevServer(config);
+        config = rewires.devServer(config);
         // Edit config here - example: set your own certificates.
         //
         // const fs = require('fs');

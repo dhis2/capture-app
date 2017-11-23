@@ -17,7 +17,8 @@
     "globals": {
         "document": true,
         "window": true,
-        "$": true
+        "it": true,
+        "expect": true
     },
     "rules": {
         "no-param-reassign": 0       
@@ -25,7 +26,7 @@
     "settings": {
          "import/resolver": {
             "webpack": {
-                "config": "./config/eslintWebpack.config.js"
+                "config": "config/eslintWebpack.config.js"
             }
         }
     }

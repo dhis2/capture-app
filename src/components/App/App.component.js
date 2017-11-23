@@ -1,20 +1,26 @@
 // @flow
 /* eslint-disable */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import { Provider } from 'react-redux';
 import LegacyMuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { MuiThemeProvider } from 'material-ui-next/styles';
 
 // d2-ui
 import LoadingMask from 'd2-ui/lib/loading-mask/LoadingMask.component';
 
-import addD2ToContext from 'd2-tracker/HOC/addD2ToContext';
 import AppContents from './AppContents.component';
-import legacyTheme from '../../styles/uiThemeLegacy';
 
-const D2AppContents = addD2ToContext(AppContents);
+//HOCs
+import withD2InContext from 'd2-tracker/HOC/withD2InContext';
+import withStateBoundLoadingIndicator from 'd2-tracker/HOC/withStateBoundLoadingIndicator';
+
+import legacyTheme from '../../styles/uiThemeLegacy';
+import theme from '../../styles/uiTheme';
+
+const D2AppContents = withD2InContext()(AppContents);
+const LoadD2AppContents = withStateBoundLoadingIndicator((state: State) => state.app.ready)(D2AppContents);
 
 type Props = {
-    ready?: ?boolean,
     store: TrackerStore
 };
 
@@ -23,42 +29,21 @@ class App extends Component<Props> {
         super(props);
     }
 
-    static renderLoader() {
-        return (
-            <LegacyMuiThemeProvider theme={legacyTheme}>
-                <LoadingMask />
-            </LegacyMuiThemeProvider>
-        );
-    }
-
     renderContents() {
         return (
             <Provider store={this.props.store}>
             <LegacyMuiThemeProvider theme={legacyTheme}>
-                <D2AppContents />
+                <MuiThemeProvider theme={theme}>
+                    <LoadD2AppContents />
+                </MuiThemeProvider>
             </LegacyMuiThemeProvider>
              </Provider>
         );
     }
 
     render() {
-        const {ready, store} = this.props;       
-
-        return (
-            
-                <div>   
-                {
-                    (() => {
-                        if(!ready){
-                            return App.renderLoader();
-                        }
-
-                        return this.renderContents();
-                    })()                    
-                }
-                </div>
-            
-        );
+        const {store} = this.props;
+        return this.renderContents();
     }
 }
 
