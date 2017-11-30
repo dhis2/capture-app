@@ -2,14 +2,14 @@
 import StorageContainer from 'd2-tracker/storage/StorageContainer';
 import IndexedDBAdapter from 'd2-tracker/storage/IndexedDBAdapter';
 import LocalStorageAdapter from 'd2-tracker/storage/DomLocalStorageAdapter';
-import { loadStoreData, loadStoreDataIfNotExists } from 'd2-tracker/metaData/loader/storeDataLoaders';
 
-import LoadSpecification from 'd2-tracker/metaData/loadSpecifications/LoadSpecification';
-import getConstantsLoadSpecification from 'd2-tracker/metaData/loadSpecifications/getConstantsLoadSpecification';
-import getOrgUnitLevelsLoadSpecification from 'd2-tracker/metaData/loadSpecifications/getOrgUnitLevelsLoadSpecification';
-import getRelationshipsLoadSpecification from 'd2-tracker/metaData/loadSpecifications/getRelationshipsLoadSpecification';
-import getTrackedEntitiesLoadSpecification from 'd2-tracker/metaData/loadSpecifications/getTrackedEntitiesLoadSpecification';
-import getSystemSettingsLoadSpecification from './loadSpecifications/getSystemSettingsLoadSpecification';
+import LoadSpecification from 'd2-tracker/apiToStore/LoadSpecificationDefinition/LoadSpecification';
+import getConstantsLoadSpecification from 'd2-tracker/apiToStore/loadSpecifications/getConstantsLoadSpecification';
+import getOrgUnitLevelsLoadSpecification from 'd2-tracker/apiToStore/loadSpecifications/getOrgUnitLevelsLoadSpecification';
+import getRelationshipsLoadSpecification from 'd2-tracker/apiToStore/loadSpecifications/getRelationshipsLoadSpecification';
+import getTrackedEntitiesLoadSpecification from 'd2-tracker/apiToStore/loadSpecifications/getTrackedEntitiesLoadSpecification';
+
+import getProgramsData from 'd2-tracker/metaData/getPrograms';
 
 import objectStores from './metaDataObjectStores.const';
 import { set as setStorageContainer } from './metaDataStorageContainer';
@@ -33,6 +33,10 @@ function composeLoadSpecifications(specifiationsLoaders: Array<() => ?Array<Load
 }
 */
 
+function loadCoreMetaData(storageContainer: StorageContainer) {
+    return Promise.all(coreLoadSpecifications.map(loadSpecification => loadSpecification.load(storageContainer)));
+}
+
 
 async function openStorageContainer() {
     const objectStoreList = Object.keys(objectStores).map(key => objectStores[key]);
@@ -44,6 +48,7 @@ async function openStorageContainer() {
 
 export default async function loadMetaData() {
     const storageContainer = await openStorageContainer();
-    return Promise.all(coreLoadSpecifications.map(loadSpecification => loadSpecification.load(storageContainer)));
+    await loadCoreMetaData(storageContainer);
+    await getProgramsData(storageContainer, objectStores.PROGRAMS);
 }
 
