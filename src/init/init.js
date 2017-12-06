@@ -5,6 +5,7 @@ import { init, config, getUserSettings, getManifest } from 'd2/lib/d2';
 import environments from 'd2-tracker/constants/environments';
 
 import loadMetaData from '../metaData/metaDataLoader';
+import loadAppCacheData from '../appCache/appCacheLoader';
 
 function setLogLevel() {
     const levels = {
@@ -41,6 +42,10 @@ export async function initializeD2() {
 
 export async function initializeMetaData() {
     await loadMetaData();
+}
+
+export async function initializeAppCache() {
+    await loadAppCacheData();
 }
 
 
