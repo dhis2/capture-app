@@ -7,6 +7,7 @@ import withStateFrom from 'd2-ui/lib/component-helpers/withStateFrom';
 // TEST
 import { withStyles } from 'material-ui-next/styles';
 import Button from 'material-ui-next/Button';
+import EventForm from '../EventForm/EventForm.component';
 
 const HeaderBar = withStateFrom(headerBarStore$, HeaderBarComponent);
 
@@ -23,10 +24,17 @@ class AppContents extends Component {
                 <div>
                     <HeaderBar />
                 </div>
+                {
+                /*
                 <div className={this.props.classes.danger} style={{padding: 400}}>
                     <Button color="primary">
                         Primary
-                    </Button>
+                    </Button>                    
+                </div>
+                */
+                }
+                <div>
+                    <EventForm />
                 </div>
             </div>
         );

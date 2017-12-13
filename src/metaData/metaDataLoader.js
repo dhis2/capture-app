@@ -2,8 +2,8 @@
 import StorageContainer from 'd2-tracker/storage/StorageContainer';
 import IndexedDBAdapter from 'd2-tracker/storage/IndexedDBAdapter';
 import LocalStorageAdapter from 'd2-tracker/storage/DomLocalStorageAdapter';
-import programStoresKeys from 'd2-tracker/metaData/programs/programsStoresKeys';
-import trackedEntityStoresKeys from 'd2-tracker/metaData/trackedEntityAttributes/trackedEntityAttributesStoresKeys';
+import programStoresKeys from 'd2-tracker/metaDataStoreLoaders/programs/programsStoresKeys';
+import trackedEntityStoresKeys from 'd2-tracker/metaDataStoreLoaders/trackedEntityAttributes/trackedEntityAttributesStoresKeys';
 
 import LoadSpecification from 'd2-tracker/apiToStore/LoadSpecificationDefinition/LoadSpecification';
 import getConstantsLoadSpecification from 'd2-tracker/apiToStore/loadSpecifications/getConstantsLoadSpecification';
@@ -11,9 +11,9 @@ import getOrgUnitLevelsLoadSpecification from 'd2-tracker/apiToStore/loadSpecifi
 import getRelationshipsLoadSpecification from 'd2-tracker/apiToStore/loadSpecifications/getRelationshipsLoadSpecification';
 import getTrackedEntitiesLoadSpecification from 'd2-tracker/apiToStore/loadSpecifications/getTrackedEntitiesLoadSpecification';
 
-import getProgramsData from 'd2-tracker/metaData/programs/getPrograms';
-import getTrackedEntityAttributes from 'd2-tracker/metaData/trackedEntityAttributes/getTrackedEntityAttributes';
-import getOptionSets from 'd2-tracker/metaData/optionSets/getOptionSets';
+import getProgramsData from 'd2-tracker/metaDataStoreLoaders/programs/getPrograms';
+import getTrackedEntityAttributes from 'd2-tracker/metaDataStoreLoaders/trackedEntityAttributes/getTrackedEntityAttributes';
+import getOptionSets from 'd2-tracker/metaDataStoreLoaders/optionSets/getOptionSets';
 
 import objectStores from './metaDataObjectStores.const';
 import { set as setStorageContainer } from './metaDataStorageContainer';

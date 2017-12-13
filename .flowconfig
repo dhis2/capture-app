@@ -10,3 +10,4 @@ src/core_modules/d2-tracker/flow/
 suppress_comment= \\(.\\|\n\\)*\\$FlowSuppress
 module.system.node.resolve_dirname=core_modules
 module.name_mapper='^d2-tracker' ->'<PROJECT_ROOT>/src/core_modules/d2-tracker/src'
+unsafe.enable_getters_and_setters=true
