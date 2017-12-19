@@ -42,7 +42,7 @@ export async function initializeD2() {
     return d2;
 }
 
-export async function initializeBaseSettings() {
+export async function getBaseSettings() {
     const systemSettings = await getSystemSettings();
     return {
         systemSettings,

@@ -14,6 +14,7 @@
     "loglevel": "^1.5.1",
     "material-ui": "^0.19.4",
     "material-ui-next": "npm:material-ui@next",
+    "moment": "^2.19.4",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
@@ -23,7 +24,8 @@
     "redux-logger": "^3.0.6",
     "redux-observable": "^0.16.0",
     "redux-optimistic-ui": "^3.1.0",
-    "rxjs": "^5.5.2"
+    "rxjs": "^5.5.2",
+    "typeface-roboto": "^0.0.45"
   },
   "scripts": {
     "start": "react-app-rewired start",

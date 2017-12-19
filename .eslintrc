@@ -21,7 +21,43 @@
         "expect": true
     },
     "rules": {
-        "no-param-reassign": 0       
+        "no-param-reassign": 0,
+        "react/prop-types": 0,
+        "react/sort-comp": [
+            2,
+            {
+                "order": [
+                    "static-methods",
+                    "type-annotations",
+                    "lifecycle",
+                    "everything-else",
+                    "render"
+                ],
+                "groups": {
+                    "lifecycle": [
+                        "displayName",
+                        "propTypes",
+                        "contextTypes",
+                        "childContextTypes",
+                        "mixins",
+                        "statics",
+                        "defaultProps",
+                        "constructor",
+                        "getDefaultProps",
+                        "getInitialState",
+                        "state",
+                        "getChildContext",
+                        "componentWillMount",
+                        "componentDidMount",
+                        "componentWillReceiveProps",
+                        "shouldComponentUpdate",
+                        "componentWillUpdate",
+                        "componentDidUpdate",
+                        "componentWillUnmount"
+                    ]
+                }
+            }
+        ]
     },
     "settings": {
          "import/resolver": {
