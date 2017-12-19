@@ -2,7 +2,7 @@
 /* eslint-disable import/prefer-default-export */
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/concatMap';
-import getD2 from 'd2-tracker/d2/d2Instance';
+import getD2 from 'capture-core/d2/d2Instance';
 
 import { startupDataLoaded, actionTypes } from './entry.actions';
 

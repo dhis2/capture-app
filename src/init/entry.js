@@ -4,9 +4,9 @@ import { render } from 'react-dom';
 import log from 'loglevel';
 import 'typeface-roboto';
 
-import environments from 'd2-tracker/constants/environments';
+import environments from 'capture-core/constants/environments';
 
-import { setD2 } from 'd2-tracker/d2/d2Instance';
+import { setD2 } from 'capture-core/d2/d2Instance';
 
 import './react16Temp';
 import App from '../components/App/App.component';

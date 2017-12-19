@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 import LoadingMask from 'd2-ui/lib/loading-mask/LoadingMask.component';
 
-import { setD2 } from 'd2-tracker/d2/d2Instance';
+import { setD2 } from 'capture-core/d2/d2Instance';
 
 import App from '../App.component';
 import { MuiThemeProvider } from 'material-ui-next/styles';

@@ -1,7 +1,7 @@
 // @flow
-import StorageContainer from 'd2-tracker/storage/StorageContainer';
-import LocalStorageAdapter from 'd2-tracker/storage/DomLocalStorageAdapter';
-import getD2 from 'd2-tracker/d2/d2Instance';
+import StorageContainer from 'capture-core/storage/StorageContainer';
+import LocalStorageAdapter from 'capture-core/storage/DomLocalStorageAdapter';
+import getD2 from 'capture-core/d2/d2Instance';
 
 import objectStores from './sessionCacheObjectStores.const';
 import { set as setStorageContainer } from './sessionCacheStorageContainer';

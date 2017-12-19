@@ -1,6 +1,6 @@
 // @flow
 /* eslint-disable import/prefer-default-export */
-import { createReducerDescription } from 'd2-tracker/tracker-redux/trackerReducer';
+import { createReducerDescription } from 'capture-core/tracker-redux/trackerReducer';
 import { actionTypes as entryActionTypes } from '../../init/entry.actions';
 
 export const appReducerDesc = createReducerDescription({

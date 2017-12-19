@@ -2,7 +2,7 @@
 /* eslint-disable import/prefer-default-export */
 import log from 'loglevel';
 import { init, config, getUserSettings, getManifest } from 'd2/lib/d2';
-import environments from 'd2-tracker/constants/environments';
+import environments from 'capture-core/constants/environments';
 
 import loadMetaData from '../metaData/metaDataLoader';
 import buildMetaData from '../metaData/metaDataBuilder';

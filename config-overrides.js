@@ -14,7 +14,7 @@ module.exports = {
         ];
 
         config.moduleNameMapper = Object.assign({}, config.moduleNameMapper, {
-            "^d2-tracker(.*)$": "<rootDir>/src/core_modules/d2-tracker/src$1"
+            "^capture-core(.*)$": "<rootDir>/src/core_modules/capture-core/src$1"
         });
         
         return config;

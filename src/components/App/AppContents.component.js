@@ -8,8 +8,8 @@ import withStateFrom from 'd2-ui/lib/component-helpers/withStateFrom';
 import { withStyles } from 'material-ui-next/styles';
 import Button from 'material-ui-next/Button';
 import EventForm from '../EventForm/EventForm.component';
-import D2Form from 'd2-tracker/components/D2Form/D2Form.component';
-import programCollection from 'd2-tracker/metaData/programCollection/programCollection';
+import D2Form from 'capture-core/components/D2Form/D2Form.component';
+import programCollection from 'capture-core/metaData/programCollection/programCollection';
 
 const HeaderBar = withStateFrom(headerBarStore$, HeaderBarComponent);
 

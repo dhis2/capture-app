@@ -4,8 +4,8 @@ import { createEpicMiddleware } from 'redux-observable';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import { createLogger } from 'redux-logger';
 
-import { buildReducersFromDescriptions } from 'd2-tracker/tracker-redux/trackerReducer';
-import environments from 'd2-tracker/constants/environments';
+import { buildReducersFromDescriptions } from 'capture-core/tracker-redux/trackerReducer';
+import environments from 'capture-core/constants/environments';
 
 import reducerDescriptions from './reducers/descriptions/trackerCapture.reducerDescriptions';
 import epics from './epics/trackerCapture.epics';

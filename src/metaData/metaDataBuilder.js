@@ -1,6 +1,6 @@
 // @flow
-import buildProgramCollection from 'd2-tracker/metaDataFactory/metaDataFactory';
-import StorageContainer from 'd2-tracker/storage/StorageContainer';
+import buildProgramCollection from 'capture-core/metaDataFactory/metaDataFactory';
+import StorageContainer from 'capture-core/storage/StorageContainer';
 
 import getStorageContainer from './metaDataStorageContainer';
 import stores from './metaDataObjectStores.const';

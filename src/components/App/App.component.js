@@ -11,8 +11,8 @@ import LoadingMask from 'd2-ui/lib/loading-mask/LoadingMask.component';
 import AppContents from './AppContents.component';
 
 //HOCs
-import withD2InContext from 'd2-tracker/HOC/withD2InContext';
-import withStateBoundLoadingIndicator from 'd2-tracker/HOC/withStateBoundLoadingIndicator';
+import withD2InContext from 'capture-core/HOC/withD2InContext';
+import withStateBoundLoadingIndicator from 'capture-core/HOC/withStateBoundLoadingIndicator';
 
 import legacyTheme from '../../styles/uiThemeLegacy';
 import theme from '../../styles/uiTheme';

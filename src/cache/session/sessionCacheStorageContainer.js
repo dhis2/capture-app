@@ -1,5 +1,5 @@
 // @flow
-import StorageContainer from 'd2-tracker/storage/StorageContainer';
+import StorageContainer from 'capture-core/storage/StorageContainer';
 
 let currentStorageContainer;
 

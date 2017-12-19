@@ -8,8 +8,8 @@ function fileExists(filePath) {
     return fs.existsSync(filePath);
 }
 
-if (fileExists(path.resolve(__dirname, './../src/core_modules/d2-tracker/src'))) {
-    alias['d2-tracker'] = path.resolve(__dirname, './../src/core_modules/d2-tracker/src');
+if (fileExists(path.resolve(__dirname, './../src/core_modules/capture-core/src'))) {
+    alias['capture-core'] = path.resolve(__dirname, './../src/core_modules/capture-core/src');
 }
 
 module.exports = alias;

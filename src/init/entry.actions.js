@@ -1,6 +1,6 @@
 // @flow
 
-import { actionCreator } from 'd2-tracker/actions/actions.utils';
+import { actionCreator } from 'capture-core/actions/actions.utils';
 
 export const actionTypes = {
     STARTUP_DATA_LOAD: 'StartupDataLoad',
