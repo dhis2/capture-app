@@ -33,11 +33,17 @@ async function initializeManifest() {
     log.info(`Loading: ${manifest.name} v${manifest.version}`);
 }
 
+function configI18n({ keyUiLocale }) {
+    const locale = keyUiLocale || 'en';
+    config.i18n.sources.add(`i18n/module/i18n_module_${locale}.properties`);
+}
+
 export async function initializeD2() {
     setLogLevel();
 
     const d2 = await initializeManifest()
         .then(getUserSettings)
+        .then(configI18n)
         .then(init);
     return d2;
 }

@@ -8,11 +8,17 @@ import environments from 'capture-core/constants/environments';
 
 import { setD2 } from 'capture-core/d2/d2Instance';
 
+//TEST
+import getTEIEvents from 'capture-core/events/getTEIEvents';
+//END TEST
+
 import './react16Temp';
 import App from '../components/App/App.component';
 import store from '../store';
 import { initializeD2, initializeMetaData, initializeSessionAppCache, getBaseSettings } from './init';
 import { startupDataLoad } from './entry.actions';
+
+
 
 const DOM_ID = 'app';
 
@@ -30,6 +36,7 @@ async function runApp() {
         const baseSettings = await getBaseSettings();
         await initializeMetaData(baseSettings.systemSettings);
         await initializeSessionAppCache();
+        await getTEIEvents();
         store.dispatch(startupDataLoad());
     } catch (error) {
         log.error(error);

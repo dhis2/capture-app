@@ -23,6 +23,10 @@
     "rules": {
         "no-param-reassign": 0,
         "react/prop-types": 0,
+        "import/prefer-default-export": 0,
+        "react/prefer-stateless-function": 0,
+        "no-unused-expressions": 0,
+        "react/jsx-no-bind": 0,
         "react/sort-comp": [
             2,
             {

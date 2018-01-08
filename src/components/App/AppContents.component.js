@@ -4,12 +4,8 @@ import HeaderBarComponent from 'd2-ui/lib/app-header/HeaderBar';
 import headerBarStore$ from 'd2-ui/lib/app-header/headerBar.store';
 import withStateFrom from 'd2-ui/lib/component-helpers/withStateFrom';
 
-// TEST
 import { withStyles } from 'material-ui-next/styles';
-import Button from 'material-ui-next/Button';
-import EventForm from '../EventForm/EventForm.component';
-import D2Form from 'capture-core/components/D2Form/D2Form.component';
-import programCollection from 'capture-core/metaData/programCollection/programCollection';
+import EventCaptureForm from '../EventCaptureForm/EventCaptureForm.component';
 
 const HeaderBar = withStateFrom(headerBarStore$, HeaderBarComponent);
 
@@ -34,9 +30,10 @@ class AppContents extends Component {
                 */
                 }
                 <div style={{padding: 100}}>
-                    <D2Form
-                        metaDataStage={Array.from(programCollection.get('IpHINAT79UW').stages.entries())[0][1]}
-                    />
+                    <EventCaptureForm />
+                </div>
+                <div>
+                    
                 </div>
             </div>
         );
