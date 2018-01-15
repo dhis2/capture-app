@@ -1,5 +1,4 @@
 // @flow
-/* eslint-disable import/prefer-default-export */
 import { createReducerDescription } from 'capture-core/tracker-redux/trackerReducer';
 import { actionTypes as entryActionTypes } from '../../init/entry.actions';
 

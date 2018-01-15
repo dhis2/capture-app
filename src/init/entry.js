@@ -8,17 +8,15 @@ import environments from 'capture-core/constants/environments';
 
 import { setD2 } from 'capture-core/d2/d2Instance';
 
-//TEST
-import getTEIEvents from 'capture-core/events/getTEIEvents';
-//END TEST
-
 import './react16Temp';
 import App from '../components/App/App.component';
 import store from '../store';
 import { initializeD2, initializeMetaData, initializeSessionAppCache, getBaseSettings } from './init';
 import { startupDataLoad } from './entry.actions';
 
-
+//TEST
+import { startEnrollmentLoad } from './enrollment.actions';
+//END TEST
 
 const DOM_ID = 'app';
 
@@ -36,8 +34,12 @@ async function runApp() {
         const baseSettings = await getBaseSettings();
         await initializeMetaData(baseSettings.systemSettings);
         await initializeSessionAppCache();
-        await getTEIEvents();
         store.dispatch(startupDataLoad());
+
+        //START TEST
+        store.dispatch(startEnrollmentLoad());
+        //END TEST
+
     } catch (error) {
         log.error(error);
         let message = 'The application could not be loaded.';

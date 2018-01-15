@@ -10,7 +10,7 @@ import { formatterOptions } from 'capture-core/utils/string/format.const';
 
 
 type Props = {
-
+    eventId: string,
 };
 
 const styles = theme => ({
@@ -38,11 +38,14 @@ class EventCaptureForm extends Component<Props> {
     }
 
     render() {
+        const { eventId } = this.props;
+
         return (
             <div>
                 <D2Form
-                    metaDataStage={Array.from(programCollection.get('IpHINAT79UW').stages.entries())[0][1]}
                     ref={(formInstance) => { this.formInstance = formInstance; }}
+                    metaDataStage={programCollection.get('WSGAb5XwJ3Y').getStage('edqlbukwRfQ')}
+                    dataId={eventId}
                 />
                 <div>
                     <ProgressButton

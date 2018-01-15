@@ -30,7 +30,9 @@ class AppContents extends Component {
                 */
                 }
                 <div style={{padding: 100}}>
-                    <EventCaptureForm />
+                    <EventCaptureForm 
+                        eventId={'HWbBg2xFkeR'}
+                    />
                 </div>
                 <div>
                     
