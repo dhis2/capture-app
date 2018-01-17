@@ -5,7 +5,11 @@ import { init, config, getUserSettings, getManifest } from 'd2/lib/d2';
 import environments from 'capture-core/constants/environments';
 import moment from 'capture-core/utils/moment/momentResolver';
 import CurrentLocaleData from 'capture-core/utils/localeData/CurrentLocaleData';
+
+// LANGUAGE FILES
+import 'moment/locale/nb';
 import dateFnNorwegianLocale from 'date-fns/locale/nb';
+// END LANGUAGE FILES
 
 import loadMetaData from '../metaData/metaDataLoader';
 import buildMetaData from '../metaData/metaDataBuilder';
@@ -45,18 +49,23 @@ function configI18n({ keyUiLocale }) {
 }
 
 function setLocaleData(locale: string, d2: D2) {
-    moment.locale(locale);
+    moment.locale('nb');
+    const weekdays = moment.weekdays();
+    const weekdaysShort = moment.weekdaysShort();
+
+    const firstDayOfWeek = moment.localeData()._week.dow;
 
     const localeData: LocaleDataType = {
         dateFnsLocale: dateFnNorwegianLocale,
-        weekDays: ["Søn", "Man", "Tir", "Ons", "Tor", "Fre", "Lør"],
+        weekDays: weekdays,
+        weekDaysShort: weekdaysShort,
         calendarFormatHeaderLong: 'dddd D MMM',
         calendarFormatHeaderShort: 'D MMM',
         selectDatesText: 'Velg en eller flere datoer...',
         selectDateText: 'Velg en dato...',
         todayLabelShort: 'I dag',
         todayLabelLong: 'I dag',
-        weekStartsOn: 1,
+        weekStartsOn: firstDayOfWeek,
     };
 
     CurrentLocaleData.set(localeData);

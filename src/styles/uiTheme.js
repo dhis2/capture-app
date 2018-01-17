@@ -1,13 +1,15 @@
 // @flow
 import { MuiThemeProvider, createMuiTheme } from 'material-ui-next/styles';
-import blue from 'material-ui-next/colors/blue';
 
 const theme = createMuiTheme({
-    palette: {
-        primary: blue,
-    },
+   
 });
 
+theme.typography = { ...theme.typography,
+    formFieldTitle: {
+        fontSize: theme.typography.pxToRem(12),
+    },
+};
 // theme.palette.common = Object.assign({}, theme.palette.common, {black: "red"});
 
 

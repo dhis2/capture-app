@@ -10,13 +10,24 @@ import EventCaptureForm from '../EventCaptureForm/EventCaptureForm.component';
 const HeaderBar = withStateFrom(headerBarStore$, HeaderBarComponent);
 
 const styles = theme => ({
-   
+    app: {
+        fontFamily: theme.typography.fontFamily,
+        fontSize: theme.typography.pxToRem(16),
+    },
 });
 
-class AppContents extends Component {
+type Props = {
+    classes: Object
+};
+
+class AppContents extends Component<Props> {
     render() {
+        const { classes } = this.props;
+
         return (
-            <div>
+            <div
+                className={classes.app}
+            >
                 <div>
                     <HeaderBar />
                 </div>
@@ -29,22 +40,16 @@ class AppContents extends Component {
                 </div>
                 */
                 }
-                <div style={{padding: 100}}>
-                    <EventCaptureForm 
+                <div style={{ padding: 100 }}>
+                    <EventCaptureForm
                         eventId={'HWbBg2xFkeR'}
                     />
                 </div>
-                <div>
-                    
-                </div>
+                <div />
             </div>
         );
     }
 }
-
-AppContents.propTypes = {
-
-};
 
 const AppContentsWithStyles = withStyles(styles)(AppContents);
 
