@@ -6,7 +6,7 @@
     "classnames": "^2.2.5",
     "create-react-class": "^15.6.2",
     "d2": "^28.3.0",
-    "d2-ui": "^28.0.3",
+    "d2-ui": "^28.0.14",
     "d2-utilizr": "^0.2.15",
     "date-fns": "^1.29.0",
     "fake-indexeddb": "^2.0.3",

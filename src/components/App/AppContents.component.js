@@ -5,7 +5,7 @@ import headerBarStore$ from 'd2-ui/lib/app-header/headerBar.store';
 import withStateFrom from 'd2-ui/lib/component-helpers/withStateFrom';
 
 import { withStyles } from 'material-ui-next/styles';
-import EventCaptureForm from '../EventCaptureForm/EventCaptureForm.component';
+import EventCaptureForm from '../EventCaptureForm/EventCaptureForm.container';
 
 const HeaderBar = withStateFrom(headerBarStore$, HeaderBarComponent);
 
@@ -41,9 +41,7 @@ class AppContents extends Component<Props> {
                 */
                 }
                 <div style={{ padding: 100 }}>
-                    <EventCaptureForm
-                        eventId={'HWbBg2xFkeR'}
-                    />
+                    <EventCaptureForm />
                 </div>
                 <div />
             </div>

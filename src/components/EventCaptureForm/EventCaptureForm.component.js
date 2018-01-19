@@ -9,13 +9,14 @@ import { getTranslation } from 'capture-core/d2/d2Instance';
 import { formatterOptions } from 'capture-core/utils/string/format.const';
 
 
-type Props = {
-    eventId: string,
-};
-
 const styles = theme => ({
 
 });
+
+type Props = {
+    eventId: string,
+    onCompleteForm: () => void
+};
 
 class EventCaptureForm extends Component<Props> {
     formInstance: ?D2Form;
@@ -31,6 +32,8 @@ class EventCaptureForm extends Component<Props> {
             const valid = this.formInstance.validateForm();
             if (valid) {
                 console.log("valid");
+                this.props.onCompleteForm();
+
             } else {
                 console.log("invalid");
             } 
@@ -46,6 +49,7 @@ class EventCaptureForm extends Component<Props> {
                     ref={(formInstance) => { this.formInstance = formInstance; }}
                     metaDataStage={programCollection.get('WSGAb5XwJ3Y').getStage('edqlbukwRfQ')}
                     dataId={eventId}
+                    formCompletionAttempted={false}
                 />
                 <div>
                     <ProgressButton
