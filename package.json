@@ -28,6 +28,7 @@
     "react-virtualized": "^9.17.2",
     "react-virtualized-select": "^3.1.1",
     "redux": "^3.7.2",
+    "redux-batched-actions": "^0.2.1",
     "redux-logger": "^3.0.6",
     "redux-observable": "^0.16.0",
     "redux-optimistic-ui": "^3.1.0",

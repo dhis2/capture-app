@@ -1,5 +1,5 @@
 // @flow
-import { createReducerDescription } from 'capture-core/tracker-redux/trackerReducer';
+import { createReducerDescription } from 'capture-core/trackerRedux/trackerReducer';
 import { actionTypes as entryActionTypes } from '../../init/entry.actions';
 
 export const appReducerDesc = createReducerDescription({

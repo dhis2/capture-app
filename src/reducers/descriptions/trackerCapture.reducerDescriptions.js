@@ -1,8 +1,10 @@
 // @flow
 import { formsValuesDesc } from 'capture-core/reducers/descriptions/form.reducerDescription';
+import { eventsDesc, eventsValuesDesc } from 'capture-core/reducers/descriptions/events.reducerDescription';
+import { dataEntryDesc } from 'capture-core/reducers/descriptions/dataEntry.reducerDescription';
+
 import { appReducerDesc } from './app.reducerDescription';
-import { eventsDesc, eventsValuesDesc } from './events.reducerDescription';
-import { dataEntryDesc } from './dataEntry.reducerDescription';
+
 
 export default [
     appReducerDesc,

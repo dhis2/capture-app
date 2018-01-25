@@ -2,15 +2,17 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+import { enableBatching } from 'redux-batched-actions';
 import { createLogger } from 'redux-logger';
 
-import { buildReducersFromDescriptions } from 'capture-core/tracker-redux/trackerReducer';
+import reduxOptimisticUI from 'capture-core/middleware/reduxOptimisticUI/reduxOptimisticUI.middleware';
+import { buildReducersFromDescriptions } from 'capture-core/trackerRedux/trackerReducer';
 import environments from 'capture-core/constants/environments';
 
 import reducerDescriptions from './reducers/descriptions/trackerCapture.reducerDescriptions';
 import epics from './epics/trackerCapture.epics';
 
-const middleWares = [createEpicMiddleware(epics)];
+const middleWares = [createEpicMiddleware(epics), reduxOptimisticUI];
 
 if (process.env.NODE_ENV !== environments.prod) {
     middleWares.push(
@@ -22,4 +24,4 @@ const reducersFromDescriptions = buildReducersFromDescriptions(reducerDescriptio
 
 const rootReducer = combineReducers({ ...reducersFromDescriptions });
 
-export default createStore(rootReducer, composeWithDevTools(applyMiddleware(...middleWares)));
+export default createStore(enableBatching(rootReducer), composeWithDevTools(applyMiddleware(...middleWares)));

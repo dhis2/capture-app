@@ -15,7 +15,7 @@ import { initializeD2, initializeMetaData, initializeSessionAppCache, getBaseSet
 import { startupDataLoad } from './entry.actions';
 
 //TEST
-import { startEnrollmentLoad } from './enrollment.actions';
+import { startEnrollmentLoad } from 'capture-core/actions/__TEMP__/enrollment.actions';
 //END TEST
 
 const DOM_ID = 'app';
