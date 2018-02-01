@@ -1,0 +1,47 @@
+.Select-control:focus {
+	outline: none !important;
+    box-shadow: none !important;
+}
+
+.Select-control:hover {
+	outline: none;
+	box-shadow: none;
+}
+
+.virtualized-select {
+    border-radius: 0px;
+}
+
+.is-focused:not(.is-open) > .Select-control {
+    box-shadow: none !important;
+}
+
+.Select-menu-outer {
+    max-height: 1000px;
+    z-index: 2000 !important;
+}
+
+.Select-menu {
+    max-height: 998px;
+}
+
+.virtualized-select-option:hover {
+    background-color: rgba(0,0,0,0.1) !important;
+}
+
+.Select-placeholder {
+    padding-left: 0px !important;
+    color: rgba(0, 0, 0, 0.3) !important;
+}
+
+.Select-value {
+    padding-left: 0px !important;
+}
+
+.Select-input {
+    padding-left: 0px !important;
+}
+
+.width-expandable-multi-select .Select {
+    display: inline-block !important;
+}
