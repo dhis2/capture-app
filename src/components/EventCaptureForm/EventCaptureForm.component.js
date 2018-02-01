@@ -13,10 +13,10 @@ const getSaveOptions = () => ({
 });
 
 const CompletableDataEntry = withCompleteButton(getCompleteOptions)(DataEntry);
-const SaveableAndCompleableDataEntry = withSaveButton(getSaveOptions)(CompletableDataEntry);
+const SaveableAndCompletableDataEntry = withSaveButton(getSaveOptions)(CompletableDataEntry);
 
 export default () => (
-    <SaveableAndCompleableDataEntry
+    <SaveableAndCompletableDataEntry
         id={'main'}
     />
 );
