@@ -5,10 +5,13 @@
 import log from 'loglevel';
 import isDefined from 'd2-utilizr/src/isDefined';
 import isFunction from 'd2-utilizr/src/isFunction';
+import isArray from 'd2-utilizr/src/isArray';
 
 import OptionSet from '../OptionSet/OptionSet';
 import errorCreator from '../../utils/errorCreator';
 import elementTypes from './elementTypes';
+
+import type { TypeConverters } from '../Stage/Stage';
 
 export default class DataElement {
     static errorMessages = {
@@ -134,5 +137,14 @@ export default class DataElement {
             return convertedOptionSet;
         }
         return null;
+    }
+
+    convertValue(rawValue: any, typeConverters: TypeConverters) {
+        if ((rawValue || rawValue === false || rawValue === 0) && typeConverters[this.type]) {
+            return isArray(rawValue)
+                ? rawValue.map(valuePart => typeConverters[this.type](valuePart, this))
+                : typeConverters[this.type](rawValue, this);
+        }
+        return rawValue;
     }
 }

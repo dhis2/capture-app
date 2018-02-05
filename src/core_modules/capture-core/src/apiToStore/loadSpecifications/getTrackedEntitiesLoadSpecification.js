@@ -14,11 +14,11 @@ function converter(d2Model) {
     }));
 }
 
-export default function getTrackedEntitiesLoadSpecification(storeName: string = 'trackedEntities'): LoadSpecification {
+export default function getTrackedEntitiesLoadSpecification(storeName: string = 'trackedEntityTypes'): LoadSpecification {
     return new LoadSpecification((_this) => {
         _this.converter = converter;
         _this.d2ModelGetterType = getterTypes.LIST;
-        _this.d2ModelName = 'trackedEntities';
+        _this.d2ModelName = 'trackedEntityTypes';
         _this.loader = loadStoreDataIfNotExists;
         _this.objectStore = storeName;
         _this.queryParams = {

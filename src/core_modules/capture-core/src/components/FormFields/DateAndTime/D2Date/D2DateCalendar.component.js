@@ -35,7 +35,7 @@ class D2DateCalendar extends Component<Props> {
     handleChange: (e: any, dates: ?Array<Date>) => void;
     calendarLocaleData: Object;
 
-    constructor(props: propsTypes) {
+    constructor(props: Props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
 

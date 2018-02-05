@@ -5,6 +5,7 @@ import Button from 'material-ui-next/Button';
 import { connect } from 'react-redux';
 
 import D2Form from '../D2Form/D2Form.component';
+import DataEntry from './DataEntry.component';
 import errorCreator from '../../utils/errorCreator';
 import { getTranslation } from '../../d2/d2Instance';
 import { formatterOptions } from '../../utils/string/format.const';
@@ -56,9 +57,42 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
             return currentInstance;
         }
 
+        getEventFieldInstances() {
+            let currentInstance = this.innerInstance;
+            let done;
+            const eventFields = [];
+            while (!done) {
+                currentInstance = currentInstance.getWrappedInstance && currentInstance.getWrappedInstance();
+                if (!currentInstance || currentInstance instanceof DataEntry) {
+                    done = true;
+                } else if (currentInstance.constructor.name === 'EventFieldBuilder') {
+                    eventFields.push(currentInstance);
+                }
+            }
+            return eventFields;
+        }
+
+        validateEventFields() {
+            const eventFieldInstance = this.getEventFieldInstances();
+            
+            let fieldsValid = true;
+            let index = 0;
+            while (eventFieldInstance[index] && fieldsValid) {
+                fieldsValid = eventFieldInstance[index].validateAndScrollToIfFailed();
+                index += 1;
+            }
+            return fieldsValid;
+        }
+
         handleCompletionAttempt() {
             if (!this.innerInstance) {
                 log.error(errorCreator(CompleteButtonBuilder.errorMessages.INNER_INSTANCE_NOT_FOUND)({ CompleteButtonBuilder: this }));
+                return;
+            }
+
+            const isFieldsValid = this.validateEventFields();
+            if (!isFieldsValid) {
+                this.props.onCompleteValidationFailed(this.props.eventId, this.props.id);
                 return;
             }
 
@@ -104,8 +138,8 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
     };
 
 const mapStateToProps = (state: ReduxState, props: { id: string }) => ({
-    eventId: state.dataEntry && state.dataEntry[props.id] && state.dataEntry[props.id].eventId,
-    completionAttempted: state.dataEntry && state.dataEntry[props.id] && state.dataEntry[props.id].completionAttempted,
+    eventId: state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].eventId,
+    completionAttempted: state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].completionAttempted,
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({

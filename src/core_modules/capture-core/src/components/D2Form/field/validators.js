@@ -134,7 +134,7 @@ function buildCompulsoryValidator(metaData: MetaDataElement): Array<ValidatorCon
     return metaData.compulsory ? [
         {
             validator: wordToValidatorMap.get(wordValidatorKeys.COMPULSORY),
-            message: getTranslation(wordToValidatorMap.get(wordValidatorKeys.COMPULSORY).message),
+            message: getTranslation(wordToValidatorMap.get(wordValidatorKeys.COMPULSORY).message, formatterOptions.CAPITALIZE_FIRST_LETTER),
         },
     ] :
         [];

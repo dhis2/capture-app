@@ -25,6 +25,7 @@ type Props = {
     event: Event,
     completeButton?: ?React.Element<any>,
     saveButton?: ?React.Element<any>,
+    eventFields?: ?Array<React.Element<any>>,
     completionAttempted?: ?boolean,
     saveAttempted?: ?boolean,
     classes: Object,
@@ -52,7 +53,7 @@ class DataEntry extends Component<Props> {
     }
 
     render() {
-        const { id, classes, event, completeButton, saveButton, completionAttempted, saveAttempted, ...passOnProps } = this.props;
+        const { id, classes, event, completeButton, saveButton, completionAttempted, saveAttempted, eventFields, ...passOnProps } = this.props;
 
         if (!event) {
             return (
@@ -75,6 +76,7 @@ class DataEntry extends Component<Props> {
 
         return (
             <div>
+                {eventFields}
                 <D2Form
                     ref={(formInstance) => { this.formInstance = formInstance; }}
                     metaDataStage={stage}
