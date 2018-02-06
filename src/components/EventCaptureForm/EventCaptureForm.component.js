@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { wordToValidatorMap } from 'd2-ui/lib/forms/Validators'
+import { wordToValidatorMap } from 'd2-ui/lib/forms/Validators';
 import DataEntry from 'capture-core/components/DataEntry/DataEntry.container';
 import withCompleteButton from 'capture-core/components/DataEntry/withCompleteButton';
 import withSaveButton from 'capture-core/components/DataEntry/withSaveButton';
@@ -57,8 +57,10 @@ const DataEntryWithEventDate = withEventField(eventDateSettings)(DataEntry);
 const CompletableDataEntry = withCompleteButton(getCompleteOptions)(DataEntryWithEventDate);
 const SaveableAndCompletableDataEntry = withSaveButton(getSaveOptions)(CompletableDataEntry);
 
-export default () => (
-    <SaveableAndCompletableDataEntry
-        id={'main'}
-    />
+export default props => (
+    <div>
+        <SaveableAndCompletableDataEntry
+            id={'main'}
+        />
+    </div>
 );

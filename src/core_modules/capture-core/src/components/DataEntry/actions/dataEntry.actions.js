@@ -11,6 +11,7 @@ import { actionCreator } from '../../../actions/actions.utils';
 import { addFormData } from '../../D2Form/actions/form.actions';
 
 export const actionTypes = {
+    START_LOAD_DATA_ENTRY_EVENT: 'StaryLoadDataEntryEvent',
     LOAD_DATA_ENTRY_EVENT: 'LoadDataEntryEvent',
     LOAD_DATA_ENTRY_EVENT_FAILED: 'LoadDataEntryEventFailed',
     START_COMPLETE_EVENT: 'StartCompleteDataEntryEvent',
@@ -33,6 +34,10 @@ type EventPropToInclude = {
     id: string,
     type: string,
 };
+
+export const startLoadDataEntryEvent =
+    (eventId: string, eventPropsToInclude?: ?Array<EventPropToInclude>, dataEntryId?: ?string = 'main') =>
+        actionCreator(actionTypes.START_LOAD_DATA_ENTRY_EVENT)({ eventId, eventPropsToInclude, dataEntryId });
 
 export function loadDataEntryEvent(eventId: string, state: ReduxState, eventPropsToInclude?: ?Array<EventPropToInclude>, id?: ?string = 'main') {
     const event: Event = ensureState(state.events)[eventId];
@@ -122,7 +127,4 @@ export const saveEvent =
 export const saveValidationFailed =
     (eventId: string, id: string) => actionCreator(actionTypes.SAVE_VALIDATION_FALED)({ eventId, id });
 
-export const updateField = (value: any, valueMeta: Object, fieldId: string, dataEntryId: string) => {
-    var x = "hrh;";
-    return actionCreator(actionTypes.UPDATE_FIELD)({ value, valueMeta, fieldId, dataEntryId });
-}
+export const updateField = (value: any, valueMeta: Object, fieldId: string, dataEntryId: string) => actionCreator(actionTypes.UPDATE_FIELD)({ value, valueMeta, fieldId, dataEntryId });

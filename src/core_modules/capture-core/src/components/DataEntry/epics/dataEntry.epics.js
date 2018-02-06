@@ -5,7 +5,13 @@ import { ensureState } from 'redux-optimistic-ui';
 
 import { convertStateFormValuesToClient } from '../../../converters/helpers/formToClient';
 import { convertClientValuesToServer } from '../../../converters/helpers/clientToServer';
-import { actionTypes, completeEvent, completeEventError, saveEvent, saveEventError } from '../actions/dataEntry.actions';
+import { actionTypes, completeEvent, completeEventError, saveEvent, saveEventError, loadDataEntryEvent } from '../actions/dataEntry.actions';
+
+export const loadDataEntryEpic = (action$, store: ReduxStore) => 
+    action$.ofType(actionTypes.START_LOAD_DATA_ENTRY_EVENT)
+        .map((action) => {
+            return loadDataEntryEvent(action.payload.eventId, store.getState(), action.payload.eventPropsToInclude, action.payload.dataEntryId);
+        });
 
 export const completeEventEpic = (action$, store: ReduxStore) =>
     action$.ofType(actionTypes.START_COMPLETE_EVENT)

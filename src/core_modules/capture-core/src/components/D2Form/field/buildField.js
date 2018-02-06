@@ -63,7 +63,7 @@ const createFieldProps = (fieldProps: Object, metaData: MetaDataElement) => ({
 
 const getBaseTextField = (metaData: MetaDataElement) => {
     const props = createComponentProps({
-        label: metaData.name,
+        label: metaData.formName,
         multiline: false,
         required: metaData.compulsory,
     });
@@ -88,7 +88,7 @@ const fieldForTypes = {
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.BOOLEAN]: (metaData: MetaDataElement) => {
         const props = createComponentProps({
-            label: metaData.name,
+            label: metaData.formName,
             required: metaData.compulsory,
         });
 
@@ -100,7 +100,7 @@ const fieldForTypes = {
     },
     [elementTypes.TRUE_ONLY]: (metaData: MetaDataElement) => {
         const props = createComponentProps({
-            label: metaData.name,
+            label: metaData.formName,
             nullable: !metaData.compulsory,
         });
 
@@ -113,7 +113,7 @@ const fieldForTypes = {
     [elementTypes.DATE]: (metaData: MetaDataElement) => {
         const props = createComponentProps({
             width: 350,
-            label: metaData.name,
+            label: metaData.formName,
         });
 
         return createFieldProps({
@@ -126,7 +126,7 @@ const fieldForTypes = {
         const props = createComponentProps({
             dateWidth: 200,
             calendarWidth: 350,
-            label: metaData.name,
+            label: metaData.formName,
             required: metaData.compulsory,
         });
 
@@ -143,7 +143,7 @@ const fieldForTypes = {
 
 const optionSetField = (metaData: MetaDataElement) => {
     const props = createComponentProps({
-        label: metaData.name,
+        label: metaData.formName,
         optionSet: metaData.optionSet,
         nullable: !metaData.compulsory,
     });
