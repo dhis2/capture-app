@@ -13,18 +13,46 @@ class FormBuilder extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = this.initState(props);
-        this.asyncValidators = this.createAsyncValidators(props);
-        this.asyncValidationRunner = props.asyncValidationRunner || new AsyncValidatorRunner();
-
         this.getFieldProp = this.getFieldProp.bind(this);
         this.getStateClone = this.getStateClone.bind(this);
 
-        if (this.props.validateOnStart) {
-            this.initValidate();
+        this.init(this.props);       
+    }
+
+    init(props, isReInit) {
+        this.asyncValidators = this.createAsyncValidators(props);
+        this.asyncValidationRunner = props.asyncValidationRunner || new AsyncValidatorRunner();
+
+        let newState;
+        if (props.useCachedState) {            
+            newState = this.initStateWithCacheData(props, props.cachedFieldsState);
+        } else {
+            newState = this.initState(props);     
+        }
+
+        if (props.validateOnStart) {
+            newState = this.initValidate(newState, props);
+        }
+
+        if (!isReInit) {
+            this.state = newState;
+        } else {
+            this.setState(newState);
         }
 
         this.fieldInstances = new Map();
+    }
+
+    cacheFieldsState() {
+        if (this.props.onCacheFieldsState) {
+            const fieldsState = this.state.fields;
+            const fieldsStateToCache = Object.keys(fieldsState).reduce((accFieldsCache, key) => {
+                accFieldsCache[key] = { touched: fieldsState[key].touched, pristine: fieldsState[key].pristine };
+                return accFieldsCache;
+            }, {});
+
+            this.props.onCacheFieldsState(fieldsStateToCache, this.props.id);
+        }         
     }
 
     /**
@@ -36,6 +64,15 @@ class FormBuilder extends React.Component {
      * @param props
      */
     componentWillReceiveProps(nextProps) {
+        const previousId = this.props.id;
+        const nextId = nextProps.id;
+
+        if (previousId !== nextId) {
+            this.cacheFieldsState();
+            this.init(nextProps, true);
+            return;
+        }
+
         this.asyncValidators = this.createAsyncValidators(nextProps);
 
         const clonedState = this.getStateClone();
@@ -60,6 +97,9 @@ class FormBuilder extends React.Component {
         this.setState(clonedState);
     }
 
+    componentWillUnmount() {
+        this.cacheFieldsState();
+    }
 
     /**
      * Custom state deep copy function
@@ -210,7 +250,7 @@ class FormBuilder extends React.Component {
                         validating: currentFieldState !== undefined ? currentFieldState.validating : false,
                         valid: currentFieldState !== undefined ? currentFieldState.valid : true,
                         error: currentFieldState && currentFieldState.error || undefined,
-                        touched: currentFieldState && currentFieldState.touched || undefined,
+                        touched: currentFieldState && currentFieldState[field.name] ? currentFieldState[field.name].touched : false, 
                     },
                 });
             }, {}),
@@ -223,9 +263,28 @@ class FormBuilder extends React.Component {
         return state;
     }
 
-    initValidate() {
-        const stateClone = this.getStateClone();
-        this.state = this.validateAllFields(this.props.fields, stateClone);
+    initStateWithCacheData(props, cachedFieldsData) {
+        const state = {
+            fields: props.fields.reduce((fields, field) => {
+                return Object.assign(fields, {
+                    [field.name]: {
+                        value: field.value,
+                        pristine: cachedFieldsData && cachedFieldsData[field.name] !== undefined ? cachedFieldsData[field.name].pristine : true,
+                        validating: false,
+                        valid: true,
+                        error: undefined,
+                        touched: cachedFieldsData && cachedFieldsData[field.name] !== undefined ? cachedFieldsData[field.name].touched : false, 
+                    },
+                });
+            }, {}),
+        };
+        
+        return this.calculateStateFormData(state);
+    }
+
+    initValidate(state, props) {      
+        const newState = this.validateAllFields(props.fields, state);
+        return this.calculateStateFormData(newState);
     }
 
     validateAllFields(fields, stateClone) {
@@ -233,6 +292,15 @@ class FormBuilder extends React.Component {
             this.validateField(stateClone, field.name, field.value);
             return stateClone;
         }, stateClone);
+    }
+
+    calculateStateFormData(state) {
+        state.form = {
+            pristine: Object.keys(state.fields).reduce((p, c) => p && state.fields[c].pristine, true),
+            validating: Object.keys(state.fields).reduce((p, c) => p || state.fields[c].validating, false),
+            valid: Object.keys(state.fields).reduce((p, c) => p && state.fields[c].valid, true),
+        };
+        return state;
     }
 
 

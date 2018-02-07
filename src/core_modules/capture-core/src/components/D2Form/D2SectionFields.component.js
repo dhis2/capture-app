@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import type { ComponentType } from 'react';
-import FormBuilder from '../../__TEMP__/FormBuilder.component';
+import FormBuilder from './FormBuilder.container';
 //import FormBuilder from 'd2-ui/lib/forms/FormBuilder.component';
 import buildField from './field/buildField';
 
@@ -24,7 +24,8 @@ type Props = {
     fieldsMetaData: Map<string, MetaDataElement>,
     values: FormsValues,
     onUpdateField: (containerId: string, elementId: string, value: any) => void,
-    dataId: string,
+    formId: string,
+    formBuilderId: string,
 };
 
 class D2SectionFields extends Component<Props> {
@@ -44,7 +45,6 @@ class D2SectionFields extends Component<Props> {
 
     buildFormFields(): Array<FieldConfig> {
         const elements = this.props.fieldsMetaData;
-        const values = this.props.values;
         // $FlowSuppress
         return Array.from(elements.entries())
             .map(entry => entry[1])
@@ -53,7 +53,7 @@ class D2SectionFields extends Component<Props> {
     }
 
     handleUpdateField(elementId: string, value: any) {
-        this.props.onUpdateField(this.props.dataId, elementId, value);
+        this.props.onUpdateField(this.props.formId, elementId, value);
     }
 
     getFieldConfigWithValue(): Array<FieldConfigWithValue> {
@@ -61,24 +61,22 @@ class D2SectionFields extends Component<Props> {
     }
 
     render() {
-        const { onUpdateField, ...passOnProps } = this.props;
+        const { fieldsMetaData, values, onUpdateField, formId, formBuilderId, ...passOnProps } = this.props;
 
         return (
             <div>
                 <FormBuilder
                     ref={(instance) => { this.formBuilderInstance = instance; }}
+                    id={formBuilderId}
                     fields={this.getFieldConfigWithValue()}
                     onUpdateField={this.handleUpdateField}
                     validateOnStart
+                    useCachedState
                     {...passOnProps}
                 />
             </div>
         );
     }
 }
-
-D2SectionFields.propTypes = {
-
-};
 
 export default D2SectionFields;

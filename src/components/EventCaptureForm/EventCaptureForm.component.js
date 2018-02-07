@@ -59,6 +59,22 @@ const SaveableAndCompletableDataEntry = withSaveButton(getSaveOptions)(Completab
 
 export default props => (
     <div>
+        <button
+            onClick={() => { props.onLoadEvent('njKfugT8jM4'); }}
+        >
+        program1 event1
+        </button>
+        <button
+            onClick={() => { props.onLoadEvent('rCsKp0gbr9V'); }}
+        >
+        program1 event2
+        </button>
+        <button
+            onClick={() => { props.onLoadEvent('Cx35fVyy4iH'); }}
+        >
+        program2 event1
+        </button>
+
         <SaveableAndCompletableDataEntry
             id={'main'}
         />

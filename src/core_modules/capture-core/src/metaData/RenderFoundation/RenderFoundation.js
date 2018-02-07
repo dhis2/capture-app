@@ -1,6 +1,5 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-unused-expressions */
 import log from 'loglevel';
 
 import isFunction from 'd2-utilizr/src/isFunction';
@@ -22,7 +21,7 @@ export type TypeConverters = {
     [type: $Values<typeof elementTypeKeys>]: (rawValue: any, metaDataElement: DataElement) => any,
 };
 
-export default class Stage {
+export default class RenderFoundation {
     static errorMessages = {
         CONVERT_VALUES_STRUCTURE: 'Values can not be converted, data is neither an array or an object',
     };

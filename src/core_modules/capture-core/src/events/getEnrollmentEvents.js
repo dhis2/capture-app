@@ -81,7 +81,7 @@ function convertToClientEvent(event: ApiTEIEvent) {
 export default async function getEnrollmentEvents() {
     const api = getApi();
     const apiRes = await api
-        .get('events?trackedEntityInstance=CjHMkbc6s8X&program=WSGAb5XwJ3Y&programStage=edqlbukwRfQ');
+        .get('events?trackedEntityInstance=CjHMkbc6s8X&program=WSGAb5XwJ3Y');
 
     if (!apiRes || !apiRes.events || apiRes.events.length === 0) {
         return null;

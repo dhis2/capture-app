@@ -10,6 +10,7 @@ import errorCreator from '../../utils/errorCreator';
 import { getTranslation } from '../../d2/d2Instance';
 import { formatterOptions } from '../../utils/string/format.const';
 import { startCompleteEvent, completeValidationFailed } from './actions/dataEntry.actions';
+import getDataEntryKey from './common/getDataEntryKey';
 
 type Props = {
     classes: Object,
@@ -137,10 +138,14 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
         }
     };
 
-const mapStateToProps = (state: ReduxState, props: { id: string }) => ({
-    eventId: state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].eventId,
-    completionAttempted: state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].completionAttempted,
-});
+const mapStateToProps = (state: ReduxState, props: { id: string }) => {
+    const eventId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].eventId;
+    const key = getDataEntryKey(props.id, eventId);
+    return {
+        eventId,
+        completionAttempted: state.dataEntriesUI && state.dataEntriesUI[key] && state.dataEntriesUI[key].completionAttempted,
+    };
+};
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onCompleteEvent: (eventId: string, id: string) => {

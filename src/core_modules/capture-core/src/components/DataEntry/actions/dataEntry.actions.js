@@ -11,7 +11,8 @@ import { actionCreator } from '../../../actions/actions.utils';
 import { addFormData } from '../../D2Form/actions/form.actions';
 
 export const actionTypes = {
-    START_LOAD_DATA_ENTRY_EVENT: 'StaryLoadDataEntryEvent',
+    START_LOAD_DATA_ENTRY_EVENT: 'StartLoadDataEntryEvent',
+    OPEN_DATA_ENTRY_EVENT_ALREADY_LOADED: 'OpenDataEntryEventAlreadyLoaded',
     LOAD_DATA_ENTRY_EVENT: 'LoadDataEntryEvent',
     LOAD_DATA_ENTRY_EVENT_FAILED: 'LoadDataEntryEventFailed',
     START_COMPLETE_EVENT: 'StartCompleteDataEntryEvent',
@@ -39,7 +40,7 @@ export const startLoadDataEntryEvent =
     (eventId: string, eventPropsToInclude?: ?Array<EventPropToInclude>, dataEntryId?: ?string = 'main') =>
         actionCreator(actionTypes.START_LOAD_DATA_ENTRY_EVENT)({ eventId, eventPropsToInclude, dataEntryId });
 
-export function loadDataEntryEvent(eventId: string, state: ReduxState, eventPropsToInclude?: ?Array<EventPropToInclude>, id?: ?string = 'main') {
+export function loadDataEntryEvent(eventId: string, state: ReduxState, eventPropsToInclude?: ?Array<EventPropToInclude>, id: string) {
     const event: Event = ensureState(state.events)[eventId];
     const eventValues = ensureState(state.eventsValues)[eventId];
 
@@ -76,6 +77,8 @@ export function loadDataEntryEvent(eventId: string, state: ReduxState, eventProp
         addFormData(eventId, convertedValues),
     ]);
 }
+
+export const openDataEntryEventAlreadyLoaded = (eventId: string, dataEntryId: string) => actionCreator(actionTypes.OPEN_DATA_ENTRY_EVENT_ALREADY_LOADED)({ eventId, dataEntryId });
 
 // COMPLETE
 export const startCompleteEvent = (eventId: string, id: string) => actionCreator(actionTypes.START_COMPLETE_EVENT)({ eventId, id });
@@ -127,4 +130,4 @@ export const saveEvent =
 export const saveValidationFailed =
     (eventId: string, id: string) => actionCreator(actionTypes.SAVE_VALIDATION_FALED)({ eventId, id });
 
-export const updateField = (value: any, valueMeta: Object, fieldId: string, dataEntryId: string) => actionCreator(actionTypes.UPDATE_FIELD)({ value, valueMeta, fieldId, dataEntryId });
+export const updateField = (value: any, valueMeta: Object, fieldId: string, dataEntryId: string, eventId: string) => actionCreator(actionTypes.UPDATE_FIELD)({ value, valueMeta, fieldId, dataEntryId, eventId });

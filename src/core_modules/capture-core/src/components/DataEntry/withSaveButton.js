@@ -10,6 +10,7 @@ import errorCreator from '../../utils/errorCreator';
 import { getTranslation } from '../../d2/d2Instance';
 import { formatterOptions } from '../../utils/string/format.const';
 import { startSaveEvent, saveValidationFailed } from './actions/dataEntry.actions';
+import getDataEntryKey from './common/getDataEntryKey';
 
 type Props = {
     classes: Object,
@@ -138,10 +139,14 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
         }
     };
 
-const mapStateToProps = (state: ReduxState, props: { id: string }) => ({
-    eventId: state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].eventId,
-    saveAttempted: state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].saveAttempted,
-});
+const mapStateToProps = (state: ReduxState, props: { id: string }) => {
+    const eventId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].eventId;
+    const key = getDataEntryKey(props.id, eventId);
+    return {
+        eventId,
+        saveAttempted: state.dataEntriesUI && state.dataEntriesUI[key] && state.dataEntriesUI[key].saveAttempted,
+    };
+};
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onSaveEvent: (eventId: string, id: string) => {

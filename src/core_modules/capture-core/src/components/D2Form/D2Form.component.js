@@ -1,24 +1,29 @@
 // @flow
 import React, { Component, PropTypes } from 'react';
+import { withStyles } from 'material-ui-next/styles';
 
 import D2Section from './D2Section.component';
-import MetaDataStage from '../../metaData/Stage/Stage';
+import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
+
+const styles = theme => ({
+    container: {
+        paddingTop: 10,
+        paddingBottom: 10,
+    },
+});
 
 type Props = {
-    metaDataStage: MetaDataStage,
-    dataId: string,
+    formFoundation: RenderFoundation,
+    id: string,
+    classes: Object,
 };
 
 class D2Form extends Component<Props> {
-    id: string;
     validateForm: () => void;
     sectionInstances: Map<string, D2Section>;
 
     constructor(props: Props) {
         super(props);
-
-        const metaData = this.props.metaDataStage;
-        this.id = metaData.id;
 
         this.validateForm = this.validateForm.bind(this);
 
@@ -72,19 +77,32 @@ class D2Form extends Component<Props> {
         }
     }
 
-    render() {
-        const { metaDataStage, ...passOnProps } = this.props;
+    getFormId() {
+        return this.props.id;
+    }
 
-        const metaDataSectionsAsArray = Array.from(metaDataStage.sections.entries()).map(entry => entry[1]);
+    getFormBuilderId(sectionId: string) {
+        return `${this.props.id}-${sectionId}`;
+    }
+
+    render() {
+        const { formFoundation, id, classes, ...passOnProps } = this.props;
+
+        const metaDataSectionsAsArray = Array.from(formFoundation.sections.entries()).map(entry => entry[1]);
 
         const sections = metaDataSectionsAsArray.map(section => (
-            <D2Section
-                ref={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
-                key={section.id}
-                sectionMetaData={section}
-                getDataId={this.resolveStateContainerId}
-                {...passOnProps}
-            />
+            <div
+                className={classes.container}
+            >
+                <D2Section
+                    ref={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
+                    key={section.id}
+                    sectionMetaData={section}
+                    formId={this.getFormId()}
+                    formBuilderId={this.getFormBuilderId(section.id)}
+                    {...passOnProps}
+                />
+            </div>
         ));
 
         return (
@@ -95,8 +113,4 @@ class D2Form extends Component<Props> {
     }
 }
 
-D2Form.propTypes = {
-
-};
-
-export default D2Form;
+export default withStyles(styles)(D2Form);

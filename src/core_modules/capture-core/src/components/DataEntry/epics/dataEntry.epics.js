@@ -5,12 +5,22 @@ import { ensureState } from 'redux-optimistic-ui';
 
 import { convertStateFormValuesToClient } from '../../../converters/helpers/formToClient';
 import { convertClientValuesToServer } from '../../../converters/helpers/clientToServer';
-import { actionTypes, completeEvent, completeEventError, saveEvent, saveEventError, loadDataEntryEvent } from '../actions/dataEntry.actions';
+import { actionTypes, completeEvent, completeEventError, saveEvent, saveEventError, loadDataEntryEvent, openDataEntryEventAlreadyLoaded } from '../actions/dataEntry.actions';
+import getDataEntryKey from '../common/getDataEntryKey';
 
 export const loadDataEntryEpic = (action$, store: ReduxStore) => 
     action$.ofType(actionTypes.START_LOAD_DATA_ENTRY_EVENT)
         .map((action) => {
-            return loadDataEntryEvent(action.payload.eventId, store.getState(), action.payload.eventPropsToInclude, action.payload.dataEntryId);
+            const state = store.getState();
+            const payload = action.payload;
+            const key = getDataEntryKey(payload.dataEntryId, payload.eventId);
+            const isAlreadyLoaded = !!(state.dataEntriesUI[key] && state.dataEntriesUI[key].loaded);
+
+            if (isAlreadyLoaded) {
+                return openDataEntryEventAlreadyLoaded(payload.eventId, payload.dataEntryId);
+            }
+
+            return loadDataEntryEvent(payload.eventId, store.getState(), payload.eventPropsToInclude, payload.dataEntryId);
         });
 
 export const completeEventEpic = (action$, store: ReduxStore) =>

@@ -47,7 +47,7 @@ class DataEntry extends Component<Props> {
         return this.formInstance;
     }
 
-    getMetaDataStage() {
+    getFormFoundation() {
         const event = this.props.event;
         return getStageFromEvent(event);
     }
@@ -63,24 +63,24 @@ class DataEntry extends Component<Props> {
             );
         }
 
-        const stageContainer = this.getMetaDataStage();
-        if (stageContainer.error) {
+        const formFoundationContainer = this.getFormFoundation();
+        if (formFoundationContainer.error) {
             return (
                 <div>
-                    {stageContainer.error}
+                    {formFoundationContainer.error}
                 </div>
             );
         }
 
-        const stage = stageContainer.stage;
+        const foundation = formFoundationContainer.stage;
 
         return (
             <div>
                 {eventFields}
                 <D2Form
                     ref={(formInstance) => { this.formInstance = formInstance; }}
-                    metaDataStage={stage}
-                    dataId={event.eventId}
+                    formFoundation={foundation}
+                    id={event.eventId}
                     validationAttempted={completionAttempted || saveAttempted}
                     {...passOnProps}
                 />

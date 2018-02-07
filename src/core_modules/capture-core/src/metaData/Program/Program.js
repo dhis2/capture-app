@@ -3,7 +3,7 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-restricted-syntax */
 import isFunction from 'd2-utilizr/src/isFunction';
-import Stage from '../Stage/Stage';
+import RenderFoundation from '../RenderFoundation/RenderFoundation';
 import errorCreator from '../../utils/errorCreator';
 
 // import MetaDataElement from './MetaDataElement';
@@ -15,7 +15,7 @@ export default class Program {
         STAGE_NOT_FOUND: 'Stage was not found',
         STAGE_INDEX_NOT_FOUND: 'No stage found on index',
     };
-    _stages: Map<string, Stage>;
+    _stages: Map<string, RenderFoundation>;
     _id: string;
     _name: string;
     _shortName: string;
@@ -27,7 +27,7 @@ export default class Program {
     }
 
     // $FlowSuppress
-    * [Symbol.iterator](): Iterator<Stage> {
+    * [Symbol.iterator](): Iterator<RenderFoundation> {
         for (const stage of this._stages.values()) {
             yield stage;
         }
@@ -54,19 +54,19 @@ export default class Program {
         return this._shortName;
     }
 
-    get stages(): Map<string, Stage> {
+    get stages(): Map<string, RenderFoundation> {
         return this._stages;
     }
 
-    addStage(stage: Stage) {
+    addStage(stage: RenderFoundation) {
         this.stages.set(stage.id, stage);
     }
 
-    getStage(id: string): ?Stage {
+    getStage(id: string): ?RenderFoundation {
         return this.stages.get(id);
     }
     
-    getStageThrowIfNotFound(id: string): Stage {
+    getStageThrowIfNotFound(id: string): RenderFoundation {
         const stage = this.stages.get(id);
         if (!stage) {
             throw new Error(
@@ -76,7 +76,7 @@ export default class Program {
         return stage;
     }
 
-    getStageFromIndex(index: number): Stage {
+    getStageFromIndex(index: number): RenderFoundation {
         const stage = this.stages.entries()[index];
         if (!stage) {
             throw new Error(

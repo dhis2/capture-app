@@ -3,8 +3,8 @@ import log from 'loglevel';
 
 import programCollection from '../metaData/programCollection/programCollection';
 import Program from '../metaData/Program/Program';
-import Stage from '../metaData/Stage/Stage';
-import Section from '../metaData/Stage/Section';
+import RenderFoundation from '../metaData/RenderFoundation/RenderFoundation';
+import Section from '../metaData/RenderFoundation/Section';
 import DataElement from '../metaData/DataElement/DataElement';
 import OptionSet from '../metaData/OptionSet/OptionSet';
 import Option from '../metaData/OptionSet/Option';
@@ -182,8 +182,6 @@ function buildSection(d2ProgramStageDataElements: D2ProgramStageDataElementsAsOb
 function buildMainSection(d2ProgramStageDataElements: ?Array<D2ProgramStageDataElement>) {
     const section = new Section((_this) => {
         _this.id = Section.MAIN_SECTION_ID;
-        _this.name = Section.MAIN_SECTION_NAME;
-        _this.showContainer = false;
     });
 
     if (d2ProgramStageDataElements) {
@@ -195,7 +193,7 @@ function buildMainSection(d2ProgramStageDataElements: ?Array<D2ProgramStageDataE
 }
 
 function buildStage(d2ProgramStage: D2ProgramStage) {
-    const stage = new Stage((_this) => {
+    const stage = new RenderFoundation((_this) => {
         _this.id = d2ProgramStage.id;
         _this.name = d2ProgramStage.displayName;
         _this.description = d2ProgramStage.description;
