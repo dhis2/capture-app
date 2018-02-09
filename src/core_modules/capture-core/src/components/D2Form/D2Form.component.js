@@ -93,10 +93,10 @@ class D2Form extends Component<Props> {
         const sections = metaDataSectionsAsArray.map(section => (
             <div
                 className={classes.container}
+                key={section.id}
             >
                 <D2Section
                     ref={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
-                    key={section.id}
                     sectionMetaData={section}
                     formId={this.getFormId()}
                     formBuilderId={this.getFormBuilderId(section.id)}

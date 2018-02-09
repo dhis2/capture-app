@@ -16,6 +16,12 @@ declare type D2 = {
 };
 
 // Redux
+declare type ReduxAction = {
+    type: string,
+    payload?: any,
+    meta?: any,
+};
+
 declare type ReduxState = Object;
 declare type ReduxDispatch = (action: {
     type: string,
@@ -54,3 +60,49 @@ declare type Theme = {
         pxToRem: (size: number) => string,
     }
 };
+
+//ProgramRules
+declare type ProgramRuleAction = {
+    dataElement: {
+        id?: ?string,
+    },
+    programRuleActionType: string,
+    programStage: {
+        id?: ?string,
+    },
+    programStageSection: {
+        id?: ?string,
+    },
+    trackedEntityAttribute: {
+        id?: ?string,
+    }
+};
+
+declare type ProgramRule = {
+    id: string,
+    condition: string,
+    description: string,
+    displayName: string,
+    program: {
+        id: string,
+    },
+    programRuleActions: Array<ProgramRuleAction>,
+};
+
+
+declare type ProgramRuleVariable = {
+    dataElement: {
+        id?: ?string,
+    },
+    trackedEntityAttribute: {
+        id?: ?string,
+    },
+    displayName: string,
+    program: {
+        id: string,
+    },
+    programStage: {
+        id?: ?string,
+    },
+    programRuleVariableSourceType: string,
+}; 
