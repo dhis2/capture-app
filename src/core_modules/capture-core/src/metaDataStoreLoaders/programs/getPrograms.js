@@ -23,17 +23,17 @@ async function getMissingPrograms(programs, storageContainer: StorageContainer, 
         return null;
     }
 
-    const storePrograms = [];
+    const storePrograms = {};
     await Promise.all(
         programs.map(
             program => storageContainer
                 .get(store, program.id)
-                .then(storeProgram => storePrograms.push(storeProgram)),
+                .then((storeProgram) => { storePrograms[program.id] = storeProgram; }),
         ),
     );
 
-    const missingPrograms = programs.filter((program, index) => {
-        const storeProgram = storePrograms[index];
+    const missingPrograms = programs.filter((program) => {
+        const storeProgram = storePrograms[program.id];
         return !storeProgram || storeProgram.version !== program.version;
     });
 

@@ -3,7 +3,7 @@ import { createSelectorCreator, defaultMemoize } from 'reselect';
 
 const sectionValuesSelector = (state, props) => {
     const metaData = props.fieldsMetaData;
-    const values = state.formsValues[props.dataId] || {};
+    const values = state.formsValues[props.formId] || {};
     const sectionValues = Array.from(metaData.entries())
         .map(entry => entry[1])
         .reduce((accValues, metaDataElement) => {

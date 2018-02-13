@@ -8,7 +8,7 @@ type Props = {
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         class GotoFieldInterface extends React.Component<Props> {
-            gotoInstance: ?React.Element<'div'>;
+            gotoInstance: any;
 
             goto() {
                 if (this.gotoInstance) {
@@ -16,7 +16,7 @@ export default () =>
 
                     const scrolledY = window.scrollY;
                     if (scrolledY) {
-                        //TODO: Set the modifier some other way (caused be the fixed header)
+                        // TODO: Set the modifier some other way (caused be the fixed header)
                         window.scroll(0, scrolledY - 48);
                     }
                 }

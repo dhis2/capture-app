@@ -2,9 +2,12 @@
 import log from 'loglevel';
 
 import programCollection from '../metaData/programCollection/programCollection';
-import Program from '../metaData/Program/Program';
-import Stage from '../metaData/Stage/Stage';
-import Section from '../metaData/Stage/Section';
+
+import EventProgram from '../metaData/Program/EventProgram';
+import TrackerProgram from '../metaData/Program/TrackerProgram';
+
+import RenderFoundation from '../metaData/RenderFoundation/RenderFoundation';
+import Section from '../metaData/RenderFoundation/Section';
 import DataElement from '../metaData/DataElement/DataElement';
 import OptionSet from '../metaData/OptionSet/OptionSet';
 import Option from '../metaData/OptionSet/Option';
@@ -59,7 +62,8 @@ type D2Program = {
     id: string,
     displayName: string,
     displayShortName: string,
-    programStages: Array<D2ProgramStage>
+    programStages: Array<D2ProgramStage>,
+    programType: string,
 };
 
 type SectionSpecs = {
@@ -182,8 +186,6 @@ function buildSection(d2ProgramStageDataElements: D2ProgramStageDataElementsAsOb
 function buildMainSection(d2ProgramStageDataElements: ?Array<D2ProgramStageDataElement>) {
     const section = new Section((_this) => {
         _this.id = Section.MAIN_SECTION_ID;
-        _this.name = Section.MAIN_SECTION_NAME;
-        _this.showContainer = false;
     });
 
     if (d2ProgramStageDataElements) {
@@ -195,7 +197,7 @@ function buildMainSection(d2ProgramStageDataElements: ?Array<D2ProgramStageDataE
 }
 
 function buildStage(d2ProgramStage: D2ProgramStage) {
-    const stage = new Stage((_this) => {
+    const stage = new RenderFoundation((_this) => {
         _this.id = d2ProgramStage.id;
         _this.name = d2ProgramStage.displayName;
         _this.description = d2ProgramStage.description;
@@ -219,22 +221,68 @@ function buildStage(d2ProgramStage: D2ProgramStage) {
 }
 
 function buildProgram(d2Program: D2Program) {
-    const program = new Program((_this) => {
-        _this.id = d2Program.id;
-        _this.name = d2Program.displayName;
-        _this.shortName = d2Program.displayShortName;
-    });
+    let program;
+    if (d2Program.programType === 'WITHOUT_REGISTRATION') {
+        program = new EventProgram((_this) => {
+            _this.id = d2Program.id;
+            _this.name = d2Program.displayName;
+            _this.shortName = d2Program.displayShortName;
+        });
+        const d2Stage = d2Program.programStages && d2Program.programStages[0];
+        program.stage = buildStage(d2Stage);
+    } else {
+        program = new TrackerProgram((_this) => {
+            _this.id = d2Program.id;
+            _this.name = d2Program.displayName;
+            _this.shortName = d2Program.displayShortName;
+        });
 
-    d2Program.programStages.forEach((d2ProgramStage: D2ProgramStage) => {
-        program.addStage(buildStage(d2ProgramStage));
-    });
-
+        d2Program.programStages.forEach((d2ProgramStage: D2ProgramStage) => {
+            program.addStage(buildStage(d2ProgramStage));
+        });
+    }
     return program;
+}
+
+function addProgramVariables(d2ProgramRulesVariables: Array<ProgramRuleVariable>) {
+    const rulesVariablesByProgram = d2ProgramRulesVariables.reduce((accRulesVariablesByProgram, d2RuleVariable) => {
+        const ruleVariableProgramId = d2RuleVariable.program.id;
+        accRulesVariablesByProgram[ruleVariableProgramId] = accRulesVariablesByProgram[ruleVariableProgramId] || [];
+        accRulesVariablesByProgram[ruleVariableProgramId].push(d2RuleVariable);
+        return accRulesVariablesByProgram;
+    }, {});
+
+    Object.keys(rulesVariablesByProgram).forEach((programKey) => {
+        const programRulesVariables = rulesVariablesByProgram[programKey];
+        const program = programCollection.get(programKey);
+        if (program) {
+            program.programRuleVariables = programRulesVariables;
+        }
+    });
+}
+
+function addProgramRules(d2ProgramRules: Array<ProgramRule>) {
+    const rulesByProgram = d2ProgramRules.reduce((accRulesByProgram, d2Rule) => {
+        const ruleProgramId = d2Rule.program.id;
+        accRulesByProgram[ruleProgramId] = accRulesByProgram[ruleProgramId] || [];
+        accRulesByProgram[ruleProgramId].push(d2Rule);
+        return accRulesByProgram;
+    }, {});
+
+    Object.keys(rulesByProgram).forEach((programKey) => {
+        const programRules = rulesByProgram[programKey];
+        const program = programCollection.get(programKey);
+        if (program) {
+            program.programRuleVariables = programRules;
+        }
+    });
 }
 
 export default function buildProgramCollection(
     d2Programs: ?Array<D2Program>,
     d2OptionSets: ?Array<D2OptionSet>,
+    d2ProgramRulesVariables: ?Array<ProgramRuleVariable>,
+    d2ProgramRules: ?Array<ProgramRule>,
     locale: ?string) {
     currentLocale = locale;
     currentD2OptionSets = d2OptionSets;
@@ -244,5 +292,13 @@ export default function buildProgramCollection(
             const program = buildProgram(d2Program);
             programCollection.set(program.id, program);
         });
+
+        if (d2ProgramRulesVariables) {
+            addProgramVariables(d2ProgramRulesVariables);
+        }
+
+        if (d2ProgramRules) {
+            addProgramRules(d2ProgramRules);
+        }
     }
 }

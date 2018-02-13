@@ -121,6 +121,7 @@ export default new ApiSpecification((_this) => {
             version: d2Program.version,
             programStages: getProgramStages(d2Program.programStages),
             organisationUnits: getOrganisationUnits(d2Program.organisationUnits),
+            programType: d2Program.programType,
         }));
 
         return programs;

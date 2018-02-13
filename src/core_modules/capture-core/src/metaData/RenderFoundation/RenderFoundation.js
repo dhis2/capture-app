@@ -1,6 +1,5 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-unused-expressions */
 import log from 'loglevel';
 
 import isFunction from 'd2-utilizr/src/isFunction';
@@ -18,9 +17,11 @@ import errorCreator from '../../utils/errorCreator';
 // import elementTypeKeys from '../DataElement/elementTypes';
 
 type ValuesType = { [key: string]: any };
-type TypeConverters = { [type: $Values<typeof elementTypeKeys>]: (rawValue: any, metaDataElement: DataElement) => any };
+export type TypeConverters = {
+    [type: $Values<typeof elementTypeKeys>]: (rawValue: any, metaDataElement: DataElement) => any,
+};
 
-export default class Stage {
+export default class RenderFoundation {
     static errorMessages = {
         CONVERT_VALUES_STRUCTURE: 'Values can not be converted, data is neither an array or an object',
     };
@@ -119,18 +120,9 @@ export default class Stage {
         return Object.keys(values).reduce((inProgressValues, id) => {
             const metaElement = elementsById[id];
             const rawValue = values[id];
-            const convertedValue = Stage.convertValue(rawValue, metaElement, typeConverters);
+            const convertedValue = metaElement ? metaElement.convertValue(rawValue, typeConverters) : rawValue;
             return { ...inProgressValues, [id]: convertedValue };
         }, {});
-    }
-
-    static convertValue(rawValue: any, metaElement: DataElement, typeConverters: TypeConverters) {
-        if ((rawValue || rawValue === false || rawValue === 0) && metaElement && typeConverters[metaElement.type]) {
-            return isArray(rawValue)
-                ? rawValue.map(valuePart => typeConverters[metaElement.type](valuePart, metaElement))
-                : typeConverters[metaElement.type](rawValue, metaElement);
-        }
-        return rawValue;
     }
 
     /*

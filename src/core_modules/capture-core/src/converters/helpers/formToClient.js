@@ -5,7 +5,7 @@ import { ensureState } from 'redux-optimistic-ui';
 import errorCreator from '../../utils/errorCreator';
 import { getTranslation } from '../../d2/d2Instance';
 import programCollection from '../../metaData/programCollection/programCollection';
-import Stage from '../../metaData/Stage/Stage';
+import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import { valueConvertersForType } from '../formToClient';
 
 const errorMessages = {
@@ -13,7 +13,7 @@ const errorMessages = {
     STAGE_NOT_FOUND: 'Stage not found',
 };
 
-export function convertFormValuesToClient(formValues: ?Object, stage: Stage) {
+export function convertFormValuesToClient(formValues: ?Object, stage: RenderFoundation) {
     const convertedValues = stage.convertValues(formValues, valueConvertersForType);
     return convertedValues;
 }

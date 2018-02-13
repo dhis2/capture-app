@@ -5,7 +5,7 @@ import SectionHeaderSimple from '../Section/SectionHeaderSimple.component';
 
 import D2SectionFields from './D2SectionFields.container';
 
-import MetaDataSection from '../../metaData/Stage/Section';
+import MetaDataSection from '../../metaData/RenderFoundation/Section';
 
 type Props = {
     sectionMetaData: MetaDataSection,
@@ -21,6 +21,10 @@ class D2Section extends Component<Props> {
     renderSectionHeader() {
         const title = this.props.sectionMetaData.name;
 
+        if (!title) {
+            return null;
+        }
+        
         return (
             <SectionHeaderSimple
                 title={title}
