@@ -1,22 +1,22 @@
 // @flow
-import StorageContainer from 'capture-core/storage/StorageContainer';
-import IndexedDBAdapter from 'capture-core/storage/IndexedDBAdapter';
-import LocalStorageAdapter from 'capture-core/storage/DomLocalStorageAdapter';
-import programStoresKeys from 'capture-core/metaDataStoreLoaders/programs/programsStoresKeys';
-import trackedEntityStoresKeys from 'capture-core/metaDataStoreLoaders/trackedEntityAttributes/trackedEntityAttributesStoresKeys';
+import StorageContainer from '../../storage/StorageContainer';
+import IndexedDBAdapter from '../../storage/IndexedDBAdapter';
+import LocalStorageAdapter from '../../storage/DomLocalStorageAdapter';
+import programStoresKeys from '../programs/programsStoresKeys';
+import trackedEntityStoresKeys from '../trackedEntityAttributes/trackedEntityAttributesStoresKeys';
 
-import LoadSpecification from 'capture-core/apiToStore/LoadSpecificationDefinition/LoadSpecification';
-import getConstantsLoadSpecification from 'capture-core/apiToStore/loadSpecifications/getConstantsLoadSpecification';
-import getOrgUnitLevelsLoadSpecification from 'capture-core/apiToStore/loadSpecifications/getOrgUnitLevelsLoadSpecification';
-import getRelationshipsLoadSpecification from 'capture-core/apiToStore/loadSpecifications/getRelationshipsLoadSpecification';
-import getTrackedEntitiesLoadSpecification from 'capture-core/apiToStore/loadSpecifications/getTrackedEntitiesLoadSpecification';
+import LoadSpecification from '../../apiToStore/LoadSpecificationDefinition/LoadSpecification';
+import getConstantsLoadSpecification from '../../apiToStore/loadSpecifications/getConstantsLoadSpecification';
+import getOrgUnitLevelsLoadSpecification from '../../apiToStore/loadSpecifications/getOrgUnitLevelsLoadSpecification';
+import getRelationshipsLoadSpecification from '../../apiToStore/loadSpecifications/getRelationshipsLoadSpecification';
+import getTrackedEntitiesLoadSpecification from '../../apiToStore/loadSpecifications/getTrackedEntitiesLoadSpecification';
 
-import getProgramsData from 'capture-core/metaDataStoreLoaders/programs/getPrograms';
-import getTrackedEntityAttributes from 'capture-core/metaDataStoreLoaders/trackedEntityAttributes/getTrackedEntityAttributes';
-import getOptionSets from 'capture-core/metaDataStoreLoaders/optionSets/getOptionSets';
+import getProgramsData from '../programs/getPrograms';
+import getTrackedEntityAttributes from '../trackedEntityAttributes/getTrackedEntityAttributes';
+import getOptionSets from '../optionSets/getOptionSets';
 
 import objectStores from './metaDataObjectStores.const';
-import { set as setStorageContainer } from './metaDataStorageContainer';
+import { set as setStorageContainer } from '../../metaDataMemoryStores/storageContainer/metaDataStorageContainer';
 
 const coreLoadSpecifications: Array<LoadSpecification> = [
     getConstantsLoadSpecification(objectStores.CONSTANTS),

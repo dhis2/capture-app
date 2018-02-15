@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { getApi } from '../d2/d2Instance';
-import programCollection from '../metaData/programCollection/programCollection';
+import programCollection from '../metaDataMemoryStores/programCollection/programCollection';
 import errorCreator from '../utils/errorCreator';
 import { valueConvertersForType } from '../converters/serverToClient';
 

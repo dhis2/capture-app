@@ -17,7 +17,6 @@ import getValidators from './validators';
 import MetaDataElement from '../../../metaData/DataElement/DataElement';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 
-import withFormBuilderInterface from './withFormBuilderInterface';
 import withDefaultChangeHandler from './withDefaultChangeHandler';
 import withDefaultShouldUpdateInterface from './withDefaultShouldUpdateInterface';
 import withDefaultFieldContainer from './withDefaultFieldContainer';
@@ -25,15 +24,10 @@ import withDefaultMessages from './withDefaultMessages';
 import withHideCompatibility from './withHideCompatibility';
 import withGotoInterface from './withGotoInterface';
 
-import type { ComponentType } from 'react';
+import type { Field, ValidatorContainer } from '../../../__TEMP__/FormBuilderNew.component';
 
-export type FieldConfig = {
-    name: string,
-    component: ComponentType<any>,
-    props: Object,
-};
 
-const changeEvents = {
+const commitEvents = {
     ON_BLUR: 'onBlur',
 };
 const errorMessages = {
@@ -41,7 +35,6 @@ const errorMessages = {
 };
 
 const getBaseComponentProps = () => ({
-    changeEvent: changeEvents.ON_BLUR,
     style: {
         width: '100%',
     },
@@ -49,6 +42,7 @@ const getBaseComponentProps = () => ({
 
 const getBaseFieldProps = (metaData: MetaDataElement) => ({
     validators: getValidators(metaData),
+    commitEvent: commitEvents.ON_BLUR,
 });
 
 const createComponentProps = (componentProps: Object) => ({
@@ -69,8 +63,8 @@ const getBaseTextField = (metaData: MetaDataElement) => {
     });
 
     return createFieldProps({
-        name: metaData.id,
-        component: withGotoInterface()(withHideCompatibility()(withDefaultShouldUpdateInterface()(withDefaultFieldContainer()(withDefaultMessages()(withFormBuilderInterface()(withDefaultChangeHandler()(TextField))))))),
+        id: metaData.id,
+        component: withGotoInterface()(withHideCompatibility()(withDefaultShouldUpdateInterface()(withDefaultFieldContainer()(withDefaultMessages()(withDefaultChangeHandler()(TextField)))))),
         props,
     }, metaData);
 };
@@ -93,8 +87,8 @@ const fieldForTypes = {
         });
 
         return createFieldProps({
-            name: metaData.id,
-            component: withGotoInterface()(withHideCompatibility()(withDefaultShouldUpdateInterface()(withDefaultFieldContainer({ marginBottom: 0 })(withDefaultMessages()(withFormBuilderInterface()(TrueFalse)))))),
+            id: metaData.id,
+            component: withGotoInterface()(withHideCompatibility()(withDefaultShouldUpdateInterface()(withDefaultFieldContainer({ marginBottom: 0 })(withDefaultMessages()(TrueFalse))))),
             props,
         }, metaData);
     },
@@ -105,8 +99,8 @@ const fieldForTypes = {
         });
 
         return createFieldProps({
-            name: metaData.id,
-            component: withGotoInterface()(withHideCompatibility()(withDefaultShouldUpdateInterface()(withDefaultFieldContainer({ marginBottom: 0 })(withDefaultMessages()(withFormBuilderInterface()(TrueOnly)))))),
+            id: metaData.id,
+            component: withGotoInterface()(withHideCompatibility()(withDefaultShouldUpdateInterface()(withDefaultFieldContainer({ marginBottom: 0 })(withDefaultMessages()(TrueOnly))))),
             props,
         }, metaData);
     },
@@ -117,8 +111,8 @@ const fieldForTypes = {
         });
 
         return createFieldProps({
-            name: metaData.id,
-            component: withGotoInterface()(withHideCompatibility()(withDefaultShouldUpdateInterface()(withDefaultFieldContainer()(withDefaultMessages()(withFormBuilderInterface()(withDefaultChangeHandler()(D2Date))))))),
+            id: metaData.id,
+            component: withGotoInterface()(withHideCompatibility()(withDefaultShouldUpdateInterface()(withDefaultFieldContainer()(withDefaultMessages()(withDefaultChangeHandler()(D2Date)))))),
             props,
         }, metaData);
     },
@@ -131,8 +125,8 @@ const fieldForTypes = {
         });
 
         return createFieldProps({
-            name: metaData.id,
-            component: withGotoInterface()(withHideCompatibility()(withDefaultShouldUpdateInterface()(withDefaultFieldContainer()(withDefaultMessages()(withFormBuilderInterface()(withDefaultChangeHandler()(D2DateTime))))))),
+            id: metaData.id,
+            component: withGotoInterface()(withHideCompatibility()(withDefaultShouldUpdateInterface()(withDefaultFieldContainer()(withDefaultMessages()(withDefaultChangeHandler()(D2DateTime)))))),
             props,
         }, metaData);
     },
@@ -149,8 +143,8 @@ const optionSetField = (metaData: MetaDataElement) => {
     });
 
     return createFieldProps({
-        name: metaData.id,
-        component: withGotoInterface()(withHideCompatibility()(withDefaultShouldUpdateInterface()(withDefaultFieldContainer()(withDefaultMessages()(withConvertedOptionSet()(withFormBuilderInterface()(withSelectTranslations()(OptionsSelect)))))))),
+        id: metaData.id,
+        component: withGotoInterface()(withHideCompatibility()(withDefaultShouldUpdateInterface()(withDefaultFieldContainer()(withDefaultMessages()(withConvertedOptionSet()(withSelectTranslations()(OptionsSelect))))))),
         props,
     }, metaData);
 };

@@ -3,7 +3,7 @@ import log from 'loglevel';
 import { ensureState } from 'redux-optimistic-ui';
 import { batchActions } from 'redux-batched-actions';
 
-import metaDataCollection from '../../../metaData/programCollection/programCollection';
+import metaDataCollection from '../../../metaDataMemoryStores/programCollection/programCollection';
 import DataElement from '../../../metaData/DataElement/DataElement';
 import { valueConvertersForType } from '../../../converters/clientToForm';
 import errorCreator from '../../../utils/errorCreator';

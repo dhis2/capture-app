@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 
-import programCollection from '../metaData/programCollection/programCollection';
+import programCollection from '../metaDataMemoryStores/programCollection/programCollection';
 
 import EventProgram from '../metaData/Program/EventProgram';
 import TrackerProgram from '../metaData/Program/TrackerProgram';

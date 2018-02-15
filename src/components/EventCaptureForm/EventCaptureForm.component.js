@@ -60,17 +60,17 @@ const SaveableAndCompletableDataEntry = withSaveButton(getSaveOptions)(Completab
 export default props => (
     <div>
         <button
-            onClick={() => { props.onLoadEvent('njKfugT8jM4'); }}
+            onClick={() => { props.onLoadEvent('dcDICb4mZ5x'); }}
         >
         program1 event1
         </button>
         <button
-            onClick={() => { props.onLoadEvent('rCsKp0gbr9V'); }}
+            onClick={() => { props.onLoadEvent('GLzj6nka7Ae'); }}
         >
         program1 event2
         </button>
         <button
-            onClick={() => { props.onLoadEvent('Cx35fVyy4iH'); }}
+            onClick={() => { props.onLoadEvent('TB1aevraoff'); }}
         >
         program2 event1
         </button>

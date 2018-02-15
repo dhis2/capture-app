@@ -23,7 +23,7 @@ type FormsValues = {
 type Props = {
     fieldsMetaData: Map<string, MetaDataElement>,
     values: FormsValues,
-    onUpdateField: (containerId: string, elementId: string, value: any) => void,
+    onUpdateField: (value: any, uiState: Object, elementId: string, formBuilderId: string, formId: string) => void,
     formId: string,
     formBuilderId: string,
 };
@@ -52,8 +52,8 @@ class D2SectionFields extends Component<Props> {
             .filter(field => field);
     }
 
-    handleUpdateField(elementId: string, value: any) {
-        this.props.onUpdateField(this.props.formId, elementId, value);
+    handleUpdateField(value: any, uiState: Object, elementId: string, formBuilderId: string) {
+        this.props.onUpdateField(value, uiState, elementId, formBuilderId, this.props.formId);
     }
 
     getFieldConfigWithValue(): Array<FieldConfigWithValue> {
@@ -66,12 +66,12 @@ class D2SectionFields extends Component<Props> {
         return (
             <div>
                 <FormBuilder
-                    ref={(instance) => { this.formBuilderInstance = instance; }}
+                    innerRef={(instance) => { this.formBuilderInstance = instance; }}
                     id={formBuilderId}
-                    fields={this.getFieldConfigWithValue()}
+                    fields={this.formFields}
+                    values={values}
                     onUpdateField={this.handleUpdateField}
-                    validateOnStart
-                    useCachedState
+                    validateIfNoUIData
                     {...passOnProps}
                 />
             </div>

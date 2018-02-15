@@ -4,7 +4,6 @@ import log from 'loglevel';
 import Button from 'material-ui-next/Button';
 import { connect } from 'react-redux';
 
-import D2Form from '../D2Form/D2Form.component';
 import DataEntry from './DataEntry.component';
 import errorCreator from '../../utils/errorCreator';
 import { getTranslation } from '../../d2/d2Instance';
@@ -51,7 +50,7 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
             let done;
             while (!done) {
                 currentInstance = currentInstance.getWrappedInstance && currentInstance.getWrappedInstance();
-                if (!currentInstance || currentInstance instanceof D2Form) {
+                if (!currentInstance || currentInstance.constructor.name === 'D2Form') {
                     done = true;
                 }
             }

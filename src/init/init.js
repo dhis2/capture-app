@@ -11,8 +11,8 @@ import 'moment/locale/nb';
 import dateFnNorwegianLocale from 'date-fns/locale/nb';
 // END LANGUAGE FILES
 
-import loadMetaData from '../metaData/metaDataLoader';
-import buildMetaData from '../metaData/metaDataBuilder';
+import loadMetaData from 'capture-core/metaDataStoreLoaders/baseLoader/metaDataLoader';
+import buildMetaData from 'capture-core/metaDataMemoryStoreBuilders/baseBuilder/metaDataBuilder';
 import loadSessionCacheData from '../cache/session/sessionCacheLoader';
 import getSystemSettings from './getSettings';
 

@@ -23,12 +23,12 @@ const styles = (theme: Theme) => ({
 });
 
 type Props = {
-    errorText: ?string,
-    warningText: ?string,
-    infoText: ?string,
-    validatingText: ?string,
+    errorMessage: ?string,
+    warningMessage: ?string,
+    infoMessage: ?string,
+    validatingMessage: ?string,
     touched: boolean,
-    formCompletionAttempted: boolean,
+    validationAttempted?: ?boolean,
     classes: {
         base: Object,
         error: Object,
@@ -68,8 +68,8 @@ const getFieldMessages = (InnerComponent: React.ComponentType<any>) =>
         }
 
         render() {
-            const { classes, errorText, warningText, infoText, validatingText, touched, validationAttempted, ...passOnProps } = this.props;
-            const messageElement = (touched || validationAttempted) ? FieldMessages.getMessageElement(errorText, warningText, infoText, validatingText, classes) : null;
+            const { classes, errorMessage, warningMessage, infoMessage, validatingMessage, touched, validationAttempted, ...passOnProps } = this.props;
+            const messageElement = (touched || validationAttempted) ? FieldMessages.getMessageElement(errorMessage, warningMessage, infoMessage, validatingMessage, classes) : null;
 
             return (
                 <div>

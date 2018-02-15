@@ -6,7 +6,6 @@ import log from 'loglevel';
 import { withStyles } from 'material-ui-next/styles';
 
 import errorCreator from '../../utils/errorCreator';
-import programCollection from '../../metaData/programCollection/programCollection';
 import getStageFromEvent from '../../metaData/helpers/getStageFromEvent';
 
 import D2Form from '../D2Form/D2Form.component';
@@ -78,7 +77,7 @@ class DataEntry extends Component<Props> {
             <div>
                 {eventFields}
                 <D2Form
-                    ref={(formInstance) => { this.formInstance = formInstance; }}
+                    innerRef={(formInstance) => { this.formInstance = formInstance; }}
                     formFoundation={foundation}
                     id={event.eventId}
                     validationAttempted={completionAttempted || saveAttempted}

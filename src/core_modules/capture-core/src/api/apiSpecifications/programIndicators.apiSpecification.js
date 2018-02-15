@@ -9,5 +9,7 @@ export default new ApiSpecification((_this) => {
         fields: 'id,displayName,code,shortName,displayInForm,expression,displayDescription,description,filter,program[id]',
         filter: 'program.id:in',
     };
-    _this.converter = d2Model => d2Model;
+    _this.converter = d2Model => {
+        var x = "gege";
+    };
 });

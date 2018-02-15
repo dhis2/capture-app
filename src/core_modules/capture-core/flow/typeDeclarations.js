@@ -16,10 +16,10 @@ declare type D2 = {
 };
 
 // Redux
-declare type ReduxAction = {
+declare type ReduxAction<Payload, Meta> = {
     type: string,
-    payload?: any,
-    meta?: any,
+    payload: Payload,
+    meta: Meta,
 };
 
 declare type ReduxState = Object;

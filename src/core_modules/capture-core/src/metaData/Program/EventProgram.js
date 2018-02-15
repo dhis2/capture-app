@@ -6,14 +6,14 @@ import Program from './Program';
 import RenderFoundation from '../RenderFoundation/RenderFoundation';
 
 export default class EventProgram extends Program {
-    _stage: RenderFoundation;
+    _stage: ?RenderFoundation;
 
     constructor(initFn: ?(_this: Program) => void) {
         super();
         initFn && isFunction(initFn) && initFn(this);
     }
 
-    get stage(): RenderFoundation {
+    get stage(): ?RenderFoundation {
         return this._stage;
     }
 

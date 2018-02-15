@@ -4,7 +4,7 @@ import { ensureState } from 'redux-optimistic-ui';
 
 import errorCreator from '../../utils/errorCreator';
 import { getTranslation } from '../../d2/d2Instance';
-import programCollection from '../../metaData/programCollection/programCollection';
+import programCollection from '../../metaDataMemoryStores/programCollection/programCollection';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import { valueConvertersForType } from '../formToClient';
 

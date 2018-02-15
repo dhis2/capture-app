@@ -10,7 +10,6 @@ const elementTypeCodes = [
     'INTEGER_NEGATIVE',
     'INTEGER_ZERO_OR_POSITIVE',
     'PERCENTAGE',
-    'YEAR',
     'DATE',
     'DATETIME',
     'TIME',

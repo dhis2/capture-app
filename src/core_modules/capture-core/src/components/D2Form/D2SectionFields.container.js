@@ -14,8 +14,8 @@ const makeMapStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onUpdateField: (containerId: string, elementId: string, value: any) => {
-        dispatch(updateField(containerId, elementId, value));
+    onUpdateField: (value: any, uiState: Object, elementId: string, sectionId: string, formId: string) => {
+        dispatch(updateField(value, uiState, elementId, sectionId, formId));
     },
 });
 

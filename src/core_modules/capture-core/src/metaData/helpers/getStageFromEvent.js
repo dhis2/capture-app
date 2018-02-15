@@ -2,7 +2,7 @@
 import log from 'loglevel';
 
 import errorCreator from '../../utils/errorCreator';
-import programCollection from '../programCollection/programCollection';
+import programCollection from '../../metaDataMemoryStores/programCollection/programCollection';
 import { getTranslation } from '../../d2/d2Instance';
 
 const errorMessages = {
