@@ -21,7 +21,7 @@ export const dataEntriesDesc = createReducerDescription({
 }, 'dataEntries');
 
 export const dataEntriesUIDesc = createReducerDescription({
-    [actionTypes.LOAD_DATA_ENTRY_EVENT]: (state,action) => {
+    [actionTypes.LOAD_DATA_ENTRY_EVENT]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
         const key = getDataEntryKey(payload.id, payload.eventId);
@@ -76,11 +76,12 @@ export const dataEntriesValuesMetaDesc = createReducerDescription({
         const payload = action.payload;
 
         const key = getDataEntryKey(payload.id, payload.eventId);
-        newState[key] = Object.keys(payload.dataEntryValues).reduce((accValuesMeta, valueKey) => {
-            accValuesMeta[valueKey] = {
+        newState[key] = Object.keys(payload.dataEntryTypes).reduce((accValuesMeta, elementKey) => {
+            accValuesMeta[elementKey] = {
                 validationError: null,
                 isValid: true,
                 touched: false,
+                type: payload.dataEntryTypes[elementKey],
             };
             return accValuesMeta;
         }, {});
@@ -94,7 +95,7 @@ export const dataEntriesValuesMetaDesc = createReducerDescription({
         const key = getDataEntryKey(payload.dataEntryId, payload.eventId);
         newState[key] = { ...newState[key] };
         const dataEntryValuesMeta = newState[key];
-        dataEntryValuesMeta[payload.fieldId] = payload.valueMeta;
+        dataEntryValuesMeta[payload.fieldId] = { ...dataEntryValuesMeta[payload.fieldId], ...payload.valueMeta };
         return newState;
     },
 }, 'dataEntriesValuesMeta');

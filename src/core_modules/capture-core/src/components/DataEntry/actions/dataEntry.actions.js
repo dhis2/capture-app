@@ -5,7 +5,7 @@ import { batchActions } from 'redux-batched-actions';
 
 import metaDataCollection from '../../../metaDataMemoryStores/programCollection/programCollection';
 import DataElement from '../../../metaData/DataElement/DataElement';
-import { valueConvertersForType } from '../../../converters/clientToForm';
+import { convertValue } from '../../../converters/clientToForm';
 import errorCreator from '../../../utils/errorCreator';
 import { actionCreator } from '../../../actions/actions.utils';
 import { addFormData } from '../../D2Form/actions/form.actions';
@@ -24,6 +24,7 @@ export const actionTypes = {
     SAVE_EVENT_ERROR: 'SaveDataEntryEventError',
     SAVE_VALIDATION_FALED: 'SaveValidationFailedForDataEntry',
     UPDATE_FIELD: 'UpdateDataEntryField',
+    UPDATE_FORM_FIELD: 'UpdateDataEntryFormField',
 };
 
 const errorMessages = {
@@ -56,10 +57,11 @@ export function loadDataEntryEvent(eventId: string, state: ReduxState, eventProp
         return actionCreator(actionTypes.LOAD_DATA_ENTRY_EVENT_FAILED)();
     }
 
-    const convertedValues = stage.convertValues(eventValues, valueConvertersForType);
+    const convertedValues = stage.convertValues(eventValues, convertValue);
 
     // eventPropsToInclude
     let dataEntryValues;
+    let dataEntryTypes;
     if (eventPropsToInclude) {
         dataEntryValues = eventPropsToInclude
             .map(propToInclude => new DataElement((_this) => {
@@ -67,13 +69,18 @@ export function loadDataEntryEvent(eventId: string, state: ReduxState, eventProp
                 _this.type = propToInclude.type;
             }))
             .reduce((accConvertedEventProps, dataElement: DataElement) => {
-                accConvertedEventProps[dataElement.id] = dataElement.convertValue(event[dataElement.id], valueConvertersForType);
+                accConvertedEventProps[dataElement.id] = dataElement.convertValue(event[dataElement.id], convertValue);
                 return accConvertedEventProps;
             }, {});
+        
+        dataEntryTypes = eventPropsToInclude.reduce((accTypes, prop: EventPropToInclude) => {
+            accTypes[prop.id] = prop.type;
+            return accTypes;
+        }, {});
     }
 
     return batchActions([
-        actionCreator(actionTypes.LOAD_DATA_ENTRY_EVENT)({ eventId, id, dataEntryValues }),
+        actionCreator(actionTypes.LOAD_DATA_ENTRY_EVENT)({ eventId, id, dataEntryValues, dataEntryTypes }),
         addFormData(eventId, convertedValues),
     ]);
 }
@@ -131,3 +138,6 @@ export const saveValidationFailed =
     (eventId: string, id: string) => actionCreator(actionTypes.SAVE_VALIDATION_FALED)({ eventId, id });
 
 export const updateField = (value: any, valueMeta: Object, fieldId: string, dataEntryId: string, eventId: string) => actionCreator(actionTypes.UPDATE_FIELD)({ value, valueMeta, fieldId, dataEntryId, eventId });
+
+export const updateFormField = (value: any, uiState: Object, elementId: string, sectionId: string, formId: string, dataEntryId: string) =>
+    actionCreator(actionTypes.UPDATE_FORM_FIELD)({ value, uiState, formId, sectionId, elementId, dataEntryId });

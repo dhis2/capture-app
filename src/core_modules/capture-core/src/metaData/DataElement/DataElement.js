@@ -11,7 +11,7 @@ import OptionSet from '../OptionSet/OptionSet';
 import errorCreator from '../../utils/errorCreator';
 import elementTypes from './elementTypes';
 
-import type { TypeConverters } from '../Stage/Stage';
+export type ConvertFn = (type: $Values<typeof elementTypes>, value: any) => any;
 
 export default class DataElement {
     static errorMessages = {
@@ -128,10 +128,10 @@ export default class DataElement {
         return object;
     }
 
-    getConvertedOptionSet(convertersForType: ?{[typeId: $Values<typeof elementTypes>]: (value: string) => any}): ?OptionSet {
+    getConvertedOptionSet(onConvert: ?ConvertFn): ?OptionSet {
         if (this.optionSet) {
             const currentOptions = [...this.optionSet.options];
-            const convertedOptionSet = new OptionSet(currentOptions, this, this.optionSet.viewType, convertersForType);
+            const convertedOptionSet = new OptionSet(currentOptions, this, this.optionSet.viewType, onConvert);
             convertedOptionSet.emptyText = this.optionSet.emptyText;
 
             return convertedOptionSet;
@@ -139,12 +139,9 @@ export default class DataElement {
         return null;
     }
 
-    convertValue(rawValue: any, typeConverters: TypeConverters) {
-        if ((rawValue || rawValue === false || rawValue === 0) && typeConverters[this.type]) {
-            return isArray(rawValue)
-                ? rawValue.map(valuePart => typeConverters[this.type](valuePart, this))
-                : typeConverters[this.type](rawValue, this);
-        }
-        return rawValue;
+    convertValue(rawValue: any, onConvert: ConvertFn) {
+        return isArray(rawValue)
+            ? rawValue.map(valuePart => onConvert(this.type, valuePart, this))
+            : onConvert(this.type, rawValue, this);
     }
 }

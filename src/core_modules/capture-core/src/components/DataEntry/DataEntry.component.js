@@ -21,6 +21,7 @@ const styles = theme => ({
 });
 
 type Props = {
+    id: string,
     event: Event,
     completeButton?: ?React.Element<any>,
     saveButton?: ?React.Element<any>,
@@ -28,7 +29,7 @@ type Props = {
     completionAttempted?: ?boolean,
     saveAttempted?: ?boolean,
     classes: Object,
-    id: string
+    onUpdateField: (value: any, uiState: Object, elementId: string, sectionId: string, formId: string, dataEntryId: string) => void,
 };
 
 class DataEntry extends Component<Props> {
@@ -37,9 +38,11 @@ class DataEntry extends Component<Props> {
     };
 
     formInstance: ?D2Form;
+    handleUpdateField: (value: any, uiState: Object, elementId: string, sectionId: string, formId: string) => void;
 
     constructor(props: Props) {
         super(props);
+        this.handleUpdateField = this.handleUpdateField.bind(this);
     }
 
     getWrappedInstance() {
@@ -51,8 +54,12 @@ class DataEntry extends Component<Props> {
         return getStageFromEvent(event);
     }
 
+    handleUpdateField(...args) {
+        this.props.onUpdateField(...args, this.props.id);
+    }
+
     render() {
-        const { id, classes, event, completeButton, saveButton, completionAttempted, saveAttempted, eventFields, ...passOnProps } = this.props;
+        const { id, classes, event, completeButton, saveButton, completionAttempted, saveAttempted, eventFields, onUpdateField, ...passOnProps } = this.props;
 
         if (!event) {
             return (
@@ -81,6 +88,7 @@ class DataEntry extends Component<Props> {
                     formFoundation={foundation}
                     id={event.eventId}
                     validationAttempted={completionAttempted || saveAttempted}
+                    onUpdateField={this.handleUpdateField}
                     {...passOnProps}
                 />
                 <div

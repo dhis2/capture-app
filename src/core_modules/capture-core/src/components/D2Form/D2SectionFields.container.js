@@ -19,4 +19,11 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-export default connect(makeMapStateToProps, mapDispatchToProps, null, { withRef: true })(D2SectionFields);
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+    const defaultMergedProps = Object.assign({}, ownProps, stateProps, dispatchProps);
+
+    const mergedProps = ownProps.onUpdateField ? { ...defaultMergedProps, onUpdateField: ownProps.onUpdateField } : defaultMergedProps;
+    return mergedProps;
+};
+
+export default connect(makeMapStateToProps, mapDispatchToProps, mergeProps, { withRef: true })(D2SectionFields);

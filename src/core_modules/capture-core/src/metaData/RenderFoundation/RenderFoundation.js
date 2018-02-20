@@ -8,18 +8,10 @@ import isObject from 'd2-utilizr/src/isObject';
 
 import Section from './Section';
 import DataElement from '../DataElement/DataElement';
-import elementTypeKeys from '../DataElement/elementTypes';
 import errorCreator from '../../utils/errorCreator';
-
-// import isDefined from 'd2-utilizr/src/isDefined';
-// import Option from './optionSet/Option';
-// import OptionSet from './optionSet/OptionSet';
-// import elementTypeKeys from '../DataElement/elementTypes';
+import type { ConvertFn } from '../DataElement/DataElement';
 
 type ValuesType = { [key: string]: any };
-export type TypeConverters = {
-    [type: $Values<typeof elementTypeKeys>]: (rawValue: any, metaDataElement: DataElement) => any,
-};
 
 export default class RenderFoundation {
     static errorMessages = {
@@ -96,14 +88,14 @@ export default class RenderFoundation {
             }, {});
     }
 
-    convertValues<T: ?ValuesType | Array<ValuesType>>(values: T, typeConverters: TypeConverters): T {
+    convertValues<T: ?ValuesType | Array<ValuesType>>(values: T, onConvert: ConvertFn): T {
         if (values) {
             if (isArray(values)) {
                 // $FlowSuppress
-                return this.convertArrayValues(values, typeConverters);
+                return this.convertArrayValues(values, onConvert);
             } else if (isObject(values)) {
                 // $FlowSuppress
-                return this.convertObjectValues(values, typeConverters);
+                return this.convertObjectValues(values, onConvert);
             }
 
             log.error(errorCreator(Stage.errorMessages.CONVERT_VALUES_STRUCTURE)({ values }));
@@ -111,16 +103,16 @@ export default class RenderFoundation {
         return values;
     }
 
-    convertArrayValues(arrayOfValues: Array<ValuesType>, typeConverters: TypeConverters) {
-        return arrayOfValues.map((values: ValuesType) => this.convertObjectValues(values, typeConverters));
+    convertArrayValues(arrayOfValues: Array<ValuesType>, onConvert: ConvertFn) {
+        return arrayOfValues.map((values: ValuesType) => this.convertObjectValues(values, onConvert));
     }
 
-    convertObjectValues(values: ValuesType, typeConverters: TypeConverters) {
+    convertObjectValues(values: ValuesType, onConvert: ConvertFn) {
         const elementsById = this.getElementsById();
         return Object.keys(values).reduce((inProgressValues, id) => {
             const metaElement = elementsById[id];
             const rawValue = values[id];
-            const convertedValue = metaElement ? metaElement.convertValue(rawValue, typeConverters) : rawValue;
+            const convertedValue = metaElement ? metaElement.convertValue(rawValue, onConvert) : rawValue;
             return { ...inProgressValues, [id]: convertedValue };
         }, {});
     }

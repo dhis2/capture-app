@@ -3,21 +3,26 @@ import log from 'loglevel';
 import { ensureState } from 'redux-optimistic-ui';
 
 import errorCreator from '../../utils/errorCreator';
-import { actionTypes as d2FormActionTypes } from '../../components/D2Form/D2SectionFields.actions';
+import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
 import programCollection from '../../metaDataMemoryStores/programCollection/programCollection';
 import Program from '../../metaData/Program/Program';
 import TrackerProgram from '../../metaData/Program/TrackerProgram';
 import EventProgram from '../../metaData/Program/EventProgram';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import { convertFormValuesToClient } from '../../converters/helpers/formToClient';
+import { convertValue } from '../../converters/formToClient';
 
 import constantsStore from '../../metaDataMemoryStores/constants/constants.store';
+import optionSetsStore from '../../metaDataMemoryStores/optionSets/optionSets.store';
+import DataElement from '../../metaData/DataElement/DataElement';
+
+import type { OptionSet } from '../../metaDataMemoryStores/optionSets/optionSets.store';
 
 type Next = (action: ReduxAction<any, any>) => void;
 
-type ProgramRulesContainer = {
-    programRulesVariables: ?Array<ProgramRuleVariable>,
-    programRules: ?Array<ProgramRule>,
+type DataElementForRulesEngine = {
+    id: string,
+    valueType: string,
 };
 
 const errorMessages = {
@@ -42,7 +47,7 @@ function getProgramRulesContainer(program: Program): ProgramRulesContainer {
     };
 }
 
-function getTrackerMetaElements(trackerProgram: TrackerProgram) {
+function getTrackerDataElements(trackerProgram: TrackerProgram): Array<DataElement> {
     const elements = Array.from(trackerProgram.stages.values())
         .reduce((accElements, stage) => {
             const stageElements = Array.from(stage.sections.values())
@@ -54,7 +59,7 @@ function getTrackerMetaElements(trackerProgram: TrackerProgram) {
     return elements;
 }
 
-function getEventMetaElements(eventProgram: EventProgram) {
+function getEventDataElements(eventProgram: EventProgram): Array<DataElement> {
     const elements = eventProgram.stage ?
         Array.from(eventProgram.stage.sections.values()).reduce((accElements, section) =>
             [...accElements, ...Array.from(section.elements.values())], []) :
@@ -62,16 +67,27 @@ function getEventMetaElements(eventProgram: EventProgram) {
     return elements;
 }
 
-function getMetaElements(program: Program) {
+function getRulesEngineDataElementsAsObject(dataElements: Array<DataElement>): { [elementId: string]: DataElementForRulesEngine } {
+    return dataElements.reduce((accRulesDataElements, dataElement) => {
+        accRulesDataElements[dataElement.id] = {
+            id: dataElement.id,
+            valueType: dataElement.type,
+        };
+        return accRulesDataElements;
+    }, {});
+}
+
+function getDataElements(program: Program) {
+    let dataElements: Array<DataElement> = [];
     if (program instanceof TrackerProgram) {
-        return getTrackerMetaElements(program);
+        dataElements = getTrackerDataElements(program);
     }
 
     if (program instanceof EventProgram) {
-        return getEventMetaElements(program);
+        dataElements = getEventDataElements(program);
     }
 
-    return [];
+    return getRulesEngineDataElementsAsObject(dataElements);
 }
 
 /**
@@ -138,31 +154,99 @@ function getCurrentEventValues(state: ReduxState, program: Program, action: Redu
     return clientData;
 }
 
-// WILL GET MORE COMPLICATED :(
+function getDataEntryValidatons(dataEntryMeta: {[key: string]: { isValid: boolean }}) {
+    return Object.keys(dataEntryMeta).reduce((accValidations, key) => {
+        accValidations[key] = dataEntryMeta[key].isValid;
+        return accValidations;
+    }, {});
+}
+
+function getDataEntryTypes(dataEntryMeta: {[key: string]: { type: string }}) {
+    return Object.keys(dataEntryMeta).reduce((accValidations, key) => {
+        accValidations[key] = dataEntryMeta[key].type;
+        return accValidations;
+    }, {});
+}
+
+function getValidDataEntryValues(dataEntryValues: { [key: string]: any }, dataEntryValidations: { [key: string]: boolean }) {
+    return Object.keys(dataEntryValues).reduce((accValidValues, key) => {
+        accValidValues[key] = dataEntryValidations[key] ? dataEntryValues[key] : null;
+        return accValidValues;
+    }, {});
+}
+
+function convertDataEntryFormValuesToClientValues(validDataEntryValues: { [key: string]: any }, dataEntryTypes: { [key: string]: string }) {
+    return Object.keys(validDataEntryValues).reduce((accConvertedValues, key) => {
+        const valueToConvert = validDataEntryValues[key];
+        const valueType = dataEntryTypes[key];
+        accConvertedValues[key] = convertValue(valueType, valueToConvert);
+        return accConvertedValues;
+    }, {});
+}
+
+function getCurrentEventMainData(state: ReduxState, event: Event, dataEntryId: string) {
+    const dataEntryReduxKey = `${dataEntryId}-${event.eventId}`;
+
+    const dataEntryMeta = state.dataEntriesValuesMeta[dataEntryReduxKey];
+    const dataEntryValidations = getDataEntryValidatons(dataEntryMeta);
+    const dataEntryValues = state.dataEntriesValues[dataEntryReduxKey];
+    const validDataEntryValues = getValidDataEntryValues(dataEntryValues, dataEntryValidations);
+
+    const dataEntryTypes = getDataEntryTypes(dataEntryMeta);
+    const dataEntryClientValues = convertDataEntryFormValuesToClientValues(validDataEntryValues, dataEntryTypes);
+
+    const eventValues = ensureState(state.events)[event.eventId];
+    return { ...eventValues, ...dataEntryClientValues };
+}
+
+// Also convert other open form data?
 function getAllEventsValues(state: ReduxState, currentEventValues: { [key: string]: any}, event: Event) {
     const eventsValues = ensureState(state.eventsValues);
     eventsValues[event.eventId] = currentEventValues;
     return eventsValues;
 }
 
-function getRulesEngineArguments(program: Program, action: ReduxAction<Object, null>, state: ReduxState, event: Event, formId: string) {
-    const dataElementsInProgram = getMetaElements(program);
+// Also convert other open form data?
+function getAllEventsMainData(state: ReduxState, currentEventMainData: { [key: string]: any}, event: Event) {
+    const events = ensureState(state.events);
+    events[event.eventId] = currentEventMainData;
+    return events;
+}
+
+function createEventsArray(allEventsValues: { [eventId: string]: Object }, allEventsMainData: { [eventId: string]: Object }) {
+    return Object.keys(allEventsValues)
+        .map(key => ({ ...allEventsValues[key], ...allEventsMainData[key] }),
+        );
+}
+
+function getRulesEngineArguments(program: Program, action: ReduxAction<Object, null>, state: ReduxState, event: Event, formId: string, dataEntryId: string) {
+    const dataElementsInProgram = getDataElements(program);
+
     const currentEventValues = getCurrentEventValues(state, program, action, event, formId);
+    const currentEventMainData = getCurrentEventMainData(state, event, dataEntryId);
+    const currentEventData = { ...currentEventValues, ...currentEventMainData };
+
     const allEventsValues = getAllEventsValues(state, currentEventValues, event);
+    const allEventsMainData = getAllEventsMainData(state, currentEventMainData, event);
+
+    const allEventsData = createEventsArray(allEventsValues, allEventsMainData);
+
+    const optionSets = optionSetsStore.get();
+
     return {
         dataElementsInProgram,
-        currentEventValues,
-        allEventsValues,
+        currentEventData,
+        allEventsData,
+        optionSets,
     };
 }
 
-function runRulesEngine(programRulesContainer: ProgramRulesContainer, currentEventValues: { [elementId: string]: any }) {
+function runRulesEngine(programRulesContainer: ProgramRulesContainer, dataElementsInProgram: { [elementId: string]: DataElementForRulesEngine }, currentEventData: { [elementId: string]: any }, allEventsData: Array<{ [elementId: string]: any }>, optionSets: ?Array<OptionSet>) {
 
 }
 
-
 export default (store: ReduxStore) => (next: Next) => (action: ReduxAction<any, any>) => {
-    if (action.type === d2FormActionTypes.UPDATE_FIELD) {
+    if (action.type === dataEntryActionTypes.UPDATE_FORM_FIELD) {
         const state = store.getState();
         const formId = action.payload.formId;
         const eventId = formId;
@@ -182,8 +266,8 @@ export default (store: ReduxStore) => (next: Next) => (action: ReduxAction<any, 
             return;
         }
 
-        const { dataElementsInProgram, currentEventValues, allEventsValues } = getRulesEngineArguments(program, action, state);
-
+        const { dataElementsInProgram, currentEventData, allEventsData, optionSets } = getRulesEngineArguments(program, action, state, event, formId, action.payload.dataEntryId);
+        const rulesEffects = runRulesEngine(programRulesContainer, dataElementsInProgram, currentEventData, allEventsData, optionSets);
 
 
         next(action);

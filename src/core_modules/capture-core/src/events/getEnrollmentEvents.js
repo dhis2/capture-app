@@ -3,7 +3,8 @@ import log from 'loglevel';
 import { getApi } from '../d2/d2Instance';
 import programCollection from '../metaDataMemoryStores/programCollection/programCollection';
 import errorCreator from '../utils/errorCreator';
-import { valueConvertersForType } from '../converters/serverToClient';
+import { convertValue } from '../converters/serverToClient';
+import elementTypes from '../metaData/DataElement/elementTypes';
 
 type ApiDataValue = {
     dataElement: string,
@@ -48,8 +49,8 @@ function convertMainProperties(apiEvent: ApiTEIEvent): Event {
         enrollmentId: apiEvent.enrollment,
         enrollmentStatus: apiEvent.enrollmentStatus,
         status: apiEvent.status,
-        eventDate: valueConvertersForType.DATETIME(apiEvent.eventDate),
-        dueDate: valueConvertersForType.DATETIME(apiEvent.dueDate),
+        eventDate: convertValue(elementTypes.DATE, apiEvent.eventDate),
+        dueDate: convertValue(elementTypes.DATE, apiEvent.dueDate),
     };
 }
 
@@ -67,7 +68,7 @@ function convertToClientEvent(event: ApiTEIEvent) {
     }
 
     const dataValuesById = getValuesById(event.dataValues);
-    const convertedDataValues = stageMetaData.convertValues(dataValuesById, valueConvertersForType);
+    const convertedDataValues = stageMetaData.convertValues(dataValuesById, convertValue);
 
     const convertedMainProperties = convertMainProperties(event);
 

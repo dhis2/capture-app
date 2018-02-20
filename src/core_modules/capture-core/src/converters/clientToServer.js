@@ -12,7 +12,7 @@ function convertDate(rawValue: string): string {
     return momentDateUtc.toISOString();
 }
 
-export const valueConvertersForType = {
+const valueConvertersForType = {
     [elementTypes.NUMBER]: stringifyNumber,
     [elementTypes.INTEGER]: stringifyNumber,
     [elementTypes.INTEGER_POSITIVE]: stringifyNumber,
@@ -22,3 +22,10 @@ export const valueConvertersForType = {
     [elementTypes.TRUE_ONLY]: () => 'true',
     [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'true' : 'false'),
 };
+
+export function convertValue(type: $Values<typeof elementTypes>, value: any) {
+    if (!value && value !== 0 && value !== false) {
+        return value;
+    }
+    return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
+}

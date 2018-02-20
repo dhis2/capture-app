@@ -12,7 +12,7 @@ import DataElement from '../metaData/DataElement/DataElement';
 import OptionSet from '../metaData/OptionSet/OptionSet';
 import Option from '../metaData/OptionSet/Option';
 
-import { optionSetConvertersForType } from '../converters/serverToClient';
+import { convertOptionSetValue } from '../converters/serverToClient';
 import isNonEmptyArray from '../utils/isNonEmptyArray';
 import errorCreator from '../utils/errorCreator';
 
@@ -126,7 +126,7 @@ function buildOptionSet(id: string, dataElement: DataElement) {
         }),
     );
 
-    return new OptionSet(options, dataElement, null, optionSetConvertersForType);
+    return new OptionSet(options, dataElement, null, convertOptionSetValue);
 }
 
 function getDataElementTranslation(d2DataElement: D2DataElement, property: $Values<typeof propertyNames>) {
@@ -142,7 +142,7 @@ function buildDataElement(d2ProgramStageDataElement: D2ProgramStageDataElement) 
         _this.shortName = getDataElementTranslation(d2DataElement, propertyNames.SHORT_NAME) || d2DataElement.displayShortName;
         _this.formName = getDataElementTranslation(d2DataElement, propertyNames.FORM_NAME) || d2DataElement.displayFormName;
         _this.description = getDataElementTranslation(d2DataElement, propertyNames.DESCRIPTION) || d2DataElement.description;
-        _this.visible = d2ProgramStageDataElement.displayInReports;
+        _this.visible = true; // d2ProgramStageDataElement.displayInReports;
         _this.compulsory = d2ProgramStageDataElement.compulsory;
         _this.disabled = false;
         _this.type = getDataElementType(d2DataElement.valueType);
@@ -273,7 +273,7 @@ function addProgramRules(d2ProgramRules: Array<ProgramRule>) {
         const programRules = rulesByProgram[programKey];
         const program = programCollection.get(programKey);
         if (program) {
-            program.programRuleVariables = programRules;
+            program.programRules = programRules;
         }
     });
 }

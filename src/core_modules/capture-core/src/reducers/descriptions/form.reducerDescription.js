@@ -3,6 +3,7 @@ import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as fieldActionTypes } from '../../components/D2Form/D2SectionFields.actions';
 import { actionTypes as loaderActionTypes } from '../../components/D2Form/actions/form.actions';
 import { actionTypes as formBuilderActionTypes } from '../../components/D2Form/formBuilder.actions';
+import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
 
 export const formsValuesDesc = createReducerDescription({
     [loaderActionTypes.ADD_FORM_DATA]: (state, action) => {
@@ -11,6 +12,13 @@ export const formsValuesDesc = createReducerDescription({
         return newState;
     },
     [fieldActionTypes.UPDATE_FIELD]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const formValues = newState[payload.formId] = { ...newState[payload.formId] };
+        formValues[payload.elementId] = payload.value;
+        return newState;
+    },
+    [dataEntryActionTypes.UPDATE_FORM_FIELD]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
         const formValues = newState[payload.formId] = { ...newState[payload.formId] };

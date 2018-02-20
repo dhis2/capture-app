@@ -4,25 +4,7 @@ import isString from 'd2-utilizr/lib/isString';
 import log from 'loglevel';
 import errorCreator from '../utils/errorCreator';
 
-export interface IConvertRulesValue {
-    convertText(value: any): string;
-    convertLongText(value: any): string;
-    convertLetter(value: any): string;
-    convertPhoneNumber(value: any): string;
-    convertEmail(value: any): string;
-    convertBoolean(value: any): boolean;
-    convertTrueOnly(value: any): boolean;
-    convertDate(value: any): string;
-    convertDateTime(value: any): string;
-    convertTime(value: any): string;
-    convertNumber(value: any): number;
-    convertInteger(value: any): number;
-    convertIntegerPositive(value: any): number;
-    convertIntegerNegative(value: any): number;
-    convertIntegerZeroOrPositive(value: any): number;
-    convertPercentage(value: any): number;
-    convertUrl(value: any): string;
-}
+import type { IConvertRulesValue, ProgramRulesContainer, EventData, EventsData } from './rulesEngine.types';
 
 export default class RulesEngine {
     static mapTypeToInterfaceFnName = {
@@ -53,6 +35,22 @@ export default class RulesEngine {
         return isString(value) ? `"${value}"` : value;
     }
 
+    static trimQuotes(input: string) {
+        let trimmingComplete = false;
+        let beingTrimmed = input;
+
+        while (!trimmingComplete) {
+            const beforeTrimming = beingTrimmed;
+            beingTrimmed = beingTrimmed.replace(/^'/, '').replace(/'$/, '');
+            beingTrimmed = beingTrimmed.replace(/^"/, '').replace(/"$/, '');
+
+            if (beforeTrimming.length === beingTrimmed.length) {
+                trimmingComplete = true;
+            }
+        }
+        return beingTrimmed;
+    }
+
     _converterObject: IConvertRulesValue;
 
     constructor(converterObject: IConvertRulesValue) {
@@ -60,6 +58,10 @@ export default class RulesEngine {
     }
 
     processValue(value: any, type: $Keys<typeof RulesEngine.mapTypeToInterfaceFnName>) {
+        if (isString(value)) {
+            value = RulesEngine.trimQuotes(value);
+        }
+
         const convertFnName = RulesEngine.mapTypeToInterfaceFnName[type];
         if (!convertFnName) {
             log.warn(errorCreator(RulesEngine.errorMessages.CONVERTER_NOT_FOUND)({ type }));
@@ -70,7 +72,13 @@ export default class RulesEngine {
         return convertedValue;
     }
 
-    executeRules() {
-        
+
+
+    executeRules(
+        allProgramRules: ProgramRulesContainer,
+        executingEventValues: EventData,
+        eventsValues: EventsData,
+        allDataElements: DataElement) {
+
     }
 }

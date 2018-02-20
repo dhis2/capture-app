@@ -1,6 +1,7 @@
 // @flow
 import { wordToValidatorMap } from 'd2-ui/lib/forms/Validators';
 import isArray from 'd2-utilizr/src/isArray';
+import isString from 'd2-utilizr/src/isString';
 
 import isValidDate from '../../../utils/validators/date.validator';
 import isValidDateTime from '../../../utils/validators/dateTime.validator';
@@ -34,6 +35,13 @@ const errorMessages = {
     DATETIME: 'value_should_be_a_valid_datetime',
     TIME: 'value_should_be_a_valid_time',
     PERCENTAGE: 'value_should_be_a_valid_percentage',
+};
+
+const isCompulsoryRequirementMet = wordToValidatorMap.get(wordValidatorKeys.COMPULSORY);
+
+const isCompulsoryRequirementMetWrapper = (value: any) => {
+    const testValue = (value && isString(value)) ? value.trim() : value;
+    return isCompulsoryRequirementMet(testValue);
 };
 
 const isInteger = (value: string) => {
@@ -123,7 +131,9 @@ function buildTypeValidators(metaData: MetaDataElement): Array<ValidatorContaine
             if (!value && value !== 0 && value !== false) {
                 return true;
             }
-            return validatorContainer.validator(value);
+
+            const toValidateValue = isString(value) ? value.trim() : value;
+            return validatorContainer.validator(toValidateValue);
         },
     }));
 
@@ -133,7 +143,7 @@ function buildTypeValidators(metaData: MetaDataElement): Array<ValidatorContaine
 function buildCompulsoryValidator(metaData: MetaDataElement): Array<ValidatorContainer> {
     return metaData.compulsory ? [
         {
-            validator: wordToValidatorMap.get(wordValidatorKeys.COMPULSORY),
+            validator: isCompulsoryRequirementMetWrapper,
             message: getTranslation(wordToValidatorMap.get(wordValidatorKeys.COMPULSORY).message, formatterOptions.CAPITALIZE_FIRST_LETTER),
         },
     ] :

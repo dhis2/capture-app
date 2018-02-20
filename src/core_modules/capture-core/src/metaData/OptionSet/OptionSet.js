@@ -11,6 +11,7 @@ import errorCreator from '../../utils/errorCreator';
 import elementTypes from '../DataElement/elementTypes';
 import DataElement from '../DataElement/DataElement';
 
+import type { ConvertFn } from '../DataElement/DataElement';
 import type { Value } from './Option';
 
 export default class OptionSet {
@@ -23,12 +24,10 @@ export default class OptionSet {
     _viewType: ?$Values<typeof viewTypes>;
     _dataElement: ?DataElement;
 
-    constructor(options?: ?Array<Option>, dataElement?: ?DataElement, viewType?: ?string, convertersForType?: ?{[typeId: $Values<typeof elementTypes>]: (value: string) => any}) {
+    constructor(options?: ?Array<Option>, dataElement?: ?DataElement, viewType?: ?string, onConvert?: ?ConvertFn) {
         this._options = !options ? [] : options.reduce((accOptions: Array<Option>, currentOption: Option) => {
             if (currentOption.value || currentOption.value === false || currentOption.value === 0) {
-                if (convertersForType && convertersForType[dataElement.type]) {
-                    currentOption.value = convertersForType[dataElement.type](currentOption.value);
-                }
+                currentOption.value =  onConvert ? onConvert(dataElement.type, currentOption.value) : currentOption.value;
                 accOptions.push(currentOption);
             } else {
                 this._emptyText = currentOption.text;

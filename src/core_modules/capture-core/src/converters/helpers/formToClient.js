@@ -6,7 +6,7 @@ import errorCreator from '../../utils/errorCreator';
 import { getTranslation } from '../../d2/d2Instance';
 import programCollection from '../../metaDataMemoryStores/programCollection/programCollection';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
-import { valueConvertersForType } from '../formToClient';
+import { convertValue } from '../formToClient';
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found',
@@ -14,7 +14,7 @@ const errorMessages = {
 };
 
 export function convertFormValuesToClient(formValues: ?Object, stage: RenderFoundation) {
-    const convertedValues = stage.convertValues(formValues, valueConvertersForType);
+    const convertedValues = stage.convertValues(formValues, convertValue);
     return convertedValues;
 }
 

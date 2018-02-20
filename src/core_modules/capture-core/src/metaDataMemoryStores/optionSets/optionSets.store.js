@@ -7,7 +7,7 @@ type Option = {
     id: string,
 };
 
-type OptionSet = {
+export type OptionSet = {
     id: string,
     displayName: string,
     options: Array<Option>,
