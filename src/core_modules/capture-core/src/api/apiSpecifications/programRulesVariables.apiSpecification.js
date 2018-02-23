@@ -30,6 +30,7 @@ export default new ApiSpecification((_this) => {
                 id: d2RuleVariable.programStage && d2RuleVariable.programStage.id,
             },
             programRuleVariableSourceType: d2RuleVariable.programRuleVariableSourceType,
+            useNameForOptionSet: !d2RuleVariable.useCodeForOptionSet,
         }));
     };
 });

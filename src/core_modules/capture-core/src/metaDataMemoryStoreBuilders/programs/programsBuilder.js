@@ -1,14 +1,14 @@
 // @flow
-import buildProgramCollection from '../../metaDataFactory/programFactory';
+import buildProgramCollection from '../../metaDataFactory/program/programFactory';
 
 import getStorageContainer from '../../metaDataMemoryStores/storageContainer/metaDataStorageContainer';
 import StorageContainer from '../../storage/StorageContainer';
 
-function getD2Programs(storageContainer: StorageContainer, storeName: string): Promise<Array<Object>> {
+function getPrograms(storageContainer: StorageContainer, storeName: string): Promise<Array<Object>> {
     return storageContainer.getAll(storeName);
 }
 
-function getD2OptionSets(storageContainer: StorageContainer, storeName: string): Promise<Array<Object>> {
+function getOptionSets(storageContainer: StorageContainer, storeName: string): Promise<Array<Object>> {
     return storageContainer.getAll(storeName);
 }
 
@@ -20,15 +20,20 @@ function getProgramRules(storageContainer: StorageContainer, storeName: string):
     return storageContainer.getAll(storeName);
 }
 
+function getProgramIndicators(storageContainer: StorageContainer, storeName: string): Promise<Array<Object>> {
+    return storageContainer.getAll(storeName);
+}
+
 async function getBuilderPrerequisites(...storeNames: Array<string>) {
     const storageContainer = getStorageContainer();
 
-    const d2ProgramsPromise = getD2Programs(storageContainer, storeNames[0]);
-    const d2OptionSetsPromise = getD2OptionSets(storageContainer, storeNames[1]);
-    const d2ProgramRulesVariables = getProgramRulesVariables(storageContainer, storeNames[2]);
-    const d2ProgramRules = getProgramRules(storageContainer, storeNames[3]);
+    const cachedProgramsPromise = getPrograms(storageContainer, storeNames[0]);
+    const cachedOptionSetsPromise = getOptionSets(storageContainer, storeNames[1]);
+    const cachedProgramRulesVariables = getProgramRulesVariables(storageContainer, storeNames[2]);
+    const cachedProgramRules = getProgramRules(storageContainer, storeNames[3]);
+    const cachedProgramIndicatorsPromise = getProgramIndicators(storageContainer, storeNames[4]);
 
-    const values = await Promise.all([d2ProgramsPromise, d2OptionSetsPromise, d2ProgramRulesVariables, d2ProgramRules]);
+    const values = await Promise.all([cachedProgramsPromise, cachedOptionSetsPromise, cachedProgramRulesVariables, cachedProgramRules, cachedProgramIndicatorsPromise]);
     return values;
 }
 
@@ -37,8 +42,9 @@ export default async function buildPrograms(
     programStoreName: string,
     optionSetStoreName: string,
     programRulesVariablesStoreName: string,
-    programRulesStoreName: string) {
-    const [d2Programs, d2OptionSets, d2ProgramRulesVariables, d2ProgramRules] =
-        await getBuilderPrerequisites(programStoreName, optionSetStoreName, programRulesVariablesStoreName, programRulesStoreName);
-    buildProgramCollection(d2Programs, d2OptionSets, d2ProgramRulesVariables, d2ProgramRules, locale);
+    programRulesStoreName: string,
+    programIndicatorsStoreName: string) {
+    const [cachedPrograms, cachedOptionSets, cachedProgramRulesVariables, cachedProgramRules, cachedProgramIndicators] =
+        await getBuilderPrerequisites(programStoreName, optionSetStoreName, programRulesVariablesStoreName, programRulesStoreName, programIndicatorsStoreName);
+    buildProgramCollection(cachedPrograms, cachedOptionSets, cachedProgramRulesVariables, cachedProgramRules, cachedProgramIndicators, locale);
 }

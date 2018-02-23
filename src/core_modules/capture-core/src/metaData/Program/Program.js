@@ -58,4 +58,12 @@ export default class Program {
     addProgramRule(programRule: ProgramRule) {
         this._programRules.push(programRule);
     }
+
+    addProgramRuleVariables(programRuleVariables: Array<ProgramRuleVariable>) {
+        this._programRuleVariables = [...this._programRuleVariables, ...programRuleVariables];
+    }
+
+    addProgramRules(programRules: Array<ProgramRule>) {
+        this._programRules = [...this._programRules, ...programRules];
+    }
 }

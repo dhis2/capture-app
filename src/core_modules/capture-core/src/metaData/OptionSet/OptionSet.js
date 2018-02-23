@@ -19,12 +19,14 @@ export default class OptionSet {
         OPTION_NOT_FOUND: 'Option not found',
         UNSUPPORTED_VIEWTYPE: 'Tried to set unsupported viewType',
     };
+
+    _id: ?string;
     _emptyText: ?string;
     _options: Array<Option>;
     _viewType: ?$Values<typeof viewTypes>;
     _dataElement: ?DataElement;
 
-    constructor(options?: ?Array<Option>, dataElement?: ?DataElement, viewType?: ?string, onConvert?: ?ConvertFn) {
+    constructor(id?: ?string, options?: ?Array<Option>, dataElement?: ?DataElement, viewType?: ?string, onConvert?: ?ConvertFn) {
         this._options = !options ? [] : options.reduce((accOptions: Array<Option>, currentOption: Option) => {
             if (currentOption.value || currentOption.value === false || currentOption.value === 0) {
                 currentOption.value =  onConvert ? onConvert(dataElement.type, currentOption.value) : currentOption.value;
@@ -39,7 +41,15 @@ export default class OptionSet {
             this.viewType = viewType;
         }
 
+        this._id = id;
         this._dataElement = dataElement;
+    }
+
+    set id(id: string) {
+        this._id = id;
+    }
+    get id(): ?string {
+        return this._id;
     }
 
     set viewType(viewType: string) {

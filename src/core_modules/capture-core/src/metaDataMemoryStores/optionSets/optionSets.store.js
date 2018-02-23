@@ -14,10 +14,16 @@ export type OptionSet = {
 };
 
 class OptionSetStore {
-    _optionSets: ?Array<OptionSet>;
+    _optionSets: { [id: string]: OptionSet };
+    constructor() {
+        this._optionSets = {};
+    }
 
     set(optionSets: Array<OptionSet>) {
-        this._optionSets = optionSets;
+        this._optionSets = optionSets.reduce((accObjectOptionSets, optionSet) => {
+            accObjectOptionSets[optionSet.id] = optionSet;
+            return accObjectOptionSets;
+        }, {});
     }
 
     get() {

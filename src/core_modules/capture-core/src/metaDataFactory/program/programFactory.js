@@ -1,95 +1,99 @@
 // @flow
+/* eslint-disable complexity */
 import log from 'loglevel';
 
-import programCollection from '../metaDataMemoryStores/programCollection/programCollection';
+import programCollection from '../../metaDataMemoryStores/programCollection/programCollection';
 
-import EventProgram from '../metaData/Program/EventProgram';
-import TrackerProgram from '../metaData/Program/TrackerProgram';
+import EventProgram from '../../metaData/Program/EventProgram';
+import TrackerProgram from '../../metaData/Program/TrackerProgram';
 
-import RenderFoundation from '../metaData/RenderFoundation/RenderFoundation';
-import Section from '../metaData/RenderFoundation/Section';
-import DataElement from '../metaData/DataElement/DataElement';
-import OptionSet from '../metaData/OptionSet/OptionSet';
-import Option from '../metaData/OptionSet/Option';
+import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
+import Section from '../../metaData/RenderFoundation/Section';
+import DataElement from '../../metaData/DataElement/DataElement';
+import OptionSet from '../../metaData/OptionSet/OptionSet';
+import Option from '../../metaData/OptionSet/Option';
 
-import { convertOptionSetValue } from '../converters/serverToClient';
-import isNonEmptyArray from '../utils/isNonEmptyArray';
-import errorCreator from '../utils/errorCreator';
+import { convertOptionSetValue } from '../../converters/serverToClient';
+import isNonEmptyArray from '../../utils/isNonEmptyArray';
+import errorCreator from '../../utils/errorCreator';
 
-type D2Translation = {
+import getRulesAndVariablesFromProgramIndicators from './getRulesAndVariablesFromIndicators';
+import type { CachedProgramIndicator } from './getRulesAndVariablesFromIndicators';
+
+type CachedTranslation = {
     property: string,
     locale: string,
     value: string
 };
 
-type D2DataElement = {
+type CachedDataElement = {
     id: string,
     displayName: string,
     displayShortName: string,
     displayFormName: string,
     valueType: string,
-    translations: Array<D2Translation>,
+    translations: Array<CachedTranslation>,
     description: string,
     optionSetValue: boolean,
     optionSet: { id: string }
 };
 
-type D2ProgramStageDataElement = {
+type CachedProgramStageDataElement = {
     compulsory: boolean,
     displayInReports: boolean,
-    dataElement: D2DataElement
+    dataElement: CachedDataElement
 };
 
-type D2SectionDataElements = {
+type CachedSectionDataElements = {
     id: string
 };
 
-type D2ProgramStageSection = {
+type CachedProgramStageSection = {
     id: string,
     displayName: string,
-    dataElements: ?Array<D2SectionDataElements>
+    dataElements: ?Array<CachedSectionDataElements>
 };
 
-type D2ProgramStage = {
+type CachedProgramStage = {
     id: string,
     displayName: string,
     description: ?string,
-    programStageSections: ?Array<D2ProgramStageSection>,
-    programStageDataElements: ?Array<D2ProgramStageDataElement>
+    programStageSections: ?Array<CachedProgramStageSection>,
+    programStageDataElements: ?Array<CachedProgramStageDataElement>
 };
 
-type D2Program = {
+type CachedProgram = {
     id: string,
     displayName: string,
     displayShortName: string,
-    programStages: Array<D2ProgramStage>,
+    programStages: Array<CachedProgramStage>,
     programType: string,
 };
 
 type SectionSpecs = {
     id: string,
     displayName: string,
-    dataElements: ?Array<D2SectionDataElements>
+    dataElements: ?Array<CachedSectionDataElements>
 };
 
-type D2ProgramStageDataElementsAsObject = {
-    [id: string]: D2ProgramStageDataElement
+type CachedProgramStageDataElementsAsObject = {
+    [id: string]: CachedProgramStageDataElement
 };
 
-type D2Option = {
+type CachedOption = {
     id: string,
     code: string,
     displayName: string
 };
 
-type D2OptionSet = {
+type CachedOptionSet = {
     id: string,
     valueType: string,
-    options: Array<D2Option>
+    options: Array<CachedOption>
 };
 
 let currentLocale: ?string;
-let currentD2OptionSets: ?Array<D2OptionSet>;
+let currentD2OptionSets: ?Array<CachedOptionSet>;
 
 const propertyNames = {
     NAME: 'NAME',
@@ -126,14 +130,14 @@ function buildOptionSet(id: string, dataElement: DataElement) {
         }),
     );
 
-    return new OptionSet(options, dataElement, null, convertOptionSetValue);
+    return new OptionSet(id, options, dataElement, null, convertOptionSetValue);
 }
 
-function getDataElementTranslation(d2DataElement: D2DataElement, property: $Values<typeof propertyNames>) {
+function getDataElementTranslation(d2DataElement: CachedDataElement, property: $Values<typeof propertyNames>) {
     return currentLocale && d2DataElement.translations[currentLocale] && d2DataElement.translations[currentLocale][property];
 }
 
-function buildDataElement(d2ProgramStageDataElement: D2ProgramStageDataElement) {
+function buildDataElement(d2ProgramStageDataElement: CachedProgramStageDataElement) {
     const d2DataElement = d2ProgramStageDataElement.dataElement;
 
     const dataElement = new DataElement((_this) => {
@@ -155,7 +159,7 @@ function buildDataElement(d2ProgramStageDataElement: D2ProgramStageDataElement) 
     return dataElement;
 }
 
-function convertProgramStageDataElementsToObject(d2ProgramStageDataElements: ?Array<D2ProgramStageDataElement>): D2ProgramStageDataElementsAsObject {
+function convertProgramStageDataElementsToObject(d2ProgramStageDataElements: ?Array<CachedProgramStageDataElement>): CachedProgramStageDataElementsAsObject {
     if (!d2ProgramStageDataElements) {
         return {};
     }
@@ -166,14 +170,14 @@ function convertProgramStageDataElementsToObject(d2ProgramStageDataElements: ?Ar
     }, {});
 }
 
-function buildSection(d2ProgramStageDataElements: D2ProgramStageDataElementsAsObject, sectionSpecs: SectionSpecs) {
+function buildSection(d2ProgramStageDataElements: CachedProgramStageDataElementsAsObject, sectionSpecs: SectionSpecs) {
     const section = new Section((_this) => {
         _this.id = sectionSpecs.id;
         _this.name = sectionSpecs.displayName;
     });
 
     if (sectionSpecs.dataElements) {
-        sectionSpecs.dataElements.forEach((sectionDataElement: D2SectionDataElements) => {
+        sectionSpecs.dataElements.forEach((sectionDataElement: CachedSectionDataElements) => {
             const id = sectionDataElement.id;
             const d2ProgramStageDataElement = d2ProgramStageDataElements[id];
             section.addElement(buildDataElement(d2ProgramStageDataElement));
@@ -183,7 +187,7 @@ function buildSection(d2ProgramStageDataElements: D2ProgramStageDataElementsAsOb
     return section;
 }
 
-function buildMainSection(d2ProgramStageDataElements: ?Array<D2ProgramStageDataElement>) {
+function buildMainSection(d2ProgramStageDataElements: ?Array<CachedProgramStageDataElement>) {
     const section = new Section((_this) => {
         _this.id = Section.MAIN_SECTION_ID;
     });
@@ -196,7 +200,7 @@ function buildMainSection(d2ProgramStageDataElements: ?Array<D2ProgramStageDataE
     return section;
 }
 
-function buildStage(d2ProgramStage: D2ProgramStage) {
+function buildStage(d2ProgramStage: CachedProgramStage) {
     const stage = new RenderFoundation((_this) => {
         _this.id = d2ProgramStage.id;
         _this.name = d2ProgramStage.displayName;
@@ -206,7 +210,7 @@ function buildStage(d2ProgramStage: D2ProgramStage) {
     if (isNonEmptyArray(d2ProgramStage.programStageSections)) {
         const d2ProgramStageDataElementsAsObject = convertProgramStageDataElementsToObject(d2ProgramStage.programStageDataElements);
         // $FlowSuppress
-        d2ProgramStage.programStageSections.forEach((section: D2ProgramStageSection) => {
+        d2ProgramStage.programStageSections.forEach((section: CachedProgramStageSection) => {
             stage.addSection(buildSection(d2ProgramStageDataElementsAsObject, {
                 id: section.id,
                 displayName: section.displayName,
@@ -220,7 +224,7 @@ function buildStage(d2ProgramStage: D2ProgramStage) {
     return stage;
 }
 
-function buildProgram(d2Program: D2Program) {
+function buildProgram(d2Program: CachedProgram) {
     let program;
     if (d2Program.programType === 'WITHOUT_REGISTRATION') {
         program = new EventProgram((_this) => {
@@ -237,7 +241,7 @@ function buildProgram(d2Program: D2Program) {
             _this.shortName = d2Program.displayShortName;
         });
 
-        d2Program.programStages.forEach((d2ProgramStage: D2ProgramStage) => {
+        d2Program.programStages.forEach((d2ProgramStage: CachedProgramStage) => {
             program.addStage(buildStage(d2ProgramStage));
         });
     }
@@ -278,27 +282,51 @@ function addProgramRules(d2ProgramRules: Array<ProgramRule>) {
     });
 }
 
+function addRulesAndVariablesFromProgramIndicators(cachedProgramIndicators: Array<CachedProgramIndicator>) {
+    const indicatorsByProgram = cachedProgramIndicators.reduce((accIndicatorsByProgram, indicator) => {
+        const programId = indicator.program && indicator.program.id;
+        accIndicatorsByProgram[programId] = accIndicatorsByProgram[programId] || [];
+        accIndicatorsByProgram[programId].push(indicator);
+        return accIndicatorsByProgram;
+    }, {});
+
+    Object.keys(indicatorsByProgram).forEach((programKey) => {
+        const indicators = indicatorsByProgram[programKey];
+        const program = programCollection.get(programKey);
+        if (program) {
+            const { rules, variables } = getRulesAndVariablesFromProgramIndicators(indicators, programKey);
+            rules && program.addProgramRules(rules);
+            variables && program.addProgramRuleVariables(variables);
+        }
+    });
+}
+
 export default function buildProgramCollection(
-    d2Programs: ?Array<D2Program>,
-    d2OptionSets: ?Array<D2OptionSet>,
-    d2ProgramRulesVariables: ?Array<ProgramRuleVariable>,
-    d2ProgramRules: ?Array<ProgramRule>,
+    cachedPrograms: ?Array<CachedProgram>,
+    cachedOptionSets: ?Array<CachedOptionSet>,
+    cachedProgramRulesVariables: ?Array<ProgramRuleVariable>,
+    cachedProgramRules: ?Array<ProgramRule>,
+    cachedProgramIndicators: ?Array<CachedProgramIndicator>,
     locale: ?string) {
     currentLocale = locale;
-    currentD2OptionSets = d2OptionSets;
+    currentD2OptionSets = cachedOptionSets;
 
-    if (d2Programs) {
-        d2Programs.forEach((d2Program) => {
+    if (cachedPrograms) {
+        cachedPrograms.forEach((d2Program) => {
             const program = buildProgram(d2Program);
             programCollection.set(program.id, program);
         });
 
-        if (d2ProgramRulesVariables) {
-            addProgramVariables(d2ProgramRulesVariables);
+        if (cachedProgramRulesVariables) {
+            addProgramVariables(cachedProgramRulesVariables);
         }
 
-        if (d2ProgramRules) {
-            addProgramRules(d2ProgramRules);
+        if (cachedProgramRules) {
+            addProgramRules(cachedProgramRules);
+        }
+
+        if (cachedProgramIndicators) {
+            addRulesAndVariablesFromProgramIndicators(cachedProgramIndicators);
         }
     }
 }

@@ -1,4 +1,68 @@
 // @flow
+export type ProgramRuleAction = {
+    content: string,
+    data: string,
+    location: string,
+    programRuleActionType: string,
+    dataElement?: {
+        id?: ?string,
+    },
+    programStage?: {
+        id?: ?string,
+    },
+    programStageSection?: {
+        id?: ?string,
+    },
+    trackedEntityAttribute?: {
+        id?: ?string,
+    }
+};
+
+export type ProgramRule = {
+    id: string,
+    condition: string,
+    description?: ?string,
+    displayName: string,
+    program: {
+        id: string,
+    },
+    programRuleActions: Array<ProgramRuleAction>,
+};
+
+
+export type ProgramRuleVariable = {
+    displayName: string,
+    programRuleVariableSourceType: string,
+    program: {
+        id: string,
+    },
+    dataElement?: {
+        id?: ?string,
+    },
+    trackedEntityAttribute?: {
+        id?: ?string,
+    },
+    programStage?: {
+        id?: ?string,
+    },
+    useNameForOptionSet: boolean,
+};
+
+type Option = {
+    code: string,
+    displayName: string,
+    id: string,
+};
+
+export type OptionSet = {
+    id: string,
+    displayName: string,
+    options: Array<Option>,
+};
+
+export type OptionSets = {
+    [id: string]: OptionSet
+}
 
 type Constant = {
     id: string,
@@ -6,10 +70,12 @@ type Constant = {
     value: any,
 };
 
+export type Constants = Array<Constant>;
+
 export type ProgramRulesContainer = {
     programRulesVariables: ?Array<ProgramRuleVariable>,
     programRules: ?Array<ProgramRule>,
-    constants?: ?Array<Constant>,
+    constants?: ?Constants,
 };
 
 type EventMain = {
@@ -32,12 +98,35 @@ type EventValues = {
 
 export type EventData = EventMain & EventValues;
 
-export type EventsData = {
-    [eventId: string]: EventData,
+export type EventsData = Array<EventData>;
+
+export type EventsDataContainer = {
+    all: EventsData,
+    byStage: { [stageId: string]: EventsData },
 };
 
 export type DataElement = {
-    
+    id: string,
+    valueType: string,
+    optionSetId: string,
+};
+
+export type DataElements = { [elementId: string]: DataElement };
+
+type TrackedEntityAttribute = {
+
+};
+
+export type TrackedEntityAttributes = {
+    [id: string]: TrackedEntityAttribute
+};
+
+export type Entity = {
+
+};
+
+export type Enrollment = {
+
 };
 
 export interface IConvertRulesValue {

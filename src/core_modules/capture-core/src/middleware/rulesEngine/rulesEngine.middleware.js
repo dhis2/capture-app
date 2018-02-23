@@ -16,14 +16,9 @@ import constantsStore from '../../metaDataMemoryStores/constants/constants.store
 import optionSetsStore from '../../metaDataMemoryStores/optionSets/optionSets.store';
 import DataElement from '../../metaData/DataElement/DataElement';
 
-import type { OptionSet } from '../../metaDataMemoryStores/optionSets/optionSets.store';
+import type { OptionSet, ProgramRulesContainer, DataElement as DataElementForRulesEngine, EventData } from '../../RulesEngine/rulesEngine.types';
 
 type Next = (action: ReduxAction<any, any>) => void;
-
-type DataElementForRulesEngine = {
-    id: string,
-    valueType: string,
-};
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found in rulesEngine middleware',
@@ -72,6 +67,7 @@ function getRulesEngineDataElementsAsObject(dataElements: Array<DataElement>): {
         accRulesDataElements[dataElement.id] = {
             id: dataElement.id,
             valueType: dataElement.type,
+            optionSetId: dataElement.optionSet.id
         };
         return accRulesDataElements;
     }, {});
@@ -241,7 +237,7 @@ function getRulesEngineArguments(program: Program, action: ReduxAction<Object, n
     };
 }
 
-function runRulesEngine(programRulesContainer: ProgramRulesContainer, dataElementsInProgram: { [elementId: string]: DataElementForRulesEngine }, currentEventData: { [elementId: string]: any }, allEventsData: Array<{ [elementId: string]: any }>, optionSets: ?Array<OptionSet>) {
+function runRulesEngine(programRulesContainer: ProgramRulesContainer, dataElementsInProgram: { [elementId: string]: DataElementForRulesEngine }, currentEventData: EventData, allEventsData: Array<EventData>, optionSets: ?Array<OptionSet>) {
 
 }
 

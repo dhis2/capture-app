@@ -1,30 +1,30 @@
 // @flow
-/* eslint-disable no-underscore-dangle */
 import isString from 'd2-utilizr/lib/isString';
 import log from 'loglevel';
 import errorCreator from '../utils/errorCreator';
+import typeKeys from './typeKeys.const';
 
 import type { IConvertRulesValue, ProgramRulesContainer, EventData, EventsData } from './rulesEngine.types';
 
 export default class RulesEngine {
     static mapTypeToInterfaceFnName = {
-        TEXT: 'convertText',
-        LONG_TEXT: 'convertLongText',
-        LETTER: 'convertLetter',
-        PHONE_NUMBER: 'convertPhoneNumber',
-        EMAIL: 'convertEmail',
-        BOOLEAN: 'convertBoolean',
-        TRUE_ONLY: 'convertTrueOnly',
-        DATE: 'convertDate',
-        DATETIME: 'convertDateTime',
-        TIME: 'convertTime',
-        NUMBER: 'convertNumber',
-        INTEGER: 'convertInteger',
-        INTEGER_POSITIVE: 'convertIntegerPositive',
-        INTEGER_NEGATIVE: 'convertIntegerNegative',
-        INTEGER_ZERO_OR_POSITIVE: 'convertIntegerZeroOrPositive',
-        PERCENTAGE: 'convertPercentage',
-        URL: 'convertUrl',
+        [typeKeys.TEXT]: 'convertText',
+        [typeKeys.LONG_TEXT]: 'convertLongText',
+        [typeKeys.LETTER]: 'convertLetter',
+        [typeKeys.PHONE_NUMBER]: 'convertPhoneNumber',
+        [typeKeys.EMAIL]: 'convertEmail',
+        [typeKeys.BOOLEAN]: 'convertBoolean',
+        [typeKeys.TRUE_ONLY]: 'convertTrueOnly',
+        [typeKeys.DATE]: 'convertDate',
+        [typeKeys.DATETIME]: 'convertDateTime',
+        [typeKeys.TIME]: 'convertTime',
+        [typeKeys.NUMBER]: 'convertNumber',
+        [typeKeys.INTEGER]: 'convertInteger',
+        [typeKeys.INTEGER_POSITIVE]: 'convertIntegerPositive',
+        [typeKeys.INTEGER_NEGATIVE]: 'convertIntegerNegative',
+        [typeKeys.INTEGER_ZERO_OR_POSITIVE]: 'convertIntegerZeroOrPositive',
+        [typeKeys.PERCENTAGE]: 'convertPercentage',
+        [typeKeys.URL]: 'convertUrl',
     };
 
     static errorMessages = {
@@ -51,13 +51,13 @@ export default class RulesEngine {
         return beingTrimmed;
     }
 
-    _converterObject: IConvertRulesValue;
+    converterObject: IConvertRulesValue;
 
     constructor(converterObject: IConvertRulesValue) {
-        this._converterObject = converterObject;
+        this.converterObject = converterObject;
     }
 
-    processValue(value: any, type: $Keys<typeof RulesEngine.mapTypeToInterfaceFnName>) {
+    processValue(value: any, type: $Keys<typeof RulesEngine.mapTypeToInterfaceFnName>): any {
         if (isString(value)) {
             value = RulesEngine.trimQuotes(value);
         }
@@ -68,17 +68,15 @@ export default class RulesEngine {
             return value;
         }
         // $FlowSuppress
-        const convertedValue = RulesEngine.addQuotesToValueIfString(this._converterObject[convertFnName](value));
+        const convertedValue = RulesEngine.addQuotesToValueIfString(this.converterObject[convertFnName](value));
         return convertedValue;
     }
-
-
 
     executeRules(
         allProgramRules: ProgramRulesContainer,
         executingEventValues: EventData,
         eventsValues: EventsData,
-        allDataElements: DataElement) {
-
+        dataElements: { [elementId: string]: DataElementForRulesEngine }) {
+            
     }
 }

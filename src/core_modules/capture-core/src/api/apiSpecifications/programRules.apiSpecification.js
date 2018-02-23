@@ -12,6 +12,9 @@ function convertFromCollectionToArray(collection) {
 function getProgramRuleActions(d2ProgramRuleActionsCollection): Array<ProgramRuleAction> {
     const d2ProgramRuleActions = convertFromCollectionToArray(d2ProgramRuleActionsCollection);
     return d2ProgramRuleActions.map(programRuleAction => ({
+        content: programRuleAction.content,
+        data: programRuleAction.data,
+        location: programRuleAction.location,
         dataElement: {
             id: programRuleAction.dataElement && programRuleAction.dataElement.id,
         },
@@ -36,7 +39,7 @@ export default new ApiSpecification((_this) => {
         fields: 'id,displayName,condition,description,program[id],programStage[id],priority,programRuleActions[id,content,location,data,programRuleActionType,programStageSection[id],dataElement[id],trackedEntityAttribute[id],programIndicator[id],programStage[id]]',
         filter: 'program.id:in:',
     };
-    _this.converter = (d2ProgramRules: ?Array<ProgramRule>) => {
+    _this.converter = (d2ProgramRules: ?Array<Object>): ?Array<ProgramRule> => {
         if (!d2ProgramRules || d2ProgramRules.length === 0) {
             return null;
         }
