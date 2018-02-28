@@ -1,11 +1,20 @@
-// @flow
+/* eslint-disable */
+import log from 'loglevel';
 
-/* service for executing tracker rules and broadcasting results */
-.service('TrackerRulesExecutionService', function($translate, VariableService, DateUtils, NotificationService, DHIS2EventFactory, RulesFactory, CalendarService, OptionSetService, $rootScope, $q, $log, $filter, orderByFilter){
+import isDefined from 'd2-utilizr/lib/isDefined';
+import isNumber from 'd2-utilizr/lib/isNumber';
+import isObject from 'd2-utilizr/lib/isObject';
+import isArray from 'd2-utilizr/lib/isArray';
+
+import OptionSetHelper from '../OptionSetHelper/OptionSetHelper';
+
+//.service('TrackerRulesExecutionService', function(NotificationService, DHIS2EventFactory, RulesFactory, CalendarService, $rootScope, $q, log, $filter, orderByFilter){
+
+export default function getExecutionService(onTranslate, variableService, dateUtils) {
     var NUMBER_OF_EVENTS_IN_SCOPE = 10;
 
     //Variables for storing scope and rules in memory from rules execution to rules execution:
-    var allProgramRules = false; 
+    var programRulesContainer = false; 
     var crossEventRulesExist = false;
     var lastEventId = null;
     var lastEventDate = null;
@@ -20,17 +29,17 @@
             //Find every variable name in the expression;
             var variablespresent = expression.match(/[A#CV]\{[\w -_.]+}/g);
             //Replace each matched variable:
-            angular.forEach(variablespresent, function(variablepresent) {
+            variablespresent.forEach(variablepresent => {
                 //First strip away any prefix and postfix signs from the variable name:
                 variablepresent = variablepresent.replace("#{","").replace("A{","").replace("C{","").replace("V{","").replace("}","");
 
-                if(angular.isDefined(variablesHash[variablepresent])) {
+                if(isDefined(variablesHash[variablepresent])) {
                     //Replace all occurrences of the variable name(hence using regex replacement):
                     expression = expression.replace(new RegExp( variablesHash[variablepresent].variablePrefix + "\\{" + variablepresent + "\\}", 'g'),
                         variablesHash[variablepresent].variableValue);
                 }
                 else {
-                    $log.warn("Expression " + expression + " contains variable " + variablepresent
+                    log.warn("Expression " + expression + " contains variable " + variablepresent
                         + " - but this variable is not defined." );
                 }
             });
@@ -41,18 +50,18 @@
             //Find every variable name in the expression;
             var variablespresent = expression.match(/V{\w+.?\w*}/g);
             //Replace each matched variable:
-            angular.forEach(variablespresent, function(variablepresent) {
+            variablespresent.forEach(variablepresent => {
                 //First strip away any prefix and postfix signs from the variable name:
                 variablepresent = variablepresent.replace("V{","").replace("}","");
 
-                if(angular.isDefined(variablesHash[variablepresent]) &&
+                if(isDefined(variablesHash[variablepresent]) &&
                     variablesHash[variablepresent].variablePrefix === 'V') {
                     //Replace all occurrences of the variable name(hence using regex replacement):
                     expression = expression.replace(new RegExp("V{" + variablepresent + "}", 'g'),
                         variablesHash[variablepresent].variableValue);
                 }
                 else {
-                    $log.warn("Expression " + expression + " conains context variable " + variablepresent
+                    log.warn("Expression " + expression + " conains context variable " + variablepresent
                         + " - but this variable is not defined." );
                 }
             });
@@ -63,18 +72,18 @@
             //Find every attribute in the expression;
             var variablespresent = expression.match(/A{\w+.?\w*}/g);
             //Replace each matched variable:
-            angular.forEach(variablespresent, function(variablepresent) {
+            variablespresent.forEach(variablepresent => {
                 //First strip away any prefix and postfix signs from the variable name:
                 variablepresent = variablepresent.replace("A{","").replace("}","");
 
-                if(angular.isDefined(variablesHash[variablepresent]) &&
+                if(isDefined(variablesHash[variablepresent]) &&
                     variablesHash[variablepresent].variablePrefix === 'A') {
                     //Replace all occurrences of the variable name(hence using regex replacement):
                     expression = expression.replace(new RegExp("A{" + variablepresent + "}", 'g'),
                         variablesHash[variablepresent].variableValue);
                 }
                 else {
-                    $log.warn("Expression " + expression + " conains attribute " + variablepresent
+                    log.warn("Expression " + expression + " conains attribute " + variablepresent
                         + " - but this attribute is not defined." );
                 }
             });
@@ -85,18 +94,18 @@
             //Find every constant in the expression;
             var variablespresent = expression.match(/C{\w+.?\w*}/g);
             //Replace each matched variable:
-            angular.forEach(variablespresent, function(variablepresent) {
+            variablespresent.forEach(variablepresent => {
                 //First strip away any prefix and postfix signs from the variable name:
                 variablepresent = variablepresent.replace("C{","").replace("}","");
 
-                if(angular.isDefined(variablesHash[variablepresent]) &&
+                if(isDefined(variablesHash[variablepresent]) &&
                     variablesHash[variablepresent].variablePrefix === 'C') {
                     //Replace all occurrences of the variable name(hence using regex replacement):
                     expression = expression.replace(new RegExp("C{" + variablepresent + "}", 'g'),
                         variablesHash[variablepresent].variableValue);
                 }
                 else {
-                    $log.warn("Expression " + expression + " conains constant " + variablepresent
+                    log.warn("Expression " + expression + " conains constant " + variablepresent
                         + " - but this constant is not defined." );
                 }
             });
@@ -107,7 +116,7 @@
 
     var runDhisFunctions = function(expression, variablesHash, flag){
         //Called from "runExpression". Only proceed with this logic in case there seems to be dhis function calls: "d2:" is present.
-        if(angular.isDefined(expression) && expression.indexOf("d2:") !== -1){
+        if(isDefined(expression) && expression.indexOf("d2:") !== -1){
             var dhisFunctions = [{name:"d2:daysBetween",parameters:2},
                 {name:"d2:weeksBetween",parameters:2},
                 {name:"d2:monthsBetween",parameters:2},
@@ -138,11 +147,11 @@
             for(var i = 0; i < 10 && continueLooping; i++ ) {
                 var expressionUpdated = false;
                 var brokenExecution = false;
-                angular.forEach(dhisFunctions, function(dhisFunction){
+                dhisFunctions.forEach(dhisFunction => {
                     //Select the function call, with any number of parameters inside single quotations, or number parameters witout quotations
                     var regularExFunctionCall = new RegExp(dhisFunction.name + "\\( *(([\\d/\\*\\+\\-%\.]+)|( *'[^']*'))*( *, *(([\\d/\\*\\+\\-%\.]+)|'[^']*'))* *\\)",'g');
                     var callsToThisFunction = expression.match(regularExFunctionCall);
-                    angular.forEach(callsToThisFunction, function(callToThisFunction){
+                    callsToThisFunction.forEach(callToThisFunction => {
                         //Remove the function name and paranthesis:
                         var justparameters = callToThisFunction.replace(/(^[^\(]+\()|\)$/g,"");
                         //Remove white spaces before and after parameters:
@@ -152,12 +161,12 @@
 
                         //Show error if no parameters is given and the function requires parameters,
                         //or if the number of parameters is wrong.
-                        if(angular.isDefined(dhisFunction.parameters)){
+                        if(isDefined(dhisFunction.parameters)){
                             //But we are only checking parameters where the dhisFunction actually has a defined set of parameters(concatenate, for example, does not have a fixed number);
                             var numParameters = parameters ? parameters.length : 0;
                             
                             if(numParameters !== dhisFunction.parameters){
-                                $log.warn(dhisFunction.name + " was called with the incorrect number of parameters");
+                                log.warn(dhisFunction.name + " was called with the incorrect number of parameters");
                                 
                                 //Mark this function call as broken:
                                 brokenExecution = true;
@@ -165,7 +174,7 @@
                         }
 
                         //In case the function call is nested, the parameter itself contains an expression, run the expression.
-                        if(!brokenExecution && angular.isDefined(parameters) && parameters !== null) {
+                        if(!brokenExecution && isDefined(parameters) && parameters !== null) {
                             for (var i = 0; i < parameters.length; i++) {
                                 parameters[i] = runExpression(parameters[i],dhisFunction.name,"parameter:" + i, flag, variablesHash);
                             }
@@ -178,39 +187,27 @@
                             expressionUpdated = true;
                         }
                         else if(dhisFunction.name === "d2:daysBetween") {
-                            var firstdate = $filter('trimquotes')(parameters[0]);
-                            var seconddate = $filter('trimquotes')(parameters[1]);
-                            firstdate = moment(firstdate, CalendarService.getSetting().momentFormat);
-                            seconddate = moment(seconddate, CalendarService.getSetting().momentFormat);
+                            const daysBetween = dateUtils.daysBetween(parameters[0], parameters[1]);
                             //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, seconddate.diff(firstdate,'days'));
+                            expression = expression.replace(callToThisFunction, daysBetween);
                             expressionUpdated = true;
                         }
                         else if(dhisFunction.name === "d2:weeksBetween") {
-                            var firstdate = $filter('trimquotes')(parameters[0]);
-                            var seconddate = $filter('trimquotes')(parameters[1]);
-                            firstdate = moment(firstdate, CalendarService.getSetting().momentFormat);
-                            seconddate = moment(seconddate, CalendarService.getSetting().momentFormat);
+                            const weeksBetween = dateUtils.weeksBetween(parameters[0], parameters[1]);                          
                             //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, seconddate.diff(firstdate,'weeks'));
+                            expression = expression.replace(callToThisFunction, weeksBetween);
                             expressionUpdated = true;
                         }
                         else if(dhisFunction.name === "d2:monthsBetween") {
-                            var firstdate = $filter('trimquotes')(parameters[0]);
-                            var seconddate = $filter('trimquotes')(parameters[1]);
-                            firstdate = moment(firstdate, CalendarService.getSetting().momentFormat);
-                            seconddate = moment(seconddate, CalendarService.getSetting().momentFormat);
+                            const monthsBetween = dateUtils.monthsBetween(parameters[0], parameters[1]);
                             //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, seconddate.diff(firstdate,'months'));
+                            expression = expression.replace(callToThisFunction, monthsBetween);
                             expressionUpdated = true;
                         }
                         else if(dhisFunction.name === "d2:yearsBetween") {
-                            var firstdate = $filter('trimquotes')(parameters[0]);
-                            var seconddate = $filter('trimquotes')(parameters[1]);
-                            firstdate = moment(firstdate, CalendarService.getSetting().momentFormat);
-                            seconddate = moment(seconddate, CalendarService.getSetting().momentFormat);
+                            const yearsBetween = dateUtils.yearsBetween(parameters[0], parameters[1]);                          
                             //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, seconddate.diff(firstdate,'years'));
+                            expression = expression.replace(callToThisFunction, yearsBetween);
                             expressionUpdated = true;
                         }
                         else if(dhisFunction.name === "d2:floor") {
@@ -237,12 +234,9 @@
                             expressionUpdated = true;
                         }
                         else if(dhisFunction.name === "d2:addDays") {
-                            var date = $filter('trimquotes')(parameters[0]);
-                            var daystoadd = $filter('trimquotes')(parameters[1]);
-                            var newdate = DateUtils.format( moment(date, CalendarService.getSetting().momentFormat).add(daystoadd, 'days') );
-                            var newdatestring = "'" + newdate + "'";
+                            const newDate = dateUtils.addDays(date, daysToAdd);
                             //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, newdatestring);
+                            expression = expression.replace(callToThisFunction, newDate);
                             expressionUpdated = true;
                         }
                         else if(dhisFunction.name === "d2:zing") {
@@ -285,7 +279,7 @@
                             }
                             else
                             {
-                                $log.warn("could not find variable to count: " + variableName);
+                                log.warn("could not find variable to count: " + variableName);
                             }
 
                             //Replace the end evaluation of the dhis function:
@@ -319,7 +313,7 @@
                             }
                             else
                             {
-                                $log.warn("could not find variable to countifzeropos: " + variableName);
+                                log.warn("could not find variable to countifzeropos: " + variableName);
                             }
 
                             //Replace the end evaluation of the dhis function:
@@ -330,7 +324,7 @@
                             var variableName = parameters[0];
                             var variableObject = variablesHash[variableName];
 
-                            var valueToCompare = VariableService.processValue(parameters[1],variableObject.variableType);
+                            var valueToCompare = variableService.processValue(parameters[1],variableObject.variableType);
 
                             var count = 0;
                             if(variableObject)
@@ -356,7 +350,7 @@
                             }
                             else
                             {
-                                $log.warn("could not find variable to countifvalue: " + variableName);
+                                log.warn("could not find variable to countifvalue: " + variableName);
                             }
 
                             //Replace the end evaluation of the dhis function:
@@ -387,7 +381,7 @@
                             }
                             else
                             {
-                                $log.warn("could not find variable to check if has value: " + variableName);
+                                log.warn("could not find variable to check if has value: " + variableName);
                             }
 
                             //Replace the end evaluation of the dhis function:
@@ -401,15 +395,15 @@
                             if(variableObject)
                             {
                                 if(variableObject.variableEventDate){
-                                    valueFound = VariableService.processValue(variableObject.variableEventDate, 'DATE');
+                                    valueFound = variableService.processValue(variableObject.variableEventDate, 'DATE');
                                 }
                                 else {
-                                    $log.warn("no last event date found for variable: " + variableName);
+                                    log.warn("no last event date found for variable: " + variableName);
                                 }
                             }
                             else
                             {
-                                $log.warn("could not find variable to check last event date: " + variableName);
+                                log.warn("could not find variable to check last event date: " + variableName);
                             }
 
                             //Replace the end evaluation of the dhis function:
@@ -462,17 +456,17 @@
                                 secondDigit = secondSum % 11;
 
                                 if(firstDigit === 10) {
-                                    $log.warn("First control digit became 10, replacing with 0");
+                                    log.warn("First control digit became 10, replacing with 0");
                                     firstDigit = 0;
                                 }
                                 if(secondDigit === 10) {
-                                    $log.warn("Second control digit became 10, replacing with 0");
+                                    log.warn("Second control digit became 10, replacing with 0");
                                     secondDigit = 0;
                                 }
                             }
                             else
                             {
-                                $log.warn("Base nuber not well formed(" + baseNumberLength + " digits): " + baseNumber);
+                                log.warn("Base nuber not well formed(" + baseNumberLength + " digits): " + baseNumber);
                             }
 
                             if(!error) {
@@ -488,7 +482,7 @@
                             }
                         }
                         else if(dhisFunction.name === "d2:checkControlDigits") {
-                            $log.warn("checkControlDigits not implemented yet");
+                            log.warn("checkControlDigits not implemented yet");
 
                             //Replace the end evaluation of the dhis function:
                             expression = expression.replace(callToThisFunction, parameters[0]);
@@ -498,7 +492,7 @@
                             var string = String(parameters[0]);
                             var numChars = string.length < parameters[1] ? string.length : parameters[1];
                             var returnString =  string.substring(0,numChars);
-                            returnString = VariableService.processValue(returnString, 'TEXT');
+                            returnString = variableService.processValue(returnString, 'TEXT');
                             expression = expression.replace(callToThisFunction, returnString);
                             expressionUpdated = true;
                         }
@@ -506,7 +500,7 @@
                             var string = String(parameters[0]);
                             var numChars = string.length < parameters[1] ? string.length : parameters[1];
                             var returnString =  string.substring(string.length - numChars, string.length);
-                            returnString = VariableService.processValue(returnString, 'TEXT');
+                            returnString = variableService.processValue(returnString, 'TEXT');
                             expression = expression.replace(callToThisFunction, returnString);
                             expressionUpdated = true;
                         }
@@ -519,7 +513,7 @@
                                 expressionUpdated = true;
                             } else {
                                 var returnString =  string.substring(startChar, endChar);
-                                returnString = VariableService.processValue(returnString, 'TEXT');
+                                returnString = variableService.processValue(returnString, 'TEXT');
                                 expression = expression.replace(callToThisFunction, returnString);
                                 expressionUpdated = true;
                             }
@@ -531,7 +525,7 @@
                             if (splitArray.length >= parameters[2]) {
                                 returnPart = splitArray[parameters[2]];
                             }
-                            returnPart = VariableService.processValue(returnPart, 'TEXT');
+                            returnPart = variableService.processValue(returnPart, 'TEXT');
                             expression = expression.replace(callToThisFunction, returnPart);
                             expressionUpdated = true;
                         }
@@ -570,12 +564,12 @@
 
                 if(flag.verbose)
                 {
-                    $log.info("Expression with id " + identifier + " was successfully run. Original condition was: " + beforereplacement + " - Evaluation ended up as:" + expression + " - Result of evaluation was:" + answer);
+                    log.info("Expression with id " + identifier + " was successfully run. Original condition was: " + beforereplacement + " - Evaluation ended up as:" + expression + " - Result of evaluation was:" + answer);
                 }
             }
             catch(e)
             {
-                $log.warn("Expression with id " + identifier + " could not be run. Original condition was: " + beforereplacement + " - Evaluation ended up as:" + expression + " - error message:" + e);
+                log.warn("Expression with id " + identifier + " could not be run. Original condition was: " + beforereplacement + " - Evaluation ended up as:" + expression + " - error message:" + e);
             }
         }
         else {
@@ -591,7 +585,7 @@
         if(value === 'true' || value === 'false') {
             valueType = 'BOOLEAN';
         }
-        else if(angular.isNumber(value) || !isNaN(value)) {
+        else if(isNumber(value) || !isNaN(value)) {
             if(value % 1 !== 0) {
                 valueType = 'NUMBER';
             }
@@ -609,7 +603,7 @@
             var newEventDataValues = [];
             var idList = {active:false};
 
-            angular.forEach(valArray, function(value) {
+            valArray.forEach(value => {
                 var valParts = value.split(':');                
                 if(valParts && valParts.length >= 1) {
                     var valId = valParts[0];
@@ -627,7 +621,7 @@
                     }
                     var valueType = determineValueType(valVal);
 
-                    var processedValue = VariableService.processValue(valVal, valueType);
+                    var processedValue = variableService.processValue(valVal, valueType);
                     processedValue = $filter('trimquotes')(processedValue);
                     newEventDataValues.push({dataElement:valId,value:processedValue});
                     newEventDataValues[valId] = processedValue;
@@ -635,11 +629,11 @@
             });
 
             var valuesAlreadyExists = false;
-            angular.forEach(currentEvents, function(currentEvent) {
+            currentEvents.forEach(currentEvent => {
                 var misMatch = false;
-                angular.forEach(newEventDataValues, function(value) {
+                newEventDataValues.forEach(value => {
                     var valueFound = false;
-                    angular.forEach(currentEvent.dataValues, function(currentDataValue) {
+                    currentEvent.dataValues.forEach(currentDataValue => {
                         //Only count as mismatch if there is no particular ID to use, or the current field is part of the same ID
                         if(!idList.active || idList[currentDataValue.dataElement]){
                             if(currentDataValue.dataElement === value.dataElement) {
@@ -663,8 +657,8 @@
             });
 
             if(!valuesAlreadyExists) {
-                var eventDate = DateUtils.getToday();
-                var dueDate = DateUtils.getToday();
+                var eventDate = dateUtils.getToday();
+                var dueDate = dateUtils.getToday();
 
                 var newEvent = {
                     trackedEntityInstance: selectedEnrollment.trackedEntityInstance,
@@ -699,12 +693,58 @@
                 return 0;
             }
         } else {
-            $log.warn("Cannot create event with empty content.");
+            log.warn("Cannot create event with empty content.");
         }
     };
+
+    const getApplicableProgramRules = function(programRules, executingEvent) {
+        const executingEventProgramStageId = executingEvent.programStageId;
+        const mainRules = programRules.filter(rule => !rule.programStageId);
+        const programStageRules = programRules.filter(rule => rule.programStageId === executingEventProgramStageId);
+        return [...mainRules, ...programStageRules];
+    }
+
+    // lowest number first(priority null is last)
+    const orderRulesByPriority = function(programRules) {
+        const orderedRules = programRules.sort((a, b) => {
+            if (!a.priority && !b.priority) {
+                return 0;
+            }
+
+            if (!a.priority) {
+                return 1;
+            }
+
+            if (!b.priority) {
+                return -1;
+            }
+
+            return a.priority - b.priority;
+        });
+        return orderedRules;
+    }
+
+    const translateRuleEffectData = function(data, variablesHash) {
+        let ruleEffectData = data;
+
+        var nameWithoutBrackets = data.replace('#{','').replace('}','');
+        if (variablesHash[nameWithoutBrackets])
+        {
+            // The variable exists, and is replaced with its corresponding value
+            ruleEffectData = variablesHash[nameWithoutBrackets].variableValue;
+        } else if(data.indexOf('{') !== -1 || data.indexOf('d2:') !== -1) {
+            //Since the value couldnt be looked up directly, and contains a curly brace or a dhis function call,
+            //the expression was more complex than replacing a single variable value.
+            //Now we will have to make a thorough replacement and separate evaluation to find the correct value:
+            ruleEffectData = replaceVariables(data, variablesHash);
+            //In a scenario where the data contains a complex expression, evaluate the expression to compile(calculate) the result:
+            ruleEffectData = runExpression(ruleEffectData, data, "action:" + action.id, flag, variablesHash);
+        }
+        return data;
+    }
     /**
      * 
-     * @param {*} allProgramRules all program rules for the program
+     * @param {*} programRulesContainer all program rules for the program
      * @param {*} executingEvent the event context for the program
      * @param {*} evs all events in the enrollment
      * @param {*} allDataElements all data elements(metadata)
@@ -714,201 +754,185 @@
      * @param {*} optionSets all optionsets(matedata)
      * @param {*} flag execution flags
      */
-    var internalExecuteRules = function(allProgramRules, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, optionSets, flag) {
-        if(allProgramRules) {
-            var variablesHash = {};
+    var internalExecuteRules = function(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, optionSets, flag) {
+        const rulesEffects = {};
 
-            //Concatenate rules produced by indicator definitions into the other rules:
-            var rules = $filter('filter')(allProgramRules.programRules, {programStageId: null});
+        let rules = getApplicableProgramRules(programRulesContainer.programRules, executingEvent);
+        rules = orderRulesByPriority(rules);
 
-            if(executingEvent && executingEvent.programStage){
-                if(!rules) {
-                    rules = [];
+        const variablesHash = variableService.getVariables(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, optionSets);
+
+        if(isArray(rules)){
+            const ruleEffectKey = executingEvent.eventId;
+            let updatedEffectsExits = false;
+            let eventsCreated = 0;
+
+            rules.forEach(rule => {
+                let ruleEffective = false;
+                const expression = rule.condition;
+                if(expression) {
+                    if(expression.indexOf('{') !== -1) {
+                        expression = replaceVariables(expression, variablesHash);
+                    }
+                    //run expression:
+                    ruleEffective = runExpression(expression, rule.condition, "rule:" + rule.id, flag, variablesHash);
+                } else {
+                    log.warn("Rule id:'" + rule.id + "'' and name:'" + rule.name + "' had no condition specified. Please check rule configuration.");
                 }
-                rules = rules.concat($filter('filter')(allProgramRules.programRules, {programStageId: executingEvent.programStage}));
-            }
-            if(!rules) {
-                rules = [];
-            }
-            rules = rules.concat(allProgramRules.programIndicators.rules);
 
-            //Run rules in priority - lowest number first(priority null is last)
-            rules = orderByFilter(rules, 'priority');
+                if (ruleEffective) {
+                    const effects = rule.programRuleActions.map(action => {
+                         const effect = {
+                            id: action.id,
+                            location: action.location,
+                            action:action.programRuleActionType,
+                            dataElementId: action.dataElementId,
+                            trackedEntityAttributeId: action.trackedEntityAttribute,
+                            programStageId: action.programStageId,
+                            programStageSectionId: programStageSectionId,
+                            content: action.content,
+                            data: action.data,
+                            ineffect: true,
+                        };
+                        
+                        effect.data = translateRuleEffectData(effect.data, variablesHash);
 
-            return VariableService.getVariables(allProgramRules, executingEvent, evs, allDataElements,
-                allTrackedEntityAttributes, selectedEntity, selectedEnrollment, optionSets).then( function(variablesHash) {
-                if(angular.isObject(rules) && angular.isArray(rules)){
-                    //The program has rules, and we want to run them.
-                    //Prepare repository unless it is already prepared:
-                    if(angular.isUndefined( $rootScope.ruleeffects ) ) {
-                        $rootScope.ruleeffects = {};
+                        
+
+                    });
+                }
+
+
+
+                rule.programRuleActions.forEach(action => {
+                    //In case the effect-hash is not populated, add entries
+                    if(!isDefined($rootScope.ruleeffects[ruleEffectKey][action.id])){
+                        $rootScope.ruleeffects[ruleEffectKey][action.id] =  {
+                            id:action.id,
+                            location:action.location,
+                            action:action.programRuleActionType,
+                            dataElement:action.dataElement,
+                            trackedEntityAttribute:action.trackedEntityAttribute,
+                            programStage: action.programStage,
+                            programIndicator: action.programIndicator,
+                            programStageSection: action.programStageSection && action.programStageSection.id ? action.programStageSection.id : null,
+                            content:action.content,
+                            data:action.data,
+                            ineffect:undefined
+                        };
                     }
 
-                    var ruleEffectKey = executingEvent.event ? executingEvent.event : executingEvent;
-                    if( executingEvent.event && angular.isUndefined( $rootScope.ruleeffects[ruleEffectKey] )){
-                        $rootScope.ruleeffects[ruleEffectKey] = {};
-                    }
+                    //In case the rule is effective and contains specific data,
+                    //the effect be refreshed from the variables list.
+                    //If the rule is not effective we can skip this step
+                    if(ruleEffective && action.data)
+                    {
+                        //Preserve old data for comparison:
+                        var oldData = $rootScope.ruleeffects[ruleEffectKey][action.id].data;
 
-                    if(!angular.isObject(executingEvent) && angular.isUndefined( $rootScope.ruleeffects[ruleEffectKey] )){
-                        $rootScope.ruleeffects[ruleEffectKey] = {};
-                    }
+                        //The key data might be containing a dollar sign denoting that the key data is a variable.
+                        //To make a lookup in variables hash, we must make a lookup without the dollar sign in the variable name
+                        //The first strategy is to make a direct lookup. In case the "data" expression is more complex, we have to do more replacement and evaluation.
 
-                    var updatedEffectsExits = false;
-                    var eventsCreated = 0;
-
-                    angular.forEach(rules, function(rule) {
-                        var ruleEffective = false;
-
-                        var expression = rule.condition;
-                        //Go through and populate variables with actual values, but only if there actually is any replacements to be made(one or more "$" is present)
-                        if(expression) {
-                            if(expression.indexOf('{') !== -1) {
-                                expression = replaceVariables(expression, variablesHash);
-                            }
-
-                            //run expression:
-                            if( runExpression(expression, rule.condition, "rule:" + rule.id, flag, variablesHash) ){
-                                ruleEffective = true;
-                            }
-                        } else {
-                            $log.warn("Rule id:'" + rule.id + "'' and name:'" + rule.name + "' had no condition specified. Please check rule configuration.");
+                        var nameWithoutBrackets = action.data.replace('#{','').replace('}','');
+                        if(isDefined(variablesHash[nameWithoutBrackets]))
+                        {
+                            //The variable exists, and is replaced with its corresponding value
+                            $rootScope.ruleeffects[ruleEffectKey][action.id].data =
+                                variablesHash[nameWithoutBrackets].variableValue;
+                        }
+                        else if(action.data.indexOf('{') !== -1 || action.data.indexOf('d2:') !== -1)
+                        {
+                            //Since the value couldnt be looked up directly, and contains a curly brace or a dhis function call,
+                            //the expression was more complex than replacing a single variable value.
+                            //Now we will have to make a thorough replacement and separate evaluation to find the correct value:
+                            $rootScope.ruleeffects[ruleEffectKey][action.id].data = replaceVariables(action.data, variablesHash);
+                            //In a scenario where the data contains a complex expression, evaluate the expression to compile(calculate) the result:
+                            $rootScope.ruleeffects[ruleEffectKey][action.id].data = runExpression($rootScope.ruleeffects[ruleEffectKey][action.id].data, action.data, "action:" + action.id, flag, variablesHash);
                         }
 
-                        angular.forEach(rule.programRuleActions, function(action){
-                            //In case the effect-hash is not populated, add entries
-                            if(angular.isUndefined( $rootScope.ruleeffects[ruleEffectKey][action.id] )){
-                                $rootScope.ruleeffects[ruleEffectKey][action.id] =  {
-                                    id:action.id,
-                                    location:action.location,
-                                    action:action.programRuleActionType,
-                                    dataElement:action.dataElement,
-                                    trackedEntityAttribute:action.trackedEntityAttribute,
-                                    programStage: action.programStage,
-                                    programIndicator: action.programIndicator,
-                                    programStageSection: action.programStageSection && action.programStageSection.id ? action.programStageSection.id : null,
-                                    content:action.content,
-                                    data:action.data,
-                                    ineffect:undefined
-                                };
-                            }
-
-                            //In case the rule is effective and contains specific data,
-                            //the effect be refreshed from the variables list.
-                            //If the rule is not effective we can skip this step
-                            if(ruleEffective && action.data)
-                            {
-                                //Preserve old data for comparison:
-                                var oldData = $rootScope.ruleeffects[ruleEffectKey][action.id].data;
-
-                                //The key data might be containing a dollar sign denoting that the key data is a variable.
-                                //To make a lookup in variables hash, we must make a lookup without the dollar sign in the variable name
-                                //The first strategy is to make a direct lookup. In case the "data" expression is more complex, we have to do more replacement and evaluation.
-
-                                var nameWithoutBrackets = action.data.replace('#{','').replace('}','');
-                                if(angular.isDefined(variablesHash[nameWithoutBrackets]))
-                                {
-                                    //The variable exists, and is replaced with its corresponding value
-                                    $rootScope.ruleeffects[ruleEffectKey][action.id].data =
-                                        variablesHash[nameWithoutBrackets].variableValue;
-                                }
-                                else if(action.data.indexOf('{') !== -1 || action.data.indexOf('d2:') !== -1)
-                                {
-                                    //Since the value couldnt be looked up directly, and contains a curly brace or a dhis function call,
-                                    //the expression was more complex than replacing a single variable value.
-                                    //Now we will have to make a thorough replacement and separate evaluation to find the correct value:
-                                    $rootScope.ruleeffects[ruleEffectKey][action.id].data = replaceVariables(action.data, variablesHash);
-                                    //In a scenario where the data contains a complex expression, evaluate the expression to compile(calculate) the result:
-                                    $rootScope.ruleeffects[ruleEffectKey][action.id].data = runExpression($rootScope.ruleeffects[ruleEffectKey][action.id].data, action.data, "action:" + action.id, flag, variablesHash);
-                                }
-
-                                if(oldData !== $rootScope.ruleeffects[ruleEffectKey][action.id].data) {
-                                    updatedEffectsExits = true;
-                                }
-                            }
-
-                            //Update the rule effectiveness if it changed in this evaluation;
-                            if($rootScope.ruleeffects[ruleEffectKey][action.id].ineffect !== ruleEffective)
-                            {
-                                //There is a change in the rule outcome, we need to update the effect object.
-                                updatedEffectsExits = true;
-                                $rootScope.ruleeffects[ruleEffectKey][action.id].ineffect = ruleEffective;
-                            }
-
-                            //In case the rule is of type CREATEEVENT, run event creation:
-                            if($rootScope.ruleeffects[ruleEffectKey][action.id].action === "CREATEEVENT" && $rootScope.ruleeffects[ruleEffectKey][action.id].ineffect){
-                                if(evs && evs.byStage){
-                                    if($rootScope.ruleeffects[ruleEffectKey][action.id].programStage) {
-                                        var createdNow = performCreateEventAction($rootScope.ruleeffects[ruleEffectKey][action.id], selectedEntity, selectedEnrollment, evs.byStage[$rootScope.ruleeffects[ruleEffectKey][action.id].programStage.id]);
-                                        eventsCreated += createdNow;
-                                    } else {
-                                        $log.warn("No programstage defined for CREATEEVENT action: " + action.id);
-                                    }
-                                } else {
-                                    $log.warn("Events to evaluate for CREATEEVENT action: " + action.id + ". Could it have been triggered at the wrong time or during registration?");
-                                }
-                            }
-                            //In case the rule is of type "assign variable" and the rule is effective,
-                            //the variable data result needs to be applied to the correct variable:
-                            else if($rootScope.ruleeffects[ruleEffectKey][action.id].action === "ASSIGN" && $rootScope.ruleeffects[ruleEffectKey][action.id].ineffect){
-                                //from earlier evaluation, the data portion of the ruleeffect now contains the value of the variable to be assigned.
-                                //the content portion of the ruleeffect defines the name for the variable, when the qualidisers are removed:
-                                var variabletoassign = $rootScope.ruleeffects[ruleEffectKey][action.id].content ?
-                                    $rootScope.ruleeffects[ruleEffectKey][action.id].content.replace("#{","").replace("A{","").replace("}","") : null;
-
-                                if(variabletoassign && !angular.isDefined(variablesHash[variabletoassign])){
-                                    //If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
-                                    $log.warn("Variable " + variabletoassign + " was not defined.");
-                                }
-
-                                if(variablesHash[variabletoassign]){
-                                    var updatedValue = $rootScope.ruleeffects[ruleEffectKey][action.id].data;
-
-                                    var valueType = determineValueType(updatedValue);
-
-                                    if($rootScope.ruleeffects[ruleEffectKey][action.id].dataElement) {
-                                        updatedValue = VariableService.getDataElementValueOrCodeForValue(variablesHash[variabletoassign].useCodeForOptionSet, updatedValue, $rootScope.ruleeffects[ruleEffectKey][action.id].dataElement.id, allDataElements, optionSets);
-                                    }
-                                    updatedValue = VariableService.processValue(updatedValue, valueType);
-
-                                    variablesHash[variabletoassign] = {
-                                        variableValue:updatedValue,
-                                        variableType:valueType,
-                                        hasValue:true,
-                                        variableEventDate:'',
-                                        variablePrefix:variablesHash[variabletoassign].variablePrefix ? variablesHash[variabletoassign].variablePrefix : '#',
-                                        allValues:[updatedValue]
-                                    };
-
-                                    if(variablesHash[variabletoassign].variableValue !== updatedValue) {
-                                        //If the variable was actually updated, we assume that there is an updated ruleeffect somewhere:
-                                        updatedEffectsExits = true;
-                                    }
-                                }
-                            }
-                        });
-                    });
-                    var result = { event: ruleEffectKey, callerId:flag.callerId, eventsCreated:eventsCreated };
-                    //Broadcast rules finished if there was any actual changes to the event.
-                    if(updatedEffectsExits){
-                        $rootScope.$broadcast("ruleeffectsupdated", result);
+                        if(oldData !== $rootScope.ruleeffects[ruleEffectKey][action.id].data) {
+                            updatedEffectsExits = true;
+                        }
                     }
-                    return result;
-                }
-                return null;
+
+                    //Update the rule effectiveness if it changed in this evaluation;
+                    if($rootScope.ruleeffects[ruleEffectKey][action.id].ineffect !== ruleEffective)
+                    {
+                        //There is a change in the rule outcome, we need to update the effect object.
+                        updatedEffectsExits = true;
+                        $rootScope.ruleeffects[ruleEffectKey][action.id].ineffect = ruleEffective;
+                    }
+
+                    //In case the rule is of type CREATEEVENT, run event creation:
+                    if($rootScope.ruleeffects[ruleEffectKey][action.id].action === "CREATEEVENT" && $rootScope.ruleeffects[ruleEffectKey][action.id].ineffect){
+                        if(evs && evs.byStage){
+                            if($rootScope.ruleeffects[ruleEffectKey][action.id].programStage) {
+                                var createdNow = performCreateEventAction($rootScope.ruleeffects[ruleEffectKey][action.id], selectedEntity, selectedEnrollment, evs.byStage[$rootScope.ruleeffects[ruleEffectKey][action.id].programStage.id]);
+                                eventsCreated += createdNow;
+                            } else {
+                                log.warn("No programstage defined for CREATEEVENT action: " + action.id);
+                            }
+                        } else {
+                            log.warn("Events to evaluate for CREATEEVENT action: " + action.id + ". Could it have been triggered at the wrong time or during registration?");
+                        }
+                    }
+                    //In case the rule is of type "assign variable" and the rule is effective,
+                    //the variable data result needs to be applied to the correct variable:
+                    else if($rootScope.ruleeffects[ruleEffectKey][action.id].action === "ASSIGN" && $rootScope.ruleeffects[ruleEffectKey][action.id].ineffect){
+                        //from earlier evaluation, the data portion of the ruleeffect now contains the value of the variable to be assigned.
+                        //the content portion of the ruleeffect defines the name for the variable, when the qualidisers are removed:
+                        var variabletoassign = $rootScope.ruleeffects[ruleEffectKey][action.id].content ?
+                            $rootScope.ruleeffects[ruleEffectKey][action.id].content.replace("#{","").replace("A{","").replace("}","") : null;
+
+                        if(variabletoassign && !isDefined(variablesHash[variabletoassign])){
+                            //If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
+                            log.warn("Variable " + variabletoassign + " was not defined.");
+                        }
+
+                        if(variablesHash[variabletoassign]){
+                            var updatedValue = $rootScope.ruleeffects[ruleEffectKey][action.id].data;
+
+                            var valueType = determineValueType(updatedValue);
+
+                            if($rootScope.ruleeffects[ruleEffectKey][action.id].dataElement) {
+                                updatedValue = variableService.getDataElementValueOrCodeForValue(variablesHash[variabletoassign].useCodeForOptionSet, updatedValue, $rootScope.ruleeffects[ruleEffectKey][action.id].dataElement.id, allDataElements, optionSets);
+                            }
+                            updatedValue = variableService.processValue(updatedValue, valueType);
+
+                            variablesHash[variabletoassign] = {
+                                variableValue:updatedValue,
+                                variableType:valueType,
+                                hasValue:true,
+                                variableEventDate:'',
+                                variablePrefix:variablesHash[variabletoassign].variablePrefix ? variablesHash[variabletoassign].variablePrefix : '#',
+                                allValues:[updatedValue]
+                            };
+
+                            if(variablesHash[variabletoassign].variableValue !== updatedValue) {
+                                //If the variable was actually updated, we assume that there is an updated ruleeffect somewhere:
+                                updatedEffectsExits = true;
+                            }
+                        }
+                    }
+                });
             });
+            var result = { event: ruleEffectKey, callerId:flag.callerId, eventsCreated:eventsCreated };
+            //Broadcast rules finished if there was any actual changes to the event.
+            if(updatedEffectsExits){
+                $rootScope.$broadcast("ruleeffectsupdated", result);
+            }
+            return result;
         }
-        var def = $q.defer();
-        def.resolve();
-        return def.promise;
     };
     
     var internalProcessEventGrid = function( eventGrid ){
     	var events = [];
     	if( eventGrid && eventGrid.rows && eventGrid.headers ){    		
-    		angular.forEach(eventGrid.rows, function(row) {
+    		eventGrid.rows.forEach(row => {
     			var ev = {};
     			var i = 0;
-        		angular.forEach(eventGrid.headers, function(h){
+        		eventGrid.headers.forEach(h => {
         			ev[h] = row[i];
         			i++;
         		});                            
@@ -917,6 +941,7 @@
     	return events;
     };
 
+    /*
     var internalGetOrLoadScope = function(currentEvent,programStageId,orgUnitId) {        
         if(crossEventRulesExist) {
             //If crossEventRulesExist, we need to get a scope that contains more than the current event.
@@ -934,12 +959,12 @@
                 
                 return DHIS2EventFactory.getByStage(orgUnitId, programStageId, null, pager, true, null, null, ordering).then(function(events) {                	
                 	var allEventsWithPossibleDuplicates = internalProcessEventGrid( events );                	
-                    var filterUrl = '&dueDateStart=' + DateUtils.formatFromUserToApi(lastEventDate) + '&dueDateEnd=' + DateUtils.formatFromUserToApi(lastEventDate); 
+                    var filterUrl = '&dueDateStart=' + dateUtils.formatFromUserToApi(lastEventDate) + '&dueDateEnd=' + dateUtils.formatFromUserToApi(lastEventDate); 
                     return DHIS2EventFactory.getByStage(orgUnitId, programStageId, null, pager, true, null, filterUrl, ordering).then(function(events) {
                     	allEventsWithPossibleDuplicates = allEventsWithPossibleDuplicates.concat( internalProcessEventGrid( events ) );
                         eventScopeExceptCurrent = [];
                         var eventIdDictionary = {};
-                        angular.forEach(allEventsWithPossibleDuplicates, function(eventInScope) {
+                        allEventsWithPossibleDuplicates.forEach(eventInScope => {
                             if(currentEvent.event !== eventInScope.event 
                                     && !eventIdDictionary[eventInScope.event]) {
                                 //Add event and update dictionary to avoid duplicates:                                
@@ -1006,10 +1031,12 @@
             return $q.when(allProgramRules);
         }
     };
+    */
     return {
-        executeRules: function(allProgramRules, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, optionSets, flags) {
-            return internalExecuteRules(allProgramRules, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, optionSets, flags);
+        executeRules: function(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, optionSets, flags) {
+            return internalExecuteRules(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, optionSets, flags);
         },
+        /*
         loadAndExecuteRulesScope: function(currentEvent, programId, programStageId, programStageDataElements, allTrackedEntityAttributes, optionSets, orgUnitId, flags){
             return internalGetOrLoadRules(programId).then(function(rules) {
                 return internalGetOrLoadScope(currentEvent,programStageId,orgUnitId).then(function(scope) {
@@ -1017,6 +1044,7 @@
                 });
             });
         },
+        */
         processRuleEffectsForTrackedEntityAttributes: function(context, currentTei, teiOriginalValues, attributesById, optionSets ) {
             var hiddenFields = {};
             var assignedFields = {};
@@ -1024,7 +1052,7 @@
             var mandatoryFields = {};
             var warningMessages = [];
             
-            angular.forEach($rootScope.ruleeffects[context], function (effect) {
+            $rootScope.ruleeffects[context].forEach(effect => {
                 if (effect.ineffect) {
                     if (effect.action === "HIDEFIELD" && effect.trackedEntityAttribute) {
                         if (currentTei[effect.trackedEntityAttribute.id]) {
@@ -1045,7 +1073,7 @@
                         hiddenFields[effect.trackedEntityAttribute.id] = true;
                     } else if (effect.action === "SHOWERROR" && effect.trackedEntityAttribute) {
                         if(effect.ineffect) {
-                            var headerText =  $translate.instant('validation_error');
+                            var headerText =  onTranslate('validation_error');
                             var bodyText = effect.content + (effect.data ? effect.data : "");
 
                             NotificationService.showNotifcationDialog(headerText, bodyText);
@@ -1055,7 +1083,7 @@
                         }
                     } else if (effect.action === "SHOWWARNING" && effect.trackedEntityAttribute) {
                         if(effect.ineffect) {
-                            var message = effect.content + (angular.isDefined(effect.data) ? effect.data : "");
+                            var message = effect.content + (isDefined(effect.data) ? effect.data : "");
                             
                             if( effect.trackedEntityAttribute ) {
                                 warningMessages[effect.trackedEntityAttribute.id] = message;
@@ -1071,7 +1099,7 @@
 
                         if(attributesById[effect.trackedEntityAttribute.id]
                                 && attributesById[effect.trackedEntityAttribute.id].optionSet) {
-                            processedValue = OptionSetService.getName(
+                            processedValue = OptionSetHelper.getName(
                                     optionSets[attributesById[effect.trackedEntityAttribute.id].optionSet.id].options, processedValue)
                         }
 
@@ -1095,7 +1123,7 @@
             var hiddenSections = {};
             var warningMessages = [];
             
-            angular.forEach($rootScope.ruleeffects[eventId], function (effect) {
+            $rootScope.ruleeffects[eventId].forEach(effect => {
                 if (effect.ineffect) {
                     if (effect.action === "HIDEFIELD" && effect.dataElement) {
                         if(currentEvent[effect.dataElement.id]) {
@@ -1119,7 +1147,7 @@
                         }
                     }
                     else if(effect.action === "SHOWERROR" && effect.dataElement.id){
-                        var headerTxt =  $translate.instant('validation_error');
+                        var headerTxt =  onTranslate('validation_error');
                         var bodyTxt = effect.content + (effect.data ? effect.data : "");
                         NotificationService.showNotifcationDialog(headerTxt, bodyTxt);
 
@@ -1133,7 +1161,7 @@
 
                         if(prStDes[effect.dataElement.id] 
                                 && prStDes[effect.dataElement.id].dataElement.optionSet) {
-                            processedValue = OptionSetService.getName(
+                            processedValue = OptionSetHelper.getName(
                                     optionSets[prStDes[effect.dataElement.id].dataElement.optionSet.id].options, processedValue)
                         }
 
@@ -1158,7 +1186,7 @@
             
             if(context === "SINGLE_EVENT" && currentEvent && prStDes ) {
                 var eventEffects = this.processRuleEffectsForEvent("SINGLE_EVENT", currentEvent, currentEventOriginialValue, prStDes, optionSets);
-                teiAttributesEffects.warningMessages = angular.extend(teiAttributesEffects.warningMessages,eventEffects.warningMessages);
+                teiAttributesEffects.warningMessages =  { ...teiAttributesEffects.warningMessages, ...eventEffects.warningMessages };
                 teiAttributesEffects.hiddenFields[context] = eventEffects.hiddenFields;
                 teiAttributesEffects.hiddenSections[context] = eventEffects.hiddenSections;
                 teiAttributesEffects.assignedFields[context] = eventEffects.assignedFields;
@@ -1169,4 +1197,4 @@
             return teiAttributesEffects;
         }
     };
-})
+}

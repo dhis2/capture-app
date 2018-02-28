@@ -5,10 +5,12 @@ import { dataEntriesDesc, dataEntriesUIDesc, dataEntriesValuesDesc, dataEntriesV
 import { feedbackDesc } from 'capture-core/reducers/descriptions/feedback.reducerDescription';
 
 import { appReducerDesc } from './app.reducerDescription';
+import { currentSelectionsReducerDesc } from './currentSelections.reducerDescription';
 
 
 export default [
     appReducerDesc,
+    currentSelectionsReducerDesc,
     formsValuesDesc,
     formsSectionsFieldsUIDesc,
     eventsDesc,

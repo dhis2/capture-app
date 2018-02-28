@@ -2,6 +2,10 @@
 import log from 'loglevel';
 import { ensureState } from 'redux-optimistic-ui';
 
+import RulesEngine from '../../RulesEngine/RulesEngine';
+import valueConverter from './valueConverter';
+import momentConverter from './momentConverter';
+
 import errorCreator from '../../utils/errorCreator';
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
 import programCollection from '../../metaDataMemoryStores/programCollection/programCollection';
@@ -16,9 +20,11 @@ import constantsStore from '../../metaDataMemoryStores/constants/constants.store
 import optionSetsStore from '../../metaDataMemoryStores/optionSets/optionSets.store';
 import DataElement from '../../metaData/DataElement/DataElement';
 
-import type { OptionSet, ProgramRulesContainer, DataElement as DataElementForRulesEngine, EventData } from '../../RulesEngine/rulesEngine.types';
+import type { OptionSets, ProgramRulesContainer, DataElement as DataElementForRulesEngine, EventData, OrgUnit } from '../../RulesEngine/rulesEngine.types';
 
 type Next = (action: ReduxAction<any, any>) => void;
+
+const rulesEngine = new RulesEngine(valueConverter, momentConverter);
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found in rulesEngine middleware',
@@ -67,7 +73,7 @@ function getRulesEngineDataElementsAsObject(dataElements: Array<DataElement>): {
         accRulesDataElements[dataElement.id] = {
             id: dataElement.id,
             valueType: dataElement.type,
-            optionSetId: dataElement.optionSet.id
+            optionSetId: dataElement.optionSet && dataElement.optionSet.id,
         };
         return accRulesDataElements;
     }, {});
@@ -215,6 +221,10 @@ function createEventsArray(allEventsValues: { [eventId: string]: Object }, allEv
         );
 }
 
+function getSelectedOrgUnit(state: ReduxState) {
+    return state.currentSelections.orgUnit;
+}
+
 function getRulesEngineArguments(program: Program, action: ReduxAction<Object, null>, state: ReduxState, event: Event, formId: string, dataEntryId: string) {
     const dataElementsInProgram = getDataElements(program);
 
@@ -229,16 +239,19 @@ function getRulesEngineArguments(program: Program, action: ReduxAction<Object, n
 
     const optionSets = optionSetsStore.get();
 
+    const orgUnit = getSelectedOrgUnit(state);
+
     return {
         dataElementsInProgram,
         currentEventData,
         allEventsData,
         optionSets,
+        orgUnit,
     };
 }
 
-function runRulesEngine(programRulesContainer: ProgramRulesContainer, dataElementsInProgram: { [elementId: string]: DataElementForRulesEngine }, currentEventData: EventData, allEventsData: Array<EventData>, optionSets: ?Array<OptionSet>) {
-
+function runRulesEngine(programRulesContainer: ProgramRulesContainer, dataElementsInProgram: { [elementId: string]: DataElementForRulesEngine }, currentEventData: EventData, allEventsData: Array<EventData>, orgUnit: OrgUnit, optionSets: ?OptionSets) {
+    rulesEngine.executeRules(programRulesContainer, currentEventData, allEventsData, dataElementsInProgram, orgUnit, optionSets);
 }
 
 export default (store: ReduxStore) => (next: Next) => (action: ReduxAction<any, any>) => {
@@ -262,8 +275,8 @@ export default (store: ReduxStore) => (next: Next) => (action: ReduxAction<any, 
             return;
         }
 
-        const { dataElementsInProgram, currentEventData, allEventsData, optionSets } = getRulesEngineArguments(program, action, state, event, formId, action.payload.dataEntryId);
-        const rulesEffects = runRulesEngine(programRulesContainer, dataElementsInProgram, currentEventData, allEventsData, optionSets);
+        const { dataElementsInProgram, currentEventData, allEventsData, optionSets, orgUnit } = getRulesEngineArguments(program, action, state, event, formId, action.payload.dataEntryId);
+        const rulesEffects = runRulesEngine(programRulesContainer, dataElementsInProgram, currentEventData, allEventsData, orgUnit, optionSets);
 
 
         next(action);

@@ -2,6 +2,7 @@
 
 export default {
     CONSTANTS: 'constants',
+    ORGANISATION_UNITS: 'organisationUnits',
     ORGANISATION_UNIT_LEVELS: 'ouLevels',
     RELATIONSHIP_TYPES: 'relationshipTypes',
     TRACKED_ENTITIES: 'trackedEntities',

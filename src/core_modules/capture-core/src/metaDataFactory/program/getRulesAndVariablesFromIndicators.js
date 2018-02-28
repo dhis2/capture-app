@@ -1,6 +1,8 @@
 // @flow
 import isString from 'd2-utilizr/lib/isString';
 
+import type { ProgramRule, ProgramRuleAction, ProgramRuleVariable } from '../../RulesEngine/rulesEngine.types';
+
 export type CachedProgramIndicator = {
     id: string,
     code: string,
@@ -9,9 +11,7 @@ export type CachedProgramIndicator = {
     description?: ?string,
     expression: string,
     filter?: ?string,
-    program: {
-        id: string,
-    },
+    programId: string,
     shortName: string,
 };
 
@@ -44,31 +44,25 @@ function getDirectAddressedVariable(variableWithCurls, programId) {
     const variableName = trimVariableQualifiers(variableWithCurls);
     const variableNameParts = variableName.split('.');
 
-    let newVariableObject;
+    let newVariableObject: ProgramRuleVariable;
 
     if (variableNameParts.length === 2) {
         // This is a programstage and dataelement specification
         newVariableObject = {
+            id: variableName,
             displayName: variableName,
             programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT',
-            dataElement: {
-                id: variableNameParts[1],
-            },
-            program: {
-                id: programId,
-            },
+            dataElementId: variableNameParts[1],
+            programId,
         };
     } else { // if (variableNameParts.length === 1)
         // This is an attribute
         newVariableObject = {
+            id: variableName,
             displayName: variableName,
             programRuleVariableSourceType: 'TEI_ATTRIBUTE',
-            trackedEntityAttribute: {
-                id: variableNameParts[0],
-            },
-            program: {
-                id: programId,
-            },
+            trackedEntityAttributeId: variableNameParts[0],
+            programId,
         };
     }
     return newVariableObject;
@@ -158,7 +152,7 @@ function buildIndicatorRuleAndVariables(programIndicator: CachedProgramIndicator
         condition: programIndicator.filter ? programIndicator.filter : 'true',
         description: programIndicator.description,
         displayName: programIndicator.displayName,
-        program: programIndicator.program,
+        programId: programIndicator.programId,
         programRuleActions: [newAction],
     };
 

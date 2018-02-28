@@ -11,6 +11,9 @@ import getOrgUnitLevelsLoadSpecification from '../../apiToStore/loadSpecificatio
 import getRelationshipsLoadSpecification from '../../apiToStore/loadSpecifications/getRelationshipsLoadSpecification';
 import getTrackedEntitiesLoadSpecification from '../../apiToStore/loadSpecifications/getTrackedEntitiesLoadSpecification';
 
+import organisationUnitApiSpecification from '../../api/apiSpecifications/organisationUnits.apiSpecification';
+import getOrganisationUnitsLoadSpecification from '../../apiToStore/loadSpecifications/getOrganisationUnitsLoadSpecification';
+
 import getProgramsData from '../programs/getPrograms';
 import getTrackedEntityAttributes from '../trackedEntityAttributes/getTrackedEntityAttributes';
 import getOptionSets from '../optionSets/getOptionSets';
@@ -23,6 +26,7 @@ const coreLoadSpecifications: Array<LoadSpecification> = [
     getOrgUnitLevelsLoadSpecification(objectStores.ORGANISATION_UNIT_LEVELS),
     getRelationshipsLoadSpecification(objectStores.RELATIONSHIP_TYPES),
     getTrackedEntitiesLoadSpecification(objectStores.TRACKED_ENTITIES),
+    getOrganisationUnitsLoadSpecification(objectStores.ORGANISATION_UNITS, organisationUnitApiSpecification),
 ];
 
 function loadCoreMetaData(storageContainer: StorageContainer) {

@@ -2,6 +2,8 @@
 import ApiSpecification from '../ApiSpecificationDefinition/ApiSpecification';
 import getterTypes from '../fetcher/getterTypes.const';
 
+import type { ProgramRuleAction, ProgramRule } from '../../RulesEngine/rulesEngine.types';
+
 function convertFromCollectionToArray(collection) {
     if (!collection || collection.size === 0) {
         return [];
@@ -12,22 +14,15 @@ function convertFromCollectionToArray(collection) {
 function getProgramRuleActions(d2ProgramRuleActionsCollection): Array<ProgramRuleAction> {
     const d2ProgramRuleActions = convertFromCollectionToArray(d2ProgramRuleActionsCollection);
     return d2ProgramRuleActions.map(programRuleAction => ({
+        id: programRuleAction.id,
         content: programRuleAction.content,
         data: programRuleAction.data,
         location: programRuleAction.location,
-        dataElement: {
-            id: programRuleAction.dataElement && programRuleAction.dataElement.id,
-        },
+        dataElementId: programRuleAction.dataElement && programRuleAction.dataElement.id,
         programRuleActionType: programRuleAction.programRuleActionType,
-        programStage: {
-            id: programRuleAction.programStage && programRuleAction.programStage.id,
-        },
-        programStageSection: {
-            id: programRuleAction.programStageSection && programRuleAction.programStageSection.id,
-        },
-        trackedEntityAttribute: {
-            id: programRuleAction.trackedEntityAttribute && programRuleAction.trackedEntityAttribute.id,
-        },
+        programStageId: programRuleAction.programStage && programRuleAction.programStage.id,
+        programStageSectionId: programRuleAction.programStageSection && programRuleAction.programStageSection.id,
+        trackedEntityAttributeId: programRuleAction.trackedEntityAttribute && programRuleAction.trackedEntityAttribute.id,
     }));
 }
 
@@ -49,10 +44,10 @@ export default new ApiSpecification((_this) => {
             condition: d2ProgramRule.condition,
             description: d2ProgramRule.description,
             displayName: d2ProgramRule.displayName,
-            program: {
-                id: d2ProgramRule.program.id,
-            },
+            programId: d2ProgramRule.program.id,
             programRuleActions: getProgramRuleActions(d2ProgramRule.programRuleActions),
+            priority: d2ProgramRule.priority,
+            programStageId: d2ProgramRule.programStage && d2ProgramRule.programStage.id,
         }));
 
         return programRules;

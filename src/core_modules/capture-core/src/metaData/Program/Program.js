@@ -2,6 +2,8 @@
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/src/isFunction';
 
+import type { ProgramRule, ProgramRuleVariable } from '../../RulesEngine/rulesEngine.types';
+
 export default class Program {
     _id: string;
     _name: string;

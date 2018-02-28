@@ -1,4 +1,4 @@
-export default class OptionSetService {
+export default class OptionSetHelper {
     static getCode(options, key) {
         if (options) {
             const option = options.find(o => o.displayName === key);

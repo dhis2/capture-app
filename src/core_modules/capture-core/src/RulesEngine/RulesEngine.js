@@ -1,82 +1,52 @@
 // @flow
-import isString from 'd2-utilizr/lib/isString';
-import log from 'loglevel';
-import errorCreator from '../utils/errorCreator';
-import typeKeys from './typeKeys.const';
+import VariableService from './VariableService/VariableService';
+import ValueProcessor from './ValueProcessor/ValueProcessor';
+import getExecutionService from './executionService/executionService';
+import getDateUtils from './dateUtils/dateUtils';
 
-import type { IConvertRulesValue, ProgramRulesContainer, EventData, EventsData } from './rulesEngine.types';
+import type { IConvertRulesValue, IMomentConverter, ProgramRulesContainer, EventData, EventsData, DataElements, OrgUnit, OptionSets, Translator } from './rulesEngine.types';
+
+type ExecutionService = {
+    executeRules: () => void,
+};
 
 export default class RulesEngine {
-    static mapTypeToInterfaceFnName = {
-        [typeKeys.TEXT]: 'convertText',
-        [typeKeys.LONG_TEXT]: 'convertLongText',
-        [typeKeys.LETTER]: 'convertLetter',
-        [typeKeys.PHONE_NUMBER]: 'convertPhoneNumber',
-        [typeKeys.EMAIL]: 'convertEmail',
-        [typeKeys.BOOLEAN]: 'convertBoolean',
-        [typeKeys.TRUE_ONLY]: 'convertTrueOnly',
-        [typeKeys.DATE]: 'convertDate',
-        [typeKeys.DATETIME]: 'convertDateTime',
-        [typeKeys.TIME]: 'convertTime',
-        [typeKeys.NUMBER]: 'convertNumber',
-        [typeKeys.INTEGER]: 'convertInteger',
-        [typeKeys.INTEGER_POSITIVE]: 'convertIntegerPositive',
-        [typeKeys.INTEGER_NEGATIVE]: 'convertIntegerNegative',
-        [typeKeys.INTEGER_ZERO_OR_POSITIVE]: 'convertIntegerZeroOrPositive',
-        [typeKeys.PERCENTAGE]: 'convertPercentage',
-        [typeKeys.URL]: 'convertUrl',
-    };
+    executionService: ExecutionService;
 
-    static errorMessages = {
-        CONVERTER_NOT_FOUND: 'converter for type is missing',
-    };
-
-    static addQuotesToValueIfString(value: any) {
-        return isString(value) ? `"${value}"` : value;
-    }
-
-    static trimQuotes(input: string) {
-        let trimmingComplete = false;
-        let beingTrimmed = input;
-
-        while (!trimmingComplete) {
-            const beforeTrimming = beingTrimmed;
-            beingTrimmed = beingTrimmed.replace(/^'/, '').replace(/'$/, '');
-            beingTrimmed = beingTrimmed.replace(/^"/, '').replace(/"$/, '');
-
-            if (beforeTrimming.length === beingTrimmed.length) {
-                trimmingComplete = true;
-            }
-        }
-        return beingTrimmed;
-    }
-
-    converterObject: IConvertRulesValue;
-
-    constructor(converterObject: IConvertRulesValue) {
-        this.converterObject = converterObject;
-    }
-
-    processValue(value: any, type: $Keys<typeof RulesEngine.mapTypeToInterfaceFnName>): any {
-        if (isString(value)) {
-            value = RulesEngine.trimQuotes(value);
-        }
-
-        const convertFnName = RulesEngine.mapTypeToInterfaceFnName[type];
-        if (!convertFnName) {
-            log.warn(errorCreator(RulesEngine.errorMessages.CONVERTER_NOT_FOUND)({ type }));
-            return value;
-        }
-        // $FlowSuppress
-        const convertedValue = RulesEngine.addQuotesToValueIfString(this.converterObject[convertFnName](value));
-        return convertedValue;
+    constructor(converterObject: IConvertRulesValue, momentConverter: IMomentConverter, onTranslate: Translator) {
+        /*
+        const valueProcessor = new ValueProcessor(converterObject);
+        const variableService = new VariableService(valueProcessor.processValue);
+        const dateUtils = getDateUtils(momentConverter);
+        this.executionService = getExecutionService(onTranslate, variableService, dateUtils);
+        */
     }
 
     executeRules(
-        allProgramRules: ProgramRulesContainer,
-        executingEventValues: EventData,
-        eventsValues: EventsData,
-        dataElements: { [elementId: string]: DataElementForRulesEngine }) {
-            
+        programRulesContainer: ProgramRulesContainer,
+        executingEvent: EventData,
+        eventsData: EventsData,
+        dataElements: DataElements,
+        selectedOrgUnit: OrgUnit,
+        optionSets: ?OptionSets) {
+        
+        /* TEMP */
+        /*
+        const eventsDataByStage = eventsData.reduce((accEventsByStage, event) => {
+            const hasProgramStage = !!event.programStageId;
+            if (hasProgramStage) {
+                accEventsByStage[event.programStageId] = accEventsByStage[event.programStageId] || [];
+                accEventsByStage[event.programStageId].push(event);
+            }
+            return accEventsByStage;
+        }, {});
+
+        const eventsContainer = {
+            all: eventsData,
+            byStage: eventsDataByStage,
+        };
+
+        this.variableService.getVariables(programRulesContainer, executingEvent, eventsContainer, dataElements, optionSets, selectedOrgUnit);
+        */
     }
 }

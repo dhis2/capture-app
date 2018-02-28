@@ -1,21 +1,27 @@
 // @flow
-export type ProgramRuleAction = {
+export type ProgramRuleEffect = {
+    id: string,
+    location: ?string,
+    action: string,
+    dataElementId: ?string,
+    trackedEntityAttributeId: ?string,
+    programStageId: ?string,
+    programStageSectionId: ?string,
     content: string,
-    data: string,
-    location: string,
+    data: ?string,
+    ineffect: boolean,
+};
+
+export type ProgramRuleAction = {
+    id: string,
+    content: string,
+    data: ?string,
+    location: ?string,
     programRuleActionType: string,
-    dataElement?: {
-        id?: ?string,
-    },
-    programStage?: {
-        id?: ?string,
-    },
-    programStageSection?: {
-        id?: ?string,
-    },
-    trackedEntityAttribute?: {
-        id?: ?string,
-    }
+    dataElementId?: ?string,
+    programStageId?: ?string,
+    programStageSectionId?: ?string,
+    trackedEntityAttributeId?: ?string,
 };
 
 export type ProgramRule = {
@@ -23,29 +29,21 @@ export type ProgramRule = {
     condition: string,
     description?: ?string,
     displayName: string,
-    program: {
-        id: string,
-    },
+    programId: string,
+    programStageId?: ?string,
     programRuleActions: Array<ProgramRuleAction>,
 };
 
 
 export type ProgramRuleVariable = {
+    id: string,
     displayName: string,
     programRuleVariableSourceType: string,
-    program: {
-        id: string,
-    },
-    dataElement?: {
-        id?: ?string,
-    },
-    trackedEntityAttribute?: {
-        id?: ?string,
-    },
-    programStage?: {
-        id?: ?string,
-    },
-    useNameForOptionSet: boolean,
+    programId: string,
+    dataElementId?: ?string,
+    trackedEntityAttributeId?: ?string,
+    programStageId?: ?string,
+    useNameForOptionSet?: ?boolean,
 };
 
 type Option = {
@@ -73,8 +71,8 @@ type Constant = {
 export type Constants = Array<Constant>;
 
 export type ProgramRulesContainer = {
-    programRulesVariables: ?Array<ProgramRuleVariable>,
-    programRules: ?Array<ProgramRule>,
+    programRulesVariables: Array<ProgramRuleVariable>,
+    programRules: Array<ProgramRule>,
     constants?: ?Constants,
 };
 
@@ -121,13 +119,31 @@ export type TrackedEntityAttributes = {
     [id: string]: TrackedEntityAttribute
 };
 
-export type Entity = {
+type Attribute = {
+    id: string,
+    value: any,
+};
 
+export type Entity = {
+    attributes: Array<Attribute>,
 };
 
 export type Enrollment = {
-
+    enrollmentDate: string,
 };
+
+export type OrgUnit = {
+    id: string,
+    code: string,
+};
+
+export type Translator = (value: string) => string;
+
+export type Moment = Object;
+export interface IMomentConverter {
+    rulesDateToMoment(rulesEngineValue: string): Moment;
+    momentToRulesDate(momentValue: Moment): string;
+}
 
 export interface IConvertRulesValue {
     convertText(value: any): string;

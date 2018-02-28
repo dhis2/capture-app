@@ -68,3 +68,7 @@ export const displayTime = (() => {
     };
 })();
 
+export const RulesEngineDateUtils = {
+    format: (IsoString: string) => moment(IsoString).format('L'),
+    getToday: () => moment().format('L'),
+};

@@ -1,6 +1,6 @@
 // @flow
 /* eslint-disable class-methods-use-this */
-import type { IConvertRulesValue } from '../../RulesEngine/RulesEngine';
+import type { IConvertRulesValue } from '../../RulesEngine/rulesEngine.types';
 
 class RulesValueConverter implements IConvertRulesValue {
     convertText(value: any): string {

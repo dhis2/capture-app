@@ -24,9 +24,7 @@ export default new ApiSpecification((_this) => {
             displayDescription: d2ProgramIndicator.displayDescription,
             description: d2ProgramIndicator.description,
             filter: d2ProgramIndicator.filter,
-            program: {
-                id: d2ProgramIndicator.program && d2ProgramIndicator.program.id,
-            },
+            programId: d2ProgramIndicator.program && d2ProgramIndicator.program.id,
         }));
 
         return programIndicators;
