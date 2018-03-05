@@ -12,7 +12,7 @@ export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         class ShuoldFieldUpdateInterface extends React.Component<Props> {
             shouldComponentUpdate(nextProps: Props) {
-                const pureCheck = ['value', 'touched', 'validationAttempted', 'errorText'];
+                const pureCheck = ['value', 'touched', 'validationAttempted', 'errorMessage', 'rulesErrorMessage'];
                 return pureCheck.some(propName => nextProps[propName] !== this.props[propName]);
             }
 

@@ -106,26 +106,23 @@ export type EventsDataContainer = {
 export type DataElement = {
     id: string,
     valueType: string,
-    optionSetId: string,
+    optionSetId?: ?string,
 };
 
 export type DataElements = { [elementId: string]: DataElement };
 
-type TrackedEntityAttribute = {
-
+export type TrackedEntityAttribute = {
+    id: string,
+    valueType: string,
+    optionSetId?: ?string,
 };
 
 export type TrackedEntityAttributes = {
     [id: string]: TrackedEntityAttribute
 };
 
-type Attribute = {
-    id: string,
-    value: any,
-};
-
 export type Entity = {
-    attributes: Array<Attribute>,
+    [attributeId: string]: any,
 };
 
 export type Enrollment = {
@@ -135,6 +132,15 @@ export type Enrollment = {
 export type OrgUnit = {
     id: string,
     code: string,
+};
+
+export type DateUtils = {
+    getToday: () => string,
+    daysBetween: (firstRulesDate: string, secondRulesDate: string) => string,
+    weeksBetween: (firstRulesDate: string, secondRulesDate: string) => string,
+    monthsBetween: (firstRulesDate: string, secondRulesDate: string) => string,
+    yearsBetween: (firstRulesDate: string, secondRulesDate: string) => string,
+    addDays: (rulesDate: string, daysToAdd: string) => string,
 };
 
 export type Translator = (value: string) => string;

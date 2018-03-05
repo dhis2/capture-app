@@ -5,6 +5,7 @@ import { ensureState } from 'redux-optimistic-ui';
 import RulesEngine from '../../RulesEngine/RulesEngine';
 import valueConverter from './valueConverter';
 import momentConverter from './momentConverter';
+import { getTranslation } from '../../d2/d2Instance';
 
 import errorCreator from '../../utils/errorCreator';
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
@@ -20,21 +21,21 @@ import constantsStore from '../../metaDataMemoryStores/constants/constants.store
 import optionSetsStore from '../../metaDataMemoryStores/optionSets/optionSets.store';
 import DataElement from '../../metaData/DataElement/DataElement';
 
-import type { OptionSets, ProgramRulesContainer, DataElement as DataElementForRulesEngine, EventData, OrgUnit } from '../../RulesEngine/rulesEngine.types';
+import { updateRulesEffects } from './rulesEngine.actions';
+
+import type { OptionSets, ProgramRulesContainer, DataElement as DataElementForRulesEngine, EventData, OrgUnit, ProgramRuleEffect } from '../../RulesEngine/rulesEngine.types';
 
 type Next = (action: ReduxAction<any, any>) => void;
 
-const rulesEngine = new RulesEngine(valueConverter, momentConverter);
+const rulesEngine = new RulesEngine(valueConverter, momentConverter, getTranslation);
+
+const rulesEffectsTypes = {
+    ASSIGN_VALUE: 'Assign_Value',
+};
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found in rulesEngine middleware',
     PROGRAMSTAGE_NOT_FOUND: 'ProgramStage not found',
-};
-
-const actionTypes = {
-    UPDATE_VALUES: 'UpdateFormsValues',
-    UPDATE_MESSAGES: 'RulesUpdateMessages',
-    UPDATE_HIDDEN: 'RulesUpdateHidden',
 };
 
 function getProgramRulesContainer(program: Program): ProgramRulesContainer {
@@ -250,8 +251,41 @@ function getRulesEngineArguments(program: Program, action: ReduxAction<Object, n
     };
 }
 
+function findId(effect: ProgramRuleEffect) {
+    return effect.dataElementId || effect.programStageSectionId;
+}
+
+function buildEffectsHierarchy(effects: Array<ProgramRuleEffect>) {
+    return effects.reduce((accEffectsObject, effect) => {
+        const actionType = effect.action;
+        accEffectsObject[actionType] = accEffectsObject[actionType] || {};
+
+        const id = findId(effect);
+        accEffectsObject[actionType][id] = accEffectsObject[actionType][id] || [];
+        accEffectsObject[actionType][id].push(effect);
+        return accEffectsObject;
+    }, {});
+}
+
+function handleAssigns(assignEffects: ?Array<ProgramRuleEffect>, action: ReduxAction<any, any>) {
+    // updateFormValue
+    // updateEventValue
+    if (assignEffects) {
+        
+    }
+}
+
+function handleRulesEffects(rulesEffects: ?Array<ProgramRuleEffect>, dispatch: ReduxDispatch, action: ReduxAction<any, any>) {
+    if (rulesEffects) {
+        const effectsHierarchy = buildEffectsHierarchy(rulesEffects);
+        handleAssigns(effectsHierarchy[rulesEffectsTypes.ASSIGN_VALUE], action);
+        dispatch(updateRulesEffects(effectsHierarchy, action.payload.formId));
+    }
+}
+
 function runRulesEngine(programRulesContainer: ProgramRulesContainer, dataElementsInProgram: { [elementId: string]: DataElementForRulesEngine }, currentEventData: EventData, allEventsData: Array<EventData>, orgUnit: OrgUnit, optionSets: ?OptionSets) {
-    rulesEngine.executeRules(programRulesContainer, currentEventData, allEventsData, dataElementsInProgram, orgUnit, optionSets);
+    const effects = rulesEngine.executeRulesForSingleEvent(programRulesContainer, currentEventData, allEventsData, dataElementsInProgram, orgUnit, optionSets);
+    return effects;
 }
 
 export default (store: ReduxStore) => (next: Next) => (action: ReduxAction<any, any>) => {
@@ -277,7 +311,7 @@ export default (store: ReduxStore) => (next: Next) => (action: ReduxAction<any, 
 
         const { dataElementsInProgram, currentEventData, allEventsData, optionSets, orgUnit } = getRulesEngineArguments(program, action, state, event, formId, action.payload.dataEntryId);
         const rulesEffects = runRulesEngine(programRulesContainer, dataElementsInProgram, currentEventData, allEventsData, orgUnit, optionSets);
-
+        handleRulesEffects(rulesEffects, store.dispatch, action);
 
         next(action);
     } else {

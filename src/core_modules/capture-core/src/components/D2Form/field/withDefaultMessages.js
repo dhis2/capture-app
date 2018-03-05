@@ -24,6 +24,7 @@ const styles = (theme: Theme) => ({
 
 type Props = {
     errorMessage: ?string,
+    rulesErrorMessage: ?string,
     warningMessage: ?string,
     infoMessage: ?string,
     validatingMessage: ?string,
@@ -67,9 +68,22 @@ const getFieldMessages = (InnerComponent: React.ComponentType<any>) =>
             return messageElement;
         }
 
+        static getRulesMessageElement(errorText, warningText, errorTextOnComplete, warningTextOnComplete, touched, validationAttempted, classes) {
+            let messageElement;
+
+            if (errorText) {
+                messageElement = FieldMessages.createMessageElement(errorText, classNames(classes.error, classes.base));
+            }
+
+            return messageElement;
+        }
+
         render() {
-            const { classes, errorMessage, warningMessage, infoMessage, validatingMessage, touched, validationAttempted, ...passOnProps } = this.props;
-            const messageElement = (touched || validationAttempted) ? FieldMessages.getMessageElement(errorMessage, warningMessage, infoMessage, validatingMessage, classes) : null;
+            const { classes, errorMessage, warningMessage, infoMessage, validatingMessage, rulesErrorMessage, touched, validationAttempted, ...passOnProps } = this.props;
+            let messageElement = (touched || validationAttempted) ? FieldMessages.getMessageElement(errorMessage, warningMessage, infoMessage, validatingMessage, classes) : null;
+            if (!messageElement) {
+                messageElement = FieldMessages.getRulesMessageElement(rulesErrorMessage, null, null, null, touched, validationAttempted, classes);
+            }
 
             return (
                 <div>

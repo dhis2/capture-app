@@ -34,9 +34,9 @@ class D2Form extends Component<Props> {
         return Array.from(this.sectionInstances.entries())
             .map(entry => entry[1])
             .every((sectionInstance: D2Section) => {
-                if (sectionInstance && sectionInstance.sectionFieldsInstance && sectionInstance.sectionFieldsInstance.getWrappedInstance() && sectionInstance.sectionFieldsInstance.getWrappedInstance().formBuilderInstance) {
-                    const formBuilderInstance = sectionInstance.sectionFieldsInstance.getWrappedInstance().formBuilderInstance;
-                    return formBuilderInstance.isValid();
+                if (sectionInstance && sectionInstance.sectionFieldsInstance && sectionInstance.sectionFieldsInstance.getWrappedInstance()) {
+                    const sectionFieldsInstance = sectionInstance.sectionFieldsInstance.getWrappedInstance();
+                    return sectionFieldsInstance.isValid();
                 }
                 return true;
             });
@@ -46,10 +46,10 @@ class D2Form extends Component<Props> {
         return Array.from(this.sectionInstances.entries())
             .map(entry => entry[1])
             .reduce((failedFormFields: Array<any>, sectionInstance: D2Section) => {
-                if (sectionInstance && sectionInstance.sectionFieldsInstance && sectionInstance.sectionFieldsInstance.getWrappedInstance() && sectionInstance.sectionFieldsInstance.getWrappedInstance().formBuilderInstance) {
-                    const formBuilderInstance = sectionInstance.sectionFieldsInstance.getWrappedInstance().formBuilderInstance;
-                    if (!formBuilderInstance.isValid()) {
-                        failedFormFields = [...failedFormFields, ...formBuilderInstance.getInvalidFields()];
+                if (sectionInstance && sectionInstance.sectionFieldsInstance && sectionInstance.sectionFieldsInstance.getWrappedInstance()) {
+                    const sectionFieldsInstance = sectionInstance.sectionFieldsInstance.getWrappedInstance();
+                    if (!sectionFieldsInstance.isValid()) {
+                        failedFormFields = [...failedFormFields, ...sectionFieldsInstance.getInvalidFields()];
                     }
                 }
                 return failedFormFields;

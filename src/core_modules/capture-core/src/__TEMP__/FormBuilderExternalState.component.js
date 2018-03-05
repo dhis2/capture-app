@@ -155,11 +155,17 @@ class FormBuilder extends React.Component<Props> {
         return Object.keys(this.props.fieldsUI).every(key => this.props.fieldsUI[key].valid);
     }
 
-    getInvalidFields() {
+    getInvalidFields(externalInvalidFields?: ?{ [id: string]: boolean }) {
         const propFields = this.props.fields;
         return propFields.reduce((invalidFieldsContainer, field) => {
             const fieldUI = this.props.fieldsUI[field.id];
             if (!fieldUI.valid) {
+                invalidFieldsContainer.push({
+                    prop: field,
+                    instance: this.fieldInstances.get(field.id),
+                    uiState: fieldUI,
+                });
+            } else if (externalInvalidFields && externalInvalidFields[field.id]) {
                 invalidFieldsContainer.push({
                     prop: field,
                     instance: this.fieldInstances.get(field.id),
@@ -174,7 +180,7 @@ class FormBuilder extends React.Component<Props> {
         const { fields, values, fieldsUI, validationAttempted, classes } = this.props;
 
         return fields.map((field) => {
-            const props = field.props;
+            const props = field.props || {};
             const fieldUI = fieldsUI[field.id] || {};
             const value = values[field.id];
 

@@ -596,6 +596,7 @@ export default function getExecutionService(onTranslate, variableService, dateUt
         return valueType;
     };
 
+    /*
     var performCreateEventAction = function(effect, selectedEntity, selectedEnrollment, currentEvents,executingEvent, programStage){
         var valArray = [];
         if(effect.data) {
@@ -696,6 +697,7 @@ export default function getExecutionService(onTranslate, variableService, dateUt
             log.warn("Cannot create event with empty content.");
         }
     };
+    */
 
     const getApplicableProgramRules = function(programRules, executingEvent) {
         const executingEventProgramStageId = executingEvent.programStageId;
@@ -724,23 +726,72 @@ export default function getExecutionService(onTranslate, variableService, dateUt
         return orderedRules;
     }
 
-    const translateRuleEffectData = function(data, variablesHash) {
-        let ruleEffectData = data;
+    const getRuleEffectData = function(action, variablesHash, flag) {
+        const actionData = action.data;
+        let ruleEffectData = actionData; 
 
-        var nameWithoutBrackets = data.replace('#{','').replace('}','');
+        var nameWithoutBrackets = actionData.replace('#{','').replace('}','');
         if (variablesHash[nameWithoutBrackets])
         {
             // The variable exists, and is replaced with its corresponding value
             ruleEffectData = variablesHash[nameWithoutBrackets].variableValue;
-        } else if(data.indexOf('{') !== -1 || data.indexOf('d2:') !== -1) {
+        } else if(actionData.indexOf('{') !== -1 || actionData.indexOf('d2:') !== -1) {
             //Since the value couldnt be looked up directly, and contains a curly brace or a dhis function call,
             //the expression was more complex than replacing a single variable value.
             //Now we will have to make a thorough replacement and separate evaluation to find the correct value:
-            ruleEffectData = replaceVariables(data, variablesHash);
+            ruleEffectData = replaceVariables(actionData, variablesHash);
             //In a scenario where the data contains a complex expression, evaluate the expression to compile(calculate) the result:
-            ruleEffectData = runExpression(ruleEffectData, data, "action:" + action.id, flag, variablesHash);
+            ruleEffectData = runExpression(ruleEffectData, actionData, "action:" + action.id, flag, variablesHash);
         }
-        return data;
+        return ruleEffectData;
+    }
+
+    const buildRuleEffect = function(action, variablesHash, flag) {
+        const effect = {
+            id: action.id,
+            location: action.location,
+            action:action.programRuleActionType,
+            dataElementId: action.dataElementId,
+            trackedEntityAttributeId: action.trackedEntityAttribute,
+            programStageId: action.programStageId,
+            programStageSectionId: action.programStageSectionId,
+            content: action.content,
+            data: action.data ? getRuleEffectData(action, variablesHash, flag) : action.data,
+            ineffect: true,
+        };
+        
+        if (effect.action === "ASSIGN") {
+            //from earlier evaluation, the data portion of the ruleeffect now contains the value of the variable to be assigned.
+            //the content portion of the ruleeffect defines the name for the variable, when the qualidisers are removed:
+            var variableToAssign = effect.content ?
+                effect.content.replace("#{","").replace("A{","").replace("}","") : null;
+
+            if (variableToAssign && !isDefined(variablesHash[variableToAssign])) {
+                //If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
+                log.warn("Variable " + variableToAssign + " was not defined.");
+            }
+
+            if (variablesHash[variableToAssign]){
+                var updatedValue = effect.data;
+
+                var valueType = determineValueType(updatedValue);
+
+                if($rootScope.ruleeffects[ruleEffectKey][action.id].dataElement) {
+                    updatedValue = variableService.getDataElementValueOrCodeForValue(variablesHash[variabletoassign].useCodeForOptionSet, updatedValue, $rootScope.ruleeffects[ruleEffectKey][action.id].dataElement.id, allDataElements, optionSets);
+                }
+                updatedValue = variableService.processValue(updatedValue, valueType);
+
+                variablesHash[variabletoassign] = {
+                    variableValue:updatedValue,
+                    variableType:valueType,
+                    hasValue:true,
+                    variableEventDate:'',
+                    variablePrefix:variablesHash[variabletoassign].variablePrefix ? variablesHash[variabletoassign].variablePrefix : '#',
+                    allValues:[updatedValue]
+                };
+            }
+        }
+        return effect;              
     }
     /**
      * 
@@ -754,22 +805,23 @@ export default function getExecutionService(onTranslate, variableService, dateUt
      * @param {*} optionSets all optionsets(matedata)
      * @param {*} flag execution flags
      */
-    var internalExecuteRules = function(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, optionSets, flag) {
-        const rulesEffects = {};
-
+    var internalExecuteRules = function(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, flag) {
         let rules = getApplicableProgramRules(programRulesContainer.programRules, executingEvent);
-        rules = orderRulesByPriority(rules);
+        if(rules.length === 0) {
+            return null;
+        }
+        rules = orderRulesByPriority(rules);        
+        const variablesHash = variableService.getVariables(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets);
+        const ruleEffectKey = executingEvent.eventId;
+        let updatedEffectsExits = false;
+        let eventsCreated = 0;
 
-        const variablesHash = variableService.getVariables(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, optionSets);
+        const effects = rules
+            .map(rule => {
+                let ruleEffects;
 
-        if(isArray(rules)){
-            const ruleEffectKey = executingEvent.eventId;
-            let updatedEffectsExits = false;
-            let eventsCreated = 0;
-
-            rules.forEach(rule => {
                 let ruleEffective = false;
-                const expression = rule.condition;
+                let expression = rule.condition;
                 if(expression) {
                     if(expression.indexOf('{') !== -1) {
                         expression = replaceVariables(expression, variablesHash);
@@ -781,151 +833,34 @@ export default function getExecutionService(onTranslate, variableService, dateUt
                 }
 
                 if (ruleEffective) {
-                    const effects = rule.programRuleActions.map(action => {
-                         const effect = {
-                            id: action.id,
-                            location: action.location,
-                            action:action.programRuleActionType,
-                            dataElementId: action.dataElementId,
-                            trackedEntityAttributeId: action.trackedEntityAttribute,
-                            programStageId: action.programStageId,
-                            programStageSectionId: programStageSectionId,
-                            content: action.content,
-                            data: action.data,
-                            ineffect: true,
-                        };
-                        
-                        effect.data = translateRuleEffectData(effect.data, variablesHash);
-
-                        
-
-                    });
+                    ruleEffects = rule.programRuleActions.map(action => buildRuleEffect(action, variablesHash, flag))
                 }
+                return ruleEffects;
+            })
+            .filter(ruleEffectsForRule => ruleEffectsForRule)
+            .reduce((accRuleEffects, effectsForRule) => {
+                return [...accRuleEffects, ...effectsForRule];
+            }, []);
 
-
-
-                rule.programRuleActions.forEach(action => {
-                    //In case the effect-hash is not populated, add entries
-                    if(!isDefined($rootScope.ruleeffects[ruleEffectKey][action.id])){
-                        $rootScope.ruleeffects[ruleEffectKey][action.id] =  {
-                            id:action.id,
-                            location:action.location,
-                            action:action.programRuleActionType,
-                            dataElement:action.dataElement,
-                            trackedEntityAttribute:action.trackedEntityAttribute,
-                            programStage: action.programStage,
-                            programIndicator: action.programIndicator,
-                            programStageSection: action.programStageSection && action.programStageSection.id ? action.programStageSection.id : null,
-                            content:action.content,
-                            data:action.data,
-                            ineffect:undefined
-                        };
+            //In case the rule is of type CREATEEVENT, run event creation:
+            /*
+            if($rootScope.ruleeffects[ruleEffectKey][action.id].action === "CREATEEVENT" && $rootScope.ruleeffects[ruleEffectKey][action.id].ineffect){
+                if(evs && evs.byStage){
+                    if($rootScope.ruleeffects[ruleEffectKey][action.id].programStage) {
+                        var createdNow = performCreateEventAction($rootScope.ruleeffects[ruleEffectKey][action.id], selectedEntity, selectedEnrollment, evs.byStage[$rootScope.ruleeffects[ruleEffectKey][action.id].programStage.id]);
+                        eventsCreated += createdNow;
+                    } else {
+                        log.warn("No programstage defined for CREATEEVENT action: " + action.id);
                     }
-
-                    //In case the rule is effective and contains specific data,
-                    //the effect be refreshed from the variables list.
-                    //If the rule is not effective we can skip this step
-                    if(ruleEffective && action.data)
-                    {
-                        //Preserve old data for comparison:
-                        var oldData = $rootScope.ruleeffects[ruleEffectKey][action.id].data;
-
-                        //The key data might be containing a dollar sign denoting that the key data is a variable.
-                        //To make a lookup in variables hash, we must make a lookup without the dollar sign in the variable name
-                        //The first strategy is to make a direct lookup. In case the "data" expression is more complex, we have to do more replacement and evaluation.
-
-                        var nameWithoutBrackets = action.data.replace('#{','').replace('}','');
-                        if(isDefined(variablesHash[nameWithoutBrackets]))
-                        {
-                            //The variable exists, and is replaced with its corresponding value
-                            $rootScope.ruleeffects[ruleEffectKey][action.id].data =
-                                variablesHash[nameWithoutBrackets].variableValue;
-                        }
-                        else if(action.data.indexOf('{') !== -1 || action.data.indexOf('d2:') !== -1)
-                        {
-                            //Since the value couldnt be looked up directly, and contains a curly brace or a dhis function call,
-                            //the expression was more complex than replacing a single variable value.
-                            //Now we will have to make a thorough replacement and separate evaluation to find the correct value:
-                            $rootScope.ruleeffects[ruleEffectKey][action.id].data = replaceVariables(action.data, variablesHash);
-                            //In a scenario where the data contains a complex expression, evaluate the expression to compile(calculate) the result:
-                            $rootScope.ruleeffects[ruleEffectKey][action.id].data = runExpression($rootScope.ruleeffects[ruleEffectKey][action.id].data, action.data, "action:" + action.id, flag, variablesHash);
-                        }
-
-                        if(oldData !== $rootScope.ruleeffects[ruleEffectKey][action.id].data) {
-                            updatedEffectsExits = true;
-                        }
-                    }
-
-                    //Update the rule effectiveness if it changed in this evaluation;
-                    if($rootScope.ruleeffects[ruleEffectKey][action.id].ineffect !== ruleEffective)
-                    {
-                        //There is a change in the rule outcome, we need to update the effect object.
-                        updatedEffectsExits = true;
-                        $rootScope.ruleeffects[ruleEffectKey][action.id].ineffect = ruleEffective;
-                    }
-
-                    //In case the rule is of type CREATEEVENT, run event creation:
-                    if($rootScope.ruleeffects[ruleEffectKey][action.id].action === "CREATEEVENT" && $rootScope.ruleeffects[ruleEffectKey][action.id].ineffect){
-                        if(evs && evs.byStage){
-                            if($rootScope.ruleeffects[ruleEffectKey][action.id].programStage) {
-                                var createdNow = performCreateEventAction($rootScope.ruleeffects[ruleEffectKey][action.id], selectedEntity, selectedEnrollment, evs.byStage[$rootScope.ruleeffects[ruleEffectKey][action.id].programStage.id]);
-                                eventsCreated += createdNow;
-                            } else {
-                                log.warn("No programstage defined for CREATEEVENT action: " + action.id);
-                            }
-                        } else {
-                            log.warn("Events to evaluate for CREATEEVENT action: " + action.id + ". Could it have been triggered at the wrong time or during registration?");
-                        }
-                    }
-                    //In case the rule is of type "assign variable" and the rule is effective,
-                    //the variable data result needs to be applied to the correct variable:
-                    else if($rootScope.ruleeffects[ruleEffectKey][action.id].action === "ASSIGN" && $rootScope.ruleeffects[ruleEffectKey][action.id].ineffect){
-                        //from earlier evaluation, the data portion of the ruleeffect now contains the value of the variable to be assigned.
-                        //the content portion of the ruleeffect defines the name for the variable, when the qualidisers are removed:
-                        var variabletoassign = $rootScope.ruleeffects[ruleEffectKey][action.id].content ?
-                            $rootScope.ruleeffects[ruleEffectKey][action.id].content.replace("#{","").replace("A{","").replace("}","") : null;
-
-                        if(variabletoassign && !isDefined(variablesHash[variabletoassign])){
-                            //If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
-                            log.warn("Variable " + variabletoassign + " was not defined.");
-                        }
-
-                        if(variablesHash[variabletoassign]){
-                            var updatedValue = $rootScope.ruleeffects[ruleEffectKey][action.id].data;
-
-                            var valueType = determineValueType(updatedValue);
-
-                            if($rootScope.ruleeffects[ruleEffectKey][action.id].dataElement) {
-                                updatedValue = variableService.getDataElementValueOrCodeForValue(variablesHash[variabletoassign].useCodeForOptionSet, updatedValue, $rootScope.ruleeffects[ruleEffectKey][action.id].dataElement.id, allDataElements, optionSets);
-                            }
-                            updatedValue = variableService.processValue(updatedValue, valueType);
-
-                            variablesHash[variabletoassign] = {
-                                variableValue:updatedValue,
-                                variableType:valueType,
-                                hasValue:true,
-                                variableEventDate:'',
-                                variablePrefix:variablesHash[variabletoassign].variablePrefix ? variablesHash[variabletoassign].variablePrefix : '#',
-                                allValues:[updatedValue]
-                            };
-
-                            if(variablesHash[variabletoassign].variableValue !== updatedValue) {
-                                //If the variable was actually updated, we assume that there is an updated ruleeffect somewhere:
-                                updatedEffectsExits = true;
-                            }
-                        }
-                    }
-                });
-            });
-            var result = { event: ruleEffectKey, callerId:flag.callerId, eventsCreated:eventsCreated };
-            //Broadcast rules finished if there was any actual changes to the event.
-            if(updatedEffectsExits){
-                $rootScope.$broadcast("ruleeffectsupdated", result);
+                } else {
+                    log.warn("Events to evaluate for CREATEEVENT action: " + action.id + ". Could it have been triggered at the wrong time or during registration?");
+                }
             }
-            return result;
-        }
+            */
+        return effects;
     };
-    
+
+    /*
     var internalProcessEventGrid = function( eventGrid ){
     	var events = [];
     	if( eventGrid && eventGrid.rows && eventGrid.headers ){    		
@@ -941,7 +876,6 @@ export default function getExecutionService(onTranslate, variableService, dateUt
     	return events;
     };
 
-    /*
     var internalGetOrLoadScope = function(currentEvent,programStageId,orgUnitId) {        
         if(crossEventRulesExist) {
             //If crossEventRulesExist, we need to get a scope that contains more than the current event.
@@ -1033,8 +967,11 @@ export default function getExecutionService(onTranslate, variableService, dateUt
     };
     */
     return {
-        executeRules: function(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, optionSets, flags) {
-            return internalExecuteRules(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, optionSets, flags);
+        executeRules: function(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, flags) {
+            if (!programRulesContainer.programRules) {
+                return null;
+            }
+            return internalExecuteRules(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, flags);
         },
         /*
         loadAndExecuteRulesScope: function(currentEvent, programId, programStageId, programStageDataElements, allTrackedEntityAttributes, optionSets, orgUnitId, flags){
