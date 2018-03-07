@@ -2,11 +2,15 @@
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/concatMap';
 import { ensureState } from 'redux-optimistic-ui';
+import { batchActions } from 'redux-batched-actions';
 
 import { convertStateFormValuesToClient } from '../../../converters/helpers/formToClient';
 import { convertClientValuesToServer } from '../../../converters/helpers/clientToServer';
 import { actionTypes, completeEvent, completeEventError, saveEvent, saveEventError, loadDataEntryEvent, openDataEntryEventAlreadyLoaded } from '../actions/dataEntry.actions';
 import getDataEntryKey from '../common/getDataEntryKey';
+import { getRulesActionsOnUpdate } from '../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+
+import type { FieldData } from '../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
 
 export const loadDataEntryEpic = (action$, store: ReduxStore) => 
     action$.ofType(actionTypes.START_LOAD_DATA_ENTRY_EVENT)
@@ -56,4 +60,17 @@ export const saveEventEpic = (action$, store: ReduxStore) =>
             const serverValues = convertClientValuesToServer(clientValues, clientValuesContainer.stage);
 
             return saveEvent(clientValues, serverValues, eventId, ensureState(state.events)[eventId], id);
+        });
+
+export const rulesEpic = (action$, store: ReduxStore) =>
+    action$.ofType(actionTypes.UPDATE_FORM_FIELD)
+        .map((action) => {
+            const payload = action.payload;
+            const fieldData: FieldData = {
+                elementId: payload.elementId,
+                value: payload.value,
+                valid: payload.uiState.valid,
+            };
+            const actions = getRulesActionsOnUpdate(payload.eventId, store.getState(), payload.formId, payload.dataEntryId, fieldData);
+            return batchActions(actions);
         });

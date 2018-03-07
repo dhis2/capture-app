@@ -2,17 +2,17 @@
 import { connect } from 'react-redux';
 import D2SectionFields from './D2SectionFields.component';
 import { updateField } from './D2SectionFields.actions';
-import { makeGetSectionValues, makeGetHiddenFieldsValues, makeGetErrorMessages } from './D2SectionFields.selectors';
+import { makeGetSectionValues, makeGetHiddenFieldsValues, makeGetMessages } from './D2SectionFields.selectors';
 
 const makeMapStateToProps = () => {
     const getSectionValues = makeGetSectionValues();
     const getHiddenFields = makeGetHiddenFieldsValues();
-    const getRulesErrorMessages = makeGetErrorMessages();
+    const getRulesMessages = makeGetMessages();
 
     const mapStateToProps = (state: Object, props: { getContainerId: () => string }) => ({
         values: getSectionValues(state, props),
         rulesHiddenFields: getHiddenFields(state, props),
-        rulesErrorMessages: getRulesErrorMessages(state, props),
+        rulesMessages: getRulesMessages(state, props),
     });
     return mapStateToProps;
 };

@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import type { ComponentType } from 'react';
 import FormBuilderContainer from './FormBuilder.container';
 import FormBuilder from '../../__TEMP__/FormBuilder.component';
-//import FormBuilder from 'd2-ui/lib/forms/FormBuilder.component';
 import buildField from './field/buildField';
 
 import MetaDataElement from '../../metaData/DataElement/DataElement';
+import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 
 import type { FieldConfig } from './field/buildField';
 
@@ -19,15 +19,20 @@ type RulesHiddenFields = {
     [id: string]: RulesHiddenField,
 };
 
-type RulesErrorMessage = string;
-type RulesErrorMessages = {
-    [id: string]: RulesErrorMessage,
+type RulesMessage = {
+    error?: ?string,
+    warning?: ?string,
+    errorOnComplete?: ?string,
+    warningOnComplete?: ?string,
+}
+type RulesMessages = {
+    [id: string]: ?RulesMessage,
 };
 
 type Props = {
     fieldsMetaData: Map<string, MetaDataElement>,
     values: FormsValues,
-    rulesErrorMessages: RulesErrorMessages,
+    rulesMessages: RulesMessages,
     rulesHiddenFields: RulesHiddenFields,
     onUpdateField: (value: any, uiState: Object, elementId: string, formBuilderId: string, formId: string) => void,
     formId: string,
@@ -59,8 +64,12 @@ class D2SectionFields extends Component<Props> {
     }
 
     rulesIsValid() {
-        const rulesErrorMessages = this.props.rulesErrorMessages;
-        return Object.keys(rulesErrorMessages).length === 0;
+        const rulesMessages = this.props.rulesMessages;
+        const errorMessages = Object.keys(rulesMessages)
+            .map(id => rulesMessages[id] && (rulesMessages[id][messageStateKeys.ERROR] || rulesMessages[id][messageStateKeys.ERROR_ON_COMPLETE]))
+            .filter(errorMessage => errorMessage);
+
+        return errorMessages.length === 0;
     }
 
     isValid() {
@@ -72,10 +81,13 @@ class D2SectionFields extends Component<Props> {
     }
 
     getInvalidFields() {
-        const externalInvalidFields = Object.keys(this.props.rulesErrorMessages).reduce((accInvalidFields, key) => {
-            accInvalidFields[key] = true;
+        const externalInvalidFields = Object.keys(this.props.rulesMessages).reduce((accInvalidFields, key) => {
+            if (this.props.rulesMessages[key] && (this.props.rulesMessages[key][messageStateKeys.ERROR] || this.props.rulesMessages[key][messageStateKeys.ERROR_ON_COMPLETE])) {
+                accInvalidFields[key] = true;
+            }
             return accInvalidFields;
         }, {});
+
         const invalidFields = this.formBuilderInstance ? this.formBuilderInstance.getInvalidFields(externalInvalidFields) : [];
         return invalidFields;
     }
@@ -90,7 +102,10 @@ class D2SectionFields extends Component<Props> {
             props: {
                 ...formField.props,
                 hidden: this.props.rulesHiddenFields[formField.id],
-                rulesErrorMessage: this.props.rulesErrorMessages[formField.id],
+                rulesErrorMessage: this.props.rulesMessages[formField.id] && this.props.rulesMessages[formField.id][messageStateKeys.ERROR],
+                rulesWarningMessage: this.props.rulesMessages[formField.id] && this.props.rulesMessages[formField.id][messageStateKeys.WARNING],
+                rulesErrorMessageOnComplete: this.props.rulesMessages[formField.id] && this.props.rulesMessages[formField.id][messageStateKeys.ERROR_ON_COMPLETE],
+                rulesWarningMessageOnComplete: this.props.rulesMessages[formField.id] && this.props.rulesMessages[formField.id][messageStateKeys.WARNING_ON_COMPLETE],
             },
         }));
     }

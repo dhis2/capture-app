@@ -1,12 +1,10 @@
 // @flow
 import { createSelectorCreator, defaultMemoize } from 'reselect';
+import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 
-const onIsEqual = (currentValues, prevValues) => {
-    if (Object.keys(currentValues).every(key => currentValues[key] === prevValues[key])) {
-        return Object.keys(prevValues).every(key => currentValues[key] === prevValues[key]);
-    }
-    return false;
-};
+const onIsEqual = (prevValues, currentValues) =>
+    Object.keys(currentValues).every(key => currentValues[key] === prevValues[key]);
+
 
 const createDeepEqualSelector = createSelectorCreator(
     defaultMemoize,
@@ -45,19 +43,30 @@ export const makeGetHiddenFieldsValues = () => createDeepEqualSelector(
     sectionHiddenFields => sectionHiddenFields,
 );
 
-const sectionRulesErrorMessagesSelector = (state, props) => {
+
+const createMessagesDeepEqualSelector = createSelectorCreator(
+    defaultMemoize,
+    (prevValues, currentValues) =>
+        Object.keys(currentValues).every((key) => {
+            const currentMessagesForId = currentValues[key] || {};
+            const prevMessagesForId = prevValues[key] || {};
+            return [messageStateKeys.ERROR, messageStateKeys.WARNING, messageStateKeys.ERROR_ON_COMPLETE, messageStateKeys.WARNING_ON_COMPLETE].every(messageKey => currentMessagesForId[messageKey] === prevMessagesForId[messageKey]);
+        }),
+);
+
+const sectionRulesMessagesSelector = (state, props) => {
     const metaData = props.fieldsMetaData;
-    const errors = state.rulesEffectsErrorMessages[props.formId] || {};
+    const messages = state.rulesEffectsMessages[props.formId] || {};
     const sectionErrorMessages = Array.from(metaData.entries())
         .map(entry => entry[1])
         .reduce((accErrorFields, metaDataElement) => {
-            accErrorFields[metaDataElement.id] = errors[metaDataElement.id];
+            accErrorFields[metaDataElement.id] = messages[metaDataElement.id];
             return accErrorFields;
         }, {});
     return sectionErrorMessages;
 };
-export const makeGetErrorMessages = () => createDeepEqualSelector(
-    sectionRulesErrorMessagesSelector,
-    sectionHiddenFields => sectionHiddenFields,
+export const makeGetMessages = () => createMessagesDeepEqualSelector(
+    sectionRulesMessagesSelector,
+    sectionMessages => sectionMessages,
 );
 

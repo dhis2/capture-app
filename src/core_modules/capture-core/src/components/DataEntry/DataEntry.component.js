@@ -55,7 +55,7 @@ class DataEntry extends Component<Props> {
     }
 
     handleUpdateField(...args) {
-        this.props.onUpdateField(...args, this.props.id);
+        this.props.onUpdateField(...args, this.props.id, this.props.event.eventId);
     }
 
     render() {

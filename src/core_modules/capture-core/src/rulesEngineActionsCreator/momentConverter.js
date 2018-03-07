@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable class-methods-use-this */
 import moment from 'moment';
-import type { IMomentConverter } from '../../RulesEngine/rulesEngine.types';
+import type { IMomentConverter } from '../RulesEngine/rulesEngine.types';
 
 const momentFormat = 'YYYY-MM-DD';
 

@@ -69,6 +69,11 @@ export default class RenderFoundation {
         return this._sections.get(id);
     }
 
+    getElement(id: string) {
+        const elements = this.getElementsById();
+        return elements[id];
+    }
+
     getElements(): Array<DataElement> {
         return Array.from(this.sections.entries()).map(entry => entry[1])
             .reduce((accElements, section) => {

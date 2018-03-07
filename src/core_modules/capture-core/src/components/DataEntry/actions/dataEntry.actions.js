@@ -10,6 +10,8 @@ import errorCreator from '../../../utils/errorCreator';
 import { actionCreator } from '../../../actions/actions.utils';
 import { addFormData } from '../../D2Form/actions/form.actions';
 
+import { getRulesActionsOnLoad } from '../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+
 export const actionTypes = {
     START_LOAD_DATA_ENTRY_EVENT: 'StartLoadDataEntryEvent',
     OPEN_DATA_ENTRY_EVENT_ALREADY_LOADED: 'OpenDataEntryEventAlreadyLoaded',
@@ -72,7 +74,7 @@ export function loadDataEntryEvent(eventId: string, state: ReduxState, eventProp
                 accConvertedEventProps[dataElement.id] = dataElement.convertValue(event[dataElement.id], convertValue);
                 return accConvertedEventProps;
             }, {});
-        
+
         dataEntryTypes = eventPropsToInclude.reduce((accTypes, prop: EventPropToInclude) => {
             accTypes[prop.id] = prop.type;
             return accTypes;
@@ -82,6 +84,7 @@ export function loadDataEntryEvent(eventId: string, state: ReduxState, eventProp
     return batchActions([
         actionCreator(actionTypes.LOAD_DATA_ENTRY_EVENT)({ eventId, id, dataEntryValues, dataEntryTypes }),
         addFormData(eventId, convertedValues),
+        ...getRulesActionsOnLoad(eventId, state, eventId, id),
     ]);
 }
 
@@ -139,5 +142,5 @@ export const saveValidationFailed =
 
 export const updateField = (value: any, valueMeta: Object, fieldId: string, dataEntryId: string, eventId: string) => actionCreator(actionTypes.UPDATE_FIELD)({ value, valueMeta, fieldId, dataEntryId, eventId });
 
-export const updateFormField = (value: any, uiState: Object, elementId: string, sectionId: string, formId: string, dataEntryId: string) =>
-    actionCreator(actionTypes.UPDATE_FORM_FIELD)({ value, uiState, formId, sectionId, elementId, dataEntryId });
+export const updateFormField = (value: any, uiState: Object, elementId: string, sectionId: string, formId: string, dataEntryId: string, eventId: string) =>
+    actionCreator(actionTypes.UPDATE_FORM_FIELD)({ value, uiState, formId, sectionId, elementId, dataEntryId, eventId });

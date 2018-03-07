@@ -76,7 +76,7 @@ export type ProgramRulesContainer = {
     constants?: ?Constants,
 };
 
-type EventMain = {
+export type EventMain = {
     eventId: string,
     programId: string,
     programStageId: string,
@@ -90,7 +90,7 @@ type EventMain = {
     dueDate: string,
 };
 
-type EventValues = {
+export type EventValues = {
     [elementId: string]: any,
 };
 
@@ -151,7 +151,7 @@ export interface IMomentConverter {
     momentToRulesDate(momentValue: Moment): string;
 }
 
-export interface IConvertRulesValue {
+export interface IConvertInputRulesValue {
     convertText(value: any): string;
     convertLongText(value: any): string;
     convertLetter(value: any): string;
@@ -170,6 +170,28 @@ export interface IConvertRulesValue {
     convertPercentage(value: any): number;
     convertUrl(value: any): string;
 }
+
+export interface IConvertOutputRulesEffectsValue {
+    convertText(value: string): any;
+    convertLongText(value: string): any;
+    convertLetter(value: string): any;
+    convertPhoneNumber(value: string): any;
+    convertEmail(value: string): any;
+    convertBoolean(value: boolean): any;
+    convertTrueOnly(value: boolean): any;
+    convertDate(value: string): any;
+    convertDateTime(value: string): any;
+    convertTime(value: string): any;
+    convertNumber(value: number): any;
+    convertInteger(value: number): any;
+    convertIntegerPositive(value: number): any;
+    convertIntegerNegative(value: number): any;
+    convertIntegerZeroOrPositive(value: number): any;
+    convertPercentage(value: number): any;
+    convertUrl(value: string): any;
+}
+
+
 
 
 

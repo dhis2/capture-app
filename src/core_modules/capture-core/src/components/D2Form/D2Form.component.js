@@ -66,7 +66,7 @@ class D2Form extends Component<Props> {
         firstFailureInstance.goto && firstFailureInstance.goto();
         return false;
     }
-
+    
     setSectionInstance(instance: ?D2Section, id: string) {
         if (!instance) {
             if (this.sectionInstances.has(id)) {

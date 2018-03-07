@@ -1,6 +1,9 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
+
 import { actionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
+import { actionTypes as rulesEngineActionTypes } from '../../rulesEngineActionsCreator/rulesEngine.actions';
+
 import getDataEntryKey from '../../components/DataEntry/common/getDataEntryKey';
 
 export const dataEntriesDesc = createReducerDescription({
@@ -44,6 +47,22 @@ export const dataEntriesUIDesc = createReducerDescription({
         const key = getDataEntryKey(payload.id, payload.eventId);
         newState[key] = { ...newState[key] };
         newState[key].saveAttempted = true;
+        return newState;
+    },
+    [actionTypes.UPDATE_FORM_FIELD]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const key = getDataEntryKey(payload.dataEntryId, payload.eventId);
+        newState[key] = { ...newState[key] };
+        newState[key].inProgress = newState[key].inProgress ? newState[key].inProgress + 1 : 1;
+        return newState;
+    },
+    [rulesEngineActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const key = getDataEntryKey(payload.dataEntryId, payload.eventId);
+        newState[key] = { ...newState[key] };
+        newState[key].inProgress = newState[key].inProgress ? newState[key].inProgress - 1 : 0;
         return newState;
     },
 }, 'dataEntriesUI');

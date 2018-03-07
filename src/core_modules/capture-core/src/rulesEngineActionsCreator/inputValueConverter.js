@@ -1,8 +1,8 @@
 // @flow
 /* eslint-disable class-methods-use-this */
-import type { IConvertRulesValue } from '../../RulesEngine/rulesEngine.types';
+import type { IConvertInputRulesValue } from '../RulesEngine/rulesEngine.types';
 
-class RulesValueConverter implements IConvertRulesValue {
+class RulesValueConverter implements IConvertInputRulesValue {
     convertText(value: any): string {
         return value || '';
     }
@@ -10,7 +10,7 @@ class RulesValueConverter implements IConvertRulesValue {
     convertLongText(value: any): string {
         return value || '';
     }
-    
+
     convertLetter(value: any): string {
         return value || '';
     }
@@ -24,11 +24,11 @@ class RulesValueConverter implements IConvertRulesValue {
     }
 
     convertBoolean(value: any): boolean {
-        return value;
+        return (value || value === false) ? value : '';
     }
 
     convertTrueOnly(value: any): boolean {
-        return (value === true);
+        return (value || value === false) ? value : '';
     }
 
     convertDate(value: any): string {
@@ -44,27 +44,27 @@ class RulesValueConverter implements IConvertRulesValue {
     }
 
     convertNumber(value: any): number {
-        return value;
+        return (value || value === 0) ? value : '';
     }
 
     convertInteger(value: any): number {
-        return value;
+        return (value || value === 0) ? value : '';
     }
 
     convertIntegerPositive(value: any): number {
-        return value;
+        return (value || value === 0) ? value : '';
     }
 
     convertIntegerNegative(value: any): number {
-        return value;
+        return (value || value === 0) ? value : '';
     }
 
     convertIntegerZeroOrPositive(value: any): number {
-        return value;
+        return (value || value === 0) ? value : '';
     }
 
     convertPercentage(value: any): number {
-        return value;
+        return (value || value === 0) ? value : '';
     }
 
     convertUrl(value: any): string {
