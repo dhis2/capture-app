@@ -29,7 +29,7 @@ export const makeGetSectionValues = () => createDeepEqualSelector(
 
 const sectionHiddenFieldsSelector = (state, props) => {
     const metaData = props.fieldsMetaData;
-    const hiddenFields = state.rulesEffectsHiddenFields[props.formId] || {};
+    const hiddenFields = state.eventsRulesEffectsHiddenFields[props.formId] || {};
     const sectionHiddenFields = Array.from(metaData.entries())
         .map(entry => entry[1])
         .reduce((accHiddenFields, metaDataElement) => {
@@ -56,7 +56,7 @@ const createMessagesDeepEqualSelector = createSelectorCreator(
 
 const sectionRulesMessagesSelector = (state, props) => {
     const metaData = props.fieldsMetaData;
-    const messages = state.rulesEffectsMessages[props.formId] || {};
+    const messages = state.eventsRulesEffectsMessages[props.formId] || {};
     const sectionErrorMessages = Array.from(metaData.entries())
         .map(entry => entry[1])
         .reduce((accErrorFields, metaDataElement) => {

@@ -21,9 +21,10 @@ import constantsStore from '../metaDataMemoryStores/constants/constants.store';
 import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store';
 import DataElement from '../metaData/DataElement/DataElement';
 
-import { updateRulesEffects } from './rulesEngine.actions';
+import { updateRulesEffects, updateFieldFromRuleEffect } from './rulesEngine.actions';
+import effectActions from '../RulesEngine/effectActions.const';
 
-import type { OptionSets, ProgramRulesContainer, DataElement as DataElementForRulesEngine, EventData, OrgUnit, ProgramRuleEffect, EventMain, EventValues } from '../RulesEngine/rulesEngine.types';
+import type { OptionSets, ProgramRulesContainer, DataElement as DataElementForRulesEngine, EventData, OrgUnit, OutputEffect, AssignOutputEffect, HideOutputEffect, EventMain, EventValues } from '../RulesEngine/rulesEngine.types';
 
 export type EventContainer = {
     main: EventMain,
@@ -37,10 +38,6 @@ type FieldData = {
 };
 
 const rulesEngine = new RulesEngine(inputValueConverter, momentConverter, getTranslation, outputRulesEffectsValueConverter);
-
-const rulesEffectsTypes = {
-    ASSIGN_VALUE: 'Assign_Value',
-};
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found in loadAndExecuteRulesForEvent',
@@ -281,33 +278,47 @@ function getRulesEngineArguments(
     };
 }
 
-function findId(effect: ProgramRuleEffect) {
-    return effect.dataElementId || effect.programStageSectionId;
-}
-
-function buildEffectsHierarchy(effects: Array<ProgramRuleEffect>) {
+function buildEffectsHierarchy(effects: Array<OutputEffect>) {
     return effects.reduce((accEffectsObject, effect) => {
-        const actionType = effect.action;
+        const actionType = effect.type;
         accEffectsObject[actionType] = accEffectsObject[actionType] || {};
 
-        const id = findId(effect);
+        const id = effect.id;
         accEffectsObject[actionType][id] = accEffectsObject[actionType][id] || [];
         accEffectsObject[actionType][id].push(effect);
         return accEffectsObject;
     }, {});
 }
 
-function createAssignActions(assignEffects: ?Array<ProgramRuleEffect>) {
-    // updateFormValue
-    // updateEventValue
+function createAssignActions(assignEffects: ?{ [elementId: string]: Array<AssignOutputEffect> }, formId: string) {
     if (!assignEffects) {
         return [];
     }
 
-
+    return Object.keys(assignEffects).map((elementId: string) => {
+        const effectsForId = assignEffects[elementId];
+        const applicableEffectForId = effectsForId[effectsForId.length - 1];
+        return updateFieldFromRuleEffect(applicableEffectForId.value, applicableEffectForId.id, formId);
+    });
 }
 
-function createRulesEffectsActions(rulesEffects: ?Array<ProgramRuleEffect>, formId: string, eventId: string, dataEntryId: string) {
+function createHideFieldsResetActions(hideEffects: ?{ [elementId: string]: Array<HideOutputEffect> }, formId: string) {
+    if (!hideEffects) {
+        return [];
+    }
+
+    return Object.keys(hideEffects).map((elementId: string) => {
+        const effectsForId = hideEffects[elementId];
+        const applicableEffectForId = effectsForId[effectsForId.length - 1];
+        return updateFieldFromRuleEffect(null, applicableEffectForId.id, formId);
+    });
+}
+
+function createRulesEffectsActions(
+    rulesEffects: ?Array<OutputEffect>,
+    formId: string,
+    eventId: string,
+    dataEntryId: string) {
     if (!rulesEffects) {
         return [updateRulesEffects(null, formId, eventId, dataEntryId)];
     }
@@ -316,7 +327,8 @@ function createRulesEffectsActions(rulesEffects: ?Array<ProgramRuleEffect>, form
     const effectsHierarchy = buildEffectsHierarchy(rulesEffects);
     actions.push(updateRulesEffects(effectsHierarchy, formId, eventId, dataEntryId));
 
-    actions = [...actions, ...createAssignActions(effectsHierarchy[rulesEffectsTypes.ASSIGN_VALUE])];
+    actions = [...actions, ...createAssignActions(effectsHierarchy[effectActions.ASSIGN_VALUE], formId)];
+    actions = [...actions, ...createHideFieldsResetActions(effectsHierarchy[effectActions.HIDE_FIELD], formId)];
 
     return actions;
 }

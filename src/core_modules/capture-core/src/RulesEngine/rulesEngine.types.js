@@ -1,4 +1,23 @@
 // @flow
+import actions from './effectActions';
+
+export type OutputEffect = {
+    type: $Values<typeof actions>,
+    id: string,
+};
+
+export type AssignOutputEffect = OutputEffect & {
+    value: any,
+};
+
+export type HideOutputEffect = OutputEffect & {
+
+}
+
+export type MessageEffect = OutputEffect & {
+    message: string,
+}
+
 export type ProgramRuleEffect = {
     id: string,
     location: ?string,
@@ -157,17 +176,17 @@ export interface IConvertInputRulesValue {
     convertLetter(value: any): string;
     convertPhoneNumber(value: any): string;
     convertEmail(value: any): string;
-    convertBoolean(value: any): boolean;
-    convertTrueOnly(value: any): boolean;
+    convertBoolean(value: any): boolean | string;
+    convertTrueOnly(value: any): boolean | string;
     convertDate(value: any): string;
     convertDateTime(value: any): string;
     convertTime(value: any): string;
-    convertNumber(value: any): number;
-    convertInteger(value: any): number;
-    convertIntegerPositive(value: any): number;
-    convertIntegerNegative(value: any): number;
-    convertIntegerZeroOrPositive(value: any): number;
-    convertPercentage(value: any): number;
+    convertNumber(value: any): number | string;
+    convertInteger(value: any): number | string;
+    convertIntegerPositive(value: any): number | string;
+    convertIntegerNegative(value: any): number | string;
+    convertIntegerZeroOrPositive(value: any): number | string;
+    convertPercentage(value: any): number | string;
     convertUrl(value: any): string;
 }
 

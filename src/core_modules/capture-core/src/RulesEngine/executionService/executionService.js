@@ -5,10 +5,11 @@ import isDefined from 'd2-utilizr/lib/isDefined';
 import isNumber from 'd2-utilizr/lib/isNumber';
 import isObject from 'd2-utilizr/lib/isObject';
 import isArray from 'd2-utilizr/lib/isArray';
+import isString from 'd2-utilizr/lib/isString';
 
 import OptionSetHelper from '../OptionSetHelper/OptionSetHelper';
-
-//.service('TrackerRulesExecutionService', function(NotificationService, DHIS2EventFactory, RulesFactory, CalendarService, $rootScope, $q, log, $filter, orderByFilter){
+import trimQuotes from '../commonUtils/trimQuotes';
+import typeKeys from '../typeKeys.const';
 
 export default function getExecutionService(onTranslate, variableService, dateUtils) {
     var NUMBER_OF_EVENTS_IN_SCOPE = 10;
@@ -726,6 +727,40 @@ export default function getExecutionService(onTranslate, variableService, dateUt
         return orderedRules;
     }
 
+    const convertNumber = function(numberRepresentation) {
+        if (isString(numberRepresentation)) {
+            if (isNaN(numberRepresentation)) {
+                log.warn('rule execution service could not convert ' + numberRepresentation + ' to number');
+                return null;
+            }
+            return Number(numberRepresentation);
+        }
+        return numberRepresentation;
+    }
+
+    const ruleEffectDataConvertersByType = {
+        [typeKeys.BOOLEAN]: value => {
+            if (isString(value)) {
+                return value === 'true';  
+            }
+            return value;
+        },
+        [typeKeys.INTEGER]: convertNumber,
+        [typeKeys.INTEGER_NEGATIVE]: convertNumber,
+        [typeKeys.INTEGER_POSITIVE]: convertNumber,
+        [typeKeys.INTEGER_ZERO_OR_POSITIVE]: convertNumber,
+        [typeKeys.NUMBER]: convertNumber,
+        [typeKeys.TRUE_ONLY]: value => true, 
+    };
+
+    const convertRuleEffectDataToOutputBaseValue = function(data, valueType) {
+        if(!data && data !== 0 && data !== false) {
+            return null;
+        }
+
+        return ruleEffectDataConvertersByType[valueType] ? ruleEffectDataConvertersByType[valueType](data) : data;
+    }
+
     const getRuleEffectData = function(action, variablesHash, flag) {
         const actionData = action.data;
         let ruleEffectData = actionData; 
@@ -743,10 +778,36 @@ export default function getExecutionService(onTranslate, variableService, dateUt
             //In a scenario where the data contains a complex expression, evaluate the expression to compile(calculate) the result:
             ruleEffectData = runExpression(ruleEffectData, actionData, "action:" + action.id, flag, variablesHash);
         }
+
+        //trimQuotes if found
+        if (ruleEffectData && isString(ruleEffectData)) {
+            ruleEffectData = trimQuotes(ruleEffectData);
+        }
+
         return ruleEffectData;
     }
 
+    const buildAssignVariable = function(variableHash, data) {
+
+        const valueType = variableHash.variableType;
+        const baseValue = convertRuleEffectDataToOutputBaseValue(data, valueType);
+        let variableValue = baseValue;
+        if (isString(variableValue)) {
+            variableValue = "'" + variableValue + "'";
+        }
+
+        return {
+            variableValue:variableValue,
+            variableType:valueType,
+            hasValue:true,
+            variableEventDate:'',
+            variablePrefix:variableHash.variablePrefix ? variableHash.variablePrefix : '#',
+            allValues:[variableValue]
+        };
+    }
+
     const buildRuleEffect = function(action, variablesHash, flag) {
+
         const effect = {
             id: action.id,
             location: action.location,
@@ -759,40 +820,25 @@ export default function getExecutionService(onTranslate, variableService, dateUt
             data: action.data ? getRuleEffectData(action, variablesHash, flag) : action.data,
             ineffect: true,
         };
-        
-        if (effect.action === "ASSIGN") {
-            //from earlier evaluation, the data portion of the ruleeffect now contains the value of the variable to be assigned.
-            //the content portion of the ruleeffect defines the name for the variable, when the qualidisers are removed:
-            var variableToAssign = effect.content ?
-                effect.content.replace("#{","").replace("A{","").replace("}","") : null;
 
-            if (variableToAssign && !isDefined(variablesHash[variableToAssign])) {
+        if (effect.action === "ASSIGN" && effect.content) {
+            const variableToAssign = effect.content ?
+                effect.content.replace("#{","").replace("A{","").replace("}","") : null;
+            
+            const variableHash = variablesHash[variableToAssign];
+
+            if (!variableHash) {
                 //If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
                 log.warn("Variable " + variableToAssign + " was not defined.");
-            }
-
-            if (variablesHash[variableToAssign]){
-                var updatedValue = effect.data;
-
-                var valueType = determineValueType(updatedValue);
-
-                if($rootScope.ruleeffects[ruleEffectKey][action.id].dataElement) {
-                    updatedValue = variableService.getDataElementValueOrCodeForValue(variablesHash[variabletoassign].useCodeForOptionSet, updatedValue, $rootScope.ruleeffects[ruleEffectKey][action.id].dataElement.id, allDataElements, optionSets);
-                }
-                updatedValue = variableService.processValue(updatedValue, valueType);
-
-                variablesHash[variabletoassign] = {
-                    variableValue:updatedValue,
-                    variableType:valueType,
-                    hasValue:true,
-                    variableEventDate:'',
-                    variablePrefix:variablesHash[variabletoassign].variablePrefix ? variablesHash[variabletoassign].variablePrefix : '#',
-                    allValues:[updatedValue]
-                };
+            } else {
+                variablesHash[variableToAssign] = buildAssignVariable(variableHash, effect.data);
             }
         }
+
         return effect;              
     }
+
+
     /**
      * 
      * @param {*} programRulesContainer all program rules for the program
@@ -860,112 +906,6 @@ export default function getExecutionService(onTranslate, variableService, dateUt
         return effects;
     };
 
-    /*
-    var internalProcessEventGrid = function( eventGrid ){
-    	var events = [];
-    	if( eventGrid && eventGrid.rows && eventGrid.headers ){    		
-    		eventGrid.rows.forEach(row => {
-    			var ev = {};
-    			var i = 0;
-        		eventGrid.headers.forEach(h => {
-        			ev[h] = row[i];
-        			i++;
-        		});                            
-            });
-    	}
-    	return events;
-    };
-
-    var internalGetOrLoadScope = function(currentEvent,programStageId,orgUnitId) {        
-        if(crossEventRulesExist) {
-            //If crossEventRulesExist, we need to get a scope that contains more than the current event.
-            if(lastEventId !== currentEvent.event 
-                    || lastEventDate !== currentEvent.eventDate 
-                    || !eventScopeExceptCurrent) {
-                //The scope might need updates, as the parameters of the event has changed
-
-                lastEventId = currentEvent.event;
-                lastEventDate = currentEvent.eventDate;
-
-                
-                var pager = {pageSize: NUMBER_OF_EVENTS_IN_SCOPE};                
-                var ordering = {id:"eventDate",direction:"desc"};
-                
-                return DHIS2EventFactory.getByStage(orgUnitId, programStageId, null, pager, true, null, null, ordering).then(function(events) {                	
-                	var allEventsWithPossibleDuplicates = internalProcessEventGrid( events );                	
-                    var filterUrl = '&dueDateStart=' + dateUtils.formatFromUserToApi(lastEventDate) + '&dueDateEnd=' + dateUtils.formatFromUserToApi(lastEventDate); 
-                    return DHIS2EventFactory.getByStage(orgUnitId, programStageId, null, pager, true, null, filterUrl, ordering).then(function(events) {
-                    	allEventsWithPossibleDuplicates = allEventsWithPossibleDuplicates.concat( internalProcessEventGrid( events ) );
-                        eventScopeExceptCurrent = [];
-                        var eventIdDictionary = {};
-                        allEventsWithPossibleDuplicates.forEach(eventInScope => {
-                            if(currentEvent.event !== eventInScope.event 
-                                    && !eventIdDictionary[eventInScope.event]) {
-                                //Add event and update dictionary to avoid duplicates:                                
-                                eventIdDictionary[eventInScope.event] = true;
-                            }
-                        });
-
-                        //make a sorted list of all events to pass to rules execution service:
-                        var allEventsInScope = eventScopeExceptCurrent.concat([currentEvent]);
-                        allEventsInScope = orderByFilter(allEventsInScope, '-eventDate').reverse();
-                        var byStage = {};
-                        byStage[currentEvent.programStage] = allEventsInScope;
-                        return {all: allEventsInScope, byStage:byStage};
-                    });
-                });   
-            }
-            else
-            {
-                //make a sorted list of all events to pass to rules execution service:
-                var allEvents = eventScopeExceptCurrent.concat([currentEvent]);
-                allEvents = orderByFilter(allEvents, '-eventDate').reverse();
-                var byStage = {};
-                byStage[currentEvent.programStage] = allEvents;
-                return $q.when({all: allEvents, byStage:byStage});
-            }
-        }
-        else
-        {
-            //return a scope containing only the current event
-            var byStage = {};
-            byStage[currentEvent.programStage] = [currentEvent];
-            return $q.when({all: [currentEvent], byStage:byStage});
-        }
-    };
-    var internalGetOrLoadRules = function(programId) {
-        //If no rules is stored in memory, or this service is being called in the context of a different program, get the rules again:
-        if(allProgramRules === false || lastProgramId !== programId)
-        {
-            return RulesFactory.loadRules(programId).then(function(rules){                    
-                allProgramRules = rules;
-                lastProgramId = programId;
-
-                //Check if any of the rules is using any source type thar requires a bigger event scope
-                crossEventRulesExist = false;
-                if(rules.programVariables && rules.programVariables.length) {
-                    for(var i = 0; i < rules.programVariables.length; i ++) {
-                        if( rules.programVariables[i].programRuleVariableSourceType ===
-                                "DATAELEMENT_NEWEST_EVENT_PROGRAM" ||
-                            rules.programVariables[i].programRuleVariableSourceType ===
-                                "DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE" ||
-                            rules.programVariables[i].programRuleVariableSourceType ===
-                                "DATAELEMENT_PREVIOUS_EVENT")
-                        {
-                            crossEventRulesExist = true;
-                        }
-                    }
-                }
-
-                return rules;
-            });  
-        }
-        else
-        {
-            return $q.when(allProgramRules);
-        }
-    };
-    */
     return {
         executeRules: function(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, flags) {
             if (!programRulesContainer.programRules) {
@@ -973,165 +913,6 @@ export default function getExecutionService(onTranslate, variableService, dateUt
             }
             return internalExecuteRules(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, flags);
         },
-        /*
-        loadAndExecuteRulesScope: function(currentEvent, programId, programStageId, programStageDataElements, allTrackedEntityAttributes, optionSets, orgUnitId, flags){
-            return internalGetOrLoadRules(programId).then(function(rules) {
-                return internalGetOrLoadScope(currentEvent,programStageId,orgUnitId).then(function(scope) {
-                    return internalExecuteRules(rules, currentEvent, scope, programStageDataElements, allTrackedEntityAttributes, null, null, optionSets, flags);
-                });
-            });
-        },
-        */
-        processRuleEffectsForTrackedEntityAttributes: function(context, currentTei, teiOriginalValues, attributesById, optionSets ) {
-            var hiddenFields = {};
-            var assignedFields = {};
-            var hiddenSections = {};
-            var mandatoryFields = {};
-            var warningMessages = [];
-            
-            $rootScope.ruleeffects[context].forEach(effect => {
-                if (effect.ineffect) {
-                    if (effect.action === "HIDEFIELD" && effect.trackedEntityAttribute) {
-                        if (currentTei[effect.trackedEntityAttribute.id]) {
-                            //If a field is going to be hidden, but contains a value, we need to take action;
-                            if (effect.content) {
-                                //TODO: Alerts is going to be replaced with a proper display mecanism.
-                                alert(effect.content);
-                            }
-                            else {
-                                //TODO: Alerts is going to be replaced with a proper display mecanism.
-                                alert(attributesById[effect.trackedEntityAttribute.id].displayName + " - was blanked out and hidden by your last action");
-                            }
-
-                            //Blank out the value:
-                            currentTei[effect.trackedEntityAttribute.id] = "";
-                        }
-
-                        hiddenFields[effect.trackedEntityAttribute.id] = true;
-                    } else if (effect.action === "SHOWERROR" && effect.trackedEntityAttribute) {
-                        if(effect.ineffect) {
-                            var headerText =  onTranslate('validation_error');
-                            var bodyText = effect.content + (effect.data ? effect.data : "");
-
-                            NotificationService.showNotifcationDialog(headerText, bodyText);
-                            if( effect.trackedEntityAttribute ) {
-                                currentTei[effect.trackedEntityAttribute.id] = teiOriginalValues[effect.trackedEntityAttribute.id];
-                            }
-                        }
-                    } else if (effect.action === "SHOWWARNING" && effect.trackedEntityAttribute) {
-                        if(effect.ineffect) {
-                            var message = effect.content + (isDefined(effect.data) ? effect.data : "");
-                            
-                            if( effect.trackedEntityAttribute ) {
-                                warningMessages[effect.trackedEntityAttribute.id] = message;
-                            }
-                            else
-                            {
-                                warningMessages.push(message);
-                            }
-                        }
-                    }
-                    else if (effect.action === "ASSIGN" && effect.trackedEntityAttribute) {
-                        var processedValue = $filter('trimquotes')(effect.data);
-
-                        if(attributesById[effect.trackedEntityAttribute.id]
-                                && attributesById[effect.trackedEntityAttribute.id].optionSet) {
-                            processedValue = OptionSetHelper.getName(
-                                    optionSets[attributesById[effect.trackedEntityAttribute.id].optionSet.id].options, processedValue)
-                        }
-
-                        processedValue = processedValue === "true" ? true : processedValue;
-                        processedValue = processedValue === "false" ? false : processedValue;
-
-                        //For "ASSIGN" actions where we have a dataelement, we save the calculated value to the dataelement:
-                        currentTei[effect.trackedEntityAttribute.id] = processedValue;
-                        assignedFields[effect.trackedEntityAttribute.id] = true;
-                    }else if(effect.action === "SETMANDATORYFIELD" && effect.trackedEntityAttribute){
-                        mandatoryFields[effect.trackedEntityAttribute.id] = effect.ineffect;
-                    }
-                }
-            });
-            return {currentTei: currentTei, hiddenFields: hiddenFields, hiddenSections: hiddenSections, warningMessages: warningMessages, assignedFields: assignedFields, mandatoryFields: mandatoryFields};
-        },
-        processRuleEffectsForEvent: function(eventId, currentEvent, currentEventOriginalValues, prStDes, optionSets ) {
-            var hiddenFields = {};
-            var assignedFields = {};
-            var mandatoryFields = {};
-            var hiddenSections = {};
-            var warningMessages = [];
-            
-            $rootScope.ruleeffects[eventId].forEach(effect => {
-                if (effect.ineffect) {
-                    if (effect.action === "HIDEFIELD" && effect.dataElement) {
-                        if(currentEvent[effect.dataElement.id]) {
-                            //If a field is going to be hidden, but contains a value, we need to take action;
-                            if(effect.content) {
-                                //TODO: Alerts is going to be replaced with a proper display mecanism.
-                                alert(effect.content);
-                            }
-                            else {
-                                //TODO: Alerts is going to be replaced with a proper display mecanism.
-                                alert(prStDes[effect.dataElement.id].dataElement.displayFormName + " - was blanked out and hidden by your last action");
-                            }
-
-                        }
-                        currentEvent[effect.dataElement.id] = "";
-                        hiddenFields[effect.dataElement.id] = true;
-                    }
-                    else if(effect.action === "HIDESECTION") {
-                        if(effect.programStageSection){
-                            hiddenSections[effect.programStageSection] = effect.programStageSection;
-                        }
-                    }
-                    else if(effect.action === "SHOWERROR" && effect.dataElement.id){
-                        var headerTxt =  onTranslate('validation_error');
-                        var bodyTxt = effect.content + (effect.data ? effect.data : "");
-                        NotificationService.showNotifcationDialog(headerTxt, bodyTxt);
-
-                        currentEvent[effect.dataElement.id] = currentEventOriginalValues[effect.dataElement.id];
-                    }
-                    else if(effect.action === "SHOWWARNING"){
-                        warningMessages.push(effect.content + (effect.data ? effect.data : ""));
-                    }
-                    else if (effect.action === "ASSIGN" && effect.dataElement) {
-                        var processedValue = $filter('trimquotes')(effect.data);
-
-                        if(prStDes[effect.dataElement.id] 
-                                && prStDes[effect.dataElement.id].dataElement.optionSet) {
-                            processedValue = OptionSetHelper.getName(
-                                    optionSets[prStDes[effect.dataElement.id].dataElement.optionSet.id].options, processedValue)
-                        }
-
-                        processedValue = processedValue === "true" ? true : processedValue;
-                        processedValue = processedValue === "false" ? false : processedValue;
-
-                        currentEvent[effect.dataElement.id] = processedValue;
-                        assignedFields[effect.dataElement.id] = true;
-                    }
-                    else if (effect.action === "SETMANDATORYFIELD" && effect.dataElement) {
-                        mandatoryFields[effect.dataElement.id] = effect.ineffect;
-                    }
-                }
-            });
-        
-            return {currentEvent: currentEvent, hiddenFields: hiddenFields, hiddenSections: hiddenSections, warningMessages: warningMessages, assignedFields: assignedFields, mandatoryFields: mandatoryFields};
-        },
-        processRuleEffectAttribute: function(context, selectedTei, tei, currentEvent, currentEventOriginialValue, affectedEvent, attributesById, prStDes, hiddenFields, hiddenSections, warningMessages, assignedFields, optionSets, mandatoryFields){
-            //Function used from registration controller to process effects for the tracked entity instance and for the events in the same operation
-            var teiAttributesEffects = this.processRuleEffectsForTrackedEntityAttributes(context, selectedTei, tei, attributesById, optionSets );
-            teiAttributesEffects.selectedTei = teiAttributesEffects.currentTei;
-            
-            if(context === "SINGLE_EVENT" && currentEvent && prStDes ) {
-                var eventEffects = this.processRuleEffectsForEvent("SINGLE_EVENT", currentEvent, currentEventOriginialValue, prStDes, optionSets);
-                teiAttributesEffects.warningMessages =  { ...teiAttributesEffects.warningMessages, ...eventEffects.warningMessages };
-                teiAttributesEffects.hiddenFields[context] = eventEffects.hiddenFields;
-                teiAttributesEffects.hiddenSections[context] = eventEffects.hiddenSections;
-                teiAttributesEffects.assignedFields[context] = eventEffects.assignedFields;
-                teiAttributesEffects.mandatoryFields[context] = eventEffects.mandatoryFields;
-                teiAttributesEffects.currentEvent = eventEffects.currentEvent;
-            }
-            
-            return teiAttributesEffects;
-        }
+        convertDataToBaseOutputValue: convertRuleEffectDataToOutputBaseValue,
     };
 }

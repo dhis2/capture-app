@@ -23,11 +23,11 @@ class RulesValueConverter implements IConvertInputRulesValue {
         return value || '';
     }
 
-    convertBoolean(value: any): boolean {
+    convertBoolean(value: any): boolean | string {
         return (value || value === false) ? value : '';
     }
 
-    convertTrueOnly(value: any): boolean {
+    convertTrueOnly(value: any): boolean | string {
         return (value || value === false) ? value : '';
     }
 
@@ -43,27 +43,27 @@ class RulesValueConverter implements IConvertInputRulesValue {
         return value || '';
     }
 
-    convertNumber(value: any): number {
+    convertNumber(value: any): number | string {
         return (value || value === 0) ? value : '';
     }
 
-    convertInteger(value: any): number {
+    convertInteger(value: any): number | string {
         return (value || value === 0) ? value : '';
     }
 
-    convertIntegerPositive(value: any): number {
+    convertIntegerPositive(value: any): number | string {
         return (value || value === 0) ? value : '';
     }
 
-    convertIntegerNegative(value: any): number {
+    convertIntegerNegative(value: any): number | string {
         return (value || value === 0) ? value : '';
     }
 
-    convertIntegerZeroOrPositive(value: any): number {
+    convertIntegerZeroOrPositive(value: any): number | string {
         return (value || value === 0) ? value : '';
     }
 
-    convertPercentage(value: any): number {
+    convertPercentage(value: any): number | string {
         return (value || value === 0) ? value : '';
     }
 

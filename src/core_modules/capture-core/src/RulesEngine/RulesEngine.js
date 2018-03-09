@@ -3,8 +3,28 @@ import VariableService from './VariableService/VariableService';
 import ValueProcessor from './ValueProcessor/ValueProcessor';
 import getExecutionService from './executionService/executionService';
 import getDateUtils from './dateUtils/dateUtils';
+import getRulesEffectsProcessor from './rulesEffectsProcessor/rulesEffectsProcessor';
+import processTypes from './rulesEffectsProcessor/processTypes.const';
 
-import type { IConvertRulesValue, IMomentConverter, ProgramRulesContainer, EventData, EventsData, DataElements, OrgUnit, OptionSets, Translator, TrackedEntityAttributes, Entity, Enrollment, ProgramRuleEffect, EventsDataContainer } from './rulesEngine.types';
+import type {
+    OutputEffect,
+    IConvertInputRulesValue,
+    IConvertOutputRulesEffectsValue,
+    IMomentConverter,
+    ProgramRulesContainer,
+    EventData,
+    EventsData,
+    DataElements,
+    OrgUnit,
+    OptionSets,
+    Translator,
+    TrackedEntityAttributes,
+    Entity,
+    Enrollment,
+    ProgramRuleEffect,
+    EventsDataContainer,
+} from './rulesEngine.types';
+
 
 type ExecutionService = {
     executeRules: (
@@ -23,12 +43,14 @@ type ExecutionService = {
 
 export default class RulesEngine {
     executionService: ExecutionService;
+    onProcessRulesEffects: (effects: Array<ProgramRuleEffect>, processType: $Values<typeof processTypes>, dataElements: ?DataElements, trackedEntityAttributes?: ?TrackedEntityAttributes) => Array<OutputEffect>;
 
-    constructor(converterObject: IConvertRulesValue, momentConverter: IMomentConverter, onTranslate: Translator) {
-        const valueProcessor = new ValueProcessor(converterObject);
+    constructor(inputConverterObject: IConvertInputRulesValue, momentConverter: IMomentConverter, onTranslate: Translator, outputRulesConverterObject: IConvertOutputRulesEffectsValue) {
+        const valueProcessor = new ValueProcessor(inputConverterObject);
         const dateUtils = getDateUtils(momentConverter);
         const variableService = new VariableService(valueProcessor.processValue, dateUtils);
         this.executionService = getExecutionService(onTranslate, variableService, dateUtils);
+        this.onProcessRulesEffects = getRulesEffectsProcessor(this.executionService.convertDataToBaseOutputValue, outputRulesConverterObject);
     }
 
     executeRulesForSingleEvent(
@@ -37,7 +59,7 @@ export default class RulesEngine {
         eventsData: EventsData,
         dataElements: DataElements,
         selectedOrgUnit: OrgUnit,
-        optionSets: ?OptionSets) {
+        optionSets: ?OptionSets): Array<OutputEffect> {
         // create eventsByStage provisionally
         const eventsDataByStage = eventsData.reduce((accEventsByStage, event) => {
             const hasProgramStage = !!event.programStageId;
@@ -54,6 +76,7 @@ export default class RulesEngine {
         };
 
         const effects = this.executionService.executeRules(programRulesContainer, executingEvent, eventsContainer, dataElements, null, null, null, selectedOrgUnit, optionSets, { debug: true });
-        return effects;
+        const effectsForEvent = effects ? this.onProcessRulesEffects(effects, processTypes.EVENT, dataElements) : null;
+        return effectsForEvent;
     }
 }

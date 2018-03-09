@@ -4,31 +4,12 @@ import isString from 'd2-utilizr/lib/isString';
 // TODO: add some kind of errorcreator to d2 before moving
 import errorCreator from '../../utils/errorCreator';
 import typeKeys from '../typeKeys.const';
+import mapTypeToInterfaceFnName from '../typeToInterfaceFnName.const';
 import trimQuotes from '../commonUtils/trimQuotes';
 
 import type { IConvertRulesValue } from '../rulesEngine.types';
 
 export default class ValueProcessor {
-    static mapTypeToInterfaceFnName = {
-        [typeKeys.TEXT]: 'convertText',
-        [typeKeys.LONG_TEXT]: 'convertLongText',
-        [typeKeys.LETTER]: 'convertLetter',
-        [typeKeys.PHONE_NUMBER]: 'convertPhoneNumber',
-        [typeKeys.EMAIL]: 'convertEmail',
-        [typeKeys.BOOLEAN]: 'convertBoolean',
-        [typeKeys.TRUE_ONLY]: 'convertTrueOnly',
-        [typeKeys.DATE]: 'convertDate',
-        [typeKeys.DATETIME]: 'convertDateTime',
-        [typeKeys.TIME]: 'convertTime',
-        [typeKeys.NUMBER]: 'convertNumber',
-        [typeKeys.INTEGER]: 'convertInteger',
-        [typeKeys.INTEGER_POSITIVE]: 'convertIntegerPositive',
-        [typeKeys.INTEGER_NEGATIVE]: 'convertIntegerNegative',
-        [typeKeys.INTEGER_ZERO_OR_POSITIVE]: 'convertIntegerZeroOrPositive',
-        [typeKeys.PERCENTAGE]: 'convertPercentage',
-        [typeKeys.URL]: 'convertUrl',
-    };
-
     static errorMessages = {
         CONVERTER_NOT_FOUND: 'converter for type is missing',
     };
@@ -50,7 +31,7 @@ export default class ValueProcessor {
             value = trimQuotes(value);
         }
 
-        const convertFnName = ValueProcessor.mapTypeToInterfaceFnName[type];
+        const convertFnName = mapTypeToInterfaceFnName[type];
         if (!convertFnName) {
             log.warn(errorCreator(ValueProcessor.errorMessages.CONVERTER_NOT_FOUND)({ type }));
             return value;

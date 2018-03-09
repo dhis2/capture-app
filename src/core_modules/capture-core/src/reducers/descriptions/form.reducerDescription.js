@@ -4,6 +4,7 @@ import { actionTypes as fieldActionTypes } from '../../components/D2Form/D2Secti
 import { actionTypes as loaderActionTypes } from '../../components/D2Form/actions/form.actions';
 import { actionTypes as formBuilderActionTypes } from '../../components/D2Form/formBuilder.actions';
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
+import { actionTypes as rulesEffectsActionTypes } from '../../rulesEngineActionsCreator/rulesEngine.actions';
 
 export const formsValuesDesc = createReducerDescription({
     [loaderActionTypes.ADD_FORM_DATA]: (state, action) => {
@@ -25,6 +26,14 @@ export const formsValuesDesc = createReducerDescription({
         formValues[payload.elementId] = payload.value;
         return newState;
     },
+    [rulesEffectsActionTypes.UPDATE_FIELD_FROM_RULE_EFFECT]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const formValues = newState[payload.formId] = { ...newState[payload.formId] };
+        formValues[payload.elementId] = payload.value;
+        return newState;
+    },
+
 }, 'formsValues');
 
 export const formsSectionsFieldsUIDesc = createReducerDescription({
