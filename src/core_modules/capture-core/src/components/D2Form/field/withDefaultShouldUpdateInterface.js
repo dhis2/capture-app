@@ -5,7 +5,11 @@ type Props = {
     value: any,
     touched?: ?boolean,
     validationAttempted?: ?boolean,
-    errorText?: ?string,
+    errorMessage?: ?string,
+    rulesErrorMessage?: ?string,
+    rulesWarningMessage?: ?string,
+    rulesErrorMessageOnComplete?: ?string,
+    rulesWarningMessageOnComplete?: ?string,
 };
 
 export default () =>

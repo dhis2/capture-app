@@ -8,7 +8,6 @@ import isArray from 'd2-utilizr/src/isArray';
 import Option from './Option';
 import { viewTypes } from './optionSet.const';
 import errorCreator from '../../utils/errorCreator';
-import elementTypes from '../DataElement/elementTypes';
 import DataElement from '../DataElement/DataElement';
 
 import type { ConvertFn } from '../DataElement/DataElement';
@@ -26,10 +25,17 @@ export default class OptionSet {
     _viewType: ?$Values<typeof viewTypes>;
     _dataElement: ?DataElement;
 
-    constructor(id?: ?string, options?: ?Array<Option>, dataElement?: ?DataElement, viewType?: ?string, onConvert?: ?ConvertFn) {
+    constructor(
+        id?: ?string,
+        options?: ?Array<Option>,
+        dataElement?: ?DataElement,
+        viewType?: ?string,
+        onConvert?: ?ConvertFn) {
         this._options = !options ? [] : options.reduce((accOptions: Array<Option>, currentOption: Option) => {
             if (currentOption.value || currentOption.value === false || currentOption.value === 0) {
-                currentOption.value =  onConvert ? onConvert(dataElement.type, currentOption.value) : currentOption.value;
+                currentOption.value = onConvert && dataElement ?
+                    onConvert(dataElement.type, currentOption.value, dataElement) :
+                    currentOption.value;
                 accOptions.push(currentOption);
             } else {
                 this._emptyText = currentOption.text;
@@ -118,7 +124,7 @@ export default class OptionSet {
         });
     }
 
-    getOptions(values: Array<Values>): Array<Option> {
+    getOptions(values: Array<Value>): Array<Option> {
         return values.reduce((accOptions: Array<Option>, value: Value) => {
             const option = this.options.find(o => o.value === value);
             if (option) {
@@ -149,13 +155,18 @@ export default class OptionSet {
 
     resolveTextsAsString(values: Value | Array<Value>): ?string {
         if (isArray(values)) {
+            // $FlowSuppress
             return this.getOptionsTextAsString(values);
         }
+        // $FlowSuppress
         return this.getOptionText(values);
     }
 
-    resolveViewElement(values: Value | Array<Value>, onGetStyle?: (viewType: ?$Values<typeof viewTypes>) => ?Object): ?React$Element<any> | any {
+    resolveViewElement(
+        values: Value | Array<Value>,
+        onGetStyle?: (viewType: ?$Values<typeof viewTypes>) => ?Object): ?React$Element<any> | any {
         if (isArray(values)) {
+            // $FlowSuppress
             return values.reduce((accElements, value: Value) => {
                 const option = this.options.find(o => o.value === value);
                 if (!option) {
@@ -175,10 +186,14 @@ export default class OptionSet {
                 return accElements;
             }, []);
         }
+
+        // $FlowSuppress
         return this.getSingleViewElementFromValue(values, onGetStyle);
     }
 
-    getSingleViewElementFromValue(value: Value, onGetStyle?: (viewType: ?$Values<typeof viewTypes>) => ?Object): ?React$Element<any> | any {
+    getSingleViewElementFromValue(
+        value: Value,
+        onGetStyle?: (viewType: ?$Values<typeof viewTypes>) => ?Object): ?React$Element<any> | any {
         const option = this._options.find(o => o.value === value);
         if (!option) {
             log.warn(
@@ -208,7 +223,7 @@ export default class OptionSet {
                         {icon}
                     </FontIcon>
                 );
-            } else if (this._viewType === viewTypes.icons) {
+            } else if (this._viewType === viewTypes.icon) {
                 element = (
                     <FontIcon
                         title={option.description}

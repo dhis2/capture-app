@@ -10,4 +10,3 @@ src/core_modules/capture-core/flow/
 suppress_comment= \\(.\\|\n\\)*\\$FlowSuppress
 module.system.node.resolve_dirname=core_modules
 module.name_mapper='^capture-core' ->'<PROJECT_ROOT>/src/core_modules/capture-core/src'
-unsafe.enable_getters_and_setters=true

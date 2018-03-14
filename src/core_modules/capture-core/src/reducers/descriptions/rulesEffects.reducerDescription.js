@@ -27,6 +27,38 @@ export const eventsRulesEffectsHiddenFieldsDesc = createReducerDescription({
     },
 }, 'eventsRulesEffectsHiddenFields');
 
+export const eventsRulesEffectsCompulsoryFieldsDesc = createReducerDescription({
+    [actionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
+        const newState = { ...state };
+
+        const compulsoryEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.MAKE_COMPULSORY];
+        newState[action.payload.formId] = compulsoryEffects ?
+            Object.keys(compulsoryEffects).reduce((accState, key) => {
+                accState[key] = true;
+                return accState;
+            }, {}) :
+            null;
+
+        return newState;
+    },
+}, 'eventsRulesEffectsCompulsoryFields');
+
+export const eventsRulesEffectsHiddenSectionsDesc = createReducerDescription({
+    [actionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
+        const newState = { ...state };
+
+        const hideEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.HIDE_SECTION];
+        newState[action.payload.formId] = hideEffects ?
+            Object.keys(hideEffects).reduce((accState, key) => {
+                accState[key] = true;
+                return accState;
+            }, {}) :
+            null;
+
+        return newState;
+    },
+}, 'eventsRulesEffectsHiddenSections');
+
 const mapMessageEffectTypeToStateKey = {
     [effectActions.SHOW_ERROR]: messageStateKeys.ERROR,
     [effectActions.SHOW_WARNING]: messageStateKeys.WARNING,

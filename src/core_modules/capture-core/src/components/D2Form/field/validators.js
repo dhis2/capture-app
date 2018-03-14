@@ -80,7 +80,11 @@ const isValidPercentage = (value: any) => {
 const validatorsForTypes = {
     [elementTypes.NUMBER]: () => ({
         validator: wordToValidatorMap.get(wordValidatorKeys.NUMBER),
-        message: getTranslation(wordToValidatorMap.get(wordValidatorKeys.NUMBER).message, formatterOptions.CAPITALIZE_FIRST_LETTER),
+        message:
+            getTranslation(
+                wordToValidatorMap.get(wordValidatorKeys.NUMBER).message,
+                formatterOptions.CAPITALIZE_FIRST_LETTER,
+            ),
     }),
     [elementTypes.INTEGER]: () => ({
         validator: isInteger,
@@ -117,14 +121,19 @@ const validatorsForTypes = {
 };
 
 function buildTypeValidators(metaData: MetaDataElement): Array<ValidatorContainer> {
+    // $FlowSuppress
     let validatorContainersForType = validatorsForTypes[metaData.type] && validatorsForTypes[metaData.type](metaData);
 
     if (!validatorContainersForType) {
         return [];
     }
 
-    validatorContainersForType = isArray(validatorContainersForType) ? validatorContainersForType : [validatorContainersForType];
+    validatorContainersForType = isArray(validatorContainersForType) ?
+        validatorContainersForType :
+        [validatorContainersForType]
+    ;
 
+    // $FlowSuppress
     validatorContainersForType = validatorContainersForType.map(validatorContainer => ({
         ...validatorContainer,
         validator: (value: any) => {
@@ -144,14 +153,22 @@ function buildCompulsoryValidator(metaData: MetaDataElement): Array<ValidatorCon
     return metaData.compulsory ? [
         {
             validator: isCompulsoryRequirementMetWrapper,
-            message: getTranslation(wordToValidatorMap.get(wordValidatorKeys.COMPULSORY).message, formatterOptions.CAPITALIZE_FIRST_LETTER),
+            message:
+                getTranslation(
+                    wordToValidatorMap.get(
+                        wordValidatorKeys.COMPULSORY,
+                    ).message,
+                    formatterOptions.CAPITALIZE_FIRST_LETTER,
+                ),
         },
     ] :
         [];
 }
 
 function compose(validatorBuilders: Array<ValidatorBuilder>, metaData: MetaDataElement) {
-    const validators = validatorBuilders.reduce((accValidators: Array<ValidatorContainer>, builder: ValidatorBuilder) => [...accValidators, ...builder(metaData)], []);
+    const validators =
+        validatorBuilders.reduce((accValidators: Array<ValidatorContainer>, builder: ValidatorBuilder) =>
+            [...accValidators, ...builder(metaData)], []);
     return validators;
 }
 

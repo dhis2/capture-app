@@ -9,6 +9,7 @@ import MetaDataSection from '../../metaData/RenderFoundation/Section';
 
 type Props = {
     sectionMetaData: MetaDataSection,
+    isHidden: boolean,
 };
 
 class D2Section extends Component<Props> {
@@ -33,7 +34,11 @@ class D2Section extends Component<Props> {
     }
 
     render() {
-        const { sectionMetaData, onUpdateSectionStatus, ...passOnProps } = this.props;
+        const { sectionMetaData, onUpdateSectionStatus, isHidden, ...passOnProps } = this.props;
+
+        if (isHidden) {
+            return null;
+        }
 
         if (!sectionMetaData.showContainer) {
             return (

@@ -11,8 +11,6 @@ import OptionSet from '../OptionSet/OptionSet';
 import errorCreator from '../../utils/errorCreator';
 import elementTypes from './elementTypes';
 
-export type ConvertFn = (type: $Values<typeof elementTypes>, value: any) => any;
-
 export default class DataElement {
     static errorMessages = {
         TYPE_NOT_FOUND: 'type not supported',
@@ -145,3 +143,5 @@ export default class DataElement {
             : onConvert(this.type, rawValue, this);
     }
 }
+
+export type ConvertFn = (type: $Values<typeof elementTypes>, value: any, element: ?DataElement) => any;

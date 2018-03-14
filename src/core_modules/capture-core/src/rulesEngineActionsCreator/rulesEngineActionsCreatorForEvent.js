@@ -153,6 +153,7 @@ function getCurrentEventValues(
     state: ReduxState,
     program: Program,
     event: Event,
+    foundation: RenderFoundation,
     formId: string,
     updatedEventField?: ?FieldData) {
     const currentFormData = ensureState(state.formsValues)[formId] || {};
@@ -164,7 +165,7 @@ function getCurrentEventValues(
 
     const validFormValues = getValidFormValues(updatedCurrentFormData, updatedFieldValidations);
 
-    const clientData = convertFormValuesToClientValues(validFormValues, program.getStage(event.programStageId));
+    const clientData = convertFormValuesToClientValues(validFormValues, foundation);
     return clientData;
 }
 
@@ -216,15 +217,15 @@ function getCurrentEventMainData(state: ReduxState, event: Event, dataEntryId: s
 // Also convert other open form data?
 function getAllEventsValues(state: ReduxState, currentEventValues: { [key: string]: any}, event: Event) {
     const eventsValues = ensureState(state.eventsValues);
-    eventsValues[event.eventId] = currentEventValues;
-    return eventsValues;
+    const eventsValuesWithUpdatedCurrent = { ...eventsValues, [event.eventId]: currentEventValues };
+    return eventsValuesWithUpdatedCurrent;
 }
 
 // Also convert other open form data?
 function getAllEventsMainData(state: ReduxState, currentEventMainData: { [key: string]: any}, event: Event) {
     const events = ensureState(state.events);
-    events[event.eventId] = currentEventMainData;
-    return events;
+    const eventsWithUpdatedCurrent = { ...events, [event.eventId]: currentEventMainData };
+    return eventsWithUpdatedCurrent;
 }
 
 function createEventsArray(allEventsValues: { [eventId: string]: Object }, allEventsMainData: { [eventId: string]: Object }) {
@@ -241,6 +242,7 @@ function getRulesEngineArguments(
     program: Program,
     state: ReduxState,
     event: Event,
+    foundation: RenderFoundation,
     formId: string,
     dataEntryId: string,
     updatedFieldData?: ?FieldData,
@@ -251,7 +253,7 @@ function getRulesEngineArguments(
     let currentEventMainData;
     let currentEventData;
     if (!isLoad) {
-        currentEventValues = getCurrentEventValues(state, program, event, formId, updatedFieldData);
+        currentEventValues = getCurrentEventValues(state, program, event, foundation, formId, updatedFieldData);
         currentEventMainData = getCurrentEventMainData(state, event, dataEntryId);
         currentEventData = { ...currentEventValues, ...currentEventMainData };
     } else {
@@ -302,33 +304,124 @@ function createAssignActions(assignEffects: ?{ [elementId: string]: Array<Assign
     });
 }
 
+function filterFieldsHideEffects(
+    hideEffects: ?{ [elementId: string]: Array<HideOutputEffect> },
+    makeCompulsoryEffects: { [elementId: string]: Array<OutputEffect>} = {},
+    foundation: RenderFoundation) {
+    if (!hideEffects) {
+        return hideEffects;
+    }
+
+    const elementIds = Object.keys(hideEffects);
+    return elementIds
+        .filter((elementId) => {
+            const element = foundation.getElement(elementId);
+            const dataCompulsory = element && element.compulsory;
+            const compulsoryEffect = makeCompulsoryEffects[elementId];
+            return !(dataCompulsory || compulsoryEffect);
+        })
+        .reduce((accFilteredEffects, elementId) => {
+            accFilteredEffects[elementId] = hideEffects[elementId];
+            return accFilteredEffects;
+        }, {});
+}
+
+function filterSectionsHideEffects(
+    hideEffects: ?{ [elementId: string]: Array<HideOutputEffect> },
+    makeCompulsoryEffects: { [elementId: string]: Array<OutputEffect>} = {},
+    foundation: RenderFoundation) {
+    if (!hideEffects) {
+        return hideEffects;
+    }
+
+    const sectionIds = Object.keys(hideEffects);
+    return sectionIds
+        .filter((sectionId) => {
+            const section = foundation.getSection(sectionId);
+            if (!section) {
+                return false;
+            }
+
+            const compulsoryFieldFound = Array.from(section.elements.entries())
+                .map(entry => entry[1])
+                .some((element) => {
+                    const dataCompulsory = element.compulsory;
+                    const compulsoryEffect = makeCompulsoryEffects[element.id];
+                    return dataCompulsory || compulsoryEffect;
+                });
+
+            return !compulsoryFieldFound;
+        })
+        .reduce((accFilteredEffects, sectionId) => {
+            accFilteredEffects[sectionId] = hideEffects[sectionId];
+            return accFilteredEffects;
+        }, {});
+}
+
 function createHideFieldsResetActions(hideEffects: ?{ [elementId: string]: Array<HideOutputEffect> }, formId: string) {
     if (!hideEffects) {
         return [];
     }
 
-    return Object.keys(hideEffects).map((elementId: string) => {
-        const effectsForId = hideEffects[elementId];
-        const applicableEffectForId = effectsForId[effectsForId.length - 1];
-        return updateFieldFromRuleEffect(null, applicableEffectForId.id, formId);
-    });
+    return Object.keys(hideEffects)
+        .map((elementId: string) => updateFieldFromRuleEffect(null, elementId, formId));
+}
+
+function createHideSectionsResetActions(
+    hideEffects: ?{ [sectionId: string]: Array<HideOutputEffect> },
+    foundation: RenderFoundation,
+    formId: string) {
+    if (!hideEffects) {
+        return [];
+    }
+
+    return Object.keys(hideEffects)
+        .map((sectionId: string) => {
+            const section = foundation.getSection(sectionId);
+
+            if (!section) {
+                return null;
+            }
+
+            return Array.from(section.elements.entries())
+                .map(entry => entry[1])
+                .map(element => updateFieldFromRuleEffect(null, element.id, formId));
+        })
+        .filter(action => action)
+        .reduce((accActions, sectionActions) => [...accActions, ...sectionActions], []);
 }
 
 function createRulesEffectsActions(
     rulesEffects: ?Array<OutputEffect>,
     formId: string,
     eventId: string,
-    dataEntryId: string) {
+    dataEntryId: string,
+    foundation: RenderFoundation) {
     if (!rulesEffects) {
         return [updateRulesEffects(null, formId, eventId, dataEntryId)];
     }
 
     let actions = [];
     const effectsHierarchy = buildEffectsHierarchy(rulesEffects);
+
+    effectsHierarchy[effectActions.HIDE_FIELD] =
+        filterFieldsHideEffects(
+            effectsHierarchy[effectActions.HIDE_FIELD],
+            effectsHierarchy[effectActions.MAKE_COMPULSORY],
+            foundation,
+        );
+    effectsHierarchy[effectActions.HIDE_SECTION] =
+        filterSectionsHideEffects(
+            effectsHierarchy[effectActions.HIDE_SECTION],
+            effectsHierarchy[effectActions.MAKE_COMPULSORY],
+            foundation,
+        );
+
     actions.push(updateRulesEffects(effectsHierarchy, formId, eventId, dataEntryId));
 
     actions = [...actions, ...createAssignActions(effectsHierarchy[effectActions.ASSIGN_VALUE], formId)];
     actions = [...actions, ...createHideFieldsResetActions(effectsHierarchy[effectActions.HIDE_FIELD], formId)];
+    actions = [...actions, ...createHideSectionsResetActions(effectsHierarchy[effectActions.HIDE_SECTION], foundation, formId)];
 
     return actions;
 }
@@ -360,9 +453,11 @@ function getRulesActions(
         return [updateRulesEffects(null, formId, eventId, dataEntryId)];
     }
 
-    const { dataElementsInProgram, currentEventData, allEventsData, optionSets, orgUnit } = getRulesEngineArguments(program, state, event, formId, dataEntryId, updatedFieldData, isLoad);
+    const foundation = program.getStage(event.programStageId);
+
+    const { dataElementsInProgram, currentEventData, allEventsData, optionSets, orgUnit } = getRulesEngineArguments(program, state, event, foundation, formId, dataEntryId, updatedFieldData, isLoad);
     const rulesEffects = runRulesEngine(programRulesContainer, dataElementsInProgram, currentEventData, allEventsData, orgUnit, optionSets);
-    return createRulesEffectsActions(rulesEffects, formId, eventId, dataEntryId);
+    return createRulesEffectsActions(rulesEffects, formId, eventId, dataEntryId, foundation);
 }
 
 export function getRulesActionsOnLoad(

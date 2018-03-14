@@ -18,17 +18,13 @@ import legacyTheme from '../../styles/uiThemeLegacy';
 import theme from '../../styles/uiTheme';
 
 const D2AppContents = withD2InContext()(AppContents);
-const LoadD2AppContents = withStateBoundLoadingIndicator((state: State) => state.app.ready)(D2AppContents);
+const LoadD2AppContents = withStateBoundLoadingIndicator((state: ReduxState) => state.app.ready)(D2AppContents);
 
 type Props = {
     store: TrackerStore
 };
 
 class App extends Component<Props> {
-    constructor(props: Props) {
-        super(props);
-    }
-
     renderContents() {
         return (
             <Provider store={this.props.store}>

@@ -27,6 +27,22 @@ export const makeGetSectionValues = () => createDeepEqualSelector(
     sectionValues => sectionValues,
 );
 
+const sectionIsCompulsorySelector = (state, props) => {
+    const metaData = props.fieldsMetaData;
+    const compulsoryFields = state.eventsRulesEffectsCompulsoryFields[props.formId] || {};
+    const sectionCompulsoryFields = Array.from(metaData.entries())
+        .map(entry => entry[1])
+        .reduce((accCompulsoryFields, metaDataElement) => {
+            accCompulsoryFields[metaDataElement.id] = compulsoryFields[metaDataElement.id];
+            return accCompulsoryFields;
+        }, {});
+    return sectionCompulsoryFields;
+};
+export const makeGetCompulsory = () => createDeepEqualSelector(
+    sectionIsCompulsorySelector,
+    sectionCompulsoryFields => sectionCompulsoryFields,
+);
+
 const sectionHiddenFieldsSelector = (state, props) => {
     const metaData = props.fieldsMetaData;
     const hiddenFields = state.eventsRulesEffectsHiddenFields[props.formId] || {};

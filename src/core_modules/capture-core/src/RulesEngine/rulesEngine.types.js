@@ -1,5 +1,5 @@
 // @flow
-import actions from './effectActions';
+import actions from './effectActions.const';
 
 export type OutputEffect = {
     type: $Values<typeof actions>,
@@ -12,11 +12,15 @@ export type AssignOutputEffect = OutputEffect & {
 
 export type HideOutputEffect = OutputEffect & {
 
-}
+};
 
 export type MessageEffect = OutputEffect & {
     message: string,
-}
+};
+
+export type CompulsoryEffect = OutputEffect & {
+
+};
 
 export type ProgramRuleEffect = {
     id: string,
@@ -209,8 +213,3 @@ export interface IConvertOutputRulesEffectsValue {
     convertPercentage(value: number): any;
     convertUrl(value: string): any;
 }
-
-
-
-
-

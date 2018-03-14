@@ -7,7 +7,7 @@ import typeKeys from '../typeKeys.const';
 import mapTypeToInterfaceFnName from '../typeToInterfaceFnName.const';
 import trimQuotes from '../commonUtils/trimQuotes';
 
-import type { IConvertRulesValue } from '../rulesEngine.types';
+import type { IConvertInputRulesValue } from '../rulesEngine.types';
 
 export default class ValueProcessor {
     static errorMessages = {
@@ -18,10 +18,10 @@ export default class ValueProcessor {
         return isString(value) ? `"${value}"` : value;
     }
 
-    converterObject: IConvertRulesValue;
+    converterObject: IConvertInputRulesValue;
     processValue: (value: any, type: $Values<typeof typeKeys>) => any;
 
-    constructor(converterObject: IConvertRulesValue) {
+    constructor(converterObject: IConvertInputRulesValue) {
         this.converterObject = converterObject;
         this.processValue = this.processValue.bind(this);
     }

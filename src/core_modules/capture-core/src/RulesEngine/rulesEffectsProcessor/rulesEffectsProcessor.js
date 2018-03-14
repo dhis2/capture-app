@@ -11,6 +11,7 @@ import type {
     AssignOutputEffect,
     HideOutputEffect,
     MessageEffect,
+    CompulsoryEffect,
 } from '../rulesEngine.types';
 
 const mapProcessTypeToIdentifierName = {
@@ -28,7 +29,11 @@ export default function getRulesEffectsProcessor(
         let outputValue;
         if (baseValue || baseValue === 0 || baseValue === false) {
             const converterName = mapTypeToInterfaceFnName[valueType];
-            outputValue = rulesEffectsValueConverters[converterName] ? rulesEffectsValueConverters[converterName](baseValue) : baseValue;
+            // $FlowSuppress
+            outputValue = rulesEffectsValueConverters[converterName] ?
+                // $FlowSuppress
+                rulesEffectsValueConverters[converterName](baseValue) :
+                baseValue;
         } else {
             outputValue = baseValue;
         }
@@ -45,9 +50,12 @@ export default function getRulesEffectsProcessor(
             return null;
         }
 
-        // $FlowSuppress
-        const element = processType === processTypes.EVENT ? dataElements[effect[processIdName]] : trackedEntityAttributes[effect[processIdName]];
-        
+        const element = processType === processTypes.EVENT ?
+            // $FlowSuppress
+            dataElements[effect[processIdName]] :
+            // $FlowSuppress
+            trackedEntityAttributes[effect[processIdName]];
+
         const valueType = element.valueType;
         const baseValue = onConvertDataToBaseOutputValue(effect.data, valueType);
         const outputValue = convertBaseValueToOutputValue(baseValue, valueType);
@@ -118,7 +126,10 @@ export default function getRulesEffectsProcessor(
         };
     }
 
-    function processHideSection(effect: ProgramRuleEffect, processIdName: string, processType: $Values<typeof processTypes>): ?HideOutputEffect {
+    function processHideSection(
+        effect: ProgramRuleEffect,
+        processIdName: string,
+        processType: $Values<typeof processTypes>): ?HideOutputEffect {
         if (processType !== processTypes.EVENT || !effect.programStageSectionId) {
             return null;
         }
@@ -126,6 +137,17 @@ export default function getRulesEffectsProcessor(
         return {
             type: actions.HIDE_SECTION,
             id: effect.programStageSectionId,
+        };
+    }
+
+    function processMakeCompulsory(effect: ProgramRuleEffect, processIdName: string): ?CompulsoryEffect {
+        if (!effect[processIdName]) {
+            return null;
+        }
+
+        return {
+            type: actions.MAKE_COMPULSORY,
+            id: effect[processIdName],
         };
     }
 
@@ -137,6 +159,7 @@ export default function getRulesEffectsProcessor(
         [actions.SHOW_ERROR_ONCOMPLETE]: processShowErrorOnComplete,
         [actions.SHOW_WARNING_ONCOMPLETE]: processShowWarningOnComplete,
         [actions.HIDE_SECTION]: processHideSection,
+        [actions.MAKE_COMPULSORY]: processMakeCompulsory,
     };
 
     function processRulesEffects(
@@ -149,7 +172,14 @@ export default function getRulesEffectsProcessor(
         return effects
             .map((effect) => {
                 const action = effect.action;
-                return mapActionsToProcessor[action] ? mapActionsToProcessor[action](effect, processIdName, processType, dataElements, trackedEntityAttributes) : null;
+                return mapActionsToProcessor[action] ?
+                    mapActionsToProcessor[action](
+                        effect,
+                        processIdName,
+                        processType,
+                        dataElements,
+                        trackedEntityAttributes,
+                    ) : null;
             })
             .filter(effect => effect);
     }

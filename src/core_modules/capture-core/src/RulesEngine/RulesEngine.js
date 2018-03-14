@@ -39,18 +39,31 @@ type ExecutionService = {
         optionSets: ?OptionSets,
         flags: Object,
     ) => ?Array<ProgramRuleEffect>,
+    convertDataToBaseOutputValue: (data: any, valueType: string) => any,
 };
 
 export default class RulesEngine {
     executionService: ExecutionService;
-    onProcessRulesEffects: (effects: Array<ProgramRuleEffect>, processType: $Values<typeof processTypes>, dataElements: ?DataElements, trackedEntityAttributes?: ?TrackedEntityAttributes) => Array<OutputEffect>;
+    onProcessRulesEffects: (
+        effects: Array<ProgramRuleEffect>,
+        processType: $Values<typeof processTypes>,
+        dataElements: ?DataElements,
+        trackedEntityAttributes?: ?TrackedEntityAttributes) => ?Array<OutputEffect>;
 
-    constructor(inputConverterObject: IConvertInputRulesValue, momentConverter: IMomentConverter, onTranslate: Translator, outputRulesConverterObject: IConvertOutputRulesEffectsValue) {
+    constructor(
+        inputConverterObject: IConvertInputRulesValue,
+        momentConverter: IMomentConverter,
+        onTranslate: Translator,
+        outputRulesConverterObject: IConvertOutputRulesEffectsValue) {
         const valueProcessor = new ValueProcessor(inputConverterObject);
         const dateUtils = getDateUtils(momentConverter);
         const variableService = new VariableService(valueProcessor.processValue, dateUtils);
         this.executionService = getExecutionService(onTranslate, variableService, dateUtils);
-        this.onProcessRulesEffects = getRulesEffectsProcessor(this.executionService.convertDataToBaseOutputValue, outputRulesConverterObject);
+        // $FlowSuppress filter result not recognized
+        this.onProcessRulesEffects = getRulesEffectsProcessor(
+            this.executionService.convertDataToBaseOutputValue,
+            outputRulesConverterObject,
+        );
     }
 
     executeRulesForSingleEvent(
@@ -59,7 +72,7 @@ export default class RulesEngine {
         eventsData: EventsData,
         dataElements: DataElements,
         selectedOrgUnit: OrgUnit,
-        optionSets: ?OptionSets): Array<OutputEffect> {
+        optionSets: ?OptionSets): ?Array<OutputEffect> {
         // create eventsByStage provisionally
         const eventsDataByStage = eventsData.reduce((accEventsByStage, event) => {
             const hasProgramStage = !!event.programStageId;
@@ -75,7 +88,18 @@ export default class RulesEngine {
             byStage: eventsDataByStage,
         };
 
-        const effects = this.executionService.executeRules(programRulesContainer, executingEvent, eventsContainer, dataElements, null, null, null, selectedOrgUnit, optionSets, { debug: true });
+        const effects = this.executionService.executeRules(
+            programRulesContainer,
+            executingEvent,
+            eventsContainer,
+            dataElements,
+            null,
+            null,
+            null,
+            selectedOrgUnit,
+            optionSets,
+            { debug: true },
+        );
         const effectsForEvent = effects ? this.onProcessRulesEffects(effects, processTypes.EVENT, dataElements) : null;
         return effectsForEvent;
     }
