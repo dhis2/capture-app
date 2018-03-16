@@ -35,14 +35,6 @@ class D2TrueFalse extends Component<Props> {
         this.optionSet = D2TrueFalse.getOptions();
     }
 
-    /*
-    goto() {
-        if (this.fieldInstance && this.fieldInstance.goto) {
-            this.fieldInstance.goto();
-        }
-    }
-    */
-
     render() {
         const { ...other } = this.props;
 

@@ -119,7 +119,7 @@ const fieldForTypes = {
     [elementTypes.TRUE_ONLY]: (metaData: MetaDataElement) => {
         const props = createComponentProps({
             label: metaData.formName,
-            nullable: !metaData.compulsory,
+            metaCompulsory: metaData.compulsory,
         });
 
         return createFieldProps({

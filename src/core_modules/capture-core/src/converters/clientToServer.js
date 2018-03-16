@@ -8,8 +8,11 @@ import stringifyNumber from './common/stringifyNumber';
 function convertDate(rawValue: string): string {
     const editedDate = rawValue;
     const momentDateLocal = moment(editedDate);
+    return momentDateLocal.format('YYYY-MM-DD');
+    /*
     const momentDateUtc = adjustLocalMomentDateToUtc(momentDateLocal);
     return momentDateUtc.toISOString();
+    */
 }
 
 const valueConvertersForType = {

@@ -19,12 +19,16 @@ export const eventsDesc = createReducerDescription({
         const newState = { ...state, ...newEventsById };
         return newState;
     },
+    [dataEntryActionTypes.SAVE_EVENT]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        newState[payload.eventId] = payload.event;
+        return newState;
+    },
     [dataEntryActionTypes.COMPLETE_EVENT]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
-        newState[payload.eventId] = { ...newState[payload.eventId] };
-        const event = newState[payload.eventId];
-        event.status = payload.event.status;
+        newState[payload.eventId] = payload.event;
         return newState;
     },
 }, 'events', {}, optimistic);

@@ -33,7 +33,7 @@ const valueConvertersForType = {
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: parseNumber,
     [elementTypes.INTEGER_NEGATIVE]: parseNumber,
     [elementTypes.DATE]: (d2Value: string) => moment(d2Value, 'YYYY-MM-DD').toISOString(),
-    [elementTypes.DATETIME]: (d2Value: string) => moment(d2Value, 'YYYY-MM-DD HH:mm').toISOString(),
+    [elementTypes.DATETIME]: (d2Value: string) => moment(d2Value).toISOString(),
     [elementTypes.TRUE_ONLY]: (d2Value: string) => ((d2Value === 'true') || null),
     [elementTypes.BOOLEAN]: (d2Value: string) => (d2Value === 'true'),
 };

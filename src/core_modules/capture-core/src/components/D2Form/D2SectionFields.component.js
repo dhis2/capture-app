@@ -71,9 +71,10 @@ class D2SectionFields extends Component<Props> {
     rulesIsValid() {
         const rulesMessages = this.props.rulesMessages;
         const errorMessages = Object.keys(rulesMessages)
-            .map(id => rulesMessages[id] && (rulesMessages[id][messageStateKeys.ERROR] || rulesMessages[id][messageStateKeys.ERROR_ON_COMPLETE]))
+            .map(id => rulesMessages[id] &&
+                (rulesMessages[id][messageStateKeys.ERROR] || rulesMessages[id][messageStateKeys.ERROR_ON_COMPLETE]))
             .filter(errorMessage => errorMessage);
-        
+
         return errorMessages.length === 0 && Object.keys(this.rulesCompulsoryErrors).length === 0;
     }
 
@@ -86,14 +87,25 @@ class D2SectionFields extends Component<Props> {
     }
 
     getInvalidFields() {
-        const externalInvalidFields = Object.keys(this.props.rulesMessages).reduce((accInvalidFields, key) => {
-            if (this.props.rulesMessages[key] && (this.props.rulesMessages[key][messageStateKeys.ERROR] || this.props.rulesMessages[key][messageStateKeys.ERROR_ON_COMPLETE])) {
+        const messagesInvalidFields = Object.keys(this.props.rulesMessages).reduce((accInvalidFields, key) => {
+            if (this.props.rulesMessages[key] &&
+                    (this.props.rulesMessages[key][messageStateKeys.ERROR] ||
+                        this.props.rulesMessages[key][messageStateKeys.ERROR_ON_COMPLETE])) {
                 accInvalidFields[key] = true;
             }
             return accInvalidFields;
         }, {});
 
-        const invalidFields = this.formBuilderInstance ? this.formBuilderInstance.getInvalidFields(externalInvalidFields) : [];
+        const rulesCompulsoryInvalidFields =
+            Object.keys(this.rulesCompulsoryErrors).reduce((accCompulsoryInvalidFields, key) => {
+                accCompulsoryInvalidFields[key] = true;
+                return accCompulsoryInvalidFields;
+            }, {});
+
+        const externalInvalidFields = { ...messagesInvalidFields, ...rulesCompulsoryInvalidFields };
+
+        const invalidFields = this.formBuilderInstance ?
+            this.formBuilderInstance.getInvalidFields(externalInvalidFields) : [];
         return invalidFields;
     }
 
@@ -107,9 +119,12 @@ class D2SectionFields extends Component<Props> {
 
         this.rulesCompulsoryErrors = Object.keys(rulesCompulsory)
             .reduce((accCompulsoryErrors, key) => {
-                const value = values[key];
-                if (!value && value !== 0 && value === false) {
-                    accCompulsoryErrors[key] = 'This field is required';
+                const isCompulsory = rulesCompulsory[key];
+                if (isCompulsory) {
+                    const value = values[key];
+                    if (!value && value !== 0 && value !== false) {
+                        accCompulsoryErrors[key] = 'This field is required';
+                    }
                 }
                 return accCompulsoryErrors;
             }, {});
@@ -134,12 +149,15 @@ class D2SectionFields extends Component<Props> {
                     this.props.rulesMessages[formField.id] &&
                     this.props.rulesMessages[formField.id][messageStateKeys.WARNING_ON_COMPLETE],
                 rulesCompulsory: this.props.rulesCompulsoryFields[formField.id],
+                rulesCompulsoryError: this.rulesCompulsoryErrors[formField.id],
             },
         }));
     }
 
     render() {
         const { fieldsMetaData, values, onUpdateField, formId, formBuilderId, ...passOnProps } = this.props;
+
+        this.buildRulesCompulsoryErrors();
 
         return (
             <div>

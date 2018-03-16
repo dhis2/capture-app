@@ -94,8 +94,8 @@ type Constant = {
 export type Constants = Array<Constant>;
 
 export type ProgramRulesContainer = {
-    programRulesVariables: Array<ProgramRuleVariable>,
-    programRules: Array<ProgramRule>,
+    programRulesVariables: ?Array<ProgramRuleVariable>,
+    programRules: ?Array<ProgramRule>,
     constants?: ?Constants,
 };
 

@@ -1,37 +1,16 @@
 // @flow
-import { MuiThemeProvider, createMuiTheme } from 'material-ui-next/styles';
+import { createMuiTheme } from 'material-ui-next/styles';
 
-const theme = createMuiTheme({
-   
-});
+const theme = createMuiTheme();
 
-theme.typography = { ...theme.typography,
-    formFieldTitle: {
-        fontSize: theme.typography.pxToRem(12),
-    },
+theme.typography.formFieldTitle = {
+    fontSize: theme.typography.pxToRem(12),
 };
-// theme.palette.common = Object.assign({}, theme.palette.common, {black: "red"});
 
+theme.palette.warning = {
+    light: '#FFF66',
+    main: '#FFCC00',
+    dark: '#FF9900',
+};
 
-// custom components
-function includeCustomStyles(basicTheme: Object) {
-    const customStyles = {
-        section: {
-            container: {
-
-            },
-        },
-        sectionHeaderSimple: {
-            container: {
-                backgroundColor: basicTheme.palette.primary[500],
-            },
-            containerSecondary: {
-                backgroundColor: basicTheme.palette.secondary[500],
-            },
-            title: basicTheme.typography.title,
-        },
-    };
-    return { ...basicTheme, ...customStyles };
-}
-
-export default includeCustomStyles(theme);
+export default theme;

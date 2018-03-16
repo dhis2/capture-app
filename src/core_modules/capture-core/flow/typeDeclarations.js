@@ -40,12 +40,13 @@ declare type Event = {
     programStageId: string,
     orgUnitId: string,
     orgUnitName: string,
-    trackedEntityInstanceId: string,
-    enrollmentId: string,
-    enrollmentStatus: string,
+    trackedEntityInstanceId?: string,
+    enrollmentId?: string,
+    enrollmentStatus?: string,
     status: string,
     eventDate: string,
     dueDate: string,
+    completedDate: string,
 };
 
 declare type UiEventData = {

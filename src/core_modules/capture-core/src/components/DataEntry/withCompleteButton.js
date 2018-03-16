@@ -9,7 +9,6 @@ import Dialog, {
     DialogContent,
     DialogContentText,
     DialogTitle,
-    withMobileDialog,
 } from 'material-ui-next/Dialog';
 
 import { connect } from 'react-redux';
@@ -18,11 +17,10 @@ import DataEntry from './DataEntry.component';
 import errorCreator from '../../utils/errorCreator';
 import { getTranslation } from '../../d2/d2Instance';
 import { formatterOptions } from '../../utils/string/format.const';
-import { startCompleteEvent, completeValidationFailed } from './actions/dataEntry.actions';
+import { startCompleteEvent, completeValidationFailed, completeAbort } from './actions/dataEntry.actions';
 import getDataEntryKey from './common/getDataEntryKey';
 
 import getStageFromEvent from '../../metaData/helpers/getStageFromEvent';
-import Foundation from '../../metaData/RenderFoundation/RenderFoundation';
 
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 
@@ -32,6 +30,7 @@ type Props = {
     event: Event,
     onCompleteEvent: (eventId: string, id: string) => void,
     onCompleteValidationFailed: (eventId: string, id: string) => void,
+    onCompleteAbort: (eventId: string, id: string) => void,
     completionAttempted?: ?boolean,
     id: string,
     warnings: ?Array<{id: string, warning: string }>,
@@ -103,7 +102,7 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
 
         validateEventFields() {
             const eventFieldInstance = this.getEventFieldInstances();
-            
+
             let fieldsValid = true;
             let index = 0;
             while (eventFieldInstance[index] && fieldsValid) {
@@ -120,7 +119,10 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
         validateForm() {
             const formInstance = this.getFormInstance();
             if (!formInstance) {
-                log.error(errorCreator(CompleteButtonBuilder.errorMessages.FORM_INSTANCE_NOT_FOUND)({ CompleteButtonBuilder: this }));
+                log.error(
+                    errorCreator(
+                        CompleteButtonBuilder.errorMessages.FORM_INSTANCE_NOT_FOUND)({ CompleteButtonBuilder: this }),
+                );
                 return;
             }
 
@@ -136,7 +138,9 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
 
         handleCompletionAttempt() {
             if (!this.innerInstance) {
-                log.error(errorCreator(CompleteButtonBuilder.errorMessages.INNER_INSTANCE_NOT_FOUND)({ CompleteButtonBuilder: this }));
+                log.error(
+                    errorCreator(
+                        CompleteButtonBuilder.errorMessages.INNER_INSTANCE_NOT_FOUND)({ CompleteButtonBuilder: this }));
                 return;
             }
 
@@ -150,6 +154,7 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
         }
 
         handleCloseDialog() {
+            this.props.onCompleteAbort(this.props.eventId, this.props.id);
             this.setState({ warningDialogOpen: false });
         }
 
@@ -190,7 +195,13 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
         }
 
         render() {
-            const { eventId, onCompleteEvent, onCompleteValidationFailed, ...passOnProps } = this.props;
+            const {
+                eventId,
+                onCompleteEvent,
+                onCompleteValidationFailed,
+                onCompleteAbort,
+                ...passOnProps
+            } = this.props;
             const options = optionFn ? optionFn(this.props) : {};
 
             if (!eventId) {
@@ -247,11 +258,16 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
     return {
         eventId,
         event: eventId && ensureState(state.events)[eventId],
-        completionAttempted: state.dataEntriesUI && state.dataEntriesUI[key] && state.dataEntriesUI[key].completionAttempted,
-        warnings: state.eventsRulesEffectsMessages[eventId] && 
+        completionAttempted:
+            state.dataEntriesUI &&
+            state.dataEntriesUI[key] &&
+            state.dataEntriesUI[key].completionAttempted,
+        warnings: state.eventsRulesEffectsMessages[eventId] &&
             Object.keys(state.eventsRulesEffectsMessages[eventId])
                 .map((elementId) => {
-                    const warning = state.eventsRulesEffectsMessages[eventId][elementId] && (state.eventsRulesEffectsMessages[eventId][elementId][messageStateKeys.WARNING] || state.eventsRulesEffectsMessages[eventId][elementId][messageStateKeys.WARNING_ON_COMPLETE]);
+                    const warning = state.eventsRulesEffectsMessages[eventId][elementId] &&
+                    (state.eventsRulesEffectsMessages[eventId][elementId][messageStateKeys.WARNING] ||
+                        state.eventsRulesEffectsMessages[eventId][elementId][messageStateKeys.WARNING_ON_COMPLETE]);
                     return {
                         id: elementId,
                         warning,
@@ -268,8 +284,12 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onCompleteValidationFailed: (eventId: string, id: string) => {
         dispatch(completeValidationFailed(eventId, id));
     },
+    onCompleteAbort: (eventId: string, id: string) => {
+        dispatch(completeAbort(eventId, id));
+    },
 });
 
 export default (optionFn?: ?OptionFn) =>
     (InnerComponent: React.ComponentType<any>) =>
-        connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(getCompleteButton(InnerComponent, optionFn));
+        connect(
+            mapStateToProps, mapDispatchToProps, null, { withRef: true })(getCompleteButton(InnerComponent, optionFn));

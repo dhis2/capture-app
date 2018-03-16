@@ -6,13 +6,24 @@ import { batchActions } from 'redux-batched-actions';
 
 import { convertStateFormValuesToClient } from '../../../converters/helpers/formToClient';
 import { convertClientValuesToServer } from '../../../converters/helpers/clientToServer';
-import { actionTypes, completeEvent, completeEventError, saveEvent, saveEventError, loadDataEntryEvent, openDataEntryEventAlreadyLoaded } from '../actions/dataEntry.actions';
+import convertDataEntryValuesToEventValues from '../common/convertDataEntryValuesToEventValues';
+import convertEventToServerValues from '../common/convertEventToServerValues';
+
+import {
+    actionTypes,
+    completeEvent,
+    completeEventError,
+    saveEvent,
+    saveEventError,
+    loadDataEntryEvent,
+    openDataEntryEventAlreadyLoaded,
+} from '../actions/dataEntry.actions';
 import getDataEntryKey from '../common/getDataEntryKey';
 import { getRulesActionsOnUpdate } from '../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
 
-import type { FieldData } from '../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+import type { FieldData } from '../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
 
-export const loadDataEntryEpic = (action$, store: ReduxStore) => 
+export const loadDataEntryEpic = (action$, store: ReduxStore) =>
     action$.ofType(actionTypes.START_LOAD_DATA_ENTRY_EVENT)
         .map((action) => {
             const state = store.getState();
@@ -27,21 +38,50 @@ export const loadDataEntryEpic = (action$, store: ReduxStore) =>
             return loadDataEntryEvent(payload.eventId, store.getState(), payload.eventPropsToInclude, payload.dataEntryId);
         });
 
+function convertForSaveAndComplete(state: ReduxState, eventId: string, id: string) {
+    const clientValuesContainer = convertStateFormValuesToClient(eventId, state);
+    if (clientValuesContainer.error) {
+        return {
+            error: clientValuesContainer.error,
+            clientValues: null,
+            serverData: null,
+            eventMainData: null,
+        };
+    }
+    const clientValues = clientValuesContainer.values;
+
+    const oldEvent = ensureState(state.events)[eventId];
+    const eventMainData = { ...oldEvent, ...convertDataEntryValuesToEventValues(state, eventId, id) };
+
+    // $FlowSuppress : TODO - TEI
+    const serverValues = convertClientValuesToServer(clientValues, clientValuesContainer.stage) || {};
+    const serverValuesAsArray = Object
+        .keys(serverValues)
+        .map(key => ({ dataElement: key, value: serverValues[key] }));
+    const serverMainData = convertEventToServerValues(eventMainData);
+    const serverData = { ...serverMainData, dataValues: serverValuesAsArray };
+
+    return {
+        clientValues,
+        serverData,
+        eventMainData,
+        error: null,
+    };
+}
+
 export const completeEventEpic = (action$, store: ReduxStore) =>
     action$.ofType(actionTypes.START_COMPLETE_EVENT)
         .map((action) => {
             const { eventId, id } = action.payload;
             const state = store.getState();
-            const clientValuesContainer = convertStateFormValuesToClient(eventId, state);
+            const { error, clientValues, serverData, eventMainData } = convertForSaveAndComplete(state, eventId, id);
 
-            if (clientValuesContainer.error) {
-                return completeEventError(clientValuesContainer.error, id);
+            if (error) {
+                return completeEventError(error, id);
             }
-            const clientValues = clientValuesContainer.values;
-
+            
             // $FlowSuppress
-            const serverValues = convertClientValuesToServer(clientValues, clientValuesContainer.stage);
-            return completeEvent(clientValues, serverValues, eventId, ensureState(state.events)[eventId], id);
+            return completeEvent(clientValues, serverData, eventMainData, eventId, id);
         });
 
 export const saveEventEpic = (action$, store: ReduxStore) =>
@@ -49,17 +89,14 @@ export const saveEventEpic = (action$, store: ReduxStore) =>
         .map((action) => {
             const { eventId, id } = action.payload;
             const state = store.getState();
-            const clientValuesContainer = convertStateFormValuesToClient(eventId, state);
+            const { error, clientValues, serverData, eventMainData } = convertForSaveAndComplete(state, eventId, id);
 
-            if (clientValuesContainer.error) {
-                return saveEventError(clientValuesContainer.error, id);
+            if (error) {
+                return saveEventError(error, id);
             }
-            const clientValues = clientValuesContainer.values;
 
             // $FlowSuppress
-            const serverValues = convertClientValuesToServer(clientValues, clientValuesContainer.stage);
-
-            return saveEvent(clientValues, serverValues, eventId, ensureState(state.events)[eventId], id);
+            return saveEvent(clientValues, serverData, eventMainData, eventId, id);
         });
 
 export const rulesEpic = (action$, store: ReduxStore) =>

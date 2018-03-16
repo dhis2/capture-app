@@ -1,5 +1,4 @@
 // @flow
-import log from 'loglevel';
 import { ensureState } from 'redux-optimistic-ui';
 
 import RulesEngine from '../RulesEngine/RulesEngine';
@@ -24,20 +23,32 @@ import DataElement from '../metaData/DataElement/DataElement';
 import { updateRulesEffects, updateFieldFromRuleEffect } from './rulesEngine.actions';
 import effectActions from '../RulesEngine/effectActions.const';
 
-import type { OptionSets, ProgramRulesContainer, DataElement as DataElementForRulesEngine, EventData, OrgUnit, OutputEffect, AssignOutputEffect, HideOutputEffect, EventMain, EventValues } from '../RulesEngine/rulesEngine.types';
+import type {
+    OptionSets,
+    ProgramRulesContainer,
+    DataElement as DataElementForRulesEngine,
+    EventData,
+    OrgUnit,
+    OutputEffect,
+    AssignOutputEffect,
+    HideOutputEffect,
+    EventMain,
+    EventValues,
+} from '../RulesEngine/rulesEngine.types';
 
 export type EventContainer = {
     main: EventMain,
     values: EventValues
 };
 
-type FieldData = {
+export type FieldData = {
     elementId: string,
     value: any,
     valid: boolean,
 };
 
-const rulesEngine = new RulesEngine(inputValueConverter, momentConverter, getTranslation, outputRulesEffectsValueConverter);
+const rulesEngine =
+    new RulesEngine(inputValueConverter, momentConverter, getTranslation, outputRulesEffectsValueConverter);
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found in loadAndExecuteRulesForEvent',
@@ -75,7 +86,8 @@ function getEventDataElements(eventProgram: EventProgram): Array<DataElement> {
     return elements;
 }
 
-function getRulesEngineDataElementsAsObject(dataElements: Array<DataElement>): { [elementId: string]: DataElementForRulesEngine } {
+function getRulesEngineDataElementsAsObject(
+    dataElements: Array<DataElement>): { [elementId: string]: DataElementForRulesEngine } {
     return dataElements.reduce((accRulesDataElements, dataElement) => {
         accRulesDataElements[dataElement.id] = {
             id: dataElement.id,
@@ -157,11 +169,15 @@ function getCurrentEventValues(
     formId: string,
     updatedEventField?: ?FieldData) {
     const currentFormData = ensureState(state.formsValues)[formId] || {};
-    const updatedCurrentFormData = updatedEventField ? { ...currentFormData, [updatedEventField.elementId]: updatedEventField.value } : currentFormData;
+    const updatedCurrentFormData = updatedEventField ?
+        { ...currentFormData, [updatedEventField.elementId]: updatedEventField.value } :
+        currentFormData;
 
     const sectionsFieldsUIState = ensureState(state.formsSectionsFieldsUI);
     const fieldValidations = getFieldsValidationForForm(sectionsFieldsUIState, formId);
-    const updatedFieldValidations = updatedEventField ? { ...fieldValidations, [updatedEventField.elementId]: updatedEventField.valid } : fieldValidations;
+    const updatedFieldValidations = updatedEventField ?
+        { ...fieldValidations, [updatedEventField.elementId]: updatedEventField.valid } :
+        fieldValidations;
 
     const validFormValues = getValidFormValues(updatedCurrentFormData, updatedFieldValidations);
 
@@ -183,14 +199,18 @@ function getDataEntryTypes(dataEntryMeta: {[key: string]: { type: string }}) {
     }, {});
 }
 
-function getValidDataEntryValues(dataEntryValues: { [key: string]: any }, dataEntryValidations: { [key: string]: boolean }) {
+function getValidDataEntryValues(
+    dataEntryValues: { [key: string]: any },
+    dataEntryValidations: { [key: string]: boolean }) {
     return Object.keys(dataEntryValues).reduce((accValidValues, key) => {
         accValidValues[key] = dataEntryValidations[key] ? dataEntryValues[key] : null;
         return accValidValues;
     }, {});
 }
 
-function convertDataEntryFormValuesToClientValues(validDataEntryValues: { [key: string]: any }, dataEntryTypes: { [key: string]: string }) {
+function convertDataEntryFormValuesToClientValues(
+    validDataEntryValues: { [key: string]: any },
+    dataEntryTypes: { [key: string]: string }) {
     return Object.keys(validDataEntryValues).reduce((accConvertedValues, key) => {
         const valueToConvert = validDataEntryValues[key];
         const valueType = dataEntryTypes[key];
@@ -215,7 +235,7 @@ function getCurrentEventMainData(state: ReduxState, event: Event, dataEntryId: s
 }
 
 // Also convert other open form data?
-function getAllEventsValues(state: ReduxState, currentEventValues: { [key: string]: any}, event: Event) {
+function getAllEventsValues(state: ReduxState, currentEventValues: ?{ [key: string]: any}, event: Event) {
     const eventsValues = ensureState(state.eventsValues);
     const eventsValuesWithUpdatedCurrent = { ...eventsValues, [event.eventId]: currentEventValues };
     return eventsValuesWithUpdatedCurrent;
@@ -228,7 +248,9 @@ function getAllEventsMainData(state: ReduxState, currentEventMainData: { [key: s
     return eventsWithUpdatedCurrent;
 }
 
-function createEventsArray(allEventsValues: { [eventId: string]: Object }, allEventsMainData: { [eventId: string]: Object }) {
+function createEventsArray(
+    allEventsValues: { [eventId: string]: Object },
+    allEventsMainData: { [eventId: string]: Object }) {
     return Object.keys(allEventsValues)
         .map(key => ({ ...allEventsValues[key], ...allEventsMainData[key] }),
         );
@@ -286,7 +308,9 @@ function buildEffectsHierarchy(effects: Array<OutputEffect>) {
         accEffectsObject[actionType] = accEffectsObject[actionType] || {};
 
         const id = effect.id;
+        // $FlowSuppress
         accEffectsObject[actionType][id] = accEffectsObject[actionType][id] || [];
+        // $FlowSuppress
         accEffectsObject[actionType][id].push(effect);
         return accEffectsObject;
     }, {});
@@ -298,6 +322,7 @@ function createAssignActions(assignEffects: ?{ [elementId: string]: Array<Assign
     }
 
     return Object.keys(assignEffects).map((elementId: string) => {
+        // $FlowSuppress
         const effectsForId = assignEffects[elementId];
         const applicableEffectForId = effectsForId[effectsForId.length - 1];
         return updateFieldFromRuleEffect(applicableEffectForId.value, applicableEffectForId.id, formId);
@@ -321,6 +346,7 @@ function filterFieldsHideEffects(
             return !(dataCompulsory || compulsoryEffect);
         })
         .reduce((accFilteredEffects, elementId) => {
+            // $FlowSuppress
             accFilteredEffects[elementId] = hideEffects[elementId];
             return accFilteredEffects;
         }, {});
@@ -353,6 +379,7 @@ function filterSectionsHideEffects(
             return !compulsoryFieldFound;
         })
         .reduce((accFilteredEffects, sectionId) => {
+            // $FlowSuppress
             accFilteredEffects[sectionId] = hideEffects[sectionId];
             return accFilteredEffects;
         }, {});
@@ -388,6 +415,7 @@ function createHideSectionsResetActions(
                 .map(element => updateFieldFromRuleEffect(null, element.id, formId));
         })
         .filter(action => action)
+        // $FlowSuppress
         .reduce((accActions, sectionActions) => [...accActions, ...sectionActions], []);
 }
 
@@ -421,13 +449,28 @@ function createRulesEffectsActions(
 
     actions = [...actions, ...createAssignActions(effectsHierarchy[effectActions.ASSIGN_VALUE], formId)];
     actions = [...actions, ...createHideFieldsResetActions(effectsHierarchy[effectActions.HIDE_FIELD], formId)];
-    actions = [...actions, ...createHideSectionsResetActions(effectsHierarchy[effectActions.HIDE_SECTION], foundation, formId)];
+    actions = [
+        ...actions,
+        ...createHideSectionsResetActions(effectsHierarchy[effectActions.HIDE_SECTION], foundation, formId),
+    ];
 
     return actions;
 }
 
-function runRulesEngine(programRulesContainer: ProgramRulesContainer, dataElementsInProgram: { [elementId: string]: DataElementForRulesEngine }, currentEventData: EventData, allEventsData: Array<EventData>, orgUnit: OrgUnit, optionSets: ?OptionSets) {
-    const effects = rulesEngine.executeRulesForSingleEvent(programRulesContainer, currentEventData, allEventsData, dataElementsInProgram, orgUnit, optionSets);
+function runRulesEngine(
+    programRulesContainer: ProgramRulesContainer,
+    dataElementsInProgram: { [elementId: string]: DataElementForRulesEngine },
+    currentEventData: EventData,
+    allEventsData: Array<EventData>,
+    orgUnit: OrgUnit,
+    optionSets: ?OptionSets) {
+    const effects = rulesEngine.executeRulesForSingleEvent(
+        programRulesContainer,
+        currentEventData,
+        allEventsData,
+        dataElementsInProgram,
+        orgUnit,
+        optionSets);
     return effects;
 }
 
@@ -453,10 +496,19 @@ function getRulesActions(
         return [updateRulesEffects(null, formId, eventId, dataEntryId)];
     }
 
+    // $FlowSuppress : TODO: handle TEI
     const foundation = program.getStage(event.programStageId);
 
-    const { dataElementsInProgram, currentEventData, allEventsData, optionSets, orgUnit } = getRulesEngineArguments(program, state, event, foundation, formId, dataEntryId, updatedFieldData, isLoad);
-    const rulesEffects = runRulesEngine(programRulesContainer, dataElementsInProgram, currentEventData, allEventsData, orgUnit, optionSets);
+    const { dataElementsInProgram, currentEventData, allEventsData, optionSets, orgUnit } =
+        getRulesEngineArguments(program, state, event, foundation, formId, dataEntryId, updatedFieldData, isLoad);
+    const rulesEffects =
+        runRulesEngine(
+            programRulesContainer,
+            dataElementsInProgram,
+            currentEventData,
+            allEventsData,
+            orgUnit,
+            optionSets);
     return createRulesEffectsActions(rulesEffects, formId, eventId, dataEntryId, foundation);
 }
 

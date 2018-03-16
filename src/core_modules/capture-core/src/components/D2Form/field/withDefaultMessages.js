@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable complexity */
 import * as React from 'react';
 import { withStyles } from 'material-ui-next/styles';
 import classNames from 'classnames';
@@ -12,13 +13,16 @@ const styles = (theme: Theme) => ({
         fontSize: theme.typography.pxToRem(12),
     },
     warning: {
-        color: 'yellow',
+        color: theme.palette.warning.main,
+        fontSize: theme.typography.pxToRem(12),
     },
     info: {
         color: 'green',
+        fontSize: theme.typography.pxToRem(12),
     },
     validating: {
         color: 'orange',
+        fontSize: theme.typography.pxToRem(12),
     },
 });
 
@@ -31,6 +35,7 @@ type Props = {
     rulesWarningMessage: ?string,
     rulesErrorMessageOnComplete: ?string,
     rulesWarningMessageOnComplete: ?string,
+    rulesCompulsoryError?: ?string,
     touched: boolean,
     validationAttempted?: ?boolean,
     classes: {
@@ -63,7 +68,8 @@ const getFieldMessages = (InnerComponent: React.ComponentType<any>) =>
             let messageElement;
 
             if (validatingText) {
-                messageElement = FieldMessages.createMessageElement(validatingText, this.getClassNames(classes.validating));
+                messageElement =
+                    FieldMessages.createMessageElement(validatingText, this.getClassNames(classes.validating));
             } else if (errorText) {
                 messageElement = FieldMessages.createMessageElement(errorText, this.getClassNames(classes.error));
             } else if (warningText) {
@@ -75,27 +81,68 @@ const getFieldMessages = (InnerComponent: React.ComponentType<any>) =>
             return messageElement;
         }
 
-        getRulesMessageElement(errorText, warningText, errorTextOnComplete, warningTextOnComplete, touched, validationAttempted, classes) {
+        getRulesMessageElement(
+            errorText,
+            warningText,
+            errorTextOnComplete,
+            warningTextOnComplete,
+            rulesCompulsoryError,
+            touched,
+            validationAttempted,
+            classes) {
             let messageElement;
 
             if (errorText) {
-                messageElement = FieldMessages.createMessageElement(errorText, this.getClassNames(classes.error));
+                messageElement =
+                    FieldMessages.createMessageElement(errorText, this.getClassNames(classes.error));
             } else if (errorTextOnComplete && validationAttempted) {
-                messageElement = FieldMessages.createMessageElement(errorTextOnComplete, this.getClassNames(classes.error));
+                messageElement =
+                    FieldMessages.createMessageElement(errorTextOnComplete, this.getClassNames(classes.error));
             } else if (warningText) {
-                messageElement = FieldMessages.createMessageElement(warningText, this.getClassNames(classes.warning));
+                messageElement =
+                    FieldMessages.createMessageElement(warningText, this.getClassNames(classes.warning));
             } else if (warningTextOnComplete && validationAttempted) {
-                messageElement = FieldMessages.createMessageElement(warningTextOnComplete, this.getClassNames(classes.warning));
+                messageElement =
+                    FieldMessages.createMessageElement(warningTextOnComplete, this.getClassNames(classes.warning));
+            } else if (rulesCompulsoryError && (touched || validationAttempted)) {
+                messageElement =
+                    FieldMessages.createMessageElement(rulesCompulsoryError, this.getClassNames(classes.error));
             }
 
             return messageElement;
         }
 
         render() {
-            const { classes, errorMessage, warningMessage, infoMessage, validatingMessage, rulesErrorMessage, rulesWarningMessage, rulesErrorMessageOnComplete, rulesWarningMessageOnComplete, touched, validationAttempted, ...passOnProps } = this.props;
-            let messageElement = (touched || validationAttempted) ? this.getMessageElement(errorMessage, warningMessage, infoMessage, validatingMessage, classes) : null;
+            const {
+                classes,
+                errorMessage,
+                warningMessage,
+                infoMessage,
+                validatingMessage,
+                rulesErrorMessage,
+                rulesWarningMessage,
+                rulesErrorMessageOnComplete,
+                rulesWarningMessageOnComplete,
+                rulesCompulsoryError,
+                touched,
+                validationAttempted,
+                ...passOnProps
+            } = this.props;
+            let messageElement =
+                (touched || validationAttempted) ?
+                    this.getMessageElement(errorMessage, warningMessage, infoMessage, validatingMessage, classes) :
+                    null;
             if (!messageElement) {
-                messageElement = this.getRulesMessageElement(rulesErrorMessage, rulesWarningMessage, rulesErrorMessageOnComplete, rulesWarningMessageOnComplete, touched, validationAttempted, classes);
+                messageElement =
+                    this.getRulesMessageElement(
+                        rulesErrorMessage,
+                        rulesWarningMessage,
+                        rulesErrorMessageOnComplete,
+                        rulesWarningMessageOnComplete,
+                        rulesCompulsoryError,
+                        touched,
+                        validationAttempted,
+                        classes);
             }
 
             return (

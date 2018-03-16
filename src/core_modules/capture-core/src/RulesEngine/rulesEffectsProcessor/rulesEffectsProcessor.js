@@ -49,7 +49,6 @@ export default function getRulesEffectsProcessor(
         if (!effect[processIdName]) {
             return null;
         }
-
         const element = processType === processTypes.EVENT ?
             // $FlowSuppress
             dataElements[effect[processIdName]] :

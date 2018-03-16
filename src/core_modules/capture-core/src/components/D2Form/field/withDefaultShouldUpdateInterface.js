@@ -10,13 +10,29 @@ type Props = {
     rulesWarningMessage?: ?string,
     rulesErrorMessageOnComplete?: ?string,
     rulesWarningMessageOnComplete?: ?string,
+    rulesCompulsoryError?: ?string,
+    metaCompulsory?: ?boolean,
+    rulesCompulsory?: ?boolean,
 };
 
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         class ShuoldFieldUpdateInterface extends React.Component<Props> {
             shouldComponentUpdate(nextProps: Props) {
-                const pureCheck = ['value', 'touched', 'validationAttempted', 'errorMessage', 'rulesErrorMessage', 'rulesWarningMessage', 'rulesErrorMessageOnComplete', 'rulesWarningMessageOnComplete'];
+                const pureCheck = [
+                    'value',
+                    'touched',
+                    'validationAttempted',
+                    'errorMessage',
+                    'rulesErrorMessage',
+                    'rulesWarningMessage',
+                    'rulesErrorMessageOnComplete',
+                    'rulesWarningMessageOnComplete',
+                    'rulesCompulsoryError',
+                    'metaCompulsory',
+                    'rulesCompulsory',
+                ];
+
                 return pureCheck.some(propName => nextProps[propName] !== this.props[propName]);
             }
 

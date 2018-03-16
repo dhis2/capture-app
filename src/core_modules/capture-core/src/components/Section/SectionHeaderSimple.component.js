@@ -7,24 +7,18 @@ import FontIcon from 'material-ui/FontIcon';
 
 const styles = theme => ({
     container: {
-        ...theme.sectionHeaderSimple.container,
-        ...{
-            display: 'flex',
-        },
+        backgroundColor: theme.palette.primary[500],
+        display: 'flex',
     },
     containerSecondary: {
-        ...theme.sectionHeaderSimple.containerSecondary,
-        ...{
-            display: 'flex',
-        },
+        backgroundColor: theme.palette.secondary[500],
+        display: 'flex',
     },
     title: {
-        ...theme.sectionHeaderSimple.title,
-        ...{
-            fontSize: 16,
-            fontWeight: 500,
-            padding: 16,
-        },
+        ...theme.typography.title,
+        fontSize: 16,
+        fontWeight: 500,
+        padding: 16,
     },
     children: {
         flexGrow: 1,

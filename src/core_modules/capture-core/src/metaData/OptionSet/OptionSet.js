@@ -6,7 +6,7 @@ import FontIcon from 'material-ui/FontIcon';
 import isArray from 'd2-utilizr/src/isArray';
 
 import Option from './Option';
-import { viewTypes } from './optionSet.const';
+import { viewTypes, inputTypes } from './optionSet.const';
 import errorCreator from '../../utils/errorCreator';
 import DataElement from '../DataElement/DataElement';
 
@@ -16,20 +16,21 @@ import type { Value } from './Option';
 export default class OptionSet {
     static errorMessages = {
         OPTION_NOT_FOUND: 'Option not found',
-        UNSUPPORTED_VIEWTYPE: 'Tried to set unsupported viewType',
+        UNSUPPORTED_VIEWTYPE: 'Tried to set an unsupported viewType',
+        UNSUPPORTED_INPUTTYPE: 'Tried to set an unsuported inputType',
     };
 
     _id: ?string;
     _emptyText: ?string;
     _options: Array<Option>;
-    _viewType: ?$Values<typeof viewTypes>;
+    _viewType: $Values<typeof viewTypes>;
+    _inputType: $Values<typeof inputTypes>;
     _dataElement: ?DataElement;
 
     constructor(
         id?: ?string,
         options?: ?Array<Option>,
         dataElement?: ?DataElement,
-        viewType?: ?string,
         onConvert?: ?ConvertFn) {
         this._options = !options ? [] : options.reduce((accOptions: Array<Option>, currentOption: Option) => {
             if (currentOption.value || currentOption.value === false || currentOption.value === 0) {
@@ -43,12 +44,9 @@ export default class OptionSet {
             return accOptions;
         }, []);
 
-        if (viewType) {
-            this.viewType = viewType;
-        }
-
         this._id = id;
         this._dataElement = dataElement;
+        this._inputType = inputTypes.SELECT;
     }
 
     set id(id: string) {
@@ -58,7 +56,26 @@ export default class OptionSet {
         return this._id;
     }
 
-    set viewType(viewType: string) {
+    set inputType(inputType: ?string) {
+        if (!inputType) {
+            return;
+        }
+
+        if (inputTypes[inputType]) {
+            this._inputType = inputType;
+        } else {
+            log.warn(errorCreator(OptionSet.errorMessages.UNSUPPORTED_INPUTTYPE)({ optionSet: this, inputType }));
+        }
+    }
+    get inputType(): $Values<typeof inputTypes> {
+        return this._inputType;
+    }
+
+    set viewType(viewType: ?string) {
+        if (!viewType) {
+            return;
+        }
+
         if (viewTypes[viewType]) {
             this._viewType = viewType;
         } else {

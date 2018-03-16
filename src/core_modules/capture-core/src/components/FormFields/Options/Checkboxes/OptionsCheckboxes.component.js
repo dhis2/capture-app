@@ -3,7 +3,6 @@
 import React, { Component } from 'react';
 import Checkbox from 'material-ui-next/Checkbox';
 import { FormControl, FormLabel, FormGroup, FormControlLabel } from 'material-ui-next/Form';
-import { InputLabel } from 'material-ui-next/Input';
 import { withStyles } from 'material-ui-next/styles';
 
 import RadioOffIcon from 'material-ui/svg-icons/image/panorama-fish-eye';
@@ -11,12 +10,10 @@ import RadioOnIcon from 'material-ui/svg-icons/action/check-circle';
 
 import isArray from 'd2-utilizr/lib/isArray';
 
-import { orientation } from './optionsCheckboxes.constants';
+import { orientations } from './optionsCheckboxes.constants';
 
 import OptionSet from '../../../../metaData/OptionSet/OptionSet';
 import Option from '../../../../metaData/OptionSet/Option';
-
-// import gotoFn from '../Utils/gotoMixin';
 
 const styles = theme => ({
     label: theme.typography.formFieldTitle,
@@ -29,10 +26,12 @@ type Props = {
     nullable?: boolean,
     multiSelect?: boolean,
     value?: any,
-    orientation?: $Values<typeof orientation>,
+    orientation?: ?$Values<typeof orientations>,
     required?: ?boolean,
-    error?: ?boolean,
-    classes: Object,
+    classes: {
+        label: string,
+    },
+    style?: ?Object,
 };
 
 class OptionsCheckboxesField extends Component<Props> {
@@ -46,7 +45,6 @@ class OptionsCheckboxesField extends Component<Props> {
         super(props);
         this.handleOptionChange = this.handleOptionChange.bind(this);
         this.labelClasses = this.buildLabelClasses();
-        // this.goto = gotoFn;
     }
 
     buildLabelClasses() {
@@ -147,8 +145,13 @@ class OptionsCheckboxesField extends Component<Props> {
         );
     }
 
+    renderCheckBoxes() {
+        const orientation = this.props.orientation;
+        return orientation === orientations.VERTICAL ? this.renderVertical() : this.renderHorizontal();
+    }
+
     render() {
-        const { label, required, error, classes } = this.props;
+        const { label, required, classes, style, orientation } = this.props;  // eslint-disable-line no-unused-vars
 
         this.setCheckedStatusForBoxes();
 
@@ -165,7 +168,6 @@ class OptionsCheckboxesField extends Component<Props> {
                                 <FormLabel
                                     component="label"
                                     required={required}
-                                    error={error}
                                     classes={this.labelClasses}
                                     focused={false}
                                 >

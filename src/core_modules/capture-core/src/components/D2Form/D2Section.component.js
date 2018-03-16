@@ -10,22 +10,18 @@ import MetaDataSection from '../../metaData/RenderFoundation/Section';
 type Props = {
     sectionMetaData: MetaDataSection,
     isHidden: boolean,
+    onUpdateSectionStatus: (id: string, status: Object) => void,
 };
 
 class D2Section extends Component<Props> {
     sectionFieldsInstance: ?D2SectionFields;
-
-    constructor(props: Props) {
-        super(props);
-    }
-
     renderSectionHeader() {
         const title = this.props.sectionMetaData.name;
 
         if (!title) {
             return null;
         }
-        
+
         return (
             <SectionHeaderSimple
                 title={title}

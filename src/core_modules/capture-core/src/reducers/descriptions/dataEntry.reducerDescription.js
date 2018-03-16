@@ -41,7 +41,23 @@ export const dataEntriesUIDesc = createReducerDescription({
         newState[key].completionAttempted = true;
         return newState;
     },
+    [actionTypes.COMPLETE_ABORT]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const key = getDataEntryKey(payload.id, payload.eventId);
+        newState[key] = { ...newState[key] };
+        newState[key].completionAttempted = true;
+        return newState;
+    },
     [actionTypes.SAVE_VALIDATION_FALED]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const key = getDataEntryKey(payload.id, payload.eventId);
+        newState[key] = { ...newState[key] };
+        newState[key].saveAttempted = true;
+        return newState;
+    },
+    [actionTypes.SAVE_ABORT]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
         const key = getDataEntryKey(payload.id, payload.eventId);
@@ -57,7 +73,7 @@ export const dataEntriesUIDesc = createReducerDescription({
         newState[key].inProgress = newState[key].inProgress ? newState[key].inProgress + 1 : 1;
         return newState;
     },
-    [rulesEngineActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
+    [rulesEngineActionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
         const key = getDataEntryKey(payload.dataEntryId, payload.eventId);

@@ -18,8 +18,8 @@ export const loadDataEntryData = (action$, store: ReduxStore) =>
     action$.ofType(actionTypes.ENROLLMENT_LOADED)
         .map((action) => {
             if (action.payload && action.payload.length > 0) {
-                return loadDataEntryEvent('dcDICb4mZ5x', store.getState(), [{ id: 'eventDate', type: 'DATE' }, { id: 'dueDate', type: 'DATE' }], 'main');
+                return loadDataEntryEvent('qEHQdXkUAGk', store.getState(), [{ id: 'eventDate', type: 'DATE' }, { id: 'dueDate', type: 'DATE' }], 'main');
             }
-            return loadDataEntryEvent('dcDICb4mZ5x', store.getState(), [{ id: 'eventDate', type: 'DATE' }, { id: 'dueDate', type: 'DATE' }], 'main');
+            return loadDataEntryEvent('qEHQdXkUAGk', store.getState(), [{ id: 'eventDate', type: 'DATE' }, { id: 'dueDate', type: 'DATE' }], 'main');
         });
 

@@ -11,6 +11,7 @@ import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import Section from '../../metaData/RenderFoundation/Section';
 import DataElement from '../../metaData/DataElement/DataElement';
 import OptionSet from '../../metaData/OptionSet/OptionSet';
+import { inputTypes } from '../../metaData/OptionSet/optionSet.const';
 import Option from '../../metaData/OptionSet/Option';
 
 import { convertOptionSetValue } from '../../converters/serverToClient';
@@ -42,6 +43,7 @@ type CachedDataElement = {
 type CachedProgramStageDataElement = {
     compulsory: boolean,
     displayInReports: boolean,
+    renderOptionsAsRadio?: ?boolean,
     dataElement: CachedDataElement
 };
 
@@ -112,7 +114,7 @@ function getDataElementType(d2ValueType: string) {
     return converters[d2ValueType] || d2ValueType;
 }
 
-function buildOptionSet(id: string, dataElement: DataElement) {
+function buildOptionSet(id: string, dataElement: DataElement, renderOptionsAsRadio: ?boolean) {
     const d2OptionSet = currentD2OptionSets && currentD2OptionSets.find(d2Os => d2Os.id === id);
 
     if (!d2OptionSet) {
@@ -131,7 +133,9 @@ function buildOptionSet(id: string, dataElement: DataElement) {
         }),
     );
 
-    return new OptionSet(id, options, dataElement, null, convertOptionSetValue);
+    const optionSet = new OptionSet(id, options, dataElement, convertOptionSetValue);
+    optionSet.inputType = renderOptionsAsRadio ? inputTypes.RADIO : null;
+    return optionSet;
 }
 
 function getDataElementTranslation(d2DataElement: CachedDataElement, property: $Values<typeof propertyNames>) {
@@ -154,7 +158,7 @@ function buildDataElement(d2ProgramStageDataElement: CachedProgramStageDataEleme
     });
 
     if (d2DataElement.optionSet && d2DataElement.optionSet.id) {
-        dataElement.optionSet = buildOptionSet(d2DataElement.optionSet.id, dataElement);
+        dataElement.optionSet = buildOptionSet(d2DataElement.optionSet.id, dataElement, d2ProgramStageDataElement.renderOptionsAsRadio);
     }
 
     return dataElement;
