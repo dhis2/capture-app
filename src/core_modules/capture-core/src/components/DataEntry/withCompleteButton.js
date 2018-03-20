@@ -2,8 +2,6 @@
 import * as React from 'react';
 import { ensureState } from 'redux-optimistic-ui';
 import log from 'loglevel';
-import Button from 'material-ui-next/Button';
-
 import Dialog, {
     DialogActions,
     DialogContent,
@@ -13,6 +11,8 @@ import Dialog, {
 
 import { connect } from 'react-redux';
 
+import Button from '../Buttons/Button.component';
+import ProgressButton from '../Buttons/ProgressButton.component';
 import DataEntry from './DataEntry.component';
 import errorCreator from '../../utils/errorCreator';
 import { getTranslation } from '../../d2/d2Instance';
@@ -34,6 +34,7 @@ type Props = {
     completionAttempted?: ?boolean,
     id: string,
     warnings: ?Array<{id: string, warning: string }>,
+    finalInProgress?: ?boolean,
 };
 
 type Options = {
@@ -200,6 +201,7 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
                 onCompleteEvent,
                 onCompleteValidationFailed,
                 onCompleteAbort,
+                finalInProgress,
                 ...passOnProps
             } = this.props;
             const options = optionFn ? optionFn(this.props) : {};
@@ -213,13 +215,14 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
                     <InnerComponent
                         ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                         completeButton={
-                            <Button
-                                raised
+                            <ProgressButton
+                                variant="raised"
                                 onClick={this.handleCompletionAttempt}
                                 color={options.color || 'primary'}
+                                inProgress={!!finalInProgress}
                             >
                                 { getTranslation('complete', formatterOptions.CAPITALIZE_FIRST_LETTER) }
-                            </Button>
+                            </ProgressButton>
                         }
                         {...passOnProps}
                     />
@@ -274,6 +277,7 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
                     };
                 })
                 .filter(element => element.warning),
+        finalInProgress: state.dataEntriesUI[key] && state.dataEntriesUI[key].finalInProgress,
     };
 };
 

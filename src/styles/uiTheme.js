@@ -13,4 +13,8 @@ theme.palette.warning = {
     dark: '#FF9900',
 };
 
+theme.palette.input = {
+    bottomLine: 'rgba(0, 0, 0, 0.42)',
+};
+
 export default theme;

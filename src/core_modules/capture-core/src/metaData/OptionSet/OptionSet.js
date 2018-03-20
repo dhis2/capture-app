@@ -1,8 +1,8 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
-import React from 'react';
-import FontIcon from 'material-ui/FontIcon';
+// import React from 'react';
+// import FontIcon from 'material-ui/FontIcon';
 import isArray from 'd2-utilizr/src/isArray';
 
 import Option from './Option';
@@ -179,6 +179,7 @@ export default class OptionSet {
         return this.getOptionText(values);
     }
 
+    /*
     resolveViewElement(
         values: Value | Array<Value>,
         onGetStyle?: (viewType: ?$Values<typeof viewTypes>) => ?Object): ?React$Element<any> | any {
@@ -259,4 +260,5 @@ export default class OptionSet {
 
         return element;
     }
+    */
 }

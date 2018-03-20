@@ -79,7 +79,7 @@ export const completeEventEpic = (action$, store: ReduxStore) =>
             if (error) {
                 return completeEventError(error, id);
             }
-            
+
             // $FlowSuppress
             return completeEvent(clientValues, serverData, eventMainData, eventId, id);
         });

@@ -5,12 +5,7 @@ import Checkbox from 'material-ui-next/Checkbox';
 import { FormControl, FormLabel, FormGroup, FormControlLabel } from 'material-ui-next/Form';
 import { withStyles } from 'material-ui-next/styles';
 
-import RadioOffIcon from 'material-ui/svg-icons/image/panorama-fish-eye';
-import RadioOnIcon from 'material-ui/svg-icons/action/check-circle';
-
-import isArray from 'd2-utilizr/lib/isArray';
-
-import { orientations } from './optionsCheckboxes.constants';
+import { orientations } from './multiSelectBoxes.const';
 
 import OptionSet from '../../../../metaData/OptionSet/OptionSet';
 import Option from '../../../../metaData/OptionSet/Option';
@@ -23,8 +18,6 @@ type Props = {
     onBlur: (value: any) => void,
     optionSet?: ?OptionSet,
     label?: string,
-    nullable?: boolean,
-    multiSelect?: boolean,
     value?: any,
     orientation?: ?$Values<typeof orientations>,
     required?: ?boolean,
@@ -34,7 +27,7 @@ type Props = {
     style?: ?Object,
 };
 
-class OptionsCheckboxesField extends Component<Props> {
+class MultiSelectBoxes extends Component<Props> {
     handleOptionChange: (e: Object, isChecked: boolean, value: any) => void;
     materialUIContainerInstance: any;
     checkedValues: ?Set<any>;
@@ -53,22 +46,17 @@ class OptionsCheckboxesField extends Component<Props> {
         };
     }
 
-    getCheckboxes() {
+    getBoxes() {
         const optionSet = this.props.optionSet;
         if (optionSet) {
-            const otherProps = {};
-            if (!this.props.multiSelect) {
-                otherProps.checkedIcon = (<RadioOnIcon />);
-                otherProps.icon = (<RadioOffIcon />);
-            }
-
             return optionSet.options.map((o: Option, index: number) => (
                 <FormControlLabel
                     control={
                         <Checkbox
-                            {...otherProps}
-                            onChange={(e: Object, isChecked: boolean) => { this.handleOptionChange(e, isChecked, o.value); }}
-                            checked={this.isChecked(o.value)}                            
+                            onChange={
+                                (e: Object, isChecked: boolean) => { this.handleOptionChange(e, isChecked, o.value); }
+                            }
+                            checked={this.isChecked(o.value)}
                         />
                     }
                     label={o.text}
@@ -80,29 +68,25 @@ class OptionsCheckboxesField extends Component<Props> {
     }
 
     handleOptionChange(e: Object, isChecked: boolean, value: any) {
-        this.props.multiSelect ? this.handleMultiSelectUpdate(isChecked, value) : this.handleSingleSelectUpdate(isChecked, value);
+        this.handleSelectUpdate(isChecked, value);
     }
 
-    handleSingleSelectUpdate(isChecked: boolean, value: any) {
-        if (isChecked === false && !this.props.nullable) {
-            return;
-        }
-        this.props.onBlur(isChecked ? value : null);
-    }
-
-    handleMultiSelectUpdate(isChecked: boolean, value: any) {
+    handleSelectUpdate(isChecked: boolean, value: any) {
         let emitValues = null;
 
         if (isChecked) {
             if (this.checkedValues) {
                 this.checkedValues.add(value);
+                // $FlowSuppress
                 emitValues = Array.from(this.checkedValues);
             } else {
                 emitValues = [value];
             }
         } else if (this.checkedValues) {
             this.checkedValues.delete(value);
+            // $FlowSuppress
             if (this.checkedValues.size > 0) {
+                // $FlowSuppress
                 emitValues = Array.from(this.checkedValues);
             } else {
                 emitValues = null;
@@ -114,12 +98,8 @@ class OptionsCheckboxesField extends Component<Props> {
 
     setCheckedStatusForBoxes() {
         const value = this.props.value;
-        if (value || value === false) {
-            if (!isArray(value)) {
-                this.checkedValues = new Set().add(value);
-            } else {
-                this.checkedValues = new Set(value);
-            }
+        if (value || value === false || value === 0) {
+            this.checkedValues = new Set(value);
         } else {
             this.checkedValues = null;
         }
@@ -132,7 +112,7 @@ class OptionsCheckboxesField extends Component<Props> {
     renderHorizontal() {
         return (
             <FormGroup row>
-                {this.getCheckboxes()}
+                {this.getBoxes()}
             </FormGroup>
         );
     }
@@ -140,12 +120,12 @@ class OptionsCheckboxesField extends Component<Props> {
     renderVertical() {
         return (
             <FormGroup>
-                {this.getCheckboxes()}
+                {this.getBoxes()}
             </FormGroup>
         );
     }
 
-    renderCheckBoxes() {
+    renderCheckboxes() {
         const orientation = this.props.orientation;
         return orientation === orientations.VERTICAL ? this.renderVertical() : this.renderHorizontal();
     }
@@ -176,11 +156,11 @@ class OptionsCheckboxesField extends Component<Props> {
                             );
                         })()
                     }
-                    {this.renderHorizontal()}
+                    {this.renderCheckboxes()}
                 </FormControl>
             </div>
         );
     }
 }
 
-export default withStyles(styles)(OptionsCheckboxesField);
+export default withStyles(styles)(MultiSelectBoxes);

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import { updateField } from '../actions/dataEntry.actions';
 import getDataEntryKey from '../common/getDataEntryKey';
+import { placements } from './eventField.const';
 
 type Validator = (value: any) => boolean;
 
@@ -17,6 +18,7 @@ type Settings = {
     componentProps?: ?Object,
     propName: string,
     validatorContainers?: ?Array<ValidatorContainer>,
+    meta?: ?Object,
 };
 
 type ValueMetaUpdateOutput = {
@@ -32,12 +34,17 @@ type ValueMetaInput = {
     type: string,
 };
 
+type FieldContainer = {
+    field: React.Element<any>,
+    placement: $Values<typeof placements>,
+};
+
 type Props = {
     value: any,
     valueMeta: ValueMetaInput,
     settings: Settings,
     id: string,
-    eventFields?: ?Array<React.Element<any>>,
+    fields?: ?Array<FieldContainer>,
     onUpdateField: (value: any, valueMeta: ValueMetaUpdateOutput, fieldId: string, dataEntryId: string, eventId: string) => void,
     completionAttempted?: ?boolean,
     saveAttempted?: ?boolean,
@@ -130,18 +137,25 @@ const getEventField = (InnerComponent: React.ComponentType<any>) =>
         }
 
         getEventFields() {
-            const eventFields = this.props.eventFields;
-            return eventFields ? [...eventFields, this.getFieldElement()] : [this.getFieldElement()];
+            const eventFields = this.props.fields;
+            const settings = this.props.settings;
+
+            const fieldContainer = {
+                field: this.getFieldElement(),
+                placement: (settings.meta && settings.meta.placement) || placements.TOP,
+            };
+
+            return eventFields ? [...eventFields, fieldContainer] : [fieldContainer];
         }
 
         render() {
-            const { settings, value, valueMeta, eventFields, eventId, onUpdateField, ...passOnProps } = this.props;
+            const { settings, value, valueMeta, fields, eventId, onUpdateField, ...passOnProps } = this.props;
 
             return (
                 <div>
                     <InnerComponent
                         ref={(innerInstance) => { this.innerInstance = innerInstance; }}
-                        eventFields={this.getEventFields()}
+                        fields={this.getEventFields()}
                         {...passOnProps}
                     />
                 </div>

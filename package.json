@@ -15,7 +15,7 @@
     "jquery": "^3.2.1",
     "loglevel": "^1.5.1",
     "material-ui": "^0.20.0",
-    "material-ui-icons": "^1.0.0-beta.17",
+    "material-ui-icons": "^1.0.0-beta.36",
     "material-ui-next": "npm:material-ui@next",
     "moment": "^2.19.4",
     "prop-types": "^15.6.0",

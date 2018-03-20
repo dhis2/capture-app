@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import Checkbox from 'material-ui-next/Checkbox';
+import Switch from 'material-ui-next/Switch';
 import { FormControl, FormLabel, FormGroup, FormControlLabel } from 'material-ui-next/Form';
 import { withStyles } from 'material-ui-next/styles';
 
@@ -80,7 +80,7 @@ class D2TrueOnly extends Component<Props> {
                     <FormGroup>
                         <FormControlLabel
                             control={
-                                <Checkbox
+                                <Switch
                                     {...passOnProps}
                                     onChange={this.handleChange}
                                     checked={!!value}

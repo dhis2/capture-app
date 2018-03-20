@@ -1,18 +1,14 @@
 // @flow
 /* eslint-disable react/no-multi-comp */
 import * as React from 'react';
-import { Component } from 'react';
-import log from 'loglevel';
 import { withStyles } from 'material-ui-next/styles';
 
-import errorCreator from '../../utils/errorCreator';
 import getStageFromEvent from '../../metaData/helpers/getStageFromEvent';
-
 import D2Form from '../D2Form/D2Form.component';
+import { placements } from './eventField/eventField.const';
 
 const styles = theme => ({
     footerBar: {
-        padding: theme.spacing.unit,
         display: 'flex',
     },
     button: {
@@ -20,19 +16,30 @@ const styles = theme => ({
     },
 });
 
+type FieldContainer = {
+    field: React.Element<any>,
+    placement: $Values<typeof placements>,
+};
+
 type Props = {
     id: string,
     event: Event,
     completeButton?: ?React.Element<any>,
     saveButton?: ?React.Element<any>,
-    eventFields?: ?Array<React.Element<any>>,
+    fields?: ?Array<FieldContainer>,
     completionAttempted?: ?boolean,
     saveAttempted?: ?boolean,
     classes: Object,
-    onUpdateField: (value: any, uiState: Object, elementId: string, sectionId: string, formId: string, dataEntryId: string) => void,
+    onUpdateField: (
+        value: any,
+        uiState: Object,
+        elementId: string,
+        sectionId: string,
+        formId: string,
+        dataEntryId: string) => void,
 };
 
-class DataEntry extends Component<Props> {
+class DataEntry extends React.Component<Props> {
     static errorMessages = {
         NO_EVENT_SELECTED: 'No event selected',
     };
@@ -58,8 +65,28 @@ class DataEntry extends Component<Props> {
         this.props.onUpdateField(...args, this.props.id, this.props.event.eventId);
     }
 
+    getFieldWithPlacement(placement: $Values<typeof placements>) {
+        const fields = this.props.fields;
+
+        return fields ?
+            fields
+                .filter(fieldContainer => fieldContainer.placement === placement)
+                .map(fieldContainer => fieldContainer.field)
+            : null;
+    }
+
     render() {
-        const { id, classes, event, completeButton, saveButton, completionAttempted, saveAttempted, eventFields, onUpdateField, ...passOnProps } = this.props;
+        const {
+            id,
+            classes,
+            event,
+            completeButton,
+            saveButton,
+            completionAttempted,
+            saveAttempted,
+            fields,
+            onUpdateField,
+            ...passOnProps } = this.props;
 
         if (!event) {
             return (
@@ -79,10 +106,12 @@ class DataEntry extends Component<Props> {
         }
 
         const foundation = formFoundationContainer.stage;
+        const topFields = this.getFieldWithPlacement(placements.TOP);
+        const bottomFields = this.getFieldWithPlacement(placements.BOTTOM);
 
         return (
             <div>
-                {eventFields}
+                {topFields}
                 <D2Form
                     innerRef={(formInstance) => { this.formInstance = formInstance; }}
                     formFoundation={foundation}
@@ -91,19 +120,39 @@ class DataEntry extends Component<Props> {
                     onUpdateField={this.handleUpdateField}
                     {...passOnProps}
                 />
+                {bottomFields}
                 <div
                     className={classes.footerBar}
                 >
-                    <div
-                        className={classes.button}
-                    >
-                        { completeButton }
-                    </div>
-                    <div
-                        className={classes.button}
-                    >
-                        { saveButton }
-                    </div>
+                    {
+                        (() => {
+                            if (completeButton) {
+                                return (
+                                    <div
+                                        className={classes.button}
+                                    >
+                                        { completeButton }
+                                    </div>
+                                );
+                            }
+                            return null;
+                        })()
+                    }
+
+                    {
+                        (() => {
+                            if (saveButton) {
+                                return (
+                                    <div
+                                        className={classes.button}
+                                    >
+                                        { saveButton }
+                                    </div>
+                                );
+                            }
+                            return null;
+                        })()
+                    }
                 </div>
             </div>
         );
@@ -116,7 +165,7 @@ type ContainerProps = {
 
 };
 
-class DataEntryContainer extends Component<ContainerProps> {
+class DataEntryContainer extends React.Component<ContainerProps> {
     dataEntryInstance: DataEntry;
 
     getWrappedInstance() {

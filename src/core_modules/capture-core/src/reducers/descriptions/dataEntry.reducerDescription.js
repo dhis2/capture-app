@@ -65,6 +65,38 @@ export const dataEntriesUIDesc = createReducerDescription({
         newState[key].saveAttempted = true;
         return newState;
     },
+    [actionTypes.START_COMPLETE_EVENT]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const key = getDataEntryKey(payload.id, payload.eventId);
+        newState[key] = { ...newState[key] };
+        newState[key].finalInProgress = true;
+        return newState;
+    },
+    [actionTypes.COMPLETE_EVENT]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const key = getDataEntryKey(payload.id, payload.eventId);
+        newState[key] = { ...newState[key] };
+        newState[key].finalInProgress = false;
+        return newState;
+    },
+    [actionTypes.START_SAVE_EVENT]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const key = getDataEntryKey(payload.id, payload.eventId);
+        newState[key] = { ...newState[key] };
+        newState[key].finalInProgress = true;
+        return newState;
+    },
+    [actionTypes.SAVE_EVENT]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const key = getDataEntryKey(payload.id, payload.eventId);
+        newState[key] = { ...newState[key] };
+        newState[key].finalInProgress = false;
+        return newState;
+    },
     [actionTypes.UPDATE_FORM_FIELD]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;

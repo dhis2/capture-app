@@ -8,6 +8,7 @@ import TrueOnly from '../../FormFields/Generic/D2TrueOnly.component';
 import D2Date from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import D2DateTime from '../../FormFields/DateAndTime/D2DateTime/D2DateTime.component';
 
+import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
 import OptionsSelect from '../../FormFields/Options/SelectVirtualized/OptionsSelectVirtualized.component';
 import withSelectTranslations from '../../FormFields/Options/SelectVirtualized/withTranslations';
 import withConvertedOptionSet from '../../FormFields/Options/withConvertedOptionSet';
@@ -15,6 +16,7 @@ import withConvertedOptionSet from '../../FormFields/Options/withConvertedOption
 import getValidators from './validators';
 import MetaDataElement from '../../../metaData/DataElement/DataElement';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
+import { inputTypes as optionSetInputTypes } from '../../../metaData/OptionSet/optionSet.const';
 
 import withDefaultChangeHandler from './withDefaultChangeHandler';
 import withDefaultShouldUpdateInterface from './withDefaultShouldUpdateInterface';
@@ -97,6 +99,7 @@ const fieldForTypes = {
         const props = createComponentProps({
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
+            nullable: !metaData.compulsory,
         });
 
         return createFieldProps({
@@ -196,31 +199,53 @@ const fieldForTypes = {
     [elementTypes.UNKNOWN]: (metaData: MetaDataElement) => null, // eslint-disable-line no-unused-vars
 };
 
-const optionSetField = (metaData: MetaDataElement) => {
-    const props = createComponentProps({
-        label: metaData.formName,
-        optionSet: metaData.optionSet,
-        nullable: !metaData.compulsory,
-    });
-
-    return createFieldProps({
-        id: metaData.id,
-        component:
-            withGotoInterface()(
-                withHideCompatibility()(
-                    withDefaultShouldUpdateInterface()(
-                        withRequiredFieldCalculation()(
-                            withDefaultFieldContainer()(
-                                withDefaultMessages()(
-                                    withConvertedOptionSet()(
-                                        withSelectTranslations()(OptionsSelect),
-                                    ),
+const getOptionSetComponent = (inputType: $Values<typeof optionSetInputTypes>) => {
+    if (inputType === optionSetInputTypes.SELECT) {
+        return withGotoInterface()(
+            withHideCompatibility()(
+                withDefaultShouldUpdateInterface()(
+                    withRequiredFieldCalculation()(
+                        withDefaultFieldContainer()(
+                            withDefaultMessages()(
+                                withConvertedOptionSet()(
+                                    withSelectTranslations()(OptionsSelect),
                                 ),
                             ),
                         ),
                     ),
                 ),
             ),
+        );
+    }
+
+    return withGotoInterface()(
+        withHideCompatibility()(
+            withDefaultShouldUpdateInterface()(
+                withRequiredFieldCalculation()(
+                    withDefaultFieldContainer()(
+                        withDefaultMessages()(
+                            withConvertedOptionSet()(SelectBoxes),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+    );
+};
+
+const optionSetField = (metaData: MetaDataElement) => {
+    const props = createComponentProps({
+        label: metaData.formName,
+        optionSet: metaData.optionSet,
+        nullable: !metaData.compulsory,
+        required: metaData.compulsory,
+    });
+
+    return createFieldProps({
+        id: metaData.id,
+        component:
+            // $FlowSuppress
+            getOptionSetComponent(metaData.optionSet.inputType),
         props,
     }, metaData);
 };
