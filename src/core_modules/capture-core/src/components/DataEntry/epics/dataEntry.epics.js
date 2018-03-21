@@ -15,16 +15,16 @@ import {
     completeEventError,
     saveEvent,
     saveEventError,
-    loadDataEntryEvent,
-    openDataEntryEventAlreadyLoaded,
 } from '../actions/dataEntry.actions';
+import { actionTypes as dataEntryLoadTypes, loadDataEntryEvent, openDataEntryEventAlreadyLoaded } from '../actions/dataEntryLoad.actions';
+
 import getDataEntryKey from '../common/getDataEntryKey';
 import { getRulesActionsOnUpdate } from '../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
 
 import type { FieldData } from '../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
 
 export const loadDataEntryEpic = (action$, store: ReduxStore) =>
-    action$.ofType(actionTypes.START_LOAD_DATA_ENTRY_EVENT)
+    action$.ofType(dataEntryLoadTypes.START_LOAD_DATA_ENTRY_EVENT)
         .map((action) => {
             const state = store.getState();
             const payload = action.payload;

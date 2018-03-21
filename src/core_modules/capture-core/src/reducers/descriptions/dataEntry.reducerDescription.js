@@ -2,19 +2,20 @@
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 
 import { actionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
+import { actionTypes as loadActionTypes } from '../../components/DataEntry/actions/dataEntryLoad.actions';
 import { actionTypes as rulesEngineActionTypes } from '../../rulesEngineActionsCreator/rulesEngine.actions';
 
 import getDataEntryKey from '../../components/DataEntry/common/getDataEntryKey';
 
 export const dataEntriesDesc = createReducerDescription({
-    [actionTypes.LOAD_DATA_ENTRY_EVENT]: (state, action) => {
+    [loadActionTypes.LOAD_DATA_ENTRY_EVENT]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
         newState[payload.id] = { ...newState[payload.id] };
         newState[payload.id].eventId = payload.eventId;
         return newState;
     },
-    [actionTypes.OPEN_DATA_ENTRY_EVENT_ALREADY_LOADED]: (state, action) => {
+    [loadActionTypes.OPEN_DATA_ENTRY_EVENT_ALREADY_LOADED]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
         newState[payload.dataEntryId] = { ...newState[payload.dataEntryId] };
@@ -24,7 +25,7 @@ export const dataEntriesDesc = createReducerDescription({
 }, 'dataEntries');
 
 export const dataEntriesUIDesc = createReducerDescription({
-    [actionTypes.LOAD_DATA_ENTRY_EVENT]: (state, action) => {
+    [loadActionTypes.LOAD_DATA_ENTRY_EVENT]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
         const key = getDataEntryKey(payload.id, payload.eventId);
@@ -116,8 +117,8 @@ export const dataEntriesUIDesc = createReducerDescription({
 }, 'dataEntriesUI');
 
 
-export const dataEntriesValuesDesc = createReducerDescription({
-    [actionTypes.LOAD_DATA_ENTRY_EVENT]: (state, action) => {
+export const dataEntriesFieldsValueDesc = createReducerDescription({
+    [loadActionTypes.LOAD_DATA_ENTRY_EVENT]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
 
@@ -135,22 +136,32 @@ export const dataEntriesValuesDesc = createReducerDescription({
         dataEntryValues[payload.fieldId] = payload.value;
         return newState;
     },
-}, 'dataEntriesValues');
+}, 'dataEntriesFieldsValue');
 
-export const dataEntriesValuesMetaDesc = createReducerDescription({
-    [actionTypes.LOAD_DATA_ENTRY_EVENT]: (state, action) => {
+export const dataEntriesFieldsMetaDesc = createReducerDescription({
+    [loadActionTypes.LOAD_DATA_ENTRY_EVENT]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
 
         const key = getDataEntryKey(payload.id, payload.eventId);
-        newState[key] = Object.keys(payload.dataEntryTypes).reduce((accValuesMeta, elementKey) => {
-            accValuesMeta[elementKey] = {
+        newState[key] = payload.dataEntryMeta;
+        return newState;
+    },
+}, 'dataEntriesFieldsMeta');
+
+export const dataEntriesFieldsUIDesc = createReducerDescription({
+    [loadActionTypes.LOAD_DATA_ENTRY_EVENT]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+
+        const key = getDataEntryKey(payload.id, payload.eventId);
+        newState[key] = Object.keys(payload.dataEntryValues).reduce((accValuesUI, elementKey) => {
+            accValuesUI[elementKey] = {
                 validationError: null,
                 isValid: true,
                 touched: false,
-                type: payload.dataEntryTypes[elementKey],
             };
-            return accValuesMeta;
+            return accValuesUI;
         }, {});
 
         return newState;
@@ -161,8 +172,8 @@ export const dataEntriesValuesMetaDesc = createReducerDescription({
 
         const key = getDataEntryKey(payload.dataEntryId, payload.eventId);
         newState[key] = { ...newState[key] };
-        const dataEntryValuesMeta = newState[key];
-        dataEntryValuesMeta[payload.fieldId] = { ...dataEntryValuesMeta[payload.fieldId], ...payload.valueMeta };
+        const dataEntryValuesUI = newState[key];
+        dataEntryValuesUI[payload.fieldId] = { ...dataEntryValuesUI[payload.fieldId], ...payload.valueMeta };
         return newState;
     },
-}, 'dataEntriesValuesMeta');
+}, 'dataEntriesFieldsUI');

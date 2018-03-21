@@ -179,8 +179,8 @@ const getMapStateToProps = (settingsFn: SettingsFn) => (state: ReduxState, props
     const key = getDataEntryKey(props.id, eventId);
 
     return {
-        value: state.dataEntriesValues[key][settings.propName],
-        valueMeta: state.dataEntriesValuesMeta[key][settings.propName],
+        value: state.dataEntriesFieldsValue[key][settings.propName],
+        valueMeta: state.dataEntriesFieldsUI[key][settings.propName],
         eventId,
         settings,
     };
