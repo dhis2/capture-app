@@ -11,7 +11,7 @@ export default () =>
         class HideFieldCompatibilityInterface extends React.Component<Props> {
             render() {
                 const { metaCompulsory, rulesCompulsory, ...passOnProps } = this.props;
-                
+
                 return (
                     <InnerComponent
                         required={!!(metaCompulsory || rulesCompulsory)}

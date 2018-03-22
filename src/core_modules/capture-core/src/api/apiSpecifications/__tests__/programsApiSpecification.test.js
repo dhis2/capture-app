@@ -9,72 +9,84 @@ it('programs converter', () => {
                 {
                     dataValues: {
                         id: 'ps1',
-                    },
-                    programStageSections: {
-                        toArray: () => [
-                            {
-                                id: 'pss1',
-                            },
-                        ],
-                    },
-                    notificationTemplates: [
-                        {
-                            id: 'not1',
+                        programStageSections: {
+                            toArray: () => [
+                                {
+                                    id: 'pss1',
+                                },
+                            ],
                         },
-                    ],
+                        notificationTemplates: {
+                            toArray: () => [
+                                {
+                                    id: 'not1',
+                                },
+                            ],
+                        },
+                        programStageDataElements: [],
+                    },
                 },
                 {
                     dataValues: {
                         id: 'ps1',
                         sortOrder: 1,
-                    },
-                    programStageSections: {
-                        toArray: () => [
-                            {
-                                id: 'pss1',
-                            },
-                        ],
-                    },
-                    notificationTemplates: [
-                        {
-                            id: 'not1',
+                        programStageSections: {
+                            toArray: () => [
+                                {
+                                    id: 'pss1',
+                                },
+                            ],
                         },
-                    ],
+                        notificationTemplates: {
+                            toArray: () => [
+                                {
+                                    id: 'not1',
+                                },
+                            ],
+                        },
+                        programStageDataElements: [],
+                    },
                 },
                 {
                     dataValues: {
                         id: 'ps2',
                         sortOrder: 2,
-                    },
-                    programStageSections: {
-                        toArray: () => [
-                            {
-                                id: 'pss1',
-                            },
-                        ],
-                    },
-                    notificationTemplates: [
-                        {
-                            id: 'not1',
+                        programStageSections: {
+                            toArray: () => [
+                                {
+                                    id: 'pss1',
+                                },
+                            ],
                         },
-                    ],
+                        notificationTemplates: {
+                            toArray: () => [
+                                {
+                                    id: 'not1',
+                                },
+                            ],
+                        },
+                        programStageDataElements: [],
+                    },
                 },
                 {
                     dataValues: {
                         id: 'ps1',
-                    },
-                    programStageSections: {
-                        toArray: () => [
-                            {
-                                id: 'pss1',
-                            },
-                        ],
-                    },
-                    notificationTemplates: [
-                        {
-                            id: 'not1',
+                        programStageSections: {
+                            toArray: () => [
+                                {
+                                    id: 'pss1',
+                                },
+                            ],
                         },
-                    ],
+                        notificationTemplates: {
+                            toArray: () => [
+                                {
+                                    id: 'not1',
+                                },
+                            ],
+                        },
+                        programStageDataElements: [],
+                    },
                 },
             ],
     };
@@ -89,7 +101,6 @@ it('programs converter', () => {
             ],
         },
     }];
-
     const convertedData = programs.converter(objects);
     expect(convertedData[0].id).toEqual(id);
 

@@ -9,8 +9,7 @@ import MetaDataSection from '../../metaData/RenderFoundation/Section';
 
 type Props = {
     sectionMetaData: MetaDataSection,
-    isHidden: boolean,
-    onUpdateSectionStatus: (id: string, status: Object) => void,
+    isHidden?: ?boolean,
 };
 
 class D2Section extends Component<Props> {
@@ -30,7 +29,7 @@ class D2Section extends Component<Props> {
     }
 
     render() {
-        const { sectionMetaData, onUpdateSectionStatus, isHidden, ...passOnProps } = this.props;
+        const { sectionMetaData, isHidden, ...passOnProps } = this.props;
 
         if (isHidden) {
             return null;
@@ -54,7 +53,6 @@ class D2Section extends Component<Props> {
                     <D2SectionFields
                         ref={(instance) => { this.sectionFieldsInstance = instance; }}
                         fieldsMetaData={sectionMetaData.elements}
-                        onSectionFieldsUpdate={onUpdateSectionStatus}
                         {...passOnProps}
                     />
                 </Section>

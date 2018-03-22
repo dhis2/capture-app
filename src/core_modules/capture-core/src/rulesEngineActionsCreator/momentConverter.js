@@ -6,10 +6,10 @@ import type { IMomentConverter } from '../RulesEngine/rulesEngine.types';
 const momentFormat = 'YYYY-MM-DD';
 
 class RulesMomentConverter implements IMomentConverter {
-    rulesDateToMoment(rulesEngineValue: string): Moment {
+    rulesDateToMoment(rulesEngineValue: string): moment$Moment {
         return moment(rulesEngineValue, momentFormat);
     }
-    momentToRulesDate(momentObject: Moment): string {
+    momentToRulesDate(momentObject: moment$Moment): string {
         return momentObject.format(momentFormat);
     }
 }

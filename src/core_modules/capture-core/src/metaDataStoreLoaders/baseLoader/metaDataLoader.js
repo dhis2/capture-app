@@ -33,7 +33,6 @@ function loadCoreMetaData(storageContainer: StorageContainer) {
     return Promise.all(coreLoadSpecifications.map(loadSpecification => loadSpecification.load(storageContainer)));
 }
 
-
 async function openStorageContainer() {
     const objectStoreList = Object.keys(objectStores).map(key => objectStores[key]);
     const storageContainer = new StorageContainer('metaData', [IndexedDBAdapter, LocalStorageAdapter], objectStoreList);
@@ -56,7 +55,9 @@ export default async function loadMetaData() {
     const trackedEntityAttributesFromPrograms = missingPrograms
         ? missingPrograms.reduce((accAttributes, program) => {
             if (program.programTrackedEntityAttributes) {
-                const attributes = program.programTrackedEntityAttributes.map(programAttribute => programAttribute.trackedEntityAttribute);
+                const attributes =
+                    program.programTrackedEntityAttributes
+                        .map(programAttribute => programAttribute.trackedEntityAttribute);
                 return [...accAttributes, ...attributes];
             }
             return accAttributes;

@@ -10,7 +10,7 @@ const makeMapStateToProps = () => {
     const getRulesMessages = makeGetMessages();
     const getCompulsory = makeGetCompulsory();
 
-    const mapStateToProps = (state: Object, props: { getContainerId: () => string }) => ({
+    const mapStateToProps = (state: Object, props: { formId: string }) => ({
         values: getSectionValues(state, props),
         rulesHiddenFields: getHiddenFields(state, props),
         rulesMessages: getRulesMessages(state, props),

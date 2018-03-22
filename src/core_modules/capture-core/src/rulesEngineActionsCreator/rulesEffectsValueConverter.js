@@ -1,6 +1,9 @@
 // @flow
 /* eslint-disable class-methods-use-this */
+import moment from 'moment';
 import type { IConvertOutputRulesEffectsValue } from '../RulesEngine/rulesEngine.types';
+
+const dateMomentFormat = 'YYYY-MM-DD';
 
 class RulesValueConverter implements IConvertOutputRulesEffectsValue {
     convertText(value: string): string {
@@ -25,10 +28,21 @@ class RulesValueConverter implements IConvertOutputRulesEffectsValue {
         return value;
     }
     convertDate(value: string): string {
-        return value;
+        if (!value) {
+            return value;
+        }
+        const momentDate = moment(value, dateMomentFormat);
+        return momentDate.format('L');
     }
-    convertDateTime(value: string): Object {
-        return value;
+    convertDateTime(value: string): ?Object {
+        if (!value) {
+            return null;
+        }
+        const momentDateTime = moment(value);
+        return {
+            date: momentDateTime.format('L'),
+            time: momentDateTime.format('LT'),
+        };
     }
     convertTime(value: string): string {
         return value;

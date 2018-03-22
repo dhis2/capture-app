@@ -1,11 +1,11 @@
 // @flow
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { withStyles } from 'material-ui-next/styles';
 
-import D2Section from './D2Section.component';
+import D2Section from './D2Section.container';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 
-const styles = theme => ({
+const styles = () => ({
     container: {
         paddingTop: 10,
         paddingBottom: 10,
@@ -34,8 +34,15 @@ class D2Form extends Component<Props> {
         return Array.from(this.sectionInstances.entries())
             .map(entry => entry[1])
             .every((sectionInstance: D2Section) => {
-                if (sectionInstance && sectionInstance.sectionFieldsInstance && sectionInstance.sectionFieldsInstance.getWrappedInstance()) {
-                    const sectionFieldsInstance = sectionInstance.sectionFieldsInstance.getWrappedInstance();
+                if (sectionInstance &&
+                    sectionInstance.getWrappedInstance() &&
+                    sectionInstance.getWrappedInstance().sectionFieldsInstance &&
+                    sectionInstance.getWrappedInstance().sectionFieldsInstance.getWrappedInstance()) {
+                    const sectionFieldsInstance = sectionInstance
+                        .getWrappedInstance()
+                        .sectionFieldsInstance
+                        .getWrappedInstance();
+
                     return sectionFieldsInstance.isValid();
                 }
                 return true;
@@ -46,8 +53,15 @@ class D2Form extends Component<Props> {
         return Array.from(this.sectionInstances.entries())
             .map(entry => entry[1])
             .reduce((failedFormFields: Array<any>, sectionInstance: D2Section) => {
-                if (sectionInstance && sectionInstance.sectionFieldsInstance && sectionInstance.sectionFieldsInstance.getWrappedInstance()) {
-                    const sectionFieldsInstance = sectionInstance.sectionFieldsInstance.getWrappedInstance();
+                if (sectionInstance &&
+                    sectionInstance.getWrappedInstance() &&
+                    sectionInstance.getWrappedInstance().sectionFieldsInstance &&
+                    sectionInstance.getWrappedInstance().sectionFieldsInstance.getWrappedInstance()) {
+                    const sectionFieldsInstance = sectionInstance
+                        .getWrappedInstance()
+                        .sectionFieldsInstance
+                        .getWrappedInstance();
+
                     if (!sectionFieldsInstance.isValid()) {
                         failedFormFields = [...failedFormFields, ...sectionFieldsInstance.getInvalidFields()];
                     }
@@ -66,7 +80,7 @@ class D2Form extends Component<Props> {
         firstFailureInstance.goto && firstFailureInstance.goto();
         return false;
     }
-    
+
     setSectionInstance(instance: ?D2Section, id: string) {
         if (!instance) {
             if (this.sectionInstances.has(id)) {

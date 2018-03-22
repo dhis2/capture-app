@@ -5,7 +5,7 @@ import isDefined from 'd2-utilizr/lib/isDefined';
 import isObject from 'd2-utilizr/lib/isObject';
 import { withStyles } from 'material-ui-next/styles';
 
-const styles = theme => ({
+const styles = () => ({
     fieldContainer: {
         position: 'relative',
     },
@@ -53,7 +53,7 @@ class FormBuilder extends React.Component<Props> {
     static validateField(field: Field, value: any): { valid: boolean, errorMessage?: string } {
         const validatorResult = (field.validators || [])
             .reduce((pass, currentValidator) => (pass === true
-                ? (currentValidator.validator(value, field) === true || currentValidator.message) : pass
+                ? (currentValidator.validator(value) === true || currentValidator.message) : pass
             ), true);
 
         if (validatorResult !== true) {
@@ -210,8 +210,6 @@ class FormBuilder extends React.Component<Props> {
     }
 
     render() {
-        const { fields, values, fieldsUI, onUpdateField, classes } = this.props;
-
         return (
             <div>
                 {this.renderFields()}

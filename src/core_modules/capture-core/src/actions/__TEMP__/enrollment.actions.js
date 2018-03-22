@@ -8,5 +8,5 @@ export const actionTypes = {
 };
 
 export const startEnrollmentLoad = () => actionCreator(actionTypes.START_ENROLLMENT_LOAD)();
-export const enrollmentLoaded = events => actionCreator(actionTypes.ENROLLMENT_LOADED)(events);
-export const enrollmentLoadFailed = message => actionCreator(actionTypes.ENROLLMENT_LOAD_FAILED)(message);
+export const enrollmentLoaded = (events: any) => actionCreator(actionTypes.ENROLLMENT_LOADED)(events);
+export const enrollmentLoadFailed = (message: string) => actionCreator(actionTypes.ENROLLMENT_LOAD_FAILED)(message);

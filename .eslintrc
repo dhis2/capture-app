@@ -27,6 +27,13 @@
         "react/prefer-stateless-function": 0,
         "no-unused-expressions": 0,
         "react/jsx-no-bind": 0,
+        "max-len": [
+            "warn",
+            {
+                "code": 120,
+                "ignoreStrings": true
+            }
+        ],
         "react/sort-comp": [
             2,
             {
