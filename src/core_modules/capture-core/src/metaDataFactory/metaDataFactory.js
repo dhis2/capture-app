@@ -246,7 +246,7 @@ function buildProgram(d2Program: D2Program) {
 
 function addProgramVariables(d2ProgramRulesVariables: Array<ProgramRuleVariable>) {
     const rulesVariablesByProgram = d2ProgramRulesVariables.reduce((accRulesVariablesByProgram, d2RuleVariable) => {
-        const ruleVariableProgramId = d2RuleVariable.program.id;
+        const ruleVariableProgramId = d2RuleVariable.programId;
         accRulesVariablesByProgram[ruleVariableProgramId] = accRulesVariablesByProgram[ruleVariableProgramId] || [];
         accRulesVariablesByProgram[ruleVariableProgramId].push(d2RuleVariable);
         return accRulesVariablesByProgram;
@@ -263,7 +263,7 @@ function addProgramVariables(d2ProgramRulesVariables: Array<ProgramRuleVariable>
 
 function addProgramRules(d2ProgramRules: Array<ProgramRule>) {
     const rulesByProgram = d2ProgramRules.reduce((accRulesByProgram, d2Rule) => {
-        const ruleProgramId = d2Rule.program.id;
+        const ruleProgramId = d2Rule.programId;
         accRulesByProgram[ruleProgramId] = accRulesByProgram[ruleProgramId] || [];
         accRulesByProgram[ruleProgramId].push(d2Rule);
         return accRulesByProgram;
