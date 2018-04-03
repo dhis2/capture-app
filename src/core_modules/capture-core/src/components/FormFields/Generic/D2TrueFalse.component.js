@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import { getTranslation } from '../../../d2/d2Instance';
 import { formatterOptions } from '../../../utils/string/format.const';
-import OptionsCheckBoxes from '../Options/Checkboxes/OptionsCheckboxes.component';
 
+import SingleSelectBoxes from '../Options/SingleSelectBoxes/SingleSelectBoxes.component';
 import OptionSet from '../../../metaData/OptionSet/OptionSet';
 import Option from '../../../metaData/OptionSet/Option';
 
@@ -27,7 +27,7 @@ class D2TrueFalse extends Component<Props> {
         return optionSet;
     }
 
-    fieldInstance: OptionsCheckBoxes;
+    fieldInstance: SingleSelectBoxes;
     optionSet: OptionSet;
 
     constructor(props: Props) {
@@ -35,21 +35,13 @@ class D2TrueFalse extends Component<Props> {
         this.optionSet = D2TrueFalse.getOptions();
     }
 
-    /*
-    goto() {
-        if (this.fieldInstance && this.fieldInstance.goto) {
-            this.fieldInstance.goto();
-        }
-    }
-    */
-
     render() {
-        const { ...other } = this.props;
+        const { ...passOnProps } = this.props;
 
         return (
             <div>
-                <OptionsCheckBoxes
-                    {...other}
+                <SingleSelectBoxes
+                    {...passOnProps}
                     optionSet={this.optionSet}
                     ref={((instance) => { this.fieldInstance = instance; })}
                 />

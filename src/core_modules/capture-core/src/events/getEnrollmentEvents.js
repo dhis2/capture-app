@@ -1,9 +1,10 @@
 // @flow
 import log from 'loglevel';
 import { getApi } from '../d2/d2Instance';
-import programCollection from '../metaData/programCollection/programCollection';
+import programCollection from '../metaDataMemoryStores/programCollection/programCollection';
 import errorCreator from '../utils/errorCreator';
-import { valueConvertersForType } from '../converters/serverToClient';
+import { convertValue } from '../converters/serverToClient';
+import elementTypes from '../metaData/DataElement/elementTypes';
 
 type ApiDataValue = {
     dataElement: string,
@@ -16,9 +17,9 @@ type ApiTEIEvent = {
     programStage: string,
     orgUnit: string,
     orgUnitName: string,
-    trackedEntityInstance: string,
-    enrollment: string,
-    enrollmentStatus: string,
+    trackedEntityInstance?: string,
+    enrollment?: string,
+    enrollmentStatus?: string,
     status: string,
     eventDate: string,
     dueDate: string,
@@ -37,20 +38,35 @@ function getValuesById(apiDataValues: Array<ApiDataValue>) {
     }, {});
 }
 
+const mapEventInputKeyToOutputKey = {
+    event: 'eventId',
+    program: 'programId',
+    programStage: 'programStageId',
+    orgUnit: 'orgUnitId',
+    trackedEntityInstance: 'trackedEntityInstanceId',
+    enrollment: 'enrollmentId',
+};
+
 function convertMainProperties(apiEvent: ApiTEIEvent): Event {
-    return {
-        eventId: apiEvent.event,
-        programId: apiEvent.program,
-        programStageId: apiEvent.programStage,
-        orgUnitId: apiEvent.orgUnit,
-        orgUnitName: apiEvent.orgUnitName,
-        trackedEntityInstanceId: apiEvent.trackedEntityInstance,
-        enrollmentId: apiEvent.enrollment,
-        enrollmentStatus: apiEvent.enrollmentStatus,
-        status: apiEvent.status,
-        eventDate: valueConvertersForType.DATETIME(apiEvent.eventDate),
-        dueDate: valueConvertersForType.DATETIME(apiEvent.dueDate),
-    };
+    return Object
+        .keys(apiEvent)
+        .reduce((accEvent, inputKey) => {
+            if (inputKey !== 'dataValues') {
+                const valueToConvert = apiEvent[inputKey];
+                let convertedValue;
+                if (inputKey === 'eventDate' || inputKey === 'dueDate' || inputKey === 'completedDate') {
+                    convertedValue = convertValue(elementTypes.DATE, valueToConvert);
+                } else {
+                    convertedValue = valueToConvert;
+                }
+
+                // $FlowSuppress
+                const outputKey = mapEventInputKeyToOutputKey[inputKey] || inputKey;
+                // $FlowSuppress
+                accEvent[outputKey] = convertedValue;
+            }
+            return accEvent;
+        }, {});
 }
 
 function convertToClientEvent(event: ApiTEIEvent) {
@@ -67,7 +83,7 @@ function convertToClientEvent(event: ApiTEIEvent) {
     }
 
     const dataValuesById = getValuesById(event.dataValues);
-    const convertedDataValues = stageMetaData.convertValues(dataValuesById, valueConvertersForType);
+    const convertedDataValues = stageMetaData.convertValues(dataValuesById, convertValue);
 
     const convertedMainProperties = convertMainProperties(event);
 
@@ -81,7 +97,8 @@ function convertToClientEvent(event: ApiTEIEvent) {
 export default async function getEnrollmentEvents() {
     const api = getApi();
     const apiRes = await api
-        .get('events?program=eBAyeGv0exc');
+        //.get('events?program=eBAyeGv0exc');
+        .get('events?event=qEHQdXkUAGk');
 
     if (!apiRes || !apiRes.events || apiRes.events.length === 0) {
         return null;

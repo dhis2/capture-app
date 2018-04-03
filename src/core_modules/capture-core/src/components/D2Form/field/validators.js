@@ -1,6 +1,7 @@
 // @flow
 import { wordToValidatorMap } from 'd2-ui/lib/forms/Validators';
 import isArray from 'd2-utilizr/src/isArray';
+import isString from 'd2-utilizr/src/isString';
 
 import isValidDate from '../../../utils/validators/date.validator';
 import isValidDateTime from '../../../utils/validators/dateTime.validator';
@@ -34,6 +35,13 @@ const errorMessages = {
     DATETIME: 'value_should_be_a_valid_datetime',
     TIME: 'value_should_be_a_valid_time',
     PERCENTAGE: 'value_should_be_a_valid_percentage',
+};
+
+const isCompulsoryRequirementMet = wordToValidatorMap.get(wordValidatorKeys.COMPULSORY);
+
+const isCompulsoryRequirementMetWrapper = (value: any) => {
+    const testValue = (value && isString(value)) ? value.trim() : value;
+    return isCompulsoryRequirementMet(testValue);
 };
 
 const isInteger = (value: string) => {
@@ -72,7 +80,11 @@ const isValidPercentage = (value: any) => {
 const validatorsForTypes = {
     [elementTypes.NUMBER]: () => ({
         validator: wordToValidatorMap.get(wordValidatorKeys.NUMBER),
-        message: getTranslation(wordToValidatorMap.get(wordValidatorKeys.NUMBER).message, formatterOptions.CAPITALIZE_FIRST_LETTER),
+        message:
+            getTranslation(
+                wordToValidatorMap.get(wordValidatorKeys.NUMBER).message,
+                formatterOptions.CAPITALIZE_FIRST_LETTER,
+            ),
     }),
     [elementTypes.INTEGER]: () => ({
         validator: isInteger,
@@ -109,21 +121,28 @@ const validatorsForTypes = {
 };
 
 function buildTypeValidators(metaData: MetaDataElement): Array<ValidatorContainer> {
+    // $FlowSuppress
     let validatorContainersForType = validatorsForTypes[metaData.type] && validatorsForTypes[metaData.type](metaData);
 
     if (!validatorContainersForType) {
         return [];
     }
 
-    validatorContainersForType = isArray(validatorContainersForType) ? validatorContainersForType : [validatorContainersForType];
+    validatorContainersForType = isArray(validatorContainersForType) ?
+        validatorContainersForType :
+        [validatorContainersForType]
+    ;
 
+    // $FlowSuppress
     validatorContainersForType = validatorContainersForType.map(validatorContainer => ({
         ...validatorContainer,
         validator: (value: any) => {
             if (!value && value !== 0 && value !== false) {
                 return true;
             }
-            return validatorContainer.validator(value);
+
+            const toValidateValue = isString(value) ? value.trim() : value;
+            return validatorContainer.validator(toValidateValue);
         },
     }));
 
@@ -133,15 +152,23 @@ function buildTypeValidators(metaData: MetaDataElement): Array<ValidatorContaine
 function buildCompulsoryValidator(metaData: MetaDataElement): Array<ValidatorContainer> {
     return metaData.compulsory ? [
         {
-            validator: wordToValidatorMap.get(wordValidatorKeys.COMPULSORY),
-            message: getTranslation(wordToValidatorMap.get(wordValidatorKeys.COMPULSORY).message, formatterOptions.CAPITALIZE_FIRST_LETTER),
+            validator: isCompulsoryRequirementMetWrapper,
+            message:
+                getTranslation(
+                    wordToValidatorMap.get(
+                        wordValidatorKeys.COMPULSORY,
+                    ).message,
+                    formatterOptions.CAPITALIZE_FIRST_LETTER,
+                ),
         },
     ] :
         [];
 }
 
 function compose(validatorBuilders: Array<ValidatorBuilder>, metaData: MetaDataElement) {
-    const validators = validatorBuilders.reduce((accValidators: Array<ValidatorContainer>, builder: ValidatorBuilder) => [...accValidators, ...builder(metaData)], []);
+    const validators =
+        validatorBuilders.reduce((accValidators: Array<ValidatorContainer>, builder: ValidatorBuilder) =>
+            [...accValidators, ...builder(metaData)], []);
     return validators;
 }
 

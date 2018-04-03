@@ -1,34 +1,42 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
-import React from 'react';
-import FontIcon from 'material-ui/FontIcon';
+// import React from 'react';
+// import FontIcon from 'material-ui/FontIcon';
 import isArray from 'd2-utilizr/src/isArray';
 
 import Option from './Option';
-import { viewTypes } from './optionSet.const';
+import { viewTypes, inputTypes } from './optionSet.const';
 import errorCreator from '../../utils/errorCreator';
-import elementTypes from '../DataElement/elementTypes';
 import DataElement from '../DataElement/DataElement';
 
+import type { ConvertFn } from '../DataElement/DataElement';
 import type { Value } from './Option';
 
 export default class OptionSet {
     static errorMessages = {
         OPTION_NOT_FOUND: 'Option not found',
-        UNSUPPORTED_VIEWTYPE: 'Tried to set unsupported viewType',
+        UNSUPPORTED_VIEWTYPE: 'Tried to set an unsupported viewType',
+        UNSUPPORTED_INPUTTYPE: 'Tried to set an unsuported inputType',
     };
+
+    _id: ?string;
     _emptyText: ?string;
     _options: Array<Option>;
-    _viewType: ?$Values<typeof viewTypes>;
+    _viewType: $Values<typeof viewTypes>;
+    _inputType: $Values<typeof inputTypes>;
     _dataElement: ?DataElement;
 
-    constructor(options?: ?Array<Option>, dataElement?: ?DataElement, viewType?: ?string, convertersForType?: ?{[typeId: $Values<typeof elementTypes>]: (value: string) => any}) {
+    constructor(
+        id?: ?string,
+        options?: ?Array<Option>,
+        dataElement?: ?DataElement,
+        onConvert?: ?ConvertFn) {
         this._options = !options ? [] : options.reduce((accOptions: Array<Option>, currentOption: Option) => {
             if (currentOption.value || currentOption.value === false || currentOption.value === 0) {
-                if (convertersForType && convertersForType[dataElement.type]) {
-                    currentOption.value = convertersForType[dataElement.type](currentOption.value);
-                }
+                currentOption.value = onConvert && dataElement ?
+                    onConvert(dataElement.type, currentOption.value, dataElement) :
+                    currentOption.value;
                 accOptions.push(currentOption);
             } else {
                 this._emptyText = currentOption.text;
@@ -36,14 +44,38 @@ export default class OptionSet {
             return accOptions;
         }, []);
 
-        if (viewType) {
-            this.viewType = viewType;
-        }
-
+        this._id = id;
         this._dataElement = dataElement;
+        this._inputType = inputTypes.SELECT;
     }
 
-    set viewType(viewType: string) {
+    set id(id: string) {
+        this._id = id;
+    }
+    get id(): ?string {
+        return this._id;
+    }
+
+    set inputType(inputType: ?string) {
+        if (!inputType) {
+            return;
+        }
+
+        if (inputTypes[inputType]) {
+            this._inputType = inputType;
+        } else {
+            log.warn(errorCreator(OptionSet.errorMessages.UNSUPPORTED_INPUTTYPE)({ optionSet: this, inputType }));
+        }
+    }
+    get inputType(): $Values<typeof inputTypes> {
+        return this._inputType;
+    }
+
+    set viewType(viewType: ?string) {
+        if (!viewType) {
+            return;
+        }
+
         if (viewTypes[viewType]) {
             this._viewType = viewType;
         } else {
@@ -109,7 +141,7 @@ export default class OptionSet {
         });
     }
 
-    getOptions(values: Array<Values>): Array<Option> {
+    getOptions(values: Array<Value>): Array<Option> {
         return values.reduce((accOptions: Array<Option>, value: Value) => {
             const option = this.options.find(o => o.value === value);
             if (option) {
@@ -140,13 +172,19 @@ export default class OptionSet {
 
     resolveTextsAsString(values: Value | Array<Value>): ?string {
         if (isArray(values)) {
+            // $FlowSuppress
             return this.getOptionsTextAsString(values);
         }
+        // $FlowSuppress
         return this.getOptionText(values);
     }
 
-    resolveViewElement(values: Value | Array<Value>, onGetStyle?: (viewType: ?$Values<typeof viewTypes>) => ?Object): ?React$Element<any> | any {
+    /*
+    resolveViewElement(
+        values: Value | Array<Value>,
+        onGetStyle?: (viewType: ?$Values<typeof viewTypes>) => ?Object): ?React$Element<any> | any {
         if (isArray(values)) {
+            // $FlowSuppress
             return values.reduce((accElements, value: Value) => {
                 const option = this.options.find(o => o.value === value);
                 if (!option) {
@@ -166,10 +204,14 @@ export default class OptionSet {
                 return accElements;
             }, []);
         }
+
+        // $FlowSuppress
         return this.getSingleViewElementFromValue(values, onGetStyle);
     }
 
-    getSingleViewElementFromValue(value: Value, onGetStyle?: (viewType: ?$Values<typeof viewTypes>) => ?Object): ?React$Element<any> | any {
+    getSingleViewElementFromValue(
+        value: Value,
+        onGetStyle?: (viewType: ?$Values<typeof viewTypes>) => ?Object): ?React$Element<any> | any {
         const option = this._options.find(o => o.value === value);
         if (!option) {
             log.warn(
@@ -199,7 +241,7 @@ export default class OptionSet {
                         {icon}
                     </FontIcon>
                 );
-            } else if (this._viewType === viewTypes.icons) {
+            } else if (this._viewType === viewTypes.icon) {
                 element = (
                     <FontIcon
                         title={option.description}
@@ -218,4 +260,5 @@ export default class OptionSet {
 
         return element;
     }
+    */
 }

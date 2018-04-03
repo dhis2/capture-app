@@ -1,6 +1,7 @@
 // @flow
-import moment from '../utils/moment/momentResolver';
+import isString from 'd2-utilizr/lib/isString';
 
+import moment from '../utils/moment/momentResolver';
 import elementTypes from '../metaData/DataElement/elementTypes';
 import parseNumber from '../utils/parsers/number.parser';
 
@@ -31,7 +32,7 @@ function convertDateTime(formValue: DateTimeValue): string {
     return momentDateTime.toISOString();
 }
 
-export const valueConvertersForType = {
+const valueConvertersForType = {
     [elementTypes.NUMBER]: parseNumber,
     [elementTypes.INTEGER]: parseNumber,
     [elementTypes.INTEGER_POSITIVE]: parseNumber,
@@ -42,3 +43,21 @@ export const valueConvertersForType = {
     [elementTypes.TRUE_ONLY]: (d2Value: string) => ((d2Value === 'true') || null),
     [elementTypes.BOOLEAN]: (d2Value: string) => (d2Value === 'true'),
 };
+
+export function convertValue(type: $Values<typeof elementTypes>, value: any) {
+    if (value == null) {
+        return null;
+    }
+
+    let toConvertValue;
+    if (isString(value)) {
+        toConvertValue = value.trim();
+        if (!toConvertValue) {
+            return null;
+        }
+    } else {
+        toConvertValue = value;
+    }
+
+    return valueConvertersForType[type] ? valueConvertersForType[type](toConvertValue) : toConvertValue;
+}

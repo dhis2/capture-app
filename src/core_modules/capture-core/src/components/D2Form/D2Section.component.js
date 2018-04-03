@@ -9,22 +9,18 @@ import MetaDataSection from '../../metaData/RenderFoundation/Section';
 
 type Props = {
     sectionMetaData: MetaDataSection,
+    isHidden?: ?boolean,
 };
 
 class D2Section extends Component<Props> {
     sectionFieldsInstance: ?D2SectionFields;
-
-    constructor(props: Props) {
-        super(props);
-    }
-
     renderSectionHeader() {
         const title = this.props.sectionMetaData.name;
 
         if (!title) {
             return null;
         }
-        
+
         return (
             <SectionHeaderSimple
                 title={title}
@@ -33,7 +29,11 @@ class D2Section extends Component<Props> {
     }
 
     render() {
-        const { sectionMetaData, onUpdateSectionStatus, ...passOnProps } = this.props;
+        const { sectionMetaData, isHidden, ...passOnProps } = this.props;
+
+        if (isHidden) {
+            return null;
+        }
 
         if (!sectionMetaData.showContainer) {
             return (
@@ -53,7 +53,6 @@ class D2Section extends Component<Props> {
                     <D2SectionFields
                         ref={(instance) => { this.sectionFieldsInstance = instance; }}
                         fieldsMetaData={sectionMetaData.elements}
-                        onSectionFieldsUpdate={onUpdateSectionStatus}
                         {...passOnProps}
                     />
                 </Section>

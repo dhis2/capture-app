@@ -1,22 +1,18 @@
 // @flow
-import { actionTypes as d2FormActionTypes } from '../../components/D2Form/D2SectionFields.actions';
+import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
+import { getRulesActionsOnUpdate } from '../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+import type { FieldData } from '../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+type Next = (action: ReduxAction<any, any>) => void;
 
-type Next = (action: ReduxAction) => void;
-
-const actionTypes = {
-    UPDATE_VALUES: 'UpdateFormsValues',
-    UPDATE_MESSAGES: 'RulesUpdateMessages',
-    UPDATE_HIDDEN: 'RulesUpdateHidden',
-};
-
-function runRulesEngine() {
-    
-}
-
-
-export default (store: ReduxStore) => (next: Next) => (action: ReduxAction) => {
-    if (action.type === d2FormActionTypes.UPDATE_FIELD) {
-
+export default (store: ReduxStore) => (next: Next) => (action: ReduxAction<any, any>) => {
+    if (action.type === dataEntryActionTypes.UPDATE_FORM_FIELD) {
+        const fieldData: FieldData = {
+            elementId: action.payload.elementId,
+            value: action.payload.value,
+            valid: action.payload.uiState.valid,
+        };
+        const actions = getRulesActionsOnUpdate(action.payload.formId, store.getState(), action.payload.formId, action.payload.dataEntryId, fieldData);
+        next(action);
     } else {
         next(action);
     }

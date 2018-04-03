@@ -8,7 +8,7 @@ import TrueOnly from '../../FormFields/Generic/D2TrueOnly.component';
 import D2Date from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import D2DateTime from '../../FormFields/DateAndTime/D2DateTime/D2DateTime.component';
 
-import OptionsCheckboxes from '../../FormFields/Options/Checkboxes/OptionsCheckboxes.component';
+import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
 import OptionsSelect from '../../FormFields/Options/SelectVirtualized/OptionsSelectVirtualized.component';
 import withSelectTranslations from '../../FormFields/Options/SelectVirtualized/withTranslations';
 import withConvertedOptionSet from '../../FormFields/Options/withConvertedOptionSet';
@@ -16,24 +16,20 @@ import withConvertedOptionSet from '../../FormFields/Options/withConvertedOption
 import getValidators from './validators';
 import MetaDataElement from '../../../metaData/DataElement/DataElement';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
+import { inputTypes as optionSetInputTypes } from '../../../metaData/OptionSet/optionSet.const';
 
-import withFormBuilderInterface from './withFormBuilderInterface';
 import withDefaultChangeHandler from './withDefaultChangeHandler';
 import withDefaultShouldUpdateInterface from './withDefaultShouldUpdateInterface';
 import withDefaultFieldContainer from './withDefaultFieldContainer';
 import withDefaultMessages from './withDefaultMessages';
 import withHideCompatibility from './withHideCompatibility';
 import withGotoInterface from './withGotoInterface';
+import withRequiredFieldCalculation from './withRequiredFieldCalculation';
 
-import type { ComponentType } from 'react';
+import type { Field } from '../../../__TEMP__/FormBuilderExternalState.component';
 
-export type FieldConfig = {
-    name: string,
-    component: ComponentType<any>,
-    props: Object,
-};
 
-const changeEvents = {
+const commitEvents = {
     ON_BLUR: 'onBlur',
 };
 const errorMessages = {
@@ -41,7 +37,6 @@ const errorMessages = {
 };
 
 const getBaseComponentProps = () => ({
-    changeEvent: changeEvents.ON_BLUR,
     style: {
         width: '100%',
     },
@@ -49,6 +44,7 @@ const getBaseComponentProps = () => ({
 
 const getBaseFieldProps = (metaData: MetaDataElement) => ({
     validators: getValidators(metaData),
+    commitEvent: commitEvents.ON_BLUR,
 });
 
 const createComponentProps = (componentProps: Object) => ({
@@ -65,12 +61,25 @@ const getBaseTextField = (metaData: MetaDataElement) => {
     const props = createComponentProps({
         label: metaData.formName,
         multiline: false,
-        required: metaData.compulsory,
+        metaCompulsory: metaData.compulsory,
     });
 
     return createFieldProps({
-        name: metaData.id,
-        component: withGotoInterface()(withHideCompatibility()(withDefaultShouldUpdateInterface()(withDefaultFieldContainer()(withDefaultMessages()(withFormBuilderInterface()(withDefaultChangeHandler()(TextField))))))),
+        id: metaData.id,
+        component:
+            withGotoInterface()(
+                withHideCompatibility()(
+                    withDefaultShouldUpdateInterface()(
+                        withRequiredFieldCalculation()(
+                            withDefaultFieldContainer()(
+                                withDefaultMessages()(
+                                    withDefaultChangeHandler()(TextField),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         props,
     }, metaData);
 };
@@ -89,24 +98,47 @@ const fieldForTypes = {
     [elementTypes.BOOLEAN]: (metaData: MetaDataElement) => {
         const props = createComponentProps({
             label: metaData.formName,
-            required: metaData.compulsory,
+            metaCompulsory: metaData.compulsory,
+            nullable: !metaData.compulsory,
         });
 
         return createFieldProps({
-            name: metaData.id,
-            component: withGotoInterface()(withHideCompatibility()(withDefaultShouldUpdateInterface()(withDefaultFieldContainer({ marginBottom: 0 })(withDefaultMessages()(withFormBuilderInterface()(TrueFalse)))))),
+            id: metaData.id,
+            component:
+                withGotoInterface()(
+                    withHideCompatibility()(
+                        withDefaultShouldUpdateInterface()(
+                            withRequiredFieldCalculation()(
+                                withDefaultFieldContainer({ marginBottom: 0 })(
+                                    withDefaultMessages()(TrueFalse),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
             props,
         }, metaData);
     },
     [elementTypes.TRUE_ONLY]: (metaData: MetaDataElement) => {
         const props = createComponentProps({
             label: metaData.formName,
-            nullable: !metaData.compulsory,
+            metaCompulsory: metaData.compulsory,
         });
 
         return createFieldProps({
-            name: metaData.id,
-            component: withGotoInterface()(withHideCompatibility()(withDefaultShouldUpdateInterface()(withDefaultFieldContainer({ marginBottom: 0 })(withDefaultMessages()(withFormBuilderInterface()(TrueOnly)))))),
+            id: metaData.id,
+            component:
+                withGotoInterface()(
+                    withHideCompatibility()(
+                        withDefaultShouldUpdateInterface()(
+                            withRequiredFieldCalculation()(
+                                withDefaultFieldContainer({ marginBottom: 0 })(
+                                    withDefaultMessages()(TrueOnly),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
             props,
         }, metaData);
     },
@@ -117,8 +149,21 @@ const fieldForTypes = {
         });
 
         return createFieldProps({
-            name: metaData.id,
-            component: withGotoInterface()(withHideCompatibility()(withDefaultShouldUpdateInterface()(withDefaultFieldContainer()(withDefaultMessages()(withFormBuilderInterface()(withDefaultChangeHandler()(D2Date))))))),
+            id: metaData.id,
+            component:
+                withGotoInterface()(
+                    withHideCompatibility()(
+                        withDefaultShouldUpdateInterface()(
+                            withRequiredFieldCalculation()(
+                                withDefaultFieldContainer()(
+                                    withDefaultMessages()(
+                                        withDefaultChangeHandler()(D2Date),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
             props,
         }, metaData);
     },
@@ -127,18 +172,65 @@ const fieldForTypes = {
             dateWidth: 200,
             calendarWidth: 350,
             label: metaData.formName,
-            required: metaData.compulsory,
+            metaCompulsory: metaData.compulsory,
         });
 
         return createFieldProps({
-            name: metaData.id,
-            component: withGotoInterface()(withHideCompatibility()(withDefaultShouldUpdateInterface()(withDefaultFieldContainer()(withDefaultMessages()(withFormBuilderInterface()(withDefaultChangeHandler()(D2DateTime))))))),
+            id: metaData.id,
+            component:
+                withGotoInterface()(
+                    withHideCompatibility()(
+                        withDefaultShouldUpdateInterface()(
+                            withRequiredFieldCalculation()(
+                                withDefaultFieldContainer()(
+                                    withDefaultMessages()(
+                                        withDefaultChangeHandler()(D2DateTime),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
             props,
         }, metaData);
     },
     [elementTypes.TIME]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.PERCENTAGE]: (metaData: MetaDataElement) => getBaseTextField(metaData),
-    [elementTypes.UNKNOWN]: () => null,
+    [elementTypes.UNKNOWN]: (metaData: MetaDataElement) => null, // eslint-disable-line no-unused-vars
+};
+
+const getOptionSetComponent = (inputType: $Values<typeof optionSetInputTypes>) => {
+    if (inputType === optionSetInputTypes.SELECT) {
+        return withGotoInterface()(
+            withHideCompatibility()(
+                withDefaultShouldUpdateInterface()(
+                    withRequiredFieldCalculation()(
+                        withDefaultFieldContainer()(
+                            withDefaultMessages()(
+                                withConvertedOptionSet()(
+                                    withSelectTranslations()(OptionsSelect),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    }
+
+    return withGotoInterface()(
+        withHideCompatibility()(
+            withDefaultShouldUpdateInterface()(
+                withRequiredFieldCalculation()(
+                    withDefaultFieldContainer()(
+                        withDefaultMessages()(
+                            withConvertedOptionSet()(SelectBoxes),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+    );
 };
 
 const optionSetField = (metaData: MetaDataElement) => {
@@ -146,16 +238,19 @@ const optionSetField = (metaData: MetaDataElement) => {
         label: metaData.formName,
         optionSet: metaData.optionSet,
         nullable: !metaData.compulsory,
+        required: metaData.compulsory,
     });
 
     return createFieldProps({
-        name: metaData.id,
-        component: withGotoInterface()(withHideCompatibility()(withDefaultShouldUpdateInterface()(withDefaultFieldContainer()(withDefaultMessages()(withConvertedOptionSet()(withFormBuilderInterface()(withSelectTranslations()(OptionsSelect)))))))),
+        id: metaData.id,
+        component:
+            // $FlowSuppress
+            getOptionSetComponent(metaData.optionSet.inputType),
         props,
     }, metaData);
 };
 
-export default function buildField(metaData: MetaDataElement) {
+export default function buildField(metaData: MetaDataElement): ?Field {
     const type = metaData.type;
     if (!fieldForTypes[type]) {
         log.warn(errorCreator(errorMessages.NO_FORMFIELD_FOR_TYPE)({ metaData }));

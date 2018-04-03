@@ -5,11 +5,5 @@ export const actionTypes = {
     UPDATE_FIELD: 'UpdateField',
 };
 
-export const updateField = (containerId: string, elementId: string, value: any) => {
-    const payload = value;
-    const meta = {
-        containerId,
-        elementId,
-    };
-    return actionCreator(actionTypes.UPDATE_FIELD)(payload, meta);
-};
+export const updateField = (value: any, uiState: Object, elementId: string, sectionId: string, formId: string) =>
+    actionCreator(actionTypes.UPDATE_FIELD)({ value, uiState, formId, sectionId, elementId });

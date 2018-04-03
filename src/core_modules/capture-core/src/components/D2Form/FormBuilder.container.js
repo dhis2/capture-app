@@ -1,15 +1,18 @@
 // @flow
 import { connect } from 'react-redux';
-import FormBuilder from '../../__TEMP__/FormBuilder.component';
-import { cacheFormBuilderState } from './formBuilder.actions';
+import FormBuilder from '../../__TEMP__/FormBuilderExternalState.component';
+import { fieldsValidated, updateFieldUIOnly } from './formBuilder.actions';
 
 const mapStateToProps = (state: ReduxState, props: { id: string }) => ({
-    cachedFieldsState: state.formsSectionsFieldsUI[props.id],
+    fieldsUI: state.formsSectionsFieldsUI[props.id] || {},
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onCacheFieldsState: (formState: Object, id: string) => {
-        dispatch(cacheFormBuilderState(formState, id));
+    onFieldsValidated: (fieldsUI: Object, id: string) => {
+        dispatch(fieldsValidated(fieldsUI, id));
+    },
+    onUpdateFieldUIOnly: (uiState: Object, fieldId: string, formBuilderId: string) => {
+        dispatch(updateFieldUIOnly(uiState, fieldId, formBuilderId));
     },
 });
 

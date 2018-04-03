@@ -30,7 +30,7 @@ export default store => next => (action) => {
     });
 
     // send request
-    sendRequest(action.requestInfo)
+    sendRequest(action.payload.requestInfo)
         .then((result) => {
             const successAction = actionCreator(type + SUCCESS)(payload, {
                 optimistic: {

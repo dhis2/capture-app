@@ -3,7 +3,7 @@ import * as React from 'react';
 import log from 'loglevel';
 import errorCreator from '../../../utils/errorCreator';
 import OptionSet from '../../../metaData/OptionSet/OptionSet';
-import { valueConvertersForType } from '../../../converters/clientToForm';
+import { convertValue } from '../../../converters/clientToForm';
 
 type Props = {
     optionSet: OptionSet
@@ -28,7 +28,7 @@ export default () =>
                     log.error(errorCreator(OptionSetConverter.errorMessages.DATAELEMENT_MISSING)({ OptionSetConverter: this }));
                     return null;
                 }
-                return optionSet.dataElement.getConvertedOptionSet(valueConvertersForType);
+                return optionSet.dataElement.getConvertedOptionSet(convertValue);
             }
 
             render() {

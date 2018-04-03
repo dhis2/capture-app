@@ -8,7 +8,7 @@ import type { Converter } from '../../api/fetcher/apiFetchers';
 export async function loadStoreData(
     storageContainer: StorageContainer,
     objectStore: string,
-    queryParams?: ?Object,
+    queryParams: ?Object,
     d2ModelName: string,
     d2ModelGetterType: $Values<typeof getterTypes>,
     converter: Converter,
@@ -34,5 +34,4 @@ export async function loadStoreDataIfNotExists(
         await loadStoreData(storageContainer, objectStore, queryParams, d2ModelName, d2ModelGetterType, converter);
     }
 }
-
 

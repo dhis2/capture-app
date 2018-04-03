@@ -1,27 +1,51 @@
 // @flow
 import * as React from 'react';
+import { withStyles } from 'material-ui-next/styles';
+import green from 'material-ui-next/colors/green';
 
 import Button from './Button.component';
 import LoadingMaskForButton from '../LoadingMasks/LoadingMaskForButton.component';
 
-import { buttonStates } from './progressButton.const';
+const styles = () => ({
+    wrapper: {
+        position: 'relative',
+    },
+    progress: {
+        position: 'absolute',
+        left: '50%',
+        top: '50%',
+        transform: 'translate(-50% ,-50%)',
+        color: green[600],
+    },
+});
 
 type Props = {
-    buttonState: $Values<typeof buttonStates>,
-    children: React.Node
+    inProgress: boolean,
+    children: React.Node,
+    classes: {
+        wrapper: string,
+        progress: string,
+    }
 };
 
 const ProgressButton = (props: Props) => {
-    const { buttonState, children, ...buttonProps } = props;
+    const { inProgress, children, classes, ...buttonProps } = props;
 
-    if (buttonState === buttonStates.IN_PROGRESS) {
+    if (inProgress) {
         return (
-            <Button
-                disabled
-                {...buttonProps}
+            <div
+                className={classes.wrapper}
             >
-                <LoadingMaskForButton />
-            </Button>
+                <Button
+                    disabled
+                    {...buttonProps}
+                >
+                    {children}
+                </Button>
+                <LoadingMaskForButton
+                    className={classes.progress}
+                />
+            </div>
         );
     }
 
@@ -34,4 +58,4 @@ const ProgressButton = (props: Props) => {
     );
 };
 
-export default ProgressButton;
+export default withStyles(styles)(ProgressButton);

@@ -64,7 +64,8 @@ function convertTranslationsToObject(translations) {
 
 function getProgramStageDataElements(programStageDataElements) {
     return programStageDataElements.map((programStageDataElement) => {
-        programStageDataElement.dataElement.translations = convertTranslationsToObject(programStageDataElement.dataElement.translations);
+        programStageDataElement.dataElement.translations =
+            convertTranslationsToObject(programStageDataElement.dataElement.translations);
         return programStageDataElement;
     });
 }
@@ -76,9 +77,10 @@ function getProgramStages(d2ProgramStagesCollection) {
         const programStage = { ...d2ProgramStage.dataValues };
         programStage.programStageDataElements = getProgramStageDataElements(programStage.programStageDataElements);
         programStage.programStageSections = getProgramStageSections(programStage.programStageSections);
-        programStage.notificationTemplates = convertFromCollectionToArray(programStage.notificationTemplates).map(template => ({
-            id: template.id,
-        }));
+        programStage.notificationTemplates =
+            convertFromCollectionToArray(programStage.notificationTemplates).map(template => ({
+                id: template.id,
+            }));
         return programStage;
     });
 
@@ -104,7 +106,8 @@ export default new ApiSpecification((_this) => {
     _this.modelName = 'programs';
     _this.modelGetterType = getterTypes.LIST;
     _this.queryParams = {
-        fields: '*,dataEntryForm[*],relatedProgram[id,displayName],relationshipType[id,displayName],trackedEntity[id,displayName],categoryCombo[id,displayName,isDefault,categories[id,displayName,categoryOptions[id,displayName,organisationUnits[id]]]],organisationUnits[id,displayName],userRoles[id,displayName],programStages[*,dataEntryForm[*],programStageSections[id,displayName,description,sortOrder,dataElements[id]],programStageDataElements[*,dataElement[*,optionSet[id]]]],programTrackedEntityAttributes[*,trackedEntityAttribute[id,unique]]',
+        fields:
+            '*,dataEntryForm[*],relatedProgram[id,displayName],relationshipType[id,displayName],trackedEntity[id,displayName],categoryCombo[id,displayName,isDefault,categories[id,displayName,categoryOptions[id,displayName,organisationUnits[id]]]],organisationUnits[id,displayName],userRoles[id,displayName],programStages[*,dataEntryForm[*],programStageSections[id,displayName,description,sortOrder,dataElements[id]],programStageDataElements[*,dataElement[*,optionSet[id]]]],programTrackedEntityAttributes[*,trackedEntityAttribute[id,unique]]',
     };
     _this.converter = (d2Programs) => {
         if (!d2Programs || d2Programs.length === 0) {

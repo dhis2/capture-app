@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import LoadingMask from './LoadingMaskForButton.component';
+import LoadingMask from './LoadingMask.component';
 
 type Props = {
 
@@ -8,7 +8,7 @@ type Props = {
 
 const LoadingMaskForButton = (props: Props) => (
     <LoadingMask
-        size={15}
+        size={24}
         {...props}
     />
 );

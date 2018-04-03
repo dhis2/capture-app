@@ -1,81 +1,123 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import { wordToValidatorMap } from 'd2-ui/lib/forms/Validators';
 import DataEntry from 'capture-core/components/DataEntry/DataEntry.container';
-import withCompleteButton from 'capture-core/components/DataEntry/withCompleteButton';
+// import withCompleteButton from 'capture-core/components/DataEntry/withCompleteButton';
 import withSaveButton from 'capture-core/components/DataEntry/withSaveButton';
 
 import withEventField from 'capture-core/components/DataEntry/eventField/withEventField';
 
 import D2Date from 'capture-core/components/FormFields/DateAndTime/D2Date/D2Date.component';
+import D2TrueOnly from 'capture-core/components/FormFields/Generic/D2TrueOnly.component';
 import withDefaultMessages from 'capture-core/components/DataEntry/eventField/withDefaultMessages';
 import withDefaultFieldContainer from 'capture-core/components/DataEntry/eventField/withDefaultFieldContainer';
 import withDefaultChangeHandler from 'capture-core/components/DataEntry/eventField/withDefaultChangeHandler';
-import withDefaultShouldUpdateInterface from 'capture-core/components/DataEntry/eventField/withDefaultShouldUpdateInterface';
+import withDefaultShouldUpdateInterface from
+    'capture-core/components/DataEntry/eventField/withDefaultShouldUpdateInterface';
 import isValidDate from 'capture-core/utils/validators/date.validator';
 import { getTranslation } from 'capture-core/d2/d2Instance';
 import { formatterOptions } from 'capture-core/utils/string/format.const';
+import { placements } from 'capture-core/components/DataEntry/eventField/eventField.const';
 
-const getCompleteOptions = () => ({
+const getSaveOptions = () => ({
     color: 'primary',
 });
 
-const getSaveOptions = () => ({
-    color: 'accent',
-});
-
-function preValidateDate(value?: ?string) {
+const preValidateDate = (value?: ?string) => {
     if (!value) {
         return true;
     }
 
     return isValidDate(value);
-}
+};
 
-const comp = withDefaultFieldContainer()(withDefaultShouldUpdateInterface()(withDefaultMessages()(withDefaultChangeHandler()(D2Date))));
-const eventDateSettings = props => ({
-    component: comp,
-    componentProps: {
-        width: 350,
-        label: 'Report date',
-        required: true,
-    },
-    propName: 'eventDate',
-    validatorContainers: [
-        {
-            validator: wordToValidatorMap.get('required'),
-            message: getTranslation(wordToValidatorMap.get('required').message, formatterOptions.CAPITALIZE_FIRST_LETTER),
+const buildReportDateSettingsFn = () => {
+    const reportDateComponent = withDefaultFieldContainer()(
+        withDefaultShouldUpdateInterface()(
+            withDefaultMessages()(
+                withDefaultChangeHandler()(D2Date),
+            ),
+        ),
+    );
+
+    const reportDateSettings = () => ({
+        component: reportDateComponent,
+        componentProps: {
+            width: 350,
+            label: 'Report date',
+            required: true,
         },
-        {
-            validator: preValidateDate,
-            message: getTranslation('value_should_be_a_valid_date', formatterOptions.CAPITALIZE_FIRST_LETTER),
+        propName: 'eventDate',
+        validatorContainers: [
+            {
+                validator: wordToValidatorMap.get('required'),
+                message:
+                    getTranslation(
+                        wordToValidatorMap.get('required').message, formatterOptions.CAPITALIZE_FIRST_LETTER),
+            },
+            {
+                validator: preValidateDate,
+                message: getTranslation('value_should_be_a_valid_date', formatterOptions.CAPITALIZE_FIRST_LETTER),
+            },
+        ],
+    });
+
+    return reportDateSettings;
+};
+
+const buildCompleteFieldSettingsFn = () => {
+    const completeComponent = withDefaultFieldContainer()(
+        withDefaultShouldUpdateInterface()(
+            withDefaultMessages()(
+                withDefaultChangeHandler()(D2TrueOnly),
+            ),
+        ),
+    );
+
+    const completeSettings = () => ({
+        component: completeComponent,
+        componentProps: {
+            label: 'Complete event',
         },
-    ],
-});
+        propName: 'complete',
+        validatorContainers: [
+        ],
+        meta: {
+            placement: placements.BOTTOM,
+        },
+    });
 
-const DataEntryWithEventDate = withEventField(eventDateSettings)(DataEntry);
-const CompletableDataEntry = withCompleteButton(getCompleteOptions)(DataEntryWithEventDate);
-const SaveableAndCompletableDataEntry = withSaveButton(getSaveOptions)(CompletableDataEntry);
+    return completeSettings;
+};
 
-export default props => (
+const DataEntryWithReportDate = withEventField(buildReportDateSettingsFn())(DataEntry);
+const DataEntryWithReportDateAndCompleteField = withEventField(buildCompleteFieldSettingsFn())(DataEntryWithReportDate);
+const SaveableDataEntry = withSaveButton(getSaveOptions)(DataEntryWithReportDateAndCompleteField);
+
+
+type Props = {
+    onLoadEvent: (eventId: string) => void,
+};
+
+export default (props: Props) => (
     <div>
         <button
-            onClick={() => { props.onLoadEvent('njKfugT8jM4'); }}
+            onClick={() => { props.onLoadEvent('dcDICb4mZ5x'); }}
         >
         program1 event1
         </button>
         <button
-            onClick={() => { props.onLoadEvent('rCsKp0gbr9V'); }}
+            onClick={() => { props.onLoadEvent('GLzj6nka7Ae'); }}
         >
         program1 event2
         </button>
         <button
-            onClick={() => { props.onLoadEvent('Cx35fVyy4iH'); }}
+            onClick={() => { props.onLoadEvent('TB1aevraoff'); }}
         >
         program2 event1
         </button>
 
-        <SaveableAndCompletableDataEntry
+        <SaveableDataEntry
             id={'main'}
         />
     </div>

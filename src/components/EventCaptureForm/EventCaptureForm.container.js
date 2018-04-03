@@ -1,8 +1,8 @@
 // @flow
 import { connect } from 'react-redux';
-import EventCaptureForm from './EventCaptureForm.component';
+import { startLoadDataEntryEvent } from 'capture-core/components/DataEntry/actions/dataEntryLoad.actions';
 
-import { startLoadDataEntryEvent } from 'capture-core/components/DataEntry/actions/dataEntry.actions';
+import EventCaptureForm from './EventCaptureForm.component';
 
 const mapStateToProps = (state: Object) => ({
 

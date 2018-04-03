@@ -53,7 +53,15 @@ it('programIndicators converter', () => {
 
 it('programRules converter', () => {
     const id = '1';
-    const ids = [{ id }];
+    const ids = [
+        {
+            id,
+            program: {
+                id,
+                programRuleActions: [],
+            },
+        },
+    ];
     const convertedData = programRules.converter(ids);
     expect(convertedData[0].id).toEqual(id);
 });

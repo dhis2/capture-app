@@ -1,25 +1,64 @@
 // @flow
-/* eslint-disable import/prefer-default-export */
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/concatMap';
+import log from 'loglevel';
+import errorCreator from '../../utils/errorCreator';
 
 import getEnrollmentEvents from '../../events/getEnrollmentEvents';
-import { loadDataEntryEvent } from '../../components/DataEntry/actions/dataEntry.actions';
-import { actionTypes, enrollmentLoaded } from './enrollment.actions';
+import { loadDataEntryEvent } from '../../components/DataEntry/actions/dataEntryLoad.actions';
+import { actionTypes, enrollmentLoaded, enrollmentLoadFailed } from './enrollment.actions';
 
+type InputObservable = rxjs$Observable<ReduxAction<any, any>>;
 
-export const loadEnrollmentData = action$ =>
+const errorMessages = {
+    EVENTS_LOG: 'Events could not be loaded',
+    EVENTS_SCREEN: 'Events could not be loaded. See log for details',
+};
+
+function convertStatusIn(value: string) {
+    if (value === 'COMPLETED') {
+        return 'true';
+    }
+    return null;
+}
+
+function convertStatusOut(dataEntryValue: string, prevValue: string) {
+    if (dataEntryValue === 'true' && prevValue !== 'COMPLETED') {
+        return 'COMPLETED';
+    } else if (!dataEntryValue && prevValue === 'COMPLETED') {
+        return 'ACTIVE';
+    }
+    return prevValue;
+}
+
+export const loadEnrollmentData = (action$: InputObservable) =>
     action$.ofType(actionTypes.START_ENROLLMENT_LOAD)
-        .concatMap(action =>
+        .concatMap((action: ReduxAction<any, any>) =>
             getEnrollmentEvents()
-                .then(events => enrollmentLoaded(events)));
+                .then(events =>
+                    enrollmentLoaded(events))
+                .catch((error) => {
+                    log.error(errorCreator(errorMessages.EVENTS_LOG)({ error }));
+                    return enrollmentLoadFailed(errorMessages.EVENTS_SCREEN);
+                }),
+        );
 
-export const loadDataEntryData = (action$, store: ReduxStore) =>
+export const loadDataEntryData = (action$: InputObservable, store: ReduxStore) =>
     action$.ofType(actionTypes.ENROLLMENT_LOADED)
-        .map((action) => {
-            if (action.payload && action.payload.length > 0) {
-                return loadDataEntryEvent('dcDICb4mZ5x', store.getState(), [{ id: 'eventDate', type: 'DATE' }, { id: 'dueDate', type: 'DATE' }], 'main');
-            }
-            return loadDataEntryEvent('dcDICb4mZ5x', store.getState(), [{ id: 'eventDate', type: 'DATE' }, { id: 'dueDate', type: 'DATE' }], 'main');
-        });
-
+        .map(action =>
+            loadDataEntryEvent(
+                'qEHQdXkUAGk',
+                store.getState(),
+                [
+                    {
+                        id: 'eventDate',
+                        type: 'DATE',
+                    },
+                    {
+                        inId: 'status',
+                        outId: 'complete',
+                        onConvertIn: convertStatusIn,
+                        onConvertOut: convertStatusOut,
+                    },
+                ], 'main'),
+        );

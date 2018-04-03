@@ -1,4 +1,5 @@
 // @flow
+import { getApi } from '../../../d2/d2Instance';
 
 export type RequestInfo = {
     endpoint: string,
@@ -7,7 +8,7 @@ export type RequestInfo = {
 };
 
 export default function sendRequest(requestInfo: RequestInfo) {
-    return new Promise((resolve, reject) => {
-        resolve();
-    });
+    const api = getApi();
+    return api
+        .update(requestInfo.endpoint, requestInfo.data);
 }

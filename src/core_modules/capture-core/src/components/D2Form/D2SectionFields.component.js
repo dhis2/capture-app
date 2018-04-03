@@ -1,29 +1,42 @@
 // @flow
 import React, { Component } from 'react';
-import type { ComponentType } from 'react';
-import FormBuilder from './FormBuilder.container';
-//import FormBuilder from 'd2-ui/lib/forms/FormBuilder.component';
+import FormBuilderContainer from './FormBuilder.container';
+import FormBuilder from '../../__TEMP__/FormBuilderExternalState.component';
 import buildField from './field/buildField';
 
 import MetaDataElement from '../../metaData/DataElement/DataElement';
+import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 
-import type { FieldConfig } from './field/buildField';
-
-type FieldConfigWithValue = {
-    name: string,
-    component: ComponentType<any>,
-    props: Object,
-    value: any
-};
+import type { Field } from '../../__TEMP__/FormBuilderExternalState.component';
 
 type FormsValues = {
     [id: string]: any
 };
 
+type RulesHiddenField = boolean;
+type RulesHiddenFields = {
+    [id: string]: RulesHiddenField,
+};
+
+type RulesCompulsoryFields = { [id: string]: boolean };
+
+type RulesMessage = {
+    error?: ?string,
+    warning?: ?string,
+    errorOnComplete?: ?string,
+    warningOnComplete?: ?string,
+}
+type RulesMessages = {
+    [id: string]: ?RulesMessage,
+};
+
 type Props = {
     fieldsMetaData: Map<string, MetaDataElement>,
     values: FormsValues,
-    onUpdateField: (containerId: string, elementId: string, value: any) => void,
+    rulesMessages: RulesMessages,
+    rulesHiddenFields: RulesHiddenFields,
+    rulesCompulsoryFields: RulesCompulsoryFields,
+    onUpdateField: (value: any, uiState: Object, elementId: string, formBuilderId: string, formId: string) => void,
     formId: string,
     formBuilderId: string,
 };
@@ -35,43 +48,126 @@ class D2SectionFields extends Component<Props> {
 
     handleUpdateField: (elementId: string, value: any) => void;
     formBuilderInstance: ?FormBuilder;
-    formFields: Array<FieldConfig>;
+    formFields: Array<Field>;
+    rulesCompulsoryErrors: { [elementId: string]: boolean };
 
     constructor(props: Props) {
         super(props);
         this.handleUpdateField = this.handleUpdateField.bind(this);
         this.formFields = this.buildFormFields();
+        this.rulesCompulsoryErrors = {};
     }
 
-    buildFormFields(): Array<FieldConfig> {
+    buildFormFields(): Array<Field> {
         const elements = this.props.fieldsMetaData;
-        // $FlowSuppress
+
+        // $FlowSuppress :does not recognize filter removing nulls
         return Array.from(elements.entries())
             .map(entry => entry[1])
             .map(metaDataElement => buildField(metaDataElement))
             .filter(field => field);
     }
 
-    handleUpdateField(elementId: string, value: any) {
-        this.props.onUpdateField(this.props.formId, elementId, value);
+    rulesIsValid() {
+        const rulesMessages = this.props.rulesMessages;
+        const errorMessages = Object.keys(rulesMessages)
+            .map(id => rulesMessages[id] &&
+                (rulesMessages[id][messageStateKeys.ERROR] || rulesMessages[id][messageStateKeys.ERROR_ON_COMPLETE]))
+            .filter(errorMessage => errorMessage);
+
+        return errorMessages.length === 0 && Object.keys(this.rulesCompulsoryErrors).length === 0;
     }
 
-    getFieldConfigWithValue(): Array<FieldConfigWithValue> {
-        return this.formFields.map(formField => ({ ...formField, value: this.props.values[formField.name] }));
+    isValid() {
+        const formBuilderIsValid = this.formBuilderInstance ? this.formBuilderInstance.isValid() : false;
+        if (formBuilderIsValid) {
+            return this.rulesIsValid();
+        }
+        return false;
+    }
+
+    getInvalidFields() {
+        const messagesInvalidFields = Object.keys(this.props.rulesMessages).reduce((accInvalidFields, key) => {
+            if (this.props.rulesMessages[key] &&
+                    (this.props.rulesMessages[key][messageStateKeys.ERROR] ||
+                        this.props.rulesMessages[key][messageStateKeys.ERROR_ON_COMPLETE])) {
+                accInvalidFields[key] = true;
+            }
+            return accInvalidFields;
+        }, {});
+
+        const rulesCompulsoryInvalidFields =
+            Object.keys(this.rulesCompulsoryErrors).reduce((accCompulsoryInvalidFields, key) => {
+                accCompulsoryInvalidFields[key] = true;
+                return accCompulsoryInvalidFields;
+            }, {});
+
+        const externalInvalidFields = { ...messagesInvalidFields, ...rulesCompulsoryInvalidFields };
+
+        const invalidFields = this.formBuilderInstance ?
+            this.formBuilderInstance.getInvalidFields(externalInvalidFields) : [];
+        return invalidFields;
+    }
+
+    handleUpdateField(value: any, uiState: Object, elementId: string, formBuilderId: string) {
+        this.props.onUpdateField(value, uiState, elementId, formBuilderId, this.props.formId);
+    }
+
+    buildRulesCompulsoryErrors() {
+        const rulesCompulsory = this.props.rulesCompulsoryFields;
+        const values = this.props.values;
+
+        this.rulesCompulsoryErrors = Object.keys(rulesCompulsory)
+            .reduce((accCompulsoryErrors, key) => {
+                const isCompulsory = rulesCompulsory[key];
+                if (isCompulsory) {
+                    const value = values[key];
+                    if (!value && value !== 0 && value !== false) {
+                        accCompulsoryErrors[key] = 'This field is required';
+                    }
+                }
+                return accCompulsoryErrors;
+            }, {});
+    }
+
+    getFieldConfigWithRulesEffects(): Array<Field> {
+        return this.formFields.map(formField => ({
+            ...formField,
+            props: {
+                ...formField.props,
+                hidden: this.props.rulesHiddenFields[formField.id],
+                rulesErrorMessage:
+                    this.props.rulesMessages[formField.id] &&
+                    this.props.rulesMessages[formField.id][messageStateKeys.ERROR],
+                rulesWarningMessage:
+                    this.props.rulesMessages[formField.id] &&
+                    this.props.rulesMessages[formField.id][messageStateKeys.WARNING],
+                rulesErrorMessageOnComplete:
+                    this.props.rulesMessages[formField.id] &&
+                    this.props.rulesMessages[formField.id][messageStateKeys.ERROR_ON_COMPLETE],
+                rulesWarningMessageOnComplete:
+                    this.props.rulesMessages[formField.id] &&
+                    this.props.rulesMessages[formField.id][messageStateKeys.WARNING_ON_COMPLETE],
+                rulesCompulsory: this.props.rulesCompulsoryFields[formField.id],
+                rulesCompulsoryError: this.rulesCompulsoryErrors[formField.id],
+            },
+        }));
     }
 
     render() {
         const { fieldsMetaData, values, onUpdateField, formId, formBuilderId, ...passOnProps } = this.props;
 
+        this.buildRulesCompulsoryErrors();
+
         return (
             <div>
-                <FormBuilder
-                    ref={(instance) => { this.formBuilderInstance = instance; }}
+                <FormBuilderContainer
+                    innerRef={(instance) => { this.formBuilderInstance = instance; }}
                     id={formBuilderId}
-                    fields={this.getFieldConfigWithValue()}
+                    fields={this.getFieldConfigWithRulesEffects()}
+                    values={values}
                     onUpdateField={this.handleUpdateField}
-                    validateOnStart
-                    useCachedState
+                    validateIfNoUIData
                     {...passOnProps}
                 />
             </div>

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import { updateField } from '../actions/dataEntry.actions';
 import getDataEntryKey from '../common/getDataEntryKey';
+import { placements } from './eventField.const';
 
 type Validator = (value: any) => boolean;
 
@@ -17,15 +18,34 @@ type Settings = {
     componentProps?: ?Object,
     propName: string,
     validatorContainers?: ?Array<ValidatorContainer>,
+    meta?: ?Object,
+};
+
+type ValueMetaUpdateOutput = {
+    validationError: ?string,
+    isValid: boolean,
+    touched: boolean,
+};
+
+type ValueMetaInput = {
+    validationError: ?string,
+    isValid: boolean,
+    touched: boolean,
+    type: string,
+};
+
+type FieldContainer = {
+    field: React.Element<any>,
+    placement: $Values<typeof placements>,
 };
 
 type Props = {
     value: any,
-    valueMeta: Object,
+    valueMeta: ValueMetaInput,
     settings: Settings,
     id: string,
-    eventFields?: ?Array<React.Element<any>>,
-    onUpdateField: (value: any, valueMeta: Object, fieldId: string, dataEntryId: string, eventId: string) => void,
+    fields?: ?Array<FieldContainer>,
+    onUpdateField: (value: any, valueMeta: ValueMetaUpdateOutput, fieldId: string, dataEntryId: string, eventId: string) => void,
     completionAttempted?: ?boolean,
     saveAttempted?: ?boolean,
     eventId: string,
@@ -93,13 +113,13 @@ const getEventField = (InnerComponent: React.ComponentType<any>) =>
             this.props.onUpdateField(value, {
                 isValid: validationErrors.length === 0,
                 validationError: validationErrors.length > 0 ? validationErrors[0] : null,
-                touched: options && isDefined(options.touched) ? options.touched : true,
+                touched: options && options.touched != null ? options.touched : true,
             }, this.props.settings.propName, this.props.id, this.props.eventId);
         }
 
         getFieldElement() {
             const { settings, value, valueMeta, completionAttempted, saveAttempted } = this.props;
-            const { isValid, ...passOnValueMeta } = valueMeta;
+            const { isValid, type, ...passOnValueMeta } = valueMeta;
             return (
                 <div
                     ref={(gotoInstance) => { this.gotoInstance = gotoInstance; }}
@@ -117,18 +137,25 @@ const getEventField = (InnerComponent: React.ComponentType<any>) =>
         }
 
         getEventFields() {
-            const eventFields = this.props.eventFields;
-            return eventFields ? [...eventFields, this.getFieldElement()] : [this.getFieldElement()];
+            const eventFields = this.props.fields;
+            const settings = this.props.settings;
+
+            const fieldContainer = {
+                field: this.getFieldElement(),
+                placement: (settings.meta && settings.meta.placement) || placements.TOP,
+            };
+
+            return eventFields ? [...eventFields, fieldContainer] : [fieldContainer];
         }
 
         render() {
-            const { settings, value, valueMeta, eventFields, eventId, ...passOnProps } = this.props;
+            const { settings, value, valueMeta, fields, eventId, onUpdateField, ...passOnProps } = this.props;
 
             return (
                 <div>
                     <InnerComponent
                         ref={(innerInstance) => { this.innerInstance = innerInstance; }}
-                        eventFields={this.getEventFields()}
+                        fields={this.getEventFields()}
                         {...passOnProps}
                     />
                 </div>
@@ -152,15 +179,15 @@ const getMapStateToProps = (settingsFn: SettingsFn) => (state: ReduxState, props
     const key = getDataEntryKey(props.id, eventId);
 
     return {
-        value: state.dataEntriesValues[key][settings.propName],
-        valueMeta: state.dataEntriesValuesMeta[key][settings.propName],
+        value: state.dataEntriesFieldsValue[key][settings.propName],
+        valueMeta: state.dataEntriesFieldsUI[key][settings.propName],
         eventId,
         settings,
     };
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onUpdateField: (value: any, valueMeta: Object, fieldId: string, dataEntryId: string, eventId: string) => {
+    onUpdateField: (value: any, valueMeta: ValueMetaUpdateOutput, fieldId: string, dataEntryId: string, eventId: string) => {
         dispatch(updateField(value, valueMeta, fieldId, dataEntryId, eventId));
     },
 });

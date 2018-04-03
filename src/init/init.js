@@ -5,16 +5,15 @@ import { init, config, getUserSettings, getManifest } from 'd2/lib/d2';
 import environments from 'capture-core/constants/environments';
 import moment from 'capture-core/utils/moment/momentResolver';
 import CurrentLocaleData from 'capture-core/utils/localeData/CurrentLocaleData';
+import { setD2 } from 'capture-core/d2/d2Instance';
 
 // LANGUAGE FILES
 import 'moment/locale/nb';
 import dateFnNorwegianLocale from 'date-fns/locale/nb';
 // END LANGUAGE FILES
 
-import loadMetaData from '../metaData/metaDataLoader';
-import buildMetaData from '../metaData/metaDataBuilder';
-import loadSessionCacheData from '../cache/session/sessionCacheLoader';
-import getSystemSettings from './getSettings';
+import loadMetaData from 'capture-core/metaDataStoreLoaders/baseLoader/metaDataLoader';
+import buildMetaData from 'capture-core/metaDataMemoryStoreBuilders/baseBuilder/metaDataBuilder';
 
 import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocaleData';
 
@@ -42,18 +41,19 @@ async function initializeManifest() {
     log.info(`Loading: ${manifest.name} v${manifest.version}`);
 }
 
-function configI18n({ keyUiLocale }) {
+function configI18n(keyUiLocale: string) {
     const locale = keyUiLocale || 'en';
     config.i18n.sources.add(`i18n/module/i18n_module_${locale}.properties`);
     return keyUiLocale;
 }
-
-function setLocaleData(locale: string, d2: D2) {
+// TODO: Using norwegian for now
+function setLocaleData(uiLocale: string) {
     moment.locale('nb');
     const weekdays = moment.weekdays();
     const weekdaysShort = moment.weekdaysShort();
 
-    const firstDayOfWeek = moment.localeData()._week.dow;
+    // $FlowSuppress
+    const firstDayOfWeek = moment.localeData()._week.dow; //eslint-disable-line
 
     const localeData: LocaleDataType = {
         dateFnsLocale: dateFnNorwegianLocale,
@@ -71,37 +71,31 @@ function setLocaleData(locale: string, d2: D2) {
     CurrentLocaleData.set(localeData);
 }
 
-export async function initializeD2() {
+/*
+async function getSystemSettings(d2: D2) {
+    const systemSettings = await d2.system.settings.all();
+    return systemSettings;
+}
+*/
+
+async function initializeMetaData(dbLocale: string) {
+    await loadMetaData();
+    await buildMetaData(dbLocale);
+}
+
+export async function initialize() {
     setLogLevel();
 
-    let currentLocale;
+    await initializeManifest();
+    const userSettings = await getUserSettings();
+    configI18n(userSettings.keyUiLocale);
+    const d2 = await init();
+    setD2(d2);
+    // const systemSettings = await getSystemSettings(d2);
 
-    const d2 = await initializeManifest()
-        .then(getUserSettings)
-        .then(configI18n)
-        .then((locale: string) => {
-            currentLocale = locale;
-        })
-        .then(init);
-
-    setLocaleData(currentLocale, d2);
-
-    return d2;
-}
-
-export async function getBaseSettings() {
-    const systemSettings = await getSystemSettings();
-    return {
-        systemSettings,
-    };
-}
-
-export async function initializeMetaData(systemSettings: Object) {
-    await loadMetaData();
-    await buildMetaData(systemSettings.keyUiLocale);
-}
-
-export async function initializeSessionAppCache() {
-    await loadSessionCacheData();
+    const uiLocale = userSettings.keyUiLocale;
+    const dbLocale = userSettings.keyDbLocale;
+    setLocaleData(uiLocale);
+    await initializeMetaData(dbLocale);
 }
 

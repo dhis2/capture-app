@@ -8,7 +8,7 @@ import type { Converter } from '../../api/fetcher/apiFetchers';
 type Loader = (
 storageContainer: StorageContainer,
 objectStore: string,
-queryParams?: ?Object,
+queryParams: ?Object,
 d2ModelName: string,
 d2ModelGetterType: $Values<typeof getterTypes>,
 converter: Converter) => Promise<void>;
@@ -32,7 +32,14 @@ class LoadSpecification {
     }
 
     load(storageContainer: StorageContainer) {
-        return this.loader(storageContainer, this.objectStore, this.queryParams, this.d2ModelName, this.d2ModelGetterType, this.converter);
+        return this.loader(
+            storageContainer,
+            this.objectStore,
+            this.queryParams,
+            this.d2ModelName,
+            this.d2ModelGetterType,
+            this.converter,
+        );
     }
 }
 

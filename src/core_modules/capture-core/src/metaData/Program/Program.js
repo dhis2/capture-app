@@ -2,6 +2,8 @@
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/src/isFunction';
 
+import type { ProgramRule, ProgramRuleVariable } from '../../RulesEngine/rulesEngine.types';
+
 export default class Program {
     _id: string;
     _name: string;
@@ -57,5 +59,13 @@ export default class Program {
 
     addProgramRule(programRule: ProgramRule) {
         this._programRules.push(programRule);
+    }
+
+    addProgramRuleVariables(programRuleVariables: Array<ProgramRuleVariable>) {
+        this._programRuleVariables = [...this._programRuleVariables, ...programRuleVariables];
+    }
+
+    addProgramRules(programRules: Array<ProgramRule>) {
+        this._programRules = [...this._programRules, ...programRules];
     }
 }
