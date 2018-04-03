@@ -62,4 +62,3 @@ export const loadDataEntryData = (action$: InputObservable, store: ReduxStore) =
                     },
                 ], 'main'),
         );
-
