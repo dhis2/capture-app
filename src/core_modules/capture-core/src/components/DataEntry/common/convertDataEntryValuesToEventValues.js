@@ -7,9 +7,13 @@ import getDataEntryKey from './getDataEntryKey';
 // $FlowSuppress
 const getFunctionFromString = (functionAsString: string) => Function(`return ${functionAsString}`)();
 
-export default function convertDataEntryValuesToEventValues(state: ReduxState, eventId: string, id: string) {
+export default function convertDataEntryValuesToEventValues(
+    state: ReduxState,
+    eventId: string,
+    id: string,
+    customInputValues?: ?{ [key: string]: any}) {
     const dataEntryKey = getDataEntryKey(id, eventId);
-    const dataEntryValues = state.dataEntriesFieldsValue[dataEntryKey];
+    const dataEntryValues = customInputValues || state.dataEntriesFieldsValue[dataEntryKey];
 
     if (!dataEntryValues) {
         return null;
