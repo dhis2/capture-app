@@ -3,8 +3,11 @@ import React, { Component } from 'react';
 import HeaderBarComponent from 'd2-ui/lib/app-header/HeaderBar';
 import headerBarStore$ from 'd2-ui/lib/app-header/headerBar.store';
 import withStateFrom from 'd2-ui/lib/component-helpers/withStateFrom';
+import { Route, Switch } from 'react-router';
 
 import { withStyles } from 'material-ui-next/styles';
+
+import MainPage from '../MainPage/MainPage.component';
 import EventCaptureForm from '../EventCaptureForm/EventCaptureForm.container';
 
 const HeaderBar = withStateFrom(headerBarStore$, HeaderBarComponent);
@@ -31,17 +34,12 @@ class AppContents extends Component<Props> {
                 <div>
                     <HeaderBar />
                 </div>
-                {
-                /*
-                <div style={{padding: 400}}>
-                    <Button color="primary">
-                        Primary
-                    </Button>                    
-                </div>
-                */
-                }
                 <div style={{ padding: 100 }}>
-                    <EventCaptureForm />
+                    <Switch>
+                        <Route path="/event" component={EventCaptureForm} />
+                        <Route path="/:keys" component={MainPage} />
+                        <Route path="/" component={MainPage} />
+                    </Switch>
                 </div>
                 <div />
             </div>

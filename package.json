@@ -2,6 +2,9 @@
   "name": "tracker-capture-app",
   "version": "0.1.0",
   "private": true,
+  "peerDependencies": {
+    "react-router": "^4.2.0"
+  },
   "dependencies": {
     "classnames": "^2.2.5",
     "create-react-class": "^15.6.2",
@@ -11,6 +14,7 @@
     "date-fns": "^1.29.0",
     "fake-indexeddb": "^2.0.3",
     "flow-bin": "^0.68.0",
+    "history": "^4.7.2",
     "html-webpack-plugin": "^2.30.1",
     "jest-localstorage-mock": "^2.1.0",
     "jquery": "^3.2.1",
@@ -25,12 +29,14 @@
     "react-dom": "^16.0.0",
     "react-infinite-calendar": "^2.3.1",
     "react-redux": "^5.0.6",
+    "react-router-redux": "^5.0.0-alpha.9",
     "react-scripts": "1.0.14",
     "react-select": "^1.2.1",
     "react-virtualized": "^9.17.2",
     "react-virtualized-select": "^3.1.1",
     "redux": "^3.7.2",
     "redux-batched-actions": "^0.2.1",
+    "redux-devtools-extension": "^2.13.2",
     "redux-logger": "^3.0.6",
     "redux-observable": "^0.16.0",
     "redux-optimistic-ui": "^3.1.0",
@@ -57,7 +63,6 @@
     "eslint-plugin-import": "^2.8.0",
     "expose-loader": "^0.7.4",
     "flow-typed": "^2.2.1",
-    "react-app-rewired": "^1.3.4",
-    "redux-devtools-extension": "^2.13.2"
+    "react-app-rewired": "^1.3.4"
   }
 }

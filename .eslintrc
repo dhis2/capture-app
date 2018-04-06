@@ -27,6 +27,14 @@
         "react/prefer-stateless-function": 0,
         "no-unused-expressions": 0,
         "react/jsx-no-bind": 0,
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": false,
+                "optionalDependencies": false,
+                "peerDependencies": true
+            }
+        ],
         "max-len": [
             "warn",
             {
