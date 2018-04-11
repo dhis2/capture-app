@@ -97,8 +97,8 @@ function convertToClientEvent(event: ApiTEIEvent) {
 export default async function getEnrollmentEvents() {
     const api = getApi();
     const apiRes = await api
-        //.get('events?program=eBAyeGv0exc');
-        .get('events?event=qEHQdXkUAGk');
+        .get('events?program=eBAyeGv0exc&orgUnit=DiszpKrYNg8&paging=false');
+        // .get('events?event=qEHQdXkUAGk');
 
     if (!apiRes || !apiRes.events || apiRes.events.length === 0) {
         return null;
