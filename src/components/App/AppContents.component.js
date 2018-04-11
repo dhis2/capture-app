@@ -7,7 +7,7 @@ import { Route, Switch } from 'react-router';
 
 import { withStyles } from 'material-ui-next/styles';
 
-import MainPage from '../MainPage/MainPage.component';
+import MainPage from 'capture-core/components/Pages/MainPage/MainPage.component';
 import EventCaptureForm from '../EventCaptureForm/EventCaptureForm.container';
 
 const HeaderBar = withStateFrom(headerBarStore$, HeaderBarComponent);

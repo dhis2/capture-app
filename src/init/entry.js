@@ -35,7 +35,7 @@ async function runApp(domElement: HTMLElement, store: ReduxStore, history: HashH
         store.dispatch(startupDataLoad());
 
         // START TEST
-        store.dispatch(startEnrollmentLoad());
+        // store.dispatch(startEnrollmentLoad());
         // END TEST
     } catch (error) {
         log.error(error);

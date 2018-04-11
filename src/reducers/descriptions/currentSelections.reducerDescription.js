@@ -1,9 +1,8 @@
 // @flow
-import { createReducerDescription } from 'capture-core/trackerRedux/trackerReducer';
-import { actionTypes as selectionsActionTypes } from 'capture-core/actions/currentSelections.actions';
+import { getCurrentSelectionsReducerDesc } from 'capture-core/reducers/descriptions/currentSelections.reducerDescriptionGetter';
 import { actionTypes as entryActionTypes } from '../../init/entry.actions';
 
-export const currentSelectionsReducerDesc = createReducerDescription({
+export const currentSelectionsReducerDesc = getCurrentSelectionsReducerDesc({
     [entryActionTypes.STARTUP_DATA_LOADED]: (state, action) => {
         const newState = {
             ...state,
@@ -16,8 +15,4 @@ export const currentSelectionsReducerDesc = createReducerDescription({
         };
         return newState;
     },
-    [selectionsActionTypes.UPDATE_SELECTIONS]: (state, action) => {
-        const newState = { ...state, ...action.payload };
-        return newState;
-    },
-}, 'currentSelections');
+});

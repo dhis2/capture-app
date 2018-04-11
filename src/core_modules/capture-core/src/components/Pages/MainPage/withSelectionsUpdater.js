@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { updateSelections } from 'capture-core/actions/currentSelections.actions';
+import { updateMainSelections } from './mainSelections.actions';
 
 type Props = {
     programId: ?string,
@@ -25,25 +25,6 @@ const getMainPage = (InnerComponent: React.ComponentType<any>) =>
             return value;
         }
 
-        inSelectionUpdate: boolean;
-
-        constructor(props: Props) {
-            super(props);
-            this.inSelectionUpdate = false;
-
-            const { programId: paramProgramId, orgUnitId: paramOrgUnitId } = this.getLocationParams();
-            const stateProgramId = this.props.programId || null;
-            const stateOrgUnitId = this.props.orgUnitId || null;
-
-            if (stateProgramId !== paramProgramId || stateOrgUnitId !== paramOrgUnitId) {
-                this.inSelectionUpdate = true;
-                this.props.onUpdateSelections({
-                    programId: paramProgramId,
-                    orgUnitId: paramOrgUnitId,
-                });
-            }
-        }
-
         getLocationParams() {
             let programId = null;
             let orgUnitId = null;
@@ -60,9 +41,24 @@ const getMainPage = (InnerComponent: React.ComponentType<any>) =>
             return { programId, orgUnitId };
         }
 
+        needsUpdate(paramProgramId: ?string, paramOrgUnitId: ?string) {
+            const stateProgramId = this.props.programId || null;
+            const stateOrgUnitId = this.props.orgUnitId || null;
+
+            return stateProgramId !== paramProgramId || stateOrgUnitId !== paramOrgUnitId;
+        }
+
+        update(paramProgramId: ?string, paramOrgUnitId: ?string) {
+            this.props.onUpdateSelections({
+                programId: paramProgramId,
+                orgUnitId: paramOrgUnitId,
+            });
+        }
+
         render() {
-            if (this.inSelectionUpdate) {
-                this.inSelectionUpdate = false;
+            const { programId: paramProgramId, orgUnitId: paramOrgUnitId } = this.getLocationParams();
+            if (this.needsUpdate(paramProgramId, paramOrgUnitId)) {
+                this.update(paramProgramId, paramOrgUnitId);
                 return null;
             }
 
@@ -83,7 +79,7 @@ const mapStateToProps = (state: ReduxState) => ({
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onUpdateSelections: (selections: Object) => {
-        dispatch(updateSelections(selections));
+        dispatch(updateMainSelections(selections));
     },
 });
 
