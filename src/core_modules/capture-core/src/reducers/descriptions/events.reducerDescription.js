@@ -8,7 +8,7 @@ import { actionTypes as enrollmentActionTypes } from '../../actions/__TEMP__/enr
 
 export const eventsDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
-        const eventContainers = action.payload;
+        const eventContainers = action.payload.eventContainers;
         if (!eventContainers || eventContainers.length === 0) {
             return {};
         }
@@ -52,7 +52,7 @@ export const eventsDesc = createReducerDescription({
 
 export const eventsValuesDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
-        const eventContainers = action.payload;
+        const eventContainers = action.payload.eventContainers;
         if (!eventContainers || eventContainers.length === 0) {
             return {};
         }

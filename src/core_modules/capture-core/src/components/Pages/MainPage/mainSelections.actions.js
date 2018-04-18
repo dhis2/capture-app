@@ -11,7 +11,7 @@ export const updateMainSelections =
     (selections: Object) => actionCreator(actionTypes.UPDATE_MAIN_SELECTIONS)(selections);
 
 export const workingListDataRetrieved =
-    (events: ?Array<Object>) => actionCreator(actionTypes.WORKING_LIST_DATA_RETRIEVED)(events);
+    (data: Object) => actionCreator(actionTypes.WORKING_LIST_DATA_RETRIEVED)(data);
 
 export const workingListRetrievalFailed =
     (errorMessage: string) => actionCreator(actionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED)(errorMessage);

@@ -108,11 +108,22 @@ export default async function getEvents(queryParams: ?Object) {
         return null;
     }
 
-    return apiRes.events.reduce((accEvents, apiEvent) => {
+    const eventContainers = apiRes.events.reduce((accEvents, apiEvent) => {
         const eventContainer = convertToClientEvent(apiEvent);
         if (eventContainer) {
             accEvents.push(eventContainer);
         }
         return accEvents;
     }, []);
+
+    const pagingData = {
+        rowsCount: apiRes.pager.total,
+        rowsPerPage: apiRes.pager.pageSize,
+        currentPage: apiRes.pager.page,
+    };
+
+    return {
+        eventContainers,
+        pagingData,
+    };
 }

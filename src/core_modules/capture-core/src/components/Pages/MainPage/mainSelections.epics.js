@@ -18,6 +18,7 @@ const getWorkingList = (programId: string, orgUnitId: string) =>
     getEvents({
         program: programId,
         orgUnit: orgUnitId,
+        pageSize: 1,
     });
 
 export const retrieveWorkingListEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -30,8 +31,8 @@ export const retrieveWorkingListEpic = (action$: InputObservable, store: ReduxSt
         .switchMap(() => {
             const { programId, orgUnitId } = store.getState().currentSelections;
             return getWorkingList(programId, orgUnitId)
-                .then(events =>
-                    workingListDataRetrieved(events),
+                .then(data =>
+                    workingListDataRetrieved(data),
                 )
                 .catch((error) => {
                     log.error(errorCreator(errorMessages.WORKING_LIST_RETRIEVE_ERROR)({ error }));

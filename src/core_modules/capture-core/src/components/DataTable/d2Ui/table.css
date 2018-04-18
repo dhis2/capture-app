@@ -1,0 +1,55 @@
+.d2-table-default {
+    display: table;
+    width: '100%';
+    border-spacing: 0;
+}
+
+.d2-table-row-default {
+    color: inherit;
+    display: table-row;
+    vertical-align: middle;    
+}
+
+.d2-table-row-default:focus {
+    outline: none;
+}
+
+.d2-table-row-body-default {
+    height: 48px;
+}
+
+.d2-table-row-header-default {    
+    height: 56px;
+}
+
+.d2-table-row-footer-default {    
+    height: 56px;
+}
+
+.d2-table-cell-default {
+    display: table-cell;
+    vertical-align: inherit;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    text-align: left;
+    padding: 2 20 2 20;
+}
+
+.d2-table-cell-body-default {
+
+}
+
+.d2-table-cell-header-default {
+  
+}
+
+.d2-table-cell-footer-default {
+   
+}
+
+.d2-table-cell-pagination-default {
+    text-align: right;
+}
+
+
+

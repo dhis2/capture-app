@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import withSelectionsUpdater from './withSelectionsUpdater';
 
-import EventsList from './EventsList/EventsList.component';
+import EventsList from './EventsList/EventsList.container';
 
 type Props = {
     programId: ?string,
