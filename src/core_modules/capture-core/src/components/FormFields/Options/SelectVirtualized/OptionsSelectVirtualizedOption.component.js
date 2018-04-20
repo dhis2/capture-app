@@ -17,16 +17,11 @@ class OptionsSelectVirtualizedOption extends Component<Props> {
         cursor: 'pointer',
     };
 
-    // static selectedStyle = styleBuilder(null, null, 'selectVirtualizedOption.selected');
     static selectedStyle = {};
-
-    constructor(props: Props) {
-        super(props);
-    }
 
     render() {
         const { option, style, onSelect, currentlySelectedValues } = this.props;
-        const { label, value } = option;
+        const { label } = option;
         const renderStyle = Object.assign({}, OptionsSelectVirtualizedOption.defaultContainerStyle, style, currentlySelectedValues && currentlySelectedValues.includes(option) ? OptionsSelectVirtualizedOption.selectedStyle : null);
 
         return (

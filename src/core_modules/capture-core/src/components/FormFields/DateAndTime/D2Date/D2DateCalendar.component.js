@@ -2,7 +2,7 @@
 /* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui-next/styles';
-import InfiniteCalendar, { Calendar, defaultMultipleDateInterpolation, withMultipleDates } from 'react-infinite-calendar';
+import InfiniteCalendar from 'react-infinite-calendar';
 
 import isValidDate from '../../../../utils/validators/date.validator';
 import moment from '../../../../utils/moment/momentResolver';

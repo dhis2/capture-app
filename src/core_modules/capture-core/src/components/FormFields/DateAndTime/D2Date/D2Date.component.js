@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { findDOMNode } from 'react-dom';
 import { withStyles } from 'material-ui-next/styles';
 
 import D2TextField from '../../Generic/D2TextField.component';
