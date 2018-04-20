@@ -14,13 +14,14 @@ import LoadingMask from '../../../LoadingMasks/LoadingMask.component';
 
 import withData from './Pagination/withData';
 import withNavigation from './Pagination/withDefaultNavigation';
+import withRowsPerPageSelector from './Pagination/withRowsPerPageSelector';
 
 // $FlowSuppress
 const { Table, Row, Cell, HeaderCell, Head, Body, Footer, Pagination } = getTableComponents(reactAdapter);
 
-
-const PaginationNavigation = withNavigation()(Pagination);
-const EventListPagination = withData()(PaginationNavigation);
+const PaginationNavigationHOC = withNavigation()(Pagination);
+const RowsSelectorHOC = withRowsPerPageSelector()(PaginationNavigationHOC);
+const EventListPagination = withData()(RowsSelectorHOC);
 
 const styles = theme => ({
     loaderContainer: {
@@ -135,6 +136,10 @@ class EventsList extends Component<Props> {
                 );
             });
     }
+
+    getPaginationLabelDisplayedRows =
+        (fromToLabel: string, totalLabel: string) => `${fromToLabel} of ${totalLabel}`
+
     render() {
         const { dataSource, headers, isLoading, classes } = this.props; //eslint-disable-line
 
@@ -165,7 +170,10 @@ class EventsList extends Component<Props> {
                                 colSpan={3}
                                 className={classNames(this.props.classes.cell, this.props.classes.footerCell)}
                             >
-                                <EventListPagination />
+                                <EventListPagination
+                                    rowsCountSelectorLabel={'Rows per page'}
+                                    onGetLabelDisplayedRows={this.getPaginationLabelDisplayedRows}
+                                />
                             </Cell>
                         </Row>
                     </Footer>

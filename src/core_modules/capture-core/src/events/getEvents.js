@@ -104,17 +104,13 @@ export default async function getEvents(queryParams: ?Object) {
     const apiRes = await api
         .get('events', queryParams);
 
-    if (!apiRes || !apiRes.events || apiRes.events.length === 0) {
-        return null;
-    }
-
-    const eventContainers = apiRes.events.reduce((accEvents, apiEvent) => {
+    const eventContainers = apiRes && apiRes.events ? apiRes.events.reduce((accEvents, apiEvent) => {
         const eventContainer = convertToClientEvent(apiEvent);
         if (eventContainer) {
             accEvents.push(eventContainer);
         }
         return accEvents;
-    }, []);
+    }, []) : null;
 
     const pagingData = {
         rowsCount: apiRes.pager.total,

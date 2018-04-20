@@ -5,20 +5,19 @@ import withSelectionsUpdater from './withSelectionsUpdater';
 import EventsList from './EventsList/EventsList.container';
 
 type Props = {
-    programId: ?string,
-    orgUnitId: ?string,
+    prerequisitesForWorkingListMet: boolean,
 };
 
 class MainPage extends Component<Props> {
     render() {
-        const { programId, orgUnitId } = this.props;
+        const { prerequisitesForWorkingListMet } = this.props;
 
         return (
             <div>
                 main menu
                 {
                     (() => {
-                        if (!(programId && orgUnitId)) {
+                        if (!prerequisitesForWorkingListMet) {
                             return null;
                         }
 

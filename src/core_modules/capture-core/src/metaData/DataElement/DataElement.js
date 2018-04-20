@@ -20,15 +20,17 @@ export default class DataElement {
     _name: string;
     _shortName: string;
     _formName: string;
-    _visible: boolean;
     _disabled: boolean;
     _compulsory: boolean;
     _description: string;
     _type: $Values<typeof elementTypes>;
     _optionSet: ?OptionSet;
+    _displayInForms: boolean;
+    _displayInReports: boolean;
 
     constructor(initFn: ?(_this: DataElement) => void) {
-        this.visible = true;
+        this._displayInReports = true;
+        this._displayInForms = true;
         this.disabled = false;
         initFn && isFunction(initFn) && initFn(this);
     }
@@ -61,11 +63,18 @@ export default class DataElement {
         return this._formName;
     }
 
-    set visible(visible: boolean) {
-        this._visible = isDefined(visible) ? visible : true;
+    set displayInForms(display?: ?boolean) {
+        this._displayInForms = display != null ? display : true;
     }
-    get visible(): boolean {
-        return this._visible;
+    get displayInForms(): boolean {
+        return this._displayInForms;
+    }
+
+    set displayInReports(display?: ?boolean) {
+        this._displayInReports = display != null ? display : true;
+    }
+    get displayInReports(): boolean {
+        return this._displayInReports;
     }
 
     set disabled(disabled: boolean) {

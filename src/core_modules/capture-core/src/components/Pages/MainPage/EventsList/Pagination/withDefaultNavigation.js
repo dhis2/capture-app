@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
 import { withStyles } from 'material-ui-next/styles';
 
 import IconButton from 'material-ui-next/IconButton';
@@ -9,13 +8,10 @@ import KeyboardArrowLeft from 'material-ui-icons/KeyboardArrowLeft';
 import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
 import LastPageIcon from 'material-ui-icons/LastPage';
 
-import { changePage } from './actions/pagination.actions';
-
 const styles = (theme: Theme) => ({
     root: {
         flexShrink: 0,
         color: theme.palette.text.secondary,
-        marginLeft: theme.spacing.unit * 2.5,
     },
 });
 
@@ -99,13 +95,6 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
         }
     };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onChangePage: (page: number) => {
-        dispatch(changePage(page));
-    },
-});
-
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
-        // $FlowSuppress
-        connect(null, mapDispatchToProps)(withStyles(styles, { withTheme: true })(getNavigation(InnerComponent)));
+        withStyles(styles, { withTheme: true })(getNavigation(InnerComponent));

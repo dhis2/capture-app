@@ -17,14 +17,18 @@ function buildTranslations() {
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         class TranslationBuilder extends React.Component<Props> {
-            static translations = buildTranslations();
+            translations: Object;
+            constructor(props: Props) {
+                super(props);
+                this.translations = buildTranslations();
+            }
 
             render() {
                 const { ...passOnProps } = this.props;
 
                 return (
                     <InnerComponent
-                        translations={TranslationBuilder.translations}
+                        translations={this.translations}
                         {...passOnProps}
                     />
                 );

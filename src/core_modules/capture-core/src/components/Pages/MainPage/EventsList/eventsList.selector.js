@@ -15,7 +15,7 @@ type EventContainer = {
 // #HEADERS
 const programIdSelector = state => state.currentSelections.programId;
 
-export const makeHeadersSelector = () => createSelector(
+export const makeElementsSelector = () => createSelector(
     programIdSelector,
     (programId) => {
         const program = programCollection.get(programId);
@@ -30,7 +30,17 @@ export const makeHeadersSelector = () => createSelector(
 
         const elements = foundation.getElements();
 
+        return elements;
+    },
+);
+
+const elementsSelector = elements => elements;
+
+export const makeHeadersSelector = () => createSelector(
+    elementsSelector,
+    (elements) => {
         return elements
+            .filter(element => element.displayInReports)
             .map(element => ({
                 id: element.id,
                 text: element.formName,

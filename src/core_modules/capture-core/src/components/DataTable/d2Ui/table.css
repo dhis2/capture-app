@@ -32,7 +32,7 @@
     border-bottom-width: 1px;
     border-bottom-style: solid;
     text-align: left;
-    padding: 2 20 2 20;
+    padding: 2px 20px 2px 20px;
 }
 
 .d2-table-cell-body-default {
@@ -48,7 +48,23 @@
 }
 
 .d2-table-cell-pagination-default {
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.d2-pagination-rows-per-page-element-container {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.d2-pagination-rows-per-page-element {
+    margin-left: 20px;
+}
+
+.d2-rows-display-rows-container {
+    margin-right: 20px;
 }
 
 

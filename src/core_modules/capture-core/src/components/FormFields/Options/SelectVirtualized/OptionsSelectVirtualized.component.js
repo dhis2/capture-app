@@ -1,9 +1,7 @@
 // @flow
 /* eslint-disable class-methods-use-this */
 
-
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui-next/styles';
 import classNames from 'classnames';
 
@@ -20,7 +18,6 @@ import VirtualizedOption from './OptionsSelectVirtualizedOption.component';
 
 import OptionSet from '../../../../metaData/OptionSet/OptionSet';
 import Option from '../../../../metaData/OptionSet/Option';
-// import gotoFn from '../Utils/gotoMixin';
 
 const styles = theme => ({
     inkBar: {
@@ -80,9 +77,12 @@ const styles = theme => ({
             backgroundSize: '5px 1px',
         },
     },
-    selectRoot: {
-        paddingTop: '12px',
+    selectRootBase: {
         position: 'relative',
+        paddingTop: '2px',
+    },
+    selectRootWithLabel: {
+        paddingTop: '12px',
     },
     root: {
         position: 'relative',
@@ -114,6 +114,7 @@ type Props = {
     useHintLabel?: ?boolean,
     classes: Object,
     required?: ?boolean,
+    withoutUnderline?: ?boolean,
     translations: {
         clearText: string,
         noResults: string,
@@ -142,7 +143,6 @@ class OptionsSelectVirtualized extends Component<Props, State> {
     handleFocus: () => void;
     handleBlur: () => void;
     materialUIContainerInstance: any;
-    goto: () => void;
     options: ?Array<{label: string, value: any}>;
     renderOption: () => React$Element<any>;
     inFocusLabelClasses: Object;
@@ -156,7 +156,6 @@ class OptionsSelectVirtualized extends Component<Props, State> {
         this.handleBlur = this.handleBlur.bind(this);
         this.renderOption = this.renderOption.bind(this);
 
-        // this.goto = gotoFn;
         this.options = this.buildOptions(this.props.optionSet);
         this.inFocusLabelClasses = {
             root: this.props.classes.labelInFocus,
@@ -217,12 +216,18 @@ class OptionsSelectVirtualized extends Component<Props, State> {
     }
 
     render() {
-        const { optionSet, label, value, nullable, style, maxHeight, disabled, required, useHintLabel, onChange, onBlur, classes, translations, ...toSelect } = this.props;
+        const { optionSet, label, value, nullable, style, maxHeight, disabled, required, useHintLabel, onChange, onBlur, classes, translations, withoutUnderline, ...toSelect } = this.props;
         const { inFocus } = this.state;
         const calculatedValue = toSelect.multi ? value : this.getValue();
         const labelIsShrinked = !!calculatedValue || this.state.inFocus;
 
         const lineClasses = classNames(classes.underline, classes.inkBar, { [classes.focused]: inFocus });
+        const selectRootClasses = classNames(
+            classes.selectRootBase,
+            { [classes.selectRootWithLabel]: label },
+            { [lineClasses]: !withoutUnderline },
+        );
+
         return (
             <div
                 ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}
@@ -244,7 +249,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
                 }
 
                 <div
-                    className={`${classes.selectRoot} ${lineClasses}`}
+                    className={selectRootClasses}
                 >
                     <VirtualizedSelect
                         disabled={disabled}
