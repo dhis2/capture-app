@@ -1,13 +1,10 @@
 // @flow
 import React, { Component } from 'react';
-import HeaderBarComponent from 'd2-ui/lib/app-header/HeaderBar';
-import headerBarStore$ from 'd2-ui/lib/app-header/headerBar.store';
-import withStateFrom from 'd2-ui/lib/component-helpers/withStateFrom';
+
+import HeaderBar from '@dhis2/d2-ui-header-bar';
 
 import { withStyles } from 'material-ui-next/styles';
 import EventCaptureForm from '../EventCaptureForm/EventCaptureForm.container';
-
-const HeaderBar = withStateFrom(headerBarStore$, HeaderBarComponent);
 
 const styles = theme => ({
     app: {
@@ -29,17 +26,8 @@ class AppContents extends Component<Props> {
                 className={classes.app}
             >
                 <div>
-                    <HeaderBar />
+                    <HeaderBar d2={this.context.d2} />
                 </div>
-                {
-                /*
-                <div style={{padding: 400}}>
-                    <Button color="primary">
-                        Primary
-                    </Button>                    
-                </div>
-                */
-                }
                 <div style={{ padding: 100 }}>
                     <EventCaptureForm />
                 </div>

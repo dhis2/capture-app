@@ -6,8 +6,9 @@ import LegacyMuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { MuiThemeProvider } from 'material-ui-next/styles';
 
 import FeedbackBar from 'capture-core/components/FeedbackBar/FeedbackBar.container';
+
 // d2-ui
-import LoadingMask from 'd2-ui/lib/loading-mask/LoadingMask.component';
+import { LoadingMask } from '@dhis2/d2-ui-core';
 import AppContents from './AppContents.component';
 
 //HOCs
