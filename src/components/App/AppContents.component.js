@@ -6,6 +6,8 @@ import HeaderBar from '@dhis2/d2-ui-header-bar';
 import { withStyles } from 'material-ui-next/styles';
 import EventCaptureForm from '../EventCaptureForm/EventCaptureForm.container';
 
+import getD2 from 'capture-core/d2/d2Instance';
+
 const styles = theme => ({
     app: {
         fontFamily: theme.typography.fontFamily,
@@ -21,13 +23,12 @@ class AppContents extends Component<Props> {
     render() {
         const { classes } = this.props;
 
+        const d2 = getD2();
+
         return (
-            <div
-                className={classes.app}
-            >
-                <div>
-                    <HeaderBar d2={this.context.d2} />
-                </div>
+            <div className={classes.app}>
+                <HeaderBar d2={d2} />
+
                 <div style={{ padding: 100 }}>
                     <EventCaptureForm />
                 </div>
