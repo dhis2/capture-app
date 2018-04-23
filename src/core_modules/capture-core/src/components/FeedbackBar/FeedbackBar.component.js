@@ -88,7 +88,7 @@ class FeedbackBar extends Component<Props> {
     }
 
     render() {
-        const { feedback, onClose, classes, theme } = this.props;
+        const { feedback } = this.props;
 
         return (
             <SnackBar

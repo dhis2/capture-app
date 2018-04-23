@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import isDefined from 'd2-utilizr/lib/isDefined';
 import { updateField } from '../actions/dataEntry.actions';
 import getDataEntryKey from '../common/getDataEntryKey';
 import { placements } from './eventField.const';

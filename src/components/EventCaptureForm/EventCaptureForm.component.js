@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { wordToValidatorMap } from 'd2-ui/lib/forms/Validators';
+import { Validators } from '@dhis2/d2-ui-core';
 import DataEntry from 'capture-core/components/DataEntry/DataEntry.container';
 // import withCompleteButton from 'capture-core/components/DataEntry/withCompleteButton';
 import withSaveButton from 'capture-core/components/DataEntry/withSaveButton';
@@ -50,10 +50,10 @@ const buildReportDateSettingsFn = () => {
         propName: 'eventDate',
         validatorContainers: [
             {
-                validator: wordToValidatorMap.get('required'),
+                validator: Validators.wordToValidatorMap.get('required'),
                 message:
                     getTranslation(
-                        wordToValidatorMap.get('required').message, formatterOptions.CAPITALIZE_FIRST_LETTER),
+                        Validators.wordToValidatorMap.get('required').message, formatterOptions.CAPITALIZE_FIRST_LETTER),
             },
             {
                 validator: preValidateDate,

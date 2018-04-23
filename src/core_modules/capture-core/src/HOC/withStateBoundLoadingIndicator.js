@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 // d2-ui
-import LoadingMask from 'd2-ui/lib/loading-mask/LoadingMask.component';
+import { LoadingMask } from '@dhis2/d2-ui-core';
 
 type Props = {
     ready: boolean,
