@@ -12,6 +12,7 @@ import D2TrueOnly from 'capture-core/components/FormFields/Generic/D2TrueOnly.co
 import withDefaultMessages from 'capture-core/components/DataEntry/eventField/withDefaultMessages';
 import withDefaultFieldContainer from 'capture-core/components/DataEntry/eventField/withDefaultFieldContainer';
 import withDefaultChangeHandler from 'capture-core/components/DataEntry/eventField/withDefaultChangeHandler';
+import QuickSelector from 'capture-core/components/QuickSelector/QuickSelector.component';
 import withDefaultShouldUpdateInterface from
     'capture-core/components/DataEntry/eventField/withDefaultShouldUpdateInterface';
 import isValidDate from 'capture-core/utils/validators/date.validator';
@@ -101,6 +102,8 @@ type Props = {
 
 export default (props: Props) => (
     <div>
+        <QuickSelector />
+        <br />
         <button
             onClick={() => { props.onLoadEvent('dcDICb4mZ5x'); }}
         >
