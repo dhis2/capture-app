@@ -28,7 +28,7 @@
 
 .d2-table-cell-default {
     display: table-cell;
-    vertical-align: inherit;
+    vertical-align: middle;
     border-bottom-width: 1px;
     border-bottom-style: solid;
     text-align: left;
@@ -63,9 +63,14 @@
     margin-left: 20px;
 }
 
-.d2-rows-display-rows-container {
+.d2-pagination-display-rows-container {
     margin-right: 20px;
 }
 
-
-
+.d2-sort-label-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+}

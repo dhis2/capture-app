@@ -1,31 +1,35 @@
 // @flow
 import { connect } from 'react-redux';
 import EventsList from './EventsList.component';
-import { makeElementsSelector, makeHeadersSelector, makeSortedHeadersSelector, makeCreateEventsContainer, makeCreateWorkingListData } from './eventsList.selector';
+import { makeColumnsSelector, makeCreateEventsContainer, makeCreateWorkingListData } from './eventsList.selector';
+import { sortWorkingList } from './eventsList.actions';
 
 const makeMapStateToProps = () => {
-    const elementsSelector = makeElementsSelector();
-    const headersSelector = makeHeadersSelector();
-    const sortedHeadersSelector = makeSortedHeadersSelector();
+    const columnsSelector = makeColumnsSelector();
     const createEventsContainer = makeCreateEventsContainer();
     const createWorkingListData = makeCreateWorkingListData();
 
     const mapStateToProps = (state: ReduxState) => {
         const isLoading = !!state.workingListsUI.main.isLoading;
-        const elements = elementsSelector(state);
-        const headers = headersSelector(elements);
+        const columns = !isLoading ? columnsSelector(state) : null;
         const eventsContainer = !isLoading ? createEventsContainer(state) : [];
+        const sortById = !isLoading ? state.workingListsMeta.main.sortById : null;
+        const sortByDirection = !isLoading ? state.workingListsMeta.main.sortByDirection : null;
         return {
-            headers: sortedHeadersSelector(headers),
+            columns,
             dataSource: createWorkingListData(eventsContainer),
             isLoading,
+            sortById,
+            sortByDirection,
         };
     };
     return mapStateToProps;
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    
+    onSort: (id: string, direction: string) => {
+        dispatch(sortWorkingList(id, direction));
+    },
 });
 
 export default connect(makeMapStateToProps, mapDispatchToProps)(EventsList);

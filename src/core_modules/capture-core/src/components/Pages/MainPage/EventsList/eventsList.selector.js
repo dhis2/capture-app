@@ -2,7 +2,7 @@
 import { createSelectorCreator, createSelector, defaultMemoize } from 'reselect';
 import { ensureState } from 'redux-optimistic-ui';
 
-import programCollection from '../../../../metaDataMemoryStores/programCollection/programCollection';
+import getStageFromProgramIdForEventProgram from '../../../../metaData/helpers/getStageFromProgramIdForEventProgram';
 import getStageFromEvent from '../../../../metaData/helpers/getStageFromEvent';
 import { convertValue } from '../../../../converters/clientToList';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
@@ -14,45 +14,26 @@ type EventContainer = {
 
 // #HEADERS
 const programIdSelector = state => state.currentSelections.programId;
+const columnsOrderStateSelector = state => state.workingListsColumnsOrder.main;
 
-export const makeElementsSelector = () => createSelector(
+export const makeColumnsSelector = () => createSelector(
     programIdSelector,
-    (programId) => {
-        const program = programCollection.get(programId);
-        if (!program) {
-            return [];
+    columnsOrderStateSelector,
+    (programId, columnsOrderFromState) => {
+        const stageContainer = getStageFromProgramIdForEventProgram(programId);
+        if (stageContainer.error) {
+            return columnsOrderFromState;
         }
 
-        const foundation: RenderFoundation = program.getStage();
-        if (!foundation) {
-            return [];
-        }
+        // $FlowSuppress
+        const stage: RenderFoundation = stageContainer.stage;
 
-        const elements = foundation.getElements();
-
-        return elements;
-    },
-);
-
-const elementsSelector = elements => elements;
-
-export const makeHeadersSelector = () => createSelector(
-    elementsSelector,
-    (elements) => {
-        return elements
-            .filter(element => element.displayInReports)
-            .map(element => ({
-                id: element.id,
-                text: element.formName,
+        return columnsOrderFromState
+            .map(column => ({
+                ...column,
+                header: stage.getElement(column.id).formName,
             }));
     },
-);
-
-const headersSelector = headers => headers;
-
-export const makeSortedHeadersSelector = () => createSelector(
-    headersSelector,
-    headers => headers,
 );
 // #END HEADERS
 

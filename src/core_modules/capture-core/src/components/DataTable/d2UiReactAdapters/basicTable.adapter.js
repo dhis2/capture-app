@@ -6,7 +6,6 @@ import getTable from './componentGetters/Table.componentGetter';
 import getHead from './componentGetters/Head.componentGetter';
 import getBody from './componentGetters/Body.componentGetter';
 import getFooter from './componentGetters/Footer.componentGetter';
-import getPagination from './componentGetters/Pagination.componentGetter';
 
 import type { Adapter } from '../d2Ui/types';
 
@@ -19,7 +18,6 @@ const reactAdapter: Adapter = {
         Body: getBody,
         Head: getHead,
         Footer: getFooter,
-        Pagination: getPagination,
     },
 };
 

@@ -7,17 +7,23 @@ import classNames from 'classnames';
 
 import { getTranslation } from '../../../../d2/d2Instance';
 import { formatterOptions } from '../../../../utils/string/format.const';
+import elementTypes from '../../../../metaData/DataElement/elementTypes';
 
 import getTableComponents from '../../../DataTable/d2Ui/getTableComponents';
-import reactAdapter from '../../../DataTable/d2UiReactAdapters/Table.adapter';
+import basicTableAdapter from '../../../DataTable/d2UiReactAdapters/basicTable.adapter';
+import paginationAdapter from '../../../DataTable/d2UiReactAdapters/pagination.adapter';
 import LoadingMask from '../../../LoadingMasks/LoadingMask.component';
 
 import withData from './Pagination/withData';
 import withNavigation from './Pagination/withDefaultNavigation';
 import withRowsPerPageSelector from './Pagination/withRowsPerPageSelector';
+import SortLabelWrapper from './SortLabelWrapper.component';
+import { directions } from '../../../DataTable/d2UiReactAdapters/componentGetters/sortLabel.const';
 
 // $FlowSuppress
-const { Table, Row, Cell, HeaderCell, Head, Body, Footer, Pagination } = getTableComponents(reactAdapter);
+const { Table, Row, Cell, HeaderCell, Head, Body, Footer } = getTableComponents(basicTableAdapter);
+// $FlowSuppress
+const { Pagination } = getTableComponents(paginationAdapter);
 
 const PaginationNavigationHOC = withNavigation()(Pagination);
 const RowsSelectorHOC = withRowsPerPageSelector()(PaginationNavigationHOC);
@@ -54,15 +60,19 @@ const styles = theme => ({
         fontSize: theme.typography.pxToRem(12),
         color: theme.palette.text.secondary,
         fontWeight: theme.typography.fontWeightMedium,
-    }
+    },
 });
+
+type Column = {
+    id: string,
+    header: string,
+    visible: boolean,
+    type: $Values<typeof elementTypes>,
+};
 
 type Props = {
     dataSource: Array<Object>,
-    headers: Array<{
-        id: string,
-        text: string,
-    }>,
+    columns: ?Array<Column>,
     isLoading: boolean,
     classes: {
         loaderContainer: string,
@@ -73,18 +83,43 @@ type Props = {
         footerCell: string,
         row: string,
     },
+    sortById: string,
+    sortByDirection: string,
+    onSort: (id: string, direction: string) => void,
 };
 
 class EventsList extends Component<Props> {
-    renderHeaderRow() {
-        const headers = this.props.headers;
+    static typesWithInitialDirectionAsc = [
+        elementTypes.TEXT,
+        elementTypes.LONG_TEXT,
+    ];
 
-        const headerCells = headers
-            .map(header => (
+    getSortHandler = (id: string) => (direction: string) => {
+        this.props.onSort(id, direction);
+    }
+
+    renderHeaderRow(visibleColumns: Array<Column>) {
+        const sortById = this.props.sortById;
+        const sortByDirection = this.props.sortByDirection;
+
+        const headerCells = visibleColumns
+            .map(column => (
                 <HeaderCell
+                    key={column.id}
                     className={classNames(this.props.classes.cell, this.props.classes.headerCell)}
                 >
-                    {header.text}
+                    <SortLabelWrapper
+                        isActive={column.id === sortById}
+                        initialDirection={
+                            EventsList.typesWithInitialDirectionAsc.includes(column.type)
+                                ? directions.ASC
+                                : directions.DESC
+                        }
+                        direction={sortByDirection}
+                        onSort={this.getSortHandler(column.id)}
+                    >
+                        {column.header}
+                    </SortLabelWrapper>
                 </HeaderCell>
             ));
 
@@ -96,18 +131,18 @@ class EventsList extends Component<Props> {
             </Row>
         );
     }
-    renderRows() {
+
+    renderRows(visibleColumns: Array<Column>) {
         const dataSource = this.props.dataSource;
-        const headers = this.props.headers;
 
         if (!dataSource || dataSource.length === 0) {
-            const headersCount = headers.length;
+            const columnsCount = visibleColumns.length;
             return (
                 <Row
                     className={this.props.classes.row}
                 >
                     <Cell
-                        colSpan={headersCount}
+                        colSpan={columnsCount}
                         className={classNames(this.props.classes.cell, this.props.classes.bodyCell)}
                     >
                         {getTranslation('no_events_to_display', formatterOptions.CAPITALIZE_FIRST_LETTER)}
@@ -118,7 +153,7 @@ class EventsList extends Component<Props> {
 
         return dataSource
             .map((row) => {
-                const cells = headers
+                const cells = visibleColumns
                     .map(header => (
                         <Cell
                             className={classNames(this.props.classes.cell, this.props.classes.bodyCell)}
@@ -141,7 +176,7 @@ class EventsList extends Component<Props> {
         (fromToLabel: string, totalLabel: string) => `${fromToLabel} of ${totalLabel}`
 
     render() {
-        const { dataSource, headers, isLoading, classes } = this.props; //eslint-disable-line
+        const { dataSource, columns, isLoading, classes } = this.props; //eslint-disable-line
 
         if (isLoading) {
             return (
@@ -153,16 +188,20 @@ class EventsList extends Component<Props> {
             );
         }
 
+        const visibleColumns = columns ?
+            columns
+                .filter(column => column.visible) : [];
+
         return (
             <div>
                 <Table
                     className={classes.table}
                 >
                     <Head>
-                        {this.renderHeaderRow()}
+                        {this.renderHeaderRow(visibleColumns)}
                     </Head>
                     <Body>
-                        {this.renderRows()}
+                        {this.renderRows(visibleColumns)}
                     </Body>
                     <Footer>
                         <Row>

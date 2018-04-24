@@ -38,11 +38,13 @@ export const workingListsMetaDesc = createReducerDescription({
         const newState = { ...state };
 
         // newState.main = action.payload.pagingData;
-       
+
         newState.main = {
             rowsPerPage: 1,
             rowsCount: 3,
             currentPage: 1,
+            sortById: 'eventDate',
+            sortByDirection: 'desc',
         };
 
         return newState;
@@ -58,6 +60,12 @@ export const workingListsMetaDesc = createReducerDescription({
         const newState = { ...state };
         const page = action.payload;
         newState.main = { ...newState.main, currentPage: page };
+        return newState;
+    },
+    [eventsListActionTypes.SORT_WORKING_LIST]: (state, action) => {
+        const newState = { ...state };
+        const { id, direction } = action.payload;
+        newState.main = { ...newState.main, sortById: id, sortByDirection: direction };
         return newState;
     },
     [paginationActionTypes.CHANGE_ROWS_PER_PAGE]: (state, action) => {
@@ -117,4 +125,12 @@ export const workingListsUIDesc = createReducerDescription({
         return newState;
     },
 }, 'workingListsUI');
+
+export const workingListsColumnsOrderDesc = createReducerDescription({
+    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
+        const newState = { ...state };
+        newState.main = action.payload.columnsOrder;
+        return newState;
+    },
+}, 'workingListsColumnsOrder');
 

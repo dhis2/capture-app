@@ -102,7 +102,7 @@ function convertToClientEvent(event: ApiTEIEvent) {
 export default async function getEvents(queryParams: ?Object) {
     const api = getApi();
     const apiRes = await api
-        .get('events', queryParams);
+        .get('events', { ...queryParams, totalPages: true });
 
     const eventContainers = apiRes && apiRes.events ? apiRes.events.reduce((accEvents, apiEvent) => {
         const eventContainer = convertToClientEvent(apiEvent);

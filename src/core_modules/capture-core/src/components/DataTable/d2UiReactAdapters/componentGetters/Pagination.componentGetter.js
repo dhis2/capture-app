@@ -45,7 +45,7 @@ class Pagination extends React.Component<Props> {
     static wrapDisplayedRowsElement(displayedRowsTable: React.Node) {
         return (
             <div
-                className={'d2-rows-display-rows-container'}
+                className={'d2-pagination-display-rows-container'}
             >
                 {displayedRowsTable}
             </div>
