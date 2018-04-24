@@ -5,7 +5,7 @@ import Button from 'material-ui-next/Button';
 import AddIcon from 'material-ui-icons/AddCircleOutline';
 import SearchIcon from 'material-ui-icons/Search';
 
-const styles = theme => ({
+const styles = () => ({
     root: {
         flexGrow: 1,
         padding: 10,

@@ -18,21 +18,30 @@ export default class OrgUnitSelector extends Component {
         this.setState({ orgUnit: event.target.value });
     }
 
+    handleClick(orgunit) {
+        this.setState({ orgUnit: orgunit.id });
+    }
+
+    // TODO:Add OrgUnitTree when there are a lot of orgunits 
     render() {
-        const orgUnits = [{ id: 1, name: 'OrgUnit 1' }, { id: 2, name: 'OrgUnit 2' }, { id: 3, name: 'OrgUnit 3' }, { id: 4, name: 'OrgUnit 4' }];
-        if (orgUnits.length <= 3) {
+        // TODO: Add real data and remove placeholder data.
+        const orgUnits = [{ id: 1, name: 'OrgUnit 1' }, { id: 2, name: 'OrgUnit 2' }, { id: 3, name: 'OrgUnit 3' }, { id: 4, name: 'OrgUnit 4' }, { id: 5, name: 'OrgUnit 5' }, { id: 6, name: 'OrgUnit 6' }];
+        // If less than or equal, display as list.
+        if (orgUnits.length <= 5) {
             return (
-                <Paper elevation={1} style={{ padding: 15 }}>
-                    <List>
-                        {orgUnits.map(i => <ListItem button><ListItemText primary={i.name} /></ListItem>)}
-                    </List>
-                    <br />
-                </Paper>
+                <div>
+                    <Paper elevation={1} style={{ padding: 15, backgroundColor: '#f6f6f6', borderRadius: 5 }}>
+                        <List>
+                            {orgUnits.map(i => <ListItem button onClick={() => this.handleClick(i)}><ListItemText primary={i.name} /></ListItem>)}
+                        </List>
+                    </Paper>
+                    <h1>{this.state.orgUnit}</h1>
+                </div>
             );
         }
         return (
             <div>
-                <Paper elevation={1} style={{ padding: 15 }}>
+                <Paper elevation={1} style={{ padding: 15, backgroundColor: '#f6f6f6', borderRadius: 5 }}>
                     <FormControl style={{ width: '100%' }}>
                         <InputLabel htmlFor="orgUnit-selector">Organisation Unit</InputLabel>
                         <Select

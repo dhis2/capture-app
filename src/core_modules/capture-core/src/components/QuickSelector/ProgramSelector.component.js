@@ -19,21 +19,30 @@ export default class ProgramSelector extends Component {
         this.setState({ program: event.target.value });
     }
 
+    handleClick(program) {
+        this.setState({ program: program.id });
+    }
+
+    // TODO: Add support for cat-combos.
     render() {
         const programsArray = Array.from(programs.values());
+        // If less than or equal, display as list.
         if (programsArray.length <= 5) {
             return (
-                <Paper elevation={1} style={{ padding: 15 }}>
-                    <List>
-                        {programsArray.map(i => <ListItem button><ListItemText primary={i.name} /></ListItem>)}
-                    </List>
-                    <br />
-                </Paper>
+                <div>
+                    <Paper elevation={1} style={{ padding: 15, backgroundColor: '#f6f6f6', borderRadius: 5 }}>
+                        <List>
+                            {programsArray.map(i => <ListItem button onClick={() => this.handleClick(i)}><ListItemText primary={i.name} /></ListItem>)}
+                        </List>
+                        <br />
+                    </Paper>
+                    <h1>{this.state.program}</h1>
+                </div>
             );
         }
         return (
             <div>
-                <Paper elevation={1} style={{ padding: 15 }}>
+                <Paper elevation={1} style={{ padding: 15, backgroundColor: '#f6f6f6', borderRadius: 5 }}>
                     <FormControl style={{ width: '100%' }}>
                         <InputLabel htmlFor="program-selector">Program</InputLabel>
                         <Select
