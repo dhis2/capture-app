@@ -9,8 +9,9 @@ import { withRouter } from 'react-router';
 import type { HashHistory } from 'history/createHashHistory';
 
 import FeedbackBar from 'capture-core/components/FeedbackBar/FeedbackBar.container';
+
 // d2-ui
-import LoadingMask from 'd2-ui/lib/loading-mask/LoadingMask.component';
+import { LoadingMask } from '@dhis2/d2-ui-core';
 import AppContents from './AppContents.component';
 
 //HOCs

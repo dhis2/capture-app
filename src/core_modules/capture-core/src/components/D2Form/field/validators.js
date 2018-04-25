@@ -1,5 +1,5 @@
 // @flow
-import { wordToValidatorMap } from 'd2-ui/lib/forms/Validators';
+import { Validators } from '@dhis2/d2-ui-core';
 import isArray from 'd2-utilizr/src/isArray';
 import isString from 'd2-utilizr/src/isString';
 
@@ -37,7 +37,7 @@ const errorMessages = {
     PERCENTAGE: 'value_should_be_a_valid_percentage',
 };
 
-const isCompulsoryRequirementMet = wordToValidatorMap.get(wordValidatorKeys.COMPULSORY);
+const isCompulsoryRequirementMet = Validators.wordToValidatorMap.get(wordValidatorKeys.COMPULSORY);
 
 const isCompulsoryRequirementMetWrapper = (value: any) => {
     const testValue = (value && isString(value)) ? value.trim() : value;
@@ -45,7 +45,7 @@ const isCompulsoryRequirementMetWrapper = (value: any) => {
 };
 
 const isInteger = (value: string) => {
-    const isValidNumberFn = wordToValidatorMap.get(wordValidatorKeys.NUMBER);
+    const isValidNumberFn = Validators.wordToValidatorMap.get(wordValidatorKeys.NUMBER);
     if (!isValidNumberFn(value)) {
         return false;
     }
@@ -55,7 +55,7 @@ const isInteger = (value: string) => {
 };
 
 const isPositiveInteger = (value: string) => {
-    const isValidPositiveNumberFn = wordToValidatorMap.get(wordValidatorKeys.POSITIVE_NUMBER);
+    const isValidPositiveNumberFn = Validators.wordToValidatorMap.get(wordValidatorKeys.POSITIVE_NUMBER);
     if (!isValidPositiveNumberFn(value)) {
         return false;
     }
@@ -73,16 +73,16 @@ const isZeroOrPositiveInteger = (value: any) => {
 
 const isValidPercentage = (value: any) => {
     const replacedValue = value.replace('%', '');
-    const numberValidator = wordToValidatorMap.get(wordValidatorKeys.NUMBER);
+    const numberValidator = Validators.wordToValidatorMap.get(wordValidatorKeys.NUMBER);
     return numberValidator(replacedValue);
 };
 
 const validatorsForTypes = {
     [elementTypes.NUMBER]: () => ({
-        validator: wordToValidatorMap.get(wordValidatorKeys.NUMBER),
+        validator: Validators.wordToValidatorMap.get(wordValidatorKeys.NUMBER),
         message:
             getTranslation(
-                wordToValidatorMap.get(wordValidatorKeys.NUMBER).message,
+                Validators.wordToValidatorMap.get(wordValidatorKeys.NUMBER).message,
                 formatterOptions.CAPITALIZE_FIRST_LETTER,
             ),
     }),
@@ -111,8 +111,8 @@ const validatorsForTypes = {
         message: getTranslation(errorMessages.DATETIME, formatterOptions.CAPITALIZE_FIRST_LETTER),
     }),
     [elementTypes.EMAIL]: () => ({
-        validator: wordToValidatorMap.get(wordValidatorKeys.EMAIL),
-        message: getTranslation(wordToValidatorMap.get(wordValidatorKeys.EMAIL).message),
+        validator: Validators.wordToValidatorMap.get(wordValidatorKeys.EMAIL),
+        message: getTranslation(Validators.wordToValidatorMap.get(wordValidatorKeys.EMAIL).message),
     }),
     [elementTypes.PERCENTAGE]: () => ({
         validator: isValidPercentage,
@@ -155,7 +155,7 @@ function buildCompulsoryValidator(metaData: MetaDataElement): Array<ValidatorCon
             validator: isCompulsoryRequirementMetWrapper,
             message:
                 getTranslation(
-                    wordToValidatorMap.get(
+                    Validators.wordToValidatorMap.get(
                         wordValidatorKeys.COMPULSORY,
                     ).message,
                     formatterOptions.CAPITALIZE_FIRST_LETTER,

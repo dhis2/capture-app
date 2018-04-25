@@ -14,7 +14,7 @@ import TrackerProgram from '../metaData/Program/TrackerProgram';
 import EventProgram from '../metaData/Program/EventProgram';
 import RenderFoundation from '../metaData/RenderFoundation/RenderFoundation';
 import { convertFormValuesToClient } from '../converters/helpers/formToClient';
-import { convertValue } from '../converters/formToClient';
+import convertDataEntryValuesToEventValues from '../components/DataEntry/common/convertDataEntryValuesToEventValues';
 
 import constantsStore from '../metaDataMemoryStores/constants/constants.store';
 import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store';
@@ -192,13 +192,6 @@ function getDataEntryValidatons(dataEntryMeta: {[key: string]: { isValid: boolea
     }, {});
 }
 
-function getDataEntryTypes(dataEntryMeta: {[key: string]: { type: string }}) {
-    return Object.keys(dataEntryMeta).reduce((accValidations, key) => {
-        accValidations[key] = dataEntryMeta[key].type;
-        return accValidations;
-    }, {});
-}
-
 function getValidDataEntryValues(
     dataEntryValues: { [key: string]: any },
     dataEntryValidations: { [key: string]: boolean }) {
@@ -208,27 +201,16 @@ function getValidDataEntryValues(
     }, {});
 }
 
-function convertDataEntryFormValuesToClientValues(
-    validDataEntryValues: { [key: string]: any },
-    dataEntryTypes: { [key: string]: string }) {
-    return Object.keys(validDataEntryValues).reduce((accConvertedValues, key) => {
-        const valueToConvert = validDataEntryValues[key];
-        const valueType = dataEntryTypes[key];
-        accConvertedValues[key] = convertValue(valueType, valueToConvert);
-        return accConvertedValues;
-    }, {});
-}
-
 function getCurrentEventMainData(state: ReduxState, event: Event, dataEntryId: string) {
     const dataEntryReduxKey = `${dataEntryId}-${event.eventId}`;
 
-    const dataEntryMeta = state.dataEntriesValuesMeta[dataEntryReduxKey];
-    const dataEntryValidations = getDataEntryValidatons(dataEntryMeta);
-    const dataEntryValues = state.dataEntriesValues[dataEntryReduxKey];
+    const dataEntryFieldsUI = state.dataEntriesFieldsUI[dataEntryReduxKey];
+    const dataEntryValidations = getDataEntryValidatons(dataEntryFieldsUI);
+    const dataEntryValues = state.dataEntriesFieldsValue[dataEntryReduxKey];
     const validDataEntryValues = getValidDataEntryValues(dataEntryValues, dataEntryValidations);
 
-    const dataEntryTypes = getDataEntryTypes(dataEntryMeta);
-    const dataEntryClientValues = convertDataEntryFormValuesToClientValues(validDataEntryValues, dataEntryTypes);
+    const dataEntryClientValues =
+        convertDataEntryValuesToEventValues(state, event.eventId, dataEntryId, validDataEntryValues);
 
     const eventValues = ensureState(state.events)[event.eventId];
     return { ...eventValues, ...dataEntryClientValues };

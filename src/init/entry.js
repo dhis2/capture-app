@@ -13,7 +13,6 @@ import environments from 'capture-core/constants/environments';
 import { startEnrollmentLoad } from 'capture-core/actions/__TEMP__/enrollment.actions';
 // END TEST
 
-import './react16Temp';
 import App from '../components/App/App.component';
 import getStore from '../getStore';
 import { initialize } from './init';

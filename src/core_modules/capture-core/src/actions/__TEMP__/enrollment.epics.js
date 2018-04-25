@@ -2,6 +2,7 @@
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/concatMap';
 import log from 'loglevel';
+import { ensureState } from 'redux-optimistic-ui';
 import errorCreator from '../../utils/errorCreator';
 
 import getEnrollmentEvents from '../../events/getEnrollmentEvents';
@@ -33,7 +34,7 @@ function convertStatusOut(dataEntryValue: string, prevValue: string) {
 
 export const loadEnrollmentData = (action$: InputObservable) =>
     action$.ofType(actionTypes.START_ENROLLMENT_LOAD)
-        .concatMap((action: ReduxAction<any, any>) =>
+        .concatMap(() =>
             getEnrollmentEvents()
                 .then(events =>
                     enrollmentLoaded(events))
@@ -45,9 +46,12 @@ export const loadEnrollmentData = (action$: InputObservable) =>
 
 export const loadDataEntryData = (action$: InputObservable, store: ReduxStore) =>
     action$.ofType(actionTypes.ENROLLMENT_LOADED)
-        .map(action =>
-            loadDataEntryEvent(
-                'qEHQdXkUAGk',
+        .map(() => {
+            const events = ensureState(store.getState().events);
+            const firstEventKey = Object.keys(events)[0];
+
+            return loadDataEntryEvent(
+                firstEventKey,
                 store.getState(),
                 [
                     {
@@ -60,5 +64,5 @@ export const loadDataEntryData = (action$: InputObservable, store: ReduxStore) =
                         onConvertIn: convertStatusIn,
                         onConvertOut: convertStatusOut,
                     },
-                ], 'main'),
-        );
+                ], 'main');
+        });
