@@ -29,10 +29,14 @@ export const makeColumnsSelector = () => createSelector(
         const stage: RenderFoundation = stageContainer.stage;
 
         return columnsOrderFromState
-            .map(column => ({
-                ...column,
-                header: stage.getElement(column.id).formName,
-            }));
+            .map((column) => {
+                const element = stage.getElement(column.id);
+                return {
+                    ...column,
+                    header: element.formName,
+                    type: element.type,
+                };
+            });
     },
 );
 // #END HEADERS

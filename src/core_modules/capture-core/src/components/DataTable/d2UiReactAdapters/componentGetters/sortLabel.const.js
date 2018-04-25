@@ -1,6 +1,11 @@
 // @flow
 
 export const directions = {
-    ASC: 'ASC',
-    DESC: 'DESC',
+    ASC: 'Asc',
+    DESC: 'Desc',
+};
+
+export const placements = {
+    LEFT: 'Left',
+    RIGHT: 'Right',
 };

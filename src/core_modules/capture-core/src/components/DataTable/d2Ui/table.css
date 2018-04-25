@@ -67,10 +67,18 @@
     margin-right: 20px;
 }
 
-.d2-sort-label-container {
+.d2-sort-label-default {
     display: flex;
     align-items: center;
     cursor: pointer;
     outline: none;
     user-select: none;
+}
+
+.d2-sort-label-last-element-default {
+    padding-left: 10px;
+}
+
+.d2-sort-label-right-default {
+    justify-content: flex-end;
 }

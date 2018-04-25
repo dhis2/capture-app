@@ -18,7 +18,7 @@ import withData from './Pagination/withData';
 import withNavigation from './Pagination/withDefaultNavigation';
 import withRowsPerPageSelector from './Pagination/withRowsPerPageSelector';
 import SortLabelWrapper from './SortLabelWrapper.component';
-import { directions } from '../../../DataTable/d2UiReactAdapters/componentGetters/sortLabel.const';
+import { directions, placements } from '../../../DataTable/d2UiReactAdapters/componentGetters/sortLabel.const';
 
 // $FlowSuppress
 const { Table, Row, Cell, HeaderCell, Head, Body, Footer } = getTableComponents(basicTableAdapter);
@@ -89,9 +89,17 @@ type Props = {
 };
 
 class EventsList extends Component<Props> {
-    static typesWithInitialDirectionAsc = [
+    static typesWithAscendingInitialDirection = [
         elementTypes.TEXT,
         elementTypes.LONG_TEXT,
+    ];
+
+    static typesWithRightPlacement = [
+        elementTypes.NUMBER,
+        elementTypes.INTEGER,
+        elementTypes.INTEGER_POSITIVE,
+        elementTypes.INTEGER_NEGATIVE,
+        elementTypes.INTEGER_ZERO_OR_POSITIVE,
     ];
 
     getSortHandler = (id: string) => (direction: string) => {
@@ -111,9 +119,14 @@ class EventsList extends Component<Props> {
                     <SortLabelWrapper
                         isActive={column.id === sortById}
                         initialDirection={
-                            EventsList.typesWithInitialDirectionAsc.includes(column.type)
+                            EventsList.typesWithAscendingInitialDirection.includes(column.type)
                                 ? directions.ASC
                                 : directions.DESC
+                        }
+                        placement={
+                            EventsList.typesWithRightPlacement.includes(column.type)
+                                ? placements.RIGHT
+                                : placements.LEFT
                         }
                         direction={sortByDirection}
                         onSort={this.getSortHandler(column.id)}
