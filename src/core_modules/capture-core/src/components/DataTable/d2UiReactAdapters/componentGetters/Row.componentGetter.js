@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 type Props = {
     children: React.Node,
@@ -32,7 +33,7 @@ const Row = (props: Props, context: { table?: ?{ head: boolean, footer: boolean 
 };
 
 Row.contextTypes = {
-    table: React.PropTypes.object,
+    table: PropTypes.object,
 };
 
 const getRow = () => Row;

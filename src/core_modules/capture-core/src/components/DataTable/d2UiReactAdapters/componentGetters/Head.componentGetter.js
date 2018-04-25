@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import PropTypes from 'prop-types';
 
 type Props = {
     children: React.Node,
@@ -7,7 +8,7 @@ type Props = {
 
 const getHead = () => class Head extends React.Component<Props> {
     static childContextTypes = {
-        table: React.PropTypes.object,
+        table: PropTypes.object,
     };
 
     getChildContext() {

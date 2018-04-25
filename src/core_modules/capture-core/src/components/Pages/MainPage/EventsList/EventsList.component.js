@@ -71,7 +71,7 @@ type Column = {
 };
 
 type Props = {
-    dataSource: Array<Object>,
+    dataSource: Array<{eventId: string, [elementId: string]: any}>,
     columns: ?Array<Column>,
     isLoading: boolean,
     classes: {
@@ -167,16 +167,18 @@ class EventsList extends Component<Props> {
         return dataSource
             .map((row) => {
                 const cells = visibleColumns
-                    .map(header => (
+                    .map(column => (
                         <Cell
+                            key={column.id}
                             className={classNames(this.props.classes.cell, this.props.classes.bodyCell)}
                         >
-                            {row[header.id]}
+                            {row[column.id]}
                         </Cell>
                     ));
 
                 return (
                     <Row
+                        key={row.eventId}
                         className={this.props.classes.row}
                     >
                         {cells}

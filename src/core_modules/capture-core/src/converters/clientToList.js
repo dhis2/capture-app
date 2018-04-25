@@ -25,14 +25,15 @@ const valueConvertersForType = {
     [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'Yes' : 'No'),
 };
 
-export function convertValue(type: $Values<typeof elementTypes>, value: any, dataElement: DataElement) {
+export function convertValue(type: $Values<typeof elementTypes>, value: any, dataElement?: ?DataElement) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }
 
-    if (dataElement.optionSet) {
+    if (dataElement && dataElement.optionSet) {
         return dataElement.optionSet.getOptionText(value);
     }
 
+    // $FlowSuppress
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }

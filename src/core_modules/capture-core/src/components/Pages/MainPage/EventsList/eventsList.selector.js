@@ -4,6 +4,7 @@ import { ensureState } from 'redux-optimistic-ui';
 
 import getStageFromProgramIdForEventProgram from '../../../../metaData/helpers/getStageFromProgramIdForEventProgram';
 import getStageFromEvent from '../../../../metaData/helpers/getStageFromEvent';
+import { convertMainEvent } from '../../../../events/mainEventConverter';
 import { convertValue } from '../../../../converters/clientToList';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 
@@ -46,7 +47,7 @@ const eventsValuesSelector = state => ensureState(state.eventsValues);
 const sortOrderSelector = state => state.workingLists.main.order;
 
 
-const createEventsContainer = (events, eventsValues, sortOrder): EventContainer =>
+const createEventsContainer = (events, eventsValues, sortOrder): Array<EventContainer> =>
     sortOrder
         .map(eventId => ({
             event: events[eventId],
@@ -92,9 +93,12 @@ const buildWorkingListData = (eventsContainer: Array<EventContainer>) => {
     return eventsContainer
         .map((eventContainer) => {
             const convertedValues = stage.convertValues(eventContainer.eventValues, convertValue);
-            return convertedValues;
-        })
-        .filter(data => data);
+            const convertedMainEvent = convertMainEvent(eventContainer.event, convertValue);
+            return {
+                ...convertedMainEvent,
+                ...convertedValues,
+            };
+        });
 };
 
 
