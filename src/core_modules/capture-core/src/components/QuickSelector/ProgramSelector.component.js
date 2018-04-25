@@ -11,16 +11,16 @@ import Paper from 'material-ui-next/Paper';
 export default class ProgramSelector extends Component {
     constructor(props) {
         super(props);
-        this.state = { program: '' };
         this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     handleChange(event) {
-        this.setState({ program: event.target.value });
+        this.props.handleChangeProgram(event.target.value);
     }
 
     handleClick(program) {
-        this.setState({ program: program.id });
+        this.props.handleClickProgram(program.id);
     }
 
     // TODO: Add support for cat-combos.
@@ -32,11 +32,9 @@ export default class ProgramSelector extends Component {
                 <div>
                     <Paper elevation={1} style={{ padding: 15, backgroundColor: '#f6f6f6', borderRadius: 5 }}>
                         <List>
-                            {programsArray.map(i => <ListItem button onClick={() => this.handleClick(i)}><ListItemText primary={i.name} /></ListItem>)}
+                            {programsArray.map(i => <ListItem style={{ backgroundColor: '#ffffff', borderRadius: 5, margin: 5 }} button onClick={() => this.handleClick(i)}><ListItemText primary={i.name} /></ListItem>)}
                         </List>
-                        <br />
                     </Paper>
-                    <h1>{this.state.program}</h1>
                 </div>
             );
         }
@@ -46,7 +44,7 @@ export default class ProgramSelector extends Component {
                     <FormControl style={{ width: '100%' }}>
                         <InputLabel htmlFor="program-selector">Program</InputLabel>
                         <Select
-                            value={this.state.program}
+                            value={this.props.selectedProgram}
                             onChange={this.handleChange}
                             inputProps={{
                                 name: 'program',
@@ -61,7 +59,6 @@ export default class ProgramSelector extends Component {
                     </FormControl>
                     <br />
                 </Paper>
-                <h1>{this.state.program}</h1>
             </div>
         );
     }

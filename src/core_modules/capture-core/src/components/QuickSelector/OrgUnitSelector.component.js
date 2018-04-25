@@ -10,16 +10,15 @@ import Paper from 'material-ui-next/Paper';
 export default class OrgUnitSelector extends Component {
     constructor(props) {
         super(props);
-        this.state = { orgUnit: '' };
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(event) {
-        this.setState({ orgUnit: event.target.value });
+        this.props.handleChangeOrgUnit(event.target.value);
     }
 
     handleClick(orgunit) {
-        this.setState({ orgUnit: orgunit.id });
+        this.props.handleClickOrgUnit(orgunit.id);
     }
 
     // TODO:Add OrgUnitTree when there are a lot of orgunits 
@@ -32,10 +31,9 @@ export default class OrgUnitSelector extends Component {
                 <div>
                     <Paper elevation={1} style={{ padding: 15, backgroundColor: '#f6f6f6', borderRadius: 5 }}>
                         <List>
-                            {orgUnits.map(i => <ListItem button onClick={() => this.handleClick(i)}><ListItemText primary={i.name} /></ListItem>)}
+                            {orgUnits.map(i => <ListItem style={{ backgroundColor: '#ffffff', borderRadius: 5, margin: 5 }} button onClick={() => this.handleClick(i)}><ListItemText primary={i.name} /></ListItem>)}
                         </List>
                     </Paper>
-                    <h1>{this.state.orgUnit}</h1>
                 </div>
             );
         }
@@ -45,7 +43,7 @@ export default class OrgUnitSelector extends Component {
                     <FormControl style={{ width: '100%' }}>
                         <InputLabel htmlFor="orgUnit-selector">Organisation Unit</InputLabel>
                         <Select
-                            value={this.state.orgUnit}
+                            value={this.props.selectedOrgUint}
                             onChange={this.handleChange}
                             inputProps={{
                                 name: 'orgUnit',
@@ -60,7 +58,6 @@ export default class OrgUnitSelector extends Component {
                     </FormControl>
                     <br />
                 </Paper>
-                <h1>{this.state.orgUnit}</h1>
             </div>
         );
     }

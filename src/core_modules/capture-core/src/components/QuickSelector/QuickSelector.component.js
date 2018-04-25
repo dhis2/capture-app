@@ -1,5 +1,4 @@
-import React from 'react';
-import { withStyles } from 'material-ui-next/styles';
+import React, { Component } from 'react';
 import Paper from 'material-ui-next/Paper';
 import Grid from 'material-ui-next/Grid';
 
@@ -7,37 +6,57 @@ import ProgramSelector from 'capture-core/components/QuickSelector/ProgramSelect
 import OrgUnitSelector from 'capture-core/components/QuickSelector/OrgUnitSelector.component';
 import ActionButtons from 'capture-core/components/QuickSelector/ActionButtons.component';
 
+export default class QuickSelector extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { selectedProgram: '', selectedOrgUint: '' };
 
-const styles = theme => ({
-    root: {
-        flexGrow: 1,
-        padding: 10,
-    },
-    paper: {
-        padding: theme.spacing.unit * 2,
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-    },
-});
+        this.handleChangeProgram = this.handleChangeProgram.bind(this);
+        this.handleClickProgram = this.handleClickProgram.bind(this);
 
-function FullWidthGrid(props) {
-    const { classes } = props;
+        this.handleChangeOrgUnit = this.handleChangeOrgUnit.bind(this);
+        this.handleClickOrgUnit = this.handleClickOrgUnit.bind(this);
 
-    return (
-        <Paper className={classes.root}>
-            <Grid container spacing={24}>
-                <Grid item xs={12} sm={4}>
-                    <ProgramSelector />
+        this.handleClickReset = this.handleClickReset.bind(this);
+    }
+
+    handleChangeProgram(program) {
+        this.setState({ selectedProgram: program });
+    }
+
+    handleClickProgram(program) {
+        this.setState({ selectedProgram: program });
+    }
+
+    handleChangeOrgUnit(orgUnit) {
+        this.setState({ selectedOrgUint: orgUnit });
+    }
+
+    handleClickOrgUnit(orgUnit) {
+        this.setState({ selectedOrgUint: orgUnit });
+    }
+
+    handleClickReset() {
+        this.setState({ selectedProgram: '', selectedOrgUint: '' });
+    }
+
+    // TODO: Add support for cat-combos.
+    render() {
+        return (
+            <Paper style={{ flexGrow: 1, padding: 10 }}>
+                <Grid container spacing={24}>
+                    <Grid item xs={12} sm={4}>
+                        <ProgramSelector selectedProgram={this.state.selectedProgram} handleChangeProgram={this.handleChangeProgram} handleClickProgram={this.handleClickProgram} />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <OrgUnitSelector selectedOrgUint={this.state.selectedOrgUint} handleChangeOrgUnit={this.handleChangeOrgUnit} handleClickOrgUnit={this.handleClickOrgUnit} />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <ActionButtons handleClickReset={this.handleClickReset} />
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} sm={4}>
-                    <OrgUnitSelector />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                    <ActionButtons />
-                </Grid>
-            </Grid>
-        </Paper>
-    );
+                <p>ProgramID: {this.state.selectedProgram} - OrgUnitID: {this.state.selectedOrgUint}</p>
+            </Paper>
+        );
+    }
 }
-
-export default withStyles(styles)(FullWidthGrid);

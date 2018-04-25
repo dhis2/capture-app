@@ -1,30 +1,26 @@
-import React from 'react';
-import { withStyles } from 'material-ui-next/styles';
+import React, { Component } from 'react';
 
 import Button from 'material-ui-next/Button';
 import AddIcon from 'material-ui-icons/AddCircleOutline';
 import SearchIcon from 'material-ui-icons/Search';
 
-const styles = () => ({
-    root: {
-        flexGrow: 1,
-        padding: 10,
-        textAlign: 'right',
-    },
-    button: {
-        marginRight: 5,
-    },
-});
+export default class ActionButtons extends Component {
+    constructor(props) {
+        super(props);
+        this.handleClickReset = this.handleClickReset.bind(this);
+    }
 
-function ActionButtons(props) {
-    const { classes } = props;
+    handleClickReset() {
+        this.props.handleClickReset();
+    }
 
-    return (
-        <div className={classes.root}>
-            <Button raised color="primary"><AddIcon className={classes.button} /> New</Button>
-            <Button raised color="primary"><SearchIcon className={classes.button} /> Find</Button>
-        </div>
-    );
+    render() {
+        return (
+            <div style={{ flexGrow: 1, padding: 10, textAlign: 'right' }}>
+                <Button onClick={() => this.handleClickReset()} raised color="primary" style={{ float: 'left' }}>Reset</Button>
+                <Button raised color="primary"><AddIcon style={{ marginRight: 5 }} /> New</Button>
+                <Button raised color="primary"><SearchIcon style={{ marginRight: 5 }} /> Find</Button>
+            </div>
+        );
+    }
 }
-
-export default withStyles(styles)(ActionButtons);
