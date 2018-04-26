@@ -9,4 +9,8 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         const newState = { ...state, ...action.payload };
         return newState;
     },
+    [selectionsActionTypes.ORG_UNIT_DATA_RETRIVED]: (state, action) => {
+        const newState = { ...state, orgUnit: action.payload };
+        return newState;
+    },
 }, 'currentSelections');

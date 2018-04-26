@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import QuickSelector from 'capture-core/components/QuickSelector/QuickSelector.component';
+import QuickSelector from 'capture-core/components/QuickSelector/QuickSelector.container';
 import withSelectionsUpdater from './withSelectionsUpdater';
 
 import EventsList from './EventsList/EventsList.container';

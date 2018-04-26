@@ -55,16 +55,16 @@ class QuickSelector extends Component {
             <Paper className={this.props.classes.paper}>
                 <Grid container spacing={24}>
                     <Grid item xs={12} sm={4}>
-                        <ProgramSelector selectedProgram={this.state.selectedProgram} handleChangeProgram={this.handleChangeProgram} handleClickProgram={this.handleClickProgram} />
+                        <OrgUnitSelector selectedOrgUint={this.props.selectedOrgUnit} handleChangeOrgUnit={this.handleChangeOrgUnit} handleClickOrgUnit={this.handleClickOrgUnit} />
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <OrgUnitSelector selectedOrgUint={this.state.selectedOrgUint} handleChangeOrgUnit={this.handleChangeOrgUnit} handleClickOrgUnit={this.handleClickOrgUnit} />
+                        <ProgramSelector selectedProgram={this.props.selectedProgramId} handleChangeProgram={this.handleChangeProgram} handleClickProgram={this.handleClickProgram} />
                     </Grid>
                     <Grid item xs={12} sm={4}>
                         <ActionButtons handleClickReset={this.handleClickReset} selectedProgram={this.state.selectedProgram} selectedOrgUint={this.state.selectedOrgUint} />
                     </Grid>
                 </Grid>
-                <p>ProgramID: {this.state.selectedProgram} - OrgUnitID: {this.state.selectedOrgUint}</p>
+                <p>OrgUnitID: {this.props.selectedOrgUnit.id} - ProgramID: {this.props.selectedProgramId}</p>
             </Paper>
         );
     }

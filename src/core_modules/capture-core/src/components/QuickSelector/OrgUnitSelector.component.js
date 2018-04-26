@@ -60,9 +60,9 @@ class OrgUnitSelector extends Component {
             <div>
                 <Paper elevation={1} className={this.props.classes.paper}>
                     <FormControl className={this.props.classes.form}>
-                        <InputLabel htmlFor="orgUnit-selector">Organisation Unit</InputLabel>
+                        <InputLabel htmlFor="orgUnit-selector">Registering unit</InputLabel>
                         <Select
-                            value={this.props.selectedOrgUint}
+                            value={this.props.selectedOrgUint.id}
                             onChange={this.handleChange}
                             inputProps={{
                                 name: 'orgUnit',
@@ -72,7 +72,7 @@ class OrgUnitSelector extends Component {
                             <MenuItem value="">
                                 <em>None</em>
                             </MenuItem>
-                            {orgUnits.map(i => <MenuItem key={i.id} value={i.id}>{i.name}</MenuItem>)}
+                            <MenuItem key={this.props.selectedOrgUint.id} value={this.props.selectedOrgUint.id}>{this.props.selectedOrgUint.name}</MenuItem>
                         </Select>
                     </FormControl>
                     <br />
