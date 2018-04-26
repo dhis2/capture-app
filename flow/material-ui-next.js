@@ -36,3 +36,11 @@ declare module 'material-ui-next/Progress' {
 declare module 'material-ui-next/colors/green' {
     declare module.exports: any;
 }
+
+declare module 'material-ui-next/styles/colorManipulator' {
+    declare module.exports: any;
+}
+
+declare module 'material-ui-next/IconButton' {
+    declare module.exports: any;
+}
