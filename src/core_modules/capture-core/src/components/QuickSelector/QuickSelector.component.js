@@ -61,7 +61,7 @@ class QuickSelector extends Component {
                         <ProgramSelector selectedProgram={this.props.selectedProgramId} handleChangeProgram={this.handleChangeProgram} handleClickProgram={this.handleClickProgram} />
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <ActionButtons handleClickReset={this.handleClickReset} selectedProgram={this.state.selectedProgram} selectedOrgUint={this.state.selectedOrgUint} />
+                        <ActionButtons handleClickReset={this.handleClickReset} selectedProgram={this.props.selectedProgramId} selectedOrgUint={this.state.selectedOrgUint.id} />
                     </Grid>
                 </Grid>
                 <p>OrgUnitID: {this.props.selectedOrgUnit.id} - ProgramID: {this.props.selectedProgramId}</p>
