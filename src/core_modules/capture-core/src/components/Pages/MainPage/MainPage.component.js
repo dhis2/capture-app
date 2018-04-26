@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import QuickSelector from 'capture-core/components/QuickSelector/QuickSelector.component';
 import withSelectionsUpdater from './withSelectionsUpdater';
 
 import EventsList from './EventsList/EventsList.container';
@@ -14,7 +15,7 @@ class MainPage extends Component<Props> {
 
         return (
             <div>
-                main menu
+                <QuickSelector />
                 {
                     (() => {
                         if (!prerequisitesForWorkingListMet) {
