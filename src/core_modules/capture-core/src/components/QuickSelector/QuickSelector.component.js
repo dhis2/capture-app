@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { withStyles } from 'material-ui-next/styles';
+
 import Paper from 'material-ui-next/Paper';
 import Grid from 'material-ui-next/Grid';
 
@@ -6,7 +8,14 @@ import ProgramSelector from 'capture-core/components/QuickSelector/ProgramSelect
 import OrgUnitSelector from 'capture-core/components/QuickSelector/OrgUnitSelector.component';
 import ActionButtons from 'capture-core/components/QuickSelector/ActionButtons.component';
 
-export default class QuickSelector extends Component {
+const styles = () => ({
+    paper: {
+        flexGrow: 1,
+        padding: 10,
+    },
+});
+
+class QuickSelector extends Component {
     constructor(props) {
         super(props);
         this.state = { selectedProgram: '', selectedOrgUint: '' };
@@ -43,7 +52,7 @@ export default class QuickSelector extends Component {
     // TODO: Add support for cat-combos.
     render() {
         return (
-            <Paper style={{ flexGrow: 1, padding: 10 }}>
+            <Paper className={this.props.classes.paper}>
                 <Grid container spacing={24}>
                     <Grid item xs={12} sm={4}>
                         <ProgramSelector selectedProgram={this.state.selectedProgram} handleChangeProgram={this.handleChangeProgram} handleClickProgram={this.handleClickProgram} />
@@ -52,7 +61,7 @@ export default class QuickSelector extends Component {
                         <OrgUnitSelector selectedOrgUint={this.state.selectedOrgUint} handleChangeOrgUnit={this.handleChangeOrgUnit} handleClickOrgUnit={this.handleClickOrgUnit} />
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <ActionButtons handleClickReset={this.handleClickReset} />
+                        <ActionButtons handleClickReset={this.handleClickReset} selectedProgram={this.state.selectedProgram} selectedOrgUint={this.state.selectedOrgUint} />
                     </Grid>
                 </Grid>
                 <p>ProgramID: {this.state.selectedProgram} - OrgUnitID: {this.state.selectedOrgUint}</p>
@@ -60,3 +69,5 @@ export default class QuickSelector extends Component {
         );
     }
 }
+
+export default withStyles(styles)(QuickSelector);

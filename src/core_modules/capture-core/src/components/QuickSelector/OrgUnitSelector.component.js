@@ -1,5 +1,7 @@
 // @flow
 import React, { Component } from 'react';
+import { withStyles } from 'material-ui-next/styles';
+
 import List, { ListItem, ListItemText } from 'material-ui-next/List';
 import Select from 'material-ui-next/Select';
 import { MenuItem } from 'material-ui-next/Menu';
@@ -7,10 +9,27 @@ import { FormControl } from 'material-ui-next/Form';
 import { InputLabel } from 'material-ui-next/Input';
 import Paper from 'material-ui-next/Paper';
 
-export default class OrgUnitSelector extends Component {
+const styles = () => ({
+    paper: {
+        padding: 15,
+        backgroundColor: '#f6f6f6',
+        borderRadius: 5,
+    },
+    form: {
+        width: '100%',
+    },
+    listItem: {
+        backgroundColor: '#ffffff',
+        borderRadius: 5,
+        margin: 5,
+    },
+});
+
+class OrgUnitSelector extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     handleChange(event) {
@@ -29,9 +48,9 @@ export default class OrgUnitSelector extends Component {
         if (orgUnits.length <= 5) {
             return (
                 <div>
-                    <Paper elevation={1} style={{ padding: 15, backgroundColor: '#f6f6f6', borderRadius: 5 }}>
+                    <Paper elevation={1} className={this.props.classes.paper}>
                         <List>
-                            {orgUnits.map(i => <ListItem style={{ backgroundColor: '#ffffff', borderRadius: 5, margin: 5 }} button onClick={() => this.handleClick(i)}><ListItemText primary={i.name} /></ListItem>)}
+                            {orgUnits.map(i => <ListItem className={this.props.classes.listItem} button onClick={() => this.handleClick(i)}><ListItemText primary={i.name} /></ListItem>)}
                         </List>
                     </Paper>
                 </div>
@@ -39,8 +58,8 @@ export default class OrgUnitSelector extends Component {
         }
         return (
             <div>
-                <Paper elevation={1} style={{ padding: 15, backgroundColor: '#f6f6f6', borderRadius: 5 }}>
-                    <FormControl style={{ width: '100%' }}>
+                <Paper elevation={1} className={this.props.classes.paper}>
+                    <FormControl className={this.props.classes.form}>
                         <InputLabel htmlFor="orgUnit-selector">Organisation Unit</InputLabel>
                         <Select
                             value={this.props.selectedOrgUint}
@@ -62,3 +81,5 @@ export default class OrgUnitSelector extends Component {
         );
     }
 }
+
+export default withStyles(styles)(OrgUnitSelector);
