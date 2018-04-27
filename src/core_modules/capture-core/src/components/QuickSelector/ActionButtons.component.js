@@ -22,26 +22,26 @@ const styles = () => ({
 class ActionButtons extends Component {
     constructor(props) {
         super(props);
-        this.handleClickReset = this.handleClickReset.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClickReset() {
-        this.props.handleClickReset();
+    handleClick() {
+        this.props.handleClickActionButton();
     }
 
     render() {
         if (!this.props.selectedProgram && !this.props.selectedOrgUnit) {
             return (
                 <div className={this.props.classes.container}>
-                    <Button onClick={() => this.handleClickReset()} color="primary" className={this.props.classes.leftButton}>Reset</Button>
+                    <Button onClick={() => this.handleClick()} color="primary" className={this.props.classes.leftButton}>Reset</Button>
                 </div>
             );
         }
         return (
             <div className={this.props.classes.container}>
-                <Button onClick={() => this.handleClickReset()} color="primary" className={this.props.classes.leftButton}>Reset</Button>
-                <Button color="primary"><AddIcon className={this.props.classes.rightButton} /> New</Button>
-                <Button color="primary"><SearchIcon className={this.props.classes.rightButton} /> Find</Button>
+                <Button onClick={() => this.handleClick()} color="primary" className={this.props.classes.leftButton}>Reset</Button>
+                <Button onClick={() => this.handleClick()} color="primary"><AddIcon className={this.props.classes.rightButton} /> New</Button>
+                <Button onClick={() => this.handleClick()} color="primary"><SearchIcon className={this.props.classes.rightButton} /> Find</Button>
             </div>
         );
     }

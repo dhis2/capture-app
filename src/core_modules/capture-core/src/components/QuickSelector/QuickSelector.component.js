@@ -18,7 +18,6 @@ const styles = () => ({
 class QuickSelector extends Component {
     constructor(props) {
         super(props);
-        this.state = { selectedProgram: '', selectedOrgUint: '' };
 
         this.handleChangeProgram = this.handleChangeProgram.bind(this);
         this.handleClickProgram = this.handleClickProgram.bind(this);
@@ -26,27 +25,27 @@ class QuickSelector extends Component {
         this.handleChangeOrgUnit = this.handleChangeOrgUnit.bind(this);
         this.handleClickOrgUnit = this.handleClickOrgUnit.bind(this);
 
-        this.handleClickReset = this.handleClickReset.bind(this);
+        this.handleClickActionButton = this.handleClickActionButton.bind(this);
     }
 
     handleChangeProgram(program) {
-        this.setState({ selectedProgram: program });
+        alert('Program switching has not yet been implemented.');
     }
 
     handleClickProgram(program) {
-        this.setState({ selectedProgram: program });
+        alert('Program switching has not yet been implemented.');
     }
 
     handleChangeOrgUnit(orgUnit) {
-        this.setState({ selectedOrgUint: orgUnit });
+        alert('OrgUnit switching has not yet been implemented.');
     }
 
     handleClickOrgUnit(orgUnit) {
-        this.setState({ selectedOrgUint: orgUnit });
+        alert('OrgUnit switching has not yet been implemented.');
     }
 
-    handleClickReset() {
-        this.setState({ selectedProgram: '', selectedOrgUint: '' });
+    handleClickActionButton() {
+        alert('This button has not yet been implemented.');
     }
 
     // TODO: Add support for cat-combos.
@@ -61,10 +60,9 @@ class QuickSelector extends Component {
                         <ProgramSelector selectedProgram={this.props.selectedProgramId} handleChangeProgram={this.handleChangeProgram} handleClickProgram={this.handleClickProgram} />
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <ActionButtons handleClickReset={this.handleClickReset} selectedProgram={this.props.selectedProgramId} selectedOrgUint={this.state.selectedOrgUint.id} />
+                        <ActionButtons handleClickActionButton={this.handleClickActionButton} selectedProgram={this.props.selectedProgramId} selectedOrgUint={this.props.selectedOrgUnit.id} />
                     </Grid>
                 </Grid>
-                <p>OrgUnitID: {this.props.selectedOrgUnit.id} - ProgramID: {this.props.selectedProgramId}</p>
             </Paper>
         );
     }
