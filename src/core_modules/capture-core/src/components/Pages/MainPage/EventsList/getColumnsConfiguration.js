@@ -2,6 +2,16 @@
 import getStageFromProgramIdForEventProgram from '../../../../metaData/helpers/getStageFromProgramIdForEventProgram';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 
+export const mainPropertyNames = {
+    EVENT_DATE: 'eventDate',
+};
+
+const getDefaultMainConfig = () => ({
+    id: mainPropertyNames.EVENT_DATE,
+    visible: true,
+    isMainProperty: true,
+});
+
 const getMetaDataConfig = (stage: RenderFoundation) =>
     stage
         .getElements()
@@ -22,7 +32,10 @@ const getColumnsConfiguration = (programId: string): Promise<any> => {
         // $FlowSuppress
         const stage: Stage = stageContainer.stage;
         resolve(
-            getMetaDataConfig(stage),
+            [
+                getDefaultMainConfig(),
+                ...getMetaDataConfig(stage),
+            ],
         );
     });
 };

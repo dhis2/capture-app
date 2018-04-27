@@ -9,7 +9,7 @@ type Props = {
 
 const getHeaderCell = () => (props: Props) => {
     const { children, className, ...passOnProps } = props;
-    const classes = classNames('d2-table-header-cell-default', className);
+    const classes = classNames('d2-table-cell-default', 'd2-table-cell-header-default', className);
     return (
         <td
             className={classes}

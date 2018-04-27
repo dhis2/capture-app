@@ -1,7 +1,9 @@
 // @flow
 /* eslint-disable */
-import React, {Component} from 'react';
+import './app.css';
+import * as React from 'react';
 import { Provider } from 'react-redux';
+import CssBaseline from 'material-ui-next/CssBaseline';
 import LegacyMuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { MuiThemeProvider } from 'material-ui-next/styles';
 import { ConnectedRouter } from 'react-router-redux';
@@ -30,27 +32,30 @@ type Props = {
     history: HashHistory,
 };
 
-class App extends Component<Props> {
+class App extends React.Component<Props> {
     renderContents() {
         return (
-            <Provider 
-                store={this.props.store}
-            >
-                <ConnectedRouter 
-                    history={this.props.history}
+            <React.Fragment>
+                <CssBaseline />
+                <Provider 
+                    store={this.props.store}
                 >
-                    <LegacyMuiThemeProvider
-                        theme={legacyTheme}
+                    <ConnectedRouter 
+                        history={this.props.history}
                     >
-                        <MuiThemeProvider
-                            theme={theme}
+                        <LegacyMuiThemeProvider
+                            theme={legacyTheme}
                         >
-                            <D2AppContentsLoaderBlockAvoider />
-                            <FeedbackBar />
-                        </MuiThemeProvider>
-                    </LegacyMuiThemeProvider>
-                </ConnectedRouter>
-             </Provider>
+                            <MuiThemeProvider
+                                theme={theme}
+                            >
+                                <D2AppContentsLoaderBlockAvoider />
+                                <FeedbackBar />
+                            </MuiThemeProvider>
+                        </LegacyMuiThemeProvider>
+                    </ConnectedRouter>
+                </Provider>
+            </React.Fragment>
         );
     }
 

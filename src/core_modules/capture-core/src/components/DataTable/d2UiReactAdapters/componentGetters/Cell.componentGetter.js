@@ -1,13 +1,14 @@
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 type Props = {
     children: React.Node,
     className?: ?string,
 };
 
-const getCell = () => (props: Props, context: { table?: ?{ head: boolean, footer: boolean }}) => {
+const Cell = (props: Props, context: { table?: ?{ head: boolean, footer: boolean }}) => {
     const { children, className, ...passOnProps } = props;
 
     const { table } = context;
@@ -29,5 +30,11 @@ const getCell = () => (props: Props, context: { table?: ?{ head: boolean, footer
         </td>
     );
 };
+
+Cell.contextTypes = {
+    table: PropTypes.object,
+};
+
+const getCell = () => Cell;
 
 export default getCell;

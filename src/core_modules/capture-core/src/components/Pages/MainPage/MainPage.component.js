@@ -14,7 +14,7 @@ class MainPage extends Component<Props> {
 
         return (
             <div>
-                main menu
+                {'{{main menu}}'}
                 {
                     (() => {
                         if (!prerequisitesForWorkingListMet) {

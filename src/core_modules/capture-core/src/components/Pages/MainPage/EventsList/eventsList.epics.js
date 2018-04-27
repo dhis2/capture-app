@@ -23,7 +23,7 @@ const getWorkingList = async (programId: string, orgUnitId: string) => {
     const eventsPromise = getEvents({
         program: programId,
         orgUnit: orgUnitId,
-        pageSize: 1,
+        pageSize: 15,
         order: 'eventDate:desc',
     });
 
@@ -43,7 +43,7 @@ const getWorkingList = async (programId: string, orgUnitId: string) => {
 export const retrieveWorkingListEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
     action$.ofType(mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED)
-        .concatMap(() => {
+        .switchMap(() => {
             const { programId, orgUnitId } = store.getState().currentSelections;
             return getWorkingList(programId, orgUnitId)
                 .then(data =>

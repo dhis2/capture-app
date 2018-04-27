@@ -1,8 +1,8 @@
 // @flow
 
 export const directions = {
-    ASC: 'Asc',
-    DESC: 'Desc',
+    ASC: 'asc',
+    DESC: 'desc',
 };
 
 export const placements = {

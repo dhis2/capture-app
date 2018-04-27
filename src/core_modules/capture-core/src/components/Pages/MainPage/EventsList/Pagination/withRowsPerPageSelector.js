@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import './rowsPerPage.css';
 
 import OptionSet from '../../../../../metaData/OptionSet/OptionSet';
 import Option from '../../../../../metaData/OptionSet/Option';
@@ -17,7 +18,7 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
     class RowsPerPageSelector extends React.Component<Props> {
         optionSet: OptionSet;
         static getOptionSet() {
-            const options = [1, 5, 10, 15]
+            const options = [10, 15, 25, 50, 100]
                 .map(optionCount => new Option((_this) => {
                     _this.value = optionCount;
                     _this.text = optionCount.toString();
@@ -39,14 +40,16 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
             const rowsPerPage = this.props.rowsPerPage;
 
             return (
-                <OptionsSelectWithTranslations
-                    onBlur={this.handleRowsSelect}
-                    optionSet={this.optionSet}
-                    value={rowsPerPage}
-                    nullable={false}
-                    withoutUnderline
-                    searchable={false}
-                />
+                <div id="rows-per-page-selector">
+                    <OptionsSelectWithTranslations
+                        onBlur={this.handleRowsSelect}
+                        optionSet={this.optionSet}
+                        value={rowsPerPage}
+                        nullable={false}
+                        withoutUnderline
+                        searchable={false}
+                    />
+                </div>
             );
         }
 
