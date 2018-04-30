@@ -8,6 +8,8 @@ import {
     saveEventEpic,
     rulesEpic,
 } from 'capture-core/components/DataEntry/epics/dataEntry.epics';
+import { mainSelectionsCompletedEpic } from 'capture-core/components/Pages/MainPage/mainSelections.epics';
+import { retrieveWorkingListEpic, updateWorkingListEpic } from 'capture-core/components/Pages/MainPage/EventsList/eventsList.epics';
 
 import { loadStartupData } from '../init/entry.epics';
 
@@ -19,4 +21,7 @@ export default combineEpics(
     completeEventEpic,
     saveEventEpic,
     rulesEpic,
+    mainSelectionsCompletedEpic,
+    retrieveWorkingListEpic,
+    updateWorkingListEpic,
 );

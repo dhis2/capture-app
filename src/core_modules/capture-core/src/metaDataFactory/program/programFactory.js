@@ -61,6 +61,7 @@ type CachedProgramStage = {
     id: string,
     displayName: string,
     description: ?string,
+    executionDateLabel?: ?string,
     programStageSections: ?Array<CachedProgramStageSection>,
     programStageDataElements: ?Array<CachedProgramStageDataElement>
 };
@@ -151,7 +152,8 @@ function buildDataElement(d2ProgramStageDataElement: CachedProgramStageDataEleme
         _this.shortName = getDataElementTranslation(d2DataElement, propertyNames.SHORT_NAME) || d2DataElement.displayShortName;
         _this.formName = getDataElementTranslation(d2DataElement, propertyNames.FORM_NAME) || d2DataElement.displayFormName;
         _this.description = getDataElementTranslation(d2DataElement, propertyNames.DESCRIPTION) || d2DataElement.description;
-        _this.visible = true; // d2ProgramStageDataElement.displayInReports;
+        _this.displayInForms = true;
+        _this.displayInReports = d2ProgramStageDataElement.displayInReports;
         _this.compulsory = d2ProgramStageDataElement.compulsory;
         _this.disabled = false;
         _this.type = getDataElementType(d2DataElement.valueType);
@@ -210,6 +212,7 @@ function buildStage(d2ProgramStage: CachedProgramStage) {
         _this.id = d2ProgramStage.id;
         _this.name = d2ProgramStage.displayName;
         _this.description = d2ProgramStage.description;
+        d2ProgramStage.executionDateLabel && _this.addLabel({ id: 'eventDate', label: d2ProgramStage.executionDateLabel });
     });
 
     if (isNonEmptyArray(d2ProgramStage.programStageSections)) {

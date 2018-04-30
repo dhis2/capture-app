@@ -59,5 +59,9 @@ declare type Theme = {
     palette: Object,
     typography: {
         pxToRem: (size: number) => string,
-    }
+    },
+    spacing: {
+        unit: number,
+    },
+    direction: string,
 };

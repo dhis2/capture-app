@@ -35,7 +35,7 @@ function setLogLevel() {
 }
 
 async function initializeManifest() {
-    const manifest = await getManifest('./manifest.webapp');
+    const manifest = await getManifest('/manifest.webapp');
     const baseUrl = manifest.getBaseUrl();
     config.baseUrl = `${baseUrl}/api`;
     log.info(`Loading: ${manifest.name} v${manifest.version}`);
@@ -47,7 +47,7 @@ function configI18n(keyUiLocale: string) {
     return keyUiLocale;
 }
 // TODO: Using norwegian for now
-function setLocaleData(uiLocale: string) {
+function setLocaleData(uiLocale: string) { //eslint-disable-line
     moment.locale('nb');
     const weekdays = moment.weekdays();
     const weekdaysShort = moment.weekdaysShort();

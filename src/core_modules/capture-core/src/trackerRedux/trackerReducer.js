@@ -19,16 +19,23 @@ type ReducerDescription = {
     initValue: any,
     name: string,
     updaters: Object,
-    reducerWrappers: ReducerWrapper | Array<ReducerWrapper>
+    reducerWrappers: ?ReducerWrapper | Array<ReducerWrapper>
 };
 
+type Updater = (state: ReduxState, action: Action) => ReduxState;
+export type Updaters = { [type: string]: Updater };
+
 function updateStatePartInProduction<T>(
-    state: ?T, action: Action, updatersForActionTypes: {[actionType: string]: () => T}, initValue: T): T {
+    state: ?T,
+    action: Action,
+    updatersForActionTypes: {[actionType: string]: () => T},
+    initValue: T): T {
     if (!isDefined(state) || state === null) {
         state = initValue;
     }
 
     if (updatersForActionTypes[action.type]) {
+        // $FlowSuppress
         const newState = updatersForActionTypes[action.type](state, action);
         return newState;
     }
@@ -38,13 +45,19 @@ function updateStatePartInProduction<T>(
 }
 
 function updateStatePartInDevelopment<T>(
-    state: ?T, action: Action, updatersForActionTypes: {[actionType: string]: () => T}, initValue: T, onUpdaterFound: ActionOnReducerData, onUpdaterExecuted: ActionOnReducerData): T {
+    state: ?T,
+    action: Action,
+    updatersForActionTypes: {[actionType: string]: () => T},
+    initValue: T,
+    onUpdaterFound: ActionOnReducerData,
+    onUpdaterExecuted: ActionOnReducerData): T {
     if (!isDefined(state) || state === null) {
         state = initValue;
     }
 
     if (updatersForActionTypes[action.type]) {
         onUpdaterFound(state, action);
+        // $FlowSuppress
         const newState = updatersForActionTypes[action.type](state, action);
         onUpdaterExecuted(state, action);
         return newState;
@@ -57,13 +70,18 @@ function updateStatePartInDevelopment<T>(
 const getUpdaterFoundFn =
     (reducerDescription: ReducerDescription) =>
         (state: any, action: Action) => {
-            log.trace(`Updater for ${action.type} started in ${reducerDescription.name}. Starting state is: ${JSON.stringify(state)}`);
+            log.trace(
+                `Updater for ${action.type} started in ${reducerDescription.name}. 
+                Starting state is: ${JSON.stringify(state)}`,
+            );
         };
 
 const getUpdaterExecutedFn =
     (reducerDescription: ReducerDescription) =>
         (state: any, action: Action) => {
-            log.trace(`Updater for ${action.type} executed in ${reducerDescription.name}. New state is: ${JSON.stringify(state)}`);
+            log.trace(
+                `Updater for ${action.type} executed in ${reducerDescription.name}. 
+                New state is: ${JSON.stringify(state)}`);
         };
 
 const getProductionReducer =
@@ -76,7 +94,15 @@ const getDevelopmentReducer = (reducerDescription: ReducerDescription) => {
     const updaterExecutedFn = getUpdaterExecutedFn(reducerDescription);
     return (state: any, action: Action) => {
         log.trace(`reducer ${reducerDescription.name} starting. Action is: ${JSON.stringify(action)}`);
-        const newState = updateStatePartInDevelopment(state, action, reducerDescription.updaters, reducerDescription.initValue, updaterFoundFn, updaterExecutedFn);
+        const newState =
+            updateStatePartInDevelopment(
+                state,
+                action,
+                reducerDescription.updaters,
+                reducerDescription.initValue,
+                updaterFoundFn,
+                updaterExecutedFn,
+            );
         log.trace(`reducer ${reducerDescription.name} finished`);
         return newState;
     };
@@ -107,15 +133,17 @@ function buildReducer(reducerDescription: ReducerDescription) {
 
 export function buildReducersFromDescriptions(reducerDescriptions: Array<ReducerDescription>) {
     // $FlowSuppress
-    const reducers = reducerDescriptions.reduce((accReducers: {[reducerName: string]: Reducer<any, Action>}, description: ReducerDescription) => {
-        accReducers[description.name] = buildReducer(description);
-        return accReducers;
-    }, {});
+    const reducers = reducerDescriptions
+        // $FlowSuppress
+        .reduce((accReducers: {[reducerName: string]: Reducer<any, Action>}, description: ReducerDescription) => {
+            accReducers[description.name] = buildReducer(description);
+            return accReducers;
+        }, {});
     return reducers;
 }
 
 export function createReducerDescription(
-    updaters: Object,
+    updaters: Updaters,
     name: string,
     initValue: any = {},
     reducerWrappers?: ?ReducerWrapper | Array<ReducerWrapper>): ReducerDescription {

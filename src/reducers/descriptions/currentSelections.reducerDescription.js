@@ -1,10 +1,11 @@
 // @flow
-import { createReducerDescription } from 'capture-core/trackerRedux/trackerReducer';
+import { getCurrentSelectionsReducerDesc } from 'capture-core/reducers/descriptions/currentSelections.reducerDescriptionGetter';
 import { actionTypes as entryActionTypes } from '../../init/entry.actions';
 
-export const currentSelectionsReducerDesc = createReducerDescription({
+export const currentSelectionsReducerDesc = getCurrentSelectionsReducerDesc({
     [entryActionTypes.STARTUP_DATA_LOADED]: (state, action) => {
         const newState = {
+            ...state,
             orgUnit: {
                 code: 'OU_222702',
                 id: 'ueuQlqb8ccl',
@@ -14,4 +15,4 @@ export const currentSelectionsReducerDesc = createReducerDescription({
         };
         return newState;
     },
-}, 'currentSelections');
+});
