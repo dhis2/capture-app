@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router';
 import HeaderBar from '@dhis2/d2-ui-header-bar';
 import { withStyles } from 'material-ui-next/styles';
+
 import getD2 from 'capture-core/d2/d2Instance';
 import MainPage from 'capture-core/components/Pages/MainPage/MainPage.container';
 import EventCaptureForm from '../EventCaptureForm/EventCaptureForm.container';
