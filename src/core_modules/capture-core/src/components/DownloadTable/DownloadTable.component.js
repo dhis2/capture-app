@@ -32,7 +32,8 @@ class DownloadTable extends Component {
       };
 
     handleSelectFormat(format) {
-        const orgUnit = 'DiszpKrYNg8';
+        //TODO: GET current programStageId.
+        const orgUnit = this.props.selectedOrgUnitId;
         const programStage = 'dBwrot7S420';
         const skipPaging = true;
 
@@ -64,7 +65,7 @@ class DownloadTable extends Component {
                     <MenuItem onClick={() => this.handleSelectFormat('xml')}>XML</MenuItem>
                     <MenuItem onClick={() => this.handleSelectFormat('csv')}>CSV</MenuItem>
                 </Menu>
-                <h1>{this.props.selectedOrgUnit.id}</h1>
+                <h1>{this.props.selectedOrgUnitId}</h1>
             </div>
         );
     }
