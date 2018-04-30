@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 import HeaderBar from '@dhis2/d2-ui-header-bar';
-import DownloadTable from 'capture-core/components/DownloadTable/DownloadTable.component';
+import DownloadTable from 'capture-core/components/DownloadTable/DownloadTable.container';
 
 
 import { withStyles } from 'material-ui-next/styles';
