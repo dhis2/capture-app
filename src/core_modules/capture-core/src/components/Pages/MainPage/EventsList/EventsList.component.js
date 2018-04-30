@@ -23,6 +23,7 @@ import withNavigation from './Pagination/withDefaultNavigation';
 import withRowsPerPageSelector from './Pagination/withRowsPerPageSelector';
 import SortLabelWrapper from './SortLabelWrapper.component';
 import { directions, placements } from '../../../DataTable/d2UiReactAdapters/componentGetters/sortLabel.const';
+import DownloadTable from '../../../DownloadTable/DownloadTable.container';
 
 // $FlowSuppress
 const { Table, Row, Cell, HeaderCell, Head, Body } = getTableComponents(basicTableAdapter);
@@ -263,12 +264,7 @@ class EventsList extends Component<Props> {
                                 onClick={() => { alert('not implemented yet'); }}
                             />
                         </IconButton>
-                        <IconButton>
-                            <FileDownloadIcon
-                                className={classes.optionsIcon}
-                                onClick={() => { alert('not implemented yet'); }}
-                            />
-                        </IconButton>
+                        <DownloadTable />
                     </div>
                 </div>
                 <div

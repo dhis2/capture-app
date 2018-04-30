@@ -6,6 +6,8 @@ import { withStyles } from 'material-ui-next/styles';
 import { getApi } from '../../d2/d2Instance';
 import Button from 'material-ui-next/Button';
 import Menu, { MenuItem } from 'material-ui-next/Menu';
+import IconButton from 'material-ui-next/IconButton';
+import FileDownloadIcon from '@material-ui/icons/FileDownload';
 
 const styles = () => ({
     button: {
@@ -45,16 +47,16 @@ class DownloadTable extends Component {
         const { anchorEl } = this.state;
 
         return (
-            <div>
-                <Button 
+            <span>
+                <IconButton 
                     aria-owns={anchorEl ? 'download-menu' : null}
                     aria-haspopup="true"
                     onClick={this.handleClick}
-                    variant="raised"
+                    variant="fab"
                     color="primary"
                 >
-                    Download
-                </Button>
+                    <FileDownloadIcon />
+                </IconButton>
                 <Menu
                     id="download-menu"
                     anchorEl={anchorEl}
@@ -65,8 +67,7 @@ class DownloadTable extends Component {
                     <MenuItem onClick={() => this.handleSelectFormat('xml')}>XML</MenuItem>
                     <MenuItem onClick={() => this.handleSelectFormat('csv')}>CSV</MenuItem>
                 </Menu>
-                <h1>{this.props.selectedOrgUnitId}</h1>
-            </div>
+            </span>
         );
     }
 }

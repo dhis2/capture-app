@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import withSelectionsUpdater from './withSelectionsUpdater';
 
 import EventsList from './EventsList/EventsList.container';
-import DownloadTable from '../../DownloadTable/DownloadTable.container'
 
 type Props = {
     prerequisitesForWorkingListMet: boolean,
@@ -15,7 +14,7 @@ class MainPage extends Component<Props> {
 
         return (
             <div>
-                <DownloadTable />
+                {'{{main menu}}'}
                 {
                     (() => {
                         if (!prerequisitesForWorkingListMet) {
