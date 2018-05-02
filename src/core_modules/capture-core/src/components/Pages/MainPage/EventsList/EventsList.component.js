@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui-next/styles';
 import { darken, fade, lighten } from 'material-ui-next/styles/colorManipulator';
-import Tooltip from 'material-ui-next/Tooltip';
 import SettingsIcon from '@material-ui/icons/Settings';
 import FileDownloadIcon from '@material-ui/icons/FileDownload';
 import IconButton from 'material-ui-next/IconButton';
@@ -143,31 +142,23 @@ class EventsList extends Component<Props> {
                     key={column.id}
                     className={classNames(this.props.classes.cell, this.props.classes.headerCell)}
                 >
-                    <Tooltip
-                        title={getTranslation('sort', formatterOptions.CAPITALIZE_FIRST_LETTER)}
-                        placement={EventsList.typesWithRightPlacement.includes(column.type) ? 'bottom-start' : 'bottom-end'}
-                        enterDelay={300}
+                    <SortLabelWrapper
+                        isActive={column.id === sortById}
+                        initialDirection={
+                            EventsList.typesWithAscendingInitialDirection.includes(column.type)
+                                ? directions.ASC
+                                : directions.DESC
+                        }
+                        placement={
+                            EventsList.typesWithRightPlacement.includes(column.type)
+                                ? placements.RIGHT
+                                : placements.LEFT
+                        }
+                        direction={sortByDirection}
+                        onSort={this.getSortHandler(column.id)}
                     >
-                        <span>
-                            <SortLabelWrapper
-                                isActive={column.id === sortById}
-                                initialDirection={
-                                    EventsList.typesWithAscendingInitialDirection.includes(column.type)
-                                        ? directions.ASC
-                                        : directions.DESC
-                                }
-                                placement={
-                                    EventsList.typesWithRightPlacement.includes(column.type)
-                                        ? placements.RIGHT
-                                        : placements.LEFT
-                                }
-                                direction={sortByDirection}
-                                onSort={this.getSortHandler(column.id)}
-                            >
-                                {column.header}
-                            </SortLabelWrapper>
-                        </span>
-                    </Tooltip>
+                        {column.header}
+                    </SortLabelWrapper>
                 </HeaderCell>
             ));
 

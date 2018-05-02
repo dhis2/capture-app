@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
-
 import { directions, placements } from './sortLabel.const';
+import type { TableClasses } from '../../d2Ui/getTableComponents';
 
 type Props = {
     children?: ?React.Node,
@@ -14,79 +14,78 @@ type Props = {
     onGetIcons?: ?(isActive: boolean, direction?: ?$Values<typeof directions>, onSort: (direction: $Values<typeof directions>) => void) => void,
 };
 
-class SortLabel extends React.Component<Props> {
-    handleSort = () => {
-        const isActive = this.props.isActive;
-        const direction = this.props.direction;
+export default (defaultClasses: TableClasses) =>
+    class SortLabel extends React.Component<Props> {
+        handleSort = () => {
+            const isActive = this.props.isActive;
+            const direction = this.props.direction;
 
-        if (isActive) {
-            this.props.onSort(direction === directions.ASC ? directions.DESC : directions.ASC);
-        } else {
-            this.props.onSort(this.props.initialDirection || directions.DESC);
+            if (isActive) {
+                this.props.onSort(direction === directions.ASC ? directions.DESC : directions.ASC);
+            } else {
+                this.props.onSort(this.props.initialDirection || directions.DESC);
+            }
         }
-    }
 
-    renderChildrenContainer(classes?: ?Array<string>) {
-        return (
-            <div
-                className={classNames('d2-sort-label-children-default', classes)}
-                onClick={this.handleSort}
-                role="button"
-                tabIndex={0}
-            >
-                {this.props.children}
-            </div>
-        );
-    }
+        renderChildrenContainer(classes?: ?Array<string>) {
+            return (
+                <div
+                    className={classNames(defaultClasses.sortLabelChildren, classes)}
+                    onClick={this.handleSort}
+                    role="button"
+                    tabIndex={0}
+                >
+                    {this.props.children}
+                </div>
+            );
+        }
 
-    render() {
-        const { children, isActive, direction, onSort, onGetIcons, placement } = this.props;
-        const icons = onGetIcons && onGetIcons(isActive, direction, onSort);
-        const containerClasses = classNames(
-            'd2-sort-label-container-default',
-            {
-                'd2-sort-label-right-default': placement === placements.RIGHT,
-            },
-        );
-
-        return (
-            <div
-                className={containerClasses}
-            >
+        render() {
+            const { children, isActive, direction, onSort, onGetIcons, placement } = this.props;
+            const icons = onGetIcons && onGetIcons(isActive, direction, onSort);
+            const containerClasses = classNames(
+                defaultClasses.sortLabelContainer,
                 {
-                    (() => {
-                        if (placement === placements.RIGHT) {
+                    [defaultClasses.sortLabelRight]: placement === placements.RIGHT,
+                },
+            );
+
+            return (
+                <div
+                    className={containerClasses}
+                >
+                    {
+                        (() => {
+                            if (placement === placements.RIGHT) {
+                                return (
+                                    <React.Fragment>
+                                        <div
+                                            className={defaultClasses.sortLabelIcon}
+                                        >
+                                            {icons}
+                                        </div>
+                                        {
+                                            this.renderChildrenContainer([defaultClasses.sortLabelChildrenLast])
+                                        }
+                                    </React.Fragment>
+                                );
+                            }
+
                             return (
                                 <React.Fragment>
+                                    {
+                                        this.renderChildrenContainer([defaultClasses.sortLabelChildrenFirst])
+                                    }
                                     <div
-                                        className="d2-sort-label-icon-default"
+                                        className={defaultClasses.sortLabelIcon}
                                     >
                                         {icons}
                                     </div>
-                                    {
-                                        this.renderChildrenContainer(['d2-sort-label-children-last-default'])
-                                    }
                                 </React.Fragment>
                             );
-                        }
-
-                        return (
-                            <React.Fragment>
-                                {
-                                    this.renderChildrenContainer(['d2-sort-label-children-first-default'])
-                                }
-                                <div
-                                    className="d2-sort-label-last-element-default d2-sort-label-icon-default"
-                                >
-                                    {icons}
-                                </div>
-                            </React.Fragment>
-                        );
-                    })()
-                }
-            </div>
-        );
-    }
-}
-
-export default () => SortLabel;
+                        })()
+                    }
+                </div>
+            );
+        }
+    };

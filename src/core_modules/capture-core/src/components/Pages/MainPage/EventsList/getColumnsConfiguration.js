@@ -20,10 +20,10 @@ const getMetaDataConfig = (stage: RenderFoundation) =>
             visible: element.displayInReports,
         }));
 
-const getColumnsConfiguration = (programId: string): Promise<any> => {
+const getColumnsConfiguration = (programId: string): Promise<any> =>
     // TODO: retrieve columns configuration from system/user config.
 
-    return new Promise((resolve, reject) => {
+    new Promise((resolve, reject) => {
         const stageContainer = getStageFromProgramIdForEventProgram(programId);
         if (stageContainer.error) {
             reject();
@@ -37,7 +37,7 @@ const getColumnsConfiguration = (programId: string): Promise<any> => {
                 ...getMetaDataConfig(stage),
             ],
         );
-    });
-};
+    })
+;
 
 export default getColumnsConfiguration;

@@ -7,6 +7,7 @@ const webpack = require('webpack');
 const path = require('path');
 const fs = require('fs');
 const customAlias = require('./alias.config');
+const getCssMod = require('./cssMod.config');
 
 const isDevBuild = process.argv[1].indexOf('start.js') !== -1;
 
@@ -135,6 +136,12 @@ function rewireAliases(config) {
     return config;
 }
 
+function addCssModuleRules(config) {
+    if (isDevBuild) {
+        
+    }
+}
+
 function rewireModules(config){
     /*
     const jqueryLoader = {
@@ -144,6 +151,10 @@ function rewireModules(config){
 
     config.module.rules.push(jqueryLoader);
     */
+   const cssMod = getCssMod(isDevBuild);
+   config.module.rules[1].oneOf.splice(0, 0, cssMod);
+   // console.log(cssloader);
+   // var x = config.modules.rules;
     return config;
 }
 

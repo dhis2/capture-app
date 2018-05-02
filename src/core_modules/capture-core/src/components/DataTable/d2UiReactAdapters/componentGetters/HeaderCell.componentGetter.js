@@ -1,15 +1,16 @@
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
+import type { TableClasses } from '../../d2Ui/getTableComponents';
 
 type Props = {
     children: React.Node,
     className?: ?string,
 };
 
-const getHeaderCell = () => (props: Props) => {
+const getHeaderCell = (defaultClasses: TableClasses) => (props: Props) => {
     const { children, className, ...passOnProps } = props;
-    const classes = classNames('d2-table-cell-default', 'd2-table-cell-header-default', className);
+    const classes = classNames(defaultClasses.tableCell, defaultClasses.tableCellHeader, className);
     return (
         <td
             className={classes}

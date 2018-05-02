@@ -1,11 +1,14 @@
 // @flow
 import * as React from 'react';
-import ArrowDownwardIcon from 'material-ui-icons/ArrowDownward';
-import ArrowUpwardIcon from 'material-ui-icons/ArrowUpward';
+import Tooltip from 'material-ui-next/Tooltip';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import { withStyles } from 'material-ui-next/styles';
 
+import { getTranslation } from '../../../../d2/d2Instance';
+import { formatterOptions } from '../../../../utils/string/format.const';
 import getTableComponents from '../../../DataTable/d2Ui/getTableComponents';
-import sortLabelAdapter from '../../../DataTable/d2UiReactAdapters/sortLabel.adapter'; 
+import sortLabelAdapter from '../../../DataTable/d2UiReactAdapters/sortLabel.adapter';
 
 import { directions } from '../../../DataTable/d2UiReactAdapters/componentGetters/sortLabel.const';
 
@@ -29,13 +32,19 @@ type Props = {
 };
 
 class SortLabelWrapper extends React.Component<Props> {
-    getIconClickHandler = (direction: $Values<typeof directions>, onSort: (direction: $Values<typeof directions>) => void) => () => {
-        onSort(direction);
-    }
+    getIconClickHandler = (
+        direction: $Values<typeof directions>,
+        onSort: (direction: $Values<typeof directions>) => void) =>
+        () => {
+            onSort(direction);
+        }
 
-    getIcons = (isActive: boolean, direction?: ?$Values<typeof directions>, onSort: (direction: $Values<typeof directions>) => void) => {
+    getIcons = (
+        isActive: boolean,
+        direction?: ?$Values<typeof directions>,
+        onSort: (direction: $Values<typeof directions>) => void) => {
         if (isActive) {
-            return direction === directions.ASC
+            const icon = direction === directions.ASC
                 ? (
                     <ArrowUpwardIcon
                         className={this.props.classes.icon}
@@ -48,6 +57,18 @@ class SortLabelWrapper extends React.Component<Props> {
                         onClick={this.getIconClickHandler(directions.ASC, onSort)}
                     />
                 );
+
+            return (
+                <Tooltip
+                    title={getTranslation('sort', formatterOptions.CAPITALIZE_FIRST_LETTER)}
+                    placement={'bottom'}
+                    enterDelay={300}
+                >
+                    <span>
+                        {icon}
+                    </span>
+                </Tooltip>
+            );
         }
         return (
             <div
@@ -62,7 +83,15 @@ class SortLabelWrapper extends React.Component<Props> {
                 onGetIcons={this.getIcons}
                 {...this.props}
             >
-                {this.props.children}
+                <Tooltip
+                    title={getTranslation('sort', formatterOptions.CAPITALIZE_FIRST_LETTER)}
+                    placement={'bottom'}
+                    enterDelay={300}
+                >
+                    <span>
+                        {this.props.children}
+                    </span>
+                </Tooltip>
             </SortLabel>
         );
     }

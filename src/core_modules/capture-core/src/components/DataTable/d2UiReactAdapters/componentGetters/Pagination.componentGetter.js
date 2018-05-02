@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import type { TableClasses } from '../../d2Ui/getTableComponents';
 
 type Props = {
     rowsCount: number,
@@ -11,75 +12,74 @@ type Props = {
     onGetLabelDisplayedRows?: ?(fromToLabel: string, totalLabel: string) => string,
 };
 
-class Pagination extends React.Component<Props> {
-    static getFromToLabel(rowsCount: number, rowsPerPage: number, currentPage: number) {
-        const fromCount = (rowsPerPage * (currentPage - 1)) + 1;
+const getPagination = (defaultClasses: TableClasses) =>
+    class Pagination extends React.Component<Props> {
+        static getFromToLabel(rowsCount: number, rowsPerPage: number, currentPage: number) {
+            const fromCount = (rowsPerPage * (currentPage - 1)) + 1;
 
-        if (fromCount > rowsCount) {
-            return '-';
+            if (fromCount > rowsCount) {
+                return '-';
+            }
+
+            const toCount = Math.min(rowsPerPage * currentPage, rowsCount);
+            return `${fromCount}-${toCount}`;
         }
 
-        const toCount = Math.min(rowsPerPage * currentPage, rowsCount);
-        return `${fromCount}-${toCount}`;
-    }
+        static getRowsCountElement(rowsCountSelectorLabel?: ?string, rowsCountSelector?: ?React.Node) {
+            if (!rowsCountSelector) {
+                return null;
+            }
 
-    static getRowsCountElement(rowsCountSelectorLabel?: ?string, rowsCountSelector?: ?React.Node) {
-        if (!rowsCountSelector) {
-            return null;
-        }
-
-        return rowsCountSelectorLabel ? (
-            <div
-                className={'d2-pagination-rows-per-page-element-container'}
-            >
-                {rowsCountSelectorLabel}:
-                <span
-                    className={'d2-pagination-rows-per-page-element'}
+            return rowsCountSelectorLabel ? (
+                <div
+                    className={defaultClasses.paginationRowsPerPageElementContainer}
                 >
-                    {rowsCountSelector}
-                </span>
-            </div>
-        ) : rowsCountSelector;
-    }
+                    {rowsCountSelectorLabel}:
+                    <span
+                        className={defaultClasses.paginationRowsPerPageElement}
+                    >
+                        {rowsCountSelector}
+                    </span>
+                </div>
+            ) : rowsCountSelector;
+        }
 
-    static wrapDisplayedRowsElement(displayedRowsTable: React.Node) {
-        return (
-            <div
-                className={'d2-pagination-display-rows-container'}
-            >
-                {displayedRowsTable}
-            </div>
-        );
-    }
+        static wrapDisplayedRowsElement(displayedRowsTable: React.Node) {
+            return (
+                <div
+                    className={defaultClasses.paginationDisplayRowsContainer}
+                >
+                    {displayedRowsTable}
+                </div>
+            );
+        }
 
-    render() {
-        const {
-            rowsCount,
-            rowsPerPage,
-            currentPage,
-            rowsCountSelector,
-            rowsCountSelectorLabel,
-            navigationElements,
-            onGetLabelDisplayedRows } = this.props;
+        render() {
+            const {
+                rowsCount,
+                rowsPerPage,
+                currentPage,
+                rowsCountSelector,
+                rowsCountSelectorLabel,
+                navigationElements,
+                onGetLabelDisplayedRows } = this.props;
 
-        const rowsCountElement = Pagination.getRowsCountElement(rowsCountSelectorLabel, rowsCountSelector);
-        const displayedRowsTable = onGetLabelDisplayedRows &&
+            const rowsCountElement = Pagination.getRowsCountElement(rowsCountSelectorLabel, rowsCountSelector);
+            const displayedRowsTable = onGetLabelDisplayedRows &&
             Pagination.wrapDisplayedRowsElement(
                 onGetLabelDisplayedRows(
                     Pagination.getFromToLabel(rowsCount, rowsPerPage, currentPage), rowsCount.toString()),
             );
-        return (
-            <div
-                className={'d2-table-cell-pagination-default'}
-            >
-                {rowsCountElement}
-                {displayedRowsTable}
-                {navigationElements}
-            </div>
-        );
-    }
-}
-
-const getPagination = () => Pagination;
+            return (
+                <div
+                    className={defaultClasses.pagination}
+                >
+                    {rowsCountElement}
+                    {displayedRowsTable}
+                    {navigationElements}
+                </div>
+            );
+        }
+    };
 
 export default getPagination;
