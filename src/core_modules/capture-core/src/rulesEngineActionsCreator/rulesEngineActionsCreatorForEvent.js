@@ -136,10 +136,8 @@ function getFieldsValidationForForm(sectionsFieldsUI: Object, formId: string) {
 
 /**
  * get valid form data based on fieldsValidation
- * 
- * @param {{ [key: string]: any }} formData
- * @param {{ [key: string]: boolean }} fieldsValidation
- * @returns
+ * @param {Object} formValues
+ * @param {Object} fieldsValidation
  */
 function getValidFormValues(formValues: { [key: string]: any }, fieldsValidation: { [key: string]: boolean }) {
     return Object.keys(formValues)
@@ -152,10 +150,8 @@ function getValidFormValues(formValues: { [key: string]: any }, fieldsValidation
 
 /**
  * convert form values to client values
- * 
- * @param {{[key: string]: any}} formValues
+ * @param {Object} formValues
  * @param {RenderFoundation} renderFoundation
- * @returns
  */
 function convertFormValuesToClientValues(formValues: {[key: string]: any}, renderFoundation: RenderFoundation) {
     return convertFormValuesToClient(formValues, renderFoundation);

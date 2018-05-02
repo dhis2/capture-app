@@ -1,4 +1,8 @@
 // @flow
+/**
+ * @namespace test
+ * @module getTableComponents
+ */
 import defaultTableClasses from './table.mod.css';
 import type { Adapter, ComponentCreators } from './types';
 
@@ -27,7 +31,7 @@ export type TableClasses = {
 /**
  * @param {Adapter} adapter
  * @param {ComponentCreators} [adapter.componentCreators]: the methods for creating the components. The creator methods will get the default css classes passed to them as an argument.
- * @returns {{[key: string]: any}} components
+ * @returns {*} components
  */
 const getComponentsUnordered =
     ({ componentCreators }: { componentCreators: ComponentCreators }): {[key: string]: any} =>
@@ -40,8 +44,8 @@ const getComponentsUnordered =
 /**
  * @param {Adapter} adapter
  * @param {ComponentCreators} [adapter.componentCreators]: the methods for creating the components. The creator methods will get the default css classes passed to them as an argument.
- * @param {Array<string>} [adapter.creationOrder]
- * @returns {{[key: string]: any}} components
+ * @param {array} [adapter.creationOrder]
+ * @returns {*} components
  */
 const getComponentsOrdered =
     ({ componentCreators, creationOrder }: { componentCreators: ComponentCreators, creationOrder: Array<string> }) =>
@@ -57,7 +61,7 @@ const getComponentsOrdered =
  * retrieve the table components specified by the adapter
  * @export
  * @param {Adapter} adapter: contains methods for creating the components as well as an optional creation order
- * @returns {{[key: string]: any}} components
+ * @returns {*} components
  */
 const getTableComponents = (adapter: Adapter) => {
     const components = adapter.creationOrder ?

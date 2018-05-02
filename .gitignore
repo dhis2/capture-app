@@ -9,6 +9,9 @@
 # production
 /build
 
+# docs
+/docs
+
 # flow
 /flow-typed
 

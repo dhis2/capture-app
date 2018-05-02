@@ -136,25 +136,10 @@ function rewireAliases(config) {
     return config;
 }
 
-function addCssModuleRules(config) {
-    if (isDevBuild) {
-        
-    }
-}
-
 function rewireModules(config){
-    /*
-    const jqueryLoader = {
-        test: require.resolve('jquery'),
-        loader: "expose-loader?jQuery!expose-loader?$"
-    };
-
-    config.module.rules.push(jqueryLoader);
-    */
-   const cssMod = getCssMod(isDevBuild);
-   config.module.rules[1].oneOf.splice(0, 0, cssMod);
-   // console.log(cssloader);
-   // var x = config.modules.rules;
+    // TODO: Temporary, probably isn't needed whenever create-react-app is updated to v2
+    const cssMod = getCssMod(isDevBuild);
+    config.module.rules[1].oneOf.splice(0, 0, cssMod);
     return config;
 }
 
