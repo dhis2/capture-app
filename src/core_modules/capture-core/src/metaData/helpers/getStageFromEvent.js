@@ -24,5 +24,5 @@ export default function getStageFromEvent(event: Event) {
         return { error: getTranslation('generic_error'), stage: null };
     }
 
-    return { stage };
+    return { stage, error: null };
 }
