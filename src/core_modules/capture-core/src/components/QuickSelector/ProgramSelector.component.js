@@ -26,7 +26,16 @@ const styles = () => ({
     },
 });
 
-class ProgramSelector extends Component {
+type Props = {
+    handleChangeProgram: (value: string) => void,
+    handleClickProgram: (value: string) => void,
+    selectedProgram: Object,
+    classes: Object,
+};
+
+class ProgramSelector extends Component<Props> {
+    handleChange: (event: any) => void;
+    handleClick: (program: Object) => void;
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
@@ -50,7 +59,13 @@ class ProgramSelector extends Component {
                 <div>
                     <Paper elevation={1} className={this.props.classes.paper}>
                         <List>
-                            {programsArray.map(i => <ListItem className={this.props.classes.listItem} button onClick={() => this.handleClick(i)}><ListItemText primary={i.name} /></ListItem>)}
+                            {programsArray.map(i =>
+                                (<ListItem
+                                    className={this.props.classes.listItem}
+                                    button
+                                    onClick={() => this.handleClick(i)}
+                                >
+                                    <ListItemText primary={i.name} /></ListItem>))}
                         </List>
                     </Paper>
                 </div>

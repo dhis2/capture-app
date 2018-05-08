@@ -25,7 +25,16 @@ const styles = () => ({
     },
 });
 
-class OrgUnitSelector extends Component {
+type Props = {
+    handleChangeOrgUnit: (value: string) => void,
+    handleClickOrgUnit: (value: string) => void,
+    selectedOrgUint: Object,
+    classes: Object,
+};
+
+class OrgUnitSelector extends Component<Props> {
+    handleChange: (event: any) => void;
+    handleClick: (orgunit: Object) => void;
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
@@ -40,17 +49,24 @@ class OrgUnitSelector extends Component {
         this.props.handleClickOrgUnit(orgunit.id);
     }
 
-    // TODO:Add OrgUnitTree when there are a lot of orgunits 
+    // TODO:Add OrgUnitTree when there are a lot of orgunits
     render() {
         // TODO: Add real data and remove placeholder data.
-        const orgUnits = [{ id: 1, name: 'OrgUnit 1' }, { id: 2, name: 'OrgUnit 2' }, { id: 3, name: 'OrgUnit 3' }, { id: 4, name: 'OrgUnit 4' }, { id: 5, name: 'OrgUnit 5' }, { id: 6, name: 'OrgUnit 6' }];
+        const orgUnits = [{ id: 1, name: 'OrgUnit 1' }, { id: 2, name: 'OrgUnit 2' }, { id: 3, name: 'OrgUnit 3' },
+            { id: 4, name: 'OrgUnit 4' }, { id: 5, name: 'OrgUnit 5' }, { id: 6, name: 'OrgUnit 6' }];
         // If less than or equal, display as list.
         if (orgUnits.length <= 5) {
             return (
                 <div>
                     <Paper elevation={1} className={this.props.classes.paper}>
                         <List>
-                            {orgUnits.map(i => <ListItem className={this.props.classes.listItem} button onClick={() => this.handleClick(i)}><ListItemText primary={i.name} /></ListItem>)}
+                            {orgUnits.map(i =>
+                                (<ListItem
+                                    className={this.props.classes.listItem}
+                                    button
+                                    onClick={() => this.handleClick(i)}
+                                >
+                                    <ListItemText primary={i.name} /></ListItem>))}
                         </List>
                     </Paper>
                 </div>
@@ -72,7 +88,12 @@ class OrgUnitSelector extends Component {
                             <MenuItem value="">
                                 <em>None</em>
                             </MenuItem>
-                            <MenuItem key={this.props.selectedOrgUint.id} value={this.props.selectedOrgUint.id}>{this.props.selectedOrgUint.name}</MenuItem>
+                            <MenuItem
+                                key={this.props.selectedOrgUint.id}
+                                value={this.props.selectedOrgUint.id}
+                            >
+                                {this.props.selectedOrgUint.name}
+                            </MenuItem>
                         </Select>
                     </FormControl>
                     <br />

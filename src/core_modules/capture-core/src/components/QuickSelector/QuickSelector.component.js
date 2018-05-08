@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui-next/styles';
 
@@ -15,7 +16,18 @@ const styles = () => ({
     },
 });
 
-class QuickSelector extends Component {
+type Props = {
+    selectedOrgUnit: Object,
+    selectedProgramId: string,
+    classes: Object,
+};
+
+class QuickSelector extends Component<Props> {
+    handleChangeProgram: (program: any) => void;
+    handleClickProgram: (program: Object) => void;
+    handleChangeOrgUnit: (orgUnit: any) => void;
+    handleClickOrgUnit: (orgUnit: Object) => void;
+    handleClickActionButton: () => void;
     constructor(props) {
         super(props);
 
@@ -54,13 +66,25 @@ class QuickSelector extends Component {
             <Paper className={this.props.classes.paper}>
                 <Grid container spacing={24}>
                     <Grid item xs={12} sm={4}>
-                        <OrgUnitSelector selectedOrgUint={this.props.selectedOrgUnit} handleChangeOrgUnit={this.handleChangeOrgUnit} handleClickOrgUnit={this.handleClickOrgUnit} />
+                        <OrgUnitSelector
+                            selectedOrgUint={this.props.selectedOrgUnit}
+                            handleChangeOrgUnit={this.handleChangeOrgUnit}
+                            handleClickOrgUnit={this.handleClickOrgUnit} 
+                        />
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <ProgramSelector selectedProgram={this.props.selectedProgramId} handleChangeProgram={this.handleChangeProgram} handleClickProgram={this.handleClickProgram} />
+                        <ProgramSelector
+                            selectedProgram={this.props.selectedProgramId}
+                            handleChangeProgram={this.handleChangeProgram}
+                            handleClickProgram={this.handleClickProgram}
+                        />
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <ActionButtons handleClickActionButton={this.handleClickActionButton} selectedProgram={this.props.selectedProgramId} selectedOrgUint={this.props.selectedOrgUnit.id} />
+                        <ActionButtons
+                            handleClickActionButton={this.handleClickActionButton}
+                            selectedProgram={this.props.selectedProgramId}
+                            selectedOrgUint={this.props.selectedOrgUnit.id}
+                        />
                     </Grid>
                 </Grid>
             </Paper>
