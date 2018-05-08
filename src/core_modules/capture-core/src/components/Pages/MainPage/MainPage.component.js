@@ -1,4 +1,7 @@
 // @flow
+/**
+ * @namespace MainPage
+*/
 import React, { Component } from 'react';
 import withSelectionsUpdater from './withSelectionsUpdater';
 

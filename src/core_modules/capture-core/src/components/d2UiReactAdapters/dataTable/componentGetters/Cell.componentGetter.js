@@ -2,7 +2,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import type { TableClasses } from '../../d2Ui/getTableComponents';
+import type { TableClasses } from '../../../d2Ui/dataTable/getTableComponents';
 
 type Props = {
     children: React.Node,

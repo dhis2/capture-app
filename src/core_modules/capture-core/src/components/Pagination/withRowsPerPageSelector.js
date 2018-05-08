@@ -2,10 +2,10 @@
 import * as React from 'react';
 import './rowsPerPage.css';
 
-import OptionSet from '../../../../../metaData/OptionSet/OptionSet';
-import Option from '../../../../../metaData/OptionSet/Option';
-import OptionsSelect from '../../../../FormFields/Options/SelectVirtualized/OptionsSelectVirtualized.component';
-import withTranslations from '../../../../FormFields/Options/SelectVirtualized/withTranslations';
+import OptionSet from '../../metaData/OptionSet/OptionSet';
+import Option from '../../metaData/OptionSet/Option';
+import OptionsSelect from '../FormFields/Options/SelectVirtualized/OptionsSelectVirtualized.component';
+import withTranslations from '../FormFields/Options/SelectVirtualized/withTranslations';
 
 const OptionsSelectWithTranslations = withTranslations()(OptionsSelect);
 
@@ -16,7 +16,6 @@ type Props = {
 
 const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
     class RowsPerPageSelector extends React.Component<Props> {
-        optionSet: OptionSet;
         static getOptionSet() {
             const options = [10, 15, 25, 50, 100]
                 .map(optionCount => new Option((_this) => {
@@ -26,6 +25,7 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
 
             return new OptionSet('rowsCountOptions', options);
         }
+        optionSet: OptionSet;
 
         constructor(props: Props) {
             super(props);
@@ -64,6 +64,13 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
         }
     };
 
+/**
+ * Add rows per page selector to the inner component
+ * @returns React Component
+ * @alias withRowsPerPageSelector
+ * @memberof Pagination
+ * @example withRowsPerPageSelector()([InnerComponent])
+*/
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         getRowsPerPageSelector(InnerComponent);

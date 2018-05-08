@@ -3,7 +3,7 @@ export type CssClasses = {
     [key: string]: string,
 };
 
-export type ComponentCreator = (createdComponents?: any) => any;
+export type ComponentCreator = (defaultClasses: Object, createdComponents?: any) => any;
 export type ComponentCreators = {
     [key: string]: ComponentCreator,
 };

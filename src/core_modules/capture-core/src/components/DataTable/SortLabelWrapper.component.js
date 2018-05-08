@@ -5,12 +5,12 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import { withStyles } from 'material-ui-next/styles';
 
-import { getTranslation } from '../../../../d2/d2Instance';
-import { formatterOptions } from '../../../../utils/string/format.const';
-import getTableComponents from '../../../DataTable/d2Ui/getTableComponents';
-import sortLabelAdapter from '../../../DataTable/d2UiReactAdapters/sortLabel.adapter';
+import { getTranslation } from '../../d2/d2Instance';
+import { formatterOptions } from '../../utils/string/format.const';
+import getTableComponents from '../d2Ui/dataTable/getTableComponents';
+import sortLabelAdapter from '../d2UiReactAdapters/dataTable/sortLabel.adapter';
 
-import { directions } from '../../../DataTable/d2UiReactAdapters/componentGetters/sortLabel.const';
+import { directions } from '../d2UiReactAdapters/dataTable/componentGetters/sortLabel.const';
 
 // $FlowSuppress
 const { SortLabel } = getTableComponents(sortLabelAdapter);
@@ -97,4 +97,9 @@ class SortLabelWrapper extends React.Component<Props> {
     }
 }
 
+/**
+ * A wrapper for the d2-ui/dataTable/sortLabel component. Adds sort tooltip and icons
+ * @alias SortLabelWrapper
+ * @memberof DataTable
+ */
 export default withStyles(styles)(SortLabelWrapper);

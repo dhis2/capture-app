@@ -1,12 +1,12 @@
 {
     "version": "0.1",
-    "name": "Tracker Capture",
-    "description": "Tracker Capture App",
+    "name": "Capture",
+    "description": "Capture App",
     "launch_path": "index.html",
     "icons": {
-        "16": "/img/icons/mortar-16.png",
-        "48": "/img/icons/mortar-48.png",
-        "128": "/img/icons/mortar-128.png"
+        "16": "/assets/icons/track16.png",
+        "48": "/assets/icons/track48.png",
+        "128": "/assets/icons/track128.png"
     },
     "developer": {
         "name": "HISP",
@@ -15,7 +15,7 @@
     "default_locale": "en",
     "activities": {
         "dhis": {
-            "href": ".."
+            "href": "../../.."
         }
     }
 }

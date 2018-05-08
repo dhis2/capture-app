@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import type { TableClasses } from '../../d2Ui/getTableComponents';
+import type { TableClasses } from '../../../d2Ui/dataTable/getTableComponents';
 
 type Props = {
     rowsCount: number,

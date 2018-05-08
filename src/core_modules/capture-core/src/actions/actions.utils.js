@@ -1,9 +1,12 @@
 // @flow
+/**
+ * @module actionUtils
+ */
 
 /**
  * Generic action-creator
- * @param type of action
- * @returns {object} FSA-compliant action
+ * @param  {string} type - type of the action
+ * @returns {function} a function accepting payload, meta and error -> returning an FSA-compliant action
  */
 export function actionCreator(type: string) {
     return (payload: any, meta: any, error: any) => ({

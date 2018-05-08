@@ -14,15 +14,21 @@
     },
     "templates": {
         "cleverLinks": false,
-        "monospaceLinks": false
+        "monospaceLinks": false,
+        "default": {
+            "outputSourceFiles": true
+        }
     },
     "opts": {
+        "template": "node_modules/docdash",
         "encoding": "utf8",
         "destination": "./docs/",
         "recurse": true
     },
     "plugins": [
-        "node_modules/jsdoc-babel"
+        "node_modules/jsdoc-babel",
+        "plugins/markdown",
+        "./node_modules/jsdoc-export-default-interop/dist/index"
     ],
     "babel": {
         "presets": ["react-app"]

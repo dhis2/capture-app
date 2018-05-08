@@ -12,16 +12,16 @@ import { getTranslation } from '../../../../d2/d2Instance';
 import { formatterOptions } from '../../../../utils/string/format.const';
 import elementTypes from '../../../../metaData/DataElement/elementTypes';
 
-import getTableComponents from '../../../DataTable/d2Ui/getTableComponents';
-import basicTableAdapter from '../../../DataTable/d2UiReactAdapters/basicTable.adapter';
-import paginationAdapter from '../../../DataTable/d2UiReactAdapters/pagination.adapter';
+import getTableComponents from '../../../d2Ui/dataTable/getTableComponents';
+import basicTableAdapter from '../../../d2UiReactAdapters/dataTable/basicTable.adapter';
+import paginationAdapter from '../../../d2UiReactAdapters/dataTable/pagination.adapter';
 import LoadingMask from '../../../LoadingMasks/LoadingMask.component';
 
 import withData from './Pagination/withData';
-import withNavigation from './Pagination/withDefaultNavigation';
-import withRowsPerPageSelector from './Pagination/withRowsPerPageSelector';
-import SortLabelWrapper from './SortLabelWrapper.component';
-import { directions, placements } from '../../../DataTable/d2UiReactAdapters/componentGetters/sortLabel.const';
+import withNavigation from '../../../Pagination/withDefaultNavigation';
+import withRowsPerPageSelector from '../../../Pagination/withRowsPerPageSelector';
+import SortLabelWrapper from '../../../DataTable/SortLabelWrapper.component';
+import { directions, placements } from '../../../d2UiReactAdapters/dataTable/componentGetters/sortLabel.const';
 
 // $FlowSuppress
 const { Table, Row, Cell, HeaderCell, Head, Body } = getTableComponents(basicTableAdapter);
@@ -72,7 +72,7 @@ const styles = theme => ({
     },
     headerCell: {
         fontSize: theme.typography.pxToRem(12),
-        color: theme.palette.text.primary,
+        color: theme.palette.text.secondary,
         fontWeight: theme.typography.fontWeightMedium,
     },
     paginationContainer: {
@@ -81,6 +81,14 @@ const styles = theme => ({
         fontWeight: theme.typography.fontWeightMedium,
         display: 'flex',
         justifyContent: 'flex-end',
+    },
+    sortLabelChilden: {
+        '&:focus': {
+            color: theme.palette.text.primary,
+        },
+        '&:hover': {
+            color: theme.palette.text.primary,
+        },
     },
 });
 
@@ -108,6 +116,7 @@ type Props = {
         bodyCell: string,
         footerCell: string,
         row: string,
+        sortLabelChilden: string,
     },
     sortById: string,
     sortByDirection: string,
@@ -156,6 +165,7 @@ class EventsList extends Component<Props> {
                         }
                         direction={sortByDirection}
                         onSort={this.getSortHandler(column.id)}
+                        childrenClass={this.props.classes.sortLabelChilden}
                     >
                         {column.header}
                     </SortLabelWrapper>
@@ -289,4 +299,8 @@ class EventsList extends Component<Props> {
     }
 }
 
+/**
+ * Create the event list for a event capture program
+ * @namespace EventsList
+ */
 export default withStyles(styles)(EventsList);

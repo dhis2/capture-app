@@ -2,7 +2,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import { directions, placements } from './sortLabel.const';
-import type { TableClasses } from '../../d2Ui/getTableComponents';
+import type { TableClasses } from '../../../d2Ui/dataTable/getTableComponents';
 
 type Props = {
     children?: ?React.Node,
@@ -11,7 +11,12 @@ type Props = {
     direction?: ?$Values<typeof directions>,
     placement?: ?$Values<typeof placements>,
     onSort: (direction: $Values<typeof directions>) => void,
-    onGetIcons?: ?(isActive: boolean, direction?: ?$Values<typeof directions>, onSort: (direction: $Values<typeof directions>) => void) => void,
+    onGetIcons?: ?(
+        isActive: boolean,
+        direction?: ?$Values<typeof directions>,
+        onSort: (direction: $Values<typeof directions>) => void)
+    => void,
+    childrenClass?: ?string,
 };
 
 export default (defaultClasses: TableClasses) =>
@@ -27,10 +32,11 @@ export default (defaultClasses: TableClasses) =>
             }
         }
 
-        renderChildrenContainer(classes?: ?Array<string>) {
+        renderChildrenContainer(classes: Array<string>) {
             return (
                 <div
-                    className={classNames(defaultClasses.sortLabelChildren, classes)}
+                    // $FlowSuppress
+                    className={classNames(defaultClasses.sortLabelChildren, this.props.childrenClass, classes)}
                     onClick={this.handleSort}
                     role="button"
                     tabIndex={0}
@@ -41,7 +47,7 @@ export default (defaultClasses: TableClasses) =>
         }
 
         render() {
-            const { children, isActive, direction, onSort, onGetIcons, placement } = this.props;
+            const { children, isActive, direction, onSort, onGetIcons, placement } = this.props; // eslint-disable-line
             const icons = onGetIcons && onGetIcons(isActive, direction, onSort);
             const containerClasses = classNames(
                 defaultClasses.sortLabelContainer,

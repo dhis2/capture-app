@@ -1,8 +1,8 @@
 // @flow
 /**
- * @namespace test
- * @module getTableComponents
+ * @module d2-ui/dataTable/getTableComponents
  */
+
 import defaultTableClasses from './table.mod.css';
 import type { Adapter, ComponentCreators } from './types';
 
@@ -60,14 +60,17 @@ const getComponentsOrdered =
 /**
  * retrieve the table components specified by the adapter
  * @export
- * @param {Adapter} adapter: contains methods for creating the components as well as an optional creation order
+ * @param {Adapter} adapter contains methods for creating the components as well as an optional creation order
  * @returns {*} components
  */
-const getTableComponents = (adapter: Adapter) => {
+function getTableComponents(adapter: Adapter) {
     const components = adapter.creationOrder ?
         getComponentsOrdered(adapter) :
         getComponentsUnordered(adapter);
     return components;
-};
+}
 
+/**
+ * @see getTableComponents
+ */
 export default getTableComponents;

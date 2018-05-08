@@ -3,7 +3,6 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-restricted-syntax */
 import log from 'loglevel';
-import isDefined from 'd2-utilizr/src/isDefined';
 import isFunction from 'd2-utilizr/src/isFunction';
 import isArray from 'd2-utilizr/src/isArray';
 

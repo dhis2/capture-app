@@ -1,4 +1,7 @@
 // @flow
+/**
+ * @namespace Pagination
+ */
 import * as React from 'react';
 import { withStyles } from 'material-ui-next/styles';
 
@@ -25,7 +28,6 @@ type Props = {
     },
     theme: Theme,
 };
-
 const getNavigation = (InnerComponent: React.ComponentType<any>) =>
     class PaginationNavigation extends React.Component<Props> {
         handleFirstPageButtonClick = () => {
@@ -95,6 +97,13 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
         }
     };
 
+/**
+ * Add navigation elements to the inner component
+ * @returns React Component
+ * @alias withDefaultNavigation
+ * @memberof Pagination
+ * @example withDefaultNavigation()([InnerComponent])
+*/
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         withStyles(styles, { withTheme: true })(getNavigation(InnerComponent));
