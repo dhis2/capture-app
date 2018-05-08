@@ -6,6 +6,7 @@ export const actionTypes = {
     MAIN_SELECTIONS_COMPLETED: 'MainSelectionsCompleted',
     WORKING_LIST_DATA_RETRIEVED: 'WorkingListDataRetrieved',
     WORKING_LIST_DATA_RETRIEVAL_FAILED: 'WorkingListDataRetrievalFailed',
+    ORG_UNIT_DATA_RETRIVED: 'OrgUnitDataRetrived',
 };
 
 export const updateMainSelections =
@@ -19,3 +20,6 @@ export const workingListInitialDataRetrieved =
 
 export const workingListInitialRetrievalFailed =
     (errorMessage: string) => actionCreator(actionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED)(errorMessage);
+
+export const orgUnitDataRetrived =
+    (orgUnit: Object) => actionCreator(actionTypes.ORG_UNIT_DATA_RETRIVED)(orgUnit);

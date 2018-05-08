@@ -36,13 +36,6 @@
                 "peerDependencies": true
             }
         ],
-        "max-len": [
-            "warn",
-            {
-                "code": 120,
-                "ignoreStrings": true
-            }
-        ],
         "react/sort-comp": [
             2,
             {
