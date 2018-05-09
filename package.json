@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "private": false,
   "dependencies": {
-    "@dhis2/d2-ui-core": "^1.0.2",
-    "@dhis2/d2-ui-forms": "^1.0.1",
-    "@dhis2/d2-ui-header-bar": "^1.0.2",
+    "@dhis2/d2-ui-core": "1",
+    "@dhis2/d2-ui-forms": "1",
+    "@dhis2/d2-ui-header-bar": "1",
     "@material-ui/icons": "^1.0.0-beta.43",
     "@redux-offline/redux-offline": "^2.3.3",
     "classnames": "^2.2.5",
