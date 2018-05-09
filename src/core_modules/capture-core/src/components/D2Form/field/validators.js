@@ -1,5 +1,5 @@
 // @flow
-import { Validators } from '@dhis2/d2-ui-core';
+import { Validators } from '@dhis2/d2-ui-forms';
 import isArray from 'd2-utilizr/src/isArray';
 import isString from 'd2-utilizr/src/isString';
 
