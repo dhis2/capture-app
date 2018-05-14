@@ -1,9 +1,15 @@
 #FLOW-TYPED
 to install libdefs: 
-npm install flow-bin
 flow-typed install --libdefDir fromReactScripts
 move folders to flow-typed directory
 
 #MATERIAL-UI
 yarn add material-ui
 yarn add material-ui-next@npm:material-ui@next
+
+TASKS:
+- remove old material ui dependency (and use other components where these are used)
+    temporary manual updates:
+        - @material-ui/icons/utils/createSvgIcon line 15
+        - material-ui-next/styles/createGenerateClassName: Remove line 75-77 (also: d2-header-bar/node-modules...)
+- switch to the new d2 translation package

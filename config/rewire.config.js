@@ -7,6 +7,7 @@ const webpack = require('webpack');
 const path = require('path');
 const fs = require('fs');
 const customAlias = require('./alias.config');
+const getCssMod = require('./cssMod.config');
 
 const isDevBuild = process.argv[1].indexOf('start.js') !== -1;
 
@@ -136,14 +137,9 @@ function rewireAliases(config) {
 }
 
 function rewireModules(config){
-    /*
-    const jqueryLoader = {
-        test: require.resolve('jquery'),
-        loader: "expose-loader?jQuery!expose-loader?$"
-    };
-
-    config.module.rules.push(jqueryLoader);
-    */
+    // TODO: Temporary, probably isn't needed whenever create-react-app is updated to v2
+    const cssMod = getCssMod(isDevBuild);
+    config.module.rules[1].oneOf.splice(0, 0, cssMod);
     return config;
 }
 

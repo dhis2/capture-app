@@ -7,11 +7,21 @@ import getStageFromEvent from '../../../../metaData/helpers/getStageFromEvent';
 import { convertMainEvent } from '../../../../events/mainEventConverter';
 import { convertValue } from '../../../../converters/clientToList';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
+import { mainPropertyNames } from './getColumnsConfiguration';
+import elementTypeKeys from '../../../../metaData/DataElement/elementTypes';
 
 type EventContainer = {
     event: Event,
     eventValues: { [key: string]: any },
 };
+
+type ColumnOrderFromState = {
+    id: string,
+    visible: boolean,
+    isMainProperty?: ?boolean,
+};
+
+type ColumnsOrderFromState = Array<ColumnOrderFromState>;
 
 // #HEADERS
 const programIdSelector = state => state.currentSelections.programId;
@@ -20,7 +30,7 @@ const columnsOrderStateSelector = state => state.workingListsColumnsOrder.main;
 export const makeColumnsSelector = () => createSelector(
     programIdSelector,
     columnsOrderStateSelector,
-    (programId, columnsOrderFromState) => {
+    (programId, columnsOrderFromState: ColumnsOrderFromState) => {
         const stageContainer = getStageFromProgramIdForEventProgram(programId);
         if (stageContainer.error) {
             return columnsOrderFromState;
@@ -31,6 +41,17 @@ export const makeColumnsSelector = () => createSelector(
 
         return columnsOrderFromState
             .map((column) => {
+                if (column.isMainProperty) {
+                    if (column.id === mainPropertyNames.EVENT_DATE) {
+                        return {
+                            ...column,
+                            header: stage.getLabel(mainPropertyNames.EVENT_DATE),
+                            type: elementTypeKeys.DATE,
+                        };
+                    }
+                    // fallback
+                    return columnsOrderFromState;
+                }
                 const element = stage.getElement(column.id);
                 return {
                     ...column,

@@ -44,3 +44,11 @@ declare module 'material-ui-next/styles/colorManipulator' {
 declare module 'material-ui-next/IconButton' {
     declare module.exports: any;
 }
+
+declare module 'material-ui-next/Tooltip' {
+    declare module.exports: any;
+}
+
+declare module 'material-ui-next/CssBaseline' {
+    declare module.exports: any;
+}

@@ -23,9 +23,11 @@ export default class RenderFoundation {
     _description: ?string;
     _programId: string;
     _sections: Map<string, Section>;
+    _labels: { [key: string]: string };
 
-    constructor(initFn: ?(_this: Stage) => void) {
+    constructor(initFn: ?(_this: RenderFoundation) => void) {
         this._sections = new Map();
+        this._labels = {};
         initFn && isFunction(initFn) && initFn(this);
     }
 
@@ -61,7 +63,15 @@ export default class RenderFoundation {
         return this._sections;
     }
 
-    addSection(newSection: section) {
+    addLabel({ id, label }: { id: string, label: string }) {
+        this._labels[id] = label;
+    }
+
+    getLabel(id: string) {
+        return this._labels[id];
+    }
+
+    addSection(newSection: Section) {
         this._sections.set(newSection.id, newSection);
     }
 
@@ -85,10 +95,11 @@ export default class RenderFoundation {
     getElementsById(): {[id: string]: DataElement} {
         return Array.from(this.sections.entries()).map(entry => entry[1])
             .reduce((accElements, section) => {
-                const elementsInSection = Array.from(section.elements.entries()).reduce((accElementsInSection, elementEntry) => {
-                    accElementsInSection[elementEntry[0]] = elementEntry[1];
-                    return accElementsInSection;
-                }, {});
+                const elementsInSection =
+                    Array.from(section.elements.entries()).reduce((accElementsInSection, elementEntry) => {
+                        accElementsInSection[elementEntry[0]] = elementEntry[1];
+                        return accElementsInSection;
+                    }, {});
                 return { ...accElements, ...elementsInSection };
             }, {});
     }
@@ -103,12 +114,13 @@ export default class RenderFoundation {
                 return this.convertObjectValues(values, onConvert);
             }
 
-            log.error(errorCreator(Stage.errorMessages.CONVERT_VALUES_STRUCTURE)({ values }));
+            log.error(errorCreator(RenderFoundation.errorMessages.CONVERT_VALUES_STRUCTURE)({ values }));
         }
         return values;
     }
 
     convertArrayValues(arrayOfValues: Array<ValuesType>, onConvert: ConvertFn) {
+        // $FlowSuppress
         return arrayOfValues.map((values: ValuesType) => this.convertObjectValues(values, onConvert));
     }
 
@@ -123,31 +135,6 @@ export default class RenderFoundation {
     }
 
     /*
-    convertValueKeysFromCodeNameToId(values: ?Object): ?Object {
-        if (values) {
-            const valuesWithIdKey = {};
-            this.elements.forEach((element: element) => {
-                // $FlowSuppress
-                if (isDefined(values[element.codeName])) {
-                    valuesWithIdKey[element.id] = values[element.codeName];
-                }
-            });
-            return valuesWithIdKey;
-        }
-        return values;
-    }
-
-    convertValueKeysFromIdToCodeName(values: ?Object): ?Object {
-        if (values) {
-            return Object.keys(values).reduce((inProgressValues, key) => {
-                const element = this.getElement(key);
-                // $FlowSuppress
-                return (element ? Object.assign(inProgressValues, { [element.codeName]: values[key] }) : inProgressValues);
-            }, {});
-        }
-        return values;
-    }
-
     convertDynamicOptionSets(dynamicOptionSets: ?dynamicOptionSetsType,
         typeConverters: {[type: $Keys<typeof elementTypeConstants>]: (rawValue: any, metaDataElement: element) => any},
         keyForValueToConvertInOption: string,

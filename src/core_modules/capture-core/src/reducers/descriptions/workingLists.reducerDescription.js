@@ -37,12 +37,8 @@ export const workingListsMetaDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
 
-        // newState.main = action.payload.pagingData;
-
         newState.main = {
-            rowsPerPage: 1,
-            rowsCount: 3,
-            currentPage: 1,
+            ...action.payload.pagingData,
             sortById: 'eventDate',
             sortByDirection: 'desc',
         };
@@ -51,8 +47,7 @@ export const workingListsMetaDesc = createReducerDescription({
     },
     [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
-        // const rowsCount = action.payload.rowsCount;
-        const rowsCount = 3;
+        const rowsCount = action.payload.pagingData.rowsCount;
         newState.main = { ...newState.main, rowsCount };
         return newState;
     },
@@ -65,13 +60,13 @@ export const workingListsMetaDesc = createReducerDescription({
     [eventsListActionTypes.SORT_WORKING_LIST]: (state, action) => {
         const newState = { ...state };
         const { id, direction } = action.payload;
-        newState.main = { ...newState.main, sortById: id, sortByDirection: direction };
+        newState.main = { ...newState.main, sortById: id, sortByDirection: direction, currentPage: 1 };
         return newState;
     },
     [paginationActionTypes.CHANGE_ROWS_PER_PAGE]: (state, action) => {
         const newState = { ...state };
         const rowsPerPage = action.payload;
-        newState.main = { ...newState.main, rowsPerPage };
+        newState.main = { ...newState.main, rowsPerPage, currentPage: 1 };
         return newState;
     },
 }, 'workingListsMeta');
@@ -85,6 +80,16 @@ export const workingListsUIDesc = createReducerDescription({
         return newState;
     },
     [paginationActionTypes.CHANGE_PAGE]: (state, action) => {
+        const newState = { ...state };
+
+        newState.main = {
+            ...newState.main,
+            isLoading: true,
+        };
+
+        return newState;
+    },
+    [paginationActionTypes.CHANGE_ROWS_PER_PAGE]: (state, action) => {
         const newState = { ...state };
 
         newState.main = {

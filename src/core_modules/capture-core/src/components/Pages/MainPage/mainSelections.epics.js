@@ -3,7 +3,6 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/filter';
 import { getApi } from '../../../d2/d2Instance';
-
 import { actionTypes, mainSelectionCompleted, orgUnitDataRetrived } from './mainSelections.actions';
 
 type InputObservable = rxjs$Observable<ReduxAction<any, any>>;

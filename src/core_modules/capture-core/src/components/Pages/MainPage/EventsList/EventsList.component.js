@@ -2,6 +2,9 @@
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui-next/styles';
 import { darken, fade, lighten } from 'material-ui-next/styles/colorManipulator';
+import SettingsIcon from '@material-ui/icons/Settings';
+import FileDownloadIcon from '@material-ui/icons/FileDownload';
+import IconButton from 'material-ui-next/IconButton';
 
 import classNames from 'classnames';
 
@@ -9,19 +12,19 @@ import { getTranslation } from '../../../../d2/d2Instance';
 import { formatterOptions } from '../../../../utils/string/format.const';
 import elementTypes from '../../../../metaData/DataElement/elementTypes';
 
-import getTableComponents from '../../../DataTable/d2Ui/getTableComponents';
-import basicTableAdapter from '../../../DataTable/d2UiReactAdapters/basicTable.adapter';
-import paginationAdapter from '../../../DataTable/d2UiReactAdapters/pagination.adapter';
+import getTableComponents from '../../../d2Ui/dataTable/getTableComponents';
+import basicTableAdapter from '../../../d2UiReactAdapters/dataTable/basicTable.adapter';
+import paginationAdapter from '../../../d2UiReactAdapters/dataTable/pagination.adapter';
 import LoadingMask from '../../../LoadingMasks/LoadingMask.component';
 
 import withData from './Pagination/withData';
-import withNavigation from './Pagination/withDefaultNavigation';
-import withRowsPerPageSelector from './Pagination/withRowsPerPageSelector';
-import SortLabelWrapper from './SortLabelWrapper.component';
-import { directions, placements } from '../../../DataTable/d2UiReactAdapters/componentGetters/sortLabel.const';
+import withNavigation from '../../../Pagination/withDefaultNavigation';
+import withRowsPerPageSelector from '../../../Pagination/withRowsPerPageSelector';
+import SortLabelWrapper from '../../../DataTable/SortLabelWrapper.component';
+import { directions, placements } from '../../../d2UiReactAdapters/dataTable/componentGetters/sortLabel.const';
 
 // $FlowSuppress
-const { Table, Row, Cell, HeaderCell, Head, Body, Footer } = getTableComponents(basicTableAdapter);
+const { Table, Row, Cell, HeaderCell, Head, Body } = getTableComponents(basicTableAdapter);
 // $FlowSuppress
 const { Pagination } = getTableComponents(paginationAdapter);
 
@@ -34,6 +37,23 @@ const styles = theme => ({
         display: 'flex',
         justifyContent: 'center',
     },
+    container: {
+        borderColor: theme.palette.type === 'light'
+            ? lighten(fade(theme.palette.divider, 1), 0.88)
+            : darken(fade(theme.palette.divider, 1), 0.8),
+        borderWidth: '1px',
+        borderStyle: 'solid',
+    },
+    topBarContainer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+    },
+    tableContainer: {
+        overflow: 'auto',
+    },
+    optionsIcon: {
+        color: theme.palette.primary.main,
+    },
     table: {},
     row: {},
     cell: {
@@ -44,8 +64,7 @@ const styles = theme => ({
         },
         borderBottomColor: theme.palette.type === 'light'
             ? lighten(fade(theme.palette.divider, 1), 0.88)
-            : darken(fade(theme.palette.divider, 1), 0.8)
-        ,
+            : darken(fade(theme.palette.divider, 1), 0.8),
     },
     bodyCell: {
         fontSize: theme.typography.pxToRem(13),
@@ -56,10 +75,20 @@ const styles = theme => ({
         color: theme.palette.text.secondary,
         fontWeight: theme.typography.fontWeightMedium,
     },
-    footerCell: {
+    paginationContainer: {
         fontSize: theme.typography.pxToRem(12),
         color: theme.palette.text.secondary,
         fontWeight: theme.typography.fontWeightMedium,
+        display: 'flex',
+        justifyContent: 'flex-end',
+    },
+    sortLabelChilden: {
+        '&:focus': {
+            color: theme.palette.text.primary,
+        },
+        '&:hover': {
+            color: theme.palette.text.primary,
+        },
     },
 });
 
@@ -76,12 +105,18 @@ type Props = {
     isLoading: boolean,
     classes: {
         loaderContainer: string,
+        container: string,
+        topBarContainer: string,
+        tableContainer: string,
+        paginationContainer: string,
+        optionsIcon: string,
         table: string,
         cell: string,
         headerCell: string,
         bodyCell: string,
         footerCell: string,
         row: string,
+        sortLabelChilden: string,
     },
     sortById: string,
     sortByDirection: string,
@@ -130,6 +165,7 @@ class EventsList extends Component<Props> {
                         }
                         direction={sortByDirection}
                         onSort={this.getSortHandler(column.id)}
+                        childrenClass={this.props.classes.sortLabelChilden}
                     >
                         {column.header}
                     </SortLabelWrapper>
@@ -172,7 +208,11 @@ class EventsList extends Component<Props> {
                             key={column.id}
                             className={classNames(this.props.classes.cell, this.props.classes.bodyCell)}
                         >
-                            {row[column.id]}
+                            <div
+                                style={EventsList.typesWithRightPlacement.includes(column.type) ? { textAlign: 'right' } : null}
+                            >
+                                {row[column.id]}
+                            </div>
                         </Cell>
                     ));
 
@@ -208,33 +248,59 @@ class EventsList extends Component<Props> {
                 .filter(column => column.visible) : [];
 
         return (
-            <div>
-                <Table
-                    className={classes.table}
+            <div
+                className={classes.container}
+            >
+                <div
+                    className={classes.topBarContainer}
                 >
-                    <Head>
-                        {this.renderHeaderRow(visibleColumns)}
-                    </Head>
-                    <Body>
-                        {this.renderRows(visibleColumns)}
-                    </Body>
-                    <Footer>
-                        <Row>
-                            <Cell
-                                colSpan={3}
-                                className={classNames(this.props.classes.cell, this.props.classes.footerCell)}
-                            >
-                                <EventListPagination
-                                    rowsCountSelectorLabel={'Rows per page'}
-                                    onGetLabelDisplayedRows={this.getPaginationLabelDisplayedRows}
-                                />
-                            </Cell>
-                        </Row>
-                    </Footer>
-                </Table>
+                    <div>
+                        {'{{filters}}'}
+                    </div>
+                    <div>
+                        <IconButton>
+                            <SettingsIcon
+                                className={classes.optionsIcon}
+                                onClick={() => { alert('not implemented yet'); }}
+                            />
+                        </IconButton>
+                        <IconButton>
+                            <FileDownloadIcon
+                                className={classes.optionsIcon}
+                                onClick={() => { alert('not implemented yet'); }}
+                            />
+                        </IconButton>
+                    </div>
+                </div>
+                <div
+                    className={classes.tableContainer}
+                >
+                    <Table
+                        className={classes.table}
+                    >
+                        <Head>
+                            {this.renderHeaderRow(visibleColumns)}
+                        </Head>
+                        <Body>
+                            {this.renderRows(visibleColumns)}
+                        </Body>
+                    </Table>
+                </div>
+                <div
+                    className={classes.paginationContainer}
+                >
+                    <EventListPagination
+                        rowsCountSelectorLabel={getTranslation('rows_per_page', formatterOptions.CAPITALIZE_FIRST_LETTER)}
+                        onGetLabelDisplayedRows={this.getPaginationLabelDisplayedRows}
+                    />
+                </div>
             </div>
         );
     }
 }
 
+/**
+ * Create the event list for a event capture program
+ * @namespace EventsList
+ */
 export default withStyles(styles)(EventsList);

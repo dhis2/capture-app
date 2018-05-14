@@ -8,6 +8,10 @@
 
 # production
 /build
+/buildzip
+
+# docs
+/docs
 
 # flow
 /flow-typed

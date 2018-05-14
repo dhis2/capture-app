@@ -35,7 +35,7 @@ function setLogLevel() {
 }
 
 async function initializeManifest() {
-    const manifest = await getManifest('/manifest.webapp');
+    const manifest = await getManifest('manifest.webapp');
     const baseUrl = manifest.getBaseUrl();
     config.baseUrl = `${baseUrl}/api`;
     log.info(`Loading: ${manifest.name} v${manifest.version}`);

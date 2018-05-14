@@ -1,4 +1,8 @@
 // @flow
+/**
+ * @module rulesEngineActionsCreatorForEvent
+ */
+
 import { ensureState } from 'redux-optimistic-ui';
 
 import RulesEngine from '../RulesEngine/RulesEngine';
@@ -111,7 +115,7 @@ function getDataElements(program: Program) {
     return getRulesEngineDataElementsAsObject(dataElements);
 }
 
-/**
+/*
  * concatenate fieldsValidation from sections 
  * 
  * @param {Object} sectionsFieldsUI
@@ -134,12 +138,10 @@ function getFieldsValidationForForm(sectionsFieldsUI: Object, formId: string) {
     return fieldsValidation;
 }
 
-/**
+/*
  * get valid form data based on fieldsValidation
- * 
- * @param {{ [key: string]: any }} formData
- * @param {{ [key: string]: boolean }} fieldsValidation
- * @returns
+ * @param {Object} formValues
+ * @param {Object} fieldsValidation
  */
 function getValidFormValues(formValues: { [key: string]: any }, fieldsValidation: { [key: string]: boolean }) {
     return Object.keys(formValues)
@@ -150,12 +152,10 @@ function getValidFormValues(formValues: { [key: string]: any }, fieldsValidation
         }, {});
 }
 
-/**
+/*
  * convert form values to client values
- * 
- * @param {{[key: string]: any}} formValues
+ * @param {Object} formValues
  * @param {RenderFoundation} renderFoundation
- * @returns
  */
 function convertFormValuesToClientValues(formValues: {[key: string]: any}, renderFoundation: RenderFoundation) {
     return convertFormValuesToClient(formValues, renderFoundation);
@@ -494,6 +494,9 @@ function getRulesActions(
     return createRulesEffectsActions(rulesEffects, formId, eventId, dataEntryId, foundation);
 }
 
+/**
+ * run rules for a data entry (event) and return Redux actions based on the rulesEffects. This method is run on load
+ */
 export function getRulesActionsOnLoad(
     currentEventId: string,
     state: ReduxState,
@@ -503,6 +506,9 @@ export function getRulesActionsOnLoad(
     return getRulesActions(currentEventId, state, formId, dataEntryId, null, true);
 }
 
+/**
+ * run rules for a data entry (event) and return Redux actions based on the rulesEffects. This method is run on update
+ */
 export function getRulesActionsOnUpdate(
     currentEventId: string,
     state: ReduxState,

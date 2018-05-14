@@ -83,6 +83,12 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
+/**
+ * Updates the redux state if the main selections url parameters (programId, orgUnitId) are not in sync with the state.
+ * @alias withSelectionsUpdater
+ * @memberof MainPage
+ * @example withSelectionsUpdater()(MainPage)
+ */
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         connect(mapStateToProps, mapDispatchToProps)(getMainPage(InnerComponent));

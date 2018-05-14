@@ -10,7 +10,7 @@ import type { HashHistory } from 'history/createHashHistory';
 import environments from 'capture-core/constants/environments';
 
 // TEST
-import { startEnrollmentLoad } from 'capture-core/actions/__TEMP__/enrollment.actions';
+// import { startEnrollmentLoad } from 'capture-core/actions/__TEMP__/enrollment.actions';
 // END TEST
 
 import App from '../components/App/App.component';
