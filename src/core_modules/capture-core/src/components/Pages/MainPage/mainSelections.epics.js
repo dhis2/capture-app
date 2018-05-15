@@ -2,21 +2,32 @@
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/filter';
-import { getApi } from '../../../d2/d2Instance';
-import { actionTypes, mainSelectionCompleted, orgUnitDataRetrived } from './mainSelections.actions';
+import { getApi, getTranslation } from '../../../d2/d2Instance';
+import {
+    actionTypes,
+    mainSelectionCompleted,
+    orgUnitDataRetrived,
+    setCurrentOrgUnitBasedOnUrl,
+    errorRetrievingOrgUnitBasedOnUrl,
+    invalidOrgUnitFromUrl,
+    setEmptyOrgUnitBasedOnUrl,
+    validSelectionsFromUrl,
+    invalidSelectionsFromUrl,
+} from './mainSelections.actions';
+import programCollection from '../../../metaDataMemoryStores/programCollection/programCollection';
 
 type InputObservable = rxjs$Observable<ReduxAction<any, any>>;
 
 export const mainSelectionsCompletedEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(actionTypes.UPDATE_MAIN_SELECTIONS)
+    action$.ofType(actionTypes.UPDATE_MAIN_SELECTIONS, actionTypes.VALID_SELECTIONS_FROM_URL)
         .filter(() => {
             const { programId, orgUnitId } = store.getState().currentSelections;
             return programId && orgUnitId;
         })
         .map(() => mainSelectionCompleted());
 
-export const orgUnitDataRetrivedEpic = (action$: InputObservable, store: ReduxStore) =>
+export const orgUnitDataRetrivedEpic = (action$: InputObservable) =>
     // $FlowSuppress
     action$.ofType(actionTypes.UPDATE_MAIN_SELECTIONS)
         .filter((action) => {
@@ -26,3 +37,35 @@ export const orgUnitDataRetrivedEpic = (action$: InputObservable, store: ReduxSt
         .switchMap(action => getApi()
             .get(`organisationUnits/${action.payload.orgUnitId}`)
             .then(response => orgUnitDataRetrived({ id: response.id, name: response.displayName })));
+
+// Url-Specific
+
+export const mainSelectionsFromUrlGetOrgUnitDataEpic = (action$: InputObservable) =>
+    // $FlowSuppress
+    action$.ofType(actionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL)
+        .filter(action => action.payload.orgUnitId)
+        .switchMap(action => getApi()
+            .get(`organisationUnits/${action.payload.orgUnitId}`)
+            .then(response => setCurrentOrgUnitBasedOnUrl({ id: response.id, name: response.displayName }),
+            )
+            .catch(() =>
+                errorRetrievingOrgUnitBasedOnUrl(getTranslation('could_not_get_organisation_unit')),
+            ),
+        );
+
+export const mainSelectionsFromUrlEmptyOrgUnitEpic = (action$: InputObservable) =>
+    // $FlowSuppress
+    action$.ofType(actionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL)
+        .filter(action => !action.payload.orgUnitId)
+        .map(() => setEmptyOrgUnitBasedOnUrl());
+
+export const mainSelectionsFromUrlValidationEpic = (action$: InputObservable, store: ReduxStore) =>
+    // $FlowSuppress
+    action$.ofType(actionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL, actionTypes.SET_ORG_UNIT_BASED_ON_URL)
+        .map(() => {
+            const { programId } = store.getState().currentSelections;
+            if (programId && !programCollection.has(programId)) {
+                return invalidSelectionsFromUrl(getTranslation('program_doesnt_exist'));
+            }
+            return validSelectionsFromUrl();
+        });

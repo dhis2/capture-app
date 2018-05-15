@@ -12,6 +12,10 @@ import type { HashHistory } from 'history/createHashHistory';
 
 import FeedbackBar from 'capture-core/components/FeedbackBar/FeedbackBar.container';
 
+// urlParamSync
+import withAppUrlSync from 'capture-core/components/App/withAppUrlSync';
+import withUrlSync from 'capture-core/components/UrlSync/withUrlSync';
+
 // d2-ui
 import { LoadingMask } from '@dhis2/d2-ui-core';
 import AppContents from './AppContents.component';
@@ -23,9 +27,16 @@ import withStateBoundLoadingIndicator from 'capture-core/HOC/withStateBoundLoadi
 import legacyTheme from '../../styles/uiThemeLegacy';
 import theme from '../../styles/uiTheme';
 
-const D2AppContents = withD2InContext()(AppContents);
-const D2AppContentsLoader = withStateBoundLoadingIndicator((state: ReduxState) => state.app.ready)(D2AppContents);
-const D2AppContentsLoaderBlockAvoider = withRouter(D2AppContentsLoader);
+const AppContentsOutOfSyncLoadingIndicator = withStateBoundLoadingIndicator(
+    (state: ReduxState, props: any) => !props.urlOutOfSync)(AppContents);
+const AppContentsUrlParamSync = withUrlSync(
+    (props: Object) => props.syncSpecification
+)(AppContentsOutOfSyncLoadingIndicator);
+const AppContentsUrlParam = withAppUrlSync()(AppContentsUrlParamSync);
+const AppContentsD2Context = withD2InContext()(AppContentsUrlParam);
+const AppContentsInitLoadingIndicator = withStateBoundLoadingIndicator(
+    (state: ReduxState, props: any) => state.app.initDone)(AppContentsD2Context);
+const AppContentsRouterLoader = withRouter(AppContentsInitLoadingIndicator);
 
 type Props = {
     store: ReduxStore,
@@ -49,7 +60,8 @@ class App extends React.Component<Props> {
                             <MuiThemeProvider
                                 theme={theme}
                             >
-                                <D2AppContentsLoaderBlockAvoider />
+                                <AppContentsRouterLoader
+                                />
                                 <FeedbackBar />
                             </MuiThemeProvider>
                         </LegacyMuiThemeProvider>

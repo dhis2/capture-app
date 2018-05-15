@@ -6,7 +6,7 @@ export const appReducerDesc = createReducerDescription({
     [entryActionTypes.STARTUP_DATA_LOADED]: (state, action) => {
         const newState = { ...state };
         newState.someRandomData = action.payload;
-        newState.ready = true;
+        newState.initDone = true;
         return newState;
     },
 }, 'app');
