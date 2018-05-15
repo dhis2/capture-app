@@ -21,14 +21,6 @@ import { startupDataLoad } from './entry.actions';
 const DOM_ID = 'app';
 
 async function runApp(domElement: HTMLElement, store: ReduxStore, history: HashHistory) {
-    render(
-        <App
-            store={store}
-            history={history}
-        />,
-        domElement,
-    );
-
     try {
         await initialize();
         store.dispatch(startupDataLoad());
@@ -36,6 +28,13 @@ async function runApp(domElement: HTMLElement, store: ReduxStore, history: HashH
         // START TEST
         // store.dispatch(startEnrollmentLoad());
         // END TEST
+        render(
+            <App
+                store={store}
+                history={history}
+            />,
+            domElement,
+        );
     } catch (error) {
         log.error(error);
         let message = 'The application could not be loaded.';
