@@ -9,6 +9,10 @@ import { MenuItem } from 'material-ui-next/Menu';
 import { FormControl } from 'material-ui-next/Form';
 import { InputLabel } from 'material-ui-next/Input';
 import Paper from 'material-ui-next/Paper';
+import IconButton from 'material-ui-next/IconButton';
+import ClearIcon from 'material-ui-icons/Clear';
+
+import { getTranslation } from '../../d2/d2Instance';
 
 const styles = () => ({
     paper: {
@@ -23,6 +27,32 @@ const styles = () => ({
         backgroundColor: '#ffffff',
         borderRadius: 5,
         margin: 5,
+    },
+    selectedText: {
+        margin: 0,
+        padding: 5,
+        borderLeft: '2px solid #71a4f8',
+        marginLeft: 5,
+    },
+    selectedPaper: {
+        backgroundColor: '#f6f6f6',
+        borderRadius: 5,
+        paddingBottom: 5,
+    },
+    selectedTitle: {
+        padding: 5,
+        margin: 0,
+        fontWeight: 425,
+        fontSize: 15,
+    },
+    selectedButton: {
+        float: 'right',
+        width: 20,
+        height: 20,
+    },
+    selectedButtonIcon: {
+        width: 20,
+        height: 20,
     },
 });
 
@@ -53,6 +83,29 @@ class ProgramSelector extends Component<Props> {
     // TODO: Add support for cat-combos.
     render() {
         const programsArray = Array.from(programs.values());
+
+        // If program is set in Redux state.
+        if (this.props.selectedProgram) {
+            let selectedProgram = {};
+            for (let i = 0; i < programsArray.length; i++) {
+                // Get full program object based on id from this.props.selectedProgram.
+                if (programsArray[i].id === this.props.selectedProgram) {
+                    selectedProgram = programsArray[i];
+                }
+            }
+            return (
+                <div>
+                    <Paper elevation={1} className={this.props.classes.selectedPaper}>
+                        <h4 className={this.props.classes.selectedTitle}>{ getTranslation('selected_program') }</h4>
+                        <p className={this.props.classes.selectedText}>{selectedProgram.name}
+                            <IconButton className={this.props.classes.selectedButton}>
+                                <ClearIcon className={this.props.classes.selectedButtonIcon} />
+                            </IconButton>
+                        </p>
+                    </Paper>
+                </div>
+            );
+        }
         // If less than or equal, display as list.
         if (programsArray.length <= 5) {
             return (

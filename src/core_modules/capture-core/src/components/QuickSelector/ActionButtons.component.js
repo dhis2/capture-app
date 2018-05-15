@@ -49,7 +49,7 @@ class ActionButtons extends Component<Props> {
                         color="primary"
                         className={this.props.classes.leftButton}
                     >
-                        { getTranslation('reset') }
+                        { getTranslation('start_again') }
                     </Button>
                 </div>
             );
@@ -61,7 +61,7 @@ class ActionButtons extends Component<Props> {
                     color="primary"
                     className={this.props.classes.leftButton}
                 >
-                    { getTranslation('reset') }
+                    { getTranslation('start_again') }
                 </Button>
                 <Button
                     onClick={this.handleClick}
