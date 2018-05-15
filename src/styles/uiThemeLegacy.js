@@ -1,17 +1,18 @@
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { fade } from 'material-ui/utils/colorManipulator';
-import {
-    blue500,
-    blue700,
-    blue900,
-    grey100,
-    grey200,
-    grey300,
-    grey500,
-    white,
-    darkBlack,
-    fullBlack,
-} from 'material-ui/styles/colors';
+import blue from '@material-ui/core/colors/blue';
+import grey from '@material-ui/core/colors/grey';
+import common from '@material-ui/core/colors/common';
+const blue500 = blue['500'];
+const blue700 = blue['700'];
+const blue900 = blue['900'];
+const grey100 = grey['100'];
+const grey200 = grey['200'];
+const grey300 = grey['300'];
+const grey500 = grey['500'];
+const white = common.white;
+const darkBlack = common.darkBlack;
+const fullBlack = common.fullBlack;
 
 export default getMuiTheme({
     palette: {
