@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable complexity */
 import * as React from 'react';
-import { withStyles } from 'material-ui-next/styles';
+import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
 const styles = (theme: Theme) => ({

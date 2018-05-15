@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui-next/styles';
-import { FormControl } from 'material-ui-next/Form';
-import { InputLabel } from 'material-ui-next/Input';
+import { withStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
 
 import D2Date from '../D2Date/D2Date.component';
 import D2TextField from '../../Generic/D2TextField.component';

@@ -1,10 +1,10 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui-next/styles';
-import { darken, fade, lighten } from 'material-ui-next/styles/colorManipulator';
+import { withStyles } from '@material-ui/core/styles';
+import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator';
 import SettingsIcon from '@material-ui/icons/Settings';
 import FileDownloadIcon from '@material-ui/icons/FileDownload';
-import IconButton from 'material-ui-next/IconButton';
+import IconButton from '@material-ui/core/IconButton';
 
 import classNames from 'classnames';
 

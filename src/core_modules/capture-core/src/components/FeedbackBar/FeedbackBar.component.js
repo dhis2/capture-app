@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
 import { Component } from 'react';
-import SnackBar from 'material-ui-next/Snackbar';
-import { withStyles, withTheme } from 'material-ui-next/styles';
-import IconButton from 'material-ui-next/IconButton';
-import CloseIcon from 'material-ui-icons/Close';
+import SnackBar from '@material-ui/core/Snackbar';
+import { withStyles, withTheme } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 const styles = theme => ({
     closeButton: {

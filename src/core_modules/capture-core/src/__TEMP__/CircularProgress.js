@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { default as MUICircularProgress } from 'material-ui/CircularProgress/CircularProgress';
+import MUICircularProgress from '@material-ui/core/default';
 
 function getSizes(large, small) {
     // Size calculations for the MUI Circular Progress (https://github.com/callemall/material-ui/releases/tag/v0.16.0-rc1)

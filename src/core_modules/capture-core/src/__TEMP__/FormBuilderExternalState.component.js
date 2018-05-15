@@ -3,7 +3,7 @@
 import * as React from 'react';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import isObject from 'd2-utilizr/lib/isObject';
-import { withStyles } from 'material-ui-next/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = () => ({
     fieldContainer: {

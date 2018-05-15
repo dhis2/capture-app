@@ -1,10 +1,10 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui-next/styles';
+import { withStyles } from '@material-ui/core/styles';
 
-import Button from 'material-ui-next/Button';
-import AddIcon from 'material-ui-icons/AddCircleOutline';
-import SearchIcon from 'material-ui-icons/Search';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/AddCircleOutline';
+import SearchIcon from '@material-ui/icons/Search';
 
 import { getTranslation } from '../../d2/d2Instance';
 

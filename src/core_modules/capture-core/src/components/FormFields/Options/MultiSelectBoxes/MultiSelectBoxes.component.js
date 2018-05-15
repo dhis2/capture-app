@@ -1,9 +1,12 @@
 // @flow
 /* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
-import Checkbox from 'material-ui-next/Checkbox';
-import { FormControl, FormLabel, FormGroup, FormControlLabel } from 'material-ui-next/Form';
-import { withStyles } from 'material-ui-next/styles';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { withStyles } from '@material-ui/core/styles';
 
 import { orientations } from './multiSelectBoxes.const';
 

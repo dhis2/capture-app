@@ -3,9 +3,8 @@
 import './app.css';
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import CssBaseline from 'material-ui-next/CssBaseline';
-import LegacyMuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { MuiThemeProvider } from 'material-ui-next/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import { ConnectedRouter } from 'react-router-redux';
 import { withRouter } from 'react-router';
 import type { HashHistory } from 'history/createHashHistory';
@@ -17,6 +16,7 @@ import withAppUrlSync from 'capture-core/components/App/withAppUrlSync';
 import withUrlSync from 'capture-core/components/UrlSync/withUrlSync';
 
 // d2-ui
+import D2UIApp from '@dhis2/d2-ui-app';
 import { LoadingMask } from '@dhis2/d2-ui-core';
 import AppContents from './AppContents.component';
 
@@ -24,7 +24,6 @@ import AppContents from './AppContents.component';
 import withD2InContext from 'capture-core/HOC/withD2InContext';
 import withStateBoundLoadingIndicator from 'capture-core/HOC/withStateBoundLoadingIndicator';
 
-import legacyTheme from '../../styles/uiThemeLegacy';
 import theme from '../../styles/uiTheme';
 
 const AppContentsOutOfSyncLoadingIndicator = withStateBoundLoadingIndicator(
@@ -54,17 +53,15 @@ class App extends React.Component<Props> {
                     <ConnectedRouter 
                         history={this.props.history}
                     >
-                        <LegacyMuiThemeProvider
-                            theme={legacyTheme}
+                        <MuiThemeProvider
+                            theme={theme}
                         >
-                            <MuiThemeProvider
-                                theme={theme}
-                            >
-                                <AppContentsRouterLoader
-                                />
+                            <AppContentsRouterLoader />
+                            <D2UIApp>
+                                <D2AppContentsLoaderBlockAvoider />
                                 <FeedbackBar />
-                            </MuiThemeProvider>
-                        </LegacyMuiThemeProvider>
+                            </D2UIApp>
+                        </MuiThemeProvider>
                     </ConnectedRouter>
                 </Provider>
             </React.Fragment>

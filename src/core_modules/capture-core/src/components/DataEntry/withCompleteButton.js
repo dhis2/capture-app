@@ -7,7 +7,7 @@ import Dialog, {
     DialogContent,
     DialogContentText,
     DialogTitle,
-} from 'material-ui-next/Dialog';
+} from '@material-ui/core/Dialog';
 
 import { connect } from 'react-redux';
 
