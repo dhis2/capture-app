@@ -1,6 +1,10 @@
 // @flow
+/* eslint-disable */
+
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+
+import  ACSelect from './AutocompleteSelect.component';
 
 import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import List from '@material-ui/core/List';
@@ -132,7 +136,7 @@ class ProgramSelector extends Component<Props> {
                     <FormControl className={this.props.classes.form}>
                         <InputLabel htmlFor="program-selector">Program</InputLabel>
                         <Select
-                            value={this.props.selectedProgram}
+                            value={this.props.selectedProgram ? this.props.selectedProgram : ''}
                             onChange={this.handleChange}
                             inputProps={{
                                 name: 'program',
@@ -146,6 +150,7 @@ class ProgramSelector extends Component<Props> {
                         </Select>
                     </FormControl>
                     <br />
+                    <ACSelect options={programsArray} selected={this.props.selectedProgram ? this.props.selectedProgram : ''} handleChange={this.props.handleClickProgram} placeholder="Program" />
                 </Paper>
             </div>
         );
