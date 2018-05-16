@@ -114,7 +114,7 @@ class ProgramSelector extends Component<Props> {
             );
         }
         // If less than or equal, display as list.
-        if (programsArray.length <= 55) {
+        if (programsArray.length <= 5) {
             return (
                 <div>
                     <Paper elevation={1} className={this.props.classes.paper}>
