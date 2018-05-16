@@ -26,30 +26,31 @@ const styles = () => ({
         backgroundColor: '#f6f6f6',
         borderRadius: 5,
     },
+    title: {
+        margin: 0,
+        fontWeight: 425,
+        fontSize: 15,
+    },
     form: {
         width: '100%',
     },
     listItem: {
         backgroundColor: '#ffffff',
         borderRadius: 5,
-        margin: 5,
+        marginBottom: 5,
+        padding: 5,
+        border: '1px solid lightGrey',
     },
     selectedText: {
-        margin: 0,
+        marginTop: 5,
+        marginBottom: 5,
         padding: 5,
         borderLeft: '2px solid #71a4f8',
-        marginLeft: 5,
     },
     selectedPaper: {
         backgroundColor: '#f6f6f6',
         borderRadius: 5,
-        paddingBottom: 5,
-    },
-    selectedTitle: {
         padding: 5,
-        margin: 0,
-        fontWeight: 425,
-        fontSize: 15,
     },
     selectedButton: {
         float: 'right',
@@ -102,7 +103,7 @@ class ProgramSelector extends Component<Props> {
             return (
                 <div>
                     <Paper elevation={1} className={this.props.classes.selectedPaper}>
-                        <h4 className={this.props.classes.selectedTitle}>{ getTranslation('selected_program') }</h4>
+                        <h4 className={this.props.classes.title}>{ getTranslation('selected_program') }</h4>
                         <p className={this.props.classes.selectedText}>{selectedProgram.name}
                             <IconButton className={this.props.classes.selectedButton}>
                                 <ClearIcon className={this.props.classes.selectedButtonIcon} />
@@ -113,10 +114,11 @@ class ProgramSelector extends Component<Props> {
             );
         }
         // If less than or equal, display as list.
-        if (programsArray.length <= 5) {
+        if (programsArray.length <= 55) {
             return (
                 <div>
                     <Paper elevation={1} className={this.props.classes.paper}>
+                        <h4 className={this.props.classes.title}>{ getTranslation('program') }</h4>
                         <List>
                             {programsArray.map(i =>
                                 (<ListItem
@@ -133,23 +135,7 @@ class ProgramSelector extends Component<Props> {
         return (
             <div>
                 <Paper elevation={1} className={this.props.classes.paper}>
-                    <FormControl className={this.props.classes.form}>
-                        <InputLabel htmlFor="program-selector">Program</InputLabel>
-                        <Select
-                            value={this.props.selectedProgram ? this.props.selectedProgram : ''}
-                            onChange={this.handleChange}
-                            inputProps={{
-                                name: 'program',
-                                id: 'program-selector',
-                            }}
-                        >
-                            <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem>
-                            {programsArray.map(i => <MenuItem key={i.id} value={i.id}>{i.name}</MenuItem>)}
-                        </Select>
-                    </FormControl>
-                    <br />
+                    <h4 className={this.props.classes.title}>{ getTranslation('program') }</h4>
                     <ACSelect options={programsArray} selected={this.props.selectedProgram ? this.props.selectedProgram : ''} handleChange={this.props.handleClickProgram} placeholder="Program" />
                 </Paper>
             </div>
