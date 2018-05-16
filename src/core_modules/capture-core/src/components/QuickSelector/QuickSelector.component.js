@@ -83,7 +83,7 @@ class QuickSelector extends Component<Props> {
                         <ActionButtons
                             handleClickActionButton={this.handleClickActionButton}
                             selectedProgram={this.props.selectedProgramId}
-                            selectedOrgUint={this.props.selectedOrgUnit.id}
+                            selectedOrgUint={this.props.selectedOrgUnit ? this.props.selectedOrgUnit.id : ''}
                         />
                     </Grid>
                 </Grid>
