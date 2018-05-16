@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -191,7 +191,19 @@ const styles = theme => ({
     },
 });
 
+type Props = {
+    handleChange: (value: string) => void,
+    selected: string,
+    classes: Object,
+};
+
 class IntegrationReactSelect extends React.Component {
+    handleChange: () => void;
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
   handleChange = () => (selectedOption) => {
     this.props.handleChange(selectedOption.value);
   };
