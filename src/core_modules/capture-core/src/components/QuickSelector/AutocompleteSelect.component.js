@@ -22,7 +22,7 @@ class Option extends React.Component {
   };
 
   render() {
-      const { children, isFocused, onFocus } = this.props;
+      const { children, isSelected, isFocused, onFocus } = this.props;
 
       return (
           <MenuItem
@@ -30,6 +30,9 @@ class Option extends React.Component {
               selected={isFocused}
               onClick={this.handleClick}
               component="div"
+              style={{
+                  fontWeight: isSelected ? 500 : 400,
+              }}
           >
               {children}
           </MenuItem>
