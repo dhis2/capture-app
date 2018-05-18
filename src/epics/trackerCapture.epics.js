@@ -6,7 +6,6 @@ import {
     loadDataEntryEpic,
     completeEventEpic,
     saveEventEpic,
-    rulesEpic,
 } from 'capture-core/components/DataEntry/epics/dataEntry.epics';
 import {
     mainSelectionsCompletedEpic,
@@ -21,6 +20,10 @@ import {
     selectionsFromUrlValidationForNewEventEpic,
 } from 'capture-core/components/Pages/NewEvent/newEventSelections.epics';
 import {
+    openNewEventInDataEntryEpic,
+    runRulesForSingleEventEpic,
+} from 'capture-core/components/Pages/NewEvent/DataEntry/newEventDataEntry.epics';
+import {
     retrieveWorkingListEpic,
     updateWorkingListEpic,
 } from 'capture-core/components/Pages/MainPage/EventsList/eventsList.epics';
@@ -34,7 +37,6 @@ export default combineEpics(
     loadDataEntryEpic,
     completeEventEpic,
     saveEventEpic,
-    rulesEpic,
     mainSelectionsCompletedEpic,
     orgUnitDataRetrivedEpic,
     retrieveWorkingListEpic,
@@ -45,4 +47,6 @@ export default combineEpics(
     selectionsFromUrlGetOrgUnitDataForNewEventEpic,
     selectionsFromUrlEmptyOrgUnitForNewEventEpic,
     selectionsFromUrlValidationForNewEventEpic,
+    openNewEventInDataEntryEpic,
+    runRulesForSingleEventEpic,
 );

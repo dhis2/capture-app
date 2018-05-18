@@ -16,6 +16,7 @@ type Props = {
     programId: ?string,
     orgUnitId: ?string,
     page: ?string,
+    pageSwitchInTransition: ?boolean,
 };
 
 const pageKeys = {
@@ -116,13 +117,17 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
         }
 
         render() {
-            const { location, onUpdateFromUrl, ...passOnProps } = this.props;
+            const { location, onUpdateFromUrl, pageSwitchInTransition, programId, orgUnitId, page, ...passOnProps } = this.props;
+
+            if (pageSwitchInTransition) {
+                return null;
+            }
 
             this.setPageAndParams();
 
             return (
                 <InnerComponent
-                    statePage={this.props.page || pageKeys.main}
+                    statePage={page || pageKeys.main}
                     urlPage={this.page}
                     urlParams={this.params}
                     onUpdate={this.handleUpdate}
@@ -137,7 +142,8 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
     const mapStateToProps = (state: ReduxState) => ({
         programId: state.currentSelections.programId,
         orgUnitId: state.currentSelections.orgUnitId,
-        page: state.currentSelections.page,
+        page: state.app.page,
+        pageSwitchInTransition: state.app.pageSwitchInTransition,
     });
 
     const mapDispatchToProps = (dispatch: ReduxDispatch) => ({

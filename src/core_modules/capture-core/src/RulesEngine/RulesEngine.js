@@ -66,27 +66,32 @@ export default class RulesEngine {
         );
     }
 
-    executeRulesForSingleEvent(
+    executeRulesForEvent(
         programRulesContainer: ProgramRulesContainer,
-        executingEvent: EventData,
-        eventsData: EventsData,
+        executingEvent: ?EventData,
+        eventsData: ?EventsData,
         dataElements: DataElements,
         selectedOrgUnit: OrgUnit,
         optionSets: ?OptionSets): ?Array<OutputEffect> {
-        // create eventsByStage provisionally
-        const eventsDataByStage = eventsData.reduce((accEventsByStage, event) => {
-            const hasProgramStage = !!event.programStageId;
-            if (hasProgramStage) {
-                accEventsByStage[event.programStageId] = accEventsByStage[event.programStageId] || [];
-                accEventsByStage[event.programStageId].push(event);
-            }
-            return accEventsByStage;
-        }, {});
+        let eventsContainer;
+        if (eventsData && eventsData.length > 0) {
+            // create eventsByStage provisionally
+            const eventsDataByStage = eventsData.reduce((accEventsByStage, event) => {
+                const hasProgramStage = !!event.programStageId;
+                if (hasProgramStage) {
+                    accEventsByStage[event.programStageId] = accEventsByStage[event.programStageId] || [];
+                    accEventsByStage[event.programStageId].push(event);
+                }
+                return accEventsByStage;
+            }, {});
 
-        const eventsContainer = {
-            all: eventsData,
-            byStage: eventsDataByStage,
-        };
+            eventsContainer = {
+                all: eventsData,
+                byStage: eventsDataByStage,
+            };
+        } else {
+            eventsContainer = null;
+        }
 
         const effects = this.executionService.executeRules(
             programRulesContainer,

@@ -13,7 +13,8 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         return newState;
     },
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: (state, action) => {
-        const newState = { ...state, ...action.payload };
+        const { page, ...selections } = action.payload;
+        const newState = { ...state, ...selections };
         return newState;
     },
     [mainSelectionsActionTypes.ORG_UNIT_DATA_RETRIVED]: (state, action) => {
@@ -37,7 +38,8 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         return newState;
     },
     [newEventSelectionActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
-        const newState = { ...state, ...action.payload };
+        const { page, ...selections } = action.payload;
+        const newState = { ...state, ...selections };
         return newState;
     },
     [newEventSelectionActionTypes.SET_ORG_UNIT_BASED_ON_URL]: (state, action) => {

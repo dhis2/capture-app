@@ -98,6 +98,7 @@ export const saveEventEpic = (action$, store: ReduxStore) =>
             return saveEvent(clientValues, serverData, eventMainData, eventId, id);
         });
 
+/*
 export const rulesEpic = (action$, store: ReduxStore) =>
     action$.ofType(actionTypes.UPDATE_FORM_FIELD)
         .map((action) => {
@@ -110,3 +111,4 @@ export const rulesEpic = (action$, store: ReduxStore) =>
             const actions = getRulesActionsOnUpdate(payload.eventId, store.getState(), payload.formId, payload.dataEntryId, fieldData);
             return batchActions(actions);
         });
+*/

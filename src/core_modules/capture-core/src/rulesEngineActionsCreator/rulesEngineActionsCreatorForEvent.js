@@ -2,6 +2,7 @@
 /**
  * @module rulesEngineActionsCreatorForEvent
  */
+import log from 'loglevel';
 
 import RulesEngine from '../RulesEngine/RulesEngine';
 import inputValueConverter from './inputValueConverter';
@@ -57,9 +58,13 @@ const errorMessages = {
     PROGRAMSTAGE_NOT_FOUND: 'ProgramStage not found',
 };
 
-function getProgramRulesContainer(program: Program): ProgramRulesContainer {
+function getProgramRulesContainer(program: Program, foundation: RenderFoundation): ProgramRulesContainer {
     const programRulesVariables = program.programRuleVariables;
-    const programRules = program.programRules;
+
+    const mainProgramRules = program.programRules;
+    const foundationProgramRules = foundation.programRules;
+    const programRules = [...mainProgramRules, ...foundationProgramRules];
+
     const constants = constantsStore.get();
     return {
         programRulesVariables,
@@ -114,8 +119,8 @@ function getDataElements(program: Program) {
 }
 
 /*
- * concatenate fieldsValidation from sections 
- * 
+ * concatenate fieldsValidation from sections
+ *
  * @param {Object} sectionsFieldsUI
  * @param {string} formId
  */
@@ -161,8 +166,6 @@ function convertFormValuesToClientValues(formValues: {[key: string]: any}, rende
 
 function getCurrentEventValues(
     state: ReduxState,
-    program: Program,
-    event: Event,
     foundation: RenderFoundation,
     formId: string,
     updatedEventField?: ?FieldData) {
@@ -199,8 +202,8 @@ function getValidDataEntryValues(
     }, {});
 }
 
-function getCurrentEventMainData(state: ReduxState, event: Event, dataEntryId: string) {
-    const dataEntryReduxKey = `${dataEntryId}-${event.eventId}`;
+function getCurrentEventMainData(state: ReduxState, eventId: string, dataEntryId: string) {
+    const dataEntryReduxKey = `${dataEntryId}-${eventId}`;
 
     const dataEntryFieldsUI = state.dataEntriesFieldsUI[dataEntryReduxKey];
     const dataEntryValidations = getDataEntryValidatons(dataEntryFieldsUI);
@@ -208,9 +211,9 @@ function getCurrentEventMainData(state: ReduxState, event: Event, dataEntryId: s
     const validDataEntryValues = getValidDataEntryValues(dataEntryValues, dataEntryValidations);
 
     const dataEntryClientValues =
-        convertDataEntryValuesToEventValues(state, event.eventId, dataEntryId, validDataEntryValues);
+        convertDataEntryValuesToEventValues(state, eventId, dataEntryId, validDataEntryValues);
 
-    const eventValues = state.events[event.eventId];
+    const eventValues = state.events[eventId];
     return { ...eventValues, ...dataEntryClientValues };
 }
 
@@ -255,8 +258,8 @@ function getRulesEngineArguments(
     let currentEventMainData;
     let currentEventData;
     if (!isLoad) {
-        currentEventValues = getCurrentEventValues(state, program, event, foundation, formId, updatedFieldData);
-        currentEventMainData = getCurrentEventMainData(state, event, dataEntryId);
+        currentEventValues = getCurrentEventValues(state, foundation, formId, updatedFieldData);
+        currentEventMainData = getCurrentEventMainData(state, event.eventId, dataEntryId);
         currentEventData = { ...currentEventValues, ...currentEventMainData };
     } else {
         currentEventValues = state.eventsValues[event.eventId];
@@ -440,11 +443,11 @@ function createRulesEffectsActions(
 function runRulesEngine(
     programRulesContainer: ProgramRulesContainer,
     dataElementsInProgram: { [elementId: string]: DataElementForRulesEngine },
-    currentEventData: EventData,
-    allEventsData: Array<EventData>,
     orgUnit: OrgUnit,
-    optionSets: ?OptionSets) {
-    const effects = rulesEngine.executeRulesForSingleEvent(
+    optionSets: ?OptionSets,
+    currentEventData: ?EventData,
+    allEventsData: ?Array<EventData>) {
+    const effects = rulesEngine.executeRulesForEvent(
         programRulesContainer,
         currentEventData,
         allEventsData,
@@ -467,7 +470,7 @@ function getRulesActions(
 
     const program = programCollection.get(programId);
     if (!program) {
-        errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ currentEventId });
+        log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ currentEventId }));
         return [updateRulesEffects(null, formId, eventId, dataEntryId)];
     }
 
@@ -485,10 +488,10 @@ function getRulesActions(
         runRulesEngine(
             programRulesContainer,
             dataElementsInProgram,
-            currentEventData,
-            allEventsData,
             orgUnit,
-            optionSets);
+            optionSets,
+            currentEventData,
+            allEventsData);
     return createRulesEffectsActions(rulesEffects, formId, eventId, dataEntryId, foundation);
 }
 
@@ -514,4 +517,84 @@ export function getRulesActionsOnUpdate(
     dataEntryId: string,
     updatedFieldData: FieldData): Array<ReduxAction<any, any>> {
     return getRulesActions(currentEventId, state, formId, dataEntryId, updatedFieldData);
+}
+
+export function getRulesActionsOnLoadForSingleNewEvent(
+    programId: string,
+    formId: string,
+    eventId: string,
+    dataEntryId: string,
+    orgUnit: Object,
+): Array<ReduxAction<any, any>> {
+    const program = programCollection.get(programId);
+    if (!program) {
+        log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ programId, method: 'getRulesActionsOnLoadForSingleNewEvent' }));
+        return [updateRulesEffects(null, formId, eventId, dataEntryId)];
+    }
+
+    const foundation = program.getStage();
+
+    const programRulesContainer = getProgramRulesContainer(program, foundation);
+
+    if (!programRulesContainer.programRules || programRulesContainer.programRules.length === 0) {
+        return [updateRulesEffects(null, formId, eventId, dataEntryId)];
+    }
+
+    const dataElementsInProgram = getDataElements(program);
+    const optionSets = optionSetsStore.get();
+
+    const rulesEffects =
+        runRulesEngine(
+            programRulesContainer,
+            dataElementsInProgram,
+            orgUnit,
+            optionSets);
+
+    return createRulesEffectsActions(rulesEffects, formId, eventId, dataEntryId, foundation);
+}
+
+export function getRulesActionsOnUpdateForSingleNewEvent(
+    programId: string,
+    formId: string,
+    eventId: string,
+    dataEntryId: string,
+    state: Object,
+    orgUnit: Object,
+    updatedFieldData: FieldData,
+): Array<ReduxAction<any, any>> {
+    const program = programCollection.get(programId);
+    if (!program) {
+        log.error(
+            errorCreator(
+                errorMessages.PROGRAM_NOT_FOUND,
+            )(
+                { programId, method: 'getRulesActionsOnUpdateForSingleNewEvent' },
+            ),
+        );
+        return [updateRulesEffects(null, formId, eventId, dataEntryId)];
+    }
+    const foundation = program.getStage();
+
+    const programRulesContainer = getProgramRulesContainer(program, foundation);
+    if (!programRulesContainer.programRules || programRulesContainer.programRules.length === 0) {
+        return [updateRulesEffects(null, formId, eventId, dataEntryId)];
+    }
+
+    const dataElementsInProgram = getDataElements(program);
+    const optionSets = optionSetsStore.get();
+
+    const currentEventValues = getCurrentEventValues(state, foundation, formId, updatedFieldData);
+    const currentEventMainData = getCurrentEventMainData(state, eventId, dataEntryId);
+    const currentEventData = { ...currentEventValues, ...currentEventMainData };
+
+    const rulesEffects =
+        runRulesEngine(
+            programRulesContainer,
+            dataElementsInProgram,
+            orgUnit,
+            optionSets,
+            currentEventData,
+        );
+
+    return createRulesEffectsActions(rulesEffects, formId, eventId, dataEntryId, foundation);
 }

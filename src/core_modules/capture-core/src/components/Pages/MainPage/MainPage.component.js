@@ -3,54 +3,26 @@
  * @namespace MainPage
 */
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import QuickSelector from 'capture-core/components/QuickSelector/QuickSelector.container';
 
-import LoadingMask from '../../LoadingMasks/LoadingMask.component';
+import withLoadHandler from './withLoadHandler';
 import EventsList from './EventsList/EventsList.container';
-
-const styles = () => ({
-    loaderContainer: {
-        display: 'flex',
-        justifyContent: 'center',
-    },
-});
+import QuickSelector from '../../QuickSelector/QuickSelector.container';
+import TempSelector from './TempSelector.container';
 
 type Props = {
     prerequisitesForWorkingListMet: boolean,
-    selectionsError: ?string,
-    isLoading: boolean,
-    classes: {
-        loaderContainer: string,
-    }
 };
 
 class MainPage extends Component<Props> {
     render() {
-        const { prerequisitesForWorkingListMet, selectionsError, isLoading, classes } = this.props;
-
-        if (isLoading) {
-            return (
-                <div
-                    className={classes.loaderContainer}
-                >
-                    <LoadingMask />
-                </div>
-            );
-        }
-
-        if (selectionsError) {
-            return (
-                <div>
-                    { selectionsError }
-                </div>
-            );
-        }
+        const { prerequisitesForWorkingListMet } = this.props;
 
         return (
             <div>
                 {'{{main menu}}'}
-
+                <TempSelector
+                    selectionsCompleted={prerequisitesForWorkingListMet}
+                />
                 {
                     (() => {
                         if (!prerequisitesForWorkingListMet) {
@@ -67,4 +39,4 @@ class MainPage extends Component<Props> {
     }
 }
 
-export default withStyles(styles)(MainPage);
+export default withLoadHandler()(MainPage);
