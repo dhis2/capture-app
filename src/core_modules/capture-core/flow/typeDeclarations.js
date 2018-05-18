@@ -65,3 +65,5 @@ declare type Theme = {
     },
     direction: string,
 };
+
+declare type InputObservable = rxjs$Observable<ReduxAction<any, any>>;

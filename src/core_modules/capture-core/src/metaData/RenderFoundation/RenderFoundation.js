@@ -10,6 +10,7 @@ import Section from './Section';
 import DataElement from '../DataElement/DataElement';
 import errorCreator from '../../utils/errorCreator';
 import type { ConvertFn } from '../DataElement/DataElement';
+import type { ProgramRule } from '../../RulesEngine/rulesEngine.types';
 
 type ValuesType = { [key: string]: any };
 
@@ -24,11 +25,13 @@ export default class RenderFoundation {
     _programId: string;
     _sections: Map<string, Section>;
     _labels: { [key: string]: string };
+    _programRules: Array<ProgramRule>;
 
     constructor(initFn: ?(_this: RenderFoundation) => void) {
         this._sections = new Map();
         this._labels = {};
         initFn && isFunction(initFn) && initFn(this);
+        this.programRules = [];
     }
 
     set id(id: string) {
@@ -59,6 +62,13 @@ export default class RenderFoundation {
         return this._programId;
     }
 
+    set programRules(programRules: Array<ProgramRule>) {
+        this._programRules = programRules;
+    }
+    get programRules(): Array<ProgramRule> {
+        return this._programRules;
+    }
+
     get sections(): Map<string, Section> {
         return this._sections;
     }
@@ -82,6 +92,14 @@ export default class RenderFoundation {
     getElement(id: string) {
         const elements = this.getElementsById();
         return elements[id];
+    }
+
+    addProgramRule(programRule: ProgramRule) {
+        this.programRules.push(programRule);
+    }
+
+    addProgramRules(programRules: Array<ProgramRule>) {
+        this.programRules = [...this.programRules, ...programRules];
     }
 
     getElements(): Array<DataElement> {

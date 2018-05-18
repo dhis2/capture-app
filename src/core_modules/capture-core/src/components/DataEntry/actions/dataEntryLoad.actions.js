@@ -9,13 +9,14 @@ import { convertValue } from '../../../converters/clientToForm';
 import errorCreator from '../../../utils/errorCreator';
 import { actionCreator } from '../../../actions/actions.utils';
 import { addFormData } from '../../D2Form/actions/form.actions';
-import { getRulesActionsOnLoad } from '../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+import { getRulesActionsOnLoad, getRulesActionsOnLoadForSingleNewEvent } from '../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
 
 export const actionTypes = {
     START_LOAD_DATA_ENTRY_EVENT: 'StartLoadDataEntryEvent',
     OPEN_DATA_ENTRY_EVENT_ALREADY_LOADED: 'OpenDataEntryEventAlreadyLoaded',
     LOAD_DATA_ENTRY_EVENT: 'LoadDataEntryEvent',
     LOAD_DATA_ENTRY_EVENT_FAILED: 'LoadDataEntryEventFailed',
+    OPEN_NEW_EVENT_IN_DATA_ENTRY: 'OpenNewEventInDataEntry',
 };
 
 const errorMessages = {
@@ -133,3 +134,14 @@ export function loadDataEntryEvent(
 export const openDataEntryEventAlreadyLoaded =
     (eventId: string, dataEntryId: string) =>
         actionCreator(actionTypes.OPEN_DATA_ENTRY_EVENT_ALREADY_LOADED)({ eventId, dataEntryId });
+
+export const openNewEventInDataEntry =
+    (eventPropsToInclude?: ?Array<DataEntryPropToInclude>, dataEntryId?: string = 'main', programId: string, orgUnit: Object) => {
+        const eventId = 'newEvent';
+        const dataEntryMeta = eventPropsToInclude ? getDataEntryMeta(eventPropsToInclude) : {};
+        return batchActions([
+            actionCreator(actionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY)({ eventId, dataEntryId, dataEntryMeta }),
+            addFormData(eventId, {}),
+            ...getRulesActionsOnLoadForSingleNewEvent(programId, eventId, eventId, dataEntryId, orgUnit),
+        ]);
+    };

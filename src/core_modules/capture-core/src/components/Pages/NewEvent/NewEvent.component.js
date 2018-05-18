@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import withInputHandling from './withInputHandling';
+import withLoadHandler from './withLoadHandler';
+import NewEventDataEntry from './DataEntry/NewEventDataEntry.container';
 
 type Props = {
 
@@ -10,10 +11,10 @@ class NewEvent extends Component<Props> {
     render() {
         return (
             <div>
-               newEvent
+                <NewEventDataEntry />
             </div>
         );
     }
 }
 
-export default withInputHandling()(NewEvent);
+export default withLoadHandler()(NewEvent);

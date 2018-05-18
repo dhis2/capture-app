@@ -3,9 +3,9 @@
 import * as React from 'react';
 import { withStyles } from 'material-ui-next/styles';
 
-import getStageFromEvent from '../../metaData/helpers/getStageFromEvent';
 import D2Form from '../D2Form/D2Form.component';
 import { placements } from './eventField/eventField.const';
+import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 
 const styles = theme => ({
     footerBar: {
@@ -23,25 +23,26 @@ type FieldContainer = {
 
 type Props = {
     id: string,
-    event: Event,
+    eventId: string,
+    formFoundation: ?RenderFoundation,
     completeButton?: ?React.Element<any>,
     saveButton?: ?React.Element<any>,
     fields?: ?Array<FieldContainer>,
     completionAttempted?: ?boolean,
     saveAttempted?: ?boolean,
     classes: Object,
-    onUpdateField: (
-        value: any,
-        uiState: Object,
-        elementId: string,
-        sectionId: string,
-        formId: string,
-        dataEntryId: string) => void,
+    onUpdateFieldInner: (
+        action: ReduxAction<any, any>,
+    ) => void,
+    onUpdateField?: ?(
+        innerAction: ReduxAction<any, any>,
+    ) => void,
 };
 
 class DataEntry extends React.Component<Props> {
     static errorMessages = {
         NO_EVENT_SELECTED: 'No event selected',
+        FORM_FOUNDATION_MISSING: 'form foundation missing. see log for details',
     };
 
     formInstance: ?D2Form;
@@ -56,13 +57,8 @@ class DataEntry extends React.Component<Props> {
         return this.formInstance;
     }
 
-    getFormFoundation() {
-        const event = this.props.event;
-        return getStageFromEvent(event);
-    }
-
     handleUpdateField(...args) {
-        this.props.onUpdateField(...args, this.props.id, this.props.event.eventId);
+        this.props.onUpdateFieldInner(...args, this.props.id, this.props.eventId, this.props.onUpdateField);
     }
 
     getFieldWithPlacement(placement: $Values<typeof placements>) {
@@ -79,7 +75,8 @@ class DataEntry extends React.Component<Props> {
         const {
             id,
             classes,
-            event,
+            eventId,
+            formFoundation,
             completeButton,
             saveButton,
             completionAttempted,
@@ -88,7 +85,7 @@ class DataEntry extends React.Component<Props> {
             onUpdateField,
             ...passOnProps } = this.props;
 
-        if (!event) {
+        if (!eventId) {
             return (
                 <div>
                     {DataEntry.errorMessages.NO_EVENT_SELECTED}
@@ -96,16 +93,14 @@ class DataEntry extends React.Component<Props> {
             );
         }
 
-        const formFoundationContainer = this.getFormFoundation();
-        if (formFoundationContainer.error) {
+        if (!formFoundation) {
             return (
                 <div>
-                    {formFoundationContainer.error}
+                    {DataEntry.errorMessages.FORM_FOUNDATION_MISSING}
                 </div>
             );
         }
 
-        const foundation = formFoundationContainer.stage;
         const topFields = this.getFieldWithPlacement(placements.TOP);
         const bottomFields = this.getFieldWithPlacement(placements.BOTTOM);
 
@@ -114,8 +109,8 @@ class DataEntry extends React.Component<Props> {
                 {topFields}
                 <D2Form
                     innerRef={(formInstance) => { this.formInstance = formInstance; }}
-                    formFoundation={foundation}
-                    id={event.eventId}
+                    formFoundation={formFoundation}
+                    id={eventId}
                     validationAttempted={completionAttempted || saveAttempted}
                     onUpdateField={this.handleUpdateField}
                     {...passOnProps}

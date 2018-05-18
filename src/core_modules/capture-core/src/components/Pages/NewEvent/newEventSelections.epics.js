@@ -13,8 +13,6 @@ import {
 } from './newEventSelections.actions';
 import programCollection from '../../../metaDataMemoryStores/programCollection/programCollection';
 
-type InputObservable = rxjs$Observable<ReduxAction<any, any>>;
-
 export const selectionsFromUrlGetOrgUnitDataForNewEventEpic = (action$: InputObservable) =>
     // $FlowSuppress
     action$.ofType(actionTypes.UPDATE_SELECTIONS_FROM_URL)

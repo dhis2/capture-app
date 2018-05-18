@@ -1,6 +1,6 @@
 // @flow
 /**
- * @namespace NewEventPage
+ * @namespace MainPage
  */
 import * as React from 'react';
 import { withStyles } from 'material-ui-next/styles';
@@ -21,8 +21,8 @@ type Props = {
     }
 };
 
-const getInputHandler = (InnerComponent: React.ComponentType<any>) =>
-    class MainMenuInputHandler extends React.Component<Props> {
+const getLoadHandler = (InnerComponent: React.ComponentType<any>) =>
+    class MainPageInputHandler extends React.Component<Props> {
         render() {
             const { isLoading, selectionsError, classes, ...passOnProps } = this.props;
 
@@ -52,10 +52,10 @@ const getInputHandler = (InnerComponent: React.ComponentType<any>) =>
     };
 
 /**
- * HOC for newEvent component. Handling load status and load errors
- * @alias withInputHandling
- * @memberof NewEventPage
+ * HOC for MainPage component. Handling load status and load errors
+ * @alias withLoadHandling
+ * @memberof MainPage
  */
 
 export default () => (InnerComponent: React.ComponentType<any>) =>
-    withStyles(styles)(getInputHandler(InnerComponent));
+    withStyles(styles)(getLoadHandler(InnerComponent));

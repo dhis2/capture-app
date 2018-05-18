@@ -285,7 +285,27 @@ function addProgramRules(d2ProgramRules: Array<ProgramRule>) {
         const programRules = rulesByProgram[programKey];
         const program = programCollection.get(programKey);
         if (program) {
-            program.programRules = programRules;
+            const mainRules = programRules
+                .filter(rule => !rule.programStageId);
+
+            const rulesByStage = programRules
+                .filter(rule => rule.programStageId)
+                .reduce((accRulesByStage, programRule) => {
+                    accRulesByStage[programRule.programStageId] = accRulesByStage[programRule.programStageId] || [];
+                    accRulesByStage[programRule.programStageId].push(programRule);
+                    return accRulesByStage;
+                }, {});
+
+            program.programRules = mainRules;
+            Object
+                .keys(rulesByStage)
+                .forEach((stageKey) => {
+                    const rulesForStage = rulesByStage[stageKey];
+                    const programStage = program.getStage(stageKey);
+                    if (programStage) {
+                        programStage.programRules = rulesForStage;
+                    }
+                });
         }
     });
 }
