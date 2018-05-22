@@ -66,6 +66,7 @@ const styles = () => ({
 type Props = {
     handleChangeProgram: (value: string) => void,
     handleClickProgram: (value: string) => void,
+    resetProgram: () => void,
     selectedProgram: Object,
     classes: Object,
 };
@@ -87,6 +88,10 @@ class ProgramSelector extends Component<Props> {
         this.props.handleClickProgram(program.id);
     }
 
+    handleReset() {
+        this.props.resetProgram();
+    }
+
     // TODO: Add support for cat-combos.
     render() {
         const programsArray = Array.from(programs.values());
@@ -105,7 +110,7 @@ class ProgramSelector extends Component<Props> {
                     <Paper elevation={1} className={this.props.classes.selectedPaper}>
                         <h4 className={this.props.classes.title}>{ getTranslation('selected_program') }</h4>
                         <p className={this.props.classes.selectedText}>{selectedProgram.name}
-                            <IconButton className={this.props.classes.selectedButton}>
+                            <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleReset()}>
                                 <ClearIcon className={this.props.classes.selectedButtonIcon} />
                             </IconButton>
                         </p>

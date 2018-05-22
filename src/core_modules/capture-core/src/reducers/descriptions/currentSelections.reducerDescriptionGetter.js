@@ -2,6 +2,7 @@
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import { actionTypes as mainSelectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
+import { actionTypes as setProgramIdActionTypes } from '../../components/QuickSelector/actions/QuickSelector.actions';
 import {
     actionTypes as newEventSelectionActionTypes,
 } from '../../components/Pages/NewEvent/newEventSelections.actions';
@@ -95,6 +96,10 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             complete: true,
         };
 
+        return newState;
+    },
+    [setProgramIdActionTypes.SET_PROGRAM_ID]: (state, action) => {
+        const newState = { ...state, programId: action.payload };
         return newState;
     },
 }, 'currentSelections');
