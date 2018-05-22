@@ -4,6 +4,8 @@ import MainPage from './MainPage.component';
 
 const mapStateToProps = (state: ReduxState) => ({
     prerequisitesForWorkingListMet: !!state.mainPage.prerequisitesForWorkingListMet,
+    selectionsError: state.mainPage.selectionsError,
+    isLoading: !!state.mainPage.isLoading,
 });
 
 // $FlowSuppress

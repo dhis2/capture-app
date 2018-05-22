@@ -7,6 +7,13 @@ export const actionTypes = {
     WORKING_LIST_DATA_RETRIEVED: 'WorkingListDataRetrieved',
     WORKING_LIST_DATA_RETRIEVAL_FAILED: 'WorkingListDataRetrievalFailed',
     ORG_UNIT_DATA_RETRIVED: 'OrgUnitDataRetrived',
+    UPDATE_MAIN_SELECTIONS_FROM_URL: 'UpdateMainSelectionsFromUrl',
+    SET_ORG_UNIT_BASED_ON_URL: 'SetOrgUnitBasedOnUrl',
+    INVALID_ORG_UNIT_FROM_URL: 'InvalidOrgUnitFromUrl',
+    ERROR_RETRIEVING_ORG_UNIT_BASED_ON_URL: 'ErrorRetrievingOrgUnitBasedOnUrl',
+    SET_EMPTY_ORG_UNIT_BASED_ON_URL: 'SetEmptyOrgUnitBasedOnUrl',
+    INVALID_SELECTIONS_FROM_URL: 'InvalidSelectionsFromUrl',
+    VALID_SELECTIONS_FROM_URL: 'ValidSelectionsFromUrl',
 };
 
 export const updateMainSelections =
@@ -23,3 +30,26 @@ export const workingListInitialRetrievalFailed =
 
 export const orgUnitDataRetrived =
     (orgUnit: Object) => actionCreator(actionTypes.ORG_UNIT_DATA_RETRIVED)(orgUnit);
+
+// url-specific
+
+export const updateMainSelectionsFromUrl =
+    (selections: Object) => actionCreator(actionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL)(selections);
+
+export const setCurrentOrgUnitBasedOnUrl =
+    (orgUnit: Object) => actionCreator(actionTypes.SET_ORG_UNIT_BASED_ON_URL)(orgUnit);
+
+export const invalidOrgUnitFromUrl =
+    (error: string) => actionCreator(actionTypes.INVALID_ORG_UNIT_FROM_URL)(error);
+
+export const errorRetrievingOrgUnitBasedOnUrl =
+    (error: string) => actionCreator(actionTypes.ERROR_RETRIEVING_ORG_UNIT_BASED_ON_URL)(error);
+
+export const setEmptyOrgUnitBasedOnUrl =
+    () => actionCreator(actionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL)();
+
+export const validSelectionsFromUrl =
+    () => actionCreator(actionTypes.VALID_SELECTIONS_FROM_URL)();
+
+export const invalidSelectionsFromUrl =
+    (error: string) => actionCreator(actionTypes.INVALID_SELECTIONS_FROM_URL)(error);

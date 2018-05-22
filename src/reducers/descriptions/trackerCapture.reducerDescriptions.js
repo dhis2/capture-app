@@ -6,6 +6,7 @@ import { feedbackDesc } from 'capture-core/reducers/descriptions/feedback.reduce
 import { eventsRulesEffectsHiddenFieldsDesc, eventsRulesEffectsErrorMessagesDesc, eventsRulesEffectsHiddenSectionsDesc, eventsRulesEffectsCompulsoryFieldsDesc } from 'capture-core/reducers/descriptions/rulesEffects.reducerDescription';
 import { workingListsDesc, workingListsMetaDesc, workingListsUIDesc, workingListsColumnsOrderDesc } from 'capture-core/reducers/descriptions/workingLists.reducerDescription';
 import { mainPageDesc } from 'capture-core/reducers/descriptions/mainPage.reducerDescription';
+import { newEventPageDesc } from 'capture-core/reducers/descriptions/newEvent.reducerDescription';
 import { appReducerDesc } from './app.reducerDescription';
 import { currentSelectionsReducerDesc } from './currentSelections.reducerDescription';
 
@@ -32,4 +33,5 @@ export default [
     workingListsUIDesc,
     workingListsColumnsOrderDesc,
     mainPageDesc,
+    newEventPageDesc,
 ];

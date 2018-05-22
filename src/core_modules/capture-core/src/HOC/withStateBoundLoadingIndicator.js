@@ -26,16 +26,18 @@ const LoadingIndicator = (props: Props) => {
     );
 };
 
-export default (isReadyFn: (state: State) => boolean) => (InnerComponent: React.ComponentType<any>) => {
-    const mapStateToProps = (state: State) => ({
-        ready: isReadyFn(state),
-    });
-
-    const mergeProps = (stateProps, dispatchProps, ownProps) =>
-        Object.assign({}, ownProps, stateProps, dispatchProps, {
-            InnerComponent,
+export default (isReadyFn: (state: ReduxState, props: any) => boolean) =>
+    (InnerComponent: React.ComponentType<any>) => {
+        const mapStateToProps = (state: ReduxState, props: any) => ({
+            ready: isReadyFn(state, props),
         });
 
-    const LoadingIndicatorContainer = connect(mapStateToProps, null, mergeProps)(LoadingIndicator);
-    return LoadingIndicatorContainer;
-};
+        const mergeProps = (stateProps, dispatchProps, ownProps) =>
+            Object.assign({}, ownProps, stateProps, dispatchProps, {
+                InnerComponent,
+            });
+
+        // $FlowSuppress
+        const LoadingIndicatorContainer = connect(mapStateToProps, null, mergeProps)(LoadingIndicator);
+        return LoadingIndicatorContainer;
+    };

@@ -1,11 +1,13 @@
 // @flow
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router';
+import { Route, Switch } from 'react-router'; //eslint-disable-line
 import HeaderBar from '@dhis2/d2-ui-header-bar';
 import { withStyles } from 'material-ui-next/styles';
 
 import getD2 from 'capture-core/d2/d2Instance';
 import MainPage from 'capture-core/components/Pages/MainPage/MainPage.container';
+import NewEvent from 'capture-core/components/Pages/NewEvent/NewEvent.container';
+
 import EventCaptureForm from '../EventCaptureForm/EventCaptureForm.container';
 
 const styles = theme => ({
@@ -33,6 +35,7 @@ class AppContents extends Component<Props> {
                 <div style={{ padding: 100 }}>
                     <Switch>
                         <Route path="/event" component={EventCaptureForm} />
+                        <Route path="/newEvent" component={NewEvent} />
                         <Route path="/:keys" component={MainPage} />
                         <Route path="/" component={MainPage} />
                     </Switch>

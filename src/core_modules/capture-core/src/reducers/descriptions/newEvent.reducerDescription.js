@@ -1,16 +1,10 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { actionTypes as selectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
+import { actionTypes as selectionsActionTypes } from '../../components/Pages/NewEvent/newEventSelections.actions';
 
-export const mainPageDesc = createReducerDescription({
-    [selectionsActionTypes.UPDATE_MAIN_SELECTIONS]: (state) => {
+export const newEventPageDesc = createReducerDescription({
+    [selectionsActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state) => {
         const newState = { ...state };
-        newState.prerequisitesForWorkingListMet = false;
-        return newState;
-    },
-    [selectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: (state) => {
-        const newState = { ...state };
-        newState.prerequisitesForWorkingListMet = false;
         newState.isLoading = true;
         return newState;
     },
@@ -38,9 +32,4 @@ export const mainPageDesc = createReducerDescription({
         newState.selectionsError = null;
         return newState;
     },
-    [selectionsActionTypes.MAIN_SELECTIONS_COMPLETED]: (state) => {
-        const newState = { ...state };
-        newState.prerequisitesForWorkingListMet = true;
-        return newState;
-    },
-}, 'mainPage');
+}, 'newEventPage');

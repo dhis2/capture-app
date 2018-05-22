@@ -3,23 +3,54 @@
  * @namespace MainPage
 */
 import React, { Component } from 'react';
+import { withStyles } from 'material-ui-next/styles';
 import QuickSelector from 'capture-core/components/QuickSelector/QuickSelector.container';
-import withSelectionsUpdater from './withSelectionsUpdater';
 
+import LoadingMask from '../../LoadingMasks/LoadingMask.component';
 import EventsList from './EventsList/EventsList.container';
+
+const styles = () => ({
+    loaderContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
+});
 
 type Props = {
     prerequisitesForWorkingListMet: boolean,
+    selectionsError: ?string,
+    isLoading: boolean,
+    classes: {
+        loaderContainer: string,
+    }
 };
 
 class MainPage extends Component<Props> {
     render() {
-        const { prerequisitesForWorkingListMet } = this.props;
+        const { prerequisitesForWorkingListMet, selectionsError, isLoading, classes } = this.props;
+
+        if (isLoading) {
+            return (
+                <div
+                    className={classes.loaderContainer}
+                >
+                    <LoadingMask />
+                </div>
+            );
+        }
+
+        if (selectionsError) {
+            return (
+                <div>
+                    { selectionsError }
+                </div>
+            );
+        }
 
         return (
             <div>
                 {'{{main menu}}'}
-                <QuickSelector />
+
                 {
                     (() => {
                         if (!prerequisitesForWorkingListMet) {
@@ -27,9 +58,7 @@ class MainPage extends Component<Props> {
                         }
 
                         return (
-                            <EventsList
-                                {...this.props}
-                            />
+                            <EventsList />
                         );
                     })()
                 }
@@ -38,4 +67,4 @@ class MainPage extends Component<Props> {
     }
 }
 
-export default withSelectionsUpdater()(MainPage);
+export default withStyles(styles)(MainPage);
