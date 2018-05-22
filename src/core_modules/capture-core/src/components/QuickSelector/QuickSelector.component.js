@@ -20,11 +20,13 @@ type Props = {
     selectedOrgUnit: Object,
     selectedProgramId: string,
     classes: Object,
+    onSetProgramId: (programId: string) => void,
 };
 
 class QuickSelector extends Component<Props> {
     handleChangeProgram: (program: any) => void;
     handleClickProgram: (program: Object) => void;
+    resetProgram: () => void;
     handleChangeOrgUnit: (orgUnit: any) => void;
     handleClickOrgUnit: (orgUnit: Object) => void;
     handleClickActionButton: () => void;
@@ -33,19 +35,22 @@ class QuickSelector extends Component<Props> {
 
         this.handleChangeProgram = this.handleChangeProgram.bind(this);
         this.handleClickProgram = this.handleClickProgram.bind(this);
-
+        this.resetProgram = this.resetProgram.bind(this);
         this.handleChangeOrgUnit = this.handleChangeOrgUnit.bind(this);
         this.handleClickOrgUnit = this.handleClickOrgUnit.bind(this);
-
         this.handleClickActionButton = this.handleClickActionButton.bind(this);
     }
 
     handleChangeProgram(program) {
-        alert('Program switching has not yet been implemented.');
+        this.props.onSetProgramId(program);
     }
 
     handleClickProgram(program) {
-        alert('Program switching has not yet been implemented.');
+        this.props.onSetProgramId(program);
+    }
+
+    resetProgram() {
+        this.props.onSetProgramId(null);
     }
 
     handleChangeOrgUnit(orgUnit) {
@@ -77,6 +82,7 @@ class QuickSelector extends Component<Props> {
                             selectedProgram={this.props.selectedProgramId}
                             handleChangeProgram={this.handleChangeProgram}
                             handleClickProgram={this.handleClickProgram}
+                            resetProgram={this.resetProgram}
                         />
                     </Grid>
                     <Grid item xs={12} sm={4}>

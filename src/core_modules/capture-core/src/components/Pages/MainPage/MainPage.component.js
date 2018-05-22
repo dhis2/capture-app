@@ -37,5 +37,5 @@ class MainPage extends Component<Props> {
         );
     }
 }
-
-export default withSelectionsUpdater()(MainPage);
+// Disabled routing for testing
+export default MainPage;
