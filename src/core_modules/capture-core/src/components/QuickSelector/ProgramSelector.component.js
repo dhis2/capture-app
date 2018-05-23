@@ -38,6 +38,10 @@ const styles = () => ({
         marginBottom: 5,
         padding: 5,
         border: '1px solid lightGrey',
+        '&:hover': {
+            backgroundColor: 'white',
+            borderColor: '#71a4f8', 
+       },
     },
     selectedText: {
         marginTop: 5,
@@ -139,7 +143,7 @@ class ProgramSelector extends Component<Props> {
             <div>
                 <Paper elevation={1} className={this.props.classes.paper}>
                     <h4 className={this.props.classes.title}>{ getTranslation('program') }</h4>
-                    <ACSelect options={programsArray} selected={this.props.selectedProgram ? this.props.selectedProgram : ''} handleChange={this.props.handleClickProgram} placeholder="Program" />
+                    <ACSelect options={programsArray} selected={this.props.selectedProgram ? this.props.selectedProgram : ''} handleChange={this.props.handleClickProgram} placeholder="Select program" />
                 </Paper>
             </div>
         );
