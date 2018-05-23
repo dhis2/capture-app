@@ -4,8 +4,8 @@ import DataEntry from './DataEntry.component';
 import { updateFormField } from './actions/dataEntry.actions';
 
 const mapStateToProps = (state: Object, props: { id: string }) => ({
-    eventId: state.dataEntries[props.id] &&
-        state.dataEntries[props.id].eventId,
+    itemId: state.dataEntries[props.id] &&
+        state.dataEntries[props.id].itemId,
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
@@ -16,14 +16,14 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         sectionId: string,
         formId: string,
         dataEntryId: string,
-        eventId: string,
+        itemId: string,
         onUpdateField: ?(innerAction: ReduxAction<any, any>) => void) => {
-        const updateAction = updateFormField(value, uiState, elementId, sectionId, formId, dataEntryId, eventId);
+        const updateAction = updateFormField(value, uiState, elementId, sectionId, formId, dataEntryId, itemId);
 
         if (onUpdateField) {
             onUpdateField(updateAction);
         } else {
-            dispatch(updateFormField(value, uiState, elementId, sectionId, formId, dataEntryId, eventId));
+            dispatch(updateAction);
         }
     },
 });

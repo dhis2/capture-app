@@ -5,4 +5,6 @@ export const actionTypes = {
     OPEN_NEW_EVENT_PAGE: 'OpenNewEventPage',
 };
 
-export const openNewEventPage = () => actionCreator(actionTypes.OPEN_NEW_EVENT_PAGE)();
+export const openNewEventPage =
+    (programId: string, orgUnitId: string) =>
+        actionCreator(actionTypes.OPEN_NEW_EVENT_PAGE)({ programId, orgUnitId });

@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import { startLoadDataEntryEvent } from 'capture-core/components/DataEntry/actions/dataEntryLoad.actions';
+import { startLoadDataEntryEvent } from 'capture-core/components/DataEntry/actions/dataEntryLoadEdit.actions';
 
 import EventCaptureForm from './EventCaptureForm.component';
 

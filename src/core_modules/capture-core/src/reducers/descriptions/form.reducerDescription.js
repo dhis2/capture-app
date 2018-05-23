@@ -9,7 +9,8 @@ import { actionTypes as rulesEffectsActionTypes } from '../../rulesEngineActions
 export const formsValuesDesc = createReducerDescription({
     [loaderActionTypes.ADD_FORM_DATA]: (state, action) => {
         const newState = { ...state };
-        newState[action.meta.formId] = action.payload;
+        const payload = action.payload;
+        newState[payload.formId] = payload.formValues;
         return newState;
     },
     [fieldActionTypes.UPDATE_FIELD]: (state, action) => {
@@ -37,6 +38,19 @@ export const formsValuesDesc = createReducerDescription({
 }, 'formsValues');
 
 export const formsSectionsFieldsUIDesc = createReducerDescription({
+    [loaderActionTypes.ADD_FORM_DATA]: (state, action) => {
+        const newState = { ...state };
+        const formId = action.payload.formId;
+
+        Object
+            .keys(newState)
+            .filter(sectionKey => sectionKey.startsWith(formId))
+            .forEach((formSectionKey) => {
+                newState[formSectionKey] = {};
+            });
+
+        return newState;
+    },
     [formBuilderActionTypes.FIELDS_VALIDATED]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;

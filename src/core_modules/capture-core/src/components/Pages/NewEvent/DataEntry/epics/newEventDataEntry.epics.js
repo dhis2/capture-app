@@ -1,11 +1,18 @@
 // @flow
 import 'rxjs/add/observable/of';
-import { actionTypes as selectorActionTypes } from '../../MainPage/tempSelector.actions';
-import { actionTypes as newEventDataEntryActionTypes } from './newEventDataEntry.actions';
-import { openNewEventInDataEntry } from '../../../DataEntry/actions/dataEntryLoad.actions';
-import { getRulesActionsOnUpdateForSingleNewEvent } from '../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+import { batchActions } from 'redux-batched-actions';
+import { actionTypes as selectorActionTypes } from '../../../MainPage/tempSelector.actions';
+import {
+    actionTypes as newEventDataEntryActionTypes,
+    openNewEventInDataEntry,
+} from '../newEventDataEntry.actions';
+import {
+    getRulesActionsOnUpdateForSingleNewEvent,
+} from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
 
-import type { FieldData } from '../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+import type { FieldData } from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+
+const UPDATE_FIELD_ACTIONS_BATCH = 'UpdateFieldActionsBatch';
 
 export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
@@ -14,12 +21,13 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
             const state = store.getState();
             const programId = state.currentSelections.programId;
             const orgUnit = state.currentSelections.orgUnit;
-            return openNewEventInDataEntry(null, 'main', programId, orgUnit);
+            return openNewEventInDataEntry(programId, orgUnit);
         });
 
 export const runRulesForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(newEventDataEntryActionTypes.START_RUN_RULES)
+    action$.ofType(UPDATE_FIELD_ACTIONS_BATCH)
+        .map(actionBatch => actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE))
         .map((action) => {
             const state = store.getState();
             const programId = state.currentSelections.programId;
@@ -32,13 +40,15 @@ export const runRulesForSingleEventEpic = (action$: InputObservable, store: Redu
                 valid: payload.uiState.valid,
             };
 
-            return getRulesActionsOnUpdateForSingleNewEvent(
+            const rulesActions = getRulesActionsOnUpdateForSingleNewEvent(
                 programId,
                 payload.formId,
-                payload.eventId,
+                payload.itemId,
                 payload.dataEntryId,
                 state,
                 orgUnit,
                 fieldData,
             );
+
+            return batchActions(rulesActions, 'RulesEffectsActionsBatch');
         });

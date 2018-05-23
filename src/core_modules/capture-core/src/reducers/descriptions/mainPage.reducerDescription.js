@@ -1,6 +1,7 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as selectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
+import { actionTypes as newEventDataEntryActionTypes } from '../../components/Pages/NewEvent/DataEntry/newEventDataEntry.actions';
 
 export const mainPageDesc = createReducerDescription({
     [selectionsActionTypes.UPDATE_MAIN_SELECTIONS]: (state) => {
@@ -41,6 +42,16 @@ export const mainPageDesc = createReducerDescription({
     [selectionsActionTypes.MAIN_SELECTIONS_COMPLETED]: (state) => {
         const newState = { ...state };
         newState.prerequisitesForWorkingListMet = true;
+        return newState;
+    },
+    [newEventDataEntryActionTypes.START_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
+        const newState = { ...state };
+        newState.newEventIsSaving = true;
+        return newState;
+    },
+    [newEventDataEntryActionTypes.NEW_EVENT_SAVED]: (state) => {
+        const newState = { ...state };
+        newState.newEventIsSaving = false;
         return newState;
     },
 }, 'mainPage');
