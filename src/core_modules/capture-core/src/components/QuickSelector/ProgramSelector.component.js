@@ -15,6 +15,7 @@ import { InputLabel } from 'material-ui-next/Input';
 import Paper from 'material-ui-next/Paper';
 import IconButton from 'material-ui-next/IconButton';
 import ClearIcon from 'material-ui-icons/Clear';
+import Grid from 'material-ui-next/Grid';
 
 import { getTranslation } from '../../d2/d2Instance';
 
@@ -46,6 +47,8 @@ const styles = () => ({
     selectedText: {
         marginTop: 5,
         marginBottom: 5,
+        marginLeft: 5,
+        width: '100%',
         padding: 5,
         borderLeft: '2px solid #71a4f8',
     },
@@ -103,6 +106,7 @@ class ProgramSelector extends Component<Props> {
             let selectedProgram = {};
             for (let i = 0; i < programsArray.length; i++) {
                 // Get full program object based on id from this.props.selectedProgram.
+                // TODO: Add CategoryCombo support.
                 if (programsArray[i].id === this.props.selectedProgram) {
                     selectedProgram = programsArray[i];
                 }
