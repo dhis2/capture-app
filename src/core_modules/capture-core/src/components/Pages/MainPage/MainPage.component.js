@@ -7,7 +7,6 @@ import React, { Component } from 'react';
 import withLoadHandler from './withLoadHandler';
 import EventsList from './EventsList/EventsList.container';
 import QuickSelector from '../../QuickSelector/QuickSelector.container';
-import TempSelector from './TempSelector.container';
 
 type Props = {
     currentSelectionsComplete: boolean,
@@ -20,9 +19,6 @@ class MainPage extends Component<Props> {
         return (
             <div>
                 {'{{main menu}}'}
-                <TempSelector
-                    selectionsCompleted={currentSelectionsComplete}
-                />
                 {
                     (() => {
                         if (!currentSelectionsComplete) {

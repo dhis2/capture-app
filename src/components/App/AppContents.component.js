@@ -8,6 +8,7 @@ import getD2 from 'capture-core/d2/d2Instance';
 import MainPage from 'capture-core/components/Pages/MainPage/MainPage.container';
 import NewEvent from 'capture-core/components/Pages/NewEvent/NewEvent.container';
 import EditEvent from 'capture-core/components/Pages/EditEvent/EditEvent.container';
+import QuickSelector from 'capture-core/components/QuickSelector/QuickSelector.container';
 
 // import EventCaptureForm from '../EventCaptureForm/EventCaptureForm.container';
 
@@ -33,6 +34,9 @@ class AppContents extends Component<Props> {
                 className={classes.app}
             >
                 <HeaderBar d2={d2} />
+                <div style={{ paddingTop: 48 }}>
+                    <QuickSelector />
+                </div>
                 <div style={{ padding: 100 }}>
                     <Switch>
                         <Route path="/newEvent" component={NewEvent} />
