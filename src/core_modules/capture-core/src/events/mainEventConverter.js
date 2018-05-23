@@ -1,11 +1,25 @@
 // @flow
 import elementTypes from '../metaData/DataElement/elementTypes';
+import { convertValue as convertToServerValue } from '../converters/clientToServer';
+import { convertValue as convertToClientValue } from '../converters/serverToClient';
 
 type ConverterFn = (type: $Values<typeof elementTypes>, value: any) => any;
 
-function getConvertedValue(valueToConvert: any, key: string, onConvertValue: ConverterFn) {
+type InputCompareKeys = {
+    eventDate?: ?string,
+    dueDate?: ?string,
+    completedDate?: ?string,
+};
+
+type CompareKeys = {
+    eventDate: string,
+    dueDate: string,
+    completedDate: string,
+};
+
+function getConvertedValue(valueToConvert: any, key: string, onConvertValue: ConverterFn, compareKeys: CompareKeys) {
     let convertedValue;
-    if (key === 'eventDate' || key === 'dueDate' || key === 'completedDate') {
+    if (key === compareKeys.eventDate || key === compareKeys.dueDate || key === compareKeys.completedDate) {
         convertedValue = onConvertValue(elementTypes.DATE, valueToConvert);
     } else {
         convertedValue = valueToConvert;
@@ -13,17 +27,49 @@ function getConvertedValue(valueToConvert: any, key: string, onConvertValue: Con
     return convertedValue;
 }
 
-export function convertMainEvent(event: Event, onConvertValue: ConverterFn) {
+export function convertMainEvent(
+    event: Object,
+    onConvertValue: ConverterFn,
+    keyMap: Object = {},
+    compareKeysMapFromDefault: InputCompareKeys = {}) {
+    const calculatedCompareKeys: CompareKeys = {
+        eventDate: compareKeysMapFromDefault.eventDate || 'eventDate',
+        dueDate: compareKeysMapFromDefault.dueDate || 'dueDate',
+        completedDate: compareKeysMapFromDefault.completedDate || 'completedDate',
+    };
+
     return Object
         .keys(event)
         .reduce((accConvertedEvent, key) => {
-            accConvertedEvent[key] = getConvertedValue(event[key], key, onConvertValue);
+            const convertedValue = getConvertedValue(event[key], key, onConvertValue, calculatedCompareKeys);
+            const outputKey = keyMap[key] || key;
+            accConvertedEvent[outputKey] = convertedValue;
             return accConvertedEvent;
         }, {});
 }
 
-export function convertMainEvents(events: Array<Event>, onConvertValue: ConverterFn) {
-    // $FlowSuppress
-    return events
-        .map(event => convertMainEvent(event, onConvertValue));
+const mapEventClientKeyToServerKey = {
+    eventId: 'event',
+    programId: 'program',
+    programStageId: 'programStage',
+    orgUnitId: 'orgUnit',
+    trackedEntityInstanceId: 'trackedEntityInstance',
+    enrollmentId: 'enrollment',
+};
+
+export function convertMainEventClientToServerWithKeysMap(event: Object) {
+    return convertMainEvent(event, convertToServerValue, mapEventClientKeyToServerKey);
+}
+
+const mapEventServerKeyToClientKey = {
+    event: 'eventId',
+    program: 'programId',
+    programStage: 'programStageId',
+    orgUnit: 'orgUnitId',
+    trackedEntityInstance: 'trackedEntityInstanceId',
+    enrollment: 'enrollmentId',
+};
+
+export function convertMainEventServerToClientWithKeysMap(event: Object) {
+    return convertMainEvent(event, convertToClientValue, mapEventServerKeyToClientKey);
 }

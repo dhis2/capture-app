@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { updateField } from '../actions/dataEntry.actions';
 import getDataEntryKey from '../common/getDataEntryKey';
-import { placements } from './eventField.const';
+import { placements } from './dataEntryField.const';
 
 type Validator = (value: any) => boolean;
 
@@ -44,18 +44,18 @@ type Props = {
     settings: Settings,
     id: string,
     fields?: ?Array<FieldContainer>,
-    onUpdateField: (value: any, valueMeta: ValueMetaUpdateOutput, fieldId: string, dataEntryId: string, eventId: string) => void,
+    onUpdateField: (value: any, valueMeta: ValueMetaUpdateOutput, fieldId: string, dataEntryId: string, itemId: string) => void,
     completionAttempted?: ?boolean,
     saveAttempted?: ?boolean,
-    eventId: string,
+    itemId: string,
 };
 
 type Options = {
     touched?: ?boolean,
 };
 
-const getEventField = (InnerComponent: React.ComponentType<any>) =>
-    class EventFieldBuilder extends React.Component<Props> {
+const getDataEntryField = (InnerComponent: React.ComponentType<any>) =>
+    class DataEntryFieldBuilder extends React.Component<Props> {
         handleBlur: (value: any, options?: ?Options) => void;
         innerInstance: any;
         gotoInstance: any;
@@ -113,7 +113,7 @@ const getEventField = (InnerComponent: React.ComponentType<any>) =>
                 isValid: validationErrors.length === 0,
                 validationError: validationErrors.length > 0 ? validationErrors[0] : null,
                 touched: options && options.touched != null ? options.touched : true,
-            }, this.props.settings.propName, this.props.id, this.props.eventId);
+            }, this.props.settings.propName, this.props.id, this.props.itemId);
         }
 
         getFieldElement() {
@@ -135,8 +135,8 @@ const getEventField = (InnerComponent: React.ComponentType<any>) =>
             );
         }
 
-        getEventFields() {
-            const eventFields = this.props.fields;
+        getFields() {
+            const fields = this.props.fields;
             const settings = this.props.settings;
 
             const fieldContainer = {
@@ -144,17 +144,17 @@ const getEventField = (InnerComponent: React.ComponentType<any>) =>
                 placement: (settings.meta && settings.meta.placement) || placements.TOP,
             };
 
-            return eventFields ? [...eventFields, fieldContainer] : [fieldContainer];
+            return fields ? [...fields, fieldContainer] : [fieldContainer];
         }
 
         render() {
-            const { settings, value, valueMeta, fields, eventId, onUpdateField, ...passOnProps } = this.props;
+            const { settings, value, valueMeta, fields, itemId, onUpdateField, ...passOnProps } = this.props;
 
             return (
                 <div>
                     <InnerComponent
                         ref={(innerInstance) => { this.innerInstance = innerInstance; }}
-                        fields={this.getEventFields()}
+                        fields={this.getFields()}
                         {...passOnProps}
                     />
                 </div>
@@ -165,7 +165,7 @@ const getEventField = (InnerComponent: React.ComponentType<any>) =>
 
 type ContainerProps = {
     id: string,
-    eventFields?: ?Array<React.Element<any>>,
+    fields?: ?Array<React.Element<any>>,
     completionAttempted?: ?boolean,
     saveAttempted?: ?boolean,
 };
@@ -174,24 +174,24 @@ type SettingsFn = (props: ContainerProps) => Settings;
 
 const getMapStateToProps = (settingsFn: SettingsFn) => (state: ReduxState, props: ContainerProps) => {
     const settings = settingsFn(props);
-    const eventId = state.dataEntries[props.id].eventId;
-    const key = getDataEntryKey(props.id, eventId);
+    const itemId = state.dataEntries[props.id].itemId;
+    const key = getDataEntryKey(props.id, itemId);
 
     return {
         value: state.dataEntriesFieldsValue[key][settings.propName],
         valueMeta: state.dataEntriesFieldsUI[key][settings.propName],
-        eventId,
+        itemId,
         settings,
     };
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onUpdateField: (value: any, valueMeta: ValueMetaUpdateOutput, fieldId: string, dataEntryId: string, eventId: string) => {
-        dispatch(updateField(value, valueMeta, fieldId, dataEntryId, eventId));
+    onUpdateField: (value: any, valueMeta: ValueMetaUpdateOutput, fieldId: string, dataEntryId: string, itemId: string) => {
+        dispatch(updateField(value, valueMeta, fieldId, dataEntryId, itemId));
     },
 });
 
 export default (settingsFn: SettingsFn) =>
     (InnerComponent: React.ComponentType<any>) =>
-        connect(getMapStateToProps(settingsFn), mapDispatchToProps, null, { withRef: true })(getEventField(InnerComponent));
+        connect(getMapStateToProps(settingsFn), mapDispatchToProps, null, { withRef: true })(getDataEntryField(InnerComponent));
 

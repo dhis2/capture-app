@@ -2,7 +2,7 @@
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/filter';
-import { getApi, getTranslation } from '../../../d2/d2Instance';
+import { getApi, getTranslation } from '../../../../d2/d2Instance';
 import {
     actionTypes,
     setCurrentOrgUnitBasedOnUrl,
@@ -10,8 +10,8 @@ import {
     invalidSelectionsFromUrl,
     validSelectionsFromUrl,
     setEmptyOrgUnitBasedOnUrl,
-} from './newEventSelections.actions';
-import programCollection from '../../../metaDataMemoryStores/programCollection/programCollection';
+} from '../newEventSelections.actions';
+import programCollection from '../../../../metaDataMemoryStores/programCollection/programCollection';
 
 export const selectionsFromUrlGetOrgUnitDataForNewEventEpic = (action$: InputObservable) =>
     // $FlowSuppress

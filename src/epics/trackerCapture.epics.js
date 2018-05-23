@@ -18,11 +18,18 @@ import {
     selectionsFromUrlGetOrgUnitDataForNewEventEpic,
     selectionsFromUrlEmptyOrgUnitForNewEventEpic,
     selectionsFromUrlValidationForNewEventEpic,
-} from 'capture-core/components/Pages/NewEvent/newEventSelections.epics';
+} from 'capture-core/components/Pages/NewEvent/epics/newEventSelections.epics';
+import {
+    openNewEventPageLocationChangeEpic,
+} from 'capture-core/components/Pages/NewEvent/epics/newEvent.epics';
 import {
     openNewEventInDataEntryEpic,
     runRulesForSingleEventEpic,
-} from 'capture-core/components/Pages/NewEvent/DataEntry/newEventDataEntry.epics';
+} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/newEventDataEntry.epics';
+import {
+    saveNewEventEpic,
+    saveNewEventLocationChangeEpic,
+} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/saveNewSingleEvent.epic';
 import {
     retrieveWorkingListEpic,
     updateWorkingListEpic,
@@ -47,6 +54,9 @@ export default combineEpics(
     selectionsFromUrlGetOrgUnitDataForNewEventEpic,
     selectionsFromUrlEmptyOrgUnitForNewEventEpic,
     selectionsFromUrlValidationForNewEventEpic,
+    openNewEventPageLocationChangeEpic,
     openNewEventInDataEntryEpic,
     runRulesForSingleEventEpic,
+    saveNewEventLocationChangeEpic,
+    saveNewEventEpic,
 );

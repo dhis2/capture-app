@@ -6,5 +6,5 @@ export const actionTypes = {
 };
 
 export function addFormData(formId: string, formValues: Object) {
-    return actionCreator(actionTypes.ADD_FORM_DATA)(formValues, { formId });
+    return actionCreator(actionTypes.ADD_FORM_DATA)({ formValues, formId });
 }

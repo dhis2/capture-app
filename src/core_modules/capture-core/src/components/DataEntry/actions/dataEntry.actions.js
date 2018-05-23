@@ -70,10 +70,10 @@ export const saveEvent =
         });
 
 export const saveValidationFailed =
-    (eventId: string, id: string) => actionCreator(actionTypes.SAVE_VALIDATION_FALED)({ eventId, id });
+    (itemId: string, id: string) => actionCreator(actionTypes.SAVE_VALIDATION_FALED)({ itemId, id });
 
 export const saveAbort =
-    (eventId: string, id: string) => actionCreator(actionTypes.SAVE_ABORT)({ eventId, id });
+    (itemId: string, id: string) => actionCreator(actionTypes.SAVE_ABORT)({ itemId, id });
 
 export const updateField =
     (value: any, valueMeta: Object, fieldId: string, dataEntryId: string, eventId: string) =>
@@ -87,7 +87,7 @@ export const updateFormField =
         sectionId: string,
         formId: string,
         dataEntryId: string,
-        eventId: string,
+        itemId: string,
     ) =>
         actionCreator(
-            actionTypes.UPDATE_FORM_FIELD)({ value, uiState, formId, sectionId, elementId, dataEntryId, eventId });
+            actionTypes.UPDATE_FORM_FIELD)({ value, uiState, formId, sectionId, elementId, dataEntryId, itemId });

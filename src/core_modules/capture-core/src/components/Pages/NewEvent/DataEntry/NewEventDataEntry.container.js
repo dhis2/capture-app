@@ -5,7 +5,8 @@ import { batchActions } from 'redux-batched-actions';
 import errorCreator from '../../../../utils/errorCreator';
 import programCollection from '../../../../metaDataMemoryStores/programCollection/programCollection';
 import NewEventDataEntry from './NewEventDataEntry.component';
-import { startRunRulesForNewSingleEvent } from './newEventDataEntry.actions';
+import { startRunRulesOnUpdateForNewSingleEvent, startSaveNewEventAndReturnToMainPage } from './newEventDataEntry.actions';
+import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 
 const getFormFoundation = (state: ReduxState) => {
     const programId = state.currentSelections.programId;
@@ -32,8 +33,11 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onUpdateField: (innerAction: ReduxAction<any, any>) => {
         dispatch(batchActions([
             innerAction,
-            startRunRulesForNewSingleEvent({ payload: innerAction.payload }),
-        ]));
+            startRunRulesOnUpdateForNewSingleEvent(innerAction.payload),
+        ], 'UpdateFieldActionsBatch'));
+    },
+    onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
+        dispatch(startSaveNewEventAndReturnToMainPage(eventId, dataEntryId, formFoundation));
     },
 });
 

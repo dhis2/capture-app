@@ -4,8 +4,9 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 import D2Form from '../D2Form/D2Form.component';
-import { placements } from './eventField/eventField.const';
+import { placements } from './dataEntryField/dataEntryField.const';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
+import getDataEntryKey from './common/getDataEntryKey';
 
 const styles = theme => ({
     footerBar: {
@@ -23,7 +24,7 @@ type FieldContainer = {
 
 type Props = {
     id: string,
-    eventId: string,
+    itemId: string,
     formFoundation: ?RenderFoundation,
     completeButton?: ?React.Element<any>,
     saveButton?: ?React.Element<any>,
@@ -41,7 +42,7 @@ type Props = {
 
 class DataEntry extends React.Component<Props> {
     static errorMessages = {
-        NO_EVENT_SELECTED: 'No event selected',
+        NO_ITEM_SELECTED: 'No item selected',
         FORM_FOUNDATION_MISSING: 'form foundation missing. see log for details',
     };
 
@@ -58,7 +59,7 @@ class DataEntry extends React.Component<Props> {
     }
 
     handleUpdateField(...args) {
-        this.props.onUpdateFieldInner(...args, this.props.id, this.props.eventId, this.props.onUpdateField);
+        this.props.onUpdateFieldInner(...args, this.props.id, this.props.itemId, this.props.onUpdateField);
     }
 
     getFieldWithPlacement(placement: $Values<typeof placements>) {
@@ -75,7 +76,7 @@ class DataEntry extends React.Component<Props> {
         const {
             id,
             classes,
-            eventId,
+            itemId,
             formFoundation,
             completeButton,
             saveButton,
@@ -85,10 +86,10 @@ class DataEntry extends React.Component<Props> {
             onUpdateField,
             ...passOnProps } = this.props;
 
-        if (!eventId) {
+        if (!itemId) {
             return (
                 <div>
-                    {DataEntry.errorMessages.NO_EVENT_SELECTED}
+                    {DataEntry.errorMessages.NO_ITEM_SELECTED}
                 </div>
             );
         }
@@ -110,7 +111,7 @@ class DataEntry extends React.Component<Props> {
                 <D2Form
                     innerRef={(formInstance) => { this.formInstance = formInstance; }}
                     formFoundation={formFoundation}
-                    id={eventId}
+                    id={getDataEntryKey(id, itemId)}
                     validationAttempted={completionAttempted || saveAttempted}
                     onUpdateField={this.handleUpdateField}
                     {...passOnProps}

@@ -6,6 +6,9 @@ import {
     actionTypes as newEventSelectionActionTypes,
 } from '../../components/Pages/NewEvent/newEventSelections.actions';
 import { actionTypes as tempSelectorActionTypes } from '../../components/Pages/MainPage/tempSelector.actions';
+import {
+    actionTypes as newEventDataEntryActionTypes,
+} from '../../components/Pages/NewEvent/DataEntry/newEventDataEntry.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 
@@ -22,6 +25,12 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     [tempSelectorActionTypes.OPEN_NEW_EVENT_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = 'newEvent';
+        newState.pageSwitchInTransition = true;
+        return newState;
+    },
+    [newEventDataEntryActionTypes.START_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
+        const newState = { ...state };
+        newState.page = null;
         newState.pageSwitchInTransition = true;
         return newState;
     },

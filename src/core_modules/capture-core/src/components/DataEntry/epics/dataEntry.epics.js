@@ -15,7 +15,7 @@ import {
     saveEvent,
     saveEventError,
 } from '../actions/dataEntry.actions';
-import { actionTypes as dataEntryLoadTypes, loadDataEntryEvent, openDataEntryEventAlreadyLoaded } from '../actions/dataEntryLoad.actions';
+import { actionTypes as dataEntryLoadTypes, loadDataEntryEvent, openDataEntryEventAlreadyLoaded } from '../actions/dataEntryLoadEdit.actions';
 
 import getDataEntryKey from '../common/getDataEntryKey';
 import { getRulesActionsOnUpdate } from '../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';

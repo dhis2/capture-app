@@ -11,11 +11,12 @@ import TempSelector from './TempSelector.container';
 
 type Props = {
     prerequisitesForWorkingListMet: boolean,
+    newEventIsSaving: boolean,
 };
 
 class MainPage extends Component<Props> {
     render() {
-        const { prerequisitesForWorkingListMet } = this.props;
+        const { prerequisitesForWorkingListMet, newEventIsSaving } = this.props;
 
         return (
             <div>
@@ -27,6 +28,12 @@ class MainPage extends Component<Props> {
                     (() => {
                         if (!prerequisitesForWorkingListMet) {
                             return null;
+                        }
+
+                        if (newEventIsSaving) {
+                            return (
+                                <div>spinner</div>
+                            );
                         }
 
                         return (

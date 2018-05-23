@@ -1,5 +1,5 @@
 // @flow
 
-export default function getDataEntryKey(dataEntryId: string, eventId: string) {
-    return `${dataEntryId}-${eventId}`;
+export default function getDataEntryKey(dataEntryId: string, itemId: string) {
+    return `${dataEntryId}-${itemId}`;
 }
