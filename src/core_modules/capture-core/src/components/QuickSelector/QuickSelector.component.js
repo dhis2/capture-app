@@ -70,7 +70,7 @@ class QuickSelector extends Component<Props> {
     render() {
         return (
             <Paper className={this.props.classes.paper}>
-                <Grid container spacing={24}>
+                <Grid container spacing={16}>
                     <Grid item xs={12} sm={4}>
                         <OrgUnitSelector
                             selectedOrgUint={this.props.selectedOrgUnit}

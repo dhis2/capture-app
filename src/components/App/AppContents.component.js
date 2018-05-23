@@ -9,6 +9,7 @@ import MainPage from 'capture-core/components/Pages/MainPage/MainPage.container'
 import NewEvent from 'capture-core/components/Pages/NewEvent/NewEvent.container';
 import EditEvent from 'capture-core/components/Pages/EditEvent/EditEvent.container';
 import NetworkStatusBadge from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.component';
+import QuickSelector from 'capture-core/components/QuickSelector/QuickSelector.container';
 
 // import EventCaptureForm from '../EventCaptureForm/EventCaptureForm.container';
 
@@ -37,6 +38,9 @@ class AppContents extends Component<Props> {
                 <HeaderBar d2={d2}>
                     <NetworkStatusBadge />
                 </HeaderBar>
+                <div style={{ paddingTop: 48 }}>
+                    <QuickSelector />
+                </div>
                 <div style={{ padding: 100 }}>
                     <Switch>
                         <Route path="/newEvent" component={NewEvent} />
