@@ -34,7 +34,7 @@ class AppContents extends Component<Props> {
                 <div style={{ paddingTop: 48 }}>
                     <QuickSelector />
                 </div>
-                <div style={{ padding: 100 }}>
+                <div style={{ padding: 25 }}>
                     <Switch>
                         <Route path="/event" component={EventCaptureForm} />
                         <Route path="/:keys" component={MainPage} />

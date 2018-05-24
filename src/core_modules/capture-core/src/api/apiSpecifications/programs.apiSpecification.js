@@ -122,6 +122,7 @@ export default new ApiSpecification((_this) => {
             created: d2Program.created,
             description: d2Program.displayDescription,
             version: d2Program.version,
+            categoryCombo: d2Program.categoryCombo,
             programStages: getProgramStages(d2Program.programStages),
             organisationUnits: getOrganisationUnits(d2Program.organisationUnits),
             programType: d2Program.programType,
