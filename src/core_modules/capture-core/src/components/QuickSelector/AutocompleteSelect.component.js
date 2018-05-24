@@ -153,10 +153,11 @@ const styles = theme => ({
             boxShadow: theme.shadows[2],
             position: 'absolute',
             left: 0,
-            top: `calc(100% + ${theme.spacing.unit}px)`,
-            width: '100%',
+            width: 'auto',
+            minWidth: '100%',
             zIndex: 2,
             maxHeight: ITEM_HEIGHT * 4.5,
+            marginTop: 1,
         },
         '.Select.is-focused:not(.is-open) > .Select-control': {
             background: 'transparent',
@@ -205,14 +206,18 @@ class IntegrationReactSelect extends React.Component {
     }
 
   handleChange = () => (selectedOption) => {
-    this.props.handleChange(selectedOption.value);
+    if(this.props.extraSaveParameter) {
+        this.props.handleChange(selectedOption.value, this.props.extraSaveParameter);
+    } else {
+        this.props.handleChange(selectedOption.value);
+    }
   };
 
   render() {
       const { classes } = this.props;
       const options = this.props.options.map(option  => ({
         value: option.id,
-        label: option.name,
+        label: option.name || option.displayName,
     }));
 
       return (

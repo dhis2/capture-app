@@ -71,24 +71,18 @@ const styles = () => ({
 });
 
 type Props = {
-    handleChangeProgram: (value: string) => void,
     handleClickProgram: (value: string) => void,
+    handleSetCatergoryCombo: (value: string) => void,
     resetProgram: () => void,
     selectedProgram: Object,
     classes: Object,
 };
 
 class ProgramSelector extends Component<Props> {
-    handleChange: (event: any) => void;
     handleClick: (program: Object) => void;
     constructor(props) {
         super(props);
-        this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleChange(event) {
-        this.props.handleChangeProgram(event.target.value);
     }
 
     handleClick(program) {
@@ -112,6 +106,31 @@ class ProgramSelector extends Component<Props> {
                 if (programsArray[i].id === this.props.selectedProgram) {
                     selectedProgram = programsArray[i];
                 }
+            }
+            if(selectedProgram.categoryCombo && selectedProgram.categoryCombo.categories.length > 0 && !selectedProgram.categoryCombo.isDefault) {
+                return (
+                    <div>
+                        <Paper elevation={1} className={this.props.classes.selectedPaper}>
+                            <Grid container spacing={8}>
+                                <Grid item xs={12} sm={6}>
+                                    <h4 className={this.props.classes.title}>{ getTranslation('selected_program') }</h4>
+                                    <p className={this.props.classes.selectedText}>{selectedProgram.name}
+                                        <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleReset()}>
+                                            <ClearIcon className={this.props.classes.selectedButtonIcon} />
+                                        </IconButton>
+                                    </p>
+                                </Grid>
+                                {selectedProgram.categoryCombo.categories.map(i =>
+                                (<Grid item xs={12} sm={6}>
+                                    <h4 className={this.props.classes.title}>{i.displayName}</h4>
+                                    <ACSelect options={i.categoryOptions} extraSaveParameter={i.id} handleChange={this.props.handleSetCatergoryCombo} placeholder="Select" />
+                                </Grid>))}
+                                <Grid item xs={12} sm={6}>
+                                </Grid>
+                            </Grid>
+                        </Paper>
+                    </div>
+                );
             }
             return (
                 <div>
