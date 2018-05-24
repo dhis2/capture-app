@@ -239,6 +239,7 @@ function buildProgram(d2Program: CachedProgram) {
             _this.id = d2Program.id;
             _this.name = d2Program.displayName;
             _this.shortName = d2Program.displayShortName;
+            _this.categoryCombo = d2Program.categoryCombo;
         });
         const d2Stage = d2Program.programStages && d2Program.programStages[0];
         program.stage = buildStage(d2Stage);

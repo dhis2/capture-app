@@ -24,7 +24,6 @@ type Props = {
 };
 
 class QuickSelector extends Component<Props> {
-    handleChangeProgram: (program: any) => void;
     handleClickProgram: (program: Object) => void;
     resetProgram: () => void;
     handleChangeOrgUnit: (orgUnit: any) => void;
@@ -33,7 +32,6 @@ class QuickSelector extends Component<Props> {
     constructor(props) {
         super(props);
 
-        this.handleChangeProgram = this.handleChangeProgram.bind(this);
         this.handleClickProgram = this.handleClickProgram.bind(this);
         this.resetProgram = this.resetProgram.bind(this);
         this.handleChangeOrgUnit = this.handleChangeOrgUnit.bind(this);
@@ -41,12 +39,13 @@ class QuickSelector extends Component<Props> {
         this.handleClickActionButton = this.handleClickActionButton.bind(this);
     }
 
-    handleChangeProgram(program) {
+    handleClickProgram(program) {
         this.props.onSetProgramId(program);
     }
 
-    handleClickProgram(program) {
-        this.props.onSetProgramId(program);
+    handleSetCatergoryCombo(selectedCategoryOption, categoryId) {
+        console.log(selectedCategoryOption);
+        console.log(categoryId);
     }
 
     resetProgram() {
@@ -71,18 +70,18 @@ class QuickSelector extends Component<Props> {
         return (
             <Paper className={this.props.classes.paper}>
                 <Grid container spacing={16}>
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={4} md={3}>
                         <OrgUnitSelector
                             selectedOrgUint={this.props.selectedOrgUnit}
                             handleChangeOrgUnit={this.handleChangeOrgUnit}
-                            handleClickOrgUnit={this.handleClickOrgUnit} 
+                            handleClickOrgUnit={this.handleClickOrgUnit}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={4} md={5}>
                         <ProgramSelector
                             selectedProgram={this.props.selectedProgramId}
-                            handleChangeProgram={this.handleChangeProgram}
                             handleClickProgram={this.handleClickProgram}
+                            handleSetCatergoryCombo={this.handleSetCatergoryCombo}
                             resetProgram={this.resetProgram}
                         />
                     </Grid>
