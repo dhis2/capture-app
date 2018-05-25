@@ -34,7 +34,6 @@ type Props = {
 };
 
 type Options = {
-    buttonStyle?: ?Object,
     color?: ?string,
 };
 
@@ -261,12 +260,12 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
             state.dataEntriesUI &&
             state.dataEntriesUI[key] &&
             state.dataEntriesUI[key].saveAttempted,
-        warnings: state.eventsRulesEffectsMessages[itemId] &&
-            Object.keys(state.eventsRulesEffectsMessages[itemId])
+        warnings: state.rulesEffectsMessages[itemId] &&
+            Object.keys(state.rulesEffectsMessages[itemId])
                 .map((elementId) => {
-                    const warning = state.eventsRulesEffectsMessages[itemId][elementId] &&
-                    (state.eventsRulesEffectsMessages[itemId][elementId][messageStateKeys.WARNING] ||
-                        state.eventsRulesEffectsMessages[itemId][elementId][messageStateKeys.WARNING_ON_COMPLETE]);
+                    const warning = state.rulesEffectsMessages[itemId][elementId] &&
+                    (state.rulesEffectsMessages[itemId][elementId][messageStateKeys.WARNING] ||
+                        state.rulesEffectsMessages[itemId][elementId][messageStateKeys.WARNING_ON_COMPLETE]);
                     return {
                         id: elementId,
                         warning,

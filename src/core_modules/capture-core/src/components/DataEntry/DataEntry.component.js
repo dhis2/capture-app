@@ -28,6 +28,7 @@ type Props = {
     formFoundation: ?RenderFoundation,
     completeButton?: ?React.Element<any>,
     saveButton?: ?React.Element<any>,
+    cancelButton?: ?React.Element<any>,
     fields?: ?Array<FieldContainer>,
     completionAttempted?: ?boolean,
     saveAttempted?: ?boolean,
@@ -35,7 +36,7 @@ type Props = {
     onUpdateFieldInner: (
         action: ReduxAction<any, any>,
     ) => void,
-    onUpdateField?: ?(
+    onUpdateFormField?: ?(
         innerAction: ReduxAction<any, any>,
     ) => void,
 };
@@ -59,7 +60,7 @@ class DataEntry extends React.Component<Props> {
     }
 
     handleUpdateField(...args) {
-        this.props.onUpdateFieldInner(...args, this.props.id, this.props.itemId, this.props.onUpdateField);
+        this.props.onUpdateFieldInner(...args, this.props.id, this.props.itemId, this.props.onUpdateFormField);
     }
 
     getFieldWithPlacement(placement: $Values<typeof placements>) {
@@ -80,6 +81,7 @@ class DataEntry extends React.Component<Props> {
             formFoundation,
             completeButton,
             saveButton,
+            cancelButton,
             completionAttempted,
             saveAttempted,
             fields,
@@ -143,6 +145,21 @@ class DataEntry extends React.Component<Props> {
                                         className={classes.button}
                                     >
                                         { saveButton }
+                                    </div>
+                                );
+                            }
+                            return null;
+                        })()
+                    }
+
+                    {
+                        (() => {
+                            if (cancelButton) {
+                                return (
+                                    <div
+                                        className={classes.button}
+                                    >
+                                        { cancelButton }
                                     </div>
                                 );
                             }

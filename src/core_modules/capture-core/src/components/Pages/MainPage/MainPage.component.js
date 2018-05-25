@@ -10,30 +10,23 @@ import QuickSelector from '../../QuickSelector/QuickSelector.container';
 import TempSelector from './TempSelector.container';
 
 type Props = {
-    prerequisitesForWorkingListMet: boolean,
-    newEventIsSaving: boolean,
+    currentSelectionsComplete: boolean,
 };
 
 class MainPage extends Component<Props> {
     render() {
-        const { prerequisitesForWorkingListMet, newEventIsSaving } = this.props;
+        const { currentSelectionsComplete } = this.props;
 
         return (
             <div>
                 {'{{main menu}}'}
                 <TempSelector
-                    selectionsCompleted={prerequisitesForWorkingListMet}
+                    selectionsCompleted={currentSelectionsComplete}
                 />
                 {
                     (() => {
-                        if (!prerequisitesForWorkingListMet) {
+                        if (!currentSelectionsComplete) {
                             return null;
-                        }
-
-                        if (newEventIsSaving) {
-                            return (
-                                <div>spinner</div>
-                            );
                         }
 
                         return (

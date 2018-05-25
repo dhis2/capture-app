@@ -5,8 +5,13 @@ import { batchActions } from 'redux-batched-actions';
 import errorCreator from '../../../../utils/errorCreator';
 import programCollection from '../../../../metaDataMemoryStores/programCollection/programCollection';
 import NewEventDataEntry from './NewEventDataEntry.component';
-import { startRunRulesOnUpdateForNewSingleEvent, startSaveNewEventAndReturnToMainPage } from './newEventDataEntry.actions';
+import {
+    startRunRulesOnUpdateForNewSingleEvent,
+    startSaveNewEventAndReturnToMainPage,
+    cancelNewEventAndReturnToMainPage,
+} from './newEventDataEntry.actions';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
+import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 
 const getFormFoundation = (state: ReduxState) => {
     const programId = state.currentSelections.programId;
@@ -27,6 +32,7 @@ const getFormFoundation = (state: ReduxState) => {
 
 const mapStateToProps = (state: ReduxState) => ({
     formFoundation: getFormFoundation(state),
+    ready: !state.newEventPage.dataEntryIsLoading,
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
@@ -39,7 +45,12 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         dispatch(startSaveNewEventAndReturnToMainPage(eventId, dataEntryId, formFoundation));
     },
+    onCancel: () => {
+        dispatch(cancelNewEventAndReturnToMainPage());
+    },
 });
 
 // $FlowSuppress
-export default connect(mapStateToProps, mapDispatchToProps)(NewEventDataEntry);
+export default connect(mapStateToProps, mapDispatchToProps)(
+    withLoadingIndicator()(NewEventDataEntry),
+);

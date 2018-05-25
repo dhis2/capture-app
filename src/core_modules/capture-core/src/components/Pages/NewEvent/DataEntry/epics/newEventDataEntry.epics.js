@@ -5,23 +5,37 @@ import { actionTypes as selectorActionTypes } from '../../../MainPage/tempSelect
 import {
     actionTypes as newEventDataEntryActionTypes,
     openNewEventInDataEntry,
+    selectionsNotCompleteOpeningNewEvent,
 } from '../newEventDataEntry.actions';
 import {
     getRulesActionsOnUpdateForSingleNewEvent,
 } from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+import {
+    actionTypes as newEventSelectionTypes,
+} from '../../newEventSelections.actions';
+
 
 import type { FieldData } from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
 
 const UPDATE_FIELD_ACTIONS_BATCH = 'UpdateFieldActionsBatch';
 
+export const batchActionTypes = {
+    OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH: 'OpenNewEventInDataEntryActionsBatch',
+    RULES_EFFECTS_ACTIONS_BATCH: 'RulesEffectsActionsBatch',
+};
+
 export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(selectorActionTypes.OPEN_NEW_EVENT_PAGE)
+    action$.ofType(selectorActionTypes.OPEN_NEW_EVENT_PAGE, newEventSelectionTypes.VALID_SELECTIONS_FROM_URL)
         .map(() => {
             const state = store.getState();
+            const selectionsComplete = state.currentSelections.complete;
+            if (!selectionsComplete) {
+                return selectionsNotCompleteOpeningNewEvent();
+            }
             const programId = state.currentSelections.programId;
             const orgUnit = state.currentSelections.orgUnit;
-            return openNewEventInDataEntry(programId, orgUnit);
+            return batchActions(openNewEventInDataEntry(programId, orgUnit), batchActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH);
         });
 
 export const runRulesForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -50,5 +64,5 @@ export const runRulesForSingleEventEpic = (action$: InputObservable, store: Redu
                 fieldData,
             );
 
-            return batchActions(rulesActions, 'RulesEffectsActionsBatch');
+            return batchActions(rulesActions, batchActionTypes.RULES_EFFECTS_ACTIONS_BATCH);
         });

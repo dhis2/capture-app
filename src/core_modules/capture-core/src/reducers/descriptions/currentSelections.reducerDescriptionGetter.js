@@ -6,15 +6,24 @@ import {
     actionTypes as newEventSelectionActionTypes,
 } from '../../components/Pages/NewEvent/newEventSelections.actions';
 
+type CurrentSelectionsState = {
+    programId?: ?string,
+    orgUnitId?: ?string,
+};
+
+const calculateCompleteStatus = (state: CurrentSelectionsState) => {
+    return !!(state.programId && state.orgUnitId);
+};
+
 export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => createReducerDescription({
     ...appUpdaters,
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS]: (state, action) => {
-        const newState = { ...state, ...action.payload };
+        const newState = { ...state, ...action.payload, complete: calculateCompleteStatus(state) };
         return newState;
     },
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: (state, action) => {
         const { page, ...selections } = action.payload;
-        const newState = { ...state, ...selections };
+        const newState = { ...state, ...selections, complete: false };
         return newState;
     },
     [mainSelectionsActionTypes.ORG_UNIT_DATA_RETRIVED]: (state, action) => {
@@ -39,7 +48,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     },
     [newEventSelectionActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
         const { page, ...selections } = action.payload;
-        const newState = { ...state, ...selections };
+        const newState = { ...state, ...selections, complete: false };
         return newState;
     },
     [newEventSelectionActionTypes.SET_ORG_UNIT_BASED_ON_URL]: (state, action) => {
@@ -56,6 +65,11 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     },
     [newEventSelectionActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: (state) => {
         const newState = { ...state, orgUnit: null };
+        return newState;
+    },
+    [newEventSelectionActionTypes.VALID_SELECTIONS_FROM_URL]: (state) => {
+        const newState = { ...state };
+        newState.complete = calculateCompleteStatus(newState);
         return newState;
     },
 }, 'currentSelections');

@@ -146,6 +146,7 @@ const fieldForTypes = {
         const props = createComponentProps({
             width: 350,
             label: metaData.formName,
+            metaCompulsory: metaData.compulsory,
         });
 
         return createFieldProps({

@@ -29,7 +29,7 @@ export const makeGetSectionValues = () => createDeepEqualSelector(
 
 const sectionIsCompulsorySelector = (state, props) => {
     const metaData = props.fieldsMetaData;
-    const compulsoryFields = state.eventsRulesEffectsCompulsoryFields[props.formId] || {};
+    const compulsoryFields = state.rulesEffectsCompulsoryFields[props.formId] || {};
     const sectionCompulsoryFields = Array.from(metaData.entries())
         .map(entry => entry[1])
         .reduce((accCompulsoryFields, metaDataElement) => {
@@ -45,7 +45,7 @@ export const makeGetCompulsory = () => createDeepEqualSelector(
 
 const sectionHiddenFieldsSelector = (state, props) => {
     const metaData = props.fieldsMetaData;
-    const hiddenFields = state.eventsRulesEffectsHiddenFields[props.formId] || {};
+    const hiddenFields = state.rulesEffectsHiddenFields[props.formId] || {};
     const sectionHiddenFields = Array.from(metaData.entries())
         .map(entry => entry[1])
         .reduce((accHiddenFields, metaDataElement) => {
@@ -72,7 +72,7 @@ const createMessagesDeepEqualSelector = createSelectorCreator(
 
 const sectionRulesMessagesSelector = (state, props) => {
     const metaData = props.fieldsMetaData;
-    const messages = state.eventsRulesEffectsMessages[props.formId] || {};
+    const messages = state.rulesEffectsMessages[props.formId] || {};
     const sectionErrorMessages = Array.from(metaData.entries())
         .map(entry => entry[1])
         .reduce((accErrorFields, metaDataElement) => {
