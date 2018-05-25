@@ -22,8 +22,8 @@ export const mainSelectionsCompletedEpic = (action$: InputObservable, store: Red
     // $FlowSuppress
     action$.ofType(actionTypes.UPDATE_MAIN_SELECTIONS, actionTypes.VALID_SELECTIONS_FROM_URL)
         .filter(() => {
-            const { programId, orgUnitId } = store.getState().currentSelections;
-            return programId && orgUnitId;
+            const currentSelectionsComplete = !!store.getState().currentSelections.complete;
+            return currentSelectionsComplete;
         })
         .map(() => mainSelectionCompleted());
 

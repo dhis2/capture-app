@@ -5,6 +5,7 @@ import { getTranslation } from '../../../../d2/d2Instance';
 import { formatterOptions } from '../../../../utils/string/format.const';
 import DataEntry from '../../../../components/DataEntry/DataEntry.container';
 import withSaveButton from '../../../../components/DataEntry/withSaveButton';
+import withCancelButton from '../../../../components/DataEntry/withCancelButton';
 import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
 import { placements } from '../../../../components/DataEntry/dataEntryField/dataEntryField.const';
 import isValidDate from '../../../../utils/validators/date.validator';
@@ -20,6 +21,10 @@ import withDefaultShouldUpdateInterface from
 
 const getSaveOptions = () => ({
     color: 'primary',
+});
+
+const getCancelOptions = () => ({
+    color: 'default',
 });
 
 const preValidateDate = (value?: ?string) => {
@@ -93,22 +98,25 @@ const buildCompleteFieldSettingsFn = () => {
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(DataEntry);
 const CompleteField = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
 const SaveableDataEntry = withSaveButton(getSaveOptions)(CompleteField);
+const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
 
 type Props = {
     formFoundation: ?RenderFoundation,
     onUpdateField: (innerAction: ReduxAction<any, any>) => void,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onCancel: () => void,
 };
 
 class NewEventDataEntry extends Component<Props> {
     render() {
-        const { formFoundation, onUpdateField, onSave } = this.props;
+        const { formFoundation, onUpdateField, onSave, onCancel } = this.props;
         return (
             <div>
-                <SaveableDataEntry
+                <CancelableDataEntry
                     id={'singleEvent'}
                     formFoundation={formFoundation}
-                    onUpdateField={onUpdateField}
+                    onUpdateFormField={onUpdateField}
+                    onCancel={onCancel}
                     onSave={onSave}
                 />
             </div>

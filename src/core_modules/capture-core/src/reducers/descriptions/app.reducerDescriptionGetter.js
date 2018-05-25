@@ -34,6 +34,12 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         newState.pageSwitchInTransition = true;
         return newState;
     },
+    [newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
+        const newState = { ...state };
+        newState.page = null;
+        newState.pageSwitchInTransition = true;
+        return newState;
+    },
     [LOCATION_CHANGE]: (state) => {
         const newState = { ...state };
         newState.pageSwitchInTransition = false;

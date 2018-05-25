@@ -1,16 +1,21 @@
 // @flow
 import { replace } from 'react-router-redux';
+import { isString, isObject } from 'd2-utilizr';
+import log from 'loglevel';
+import errorCreator from '../../../../../utils/errorCreator';
 import moment from '../../../../../utils/moment/momentResolver';
 import {
     actionTypes as newEventDataEntryActionTypes,
-    newEventSaved,
+    newEventSavedAfterReturnedToMainPage,
+    saveFailedForNewEventAfterReturnedToMainPage,
 } from '../newEventDataEntry.actions';
 
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import convertDataEntryToClientValues from '../../../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../../../converters/clientToServer';
 import { convertMainEventClientToServerWithKeysMap } from '../../../../../events/mainEventConverter';
-import { getApi } from '../../../../../d2/d2Instance';
+import { getApi, getTranslation } from '../../../../../d2/d2Instance';
+import { formatterOptions } from '../../../../../utils/string/format.const';
 
 export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
@@ -56,9 +61,17 @@ export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
             };
 
             return getApi().post('events', serverData)
-                .then(() => newEventSaved())
+                .then(() => newEventSavedAfterReturnedToMainPage())
                 .catch((error) => {
-                    var x = "g4g";
+                    const errorMessage = isString(error) ? error : error.message;
+                    const errorObject = isObject(error) ? error : null;
+                    log.error(errorCreator(errorMessage || getTranslation('error_saving_event'))(errorObject));
+                    return saveFailedForNewEventAfterReturnedToMainPage(
+                        getTranslation(
+                            'error_saving_event',
+                            formatterOptions.CAPITALIZE_FIRST_LETTER,
+                        ),
+                    );
                 });
         });
 

@@ -265,12 +265,12 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
             state.dataEntriesUI &&
             state.dataEntriesUI[key] &&
             state.dataEntriesUI[key].completionAttempted,
-        warnings: state.eventsRulesEffectsMessages[eventId] &&
-            Object.keys(state.eventsRulesEffectsMessages[eventId])
+        warnings: state.rulesEffectsMessages[eventId] &&
+            Object.keys(state.rulesEffectsMessages[eventId])
                 .map((elementId) => {
-                    const warning = state.eventsRulesEffectsMessages[eventId][elementId] &&
-                    (state.eventsRulesEffectsMessages[eventId][elementId][messageStateKeys.WARNING] ||
-                        state.eventsRulesEffectsMessages[eventId][elementId][messageStateKeys.WARNING_ON_COMPLETE]);
+                    const warning = state.rulesEffectsMessages[eventId][elementId] &&
+                    (state.rulesEffectsMessages[eventId][elementId][messageStateKeys.WARNING] ||
+                        state.rulesEffectsMessages[eventId][elementId][messageStateKeys.WARNING_ON_COMPLETE]);
                     return {
                         id: elementId,
                         warning,

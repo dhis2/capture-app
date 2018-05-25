@@ -4,7 +4,7 @@ import D2Section from './D2Section.component';
 import MetaDataSection from '../../metaData/RenderFoundation/Section';
 
 const mapStateToProps = (state: Object, props: { sectionMetaData: MetaDataSection }) => ({
-    isHidden: !!state.eventsRulesEffectsHiddenSections[props.sectionMetaData.id],
+    isHidden: !!state.rulesEffectsHiddenSections[props.sectionMetaData.id],
 });
 
 // $FlowSuppress

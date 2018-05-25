@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
+import LoadingMaskForPage from '../LoadingMasks/LoadingMaskForPage.component';
 import {
     updateMainSelectionsFromUrl as updateMainSelectionsFromUrlForMainPage,
 } from '../Pages/MainPage/mainSelections.actions';
@@ -117,10 +118,20 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
         }
 
         render() {
-            const { location, onUpdateFromUrl, pageSwitchInTransition, programId, orgUnitId, page, ...passOnProps } = this.props;
+            const {
+                location,
+                onUpdateFromUrl,
+                pageSwitchInTransition,
+                programId,
+                orgUnitId,
+                page,
+                ...passOnProps
+            } = this.props;
 
             if (pageSwitchInTransition) {
-                return null;
+                return (
+                    <LoadingMaskForPage />
+                );
             }
 
             this.setPageAndParams();

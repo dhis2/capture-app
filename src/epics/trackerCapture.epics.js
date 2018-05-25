@@ -31,6 +31,10 @@ import {
     saveNewEventLocationChangeEpic,
 } from 'capture-core/components/Pages/NewEvent/DataEntry/epics/saveNewSingleEvent.epic';
 import {
+    cancelNewEventEpic,
+    cancelNewEventLocationChangeEpic,
+} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/cancelNewSingleEvent.epic';
+import {
     retrieveWorkingListEpic,
     updateWorkingListEpic,
 } from 'capture-core/components/Pages/MainPage/EventsList/eventsList.epics';
@@ -59,4 +63,6 @@ export default combineEpics(
     runRulesForSingleEventEpic,
     saveNewEventLocationChangeEpic,
     saveNewEventEpic,
+    cancelNewEventLocationChangeEpic,
+    cancelNewEventEpic,
 );
