@@ -19,12 +19,15 @@ const styles = () => ({
 type Props = {
     selectedOrgUnit: Object,
     selectedProgramId: string,
+    selectedCategories: Object,
     classes: Object,
     onSetProgramId: (programId: string) => void,
+    onSetCategoryOptionId: (categoryId: string, selectedCategoryOptionId: string) => void,
 };
 
 class QuickSelector extends Component<Props> {
     handleClickProgram: (program: Object) => void;
+    handleSetCatergoryCombo: (selectedCategoryOption: string, categoryId: string) => void;
     resetProgram: () => void;
     handleChangeOrgUnit: (orgUnit: any) => void;
     handleClickOrgUnit: (orgUnit: Object) => void;
@@ -33,6 +36,7 @@ class QuickSelector extends Component<Props> {
         super(props);
 
         this.handleClickProgram = this.handleClickProgram.bind(this);
+        this.handleSetCatergoryCombo = this.handleSetCatergoryCombo.bind(this);
         this.resetProgram = this.resetProgram.bind(this);
         this.handleChangeOrgUnit = this.handleChangeOrgUnit.bind(this);
         this.handleClickOrgUnit = this.handleClickOrgUnit.bind(this);
@@ -44,8 +48,7 @@ class QuickSelector extends Component<Props> {
     }
 
     handleSetCatergoryCombo(selectedCategoryOption, categoryId) {
-        console.log(selectedCategoryOption);
-        console.log(categoryId);
+        this.props.onSetCategoryOptionId(categoryId, selectedCategoryOption);
     }
 
     resetProgram() {
@@ -80,6 +83,7 @@ class QuickSelector extends Component<Props> {
                     <Grid item xs={12} sm={4} md={5}>
                         <ProgramSelector
                             selectedProgram={this.props.selectedProgramId}
+                            selectedCategories={this.props.selectedCategories}
                             handleClickProgram={this.handleClickProgram}
                             handleSetCatergoryCombo={this.handleSetCatergoryCombo}
                             resetProgram={this.resetProgram}
