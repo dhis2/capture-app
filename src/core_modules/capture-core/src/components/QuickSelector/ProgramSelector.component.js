@@ -4,7 +4,10 @@
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui-next/styles';
 
-import  ACSelect from './AutocompleteSelect.component';
+// import  ACSelect from './AutocompleteSelect.component';
+import ACSelect from 'capture-core/components/FormFields/Options/SelectVirtualized/OptionsSelectVirtualized.component';
+import OptionSet from 'capture-core/metaData/OptionSet/OptionSet';
+import Option from 'capture-core/metaData/OptionSet/Option';
 
 import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import List, { ListItem, ListItemText } from 'material-ui-next/List';
@@ -70,30 +73,48 @@ const styles = () => ({
 
 type Props = {
     handleClickProgram: (value: string) => void,
-    handleSetCatergoryCombo: (value: string) => void,
+    handleSetCatergoryCombo: (value: string, value: string) => void,
     resetProgram: () => void,
     selectedProgram: Object,
+    selectedCategories: Object,
     classes: Object,
 };
 
 class ProgramSelector extends Component<Props> {
     handleClick: (program: Object) => void;
+    handleClickCategoryOption: (value: string, value: string) => void;
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
+        this.handleClickCategoryOption = this.handleClickCategoryOption.bind(this);
     }
 
     handleClick(program) {
         this.props.handleClickProgram(program.id);
     }
 
-    handleReset() {
+    handleClickCategoryOption(selectedCategoryOption, categoryId) {
+        this.props.handleSetCatergoryCombo(selectedCategoryOption, categoryId);
+    }
+
+    handleResetProgram() {
         this.props.resetProgram();
+    }
+
+    handleResetCategory(categoryId) {
+        this.props.handleSetCatergoryCombo(null, categoryId);
     }
 
     // TODO: Add support for cat-combos.
     render() {
         const programsArray = Array.from(programs.values());
+        
+        const programOptions = programsArray.map(optionCount => new Option((_this) => {
+            _this.value = optionCount.id;
+            _this.text = optionCount.name;
+        }));
+
+        const programOptionSet = new OptionSet('programOptionSet', programOptions);
 
         // If program is set in Redux state.
         if (this.props.selectedProgram) {
@@ -113,18 +134,42 @@ class ProgramSelector extends Component<Props> {
                                 <Grid item xs={12} sm={6}>
                                     <h4 className={this.props.classes.title}>{ getTranslation('selected_program') }</h4>
                                     <p className={this.props.classes.selectedText}>{selectedProgram.name}
-                                        <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleReset()}>
+                                        <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetProgram()}>
                                             <ClearIcon className={this.props.classes.selectedButtonIcon} />
                                         </IconButton>
                                     </p>
                                 </Grid>
                                 {selectedProgram.categoryCombo.categories.map(i =>
-                                (<Grid item xs={12} sm={6}>
-                                    <h4 className={this.props.classes.title}>{i.displayName}</h4>
-                                    <ACSelect options={i.categoryOptions} extraSaveParameter={i.id} handleChange={this.props.handleSetCatergoryCombo} placeholder="Select" />
-                                </Grid>))}
-                                <Grid item xs={12} sm={6}>
-                                </Grid>
+                                    (<Grid item xs={12} sm={6}>
+                                        <h4 className={this.props.classes.title}>{i.displayName}</h4>
+                                        {
+                                            (() => {
+                                                if(this.props.selectedCategories && this.props.selectedCategories[i.id]) {
+                                                    return (
+                                                        <p className={this.props.classes.selectedText}>{i.categoryOptions.find(option => option.id === this.props.selectedCategories[i.id]).displayName}
+                                                            <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetCategory(i.id)}>
+                                                                <ClearIcon className={this.props.classes.selectedButtonIcon} />
+                                                            </IconButton>
+                                                        </p> 
+                                                    );
+                                                }
+                                                const categoryOptions = i.categoryOptions.map(optionCount => new Option((_this) => {
+                                                    _this.value = optionCount.id;
+                                                    _this.text = optionCount.displayName;
+                                                }));
+
+                                                const categoryOptionSet = new OptionSet('categoryOptionSet', categoryOptions);
+
+                                                return (
+                                                    <ACSelect optionSet={categoryOptionSet} 
+                                                              onBlur={(option) => {this.handleClickCategoryOption(option, i.id)}}
+                                                              placeholder="Select"
+                                                    />
+                                                );
+                                            })()
+                                        }
+                                    </Grid>))
+                                }
                             </Grid>
                         </Paper>
                     </div>
@@ -135,7 +180,7 @@ class ProgramSelector extends Component<Props> {
                     <Paper elevation={1} className={this.props.classes.selectedPaper}>
                         <h4 className={this.props.classes.title}>{ getTranslation('selected_program') }</h4>
                         <p className={this.props.classes.selectedText}>{selectedProgram.name}
-                            <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleReset()}>
+                            <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetProgram()}>
                                 <ClearIcon className={this.props.classes.selectedButtonIcon} />
                             </IconButton>
                         </p>
@@ -166,7 +211,7 @@ class ProgramSelector extends Component<Props> {
             <div>
                 <Paper elevation={1} className={this.props.classes.paper}>
                     <h4 className={this.props.classes.title}>{ getTranslation('program') }</h4>
-                    <ACSelect options={programsArray} selected={this.props.selectedProgram ? this.props.selectedProgram : ''} handleChange={this.props.handleClickProgram} placeholder="Select program" />
+                    <ACSelect optionSet={programOptionSet} onBlur={this.props.handleClickProgram} placeholder="Select program" />
                 </Paper>
             </div>
         );

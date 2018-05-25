@@ -15,6 +15,7 @@ class OptionsSelectVirtualizedOption extends Component<Props> {
         display: 'flex',
         alignItems: 'center',
         cursor: 'pointer',
+        paddingLeft: 5,
     };
 
     static selectedStyle = {};

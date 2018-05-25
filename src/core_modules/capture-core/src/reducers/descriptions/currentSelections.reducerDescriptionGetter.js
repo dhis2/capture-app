@@ -2,7 +2,7 @@
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import { actionTypes as selectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
-import { actionTypes as setProgramIdActionTypes } from '../../components/QuickSelector/actions/QuickSelector.actions';
+import { actionTypes as setCurrentSelectionsActionTypes } from '../../components/QuickSelector/actions/QuickSelector.actions';
 
 export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => createReducerDescription({
     ...appUpdaters,
@@ -14,8 +14,20 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         const newState = { ...state, orgUnit: action.payload };
         return newState;
     },
-    [setProgramIdActionTypes.SET_PROGRAM_ID]: (state, action) => {
+    [setCurrentSelectionsActionTypes.SET_PROGRAM_ID]: (state, action) => {
         const newState = { ...state, programId: action.payload };
+        return newState;
+    },
+    [setCurrentSelectionsActionTypes.SET_CATEGORY_ID]: (state, action) => {
+        let categories = {};
+        if (state.categories) {
+            // Necessary step to prevent mutation.
+            categories = Object.assign({}, state.categories);
+            categories[action.payload.categoryId] = action.payload.selectedCategoryOptionId;
+        } else {
+            categories[action.payload.categoryId] = action.payload.selectedCategoryOptionId;
+        }
+        const newState = { ...state, categories };
         return newState;
     },
 }, 'currentSelections');
