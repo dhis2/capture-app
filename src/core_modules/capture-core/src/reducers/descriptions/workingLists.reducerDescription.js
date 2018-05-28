@@ -77,7 +77,14 @@ export const workingListsMetaDesc = createReducerDescription({
 }, 'workingListsMeta');
 
 export const workingListsUIDesc = createReducerDescription({
-    [mainSelectionsActionTypes.MAIN_SELECTIONS_COMPLETED]: (state) => {
+    [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS]: (state) => {
+        const newState = { ...state };
+        newState.main = {
+            isLoading: true,
+        };
+        return newState;
+    },
+    [mainSelectionsActionTypes.VALID_SELECTIONS_FROM_URL]: (state) => {
         const newState = { ...state };
         newState.main = {
             isLoading: true,

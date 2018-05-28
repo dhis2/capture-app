@@ -117,7 +117,7 @@ export const updateWorkingListEpic = (action$: InputObservable, store: ReduxStor
             const { programId, orgUnitId } = state.currentSelections;
 
             if (action.type === newEventDataEntryActionTypes.NEW_EVENT_SAVED_AFTER_RETURNED_TO_MAIN_PAGE) {
-                const isListLoaded = !!state.workingListsColumnsOrder.main;
+                const isListLoaded = !!state.workingListsUI.hasBeenLoaded;
                 if (!isListLoaded) {
                     return getInitialWorkingListActionAsync(programId, orgUnitId);
                 }
