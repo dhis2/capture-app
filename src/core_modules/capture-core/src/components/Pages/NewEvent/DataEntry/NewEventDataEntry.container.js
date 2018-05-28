@@ -43,9 +43,11 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         ], 'UpdateFieldActionsBatch'));
     },
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
+        window.scrollTo(0, 0);
         dispatch(startSaveNewEventAndReturnToMainPage(eventId, dataEntryId, formFoundation));
     },
     onCancel: () => {
+        window.scrollTo(0, 0);
         dispatch(cancelNewEventAndReturnToMainPage());
     },
 });

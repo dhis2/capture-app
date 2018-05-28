@@ -46,6 +46,11 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         const newState = { ...state, orgUnit: null };
         return newState;
     },
+    [mainSelectionsActionTypes.VALID_SELECTIONS_FROM_URL]: (state) => {
+        const newState = { ...state };
+        newState.complete = calculateCompleteStatus(newState);
+        return newState;
+    },
     [newEventSelectionActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
         const { page, ...selections } = action.payload;
         const newState = { ...state, ...selections, complete: false };

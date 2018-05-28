@@ -16,8 +16,6 @@ import FeedbackBar from 'capture-core/components/FeedbackBar/FeedbackBar.contain
 import withAppUrlSync from 'capture-core/components/App/withAppUrlSync';
 import withUrlSync from 'capture-core/components/UrlSync/withUrlSync';
 
-// d2-ui
-import { LoadingMask } from '@dhis2/d2-ui-core';
 import AppContents from './AppContents.component';
 
 //HOCs
@@ -28,14 +26,14 @@ import legacyTheme from '../../styles/uiThemeLegacy';
 import theme from '../../styles/uiTheme';
 
 const AppContentsOutOfSyncLoadingIndicator = withStateBoundLoadingIndicator(
-    (state: ReduxState, props: any) => !props.urlOutOfSync)(AppContents);
+    (state: ReduxState, props: any) => !props.urlOutOfSync, null, true)(AppContents);
 const AppContentsUrlParamSync = withUrlSync(
     (props: Object) => props.syncSpecification
 )(AppContentsOutOfSyncLoadingIndicator);
 const AppContentsUrlParam = withAppUrlSync()(AppContentsUrlParamSync);
 const AppContentsD2Context = withD2InContext()(AppContentsUrlParam);
 const AppContentsInitLoadingIndicator = withStateBoundLoadingIndicator(
-    (state: ReduxState, props: any) => state.app.initDone)(AppContentsD2Context);
+    (state: ReduxState, props: any) => state.app.initDone, null, true)(AppContentsD2Context);
 const AppContentsRouterLoader = withRouter(AppContentsInitLoadingIndicator);
 
 type Props = {
