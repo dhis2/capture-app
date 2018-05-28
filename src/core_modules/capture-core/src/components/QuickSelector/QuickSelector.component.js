@@ -66,6 +66,7 @@ class QuickSelector extends Component<Props> {
     handleClickActionButton() {
         // Also reset orgUnit.
         this.props.onSetProgramId(null);
+        this.props.onSetCategoryOptionId(null, null);
     }
 
     // TODO: Add support for cat-combos.

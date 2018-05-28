@@ -20,7 +20,9 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     },
     [setCurrentSelectionsActionTypes.SET_CATEGORY_ID]: (state, action) => {
         let categories = {};
-        if (state.categories) {
+        if (!action.payload.categoryId && !action.payload.selectedCategoryOptionId) {
+            categories = null;
+        } else if (state.categories) {
             // Necessary step to prevent mutation.
             categories = Object.assign({}, state.categories);
             categories[action.payload.categoryId] = action.payload.selectedCategoryOptionId;
