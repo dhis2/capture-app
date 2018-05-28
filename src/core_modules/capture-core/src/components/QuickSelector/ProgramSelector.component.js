@@ -105,7 +105,6 @@ class ProgramSelector extends Component<Props> {
         this.props.handleSetCatergoryCombo(null, categoryId);
     }
 
-    // TODO: Add support for cat-combos.
     render() {
         const programsArray = Array.from(programs.values());
         
@@ -121,7 +120,6 @@ class ProgramSelector extends Component<Props> {
             let selectedProgram = {};
             for (let i = 0; i < programsArray.length; i++) {
                 // Get full program object based on id from this.props.selectedProgram.
-                // TODO: Add CategoryCombo support.
                 if (programsArray[i].id === this.props.selectedProgram) {
                     selectedProgram = programsArray[i];
                 }
@@ -140,7 +138,7 @@ class ProgramSelector extends Component<Props> {
                                     </p>
                                 </Grid>
                                 {selectedProgram.categoryCombo.categories.map(i =>
-                                    (<Grid item xs={12} sm={6}>
+                                    (<Grid key={i.id} item xs={12} sm={6}>
                                         <h4 className={this.props.classes.title}>{i.displayName}</h4>
                                         {
                                             (() => {
