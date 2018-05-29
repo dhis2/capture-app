@@ -10,6 +10,9 @@ import {
     startSaveNewEventAndReturnToMainPage,
     cancelNewEventAndReturnToMainPage,
 } from './newEventDataEntry.actions';
+import {
+    makeProgramNameSelector,
+} from './newEventDataEntry.selector';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 
@@ -21,6 +24,7 @@ const getFormFoundation = (state: ReduxState) => {
         return null;
     }
 
+    // $FlowSuppress
     const foundation = program.getStage();
     if (!foundation) {
         log.error(errorCreator('stage not found for program')({ method: 'getFormFoundation' }));
@@ -28,12 +32,19 @@ const getFormFoundation = (state: ReduxState) => {
     }
 
     return foundation;
-}
+};
 
-const mapStateToProps = (state: ReduxState) => ({
-    formFoundation: getFormFoundation(state),
-    ready: !state.newEventPage.dataEntryIsLoading,
-});
+const makeMapStateToProps = () => {
+    const programNameSelector = makeProgramNameSelector();
+
+    const mapStateToProps = (state: ReduxState) => ({
+        formFoundation: getFormFoundation(state),
+        ready: !state.newEventPage.dataEntryIsLoading,
+        programName: programNameSelector(state),
+        orgUnitName: state.currentSelections.orgUnit && state.currentSelections.orgUnit.name,
+    });
+    return mapStateToProps;
+};
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onUpdateField: (innerAction: ReduxAction<any, any>) => {
@@ -53,6 +64,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowSuppress
-export default connect(mapStateToProps, mapDispatchToProps)(
+export default connect(makeMapStateToProps, mapDispatchToProps)(
     withLoadingIndicator()(NewEventDataEntry),
 );

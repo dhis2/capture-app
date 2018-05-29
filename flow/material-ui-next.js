@@ -52,3 +52,15 @@ declare module 'material-ui-next/Tooltip' {
 declare module 'material-ui-next/CssBaseline' {
     declare module.exports: any;
 }
+
+declare module 'material-ui-next/Paper' {
+    declare module.exports: any;
+}
+
+declare module 'material-ui-next/colors/grey' {
+    declare module.exports: any;
+}
+
+declare module 'material-ui-next/colors/blue' {
+    declare module.exports: any;
+}

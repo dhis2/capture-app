@@ -1,7 +1,14 @@
 // @flow
 import { createMuiTheme } from 'material-ui-next/styles';
+import grey from 'material-ui-next/colors/grey';
+import blue from 'material-ui-next/colors/blue';
 
-const theme = createMuiTheme();
+const theme = createMuiTheme({
+    palette: {
+        primary: blue,
+        secondary: grey,
+    },
+});
 
 theme.typography.formFieldTitle = {
     fontSize: theme.typography.pxToRem(12),

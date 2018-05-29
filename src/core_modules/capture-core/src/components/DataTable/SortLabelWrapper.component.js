@@ -20,7 +20,7 @@ const styles = theme => ({
         width: '14px',
         height: '14px',
         cursor: 'pointer',
-        color: theme.palette.secondary.main,
+        color: '#3a796f',
     },
 });
 
