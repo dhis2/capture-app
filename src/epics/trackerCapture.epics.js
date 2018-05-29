@@ -29,11 +29,14 @@ import {
 import {
     saveNewEventEpic,
     saveNewEventLocationChangeEpic,
-} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/saveNewSingleEvent.epic';
+} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/saveNewSingleEvent.epics';
 import {
     cancelNewEventEpic,
     cancelNewEventLocationChangeEpic,
-} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/cancelNewSingleEvent.epic';
+} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/cancelNewSingleEvent.epics';
+import {
+    cancelNewEventIncompleteSelectionsLocationChangeEpic,
+} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/cancelNewSingleEventSelectionsIncomplete.epics';
 import {
     retrieveWorkingListEpic,
     updateWorkingListEpic,
@@ -65,4 +68,5 @@ export default combineEpics(
     saveNewEventEpic,
     cancelNewEventLocationChangeEpic,
     cancelNewEventEpic,
+    cancelNewEventIncompleteSelectionsLocationChangeEpic,
 );

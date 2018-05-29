@@ -9,4 +9,3 @@ const mapStateToProps = (state: ReduxState) => ({
 
 // $FlowSuppress
 export default connect(mapStateToProps)(NewEvent);
-

@@ -1,5 +1,7 @@
 // @flow
 import React, { Component } from 'react';
+import { withStyles } from 'material-ui-next/styles';
+import InfoIcon from '@material-ui/icons/InfoOutline';
 import { Validators } from '@dhis2/d2-ui-core';
 import { getTranslation } from '../../../../d2/d2Instance';
 import { formatterOptions } from '../../../../utils/string/format.const';
@@ -19,12 +21,27 @@ import withDefaultChangeHandler from '../../../../components/DataEntry/dataEntry
 import withDefaultShouldUpdateInterface from
     '../../../../components/DataEntry/dataEntryField/withDefaultShouldUpdateInterface';
 
+const getStyles = theme => ({
+    savingContextContainer: {
+        paddingTop: 10,
+        display: 'flex',
+        alignItems: 'center',
+        color: theme.palette.text.hint,
+    },
+    savingContextText: {
+        paddingLeft: 5,
+    },
+    savingContextNames: {
+        fontWeight: 'bold',
+    },
+});
+
 const getSaveOptions = () => ({
     color: 'primary',
 });
 
 const getCancelOptions = () => ({
-    color: 'default',
+    color: 'secondary',
 });
 
 const preValidateDate = (value?: ?string) => {
@@ -102,27 +119,76 @@ const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry
 
 type Props = {
     formFoundation: ?RenderFoundation,
+    programName: string,
+    orgUnitName: string,
     onUpdateField: (innerAction: ReduxAction<any, any>) => void,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onCancel: () => void,
+    classes: {
+        savingContextContainer: string,
+        savingContextText: string,
+        savingContextNames: string,
+    },
 };
 
 class NewEventDataEntry extends Component<Props> {
+    getSavingText() {
+        const { classes, orgUnitName, programName } = this.props;
+        const firstPart = `${getTranslation('saving_to', formatterOptions.CAPITALIZE_FIRST_LETTER)} `;
+        const secondPart = ` ${getTranslation('in')} `;
+
+        return (
+            <span>
+                {firstPart}
+                <span
+                    className={classes.savingContextNames}
+                >
+                    {programName}
+                </span>
+                {secondPart}
+                <span
+                    className={classes.savingContextNames}
+                >
+                    {orgUnitName}
+                </span>
+            </span>
+        );
+    }
     render() {
-        const { formFoundation, onUpdateField, onSave, onCancel } = this.props;
+        const {
+            formFoundation,
+            onUpdateField,
+            onSave,
+            onCancel,
+            programName, // eslint-disable-line
+            orgUnitName, // eslint-disable-line
+            classes,
+        } = this.props;
         return (
             <div>
-                <CancelableDataEntry
-                    id={'singleEvent'}
-                    formFoundation={formFoundation}
-                    onUpdateFormField={onUpdateField}
-                    onCancel={onCancel}
-                    onSave={onSave}
-                />
+                <div>
+                    <CancelableDataEntry
+                        id={'singleEvent'}
+                        formFoundation={formFoundation}
+                        onUpdateFormField={onUpdateField}
+                        onCancel={onCancel}
+                        onSave={onSave}
+                    />
+                </div>
+                <div
+                    className={classes.savingContextContainer}
+                >
+                    <InfoIcon />
+                    <div
+                        className={classes.savingContextText}
+                    >
+                        {this.getSavingText()}
+                    </div>
+                </div>
             </div>
         );
     }
 }
 
 
-export default NewEventDataEntry;
+export default withStyles(getStyles)(NewEventDataEntry);

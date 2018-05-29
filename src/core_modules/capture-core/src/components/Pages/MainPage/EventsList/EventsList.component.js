@@ -15,7 +15,6 @@ import elementTypes from '../../../../metaData/DataElement/elementTypes';
 import getTableComponents from '../../../d2Ui/dataTable/getTableComponents';
 import basicTableAdapter from '../../../d2UiReactAdapters/dataTable/basicTable.adapter';
 import paginationAdapter from '../../../d2UiReactAdapters/dataTable/pagination.adapter';
-import LoadingMask from '../../../LoadingMasks/LoadingMask.component';
 
 import withData from './Pagination/withData';
 import withNavigation from '../../../Pagination/withDefaultNavigation';

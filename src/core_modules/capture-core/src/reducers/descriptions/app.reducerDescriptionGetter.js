@@ -40,6 +40,12 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         newState.pageSwitchInTransition = true;
         return newState;
     },
+    [newEventDataEntryActionTypes.CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE]: (state) => {
+        const newState = { ...state };
+        newState.page = null;
+        newState.pageSwitchInTransition = true;
+        return newState;
+    },
     [LOCATION_CHANGE]: (state) => {
         const newState = { ...state };
         newState.pageSwitchInTransition = false;
