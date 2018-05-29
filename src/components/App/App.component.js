@@ -56,9 +56,8 @@ class App extends React.Component<Props> {
                         <MuiThemeProvider
                             theme={theme}
                         >
-                            <AppContentsRouterLoader />
                             <D2UIApp>
-                                <D2AppContentsLoaderBlockAvoider />
+                                <AppContentsRouterLoader />
                                 <FeedbackBar />
                             </D2UIApp>
                         </MuiThemeProvider>

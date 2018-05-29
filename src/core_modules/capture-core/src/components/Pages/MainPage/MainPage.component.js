@@ -3,7 +3,7 @@
  * @namespace MainPage
 */
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui-next/styles';
+import { withStyles } from '@material-ui/core/styles';
 import QuickSelector from 'capture-core/components/QuickSelector/QuickSelector.container';
 
 import LoadingMask from '../../LoadingMasks/LoadingMask.component';
