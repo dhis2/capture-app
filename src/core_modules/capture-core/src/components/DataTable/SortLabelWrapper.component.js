@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
-import Tooltip from 'material-ui-next/Tooltip';
+import Tooltip from '@material-ui/core/Tooltip';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import { withStyles } from 'material-ui-next/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 import { getTranslation } from '../../d2/d2Instance';
 import { formatterOptions } from '../../utils/string/format.const';

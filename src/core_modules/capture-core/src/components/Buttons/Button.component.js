@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 
-import MuiButton from 'material-ui-next/Button';
-import { withStyles } from 'material-ui-next/styles';
+import MuiButton from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
 
 type Props = {
     classes: Object,

@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui-next/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 import D2Section from './D2Section.container';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';

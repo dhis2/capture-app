@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable react/no-multi-comp */
 import * as React from 'react';
-import { withStyles } from 'material-ui-next/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 import getStageFromEvent from '../../metaData/helpers/getStageFromEvent';
 import D2Form from '../D2Form/D2Form.component';

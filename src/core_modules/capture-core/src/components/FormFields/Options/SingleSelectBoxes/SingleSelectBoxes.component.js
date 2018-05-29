@@ -1,12 +1,15 @@
 // @flow
 /* eslint-disable react/no-array-index-key */
 import React, { Component } from 'react';
-import Checkbox from 'material-ui-next/Checkbox';  // using custom checkboxes because RadioButton can not be deselected
-import { FormControl, FormLabel, FormGroup, FormControlLabel } from 'material-ui-next/Form';
-import { withStyles } from 'material-ui-next/styles';
+import Checkbox from '@material-ui/core/Checkbox';  // using custom checkboxes because RadioButton can not be deselected
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { withStyles } from '@material-ui/core/styles';
 
-import RadioOffIcon from 'material-ui-icons/PanoramaFishEye';
-import RadioOnIcon from 'material-ui-icons/CheckCircle';
+import RadioOffIcon from '@material-ui/icons/PanoramaFishEye';
+import RadioOnIcon from '@material-ui/icons/CheckCircle';
 
 import { orientations } from './singleSelectBoxes.const';
 

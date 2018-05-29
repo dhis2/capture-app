@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import TextField from 'material-ui-next/TextField';
+import TextField from '@material-ui/core/TextField';
 
 type Props = {
     onChange: (value: string, event: UiEventData) => void,

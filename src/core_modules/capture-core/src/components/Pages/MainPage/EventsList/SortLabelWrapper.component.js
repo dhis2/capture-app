@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
-import ArrowDownwardIcon from 'material-ui-icons/ArrowDownward';
-import ArrowUpwardIcon from 'material-ui-icons/ArrowUpward';
-import Icon from 'material-ui-next/Icon';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import Icon from '@material-ui/core/Icon';
 
 import getTableComponents from '../../../DataTable/d2Ui/getTableComponents';
 import sortLabelAdapter from '../../../DataTable/d2UiReactAdapters/sortLabel.adapter'; 

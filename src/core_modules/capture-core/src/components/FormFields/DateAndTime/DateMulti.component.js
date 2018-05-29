@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui-next/styles';
+import { withStyles } from '@material-ui/core/styles';
 import InfiniteCalendar, { Calendar, defaultMultipleDateInterpolation, withMultipleDates } from 'react-infinite-calendar';
 
 import moment from '../../../utils/moment/momentResolver';

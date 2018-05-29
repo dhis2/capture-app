@@ -1,6 +1,5 @@
 // @flow
 import { createSelectorCreator, createSelector, defaultMemoize } from 'reselect';
-import { ensureState } from 'redux-optimistic-ui';
 
 import getStageFromProgramIdForEventProgram from '../../../../metaData/helpers/getStageFromProgramIdForEventProgram';
 import getStageFromEvent from '../../../../metaData/helpers/getStageFromEvent';
@@ -63,8 +62,8 @@ export const makeColumnsSelector = () => createSelector(
 );
 // #END HEADERS
 
-const eventsMainDataSelector = state => ensureState(state.events);
-const eventsValuesSelector = state => ensureState(state.eventsValues);
+const eventsMainDataSelector = state => state.events;
+const eventsValuesSelector = state => state.eventsValues;
 const sortOrderSelector = state => state.workingLists.main.order;
 
 
@@ -102,6 +101,9 @@ const createDeepEqualSelector = createSelectorCreator(
 const eventsContainerSelector = eventContainers => eventContainers;
 
 const buildWorkingListData = (eventsContainer: Array<EventContainer>) => {
+
+    console.log('buildWorkingListData', eventsContainer);
+
     if (eventsContainer.length === 0) {
         return [];
     }

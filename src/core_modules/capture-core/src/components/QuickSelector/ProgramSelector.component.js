@@ -1,14 +1,16 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui-next/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
-import List, { ListItem, ListItemText } from 'material-ui-next/List';
-import Select from 'material-ui-next/Select';
-import { MenuItem } from 'material-ui-next/Menu';
-import { FormControl } from 'material-ui-next/Form';
-import { InputLabel } from 'material-ui-next/Input';
-import Paper from 'material-ui-next/Paper';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem'; 
+import ListItemText from '@material-ui/core/ListItemText';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Paper from '@material-ui/core/Paper';
 
 const styles = () => ({
     paper: {

@@ -2,12 +2,12 @@
 /* eslint-disable class-methods-use-this */
 
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui-next/styles';
+import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
 import VirtualizedSelect from 'react-virtualized-select';
-import { FormControl } from 'material-ui-next/Form';
-import { InputLabel } from 'material-ui-next/Input';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
 
 import 'react-select/dist/react-select.css';
 import 'react-virtualized/styles.css';

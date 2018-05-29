@@ -1,8 +1,11 @@
 // @flow
 import React, { Component } from 'react';
-import Switch from 'material-ui-next/Switch';
-import { FormControl, FormLabel, FormGroup, FormControlLabel } from 'material-ui-next/Form';
-import { withStyles } from 'material-ui-next/styles';
+import Switch from '@material-ui/core/Switch';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
     label: theme.typography.formFieldTitle,

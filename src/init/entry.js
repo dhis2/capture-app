@@ -7,6 +7,9 @@ import 'typeface-roboto';
 import createHistory from 'history/createHashHistory';
 import type { HashHistory } from 'history/createHashHistory';
 
+import D2UIApp from '@dhis2/d2-ui-app';
+import { LoadingMask } from '@dhis2/d2-ui-core';
+
 import environments from 'capture-core/constants/environments';
 
 // TEST
@@ -21,6 +24,13 @@ import { startupDataLoad } from './entry.actions';
 const DOM_ID = 'app';
 
 async function runApp(domElement: HTMLElement, store: ReduxStore, history: HashHistory) {
+    render(
+        <D2UIApp>
+            <LoadingMask />
+        </D2UIApp>,
+        domElement
+    );
+
     try {
         await initialize();
         store.dispatch(startupDataLoad());

@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 // import React from 'react';
-// import FontIcon from 'material-ui/FontIcon';
+// import FontIcon from '@material-ui/core/FontIcon';
 import isArray from 'd2-utilizr/src/isArray';
 
 import Option from './Option';

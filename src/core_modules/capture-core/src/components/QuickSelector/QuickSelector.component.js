@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui-next/styles';
+import { withStyles } from '@material-ui/core/styles';
 
-import Paper from 'material-ui-next/Paper';
-import Grid from 'material-ui-next/Grid';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
 import ProgramSelector from 'capture-core/components/QuickSelector/ProgramSelector.component';
 import OrgUnitSelector from 'capture-core/components/QuickSelector/OrgUnitSelector.component';

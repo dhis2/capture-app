@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui-next/styles';
+import { withStyles } from '@material-ui/core/styles';
 
-import IconButton from 'material-ui/IconButton';
-import FontIcon from 'material-ui/FontIcon';
+import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
 
 const styles = theme => ({
     container: {
@@ -85,11 +85,9 @@ class SectionHeaderSimple extends Component<Props> {
                                         title={this.props.isCollapsed ? 'Åpne' : 'Lukk'}
                                         onTouchTap={this.handleChangeCollapse}
                                     >
-                                        <FontIcon
-                                            className="material-icons"
-                                        >
+                                        <Icon>
                                             {this.props.isCollapsed ? 'keyboard_arrow_down' : 'keyboard_arrow_up'}
-                                        </FontIcon>
+                                        </Icon>
                                     </IconButton>
                                 );
                             }

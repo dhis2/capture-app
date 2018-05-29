@@ -1,5 +1,5 @@
 // @flow
-import { createMuiTheme } from 'material-ui-next/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme();
 

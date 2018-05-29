@@ -20,6 +20,7 @@ const errorMessages = {
 };
 
 const getWorkingList = async (programId: string, orgUnitId: string) => {
+    console.log('hello');
     const eventsPromise = getEvents({
         program: programId,
         orgUnit: orgUnitId,

@@ -104,6 +104,7 @@ export default async function getEvents(queryParams: ?Object) {
     const apiRes = await api
         .get('events', { ...queryParams, totalPages: true });
 
+    console.log(apiRes);
     const eventContainers = apiRes && apiRes.events ? apiRes.events.reduce((accEvents, apiEvent) => {
         const eventContainer = convertToClientEvent(apiEvent);
         if (eventContainer) {
