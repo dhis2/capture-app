@@ -1,6 +1,5 @@
 // @flow
 /* eslint-disable no-new-func */
-import { ensureState } from 'redux-optimistic-ui';
 import { convertValue } from '../../../converters/formToClient';
 import getDataEntryKey from './getDataEntryKey';
 
@@ -20,7 +19,7 @@ export default function convertDataEntryValuesToEventValues(
     }
 
     const dataEntryValuesMeta = state.dataEntriesFieldsMeta[dataEntryKey];
-    const prevEventMainData = ensureState(state.events)[eventId];
+    const prevEventMainData = state.events[eventId];
     const eventValues = Object
         .keys(dataEntryValues)
         .reduce((accEventValues, key) => {

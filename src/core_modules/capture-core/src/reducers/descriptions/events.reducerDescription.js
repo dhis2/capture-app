@@ -1,5 +1,4 @@
 // @flow
-import { optimistic } from 'redux-optimistic-ui';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
@@ -59,7 +58,7 @@ export const eventsDesc = createReducerDescription({
         newState[payload.eventId] = payload.event;
         return newState;
     },
-}, 'events', {}, optimistic);
+}, 'events', {});
 
 export const eventsValuesDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
@@ -100,4 +99,4 @@ export const eventsValuesDesc = createReducerDescription({
         newState[payload.eventId] = action.payload.clientValues;
         return newState;
     },
-}, 'eventsValues', {}, optimistic);
+}, 'eventsValues', {});

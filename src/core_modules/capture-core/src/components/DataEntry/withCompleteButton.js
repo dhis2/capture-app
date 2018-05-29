@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { ensureState } from 'redux-optimistic-ui';
 import log from 'loglevel';
 import Dialog, {
     DialogActions,
@@ -260,7 +259,7 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
 
     return {
         eventId,
-        event: eventId && ensureState(state.events)[eventId],
+        event: eventId && state.events[eventId],
         completionAttempted:
             state.dataEntriesUI &&
             state.dataEntriesUI[key] &&

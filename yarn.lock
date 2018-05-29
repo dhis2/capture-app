@@ -8380,10 +8380,6 @@ redux-observable@^0.18.0:
   dependencies:
     gitbook-plugin-github "^2.0.0"
 
-redux-optimistic-ui@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/redux-optimistic-ui/-/redux-optimistic-ui-3.1.0.tgz#efd07bb8483185db221b50f3d0ea42ce93b12d6d"
-
 redux-persist@^4.5.0:
   version "4.10.2"
   resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-4.10.2.tgz#8efdb16cfe882c521a78a6d0bfdfef2437f49f96"

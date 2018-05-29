@@ -2,7 +2,6 @@
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/concatMap';
 import log from 'loglevel';
-import { ensureState } from 'redux-optimistic-ui';
 import errorCreator from '../../utils/errorCreator';
 
 import getEnrollmentEvents from '../../events/getEnrollmentEvents';
@@ -47,7 +46,7 @@ export const loadEnrollmentData = (action$: InputObservable) =>
 export const loadDataEntryData = (action$: InputObservable, store: ReduxStore) =>
     action$.ofType(actionTypes.ENROLLMENT_LOADED)
         .map(() => {
-            const events = ensureState(store.getState().events);
+            const events = store.getState().events;
             const firstEventKey = Object.keys(events)[0];
 
             return loadDataEntryEvent(

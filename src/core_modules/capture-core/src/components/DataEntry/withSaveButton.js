@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { ensureState } from 'redux-optimistic-ui';
 import log from 'loglevel';
 import Dialog, {
     DialogActions,
@@ -256,7 +255,7 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
     const key = getDataEntryKey(props.id, eventId);
     return {
         eventId,
-        event: eventId && ensureState(state.events)[eventId],
+        event: eventId && state.events[eventId],
         saveAttempted:
             state.dataEntriesUI &&
             state.dataEntriesUI[key] &&

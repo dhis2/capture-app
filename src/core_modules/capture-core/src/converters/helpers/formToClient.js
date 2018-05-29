@@ -1,6 +1,5 @@
 // @flow
 import log from 'loglevel';
-import { ensureState } from 'redux-optimistic-ui';
 
 import errorCreator from '../../utils/errorCreator';
 import { getTranslation } from '../../d2/d2Instance';
@@ -19,7 +18,7 @@ export function convertFormValuesToClient(formValues: ?Object, stage: RenderFoun
 }
 
 export function convertStateFormValuesToClient(eventId: string, state: Object) {
-    const event = ensureState(state.events)[eventId];
+    const event = state.events[eventId];
     const formValues = state.formsValues[eventId];
 
     const program = programCollection.get(event.programId);

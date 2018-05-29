@@ -1,6 +1,5 @@
 // @flow
 import log from 'loglevel';
-import { ensureState } from 'redux-optimistic-ui';
 import { batchActions } from 'redux-batched-actions';
 
 import metaDataCollection from '../../../metaDataMemoryStores/programCollection/programCollection';
@@ -102,8 +101,8 @@ export function loadDataEntryEvent(
     state: ReduxState,
     dataEntryPropsToInclude?: ?Array<DataEntryPropToInclude>,
     id: string) {
-    const event: Event = ensureState(state.events)[eventId];
-    const eventValues = ensureState(state.eventsValues)[eventId];
+    const event: Event = state.events[eventId];
+    const eventValues = state.eventsValues[eventId];
 
     const program = metaDataCollection.get(event.programId);
     if (!program) {

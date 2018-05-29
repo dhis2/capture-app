@@ -3,8 +3,6 @@
  * @module rulesEngineActionsCreatorForEvent
  */
 
-import { ensureState } from 'redux-optimistic-ui';
-
 import RulesEngine from '../RulesEngine/RulesEngine';
 import inputValueConverter from './inputValueConverter';
 import outputRulesEffectsValueConverter from './rulesEffectsValueConverter';
@@ -168,12 +166,12 @@ function getCurrentEventValues(
     foundation: RenderFoundation,
     formId: string,
     updatedEventField?: ?FieldData) {
-    const currentFormData = ensureState(state.formsValues)[formId] || {};
+    const currentFormData = state.formsValues[formId] || {};
     const updatedCurrentFormData = updatedEventField ?
         { ...currentFormData, [updatedEventField.elementId]: updatedEventField.value } :
         currentFormData;
 
-    const sectionsFieldsUIState = ensureState(state.formsSectionsFieldsUI);
+    const sectionsFieldsUIState = state.formsSectionsFieldsUI;
     const fieldValidations = getFieldsValidationForForm(sectionsFieldsUIState, formId);
     const updatedFieldValidations = updatedEventField ?
         { ...fieldValidations, [updatedEventField.elementId]: updatedEventField.valid } :
@@ -212,20 +210,20 @@ function getCurrentEventMainData(state: ReduxState, event: Event, dataEntryId: s
     const dataEntryClientValues =
         convertDataEntryValuesToEventValues(state, event.eventId, dataEntryId, validDataEntryValues);
 
-    const eventValues = ensureState(state.events)[event.eventId];
+    const eventValues = state.events[event.eventId];
     return { ...eventValues, ...dataEntryClientValues };
 }
 
 // Also convert other open form data?
 function getAllEventsValues(state: ReduxState, currentEventValues: ?{ [key: string]: any}, event: Event) {
-    const eventsValues = ensureState(state.eventsValues);
+    const eventsValues = state.eventsValues;
     const eventsValuesWithUpdatedCurrent = { ...eventsValues, [event.eventId]: currentEventValues };
     return eventsValuesWithUpdatedCurrent;
 }
 
 // Also convert other open form data?
 function getAllEventsMainData(state: ReduxState, currentEventMainData: { [key: string]: any}, event: Event) {
-    const events = ensureState(state.events);
+    const events = state.events;
     const eventsWithUpdatedCurrent = { ...events, [event.eventId]: currentEventMainData };
     return eventsWithUpdatedCurrent;
 }
@@ -261,8 +259,8 @@ function getRulesEngineArguments(
         currentEventMainData = getCurrentEventMainData(state, event, dataEntryId);
         currentEventData = { ...currentEventValues, ...currentEventMainData };
     } else {
-        currentEventValues = ensureState(state.eventsValues)[event.eventId];
-        currentEventMainData = ensureState(state.events)[event.eventId];
+        currentEventValues = state.eventsValues[event.eventId];
+        currentEventMainData = state.events[event.eventId];
         currentEventData = { ...currentEventValues, ...currentEventMainData };
     }
 
@@ -464,7 +462,7 @@ function getRulesActions(
     updatedFieldData?: ?FieldData,
     isLoad?: ?boolean): Array<ReduxAction<any, any>> {
     const eventId = currentEventId;
-    const event = ensureState(state.events)[eventId];
+    const event = state.events[eventId];
     const programId = event.programId;
 
     const program = programCollection.get(programId);

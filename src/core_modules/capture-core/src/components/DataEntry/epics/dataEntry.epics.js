@@ -1,7 +1,6 @@
 // @flow
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/concatMap';
-import { ensureState } from 'redux-optimistic-ui';
 import { batchActions } from 'redux-batched-actions';
 
 import { convertStateFormValuesToClient } from '../../../converters/helpers/formToClient';
@@ -50,7 +49,7 @@ function convertForSaveAndComplete(state: ReduxState, eventId: string, id: strin
     }
     const clientValues = clientValuesContainer.values;
 
-    const oldEvent = ensureState(state.events)[eventId];
+    const oldEvent = state.events[eventId];
     const eventMainData = { ...oldEvent, ...convertDataEntryValuesToEventValues(state, eventId, id) };
 
     // $FlowSuppress : TODO - TEI
