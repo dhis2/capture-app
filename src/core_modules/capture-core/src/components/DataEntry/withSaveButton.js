@@ -20,6 +20,8 @@ import getDataEntryKey from './common/getDataEntryKey';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 
+import { D2Form } from '../D2Form/D2Form.component';
+
 type Props = {
     classes: Object,
     formFoundation: RenderFoundation,
@@ -74,7 +76,7 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
             let done;
             while (!done) {
                 currentInstance = currentInstance.getWrappedInstance && currentInstance.getWrappedInstance();
-                if (!currentInstance || currentInstance.constructor.name === 'D2Form') {
+                if (!currentInstance || currentInstance instanceof D2Form) {
                     done = true;
                 }
             }

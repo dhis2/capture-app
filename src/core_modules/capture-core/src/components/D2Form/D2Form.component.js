@@ -18,7 +18,7 @@ type Props = {
     classes: Object,
 };
 
-class D2Form extends Component<Props> {
+export class D2Form extends Component<Props> {
     validateForm: () => void;
     sectionInstances: Map<string, D2Section>;
 
