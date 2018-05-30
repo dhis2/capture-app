@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { withStyles } from 'material-ui-next/styles';
+import { withStyles } from '@material-ui/core/styles';
 import NewEventDataEntry from './NewEventDataEntry.container';
 import DataEntrySelectionsIncomplete from './DataEntrySelectionsIncomplete.container';
 import { getTranslation } from '../../../../d2/d2Instance';

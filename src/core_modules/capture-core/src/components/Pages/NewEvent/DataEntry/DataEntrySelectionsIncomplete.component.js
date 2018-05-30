@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui-next/styles';
-import Paper from 'material-ui-next/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import Button from '../../../Buttons/Button.component';
 import { getTranslation } from '../../../../d2/d2Instance';
 

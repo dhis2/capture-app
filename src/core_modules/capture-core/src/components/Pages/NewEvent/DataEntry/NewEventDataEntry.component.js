@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui-next/styles';
+import { withStyles } from '@material-ui/core/styles';
 import InfoIcon from '@material-ui/icons/InfoOutline';
-import { Validators } from '@dhis2/d2-ui-core';
+import { Validators } from '@dhis2/d2-ui-forms';
 import { getTranslation } from '../../../../d2/d2Instance';
 import { formatterOptions } from '../../../../utils/string/format.const';
 import DataEntry from '../../../../components/DataEntry/DataEntry.container';
