@@ -5,12 +5,11 @@ import { init, config, getUserSettings, getManifest } from 'd2/lib/d2';
 import environments from 'capture-core/constants/environments';
 import moment from 'capture-core/utils/moment/momentResolver';
 import CurrentLocaleData from 'capture-core/utils/localeData/CurrentLocaleData';
-import { setD2 } from 'capture-core/d2/d2Instance';
+import { setD2, getTranslation } from 'capture-core/d2/d2Instance';
+import { formatterOptions } from 'capture-core/utils/string/format.const';
 
-// LANGUAGE FILES
+
 import 'moment/locale/nb';
-import dateFnNorwegianLocale from 'date-fns/locale/nb';
-// END LANGUAGE FILES
 
 import loadMetaData from 'capture-core/metaDataStoreLoaders/baseLoader/metaDataLoader';
 import buildMetaData from 'capture-core/metaDataMemoryStoreBuilders/baseBuilder/metaDataBuilder';
@@ -46,25 +45,53 @@ function configI18n(keyUiLocale: string) {
     config.i18n.sources.add(`i18n/module/i18n_module_${locale}.properties`);
     return keyUiLocale;
 }
-// TODO: Using norwegian for now
+
+// TODO: Make api-requests?
+function getLocaleSpecs(locale: string) {
+    const fallbackLocale = 'en';
+    let calculatedLocale = locale;
+    try {
+        if (locale !== 'en') {
+            require(`moment/locale/${locale}`);
+        }
+    } catch (error) {
+        log.error(`could not get moment locale for ${locale}`);
+        calculatedLocale = fallbackLocale;
+    }
+
+    let dateFnLocale;
+    try {
+        dateFnLocale = require(`date-fns/locale/${locale}`);
+    } catch (error) {
+        log.error(`could not get date-fns locale for ${locale}`);
+        dateFnLocale = require('date-fns/locale/en');
+        calculatedLocale = fallbackLocale;
+    }
+
+    return {
+        calculatedLocale,
+        dateFnLocale,
+    };
+}
+
 function setLocaleData(uiLocale: string) { //eslint-disable-line
-    moment.locale('nb');
+    const locale = 'en';
+    const { calculatedLocale, dateFnLocale } = getLocaleSpecs(locale);
+    moment.locale(calculatedLocale);
     const weekdays = moment.weekdays();
     const weekdaysShort = moment.weekdaysShort();
-
     // $FlowSuppress
     const firstDayOfWeek = moment.localeData()._week.dow; //eslint-disable-line
-
     const localeData: LocaleDataType = {
-        dateFnsLocale: dateFnNorwegianLocale,
+        dateFnsLocale: dateFnLocale,
         weekDays: weekdays,
         weekDaysShort: weekdaysShort,
         calendarFormatHeaderLong: 'dddd D MMM',
         calendarFormatHeaderShort: 'D MMM',
-        selectDatesText: 'Velg en eller flere datoer...',
-        selectDateText: 'Velg en dato...',
-        todayLabelShort: 'I dag',
-        todayLabelLong: 'I dag',
+        selectDatesText: getTranslation('choose_one_or_more_dates', formatterOptions.CAPITALIZE_FIRST_LETTER),
+        selectDateText: getTranslation('choose_a_date', formatterOptions.CAPITALIZE_FIRST_LETTER),
+        todayLabelShort: getTranslation('today', formatterOptions.CAPITALIZE_FIRST_LETTER),
+        todayLabelLong: getTranslation('today', formatterOptions.CAPITALIZE_FIRST_LETTER),
         weekStartsOn: firstDayOfWeek,
     };
 
