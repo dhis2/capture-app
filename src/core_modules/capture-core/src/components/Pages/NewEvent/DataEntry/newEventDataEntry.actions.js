@@ -1,5 +1,4 @@
 // @flow
-import { batchActions } from 'redux-batched-actions';
 import { actionCreator } from '../../../../actions/actions.utils';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
 import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';

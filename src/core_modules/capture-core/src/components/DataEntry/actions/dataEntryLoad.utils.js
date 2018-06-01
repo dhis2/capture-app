@@ -1,4 +1,7 @@
 // @flow
+import DataElement from '../../../metaData/DataElement/DataElement';
+import { convertValue } from '../../../converters/clientToForm';
+import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 
 type DataEntryPropToIncludeStandard = {|
     id: string,
@@ -25,4 +28,45 @@ export function getDataEntryMeta(dataEntryPropsToInclude: Array<DataEntryPropToI
                     { onConvertOut: propToInclude.onConvertOut.toString(), outId: propToInclude.inId };
             return accMeta;
         }, {});
+}
+
+export function getDataEntryValues(
+    dataEntryPropsToInclude: Array<DataEntryPropToInclude>,
+    clientValuesForDataEntry: Object,
+) {
+    const standardValuesArray = dataEntryPropsToInclude
+        // $FlowSuppress :flow filter problem
+        .filter(propToInclude => propToInclude.type)
+        // $FlowSuppress :flow filter problem
+        .map((propToInclude: DataEntryPropToIncludeStandard) => new DataElement((_this) => {
+            _this.id = propToInclude.id;
+            _this.type = propToInclude.type;
+        }))
+        .map(dataElement => ({
+            id: dataElement.id,
+            value: dataElement.convertValue(clientValuesForDataEntry[dataElement.id], convertValue),
+        }));
+
+    const specialValuesArray = dataEntryPropsToInclude
+        // $FlowSuppress :flow filter problem
+        .filter(propToInclude => propToInclude.onConvertIn)
+        // $FlowSuppress :flow filter problem
+        .map((propToInclude: DataEntryPropToIncludeSpecial) => ({
+            id: propToInclude.outId,
+            value: propToInclude.onConvertIn(clientValuesForDataEntry[propToInclude.inId]),
+        }));
+
+    return [...standardValuesArray, ...specialValuesArray]
+        .reduce((accConvertedValues, valueItem: { id: string, value: any }) => {
+            accConvertedValues[valueItem.id] = valueItem.value;
+            return accConvertedValues;
+        }, {});
+}
+
+export function getFormValues(
+    clientValuesForForm: Object,
+    formFoundation: RenderFoundation,
+) {
+    const convertedValues = formFoundation.convertValues(clientValuesForForm, convertValue);
+    return convertedValues;
 }

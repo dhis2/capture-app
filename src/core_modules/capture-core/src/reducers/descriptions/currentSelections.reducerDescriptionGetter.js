@@ -5,6 +5,9 @@ import { actionTypes as mainSelectionsActionTypes } from '../../components/Pages
 import {
     actionTypes as newEventSelectionActionTypes,
 } from '../../components/Pages/NewEvent/newEventSelections.actions';
+import {
+    actionTypes as editEventActionTypes,
+} from '../../components/Pages/EditEvent/editEvent.actions';
 
 type CurrentSelectionsState = {
     programId?: ?string,
@@ -75,6 +78,16 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     [newEventSelectionActionTypes.VALID_SELECTIONS_FROM_URL]: (state) => {
         const newState = { ...state };
         newState.complete = calculateCompleteStatus(newState);
+        return newState;
+    },
+    [editEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
+        const payload = action.payload;
+        const newState = {
+            ...state,
+            programId: payload.event.programId,
+            orgUnitId: payload.event.orgUnitId,
+        };
+
         return newState;
     },
 }, 'currentSelections');

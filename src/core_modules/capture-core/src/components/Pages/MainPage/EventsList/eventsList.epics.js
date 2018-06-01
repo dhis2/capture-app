@@ -5,7 +5,7 @@ import 'rxjs/add/operator/concatMap';
 
 import log from 'loglevel';
 import errorCreator from 'capture-core/utils/errorCreator';
-import getEvents from '../../../../events/getEvents';
+import { getEvents } from '../../../../events/eventRequests';
 import getColumnsConfiguration from './getColumnsConfiguration';
 
 import {

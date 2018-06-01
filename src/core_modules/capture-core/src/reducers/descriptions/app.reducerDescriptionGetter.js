@@ -9,6 +9,7 @@ import { actionTypes as tempSelectorActionTypes } from '../../components/Pages/M
 import {
     actionTypes as newEventDataEntryActionTypes,
 } from '../../components/Pages/NewEvent/DataEntry/newEventDataEntry.actions';
+import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 
@@ -19,6 +20,10 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
     [newEventSelectionActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
+        const newState = { ...state, page: action.payload.page };
+        return newState;
+    },
+    [editEventActionTypes.EDIT_EVENT_FROM_URL]: (state, action) => {
         const newState = { ...state, page: action.payload.page };
         return newState;
     },

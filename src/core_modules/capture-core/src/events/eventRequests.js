@@ -27,6 +27,12 @@ type ApiTEIEvent = {
     dataValues: Array<ApiDataValue>
 };
 
+export type ClientEventContainer = {
+    id: string,
+    event: Event,
+    values: { [key: string]: any },
+};
+
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found',
     STAGE_NOT_FOUND: 'Stage not found',
@@ -99,12 +105,20 @@ function convertToClientEvent(event: ApiTEIEvent) {
     };
 }
 
-export default async function getEvents(queryParams: ?Object) {
+export async function getEvent(eventId: string): Promise<?ClientEventContainer> {
+    const api = getApi();
+    const apiRes = await api
+        .get(`events/${eventId}`);
+
+    const eventContainer = convertToClientEvent(apiRes);
+    return eventContainer;
+}
+
+export async function getEvents(queryParams: ?Object) {
     const api = getApi();
     const apiRes = await api
         .get('events', { ...queryParams, totalPages: true });
 
-    console.log(apiRes);
     const eventContainers = apiRes && apiRes.events ? apiRes.events.reduce((accEvents, apiEvent) => {
         const eventContainer = convertToClientEvent(apiEvent);
         if (eventContainer) {

@@ -3,13 +3,20 @@ import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 
 import { actionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
 import { actionTypes as loadNewActionTypes } from '../../components/DataEntry/actions/dataEntryLoadNew.actions';
-// import { actionTypes as loadActionTypes } from '../../components/DataEntry/actions/dataEntryLoad.actions';
+import { actionTypes as loadEditActionTypes } from '../../components/DataEntry/actions/dataEntryLoadEdit.actions';
 import { actionTypes as rulesEngineActionTypes } from '../../rulesEngineActionsCreator/rulesEngine.actions';
 
 import getDataEntryKey from '../../components/DataEntry/common/getDataEntryKey';
 
 export const dataEntriesDesc = createReducerDescription({
     [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        newState[payload.dataEntryId] = { ...newState[payload.dataEntryId] };
+        newState[payload.dataEntryId].itemId = payload.itemId;
+        return newState;
+    },
+    [loadEditActionTypes.LOAD_EDIT_DATA_ENTRY]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
         newState[payload.dataEntryId] = { ...newState[payload.dataEntryId] };
@@ -29,6 +36,15 @@ export const dataEntriesDesc = createReducerDescription({
 
 export const dataEntriesUIDesc = createReducerDescription({
     [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const key = payload.key;
+        newState[key] = {
+            loaded: true,
+        };
+        return newState;
+    },
+    [loadEditActionTypes.LOAD_EDIT_DATA_ENTRY]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
         const key = payload.key;
@@ -112,12 +128,15 @@ export const dataEntriesUIDesc = createReducerDescription({
         return newState;
     },
     [rulesEngineActionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
+        /*
         const newState = { ...state };
         const payload = action.payload;
         const key = getDataEntryKey(payload.dataEntryId, payload.eventId);
         newState[key] = { ...newState[key] };
         newState[key].inProgress = newState[key].inProgress ? newState[key].inProgress - 1 : 0;
         return newState;
+        */
+        return state;
     },
 }, 'dataEntriesUI');
 
@@ -128,6 +147,13 @@ export const dataEntriesFieldsValueDesc = createReducerDescription({
         const payload = action.payload;
         const key = payload.key;
         newState[key] = {};
+        return newState;
+    },
+    [loadEditActionTypes.LOAD_EDIT_DATA_ENTRY]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const key = payload.key;
+        newState[key] = payload.dataEntryValues;
         return newState;
     },
     [actionTypes.UPDATE_FIELD]: (state, action) => {
@@ -150,10 +176,32 @@ export const dataEntriesFieldsMetaDesc = createReducerDescription({
         newState[key] = payload.dataEntryMeta;
         return newState;
     },
+    [loadEditActionTypes.LOAD_EDIT_DATA_ENTRY]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const key = payload.key;
+        newState[key] = payload.dataEntryMeta;
+        return newState;
+    },
 }, 'dataEntriesFieldsMeta');
 
 export const dataEntriesFieldsUIDesc = createReducerDescription({
     [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const key = payload.key;
+        newState[key] = Object.keys(payload.dataEntryMeta).reduce((accValuesUI, elementKey) => {
+            accValuesUI[elementKey] = {
+                validationError: null,
+                isValid: true,
+                touched: false,
+            };
+            return accValuesUI;
+        }, {});
+
+        return newState;
+    },
+    [loadEditActionTypes.LOAD_EDIT_DATA_ENTRY]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
         const key = payload.key;

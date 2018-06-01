@@ -1,4 +1,5 @@
 // @flow
+/*
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/concatMap';
 import { batchActions } from 'redux-batched-actions';
@@ -97,7 +98,7 @@ export const saveEventEpic = (action$, store: ReduxStore) =>
             // $FlowSuppress
             return saveEvent(clientValues, serverData, eventMainData, eventId, id);
         });
-
+*/
 /*
 export const rulesEpic = (action$, store: ReduxStore) =>
     action$.ofType(actionTypes.UPDATE_FORM_FIELD)

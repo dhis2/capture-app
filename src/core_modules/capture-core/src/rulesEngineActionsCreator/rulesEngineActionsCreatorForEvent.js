@@ -56,6 +56,7 @@ const rulesEngine =
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found in loadAndExecuteRulesForEvent',
     PROGRAMSTAGE_NOT_FOUND: 'ProgramStage not found',
+    PROGRAM_OR_FOUNDATION_MISSING: 'Program or foundation missing',
 };
 
 function getProgramRulesContainer(program: Program, foundation: RenderFoundation): ProgramRulesContainer {
@@ -405,11 +406,9 @@ function createHideSectionsResetActions(
 function createRulesEffectsActions(
     rulesEffects: ?Array<OutputEffect>,
     formId: string,
-    eventId: string,
-    dataEntryId: string,
     foundation: RenderFoundation) {
     if (!rulesEffects) {
-        return [updateRulesEffects(null, formId, eventId, dataEntryId)];
+        return [updateRulesEffects(null, formId)];
     }
 
     let actions = [];
@@ -428,7 +427,7 @@ function createRulesEffectsActions(
             foundation,
         );
 
-    actions.push(updateRulesEffects(effectsHierarchy, formId, eventId, dataEntryId));
+    actions.push(updateRulesEffects(effectsHierarchy, formId));
 
     actions = [...actions, ...createAssignActions(effectsHierarchy[effectActions.ASSIGN_VALUE], formId)];
     actions = [...actions, ...createHideFieldsResetActions(effectsHierarchy[effectActions.HIDE_FIELD], formId)];
@@ -551,6 +550,43 @@ export function getRulesActionsOnLoadForSingleNewEvent(
             optionSets);
 
     return createRulesEffectsActions(rulesEffects, formId, eventId, dataEntryId, foundation);
+}
+
+export function getRulesActionsForEvent(
+    program: ?Program,
+    foundation: ?RenderFoundation,
+    formId: string,
+    orgUnit: Object,
+    currentEventData: ?EventData,
+    allEventsData: ?Array<EventData>,
+): Array<ReduxAction<any, any>> {
+    if (!program || !foundation) {
+        log.error(
+            errorCreator(
+                errorMessages.PROGRAM_OR_FOUNDATION_MISSING)({ program, foundation, method: 'getRulesActions' }));
+        return [updateRulesEffects(null, formId)];
+    }
+
+    const programRulesContainer = getProgramRulesContainer(program, foundation);
+    if (!programRulesContainer.programRules || programRulesContainer.programRules.length === 0) {
+        return [updateRulesEffects(null, formId)];
+    }
+
+    const dataElementsInProgram = getDataElements(program);
+    const optionSets = optionSetsStore.get();
+
+
+    const rulesEffects =
+        runRulesEngine(
+            programRulesContainer,
+            dataElementsInProgram,
+            orgUnit,
+            optionSets,
+            currentEventData,
+            allEventsData,
+        );
+
+    return createRulesEffectsActions(rulesEffects, formId, foundation);
 }
 
 export function getRulesActionsOnUpdateForSingleNewEvent(
