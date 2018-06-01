@@ -25,7 +25,7 @@ const styles = () => ({
 type Props = {
     handleClickActionButton: () => void,
     selectedProgram: string,
-    selectedOrgUnit: string,
+    selectedOrgUnitId: string,
     classes: Object,
 };
 
@@ -41,7 +41,7 @@ class ActionButtons extends Component<Props> {
     }
 
     render() {
-        if (!this.props.selectedProgram && !this.props.selectedOrgUnit) {
+        if (!this.props.selectedProgram && !this.props.selectedOrgUnitId) {
             return (
                 <div className={this.props.classes.container}>
                     <Button

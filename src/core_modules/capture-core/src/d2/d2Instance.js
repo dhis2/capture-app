@@ -28,4 +28,7 @@ export const getTranslation = (text: string, formatterOption?: $Values<typeof fo
 
 export const getApi = () => getD2().Api.getApi();
 
+export const getModels = () => getD2().models;
+
+
 export default getD2;

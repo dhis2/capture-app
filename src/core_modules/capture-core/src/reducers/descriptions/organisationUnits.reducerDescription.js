@@ -2,6 +2,7 @@
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
 import { actionTypes as mainPageSelectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
+import { actionTypes as setOrgUnitActionTypes } from '../../components/QuickSelector/actions/QuickSelector.actions';
 import {
     actionTypes as newEventSelectionActionTypes,
 } from '../../components/Pages/NewEvent/newEventSelections.actions';
@@ -32,6 +33,12 @@ export const organisationUnitDesc = createReducerDescription({
             ...state,
             [action.payload.id]: action.payload,
         };
+        return newState;
+    },
+    [setOrgUnitActionTypes.STORE_ORG_UNIT_OBJECT]: (state, action) => {
+        const newState = { ...state };
+        const orgUnit = action.payload;
+        newState[orgUnit.id] = orgUnit;
         return newState;
     },
 }, 'organisationUnits');
