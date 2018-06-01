@@ -98,6 +98,10 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
 
         return newState;
     },
+    [setCurrentSelectionsActionTypes.SET_ORG_UNIT_ID]: (state, action) => {
+        const newState = { ...state, orgUnitId: action.payload };
+        return newState;
+    },
     [setCurrentSelectionsActionTypes.SET_PROGRAM_ID]: (state, action) => {
         const newState = { ...state, programId: action.payload };
         return newState;

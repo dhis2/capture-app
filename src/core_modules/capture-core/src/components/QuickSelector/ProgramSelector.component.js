@@ -4,12 +4,11 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
-// import  ACSelect from './AutocompleteSelect.component';
-import ACSelect from 'capture-core/components/FormFields/Options/SelectVirtualized/OptionsSelectVirtualized.component';
+import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import OptionSet from 'capture-core/metaData/OptionSet/OptionSet';
 import Option from 'capture-core/metaData/OptionSet/Option';
 
-import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
+import ACSelect from 'capture-core/components/FormFields/Options/SelectVirtualized/OptionsSelectVirtualized.component';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem'; 
 import ListItemText from '@material-ui/core/ListItemText';
@@ -70,6 +69,12 @@ const styles = () => ({
     selectedButtonIcon: {
         width: 20,
         height: 20,
+    },
+    programAC: {
+        backgroundColor: 'white',
+        border: '1px solid lightGrey',
+        borderRadius: 5,
+        padding: '0px 5px 2px 5px',
     },
 });
 
@@ -161,10 +166,12 @@ class ProgramSelector extends Component<Props> {
                                                 const categoryOptionSet = new OptionSet('categoryOptionSet', categoryOptions);
 
                                                 return (
-                                                    <ACSelect optionSet={categoryOptionSet} 
-                                                              onBlur={(option) => {this.handleClickCategoryOption(option, i.id)}}
-                                                              placeholder="Select"
-                                                    />
+                                                    <div className={this.props.classes.programAC}>
+                                                        <ACSelect optionSet={categoryOptionSet} 
+                                                                  onBlur={(option) => {this.handleClickCategoryOption(option, i.id)}}
+                                                                  placeholder="Select"
+                                                        />
+                                                    </div>
                                                 );
                                             })()
                                         }
@@ -211,7 +218,9 @@ class ProgramSelector extends Component<Props> {
             <div>
                 <Paper elevation={1} className={this.props.classes.paper}>
                     <h4 className={this.props.classes.title}>{ getTranslation('program') }</h4>
-                    <ACSelect optionSet={programOptionSet} onBlur={this.props.handleClickProgram} placeholder="Select program" />
+                    <div className={this.props.classes.programAC}>
+                        <ACSelect optionSet={programOptionSet} onBlur={this.props.handleClickProgram} placeholder="Select program" />
+                    </div>
                 </Paper>
             </div>
         );
