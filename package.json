@@ -6,6 +6,7 @@
   "dependencies": {
     "@dhis2/d2-ui-core": "^1.0.2",
     "@dhis2/d2-ui-header-bar": "^1.0.2",
+    "@dhis2/d2-ui-org-unit-tree": "^1.0.9",
     "@material-ui/icons": "^1.0.0-beta.43",
     "classnames": "^2.2.5",
     "create-react-class": "^15.6.3",
