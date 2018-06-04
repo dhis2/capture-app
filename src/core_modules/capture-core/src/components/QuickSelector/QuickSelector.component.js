@@ -68,6 +68,7 @@ class QuickSelector extends Component<Props> {
         }
     }
 
+    // Restart button
     handleClickActionButton() {
         this.props.onSetOrgUnitId(undefined);
         this.props.onSetProgramId(null);

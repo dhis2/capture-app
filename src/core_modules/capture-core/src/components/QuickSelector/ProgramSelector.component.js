@@ -104,6 +104,11 @@ class ProgramSelector extends Component<Props> {
 
     handleResetProgram() {
         this.props.resetProgram();
+        
+        // If categoryOptions have been selected, they need to be removed when program is de-selected.
+        if (this.props.selectedCategories) {
+            this.props.handleSetCatergoryCombo(null, null);
+        }
     }
 
     handleResetCategory(categoryId) {
