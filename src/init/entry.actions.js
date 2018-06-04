@@ -8,5 +8,3 @@ export const actionTypes = {
 
 export const startupDataLoad = () => actionCreator(actionTypes.STARTUP_DATA_LOAD)();
 export const startupDataLoaded = (payload: mixed) => actionCreator(actionTypes.STARTUP_DATA_LOADED)(payload);
-
-// Add Action for setting OrgUnits in state.

@@ -2,12 +2,11 @@
 
 import { connect } from 'react-redux';
 import QuickSelector from './QuickSelector.component';
-import { setOrgUnitId, storeOrgUnitObject, setProgramId, setCategoryId } from './actions/QuickSelector.actions';
+import { setOrgUnitId, storeOrgUnitObject, setProgramId, setCategoryId, resetCategorySelections } from './actions/QuickSelector.actions';
 
 const mapStateToProps = (state: Object) => ({
     selectedProgramId: state.currentSelections.programId,
     selectedCategories: state.currentSelections.categories,
-    // We currently have orgUnit (Object) and orgUnitId (string). Do we need both?
     selectedOrgUnitId: state.currentSelections.orgUnitId,
     storedOrgUnits: state.organisationUnits,
 });
@@ -24,6 +23,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
     onSetCategoryOptionId: (categoryId: string, selectedCategoryOptionId: string) => {
         dispatch(setCategoryId(categoryId, selectedCategoryOptionId));
+    },
+    onResetCategoryOptionSelections: () => {
+        dispatch(resetCategorySelections());
     },
 });
 

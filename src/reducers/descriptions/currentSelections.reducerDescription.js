@@ -4,6 +4,7 @@ import { actionTypes as entryActionTypes } from '../../init/entry.actions';
 
 export const currentSelectionsReducerDesc = getCurrentSelectionsReducerDesc({
     [entryActionTypes.STARTUP_DATA_LOADED]: (state, action) => {
+        // TODO: Remove hard-coding.
         const newState = {
             ...state,
             orgUnit: {

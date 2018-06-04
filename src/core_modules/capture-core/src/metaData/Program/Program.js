@@ -9,7 +9,7 @@ export default class Program {
     _name: string;
     _shortName: string;
     _version: string | number;
-    _categoryCombo: any;
+    _categoryCombo: Object;
     _programRules: Array<ProgramRule>;
     _programRuleVariables: Array<ProgramRuleVariable>;
 
@@ -40,10 +40,10 @@ export default class Program {
         return this._shortName;
     }
 
-    set categoryCombo(categoryCombo: any) {
+    set categoryCombo(categoryCombo: Object) {
         this._categoryCombo = categoryCombo;
     }
-    get categoryCombo(): any {
+    get categoryCombo(): Object {
         return this._categoryCombo;
     }
 

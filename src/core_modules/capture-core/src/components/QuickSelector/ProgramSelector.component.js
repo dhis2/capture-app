@@ -79,7 +79,9 @@ const styles = () => ({
 type Props = {
     handleClickProgram: (value: string) => void,
     handleSetCatergoryCombo: (value: string, value: string) => void,
+    handleResetCategorySelection: () => void,
     resetProgram: () => void,
+    buttonModeMaxLength: number,
     selectedProgram: Object,
     selectedCategories: Object,
     classes: Object,
@@ -107,7 +109,7 @@ class ProgramSelector extends Component<Props> {
         
         // If categoryOptions have been selected, they need to be removed when program is de-selected.
         if (this.props.selectedCategories) {
-            this.props.handleSetCatergoryCombo(null, null);
+            this.props.handleResetCategorySelection();
         }
     }
 
@@ -199,7 +201,7 @@ class ProgramSelector extends Component<Props> {
             );
         }
         // If less than or equal, display as list.
-        if (programsArray.length <= 5) {
+        if (programsArray.length <= this.props.buttonModeMaxLength) {
             return (
                 <div>
                     <Paper elevation={1} className={this.props.classes.paper}>

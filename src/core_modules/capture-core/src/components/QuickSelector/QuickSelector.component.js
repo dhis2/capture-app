@@ -30,6 +30,7 @@ type Props = {
     onStoreOrgUnitObject: (orgUnitObject: Object) => void,
     onSetProgramId: (programId: string) => void,
     onSetCategoryOptionId: (categoryId: string, selectedCategoryOptionId: string) => void,
+    onResetCategoryOptionSelections: () => void,
 };
 
 class QuickSelector extends Component<Props> {
@@ -72,7 +73,7 @@ class QuickSelector extends Component<Props> {
     handleClickActionButton() {
         this.props.onSetOrgUnitId(undefined);
         this.props.onSetProgramId(null);
-        this.props.onSetCategoryOptionId(null, null);
+        this.props.onResetCategoryOptionSelections();
     }
 
     // TODO: Add support for cat-combos.
@@ -135,7 +136,9 @@ class QuickSelector extends Component<Props> {
                             selectedCategories={this.props.selectedCategories}
                             handleClickProgram={this.handleClickProgram}
                             handleSetCatergoryCombo={this.handleSetCatergoryCombo}
+                            handleResetCategorySelection={this.props.onResetCategoryOptionSelections}
                             resetProgram={this.resetProgram}
+                            buttonModeMaxLength={5}
                         />
                     </Grid>
                     <Grid item xs={12} sm={actionButtonsWidth}>

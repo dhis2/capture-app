@@ -35,7 +35,6 @@
 .Select-menu-outer {
     max-height: 1000px;
     z-index: 2000 !important;
-    width: auto;
     min-width: 100%;
 }
 
