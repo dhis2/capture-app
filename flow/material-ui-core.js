@@ -14,7 +14,23 @@ declare module '@material-ui/core/Button' {
 }
 
 declare module '@material-ui/core/Dialog' {
-    declare module.exports: any;
+    declare export default any;
+}
+
+declare module '@material-ui/core/DialogActions' {
+    declare export default any;
+}
+
+declare module '@material-ui/core/DialogContent' {
+    declare export default any;
+}
+
+declare module '@material-ui/core/DialogContentText' {
+    declare export default any;
+}
+
+declare module '@material-ui/core/DialogTitle' {
+    declare export default any;
 }
 
 declare module '@material-ui/core/Checkbox' {

@@ -1,27 +1,34 @@
 // @flow
+import log from 'loglevel';
 import 'rxjs/add/observable/of';
 import { batchActions } from 'redux-batched-actions';
+import { rulesExecutedPostUpdateField } from '../../../../DataEntry/actions/dataEntry.actions';
 import { actionTypes as selectorActionTypes } from '../../../MainPage/tempSelector.actions';
 import {
     actionTypes as newEventDataEntryActionTypes,
     openNewEventInDataEntry,
     selectionsNotCompleteOpeningNewEvent,
+    batchActionTypes,
 } from '../newEventDataEntry.actions';
 import {
-    getRulesActionsOnUpdateForSingleNewEvent,
+    getRulesActionsForEvent,
 } from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
 import {
     actionTypes as newEventSelectionTypes,
 } from '../../newEventSelections.actions';
+import {
+    getCurrentClientValues,
+    getCurrentClientMainData,
+} from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorInputHelpers';
+import getProgramAndStageFromProgramId from
+    '../../../../../metaData/helpers/EventProgram/getProgramAndStageFromProgramId';
+import errorCreator from '../../../../../utils/errorCreator';
 
+import type
+{ FieldData } from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
 
-import type { FieldData } from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
-
-const UPDATE_FIELD_ACTIONS_BATCH = 'UpdateFieldActionsBatch';
-
-export const batchActionTypes = {
-    OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH: 'OpenNewEventInDataEntryActionsBatch',
-    RULES_EFFECTS_ACTIONS_BATCH: 'RulesEffectsActionsBatch',
+const errorMessages = {
+    PROGRAM_OR_STAGE_NOT_FOUND: 'Program or stage not found',
 };
 
 export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -34,18 +41,36 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
                 return selectionsNotCompleteOpeningNewEvent();
             }
             const programId = state.currentSelections.programId;
-            const orgUnit = state.currentSelections.orgUnit;
-            return batchActions(openNewEventInDataEntry(programId, orgUnit), batchActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH);
+            const orgUnitId = state.currentSelections.orgUnitId;
+            const orgUnit = state.organisationUnits[orgUnitId];
+            const metadataContainer = getProgramAndStageFromProgramId(programId);
+            if (metadataContainer.error) {
+                log.error(
+                    errorCreator(
+                        errorMessages.PROGRAM_OR_STAGE_NOT_FOUND)(
+                        { method: 'openNewEventInDataEntryEpic' }),
+                );
+            }
+
+            return batchActions(
+                // $FlowSuppress
+                openNewEventInDataEntry(metadataContainer.program, metadataContainer.stage, orgUnit),
+                batchActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH,
+            );
         });
 
 export const runRulesForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(UPDATE_FIELD_ACTIONS_BATCH)
-        .map(actionBatch => actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE))
+    action$.ofType(batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH)
+        .map(actionBatch =>
+            actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE))
         .map((action) => {
             const state = store.getState();
             const programId = state.currentSelections.programId;
-            const orgUnit = state.currentSelections.orgUnit;
+            const metadataContainer = getProgramAndStageFromProgramId(programId);
+
+            const orgUnitId = state.currentSelections.orgUnitId;
+            const orgUnit = state.organisationUnits[orgUnitId];
 
             const payload = action.payload;
             const fieldData: FieldData = {
@@ -54,15 +79,35 @@ export const runRulesForSingleEventEpic = (action$: InputObservable, store: Redu
                 valid: payload.uiState.valid,
             };
 
-            const rulesActions = getRulesActionsOnUpdateForSingleNewEvent(
-                programId,
-                payload.formId,
-                payload.itemId,
-                payload.dataEntryId,
-                state,
-                orgUnit,
-                fieldData,
-            );
+            let rulesActions;
+            if (metadataContainer.error) {
+                rulesActions = getRulesActionsForEvent(
+                    metadataContainer.program,
+                    metadataContainer.stage,
+                    payload.formId,
+                    orgUnit,
+                );
+            } else {
+                // $FlowSuppress
+                const foundation: RenderFoundation = metadataContainer.stage;
 
-            return batchActions(rulesActions, batchActionTypes.RULES_EFFECTS_ACTIONS_BATCH);
+                const currentEventValues = getCurrentClientValues(state, foundation, payload.formId, fieldData);
+                const currentEventMainData = getCurrentClientMainData(state, payload.itemId, payload.dataEntryId, {});
+                const currentEventData = { ...currentEventValues, ...currentEventMainData };
+
+                rulesActions = getRulesActionsForEvent(
+                    metadataContainer.program,
+                    metadataContainer.stage,
+                    payload.formId,
+                    orgUnit,
+                    currentEventData,
+                );
+            }
+
+            return batchActions([
+                ...rulesActions,
+                rulesExecutedPostUpdateField(payload.dataEntryId, payload.itemId),
+            ],
+            batchActionTypes.RULES_EFFECTS_ACTIONS_BATCH,
+            );
         });

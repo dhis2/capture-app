@@ -19,10 +19,10 @@ type Props = {
 };
 
 const LoadingMaskForPage = (props: Props) => {
-    const { containerStyle, ...passOnProps } = props;
+    const { containerStyle, classes, ...passOnProps } = props;
     return (
         <div
-            className={props.classes.container}
+            className={classes.container}
             style={containerStyle}
         >
             <LoadingMask

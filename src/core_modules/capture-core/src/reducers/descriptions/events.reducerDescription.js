@@ -5,6 +5,7 @@ import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/
 import { actionTypes as mainSelectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
 import { actionTypes as enrollmentActionTypes } from '../../actions/__TEMP__/enrollment.actions';
 import { actionTypes as eventListActionTypes } from '../../components/Pages/MainPage/EventsList/eventsList.actions';
+import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
 
 const getFromWorkingListRetrieval = (eventContainers, containerProperty) => {
     if (!eventContainers || eventContainers.length === 0) {
@@ -56,6 +57,14 @@ export const eventsDesc = createReducerDescription({
         const newState = { ...state };
         const payload = action.payload;
         newState[payload.eventId] = payload.event;
+        return newState;
+    },
+    [editEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
+        const event = action.payload.event;
+        const newState = {
+            ...state,
+            [event.eventId]: event,
+        };
         return newState;
     },
 }, 'events', {});

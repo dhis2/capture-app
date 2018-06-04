@@ -1,12 +1,13 @@
 // @flow
 import { connect } from 'react-redux';
 import EditEvent from './EditEvent.component';
-import withLoadHandler from './withLoadHandler';
+import withLoadingIndicator from '../../../HOC/withLoadingIndicator';
+import withErrorMessageHandler from '../../../HOC/withErrorMessageHandler';
 
 const mapStateToProps = (state: ReduxState) => ({
-    isLoading: state.editEventPage.isLoading,
-    loadError: state.editEventPage.loadError,
+    ready: !state.editEventPage.isLoading,
+    error: state.editEventPage.loadError,
 });
 
 // $FlowSuppress
-export default connect(mapStateToProps)(withLoadHandler()(EditEvent));
+export default connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(EditEvent)));

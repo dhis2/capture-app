@@ -1,11 +1,16 @@
 // @flow
 import { connect } from 'react-redux';
 import log from 'loglevel';
+import { batchActions } from 'redux-batched-actions';
 import EditEventDataEntry from './EditEventDataEntry.component';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
 import programCollection from '../../../../metaDataMemoryStores/programCollection/programCollection';
 import errorCreator from '../../../../utils/errorCreator';
+import {
+    startRunRulesOnUpdateForEditSingleEvent,
+    batchActionTypes,
+} from './editEventDataEntry.actions';
 
 const getFormFoundation = (state: ReduxState) => {
     const programId = state.currentSelections.programId;
@@ -31,5 +36,26 @@ const mapStateToProps = (state: ReduxState) => ({
     error: state.editEventPage.dataEntryLoadError,
 });
 
+const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+    onUpdateField: (innerAction: ReduxAction<any, any>) => {
+        dispatch(batchActions([
+            innerAction,
+            startRunRulesOnUpdateForEditSingleEvent(innerAction.payload),
+        ], batchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH));
+    },
+    /*
+    onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
+        window.scrollTo(0, 0);
+        dispatch(startSaveNewEventAndReturnToMainPage(eventId, dataEntryId, formFoundation));
+    },
+    onCancel: () => {
+        window.scrollTo(0, 0);
+        dispatch(cancelNewEventAndReturnToMainPage());
+    },
+    */
+});
+
 // $FlowSuppress
-export default connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(EditEventDataEntry)));
+export default connect(
+    mapStateToProps, mapDispatchToProps)(
+    withLoadingIndicator()(withErrorMessageHandler()(EditEventDataEntry)));

@@ -40,6 +40,7 @@ import {
 } from 'capture-core/components/Pages/EditEvent/epics/editEvent.epics';
 import {
     openEditEventInDataEntryEpic,
+    runRulesForEditSingleEventEpic,
 } from 'capture-core/components/Pages/EditEvent/DataEntry/epics/editEventDataEntry.epics';
 
 import { loadStartupData } from '../init/entry.epics';
@@ -67,4 +68,5 @@ export default combineEpics(
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,
     openEditEventInDataEntryEpic,
+    runRulesForEditSingleEventEpic,
 );

@@ -3,9 +3,16 @@ import { actionCreator } from '../../../../actions/actions.utils';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
 import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
 import {
-    getRulesActionsOnLoadForSingleNewEvent,
+    getRulesActionsForEvent,
 } from '../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
+import EventProgram from '../../../../metaData/Program/EventProgram';
 
+export const batchActionTypes = {
+    UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH: 'UpdateFieldForNewSingleEventActionsBatch',
+    OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH: 'OpenNewEventInDataEntryActionsBatch',
+    RULES_EFFECTS_ACTIONS_BATCH: 'RulesEffectsForNewSingleEventActionsBatch',
+};
 
 export const actionTypes = {
     OPEN_NEW_EVENT_IN_DATA_ENTRY: 'OpenNewEventInDataEntry',
@@ -39,9 +46,9 @@ function convertStatusOut(dataEntryValue: string, prevValue: string) {
 }
 
 export const openNewEventInDataEntry =
-    (programId: string, orgUnit: Object) => {
+    (program: ?EventProgram, foundation: ?RenderFoundation, orgUnit: Object) => {
         const dataEntryId = 'singleEvent';
-        const eventId = 'newEvent';
+        const itemId = 'newEvent';
         const dataEntryPropsToInclude = [
             {
                 id: 'eventDate',
@@ -54,12 +61,19 @@ export const openNewEventInDataEntry =
                 onConvertOut: convertStatusOut,
             },
         ];
-        const key = getDataEntryKey(dataEntryId, eventId);
-        const dataEntryActions = loadNewDataEntry(dataEntryId, eventId, dataEntryPropsToInclude);
+        const formId = getDataEntryKey(dataEntryId, itemId);
+        const dataEntryActions = loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude);
 
+        const rulesActions = getRulesActionsForEvent(
+            program,
+            foundation,
+            formId,
+            orgUnit,
+        );
+        
         return [
             ...dataEntryActions,
-            ...getRulesActionsOnLoadForSingleNewEvent(programId, key, eventId, dataEntryId, orgUnit),
+            ...rulesActions,
             actionCreator(actionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY)(),
         ];
     };

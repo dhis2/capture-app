@@ -9,6 +9,7 @@ import {
     startRunRulesOnUpdateForNewSingleEvent,
     startSaveNewEventAndReturnToMainPage,
     cancelNewEventAndReturnToMainPage,
+    batchActionTypes,
 } from './newEventDataEntry.actions';
 import {
     makeProgramNameSelector,
@@ -51,7 +52,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         dispatch(batchActions([
             innerAction,
             startRunRulesOnUpdateForNewSingleEvent(innerAction.payload),
-        ], 'UpdateFieldActionsBatch'));
+        ], batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH));
     },
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);

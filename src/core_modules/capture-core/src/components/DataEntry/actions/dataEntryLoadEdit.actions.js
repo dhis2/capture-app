@@ -18,6 +18,7 @@ export function loadEditDataEntry(
     clientValuesForForm: Object,
     dataEntryPropsToInclude?: ?Array<DataEntryPropToInclude>,
     formFoundation: RenderFoundation,
+    extraProps?: ?{ [key: string]: any },
 ) {
     const dataEntryMeta = dataEntryPropsToInclude ? getDataEntryMeta(dataEntryPropsToInclude) : {};
     const dataEntryValues =
@@ -25,7 +26,7 @@ export function loadEditDataEntry(
     const formValues = getFormValues(clientValuesForForm, formFoundation);
     const key = getDataEntryKey(dataEntryId, itemId);
     return [
-        actionCreator(actionTypes.LOAD_EDIT_DATA_ENTRY)({ key, itemId, dataEntryId, dataEntryMeta, dataEntryValues }),
+        actionCreator(actionTypes.LOAD_EDIT_DATA_ENTRY)({ key, itemId, dataEntryId, dataEntryMeta, dataEntryValues, extraProps }),
         addFormData(key, formValues),
     ];
 }
