@@ -6,6 +6,7 @@ export const actionTypes = {
     STORE_ORG_UNIT_OBJECT: 'storeOrgUnitObject',
     SET_PROGRAM_ID: 'setProgramId',
     SET_CATEGORY_ID: 'setCategoryId',
+    RESET_CATEGORY_SELECTIONS: 'resetCategorySelections',
 };
 
 export const setOrgUnitId =
@@ -20,3 +21,6 @@ export const setProgramId =
 export const setCategoryId =
     (categoryId: string, selectedCategoryOptionId: string) =>
         actionCreator(actionTypes.SET_CATEGORY_ID)({ categoryId, selectedCategoryOptionId });
+
+export const resetCategorySelections =
+    () => actionCreator(actionTypes.RESET_CATEGORY_SELECTIONS)();

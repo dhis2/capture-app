@@ -109,12 +109,7 @@ class OrgUnitSelector extends Component<Props> {
         this.props.handleClickOrgUnit(undefined);
     }
 
-    // TODO:Add OrgUnitTree when there are a lot of orgunits
     render() {
-        // TODO: Add real data and remove placeholder data.
-        const orgUnits = [{ id: 1, name: 'OrgUnit 1' }, { id: 2, name: 'OrgUnit 2' }, { id: 3, name: 'OrgUnit 3' },
-            { id: 4, name: 'OrgUnit 4' }, { id: 5, name: 'OrgUnit 5' }, { id: 6, name: 'OrgUnit 6' }];
-
         // If orgUnit is set in Redux state.
         if (this.props.selectedOrgUint) {
             return (
@@ -132,7 +127,7 @@ class OrgUnitSelector extends Component<Props> {
         }
         // TODO: Find a way to know how many total orgunits the user is assigned to.
         // If less than or equal to 5 orgUnits, display as list.
-        if (orgUnits.length <= 5) {
+        /*if (orgUnits.length <= 5) {
             return (
                 <div>
                     <Paper elevation={1} className={this.props.classes.paper}>
@@ -149,8 +144,8 @@ class OrgUnitSelector extends Component<Props> {
                     </Paper>
                 </div>
             );
-        }
-        // TODO: Make proper orgunitTree. Only the selected orgunit is shown in the option list.
+        }*/
+        
         return (
             <div>
                 <Paper elevation={1} className={this.props.classes.paper}>

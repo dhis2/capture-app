@@ -108,15 +108,18 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     },
     [setCurrentSelectionsActionTypes.SET_CATEGORY_ID]: (state, action) => {
         let categories = {};
-        if (!action.payload.categoryId && !action.payload.selectedCategoryOptionId) {
-            categories = null;
-        } else if (state.categories) {
+        if (state.categories) {
             // Necessary step to prevent mutation.
             categories = Object.assign({}, state.categories);
             categories[action.payload.categoryId] = action.payload.selectedCategoryOptionId;
         } else {
             categories[action.payload.categoryId] = action.payload.selectedCategoryOptionId;
         }
+        const newState = { ...state, categories };
+        return newState;
+    },
+    [setCurrentSelectionsActionTypes.RESET_CATEGORY_SELECTIONS]: (state) => {
+        const categories = null;
         const newState = { ...state, categories };
         return newState;
     },
