@@ -33,7 +33,6 @@ async function runApp(domElement: HTMLElement, store: ReduxStore, history: HashH
 
     try {
         await initialize();
-        // Fetch OrgUnits here and set theme in state (LoadOrgUnitsOnStartUp).
         store.dispatch(startupDataLoad());
 
         // START TEST
