@@ -30,5 +30,7 @@ export const getApi = () => getD2().Api.getApi();
 
 export const getModels = () => getD2().models;
 
+export const getCurrentUser = () => getD2().currentUser;
+
 
 export default getD2;
