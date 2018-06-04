@@ -16,7 +16,7 @@ import Paper from '@material-ui/core/Paper';
 import IconButton from 'material-ui-next/IconButton';
 import ClearIcon from 'material-ui-icons/Clear';
 
-import { getTranslation, getModels } from '../../d2/d2Instance';
+import { getTranslation, getCurrentUser } from '../../d2/d2Instance';
 import { OrgUnitTreeMultipleRoots } from '@dhis2/d2-ui-org-unit-tree';
 
 
@@ -84,52 +84,20 @@ class OrgUnitSelector extends Component<Props> {
 
         this.state = {
 			roots: [],
-            root: undefined,
 		};
 
         this.handleClick = this.handleClick.bind(this);
         this.handleReset = this.handleReset.bind(this);
 
-        //Models comes from d2.
-        const models = getModels();
-        const childFields = 'id,path,displayName,children::isNotEmpty';
-
-		models.organisationUnits
-			.list({
-				paging: false,
-				level: 1,
-				fields: childFields,
-			})
-			.then(rootLevel => rootLevel.toArray()[0])
-			.then((loadRootUnit) => {
-				this.setState({
-					root: loadRootUnit,
-					roots: []
-				})
-			})
-			.then(() => Promise.all([
-                // Below: If you have multiple roots.
-				//models.organisationUnits.get('at6UHUQatSo', { fields: childFields }),
-				//models.organisationUnits.get('fdc6uOvgoji', { fields: childFields }),
-				models.organisationUnits.list({
-					paging: false,
-					level: 1,
-					fields: 'id,path,displayName,children[id,path,displayName,children::isNotEmpty]',
-				}),
-            ]))
-            //TODO: Add ability for multiple roots
-            //.then(roots => [roots[0], roots[1], roots[2].toArray()[0]])
-            .then(roots => [roots[0].toArray()[0]])
-			.then((roots) => {
-				this.setState({
-					roots
-				});
-				models.organisationUnits.list({
-					paging: false,
-					level: 1,
-					fields: `id,path,displayName,children[id,path,displayName,children[${childFields}]]`,
-				});
-			})
+        const currentUser = getCurrentUser();
+        // Get orgUnits assigned to currentUser and set them as roots to be used by orgUnitTree.
+        currentUser.getOrganisationUnits({
+            fields: 'id,path,displayName,children::isNotEmpty',
+        })
+        .then(roots => roots.toArray())
+        .then(roots => this.setState({
+            roots
+        }));
     }
 
     handleClick(event, selectedOu) {
@@ -147,7 +115,7 @@ class OrgUnitSelector extends Component<Props> {
         const orgUnits = [{ id: 1, name: 'OrgUnit 1' }, { id: 2, name: 'OrgUnit 2' }, { id: 3, name: 'OrgUnit 3' },
             { id: 4, name: 'OrgUnit 4' }, { id: 5, name: 'OrgUnit 5' }, { id: 6, name: 'OrgUnit 6' }];
 
-        // If program is set in Redux state. TODO: Remove .name (orgUnit is set with testing data, should be empty).
+        // If orgUnit is set in Redux state.
         if (this.props.selectedOrgUint) {
             return (
                 <div>
@@ -162,7 +130,8 @@ class OrgUnitSelector extends Component<Props> {
                 </div>
             );
         }
-        // If less than or equal, display as list.
+        // TODO: Find a way to know how many total orgunits the user is assigned to.
+        // If less than or equal to 5 orgUnits, display as list.
         if (orgUnits.length <= 5) {
             return (
                 <div>
