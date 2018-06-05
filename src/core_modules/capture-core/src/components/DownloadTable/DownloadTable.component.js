@@ -4,16 +4,25 @@ import React, { Component } from 'react';
 import { withStyles } from 'material-ui-next/styles';
 
 import { getApi } from '../../d2/d2Instance';
+import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
+
 import Button from 'material-ui-next/Button';
 import Menu, { MenuItem } from 'material-ui-next/Menu';
 import IconButton from 'material-ui-next/IconButton';
 import FileDownloadIcon from '@material-ui/icons/FileDownload';
 
 const styles = () => ({
-    button: {
-        float: 'right',
-    },
+    menubuttons: {
+        textDecoration: 'none',
+        outline: 'none',
+    }
 });
+
+type Props = {
+    classes: Object,
+    selectedOrgUnitId: string,
+    selectedProgramId: string,
+};
 
 class DownloadTable extends Component {
     constructor() {
@@ -22,29 +31,33 @@ class DownloadTable extends Component {
         this.state = { anchorEl: null, };
         this.handleClick = this.handleClick.bind(this);
         this.handleClose = this.handleClose.bind(this);
-        this.handleSelectFormat = this.handleSelectFormat.bind(this);
     }
     
     handleClick = event => {
         this.setState({ anchorEl: event.currentTarget });
       };
     
-      handleClose = () => {
+    handleClose = () => {
         this.setState({ anchorEl: null });
-      };
-
-    handleSelectFormat(format) {
-        //TODO: GET current programStageId.
-        const orgUnit = this.props.selectedOrgUnitId;
-        const programStage = 'dBwrot7S420';
-        const skipPaging = true;
-
-        getApi().get('events.' + format, {orgUnit, programStage, skipPaging}).then(response => console.log(response));
-        this.handleClose();
-    }
+    };
 
     render() {
         const { anchorEl } = this.state;
+        const { classes } = this.props;
+
+        const baseUrl = getApi().baseUrl;
+        const programsArray = Array.from(programs.values());
+
+        let selectedProgramStageId = "";
+        
+        if(this.props.selectedProgramId) {
+            const selectedProgram = programsArray[programsArray.findIndex(program => program.id === this.props.selectedProgramId)];
+            if (selectedProgram.constructor.name === 'EventProgram') {
+                selectedProgramStageId = selectedProgram.stage.id;
+            } else if (selectedProgram.constructor.name === 'TrackerProgram') {
+                // TODO: Once we support TracekrProgram we need to get selected programStage.
+            }
+        }
 
         return (
             <span>
@@ -63,9 +76,15 @@ class DownloadTable extends Component {
                     open={Boolean(anchorEl)}
                     onClose={this.handleClose}
                 >
-                    <MenuItem onClick={() => this.handleSelectFormat('json')}>JSON</MenuItem>
-                    <MenuItem onClick={() => this.handleSelectFormat('xml')}>XML</MenuItem>
-                    <MenuItem onClick={() => this.handleSelectFormat('csv')}>CSV</MenuItem>
+                    <a className={classes.menubuttons} href={baseUrl + '/events/query.json?orgUnit=' + this.props.selectedOrgUnitId + '&programStage=' + selectedProgramStageId + '&skipPaging=true'} download tabIndex={-1}>
+                        <MenuItem onClick={this.handleClose}>JSON</MenuItem>
+                    </a>
+                    <a className={classes.menubuttons} href={baseUrl + '/events/query.xml?orgUnit=' + this.props.selectedOrgUnitId + '&programStage=' + selectedProgramStageId + '&skipPaging=true'} download tabIndex={-1}>
+                        <MenuItem onClick={this.handleClose}>XML</MenuItem>
+                    </a>
+                    <a className={classes.menubuttons} href={baseUrl + '/events/query.csv?orgUnit=' + this.props.selectedOrgUnitId + '&programStage=' + selectedProgramStageId + '&skipPaging=true'} download tabIndex={-1}>
+                        <MenuItem onClick={this.handleClose}>CSV</MenuItem>
+                    </a>
                 </Menu>
             </span>
         );
