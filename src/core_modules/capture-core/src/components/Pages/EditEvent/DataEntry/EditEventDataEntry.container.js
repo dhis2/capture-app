@@ -9,8 +9,11 @@ import programCollection from '../../../../metaDataMemoryStores/programCollectio
 import errorCreator from '../../../../utils/errorCreator';
 import {
     startRunRulesOnUpdateForEditSingleEvent,
+    startSaveReturnToMainPage,
+    startCancelSaveReturnToMainPage,
     batchActionTypes,
 } from './editEventDataEntry.actions';
+import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 
 const getFormFoundation = (state: ReduxState) => {
     const programId = state.currentSelections.programId;
@@ -43,16 +46,14 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
             startRunRulesOnUpdateForEditSingleEvent(innerAction.payload),
         ], batchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH));
     },
-    /*
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);
-        dispatch(startSaveNewEventAndReturnToMainPage(eventId, dataEntryId, formFoundation));
+        dispatch(startSaveReturnToMainPage(eventId, dataEntryId, formFoundation));
     },
     onCancel: () => {
         window.scrollTo(0, 0);
-        dispatch(cancelNewEventAndReturnToMainPage());
+        dispatch(startCancelSaveReturnToMainPage());
     },
-    */
 });
 
 // $FlowSuppress

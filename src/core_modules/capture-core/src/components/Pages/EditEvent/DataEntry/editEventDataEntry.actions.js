@@ -19,6 +19,11 @@ export const actionTypes = {
     PREREQUISITES_ERROR_OPENING_EVENT_FOR_EDIT_IN_DATA_ENTRY: 'PrerequisitesErrorOpeningSingleEventForEditInDataEntry',
     START_RUN_RULES_ON_UPDATE: 'StartRunRulesOnUpdateForEditSingleEvent',
     START_SAVE_RETURN_TO_MAIN_PAGE: 'StartSaveReturnToMainPageForEditEvent',
+    EVENT_UPDATED_AFTER_RETURN_TO_MAIN_PAGE: 'SingleEventUpdatedAfterReturnToMainPage',
+    EVENT_UPDATE_FAILED_AFTER_RETURN_TO_MAIN_PAGE: 'SingleEventUpdateFailedAfterReturnToMainPage',
+    START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE: 'CancelUpdateForSingleEventReturnToMainPage',
+    NO_WORKING_LIST_UPDATE_NEEDED_AFTER_CANCEL_UPDATE: 'NoWorkingListUpdateNeededAfterEventUpdateCancelled',
+    UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE: 'UpdateWorkingListAfterEventUpdateCancelled',
 };
 
 export const editEventIds = {
@@ -87,5 +92,20 @@ export const prerequisitesErrorOpeningEventForEditInDataEntry = (message: string
 export const startRunRulesOnUpdateForEditSingleEvent = (actionData: { payload: Object}) =>
     actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)(actionData);
 
-export const startSaveReturnToMainPage = () =>
-    actionCreator(actionTypes.START_SAVE_RETURN_TO_MAIN_PAGE)();
+export const startSaveReturnToMainPage = (itemId: string, dataEntryId: string, formFoundation: Object) =>
+    actionCreator(actionTypes.START_SAVE_RETURN_TO_MAIN_PAGE)({ itemId, dataEntryId, formFoundation });
+
+export const eventUpdatedAfterReturnedToMainPage = () =>
+    actionCreator(actionTypes.EVENT_UPDATED_AFTER_RETURN_TO_MAIN_PAGE)();
+
+export const eventUpdateFailedAfterReturnedToMainPage = (message: string) =>
+    actionCreator(actionTypes.EVENT_UPDATE_FAILED_AFTER_RETURN_TO_MAIN_PAGE)(message);
+
+export const startCancelSaveReturnToMainPage = () =>
+    actionCreator(actionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE)();
+
+export const noWorkingListUpdateNeededAfterUpdateCancelled = () =>
+    actionCreator(actionTypes.NO_WORKING_LIST_UPDATE_NEEDED_AFTER_CANCEL_UPDATE)();
+
+export const updateWorkingListAfterUpdateCancelled = () =>
+    actionCreator(actionTypes.UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE)();

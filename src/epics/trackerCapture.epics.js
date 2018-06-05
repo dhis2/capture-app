@@ -37,11 +37,21 @@ import {
 import {
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,
+    openEditPageLocationChangeEpic,
+    getEventOpeningFromEventListEpic,
 } from 'capture-core/components/Pages/EditEvent/epics/editEvent.epics';
 import {
     openEditEventInDataEntryEpic,
     runRulesForEditSingleEventEpic,
 } from 'capture-core/components/Pages/EditEvent/DataEntry/epics/editEventDataEntry.epics';
+import {
+    saveEditEventEpic,
+    saveEditEventLocationChangeEpic,
+} from 'capture-core/components/Pages/EditEvent/DataEntry/epics/saveEditSingleEvent.epics';
+import {
+    cancelEditEventEpic,
+    cancelEditEventLocationChangeEpic,
+} from 'capture-core/components/Pages/EditEvent/DataEntry/epics/cancelEditSingleEvent.epics';
 
 import { loadStartupData } from '../init/entry.epics';
 
@@ -69,4 +79,10 @@ export default combineEpics(
     getOrgUnitOnUrlUpdateEpic,
     openEditEventInDataEntryEpic,
     runRulesForEditSingleEventEpic,
+    saveEditEventLocationChangeEpic,
+    saveEditEventEpic,
+    cancelEditEventLocationChangeEpic,
+    cancelEditEventEpic,
+    openEditPageLocationChangeEpic,
+    getEventOpeningFromEventListEpic,
 );

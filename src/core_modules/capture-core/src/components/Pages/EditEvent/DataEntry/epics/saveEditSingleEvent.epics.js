@@ -6,8 +6,8 @@ import errorCreator from '../../../../../utils/errorCreator';
 import moment from '../../../../../utils/moment/momentResolver';
 import {
     actionTypes as editEventDataEntryActionTypes,
-    editEventSavedAfterReturnedToMainPage,
-    saveFailedForEditEventAfterReturnedToMainPage,
+    eventUpdatedAfterReturnedToMainPage,
+    eventUpdateFailedAfterReturnedToMainPage,
 } from '../editEventDataEntry.actions';
 
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
@@ -23,12 +23,13 @@ export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =
         .switchMap((action) => {
             const state = store.getState();
             const payload = action.payload;
-            const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.eventId);
+            const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.itemId);
+            const eventId = state.dataEntries[payload.dataEntryId].eventId;
 
             const formValues = state.formsValues[dataEntryKey];
             const dataEntryValues = state.dataEntriesFieldsValue[dataEntryKey];
             const dataEntryValuesMeta = state.dataEntriesFieldsMeta[dataEntryKey];
-            const prevEventMainData = {};
+            const prevEventMainData = state.events[eventId];
             const formFoundation = payload.formFoundation;
 
             const { formClientValues, dataEntryClientValues } = convertDataEntryToClientValues(
@@ -43,15 +44,12 @@ export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =
             const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
             const mainDataServerValues: Object = convertMainEventClientToServerWithKeysMap(mainDataClientValues);
 
-            if (mainDataServerValues.status === 'COMPLETED') {
+            if (mainDataServerValues.status === 'COMPLETED' && !prevEventMainData.completedDate) {
                 mainDataServerValues.completedDate = moment().format('YYYY-MM-DD');
             }
 
             const serverData = {
                 ...mainDataServerValues,
-                program: state.currentSelections.programId,
-                programStage: formFoundation.id,
-                orgUnit: state.currentSelections.orgUnitId,
                 dataValues: Object
                     .keys(formServerValues)
                     .map(key => ({
@@ -60,13 +58,13 @@ export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =
                     })),
             };
 
-            return getApi().post('events', serverData)
-                .then(() => newEventSavedAfterReturnedToMainPage())
+            return getApi().update(`events/${eventId}`, serverData)
+                .then(() => eventUpdatedAfterReturnedToMainPage())
                 .catch((error) => {
                     const errorMessage = isString(error) ? error : error.message;
                     const errorObject = isObject(error) ? error : null;
                     log.error(errorCreator(errorMessage || getTranslation('error_saving_event'))(errorObject));
-                    return saveFailedForNewEventAfterReturnedToMainPage(
+                    return eventUpdateFailedAfterReturnedToMainPage(
                         getTranslation(
                             'error_saving_event',
                             formatterOptions.CAPITALIZE_FIRST_LETTER,
@@ -75,9 +73,9 @@ export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =
                 });
         });
 
-export const saveNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveEditEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(newEventDataEntryActionTypes.START_SAVE_RETURN_TO_MAIN_PAGE)
+    action$.ofType(editEventDataEntryActionTypes.START_SAVE_RETURN_TO_MAIN_PAGE)
         .map(() => {
             const state = store.getState();
             const programId = state.currentSelections.programId;

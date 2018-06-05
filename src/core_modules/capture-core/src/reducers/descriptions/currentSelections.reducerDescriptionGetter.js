@@ -92,6 +92,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             ...state,
             programId: payload.event.programId,
             orgUnitId: payload.event.orgUnitId,
+            complete: true,
         };
 
         return newState;

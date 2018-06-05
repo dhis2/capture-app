@@ -20,6 +20,7 @@ import {
     workingListUpdateRetrievalFailed,
 } from './eventsList.actions';
 import { actionTypes as newEventDataEntryActionTypes } from '../../NewEvent/DataEntry/newEventDataEntry.actions';
+import { actionTypes as editEventDataEntryActionTypes } from '../../EditEvent/DataEntry/editEventDataEntry.actions';
 
 type InputObservable = rxjs$Observable<ReduxAction<any, any>>;
 
@@ -98,6 +99,7 @@ export const retrieveWorkingListEpic = (action$: InputObservable, store: ReduxSt
     action$.ofType(
         mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
         newEventDataEntryActionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST,
+        editEventDataEntryActionTypes.UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE,
     )
         .switchMap(() => {
             const { programId, orgUnitId } = store.getState().currentSelections;
@@ -111,13 +113,15 @@ export const updateWorkingListEpic = (action$: InputObservable, store: ReduxStor
         paginationActionTypes.CHANGE_ROWS_PER_PAGE,
         eventsListActionTypes.SORT_WORKING_LIST,
         newEventDataEntryActionTypes.NEW_EVENT_SAVED_AFTER_RETURNED_TO_MAIN_PAGE,
+        editEventDataEntryActionTypes.EVENT_UPDATED_AFTER_RETURN_TO_MAIN_PAGE,
     )
         .switchMap((action) => {
             const state = store.getState();
             const { programId, orgUnitId } = state.currentSelections;
 
-            if (action.type === newEventDataEntryActionTypes.NEW_EVENT_SAVED_AFTER_RETURNED_TO_MAIN_PAGE) {
-                const isListLoaded = !!state.workingListsUI.hasBeenLoaded;
+            if (action.type === newEventDataEntryActionTypes.NEW_EVENT_SAVED_AFTER_RETURNED_TO_MAIN_PAGE ||
+                action.type === editEventDataEntryActionTypes.EVENT_UPDATED_AFTER_RETURN_TO_MAIN_PAGE) {
+                const isListLoaded = !!state.workingListsUI.main.hasBeenLoaded;
                 if (!isListLoaded) {
                     return getInitialWorkingListActionAsync(programId, orgUnitId);
                 }

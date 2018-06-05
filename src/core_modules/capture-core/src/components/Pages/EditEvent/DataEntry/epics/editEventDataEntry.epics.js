@@ -3,7 +3,9 @@ import log from 'loglevel';
 import { batchActions } from 'redux-batched-actions';
 import errorCreator from '../../../../../utils/errorCreator';
 import { rulesExecutedPostUpdateField } from '../../../../DataEntry/actions/dataEntry.actions';
-import { actionTypes as editEventActionTypes } from '../../editEvent.actions';
+import {
+    actionTypes as editEventActionTypes,
+} from '../../editEvent.actions';
 import {
     openEventForEditInDataEntry,
     prerequisitesErrorOpeningEventForEditInDataEntry,
@@ -28,6 +30,7 @@ export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
     action$.ofType(
         editEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
         editEventActionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE,
+        editEventActionTypes.START_OPEN_EVENT_FOR_EDIT,
     )
         .map((action) => {
             const eventContainer = action.payload.eventContainer;
@@ -103,3 +106,4 @@ export const runRulesForEditSingleEventEpic = (action$: InputObservable, store: 
             ],
             editEventDataEntryBatchActionTypes.RULES_EFFECTS_ACTIONS_BATCH);
         });
+
