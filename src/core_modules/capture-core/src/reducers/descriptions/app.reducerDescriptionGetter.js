@@ -34,50 +34,50 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     [tempSelectorActionTypes.OPEN_NEW_EVENT_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = 'newEvent';
-        newState.pageSwitchInTransition = true;
+        newState.locationSwitchInProgress = true;
         return newState;
     },
     [newEventDataEntryActionTypes.START_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;
-        newState.pageSwitchInTransition = true;
+        newState.locationSwitchInProgress = true;
         return newState;
     },
     [newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;
-        newState.pageSwitchInTransition = true;
+        newState.locationSwitchInProgress = true;
         return newState;
     },
     [newEventDataEntryActionTypes.CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;
-        newState.pageSwitchInTransition = true;
+        newState.locationSwitchInProgress = true;
         return newState;
     },
     [editEventDataEntryActionTypes.START_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;
-        newState.pageSwitchInTransition = true;
+        newState.locationSwitchInProgress = true;
         return newState;
     },
     [editEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;
-        newState.pageSwitchInTransition = true;
+        newState.locationSwitchInProgress = true;
         return newState;
     },
     [eventListActionTypes.OPEN_EDIT_EVENT_PAGE]: (state) => {
         const newState = {
             ...state,
             page: 'editEvent',
-            pageSwitchInTransition: true,
+            locationSwitchInProgress: true,
         };
         return newState;
     },
     [LOCATION_CHANGE]: (state) => {
         const newState = { ...state };
-        newState.pageSwitchInTransition = false;
+        newState.locationSwitchInProgress = false;
         return newState;
     },
 }, 'app');

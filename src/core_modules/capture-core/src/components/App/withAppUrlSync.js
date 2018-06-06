@@ -21,7 +21,7 @@ type Props = {
     onUpdateFromUrl: (selections: Object, page: string) => void,
     params: Object,
     page: ?string,
-    pageSwitchInTransition: ?boolean,
+    locationSwitchInProgress: ?boolean,
 };
 
 const pageKeys = {
@@ -124,13 +124,13 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
             const {
                 location,
                 onUpdateFromUrl,
-                pageSwitchInTransition,
+                locationSwitchInProgress,
                 params,
                 page,
                 ...passOnProps
             } = this.props;
 
-            if (pageSwitchInTransition) {
+            if (locationSwitchInProgress) {
                 return (
                     <LoadingMaskForPage />
                 );
@@ -155,7 +155,7 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
     const mapStateToProps = (state: ReduxState) => ({
         params: paramsSelector(state),
         page: state.app.page,
-        pageSwitchInTransition: state.app.pageSwitchInTransition,
+        locationSwitchInProgress: state.app.locationSwitchInProgress,
     });
 
     const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
