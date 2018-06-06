@@ -4,12 +4,11 @@ import { Route, Switch } from 'react-router'; //eslint-disable-line
 import HeaderBar from '@dhis2/d2-ui-header-bar';
 import { withStyles } from '@material-ui/core/styles';
 
-import { connect } from 'react-redux';
-
 import getD2 from 'capture-core/d2/d2Instance';
 import MainPage from 'capture-core/components/Pages/MainPage/MainPage.container';
 import NewEvent from 'capture-core/components/Pages/NewEvent/NewEvent.container';
 import EditEvent from 'capture-core/components/Pages/EditEvent/EditEvent.container';
+import NetworkStatusBadge from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.component';
 
 // import EventCaptureForm from '../EventCaptureForm/EventCaptureForm.container';
 
@@ -24,17 +23,11 @@ type Props = {
     classes: Object
 };
 
-const mapStateToProps = (state: ReduxState) => ({
-    offline: state.offline
-});
-
 class AppContents extends Component<Props> {
     render() {
 
-        console.log('AppCompProps', this.props);
-        const { classes, offline } = this.props;
+        const { classes } = this.props;
 
-        console.log('offlien obj', offline.online);
         const d2 = getD2();
 
         return (
@@ -42,7 +35,7 @@ class AppContents extends Component<Props> {
                 className={classes.app}
             >
                 <HeaderBar d2={d2}>
-                    <p>Online: {offline.online ? 'yes' : 'no' }</p>
+                    <NetworkStatusBadge />
                 </HeaderBar>
                 <div style={{ padding: 100 }}>
                     <Switch>
@@ -60,6 +53,6 @@ class AppContents extends Component<Props> {
 
 const AppContentsWithStyles = withStyles(styles)(AppContents);
 
-export default connect(mapStateToProps)(AppContentsWithStyles);
+export default AppContentsWithStyles;
 
 /*  <Route path="/event" component={EventCaptureForm} /> */
