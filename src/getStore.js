@@ -31,8 +31,8 @@ export default function getStore(history: BrowserHistory | HashHistory) {
     const reducersFromDescriptions = buildReducersFromDescriptions(reducerDescriptions);
 
     const rootReducer = combineReducers({
-        ...reducersFromDescriptions,
         router: routerReducer,
+        ...reducersFromDescriptions,
     });
 
     const {
