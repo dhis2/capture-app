@@ -42,30 +42,30 @@ export default class Program {
     set programRules(programRules: Array<ProgramRule>) {
         this._programRules = programRules;
     }
-    get programRules(): ?Array<ProgramRule> {
+    get programRules(): Array<ProgramRule> {
         return this._programRules;
     }
 
     set programRuleVariables(programRuleVariables: Array<ProgramRuleVariable>) {
         this._programRuleVariables = programRuleVariables;
     }
-    get programRuleVariables(): ?Array<ProgramRuleVariable> {
+    get programRuleVariables(): Array<ProgramRuleVariable> {
         return this._programRuleVariables;
     }
 
     addProgramRuleVariable(programRuleVariable: ProgramRuleVariable) {
-        this._programRuleVariables.push(programRuleVariable);
+        this.programRuleVariables.push(programRuleVariable);
     }
 
     addProgramRule(programRule: ProgramRule) {
-        this._programRules.push(programRule);
+        this.programRules.push(programRule);
     }
 
     addProgramRuleVariables(programRuleVariables: Array<ProgramRuleVariable>) {
-        this._programRuleVariables = [...this._programRuleVariables, ...programRuleVariables];
+        this.programRuleVariables = [...this.programRuleVariables, ...programRuleVariables];
     }
 
     addProgramRules(programRules: Array<ProgramRule>) {
-        this._programRules = [...this._programRules, ...programRules];
+        this.programRules = [...this.programRules, ...programRules];
     }
 }

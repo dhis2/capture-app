@@ -1,7 +1,14 @@
 // @flow
 import { createMuiTheme } from '@material-ui/core/styles';
+import grey from '@material-ui/core/colors/grey';
+import blue from '@material-ui/core/colors/blue';
 
-const theme = createMuiTheme();
+const theme = createMuiTheme({
+    palette: {
+        primary: blue,
+        secondary: grey,
+    },
+});
 
 theme.typography.formFieldTitle = {
     fontSize: theme.typography.pxToRem(12),

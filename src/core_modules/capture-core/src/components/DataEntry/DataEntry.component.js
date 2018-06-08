@@ -3,9 +3,10 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
-import getStageFromEvent from '../../metaData/helpers/getStageFromEvent';
 import D2Form from '../D2Form/D2Form.component';
-import { placements } from './eventField/eventField.const';
+import { placements } from './dataEntryField/dataEntryField.const';
+import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
+import getDataEntryKey from './common/getDataEntryKey';
 
 const styles = theme => ({
     footerBar: {
@@ -23,25 +24,27 @@ type FieldContainer = {
 
 type Props = {
     id: string,
-    event: Event,
+    itemId: string,
+    formFoundation: ?RenderFoundation,
     completeButton?: ?React.Element<any>,
     saveButton?: ?React.Element<any>,
+    cancelButton?: ?React.Element<any>,
     fields?: ?Array<FieldContainer>,
     completionAttempted?: ?boolean,
     saveAttempted?: ?boolean,
     classes: Object,
-    onUpdateField: (
-        value: any,
-        uiState: Object,
-        elementId: string,
-        sectionId: string,
-        formId: string,
-        dataEntryId: string) => void,
+    onUpdateFieldInner: (
+        action: ReduxAction<any, any>,
+    ) => void,
+    onUpdateFormField?: ?(
+        innerAction: ReduxAction<any, any>,
+    ) => void,
 };
 
 class DataEntry extends React.Component<Props> {
     static errorMessages = {
-        NO_EVENT_SELECTED: 'No event selected',
+        NO_ITEM_SELECTED: 'No item selected',
+        FORM_FOUNDATION_MISSING: 'form foundation missing. see log for details',
     };
 
     formInstance: ?D2Form;
@@ -56,13 +59,8 @@ class DataEntry extends React.Component<Props> {
         return this.formInstance;
     }
 
-    getFormFoundation() {
-        const event = this.props.event;
-        return getStageFromEvent(event);
-    }
-
     handleUpdateField(...args) {
-        this.props.onUpdateField(...args, this.props.id, this.props.event.eventId);
+        this.props.onUpdateFieldInner(...args, this.props.id, this.props.itemId, this.props.onUpdateFormField);
     }
 
     getFieldWithPlacement(placement: $Values<typeof placements>) {
@@ -79,33 +77,33 @@ class DataEntry extends React.Component<Props> {
         const {
             id,
             classes,
-            event,
+            itemId,
+            formFoundation,
             completeButton,
             saveButton,
+            cancelButton,
             completionAttempted,
             saveAttempted,
             fields,
             onUpdateField,
             ...passOnProps } = this.props;
 
-        if (!event) {
+        if (!itemId) {
             return (
                 <div>
-                    {DataEntry.errorMessages.NO_EVENT_SELECTED}
+                    {DataEntry.errorMessages.NO_ITEM_SELECTED}
                 </div>
             );
         }
 
-        const formFoundationContainer = this.getFormFoundation();
-        if (formFoundationContainer.error) {
+        if (!formFoundation) {
             return (
                 <div>
-                    {formFoundationContainer.error}
+                    {DataEntry.errorMessages.FORM_FOUNDATION_MISSING}
                 </div>
             );
         }
 
-        const foundation = formFoundationContainer.stage;
         const topFields = this.getFieldWithPlacement(placements.TOP);
         const bottomFields = this.getFieldWithPlacement(placements.BOTTOM);
 
@@ -114,8 +112,8 @@ class DataEntry extends React.Component<Props> {
                 {topFields}
                 <D2Form
                     innerRef={(formInstance) => { this.formInstance = formInstance; }}
-                    formFoundation={foundation}
-                    id={event.eventId}
+                    formFoundation={formFoundation}
+                    id={getDataEntryKey(id, itemId)}
                     validationAttempted={completionAttempted || saveAttempted}
                     onUpdateField={this.handleUpdateField}
                     {...passOnProps}
@@ -147,6 +145,21 @@ class DataEntry extends React.Component<Props> {
                                         className={classes.button}
                                     >
                                         { saveButton }
+                                    </div>
+                                );
+                            }
+                            return null;
+                        })()
+                    }
+
+                    {
+                        (() => {
+                            if (cancelButton) {
+                                return (
+                                    <div
+                                        className={classes.button}
+                                    >
+                                        { cancelButton }
                                     </div>
                                 );
                             }

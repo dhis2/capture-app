@@ -6,7 +6,6 @@ import {
     loadDataEntryEpic,
     completeEventEpic,
     saveEventEpic,
-    rulesEpic,
 } from 'capture-core/components/DataEntry/epics/dataEntry.epics';
 import {
     mainSelectionsCompletedEpic,
@@ -19,7 +18,25 @@ import {
     selectionsFromUrlGetOrgUnitDataForNewEventEpic,
     selectionsFromUrlEmptyOrgUnitForNewEventEpic,
     selectionsFromUrlValidationForNewEventEpic,
-} from 'capture-core/components/Pages/NewEvent/newEventSelections.epics';
+} from 'capture-core/components/Pages/NewEvent/epics/newEventSelections.epics';
+import {
+    openNewEventPageLocationChangeEpic,
+} from 'capture-core/components/Pages/NewEvent/epics/newEvent.epics';
+import {
+    openNewEventInDataEntryEpic,
+    runRulesForSingleEventEpic,
+} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/newEventDataEntry.epics';
+import {
+    saveNewEventEpic,
+    saveNewEventLocationChangeEpic,
+} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/saveNewSingleEvent.epics';
+import {
+    cancelNewEventEpic,
+    cancelNewEventLocationChangeEpic,
+} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/cancelNewSingleEvent.epics';
+import {
+    cancelNewEventIncompleteSelectionsLocationChangeEpic,
+} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/cancelNewSingleEventSelectionsIncomplete.epics';
 import {
     retrieveWorkingListEpic,
     updateWorkingListEpic,
@@ -34,7 +51,6 @@ export default combineEpics(
     loadDataEntryEpic,
     completeEventEpic,
     saveEventEpic,
-    rulesEpic,
     mainSelectionsCompletedEpic,
     orgUnitDataRetrivedEpic,
     retrieveWorkingListEpic,
@@ -45,4 +61,12 @@ export default combineEpics(
     selectionsFromUrlGetOrgUnitDataForNewEventEpic,
     selectionsFromUrlEmptyOrgUnitForNewEventEpic,
     selectionsFromUrlValidationForNewEventEpic,
+    openNewEventPageLocationChangeEpic,
+    openNewEventInDataEntryEpic,
+    runRulesForSingleEventEpic,
+    saveNewEventLocationChangeEpic,
+    saveNewEventEpic,
+    cancelNewEventLocationChangeEpic,
+    cancelNewEventEpic,
+    cancelNewEventIncompleteSelectionsLocationChangeEpic,
 );

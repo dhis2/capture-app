@@ -15,7 +15,6 @@ import elementTypes from '../../../../metaData/DataElement/elementTypes';
 import getTableComponents from '../../../d2Ui/dataTable/getTableComponents';
 import basicTableAdapter from '../../../d2UiReactAdapters/dataTable/basicTable.adapter';
 import paginationAdapter from '../../../d2UiReactAdapters/dataTable/pagination.adapter';
-import LoadingMask from '../../../LoadingMasks/LoadingMask.component';
 
 import withData from './Pagination/withData';
 import withNavigation from '../../../Pagination/withDefaultNavigation';
@@ -102,7 +101,6 @@ type Column = {
 type Props = {
     dataSource: Array<{eventId: string, [elementId: string]: any}>,
     columns: ?Array<Column>,
-    isLoading: boolean,
     classes: {
         loaderContainer: string,
         container: string,
@@ -231,17 +229,7 @@ class EventsList extends Component<Props> {
         (fromToLabel: string, totalLabel: string) => `${fromToLabel} of ${totalLabel}`
 
     render() {
-        const { dataSource, columns, isLoading, classes } = this.props; //eslint-disable-line
-
-        if (isLoading) {
-            return (
-                <div
-                    className={classes.loaderContainer}
-                >
-                    <LoadingMask />
-                </div>
-            );
-        }
+        const { dataSource, columns, classes } = this.props; //eslint-disable-line
 
         const visibleColumns = columns ?
             columns

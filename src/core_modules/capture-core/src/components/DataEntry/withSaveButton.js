@@ -15,20 +15,20 @@ import DataEntry from './DataEntry.component';
 import errorCreator from '../../utils/errorCreator';
 import { getTranslation } from '../../d2/d2Instance';
 import { formatterOptions } from '../../utils/string/format.const';
-import { startSaveEvent, saveValidationFailed, saveAbort } from './actions/dataEntry.actions';
+import { saveValidationFailed, saveAbort } from './actions/dataEntry.actions';
 import getDataEntryKey from './common/getDataEntryKey';
-
-import getStageFromEvent from '../../metaData/helpers/getStageFromEvent';
-
+import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
+
+import { D2Form } from '../D2Form/D2Form.component';
 
 type Props = {
     classes: Object,
-    eventId: string,
-    event: Event,
-    onSaveEvent: (eventId: string, id: string) => void,
-    onSaveValidationFailed: (eventId: string, id: string) => void,
-    onSaveAbort: (eventId: string, id: string) => void,
+    formFoundation: RenderFoundation,
+    itemId: string,
+    onSave: (itemId: string, id: string, formFoundation: RenderFoundation) => void,
+    onSaveValidationFailed: (itemId: string, id: string) => void,
+    onSaveAbort: (itemId: string, id: string) => void,
     saveAttempted?: ?boolean,
     id: string,
     warnings: ?Array<{id: string, warning: string }>,
@@ -36,7 +36,6 @@ type Props = {
 };
 
 type Options = {
-    buttonStyle?: ?Object,
     color?: ?string,
 };
 
@@ -77,35 +76,35 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
             let done;
             while (!done) {
                 currentInstance = currentInstance.getWrappedInstance && currentInstance.getWrappedInstance();
-                if (!currentInstance || currentInstance.constructor.name === 'D2Form') {
+                if (!currentInstance || currentInstance instanceof D2Form) {
                     done = true;
                 }
             }
             return currentInstance;
         }
 
-        getEventFieldInstances() {
+        getDataEntryFieldInstances() {
             let currentInstance = this.innerInstance;
             let done;
-            const eventFields = [];
+            const dataEntryFields = [];
             while (!done) {
                 currentInstance = currentInstance.getWrappedInstance && currentInstance.getWrappedInstance();
                 if (!currentInstance || currentInstance instanceof DataEntry) {
                     done = true;
-                } else if (currentInstance.constructor.name === 'EventFieldBuilder') {
-                    eventFields.push(currentInstance);
+                } else if (currentInstance.constructor.name === 'DataEntryFieldBuilder') {
+                    dataEntryFields.push(currentInstance);
                 }
             }
-            return eventFields;
+            return dataEntryFields;
         }
 
-        validateEventFields() {
-            const eventFieldInstance = this.getEventFieldInstances();
+        validateDataEntryFields() {
+            const fieldInstance = this.getDataEntryFieldInstances();
 
             let fieldsValid = true;
             let index = 0;
-            while (eventFieldInstance[index] && fieldsValid) {
-                fieldsValid = eventFieldInstance[index].validateAndScrollToIfFailed();
+            while (fieldInstance[index] && fieldsValid) {
+                fieldsValid = fieldInstance[index].validateAndScrollToIfFailed();
                 index += 1;
             }
             return fieldsValid;
@@ -120,19 +119,19 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
             if (!formInstance) {
                 log.error(
                     errorCreator(
-                        SaveButtonBuilder.errorMessages.FORM_INSTANCE_NOT_FOUND)({ CompleteButtonBuilder: this }),
+                        SaveButtonBuilder.errorMessages.FORM_INSTANCE_NOT_FOUND)({ SaveButtonBuilder: this }),
                 );
-                return;
+                return {
+                    error: true,
+                    isValid: false,
+                };
             }
 
-            const valid = formInstance.validateFormScrollToFirstFailedField();
-            if (!valid) {
-                this.props.onSaveValidationFailed(this.props.eventId, this.props.id);
-            } else if (this.props.warnings && this.props.warnings.length > 0) {
-                this.showWarningsPopup();
-            } else {
-                this.props.onSaveEvent(this.props.eventId, this.props.id);
-            }
+            const isValid = formInstance.validateFormScrollToFirstFailedField();
+            return {
+                isValid,
+                error: false,
+            };
         }
 
         handleSaveAttempt() {
@@ -143,39 +142,43 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
                 return;
             }
 
-            const isFieldsValid = this.validateEventFields();
-            if (!isFieldsValid) {
-                this.props.onSaveValidationFailed(this.props.eventId, this.props.id);
+            const isDataEntryFieldsValid = this.validateDataEntryFields();
+            if (!isDataEntryFieldsValid) {
+                this.props.onSaveValidationFailed(this.props.itemId, this.props.id);
                 return;
             }
 
-            this.validateForm();
+            const { error: validateFormError, isValid: isFormValid } = this.validateForm();
+            if (validateFormError) {
+                return;
+            }
+
+            this.handleSaveValidationOutcome(isFormValid);
+        }
+
+        handleSaveValidationOutcome(isFormValid: boolean) {
+            if (!isFormValid) {
+                this.props.onSaveValidationFailed(this.props.itemId, this.props.id);
+            } else if (this.props.warnings && this.props.warnings.length > 0) {
+                this.showWarningsPopup();
+            } else {
+                this.props.onSave(this.props.itemId, this.props.id, this.props.formFoundation);
+            }
         }
 
         handleCloseDialog() {
-            this.props.onSaveAbort(this.props.eventId, this.props.id);
+            this.props.onSaveAbort(this.props.itemId, this.props.id);
             this.setState({ warningDialogOpen: false });
         }
 
         handleSaveDialog() {
-            this.props.onSaveEvent(this.props.eventId, this.props.id);
+            this.props.onSave(this.props.itemId, this.props.id, this.props.formFoundation);
             this.setState({ warningDialogOpen: false });
-        }
-
-        getFoundation() {
-            const event = this.props.event;
-            return getStageFromEvent(event);
         }
 
         getDialogWarningContents() {
             if (this.state.warningDialogOpen) {
-                const foundationContainer = this.getFoundation();
-
-                if (!foundationContainer || !foundationContainer.stage) {
-                    return null;
-                }
-
-                const foundation = foundationContainer.stage;
+                const foundation = this.props.formFoundation;
                 const warnings = this.props.warnings;
 
                 return warnings ?
@@ -195,8 +198,8 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
 
         render() {
             const {
-                eventId,
-                onSaveEvent,
+                itemId,
+                onSave,
                 onSaveValidationFailed,
                 onSaveAbort,
                 finalInProgress,
@@ -204,7 +207,7 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
             } = this.props;
             const options = optionFn ? optionFn(this.props) : {};
 
-            if (!eventId) {
+            if (!itemId) {
                 return null;
             }
 
@@ -251,21 +254,20 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
     };
 
 const mapStateToProps = (state: ReduxState, props: { id: string }) => {
-    const eventId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].eventId;
-    const key = getDataEntryKey(props.id, eventId);
+    const itemId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].itemId;
+    const key = getDataEntryKey(props.id, itemId);
     return {
-        eventId,
-        event: eventId && state.events[eventId],
+        itemId,
         saveAttempted:
             state.dataEntriesUI &&
             state.dataEntriesUI[key] &&
             state.dataEntriesUI[key].saveAttempted,
-        warnings: state.eventsRulesEffectsMessages[eventId] &&
-            Object.keys(state.eventsRulesEffectsMessages[eventId])
+        warnings: state.rulesEffectsMessages[itemId] &&
+            Object.keys(state.rulesEffectsMessages[itemId])
                 .map((elementId) => {
-                    const warning = state.eventsRulesEffectsMessages[eventId][elementId] &&
-                    (state.eventsRulesEffectsMessages[eventId][elementId][messageStateKeys.WARNING] ||
-                        state.eventsRulesEffectsMessages[eventId][elementId][messageStateKeys.WARNING_ON_COMPLETE]);
+                    const warning = state.rulesEffectsMessages[itemId][elementId] &&
+                    (state.rulesEffectsMessages[itemId][elementId][messageStateKeys.WARNING] ||
+                        state.rulesEffectsMessages[itemId][elementId][messageStateKeys.WARNING_ON_COMPLETE]);
                     return {
                         id: elementId,
                         warning,
@@ -277,14 +279,11 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onSaveEvent: (eventId: string, id: string) => {
-        dispatch(startSaveEvent(eventId, id));
+    onSaveValidationFailed: (itemId: string, id: string) => {
+        dispatch(saveValidationFailed(itemId, id));
     },
-    onSaveValidationFailed: (eventId: string, id: string) => {
-        dispatch(saveValidationFailed(eventId, id));
-    },
-    onSaveAbort: (eventId: string, id: string) => {
-        dispatch(saveAbort(eventId, id));
+    onSaveAbort: (itemId: string, id: string) => {
+        dispatch(saveAbort(itemId, id));
     },
 });
 

@@ -4,7 +4,7 @@ import moment from '../moment/momentResolver';
 export default function isValidDate(value: string) {
     const dateString = value;
 
-    const momentDate = moment(dateString, 'L');
+    const momentDate = moment(dateString, 'L', true);
     const isValid = momentDate.isValid();
     if (!isValid) {
         return isValid;

@@ -700,13 +700,6 @@ export default function getExecutionService(onTranslate, variableService, dateUt
     };
     */
 
-    const getApplicableProgramRules = function(programRules, executingEvent) {
-        const executingEventProgramStageId = executingEvent.programStageId;
-        const mainRules = programRules.filter(rule => !rule.programStageId);
-        const programStageRules = programRules.filter(rule => rule.programStageId === executingEventProgramStageId);
-        return [...mainRules, ...programStageRules];
-    }
-
     // lowest number first(priority null is last)
     const orderRulesByPriority = function(programRules) {
         const orderedRules = programRules.sort((a, b) => {
@@ -852,13 +845,13 @@ export default function getExecutionService(onTranslate, variableService, dateUt
      * @param {*} flag execution flags
      */
     var internalExecuteRules = function(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, flag) {
-        let rules = getApplicableProgramRules(programRulesContainer.programRules, executingEvent);
+        let rules = programRulesContainer.programRules;
         if(rules.length === 0) {
             return null;
         }
         rules = orderRulesByPriority(rules);        
         const variablesHash = variableService.getVariables(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets);
-        const ruleEffectKey = executingEvent.eventId;
+        // const ruleEffectKey = executingEvent.eventId;
         let updatedEffectsExits = false;
         let eventsCreated = 0;
 

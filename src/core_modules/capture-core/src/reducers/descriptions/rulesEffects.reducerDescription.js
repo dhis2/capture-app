@@ -11,7 +11,7 @@ export const messageStateKeys = {
     WARNING_ON_COMPLETE: 'warningOnComplete',
 };
 
-export const eventsRulesEffectsHiddenFieldsDesc = createReducerDescription({
+export const rulesEffectsHiddenFieldsDesc = createReducerDescription({
     [actionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
         const newState = { ...state };
 
@@ -25,9 +25,9 @@ export const eventsRulesEffectsHiddenFieldsDesc = createReducerDescription({
 
         return newState;
     },
-}, 'eventsRulesEffectsHiddenFields');
+}, 'rulesEffectsHiddenFields');
 
-export const eventsRulesEffectsCompulsoryFieldsDesc = createReducerDescription({
+export const rulesEffectsCompulsoryFieldsDesc = createReducerDescription({
     [actionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
         const newState = { ...state };
 
@@ -41,9 +41,9 @@ export const eventsRulesEffectsCompulsoryFieldsDesc = createReducerDescription({
 
         return newState;
     },
-}, 'eventsRulesEffectsCompulsoryFields');
+}, 'rulesEffectsCompulsoryFields');
 
-export const eventsRulesEffectsHiddenSectionsDesc = createReducerDescription({
+export const rulesEffectsHiddenSectionsDesc = createReducerDescription({
     [actionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
         const newState = { ...state };
 
@@ -57,7 +57,7 @@ export const eventsRulesEffectsHiddenSectionsDesc = createReducerDescription({
 
         return newState;
     },
-}, 'eventsRulesEffectsHiddenSections');
+}, 'rulesEffectsHiddenSections');
 
 const mapMessageEffectTypeToStateKey = {
     [effectActions.SHOW_ERROR]: messageStateKeys.ERROR,
@@ -66,7 +66,7 @@ const mapMessageEffectTypeToStateKey = {
     [effectActions.SHOW_WARNING_ONCOMPLETE]: messageStateKeys.WARNING_ON_COMPLETE,
 };
 
-export const eventsRulesEffectsErrorMessagesDesc = createReducerDescription({
+export const rulesEffectsErrorMessagesDesc = createReducerDescription({
     [actionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
         const newState = { ...state };
 
@@ -93,4 +93,4 @@ export const eventsRulesEffectsErrorMessagesDesc = createReducerDescription({
 
         return newState;
     },
-}, 'eventsRulesEffectsMessages');
+}, 'rulesEffectsMessages');

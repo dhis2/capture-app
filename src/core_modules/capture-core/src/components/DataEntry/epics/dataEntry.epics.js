@@ -15,7 +15,7 @@ import {
     saveEvent,
     saveEventError,
 } from '../actions/dataEntry.actions';
-import { actionTypes as dataEntryLoadTypes, loadDataEntryEvent, openDataEntryEventAlreadyLoaded } from '../actions/dataEntryLoad.actions';
+import { actionTypes as dataEntryLoadTypes, loadDataEntryEvent, openDataEntryEventAlreadyLoaded } from '../actions/dataEntryLoadEdit.actions';
 
 import getDataEntryKey from '../common/getDataEntryKey';
 import { getRulesActionsOnUpdate } from '../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
@@ -98,6 +98,7 @@ export const saveEventEpic = (action$, store: ReduxStore) =>
             return saveEvent(clientValues, serverData, eventMainData, eventId, id);
         });
 
+/*
 export const rulesEpic = (action$, store: ReduxStore) =>
     action$.ofType(actionTypes.UPDATE_FORM_FIELD)
         .map((action) => {
@@ -110,3 +111,4 @@ export const rulesEpic = (action$, store: ReduxStore) =>
             const actions = getRulesActionsOnUpdate(payload.eventId, store.getState(), payload.formId, payload.dataEntryId, fieldData);
             return batchActions(actions);
         });
+*/

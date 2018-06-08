@@ -31,3 +31,7 @@ declare module '@material-ui/icons/KeyboardArrowRight' {
 declare module '@material-ui/icons/LastPage' {
     declare module.exports: any;
 }
+
+declare module '@material-ui/icons/InfoOutline' {
+    declare module.exports: any;
+}

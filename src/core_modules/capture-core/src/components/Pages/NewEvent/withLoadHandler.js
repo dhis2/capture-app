@@ -21,8 +21,8 @@ type Props = {
     }
 };
 
-const getInputHandler = (InnerComponent: React.ComponentType<any>) =>
-    class MainMenuInputHandler extends React.Component<Props> {
+const getLoadHandler = (InnerComponent: React.ComponentType<any>) =>
+    class NewEventLoadHandler extends React.Component<Props> {
         render() {
             const { isLoading, selectionsError, classes, ...passOnProps } = this.props;
 
@@ -53,9 +53,9 @@ const getInputHandler = (InnerComponent: React.ComponentType<any>) =>
 
 /**
  * HOC for newEvent component. Handling load status and load errors
- * @alias withInputHandling
+ * @alias withLoadHandling
  * @memberof NewEventPage
  */
 
 export default () => (InnerComponent: React.ComponentType<any>) =>
-    withStyles(styles)(getInputHandler(InnerComponent));
+    withStyles(styles)(getLoadHandler(InnerComponent));

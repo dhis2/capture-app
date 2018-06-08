@@ -1,5 +1,5 @@
 // @flow
-export default (message: string) => (details: Object) => ({
+export default (message: string) => (details?: ?Object) => ({
     ...details,
     message,
 });

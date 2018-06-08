@@ -4,21 +4,27 @@ import DataEntry from './DataEntry.component';
 import { updateFormField } from './actions/dataEntry.actions';
 
 const mapStateToProps = (state: Object, props: { id: string }) => ({
-    event: state.dataEntries[props.id] &&
-        state.dataEntries[props.id].eventId &&
-        state.events[state.dataEntries[props.id].eventId],
+    itemId: state.dataEntries[props.id] &&
+        state.dataEntries[props.id].itemId,
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onUpdateField: (
+    onUpdateFieldInner: (
         value: any,
         uiState: Object,
         elementId: string,
         sectionId: string,
         formId: string,
         dataEntryId: string,
-        eventId: string) => {
-        dispatch(updateFormField(value, uiState, elementId, sectionId, formId, dataEntryId, eventId));
+        itemId: string,
+        onUpdateField: ?(innerAction: ReduxAction<any, any>) => void) => {
+        const updateAction = updateFormField(value, uiState, elementId, sectionId, formId, dataEntryId, itemId);
+
+        if (onUpdateField) {
+            onUpdateField(updateAction);
+        } else {
+            dispatch(updateAction);
+        }
     },
 });
 

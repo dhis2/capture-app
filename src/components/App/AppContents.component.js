@@ -8,7 +8,7 @@ import getD2 from 'capture-core/d2/d2Instance';
 import MainPage from 'capture-core/components/Pages/MainPage/MainPage.container';
 import NewEvent from 'capture-core/components/Pages/NewEvent/NewEvent.container';
 
-import EventCaptureForm from '../EventCaptureForm/EventCaptureForm.container';
+// import EventCaptureForm from '../EventCaptureForm/EventCaptureForm.container';
 
 const styles = theme => ({
     app: {
@@ -34,7 +34,6 @@ class AppContents extends Component<Props> {
                 <HeaderBar d2={d2} />
                 <div style={{ padding: 100 }}>
                     <Switch>
-                        <Route path="/event" component={EventCaptureForm} />
                         <Route path="/newEvent" component={NewEvent} />
                         <Route path="/:keys" component={MainPage} />
                         <Route path="/" component={MainPage} />
@@ -49,3 +48,5 @@ class AppContents extends Component<Props> {
 const AppContentsWithStyles = withStyles(styles)(AppContents);
 
 export default AppContentsWithStyles;
+
+/*  <Route path="/event" component={EventCaptureForm} /> */

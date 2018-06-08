@@ -5,7 +5,7 @@ import log from 'loglevel';
 import errorCreator from '../../utils/errorCreator';
 
 import getEnrollmentEvents from '../../events/getEnrollmentEvents';
-import { loadDataEntryEvent } from '../../components/DataEntry/actions/dataEntryLoad.actions';
+import { loadDataEntryEvent } from '../../components/DataEntry/actions/dataEntryLoadEdit.actions';
 import { actionTypes, enrollmentLoaded, enrollmentLoadFailed } from './enrollment.actions';
 
 type InputObservable = rxjs$Observable<ReduxAction<any, any>>;
