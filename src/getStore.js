@@ -8,8 +8,9 @@ import { routerMiddleware, routerReducer } from 'react-router-redux';
 import type { BrowserHistory } from 'history/createBrowserHistory';
 import type { HashHistory } from 'history/createHashHistory';
 
-import { offline } from '@redux-offline/redux-offline';
+import { createOffline } from '@redux-offline/redux-offline';
 import offlineConfig from '@redux-offline/redux-offline/lib/defaults';
+import { effectConfig } from 'capture-core/trackerOffline/trackerOfflineConfig';
 
 import { buildReducersFromDescriptions } from 'capture-core/trackerRedux/trackerReducer';
 import environments from 'capture-core/constants/environments';
@@ -34,10 +35,24 @@ export default function getStore(history: BrowserHistory | HashHistory) {
         router: routerReducer,
     });
 
-    return createStore(enableBatching(rootReducer), composeWithDevTools(
-        compose(
-            applyMiddleware(...middleWares),
-            offline(offlineConfig),
-        )
-    ));
+    const {
+        middleware: offlineMiddleware,
+        enhanceReducer: offlineEnhanceReducer,
+        enhanceStore: offlineEnhanceStore,
+    } = createOffline({
+        ...offlineConfig,
+        effect: effectConfig,
+    });
+
+    return createStore(
+        offlineEnhanceReducer(enableBatching(rootReducer)), composeWithDevTools(
+            compose(
+                offlineEnhanceStore,
+                applyMiddleware(
+                    ...middleWares,
+                    offlineMiddleware,
+                ),
+            ),
+        ),
+    );
 }

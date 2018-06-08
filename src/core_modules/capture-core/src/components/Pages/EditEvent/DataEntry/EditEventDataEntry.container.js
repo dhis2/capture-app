@@ -9,7 +9,7 @@ import programCollection from '../../../../metaDataMemoryStores/programCollectio
 import errorCreator from '../../../../utils/errorCreator';
 import {
     startRunRulesOnUpdateForEditSingleEvent,
-    startSaveReturnToMainPage,
+    requestSaveReturnToMainPage,
     startCancelSaveReturnToMainPage,
     batchActionTypes,
 } from './editEventDataEntry.actions';
@@ -48,7 +48,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);
-        dispatch(startSaveReturnToMainPage(eventId, dataEntryId, formFoundation));
+        dispatch(requestSaveReturnToMainPage(eventId, dataEntryId, formFoundation));
     },
     onCancel: () => {
         window.scrollTo(0, 0);

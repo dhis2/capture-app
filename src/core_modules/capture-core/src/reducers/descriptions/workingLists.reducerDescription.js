@@ -145,7 +145,7 @@ export const workingListsUIDesc = createReducerDescription({
         };
         return newState;
     },
-    [newEventDataEntryActionTypes.START_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
+    [newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.main = {
             ...newState.main,
@@ -177,7 +177,7 @@ export const workingListsUIDesc = createReducerDescription({
         };
         return newState;
     },
-    [editEventDataEntryActionTypes.START_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
+    [editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.main = {
             ...newState.main,

@@ -4,7 +4,7 @@ import FeedbackBar from './FeedbackBar.component';
 import { closeFeedback } from './actions/feedback.actions';
 
 const mapStateToProps = (state: ReduxState) => ({
-    feedback: state.feedbacks && state.feedbacks[0],
+    feedback: (state.feedbacks && state.feedbacks[0]) ? state.feedbacks[0] : undefined,
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({

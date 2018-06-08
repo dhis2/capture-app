@@ -7,6 +7,8 @@ import {
 } from '../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import Program from '../../../../metaData/Program/Program';
+import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
+
 import type { ClientEventContainer } from '../../../../events/eventRequests';
 
 export const batchActionTypes = {
@@ -18,7 +20,8 @@ export const actionTypes = {
     OPEN_EVENT_FOR_EDIT_IN_DATA_ENTRY: 'OpenSingleEventForEditInDataEntry',
     PREREQUISITES_ERROR_OPENING_EVENT_FOR_EDIT_IN_DATA_ENTRY: 'PrerequisitesErrorOpeningSingleEventForEditInDataEntry',
     START_RUN_RULES_ON_UPDATE: 'StartRunRulesOnUpdateForEditSingleEvent',
-    START_SAVE_RETURN_TO_MAIN_PAGE: 'StartSaveReturnToMainPageForEditEvent',
+    REQUEST_SAVE_RETURN_TO_MAIN_PAGE: 'RequestSaveReturnToMainPageForEditSingleEvent',
+    START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE: 'StartSaveAfterReturnedToMainPageForEditEvent',
     EVENT_UPDATED_AFTER_RETURN_TO_MAIN_PAGE: 'SingleEventUpdatedAfterReturnToMainPage',
     EVENT_UPDATE_FAILED_AFTER_RETURN_TO_MAIN_PAGE: 'SingleEventUpdateFailedAfterReturnToMainPage',
     START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE: 'CancelUpdateForSingleEventReturnToMainPage',
@@ -81,7 +84,12 @@ export const openEventForEditInDataEntry =
 
         return [
             ...dataEntryActions,
-            ...getRulesActionsForEvent(program, foundation, key, orgUnit, { ...eventContainer.event, ...eventContainer.values }),
+            ...getRulesActionsForEvent(
+                program,
+                foundation,
+                key,
+                orgUnit,
+                { ...eventContainer.event, ...eventContainer.values }),
             actionCreator(actionTypes.OPEN_EVENT_FOR_EDIT_IN_DATA_ENTRY)(),
         ];
     };
@@ -92,14 +100,21 @@ export const prerequisitesErrorOpeningEventForEditInDataEntry = (message: string
 export const startRunRulesOnUpdateForEditSingleEvent = (actionData: { payload: Object}) =>
     actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)(actionData);
 
-export const startSaveReturnToMainPage = (itemId: string, dataEntryId: string, formFoundation: Object) =>
-    actionCreator(actionTypes.START_SAVE_RETURN_TO_MAIN_PAGE)({ itemId, dataEntryId, formFoundation });
+export const requestSaveReturnToMainPage = (itemId: string, dataEntryId: string, formFoundation: Object) =>
+    actionCreator(actionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)({ itemId, dataEntryId, formFoundation });
 
-export const eventUpdatedAfterReturnedToMainPage = () =>
-    actionCreator(actionTypes.EVENT_UPDATED_AFTER_RETURN_TO_MAIN_PAGE)();
-
-export const eventUpdateFailedAfterReturnedToMainPage = (message: string) =>
-    actionCreator(actionTypes.EVENT_UPDATE_FAILED_AFTER_RETURN_TO_MAIN_PAGE)(message);
+export const startSaveEditEventAfterReturnedToMainPage = (eventId: string, serverData: Object) =>
+    actionCreator(actionTypes.START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE)(null, {
+        offline: {
+            effect: {
+                url: `events/${eventId}`,
+                method: methods.UPDATE,
+                data: serverData,
+            },
+            commit: { type: actionTypes.EVENT_UPDATED_AFTER_RETURN_TO_MAIN_PAGE },
+            rollback: { type: actionTypes.EVENT_UPDATE_FAILED_AFTER_RETURN_TO_MAIN_PAGE },
+        },
+    });
 
 export const startCancelSaveReturnToMainPage = () =>
     actionCreator(actionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE)();

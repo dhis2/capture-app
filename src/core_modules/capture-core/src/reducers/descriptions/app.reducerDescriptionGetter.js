@@ -37,7 +37,7 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         newState.locationSwitchInProgress = true;
         return newState;
     },
-    [newEventDataEntryActionTypes.START_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
+    [newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;
         newState.locationSwitchInProgress = true;
@@ -55,7 +55,7 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         newState.locationSwitchInProgress = true;
         return newState;
     },
-    [editEventDataEntryActionTypes.START_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
+    [editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;
         newState.locationSwitchInProgress = true;

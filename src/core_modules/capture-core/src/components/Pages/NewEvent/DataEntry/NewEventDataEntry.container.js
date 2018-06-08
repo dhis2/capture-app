@@ -4,7 +4,7 @@ import { batchActions } from 'redux-batched-actions';
 import NewEventDataEntry from './NewEventDataEntry.component';
 import {
     startRunRulesOnUpdateForNewSingleEvent,
-    startSaveNewEventAndReturnToMainPage,
+    requestSaveNewEventAndReturnToMainPage,
     cancelNewEventAndReturnToMainPage,
     batchActionTypes,
 } from './newEventDataEntry.actions';
@@ -27,13 +27,16 @@ const makeMapStateToProps = () => {
 
         return {
             ready: !state.newEventPage.dataEntryIsLoading,
-            error: !formFoundation ? getTranslation('not_event_program_or_metadata_error', formatterOptions.CAPITALIZE_FIRST_LETTER) : null,
+            error: !formFoundation ?
+                getTranslation('not_event_program_or_metadata_error', formatterOptions.CAPITALIZE_FIRST_LETTER) : null,
             formFoundation,
             programName: programNameSelector(state),
-            orgUnitName: state.organisationUnits[state.currentSelections.orgUnitId] && state.organisationUnits[state.currentSelections.orgUnitId].name,
+            orgUnitName: state.organisationUnits[state.currentSelections.orgUnitId] &&
+                state.organisationUnits[state.currentSelections.orgUnitId].name,
         };
     };
 
+    // $FlowSuppress
     return mapStateToProps;
 };
 
@@ -46,7 +49,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);
-        dispatch(startSaveNewEventAndReturnToMainPage(eventId, dataEntryId, formFoundation));
+        dispatch(requestSaveNewEventAndReturnToMainPage(eventId, dataEntryId, formFoundation));
     },
     onCancel: () => {
         window.scrollTo(0, 0);

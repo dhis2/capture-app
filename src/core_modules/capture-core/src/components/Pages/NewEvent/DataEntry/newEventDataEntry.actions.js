@@ -7,6 +7,7 @@ import {
 } from '../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import EventProgram from '../../../../metaData/Program/EventProgram';
+import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
 
 export const batchActionTypes = {
     UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH: 'UpdateFieldForNewSingleEventActionsBatch',
@@ -17,7 +18,8 @@ export const batchActionTypes = {
 export const actionTypes = {
     OPEN_NEW_EVENT_IN_DATA_ENTRY: 'OpenNewEventInDataEntry',
     START_RUN_RULES_ON_UPDATE: 'StartRunRulesOnUpdateForNewSingleEvent',
-    START_SAVE_RETURN_TO_MAIN_PAGE: 'StartSaveReturnToMainPageForNewSingleEvent',
+    REQUEST_SAVE_RETURN_TO_MAIN_PAGE: 'RequestSaveReturnToMainPageForNewSingleEvent',
+    START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE: 'StartSaveAfterReturnedToMainPage',
     START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE: 'StartCancelSaveReturnToMainPageForNewSingleEvent',
     CANCEL_SAVE_NO_WORKING_LIST_UPDATE_NEEDED: 'CancelSaveNoWorkingListUpdateNeededForSingleEvent',
     CANCEL_SAVE_UPDATE_WORKING_LIST: 'CancelSaveUpdateWorkingListForSingleNewEvent',
@@ -70,7 +72,7 @@ export const openNewEventInDataEntry =
             formId,
             orgUnit,
         );
-        
+
         return [
             ...dataEntryActions,
             ...rulesActions,
@@ -81,8 +83,21 @@ export const openNewEventInDataEntry =
 export const startRunRulesOnUpdateForNewSingleEvent = (actionData: { payload: Object}) =>
     actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)(actionData);
 
-export const startSaveNewEventAndReturnToMainPage = (eventId: string, dataEntryId: string, formFoundation: Object) =>
-    actionCreator(actionTypes.START_SAVE_RETURN_TO_MAIN_PAGE)({ eventId, dataEntryId, formFoundation });
+export const requestSaveNewEventAndReturnToMainPage = (eventId: string, dataEntryId: string, formFoundation: Object) =>
+    actionCreator(actionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)({ eventId, dataEntryId, formFoundation });
+
+export const startSaveNewEventAfterReturnedToMainPage = (serverData: Object) =>
+    actionCreator(actionTypes.START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE)(null, {
+        offline: {
+            effect: {
+                url: 'events',
+                method: methods.POST,
+                data: serverData,
+            },
+            commit: { type: actionTypes.NEW_EVENT_SAVED_AFTER_RETURNED_TO_MAIN_PAGE },
+            rollback: { type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE },
+        },
+    });
 
 export const cancelNewEventAndReturnToMainPage = () =>
     actionCreator(actionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE)();
@@ -92,12 +107,6 @@ export const cancelNewEventNoWorkingListUpdateNeeded = () =>
 
 export const cancelNewEventUpdateWorkingList = () =>
     actionCreator(actionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST)();
-
-export const newEventSavedAfterReturnedToMainPage = () =>
-    actionCreator(actionTypes.NEW_EVENT_SAVED_AFTER_RETURNED_TO_MAIN_PAGE)();
-
-export const saveFailedForNewEventAfterReturnedToMainPage = (message: string) =>
-    actionCreator(actionTypes.SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE)(message);
 
 export const selectionsNotCompleteOpeningNewEvent = () =>
     actionCreator(actionTypes.SELECTIONS_NOT_COMPLETE_OPENING_NEW_EVENT)();

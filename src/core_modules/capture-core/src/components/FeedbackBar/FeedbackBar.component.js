@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Component } from 'react';
+import isDefined from 'd2-utilizr/lib/isDefined';
 import SnackBar from '@material-ui/core/Snackbar';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -28,7 +28,7 @@ type Props = {
     theme: Object,
 };
 
-class FeedbackBar extends Component<Props> {
+class FeedbackBar extends React.Component<Props> {
     static CLICKAWAY_KEY = 'clickaway';
 
     static ANCHOR_ORIGION = {
@@ -40,13 +40,13 @@ class FeedbackBar extends Component<Props> {
         feedback: {},
     };
 
-    handleClose: (event: Object, reason: string) => void;
+    handleClose: (event?: ?Object, reason: string) => void;
     constructor(props: Props) {
         super(props);
         this.handleClose = this.handleClose.bind(this);
     }
 
-    handleClose(event: Object, reason: string) {
+    handleClose(event?: ?Object, reason: string) {
         if (reason !== FeedbackBar.CLICKAWAY_KEY) {
             this.props.onClose();
         }
@@ -92,7 +92,7 @@ class FeedbackBar extends Component<Props> {
 
         return (
             <SnackBar
-                open={!!feedback.message}
+                open={isDefined(feedback.message)}
                 anchorOrigin={FeedbackBar.ANCHOR_ORIGION}
                 autoHideDuration={5000}
                 onClose={this.handleClose}
