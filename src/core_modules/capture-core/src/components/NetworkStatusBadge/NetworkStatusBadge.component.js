@@ -7,33 +7,28 @@ import Grow from '@material-ui/core/Grow'
 import { withStyles } from '@material-ui/core/styles';
 import * as moment from 'moment';
 
-const leftStyle = {
-    padding: '8px',
-}
-
-const offlineIcon = {
-    backgroundColor: '#9e9e9e',
-    width: '8px',
-    height: '8px',
-    borderRadius: '4px',
-    display: 'inline-block',
-    marginRight: '6px',
-}
-
-const onlineIcon = {
-    backgroundColor: '#48a999',
-    width: '8px',
-    height: '8px',
-    borderRadius: '4px',
-    display: 'inline-block',
-    marginRight: '6px',
-}
-
 const styles = theme => ({
+    offlineIcon: {
+        backgroundColor: '#9e9e9e',
+        width: '8px',
+        height: '8px',
+        borderRadius: '4px',
+        display: 'inline-block',
+        marginRight: '6px',
+    },
+    onlineIcon: {
+        backgroundColor: '#48a999',
+        width: '8px',
+        height: '8px',
+        borderRadius: '4px',
+        display: 'inline-block',
+        marginRight: '6px',
+    },
     badgeContainer: {
         backgroundColor: '#16486e',
         color: 'white',
         borderRadius: '4px',
+        whiteSpace: 'nowrap',
     },
     badgeSection: {
         padding: '8px',
@@ -71,7 +66,7 @@ const styles = theme => ({
 
 const RightSection = (props) =>
     <div className={`${props.classes.flex} ${props.classes.badgeSection}`}>
-        <OnlineIcon state={props.status} />
+        <OnlineIcon status={props.status ? props.classes.onlineIcon : props.classes.offlineIcon } />
         <p className={props.classes.text}>{ props.status ? 'Online' : 'Offline' }</p>
     </div>
 
@@ -84,7 +79,6 @@ class LeftSection extends PureComponent {
 
     componentDidUpdate (prevProps, prevState) {
         if (this.props.statusTimer === 0) {
-            console.log('clearing stuff', this.timer)
             clearInterval(this.timer)
             this.timer = null
             this.setState({offlineTimer: moment(Date.now()).locale('en').fromNow()})
@@ -94,7 +88,6 @@ class LeftSection extends PureComponent {
         if (this.props.statusTimer > 0 && !this.timer) {
             this.timer = setInterval(() => {
                 const t1 = moment(this.props.statusTimer).locale('en').fromNow()
-                console.log('tick tock', t1)
                 this.setState({offlineTimer: t1})
             }, 60*1000)
             console.log('set timer', this.timer)
@@ -135,7 +128,7 @@ class LeftSection extends PureComponent {
     }
 }
 
-const OnlineIcon = (props) => <span style={props.state ? onlineIcon : offlineIcon}></span>
+const OnlineIcon = (props) => <span className={props.status}></span>
 
 class NetworkStatusBadge extends PureComponent {
     render () {
@@ -143,7 +136,6 @@ class NetworkStatusBadge extends PureComponent {
         const classes = this.props.classes;
 
         const itemsToSync = status.outbox;
-        //const itemsToSync = [1,2,3];
 
         return (
             <div className={`${classes.flex} ${classes.badgeContainer}`}>

@@ -1,14 +1,13 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
+import { actionTypes } from '../../components/NetworkStatusBadge/NetworkStatusBadge.actions.js';
 
 export const networkStatusDesc = createReducerDescription({
-    'FLIP_IT': (state, action) => {
+    [actionTypes.NETWORK_STATUS_CHANGE]: (state, action) => {
         const newState = { ...state };
         if (!action.payload.status) {
-            console.log('going offline')
             newState.offlineSince = Date.now();
         } else {
-            console.log('going online')
             newState.offlineSince = 0;
         }
         return newState;
