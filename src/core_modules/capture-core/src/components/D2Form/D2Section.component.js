@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import Section from '../Section/Section.component';
 import SectionHeaderSimple from '../Section/SectionHeaderSimple.component';
 
@@ -7,9 +8,18 @@ import D2SectionFields from './D2SectionFields.container';
 
 import MetaDataSection from '../../metaData/RenderFoundation/Section';
 
+const getStyles = () => ({
+    sectionFieldsInSection: {
+        paddingTop: 10,
+    },
+});
+
 type Props = {
     sectionMetaData: MetaDataSection,
     isHidden?: ?boolean,
+    classes: {
+        sectionFieldsInSection: string,
+    },
 };
 
 class D2Section extends Component<Props> {
@@ -29,7 +39,7 @@ class D2Section extends Component<Props> {
     }
 
     render() {
-        const { sectionMetaData, isHidden, ...passOnProps } = this.props;
+        const { sectionMetaData, isHidden, classes, ...passOnProps } = this.props;
 
         if (isHidden) {
             return null;
@@ -50,15 +60,19 @@ class D2Section extends Component<Props> {
                     header={this.renderSectionHeader()}
                     elevation={2}
                 >
-                    <D2SectionFields
-                        ref={(instance) => { this.sectionFieldsInstance = instance; }}
-                        fieldsMetaData={sectionMetaData.elements}
-                        {...passOnProps}
-                    />
+                    <div
+                        className={classes.sectionFieldsInSection}
+                    >
+                        <D2SectionFields
+                            ref={(instance) => { this.sectionFieldsInstance = instance; }}
+                            fieldsMetaData={sectionMetaData.elements}
+                            {...passOnProps}
+                        />
+                    </div>
                 </Section>
             </div>
         );
     }
 }
 
-export default D2Section;
+export default withStyles(getStyles)(D2Section);

@@ -5,6 +5,7 @@ export const actionTypes = {
     WORKING_LIST_UPDATE_DATA_RETRIEVED: 'WorkingListUpdateDataRetrieved',
     WORKING_LIST_UPDATE_DATA_RETRIEVAL_FAILED: 'WorkingListUpdateDataRetrievalFailed',
     SORT_WORKING_LIST: 'SortWorkingList',
+    OPEN_EDIT_EVENT_PAGE: 'OpenEditEventPage',
 };
 
 export const workingListUpdateDataRetrieved =
@@ -15,3 +16,6 @@ export const workingListUpdateRetrievalFailed =
 
 export const sortWorkingList =
     (id: string, direction: string) => actionCreator(actionTypes.SORT_WORKING_LIST)({ id, direction });
+
+export const openEditEventPage =
+    (eventId: string) => actionCreator(actionTypes.OPEN_EDIT_EVENT_PAGE)(eventId);

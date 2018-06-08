@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import EventsList from './EventsList.component';
 import { makeColumnsSelector, makeCreateEventsContainer, makeCreateWorkingListData } from './eventsList.selector';
-import { sortWorkingList } from './eventsList.actions';
+import { sortWorkingList, openEditEventPage } from './eventsList.actions';
 import withStateBoundLoadingIndicator from '../../../../HOC/withStateBoundLoadingIndicator';
 
 const makeMapStateToProps = () => {
@@ -29,6 +29,9 @@ const makeMapStateToProps = () => {
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onSort: (id: string, direction: string) => {
         dispatch(sortWorkingList(id, direction));
+    },
+    onRowClick: (rowData: {eventId: string}) => {
+        dispatch(openEditEventPage(rowData.eventId));
     },
 });
 

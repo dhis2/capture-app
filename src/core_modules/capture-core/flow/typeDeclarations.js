@@ -1,6 +1,7 @@
 // @flow
 /* eslint-disable */
 import type { Store } from 'redux';
+import { methods } from '../src/trackerOffline/trackerOfflineConfig.const';
 
 declare type D2 = {
     models: Object,
@@ -67,3 +68,10 @@ declare type Theme = {
 };
 
 declare type InputObservable = rxjs$Observable<ReduxAction<any, any>>;
+
+// Redux Offline
+declare type OfflineEffect = {
+    url: string,
+    data: any,
+    method: $Values<typeof methods>,
+};

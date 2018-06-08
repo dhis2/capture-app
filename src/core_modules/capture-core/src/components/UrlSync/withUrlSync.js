@@ -8,9 +8,9 @@ type Props = {
     urlPage: string,
     statePage: string,
     urlParams?: ?string,
+    stateParams: ?Object,
     onUpdate: (selections: Object) => void,
     onNoUpdateRequired?: ?() => void,
-    stateParams: ?Object,
 };
 
 type SyncSpecification = {
@@ -18,6 +18,10 @@ type SyncSpecification = {
     propKey: string,
 };
 type SyncSpecificationGetter = (props: Props) => Array<SyncSpecification>;
+
+export const reservedUrlKeys = {
+    ENTIRE_PARAM_STRING: 'ENTIRE_PARAM_STRING',
+};
 
 const getUrlSyncer = (
     InnerComponent: React.ComponentType<any>,
@@ -48,6 +52,8 @@ const getUrlSyncer = (
                     let value;
                     if (!urlParams) {
                         value = null;
+                    } else if (key === reservedUrlKeys.ENTIRE_PARAM_STRING) {
+                        value = urlParams;
                     } else {
                         const regExp = new RegExp(`${key}[^&]+`, 'i');
                         const keyParams = urlParams.match(regExp);

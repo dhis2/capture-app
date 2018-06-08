@@ -14,6 +14,7 @@ export const actionTypes = {
     SAVE_ABORT: 'SaveAbortedForDataEntry',
     UPDATE_FIELD: 'UpdateDataEntryField',
     UPDATE_FORM_FIELD: 'UpdateDataEntryFormField',
+    RULES_EXECUTED_POST_UPDATE_FIELD: 'RulesExecutedPostUpdateFieldDataEntry',
 };
 
 // COMPLETE
@@ -76,8 +77,8 @@ export const saveAbort =
     (itemId: string, id: string) => actionCreator(actionTypes.SAVE_ABORT)({ itemId, id });
 
 export const updateField =
-    (value: any, valueMeta: Object, fieldId: string, dataEntryId: string, eventId: string) =>
-        actionCreator(actionTypes.UPDATE_FIELD)({ value, valueMeta, fieldId, dataEntryId, eventId });
+    (value: any, valueMeta: Object, fieldId: string, dataEntryId: string, itemId: string) =>
+        actionCreator(actionTypes.UPDATE_FIELD)({ value, valueMeta, fieldId, dataEntryId, itemId });
 
 export const updateFormField =
     (
@@ -91,3 +92,7 @@ export const updateFormField =
     ) =>
         actionCreator(
             actionTypes.UPDATE_FORM_FIELD)({ value, uiState, formId, sectionId, elementId, dataEntryId, itemId });
+
+export const rulesExecutedPostUpdateField =
+    (dataEntryId: string, itemId: string) =>
+        actionCreator(actionTypes.RULES_EXECUTED_POST_UPDATE_FIELD)({ dataEntryId, itemId });

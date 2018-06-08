@@ -1,48 +1,42 @@
 // @flow
 import { connect } from 'react-redux';
-import log from 'loglevel';
 import { batchActions } from 'redux-batched-actions';
-import errorCreator from '../../../../utils/errorCreator';
-import programCollection from '../../../../metaDataMemoryStores/programCollection/programCollection';
 import NewEventDataEntry from './NewEventDataEntry.component';
 import {
     startRunRulesOnUpdateForNewSingleEvent,
-    startSaveNewEventAndReturnToMainPage,
+    requestSaveNewEventAndReturnToMainPage,
     cancelNewEventAndReturnToMainPage,
+    batchActionTypes,
 } from './newEventDataEntry.actions';
 import {
     makeProgramNameSelector,
+    makeFormFoundationSelector,
 } from './newEventDataEntry.selector';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
-
-const getFormFoundation = (state: ReduxState) => {
-    const programId = state.currentSelections.programId;
-    const program = programCollection.get(programId);
-    if (!program) {
-        log.error(errorCreator('programId not found')({ method: 'getFormFoundation' }));
-        return null;
-    }
-
-    // $FlowSuppress
-    const foundation = program.getStage();
-    if (!foundation) {
-        log.error(errorCreator('stage not found for program')({ method: 'getFormFoundation' }));
-        return null;
-    }
-
-    return foundation;
-};
+import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
+import { getTranslation } from '../../../../d2/d2Instance';
+import { formatterOptions } from '../../../../utils/string/format.const';
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
+    const formFoundationSelector = makeFormFoundationSelector();
 
-    const mapStateToProps = (state: ReduxState) => ({
-        formFoundation: getFormFoundation(state),
-        ready: !state.newEventPage.dataEntryIsLoading,
-        programName: programNameSelector(state),
-        orgUnitName: state.currentSelections.orgUnit && state.currentSelections.orgUnit.name,
-    });
+    const mapStateToProps = (state: ReduxState) => {
+        const formFoundation = formFoundationSelector(state);
+
+        return {
+            ready: !state.newEventPage.dataEntryIsLoading,
+            error: !formFoundation ?
+                getTranslation('not_event_program_or_metadata_error', formatterOptions.CAPITALIZE_FIRST_LETTER) : null,
+            formFoundation,
+            programName: programNameSelector(state),
+            orgUnitName: state.organisationUnits[state.currentSelections.orgUnitId] &&
+                state.organisationUnits[state.currentSelections.orgUnitId].name,
+        };
+    };
+
+    // $FlowSuppress
     return mapStateToProps;
 };
 
@@ -51,11 +45,11 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         dispatch(batchActions([
             innerAction,
             startRunRulesOnUpdateForNewSingleEvent(innerAction.payload),
-        ], 'UpdateFieldActionsBatch'));
+        ], batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH));
     },
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);
-        dispatch(startSaveNewEventAndReturnToMainPage(eventId, dataEntryId, formFoundation));
+        dispatch(requestSaveNewEventAndReturnToMainPage(eventId, dataEntryId, formFoundation));
     },
     onCancel: () => {
         window.scrollTo(0, 0);
@@ -65,5 +59,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 
 // $FlowSuppress
 export default connect(makeMapStateToProps, mapDispatchToProps)(
-    withLoadingIndicator()(NewEventDataEntry),
+    withLoadingIndicator()(withErrorMessageHandler()(NewEventDataEntry)),
 );

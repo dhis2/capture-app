@@ -55,6 +55,9 @@ const styles = theme => ({
     },
     table: {},
     row: {},
+    dataRow: {
+        cursor: 'pointer',
+    },
     cell: {
         padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit * 7}px ${theme.spacing.unit /
             2}px ${theme.spacing.unit * 3}px`,
@@ -114,11 +117,13 @@ type Props = {
         bodyCell: string,
         footerCell: string,
         row: string,
+        dataRow: string,
         sortLabelChilden: string,
     },
     sortById: string,
     sortByDirection: string,
     onSort: (id: string, direction: string) => void,
+    onRowClick: (rowData: {eventId: string}) => void,
 };
 
 class EventsList extends Component<Props> {
@@ -181,16 +186,17 @@ class EventsList extends Component<Props> {
 
     renderRows(visibleColumns: Array<Column>) {
         const dataSource = this.props.dataSource;
+        const classes = this.props.classes;
 
         if (!dataSource || dataSource.length === 0) {
             const columnsCount = visibleColumns.length;
             return (
                 <Row
-                    className={this.props.classes.row}
+                    className={classes.row}
                 >
                     <Cell
                         colSpan={columnsCount}
-                        className={classNames(this.props.classes.cell, this.props.classes.bodyCell)}
+                        className={classNames(classes.cell, classes.bodyCell)}
                     >
                         {getTranslation('no_events_to_display', formatterOptions.CAPITALIZE_FIRST_LETTER)}
                     </Cell>
@@ -204,7 +210,7 @@ class EventsList extends Component<Props> {
                     .map(column => (
                         <Cell
                             key={column.id}
-                            className={classNames(this.props.classes.cell, this.props.classes.bodyCell)}
+                            className={classNames(classes.cell, classes.bodyCell)}
                         >
                             <div
                                 style={EventsList.typesWithRightPlacement.includes(column.type) ? { textAlign: 'right' } : null}
@@ -217,7 +223,8 @@ class EventsList extends Component<Props> {
                 return (
                     <Row
                         key={row.eventId}
-                        className={this.props.classes.row}
+                        className={classNames(classes.row, classes.dataRow)}
+                        onClick={() => this.props.onRowClick(row)}
                     >
                         {cells}
                     </Row>

@@ -7,6 +7,9 @@ import { rulesEffectsHiddenFieldsDesc, rulesEffectsErrorMessagesDesc, rulesEffec
 import { workingListsDesc, workingListsMetaDesc, workingListsUIDesc, workingListsColumnsOrderDesc } from 'capture-core/reducers/descriptions/workingLists.reducerDescription';
 import { mainPageDesc } from 'capture-core/reducers/descriptions/mainPage.reducerDescription';
 import { newEventPageDesc } from 'capture-core/reducers/descriptions/newEvent.reducerDescription';
+import { editEventPageDesc } from 'capture-core/reducers/descriptions/editEvent.reducerDescription';
+import { organisationUnitDesc } from 'capture-core/reducers/descriptions/organisationUnits.reducerDescription';
+
 import { appReducerDesc } from './app.reducerDescription';
 import { currentSelectionsReducerDesc } from './currentSelections.reducerDescription';
 
@@ -34,4 +37,6 @@ export default [
     workingListsColumnsOrderDesc,
     mainPageDesc,
     newEventPageDesc,
+    editEventPageDesc,
+    organisationUnitDesc,
 ];

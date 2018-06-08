@@ -18,9 +18,17 @@
     lodash "^4.17.10"
     material-ui "^0.20.0"
 
-"@dhis2/d2-ui-core@1", "@dhis2/d2-ui-core@^1.1.4":
+"@dhis2/d2-ui-core@^1.1.4":
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/@dhis2/d2-ui-core/-/d2-ui-core-1.1.4.tgz#c19616f2beca8a1aa1c7909e847f48c1aaa0157a"
+  dependencies:
+    babel-runtime "^6.26.0"
+    lodash "^4.17.10"
+    material-ui "^0.20.0"
+
+"@dhis2/d2-ui-core@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@dhis2/d2-ui-core/-/d2-ui-core-1.2.0.tgz#e3b712fab9e5677fc54ef0488d1ecf8cc62302c6"
   dependencies:
     babel-runtime "^6.26.0"
     lodash "^4.17.10"

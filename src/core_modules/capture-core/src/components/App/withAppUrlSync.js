@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { paramsSelector } from './appSync.selectors';
 import LoadingMaskForPage from '../LoadingMasks/LoadingMaskForPage.component';
 import {
     updateMainSelectionsFromUrl as updateMainSelectionsFromUrlForMainPage,
@@ -8,22 +9,25 @@ import {
 import {
     updateSelectionsFromUrl as updateSelectionsFromUrlForNewEvent,
 } from '../Pages/NewEvent/newEventSelections.actions';
+import {
+    editEventFromUrl as editEventFromUrlForNewEvent,
+} from '../Pages/EditEvent/editEvent.actions';
+import { reservedUrlKeys } from '../UrlSync/withUrlSync';
 
 type Props = {
     location: {
         pathname: string,
     },
     onUpdateFromUrl: (selections: Object, page: string) => void,
-    programId: ?string,
-    orgUnitId: ?string,
+    params: Object,
     page: ?string,
-    pageSwitchInTransition: ?boolean,
+    locationSwitchInProgress: ?boolean,
 };
 
 const pageKeys = {
     main: 'main',
     newEvent: 'newEvent',
-    editEvent: 'event',
+    editEvent: 'editEvent',
 };
 
 const specificationForPages = {
@@ -47,12 +51,18 @@ const specificationForPages = {
             propKey: 'orgUnitId',
         },
     ],
-    [pageKeys.editEvent]: [],
+    [pageKeys.editEvent]: [
+        {
+            urlKey: reservedUrlKeys.ENTIRE_PARAM_STRING,
+            propKey: 'eventId',
+        },
+    ],
 };
 
 const updaterForPages = {
     [pageKeys.main]: updateMainSelectionsFromUrlForMainPage,
     [pageKeys.newEvent]: updateSelectionsFromUrlForNewEvent,
+    [pageKeys.editEvent]: editEventFromUrlForNewEvent,
 };
 
 const getUrlParts = (pathName: string) => {
@@ -110,25 +120,17 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
             }
         }
 
-        getStateParams() {
-            return {
-                programId: this.props.programId,
-                orgUnitId: this.props.orgUnitId,
-            };
-        }
-
         render() {
             const {
                 location,
                 onUpdateFromUrl,
-                pageSwitchInTransition,
-                programId,
-                orgUnitId,
+                locationSwitchInProgress,
+                params,
                 page,
                 ...passOnProps
             } = this.props;
 
-            if (pageSwitchInTransition) {
+            if (locationSwitchInProgress) {
                 return (
                     <LoadingMaskForPage />
                 );
@@ -143,7 +145,7 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
                     urlParams={this.params}
                     onUpdate={this.handleUpdate}
                     syncSpecification={this.getSyncSpecification()}
-                    stateParams={this.getStateParams()}
+                    stateParams={params}
                     {...passOnProps}
                 />
             );
@@ -151,10 +153,9 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
     }
 
     const mapStateToProps = (state: ReduxState) => ({
-        programId: state.currentSelections.programId,
-        orgUnitId: state.currentSelections.orgUnitId,
+        params: paramsSelector(state),
         page: state.app.page,
-        pageSwitchInTransition: state.app.pageSwitchInTransition,
+        locationSwitchInProgress: state.app.locationSwitchInProgress,
     });
 
     const mapDispatchToProps = (dispatch: ReduxDispatch) => ({

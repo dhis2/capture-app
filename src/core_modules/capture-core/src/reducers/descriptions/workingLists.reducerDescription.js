@@ -8,6 +8,9 @@ import { actionTypes as eventsListActionTypes } from '../../components/Pages/Mai
 import {
     actionTypes as newEventDataEntryActionTypes,
 } from '../../components/Pages/NewEvent/DataEntry/newEventDataEntry.actions';
+import {
+    actionTypes as editEventDataEntryActionTypes,
+} from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
 
 export const workingListsDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
@@ -142,7 +145,7 @@ export const workingListsUIDesc = createReducerDescription({
         };
         return newState;
     },
-    [newEventDataEntryActionTypes.START_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
+    [newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.main = {
             ...newState.main,
@@ -167,6 +170,38 @@ export const workingListsUIDesc = createReducerDescription({
         return newState;
     },
     [newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE]: (state) => {
+        const newState = { ...state };
+        newState.main = {
+            ...newState.main,
+            isLoading: false,
+        };
+        return newState;
+    },
+    [editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
+        const newState = { ...state };
+        newState.main = {
+            ...newState.main,
+            isLoading: true,
+        };
+        return newState;
+    },
+    [editEventDataEntryActionTypes.EVENT_UPDATE_FAILED_AFTER_RETURN_TO_MAIN_PAGE]: (state) => {
+        const newState = { ...state };
+        newState.main = {
+            ...newState.main,
+            isLoading: false,
+        };
+        return newState;
+    },
+    [editEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
+        const newState = { ...state };
+        newState.main = {
+            ...newState.main,
+            isLoading: true,
+        };
+        return newState;
+    },
+    [editEventDataEntryActionTypes.NO_WORKING_LIST_UPDATE_NEEDED_AFTER_CANCEL_UPDATE]: (state) => {
         const newState = { ...state };
         newState.main = {
             ...newState.main,

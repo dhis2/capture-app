@@ -11,13 +11,10 @@ import momentConverter from './momentConverter';
 import { getTranslation } from '../d2/d2Instance';
 
 import errorCreator from '../utils/errorCreator';
-import programCollection from '../metaDataMemoryStores/programCollection/programCollection';
 import Program from '../metaData/Program/Program';
 import TrackerProgram from '../metaData/Program/TrackerProgram';
 import EventProgram from '../metaData/Program/EventProgram';
 import RenderFoundation from '../metaData/RenderFoundation/RenderFoundation';
-import { convertFormValuesToClient } from '../converters/helpers/formToClient';
-import convertDataEntryValuesToEventValues from '../components/DataEntry/common/convertDataEntryValuesToEventValues';
 
 import constantsStore from '../metaDataMemoryStores/constants/constants.store';
 import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store';
@@ -56,6 +53,7 @@ const rulesEngine =
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found in loadAndExecuteRulesForEvent',
     PROGRAMSTAGE_NOT_FOUND: 'ProgramStage not found',
+    PROGRAM_OR_FOUNDATION_MISSING: 'Program or foundation missing',
 };
 
 function getProgramRulesContainer(program: Program, foundation: RenderFoundation): ProgramRulesContainer {
@@ -116,173 +114,6 @@ function getDataElements(program: Program) {
     }
 
     return getRulesEngineDataElementsAsObject(dataElements);
-}
-
-/*
- * concatenate fieldsValidation from sections
- *
- * @param {Object} sectionsFieldsUI
- * @param {string} formId
- */
-function getFieldsValidationForForm(sectionsFieldsUI: Object, formId: string) {
-    const fieldsUIState = Object.keys(sectionsFieldsUI)
-        .filter(sectionKey => sectionKey.startsWith(formId))
-        .reduce((accFormElementsUIState, stateKey) => {
-            accFormElementsUIState = { ...accFormElementsUIState, ...sectionsFieldsUI[stateKey] };
-            return accFormElementsUIState;
-        }, {});
-
-    const fieldsValidation = Object.keys(fieldsUIState)
-        .reduce((accFieldsValidation, key) => {
-            accFieldsValidation[key] = fieldsUIState[key].valid;
-            return accFieldsValidation;
-        }, {});
-
-    return fieldsValidation;
-}
-
-/*
- * get valid form data based on fieldsValidation
- * @param {Object} formValues
- * @param {Object} fieldsValidation
- */
-function getValidFormValues(formValues: { [key: string]: any }, fieldsValidation: { [key: string]: boolean }) {
-    return Object.keys(formValues)
-        .reduce((accValidFormValues, key) => {
-            const isValid = fieldsValidation[key];
-            accValidFormValues[key] = isValid ? formValues[key] : null;
-            return accValidFormValues;
-        }, {});
-}
-
-/*
- * convert form values to client values
- * @param {Object} formValues
- * @param {RenderFoundation} renderFoundation
- */
-function convertFormValuesToClientValues(formValues: {[key: string]: any}, renderFoundation: RenderFoundation) {
-    return convertFormValuesToClient(formValues, renderFoundation);
-}
-
-function getCurrentEventValues(
-    state: ReduxState,
-    foundation: RenderFoundation,
-    formId: string,
-    updatedEventField?: ?FieldData) {
-    const currentFormData = state.formsValues[formId] || {};
-    const updatedCurrentFormData = updatedEventField ?
-        { ...currentFormData, [updatedEventField.elementId]: updatedEventField.value } :
-        currentFormData;
-
-    const sectionsFieldsUIState = state.formsSectionsFieldsUI;
-    const fieldValidations = getFieldsValidationForForm(sectionsFieldsUIState, formId);
-    const updatedFieldValidations = updatedEventField ?
-        { ...fieldValidations, [updatedEventField.elementId]: updatedEventField.valid } :
-        fieldValidations;
-
-    const validFormValues = getValidFormValues(updatedCurrentFormData, updatedFieldValidations);
-
-    const clientData = convertFormValuesToClientValues(validFormValues, foundation);
-    return clientData;
-}
-
-function getDataEntryValidatons(dataEntryMeta: {[key: string]: { isValid: boolean }}) {
-    return Object.keys(dataEntryMeta).reduce((accValidations, key) => {
-        accValidations[key] = dataEntryMeta[key].isValid;
-        return accValidations;
-    }, {});
-}
-
-function getValidDataEntryValues(
-    dataEntryValues: { [key: string]: any },
-    dataEntryValidations: { [key: string]: boolean }) {
-    return Object.keys(dataEntryValues).reduce((accValidValues, key) => {
-        accValidValues[key] = dataEntryValidations[key] ? dataEntryValues[key] : null;
-        return accValidValues;
-    }, {});
-}
-
-function getCurrentEventMainData(state: ReduxState, eventId: string, dataEntryId: string) {
-    const dataEntryReduxKey = `${dataEntryId}-${eventId}`;
-
-    const dataEntryFieldsUI = state.dataEntriesFieldsUI[dataEntryReduxKey];
-    const dataEntryValidations = getDataEntryValidatons(dataEntryFieldsUI);
-    const dataEntryValues = state.dataEntriesFieldsValue[dataEntryReduxKey];
-    const validDataEntryValues = getValidDataEntryValues(dataEntryValues, dataEntryValidations);
-
-    const dataEntryClientValues =
-        convertDataEntryValuesToEventValues(state, eventId, dataEntryId, validDataEntryValues);
-
-    const eventValues = state.events[eventId];
-    return { ...eventValues, ...dataEntryClientValues };
-}
-
-// Also convert other open form data?
-function getAllEventsValues(state: ReduxState, currentEventValues: ?{ [key: string]: any}, event: Event) {
-    const eventsValues = state.eventsValues;
-    const eventsValuesWithUpdatedCurrent = { ...eventsValues, [event.eventId]: currentEventValues };
-    return eventsValuesWithUpdatedCurrent;
-}
-
-// Also convert other open form data?
-function getAllEventsMainData(state: ReduxState, currentEventMainData: { [key: string]: any}, event: Event) {
-    const events = state.events;
-    const eventsWithUpdatedCurrent = { ...events, [event.eventId]: currentEventMainData };
-    return eventsWithUpdatedCurrent;
-}
-
-function createEventsArray(
-    allEventsValues: { [eventId: string]: Object },
-    allEventsMainData: { [eventId: string]: Object }) {
-    return Object.keys(allEventsValues)
-        .map(key => ({ ...allEventsValues[key], ...allEventsMainData[key] }),
-        );
-}
-
-function getSelectedOrgUnit(state: ReduxState) {
-    return state.currentSelections.orgUnit;
-}
-
-function getRulesEngineArguments(
-    program: Program,
-    state: ReduxState,
-    event: Event,
-    foundation: RenderFoundation,
-    formId: string,
-    dataEntryId: string,
-    updatedFieldData?: ?FieldData,
-    isLoad?: ?boolean) {
-    const dataElementsInProgram = getDataElements(program);
-
-    let currentEventValues;
-    let currentEventMainData;
-    let currentEventData;
-    if (!isLoad) {
-        currentEventValues = getCurrentEventValues(state, foundation, formId, updatedFieldData);
-        currentEventMainData = getCurrentEventMainData(state, event.eventId, dataEntryId);
-        currentEventData = { ...currentEventValues, ...currentEventMainData };
-    } else {
-        currentEventValues = state.eventsValues[event.eventId];
-        currentEventMainData = state.events[event.eventId];
-        currentEventData = { ...currentEventValues, ...currentEventMainData };
-    }
-
-    const allEventsValues = getAllEventsValues(state, currentEventValues, event);
-    const allEventsMainData = getAllEventsMainData(state, currentEventMainData, event);
-
-    const allEventsData = createEventsArray(allEventsValues, allEventsMainData);
-
-    const optionSets = optionSetsStore.get();
-
-    const orgUnit = getSelectedOrgUnit(state);
-
-    return {
-        dataElementsInProgram,
-        currentEventData,
-        allEventsData,
-        optionSets,
-        orgUnit,
-    };
 }
 
 function buildEffectsHierarchy(effects: Array<OutputEffect>) {
@@ -405,11 +236,9 @@ function createHideSectionsResetActions(
 function createRulesEffectsActions(
     rulesEffects: ?Array<OutputEffect>,
     formId: string,
-    eventId: string,
-    dataEntryId: string,
     foundation: RenderFoundation) {
     if (!rulesEffects) {
-        return [updateRulesEffects(null, formId, eventId, dataEntryId)];
+        return [updateRulesEffects(null, formId)];
     }
 
     let actions = [];
@@ -428,7 +257,7 @@ function createRulesEffectsActions(
             foundation,
         );
 
-    actions.push(updateRulesEffects(effectsHierarchy, formId, eventId, dataEntryId));
+    actions.push(updateRulesEffects(effectsHierarchy, formId));
 
     actions = [...actions, ...createAssignActions(effectsHierarchy[effectActions.ASSIGN_VALUE], formId)];
     actions = [...actions, ...createHideFieldsResetActions(effectsHierarchy[effectActions.HIDE_FIELD], formId)];
@@ -457,135 +286,29 @@ function runRulesEngine(
     return effects;
 }
 
-function getRulesActions(
-    currentEventId: string,
-    state: ReduxState,
+export function getRulesActionsForEvent(
+    program: ?Program,
+    foundation: ?RenderFoundation,
     formId: string,
-    dataEntryId: string,
-    updatedFieldData?: ?FieldData,
-    isLoad?: ?boolean): Array<ReduxAction<any, any>> {
-    const eventId = currentEventId;
-    const event = state.events[eventId];
-    const programId = event.programId;
-
-    const program = programCollection.get(programId);
-    if (!program) {
-        log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ currentEventId }));
-        return [updateRulesEffects(null, formId, eventId, dataEntryId)];
-    }
-
-    const programRulesContainer = getProgramRulesContainer(program);
-    if (!programRulesContainer.programRules || programRulesContainer.programRules.length === 0) {
-        return [updateRulesEffects(null, formId, eventId, dataEntryId)];
-    }
-
-    // $FlowSuppress : TODO: handle TEI
-    const foundation = program.getStage(event.programStageId);
-
-    const { dataElementsInProgram, currentEventData, allEventsData, optionSets, orgUnit } =
-        getRulesEngineArguments(program, state, event, foundation, formId, dataEntryId, updatedFieldData, isLoad);
-    const rulesEffects =
-        runRulesEngine(
-            programRulesContainer,
-            dataElementsInProgram,
-            orgUnit,
-            optionSets,
-            currentEventData,
-            allEventsData);
-    return createRulesEffectsActions(rulesEffects, formId, eventId, dataEntryId, foundation);
-}
-
-/**
- * run rules for a data entry (event) and return Redux actions based on the rulesEffects. This method is run on load
- */
-export function getRulesActionsOnLoad(
-    currentEventId: string,
-    state: ReduxState,
-    formId: string,
-    dataEntryId: string,
-) {
-    return getRulesActions(currentEventId, state, formId, dataEntryId, null, true);
-}
-
-/**
- * run rules for a data entry (event) and return Redux actions based on the rulesEffects. This method is run on update
- */
-export function getRulesActionsOnUpdate(
-    currentEventId: string,
-    state: ReduxState,
-    formId: string,
-    dataEntryId: string,
-    updatedFieldData: FieldData): Array<ReduxAction<any, any>> {
-    return getRulesActions(currentEventId, state, formId, dataEntryId, updatedFieldData);
-}
-
-export function getRulesActionsOnLoadForSingleNewEvent(
-    programId: string,
-    formId: string,
-    eventId: string,
-    dataEntryId: string,
     orgUnit: Object,
+    currentEventData: ?EventData,
+    allEventsData: ?Array<EventData>,
 ): Array<ReduxAction<any, any>> {
-    const program = programCollection.get(programId);
-    if (!program) {
-        log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ programId, method: 'getRulesActionsOnLoadForSingleNewEvent' }));
-        return [updateRulesEffects(null, formId, eventId, dataEntryId)];
-    }
-
-    const foundation = program.getStage();
-
-    const programRulesContainer = getProgramRulesContainer(program, foundation);
-
-    if (!programRulesContainer.programRules || programRulesContainer.programRules.length === 0) {
-        return [updateRulesEffects(null, formId, eventId, dataEntryId)];
-    }
-
-    const dataElementsInProgram = getDataElements(program);
-    const optionSets = optionSetsStore.get();
-
-    const rulesEffects =
-        runRulesEngine(
-            programRulesContainer,
-            dataElementsInProgram,
-            orgUnit,
-            optionSets);
-
-    return createRulesEffectsActions(rulesEffects, formId, eventId, dataEntryId, foundation);
-}
-
-export function getRulesActionsOnUpdateForSingleNewEvent(
-    programId: string,
-    formId: string,
-    eventId: string,
-    dataEntryId: string,
-    state: Object,
-    orgUnit: Object,
-    updatedFieldData: FieldData,
-): Array<ReduxAction<any, any>> {
-    const program = programCollection.get(programId);
-    if (!program) {
+    if (!program || !foundation) {
         log.error(
             errorCreator(
-                errorMessages.PROGRAM_NOT_FOUND,
-            )(
-                { programId, method: 'getRulesActionsOnUpdateForSingleNewEvent' },
-            ),
-        );
-        return [updateRulesEffects(null, formId, eventId, dataEntryId)];
+                errorMessages.PROGRAM_OR_FOUNDATION_MISSING)({ program, foundation, method: 'getRulesActions' }));
+        return [updateRulesEffects(null, formId)];
     }
-    const foundation = program.getStage();
 
     const programRulesContainer = getProgramRulesContainer(program, foundation);
     if (!programRulesContainer.programRules || programRulesContainer.programRules.length === 0) {
-        return [updateRulesEffects(null, formId, eventId, dataEntryId)];
+        return [updateRulesEffects(null, formId)];
     }
 
     const dataElementsInProgram = getDataElements(program);
     const optionSets = optionSetsStore.get();
 
-    const currentEventValues = getCurrentEventValues(state, foundation, formId, updatedFieldData);
-    const currentEventMainData = getCurrentEventMainData(state, eventId, dataEntryId);
-    const currentEventData = { ...currentEventValues, ...currentEventMainData };
 
     const rulesEffects =
         runRulesEngine(
@@ -594,7 +317,8 @@ export function getRulesActionsOnUpdateForSingleNewEvent(
             orgUnit,
             optionSets,
             currentEventData,
+            allEventsData,
         );
 
-    return createRulesEffectsActions(rulesEffects, formId, eventId, dataEntryId, foundation);
+    return createRulesEffectsActions(rulesEffects, formId, foundation);
 }
