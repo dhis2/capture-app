@@ -3,6 +3,7 @@
  * @namespace MainPage
 */
 import React, { Component } from 'react';
+import QuickSelector from 'capture-core/components/QuickSelector/QuickSelector.container';
 import withSelectionsUpdater from './withSelectionsUpdater';
 
 import EventsList from './EventsList/EventsList.container';
@@ -17,6 +18,7 @@ class MainPage extends Component<Props> {
 
         return (
             <div>
+                <QuickSelector />
                 {'{{main menu}}'}
                 {
                     (() => {
@@ -36,4 +38,5 @@ class MainPage extends Component<Props> {
     }
 }
 // Disabled routing for testing
+// export default withSelectionsUpdater()(MainPage);
 export default MainPage;

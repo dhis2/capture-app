@@ -6,7 +6,6 @@ import { withStyles } from 'material-ui-next/styles';
 
 import getD2 from 'capture-core/d2/d2Instance';
 import MainPage from 'capture-core/components/Pages/MainPage/MainPage.container';
-import QuickSelector from 'capture-core/components/QuickSelector/QuickSelector.container';
 import EventCaptureForm from '../EventCaptureForm/EventCaptureForm.container';
 
 const styles = theme => ({
@@ -32,9 +31,6 @@ class AppContents extends Component<Props> {
             >
                 <HeaderBar d2={d2} />
                 <div style={{ paddingTop: 48 }}>
-                    <QuickSelector />
-                </div>
-                <div style={{ padding: 25 }}>
                     <Switch>
                         <Route path="/event" component={EventCaptureForm} />
                         <Route path="/:keys" component={MainPage} />
