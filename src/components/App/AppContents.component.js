@@ -39,9 +39,6 @@ class AppContents extends Component<Props> {
                     <NetworkStatusBadge />
                 </HeaderBar>
                 <div style={{ paddingTop: 48 }}>
-                    <QuickSelector />
-                </div>
-                <div style={{ padding: 25 }}>
                     <Switch>
                         <Route path="/newEvent" component={NewEvent} />
                         <Route path="/editEvent" component={EditEvent} />
