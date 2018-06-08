@@ -90,7 +90,6 @@ class LeftSection extends PureComponent {
                 const t1 = moment(this.props.statusTimer).locale('en').fromNow()
                 this.setState({offlineTimer: t1})
             }, 60*1000)
-            console.log('set timer', this.timer)
             return
         }
     }
