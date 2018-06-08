@@ -35,9 +35,6 @@ class AppContents extends Component<Props> {
             >
                 <HeaderBar d2={d2} />
                 <div style={{ paddingTop: 48 }}>
-                    <QuickSelector />
-                </div>
-                <div style={{ padding: 25 }}>
                     <Switch>
                         <Route path="/newEvent" component={NewEvent} />
                         <Route path="/editEvent" component={EditEvent} />

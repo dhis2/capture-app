@@ -18,6 +18,7 @@ class MainPage extends Component<Props> {
 
         return (
             <div>
+                <QuickSelector />
                 {'{{main menu}}'}
                 {
                     (() => {
