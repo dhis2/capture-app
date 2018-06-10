@@ -2,7 +2,7 @@
 import { actionCreator } from '../../../actions/actions.utils';
 import { addFormData } from '../../D2Form/actions/form.actions';
 import getDataEntryKey from '../common/getDataEntryKey';
-import { getDataEntryMeta, getDataEntryValues, getFormValues } from './dataEntryLoad.utils';
+import { getDataEntryMeta, getDataEntryValues, getFormValues, validateDataEntryValues } from './dataEntryLoad.utils';
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 
 import type { DataEntryPropToInclude } from './dataEntryLoad.utils';
@@ -23,10 +23,11 @@ export function loadEditDataEntry(
     const dataEntryMeta = dataEntryPropsToInclude ? getDataEntryMeta(dataEntryPropsToInclude) : {};
     const dataEntryValues =
         dataEntryPropsToInclude ? getDataEntryValues(dataEntryPropsToInclude, clientValuesForDataEntry) : {};
+    const dataEntryUI = dataEntryPropsToInclude ? validateDataEntryValues(dataEntryValues, dataEntryPropsToInclude) : {};
     const formValues = getFormValues(clientValuesForForm, formFoundation);
     const key = getDataEntryKey(dataEntryId, itemId);
     return [
-        actionCreator(actionTypes.LOAD_EDIT_DATA_ENTRY)({ key, itemId, dataEntryId, dataEntryMeta, dataEntryValues, extraProps }),
+        actionCreator(actionTypes.LOAD_EDIT_DATA_ENTRY)({ key, itemId, dataEntryId, dataEntryMeta, dataEntryValues, extraProps, dataEntryUI }),
         addFormData(key, formValues),
     ];
 }

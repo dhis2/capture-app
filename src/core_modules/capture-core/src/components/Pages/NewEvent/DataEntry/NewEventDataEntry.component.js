@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import InfoIcon from '@material-ui/icons/InfoOutline';
-import { Validators } from '@dhis2/d2-ui-forms';
 import { getTranslation } from '../../../../d2/d2Instance';
 import { formatterOptions } from '../../../../utils/string/format.const';
 import DataEntry from '../../../../components/DataEntry/DataEntry.container';
@@ -10,7 +9,7 @@ import withSaveButton from '../../../../components/DataEntry/withSaveButton';
 import withCancelButton from '../../../../components/DataEntry/withCancelButton';
 import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
 import { placements } from '../../../../components/DataEntry/dataEntryField/dataEntryField.const';
-import isValidDate from '../../../../utils/validators/date.validator';
+import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 
 import D2Date from '../../../../components/FormFields/DateAndTime/D2Date/D2Date.component';
@@ -44,14 +43,6 @@ const getCancelOptions = () => ({
     color: 'secondary',
 });
 
-const preValidateDate = (value?: ?string) => {
-    if (!value) {
-        return true;
-    }
-
-    return isValidDate(value);
-};
-
 const buildReportDateSettingsFn = () => {
     const reportDateComponent = withDefaultFieldContainer()(
         withDefaultShouldUpdateInterface()(
@@ -69,19 +60,7 @@ const buildReportDateSettingsFn = () => {
             required: true,
         },
         propName: 'eventDate',
-        validatorContainers: [
-            {
-                validator: Validators.wordToValidatorMap.get('required'),
-                message:
-                    getTranslation(
-                        Validators.wordToValidatorMap.get('required').message,
-                        formatterOptions.CAPITALIZE_FIRST_LETTER),
-            },
-            {
-                validator: preValidateDate,
-                message: getTranslation('value_should_be_a_valid_date', formatterOptions.CAPITALIZE_FIRST_LETTER),
-            },
-        ],
+        validatorContainers: getEventDateValidatorContainers(),
     });
 
     return reportDateSettings;

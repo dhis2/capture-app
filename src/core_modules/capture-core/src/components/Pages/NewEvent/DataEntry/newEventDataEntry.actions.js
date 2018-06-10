@@ -8,6 +8,7 @@ import {
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import EventProgram from '../../../../metaData/Program/EventProgram';
 import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
+import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 
 export const batchActionTypes = {
     UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH: 'UpdateFieldForNewSingleEventActionsBatch',
@@ -55,6 +56,7 @@ export const openNewEventInDataEntry =
             {
                 id: 'eventDate',
                 type: 'DATE',
+                validatorContainers: getEventDateValidatorContainers(),
             },
             {
                 inId: 'status',

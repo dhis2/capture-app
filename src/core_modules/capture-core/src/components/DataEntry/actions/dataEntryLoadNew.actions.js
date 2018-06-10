@@ -2,7 +2,7 @@
 import { actionCreator } from '../../../actions/actions.utils';
 import { addFormData } from '../../D2Form/actions/form.actions';
 import getDataEntryKey from '../common/getDataEntryKey';
-import { getDataEntryMeta } from './dataEntryLoad.utils';
+import { getDataEntryMeta, validateDataEntryValues } from './dataEntryLoad.utils';
 
 import type { DataEntryPropToInclude } from './dataEntryLoad.utils';
 
@@ -15,10 +15,12 @@ export function loadNewDataEntry(
     itemId: string,
     dataEntryPropsToInclude?: ?Array<DataEntryPropToInclude>,
 ) {
+    const values = {};
     const dataEntryMeta = dataEntryPropsToInclude ? getDataEntryMeta(dataEntryPropsToInclude) : {};
+    const dataEntryUI = dataEntryPropsToInclude ? validateDataEntryValues(values, dataEntryPropsToInclude) : {};
     const key = getDataEntryKey(dataEntryId, itemId);
     return [
-        actionCreator(actionTypes.LOAD_NEW_DATA_ENTRY)({ key, itemId, dataEntryId, dataEntryMeta }),
-        addFormData(key, {}),
+        actionCreator(actionTypes.LOAD_NEW_DATA_ENTRY)({ key, itemId, dataEntryId, dataEntryMeta, dataEntryUI }),
+        addFormData(key, values),
     ];
 }

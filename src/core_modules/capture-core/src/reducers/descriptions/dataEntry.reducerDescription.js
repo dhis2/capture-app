@@ -178,10 +178,9 @@ export const dataEntriesFieldsUIDesc = createReducerDescription({
         const newState = { ...state };
         const payload = action.payload;
         const key = payload.key;
-        newState[key] = Object.keys(payload.dataEntryMeta).reduce((accValuesUI, elementKey) => {
+        newState[key] = Object.keys(payload.dataEntryUI).reduce((accValuesUI, elementKey) => {
             accValuesUI[elementKey] = {
-                validationError: null,
-                isValid: true,
+                ...payload.dataEntryUI[elementKey],
                 touched: false,
             };
             return accValuesUI;
@@ -193,10 +192,9 @@ export const dataEntriesFieldsUIDesc = createReducerDescription({
         const newState = { ...state };
         const payload = action.payload;
         const key = payload.key;
-        newState[key] = Object.keys(payload.dataEntryMeta).reduce((accValuesUI, elementKey) => {
+        newState[key] = Object.keys(payload.dataEntryUI).reduce((accValuesUI, elementKey) => {
             accValuesUI[elementKey] = {
-                validationError: null,
-                isValid: true,
+                ...payload.dataEntryUI[elementKey],
                 touched: false,
             };
             return accValuesUI;
