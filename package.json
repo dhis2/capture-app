@@ -86,7 +86,7 @@
     "redux-devtools-extension": "^2.13.2"
   },
   "manifest.webapp": {
-    "name": "Dashboards app",
+    "name": "Capture app",
     "icons": {
       "48": "icon.png"
     },
