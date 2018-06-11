@@ -46,6 +46,7 @@ export const editEventPageDesc = createReducerDescription({
             ...state,
             eventId: action.payload,
             dataEntryIsLoading: true,
+            loadError: null,
         };
         return newState;
     },
