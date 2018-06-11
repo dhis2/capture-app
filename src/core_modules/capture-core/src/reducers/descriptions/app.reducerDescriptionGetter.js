@@ -14,6 +14,7 @@ import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
 import { actionTypes as eventListActionTypes } from '../../components/Pages/MainPage/EventsList/eventsList.actions';
+import { actionTypes as setCurrentSelectionsActionTypes } from '../../components/QuickSelector/actions/QuickSelector.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 
@@ -71,6 +72,22 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         const newState = {
             ...state,
             page: 'editEvent',
+            locationSwitchInProgress: true,
+        };
+        return newState;
+    },
+    [setCurrentSelectionsActionTypes.SET_ORG_UNIT_ID]: (state) => {
+        const newState = {
+            ...state,
+            page: null,
+            locationSwitchInProgress: true,
+        };
+        return newState;
+    },
+    [setCurrentSelectionsActionTypes.SET_PROGRAM_ID]: (state) => {
+        const newState = {
+            ...state,
+            page: null,
             locationSwitchInProgress: true,
         };
         return newState;

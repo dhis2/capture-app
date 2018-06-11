@@ -52,6 +52,10 @@ import {
     cancelEditEventEpic,
     cancelEditEventLocationChangeEpic,
 } from 'capture-core/components/Pages/EditEvent/DataEntry/epics/cancelEditSingleEvent.epics';
+import {
+    setOrgUnit,
+    setProgram,
+} from 'capture-core/components/QuickSelector/epics/setSelection.epics';
 
 import { loadStartupData } from '../init/entry.epics';
 
@@ -85,4 +89,6 @@ export default combineEpics(
     cancelEditEventEpic,
     openEditPageLocationChangeEpic,
     getEventOpeningFromEventListEpic,
+    setOrgUnit,
+    setProgram,
 );

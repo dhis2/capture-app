@@ -13,8 +13,8 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Paper from '@material-ui/core/Paper';
 
-import IconButton from 'material-ui-next/IconButton';
-import ClearIcon from 'material-ui-icons/Clear';
+import IconButton from '@material-ui/core/IconButton';
+import ClearIcon from '@material-ui/icons/Clear';
 
 import { getTranslation, getCurrentUser } from '../../d2/d2Instance';
 import { OrgUnitTreeMultipleRoots } from '@dhis2/d2-ui-org-unit-tree';
@@ -79,6 +79,9 @@ type Props = {
 class OrgUnitSelector extends Component<Props> {
     handleClick: (orgUnit: Object) => void;
     handleReset: () => void;
+    state: {
+        roots: Array;
+    };
     constructor(props) {
         super(props);
 
@@ -106,7 +109,7 @@ class OrgUnitSelector extends Component<Props> {
     }
 
     handleReset() {
-        this.props.handleClickOrgUnit(undefined);
+        this.props.handleClickOrgUnit(undefined, null);
     }
 
     render() {
@@ -154,7 +157,6 @@ class OrgUnitSelector extends Component<Props> {
                         <OrgUnitTreeMultipleRoots
                             roots={this.state.roots}
                             hideCheckboxes
-                            selected={this.props.selectedOrgUint}
                             onSelectClick={this.handleClick}
                         />
                     </div>

@@ -99,11 +99,15 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         return newState;
     },
     [setCurrentSelectionsActionTypes.SET_ORG_UNIT_ID]: (state, action) => {
-        const newState = { ...state, orgUnitId: action.payload };
+        const newState = { ...state };
+        newState.orgUnitId = action.payload;
+        newState.complete = calculateCompleteStatus(newState);
         return newState;
     },
     [setCurrentSelectionsActionTypes.SET_PROGRAM_ID]: (state, action) => {
-        const newState = { ...state, programId: action.payload };
+        const newState = { ...state };
+        newState.programId = action.payload;
+        newState.complete = calculateCompleteStatus(newState);
         return newState;
     },
     [setCurrentSelectionsActionTypes.SET_CATEGORY_ID]: (state, action) => {
