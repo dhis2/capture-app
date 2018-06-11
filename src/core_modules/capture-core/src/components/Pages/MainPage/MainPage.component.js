@@ -5,7 +5,7 @@
 import React, { Component } from 'react';
 
 import withLoadHandler from './withLoadHandler';
-import EventsList from './EventsList/EventsList.container';
+import EventsListConnectivityWrapper from './EventsListConnectionWrapper/EventsListConnectivityWrapper.container';
 import TempSelector from './TempSelector.container';
 
 type Props = {
@@ -29,7 +29,7 @@ class MainPage extends Component<Props> {
                         }
 
                         return (
-                            <EventsList />
+                            <EventsListConnectivityWrapper />
                         );
                     })()
                 }

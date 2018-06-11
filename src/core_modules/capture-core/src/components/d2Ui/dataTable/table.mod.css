@@ -74,9 +74,12 @@
 }
 
 .sortLabelChildren {   
-    cursor: pointer;
     outline: none;
     user-select: none;
+}
+
+.sortLabelChildrenEnabled {
+    cursor: pointer;
 }
 
 .sortLabelChildrenFirst {
