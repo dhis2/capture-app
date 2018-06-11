@@ -5,8 +5,7 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import { withStyles } from '@material-ui/core/styles';
 
-import { getTranslation } from '../../d2/d2Instance';
-import { formatterOptions } from '../../utils/string/format.const';
+import i18n from '@dhis2/d2-i18n';
 import getTableComponents from '../d2Ui/dataTable/getTableComponents';
 import sortLabelAdapter from '../d2UiReactAdapters/dataTable/sortLabel.adapter';
 
@@ -60,7 +59,7 @@ class SortLabelWrapper extends React.Component<Props> {
 
             return (
                 <Tooltip
-                    title={getTranslation('sort', formatterOptions.CAPITALIZE_FIRST_LETTER)}
+                    title={i18n.t('Sort')}
                     placement={'bottom'}
                     enterDelay={300}
                 >
@@ -84,7 +83,7 @@ class SortLabelWrapper extends React.Component<Props> {
                 {...this.props}
             >
                 <Tooltip
-                    title={getTranslation('sort', formatterOptions.CAPITALIZE_FIRST_LETTER)}
+                    title={i18n.t('Sort')}
                     placement={'bottom'}
                     enterDelay={300}
                 >

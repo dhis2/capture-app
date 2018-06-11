@@ -3,8 +3,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import NewEventDataEntry from './NewEventDataEntry.container';
 import DataEntrySelectionsIncomplete from './DataEntrySelectionsIncomplete.container';
-import { getTranslation } from '../../../../d2/d2Instance';
-import { formatterOptions } from '../../../../utils/string/format.const';
+import i18n from '@dhis2/d2-i18n';
 
 const getStyles = theme => ({
     headerContainer: {
@@ -37,7 +36,7 @@ class DataEntryWrapper extends React.Component<Props> {
                 <div
                     className={this.props.classes.header}
                 >
-                    {getTranslation('new_event_header', formatterOptions.CAPITALIZE_FIRST_LETTER)}
+                    {i18n.t('New event')}
                 </div>
                 <div>
                     {/* print form? */ }

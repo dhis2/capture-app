@@ -4,7 +4,6 @@ import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
 import { actionTypes as loadNewActionTypes } from '../../components/DataEntry/actions/dataEntryLoadNew.actions';
 import { actionTypes as loadEditActionTypes } from '../../components/DataEntry/actions/dataEntryLoadEdit.actions';
-import { actionTypes as rulesEngineActionTypes } from '../../rulesEngineActionsCreator/rulesEngine.actions';
 
 import getDataEntryKey from '../../components/DataEntry/common/getDataEntryKey';
 

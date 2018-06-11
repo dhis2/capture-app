@@ -30,3 +30,6 @@ yarn-error.log*
 .vscode/
 .DS_Store
 npm-debug.log
+
+# generated localization files
+src/locales/

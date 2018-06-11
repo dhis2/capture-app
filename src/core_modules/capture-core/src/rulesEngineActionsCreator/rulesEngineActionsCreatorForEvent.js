@@ -8,8 +8,7 @@ import RulesEngine from '../RulesEngine/RulesEngine';
 import inputValueConverter from './inputValueConverter';
 import outputRulesEffectsValueConverter from './rulesEffectsValueConverter';
 import momentConverter from './momentConverter';
-import { getTranslation } from '../d2/d2Instance';
-
+import i18n from '@dhis2/d2-i18n';
 import errorCreator from '../utils/errorCreator';
 import Program from '../metaData/Program/Program';
 import TrackerProgram from '../metaData/Program/TrackerProgram';
@@ -48,7 +47,7 @@ export type FieldData = {
 };
 
 const rulesEngine =
-    new RulesEngine(inputValueConverter, momentConverter, getTranslation, outputRulesEffectsValueConverter);
+    new RulesEngine(inputValueConverter, momentConverter, i18n.t, outputRulesEffectsValueConverter);
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found in loadAndExecuteRulesForEvent',

@@ -15,8 +15,7 @@ import {
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
-import { getTranslation } from '../../../../d2/d2Instance';
-import { formatterOptions } from '../../../../utils/string/format.const';
+import i18n from '@dhis2/d2-i18n';
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
@@ -28,7 +27,7 @@ const makeMapStateToProps = () => {
         return {
             ready: !state.newEventPage.dataEntryIsLoading,
             error: !formFoundation ?
-                getTranslation('not_event_program_or_metadata_error', formatterOptions.CAPITALIZE_FIRST_LETTER) : null,
+                i18n.t('This is not an event program or the metadata is corrupt. See log for details.') : null,
             formFoundation,
             programName: programNameSelector(state),
             orgUnitName: state.organisationUnits[state.currentSelections.orgUnitId] &&

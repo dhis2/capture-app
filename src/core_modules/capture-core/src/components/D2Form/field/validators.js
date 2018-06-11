@@ -6,8 +6,7 @@ import isString from 'd2-utilizr/src/isString';
 import isValidDate from '../../../utils/validators/date.validator';
 import isValidDateTime from '../../../utils/validators/dateTime.validator';
 import isValidTime from '../../../utils/validators/time.validator';
-import { getTranslation } from '../../../d2/d2Instance';
-import { formatterOptions } from '../../../utils/string/format.const';
+import i18n from '@dhis2/d2-i18n';
 import MetaDataElement from '../../../metaData/DataElement/DataElement';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 
@@ -28,13 +27,13 @@ const wordValidatorKeys = {
 };
 
 const errorMessages = {
-    INTEGER: 'value_should_be_an_integer',
-    POSITIVE_INTEGER: 'value_should_be_a_positive_integer',
-    ZERO_OR_POSITIVE_INTEGER: 'value_should_be_zero_or_a_positive_integer',
-    DATE: 'value_should_be_a_valid_date',
-    DATETIME: 'value_should_be_a_valid_datetime',
-    TIME: 'value_should_be_a_valid_time',
-    PERCENTAGE: 'value_should_be_a_valid_percentage',
+    INTEGER: 'Please provide a valid integer',
+    POSITIVE_INTEGER: 'Please provide a positive integer',
+    ZERO_OR_POSITIVE_INTEGER: 'Please provide zero or a positive integer',
+    DATE: 'Please provide a valid date',
+    DATETIME: 'Please provide a valid date and time',
+    TIME: 'Please provide a valid time',
+    PERCENTAGE: 'Please provide a valid percentage',
 };
 
 const isCompulsoryRequirementMet = Validators.wordToValidatorMap.get(wordValidatorKeys.COMPULSORY);
@@ -81,42 +80,39 @@ const validatorsForTypes = {
     [elementTypes.NUMBER]: () => ({
         validator: Validators.wordToValidatorMap.get(wordValidatorKeys.NUMBER),
         message:
-            getTranslation(
-                Validators.wordToValidatorMap.get(wordValidatorKeys.NUMBER).message,
-                formatterOptions.CAPITALIZE_FIRST_LETTER,
-            ),
+            i18n.t(Validators.wordToValidatorMap.get(wordValidatorKeys.NUMBER).message),
     }),
     [elementTypes.INTEGER]: () => ({
         validator: isInteger,
-        message: getTranslation(errorMessages.INTEGER, formatterOptions.CAPITALIZE_FIRST_LETTER),
+        message: i18n.t(errorMessages.INTEGER),
     }),
     [elementTypes.INTEGER_POSITIVE]: () => ({
         validator: isPositiveInteger,
-        message: getTranslation(errorMessages.POSITIVE_INTEGER, formatterOptions.CAPITALIZE_FIRST_LETTER),
+        message: i18n.t(errorMessages.POSITIVE_INTEGER),
     }),
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: () => ({
         validator: isZeroOrPositiveInteger,
-        message: getTranslation(errorMessages.ZERO_OR_POSITIVE_INTEGER, formatterOptions.CAPITALIZE_FIRST_LETTER),
+        message: i18n.t(errorMessages.ZERO_OR_POSITIVE_INTEGER),
     }),
     [elementTypes.TIME]: () => ({
         validator: isValidTime,
-        message: getTranslation(errorMessages.TIME, formatterOptions.CAPITALIZE_FIRST_LETTER),
+        message: i18n.t(errorMessages.TIME),
     }),
     [elementTypes.DATE]: () => ({
         validator: isValidDate,
-        message: getTranslation(errorMessages.DATE, formatterOptions.CAPITALIZE_FIRST_LETTER),
+        message: i18n.t(errorMessages.DATE),
     }),
     [elementTypes.DATETIME]: () => ({
         validator: isValidDateTime,
-        message: getTranslation(errorMessages.DATETIME, formatterOptions.CAPITALIZE_FIRST_LETTER),
+        message: i18n.t(errorMessages.DATETIME),
     }),
     [elementTypes.EMAIL]: () => ({
         validator: Validators.wordToValidatorMap.get(wordValidatorKeys.EMAIL),
-        message: getTranslation(Validators.wordToValidatorMap.get(wordValidatorKeys.EMAIL).message),
+        message: i18n.t(Validators.wordToValidatorMap.get(wordValidatorKeys.EMAIL).message),
     }),
     [elementTypes.PERCENTAGE]: () => ({
         validator: isValidPercentage,
-        message: getTranslation(errorMessages.PERCENTAGE, formatterOptions.CAPITALIZE_FIRST_LETTER),
+        message: i18n.t(errorMessages.PERCENTAGE),
     }),
 };
 
@@ -154,11 +150,10 @@ function buildCompulsoryValidator(metaData: MetaDataElement): Array<ValidatorCon
         {
             validator: isCompulsoryRequirementMetWrapper,
             message:
-                getTranslation(
+                i18n.t(
                     Validators.wordToValidatorMap.get(
                         wordValidatorKeys.COMPULSORY,
-                    ).message,
-                    formatterOptions.CAPITALIZE_FIRST_LETTER,
+                    ).message
                 ),
         },
     ] :

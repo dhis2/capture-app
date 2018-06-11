@@ -2,7 +2,8 @@
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/filter';
-import { getApi, getTranslation } from '../../../../d2/d2Instance';
+import { getApi } from '../../../../d2/d2Instance';
+import i18n from '@dhis2/d2-i18n';
 import {
     actionTypes,
     setCurrentOrgUnitBasedOnUrl,
@@ -22,7 +23,7 @@ export const selectionsFromUrlGetOrgUnitDataForNewEventEpic = (action$: InputObs
             .then(response => setCurrentOrgUnitBasedOnUrl({ id: response.id, name: response.displayName }),
             )
             .catch(() =>
-                errorRetrievingOrgUnitBasedOnUrl(getTranslation('could_not_get_organisation_unit')),
+                errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')),
             ),
         );
 
@@ -39,7 +40,7 @@ export const selectionsFromUrlValidationForNewEventEpic = (action$: InputObserva
             const { programId } = store.getState().currentSelections;
 
             if (programId && !programCollection.has(programId)) {
-                return invalidSelectionsFromUrl(getTranslation('program_doesnt_exist'));
+                return invalidSelectionsFromUrl(i18n.t("Program doesn't exist"));
             }
 
             return validSelectionsFromUrl();

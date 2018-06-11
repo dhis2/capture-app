@@ -2,8 +2,8 @@
 import log from 'loglevel';
 
 import errorCreator from '../../utils/errorCreator';
-import { getTranslation } from '../../d2/d2Instance';
 import programCollection from '../../metaDataMemoryStores/programCollection/programCollection';
+import i18n from '@dhis2/d2-i18n';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import { convertValue } from '../formToClient';
 
@@ -24,13 +24,13 @@ export function convertStateFormValuesToClient(eventId: string, state: Object) {
     const program = programCollection.get(event.programId);
     if (!program) {
         log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ eventId, event }));
-        return { error: getTranslation('generic_error'), values: null, stage: null };
+        return { error: i18n.t('An error has occured. See log for details'), values: null, stage: null };
     }
 
     const stage = program.getStage(event.programStageId);
     if (!stage) {
         log.error(errorCreator(errorMessages.STAGE_NOT_FOUND)({ eventId, event }));
-        return { error: getTranslation('generic_error'), values: null, stage: null };
+        return { error: i18n.t('An error has occured. See log for details'), values: null, stage: null };
     }
 
     const convertedValues = convertFormValuesToClient(formValues, stage);

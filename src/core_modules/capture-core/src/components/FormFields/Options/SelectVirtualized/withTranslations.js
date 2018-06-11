@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
-import { getTranslation } from '../../../../d2/d2Instance';
-import { formatterOptions } from '../../../../utils/string/format.const';
+import i18n from '@dhis2/d2-i18n';
 
 type Props = {
 
@@ -9,8 +8,8 @@ type Props = {
 
 function buildTranslations() {
     return {
-        clearText: getTranslation('dropdown_clear', formatterOptions.CAPITALIZE_FIRST_LETTER),
-        noResults: getTranslation('dropdown_no_results', formatterOptions.CAPITALIZE_FIRST_LETTER),
+        clearText: i18n.t('Clear'),
+        noResults: i18n.t('No results'),
     };
 }
 

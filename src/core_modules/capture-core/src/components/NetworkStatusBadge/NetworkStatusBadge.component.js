@@ -5,7 +5,8 @@ import React, { PureComponent } from 'react';
 import Sync from '@material-ui/icons/Sync';
 import Grow from '@material-ui/core/Grow'
 import { withStyles } from '@material-ui/core/styles';
-import * as moment from 'moment';
+import moment from '../../utils/moment/momentResolver';
+import i18n from '@dhis2/d2-i18n';
 
 const styles = theme => ({
     offlineIcon: {
@@ -67,27 +68,27 @@ const styles = theme => ({
 const RightSection = (props) =>
     <div className={`${props.classes.flex} ${props.classes.badgeSection}`}>
         <OnlineIcon status={props.status ? props.classes.onlineIcon : props.classes.offlineIcon } />
-        <p className={props.classes.text}>{ props.status ? 'Online' : 'Offline' }</p>
+        <p className={props.classes.text}>{ props.status ? i18n.t('Online') : i18n.t('Offline') }</p>
     </div>
 
 class LeftSection extends PureComponent {
 
     constructor(props) {
         super(props)
-        this.state = {offlineTimer: moment(Date.now()).locale('en').fromNow()}
+        this.state = {offlineTimer: moment(Date.now()).fromNow()}
     }
 
     componentDidUpdate (prevProps, prevState) {
         if (this.props.statusTimer === 0) {
             clearInterval(this.timer)
             this.timer = null
-            this.setState({offlineTimer: moment(Date.now()).locale('en').fromNow()})
+            this.setState({offlineTimer: moment(Date.now()).fromNow()})
             return
         }
         
         if (this.props.statusTimer > 0 && !this.timer) {
             this.timer = setInterval(() => {
-                const t1 = moment(this.props.statusTimer).locale('en').fromNow()
+                const t1 = moment(this.props.statusTimer).fromNow()
                 this.setState({offlineTimer: t1})
             }, 60*1000)
             return
@@ -106,13 +107,13 @@ class LeftSection extends PureComponent {
             content = (
                 <div className={props.classes.flex}>
                     <Sync className={props.classes.icon}/>
-                    <p className={props.classes.text}>Syncing</p>
+                    <p className={props.classes.text}>{i18n.t('Syncing')}</p>
                 </div>
             )
         }
 
         if (!props.status) {
-            content = <span>{props.syncList.length} offline events. Last synced: {this.state.offlineTimer}</span>
+            content = <span>{props.syncList.length} {i18n.t('offline events. Last synced:')} {this.state.offlineTimer}</span>
         }
 
         const show = !!content

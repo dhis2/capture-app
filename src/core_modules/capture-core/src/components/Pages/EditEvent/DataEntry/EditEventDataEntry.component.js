@@ -2,8 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Validators } from '@dhis2/d2-ui-forms';
-import { getTranslation } from '../../../../d2/d2Instance';
-import { formatterOptions } from '../../../../utils/string/format.const';
+import i18n from '@dhis2/d2-i18n';
 import DataEntry from '../../../../components/DataEntry/DataEntry.container';
 import withSaveButton from '../../../../components/DataEntry/withSaveButton';
 import withCancelButton from '../../../../components/DataEntry/withCancelButton';
@@ -60,13 +59,13 @@ const buildReportDateSettingsFn = () => {
             {
                 validator: Validators.wordToValidatorMap.get('required'),
                 message:
-                    getTranslation(
+                    i18n.t(
                         Validators.wordToValidatorMap.get('required').message,
-                        formatterOptions.CAPITALIZE_FIRST_LETTER),
+                    ),
             },
             {
                 validator: preValidateDate,
-                message: getTranslation('value_should_be_a_valid_date', formatterOptions.CAPITALIZE_FIRST_LETTER),
+                message: i18n.t('Please provide a valid date'),
             },
         ],
     });
