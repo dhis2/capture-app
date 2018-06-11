@@ -54,6 +54,9 @@ import {
 } from 'capture-core/components/Pages/EditEvent/DataEntry/epics/cancelEditSingleEvent.epics';
 
 import { loadStartupData } from '../init/entry.epics';
+import {
+    networkMonitorStatusEpic
+} from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.epics.js';
 
 export default combineEpics(
     loadStartupData,
@@ -85,4 +88,5 @@ export default combineEpics(
     cancelEditEventEpic,
     openEditPageLocationChangeEpic,
     getEventOpeningFromEventListEpic,
+    networkMonitorStatusEpic,
 );

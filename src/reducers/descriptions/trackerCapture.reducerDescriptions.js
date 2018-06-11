@@ -12,7 +12,7 @@ import { organisationUnitDesc } from 'capture-core/reducers/descriptions/organis
 
 import { appReducerDesc } from './app.reducerDescription';
 import { currentSelectionsReducerDesc } from './currentSelections.reducerDescription';
-
+import { networkStatusDesc } from 'capture-core/reducers/descriptions/networkStatus.reducerDescription';
 
 export default [
     appReducerDesc,
@@ -39,4 +39,5 @@ export default [
     newEventPageDesc,
     editEventPageDesc,
     organisationUnitDesc,
+    networkStatusDesc,
 ];
