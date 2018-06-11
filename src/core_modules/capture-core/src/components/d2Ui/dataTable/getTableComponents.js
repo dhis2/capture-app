@@ -22,6 +22,7 @@ export type TableClasses = {
     paginationDisplayRowsContainer: string,
     sortLabelContainer: string,
     sortLabelChildren: string,
+    sortLabelChildrenEnabled: string,
     sortLabelChildrenFirst: string,
     sortLabelChildrenLast: string,
     sortLabelRight: string,

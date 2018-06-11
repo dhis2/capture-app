@@ -4,6 +4,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 
 import { getTranslation } from '../../d2/d2Instance';
 import { formatterOptions } from '../../utils/string/format.const';
@@ -16,19 +17,23 @@ import { directions } from '../d2UiReactAdapters/dataTable/componentGetters/sort
 const { SortLabel } = getTableComponents(sortLabelAdapter);
 
 const styles = theme => ({
-    icon: {
+    iconBase: {
         width: '14px',
         height: '14px',
-        cursor: 'pointer',
         color: '#3a796f',
+    },
+    enabledIcon: {
+        cursor: 'pointer',
     },
 });
 
 type Props = {
     children?: ?React.Node,
     classes: {
-        icon: string,
-    }
+        iconBase: string,
+        enabledIcon: string,
+    },
+    disabled?: ?boolean,
 };
 
 class SortLabelWrapper extends React.Component<Props> {
@@ -36,39 +41,55 @@ class SortLabelWrapper extends React.Component<Props> {
         direction: $Values<typeof directions>,
         onSort: (direction: $Values<typeof directions>) => void) =>
         () => {
-            onSort(direction);
+            if (!this.props.disabled) {
+                onSort(direction);
+            }
         }
+
+    getActiveIcons = (direction?: ?$Values<typeof directions>,
+        onSort: (direction: $Values<typeof directions>) => void,
+    ) => {
+        const isDisabled = this.props.disabled;
+        const classes = this.props.classes;
+        const IconComponent = direction === directions.ASC ? ArrowUpwardIcon : ArrowDownwardIcon;
+        const icon = (
+            <IconComponent
+                className={isDisabled ? classes.iconBase : classNames(classes.iconBase, classes.enabledIcon)}
+                onClick={this.getIconClickHandler(
+                    direction === directions.DESC ? directions.ASC : directions.DESC,
+                    onSort,
+                )}
+            />
+        );
+
+        if (this.props.disabled) {
+            return (
+                <span>
+                    {icon}
+                </span>
+            );
+        }
+
+        return (
+            <Tooltip
+                title={getTranslation('sort', formatterOptions.CAPITALIZE_FIRST_LETTER)}
+                placement={'bottom'}
+                enterDelay={300}
+            >
+                <span>
+                    {icon}
+                </span>
+            </Tooltip>
+        );
+    }
 
     getIcons = (
         isActive: boolean,
         direction?: ?$Values<typeof directions>,
-        onSort: (direction: $Values<typeof directions>) => void) => {
+        onSort: (direction: $Values<typeof directions>,
+    ) => void) => {
         if (isActive) {
-            const icon = direction === directions.ASC
-                ? (
-                    <ArrowUpwardIcon
-                        className={this.props.classes.icon}
-                        onClick={this.getIconClickHandler(directions.DESC, onSort)}
-                    />
-                )
-                : (
-                    <ArrowDownwardIcon
-                        className={this.props.classes.icon}
-                        onClick={this.getIconClickHandler(directions.ASC, onSort)}
-                    />
-                );
-
-            return (
-                <Tooltip
-                    title={getTranslation('sort', formatterOptions.CAPITALIZE_FIRST_LETTER)}
-                    placement={'bottom'}
-                    enterDelay={300}
-                >
-                    <span>
-                        {icon}
-                    </span>
-                </Tooltip>
-            );
+            return this.getActiveIcons(direction, onSort);
         }
         return (
             <div
@@ -83,15 +104,28 @@ class SortLabelWrapper extends React.Component<Props> {
                 onGetIcons={this.getIcons}
                 {...this.props}
             >
-                <Tooltip
-                    title={getTranslation('sort', formatterOptions.CAPITALIZE_FIRST_LETTER)}
-                    placement={'bottom'}
-                    enterDelay={300}
-                >
-                    <span>
-                        {this.props.children}
-                    </span>
-                </Tooltip>
+                {
+                    (() => {
+                        if (this.props.disabled) {
+                            return (
+                                <span>
+                                    {this.props.children}
+                                </span>
+                            );
+                        }
+                        return (
+                            <Tooltip
+                                title={getTranslation('sort', formatterOptions.CAPITALIZE_FIRST_LETTER)}
+                                placement={'bottom'}
+                                enterDelay={300}
+                            >
+                                <span>
+                                    {this.props.children}
+                                </span>
+                            </Tooltip>
+                        );
+                    })()
+                }
             </SortLabel>
         );
     }
