@@ -97,12 +97,12 @@
 "@material-ui/core@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-1.2.1.tgz#f8c73da10b875762b37be7167ec2ac79b027499f"
-"@dhis2/d2-ui-org-unit-tree@1.0.9":
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/@dhis2/d2-ui-org-unit-tree/-/d2-ui-org-unit-tree-1.0.9.tgz#7a3864736dc983c6bfbc4d8503335045cbbd62b4"
-  
+
+  "@dhis2/d2-ui-org-unit-tree@^1.0.10":
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/@dhis2/d2-ui-org-unit-tree/-/d2-ui-org-unit-tree-1.0.10.tgz#6d64c2e9697e685a83bcda921ca6beb078618953"
   dependencies:
-    "@dhis2/d2-ui-core" "^1.1.4"
+    "@dhis2/d2-ui-core" "^1.2.0"
     babel-runtime "^6.26.0"
     material-ui "^0.19.3"
     prop-types "^15.5.10"

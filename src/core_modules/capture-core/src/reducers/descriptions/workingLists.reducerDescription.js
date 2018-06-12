@@ -14,6 +14,9 @@ import {
 import {
     actionTypes as connectivityActionTypes,
 } from '../../components/Connectivity/connectivity.actions';
+import {
+    actionTypes as selectorSelection,
+} from '../../components/QuickSelector/actions/QuickSelector.actions';
 
 export const workingListsDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
@@ -133,6 +136,27 @@ export const workingListsUIDesc = createReducerDescription({
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS]: (state) => {
         const newState = { ...state };
         newState.main = getLoadingState(newState.main);
+        return newState;
+    },
+    [selectorSelection.SET_ORG_UNIT_ID]: (state) => {
+        const newState = { ...state };
+        newState.main = {
+            isLoading: true,
+        };
+        return newState;
+    },
+    [selectorSelection.SET_PROGRAM_ID]: (state) => {
+        const newState = { ...state };
+        newState.main = {
+            isLoading: true,
+        };
+        return newState;
+    },
+    [selectorSelection.SET_CATEGORY_ID]: (state) => {
+        const newState = { ...state };
+        newState.main = {
+            isLoading: true,
+        };
         return newState;
     },
     [mainSelectionsActionTypes.VALID_SELECTIONS_FROM_URL]: (state) => {
