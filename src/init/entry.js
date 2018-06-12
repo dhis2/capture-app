@@ -38,6 +38,17 @@ async function runApp(domElement: HTMLElement, store: ReduxStore, history: HashH
         // START TEST
         // store.dispatch(startEnrollmentLoad());
         // END TEST
+
+        window.addEventListener("beforeunload", function (e) {
+            if (store.getState().offline.outbox.length > 0) {
+                const msg = 'Unsaved events!';
+                e.returnValue = msg;
+                return msg;
+            } else {
+                return undefined;
+            }
+        });
+
         render(
             <App
                 store={store}
