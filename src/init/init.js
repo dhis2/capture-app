@@ -8,7 +8,6 @@ import CurrentLocaleData from 'capture-core/utils/localeData/CurrentLocaleData';
 import { setD2, getTranslation } from 'capture-core/d2/d2Instance';
 import { formatterOptions } from 'capture-core/utils/string/format.const';
 
-
 import 'moment/locale/nb';
 
 import loadMetaData from 'capture-core/metaDataStoreLoaders/baseLoader/metaDataLoader';
@@ -125,4 +124,3 @@ export async function initialize() {
     setLocaleData(uiLocale);
     await initializeMetaData(dbLocale);
 }
-
