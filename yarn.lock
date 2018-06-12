@@ -61,11 +61,11 @@
     material-ui-icons "^1.0.0-beta.36"
     rxjs "^5.5.7"
 
-"@dhis2/d2-ui-org-unit-tree@1.0.9":
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/@dhis2/d2-ui-org-unit-tree/-/d2-ui-org-unit-tree-1.0.9.tgz#7a3864736dc983c6bfbc4d8503335045cbbd62b4"
+"@dhis2/d2-ui-org-unit-tree@^1.0.10":
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/@dhis2/d2-ui-org-unit-tree/-/d2-ui-org-unit-tree-1.0.10.tgz#6d64c2e9697e685a83bcda921ca6beb078618953"
   dependencies:
-    "@dhis2/d2-ui-core" "^1.1.4"
+    "@dhis2/d2-ui-core" "^1.2.0"
     babel-runtime "^6.26.0"
     material-ui "^0.19.3"
     prop-types "^15.5.10"

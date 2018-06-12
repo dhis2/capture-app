@@ -1,4 +1,5 @@
 // @flow
+import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import { actionTypes as mainSelectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
@@ -13,9 +14,24 @@ import {
 type CurrentSelectionsState = {
     programId?: ?string,
     orgUnitId?: ?string,
+    categories?: ?Object,
 };
 
 const calculateCompleteStatus = (state: CurrentSelectionsState) => {
+    const programsArray = Array.from(programs.values());
+    const selectedProgram = programsArray.find(program => program.id === state.programId);
+
+    if (state.programId && selectedProgram.categoryCombo && !selectedProgram.categoryCombo.isDefault) {
+        const categoryCombos = programsArray.find(program => program.id === state.programId).categoryCombo.categories;
+
+        for (let i = 0; i < categoryCombos.length; i++) {
+            if (!state.categories || !state.categories[categoryCombos[i].id]) {
+                return false;
+            }
+        }
+        return !!(state.programId && state.orgUnitId);
+    }
+
     return !!(state.programId && state.orgUnitId);
 };
 
@@ -120,6 +136,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             categories[action.payload.categoryId] = action.payload.selectedCategoryOptionId;
         }
         const newState = { ...state, categories };
+        newState.complete = calculateCompleteStatus(newState);
         return newState;
     },
     [setCurrentSelectionsActionTypes.RESET_CATEGORY_SELECTIONS]: (state) => {

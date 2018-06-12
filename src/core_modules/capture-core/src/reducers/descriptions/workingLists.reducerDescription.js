@@ -11,6 +11,9 @@ import {
 import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
+import {
+    actionTypes as selectorSelection,
+} from '../../components/QuickSelector/actions/QuickSelector.actions';
 
 export const workingListsDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
@@ -81,6 +84,27 @@ export const workingListsMetaDesc = createReducerDescription({
 
 export const workingListsUIDesc = createReducerDescription({
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS]: (state) => {
+        const newState = { ...state };
+        newState.main = {
+            isLoading: true,
+        };
+        return newState;
+    },
+    [selectorSelection.SET_ORG_UNIT_ID]: (state) => {
+        const newState = { ...state };
+        newState.main = {
+            isLoading: true,
+        };
+        return newState;
+    },
+    [selectorSelection.SET_PROGRAM_ID]: (state) => {
+        const newState = { ...state };
+        newState.main = {
+            isLoading: true,
+        };
+        return newState;
+    },
+    [selectorSelection.SET_CATEGORY_ID]: (state) => {
         const newState = { ...state };
         newState.main = {
             isLoading: true,
