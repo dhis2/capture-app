@@ -31,8 +31,11 @@ import {
     cancelNewEventIncompleteSelectionsLocationChangeEpic,
 } from 'capture-core/components/Pages/NewEvent/DataEntry/epics/cancelNewSingleEventSelectionsIncomplete.epics';
 import {
-    retrieveWorkingListEpic,
+    retrieveWorkingListOnMainSelectionsCompletedEpic,
+    getWorkingListOnCancelSaveEpic,
+    getWorkingListOnSaveEpic,
     updateWorkingListEpic,
+    getEventListOnReconnectEpic,
 } from 'capture-core/components/Pages/MainPage/EventsList/eventsList.epics';
 import {
     getEventFromUrlEpic,
@@ -52,6 +55,12 @@ import {
     cancelEditEventEpic,
     cancelEditEventLocationChangeEpic,
 } from 'capture-core/components/Pages/EditEvent/DataEntry/epics/cancelEditSingleEvent.epics';
+import {
+    goingOnlineEpic,
+} from 'capture-core/components/Connectivity/connectivity.epics';
+import {
+    updateEventListAfterSaveOrUpdateEventEpic,
+} from 'capture-core/components/Pages/MainPage/mainPage.epics';
 
 import { loadStartupData } from '../init/entry.epics';
 
@@ -59,8 +68,11 @@ export default combineEpics(
     loadStartupData,
     mainSelectionsCompletedEpic,
     orgUnitDataRetrivedEpic,
-    retrieveWorkingListEpic,
+    retrieveWorkingListOnMainSelectionsCompletedEpic,
+    getWorkingListOnCancelSaveEpic,
+    getWorkingListOnSaveEpic,
     updateWorkingListEpic,
+    getEventListOnReconnectEpic,
     mainSelectionsFromUrlGetOrgUnitDataEpic,
     mainSelectionsFromUrlEmptyOrgUnitEpic,
     mainSelectionsFromUrlValidationEpic,
@@ -85,4 +97,6 @@ export default combineEpics(
     cancelEditEventEpic,
     openEditPageLocationChangeEpic,
     getEventOpeningFromEventListEpic,
+    goingOnlineEpic,
+    updateEventListAfterSaveOrUpdateEventEpic,
 );

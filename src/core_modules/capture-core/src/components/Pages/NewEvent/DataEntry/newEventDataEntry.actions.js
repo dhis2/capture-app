@@ -88,16 +88,16 @@ export const startRunRulesOnUpdateForNewSingleEvent = (actionData: { payload: Ob
 export const requestSaveNewEventAndReturnToMainPage = (eventId: string, dataEntryId: string, formFoundation: Object) =>
     actionCreator(actionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)({ eventId, dataEntryId, formFoundation });
 
-export const startSaveNewEventAfterReturnedToMainPage = (serverData: Object) =>
-    actionCreator(actionTypes.START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE)(null, {
+export const startSaveNewEventAfterReturnedToMainPage = (serverData: Object, selections: Object) =>
+    actionCreator(actionTypes.START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE)({ selections }, {
         offline: {
             effect: {
                 url: 'events',
                 method: methods.POST,
                 data: serverData,
             },
-            commit: { type: actionTypes.NEW_EVENT_SAVED_AFTER_RETURNED_TO_MAIN_PAGE },
-            rollback: { type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE },
+            commit: { type: actionTypes.NEW_EVENT_SAVED_AFTER_RETURNED_TO_MAIN_PAGE, meta: { selections } },
+            rollback: { type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE, meta: { selections } },
         },
     });
 

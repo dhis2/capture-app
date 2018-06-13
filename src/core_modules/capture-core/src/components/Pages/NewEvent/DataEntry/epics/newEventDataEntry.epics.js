@@ -1,6 +1,5 @@
 // @flow
 import log from 'loglevel';
-import 'rxjs/add/observable/of';
 import { batchActions } from 'redux-batched-actions';
 import { rulesExecutedPostUpdateField } from '../../../../DataEntry/actions/dataEntry.actions';
 import { actionTypes as selectorActionTypes } from '../../../MainPage/tempSelector.actions';

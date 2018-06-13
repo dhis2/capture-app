@@ -25,8 +25,10 @@ import withStateBoundLoadingIndicator from 'capture-core/HOC/withStateBoundLoadi
 
 import theme from '../../styles/uiTheme';
 
+
+const AppGoingOnlineLoadingIndicator = withStateBoundLoadingIndicator((state: ReduxState) => !state.app.goingOnline, null, true)(AppContents);
 const AppContentsOutOfSyncLoadingIndicator = withStateBoundLoadingIndicator(
-    (state: ReduxState, props: any) => !props.urlOutOfSync, null, true)(AppContents);
+    (state: ReduxState, props: any) => !props.urlOutOfSync, null, true)(AppGoingOnlineLoadingIndicator);
 const AppContentsUrlParamSync = withUrlSync(
     (props: Object) => props.syncSpecification
 )(AppContentsOutOfSyncLoadingIndicator);

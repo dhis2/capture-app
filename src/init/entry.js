@@ -12,10 +12,7 @@ import { LoadingMask } from '@dhis2/d2-ui-core';
 
 import environments from 'capture-core/constants/environments';
 
-// TEST
-// import { startEnrollmentLoad } from 'capture-core/actions/__TEMP__/enrollment.actions';
-// END TEST
-
+import './addRxjsOperators';
 import App from '../components/App/App.component';
 import getStore from '../getStore';
 import { initialize } from './init';
@@ -28,16 +25,13 @@ async function runApp(domElement: HTMLElement, store: ReduxStore, history: HashH
         <D2UIApp>
             <LoadingMask />
         </D2UIApp>,
-        domElement
+        domElement,
     );
 
     try {
         await initialize();
         store.dispatch(startupDataLoad());
 
-        // START TEST
-        // store.dispatch(startEnrollmentLoad());
-        // END TEST
         render(
             <App
                 store={store}

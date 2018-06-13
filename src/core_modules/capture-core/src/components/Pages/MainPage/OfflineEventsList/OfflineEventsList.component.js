@@ -91,6 +91,7 @@ type Props = {
     },
     sortById: string,
     sortByDirection: string,
+    onRowClick: (rowData: {eventId: string}) => void,
 };
 
 class OfflineEventsList extends Component<Props> {

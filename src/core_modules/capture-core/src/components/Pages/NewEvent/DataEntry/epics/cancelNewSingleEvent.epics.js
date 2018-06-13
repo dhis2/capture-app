@@ -5,14 +5,19 @@ import {
     cancelNewEventNoWorkingListUpdateNeeded,
     cancelNewEventUpdateWorkingList,
 } from '../newEventDataEntry.actions';
+import isSelectionsEqual from '../../../../App/isSelectionsEqual';
 
 export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
     action$.ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE)
         .map(() => {
             const state = store.getState();
-            const workingListHasBeenLoaded = state.workingListsUI.main && state.workingListsUI.main.hasBeenLoaded;
-            if (!workingListHasBeenLoaded) {
+            const listSelections = state.workingListsContext.main;
+            if (!listSelections) {
+                return cancelNewEventUpdateWorkingList();
+            }
+            const currentSelections = state.currentSelections;
+            if (!isSelectionsEqual(currentSelections, listSelections)) {
                 return cancelNewEventUpdateWorkingList();
             }
             return cancelNewEventNoWorkingListUpdateNeeded();

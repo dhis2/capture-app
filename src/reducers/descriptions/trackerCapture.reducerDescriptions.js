@@ -4,7 +4,7 @@ import { eventsDesc, eventsValuesDesc } from 'capture-core/reducers/descriptions
 import { dataEntriesDesc, dataEntriesUIDesc, dataEntriesFieldsValueDesc, dataEntriesFieldsMetaDesc, dataEntriesFieldsUIDesc } from 'capture-core/reducers/descriptions/dataEntry.reducerDescription';
 import { feedbackDesc } from 'capture-core/reducers/descriptions/feedback.reducerDescription';
 import { rulesEffectsHiddenFieldsDesc, rulesEffectsErrorMessagesDesc, rulesEffectsHiddenSectionsDesc, rulesEffectsCompulsoryFieldsDesc } from 'capture-core/reducers/descriptions/rulesEffects.reducerDescription';
-import { workingListsDesc, workingListsMetaDesc, workingListsUIDesc, workingListsColumnsOrderDesc } from 'capture-core/reducers/descriptions/workingLists.reducerDescription';
+import { workingListsDesc, workingListsMetaDesc, workingListsUIDesc, workingListsColumnsOrderDesc, workingListsContextDesc } from 'capture-core/reducers/descriptions/workingLists.reducerDescription';
 import { mainPageDesc } from 'capture-core/reducers/descriptions/mainPage.reducerDescription';
 import { newEventPageDesc } from 'capture-core/reducers/descriptions/newEvent.reducerDescription';
 import { editEventPageDesc } from 'capture-core/reducers/descriptions/editEvent.reducerDescription';
@@ -35,6 +35,7 @@ export default [
     workingListsMetaDesc,
     workingListsUIDesc,
     workingListsColumnsOrderDesc,
+    workingListsContextDesc,
     mainPageDesc,
     newEventPageDesc,
     editEventPageDesc,

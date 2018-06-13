@@ -14,8 +14,10 @@ import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
 import { actionTypes as eventListActionTypes } from '../../components/Pages/MainPage/EventsList/eventsList.actions';
+import { actionTypes as connectivityActionTypes } from '../../components/Connectivity/connectivity.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
+const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
 
 export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescription({
     ...appUpdaters,
@@ -78,6 +80,23 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     [LOCATION_CHANGE]: (state) => {
         const newState = { ...state };
         newState.locationSwitchInProgress = false;
+        return newState;
+    },
+    [OFFLINE_STATUS_CHANGED]: (state, action) => {
+        if (action.payload.online) {
+            const newState = {
+                ...state,
+                goingOnlineInProgress: true,
+            };
+            return newState;
+        }
+        return state;
+    },
+    [connectivityActionTypes.GOING_ONLINE_EXECUTED]: (state) => {
+        const newState = {
+            ...state,
+            goingOnlineInProgress: false,
+        };
         return newState;
     },
 }, 'app');
