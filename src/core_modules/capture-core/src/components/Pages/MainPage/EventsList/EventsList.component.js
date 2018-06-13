@@ -2,8 +2,6 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator';
-import SettingsIcon from '@material-ui/icons/Settings';
-import IconButton from '@material-ui/core/IconButton';
 
 import classNames from 'classnames';
 
@@ -19,6 +17,7 @@ import withNavigation from '../../../Pagination/withDefaultNavigation';
 import withRowsPerPageSelector from '../../../Pagination/withRowsPerPageSelector';
 import SortLabelWrapper from '../../../DataTable/SortLabelWrapper.component';
 import { directions, placements } from '../../../d2UiReactAdapters/dataTable/componentGetters/sortLabel.const';
+import ColumnSelector from '../../../ColumnSelector/ColumnSelector.container';
 
 import DownloadTable from '../../../DownloadTable/DownloadTable.container';
 
@@ -256,12 +255,7 @@ class EventsList extends Component<Props> {
                         {'{{filters}}'}
                     </div>
                     <div>
-                        <IconButton>
-                            <SettingsIcon
-                                className={classes.optionsIcon}
-                                onClick={() => { alert('not implemented yet'); }}
-                            />
-                        </IconButton>
+                        <ColumnSelector />
                         <DownloadTable />
                     </div>
                 </div>

@@ -17,6 +17,9 @@ import {
 import {
     actionTypes as mainPageSelectorActionTypes,
 } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
+import {
+    actionTypes as columnSelectorActionTypes,
+} from '../../components/ColumnSelector/actions/ColumnSelector.actions';
 
 export const workingListsDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
@@ -271,6 +274,23 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
         newState.main = action.payload.columnsOrder;
+        return newState;
+    },
+    [columnSelectorActionTypes.SET_COLUMN_VISIBLE]: (state, action) => {
+        //TODO: Consult Joakim for a possible better solution for avaoiding mutation. 
+        const newState = { ...state };
+
+        const workingList = [...state.main];
+        const index = workingList.findIndex(column => column.id === action.payload);
+
+        const updatedList = workingList.map(column => {  
+            if(column.id ===  action.payload) {
+              column.visible = !column.visible;
+            }
+            return column;
+        });
+
+        newState.main = updatedList;
         return newState;
     },
 }, 'workingListsColumnsOrder');
