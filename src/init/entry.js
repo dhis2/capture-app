@@ -23,7 +23,7 @@ import { startupDataLoad } from './entry.actions';
 
 const DOM_ID = 'app';
 
-async function runApp(domElement: HTMLElement, store: ReduxStore, history: HashHistory) {
+async function runApp(domElement: HTMLElement) {
     render(
         <D2UIApp>
             <LoadingMask />
@@ -33,6 +33,10 @@ async function runApp(domElement: HTMLElement, store: ReduxStore, history: HashH
 
     try {
         await initialize();
+
+        const history = createHistory();
+        const store = getStore(history);
+
         store.dispatch(startupDataLoad());
 
         // START TEST
@@ -63,7 +67,5 @@ const domElement = document.getElementById(DOM_ID);
 if (!domElement) {
     log.error(`html element with id ${DOM_ID} is missing in index file`);
 } else {
-    const history = createHistory();
-    const store = getStore(history);
-    runApp(domElement, store, history);
+    runApp(domElement);
 }
