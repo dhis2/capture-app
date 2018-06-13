@@ -6,6 +6,7 @@ import {
     makeCreateEventsContainer,
     makeCreateWorkingListData,
 } from './offlineEventsList.selector';
+import { openEditEventPage } from '../EventsList/eventsList.actions'; // temporary?
 
 const makeMapStateToProps = () => {
     const columnsSelector = makeColumnsSelector();
@@ -27,4 +28,11 @@ const makeMapStateToProps = () => {
     return mapStateToProps;
 };
 
-export default connect(makeMapStateToProps)(OfflineEventsList);
+const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+    onRowClick: (rowData: {eventId: string}) => {
+        window.scrollTo(0, 0);
+        dispatch(openEditEventPage(rowData.eventId));
+    },
+});
+
+export default connect(makeMapStateToProps, mapDispatchToProps)(OfflineEventsList);

@@ -105,16 +105,16 @@ export const startRunRulesOnUpdateForEditSingleEvent = (actionData: { payload: O
 export const requestSaveReturnToMainPage = (itemId: string, dataEntryId: string, formFoundation: Object) =>
     actionCreator(actionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)({ itemId, dataEntryId, formFoundation });
 
-export const startSaveEditEventAfterReturnedToMainPage = (eventId: string, serverData: Object) =>
-    actionCreator(actionTypes.START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE)(null, {
+export const startSaveEditEventAfterReturnedToMainPage = (eventId: string, serverData: Object, selections: Object) =>
+    actionCreator(actionTypes.START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE)({ selections }, {
         offline: {
             effect: {
                 url: `events/${eventId}`,
                 method: methods.UPDATE,
                 data: serverData,
             },
-            commit: { type: actionTypes.EVENT_UPDATED_AFTER_RETURN_TO_MAIN_PAGE },
-            rollback: { type: actionTypes.EVENT_UPDATE_FAILED_AFTER_RETURN_TO_MAIN_PAGE },
+            commit: { type: actionTypes.EVENT_UPDATED_AFTER_RETURN_TO_MAIN_PAGE, meta: { selections } },
+            rollback: { type: actionTypes.EVENT_UPDATE_FAILED_AFTER_RETURN_TO_MAIN_PAGE, meta: { selections } },
         },
     });
 

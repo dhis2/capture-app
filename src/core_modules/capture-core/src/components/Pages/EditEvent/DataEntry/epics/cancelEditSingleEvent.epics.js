@@ -11,8 +11,8 @@ export const cancelEditEventEpic = (action$: InputObservable, store: ReduxStore)
     action$.ofType(editEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE)
         .map(() => {
             const state = store.getState();
-            const workingListHasBeenLoaded = state.workingListsUI.main && state.workingListsUI.main.hasBeenLoaded;
-            if (!workingListHasBeenLoaded) {
+            const listSelections = state.workingListsContext.main;
+            if (!listSelections) {
                 return updateWorkingListAfterUpdateCancelled();
             }
             return noWorkingListUpdateNeededAfterUpdateCancelled();

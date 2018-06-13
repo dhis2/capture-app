@@ -54,7 +54,7 @@ export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
                     })),
             };
 
-            return startSaveNewEventAfterReturnedToMainPage(serverData);
+            return startSaveNewEventAfterReturnedToMainPage(serverData, state.currentSelections);
         });
 
 export const saveNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>

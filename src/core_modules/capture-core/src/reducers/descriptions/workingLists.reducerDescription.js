@@ -11,6 +11,9 @@ import {
 import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
+import {
+    actionTypes as connectivityActionTypes,
+} from '../../components/Connectivity/connectivity.actions';
 
 export const workingListsDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
@@ -49,69 +52,107 @@ export const workingListsMetaDesc = createReducerDescription({
             ...action.payload.pagingData,
             sortById: 'eventDate',
             sortByDirection: 'desc',
+            next: {},
         };
 
         return newState;
     },
+    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: (state) => {
+        return {
+            ...state,
+            main: {},
+        };
+    },
     [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
-        const rowsCount = action.payload.pagingData.rowsCount;
-        newState.main = { ...newState.main, rowsCount };
+        const pagingData = action.payload.pagingData;
+        const next = newState.main.next;
+        newState.main = {
+            ...newState.main,
+            ...next,
+            ...pagingData,
+            next: {},
+        };
+        return newState;
+    },
+    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVAL_FAILED]: (state) => {
+        const newState = { ...state };
+        newState.main = {
+            ...newState.main,
+            next: {},
+        };
         return newState;
     },
     [paginationActionTypes.CHANGE_PAGE]: (state, action) => {
         const newState = { ...state };
         const page = action.payload;
-        newState.main = { ...newState.main, currentPage: page };
+        newState.main = {
+            ...newState.main,
+            next: {
+                ...newState.main.next,
+                currentPage: page,
+            },
+        };
         return newState;
     },
     [eventsListActionTypes.SORT_WORKING_LIST]: (state, action) => {
         const newState = { ...state };
         const { id, direction } = action.payload;
-        newState.main = { ...newState.main, sortById: id, sortByDirection: direction, currentPage: 1 };
+        newState.main = {
+            ...newState.main,
+            next: {
+                ...newState.main.next,
+                sortById: id,
+                sortByDirection: direction,
+                currentPage: 1,
+            },
+        };
         return newState;
     },
     [paginationActionTypes.CHANGE_ROWS_PER_PAGE]: (state, action) => {
         const newState = { ...state };
         const rowsPerPage = action.payload;
-        newState.main = { ...newState.main, rowsPerPage, currentPage: 1 };
+        newState.main = {
+            ...newState.main,
+            next: {
+                ...newState.main.next,
+                rowsPerPage,
+                currentPage: 1,
+            },
+        };
         return newState;
     },
 }, 'workingListsMeta');
 
+const getLoadingState = oldState => ({
+    ...oldState,
+    isLoading: true,
+});
+
 export const workingListsUIDesc = createReducerDescription({
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS]: (state) => {
         const newState = { ...state };
-        newState.main = {
-            isLoading: true,
-        };
+        newState.main = getLoadingState(newState.main);
         return newState;
     },
     [mainSelectionsActionTypes.VALID_SELECTIONS_FROM_URL]: (state) => {
         const newState = { ...state };
-        newState.main = {
-            isLoading: true,
-        };
+        newState.main = getLoadingState(newState.main);
         return newState;
     },
     [paginationActionTypes.CHANGE_PAGE]: (state) => {
         const newState = { ...state };
-
-        newState.main = {
-            ...newState.main,
-            isLoading: true,
-        };
-
+        newState.main = getLoadingState(newState.main);
         return newState;
     },
     [paginationActionTypes.CHANGE_ROWS_PER_PAGE]: (state) => {
         const newState = { ...state };
-
-        newState.main = {
-            ...newState.main,
-            isLoading: true,
-        };
-
+        newState.main = getLoadingState(newState.main);
+        return newState;
+    },
+    [eventsListActionTypes.SORT_WORKING_LIST]: (state) => {
+        const newState = { ...state };
+        newState.main = getLoadingState(newState.main);
         return newState;
     },
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state) => {
@@ -120,6 +161,7 @@ export const workingListsUIDesc = createReducerDescription({
             ...newState.main,
             isLoading: false,
             hasBeenLoaded: true,
+            dataLoadingError: null,
         };
         return newState;
     },
@@ -128,6 +170,7 @@ export const workingListsUIDesc = createReducerDescription({
         newState.main = {
             ...newState.main,
             isLoading: false,
+            dataLoadingError: null,
         };
         return newState;
     },
@@ -135,30 +178,26 @@ export const workingListsUIDesc = createReducerDescription({
         const newState = { ...state };
         newState.main = {
             dataLoadingError: action.payload,
+            isLoading: false,
         };
         return newState;
     },
-    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVAL_FAILED]: (state, action) => {
+    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVAL_FAILED]: (state) => {
         const newState = { ...state };
         newState.main = {
-            dataLoadingError: action.payload,
+            dataLoadingError: null,  // reverting list to previous state and showing feedbackBar message
+            isLoading: false,
         };
         return newState;
     },
     [newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
-        newState.main = {
-            ...newState.main,
-            isLoading: true,
-        };
+        newState.main = getLoadingState(newState.main);
         return newState;
     },
     [newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
-        newState.main = {
-            ...newState.main,
-            isLoading: true,
-        };
+        newState.main = getLoadingState(newState.main);
         return newState;
     },
     [newEventDataEntryActionTypes.CANCEL_SAVE_NO_WORKING_LIST_UPDATE_NEEDED]: (state) => {
@@ -179,10 +218,7 @@ export const workingListsUIDesc = createReducerDescription({
     },
     [editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
-        newState.main = {
-            ...newState.main,
-            isLoading: true,
-        };
+        newState.main = getLoadingState(newState.main);
         return newState;
     },
     [editEventDataEntryActionTypes.EVENT_UPDATE_FAILED_AFTER_RETURN_TO_MAIN_PAGE]: (state) => {
@@ -195,10 +231,7 @@ export const workingListsUIDesc = createReducerDescription({
     },
     [editEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
-        newState.main = {
-            ...newState.main,
-            isLoading: true,
-        };
+        newState.main = getLoadingState(newState.main);
         return newState;
     },
     [editEventDataEntryActionTypes.NO_WORKING_LIST_UPDATE_NEEDED_AFTER_CANCEL_UPDATE]: (state) => {
@@ -207,6 +240,11 @@ export const workingListsUIDesc = createReducerDescription({
             ...newState.main,
             isLoading: false,
         };
+        return newState;
+    },
+    [connectivityActionTypes.GET_EVENT_LIST_ON_RECONNECT]: (state) => {
+        const newState = { ...state };
+        newState.main = getLoadingState(newState.main);
         return newState;
     },
 }, 'workingListsUI');
@@ -219,3 +257,10 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
     },
 }, 'workingListsColumnsOrder');
 
+export const workingListsContextDesc = createReducerDescription({
+    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
+        const newState = { ...state };
+        newState.main = action.payload.selections;
+        return newState;
+    },
+}, 'workingListsContext');

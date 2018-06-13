@@ -1,12 +1,11 @@
 // @flow
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/concatMap';
+import { fromPromise } from 'rxjs/observable/fromPromise';
 
 import log from 'loglevel';
 import errorCreator from 'capture-core/utils/errorCreator';
 import { getEvents } from '../../../../events/eventRequests';
 import getColumnsConfiguration from './getColumnsConfiguration';
+import isSelectionsEqual from '../../../App/isSelectionsEqual';
 
 import {
     actionTypes as mainSelectionActionTypes,
@@ -21,8 +20,11 @@ import {
 } from './eventsList.actions';
 import { actionTypes as newEventDataEntryActionTypes } from '../../NewEvent/DataEntry/newEventDataEntry.actions';
 import { actionTypes as editEventDataEntryActionTypes } from '../../EditEvent/DataEntry/editEventDataEntry.actions';
-
-type InputObservable = rxjs$Observable<ReduxAction<any, any>>;
+import {
+    batchActionTypes as connectivityBatchActionTypes,
+    actionTypes as connectivityActionTypes,
+} from '../../../Connectivity/connectivity.actions';
+import { actionTypes as mainPageActionTypes } from '../mainPage.actions';
 
 const errorMessages = {
     WORKING_LIST_RETRIEVE_ERROR: 'Working list could not be loaded',
@@ -71,7 +73,7 @@ const getInitialWorkingListActionAsync = (
     orgUnitId: string): Promise<ReduxAction<any, any>> =>
     getInitialWorkingListDataAsync(programId, orgUnitId)
         .then(data =>
-            workingListInitialDataRetrieved(data),
+            workingListInitialDataRetrieved({ ...data, selections: { programId, orgUnitId } }),
         )
         .catch((error) => {
             log.error(errorCreator(errorMessages.WORKING_LIST_RETRIEVE_ERROR)({ error }));
@@ -94,16 +96,125 @@ const getUpdateWorkingListActionAsync = (
             return workingListUpdateRetrievalFailed(errorMessages.WORKING_LIST_UPDATE_ERROR);
         });
 
-export const retrieveWorkingListEpic = (action$: InputObservable, store: ReduxStore) =>
+const getArgumentsForUpdateWorkingListFromState = (state: ReduxState) => {
+    const { programId, orgUnitId } = state.workingListsContext.main;
+
+    const currentMeta = state.workingListsMeta.main;
+    const nextMeta = state.workingListsMeta.main.next;
+    const { rowsPerPage, currentPage, sortById, sortByDirection } = {
+        ...currentMeta,
+        ...nextMeta,
+    };
+
+    return [
+        programId,
+        orgUnitId,
+        rowsPerPage,
+        currentPage,
+        sortById,
+        sortByDirection,
+    ];
+};
+
+export const retrieveWorkingListOnMainSelectionsCompletedEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
     action$.ofType(
         mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
+    )
+        .switchMap(() => {
+            const { programId, orgUnitId } = store.getState().currentSelections;
+
+            const initialPromise = getInitialWorkingListActionAsync(programId, orgUnitId);
+            return fromPromise(initialPromise)
+                .takeUntil(
+                    action$.ofType(
+                        mainPageActionTypes.UPDATE_EVENT_LIST_AFTER_SAVE_OR_UPDATE_FOR_SINGLE_EVENT,
+                        newEventDataEntryActionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST,
+                        editEventDataEntryActionTypes.UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE,
+                        paginationActionTypes.CHANGE_PAGE,
+                        paginationActionTypes.CHANGE_ROWS_PER_PAGE,
+                        eventsListActionTypes.SORT_WORKING_LIST,
+                    ),
+                )
+                .takeUntil(
+                    action$
+                        .ofType(connectivityBatchActionTypes.GOING_ONLINE_EXECUTED_BATCH)
+                        .filter(actionBatch =>
+                            actionBatch.payload.some(action => action.type === connectivityActionTypes.GET_EVENT_LIST_ON_RECONNECT)),
+                );
+        });
+
+export const getWorkingListOnCancelSaveEpic = (action$: InputObservable, store: ReduxStore) =>
+    // $FlowSuppress
+    action$.ofType(
         newEventDataEntryActionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST,
         editEventDataEntryActionTypes.UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE,
     )
         .switchMap(() => {
             const { programId, orgUnitId } = store.getState().currentSelections;
-            return getInitialWorkingListActionAsync(programId, orgUnitId);
+
+            const initialPromise = getInitialWorkingListActionAsync(programId, orgUnitId);
+            return fromPromise(initialPromise)
+                .takeUntil(
+                    action$
+                        .ofType(
+                            mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
+                            mainPageActionTypes.UPDATE_EVENT_LIST_AFTER_SAVE_OR_UPDATE_FOR_SINGLE_EVENT,
+                            paginationActionTypes.CHANGE_PAGE,
+                            paginationActionTypes.CHANGE_ROWS_PER_PAGE,
+                            eventsListActionTypes.SORT_WORKING_LIST,
+                        ),
+                )
+                .takeUntil(
+                    action$
+                        .ofType(connectivityBatchActionTypes.GOING_ONLINE_EXECUTED_BATCH)
+                        .filter(actionBatch =>
+                            actionBatch.payload.some(action => action.type === connectivityActionTypes.GET_EVENT_LIST_ON_RECONNECT)),
+                );
+        });
+
+export const getWorkingListOnSaveEpic = (action$: InputObservable, store: ReduxStore) =>
+    // $FlowSuppress
+    action$.ofType(
+        mainPageActionTypes.UPDATE_EVENT_LIST_AFTER_SAVE_OR_UPDATE_FOR_SINGLE_EVENT,
+    )
+        .switchMap(() => {
+            const state = store.getState();
+            const listSelections = state.workingListsContext.main;
+            const programId = state.currentSelections.programId;
+            const orgUnitId = state.currentSelections.orgUnitId;
+
+            const cancelActionTypes = [
+                mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
+                newEventDataEntryActionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST,
+                editEventDataEntryActionTypes.UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE,
+                paginationActionTypes.CHANGE_PAGE,
+                paginationActionTypes.CHANGE_ROWS_PER_PAGE,
+                eventsListActionTypes.SORT_WORKING_LIST,
+            ];
+
+            if (listSelections && isSelectionsEqual(state.currentSelections, listSelections)) {
+                const argsForUpdate = getArgumentsForUpdateWorkingListFromState(state);
+                const updatePromise = getUpdateWorkingListActionAsync(...argsForUpdate);
+                return fromPromise(updatePromise)
+                    .takeUntil(action$.ofType(...cancelActionTypes))
+                    .takeUntil(
+                        action$
+                            .ofType(connectivityBatchActionTypes.GOING_ONLINE_EXECUTED_BATCH)
+                            .filter(actionBatch =>
+                                actionBatch.payload.some(action => action.type === connectivityActionTypes.GET_EVENT_LIST_ON_RECONNECT)),
+                    );
+            }
+
+            const initialPromise = getInitialWorkingListActionAsync(programId, orgUnitId);
+            return fromPromise(initialPromise)
+                .takeUntil(action$.ofType(...cancelActionTypes))
+                .takeUntil(
+                    action$
+                        .ofType(connectivityBatchActionTypes.GOING_ONLINE_EXECUTED_BATCH)
+                        .filter(actionBatch =>
+                            actionBatch.payload.some(action => action.type === connectivityActionTypes.GET_EVENT_LIST_ON_RECONNECT)),
+                );
         });
 
 export const updateWorkingListEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -112,28 +223,61 @@ export const updateWorkingListEpic = (action$: InputObservable, store: ReduxStor
         paginationActionTypes.CHANGE_PAGE,
         paginationActionTypes.CHANGE_ROWS_PER_PAGE,
         eventsListActionTypes.SORT_WORKING_LIST,
-        newEventDataEntryActionTypes.NEW_EVENT_SAVED_AFTER_RETURNED_TO_MAIN_PAGE,
-        editEventDataEntryActionTypes.EVENT_UPDATED_AFTER_RETURN_TO_MAIN_PAGE,
     )
         .switchMap((action) => {
             const state = store.getState();
-            const { programId, orgUnitId } = state.currentSelections;
+            const argsForUpdate = getArgumentsForUpdateWorkingListFromState(state);
+            const updatePromise = getUpdateWorkingListActionAsync(...argsForUpdate);
+            return fromPromise(updatePromise)
+                .takeUntil(action$.ofType(
+                    mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
+                    newEventDataEntryActionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST,
+                    editEventDataEntryActionTypes.UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE,
+                    mainPageActionTypes.UPDATE_EVENT_LIST_AFTER_SAVE_OR_UPDATE_FOR_SINGLE_EVENT,
+                ))
+                .takeUntil(
+                    action$
+                        .ofType(connectivityBatchActionTypes.GOING_ONLINE_EXECUTED_BATCH)
+                        .filter(actionBatch =>
+                            actionBatch.payload.some(action => action.type === connectivityActionTypes.GET_EVENT_LIST_ON_RECONNECT)),
+                );
+        });
 
-            if (action.type === newEventDataEntryActionTypes.NEW_EVENT_SAVED_AFTER_RETURNED_TO_MAIN_PAGE ||
-                action.type === editEventDataEntryActionTypes.EVENT_UPDATED_AFTER_RETURN_TO_MAIN_PAGE) {
-                const isListLoaded = !!state.workingListsUI.main.hasBeenLoaded;
-                if (!isListLoaded) {
-                    return getInitialWorkingListActionAsync(programId, orgUnitId);
-                }
+export const getEventListOnReconnectEpic = (action$: InputObservable, store: ReduxStore) =>
+    // $FlowSuppress
+    action$.ofType(
+        connectivityBatchActionTypes.GOING_ONLINE_EXECUTED_BATCH,
+    )
+        .filter(actionBatch =>
+            actionBatch.payload.some(action => action.type === connectivityActionTypes.GET_EVENT_LIST_ON_RECONNECT))
+        .switchMap(() => {
+            const state = store.getState();
+
+            const currentSelections = {
+                programId: state.currentSelections.programId,
+                orgUnitId: state.currentSelections.orgUnitId,
+            };
+
+            const listSelections = state.workingListsContext.main;
+
+            const cancelActionTypes = [
+                mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
+                newEventDataEntryActionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST,
+                editEventDataEntryActionTypes.UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE,
+                mainPageActionTypes.UPDATE_EVENT_LIST_AFTER_SAVE_OR_UPDATE_FOR_SINGLE_EVENT,
+                paginationActionTypes.CHANGE_PAGE,
+                paginationActionTypes.CHANGE_ROWS_PER_PAGE,
+                eventsListActionTypes.SORT_WORKING_LIST,
+            ];
+
+            if (listSelections && isSelectionsEqual(currentSelections, listSelections)) {
+                const argsForUpdate = getArgumentsForUpdateWorkingListFromState(state);
+                const updatePromise = getUpdateWorkingListActionAsync(...argsForUpdate);
+                return fromPromise(updatePromise)
+                    .takeUntil(action$.ofType(...cancelActionTypes));
             }
 
-            const { rowsPerPage, currentPage, sortById, sortByDirection } = state.workingListsMeta.main;
-            return getUpdateWorkingListActionAsync(
-                programId,
-                orgUnitId,
-                rowsPerPage,
-                currentPage,
-                sortById,
-                sortByDirection,
-            );
+            const initialPromise = getInitialWorkingListActionAsync(currentSelections.programId, currentSelections.orgUnitId);
+            return fromPromise(initialPromise)
+                .takeUntil(action$.ofType(...cancelActionTypes));
         });

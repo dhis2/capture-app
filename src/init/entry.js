@@ -11,10 +11,7 @@ import { LoadingMask } from '@dhis2/d2-ui-core';
 
 import environments from 'capture-core/constants/environments';
 
-// TEST
-// import { startEnrollmentLoad } from 'capture-core/actions/__TEMP__/enrollment.actions';
-// END TEST
-
+import './addRxjsOperators';
 import App from '../components/App/App.component';
 import getStore from '../getStore';
 import { initialize } from './init';
@@ -27,7 +24,7 @@ async function runApp(domElement: HTMLElement) {
         <D2UIApp>
             <LoadingMask />
         </D2UIApp>,
-        domElement
+        domElement,
     );
 
     try {
@@ -37,10 +34,6 @@ async function runApp(domElement: HTMLElement) {
         const store = getStore(history);
 
         store.dispatch(startupDataLoad());
-
-        // START TEST
-        // store.dispatch(startEnrollmentLoad());
-        // END TEST
 
         window.addEventListener("beforeunload", function (e) {
             if (store.getState().offline.outbox.length > 0) {

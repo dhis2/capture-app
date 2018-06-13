@@ -31,8 +31,11 @@ import {
     cancelNewEventIncompleteSelectionsLocationChangeEpic,
 } from 'capture-core/components/Pages/NewEvent/DataEntry/epics/cancelNewSingleEventSelectionsIncomplete.epics';
 import {
-    retrieveWorkingListEpic,
+    retrieveWorkingListOnMainSelectionsCompletedEpic,
+    getWorkingListOnCancelSaveEpic,
+    getWorkingListOnSaveEpic,
     updateWorkingListEpic,
+    getEventListOnReconnectEpic,
 } from 'capture-core/components/Pages/MainPage/EventsList/eventsList.epics';
 import {
     getEventFromUrlEpic,
@@ -52,18 +55,27 @@ import {
     cancelEditEventEpic,
     cancelEditEventLocationChangeEpic,
 } from 'capture-core/components/Pages/EditEvent/DataEntry/epics/cancelEditSingleEvent.epics';
+import {
+    goingOnlineEpic,
+} from 'capture-core/components/Connectivity/connectivity.epics';
+import {
+    updateEventListAfterSaveOrUpdateEventEpic,
+} from 'capture-core/components/Pages/MainPage/mainPage.epics';
+import {
+    networkMonitorStatusEpic,
+} from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.epics';
 
 import { loadStartupData } from '../init/entry.epics';
-import {
-    networkMonitorStatusEpic
-} from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.epics.js';
 
 export default combineEpics(
     loadStartupData,
     mainSelectionsCompletedEpic,
     orgUnitDataRetrivedEpic,
-    retrieveWorkingListEpic,
+    retrieveWorkingListOnMainSelectionsCompletedEpic,
+    getWorkingListOnCancelSaveEpic,
+    getWorkingListOnSaveEpic,
     updateWorkingListEpic,
+    getEventListOnReconnectEpic,
     mainSelectionsFromUrlGetOrgUnitDataEpic,
     mainSelectionsFromUrlEmptyOrgUnitEpic,
     mainSelectionsFromUrlValidationEpic,
@@ -89,4 +101,6 @@ export default combineEpics(
     openEditPageLocationChangeEpic,
     getEventOpeningFromEventListEpic,
     networkMonitorStatusEpic,
+    goingOnlineEpic,
+    updateEventListAfterSaveOrUpdateEventEpic,
 );
