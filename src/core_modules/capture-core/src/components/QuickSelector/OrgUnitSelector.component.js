@@ -13,6 +13,13 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Paper from '@material-ui/core/Paper';
 
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 
@@ -72,23 +79,30 @@ const styles = () => ({
 type Props = {
     handleClickOrgUnit: (orgUnitId: string, orgUnitObject: Object) => void,
     selectedOrgUint: string,
+    showWarning: boolean,
     storedOrgUnits: Object,
     classes: Object,
 };
 
 class OrgUnitSelector extends Component<Props> {
+    handleShowWarning: () => void;
+    handleClose: () => void;
     handleClick: (orgUnit: Object) => void;
     handleReset: () => void;
     state: {
         roots: Array;
+        open: false;
     };
     constructor(props) {
         super(props);
 
         this.state = {
-			roots: [],
+            roots: [],
+            open: false,
 		};
 
+        this.handleShowWarning = this.handleShowWarning.bind(this);
+        this.handleClose = this.handleClose.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleReset = this.handleReset.bind(this);
 
@@ -102,6 +116,18 @@ class OrgUnitSelector extends Component<Props> {
             roots
         }));
     }
+
+    handleShowWarning() {
+        if (this.props.showWarning) {
+            this.setState({ open: true });
+        } else {
+            this.handleReset();
+        }
+    };
+
+    handleClose() {
+        this.setState({ open: false });
+    };
 
     handleClick(event, selectedOu) {
         const orgUnitObject = {id: selectedOu.id, name: selectedOu.displayName, path: selectedOu.path};
@@ -120,11 +146,30 @@ class OrgUnitSelector extends Component<Props> {
                     <Paper elevation={1} className={this.props.classes.selectedPaper}>
                         <h4 className={this.props.classes.title}>{ getTranslation('selected_orgunit') }</h4>
                         <p className={this.props.classes.selectedText}>{this.props.storedOrgUnits[this.props.selectedOrgUint].name}
-                            <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleReset()}>
+                            <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleShowWarning()}>
                                 <ClearIcon className={this.props.classes.selectedButtonIcon} />
                             </IconButton>
                         </p>
                     </Paper>
+                    <Dialog
+                        open={this.state.open}
+                        onClose={this.handleClose}
+                    >
+                        <DialogTitle>{"Start Again"}</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                Are you sure? All unsaved data will be lost.
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={this.handleClose} color="secondary">
+                                Cancel
+                            </Button>
+                            <Button onClick={this.handleReset} color="primary" autoFocus>
+                                Accept
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                 </div>
             );
         }

@@ -52,9 +52,9 @@ class ActionButtons extends Component<Props> {
 
     handleStartAgainClick = () => {
         if (this.props.showWarning) {
-            this.props.handleClickStartAgainButton();
-        } else {
             this.setState({ open: true });
+        } else {
+            this.props.handleClickStartAgainButton();
         }
     };
 
