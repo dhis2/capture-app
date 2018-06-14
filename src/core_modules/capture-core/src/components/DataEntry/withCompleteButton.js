@@ -14,7 +14,7 @@ import Button from '../Buttons/Button.component';
 import ProgressButton from '../Buttons/ProgressButton.component';
 import DataEntry from './DataEntry.component';
 import errorCreator from '../../utils/errorCreator';
-import { getTranslation } from '../../d2/d2Instance';
+import i18n from '@dhis2/d2-i18n';
 import { formatterOptions } from '../../utils/string/format.const';
 import { startCompleteEvent, completeValidationFailed, completeAbort } from './actions/dataEntry.actions';
 import getDataEntryKey from './common/getDataEntryKey';
@@ -220,7 +220,7 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
                                 color={options.color || 'primary'}
                                 inProgress={!!finalInProgress}
                             >
-                                { getTranslation('complete', formatterOptions.CAPITALIZE_FIRST_LETTER) }
+                                { i18n.t('Complete') }
                             </ProgressButton>
                         }
                         {...passOnProps}
@@ -231,7 +231,7 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
                         onClose={this.handleCloseDialog}
                     >
                         <DialogTitle id="complete-dialog-title">
-                            {getTranslation('warnings_found')}
+                            {i18n.t('Warnings found')}
                         </DialogTitle>
                         <DialogContent>
                             <DialogContentText>
@@ -240,10 +240,10 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={this.handleCloseDialog} color="primary">
-                                {getTranslation('abort')}
+                                {i18n.t('Abort')}
                             </Button>
                             <Button onClick={this.handleCompleteDialog} color="primary" autoFocus>
-                                {getTranslation('complete')}
+                                {i18n.t('Complete')}
                             </Button>
                         </DialogActions>
                     </Dialog>

@@ -6,7 +6,6 @@ import React, { Component } from 'react';
 
 import withLoadHandler from './withLoadHandler';
 import EventsList from './EventsList/EventsList.container';
-import QuickSelector from '../../QuickSelector/QuickSelector.container';
 import TempSelector from './TempSelector.container';
 
 type Props = {

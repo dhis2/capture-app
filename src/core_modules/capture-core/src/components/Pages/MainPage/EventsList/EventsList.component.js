@@ -8,8 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 
 import classNames from 'classnames';
 
-import { getTranslation } from '../../../../d2/d2Instance';
-import { formatterOptions } from '../../../../utils/string/format.const';
+import i18n from '@dhis2/d2-i18n';
 import elementTypes from '../../../../metaData/DataElement/elementTypes';
 
 import getTableComponents from '../../../d2Ui/dataTable/getTableComponents';
@@ -198,7 +197,7 @@ class EventsList extends Component<Props> {
                         colSpan={columnsCount}
                         className={classNames(classes.cell, classes.bodyCell)}
                     >
-                        {getTranslation('no_events_to_display', formatterOptions.CAPITALIZE_FIRST_LETTER)}
+                        {i18n.t('No events to display')}
                     </Cell>
                 </Row>
             );
@@ -285,7 +284,7 @@ class EventsList extends Component<Props> {
                     className={classes.paginationContainer}
                 >
                     <EventListPagination
-                        rowsCountSelectorLabel={getTranslation('rows_per_page', formatterOptions.CAPITALIZE_FIRST_LETTER)}
+                        rowsCountSelectorLabel={i18n.t('Rows per page')}
                         onGetLabelDisplayedRows={this.getPaginationLabelDisplayedRows}
                     />
                 </div>

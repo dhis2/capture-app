@@ -4,7 +4,7 @@ import log from 'loglevel';
 import isString from 'd2-utilizr/lib/isString';
 import isObject from 'd2-utilizr/lib/isObject';
 import errorCreator from '../../utils/errorCreator';
-import { getTranslation } from '../../d2/d2Instance';
+import i18n from '@dhis2/d2-i18n';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as feedbackActionTypes } from '../../components/FeedbackBar/actions/feedback.actions';
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
@@ -51,10 +51,10 @@ export const feedbackDesc = createReducerDescription({
         const error = action.payload;
         const errorMessage = isString(error) ? error : error.message;
         const errorObject = isObject(error) ? error : null;
-        log.error(errorCreator(errorMessage || getTranslation('error_saving_event_log'))(errorObject));
+        log.error(errorCreator(errorMessage || i18n.t('Error saving event'))(errorObject));
         const newState = [
             ...state,
-            getErrorFeedback(getTranslation('error_saving_event_user')),
+            getErrorFeedback(i18n.t('Could not save event. See log for details')),
         ];
         return newState;
     },
@@ -62,10 +62,10 @@ export const feedbackDesc = createReducerDescription({
         const error = action.payload;
         const errorMessage = isString(error) ? error : error.message;
         const errorObject = isObject(error) ? error : null;
-        log.error(errorCreator(errorMessage || getTranslation('error_saving_event_log'))(errorObject));
+        log.error(errorCreator(errorMessage || i18n.t('Error saving event'))(errorObject));
         const newState = [
             ...state,
-            getErrorFeedback(getTranslation('error_saving_event_user')),
+            getErrorFeedback(i18n.t('Could not save event. See log for details')),
         ];
         return newState;
     },
