@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-06-11T17:30:30.072Z\n"
-"PO-Revision-Date: 2018-06-11T17:30:30.072Z\n"
+"POT-Creation-Date: 2018-06-14T18:12:07.128Z\n"
+"PO-Revision-Date: 2018-06-14T18:12:07.128Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -63,6 +63,9 @@ msgid "No events to display"
 msgstr ""
 
 msgid "Rows per page"
+msgstr ""
+
+msgid "Data for offline event list not present"
 msgstr ""
 
 msgid "Could not get organisation unit"

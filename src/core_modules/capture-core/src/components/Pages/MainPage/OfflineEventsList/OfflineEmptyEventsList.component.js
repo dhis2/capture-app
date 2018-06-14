@@ -2,8 +2,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator';
-import { getTranslation } from '../../../../d2/d2Instance';
-import { formatterOptions } from '../../../../utils/string/format.const';
+import i18n from '@dhis2/d2-i18n';
 
 const getStyles = theme => ({
     container: {
@@ -29,7 +28,7 @@ const OfflineEmptyEventsList = (props: Props) => (
     <div
         className={props.classes.container}
     >
-        {getTranslation('data_for_offline_event_list_not_present', formatterOptions.CAPITALIZE_FIRST_LETTER)}
+        {i18n.t('Data for offline event list not present')}
     </div>
 );
 

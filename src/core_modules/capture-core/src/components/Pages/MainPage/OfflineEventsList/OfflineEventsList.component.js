@@ -4,8 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator';
 import classNames from 'classnames';
 
-import { getTranslation } from '../../../../d2/d2Instance';
-import { formatterOptions } from '../../../../utils/string/format.const';
+import i18n from '@dhis2/d2-i18n';
 import elementTypes from '../../../../metaData/DataElement/elementTypes';
 
 import getTableComponents from '../../../d2Ui/dataTable/getTableComponents';
@@ -161,7 +160,7 @@ class OfflineEventsList extends Component<Props> {
                         colSpan={columnsCount}
                         className={classNames(classes.cell, classes.bodyCell)}
                     >
-                        {getTranslation('no_events_to_display', formatterOptions.CAPITALIZE_FIRST_LETTER)}
+                        {i18n.t('No events to display')}
                     </Cell>
                 </Row>
             );
