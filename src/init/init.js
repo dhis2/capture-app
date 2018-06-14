@@ -7,7 +7,6 @@ import moment from 'capture-core/utils/moment/momentResolver';
 import CurrentLocaleData from 'capture-core/utils/localeData/CurrentLocaleData';
 import { setD2 } from 'capture-core/d2/d2Instance';
 import i18n from '@dhis2/d2-i18n';
-import { formatterOptions } from 'capture-core/utils/string/format.const';
 
 import loadMetaData from 'capture-core/metaDataStoreLoaders/baseLoader/metaDataLoader';
 import buildMetaData from 'capture-core/metaDataMemoryStoreBuilders/baseBuilder/metaDataBuilder';
@@ -56,33 +55,48 @@ function setLocaleData(uiLocale: string) { //eslint-disable-line
 
     changeLocale(locale);
 
-    let dateFnLocale;
-    try {
-        // this should be replaced with a dynamic import
-        dateFnLocale = require(`date-fns/locale/${locale}`);
-    } catch (error) {
-        log.error(`could not get date-fns locale for ${locale}`);
-        dateFnLocale = require('date-fns/locale/en');
-    }
-    
     const weekdays = moment.weekdays();
     const weekdaysShort = moment.weekdaysShort();
     // $FlowSuppress
     const firstDayOfWeek = moment.localeData()._week.dow; //eslint-disable-line
-    const localeData: LocaleDataType = {
-        dateFnsLocale: dateFnLocale,
-        weekDays: weekdays,
-        weekDaysShort: weekdaysShort,
-        calendarFormatHeaderLong: 'dddd D MMM',
-        calendarFormatHeaderShort: 'D MMM',
-        selectDatesText: i18n.t('Choose one or more dates...'),
-        selectDateText: i18n.t('Choose a date...'),
-        todayLabelShort: i18n.t('Today'),
-        todayLabelLong: i18n.t('Today'),
-        weekStartsOn: firstDayOfWeek,
-    };
 
-    CurrentLocaleData.set(localeData);
+    import(`date-fns/locale/${locale}`).then(dateFnLocale => {
+        const localeData: LocaleDataType = {
+            dateFnsLocale: dateFnLocale,
+            weekDays: weekdays,
+            weekDaysShort: weekdaysShort,
+            calendarFormatHeaderLong: 'dddd D MMM',
+            calendarFormatHeaderShort: 'D MMM',
+            selectDatesText: i18n.t('Choose one or more dates...'),
+            selectDateText: i18n.t('Choose a date...'),
+            todayLabelShort: i18n.t('Today'),
+            todayLabelLong: i18n.t('Today'),
+            weekStartsOn: firstDayOfWeek,
+        };
+
+        log.info(`got date-fns locale for ${locale}`);
+        CurrentLocaleData.set(localeData);
+    }).catch(e => {
+        log.error(`could not get date-fns locale for ${locale}`);
+        import('date-fns/locale/en').then(dateFnLocale => {
+            const localeData: LocaleDataType = {
+                dateFnsLocale: dateFnLocale,
+                weekDays: weekdays,
+                weekDaysShort: weekdaysShort,
+                calendarFormatHeaderLong: 'dddd D MMM',
+                calendarFormatHeaderShort: 'D MMM',
+                selectDatesText: i18n.t('Choose one or more dates...'),
+                selectDateText: i18n.t('Choose a date...'),
+                todayLabelShort: i18n.t('Today'),
+                todayLabelLong: i18n.t('Today'),
+                weekStartsOn: firstDayOfWeek,
+            };
+
+            CurrentLocaleData.set(localeData);
+        }).catch(e => {
+            log.error(`could not get the fallback date-fns locale for ${locale}`);
+        })
+    })
 }
 
 /*
