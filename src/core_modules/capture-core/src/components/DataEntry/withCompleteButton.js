@@ -15,7 +15,6 @@ import ProgressButton from '../Buttons/ProgressButton.component';
 import DataEntry from './DataEntry.component';
 import errorCreator from '../../utils/errorCreator';
 import i18n from '@dhis2/d2-i18n';
-import { formatterOptions } from '../../utils/string/format.const';
 import { startCompleteEvent, completeValidationFailed, completeAbort } from './actions/dataEntry.actions';
 import getDataEntryKey from './common/getDataEntryKey';
 

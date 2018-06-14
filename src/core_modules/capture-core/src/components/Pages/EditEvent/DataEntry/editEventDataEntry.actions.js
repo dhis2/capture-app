@@ -8,6 +8,7 @@ import {
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import Program from '../../../../metaData/Program/Program';
 import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
+import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 
 import type { ClientEventContainer } from '../../../../events/eventRequests';
 
@@ -60,6 +61,7 @@ export const openEventForEditInDataEntry =
             {
                 id: 'eventDate',
                 type: 'DATE',
+                validatorContainers: getEventDateValidatorContainers(),
             },
             {
                 inId: 'status',

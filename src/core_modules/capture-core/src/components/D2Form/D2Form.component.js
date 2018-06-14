@@ -1,8 +1,11 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import log from 'loglevel';
+import errorCreator from '../../utils/errorCreator';
 
-import D2Section from './D2Section.container';
+import D2SectionContainer from './D2Section.container';
+import D2Section from './D2Section.component';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 
 const styles = () => ({
@@ -34,18 +37,24 @@ export class D2Form extends Component<Props> {
         return Array.from(this.sectionInstances.entries())
             .map(entry => entry[1])
             .every((sectionInstance: D2Section) => {
-                if (sectionInstance &&
-                    sectionInstance.getWrappedInstance() &&
-                    sectionInstance.getWrappedInstance().sectionFieldsInstance &&
-                    sectionInstance.getWrappedInstance().sectionFieldsInstance.getWrappedInstance()) {
+                try {
                     const sectionFieldsInstance = sectionInstance
-                        .getWrappedInstance()
                         .sectionFieldsInstance
                         .getWrappedInstance();
 
                     return sectionFieldsInstance.isValid();
+                } catch (error) {
+                    log.error(
+                        errorCreator(
+                            'could not get section fields instance')(
+                            {
+                                method: 'validateForm',
+                                object: this,
+                            },
+                        ),
+                    );
+                    return true;
                 }
-                return true;
             });
     }
 
@@ -53,18 +62,24 @@ export class D2Form extends Component<Props> {
         return Array.from(this.sectionInstances.entries())
             .map(entry => entry[1])
             .reduce((failedFormFields: Array<any>, sectionInstance: D2Section) => {
-                if (sectionInstance &&
-                    sectionInstance.getWrappedInstance() &&
-                    sectionInstance.getWrappedInstance().sectionFieldsInstance &&
-                    sectionInstance.getWrappedInstance().sectionFieldsInstance.getWrappedInstance()) {
+                try {
                     const sectionFieldsInstance = sectionInstance
-                        .getWrappedInstance()
                         .sectionFieldsInstance
                         .getWrappedInstance();
 
                     if (!sectionFieldsInstance.isValid()) {
                         failedFormFields = [...failedFormFields, ...sectionFieldsInstance.getInvalidFields()];
                     }
+                } catch (error) {
+                    log.error(
+                        errorCreator(
+                            'could not get section fields instance')(
+                            {
+                                method: 'validateFormReturningFailedFields',
+                                object: this,
+                            },
+                        ),
+                    );
                 }
                 return failedFormFields;
             }, []);
@@ -109,8 +124,8 @@ export class D2Form extends Component<Props> {
                 className={classes.container}
                 key={section.id}
             >
-                <D2Section
-                    ref={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
+                <D2SectionContainer
+                    innerRef={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
                     sectionMetaData={section}
                     formId={this.getFormId()}
                     formBuilderId={this.getFormBuilderId(section.id)}

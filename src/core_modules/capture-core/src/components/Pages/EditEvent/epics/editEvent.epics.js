@@ -21,20 +21,18 @@ export const getEventOpeningFromEventListEpic = (action$: InputObservable, store
     // $FlowSuppress
     action$.ofType(eventListActionTypes.OPEN_EDIT_EVENT_PAGE)
         .map((action) => {
+            const eventId = action.payload;
             const state = store.getState();
-            const event = state.events[action.payload];
-            const values = state.eventsValues[action.payload];
+            const event = state.events[eventId];
+            const values = state.eventsValues[eventId];
             const eventContainer = {
                 event,
                 values,
                 id: event.eventId,
             };
 
-            // TODO: GET ORGUNIT FROM STATE
-            return startOpenEventForEditInDataEntry(eventContainer, {
-                id: 'Rp268JB6Ne4',
-                name: 'Adonkia CHP',
-            });
+            const orgUnit = state.organisationUnits[event.orgUnitId];
+            return startOpenEventForEditInDataEntry(eventContainer, orgUnit);
         });
 
 export const getEventFromUrlEpic = (action$: InputObservable) =>

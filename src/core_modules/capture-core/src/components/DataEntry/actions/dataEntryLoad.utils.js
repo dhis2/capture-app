@@ -3,9 +3,13 @@ import DataElement from '../../../metaData/DataElement/DataElement';
 import { convertValue } from '../../../converters/clientToForm';
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 
+import { getValidationErrors } from '../dataEntryField/dataEntryField.utils';
+import type { ValidatorContainer } from '../dataEntryField/dataEntryField.utils';
+
 type DataEntryPropToIncludeStandard = {|
     id: string,
     type: string,
+    validatorContainers?: ?Array<ValidatorContainer>,
 |};
 
 type DataEntryPropToIncludeSpecial = {|
@@ -13,6 +17,7 @@ type DataEntryPropToIncludeSpecial = {|
     outId: string,
     onConvertIn: (value: any) => any,
     onConvertOut: (dataEntryValue: any, prevValue: any) => any,
+    validatorContainers?: ?Array<ValidatorContainer>,
 |};
 
 export type DataEntryPropToInclude = DataEntryPropToIncludeStandard | DataEntryPropToIncludeSpecial;
@@ -69,4 +74,25 @@ export function getFormValues(
 ) {
     const convertedValues = formFoundation.convertValues(clientValuesForForm, convertValue);
     return convertedValues;
+}
+
+export function validateDataEntryValues(
+    values: {[key: string]: any},
+    dataEntryPropsToInclude: Array<DataEntryPropToInclude>,
+) {
+    return dataEntryPropsToInclude
+        .reduce((accValidations, propToInclude) => {
+            // $FlowSuppress
+            const id = propToInclude.outId || propToInclude.id;
+            const value = values[id];
+            const validatorContainers = propToInclude.validatorContainers;
+            const validationErrors = getValidationErrors(value, validatorContainers);
+
+            accValidations[id] = {
+                isValid: validationErrors.length === 0,
+                validationError: validationErrors.length > 0 ? validationErrors[0] : null,
+            };
+
+            return accValidations;
+        }, {});
 }

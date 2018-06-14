@@ -16,7 +16,6 @@ import QuickSelector from 'capture-core/components/QuickSelector/QuickSelector.c
 import withDefaultShouldUpdateInterface from
     'capture-core/components/DataEntry/eventField/withDefaultShouldUpdateInterface';
 import isValidDate from 'capture-core/utils/validators/date.validator';
-import { formatterOptions } from 'capture-core/utils/string/format.const';
 import { placements } from 'capture-core/components/DataEntry/eventField/eventField.const';
 
 import i18n from '@dhis2/d2-i18n';

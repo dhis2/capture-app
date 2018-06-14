@@ -41,10 +41,12 @@ export const editEventPageDesc = createReducerDescription({
         newState.dataEntryLoadError = action.payload;
         return newState;
     },
-    [eventListActionTypes.OPEN_EDIT_EVENT_PAGE]: (state) => {
+    [eventListActionTypes.OPEN_EDIT_EVENT_PAGE]: (state, action) => {
         const newState = {
             ...state,
+            eventId: action.payload,
             dataEntryIsLoading: true,
+            loadError: null,
         };
         return newState;
     },

@@ -39,6 +39,10 @@ const errorMessages = {
 };
 
 function getValuesById(apiDataValues: Array<ApiDataValue>) {
+    if (!apiDataValues) {
+        return apiDataValues;
+    }
+
     return apiDataValues.reduce((accValues, dataValue) => {
         accValues[dataValue.dataElement] = dataValue.value;
         return accValues;
@@ -101,7 +105,7 @@ function convertToClientEvent(event: ApiTEIEvent) {
     return {
         id: convertedMainProperties.eventId,
         event: convertedMainProperties,
-        values: convertedDataValues,
+        values: convertedDataValues || {},
     };
 }
 

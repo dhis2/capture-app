@@ -31,6 +31,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         dispatch(sortWorkingList(id, direction));
     },
     onRowClick: (rowData: {eventId: string}) => {
+        window.scrollTo(0, 0);
         dispatch(openEditEventPage(rowData.eventId));
     },
 });

@@ -4,13 +4,9 @@ import { connect } from 'react-redux';
 import { updateField } from '../actions/dataEntry.actions';
 import getDataEntryKey from '../common/getDataEntryKey';
 import { placements } from './dataEntryField.const';
+import { getValidationErrors } from './dataEntryField.utils';
 
-type Validator = (value: any) => boolean;
-
-type ValidatorContainer = {
-    validator: Validator,
-    message: string,
-};
+import type { ValidatorContainer } from './dataEntryField.utils';
 
 type Settings = {
     component: React.ComponentType<any>,
@@ -90,25 +86,8 @@ const getDataEntryField = (InnerComponent: React.ComponentType<any>) =>
             }
         }
 
-        getValidationErrors(value: any) {
-            const validatorContainers = this.props.settings.validatorContainers;
-
-            if (!validatorContainers) {
-                return [];
-            }
-
-            return validatorContainers.reduce((accErrors, validatorContainer) => {
-                const validator = validatorContainer.validator;
-                const isValid = validator(value);
-                if (!isValid) {
-                    accErrors.push(validatorContainer.message);
-                }
-                return accErrors;
-            }, []);
-        }
-
         handleBlur(value: any, options?: ?Options) {
-            const validationErrors = this.getValidationErrors(value);
+            const validationErrors = getValidationErrors(value, this.props.settings.validatorContainers);
             this.props.onUpdateField(value, {
                 isValid: validationErrors.length === 0,
                 validationError: validationErrors.length > 0 ? validationErrors[0] : null,
