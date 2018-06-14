@@ -1,7 +1,14 @@
 const cssModDev = {
     test: /\.mod\.css$/,
     use: [
-        require.resolve('style-loader'),
+        {
+            loader: require.resolve('style-loader'),
+            options: {
+                insertAt: {
+                    before: '#css-mod-insertion-point',
+                },
+            },
+        },
         {
             loader: require.resolve('css-loader'),
             options: {
