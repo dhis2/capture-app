@@ -47,6 +47,7 @@
     "typeface-roboto": "^0.0.54"
   },
   "scripts": {
+    "manualBuild": "mkdirp buildzip/ && pushd build && bestzip ../buildzip/NewCaptureApp.zip * && popd",
     "start": "react-app-rewired start",
     "build": "yarn localize && react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
