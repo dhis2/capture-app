@@ -2,6 +2,12 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
 import SearchIcon from '@material-ui/icons/Search';
@@ -23,9 +29,10 @@ const styles = () => ({
 });
 
 type Props = {
-    handleClickActionButton: () => void,
+    handleClickStartAgainButton: () => void,
     selectedProgram: string,
     selectedOrgUnitId: string,
+    showWarning: boolean,
     classes: Object,
 };
 
@@ -33,45 +40,91 @@ class ActionButtons extends Component<Props> {
     handleClick: () => void;
     constructor(props) {
         super(props);
-        this.handleClick = this.handleClick.bind(this);
+        this.handleStartAgainClick = this.handleStartAgainClick.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.handleAcceptClick = this.handleAcceptClick.bind(this);
+        this.dialogElement = this.dialogElement.bind(this);
+
+        this.state = {
+            open: false,
+        };
     }
 
-    handleClick() {
-        this.props.handleClickActionButton();
+    handleStartAgainClick = () => {
+        if (this.props.showWarning) {
+            this.props.handleClickStartAgainButton();
+        } else {
+            this.setState({ open: true });
+        }
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
+    handleAcceptClick = () => {
+        this.props.handleClickStartAgainButton();
     }
 
+    dialogElement = () => {
+        return (
+            <Dialog
+                open={this.state.open}
+                onClose={this.handleClose}
+            >
+                <DialogTitle>{"Start Again"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Are you sure? All unsaved data will be lost.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={this.handleClose} color="secondary">
+                        Cancel
+                    </Button>
+                    <Button onClick={this.handleAcceptClick} color="primary" autoFocus>
+                        Accept
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        );
+    }
+
+    // TODO: Add translation.
     render() {
         if (!this.props.selectedProgram && !this.props.selectedOrgUnitId) {
             return (
                 <div className={this.props.classes.container}>
                     <Button
-                        onClick={this.handleClick}
+                        onClick={this.handleStartAgainClick}
                         color="primary"
                         className={this.props.classes.leftButton}
                     >
                         { getTranslation('start_again') }
                     </Button>
+                    {this.dialogElement()}
                 </div>
             );
         }
         return (
             <div className={this.props.classes.container}>
                 <Button
-                    onClick={this.handleClick}
+                    onClick={this.handleStartAgainClick}
                     color="primary"
                     className={this.props.classes.leftButton}
                 >
                     { getTranslation('start_again') }
                 </Button>
+                {this.dialogElement()}
                 <Button
-                    onClick={this.handleClick}
+                    onClick={this.handleStartAgainClick}
                     color="primary"
                 >
                     <AddIcon className={this.props.classes.rightButton} />
                     { getTranslation('new') }
                 </Button>
                 <Button
-                    onClick={this.handleClick}
+                    onClick={this.handleStartAgainClick}
                     color="primary"
                 >
                     <SearchIcon className={this.props.classes.rightButton} />
