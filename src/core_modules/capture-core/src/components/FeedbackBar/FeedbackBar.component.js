@@ -53,7 +53,7 @@ class FeedbackBar extends React.Component<Props> {
     }
 
     getAction() {
-        const { feedback, classes, theme } = this.props;
+        const { feedback, classes } = this.props;
 
         return (
             <span>
