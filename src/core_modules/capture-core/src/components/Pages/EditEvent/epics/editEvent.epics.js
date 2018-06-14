@@ -5,7 +5,7 @@ import errorCreator from '../../../../utils/errorCreator';
 import getErrorMessageAndDetails from '../../../../utils/errors/getErrorMessageAndDetails';
 import getOrganisationUnitApiSpec from '../../../../api/apiSpecifications/organisationUnit.apiSpecificationGetter';
 
-import { getTranslation } from '../../../../d2/d2Instance';
+import i18n from '@dhis2/d2-i18n';
 import {
     actionTypes as editEventActionTypes,
     eventFromUrlCouldNotBeRetrieved,
@@ -44,7 +44,7 @@ export const getEventFromUrlEpic = (action$: InputObservable) =>
                 .then((eventContainer) => {
                     if (!eventContainer) {
                         return eventFromUrlCouldNotBeRetrieved(
-                            getTranslation('error_loading_event_from_url_for_edit_event_user_message'));
+                            i18n.t('Event could not be loaded. Are you sure it exists?'));
                     }
                     return eventFromUrlRetrieved(eventContainer);
                 })
@@ -53,9 +53,9 @@ export const getEventFromUrlEpic = (action$: InputObservable) =>
                     log.error(
                         errorCreator(
                             message ||
-                            getTranslation('error_loading_event_from_url_for_edit_event_log_message'))(details));
+                            i18n.t('Event could not be loaded'))(details));
                     return eventFromUrlCouldNotBeRetrieved(
-                        getTranslation('error_loading_event_from_url_for_edit_event_user_message'));
+                        i18n.t('Event could not be loaded. Are you sure it exists?'));
                 });
         });
 
@@ -72,7 +72,7 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
                     const { message, details } = getErrorMessageAndDetails(error);
                     log.error(errorCreator(
                         message ||
-                        getTranslation('error_loading_orgunit_for_url_log_message'))(details));
+                        i18n.t('Organisation unit could not be loaded'))(details));
                     return orgUnitCouldNotBeRetrievedOnUrlUpdate(eventContainer);
                 });
         });

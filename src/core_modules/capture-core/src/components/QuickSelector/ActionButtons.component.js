@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
 import SearchIcon from '@material-ui/icons/Search';
 
-import { getTranslation } from '../../d2/d2Instance';
+import i18n from '@dhis2/d2-i18n';
 
 const styles = () => ({
     container: {
@@ -49,7 +49,7 @@ class ActionButtons extends Component<Props> {
                         color="primary"
                         className={this.props.classes.leftButton}
                     >
-                        { getTranslation('reset') }
+                        { i18n.t('Reset') }
                     </Button>
                 </div>
             );
@@ -61,21 +61,21 @@ class ActionButtons extends Component<Props> {
                     color="primary"
                     className={this.props.classes.leftButton}
                 >
-                    { getTranslation('reset') }
+                    { i18n.t('Reset') }
                 </Button>
                 <Button
                     onClick={this.handleClick}
                     color="primary"
                 >
                     <AddIcon className={this.props.classes.rightButton} />
-                    { getTranslation('new') }
+                    { i18n.t('New') }
                 </Button>
                 <Button
                     onClick={this.handleClick}
                     color="primary"
                 >
                     <SearchIcon className={this.props.classes.rightButton} />
-                    { getTranslation('find') }
+                    { i18n.t('Find') }
                 </Button>
             </div>
         );

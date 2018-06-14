@@ -2,8 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import InfoIcon from '@material-ui/icons/InfoOutline';
-import { getTranslation } from '../../../../d2/d2Instance';
-import { formatterOptions } from '../../../../utils/string/format.const';
+import i18n from '@dhis2/d2-i18n';
 import DataEntry from '../../../../components/DataEntry/DataEntry.container';
 import withSaveButton from '../../../../components/DataEntry/withSaveButton';
 import withCancelButton from '../../../../components/DataEntry/withCancelButton';
@@ -113,8 +112,8 @@ type Props = {
 class NewEventDataEntry extends Component<Props> {
     getSavingText() {
         const { classes, orgUnitName, programName } = this.props;
-        const firstPart = `${getTranslation('saving_to', formatterOptions.CAPITALIZE_FIRST_LETTER)} `;
-        const secondPart = ` ${getTranslation('in')} `;
+        const firstPart = `${i18n.t('Saving to')} `;
+        const secondPart = ` ${i18n.t('in')} `;
 
         return (
             <span>

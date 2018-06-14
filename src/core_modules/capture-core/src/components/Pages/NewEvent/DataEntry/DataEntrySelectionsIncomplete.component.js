@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Button from '../../../Buttons/Button.component';
-import { getTranslation } from '../../../../d2/d2Instance';
+import i18n from '@dhis2/d2-i18n';
 
 const getStyles = () => ({
     contents: {
@@ -34,11 +34,11 @@ class DataEntrySelectionsIncomplete extends Component<Props> {
         const { isProgramSelected, isOrgUnitSelected } = this.props;
 
         if (!isProgramSelected && !isOrgUnitSelected) {
-            text = getTranslation('select_a_registering_unit_and_program_to_get_started');
+            text = i18n.t('Select a registering unit and program above to get started');
         } else if (!isProgramSelected) {
-            text = getTranslation('select_a_program_to_start_reporting');
+            text = i18n.t('Select a program to start reporting');
         } else {
-            text = getTranslation('select_a_registering_unit_to_start_reporting');
+            text = i18n.t('Select a registering unit to start reporting');
         }
 
         return text;
@@ -64,14 +64,14 @@ class DataEntrySelectionsIncomplete extends Component<Props> {
                         color="primary"
                         disabled
                     >
-                        {getTranslation('save')}
+                        {i18n.t('Save')}
                     </Button>
                     <Button
                         variant="raised"
                         color="secondary"
                         onClick={onCancel}
                     >
-                        {getTranslation('cancel')}
+                        {i18n.t('Cancel')}
                     </Button>
                 </div>
             </div>

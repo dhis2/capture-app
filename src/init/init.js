@@ -5,11 +5,8 @@ import { init, config, getUserSettings, getManifest } from 'd2/lib/d2';
 import environments from 'capture-core/constants/environments';
 import moment from 'capture-core/utils/moment/momentResolver';
 import CurrentLocaleData from 'capture-core/utils/localeData/CurrentLocaleData';
-import { setD2, getTranslation } from 'capture-core/d2/d2Instance';
-import { formatterOptions } from 'capture-core/utils/string/format.const';
-
-
-import 'moment/locale/nb';
+import { setD2 } from 'capture-core/d2/d2Instance';
+import i18n from '@dhis2/d2-i18n';
 
 import loadMetaData from 'capture-core/metaDataStoreLoaders/baseLoader/metaDataLoader';
 import buildMetaData from 'capture-core/metaDataMemoryStoreBuilders/baseBuilder/metaDataBuilder';
@@ -40,62 +37,66 @@ async function initializeManifest() {
     log.info(`Loading: ${manifest.name} v${manifest.version}`);
 }
 
-function configI18n(keyUiLocale: string) {
-    const locale = keyUiLocale || 'en';
-    config.i18n.sources.add(`i18n/module/i18n_module_${locale}.properties`);
-    return keyUiLocale;
+function isLangRTL(code) {
+    const langs = ['ar', 'fa', 'ur']
+    const prefixed = langs.map(c => `${c}-`)
+    return langs.includes(code) || prefixed.filter(c => code.startsWith(c)).length > 0
 }
 
-// TODO: Make api-requests?
-function getLocaleSpecs(locale: string) {
-    const fallbackLocale = 'en';
-    let calculatedLocale = locale;
-    try {
-        if (locale !== 'en') {
-            require(`moment/locale/${locale}`);
-        }
-    } catch (error) {
-        log.error(`could not get moment locale for ${locale}`);
-        calculatedLocale = fallbackLocale;
-    }
-
-    let dateFnLocale;
-    try {
-        dateFnLocale = require(`date-fns/locale/${locale}`);
-    } catch (error) {
-        log.error(`could not get date-fns locale for ${locale}`);
-        dateFnLocale = require('date-fns/locale/en');
-        calculatedLocale = fallbackLocale;
-    }
-
-    return {
-        calculatedLocale,
-        dateFnLocale,
-    };
+function changeLocale(locale) {
+    moment.locale(locale)
+    i18n.changeLanguage(locale)
+    document.body.setAttribute('dir', isLangRTL(locale) ? 'rtl' : 'ltr')
 }
 
 function setLocaleData(uiLocale: string) { //eslint-disable-line
+    // this should be the user locale
     const locale = 'en';
-    const { calculatedLocale, dateFnLocale } = getLocaleSpecs(locale);
-    moment.locale(calculatedLocale);
+
+    changeLocale(locale);
+
     const weekdays = moment.weekdays();
     const weekdaysShort = moment.weekdaysShort();
     // $FlowSuppress
     const firstDayOfWeek = moment.localeData()._week.dow; //eslint-disable-line
-    const localeData: LocaleDataType = {
-        dateFnsLocale: dateFnLocale,
-        weekDays: weekdays,
-        weekDaysShort: weekdaysShort,
-        calendarFormatHeaderLong: 'dddd D MMM',
-        calendarFormatHeaderShort: 'D MMM',
-        selectDatesText: getTranslation('choose_one_or_more_dates', formatterOptions.CAPITALIZE_FIRST_LETTER),
-        selectDateText: getTranslation('choose_a_date', formatterOptions.CAPITALIZE_FIRST_LETTER),
-        todayLabelShort: getTranslation('today', formatterOptions.CAPITALIZE_FIRST_LETTER),
-        todayLabelLong: getTranslation('today', formatterOptions.CAPITALIZE_FIRST_LETTER),
-        weekStartsOn: firstDayOfWeek,
-    };
 
-    CurrentLocaleData.set(localeData);
+    import(`date-fns/locale/${locale}`).then(dateFnLocale => {
+        const localeData: LocaleDataType = {
+            dateFnsLocale: dateFnLocale,
+            weekDays: weekdays,
+            weekDaysShort: weekdaysShort,
+            calendarFormatHeaderLong: 'dddd D MMM',
+            calendarFormatHeaderShort: 'D MMM',
+            selectDatesText: i18n.t('Choose one or more dates...'),
+            selectDateText: i18n.t('Choose a date...'),
+            todayLabelShort: i18n.t('Today'),
+            todayLabelLong: i18n.t('Today'),
+            weekStartsOn: firstDayOfWeek,
+        };
+
+        log.info(`got date-fns locale for ${locale}`);
+        CurrentLocaleData.set(localeData);
+    }).catch(e => {
+        log.error(`could not get date-fns locale for ${locale}`);
+        import('date-fns/locale/en').then(dateFnLocale => {
+            const localeData: LocaleDataType = {
+                dateFnsLocale: dateFnLocale,
+                weekDays: weekdays,
+                weekDaysShort: weekdaysShort,
+                calendarFormatHeaderLong: 'dddd D MMM',
+                calendarFormatHeaderShort: 'D MMM',
+                selectDatesText: i18n.t('Choose one or more dates...'),
+                selectDateText: i18n.t('Choose a date...'),
+                todayLabelShort: i18n.t('Today'),
+                todayLabelLong: i18n.t('Today'),
+                weekStartsOn: firstDayOfWeek,
+            };
+
+            CurrentLocaleData.set(localeData);
+        }).catch(e => {
+            log.error(`could not get the fallback date-fns locale for ${locale}`);
+        })
+    })
 }
 
 /*
@@ -115,7 +116,6 @@ export async function initialize() {
 
     await initializeManifest();
     const userSettings = await getUserSettings();
-    configI18n(userSettings.keyUiLocale);
     const d2 = await init();
     setD2(d2);
     // const systemSettings = await getSystemSettings(d2);
@@ -125,4 +125,3 @@ export async function initialize() {
     setLocaleData(uiLocale);
     await initializeMetaData(dbLocale);
 }
-

@@ -16,9 +16,9 @@ import QuickSelector from 'capture-core/components/QuickSelector/QuickSelector.c
 import withDefaultShouldUpdateInterface from
     'capture-core/components/DataEntry/eventField/withDefaultShouldUpdateInterface';
 import isValidDate from 'capture-core/utils/validators/date.validator';
-import { getTranslation } from 'capture-core/d2/d2Instance';
-import { formatterOptions } from 'capture-core/utils/string/format.const';
 import { placements } from 'capture-core/components/DataEntry/eventField/eventField.const';
+
+import i18n from '@dhis2/d2-i18n';
 
 const getSaveOptions = () => ({
     color: 'primary',
@@ -53,12 +53,11 @@ const buildReportDateSettingsFn = () => {
             {
                 validator: Validators.wordToValidatorMap.get('required'),
                 message:
-                    getTranslation(
-                        Validators.wordToValidatorMap.get('required').message, formatterOptions.CAPITALIZE_FIRST_LETTER),
+                    i18n.t(Validators.wordToValidatorMap.get('required').message),
             },
             {
                 validator: preValidateDate,
-                message: getTranslation('value_should_be_a_valid_date', formatterOptions.CAPITALIZE_FIRST_LETTER),
+                message: i18n.t('Please provide a valid date'),
             },
         ],
     });

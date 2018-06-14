@@ -1,21 +1,23 @@
 {
-    "version": "0.1",
-    "name": "Capture",
-    "description": "Capture App",
-    "launch_path": "index.html",
-    "icons": {
-        "16": "/assets/icons/track16.png",
-        "48": "/assets/icons/track48.png",
-        "128": "/assets/icons/track128.png"
-    },
-    "developer": {
-        "name": "HISP",
-        "url": "http://dhis2.org"
-    },
-    "default_locale": "en",
-    "activities": {
-        "dhis": {
-            "href": "../../.."
-        }
+  "launch_path": "index.html",
+  "default_locale": "en",
+  "activities": {
+    "dhis": {
+      "href": "../../.."
     }
+  },
+  "appType": "APP",
+  "name": "Capture",
+  "version": "0.1",
+  "description": "Capture App",
+  "icons": {
+    "16": "/assets/icons/track16.png",
+    "48": "/assets/icons/track48.png",
+    "128": "/assets/icons/track128.png"
+  },
+  "developer": {
+    "name": "HISP",
+    "url": "http://dhis2.org"
+  },
+  "manifest_generated_at": "Thu Jun 14 2018 10:46:40 GMT+0200 (CEST)"
 }

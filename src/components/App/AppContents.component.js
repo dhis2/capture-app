@@ -8,6 +8,7 @@ import getD2 from 'capture-core/d2/d2Instance';
 import MainPage from 'capture-core/components/Pages/MainPage/MainPage.container';
 import NewEvent from 'capture-core/components/Pages/NewEvent/NewEvent.container';
 import EditEvent from 'capture-core/components/Pages/EditEvent/EditEvent.container';
+import NetworkStatusBadge from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.component';
 
 // import EventCaptureForm from '../EventCaptureForm/EventCaptureForm.container';
 
@@ -24,6 +25,7 @@ type Props = {
 
 class AppContents extends Component<Props> {
     render() {
+
         const { classes } = this.props;
 
         const d2 = getD2();
@@ -32,7 +34,9 @@ class AppContents extends Component<Props> {
             <div
                 className={classes.app}
             >
-                <HeaderBar d2={d2} />
+                <HeaderBar d2={d2}>
+                    <NetworkStatusBadge />
+                </HeaderBar>
                 <div style={{ padding: 100 }}>
                     <Switch>
                         <Route path="/newEvent" component={NewEvent} />

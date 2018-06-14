@@ -1,8 +1,7 @@
 // @flow
 import { Validators } from '@dhis2/d2-ui-forms';
+import i18n from '@dhis2/d2-i18n';
 import isValidDate from '../../../../../utils/validators/date.validator';
-import { getTranslation } from '../../../../../d2/d2Instance';
-import { formatterOptions } from '../../../../../utils/string/format.const';
 
 const preValidateDate = (value?: ?string) => {
     if (!value) {
@@ -17,13 +16,13 @@ const getValidatorContainers = () => {
         {
             validator: Validators.wordToValidatorMap.get('required'),
             message:
-                getTranslation(
+                i18n.t(
                     Validators.wordToValidatorMap.get('required').message,
-                    formatterOptions.CAPITALIZE_FIRST_LETTER),
+                ),
         },
         {
             validator: preValidateDate,
-            message: getTranslation('value_should_be_a_valid_date', formatterOptions.CAPITALIZE_FIRST_LETTER),
+            message: i18n.t('Please provide a valid date'),
         },
     ];
     return validatorContainers;

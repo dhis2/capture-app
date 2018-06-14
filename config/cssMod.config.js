@@ -17,6 +17,7 @@ const cssModDev = {
                 // https://github.com/facebookincubator/create-react-app/issues/2677
                 ident: 'postcss',
                 plugins: () => [
+                    require('postcss-rtl'),
                     require('postcss-flexbugs-fixes'),
                     require('autoprefixer')({
                         browsers: [

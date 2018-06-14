@@ -1,8 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { getTranslation } from '../../d2/d2Instance';
-import { formatterOptions } from '../../utils/string/format.const';
+import i18n from '@dhis2/d2-i18n';
 import ProgressButton from '../Buttons/ProgressButton.component';
 import getDataEntryKey from './common/getDataEntryKey';
 
@@ -30,7 +29,7 @@ const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: ?
                     color={options.color || 'primary'}
                     inProgress={finalInProgress}
                 >
-                    { getTranslation('cancel', formatterOptions.CAPITALIZE_FIRST_LETTER) }
+                    { i18n.t('Cancel') }
                 </ProgressButton>
             }
             {...passOnProps}
