@@ -134,7 +134,7 @@ class QuickSelector extends Component<Props> {
                             selectedOrgUint={this.props.selectedOrgUnitId}
                             handleClickOrgUnit={this.handleClickOrgUnit}
                             storedOrgUnits={this.props.storedOrgUnits}
-                            showWarning={this.props.clearOnStartAgain}
+                            showWarning={!this.props.clearOnStartAgain}
                         />
                     </Grid>
                     <Grid item xs={12} sm={programSelectorWidth}>
@@ -146,7 +146,7 @@ class QuickSelector extends Component<Props> {
                             handleResetCategorySelection={this.props.onResetCategoryOptionSelections}
                             resetProgram={this.resetProgram}
                             buttonModeMaxLength={5}
-                            showWarning={this.props.clearOnStartAgain}
+                            showWarning={!this.props.clearOnStartAgain}
                         />
                     </Grid>
                     <Grid item xs={12} sm={actionButtonsWidth}>
@@ -154,7 +154,7 @@ class QuickSelector extends Component<Props> {
                             handleClickStartAgainButton={this.handleClickStartAgainButton}
                             selectedProgram={this.props.selectedProgramId}
                             selectedOrgUint={this.props.selectedOrgUnitId}
-                            showWarning={this.props.clearOnStartAgain}
+                            showWarning={!this.props.clearOnStartAgain}
                         />
                     </Grid>
                 </Grid>
