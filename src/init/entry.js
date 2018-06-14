@@ -17,7 +17,17 @@ import getStore from '../getStore';
 import { initialize } from './init';
 import { startupDataLoad } from './entry.actions';
 
+import JssProvider from 'react-jss/lib/JssProvider';
+import { create } from 'jss';
+import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
+
+
 const DOM_ID = 'app';
+
+// change the insertion point for jss styles so they don't collide
+const generateClassName = createGenerateClassName();
+const jss = create(jssPreset());
+jss.options.insertionPoint = document.getElementById('jss-insertion-point');
 
 async function runApp(domElement: HTMLElement) {
     render(
@@ -46,10 +56,12 @@ async function runApp(domElement: HTMLElement) {
         });
 
         render(
-            <App
-                store={store}
-                history={history}
-            />,
+            <JssProvider jss={jss} generateClassName={generateClassName}>
+                <App
+                    store={store}
+                    history={history}
+                />
+            </JssProvider>,
             domElement,
         );
     } catch (error) {
