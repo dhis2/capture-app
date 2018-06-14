@@ -79,9 +79,7 @@ class FeedbackBar extends React.Component<Props> {
                     className={classes.closeButton}
                     onClick={this.handleClose}
                 >
-                    <CloseIcon
-                        color={theme.palette.primary.contrastText}
-                    />
+                    <CloseIcon />
                 </IconButton>
             </span>
         );

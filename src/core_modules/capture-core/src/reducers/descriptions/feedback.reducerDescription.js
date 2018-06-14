@@ -16,6 +16,7 @@ import {
 import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
+import { actionTypes as eventsListActionTypes } from '../../components/Pages/MainPage/EventsList/eventsList.actions';
 
 function addErrorFeedback(state: ReduxState, message: string, action?: ?React.Node) {
     const newState = [...state];
@@ -69,5 +70,9 @@ export const feedbackDesc = createReducerDescription({
         ];
         return newState;
     },
+    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVAL_FAILED]: (state, action) => [
+        ...state,
+        getErrorFeedback(action.payload),
+    ],
 }, 'feedbacks', []);
 

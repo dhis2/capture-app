@@ -52,7 +52,7 @@ export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =
                     })),
             };
 
-            return startSaveEditEventAfterReturnedToMainPage(eventId, serverData);
+            return startSaveEditEventAfterReturnedToMainPage(eventId, serverData, state.currentSelections);
         });
 
 export const saveEditEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>

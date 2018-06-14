@@ -1,7 +1,4 @@
 // @flow
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/filter';
 import { getApi } from '../../../../d2/d2Instance';
 import i18n from '@dhis2/d2-i18n';
 import {

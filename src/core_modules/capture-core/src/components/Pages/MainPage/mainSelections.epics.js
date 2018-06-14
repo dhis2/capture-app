@@ -1,7 +1,4 @@
 // @flow
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/filter';
 import { getApi } from '../../../d2/d2Instance';
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -15,8 +12,6 @@ import {
     invalidSelectionsFromUrl,
 } from './mainSelections.actions';
 import programCollection from '../../../metaDataMemoryStores/programCollection/programCollection';
-
-type InputObservable = rxjs$Observable<ReduxAction<any, any>>;
 
 export const mainSelectionsCompletedEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress

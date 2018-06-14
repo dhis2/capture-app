@@ -17,26 +17,29 @@ type Props = {
         onSort: (direction: $Values<typeof directions>) => void)
     => void,
     childrenClass?: ?string,
+    disabled?: ?boolean,
 };
 
 export default (defaultClasses: TableClasses) =>
     class SortLabel extends React.Component<Props> {
         handleSort = () => {
-            const isActive = this.props.isActive;
-            const direction = this.props.direction;
+            const { isActive, direction, disabled } = this.props;
 
-            if (isActive) {
-                this.props.onSort(direction === directions.ASC ? directions.DESC : directions.ASC);
-            } else {
-                this.props.onSort(this.props.initialDirection || directions.DESC);
+            if (!disabled) {
+                if (isActive) {
+                    this.props.onSort(direction === directions.ASC ? directions.DESC : directions.ASC);
+                } else {
+                    this.props.onSort(this.props.initialDirection || directions.DESC);
+                }
             }
         }
 
         renderChildrenContainer(classes: Array<string>) {
+            const childrenDefaultClasses = this.props.disabled ? defaultClasses.sortLabelChildren : classNames(defaultClasses.sortLabelChildren, defaultClasses.sortLabelChildrenEnabled);
             return (
                 <div
                     // $FlowSuppress
-                    className={classNames(defaultClasses.sortLabelChildren, this.props.childrenClass, classes)}
+                    className={classNames(childrenDefaultClasses, this.props.childrenClass, classes)}
                     onClick={this.handleSort}
                     role="button"
                     tabIndex={0}

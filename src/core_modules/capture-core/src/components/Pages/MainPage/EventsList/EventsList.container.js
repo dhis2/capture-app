@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import EventsList from './EventsList.component';
 import { makeColumnsSelector, makeCreateEventsContainer, makeCreateWorkingListData } from './eventsList.selector';
 import { sortWorkingList, openEditEventPage } from './eventsList.actions';
-import withStateBoundLoadingIndicator from '../../../../HOC/withStateBoundLoadingIndicator';
 
 const makeMapStateToProps = () => {
     const columnsSelector = makeColumnsSelector();
@@ -36,6 +35,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-export default withStateBoundLoadingIndicator(
-    state => !state.workingListsUI.main.isLoading)(
-    connect(makeMapStateToProps, mapDispatchToProps)(EventsList));
+export default connect(makeMapStateToProps, mapDispatchToProps)(EventsList);

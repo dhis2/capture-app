@@ -1,14 +1,10 @@
 // @flow
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/concatMap';
 import log from 'loglevel';
 import errorCreator from '../../utils/errorCreator';
 
 import getEnrollmentEvents from '../../events/getEnrollmentEvents';
 import { loadDataEntryEvent } from '../../components/DataEntry/actions/dataEntryLoadEdit.actions';
 import { actionTypes, enrollmentLoaded, enrollmentLoadFailed } from './enrollment.actions';
-
-type InputObservable = rxjs$Observable<ReduxAction<any, any>>;
 
 const errorMessages = {
     EVENTS_LOG: 'Events could not be loaded',
