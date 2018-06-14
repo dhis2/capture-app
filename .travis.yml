@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+- node
+env:
+  global:
+  - CC_TEST_REPORTER_ID=99c53e7494b352df65334376e53eeb1cfa022afca8f90fefa15da1e59efa4879
+  - secure: dW8U0j8cxFbI8rqeirCvAPExtKO+0ZYmu/Xqx+06G7tocRbzfBF7qU4Fe+lQ/Xe1x9TkwesGtqm7FgS6fRVMD6DjotJfo4kyMgDeGFZXJWuhhOxKhT0wHiyFCKYT26MzJ6e288IKzSl6JCLo587DM0JutXGsmmVYsQOTrXWtHey85/7haEVHbZWIFJs9M4CuyYdipRXfE4TbzRDH5mUiw7qmMcxPUr5vEw1VCplrYG1pcPgT4miM78GuDWzTec33UqiRoLYssAMBFF1VS6ApVndEb/zbI4cV2tnunKrraDJrFk7IsE0MYRW8Ezsn/dhVg1kjd5Op9ovz7DAM2aKLztUjNLrRE3bDcEJiqXfwLn/2KmzFyeN8MrXzHXyXsxa9eBq341rFMz72XHm2n/5mQ1SYYuSxSzGvHa+Aqcp7v7RxidCYN/0acICUdhAasgyG5hfu4/HLHwtGeSRcce1eCkBhHPA/WdPxBaQLqcrHNk7RR0PzDVI0sYWtu6LFXcw1tvRndvBXiSnn6ZQPjwuabuhZrRmMYqpTWSkGOhD9yFG3yVvVOuomQ2wKUhW20Gpzho/z61s0U+eEYrDHQr044bs6f6AqYXtAEjxX3y4i9pSEbI5o+rQGymdhNZy/DkBGVr+YJLs77h+HRab6CKHipImLlUdxRQdzZNQyzOsJFjg=
+  - secure: OH2E3ZsRT0wBTepKv4rNQXQKdYLk8youInVTcjjegpvuhx7IQcoVmHuq9ipKII2j5TqSFxKM72600j4qiPyWu4kDULXLlshgDhNhxb6/uyjbE5a6gDhgtCGo4slDJgAeIoMGQ3wc4eK1Kfl4y6UL+jZdt8DOnkJuVOyDEy+3rVk6LeiU5fNC77LgTfHYqLfM0H3dwsNjQh8RSiNJw4cbQm1R8HP0u+n7VY3ZLs4uKiOIHRw/bgYHg/Mj8FisltjBmd+tlqrJqhciiTbUYC9cd3/AsnqIA7DxCf3gfCgjrApOyIY+fYjPGbt+Xhum7/5BhutALlZ5EyGZK/dVgyCcU+isqSXyvE52a+IjhZulaEffvi635kW5PAXr4VkTyJX27l9MGojjX57Ri21ipUSEdf0a5T/TAoQLJazsx8LOxsJTdo2e9WDc/xLQ3MYsqXmcXATCTbTUJkvnPzU5jOF6lhT5ZuJM5jBLo+viL/pWE0hkHgPpVEhKUSCr/n/g3j8iloD04f8cS3AnsWzTClpHeMC1PI0zcqevMRupUNkj7imQ/r7Pi+/CgXpHQUtRGZY6Q+tdY0M1/IsmN17ZgGb2Np07mkk91byTPn8jroeCXtaCYi0UCofM/MlNuL1E5suZs2cGY+ZT1wZjPAPL0aG1zt3wGcJe8kn9dhri8Vng22Q=
+before_script:
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+  > ./cc-test-reporter
+- chmod +x ./cc-test-reporter
+- "./cc-test-reporter before-build"
+script:
+- yarn build
+after_script:
+- "./cc-test-reporter after-build -d --exit-code $TRAVIS_TEST_RESULT"
+after_success:
+- if ( [ "$TRAVIS_BRANCH" == "master" ] || [ ! -z "$TRAVIS_TAG" ] ) && [ "$TRAVIS_REPO_SLUG"
+  == "dhis2/capture-app" ]  &&  [ "$TRAVIS_PULL_REQUEST" == "false" ] ; then mvn clean
+  deploy --settings deploy/settings.xml && exit 0; fi
