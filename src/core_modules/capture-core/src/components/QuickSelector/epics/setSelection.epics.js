@@ -35,3 +35,13 @@ export const setProgram = (action$: InputObservable, store: ReduxStore) =>
             const args = getArguments(programId, orgUnitId);
             return replace(`/${args}`);
         });
+
+export const goBackToListContext = (action$: InputObservable, store: ReduxStore) =>
+    // $FlowSuppress
+    action$.ofType(selectionActionTypes.GO_BACK_TO_LIST_CONTEXT)
+        .map(() => {
+            const state = store.getState();
+            const { programId, orgUnitId } = state.currentSelections;
+            const args = getArguments(programId, orgUnitId);
+            return replace(`/${args}`);
+        });

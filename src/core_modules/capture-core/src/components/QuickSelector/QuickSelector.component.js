@@ -26,11 +26,13 @@ type Props = {
     selectedCategories: Object,
     storedOrgUnits: Object,
     classes: Object,
+    clearOnStartAgain: boolean,
     onSetOrgUnitId: (orgUnitId: string) => void,
     onStoreOrgUnitObject: (orgUnitObject: Object) => void,
     onSetProgramId: (programId: string) => void,
     onSetCategoryOptionId: (categoryId: string, selectedCategoryOptionId: string) => void,
     onResetCategoryOptionSelections: () => void,
+    onGoBackToListContext: () => void,
 };
 
 class QuickSelector extends Component<Props> {
@@ -38,7 +40,7 @@ class QuickSelector extends Component<Props> {
     handleSetCatergoryCombo: (selectedCategoryOption: string, categoryId: string) => void;
     resetProgram: () => void;
     handleClickOrgUnit: (orgUnit: Object) => void;
-    handleClickActionButton: () => void;
+    handleClickStartAgainButton: () => void;
     constructor(props) {
         super(props);
 
@@ -46,7 +48,7 @@ class QuickSelector extends Component<Props> {
         this.handleSetCatergoryCombo = this.handleSetCatergoryCombo.bind(this);
         this.resetProgram = this.resetProgram.bind(this);
         this.handleClickOrgUnit = this.handleClickOrgUnit.bind(this);
-        this.handleClickActionButton = this.handleClickActionButton.bind(this);
+        this.handleClickStartAgainButton = this.handleClickStartAgainButton.bind(this);
     }
 
     handleClickProgram(program) {
@@ -70,10 +72,14 @@ class QuickSelector extends Component<Props> {
     }
 
     // Restart button
-    handleClickActionButton() {
-        this.props.onSetOrgUnitId(undefined);
-        this.props.onSetProgramId(null);
-        this.props.onResetCategoryOptionSelections();
+    handleClickStartAgainButton() {
+        if(this.props.clearOnStartAgain) {
+            this.props.onSetOrgUnitId(undefined);
+            this.props.onSetProgramId(null);
+            this.props.onResetCategoryOptionSelections();
+        } else {
+            this.props.onGoBackToListContext();
+        }
     }
 
     // TODO: Add support for cat-combos.
@@ -128,6 +134,7 @@ class QuickSelector extends Component<Props> {
                             selectedOrgUint={this.props.selectedOrgUnitId}
                             handleClickOrgUnit={this.handleClickOrgUnit}
                             storedOrgUnits={this.props.storedOrgUnits}
+                            showWarning={this.props.clearOnStartAgain}
                         />
                     </Grid>
                     <Grid item xs={12} sm={programSelectorWidth}>
@@ -139,13 +146,15 @@ class QuickSelector extends Component<Props> {
                             handleResetCategorySelection={this.props.onResetCategoryOptionSelections}
                             resetProgram={this.resetProgram}
                             buttonModeMaxLength={5}
+                            showWarning={this.props.clearOnStartAgain}
                         />
                     </Grid>
                     <Grid item xs={12} sm={actionButtonsWidth}>
                         <ActionButtons
-                            handleClickActionButton={this.handleClickActionButton}
+                            handleClickStartAgainButton={this.handleClickStartAgainButton}
                             selectedProgram={this.props.selectedProgramId}
                             selectedOrgUint={this.props.selectedOrgUnitId}
+                            showWarning={this.props.clearOnStartAgain}
                         />
                     </Grid>
                 </Grid>

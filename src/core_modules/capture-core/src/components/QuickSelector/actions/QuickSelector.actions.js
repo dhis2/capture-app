@@ -7,6 +7,7 @@ export const actionTypes = {
     SET_PROGRAM_ID: 'setProgramId',
     SET_CATEGORY_ID: 'setCategoryId',
     RESET_CATEGORY_SELECTIONS: 'resetCategorySelections',
+    GO_BACK_TO_LIST_CONTEXT: 'goBackToListContext',
 };
 
 export const setOrgUnitId =
@@ -24,3 +25,6 @@ export const setCategoryId =
 
 export const resetCategorySelections =
     () => actionCreator(actionTypes.RESET_CATEGORY_SELECTIONS)();
+
+export const goBackToListContext =
+    () => actionCreator(actionTypes.GO_BACK_TO_LIST_CONTEXT)();

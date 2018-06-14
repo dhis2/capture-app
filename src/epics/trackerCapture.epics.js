@@ -67,6 +67,7 @@ import {
 import {    
     setOrgUnit,
     setProgram,
+    goBackToListContext,
 } from 'capture-core/components/QuickSelector/epics/setSelection.epics';
 
 import { loadStartupData } from '../init/entry.epics';
@@ -109,4 +110,5 @@ export default combineEpics(
     updateEventListAfterSaveOrUpdateEventEpic,
     setOrgUnit,
     setProgram,
+    goBackToListContext,
 );

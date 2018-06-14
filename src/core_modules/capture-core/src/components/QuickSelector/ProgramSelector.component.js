@@ -84,6 +84,7 @@ type Props = {
     handleResetCategorySelection: () => void,
     resetProgram: () => void,
     buttonModeMaxLength: number,
+    showWarning: boolean,
     selectedProgram: Object,
     selectedCategories: Object,
     classes: Object,
