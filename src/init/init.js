@@ -51,15 +51,26 @@ function changeLocale(locale) {
 }
 
 function setLocaleData(uiLocale: string) { //eslint-disable-line
+    // this should be the user locale
     const locale = 'en';
 
     changeLocale(locale);
+
+    let dateFnLocale;
+    try {
+        // this should be replaced with a dynamic import
+        dateFnLocale = require(`date-fns/locale/${locale}`);
+    } catch (error) {
+        log.error(`could not get date-fns locale for ${locale}`);
+        dateFnLocale = require('date-fns/locale/en');
+    }
     
     const weekdays = moment.weekdays();
     const weekdaysShort = moment.weekdaysShort();
     // $FlowSuppress
     const firstDayOfWeek = moment.localeData()._week.dow; //eslint-disable-line
     const localeData: LocaleDataType = {
+        dateFnsLocale: dateFnLocale,
         weekDays: weekdays,
         weekDaysShort: weekdaysShort,
         calendarFormatHeaderLong: 'dddd D MMM',

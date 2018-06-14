@@ -3,21 +3,21 @@
   "default_locale": "en",
   "activities": {
     "dhis": {
-      "href": ".."
+      "href": "../../.."
     }
   },
   "appType": "APP",
-  "name": "Dashboards app",
-  "version": "0.1.0",
+  "name": "Capture",
+  "version": "0.1",
+  "description": "Capture App",
   "icons": {
-    "48": "icon.png"
+    "16": "/assets/icons/track16.png",
+    "48": "/assets/icons/track48.png",
+    "128": "/assets/icons/track128.png"
   },
   "developer": {
-    "name": "DHIS2"
+    "name": "HISP",
+    "url": "http://dhis2.org"
   },
-  "dhis2": {
-    "apiVersion": "30"
-  },
-  "description": "New Capture app",
-  "manifest_generated_at": "Mon Jun 11 2018 19:17:34 GMT+0200 (Central European Summer Time)"
+  "manifest_generated_at": "Thu Jun 14 2018 08:11:29 GMT+0200 (DST)"
 }

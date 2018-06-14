@@ -48,7 +48,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "yarn localize && node scripts/build.js",
+    "build": "yarn localize && react-app-rewired build",
     "postbuild": "mkdirp buildzip/ && pushd build && bestzip ../buildzip/NewCaptureApp.zip * && popd",
     "test": "react-app-rewired test --env=jsdom",
     "test:debug": "react-app-rewired --inspect-brk test --runInBand --env=jsdom",
@@ -86,22 +86,24 @@
     "redux-devtools-extension": "^2.13.2"
   },
   "manifest.webapp": {
-    "name": "Capture app",
+    "version": "0.1",
+    "name": "Capture",
+    "description": "Capture App",
+    "launch_path": "index.html",
     "icons": {
-      "48": "icon.png"
+      "16": "/assets/icons/track16.png",
+      "48": "/assets/icons/track48.png",
+      "128": "/assets/icons/track128.png"
     },
     "developer": {
-      "url": "",
-      "name": "DHIS2"
+      "name": "HISP",
+      "url": "http://dhis2.org"
     },
-    "dhis2": {
-      "apiVersion": "30"
-    },
+    "default_locale": "en",
     "activities": {
       "dhis": {
-        "href": ".."
+          "href": "../../.."
       }
-    },
-    "description": "New Capture app"
+    }
   }
 }
