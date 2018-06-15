@@ -102,7 +102,7 @@
     "default_locale": "en",
     "activities": {
       "dhis": {
-          "href": "../../.."
+          "href": ".."
       }
     }
   }
