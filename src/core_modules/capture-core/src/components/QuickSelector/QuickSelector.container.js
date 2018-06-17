@@ -2,12 +2,13 @@
 
 import { connect } from 'react-redux';
 import QuickSelector from './QuickSelector.component';
-import { setOrgUnitId, storeOrgUnitObject, setProgramId, setCategoryId, resetCategorySelections, goBackToListContext } from './actions/QuickSelector.actions';
+import { setOrgUnitId, storeOrgUnitObject, setCategoryId, resetCategorySelections, goBackToListContext } from './actions/QuickSelector.actions';
 
 const mapStateToProps = (state: Object) => ({
     selectedProgramId: state.currentSelections.programId,
     selectedCategories: state.currentSelections.categories,
     selectedOrgUnitId: state.currentSelections.orgUnitId,
+    selectionComplete: state.currentSelections.complete,
     storedOrgUnits: state.organisationUnits,
 });
 
@@ -17,9 +18,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
     onStoreOrgUnitObject: (orgUnitObject: Object) => {
         dispatch(storeOrgUnitObject(orgUnitObject));
-    },
-    onSetProgramId: (programId: string) => {
-        dispatch(setProgramId(programId));
     },
     onSetCategoryOptionId: (categoryId: string, selectedCategoryOptionId: string) => {
         dispatch(setCategoryId(categoryId, selectedCategoryOptionId));

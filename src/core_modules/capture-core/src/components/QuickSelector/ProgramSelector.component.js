@@ -81,8 +81,9 @@ const styles = () => ({
 type Props = {
     handleClickProgram: (value: string) => void,
     handleSetCatergoryCombo: (value: string, value: string) => void,
-    handleResetCategorySelection: () => void,
-    resetProgram: () => void,
+    handleResetCategorySelections: () => void,
+    onResetProgramId: () => void,
+    onResetCategoryOption: (categoryId: string) => void,
     buttonModeMaxLength: number,
     showWarning: boolean,
     selectedProgram: Object,
@@ -108,16 +109,11 @@ class ProgramSelector extends Component<Props> {
     }
 
     handleResetProgram() {
-        this.props.resetProgram();
-        
-        // If categoryOptions have been selected, they need to be removed when program is de-selected.
-        if (this.props.selectedCategories) {
-            this.props.handleResetCategorySelection();
-        }
+        this.props.onResetProgramId();
     }
 
-    handleResetCategory(categoryId) {
-        this.props.handleSetCatergoryCombo(null, categoryId);
+    handleResetCategoryOption(categoryId) {
+        this.props.onResetCategoryOption(categoryId);
     }
 
     render() {
@@ -160,7 +156,7 @@ class ProgramSelector extends Component<Props> {
                                                 if(this.props.selectedCategories && this.props.selectedCategories[i.id]) {
                                                     return (
                                                         <p className={this.props.classes.selectedText}>{i.categoryOptions.find(option => option.id === this.props.selectedCategories[i.id]).displayName}
-                                                            <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetCategory(i.id)}>
+                                                            <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetCategoryOption(i.id)}>
                                                                 <ClearIcon className={this.props.classes.selectedButtonIcon} />
                                                             </IconButton>
                                                         </p> 

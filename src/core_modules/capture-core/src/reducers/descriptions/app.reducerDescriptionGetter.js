@@ -15,6 +15,9 @@ import {
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
 import { actionTypes as eventListActionTypes } from '../../components/Pages/MainPage/EventsList/eventsList.actions';
 import { actionTypes as setCurrentSelectionsActionTypes } from '../../components/QuickSelector/actions/QuickSelector.actions';
+import { actionTypes as mainPageSelectorActionTypes } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
+import { actionTypes as editEventPageSelectorActionTypes } from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
+import { actionTypes as newEventPageSelectorActionTypes } from '../../components/Pages/NewEvent/NewEventSelector/NewEventSelector.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 
@@ -33,6 +36,18 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
     [tempSelectorActionTypes.OPEN_NEW_EVENT_PAGE]: (state) => {
+        const newState = { ...state };
+        newState.page = 'newEvent';
+        newState.locationSwitchInProgress = true;
+        return newState;
+    },
+    [mainPageSelectorActionTypes.OPEN_NEW_EVENT]: (state) => {
+        const newState = { ...state };
+        newState.page = 'newEvent';
+        newState.locationSwitchInProgress = true;
+        return newState;
+    },
+    [editEventPageSelectorActionTypes.OPEN_NEW_EVENT]: (state) => {
         const newState = { ...state };
         newState.page = 'newEvent';
         newState.locationSwitchInProgress = true;
@@ -95,6 +110,66 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     [LOCATION_CHANGE]: (state) => {
         const newState = { ...state };
         newState.locationSwitchInProgress = false;
+        return newState;
+    },
+    [mainPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
+        const newState = { ...state };
+        newState.locationSwitchInProgress = true;
+        return newState;
+    },
+    [mainPageSelectorActionTypes.SET_ORG_UNIT]: (state) => {
+        const newState = { ...state };
+        newState.locationSwitchInProgress = true;
+        return newState;
+    },
+    [mainPageSelectorActionTypes.SET_PROGRAM_ID]: (state) => {
+        const newState = { ...state };
+        newState.locationSwitchInProgress = true;
+        return newState;
+    },
+    [mainPageSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
+        const newState = { ...state };
+        newState.locationSwitchInProgress = true;
+        return newState;
+    },
+    [editEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
+        const newState = { ...state };
+        newState.locationSwitchInProgress = true;
+        return newState;
+    },
+    [editEventPageSelectorActionTypes.SET_ORG_UNIT]: (state) => {
+        const newState = { ...state };
+        newState.locationSwitchInProgress = true;
+        return newState;
+    },
+    [editEventPageSelectorActionTypes.SET_PROGRAM_ID]: (state) => {
+        const newState = { ...state };
+        newState.locationSwitchInProgress = true;
+        return newState;
+    },
+    [editEventPageSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
+        const newState = { ...state };
+        newState.locationSwitchInProgress = true;
+        return newState;
+    },
+    [newEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
+        const newState = { ...state };
+        newState.locationSwitchInProgress = true;
+        return newState;
+    },
+    [newEventPageSelectorActionTypes.SET_ORG_UNIT]: (state) => {
+        const newState = { ...state };
+        newState.locationSwitchInProgress = true;
+        return newState;
+    },
+    [newEventPageSelectorActionTypes.SET_PROGRAM_ID]: (state) => {
+        const newState = { ...state };
+        newState.locationSwitchInProgress = true;
+        return newState;
+    },
+    [newEventPageSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
+        const newState = { ...state };
+        newState.locationSwitchInProgress = true;
         return newState;
     },
 }, 'app');

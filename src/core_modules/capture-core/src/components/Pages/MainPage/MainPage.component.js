@@ -4,9 +4,7 @@
 */
 import React, { Component } from 'react';
 
-import withLoadHandler from './withLoadHandler';
 import EventsList from './EventsList/EventsList.container';
-import QuickSelector from '../../QuickSelector/QuickSelector.container';
 
 type Props = {
     currentSelectionsComplete: boolean,
@@ -18,7 +16,6 @@ class MainPage extends Component<Props> {
 
         return (
             <div>
-                <QuickSelector clearOnStartAgain={true} />
                 {
                     (() => {
                         if (!currentSelectionsComplete) {
@@ -35,4 +32,4 @@ class MainPage extends Component<Props> {
     }
 }
 
-export default withLoadHandler()(MainPage);
+export default (MainPage);

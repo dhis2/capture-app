@@ -37,8 +37,10 @@ class DataEntrySelectionsIncomplete extends Component<Props> {
             text = getTranslation('select_a_registering_unit_and_program_to_get_started');
         } else if (!isProgramSelected) {
             text = getTranslation('select_a_program_to_start_reporting');
-        } else {
+        } else if (!isOrgUnitSelected) {
             text = getTranslation('select_a_registering_unit_to_start_reporting');
+        } else {
+            text = getTranslation('select_a_category_option_to_start_reporting');
         }
 
         return text;

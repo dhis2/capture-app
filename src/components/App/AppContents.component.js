@@ -5,9 +5,9 @@ import HeaderBar from '@dhis2/d2-ui-header-bar';
 import { withStyles } from '@material-ui/core/styles';
 
 import getD2 from 'capture-core/d2/d2Instance';
-import MainPage from 'capture-core/components/Pages/MainPage/MainPage.container';
-import NewEvent from 'capture-core/components/Pages/NewEvent/NewEvent.container';
-import EditEvent from 'capture-core/components/Pages/EditEvent/EditEvent.container';
+import MainPageSelector from 'capture-core/components/Pages/MainPage/MainPageSelector/MainPageSelector.container';
+import NewEventSelector from 'capture-core/components/Pages/NewEvent/NewEventSelector/NewEventSelector.container';
+import EditEventSelector from 'capture-core/components/Pages/EditEvent/EditEventSelector/EditEventSelector.container';
 // import EventCaptureForm from '../EventCaptureForm/EventCaptureForm.container';
 
 const styles = theme => ({
@@ -34,10 +34,10 @@ class AppContents extends Component<Props> {
                 <HeaderBar d2={d2} />
                 <div style={{ paddingTop: 48 }}>
                     <Switch>
-                        <Route path="/newEvent" component={NewEvent} />
-                        <Route path="/editEvent" component={EditEvent} />
-                        <Route path="/:keys" component={MainPage} />
-                        <Route path="/" component={MainPage} />
+                        <Route path="/newEvent" component={NewEventSelector} />
+                        <Route path="/editEvent" component={EditEventSelector} />
+                        <Route path="/:keys" component={MainPageSelector} />
+                        <Route path="/" component={MainPageSelector} />
                     </Switch>
                 </div>
                 <div />

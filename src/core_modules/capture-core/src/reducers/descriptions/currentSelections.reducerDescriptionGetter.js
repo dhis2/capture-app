@@ -10,6 +10,15 @@ import {
 import {
     actionTypes as editEventActionTypes,
 } from '../../components/Pages/EditEvent/editEvent.actions';
+import {
+    actionTypes as mainPageSelectorActionTypes,
+} from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
+import {
+    actionTypes as editEventPageSelectorActionTypes,
+} from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
+import {
+    actionTypes as newEventPageSelectorActionTypes,
+} from '../../components/Pages/NewEvent/NewEventSelector/NewEventSelector.actions';
 
 type CurrentSelectionsState = {
     programId?: ?string,
@@ -140,6 +149,171 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         return newState;
     },
     [setCurrentSelectionsActionTypes.RESET_CATEGORY_SELECTIONS]: (state) => {
+        const categories = null;
+        const newState = { ...state, categories };
+        return newState;
+    },
+    [mainPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
+        const orgUnitId = null;
+        const newState = { ...state, orgUnitId };
+        newState.complete = calculateCompleteStatus(newState);
+        return newState;
+    },
+    [mainPageSelectorActionTypes.SET_ORG_UNIT]: (state, action) => {
+        const orgUnitId = action.payload.id;
+        const newState = { ...state, orgUnitId };
+        newState.complete = calculateCompleteStatus(newState);
+        return newState;
+    },
+    [mainPageSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
+        const programId = action.payload;
+        const newState = { ...state, programId };
+        newState.complete = calculateCompleteStatus(newState);
+        return newState;
+    },
+    [mainPageSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
+        const programId = null;
+        const newState = { ...state, programId };
+        newState.complete = calculateCompleteStatus(newState);
+        return newState;
+    },
+    [mainPageSelectorActionTypes.SET_CATEGORY_OPTION]: (state, action) => {
+        let categories = {};
+        if (state.categories) {
+            // Necessary step to prevent mutation.
+            categories = Object.assign({}, state.categories);
+            categories[action.payload.categoryId] = action.payload.categoryOptionId;
+        } else {
+            categories[action.payload.categoryId] = action.payload.categoryOptionId;
+        }
+        const newState = { ...state, categories };
+        newState.complete = calculateCompleteStatus(newState);
+        return newState;
+    },
+    [mainPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state, action) => {
+        let categories = {};
+        if (state.categories) {
+            // Necessary step to prevent mutation.
+            categories = Object.assign({}, state.categories);
+            categories[action.payload] = null;
+        } else {
+            categories[action.payload] = null;
+        }
+        const newState = { ...state, categories };
+        newState.complete = calculateCompleteStatus(newState);
+        return newState;
+    },
+    [mainPageSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: (state) => {
+        const categories = null;
+        const newState = { ...state, categories };
+        return newState;
+    },
+    [editEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
+        const orgUnitId = null;
+        const newState = { ...state, orgUnitId };
+        newState.complete = calculateCompleteStatus(newState);
+        return newState;
+    },
+    [editEventPageSelectorActionTypes.SET_ORG_UNIT]: (state, action) => {
+        const orgUnitId = action.payload.id;
+        const newState = { ...state, orgUnitId };
+        newState.complete = calculateCompleteStatus(newState);
+        return newState;
+    },
+    [editEventPageSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
+        const programId = action.payload;
+        const newState = { ...state, programId };
+        newState.complete = calculateCompleteStatus(newState);
+        return newState;
+    },
+    [editEventPageSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
+        const programId = null;
+        const newState = { ...state, programId };
+        newState.complete = calculateCompleteStatus(newState);
+        return newState;
+    },
+    [editEventPageSelectorActionTypes.SET_CATEGORY_OPTION]: (state, action) => {
+        let categories = {};
+        if (state.categories) {
+            // Necessary step to prevent mutation.
+            categories = Object.assign({}, state.categories);
+            categories[action.payload.categoryId] = action.payload.categoryOptionId;
+        } else {
+            categories[action.payload.categoryId] = action.payload.categoryOptionId;
+        }
+        const newState = { ...state, categories };
+        newState.complete = calculateCompleteStatus(newState);
+        return newState;
+    },
+    [editEventPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state, action) => {
+        let categories = {};
+        if (state.categories) {
+            // Necessary step to prevent mutation.
+            categories = Object.assign({}, state.categories);
+            categories[action.payload] = null;
+        } else {
+            categories[action.payload] = null;
+        }
+        const newState = { ...state, categories };
+        newState.complete = calculateCompleteStatus(newState);
+        return newState;
+    },
+    [editEventPageSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: (state) => {
+        const categories = null;
+        const newState = { ...state, categories };
+        return newState;
+    },
+    [newEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
+        const orgUnitId = null;
+        const newState = { ...state, orgUnitId };
+        newState.complete = calculateCompleteStatus(newState);
+        return newState;
+    },
+    [newEventPageSelectorActionTypes.SET_ORG_UNIT]: (state, action) => {
+        const orgUnitId = action.payload.id;
+        const newState = { ...state, orgUnitId };
+        newState.complete = calculateCompleteStatus(newState);
+        return newState;
+    },
+    [newEventPageSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
+        const programId = action.payload;
+        const newState = { ...state, programId };
+        newState.complete = calculateCompleteStatus(newState);
+        return newState;
+    },
+    [newEventPageSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
+        const programId = null;
+        const newState = { ...state, programId };
+        newState.complete = calculateCompleteStatus(newState);
+        return newState;
+    },
+    [newEventPageSelectorActionTypes.SET_CATEGORY_OPTION]: (state, action) => {
+        let categories = {};
+        if (state.categories) {
+            // Necessary step to prevent mutation.
+            categories = Object.assign({}, state.categories);
+            categories[action.payload.categoryId] = action.payload.categoryOptionId;
+        } else {
+            categories[action.payload.categoryId] = action.payload.categoryOptionId;
+        }
+        const newState = { ...state, categories };
+        newState.complete = calculateCompleteStatus(newState);
+        return newState;
+    },
+    [newEventPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state, action) => {
+        let categories = {};
+        if (state.categories) {
+            // Necessary step to prevent mutation.
+            categories = Object.assign({}, state.categories);
+            categories[action.payload] = null;
+        } else {
+            categories[action.payload] = null;
+        }
+        const newState = { ...state, categories };
+        newState.complete = calculateCompleteStatus(newState);
+        return newState;
+    },
+    [newEventPageSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: (state) => {
         const categories = null;
         const newState = { ...state, categories };
         return newState;

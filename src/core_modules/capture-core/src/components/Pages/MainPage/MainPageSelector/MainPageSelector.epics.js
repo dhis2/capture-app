@@ -1,7 +1,8 @@
 // @flow
 import { replace } from 'react-router-redux';
-import { actionTypes as editEventSelectorActionTypes } from '../../EditEvent/EditEventSelector/EditEventSelector.actions';
-import { actionTypes as mainPageSelectorActionTypes } from '../../MainPage/MainPageSelector/MainPageSelector.actions';
+import {
+    actionTypes as mainPageSelectorActionTypes,
+} from './MainPageSelector.actions';
 
 const getArguments = (programId: string, orgUnitId: string) => {
     const argArray = [];
@@ -15,12 +16,12 @@ const getArguments = (programId: string, orgUnitId: string) => {
     return argArray.join('&');
 };
 
-export const openNewEventPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
+export const mainPageSelectorUpdateURLEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(editEventSelectorActionTypes.OPEN_NEW_EVENT, mainPageSelectorActionTypes.OPEN_NEW_EVENT)
+    action$.ofType(mainPageSelectorActionTypes.RESET_ORG_UNIT_ID, mainPageSelectorActionTypes.SET_ORG_UNIT, mainPageSelectorActionTypes.SET_PROGRAM_ID, mainPageSelectorActionTypes.RESET_PROGRAM_ID)
         .map(() => {
             const state = store.getState();
             const { programId, orgUnitId } = state.currentSelections;
             const args = getArguments(programId, orgUnitId);
-            return replace(`/newEvent/${args}`);
+            return replace(`/${args}`);
         });

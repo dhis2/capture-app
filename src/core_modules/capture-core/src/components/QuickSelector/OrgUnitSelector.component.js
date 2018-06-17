@@ -78,6 +78,7 @@ const styles = () => ({
 
 type Props = {
     handleClickOrgUnit: (orgUnitId: string, orgUnitObject: Object) => void,
+    onReset: () => void,
     selectedOrgUint: string,
     showWarning: boolean,
     storedOrgUnits: Object,
@@ -130,7 +131,7 @@ class OrgUnitSelector extends Component<Props> {
     };
 
     handleClick(event, selectedOu) {
-        const orgUnitObject = {id: selectedOu.id, name: selectedOu.displayName, path: selectedOu.path};
+        const orgUnitObject = {id: selectedOu.id, name: selectedOu.displayName};
         this.props.handleClickOrgUnit(selectedOu.id, orgUnitObject);
     }
 
@@ -146,7 +147,7 @@ class OrgUnitSelector extends Component<Props> {
                     <Paper elevation={1} className={this.props.classes.selectedPaper}>
                         <h4 className={this.props.classes.title}>{ getTranslation('selected_orgunit') }</h4>
                         <p className={this.props.classes.selectedText}>{this.props.storedOrgUnits[this.props.selectedOrgUint].name}
-                            <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleShowWarning()}>
+                            <IconButton className={this.props.classes.selectedButton} onClick={() => this.props.onReset()}>
                                 <ClearIcon className={this.props.classes.selectedButtonIcon} />
                             </IconButton>
                         </p>

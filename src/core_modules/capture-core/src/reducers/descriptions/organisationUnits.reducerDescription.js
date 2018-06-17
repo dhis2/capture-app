@@ -6,6 +6,9 @@ import { actionTypes as setOrgUnitActionTypes } from '../../components/QuickSele
 import {
     actionTypes as newEventSelectionActionTypes,
 } from '../../components/Pages/NewEvent/newEventSelections.actions';
+import {
+    actionTypes as mainPageSelectorActionTypes
+} from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
 
 export const organisationUnitDesc = createReducerDescription({
     [editEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE]: (state, action) => {
@@ -38,6 +41,12 @@ export const organisationUnitDesc = createReducerDescription({
     [setOrgUnitActionTypes.STORE_ORG_UNIT_OBJECT]: (state, action) => {
         const newState = { ...state };
         const orgUnit = action.payload;
+        newState[orgUnit.id] = orgUnit;
+        return newState;
+    },
+    [mainPageSelectorActionTypes.SET_ORG_UNIT]: (state, action) => {
+        const newState = { ...state };
+        const orgUnit = action.payload.orgUnit;
         newState[orgUnit.id] = orgUnit;
         return newState;
     },
