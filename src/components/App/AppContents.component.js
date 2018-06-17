@@ -11,6 +11,9 @@ import EditEvent from 'capture-core/components/Pages/EditEvent/EditEvent.contain
 import NetworkStatusBadge from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.component';
 import QuickSelector from 'capture-core/components/QuickSelector/QuickSelector.container';
 
+import MainPageSelector from 'capture-core/components/Pages/MainPage/MainPageSelector/MainPageSelector.container';
+import NewEventSelector from 'capture-core/components/Pages/NewEvent/NewEventSelector/NewEventSelector.container';
+import EditEventSelector from 'capture-core/components/Pages/EditEvent/EditEventSelector/EditEventSelector.container';
 // import EventCaptureForm from '../EventCaptureForm/EventCaptureForm.container';
 
 const styles = theme => ({
@@ -40,10 +43,10 @@ class AppContents extends Component<Props> {
                 </HeaderBar>
                 <div style={{ paddingTop: 48 }}>
                     <Switch>
-                        <Route path="/newEvent" component={NewEvent} />
-                        <Route path="/editEvent" component={EditEvent} />
-                        <Route path="/:keys" component={MainPage} />
-                        <Route path="/" component={MainPage} />
+                        <Route path="/newEvent" component={NewEventSelector} />
+                        <Route path="/editEvent" component={EditEventSelector} />
+                        <Route path="/:keys" component={MainPageSelector} />
+                        <Route path="/" component={MainPageSelector} />
                     </Switch>
                 </div>
                 <div />

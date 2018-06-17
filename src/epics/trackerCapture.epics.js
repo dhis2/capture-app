@@ -69,6 +69,15 @@ import {
     setProgram,
     goBackToListContext,
 } from 'capture-core/components/QuickSelector/epics/setSelection.epics';
+import {
+    mainPageSelectorUpdateURLEpic,
+} from 'capture-core/components/Pages/MainPage/MainPageSelector/MainPageSelector.epics';
+import {
+    editEventPageSelectorUpdateURLEpic,
+} from 'capture-core/components/Pages/EditEvent/EditEventSelector/EditEventSelector.epics';
+import {
+    newEventPageSelectorUpdateURLEpic,
+} from 'capture-core/components/Pages/NewEvent/NewEventSelector/NewEventSelector.epics';
 
 import { loadStartupData } from '../init/entry.epics';
 
@@ -111,4 +120,7 @@ export default combineEpics(
     setOrgUnit,
     setProgram,
     goBackToListContext,
+    mainPageSelectorUpdateURLEpic,
+    editEventPageSelectorUpdateURLEpic,
+    newEventPageSelectorUpdateURLEpic,
 );

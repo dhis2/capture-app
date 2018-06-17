@@ -24,31 +24,32 @@ type Props = {
     selectedOrgUnitId: string,
     selectedProgramId: string,
     selectedCategories: Object,
+    selectionComplete: boolean,
     storedOrgUnits: Object,
     classes: Object,
     clearOnStartAgain: boolean,
-    onSetOrgUnitId: (orgUnitId: string) => void,
-    onStoreOrgUnitObject: (orgUnitObject: Object) => void,
+    onSetOrgUnit: (orgUnitId: string, orgUnitObject: Object) => void,
     onSetProgramId: (programId: string) => void,
-    onSetCategoryOptionId: (categoryId: string, selectedCategoryOptionId: string) => void,
-    onResetCategoryOptionSelections: () => void,
+    onSetCategoryOption: (categoryId: string, categoryOptionId: string) => void,
     onGoBackToListContext: () => void,
+    onResetOrgUnitId: () => void,
+    onResetProgramId: () => void,
+    onResetCategoryOption: (categoryId: string) => void,
+    onResetAllCategoryOptions: () => void,
+    onStartAgain: () => void,
+    onClickNew: () => void,
 };
 
 class QuickSelector extends Component<Props> {
     handleClickProgram: (program: Object) => void;
     handleSetCatergoryCombo: (selectedCategoryOption: string, categoryId: string) => void;
-    resetProgram: () => void;
     handleClickOrgUnit: (orgUnit: Object) => void;
-    handleClickStartAgainButton: () => void;
     constructor(props) {
         super(props);
 
         this.handleClickProgram = this.handleClickProgram.bind(this);
         this.handleSetCatergoryCombo = this.handleSetCatergoryCombo.bind(this);
-        this.resetProgram = this.resetProgram.bind(this);
         this.handleClickOrgUnit = this.handleClickOrgUnit.bind(this);
-        this.handleClickStartAgainButton = this.handleClickStartAgainButton.bind(this);
     }
 
     handleClickProgram(program) {
@@ -56,30 +57,11 @@ class QuickSelector extends Component<Props> {
     }
 
     handleSetCatergoryCombo(selectedCategoryOption, categoryId) {
-        this.props.onSetCategoryOptionId(categoryId, selectedCategoryOption);
-    }
-
-    resetProgram() {
-        this.props.onSetProgramId(null);
+        this.props.onSetCategoryOption(categoryId, selectedCategoryOption);
     }
 
     handleClickOrgUnit(orgUnitId, orgUnitObject) {
-        this.props.onSetOrgUnitId(orgUnitId);
-
-        if (orgUnitObject) {
-            this.props.onStoreOrgUnitObject(orgUnitObject);
-        }
-    }
-
-    // Restart button
-    handleClickStartAgainButton() {
-        if(this.props.clearOnStartAgain) {
-            this.props.onSetOrgUnitId(undefined);
-            this.props.onSetProgramId(null);
-            this.props.onResetCategoryOptionSelections();
-        } else {
-            this.props.onGoBackToListContext();
-        }
+        this.props.onSetOrgUnit(orgUnitId, orgUnitObject);
     }
 
     // TODO: Add support for cat-combos.
@@ -134,7 +116,7 @@ class QuickSelector extends Component<Props> {
                             selectedOrgUint={this.props.selectedOrgUnitId}
                             handleClickOrgUnit={this.handleClickOrgUnit}
                             storedOrgUnits={this.props.storedOrgUnits}
-                            showWarning={!this.props.clearOnStartAgain}
+                            onReset={this.props.onResetOrgUnitId}
                         />
                     </Grid>
                     <Grid item xs={12} sm={programSelectorWidth}>
@@ -143,18 +125,17 @@ class QuickSelector extends Component<Props> {
                             selectedCategories={this.props.selectedCategories}
                             handleClickProgram={this.handleClickProgram}
                             handleSetCatergoryCombo={this.handleSetCatergoryCombo}
-                            handleResetCategorySelection={this.props.onResetCategoryOptionSelections}
-                            resetProgram={this.resetProgram}
+                            handleResetCategorySelections={this.props.onResetAllCategoryOptions}
                             buttonModeMaxLength={5}
-                            showWarning={!this.props.clearOnStartAgain}
+                            onResetProgramId={this.props.onResetProgramId}
+                            onResetCategoryOption={this.props.onResetCategoryOption}
                         />
                     </Grid>
                     <Grid item xs={12} sm={actionButtonsWidth}>
                         <ActionButtons
-                            handleClickStartAgainButton={this.handleClickStartAgainButton}
-                            selectedProgram={this.props.selectedProgramId}
-                            selectedOrgUint={this.props.selectedOrgUnitId}
-                            showWarning={!this.props.clearOnStartAgain}
+                            onStartAgain={this.props.onStartAgain}
+                            onClickNew={this.props.onClickNew}
+                            selectionComplete={this.props.selectionComplete}
                         />
                     </Grid>
                 </Grid>

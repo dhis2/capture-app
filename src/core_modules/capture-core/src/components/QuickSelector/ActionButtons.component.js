@@ -2,12 +2,6 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
 import SearchIcon from '@material-ui/icons/Search';
@@ -29,70 +23,36 @@ const styles = () => ({
 });
 
 type Props = {
-    handleClickStartAgainButton: () => void,
-    selectedProgram: string,
-    selectedOrgUnitId: string,
-    showWarning: boolean,
+    selectionComplete: boolean,
     classes: Object,
+    onStartAgain: () => void,
+    onClickNew: () => void,
 };
 
 class ActionButtons extends Component<Props> {
     handleClick: () => void;
+    handleNewClick: () => void;
     constructor(props) {
         super(props);
         this.handleStartAgainClick = this.handleStartAgainClick.bind(this);
-        this.handleClose = this.handleClose.bind(this);
-        this.handleAcceptClick = this.handleAcceptClick.bind(this);
-        this.dialogElement = this.dialogElement.bind(this);
-
-        this.state = {
-            open: false,
-        };
+        this.handleNewClick = this.handleNewClick.bind(this);
     }
 
     handleStartAgainClick = () => {
-        if (this.props.showWarning) {
-            this.setState({ open: true });
-        } else {
-            this.props.handleClickStartAgainButton();
-        }
-    };
-
-    handleClose = () => {
-        this.setState({ open: false });
-    };
-
-    handleAcceptClick = () => {
-        this.props.handleClickStartAgainButton();
+        this.props.onStartAgain();
     }
 
-    dialogElement = () => {
-        return (
-            <Dialog
-                open={this.state.open}
-                onClose={this.handleClose}
-            >
-                <DialogTitle>{"Start Again"}</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        Are you sure? All unsaved data will be lost.
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={this.handleClose} color="secondary">
-                        Cancel
-                    </Button>
-                    <Button onClick={this.handleAcceptClick} color="primary" autoFocus>
-                        Accept
-                    </Button>
-                </DialogActions>
-            </Dialog>
-        );
+    handleNewClick = () => {
+        this.props.onClickNew();
+    }
+
+    handleFindClick = () => {
+        alert('Not implemented yet.');
     }
 
     // TODO: Add translation.
     render() {
-        if (!this.props.selectedProgram && !this.props.selectedOrgUnitId) {
+        if (!this.props.selectionComplete) {
             return (
                 <div className={this.props.classes.container}>
                     <Button
@@ -102,7 +62,6 @@ class ActionButtons extends Component<Props> {
                     >
                         { i18n.t('Reset') }
                     </Button>
-                    {this.dialogElement()}
                 </div>
             );
         }
@@ -115,16 +74,15 @@ class ActionButtons extends Component<Props> {
                 >
                     { i18n.t('Reset') }
                 </Button>
-                {this.dialogElement()}
                 <Button
-                    onClick={this.handleStartAgainClick}
+                    onClick={this.handleNewClick}
                     color="primary"
                 >
                     <AddIcon className={this.props.classes.rightButton} />
                     { i18n.t('New') }
                 </Button>
                 <Button
-                    onClick={this.handleStartAgainClick}
+                    onClick={this.handleFindClick}
                     color="primary"
                 >
                     <SearchIcon className={this.props.classes.rightButton} />
