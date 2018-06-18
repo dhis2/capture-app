@@ -8,22 +8,23 @@ import IconButton from '@material-ui/core/IconButton';
 import classNames from 'classnames';
 
 import i18n from '@dhis2/d2-i18n';
-import elementTypes from '../../../../metaData/DataElement/elementTypes';
+import elementTypes from '../../../../../metaData/DataElement/elementTypes';
 
-import getTableComponents from '../../../d2Ui/dataTable/getTableComponents';
-import basicTableAdapter from '../../../d2UiReactAdapters/dataTable/basicTable.adapter';
-import paginationAdapter from '../../../d2UiReactAdapters/dataTable/pagination.adapter';
+import getTableComponents from '../../../../d2Ui/dataTable/getTableComponents';
+import basicTableAdapter from '../../../../d2UiReactAdapters/dataTable/basicTable.adapter';
+import paginationAdapter from '../../../../d2UiReactAdapters/dataTable/pagination.adapter';
 
-import withData from './Pagination/withData';
-import withNavigation from '../../../Pagination/withDefaultNavigation';
-import withRowsPerPageSelector from '../../../Pagination/withRowsPerPageSelector';
-import SortLabelWrapper from '../../../DataTable/SortLabelWrapper.component';
-import { directions, placements } from '../../../d2UiReactAdapters/dataTable/componentGetters/sortLabel.const';
+import withData from '../Pagination/withData';
+import withNavigation from '../../../../Pagination/withDefaultNavigation';
+import withRowsPerPageSelector from '../../../../Pagination/withRowsPerPageSelector';
+import SortLabelWrapper from '../../../../DataTable/SortLabelWrapper.component';
+import { directions, placements } from '../../../../d2UiReactAdapters/dataTable/componentGetters/sortLabel.const';
+import withFilterSelectors from '../FilterSelectors/withFilterSelectors';
 
-import DownloadTable from '../../../DownloadTable/DownloadTable.container';
+import DownloadTable from '../../../../DownloadTable/DownloadTable.container';
 
-import withHeader from './Header/withHeader';
-import withListHeaderWrapper from '../ListHeaderWrapper/withListHeaderWrapper';
+import withHeader from '../Header/withHeader';
+import withListHeaderWrapper from '../../ListHeaderWrapper/withListHeaderWrapper';
 
 // $FlowSuppress
 const { Table, Row, Cell, HeaderCell, Head, Body } = getTableComponents(basicTableAdapter);
@@ -97,7 +98,7 @@ const styles = theme => ({
     },
 });
 
-type Column = {
+export type Column = {
     id: string,
     header: string,
     visible: boolean,
@@ -296,4 +297,4 @@ class EventsList extends Component<Props> {
  * Create the event list for a event capture program
  * @namespace EventsList
  */
-export default withHeader()(withListHeaderWrapper()(withStyles(styles)(EventsList)));
+export default withHeader()(withListHeaderWrapper()(withFilterSelectors()(withStyles(styles)(EventsList))));

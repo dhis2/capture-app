@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 
 type Props = {
-    onChange: (value: string, event: UiEventData) => void,
-    onBlur: (value: string, event: UiEventData) => void,
+    onChange?: ?(value: string, event: UiEventData) => void,
+    onBlur?: ?(value: string, event: UiEventData) => void,
 };
 
 class D2TextField extends Component<Props> {
@@ -24,11 +24,11 @@ class D2TextField extends Component<Props> {
     }
 
     handleChange(event: UiEventData) {
-        this.props.onChange(event.target.value, event);
+        this.props.onChange && this.props.onChange(event.target.value, event);
     }
 
     handleBlur(event: UiEventData) {
-        this.props.onBlur(event.target.value, event);
+        this.props.onBlur && this.props.onBlur(event.target.value, event);
     }
 
     render() {

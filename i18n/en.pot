@@ -77,6 +77,12 @@ msgstr ""
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
+msgid "Close"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
 msgid "No events to display"
 msgstr ""
 

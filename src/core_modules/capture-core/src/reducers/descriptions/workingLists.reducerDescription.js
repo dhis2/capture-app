@@ -17,6 +17,9 @@ import {
 import {
     actionTypes as mainPageSelectorActionTypes,
 } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
+import {
+    actionTypes as filterSelectorActionTypes,
+} from '../../components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.actions';
 
 export const workingListsDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
@@ -282,3 +285,15 @@ export const workingListsContextDesc = createReducerDescription({
         return newState;
     },
 }, 'workingListsContext');
+
+export const workingListFiltersEdit = createReducerDescription({
+    [filterSelectorActionTypes.EDIT_CONTENTS]: (state, action) => {
+        const payload = action.payload;
+        const newState = { ...state };
+        newState.main = {
+            ...newState.main,
+            [payload.itemId]: payload.value,
+        };
+        return newState;
+    },
+}, 'workingListFiltersEdit');

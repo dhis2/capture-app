@@ -29,7 +29,7 @@ type ApiTEIEvent = {
 
 export type ClientEventContainer = {
     id: string,
-    event: Event,
+    event: CaptureClientEvent,
     values: { [key: string]: any },
 };
 
@@ -67,7 +67,7 @@ function getConvertedValue(valueToConvert: any, inputKey: string) {
     }
     return convertedValue;
 }
-function convertMainProperties(apiEvent: ApiTEIEvent): Event {
+function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
     return Object
         .keys(apiEvent)
         .reduce((accEvent, inputKey) => {

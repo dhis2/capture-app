@@ -35,7 +35,7 @@ declare type ReduxStore = {
 }
 
 // Events
-declare type Event = {
+declare type CaptureClientEvent = {
     eventId: string,
     programId: string,
     programStageId: string,

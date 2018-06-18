@@ -1,16 +1,16 @@
 // @flow
 import { createSelectorCreator, createSelector, defaultMemoize } from 'reselect';
 
-import getStageFromProgramIdForEventProgram from '../../../../metaData/helpers/getStageFromProgramIdForEventProgram';
-import getStageFromEvent from '../../../../metaData/helpers/getStageFromEvent';
-import { convertMainEvent } from '../../../../events/mainEventConverter';
-import { convertValue } from '../../../../converters/clientToList';
-import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
-import { mainPropertyNames } from './getColumnsConfiguration';
-import elementTypeKeys from '../../../../metaData/DataElement/elementTypes';
+import getStageFromProgramIdForEventProgram from '../../../../../metaData/helpers/getStageFromProgramIdForEventProgram';
+import getStageFromEvent from '../../../../../metaData/helpers/getStageFromEvent';
+import { convertMainEvent } from '../../../../../events/mainEventConverter';
+import { convertValue } from '../../../../../converters/clientToList';
+import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
+import { mainPropertyNames } from '../getColumnsConfiguration';
+import elementTypeKeys from '../../../../../metaData/DataElement/elementTypes';
 
 type EventContainer = {
-    event: Event,
+    event: CaptureClientEvent,
     eventValues: { [key: string]: any },
 };
 
