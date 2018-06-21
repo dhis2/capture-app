@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-06-14T18:12:07.128Z\n"
-"PO-Revision-Date: 2018-06-14T18:12:07.128Z\n"
+"POT-Creation-Date: 2018-06-21T11:29:01.548Z\n"
+"PO-Revision-Date: 2018-06-21T11:29:01.548Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -83,6 +83,9 @@ msgstr ""
 msgid "Select a registering unit to start reporting"
 msgstr ""
 
+msgid "Select a category option to start reporting"
+msgstr ""
+
 msgid "New event"
 msgstr ""
 
@@ -106,6 +109,12 @@ msgstr ""
 msgid "Find"
 msgstr ""
 
+msgid "orgunit"
+msgstr ""
+
+msgid "program"
+msgstr ""
+
 msgid "An error has occured. See log for details"
 msgstr ""
 
@@ -122,4 +131,12 @@ msgid "Choose a date..."
 msgstr ""
 
 msgid "Today"
+msgstr ""
+
+msgctxt "orgunit"
+msgid "selected"
+msgstr ""
+
+msgctxt "program"
+msgid "selected"
 msgstr ""

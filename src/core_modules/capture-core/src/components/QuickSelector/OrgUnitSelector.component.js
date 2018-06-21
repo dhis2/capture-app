@@ -23,8 +23,10 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 
-import { getTranslation, getCurrentUser } from '../../d2/d2Instance';
+import { getCurrentUser } from '../../d2/d2Instance';
 import { OrgUnitTreeMultipleRoots } from '@dhis2/d2-ui-org-unit-tree';
+
+import i18n from '@dhis2/d2-i18n';
 
 
 const styles = () => ({
@@ -145,7 +147,7 @@ class OrgUnitSelector extends Component<Props> {
             return (
                 <div>
                     <Paper elevation={1} className={this.props.classes.selectedPaper}>
-                        <h4 className={this.props.classes.title}>{ getTranslation('selected_orgunit') }</h4>
+                        <h4 className={this.props.classes.title}>{ i18n.t('selected_orgunit') }</h4>
                         <p className={this.props.classes.selectedText}>{this.props.storedOrgUnits[this.props.selectedOrgUint].name}
                             <IconButton className={this.props.classes.selectedButton} onClick={() => this.props.onReset()}>
                                 <ClearIcon className={this.props.classes.selectedButtonIcon} />
@@ -180,7 +182,7 @@ class OrgUnitSelector extends Component<Props> {
             return (
                 <div>
                     <Paper elevation={1} className={this.props.classes.paper}>
-                        <h4 className={this.props.classes.title}>{ getTranslation('orgunit') }</h4>
+                        <h4 className={this.props.classes.title}>{ i18n.t('orgunit') }</h4>
                         <List>
                             {orgUnits.map(i =>
                                 (<ListItem
@@ -198,7 +200,7 @@ class OrgUnitSelector extends Component<Props> {
         return (
             <div>
                 <Paper elevation={1} className={this.props.classes.paper}>
-                    <h4 className={this.props.classes.title}>{ getTranslation('orgunit') }</h4>
+                    <h4 className={this.props.classes.title}>{ i18n.t('orgunit') }</h4>
                     <div className={this.props.classes.orgunittree}>
                         <OrgUnitTreeMultipleRoots
                             roots={this.state.roots}
