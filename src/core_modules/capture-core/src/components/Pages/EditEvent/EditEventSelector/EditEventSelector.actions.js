@@ -12,6 +12,11 @@ export const actionTypes = {
     OPEN_NEW_EVENT: 'openNewEventPageFromEditEventPage',
 };
 
+export const batchActionTypes = {
+    START_AGAIN: 'startAgainFromEditEventPageBatch',
+    RESET_PROGRAM_AND_CATEGORY_OPTION: 'resetProgramAndCategoryOptionFromEditEventPageBatch',
+};
+
 export const setOrgUnitFromEditEventPage =
     (id: string, orgUnit: Object) => actionCreator(actionTypes.SET_ORG_UNIT)({ id, orgUnit });
 

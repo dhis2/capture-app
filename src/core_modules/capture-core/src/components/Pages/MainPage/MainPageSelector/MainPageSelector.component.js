@@ -11,11 +11,12 @@ type Props = {
     onSetOrgUnit: (id: string, orgUnit: Object) => void,
     onResetOrgUnitId: () => void,
     onSetProgramId: (id: string) => void,
-    onResetProgramId: () => void,
     onSetCategoryOption: (categoryId: string, categoryOptionId: string) => void,
     onResetCategoryOption: (categoryId: string) => void,
     onResetAllCategoryOptions: () => void,
     onOpenNewEventPage: (programId: string, orgUnitId: string) => void,
+    onStartAgain: () => void,
+    onResetProgramAndAllCategoryOptions: () => void,
 };
 
 class MainPageSelector extends Component<Props> {
@@ -32,14 +33,11 @@ class MainPageSelector extends Component<Props> {
     }
 
     handleStartAgain() {
-        this.props.onResetOrgUnitId();
-        this.props.onResetProgramId();
-        this.props.onResetAllCategoryOptions();
+        this.props.onStartAgain();
     }
 
     handleResetProgramId() {
-        this.props.onResetProgramId();
-        this.props.onResetAllCategoryOptions();
+        this.props.onResetProgramAndAllCategoryOptions();
     }
 
     handleClickNew() {

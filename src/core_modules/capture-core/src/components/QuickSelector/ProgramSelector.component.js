@@ -141,7 +141,7 @@ class ProgramSelector extends Component<Props> {
                         <Paper elevation={1} className={this.props.classes.selectedPaper}>
                             <Grid container spacing={8}>
                                 <Grid item xs={12} sm={6}>
-                                    <h4 className={this.props.classes.title}>{ i18n.t('selected_program') }</h4>
+                                    <h4 className={this.props.classes.title}>{ i18n.t('Selected Program') }</h4>
                                     <p className={this.props.classes.selectedText}>{selectedProgram.name}
                                         <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetProgram()}>
                                             <ClearIcon className={this.props.classes.selectedButtonIcon} />

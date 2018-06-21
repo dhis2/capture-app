@@ -3,18 +3,19 @@ import React, { Component } from 'react';
 
 import QuickSelector from '../../../QuickSelector/QuickSelector.container';
 import NewEvent from '../NewEvent.container';
-import withLoadHandler from '../withLoadHandler';
-
 import WarningDialog from './WarningDialog.components';
+import withLoadHandler from '../withLoadHandler';
+import i18n from '@dhis2/d2-i18n';
 
 type Props = {
     onSetOrgUnit: (id: string, orgUnit: Object) => void,
     onResetOrgUnitId: () => void,
     onSetProgramId: (id: string) => void,
-    onResetProgramId: () => void,
     onSetCategoryOption: (categoryId: string, categoryOptionId: string) => void,
     onResetCategoryOption: (categoryId: string) => void,
     onResetAllCategoryOptions: () => void,
+    onStartAgain: () => void,
+    onResetProgramAndAllCategoryOptions: () => void,
 };
 
 class EditEventSelector extends Component<Props> {
@@ -85,9 +86,7 @@ class EditEventSelector extends Component<Props> {
     }
 
     handleAcceptStartAgain() {
-        this.props.onResetOrgUnitId();
-        this.props.onResetProgramId();
-        this.props.onResetAllCategoryOptions();
+        this.props.onStartAgain();
         this.handleClose();
     }
 
@@ -97,8 +96,7 @@ class EditEventSelector extends Component<Props> {
     }
 
     handleAcceptProgram() {
-        this.props.onResetProgramId();
-        this.props.onResetAllCategoryOptions();
+        this.props.onResetProgramAndAllCategoryOptions();
         this.handleClose();
     }
 
@@ -112,9 +110,7 @@ class EditEventSelector extends Component<Props> {
     }
 
     handleAcceptNew() {
-        this.props.onResetOrgUnitId();
-        this.props.onResetProgramId();
-        this.props.onResetAllCategoryOptions();
+        this.props.onStartAgain();
         this.handleClose();
     }
 
@@ -133,11 +129,11 @@ class EditEventSelector extends Component<Props> {
                     onClickNew={this.handleClickNew}
                 />
                 <NewEvent />
-                <WarningDialog onAcceptClick={this.handleAcceptStartAgain} open={this.state.openStartAgainWarning} onClose={this.handleClose} titleText="Start Again" contentText="Are you sure? All unsaved data will be lost." />
-                <WarningDialog onAcceptClick={this.handleAcceptOrgUnit} open={this.state.openOrgUnitWarning} onClose={this.handleClose} titleText="Reset Organisation Unit" contentText="Are you sure? All unsaved data will be lost." />
-                <WarningDialog onAcceptClick={this.handleAcceptProgram} open={this.state.openProgramWarning} onClose={this.handleClose} titleText="Reset Program" contentText="Are you sure? All unsaved data will be lost." />
-                <WarningDialog onAcceptClick={this.handleAcceptCatCombo} open={this.state.openCatComboWarning} onClose={this.handleClose} titleText="Reset Category Option" contentText="Are you sure? All unsaved data will be lost." />
-                <WarningDialog onAcceptClick={this.handleAcceptNew} open={this.state.openNewEventWarning} onClose={this.handleClose} titleText="Create New Event" contentText="Are you sure? All unsaved data will be lost." />
+                <WarningDialog onAcceptClick={this.handleAcceptStartAgain} open={this.state.openStartAgainWarning} onClose={this.handleClose} titleText={i18n.t('Start Again')} contentText={i18n.t('Are you sure? All unsaved data will be lost')} />
+                <WarningDialog onAcceptClick={this.handleAcceptOrgUnit} open={this.state.openOrgUnitWarning} onClose={this.handleClose} titleText={i18n.t('Reset Organisation Unit')} contentText={i18n.t('Are you sure? All unsaved data will be lost')} />
+                <WarningDialog onAcceptClick={this.handleAcceptProgram} open={this.state.openProgramWarning} onClose={this.handleClose} titleText={i18n.t('Reset Program')} contentText={i18n.t('Are you sure? All unsaved data will be lost')} />
+                <WarningDialog onAcceptClick={this.handleAcceptCatCombo} open={this.state.openCatComboWarning} onClose={this.handleClose} titleText={i18n.t('Reset Category Option')} contentText={i18n.t('Are you sure? All unsaved data will be lost')} />
+                <WarningDialog onAcceptClick={this.handleAcceptNew} open={this.state.openNewEventWarning} onClose={this.handleClose} titleText={i18n.t('Create New Event')} contentText={i18n.t('Are you sure? All unsaved data will be lost')} />
             </div>
         );
     }

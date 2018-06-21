@@ -1,7 +1,8 @@
 // @flow
 import { connect } from 'react-redux';
+import { batchActions } from 'redux-batched-actions';
 import MainPageSelector from './MainPageSelector.component';
-import { resetOrgUnitIdFromMainPage, setOrgUnitFromMainPage, setProgramIdFromMainPage, resetProgramIdFromMainPage, setCategoryOptionFromMainPage, resetCategoryOptionFromMainPage, resetAllCategoryOptionsFromMainPage, openNewEventPageFromMainPage } from './MainPageSelector.actions';
+import { resetOrgUnitIdFromMainPage, setOrgUnitFromMainPage, setProgramIdFromMainPage, resetProgramIdFromMainPage, setCategoryOptionFromMainPage, resetCategoryOptionFromMainPage, resetAllCategoryOptionsFromMainPage, openNewEventPageFromMainPage, batchActionTypes } from './MainPageSelector.actions';
 
 const mapStateToProps = (state: ReduxState) => ({
     selectedProgramId: state.currentSelections.programId,
@@ -32,6 +33,19 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
     onOpenNewEventPage: (programId: string, orgUnitId: string) => {
         dispatch(openNewEventPageFromMainPage(programId, orgUnitId));
+    },
+    onStartAgain: () => {
+        dispatch(batchActions([
+            resetOrgUnitIdFromMainPage(),
+            resetProgramIdFromMainPage(),
+            resetAllCategoryOptionsFromMainPage(),
+        ], batchActionTypes.START_AGAIN));
+    },
+    onResetProgramAndAllCategoryOptions: () => {
+        dispatch(batchActions([
+            resetProgramIdFromMainPage(),
+            resetAllCategoryOptionsFromMainPage(),
+        ], batchActionTypes.RESET_PROGRAM_AND_CATEGORY_OPTION));
     },
 });
 

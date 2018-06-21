@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-06-21T14:21:52.685Z\n"
-"PO-Revision-Date: 2018-06-21T14:21:52.685Z\n"
+"POT-Creation-Date: 2018-06-21T17:20:59.427Z\n"
+"PO-Revision-Date: 2018-06-21T17:20:59.427Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -48,6 +48,24 @@ msgid "Offline"
 msgstr ""
 
 msgid "Syncing"
+msgstr ""
+
+msgid "Start Again"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Reset Organisation Unit"
+msgstr ""
+
+msgid "Reset Program"
+msgstr ""
+
+msgid "Reset Category Option"
+msgstr ""
+
+msgid "Create New Event"
 msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
@@ -100,6 +118,9 @@ msgid ""
 "details."
 msgstr ""
 
+msgid "Are you sure? All unsaved data will be lost"
+msgstr ""
+
 msgid "Reset"
 msgstr ""
 
@@ -112,16 +133,13 @@ msgstr ""
 msgid "Selected registering unit"
 msgstr ""
 
-msgid "Start Again"
-msgstr ""
-
 msgid "Registering Oraginastion Unit"
 msgstr ""
 
-msgid "Select"
+msgid "Selected Program"
 msgstr ""
 
-msgid "Selected Program"
+msgid "Select"
 msgstr ""
 
 msgid "Program"
@@ -146,8 +164,4 @@ msgid "Choose a date..."
 msgstr ""
 
 msgid "Today"
-msgstr ""
-
-msgctxt "program"
-msgid "selected"
 msgstr ""

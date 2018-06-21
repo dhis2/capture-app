@@ -1,7 +1,8 @@
 // @flow
 import { connect } from 'react-redux';
+import { batchActions } from 'redux-batched-actions';
 import EditEventSelector from './EditEventSelector.component';
-import { resetOrgUnitIdFromEditEventPage, setOrgUnitFromEditEventPage, setProgramIdFromEditEventPage, resetProgramIdFromEditEventPage, setCategoryOptionFromEditEventPage, resetCategoryOptionFromEditEventPage, resetAllCategoryOptionsFromEditEventPage, openNewEventPageFromEditEventPage } from './EditEventSelector.actions';
+import { resetOrgUnitIdFromEditEventPage, setOrgUnitFromEditEventPage, setProgramIdFromEditEventPage, resetProgramIdFromEditEventPage, setCategoryOptionFromEditEventPage, resetCategoryOptionFromEditEventPage, resetAllCategoryOptionsFromEditEventPage, openNewEventPageFromEditEventPage, batchActionTypes } from './EditEventSelector.actions';
 
 const mapStateToProps = (state: ReduxState) => ({
     selectedProgramId: state.currentSelections.programId,
@@ -32,6 +33,19 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
     onOpenNewEventPage: (programId: string, orgUnitId: string) => {
         dispatch(openNewEventPageFromEditEventPage(programId, orgUnitId));
+    },
+    onStartAgain: () => {
+        dispatch(batchActions([
+            resetOrgUnitIdFromEditEventPage(),
+            resetProgramIdFromEditEventPage(),
+            resetAllCategoryOptionsFromEditEventPage(),
+        ], batchActionTypes.START_AGAIN));
+    },
+    onResetProgramAndAllCategoryOptions: () => {
+        dispatch(batchActions([
+            resetProgramIdFromEditEventPage(),
+            resetAllCategoryOptionsFromEditEventPage(),
+        ], batchActionTypes.RESET_PROGRAM_AND_CATEGORY_OPTION));
     },
 });
 

@@ -71,7 +71,7 @@ const styles = () => ({
         width: 20,
         height: 20,
     },
-    orgunittree: {
+    orgunitTree: {
         backgroundColor: 'white',
         border: '1px solid lightGrey',
         borderRadius: 5,
@@ -202,7 +202,7 @@ class OrgUnitSelector extends Component<Props> {
             <div>
                 <Paper elevation={1} className={this.props.classes.paper}>
                     <h4 className={this.props.classes.title}>{ i18n.t('Registering Oraginastion Unit') }</h4>
-                    <div className={this.props.classes.orgunittree}>
+                    <div className={this.props.classes.orgunitTree}>
                         <OrgUnitTreeMultipleRoots
                             roots={this.state.roots}
                             hideCheckboxes

@@ -27,21 +27,22 @@ type CurrentSelectionsState = {
 };
 
 const calculateCompleteStatus = (state: CurrentSelectionsState) => {
-    const programsArray = Array.from(programs.values());
-    const selectedProgram = programsArray.find(program => program.id === state.programId);
+    if (!state.orgUnitId || !state.programId) {
+        return false;
+    }
 
-    if (state.programId && selectedProgram.categoryCombo && !selectedProgram.categoryCombo.isDefault) {
-        const categoryCombos = programsArray.find(program => program.id === state.programId).categoryCombo.categories;
+    const selectedProgram = state.programId && programs.get(state.programId);
 
-        for (let i = 0; i < categoryCombos.length; i++) {
-            if (!state.categories || !state.categories[categoryCombos[i].id]) {
+    if (selectedProgram && selectedProgram.categories) {
+        const categoryies = selectedProgram.categories;
+
+        for (let i = 0; i < categoryies.length; i++) {
+            if (!state.categories || !state.categories[categoryies[i].id]) {
                 return false;
             }
         }
-        return !!(state.programId && state.orgUnitId);
     }
-
-    return !!(state.programId && state.orgUnitId);
+    return true;
 };
 
 export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => createReducerDescription({

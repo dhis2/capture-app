@@ -64,7 +64,6 @@ class QuickSelector extends Component<Props> {
         this.props.onSetOrgUnit(orgUnitId, orgUnitObject);
     }
 
-    // TODO: Add support for cat-combos.
     render() {
         // The grid has a total width of 12 columns, we need to calculate how much width each selector should have.
         let orgUnitSelectorWidth = 3;
@@ -83,7 +82,7 @@ class QuickSelector extends Component<Props> {
         }
 
         if (this.props.selectedOrgUnitId && this.props.selectedProgramId) {
-            if (selectedProgram.categoryCombo && selectedProgram.categoryCombo.categories.length > 0 && !selectedProgram.categoryCombo.isDefault) {
+            if (selectedProgram.categories) {
                 orgUnitSelectorWidth = 3;
                 programSelectorWidth = 5;
                 actionButtonsWidth = 4;
@@ -93,7 +92,7 @@ class QuickSelector extends Component<Props> {
                 actionButtonsWidth = 6;
             }
         } else if (!this.props.selectedOrgUnitId && this.props.selectedProgramId) {
-            if (selectedProgram.categoryCombo && selectedProgram.categoryCombo.categories.length > 0 && !selectedProgram.categoryCombo.isDefault) {
+            if (selectedProgram.categories) {
                 orgUnitSelectorWidth = 3;
                 programSelectorWidth = 5;
                 actionButtonsWidth = 4;

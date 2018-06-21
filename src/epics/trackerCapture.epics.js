@@ -77,6 +77,7 @@ import {
 } from 'capture-core/components/Pages/EditEvent/EditEventSelector/EditEventSelector.epics';
 import {
     newEventPageSelectorUpdateURLEpic,
+    newEventPageSelectorResetURLEpic,
 } from 'capture-core/components/Pages/NewEvent/NewEventSelector/NewEventSelector.epics';
 
 import { loadStartupData } from '../init/entry.epics';
@@ -123,4 +124,5 @@ export default combineEpics(
     mainPageSelectorUpdateURLEpic,
     editEventPageSelectorUpdateURLEpic,
     newEventPageSelectorUpdateURLEpic,
+    newEventPageSelectorResetURLEpic,
 );

@@ -1,7 +1,8 @@
 // @flow
 import { connect } from 'react-redux';
+import { batchActions } from 'redux-batched-actions';
 import NewEventSelector from './NewEventSelector.component';
-import { resetOrgUnitIdFromNewEventPage, setOrgUnitFromNewEventPage, setProgramIdFromNewEventPage, resetProgramIdFromNewEventPage, setCategoryOptionFromNewEventPage, resetCategoryOptionFromNewEventPage, resetAllCategoryOptionsFromNewEventPage } from './NewEventSelector.actions';
+import { resetOrgUnitIdFromNewEventPage, setOrgUnitFromNewEventPage, setProgramIdFromNewEventPage, resetProgramIdFromNewEventPage, setCategoryOptionFromNewEventPage, resetCategoryOptionFromNewEventPage, resetAllCategoryOptionsFromNewEventPage, batchActionTypes } from './NewEventSelector.actions';
 
 const mapStateToProps = (state: ReduxState) => ({
     
@@ -28,6 +29,19 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
     onResetAllCategoryOptions: () => {
         dispatch(resetAllCategoryOptionsFromNewEventPage());
+    },
+    onStartAgain: () => {
+        dispatch(batchActions([
+            resetOrgUnitIdFromNewEventPage(),
+            resetProgramIdFromNewEventPage(),
+            resetAllCategoryOptionsFromNewEventPage(),
+        ], batchActionTypes.START_AGAIN));
+    },
+    onResetProgramAndAllCategoryOptions: () => {
+        dispatch(batchActions([
+            resetProgramIdFromNewEventPage(),
+            resetAllCategoryOptionsFromNewEventPage(),
+        ], batchActionTypes.RESET_PROGRAM_AND_CATEGORY_OPTION));
     },
 });
 

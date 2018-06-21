@@ -2,6 +2,7 @@
 import { replace } from 'react-router-redux';
 import {
     actionTypes as editEventPageSelectorActionTypes,
+    batchActionTypes as editEventPageSelectorBatchActionTypes,
 } from './EditEventSelector.actions';
 
 const getArguments = (programId: string, orgUnitId: string) => {
@@ -18,7 +19,10 @@ const getArguments = (programId: string, orgUnitId: string) => {
 
 export const editEventPageSelectorUpdateURLEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(editEventPageSelectorActionTypes.RESET_ORG_UNIT_ID, editEventPageSelectorActionTypes.SET_ORG_UNIT, editEventPageSelectorActionTypes.SET_PROGRAM_ID, editEventPageSelectorActionTypes.RESET_PROGRAM_ID)
+    action$.ofType(editEventPageSelectorActionTypes.RESET_ORG_UNIT_ID,
+        editEventPageSelectorActionTypes.SET_ORG_UNIT, editEventPageSelectorActionTypes.SET_PROGRAM_ID,
+        editEventPageSelectorActionTypes.RESET_PROGRAM_ID, editEventPageSelectorActionTypes.RESET_CATEGORY_OPTION,
+        editEventPageSelectorBatchActionTypes.START_AGAIN, editEventPageSelectorBatchActionTypes.RESET_PROGRAM_AND_CATEGORY_OPTION)
         .map(() => {
             const state = store.getState();
             const { programId, orgUnitId } = state.currentSelections;

@@ -171,6 +171,11 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         newState.locationSwitchInProgress = true;
         return newState;
     },
+    [editEventPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state) => {
+        const newState = { ...state };
+        newState.locationSwitchInProgress = true;
+        return newState;
+    },
     [newEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
         const newState = { ...state };
         newState.locationSwitchInProgress = true;
