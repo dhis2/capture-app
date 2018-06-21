@@ -25,6 +25,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 
 import { getCurrentUser } from '../../d2/d2Instance';
 import { OrgUnitTreeMultipleRoots } from '@dhis2/d2-ui-org-unit-tree';
+import withLoadingIndicator from '../../HOC/withLoadingIndicator';
 
 import i18n from '@dhis2/d2-i18n';
 
@@ -81,9 +82,9 @@ const styles = () => ({
 type Props = {
     handleClickOrgUnit: (orgUnitId: string, orgUnitObject: Object) => void,
     onReset: () => void,
-    selectedOrgUint: string,
+    selectedOrgUnitId: string,
     showWarning: boolean,
-    storedOrgUnits: Object,
+    selectedOrgUnit: Object,
     classes: Object,
 };
 
@@ -143,12 +144,12 @@ class OrgUnitSelector extends Component<Props> {
 
     render() {
         // If orgUnit is set in Redux state.
-        if (this.props.selectedOrgUint) {
+        if (this.props.selectedOrgUnitId) {
             return (
                 <div>
                     <Paper elevation={1} className={this.props.classes.selectedPaper}>
-                        <h4 className={this.props.classes.title}>{ i18n.t('selected_orgunit') }</h4>
-                        <p className={this.props.classes.selectedText}>{this.props.storedOrgUnits[this.props.selectedOrgUint].name}
+                        <h4 className={this.props.classes.title}>{ i18n.t('Selected registering unit') }</h4>
+                        <p className={this.props.classes.selectedText}>{this.props.selectedOrgUnit.name}
                             <IconButton className={this.props.classes.selectedButton} onClick={() => this.props.onReset()}>
                                 <ClearIcon className={this.props.classes.selectedButtonIcon} />
                             </IconButton>
@@ -158,7 +159,7 @@ class OrgUnitSelector extends Component<Props> {
                         open={this.state.open}
                         onClose={this.handleClose}
                     >
-                        <DialogTitle>{"Start Again"}</DialogTitle>
+                        <DialogTitle>{i18n.t('Start Again')}</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
                                 Are you sure? All unsaved data will be lost.
@@ -182,7 +183,7 @@ class OrgUnitSelector extends Component<Props> {
             return (
                 <div>
                     <Paper elevation={1} className={this.props.classes.paper}>
-                        <h4 className={this.props.classes.title}>{ i18n.t('orgunit') }</h4>
+                        <h4 className={this.props.classes.title}>{ i18n.t('Registering Oraginastion Unit') }</h4>
                         <List>
                             {orgUnits.map(i =>
                                 (<ListItem
@@ -200,7 +201,7 @@ class OrgUnitSelector extends Component<Props> {
         return (
             <div>
                 <Paper elevation={1} className={this.props.classes.paper}>
-                    <h4 className={this.props.classes.title}>{ i18n.t('orgunit') }</h4>
+                    <h4 className={this.props.classes.title}>{ i18n.t('Registering Oraginastion Unit') }</h4>
                     <div className={this.props.classes.orgunittree}>
                         <OrgUnitTreeMultipleRoots
                             roots={this.state.roots}
@@ -214,4 +215,4 @@ class OrgUnitSelector extends Component<Props> {
     }
 }
 
-export default withStyles(styles)(OrgUnitSelector);
+export default withLoadingIndicator()(withStyles(styles)(OrgUnitSelector));

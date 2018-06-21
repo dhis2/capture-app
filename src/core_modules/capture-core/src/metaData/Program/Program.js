@@ -2,6 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/src/isFunction';
 
+import Category from '../CategoryCombinations/Category';
 import type { ProgramRule, ProgramRuleVariable } from '../../RulesEngine/rulesEngine.types';
 
 export default class Program {
@@ -9,7 +10,7 @@ export default class Program {
     _name: string;
     _shortName: string;
     _version: string | number;
-    _categoryCombo: Object;
+    _categories: ?Array<Category>;
     _programRules: Array<ProgramRule>;
     _programRuleVariables: Array<ProgramRuleVariable>;
 
@@ -40,11 +41,11 @@ export default class Program {
         return this._shortName;
     }
 
-    set categoryCombo(categoryCombo: Object) {
-        this._categoryCombo = categoryCombo;
+    set categories(categories: ?Array<Category>) {
+        this._categories = categories;
     }
-    get categoryCombo(): Object {
-        return this._categoryCombo;
+    get categories(): ?Array<Category> {
+        return this._categories;
     }
 
     set programRules(programRules: Array<ProgramRule>) {

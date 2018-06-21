@@ -5,11 +5,7 @@ import HeaderBar from '@dhis2/d2-ui-header-bar';
 import { withStyles } from '@material-ui/core/styles';
 
 import getD2 from 'capture-core/d2/d2Instance';
-import MainPage from 'capture-core/components/Pages/MainPage/MainPage.container';
-import NewEvent from 'capture-core/components/Pages/NewEvent/NewEvent.container';
-import EditEvent from 'capture-core/components/Pages/EditEvent/EditEvent.container';
 import NetworkStatusBadge from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.component';
-import QuickSelector from 'capture-core/components/QuickSelector/QuickSelector.container';
 
 import MainPageSelector from 'capture-core/components/Pages/MainPage/MainPageSelector/MainPageSelector.container';
 import NewEventSelector from 'capture-core/components/Pages/NewEvent/NewEventSelector/NewEventSelector.container';

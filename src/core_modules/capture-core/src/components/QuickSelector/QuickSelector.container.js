@@ -9,7 +9,7 @@ const mapStateToProps = (state: Object) => ({
     selectedCategories: state.currentSelections.categories,
     selectedOrgUnitId: state.currentSelections.orgUnitId,
     selectionComplete: state.currentSelections.complete,
-    storedOrgUnits: state.organisationUnits,
+    selectedOrgUnit: state.currentSelections.orgUnitId ? state.organisationUnits[state.currentSelections.orgUnitId] : null,
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({

@@ -25,7 +25,7 @@ type Props = {
     selectedProgramId: string,
     selectedCategories: Object,
     selectionComplete: boolean,
-    storedOrgUnits: Object,
+    selectedOrgUnit: Object,
     classes: Object,
     clearOnStartAgain: boolean,
     onSetOrgUnit: (orgUnitId: string, orgUnitObject: Object) => void,
@@ -113,10 +113,11 @@ class QuickSelector extends Component<Props> {
                 <Grid container spacing={16}>
                     <Grid item xs={12} sm={orgUnitSelectorWidth}>
                         <OrgUnitSelector
-                            selectedOrgUint={this.props.selectedOrgUnitId}
+                            selectedOrgUnitId={this.props.selectedOrgUnitId}
                             handleClickOrgUnit={this.handleClickOrgUnit}
-                            storedOrgUnits={this.props.storedOrgUnits}
+                            selectedOrgUnit={this.props.selectedOrgUnit}
                             onReset={this.props.onResetOrgUnitId}
+                            ready={!(this.props.selectedOrgUnitId && !this.props.selectedOrgUnit)}
                         />
                     </Grid>
                     <Grid item xs={12} sm={programSelectorWidth}>

@@ -3,10 +3,7 @@
  * @namespace MainPage
 */
 import React, { Component } from 'react';
-
-import withLoadHandler from './withLoadHandler';
 import EventsListConnectivityWrapper from './EventsListConnectionWrapper/EventsListConnectivityWrapper.container';
-import EventsList from './EventsList/EventsList.container';
 
 type Props = {
     currentSelectionsComplete: boolean,

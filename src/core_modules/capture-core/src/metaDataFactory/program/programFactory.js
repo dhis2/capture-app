@@ -13,6 +13,7 @@ import DataElement from '../../metaData/DataElement/DataElement';
 import OptionSet from '../../metaData/OptionSet/OptionSet';
 import { inputTypes } from '../../metaData/OptionSet/optionSet.const';
 import Option from '../../metaData/OptionSet/Option';
+import Category from '../../metaData/CategoryCombinations/Category';
 
 import { convertOptionSetValue } from '../../converters/serverToClient';
 import isNonEmptyArray from '../../utils/isNonEmptyArray';
@@ -66,12 +67,31 @@ type CachedProgramStage = {
     programStageDataElements: ?Array<CachedProgramStageDataElement>
 };
 
+type CachedCategoryOption = {
+    id: string,
+    displayName: string,
+};
+
+type CachedCategory = {
+    id: string,
+    displayName: string,
+    categoryOptions: ?Array<CachedCategoryOption>,
+};
+
+type CachedCategoryCombo = {
+    id: string,
+    displayName: string,
+    categories: ?Array<CachedCategory>,
+    isDefault: boolean,
+};
+
 type CachedProgram = {
     id: string,
     displayName: string,
     displayShortName: string,
     programStages: Array<CachedProgramStage>,
     programType: string,
+    categoryCombo: ?CachedCategoryCombo,
 };
 
 type SectionSpecs = {
@@ -232,6 +252,22 @@ function buildStage(d2ProgramStage: CachedProgramStage) {
     return stage;
 }
 
+
+function buildCategories(cachedCategories) {
+    return cachedCategories ?
+        cachedCategories
+            .map(cachedCategory =>
+                new Category((_this) => {
+                    _this.id = cachedCategory.id;
+                    _this.name = cachedCategory.displayName;
+                    _this.categoryOptions = cachedCategory.categoryOptions ? cachedCategory.categoryOptions.map(cachedOption => ({
+                        id: cachedOption.id,
+                        name: cachedOption.displayName,
+                    })) : null;
+                }),
+            ) : null;
+}
+
 function buildProgram(d2Program: CachedProgram) {
     let program;
     if (d2Program.programType === 'WITHOUT_REGISTRATION') {
@@ -239,7 +275,7 @@ function buildProgram(d2Program: CachedProgram) {
             _this.id = d2Program.id;
             _this.name = d2Program.displayName;
             _this.shortName = d2Program.displayShortName;
-            _this.categoryCombo = d2Program.categoryCombo;
+            _this.categories = buildCategories(d2Program.categoryCombo && d2Program.categoryCombo.categories && d2Program.categoryCombo.categories.length > 0 && !d2Program.categoryCombo.isDefault ? d2Program.categoryCombo.categories : null);
         });
         const d2Stage = d2Program.programStages && d2Program.programStages[0];
         program.stage = buildStage(d2Stage);
