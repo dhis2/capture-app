@@ -57,10 +57,7 @@ class ColumnSelector extends Component<Props> {
     };
 
     handleToggle = value => () => {
-        console.log(value);
         this.props.onSetColumnVisible(value);
-        // Add logic for toggle visibility.
-        // Action for updating the list.
     };
 
     render() {
