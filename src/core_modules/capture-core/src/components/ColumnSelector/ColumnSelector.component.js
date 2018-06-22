@@ -22,6 +22,11 @@ import IconButton from '@material-ui/core/IconButton';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ReorderIcon from '@material-ui/icons/Reorder';
 
+import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
+import getStageFromProgramIdForEventProgram from '../../metaData/helpers/getStageFromProgramIdForEventProgram';
+import i18n from '@dhis2/d2-i18n';
+
+
 const styles = theme => ({
     optionsIcon: {
         color: theme.palette.primary.main,
@@ -37,6 +42,7 @@ const styles = theme => ({
 type Props = {
     classes: Object,
     workingListColumnOrder: Array,
+    selectedProgramId: string,
     onSetColumnVisible: (columnId: string) => void,
 };
 
@@ -63,6 +69,10 @@ class ColumnSelector extends Component<Props> {
     render() {
         const { classes } = this.props;
 
+        const stageContainer = getStageFromProgramIdForEventProgram(this.props.selectedProgramId);
+        // $FlowSuppress
+        const stage: RenderFoundation = stageContainer.stage;
+
         return (
             <span>
                 <IconButton onClick={this.handleClickOpen}>
@@ -75,16 +85,25 @@ class ColumnSelector extends Component<Props> {
                     onClose={this.handleClose}
                     fullWidth
                 >
-                    <DialogTitle>{"Columns to show in table"}</DialogTitle>
+                    <DialogTitle>{i18n.t('Columns to show in table')}</DialogTitle>
                     <DialogContent>
                         <Table className={classes.table}>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell colSpan={12}>Column</TableCell>
+                                    <TableCell colSpan={12}>{i18n.t('Column')}</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                             {this.props.workingListColumnOrder.map(column => {
+                                let headerName = "";
+                                if (column.isMainProperty) {
+                                    if (column.id === 'eventDate') {
+                                        headerName = stage.getLabel(column.id);
+                                    }
+                                } else {
+                                    headerName = stage.getElement(column.id).name;
+                                }
+                                
                                 return (
                                 <TableRow key={column.id} role="checkbox" tabIndex={-1}>
                                     <TableCell component="th" scope="row">
@@ -95,7 +114,7 @@ class ColumnSelector extends Component<Props> {
                                             disableRipple
                                             onClick={this.handleToggle(column.id)}
                                         />
-                                        {column.id}
+                                        {headerName}
                                     </TableCell>
                                     <TableCell>
                                         <ReorderIcon className={classes.resortIcon} />

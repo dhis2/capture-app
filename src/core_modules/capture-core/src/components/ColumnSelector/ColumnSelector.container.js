@@ -4,6 +4,7 @@ import { setColumnVisible } from './actions/ColumnSelector.actions';
 
 const mapStateToProps = (state: Object) => ({
     workingListColumnOrder: state.workingListsColumnsOrder.main,
+    selectedProgramId: state.currentSelections.programId,
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
