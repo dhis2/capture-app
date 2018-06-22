@@ -258,6 +258,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
                         value={calculatedValue}
                         clearable={nullable}
                         style={OptionsSelectVirtualized.defaultSelectStyle}
+                        menuContainerStyle={{ width: 'auto' }}
                         className={'virtualized-select'}
                         placeholder={useHintLabel ? label : ''}
                         maxHeight={maxHeight || 200}

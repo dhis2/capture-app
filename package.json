@@ -11,12 +11,13 @@
     "@dhis2/d2-ui-core": "^1.2.0",
     "@dhis2/d2-ui-forms": "1",
     "@dhis2/d2-ui-header-bar": "1.1.0",
+    "@dhis2/d2-ui-org-unit-tree": "1.0.10",
     "@material-ui/core": "^1.2.1",
     "@material-ui/icons": "^1.1.0",
     "@redux-offline/redux-offline": "^2.3.3",
     "classnames": "^2.2.5",
     "create-react-class": "^15.6.3",
-    "d2": "30",
+    "d2": "29.1.5",
     "d2-manifest": "^1.0.0",
     "d2-utilizr": "^0.2.15",
     "date-fns": "^1.29.0",
@@ -102,7 +103,7 @@
     "default_locale": "en",
     "activities": {
       "dhis": {
-          "href": ".."
+        "href": ".."
       }
     }
   }

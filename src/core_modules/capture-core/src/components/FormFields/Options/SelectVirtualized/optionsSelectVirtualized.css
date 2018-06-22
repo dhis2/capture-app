@@ -1,3 +1,19 @@
+.Select-control {
+	background: transparent;
+}
+
+.Select-input input {
+    background: transparent;
+}
+
+.Select.is-focused:not(.is-open) > .Select-control {
+    background: transparent;
+}
+
+.Select.is-focused > .Select-control {
+    background: transparent;
+}
+
 .Select-control:focus {
 	outline: none !important;
     box-shadow: none !important;
@@ -19,6 +35,7 @@
 .Select-menu-outer {
     max-height: 1000px;
     z-index: 2000 !important;
+    min-width: 100%;
 }
 
 .Select-menu {
@@ -31,7 +48,7 @@
 
 .Select-placeholder {
     padding-left: 0px !important;
-    color: rgba(0, 0, 0, 0.3) !important;
+    color: rgba(113, 113, 113, 1) !important;
 }
 
 .Select-value {

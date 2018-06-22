@@ -14,6 +14,9 @@ import {
 import {
     actionTypes as connectivityActionTypes,
 } from '../../components/Connectivity/connectivity.actions';
+import {
+    actionTypes as mainPageSelectorActionTypes,
+} from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
 
 export const workingListsDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
@@ -131,6 +134,21 @@ const getLoadingState = oldState => ({
 
 export const workingListsUIDesc = createReducerDescription({
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS]: (state) => {
+        const newState = { ...state };
+        newState.main = getLoadingState(newState.main);
+        return newState;
+    },
+    [mainPageSelectorActionTypes.SET_ORG_UNIT]: (state) => {
+        const newState = { ...state };
+        newState.main = getLoadingState(newState.main);
+        return newState;
+    },
+    [mainPageSelectorActionTypes.SET_PROGRAM_ID]: (state) => {
+        const newState = { ...state };
+        newState.main = getLoadingState(newState.main);
+        return newState;
+    },
+    [mainPageSelectorActionTypes.SET_CATEGORY_OPTION]: (state) => {
         const newState = { ...state };
         newState.main = getLoadingState(newState.main);
         return newState;

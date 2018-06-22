@@ -1,9 +1,12 @@
 // @flow
+
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+
+import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 
 import ProgramSelector from 'capture-core/components/QuickSelector/ProgramSelector.component';
 import OrgUnitSelector from 'capture-core/components/QuickSelector/OrgUnitSelector.component';
@@ -17,73 +20,106 @@ const styles = () => ({
 });
 
 type Props = {
-    selectedOrgUnit: Object,
+    selectedOrgUnitId: string,
     selectedProgramId: string,
+    selectedCategories: Object,
+    selectionComplete: boolean,
+    selectedOrgUnit: Object,
     classes: Object,
+    onSetOrgUnit: (orgUnitId: string, orgUnitObject: Object) => void,
+    onSetProgramId: (programId: string) => void,
+    onSetCategoryOption: (categoryId: string, categoryOptionId: string) => void,
+    onResetOrgUnitId: () => void,
+    onResetProgramId: () => void,
+    onResetCategoryOption: (categoryId: string) => void,
+    onResetAllCategoryOptions: () => void,
+    onStartAgain: () => void,
+    onClickNew: () => void,
 };
 
 class QuickSelector extends Component<Props> {
-    handleChangeProgram: (program: any) => void;
+    static getSelectedProgram(selectedProgramId: string) {
+        return programs.get(selectedProgramId) || {};
+    }
+
     handleClickProgram: (program: Object) => void;
-    handleChangeOrgUnit: (orgUnit: any) => void;
+    handleSetCatergoryCombo: (selectedCategoryOption: string, categoryId: string) => void;
     handleClickOrgUnit: (orgUnit: Object) => void;
-    handleClickActionButton: () => void;
     constructor(props) {
         super(props);
 
-        this.handleChangeProgram = this.handleChangeProgram.bind(this);
         this.handleClickProgram = this.handleClickProgram.bind(this);
-
-        this.handleChangeOrgUnit = this.handleChangeOrgUnit.bind(this);
+        this.handleSetCatergoryCombo = this.handleSetCatergoryCombo.bind(this);
         this.handleClickOrgUnit = this.handleClickOrgUnit.bind(this);
-
-        this.handleClickActionButton = this.handleClickActionButton.bind(this);
-    }
-
-    handleChangeProgram(program) {
-        alert('Program switching has not yet been implemented.');
     }
 
     handleClickProgram(program) {
-        alert('Program switching has not yet been implemented.');
+        this.props.onSetProgramId(program);
     }
 
-    handleChangeOrgUnit(orgUnit) {
-        alert('OrgUnit switching has not yet been implemented.');
+    handleSetCatergoryCombo(selectedCategoryOption, categoryId) {
+        this.props.onSetCategoryOption(categoryId, selectedCategoryOption);
     }
 
-    handleClickOrgUnit(orgUnit) {
-        alert('OrgUnit switching has not yet been implemented.');
+    handleClickOrgUnit(orgUnitId, orgUnitObject) {
+        this.props.onSetOrgUnit(orgUnitId, orgUnitObject);
     }
 
-    handleClickActionButton() {
-        alert('This button has not yet been implemented.');
+    calculateColumnWidths() {
+        // The grid has a total width of 12 columns, we need to calculate how much width each selector should have.
+        const selectedProgramId = this.props.selectedProgramId;
+        const selectedProgram = QuickSelector.getSelectedProgram(selectedProgramId);
+
+        let orgUnitSelectorWidth = 3;
+        let programSelectorWidth = 3;
+        let actionButtonsWidth = 6;
+
+        if (selectedProgram && selectedProgram.categories) {
+            orgUnitSelectorWidth = 3;
+            programSelectorWidth = 5;
+            actionButtonsWidth = 4;
+        }
+
+        return {
+            orgUnitSelectorWidth,
+            programSelectorWidth,
+            actionButtonsWidth,
+        };
     }
 
-    // TODO: Add support for cat-combos.
     render() {
+        const { orgUnitSelectorWidth, programSelectorWidth, actionButtonsWidth } = this.calculateColumnWidths();
+
         return (
             <Paper className={this.props.classes.paper}>
-                <Grid container spacing={24}>
-                    <Grid item xs={12} sm={4}>
+                <Grid container spacing={16}>
+                    <Grid item xs={12} sm={orgUnitSelectorWidth}>
                         <OrgUnitSelector
-                            selectedOrgUint={this.props.selectedOrgUnit}
-                            handleChangeOrgUnit={this.handleChangeOrgUnit}
-                            handleClickOrgUnit={this.handleClickOrgUnit} 
+                            selectedOrgUnitId={this.props.selectedOrgUnitId}
+                            handleClickOrgUnit={this.handleClickOrgUnit}
+                            selectedOrgUnit={this.props.selectedOrgUnit}
+                            onReset={this.props.onResetOrgUnitId}
+                            ready={!(this.props.selectedOrgUnitId && !this.props.selectedOrgUnit)}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={programSelectorWidth}>
                         <ProgramSelector
                             selectedProgram={this.props.selectedProgramId}
-                            handleChangeProgram={this.handleChangeProgram}
+                            selectedCategories={this.props.selectedCategories}
                             handleClickProgram={this.handleClickProgram}
+                            handleSetCatergoryCombo={this.handleSetCatergoryCombo}
+                            handleResetCategorySelections={this.props.onResetAllCategoryOptions}
+                            buttonModeMaxLength={5}
+                            onResetProgramId={this.props.onResetProgramId}
+                            onResetCategoryOption={this.props.onResetCategoryOption}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={actionButtonsWidth}>
                         <ActionButtons
-                            handleClickActionButton={this.handleClickActionButton}
-                            selectedProgram={this.props.selectedProgramId}
-                            selectedOrgUint={this.props.selectedOrgUnit.id}
+                            onStartAgain={this.props.onStartAgain}
+                            onClickNew={this.props.onClickNew}
+                            selectionComplete={this.props.selectionComplete}
+                            showResetButton={!!(this.props.selectedProgramId || this.props.selectedOrgUnitId)}
                         />
                     </Grid>
                 </Grid>

@@ -3,25 +3,28 @@
  * @namespace MainPage
 */
 import React, { Component } from 'react';
-
-import withLoadHandler from './withLoadHandler';
+import { withStyles } from '@material-ui/core/styles';
 import EventsListConnectivityWrapper from './EventsListConnectionWrapper/EventsListConnectivityWrapper.container';
-import TempSelector from './TempSelector.container';
+
+const getStyles = () => ({
+    listContainer: {
+        padding: 24,
+    },
+});
 
 type Props = {
     currentSelectionsComplete: boolean,
+    classes: {
+        listContainer: string,
+    },
 };
 
 class MainPage extends Component<Props> {
     render() {
-        const { currentSelectionsComplete } = this.props;
+        const { currentSelectionsComplete, classes } = this.props;
 
         return (
             <div>
-                {'{{main menu}}'}
-                <TempSelector
-                    selectionsCompleted={currentSelectionsComplete}
-                />
                 {
                     (() => {
                         if (!currentSelectionsComplete) {
@@ -29,7 +32,11 @@ class MainPage extends Component<Props> {
                         }
 
                         return (
-                            <EventsListConnectivityWrapper />
+                            <div
+                                className={classes.listContainer}
+                            >
+                                <EventsListConnectivityWrapper />
+                            </div>
                         );
                     })()
                 }
@@ -38,4 +45,4 @@ class MainPage extends Component<Props> {
     }
 }
 
-export default withLoadHandler()(MainPage);
+export default withStyles(getStyles)(MainPage);

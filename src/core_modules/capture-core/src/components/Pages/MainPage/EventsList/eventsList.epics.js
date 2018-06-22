@@ -31,12 +31,13 @@ const errorMessages = {
     WORKING_LIST_UPDATE_ERROR: 'Working list could not be updated',
 };
 
-const getInitialWorkingListDataAsync = async (programId: string, orgUnitId: string) => {
+const getInitialWorkingListDataAsync = async (programId: string, orgUnitId: string, categories: { [key: string]: string}) => {
     const eventsPromise = getEvents({
         program: programId,
         orgUnit: orgUnitId,
         pageSize: 15,
         order: 'eventDate:desc',
+        ...categories,
     });
 
     const columnsConfigPromise = getColumnsConfiguration(programId);
@@ -59,6 +60,7 @@ const getUpdateWorkingListDataAsync = (
     currentPage: number,
     sortById: string,
     sortByDirection: string,
+    categories: { [key: string]: string },
 ) =>
     getEvents({
         program: programId,
@@ -66,14 +68,17 @@ const getUpdateWorkingListDataAsync = (
         pageSize: rowsPerPage,
         page: currentPage,
         order: `${sortById}:${sortByDirection}`,
+        ...categories,
     });
 
 const getInitialWorkingListActionAsync = (
     programId: string,
-    orgUnitId: string): Promise<ReduxAction<any, any>> =>
-    getInitialWorkingListDataAsync(programId, orgUnitId)
+    orgUnitId: string,
+    categories: { [key: string]: string },
+): Promise<ReduxAction<any, any>> =>
+    getInitialWorkingListDataAsync(programId, orgUnitId, categories)
         .then(data =>
-            workingListInitialDataRetrieved({ ...data, selections: { programId, orgUnitId } }),
+            workingListInitialDataRetrieved({ ...data, selections: { programId, orgUnitId, categories } }),
         )
         .catch((error) => {
             log.error(errorCreator(errorMessages.WORKING_LIST_RETRIEVE_ERROR)({ error }));
@@ -86,8 +91,10 @@ const getUpdateWorkingListActionAsync = (
     rowsPerPage: number,
     currentPage: number,
     sortById: string,
-    sortByDirection: string): Promise<ReduxAction<any, any>> =>
-    getUpdateWorkingListDataAsync(programId, orgUnitId, rowsPerPage, currentPage, sortById, sortByDirection)
+    sortByDirection: string,
+    categories: { [key: string]: string },
+): Promise<ReduxAction<any, any>> =>
+    getUpdateWorkingListDataAsync(programId, orgUnitId, rowsPerPage, currentPage, sortById, sortByDirection, categories)
         .then(data =>
             workingListUpdateDataRetrieved(data),
         )
@@ -97,7 +104,7 @@ const getUpdateWorkingListActionAsync = (
         });
 
 const getArgumentsForUpdateWorkingListFromState = (state: ReduxState) => {
-    const { programId, orgUnitId } = state.workingListsContext.main;
+    const { programId, orgUnitId, categories } = state.workingListsContext.main;
 
     const currentMeta = state.workingListsMeta.main;
     const nextMeta = state.workingListsMeta.main.next;
@@ -113,6 +120,7 @@ const getArgumentsForUpdateWorkingListFromState = (state: ReduxState) => {
         currentPage,
         sortById,
         sortByDirection,
+        categories,
     ];
 };
 
@@ -122,9 +130,9 @@ export const retrieveWorkingListOnMainSelectionsCompletedEpic = (action$: InputO
         mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
     )
         .switchMap(() => {
-            const { programId, orgUnitId } = store.getState().currentSelections;
+            const { programId, orgUnitId, categories } = store.getState().currentSelections;
 
-            const initialPromise = getInitialWorkingListActionAsync(programId, orgUnitId);
+            const initialPromise = getInitialWorkingListActionAsync(programId, orgUnitId, categories);
             return fromPromise(initialPromise)
                 .takeUntil(
                     action$.ofType(
@@ -151,9 +159,9 @@ export const getWorkingListOnCancelSaveEpic = (action$: InputObservable, store: 
         editEventDataEntryActionTypes.UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE,
     )
         .switchMap(() => {
-            const { programId, orgUnitId } = store.getState().currentSelections;
+            const { programId, orgUnitId, categories } = store.getState().currentSelections;
 
-            const initialPromise = getInitialWorkingListActionAsync(programId, orgUnitId);
+            const initialPromise = getInitialWorkingListActionAsync(programId, orgUnitId, categories);
             return fromPromise(initialPromise)
                 .takeUntil(
                     action$
@@ -181,8 +189,7 @@ export const getWorkingListOnSaveEpic = (action$: InputObservable, store: ReduxS
         .switchMap(() => {
             const state = store.getState();
             const listSelections = state.workingListsContext.main;
-            const programId = state.currentSelections.programId;
-            const orgUnitId = state.currentSelections.orgUnitId;
+            const { programId, orgUnitId, categories } = state.currentSelections;
 
             const cancelActionTypes = [
                 mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
@@ -193,7 +200,7 @@ export const getWorkingListOnSaveEpic = (action$: InputObservable, store: ReduxS
                 eventsListActionTypes.SORT_WORKING_LIST,
             ];
 
-            if (listSelections && isSelectionsEqual(state.currentSelections, listSelections)) {
+            if (listSelections && isSelectionsEqual(listSelections, state.currentSelections)) {
                 const argsForUpdate = getArgumentsForUpdateWorkingListFromState(state);
                 const updatePromise = getUpdateWorkingListActionAsync(...argsForUpdate);
                 return fromPromise(updatePromise)
@@ -206,7 +213,7 @@ export const getWorkingListOnSaveEpic = (action$: InputObservable, store: ReduxS
                     );
             }
 
-            const initialPromise = getInitialWorkingListActionAsync(programId, orgUnitId);
+            const initialPromise = getInitialWorkingListActionAsync(programId, orgUnitId, categories);
             return fromPromise(initialPromise)
                 .takeUntil(action$.ofType(...cancelActionTypes))
                 .takeUntil(
@@ -256,6 +263,7 @@ export const getEventListOnReconnectEpic = (action$: InputObservable, store: Red
             const currentSelections = {
                 programId: state.currentSelections.programId,
                 orgUnitId: state.currentSelections.orgUnitId,
+                categories: state.currentSelections.categories,
             };
 
             const listSelections = state.workingListsContext.main;
@@ -270,14 +278,14 @@ export const getEventListOnReconnectEpic = (action$: InputObservable, store: Red
                 eventsListActionTypes.SORT_WORKING_LIST,
             ];
 
-            if (listSelections && isSelectionsEqual(currentSelections, listSelections)) {
+            if (listSelections && isSelectionsEqual(listSelections, currentSelections)) {
                 const argsForUpdate = getArgumentsForUpdateWorkingListFromState(state);
                 const updatePromise = getUpdateWorkingListActionAsync(...argsForUpdate);
                 return fromPromise(updatePromise)
                     .takeUntil(action$.ofType(...cancelActionTypes));
             }
 
-            const initialPromise = getInitialWorkingListActionAsync(currentSelections.programId, currentSelections.orgUnitId);
+            const initialPromise = getInitialWorkingListActionAsync(currentSelections.programId, currentSelections.orgUnitId, currentSelections.categories);
             return fromPromise(initialPromise)
                 .takeUntil(action$.ofType(...cancelActionTypes));
         });
