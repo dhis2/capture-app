@@ -52,7 +52,7 @@ class ActionButtons extends Component<Props> {
 
     // TODO: Add translation.
     render() {
-        const { classes, onStartAgain, onClickNew, showResetButton } = this.props;
+        const { classes, showResetButton } = this.props;
         return (
             <div className={classes.container}>
                 {
