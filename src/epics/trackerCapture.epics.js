@@ -64,6 +64,21 @@ import {
 import {
     networkMonitorStatusEpic,
 } from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.epics';
+import {    
+    setOrgUnit,
+    setProgram,
+    goBackToListContext,
+} from 'capture-core/components/QuickSelector/epics/setSelection.epics';
+import {
+    mainPageSelectorUpdateURLEpic,
+} from 'capture-core/components/Pages/MainPage/MainPageSelector/MainPageSelector.epics';
+import {
+    editEventPageSelectorUpdateURLEpic,
+} from 'capture-core/components/Pages/EditEvent/EditEventSelector/EditEventSelector.epics';
+import {
+    newEventPageSelectorUpdateURLEpic,
+    newEventPageSelectorResetURLEpic,
+} from 'capture-core/components/Pages/NewEvent/NewEventSelector/NewEventSelector.epics';
 
 import { loadStartupData } from '../init/entry.epics';
 
@@ -103,4 +118,11 @@ export default combineEpics(
     networkMonitorStatusEpic,
     goingOnlineEpic,
     updateEventListAfterSaveOrUpdateEventEpic,
+    setOrgUnit,
+    setProgram,
+    goBackToListContext,
+    mainPageSelectorUpdateURLEpic,
+    editEventPageSelectorUpdateURLEpic,
+    newEventPageSelectorUpdateURLEpic,
+    newEventPageSelectorResetURLEpic,
 );

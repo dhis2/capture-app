@@ -23,58 +23,61 @@ const styles = () => ({
 });
 
 type Props = {
-    handleClickActionButton: () => void,
-    selectedProgram: string,
-    selectedOrgUnit: string,
     classes: Object,
+    onStartAgain: () => void,
+    onClickNew: () => void,
+    showResetButton: boolean,
 };
 
 class ActionButtons extends Component<Props> {
     handleClick: () => void;
+    handleNewClick: () => void;
     constructor(props) {
         super(props);
-        this.handleClick = this.handleClick.bind(this);
+        this.handleStartAgainClick = this.handleStartAgainClick.bind(this);
+        this.handleNewClick = this.handleNewClick.bind(this);
     }
 
-    handleClick() {
-        this.props.handleClickActionButton();
+    handleStartAgainClick = () => {
+        this.props.onStartAgain();
     }
 
+    handleNewClick = () => {
+        this.props.onClickNew();
+    }
+
+    handleFindClick = () => {
+        alert('Not implemented yet.');
+    }
+
+    // TODO: Add translation.
     render() {
-        if (!this.props.selectedProgram && !this.props.selectedOrgUnit) {
-            return (
-                <div className={this.props.classes.container}>
-                    <Button
-                        onClick={this.handleClick}
-                        color="primary"
-                        className={this.props.classes.leftButton}
-                    >
-                        { i18n.t('Reset') }
-                    </Button>
-                </div>
-            );
-        }
+        const { classes, showResetButton } = this.props;
         return (
-            <div className={this.props.classes.container}>
+            <div className={classes.container}>
+                {
+                    showResetButton ?
+                        <Button
+                            onClick={this.handleStartAgainClick}
+                            color="primary"
+                            className={classes.leftButton}
+                        >
+                            { i18n.t('Reset') }
+                        </Button> :
+                        null
+                }
                 <Button
-                    onClick={this.handleClick}
-                    color="primary"
-                    className={this.props.classes.leftButton}
-                >
-                    { i18n.t('Reset') }
-                </Button>
-                <Button
-                    onClick={this.handleClick}
+                    onClick={this.handleNewClick}
                     color="primary"
                 >
-                    <AddIcon className={this.props.classes.rightButton} />
+                    <AddIcon className={classes.rightButton} />
                     { i18n.t('New') }
                 </Button>
                 <Button
-                    onClick={this.handleClick}
+                    onClick={this.handleFindClick}
                     color="primary"
                 >
-                    <SearchIcon className={this.props.classes.rightButton} />
+                    <SearchIcon className={classes.rightButton} />
                     { i18n.t('Find') }
                 </Button>
             </div>

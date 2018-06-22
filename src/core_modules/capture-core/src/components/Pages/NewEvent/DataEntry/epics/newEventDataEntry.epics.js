@@ -2,7 +2,8 @@
 import log from 'loglevel';
 import { batchActions } from 'redux-batched-actions';
 import { rulesExecutedPostUpdateField } from '../../../../DataEntry/actions/dataEntry.actions';
-import { actionTypes as selectorActionTypes } from '../../../MainPage/tempSelector.actions';
+import { actionTypes as editEventSelectorActionTypes } from '../../../EditEvent/EditEventSelector/EditEventSelector.actions';
+import { actionTypes as mainPageSelectorActionTypes } from '../../../MainPage/MainPageSelector/MainPageSelector.actions';
 import {
     actionTypes as newEventDataEntryActionTypes,
     openNewEventInDataEntry,
@@ -32,7 +33,7 @@ const errorMessages = {
 
 export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(selectorActionTypes.OPEN_NEW_EVENT_PAGE, newEventSelectionTypes.VALID_SELECTIONS_FROM_URL)
+    action$.ofType(editEventSelectorActionTypes.OPEN_NEW_EVENT, mainPageSelectorActionTypes.OPEN_NEW_EVENT, newEventSelectionTypes.VALID_SELECTIONS_FROM_URL)
         .map(() => {
             const state = store.getState();
             const selectionsComplete = state.currentSelections.complete;

@@ -37,8 +37,10 @@ class DataEntrySelectionsIncomplete extends Component<Props> {
             text = i18n.t('Select a registering unit and program above to get started');
         } else if (!isProgramSelected) {
             text = i18n.t('Select a program to start reporting');
-        } else {
+        } else if (!isOrgUnitSelected) {
             text = i18n.t('Select a registering unit to start reporting');
+        } else {
+            text = i18n.t('Select a category option to start reporting');
         }
 
         return text;

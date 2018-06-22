@@ -2,9 +2,13 @@
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
 import { actionTypes as mainPageSelectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
+import { actionTypes as setOrgUnitActionTypes } from '../../components/QuickSelector/actions/QuickSelector.actions';
 import {
     actionTypes as newEventSelectionActionTypes,
 } from '../../components/Pages/NewEvent/newEventSelections.actions';
+import {
+    actionTypes as mainPageSelectorActionTypes
+} from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
 
 export const organisationUnitDesc = createReducerDescription({
     [editEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE]: (state, action) => {
@@ -32,6 +36,18 @@ export const organisationUnitDesc = createReducerDescription({
             ...state,
             [action.payload.id]: action.payload,
         };
+        return newState;
+    },
+    [setOrgUnitActionTypes.STORE_ORG_UNIT_OBJECT]: (state, action) => {
+        const newState = { ...state };
+        const orgUnit = action.payload;
+        newState[orgUnit.id] = orgUnit;
+        return newState;
+    },
+    [mainPageSelectorActionTypes.SET_ORG_UNIT]: (state, action) => {
+        const newState = { ...state };
+        const orgUnit = action.payload.orgUnit;
+        newState[orgUnit.id] = orgUnit;
         return newState;
     },
 }, 'organisationUnits');
