@@ -1,22 +1,19 @@
 // @flow
-/* eslint-disable */
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-
-import { getApi } from '../../d2/d2Instance';
-import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
-
-import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
 import FileDownloadIcon from '@material-ui/icons/FileDownload';
 
+import { getApi } from '../../d2/d2Instance';
+import getProgramAndStageFromProgramId from '../../metaData/helpers/EventProgram/getProgramAndStageFromProgramId';
+
 const styles = () => ({
     menuButtons: {
         textDecoration: 'none',
         outline: 'none',
-    }
+    },
 });
 
 type Props = {
@@ -25,44 +22,44 @@ type Props = {
     selectedProgramId: string,
 };
 
-class DownloadTable extends Component<Props> {
+type State = {
+    anchorEl: any,
+};
+
+class DownloadTable extends Component<Props, State> {
     constructor() {
         super();
         // anchorEl is the button that spawns the menu.
-        this.state = { anchorEl: null, };
+        this.state = {
+            anchorEl: null,
+        };
+
         this.handleClick = this.handleClick.bind(this);
         this.handleClose = this.handleClose.bind(this);
     }
-    
-    handleClick = event => {
+
+    handleClick = (event) => {
         this.setState({ anchorEl: event.currentTarget });
-      };
-    
+    };
+
     handleClose = () => {
         this.setState({ anchorEl: null });
     };
 
     render() {
         const { anchorEl } = this.state;
-        const { classes } = this.props;
-
+        const { classes, selectedProgramId } = this.props;
         const baseUrl = getApi().baseUrl;
-        const programsArray = Array.from(programs.values());
 
-        let selectedProgramStageId = "";
-        
-        if(this.props.selectedProgramId) {
-            const selectedProgram = programsArray[programsArray.findIndex(program => program.id === this.props.selectedProgramId)];
-            if (selectedProgram.constructor.name === 'EventProgram') {
-                selectedProgramStageId = selectedProgram.stage.id;
-            } else if (selectedProgram.constructor.name === 'TrackerProgram') {
-                // TODO: Once we support TracekrProgram we need to get selected programStage.
-            }
+        const programAndStageContainer = getProgramAndStageFromProgramId(selectedProgramId);
+        if (!programAndStageContainer.stage) {
+            return null;
         }
+        const selectedProgramStageId = programAndStageContainer.stage.id;
 
         return (
             <span>
-                <IconButton 
+                <IconButton
                     aria-owns={anchorEl ? 'download-menu' : null}
                     aria-haspopup="true"
                     onClick={this.handleClick}
@@ -77,13 +74,34 @@ class DownloadTable extends Component<Props> {
                     open={Boolean(anchorEl)}
                     onClose={this.handleClose}
                 >
-                    <a className={classes.menuButtons} href={baseUrl + '/events/query.json?orgUnit=' + this.props.selectedOrgUnitId + '&programStage=' + selectedProgramStageId + '&skipPaging=true'} download tabIndex={-1}>
+                    <a
+                        className={classes.menuButtons}
+                        href={
+                            `${baseUrl}/events/query.json?orgUnit=${this.props.selectedOrgUnitId}&programStage=${selectedProgramStageId}&skipPaging=true`
+                        }
+                        download
+                        tabIndex={-1}
+                    >
                         <MenuItem onClick={this.handleClose}>JSON</MenuItem>
                     </a>
-                    <a className={classes.menuButtons} href={baseUrl + '/events/query.xml?orgUnit=' + this.props.selectedOrgUnitId + '&programStage=' + selectedProgramStageId + '&skipPaging=true'} download tabIndex={-1}>
+                    <a
+                        className={classes.menuButtons}
+                        href={
+                            `${baseUrl}/events/query.xml?orgUnit=${this.props.selectedOrgUnitId}&programStage=${selectedProgramStageId}&skipPaging=true`
+                        }
+                        download
+                        tabIndex={-1}
+                    >
                         <MenuItem onClick={this.handleClose}>XML</MenuItem>
                     </a>
-                    <a className={classes.menuButtons} href={baseUrl + '/events/query.csv?orgUnit=' + this.props.selectedOrgUnitId + '&programStage=' + selectedProgramStageId + '&skipPaging=true'} download tabIndex={-1}>
+                    <a
+                        className={classes.menuButtons}
+                        href={
+                            `${baseUrl}/events/query.csv?orgUnit=${this.props.selectedOrgUnitId}&programStage=${selectedProgramStageId}&skipPaging=true`
+                        }
+                        download
+                        tabIndex={-1}
+                    >
                         <MenuItem onClick={this.handleClose}>CSV</MenuItem>
                     </a>
                 </Menu>
