@@ -1,5 +1,4 @@
 // @flow
-/* eslint-disable */
 
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
@@ -27,11 +26,9 @@ type Props = {
     selectionComplete: boolean,
     selectedOrgUnit: Object,
     classes: Object,
-    clearOnStartAgain: boolean,
     onSetOrgUnit: (orgUnitId: string, orgUnitObject: Object) => void,
     onSetProgramId: (programId: string) => void,
     onSetCategoryOption: (categoryId: string, categoryOptionId: string) => void,
-    onGoBackToListContext: () => void,
     onResetOrgUnitId: () => void,
     onResetProgramId: () => void,
     onResetCategoryOption: (categoryId: string) => void,
@@ -41,6 +38,10 @@ type Props = {
 };
 
 class QuickSelector extends Component<Props> {
+    static getSelectedProgram(selectedProgramId: string) {
+        return programs.get(selectedProgramId) || {};
+    }
+
     handleClickProgram: (program: Object) => void;
     handleSetCatergoryCombo: (selectedCategoryOption: string, categoryId: string) => void;
     handleClickOrgUnit: (orgUnit: Object) => void;
@@ -64,48 +65,30 @@ class QuickSelector extends Component<Props> {
         this.props.onSetOrgUnit(orgUnitId, orgUnitObject);
     }
 
-    render() {
+    calculateColumnWidths() {
         // The grid has a total width of 12 columns, we need to calculate how much width each selector should have.
+        const selectedProgramId = this.props.selectedProgramId;
+        const selectedProgram = QuickSelector.getSelectedProgram(selectedProgramId);
+
         let orgUnitSelectorWidth = 3;
         let programSelectorWidth = 3;
         let actionButtonsWidth = 6;
 
-        let selectedProgram = {};
-        
-        if(this.props.selectedProgramId) {
-            const programsArray = Array.from(programs.values());
-            for (let i = 0; i < programsArray.length; i++) {
-                if (programsArray[i].id === this.props.selectedProgramId) {
-                    selectedProgram = programsArray[i];
-                }
-            }
+        if (selectedProgram && selectedProgram.categories) {
+            orgUnitSelectorWidth = 3;
+            programSelectorWidth = 5;
+            actionButtonsWidth = 4;
         }
 
-        if (this.props.selectedOrgUnitId && this.props.selectedProgramId) {
-            if (selectedProgram.categories) {
-                orgUnitSelectorWidth = 3;
-                programSelectorWidth = 5;
-                actionButtonsWidth = 4;
-            } else {
-                orgUnitSelectorWidth = 3;
-                programSelectorWidth = 3;
-                actionButtonsWidth = 6;
-            }
-        } else if (!this.props.selectedOrgUnitId && this.props.selectedProgramId) {
-            if (selectedProgram.categories) {
-                orgUnitSelectorWidth = 3;
-                programSelectorWidth = 5;
-                actionButtonsWidth = 4;
-            } else {
-                orgUnitSelectorWidth = 3;
-                programSelectorWidth = 3;
-                actionButtonsWidth = 6;
-            }
-        } else if (this.props.selectedOrgUnitId && !this.props.selectedProgramId) {
-            orgUnitSelectorWidth = 3;
-            programSelectorWidth = 3;
-            actionButtonsWidth = 6;
-        } 
+        return {
+            orgUnitSelectorWidth,
+            programSelectorWidth,
+            actionButtonsWidth,
+        };
+    }
+
+    render() {
+        const { orgUnitSelectorWidth, programSelectorWidth, actionButtonsWidth } = this.calculateColumnWidths();
 
         return (
             <Paper className={this.props.classes.paper}>
@@ -136,6 +119,7 @@ class QuickSelector extends Component<Props> {
                             onStartAgain={this.props.onStartAgain}
                             onClickNew={this.props.onClickNew}
                             selectionComplete={this.props.selectionComplete}
+                            showResetButton={!!(this.props.selectedProgramId || this.props.selectedOrgUnitId)}
                         />
                     </Grid>
                 </Grid>

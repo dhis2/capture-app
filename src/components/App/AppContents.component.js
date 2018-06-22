@@ -17,15 +17,20 @@ const styles = theme => ({
         fontFamily: theme.typography.fontFamily,
         fontSize: theme.typography.pxToRem(16),
     },
+    pageContainer: {
+        paddingTop: 48,
+    },
 });
 
 type Props = {
-    classes: Object
+    classes: {
+        app: string,
+        pageContainer: string,
+    },
 };
 
 class AppContents extends Component<Props> {
     render() {
-
         const { classes } = this.props;
 
         const d2 = getD2();
@@ -37,7 +42,9 @@ class AppContents extends Component<Props> {
                 <HeaderBar d2={d2}>
                     <NetworkStatusBadge />
                 </HeaderBar>
-                <div style={{ paddingTop: 48 }}>
+                <div
+                    className={classes.pageContainer}
+                >
                     <Switch>
                         <Route path="/newEvent" component={NewEventSelector} />
                         <Route path="/editEvent" component={EditEventSelector} />

@@ -232,7 +232,7 @@ function buildStage(d2ProgramStage: CachedProgramStage) {
         _this.id = d2ProgramStage.id;
         _this.name = d2ProgramStage.displayName;
         _this.description = d2ProgramStage.description;
-        d2ProgramStage.executionDateLabel && _this.addLabel({ id: 'eventDate', label: d2ProgramStage.executionDateLabel });
+        _this.addLabel({ id: 'eventDate', label: d2ProgramStage.executionDateLabel || 'Incident date' });
     });
 
     if (isNonEmptyArray(d2ProgramStage.programStageSections)) {

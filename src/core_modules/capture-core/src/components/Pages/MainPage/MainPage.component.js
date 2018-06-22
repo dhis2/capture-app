@@ -3,15 +3,25 @@
  * @namespace MainPage
 */
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import EventsListConnectivityWrapper from './EventsListConnectionWrapper/EventsListConnectivityWrapper.container';
+
+const getStyles = () => ({
+    listContainer: {
+        padding: 24,
+    },
+});
 
 type Props = {
     currentSelectionsComplete: boolean,
+    classes: {
+        listContainer: string,
+    },
 };
 
 class MainPage extends Component<Props> {
     render() {
-        const { currentSelectionsComplete } = this.props;
+        const { currentSelectionsComplete, classes } = this.props;
 
         return (
             <div>
@@ -22,7 +32,11 @@ class MainPage extends Component<Props> {
                         }
 
                         return (
-                            <EventsListConnectivityWrapper />
+                            <div
+                                className={classes.listContainer}
+                            >
+                                <EventsListConnectivityWrapper />
+                            </div>
                         );
                     })()
                 }
@@ -31,4 +45,4 @@ class MainPage extends Component<Props> {
     }
 }
 
-export default (MainPage);
+export default withStyles(getStyles)(MainPage);

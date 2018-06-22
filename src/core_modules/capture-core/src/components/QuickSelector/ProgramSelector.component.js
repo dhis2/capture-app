@@ -23,6 +23,8 @@ import Grid from '@material-ui/core/Grid';
 
 import i18n from '@dhis2/d2-i18n';
 
+import EventProgram from '../../metaData/Program/EventProgram';
+
 const styles = () => ({
     paper: {
         padding: 15,
@@ -119,9 +121,11 @@ class ProgramSelector extends Component<Props> {
     render() {
         const programsArray = Array.from(programs.values());
         
-        const programOptions = programsArray.map(optionCount => new Option((_this) => {
-            _this.value = optionCount.id;
-            _this.text = optionCount.name;
+        const programOptions = programsArray
+            .filter(program => program instanceof EventProgram)
+            .map(program => new Option((_this) => {
+            _this.value = program.id;
+            _this.text = program.name;
         }));
 
         const programOptionSet = new OptionSet('programOptionSet', programOptions);

@@ -23,10 +23,10 @@ const styles = () => ({
 });
 
 type Props = {
-    selectionComplete: boolean,
     classes: Object,
     onStartAgain: () => void,
     onClickNew: () => void,
+    showResetButton: boolean,
 };
 
 class ActionButtons extends Component<Props> {
@@ -52,40 +52,32 @@ class ActionButtons extends Component<Props> {
 
     // TODO: Add translation.
     render() {
-        if (!this.props.selectionComplete) {
-            return (
-                <div className={this.props.classes.container}>
-                    <Button
-                        onClick={this.handleStartAgainClick}
-                        color="primary"
-                        className={this.props.classes.leftButton}
-                    >
-                        { i18n.t('Reset') }
-                    </Button>
-                </div>
-            );
-        }
+        const { classes, onStartAgain, onClickNew, showResetButton } = this.props;
         return (
-            <div className={this.props.classes.container}>
-                <Button
-                    onClick={this.handleStartAgainClick}
-                    color="primary"
-                    className={this.props.classes.leftButton}
-                >
-                    { i18n.t('Reset') }
-                </Button>
+            <div className={classes.container}>
+                {
+                    showResetButton ?
+                        <Button
+                            onClick={this.handleStartAgainClick}
+                            color="primary"
+                            className={classes.leftButton}
+                        >
+                            { i18n.t('Reset') }
+                        </Button> :
+                        null
+                }
                 <Button
                     onClick={this.handleNewClick}
                     color="primary"
                 >
-                    <AddIcon className={this.props.classes.rightButton} />
+                    <AddIcon className={classes.rightButton} />
                     { i18n.t('New') }
                 </Button>
                 <Button
                     onClick={this.handleFindClick}
                     color="primary"
                 >
-                    <SearchIcon className={this.props.classes.rightButton} />
+                    <SearchIcon className={classes.rightButton} />
                     { i18n.t('Find') }
                 </Button>
             </div>

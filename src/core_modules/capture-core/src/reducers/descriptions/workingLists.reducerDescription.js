@@ -15,8 +15,8 @@ import {
     actionTypes as connectivityActionTypes,
 } from '../../components/Connectivity/connectivity.actions';
 import {
-    actionTypes as selectorSelection,
-} from '../../components/QuickSelector/actions/QuickSelector.actions';
+    actionTypes as mainPageSelectorActionTypes,
+} from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
 
 export const workingListsDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
@@ -138,25 +138,19 @@ export const workingListsUIDesc = createReducerDescription({
         newState.main = getLoadingState(newState.main);
         return newState;
     },
-    [selectorSelection.SET_ORG_UNIT_ID]: (state) => {
+    [mainPageSelectorActionTypes.SET_ORG_UNIT]: (state) => {
         const newState = { ...state };
-        newState.main = {
-            isLoading: true,
-        };
+        newState.main = getLoadingState(newState.main);
         return newState;
     },
-    [selectorSelection.SET_PROGRAM_ID]: (state) => {
+    [mainPageSelectorActionTypes.SET_PROGRAM_ID]: (state) => {
         const newState = { ...state };
-        newState.main = {
-            isLoading: true,
-        };
+        newState.main = getLoadingState(newState.main);
         return newState;
     },
-    [selectorSelection.SET_CATEGORY_ID]: (state) => {
+    [mainPageSelectorActionTypes.SET_CATEGORY_OPTION]: (state) => {
         const newState = { ...state };
-        newState.main = {
-            isLoading: true,
-        };
+        newState.main = getLoadingState(newState.main);
         return newState;
     },
     [mainSelectionsActionTypes.VALID_SELECTIONS_FROM_URL]: (state) => {
