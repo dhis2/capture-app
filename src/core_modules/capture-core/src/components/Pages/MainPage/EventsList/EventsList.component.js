@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator';
 import SettingsIcon from '@material-ui/icons/Settings';
-import FileDownloadIcon from '@material-ui/icons/FileDownload';
 import IconButton from '@material-ui/core/IconButton';
 
 import classNames from 'classnames';
@@ -20,6 +19,8 @@ import withNavigation from '../../../Pagination/withDefaultNavigation';
 import withRowsPerPageSelector from '../../../Pagination/withRowsPerPageSelector';
 import SortLabelWrapper from '../../../DataTable/SortLabelWrapper.component';
 import { directions, placements } from '../../../d2UiReactAdapters/dataTable/componentGetters/sortLabel.const';
+
+import DownloadTable from '../../../DownloadTable/DownloadTable.container';
 
 // $FlowSuppress
 const { Table, Row, Cell, HeaderCell, Head, Body } = getTableComponents(basicTableAdapter);
@@ -258,12 +259,7 @@ class EventsList extends Component<Props> {
                                 onClick={() => { alert('not implemented yet'); }}
                             />
                         </IconButton>
-                        <IconButton>
-                            <FileDownloadIcon
-                                className={classes.optionsIcon}
-                                onClick={() => { alert('not implemented yet'); }}
-                            />
-                        </IconButton>
+                        <DownloadTable />
                     </div>
                 </div>
                 <div
