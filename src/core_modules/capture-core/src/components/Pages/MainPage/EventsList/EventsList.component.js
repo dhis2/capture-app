@@ -22,6 +22,9 @@ import { directions, placements } from '../../../d2UiReactAdapters/dataTable/com
 
 import DownloadTable from '../../../DownloadTable/DownloadTable.container';
 
+import withHeader from './Header/withHeader';
+import withListHeaderWrapper from '../ListHeaderWrapper/withListHeaderWrapper';
+
 // $FlowSuppress
 const { Table, Row, Cell, HeaderCell, Head, Body } = getTableComponents(basicTableAdapter);
 // $FlowSuppress
@@ -293,4 +296,4 @@ class EventsList extends Component<Props> {
  * Create the event list for a event capture program
  * @namespace EventsList
  */
-export default withStyles(styles)(EventsList);
+export default withHeader()(withListHeaderWrapper()(withStyles(styles)(EventsList)));
