@@ -22,6 +22,7 @@ const elementTypeCodes = [
     'PASSWORD',
     'DURATION_MINUTES',
     'FILE_RESOURCE',
+    'URL',
     unknownTypeCode,
 ];
 
