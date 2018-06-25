@@ -34,6 +34,7 @@ const errorMessages = {
     DATETIME: 'Please provide a valid date and time',
     TIME: 'Please provide a valid time',
     PERCENTAGE: 'Please provide a valid percentage',
+    URL: 'Please provide a valid url',
 };
 
 const isCompulsoryRequirementMet = Validators.wordToValidatorMap.get(wordValidatorKeys.COMPULSORY);
@@ -76,6 +77,11 @@ const isValidPercentage = (value: any) => {
     return numberValidator(replacedValue);
 };
 
+const isValidUrl = (value: any) => {
+    const match = value.match(/^(http|https):\/\/[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,6}(:[0-9]{1,5})?(\/.*)?$/);
+    return match !== null;
+};
+
 const validatorsForTypes = {
     [elementTypes.NUMBER]: () => ({
         validator: Validators.wordToValidatorMap.get(wordValidatorKeys.NUMBER),
@@ -113,6 +119,10 @@ const validatorsForTypes = {
     [elementTypes.PERCENTAGE]: () => ({
         validator: isValidPercentage,
         message: i18n.t(errorMessages.PERCENTAGE),
+    }),
+    [elementTypes.URL]: () => ({
+        validator: isValidUrl,
+        message: i18n.t(errorMessages.URL),
     }),
 };
 
