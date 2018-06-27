@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import { filterTypesObject } from '../filterTypes';
 import withData from './withData';
 import withRef from './withRef';
@@ -7,8 +8,17 @@ import withButtons from './withButtons';
 
 import TextFilter from '../../../../../FiltersForTypes/TextFilter.component';
 
+const getStyles = (theme: Theme) => ({
+    container: {
+        padding: theme.typography.pxToRem(24),
+    }
+});
+
 type Props = {
     type: $Values<typeof filterTypesObject>,
+    classes: {
+        container: string,
+    },
 };
 
 class FilterSelectorContents extends React.PureComponent<Props> {
@@ -30,15 +40,19 @@ class FilterSelectorContents extends React.PureComponent<Props> {
     }
 
     render() {
-        const { type, ...passOnProps } = this.props;
+        const { type, classes, ...passOnProps } = this.props;
         const SelectorContent = this.getContentsComponent();
 
         return (
-            <SelectorContent
-                {...passOnProps}
-            />
+            <div
+                className={classes.container}
+            >
+                <SelectorContent
+                    {...passOnProps}
+                />
+            </div>
         );
     }
 }
 
-export default FilterSelectorContents;
+export default withStyles(getStyles)(FilterSelectorContents);

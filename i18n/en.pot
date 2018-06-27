@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-06-21T17:20:59.427Z\n"
-"PO-Revision-Date: 2018-06-21T17:20:59.427Z\n"
+"POT-Creation-Date: 2018-06-26T07:17:20.353Z\n"
+"PO-Revision-Date: 2018-06-26T07:17:20.353Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -27,6 +27,9 @@ msgid "Save"
 msgstr ""
 
 msgid "Sort"
+msgstr ""
+
+msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
@@ -77,10 +80,10 @@ msgstr ""
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
-msgid "Close"
+msgid "Update"
 msgstr ""
 
-msgid "Update"
+msgid "Close"
 msgstr ""
 
 msgid "No events to display"

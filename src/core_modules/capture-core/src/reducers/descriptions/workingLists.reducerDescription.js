@@ -77,6 +77,10 @@ export const workingListsMetaDesc = createReducerDescription({
             ...newState.main,
             ...next,
             ...pagingData,
+            filters: {
+                ...newState.main.filters,
+                ...newState.main.next.filters,
+            },
             next: {},
         };
         return newState;
@@ -124,6 +128,21 @@ export const workingListsMetaDesc = createReducerDescription({
                 ...newState.main.next,
                 rowsPerPage,
                 currentPage: 1,
+            },
+        };
+        return newState;
+    },
+    [filterSelectorActionTypes.SET_FILTER]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        newState.main = {
+            ...newState.main,
+            next: {
+                ...newState.main.next,
+                filters: {
+                    ...(newState.main.next && newState.main.next.filters),
+                    [payload.itemId]: payload.requestData,
+                },
             },
         };
         return newState;
@@ -286,7 +305,7 @@ export const workingListsContextDesc = createReducerDescription({
     },
 }, 'workingListsContext');
 
-export const workingListFiltersEdit = createReducerDescription({
+export const workingListFiltersEditDesc = createReducerDescription({
     [filterSelectorActionTypes.EDIT_CONTENTS]: (state, action) => {
         const payload = action.payload;
         const newState = { ...state };
@@ -297,3 +316,30 @@ export const workingListFiltersEdit = createReducerDescription({
         return newState;
     },
 }, 'workingListFiltersEdit');
+
+export const workingListsAppliedFiltersDesc = createReducerDescription({
+    [filterSelectorActionTypes.SET_FILTER]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        newState.main = {
+            ...newState.main,
+            next: {
+                ...(newState.main ? newState.main.next : {}),
+                [payload.itemId]: payload.appliedText,
+            },
+        };
+        return newState;
+    },
+    [filterSelectorActionTypes.CLEAR_FILTER]: (state, action) => {
+        const newState = { ...state };
+        const itemId = action.payload.itemId;
+        newState.main = {
+            ...newState.main,
+            next: {
+                ...(newState.main ? newState.main.next : {}),
+                [itemId]: null,
+            },
+        };
+        return newState;
+    },
+}, 'workingListsAppliedFilters');

@@ -16,19 +16,22 @@ const styles = theme => ({
     contents: {
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
     },
 });
 
 const Button = (props: Props) => {
     const { classes, children, ...passOnProps } = props;
+    const { button: buttonClass, contents: contentsClass, ...passOnClasses } = classes;
 
     return (
         <MuiButton
-            className={classes.button}
+            className={buttonClass}
+            classes={passOnClasses}
             {...passOnProps}
         >
             <div
-                className={classes.contents}
+                className={contentsClass}
             >
                 {children}
             </div>
