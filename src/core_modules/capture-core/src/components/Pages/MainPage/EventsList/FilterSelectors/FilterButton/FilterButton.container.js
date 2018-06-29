@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import FilterButton from './FilterButton.component';
-import { editContents, setFilter, clearFilter } from '../filterSelector.actions';
+import { editContents, setFilter, clearFilter, revertFilter } from '../filterSelector.actions';
 import { makeFilterValueSelector } from './filterButton.selectors';
 
 const mapStateToProps = () => {
@@ -21,6 +21,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
     onClearFilter: (itemId: string) => {
         dispatch(clearFilter(itemId));
+    },
+    onRevertFilter: () => {
+        dispatch(revertFilter());
     },
 });
 

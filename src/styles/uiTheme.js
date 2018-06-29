@@ -14,7 +14,7 @@ theme.typography.formFieldTitle = {
     fontSize: theme.typography.pxToRem(12),
 };
 
-delete theme.typography.button.textTransform;
+// delete theme.typography.button.textTransform;
 
 theme.palette.warning = {
     light: '#FFF66',

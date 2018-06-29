@@ -6,9 +6,12 @@ import Button from '../../../../../Buttons/Button.component';
 import type { Convertable } from '../../../../../FiltersForTypes/filters.types';
 
 const getStyles = (theme: Theme) => ({
-    buttonContainer: {
-        marginLeft: -8,
+    buttonsContainer: {
         paddingTop: theme.typography.pxToRem(8),
+    },
+    firstButtonContainer: {
+        paddingRight: theme.typography.pxToRem(8),
+        display: 'inline-block',
     },
 });
 
@@ -16,8 +19,9 @@ type Props = {
     onUpdate: () => void,
     onClose: () => void,
     classes: {
-        buttonContainer: string,
-    }
+        buttonsContainer: string,
+        firstButtonContainer: string,
+    },
 };
 
 export default () => (InnerComponent: React.ComponentType<any>) =>
@@ -42,15 +46,19 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
                         {...passOnProps}
                     />
                     <div
-                        className={classes.buttonContainer}
+                        className={classes.buttonsContainer}
                     >
-                        <Button
-                            variant="raised"
-                            color="primary"
-                            onClick={this.onUpdate}
+                        <div
+                            className={classes.firstButtonContainer}
                         >
-                            {i18n.t('Update')}
-                        </Button>
+                            <Button
+                                variant="raised"
+                                color="primary"
+                                onClick={this.onUpdate}
+                            >
+                                {i18n.t('Update')}
+                            </Button>
+                        </div>
                         <Button
                             variant="text"
                             color="primary"

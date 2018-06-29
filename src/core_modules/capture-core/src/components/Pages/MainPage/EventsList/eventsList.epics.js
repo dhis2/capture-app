@@ -25,6 +25,7 @@ import {
     actionTypes as connectivityActionTypes,
 } from '../../../Connectivity/connectivity.actions';
 import { actionTypes as mainPageActionTypes } from '../mainPage.actions';
+import { actionTypes as filterSelectorActionTypes } from './FilterSelectors/filterSelector.actions';
 
 const errorMessages = {
     WORKING_LIST_RETRIEVE_ERROR: 'Working list could not be loaded',
@@ -60,7 +61,8 @@ const getUpdateWorkingListDataAsync = (
     currentPage: number,
     sortById: string,
     sortByDirection: string,
-    categories: { [key: string]: string },
+    categories: { [key: string]: string } = {},
+    filters: { [key: string]: string },
 ) =>
     getEvents({
         program: programId,
@@ -69,6 +71,10 @@ const getUpdateWorkingListDataAsync = (
         page: currentPage,
         order: `${sortById}:${sortByDirection}`,
         ...categories,
+        filter: filters ?
+            Object
+                .keys(filters)
+                .map(filterKey => `${filterKey}:${filters[filterKey]}`) : null,
     });
 
 const getInitialWorkingListActionAsync = (
@@ -93,8 +99,9 @@ const getUpdateWorkingListActionAsync = (
     sortById: string,
     sortByDirection: string,
     categories: { [key: string]: string },
+    filters: { [key: string]: string },
 ): Promise<ReduxAction<any, any>> =>
-    getUpdateWorkingListDataAsync(programId, orgUnitId, rowsPerPage, currentPage, sortById, sortByDirection, categories)
+    getUpdateWorkingListDataAsync(programId, orgUnitId, rowsPerPage, currentPage, sortById, sortByDirection, categories, filters)
         .then(data =>
             workingListUpdateDataRetrieved(data),
         )
@@ -108,9 +115,13 @@ const getArgumentsForUpdateWorkingListFromState = (state: ReduxState) => {
 
     const currentMeta = state.workingListsMeta.main;
     const nextMeta = state.workingListsMeta.main.next;
-    const { rowsPerPage, currentPage, sortById, sortByDirection } = {
+    const { rowsPerPage, currentPage, sortById, sortByDirection, filters } = {
         ...currentMeta,
         ...nextMeta,
+        filters: {
+            ...currentMeta.filters,
+            ...nextMeta.filters,
+        },
     };
 
     return [
@@ -121,6 +132,7 @@ const getArgumentsForUpdateWorkingListFromState = (state: ReduxState) => {
         sortById,
         sortByDirection,
         categories,
+        filters,
     ];
 };
 
@@ -230,6 +242,8 @@ export const updateWorkingListEpic = (action$: InputObservable, store: ReduxStor
         paginationActionTypes.CHANGE_PAGE,
         paginationActionTypes.CHANGE_ROWS_PER_PAGE,
         eventsListActionTypes.SORT_WORKING_LIST,
+        filterSelectorActionTypes.SET_FILTER,
+        filterSelectorActionTypes.CLEAR_FILTER,
     )
         .switchMap((action) => {
             const state = store.getState();

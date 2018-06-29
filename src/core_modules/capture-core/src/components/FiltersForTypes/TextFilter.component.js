@@ -15,7 +15,7 @@ class TextFilter extends Component<Props> implements Convertable {
         const value = this.props.value;
 
         return {
-            requestData: value,
+            requestData: 'eq:' + value,
             appliedText: value,
         };
     }

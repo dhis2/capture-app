@@ -1,29 +1,43 @@
 // @flow
 import * as React from 'react';
+import { withStyles, Theme } from '@material-ui/core/styles';
 
 import FilterButton from './FilterButton/FilterButton.container';
 import { filterTypesArray } from './filterTypes';
 
 import type { Column } from '../ListWrapper/EventsListWrapper.component';
 
+const getStyles = (theme: Theme) => ({
+    filterButtonContainer: {
+        paddingRight: theme.typography.pxToRem(theme.spacing.unit),
+        paddingBottom: theme.typography.pxToRem(theme.spacing.unit),
+        display: 'inline-block',
+    },
+});
+
 type Props = {
     columns: ?Array<Column>,
+    classes: {
+        filterButtonContainer: string,
+    },
 };
 
 const INDIVIDUAL_DISPLAY_COUNT = 4;
 
 export default (InnerComponent: React.ComponentType<any>) =>
-    class EventListFilterSelectors extends React.Component<Props> {
-        static renderConcatenatedSelectorButton(columns: Array<Column>) {
+    withStyles(getStyles)(class EventListFilterSelectors extends React.Component<Props> {
+        renderConcatenatedSelectorButton(columns: Array<Column>) {
             return [];
         }
 
-        static renderIndividualFilterSelectorButtons(columns: Array<Column>) {
+        renderIndividualFilterSelectorButtons(columns: Array<Column>) {
+            const classes = this.props.classes;
             return columns
                 .map(
                     column => (
                         <span
                             key={column.id}
+                            className={classes.filterButtonContainer}
                         >
                             <FilterButton
                                 itemId={column.id}
@@ -48,8 +62,8 @@ export default (InnerComponent: React.ComponentType<any>) =>
             const columnsForIndividualDisplay = filterColumns.slice(0, filterColumns.length > INDIVIDUAL_DISPLAY_COUNT ? INDIVIDUAL_DISPLAY_COUNT : filterColumns.length);
             const columnsForConcatenatedDisplay = filterColumns.length > INDIVIDUAL_DISPLAY_COUNT ? filterColumns.slice(INDIVIDUAL_DISPLAY_COUNT, filterColumns.length) : [];
 
-            const individualFilterSelectorButtons = EventListFilterSelectors.renderIndividualFilterSelectorButtons(columnsForIndividualDisplay);
-            const concatenatedFilterSelectorButton = EventListFilterSelectors.renderConcatenatedSelectorButton(columnsForConcatenatedDisplay);
+            const individualFilterSelectorButtons = this.renderIndividualFilterSelectorButtons(columnsForIndividualDisplay);
+            const concatenatedFilterSelectorButton = this.renderConcatenatedSelectorButton(columnsForConcatenatedDisplay);
             return [
                 ...individualFilterSelectorButtons,
                 ...concatenatedFilterSelectorButton,
@@ -57,16 +71,16 @@ export default (InnerComponent: React.ComponentType<any>) =>
         }
 
         render() {
-            const { ...passOnProps } = this.props;
+            const { classes, ...passOnProps } = this.props;
             const filterButtons = this.renderFilterSelectorButtons();
 
             return (
                 <React.Fragment>
-                    {filterButtons}
                     <InnerComponent
+                        filterButtons={filterButtons}
                         {...passOnProps}
                     />
                 </React.Fragment>
             );
         }
-    };
+    });

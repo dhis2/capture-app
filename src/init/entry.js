@@ -10,16 +10,17 @@ import D2UIApp from '@dhis2/d2-ui-app';
 import { LoadingMask } from '@dhis2/d2-ui-core';
 
 import environments from 'capture-core/constants/environments';
+import JssProvider from 'react-jss/lib/JssProvider';
+import { create } from 'jss';
+import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
+
+import type { HashHistory } from 'history/createHashHistory';
 
 import './addRxjsOperators';
 import App from '../components/App/App.component';
 import getStore from '../getStore';
 import { initialize } from './init';
 import { startupDataLoad } from './entry.actions';
-
-import JssProvider from 'react-jss/lib/JssProvider';
-import { create } from 'jss';
-import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
 
 
 const DOM_ID = 'app';
@@ -29,7 +30,30 @@ const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());
 jss.options.insertionPoint = document.getElementById('jss-insertion-point');
 
-async function runApp(domElement: HTMLElement) {
+function runApp(domElement: HTMLElement, store: ReduxStore, history: HashHistory) {
+    store.dispatch(startupDataLoad());
+
+    window.addEventListener('beforeunload', (e) => {
+        if (store.getState().offline.outbox.length > 0) {
+            const msg = 'Unsaved events!';
+            e.returnValue = msg;
+            return msg;
+        }
+        return undefined;
+    });
+
+    render(
+        <JssProvider jss={jss} generateClassName={generateClassName}>
+            <App
+                store={store}
+                history={history}
+            />
+        </JssProvider>,
+        domElement,
+    );
+}
+
+async function loadApp(domElement: HTMLElement) {
     render(
         <D2UIApp>
             <LoadingMask />
@@ -39,31 +63,8 @@ async function runApp(domElement: HTMLElement) {
 
     try {
         await initialize();
-
         const history = createHistory();
-        const store = getStore(history);
-
-        store.dispatch(startupDataLoad());
-
-        window.addEventListener("beforeunload", function (e) {
-            if (store.getState().offline.outbox.length > 0) {
-                const msg = 'Unsaved events!';
-                e.returnValue = msg;
-                return msg;
-            } else {
-                return undefined;
-            }
-        });
-
-        render(
-            <JssProvider jss={jss} generateClassName={generateClassName}>
-                <App
-                    store={store}
-                    history={history}
-                />
-            </JssProvider>,
-            domElement,
-        );
+        const store = getStore(history, () => runApp(domElement, store, history));
     } catch (error) {
         log.error(error);
         let message = 'The application could not be loaded.';
@@ -82,5 +83,5 @@ const domElement = document.getElementById(DOM_ID);
 if (!domElement) {
     log.error(`html element with id ${DOM_ID} is missing in index file`);
 } else {
-    runApp(domElement);
+    loadApp(domElement);
 }

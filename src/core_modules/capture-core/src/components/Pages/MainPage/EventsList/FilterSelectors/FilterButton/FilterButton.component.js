@@ -17,6 +17,9 @@ const getStyles = (theme: Theme) => ({
     inactiveFilterButton: {
         backgroundColor: theme.palette.grey[100],
     },
+    inactiveFilterButtonLabel: {
+        textTransform: 'none',
+    },
 });
 
 const POPOVER_ANCHOR_ORIGIN = {
@@ -35,11 +38,13 @@ type Props = {
     classes: {
         icon: string,
         inactiveFilterButton: string,
+        inactiveFilterButtonLabel: string,
     },
     filterValue: ?string,
     onEditContents: (value: any, itemId: string) => void,
     onSetFilter: (requestData: any, appliedText: string, itemId: string) => void,
     onClearFilter: (itemId: string) => void,
+    onRevertFilter: () => void,
 };
 
 type State = {
@@ -73,6 +78,11 @@ class FilterButton extends Component<Props, State> {
         this.setState({ filterSelectorOpen: null });
     }
 
+    handleCloseFilterSelector = () => {
+        this.closeFilterSelector();
+        this.props.onRevertFilter();
+    }
+
     handleEditContents = (value: any) => {
         this.props.onEditContents(value, this.props.itemId);
     }
@@ -97,7 +107,7 @@ class FilterButton extends Component<Props, State> {
                 id={id}
                 onEdit={this.handleEditContents}
                 onUpdate={this.handleSetFilter}
-                onClose={this.closeFilterSelector}
+                onClose={this.handleCloseFilterSelector}
             />
         );
     }
@@ -135,6 +145,7 @@ class FilterButton extends Component<Props, State> {
                 color="default"
                 size={'small'}
                 classes={{ button: classes.inactiveFilterButton }}
+                muiClasses={{ label: classes.inactiveFilterButtonLabel }}
                 onClick={this.openFilterSelector}
             >
                 {title}
@@ -158,7 +169,7 @@ class FilterButton extends Component<Props, State> {
                 <Popover
                     open={!!filterSelectorOpen}
                     anchorEl={filterSelectorOpen && filterSelectorOpen.anchorElement}
-                    onClose={this.closeFilterSelector}
+                    onClose={this.handleCloseFilterSelector}
                     anchorOrigin={POPOVER_ANCHOR_ORIGIN}
                     transformOrigin={POPOVER_TRANSFORM_ORIGIN}
                 >

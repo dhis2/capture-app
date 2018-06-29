@@ -5,6 +5,7 @@ export const actionTypes = {
     EDIT_CONTENTS: 'EditFilterSelectorContentsForWorkingList',
     SET_FILTER: 'SetWorkingListFilter',
     CLEAR_FILTER: 'ClearWorkingListFilter',
+    REVERT_FILTER: 'RevertWorkingListFilter',
 };
 
 export const editContents = (value: any, itemId: string) =>
@@ -15,3 +16,6 @@ export const setFilter = (requestData: any, appliedText: string, itemId: string)
 
 export const clearFilter = (itemId: string) =>
     actionCreator(actionTypes.CLEAR_FILTER)({ itemId });
+
+export const revertFilter = () =>
+    actionCreator(actionTypes.REVERT_FILTER)();

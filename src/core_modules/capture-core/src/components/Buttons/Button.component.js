@@ -4,15 +4,8 @@ import * as React from 'react';
 import MuiButton from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 
-type Props = {
-    classes: Object,
-    children: React.Node,
-};
-
-const styles = theme => ({
-    button: {
-        margin: theme.spacing.unit,
-    },
+const styles = () => ({
+    button: {},
     contents: {
         display: 'flex',
         alignItems: 'center',
@@ -20,18 +13,26 @@ const styles = theme => ({
     },
 });
 
+type Props = {
+    classes: {
+        contents: string,
+        button: string,
+    },
+    muiClasses: Object,
+    children: React.Node,
+};
+
 const Button = (props: Props) => {
-    const { classes, children, ...passOnProps } = props;
-    const { button: buttonClass, contents: contentsClass, ...passOnClasses } = classes;
+    const { classes, children, muiClasses, ...passOnProps } = props;
 
     return (
         <MuiButton
-            className={buttonClass}
-            classes={passOnClasses}
+            className={classes.button}
+            classes={muiClasses}
             {...passOnProps}
         >
             <div
-                className={contentsClass}
+                className={classes.contents}
             >
                 {children}
             </div>

@@ -311,13 +311,74 @@ export const workingListFiltersEditDesc = createReducerDescription({
         const newState = { ...state };
         newState.main = {
             ...newState.main,
-            [payload.itemId]: payload.value,
+            next: {
+                ...(newState.main && newState.main.next),
+                [payload.itemId]: payload.value,
+            },
+        };
+        return newState;
+    },
+    [filterSelectorActionTypes.CLEAR_FILTER]: (state, action) => {
+        const itemId = action.payload.itemId;
+        const newState = { ...state };
+        newState.main = {
+            ...newState.main,
+            [itemId]: null,
+        };
+        return newState;
+    },
+    [filterSelectorActionTypes.SET_FILTER]: (state) => {
+        const newState = { ...state };
+        newState.main = {
+            ...newState.main,
+            ...(newState.main && newState.main.next),
+            next: {},
+        };
+        return newState;
+    },
+    [filterSelectorActionTypes.REVERT_FILTER]: (state) => {
+        const newState = { ...state };
+        newState.main = {
+            ...newState.main,
+            next: {},
         };
         return newState;
     },
 }, 'workingListFiltersEdit');
 
 export const workingListsAppliedFiltersDesc = createReducerDescription({
+    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state) => {
+        const newState = {
+            ...state,
+            main: {},
+        };
+        return newState;
+    },
+    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: (state) => {
+        const newState = {
+            ...state,
+            main: {},
+        };
+        return newState;
+    },
+    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state) => {
+        const newState = { ...state };
+        const next = newState.main.next;
+        newState.main = {
+            ...newState.main,
+            ...next,
+            next: {},
+        };
+        return newState;
+    },
+    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVAL_FAILED]: (state) => {
+        const newState = { ...state };
+        newState.main = {
+            ...newState.main,
+            next: {},
+        };
+        return newState;
+    },
     [filterSelectorActionTypes.SET_FILTER]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;

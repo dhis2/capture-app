@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { darken, lighten } from '@material-ui/core/styles/colorManipulator';
+import { lighten } from '@material-ui/core/styles/colorManipulator';
 import ClearIcon from '@material-ui/icons/RemoveCircle';
 import Tooltip from '@material-ui/core/Tooltip';
 import i18n from '@dhis2/d2-i18n';
@@ -10,13 +10,13 @@ import Button from '../../../../../Buttons/Button.component';
 
 const getStyles = (theme: Theme) => ({
     button: {
-        backgroundColor: lighten(theme.palette.primary.light, 0.4),
+        backgroundColor: lighten(theme.palette.primary.light, 0.7),
         '&:hover': {
-            backgroundColor: lighten(theme.palette.primary.light, 0.4),
+            backgroundColor: lighten(theme.palette.primary.light, 0.7),
         },
     },
     hovered: {
-        backgroundColor: `${darken(theme.palette.primary.light, 0.1)} !important`,
+        backgroundColor: `${lighten(theme.palette.primary.light, 0.4)} !important`,
     },
     contents: {
         color: theme.palette.text.primary,
@@ -26,6 +26,9 @@ const getStyles = (theme: Theme) => ({
         '&:hover': {
             color: theme.palette.text.primary,
         },
+    },
+    label: {
+        textTransform: 'none',
     },
 });
 
@@ -41,6 +44,7 @@ type Props = {
         hovered: string,
         contents: string,
         clearIcon: string,
+        label: string,
     },
     iconClass: string,
     title: string,
@@ -94,6 +98,7 @@ class ActiveFilterButton extends React.Component<Props, State> {
                 color="default"
                 size={'small'}
                 classes={{ button: buttonClasses, contents: classes.contents }}
+                muiClasses={{ label: classes.label }}
                 onClick={onChange}
                 onMouseEnter={this.setIsHovered}
                 onMouseLeave={this.clearIsHovered}

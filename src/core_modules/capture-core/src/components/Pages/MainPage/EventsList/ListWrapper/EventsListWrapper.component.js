@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -35,7 +35,7 @@ const PaginationNavigationHOC = withNavigation()(Pagination);
 const RowsSelectorHOC = withRowsPerPageSelector()(PaginationNavigationHOC);
 const EventListPagination = withData()(RowsSelectorHOC);
 
-const styles = theme => ({
+const styles = (theme: Theme) => ({
     loaderContainer: {
         display: 'flex',
         justifyContent: 'center',
@@ -50,6 +50,11 @@ const styles = theme => ({
     topBarContainer: {
         display: 'flex',
         justifyContent: 'space-between',
+        padding: theme.typography.pxToRem(8),
+    },
+    topBarRightContainer: {
+        display: 'flex',
+        justifyContent: 'flex-end',
     },
     tableContainer: {
         overflow: 'auto',
@@ -112,6 +117,7 @@ type Props = {
         loaderContainer: string,
         container: string,
         topBarContainer: string,
+        topBarRightContainer: string,
         tableContainer: string,
         paginationContainer: string,
         optionsIcon: string,
@@ -128,9 +134,10 @@ type Props = {
     sortByDirection: string,
     onSort: (id: string, direction: string) => void,
     onRowClick: (rowData: {eventId: string}) => void,
+    filterButtons: React.Node,
 };
 
-class EventsList extends Component<Props> {
+class EventsList extends React.Component<Props> {
     static typesWithAscendingInitialDirection = [
         elementTypes.TEXT,
         elementTypes.LONG_TEXT,
@@ -240,7 +247,7 @@ class EventsList extends Component<Props> {
         (fromToLabel: string, totalLabel: string) => `${fromToLabel} of ${totalLabel}`
 
     render() {
-        const { dataSource, columns, classes } = this.props; //eslint-disable-line
+        const { dataSource, columns, classes, filterButtons } = this.props; //eslint-disable-line
 
         const visibleColumns = columns ?
             columns
@@ -254,9 +261,11 @@ class EventsList extends Component<Props> {
                     className={classes.topBarContainer}
                 >
                     <div>
-                        {'{{filters}}'}
+                        {filterButtons}
                     </div>
-                    <div>
+                    <div
+                        className={classes.topBarRightContainer}
+                    >
                         <IconButton>
                             <SettingsIcon
                                 className={classes.optionsIcon}
