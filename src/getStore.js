@@ -18,8 +18,7 @@ import environments from 'capture-core/constants/environments';
 import reducerDescriptions from './reducers/descriptions/trackerCapture.reducerDescriptions';
 import epics from './epics/trackerCapture.epics';
 
-
-export default function getStore(history: BrowserHistory | HashHistory) {
+export default function getStore(history: BrowserHistory | HashHistory, onRehydrated: () => void) {
     const middleWares = [createEpicMiddleware(epics), routerMiddleware(history)];
 
     if (process.env.NODE_ENV !== environments.prod) {
@@ -42,6 +41,7 @@ export default function getStore(history: BrowserHistory | HashHistory) {
     } = createOffline({
         ...offlineConfig,
         effect: effectConfig,
+        persistCallback: onRehydrated,
     });
 
     return createStore(
