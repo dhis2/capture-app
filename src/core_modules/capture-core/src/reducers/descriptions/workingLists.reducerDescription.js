@@ -276,21 +276,9 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
         newState.main = action.payload.columnsOrder;
         return newState;
     },
-    [columnSelectorActionTypes.SET_COLUMN_VISIBLE]: (state, action) => {
-        //TODO: Consult Joakim for a possible better solution for avaoiding mutation. 
+    [columnSelectorActionTypes.UPDATE_WORKINGLIST_ORDER]: (state, action) => {
         const newState = { ...state };
-
-        const workingList = [...state.main];
-        const index = workingList.findIndex(column => column.id === action.payload);
-
-        const updatedList = workingList.map(column => {  
-            if(column.id ===  action.payload) {
-              column.visible = !column.visible;
-            }
-            return column;
-        });
-
-        newState.main = updatedList;
+        newState.main = [...action.payload];
         return newState;
     },
 }, 'workingListsColumnsOrder');

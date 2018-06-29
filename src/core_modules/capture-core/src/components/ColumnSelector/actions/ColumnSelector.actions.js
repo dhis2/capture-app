@@ -2,8 +2,8 @@
 import { actionCreator } from '../../../actions/actions.utils';
 
 export const actionTypes = {
-    SET_COLUMN_VISIBLE: 'setColumnVisible',
+    UPDATE_WORKINGLIST_ORDER: 'updateWorkinglistOrder',
 };
 
-export const setColumnVisible =
-    (column: string) => actionCreator(actionTypes.SET_COLUMN_VISIBLE)(column);
+export const updateWorkinglistOrder =
+    (workinglist: Array) => actionCreator(actionTypes.UPDATE_WORKINGLIST_ORDER)(workinglist);

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ColumnSelector from './ColumnSelector.component';
-import { setColumnVisible } from './actions/ColumnSelector.actions';
+import { updateWorkinglistOrder } from './actions/ColumnSelector.actions';
 
 const mapStateToProps = (state: Object) => ({
     workingListColumnOrder: state.workingListsColumnsOrder.main,
@@ -8,8 +8,8 @@ const mapStateToProps = (state: Object) => ({
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onSetColumnVisible: (columnId: string) => {
-        dispatch(setColumnVisible(columnId));
+    onUpdateWorkinglistOrder: (workinglist: Array) => {
+        dispatch(updateWorkinglistOrder(workinglist));
     },
 });
 

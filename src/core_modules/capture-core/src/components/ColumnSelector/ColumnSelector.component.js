@@ -22,18 +22,12 @@ import IconButton from '@material-ui/core/IconButton';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ReorderIcon from '@material-ui/icons/Reorder';
 
-import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
-import getStageFromProgramIdForEventProgram from '../../metaData/helpers/getStageFromProgramIdForEventProgram';
 import i18n from '@dhis2/d2-i18n';
+
+import DragDropList from './DragDropSort/DragDropList.component';
 
 
 const styles = theme => ({
-    optionsIcon: {
-        color: theme.palette.primary.main,
-    },
-    resortIcon: {
-        float: 'right',
-    },
     optionsIcon: {
         color: theme.palette.primary.main,
     },
@@ -43,14 +37,15 @@ type Props = {
     classes: Object,
     workingListColumnOrder: Array,
     selectedProgramId: string,
-    onSetColumnVisible: (columnId: string) => void,
+    onUpdateWorkinglistOrder: (workinglist: Array) => void,
 };
 
 class ColumnSelector extends Component<Props> {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             open: false,
+            columnList: this.props.workingListColumnOrder,
         };
     }
 
@@ -62,16 +57,26 @@ class ColumnSelector extends Component<Props> {
         this.setState({ open: false });
     };
 
-    handleToggle = value => () => {
-        this.props.onSetColumnVisible(value);
+    handleSave = () => {
+        this.props.onUpdateWorkinglistOrder(this.state.columnList);
+        this.setState({ open: false });
+    };
+
+    handleToggle = id => () => {
+        const index = this.state.columnList.findIndex(column => column.id === id);
+        let toggleList = this.state.columnList;
+
+        toggleList[index] = {...toggleList[index], visible: !toggleList[index].visible};
+
+        this.setState({ columnList: toggleList });
+    };
+
+    handleUpdateListOrder = (sortedList) => {
+        this.setState({ columnList: sortedList });
     };
 
     render() {
         const { classes } = this.props;
-
-        const stageContainer = getStageFromProgramIdForEventProgram(this.props.selectedProgramId);
-        // $FlowSuppress
-        const stage: RenderFoundation = stageContainer.stage;
 
         return (
             <span>
@@ -87,46 +92,10 @@ class ColumnSelector extends Component<Props> {
                 >
                     <DialogTitle>{i18n.t('Columns to show in table')}</DialogTitle>
                     <DialogContent>
-                        <Table className={classes.table}>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell colSpan={12}>{i18n.t('Column')}</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                            {this.props.workingListColumnOrder.map(column => {
-                                let headerName = "";
-                                if (column.isMainProperty) {
-                                    if (column.id === 'eventDate') {
-                                        headerName = stage.getLabel(column.id);
-                                    }
-                                } else {
-                                    headerName = stage.getElement(column.id).name;
-                                }
-                                
-                                return (
-                                <TableRow key={column.id} role="checkbox" tabIndex={-1}>
-                                    <TableCell component="th" scope="row">
-                                        <Checkbox
-                                            color={'primary'}
-                                            checked={column.visible}
-                                            tabIndex={-1}
-                                            disableRipple
-                                            onClick={this.handleToggle(column.id)}
-                                        />
-                                        {headerName}
-                                    </TableCell>
-                                    <TableCell>
-                                        <ReorderIcon className={classes.resortIcon} />
-                                    </TableCell>
-                                </TableRow>
-                                );
-                            })}
-                            </TableBody>
-                        </Table>
+                        <DragDropList listItems={this.state.columnList} handleUpdateListOrder={this.handleUpdateListOrder} handleToggle={this.handleToggle} selectedProgramId={this.props.selectedProgramId}/>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="primary" autoFocus>
+                        <Button onClick={this.handleSave} color="primary" autoFocus>
                             Save
                         </Button>
                     </DialogActions>
