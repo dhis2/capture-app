@@ -1,3 +1,4 @@
+// @flow
 import { connect } from 'react-redux';
 import ColumnSelector from './ColumnSelector.component';
 import { updateWorkinglistOrder } from './actions/ColumnSelector.actions';
@@ -8,7 +9,7 @@ const mapStateToProps = (state: Object) => ({
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onUpdateWorkinglistOrder: (workinglist: Array) => {
+    onUpdateWorkinglistOrder: (workinglist: Array<Object>) => {
         dispatch(updateWorkinglistOrder(workinglist));
     },
 });

@@ -17,13 +17,18 @@ import getStageFromProgramIdForEventProgram from '../../../metaData/helpers/getS
 import i18n from '@dhis2/d2-i18n';
 
 type Props = {
-    listItems: Array,
-    handleUpdateListOrder: (sortedList: Array) => void,
+    listItems: Array<Object>,
+    handleUpdateListOrder: (sortedList: Array<Object>) => void,
     handleToggle: (id: string) => void,
     selectedProgramId: string,
 };
 
-class Container extends Component<Props> {
+type State = {
+    listItems: Array<Object>,
+};
+
+class Container extends Component<Props, State> {
+    moveListItem: (dragIndex: any, hoverIndex: any) => void;
     constructor(props) {
         super(props);
         this.moveListItem = this.moveListItem.bind(this);

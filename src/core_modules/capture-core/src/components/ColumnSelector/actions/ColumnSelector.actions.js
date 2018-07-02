@@ -6,4 +6,4 @@ export const actionTypes = {
 };
 
 export const updateWorkinglistOrder =
-    (workinglist: Array) => actionCreator(actionTypes.UPDATE_WORKINGLIST_ORDER)(workinglist);
+    (workinglist: Array<Object>) => actionCreator(actionTypes.UPDATE_WORKINGLIST_ORDER)(workinglist);

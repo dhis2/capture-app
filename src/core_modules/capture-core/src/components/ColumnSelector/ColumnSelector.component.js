@@ -35,12 +35,17 @@ const styles = theme => ({
 
 type Props = {
     classes: Object,
-    workingListColumnOrder: Array,
+    workingListColumnOrder: Array<Object>,
     selectedProgramId: string,
-    onUpdateWorkinglistOrder: (workinglist: Array) => void,
+    onUpdateWorkinglistOrder: (workinglist: Array<Object>) => void,
 };
 
-class ColumnSelector extends Component<Props> {
+type State = {
+    open: boolean,
+    columnList: Array<Object>,
+};
+
+class ColumnSelector extends Component<Props, State> {
     constructor(props) {
         super(props);
         this.state = {

@@ -1,18 +1,28 @@
-import { DragSource, DropTarget } from 'react-dnd';
+// @flow
 import React, { Component } from 'react';
-
-import ItemTypes from './ItemTypes';
-import PropTypes from 'prop-types';
+import { DragSource, DropTarget } from 'react-dnd';
 
 import TableCell from '@material-ui/core/TableCell';
-
 import Checkbox from '@material-ui/core/Checkbox';
-
 import ReorderIcon from '@material-ui/icons/Reorder';
+
+type Props = {
+    id: string,
+    visible: boolean,
+    text: string,
+    handleToggle: (id: string) => void,
+    isDragging: () => void,
+    connectDragSource: (any) => void,
+    connectDropTarget: (any) => void,
+};
 
 const style = {
     cursor: 'move',
     outline: 'none',
+};
+
+const ItemTypes = {
+    LISTITEM: 'listItem',
 };
 
 const cardSource = {
@@ -45,15 +55,7 @@ const cardTarget = {
     },
 };
 
-class Card extends Component {
-    static propTypes = {
-        connectDragSource: PropTypes.func.isRequired,
-        connectDropTarget: PropTypes.func.isRequired,
-        isDragging: PropTypes.bool.isRequired,
-        id: PropTypes.any.isRequired,
-        text: PropTypes.string.isRequired,
-    }
-
+class DragDropListItem extends Component<Props> {
     render() {
         const { text, isDragging, connectDragSource, connectDropTarget } = this.props;
         const opacity = isDragging ? 0 : 1;
@@ -78,4 +80,4 @@ class Card extends Component {
     }
 }
 
-export default DragSource(ItemTypes.CARD, cardSource, (connect, monitor) => ({ connectDragSource: connect.dragSource(), isDragging: monitor.isDragging() }))(DropTarget(ItemTypes.CARD, cardTarget, connect => ({ connectDropTarget: connect.dropTarget() }))(Card));
+export default DragSource(ItemTypes.LISTITEM, cardSource, (connect, monitor) => ({ connectDragSource: connect.dragSource(), isDragging: monitor.isDragging() }))(DropTarget(ItemTypes.LISTITEM, cardTarget, connect => ({ connectDropTarget: connect.dropTarget() }))(DragDropListItem));
