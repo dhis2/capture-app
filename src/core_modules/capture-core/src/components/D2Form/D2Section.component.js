@@ -8,6 +8,8 @@ import D2SectionFields from './D2SectionFields.container';
 
 import MetaDataSection from '../../metaData/RenderFoundation/Section';
 
+import contextTypes from './contextTypes.const';
+
 const getStyles = () => ({
     sectionFieldsInSection: {
         paddingTop: 10,
@@ -20,6 +22,9 @@ type Props = {
     classes: {
         sectionFieldsInSection: string,
     },
+    sectionId: string,
+    formBuilderId: string,
+    formId: string,
 };
 
 class D2Section extends Component<Props> {
@@ -38,8 +43,10 @@ class D2Section extends Component<Props> {
         );
     }
 
+    getContext = (contextType: $Values<typeof contextTypes>) => this.props[contextType];
+
     render() {
-        const { sectionMetaData, isHidden, classes, ...passOnProps } = this.props;
+        const { sectionMetaData, isHidden, classes, sectionId, ...passOnProps } = this.props;
 
         if (isHidden) {
             return null;
@@ -51,6 +58,7 @@ class D2Section extends Component<Props> {
                     ref={(instance) => { this.sectionFieldsInstance = instance; }}
                     fieldsMetaData={sectionMetaData.elements}
                     {...passOnProps}
+                    getContext={this.getContext}
                 />
             );
         }
@@ -67,6 +75,7 @@ class D2Section extends Component<Props> {
                             ref={(instance) => { this.sectionFieldsInstance = instance; }}
                             fieldsMetaData={sectionMetaData.elements}
                             {...passOnProps}
+                            getContext={this.getContext}
                         />
                     </div>
                 </Section>

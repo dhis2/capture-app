@@ -100,6 +100,7 @@ type Props = {
     programName: string,
     orgUnitName: string,
     onUpdateField: (innerAction: ReduxAction<any, any>) => void,
+    onStartAsyncUpdateField: Object,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onCancel: () => void,
     classes: {
@@ -136,6 +137,7 @@ class NewEventDataEntry extends Component<Props> {
         const {
             formFoundation,
             onUpdateField,
+            onStartAsyncUpdateField,
             onSave,
             onCancel,
             programName, // eslint-disable-line
@@ -149,6 +151,7 @@ class NewEventDataEntry extends Component<Props> {
                         id={'singleEvent'}
                         formFoundation={formFoundation}
                         onUpdateFormField={onUpdateField}
+                        onUpdateFormFieldAsync={onStartAsyncUpdateField}
                         onCancel={onCancel}
                         onSave={onSave}
                     />

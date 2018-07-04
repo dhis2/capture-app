@@ -65,7 +65,7 @@ const isPositiveInteger = (value: string) => {
 };
 
 const isZeroOrPositiveInteger = (value: any) => {
-    if (value === 0) {
+    if (value === '0') {
         return true;
     }
     return isPositiveInteger(value);

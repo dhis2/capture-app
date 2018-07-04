@@ -7,6 +7,7 @@ import TrueFalse from '../../FormFields/Generic/D2TrueFalse.component';
 import TrueOnly from '../../FormFields/Generic/D2TrueOnly.component';
 import D2Date from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import D2DateTime from '../../FormFields/DateAndTime/D2DateTime/D2DateTime.component';
+import D2File from '../../FormFields/File/D2File.container';
 
 import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
 import OptionsSelect from '../../FormFields/Options/SelectVirtualized/OptionsSelectVirtualized.component';
@@ -198,6 +199,31 @@ const fieldForTypes = {
     [elementTypes.TIME]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.PERCENTAGE]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.URL]: (metaData: MetaDataElement) => getBaseTextField(metaData),
+    [elementTypes.FILE_RESOURCE]: (metaData: MetaDataElement) => {
+        const props = createComponentProps({
+            label: metaData.formName,
+            metaCompulsory: metaData.compulsory,
+            async: true,
+        });
+        return createFieldProps({
+            id: metaData.id,
+            component:
+                withGotoInterface()(
+                    withHideCompatibility()(
+                        withDefaultShouldUpdateInterface()(
+                            withRequiredFieldCalculation()(
+                                withDefaultFieldContainer()(
+                                    withDefaultMessages()(
+                                        withDefaultChangeHandler()(D2File),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            props,
+        }, metaData);
+    },
     [elementTypes.UNKNOWN]: (metaData: MetaDataElement) => null, // eslint-disable-line no-unused-vars
 };
 

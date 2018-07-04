@@ -37,10 +37,12 @@ type Props = {
     fields: Array<Field>,
     values: { [id: string]: any },
     fieldsUI: { [id: string]: FieldUI },
+    onUpdateFieldAsync: (fieldId: string, formBuilderId: string, callback: Function) => void,
     onUpdateField: (value: any, uiState: FieldUI, fieldId: string, formBuilderId: string) => void,
     onUpdateFieldUIOnly: (uiState: FieldUI, fieldId: string, formBuilderId: string) => void,
     onFieldsValidated: (fieldsUI: { [id: string]: FieldUI }, formBuilderId: string) => void,
     validationAttempted?: ?boolean,
+    getContext: (contextType: string) => string,
     validateIfNoUIData?: ?boolean,
     classes: Object,
 };
@@ -138,9 +140,13 @@ class FormBuilder extends React.Component<Props> {
         }, fieldId, this.props.id);
     }
 
+    handleCommitAsync = (fieldId: string, callback: Function) => {
+        this.props.onUpdateFieldAsync(fieldId, this.props.id, callback);
+    }
+
     /**
      *  Retain a reference to the form field instance
-    */    
+    */
     setFieldInstance(instance, id) {
         if (!instance) {
             if (this.fieldInstances.has(id)) {
@@ -177,7 +183,20 @@ class FormBuilder extends React.Component<Props> {
     }
 
     renderFields() {
-        const { fields, values, fieldsUI, validationAttempted, classes } = this.props;
+        const {
+            fields,
+            values,
+            fieldsUI,
+            validationAttempted,
+            classes,
+            getContext,
+            id,
+            onFieldsValidated,
+            onUpdateField,
+            onUpdateFieldAsync,
+            onUpdateFieldUIOnly,
+            validateIfNoUIData,
+            ...passOnProps } = this.props;
 
         return fields.map((field) => {
             const props = field.props || {};
@@ -190,6 +209,10 @@ class FormBuilder extends React.Component<Props> {
                 [commitEvent]: commitFieldHandler,
             };
 
+            if (props.async) {
+                commitPropObject.onCommitAsync = (callback: Function) => this.handleCommitAsync(field.id, callback);
+            }
+
             return (
                 <div
                     key={field.id}
@@ -201,8 +224,10 @@ class FormBuilder extends React.Component<Props> {
                         errorMessage={fieldUI.errorMessage}
                         touched={fieldUI.touched}
                         validationAttempted={validationAttempted}
+                        getContext={getContext}
                         {...commitPropObject}
                         {...props}
+                        {...passOnProps}
                     />
                 </div>
             );

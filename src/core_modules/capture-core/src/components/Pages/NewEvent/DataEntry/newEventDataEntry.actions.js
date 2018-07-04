@@ -28,6 +28,7 @@ export const actionTypes = {
     SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE: 'SaveFailedForNewSingleEventAfterReturnedToMainPage',
     SELECTIONS_NOT_COMPLETE_OPENING_NEW_EVENT: 'SelectionsNotCompleteOpeningNewEvent',
     CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE: 'CancelNewEventFromIncompleteSelectionAndReturnToMainPage',
+    START_ASYNC_UPDATE_FIELD: 'StartAsyncUpdateField',
 };
 
 function convertStatusIn(value: string) {
@@ -115,3 +116,13 @@ export const selectionsNotCompleteOpeningNewEvent = () =>
 
 export const cancelNewEventFromIncompleteSelectionAndReturnToMainPage = () =>
     actionCreator(actionTypes.CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE)();
+
+export const startAsyncUpdateField = (fieldId: string, formBuilderId: string, formId: string, callback: Function, dataEntryId: string, itemId: string) =>
+    actionCreator(actionTypes.START_ASYNC_UPDATE_FIELD)({
+        fieldId,
+        formBuilderId,
+        formId,
+        callback,
+        dataEntryId,
+        itemId,
+    });

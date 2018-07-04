@@ -19,6 +19,7 @@ import { saveValidationFailed, saveAbort } from './actions/dataEntry.actions';
 import getDataEntryKey from './common/getDataEntryKey';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
+import AsyncFieldHandler from './asyncFields/AsyncFieldHandler';
 
 import { D2Form } from '../D2Form/D2Form.component';
 
@@ -162,7 +163,9 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
             } else if (this.props.warnings && this.props.warnings.length > 0) {
                 this.showWarningsPopup();
             } else {
-                this.props.onSave(this.props.itemId, this.props.id, this.props.formFoundation);
+                this.getDataEntryItemPromise().then(() => {
+                    this.props.onSave(this.props.itemId, this.props.id, this.props.formFoundation);
+                });
             }
         }
 
@@ -172,8 +175,14 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
         }
 
         handleSaveDialog() {
-            this.props.onSave(this.props.itemId, this.props.id, this.props.formFoundation);
-            this.setState({ warningDialogOpen: false });
+            this.getDataEntryItemPromise().then(() => {
+                this.props.onSave(this.props.itemId, this.props.id, this.props.formFoundation);
+                this.setState({ warningDialogOpen: false });
+            });
+        }
+
+        getDataEntryItemPromise() {
+            return AsyncFieldHandler.getDataEntryItemPromise(this.props.id, this.props.itemId);
         }
 
         getDialogWarningContents() {
@@ -203,6 +212,7 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
                 onSaveValidationFailed,
                 onSaveAbort,
                 finalInProgress,
+                warnings,
                 ...passOnProps
             } = this.props;
             const options = optionFn ? optionFn(this.props) : {};

@@ -85,13 +85,13 @@ export const updateFormField =
         value: any,
         uiState: Object,
         elementId: string,
-        sectionId: string,
+        formBuilderId: string,
         formId: string,
         dataEntryId: string,
         itemId: string,
     ) =>
         actionCreator(
-            actionTypes.UPDATE_FORM_FIELD)({ value, uiState, formId, sectionId, elementId, dataEntryId, itemId });
+            actionTypes.UPDATE_FORM_FIELD)({ value, uiState, formId, formBuilderId, elementId, dataEntryId, itemId });
 
 export const rulesExecutedPostUpdateField =
     (dataEntryId: string, itemId: string) =>
