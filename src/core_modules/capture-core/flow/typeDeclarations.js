@@ -60,6 +60,7 @@ declare type Theme = {
     palette: Object,
     typography: {
         pxToRem: (size: number) => string,
+        title: Object,
     },
     spacing: {
         unit: number,

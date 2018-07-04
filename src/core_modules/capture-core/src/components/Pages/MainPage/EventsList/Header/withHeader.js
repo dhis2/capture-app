@@ -1,10 +1,41 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/core/styles';
 
-const mapStateToProps = (state: ReduxState) => ({
-    header: 'test',
+const getStyles = (theme: Theme) => ({
+    container: {
+        backgroundColor: '#fff',
+    },
+    title: {
+        ...theme.typography.title,
+    },
 });
 
+type Props = {
+    classes: {
+        container: string,
+        title: string,
+    },
+};
+
 export default () => (InnerComponent: React.ComponentType<any>) =>
-    connect(mapStateToProps)(InnerComponent);
+    withStyles(getStyles)((props: Props) => {
+        const { classes, ...passOnProps } = props;
+
+        return (
+            <div
+                className={classes.container}
+            >
+                <InnerComponent
+                    {...passOnProps}
+                    header={
+                        <span
+                            className={classes.title}
+                        >
+                            Registered events
+                        </span>
+                    }
+                />
+            </div>
+        );
+    });
