@@ -10,8 +10,8 @@ import type { Column } from '../ListWrapper/EventsListWrapper.component';
 const getStyles = (theme: Theme) => ({
     filterButtonContainer: {
         paddingRight: theme.typography.pxToRem(theme.spacing.unit),
-        paddingBottom: theme.typography.pxToRem(theme.spacing.unit),
-        display: 'inline-block',
+        paddingBottom: theme.typography.pxToRem(theme.spacing.unit / 2),
+        paddingTop: theme.typography.pxToRem(theme.spacing.unit / 2),
     },
 });
 
@@ -35,7 +35,7 @@ export default (InnerComponent: React.ComponentType<any>) =>
             return columns
                 .map(
                     column => (
-                        <span
+                        <div
                             key={column.id}
                             className={classes.filterButtonContainer}
                         >
@@ -44,7 +44,7 @@ export default (InnerComponent: React.ComponentType<any>) =>
                                 type={column.type}
                                 title={column.header}
                             />
-                        </span>
+                        </div>
                     ),
                 );
         }

@@ -8,11 +8,15 @@ export const actionTypes = {
     REVERT_FILTER: 'RevertWorkingListFilter',
 };
 
+export const batchActionTypes = {
+    SET_FILTER_BATCH: 'SetFilterBatch',
+};
+
 export const editContents = (value: any, itemId: string) =>
     actionCreator(actionTypes.EDIT_CONTENTS)({ value, itemId });
 
-export const setFilter = (requestData: any, appliedText: string, itemId: string) =>
-    actionCreator(actionTypes.SET_FILTER)({ requestData, appliedText, itemId });
+export const setFilter = (data: Object, itemId: string) =>
+    actionCreator(actionTypes.SET_FILTER)({ ...data, itemId });
 
 export const clearFilter = (itemId: string) =>
     actionCreator(actionTypes.CLEAR_FILTER)({ itemId });

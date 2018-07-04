@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import InfiniteCalendar from 'react-infinite-calendar';
 
-import isValidDate from '../../../../utils/validators/date.validator';
+import isValidDate from '../../../../utils/validators/form/date.validator';
 import moment from '../../../../utils/moment/momentResolver';
 import 'react-infinite-calendar/styles.css';
 import CurrentLocaleData from '../../../../utils/localeData/CurrentLocaleData';

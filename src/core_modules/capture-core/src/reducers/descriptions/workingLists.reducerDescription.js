@@ -140,11 +140,30 @@ export const workingListsMetaDesc = createReducerDescription({
             next: {
                 ...newState.main.next,
                 filters: {
-                    ...(newState.main.next && newState.main.next.filters),
+                    ...(newState.main.next ? newState.main.next.filters : null),
                     [payload.itemId]: payload.requestData,
                 },
             },
         };
+        return newState;
+    },
+    [filterSelectorActionTypes.CLEAR_FILTER]: (state, action) => {
+        const newState = { ...state };
+        const itemId = action.payload.itemId;
+
+        const nextMainStateFilters = {
+            ...(newState.main.next ? newState.main.next.filters : null),
+            [itemId]: null,
+        };
+
+        newState.main = {
+            ...newState.main,
+            next: {
+                ...newState.main.next,
+                filters: nextMainStateFilters,
+            },
+        };
+
         return newState;
     },
 }, 'workingListsMeta');
@@ -312,7 +331,7 @@ export const workingListFiltersEditDesc = createReducerDescription({
         newState.main = {
             ...newState.main,
             next: {
-                ...(newState.main && newState.main.next),
+                ...(newState.main ? newState.main.next : null),
                 [payload.itemId]: payload.value,
             },
         };
@@ -324,6 +343,7 @@ export const workingListFiltersEditDesc = createReducerDescription({
         newState.main = {
             ...newState.main,
             [itemId]: null,
+            next: {},
         };
         return newState;
     },
@@ -331,7 +351,7 @@ export const workingListFiltersEditDesc = createReducerDescription({
         const newState = { ...state };
         newState.main = {
             ...newState.main,
-            ...(newState.main && newState.main.next),
+            ...(newState.main ? newState.main.next : null),
             next: {},
         };
         return newState;
@@ -385,7 +405,7 @@ export const workingListsAppliedFiltersDesc = createReducerDescription({
         newState.main = {
             ...newState.main,
             next: {
-                ...(newState.main ? newState.main.next : {}),
+                ...(newState.main ? newState.main.next : null),
                 [payload.itemId]: payload.appliedText,
             },
         };
@@ -397,7 +417,7 @@ export const workingListsAppliedFiltersDesc = createReducerDescription({
         newState.main = {
             ...newState.main,
             next: {
-                ...(newState.main ? newState.main.next : {}),
+                ...(newState.main ? newState.main.next : null),
                 [itemId]: null,
             },
         };

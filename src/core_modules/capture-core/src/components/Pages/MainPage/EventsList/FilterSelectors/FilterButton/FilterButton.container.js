@@ -1,7 +1,9 @@
 // @flow
 import { connect } from 'react-redux';
+import { batchActions } from 'redux-batched-actions'; 
+import isDefined from 'd2-utilizr/lib/isDefined';
 import FilterButton from './FilterButton.component';
-import { editContents, setFilter, clearFilter, revertFilter } from '../filterSelector.actions';
+import { editContents, setFilter, clearFilter, revertFilter, batchActionTypes } from '../filterSelector.actions';
 import { makeFilterValueSelector } from './filterButton.selectors';
 
 const mapStateToProps = () => {
@@ -13,11 +15,13 @@ const mapStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onEditContents: (value: any, itemId: string) => {
+    onEditFilterContents: (value: any, itemId: string) => {
         dispatch(editContents(value, itemId));
     },
-    onSetFilter: (requestData: any, appliedText: string, itemId: string) => {
-        dispatch(setFilter(requestData, appliedText, itemId));
+    onFilterUpdate: (data: ?Object, itemId: string, commitValue?: any) => {
+        const actions = isDefined(commitValue) ? [editContents(commitValue, itemId)] : [];
+        actions.push(data == null ? clearFilter(itemId) : setFilter(data, itemId));
+        dispatch(batchActions(actions, batchActionTypes.SET_FILTER_BATCH));
     },
     onClearFilter: (itemId: string) => {
         dispatch(clearFilter(itemId));

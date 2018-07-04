@@ -25,7 +25,7 @@ import {
     actionTypes as connectivityActionTypes,
 } from '../../../Connectivity/connectivity.actions';
 import { actionTypes as mainPageActionTypes } from '../mainPage.actions';
-import { actionTypes as filterSelectorActionTypes } from './FilterSelectors/filterSelector.actions';
+import { actionTypes as filterSelectorActionTypes, batchActionTypes as filterSelectorBatchActionTypes } from './FilterSelectors/filterSelector.actions';
 
 const errorMessages = {
     WORKING_LIST_RETRIEVE_ERROR: 'Working list could not be loaded',
@@ -61,21 +61,39 @@ const getUpdateWorkingListDataAsync = (
     currentPage: number,
     sortById: string,
     sortByDirection: string,
-    categories: { [key: string]: string } = {},
-    filters: { [key: string]: string },
-) =>
-    getEvents({
+    categories: { [key: string]: string },
+    filters: { [key: string]: string | Array<string> },
+) => {
+    const filterQueries =
+        filters ?
+            Object
+                .keys(filters)
+                .filter(key => filters[key] != null)
+                .reduce((accFilterQueries, filterKey) => {
+                    const filter = filters[filterKey];
+                    if (Array.isArray(filter)) {
+                        const filtersFromArray = filter
+                            .map(filterPart => `${filterKey}:${filterPart}`);
+                        accFilterQueries = [...accFilterQueries, ...filtersFromArray];
+                    } else {
+                        accFilterQueries.push(`${filterKey}:${filter}`);
+                    }
+                    return accFilterQueries;
+                }, []) :
+            null;
+
+    const filterArgument = filterQueries && filterQueries.length > 0 ? { filter: filterQueries } : null;
+
+    return getEvents({
         program: programId,
         orgUnit: orgUnitId,
         pageSize: rowsPerPage,
         page: currentPage,
         order: `${sortById}:${sortByDirection}`,
         ...categories,
-        filter: filters ?
-            Object
-                .keys(filters)
-                .map(filterKey => `${filterKey}:${filters[filterKey]}`) : null,
+        ...filterArgument,
     });
+};
 
 const getInitialWorkingListActionAsync = (
     programId: string,
@@ -154,6 +172,8 @@ export const retrieveWorkingListOnMainSelectionsCompletedEpic = (action$: InputO
                         paginationActionTypes.CHANGE_PAGE,
                         paginationActionTypes.CHANGE_ROWS_PER_PAGE,
                         eventsListActionTypes.SORT_WORKING_LIST,
+                        filterSelectorActionTypes.CLEAR_FILTER,
+                        filterSelectorBatchActionTypes.SET_FILTER_BATCH,
                     ),
                 )
                 .takeUntil(
@@ -183,6 +203,8 @@ export const getWorkingListOnCancelSaveEpic = (action$: InputObservable, store: 
                             paginationActionTypes.CHANGE_PAGE,
                             paginationActionTypes.CHANGE_ROWS_PER_PAGE,
                             eventsListActionTypes.SORT_WORKING_LIST,
+                            filterSelectorActionTypes.CLEAR_FILTER,
+                            filterSelectorBatchActionTypes.SET_FILTER_BATCH,
                         ),
                 )
                 .takeUntil(
@@ -210,6 +232,8 @@ export const getWorkingListOnSaveEpic = (action$: InputObservable, store: ReduxS
                 paginationActionTypes.CHANGE_PAGE,
                 paginationActionTypes.CHANGE_ROWS_PER_PAGE,
                 eventsListActionTypes.SORT_WORKING_LIST,
+                filterSelectorActionTypes.CLEAR_FILTER,
+                filterSelectorBatchActionTypes.SET_FILTER_BATCH,
             ];
 
             if (listSelections && isSelectionsEqual(listSelections, state.currentSelections)) {
@@ -242,8 +266,8 @@ export const updateWorkingListEpic = (action$: InputObservable, store: ReduxStor
         paginationActionTypes.CHANGE_PAGE,
         paginationActionTypes.CHANGE_ROWS_PER_PAGE,
         eventsListActionTypes.SORT_WORKING_LIST,
-        filterSelectorActionTypes.SET_FILTER,
         filterSelectorActionTypes.CLEAR_FILTER,
+        filterSelectorBatchActionTypes.SET_FILTER_BATCH,
     )
         .switchMap((action) => {
             const state = store.getState();
@@ -290,6 +314,8 @@ export const getEventListOnReconnectEpic = (action$: InputObservable, store: Red
                 paginationActionTypes.CHANGE_PAGE,
                 paginationActionTypes.CHANGE_ROWS_PER_PAGE,
                 eventsListActionTypes.SORT_WORKING_LIST,
+                filterSelectorActionTypes.CLEAR_FILTER,
+                filterSelectorBatchActionTypes.SET_FILTER_BATCH,
             ];
 
             if (listSelections && isSelectionsEqual(listSelections, currentSelections)) {

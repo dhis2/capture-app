@@ -52,6 +52,11 @@ const styles = (theme: Theme) => ({
         justifyContent: 'space-between',
         padding: theme.typography.pxToRem(8),
     },
+    topBarLeftContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+    },
     topBarRightContainer: {
         display: 'flex',
         justifyContent: 'flex-end',
@@ -117,6 +122,7 @@ type Props = {
         loaderContainer: string,
         container: string,
         topBarContainer: string,
+        topBarLeftContainer: string,
         topBarRightContainer: string,
         tableContainer: string,
         paginationContainer: string,
@@ -260,7 +266,9 @@ class EventsList extends React.Component<Props> {
                 <div
                     className={classes.topBarContainer}
                 >
-                    <div>
+                    <div
+                        className={classes.topBarLeftContainer}
+                    >
                         {filterButtons}
                     </div>
                     <div

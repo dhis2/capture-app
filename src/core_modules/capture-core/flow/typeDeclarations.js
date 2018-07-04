@@ -110,7 +110,34 @@ declare type Theme = {
     },
     typography: {
         pxToRem: (size: number) => string,
-        title: Object,
+        title: {
+            fontSize: string,
+            fontWeight: number,
+            fontFamily: string,
+            lineHeight: string,
+            color: string,
+        },
+        caption: {
+            fontSize: string,
+            fontWeight: number,
+            fontFamily: string,
+            lineHeight: string,
+            color: string,
+        },
+        body1: {
+            fontSize: string,
+            fontWeight: number,
+            fontFamily: string,
+            lineHeight: string,
+            color: string,
+        },
+        body2: {
+            fontSize: string,
+            fontWeight: number,
+            fontFamily: string,
+            lineHeight: string,
+            color: string,
+        },
     },
     spacing: {
         unit: number,

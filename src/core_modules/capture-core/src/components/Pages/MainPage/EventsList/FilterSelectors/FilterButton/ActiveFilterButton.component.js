@@ -52,15 +52,20 @@ type Props = {
     filterValue: string,
 };
 
-const MAX_LENGTH_OF_VALUE = 6;
+const MAX_LENGTH_OF_VALUE = 10;
 
 class ActiveFilterButton extends React.Component<Props, State> {
     static stopClearPropagation(event: SyntheticEvent<any>) {
         event.stopPropagation();
     }
 
+    static getCappedValue(value: string) {
+        const cappedValue = value.substring(0, MAX_LENGTH_OF_VALUE - 3).trimRight();
+        return `${cappedValue}...`;
+    }
     static getViewValueForFilter(filterValue: string) {
-        return `: ${filterValue.length > MAX_LENGTH_OF_VALUE ? filterValue.substring(0, MAX_LENGTH_OF_VALUE) : filterValue}`;
+        const calculatedValue = filterValue.length > MAX_LENGTH_OF_VALUE ? ActiveFilterButton.getCappedValue(filterValue) : filterValue;
+        return `: ${calculatedValue}`;
     }
 
     constructor(props: Props) {

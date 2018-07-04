@@ -3,7 +3,7 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import Button from '../../../../../Buttons/Button.component';
-import type { Convertable } from '../../../../../FiltersForTypes/filters.types';
+import type { UpdatableFilterContent } from '../../../../../FiltersForTypes/filters.types';
 
 const getStyles = (theme: Theme) => ({
     buttonsContainer: {
@@ -16,7 +16,7 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    onUpdate: () => void,
+    onUpdate: (data: ?Object, commitValue?: any) => void,
     onClose: () => void,
     classes: {
         buttonsContainer: string,
@@ -26,14 +26,24 @@ type Props = {
 
 export default () => (InnerComponent: React.ComponentType<any>) =>
     withStyles(getStyles)(class FilterContentsButtons extends React.Component<Props> {
-        filterTypeInstance: Convertable;
-        onUpdate = () => {
-            const { requestData, appliedText } = (this.filterTypeInstance.onConvert && this.filterTypeInstance.onConvert()) || {};
-            this.props.onUpdate(requestData, appliedText);
+        filterTypeInstance: UpdatableFilterContent;
+        update = (commitValue?: any) => {
+            const updateData = this.filterTypeInstance.onGetUpdateData(commitValue);
+            this.props.onUpdate(updateData, commitValue);
         }
 
-        setFilterTypeInstance = (filterTypeInstance: Convertable) => {
+        isValid() {
+            return this.filterTypeInstance.onIsValid ? this.filterTypeInstance.onIsValid() : true;
+        }
+
+        setFilterTypeInstance = (filterTypeInstance: UpdatableFilterContent) => {
             this.filterTypeInstance = filterTypeInstance;
+        }
+
+        handleUpdateClick = () => {
+            if (this.isValid()) {
+                this.update();
+            }
         }
 
         render() {
@@ -42,7 +52,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
                 <React.Fragment>
                     <InnerComponent
                         filterTypeRef={this.setFilterTypeInstance}
-                        onUpdate={this.onUpdate}
+                        onUpdate={this.update}
                         {...passOnProps}
                     />
                     <div
@@ -54,7 +64,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
                             <Button
                                 variant="raised"
                                 color="primary"
-                                onClick={this.onUpdate}
+                                onClick={this.handleUpdateClick}
                             >
                                 {i18n.t('Update')}
                             </Button>

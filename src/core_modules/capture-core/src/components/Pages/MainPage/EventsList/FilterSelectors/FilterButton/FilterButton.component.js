@@ -41,8 +41,8 @@ type Props = {
         inactiveFilterButtonLabel: string,
     },
     filterValue: ?string,
-    onEditContents: (value: any, itemId: string) => void,
-    onSetFilter: (requestData: any, appliedText: string, itemId: string) => void,
+    onEditFilterContents: (value: any, itemId: string) => void,
+    onFilterUpdate: (data: ?Object, itemId: string, commitValue?: any) => void,
     onClearFilter: (itemId: string) => void,
     onRevertFilter: () => void,
 };
@@ -83,13 +83,13 @@ class FilterButton extends Component<Props, State> {
         this.props.onRevertFilter();
     }
 
-    handleEditContents = (value: any) => {
-        this.props.onEditContents(value, this.props.itemId);
+    handleEditFilterContents = (value: any) => {
+        this.props.onEditFilterContents(value, this.props.itemId);
     }
 
-    handleSetFilter = (requestData: any, appliedText: string) => {
+    handleFilterUpdate = (data: ?Object, commitValue?: any) => {
         const itemId = this.props.itemId;
-        this.props.onSetFilter(requestData, appliedText, itemId);
+        this.props.onFilterUpdate(data, itemId, commitValue);
         this.closeFilterSelector();
     }
 
@@ -105,8 +105,8 @@ class FilterButton extends Component<Props, State> {
             <FilterSelectorContents
                 type={type}
                 id={id}
-                onEdit={this.handleEditContents}
-                onUpdate={this.handleSetFilter}
+                onCommitValue={this.handleEditFilterContents}
+                onUpdate={this.handleFilterUpdate}
                 onClose={this.handleCloseFilterSelector}
             />
         );
