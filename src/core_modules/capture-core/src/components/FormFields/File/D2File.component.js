@@ -1,66 +1,55 @@
 // @flow
+import CheckIcon from '@material-ui/icons/Check';
+import { withStyles } from '@material-ui/core/styles';
+import withLoadingIndicator from '../../../HOC/withLoadingIndicator';
 import React, { Component } from 'react';
+import i18n from '@dhis2/d2-i18n';
+import BorderBox from '../../BorderBox/borderBox.component';
 import Button from '../../Buttons/Button.component';
-import contextTypes from '../../D2Form/contextTypes.const';
 import { getApi } from '../../../d2/d2Instance';
-
-
-type fileContainer = {
-    fileInfo: ?Object,
-    data: ?string,
-    isNew?: ?boolean,
-    isLoading?: boolean,
-};
 
 type Props = {
     label?: ?string,
-    value: ?fileContainer,
-    file?: ?File,
-    onBlur: (value: string) => void,
+    value: ?{ value: string, name: string },
+    classes: {
+        fileContainer: string,
+        fileInputContainer: string,
+        fileInputItemIcon: string,
+        fileInputItem: string,
+        fileInputDeleteButton: string,
+        fileInput: string,
+    },
     onCommitAsync: (callback: Function) => void,
+    onBlur: (value: ?Object) => void,
+    onUpdateAsyncUIState: (uiStateToAdd: Object) => void,
+    asyncUIState: { loading?: ?boolean },
 }
 
-type State = {
-    internalError?: ?string,
-    file?: ?File,
-}
-
-class D2File extends Component<Props, State> {
-    static defaultLabelStyle = {
-
-    };
-
-    static defaultHiddenFileInputStyle = {
+const styles = (theme: Theme) => ({
+    fileContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    fileInputContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    fileInputItemIcon: {
+        color: 'green',
+    },
+    fileInputItem: {
+    },
+    fileInputDeleteButton: {
+        marginLeft: theme.typography.pxToRem(10),
+        color: theme.palette.error.main,
+    },
+    fileInput: {
         display: 'none',
-    };
+    },
+});
 
-    static defaultFileContainer = {
-        paddingTop: 5,
-    };
-
-    static defaultButtonContainerStyle = {
-        display: 'flex',
-    };
-
-    static defaultFileInputButtonContainerStyle = {
-        display: 'flex',
-        paddingTop: 5,
-        paddingBottom: 5,
-    };
-
-    static defaultFileInputButtonStyle = {
-
-    };
-
-    static defaultFileInputRemoveButtonStyle = {
-        marginLeft: 10,
-    };
-
-    static defaultLoadingIndicatorContainerPage = {
-        paddingLeft: 85,
-    };
-
-    state: State;
+class D2File extends Component<Props> {
     containerInstance: ?HTMLElement;
     materialUIContainerInstance: any;
 
@@ -74,25 +63,27 @@ class D2File extends Component<Props, State> {
         // this.goto = gotoFn;
         this.handleRemoveClick = this.handleRemoveClick.bind(this);
         this.handleButtonClick = this.handleButtonClick.bind(this);
-        this.state = { internalError: null, file: null };
     }
 
     handleImageChange(e: Object) {
         e.preventDefault();
         const file = e.target.files[0];
+        e.target.value = null;
 
         if (file) {
+            this.props.onUpdateAsyncUIState({ loading: true });
             this.props.onCommitAsync(() => {
                 const formData = new FormData();
                 formData.append('file', file);
                 return getApi().post('fileResources', formData).then((response: any) => {
                     const fileResource = response && response.response && response.response.fileResource;
                     if (fileResource) {
-                        return { name: fileResource.name, value: fileResource.id };
+                        const val = { name: fileResource.name, value: fileResource.id };
+                        return new Promise(resolve => setTimeout(() => resolve(val), 5000));
                     }
+                    return null;
                 });
             });
-            this.setState({ file });
         }
     }
     handleButtonClick() {
@@ -100,19 +91,20 @@ class D2File extends Component<Props, State> {
     }
 
     handleRemoveClick() {
-        this.setState({ file: null });
+        this.props.onBlur(null);
     }
 
     render() {
-        const { label, value, file } = this.props;
+        const { label, value, classes, asyncUIState } = this.props;
         return (
-            <div ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}>
-                <div>
-                    {label || ''}
-                </div>
-                <div style={D2File.defaultFileInputButtonContainerStyle}>
+            <BorderBox>
+                <div className={classes.fileContainer}>
+                    <div>
+                        {label || ''}
+                    </div>
+
                     <input
-                        style={D2File.defaultHiddenFileInputStyle}
+                        className={classes.fileInput}
                         type="file"
                         accept="image/*"
                         ref={(hiddenFileSelector) => {
@@ -120,56 +112,50 @@ class D2File extends Component<Props, State> {
                         }}
                         onChange={e => this.handleImageChange(e)}
                     />
-                    <Button
-                        label={this.state.file ? 'Change' : 'Select'}
-                        onClick={this.handleButtonClick}
-                        style={D2File.defaultFileInputButtonStyle}
-                        variant="raised"
-                    >
-                        {file ? 'Change' : 'Select'}
-                    </Button>
                     {
                         (() => {
-                            if (this.state.file) {
+                            if (value) {
                                 return (
-                                    <Button
-                                        label={'Remove'}
-                                        onClick={this.handleRemoveClick}
-                                        style={D2File.defaultFileInputRemoveButtonStyle}
-                                        variant="raised"
-                                    >
-                                        {'Remove'}
-                                    </Button>
+                                    <div className={classes.fileInputContainer}>
+                                        <CheckIcon className={classes.fileInputItemIcon} />
+                                        <div className={classes.fileInputItem}>
+                                            <a
+                                                href=""
+                                            >
+                                                {value.name}
+                                            </a>
+                                            {` ${i18n.t('selected')}.`}
+                                        </div>
+                                        <div className={classes.fileInputItem}>
+                                            <Button
+                                                onClick={this.handleRemoveClick}
+                                                className={classes.fileInputDeleteButton}
+                                            >
+                                                {i18n.t('Delete')}
+                                            </Button>
+                                        </div>
+                                    </div>
                                 );
                             }
+                            return (
+                                <div className={classes.fileInputContainer}>
+                                    <div className={classes.fileInputItem}>
+                                        <Button
+                                            onClick={this.handleButtonClick}
+                                            color="primary"
+                                        >
+                                            {i18n.t('Select file')}
+                                        </Button>
+                                    </div>
+                                </div>
+
+                            );
                         })()
                     }
                 </div>
-                {
-                    (() => {
-                        if (value && value.isLoading) {
-                            return (
-                                <div style={D2File.defaultLoadingIndicatorContainerPage} />
-                            );
-                        }
-
-                        if (this.state.file) {
-                            return (
-                                <a style={D2File.defaultFileContainer} href="www.vg.no">
-                                    {this.state.file.name}
-                                </a>
-                            );
-                        }
-                    })()
-                }
-
-                <div>
-                    {this.state.internalError}
-                </div>
-
-            </div>
+            </BorderBox>
         );
     }
 }
 
-export default D2File;
+export default withStyles(styles)(D2File);

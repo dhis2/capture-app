@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-06-21T17:20:59.427Z\n"
-"PO-Revision-Date: 2018-06-21T17:20:59.427Z\n"
+"POT-Creation-Date: 2018-07-05T15:12:32.196Z\n"
+"PO-Revision-Date: 2018-07-05T15:12:32.196Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -23,10 +23,25 @@ msgstr ""
 msgid "Abort"
 msgstr ""
 
+msgid "Your data is uploading. Please wait untill this message disappears"
+msgstr ""
+
 msgid "Save"
 msgstr ""
 
+msgid "Uploading data"
+msgstr ""
+
 msgid "Sort"
+msgstr ""
+
+msgid "selected"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Select file"
 msgstr ""
 
 msgid "Yes"

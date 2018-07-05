@@ -87,7 +87,7 @@ export const startRunRulesOnUpdateForNewSingleEvent = (actionData: { payload: Ob
     actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)(actionData);
 
 export const requestSaveNewEventAndReturnToMainPage = (eventId: string, dataEntryId: string, formFoundation: Object) =>
-    actionCreator(actionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)({ eventId, dataEntryId, formFoundation });
+    actionCreator(actionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)({ eventId, dataEntryId, formFoundation }, { skipLogging: ['formFoundation'] });
 
 export const startSaveNewEventAfterReturnedToMainPage = (serverData: Object, selections: Object) =>
     actionCreator(actionTypes.START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE)({ selections }, {
@@ -117,12 +117,20 @@ export const selectionsNotCompleteOpeningNewEvent = () =>
 export const cancelNewEventFromIncompleteSelectionAndReturnToMainPage = () =>
     actionCreator(actionTypes.CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE)();
 
-export const startAsyncUpdateField = (fieldId: string, formBuilderId: string, formId: string, callback: Function, dataEntryId: string, itemId: string) =>
-    actionCreator(actionTypes.START_ASYNC_UPDATE_FIELD)({
-        fieldId,
-        formBuilderId,
-        formId,
-        callback,
-        dataEntryId,
-        itemId,
-    });
+export const startAsyncUpdateField =
+    (
+        fieldId: string,
+        formBuilderId: string,
+        formId: string,
+        callback: Function,
+        dataEntryId: string,
+        itemId: string,
+    ) =>
+        actionCreator(actionTypes.START_ASYNC_UPDATE_FIELD)({
+            fieldId,
+            formBuilderId,
+            formId,
+            callback,
+            dataEntryId,
+            itemId,
+        });

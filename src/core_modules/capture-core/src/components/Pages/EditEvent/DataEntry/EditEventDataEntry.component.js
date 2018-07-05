@@ -84,6 +84,7 @@ const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry
 type Props = {
     formFoundation: ?RenderFoundation,
     onUpdateField: (innerAction: ReduxAction<any, any>) => void,
+    onStartAsyncUpdateField: Object,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onCancel: () => void,
 };
@@ -95,6 +96,7 @@ class NewEventDataEntry extends Component<Props> {
             onUpdateField,
             onSave,
             onCancel,
+            onStartAsyncUpdateField,
         } = this.props;
         return (
             <div>
@@ -103,6 +105,7 @@ class NewEventDataEntry extends Component<Props> {
                         id={'singleEvent'}
                         formFoundation={formFoundation}
                         onUpdateFormField={onUpdateField}
+                        onUpdateFormFieldAsync={onStartAsyncUpdateField}
                         onCancel={onCancel}
                         onSave={onSave}
                     />

@@ -2,9 +2,9 @@
 import { batchActions } from 'redux-batched-actions';
 import {
     actionTypes,
-    startRunRulesOnUpdateForNewSingleEvent,
+    startRunRulesOnUpdateForEditSingleEvent,
     batchActionTypes,
-} from '../newEventDataEntry.actions';
+} from '../EditEventDataEntry.actions';
 import { updateFormField } from '../../../../DataEntry/actions/dataEntry.actions';
 
 import AsyncFieldsHandler from '../../../../DataEntry/asyncFields/AsyncFieldHandler';
@@ -26,7 +26,7 @@ export const asyncUpdateFieldEpic = (action$: InputObservable, store: ReduxStore
                     const innerAction = updateFormField(value, uiState, payload.fieldId, payload.formBuilderId, payload.formId, payload.dataEntryId, payload.itemId);
                     return batchActions([
                         innerAction,
-                        startRunRulesOnUpdateForNewSingleEvent(innerAction.payload),
-                    ], batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH);
+                        startRunRulesOnUpdateForEditSingleEvent(innerAction.payload),
+                    ], batchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH);
                 });
         });

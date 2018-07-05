@@ -43,8 +43,6 @@ class D2Section extends Component<Props> {
         );
     }
 
-    getContext = (contextType: $Values<typeof contextTypes>) => this.props[contextType];
-
     render() {
         const { sectionMetaData, isHidden, classes, sectionId, ...passOnProps } = this.props;
 
@@ -58,7 +56,6 @@ class D2Section extends Component<Props> {
                     ref={(instance) => { this.sectionFieldsInstance = instance; }}
                     fieldsMetaData={sectionMetaData.elements}
                     {...passOnProps}
-                    getContext={this.getContext}
                 />
             );
         }
@@ -75,7 +72,6 @@ class D2Section extends Component<Props> {
                             ref={(instance) => { this.sectionFieldsInstance = instance; }}
                             fieldsMetaData={sectionMetaData.elements}
                             {...passOnProps}
-                            getContext={this.getContext}
                         />
                     </div>
                 </Section>

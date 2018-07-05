@@ -1,5 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
+import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
 import NewEventDataEntry from './NewEventDataEntry.component';
 import {
@@ -16,7 +17,6 @@ import {
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
-import i18n from '@dhis2/d2-i18n';
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
@@ -47,7 +47,14 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
             startRunRulesOnUpdateForNewSingleEvent(innerAction.payload),
         ], batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH));
     },
-    onStartAsyncUpdateField: (fieldId: string, formBuilderId: string, formId: string, callback: Function, dataEntryId: string, itemId: string) => {
+    onStartAsyncUpdateField: (
+        fieldId: string,
+        formBuilderId: string,
+        formId: string,
+        callback: Function,
+        dataEntryId: string,
+        itemId: string,
+    ) => {
         dispatch(startAsyncUpdateField(fieldId, formBuilderId, formId, callback, dataEntryId, itemId));
     },
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
