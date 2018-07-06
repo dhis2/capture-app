@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
 import NewEventDataEntry from './NewEventDataEntry.component';
 import {
-    startAsyncUpdateField,
+    startAsyncUpdateFieldForNewEvent,
     startRunRulesOnUpdateForNewSingleEvent,
     requestSaveNewEventAndReturnToMainPage,
     cancelNewEventAndReturnToMainPage,
@@ -55,7 +55,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         dataEntryId: string,
         itemId: string,
     ) => {
-        dispatch(startAsyncUpdateField(fieldId, formBuilderId, formId, callback, dataEntryId, itemId));
+        dispatch(startAsyncUpdateFieldForNewEvent(fieldId, formBuilderId, formId, callback, dataEntryId, itemId));
     },
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);

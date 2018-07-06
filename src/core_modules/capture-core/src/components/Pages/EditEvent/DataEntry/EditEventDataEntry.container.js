@@ -8,7 +8,7 @@ import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
 import programCollection from '../../../../metaDataMemoryStores/programCollection/programCollection';
 import errorCreator from '../../../../utils/errorCreator';
 import {
-    startAsyncUpdateField,
+    startAsyncUpdateFieldForEditEvent,
     startRunRulesOnUpdateForEditSingleEvent,
     requestSaveReturnToMainPage,
     startCancelSaveReturnToMainPage,
@@ -55,7 +55,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         dataEntryId: string,
         itemId: string,
     ) => {
-        dispatch(startAsyncUpdateField(fieldId, formBuilderId, formId, callback, dataEntryId, itemId));
+        dispatch(startAsyncUpdateFieldForEditEvent(fieldId, formBuilderId, formId, callback, dataEntryId, itemId));
     },
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);

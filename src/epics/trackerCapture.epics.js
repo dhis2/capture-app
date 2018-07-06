@@ -28,8 +28,11 @@ import {
     cancelNewEventLocationChangeEpic,
 } from 'capture-core/components/Pages/NewEvent/DataEntry/epics/cancelNewSingleEvent.epics';
 import {
-    asyncUpdateFieldEpic
-} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/asyncUpdateField.epics';
+    newEventAsyncUpdateFieldEpic,
+} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/newEventAsyncUpdateField.epics';
+import {
+    editEventAsyncUpdateFieldEpic,
+} from 'capture-core/components/Pages/EditEvent/DataEntry/epics/editEventAsyncUpdateField.epics';
 import {
     cancelNewEventIncompleteSelectionsLocationChangeEpic,
 } from 'capture-core/components/Pages/NewEvent/DataEntry/epics/cancelNewSingleEventSelectionsIncomplete.epics';
@@ -107,7 +110,8 @@ export default combineEpics(
     saveNewEventEpic,
     cancelNewEventLocationChangeEpic,
     cancelNewEventEpic,
-    asyncUpdateFieldEpic,
+    newEventAsyncUpdateFieldEpic,
+    editEventAsyncUpdateFieldEpic,
     cancelNewEventIncompleteSelectionsLocationChangeEpic,
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,

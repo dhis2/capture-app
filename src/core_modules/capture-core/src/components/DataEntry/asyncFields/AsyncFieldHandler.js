@@ -1,18 +1,16 @@
 // @flow
 
-import { Promise } from "core-js";
-import isDefined from 'd2-utilizr/src/isDefined';
 import getDataEntryKey from '../common/getDataEntryKey';
 
 
 class AsyncFieldHandler {
-    dataEntryItemPromises: { [string]: ?Array<Promise> }
+    dataEntryItemPromises: { [string]: ?Array<Promise<any>> }
 
     constructor() {
         this.dataEntryItemPromises = {};
     }
 
-    removePromise = (dataEntryKey: string, promise: Promise) => {
+    removePromise = (dataEntryKey: string, promise: Promise<any>) => {
         if (this.dataEntryItemPromises[dataEntryKey]) {
             const index = this.dataEntryItemPromises[dataEntryKey].indexOf(promise);
             if (index >= 0) {
@@ -26,7 +24,7 @@ class AsyncFieldHandler {
         }
     }
 
-    setPromise = (dataEntryKey: string, promise: Promise) => {
+    setPromise = (dataEntryKey: string, promise: Promise<any>) => {
         if (!this.dataEntryItemPromises[dataEntryKey]) {
             this.dataEntryItemPromises[dataEntryKey] = [];
         }
@@ -41,7 +39,7 @@ class AsyncFieldHandler {
         return !!promises;
     }
 
-    executeAsyncCallback = (dataEntryId: string, itemId: string, callback: Function, next: Function) => {
+    executeAsyncCallback = (dataEntryId: string, itemId: string, callback: Function) => {
         const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
         const promise = callback().then((value: any) => {
             this.removePromise(dataEntryKey, promise);

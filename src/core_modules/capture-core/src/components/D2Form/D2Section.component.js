@@ -8,8 +8,6 @@ import D2SectionFields from './D2SectionFields.container';
 
 import MetaDataSection from '../../metaData/RenderFoundation/Section';
 
-import contextTypes from './contextTypes.const';
-
 const getStyles = () => ({
     sectionFieldsInSection: {
         paddingTop: 10,

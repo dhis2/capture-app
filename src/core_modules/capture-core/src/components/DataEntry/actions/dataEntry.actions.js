@@ -1,6 +1,10 @@
 // @flow
 import { actionCreator } from '../../../actions/actions.utils';
 
+export const batchActionTypes = {
+    ASYNC_UPDATE_FIELD_FAILED_BATCH: 'AsyncUpdateFieldFailedBatch',
+};
+
 export const actionTypes = {
     START_COMPLETE_EVENT: 'StartCompleteDataEntryEvent',
     COMPLETE_EVENT: 'CompleteDataEntryEvent',
@@ -15,6 +19,7 @@ export const actionTypes = {
     UPDATE_FIELD: 'UpdateDataEntryField',
     UPDATE_FORM_FIELD: 'UpdateDataEntryFormField',
     RULES_EXECUTED_POST_UPDATE_FIELD: 'RulesExecutedPostUpdateFieldDataEntry',
+    ASYNC_UPDATE_FIELD_FAILED: 'AsyncUpdateFieldFailed',
 };
 
 // COMPLETE
@@ -96,3 +101,7 @@ export const updateFormField =
 export const rulesExecutedPostUpdateField =
     (dataEntryId: string, itemId: string) =>
         actionCreator(actionTypes.RULES_EXECUTED_POST_UPDATE_FIELD)({ dataEntryId, itemId });
+
+export const asyncUpdateFieldFailed =
+    (message: string) =>
+        actionCreator(actionTypes.ASYNC_UPDATE_FIELD_FAILED)({ message });

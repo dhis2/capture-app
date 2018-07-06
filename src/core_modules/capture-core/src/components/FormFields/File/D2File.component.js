@@ -1,12 +1,12 @@
 // @flow
 import CheckIcon from '@material-ui/icons/Check';
 import { withStyles } from '@material-ui/core/styles';
-import withLoadingIndicator from '../../../HOC/withLoadingIndicator';
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import BorderBox from '../../BorderBox/borderBox.component';
 import Button from '../../Buttons/Button.component';
 import { getApi } from '../../../d2/d2Instance';
+import LoadingMask from '../../LoadingMasks/LoadingMask.component';
 
 type Props = {
     label?: ?string,
@@ -18,6 +18,7 @@ type Props = {
         fileInputItem: string,
         fileInputDeleteButton: string,
         fileInput: string,
+        fileLoadingProgress: string,
     },
     onCommitAsync: (callback: Function) => void,
     onBlur: (value: ?Object) => void,
@@ -39,10 +40,14 @@ const styles = (theme: Theme) => ({
         color: 'green',
     },
     fileInputItem: {
+        marginRight: theme.typography.pxToRem(10),
     },
     fileInputDeleteButton: {
-        marginLeft: theme.typography.pxToRem(10),
+        margin: theme.typography.pxToRem(8),
         color: theme.palette.error.main,
+    },
+    fileLoadingProgress: {
+        marginRight: theme.typography.pxToRem(10),
     },
     fileInput: {
         display: 'none',
@@ -78,8 +83,7 @@ class D2File extends Component<Props> {
                 return getApi().post('fileResources', formData).then((response: any) => {
                     const fileResource = response && response.response && response.response.fileResource;
                     if (fileResource) {
-                        const val = { name: fileResource.name, value: fileResource.id };
-                        return new Promise(resolve => setTimeout(() => resolve(val), 5000));
+                        return { name: fileResource.name, value: fileResource.id };
                     }
                     return null;
                 });
@@ -96,6 +100,7 @@ class D2File extends Component<Props> {
 
     render() {
         const { label, value, classes, asyncUIState } = this.props;
+        const isUploading = asyncUIState && asyncUIState.loading;
         return (
             <BorderBox>
                 <div className={classes.fileContainer}>
@@ -114,7 +119,13 @@ class D2File extends Component<Props> {
                     />
                     {
                         (() => {
-                            if (value) {
+                            if (isUploading) {
+                                return (
+                                    <div className={classes.fileInputContainer}>
+                                        <LoadingMask className={classes.fileLoadingProgress} size={40} />
+                                        <div className={classes.fileInputItem}>{i18n.t('Uploading file')}</div>
+                                    </div>);
+                            } else if (value) {
                                 return (
                                     <div className={classes.fileInputContainer}>
                                         <CheckIcon className={classes.fileInputItemIcon} />
