@@ -45,13 +45,14 @@ export const editEventAsyncUpdateFieldEpic = (action$: InputObservable) =>
                         startRunRulesOnUpdateForEditSingleEvent(innerAction.payload),
                     ], batchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH);
                 }).catch((error) => {
-                    const { message, details } = getErrorMessageAndDetails(error);
+                    const { message } = getErrorMessageAndDetails(error);
+                    const errorMessage = `${i18n.t('Field')} ${payload.fieldLabel} ${i18n.t('could not be updated')}`;
                     log.error(errorCreator(
                         message ||
-                        i18n.t('Field could not be updated'))(details));
+                        errorMessage));
                     return batchActions([
                         updateFieldUIOnly(uiState, payload.fieldId, payload.formBuilderId),
-                        asyncUpdateFieldFailed(i18n.t('Field could not be updated')),
+                        asyncUpdateFieldFailed(errorMessage),
                     ], dataEntryBatchActionTypes.ASYNC_UPDATE_FIELD_FAILED_BATCH);
                 });
         });

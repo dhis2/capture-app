@@ -49,13 +49,14 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
     onStartAsyncUpdateField: (
         fieldId: string,
+        fieldLabel: string,
         formBuilderId: string,
         formId: string,
         callback: Function,
         dataEntryId: string,
         itemId: string,
     ) => {
-        dispatch(startAsyncUpdateFieldForNewEvent(fieldId, formBuilderId, formId, callback, dataEntryId, itemId));
+        dispatch(startAsyncUpdateFieldForNewEvent(fieldId, fieldLabel, formBuilderId, formId, callback, dataEntryId, itemId));
     },
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);

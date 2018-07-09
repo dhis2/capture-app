@@ -37,7 +37,7 @@ type Props = {
     fields: Array<Field>,
     values: { [id: string]: any },
     fieldsUI: { [id: string]: FieldUI },
-    onUpdateFieldAsync: (fieldId: string, formBuilderId: string, callback: Function) => void,
+    onUpdateFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, callback: Function) => void,
     onUpdateField: (value: any, uiState: FieldUI, fieldId: string, formBuilderId: string) => void,
     onUpdateFieldUIOnly: (uiState: FieldUI, fieldId: string, formBuilderId: string) => void,
     onFieldsValidated: (fieldsUI: { [id: string]: FieldUI }, formBuilderId: string) => void,
@@ -181,8 +181,8 @@ class FormBuilder extends React.Component<Props> {
         this.props.onUpdateFieldUIOnly(asyncStateToAdd, fieldId, this.props.id);
     }
 
-    handleCommitAsync = (fieldId: string, callback: Function) => {
-        this.props.onUpdateFieldAsync(fieldId, this.props.id, callback);
+    handleCommitAsync = (fieldId: string, fieldLabel: string, callback: Function) => {
+        this.props.onUpdateFieldAsync(fieldId, fieldLabel, this.props.id, callback);
     }
 
     /**
@@ -252,7 +252,7 @@ class FormBuilder extends React.Component<Props> {
             const asyncProps = {};
 
             if (props.async) {
-                asyncProps.onCommitAsync = (callback: Function) => this.handleCommitAsync(field.id, callback);
+                asyncProps.onCommitAsync = (callback: Function) => this.handleCommitAsync(field.id, props.label, callback);
                 asyncProps.onUpdateAsyncUIState = (asyncState: Object) => this.handleUpdateAsyncState(field.id, asyncState);
                 asyncProps.asyncUIState = this.asyncUIState[field.id];
             }

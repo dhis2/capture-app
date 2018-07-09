@@ -16,6 +16,7 @@ import withDefaultFieldContainer from '../../../../components/DataEntry/dataEntr
 import withDefaultChangeHandler from '../../../../components/DataEntry/dataEntryField/withDefaultChangeHandler';
 import withDefaultShouldUpdateInterface from
     '../../../../components/DataEntry/dataEntryField/withDefaultShouldUpdateInterface';
+import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
 
 const getStyles = () => ({
 });
@@ -90,6 +91,9 @@ type Props = {
 };
 
 class NewEventDataEntry extends Component<Props> {
+    componentWillUnmount() {
+        inMemoryFileStore.clear();
+    }
     render() {
         const {
             formFoundation,

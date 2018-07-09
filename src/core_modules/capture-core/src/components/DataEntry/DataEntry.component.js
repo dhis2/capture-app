@@ -39,7 +39,15 @@ type Props = {
     onUpdateFormField?: ?(
         innerAction: ReduxAction<any, any>,
     ) => void,
-    onUpdateFormFieldAsync: (fieldId: string, formBuilderId: string, formId: string, callback: Function, dataEntryId: string, itemId: string) => void,
+    onUpdateFormFieldAsync: (
+        fieldId: string,
+        fieldLabel: string,
+        formBuilderId: string,
+        formId: string,
+        callback: Function,
+        dataEntryId: string,
+        itemId: string,
+    ) => void,
 
 };
 

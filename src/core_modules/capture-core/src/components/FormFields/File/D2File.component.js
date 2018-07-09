@@ -7,10 +7,11 @@ import BorderBox from '../../BorderBox/borderBox.component';
 import Button from '../../Buttons/Button.component';
 import { getApi } from '../../../d2/d2Instance';
 import LoadingMask from '../../LoadingMasks/LoadingMask.component';
+import inMemoryFileStore from '../../DataEntry/file/inMemoryFileStore';
 
 type Props = {
     label?: ?string,
-    value: ?{ value: string, name: string },
+    value: ?{ value: string, name: string, url?: ?string },
     classes: {
         fileContainer: string,
         fileInputContainer: string,
@@ -83,6 +84,7 @@ class D2File extends Component<Props> {
                 return getApi().post('fileResources', formData).then((response: any) => {
                     const fileResource = response && response.response && response.response.fileResource;
                     if (fileResource) {
+                        inMemoryFileStore.set(fileResource.id, file);
                         return { name: fileResource.name, value: fileResource.id };
                     }
                     return null;
@@ -98,9 +100,23 @@ class D2File extends Component<Props> {
         this.props.onBlur(null);
     }
 
+    getFileUrl() {
+        if (this.props.value) {
+            if (this.props.value.url) {
+                return this.props.value.url;
+            }
+            const fileUrl = inMemoryFileStore.get(this.props.value.value);
+            if (fileUrl) {
+                return fileUrl;
+            }
+        }
+        return null;
+    }
+
     render() {
         const { label, value, classes, asyncUIState } = this.props;
         const isUploading = asyncUIState && asyncUIState.loading;
+        const fileUrl = this.getFileUrl();
         return (
             <BorderBox>
                 <div className={classes.fileContainer}>
@@ -111,7 +127,6 @@ class D2File extends Component<Props> {
                     <input
                         className={classes.fileInput}
                         type="file"
-                        accept="image/*"
                         ref={(hiddenFileSelector) => {
                             this.hiddenFileSelectorRef = hiddenFileSelector;
                         }}
@@ -131,7 +146,9 @@ class D2File extends Component<Props> {
                                         <CheckIcon className={classes.fileInputItemIcon} />
                                         <div className={classes.fileInputItem}>
                                             <a
-                                                href=""
+                                                download={value.name}
+                                                target="_blank"
+                                                href={fileUrl}
                                             >
                                                 {value.name}
                                             </a>

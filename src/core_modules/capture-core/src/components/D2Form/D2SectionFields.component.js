@@ -37,7 +37,7 @@ type Props = {
     rulesHiddenFields: RulesHiddenFields,
     rulesCompulsoryFields: RulesCompulsoryFields,
     onUpdateField: (value: any, uiState: Object, elementId: string, formBuilderId: string, formId: string) => void,
-    onUpdateFieldAsync: (fieldId: string, formBuilderId: string, formId: string, callback: Function) => void,
+    onUpdateFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, formId: string, callback: Function) => void,
     formId: string,
     formBuilderId: string,
 };
@@ -114,8 +114,8 @@ class D2SectionFields extends Component<Props> {
         this.props.onUpdateField(value, uiState, elementId, formBuilderId, this.props.formId);
     }
 
-    handleUpdateFieldAsync = (fieldId: string, formBuilderId: string, callback: Function) => {
-        this.props.onUpdateFieldAsync(fieldId, formBuilderId, this.props.formId, callback);
+    handleUpdateFieldAsync = (fieldId: string, fieldLabel: string, formBuilderId: string, callback: Function) => {
+        this.props.onUpdateFieldAsync(fieldId, fieldLabel, formBuilderId, this.props.formId, callback);
     }
 
     buildRulesCompulsoryErrors() {

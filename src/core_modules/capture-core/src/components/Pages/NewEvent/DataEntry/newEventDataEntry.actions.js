@@ -120,6 +120,7 @@ export const cancelNewEventFromIncompleteSelectionAndReturnToMainPage = () =>
 export const startAsyncUpdateFieldForNewEvent =
     (
         fieldId: string,
+        fieldLabel: string,
         formBuilderId: string,
         formId: string,
         callback: Function,
@@ -128,6 +129,7 @@ export const startAsyncUpdateFieldForNewEvent =
     ) =>
         actionCreator(actionTypes.START_ASYNC_UPDATE_FIELD_FOR_NEW_EVENT)({
             fieldId,
+            fieldLabel,
             formBuilderId,
             formId,
             callback,

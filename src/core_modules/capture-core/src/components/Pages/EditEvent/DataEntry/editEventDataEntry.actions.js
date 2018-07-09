@@ -131,6 +131,7 @@ export const updateWorkingListAfterUpdateCancelled = () =>
 export const startAsyncUpdateFieldForEditEvent =
     (
         fieldId: string,
+        fieldLabel: string,
         formBuilderId: string,
         formId: string,
         callback: Function,
@@ -139,6 +140,7 @@ export const startAsyncUpdateFieldForEditEvent =
     ) =>
         actionCreator(actionTypes.START_ASYNC_UPDATE_FIELD_FOR_EDIT_EVENT)({
             fieldId,
+            fieldLabel,
             formBuilderId,
             formId,
             callback,

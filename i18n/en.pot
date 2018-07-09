@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-07-06T11:49:56.743Z\n"
-"PO-Revision-Date: 2018-07-06T11:49:56.743Z\n"
+"POT-Creation-Date: 2018-07-09T13:57:04.500Z\n"
+"PO-Revision-Date: 2018-07-09T13:57:04.500Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -68,7 +68,10 @@ msgstr ""
 msgid "Syncing"
 msgstr ""
 
-msgid "Field could not be updated"
+msgid "Field"
+msgstr ""
+
+msgid "could not be updated"
 msgstr ""
 
 msgid "Start Again"

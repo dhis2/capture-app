@@ -18,6 +18,7 @@ import withDefaultFieldContainer from '../../../../components/DataEntry/dataEntr
 import withDefaultChangeHandler from '../../../../components/DataEntry/dataEntryField/withDefaultChangeHandler';
 import withDefaultShouldUpdateInterface from
     '../../../../components/DataEntry/dataEntryField/withDefaultShouldUpdateInterface';
+import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -111,6 +112,9 @@ type Props = {
 };
 
 class NewEventDataEntry extends Component<Props> {
+    componentWillUnmount() {
+        inMemoryFileStore.clear();
+    }
     getSavingText() {
         const { classes, orgUnitName, programName } = this.props;
         const firstPart = `${i18n.t('Saving to')} `;

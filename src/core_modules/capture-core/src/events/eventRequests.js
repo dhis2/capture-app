@@ -100,7 +100,7 @@ async function convertToClientEvent(event: ApiTEIEvent) {
 
     const dataValuesById = getValuesById(event.dataValues);
     const convertedDataValues = stageMetaData.convertValues(dataValuesById, convertValue);
-    await getSubValues(stageMetaData, convertedDataValues);
+    await getSubValues(event.event, stageMetaData, convertedDataValues);
 
     const convertedMainProperties = convertMainProperties(event);
 
