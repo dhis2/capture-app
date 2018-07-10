@@ -7,7 +7,8 @@ import TrueFalse from '../../FormFields/Generic/D2TrueFalse.component';
 import TrueOnly from '../../FormFields/Generic/D2TrueOnly.component';
 import D2Date from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import D2DateTime from '../../FormFields/DateAndTime/D2DateTime/D2DateTime.component';
-import D2File from '../../FormFields/File/D2File.container';
+import D2File from '../../FormFields/File/D2File.component';
+import D2Image from '../../FormFields/Image/D2Image.component';
 
 import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
 import OptionsSelect from '../../FormFields/Options/SelectVirtualized/OptionsSelectVirtualized.component';
@@ -215,6 +216,31 @@ const fieldForTypes = {
                                 withDefaultFieldContainer()(
                                     withDefaultMessages()(
                                         withDefaultChangeHandler()(D2File),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            props,
+        }, metaData);
+    },
+    [elementTypes.IMAGE]: (metaData: MetaDataElement) => {
+        const props = createComponentProps({
+            label: metaData.formName,
+            metaCompulsory: metaData.compulsory,
+            async: true,
+        });
+        return createFieldProps({
+            id: metaData.id,
+            component:
+                withGotoInterface()(
+                    withHideCompatibility()(
+                        withDefaultShouldUpdateInterface()(
+                            withRequiredFieldCalculation()(
+                                withDefaultFieldContainer()(
+                                    withDefaultMessages()(
+                                        withDefaultChangeHandler()(D2Image),
                                     ),
                                 ),
                             ),

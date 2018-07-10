@@ -13,13 +13,14 @@ type Props = {
     label?: ?string,
     value: ?{ value: string, name: string, url?: ?string },
     classes: {
-        fileContainer: string,
-        fileInputContainer: string,
-        fileInputItemIcon: string,
-        fileInputItem: string,
-        fileInputDeleteButton: string,
-        fileInput: string,
-        fileLoadingProgress: string,
+        imageContainer: string,
+        imageInputContainer: string,
+        imageInputItemIcon: string,
+        imageInputItem: string,
+        imageInputDeleteButton: string,
+        imageInput: string,
+        imageLoadingProgress: string,
+        imagePreview: string,
     },
     onCommitAsync: (callback: Function) => void,
     onBlur: (value: ?Object) => void,
@@ -28,50 +29,54 @@ type Props = {
 }
 
 const styles = (theme: Theme) => ({
-    fileContainer: {
+    imageContainer: {
         display: 'flex',
         flexDirection: 'column',
     },
-    fileInputContainer: {
+    imageInputContainer: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
     },
-    fileInputItemIcon: {
+    imageInputItemIcon: {
         color: theme.palette.success[700],
     },
-    fileInputItem: {
+    imageInputItem: {
         marginRight: theme.typography.pxToRem(10),
     },
-    fileInputDeleteButton: {
+    imageInputDeleteButton: {
         margin: theme.typography.pxToRem(8),
         color: theme.palette.error.main,
     },
-    fileLoadingProgress: {
+    imageLoadingProgress: {
         marginRight: theme.typography.pxToRem(10),
     },
-    fileInput: {
+    imageInput: {
         display: 'none',
+    },
+    imagePreview: {
+        maxHeight: theme.typography.pxToRem(400),
+        maxWidth: '100%',
     },
 });
 
-class D2File extends Component<Props> {
-    hiddenFileSelectorRef: any;
+class D2Image extends Component<Props> {
+    hiddenimageSelectorRef: any;
 
-    handleFileChange = (e: Object) => {
+    handleImageChange = (e: Object) => {
         e.preventDefault();
-        const file = e.target.files[0];
+        const image = e.target.files[0];
         e.target.value = null;
 
-        if (file) {
+        if (image) {
             this.props.onUpdateAsyncUIState({ loading: true });
             this.props.onCommitAsync(() => {
                 const formData = new FormData();
-                formData.append('file', file);
+                formData.append('file', image);
                 return getApi().post('fileResources', formData).then((response: any) => {
                     const fileResource = response && response.response && response.response.fileResource;
                     if (fileResource) {
-                        inMemoryFileStore.set(fileResource.id, file);
+                        inMemoryFileStore.set(fileResource.id, image);
                         return { name: fileResource.name, value: fileResource.id };
                     }
                     return null;
@@ -80,14 +85,14 @@ class D2File extends Component<Props> {
         }
     }
     handleButtonClick = () => {
-        this.hiddenFileSelectorRef.click();
+        this.hiddenimageSelectorRef.click();
     }
 
     handleRemoveClick = () => {
         this.props.onBlur(null);
     }
 
-    getFileUrl = () => {
+    getimageUrl = () => {
         const value = this.props.value;
         if (value) {
             return value.url || inMemoryFileStore.get(value.value);
@@ -98,63 +103,67 @@ class D2File extends Component<Props> {
     render() {
         const { label, value, classes, asyncUIState } = this.props;
         const isUploading = asyncUIState && asyncUIState.loading;
-        const fileUrl = this.getFileUrl();
+        const imageUrl = this.getimageUrl();
         return (
             <BorderBox>
-                <div className={classes.fileContainer}>
+                <div className={classes.imageContainer}>
                     <div>
                         {label || ''}
                     </div>
 
                     <input
-                        className={classes.fileInput}
+                        className={classes.imageInput}
                         type="file"
-                        ref={(hiddenFileSelector) => {
-                            this.hiddenFileSelectorRef = hiddenFileSelector;
+                        accept="image/*"
+                        ref={(hiddenimageSelector) => {
+                            this.hiddenimageSelectorRef = hiddenimageSelector;
                         }}
-                        onChange={e => this.handleFileChange(e)}
+                        onChange={e => this.handleImageChange(e)}
                     />
                     {
                         (() => {
                             if (isUploading) {
                                 return (
-                                    <div className={classes.fileInputContainer}>
-                                        <LoadingMask className={classes.fileLoadingProgress} size={40} />
-                                        <div className={classes.fileInputItem}>{i18n.t('Uploading file')}</div>
+                                    <div className={classes.imageInputContainer}>
+                                        <LoadingMask className={classes.imageLoadingProgress} size={40} />
+                                        <div className={classes.imageInputItem}>{i18n.t('Uploading image')}</div>
                                     </div>);
                             } else if (value) {
                                 return (
-                                    <div className={classes.fileInputContainer}>
-                                        <CheckIcon className={classes.fileInputItemIcon} />
-                                        <div className={classes.fileInputItem}>
-                                            <a
-                                                download={value.name}
-                                                target="_blank"
-                                                href={fileUrl}
-                                            >
-                                                {value.name}
-                                            </a>
-                                            {` ${i18n.t('selected')}.`}
+                                    <div>
+                                        <div className={classes.imageInputContainer}>
+                                            <CheckIcon className={classes.imageInputItemIcon} />
+                                            <div className={classes.imageInputItem}>
+                                                {`${value.name} ${i18n.t('selected')}.`}
+                                            </div>
+                                            <div className={classes.imageInputItem}>
+                                                <Button
+                                                    onClick={this.handleRemoveClick}
+                                                    className={classes.imageInputDeleteButton}
+                                                >
+                                                    {i18n.t('Delete')}
+                                                </Button>
+                                            </div>
                                         </div>
-                                        <div className={classes.fileInputItem}>
-                                            <Button
-                                                onClick={this.handleRemoveClick}
-                                                className={classes.fileInputDeleteButton}
+                                        <div>
+                                            <a
+                                                target="_blank"
+                                                href={imageUrl}
                                             >
-                                                {i18n.t('Delete')}
-                                            </Button>
+                                                <img src={imageUrl} alt="" className={classes.imagePreview} />
+                                            </a>
                                         </div>
                                     </div>
                                 );
                             }
                             return (
-                                <div className={classes.fileInputContainer}>
-                                    <div className={classes.fileInputItem}>
+                                <div className={classes.imageInputContainer}>
+                                    <div className={classes.imageInputItem}>
                                         <Button
                                             onClick={this.handleButtonClick}
                                             color="primary"
                                         >
-                                            {i18n.t('Select file')}
+                                            {i18n.t('Select image')}
                                         </Button>
                                     </div>
                                 </div>
@@ -168,4 +177,4 @@ class D2File extends Component<Props> {
     }
 }
 
-export default withStyles(styles)(D2File);
+export default withStyles(styles)(D2Image);
