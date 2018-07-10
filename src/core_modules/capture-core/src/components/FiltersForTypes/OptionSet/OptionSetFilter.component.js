@@ -16,9 +16,9 @@ const MultiSelectBoxesWithConvertedOptionSet = withConvertedOptionSet()(MultiSel
 
 const getStyles = (theme: Theme) => ({
     selectBoxesContainer: {
-        maxHeight: theme.typography.pxToRem(150),
+        maxHeight: theme.typography.pxToRem(250),
         overflowY: 'auto',
-        // marginRight: theme.typography.pxToRem(-24),
+        marginRight: theme.typography.pxToRem(-24),
     },
 });
 

@@ -28,7 +28,7 @@ type Props = {
     },
 };
 
-const MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS = 200;
+const MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS = 25;
 
 class FilterSelectorContents extends React.PureComponent<Props> {
     static selectorContentsForTypes = {
