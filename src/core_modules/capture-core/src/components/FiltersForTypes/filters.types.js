@@ -1,5 +1,5 @@
 // @flow
-export interface UpdatableFilterContent {
-    onGetUpdateData: (commitValue?: any) => ?{ requestData: any, appliedText: string };
+export interface UpdatableFilterContent<T> {
+    onGetUpdateData: (updatedValue?: T) => ?{ requestData: string | Array<string>, appliedText: string };
     onIsValid?: () => boolean,
 }

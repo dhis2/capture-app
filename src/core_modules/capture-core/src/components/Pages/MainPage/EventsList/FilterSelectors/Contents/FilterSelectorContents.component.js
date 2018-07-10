@@ -9,6 +9,7 @@ import withStyleRef from './withStyleRef';
 
 import TextFilter from '../../../../../FiltersForTypes/Text/TextFilter.component';
 import NumericFilter from '../../../../../FiltersForTypes/Numeric/NumericFilter.component';
+import DateFilter from '../../../../../FiltersForTypes/Date/DateFilter.component';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -31,6 +32,7 @@ class FilterSelectorContents extends React.PureComponent<Props> {
         [filterTypesObject.INTEGER_POSITIVE]: NumericFilter,
         [filterTypesObject.INTEGER_NEGATIVE]: NumericFilter,
         [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: NumericFilter,
+        [filterTypesObject.DATE]: DateFilter,
     };
 
     static hasStylesHOC = [
@@ -39,6 +41,7 @@ class FilterSelectorContents extends React.PureComponent<Props> {
         filterTypesObject.INTEGER_POSITIVE,
         filterTypesObject.INTEGER_NEGATIVE,
         filterTypesObject.INTEGER_ZERO_OR_POSITIVE,
+        filterTypesObject.DATE,
     ];
 
     getContentsComponent() {

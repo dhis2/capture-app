@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 type Props = {
     onChange?: ?(value: string, event: SyntheticEvent<HTMLInputElement>) => void,
     onBlur?: ?(value: string, event: SyntheticEvent<HTMLInputElement>) => void,
+    value: ?string,
 };
 
 class D2TextField extends Component<Props> {
@@ -34,15 +35,16 @@ class D2TextField extends Component<Props> {
     }
 
     render() {
-        const { onChange, onBlur, ...passOnProps } = this.props;
+        const { onChange, onBlur, value, ...passOnProps } = this.props;
 
         return (
             <div ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}>
                 <TextField
                     inputRef={(inst) => { this.materialUIInstance = inst; }}
-                    {...passOnProps}
+                    value={value || ''}
                     onChange={this.handleChange}
                     onBlur={this.handleBlur}
+                    {...passOnProps}
                 />
             </div>
         );

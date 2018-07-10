@@ -26,7 +26,10 @@ type Props = {
 
 export default () => (InnerComponent: React.ComponentType<any>) =>
     withStyles(getStyles)(class FilterContentsButtons extends React.Component<Props> {
-        filterTypeInstance: UpdatableFilterContent;
+        filterTypeInstance: UpdatableFilterContent<any>;
+        updateButtonInstance: HTMLButtonElement;
+        closeButtonInstance: HTMLButtonElement;
+
         update = (commitValue?: any) => {
             const updateData = this.filterTypeInstance.onGetUpdateData(commitValue);
             this.props.onUpdate(updateData, commitValue);
@@ -36,23 +39,42 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
             return this.filterTypeInstance.onIsValid ? this.filterTypeInstance.onIsValid() : true;
         }
 
-        setFilterTypeInstance = (filterTypeInstance: UpdatableFilterContent) => {
-            this.filterTypeInstance = filterTypeInstance;
-        }
-
         handleUpdateClick = () => {
             if (this.isValid()) {
                 this.update();
             }
         }
 
+        focusUpdateButton = () => {
+            this.updateButtonInstance && this.updateButtonInstance.focus();
+        }
+
+        focusCloseButton = () => {
+            this.closeButtonInstance && this.closeButtonInstance.focus();
+        }
+
+        setFilterTypeInstance = (filterTypeInstance: UpdatableFilterContent<any>) => {
+            this.filterTypeInstance = filterTypeInstance;
+        }
+
+        setUpdateButtonInstance = (buttonInstance: HTMLButtonElement) => {
+            this.updateButtonInstance = buttonInstance;
+        }
+
+        setCloseButtonInstance = (buttonInstance: HTMLButtonElement) => {
+            this.closeButtonInstance = buttonInstance;
+        }
+
         render() {
             const { onUpdate, onClose, classes, ...passOnProps } = this.props; //eslint-disable-line
+
             return (
                 <React.Fragment>
                     <InnerComponent
                         filterTypeRef={this.setFilterTypeInstance}
                         onUpdate={this.update}
+                        onFocusUpdateButton={this.focusUpdateButton}
+                        onFocusCloseButton={this.focusCloseButton}
                         {...passOnProps}
                     />
                     <div
@@ -62,6 +84,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
                             className={classes.firstButtonContainer}
                         >
                             <Button
+                                muiButtonRef={this.setUpdateButtonInstance}
                                 variant="raised"
                                 color="primary"
                                 onClick={this.handleUpdateClick}
@@ -70,6 +93,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
                             </Button>
                         </div>
                         <Button
+                            muiButtonRef={this.setCloseButtonInstance}
                             variant="text"
                             color="primary"
                             onClick={onClose}

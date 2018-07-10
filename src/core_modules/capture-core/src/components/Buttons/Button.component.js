@@ -20,13 +20,16 @@ type Props = {
     },
     muiClasses: Object,
     children: React.Node,
+    muiButtonRef: (muiButtonInstance: any) => void,
 };
 
 const Button = (props: Props) => {
-    const { classes, children, muiClasses, ...passOnProps } = props;
+    const { classes, children, muiClasses, muiButtonRef, ...passOnProps } = props;
+    const buttonRefPropObject = muiButtonRef ? { buttonRef: muiButtonRef } : null;
 
     return (
         <MuiButton
+            {...buttonRefPropObject}
             className={classes.button}
             classes={muiClasses}
             {...passOnProps}

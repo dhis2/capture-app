@@ -7,6 +7,7 @@ export const filterTypesArray = [
     elementTypes.INTEGER_POSITIVE,
     elementTypes.INTEGER_NEGATIVE,
     elementTypes.INTEGER_ZERO_OR_POSITIVE,
+    elementTypes.DATE,
 ];
 
 export const filterTypesObject = filterTypesArray.reduce((accFilterTypesObject, type) => {

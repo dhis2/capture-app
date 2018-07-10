@@ -8,7 +8,6 @@ type Props = {
     value: ?string,
     error: ?string,
     onBlur: ({ min: string }) => void,
-    onChange: (value: string) => void,
     onEnterKey: () => void,
     errorClass: string,
 };
@@ -29,16 +28,15 @@ class MinNumericFilter extends Component<Props> {
     }
 
     render() {
-        const { value, error, onChange, errorClass } = this.props;
+        const { error, errorClass, onBlur, onEnterKey, ...passOnProps } = this.props;
         return (
             <div>
                 <TextField
-                    onChange={onChange}
                     onKeyPress={this.handleKeyPress}
                     onBlur={this.handleBlur}
-                    value={value || ''}
                     placeholder={i18n.t('Min')}
                     fullWidth
+                    {...passOnProps}
                 />
                 <div className={errorClass}>
                     {error}

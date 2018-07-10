@@ -1,19 +1,20 @@
 // @flow
 import React, { Component } from 'react';
-import i18n from '@dhis2/d2-i18n';
-import TextField from '../../FormFields/Generic/D2TextField.component';
+import Input from './Input.component';
 import type { UpdatableFilterContent } from '../filters.types';
 
+type Value = ?string;
+
 type Props = {
-    onCommitValue: (value: string) => void,
-    onUpdate: () => void,
+    onCommitValue: (value: ?string) => void,
+    onUpdate: (updatedValue: ?string) => void,
     value: ?string,
 };
 
 // $FlowSuppress
-class TextFilter extends Component<Props> implements UpdatableFilterContent {
-    onGetUpdateData() {
-        const value = this.props.value;
+class TextFilter extends Component<Props> implements UpdatableFilterContent<Value> {
+    onGetUpdateData(updatedValue?: Value) {
+        const value = typeof updatedValue !== 'undefined' ? updatedValue : this.props.value;
 
         if (!value) {
             return null;
@@ -25,21 +26,20 @@ class TextFilter extends Component<Props> implements UpdatableFilterContent {
         };
     }
 
-    handleKeyPress = (event: SyntheticKeyboardEvent<HTMLButtonElement>) => {
-        if (event.key === 'Enter') {
-            this.props.onUpdate();
-        }
+    handleEnterKey = (value: ?string) => {
+        this.props.onUpdate(value || null);
+    }
+
+    handleBlur = (value: string) => {
+        this.props.onCommitValue(value);
     }
 
     render() {
-        const { onCommitValue, onUpdate, value } = this.props; //eslint-disable-line
         return (
-            <TextField
-                onChange={onCommitValue}
-                onKeyPress={this.handleKeyPress}
-                value={value || ''}
-                fullWidth
-                placeholder={i18n.t('Contains text')}
+            /* $FlowSuppress: Flow not working 100% with HOCs */
+            <Input
+                onBlur={this.handleBlur}
+                onEnterKey={this.handleEnterKey}
             />
         );
     }

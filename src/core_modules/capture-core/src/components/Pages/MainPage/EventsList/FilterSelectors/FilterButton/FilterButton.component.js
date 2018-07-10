@@ -11,7 +11,7 @@ import FilterSelectorContents from '../Contents/FilterSelectorContents.component
 
 const getStyles = (theme: Theme) => ({
     icon: {
-        fontSize: theme.typography.pxToRem(18),
+        fontSize: theme.typography.pxToRem(20),
         paddingLeft: theme.typography.pxToRem(5),
     },
     inactiveFilterButton: {

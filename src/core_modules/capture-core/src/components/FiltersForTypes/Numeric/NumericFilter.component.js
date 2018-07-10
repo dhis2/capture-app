@@ -13,6 +13,7 @@ import {
     isValidZeroOrPositiveInteger,
 } from '../../../utils/validators/form';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
+import D2TextField from '../../FormFields/Generic/D2TextField.component';
 import type { UpdatableFilterContent } from '../filters.types';
 
 const getStyles = (theme: Theme) => ({
@@ -38,10 +39,15 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
+type Value = ?{
+    min?: ?string,
+    max?: ?string,
+};
+
 type Props = {
     onCommitValue: (value: ?{ min?: ?string, max?: ?string }) => void,
     onUpdate: (commitValue?: any) => void,
-    value: ?{ min?: ?string, max?: ?string},
+    value: Value,
     type: $Values<typeof elementTypes>,
     classes: {
         container: string,
@@ -53,7 +59,7 @@ type Props = {
 };
 
 // $FlowSuppress
-class NumericFilter extends Component<Props> implements UpdatableFilterContent {
+class NumericFilter extends Component<Props> implements UpdatableFilterContent<Value> {
     static errorMessages = {
         MIN_GREATER_THAN_MAX: 'Minimum value cannot be greater than maximum value',
         [elementTypes.NUMBER]: 'Please provide a valid number',
@@ -131,9 +137,9 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent {
         return appliedText;
     }
 
-    maxD2TextFieldInstance: any;
-    onGetUpdateData(updatedValues?: ?{ min?: ?string, max?: ?string }) {
-        const value = updatedValues || this.props.value;
+    maxD2TextFieldInstance: D2TextField;
+    onGetUpdateData(updatedValues?: Value) {
+        const value = typeof updatedValues !== 'undefined' ? updatedValues : this.props.value;
 
         if (!value) {
             return null;
@@ -175,7 +181,7 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent {
         if (values && !NumericFilter.isFilterValid(values.min, values.max, this.props.type)) {
             this.props.onCommitValue(values);
         } else {
-            this.props.onUpdate(values);
+            this.props.onUpdate(values || null);
         }
     }
 
