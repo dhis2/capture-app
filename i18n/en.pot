@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-06-21T17:20:59.427Z\n"
-"PO-Revision-Date: 2018-06-21T17:20:59.427Z\n"
+"POT-Creation-Date: 2018-07-09T13:14:38.056Z\n"
+"PO-Revision-Date: 2018-07-09T13:14:38.056Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -27,6 +27,48 @@ msgid "Save"
 msgstr ""
 
 msgid "Sort"
+msgstr ""
+
+msgid "Last week"
+msgstr ""
+
+msgid "Last month"
+msgstr ""
+
+msgid "Last 3 months"
+msgstr ""
+
+msgid "Custom range"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
+msgstr ""
+
+msgid "From"
+msgstr ""
+
+msgid "To"
+msgstr ""
+
+msgid "Max"
+msgstr ""
+
+msgid "Min"
+msgstr ""
+
+msgid "greater than or equal to"
+msgstr ""
+
+msgid "less than or equal to"
+msgstr ""
+
+msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
@@ -75,6 +117,12 @@ msgid "Event could not be loaded"
 msgstr ""
 
 msgid "Organisation unit could not be loaded"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Close"
 msgstr ""
 
 msgid "No events to display"

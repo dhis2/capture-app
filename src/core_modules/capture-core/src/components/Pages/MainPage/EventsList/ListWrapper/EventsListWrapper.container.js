@@ -1,8 +1,8 @@
 // @flow
 import { connect } from 'react-redux';
-import EventsList from './EventsList.component';
+import EventsListWrapper from './EventsListWrapper.component';
 import { makeColumnsSelector, makeCreateEventsContainer, makeCreateWorkingListData } from './eventsList.selector';
-import { sortWorkingList, openEditEventPage } from './eventsList.actions';
+import { sortWorkingList, openEditEventPage } from '../eventsList.actions';
 
 const makeMapStateToProps = () => {
     const columnsSelector = makeColumnsSelector();
@@ -35,4 +35,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-export default connect(makeMapStateToProps, mapDispatchToProps)(EventsList);
+export default connect(makeMapStateToProps, mapDispatchToProps)(EventsListWrapper);
