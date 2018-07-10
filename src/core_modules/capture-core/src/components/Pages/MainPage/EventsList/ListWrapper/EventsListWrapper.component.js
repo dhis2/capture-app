@@ -25,6 +25,7 @@ import DownloadTable from '../../../../DownloadTable/DownloadTable.container';
 
 import withHeader from '../Header/withHeader';
 import withListHeaderWrapper from '../../ListHeaderWrapper/withListHeaderWrapper';
+import OptionSet from '../../../../../metaData/OptionSet/OptionSet';
 
 // $FlowSuppress
 const { Table, Row, Cell, HeaderCell, Head, Body } = getTableComponents(basicTableAdapter);
@@ -113,6 +114,7 @@ export type Column = {
     header: string,
     visible: boolean,
     type: $Values<typeof elementTypes>,
+    optionSet?: ?OptionSet,
 };
 
 type Props = {

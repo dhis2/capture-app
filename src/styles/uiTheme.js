@@ -1,12 +1,16 @@
 // @flow
 import { createMuiTheme } from '@material-ui/core/styles';
-import cyan from '@material-ui/core/colors/green';
+import green from '@material-ui/core/colors/green';
 import blue from '@material-ui/core/colors/blue';
 
 const theme = createMuiTheme({
     palette: {
         primary: blue,
-        secondary: cyan,
+        secondary: {
+            light: green[400],
+            main: green[700],
+            dark: green[900],
+        },
     },
 });
 

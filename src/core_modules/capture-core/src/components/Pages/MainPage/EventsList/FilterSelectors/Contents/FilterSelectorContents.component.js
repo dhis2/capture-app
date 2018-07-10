@@ -10,6 +10,9 @@ import withStyleRef from './withStyleRef';
 import TextFilter from '../../../../../FiltersForTypes/Text/TextFilter.component';
 import NumericFilter from '../../../../../FiltersForTypes/Numeric/NumericFilter.component';
 import DateFilter from '../../../../../FiltersForTypes/Date/DateFilter.component';
+import OptionSetFilter from '../../../../../FiltersForTypes/OptionSet/OptionSetFilter.component';
+
+import OptionSet from '../../../../../../metaData/OptionSet/OptionSet';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -19,10 +22,13 @@ const getStyles = (theme: Theme) => ({
 
 type Props = {
     type: $Values<typeof filterTypesObject>,
+    optionSet: ?OptionSet,
     classes: {
         container: string,
     },
 };
+
+const MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS = 200;
 
 class FilterSelectorContents extends React.PureComponent<Props> {
     static selectorContentsForTypes = {
@@ -44,11 +50,23 @@ class FilterSelectorContents extends React.PureComponent<Props> {
         filterTypesObject.DATE,
     ];
 
-    getContentsComponent() {
-        const { type } = this.props;
-        // important to use PureComponent for this
-        const SelectorContent = FilterSelectorContents.selectorContentsForTypes[type];
+    static getOptionSetComponent() {
+        return withButtons()(
+            withData()(
+                withStyleRef()(
+                    OptionSetFilter,
+                ),
+            ),
+        );
+    }
 
+    getContentsComponent() {
+        const { type, optionSet } = this.props;
+        // important to use PureComponent for this
+        if (optionSet && optionSet.options && optionSet.options.length <= MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS) {
+            return FilterSelectorContents.getOptionSetComponent();
+        }
+        const SelectorContent = FilterSelectorContents.selectorContentsForTypes[type];
         if (FilterSelectorContents.hasStylesHOC.includes(type)) {
             return withButtons()(
                 withData()(
@@ -58,7 +76,6 @@ class FilterSelectorContents extends React.PureComponent<Props> {
                 ),
             );
         }
-
         return withButtons()(
             withData()(
                 withRef()(

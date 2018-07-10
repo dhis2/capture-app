@@ -383,7 +383,7 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
                         orientation={orientations.VERTICAL}
                         value={value && value.main}
                         onBlur={this.handleMainSelect}
-                        color="primary"
+                        color="secondary"
                         nullable
                     />
                 </div>

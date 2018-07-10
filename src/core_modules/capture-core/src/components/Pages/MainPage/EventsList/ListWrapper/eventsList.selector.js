@@ -56,6 +56,7 @@ export const makeColumnsSelector = () => createSelector(
                     ...column,
                     header: element.formName,
                     type: element.type,
+                    optionSet: element.optionSet,
                 };
             });
     },

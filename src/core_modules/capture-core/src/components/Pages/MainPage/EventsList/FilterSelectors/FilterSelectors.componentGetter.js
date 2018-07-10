@@ -43,6 +43,7 @@ export default (InnerComponent: React.ComponentType<any>) =>
                                 itemId={column.id}
                                 type={column.type}
                                 title={column.header}
+                                optionSet={column.optionSet}
                             />
                         </div>
                     ),

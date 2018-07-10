@@ -8,6 +8,7 @@ import ArrowUpwardIcon from '@material-ui/icons/KeyboardArrowUp';
 import Button from '../../../../../Buttons/Button.component';
 import ActiveFilterButton from './ActiveFilterButton.component';
 import FilterSelectorContents from '../Contents/FilterSelectorContents.component';
+import OptionSet from '../../../../../../metaData/OptionSet/OptionSet';
 
 const getStyles = (theme: Theme) => ({
     icon: {
@@ -34,6 +35,7 @@ const POPOVER_TRANSFORM_ORIGIN = {
 type Props = {
     itemId: string,
     type: string,
+    optionSet?: ?OptionSet,
     title: string,
     classes: {
         icon: string,
@@ -99,11 +101,12 @@ class FilterButton extends Component<Props, State> {
     }
 
     renderSelectorContents() {
-        const { itemId: id, type } = this.props;
+        const { itemId: id, type, optionSet } = this.props;
 
         return (
             <FilterSelectorContents
                 type={type}
+                optionSet={optionSet}
                 id={id}
                 onCommitValue={this.handleEditFilterContents}
                 onUpdate={this.handleFilterUpdate}
