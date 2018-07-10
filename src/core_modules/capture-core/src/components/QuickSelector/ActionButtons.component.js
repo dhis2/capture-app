@@ -50,7 +50,6 @@ class ActionButtons extends Component<Props> {
         alert('Not implemented yet.');
     }
 
-    // TODO: Add translation.
     render() {
         const { classes, showResetButton } = this.props;
         return (
@@ -73,13 +72,15 @@ class ActionButtons extends Component<Props> {
                     <AddIcon className={classes.rightButton} />
                     { i18n.t('New') }
                 </Button>
+                {/* Find button to be included when find(tracked entity instance) 
+                is supported:
                 <Button
                     onClick={this.handleFindClick}
                     color="primary"
                 >
                     <SearchIcon className={classes.rightButton} />
                     { i18n.t('Find') }
-                </Button>
+                </Button>*/}
             </div>
         );
     }

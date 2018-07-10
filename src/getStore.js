@@ -18,7 +18,6 @@ import environments from 'capture-core/constants/environments';
 import reducerDescriptions from './reducers/descriptions/trackerCapture.reducerDescriptions';
 import epics from './epics/trackerCapture.epics';
 
-
 export default function getStore(history: BrowserHistory | HashHistory, onRehydrated: () => void) {
     const middleWares = [createEpicMiddleware(epics), routerMiddleware(history)];
 
