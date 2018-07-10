@@ -4,7 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
-import SearchIcon from '@material-ui/icons/Search';
+//Find button to be included when find(tracked entity instance) is supported
+//import SearchIcon from '@material-ui/icons/Search';
 
 import i18n from '@dhis2/d2-i18n';
 
