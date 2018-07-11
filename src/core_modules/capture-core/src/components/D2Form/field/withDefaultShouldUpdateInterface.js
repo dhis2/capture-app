@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import isFunction from 'd2-utilizr/src/isFunction';
 
 type Props = {
     value: any,
@@ -19,21 +20,8 @@ export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         class ShuoldFieldUpdateInterface extends React.Component<Props> {
             shouldComponentUpdate(nextProps: Props) {
-                const pureCheck = [
-                    'value',
-                    'touched',
-                    'validationAttempted',
-                    'errorMessage',
-                    'rulesErrorMessage',
-                    'rulesWarningMessage',
-                    'rulesErrorMessageOnComplete',
-                    'rulesWarningMessageOnComplete',
-                    'rulesCompulsoryError',
-                    'metaCompulsory',
-                    'rulesCompulsory',
-                ];
-
-                return pureCheck.some(propName => nextProps[propName] !== this.props[propName]);
+                return Object.keys(nextProps)
+                    .some(propName => nextProps[propName] !== this.props[propName] && !isFunction(nextProps[propName]));
             }
 
             render() {

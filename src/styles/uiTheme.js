@@ -11,19 +11,17 @@ const theme = createMuiTheme({
             main: green[700],
             dark: green[900],
         },
+        success: green,
+        warning: {
+            light: '#FFF66',
+            main: '#FFCC00',
+            dark: '#FF9900',
+        },
     },
 });
 
 theme.typography.formFieldTitle = {
     fontSize: theme.typography.pxToRem(12),
-};
-
-// delete theme.typography.button.textTransform;
-
-theme.palette.warning = {
-    light: '#FFF66',
-    main: '#FFCC00',
-    dark: '#FF9900',
 };
 
 theme.palette.input = {

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-07-09T13:14:38.056Z\n"
-"PO-Revision-Date: 2018-07-09T13:14:38.056Z\n"
+"POT-Creation-Date: 2018-07-11T11:30:55.300Z\n"
+"PO-Revision-Date: 2018-07-11T11:30:55.300Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -23,7 +23,13 @@ msgstr ""
 msgid "Abort"
 msgstr ""
 
+msgid "Your data is uploading. Please wait untill this message disappears"
+msgstr ""
+
 msgid "Save"
+msgstr ""
+
+msgid "Uploading data"
 msgstr ""
 
 msgid "Sort"
@@ -71,10 +77,28 @@ msgstr ""
 msgid "Contains text"
 msgstr ""
 
+msgid "Uploading file"
+msgstr ""
+
+msgid "selected"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Select file"
+msgstr ""
+
 msgid "Yes"
 msgstr ""
 
 msgid "No"
+msgstr ""
+
+msgid "Uploading image"
+msgstr ""
+
+msgid "Select image"
 msgstr ""
 
 msgid "Clear"
@@ -90,6 +114,12 @@ msgid "Offline"
 msgstr ""
 
 msgid "Syncing"
+msgstr ""
+
+msgid "Field"
+msgstr ""
+
+msgid "could not be updated"
 msgstr ""
 
 msgid "Start Again"
@@ -182,6 +212,9 @@ msgid "Selected registering unit"
 msgstr ""
 
 msgid "Registering Oraginastion Unit"
+msgstr ""
+
+msgid "Registering Organisation Unit"
 msgstr ""
 
 msgid "Selected Program"
