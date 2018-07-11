@@ -3,7 +3,7 @@ import CheckIcon from '@material-ui/icons/Check';
 import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import BorderBox from '../../BorderBox/borderBox.component';
+import BorderBox from '../../BorderBox/BorderBox.component';
 import Button from '../../Buttons/Button.component';
 import { getApi } from '../../../d2/d2Instance';
 import LoadingMask from '../../LoadingMasks/LoadingMask.component';
