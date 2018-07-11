@@ -20,7 +20,7 @@ import MetaDataElement from '../../../metaData/DataElement/DataElement';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 import { inputTypes as optionSetInputTypes } from '../../../metaData/OptionSet/optionSet.const';
 
-import withDefaultChangeHandler from './withDefaultChangeHandler';
+import withInternalChangeHandler from '../../FormFields/withInternalChangeHandler';
 import withDefaultShouldUpdateInterface from './withDefaultShouldUpdateInterface';
 import withDefaultFieldContainer from './withDefaultFieldContainer';
 import withDefaultMessages from './withDefaultMessages';
@@ -75,7 +75,7 @@ const getBaseTextField = (metaData: MetaDataElement) => {
                         withRequiredFieldCalculation()(
                             withDefaultFieldContainer()(
                                 withDefaultMessages()(
-                                    withDefaultChangeHandler()(TextField),
+                                    withInternalChangeHandler()(TextField),
                                 ),
                             ),
                         ),
@@ -96,6 +96,7 @@ const fieldForTypes = {
     [elementTypes.NUMBER]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.INTEGER]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.INTEGER_POSITIVE]: (metaData: MetaDataElement) => getBaseTextField(metaData),
+    [elementTypes.INTEGER_NEGATIVE]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.BOOLEAN]: (metaData: MetaDataElement) => {
         const props = createComponentProps({
@@ -160,7 +161,7 @@ const fieldForTypes = {
                             withRequiredFieldCalculation()(
                                 withDefaultFieldContainer()(
                                     withDefaultMessages()(
-                                        withDefaultChangeHandler()(D2Date),
+                                        withInternalChangeHandler()(D2Date),
                                     ),
                                 ),
                             ),
@@ -187,7 +188,7 @@ const fieldForTypes = {
                             withRequiredFieldCalculation()(
                                 withDefaultFieldContainer()(
                                     withDefaultMessages()(
-                                        withDefaultChangeHandler()(D2DateTime),
+                                        withInternalChangeHandler()(D2DateTime),
                                     ),
                                 ),
                             ),
@@ -215,7 +216,7 @@ const fieldForTypes = {
                             withRequiredFieldCalculation()(
                                 withDefaultFieldContainer()(
                                     withDefaultMessages()(
-                                        withDefaultChangeHandler()(D2File),
+                                        withInternalChangeHandler()(D2File),
                                     ),
                                 ),
                             ),
@@ -240,7 +241,7 @@ const fieldForTypes = {
                             withRequiredFieldCalculation()(
                                 withDefaultFieldContainer()(
                                     withDefaultMessages()(
-                                        withDefaultChangeHandler()(D2Image),
+                                        withInternalChangeHandler()(D2Image),
                                     ),
                                 ),
                             ),

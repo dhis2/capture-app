@@ -28,6 +28,7 @@ type Props = {
         label: string,
     },
     style?: ?Object,
+    passOnClasses?: ?Object,
 };
 
 class MultiSelectBoxes extends Component<Props> {
@@ -49,7 +50,7 @@ class MultiSelectBoxes extends Component<Props> {
         };
     }
 
-    getBoxes() {
+    getBoxes(passOnProps: Object) {
         const optionSet = this.props.optionSet;
         if (optionSet) {
             return optionSet.options.map((o: Option, index: number) => (
@@ -60,6 +61,7 @@ class MultiSelectBoxes extends Component<Props> {
                                 (e: Object, isChecked: boolean) => { this.handleOptionChange(e, isChecked, o.value); }
                             }
                             checked={this.isChecked(o.value)}
+                            {...passOnProps}
                         />
                     }
                     label={o.text}
@@ -112,29 +114,29 @@ class MultiSelectBoxes extends Component<Props> {
         return !!(this.checkedValues && this.checkedValues.has(value));
     }
 
-    renderHorizontal() {
+    renderHorizontal(passOnProps: Object) {
         return (
             <FormGroup row>
-                {this.getBoxes()}
+                {this.getBoxes(passOnProps)}
             </FormGroup>
         );
     }
 
-    renderVertical() {
+    renderVertical(passOnProps: Object) {
         return (
             <FormGroup>
-                {this.getBoxes()}
+                {this.getBoxes(passOnProps)}
             </FormGroup>
         );
     }
 
-    renderCheckboxes() {
+    renderCheckboxes(passOnProps: Object) {
         const orientation = this.props.orientation;
-        return orientation === orientations.VERTICAL ? this.renderVertical() : this.renderHorizontal();
+        return orientation === orientations.VERTICAL ? this.renderVertical(passOnProps) : this.renderHorizontal(passOnProps);
     }
 
     render() {
-        const { label, required, classes, style, orientation } = this.props;  // eslint-disable-line no-unused-vars
+        const { onBlur, optionSet, label, value, orientation, required, classes, style, passOnClasses, ...passOnProps } = this.props;  // eslint-disable-line no-unused-vars
 
         this.setCheckedStatusForBoxes();
 
@@ -150,7 +152,7 @@ class MultiSelectBoxes extends Component<Props> {
                             return (
                                 <FormLabel
                                     component="label"
-                                    required={required}
+                                    required={!!required}
                                     classes={this.labelClasses}
                                     focused={false}
                                 >
@@ -159,7 +161,7 @@ class MultiSelectBoxes extends Component<Props> {
                             );
                         })()
                     }
-                    {this.renderCheckboxes()}
+                    {this.renderCheckboxes({ ...passOnProps, classes: passOnClasses })}
                 </FormControl>
             </div>
         );

@@ -2,11 +2,21 @@
 import { Validators } from '@dhis2/d2-ui-forms';
 import isArray from 'd2-utilizr/src/isArray';
 import isString from 'd2-utilizr/src/isString';
-
-import isValidDate from '../../../utils/validators/date.validator';
-import isValidDateTime from '../../../utils/validators/dateTime.validator';
-import isValidTime from '../../../utils/validators/time.validator';
 import i18n from '@dhis2/d2-i18n';
+
+import {
+    isValidDate,
+    isValidDateTime,
+    isValidEmail,
+    isValidInteger,
+    isValidNegativeInteger,
+    isValidPositiveInteger,
+    isValidZeroOrPositiveInteger,
+    isValidNumber,
+    isValidPercentage,
+    isValidTime,
+    isValidUrl,
+} from '../../../utils/validators/form';
 import MetaDataElement from '../../../metaData/DataElement/DataElement';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 
@@ -21,20 +31,20 @@ type ValidatorBuilder = (metaData: MetaDataElement) => Array<ValidatorContainer>
 
 const wordValidatorKeys = {
     COMPULSORY: 'required',
-    NUMBER: 'number',
-    POSITIVE_NUMBER: 'positive_number',
-    EMAIL: 'email',
 };
 
 const errorMessages = {
+    NUMBER: 'Please provide a valid number',
     INTEGER: 'Please provide a valid integer',
     POSITIVE_INTEGER: 'Please provide a positive integer',
     ZERO_OR_POSITIVE_INTEGER: 'Please provide zero or a positive integer',
+    NEGATIVE_INTEGER: 'Please provide a negative integer',
     DATE: 'Please provide a valid date',
     DATETIME: 'Please provide a valid date and time',
     TIME: 'Please provide a valid time',
     PERCENTAGE: 'Please provide a valid percentage',
     URL: 'Please provide a valid url',
+    EMAIL: 'Please provide a valid email address',
 };
 
 const isCompulsoryRequirementMet = Validators.wordToValidatorMap.get(wordValidatorKeys.COMPULSORY);
@@ -44,61 +54,26 @@ const isCompulsoryRequirementMetWrapper = (value: any) => {
     return isCompulsoryRequirementMet(testValue);
 };
 
-const isInteger = (value: string) => {
-    const isValidNumberFn = Validators.wordToValidatorMap.get(wordValidatorKeys.NUMBER);
-    if (!isValidNumberFn(value)) {
-        return false;
-    }
-
-    const number = Number(value);
-    return Number.isSafeInteger(number);
-};
-
-const isPositiveInteger = (value: string) => {
-    const isValidPositiveNumberFn = Validators.wordToValidatorMap.get(wordValidatorKeys.POSITIVE_NUMBER);
-    if (!isValidPositiveNumberFn(value)) {
-        return false;
-    }
-
-    const number = Number(value);
-    return Number.isSafeInteger(number);
-};
-
-const isZeroOrPositiveInteger = (value: any) => {
-    if (value === '0') {
-        return true;
-    }
-    return isPositiveInteger(value);
-};
-
-const isValidPercentage = (value: any) => {
-    const replacedValue = value.replace('%', '');
-    const numberValidator = Validators.wordToValidatorMap.get(wordValidatorKeys.NUMBER);
-    return numberValidator(replacedValue);
-};
-
-const isValidUrl = (value: any) => {
-    const match = value.match(/^(http|https):\/\/[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,6}(:[0-9]{1,5})?(\/.*)?$/);
-    return match !== null;
-};
-
 const validatorsForTypes = {
     [elementTypes.NUMBER]: () => ({
-        validator: Validators.wordToValidatorMap.get(wordValidatorKeys.NUMBER),
-        message:
-            i18n.t(Validators.wordToValidatorMap.get(wordValidatorKeys.NUMBER).message),
+        validator: isValidNumber,
+        message: i18n.t(errorMessages.NUMBER),
     }),
     [elementTypes.INTEGER]: () => ({
-        validator: isInteger,
+        validator: isValidInteger,
         message: i18n.t(errorMessages.INTEGER),
     }),
     [elementTypes.INTEGER_POSITIVE]: () => ({
-        validator: isPositiveInteger,
+        validator: isValidPositiveInteger,
         message: i18n.t(errorMessages.POSITIVE_INTEGER),
     }),
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: () => ({
-        validator: isZeroOrPositiveInteger,
+        validator: isValidZeroOrPositiveInteger,
         message: i18n.t(errorMessages.ZERO_OR_POSITIVE_INTEGER),
+    }),
+    [elementTypes.INTEGER_NEGATIVE]: () => ({
+        validator: isValidNegativeInteger,
+        message: i18n.t(errorMessages.NEGATIVE_INTEGER),
     }),
     [elementTypes.TIME]: () => ({
         validator: isValidTime,
@@ -113,8 +88,8 @@ const validatorsForTypes = {
         message: i18n.t(errorMessages.DATETIME),
     }),
     [elementTypes.EMAIL]: () => ({
-        validator: Validators.wordToValidatorMap.get(wordValidatorKeys.EMAIL),
-        message: i18n.t(Validators.wordToValidatorMap.get(wordValidatorKeys.EMAIL).message),
+        validator: isValidEmail,
+        message: i18n.t(errorMessages.EMAIL),
     }),
     [elementTypes.PERCENTAGE]: () => ({
         validator: isValidPercentage,
@@ -163,7 +138,7 @@ function buildCompulsoryValidator(metaData: MetaDataElement): Array<ValidatorCon
                 i18n.t(
                     Validators.wordToValidatorMap.get(
                         wordValidatorKeys.COMPULSORY,
-                    ).message
+                    ).message,
                 ),
         },
     ] :

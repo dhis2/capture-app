@@ -35,7 +35,7 @@ declare type ReduxStore = {
 }
 
 // Events
-declare type Event = {
+declare type CaptureClientEvent = {
     eventId: string,
     programId: string,
     programStageId: string,
@@ -57,10 +57,87 @@ declare type UiEventData = {
 };
 
 declare type Theme = {
-    palette: Object,
+    palette: {
+        common: {
+            black: string,
+            white: string,
+        },
+        type: string,
+        primary: {
+            light: string,
+            main: string,
+            dark: string,
+            contrastText: string,
+        },
+        secondary: {
+            light: string,
+            main: string,
+            dark: string,
+            contrastText: string,
+        },
+        error: {
+            light: string,
+            main: string,
+            dark: string,
+            contrastText: string,
+        },
+        grey: {
+            '50': string,
+            '100': string,
+            '200': string,
+            '300': string,
+            '400': string,
+            '500': string,
+            '600': string,
+            '700': string,
+            '800': string,
+            '900': string,
+            A100: string,
+            A200: string,
+            A400: string,
+            A700: string,
+        },
+        text: {
+            primary: string,
+            secondary: string,
+            disabled: string,
+            hint: string,
+        },
+        background: {
+            paper: string,
+            default: string,
+        },
+    },
     typography: {
         pxToRem: (size: number) => string,
-        title: Object,
+        title: {
+            fontSize: string,
+            fontWeight: number,
+            fontFamily: string,
+            lineHeight: string,
+            color: string,
+        },
+        caption: {
+            fontSize: string,
+            fontWeight: number,
+            fontFamily: string,
+            lineHeight: string,
+            color: string,
+        },
+        body1: {
+            fontSize: string,
+            fontWeight: number,
+            fontFamily: string,
+            lineHeight: string,
+            color: string,
+        },
+        body2: {
+            fontSize: string,
+            fontWeight: number,
+            fontFamily: string,
+            lineHeight: string,
+            color: string,
+        },
     },
     spacing: {
         unit: number,
