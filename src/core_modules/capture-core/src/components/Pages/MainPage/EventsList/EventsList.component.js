@@ -255,7 +255,7 @@ class EventsList extends Component<Props> {
                         {'{{filters}}'}
                     </div>
                     <div>
-                        <ColumnSelector />
+                        <ColumnSelector columns={columns} />
                         <DownloadTable />
                     </div>
                 </div>

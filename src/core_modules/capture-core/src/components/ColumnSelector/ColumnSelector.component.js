@@ -1,26 +1,15 @@
 // @flow
-/* eslint-disable */
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-
-import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-
 import SettingsIcon from '@material-ui/icons/Settings';
-import ReorderIcon from '@material-ui/icons/Reorder';
 
 import i18n from '@dhis2/d2-i18n';
 
@@ -35,8 +24,7 @@ const styles = theme => ({
 
 type Props = {
     classes: Object,
-    workingListColumnOrder: Array<Object>,
-    selectedProgramId: string,
+    columns: Array<Object>,
     onUpdateWorkinglistOrder: (workinglist: Array<Object>) => void,
 };
 
@@ -50,14 +38,14 @@ class ColumnSelector extends Component<Props, State> {
         super(props);
         this.state = {
             open: false,
-            columnList: this.props.workingListColumnOrder,
+            columnList: [...this.props.columns],
         };
     }
 
     handleClickOpen = () => {
         this.setState({ open: true });
     };
-    
+
     handleClose = () => {
         this.setState({ open: false });
     };
@@ -69,9 +57,9 @@ class ColumnSelector extends Component<Props, State> {
 
     handleToggle = id => () => {
         const index = this.state.columnList.findIndex(column => column.id === id);
-        let toggleList = this.state.columnList;
+        const toggleList = this.state.columnList;
 
-        toggleList[index] = {...toggleList[index], visible: !toggleList[index].visible};
+        toggleList[index] = { ...toggleList[index], visible: !toggleList[index].visible };
 
         this.setState({ columnList: toggleList });
     };
@@ -97,7 +85,11 @@ class ColumnSelector extends Component<Props, State> {
                 >
                     <DialogTitle>{i18n.t('Columns to show in table')}</DialogTitle>
                     <DialogContent>
-                        <DragDropList listItems={this.state.columnList} handleUpdateListOrder={this.handleUpdateListOrder} handleToggle={this.handleToggle} selectedProgramId={this.props.selectedProgramId}/>
+                        <DragDropList
+                            listItems={this.state.columnList}
+                            handleUpdateListOrder={this.handleUpdateListOrder}
+                            handleToggle={this.handleToggle}
+                        />
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleSave} color="primary" autoFocus>
