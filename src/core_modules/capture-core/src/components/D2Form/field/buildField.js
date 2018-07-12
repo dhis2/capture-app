@@ -37,6 +37,11 @@ const errorMessages = {
     NO_FORMFIELD_FOR_TYPE: 'Formfield component not specified for type',
 };
 
+const convertPx = (options: Object, value: number) => {
+    const pxToRem = options && options.theme && options.theme.typography.pxToRem;
+    return pxToRem ? pxToRem(value) : value;
+};
+
 const getBaseComponentProps = () => ({
     style: {
         width: '100%',
@@ -48,14 +53,11 @@ const getBaseFieldProps = (metaData: MetaDataElement) => ({
     commitEvent: commitEvents.ON_BLUR,
 });
 
-const getBaseFormHorizontalProps = (options: Object) => {
-    const pxToRem = options.theme.typography.pxToRem;
-    return {
-        style: {
-            width: pxToRem(150),
-        },
-    };
-};
+const getBaseFormHorizontalProps = (options: Object) => ({
+    style: {
+        width: convertPx(options, 150),
+    },
+});
 
 const createComponentProps = (componentProps: Object, options: Object) => ({
     ...getBaseComponentProps(),
@@ -216,6 +218,7 @@ const fieldForTypes = {
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
             async: true,
+            formHorizontal: options.formHorizontal,
         }, options);
         return createFieldProps({
             id: metaData.id,
@@ -241,6 +244,7 @@ const fieldForTypes = {
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
             async: true,
+            formHorizontal: options.formHorizontal,
         }, options);
         return createFieldProps({
             id: metaData.id,
@@ -299,14 +303,13 @@ const getOptionSetComponent = (inputType: $Values<typeof optionSetInputTypes>) =
 };
 
 const optionSetField = (metaData: MetaDataElement, options: Object) => {
-    const pxToRem = options.theme.typography.pxToRem;
     const props = createComponentProps({
         label: metaData.formName,
         optionSet: metaData.optionSet,
         nullable: !metaData.compulsory,
         required: metaData.compulsory,
         style: {
-            width: options.formHorizontal ? pxToRem(210) : '100%',
+            width: options.formHorizontal ? convertPx(options, 210) : '100%',
         },
     }, options);
 

@@ -173,6 +173,7 @@ class D2SectionFields extends Component<Props> {
             rulesMessages,
             onUpdateFieldAsync,
             fieldOptions,
+            formHorizontal,
             ...passOnProps } = this.props;
 
         this.buildRulesCompulsoryErrors();

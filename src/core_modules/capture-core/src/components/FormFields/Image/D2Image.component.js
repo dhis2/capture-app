@@ -14,6 +14,8 @@ type Props = {
     label?: ?string,
     value: ?{ value: string, name: string, url?: ?string },
     formHorizontal?: ?boolean,
+    disabled?: ?boolean,
+    required?: ?boolean,
     classes: {
         horizontalLabel: string,
         outerContainer: string,
@@ -151,12 +153,16 @@ class D2Image extends Component<Props> {
     }
 
     renderContent = (contentClasses: Object, sizes: Object, enablePreview: boolean) => {
-        const { label, value, classes, asyncUIState } = this.props;
+        const { label, value, classes, asyncUIState, disabled, required } = this.props;
         const isUploading = asyncUIState && asyncUIState.loading;
         const imageUrl = this.getimageUrl();
         return (
             <div className={classes.outerContainer}>
-                <InputLabel classes={{ root: contentClasses.label }} >
+                <InputLabel
+                    classes={{ root: contentClasses.label }}
+                    disabled={!!disabled}
+                    required={!!required}
+                >
                     {label}
                 </InputLabel>
                 <div className={classes.container}>

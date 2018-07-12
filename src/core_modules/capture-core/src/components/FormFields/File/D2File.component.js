@@ -13,6 +13,8 @@ import inMemoryFileStore from '../../DataEntry/file/inMemoryFileStore';
 type Props = {
     label?: ?string,
     value: ?{ value: string, name: string, url?: ?string },
+    disabled?: ?boolean,
+    required?: ?boolean,
     classes: {
         horizontalLabel: string,
         outerContainer: string,
@@ -146,12 +148,16 @@ class D2File extends Component<Props> {
     }
 
     renderContent = (contentClasses: Object, sizes: Object) => {
-        const { label, value, classes, asyncUIState } = this.props;
+        const { label, value, classes, asyncUIState, disabled, required } = this.props;
         const isUploading = asyncUIState && asyncUIState.loading;
         const fileUrl = this.getFileUrl();
         return (
             <div className={classes.outerContainer}>
-                <InputLabel classes={{ root: contentClasses.label }} >
+                <InputLabel
+                    classes={{ root: contentClasses.label }}
+                    disabled={!!disabled}
+                    required={!!required}
+                >
                     {label}
                 </InputLabel>
                 <div className={classes.container}>
