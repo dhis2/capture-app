@@ -25,7 +25,7 @@ import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reduc
 type Props = {
     classes: Object,
     eventId: string,
-    event: Event,
+    event: CaptureClientEvent,
     onCompleteEvent: (eventId: string, id: string) => void,
     onCompleteValidationFailed: (eventId: string, id: string) => void,
     onCompleteAbort: (eventId: string, id: string) => void,

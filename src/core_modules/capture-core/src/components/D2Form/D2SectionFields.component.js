@@ -37,6 +37,7 @@ type Props = {
     rulesHiddenFields: RulesHiddenFields,
     rulesCompulsoryFields: RulesCompulsoryFields,
     onUpdateField: (value: any, uiState: Object, elementId: string, formBuilderId: string, formId: string) => void,
+    onUpdateFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, formId: string, callback: Function) => void,
     formId: string,
     formBuilderId: string,
     formHorizontal: boolean,
@@ -115,6 +116,10 @@ class D2SectionFields extends Component<Props> {
         this.props.onUpdateField(value, uiState, elementId, formBuilderId, this.props.formId);
     }
 
+    handleUpdateFieldAsync = (fieldId: string, fieldLabel: string, formBuilderId: string, callback: Function) => {
+        this.props.onUpdateFieldAsync(fieldId, fieldLabel, formBuilderId, this.props.formId, callback);
+    }
+
     buildRulesCompulsoryErrors() {
         const rulesCompulsory = this.props.rulesCompulsoryFields;
         const values = this.props.values;
@@ -157,7 +162,18 @@ class D2SectionFields extends Component<Props> {
     }
 
     render() {
-        const { fieldsMetaData, values, onUpdateField, formId, formBuilderId, fieldOptions, ...passOnProps } = this.props;
+        const {
+            fieldsMetaData,
+            values,
+            onUpdateField,
+            formId,
+            formBuilderId,
+            rulesCompulsoryFields,
+            rulesHiddenFields,
+            rulesMessages,
+            onUpdateFieldAsync,
+            fieldOptions,
+            ...passOnProps } = this.props;
 
         this.buildRulesCompulsoryErrors();
 
@@ -168,6 +184,7 @@ class D2SectionFields extends Component<Props> {
                 fields={this.getFieldConfigWithRulesEffects()}
                 values={values}
                 onUpdateField={this.handleUpdateField}
+                onUpdateFieldAsync={this.handleUpdateFieldAsync}
                 validateIfNoUIData
                 {...passOnProps}
             />

@@ -122,6 +122,7 @@ export class D2Form extends Component<Props> {
             sectionMetaData={section}
             formId={this.getFormId()}
             formBuilderId={this.getFormBuilderId(section.id)}
+            sectionId={section.id}
             {...passOnProps}
         />
     )
@@ -135,6 +136,7 @@ export class D2Form extends Component<Props> {
                 sectionMetaData={section}
                 formId={this.getFormId()}
                 formBuilderId={this.getFormBuilderId(section.id)}
+                sectionId={section.id}
                 {...passOnProps}
             />
         </div>

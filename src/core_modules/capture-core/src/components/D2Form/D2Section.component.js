@@ -21,6 +21,9 @@ type Props = {
         sectionFieldsInSection: string,
     },
     formHorizontal: ?boolean,
+    sectionId: string,
+    formBuilderId: string,
+    formId: string,
 };
 
 class D2Section extends Component<Props> {
@@ -40,7 +43,7 @@ class D2Section extends Component<Props> {
     }
 
     render() {
-        const { sectionMetaData, isHidden, classes, ...passOnProps } = this.props;
+        const { sectionMetaData, isHidden, classes, sectionId, ...passOnProps } = this.props;
 
         if (isHidden) {
             return null;

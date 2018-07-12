@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import InfoIcon from '@material-ui/icons/InfoOutline';
 import i18n from '@dhis2/d2-i18n';
 import DataEntry from '../../../../components/DataEntry/DataEntry.container';
@@ -18,8 +19,8 @@ import withDefaultFieldContainer from '../../../../components/DataEntry/dataEntr
 import withDefaultChangeHandler from '../../../../components/DataEntry/dataEntryField/withDefaultChangeHandler';
 import withDefaultShouldUpdateInterface from
     '../../../../components/DataEntry/dataEntryField/withDefaultShouldUpdateInterface';
-import { Paper } from 'material-ui';
 
+import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -112,6 +113,7 @@ type Props = {
     programName: string,
     orgUnitName: string,
     onUpdateField: (innerAction: ReduxAction<any, any>) => void,
+    onStartAsyncUpdateField: Object,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onCancel: () => void,
     classes: {
@@ -119,6 +121,7 @@ type Props = {
         savingContextText: string,
         savingContextNames: string,
         topButtonsContainer: string,
+        horizontalPaper: string,
     },
     theme: Theme,
     formHorizontal: ?boolean,
@@ -132,6 +135,9 @@ class NewEventDataEntry extends Component<Props> {
         this.fieldOptions = { theme: props.theme };
     }
 
+    componentWillUnmount() {
+        inMemoryFileStore.clear();
+    }
     getSavingText() {
         const { classes, orgUnitName, programName } = this.props;
         const firstPart = `${i18n.t('Saving to')} `;
@@ -171,6 +177,7 @@ class NewEventDataEntry extends Component<Props> {
         const {
             formFoundation,
             onUpdateField,
+            onStartAsyncUpdateField,
             onSave,
             onCancel,
             programName, // eslint-disable-line
@@ -185,6 +192,7 @@ class NewEventDataEntry extends Component<Props> {
                         id={'singleEvent'}
                         formFoundation={formFoundation}
                         onUpdateFormField={onUpdateField}
+                        onUpdateFormFieldAsync={onStartAsyncUpdateField}
                         onCancel={onCancel}
                         onSave={onSave}
                         formHorizontal={formHorizontal}

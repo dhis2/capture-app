@@ -44,6 +44,7 @@ type Props = {
     fields: Array<Field>,
     values: { [id: string]: any },
     fieldsUI: { [id: string]: FieldUI },
+    onUpdateFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, callback: Function) => void,
     onUpdateField: (value: any, uiState: FieldUI, fieldId: string, formBuilderId: string) => void,
     onUpdateFieldUIOnly: (uiState: FieldUI, fieldId: string, formBuilderId: string) => void,
     onFieldsValidated: (fieldsUI: { [id: string]: FieldUI }, formBuilderId: string) => void,
@@ -76,11 +77,43 @@ class FormBuilder extends React.Component<Props> {
         };
     }
 
+    static getAsyncUIState(fieldsUI: { [id: string]: FieldUI }) {
+        return Object.keys(fieldsUI).reduce((accAsyncUIState, fieldId) => {
+            const fieldUI = fieldsUI[fieldId];
+            accAsyncUIState[fieldId] = FormBuilder.getFieldAsyncUIState(fieldUI);
+            return accAsyncUIState;
+        }, {});
+    }
+
+    static getFieldAsyncUIState(fieldUI: FieldUI) {
+        const ignoreKeys = ['valid', 'errorMessage', 'touched'];
+        return Object.keys(fieldUI).reduce((accFieldAsyncUIState, propId) => {
+            if (!ignoreKeys.includes(propId)) {
+                accFieldAsyncUIState[propId] = fieldUI[propId];
+            }
+            return accFieldAsyncUIState;
+        }, {});
+    }
+
+    static updateAsyncUIState(oldFieldsUI: { [id: string]: FieldUI }, newFieldsUI: { [id: string]: FieldUI }, asyncUIState: { [id: string]: Object }) {
+        return Object.keys(newFieldsUI).reduce((accAsyncUIState, fieldId) => {
+            const newFieldUI = newFieldsUI[fieldId];
+            const oldFieldUI = oldFieldsUI[fieldId];
+
+            if (newFieldUI !== oldFieldUI) {
+                accAsyncUIState[fieldId] = FormBuilder.getFieldAsyncUIState(newFieldUI);
+            }
+            return accAsyncUIState;
+        }, asyncUIState);
+    }
+
     fieldInstances: Map<string, any>;
+    asyncUIState: { [id: string]: FieldUI };
 
     constructor(props: Props) {
         super(props);
         this.fieldInstances = new Map();
+        this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
 
         if (this.props.validateIfNoUIData) {
             this.props.onFieldsValidated(this.validateAllFields(), this.props.id);
@@ -88,6 +121,12 @@ class FormBuilder extends React.Component<Props> {
     }
 
     componentWillReceiveProps(newProps: Props) {
+        if (newProps.id !== this.props.id) {
+            this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
+        } else {
+            this.asyncUIState = FormBuilder.updateAsyncUIState(this.props.fieldsUI, newProps.fieldsUI, this.asyncUIState);
+        }
+
         if (this.props.validateIfNoUIData && newProps.id !== this.props.id) {
             this.props.onFieldsValidated(this.validateAllFields(), this.props.id);
         }
@@ -146,9 +185,17 @@ class FormBuilder extends React.Component<Props> {
         }, fieldId, this.props.id);
     }
 
+    handleUpdateAsyncState = (fieldId: string, asyncStateToAdd: Object) => {
+        this.props.onUpdateFieldUIOnly(asyncStateToAdd, fieldId, this.props.id);
+    }
+
+    handleCommitAsync = (fieldId: string, fieldLabel: string, callback: Function) => {
+        this.props.onUpdateFieldAsync(fieldId, fieldLabel, this.props.id, callback);
+    }
+
     /**
      *  Retain a reference to the form field instance
-    */    
+    */
     setFieldInstance(instance, id) {
         if (!instance) {
             if (this.fieldInstances.has(id)) {
@@ -185,7 +232,19 @@ class FormBuilder extends React.Component<Props> {
     }
 
     renderFields() {
-        const { fields, values, fieldsUI, validationAttempted, classes } = this.props;
+        const {
+            fields,
+            values,
+            fieldsUI,
+            validationAttempted,
+            classes,
+            id,
+            onFieldsValidated,
+            onUpdateField,
+            onUpdateFieldAsync,
+            onUpdateFieldUIOnly,
+            validateIfNoUIData,
+            ...passOnProps } = this.props;
 
         return fields.map((field) => {
             const props = field.props || {};
@@ -197,6 +256,14 @@ class FormBuilder extends React.Component<Props> {
             const commitPropObject = {
                 [commitEvent]: commitFieldHandler,
             };
+
+            const asyncProps = {};
+
+            if (props.async) {
+                asyncProps.onCommitAsync = (callback: Function) => this.handleCommitAsync(field.id, props.label, callback);
+                asyncProps.onUpdateAsyncUIState = (asyncState: Object) => this.handleUpdateAsyncState(field.id, asyncState);
+                asyncProps.asyncUIState = this.asyncUIState[field.id];
+            }
 
             return (
                 <div
@@ -211,6 +278,8 @@ class FormBuilder extends React.Component<Props> {
                         validationAttempted={validationAttempted}
                         {...commitPropObject}
                         {...props}
+                        {...passOnProps}
+                        {...asyncProps}
                     />
                 </div>
             );

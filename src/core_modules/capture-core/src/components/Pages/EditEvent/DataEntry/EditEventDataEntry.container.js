@@ -8,6 +8,7 @@ import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
 import programCollection from '../../../../metaDataMemoryStores/programCollection/programCollection';
 import errorCreator from '../../../../utils/errorCreator';
 import {
+    startAsyncUpdateFieldForEditEvent,
     startRunRulesOnUpdateForEditSingleEvent,
     requestSaveReturnToMainPage,
     startCancelSaveReturnToMainPage,
@@ -46,6 +47,17 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
             startRunRulesOnUpdateForEditSingleEvent(innerAction.payload),
         ], batchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH));
     },
+    onStartAsyncUpdateField: (
+        fieldId: string,
+        fieldLabel: string,
+        formBuilderId: string,
+        formId: string,
+        callback: Function,
+        dataEntryId: string,
+        itemId: string,
+    ) => {
+        dispatch(startAsyncUpdateFieldForEditEvent(fieldId, fieldLabel, formBuilderId, formId, callback, dataEntryId, itemId));
+    },
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);
         dispatch(requestSaveReturnToMainPage(eventId, dataEntryId, formFoundation));
@@ -57,6 +69,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowSuppress
-export default connect(
-    mapStateToProps, mapDispatchToProps)(
-    withLoadingIndicator()(withErrorMessageHandler()(EditEventDataEntry)));
+export default connect(mapStateToProps, mapDispatchToProps)(
+    withLoadingIndicator()(withErrorMessageHandler()(EditEventDataEntry)),
+);

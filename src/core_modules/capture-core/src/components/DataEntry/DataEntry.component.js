@@ -45,6 +45,16 @@ type Props = {
     onUpdateFormField?: ?(
         innerAction: ReduxAction<any, any>,
     ) => void,
+    onUpdateFormFieldAsync: (
+        fieldId: string,
+        fieldLabel: string,
+        formBuilderId: string,
+        formId: string,
+        callback: Function,
+        dataEntryId: string,
+        itemId: string,
+    ) => void,
+
 };
 
 class DataEntry extends React.Component<Props> {
@@ -54,18 +64,12 @@ class DataEntry extends React.Component<Props> {
     };
 
     formInstance: ?D2Form;
-    handleUpdateField: (value: any, uiState: Object, elementId: string, sectionId: string, formId: string) => void;
-
-    constructor(props: Props) {
-        super(props);
-        this.handleUpdateField = this.handleUpdateField.bind(this);
-    }
 
     getWrappedInstance() {
         return this.formInstance;
     }
 
-    handleUpdateField(...args) {
+    handleUpdateField = (...args) => {
         this.props.onUpdateFieldInner(...args, this.props.id, this.props.itemId, this.props.onUpdateFormField);
     }
 
@@ -79,6 +83,10 @@ class DataEntry extends React.Component<Props> {
             };
         }
         return {};
+    }
+
+    handleUpdateFieldAsync = (...args) => {
+        this.props.onUpdateFormFieldAsync(...args, this.props.id, this.props.itemId);
     }
 
     getFieldWithPlacement(placement: $Values<typeof placements>) {
@@ -103,7 +111,9 @@ class DataEntry extends React.Component<Props> {
             completionAttempted,
             saveAttempted,
             fields,
-            onUpdateField,
+            onUpdateFormField,
+            onUpdateFieldInner,
+            onUpdateFormFieldAsync,
             ...passOnProps } = this.props;
 
         if (!itemId) {
@@ -136,6 +146,7 @@ class DataEntry extends React.Component<Props> {
                         id={getDataEntryKey(id, itemId)}
                         validationAttempted={completionAttempted || saveAttempted}
                         onUpdateField={this.handleUpdateField}
+                        onUpdateFieldAsync={this.handleUpdateFieldAsync}
                         {...passOnProps}
                     />
                     {bottomFields}

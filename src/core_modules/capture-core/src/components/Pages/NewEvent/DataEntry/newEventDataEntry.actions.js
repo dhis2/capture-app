@@ -9,7 +9,6 @@ import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFounda
 import EventProgram from '../../../../metaData/Program/EventProgram';
 import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
-import FormLayoutDirections from './FormLayoutDirections';
 
 export const batchActionTypes = {
     UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH: 'UpdateFieldForNewSingleEventActionsBatch',
@@ -30,6 +29,7 @@ export const actionTypes = {
     SELECTIONS_NOT_COMPLETE_OPENING_NEW_EVENT: 'SelectionsNotCompleteOpeningNewEvent',
     CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE: 'CancelNewEventFromIncompleteSelectionAndReturnToMainPage',
     SET_NEW_EVENT_FORM_LAYOUT_DIRECTION: 'SetNewEventFormLayoutDirection',
+    START_ASYNC_UPDATE_FIELD_FOR_NEW_EVENT: 'StartAsyncUpdateFieldForNewEvent',
 };
 
 function convertStatusIn(value: string) {
@@ -88,7 +88,7 @@ export const startRunRulesOnUpdateForNewSingleEvent = (actionData: { payload: Ob
     actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)(actionData);
 
 export const requestSaveNewEventAndReturnToMainPage = (eventId: string, dataEntryId: string, formFoundation: Object) =>
-    actionCreator(actionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)({ eventId, dataEntryId, formFoundation });
+    actionCreator(actionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)({ eventId, dataEntryId, formFoundation }, { skipLogging: ['formFoundation'] });
 
 export const startSaveNewEventAfterReturnedToMainPage = (serverData: Object, selections: Object) =>
     actionCreator(actionTypes.START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE)({ selections }, {
@@ -120,3 +120,23 @@ export const cancelNewEventFromIncompleteSelectionAndReturnToMainPage = () =>
 
 export const setNewEventFormLayoutDirection = (formHorizontal: boolean) =>
     actionCreator(actionTypes.SET_NEW_EVENT_FORM_LAYOUT_DIRECTION)({ formHorizontal });
+
+export const startAsyncUpdateFieldForNewEvent =
+    (
+        fieldId: string,
+        fieldLabel: string,
+        formBuilderId: string,
+        formId: string,
+        callback: Function,
+        dataEntryId: string,
+        itemId: string,
+    ) =>
+        actionCreator(actionTypes.START_ASYNC_UPDATE_FIELD_FOR_NEW_EVENT)({
+            fieldId,
+            fieldLabel,
+            formBuilderId,
+            formId,
+            callback,
+            dataEntryId,
+            itemId,
+        });
