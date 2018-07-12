@@ -19,6 +19,7 @@ const valueConvertersForType = {
     [elementTypes.DATE]: convertDate,
     [elementTypes.TRUE_ONLY]: () => 'true',
     [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'true' : 'false'),
+    [elementTypes.FILE_RESOURCE]: (rawValue: Object) => rawValue.value,
 };
 
 export function convertValue(type: $Values<typeof elementTypes>, value: any) {

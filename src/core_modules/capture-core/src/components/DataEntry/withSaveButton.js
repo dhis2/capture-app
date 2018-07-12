@@ -10,15 +10,18 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { connect } from 'react-redux';
 
+import i18n from '@dhis2/d2-i18n';
+
 import Button from '../Buttons/Button.component';
 import ProgressButton from '../Buttons/ProgressButton.component';
 import DataEntry from './DataEntry.component';
 import errorCreator from '../../utils/errorCreator';
-import i18n from '@dhis2/d2-i18n';
+
 import { saveValidationFailed, saveAbort } from './actions/dataEntry.actions';
 import getDataEntryKey from './common/getDataEntryKey';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
+import AsyncFieldHandler from './asyncFields/AsyncFieldHandler';
 
 import { D2Form } from '../D2Form/D2Form.component';
 
@@ -43,6 +46,7 @@ type OptionFn = (props: Props) => Options;
 
 type State = {
     warningDialogOpen: boolean,
+    waitForUploadDialogOpen: boolean,
 };
 
 const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?OptionFn) =>
@@ -64,6 +68,7 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
 
             this.state = {
                 warningDialogOpen: false,
+                waitForUploadDialogOpen: false,
             };
         }
 
@@ -114,6 +119,14 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
             this.setState({ warningDialogOpen: true });
         }
 
+        showWaitForUploadPopup = () => {
+            this.setState({ waitForUploadDialogOpen: true });
+            AsyncFieldHandler.getDataEntryItemPromise(this.props.id, this.props.itemId).then(() => {
+                this.setState({ waitForUploadDialogOpen: false });
+                this.props.onSave(this.props.itemId, this.props.id, this.props.formFoundation);
+            });
+        }
+
         validateForm() {
             const formInstance = this.getFormInstance();
             if (!formInstance) {
@@ -162,7 +175,7 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
             } else if (this.props.warnings && this.props.warnings.length > 0) {
                 this.showWarningsPopup();
             } else {
-                this.props.onSave(this.props.itemId, this.props.id, this.props.formFoundation);
+                this.handleSave();
             }
         }
 
@@ -172,8 +185,16 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
         }
 
         handleSaveDialog() {
-            this.props.onSave(this.props.itemId, this.props.id, this.props.formFoundation);
+            this.handleSave();
             this.setState({ warningDialogOpen: false });
+        }
+
+        handleSave = () => {
+            if (AsyncFieldHandler.hasPromises(this.props.id, this.props.itemId)) {
+                this.showWaitForUploadPopup();
+            } else {
+                this.props.onSave(this.props.itemId, this.props.id, this.props.formFoundation);
+            }
         }
 
         getDialogWarningContents() {
@@ -196,6 +217,13 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
             return null;
         }
 
+        getDialogWaitForUploadContents = () => (
+            <div>
+                {i18n.t('Your data is uploading. Please wait untill this message disappears')}
+            </div>
+        );
+
+
         render() {
             const {
                 itemId,
@@ -203,6 +231,7 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
                 onSaveValidationFailed,
                 onSaveAbort,
                 finalInProgress,
+                warnings,
                 ...passOnProps
             } = this.props;
             const options = optionFn ? optionFn(this.props) : {};
@@ -246,6 +275,18 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
                             <Button onClick={this.handleSaveDialog} color="primary" autoFocus>
                                 {i18n.t('Save')}
                             </Button> </DialogActions>
+                    </Dialog>
+                    <Dialog
+                        open={this.state.waitForUploadDialogOpen}
+                    >
+                        <DialogTitle>
+                            {i18n.t('Uploading data')}
+                        </DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                {this.getDialogWaitForUploadContents()}
+                            </DialogContentText>
+                        </DialogContent>
                     </Dialog>
                 </div>
             );

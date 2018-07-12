@@ -4,7 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
-import SearchIcon from '@material-ui/icons/Search';
+//Find button to be included when find(tracked entity instance) is supported
+//import SearchIcon from '@material-ui/icons/Search';
 
 import i18n from '@dhis2/d2-i18n';
 
@@ -50,7 +51,6 @@ class ActionButtons extends Component<Props> {
         alert('Not implemented yet.');
     }
 
-    // TODO: Add translation.
     render() {
         const { classes, showResetButton } = this.props;
         return (
@@ -73,13 +73,15 @@ class ActionButtons extends Component<Props> {
                     <AddIcon className={classes.rightButton} />
                     { i18n.t('New') }
                 </Button>
+                {/* Find button to be included when find(tracked entity instance) 
+                is supported:
                 <Button
                     onClick={this.handleFindClick}
                     color="primary"
                 >
                     <SearchIcon className={classes.rightButton} />
                     { i18n.t('Find') }
-                </Button>
+                </Button>*/}
             </div>
         );
     }

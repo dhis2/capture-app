@@ -45,9 +45,11 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
     };
 };
 
+const mapDispatchToProps = () => ({});
+
 export default (optionsFn?: ?OptionsFn) =>
     (InnerComponent: React.ComponentType<any>) =>
         // $FlowSuppress
         connect(
-            mapStateToProps, null, null, { withRef: true })(
+            mapStateToProps, mapDispatchToProps, null, { withRef: true })(
             getCancelButton(InnerComponent, optionsFn));

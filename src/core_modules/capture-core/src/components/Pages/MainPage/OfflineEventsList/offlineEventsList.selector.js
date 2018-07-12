@@ -10,7 +10,7 @@ import { mainPropertyNames } from '../EventsList/getColumnsConfiguration';
 import elementTypeKeys from '../../../../metaData/DataElement/elementTypes';
 
 type EventContainer = {
-    event: Event,
+    event: CaptureClientEvent,
     eventValues: { [key: string]: any },
 };
 

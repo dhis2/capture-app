@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 
 type Props = {
-    onChange: (value: string, event: UiEventData) => void,
-    onBlur: (value: string, event: UiEventData) => void,
+    onChange?: ?(value: string, event: SyntheticEvent<HTMLInputElement>) => void,
+    onBlur?: ?(value: string, event: SyntheticEvent<HTMLInputElement>) => void,
+    value: ?string,
 };
 
 class D2TextField extends Component<Props> {
@@ -12,10 +13,8 @@ class D2TextField extends Component<Props> {
         value: '',
     };
 
-    materialUIInstance: any;
-    materialUIContainerInstance: any;
-    handleChange: (event: UiEventData) => void;
-    handleBlur: (event: UiEventData) => void;
+    materialUIInstance: ?HTMLInputElement;
+    materialUIContainerInstance: ?HTMLDivElement;
 
     constructor(props: Props) {
         super(props);
@@ -23,24 +22,29 @@ class D2TextField extends Component<Props> {
         this.handleBlur = this.handleBlur.bind(this);
     }
 
-    handleChange(event: UiEventData) {
-        this.props.onChange(event.target.value, event);
+    handleChange = (event: SyntheticEvent<HTMLInputElement>) => {
+        this.props.onChange && this.props.onChange(event.currentTarget.value, event);
     }
 
-    handleBlur(event: UiEventData) {
-        this.props.onBlur(event.target.value, event);
+    handleBlur = (event: SyntheticEvent<HTMLInputElement>) => {
+        this.props.onBlur && this.props.onBlur(event.currentTarget.value, event);
+    }
+
+    focus() {
+        this.materialUIInstance && this.materialUIInstance.focus();
     }
 
     render() {
-        const { onChange, onBlur, ...passOnProps } = this.props;
+        const { onChange, onBlur, value, ...passOnProps } = this.props;
 
         return (
             <div ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}>
                 <TextField
                     inputRef={(inst) => { this.materialUIInstance = inst; }}
-                    {...passOnProps}
+                    value={value || ''}
                     onChange={this.handleChange}
                     onBlur={this.handleBlur}
+                    {...passOnProps}
                 />
             </div>
         );

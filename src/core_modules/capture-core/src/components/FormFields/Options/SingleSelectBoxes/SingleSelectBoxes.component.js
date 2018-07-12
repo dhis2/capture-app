@@ -53,7 +53,7 @@ class SingleSelectBoxes extends Component<Props> {
         };
     }
 
-    getBoxes() {
+    getBoxes(passOnProps: ?Object) {
         const optionSet = this.props.optionSet;
         if (optionSet) {
             return optionSet.options.map((o: Option, index: number) => (
@@ -70,6 +70,7 @@ class SingleSelectBoxes extends Component<Props> {
                             checkedIcon={
                                 <RadioOnIcon />
                             }
+                            {...passOnProps}
                         />
                     }
                     label={o.text}
@@ -104,29 +105,42 @@ class SingleSelectBoxes extends Component<Props> {
         return !!(this.checkedValues && this.checkedValues.has(value));
     }
 
-    renderHorizontal() {
+    renderHorizontal(passOnProps: ?Object) {
         return (
             <FormGroup row>
-                {this.getBoxes()}
+                {this.getBoxes(passOnProps)}
             </FormGroup>
         );
     }
 
-    renderVertical() {
+    renderVertical(passOnProps: ?Object) {
         return (
             <FormGroup>
-                {this.getBoxes()}
+                {this.getBoxes(passOnProps)}
             </FormGroup>
         );
     }
 
-    renderBoxes() {
+    renderBoxes(passOnProps: ?Object) {
         const orientation = this.props.orientation;
-        return orientation === orientations.VERTICAL ? this.renderVertical() : this.renderHorizontal();
+        return orientation === orientations.VERTICAL ?
+            this.renderVertical(passOnProps) :
+            this.renderHorizontal(passOnProps);
     }
 
     render() {
-        const { label, required, classes, style, orientation } = this.props;  // eslint-disable-line no-unused-vars
+        const {
+            onBlur,
+            optionSet,
+            label,
+            nullable,
+            value,
+            orientation,
+            required,
+            classes,
+            style,
+            ...passOnProps
+        } = this.props;  // eslint-disable-line no-unused-vars
 
         this.setCheckedStatusForBoxes();
 
@@ -142,7 +156,7 @@ class SingleSelectBoxes extends Component<Props> {
                             return (
                                 <FormLabel
                                     component="label"
-                                    required={required}
+                                    required={!!required}
                                     classes={this.labelClasses}
                                     focused={false}
                                 >
@@ -151,7 +165,7 @@ class SingleSelectBoxes extends Component<Props> {
                             );
                         })()
                     }
-                    {this.renderBoxes()}
+                    {this.renderBoxes(passOnProps)}
                 </FormControl>
             </div>
         );

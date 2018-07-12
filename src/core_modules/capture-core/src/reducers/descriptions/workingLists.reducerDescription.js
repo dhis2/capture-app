@@ -17,6 +17,9 @@ import {
 import {
     actionTypes as mainPageSelectorActionTypes,
 } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
+import {
+    actionTypes as filterSelectorActionTypes,
+} from '../../components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.actions';
 
 export const workingListsDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
@@ -74,6 +77,10 @@ export const workingListsMetaDesc = createReducerDescription({
             ...newState.main,
             ...next,
             ...pagingData,
+            filters: {
+                ...newState.main.filters,
+                ...newState.main.next.filters,
+            },
             next: {},
         };
         return newState;
@@ -123,6 +130,40 @@ export const workingListsMetaDesc = createReducerDescription({
                 currentPage: 1,
             },
         };
+        return newState;
+    },
+    [filterSelectorActionTypes.SET_FILTER]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        newState.main = {
+            ...newState.main,
+            next: {
+                ...newState.main.next,
+                filters: {
+                    ...(newState.main.next ? newState.main.next.filters : null),
+                    [payload.itemId]: payload.requestData,
+                },
+            },
+        };
+        return newState;
+    },
+    [filterSelectorActionTypes.CLEAR_FILTER]: (state, action) => {
+        const newState = { ...state };
+        const itemId = action.payload.itemId;
+
+        const nextMainStateFilters = {
+            ...(newState.main.next ? newState.main.next.filters : null),
+            [itemId]: null,
+        };
+
+        newState.main = {
+            ...newState.main,
+            next: {
+                ...newState.main.next,
+                filters: nextMainStateFilters,
+            },
+        };
+
         return newState;
     },
 }, 'workingListsMeta');
@@ -282,3 +323,104 @@ export const workingListsContextDesc = createReducerDescription({
         return newState;
     },
 }, 'workingListsContext');
+
+export const workingListFiltersEditDesc = createReducerDescription({
+    [filterSelectorActionTypes.EDIT_CONTENTS]: (state, action) => {
+        const payload = action.payload;
+        const newState = { ...state };
+        newState.main = {
+            ...newState.main,
+            next: {
+                ...(newState.main ? newState.main.next : null),
+                [payload.itemId]: payload.value,
+            },
+        };
+        return newState;
+    },
+    [filterSelectorActionTypes.CLEAR_FILTER]: (state, action) => {
+        const itemId = action.payload.itemId;
+        const newState = { ...state };
+        newState.main = {
+            ...newState.main,
+            [itemId]: null,
+            next: {},
+        };
+        return newState;
+    },
+    [filterSelectorActionTypes.SET_FILTER]: (state) => {
+        const newState = { ...state };
+        newState.main = {
+            ...newState.main,
+            ...(newState.main ? newState.main.next : null),
+            next: {},
+        };
+        return newState;
+    },
+    [filterSelectorActionTypes.REVERT_FILTER]: (state) => {
+        const newState = { ...state };
+        newState.main = {
+            ...newState.main,
+            next: {},
+        };
+        return newState;
+    },
+}, 'workingListFiltersEdit');
+
+export const workingListsAppliedFiltersDesc = createReducerDescription({
+    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state) => {
+        const newState = {
+            ...state,
+            main: {},
+        };
+        return newState;
+    },
+    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: (state) => {
+        const newState = {
+            ...state,
+            main: {},
+        };
+        return newState;
+    },
+    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state) => {
+        const newState = { ...state };
+        const next = newState.main.next;
+        newState.main = {
+            ...newState.main,
+            ...next,
+            next: {},
+        };
+        return newState;
+    },
+    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVAL_FAILED]: (state) => {
+        const newState = { ...state };
+        newState.main = {
+            ...newState.main,
+            next: {},
+        };
+        return newState;
+    },
+    [filterSelectorActionTypes.SET_FILTER]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        newState.main = {
+            ...newState.main,
+            next: {
+                ...(newState.main ? newState.main.next : null),
+                [payload.itemId]: payload.appliedText,
+            },
+        };
+        return newState;
+    },
+    [filterSelectorActionTypes.CLEAR_FILTER]: (state, action) => {
+        const newState = { ...state };
+        const itemId = action.payload.itemId;
+        newState.main = {
+            ...newState.main,
+            next: {
+                ...(newState.main ? newState.main.next : null),
+                [itemId]: null,
+            },
+        };
+        return newState;
+    },
+}, 'workingListsAppliedFilters');
