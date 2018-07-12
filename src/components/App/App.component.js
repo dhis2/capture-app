@@ -23,8 +23,6 @@ import D2UIApp from '@dhis2/d2-ui-app';
 import withD2InContext from 'capture-core/HOC/withD2InContext';
 import withStateBoundLoadingIndicator from 'capture-core/HOC/withStateBoundLoadingIndicator';
 
-import UsernameField from '../../core_modules/capture-core/src/components/FormFields/Username/Username.component'
-
 import theme from '../../styles/uiTheme';
 
 
@@ -62,7 +60,6 @@ class App extends React.Component<Props> {
                             <D2UIApp>
                                 <AppContentsRouterLoader />
                                 <FeedbackBar />
-                                <UsernameField />
                             </D2UIApp>
                         </MuiThemeProvider>
                     </ConnectedRouter>
