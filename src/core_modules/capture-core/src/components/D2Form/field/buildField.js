@@ -88,6 +88,7 @@ const getBaseTextField = (metaData: MetaDataElement) => {
 
 const fieldForTypes = {
     [elementTypes.TEXT]: (metaData: MetaDataElement) => getBaseTextField(metaData),
+    [elementTypes.EMAIL]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.LONG_TEXT]: (metaData: MetaDataElement) => {
         const baseField = getBaseTextField(metaData);
         const props = { ...baseField.props, multiLine: true };
