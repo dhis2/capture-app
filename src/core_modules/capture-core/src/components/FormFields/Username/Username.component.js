@@ -7,11 +7,8 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
+import { getApi } from '../../../d2/d2Instance'
 
-const users = [
-  { label: 'Markus' },
-  { label: 'Hendrik' },
-];
 
 function renderInput(inputProps) {
   const { classes, ref, ...other } = inputProps;
@@ -31,8 +28,8 @@ function renderInput(inputProps) {
 }
 
 function renderUser(user, { query, isHighlighted }) {
-  const matches = match(user.label, query);
-  const parts = parse(user.label, matches);
+  const matches = match(user.userCredentials.username, query);
+  const parts = parse(user.userCredentials.username, matches);
 
   return (
     <MenuItem selected={isHighlighted} component="div">
@@ -64,26 +61,7 @@ function renderUsersContainer(options) {
 }
 
 function getUserValue(user) {
-  return user.label;
-}
-
-function getUsers(value) {
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
-  let count = 0;
-
-  return inputLength === 0
-    ? []
-    : users.filter(user => {
-      const keep =
-        count < 5 && user.label.toLowerCase().slice(0, inputLength) === inputValue;
-
-      if (keep) {
-        count += 1;
-      }
-
-      return keep;
-    });
+  return user.userCredentials.username;
 }
 
 const styles = theme => ({
@@ -115,17 +93,15 @@ class UsernameAutosuggest extends React.Component {
     users: [],
   };
 
-  handleUsersFetchRequested = ({ value }) => {
-    this.setState({
-      users: getUsers(value),
-    });
-  };
-
-  handleUsersClearRequested = () => {
-    this.setState({
-      users: [],
-    });
-  };
+  componentDidMount() {
+    getApi().get('users?fields=name,id,userCredentials[username]')
+      .then((response: any) => {
+        console.log(response.users)
+        this.setState({
+          users: response.users
+        })
+      })
+  }
 
   handleChange = (event, { newValue }) => {
     this.setState({
@@ -146,8 +122,8 @@ class UsernameAutosuggest extends React.Component {
         }}
         renderInputComponent={renderInput}
         suggestions={this.state.users}
-        onSuggestionsFetchRequested={this.handleUsersFetchRequested}
-        onSuggestionsClearRequested={this.handleUsersClearRequested}
+        onSuggestionsFetchRequested={() => null}
+        onSuggestionsClearRequested={() => null}
         renderSuggestionsContainer={renderUsersContainer}
         getSuggestionValue={getUserValue}
         renderSuggestion={renderUser}
