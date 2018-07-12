@@ -198,6 +198,7 @@ const fieldForTypes = {
     [elementTypes.TIME]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.PERCENTAGE]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.URL]: (metaData: MetaDataElement) => getBaseTextField(metaData),
+    [elementTypes.ORG_UNIT_TREE]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.UNKNOWN]: (metaData: MetaDataElement) => null, // eslint-disable-line no-unused-vars
 };
 

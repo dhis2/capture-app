@@ -23,6 +23,7 @@ const elementTypeCodes = [
     'DURATION_MINUTES',
     'FILE_RESOURCE',
     'URL',
+    'ORG_UNIT_TREE',
     unknownTypeCode,
 ];
 
