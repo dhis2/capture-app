@@ -109,6 +109,7 @@ type Props = {
     value: any,
     nullable?: boolean,
     style?: ?Object,
+    menuStyle?: ?Object,
     maxHeight?: ?number,
     disabled?: ?boolean,
     useHintLabel?: ?boolean,
@@ -146,6 +147,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
     options: ?Array<{label: string, value: any}>;
     renderOption: () => React$Element<any>;
     inFocusLabelClasses: Object;
+    yourSelect: any;
 
     constructor(props: Props) {
         super(props);
@@ -228,6 +230,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
             { [lineClasses]: !withoutUnderline },
         );
 
+        const selectStyle = { ...OptionsSelectVirtualized.defaultSelectStyle, ...style };
         return (
             <div
                 ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}
@@ -238,8 +241,8 @@ class OptionsSelectVirtualized extends Component<Props, State> {
                         <FormControl component="fieldset" className={classes.formControl}>
                             <InputLabel
                                 shrink={labelIsShrinked}
-                                disabled={disabled}
-                                required={required}
+                                disabled={!!disabled}
+                                required={!!required}
                                 classes={inFocus ? this.inFocusLabelClasses : null}
                             >
                                 {label}
@@ -252,13 +255,13 @@ class OptionsSelectVirtualized extends Component<Props, State> {
                     className={selectRootClasses}
                 >
                     <VirtualizedSelect
+                        ref={(select) => { this.yourSelect = select; }}
                         disabled={disabled}
                         options={this.options}
                         onChange={this.handleChange}
                         value={calculatedValue}
                         clearable={nullable}
-                        style={OptionsSelectVirtualized.defaultSelectStyle}
-                        menuContainerStyle={{ width: 'auto' }}
+                        style={selectStyle}
                         className={'virtualized-select'}
                         placeholder={useHintLabel ? label : ''}
                         maxHeight={maxHeight || 200}

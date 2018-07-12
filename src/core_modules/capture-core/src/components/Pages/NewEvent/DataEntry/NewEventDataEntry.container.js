@@ -1,6 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
+import i18n from '@dhis2/d2-i18n';
 import NewEventDataEntry from './NewEventDataEntry.component';
 import {
     startRunRulesOnUpdateForNewSingleEvent,
@@ -15,7 +16,6 @@ import {
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
-import i18n from '@dhis2/d2-i18n';
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
@@ -25,6 +25,7 @@ const makeMapStateToProps = () => {
         const formFoundation = formFoundationSelector(state);
 
         return {
+            formHorizontal: !!state.newEventPage.formHorizontal,
             ready: !state.newEventPage.dataEntryIsLoading,
             error: !formFoundation ?
                 i18n.t('This is not an event program or the metadata is corrupt. See log for details.') : null,

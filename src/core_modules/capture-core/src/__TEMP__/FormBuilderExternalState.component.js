@@ -9,6 +9,13 @@ const styles = () => ({
     fieldContainer: {
         position: 'relative',
     },
+    fieldHorizontalContainer: {
+        position: 'relative',
+        flexGrow: 1,
+    },
+    formBuilderHorizontalContainer: {
+        display: 'flex',
+    },
 });
 
 
@@ -43,6 +50,7 @@ type Props = {
     validationAttempted?: ?boolean,
     validateIfNoUIData?: ?boolean,
     classes: Object,
+    formHorizontal: ?boolean,
 };
 
 type FieldCommitOptions = {
@@ -211,9 +219,9 @@ class FormBuilder extends React.Component<Props> {
 
     render() {
         return (
-            <div>
+            <React.Fragment>
                 {this.renderFields()}
-            </div>
+            </React.Fragment>
         );
     }
 }

@@ -39,6 +39,8 @@ type Props = {
     onUpdateField: (value: any, uiState: Object, elementId: string, formBuilderId: string, formId: string) => void,
     formId: string,
     formBuilderId: string,
+    formHorizontal: boolean,
+    fieldOptions?: ?Object,
 };
 
 class D2SectionFields extends Component<Props> {
@@ -64,7 +66,7 @@ class D2SectionFields extends Component<Props> {
         // $FlowSuppress :does not recognize filter removing nulls
         return Array.from(elements.entries())
             .map(entry => entry[1])
-            .map(metaDataElement => buildField(metaDataElement))
+            .map(metaDataElement => buildField(metaDataElement, { formHorizontal: this.props.formHorizontal, ...this.props.fieldOptions }))
             .filter(field => field);
     }
 
@@ -155,22 +157,20 @@ class D2SectionFields extends Component<Props> {
     }
 
     render() {
-        const { fieldsMetaData, values, onUpdateField, formId, formBuilderId, ...passOnProps } = this.props;
+        const { fieldsMetaData, values, onUpdateField, formId, formBuilderId, fieldOptions, ...passOnProps } = this.props;
 
         this.buildRulesCompulsoryErrors();
 
         return (
-            <div>
-                <FormBuilderContainer
-                    innerRef={(instance) => { this.formBuilderInstance = instance; }}
-                    id={formBuilderId}
-                    fields={this.getFieldConfigWithRulesEffects()}
-                    values={values}
-                    onUpdateField={this.handleUpdateField}
-                    validateIfNoUIData
-                    {...passOnProps}
-                />
-            </div>
+            <FormBuilderContainer
+                innerRef={(instance) => { this.formBuilderInstance = instance; }}
+                id={formBuilderId}
+                fields={this.getFieldConfigWithRulesEffects()}
+                values={values}
+                onUpdateField={this.handleUpdateField}
+                validateIfNoUIData
+                {...passOnProps}
+            />
         );
     }
 }

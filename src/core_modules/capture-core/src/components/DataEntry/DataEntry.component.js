@@ -15,6 +15,11 @@ const styles = theme => ({
     button: {
         paddingRight: theme.spacing.unit * 2,
     },
+    horizontalContainer: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+    },
 });
 
 type FieldContainer = {
@@ -33,6 +38,7 @@ type Props = {
     completionAttempted?: ?boolean,
     saveAttempted?: ?boolean,
     classes: Object,
+    formHorizontal: ?boolean,
     onUpdateFieldInner: (
         action: ReduxAction<any, any>,
     ) => void,
@@ -61,6 +67,18 @@ class DataEntry extends React.Component<Props> {
 
     handleUpdateField(...args) {
         this.props.onUpdateFieldInner(...args, this.props.id, this.props.itemId, this.props.onUpdateFormField);
+    }
+
+    getClasses = () => {
+        const { classes, formHorizontal } = this.props;
+        if (formHorizontal) {
+            return {
+                ContainerClass: classes.horizontalContainer,
+                edgeFieldsClass: classes.horizontalEdgeFields,
+                formClass: classes.horizontalForm,
+            };
+        }
+        return {};
     }
 
     getFieldWithPlacement(placement: $Values<typeof placements>) {
@@ -102,23 +120,26 @@ class DataEntry extends React.Component<Props> {
                     {DataEntry.errorMessages.FORM_FOUNDATION_MISSING}
                 </div>
             );
-        }
+        }    
+        const directionClasses = this.getClasses();
 
         const topFields = this.getFieldWithPlacement(placements.TOP);
         const bottomFields = this.getFieldWithPlacement(placements.BOTTOM);
 
         return (
             <div>
-                {topFields}
-                <D2Form
-                    innerRef={(formInstance) => { this.formInstance = formInstance; }}
-                    formFoundation={formFoundation}
-                    id={getDataEntryKey(id, itemId)}
-                    validationAttempted={completionAttempted || saveAttempted}
-                    onUpdateField={this.handleUpdateField}
-                    {...passOnProps}
-                />
-                {bottomFields}
+                <div className={directionClasses.ContainerClass}>
+                    {topFields}
+                    <D2Form
+                        innerRef={(formInstance) => { this.formInstance = formInstance; }}
+                        formFoundation={formFoundation}
+                        id={getDataEntryKey(id, itemId)}
+                        validationAttempted={completionAttempted || saveAttempted}
+                        onUpdateField={this.handleUpdateField}
+                        {...passOnProps}
+                    />
+                    {bottomFields}
+                </div>
                 <div
                     className={classes.footerBar}
                 >

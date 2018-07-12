@@ -1,42 +1,59 @@
 // @flow
 import React, { Component } from 'react';
-
+import Tooltip from '@material-ui/core/Tooltip';
+import { withStyles } from '@material-ui/core/styles';
 import type { virtualizedOptionConfig } from './OptionsSelectVirtualized.component';
 
 type Props = {
     option: virtualizedOptionConfig,
     style: Object,
     onSelect: (selectedOption: virtualizedOptionConfig) => void,
-    currentlySelectedValues: ?Array<virtualizedOptionConfig>
+    currentlySelectedValues: ?Array<virtualizedOptionConfig>,
+    classes: { popper: string },
 };
+
+const styles = () => ({
+    popper: {
+        zIndex: 9999,
+    },
+});
 
 class OptionsSelectVirtualizedOption extends Component<Props> {
     static defaultContainerStyle = {
-        display: 'flex',
-        alignItems: 'center',
         cursor: 'pointer',
         paddingLeft: 5,
+        overflow: 'hidden',
+        paddingTop: 8,
+        whiteSpace: 'nowrap',
+        textOverflow: 'ellipsis',
     };
 
     static selectedStyle = {};
 
     render() {
-        const { option, style, onSelect, currentlySelectedValues } = this.props;
+        const { option, style, onSelect, currentlySelectedValues, classes } = this.props;
         const { label } = option;
         const renderStyle = Object.assign({}, OptionsSelectVirtualizedOption.defaultContainerStyle, style, currentlySelectedValues && currentlySelectedValues.includes(option) ? OptionsSelectVirtualizedOption.selectedStyle : null);
 
         return (
-            <div
-                className={'virtualized-select-option'}
-                style={renderStyle}
-                onClick={() => {
-                    onSelect(option);
-                }}
+            <Tooltip
+                title={option.label}
+                placement={'bottom'}
+                classes={{ popper: classes.popper }}
+                enterDelay={800}
             >
-                {label}
-            </div>
+                <div
+                    className={'virtualized-select-option'}
+                    style={renderStyle}
+                    onClick={() => {
+                        onSelect(option);
+                    }}
+                >
+                    {label}
+                </div>
+            </Tooltip>
         );
     }
 }
 
-export default OptionsSelectVirtualizedOption;
+export default withStyles(styles)(OptionsSelectVirtualizedOption);

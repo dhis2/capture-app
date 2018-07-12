@@ -28,7 +28,6 @@ import withRequiredFieldCalculation from './withRequiredFieldCalculation';
 
 import type { Field } from '../../../__TEMP__/FormBuilderExternalState.component';
 
-
 const commitEvents = {
     ON_BLUR: 'onBlur',
 };
@@ -47,8 +46,18 @@ const getBaseFieldProps = (metaData: MetaDataElement) => ({
     commitEvent: commitEvents.ON_BLUR,
 });
 
-const createComponentProps = (componentProps: Object) => ({
+const getBaseFormHorizontalProps = (options: Object) => {
+    const pxToRem = options.theme.typography.pxToRem;
+    return {
+        style: {
+            width: pxToRem(150),
+        },
+    };
+};
+
+const createComponentProps = (componentProps: Object, options: Object) => ({
     ...getBaseComponentProps(),
+    ...(options && options.formHorizontal ? getBaseFormHorizontalProps(options) : {}),
     ...componentProps,
 });
 
@@ -57,12 +66,13 @@ const createFieldProps = (fieldProps: Object, metaData: MetaDataElement) => ({
     ...fieldProps,
 });
 
-const getBaseTextField = (metaData: MetaDataElement) => {
+const getBaseTextField = (metaData: MetaDataElement, options: Object) => {
+
     const props = createComponentProps({
         label: metaData.formName,
         multiline: false,
         metaCompulsory: metaData.compulsory,
-    });
+    }, options);
 
     return createFieldProps({
         id: metaData.id,
@@ -85,22 +95,22 @@ const getBaseTextField = (metaData: MetaDataElement) => {
 };
 
 const fieldForTypes = {
-    [elementTypes.TEXT]: (metaData: MetaDataElement) => getBaseTextField(metaData),
-    [elementTypes.LONG_TEXT]: (metaData: MetaDataElement) => {
-        const baseField = getBaseTextField(metaData);
+    [elementTypes.TEXT]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
+    [elementTypes.LONG_TEXT]: (metaData: MetaDataElement, options: Object) => {
+        const baseField = getBaseTextField(metaData, options);
         const props = { ...baseField.props, multiLine: true };
         return { ...baseField, props };
     },
-    [elementTypes.NUMBER]: (metaData: MetaDataElement) => getBaseTextField(metaData),
-    [elementTypes.INTEGER]: (metaData: MetaDataElement) => getBaseTextField(metaData),
-    [elementTypes.INTEGER_POSITIVE]: (metaData: MetaDataElement) => getBaseTextField(metaData),
-    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: (metaData: MetaDataElement) => getBaseTextField(metaData),
-    [elementTypes.BOOLEAN]: (metaData: MetaDataElement) => {
+    [elementTypes.NUMBER]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
+    [elementTypes.INTEGER]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
+    [elementTypes.INTEGER_POSITIVE]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
+    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
+    [elementTypes.BOOLEAN]: (metaData: MetaDataElement, options: Object) => {
         const props = createComponentProps({
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
             nullable: !metaData.compulsory,
-        });
+        }, options);
 
         return createFieldProps({
             id: metaData.id,
@@ -119,11 +129,11 @@ const fieldForTypes = {
             props,
         }, metaData);
     },
-    [elementTypes.TRUE_ONLY]: (metaData: MetaDataElement) => {
+    [elementTypes.TRUE_ONLY]: (metaData: MetaDataElement, options: Object) => {
         const props = createComponentProps({
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
-        });
+        }, options);
 
         return createFieldProps({
             id: metaData.id,
@@ -142,12 +152,13 @@ const fieldForTypes = {
             props,
         }, metaData);
     },
-    [elementTypes.DATE]: (metaData: MetaDataElement) => {
+    [elementTypes.DATE]: (metaData: MetaDataElement, options: Object) => {
         const props = createComponentProps({
-            width: 350,
+            width: options.formHorizontal ? 150 : 350,
+            calendarWidth: 350,
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
-        });
+        }, options);
 
         return createFieldProps({
             id: metaData.id,
@@ -168,13 +179,13 @@ const fieldForTypes = {
             props,
         }, metaData);
     },
-    [elementTypes.DATETIME]: (metaData: MetaDataElement) => {
+    [elementTypes.DATETIME]: (metaData: MetaDataElement, options: Object) => {
         const props = createComponentProps({
             dateWidth: 200,
             calendarWidth: 350,
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
-        });
+        }, options);
 
         return createFieldProps({
             id: metaData.id,
@@ -195,10 +206,10 @@ const fieldForTypes = {
             props,
         }, metaData);
     },
-    [elementTypes.TIME]: (metaData: MetaDataElement) => getBaseTextField(metaData),
-    [elementTypes.PERCENTAGE]: (metaData: MetaDataElement) => getBaseTextField(metaData),
-    [elementTypes.URL]: (metaData: MetaDataElement) => getBaseTextField(metaData),
-    [elementTypes.UNKNOWN]: (metaData: MetaDataElement) => null, // eslint-disable-line no-unused-vars
+    [elementTypes.TIME]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
+    [elementTypes.PERCENTAGE]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
+    [elementTypes.URL]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
+    [elementTypes.UNKNOWN]: (metaData: MetaDataElement, options: Object) => null, // eslint-disable-line no-unused-vars
 };
 
 const getOptionSetComponent = (inputType: $Values<typeof optionSetInputTypes>) => {
@@ -235,13 +246,17 @@ const getOptionSetComponent = (inputType: $Values<typeof optionSetInputTypes>) =
     );
 };
 
-const optionSetField = (metaData: MetaDataElement) => {
+const optionSetField = (metaData: MetaDataElement, options: Object) => {
+    const pxToRem = options.theme.typography.pxToRem;
     const props = createComponentProps({
         label: metaData.formName,
         optionSet: metaData.optionSet,
         nullable: !metaData.compulsory,
         required: metaData.compulsory,
-    });
+        style: {
+            width: options.formHorizontal ? pxToRem(210) : '100%',
+        },
+    }, options);
 
     return createFieldProps({
         id: metaData.id,
@@ -252,16 +267,16 @@ const optionSetField = (metaData: MetaDataElement) => {
     }, metaData);
 };
 
-export default function buildField(metaData: MetaDataElement): ?Field {
+export default function buildField(metaData: MetaDataElement, options: Object): ?Field {
     const type = metaData.type;
     if (!fieldForTypes[type]) {
         log.warn(errorCreator(errorMessages.NO_FORMFIELD_FOR_TYPE)({ metaData }));
-        return fieldForTypes[elementTypes.UNKNOWN](metaData);
+        return fieldForTypes[elementTypes.UNKNOWN](metaData, options);
     }
 
     if (metaData.optionSet) {
-        return optionSetField(metaData);
+        return optionSetField(metaData, options);
     }
 
-    return fieldForTypes[type](metaData);
+    return fieldForTypes[type](metaData, options);
 }
