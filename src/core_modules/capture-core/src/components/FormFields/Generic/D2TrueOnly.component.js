@@ -24,7 +24,7 @@ type Props = {
 
 class D2TrueOnly extends Component<Props> {
     handleChange: (e: Object, checked: boolean) => void;
-    materialUIContainerInstance: any;
+    materialUIContainerInstance: ?HTMLDivElement;
     labelClasses: Object;
 
     constructor(props: Props) {
@@ -71,7 +71,7 @@ class D2TrueOnly extends Component<Props> {
                             return (
                                 <FormLabel
                                     component="label"
-                                    required={required}
+                                    required={!!required}
                                     classes={this.labelClasses}
                                     focused={false}
                                 >
@@ -82,6 +82,7 @@ class D2TrueOnly extends Component<Props> {
                     }
                     <FormGroup>
                         <FormControlLabel
+                            label=""
                             control={
                                 <Switch
                                     {...passOnProps}

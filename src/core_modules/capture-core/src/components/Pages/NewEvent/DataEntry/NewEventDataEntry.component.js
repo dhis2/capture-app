@@ -18,6 +18,7 @@ import withDefaultFieldContainer from '../../../../components/DataEntry/dataEntr
 import withDefaultChangeHandler from '../../../../components/DataEntry/dataEntryField/withDefaultChangeHandler';
 import withDefaultShouldUpdateInterface from
     '../../../../components/DataEntry/dataEntryField/withDefaultShouldUpdateInterface';
+import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -100,6 +101,7 @@ type Props = {
     programName: string,
     orgUnitName: string,
     onUpdateField: (innerAction: ReduxAction<any, any>) => void,
+    onStartAsyncUpdateField: Object,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onCancel: () => void,
     classes: {
@@ -110,6 +112,9 @@ type Props = {
 };
 
 class NewEventDataEntry extends Component<Props> {
+    componentWillUnmount() {
+        inMemoryFileStore.clear();
+    }
     getSavingText() {
         const { classes, orgUnitName, programName } = this.props;
         const firstPart = `${i18n.t('Saving to')} `;
@@ -136,6 +141,7 @@ class NewEventDataEntry extends Component<Props> {
         const {
             formFoundation,
             onUpdateField,
+            onStartAsyncUpdateField,
             onSave,
             onCancel,
             programName, // eslint-disable-line
@@ -149,6 +155,7 @@ class NewEventDataEntry extends Component<Props> {
                         id={'singleEvent'}
                         formFoundation={formFoundation}
                         onUpdateFormField={onUpdateField}
+                        onUpdateFormFieldAsync={onStartAsyncUpdateField}
                         onCancel={onCancel}
                         onSave={onSave}
                     />

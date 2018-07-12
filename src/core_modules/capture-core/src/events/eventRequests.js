@@ -5,6 +5,7 @@ import programCollection from '../metaDataMemoryStores/programCollection/program
 import errorCreator from '../utils/errorCreator';
 import { convertValue } from '../converters/serverToClient';
 import elementTypes from '../metaData/DataElement/elementTypes';
+import { getSubValues } from './getSubValues';
 
 type ApiDataValue = {
     dataElement: string,
@@ -29,7 +30,7 @@ type ApiTEIEvent = {
 
 export type ClientEventContainer = {
     id: string,
-    event: Event,
+    event: CaptureClientEvent,
     values: { [key: string]: any },
 };
 
@@ -67,7 +68,7 @@ function getConvertedValue(valueToConvert: any, inputKey: string) {
     }
     return convertedValue;
 }
-function convertMainProperties(apiEvent: ApiTEIEvent): Event {
+function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
     return Object
         .keys(apiEvent)
         .reduce((accEvent, inputKey) => {
@@ -83,7 +84,7 @@ function convertMainProperties(apiEvent: ApiTEIEvent): Event {
         }, {});
 }
 
-function convertToClientEvent(event: ApiTEIEvent) {
+async function convertToClientEvent(event: ApiTEIEvent) {
     const programMetaData = programCollection.get(event.program);
     if (!programMetaData) {
         log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ fn: 'convertToClientEvent', event }));
@@ -99,6 +100,7 @@ function convertToClientEvent(event: ApiTEIEvent) {
 
     const dataValuesById = getValuesById(event.dataValues);
     const convertedDataValues = stageMetaData.convertValues(dataValuesById, convertValue);
+    await getSubValues(event.event, stageMetaData, convertedDataValues);
 
     const convertedMainProperties = convertMainProperties(event);
 
@@ -114,6 +116,7 @@ export async function getEvent(eventId: string): Promise<?ClientEventContainer> 
     const apiRes = await api
         .get(`events/${eventId}`);
 
+
     const eventContainer = convertToClientEvent(apiRes);
     return eventContainer;
 }
@@ -123,13 +126,14 @@ export async function getEvents(queryParams: ?Object) {
     const apiRes = await api
         .get('events', { ...queryParams, totalPages: true });
 
-    const eventContainers = apiRes && apiRes.events ? apiRes.events.reduce((accEvents, apiEvent) => {
-        const eventContainer = convertToClientEvent(apiEvent);
+    const eventContainers = apiRes && apiRes.events ? await apiRes.events.reduce(async (accEventsPromise, apiEvent) => {
+        const accEvents = await accEventsPromise;
+        const eventContainer = await convertToClientEvent(apiEvent);
         if (eventContainer) {
             accEvents.push(eventContainer);
         }
         return accEvents;
-    }, []) : null;
+    }, Promise.resolve([])) : null;
 
     const pagingData = {
         rowsCount: apiRes.pager.total,

@@ -89,11 +89,22 @@ const getProductionReducer =
         (state: any, action: Action) =>
             updateStatePartInProduction(state, action, reducerDescription.updaters, reducerDescription.initValue);
 
+const createLogAction = (action: Action) => {
+    const payloadOverride = action.meta && action.meta.skipLogging && action.meta.skipLogging.reduce((accSkipLogging, item) => {
+        accSkipLogging[item] = null;
+        return accSkipLogging;
+    }, {});
+
+    return { ...action, payload: { ...action.payload, ...payloadOverride } };
+};
+
+
 const getDevelopmentReducer = (reducerDescription: ReducerDescription) => {
     const updaterFoundFn = getUpdaterFoundFn(reducerDescription);
     const updaterExecutedFn = getUpdaterExecutedFn(reducerDescription);
     return (state: any, action: Action) => {
-        log.trace(`reducer ${reducerDescription.name} starting. Action is: ${JSON.stringify(action)}`);
+        const logAction = createLogAction(action);
+        log.trace(`reducer ${reducerDescription.name} starting. Action is: ${JSON.stringify(logAction)}`);
         const newState =
             updateStatePartInDevelopment(
                 state,

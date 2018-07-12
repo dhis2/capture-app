@@ -16,6 +16,7 @@ import withDefaultFieldContainer from '../../../../components/DataEntry/dataEntr
 import withDefaultChangeHandler from '../../../../components/DataEntry/dataEntryField/withDefaultChangeHandler';
 import withDefaultShouldUpdateInterface from
     '../../../../components/DataEntry/dataEntryField/withDefaultShouldUpdateInterface';
+import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
 
 const getStyles = () => ({
 });
@@ -84,17 +85,22 @@ const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry
 type Props = {
     formFoundation: ?RenderFoundation,
     onUpdateField: (innerAction: ReduxAction<any, any>) => void,
+    onStartAsyncUpdateField: Object,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onCancel: () => void,
 };
 
 class NewEventDataEntry extends Component<Props> {
+    componentWillUnmount() {
+        inMemoryFileStore.clear();
+    }
     render() {
         const {
             formFoundation,
             onUpdateField,
             onSave,
             onCancel,
+            onStartAsyncUpdateField,
         } = this.props;
         return (
             <div>
@@ -103,6 +109,7 @@ class NewEventDataEntry extends Component<Props> {
                         id={'singleEvent'}
                         formFoundation={formFoundation}
                         onUpdateFormField={onUpdateField}
+                        onUpdateFormFieldAsync={onStartAsyncUpdateField}
                         onCancel={onCancel}
                         onSave={onSave}
                     />

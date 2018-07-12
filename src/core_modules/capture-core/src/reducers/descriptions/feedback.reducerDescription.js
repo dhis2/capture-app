@@ -74,5 +74,7 @@ export const feedbackDesc = createReducerDescription({
         ...state,
         getErrorFeedback(action.payload),
     ],
+    [dataEntryActionTypes.ASYNC_UPDATE_FIELD_FAILED]: (state, action) =>
+        addErrorFeedback(state, action.payload.message),
 }, 'feedbacks', []);
 

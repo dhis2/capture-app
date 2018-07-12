@@ -4,7 +4,7 @@
 */
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import EventsListConnectivityWrapper from './EventsListConnectionWrapper/EventsListConnectivityWrapper.container';
+import EventsListConnectivityWrapper from './EventsListConnectivityWrapper/EventsListConnectivityWrapper.container';
 
 const getStyles = () => ({
     listContainer: {

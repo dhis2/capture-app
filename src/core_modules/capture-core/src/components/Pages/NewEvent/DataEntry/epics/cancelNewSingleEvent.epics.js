@@ -17,7 +17,7 @@ export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) 
                 return cancelNewEventUpdateWorkingList();
             }
             const currentSelections = state.currentSelections;
-            if (!isSelectionsEqual(currentSelections, listSelections)) {
+            if (currentSelections.complete && !isSelectionsEqual(listSelections, currentSelections)) {
                 return cancelNewEventUpdateWorkingList();
             }
             return cancelNewEventNoWorkingListUpdateNeeded();
