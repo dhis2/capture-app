@@ -96,7 +96,6 @@ class UsernameAutosuggest extends React.Component {
   componentDidMount() {
     getApi().get('users?fields=name,id,userCredentials[username]')
       .then((response: any) => {
-        console.log(response.users)
         this.setState({
           users: response.users
         })
