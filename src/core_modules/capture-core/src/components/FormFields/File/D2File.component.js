@@ -2,6 +2,7 @@
 import CheckIcon from '@material-ui/icons/Check';
 import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
+import InputLabel from '@material-ui/core/InputLabel';
 import i18n from '@dhis2/d2-i18n';
 import BorderBox from '../../BorderBox/BorderBox.component';
 import Button from '../../Buttons/Button.component';
@@ -12,45 +13,66 @@ import inMemoryFileStore from '../../DataEntry/file/inMemoryFileStore';
 type Props = {
     label?: ?string,
     value: ?{ value: string, name: string, url?: ?string },
+    disabled?: ?boolean,
+    required?: ?boolean,
     classes: {
-        fileContainer: string,
-        fileInputContainer: string,
-        fileInputItemIcon: string,
-        fileInputItem: string,
-        fileInputDeleteButton: string,
-        fileInput: string,
-        fileLoadingProgress: string,
+        horizontalLabel: string,
+        outerContainer: string,
+        container: string,
+        inputContainer: string,
+        inputItemIcon: string,
+        inputItem: string,
+        input: string,
+        loadingProgress: string,
+        horizontalSelectButton: string,
+        horizontalDeleteButton: string,
+        verticalDeleteButton: string,
     },
     onCommitAsync: (callback: Function) => void,
     onBlur: (value: ?Object) => void,
     onUpdateAsyncUIState: (uiStateToAdd: Object) => void,
     asyncUIState: { loading?: ?boolean },
+    formHorizontal?: ?boolean,
 }
 
-const styles = (theme: Theme) => ({
-    fileContainer: {
+const styles = theme => ({
+    horizontalLabel: theme.typography.formFieldTitle,
+    outerContainer: {
         display: 'flex',
         flexDirection: 'column',
     },
-    fileInputContainer: {
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    inputContainer: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
     },
-    fileInputItemIcon: {
+    inputItemIcon: {
         color: theme.palette.success[700],
     },
-    fileInputItem: {
+    inputItem: {
         marginRight: theme.typography.pxToRem(10),
     },
-    fileInputDeleteButton: {
+    verticalDeleteButton: {
         margin: theme.typography.pxToRem(8),
         color: theme.palette.error.main,
     },
-    fileLoadingProgress: {
+    horizontalDeleteButton: {
+        margin: theme.typography.pxToRem(4),
+        minHeight: theme.typography.pxToRem(28),
+        color: theme.palette.error.main,
+    },
+    horizontalSelectButton: {
+        margin: theme.typography.pxToRem(4),
+        minHeight: theme.typography.pxToRem(28),
+    },
+    loadingProgress: {
         marginRight: theme.typography.pxToRem(10),
     },
-    fileInput: {
+    input: {
         display: 'none',
     },
 });
@@ -95,19 +117,52 @@ class D2File extends Component<Props> {
         return null;
     }
 
-    render() {
-        const { label, value, classes, asyncUIState } = this.props;
+    renderHorizontal = () => {
+        const classes = this.props.classes;
+        const contentClasses = {
+            label: classes.horizontalLabel,
+            selectButton: classes.horizontalSelectButton,
+            deleteButton: classes.horizontalDeleteButton,
+        };
+        const sizes = {
+            button: 'small',
+            progress: 30,
+        };
+        return this.renderContent(contentClasses, sizes);
+    }
+
+    renderVertical = () => {
+        const classes = this.props.classes;
+        const contentClasses = {
+            deleteButton: classes.verticalDeleteButton,
+        };
+        const sizes = {
+            button: 'medium',
+            progress: 40,
+        };
+        return (
+            <BorderBox>
+                {this.renderContent(contentClasses, sizes)}
+            </BorderBox>
+        );
+    }
+
+    renderContent = (contentClasses: Object, sizes: Object) => {
+        const { label, value, classes, asyncUIState, disabled, required } = this.props;
         const isUploading = asyncUIState && asyncUIState.loading;
         const fileUrl = this.getFileUrl();
         return (
-            <BorderBox>
-                <div className={classes.fileContainer}>
-                    <div>
-                        {label || ''}
-                    </div>
-
+            <div className={classes.outerContainer}>
+                <InputLabel
+                    classes={{ root: contentClasses.label }}
+                    disabled={!!disabled}
+                    required={!!required}
+                >
+                    {label}
+                </InputLabel>
+                <div className={classes.container}>
                     <input
-                        className={classes.fileInput}
+                        className={classes.input}
                         type="file"
                         ref={(hiddenFileSelector) => {
                             this.hiddenFileSelectorRef = hiddenFileSelector;
@@ -118,15 +173,15 @@ class D2File extends Component<Props> {
                         (() => {
                             if (isUploading) {
                                 return (
-                                    <div className={classes.fileInputContainer}>
-                                        <LoadingMask className={classes.fileLoadingProgress} size={40} />
-                                        <div className={classes.fileInputItem}>{i18n.t('Uploading file')}</div>
+                                    <div className={classes.inputContainer}>
+                                        <LoadingMask className={classes.loadingProgress} size={sizes.progress} />
+                                        <div className={classes.inputItem}>{i18n.t('Uploading file')}</div>
                                     </div>);
                             } else if (value) {
                                 return (
-                                    <div className={classes.fileInputContainer}>
-                                        <CheckIcon className={classes.fileInputItemIcon} />
-                                        <div className={classes.fileInputItem}>
+                                    <div className={classes.inputContainer}>
+                                        <CheckIcon className={classes.inputItemIcon} />
+                                        <div className={classes.inputItem}>
                                             <a
                                                 download={value.name}
                                                 target="_blank"
@@ -136,10 +191,11 @@ class D2File extends Component<Props> {
                                             </a>
                                             {` ${i18n.t('selected')}.`}
                                         </div>
-                                        <div className={classes.fileInputItem}>
+                                        <div className={classes.inputItem}>
                                             <Button
+                                                size={sizes.button}
                                                 onClick={this.handleRemoveClick}
-                                                className={classes.fileInputDeleteButton}
+                                                className={contentClasses.deleteButton}
                                             >
                                                 {i18n.t('Delete')}
                                             </Button>
@@ -148,9 +204,11 @@ class D2File extends Component<Props> {
                                 );
                             }
                             return (
-                                <div className={classes.fileInputContainer}>
-                                    <div className={classes.fileInputItem}>
+                                <div className={classes.inputContainer}>
+                                    <div className={classes.inputItem}>
                                         <Button
+                                            size={sizes.button}
+                                            className={contentClasses.selectButton}
                                             onClick={this.handleButtonClick}
                                             color="primary"
                                         >
@@ -163,8 +221,13 @@ class D2File extends Component<Props> {
                         })()
                     }
                 </div>
-            </BorderBox>
+            </div>
         );
+    }
+
+
+    render() {
+        return this.props.formHorizontal ? this.renderHorizontal() : this.renderVertical();
     }
 }
 

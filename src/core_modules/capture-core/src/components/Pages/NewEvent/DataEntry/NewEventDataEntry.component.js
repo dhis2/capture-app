@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, withTheme } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import InfoIcon from '@material-ui/icons/InfoOutline';
 import i18n from '@dhis2/d2-i18n';
 import DataEntry from '../../../../components/DataEntry/DataEntry.container';
@@ -18,20 +19,30 @@ import withDefaultFieldContainer from '../../../../components/DataEntry/dataEntr
 import withDefaultChangeHandler from '../../../../components/DataEntry/dataEntryField/withDefaultChangeHandler';
 import withDefaultShouldUpdateInterface from
     '../../../../components/DataEntry/dataEntryField/withDefaultShouldUpdateInterface';
+
 import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
 
 const getStyles = theme => ({
     savingContextContainer: {
-        paddingTop: 10,
+        paddingTop: theme.typography.pxToRem(10),
         display: 'flex',
         alignItems: 'center',
         color: theme.palette.text.hint,
     },
     savingContextText: {
-        paddingLeft: 5,
+        paddingLeft: theme.typography.pxToRem(10),
     },
     savingContextNames: {
         fontWeight: 'bold',
+    },
+    topButtonsContainer: {
+        display: 'flex',
+        flexFlow: 'row-reverse',
+    },
+    horizontalPaper: {
+        padding: theme.typography.pxToRem(10),
+        paddingTop: theme.typography.pxToRem(20),
+        paddingBottom: theme.typography.pxToRem(15),
     },
 });
 
@@ -52,10 +63,11 @@ const buildReportDateSettingsFn = () => {
         ),
     );
 
-    const reportDateSettings = () => ({
+    const reportDateSettings = (props: Object) => ({
         component: reportDateComponent,
         componentProps: {
-            width: 350,
+            width: props && props.formHorizontal ? 150 : 350,
+            calendarWidth: 350,
             label: 'Report date',
             required: true,
         },
@@ -108,10 +120,21 @@ type Props = {
         savingContextContainer: string,
         savingContextText: string,
         savingContextNames: string,
+        topButtonsContainer: string,
+        horizontalPaper: string,
     },
+    theme: Theme,
+    formHorizontal: ?boolean,
 };
 
 class NewEventDataEntry extends Component<Props> {
+    fieldOptions: {theme: Theme };
+
+    constructor(props: Props) {
+        super(props);
+        this.fieldOptions = { theme: props.theme };
+    }
+
     componentWillUnmount() {
         inMemoryFileStore.clear();
     }
@@ -137,7 +160,20 @@ class NewEventDataEntry extends Component<Props> {
             </span>
         );
     }
-    render() {
+    renderHorizontal = () => {
+        const classes = this.props.classes;
+        return (
+            <Paper
+                className={classes.horizontalPaper}
+            >
+                {this.renderContent()}
+            </Paper>
+        );
+    }
+
+    renderVertical = () => this.renderContent();
+
+    renderContent = () => {
         const {
             formFoundation,
             onUpdateField,
@@ -147,6 +183,7 @@ class NewEventDataEntry extends Component<Props> {
             programName, // eslint-disable-line
             orgUnitName, // eslint-disable-line
             classes,
+            formHorizontal,
         } = this.props;
         return (
             <div>
@@ -158,6 +195,8 @@ class NewEventDataEntry extends Component<Props> {
                         onUpdateFormFieldAsync={onStartAsyncUpdateField}
                         onCancel={onCancel}
                         onSave={onSave}
+                        formHorizontal={formHorizontal}
+                        fieldOptions={this.fieldOptions}
                     />
                 </div>
                 <div
@@ -173,7 +212,12 @@ class NewEventDataEntry extends Component<Props> {
             </div>
         );
     }
+
+
+    render() {
+        return this.props.formHorizontal ? this.renderHorizontal() : this.renderVertical();
+    }
 }
 
 
-export default withStyles(getStyles)(NewEventDataEntry);
+export default withStyles(getStyles)(withTheme()(NewEventDataEntry));
