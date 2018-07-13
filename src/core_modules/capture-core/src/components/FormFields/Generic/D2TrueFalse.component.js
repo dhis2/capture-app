@@ -21,7 +21,6 @@ class D2TrueFalse extends Component<Props> {
         return optionSet;
     }
 
-    fieldInstance: SingleSelectBoxes;
     optionSet: OptionSet;
 
     constructor(props: Props) {
@@ -37,7 +36,6 @@ class D2TrueFalse extends Component<Props> {
                 <SingleSelectBoxes
                     {...passOnProps}
                     optionSet={this.optionSet}
-                    ref={((instance) => { this.fieldInstance = instance; })}
                 />
             </div>
         );

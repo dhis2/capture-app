@@ -28,6 +28,7 @@ export const actionTypes = {
     START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE: 'CancelUpdateForSingleEventReturnToMainPage',
     NO_WORKING_LIST_UPDATE_NEEDED_AFTER_CANCEL_UPDATE: 'NoWorkingListUpdateNeededAfterEventUpdateCancelled',
     UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE: 'UpdateWorkingListAfterEventUpdateCancelled',
+    START_ASYNC_UPDATE_FIELD_FOR_EDIT_EVENT: 'StartAsyncUpdateFieldForEditEvent',
 };
 
 export const editEventIds = {
@@ -103,7 +104,7 @@ export const startRunRulesOnUpdateForEditSingleEvent = (actionData: { payload: O
     actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)(actionData);
 
 export const requestSaveReturnToMainPage = (itemId: string, dataEntryId: string, formFoundation: Object) =>
-    actionCreator(actionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)({ itemId, dataEntryId, formFoundation });
+    actionCreator(actionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)({ itemId, dataEntryId, formFoundation }, { skipLogging: ['formFoundation'] });
 
 export const startSaveEditEventAfterReturnedToMainPage = (eventId: string, serverData: Object, selections: Object) =>
     actionCreator(actionTypes.START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE)({ selections }, {
@@ -126,3 +127,23 @@ export const noWorkingListUpdateNeededAfterUpdateCancelled = () =>
 
 export const updateWorkingListAfterUpdateCancelled = () =>
     actionCreator(actionTypes.UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE)();
+
+export const startAsyncUpdateFieldForEditEvent =
+    (
+        fieldId: string,
+        fieldLabel: string,
+        formBuilderId: string,
+        formId: string,
+        callback: Function,
+        dataEntryId: string,
+        itemId: string,
+    ) =>
+        actionCreator(actionTypes.START_ASYNC_UPDATE_FIELD_FOR_EDIT_EVENT)({
+            fieldId,
+            fieldLabel,
+            formBuilderId,
+            formId,
+            callback,
+            dataEntryId,
+            itemId,
+        });

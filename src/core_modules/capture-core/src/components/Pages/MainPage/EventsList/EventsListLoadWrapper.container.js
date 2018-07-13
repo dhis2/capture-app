@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import EventsList from './EventsList.container';
+import EventsListWrapper from './ListWrapper/EventsListWrapper.container';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
 
@@ -12,7 +12,7 @@ const mapStateToProps = (state: ReduxState) => ({
 export default connect(mapStateToProps)(
     withLoadingIndicator()(
         withErrorMessageHandler()(
-            EventsList,
+            EventsListWrapper,
         ),
     ),
 );

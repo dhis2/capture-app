@@ -7,6 +7,8 @@ import TrueFalse from '../../FormFields/Generic/D2TrueFalse.component';
 import TrueOnly from '../../FormFields/Generic/D2TrueOnly.component';
 import D2Date from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import D2DateTime from '../../FormFields/DateAndTime/D2DateTime/D2DateTime.component';
+import D2File from '../../FormFields/File/D2File.component';
+import D2Image from '../../FormFields/Image/D2Image.component';
 
 import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
 import OptionsSelect from '../../FormFields/Options/SelectVirtualized/OptionsSelectVirtualized.component';
@@ -18,7 +20,7 @@ import MetaDataElement from '../../../metaData/DataElement/DataElement';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 import { inputTypes as optionSetInputTypes } from '../../../metaData/OptionSet/optionSet.const';
 
-import withDefaultChangeHandler from './withDefaultChangeHandler';
+import withInternalChangeHandler from '../../FormFields/withInternalChangeHandler';
 import withDefaultShouldUpdateInterface from './withDefaultShouldUpdateInterface';
 import withDefaultFieldContainer from './withDefaultFieldContainer';
 import withDefaultMessages from './withDefaultMessages';
@@ -73,7 +75,7 @@ const getBaseTextField = (metaData: MetaDataElement) => {
                         withRequiredFieldCalculation()(
                             withDefaultFieldContainer()(
                                 withDefaultMessages()(
-                                    withDefaultChangeHandler()(TextField),
+                                    withInternalChangeHandler()(TextField),
                                 ),
                             ),
                         ),
@@ -94,6 +96,7 @@ const fieldForTypes = {
     [elementTypes.NUMBER]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.INTEGER]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.INTEGER_POSITIVE]: (metaData: MetaDataElement) => getBaseTextField(metaData),
+    [elementTypes.INTEGER_NEGATIVE]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.BOOLEAN]: (metaData: MetaDataElement) => {
         const props = createComponentProps({
@@ -158,7 +161,7 @@ const fieldForTypes = {
                             withRequiredFieldCalculation()(
                                 withDefaultFieldContainer()(
                                     withDefaultMessages()(
-                                        withDefaultChangeHandler()(D2Date),
+                                        withInternalChangeHandler()(D2Date),
                                     ),
                                 ),
                             ),
@@ -185,7 +188,7 @@ const fieldForTypes = {
                             withRequiredFieldCalculation()(
                                 withDefaultFieldContainer()(
                                     withDefaultMessages()(
-                                        withDefaultChangeHandler()(D2DateTime),
+                                        withInternalChangeHandler()(D2DateTime),
                                     ),
                                 ),
                             ),
@@ -198,6 +201,56 @@ const fieldForTypes = {
     [elementTypes.TIME]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.PERCENTAGE]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.URL]: (metaData: MetaDataElement) => getBaseTextField(metaData),
+    [elementTypes.FILE_RESOURCE]: (metaData: MetaDataElement) => {
+        const props = createComponentProps({
+            label: metaData.formName,
+            metaCompulsory: metaData.compulsory,
+            async: true,
+        });
+        return createFieldProps({
+            id: metaData.id,
+            component:
+                withGotoInterface()(
+                    withHideCompatibility()(
+                        withDefaultShouldUpdateInterface()(
+                            withRequiredFieldCalculation()(
+                                withDefaultFieldContainer()(
+                                    withDefaultMessages()(
+                                        withInternalChangeHandler()(D2File),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            props,
+        }, metaData);
+    },
+    [elementTypes.IMAGE]: (metaData: MetaDataElement) => {
+        const props = createComponentProps({
+            label: metaData.formName,
+            metaCompulsory: metaData.compulsory,
+            async: true,
+        });
+        return createFieldProps({
+            id: metaData.id,
+            component:
+                withGotoInterface()(
+                    withHideCompatibility()(
+                        withDefaultShouldUpdateInterface()(
+                            withRequiredFieldCalculation()(
+                                withDefaultFieldContainer()(
+                                    withDefaultMessages()(
+                                        withInternalChangeHandler()(D2Image),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            props,
+        }, metaData);
+    },
     [elementTypes.UNKNOWN]: (metaData: MetaDataElement) => null, // eslint-disable-line no-unused-vars
 };
 

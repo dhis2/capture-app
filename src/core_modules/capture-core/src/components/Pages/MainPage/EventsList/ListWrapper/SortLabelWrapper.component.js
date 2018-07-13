@@ -4,10 +4,10 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import Icon from '@material-ui/core/Icon';
 
-import getTableComponents from '../../../DataTable/d2Ui/getTableComponents';
-import sortLabelAdapter from '../../../DataTable/d2UiReactAdapters/sortLabel.adapter'; 
+import getTableComponents from '../../../../DataTable/d2Ui/getTableComponents';
+import sortLabelAdapter from '../../../../DataTable/d2UiReactAdapters/sortLabel.adapter'; 
 
-import { directions } from '../../../DataTable/d2UiReactAdapters/componentGetters/sortLabel.const';
+import { directions } from '../../../../DataTable/d2UiReactAdapters/componentGetters/sortLabel.const';
 
 // $FlowSuppress
 const { SortLabel } = getTableComponents(sortLabelAdapter);

@@ -201,7 +201,7 @@ class OrgUnitSelector extends Component<Props> {
         return (
             <div>
                 <Paper elevation={1} className={this.props.classes.paper}>
-                    <h4 className={this.props.classes.title}>{ i18n.t('Registering Oraginastion Unit') }</h4>
+                    <h4 className={this.props.classes.title}>{ i18n.t('Registering Organisation Unit') }</h4>
                     <div className={this.props.classes.orgunitTree}>
                         <OrgUnitTreeMultipleRoots
                             roots={this.state.roots}

@@ -1,28 +1,30 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator';
 
 import classNames from 'classnames';
 
 import i18n from '@dhis2/d2-i18n';
-import elementTypes from '../../../../metaData/DataElement/elementTypes';
+import elementTypes from '../../../../../metaData/DataElement/elementTypes';
 
-import getTableComponents from '../../../d2Ui/dataTable/getTableComponents';
-import basicTableAdapter from '../../../d2UiReactAdapters/dataTable/basicTable.adapter';
-import paginationAdapter from '../../../d2UiReactAdapters/dataTable/pagination.adapter';
+import getTableComponents from '../../../../d2Ui/dataTable/getTableComponents';
+import basicTableAdapter from '../../../../d2UiReactAdapters/dataTable/basicTable.adapter';
+import paginationAdapter from '../../../../d2UiReactAdapters/dataTable/pagination.adapter';
 
-import withData from './Pagination/withData';
-import withNavigation from '../../../Pagination/withDefaultNavigation';
-import withRowsPerPageSelector from '../../../Pagination/withRowsPerPageSelector';
-import SortLabelWrapper from '../../../DataTable/SortLabelWrapper.component';
-import { directions, placements } from '../../../d2UiReactAdapters/dataTable/componentGetters/sortLabel.const';
-import ColumnSelector from '../../../ColumnSelector/ColumnSelector.container';
+import withData from '../Pagination/withData';
+import withNavigation from '../../../../Pagination/withDefaultNavigation';
+import withRowsPerPageSelector from '../../../../Pagination/withRowsPerPageSelector';
+import SortLabelWrapper from '../../../../DataTable/SortLabelWrapper.component';
+import { directions, placements } from '../../../../d2UiReactAdapters/dataTable/componentGetters/sortLabel.const';
+import withFilterSelectors from '../FilterSelectors/withFilterSelectors';
 
-import DownloadTable from '../../../DownloadTable/DownloadTable.container';
+import ColumnSelector from '../../../../ColumnSelector/ColumnSelector.container';
+import DownloadTable from '../../../../DownloadTable/DownloadTable.container';
 
-import withHeader from './Header/withHeader';
-import withListHeaderWrapper from '../ListHeaderWrapper/withListHeaderWrapper';
+import withHeader from '../Header/withHeader';
+import withListHeaderWrapper from '../../ListHeaderWrapper/withListHeaderWrapper';
+import OptionSet from '../../../../../metaData/OptionSet/OptionSet';
 
 // $FlowSuppress
 const { Table, Row, Cell, HeaderCell, Head, Body } = getTableComponents(basicTableAdapter);
@@ -33,7 +35,7 @@ const PaginationNavigationHOC = withNavigation()(Pagination);
 const RowsSelectorHOC = withRowsPerPageSelector()(PaginationNavigationHOC);
 const EventListPagination = withData()(RowsSelectorHOC);
 
-const styles = theme => ({
+const styles = (theme: Theme) => ({
     loaderContainer: {
         display: 'flex',
         justifyContent: 'center',
@@ -48,6 +50,16 @@ const styles = theme => ({
     topBarContainer: {
         display: 'flex',
         justifyContent: 'space-between',
+        padding: theme.typography.pxToRem(8),
+    },
+    topBarLeftContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+    },
+    topBarRightContainer: {
+        display: 'flex',
+        justifyContent: 'flex-end',
     },
     tableContainer: {
         overflow: 'auto',
@@ -96,11 +108,12 @@ const styles = theme => ({
     },
 });
 
-type Column = {
+export type Column = {
     id: string,
     header: string,
     visible: boolean,
     type: $Values<typeof elementTypes>,
+    optionSet?: ?OptionSet,
 };
 
 type Props = {
@@ -110,6 +123,8 @@ type Props = {
         loaderContainer: string,
         container: string,
         topBarContainer: string,
+        topBarLeftContainer: string,
+        topBarRightContainer: string,
         tableContainer: string,
         paginationContainer: string,
         optionsIcon: string,
@@ -126,9 +141,10 @@ type Props = {
     sortByDirection: string,
     onSort: (id: string, direction: string) => void,
     onRowClick: (rowData: {eventId: string}) => void,
+    filterButtons: React.Node,
 };
 
-class EventsList extends Component<Props> {
+class EventsList extends React.Component<Props> {
     static typesWithAscendingInitialDirection = [
         elementTypes.TEXT,
         elementTypes.LONG_TEXT,
@@ -238,7 +254,7 @@ class EventsList extends Component<Props> {
         (fromToLabel: string, totalLabel: string) => `${fromToLabel} of ${totalLabel}`
 
     render() {
-        const { dataSource, columns, classes } = this.props; //eslint-disable-line
+        const { dataSource, columns, classes, filterButtons } = this.props; //eslint-disable-line
 
         const visibleColumns = columns ?
             columns
@@ -251,8 +267,10 @@ class EventsList extends Component<Props> {
                 <div
                     className={classes.topBarContainer}
                 >
-                    <div>
-                        {'{{filters}}'}
+                    <div
+                        className={classes.topBarLeftContainer}
+                    >
+                        {filterButtons}
                     </div>
                     <div>
                         <ColumnSelector columns={columns} />
@@ -290,4 +308,4 @@ class EventsList extends Component<Props> {
  * Create the event list for a event capture program
  * @namespace EventsList
  */
-export default withHeader()(withListHeaderWrapper()(withStyles(styles)(EventsList)));
+export default withHeader()(withListHeaderWrapper()(withFilterSelectors()(withStyles(styles)(EventsList))));

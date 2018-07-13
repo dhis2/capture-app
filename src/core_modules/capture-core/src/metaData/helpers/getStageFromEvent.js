@@ -1,17 +1,17 @@
 // @flow
 import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
 
 import errorCreator from '../../utils/errorCreator';
 import programCollection from '../../metaDataMemoryStores/programCollection/programCollection';
-import i18n from '@dhis2/d2-i18n';
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found',
     STAGE_NOT_FOUND: 'Stage not found',
-    GENERIC_ERROR: 'An error has occured. See log for details'
+    GENERIC_ERROR: 'An error has occured. See log for details',
 };
 
-export default function getStageFromEvent(event: Event) {
+export default function getStageFromEvent(event: CaptureClientEvent) {
     const eventId = event.eventId;
     const program = programCollection.get(event.programId);
     if (!program) {

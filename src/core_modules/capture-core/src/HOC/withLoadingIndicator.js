@@ -9,12 +9,12 @@ type Props = {
 };
 
 const withLoadingIndicator =
-    (getContainerStylesFn?: ?(props: any) => Object, fullPage?: ?boolean) =>
+    (getContainerStylesFn?: ?(props: any) => Object, fullPage?: ?boolean, readyFn?: (props: any) => boolean) =>
         (InnerComponent: React.ComponentType<any>) =>
             (props: Props) => {
                 const { ready, ...other } = props;
-
-                if (!ready) {
+                const isReady = readyFn ? readyFn(props) : ready;
+                if (!isReady) {
                     if (fullPage) {
                         return (
                             <LoadingMaskForPage />
