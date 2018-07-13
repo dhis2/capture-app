@@ -105,6 +105,7 @@ class QuickSelector extends Component<Props> {
                     <Grid item xs={12} sm={programSelectorWidth}>
                         <ProgramSelector
                             selectedProgram={this.props.selectedProgramId}
+                            selectedOrgUnitId={this.props.selectedOrgUnitId}
                             selectedCategories={this.props.selectedCategories}
                             handleClickProgram={this.handleClickProgram}
                             handleSetCatergoryCombo={this.handleSetCatergoryCombo}

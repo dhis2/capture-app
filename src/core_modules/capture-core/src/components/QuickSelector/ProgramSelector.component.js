@@ -89,6 +89,7 @@ type Props = {
     buttonModeMaxLength: number,
     showWarning: boolean,
     selectedProgram: Object,
+    selectedOrgUnitId: string,
     selectedCategories: Object,
     classes: Object,
 };
@@ -120,13 +121,25 @@ class ProgramSelector extends Component<Props> {
 
     render() {
         const programsArray = Array.from(programs.values());
-        
-        const programOptions = programsArray
-            .filter(program => program instanceof EventProgram)
-            .map(program => new Option((_this) => {
-            _this.value = program.id;
-            _this.text = program.name;
-        }));
+        let areSomeProgramsHidden = false;
+
+        let programOptions = [];
+        //Once we support Tracker Programs, we don´t need to filter on EventProgram only on if the orgUnit has the progrma.
+        if(this.props.selectedOrgUnitId) {
+            programOptions = programsArray
+                .filter(program => program instanceof EventProgram && program.organisationUnits[this.props.selectedOrgUnitId])
+                .map(program => new Option((_this) => {
+                _this.value = program.id;
+                _this.text = program.name;
+            }));
+        } else {
+            programOptions = programsArray
+                .filter(program => program instanceof EventProgram)
+                .map(program => new Option((_this) => {
+                _this.value = program.id;
+                _this.text = program.name;
+            }));
+        }
 
         const programOptionSet = new OptionSet('programOptionSet', programOptions);
 
