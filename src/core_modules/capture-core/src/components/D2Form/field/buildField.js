@@ -214,7 +214,7 @@ const fieldForTypes = {
     [elementTypes.PERCENTAGE]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.URL]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.USERNAME]: (metaData: MetaDataElement) => getBaseTextField(metaData),
-    [elementTypes.FILE_RESOURCE]: (metaData: MetaDataElement) => {
+    [elementTypes.FILE_RESOURCE]: (metaData: MetaDataElement, options: Object) => {
         const props = createComponentProps({
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
