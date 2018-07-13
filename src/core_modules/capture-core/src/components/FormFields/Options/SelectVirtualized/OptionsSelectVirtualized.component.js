@@ -109,6 +109,7 @@ type Props = {
     value: any,
     nullable?: boolean,
     style?: ?Object,
+    menuStyle?: ?Object,
     maxHeight?: ?number,
     disabled?: ?boolean,
     useHintLabel?: ?boolean,
@@ -131,6 +132,9 @@ class OptionsSelectVirtualized extends Component<Props, State> {
         outline: 'none',
         borderRadius: 0,
     };
+    static defaultMenuContainerStyle = {
+        width: 'auto',
+    }
 
     static defaultProps = {
         translations: {
@@ -146,6 +150,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
     options: ?Array<{label: string, value: any}>;
     renderOption: () => React$Element<any>;
     inFocusLabelClasses: Object;
+    yourSelect: any;
 
     constructor(props: Props) {
         super(props);
@@ -216,7 +221,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
     }
 
     render() {
-        const { optionSet, label, value, nullable, style, maxHeight, disabled, required, useHintLabel, onChange, onBlur, classes, translations, withoutUnderline, ...toSelect } = this.props;
+        const { optionSet, label, value, nullable, style, menuStyle, maxHeight, disabled, required, useHintLabel, onChange, onBlur, classes, translations, withoutUnderline, ...toSelect } = this.props;
         const { inFocus } = this.state;
         const calculatedValue = toSelect.multi ? value : this.getValue();
         const labelIsShrinked = !!calculatedValue || this.state.inFocus;
@@ -228,6 +233,8 @@ class OptionsSelectVirtualized extends Component<Props, State> {
             { [lineClasses]: !withoutUnderline },
         );
 
+        const selectStyle = { ...OptionsSelectVirtualized.defaultSelectStyle, ...style };
+        const menuContainerStyle = { ...OptionsSelectVirtualized.defaultMenuContainerStyle, ...menuStyle };
         return (
             <div
                 ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}
@@ -238,8 +245,8 @@ class OptionsSelectVirtualized extends Component<Props, State> {
                         <FormControl component="fieldset" className={classes.formControl}>
                             <InputLabel
                                 shrink={labelIsShrinked}
-                                disabled={disabled}
-                                required={required}
+                                disabled={!!disabled}
+                                required={!!required}
                                 classes={inFocus ? this.inFocusLabelClasses : null}
                             >
                                 {label}
@@ -252,13 +259,14 @@ class OptionsSelectVirtualized extends Component<Props, State> {
                     className={selectRootClasses}
                 >
                     <VirtualizedSelect
+                        ref={(select) => { this.yourSelect = select; }}
                         disabled={disabled}
                         options={this.options}
                         onChange={this.handleChange}
                         value={calculatedValue}
                         clearable={nullable}
-                        style={OptionsSelectVirtualized.defaultSelectStyle}
-                        menuContainerStyle={{ width: 'auto' }}
+                        style={selectStyle}
+                        menuContainerStyle={menuContainerStyle}
                         className={'virtualized-select'}
                         placeholder={useHintLabel ? label : ''}
                         maxHeight={maxHeight || 200}

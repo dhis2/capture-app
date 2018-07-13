@@ -40,6 +40,8 @@ type Props = {
     onUpdateFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, formId: string, callback: Function) => void,
     formId: string,
     formBuilderId: string,
+    formHorizontal: boolean,
+    fieldOptions?: ?Object,
 };
 
 class D2SectionFields extends Component<Props> {
@@ -65,7 +67,7 @@ class D2SectionFields extends Component<Props> {
         // $FlowSuppress :does not recognize filter removing nulls
         return Array.from(elements.entries())
             .map(entry => entry[1])
-            .map(metaDataElement => buildField(metaDataElement))
+            .map(metaDataElement => buildField(metaDataElement, { formHorizontal: this.props.formHorizontal, ...this.props.fieldOptions }))
             .filter(field => field);
     }
 
@@ -170,23 +172,23 @@ class D2SectionFields extends Component<Props> {
             rulesHiddenFields,
             rulesMessages,
             onUpdateFieldAsync,
+            fieldOptions,
+            formHorizontal,
             ...passOnProps } = this.props;
 
         this.buildRulesCompulsoryErrors();
 
         return (
-            <div>
-                <FormBuilderContainer
-                    innerRef={(instance) => { this.formBuilderInstance = instance; }}
-                    id={formBuilderId}
-                    fields={this.getFieldConfigWithRulesEffects()}
-                    values={values}
-                    onUpdateField={this.handleUpdateField}
-                    onUpdateFieldAsync={this.handleUpdateFieldAsync}
-                    validateIfNoUIData
-                    {...passOnProps}
-                />
-            </div>
+            <FormBuilderContainer
+                innerRef={(instance) => { this.formBuilderInstance = instance; }}
+                id={formBuilderId}
+                fields={this.getFieldConfigWithRulesEffects()}
+                values={values}
+                onUpdateField={this.handleUpdateField}
+                onUpdateFieldAsync={this.handleUpdateFieldAsync}
+                validateIfNoUIData
+                {...passOnProps}
+            />
         );
     }
 }
