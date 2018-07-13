@@ -2,8 +2,6 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator';
-import SettingsIcon from '@material-ui/icons/Settings';
-import IconButton from '@material-ui/core/IconButton';
 
 import classNames from 'classnames';
 
@@ -21,6 +19,7 @@ import SortLabelWrapper from '../../../../DataTable/SortLabelWrapper.component';
 import { directions, placements } from '../../../../d2UiReactAdapters/dataTable/componentGetters/sortLabel.const';
 import withFilterSelectors from '../FilterSelectors/withFilterSelectors';
 
+import ColumnSelector from '../../../../ColumnSelector/ColumnSelector.container';
 import DownloadTable from '../../../../DownloadTable/DownloadTable.container';
 
 import withHeader from '../Header/withHeader';
@@ -273,15 +272,8 @@ class EventsList extends React.Component<Props> {
                     >
                         {filterButtons}
                     </div>
-                    <div
-                        className={classes.topBarRightContainer}
-                    >
-                        <IconButton>
-                            <SettingsIcon
-                                className={classes.optionsIcon}
-                                onClick={() => { alert('not implemented yet'); }}
-                            />
-                        </IconButton>
+                    <div>
+                        <ColumnSelector columns={columns} />
                         <DownloadTable />
                     </div>
                 </div>
