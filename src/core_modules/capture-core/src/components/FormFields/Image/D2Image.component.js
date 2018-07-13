@@ -1,6 +1,7 @@
 // @flow
 import CheckIcon from '@material-ui/icons/Check';
 import { withStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import BorderBox from '../../BorderBox/BorderBox.component';
@@ -12,15 +13,22 @@ import inMemoryFileStore from '../../DataEntry/file/inMemoryFileStore';
 type Props = {
     label?: ?string,
     value: ?{ value: string, name: string, url?: ?string },
+    formHorizontal?: ?boolean,
+    disabled?: ?boolean,
+    required?: ?boolean,
     classes: {
-        imageContainer: string,
-        imageInputContainer: string,
-        imageInputItemIcon: string,
-        imageInputItem: string,
-        imageInputDeleteButton: string,
-        imageInput: string,
-        imageLoadingProgress: string,
-        imagePreview: string,
+        horizontalLabel: string,
+        outerContainer: string,
+        container: string,
+        inputContainer: string,
+        inputItemIcon: string,
+        inputItem: string,
+        verticalDeleteButton: string,
+        horizontalDeleteButton: string,
+        horizontalSelectButton: string,
+        input: string,
+        loadingProgress: string,
+        preview: string,
     },
     onCommitAsync: (callback: Function) => void,
     onBlur: (value: ?Object) => void,
@@ -28,33 +36,47 @@ type Props = {
     asyncUIState: { loading?: ?boolean },
 }
 
-const styles = (theme: Theme) => ({
-    imageContainer: {
+const styles = theme => ({
+    horizontalLabel: theme.typography.formFieldTitle,
+    outerContainer: {
         display: 'flex',
         flexDirection: 'column',
     },
-    imageInputContainer: {
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    inputContainer: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
     },
-    imageInputItemIcon: {
+    inputItemIcon: {
         color: theme.palette.success[700],
     },
-    imageInputItem: {
+    inputItem: {
         marginRight: theme.typography.pxToRem(10),
     },
-    imageInputDeleteButton: {
+    verticalDeleteButton: {
         margin: theme.typography.pxToRem(8),
         color: theme.palette.error.main,
     },
-    imageLoadingProgress: {
+    horizontalDeleteButton: {
+        margin: theme.typography.pxToRem(4),
+        minHeight: theme.typography.pxToRem(28),
+        color: theme.palette.error.main,
+    },
+    horizontalSelectButton: {
+        margin: theme.typography.pxToRem(4),
+        minHeight: theme.typography.pxToRem(28),
+    },
+    loadingProgress: {
         marginRight: theme.typography.pxToRem(10),
     },
-    imageInput: {
+    input: {
         display: 'none',
     },
-    imagePreview: {
+    preview: {
         maxHeight: theme.typography.pxToRem(400),
         maxWidth: '100%',
     },
@@ -100,19 +122,52 @@ class D2Image extends Component<Props> {
         return null;
     }
 
-    render() {
-        const { label, value, classes, asyncUIState } = this.props;
+    renderHorizontal = () => {
+        const classes = this.props.classes;
+        const contentClasses = {
+            label: classes.horizontalLabel,
+            selectButton: classes.horizontalSelectButton,
+            deleteButton: classes.horizontalDeleteButton,
+        };
+        const sizes = {
+            button: 'small',
+            progress: 30,
+        };
+        return this.renderContent(contentClasses, sizes, false);
+    }
+
+    renderVertical = () => {
+        const classes = this.props.classes;
+        const contentClasses = {
+            deleteButton: classes.verticalDeleteButton,
+        };
+        const sizes = {
+            button: 'medium',
+            progress: 40,
+        };
+        return (
+            <BorderBox>
+                {this.renderContent(contentClasses, sizes, true)}
+            </BorderBox>
+        );
+    }
+
+    renderContent = (contentClasses: Object, sizes: Object, enablePreview: boolean) => {
+        const { label, value, classes, asyncUIState, disabled, required } = this.props;
         const isUploading = asyncUIState && asyncUIState.loading;
         const imageUrl = this.getimageUrl();
         return (
-            <BorderBox>
-                <div className={classes.imageContainer}>
-                    <div>
-                        {label || ''}
-                    </div>
-
+            <div className={classes.outerContainer}>
+                <InputLabel
+                    classes={{ root: contentClasses.label }}
+                    disabled={!!disabled}
+                    required={!!required}
+                >
+                    {label}
+                </InputLabel>
+                <div className={classes.container}>
                     <input
-                        className={classes.imageInput}
+                        className={classes.input}
                         type="file"
                         accept="image/*"
                         ref={(hiddenimageSelector) => {
@@ -124,42 +179,57 @@ class D2Image extends Component<Props> {
                         (() => {
                             if (isUploading) {
                                 return (
-                                    <div className={classes.imageInputContainer}>
-                                        <LoadingMask className={classes.imageLoadingProgress} size={40} />
-                                        <div className={classes.imageInputItem}>{i18n.t('Uploading image')}</div>
+                                    <div className={classes.inputContainer}>
+                                        <LoadingMask className={classes.loadingProgress} size={sizes.progress} />
+                                        <div className={classes.inputItem}>{i18n.t('Uploading image')}</div>
                                     </div>);
                             } else if (value) {
                                 return (
                                     <div>
-                                        <div className={classes.imageInputContainer}>
-                                            <CheckIcon className={classes.imageInputItemIcon} />
-                                            <div className={classes.imageInputItem}>
-                                                {`${value.name} ${i18n.t('selected')}.`}
+                                        <div className={classes.inputContainer}>
+                                            <CheckIcon className={classes.inputItemIcon} />
+                                            <div className={classes.inputItem}>
+                                                {enablePreview ?
+                                                    value.name :
+                                                    <a
+                                                        target="_blank"
+                                                        href={imageUrl}
+                                                    >
+                                                        {value.name}
+                                                    </a>
+                                                }
+                                                {` ${i18n.t('selected')}.`}
                                             </div>
-                                            <div className={classes.imageInputItem}>
+                                            <div className={classes.inputItem}>
                                                 <Button
+                                                    size={sizes.button}
                                                     onClick={this.handleRemoveClick}
-                                                    className={classes.imageInputDeleteButton}
+                                                    className={contentClasses.deleteButton}
                                                 >
                                                     {i18n.t('Delete')}
                                                 </Button>
                                             </div>
                                         </div>
-                                        <div>
-                                            <a
-                                                target="_blank"
-                                                href={imageUrl}
-                                            >
-                                                <img src={imageUrl} alt="" className={classes.imagePreview} />
-                                            </a>
-                                        </div>
+                                        {enablePreview &&
+                                            <div>
+                                                <a
+                                                    target="_blank"
+                                                    href={imageUrl}
+                                                >
+                                                    <img src={imageUrl} alt="" className={classes.preview} />
+                                                </a>
+                                            </div>
+                                        }
+
                                     </div>
                                 );
                             }
                             return (
-                                <div className={classes.imageInputContainer}>
-                                    <div className={classes.imageInputItem}>
+                                <div className={classes.inputContainer}>
+                                    <div className={classes.inputItem}>
                                         <Button
+                                            size={sizes.button}
+                                            className={contentClasses.selectButton}
                                             onClick={this.handleButtonClick}
                                             color="primary"
                                         >
@@ -172,8 +242,14 @@ class D2Image extends Component<Props> {
                         })()
                     }
                 </div>
-            </BorderBox>
+
+
+            </div>
         );
+    }
+
+    render() {
+        return this.props.formHorizontal ? this.renderHorizontal() : this.renderVertical();
     }
 }
 

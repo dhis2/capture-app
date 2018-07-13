@@ -7,6 +7,7 @@ import errorCreator from '../../utils/errorCreator';
 import D2SectionContainer from './D2Section.container';
 import D2Section from './D2Section.component';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
+import Section from '../../metaData/RenderFoundation/Section';
 
 const styles = () => ({
     container: {
@@ -19,6 +20,7 @@ type Props = {
     formFoundation: RenderFoundation,
     id: string,
     classes: Object,
+    formHorizontal: boolean,
 };
 
 export class D2Form extends Component<Props> {
@@ -114,31 +116,43 @@ export class D2Form extends Component<Props> {
         return `${this.props.id}-${sectionId}`;
     }
 
+    renderHorizontal = (section: Section, passOnProps: any) => (
+        <D2SectionContainer
+            innerRef={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
+            sectionMetaData={section}
+            formId={this.getFormId()}
+            formBuilderId={this.getFormBuilderId(section.id)}
+            sectionId={section.id}
+            {...passOnProps}
+        />
+    )
+    renderVertical = (section: Section, passOnProps: any, classes: any) => (
+        <div
+            className={classes.container}
+            key={section.id}
+        >
+            <D2SectionContainer
+                innerRef={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
+                sectionMetaData={section}
+                formId={this.getFormId()}
+                formBuilderId={this.getFormBuilderId(section.id)}
+                sectionId={section.id}
+                {...passOnProps}
+            />
+        </div>
+    )
+
     render() {
         const { formFoundation, id, classes, ...passOnProps } = this.props;
-
+        const formHorizontal = this.props.formHorizontal;
         const metaDataSectionsAsArray = Array.from(formFoundation.sections.entries()).map(entry => entry[1]);
 
-        const sections = metaDataSectionsAsArray.map(section => (
-            <div
-                className={classes.container}
-                key={section.id}
-            >
-                <D2SectionContainer
-                    innerRef={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
-                    sectionMetaData={section}
-                    formId={this.getFormId()}
-                    formBuilderId={this.getFormBuilderId(section.id)}
-                    sectionId={section.id}
-                    {...passOnProps}
-                />
-            </div>
-        ));
+        const sections = metaDataSectionsAsArray.map(section => (formHorizontal ? this.renderHorizontal(section, passOnProps) : this.renderVertical(section, passOnProps, classes)));
 
         return (
-            <div>
+            <React.Fragment>
                 {sections}
-            </div>
+            </React.Fragment>
         );
     }
 }

@@ -28,6 +28,7 @@ export const actionTypes = {
     SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE: 'SaveFailedForNewSingleEventAfterReturnedToMainPage',
     SELECTIONS_NOT_COMPLETE_OPENING_NEW_EVENT: 'SelectionsNotCompleteOpeningNewEvent',
     CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE: 'CancelNewEventFromIncompleteSelectionAndReturnToMainPage',
+    SET_NEW_EVENT_FORM_LAYOUT_DIRECTION: 'SetNewEventFormLayoutDirection',
     START_ASYNC_UPDATE_FIELD_FOR_NEW_EVENT: 'StartAsyncUpdateFieldForNewEvent',
 };
 
@@ -116,6 +117,9 @@ export const selectionsNotCompleteOpeningNewEvent = () =>
 
 export const cancelNewEventFromIncompleteSelectionAndReturnToMainPage = () =>
     actionCreator(actionTypes.CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE)();
+
+export const setNewEventFormLayoutDirection = (formHorizontal: boolean) =>
+    actionCreator(actionTypes.SET_NEW_EVENT_FORM_LAYOUT_DIRECTION)({ formHorizontal });
 
 export const startAsyncUpdateFieldForNewEvent =
     (
