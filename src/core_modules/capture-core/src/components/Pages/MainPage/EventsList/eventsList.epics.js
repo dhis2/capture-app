@@ -32,7 +32,10 @@ const errorMessages = {
     WORKING_LIST_UPDATE_ERROR: 'Working list could not be updated',
 };
 
-const getInitialWorkingListDataAsync = async (programId: string, orgUnitId: string, categories: { [key: string]: string}) => {
+const getInitialWorkingListDataAsync = async (
+    programId: string,
+    orgUnitId: string,
+    categories: { [key: string]: string}) => {
     const eventsPromise = getEvents({
         program: programId,
         orgUnit: orgUnitId,
@@ -127,6 +130,10 @@ const getUpdateWorkingListActionAsync = (
             log.error(errorCreator(errorMessages.WORKING_LIST_UPDATE_ERROR)({ error }));
             return workingListUpdateRetrievalFailed(errorMessages.WORKING_LIST_UPDATE_ERROR);
         });
+
+const getArgumentsForInitialWorkingListFromState = (state: ReduxState) => {
+    
+}
 
 const getArgumentsForUpdateWorkingListFromState = (state: ReduxState) => {
     const { programId, orgUnitId, categories } = state.workingListsContext.main;

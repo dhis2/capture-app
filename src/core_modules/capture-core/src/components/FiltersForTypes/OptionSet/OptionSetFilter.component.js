@@ -8,7 +8,6 @@ import withConvertedOptionSet from '../../FormFields/Options/withConvertedOption
 import OptionSet from '../../../metaData/OptionSet/OptionSet';
 import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { convertValue as convertToClientValue } from '../../../converters/formToClient';
-import { convertValue as convertToFormValue } from '../../../converters/clientToForm';
 
 import type{ UpdatableFilterContent } from '../filters.types';
 
@@ -47,11 +46,11 @@ class OptionSetFilter extends Component<Props> implements UpdatableFilterContent
         return `in:${valueString}`;
     }
 
-    static getAppliedText(values: Array<any>, type: $Values<typeof elementTypes>) {
+    static getAppliedText(values: Array<any>, optionSet: OptionSet) {
         const valueString = values
             .map((value) => {
-                const clientValue = convertToClientValue(type, value);
-                return convertToFormValue(type, clientValue);
+                const text = optionSet.getOptionText(value);
+                return text;
             })
             .join(', ');
 
@@ -67,7 +66,7 @@ class OptionSetFilter extends Component<Props> implements UpdatableFilterContent
 
         return {
             requestData: OptionSetFilter.getRequestData(value, this.props.type),
-            appliedText: OptionSetFilter.getAppliedText(value, this.props.type),
+            appliedText: OptionSetFilter.getAppliedText(value, this.props.optionSet),
         };
     }
 

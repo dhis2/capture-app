@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-07-12T07:20:20.245Z\n"
-"PO-Revision-Date: 2018-07-12T07:20:20.245Z\n"
+"POT-Creation-Date: 2018-07-12T09:01:33.022Z\n"
+"PO-Revision-Date: 2018-07-12T09:01:33.022Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -159,6 +159,9 @@ msgid "Update"
 msgstr ""
 
 msgid "Close"
+msgstr ""
+
+msgid "More filters"
 msgstr ""
 
 msgid "No events to display"

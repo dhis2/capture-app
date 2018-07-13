@@ -66,12 +66,10 @@ export const workingListsMetaDesc = createReducerDescription({
 
         return newState;
     },
-    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: (state) => {
-        return {
-            ...state,
-            main: {},
-        };
-    },
+    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: state => ({
+        ...state,
+        main: {},
+    }),
     [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
         const pagingData = action.payload.pagingData;
@@ -167,6 +165,19 @@ export const workingListsMetaDesc = createReducerDescription({
             },
         };
 
+        return newState;
+    },
+    [mainPageSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
+        const newState = {
+            ...state,
+            main: {
+                ...state.main,
+                sortById: 'eventDate',
+                sortByDirection: 'desc',
+                filters: null,
+                next: null,
+            },
+        };
         return newState;
     },
 }, 'workingListsMeta');
@@ -372,6 +383,10 @@ export const workingListFiltersEditDesc = createReducerDescription({
         };
         return newState;
     },
+    [mainPageSelectorActionTypes.RESET_PROGRAM_ID]: state => ({
+        ...state,
+        main: {},
+    }),
 }, 'workingListFiltersEdit');
 
 export const workingListsAppliedFiltersDesc = createReducerDescription({
@@ -431,4 +446,20 @@ export const workingListsAppliedFiltersDesc = createReducerDescription({
         };
         return newState;
     },
+    [mainPageSelectorActionTypes.RESET_PROGRAM_ID]: state => ({
+        ...state,
+        main: {},
+    }),
 }, 'workingListsAppliedFilters');
+
+export const workingListsUserSelectedFiltersDesc = createReducerDescription({
+    [filterSelectorActionTypes.REST_MENU_ITEM_SELECTED]: (state, action) => {
+        const newState = {
+            ...state,
+            [action.payload.id]: true,
+        };
+
+        return newState;
+    },
+    [mainPageSelectorActionTypes.RESET_PROGRAM_ID]: () => ({}),
+}, 'workingListsUserSelectedFilters');
