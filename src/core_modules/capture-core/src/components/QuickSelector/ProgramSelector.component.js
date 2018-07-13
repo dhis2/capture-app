@@ -78,6 +78,11 @@ const styles = () => ({
         borderRadius: 5,
         padding: '0px 5px 2px 5px',
     },
+    programsHiddenText: {
+        textAlign: 'center',
+        fontSize: 12,
+        color: 'grey',
+    },
 });
 
 type Props = {
@@ -121,7 +126,7 @@ class ProgramSelector extends Component<Props> {
 
     render() {
         const programsArray = Array.from(programs.values());
-        let areSomeProgramsHidden = false;
+        let areAllProgramsAvailable = false;
 
         let programOptions = [];
         //Once we support Tracker Programs, we don´t need to filter on EventProgram only on if the orgUnit has the progrma.
@@ -132,6 +137,9 @@ class ProgramSelector extends Component<Props> {
                 _this.value = program.id;
                 _this.text = program.name;
             }));
+
+            areAllProgramsAvailable = programOptions.length == programsArray.filter(program => program instanceof EventProgram).length;
+
         } else {
             programOptions = programsArray
                 .filter(program => program instanceof EventProgram)
@@ -199,6 +207,15 @@ class ProgramSelector extends Component<Props> {
                                     </Grid>))
                                 }
                             </Grid>
+                            {
+                                (() => {
+                                    if(!areAllProgramsAvailable) {
+                                        return (
+                                            <div className={this.props.classes.programsHiddenText}>Hello</div>
+                                        );
+                                    }
+                                })()
+                            }
                         </Paper>
                     </div>
                 );
@@ -212,6 +229,15 @@ class ProgramSelector extends Component<Props> {
                                 <ClearIcon className={this.props.classes.selectedButtonIcon} />
                             </IconButton>
                         </p>
+                        {
+                            (() => {
+                                if(!areAllProgramsAvailable) {
+                                    return (
+                                        <div className={this.props.classes.programsHiddenText}>Hello</div>
+                                    );
+                                }
+                            })()
+                        }
                     </Paper>
                 </div>
             );
