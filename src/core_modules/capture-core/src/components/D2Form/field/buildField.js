@@ -210,11 +210,11 @@ const fieldForTypes = {
             props,
         }, metaData);
     },
-    [elementTypes.TIME]: (metaData: MetaDataElement) => getBaseTextField(metaData),
-    [elementTypes.PERCENTAGE]: (metaData: MetaDataElement) => getBaseTextField(metaData),
-    [elementTypes.URL]: (metaData: MetaDataElement) => getBaseTextField(metaData),
-    [elementTypes.ORGANISATION_UNIT]: (metaData: MetaDataElement) => getBaseTextField(metaData),
-    [elementTypes.FILE_RESOURCE]: (metaData: MetaDataElement) => {
+    [elementTypes.TIME]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData),
+    [elementTypes.PERCENTAGE]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData),
+    [elementTypes.URL]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData),
+    [elementTypes.ORGANISATION_UNIT]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData),
+    [elementTypes.FILE_RESOURCE]: (metaData: MetaDataElement, options: Object) => {
        const props = createComponentProps({
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
