@@ -1,9 +1,10 @@
 // @flow
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import i18n from '@dhis2/d2-i18n';
 import NewEventDataEntry from './NewEventDataEntry.container';
 import DataEntrySelectionsIncomplete from './DataEntrySelectionsIncomplete.container';
-import i18n from '@dhis2/d2-i18n';
+import Button from '../../../Buttons/Button.component';
 
 const getStyles = theme => ({
     headerContainer: {
@@ -13,6 +14,7 @@ const getStyles = theme => ({
         paddingBottom: 20,
     },
     header: {
+        flexGrow: 1,
         ...theme.typography.title,
         fontSize: 16,
         fontWeight: 500,
@@ -24,7 +26,9 @@ type Props = {
     classes: {
         headerContainer: string,
         header: string,
-    }
+    },
+    formHorizontal: boolean,
+    onFormLayoutDirectionChange: (formHorizontal: boolean) => void,
 };
 
 class DataEntryWrapper extends React.Component<Props> {
@@ -38,6 +42,16 @@ class DataEntryWrapper extends React.Component<Props> {
                 >
                     {i18n.t('New event')}
                 </div>
+                {this.props.isSelectionsComplete &&
+                    <div>
+                        <Button
+                            color="primary"
+                            onClick={() => this.props.onFormLayoutDirectionChange(!this.props.formHorizontal)}
+                        >
+                            {this.props.formHorizontal ? i18n.t('Switch to form view') : i18n.t('Switch to row view')}
+                        </Button>
+                    </div>
+                }
                 <div>
                     {/* print form? */ }
                 </div>

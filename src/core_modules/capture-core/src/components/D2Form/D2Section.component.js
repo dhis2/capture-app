@@ -20,6 +20,7 @@ type Props = {
     classes: {
         sectionFieldsInSection: string,
     },
+    formHorizontal: ?boolean,
     sectionId: string,
     formBuilderId: string,
     formId: string,
@@ -48,7 +49,7 @@ class D2Section extends Component<Props> {
             return null;
         }
 
-        if (!sectionMetaData.showContainer) {
+        if (!sectionMetaData.showContainer || this.props.formHorizontal) {
             return (
                 <D2SectionFields
                     ref={(instance) => { this.sectionFieldsInstance = instance; }}

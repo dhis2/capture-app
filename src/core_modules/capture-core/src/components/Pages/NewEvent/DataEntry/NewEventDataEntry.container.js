@@ -26,6 +26,7 @@ const makeMapStateToProps = () => {
         const formFoundation = formFoundationSelector(state);
 
         return {
+            formHorizontal: !!state.newEventPage.formHorizontal,
             ready: !state.newEventPage.dataEntryIsLoading,
             error: !formFoundation ?
                 i18n.t('This is not an event program or the metadata is corrupt. See log for details.') : null,
