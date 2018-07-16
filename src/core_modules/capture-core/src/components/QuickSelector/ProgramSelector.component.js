@@ -27,7 +27,7 @@ import EventProgram from '../../metaData/Program/EventProgram';
 
 const styles = () => ({
     paper: {
-        padding: 15,
+        padding: 5,
         backgroundColor: '#f6f6f6',
         borderRadius: 5,
     },
@@ -35,9 +35,13 @@ const styles = () => ({
         margin: 0,
         fontWeight: 425,
         fontSize: 15,
+        paddingBottom: 5,
     },
     form: {
         width: '100%',
+    },
+    programList: {
+        padding: 0,
     },
     listItem: {
         backgroundColor: '#ffffff',
@@ -79,9 +83,20 @@ const styles = () => ({
         padding: '0px 5px 2px 5px',
     },
     programsHiddenText: {
-        textAlign: 'center',
         fontSize: 12,
         color: 'grey',
+        paddingTop: 5,
+    },
+    programsHiddenTextResetOrgUnit: {
+        cursor: 'pointer',
+    },
+    noProgramsAvailableNotAvailable: {
+        fontSize: 14,
+        textAlign: 'center',
+        backgroundColor: 'white',
+        padding: 10,
+        borderRadius: 5,
+        border: '1px solid lightGrey',
     },
 });
 
@@ -91,6 +106,7 @@ type Props = {
     handleResetCategorySelections: () => void,
     onResetProgramId: () => void,
     onResetCategoryOption: (categoryId: string) => void,
+    onResetOrgUnit: () => void,
     buttonModeMaxLength: number,
     showWarning: boolean,
     selectedProgram: Object,
@@ -109,7 +125,7 @@ class ProgramSelector extends Component<Props> {
     }
 
     handleClick(program) {
-        this.props.handleClickProgram(program.id);
+        this.props.handleClickProgram(program.value);
     }
 
     handleClickCategoryOption(selectedCategoryOption, categoryId) {
@@ -124,9 +140,13 @@ class ProgramSelector extends Component<Props> {
         this.props.onResetCategoryOption(categoryId);
     }
 
+    handleResetOrgUnit() {
+        this.props.onResetOrgUnit();
+    }
+
     render() {
         const programsArray = Array.from(programs.values());
-        let areAllProgramsAvailable = false;
+        let areAllProgramsAvailable = true;
 
         let programOptions = [];
         //Once we support Tracker Programs, we don´t need to filter on EventProgram only on if the orgUnit has the progrma.
@@ -207,15 +227,6 @@ class ProgramSelector extends Component<Props> {
                                     </Grid>))
                                 }
                             </Grid>
-                            {
-                                (() => {
-                                    if(!areAllProgramsAvailable) {
-                                        return (
-                                            <div className={this.props.classes.programsHiddenText}>Hello</div>
-                                        );
-                                    }
-                                })()
-                            }
                         </Paper>
                     </div>
                 );
@@ -229,34 +240,45 @@ class ProgramSelector extends Component<Props> {
                                 <ClearIcon className={this.props.classes.selectedButtonIcon} />
                             </IconButton>
                         </p>
-                        {
-                            (() => {
-                                if(!areAllProgramsAvailable) {
-                                    return (
-                                        <div className={this.props.classes.programsHiddenText}>Hello</div>
-                                    );
-                                }
-                            })()
-                        }
+                    </Paper>
+                </div>
+            );
+        }
+        if (programOptions.length == 0) {
+            return (
+                <div>
+                    <Paper elevation={1} className={this.props.classes.paper}>
+                        <h4 className={this.props.classes.title}>{ i18n.t('Program') }</h4>
+                        <div className={this.props.classes.noProgramsAvailableNotAvailable}>{i18n.t('No programs available.')} <a className={this.props.classes.programsHiddenTextResetOrgUnit} onClick={() => this.handleResetOrgUnit()}>{i18n.t('Show all')}</a></div>
                     </Paper>
                 </div>
             );
         }
         // If less than or equal, display as list.
-        if (programsArray.length <= this.props.buttonModeMaxLength) {
+        if (programOptions.length <= this.props.buttonModeMaxLength) {
             return (
                 <div>
                     <Paper elevation={1} className={this.props.classes.paper}>
                         <h4 className={this.props.classes.title}>{ i18n.t('Program') }</h4>
-                        <List>
-                            {programsArray.map(i =>
+                        <List className={this.props.classes.programList}>
+                            {programOptions.map(i =>
                                 (<ListItem
                                     className={this.props.classes.listItem}
                                     button
                                     onClick={() => this.handleClick(i)}
+                                    key={i.value}
                                 >
-                                    <ListItemText primary={i.name} /></ListItem>))}
+                                    <ListItemText primary={i.text} /></ListItem>))}
                         </List>
+                        {
+                            (() => {
+                                if(!areAllProgramsAvailable) {
+                                    return (
+                                        <div className={this.props.classes.programsHiddenText}>{i18n.t('Some programs are being filtered.')} <a className={this.props.classes.programsHiddenTextResetOrgUnit} onClick={() => this.handleResetOrgUnit()}>{i18n.t('Show all')}</a></div>
+                                    );
+                                }
+                            })()
+                        }
                     </Paper>
                 </div>
             );
@@ -268,6 +290,15 @@ class ProgramSelector extends Component<Props> {
                     <div className={this.props.classes.programAC}>
                         <ACSelect optionSet={programOptionSet} onBlur={this.props.handleClickProgram} placeholder={i18n.t('Select program')} />
                     </div>
+                    {
+                        (() => {
+                            if(!areAllProgramsAvailable) {
+                                return (
+                                    <div className={this.props.classes.programsHiddenText}>{i18n.t('Some programs are being filtered.')} <a className={this.props.classes.programsHiddenTextResetOrgUnit} onClick={() => this.handleResetOrgUnit()}>{i18n.t('Show all')}</a></div>
+                                );
+                            }
+                        })()
+                    }
                 </Paper>
             </div>
         );

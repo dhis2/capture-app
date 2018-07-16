@@ -113,6 +113,7 @@ class QuickSelector extends Component<Props> {
                             buttonModeMaxLength={5}
                             onResetProgramId={this.props.onResetProgramId}
                             onResetCategoryOption={this.props.onResetCategoryOption}
+                            onResetOrgUnit={this.props.onResetOrgUnitId}
                         />
                     </Grid>
                     <Grid item xs={12} sm={actionButtonsWidth}>
