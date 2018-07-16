@@ -33,6 +33,6 @@
     border-bottom-left-radius: 4px;
 }
 
-#rows-per-page-selector .Select.has-value.Select--single > .Select-control .Select-value .Select-value-label, .Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label {
+#rows-per-page-selector .Select.has-value.Select--single > .Select-control .Select-value .Select-value-label, #rows-per-page-selector .Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label {
     color: rgba(0, 0, 0, 0.54);
 }
