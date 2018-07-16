@@ -5,10 +5,16 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-07-11T11:30:55.300Z\n"
-"PO-Revision-Date: 2018-07-11T11:30:55.300Z\n"
+"POT-Creation-Date: 2018-07-12T07:20:20.245Z\n"
+"PO-Revision-Date: 2018-07-12T07:20:20.245Z\n"
 
 msgid "Please provide a valid date"
+msgstr ""
+
+msgid "Columns to show in table"
+msgstr ""
+
+msgid "Column"
 msgstr ""
 
 msgid "Cancel"
@@ -183,6 +189,12 @@ msgid "Select a category option to start reporting"
 msgstr ""
 
 msgid "New event"
+msgstr ""
+
+msgid "Switch to form view"
+msgstr ""
+
+msgid "Switch to row view"
 msgstr ""
 
 msgid "Saving to"
