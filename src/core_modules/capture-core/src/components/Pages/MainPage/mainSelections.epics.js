@@ -39,9 +39,9 @@ export const orgUnitDataRetrivedEpic = (action$: InputObservable) =>
 export const mainSelectionsFromUrlGetOrgUnitDataEpic = (action$: InputObservable) =>
     // $FlowSuppress
     action$.ofType(actionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL)
-        .filter(action => action.payload.orgUnitId)
+        .filter(action => action.payload.nextProps.orgUnitId)
         .switchMap(action => getApi()
-            .get(`organisationUnits/${action.payload.orgUnitId}`)
+            .get(`organisationUnits/${action.payload.nextProps.orgUnitId}`)
             .then(response => setCurrentOrgUnitBasedOnUrl({ id: response.id, name: response.displayName }),
             )
             .catch(() =>
@@ -52,7 +52,7 @@ export const mainSelectionsFromUrlGetOrgUnitDataEpic = (action$: InputObservable
 export const mainSelectionsFromUrlEmptyOrgUnitEpic = (action$: InputObservable) =>
     // $FlowSuppress
     action$.ofType(actionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL)
-        .filter(action => !action.payload.orgUnitId)
+        .filter(action => !action.payload.nextProps.orgUnitId)
         .map(() => setEmptyOrgUnitBasedOnUrl());
 
 export const mainSelectionsFromUrlValidationEpic = (action$: InputObservable, store: ReduxStore) =>

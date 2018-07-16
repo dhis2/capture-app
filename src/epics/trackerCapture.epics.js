@@ -42,7 +42,7 @@ import {
     getWorkingListOnSaveEpic,
     updateWorkingListEpic,
     getEventListOnReconnectEpic,
-} from 'capture-core/components/Pages/MainPage/EventsList/eventsList.epics';
+} from 'capture-core/components/Pages/MainPage/EventsList/epics/eventsList.epics';
 import {
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,
@@ -70,7 +70,7 @@ import {
 import {
     networkMonitorStatusEpic,
 } from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.epics';
-import {    
+import {
     setOrgUnit,
     setProgram,
     goBackToListContext,

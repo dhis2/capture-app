@@ -23,6 +23,15 @@ import {
 import {
     actionTypes as filterSelectorActionTypes,
 } from '../../components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.actions';
+import {
+    actionTypes as quickSelectorActionTypes,
+} from '../../components/QuickSelector/actions/QuickSelector.actions';
+import {
+    actionTypes as newEventSelectorActionTypes,
+} from '../../components/Pages/NewEvent/newEventSelections.actions';
+import {
+    actionTypes as editEventSelectorActionTypes,
+} from '../../components/Pages/EditEvent/editEvent.actions';
 
 export const workingListsDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
@@ -53,14 +62,67 @@ export const workingListsDesc = createReducerDescription({
     },
 }, 'workingLists');
 
+const updateListsMetaOnResetProgramId = (state) => {
+    const newState = {
+        ...state,
+        main: {
+            ...state.main,
+            next: {
+                ...(state.main ? state.main.next : null),
+                sortById: 'eventDate',
+                sortByDirection: 'desc',
+                filters: state.main.filters ?
+                    Object
+                        .keys(state.main.filters)
+                        .reduce((accFilters, key) => {
+                            accFilters[key] = null;
+                            return accFilters;
+                        }, {}) :
+                    null,
+            },
+        },
+    };
+    return newState;
+};
+
+const updateListsMetaOnUrlUpdate = (state, action) => {
+    const payload = action.payload;
+    const nextProgramId = payload.nextProps.programId;
+    const prevProgramId = payload.prevProps.programId;
+    if (nextProgramId !== prevProgramId) {
+        return updateListsMetaOnResetProgramId(state);
+    }
+    return state;
+};
+
 export const workingListsMetaDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
+        const payload = action.payload;
+
+        const oldData = newState.main;
+        const newData = newState.main && newState.main.next;
+
+        const filtersWithNull = {
+            ...(oldData ? oldData.filters : null),
+            ...(newData ? newData.filters : null),
+        };
+
+        const filtersWithoutNull = Object
+            .keys(filtersWithNull)
+            .reduce((accFilters, key) => {
+                if (filtersWithNull[key]) {
+                    accFilters[key] = filtersWithNull[key];
+                }
+                return accFilters;
+            }, {});
 
         newState.main = {
-            ...action.payload.pagingData,
-            sortById: 'eventDate',
-            sortByDirection: 'desc',
+            ...oldData,
+            ...newData,
+            ...payload.argsWithDefaults,
+            ...payload.pagingData,
+            filters: filtersWithoutNull,
             next: {},
         };
 
@@ -68,7 +130,10 @@ export const workingListsMetaDesc = createReducerDescription({
     },
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: state => ({
         ...state,
-        main: {},
+        main: {
+            ...state.main,
+            next: {},
+        },
     }),
     [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
@@ -167,19 +232,10 @@ export const workingListsMetaDesc = createReducerDescription({
 
         return newState;
     },
-    [mainPageSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
-        const newState = {
-            ...state,
-            main: {
-                ...state.main,
-                sortById: 'eventDate',
-                sortByDirection: 'desc',
-                filters: null,
-                next: null,
-            },
-        };
-        return newState;
-    },
+    [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: updateListsMetaOnResetProgramId,
+    [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateListsMetaOnUrlUpdate,
+    [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateListsMetaOnUrlUpdate,
+    [editEventSelectorActionTypes.EDIT_EVENT_FROM_URL]: updateListsMetaOnUrlUpdate,
 }, 'workingListsMeta');
 
 const getLoadingState = oldState => ({
@@ -322,8 +378,32 @@ export const workingListsUIDesc = createReducerDescription({
     },
 }, 'workingListsUI');
 
+const updateColumnsOrderOnResetProgram = (state) => {
+    const newState = {
+        ...state,
+        main: null,
+    };
+    return newState;
+};
+
+const updateColumnsOrderOnUrlUpdate = (state, action) => {
+    const payload = action.payload;
+    const nextProgramId = payload.nextProps.programId;
+    const prevProgramId = payload.prevProps.programId;
+    if (nextProgramId !== prevProgramId) {
+        return updateColumnsOrderOnResetProgram(state);
+    }
+    return state;
+};
+
 export const workingListsColumnsOrderDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
+        const newColumnsOrder = action.payload.columnsOrder;
+
+        if (!newColumnsOrder) {
+            return state;
+        }
+
         const newState = { ...state };
         newState.main = action.payload.columnsOrder;
         return newState;
@@ -333,6 +413,10 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
         newState.main = [...action.payload];
         return newState;
     },
+    [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: updateColumnsOrderOnResetProgram,
+    [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateColumnsOrderOnUrlUpdate,
+    [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateColumnsOrderOnUrlUpdate,
+    [editEventSelectorActionTypes.EDIT_EVENT_FROM_URL]: updateColumnsOrderOnUrlUpdate,
 }, 'workingListsColumnsOrder');
 
 export const workingListsContextDesc = createReducerDescription({
@@ -342,6 +426,19 @@ export const workingListsContextDesc = createReducerDescription({
         return newState;
     },
 }, 'workingListsContext');
+
+const updateFiltersEditOnUrlUpdate = (state, action) => {
+    const payload = action.payload;
+    const nextProgramId = payload.nextProps.programId;
+    const prevProgramId = payload.prevProps.programId;
+    if (nextProgramId !== prevProgramId) {
+        return {
+            ...state,
+            main: {},
+        };
+    }
+    return state;
+};
 
 export const workingListFiltersEditDesc = createReducerDescription({
     [filterSelectorActionTypes.EDIT_CONTENTS]: (state, action) => {
@@ -383,18 +480,62 @@ export const workingListFiltersEditDesc = createReducerDescription({
         };
         return newState;
     },
-    [mainPageSelectorActionTypes.RESET_PROGRAM_ID]: state => ({
+    [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: state => ({
         ...state,
         main: {},
     }),
+    [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateFiltersEditOnUrlUpdate,
+    [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateFiltersEditOnUrlUpdate,
+    [editEventSelectorActionTypes.EDIT_EVENT_FROM_URL]: updateFiltersEditOnUrlUpdate,
 }, 'workingListFiltersEdit');
+
+const updateApplitedFiltersOnProgramReset = state => ({
+    ...state,
+    main: {
+        ...state.main,
+        next: state.main ? Object.keys(state.main).reduce((accNextKeys, key) => {
+            if (key !== 'next') {
+                accNextKeys[key] = null;
+            }
+            return accNextKeys;
+        }, {}) : null,
+    },
+});
+
+const updateApplitedFiltersOnUrlUpdate = (state, action) => {
+    const payload = action.payload;
+    const nextProgramId = payload.nextProps.programId;
+    const prevProgramId = payload.prevProps.programId;
+    if (nextProgramId !== prevProgramId) {
+        return updateApplitedFiltersOnProgramReset(state);
+    }
+    return state;
+};
 
 export const workingListsAppliedFiltersDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state) => {
-        const newState = {
-            ...state,
-            main: {},
+        const newState = { ...state };
+        const next = newState.main ? newState.main.next : null;
+
+        const mainStateWithNulls = {
+            ...newState.main,
+            ...next,
         };
+
+        const mainStateWithoutNulls = Object
+            .keys(mainStateWithNulls)
+            .reduce((accNewState, key) => {
+                if (mainStateWithNulls[key]) {
+                    accNewState[key] = mainStateWithNulls[key];
+                }
+                return accNewState;
+            }, {});
+
+        newState.main = {
+            ...mainStateWithoutNulls,
+            next: {},
+        };
+
         return newState;
     },
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: (state) => {
@@ -446,12 +587,21 @@ export const workingListsAppliedFiltersDesc = createReducerDescription({
         };
         return newState;
     },
-    [mainPageSelectorActionTypes.RESET_PROGRAM_ID]: state => ({
-        ...state,
-        main: {},
-    }),
+    [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: updateApplitedFiltersOnProgramReset,
+    [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateApplitedFiltersOnUrlUpdate,
+    [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateApplitedFiltersOnUrlUpdate,
+    [editEventSelectorActionTypes.EDIT_EVENT_FROM_URL]: updateApplitedFiltersOnUrlUpdate,
 }, 'workingListsAppliedFilters');
 
+const updateUserSelectedFilersOnUrlUpdate = (state, action) => {
+    const payload = action.payload;
+    const nextProgramId = payload.nextProps.programId;
+    const prevProgramId = payload.prevProps.programId;
+    if (nextProgramId !== prevProgramId) {
+        return {};
+    }
+    return state;
+};
 export const workingListsUserSelectedFiltersDesc = createReducerDescription({
     [filterSelectorActionTypes.REST_MENU_ITEM_SELECTED]: (state, action) => {
         const newState = {
@@ -461,5 +611,8 @@ export const workingListsUserSelectedFiltersDesc = createReducerDescription({
 
         return newState;
     },
-    [mainPageSelectorActionTypes.RESET_PROGRAM_ID]: () => ({}),
+    [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: () => ({}),
+    [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateUserSelectedFilersOnUrlUpdate,
+    [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateUserSelectedFilersOnUrlUpdate,
+    [editEventSelectorActionTypes.EDIT_EVENT_FROM_URL]: updateUserSelectedFilersOnUrlUpdate,
 }, 'workingListsUserSelectedFilters');

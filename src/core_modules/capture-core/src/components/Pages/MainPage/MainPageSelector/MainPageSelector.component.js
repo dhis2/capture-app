@@ -16,28 +16,22 @@ type Props = {
     onResetAllCategoryOptions: () => void,
     onOpenNewEventPage: (programId: string, orgUnitId: string) => void,
     onStartAgain: () => void,
-    onResetProgramAndAllCategoryOptions: () => void,
+    onResetProgramId: (baseAction: ReduxAction<any, any>) => void,
 };
 
 class MainPageSelector extends Component<Props> {
     handleStartAgain: () => void;
-    handleResetProgramId: () => void;
     handleClickNew: () => void;
 
     constructor(props) {
         super(props);
 
         this.handleStartAgain = this.handleStartAgain.bind(this);
-        this.handleResetProgramId = this.handleResetProgramId.bind(this);
         this.handleClickNew = this.handleClickNew.bind(this);
     }
 
     handleStartAgain() {
         this.props.onStartAgain();
-    }
-
-    handleResetProgramId() {
-        this.props.onResetProgramAndAllCategoryOptions();
     }
 
     handleClickNew() {
@@ -51,7 +45,7 @@ class MainPageSelector extends Component<Props> {
                     onSetOrgUnit={this.props.onSetOrgUnit}
                     onResetOrgUnitId={this.props.onResetOrgUnitId}
                     onSetProgramId={this.props.onSetProgramId}
-                    onResetProgramId={this.handleResetProgramId}
+                    onResetProgramId={this.props.onResetProgramId}
                     onSetCategoryOption={this.props.onSetCategoryOption}
                     onResetCategoryOption={this.props.onResetCategoryOption}
                     onResetAllCategoryOptions={this.props.onResetAllCategoryOptions}

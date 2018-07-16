@@ -15,10 +15,19 @@ type Props = {
     onResetCategoryOption: (categoryId: string) => void,
     onResetAllCategoryOptions: () => void,
     onStartAgain: () => void,
-    onResetProgramAndAllCategoryOptions: () => void,
+    onResetProgramId: (baseAction: ReduxAction<any, any>) => void,
 };
 
-class EditEventSelector extends Component<Props> {
+type State = {
+    openStartAgainWarning: boolean;
+    openOrgUnitWarning: boolean;
+    openProgramWarning: ?Object; // uses the base action as open state for now
+    openCatComboWarning: boolean;
+    categoryIdToReset: string;
+    openNewEventWarning: boolean;
+};
+
+class EditEventSelector extends Component<Props, State> {
     handleOpenStartAgainWarning: () => void;
     handleOpenOrgUnitWarning: () => void;
     handleOpenProgramWarning: () => void;
@@ -30,14 +39,6 @@ class EditEventSelector extends Component<Props> {
     handleAcceptCatCombo: () => void;
     handleClickNew: () => void;
     handleAcceptNew: () => void;
-    state: {
-        openStartAgainWarning: boolean;
-        openOrgUnitWarning: boolean;
-        openProgramWarning: boolean;
-        openCatComboWarning: boolean;
-        categoryIdToReset: string;
-        openNewEventWarning: boolean;
-    };
 
     constructor(props) {
         super(props);
@@ -45,7 +46,7 @@ class EditEventSelector extends Component<Props> {
         this.state = {
             openStartAgainWarning: false,
             openOrgUnitWarning: false,
-            openProgramWarning: false,
+            openProgramWarning: null,
             openCatComboWarning: false,
             categoryIdToReset: '',
             openNewEventWarning: false,
@@ -72,8 +73,8 @@ class EditEventSelector extends Component<Props> {
         this.setState({ openOrgUnitWarning: true });
     }
 
-    handleOpenProgramWarning() {
-        this.setState({ openProgramWarning: true });
+    handleOpenProgramWarning(baseAction: ReduxAction<any, any>) {
+        this.setState({ openProgramWarning: baseAction });
     }
 
     handleOpenCatComboWarning(categoryId) {
@@ -82,7 +83,7 @@ class EditEventSelector extends Component<Props> {
 
 
     handleClose() {
-        this.setState({ openStartAgainWarning: false, openOrgUnitWarning: false, openProgramWarning: false, openCatComboWarning: false, openNewEventWarning: false });
+        this.setState({ openStartAgainWarning: false, openOrgUnitWarning: false, openProgramWarning: null, openCatComboWarning: false, openNewEventWarning: false });
     }
 
     handleAcceptStartAgain() {
@@ -96,7 +97,7 @@ class EditEventSelector extends Component<Props> {
     }
 
     handleAcceptProgram() {
-        this.props.onResetProgramAndAllCategoryOptions();
+        this.props.onResetProgramId(this.state.openProgramWarning);
         this.handleClose();
     }
 
@@ -131,7 +132,7 @@ class EditEventSelector extends Component<Props> {
                 <NewEvent />
                 <WarningDialog onAcceptClick={this.handleAcceptStartAgain} open={this.state.openStartAgainWarning} onClose={this.handleClose} titleText={i18n.t('Start Again')} contentText={i18n.t('Are you sure? All unsaved data will be lost')} />
                 <WarningDialog onAcceptClick={this.handleAcceptOrgUnit} open={this.state.openOrgUnitWarning} onClose={this.handleClose} titleText={i18n.t('Reset Organisation Unit')} contentText={i18n.t('Are you sure? All unsaved data will be lost')} />
-                <WarningDialog onAcceptClick={this.handleAcceptProgram} open={this.state.openProgramWarning} onClose={this.handleClose} titleText={i18n.t('Reset Program')} contentText={i18n.t('Are you sure? All unsaved data will be lost')} />
+                <WarningDialog onAcceptClick={this.handleAcceptProgram} open={!!this.state.openProgramWarning} onClose={this.handleClose} titleText={i18n.t('Reset Program')} contentText={i18n.t('Are you sure? All unsaved data will be lost')} />
                 <WarningDialog onAcceptClick={this.handleAcceptCatCombo} open={this.state.openCatComboWarning} onClose={this.handleClose} titleText={i18n.t('Reset Category Option')} contentText={i18n.t('Are you sure? All unsaved data will be lost')} />
                 <WarningDialog onAcceptClick={this.handleAcceptNew} open={this.state.openNewEventWarning} onClose={this.handleClose} titleText={i18n.t('Create New Event')} contentText={i18n.t('Are you sure? All unsaved data will be lost')} />
             </div>

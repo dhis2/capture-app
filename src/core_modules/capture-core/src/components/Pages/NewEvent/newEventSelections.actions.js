@@ -12,8 +12,8 @@ export const actionTypes = {
 };
 
 export const updateSelectionsFromUrl =
-    (selections: Object) =>
-        actionCreator(actionTypes.UPDATE_SELECTIONS_FROM_URL)(selections);
+    (data: Object) =>
+        actionCreator(actionTypes.UPDATE_SELECTIONS_FROM_URL)(data);
 
 export const setCurrentOrgUnitBasedOnUrl =
     (orgUnit: Object) => actionCreator(actionTypes.SET_ORG_UNIT_BASED_ON_URL)(orgUnit);

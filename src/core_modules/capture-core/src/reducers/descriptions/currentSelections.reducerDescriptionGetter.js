@@ -54,7 +54,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         return newState;
     },
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: (state, action) => {
-        const { page, ...selections } = action.payload;
+        const { nextProps: selections } = action.payload;
         const newState = { ...state, ...selections, complete: false };
         return newState;
     },
@@ -85,7 +85,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         return newState;
     },
     [newEventSelectionActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
-        const { page, ...selections } = action.payload;
+        const { nextProps: selections } = action.payload;
         const newState = { ...state, ...selections, complete: false };
         return newState;
     },
