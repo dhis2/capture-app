@@ -9,6 +9,7 @@ export default class Program {
     _id: string;
     _name: string;
     _shortName: string;
+    _organisationUnits: Array<Object>;
     _version: string | number;
     _categories: ?Array<Category>;
     _programRules: Array<ProgramRule>;
@@ -39,6 +40,13 @@ export default class Program {
     }
     get shortName(): string {
         return this._shortName;
+    }
+
+    set organisationUnits(organisationUnits: Array<Object>) {
+        this._organisationUnits = organisationUnits;
+    }
+    get organisationUnits(): Array<Object> {
+        return this._organisationUnits;
     }
 
     set categories(categories: ?Array<Category>) {

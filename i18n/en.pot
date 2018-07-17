@@ -241,6 +241,15 @@ msgstr ""
 msgid "Program"
 msgstr ""
 
+msgid "No programs available."
+msgstr ""
+
+msgid "Show all"
+msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr ""
+
 msgid "Select program"
 msgstr ""
 
