@@ -9,7 +9,7 @@ const mapStateToProps = (state: ReduxState) => ({
     error: state.workingListsUI.main && state.workingListsUI.main.dataLoadingError,
 });
 
-export default connect(mapStateToProps)(
+export default connect(mapStateToProps, {})(
     withLoadingIndicator()(
         withErrorMessageHandler()(
             EventsListWrapper,

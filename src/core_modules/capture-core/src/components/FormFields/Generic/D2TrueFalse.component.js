@@ -3,11 +3,12 @@ import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 
 import SingleSelectBoxes from '../Options/SingleSelectBoxes/SingleSelectBoxes.component';
+import MultiSelectBoxes from '../Options/MultiSelectBoxes/MultiSelectBoxes.component';
 import OptionSet from '../../../metaData/OptionSet/OptionSet';
 import Option from '../../../metaData/OptionSet/Option';
 
 type Props = {
-
+    allowMultiple?: boolean,
 };
 
 class D2TrueFalse extends Component<Props> {
@@ -29,11 +30,11 @@ class D2TrueFalse extends Component<Props> {
     }
 
     render() {
-        const { ...passOnProps } = this.props;
-
+        const { allowMultiple, ...passOnProps } = this.props;
+        const SelectBoxes = allowMultiple ? MultiSelectBoxes : SingleSelectBoxes;
         return (
             <div>
-                <SingleSelectBoxes
+                <SelectBoxes
                     {...passOnProps}
                     optionSet={this.optionSet}
                 />

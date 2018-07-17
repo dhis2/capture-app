@@ -6,6 +6,8 @@ export const actionTypes = {
     SET_FILTER: 'SetWorkingListFilter',
     CLEAR_FILTER: 'ClearWorkingListFilter',
     REVERT_FILTER: 'RevertWorkingListFilter',
+    REST_MENU_ITEM_SELECTED: 'RestMenuItemSelected',
+    UPDATE_INCLUDED_FILTERS_AFTER_COLUMN_SORTING: 'UpdateIncludedFiltersAfterColumnSortingForWorkingList',
 };
 
 export const batchActionTypes = {
@@ -23,3 +25,9 @@ export const clearFilter = (itemId: string) =>
 
 export const revertFilter = () =>
     actionCreator(actionTypes.REVERT_FILTER)();
+
+export const restMenuItemSelected = (id: string) =>
+    actionCreator(actionTypes.REST_MENU_ITEM_SELECTED)({ id });
+
+export const updateIncludedFiltersAfterColumnSorting = (includeFilters: Object) =>
+    actionCreator(actionTypes.UPDATE_INCLUDED_FILTERS_AFTER_COLUMN_SORTING)({ includeFilters });
