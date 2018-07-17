@@ -9,6 +9,7 @@ import D2Date from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import D2DateTime from '../../FormFields/DateAndTime/D2DateTime/D2DateTime.component';
 import D2File from '../../FormFields/File/D2File.component';
 import D2Image from '../../FormFields/Image/D2Image.component';
+import UsernameField from '../../FormFields/Username/Username.component';
 
 import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
 import OptionsSelect from '../../FormFields/Options/SelectVirtualized/OptionsSelectVirtualized.component';
@@ -94,6 +95,26 @@ const getBaseTextField = (metaData: MetaDataElement, options: Object) => {
                 ),
             ),
         props,
+    }, metaData);
+};
+
+const getUsernameField = (metaData: MetaDataElement, options: Object) => {
+    return createFieldProps({
+        id: metaData.id,
+        component:
+            withGotoInterface()(
+                withHideCompatibility()(
+                    withDefaultShouldUpdateInterface()(
+                        withRequiredFieldCalculation()(
+                            withDefaultFieldContainer()(
+                                withDefaultMessages()(
+                                    withInternalChangeHandler()(UsernameField),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
     }, metaData);
 };
 
@@ -213,7 +234,7 @@ const fieldForTypes = {
     [elementTypes.TIME]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.PERCENTAGE]: (metaData: MetaDataElement) => getBaseTextField(metaData),
     [elementTypes.URL]: (metaData: MetaDataElement) => getBaseTextField(metaData),
-    [elementTypes.USERNAME]: (metaData: MetaDataElement) => getBaseTextField(metaData),
+    [elementTypes.USERNAME]: (metaData: MetaDataElement) => getUsernameField(metaData),
     [elementTypes.FILE_RESOURCE]: (metaData: MetaDataElement, options: Object) => {
         const props = createComponentProps({
             label: metaData.formName,
