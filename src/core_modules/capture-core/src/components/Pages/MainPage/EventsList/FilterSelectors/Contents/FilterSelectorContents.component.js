@@ -10,6 +10,8 @@ import withStyleRef from './withStyleRef';
 import TextFilter from '../../../../../FiltersForTypes/Text/TextFilter.component';
 import NumericFilter from '../../../../../FiltersForTypes/Numeric/NumericFilter.component';
 import DateFilter from '../../../../../FiltersForTypes/Date/DateFilter.component';
+import BooleanFilter from '../../../../../FiltersForTypes/Boolean/BooleanFilter.component';
+import TrueOnlyFilter from '../../../../../FiltersForTypes/TrueOnly/TrueOnlyFilter.component';
 import OptionSetFilter from '../../../../../FiltersForTypes/OptionSet/OptionSetFilter.component';
 
 import OptionSet from '../../../../../../metaData/OptionSet/OptionSet';
@@ -39,6 +41,8 @@ class FilterSelectorContents extends React.PureComponent<Props> {
         [filterTypesObject.INTEGER_NEGATIVE]: NumericFilter,
         [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: NumericFilter,
         [filterTypesObject.DATE]: DateFilter,
+        [filterTypesObject.BOOLEAN]: BooleanFilter,
+        [filterTypesObject.TRUE_ONLY]: TrueOnlyFilter,
     };
 
     static hasStylesHOC = [
@@ -48,6 +52,8 @@ class FilterSelectorContents extends React.PureComponent<Props> {
         filterTypesObject.INTEGER_NEGATIVE,
         filterTypesObject.INTEGER_ZERO_OR_POSITIVE,
         filterTypesObject.DATE,
+        filterTypesObject.BOOLEAN,
+        filterTypesObject.TRUE_ONLY,
     ];
 
     static getOptionSetComponent() {

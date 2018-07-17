@@ -3,7 +3,9 @@ import programs from 'capture-core/metaDataMemoryStores/programCollection/progra
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import { actionTypes as mainSelectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
-import { actionTypes as setCurrentSelectionsActionTypes } from '../../components/QuickSelector/actions/QuickSelector.actions';
+import {
+    actionTypes as setCurrentSelectionsActionTypes,
+} from '../../components/QuickSelector/actions/QuickSelector.actions';
 import {
     actionTypes as newEventSelectionActionTypes,
 } from '../../components/Pages/NewEvent/newEventSelections.actions';
@@ -52,7 +54,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         return newState;
     },
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: (state, action) => {
-        const { page, ...selections } = action.payload;
+        const { nextProps: selections } = action.payload;
         const newState = { ...state, ...selections, complete: false };
         return newState;
     },
@@ -83,7 +85,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         return newState;
     },
     [newEventSelectionActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
-        const { page, ...selections } = action.payload;
+        const { nextProps: selections } = action.payload;
         const newState = { ...state, ...selections, complete: false };
         return newState;
     },

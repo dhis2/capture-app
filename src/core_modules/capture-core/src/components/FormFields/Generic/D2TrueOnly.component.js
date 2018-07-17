@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import Switch from '@material-ui/core/Switch';
+import Checkbox from '@material-ui/core/Checkbox';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -20,6 +21,8 @@ type Props = {
         label: string,
     },
     style?: ?Object,
+    useSwitch?: ?boolean,
+    useValueLabel?: ?boolean,
 };
 
 class D2TrueOnly extends Component<Props> {
@@ -52,8 +55,8 @@ class D2TrueOnly extends Component<Props> {
     }
 
     render() {
-        const { onBlur, value, label, required, classes, style, ...passOnProps } = this.props;
-
+        const { onBlur, value, label, required, classes, style, useSwitch, useValueLabel, ...passOnProps } = this.props;
+        const SelectComponent = useSwitch ? Switch : Checkbox;
         return (
             <div
                 ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}
@@ -64,7 +67,7 @@ class D2TrueOnly extends Component<Props> {
                 >
                     {
                         (() => {
-                            if (!label) {
+                            if (!label || useValueLabel) {
                                 return null;
                             }
 
@@ -82,9 +85,9 @@ class D2TrueOnly extends Component<Props> {
                     }
                     <FormGroup>
                         <FormControlLabel
-                            label=""
+                            label={useValueLabel ? label : ''}
                             control={
-                                <Switch
+                                <SelectComponent
                                     {...passOnProps}
                                     onChange={this.handleChange}
                                     checked={!!value}

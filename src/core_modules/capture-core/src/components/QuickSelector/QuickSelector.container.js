@@ -2,7 +2,13 @@
 
 import { connect } from 'react-redux';
 import QuickSelector from './QuickSelector.component';
-import { setOrgUnitId, storeOrgUnitObject, setCategoryId, resetCategorySelections, goBackToListContext } from './actions/QuickSelector.actions';
+import {
+    setOrgUnitId,
+    storeOrgUnitObject,
+    setCategoryId,
+    resetCategorySelections,
+    goBackToListContext,
+} from './actions/QuickSelector.actions';
 
 const mapStateToProps = (state: Object) => ({
     selectedProgramId: state.currentSelections.programId,

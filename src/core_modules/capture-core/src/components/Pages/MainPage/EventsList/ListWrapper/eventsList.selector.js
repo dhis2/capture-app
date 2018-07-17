@@ -6,7 +6,7 @@ import getStageFromEvent from '../../../../../metaData/helpers/getStageFromEvent
 import { convertMainEvent } from '../../../../../events/mainEventConverter';
 import { convertValue } from '../../../../../converters/clientToList';
 import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
-import { mainPropertyNames } from '../getColumnsConfiguration';
+import { mainPropertyNames } from '../epics/getColumnsConfiguration';
 import elementTypeKeys from '../../../../../metaData/DataElement/elementTypes';
 
 type EventContainer = {

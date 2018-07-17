@@ -30,6 +30,7 @@ yarn-error.log*
 .vscode/
 .DS_Store
 npm-debug.log
+/public/manifest.webapp
 
 # generated localization files
 src/locales/
