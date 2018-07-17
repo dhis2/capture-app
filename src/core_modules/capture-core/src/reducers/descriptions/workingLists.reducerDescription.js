@@ -71,7 +71,7 @@ const updateListsMetaOnResetProgramId = (state) => {
                 ...(state.main ? state.main.next : null),
                 sortById: 'eventDate',
                 sortByDirection: 'desc',
-                filters: state.main.filters ?
+                filters: (state.main && state.main.filters) ?
                     Object
                         .keys(state.main.filters)
                         .reduce((accFilters, key) => {
