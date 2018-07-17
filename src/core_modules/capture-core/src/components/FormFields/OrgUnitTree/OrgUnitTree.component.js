@@ -72,6 +72,7 @@ export default class OrgUnitTree extends React.Component {
                   const children = organisationUnits[0].children.valuesContainerMap;
 
                   const items = [];
+                  /* eslint-disable no-unused-vars */
                   for (const [k, v] of children.entries()) {
                     items.push({
                       open: false,
@@ -81,9 +82,6 @@ export default class OrgUnitTree extends React.Component {
                     });
                   }
                   items.sort((a, b) => a.label.localeCompare(b.label));
-
-                  console.log('items')
-                  console.log(items)
 
                   const { list } = this.state;
                   this.setChildren(path, items, list);
