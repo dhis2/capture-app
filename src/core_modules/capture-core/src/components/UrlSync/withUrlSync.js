@@ -19,6 +19,13 @@ type SyncSpecification = {
 };
 type SyncSpecificationGetter = (props: Props) => Array<SyncSpecification>;
 
+export type UpdateDataContainer = {
+    nextProps: Object,
+    prevProps: Object,
+    nextPage: ?string,
+    prevPage: ?string,
+};
+
 export const reservedUrlKeys = {
     ENTIRE_PARAM_STRING: 'ENTIRE_PARAM_STRING',
 };
@@ -35,6 +42,18 @@ const getUrlSyncer = (
                 value = param[param.length - 1].replace(regExp, '').trim() || null;
             }
             return value;
+        }
+
+        static getNextProps(locationParams: Object, syncSpecification: Array<SyncSpecification>) {
+            const nextParams = Object
+                .keys(locationParams)
+                .reduce((accNextParams, locationKey) => {
+                    const syncSpec = syncSpecification.find(s => s.urlKey === locationKey) || {};
+                    accNextParams[syncSpec.propKey || locationKey] = locationParams[locationKey];
+                    return accNextParams;
+                }, {});
+
+            return nextParams;
         }
 
         constructor(props: Props) {
@@ -79,8 +98,8 @@ const getUrlSyncer = (
                 });
         }
 
-        update(locationParams: { [key: string]: string}) {
-            this.props.onUpdate(locationParams);
+        update(updateData: UpdateDataContainer) {
+            this.props.onUpdate(updateData);
         }
 
         noUpdateRequired() {
@@ -92,7 +111,13 @@ const getUrlSyncer = (
             const locationParams = this.getLocationParams(syncSpecification);
             if (this.props.urlPage !== this.props.statePage ||
                 this.paramsNeedsUpdate(syncSpecification, locationParams)) {
-                this.update({ ...locationParams, page: this.props.urlPage });
+                const nextProps = UrlSyncer.getNextProps(locationParams, syncSpecification);
+                this.update({
+                    nextProps,
+                    prevProps: this.props.stateParams || {},
+                    nextPage: this.props.urlPage,
+                    prevPage: this.props.statePage,
+                });
                 return true;
             }
 

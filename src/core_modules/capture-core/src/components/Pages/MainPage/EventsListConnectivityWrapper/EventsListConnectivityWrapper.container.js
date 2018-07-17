@@ -6,4 +6,4 @@ const mapStateToProps = (state: ReduxState) => ({
     isOnline: !!state.offline.online,
 });
 
-export default connect(mapStateToProps)(EventsListConnectivityWrapper);
+export default connect(mapStateToProps, {})(EventsListConnectivityWrapper);

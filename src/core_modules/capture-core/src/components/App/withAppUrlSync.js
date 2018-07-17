@@ -13,12 +13,13 @@ import {
     editEventFromUrl as editEventFromUrlForNewEvent,
 } from '../Pages/EditEvent/editEvent.actions';
 import { reservedUrlKeys } from '../UrlSync/withUrlSync';
+import type { UpdateDataContainer } from '../UrlSync/withUrlSync';
 
 type Props = {
     location: {
         pathname: string,
     },
-    onUpdateFromUrl: (selections: Object, page: string) => void,
+    onUpdateFromUrl: (page: ?string, data: UpdateDataContainer) => void,
     params: Object,
     page: ?string,
     locationSwitchInProgress: ?boolean,
@@ -81,9 +82,8 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
         params: ?string;
         page: string;
 
-        handleUpdate = (selections: Object) => {
-            const page = this.page;
-            this.props.onUpdateFromUrl(selections, page);
+        handleUpdate = (updateData: UpdateDataContainer) => {
+            this.props.onUpdateFromUrl(this.page, updateData);
         }
 
         getSyncSpecification() {
@@ -159,7 +159,7 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
     });
 
     const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-        onUpdateFromUrl: (selections: Object, page: string) => dispatch(updaterForPages[page](selections, page)),
+        onUpdateFromUrl: (page: ?string, updateData: UpdateDataContainer) => dispatch(updaterForPages[page](updateData)),
     });
 
     return connect(mapStateToProps, mapDispatchToProps)(AppUrlSyncer);

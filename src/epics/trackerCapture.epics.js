@@ -42,7 +42,7 @@ import {
     getWorkingListOnSaveEpic,
     updateWorkingListEpic,
     getEventListOnReconnectEpic,
-} from 'capture-core/components/Pages/MainPage/EventsList/eventsList.epics';
+} from 'capture-core/components/Pages/MainPage/EventsList/epics/eventsList.epics';
 import {
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,
@@ -70,7 +70,7 @@ import {
 import {
     networkMonitorStatusEpic,
 } from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.epics';
-import {    
+import {
     setOrgUnit,
     setProgram,
     goBackToListContext,
@@ -85,6 +85,9 @@ import {
     newEventPageSelectorUpdateURLEpic,
     newEventPageSelectorResetURLEpic,
 } from 'capture-core/components/Pages/NewEvent/NewEventSelector/NewEventSelector.epics';
+import {
+    includeFiltersWithValueAfterColumnSortingEpic,
+} from 'capture-core/components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.epics';
 
 import { loadStartupData } from '../init/entry.epics';
 
@@ -133,4 +136,5 @@ export default combineEpics(
     editEventPageSelectorUpdateURLEpic,
     newEventPageSelectorUpdateURLEpic,
     newEventPageSelectorResetURLEpic,
+    includeFiltersWithValueAfterColumnSortingEpic,
 );

@@ -32,7 +32,7 @@ import i18n from '@dhis2/d2-i18n';
 
 const styles = () => ({
     paper: {
-        padding: 15,
+        padding: 5,
         backgroundColor: '#f6f6f6',
         borderRadius: 5,
     },
@@ -40,6 +40,7 @@ const styles = () => ({
         margin: 0,
         fontWeight: 425,
         fontSize: 15,
+        paddingBottom: 5,
     },
     form: {
         width: '100%',

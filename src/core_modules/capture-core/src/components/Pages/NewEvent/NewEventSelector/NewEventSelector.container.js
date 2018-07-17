@@ -18,9 +18,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onSetProgramId: (id: string) => {
         dispatch(setProgramIdFromNewEventPage(id));
     },
-    onResetProgramId: () => {
-        dispatch(resetProgramIdFromNewEventPage());
-    },
     onSetCategoryOption: (categoryId: string, categoryOptionId: string) => {
         dispatch(setCategoryOptionFromNewEventPage(categoryId, categoryOptionId));
     },
@@ -37,10 +34,11 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
             resetAllCategoryOptionsFromNewEventPage(),
         ], batchActionTypes.START_AGAIN));
     },
-    onResetProgramAndAllCategoryOptions: () => {
+    onResetProgramId: (baseAction: ReduxAction<any, any>) => {
         dispatch(batchActions([
             resetProgramIdFromNewEventPage(),
             resetAllCategoryOptionsFromNewEventPage(),
+            baseAction,
         ], batchActionTypes.RESET_PROGRAM_AND_CATEGORY_OPTION));
     },
 });

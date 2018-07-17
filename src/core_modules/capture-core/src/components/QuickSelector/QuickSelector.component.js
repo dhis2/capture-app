@@ -30,7 +30,7 @@ type Props = {
     onSetProgramId: (programId: string) => void,
     onSetCategoryOption: (categoryId: string, categoryOptionId: string) => void,
     onResetOrgUnitId: () => void,
-    onResetProgramId: () => void,
+    onResetProgramId: (baseAction: ReduxAction<any, any>) => void,
     onResetCategoryOption: (categoryId: string) => void,
     onResetAllCategoryOptions: () => void,
     onStartAgain: () => void,
@@ -105,6 +105,7 @@ class QuickSelector extends Component<Props> {
                     <Grid item xs={12} sm={programSelectorWidth}>
                         <ProgramSelector
                             selectedProgram={this.props.selectedProgramId}
+                            selectedOrgUnitId={this.props.selectedOrgUnitId}
                             selectedCategories={this.props.selectedCategories}
                             handleClickProgram={this.handleClickProgram}
                             handleSetCatergoryCombo={this.handleSetCatergoryCombo}
@@ -112,6 +113,7 @@ class QuickSelector extends Component<Props> {
                             buttonModeMaxLength={5}
                             onResetProgramId={this.props.onResetProgramId}
                             onResetCategoryOption={this.props.onResetCategoryOption}
+                            onResetOrgUnit={this.props.onResetOrgUnitId}
                         />
                     </Grid>
                     <Grid item xs={12} sm={actionButtonsWidth}>

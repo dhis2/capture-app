@@ -18,10 +18,19 @@ type Props = {
     onResetAllCategoryOptions: () => void,
     onOpenNewEventPage: (programId: string, orgUnitId: string) => void,
     onStartAgain: () => void,
-    onResetProgramAndAllCategoryOptions: () => void,
+    onResetProgramId: (baseAction: ReduxAction<any, any>) => void,
 };
 
-class EditEventSelector extends Component<Props> {
+type State = {
+    openStartAgainWarning: boolean;
+    openOrgUnitWarning: boolean;
+    openProgramWarning: ?Object; // uses the base action as open state for now
+    openCatComboWarning: boolean;
+    categoryIdToReset: string;
+    openNewWarning: boolean;
+};
+
+class EditEventSelector extends Component<Props, State> {
     handleOpenStartAgainWarning: () => void;
     handleOpenOrgUnitWarning: () => void;
     handleOpenProgramWarning: () => void;
@@ -33,22 +42,14 @@ class EditEventSelector extends Component<Props> {
     handleAcceptCatCombo: () => void;
     handleClickNew: () => void;
     handleAcceptNew: () => void;
-    state: {
-        openStartAgainWarning: boolean;
-        openOrgUnitWarning: boolean;
-        openProgramWarning: boolean;
-        openCatComboWarning: boolean;
-        categoryIdToReset: string;
-        openNewWarning: boolean;
-    };
 
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
 
         this.state = {
             openStartAgainWarning: false,
             openOrgUnitWarning: false,
-            openProgramWarning: false,
+            openProgramWarning: null,
             openCatComboWarning: false,
             categoryIdToReset: '',
             openNewWarning: false,
@@ -75,8 +76,8 @@ class EditEventSelector extends Component<Props> {
         this.setState({ openOrgUnitWarning: true });
     }
 
-    handleOpenProgramWarning() {
-        this.setState({ openProgramWarning: true });
+    handleOpenProgramWarning(baseAction: ReduxAction<any, any>) {
+        this.setState({ openProgramWarning: baseAction });
     }
 
     handleOpenCatComboWarning(categoryId) {
@@ -99,7 +100,7 @@ class EditEventSelector extends Component<Props> {
     }
 
     handleAcceptProgram() {
-        this.props.onResetProgramAndAllCategoryOptions();
+        this.props.onResetProgramId(this.state.openProgramWarning);
         this.handleClose();
     }
 
@@ -134,7 +135,7 @@ class EditEventSelector extends Component<Props> {
                 <EditEvent />
                 <WarningDialog onAcceptClick={this.handleAcceptStartAgain} open={this.state.openStartAgainWarning} onClose={this.handleClose} titleText={i18n.t('Start Again')} contentText={i18n.t('Are you sure? All unsaved data will be lost.')} />
                 <WarningDialog onAcceptClick={this.handleAcceptOrgUnit} open={this.state.openOrgUnitWarning} onClose={this.handleClose} titleText={i18n.t('Reset Organisation Unit')} contentText={i18n.t('Are you sure? All unsaved data will be lost.')} />
-                <WarningDialog onAcceptClick={this.handleAcceptProgram} open={this.state.openProgramWarning} onClose={this.handleClose} titleText={i18n.t('Reset Program')} contentText={i18n.t('Are you sure? All unsaved data will be lost.')} />
+                <WarningDialog onAcceptClick={this.handleAcceptProgram} open={!!this.state.openProgramWarning} onClose={this.handleClose} titleText={i18n.t('Reset Program')} contentText={i18n.t('Are you sure? All unsaved data will be lost.')} />
                 <WarningDialog onAcceptClick={this.handleAcceptCatCombo} open={this.state.openCatComboWarning} onClose={this.handleClose} titleText={i18n.t('Reset Category Option')} contentText={i18n.t('Are you sure? All unsaved data will be lost.')} />
                 <WarningDialog onAcceptClick={this.handleAcceptNew} open={this.state.openNewWarning} onClose={this.handleClose} titleText={i18n.t('Create New Event')} contentText={i18n.t('Are you sure? All unsaved data will be lost.')} />
             </div>
