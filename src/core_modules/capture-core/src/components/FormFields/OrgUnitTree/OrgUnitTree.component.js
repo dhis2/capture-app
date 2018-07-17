@@ -2,7 +2,7 @@ import React from 'react';
 import { getInstance } from 'd2/lib/d2';
 import Tree from './Tree';
 
-export class OrgUnitTree extends React.Component {
+export default class OrgUnitTree extends React.Component {
   state = {
       list: [],
       selected: this.props.selected || [],
@@ -72,16 +72,18 @@ export class OrgUnitTree extends React.Component {
                   const children = organisationUnits[0].children.valuesContainerMap;
 
                   const items = [];
-                  Object.keys(children).forEach((k) => {
-                      const v = children[k];
-                      items.push({
-                          open: false,
-                          value: v.path,
-                          label: v.displayName,
-                          children: [],
-                      });
-                  });
+                  for (const [k, v] of children.entries()) {
+                    items.push({
+                      open: false,
+                      value: v.path,
+                      label: v.displayName,
+                      children: [],
+                    });
+                  }
                   items.sort((a, b) => a.label.localeCompare(b.label));
+
+                  console.log('items')
+                  console.log(items)
 
                   const { list } = this.state;
                   this.setChildren(path, items, list);

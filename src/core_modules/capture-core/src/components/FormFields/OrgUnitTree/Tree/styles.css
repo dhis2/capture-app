@@ -17,6 +17,9 @@
   min-width: 27px;
   text-align: center;
 }
+.ou-tree .icon:focus {
+  outline: none;
+}
 .ou-tree .icon:empty {
   display: none;
 }
