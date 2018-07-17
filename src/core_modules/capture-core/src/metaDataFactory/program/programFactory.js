@@ -89,6 +89,7 @@ type CachedProgram = {
     id: string,
     displayName: string,
     displayShortName: string,
+    organisationUnits: Array<Object>,
     programStages: Array<CachedProgramStage>,
     programType: string,
     categoryCombo: ?CachedCategoryCombo,
@@ -275,6 +276,7 @@ function buildProgram(d2Program: CachedProgram) {
             _this.id = d2Program.id;
             _this.name = d2Program.displayName;
             _this.shortName = d2Program.displayShortName;
+            _this.organisationUnits = d2Program.organisationUnits;
             _this.categories = buildCategories(d2Program.categoryCombo && d2Program.categoryCombo.categories && d2Program.categoryCombo.categories.length > 0 && !d2Program.categoryCombo.isDefault ? d2Program.categoryCombo.categories : null);
         });
         const d2Stage = d2Program.programStages && d2Program.programStages[0];

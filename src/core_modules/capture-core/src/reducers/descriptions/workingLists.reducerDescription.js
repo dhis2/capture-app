@@ -18,6 +18,9 @@ import {
     actionTypes as mainPageSelectorActionTypes,
 } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
 import {
+    actionTypes as columnSelectorActionTypes,
+} from '../../components/ColumnSelector/actions/ColumnSelector.actions';
+import {
     actionTypes as filterSelectorActionTypes,
 } from '../../components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.actions';
 
@@ -312,6 +315,11 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
         newState.main = action.payload.columnsOrder;
+        return newState;
+    },
+    [columnSelectorActionTypes.UPDATE_WORKINGLIST_ORDER]: (state, action) => {
+        const newState = { ...state };
+        newState.main = [...action.payload];
         return newState;
     },
 }, 'workingListsColumnsOrder');

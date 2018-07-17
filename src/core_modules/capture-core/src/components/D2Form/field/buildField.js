@@ -126,6 +126,7 @@ const getOrgUnitField = (metaData: MetaDataElement, options: Object) => {
 };
 
 const fieldForTypes = {
+    [elementTypes.EMAIL]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
     [elementTypes.TEXT]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
     [elementTypes.LONG_TEXT]: (metaData: MetaDataElement, options: Object) => {
         const baseField = getBaseTextField(metaData, options);

@@ -5,10 +5,16 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-07-12T07:20:20.245Z\n"
-"PO-Revision-Date: 2018-07-12T07:20:20.245Z\n"
+"POT-Creation-Date: 2018-07-16T12:55:19.294Z\n"
+"PO-Revision-Date: 2018-07-16T12:55:19.294Z\n"
 
 msgid "Please provide a valid date"
+msgstr ""
+
+msgid "Columns to show in table"
+msgstr ""
+
+msgid "Column"
 msgstr ""
 
 msgid "Cancel"
@@ -230,6 +236,15 @@ msgid "Select"
 msgstr ""
 
 msgid "Program"
+msgstr ""
+
+msgid "No programs available."
+msgstr ""
+
+msgid "Show all"
+msgstr ""
+
+msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Select program"
