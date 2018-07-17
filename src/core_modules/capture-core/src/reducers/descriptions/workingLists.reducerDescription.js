@@ -611,6 +611,10 @@ export const workingListsUserSelectedFiltersDesc = createReducerDescription({
 
         return newState;
     },
+    [filterSelectorActionTypes.UPDATE_INCLUDED_FILTERS_AFTER_COLUMN_SORTING]: (state, action) => {
+        const newState = action.payload.includeFilters;
+        return newState;
+    },
     [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: () => ({}),
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateUserSelectedFilersOnUrlUpdate,
     [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateUserSelectedFilersOnUrlUpdate,

@@ -85,6 +85,9 @@ import {
     newEventPageSelectorUpdateURLEpic,
     newEventPageSelectorResetURLEpic,
 } from 'capture-core/components/Pages/NewEvent/NewEventSelector/NewEventSelector.epics';
+import {
+    includeFiltersWithValueAfterColumnSortingEpic,
+} from 'capture-core/components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.epics';
 
 import { loadStartupData } from '../init/entry.epics';
 
@@ -133,4 +136,5 @@ export default combineEpics(
     editEventPageSelectorUpdateURLEpic,
     newEventPageSelectorUpdateURLEpic,
     newEventPageSelectorResetURLEpic,
+    includeFiltersWithValueAfterColumnSortingEpic,
 );

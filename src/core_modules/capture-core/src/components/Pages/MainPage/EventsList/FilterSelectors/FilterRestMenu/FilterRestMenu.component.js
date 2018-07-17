@@ -82,6 +82,7 @@ class FilterRestMenu extends React.Component<Props, State> {
     }
 
     toggleMenu() {
+        this.updatePopper();
         this.setState({
             filterSelectorOpen: !this.state.filterSelectorOpen,
         });
@@ -101,7 +102,6 @@ class FilterRestMenu extends React.Component<Props, State> {
     handleItemSelected = (id: string) => {
         this.closeMenu();
         this.props.onItemSelected(id);
-        this.updatePopper();
     }
 
     renderMenuItems() {
