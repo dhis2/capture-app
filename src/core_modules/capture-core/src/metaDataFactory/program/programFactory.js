@@ -3,6 +3,7 @@
 import log from 'loglevel';
 
 import programCollection from '../../metaDataMemoryStores/programCollection/programCollection';
+import Program from '../../metaData/Program/Program';
 
 import EventProgram from '../../metaData/Program/EventProgram';
 import TrackerProgram from '../../metaData/Program/TrackerProgram';
@@ -368,6 +369,18 @@ function addRulesAndVariablesFromProgramIndicators(cachedProgramIndicators: Arra
     });
 }
 
+function sortPrograms(programs: Array<Program>) {
+    programs.sort((a, b) => {
+        if (a.name === b.name) {
+            return 0;
+        } else if (a.name > b.name) {
+            return 1;
+        }
+        return -1;
+    });
+    return programs;
+}
+
 export default function buildProgramCollection(
     cachedPrograms: ?Array<CachedProgram>,
     cachedOptionSets: ?Array<CachedOptionSet>,
@@ -379,10 +392,15 @@ export default function buildProgramCollection(
     currentD2OptionSets = cachedOptionSets;
 
     if (cachedPrograms) {
-        cachedPrograms.forEach((d2Program) => {
-            const program = buildProgram(d2Program);
-            programCollection.set(program.id, program);
-        });
+        sortPrograms(
+            cachedPrograms.map((d2Program) => {
+                const program = buildProgram(d2Program);
+                return program;
+            }),
+        )
+            .forEach((program) => {
+                programCollection.set(program.id, program);
+            });
 
         if (cachedProgramRulesVariables) {
             addProgramVariables(cachedProgramRulesVariables);
