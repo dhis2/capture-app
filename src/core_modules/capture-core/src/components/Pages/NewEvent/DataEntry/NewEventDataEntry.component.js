@@ -46,9 +46,25 @@ const getStyles = theme => ({
     },
 });
 
-const getSaveOptions = () => ({
-    color: 'primary',
-});
+const saveTypes = {
+    SAVEANDADDANOTHER: 'SAVEANDADDANOTHER',
+    SAVEANDEXIT: 'SAVEANDEXIT',
+};
+
+const getSaveOptions = (props: Object) => {
+    const saveAndAddAnother = { key: saveTypes.SAVEANDADDANOTHER, text: i18n.t('Save and add another') };
+    const saveAndExit = { key: saveTypes.SAVEANDEXIT, text: i18n.t('Save and exit') };
+    if (props.formHorizontal) {
+        return {
+            color: 'primary',
+            saveTypes: [saveAndAddAnother, saveAndExit],
+        };
+    }
+    return {
+        color: 'primary',
+        saveTypes: [saveAndExit, saveAndAddAnother],
+    };
+};
 
 const getCancelOptions = () => ({
     color: 'secondary',
@@ -115,6 +131,7 @@ type Props = {
     onUpdateField: (innerAction: ReduxAction<any, any>) => void,
     onStartAsyncUpdateField: Object,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onSaveAndAddAnother: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onCancel: () => void,
     classes: {
         savingContextContainer: string,
@@ -138,6 +155,15 @@ class NewEventDataEntry extends Component<Props> {
     componentWillUnmount() {
         inMemoryFileStore.clear();
     }
+
+    handleSave = (itemId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: ?string) => {
+        if (saveType === saveTypes.SAVEANDADDANOTHER) {
+            this.props.onSaveAndAddAnother(itemId, dataEntryId, formFoundation);
+        } else if (saveType === saveTypes.SAVEANDEXIT) {
+            this.props.onSave(itemId, dataEntryId, formFoundation);
+        }
+    }
+
     getSavingText() {
         const { classes, orgUnitName, programName } = this.props;
         const firstPart = `${i18n.t('Saving to')} `;
@@ -178,7 +204,6 @@ class NewEventDataEntry extends Component<Props> {
             formFoundation,
             onUpdateField,
             onStartAsyncUpdateField,
-            onSave,
             onCancel,
             programName, // eslint-disable-line
             orgUnitName, // eslint-disable-line
@@ -194,7 +219,7 @@ class NewEventDataEntry extends Component<Props> {
                         onUpdateFormField={onUpdateField}
                         onUpdateFormFieldAsync={onStartAsyncUpdateField}
                         onCancel={onCancel}
-                        onSave={onSave}
+                        onSave={this.handleSave}
                         formHorizontal={formHorizontal}
                         fieldOptions={this.fieldOptions}
                     />

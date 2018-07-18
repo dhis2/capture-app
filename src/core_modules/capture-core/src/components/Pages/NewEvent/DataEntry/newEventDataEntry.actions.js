@@ -121,6 +121,9 @@ export const cancelNewEventFromIncompleteSelectionAndReturnToMainPage = () =>
 export const setNewEventFormLayoutDirection = (formHorizontal: boolean) =>
     actionCreator(actionTypes.SET_NEW_EVENT_FORM_LAYOUT_DIRECTION)({ formHorizontal });
 
+export const requestSaveNewEventAndAddAnother = (eventId: string, dataEntryId: string, formFoundation: Object) => {
+};
+
 export const startAsyncUpdateFieldForNewEvent =
     (
         fieldId: string,

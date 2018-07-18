@@ -9,6 +9,7 @@ import {
     requestSaveNewEventAndReturnToMainPage,
     cancelNewEventAndReturnToMainPage,
     batchActionTypes,
+    requestSaveNewEventAndAddAnother,
 } from './newEventDataEntry.actions';
 import {
     makeProgramNameSelector,
@@ -62,6 +63,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);
         dispatch(requestSaveNewEventAndReturnToMainPage(eventId, dataEntryId, formFoundation));
+    },
+    onSaveAndAddAnother: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
+        dispatch(requestSaveNewEventAndAddAnother(eventId, dataEntryId, formFoundation));
     },
     onCancel: () => {
         window.scrollTo(0, 0);
