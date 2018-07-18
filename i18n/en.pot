@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-07-18T07:24:14.555Z\n"
-"PO-Revision-Date: 2018-07-18T07:24:14.555Z\n"
+"POT-Creation-Date: 2018-07-18T07:46:11.164Z\n"
+"PO-Revision-Date: 2018-07-18T07:46:11.164Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -83,6 +83,9 @@ msgstr ""
 msgid "Contains text"
 msgstr ""
 
+msgid "Yes"
+msgstr ""
+
 msgid "Uploading file"
 msgstr ""
 
@@ -93,9 +96,6 @@ msgid "Delete"
 msgstr ""
 
 msgid "Select file"
-msgstr ""
-
-msgid "Yes"
 msgstr ""
 
 msgid "No"
@@ -159,6 +159,9 @@ msgid "Update"
 msgstr ""
 
 msgid "Close"
+msgstr ""
+
+msgid "More filters"
 msgstr ""
 
 msgid "No events to display"

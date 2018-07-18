@@ -1,22 +1,17 @@
 // @flow
 import React, { Component } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
-import MultiSelectBoxes from '../../FormFields/Options/MultiSelectBoxes/MultiSelectBoxes.component';
+import D2TrueOnly from '../../FormFields/Generic/D2TrueOnly.component';
 import { orientations } from '../../FormFields/Options/MultiSelectBoxes/multiSelectBoxes.const';
-import withConvertedOptionSet from '../../FormFields/Options/withConvertedOptionSet';
-import OptionSet from '../../../metaData/OptionSet/OptionSet';
 import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { convertValue as convertToClientValue } from '../../../converters/formToClient';
 
-import type{ UpdatableFilterContent } from '../filters.types';
-
-const MultiSelectBoxesWithConvertedOptionSet = withConvertedOptionSet()(MultiSelectBoxes);
+import type { UpdatableFilterContent } from '../filters.types';
 
 const getStyles = (theme: Theme) => ({
     selectBoxesContainer: {
-        maxHeight: theme.typography.pxToRem(250),
-        overflowY: 'auto',
         marginRight: theme.typography.pxToRem(-24),
     },
 });
@@ -25,7 +20,6 @@ type Value = ?Array<any>;
 
 type Props = {
     type: $Values<typeof elementTypes>,
-    optionSet: OptionSet,
     value: Value,
     onCommitValue: (value: Value) => void,
     classes: {
@@ -33,7 +27,7 @@ type Props = {
     },
 };
 // $FlowSuppress
-class OptionSetFilter extends Component<Props> implements UpdatableFilterContent<Value> {
+class TrueOnlyFilter extends Component<Props> implements UpdatableFilterContent<Value> {
     static getRequestData(values: Array<any>, type: $Values<typeof elementTypes>) {
         const valueString = values
             .map((value) => {
@@ -46,10 +40,10 @@ class OptionSetFilter extends Component<Props> implements UpdatableFilterContent
         return `in:[${valueString}]`;
     }
 
-    static getAppliedText(values: Array<any>, optionSet: OptionSet) {
+    static getAppliedText(values: Array<any>) {
         const valueString = values
-            .map((value) => {
-                const text = optionSet.getOptionText(value);
+            .map(() => {
+                const text = i18n.t('Yes');
                 return text;
             })
             .join(', ');
@@ -65,8 +59,8 @@ class OptionSetFilter extends Component<Props> implements UpdatableFilterContent
         }
 
         return {
-            requestData: OptionSetFilter.getRequestData(value, this.props.type),
-            appliedText: OptionSetFilter.getAppliedText(value, this.props.optionSet),
+            requestData: TrueOnlyFilter.getRequestData(value, this.props.type),
+            appliedText: TrueOnlyFilter.getAppliedText(value),
         };
     }
 
@@ -74,17 +68,22 @@ class OptionSetFilter extends Component<Props> implements UpdatableFilterContent
         return true;
     }
 
+    handleTrueOnlyBlur = (value: ?string) => {
+        this.props.onCommitValue(value ? [value] : null);
+    }
+
     render() {
-        const { onCommitValue, optionSet, value, classes } = this.props;
+        const { value, classes } = this.props;
 
         return (
             <div
                 className={classes.selectBoxesContainer}
             >
-                <MultiSelectBoxesWithConvertedOptionSet
-                    optionSet={optionSet}
+                <D2TrueOnly
+                    label={i18n.t('Yes')}
+                    useValueLabel
                     value={value}
-                    onBlur={onCommitValue}
+                    onBlur={this.handleTrueOnlyBlur}
                     orientation={orientations.VERTICAL}
                 />
             </div>
@@ -92,4 +91,4 @@ class OptionSetFilter extends Component<Props> implements UpdatableFilterContent
     }
 }
 
-export default withStyles(getStyles)(OptionSetFilter);
+export default withStyles(getStyles)(TrueOnlyFilter);

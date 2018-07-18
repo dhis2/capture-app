@@ -1,6 +1,5 @@
 // @flow
 import { actionCreator } from 'capture-core/actions/actions.utils';
-import { reservedUrlKeys } from '../../UrlSync/withUrlSync';
 
 export const actionTypes = {
     EDIT_EVENT_FROM_URL: 'EditEventFromUrl',
@@ -11,10 +10,10 @@ export const actionTypes = {
     START_OPEN_EVENT_FOR_EDIT: 'StartOpenEventForEditInDataEntry',
 };
 
-export const editEventFromUrl = (selections: Object) =>
+export const editEventFromUrl = (data: Object) =>
     actionCreator(actionTypes.EDIT_EVENT_FROM_URL)({
-        eventId: selections[reservedUrlKeys.ENTIRE_PARAM_STRING],
-        page: selections.page,
+        eventId: data.nextProps.eventId,
+        page: data.nextPage,
     });
 
 export const eventFromUrlCouldNotBeRetrieved = (message: string) =>

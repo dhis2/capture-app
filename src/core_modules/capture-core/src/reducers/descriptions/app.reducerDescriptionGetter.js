@@ -15,10 +15,18 @@ import {
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
 import { actionTypes as eventListActionTypes } from '../../components/Pages/MainPage/EventsList/eventsList.actions';
 import { actionTypes as connectivityActionTypes } from '../../components/Connectivity/connectivity.actions';
-import { actionTypes as setCurrentSelectionsActionTypes } from '../../components/QuickSelector/actions/QuickSelector.actions';
-import { actionTypes as mainPageSelectorActionTypes } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
-import { actionTypes as editEventPageSelectorActionTypes } from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
-import { actionTypes as newEventPageSelectorActionTypes } from '../../components/Pages/NewEvent/NewEventSelector/NewEventSelector.actions';
+import {
+    actionTypes as setCurrentSelectionsActionTypes,
+} from '../../components/QuickSelector/actions/QuickSelector.actions';
+import {
+    actionTypes as mainPageSelectorActionTypes,
+} from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
+import {
+    actionTypes as editEventPageSelectorActionTypes,
+} from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
+import {
+    actionTypes as newEventPageSelectorActionTypes,
+} from '../../components/Pages/NewEvent/NewEventSelector/NewEventSelector.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
@@ -26,11 +34,11 @@ const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
 export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescription({
     ...appUpdaters,
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: (state, action) => {
-        const newState = { ...state, page: action.payload.page };
+        const newState = { ...state, page: action.payload.nextPage };
         return newState;
     },
     [newEventSelectionActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
-        const newState = { ...state, page: action.payload.page };
+        const newState = { ...state, page: action.payload.nextPage };
         return newState;
     },
     [editEventActionTypes.EDIT_EVENT_FROM_URL]: (state, action) => {
@@ -152,8 +160,11 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
     [editEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
-        const newState = { ...state };
-        newState.locationSwitchInProgress = true;
+        const newState = {
+            ...state,
+            page: null,
+            locationSwitchInProgress: true,
+        };
         return newState;
     },
     [editEventPageSelectorActionTypes.SET_ORG_UNIT]: (state) => {
@@ -167,13 +178,19 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
     [editEventPageSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
-        const newState = { ...state };
-        newState.locationSwitchInProgress = true;
+        const newState = {
+            ...state,
+            page: null,
+            locationSwitchInProgress: true,
+        };
         return newState;
     },
     [editEventPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state) => {
-        const newState = { ...state };
-        newState.locationSwitchInProgress = true;
+        const newState = {
+            ...state,
+            page: null,
+            locationSwitchInProgress: true,
+        };
         return newState;
     },
     [newEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {

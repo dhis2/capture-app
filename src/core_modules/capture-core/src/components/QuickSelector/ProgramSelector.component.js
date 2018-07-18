@@ -24,6 +24,7 @@ import Grid from '@material-ui/core/Grid';
 import i18n from '@dhis2/d2-i18n';
 
 import EventProgram from '../../metaData/Program/EventProgram';
+import { resetProgramIdBase } from './actions/QuickSelector.actions';
 
 const styles = () => ({
     paper: {
@@ -104,7 +105,7 @@ type Props = {
     handleClickProgram: (value: string) => void,
     handleSetCatergoryCombo: (value: string, value: string) => void,
     handleResetCategorySelections: () => void,
-    onResetProgramId: () => void,
+    onResetProgramId: (baseAction: ReduxAction<any, any>) => void,
     onResetCategoryOption: (categoryId: string) => void,
     onResetOrgUnit: () => void,
     buttonModeMaxLength: number,
@@ -133,7 +134,7 @@ class ProgramSelector extends Component<Props> {
     }
 
     handleResetProgram() {
-        this.props.onResetProgramId();
+        this.props.onResetProgramId(resetProgramIdBase());
     }
 
     handleResetCategoryOption(categoryId) {

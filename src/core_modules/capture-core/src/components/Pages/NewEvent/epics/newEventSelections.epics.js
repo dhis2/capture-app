@@ -14,9 +14,9 @@ import programCollection from '../../../../metaDataMemoryStores/programCollectio
 export const selectionsFromUrlGetOrgUnitDataForNewEventEpic = (action$: InputObservable) =>
     // $FlowSuppress
     action$.ofType(actionTypes.UPDATE_SELECTIONS_FROM_URL)
-        .filter(action => action.payload.orgUnitId)
+        .filter(action => action.payload.nextProps.orgUnitId)
         .switchMap(action => getApi()
-            .get(`organisationUnits/${action.payload.orgUnitId}`)
+            .get(`organisationUnits/${action.payload.nextProps.orgUnitId}`)
             .then(response => setCurrentOrgUnitBasedOnUrl({ id: response.id, name: response.displayName }),
             )
             .catch(() =>
@@ -27,7 +27,7 @@ export const selectionsFromUrlGetOrgUnitDataForNewEventEpic = (action$: InputObs
 export const selectionsFromUrlEmptyOrgUnitForNewEventEpic = (action$: InputObservable) =>
     // $FlowSuppress
     action$.ofType(actionTypes.UPDATE_SELECTIONS_FROM_URL)
-        .filter(action => !action.payload.orgUnitId)
+        .filter(action => !action.payload.nextProps.orgUnitId)
         .map(() => setEmptyOrgUnitBasedOnUrl());
 
 export const selectionsFromUrlValidationForNewEventEpic = (action$: InputObservable, store: ReduxStore) =>

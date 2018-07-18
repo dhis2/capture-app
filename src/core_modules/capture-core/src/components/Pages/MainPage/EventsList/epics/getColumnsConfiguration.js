@@ -1,6 +1,6 @@
 // @flow
-import getStageFromProgramIdForEventProgram from '../../../../metaData/helpers/getStageFromProgramIdForEventProgram';
-import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
+import getStageFromProgramIdForEventProgram from '../../../../../metaData/helpers/getStageFromProgramIdForEventProgram';
+import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
 
 export const mainPropertyNames = {
     EVENT_DATE: 'eventDate',
