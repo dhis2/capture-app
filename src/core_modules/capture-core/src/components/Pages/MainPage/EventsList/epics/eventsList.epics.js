@@ -103,7 +103,7 @@ const getInitialWorkingListActionAsync = (
 
     const { programId, orgUnitId, categories } = allQueryArgs;
 
-    return getInitialWorkingListDataAsync(allQueryArgs, !!state.workingListsColumnsOrder.main)
+    return getInitialWorkingListDataAsync(allQueryArgs, state.workingListsColumnsOrder.main)
         .then(data =>
             workingListInitialDataRetrieved({
                 ...data,
@@ -127,7 +127,7 @@ const getUpdateWorkingListActionAsync = (
         ...customArgs,
     };
 
-    return getUpdateWorkingListDataAsync(queryArgs)
+    return getUpdateWorkingListDataAsync(queryArgs, state.workingListsColumnsOrder.main)
         .then(data =>
             workingListUpdateDataRetrieved(data),
         )

@@ -5,15 +5,18 @@ import isFunction from 'd2-utilizr/src/isFunction';
 import Category from './Category';
 
 export default class CategoryCombination {
-    _name: ?string;
-    _id: ?string;
-    _categories: ?Array<Category>;
+    _name: string;
+    _id: string;
+    _categories: Array<Category>;
 
     constructor(initFn: ?(_this: CategoryCombination) => void) {
+        this.name = '';
+        this.id = '';
+        this.categories = [];
         initFn && isFunction(initFn) && initFn(this);
     }
 
-    get name(): ?string {
+    get name(): string {
         return this._name;
     }
 
@@ -21,7 +24,7 @@ export default class CategoryCombination {
         this._name = name;
     }
 
-    get id(): ?string {
+    get id(): string {
         return this._id;
     }
 
@@ -29,11 +32,11 @@ export default class CategoryCombination {
         this._id = id;
     }
 
-    get categories(): ?Array<Category> {
+    get categories(): Array<Category> {
         return this._categories;
     }
 
-    set categories(categories: ?Array<Category>) {
+    set categories(categories: Array<Category>) {
         this._categories = categories;
     }
 }

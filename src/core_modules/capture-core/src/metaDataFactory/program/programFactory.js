@@ -14,6 +14,7 @@ import DataElement from '../../metaData/DataElement/DataElement';
 import OptionSet from '../../metaData/OptionSet/OptionSet';
 import { inputTypes } from '../../metaData/OptionSet/optionSet.const';
 import Option from '../../metaData/OptionSet/Option';
+import CategoryCombination from '../../metaData/CategoryCombinations/CategoryCombination';
 import Category from '../../metaData/CategoryCombinations/Category';
 
 import { convertOptionSetValue } from '../../converters/serverToClient';
@@ -255,19 +256,38 @@ function buildStage(d2ProgramStage: CachedProgramStage) {
 }
 
 
-function buildCategories(cachedCategories) {
-    return cachedCategories ?
-        cachedCategories
-            .map(cachedCategory =>
-                new Category((_this) => {
-                    _this.id = cachedCategory.id;
-                    _this.name = cachedCategory.displayName;
-                    _this.categoryOptions = cachedCategory.categoryOptions ? cachedCategory.categoryOptions.map(cachedOption => ({
-                        id: cachedOption.id,
-                        name: cachedOption.displayName,
-                    })) : null;
-                }),
-            ) : null;
+function buildCategories(cachedCategories: Array<CachedCategory>) {
+    return cachedCategories
+        .map(cachedCategory =>
+            new Category((_this) => {
+                _this.id = cachedCategory.id;
+                _this.name = cachedCategory.displayName;
+                _this.categoryOptions = cachedCategory.categoryOptions ? cachedCategory.categoryOptions.map(cachedOption => ({
+                    id: cachedOption.id,
+                    name: cachedOption.displayName,
+                })) : null;
+            }),
+        );
+}
+
+function buildCategoriCombination(cachedCategoriCombination: ?CachedCategoryCombo) {
+    if (!(
+        cachedCategoriCombination &&
+        !cachedCategoriCombination.isDefault &&
+        cachedCategoriCombination.categories &&
+        cachedCategoriCombination.categories.length > 0
+    )) {
+        return null;
+    }
+
+    return new CategoryCombination((_this) => {
+        // $FlowSuppress
+        _this.name = cachedCategoriCombination.displayName;
+        // $FlowSuppress
+        _this.id = cachedCategoriCombination.id;
+        // $FlowSuppress
+        _this.categories = buildCategories(cachedCategoriCombination.categories);
+    });
 }
 
 function buildProgram(d2Program: CachedProgram) {
@@ -278,7 +298,7 @@ function buildProgram(d2Program: CachedProgram) {
             _this.name = d2Program.displayName;
             _this.shortName = d2Program.displayShortName;
             _this.organisationUnits = d2Program.organisationUnits;
-            _this.categories = buildCategories(d2Program.categoryCombo && d2Program.categoryCombo.categories && d2Program.categoryCombo.categories.length > 0 && !d2Program.categoryCombo.isDefault ? d2Program.categoryCombo.categories : null);
+            _this.categoryCombination = buildCategoriCombination(d2Program.categoryCombo);
         });
         const d2Stage = d2Program.programStages && d2Program.programStages[0];
         program.stage = buildStage(d2Stage);

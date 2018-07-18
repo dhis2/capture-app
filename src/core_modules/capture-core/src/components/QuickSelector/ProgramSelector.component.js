@@ -110,7 +110,7 @@ type Props = {
     onResetOrgUnit: () => void,
     buttonModeMaxLength: number,
     showWarning: boolean,
-    selectedProgram: Object,
+    selectedProgram: string,
     selectedOrgUnitId: string,
     selectedCategories: Object,
     classes: Object,
@@ -173,15 +173,10 @@ class ProgramSelector extends Component<Props> {
         const programOptionSet = new OptionSet('programOptionSet', programOptions);
 
         // If program is set in Redux state.
-        if (this.props.selectedProgram) {
-            let selectedProgram = {};
-            for (let i = 0; i < programsArray.length; i++) {
-                // Get full program object based on id from this.props.selectedProgram.
-                if (programsArray[i].id === this.props.selectedProgram) {
-                    selectedProgram = programsArray[i];
-                }
-            }
-            if (selectedProgram.categories) {
+        const selectedProgram = this.props.selectedProgram ? programs.get(this.props.selectedProgram) : null;
+
+        if (selectedProgram) {
+            if (selectedProgram.categoryCombination) {
                 return (
                     <div>
                         <Paper elevation={1} className={this.props.classes.selectedPaper}>
@@ -194,7 +189,7 @@ class ProgramSelector extends Component<Props> {
                                         </IconButton>
                                     </p>
                                 </Grid>
-                                {selectedProgram.categories.map(i =>
+                                {selectedProgram.categoryCombination.categories.map(i =>
                                     (<Grid key={i.id} item xs={12} sm={6}>
                                         <h4 className={this.props.classes.title}>{i.name}</h4>
                                         {

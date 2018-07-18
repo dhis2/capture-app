@@ -2,6 +2,12 @@
 import getStageFromProgramIdForEventProgram from '../../../../../metaData/helpers/getStageFromProgramIdForEventProgram';
 import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
 
+export type ColumnConfig = {
+    id: string,
+    visible: boolean,
+    isMainProperty?: ?boolean,
+};
+
 export const mainPropertyNames = {
     EVENT_DATE: 'eventDate',
 };
@@ -20,7 +26,7 @@ const getMetaDataConfig = (stage: RenderFoundation) =>
             visible: element.displayInReports,
         }));
 
-const getColumnsConfiguration = (programId: string): Promise<any> =>
+const getColumnsConfiguration = (programId: string): Promise<Array<ColumnConfig>> =>
     // TODO: retrieve columns configuration from system/user config.
 
     new Promise((resolve, reject) => {

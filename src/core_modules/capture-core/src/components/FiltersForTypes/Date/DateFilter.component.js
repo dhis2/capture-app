@@ -166,7 +166,7 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
             }
             if (toValue) {
                 // $FlowSuppress
-                const toClientValue: string = DateFilter.convertDateFilterValueToClientValue(fromValue);
+                const toClientValue: string = DateFilter.convertDateFilterValueToClientValue(toValue);
                 const toFilterRequest = DateFilter.formatDateForFilterRequest(moment(toClientValue));
                 requestData.push(`le:${toFilterRequest}`);
             }
