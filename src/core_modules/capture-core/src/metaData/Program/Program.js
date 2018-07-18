@@ -7,6 +7,7 @@ import type { ProgramRule, ProgramRuleVariable } from '../../RulesEngine/rulesEn
 
 export default class Program {
     _id: string;
+    _access: Array<Array<boolean> | boolean>;
     _name: string;
     _shortName: string;
     _organisationUnits: Array<Object>;
@@ -26,6 +27,13 @@ export default class Program {
     }
     get id(): string {
         return this._id;
+    }
+
+    set access(access: Array<Array<boolean> | boolean>): void {
+        this._access = access;
+    }
+    get access(): Array<Array<boolean> | boolean> {
+        return this._access;
     }
 
     set name(name: string) {

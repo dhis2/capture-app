@@ -89,6 +89,7 @@ type CachedCategoryCombo = {
 
 type CachedProgram = {
     id: string,
+    access: Array<Array<boolean> | boolean>,
     displayName: string,
     displayShortName: string,
     organisationUnits: Array<Object>,
@@ -295,6 +296,7 @@ function buildProgram(d2Program: CachedProgram) {
     if (d2Program.programType === 'WITHOUT_REGISTRATION') {
         program = new EventProgram((_this) => {
             _this.id = d2Program.id;
+            _this.access = d2Program.access;
             _this.name = d2Program.displayName;
             _this.shortName = d2Program.displayShortName;
             _this.organisationUnits = d2Program.organisationUnits;
