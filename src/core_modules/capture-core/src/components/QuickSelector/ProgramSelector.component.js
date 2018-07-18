@@ -159,7 +159,7 @@ class ProgramSelector extends Component<Props> {
                 _this.text = program.name;
             }));
 
-            areAllProgramsAvailable = programOptions.length == programsArray.filter(program => program instanceof EventProgram).length;
+            areAllProgramsAvailable = programOptions.length == programsArray.filter(program => program instanceof EventProgram && program.access.data.read).length;
 
         } else {
             programOptions = programsArray
