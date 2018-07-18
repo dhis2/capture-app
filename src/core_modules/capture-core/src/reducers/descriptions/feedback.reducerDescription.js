@@ -76,5 +76,16 @@ export const feedbackDesc = createReducerDescription({
     ],
     [dataEntryActionTypes.ASYNC_UPDATE_FIELD_FAILED]: (state, action) =>
         addErrorFeedback(state, action.payload.message),
+    [newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER]: (state, action) => {
+        const error = action.payload;
+        const errorMessage = isString(error) ? error : error.message;
+        const errorObject = isObject(error) ? error : null;
+        log.error(errorCreator(errorMessage || i18n.t('Error saving event'))(errorObject));
+        const newState = [
+            ...state,
+            getErrorFeedback(i18n.t('Could not save event. See log for details')),
+        ];
+        return newState;
+    },
 }, 'feedbacks', []);
 

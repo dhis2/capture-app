@@ -9,6 +9,7 @@ import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFounda
 import EventProgram from '../../../../metaData/Program/EventProgram';
 import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
+import { saveTypes } from './newEventSaveTypes';
 
 export const batchActionTypes = {
     UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH: 'UpdateFieldForNewSingleEventActionsBatch',
@@ -30,6 +31,11 @@ export const actionTypes = {
     CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE: 'CancelNewEventFromIncompleteSelectionAndReturnToMainPage',
     SET_NEW_EVENT_FORM_LAYOUT_DIRECTION: 'SetNewEventFormLayoutDirection',
     START_ASYNC_UPDATE_FIELD_FOR_NEW_EVENT: 'StartAsyncUpdateFieldForNewEvent',
+    REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER: 'RequestSaveNewEventAddAnother',
+    START_SAVE_NEW_EVENT_ADD_ANOTHER: 'startSaveMewEventAddAnother',
+    NEW_EVENT_SAVED_ADD_ANOTHER: 'NewEventSavedAddAnother',
+    SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER: 'SaveFailedForNewEventAddAnother',
+    SET_NEW_EVENT_SAVE_TYPES: 'SetNewEventSaveTypes',
 };
 
 function convertStatusIn(value: string) {
@@ -121,8 +127,28 @@ export const cancelNewEventFromIncompleteSelectionAndReturnToMainPage = () =>
 export const setNewEventFormLayoutDirection = (formHorizontal: boolean) =>
     actionCreator(actionTypes.SET_NEW_EVENT_FORM_LAYOUT_DIRECTION)({ formHorizontal });
 
-export const requestSaveNewEventAndAddAnother = (eventId: string, dataEntryId: string, formFoundation: Object) => {
-};
+export const setNewEventSaveTypes = (newSaveTypes: ?Array<$Values<typeof saveTypes>>) =>
+    actionCreator(actionTypes.SET_NEW_EVENT_SAVE_TYPES)({ saveTypes: newSaveTypes });
+
+export const requestSaveNewEventAddAnother = (eventId: string, dataEntryId: string, formFoundation: Object) =>
+    actionCreator(actionTypes.REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER)({
+        eventId,
+        dataEntryId,
+        formFoundation,
+    }, { skipLogging: ['formFoundation'] });
+
+export const startSaveNewEventAddAnother = (serverData: Object, selections: Object) =>
+    actionCreator(actionTypes.START_SAVE_NEW_EVENT_ADD_ANOTHER)({ selections }, {
+        offline: {
+            effect: {
+                url: 'events',
+                method: methods.POST,
+                data: serverData,
+            },
+            commit: { type: actionTypes.NEW_EVENT_SAVED_ADD_ANOTHER, meta: { selections } },
+            rollback: { type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER, meta: { selections } },
+        },
+    });
 
 export const startAsyncUpdateFieldForNewEvent =
     (

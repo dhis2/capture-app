@@ -33,7 +33,7 @@ const errorMessages = {
 
 export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(editEventSelectorActionTypes.OPEN_NEW_EVENT, mainPageSelectorActionTypes.OPEN_NEW_EVENT, newEventSelectionTypes.VALID_SELECTIONS_FROM_URL)
+    action$.ofType(editEventSelectorActionTypes.OPEN_NEW_EVENT, mainPageSelectorActionTypes.OPEN_NEW_EVENT, newEventSelectionTypes.VALID_SELECTIONS_FROM_URL, newEventDataEntryActionTypes.START_SAVE_NEW_EVENT_ADD_ANOTHER)
         .map(() => {
             const state = store.getState();
             const selectionsComplete = state.currentSelections.complete;

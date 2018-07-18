@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-07-18T07:46:11.164Z\n"
-"PO-Revision-Date: 2018-07-18T07:46:11.164Z\n"
+"POT-Creation-Date: 2018-07-18T13:55:05.717Z\n"
+"PO-Revision-Date: 2018-07-18T13:55:05.717Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -200,12 +200,6 @@ msgstr ""
 msgid "Switch to row view"
 msgstr ""
 
-msgid "Save and add another"
-msgstr ""
-
-msgid "Save and exit"
-msgstr ""
-
 msgid "Saving to"
 msgstr ""
 
@@ -215,6 +209,12 @@ msgstr ""
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
+msgstr ""
+
+msgid "Save and add another"
+msgstr ""
+
+msgid "Save and exit"
 msgstr ""
 
 msgid "Are you sure? All unsaved data will be lost"

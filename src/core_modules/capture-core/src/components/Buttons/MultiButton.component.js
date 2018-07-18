@@ -26,6 +26,12 @@ const styles = () => ({
     },
 });
 
+type DropDownItem = {
+    key: string,
+    text: string,
+    onClick: () => void,
+}
+
 type Props = {
     color: string,
     variant: string,
@@ -33,7 +39,7 @@ type Props = {
     buttonText: string,
     buttonProps: Object,
     arrowProps: Object,
-    dropDownItems: [{ key: string, text: string, onClick: () => void }],
+    dropDownItems: Array<DropDownItem>,
     classes: {buttonsContainer: string, arrowButton: string, button: string }
 };
 
@@ -53,23 +59,26 @@ class MultiButton extends React.Component<Props, State> {
         };
     }
 
-    getMenuItems = () => this.props.dropDownItems.map(item =>
-        (<MenuItem
-            key={item.key}
-            onClick={item.onClick}
-        >
-            {item.text}
-        </MenuItem>),
-    )
+    onMenuItemClick = (item: DropDownItem) => {
+        this.toggleMenu();
+        item.onClick();
+    }
 
     toggleMenu = () => {
-
-
         this.setState({
             menuOpen: !this.state.menuOpen,
             anchorElement: this.buttonInstance,
         });
     }
+
+    renderMenuItems = () => this.props.dropDownItems.map(item =>
+        (<MenuItem
+            key={item.key}
+            onClick={() => this.onMenuItemClick(item)}
+        >
+            {item.text}
+        </MenuItem>),
+    )
 
     render() {
         const { classes, color, variant } = this.props;
@@ -108,7 +117,7 @@ class MultiButton extends React.Component<Props, State> {
                     open={this.state.menuOpen}
                     onClose={this.toggleMenu}
                 >
-                    {this.getMenuItems()}
+                    {this.renderMenuItems()}
                 </Menu>
             </div>
 

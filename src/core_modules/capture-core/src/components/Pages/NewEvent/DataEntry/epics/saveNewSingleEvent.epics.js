@@ -4,6 +4,7 @@ import moment from '../../../../../utils/moment/momentResolver';
 import {
     actionTypes as newEventDataEntryActionTypes,
     startSaveNewEventAfterReturnedToMainPage,
+    startSaveNewEventAddAnother,
 } from '../newEventDataEntry.actions';
 
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
@@ -13,7 +14,7 @@ import { convertMainEventClientToServerWithKeysMap } from '../../../../../events
 
 export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)
+    action$.ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE, newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER)
         .map((action) => {
             const state = store.getState();
             const payload = action.payload;
@@ -54,6 +55,9 @@ export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
                     })),
             };
 
+            if (action.type === newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER) {
+                return startSaveNewEventAddAnother(serverData, state.currentSelections);
+            }
             return startSaveNewEventAfterReturnedToMainPage(serverData, state.currentSelections);
         });
 

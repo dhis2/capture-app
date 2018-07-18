@@ -47,7 +47,7 @@ type SaveType = {
 
 type Options = {
     color?: ?string,
-    saveTypes: Array<SaveType>,
+    saveTypes?: ?Array<SaveType>,
 };
 
 type OptionFn = (props: Props) => Options;
@@ -244,7 +244,7 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn: Optio
         )
 
         renderMultiSaveButton = (options: Options, saveTypes: Array<SaveType>, finalInProgress?: ?boolean) => {
-            const primary = options.saveTypes[0];
+            const primary = saveTypes[0];
             const secondaries = saveTypes.slice(1).map(saveType => ({
                 key: saveType.key,
                 text: saveType.text,
