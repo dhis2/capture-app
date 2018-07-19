@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-07-17T07:48:16.858Z\n"
-"PO-Revision-Date: 2018-07-17T07:48:16.858Z\n"
+"POT-Creation-Date: 2018-07-19T11:59:19.632Z\n"
+"PO-Revision-Date: 2018-07-19T11:59:19.633Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -215,6 +215,9 @@ msgid "Are you sure? All unsaved data will be lost"
 msgstr ""
 
 msgid "Reset"
+msgstr ""
+
+msgid "No write access"
 msgstr ""
 
 msgid "New"
