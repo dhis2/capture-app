@@ -20,6 +20,7 @@ export default class RenderFoundation {
     };
 
     _id: string;
+    _access: Array<Array<boolean> | boolean>;
     _name: string;
     _description: ?string;
     _programId: string;
@@ -39,6 +40,13 @@ export default class RenderFoundation {
     }
     get id(): string {
         return this._id;
+    }
+
+    set access(access: Array<Array<boolean> | boolean>) {
+        this._access = access;
+    }
+    get access(): string {
+        return this._access;
     }
 
     set name(name: string) {

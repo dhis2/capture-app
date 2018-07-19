@@ -62,7 +62,9 @@ class ActionButtons extends Component<Props> {
     render() {
         const { classes, showResetButton } = this.props;
 
-        const hasWriteAccess = this.props.selectedProgram ? programs.get(this.props.selectedProgram).access.data.write : true;
+        const hasWriteAccess = this.props.selectedProgram && programs.get(this.props.selectedProgram) ?
+            programs.get(this.props.selectedProgram).access.data.write : true;
+
         return (
             <div className={classes.container}>
                 {
