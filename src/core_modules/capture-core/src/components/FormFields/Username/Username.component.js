@@ -106,6 +106,7 @@ class UsernameAutosuggest extends React.Component {
     this.setState({
       value: newValue,
     });
+    this.props.onBlur(newValue);
   };
 
   render() {
