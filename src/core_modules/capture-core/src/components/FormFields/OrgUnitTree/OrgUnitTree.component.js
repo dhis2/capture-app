@@ -18,6 +18,7 @@ export default class OrgUnitTree extends React.Component {
 
   setSelected = (selected) => {
       this.setState({ selected });
+      this.props.onBlur(selected);
   }
 
   onIconClick = async (value, open, list) => {
