@@ -7,7 +7,7 @@ import InfiniteCalendar from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css';
 import './customStyles.css';
 
-import isValidDate from '../../../../utils/validators/form/date.validator';
+import parseDate from '../../../../utils/parsers/date.parser';
 import moment from '../../../../utils/moment/momentResolver';
 import CurrentLocaleData from '../../../../utils/localeData/CurrentLocaleData';
 import capitalizeFirstLetter from '../../../../utils/string/capitalizeFirstLetter';
@@ -95,12 +95,12 @@ class D2DateCalendar extends Component<Props> {
             return null;
         }
 
-        if (!isValidDate(inputValue)) {
+        const parseData = parseDate(inputValue);
+        if (!parseData.isValid) {
             return null;
         }
-
-        const momentDate = moment(inputValue, 'L');
-        return momentDate.toDate();
+        // $FlowSuppress
+        return parseData.momentDate.toDate();
     }
 
     getMinMaxProps() {
