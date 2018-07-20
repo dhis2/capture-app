@@ -11,6 +11,7 @@ import DataElement from '../DataElement/DataElement';
 import errorCreator from '../../utils/errorCreator';
 import type { ConvertFn } from '../DataElement/DataElement';
 import type { ProgramRule } from '../../RulesEngine/rulesEngine.types';
+import type { Access } from '../Access/Access';
 
 type ValuesType = { [key: string]: any };
 
@@ -20,7 +21,7 @@ export default class RenderFoundation {
     };
 
     _id: string;
-    _access: Array<Array<boolean> | boolean>;
+    _access: Access;
     _name: string;
     _description: ?string;
     _programId: string;
@@ -42,10 +43,10 @@ export default class RenderFoundation {
         return this._id;
     }
 
-    set access(access: Array<Array<boolean> | boolean>) {
+    set access(access: Access) {
         this._access = access;
     }
-    get access(): string {
+    get access(): Access {
         return this._access;
     }
 

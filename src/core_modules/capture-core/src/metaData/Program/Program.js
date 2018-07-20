@@ -4,10 +4,11 @@ import isFunction from 'd2-utilizr/src/isFunction';
 
 import CategoryCombination from '../CategoryCombinations/CategoryCombination';
 import type { ProgramRule, ProgramRuleVariable } from '../../RulesEngine/rulesEngine.types';
+import type { Access } from '../Access/Access';
 
 export default class Program {
     _id: string;
-    _access: Array<Array<boolean> | boolean>;
+    _access: Access;
     _name: string;
     _shortName: string;
     _organisationUnits: Array<Object>;
@@ -29,10 +30,10 @@ export default class Program {
         return this._id;
     }
 
-    set access(access: Array<Array<boolean> | boolean>): void {
+    set access(access: Access): void {
         this._access = access;
     }
-    get access(): Array<Array<boolean> | boolean> {
+    get access(): Access {
         return this._access;
     }
 

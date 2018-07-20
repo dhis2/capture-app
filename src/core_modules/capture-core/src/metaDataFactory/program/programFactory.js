@@ -62,7 +62,7 @@ type CachedProgramStageSection = {
 
 type CachedProgramStage = {
     id: string,
-    access: Array<Array<boolean> | boolean>,
+    access: Object,
     displayName: string,
     description: ?string,
     executionDateLabel?: ?string,
@@ -90,7 +90,7 @@ type CachedCategoryCombo = {
 
 type CachedProgram = {
     id: string,
-    access: Array<Array<boolean> | boolean>,
+    access: Object,
     displayName: string,
     displayShortName: string,
     organisationUnits: Array<Object>,
