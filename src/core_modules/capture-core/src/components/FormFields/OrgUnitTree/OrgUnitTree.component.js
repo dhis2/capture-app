@@ -18,7 +18,11 @@ export default class OrgUnitTree extends React.Component {
 
   setSelected = (selected) => {
       this.setState({ selected });
-      this.props.onBlur(selected);
+      if (Array.isArray(selected) && selected.length > 0) {
+        this.props.onBlur(selected[0]);
+      } else {
+        this.props.onBlur(null);
+      }
   }
 
   onIconClick = async (value, open, list) => {
@@ -114,11 +118,11 @@ export default class OrgUnitTree extends React.Component {
   }
 
   render() {
-      const { multiple, selectable } = this.props;
+      const { selectable } = this.props;
       const { list, selected } = this.state;
       return (
           <Tree
-              multiple={typeof multiple !== 'undefined' ? multiple : false}
+              multiple={false}
               selectable={typeof selectable !== 'undefined' ? selectable : true}
               list={list}
               selected={selected}
