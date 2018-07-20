@@ -2,8 +2,12 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
+import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
+
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
+import Tooltip from '@material-ui/core/Tooltip';
+
 //Find button to be included when find(tracked entity instance) is supported
 //import SearchIcon from '@material-ui/icons/Search';
 
@@ -21,10 +25,14 @@ const styles = () => ({
     rightButton: {
         marginRight: 5,
     },
+    buttonWrapper: {
+        display: 'inline-block',
+    },
 });
 
 type Props = {
     classes: Object,
+    selectedProgram: string,
     onStartAgain: () => void,
     onClickNew: () => void,
     showResetButton: boolean,
@@ -53,6 +61,10 @@ class ActionButtons extends Component<Props> {
 
     render() {
         const { classes, showResetButton } = this.props;
+
+        const hasWriteAccess = this.props.selectedProgram && programs.get(this.props.selectedProgram) ?
+            programs.get(this.props.selectedProgram).access.data.write : true;
+
         return (
             <div className={classes.container}>
                 {
@@ -66,13 +78,18 @@ class ActionButtons extends Component<Props> {
                         </Button> :
                         null
                 }
-                <Button
-                    onClick={this.handleNewClick}
-                    color="primary"
-                >
-                    <AddIcon className={classes.rightButton} />
-                    { i18n.t('New') }
-                </Button>
+                <Tooltip title={!hasWriteAccess ? i18n.t('No write access') : ''}>
+                    <div className={classes.buttonWrapper}>
+                        <Button
+                            onClick={this.handleNewClick}
+                            color="primary"
+                            disabled={!hasWriteAccess}
+                        >
+                            <AddIcon className={classes.rightButton} />
+                            { i18n.t('New') }
+                        </Button>
+                    </div>
+                </Tooltip>
                 {/* Find button to be included when find(tracked entity instance) 
                 is supported:
                 <Button

@@ -62,6 +62,7 @@ type CachedProgramStageSection = {
 
 type CachedProgramStage = {
     id: string,
+    access: Object,
     displayName: string,
     description: ?string,
     executionDateLabel?: ?string,
@@ -89,6 +90,7 @@ type CachedCategoryCombo = {
 
 type CachedProgram = {
     id: string,
+    access: Object,
     displayName: string,
     displayShortName: string,
     organisationUnits: Array<Object>,
@@ -233,6 +235,7 @@ function buildMainSection(d2ProgramStageDataElements: ?Array<CachedProgramStageD
 function buildStage(d2ProgramStage: CachedProgramStage) {
     const stage = new RenderFoundation((_this) => {
         _this.id = d2ProgramStage.id;
+        _this.access = d2ProgramStage.access;
         _this.name = d2ProgramStage.displayName;
         _this.description = d2ProgramStage.description;
         _this.addLabel({ id: 'eventDate', label: d2ProgramStage.executionDateLabel || 'Incident date' });
@@ -295,6 +298,7 @@ function buildProgram(d2Program: CachedProgram) {
     if (d2Program.programType === 'WITHOUT_REGISTRATION') {
         program = new EventProgram((_this) => {
             _this.id = d2Program.id;
+            _this.access = d2Program.access;
             _this.name = d2Program.displayName;
             _this.shortName = d2Program.displayShortName;
             _this.organisationUnits = d2Program.organisationUnits;

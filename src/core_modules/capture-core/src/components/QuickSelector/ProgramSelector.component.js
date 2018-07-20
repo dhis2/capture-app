@@ -153,17 +153,17 @@ class ProgramSelector extends Component<Props> {
         //Once we support Tracker Programs, we don´t need to filter on EventProgram only on if the orgUnit has the progrma.
         if(this.props.selectedOrgUnitId) {
             programOptions = programsArray
-                .filter(program => program instanceof EventProgram && program.organisationUnits[this.props.selectedOrgUnitId])
+                .filter(program => program instanceof EventProgram && program.organisationUnits[this.props.selectedOrgUnitId] && program.access.data.read)
                 .map(program => new Option((_this) => {
                 _this.value = program.id;
                 _this.text = program.name;
             }));
 
-            areAllProgramsAvailable = programOptions.length == programsArray.filter(program => program instanceof EventProgram).length;
+            areAllProgramsAvailable = programOptions.length == programsArray.filter(program => program instanceof EventProgram && program.access.data.read).length;
 
         } else {
             programOptions = programsArray
-                .filter(program => program instanceof EventProgram)
+                .filter(program => program instanceof EventProgram && program.access.data.read)
                 .map(program => new Option((_this) => {
                 _this.value = program.id;
                 _this.text = program.name;
