@@ -1,7 +1,6 @@
 // @flow
 import isString from 'd2-utilizr/lib/isString';
 
-import moment from '../utils/moment/momentResolver';
 import elementTypes from '../metaData/DataElement/elementTypes';
 import parseNumber from '../utils/parsers/number.parser';
 import parseDate from '../utils/parsers/date.parser';
