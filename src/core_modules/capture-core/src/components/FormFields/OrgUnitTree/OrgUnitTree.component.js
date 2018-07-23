@@ -118,10 +118,13 @@ export default class OrgUnitTree extends React.Component {
   }
 
   render() {
-      const { selectable } = this.props;
+      const { label, selectable, required } = this.props;
       const { list, selected } = this.state;
+
       return (
           <Tree
+              required={required}
+              label={label}
               multiple={false}
               selectable={typeof selectable !== 'undefined' ? selectable : true}
               list={list}

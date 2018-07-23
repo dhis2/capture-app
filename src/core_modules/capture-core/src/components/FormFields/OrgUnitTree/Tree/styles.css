@@ -1,5 +1,13 @@
-.ou-tree {
+.ou-tree-container {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+.ou-tree-label {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 1em;
+}
+
+.ou-tree {
+
 }
 
 .ou-tree .label {
