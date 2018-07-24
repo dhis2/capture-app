@@ -5,13 +5,13 @@ import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator
 import classNames from 'classnames';
 
 import i18n from '@dhis2/d2-i18n';
-import elementTypes from '../../../../metaData/DataElement/elementTypes';
+import elementTypes from '../../../metaData/DataElement/elementTypes';
 
-import getTableComponents from '../../../d2Ui/dataTable/getTableComponents';
-import basicTableAdapter from '../../../d2UiReactAdapters/dataTable/basicTable.adapter';
+import getTableComponents from '../../d2Ui/dataTable/getTableComponents';
+import basicTableAdapter from '../../d2UiReactAdapters/dataTable/basicTable.adapter';
 
-import SortLabelWrapper from '../../../DataTable/SortLabelWrapper.component';
-import { directions, placements } from '../../../d2UiReactAdapters/dataTable/componentGetters/sortLabel.const';
+import SortLabelWrapper from '../../DataTable/SortLabelWrapper.component';
+import { directions, placements } from '../../d2UiReactAdapters/dataTable/componentGetters/sortLabel.const';
 
 // $FlowSuppress
 const { Table, Row, Cell, HeaderCell, Head, Body } = getTableComponents(basicTableAdapter);
@@ -72,7 +72,7 @@ type Column = {
 };
 
 type Props = {
-    dataSource: Array<{eventId: string, [elementId: string]: any}>,
+    dataSource: Array<{id: string, [elementId: string]: any}>,
     columns: ?Array<Column>,
     classes: {
         loaderContainer: string,
@@ -90,10 +90,10 @@ type Props = {
     },
     sortById: string,
     sortByDirection: string,
-    onRowClick: (rowData: {eventId: string}) => void,
+    onRowClick: (rowData: {id: string}) => void,
 };
 
-class OfflineEventsList extends Component<Props> {
+class OfflineList extends Component<Props> {
     static typesWithAscendingInitialDirection = [
         elementTypes.TEXT,
         elementTypes.LONG_TEXT,
@@ -120,12 +120,12 @@ class OfflineEventsList extends Component<Props> {
                     <SortLabelWrapper
                         isActive={column.id === sortById}
                         initialDirection={
-                            OfflineEventsList.typesWithAscendingInitialDirection.includes(column.type)
+                            OfflineList.typesWithAscendingInitialDirection.includes(column.type)
                                 ? directions.ASC
                                 : directions.DESC
                         }
                         placement={
-                            OfflineEventsList.typesWithRightPlacement.includes(column.type)
+                            OfflineList.typesWithRightPlacement.includes(column.type)
                                 ? placements.RIGHT
                                 : placements.LEFT
                         }
@@ -160,7 +160,7 @@ class OfflineEventsList extends Component<Props> {
                         colSpan={columnsCount}
                         className={classNames(classes.cell, classes.bodyCell)}
                     >
-                        {i18n.t('No events to display')}
+                        {this.props.noItemsText || i18n.t('No items to display')}
                     </Cell>
                 </Row>
             );
@@ -176,7 +176,7 @@ class OfflineEventsList extends Component<Props> {
                         >
                             <div
                                 style={
-                                    OfflineEventsList.typesWithRightPlacement.includes(column.type) ?
+                                    OfflineList.typesWithRightPlacement.includes(column.type) ?
                                         { textAlign: 'right' } :
                                         null
                                 }
@@ -188,7 +188,7 @@ class OfflineEventsList extends Component<Props> {
 
                 return (
                     <Row
-                        key={row.eventId}
+                        key={row.id}
                         className={classNames(classes.row, classes.dataRow)}
                         onClick={() => this.props.onRowClick(row)}
                     >
@@ -235,7 +235,7 @@ class OfflineEventsList extends Component<Props> {
 }
 
 /**
- * Create the offline event list for a event capture program
- * @namespace OfflineEventsList
+ * Create the offline list
+ * @namespace OfflineList
  */
-export default withStyles(styles)(OfflineEventsList);
+export default withStyles(styles)(OfflineList);

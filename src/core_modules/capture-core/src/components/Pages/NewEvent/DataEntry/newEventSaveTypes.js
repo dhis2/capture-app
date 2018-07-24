@@ -1,16 +1,16 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
 
-export const saveTypes = {
+export const newEventSaveTypes = {
     SAVEANDADDANOTHER: 'SAVEANDADDANOTHER',
     SAVEANDEXIT: 'SAVEANDEXIT',
 };
 
-export const saveTypeDefinitions = {
-    [saveTypes.SAVEANDADDANOTHER]: {
-        key: saveTypes.SAVEANDADDANOTHER, text: i18n.t('Save and add another'),
+export const newEventSaveTypeDefinitions = {
+    [newEventSaveTypes.SAVEANDADDANOTHER]: {
+        key: newEventSaveTypes.SAVEANDADDANOTHER, text: i18n.t('Save and add another'),
     },
-    [saveTypes.SAVEANDEXIT]: {
-        key: saveTypes.SAVEANDEXIT, text: i18n.t('Save and exit'),
+    [newEventSaveTypes.SAVEANDEXIT]: {
+        key: newEventSaveTypes.SAVEANDEXIT, text: i18n.t('Save and exit'),
     },
 };

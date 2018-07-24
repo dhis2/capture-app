@@ -1,13 +1,13 @@
 // @flow
 import { createSelectorCreator, createSelector, defaultMemoize } from 'reselect';
 
-import getStageFromProgramIdForEventProgram from '../../../../metaData/helpers/getStageFromProgramIdForEventProgram';
-import getStageFromEvent from '../../../../metaData/helpers/getStageFromEvent';
-import { convertMainEvent } from '../../../../events/mainEventConverter';
-import { convertValue } from '../../../../converters/clientToList';
-import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
-import { mainPropertyNames } from '../EventsList/epics/getColumnsConfiguration';
-import elementTypeKeys from '../../../../metaData/DataElement/elementTypes';
+import getStageFromProgramIdForEventProgram from '../../../metaData/helpers/getStageFromProgramIdForEventProgram';
+import getStageFromEvent from '../../../metaData/helpers/getStageFromEvent';
+import { convertMainEvent } from '../../../events/mainEventConverter';
+import { convertValue } from '../../../converters/clientToList';
+import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
+import mainPropertyNames from '../../../events/mainPropertyNames.const';
+import elementTypeKeys from '../../../metaData/DataElement/elementTypes';
 
 type EventContainer = {
     event: CaptureClientEvent,
@@ -23,8 +23,8 @@ type ColumnOrderFromState = {
 type ColumnsOrderFromState = Array<ColumnOrderFromState>;
 
 // #HEADERS
-const programIdSelector = state => state.currentSelections.programId;
-const columnsOrderStateSelector = state => state.workingListsColumnsOrder.main;
+const programIdSelector = (state, props) => state.workingListsContext[props.listId].programId;
+const columnsOrderStateSelector = (state, props) => state.workingListsColumnsOrder[props.listId];
 
 export const makeColumnsSelector = () => createSelector(
     programIdSelector,
@@ -62,9 +62,9 @@ export const makeColumnsSelector = () => createSelector(
 );
 // #END HEADERS
 
-const eventsMainDataSelector = state => state.events;
-const eventsValuesSelector = state => state.eventsValues;
-const sortOrderSelector = state => state.workingLists.main.order;
+const eventsMainDataSelector = (state, props) => props.events;
+const eventsValuesSelector = (state, props) => props.eventsValues;
+const sortOrderSelector = (state, props) => state.workingLists[props.listId].order;
 
 
 const createEventsContainer = (events, eventsValues, sortOrder): Array<EventContainer> =>

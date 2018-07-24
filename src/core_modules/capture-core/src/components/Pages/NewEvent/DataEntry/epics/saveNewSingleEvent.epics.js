@@ -1,63 +1,26 @@
 // @flow
 import { replace } from 'react-router-redux';
-import moment from '../../../../../utils/moment/momentResolver';
 import {
     actionTypes as newEventDataEntryActionTypes,
     startSaveNewEventAfterReturnedToMainPage,
-    startSaveNewEventAddAnother,
 } from '../newEventDataEntry.actions';
 
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
-import convertDataEntryToClientValues from '../../../../DataEntry/common/convertDataEntryToClientValues';
-import { convertValue as convertToServerValue } from '../../../../../converters/clientToServer';
-import { convertMainEventClientToServerWithKeysMap } from '../../../../../events/mainEventConverter';
+import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
 
 export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE, newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER)
+    action$.ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)
         .map((action) => {
             const state = store.getState();
             const payload = action.payload;
             const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.eventId);
-
-            const formValues = state.formsValues[dataEntryKey];
-            const dataEntryValues = state.dataEntriesFieldsValue[dataEntryKey];
-            const dataEntryValuesMeta = state.dataEntriesFieldsMeta[dataEntryKey];
-            const prevEventMainData = {};
             const formFoundation = payload.formFoundation;
 
-            const { formClientValues, dataEntryClientValues } = convertDataEntryToClientValues(
-                formFoundation,
-                formValues,
-                dataEntryValues,
-                dataEntryValuesMeta,
-                prevEventMainData,
-            );
-            const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues };
+            const { formClientValues, mainDataClientValues } = getNewEventClientValues(state, dataEntryKey, formFoundation);
 
-            const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
-            const mainDataServerValues: Object = convertMainEventClientToServerWithKeysMap(mainDataClientValues);
+            const serverData = getNewEventServerData(state, formFoundation, formClientValues, mainDataClientValues);
 
-            if (mainDataServerValues.status === 'COMPLETED') {
-                mainDataServerValues.completedDate = moment().format('YYYY-MM-DD');
-            }
-
-            const serverData = {
-                ...mainDataServerValues,
-                program: state.currentSelections.programId,
-                programStage: formFoundation.id,
-                orgUnit: state.currentSelections.orgUnitId,
-                dataValues: Object
-                    .keys(formServerValues)
-                    .map(key => ({
-                        dataElement: key,
-                        value: formServerValues[key],
-                    })),
-            };
-
-            if (action.type === newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER) {
-                return startSaveNewEventAddAnother(serverData, state.currentSelections);
-            }
             return startSaveNewEventAfterReturnedToMainPage(serverData, state.currentSelections);
         });
 

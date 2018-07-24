@@ -15,6 +15,7 @@ export const batchActionTypes = {
     UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH: 'UpdateFieldForNewSingleEventActionsBatch',
     OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH: 'OpenNewEventInDataEntryActionsBatch',
     RULES_EFFECTS_ACTIONS_BATCH: 'RulesEffectsForNewSingleEventActionsBatch',
+    SAVE_NEW_EVENT_ADD_ANOTHER_BATCH: 'SaveNewEventAddAnotherBatch',
 };
 
 export const actionTypes = {
@@ -32,7 +33,7 @@ export const actionTypes = {
     SET_NEW_EVENT_FORM_LAYOUT_DIRECTION: 'SetNewEventFormLayoutDirection',
     START_ASYNC_UPDATE_FIELD_FOR_NEW_EVENT: 'StartAsyncUpdateFieldForNewEvent',
     REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER: 'RequestSaveNewEventAddAnother',
-    START_SAVE_NEW_EVENT_ADD_ANOTHER: 'startSaveMewEventAddAnother',
+    START_SAVE_NEW_EVENT_ADD_ANOTHER: 'startSaveNewEventAddAnother',
     NEW_EVENT_SAVED_ADD_ANOTHER: 'NewEventSavedAddAnother',
     SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER: 'SaveFailedForNewEventAddAnother',
     SET_NEW_EVENT_SAVE_TYPES: 'SetNewEventSaveTypes',
@@ -144,6 +145,7 @@ export const startSaveNewEventAddAnother = (serverData: Object, selections: Obje
                 url: 'events',
                 method: methods.POST,
                 data: serverData,
+                clientId: 'thisisanid',
             },
             commit: { type: actionTypes.NEW_EVENT_SAVED_ADD_ANOTHER, meta: { selections } },
             rollback: { type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER, meta: { selections } },

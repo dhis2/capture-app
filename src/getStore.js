@@ -10,13 +10,14 @@ import type { HashHistory } from 'history/createHashHistory';
 
 import { createOffline } from '@redux-offline/redux-offline';
 import offlineConfig from '@redux-offline/redux-offline/lib/defaults';
-import { effectConfig } from 'capture-core/trackerOffline/trackerOfflineConfig';
+import { effectConfig, queueConfig } from 'capture-core/trackerOffline/trackerOfflineConfig';
 
 import { buildReducersFromDescriptions } from 'capture-core/trackerRedux/trackerReducer';
 import environments from 'capture-core/constants/environments';
 
 import reducerDescriptions from './reducers/descriptions/trackerCapture.reducerDescriptions';
 import epics from './epics/trackerCapture.epics';
+
 
 export default function getStore(history: BrowserHistory | HashHistory, onRehydrated: () => void) {
     const middleWares = [createEpicMiddleware(epics), routerMiddleware(history)];
@@ -42,6 +43,7 @@ export default function getStore(history: BrowserHistory | HashHistory, onRehydr
         ...offlineConfig,
         effect: effectConfig,
         persistCallback: onRehydrated,
+        queue: queueConfig,
     });
 
     return createStore(

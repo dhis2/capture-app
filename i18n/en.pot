@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-07-18T13:55:05.717Z\n"
-"PO-Revision-Date: 2018-07-18T13:55:05.717Z\n"
+"POT-Creation-Date: 2018-07-24T08:56:29.854Z\n"
+"PO-Revision-Date: 2018-07-24T08:56:29.854Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -39,6 +39,12 @@ msgid "Uploading data"
 msgstr ""
 
 msgid "Sort"
+msgstr ""
+
+msgid "No events to display"
+msgstr ""
+
+msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Last week"
@@ -113,6 +119,9 @@ msgstr ""
 msgid "No results"
 msgstr ""
 
+msgid "No items to display"
+msgstr ""
+
 msgid "Online"
 msgstr ""
 
@@ -164,13 +173,7 @@ msgstr ""
 msgid "More filters"
 msgstr ""
 
-msgid "No events to display"
-msgstr ""
-
 msgid "Rows per page"
-msgstr ""
-
-msgid "Data for offline event list not present"
 msgstr ""
 
 msgid "Could not get organisation unit"
@@ -218,6 +221,12 @@ msgid "Save and exit"
 msgstr ""
 
 msgid "Are you sure? All unsaved data will be lost"
+msgstr ""
+
+msgid "events added"
+msgstr ""
+
+msgid "No events added"
 msgstr ""
 
 msgid "Reset"

@@ -276,6 +276,7 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn: Optio
                 onSaveAbort,
                 finalInProgress,
                 warnings,
+                saveTypes,
                 ...passOnProps
             } = this.props;
             const options = optionFn(this.props);

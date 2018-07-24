@@ -32,6 +32,9 @@ import {
 import {
     actionTypes as editEventSelectorActionTypes,
 } from '../../components/Pages/EditEvent/editEvent.actions';
+import {
+    actionTypes as listActionTypes,
+} from '../../components/List/list.actions';
 
 export const workingListsDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
@@ -60,6 +63,36 @@ export const workingListsDesc = createReducerDescription({
 
         return newState;
     },
+    [listActionTypes.APPEND_LIST_ITEM]: (state, action) => {
+        const newState = { ...state };
+        const { listId, itemId } = action.payload;
+        newState[listId] = {
+            order: [...(state[listId] ? state[listId].order : []), itemId],
+        };
+        return newState;
+    },
+    [listActionTypes.PREPEND_LIST_ITEM]: (state, action) => {
+        const newState = { ...state };
+        const { listId, itemId } = action.payload;
+        newState[listId] = {
+            order: [itemId, ...(state[listId] ? state[listId].order : [])],
+        };
+        return newState;
+    },
+    [listActionTypes.REMOVE_LIST_ITEM]: (state, action) => {
+        const newState = { ...state };
+        const { listId, itemId } = action.payload;
+        newState[listId] = {
+            order: state[listId] ? state[listId].order.filter(i => i !== itemId) : [],
+        };
+        return newState;
+    },
+    [listActionTypes.RESET_LIST]: (state, action) => {
+        const newState = { ...state };
+        newState[action.payload.listId] = { order: [] };
+        return newState;
+    },
+
 }, 'workingLists');
 
 const updateListsMetaOnResetProgramId = (state) => {
@@ -230,6 +263,11 @@ export const workingListsMetaDesc = createReducerDescription({
             },
         };
 
+        return newState;
+    },
+    [listActionTypes.RESET_LIST]: (state, action) => {
+        const newState = { ...state };
+        newState[action.payload.listId] = action.payload.meta;
         return newState;
     },
     [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: updateListsMetaOnResetProgramId,
@@ -413,6 +451,11 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
         newState.main = [...action.payload];
         return newState;
     },
+    [listActionTypes.RESET_LIST]: (state, action) => {
+        const newState = { ...state };
+        newState[action.payload.listId] = [...action.payload.columnsOrder];
+        return newState;
+    },
     [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: updateColumnsOrderOnResetProgram,
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateColumnsOrderOnUrlUpdate,
     [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateColumnsOrderOnUrlUpdate,
@@ -423,6 +466,11 @@ export const workingListsContextDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
         newState.main = action.payload.selections;
+        return newState;
+    },
+    [listActionTypes.RESET_LIST]: (state, action) => {
+        const newState = { ...state };
+        newState[action.payload.listId] = action.payload.selections;
         return newState;
     },
 }, 'workingListsContext');
