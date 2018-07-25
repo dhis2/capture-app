@@ -17,6 +17,7 @@ import D2TrueOnly from '../../../../components/FormFields/Generic/D2TrueOnly.com
 import withDefaultMessages from '../../../../components/DataEntry/dataEntryField/withDefaultMessages';
 import withDefaultFieldContainer from '../../../../components/DataEntry/dataEntryField/withDefaultFieldContainer';
 import withDefaultChangeHandler from '../../../../components/DataEntry/dataEntryField/withDefaultChangeHandler';
+import withFeedbackWidget from '../../../../components/DataEntry/dataEntryInfoWidgets/withFeedbackWidget';
 import withDefaultShouldUpdateInterface from
     '../../../../components/DataEntry/dataEntryField/withDefaultShouldUpdateInterface';
 
@@ -105,7 +106,8 @@ const buildCompleteFieldSettingsFn = () => {
 
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(DataEntry);
 const CompleteField = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
-const SaveableDataEntry = withSaveButton(getSaveOptions)(CompleteField);
+const FeedbackWidget = withFeedbackWidget()(CompleteField);
+const SaveableDataEntry = withSaveButton(getSaveOptions)(FeedbackWidget);
 const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
 
 type Props = {

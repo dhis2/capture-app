@@ -94,3 +94,16 @@ export const rulesEffectsErrorMessagesDesc = createReducerDescription({
         return newState;
     },
 }, 'rulesEffectsMessages');
+
+export const rulesEffectsFeedbackDesc = createReducerDescription({
+    [actionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
+        const newState = { ...state };
+
+        const displayTextEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_TEXT];
+        newState[action.payload.formId] = {
+            displayTexts: displayTextEffects && displayTextEffects.feedback ? displayTextEffects.feedback.map(e => e.message) : null,
+        };
+
+        return newState;
+    },
+}, 'rulesEffectsFeedback', {});

@@ -14,6 +14,7 @@ import {
     rulesEffectsErrorMessagesDesc,
     rulesEffectsHiddenSectionsDesc,
     rulesEffectsCompulsoryFieldsDesc,
+    rulesEffectsFeedbackDesc,
 } from 'capture-core/reducers/descriptions/rulesEffects.reducerDescription';
 import {
     workingListsDesc,
@@ -51,6 +52,7 @@ export default [
     rulesEffectsErrorMessagesDesc,
     rulesEffectsHiddenSectionsDesc,
     rulesEffectsCompulsoryFieldsDesc,
+    rulesEffectsFeedbackDesc,
     workingListsDesc,
     workingListsMetaDesc,
     workingListsUIDesc,

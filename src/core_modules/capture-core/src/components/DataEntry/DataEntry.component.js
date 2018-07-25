@@ -15,10 +15,18 @@ const styles = theme => ({
     button: {
         paddingRight: theme.spacing.unit * 2,
     },
-    horizontalContainer: {
+    horizontalFormContainer: {
         display: 'flex',
         flexWrap: 'wrap',
         alignItems: 'flex-start',
+    },
+    verticalDataEntryContainer: {
+        flexGrow: 1,
+    },
+    verticalContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
     },
 });
 
@@ -26,6 +34,14 @@ type FieldContainer = {
     field: React.Element<any>,
     placement: $Values<typeof placements>,
 };
+
+type DirectionClasses = {
+    container?: ?string,
+    dataEntryContainer?: ?string,
+    infoWidgetsContainer?: ?string,
+    infoWidgetsInnerContainer?: ?string,
+    formContainer?: ?string,
+}
 
 type Props = {
     id: string,
@@ -35,6 +51,7 @@ type Props = {
     saveButton?: ?React.Element<any>,
     cancelButton?: ?React.Element<any>,
     fields?: ?Array<FieldContainer>,
+    infoWidgets?: ?Array<any>,
     completionAttempted?: ?boolean,
     saveAttempted?: ?boolean,
     classes: Object,
@@ -73,16 +90,18 @@ class DataEntry extends React.Component<Props> {
         this.props.onUpdateFieldInner(...args, this.props.id, this.props.itemId, this.props.onUpdateFormField);
     }
 
-    getClasses = () => {
+    getClasses = (): DirectionClasses => {
         const { classes, formHorizontal } = this.props;
         if (formHorizontal) {
             return {
-                ContainerClass: classes.horizontalContainer,
-                edgeFieldsClass: classes.horizontalEdgeFields,
-                formClass: classes.horizontalForm,
+                formContainer: classes.horizontalFormContainer,
+                infoWidgetsContainer: classes.horizontalWidgetsContainer,
             };
         }
-        return {};
+        return {
+            container: classes.verticalContainer,
+            dataEntryContainer: classes.verticalDataEntryContainer,
+        };
     }
 
     handleUpdateFieldAsync = (...args) => {
@@ -130,74 +149,81 @@ class DataEntry extends React.Component<Props> {
                     {DataEntry.errorMessages.FORM_FOUNDATION_MISSING}
                 </div>
             );
-        }    
+        }
         const directionClasses = this.getClasses();
 
         const topFields = this.getFieldWithPlacement(placements.TOP);
         const bottomFields = this.getFieldWithPlacement(placements.BOTTOM);
-
+        const infoWidgets = this.props.infoWidgets;
         return (
-            <div>
-                <div className={directionClasses.ContainerClass}>
-                    {topFields}
-                    <D2Form
-                        innerRef={(formInstance) => { this.formInstance = formInstance; }}
-                        formFoundation={formFoundation}
-                        id={getDataEntryKey(id, itemId)}
-                        validationAttempted={completionAttempted || saveAttempted}
-                        onUpdateField={this.handleUpdateField}
-                        onUpdateFieldAsync={this.handleUpdateFieldAsync}
-                        {...passOnProps}
-                    />
-                    {bottomFields}
+            <div className={directionClasses.container}>
+                <div className={directionClasses.dataEntryContainer}>
+                    <div className={directionClasses.formContainer}>
+                        {topFields}
+                        <D2Form
+                            innerRef={(formInstance) => { this.formInstance = formInstance; }}
+                            formFoundation={formFoundation}
+                            id={getDataEntryKey(id, itemId)}
+                            validationAttempted={completionAttempted || saveAttempted}
+                            onUpdateField={this.handleUpdateField}
+                            onUpdateFieldAsync={this.handleUpdateFieldAsync}
+                            {...passOnProps}
+                        />
+                        {bottomFields}
+                    </div>
+                    <div
+                        className={classes.footerBar}
+                    >
+                        {
+                            (() => {
+                                if (completeButton) {
+                                    return (
+                                        <div
+                                            className={classes.button}
+                                        >
+                                            { completeButton }
+                                        </div>
+                                    );
+                                }
+                                return null;
+                            })()
+                        }
+
+                        {
+                            (() => {
+                                if (saveButton) {
+                                    return (
+                                        <div
+                                            className={classes.button}
+                                        >
+                                            { saveButton }
+                                        </div>
+                                    );
+                                }
+                                return null;
+                            })()
+                        }
+
+                        {
+                            (() => {
+                                if (cancelButton) {
+                                    return (
+                                        <div
+                                            className={classes.button}
+                                        >
+                                            { cancelButton }
+                                        </div>
+                                    );
+                                }
+                                return null;
+                            })()
+                        }
+                    </div>
                 </div>
-                <div
-                    className={classes.footerBar}
-                >
-                    {
-                        (() => {
-                            if (completeButton) {
-                                return (
-                                    <div
-                                        className={classes.button}
-                                    >
-                                        { completeButton }
-                                    </div>
-                                );
-                            }
-                            return null;
-                        })()
-                    }
-
-                    {
-                        (() => {
-                            if (saveButton) {
-                                return (
-                                    <div
-                                        className={classes.button}
-                                    >
-                                        { saveButton }
-                                    </div>
-                                );
-                            }
-                            return null;
-                        })()
-                    }
-
-                    {
-                        (() => {
-                            if (cancelButton) {
-                                return (
-                                    <div
-                                        className={classes.button}
-                                    >
-                                        { cancelButton }
-                                    </div>
-                                );
-                            }
-                            return null;
-                        })()
-                    }
+                <div className={directionClasses.infoWidgetsContainer}>
+                    <div className={directionClasses.infoWidgetsInnerContainer}>
+                        {infoWidgets}
+                    </div>
                 </div>
             </div>
         );

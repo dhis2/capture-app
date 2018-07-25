@@ -150,6 +150,14 @@ export default function getRulesEffectsProcessor(
         };
     }
 
+    function processDisplayText(effect: ProgramRuleEffect): ?any {
+        return {
+            type: actions.DISPLAY_TEXT,
+            id: effect.location,
+            message: `${effect.content} ${effect.data ? effect.data : ''}`,
+        };
+    }
+
     const mapActionsToProcessor = {
         [actions.ASSIGN_VALUE]: processAssignValue,
         [actions.HIDE_FIELD]: processHideField,
@@ -159,6 +167,7 @@ export default function getRulesEffectsProcessor(
         [actions.SHOW_WARNING_ONCOMPLETE]: processShowWarningOnComplete,
         [actions.HIDE_SECTION]: processHideSection,
         [actions.MAKE_COMPULSORY]: processMakeCompulsory,
+        [actions.DISPLAY_TEXT]: processDisplayText,
     };
 
     function processRulesEffects(

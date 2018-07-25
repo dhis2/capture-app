@@ -104,6 +104,21 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
             return dataEntryFields;
         }
 
+        getErrorInstance() {
+            let currentInstance = this.innerInstance;
+            let done;
+            const dataEntryFields = [];
+            while (!done) {
+                currentInstance = currentInstance.getWrappedInstance && currentInstance.getWrappedInstance();
+                if (!currentInstance || currentInstance instanceof DataEntry) {
+                    done = true;
+                } else if (currentInstance.constructor.name === 'ErrorWidgetBuilder') {
+                    dataEntryFields.push(currentInstance);
+                }
+            }
+            return dataEntryFields;
+        }
+
         validateDataEntryFields() {
             const fieldInstance = this.getDataEntryFieldInstances();
 
