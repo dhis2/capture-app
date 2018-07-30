@@ -12,16 +12,16 @@ export default class OrgUnitTree extends React.Component {
       await this.fetchRoot();
   }
 
-  componentWillReceiveProps({ selected }) {
-      this.setState({ selected });
+  componentWillReceiveProps({ value }) {
+      this.setState({ selected: value });
   }
 
   setSelected = (selected) => {
       this.setState({ selected });
       if (Array.isArray(selected) && selected.length > 0) {
-        this.props.onBlur(selected[0]);
+          this.props.onBlur(selected[0]);
       } else {
-        this.props.onBlur(null);
+          this.props.onBlur(null);
       }
   }
 
