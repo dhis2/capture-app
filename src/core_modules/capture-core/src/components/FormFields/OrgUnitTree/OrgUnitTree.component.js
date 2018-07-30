@@ -70,7 +70,7 @@ export default class OrgUnitTree extends React.Component {
               .list({
                   paging: false,
                   filter: `id:in:[${id}]`,
-                  fields: ':all,displayName,path,children[id,displayName,path,children::isNotEmpty]',
+                  fields: ':all,displayName,path,children[id,displayName,path,children]',
               })
               .then((r) => {
                   const organisationUnits = r.toArray();
@@ -79,12 +79,12 @@ export default class OrgUnitTree extends React.Component {
                   const items = [];
                   /* eslint-disable no-unused-vars */
                   for (const [k, v] of children.entries()) {
-                    items.push({
-                      open: false,
-                      value: v.path,
-                      label: v.displayName,
-                      children: [],
-                    });
+                      items.push({
+                          open: false,
+                          value: v.path,
+                          label: v.displayName,
+                          children: v.children.valuesContainerMap.size > 0 ? [] : null,
+                      });
                   }
                   items.sort((a, b) => a.label.localeCompare(b.label));
 
