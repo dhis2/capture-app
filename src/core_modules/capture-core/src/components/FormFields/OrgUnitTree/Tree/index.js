@@ -82,7 +82,7 @@ export default class Tree extends React.Component {
       }
 
       let { selected } = this.props;
-      const isSelected = selected.includes(value);
+      const isSelected = selected ? selected.includes(value) : false;
       if (typeof multiple === 'undefined' || !multiple) {
           this.props.setSelected(isSelected ? [] : [value], !isSelected, value);
           return;
@@ -112,7 +112,7 @@ export default class Tree extends React.Component {
               value={value}
               onClick={this.onClick}
               onIconClick={this.onIconClick}
-              isSelected={this.props.selected.includes(value)}
+              isSelected={this.props.selected ? this.props.selected.includes(value) : false}
           >
               {children ? this.node(children, depth + 1) : null}
           </Node>
