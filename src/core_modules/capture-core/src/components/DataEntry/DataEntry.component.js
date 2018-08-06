@@ -7,6 +7,7 @@ import D2Form from '../D2Form/D2Form.component';
 import { placements } from './dataEntryField/dataEntryField.const';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import getDataEntryKey from './common/getDataEntryKey';
+import StickyOnScroll from '../Sticky/StickyOnScroll.component';
 
 const styles = theme => ({
     footerBar: {
@@ -21,12 +22,31 @@ const styles = theme => ({
         alignItems: 'flex-start',
     },
     verticalDataEntryContainer: {
-        flexGrow: 1,
+        flexGrow: 10,
+        margin: theme.typography.pxToRem(10),
     },
     verticalContainer: {
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
+    },
+    stickyOnScroll: {
+        position: 'relative',
+        flexGrow: 1,
+        width: theme.typography.pxToRem(300),
+        margin: theme.typography.pxToRem(10),
+    },
+    verticalInfoWidgetsInnerContainerFixed: {
+        '@media only screen and (min-width:769px)': {
+            position: 'fixed',
+            top: 50,
+            marginRight: theme.typography.pxToRem(34),
+        },
+    },
+    verticalInfoWidgetsInnerContainerAbsolute: {
+        '@media only screen and (min-width:769px)': {
+            position: 'absolute',
+        },
     },
 });
 
@@ -50,6 +70,7 @@ type Props = {
     completeButton?: ?React.Element<any>,
     saveButton?: ?React.Element<any>,
     cancelButton?: ?React.Element<any>,
+    notes?: ?React.Element<any>,
     fields?: ?Array<FieldContainer>,
     infoWidgets?: ?Array<any>,
     completionAttempted?: ?boolean,
@@ -74,7 +95,11 @@ type Props = {
 
 };
 
-class DataEntry extends React.Component<Props> {
+type State = {
+    infoWidgetsFixed: boolean,
+}
+
+class DataEntry extends React.Component<Props, State> {
     static errorMessages = {
         NO_ITEM_SELECTED: 'No item selected',
         FORM_FOUNDATION_MISSING: 'form foundation missing. see log for details',
@@ -101,6 +126,8 @@ class DataEntry extends React.Component<Props> {
         return {
             container: classes.verticalContainer,
             dataEntryContainer: classes.verticalDataEntryContainer,
+            infoWidgetsContainer: classes.verticalInfoWidgetsContainer,
+            infoWidgetsInnerContainer: classes.verticalInfoWidgetsInnerContainerAbsolute,
         };
     }
 
@@ -127,6 +154,7 @@ class DataEntry extends React.Component<Props> {
             completeButton,
             saveButton,
             cancelButton,
+            notes,
             completionAttempted,
             saveAttempted,
             fields,
@@ -170,6 +198,11 @@ class DataEntry extends React.Component<Props> {
                             {...passOnProps}
                         />
                         {bottomFields}
+                        {notes &&
+                            <div className={classes.notes}>
+                                {notes}
+                            </div>
+                        }
                     </div>
                     <div
                         className={classes.footerBar}
@@ -220,11 +253,15 @@ class DataEntry extends React.Component<Props> {
                         }
                     </div>
                 </div>
-                <div className={directionClasses.infoWidgetsContainer}>
-                    <div className={directionClasses.infoWidgetsInnerContainer}>
+                <StickyOnScroll
+                    offsetTop={50}
+                    minViewpointWidth={769}
+                    containerClass={classes.stickyOnScroll}
+                >
+                    <div>
                         {infoWidgets}
                     </div>
-                </div>
+                </StickyOnScroll>
             </div>
         );
     }

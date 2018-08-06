@@ -5,8 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 type Props = {
     classes: {
         borderBox: string,
-        contents: string,
     },
+    contentClassName?: ?string,
     children: React.Node,
 };
 
@@ -16,20 +16,14 @@ const styles = (theme: Theme) => ({
         borderWidth: theme.typography.pxToRem(2),
         borderColor: theme.palette.grey[300],
         borderStyle: 'solid',
-        padding: theme.typography.pxToRem(10),
-    },
-    contents: {
-        display: 'flex',
-        alignItems: 'center',
     },
 });
 
 const BorderBox = (props: Props) => {
-    const { classes, children } = props;
-
+    const { classes, children, contentClassName } = props;
     return (
         <div className={classes.borderBox}>
-            <div className={classes.contents}>
+            <div className={contentClassName}>
                 {children}
             </div>
         </div>

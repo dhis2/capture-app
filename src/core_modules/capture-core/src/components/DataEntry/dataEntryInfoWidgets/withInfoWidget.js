@@ -16,10 +16,13 @@ const getInfoWidget = (InnerComponent: React.ComponentType<any>, Widget: React.C
         };
         getWidget = (key: any) =>
             (
-                <Widget
-                    key={key}
-                    {...this.props}
-                />)
+                <div style={{ marginTop: 10 }}>
+                    <Widget
+                        key={key}
+                        {...this.props}
+                    />
+                </div>
+            )
         render = () => {
             const { infoWidgets, ...passOnProps } = this.props;
 

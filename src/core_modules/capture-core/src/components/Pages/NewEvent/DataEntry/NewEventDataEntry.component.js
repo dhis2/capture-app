@@ -22,6 +22,10 @@ import withDefaultShouldUpdateInterface from
     '../../../../components/DataEntry/dataEntryField/withDefaultShouldUpdateInterface';
 
 import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
+import withIndicatorWidget from '../../../DataEntry/dataEntryInfoWidgets/withIndicatorWidget';
+import withErrorWidget from '../../../DataEntry/dataEntryInfoWidgets/withErrorWidget';
+import withWarningWidget from '../../../DataEntry/dataEntryInfoWidgets/withWarningWidget';
+import TextEditor from '../../../FormFields/TextEditor/TextEditor.component';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -54,6 +58,33 @@ const getSaveOptions = () => ({
 const getCancelOptions = () => ({
     color: 'secondary',
 });
+
+const buildNoteSettingsFn = () => {
+    const noteComponent = withDefaultFieldContainer()(
+        withDefaultShouldUpdateInterface()(
+            withDefaultMessages()(
+                withDefaultChangeHandler()(TextEditor),
+            ),
+        ),
+    );
+    const noteSettings = (props: Object) => ({
+        component: noteComponent,
+        componentProps: {
+            style: {
+                width: '100%',
+            },
+            label: 'Comment',
+        },
+        propName: 'note',
+        hidden: props.formHorizontal,
+        validatorContainers: [
+        ],
+        meta: {
+            placement: placements.BOTTOM,
+        },
+    });
+    return noteSettings;
+};
 
 const buildReportDateSettingsFn = () => {
     const reportDateComponent = withDefaultFieldContainer()(
@@ -104,10 +135,14 @@ const buildCompleteFieldSettingsFn = () => {
     return completeSettings;
 };
 
-const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(DataEntry);
+const CommentField = withDataEntryField(buildNoteSettingsFn())(DataEntry);
+const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(CommentField);
 const CompleteField = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
 const FeedbackWidget = withFeedbackWidget()(CompleteField);
-const SaveableDataEntry = withSaveButton(getSaveOptions)(FeedbackWidget);
+const IndicatorWidget = withIndicatorWidget()(FeedbackWidget);
+const WarningWidget = withWarningWidget()(IndicatorWidget);
+const ErrorWidget = withErrorWidget()(WarningWidget);
+const SaveableDataEntry = withSaveButton(getSaveOptions)(ErrorWidget);
 const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
 
 type Props = {

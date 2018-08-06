@@ -12,6 +12,7 @@ import {
     startRunRulesOnUpdateForEditSingleEvent,
     requestSaveReturnToMainPage,
     startCancelSaveReturnToMainPage,
+    addNote,
     batchActionTypes,
 } from './editEventDataEntry.actions';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
@@ -40,12 +41,15 @@ const mapStateToProps = (state: ReduxState) => ({
     error: state.editEventPage.dataEntryLoadError,
 });
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
     onUpdateField: (innerAction: ReduxAction<any, any>) => {
         dispatch(batchActions([
             innerAction,
             startRunRulesOnUpdateForEditSingleEvent(innerAction.payload),
         ], batchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH));
+    },
+    onAddNote: (itemId: string, dataEntryId: string, note: Object) => {
+        dispatch(addNote(itemId, dataEntryId, note));
     },
     onStartAsyncUpdateField: (
         fieldId: string,
@@ -56,7 +60,14 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         dataEntryId: string,
         itemId: string,
     ) => {
-        dispatch(startAsyncUpdateFieldForEditEvent(fieldId, fieldLabel, formBuilderId, formId, callback, dataEntryId, itemId));
+        dispatch(startAsyncUpdateFieldForEditEvent(
+            fieldId,
+            fieldLabel,
+            formBuilderId,
+            formId,
+            callback,
+            dataEntryId,
+            itemId));
     },
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);

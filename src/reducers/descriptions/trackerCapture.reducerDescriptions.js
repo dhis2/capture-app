@@ -5,6 +5,7 @@ import {
     dataEntriesDesc,
     dataEntriesUIDesc,
     dataEntriesFieldsValueDesc,
+    dataEntriesNotesDesc,
     dataEntriesFieldsMetaDesc,
     dataEntriesFieldsUIDesc,
 } from 'capture-core/reducers/descriptions/dataEntry.reducerDescription';
@@ -15,6 +16,9 @@ import {
     rulesEffectsHiddenSectionsDesc,
     rulesEffectsCompulsoryFieldsDesc,
     rulesEffectsFeedbackDesc,
+    rulesEffectsIndicatorsDesc,
+    rulesEffectsGeneralWarningsDesc,
+    rulesEffectsGeneralErrorsDesc,
 } from 'capture-core/reducers/descriptions/rulesEffects.reducerDescription';
 import {
     workingListsDesc,
@@ -45,6 +49,7 @@ export default [
     dataEntriesDesc,
     dataEntriesUIDesc,
     dataEntriesFieldsValueDesc,
+    dataEntriesNotesDesc,
     dataEntriesFieldsMetaDesc,
     dataEntriesFieldsUIDesc,
     feedbackDesc,
@@ -53,6 +58,9 @@ export default [
     rulesEffectsHiddenSectionsDesc,
     rulesEffectsCompulsoryFieldsDesc,
     rulesEffectsFeedbackDesc,
+    rulesEffectsIndicatorsDesc,
+    rulesEffectsGeneralWarningsDesc,
+    rulesEffectsGeneralErrorsDesc,
     workingListsDesc,
     workingListsMetaDesc,
     workingListsUIDesc,

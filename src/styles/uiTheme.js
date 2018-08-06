@@ -1,11 +1,20 @@
 // @flow
 import { createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
+import red from '@material-ui/core/colors/red';
 import blue from '@material-ui/core/colors/blue';
+import yellow from '@material-ui/core/colors/yellow';
 
 const theme = createMuiTheme({
     palette: {
         primary: blue,
+        error: {
+            ...red,
+            light: red[300],
+            main: red[500],
+            dark: red[700],
+            contrastText: '#fff',
+        },
         secondary: {
             light: green[400],
             main: green[700],
@@ -13,9 +22,10 @@ const theme = createMuiTheme({
         },
         success: green,
         warning: {
-            light: '#FFF66',
-            main: '#FFCC00',
-            dark: '#FF9900',
+            ...yellow,
+            light: yellow[300],
+            main: yellow[500],
+            dark: yellow[700],
         },
     },
 });

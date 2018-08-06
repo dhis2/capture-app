@@ -79,7 +79,11 @@ export default function getRulesEffectsProcessor(
 
     function processShowError(effect: ProgramRuleEffect, processIdName: string): ?MessageEffect {
         if (!effect[processIdName]) {
-            return null;
+            return {
+                type: actions.SHOW_ERROR,
+                id: 'generalErrors',
+                message: `${effect.content} ${effect.data ? effect.data : ''}`,
+            };
         }
 
         return {
@@ -91,7 +95,11 @@ export default function getRulesEffectsProcessor(
 
     function processShowWarning(effect: ProgramRuleEffect, processIdName: string): ?MessageEffect {
         if (!effect[processIdName]) {
-            return null;
+            return {
+                type: actions.SHOW_WARNING,
+                id: 'generalWarnings',
+                message: `${effect.content} ${effect.data ? effect.data : ''}`,
+            };
         }
 
         return {
@@ -158,6 +166,15 @@ export default function getRulesEffectsProcessor(
         };
     }
 
+    function processDisplayKeyValuePair(effect: ProgramRuleEffect): ?any {
+        return {
+            type: actions.DISPLAY_KEY_VALUE_PAIR,
+            id: effect.location,
+            message: effect.content,
+            value: effect.data,
+        };
+    }
+
     const mapActionsToProcessor = {
         [actions.ASSIGN_VALUE]: processAssignValue,
         [actions.HIDE_FIELD]: processHideField,
@@ -168,6 +185,7 @@ export default function getRulesEffectsProcessor(
         [actions.HIDE_SECTION]: processHideSection,
         [actions.MAKE_COMPULSORY]: processMakeCompulsory,
         [actions.DISPLAY_TEXT]: processDisplayText,
+        [actions.DISPLAY_KEY_VALUE_PAIR]: processDisplayKeyValuePair,
     };
 
     function processRulesEffects(

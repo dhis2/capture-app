@@ -29,6 +29,7 @@ export const actionTypes = {
     NO_WORKING_LIST_UPDATE_NEEDED_AFTER_CANCEL_UPDATE: 'NoWorkingListUpdateNeededAfterEventUpdateCancelled',
     UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE: 'UpdateWorkingListAfterEventUpdateCancelled',
     START_ASYNC_UPDATE_FIELD_FOR_EDIT_EVENT: 'StartAsyncUpdateFieldForEditEvent',
+    EDIT_EVENT_ADD_NOTE: 'EditEventAddNote',
 };
 
 export const editEventIds = {
@@ -147,3 +148,6 @@ export const startAsyncUpdateFieldForEditEvent =
             dataEntryId,
             itemId,
         });
+
+export const addNote = (itemId: string, dataEntryId: string, note: Object) =>
+    actionCreator(actionTypes.EDIT_EVENT_ADD_NOTE)({ itemId, dataEntryId, note });

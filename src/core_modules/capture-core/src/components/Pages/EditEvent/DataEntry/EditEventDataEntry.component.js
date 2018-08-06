@@ -11,12 +11,14 @@ import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFounda
 
 import D2Date from '../../../../components/FormFields/DateAndTime/D2Date/D2Date.component';
 import D2TrueOnly from '../../../../components/FormFields/Generic/D2TrueOnly.component';
+import D2TextField from '../../../../components/FormFields/Generic/D2TextField.component';
 import withDefaultMessages from '../../../../components/DataEntry/dataEntryField/withDefaultMessages';
 import withDefaultFieldContainer from '../../../../components/DataEntry/dataEntryField/withDefaultFieldContainer';
 import withDefaultChangeHandler from '../../../../components/DataEntry/dataEntryField/withDefaultChangeHandler';
 import withDefaultShouldUpdateInterface from
     '../../../../components/DataEntry/dataEntryField/withDefaultShouldUpdateInterface';
 import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
+import withNotes from '../../../DataEntry/withNotes';
 
 const getStyles = () => ({
 });
@@ -28,6 +30,26 @@ const getSaveOptions = () => ({
 const getCancelOptions = () => ({
     color: 'secondary',
 });
+
+const buildNoteFieldSettingsFn = () => {
+    const noteFieldComponent = withDefaultFieldContainer()(
+        withDefaultShouldUpdateInterface()(
+            withDefaultMessages()(
+                withDefaultChangeHandler()(D2TextField),
+            ),
+        ),
+    );
+
+    const noteFieldSettings = (props: Object) => ({
+        component: noteFieldComponent,
+        componentProps: {
+            label: props.formFoundation.getLabel('New comment'),
+        },
+        propName: 'note',
+    });
+
+    return noteFieldSettings;
+};
 
 const buildReportDateSettingsFn = () => {
     const reportDateComponent = withDefaultFieldContainer()(
@@ -80,7 +102,8 @@ const buildCompleteFieldSettingsFn = () => {
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(DataEntry);
 const CompleteField = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
 const SaveableDataEntry = withSaveButton(getSaveOptions)(CompleteField);
-const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
+const NotesDataEntry = withNotes(buildNoteFieldSettingsFn)(SaveableDataEntry);
+const CancelableDataEntry = withCancelButton(getCancelOptions)(NotesDataEntry);
 
 type Props = {
     formFoundation: ?RenderFoundation,
@@ -88,6 +111,7 @@ type Props = {
     onStartAsyncUpdateField: Object,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onCancel: () => void,
+    onAddNote: (itemId: string, dataEntryId: string, note: Object) => void,
 };
 
 class NewEventDataEntry extends Component<Props> {
@@ -98,6 +122,7 @@ class NewEventDataEntry extends Component<Props> {
         const {
             formFoundation,
             onUpdateField,
+            onAddNote,
             onSave,
             onCancel,
             onStartAsyncUpdateField,
@@ -112,6 +137,7 @@ class NewEventDataEntry extends Component<Props> {
                         onUpdateFormFieldAsync={onStartAsyncUpdateField}
                         onCancel={onCancel}
                         onSave={onSave}
+                        onAddNote={onAddNote}
                     />
                 </div>
             </div>

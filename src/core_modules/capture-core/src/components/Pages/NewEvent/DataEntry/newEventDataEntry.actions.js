@@ -61,6 +61,10 @@ export const openNewEventInDataEntry =
                 validatorContainers: getEventDateValidatorContainers(),
             },
             {
+                id: 'note',
+                type: 'TEXT',
+            },
+            {
                 inId: 'status',
                 outId: 'complete',
                 onConvertIn: convertStatusIn,
