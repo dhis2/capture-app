@@ -11,3 +11,4 @@ export { default as isValidPercentage } from './percentage.validator';
 export { default as isValidTime } from './time.validator';
 export { default as isValidUrl } from './url.validator';
 export { default as isValidAge } from './age.validator';
+export { default as isValidPhoneNumber } from './phone.validator';
