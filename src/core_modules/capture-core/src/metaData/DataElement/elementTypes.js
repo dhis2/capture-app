@@ -24,6 +24,7 @@ const elementTypeCodes = [
     'FILE_RESOURCE',
     'URL',
     'IMAGE',
+    'AGE',
     unknownTypeCode,
 ];
 

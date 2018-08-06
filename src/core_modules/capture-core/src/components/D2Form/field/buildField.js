@@ -214,6 +214,7 @@ const fieldForTypes = {
     [elementTypes.TIME]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
     [elementTypes.PERCENTAGE]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
     [elementTypes.URL]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
+    [elementTypes.AGE]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
     [elementTypes.FILE_RESOURCE]: (metaData: MetaDataElement, options: Object) => {
         const props = createComponentProps({
             label: metaData.formName,

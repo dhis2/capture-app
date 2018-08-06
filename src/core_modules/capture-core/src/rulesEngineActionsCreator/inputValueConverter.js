@@ -77,6 +77,10 @@ class RulesValueConverter implements IConvertInputRulesValue {
     convertUrl(value: any): string {
         return value || '';
     }
+
+    convertAge(value: any): number | string {
+        return (value || value === 0) ? value : '';
+    }
 }
 
 export default new RulesValueConverter();

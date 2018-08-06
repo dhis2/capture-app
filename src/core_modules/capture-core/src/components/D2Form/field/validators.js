@@ -16,6 +16,7 @@ import {
     isValidPercentage,
     isValidTime,
     isValidUrl,
+    isValidAge,
 } from '../../../utils/validators/form';
 import MetaDataElement from '../../../metaData/DataElement/DataElement';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
@@ -45,6 +46,7 @@ const errorMessages = {
     PERCENTAGE: 'Please provide a valid percentage',
     URL: 'Please provide a valid url',
     EMAIL: 'Please provide a valid email address',
+    AGE: 'Please provide a valid age',
 };
 
 const isCompulsoryRequirementMet = Validators.wordToValidatorMap.get(wordValidatorKeys.COMPULSORY);
@@ -98,6 +100,10 @@ const validatorsForTypes = {
     [elementTypes.URL]: () => ({
         validator: isValidUrl,
         message: i18n.t(errorMessages.URL),
+    }),
+    [elementTypes.AGE]: () => ({
+        validator: isValidAge,
+        message: i18n.t(errorMessages.AGE),
     }),
 };
 

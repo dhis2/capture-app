@@ -68,6 +68,9 @@ class RulesValueConverter implements IConvertOutputRulesEffectsValue {
     convertUrl(value: string): string {
         return value;
     }
+    convertAge(value: number): string {
+        return value.toString();
+    }
 }
 
 export default new RulesValueConverter();
