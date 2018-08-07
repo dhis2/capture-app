@@ -46,7 +46,7 @@ export default function getStore(history: BrowserHistory | HashHistory, onRehydr
     });
 
     return createStore(
-        offlineEnhanceReducer(enableBatching(rootReducer)), composeWithDevTools(
+        enableBatching(offlineEnhanceReducer(rootReducer)), composeWithDevTools(
             compose(
                 offlineEnhanceStore,
                 applyMiddleware(
