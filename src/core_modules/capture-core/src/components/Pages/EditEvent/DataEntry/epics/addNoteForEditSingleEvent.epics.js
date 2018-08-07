@@ -29,11 +29,8 @@ export const addNoteForEditSingleEventEpic = (action$: InputObservable, store: R
             };
 
             const clientNote = [{ value: payload.note, storedBy: userName, storedDate: moment().toISOString() }];
-            return startAddNoteForEditSingleEvent(eventId, serverData, state.currentSelections);
-            /*
+
             return batchActions([
                 startAddNoteForEditSingleEvent(eventId, serverData, state.currentSelections),
-                addNote(dataEntryKey, clientNote),
             ], editEventDataEntryBatchActionTypes.ADD_NOTE_FOR_EDIT_SINGLE_EVENT_BATCH);
-            */
         });
