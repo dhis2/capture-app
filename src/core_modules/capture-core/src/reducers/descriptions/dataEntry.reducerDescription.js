@@ -165,13 +165,14 @@ export const dataEntriesNotesDesc = createReducerDescription({
         const newState = { ...state };
         const payload = action.payload;
         const key = payload.key;
-        newState[key] = payload.dataEntryNotes ? [ ...payload.dataEntryNotes ] : [];
+        newState[key] = payload.dataEntryNotes ? [...payload.dataEntryNotes] : [];
         return newState;
     },
     [actionTypes.ADD_NOTE]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
-        const key = getDataEntryKey(payload.dataEntryId, payload.itemId);
+
+        const key = payload.dataEntryKey;
 
         newState[key] = [...state[key], { ...payload.note }];
         return newState;

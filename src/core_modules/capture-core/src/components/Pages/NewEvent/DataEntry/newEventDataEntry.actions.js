@@ -50,6 +50,16 @@ function convertStatusOut(dataEntryValue: string, prevValue: string) {
     return prevValue;
 }
 
+function convertNoteOut(dataEntryValue: string, prevValue: string) {
+    return dataEntryValue ? [{ value: dataEntryValue }] : [];
+}
+function convertNoteIn(dataEntryValue: any) {
+    if (Array.isArray(dataEntryValue) && dataEntryValue.length > 0) {
+        return dataEntryValue[0].value;
+    }
+    return null;
+}
+
 export const openNewEventInDataEntry =
     (program: ?EventProgram, foundation: ?RenderFoundation, orgUnit: Object) => {
         const dataEntryId = 'singleEvent';
@@ -61,8 +71,10 @@ export const openNewEventInDataEntry =
                 validatorContainers: getEventDateValidatorContainers(),
             },
             {
-                id: 'note',
-                type: 'TEXT',
+                inId: 'notes',
+                outId: 'notes',
+                onConvertIn: convertNoteIn,
+                onConvertOut: convertNoteOut,
             },
             {
                 inId: 'status',

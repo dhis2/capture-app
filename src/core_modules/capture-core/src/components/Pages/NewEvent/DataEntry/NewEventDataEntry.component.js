@@ -75,7 +75,7 @@ const buildNoteSettingsFn = () => {
             },
             label: 'Comment',
         },
-        propName: 'note',
+        propName: 'notes',
         hidden: props.formHorizontal,
         validatorContainers: [
         ],

@@ -9,6 +9,10 @@ type Props = {
 const getInfoWidget = (InnerComponent: React.ComponentType<any>, Widget: React.ComponentType<any>) =>
     class InfoWidgetBuilder extends React.Component<Props> {
         innerInstance: ?any;
+
+        getWrappedInstance() {
+            return this.innerInstance;
+        }
         getInfoWidgets = () => {
             const infoWidgets = this.props.infoWidgets;
             const widget = this.getWidget(infoWidgets ? infoWidgets.length : 0);

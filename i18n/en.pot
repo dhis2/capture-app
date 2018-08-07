@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-08-03T08:27:45.804Z\n"
-"PO-Revision-Date: 2018-08-03T08:27:45.804Z\n"
+"POT-Creation-Date: 2018-08-07T08:18:18.058Z\n"
+"PO-Revision-Date: 2018-08-07T08:18:18.058Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -45,12 +45,6 @@ msgid "Save comment"
 msgstr ""
 
 msgid "Write comment"
-msgstr ""
-
-msgid "by"
-msgstr ""
-
-msgid "at"
 msgstr ""
 
 msgid "Your data is uploading. Please wait untill this message disappears"

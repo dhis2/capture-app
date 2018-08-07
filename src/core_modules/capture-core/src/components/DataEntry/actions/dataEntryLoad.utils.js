@@ -74,9 +74,10 @@ export function getDataEntryNotes(
     clientValuesForDataEntry: Object,
 ): Array<Object> {
     const notes = clientValuesForDataEntry.notes || [];
-    return notes.map(note => ({
+    return notes.map((note, index) => ({
         ...note,
         storedDate: convertListValue(elementTypes.DATETIME, note.storedDate),
+        clientId: index,
     }));
 }
 

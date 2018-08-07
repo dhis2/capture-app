@@ -111,7 +111,7 @@ type Props = {
     onStartAsyncUpdateField: Object,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onCancel: () => void,
-    onAddNote: (itemId: string, dataEntryId: string, note: Object) => void,
+    onAddNote: (itemId: string, dataEntryId: string, note: string) => void,
 };
 
 class NewEventDataEntry extends Component<Props> {

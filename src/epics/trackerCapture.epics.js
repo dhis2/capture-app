@@ -62,6 +62,9 @@ import {
     cancelEditEventLocationChangeEpic,
 } from 'capture-core/components/Pages/EditEvent/DataEntry/epics/cancelEditSingleEvent.epics';
 import {
+    addNoteForEditSingleEventEpic,
+} from 'capture-core/components/Pages/EditEvent/DataEntry/epics/addNoteForEditSingleEvent.epics';
+import {
     goingOnlineEpic,
 } from 'capture-core/components/Connectivity/connectivity.epics';
 import {
@@ -124,6 +127,7 @@ export default combineEpics(
     saveEditEventEpic,
     cancelEditEventLocationChangeEpic,
     cancelEditEventEpic,
+    addNoteForEditSingleEventEpic,
     openEditPageLocationChangeEpic,
     getEventOpeningFromEventListEpic,
     networkMonitorStatusEpic,

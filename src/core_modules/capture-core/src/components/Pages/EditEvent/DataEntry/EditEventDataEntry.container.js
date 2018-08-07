@@ -12,7 +12,7 @@ import {
     startRunRulesOnUpdateForEditSingleEvent,
     requestSaveReturnToMainPage,
     startCancelSaveReturnToMainPage,
-    addNote,
+    requestAddNoteForEditSingleEvent,
     batchActionTypes,
 } from './editEventDataEntry.actions';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
@@ -48,8 +48,8 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
             startRunRulesOnUpdateForEditSingleEvent(innerAction.payload),
         ], batchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH));
     },
-    onAddNote: (itemId: string, dataEntryId: string, note: Object) => {
-        dispatch(addNote(itemId, dataEntryId, note));
+    onAddNote: (itemId: string, dataEntryId: string, note: string) => {
+        dispatch(requestAddNoteForEditSingleEvent(itemId, dataEntryId, note));
     },
     onStartAsyncUpdateField: (
         fieldId: string,

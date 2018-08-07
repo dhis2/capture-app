@@ -15,6 +15,7 @@ import type { ClientEventContainer } from '../../../../events/eventRequests';
 export const batchActionTypes = {
     UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH: 'UpdateFieldForEditSingleEventActionsBatch',
     RULES_EFFECTS_ACTIONS_BATCH: 'RulesEffectsForEditSingleEventActionsBatch',
+    ADD_NOTE_FOR_EDIT_SINGLE_EVENT_BATCH: 'AddNoteForEditSingleEventBatch',
 };
 
 export const actionTypes = {
@@ -29,7 +30,10 @@ export const actionTypes = {
     NO_WORKING_LIST_UPDATE_NEEDED_AFTER_CANCEL_UPDATE: 'NoWorkingListUpdateNeededAfterEventUpdateCancelled',
     UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE: 'UpdateWorkingListAfterEventUpdateCancelled',
     START_ASYNC_UPDATE_FIELD_FOR_EDIT_EVENT: 'StartAsyncUpdateFieldForEditEvent',
-    EDIT_EVENT_ADD_NOTE: 'EditEventAddNote',
+    REQUEST_ADD_NOTE_FOR_EDIT_SINGLE_EVENT: 'RequestAddNoteForEditSingleEvent',
+    START_ADD_NOTE_FOR_EDIT_SINGLE_EVENT: 'StartAddNoteForEditSingleEvent',
+    NOTE_ADDED_FOR_EDIT_SINGLE_EVENT: 'NoteAddedForEditSingleEvent',
+    ADD_NOTE_FAILED_FOR_EDIT_SINGLE_EVENT: 'AddNoteFailedForEditSingleEvent',
 };
 
 export const editEventIds = {
@@ -149,5 +153,18 @@ export const startAsyncUpdateFieldForEditEvent =
             itemId,
         });
 
-export const addNote = (itemId: string, dataEntryId: string, note: Object) =>
-    actionCreator(actionTypes.EDIT_EVENT_ADD_NOTE)({ itemId, dataEntryId, note });
+export const requestAddNoteForEditSingleEvent = (itemId: string, dataEntryId: string, note: Object) =>
+    actionCreator(actionTypes.REQUEST_ADD_NOTE_FOR_EDIT_SINGLE_EVENT)({ itemId, dataEntryId, note });
+
+export const startAddNoteForEditSingleEvent = (eventId: string, serverData: Object, selections: Object) =>
+    actionCreator(actionTypes.START_ADD_NOTE_FOR_EDIT_SINGLE_EVENT)({ selections }, {
+        offline: {
+            effect: {
+                url: `events/${eventId}/note`,
+                method: methods.POST,
+                data: serverData,
+            },
+            commit: { type: actionTypes.NOTE_ADDED_FOR_EDIT_SINGLE_EVENT, meta: { selections } },
+            rollback: { type: actionTypes.ADD_NOTE_FAILED_FOR_EDIT_SINGLE_EVENT, meta: { selections } },
+        },
+    });
