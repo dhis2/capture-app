@@ -8,7 +8,7 @@
  * @returns
  */
 const isValidOrgUnit = (value: string, isEmptyValid: boolean = false) => {
-    if (!isEmptyValid && !value) {
+    if (!value) {
         return isEmptyValid;
     }
 
