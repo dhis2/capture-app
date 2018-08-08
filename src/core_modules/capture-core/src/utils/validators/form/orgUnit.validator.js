@@ -4,12 +4,11 @@
  *
  * @export
  * @param {string} value
- * @param {boolean} [isEmptyValid=false] By default empty is invalid. In your form you should precheck this and not call isNumber if empty.
  * @returns
  */
-const isValidOrgUnit = (value: string, isEmptyValid: boolean = false) => {
+const isValidOrgUnit = (value: string) => {
     if (!value) {
-        return isEmptyValid;
+        return false;
     }
 
     return typeof value === 'string' && value.length > 0;
