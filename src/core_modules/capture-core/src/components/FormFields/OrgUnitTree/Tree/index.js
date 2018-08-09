@@ -69,75 +69,75 @@ export default class Tree extends React.Component {
         return list;
     }
 
-  onIconClick = (evt, open, value) => {
-      evt.stopPropagation();
-      const list = this.updateState(this.props.list, open, value);
-      this.props.onIconClick(value, open, [...list]);
-  }
+    onIconClick = (evt, open, value) => {
+        evt && evt.stopPropagation();
+        const list = this.updateState(this.props.list, open, value);
+        this.props.onIconClick(value, open, [...list]);
+    }
 
-  onClick = (value) => {
-      const { multiple, selectable } = this.props;
-      if (!selectable) {
-          return;
-      }
+    onClick = (value) => {
+        const { multiple, selectable } = this.props;
+        if (!selectable) {
+            return;
+        }
 
-      let { selected } = this.props;
-      const isSelected = selected ? selected.includes(value) : false;
-      if (typeof multiple === 'undefined' || !multiple) {
-          this.props.setSelected(isSelected ? [] : [value], !isSelected, value);
-          return;
-      }
+        let { selected } = this.props;
+        const isSelected = selected ? selected.includes(value) : false;
+        if (typeof multiple === 'undefined' || !multiple) {
+            this.props.setSelected(isSelected ? [] : [value], !isSelected, value);
+            return;
+        }
 
-      if (isSelected) {
-          selected = selected.filter(v => v !== value);
-      } else {
-          selected = selected.slice(0);
-          selected.push(value);
-      }
+        if (isSelected) {
+            selected = selected.filter(v => v !== value);
+        } else {
+            selected = selected.slice(0);
+            selected.push(value);
+        }
 
-      this.props.setSelected(selected, !isSelected, value);
-  }
+        this.props.setSelected(selected, !isSelected, value);
+    }
 
-  node(list, depth = 0) {
-      if (!Array.isArray(list)) {
-          return null;
-      }
+    node(list, depth = 0) {
+        if (!Array.isArray(list)) {
+            return null;
+        }
 
-      return list.map(({ open, label, value, children }) => (
-          <Node
-              key={`node-${value}`}
-              depth={depth}
-              open={open}
-              label={label}
-              value={value}
-              onClick={this.onClick}
-              onIconClick={this.onIconClick}
-              isSelected={this.props.selected ? this.props.selected.includes(value) : false}
-          >
-              {children ? this.node(children, depth + 1) : null}
-          </Node>
-      ));
-  }
+        return list.map(({ open, label, value, children }) => (
+            <Node
+                key={`node-${value}`}
+                depth={depth}
+                open={open}
+                label={label}
+                value={value}
+                onClick={this.onClick}
+                onIconClick={this.onIconClick}
+                isSelected={this.props.selected ? this.props.selected.includes(value) : false}
+            >
+                {children ? this.node(children, depth + 1) : null}
+            </Node>
+        ));
+    }
 
-  view() {
-      return this.node(this.props.list);
-  }
+    view() {
+        return this.node(this.props.list);
+    }
 
-  render() {
-      if (this.props.list.length === 0) {
-          return null;
-      }
+    render() {
+        if (this.props.list.length === 0) {
+            return null;
+        }
 
-      return (
-          <div className="ou-tree-container">
-              <label className="ou-tree-label">
-                  {this.props.label}
-                  {
-                      this.props.required && (<span className="ou-tree-label-required"> *</span>)
-                  }
-              </label>
-              <div className="ou-tree">{this.view()}</div>
-          </div>
-      );
-  }
+        return (
+            <div className="ou-tree-container">
+                <label className="ou-tree-label">
+                    {this.props.label}
+                    {
+                        this.props.required && (<span className="ou-tree-label-required"> *</span>)
+                    }
+                </label>
+                <div className="ou-tree">{this.view()}</div>
+            </div>
+        );
+    }
 }

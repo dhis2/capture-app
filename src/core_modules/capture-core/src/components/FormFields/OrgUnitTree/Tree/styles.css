@@ -17,6 +17,9 @@
   position: relative;
   line-height: 26px;
 }
+.ou-tree [role="button"] {
+  outline: none;
+}
 
 .ou-tree .icon {
   display: inline-block;

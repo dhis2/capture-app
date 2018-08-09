@@ -5,7 +5,7 @@ import Tree from './Tree';
 export default class OrgUnitTree extends React.Component {
   state = {
       list: [],
-      selected: this.props.selected || [],
+      selected: this.props.value,
   }
 
   async componentWillMount() {
@@ -43,12 +43,18 @@ export default class OrgUnitTree extends React.Component {
                   fields: 'id,path,displayName,children::isNotEmpty',
               })
               .then((root) => {
+                  const { value: selectedPath } = this.props;
                   const list = root.toArray();
                   this.setState({
                       list: list.map((item) => {
                           const { path, displayName } = item;
+                          const open = selectedPath && selectedPath.startsWith(path);
+                          if (open) {
+                              this.fetchNode(path, true);
+                          }
+
                           return {
-                              open: false,
+                              open,
                               value: path,
                               label: displayName,
                               children: [],
@@ -61,7 +67,7 @@ export default class OrgUnitTree extends React.Component {
       }
   }
 
-  fetchNode = async (path) => {
+  fetchNode = async (path, opening = false) => {
       try {
           const id = path.substr(path.lastIndexOf('/') + 1);
 
@@ -74,16 +80,24 @@ export default class OrgUnitTree extends React.Component {
               })
               .then((r) => {
                   const organisationUnits = r.toArray();
-                  const children = organisationUnits[0].children.valuesContainerMap;
+                  const units = organisationUnits[0].children.valuesContainerMap;
 
                   const items = [];
                   /* eslint-disable no-unused-vars */
-                  for (const [k, v] of children.entries()) {
+                  for (const [k, v] of units.entries()) {
+                      const { value: selectedPath } = this.props;
+                      const children = v.children.valuesContainerMap.size > 0 ? [] : null;
+                      const open = children !== null && selectedPath && selectedPath.startsWith(v.path);
+
+                      if (open && opening) {
+                          this.fetchNode(v.path, opening);
+                      }
+
                       items.push({
-                          open: false,
+                          open,
+                          children,
                           value: v.path,
                           label: v.displayName,
-                          children: v.children.valuesContainerMap.size > 0 ? [] : null,
                       });
                   }
                   items.sort((a, b) => a.label.localeCompare(b.label));
