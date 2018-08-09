@@ -35,6 +35,10 @@ import { newEventPageDesc } from 'capture-core/reducers/descriptions/newEvent.re
 import { editEventPageDesc } from 'capture-core/reducers/descriptions/editEvent.reducerDescription';
 import { organisationUnitDesc } from 'capture-core/reducers/descriptions/organisationUnits.reducerDescription';
 import { networkStatusDesc } from 'capture-core/reducers/descriptions/networkStatus.reducerDescription';
+import {
+    recentlyAddedEventsDesc,
+    recentlyAddedEventsValuesDesc,
+} from 'capture-core/reducers/descriptions/recentlyAddedEvents.reducerDescription';
 
 import { appReducerDesc } from './app.reducerDescription';
 import { currentSelectionsReducerDesc } from './currentSelections.reducerDescription';
@@ -74,4 +78,6 @@ export default [
     editEventPageDesc,
     organisationUnitDesc,
     networkStatusDesc,
+    recentlyAddedEventsDesc,
+    recentlyAddedEventsValuesDesc,
 ];

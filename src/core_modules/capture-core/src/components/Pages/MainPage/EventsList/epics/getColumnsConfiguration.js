@@ -1,15 +1,12 @@
 // @flow
 import getStageFromProgramIdForEventProgram from '../../../../../metaData/helpers/getStageFromProgramIdForEventProgram';
 import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
+import mainPropertyNames from '../../../../../events/mainPropertyNames.const';
 
 export type ColumnConfig = {
     id: string,
     visible: boolean,
     isMainProperty?: ?boolean,
-};
-
-export const mainPropertyNames = {
-    EVENT_DATE: 'eventDate',
 };
 
 const getDefaultMainConfig = () => ({

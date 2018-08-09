@@ -24,12 +24,12 @@ type Props = {
     }
 };
 
-const OfflineEmptyEventsList = (props: Props) => (
+const OfflineEmptyList = (props: Props) => (
     <div
         className={props.classes.container}
     >
-        {i18n.t('Data for offline event list not present')}
+        {props.emptyListText || i18n.t('Data for offline list not present')}
     </div>
 );
 
-export default withStyles(getStyles)(OfflineEmptyEventsList);
+export default withStyles(getStyles)(OfflineEmptyList);
