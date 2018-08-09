@@ -1,24 +1,13 @@
 // @flow
-import { Validators } from '@dhis2/d2-ui-forms';
 
 /**
  *
  * @export
  * @param {string} value
- * @param {boolean} [isEmptyValid=false] By default empty is invalid. In your form you should precheck this and not call isValidInteger if empty.
  * @returns
  */
-const isValidPhoneNumber = (value: string, isEmptyValid: boolean = false) => {
-    if (!value) {
-        return isEmptyValid;
-    }
-
-    const isValidNumberFn = Validators.isNumber;
-    if (!isValidNumberFn(value)) {
-        return false;
-    }
-
-    return value;
+const isValidPhoneNumber = (value: string) => {
+    return !value ? false : true;
 };
 
 export default isValidPhoneNumber;

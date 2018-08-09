@@ -39,7 +39,7 @@ class D2PhoneNumber extends Component<Props> {
               <TextField
                   inputRef={(inst) => { this.materialUIInstance = inst; }}
                   {...passOnProps}
-                  type="number"
+                  type="text"
                   onChange={this.handleChange}
                   onBlur={this.handleBlur}
               />

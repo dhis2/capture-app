@@ -108,7 +108,7 @@ const validatorsForTypes = {
         message: i18n.t(errorMessages.AGE),
     }),
     [elementTypes.PHONE_NUMBER]: () => ({
-        validator: isValidPhoneNumber(),
+        validator: isValidPhoneNumber,
         message: i18n.t(errorMessages.PHONE_NUMBER),
     }),
 };
