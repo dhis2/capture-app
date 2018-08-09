@@ -10,7 +10,7 @@ import type { HashHistory } from 'history/createHashHistory';
 
 import { createOffline } from '@redux-offline/redux-offline';
 import offlineConfig from '@redux-offline/redux-offline/lib/defaults';
-import { effectConfig, queueConfig } from 'capture-core/trackerOffline/trackerOfflineConfig';
+import { effectConfig, discardConfig, queueConfig } from 'capture-core/trackerOffline/trackerOfflineConfig';
 
 import { buildReducersFromDescriptions } from 'capture-core/trackerRedux/trackerReducer';
 import environments from 'capture-core/constants/environments';
@@ -41,6 +41,7 @@ export default function getStore(history: BrowserHistory | HashHistory, onRehydr
         enhanceStore: offlineEnhanceStore,
     } = createOffline({
         ...offlineConfig,
+        discard: discardConfig,
         effect: effectConfig,
         persistCallback: onRehydrated,
         queue: queueConfig,

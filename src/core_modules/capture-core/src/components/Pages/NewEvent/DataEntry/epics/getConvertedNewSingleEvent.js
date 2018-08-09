@@ -3,8 +3,23 @@ import moment from '../../../../../utils/moment/momentResolver';
 import convertDataEntryToClientValues from '../../../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../../../converters/clientToServer';
 import { convertMainEventClientToServerWithKeysMap } from '../../../../../events/mainEventConverter';
+import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
 
-export const getNewEventServerData = (state, formFoundation, formClientValues, mainDataClientValues) => {
+const getApiCategoriesArgument = (categories: ?{ [id: string]: string}) => {
+    if (!categories) {
+        return null;
+    }
+
+    return {
+        attributeCategoryOptions: Object
+            .keys(categories)
+            // $FlowSuppress
+            .map(key => categories[key])
+            .join(';'),
+    };
+};
+
+export const getNewEventServerData = (state: ReduxState, formFoundation: RenderFoundation, formClientValues: Object, mainDataClientValues: Object) => {
     const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
     const mainDataServerValues: Object = convertMainEventClientToServerWithKeysMap(mainDataClientValues);
 
@@ -17,6 +32,7 @@ export const getNewEventServerData = (state, formFoundation, formClientValues, m
         program: state.currentSelections.programId,
         programStage: formFoundation.id,
         orgUnit: state.currentSelections.orgUnitId,
+        ...getApiCategoriesArgument(state.currentSelections.categories),
         dataValues: Object
             .keys(formServerValues)
             .map(key => ({
@@ -26,7 +42,7 @@ export const getNewEventServerData = (state, formFoundation, formClientValues, m
     };
 };
 
-export const getNewEventClientValues = (state, dataEntryKey, formFoundation) => {
+export const getNewEventClientValues = (state: ReduxState, dataEntryKey: string, formFoundation: RenderFoundation) => {
     const formValues = state.formsValues[dataEntryKey];
     const dataEntryValues = state.dataEntriesFieldsValue[dataEntryKey];
     const dataEntryValuesMeta = state.dataEntriesFieldsMeta[dataEntryKey];

@@ -2,16 +2,18 @@
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/src/isFunction';
 
-import Category from '../CategoryCombinations/Category';
+import CategoryCombination from '../CategoryCombinations/CategoryCombination';
 import type { ProgramRule, ProgramRuleVariable } from '../../RulesEngine/rulesEngine.types';
+import type { Access } from '../Access/Access';
 
 export default class Program {
     _id: string;
+    _access: Access;
     _name: string;
     _shortName: string;
     _organisationUnits: Array<Object>;
     _version: string | number;
-    _categories: ?Array<Category>;
+    _categoryCombination: ?CategoryCombination;
     _programRules: Array<ProgramRule>;
     _programRuleVariables: Array<ProgramRuleVariable>;
 
@@ -26,6 +28,13 @@ export default class Program {
     }
     get id(): string {
         return this._id;
+    }
+
+    set access(access: Access): void {
+        this._access = access;
+    }
+    get access(): Access {
+        return this._access;
     }
 
     set name(name: string) {
@@ -49,11 +58,11 @@ export default class Program {
         return this._organisationUnits;
     }
 
-    set categories(categories: ?Array<Category>) {
-        this._categories = categories;
+    set categoryCombination(categoryCombination: ?CategoryCombination) {
+        this._categoryCombination = categoryCombination;
     }
-    get categories(): ?Array<Category> {
-        return this._categories;
+    get categoryCombination(): ?CategoryCombination {
+        return this._categoryCombination;
     }
 
     set programRules(programRules: Array<ProgramRule>) {

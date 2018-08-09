@@ -35,13 +35,11 @@ const calculateCompleteStatus = (state: CurrentSelectionsState) => {
 
     const selectedProgram = state.programId && programs.get(state.programId);
 
-    if (selectedProgram && selectedProgram.categories) {
-        const categoryies = selectedProgram.categories;
+    if (selectedProgram && selectedProgram.categoryCombination) {
+        const categories = selectedProgram.categoryCombination.categories;
 
-        for (let i = 0; i < categoryies.length; i++) {
-            if (!state.categories || !state.categories[categoryies[i].id]) {
-                return false;
-            }
+        if (categories.some(category => !state.categories || !state.categories[category.id])) {
+            return false;
         }
     }
     return true;

@@ -77,6 +77,8 @@ const styles = () => ({
         border: '1px solid lightGrey',
         borderRadius: 5,
         padding: 5,
+        minHeight: 42,
+        paddingTop: 10,
     },
 });
 

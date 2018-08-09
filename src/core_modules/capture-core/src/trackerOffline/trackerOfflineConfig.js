@@ -17,3 +17,8 @@ export const queueConfig = {
         return newArray;
     },
 };
+
+export const discardConfig = (error: ?{httpStatusCode?: number}) => {
+    const statusCode = error && error.httpStatusCode;
+    return statusCode && statusCode >= 400 && statusCode < 500;
+};

@@ -118,6 +118,7 @@ class QuickSelector extends Component<Props> {
                     </Grid>
                     <Grid item xs={12} sm={actionButtonsWidth}>
                         <ActionButtons
+                            selectedProgram={this.props.selectedProgramId}
                             onStartAgain={this.props.onStartAgain}
                             onClickNew={this.props.onClickNew}
                             selectionComplete={this.props.selectionComplete}

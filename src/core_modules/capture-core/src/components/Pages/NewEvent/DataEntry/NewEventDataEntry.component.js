@@ -86,7 +86,7 @@ const buildReportDateSettingsFn = () => {
         componentProps: {
             width: props && props.formHorizontal ? 150 : 350,
             calendarWidth: 350,
-            label: 'Report date',
+            label: props.formFoundation.getLabel('eventDate'),
             required: true,
         },
         propName: 'eventDate',

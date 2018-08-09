@@ -1,9 +1,9 @@
 // @flow
 import isString from 'd2-utilizr/lib/isString';
 
-import moment from '../utils/moment/momentResolver';
 import elementTypes from '../metaData/DataElement/elementTypes';
 import parseNumber from '../utils/parsers/number.parser';
+import parseDate from '../utils/parsers/date.parser';
 
 type DateTimeValue = {
     date: string,
@@ -26,7 +26,7 @@ function convertDateTime(formValue: DateTimeValue): string {
         minutes = editedTime.substring(3, 4);
     }
 
-    const momentDateTime = moment(editedDate, 'L');
+    const momentDateTime = parseDate(editedDate).momentDate;
     momentDateTime.hour(hour);
     momentDateTime.minute(minutes);
     return momentDateTime.toISOString();
@@ -38,7 +38,8 @@ const valueConvertersForType = {
     [elementTypes.INTEGER_POSITIVE]: parseNumber,
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: parseNumber,
     [elementTypes.INTEGER_NEGATIVE]: parseNumber,
-    [elementTypes.DATE]: (d2Value: string) => moment(d2Value, 'L').toISOString(),
+    // $FlowSuppress
+    [elementTypes.DATE]: (d2Value: string) => parseDate(d2Value).momentDate.toISOString(),
     [elementTypes.DATETIME]: convertDateTime,
     [elementTypes.TRUE_ONLY]: (d2Value: string) => ((d2Value === 'true') || null),
     [elementTypes.BOOLEAN]: (d2Value: string) => (d2Value === 'true'),

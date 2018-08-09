@@ -35,6 +35,9 @@ import {
 import {
     actionTypes as listActionTypes,
 } from '../../components/List/list.actions';
+import {
+    actionTypes as cleanUpActionTypes,
+} from '../../cleanUp/cleanUp.actions';
 
 export const workingListsDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
@@ -274,6 +277,13 @@ export const workingListsMetaDesc = createReducerDescription({
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateListsMetaOnUrlUpdate,
     [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateListsMetaOnUrlUpdate,
     [editEventSelectorActionTypes.EDIT_EVENT_FROM_URL]: updateListsMetaOnUrlUpdate,
+    [cleanUpActionTypes.CLEAN_UP_EVENT_LIST_IN_LOADING]: state => ({
+        ...state,
+        main: {
+            ...state.main,
+            next: {},
+        },
+    }),
 }, 'workingListsMeta');
 
 const getLoadingState = oldState => ({
@@ -412,6 +422,16 @@ export const workingListsUIDesc = createReducerDescription({
     [connectivityActionTypes.GET_EVENT_LIST_ON_RECONNECT]: (state) => {
         const newState = { ...state };
         newState.main = getLoadingState(newState.main);
+        return newState;
+    },
+    [cleanUpActionTypes.CLEAN_UP_EVENT_LIST_IN_LOADING]: (state) => {
+        const newState = {
+            ...state,
+            main: {
+                ...state.main,
+                isLoading: false,
+            },
+        };
         return newState;
     },
 }, 'workingListsUI');
@@ -639,6 +659,13 @@ export const workingListsAppliedFiltersDesc = createReducerDescription({
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateApplitedFiltersOnUrlUpdate,
     [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateApplitedFiltersOnUrlUpdate,
     [editEventSelectorActionTypes.EDIT_EVENT_FROM_URL]: updateApplitedFiltersOnUrlUpdate,
+    [cleanUpActionTypes.CLEAN_UP_EVENT_LIST_IN_LOADING]: state => ({
+        ...state,
+        main: {
+            ...state.main,
+            next: {},
+        },
+    }),
 }, 'workingListsAppliedFilters');
 
 const updateUserSelectedFilersOnUrlUpdate = (state, action) => {

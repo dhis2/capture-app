@@ -110,7 +110,7 @@ type Props = {
     onResetOrgUnit: () => void,
     buttonModeMaxLength: number,
     showWarning: boolean,
-    selectedProgram: Object,
+    selectedProgram: string,
     selectedOrgUnitId: string,
     selectedCategories: Object,
     classes: Object,
@@ -153,17 +153,17 @@ class ProgramSelector extends Component<Props> {
         //Once we support Tracker Programs, we don´t need to filter on EventProgram only on if the orgUnit has the progrma.
         if(this.props.selectedOrgUnitId) {
             programOptions = programsArray
-                .filter(program => program instanceof EventProgram && program.organisationUnits[this.props.selectedOrgUnitId])
+                .filter(program => program instanceof EventProgram && program.organisationUnits[this.props.selectedOrgUnitId] && program.access.data.read)
                 .map(program => new Option((_this) => {
                 _this.value = program.id;
                 _this.text = program.name;
             }));
 
-            areAllProgramsAvailable = programOptions.length == programsArray.filter(program => program instanceof EventProgram).length;
+            areAllProgramsAvailable = programOptions.length == programsArray.filter(program => program instanceof EventProgram && program.access.data.read).length;
 
         } else {
             programOptions = programsArray
-                .filter(program => program instanceof EventProgram)
+                .filter(program => program instanceof EventProgram && program.access.data.read)
                 .map(program => new Option((_this) => {
                 _this.value = program.id;
                 _this.text = program.name;
@@ -173,15 +173,10 @@ class ProgramSelector extends Component<Props> {
         const programOptionSet = new OptionSet('programOptionSet', programOptions);
 
         // If program is set in Redux state.
-        if (this.props.selectedProgram) {
-            let selectedProgram = {};
-            for (let i = 0; i < programsArray.length; i++) {
-                // Get full program object based on id from this.props.selectedProgram.
-                if (programsArray[i].id === this.props.selectedProgram) {
-                    selectedProgram = programsArray[i];
-                }
-            }
-            if (selectedProgram.categories) {
+        const selectedProgram = this.props.selectedProgram ? programs.get(this.props.selectedProgram) : null;
+
+        if (selectedProgram) {
+            if (selectedProgram.categoryCombination) {
                 return (
                     <div>
                         <Paper elevation={1} className={this.props.classes.selectedPaper}>
@@ -194,7 +189,7 @@ class ProgramSelector extends Component<Props> {
                                         </IconButton>
                                     </p>
                                 </Grid>
-                                {selectedProgram.categories.map(i =>
+                                {selectedProgram.categoryCombination.categories.map(i =>
                                     (<Grid key={i.id} item xs={12} sm={6}>
                                         <h4 className={this.props.classes.title}>{i.name}</h4>
                                         {
