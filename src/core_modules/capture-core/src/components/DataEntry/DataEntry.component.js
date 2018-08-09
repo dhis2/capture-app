@@ -253,15 +253,21 @@ class DataEntry extends React.Component<Props, State> {
                         }
                     </div>
                 </div>
-                <StickyOnScroll
-                    offsetTop={50}
-                    minViewpointWidth={769}
-                    containerClass={classes.stickyOnScroll}
-                >
+                {!this.props.formHorizontal ?
+                    <StickyOnScroll
+                        offsetTop={50}
+                        minViewpointWidth={769}
+                        containerClass={classes.stickyOnScroll}
+                    >
+                        <div>
+                            {infoWidgets}
+                        </div>
+                    </StickyOnScroll> :
                     <div>
                         {infoWidgets}
                     </div>
-                </StickyOnScroll>
+                }
+
             </div>
         );
     }
