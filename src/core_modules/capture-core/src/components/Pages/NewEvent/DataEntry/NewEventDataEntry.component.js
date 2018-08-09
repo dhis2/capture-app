@@ -21,6 +21,7 @@ import withDefaultShouldUpdateInterface from
     '../../../../components/DataEntry/dataEntryField/withDefaultShouldUpdateInterface';
 
 import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
+import { newEventSaveTypes, newEventSaveTypeDefinitions } from './newEventSaveTypes';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -46,9 +47,26 @@ const getStyles = theme => ({
     },
 });
 
-const getSaveOptions = () => ({
-    color: 'primary',
-});
+const getSaveOptions = (props: Object) => {
+    const options: {color?: ?string, saveTypes?: ?Array<any>} = {
+        color: 'primary',
+    };
+
+    if (props.formHorizontal) {
+        options.saveTypes = [
+            newEventSaveTypeDefinitions[newEventSaveTypes.SAVEANDADDANOTHER],
+            newEventSaveTypeDefinitions[newEventSaveTypes.SAVEANDEXIT],
+        ];
+        return options;
+    }
+    if (props.saveTypes) {
+        options.saveTypes = props.saveTypes.map(saveType => newEventSaveTypeDefinitions[saveType]);
+        return options;
+    }
+
+    options.saveTypes = [newEventSaveTypeDefinitions[newEventSaveTypes.SAVEANDEXIT], newEventSaveTypeDefinitions[newEventSaveTypes.SAVEANDADDANOTHER]];
+    return options;
+};
 
 const getCancelOptions = () => ({
     color: 'secondary',
@@ -114,7 +132,9 @@ type Props = {
     orgUnitName: string,
     onUpdateField: (innerAction: ReduxAction<any, any>) => void,
     onStartAsyncUpdateField: Object,
+    onSetSaveTypes: (saveTypes: ?Array<$Values<typeof newEventSaveTypes>>) => void,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onSaveAndAddAnother: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onCancel: () => void,
     classes: {
         savingContextContainer: string,
@@ -125,6 +145,7 @@ type Props = {
     },
     theme: Theme,
     formHorizontal: ?boolean,
+    saveTypes?: ?Array<$Values<typeof newEventSaveTypes>>
 };
 
 class NewEventDataEntry extends Component<Props> {
@@ -135,9 +156,25 @@ class NewEventDataEntry extends Component<Props> {
         this.fieldOptions = { theme: props.theme };
     }
 
+    componentWillMount() {
+        this.props.onSetSaveTypes(null);
+    }
+
     componentWillUnmount() {
         inMemoryFileStore.clear();
     }
+
+    handleSave = (itemId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: ?string) => {
+        if (saveType === newEventSaveTypes.SAVEANDADDANOTHER) {
+            if (!this.props.formHorizontal) {
+                this.props.onSetSaveTypes([newEventSaveTypes.SAVEANDADDANOTHER, newEventSaveTypes.SAVEANDEXIT]);
+            }
+            this.props.onSaveAndAddAnother(itemId, dataEntryId, formFoundation);
+        } else if (saveType === newEventSaveTypes.SAVEANDEXIT) {
+            this.props.onSave(itemId, dataEntryId, formFoundation);
+        }
+    }
+
     getSavingText() {
         const { classes, orgUnitName, programName } = this.props;
         const firstPart = `${i18n.t('Saving to')} `;
@@ -178,12 +215,12 @@ class NewEventDataEntry extends Component<Props> {
             formFoundation,
             onUpdateField,
             onStartAsyncUpdateField,
-            onSave,
             onCancel,
             programName, // eslint-disable-line
             orgUnitName, // eslint-disable-line
             classes,
             formHorizontal,
+            saveTypes,
         } = this.props;
         return (
             <div>
@@ -194,8 +231,9 @@ class NewEventDataEntry extends Component<Props> {
                         onUpdateFormField={onUpdateField}
                         onUpdateFormFieldAsync={onStartAsyncUpdateField}
                         onCancel={onCancel}
-                        onSave={onSave}
+                        onSave={this.handleSave}
                         formHorizontal={formHorizontal}
+                        saveTypes={saveTypes}
                         fieldOptions={this.fieldOptions}
                     />
                 </div>

@@ -1,29 +1,12 @@
 // @flow
 import { replace } from 'react-router-redux';
-import moment from '../../../../../utils/moment/momentResolver';
 import {
     actionTypes as newEventDataEntryActionTypes,
     startSaveNewEventAfterReturnedToMainPage,
 } from '../newEventDataEntry.actions';
 
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
-import convertDataEntryToClientValues from '../../../../DataEntry/common/convertDataEntryToClientValues';
-import { convertValue as convertToServerValue } from '../../../../../converters/clientToServer';
-import { convertMainEventClientToServerWithKeysMap } from '../../../../../events/mainEventConverter';
-
-const getApiCategoriesArgument = (categories: ?{ [id: string]: string}) => {
-    if (!categories) {
-        return null;
-    }
-
-    return {
-        attributeCategoryOptions: Object
-            .keys(categories)
-            // $FlowSuppress
-            .map(key => categories[key])
-            .join(';'),
-    };
-};
+import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
 
 export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
@@ -32,46 +15,13 @@ export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
             const state = store.getState();
             const payload = action.payload;
             const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.eventId);
-
-            const formValues = state.formsValues[dataEntryKey];
-            const dataEntryValues = state.dataEntriesFieldsValue[dataEntryKey];
-            const dataEntryValuesMeta = state.dataEntriesFieldsMeta[dataEntryKey];
-            const prevEventMainData = {};
             const formFoundation = payload.formFoundation;
 
-            const { formClientValues, dataEntryClientValues } = convertDataEntryToClientValues(
-                formFoundation,
-                formValues,
-                dataEntryValues,
-                dataEntryValuesMeta,
-                prevEventMainData,
-            );
-            const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues };
+            const { formClientValues, mainDataClientValues } = getNewEventClientValues(state, dataEntryKey, formFoundation);
 
-            const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
-            const mainDataServerValues: Object = convertMainEventClientToServerWithKeysMap(mainDataClientValues);
+            const serverData = getNewEventServerData(state, formFoundation, formClientValues, mainDataClientValues);
 
-            if (mainDataServerValues.status === 'COMPLETED') {
-                mainDataServerValues.completedDate = moment().format('YYYY-MM-DD');
-            }
-
-            const currentSelections = state.currentSelections;
-
-            const serverData = {
-                ...mainDataServerValues,
-                program: currentSelections.programId,
-                programStage: formFoundation.id,
-                orgUnit: currentSelections.orgUnitId,
-                ...getApiCategoriesArgument(currentSelections.categories),
-                dataValues: Object
-                    .keys(formServerValues)
-                    .map(key => ({
-                        dataElement: key,
-                        value: formServerValues[key],
-                    })),
-            };
-
-            return startSaveNewEventAfterReturnedToMainPage(serverData, currentSelections);
+            return startSaveNewEventAfterReturnedToMainPage(serverData, state.currentSelections);
         });
 
 export const saveNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>

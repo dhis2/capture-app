@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import OfflineEventsListWrapper from '../OfflineEventsList/OfflineEventsListWrapper.container';
+import OfflineEventsList from '../OfflineEventsList/OfflineEventsList.container';
 import EventsListLoadWrapper from '../EventsList/EventsListLoadWrapper.container';
 
 type Props = {
@@ -13,7 +13,7 @@ const EventsListConnectivityWrapper = (props: Props) => (
             (() => {
                 if (!props.isOnline) {
                     return (
-                        <OfflineEventsListWrapper />
+                        <OfflineEventsList />
                     );
                 }
                 return (
