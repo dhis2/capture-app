@@ -172,9 +172,18 @@ export const dataEntriesNotesDesc = createReducerDescription({
         const newState = { ...state };
         const payload = action.payload;
 
-        const key = payload.dataEntryKey;
+        const key = getDataEntryKey(payload.dataEntryId, payload.itemId);
 
-        newState[key] = [...state[key], { ...payload.note }];
+        newState[key] = [...state[key], { ...payload.formNote }];
+        return newState;
+    },
+    [actionTypes.REMOVE_NOTE]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+
+        const key = getDataEntryKey(payload.dataEntryId, payload.itemId);
+
+        newState[key] = state[key].filter(n => n.clientId !== payload.noteClientId);
         return newState;
     },
 }, 'dataEntriesNotes', {});

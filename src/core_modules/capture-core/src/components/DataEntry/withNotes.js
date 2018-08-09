@@ -135,7 +135,7 @@ const getNotes = (InnerComponent: React.ComponentType<any>) =>
                     <div>Comments</div>
                     <List dense>
                         {notes.map(n => (
-                            <ListItem className={classes.noteItem} key={n.clientId}>
+                            <ListItem className={classes.noteItem} key={n.key}>
                                 <div className={classes.noteItemHeader}>
                                     <div className={classes.noteItemUser}>
                                         {n.storedBy}

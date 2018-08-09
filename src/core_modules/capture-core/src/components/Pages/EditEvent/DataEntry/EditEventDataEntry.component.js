@@ -19,6 +19,10 @@ import withDefaultShouldUpdateInterface from
     '../../../../components/DataEntry/dataEntryField/withDefaultShouldUpdateInterface';
 import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
 import withNotes from '../../../DataEntry/withNotes';
+import withIndicatorWidget from '../../../DataEntry/dataEntryInfoWidgets/withIndicatorWidget';
+import withFeedbackWidget from '../../../DataEntry/dataEntryInfoWidgets/withFeedbackWidget';
+import withErrorWidget from '../../../DataEntry/dataEntryInfoWidgets/withErrorWidget';
+import withWarningWidget from '../../../DataEntry/dataEntryInfoWidgets/withWarningWidget';
 
 const getStyles = () => ({
 });
@@ -101,7 +105,11 @@ const buildCompleteFieldSettingsFn = () => {
 
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(DataEntry);
 const CompleteField = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
-const SaveableDataEntry = withSaveButton(getSaveOptions)(CompleteField);
+const FeedbackWidget = withFeedbackWidget()(CompleteField);
+const IndicatorWidget = withIndicatorWidget()(FeedbackWidget);
+const WarningWidget = withWarningWidget()(IndicatorWidget);
+const ErrorWidget = withErrorWidget()(WarningWidget);
+const SaveableDataEntry = withSaveButton(getSaveOptions)(ErrorWidget);
 const NotesDataEntry = withNotes(buildNoteFieldSettingsFn)(SaveableDataEntry);
 const CancelableDataEntry = withCancelButton(getCancelOptions)(NotesDataEntry);
 

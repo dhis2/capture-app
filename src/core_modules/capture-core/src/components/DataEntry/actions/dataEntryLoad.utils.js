@@ -77,7 +77,7 @@ export function getDataEntryNotes(
     return notes.map((note, index) => ({
         ...note,
         storedDate: convertListValue(elementTypes.DATETIME, note.storedDate),
-        clientId: index,
+        key: index,
     }));
 }
 

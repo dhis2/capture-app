@@ -20,7 +20,7 @@ const getInfoWidget = (InnerComponent: React.ComponentType<any>, Widget: React.C
         };
         getWidget = (key: any) =>
             (
-                <div style={{ marginTop: 10 }}>
+                <div style={{ marginTop: 10 }} key={key}>
                     <Widget
                         key={key}
                         {...this.props}

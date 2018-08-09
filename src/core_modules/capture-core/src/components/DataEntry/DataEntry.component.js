@@ -161,6 +161,7 @@ class DataEntry extends React.Component<Props, State> {
             onUpdateFormField,
             onUpdateFieldInner,
             onUpdateFormFieldAsync,
+            infoWidgets,
             ...passOnProps } = this.props;
 
         if (!itemId) {
@@ -182,7 +183,6 @@ class DataEntry extends React.Component<Props, State> {
 
         const topFields = this.getFieldWithPlacement(placements.TOP);
         const bottomFields = this.getFieldWithPlacement(placements.BOTTOM);
-        const infoWidgets = this.props.infoWidgets;
         return (
             <div className={directionClasses.container}>
                 <div className={directionClasses.dataEntryContainer}>

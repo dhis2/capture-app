@@ -156,15 +156,15 @@ export const startAsyncUpdateFieldForEditEvent =
 export const requestAddNoteForEditSingleEvent = (itemId: string, dataEntryId: string, note: Object) =>
     actionCreator(actionTypes.REQUEST_ADD_NOTE_FOR_EDIT_SINGLE_EVENT)({ itemId, dataEntryId, note });
 
-export const startAddNoteForEditSingleEvent = (eventId: string, serverData: Object, selections: Object) =>
-    actionCreator(actionTypes.START_ADD_NOTE_FOR_EDIT_SINGLE_EVENT)({ selections }, {
+export const startAddNoteForEditSingleEvent = (eventId: string, serverData: Object, selections: Object, context: Object) =>
+    actionCreator(actionTypes.START_ADD_NOTE_FOR_EDIT_SINGLE_EVENT)({ selections, context }, {
         offline: {
             effect: {
                 url: `events/${eventId}/note`,
                 method: methods.POST,
                 data: serverData,
             },
-            commit: { type: actionTypes.NOTE_ADDED_FOR_EDIT_SINGLE_EVENT, meta: { selections } },
-            rollback: { type: actionTypes.ADD_NOTE_FAILED_FOR_EDIT_SINGLE_EVENT, meta: { selections } },
+            commit: { type: actionTypes.NOTE_ADDED_FOR_EDIT_SINGLE_EVENT, meta: { selections, context } },
+            rollback: { type: actionTypes.ADD_NOTE_FAILED_FOR_EDIT_SINGLE_EVENT, meta: { selections, context } },
         },
     });
