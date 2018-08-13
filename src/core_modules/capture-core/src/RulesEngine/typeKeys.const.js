@@ -18,4 +18,5 @@ export default {
     PERCENTAGE: 'PERCENTAGE',
     URL: 'URL',
     AGE: 'AGE',
+    ORGANISATION_UNIT: 'ORGANISATION_UNIT',
 };
