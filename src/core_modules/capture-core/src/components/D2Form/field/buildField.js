@@ -9,6 +9,7 @@ import D2Date from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import D2DateTime from '../../FormFields/DateAndTime/D2DateTime/D2DateTime.component';
 import D2File from '../../FormFields/File/D2File.component';
 import D2Image from '../../FormFields/Image/D2Image.component';
+import OrgUnitTree from '../../FormFields/OrgUnitTree/OrgUnitTree.component'
 
 import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
 import OptionsSelect from '../../FormFields/Options/SelectVirtualized/OptionsSelectVirtualized.component';
@@ -95,6 +96,33 @@ const getBaseTextField = (metaData: MetaDataElement, options: Object) => {
             ),
         props,
     }, metaData);
+};
+
+const getOrgUnitField = (metaData: MetaDataElement, options: Object) => {
+  const props = createComponentProps({
+    label: metaData.formName,
+    multiline: false,
+    metaCompulsory: metaData.compulsory,
+  }, options);
+
+  return createFieldProps({
+    id: metaData.id,
+    component:
+      withGotoInterface()(
+        withHideCompatibility()(
+          withDefaultShouldUpdateInterface()(
+            withRequiredFieldCalculation()(
+              withDefaultFieldContainer()(
+                withDefaultMessages()(
+                  withInternalChangeHandler()(OrgUnitTree),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    props,
+  }, metaData);
 };
 
 const fieldForTypes = {
@@ -211,11 +239,12 @@ const fieldForTypes = {
             props,
         }, metaData);
     },
-    [elementTypes.TIME]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
-    [elementTypes.PERCENTAGE]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
-    [elementTypes.URL]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
+    [elementTypes.TIME]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData),
+    [elementTypes.PERCENTAGE]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData),
+    [elementTypes.URL]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData),
+    [elementTypes.ORGANISATION_UNIT]: (metaData: MetaDataElement, options: Object) => getOrgUnitField(metaData),
     [elementTypes.FILE_RESOURCE]: (metaData: MetaDataElement, options: Object) => {
-        const props = createComponentProps({
+       const props = createComponentProps({
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
             async: true,
