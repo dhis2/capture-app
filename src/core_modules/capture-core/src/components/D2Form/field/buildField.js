@@ -9,6 +9,7 @@ import D2Date from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import D2DateTime from '../../FormFields/DateAndTime/D2DateTime/D2DateTime.component';
 import D2File from '../../FormFields/File/D2File.component';
 import D2Image from '../../FormFields/Image/D2Image.component';
+import D2PhoneNumber from '../../FormFields/PhoneNumber/PhoneNumber.component';
 
 import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
 import OptionsSelect from '../../FormFields/Options/SelectVirtualized/OptionsSelectVirtualized.component';
@@ -97,9 +98,37 @@ const getBaseTextField = (metaData: MetaDataElement, options: Object) => {
     }, metaData);
 };
 
+const getPhoneField = (metaData: MetaDataElement, options: Object) => {
+    const props = createComponentProps({
+        label: metaData.formName,
+        multiline: false,
+        metaCompulsory: metaData.compulsory,
+    }, options);
+
+    return createFieldProps({
+        id: metaData.id,
+        component:
+      withGotoInterface()(
+          withHideCompatibility()(
+              withDefaultShouldUpdateInterface()(
+                  withRequiredFieldCalculation()(
+                      withDefaultFieldContainer()(
+                          withDefaultMessages()(
+                              withInternalChangeHandler()(D2PhoneNumber),
+                          ),
+                      ),
+                  ),
+              ),
+          ),
+      ),
+        props,
+    }, metaData);
+};
+
 const fieldForTypes = {
     [elementTypes.EMAIL]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
     [elementTypes.TEXT]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
+    [elementTypes.PHONE_NUMBER]: (metaData: MetaDataElement, options: Object) => getPhoneField(metaData, options),
     [elementTypes.LONG_TEXT]: (metaData: MetaDataElement, options: Object) => {
         const baseField = getBaseTextField(metaData, options);
         const props = { ...baseField.props, multiLine: true };
