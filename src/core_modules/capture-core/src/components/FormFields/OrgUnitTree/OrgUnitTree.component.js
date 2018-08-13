@@ -48,7 +48,7 @@ export default class OrgUnitTree extends React.Component {
                   this.setState({
                       list: list.map((item) => {
                           const { path, displayName } = item;
-                          const open = selectedPath && selectedPath.startsWith(path);
+                          const open = selectedPath && selectedPath.startsWith(path) && selectedPath !== path;
                           if (open) {
                               this.fetchNode(path, true);
                           }
@@ -87,10 +87,12 @@ export default class OrgUnitTree extends React.Component {
                   for (const [k, v] of units.entries()) {
                       const { value: selectedPath } = this.props;
                       const children = v.children.valuesContainerMap.size > 0 ? [] : null;
-                      const open = children !== null && selectedPath && selectedPath.startsWith(v.path);
+                      let open = children !== null && selectedPath && selectedPath.startsWith(v.path);
 
-                      if (open && opening) {
+                      if (open && opening && selectedPath.substr(v.path.length).indexOf('/') > -1) {
                           this.fetchNode(v.path, opening);
+                      } else {
+                          open = false;
                       }
 
                       items.push({
