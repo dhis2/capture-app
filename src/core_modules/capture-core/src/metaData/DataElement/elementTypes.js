@@ -25,6 +25,7 @@ const elementTypeCodes = [
     'URL',
     'ORGANISATION_UNIT',
     'IMAGE',
+    'AGE',
     unknownTypeCode,
 ];
 

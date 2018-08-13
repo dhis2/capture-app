@@ -9,7 +9,8 @@ import D2Date from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import D2DateTime from '../../FormFields/DateAndTime/D2DateTime/D2DateTime.component';
 import D2File from '../../FormFields/File/D2File.component';
 import D2Image from '../../FormFields/Image/D2Image.component';
-import OrgUnitTree from '../../FormFields/OrgUnitTree/OrgUnitTree.component'
+import D2PhoneNumber from '../../FormFields/PhoneNumber/PhoneNumber.component';
+import OrgUnitTree from '../../FormFields/OrgUnitTree/OrgUnitTree.component';
 
 import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
 import OptionsSelect from '../../FormFields/Options/SelectVirtualized/OptionsSelectVirtualized.component';
@@ -98,36 +99,64 @@ const getBaseTextField = (metaData: MetaDataElement, options: Object) => {
     }, metaData);
 };
 
-const getOrgUnitField = (metaData: MetaDataElement, options: Object) => {
-  const props = createComponentProps({
-    label: metaData.formName,
-    multiline: false,
-    metaCompulsory: metaData.compulsory,
-  }, options);
+const getPhoneField = (metaData: MetaDataElement, options: Object) => {
+    const props = createComponentProps({
+        label: metaData.formName,
+        multiline: false,
+        metaCompulsory: metaData.compulsory,
+    }, options);
 
-  return createFieldProps({
-    id: metaData.id,
-    component:
+    return createFieldProps({
+        id: metaData.id,
+        component:
       withGotoInterface()(
-        withHideCompatibility()(
-          withDefaultShouldUpdateInterface()(
-            withRequiredFieldCalculation()(
-              withDefaultFieldContainer()(
-                withDefaultMessages()(
-                  withInternalChangeHandler()(OrgUnitTree),
-                ),
+          withHideCompatibility()(
+              withDefaultShouldUpdateInterface()(
+                  withRequiredFieldCalculation()(
+                      withDefaultFieldContainer()(
+                          withDefaultMessages()(
+                              withInternalChangeHandler()(D2PhoneNumber),
+                          ),
+                      ),
+                  ),
               ),
-            ),
           ),
-        ),
       ),
-    props,
-  }, metaData);
+        props,
+    }, metaData);
+};
+
+const getOrgUnitField = (metaData: MetaDataElement, options: Object) => {
+    const props = createComponentProps({
+        label: metaData.formName,
+        multiline: false,
+        metaCompulsory: metaData.compulsory,
+    }, options);
+
+    return createFieldProps({
+        id: metaData.id,
+        component:
+        withGotoInterface()(
+            withHideCompatibility()(
+                withDefaultShouldUpdateInterface()(
+                    withRequiredFieldCalculation()(
+                        withDefaultFieldContainer()(
+                            withDefaultMessages()(
+                                withInternalChangeHandler()(OrgUnitTree),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        props,
+    }, metaData);
 };
 
 const fieldForTypes = {
     [elementTypes.EMAIL]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
     [elementTypes.TEXT]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
+    [elementTypes.PHONE_NUMBER]: (metaData: MetaDataElement, options: Object) => getPhoneField(metaData, options),
     [elementTypes.LONG_TEXT]: (metaData: MetaDataElement, options: Object) => {
         const baseField = getBaseTextField(metaData, options);
         const props = { ...baseField.props, multiLine: true };
@@ -239,12 +268,13 @@ const fieldForTypes = {
             props,
         }, metaData);
     },
-    [elementTypes.TIME]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData),
-    [elementTypes.PERCENTAGE]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData),
-    [elementTypes.URL]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData),
-    [elementTypes.ORGANISATION_UNIT]: (metaData: MetaDataElement, options: Object) => getOrgUnitField(metaData),
+    [elementTypes.TIME]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
+    [elementTypes.PERCENTAGE]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
+    [elementTypes.URL]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
+    [elementTypes.AGE]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
+    [elementTypes.ORGANISATION_UNIT]: (metaData: MetaDataElement, options: Object) => getOrgUnitField(metaData, options),
     [elementTypes.FILE_RESOURCE]: (metaData: MetaDataElement, options: Object) => {
-       const props = createComponentProps({
+        const props = createComponentProps({
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
             async: true,
