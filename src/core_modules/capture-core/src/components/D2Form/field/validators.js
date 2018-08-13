@@ -112,6 +112,7 @@ const validatorsForTypes = {
     [elementTypes.PHONE_NUMBER]: () => ({
         validator: isValidPhoneNumber,
         message: i18n.t(errorMessages.PHONE_NUMBER),
+    }),
     [elementTypes.ORGANISATION_UNIT]: () => ({
         validator: isValidOrgUnit,
         message: i18n.t(errorMessages.ORGANISATION_UNIT),
