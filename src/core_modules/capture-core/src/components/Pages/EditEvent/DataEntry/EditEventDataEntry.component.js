@@ -38,11 +38,11 @@ const buildReportDateSettingsFn = () => {
         ),
     );
 
-    const reportDateSettings = () => ({
+    const reportDateSettings = (props: Object) => ({
         component: reportDateComponent,
         componentProps: {
             width: 350,
-            label: 'Report date',
+            label: props.formFoundation.getLabel('eventDate'),
             required: true,
         },
         propName: 'eventDate',

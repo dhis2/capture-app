@@ -19,4 +19,5 @@ export default {
     [typeKeys.INTEGER_ZERO_OR_POSITIVE]: 'convertIntegerZeroOrPositive',
     [typeKeys.PERCENTAGE]: 'convertPercentage',
     [typeKeys.URL]: 'convertUrl',
+    [typeKeys.AGE]: 'convertAge',
 };

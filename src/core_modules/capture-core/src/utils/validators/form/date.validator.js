@@ -1,6 +1,5 @@
 // @flow
-import moment from '../../moment/momentResolver';
-
+import parseDate from '../../parsers/date.parser';
 /**
  *
  * @export
@@ -13,17 +12,6 @@ export default function isValidDate(value: string, isEmptyValid: boolean = false
         return isEmptyValid;
     }
 
-    const dateString = value;
-
-    const momentDate = moment(dateString, 'L', true);
-    const isValid = momentDate.isValid();
-    if (!isValid) {
-        return isValid;
-    }
-
-    if (!momentDate.isAfter(999, 'year')) {
-        return false;
-    }
-
-    return true;
+    const parseData = parseDate(value);
+    return parseData.isValid;
 }

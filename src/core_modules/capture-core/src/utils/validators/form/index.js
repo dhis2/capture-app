@@ -10,4 +10,7 @@ export { default as isValidNumber } from './number.validator';
 export { default as isValidPercentage } from './percentage.validator';
 export { default as isValidTime } from './time.validator';
 export { default as isValidUrl } from './url.validator';
+export { default as isValidAge } from './age.validator';
+export { default as isValidPhoneNumber } from './phone.validator';
+export { default as isValidOrgUnit } from './orgUnit.validator';
 export { default as isValidUsername } from './username.validator';

@@ -17,6 +17,9 @@ import {
     isValidTime,
     isValidUrl,
     isValidUsername,
+    isValidAge,
+    isValidPhoneNumber,
+    isValidOrgUnit,
 } from '../../../utils/validators/form';
 import MetaDataElement from '../../../metaData/DataElement/DataElement';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
@@ -46,6 +49,9 @@ const errorMessages = {
     PERCENTAGE: 'Please provide a valid percentage',
     URL: 'Please provide a valid url',
     EMAIL: 'Please provide a valid email address',
+    AGE: 'Please provide a valid age',
+    PHONE_NUMBER: 'Please provide a valid phone number',
+    ORGANISATION_UNIT: 'Please provide a valid organisation unit',
     USERNAME: 'Please provide a valid username',
 };
 
@@ -101,9 +107,21 @@ const validatorsForTypes = {
         validator: isValidUrl,
         message: i18n.t(errorMessages.URL),
     }),
-    [elementTypes.NUMBER]: () => ({
+    [elementTypes.USERNAME]: () => ({
         validator: isValidUsername,
         message: i18n.t(errorMessages.USERNAME),
+    }),
+    [elementTypes.AGE]: () => ({
+        validator: isValidAge,
+        message: i18n.t(errorMessages.AGE),
+    }),
+    [elementTypes.PHONE_NUMBER]: () => ({
+        validator: isValidPhoneNumber,
+        message: i18n.t(errorMessages.PHONE_NUMBER),
+    }),
+    [elementTypes.ORGANISATION_UNIT]: () => ({
+        validator: isValidOrgUnit,
+        message: i18n.t(errorMessages.ORGANISATION_UNIT),
     }),
 };
 

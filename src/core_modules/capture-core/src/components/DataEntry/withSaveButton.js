@@ -7,6 +7,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import { connect } from 'react-redux';
 
@@ -245,14 +246,19 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
                     <InnerComponent
                         ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                         saveButton={
-                            <ProgressButton
-                                variant="raised"
-                                onClick={this.handleSaveAttempt}
-                                color={options.color || 'primary'}
-                                inProgress={!!finalInProgress}
-                            >
-                                { i18n.t('Save') }
-                            </ProgressButton>
+                            <Tooltip title={!this.props.formFoundation.access.data.write ? i18n.t('No write access') : ''}>
+                                <div>
+                                    <ProgressButton
+                                        variant="raised"
+                                        onClick={this.handleSaveAttempt}
+                                        color={options.color || 'primary'}
+                                        inProgress={!!finalInProgress}
+                                        disabled={!this.props.formFoundation.access.data.write}
+                                    >
+                                        { i18n.t('Save') }
+                                    </ProgressButton>
+                                </div>
+                            </Tooltip>
                         }
                         {...passOnProps}
                     />

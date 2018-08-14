@@ -11,7 +11,7 @@ const mapStateToProps = (state: Object) => ({
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onLoadEvent: (eventId: string) => {
         dispatch(startLoadDataEntryEvent(eventId, [{ id: 'eventDate', type: 'DATE' }], 'main'));
-    }
+    },
 });
 
 

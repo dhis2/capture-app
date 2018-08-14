@@ -6,15 +6,17 @@ import isFunction from 'd2-utilizr/src/isFunction';
 type Option = {name: string, id: string};
 
 export default class Category {
-    _name: ?string;
-    _id: ?string;
+    _name: string;
+    _id: string;
     _options: ?Array<Option>;
 
     constructor(initFn: ?(_this: Category) => void) {
+        this.name = '';
+        this.id = '';
         initFn && isFunction(initFn) && initFn(this);
     }
 
-    get name(): ?string {
+    get name(): string {
         return this._name;
     }
 
@@ -22,7 +24,7 @@ export default class Category {
         this._name = name;
     }
 
-    get id(): ?string {
+    get id(): string {
         return this._id;
     }
 

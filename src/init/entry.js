@@ -9,10 +9,12 @@ import createHistory from 'history/createHashHistory';
 import D2UIApp from '@dhis2/d2-ui-app';
 import { LoadingMask } from '@dhis2/d2-ui-core';
 
-import environments from 'capture-core/constants/environments';
 import JssProvider from 'react-jss/lib/JssProvider';
 import { create } from 'jss';
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
+
+import environments from 'capture-core/constants/environments';
+import cleanUp from 'capture-core/cleanUp/cleanUp';
 
 import type { HashHistory } from 'history/createHashHistory';
 
@@ -21,7 +23,6 @@ import App from '../components/App/App.component';
 import getStore from '../getStore';
 import { initialize } from './init';
 import { startupDataLoad } from './entry.actions';
-
 
 const DOM_ID = 'app';
 
@@ -34,6 +35,8 @@ function runApp(domElement: HTMLElement, store: ReduxStore, history: HashHistory
     store.dispatch(startupDataLoad());
 
     window.addEventListener('beforeunload', (e) => {
+        cleanUp(store);
+
         if (store.getState().offline.outbox.length > 0) {
             const msg = 'Unsaved events!';
             e.returnValue = msg;

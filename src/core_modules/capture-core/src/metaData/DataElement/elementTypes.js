@@ -23,7 +23,9 @@ const elementTypeCodes = [
     'DURATION_MINUTES',
     'FILE_RESOURCE',
     'URL',
+    'ORGANISATION_UNIT',
     'IMAGE',
+    'AGE',
     'USERNAME',
     unknownTypeCode,
 ];

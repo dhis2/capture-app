@@ -11,6 +11,20 @@ import convertDataEntryToClientValues from '../../../../DataEntry/common/convert
 import { convertValue as convertToServerValue } from '../../../../../converters/clientToServer';
 import { convertMainEventClientToServerWithKeysMap } from '../../../../../events/mainEventConverter';
 
+const getApiCategoriesArgument = (categories: ?{ [id: string]: string}) => {
+    if (!categories) {
+        return null;
+    }
+
+    return {
+        attributeCategoryOptions: Object
+            .keys(categories)
+            // $FlowSuppress
+            .map(key => categories[key])
+            .join(';'),
+    };
+};
+
 export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
     action$.ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)
@@ -41,11 +55,14 @@ export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
                 mainDataServerValues.completedDate = moment().format('YYYY-MM-DD');
             }
 
+            const currentSelections = state.currentSelections;
+
             const serverData = {
                 ...mainDataServerValues,
-                program: state.currentSelections.programId,
+                program: currentSelections.programId,
                 programStage: formFoundation.id,
-                orgUnit: state.currentSelections.orgUnitId,
+                orgUnit: currentSelections.orgUnitId,
+                ...getApiCategoriesArgument(currentSelections.categories),
                 dataValues: Object
                     .keys(formServerValues)
                     .map(key => ({
@@ -54,7 +71,7 @@ export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
                     })),
             };
 
-            return startSaveNewEventAfterReturnedToMainPage(serverData, state.currentSelections);
+            return startSaveNewEventAfterReturnedToMainPage(serverData, currentSelections);
         });
 
 export const saveNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
