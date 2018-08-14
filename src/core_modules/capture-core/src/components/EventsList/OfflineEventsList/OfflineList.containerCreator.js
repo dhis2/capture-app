@@ -16,8 +16,10 @@ const makeMapStateToProps = () => {
         const eventsContainer = createEventsContainer(state, props);
         const sortById = state.workingListsMeta[props.listId].sortById;
         const sortByDirection = state.workingListsMeta[props.listId].sortByDirection;
+        const rowIdKey = 'eventId';
         return {
             columns,
+            rowIdKey,
             dataSource: createWorkingListData(eventsContainer),
             sortById,
             sortByDirection,

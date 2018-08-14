@@ -18,6 +18,7 @@ type Props = {
         dataEntryContainer: string,
         newEventsListContainer: string,
     },
+    isSelectionsComplete: boolean,
 };
 
 class NewEvent extends Component<Props> {
@@ -30,9 +31,12 @@ class NewEvent extends Component<Props> {
                 >
                     <DataEntryWrapper />
                 </div>
-                <div className={classes.newEventsListContainer}>
-                    <EventsList />
-                </div>
+                {this.props.isSelectionsComplete &&
+                    <div className={classes.newEventsListContainer}>
+                        <EventsList />
+                    </div>
+                }
+
             </div>
         );
     }

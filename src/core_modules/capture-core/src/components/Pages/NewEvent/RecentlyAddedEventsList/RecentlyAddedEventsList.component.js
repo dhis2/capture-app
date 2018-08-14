@@ -10,7 +10,8 @@ type Props = {
     classes: {
         container: string,
         header: string,
-    }
+    },
+    events?: ?any,
 };
 
 const styles = (theme: Theme) => ({

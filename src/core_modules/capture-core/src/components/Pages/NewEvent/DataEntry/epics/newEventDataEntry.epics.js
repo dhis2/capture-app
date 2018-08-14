@@ -21,6 +21,10 @@ import {
 import {
     actionTypes as newEventSelectionTypes,
 } from '../../newEventSelections.actions';
+import getColumnsConfiguration from '../../../MainPage/EventsList/epics/getColumnsConfiguration';
+import {
+    actionTypes as newEventSelectorTypes,
+} from '../../NewEventSelector/NewEventSelector.actions';
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
@@ -81,12 +85,16 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
     action$.ofType(
         editEventSelectorActionTypes.OPEN_NEW_EVENT,
         mainPageSelectorActionTypes.OPEN_NEW_EVENT,
-        newEventSelectionTypes.VALID_SELECTIONS_FROM_URL)
-        .map(() => {
+        newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
+        newEventSelectorTypes.SET_CATEGORY_OPTION,
+        newEventSelectorTypes.SET_ORG_UNIT,
+        newEventSelectorTypes.SET_PROGRAM_ID)
+        .switchMap(() => {
             const state = store.getState();
-            const newEventsListColumnsOrder = state.workingListsColumnsOrder.main || [];
+            // const newEventsListColumnsOrder = state.workingListsColumnsOrder.main || [];
             const newEventsMeta = { sortById: 'created', sortByDirection: 'desc' };
-            return resetList(listId, newEventsListColumnsOrder, newEventsMeta, state.currentSelections);
+            return getColumnsConfiguration(state.currentSelections.programId).then(columnsConfig =>
+                resetList(listId, columnsConfig, newEventsMeta, state.currentSelections));
         });
 
 export const runRulesForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>

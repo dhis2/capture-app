@@ -9,7 +9,6 @@ import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFounda
 import EventProgram from '../../../../metaData/Program/EventProgram';
 import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
-import { saveTypes } from './newEventSaveTypes';
 
 export const batchActionTypes = {
     UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH: 'UpdateFieldForNewSingleEventActionsBatch',
