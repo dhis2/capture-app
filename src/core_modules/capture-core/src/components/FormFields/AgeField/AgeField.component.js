@@ -31,9 +31,9 @@ function calculatedValues(m) {
     const years = moment().diff(m, 'years');
 
     return {
-        days: days < 0 ? 0 : days,
-        months: months < 0 ? 0 : months,
-        years: years < 0 ? 0 : years,
+        days: days < 0 ? '' : days,
+        months: months < 0 ? '' : months,
+        years: years < 0 ? '' : years,
     };
 }
 
@@ -45,9 +45,9 @@ class D2AgeField extends Component<Props> {
   constructor(props: Props) {
       super(props);
 
-      let years = 0;
-      let months = 0;
-      let days = 0;
+      let years = '';
+      let months = '';
+      let days = '';
       if (props.value) {
           const v = calculatedValues(moment(props.value));
           years = v.years;
@@ -133,21 +133,21 @@ class D2AgeField extends Component<Props> {
               </div>
               <TextField
                   style={textFieldStyle}
-                  type="number"
+                  type="text"
                   label={i18n.t('Years')}
                   value={this.state.years}
                   onChange={this.onYearsChange}
               />
               <TextField
                   style={textFieldStyle}
-                  type="number"
+                  type="text"
                   label={i18n.t('Months')}
                   value={this.state.months}
                   onChange={this.onMonthsChange}
               />
               <TextField
                   style={textFieldStyle}
-                  type="number"
+                  type="text"
                   label={i18n.t('Days')}
                   value={this.state.days}
                   onChange={this.onDaysChange}
