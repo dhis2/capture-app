@@ -36,14 +36,14 @@ const styles = theme => ({
         width: theme.typography.pxToRem(300),
         margin: theme.typography.pxToRem(10),
     },
-    verticalInfoWidgetsInnerContainerFixed: {
+    verticalOutputsInnerContainerFixed: {
         '@media only screen and (min-width:769px)': {
             position: 'fixed',
             top: 50,
             marginRight: theme.typography.pxToRem(34),
         },
     },
-    verticalInfoWidgetsInnerContainerAbsolute: {
+    verticalOutputsInnerContainerAbsolute: {
         '@media only screen and (min-width:769px)': {
             position: 'absolute',
         },
@@ -58,8 +58,8 @@ type FieldContainer = {
 type DirectionClasses = {
     container?: ?string,
     dataEntryContainer?: ?string,
-    infoWidgetsContainer?: ?string,
-    infoWidgetsInnerContainer?: ?string,
+    outputsContainer?: ?string,
+    outputsInnerContainer?: ?string,
     formContainer?: ?string,
 }
 
@@ -72,7 +72,7 @@ type Props = {
     cancelButton?: ?React.Element<any>,
     notes?: ?React.Element<any>,
     fields?: ?Array<FieldContainer>,
-    infoWidgets?: ?Array<any>,
+    dataEntryOutputs?: ?Array<any>,
     completionAttempted?: ?boolean,
     saveAttempted?: ?boolean,
     classes: Object,
@@ -95,11 +95,7 @@ type Props = {
 
 };
 
-type State = {
-    infoWidgetsFixed: boolean,
-}
-
-class DataEntry extends React.Component<Props, State> {
+class DataEntry extends React.Component<Props> {
     static errorMessages = {
         NO_ITEM_SELECTED: 'No item selected',
         FORM_FOUNDATION_MISSING: 'form foundation missing. see log for details',
@@ -120,14 +116,14 @@ class DataEntry extends React.Component<Props, State> {
         if (formHorizontal) {
             return {
                 formContainer: classes.horizontalFormContainer,
-                infoWidgetsContainer: classes.horizontalWidgetsContainer,
+                outputsContainer: classes.horizontalOutputsContainer,
             };
         }
         return {
             container: classes.verticalContainer,
             dataEntryContainer: classes.verticalDataEntryContainer,
-            infoWidgetsContainer: classes.verticalInfoWidgetsContainer,
-            infoWidgetsInnerContainer: classes.verticalInfoWidgetsInnerContainerAbsolute,
+            outputsContainer: classes.verticalOutputsContainer,
+            outputsInnerContainer: classes.verticalOutputsInnerContainerAbsolute,
         };
     }
 
@@ -161,7 +157,7 @@ class DataEntry extends React.Component<Props, State> {
             onUpdateFormField,
             onUpdateFieldInner,
             onUpdateFormFieldAsync,
-            infoWidgets,
+            dataEntryOutputs,
             ...passOnProps } = this.props;
 
         if (!itemId) {
@@ -260,11 +256,11 @@ class DataEntry extends React.Component<Props, State> {
                         containerClass={classes.stickyOnScroll}
                     >
                         <div>
-                            {infoWidgets}
+                            {dataEntryOutputs}
                         </div>
                     </StickyOnScroll> :
                     <div>
-                        {infoWidgets}
+                        {dataEntryOutputs}
                     </div>
                 }
 

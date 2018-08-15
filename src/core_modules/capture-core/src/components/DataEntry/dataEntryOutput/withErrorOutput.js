@@ -3,15 +3,16 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
-import Warning from '@material-ui/icons/Warning';
+import Error from '@material-ui/icons/Error';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import getDataEntryKey from '../common/getDataEntryKey';
-import withInfoWidget from './withInfoWidget';
+import withDataEntryOutput from './withDataEntryOutput';
 
 
 type Props = {
-    warningItems: Array<any>,
+    errorItems: Array<any>,
+    outputRef: (any) => void,
     classes: {
         list: string,
         listItem: string,
@@ -21,7 +22,12 @@ type Props = {
     },
 };
 
-const styles = theme => ({
+const styles = (theme: Theme) => ({
+    card: {
+        padding: theme.typography.pxToRem(10),
+        backgroundColor: theme.palette.error[100],
+        borderRadius: theme.typography.pxToRem(5),
+    },
     list: {
         margin: 0,
     },
@@ -30,26 +36,21 @@ const styles = theme => ({
         marginTop: theme.typography.pxToRem(8),
     },
     header: {
+        color: '#902c02',
         display: 'flex',
         alignItems: 'center',
     },
     headerText: {
         marginLeft: theme.typography.pxToRem(10),
     },
-    card: {
-        borderRadius: theme.typography.pxToRem(5),
-        padding: theme.typography.pxToRem(10),
-        backgroundColor: theme.palette.warning[100],
-    },
-
 });
 
-const getWarningWidget = () =>
-    class WarningWidgetBuilder extends React.Component<Props> {
-        renderWarningItems = (warningItems: any, classes: any) =>
+const getErrorOutput = () =>
+    class ErrorOutputBuilder extends React.Component<Props> {
+        renderErrorItems = (errorItems: any, classes: any) =>
             (<div>
-                {warningItems &&
-                    warningItems.map(item => (
+                {errorItems &&
+                    errorItems.map(item => (
                         <li
                             key={item}
                             className={classes.listItem}
@@ -63,20 +64,21 @@ const getWarningWidget = () =>
             </div>)
 
         render = () => {
-            const { warningItems, classes } = this.props;
+            const { errorItems, classes } = this.props;
             return (
                 <div>
-                    {warningItems &&
+                    {errorItems &&
                     <Card className={classes.card}>
                         <div className={classes.header}>
-                            <Warning />
+                            <Error />
                             <div className={classes.headerText}>
-                                {i18n.t('Warnings')}
+                                {i18n.t('Errors')}
                             </div>
                         </div>
                         <ul className={classes.list}>
-                            {warningItems && this.renderWarningItems(warningItems, classes)}
+                            {this.renderErrorItems(errorItems, classes)}
                         </ul>
+
                     </Card>
                     }
                 </div>
@@ -90,8 +92,8 @@ const mapStateToProps = (state: ReduxState, props: any) => {
     const itemId = state.dataEntries[props.id].itemId;
     const key = getDataEntryKey(props.id, itemId);
     return {
-        warningItems: state.rulesEffectsGeneralWarnings && state.rulesEffectsGeneralWarnings[key] ?
-            state.rulesEffectsGeneralWarnings[key] : null,
+        errorItems: state.rulesEffectsGeneralErrors && state.rulesEffectsGeneralErrors[key] ?
+            state.rulesEffectsGeneralErrors[key] : null,
     };
 };
 
@@ -100,6 +102,6 @@ const mapDispatchToProps = () => ({});
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         // $FlowSuppress
-        withInfoWidget()(
+        withDataEntryOutput()(
             InnerComponent,
-            withStyles(styles)(connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(getWarningWidget())));
+            withStyles(styles)(connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(getErrorOutput())));

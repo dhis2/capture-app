@@ -17,14 +17,14 @@ import D2TrueOnly from '../../../../components/FormFields/Generic/D2TrueOnly.com
 import withDefaultMessages from '../../../../components/DataEntry/dataEntryField/withDefaultMessages';
 import withDefaultFieldContainer from '../../../../components/DataEntry/dataEntryField/withDefaultFieldContainer';
 import withDefaultChangeHandler from '../../../../components/DataEntry/dataEntryField/withDefaultChangeHandler';
-import withFeedbackWidget from '../../../../components/DataEntry/dataEntryInfoWidgets/withFeedbackWidget';
+import withFeedbackOutput from '../../../../components/DataEntry/dataEntryOutput/withFeedbackOutput';
 import withDefaultShouldUpdateInterface from
     '../../../../components/DataEntry/dataEntryField/withDefaultShouldUpdateInterface';
 
 import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
-import withIndicatorWidget from '../../../DataEntry/dataEntryInfoWidgets/withIndicatorWidget';
-import withErrorWidget from '../../../DataEntry/dataEntryInfoWidgets/withErrorWidget';
-import withWarningWidget from '../../../DataEntry/dataEntryInfoWidgets/withWarningWidget';
+import withIndicatorOutput from '../../../DataEntry/dataEntryOutput/withIndicatorOutput';
+import withErrorOutput from '../../../DataEntry/dataEntryOutput/withErrorOutput';
+import withWarningOutput from '../../../DataEntry/dataEntryOutput/withWarningOutput';
 import TextEditor from '../../../FormFields/TextEditor/TextEditor.component';
 import { newEventSaveTypes, newEventSaveTypeDefinitions } from './newEventSaveTypes';
 
@@ -156,11 +156,11 @@ const buildCompleteFieldSettingsFn = () => {
 const CommentField = withDataEntryField(buildNoteSettingsFn())(DataEntry);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(CommentField);
 const CompleteField = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
-const FeedbackWidget = withFeedbackWidget()(CompleteField);
-const IndicatorWidget = withIndicatorWidget()(FeedbackWidget);
-const WarningWidget = withWarningWidget()(IndicatorWidget);
-const ErrorWidget = withErrorWidget()(WarningWidget);
-const SaveableDataEntry = withSaveButton(getSaveOptions)(ErrorWidget);
+const FeedbackOutput = withFeedbackOutput()(CompleteField);
+const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
+const WarningOutput = withWarningOutput()(IndicatorOutput);
+const ErrorOutput = withErrorOutput()(WarningOutput);
+const SaveableDataEntry = withSaveButton(getSaveOptions)(ErrorOutput);
 const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
 
 type Props = {

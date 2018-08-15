@@ -8,17 +8,18 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import getDataEntryKey from '../common/getDataEntryKey';
-import withInfoWidget from './withInfoWidget';
+import withDataEntryOutput from './withDataEntryOutput';
 
 
 type Props = {
-    indicatorItems: {
+    feedbackItems: {
         displayTexts: [{ key: string, value: string}],
         displayKeyValuePairs: [{ key: string, value: string}],
     },
     classes: {
         listItem: string,
         card: string,
+        keyValuePairKey: string,
     },
 };
 
@@ -36,14 +37,15 @@ const styles = (theme: Theme) => ({
         padding: theme.typography.pxToRem(10),
         borderRadius: theme.typography.pxToRem(5),
     },
+
 });
 
-const getIndicatorWidget = () =>
-    class IndicatorkWidgetBuilder extends React.Component<Props> {
-        renderIndicatorItems = (indicatorItems: any, classes: any) =>
+const getFeedbackOutput = () =>
+    class FeedbackOutputBuilder extends React.Component<Props> {
+        renderFeedbackItems = (feedbackItems: any, classes: any) =>
             (<div>
-                {indicatorItems.displayTexts &&
-                    indicatorItems.displayTexts.map(item => (
+                {feedbackItems.displayTexts &&
+                    feedbackItems.displayTexts.map(item => (
                         <ListItem
                             key={item}
                             className={classes.listItem}
@@ -55,8 +57,8 @@ const getIndicatorWidget = () =>
                         </ListItem>
                     ),
                     )}
-                {indicatorItems.displayKeyValuePairs &&
-                    indicatorItems.displayKeyValuePairs.map(item => (
+                {feedbackItems.displayKeyValuePairs &&
+                    feedbackItems.displayKeyValuePairs.map(item => (
                         <ListItem
                             key={item}
                             className={classes.listItem}
@@ -75,20 +77,19 @@ const getIndicatorWidget = () =>
             </div>)
 
         render = () => {
-            const { indicatorItems, classes } = this.props;
-            const hasItems = indicatorItems && (indicatorItems.displayTexts || indicatorItems.displayKeyValuePairs);
+            const { feedbackItems, classes } = this.props;
+            const hasItems = feedbackItems && (feedbackItems.displayTexts || feedbackItems.displayKeyValuePairs);
             return (
                 <div>
                     {hasItems &&
                         <Card className={classes.card}>
-                            {i18n.t('Indicators')}
+                            {i18n.t('Feedback')}
                             <List dense>
-                                {indicatorItems && this.renderIndicatorItems(indicatorItems, classes)}
+                                {feedbackItems && this.renderFeedbackItems(feedbackItems, classes)}
                             </List>
                         </Card>
                     }
                 </div>
-
             );
         }
     };
@@ -98,8 +99,8 @@ const mapStateToProps = (state: ReduxState, props: any) => {
     const itemId = state.dataEntries[props.id].itemId;
     const key = getDataEntryKey(props.id, itemId);
     return {
-        indicatorItems: state.rulesEffectsIndicators && state.rulesEffectsIndicators[key] ?
-            state.rulesEffectsIndicators[key] : null,
+        feedbackItems: state.rulesEffectsFeedback && state.rulesEffectsFeedback[key] ?
+            state.rulesEffectsFeedback[key] : null,
     };
 };
 
@@ -108,6 +109,6 @@ const mapDispatchToProps = () => ({});
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         // $FlowSuppress
-        withInfoWidget()(
+        withDataEntryOutput()(
             InnerComponent,
-            withStyles(styles)(connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(getIndicatorWidget())));
+            withStyles(styles)(connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(getFeedbackOutput())));

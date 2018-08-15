@@ -116,16 +116,15 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn: Optio
         getErrorInstance() {
             let currentInstance = this.innerInstance;
             let done;
-            const dataEntryFields = [];
             while (!done) {
                 currentInstance = currentInstance.getWrappedInstance && currentInstance.getWrappedInstance();
                 if (!currentInstance || currentInstance instanceof DataEntry) {
                     done = true;
-                } else if (currentInstance.constructor.name === 'ErrorWidgetBuilder') {
-                    dataEntryFields.push(currentInstance);
+                } else if (currentInstance.constructor.name === 'DataEntryOutputBuilder' && currentInstance.outputInstance.constructor.name === 'ErrorOutputBuilder') {
+                    return currentInstance.outputInstance;
                 }
             }
-            return dataEntryFields;
+            return null;
         }
 
         validateDataEntryFields() {
@@ -185,6 +184,8 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn: Optio
                 this.props.onSaveValidationFailed(this.props.itemId, this.props.id);
                 return;
             }
+
+            const generalErrors = this.getErrorInstance();
 
             const { error: validateFormError, isValid: isFormValid } = this.validateForm();
             if (validateFormError) {
