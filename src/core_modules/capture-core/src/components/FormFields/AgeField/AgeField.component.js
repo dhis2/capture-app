@@ -114,14 +114,14 @@ class D2AgeField extends Component<Props> {
       months = parseInt(months, 10);
       days = parseInt(days, 10);
 
-      const d = new Date();
-      d.setFullYear(d.getFullYear() - years);
-      d.setMonth(d.getMonth() - months);
-      d.setDate(d.getDate() - days);
+      const d = moment();
+      d.subtract(years, 'years');
+      d.subtract(months, 'months');
+      d.subtract(days, 'days');
 
       this.setState({
-          ...calculatedValues(d),
-          date: moment(d).format('MM/DD/YYYY'),
+          ...calculatedValues(d.toDate()),
+          date: d.format('MM/DD/YYYY'),
       }, this.emitChange);
   }
 
