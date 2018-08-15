@@ -120,8 +120,7 @@ class D2AgeField extends Component<Props> {
       d.setDate(d.getDate() - days);
 
       this.setState({
-          months: months % 12,
-          days: daysDiff(d),
+          ...calculatedValues(d),
           date: moment(d).format('MM/DD/YYYY'),
       }, this.emitChange);
   }
