@@ -40,7 +40,7 @@ export const addNoteForEditSingleEventEpic = (action$: InputObservable, store: R
             };
 
             return batchActions([
-                startAddNoteForEditSingleEvent('doesnotexist', serverData, state.currentSelections, saveContext),
+                startAddNoteForEditSingleEvent(eventId, serverData, state.currentSelections, saveContext),
                 addNote(payload.dataEntryId, payload.itemId, eventId, clientNote, formNote),
             ], editEventDataEntryBatchActionTypes.ADD_NOTE_FOR_EDIT_SINGLE_EVENT_BATCH);
         });
