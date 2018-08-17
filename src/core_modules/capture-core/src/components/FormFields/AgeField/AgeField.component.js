@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import TextField from '@material-ui/core/TextField';
+import ClearIcon from '@material-ui/icons/Clear';
 import D2Date from '../DateAndTime/D2Date/D2Date.component';
-import { absoluteDirections, modes } from '../DateAndTime/D2Date/d2DatePopup.const';
 
 type Props = {
   onBlur: (value: string, event: UiEventData) => void,
@@ -28,6 +28,12 @@ const textFieldStyle = {
 const labelStyle = {
     color: 'rgba(0, 0, 0, 0.54)',
     fontSize: '1em',
+};
+
+const clearIconStyle = {
+    cursor: 'pointer',
+    marginTop: 20,
+    marginLeft: 10,
 };
 
 function monthsDiff(d) {
@@ -144,6 +150,15 @@ class D2AgeField extends Component<Props> {
       }, this.emitChange);
   }
 
+  onClear = () => {
+      this.setState({
+          date: '',
+          years: '',
+          months: '',
+          days: '',
+      });
+  }
+
   render() {
       return (
           <div>
@@ -181,6 +196,10 @@ class D2AgeField extends Component<Props> {
                       value={this.state.days}
                       onBlur={this.updateDate}
                       onChange={this.onDaysChange}
+                  />
+                  <ClearIcon
+                      style={clearIconStyle}
+                      onClick={this.onClear}
                   />
               </div>
           </div>
