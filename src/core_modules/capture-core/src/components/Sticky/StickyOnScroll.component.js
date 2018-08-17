@@ -85,6 +85,7 @@ class StickyOnScroll extends React.Component<Props> {
             this.stickyContainer.className = classes.stickyContainerAbsolute;
             this.stickyContainer.style.top = 'initial';
             this.stickyContainer.style.marginRight = 'initial';
+            this.stickyContainer.style.width = 'initial';
             return;
         }
         if (this.stickyContainer && this.isAtBottomOfContainer()) {
@@ -96,6 +97,7 @@ class StickyOnScroll extends React.Component<Props> {
         if (this.stickyContainer) {
             this.stickyContainer.className = classes.stickyContainerFixed;
             this.stickyContainer.style.top = `${this.props.offsetTop}px`;
+            this.stickyContainer.style.width = `${this.stickyContainer.parentElement.clientWidth}px`;
             this.stickyContainer.style.marginRight = `${this.getRightMargin()}px`;
         }
     }
@@ -117,7 +119,6 @@ class StickyOnScroll extends React.Component<Props> {
 
     render() {
         const { classes, children, containerClass } = this.props;
-        
         return (
             <div className={containerClass || classes.container}>
                 <div ref={(stickyContainerInstance) => { this.setStickyContainerInstance(stickyContainerInstance); }}>

@@ -27,6 +27,7 @@ const styles = theme => ({
     verticalDataEntryContainer: {
         display: 'flex',
         flexDirection: 'row',
+        flexWrap: 'wrap',
         margin: theme.typography.pxToRem(10),
     },
     verticalContainer: {
