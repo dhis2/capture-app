@@ -25,6 +25,11 @@ const textFieldStyle = {
     width: 60,
 };
 
+const labelStyle = {
+    color: 'rgba(0, 0, 0, 0.54)',
+    fontSize: '1em',
+};
+
 function monthsDiff(d) {
     const now = new Date();
     let months = (now.getFullYear() - d.getFullYear()) * 12;
@@ -60,10 +65,9 @@ function daysDiff(d) {
 }
 
 function calculatedValues(d) {
-    const now = new Date();
-    const years = now.getFullYear() - d.getFullYear();
-
-    const months = monthsDiff(d) % 12;
+    const totalMonths = monthsDiff(d);
+    const years = Math.floor(totalMonths / 12);
+    const months = totalMonths % 12;
     const days = daysDiff(d);
 
     return {
@@ -130,6 +134,11 @@ class D2AgeField extends Component<Props> {
   onDaysChange = evt => this.setState({ days: evt.target.value })
 
   handleCalendarBlur = (date) => {
+      console.log('date', date);
+      if (!date) {
+          return;
+      }
+
       this.setState({
           date,
           ...calculatedValues(new Date(date)),
@@ -138,45 +147,49 @@ class D2AgeField extends Component<Props> {
 
   render() {
       return (
-          <div style={containerStyle}>
-              <div style={datePickerStyle}>
-                  <D2Date
-                      value={this.state.date}
-                      onBlur={this.handleCalendarBlur}
-                      placeholder={i18n.t('mm/dd/yyyy')}
-                      popupMode={modes.ABSOLUTE}
-                      popupAbsoluteDirection={absoluteDirections.UP}
-                      width={150}
-                      calendarWidth={330}
-                      calendarHeight={170}
-                      calendarRowHeight={45}
-                      calendarDisplayOptions={this.displayOptions}
+          <div>
+              <div style={labelStyle}>{this.props.label}</div>
+              <div style={containerStyle}>
+                  <div style={datePickerStyle}>
+                      <D2Date
+                          value={this.state.date}
+                          onBlur={this.handleCalendarBlur}
+                          placeholder={i18n.t('mm/dd/yyyy')}
+                          popupMode={modes.ABSOLUTE}
+                          popupAbsoluteDirection={absoluteDirections.UP}
+                          width={150}
+                          calendarWidth={330}
+                          calendarHeight={170}
+                          calendarRowHeight={45}
+                          calendarDisplayOptions={this.displayOptions}
+                          calendarMaxMoment={moment()}
+                      />
+                  </div>
+                  <TextField
+                      style={textFieldStyle}
+                      type="text"
+                      label={i18n.t('Years')}
+                      value={this.state.years}
+                      onBlur={this.updateDate}
+                      onChange={this.onYearsChange}
+                  />
+                  <TextField
+                      style={textFieldStyle}
+                      type="text"
+                      label={i18n.t('Months')}
+                      value={this.state.months}
+                      onBlur={this.updateDate}
+                      onChange={this.onMonthsChange}
+                  />
+                  <TextField
+                      style={textFieldStyle}
+                      type="text"
+                      label={i18n.t('Days')}
+                      value={this.state.days}
+                      onBlur={this.updateDate}
+                      onChange={this.onDaysChange}
                   />
               </div>
-              <TextField
-                  style={textFieldStyle}
-                  type="text"
-                  label={i18n.t('Years')}
-                  value={this.state.years}
-                  onBlur={this.updateDate}
-                  onChange={this.onYearsChange}
-              />
-              <TextField
-                  style={textFieldStyle}
-                  type="text"
-                  label={i18n.t('Months')}
-                  value={this.state.months}
-                  onBlur={this.updateDate}
-                  onChange={this.onMonthsChange}
-              />
-              <TextField
-                  style={textFieldStyle}
-                  type="text"
-                  label={i18n.t('Days')}
-                  value={this.state.days}
-                  onBlur={this.updateDate}
-                  onChange={this.onDaysChange}
-              />
           </div>
       );
   }
