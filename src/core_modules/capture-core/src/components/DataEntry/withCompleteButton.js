@@ -1,12 +1,12 @@
 // @flow
 import * as React from 'react';
 import log from 'loglevel';
-import Dialog, {
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-} from '@material-ui/core/Dialog';
+import i18n from '@dhis2/d2-i18n';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { connect } from 'react-redux';
 
@@ -14,7 +14,7 @@ import Button from '../Buttons/Button.component';
 import ProgressButton from '../Buttons/ProgressButton.component';
 import DataEntry from './DataEntry.component';
 import errorCreator from '../../utils/errorCreator';
-import i18n from '@dhis2/d2-i18n';
+
 import { startCompleteEvent, completeValidationFailed, completeAbort } from './actions/dataEntry.actions';
 import getDataEntryKey from './common/getDataEntryKey';
 

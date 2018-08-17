@@ -173,8 +173,9 @@ export const dataEntriesNotesDesc = createReducerDescription({
         const payload = action.payload;
 
         const key = getDataEntryKey(payload.dataEntryId, payload.itemId);
+        const noteKey = state[key] ? state[key].length : 0;
 
-        newState[key] = [...state[key], { ...payload.formNote }];
+        newState[key] = [...state[key], { ...payload.formNote, key: noteKey }];
         return newState;
     },
     [actionTypes.REMOVE_NOTE]: (state, action) => {

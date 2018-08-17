@@ -16,7 +16,7 @@ type Props = {
     },
 }
 
-const styles = theme => ({
+const styles = () => ({
     container: {
         position: 'relative',
     },

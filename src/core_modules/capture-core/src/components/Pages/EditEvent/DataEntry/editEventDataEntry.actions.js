@@ -153,7 +153,7 @@ export const startAsyncUpdateFieldForEditEvent =
             itemId,
         });
 
-export const requestAddNoteForEditSingleEvent = (itemId: string, dataEntryId: string, note: Object) =>
+export const requestAddNoteForEditSingleEvent = (itemId: string, dataEntryId: string, note: string) =>
     actionCreator(actionTypes.REQUEST_ADD_NOTE_FOR_EDIT_SINGLE_EVENT)({ itemId, dataEntryId, note });
 
 export const startAddNoteForEditSingleEvent = (eventId: string, serverData: Object, selections: Object, context: Object) =>

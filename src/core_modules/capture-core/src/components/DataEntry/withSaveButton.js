@@ -40,6 +40,7 @@ type Props = {
     warnings: ?Array<{id: string, warning: string }>,
     finalInProgress?: ?boolean,
     hasGeneralErrors: ?boolean,
+    saveTypes?: ?any,
 };
 
 type SaveType = {
@@ -300,6 +301,8 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn: Optio
                 onSaveAbort,
                 finalInProgress,
                 warnings,
+                hasGeneralErrors,
+                saveTypes,
                 ...passOnProps
             } = this.props;
             const options = optionFn(this.props);

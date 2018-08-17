@@ -12,7 +12,9 @@ import TextEditor from '../FormFields/TextEditor/TextEditor.component';
 
 type Props = {
     notes: Array<Object>,
-    onAddNote: (value: string) => void,
+    onAddNote: (itemId: string, dataEntryId: string, value: string) => void,
+    id: string,
+    itemId: string,
     classes: {
         noteItem: string,
         inputContainer: string,
@@ -179,7 +181,7 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
     };
 };
 
-export default settingsFn =>
+export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         withStyles(styles)(connect(
             mapStateToProps, null, null, { withRef: true })(getNotes(InnerComponent)));
