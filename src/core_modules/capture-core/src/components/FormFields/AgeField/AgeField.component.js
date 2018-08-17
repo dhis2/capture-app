@@ -154,13 +154,7 @@ class D2AgeField extends Component<Props> {
                           value={this.state.date}
                           onBlur={this.handleCalendarBlur}
                           placeholder={i18n.t('mm/dd/yyyy')}
-                          popupMode={modes.ABSOLUTE}
-                          popupAbsoluteDirection={absoluteDirections.UP}
-                          width={150}
-                          calendarWidth={330}
-                          calendarHeight={170}
-                          calendarRowHeight={45}
-                          calendarDisplayOptions={this.displayOptions}
+                          width={350}
                           calendarMaxMoment={moment()}
                       />
                   </div>
