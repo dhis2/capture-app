@@ -134,7 +134,6 @@ class D2AgeField extends Component<Props> {
   onDaysChange = evt => this.setState({ days: evt.target.value })
 
   handleCalendarBlur = (date) => {
-      console.log('date', date);
       if (!date) {
           return;
       }
