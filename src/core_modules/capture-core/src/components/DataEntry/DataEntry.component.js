@@ -21,13 +21,17 @@ const styles = theme => ({
         flexWrap: 'wrap',
         alignItems: 'flex-start',
     },
-    verticalDataEntryContainer: {
+    verticalFormContainer: {
         flexGrow: 10,
+    },
+    verticalDataEntryContainer: {
+        display: 'flex',
+        flexDirection: 'row',
         margin: theme.typography.pxToRem(10),
     },
     verticalContainer: {
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         flexWrap: 'wrap',
     },
     stickyOnScroll: {
@@ -36,17 +40,8 @@ const styles = theme => ({
         width: theme.typography.pxToRem(300),
         margin: theme.typography.pxToRem(10),
     },
-    verticalOutputsInnerContainerFixed: {
-        '@media only screen and (min-width:769px)': {
-            position: 'fixed',
-            top: 50,
-            marginRight: theme.typography.pxToRem(34),
-        },
-    },
-    verticalOutputsInnerContainerAbsolute: {
-        '@media only screen and (min-width:769px)': {
-            position: 'absolute',
-        },
+    verticalOutputsContainer: {
+        marginBottom: theme.typography.pxToRem(10),
     },
 });
 
@@ -116,14 +111,12 @@ class DataEntry extends React.Component<Props> {
         if (formHorizontal) {
             return {
                 formContainer: classes.horizontalFormContainer,
-                outputsContainer: classes.horizontalOutputsContainer,
             };
         }
         return {
             container: classes.verticalContainer,
             dataEntryContainer: classes.verticalDataEntryContainer,
-            outputsContainer: classes.verticalOutputsContainer,
-            outputsInnerContainer: classes.verticalOutputsInnerContainerAbsolute,
+            formContainer: classes.verticalFormContainer,
         };
     }
 
@@ -200,70 +193,69 @@ class DataEntry extends React.Component<Props> {
                             </div>
                         }
                     </div>
-                    <div
-                        className={classes.footerBar}
-                    >
-                        {
-                            (() => {
-                                if (completeButton) {
-                                    return (
-                                        <div
-                                            className={classes.button}
-                                        >
-                                            { completeButton }
-                                        </div>
-                                    );
-                                }
-                                return null;
-                            })()
-                        }
-
-                        {
-                            (() => {
-                                if (saveButton) {
-                                    return (
-                                        <div
-                                            className={classes.button}
-                                        >
-                                            { saveButton }
-                                        </div>
-                                    );
-                                }
-                                return null;
-                            })()
-                        }
-
-                        {
-                            (() => {
-                                if (cancelButton) {
-                                    return (
-                                        <div
-                                            className={classes.button}
-                                        >
-                                            { cancelButton }
-                                        </div>
-                                    );
-                                }
-                                return null;
-                            })()
-                        }
-                    </div>
-                </div>
-                {!this.props.formHorizontal ?
-                    <StickyOnScroll
-                        offsetTop={50}
-                        minViewpointWidth={769}
-                        containerClass={classes.stickyOnScroll}
-                    >
-                        <div>
+                    {!this.props.formHorizontal ?
+                        <StickyOnScroll
+                            offsetTop={50}
+                            minViewpointWidth={769}
+                            containerClass={classes.stickyOnScroll}
+                        >
+                            <div>
+                                {dataEntryOutputs}
+                            </div>
+                        </StickyOnScroll> :
+                        <div className={classes.verticalOutputsContainer}>
                             {dataEntryOutputs}
                         </div>
-                    </StickyOnScroll> :
-                    <div>
-                        {dataEntryOutputs}
-                    </div>
-                }
+                    }
+                </div>
+                <div
+                    className={classes.footerBar}
+                >
+                    {
+                        (() => {
+                            if (completeButton) {
+                                return (
+                                    <div
+                                        className={classes.button}
+                                    >
+                                        { completeButton }
+                                    </div>
+                                );
+                            }
+                            return null;
+                        })()
+                    }
 
+                    {
+                        (() => {
+                            if (saveButton) {
+                                return (
+                                    <div
+                                        className={classes.button}
+                                    >
+                                        { saveButton }
+                                    </div>
+                                );
+                            }
+                            return null;
+                        })()
+                    }
+
+                    {
+                        (() => {
+                            if (cancelButton) {
+                                return (
+                                    <div
+                                        className={classes.button}
+                                    >
+                                        { cancelButton }
+                                    </div>
+                                );
+                            }
+                            return null;
+                        })()
+                    }
+                </div>
             </div>
         );
     }

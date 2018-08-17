@@ -39,6 +39,7 @@ type Props = {
     id: string,
     warnings: ?Array<{id: string, warning: string }>,
     finalInProgress?: ?boolean,
+    hasGeneralErrors: ?boolean,
 };
 
 type SaveType = {
@@ -164,7 +165,7 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn: Optio
                 };
             }
 
-            const isValid = formInstance.validateFormScrollToFirstFailedField();
+            const isValid = formInstance.validateFormScrollToFirstFailedField() && !this.props.hasGeneralErrors;
             return {
                 isValid,
                 error: false,
@@ -184,8 +185,6 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn: Optio
                 this.props.onSaveValidationFailed(this.props.itemId, this.props.id);
                 return;
             }
-
-            const generalErrors = this.getErrorInstance();
 
             const { error: validateFormError, isValid: isFormValid } = this.validateForm();
             if (validateFormError) {
@@ -359,6 +358,7 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn: Optio
 const mapStateToProps = (state: ReduxState, props: { id: string }) => {
     const itemId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].itemId;
     const key = getDataEntryKey(props.id, itemId);
+    const generalErrors = state.rulesEffectsGeneralErrors && state.rulesEffectsGeneralErrors[key];
     return {
         itemId,
         saveAttempted:
@@ -378,6 +378,7 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
                 })
                 .filter(element => element.warning),
         finalInProgress: state.dataEntriesUI[key] && state.dataEntriesUI[key].finalInProgress,
+        hasGeneralErrors: (generalErrors && generalErrors.length > 0),
     };
 };
 

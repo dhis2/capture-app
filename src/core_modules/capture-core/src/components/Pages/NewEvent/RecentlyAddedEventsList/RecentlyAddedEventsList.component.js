@@ -26,6 +26,9 @@ const styles = (theme: Theme) => ({
 const NewEventsList = (props: Props) => {
     const { classes, ...passOnProps } = props;
     const eventsAdded = props.events ? Object.keys(props.events).length : 0;
+    if (eventsAdded === 0) {
+        return null;
+    }
     return (
         <Paper className={classes.container}>
             <div

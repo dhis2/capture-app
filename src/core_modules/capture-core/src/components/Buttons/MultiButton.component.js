@@ -24,6 +24,10 @@ const styles = () => ({
         borderBottomRightRadius: 0,
         borderTopRightRadius: 0,
     },
+    menuList: {
+        paddingTop: 0,
+        paddingBottom: 0,
+    },
 });
 
 type DropDownItem = {
@@ -40,7 +44,7 @@ type Props = {
     buttonProps: Object,
     arrowProps: Object,
     dropDownItems: Array<DropDownItem>,
-    classes: {buttonsContainer: string, arrowButton: string, button: string }
+    classes: {buttonsContainer: string, arrowButton: string, button: string, menuList: string, }
 };
 
 type State = {
@@ -113,9 +117,12 @@ class MultiButton extends React.Component<Props, State> {
                     id="simple-menu"
                     anchorEl={this.state.anchorElement}
                     getContentAnchorEl={null}
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                    transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    elevation={10}
                     open={this.state.menuOpen}
                     onClose={this.toggleMenu}
+                    MenuListProps={{ className: classes.menuList }}
                 >
                     {this.renderMenuItems()}
                 </Menu>
