@@ -5,6 +5,7 @@ import {
     dataEntriesDesc,
     dataEntriesUIDesc,
     dataEntriesFieldsValueDesc,
+    dataEntriesNotesDesc,
     dataEntriesFieldsMetaDesc,
     dataEntriesFieldsUIDesc,
 } from 'capture-core/reducers/descriptions/dataEntry.reducerDescription';
@@ -14,6 +15,10 @@ import {
     rulesEffectsErrorMessagesDesc,
     rulesEffectsHiddenSectionsDesc,
     rulesEffectsCompulsoryFieldsDesc,
+    rulesEffectsFeedbackDesc,
+    rulesEffectsIndicatorsDesc,
+    rulesEffectsGeneralWarningsDesc,
+    rulesEffectsGeneralErrorsDesc,
 } from 'capture-core/reducers/descriptions/rulesEffects.reducerDescription';
 import {
     workingListsDesc,
@@ -30,6 +35,10 @@ import { newEventPageDesc } from 'capture-core/reducers/descriptions/newEvent.re
 import { editEventPageDesc } from 'capture-core/reducers/descriptions/editEvent.reducerDescription';
 import { organisationUnitDesc } from 'capture-core/reducers/descriptions/organisationUnits.reducerDescription';
 import { networkStatusDesc } from 'capture-core/reducers/descriptions/networkStatus.reducerDescription';
+import {
+    recentlyAddedEventsDesc,
+    recentlyAddedEventsValuesDesc,
+} from 'capture-core/reducers/descriptions/recentlyAddedEvents.reducerDescription';
 
 import { appReducerDesc } from './app.reducerDescription';
 import { currentSelectionsReducerDesc } from './currentSelections.reducerDescription';
@@ -44,6 +53,7 @@ export default [
     dataEntriesDesc,
     dataEntriesUIDesc,
     dataEntriesFieldsValueDesc,
+    dataEntriesNotesDesc,
     dataEntriesFieldsMetaDesc,
     dataEntriesFieldsUIDesc,
     feedbackDesc,
@@ -51,6 +61,10 @@ export default [
     rulesEffectsErrorMessagesDesc,
     rulesEffectsHiddenSectionsDesc,
     rulesEffectsCompulsoryFieldsDesc,
+    rulesEffectsFeedbackDesc,
+    rulesEffectsIndicatorsDesc,
+    rulesEffectsGeneralWarningsDesc,
+    rulesEffectsGeneralErrorsDesc,
     workingListsDesc,
     workingListsMetaDesc,
     workingListsUIDesc,
@@ -64,4 +78,6 @@ export default [
     editEventPageDesc,
     organisationUnitDesc,
     networkStatusDesc,
+    recentlyAddedEventsDesc,
+    recentlyAddedEventsValuesDesc,
 ];

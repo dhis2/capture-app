@@ -4,6 +4,7 @@ import NewEvent from './NewEvent.component';
 
 const mapStateToProps = (state: ReduxState) => ({
     isLoading: state.newEventPage.isLoading,
+    isSelectionsComplete: !!state.currentSelections.complete,
     selectionsError: state.newEventPage.selectionsError,
 });
 

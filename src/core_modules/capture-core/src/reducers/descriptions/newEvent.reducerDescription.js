@@ -67,4 +67,9 @@ export const newEventPageDesc = createReducerDescription({
         newState.formHorizontal = action.payload.formHorizontal;
         return newState;
     },
+    [newEventDataEntryActionTypes.SET_NEW_EVENT_SAVE_TYPES]: (state, action) => {
+        const newState = { ...state };
+        newState.saveTypes = action.payload.saveTypes;
+        return newState;
+    },
 }, 'newEventPage');

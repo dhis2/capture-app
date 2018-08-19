@@ -94,3 +94,56 @@ export const rulesEffectsErrorMessagesDesc = createReducerDescription({
         return newState;
     },
 }, 'rulesEffectsMessages');
+
+export const rulesEffectsFeedbackDesc = createReducerDescription({
+    [actionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
+        const newState = { ...state };
+
+        const displayTextEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_TEXT];
+        const displayKeyValuePairEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_KEY_VALUE_PAIR];
+        newState[action.payload.formId] = {
+            displayTexts: displayTextEffects && displayTextEffects.feedback ? displayTextEffects.feedback.map(e => e.message) : null,
+            displayKeyValuePairs: displayKeyValuePairEffects && displayKeyValuePairEffects.feedback ? displayKeyValuePairEffects.feedback.map(e => ({ key: e.message, value: e.value })) : null,
+        };
+
+        return newState;
+    },
+}, 'rulesEffectsFeedback', {});
+
+export const rulesEffectsIndicatorsDesc = createReducerDescription({
+    [actionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
+        const newState = { ...state };
+
+        const displayTextEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_TEXT];
+        const displayKeyValuePairEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_KEY_VALUE_PAIR];
+        newState[action.payload.formId] = {
+            displayTexts: displayTextEffects && displayTextEffects.indicators ? displayTextEffects.indicators.map(e => e.message) : null,
+            displayKeyValuePairs: displayKeyValuePairEffects && displayKeyValuePairEffects.indicators ? displayKeyValuePairEffects.indicators.map(e => ({ key: e.message, value: e.value })) : null,
+        };
+
+        return newState;
+    },
+}, 'rulesEffectsIndicators', {});
+
+
+export const rulesEffectsGeneralErrorsDesc = createReducerDescription({
+    [actionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
+        const newState = { ...state };
+
+        const errors: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_ERROR];
+        newState[action.payload.formId] = errors && errors.generalErrors ? errors.generalErrors.map(e => e.message) : null;
+
+        return newState;
+    },
+}, 'rulesEffectsGeneralErrors', {});
+
+export const rulesEffectsGeneralWarningsDesc = createReducerDescription({
+    [actionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
+        const newState = { ...state };
+
+        const warnings: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_WARNING];
+        newState[action.payload.formId] = warnings && warnings.generalWarnings ? warnings.generalWarnings.map(e => e.message) : null;
+
+        return newState;
+    },
+}, 'rulesEffectsGeneralWarnings', {});

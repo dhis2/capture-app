@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 
 import Button from '../Buttons/Button.component';
+import MultiButton from '../Buttons/MultiButton.component';
 import ProgressButton from '../Buttons/ProgressButton.component';
 import DataEntry from './DataEntry.component';
 import errorCreator from '../../utils/errorCreator';
@@ -30,17 +31,26 @@ type Props = {
     classes: Object,
     formFoundation: RenderFoundation,
     itemId: string,
-    onSave: (itemId: string, id: string, formFoundation: RenderFoundation) => void,
+    onSave: (itemId: string, id: string, formFoundation: RenderFoundation, saveType?: ?string) => void,
+    onSaveAndAddAnother?: ?(itemId: string, id: string, formFoundation: RenderFoundation) => void,
     onSaveValidationFailed: (itemId: string, id: string) => void,
     onSaveAbort: (itemId: string, id: string) => void,
     saveAttempted?: ?boolean,
     id: string,
     warnings: ?Array<{id: string, warning: string }>,
     finalInProgress?: ?boolean,
+    hasGeneralErrors: ?boolean,
+    saveTypes?: ?any,
 };
+
+type SaveType = {
+    key: string,
+    text: string,
+}
 
 type Options = {
     color?: ?string,
+    saveTypes?: ?Array<SaveType>,
 };
 
 type OptionFn = (props: Props) => Options;
@@ -48,9 +58,10 @@ type OptionFn = (props: Props) => Options;
 type State = {
     warningDialogOpen: boolean,
     waitForUploadDialogOpen: boolean,
+    saveType?: ?string,
 };
 
-const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?OptionFn) =>
+const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn: OptionFn) =>
     class SaveButtonBuilder extends React.Component<Props, State> {
         static errorMessages = {
             INNER_INSTANCE_NOT_FOUND: 'Inner instance not found',
@@ -58,7 +69,7 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
         };
 
         innerInstance: any;
-        handleSaveAttempt: () => void;
+        handleSaveAttempt: (saveType?: ?string) => void;
         handleCloseDialog: () => void;
         handleSaveDialog: () => void;
         constructor(props: Props) {
@@ -104,6 +115,20 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
             return dataEntryFields;
         }
 
+        getErrorInstance() {
+            let currentInstance = this.innerInstance;
+            let done;
+            while (!done) {
+                currentInstance = currentInstance.getWrappedInstance && currentInstance.getWrappedInstance();
+                if (!currentInstance || currentInstance instanceof DataEntry) {
+                    done = true;
+                } else if (currentInstance.constructor.name === 'DataEntryOutputBuilder' && currentInstance.outputInstance.constructor.name === 'ErrorOutputBuilder') {
+                    return currentInstance.outputInstance;
+                }
+            }
+            return null;
+        }
+
         validateDataEntryFields() {
             const fieldInstance = this.getDataEntryFieldInstances();
 
@@ -116,15 +141,15 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
             return fieldsValid;
         }
 
-        showWarningsPopup() {
-            this.setState({ warningDialogOpen: true });
+        showWarningsPopup(saveType?: ?string) {
+            this.setState({ warningDialogOpen: true, saveType });
         }
 
-        showWaitForUploadPopup = () => {
+        showWaitForUploadPopup = (saveType?: ?string) => {
             this.setState({ waitForUploadDialogOpen: true });
             AsyncFieldHandler.getDataEntryItemPromise(this.props.id, this.props.itemId).then(() => {
                 this.setState({ waitForUploadDialogOpen: false });
-                this.props.onSave(this.props.itemId, this.props.id, this.props.formFoundation);
+                this.props.onSave(this.props.itemId, this.props.id, this.props.formFoundation, saveType);
             });
         }
 
@@ -141,14 +166,14 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
                 };
             }
 
-            const isValid = formInstance.validateFormScrollToFirstFailedField();
+            const isValid = formInstance.validateFormScrollToFirstFailedField() && !this.props.hasGeneralErrors;
             return {
                 isValid,
                 error: false,
             };
         }
 
-        handleSaveAttempt() {
+        handleSaveAttempt(saveType?: ?string) {
             if (!this.innerInstance) {
                 log.error(
                     errorCreator(
@@ -167,16 +192,16 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
                 return;
             }
 
-            this.handleSaveValidationOutcome(isFormValid);
+            this.handleSaveValidationOutcome(saveType, isFormValid);
         }
 
-        handleSaveValidationOutcome(isFormValid: boolean) {
+        handleSaveValidationOutcome(saveType?: ?string, isFormValid: boolean) {
             if (!isFormValid) {
                 this.props.onSaveValidationFailed(this.props.itemId, this.props.id);
             } else if (this.props.warnings && this.props.warnings.length > 0) {
-                this.showWarningsPopup();
+                this.showWarningsPopup(saveType);
             } else {
-                this.handleSave();
+                this.handleSave(saveType);
             }
         }
 
@@ -186,15 +211,15 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
         }
 
         handleSaveDialog() {
-            this.handleSave();
+            this.handleSave(this.state.saveType);
             this.setState({ warningDialogOpen: false });
         }
 
-        handleSave = () => {
+        handleSave = (saveType?: ?string) => {
             if (AsyncFieldHandler.hasPromises(this.props.id, this.props.itemId)) {
-                this.showWaitForUploadPopup();
+                this.showWaitForUploadPopup(saveType);
             } else {
-                this.props.onSave(this.props.itemId, this.props.id, this.props.formFoundation);
+                this.props.onSave(this.props.itemId, this.props.id, this.props.formFoundation, saveType);
             }
         }
 
@@ -224,18 +249,63 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
             </div>
         );
 
+        renderSingleSaveButton = (options: Options, saveType?: ?SaveType, finalInProgress?: ?boolean) => (
+            <Tooltip title={!this.props.formFoundation.access.data.write ? i18n.t('No write access') : ''}>
+                <ProgressButton
+                    variant="raised"
+                    color={options.color || 'primary'}
+                    onClick={() => (saveType ? this.handleSaveAttempt(saveType.key) : this.handleSaveAttempt())}
+                    disabled={!this.props.formFoundation.access.data.write}
+                    inProgress={finalInProgress}
+                >
+                    {saveType ? saveType.text : i18n.t('Save')}
+                </ProgressButton>
+
+            </Tooltip>
+        )
+
+        renderMultiSaveButton = (options: Options, saveTypes: Array<SaveType>, finalInProgress?: ?boolean) => {
+            const primary = saveTypes[0];
+            const secondaries = saveTypes.slice(1).map(saveType => ({
+                key: saveType.key,
+                text: saveType.text,
+                onClick: () => this.handleSaveAttempt(saveType.key),
+            }));
+            return (
+                <Tooltip title={!this.props.formFoundation.access.data.write ? i18n.t('No write access') : ''}>
+                    <MultiButton
+                        variant="raised"
+                        color={options.color || 'primary'}
+                        buttonType="progress"
+                        buttonText={primary.text}
+                        disabled={!this.props.formFoundation.access.data.write}
+                        buttonProps={{
+                            onClick: () => this.handleSaveAttempt(saveTypes[0].key),
+                            color: options.color || 'primary',
+                            inProgress: finalInProgress,
+                        }}
+                        dropDownItems={secondaries}
+                    />
+                </Tooltip>
+
+            );
+        }
+
 
         render() {
             const {
                 itemId,
                 onSave,
+                onSaveAndAddAnother,
                 onSaveValidationFailed,
                 onSaveAbort,
                 finalInProgress,
                 warnings,
+                hasGeneralErrors,
+                saveTypes,
                 ...passOnProps
             } = this.props;
-            const options = optionFn ? optionFn(this.props) : {};
+            const options = optionFn(this.props);
 
             if (!itemId) {
                 return null;
@@ -245,20 +315,9 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
                 <div>
                     <InnerComponent
                         ref={(innerInstance) => { this.innerInstance = innerInstance; }}
-                        saveButton={
-                            <Tooltip title={!this.props.formFoundation.access.data.write ? i18n.t('No write access') : ''}>
-                                <div>
-                                    <ProgressButton
-                                        variant="raised"
-                                        onClick={this.handleSaveAttempt}
-                                        color={options.color || 'primary'}
-                                        inProgress={!!finalInProgress}
-                                        disabled={!this.props.formFoundation.access.data.write}
-                                    >
-                                        { i18n.t('Save') }
-                                    </ProgressButton>
-                                </div>
-                            </Tooltip>
+                        saveButton={!options.saveTypes || options.saveTypes.length < 1 ?
+                            this.renderSingleSaveButton(options, options.saveTypes && options.saveTypes[0], finalInProgress) :
+                            this.renderMultiSaveButton(options, options.saveTypes, finalInProgress)
                         }
                         {...passOnProps}
                     />
@@ -302,6 +361,7 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?Opt
 const mapStateToProps = (state: ReduxState, props: { id: string }) => {
     const itemId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].itemId;
     const key = getDataEntryKey(props.id, itemId);
+    const generalErrors = state.rulesEffectsGeneralErrors && state.rulesEffectsGeneralErrors[key];
     return {
         itemId,
         saveAttempted:
@@ -321,6 +381,7 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
                 })
                 .filter(element => element.warning),
         finalInProgress: state.dataEntriesUI[key] && state.dataEntriesUI[key].finalInProgress,
+        hasGeneralErrors: (generalErrors && generalErrors.length > 0),
     };
 };
 
@@ -333,7 +394,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-export default (optionFn?: ?OptionFn) =>
+export default (optionFn: OptionFn) =>
     (InnerComponent: React.ComponentType<any>) =>
         connect(
             mapStateToProps, mapDispatchToProps, null, { withRef: true })(getSaveButton(InnerComponent, optionFn));

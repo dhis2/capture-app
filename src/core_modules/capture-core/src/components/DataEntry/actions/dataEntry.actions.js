@@ -20,6 +20,8 @@ export const actionTypes = {
     UPDATE_FORM_FIELD: 'UpdateDataEntryFormField',
     RULES_EXECUTED_POST_UPDATE_FIELD: 'RulesExecutedPostUpdateFieldDataEntry',
     ASYNC_UPDATE_FIELD_FAILED: 'AsyncUpdateFieldFailed',
+    ADD_NOTE: 'AddNote',
+    REMOVE_NOTE: 'RemoveNote',
 };
 
 // COMPLETE
@@ -105,3 +107,11 @@ export const rulesExecutedPostUpdateField =
 export const asyncUpdateFieldFailed =
     (message: string) =>
         actionCreator(actionTypes.ASYNC_UPDATE_FIELD_FAILED)({ message });
+
+export const addNote =
+    (dataEntryId: string, itemId: string, objectId: string, clientNote: Object, formNote: Object) =>
+        actionCreator(actionTypes.ADD_NOTE)({ dataEntryId, itemId, objectId, clientNote, formNote });
+
+export const removeNote =
+    (dataEntryId: string, itemId: string, objectId: string, noteClientId: string) =>
+        actionCreator(actionTypes.REMOVE_NOTE)({ dataEntryId, itemId, objectId, noteClientId });

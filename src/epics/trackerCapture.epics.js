@@ -17,6 +17,7 @@ import {
 } from 'capture-core/components/Pages/NewEvent/epics/newEvent.epics';
 import {
     openNewEventInDataEntryEpic,
+    resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
     runRulesForSingleEventEpic,
 } from 'capture-core/components/Pages/NewEvent/DataEntry/epics/newEventDataEntry.epics';
 import {
@@ -62,6 +63,10 @@ import {
     cancelEditEventLocationChangeEpic,
 } from 'capture-core/components/Pages/EditEvent/DataEntry/epics/cancelEditSingleEvent.epics';
 import {
+    addNoteForEditSingleEventEpic,
+    removeNoteForEditSingleEventEpic,
+} from 'capture-core/components/Pages/EditEvent/DataEntry/epics/addNoteForEditSingleEvent.epics';
+import {
     goingOnlineEpic,
 } from 'capture-core/components/Connectivity/connectivity.epics';
 import {
@@ -88,6 +93,10 @@ import {
 import {
     includeFiltersWithValueAfterColumnSortingEpic,
 } from 'capture-core/components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.epics';
+import {
+    saveNewEventAddAnotherEpic,
+    saveNewEventAddAnotherFailedEpic,
+} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/saveNewSingleEventAddAnother.epics';
 
 import { loadStartupData } from '../init/entry.epics';
 
@@ -108,6 +117,7 @@ export default combineEpics(
     selectionsFromUrlValidationForNewEventEpic,
     openNewEventPageLocationChangeEpic,
     openNewEventInDataEntryEpic,
+    resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
     runRulesForSingleEventEpic,
     saveNewEventLocationChangeEpic,
     saveNewEventEpic,
@@ -124,6 +134,8 @@ export default combineEpics(
     saveEditEventEpic,
     cancelEditEventLocationChangeEpic,
     cancelEditEventEpic,
+    addNoteForEditSingleEventEpic,
+    removeNoteForEditSingleEventEpic,
     openEditPageLocationChangeEpic,
     getEventOpeningFromEventListEpic,
     networkMonitorStatusEpic,
@@ -137,4 +149,6 @@ export default combineEpics(
     newEventPageSelectorUpdateURLEpic,
     newEventPageSelectorResetURLEpic,
     includeFiltersWithValueAfterColumnSortingEpic,
+    saveNewEventAddAnotherEpic,
+    saveNewEventAddAnotherFailedEpic,
 );

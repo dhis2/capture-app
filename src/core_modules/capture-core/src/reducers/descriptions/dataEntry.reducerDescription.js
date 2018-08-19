@@ -155,6 +155,40 @@ export const dataEntriesFieldsValueDesc = createReducerDescription({
     },
 }, 'dataEntriesFieldsValue');
 
+export const dataEntriesNotesDesc = createReducerDescription({
+    [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {
+        const newState = { ...state };
+        newState[action.payload.key] = [];
+        return newState;
+    },
+    [loadEditActionTypes.LOAD_EDIT_DATA_ENTRY]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const key = payload.key;
+        newState[key] = payload.dataEntryNotes ? [...payload.dataEntryNotes] : [];
+        return newState;
+    },
+    [actionTypes.ADD_NOTE]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+
+        const key = getDataEntryKey(payload.dataEntryId, payload.itemId);
+        const noteKey = state[key] ? state[key].length : 0;
+
+        newState[key] = [...state[key], { ...payload.formNote, key: noteKey }];
+        return newState;
+    },
+    [actionTypes.REMOVE_NOTE]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+
+        const key = getDataEntryKey(payload.dataEntryId, payload.itemId);
+
+        newState[key] = state[key].filter(n => n.clientId !== payload.noteClientId);
+        return newState;
+    },
+}, 'dataEntriesNotes', {});
+
 export const dataEntriesFieldsMetaDesc = createReducerDescription({
     [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {
         const newState = { ...state };

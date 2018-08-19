@@ -34,3 +34,4 @@ npm-debug.log
 
 # generated localization files
 src/locales/
+public/manifest.webapp

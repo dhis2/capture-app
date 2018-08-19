@@ -1,7 +1,9 @@
 // @flow
 import DataElement from '../../../metaData/DataElement/DataElement';
 import { convertValue } from '../../../converters/clientToForm';
+import { convertValue as convertListValue } from '../../../converters/clientToList';
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
+import elementTypes from '../../../metaData/DataElement/elementTypes';
 
 import { getValidationErrors } from '../dataEntryField/dataEntryField.utils';
 import type { ValidatorContainer } from '../dataEntryField/dataEntryField.utils';
@@ -66,6 +68,17 @@ export function getDataEntryValues(
             accConvertedValues[valueItem.id] = valueItem.value;
             return accConvertedValues;
         }, {});
+}
+
+export function getDataEntryNotes(
+    clientValuesForDataEntry: Object,
+): Array<Object> {
+    const notes = clientValuesForDataEntry.notes || [];
+    return notes.map((note, index) => ({
+        ...note,
+        storedDate: convertListValue(elementTypes.DATETIME, note.storedDate),
+        key: index,
+    }));
 }
 
 export function getFormValues(
