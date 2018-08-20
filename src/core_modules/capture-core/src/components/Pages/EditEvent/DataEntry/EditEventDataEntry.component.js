@@ -32,7 +32,7 @@ const getSaveOptions = () => ({
 });
 
 const getCancelOptions = () => ({
-    color: 'secondary',
+    color: 'primary',
 });
 
 const buildNoteFieldSettingsFn = () => {

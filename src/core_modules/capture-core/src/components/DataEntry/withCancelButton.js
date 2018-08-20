@@ -24,7 +24,7 @@ const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: ?
         <InnerComponent
             cancelButton={
                 <ProgressButton
-                    variant="raised"
+                    variant="text"
                     onClick={onCancel}
                     color={options.color || 'primary'}
                     inProgress={finalInProgress}

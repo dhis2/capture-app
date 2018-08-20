@@ -74,7 +74,7 @@ const getSaveOptions = (props: Object) => {
 };
 
 const getCancelOptions = () => ({
-    color: 'secondary',
+    color: 'primary',
 });
 
 const buildNoteSettingsFn = () => {
