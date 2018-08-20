@@ -17,6 +17,18 @@ msgstr ""
 msgid "Column"
 msgstr ""
 
+msgid "Errors"
+msgstr ""
+
+msgid "Feedback"
+msgstr ""
+
+msgid "Indicators"
+msgstr ""
+
+msgid "Warnings"
+msgstr ""
+
 msgid "Cancel"
 msgstr ""
 
@@ -27,6 +39,12 @@ msgid "Warnings found"
 msgstr ""
 
 msgid "Abort"
+msgstr ""
+
+msgid "Save comment"
+msgstr ""
+
+msgid "Write comment"
 msgstr ""
 
 msgid "Your data is uploading. Please wait untill this message disappears"
@@ -42,6 +60,12 @@ msgid "Uploading data"
 msgstr ""
 
 msgid "Sort"
+msgstr ""
+
+msgid "No events to display"
+msgstr ""
+
+msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Last week"
@@ -128,6 +152,9 @@ msgstr ""
 msgid "No results"
 msgstr ""
 
+msgid "No items to display"
+msgstr ""
+
 msgid "Online"
 msgstr ""
 
@@ -179,13 +206,7 @@ msgstr ""
 msgid "More filters"
 msgstr ""
 
-msgid "No events to display"
-msgstr ""
-
 msgid "Rows per page"
-msgstr ""
-
-msgid "Data for offline event list not present"
 msgstr ""
 
 msgid "Could not get organisation unit"
@@ -226,7 +247,19 @@ msgid ""
 "details."
 msgstr ""
 
+msgid "Save and add another"
+msgstr ""
+
+msgid "Save and exit"
+msgstr ""
+
 msgid "Are you sure? All unsaved data will be lost"
+msgstr ""
+
+msgid "events added"
+msgstr ""
+
+msgid "No events added"
 msgstr ""
 
 msgid "Reset"

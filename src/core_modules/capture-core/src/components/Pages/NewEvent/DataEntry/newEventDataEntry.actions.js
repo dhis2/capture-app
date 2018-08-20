@@ -14,6 +14,7 @@ export const batchActionTypes = {
     UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH: 'UpdateFieldForNewSingleEventActionsBatch',
     OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH: 'OpenNewEventInDataEntryActionsBatch',
     RULES_EFFECTS_ACTIONS_BATCH: 'RulesEffectsForNewSingleEventActionsBatch',
+    SAVE_NEW_EVENT_ADD_ANOTHER_BATCH: 'SaveNewEventAddAnotherBatch',
 };
 
 export const actionTypes = {
@@ -30,6 +31,11 @@ export const actionTypes = {
     CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE: 'CancelNewEventFromIncompleteSelectionAndReturnToMainPage',
     SET_NEW_EVENT_FORM_LAYOUT_DIRECTION: 'SetNewEventFormLayoutDirection',
     START_ASYNC_UPDATE_FIELD_FOR_NEW_EVENT: 'StartAsyncUpdateFieldForNewEvent',
+    REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER: 'RequestSaveNewEventAddAnother',
+    START_SAVE_NEW_EVENT_ADD_ANOTHER: 'startSaveNewEventAddAnother',
+    NEW_EVENT_SAVED_ADD_ANOTHER: 'NewEventSavedAddAnother',
+    SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER: 'SaveFailedForNewEventAddAnother',
+    SET_NEW_EVENT_SAVE_TYPES: 'SetNewEventSaveTypes',
 };
 
 function convertStatusIn(value: string) {
@@ -50,6 +56,16 @@ function convertStatusOut(dataEntryValue: string, prevValue: string) {
     return prevValue;
 }
 
+function convertNoteOut(dataEntryValue: string, prevValue: string) {
+    return dataEntryValue ? [{ value: dataEntryValue }] : [];
+}
+function convertNoteIn(dataEntryValue: any) {
+    if (Array.isArray(dataEntryValue) && dataEntryValue.length > 0) {
+        return dataEntryValue[0].value;
+    }
+    return null;
+}
+
 export const openNewEventInDataEntry =
     (program: ?EventProgram, foundation: ?RenderFoundation, orgUnit: Object) => {
         const dataEntryId = 'singleEvent';
@@ -59,6 +75,12 @@ export const openNewEventInDataEntry =
                 id: 'eventDate',
                 type: 'DATE',
                 validatorContainers: getEventDateValidatorContainers(),
+            },
+            {
+                inId: 'notes',
+                outId: 'notes',
+                onConvertIn: convertNoteIn,
+                onConvertOut: convertNoteOut,
             },
             {
                 inId: 'status',
@@ -120,6 +142,30 @@ export const cancelNewEventFromIncompleteSelectionAndReturnToMainPage = () =>
 
 export const setNewEventFormLayoutDirection = (formHorizontal: boolean) =>
     actionCreator(actionTypes.SET_NEW_EVENT_FORM_LAYOUT_DIRECTION)({ formHorizontal });
+
+export const setNewEventSaveTypes = (newSaveTypes: ?Array<$Values<typeof saveTypes>>) =>
+    actionCreator(actionTypes.SET_NEW_EVENT_SAVE_TYPES)({ saveTypes: newSaveTypes });
+
+export const requestSaveNewEventAddAnother = (eventId: string, dataEntryId: string, formFoundation: Object) =>
+    actionCreator(actionTypes.REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER)({
+        eventId,
+        dataEntryId,
+        formFoundation,
+    }, { skipLogging: ['formFoundation'] });
+
+export const startSaveNewEventAddAnother = (serverData: Object, selections: Object) =>
+    actionCreator(actionTypes.START_SAVE_NEW_EVENT_ADD_ANOTHER)({ selections }, {
+        offline: {
+            effect: {
+                url: 'events',
+                method: methods.POST,
+                data: serverData,
+                clientId: 'thisisanid',
+            },
+            commit: { type: actionTypes.NEW_EVENT_SAVED_ADD_ANOTHER, meta: { selections } },
+            rollback: { type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER, meta: { selections } },
+        },
+    });
 
 export const startAsyncUpdateFieldForNewEvent =
     (

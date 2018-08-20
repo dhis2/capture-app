@@ -33,7 +33,7 @@ export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =
                 dataEntryValuesMeta,
                 prevEventMainData,
             );
-            const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues };
+            const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues, notes: [] };
 
             const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
             const mainDataServerValues: Object = convertMainEventClientToServerWithKeysMap(mainDataClientValues);

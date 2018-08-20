@@ -14,6 +14,7 @@ type Settings = {
     propName: string,
     validatorContainers?: ?Array<ValidatorContainer>,
     meta?: ?Object,
+    hidden?: ?boolean,
 };
 
 type ValueMetaUpdateOutput = {
@@ -118,6 +119,7 @@ const getDataEntryField = (InnerComponent: React.ComponentType<any>) =>
             const fields = this.props.fields;
             const settings = this.props.settings;
 
+            if (this.props.settings.hidden) return fields ? [...fields] : [];
             const fieldContainer = {
                 field: this.getFieldElement(),
                 placement: (settings.meta && settings.meta.placement) || placements.TOP,

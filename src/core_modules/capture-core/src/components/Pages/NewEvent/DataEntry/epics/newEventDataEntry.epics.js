@@ -2,10 +2,15 @@
 import log from 'loglevel';
 import { batchActions } from 'redux-batched-actions';
 import { rulesExecutedPostUpdateField } from '../../../../DataEntry/actions/dataEntry.actions';
-import { actionTypes as editEventSelectorActionTypes } from '../../../EditEvent/EditEventSelector/EditEventSelector.actions';
-import { actionTypes as mainPageSelectorActionTypes } from '../../../MainPage/MainPageSelector/MainPageSelector.actions';
+import {
+    actionTypes as editEventSelectorActionTypes,
+} from '../../../EditEvent/EditEventSelector/EditEventSelector.actions';
+import {
+    actionTypes as mainPageSelectorActionTypes,
+} from '../../../MainPage/MainPageSelector/MainPageSelector.actions';
 import {
     actionTypes as newEventDataEntryActionTypes,
+    batchActionTypes as newEventDataEntryBatchActionTypes,
     openNewEventInDataEntry,
     selectionsNotCompleteOpeningNewEvent,
     batchActionTypes,
@@ -16,6 +21,10 @@ import {
 import {
     actionTypes as newEventSelectionTypes,
 } from '../../newEventSelections.actions';
+import getColumnsConfiguration from '../../../MainPage/EventsList/epics/getColumnsConfiguration';
+import {
+    actionTypes as newEventSelectorTypes,
+} from '../../NewEventSelector/NewEventSelector.actions';
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
@@ -23,9 +32,15 @@ import {
 import getProgramAndStageFromProgramId from
     '../../../../../metaData/helpers/EventProgram/getProgramAndStageFromProgramId';
 import errorCreator from '../../../../../utils/errorCreator';
-
-import type
-{ FieldData } from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+import {
+    resetList,
+} from '../../../../List/list.actions';
+import type {
+    FieldData,
+} from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+import {
+    listId,
+} from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
 
 const errorMessages = {
     PROGRAM_OR_STAGE_NOT_FOUND: 'Program or stage not found',
@@ -33,7 +48,11 @@ const errorMessages = {
 
 export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(editEventSelectorActionTypes.OPEN_NEW_EVENT, mainPageSelectorActionTypes.OPEN_NEW_EVENT, newEventSelectionTypes.VALID_SELECTIONS_FROM_URL)
+    action$.ofType(
+        editEventSelectorActionTypes.OPEN_NEW_EVENT,
+        mainPageSelectorActionTypes.OPEN_NEW_EVENT,
+        newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
+        newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH)
         .map(() => {
             const state = store.getState();
             const selectionsComplete = state.currentSelections.complete;
@@ -54,9 +73,28 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
 
             return batchActions(
                 // $FlowSuppress
-                openNewEventInDataEntry(metadataContainer.program, metadataContainer.stage, orgUnit),
+                [...openNewEventInDataEntry(metadataContainer.program, metadataContainer.stage, orgUnit),
+
+                ],
                 batchActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH,
             );
+        });
+
+export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
+// $FlowSuppress
+    action$.ofType(
+        editEventSelectorActionTypes.OPEN_NEW_EVENT,
+        mainPageSelectorActionTypes.OPEN_NEW_EVENT,
+        newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
+        newEventSelectorTypes.SET_CATEGORY_OPTION,
+        newEventSelectorTypes.SET_ORG_UNIT,
+        newEventSelectorTypes.SET_PROGRAM_ID)
+        .switchMap(() => {
+            const state = store.getState();
+            // const newEventsListColumnsOrder = state.workingListsColumnsOrder.main || [];
+            const newEventsMeta = { sortById: 'created', sortByDirection: 'desc' };
+            return getColumnsConfiguration(state.currentSelections.programId).then(columnsConfig =>
+                resetList(listId, columnsConfig, newEventsMeta, state.currentSelections));
         });
 
 export const runRulesForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>

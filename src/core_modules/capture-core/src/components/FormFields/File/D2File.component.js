@@ -27,6 +27,7 @@ type Props = {
         horizontalSelectButton: string,
         horizontalDeleteButton: string,
         verticalDeleteButton: string,
+        borderBoxContent: string,
     },
     onCommitAsync: (callback: Function) => void,
     onBlur: (value: ?Object) => void,
@@ -74,6 +75,11 @@ const styles = theme => ({
     },
     input: {
         display: 'none',
+    },
+    borderBoxContent: {
+        display: 'flex',
+        alignItems: 'center',
+        margin: theme.typography.pxToRem(10),
     },
 });
 
@@ -141,7 +147,7 @@ class D2File extends Component<Props> {
             progress: 40,
         };
         return (
-            <BorderBox>
+            <BorderBox contentClassName={classes.borderBoxContent}>
                 {this.renderContent(contentClasses, sizes)}
             </BorderBox>
         );

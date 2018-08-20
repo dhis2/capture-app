@@ -9,6 +9,8 @@ import {
     requestSaveNewEventAndReturnToMainPage,
     cancelNewEventAndReturnToMainPage,
     batchActionTypes,
+    requestSaveNewEventAddAnother,
+    setNewEventSaveTypes,
 } from './newEventDataEntry.actions';
 import {
     makeProgramNameSelector,
@@ -17,6 +19,7 @@ import {
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
+import { saveTypes } from './newEventSaveTypes';
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
@@ -26,6 +29,7 @@ const makeMapStateToProps = () => {
         const formFoundation = formFoundationSelector(state);
 
         return {
+            saveTypes: state.newEventPage.saveTypes,
             formHorizontal: !!state.newEventPage.formHorizontal,
             ready: !state.newEventPage.dataEntryIsLoading,
             error: !formFoundation ?
@@ -62,6 +66,12 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);
         dispatch(requestSaveNewEventAndReturnToMainPage(eventId, dataEntryId, formFoundation));
+    },
+    onSetSaveTypes: (newSaveTypes: ?Array<$Values<typeof saveTypes>>) => {
+        dispatch(setNewEventSaveTypes(newSaveTypes));
+    },
+    onSaveAndAddAnother: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
+        dispatch(requestSaveNewEventAddAnother(eventId, dataEntryId, formFoundation));
     },
     onCancel: () => {
         window.scrollTo(0, 0);

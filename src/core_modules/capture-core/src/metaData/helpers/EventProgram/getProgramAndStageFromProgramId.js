@@ -1,9 +1,9 @@
 // @flow
 import log from 'loglevel';
-
+import i18n from '@dhis2/d2-i18n';
 import errorCreator from '../../../utils/errorCreator';
 import programCollection from '../../../metaDataMemoryStores/programCollection/programCollection';
-import i18n from '@dhis2/d2-i18n';
+
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found',
