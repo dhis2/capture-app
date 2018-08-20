@@ -3,6 +3,7 @@ import elementTypes from '../../../../../metaData/DataElement/elementTypes';
 
 export const filterTypesArray = [
     elementTypes.TEXT,
+    elementTypes.NUMBER,
     elementTypes.INTEGER,
     elementTypes.INTEGER_POSITIVE,
     elementTypes.INTEGER_NEGATIVE,

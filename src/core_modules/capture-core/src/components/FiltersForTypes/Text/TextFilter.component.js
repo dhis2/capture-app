@@ -21,7 +21,7 @@ class TextFilter extends Component<Props> implements UpdatableFilterContent<Valu
         }
 
         return {
-            requestData: `ilike:${value}`,
+            requestData: `like:${value}`,
             appliedText: value,
         };
     }
@@ -35,11 +35,13 @@ class TextFilter extends Component<Props> implements UpdatableFilterContent<Valu
     }
 
     render() {
+        const { value } = this.props;
         return (
             /* $FlowSuppress: Flow not working 100% with HOCs */
             <Input
                 onBlur={this.handleBlur}
                 onEnterKey={this.handleEnterKey}
+                value={value}
             />
         );
     }

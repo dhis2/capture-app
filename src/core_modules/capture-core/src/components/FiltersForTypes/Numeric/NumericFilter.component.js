@@ -113,7 +113,11 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
             requestData.push(`le:${value.max}`);
         }
 
-        return requestData;
+        if (requestData.length === 2) {
+            return requestData.join(':');
+        }
+
+        return requestData[0];
     }
 
     static getAppliedText(value: { min?: ?string, max?: ?string }) {

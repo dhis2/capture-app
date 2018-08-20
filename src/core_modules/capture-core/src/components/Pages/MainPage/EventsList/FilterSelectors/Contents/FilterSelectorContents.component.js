@@ -2,6 +2,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { filterTypesObject } from '../filterTypes';
+import { MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS } from '../filterSelector.const';
 import withButtons from './withButtons';
 import withData from './withData';
 import withRef from './withRef';
@@ -29,8 +30,6 @@ type Props = {
         container: string,
     },
 };
-
-const MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS = 25;
 
 class FilterSelectorContents extends React.PureComponent<Props> {
     static selectorContentsForTypes = {

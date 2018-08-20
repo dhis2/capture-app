@@ -41,9 +41,9 @@ class OptionSetFilter extends Component<Props> implements UpdatableFilterContent
                 const filterValue = convertToServerValue(type, clientValue); // should work for now
                 return filterValue;
             })
-            .join(',');
+            .join(';');
 
-        return `in:[${valueString}]`;
+        return `in:${valueString}`;
     }
 
     static getAppliedText(values: Array<any>, optionSet: OptionSet) {

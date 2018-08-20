@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import FilterButton from './FilterButton/FilterButton.container';
 import FilterRestMenu from './FilterRestMenu/FilterRestMenu.component';
 import { filterTypesArray } from './filterTypes';
+import { MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS } from './filterSelector.const';
 
 import type { Column } from '../ListWrapper/EventsListWrapper.component';
 
@@ -103,7 +104,7 @@ export default (InnerComponent: React.ComponentType<any>) =>
             }
 
             const filterColumns = columns
-                .filter(column => filterTypesArray.includes(column.type));
+                .filter(column => filterTypesArray.includes(column.type) || (column.optionSet && column.optionSet.options.length <= MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS));
 
             const calculatedFilterColumns = EventListFilterSelectors.getCalculatedIndividiualColumns(filterColumns);
             const columnsForIndividualDisplay = [
