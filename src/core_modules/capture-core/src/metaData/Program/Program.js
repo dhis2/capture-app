@@ -11,7 +11,7 @@ export default class Program {
     _access: Access;
     _name: string;
     _shortName: string;
-    _organisationUnits: Array<Object>;
+    _organisationUnits: Object;
     _version: string | number;
     _categoryCombination: ?CategoryCombination;
     _programRules: Array<ProgramRule>;
@@ -51,10 +51,10 @@ export default class Program {
         return this._shortName;
     }
 
-    set organisationUnits(organisationUnits: Array<Object>) {
+    set organisationUnits(organisationUnits: Object) {
         this._organisationUnits = organisationUnits;
     }
-    get organisationUnits(): Array<Object> {
+    get organisationUnits(): Object {
         return this._organisationUnits;
     }
 

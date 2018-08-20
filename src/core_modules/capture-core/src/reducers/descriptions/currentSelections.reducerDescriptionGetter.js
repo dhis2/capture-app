@@ -45,6 +45,36 @@ const calculateCompleteStatus = (state: CurrentSelectionsState) => {
     return true;
 };
 
+const getUpdateDataForSetOrgUnit = (orgUnitId, currentlySelectedProgramId) => {
+    if (!currentlySelectedProgramId) {
+        return {
+            orgUnitId,
+        };
+    }
+
+    const program = programs.get(currentlySelectedProgramId);
+    if (program) {
+        if (program.organisationUnits && program.organisationUnits[orgUnitId]) {
+            return {
+                orgUnitId,
+            };
+        }
+    }
+
+    return {
+        orgUnitId,
+        programId: null,
+    };
+};
+
+const setOrgUnit = (state, action) => {
+    const orgUnitId = action.payload.id;
+    const currentlySelectedProgramId = state.programId;
+    const newState = { ...state, ...getUpdateDataForSetOrgUnit(orgUnitId, currentlySelectedProgramId) };
+    newState.complete = calculateCompleteStatus(newState);
+    return newState;
+};
+
 export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => createReducerDescription({
     ...appUpdaters,
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS]: (state, action) => {
@@ -160,12 +190,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         newState.complete = calculateCompleteStatus(newState);
         return newState;
     },
-    [mainPageSelectorActionTypes.SET_ORG_UNIT]: (state, action) => {
-        const orgUnitId = action.payload.id;
-        const newState = { ...state, orgUnitId };
-        newState.complete = calculateCompleteStatus(newState);
-        return newState;
-    },
+    [mainPageSelectorActionTypes.SET_ORG_UNIT]: setOrgUnit,
     [mainPageSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
         const programId = action.payload;
         const newState = { ...state, programId };
@@ -215,12 +240,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         newState.complete = calculateCompleteStatus(newState);
         return newState;
     },
-    [editEventPageSelectorActionTypes.SET_ORG_UNIT]: (state, action) => {
-        const orgUnitId = action.payload.id;
-        const newState = { ...state, orgUnitId };
-        newState.complete = calculateCompleteStatus(newState);
-        return newState;
-    },
+    [editEventPageSelectorActionTypes.SET_ORG_UNIT]: setOrgUnit,
     [editEventPageSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
         const programId = action.payload;
         const newState = { ...state, programId };
@@ -270,12 +290,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         newState.complete = calculateCompleteStatus(newState);
         return newState;
     },
-    [newEventPageSelectorActionTypes.SET_ORG_UNIT]: (state, action) => {
-        const orgUnitId = action.payload.id;
-        const newState = { ...state, orgUnitId };
-        newState.complete = calculateCompleteStatus(newState);
-        return newState;
-    },
+    [newEventPageSelectorActionTypes.SET_ORG_UNIT]: setOrgUnit,
     [newEventPageSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
         const programId = action.payload;
         const newState = { ...state, programId };
