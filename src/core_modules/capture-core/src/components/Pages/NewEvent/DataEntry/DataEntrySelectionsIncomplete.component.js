@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Button from '../../../Buttons/Button.component';
 import i18n from '@dhis2/d2-i18n';
 
-const getStyles = () => ({
+const getStyles = (theme: Theme) => ({
     contents: {
         display: 'flex',
         justifyContent: 'center',
@@ -14,8 +14,13 @@ const getStyles = () => ({
         paddingBottom: 50,
     },
     buttonRow: {
+        display: 'flex',
+        flexWrap: 'wrap',
         paddingTop: 10,
         marginLeft: '-8px',
+    },
+    buttonContainer: {
+        paddingRight: theme.spacing.unit * 2,
     },
 });
 type Props = {
@@ -24,6 +29,7 @@ type Props = {
     classes: {
         contents: string,
         buttonRow: string,
+        buttonContainer: string,
     },
     onCancel: () => void,
 };
@@ -61,20 +67,28 @@ class DataEntrySelectionsIncomplete extends Component<Props> {
                 <div
                     className={classes.buttonRow}
                 >
-                    <Button
-                        variant="raised"
-                        color="primary"
-                        disabled
+                    <div
+                        className={classes.buttonContainer}
                     >
-                        {i18n.t('Save')}
-                    </Button>
-                    <Button
-                        variant="raised"
-                        color="secondary"
-                        onClick={onCancel}
+                        <Button
+                            variant="raised"
+                            color="primary"
+                            disabled
+                        >
+                            {i18n.t('Save')}
+                        </Button>
+                    </div>
+                    <div
+                        className={classes.buttonContainer}
                     >
-                        {i18n.t('Cancel')}
-                    </Button>
+                        <Button
+                            variant="text"
+                            color="primary"
+                            onClick={onCancel}
+                        >
+                            {i18n.t('Cancel')}
+                        </Button>
+                    </div>
                 </div>
             </div>
         );
