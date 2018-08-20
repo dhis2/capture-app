@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-08-09T13:56:49.419Z\n"
-"PO-Revision-Date: 2018-08-09T13:56:49.419Z\n"
+"POT-Creation-Date: 2018-08-14T12:57:38.474Z\n"
+"PO-Revision-Date: 2018-08-14T12:57:38.475Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -111,6 +111,18 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
+msgstr ""
+
+msgid "mm/dd/yyyy"
+msgstr ""
+
+msgid "Years"
+msgstr ""
+
+msgid "Months"
+msgstr ""
+
+msgid "Days"
 msgstr ""
 
 msgid "Uploading file"
