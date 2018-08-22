@@ -40,6 +40,7 @@ export const newEventPageDesc = createReducerDescription({
     [selectorActionTypes.OPEN_NEW_EVENT_PAGE]: (state) => {
         const newState = { ...state };
         newState.dataEntryIsLoading = true;
+        newState.selectionsError = null;
         return newState;
     },
     [editEventPageActionTypes.OPEN_NEW_EVENT]: (state) => {

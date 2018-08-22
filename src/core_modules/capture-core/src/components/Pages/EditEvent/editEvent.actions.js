@@ -19,8 +19,8 @@ export const editEventFromUrl = (data: Object) =>
 export const eventFromUrlCouldNotBeRetrieved = (message: string) =>
     actionCreator(actionTypes.EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED)(message);
 
-export const eventFromUrlRetrieved = (eventContainer: Object) =>
-    actionCreator(actionTypes.EVENT_FROM_URL_RETRIEVED)(eventContainer);
+export const eventFromUrlRetrieved = (eventContainer: Object, prevProgramId: ?string) =>
+    actionCreator(actionTypes.EVENT_FROM_URL_RETRIEVED)({ eventContainer, prevProgramId });
 
 export const orgUnitRetrievedOnUrlUpdate = (orgUnit: Object, eventContainer: Object) =>
     actionCreator(actionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE)({ orgUnit, eventContainer });

@@ -1,6 +1,8 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as selectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
+import { actionTypes as newEventPageUrlActionTypes } from '../../components/Pages/NewEvent/newEventSelections.actions';
+import { actionTypes as editEventPageUrlActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
 
 export const mainPageDesc = createReducerDescription({
     [selectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: (state) => {
@@ -30,6 +32,20 @@ export const mainPageDesc = createReducerDescription({
         const newState = { ...state };
         newState.isLoading = false;
         newState.selectionsError = null;
+        return newState;
+    },
+    [newEventPageUrlActionTypes.VALID_SELECTIONS_FROM_URL]: (state) => {
+        const newState = {
+            ...state,
+            selectionsError: null,
+        };
+        return newState;
+    },
+    [editEventPageUrlActionTypes.EDIT_EVENT_FROM_URL]: (state) => {
+        const newState = {
+            ...state,
+            selectionsError: null,
+        };
         return newState;
     },
 }, 'mainPage');

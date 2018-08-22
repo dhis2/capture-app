@@ -13,6 +13,7 @@ import {
 } from './mainSelections.actions';
 import { actionTypes as mainPageSelectorActionTypes } from '../MainPage/MainPageSelector/MainPageSelector.actions';
 import programCollection from '../../../metaDataMemoryStores/programCollection/programCollection';
+import { orgUnitCouldNotBeRetrievedOnUrlUpdate } from '../EditEvent/editEvent.actions';
 
 export const mainSelectionsCompletedEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
@@ -42,7 +43,8 @@ export const mainSelectionsFromUrlGetOrgUnitDataEpic = (action$: InputObservable
         .filter(action => action.payload.nextProps.orgUnitId)
         .switchMap(action => getApi()
             .get(`organisationUnits/${action.payload.nextProps.orgUnitId}`)
-            .then(response => setCurrentOrgUnitBasedOnUrl({ id: response.id, name: response.displayName }),
+            .then(response =>
+                setCurrentOrgUnitBasedOnUrl({ id: response.id, name: response.displayName }),
             )
             .catch(() =>
                 errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')),
@@ -59,9 +61,17 @@ export const mainSelectionsFromUrlValidationEpic = (action$: InputObservable, st
     // $FlowSuppress
     action$.ofType(actionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL, actionTypes.SET_ORG_UNIT_BASED_ON_URL)
         .map(() => {
-            const { programId } = store.getState().currentSelections;
-            if (programId && !programCollection.has(programId)) {
-                return invalidSelectionsFromUrl(i18n.t("Program doesn't exist"));
+            const { programId, orgUnitId } = store.getState().currentSelections;
+            if (programId) {
+                const program = programCollection.get(programId);
+                if (!program) {
+                    return invalidSelectionsFromUrl(i18n.t("Program doesn't exist"));
+                }
+
+                if (orgUnitId && !program.organisationUnits[orgUnitId]) {
+                    return invalidSelectionsFromUrl(i18n.t('Selected program is invalid for registering unit'));
+                }
             }
+
             return validSelectionsFromUrl();
         });

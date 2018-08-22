@@ -1,10 +1,9 @@
 // @flow
-import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import { actionTypes as mainSelectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
 import {
-    actionTypes as setCurrentSelectionsActionTypes,
+    actionTypes as quickSelectorActionTypes,
 } from '../../components/QuickSelector/actions/QuickSelector.actions';
 import {
     actionTypes as newEventSelectionActionTypes,
@@ -21,88 +20,44 @@ import {
 import {
     actionTypes as newEventPageSelectorActionTypes,
 } from '../../components/Pages/NewEvent/NewEventSelector/NewEventSelector.actions';
-
-type CurrentSelectionsState = {
-    programId?: ?string,
-    orgUnitId?: ?string,
-    categories?: ?Object,
-};
-
-const calculateCompleteStatus = (state: CurrentSelectionsState) => {
-    if (!state.orgUnitId || !state.programId) {
-        return false;
-    }
-
-    const selectedProgram = state.programId && programs.get(state.programId);
-
-    if (selectedProgram && selectedProgram.categoryCombination) {
-        const categories = selectedProgram.categoryCombination.categories;
-
-        if (categories.some(category => !state.categories || !state.categories[category.id])) {
-            return false;
-        }
-    }
-    return true;
-};
-
-const getUpdateDataForSetOrgUnit = (orgUnitId, currentlySelectedProgramId) => {
-    if (!currentlySelectedProgramId) {
-        return {
-            orgUnitId,
-        };
-    }
-
-    const program = programs.get(currentlySelectedProgramId);
-    if (program) {
-        if (program.organisationUnits && program.organisationUnits[orgUnitId]) {
-            return {
-                orgUnitId,
-            };
-        }
-    }
-
-    return {
-        orgUnitId,
-        programId: null,
-    };
-};
+import {
+    actionTypes as crossPageActionTypes,
+} from '../../components/Pages/actions/crossPage.actions';
 
 const setOrgUnit = (state, action) => {
     const orgUnitId = action.payload.id;
-    const currentlySelectedProgramId = state.programId;
-    const newState = { ...state, ...getUpdateDataForSetOrgUnit(orgUnitId, currentlySelectedProgramId) };
-    newState.complete = calculateCompleteStatus(newState);
+    const newState = {
+        ...state,
+        orgUnitId,
+        complete: false,
+    };
     return newState;
 };
 
 export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => createReducerDescription({
     ...appUpdaters,
+    [crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED]: (state, action) => {
+        const newState = {
+            ...state,
+            complete: action.payload.isComplete,
+        };
+        return newState;
+    },
+    [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: (state) => {
+        const newState = {
+            ...state,
+            programId: null,
+            complete: false,
+        };
+        return newState;
+    },
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS]: (state, action) => {
-        const newState = { ...state, ...action.payload, complete: calculateCompleteStatus(state) };
+        const newState = { ...state, ...action.payload, complete: false };
         return newState;
     },
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: (state, action) => {
         const { nextProps: selections } = action.payload;
-        const newState = { ...state, ...selections, complete: false };
-        return newState;
-    },
-    [mainSelectionsActionTypes.VALID_SELECTIONS_FROM_URL]: (state) => {
-        const newState = { ...state };
-        newState.complete = calculateCompleteStatus(newState);
-        return newState;
-    },
-    [mainSelectionsActionTypes.ERROR_RETRIEVING_ORG_UNIT_BASED_ON_URL]: (state) => {
-        const newState = {
-            ...state,
-            orgUnitId: null,
-        };
-        return newState;
-    },
-    [mainSelectionsActionTypes.INVALID_ORG_UNIT_FROM_URL]: (state) => {
-        const newState = {
-            ...state,
-            orgUnitId: null,
-        };
+        const newState = { ...state, ...selections, categories: null, complete: false };
         return newState;
     },
     [mainSelectionsActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: (state) => {
@@ -114,26 +69,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     },
     [newEventSelectionActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
         const { nextProps: selections } = action.payload;
-        const newState = { ...state, ...selections, complete: false };
-        return newState;
-    },
-    [newEventSelectionActionTypes.VALID_SELECTIONS_FROM_URL]: (state) => {
-        const newState = { ...state };
-        newState.complete = calculateCompleteStatus(newState);
-        return newState;
-    },
-    [newEventSelectionActionTypes.ERROR_RETRIEVING_ORG_UNIT_BASED_ON_URL]: (state) => {
-        const newState = {
-            ...state,
-            orgUnitId: null,
-        };
-        return newState;
-    },
-    [newEventSelectionActionTypes.INVALID_ORG_UNIT_FROM_URL]: (state) => {
-        const newState = {
-            ...state,
-            orgUnitId: null,
-        };
+        const newState = { ...state, ...selections, categories: null, complete: false };
         return newState;
     },
     [newEventSelectionActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: (state) => {
@@ -147,60 +83,31 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         const payload = action.payload;
         const newState = {
             ...state,
-            programId: payload.event.programId,
-            orgUnitId: payload.event.orgUnitId,
+            programId: payload.eventContainer.event.programId,
+            orgUnitId: payload.eventContainer.event.orgUnitId,
             complete: true,
         };
 
         return newState;
     },
-    [setCurrentSelectionsActionTypes.SET_ORG_UNIT_ID]: (state, action) => {
-        const newState = { ...state };
-        newState.orgUnitId = action.payload;
-        newState.complete = calculateCompleteStatus(newState);
-        return newState;
-    },
-    [setCurrentSelectionsActionTypes.SET_PROGRAM_ID]: (state, action) => {
-        const newState = { ...state };
-        newState.programId = action.payload;
-        newState.complete = calculateCompleteStatus(newState);
-        return newState;
-    },
-    [setCurrentSelectionsActionTypes.SET_CATEGORY_ID]: (state, action) => {
-        let categories = {};
-        if (state.categories) {
-            // Necessary step to prevent mutation.
-            categories = Object.assign({}, state.categories);
-            categories[action.payload.categoryId] = action.payload.selectedCategoryOptionId;
-        } else {
-            categories[action.payload.categoryId] = action.payload.selectedCategoryOptionId;
-        }
-        const newState = { ...state, categories };
-        newState.complete = calculateCompleteStatus(newState);
-        return newState;
-    },
-    [setCurrentSelectionsActionTypes.RESET_CATEGORY_SELECTIONS]: (state) => {
-        const categories = null;
-        const newState = { ...state, categories };
-        return newState;
-    },
     [mainPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
         const orgUnitId = null;
         const newState = { ...state, orgUnitId };
-        newState.complete = calculateCompleteStatus(newState);
+        newState.complete = false;
         return newState;
     },
-    [mainPageSelectorActionTypes.SET_ORG_UNIT]: setOrgUnit,
+    [mainPageSelectorActionTypes.SET_ORG_UNIT]: (state, action) => {
+        const orgUnitId = action.payload.id;
+        return {
+            ...state,
+            orgUnitId,
+            complete: false,
+        };
+    },
     [mainPageSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
         const programId = action.payload;
         const newState = { ...state, programId };
-        newState.complete = calculateCompleteStatus(newState);
-        return newState;
-    },
-    [mainPageSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
-        const programId = null;
-        const newState = { ...state, programId };
-        newState.complete = calculateCompleteStatus(newState);
+        newState.complete = false;
         return newState;
     },
     [mainPageSelectorActionTypes.SET_CATEGORY_OPTION]: (state, action) => {
@@ -213,7 +120,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             categories[action.payload.categoryId] = action.payload.categoryOptionId;
         }
         const newState = { ...state, categories };
-        newState.complete = calculateCompleteStatus(newState);
+        newState.complete = false;
         return newState;
     },
     [mainPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state, action) => {
@@ -226,7 +133,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             categories[action.payload] = null;
         }
         const newState = { ...state, categories };
-        newState.complete = calculateCompleteStatus(newState);
+        newState.complete = false;
         return newState;
     },
     [mainPageSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: (state) => {
@@ -237,20 +144,14 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     [editEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
         const orgUnitId = null;
         const newState = { ...state, orgUnitId };
-        newState.complete = calculateCompleteStatus(newState);
+        newState.complete = false;
         return newState;
     },
     [editEventPageSelectorActionTypes.SET_ORG_UNIT]: setOrgUnit,
     [editEventPageSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
         const programId = action.payload;
         const newState = { ...state, programId };
-        newState.complete = calculateCompleteStatus(newState);
-        return newState;
-    },
-    [editEventPageSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
-        const programId = null;
-        const newState = { ...state, programId };
-        newState.complete = calculateCompleteStatus(newState);
+        newState.complete = false;
         return newState;
     },
     [editEventPageSelectorActionTypes.SET_CATEGORY_OPTION]: (state, action) => {
@@ -263,7 +164,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             categories[action.payload.categoryId] = action.payload.categoryOptionId;
         }
         const newState = { ...state, categories };
-        newState.complete = calculateCompleteStatus(newState);
+        newState.complete = false;
         return newState;
     },
     [editEventPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state, action) => {
@@ -276,7 +177,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             categories[action.payload] = null;
         }
         const newState = { ...state, categories };
-        newState.complete = calculateCompleteStatus(newState);
+        newState.complete = false;
         return newState;
     },
     [editEventPageSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: (state) => {
@@ -287,20 +188,14 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     [newEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
         const orgUnitId = null;
         const newState = { ...state, orgUnitId };
-        newState.complete = calculateCompleteStatus(newState);
+        newState.complete = false;
         return newState;
     },
     [newEventPageSelectorActionTypes.SET_ORG_UNIT]: setOrgUnit,
     [newEventPageSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
         const programId = action.payload;
         const newState = { ...state, programId };
-        newState.complete = calculateCompleteStatus(newState);
-        return newState;
-    },
-    [newEventPageSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
-        const programId = null;
-        const newState = { ...state, programId };
-        newState.complete = calculateCompleteStatus(newState);
+        newState.complete = false;
         return newState;
     },
     [newEventPageSelectorActionTypes.SET_CATEGORY_OPTION]: (state, action) => {
@@ -313,7 +208,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             categories[action.payload.categoryId] = action.payload.categoryOptionId;
         }
         const newState = { ...state, categories };
-        newState.complete = calculateCompleteStatus(newState);
+        newState.complete = false;
         return newState;
     },
     [newEventPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state, action) => {
@@ -326,7 +221,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             categories[action.payload] = null;
         }
         const newState = { ...state, categories };
-        newState.complete = calculateCompleteStatus(newState);
+        newState.complete = false;
         return newState;
     },
     [newEventPageSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: (state) => {

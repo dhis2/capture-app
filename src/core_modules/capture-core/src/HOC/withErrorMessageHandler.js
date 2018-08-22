@@ -1,26 +1,41 @@
 // @flow
 import * as React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+
+const getStyles = (theme: Theme) => ({
+    errorContainer: {
+        margin: 20,
+        color: theme.palette.error.main,
+    },
+});
 
 type Props = {
     error?: ?string,
-};
-
-const withErrorMessageHandler = () => (InnerComponent: React.ComponentType<any>) => (props: Props) => {
-    const { error, ...passOnProps } = props;
-
-    if (error) {
-        return (
-            <div>
-                {error}
-            </div>
-        );
+    classes: {
+        errorContainer: string,
     }
-
-    return (
-        <InnerComponent
-            {...passOnProps}
-        />
-    );
 };
+
+const withErrorMessageHandler = () =>
+    (InnerComponent: React.ComponentType<any>) =>
+        withStyles(getStyles)((props: Props) => {
+            const { error, classes, ...passOnProps } = props;
+
+            if (error) {
+                return (
+                    <div
+                        className={classes.errorContainer}
+                    >
+                        {error}
+                    </div>
+                );
+            }
+
+            return (
+                <InnerComponent
+                    {...passOnProps}
+                />
+            );
+        });
 
 export default withErrorMessageHandler;

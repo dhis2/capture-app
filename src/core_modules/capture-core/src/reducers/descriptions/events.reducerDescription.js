@@ -60,7 +60,7 @@ export const eventsDesc = createReducerDescription({
         return newState;
     },
     [editEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
-        const event = action.payload.event;
+        const event = action.payload.eventContainer.event;
         const newState = {
             ...state,
             [event.eventId]: event,

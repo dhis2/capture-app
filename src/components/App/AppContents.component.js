@@ -7,10 +7,9 @@ import { withStyles } from '@material-ui/core/styles';
 import getD2 from 'capture-core/d2/d2Instance';
 import NetworkStatusBadge from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.component';
 
-import MainPageSelector from 'capture-core/components/Pages/MainPage/MainPageSelector/MainPageSelector.container';
-import NewEventSelector from 'capture-core/components/Pages/NewEvent/NewEventSelector/NewEventSelector.container';
-import EditEventSelector from 'capture-core/components/Pages/EditEvent/EditEventSelector/EditEventSelector.container';
-// import EventCaptureForm from '../EventCaptureForm/EventCaptureForm.container';
+import MainPageEntry from 'capture-core/components/Pages/MainPage/MainPageEntry/MainPageEntry.container';
+import NewEventEntry from 'capture-core/components/Pages/NewEvent/NewEventEntry/NewEventEntry.container';
+import EditEventEntry from 'capture-core/components/Pages/EditEvent/EditEventEntry/EditEventEntry.container';
 
 const styles = theme => ({
     app: {
@@ -46,10 +45,10 @@ class AppContents extends Component<Props> {
                     className={classes.pageContainer}
                 >
                     <Switch>
-                        <Route path="/newEvent" component={NewEventSelector} />
-                        <Route path="/editEvent" component={EditEventSelector} />
-                        <Route path="/:keys" component={MainPageSelector} />
-                        <Route path="/" component={MainPageSelector} />
+                        <Route path="/newEvent" component={NewEventEntry} />
+                        <Route path="/editEvent" component={EditEventEntry} />
+                        <Route path="/:keys" component={MainPageEntry} />
+                        <Route path="/" component={MainPageEntry} />
                     </Switch>
                 </div>
                 <div />
@@ -61,5 +60,3 @@ class AppContents extends Component<Props> {
 const AppContentsWithStyles = withStyles(styles)(AppContents);
 
 export default AppContentsWithStyles;
-
-/*  <Route path="/event" component={EventCaptureForm} /> */

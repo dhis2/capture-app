@@ -35,18 +35,19 @@ export const getEventOpeningFromEventListEpic = (action$: InputObservable, store
             return startOpenEventForEditInDataEntry(eventContainer, orgUnit);
         });
 
-export const getEventFromUrlEpic = (action$: InputObservable) =>
+export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
     action$.ofType(editEventActionTypes.EDIT_EVENT_FROM_URL)
         .switchMap((action) => {
             const eventId = action.payload.eventId;
+            const prevProgramId = store.getState().currentSelections.programId; // used to clear columns and filters in eventlist if program id is changed
             return getEvent(eventId)
                 .then((eventContainer) => {
                     if (!eventContainer) {
                         return eventFromUrlCouldNotBeRetrieved(
                             i18n.t('Event could not be loaded. Are you sure it exists?'));
                     }
-                    return eventFromUrlRetrieved(eventContainer);
+                    return eventFromUrlRetrieved(eventContainer, prevProgramId);
                 })
                 .catch((error) => {
                     const { message, details } = getErrorMessageAndDetails(error);
@@ -63,7 +64,7 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
     // $FlowSuppress
     action$.ofType(editEventActionTypes.EVENT_FROM_URL_RETRIEVED)
         .switchMap((action) => {
-            const eventContainer = action.payload;
+            const eventContainer = action.payload.eventContainer;
             return getOrganisationUnitApiSpec(eventContainer.event.orgUnitId)
                 .get()
                 // $FlowSuppress

@@ -89,6 +89,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
         newEventSelectorTypes.SET_CATEGORY_OPTION,
         newEventSelectorTypes.SET_ORG_UNIT,
         newEventSelectorTypes.SET_PROGRAM_ID)
+        .filter(() => store.getState().currentSelections.complete)
         .switchMap(() => {
             const state = store.getState();
             // const newEventsListColumnsOrder = state.workingListsColumnsOrder.main || [];

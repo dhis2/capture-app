@@ -276,7 +276,15 @@ export const workingListsMetaDesc = createReducerDescription({
     [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: updateListsMetaOnResetProgramId,
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateListsMetaOnUrlUpdate,
     [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateListsMetaOnUrlUpdate,
-    [editEventSelectorActionTypes.EDIT_EVENT_FROM_URL]: updateListsMetaOnUrlUpdate,
+    [editEventSelectorActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
+        const payload = action.payload;
+        const nextProgramId = payload.eventContainer.event.programId;
+        const prevProgramId = payload.prevProgramId;
+        if (nextProgramId !== prevProgramId) {
+            return updateListsMetaOnResetProgramId(state);
+        }
+        return state;
+    },
     [cleanUpActionTypes.CLEAN_UP_EVENT_LIST_IN_LOADING]: state => ({
         ...state,
         main: {
@@ -479,7 +487,15 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
     [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: updateColumnsOrderOnResetProgram,
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateColumnsOrderOnUrlUpdate,
     [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateColumnsOrderOnUrlUpdate,
-    [editEventSelectorActionTypes.EDIT_EVENT_FROM_URL]: updateColumnsOrderOnUrlUpdate,
+    [editEventSelectorActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
+        const payload = action.payload;
+        const nextProgramId = payload.eventContainer.event.programId;
+        const prevProgramId = payload.prevProgramId;
+        if (nextProgramId !== prevProgramId) {
+            return updateColumnsOrderOnResetProgram(state);
+        }
+        return state;
+    },
 }, 'workingListsColumnsOrder');
 
 export const workingListsContextDesc = createReducerDescription({
@@ -554,7 +570,18 @@ export const workingListFiltersEditDesc = createReducerDescription({
     }),
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateFiltersEditOnUrlUpdate,
     [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateFiltersEditOnUrlUpdate,
-    [editEventSelectorActionTypes.EDIT_EVENT_FROM_URL]: updateFiltersEditOnUrlUpdate,
+    [editEventSelectorActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
+        const payload = action.payload;
+        const nextProgramId = payload.eventContainer.event.programId;
+        const prevProgramId = payload.prevProgramId;
+        if (nextProgramId !== prevProgramId) {
+            return {
+                ...state,
+                main: {},
+            };
+        }
+        return state;
+    },
 }, 'workingListFiltersEdit');
 
 const updateApplitedFiltersOnProgramReset = state => ({
@@ -658,7 +685,15 @@ export const workingListsAppliedFiltersDesc = createReducerDescription({
     [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: updateApplitedFiltersOnProgramReset,
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateApplitedFiltersOnUrlUpdate,
     [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateApplitedFiltersOnUrlUpdate,
-    [editEventSelectorActionTypes.EDIT_EVENT_FROM_URL]: updateApplitedFiltersOnUrlUpdate,
+    [editEventSelectorActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
+        const payload = action.payload;
+        const nextProgramId = payload.eventContainer.event.programId;
+        const prevProgramId = payload.prevProgramId;
+        if (nextProgramId !== prevProgramId) {
+            return updateApplitedFiltersOnProgramReset(state);
+        }
+        return state;
+    },
     [cleanUpActionTypes.CLEAN_UP_EVENT_LIST_IN_LOADING]: state => ({
         ...state,
         main: {
@@ -693,5 +728,13 @@ export const workingListsUserSelectedFiltersDesc = createReducerDescription({
     [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: () => ({}),
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateUserSelectedFilersOnUrlUpdate,
     [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateUserSelectedFilersOnUrlUpdate,
-    [editEventSelectorActionTypes.EDIT_EVENT_FROM_URL]: updateUserSelectedFilersOnUrlUpdate,
+    [editEventSelectorActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
+        const payload = action.payload;
+        const nextProgramId = payload.eventContainer.event.programId;
+        const prevProgramId = payload.prevProgramId;
+        if (nextProgramId !== prevProgramId) {
+            return {};
+        }
+        return state;
+    },
 }, 'workingListsUserSelectedFilters');

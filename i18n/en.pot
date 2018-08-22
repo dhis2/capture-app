@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-08-14T12:57:38.474Z\n"
-"PO-Revision-Date: 2018-08-14T12:57:38.475Z\n"
+"POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
+"PO-Revision-Date: 2018-08-22T14:33:31.467Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -213,6 +213,9 @@ msgid "Could not get organisation unit"
 msgstr ""
 
 msgid "Program doesn't exist"
+msgstr ""
+
+msgid "Selected program is invalid for registering unit"
 msgstr ""
 
 msgid "Select a registering unit and program above to get started"

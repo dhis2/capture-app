@@ -81,6 +81,12 @@ import {
     goBackToListContext,
 } from 'capture-core/components/QuickSelector/epics/setSelection.epics';
 import {
+    resetProgramAfterSettingOrgUnitIfApplicableEpic,
+} from 'capture-core/components/Pages/epics/resetProgramAfterSettingOrgUnitIfApplicable.epic';
+import {
+    calculateSelectionsCompletenessEpic,
+} from 'capture-core/components/Pages/epics/calculateSelectionsCompleteness.epic';
+import {
     mainPageSelectorUpdateURLEpic,
 } from 'capture-core/components/Pages/MainPage/MainPageSelector/MainPageSelector.epics';
 import {
@@ -101,6 +107,8 @@ import {
 import { loadStartupData } from '../init/entry.epics';
 
 export default combineEpics(
+    resetProgramAfterSettingOrgUnitIfApplicableEpic,
+    calculateSelectionsCompletenessEpic,
     loadStartupData,
     mainSelectionsCompletedEpic,
     orgUnitDataRetrivedEpic,

@@ -34,10 +34,17 @@ export const selectionsFromUrlValidationForNewEventEpic = (action$: InputObserva
     // $FlowSuppress
     action$.ofType(actionTypes.SET_ORG_UNIT_BASED_ON_URL, actionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL)
         .map(() => {
-            const { programId } = store.getState().currentSelections;
+            const { programId, orgUnitId } = store.getState().currentSelections;
 
-            if (programId && !programCollection.has(programId)) {
-                return invalidSelectionsFromUrl(i18n.t("Program doesn't exist"));
+            if (programId) {
+                const program = programCollection.get(programId);
+                if (!program) {
+                    return invalidSelectionsFromUrl(i18n.t("Program doesn't exist"));
+                }
+
+                if (orgUnitId && !program.organisationUnits[orgUnitId]) {
+                    return invalidSelectionsFromUrl(i18n.t('Selected program is invalid for registering unit'));
+                }
             }
 
             return validSelectionsFromUrl();

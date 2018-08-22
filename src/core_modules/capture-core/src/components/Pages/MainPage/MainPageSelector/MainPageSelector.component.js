@@ -39,16 +39,26 @@ class MainPageSelector extends Component<Props> {
     }
 
     render() {
+        const {
+            onSetOrgUnit,
+            onResetOrgUnitId,
+            onSetProgramId,
+            onResetProgramId,
+            onSetCategoryOption,
+            onResetCategoryOption,
+            onResetAllCategoryOptions,
+        } = this.props;
+
         return (
             <div>
                 <QuickSelector
-                    onSetOrgUnit={this.props.onSetOrgUnit}
-                    onResetOrgUnitId={this.props.onResetOrgUnitId}
-                    onSetProgramId={this.props.onSetProgramId}
-                    onResetProgramId={this.props.onResetProgramId}
-                    onSetCategoryOption={this.props.onSetCategoryOption}
-                    onResetCategoryOption={this.props.onResetCategoryOption}
-                    onResetAllCategoryOptions={this.props.onResetAllCategoryOptions}
+                    onSetOrgUnit={onSetOrgUnit}
+                    onResetOrgUnitId={onResetOrgUnitId}
+                    onSetProgramId={onSetProgramId}
+                    onResetProgramId={onResetProgramId}
+                    onSetCategoryOption={onSetCategoryOption}
+                    onResetCategoryOption={onResetCategoryOption}
+                    onResetAllCategoryOptions={onResetAllCategoryOptions}
                     onStartAgain={this.handleStartAgain}
                     onClickNew={this.handleClickNew}
                 />
