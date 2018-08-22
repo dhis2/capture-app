@@ -13,7 +13,6 @@ import {
 } from './mainSelections.actions';
 import { actionTypes as mainPageSelectorActionTypes } from '../MainPage/MainPageSelector/MainPageSelector.actions';
 import programCollection from '../../../metaDataMemoryStores/programCollection/programCollection';
-import { orgUnitCouldNotBeRetrievedOnUrlUpdate } from '../EditEvent/editEvent.actions';
 
 export const mainSelectionsCompletedEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
