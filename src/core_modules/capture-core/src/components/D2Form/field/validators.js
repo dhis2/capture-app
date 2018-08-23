@@ -180,4 +180,3 @@ export default function getValidators(metaData: MetaDataElement) {
     const builders = [buildCompulsoryValidator, buildTypeValidators];
     return compose(builders, metaData);
 }
-0
