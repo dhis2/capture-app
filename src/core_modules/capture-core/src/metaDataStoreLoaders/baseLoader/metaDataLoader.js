@@ -35,7 +35,7 @@ function loadCoreMetaData(storageContainer: StorageContainer) {
 
 async function openStorageContainer() {
     const objectStoreList = Object.keys(objectStores).map(key => objectStores[key]);
-    const storageContainer = new StorageContainer('metaData', [IndexedDBAdapter, LocalStorageAdapter], objectStoreList);
+    const storageContainer = new StorageContainer('dhis2ca', [IndexedDBAdapter, LocalStorageAdapter], objectStoreList);
     setStorageContainer(storageContainer);
     await storageContainer.open();
     return storageContainer;
