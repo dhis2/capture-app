@@ -5,6 +5,7 @@ import {
     noWorkingListUpdateNeededAfterUpdateCancelled,
     updateWorkingListAfterUpdateCancelled,
 } from '../editEventDataEntry.actions';
+import isSelectionsEqual from '../../../../App/isSelectionsEqual';
 
 export const cancelEditEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
@@ -13,6 +14,10 @@ export const cancelEditEventEpic = (action$: InputObservable, store: ReduxStore)
             const state = store.getState();
             const listSelections = state.workingListsContext.main;
             if (!listSelections) {
+                return updateWorkingListAfterUpdateCancelled();
+            }
+            const currentSelections = state.currentSelections;
+            if (currentSelections.complete && !isSelectionsEqual(listSelections, currentSelections)) {
                 return updateWorkingListAfterUpdateCancelled();
             }
             return noWorkingListUpdateNeededAfterUpdateCancelled();

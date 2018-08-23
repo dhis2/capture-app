@@ -13,7 +13,7 @@ const styles = (theme: Theme) => ({
         fontSize: theme.typography.pxToRem(12),
     },
     warning: {
-        color: theme.palette.warning.main,
+        color: theme.palette.warning.dark,
         fontSize: theme.typography.pxToRem(12),
     },
     info: {

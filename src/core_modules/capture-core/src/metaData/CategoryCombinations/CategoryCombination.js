@@ -39,4 +39,8 @@ export default class CategoryCombination {
     set categories(categories: Array<Category>) {
         this._categories = categories;
     }
+
+    getCategoryForOptionId(optionId: string) {
+        return this.categories.find(category => !!category.getOption(optionId));
+    }
 }

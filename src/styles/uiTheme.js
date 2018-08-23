@@ -24,8 +24,8 @@ const theme = createMuiTheme({
         warning: {
             ...yellow,
             light: yellow[300],
-            main: yellow[500],
-            dark: yellow[700],
+            main: yellow[600],
+            dark: yellow[900],
         },
     },
 });

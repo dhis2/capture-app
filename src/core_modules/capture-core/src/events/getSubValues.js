@@ -19,7 +19,11 @@ const subValueGetterByElementType = {
 };
 
 
-export async function getSubValues(eventId: string, programStage: RenderFoundation, values: Object) {
+export async function getSubValues(eventId: string, programStage: RenderFoundation, values?: ?Object) {
+    if (!values) {
+        return null;
+    }
+
     const elementsById = programStage.getElementsById();
 
     return Object.keys(values).reduce(async (accValuesPromise, metaElementId) => {

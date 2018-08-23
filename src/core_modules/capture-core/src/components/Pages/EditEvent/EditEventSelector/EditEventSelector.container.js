@@ -2,7 +2,18 @@
 import { connect } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
 import EditEventSelector from './EditEventSelector.component';
-import { resetOrgUnitIdFromEditEventPage, setOrgUnitFromEditEventPage, setProgramIdFromEditEventPage, resetProgramIdFromEditEventPage, setCategoryOptionFromEditEventPage, resetCategoryOptionFromEditEventPage, resetAllCategoryOptionsFromEditEventPage, openNewEventPageFromEditEventPage, batchActionTypes } from './EditEventSelector.actions';
+import {
+    resetOrgUnitIdFromEditEventPage,
+    setOrgUnitFromEditEventPage,
+    setProgramIdFromEditEventPage,
+    resetProgramIdFromEditEventPage,
+    setCategoryOptionFromEditEventPage,
+    resetCategoryOptionFromEditEventPage,
+    resetAllCategoryOptionsFromEditEventPage,
+    openNewEventPageFromEditEventPage,
+    batchActionTypes,
+} from './EditEventSelector.actions';
+import { resetProgramIdBase } from '../../../QuickSelector/actions/QuickSelector.actions';
 
 const mapStateToProps = (state: ReduxState) => ({
     selectedProgramId: state.currentSelections.programId,
@@ -36,6 +47,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
             resetOrgUnitIdFromEditEventPage(),
             resetProgramIdFromEditEventPage(),
             resetAllCategoryOptionsFromEditEventPage(),
+            resetProgramIdBase(),
         ], batchActionTypes.START_AGAIN));
     },
     onResetProgramId: (baseAction: ReduxAction<any, any>) => {

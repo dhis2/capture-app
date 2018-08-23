@@ -52,6 +52,9 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
         editEventSelectorActionTypes.OPEN_NEW_EVENT,
         mainPageSelectorActionTypes.OPEN_NEW_EVENT,
         newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
+        newEventSelectorTypes.SET_PROGRAM_ID,
+        newEventSelectorTypes.SET_ORG_UNIT,
+        newEventSelectorTypes.SET_CATEGORY_OPTION,
         newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH)
         .map(() => {
             const state = store.getState();
@@ -140,6 +143,7 @@ export const runRulesForSingleEventEpic = (action$: InputObservable, store: Redu
                     payload.formId,
                     orgUnit,
                     currentEventData,
+                    [currentEventData],
                 );
             }
 

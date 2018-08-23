@@ -89,7 +89,8 @@ export const openEventForEditInDataEntry =
                     eventId: eventContainer.event.eventId,
                 },
             );
-
+        
+        const eventDataForRulesEngine = { ...eventContainer.event, ...eventContainer.values };
         return [
             ...dataEntryActions,
             ...getRulesActionsForEvent(
@@ -97,7 +98,9 @@ export const openEventForEditInDataEntry =
                 foundation,
                 key,
                 orgUnit,
-                { ...eventContainer.event, ...eventContainer.values }),
+                eventDataForRulesEngine,
+                [eventDataForRulesEngine],
+            ),
             actionCreator(actionTypes.OPEN_EVENT_FOR_EDIT_IN_DATA_ENTRY)(),
         ];
     };

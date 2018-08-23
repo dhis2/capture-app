@@ -1,4 +1,5 @@
 // @flow
+import programCollection from '../../metaDataMemoryStores/programCollection/programCollection';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import { actionTypes as mainSelectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
@@ -32,6 +33,33 @@ const setOrgUnit = (state, action) => {
         complete: false,
     };
     return newState;
+};
+
+const buildCategoriesFromEvent = (event: CaptureClientEvent) => {
+    const optionIdsFromEvent = event.attributeCategoryOptions;
+    if (!optionIdsFromEvent) {
+        return null;
+    }
+
+    const program = programCollection.get(event.programId);
+    if (!program) {
+        return null;
+    }
+
+    const categoryCombination = program.categoryCombination;
+    if (!categoryCombination) {
+        return null;
+    }
+
+    const optionIdsArray = optionIdsFromEvent.split(';');
+    return optionIdsArray
+        .reduce((accCategories, optionId) => {
+            const category = categoryCombination.getCategoryForOptionId(optionId);
+            if (category) {
+                accCategories[category.id] = optionId;
+            }
+            return accCategories;
+        }, {});
 };
 
 export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => createReducerDescription({
@@ -81,10 +109,13 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     },
     [editEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
         const payload = action.payload;
+        const event = payload.eventContainer.event;
+        const categories = buildCategoriesFromEvent(event);
         const newState = {
             ...state,
-            programId: payload.eventContainer.event.programId,
-            orgUnitId: payload.eventContainer.event.orgUnitId,
+            programId: event.programId,
+            orgUnitId: event.orgUnitId,
+            categories,
             complete: true,
         };
 

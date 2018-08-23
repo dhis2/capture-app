@@ -48,6 +48,7 @@ declare type CaptureClientEvent = {
     eventDate: string,
     dueDate: string,
     completedDate: string,
+    attributeCategoryOptions?: ?string,
 };
 
 declare type UiEventData = {
@@ -80,6 +81,11 @@ declare type Theme = {
             main: string,
             dark: string,
             contrastText: string,
+        },
+        warning: {
+            light: string,
+            main: string,
+            dark: string,
         },
         grey: {
             '50': string,

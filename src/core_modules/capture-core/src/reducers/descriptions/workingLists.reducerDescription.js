@@ -509,6 +509,49 @@ export const workingListsContextDesc = createReducerDescription({
         newState[action.payload.listId] = action.payload.selections;
         return newState;
     },
+    [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: (state) => {
+        const newState = {
+            ...state,
+            main: null,
+        };
+        return newState;
+    },
+    [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: (state, action) => {
+        const payload = action.payload;
+        const nextProgramId = payload.nextProps.programId;
+        const prevProgramId = payload.prevProps.programId;
+        if (nextProgramId !== prevProgramId) {
+            return {
+                ...state,
+                main: null,
+            };
+        }
+        return state;
+    },
+    [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
+        const payload = action.payload;
+        const nextProgramId = payload.nextProps.programId;
+        const prevProgramId = payload.prevProps.programId;
+        if (nextProgramId !== prevProgramId) {
+            return {
+                ...state,
+                main: null,
+            };
+        }
+        return state;
+    },
+    [editEventSelectorActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
+        const payload = action.payload;
+        const nextProgramId = payload.eventContainer.event.programId;
+        const prevProgramId = payload.prevProgramId;
+        if (nextProgramId !== prevProgramId) {
+            return {
+                ...state,
+                main: null,
+            };
+        }
+        return state;
+    },
 }, 'workingListsContext');
 
 const updateFiltersEditOnUrlUpdate = (state, action) => {

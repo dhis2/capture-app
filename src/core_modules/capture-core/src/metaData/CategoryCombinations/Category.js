@@ -39,4 +39,8 @@ export default class Category {
     set categoryOptions(options: ?Array<Option>) {
         this._options = options;
     }
+
+    getOption(optionId: string) {
+        return this.categoryOptions && this.categoryOptions.find(option => option.id === optionId);
+    }
 }

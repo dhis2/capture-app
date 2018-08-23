@@ -97,6 +97,7 @@ export const runRulesForEditSingleEventEpic = (action$: InputObservable, store: 
                     payload.formId,
                     orgUnit,
                     currentEventData,
+                    [currentEventData],
                 );
             }
 
