@@ -12,6 +12,13 @@ export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) 
     action$.ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE)
         .map(() => {
             const state = store.getState();
+            const recentlyAddedEventsCount = Object
+                .keys(state.recentlyAddedEvents)
+                .length;
+            if (recentlyAddedEventsCount > 0) {
+                return cancelNewEventUpdateWorkingList();
+            }
+
             const listSelections = state.workingListsContext.main;
             if (!listSelections) {
                 return cancelNewEventUpdateWorkingList();

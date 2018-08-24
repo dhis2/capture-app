@@ -124,10 +124,13 @@ class FormBuilder extends React.Component<Props> {
         if (newProps.id !== this.props.id) {
             this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
         } else {
-            this.asyncUIState = FormBuilder.updateAsyncUIState(this.props.fieldsUI, newProps.fieldsUI, this.asyncUIState);
+            this.asyncUIState =
+                FormBuilder.updateAsyncUIState(this.props.fieldsUI, newProps.fieldsUI, this.asyncUIState);
         }
 
-        if (this.props.validateIfNoUIData && newProps.id !== this.props.id) {
+        if (this.props.validateIfNoUIData &&
+            (newProps.id !== this.props.id || newProps.fields.length !== Object.keys(newProps.fieldsUI).length)
+        ) {
             this.props.onFieldsValidated(this.validateAllFields(), this.props.id);
         }
     }

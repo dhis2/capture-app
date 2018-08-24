@@ -11,12 +11,35 @@ import {
     resetCategoryOptionFromNewEventPage,
     resetAllCategoryOptionsFromNewEventPage,
     batchActionTypes,
+    resetDataEntry,
 } from './NewEventSelector.actions';
 import { resetProgramIdBase } from '../../../QuickSelector/actions/QuickSelector.actions';
 
-const mapStateToProps = (state: ReduxState) => ({
-    
-});
+const newEventDataEntryHasChanges = (state: ReduxState) => {
+    const formValues = state.formsValues['singleEvent-newEvent'];
+    const formHasChanges = Object
+        .keys(formValues)
+        .some(key => formValues[key]);
+
+    if (formHasChanges) {
+        return true;
+    }
+
+    const dataEntryValues = state.dataEntriesFieldsValue['singleEvent-newEvent'];
+    const dataEntryHasChanges = Object
+        .keys(dataEntryValues)
+        .some(key => dataEntryValues[key]);
+
+    return dataEntryHasChanges;
+};
+
+const mapStateToProps = (state: ReduxState) => {
+    const formInputInProgess = state.currentSelections.complete && newEventDataEntryHasChanges(state);
+    return {
+        selectionsIsComplete: state.currentSelections.complete,
+        formInputInProgess,
+    };
+};
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onSetOrgUnit: (id: string, orgUnit: Object) => {
@@ -51,6 +74,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
             resetAllCategoryOptionsFromNewEventPage(),
             baseAction,
         ], batchActionTypes.RESET_PROGRAM_AND_CATEGORY_OPTION));
+    },
+    onResetDataEntry: () => {
+        dispatch(resetDataEntry());
     },
 });
 

@@ -1,18 +1,11 @@
 // @flow
 import { actionCreator } from '../../../../actions/actions.utils';
-import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
-import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
-import {
-    getRulesActionsForEvent,
-} from '../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
-import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
-import EventProgram from '../../../../metaData/Program/EventProgram';
 import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
-import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 
 export const batchActionTypes = {
     UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH: 'UpdateFieldForNewSingleEventActionsBatch',
     OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH: 'OpenNewEventInDataEntryActionsBatch',
+    RESET_DATA_ENTRY_ACTIONS_BATCH: 'ResetDataEntryForNewEventActionsBatch',
     RULES_EFFECTS_ACTIONS_BATCH: 'RulesEffectsForNewSingleEventActionsBatch',
     SAVE_NEW_EVENT_ADD_ANOTHER_BATCH: 'SaveNewEventAddAnotherBatch',
 };
@@ -36,81 +29,16 @@ export const actionTypes = {
     NEW_EVENT_SAVED_ADD_ANOTHER: 'NewEventSavedAddAnother',
     SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER: 'SaveFailedForNewEventAddAnother',
     SET_NEW_EVENT_SAVE_TYPES: 'SetNewEventSaveTypes',
+    RESET_DATA_ENTRY: 'ResetDataEntryForNewEvent',
 };
-
-function convertStatusIn(value: string) {
-    if (value === 'COMPLETED') {
-        return 'true';
-    }
-    return null;
-}
-
-function convertStatusOut(dataEntryValue: string, prevValue: string) {
-    if (dataEntryValue === 'true' && prevValue !== 'COMPLETED') {
-        return 'COMPLETED';
-    }
-
-    if (!dataEntryValue && prevValue === 'COMPLETED') {
-        return 'ACTIVE';
-    }
-    return prevValue;
-}
-
-function convertNoteOut(dataEntryValue: string, prevValue: string) {
-    return dataEntryValue ? [{ value: dataEntryValue }] : [];
-}
-function convertNoteIn(dataEntryValue: any) {
-    if (Array.isArray(dataEntryValue) && dataEntryValue.length > 0) {
-        return dataEntryValue[0].value;
-    }
-    return null;
-}
-
-export const openNewEventInDataEntry =
-    (program: ?EventProgram, foundation: ?RenderFoundation, orgUnit: Object) => {
-        const dataEntryId = 'singleEvent';
-        const itemId = 'newEvent';
-        const dataEntryPropsToInclude = [
-            {
-                id: 'eventDate',
-                type: 'DATE',
-                validatorContainers: getEventDateValidatorContainers(),
-            },
-            {
-                inId: 'notes',
-                outId: 'notes',
-                onConvertIn: convertNoteIn,
-                onConvertOut: convertNoteOut,
-            },
-            {
-                inId: 'status',
-                outId: 'complete',
-                onConvertIn: convertStatusIn,
-                onConvertOut: convertStatusOut,
-            },
-        ];
-        const formId = getDataEntryKey(dataEntryId, itemId);
-        const dataEntryActions = loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude);
-
-        const rulesActions = getRulesActionsForEvent(
-            program,
-            foundation,
-            formId,
-            orgUnit,
-        );
-
-        return [
-            ...dataEntryActions,
-            ...rulesActions,
-            actionCreator(actionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY)(),
-        ];
-    };
 
 export const startRunRulesOnUpdateForNewSingleEvent = (actionData: { payload: Object}) =>
     actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)(actionData);
 
 export const requestSaveNewEventAndReturnToMainPage = (eventId: string, dataEntryId: string, formFoundation: Object) =>
-    actionCreator(actionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)({ eventId, dataEntryId, formFoundation }, { skipLogging: ['formFoundation'] });
+    actionCreator(actionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)(
+        { eventId, dataEntryId, formFoundation }, { skipLogging: ['formFoundation'] },
+    );
 
 export const startSaveNewEventAfterReturnedToMainPage = (serverData: Object, selections: Object) =>
     actionCreator(actionTypes.START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE)({ selections }, {

@@ -1,5 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
+import programCollection from '../../../../metaDataMemoryStores/programCollection/programCollection';
 import { batchActions } from 'redux-batched-actions';
 import EditEventSelector from './EditEventSelector.component';
 import {
@@ -15,9 +16,40 @@ import {
 } from './EditEventSelector.actions';
 import { resetProgramIdBase } from '../../../QuickSelector/actions/QuickSelector.actions';
 
+const editEventDataEntryHasChanges = (state: ReduxState) => {
+    const program = programCollection.get(state.currentSelections.programId);
+    if (!program) {
+        return false;
+    }
+
+    const key = 'singleEvent-editEvent';
+    // $FlowSuppress
+    const formIsModified = Array.from(program.getStage().sections.values())
+        .some((section) => {
+            const sectionId = section.id;
+            const sectionKey = `${key}-${sectionId}`;
+            const sectionData = state.formsSectionsFieldsUI[sectionKey];
+            return Object
+                .keys(sectionData)
+                .some(elementKey => sectionData[elementKey].modified);
+        });
+
+    if (formIsModified) {
+        return true;
+    }
+
+    const UIDataForDataValues = state.dataEntriesFieldsUI[key];
+    const dataEntryIsModified = Object
+        .keys(UIDataForDataValues)
+        .some(elementKey => UIDataForDataValues[elementKey].modified);
+
+    return dataEntryIsModified;
+};
+
 const mapStateToProps = (state: ReduxState) => ({
     selectedProgramId: state.currentSelections.programId,
     selectedOrgUnitId: state.currentSelections.orgUnitId,
+    formInputInProgress: state.currentSelections.complete && editEventDataEntryHasChanges(state),
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({

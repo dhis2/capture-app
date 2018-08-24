@@ -242,7 +242,7 @@ export const dataEntriesFieldsUIDesc = createReducerDescription({
         const key = getDataEntryKey(payload.dataEntryId, payload.itemId);
         newState[key] = { ...newState[key] };
         const dataEntryValuesUI = newState[key];
-        dataEntryValuesUI[payload.fieldId] = { ...dataEntryValuesUI[payload.fieldId], ...payload.valueMeta };
+        dataEntryValuesUI[payload.fieldId] = { ...dataEntryValuesUI[payload.fieldId], ...payload.valueMeta, modified: true };
         return newState;
     },
 }, 'dataEntriesFieldsUI');

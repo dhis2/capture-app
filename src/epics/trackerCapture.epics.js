@@ -17,6 +17,7 @@ import {
 } from 'capture-core/components/Pages/NewEvent/epics/newEvent.epics';
 import {
     openNewEventInDataEntryEpic,
+    resetDataEntryForNewEventEpic,
     resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
     runRulesForSingleEventEpic,
 } from 'capture-core/components/Pages/NewEvent/DataEntry/epics/newEventDataEntry.epics';
@@ -125,6 +126,7 @@ export default combineEpics(
     selectionsFromUrlValidationForNewEventEpic,
     openNewEventPageLocationChangeEpic,
     openNewEventInDataEntryEpic,
+    resetDataEntryForNewEventEpic,
     resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
     runRulesForSingleEventEpic,
     saveNewEventLocationChangeEpic,

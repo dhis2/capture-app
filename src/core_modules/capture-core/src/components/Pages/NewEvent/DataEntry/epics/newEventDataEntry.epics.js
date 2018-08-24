@@ -11,10 +11,13 @@ import {
 import {
     actionTypes as newEventDataEntryActionTypes,
     batchActionTypes as newEventDataEntryBatchActionTypes,
-    openNewEventInDataEntry,
     selectionsNotCompleteOpeningNewEvent,
     batchActionTypes,
 } from '../newEventDataEntry.actions';
+import {
+    openNewEventInDataEntry,
+    resetDataEntry,
+} from '../newEventDataEntryLoad.actionBatchs';
 import {
     getRulesActionsForEvent,
 } from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
@@ -46,6 +49,35 @@ const errorMessages = {
     PROGRAM_OR_STAGE_NOT_FOUND: 'Program or stage not found',
 };
 
+
+export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
+    // $FlowSuppress
+    action$.ofType(
+        newEventSelectorTypes.OPEN_NEW_EVENT_FROM_NEW_EVENT_PAGE,
+        newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH,
+    )
+        .map(() => {
+            const state = store.getState();
+            const programId = state.currentSelections.programId;
+            const orgUnitId = state.currentSelections.orgUnitId;
+            const orgUnit = state.organisationUnits[orgUnitId];
+            const metadataContainer = getProgramAndStageFromProgramId(programId);
+            if (metadataContainer.error) {
+                log.error(
+                    errorCreator(
+                        errorMessages.PROGRAM_OR_STAGE_NOT_FOUND)(
+                        { method: 'resetDataEntryForNewEventEpic' }),
+                );
+            }
+
+            return batchActions(
+                // $FlowSuppress
+                [...resetDataEntry(metadataContainer.program, metadataContainer.stage, orgUnit)],
+                batchActionTypes.RESET_DATA_ENTRY_ACTIONS_BATCH,
+            );
+        });
+
+
 export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
     action$.ofType(
@@ -55,7 +87,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
         newEventSelectorTypes.SET_PROGRAM_ID,
         newEventSelectorTypes.SET_ORG_UNIT,
         newEventSelectorTypes.SET_CATEGORY_OPTION,
-        newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH)
+    )
         .map(() => {
             const state = store.getState();
             const selectionsComplete = state.currentSelections.complete;
@@ -76,9 +108,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
 
             return batchActions(
                 // $FlowSuppress
-                [...openNewEventInDataEntry(metadataContainer.program, metadataContainer.stage, orgUnit),
-
-                ],
+                [...openNewEventInDataEntry(metadataContainer.program, metadataContainer.stage, orgUnit)],
                 batchActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH,
             );
         });

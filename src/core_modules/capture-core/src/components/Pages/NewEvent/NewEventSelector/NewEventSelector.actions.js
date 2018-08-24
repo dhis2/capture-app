@@ -9,6 +9,7 @@ export const actionTypes = {
     SET_CATEGORY_OPTION: 'setCategoryOptionFromNewEventPage',
     RESET_CATEGORY_OPTION: 'resetCategoryOptionFromNewEventPage',
     RESET_ALL_CATEGORY_OPTIONS: 'resetAllCategoryOptionsFromNewEventPage',
+    OPEN_NEW_EVENT_FROM_NEW_EVENT_PAGE: 'OpenNewEventFromNewEventPage',
 };
 
 export const batchActionTypes = {
@@ -36,3 +37,6 @@ export const resetCategoryOptionFromNewEventPage =
 
 export const resetAllCategoryOptionsFromNewEventPage =
     () => actionCreator(actionTypes.RESET_ALL_CATEGORY_OPTIONS)();
+
+export const resetDataEntry =
+    () => actionCreator(actionTypes.OPEN_NEW_EVENT_FROM_NEW_EVENT_PAGE)();

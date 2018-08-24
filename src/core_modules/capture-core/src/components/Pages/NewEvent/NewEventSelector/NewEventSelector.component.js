@@ -16,6 +16,9 @@ type Props = {
     onResetAllCategoryOptions: () => void,
     onStartAgain: () => void,
     onResetProgramId: (baseAction: ReduxAction<any, any>) => void,
+    selectionsIsComplete: boolean,
+    formInputInProgess: boolean,
+    onResetDataEntry: () => void,
 };
 
 type State = {
@@ -66,24 +69,45 @@ class EditEventSelector extends Component<Props, State> {
     }
 
     handleOpenStartAgainWarning() {
+        if (!this.props.formInputInProgess) {
+            this.props.onStartAgain();
+            return;
+        }
         this.setState({ openStartAgainWarning: true });
     }
 
     handleOpenOrgUnitWarning() {
+        if (!this.props.formInputInProgess) {
+            this.props.onResetOrgUnitId();
+            return;
+        }
         this.setState({ openOrgUnitWarning: true });
     }
 
     handleOpenProgramWarning(baseAction: ReduxAction<any, any>) {
+        if (!this.props.formInputInProgess) {
+            this.props.onResetProgramId(baseAction);
+            return;
+        }
         this.setState({ openProgramWarning: baseAction });
     }
 
     handleOpenCatComboWarning(categoryId) {
+        if (!this.props.formInputInProgess) {
+            this.props.onResetCategoryOption(categoryId);
+            return;
+        }
         this.setState({ openCatComboWarning: true, categoryIdToReset: categoryId });
     }
 
-
     handleClose() {
-        this.setState({ openStartAgainWarning: false, openOrgUnitWarning: false, openProgramWarning: null, openCatComboWarning: false, openNewEventWarning: false });
+        this.setState({
+            openStartAgainWarning: false,
+            openOrgUnitWarning: false,
+            openProgramWarning: null,
+            openCatComboWarning: false,
+            openNewEventWarning: false,
+        });
     }
 
     handleAcceptStartAgain() {
@@ -107,11 +131,14 @@ class EditEventSelector extends Component<Props, State> {
     }
 
     handleClickNew() {
+        if (!this.props.formInputInProgess) {
+            return;
+        }
         this.setState({ openNewEventWarning: true });
     }
 
     handleAcceptNew() {
-        this.props.onStartAgain();
+        this.props.onResetDataEntry();
         this.handleClose();
     }
 

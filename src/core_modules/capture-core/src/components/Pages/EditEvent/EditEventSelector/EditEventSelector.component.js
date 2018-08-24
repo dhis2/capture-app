@@ -19,6 +19,7 @@ type Props = {
     onOpenNewEventPage: (programId: string, orgUnitId: string) => void,
     onStartAgain: () => void,
     onResetProgramId: (baseAction: ReduxAction<any, any>) => void,
+    formInputInProgress: boolean,
 };
 
 type State = {
@@ -69,24 +70,45 @@ class EditEventSelector extends Component<Props, State> {
     }
 
     handleOpenStartAgainWarning() {
+        if (!this.props.formInputInProgress) {
+            this.props.onStartAgain();
+            return;
+        }
         this.setState({ openStartAgainWarning: true });
     }
 
     handleOpenOrgUnitWarning() {
+        if (!this.props.formInputInProgress) {
+            this.props.onResetOrgUnitId();
+            return;
+        }
         this.setState({ openOrgUnitWarning: true });
     }
 
     handleOpenProgramWarning(baseAction: ReduxAction<any, any>) {
+        if (!this.props.formInputInProgress) {
+            this.props.onResetProgramId(baseAction);
+            return;
+        }
         this.setState({ openProgramWarning: baseAction });
     }
 
     handleOpenCatComboWarning(categoryId) {
+        if (!this.props.formInputInProgress) {
+            this.props.onResetCategoryOption(categoryId);
+            return;
+        }
         this.setState({ openCatComboWarning: true, categoryIdToReset: categoryId });
     }
 
 
     handleClose() {
-        this.setState({ openStartAgainWarning: false, openOrgUnitWarning: false, openProgramWarning: false, openCatComboWarning: false, openNewWarning: false });
+        this.setState({
+            openStartAgainWarning: false,
+            openOrgUnitWarning: false,
+            openProgramWarning: null,
+            openCatComboWarning: false,
+            openNewWarning: false });
     }
 
     handleAcceptStartAgain() {
@@ -110,6 +132,9 @@ class EditEventSelector extends Component<Props, State> {
     }
 
     handleClickNew() {
+        if (!this.props.formInputInProgress) {
+            this.props.onOpenNewEventPage(this.props.selectedProgramId, this.props.selectedOrgUnitId);
+        }
         this.setState({ openNewWarning: true });
     }
 
