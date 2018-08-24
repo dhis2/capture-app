@@ -66,7 +66,6 @@ class DownloadTable extends Component<Props, State> {
 
             categoryFilter += '&attributeCos=' + selectedOptionsString;
         }
-        console.log(categoryFilter);
 
         if (!programAndStageContainer.stage) {
             return null;
