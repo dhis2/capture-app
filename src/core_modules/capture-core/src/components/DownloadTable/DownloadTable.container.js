@@ -6,6 +6,7 @@ import DownloadTable from './DownloadTable.component';
 const mapStateToProps = (state: Object) => ({
     selectedProgramId: state.currentSelections.programId,
     selectedOrgUnitId: state.currentSelections.orgUnitId,
+    selectedCategoryOptions: state.currentSelections.categories,
 });
 
 // $FlowSuppress
