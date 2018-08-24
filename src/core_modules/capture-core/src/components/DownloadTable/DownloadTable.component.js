@@ -57,14 +57,14 @@ class DownloadTable extends Component<Props, State> {
         // Generate Category filter for URL.
         let categoryFilter = '';
         if (programAndStageContainer.program && programAndStageContainer.program.categoryCombination && selectedCategoryOptions) {
-            categoryFilter = '&attributeCc=' + programAndStageContainer.program.categoryCombination.id;
+            categoryFilter = `&attributeCc=${programAndStageContainer.program.categoryCombination.id}`;
 
-            let selectedOptionsString = "";
-            for (let key in selectedCategoryOptions) {
-                selectedOptionsString += selectedCategoryOptions[key] + ';';
-            }
+            let selectedOptionsString = '';
+            Object.keys(selectedCategoryOptions).forEach((key) => {
+                selectedOptionsString += `${selectedCategoryOptions[key]};`;
+            });
 
-            categoryFilter += '&attributeCos=' + selectedOptionsString;
+            categoryFilter += `&attributeCos=${selectedOptionsString}`;
         }
 
         if (!programAndStageContainer.stage) {
