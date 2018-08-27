@@ -20,6 +20,7 @@ type Props = {
     classes: Object,
     selectedOrgUnitId: string,
     selectedProgramId: string,
+    selectedCategoryOptions: { [key: string]: string },
 };
 
 type State = {
@@ -48,10 +49,24 @@ class DownloadTable extends Component<Props, State> {
 
     render() {
         const { anchorEl } = this.state;
-        const { classes, selectedProgramId } = this.props;
+        const { classes, selectedProgramId, selectedCategoryOptions } = this.props;
         const baseUrl = getApi().baseUrl;
 
         const programAndStageContainer = getProgramAndStageFromProgramId(selectedProgramId);
+
+        // Generate Category filter for URL.
+        let categoryFilter = '';
+        if (programAndStageContainer.program && programAndStageContainer.program.categoryCombination && selectedCategoryOptions) {
+            categoryFilter = `&attributeCc=${programAndStageContainer.program.categoryCombination.id}`;
+
+            let selectedOptionsString = '';
+            Object.keys(selectedCategoryOptions).forEach((key) => {
+                selectedOptionsString += `${selectedCategoryOptions[key]};`;
+            });
+
+            categoryFilter += `&attributeCos=${selectedOptionsString}`;
+        }
+
         if (!programAndStageContainer.stage) {
             return null;
         }
@@ -77,7 +92,7 @@ class DownloadTable extends Component<Props, State> {
                     <a
                         className={classes.menuButtons}
                         href={
-                            `${baseUrl}/events/query.json?orgUnit=${this.props.selectedOrgUnitId}&programStage=${selectedProgramStageId}&skipPaging=true`
+                            `${baseUrl}/events/query.json?orgUnit=${this.props.selectedOrgUnitId}&programStage=${selectedProgramStageId}${categoryFilter}&skipPaging=true`
                         }
                         download
                         tabIndex={-1}
@@ -87,7 +102,7 @@ class DownloadTable extends Component<Props, State> {
                     <a
                         className={classes.menuButtons}
                         href={
-                            `${baseUrl}/events/query.xml?orgUnit=${this.props.selectedOrgUnitId}&programStage=${selectedProgramStageId}&skipPaging=true`
+                            `${baseUrl}/events/query.xml?orgUnit=${this.props.selectedOrgUnitId}&programStage=${selectedProgramStageId}${categoryFilter}&skipPaging=true`
                         }
                         download
                         tabIndex={-1}
@@ -97,7 +112,7 @@ class DownloadTable extends Component<Props, State> {
                     <a
                         className={classes.menuButtons}
                         href={
-                            `${baseUrl}/events/query.csv?orgUnit=${this.props.selectedOrgUnitId}&programStage=${selectedProgramStageId}&skipPaging=true`
+                            `${baseUrl}/events/query.csv?orgUnit=${this.props.selectedOrgUnitId}&programStage=${selectedProgramStageId}${categoryFilter}&skipPaging=true`
                         }
                         download
                         tabIndex={-1}
