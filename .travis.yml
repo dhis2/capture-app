@@ -1,21 +1,17 @@
 language: node_js
 node_js:
-- node
+- '8'
 env:
   global:
   - CC_TEST_REPORTER_ID=99c53e7494b352df65334376e53eeb1cfa022afca8f90fefa15da1e59efa4879
-  - secure: dW8U0j8cxFbI8rqeirCvAPExtKO+0ZYmu/Xqx+06G7tocRbzfBF7qU4Fe+lQ/Xe1x9TkwesGtqm7FgS6fRVMD6DjotJfo4kyMgDeGFZXJWuhhOxKhT0wHiyFCKYT26MzJ6e288IKzSl6JCLo587DM0JutXGsmmVYsQOTrXWtHey85/7haEVHbZWIFJs9M4CuyYdipRXfE4TbzRDH5mUiw7qmMcxPUr5vEw1VCplrYG1pcPgT4miM78GuDWzTec33UqiRoLYssAMBFF1VS6ApVndEb/zbI4cV2tnunKrraDJrFk7IsE0MYRW8Ezsn/dhVg1kjd5Op9ovz7DAM2aKLztUjNLrRE3bDcEJiqXfwLn/2KmzFyeN8MrXzHXyXsxa9eBq341rFMz72XHm2n/5mQ1SYYuSxSzGvHa+Aqcp7v7RxidCYN/0acICUdhAasgyG5hfu4/HLHwtGeSRcce1eCkBhHPA/WdPxBaQLqcrHNk7RR0PzDVI0sYWtu6LFXcw1tvRndvBXiSnn6ZQPjwuabuhZrRmMYqpTWSkGOhD9yFG3yVvVOuomQ2wKUhW20Gpzho/z61s0U+eEYrDHQr044bs6f6AqYXtAEjxX3y4i9pSEbI5o+rQGymdhNZy/DkBGVr+YJLs77h+HRab6CKHipImLlUdxRQdzZNQyzOsJFjg=
-  - secure: OH2E3ZsRT0wBTepKv4rNQXQKdYLk8youInVTcjjegpvuhx7IQcoVmHuq9ipKII2j5TqSFxKM72600j4qiPyWu4kDULXLlshgDhNhxb6/uyjbE5a6gDhgtCGo4slDJgAeIoMGQ3wc4eK1Kfl4y6UL+jZdt8DOnkJuVOyDEy+3rVk6LeiU5fNC77LgTfHYqLfM0H3dwsNjQh8RSiNJw4cbQm1R8HP0u+n7VY3ZLs4uKiOIHRw/bgYHg/Mj8FisltjBmd+tlqrJqhciiTbUYC9cd3/AsnqIA7DxCf3gfCgjrApOyIY+fYjPGbt+Xhum7/5BhutALlZ5EyGZK/dVgyCcU+isqSXyvE52a+IjhZulaEffvi635kW5PAXr4VkTyJX27l9MGojjX57Ri21ipUSEdf0a5T/TAoQLJazsx8LOxsJTdo2e9WDc/xLQ3MYsqXmcXATCTbTUJkvnPzU5jOF6lhT5ZuJM5jBLo+viL/pWE0hkHgPpVEhKUSCr/n/g3j8iloD04f8cS3AnsWzTClpHeMC1PI0zcqevMRupUNkj7imQ/r7Pi+/CgXpHQUtRGZY6Q+tdY0M1/IsmN17ZgGb2Np07mkk91byTPn8jroeCXtaCYi0UCofM/MlNuL1E5suZs2cGY+ZT1wZjPAPL0aG1zt3wGcJe8kn9dhri8Vng22Q=
+  - secure: gRMnUgo6ludTP1BfUycfvdknIAt1jDh5MqZEPp3HvU6+QDda8PU0t0XS5qg9fbYiZ6vr8Aj2fDGXqg+VnLJiQmG13wb0mwrHJ7mf3tt2x0ezUuOt7mzQRTGbmXSH+z2c3w8oGB/Qj8J6ci10S4fINsp+IHtmUxvAmZplm7crqDfDTlOVm/7AhgK5QJxe3Dgu6bKWWBxvGAAjc4I2W3ZuY88mq0G3xKh+I6fBq5yVUmLyKIh/5kyPFwI3eM0DygQuremN5Y5SqXs/2yexNoLqJySYJV7HyPKlzushvlwMIsj40XDiqahffU2u+B1xvybMCDycml88sSoPSuu4QozvwmfNmIIr93hBL1yZI2FhIDl+gG+fcYC8jPtlgMP7Dqb/CXmXrqYMdQCjBUeNjP5n0p+jl+sjWFLehoGZwzI/y77COc8ZJqi96NCEp/qrkdabWJMqgIQIuYK3pP08+o3diz70HXjTiWSR0C1hvDOql3YlgmMw+aw+T0z/itQ65hJvmHZ1Ui8GJxnZoihl5ZzboMoYzBPPK2bEXEqLEromycaXYzDNVhorjkJcZGXSjZc6k5mtz0EbFTILv0upZPFCoLqY3z3x5vOXx/uMQLHC6ZWsCIkMjy05y6nndAMFAj/V6/ue4v4o+HpjMJFgVi/GjFCXp8u9c+mkG/qU6WG7+DE=
 before_script:
 - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
   > ./cc-test-reporter
 - chmod +x ./cc-test-reporter
 - "./cc-test-reporter before-build"
 script:
-- yarn build
+- npm run build
+- npm run deploy
 after_script:
 - "./cc-test-reporter after-build -d --exit-code $TRAVIS_TEST_RESULT"
-after_success:
-- if ( [ "$TRAVIS_BRANCH" == "master" ] || [ ! -z "$TRAVIS_TAG" ] ) && [ "$TRAVIS_REPO_SLUG"
-  == "dhis2/capture-app" ]  &&  [ "$TRAVIS_PULL_REQUEST" == "false" ] ; then mvn clean
-  deploy --settings deploy/settings.xml && exit 0; fi
