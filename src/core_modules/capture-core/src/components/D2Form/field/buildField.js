@@ -9,6 +9,7 @@ import D2Date from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import D2DateTime from '../../FormFields/DateAndTime/D2DateTime/D2DateTime.component';
 import D2File from '../../FormFields/File/D2File.component';
 import D2Image from '../../FormFields/Image/D2Image.component';
+import UsernameField from '../../FormFields/Username/Username.component';
 import D2PhoneNumber from '../../FormFields/PhoneNumber/PhoneNumber.component';
 import D2AgeField from '../../FormFields/AgeField/AgeField.component';
 import OrgUnitTree from '../../FormFields/OrgUnitTree/OrgUnitTree.component';
@@ -181,10 +182,29 @@ const getAgeField = (metaData: MetaDataElement, options: Object) => {
     }, metaData);
 };
 
+const getUsernameField = (metaData: MetaDataElement, options: Object) => {
+    return createFieldProps({
+        id: metaData.id,
+        component:
+            withGotoInterface()(
+                withHideCompatibility()(
+                    withDefaultShouldUpdateInterface()(
+                        withRequiredFieldCalculation()(
+                            withDefaultFieldContainer()(
+                                withDefaultMessages()(
+                                    withInternalChangeHandler()(UsernameField),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+    }, metaData);
+};
+
 const fieldForTypes = {
     [elementTypes.EMAIL]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
     [elementTypes.TEXT]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
-    [elementTypes.PHONE_NUMBER]: (metaData: MetaDataElement, options: Object) => getPhoneField(metaData, options),
     [elementTypes.LONG_TEXT]: (metaData: MetaDataElement, options: Object) => {
         const baseField = getBaseTextField(metaData, options);
         const props = { ...baseField.props, multiLine: true };
@@ -296,6 +316,10 @@ const fieldForTypes = {
             props,
         }, metaData);
     },
+    [elementTypes.TIME]: (metaData: MetaDataElement) => getBaseTextField(metaData),
+    [elementTypes.PERCENTAGE]: (metaData: MetaDataElement) => getBaseTextField(metaData),
+    [elementTypes.URL]: (metaData: MetaDataElement) => getBaseTextField(metaData),
+    [elementTypes.USERNAME]: (metaData: MetaDataElement) => getUsernameField(metaData),
     [elementTypes.TIME]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
     [elementTypes.PERCENTAGE]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
     [elementTypes.URL]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),

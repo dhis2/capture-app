@@ -26,6 +26,7 @@ const elementTypeCodes = [
     'ORGANISATION_UNIT',
     'IMAGE',
     'AGE',
+    'USERNAME',
     unknownTypeCode,
 ];
 

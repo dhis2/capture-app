@@ -16,6 +16,7 @@ import {
     isValidPercentage,
     isValidTime,
     isValidUrl,
+    isValidUsername,
     isValidAge,
     isValidPhoneNumber,
     isValidOrgUnit,
@@ -51,6 +52,7 @@ const errorMessages = {
     AGE: 'Please provide a valid age',
     PHONE_NUMBER: 'Please provide a valid phone number',
     ORGANISATION_UNIT: 'Please provide a valid organisation unit',
+    USERNAME: 'Please provide a valid username',
 };
 
 const isCompulsoryRequirementMet = Validators.wordToValidatorMap.get(wordValidatorKeys.COMPULSORY);
@@ -104,6 +106,10 @@ const validatorsForTypes = {
     [elementTypes.URL]: () => ({
         validator: isValidUrl,
         message: i18n.t(errorMessages.URL),
+    }),
+    [elementTypes.USERNAME]: () => ({
+        validator: isValidUsername,
+        message: i18n.t(errorMessages.USERNAME),
     }),
     [elementTypes.AGE]: () => ({
         validator: isValidAge,
