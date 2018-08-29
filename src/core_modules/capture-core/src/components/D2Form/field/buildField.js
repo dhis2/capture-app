@@ -2,7 +2,7 @@
 import log from 'loglevel';
 
 import errorCreator from '../../../utils/errorCreator';
-import TextField from '../../FormFields/Generic/D2TextField.component';
+import { TextFieldWithLabel as TextField } from '../../FormFields/New';
 import TrueFalse from '../../FormFields/Generic/D2TrueFalse.component';
 import TrueOnly from '../../FormFields/Generic/D2TrueOnly.component';
 import D2Date from '../../FormFields/DateAndTime/D2Date/D2Date.component';

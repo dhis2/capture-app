@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    align-items: center;
+    padding-top: 16px;
+    padding-right: 16px;
+    padding-bottom: 16px;
+}
+
+.labelContainer {
+    width: 250px;
+    padding-right: 16px;
+}
+
+.inputContainer {
+    flex-grow: 1;
+}
