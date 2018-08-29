@@ -66,28 +66,31 @@ const styles = theme => ({
     container: {
         flexGrow: 1,
         position: 'relative',
-        height: 250,
+        height: 32,
     },
     suggestionsContainerOpen: {
         position: 'absolute',
-        zIndex: 1,
+        zIndex: 1000,
         marginTop: theme.spacing.unit,
         left: 0,
         right: 0,
     },
     suggestion: {
         display: 'block',
+        color: 'rgba(0, 0, 0, 0.87)',
     },
     suggestionsList: {
         margin: 0,
         padding: 0,
         listStyleType: 'none',
+        maxHeight: 250,
+        overflow: 'hidden',
     },
 });
 
 class UsernameAutosuggest extends React.Component {
   state = {
-      value: '',
+      value: this.props.value || '',
       users: [],
   };
 
@@ -109,6 +112,14 @@ class UsernameAutosuggest extends React.Component {
 
   render() {
       const { classes } = this.props;
+      const { value } = this.state;
+      const suggestions = this.state.users.filter((u) => {
+          if (value.length === 0) {
+              return true;
+          }
+
+          return u.userCredentials.username.includes(value);
+      });
 
       return (
           <Autosuggest
@@ -119,7 +130,7 @@ class UsernameAutosuggest extends React.Component {
                   suggestion: classes.suggestion,
               }}
               renderInputComponent={renderInput}
-              suggestions={this.state.users}
+              suggestions={suggestions}
               onSuggestionsFetchRequested={() => null}
               onSuggestionsClearRequested={() => null}
               renderSuggestionsContainer={renderUsersContainer}
@@ -127,8 +138,8 @@ class UsernameAutosuggest extends React.Component {
               renderSuggestion={renderUser}
               inputProps={{
                   classes,
+                  value,
                   placeholder: 'search for username',
-                  value: this.state.value,
                   onChange: this.handleChange,
               }}
           />
