@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Autosuggest from 'react-autosuggest';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
+import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -122,27 +123,36 @@ class UsernameAutosuggest extends React.Component {
       });
 
       return (
-          <Autosuggest
-              theme={{
-                  container: classes.container,
-                  suggestionsContainerOpen: classes.suggestionsContainerOpen,
-                  suggestionsList: classes.suggestionsList,
-                  suggestion: classes.suggestion,
-              }}
-              renderInputComponent={renderInput}
-              suggestions={suggestions}
-              onSuggestionsFetchRequested={() => null}
-              onSuggestionsClearRequested={() => null}
-              renderSuggestionsContainer={renderUsersContainer}
-              getSuggestionValue={getUserValue}
-              renderSuggestion={renderUser}
-              inputProps={{
-                  classes,
-                  value,
-                  placeholder: 'search for username',
-                  onChange: this.handleChange,
-              }}
-          />
+          <div>
+              <FormLabel
+                  component="label"
+                  required={!!this.props.required}
+                  focused={false}
+              >
+                  {this.props.label}
+              </FormLabel>
+              <Autosuggest
+                  theme={{
+                      container: classes.container,
+                      suggestionsContainerOpen: classes.suggestionsContainerOpen,
+                      suggestionsList: classes.suggestionsList,
+                      suggestion: classes.suggestion,
+                  }}
+                  renderInputComponent={renderInput}
+                  suggestions={suggestions}
+                  onSuggestionsFetchRequested={() => null}
+                  onSuggestionsClearRequested={() => null}
+                  renderSuggestionsContainer={renderUsersContainer}
+                  getSuggestionValue={getUserValue}
+                  renderSuggestion={renderUser}
+                  inputProps={{
+                      classes,
+                      value,
+                      placeholder: 'search for username',
+                      onChange: this.handleChange,
+                  }}
+              />
+          </div>
       );
   }
 }
