@@ -2,7 +2,7 @@
 import log from 'loglevel';
 
 import errorCreator from '../../../utils/errorCreator';
-import { TextFieldWithLabel as TextField } from '../../FormFields/New';
+import { TextField } from '../../FormFields/New';
 import TrueFalse from '../../FormFields/Generic/D2TrueFalse.component';
 import TrueOnly from '../../FormFields/Generic/D2TrueOnly.component';
 import D2Date from '../../FormFields/DateAndTime/D2Date/D2Date.component';
@@ -30,6 +30,10 @@ import withDefaultMessages from './withDefaultMessages';
 import withHideCompatibility from './withHideCompatibility';
 import withGotoInterface from './withGotoInterface';
 import withRequiredFieldCalculation from './withRequiredFieldCalculation';
+import withLabel from '../../FormFields/New/HOC/withLabel';
+import withIsActiveHandler from './withIsActiveHandler';
+import withCalculateMessages from './messages/withCalculateMessages';
+import withDisplayMessages from './messages/withDisplayMessages';
 
 import type { Field } from '../../../__TEMP__/FormBuilderExternalState.component';
 
@@ -45,10 +49,20 @@ const convertPx = (options: Object, value: number) => {
     return pxToRem ? pxToRem(value) : value;
 };
 
+const baseComponentStyles = {
+    labelContainerStyle: {
+        flexBasis: 200,
+    },
+    inputContainerStyle: {
+        flexBasis: 150,
+    },
+};
+
 const getBaseComponentProps = () => ({
     style: {
         width: '100%',
     },
+    styles: baseComponentStyles,
 });
 
 const getBaseFieldProps = (metaData: MetaDataElement) => ({
@@ -56,10 +70,20 @@ const getBaseFieldProps = (metaData: MetaDataElement) => ({
     commitEvent: commitEvents.ON_BLUR,
 });
 
+const baseComponentStylesVertical = {
+    labelContainerStyle: {
+        width: 150,
+    },
+    inputContainerStyle: {
+        width: 150,
+    },
+};
+
 const getBaseFormHorizontalProps = (options: Object) => ({
     style: {
         width: convertPx(options, 150),
     },
+    styles: baseComponentStylesVertical,
 });
 
 const createComponentProps = (componentProps: Object, options: Object) => ({
@@ -87,9 +111,18 @@ const getBaseTextField = (metaData: MetaDataElement, options: Object) => {
                 withHideCompatibility()(
                     withDefaultShouldUpdateInterface()(
                         withRequiredFieldCalculation()(
-                            withDefaultFieldContainer()(
-                                withDefaultMessages()(
-                                    withInternalChangeHandler()(TextField),
+                            withIsActiveHandler()(
+                                withCalculateMessages()(
+                                    withDefaultFieldContainer()(
+                                        withLabel({
+                                            onGetUseVerticalOrientation: () => options.formHorizontal,
+                                            onGetFieldLabelMediaClass: () => options.fieldLabelMediaBasedClass,
+                                        })(
+                                            withDisplayMessages()(
+                                                withInternalChangeHandler()(TextField),
+                                            ),
+                                        ),
+                                    ),
                                 ),
                             ),
                         ),

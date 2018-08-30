@@ -34,8 +34,19 @@ theme.typography.formFieldTitle = {
     fontSize: theme.typography.pxToRem(12),
 };
 
-theme.palette.input = {
-    bottomLine: 'rgba(0, 0, 0, 0.42)',
+theme.palette = {
+    ...theme.palette,
+    accent: {
+        lighter: blue[50],
+        light: blue[100],
+        main: blue[300],
+        dark: blue[500],
+        contrastText: '#000000',
+    },
+    input: {
+        bottomLine: 'rgba(0, 0, 0, 0.42)',
+    },
+    dividerForm: '#f2f4f5',
 };
 
 export default theme;

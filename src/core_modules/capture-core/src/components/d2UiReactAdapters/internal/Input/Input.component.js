@@ -5,6 +5,7 @@ import defaultClasses from '../../../d2Ui/internal/input/input.mod.css';
 
 type Classes = {
     input?: ?string,
+    inputWrapper?: ?string,
 };
 
 type Props = {
@@ -16,11 +17,15 @@ const Input = (props: Props) => {
     const { classes, inputRef, ...passOnProps } = props;
 
     return (
-        <input
-            ref={inputRef}
-            className={classNames(defaultClasses.input, classes.input)}
-            {...passOnProps}
-        />
+        <div
+            className={classNames(defaultClasses.inputWrapper, classes.inputWrapper)}
+        >
+            <input
+                ref={inputRef}
+                className={classNames(defaultClasses.input, classes.input)}
+                {...passOnProps}
+            />
+        </div>
     );
 };
 

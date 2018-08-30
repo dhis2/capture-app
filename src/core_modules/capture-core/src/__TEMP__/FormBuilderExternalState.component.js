@@ -51,7 +51,7 @@ type Props = {
     validationAttempted?: ?boolean,
     validateIfNoUIData?: ?boolean,
     classes: Object,
-    formHorizontal: ?boolean,
+    onRenderSeparator: (index: number, total: number, field: Field) => ?React.Element<any>,
 };
 
 type FieldCommitOptions = {
@@ -247,9 +247,10 @@ class FormBuilder extends React.Component<Props> {
             onUpdateFieldAsync,
             onUpdateFieldUIOnly,
             validateIfNoUIData,
+            onRenderSeparator,
             ...passOnProps } = this.props;
 
-        return fields.map((field) => {
+        return fields.map((field, index) => {
             const props = field.props || {};
             const fieldUI = fieldsUI[field.id] || {};
             const value = values[field.id];
@@ -284,6 +285,8 @@ class FormBuilder extends React.Component<Props> {
                         {...passOnProps}
                         {...asyncProps}
                     />
+
+                    {onRenderSeparator && onRenderSeparator(index, fields.length, field)}
                 </div>
             );
         });

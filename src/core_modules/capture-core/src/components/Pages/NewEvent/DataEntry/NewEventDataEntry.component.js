@@ -50,6 +50,11 @@ const getStyles = theme => ({
         paddingTop: theme.typography.pxToRem(20),
         paddingBottom: theme.typography.pxToRem(15),
     },
+    fieldLabelMediaBased: {
+        [theme.breakpoints.up(481)]: {
+            paddingTop: 10,
+        },
+    },
 });
 
 const getSaveOptions = (props: Object) => {
@@ -186,11 +191,14 @@ type Props = {
 };
 
 class NewEventDataEntry extends Component<Props> {
-    fieldOptions: {theme: Theme };
+    fieldOptions: { theme: Theme };
 
     constructor(props: Props) {
         super(props);
-        this.fieldOptions = { theme: props.theme };
+        this.fieldOptions = {
+            theme: props.theme,
+            fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
+        };
     }
 
     componentWillMount() {

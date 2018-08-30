@@ -1,70 +1,58 @@
 // @flow
 import * as React from 'react';
+import classNames from 'classnames';
 import Label from '../internal/Label/Label.component';
 import defaultClasses from '../../d2Ui/fieldContainer/fieldContainer.mod.css';
+
+type LabelHOCClasses = {
+    labelContainerClass?: ?string,
+};
 
 type LabelClasses = {
     label?: ?string,
 };
 
-type InputClasses = LabelClasses & Object;
+type SpiltClasses = LabelHOCClasses & {
+    labelClasses?: ?LabelClasses,
+    passOnClasses?: ?Object,
+};
+
+type Styles = {
+    labelContainerStyle?: ?Object,
+    inputContainerStyle?: ?Object,
+};
 
 type Props = {
-    classes: ?InputClasses,
+    classes: ?Object,
     label?: ?string,
     labelRef?: ?(ref: any) => void,
+    styles?: ?Styles,
 };
 
-type ClassesFromHOCParamGetter = (props: Props) => ?LabelClasses;
+type OnSplitClasses = (classes: Object) => SpiltClasses;
+type onGetUseVerticalOrientation = (props: Props) => ?boolean
 
-type ClassesFromHOCParamGetterContainer = ?{
-    onGetInitialClassesFromParam?: ?ClassesFromHOCParamGetter,
-    onGetUpdatedClassesFromParam?: ?ClassesFromHOCParamGetter,
+type HOCParamsContainer = {
+    onSplitClasses?: ?OnSplitClasses,
+    onGetUseVerticalOrientation?: ?onGetUseVerticalOrientation,
 };
 
-export default (classesFromParamGettersContainer: ?ClassesFromHOCParamGetterContainer) =>
+export default (hocParams: ?HOCParamsContainer) =>
     (InnerComponent: React.ComponentType<any>) =>
         class LabelHOC extends React.Component<Props> {
-            labelClasses: LabelClasses;
+            labelContainerClass: ?string;
+            labelClasses: ?LabelClasses;
             passOnClasses: ?Object;
 
             constructor(props: Props) {
                 super(props);
-                this.initClasses();
+                this.setClasses(props.classes);
             }
 
             componentWillReceiveProps(newProps: Props) {
                 const nextClasses = newProps.classes || {};
                 const prevClasses = this.props.classes || {};
 
-                if (classesFromParamGettersContainer && classesFromParamGettersContainer.onGetUpdatedClassesFromParam) {
-                    const updatedClassesFromParam =
-                        classesFromParamGettersContainer.onGetUpdatedClassesFromParam(newProps);
-
-                    if (updatedClassesFromParam) {
-                        this.setClasses({
-                            ...updatedClassesFromParam,
-                            ...nextClasses,
-                        });
-                        return;
-                    }
-                }
-
-                this.updateClassesIfApplicableBasedOnProps(nextClasses, prevClasses);
-            }
-
-            initClasses() {
-                let classes = this.props.classes || {};
-
-                if (classesFromParamGettersContainer && classesFromParamGettersContainer.onGetInitialClassesFromParam) {
-                    classes =
-                        { ...classesFromParamGettersContainer.onGetInitialClassesFromParam(this.props), ...classes };
-                }
-
-                this.setClasses(classes);
-            }
-
-            updateClassesIfApplicableBasedOnProps(nextClasses: LabelClasses, prevClasses: LabelClasses) {
                 if (Object.keys(nextClasses).length !== Object.keys(prevClasses).length) {
                     this.setClasses(nextClasses);
                 } else if (
@@ -76,43 +64,65 @@ export default (classesFromParamGettersContainer: ?ClassesFromHOCParamGetterCont
                 }
             }
 
-            setClasses(classes: InputClasses) {
-                const { label, ...passOnClasses } = classes;
-                this.labelClasses = {
-                    ...this.labelClasses,
-                    label,
-                };
-                this.passOnClasses = passOnClasses;
+            setClasses(inputClasses: ?Object) {
+                if (!inputClasses) {
+                    return;
+                }
+
+                if (!hocParams || !hocParams.onSplitClasses) {
+                    this.passOnClasses = inputClasses;
+                    return;
+                }
+
+                const splitClasses = hocParams.onSplitClasses(inputClasses);
+                this.labelContainerClass = splitClasses.labelContainerClass;
+                this.labelClasses = splitClasses.labelClasses;
+                this.passOnClasses = splitClasses.passOnClasses;
             }
 
-            getLabelElement(label: ?string, labelRef: ?(ref: any) => void) {
+            getLabelElement(label: ?string, labelRef: ?(ref: any) => void, useVerticalOrientation: ?boolean) {
                 return (
                     <Label
                         title={label}
                         labelRef={labelRef}
-                        classes={this.labelClasses}
+                        classes={this.labelClasses || {}}
+                        useVerticalOrientation={useVerticalOrientation}
                     />
                 );
             }
 
             render() {
-                const { label, labelRef, classes, ...passOnProps } = this.props;
-                const labelElement = this.getLabelElement(label, labelRef);
+                const {
+                    label,
+                    labelRef,
+                    classes,
+                    styles,
+                    ...passOnProps
+                } = this.props;
+                const useVerticalOrientation =
+                    hocParams && hocParams.onGetUseVerticalOrientation &&
+                    hocParams.onGetUseVerticalOrientation(this.props);
+                const labelElement = this.getLabelElement(label, labelRef, useVerticalOrientation);
 
+                const labelContainerClass =
+                    useVerticalOrientation ? defaultClasses.labelContainerVertical : defaultClasses.labelContainer;
+                const stylesContainer = styles || {};
                 return (
                     <div
-                        className={defaultClasses.container}
+                        className={useVerticalOrientation ? defaultClasses.containerVertical : defaultClasses.container}
                     >
                         <div
-                            className={defaultClasses.labelContainer}
+                            className={classNames(labelContainerClass, this.labelContainerClass)}
+                            style={stylesContainer.labelContainerStyle}
                         >
                             {labelElement}
                         </div>
                         <div
                             className={defaultClasses.inputContainer}
+                            style={stylesContainer.inputContainerStyle}
                         >
                             <InnerComponent
-                                labelElement={labelElement}
+                                {...this.passOnClasses}
                                 {...passOnProps}
                             />
                         </div>

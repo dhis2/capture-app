@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import FormBuilderContainer from './FormBuilder.container';
+import withDivider from './FieldDivider/withDivider';
 import FormBuilder from '../../__TEMP__/FormBuilderExternalState.component';
 import buildField from './field/buildField';
 
@@ -9,6 +10,7 @@ import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reduc
 
 import type { Field } from '../../__TEMP__/FormBuilderExternalState.component';
 
+const FormBuilderContainerDividerHOCWrapped = withDivider()(FormBuilderContainer);
 type FormsValues = {
     [id: string]: any
 };
@@ -173,13 +175,12 @@ class D2SectionFields extends Component<Props> {
             rulesMessages,
             onUpdateFieldAsync,
             fieldOptions,
-            formHorizontal,
             ...passOnProps } = this.props;
 
         this.buildRulesCompulsoryErrors();
 
         return (
-            <FormBuilderContainer
+            <FormBuilderContainerDividerHOCWrapped
                 innerRef={(instance) => { this.formBuilderInstance = instance; }}
                 id={formBuilderId}
                 fields={this.getFieldConfigWithRulesEffects()}
