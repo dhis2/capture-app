@@ -10,6 +10,7 @@ const theme = createMuiTheme({
         primary: blue,
         error: {
             ...red,
+            lighter: '#fbeae5',
             light: red[300],
             main: red[500],
             dark: red[700],
@@ -23,6 +24,7 @@ const theme = createMuiTheme({
         success: green,
         warning: {
             ...yellow,
+            lighter: yellow[100],
             light: yellow[300],
             main: yellow[600],
             dark: yellow[900],
@@ -36,6 +38,10 @@ theme.typography.formFieldTitle = {
 
 theme.palette = {
     ...theme.palette,
+    grey: {
+        ...theme.palette.grey,
+        '30': '#FBFBFB', // eslint-disable-line
+    },
     accent: {
         lighter: blue[50],
         light: blue[100],
@@ -47,6 +53,7 @@ theme.palette = {
         bottomLine: 'rgba(0, 0, 0, 0.42)',
     },
     dividerForm: '#f2f4f5',
+    required: red[500],
 };
 
 export default theme;

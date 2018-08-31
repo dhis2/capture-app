@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import FormBuilderContainer from './FormBuilder.container';
 import withDivider from './FieldDivider/withDivider';
+import withAlternateBackgroundColors from './FieldAlternateBackgroundColors/withAlternateBackgroundColors';
 import FormBuilder from '../../__TEMP__/FormBuilderExternalState.component';
 import buildField from './field/buildField';
 
@@ -10,7 +11,7 @@ import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reduc
 
 import type { Field } from '../../__TEMP__/FormBuilderExternalState.component';
 
-const FormBuilderContainerDividerHOCWrapped = withDivider()(FormBuilderContainer);
+const FormBuilderContainerHOCWrapped = withDivider()(withAlternateBackgroundColors()(FormBuilderContainer));
 type FormsValues = {
     [id: string]: any
 };
@@ -180,7 +181,7 @@ class D2SectionFields extends Component<Props> {
         this.buildRulesCompulsoryErrors();
 
         return (
-            <FormBuilderContainerDividerHOCWrapped
+            <FormBuilderContainerHOCWrapped
                 innerRef={(instance) => { this.formBuilderInstance = instance; }}
                 id={formBuilderId}
                 fields={this.getFieldConfigWithRulesEffects()}

@@ -12,10 +12,10 @@ const styles = (theme: Theme) => ({
     },
     validatingContainer: {},
     errorContainer: {
-        backgroundColor: theme.palette.error.light,
+        backgroundColor: theme.palette.error.lighter,
     },
     warningContainer: {
-        backgroundColor: theme.palette.warning.light,
+        backgroundColor: theme.palette.warning.lighter,
     },
     infoContainer: {},
 });
@@ -50,7 +50,7 @@ const getFieldContainerBuilder = (InnerComponent: React.ComponentType<any>, cust
                         passOnProps.warningMessage && !passOnProps.active &&
                         !passOnProps.validatingMessage && !passOnProps.errorMessage,
                     [classes.infoContainer]:
-                        classes.infoContainer && !passOnProps.active &&
+                        passOnProps.infoMessage && !passOnProps.active &&
                         !passOnProps.validatingMessage && !passOnProps.errorMessage && !passOnProps.warningMessage,
                 },
             );

@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
 import defaultClasses from '../../../d2Ui/internal/label/label.mod.css';
 
@@ -8,7 +8,7 @@ type Classes = {
 };
 
 type Props = {
-    title: ?string,
+    children: React.Node,
     classes: Classes,
     labelRef?: ?(ref: any) => void,
     useVerticalOrientation: ?boolean,
@@ -16,7 +16,7 @@ type Props = {
 
 class Label extends React.PureComponent<Props> {
     render() {
-        const { classes, title, labelRef, useVerticalOrientation, ...passOnProps } = this.props;
+        const { classes, children, labelRef, useVerticalOrientation, ...passOnProps } = this.props;
         const labelContainerDefault =
             useVerticalOrientation ? defaultClasses.labelContainerVertical : defaultClasses.labelContainer;
 
@@ -26,7 +26,7 @@ class Label extends React.PureComponent<Props> {
                 className={classNames(labelContainerDefault, classes.label)}
                 {...passOnProps}
             >
-                {title}
+                {children}
             </div>
         );
     }

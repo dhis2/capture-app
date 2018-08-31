@@ -77,12 +77,14 @@ declare type Theme = {
             contrastText: string,
         },
         error: {
+            lighter: string,
             light: string,
             main: string,
             dark: string,
             contrastText: string,
         },
         warning: {
+            lighter: string,
             light: string,
             main: string,
             dark: string,
@@ -121,6 +123,7 @@ declare type Theme = {
             main: string,
             dark: string,
         },
+        required: string,
     },
     typography: {
         pxToRem: (size: number) => string,

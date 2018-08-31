@@ -6,7 +6,7 @@ import isObject from 'd2-utilizr/lib/isObject';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = () => ({
-    fieldContainer: {
+    fieldOuterContainer: {
         position: 'relative',
     },
     fieldHorizontalContainer: {
@@ -51,7 +51,8 @@ type Props = {
     validationAttempted?: ?boolean,
     validateIfNoUIData?: ?boolean,
     classes: Object,
-    onRenderSeparator: (index: number, total: number, field: Field) => ?React.Element<any>,
+    onRenderDivider: (index: number, total: number, field: Field) => ?React.Element<any>,
+    onGetContainerProps: (index: number, total: number, field: Field) => ?React.Element<any>,
 };
 
 type FieldCommitOptions = {
@@ -247,7 +248,8 @@ class FormBuilder extends React.Component<Props> {
             onUpdateFieldAsync,
             onUpdateFieldUIOnly,
             validateIfNoUIData,
-            onRenderSeparator,
+            onRenderDivider,
+            onGetContainerProps,
             ...passOnProps } = this.props;
 
         return fields.map((field, index) => {
@@ -272,21 +274,25 @@ class FormBuilder extends React.Component<Props> {
             return (
                 <div
                     key={field.id}
-                    className={classes.fieldContainer}
+                    className={classes.fieldOuterContainer}
                 >
-                    <field.component
-                        ref={(fieldInstance) => { this.setFieldInstance(fieldInstance, field.id); }}
-                        value={value}
-                        errorMessage={fieldUI.errorMessage}
-                        touched={fieldUI.touched}
-                        validationAttempted={validationAttempted}
-                        {...commitPropObject}
-                        {...props}
-                        {...passOnProps}
-                        {...asyncProps}
-                    />
+                    <div
+                        {...onGetContainerProps && onGetContainerProps(index, fields.length, field)}
+                    >
+                        <field.component
+                            ref={(fieldInstance) => { this.setFieldInstance(fieldInstance, field.id); }}
+                            value={value}
+                            errorMessage={fieldUI.errorMessage}
+                            touched={fieldUI.touched}
+                            validationAttempted={validationAttempted}
+                            {...commitPropObject}
+                            {...props}
+                            {...passOnProps}
+                            {...asyncProps}
+                        />
+                    </div>
 
-                    {onRenderSeparator && onRenderSeparator(index, fields.length, field)}
+                    {onRenderDivider && onRenderDivider(index, fields.length, field)}
                 </div>
             );
         });

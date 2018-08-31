@@ -24,7 +24,7 @@ type Styles = {
 
 type Props = {
     classes: ?Object,
-    label?: ?string,
+    label?: ?string | ?React.Element<any>,
     labelRef?: ?(ref: any) => void,
     styles?: ?Styles,
 };
@@ -80,14 +80,15 @@ export default (hocParams: ?HOCParamsContainer) =>
                 this.passOnClasses = splitClasses.passOnClasses;
             }
 
-            getLabelElement(label: ?string, labelRef: ?(ref: any) => void, useVerticalOrientation: ?boolean) {
+            getLabelElement(label: ?string | React.Element<any>, labelRef: ?(ref: any) => void, useVerticalOrientation: ?boolean) {
                 return (
                     <Label
-                        title={label}
                         labelRef={labelRef}
                         classes={this.labelClasses || {}}
                         useVerticalOrientation={useVerticalOrientation}
-                    />
+                    >
+                        {label}
+                    </Label>
                 );
             }
 

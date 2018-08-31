@@ -12,11 +12,19 @@ const getStyles = (theme: Theme) => ({
     labelVertical: {
         color: theme.palette.text.primary,
     },
+    required: {
+        color: theme.palette.required,
+    },
 });
 
 type Props = {
     label: ?string,
     required: boolean,
+    classes: {
+        label: string,
+        labelVertical: string,
+        required: string,
+    },
 };
 
 type HOCParams = {
@@ -28,31 +36,40 @@ export default (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<
     const useVerticalOrientation = hocParams && hocParams.onGetUseVerticalOrientation && hocParams.onGetUseVerticalOrientation();
     const fieldLabelMediaBasedClass = hocParams && hocParams.onGetFieldLabelMediaClass && hocParams.onGetFieldLabelMediaClass();
 
-    const LabelHOCWithStyles = withStyles(getStyles)(
-        withLabel({
-            onGetUseVerticalOrientation: () => useVerticalOrientation,
-            onSplitClasses: (classes) => {
-                const { label, labelVertical, ...rest } = classes;
-                return {
-                    labelContainer: null,
-                    labelClasses: {
-                        label: useVerticalOrientation ? labelVertical : classNames(label, fieldLabelMediaBasedClass),
-                    },
-                    passOnClasses: rest,
-                };
-            },
-        })(InnerComponent),
+    const LabelHOCWithStyles = withLabel({
+        onGetUseVerticalOrientation: () => useVerticalOrientation,
+        onSplitClasses: (classes) => {
+            const { label, labelVertical, ...rest } = classes;
+            return {
+                labelContainer: null,
+                labelClasses: {
+                    label: useVerticalOrientation ? labelVertical : classNames(label, fieldLabelMediaBasedClass),
+                },
+                passOnClasses: rest,
+            };
+        },
+    })(InnerComponent);
+
+    const RequiredLabel = (props: Props) => (
+        <span>
+            {props.label}
+            <span
+                className={props.classes.required}
+            >
+                &nbsp;*
+            </span>
+        </span>
     );
 
-    const ProjectLabelHOC = (props: Props) => {
+    const ProjectLabelHOC = withStyles(getStyles)((props: Props) => {
         const { label, required, ...passOnProps } = props;
         return (
             <LabelHOCWithStyles
-                label={required && label ? `${label} *` : label}
+                label={required && label ? (<RequiredLabel {...props} />) : label}
                 {...passOnProps}
             />
         );
-    };
+    });
 
     return ProjectLabelHOC;
 };

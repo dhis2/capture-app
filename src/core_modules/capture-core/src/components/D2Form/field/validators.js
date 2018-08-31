@@ -37,6 +37,7 @@ const wordValidatorKeys = {
 };
 
 const errorMessages = {
+    COMPULSORY: 'A value is required',
     NUMBER: 'Please provide a valid number',
     INTEGER: 'Please provide a valid integer',
     POSITIVE_INTEGER: 'Please provide a positive integer',
@@ -153,11 +154,7 @@ function buildCompulsoryValidator(metaData: MetaDataElement): Array<ValidatorCon
         {
             validator: isCompulsoryRequirementMetWrapper,
             message:
-                i18n.t(
-                    Validators.wordToValidatorMap.get(
-                        wordValidatorKeys.COMPULSORY,
-                    ).message,
-                ),
+                i18n.t(errorMessages.COMPULSORY),
         },
     ] :
         [];
