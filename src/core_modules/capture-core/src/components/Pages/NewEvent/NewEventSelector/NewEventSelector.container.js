@@ -16,7 +16,7 @@ import {
 import { resetProgramIdBase } from '../../../QuickSelector/actions/QuickSelector.actions';
 
 const newEventDataEntryHasChanges = (state: ReduxState) => {
-    const formValues = state.formsValues['singleEvent-newEvent'];
+    const formValues = state.formsValues['singleEvent-newEvent'] || {};
     const formHasChanges = Object
         .keys(formValues)
         .some(key => formValues[key]);
@@ -25,7 +25,7 @@ const newEventDataEntryHasChanges = (state: ReduxState) => {
         return true;
     }
 
-    const dataEntryValues = state.dataEntriesFieldsValue['singleEvent-newEvent'];
+    const dataEntryValues = state.dataEntriesFieldsValue['singleEvent-newEvent'] || {};
     const dataEntryHasChanges = Object
         .keys(dataEntryValues)
         .some(key => dataEntryValues[key]);
