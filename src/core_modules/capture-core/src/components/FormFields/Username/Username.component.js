@@ -90,71 +90,76 @@ const styles = theme => ({
 });
 
 class UsernameAutosuggest extends React.Component {
-  state = {
-      value: this.props.value || '',
-      users: [],
-  };
+    state = {
+        value: this.props.value || '',
+        users: [],
+    };
 
-  componentDidMount() {
-      getApi().get('users?fields=name,id,userCredentials[username]')
-          .then((response) => {
-              this.setState({
-                  users: response.users,
-              });
-          });
-  }
+    componentDidMount() {
+        getApi().get('users?fields=name,id,userCredentials[username]')
+            .then((response) => {
+                this.setState({
+                    users: response.users,
+                });
+            });
+    }
 
-  handleChange = (event, { newValue }) => {
-      this.setState({
-          value: newValue,
-      });
-      this.props.onBlur(newValue);
-  };
+    handleChange = (event, { newValue }) => {
+        this.setState({
+            value: newValue,
+        });
+    };
 
-  render() {
-      const { classes } = this.props;
-      const { value } = this.state;
-      const suggestions = this.state.users.filter((u) => {
-          if (value.length === 0) {
-              return true;
-          }
+    onSuggestionSelected = (evt, { suggestionValue }) => {
+        this.setState({ value: suggestionValue });
+        this.props.onBlur(suggestionValue);
+    };
 
-          return u.userCredentials.username.includes(value);
-      });
+    render() {
+        const { classes } = this.props;
+        const { value } = this.state;
+        const suggestions = this.state.users.filter((u) => {
+            if (value.length === 0) {
+                return true;
+            }
 
-      return (
-          <div>
-              <FormLabel
-                  component="label"
-                  required={!!this.props.required}
-                  focused={false}
-              >
-                  {this.props.label}
-              </FormLabel>
-              <Autosuggest
-                  theme={{
-                      container: classes.container,
-                      suggestionsContainerOpen: classes.suggestionsContainerOpen,
-                      suggestionsList: classes.suggestionsList,
-                      suggestion: classes.suggestion,
-                  }}
-                  renderInputComponent={renderInput}
-                  suggestions={suggestions}
-                  onSuggestionsFetchRequested={() => null}
-                  onSuggestionsClearRequested={() => null}
-                  renderSuggestionsContainer={renderUsersContainer}
-                  getSuggestionValue={getUserValue}
-                  renderSuggestion={renderUser}
-                  inputProps={{
-                      classes,
-                      value,
-                      placeholder: 'search for username',
-                      onChange: this.handleChange,
-                  }}
-              />
-          </div>
-      );
-  }
+            return u.userCredentials.username.includes(value);
+        });
+
+        return (
+            <div>
+                <FormLabel
+                    component="label"
+                    required={!!this.props.required}
+                    focused={false}
+                >
+                    {this.props.label}
+                </FormLabel>
+                <Autosuggest
+                    theme={{
+                        container: classes.container,
+                        suggestionsContainerOpen: classes.suggestionsContainerOpen,
+                        suggestionsList: classes.suggestionsList,
+                        suggestion: classes.suggestion,
+                    }}
+                    renderInputComponent={renderInput}
+                    suggestions={suggestions}
+                    onSuggestionsFetchRequested={() => null}
+                    onSuggestionsClearRequested={() => null}
+                    onSuggestionSelected={this.onSuggestionSelected}
+                    renderSuggestionsContainer={renderUsersContainer}
+                    getSuggestionValue={getUserValue}
+                    renderSuggestion={renderUser}
+                    inputProps={{
+                        classes,
+                        value,
+                        placeholder: 'search for username',
+                        onChange: this.handleChange,
+                    }}
+                />
+            </div>
+        );
+    }
 }
 
 UsernameAutosuggest.propTypes = {
