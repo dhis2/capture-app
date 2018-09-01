@@ -155,23 +155,32 @@ const getOrgUnitField = (metaData: MetaDataElement, options: Object) => {
     }, metaData);
 };
 
-const getUsernameField = (metaData: MetaDataElement, options: Object) => createFieldProps({
-    id: metaData.id,
-    component:
-      withGotoInterface()(
-          withHideCompatibility()(
-              withDefaultShouldUpdateInterface()(
-                  withRequiredFieldCalculation()(
-                      withDefaultFieldContainer()(
-                          withDefaultMessages()(
-                              withInternalChangeHandler()(UsernameField),
-                          ),
-                      ),
-                  ),
-              ),
-          ),
-      ),
-}, metaData);
+const getUsernameField = (metaData: MetaDataElement, options: Object) => {
+    const props = createComponentProps({
+        label: metaData.formName,
+        multiline: false,
+        metaCompulsory: metaData.compulsory,
+    }, options);
+
+    return createFieldProps({
+        id: metaData.id,
+        component:
+        withGotoInterface()(
+            withHideCompatibility()(
+                withDefaultShouldUpdateInterface()(
+                    withRequiredFieldCalculation()(
+                        withDefaultFieldContainer()(
+                            withDefaultMessages()(
+                                withInternalChangeHandler()(UsernameField),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        props,
+    }, metaData);
+};
 
 const getAgeField = (metaData: MetaDataElement, options: Object) => {
     const props = createComponentProps({
