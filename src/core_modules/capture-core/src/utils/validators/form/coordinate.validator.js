@@ -18,8 +18,8 @@ const isValidCoordinate = (value: Location) => {
 
     const { longitude, latitude } = value;
 
-    const ld = parseInt(longitude, 0);
-    const lt = parseInt(latitude, 0);
+    const ld = parseInt(longitude, 10);
+    const lt = parseInt(latitude, 10);
 
     return ld >= -180 && ld <= 180 && lt >= -90 && lt <= 90;
 };
