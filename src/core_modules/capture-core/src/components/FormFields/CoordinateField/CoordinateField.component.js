@@ -15,12 +15,12 @@ export default class CoordinateField extends Component<Props> {
         super(props);
 
         this.state = {
-            latitude: typeof props.latitude !== 'undefined' ? props.latitude : '',
-            longitude: typeof props.longitude !== 'undefined' ? props.longitude : '',
+            latitude: typeof props.value.latitude !== 'undefined' ? props.value.latitude : '',
+            longitude: typeof props.value.longitude !== 'undefined' ? props.value.longitude : '',
         };
     }
 
-    handleBlur = () => this.props.onBlur({ ...this.state });
+    handleBlur = () => this.props.onBlur({ latitude: this.state.latitude, longitude: this.state.longitude });
 
     handleLatitudeChange = evt => this.setState({ latitude: evt.target.value });
     handleLongitudeChange = evt => this.setState({ longitude: evt.target.value });

@@ -17,6 +17,7 @@
 }
 
 .coordinate-icon {
+    position: relative;
     cursor: pointer;
     margin-top: 20px;
     margin-right: 5px;
