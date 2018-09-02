@@ -1,0 +1,23 @@
+.coordinate-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.coordinate-field + div {
+    margin-left: 28px;
+}
+
+.coordinate-label {
+    margin-bottom: 5px;
+}
+
+.coordinate-fields {
+    display: flex;
+    flex-direction: row;
+}
+
+.coordinate-icon {
+    cursor: pointer;
+    margin-top: 20px;
+    margin-right: 5px;
+}

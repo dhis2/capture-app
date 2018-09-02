@@ -19,4 +19,5 @@ export default {
     URL: 'URL',
     AGE: 'AGE',
     ORGANISATION_UNIT: 'ORGANISATION_UNIT',
+    COORDINATE: 'COORDINATE',
 };
