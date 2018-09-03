@@ -1,4 +1,5 @@
 .coordinate-field {
+  position: relative;
     display: flex;
     flex-direction: column;
 }
@@ -21,4 +22,13 @@
     cursor: pointer;
     margin-top: 20px;
     margin-right: 5px;
+}
+.coordinate-leaflet-map {
+    overflow: hidden;
+    position: absolute;
+    z-index: 10;
+    left: 0;
+    top: 40px;
+    width: 250px;
+    height: 250px;
 }

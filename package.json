@@ -37,6 +37,7 @@
     "react-dnd-html5-backend": "^5.0.1",
     "react-dom": "^16.3.2",
     "react-infinite-calendar": "^2.3.1",
+    "react-leaflet": "^2.0.1",
     "react-popper": "^1.0.0",
     "react-redux": "^5.0.7",
     "react-router-redux": "^5.0.0-alpha.9",
