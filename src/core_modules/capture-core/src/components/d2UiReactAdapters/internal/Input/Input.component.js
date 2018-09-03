@@ -9,22 +9,31 @@ type Classes = {
 };
 
 type Props = {
+    multiLine?: ?boolean,
     classes: Classes,
     inputRef?: ?(ref: any) => void,
 };
 
 const Input = (props: Props) => {
-    const { classes, inputRef, ...passOnProps } = props;
+    const { multiLine, classes, inputRef, ...passOnProps } = props;
 
     return (
         <div
             className={classNames(defaultClasses.inputWrapper, classes.inputWrapper)}
         >
-            <input
-                ref={inputRef}
-                className={classNames(defaultClasses.input, classes.input)}
-                {...passOnProps}
-            />
+            {
+                multiLine ?
+                    <textarea
+                        ref={inputRef}
+                        className={classNames(defaultClasses.textArea, classes.input)}
+                        {...passOnProps}
+                    /> :
+                    <input
+                        ref={inputRef}
+                        className={classNames(defaultClasses.input, classes.input)}
+                        {...passOnProps}
+                    />
+            }
         </div>
     );
 };
