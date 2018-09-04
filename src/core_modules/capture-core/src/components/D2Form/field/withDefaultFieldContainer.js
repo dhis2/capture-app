@@ -29,7 +29,7 @@ type Props = {
         warningContainer: string,
         infoContainer: string,
     },
-    active: boolean,
+    active?: ?boolean,
     validatingMessage?: ?string,
     errorMessage?: ?string,
     warningMessage?: ?string,

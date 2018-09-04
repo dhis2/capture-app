@@ -51,8 +51,8 @@ const getStyles = theme => ({
         paddingBottom: theme.typography.pxToRem(15),
     },
     fieldLabelMediaBased: {
-        [theme.breakpoints.up(481)]: {
-            paddingTop: 10,
+        [theme.breakpoints.down(481)]: {
+            paddingTop: '0px !important',
         },
     },
 });

@@ -2,7 +2,8 @@
 import log from 'loglevel';
 
 import errorCreator from '../../../utils/errorCreator';
-import { TextField } from '../../FormFields/New';
+import { TextField, BooleanField, orientations } from '../../FormFields/New';
+import labelTypeClasses from './buildField.mod.css';
 import TrueFalse from '../../FormFields/Generic/D2TrueFalse.component';
 import TrueOnly from '../../FormFields/Generic/D2TrueOnly.component';
 import D2Date from '../../FormFields/DateAndTime/D2Date/D2Date.component';
@@ -116,7 +117,8 @@ const getBaseTextField = (metaData: MetaDataElement, options: Object) => {
                                     withDefaultFieldContainer()(
                                         withLabel({
                                             onGetUseVerticalOrientation: () => options.formHorizontal,
-                                            onGetFieldLabelMediaClass: () => options.fieldLabelMediaBasedClass,
+                                            onGetCustomFieldLabeClass: () =>
+                                                `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
                                         })(
                                             withDisplayMessages()(
                                                 withInternalChangeHandler()(TextField),
@@ -233,6 +235,7 @@ const fieldForTypes = {
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
             nullable: !metaData.compulsory,
+            orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
         }, options);
 
         return createFieldProps({
@@ -242,8 +245,14 @@ const fieldForTypes = {
                     withHideCompatibility()(
                         withDefaultShouldUpdateInterface()(
                             withRequiredFieldCalculation()(
-                                withDefaultFieldContainer({ marginBottom: 0 })(
-                                    withDefaultMessages()(TrueFalse),
+                                withDefaultFieldContainer()(
+                                    withLabel({
+                                        onGetUseVerticalOrientation: () => options.formHorizontal,
+                                        onGetCustomFieldLabeClass: () =>
+                                            `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.booleanLabel}`,
+                                    })(
+                                        withDefaultMessages()(BooleanField),
+                                    ),
                                 ),
                             ),
                         ),

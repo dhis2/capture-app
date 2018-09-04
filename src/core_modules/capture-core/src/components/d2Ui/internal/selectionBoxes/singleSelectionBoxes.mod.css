@@ -1,0 +1,21 @@
+.containerHorizontal {
+    display: flex;
+}
+
+.containerVertical {
+
+}
+
+.optionContainerHorizontal {
+    display: flex;
+    align-items: center;
+    margin-right: 24px;
+}
+
+.optionContainerVertical {
+
+}
+
+.optionName {
+    padding-left: 5px;
+}
