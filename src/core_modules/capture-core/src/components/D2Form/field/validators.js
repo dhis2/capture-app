@@ -19,6 +19,7 @@ import {
     isValidAge,
     isValidPhoneNumber,
     isValidOrgUnit,
+    isValidUsername,
 } from '../../../utils/validators/form';
 import MetaDataElement from '../../../metaData/DataElement/DataElement';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
@@ -51,6 +52,7 @@ const errorMessages = {
     AGE: 'Please provide a valid age',
     PHONE_NUMBER: 'Please provide a valid phone number',
     ORGANISATION_UNIT: 'Please provide a valid organisation unit',
+    USERNAME: 'Please provide a valid username',
 };
 
 const isCompulsoryRequirementMet = Validators.wordToValidatorMap.get(wordValidatorKeys.COMPULSORY);
@@ -116,6 +118,10 @@ const validatorsForTypes = {
     [elementTypes.ORGANISATION_UNIT]: () => ({
         validator: isValidOrgUnit,
         message: i18n.t(errorMessages.ORGANISATION_UNIT),
+    }),
+    [elementTypes.USERNAME]: () => ({
+        validator: isValidUsername,
+        message: i18n.t(errorMessages.USERNAME),
     }),
 };
 
