@@ -7,6 +7,9 @@ const getStyles = (theme: Theme) => ({
     iconSelected: {
         fill: theme.palette.secondary.main,
     },
+    iconDeselected: {
+        fill: theme.palette.grey[700],
+    },
 });
 
 type Props = {

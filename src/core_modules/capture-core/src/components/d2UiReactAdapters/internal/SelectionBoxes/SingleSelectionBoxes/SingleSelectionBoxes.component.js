@@ -2,32 +2,26 @@
 import * as React from 'react';
 import CheckedIcon from '../../../Icons/SingleSelectionCheckedIcon.component';
 import UncheckedIcon from '../../../Icons/SingleSelectionUncheckedIcon.component';
+import SingleSelectBox from './SingleSelectBox.component';
 import orientations from '../../../constants/orientations.const';
 import defaultClasses from '../../../../d2Ui/internal/selectionBoxes/singleSelectionBoxes.mod.css';
 import type { OptionRendererInputData, OptionsArray, OptionRenderer } from '../selectBoxes.types';
 
 type Props = {
+    id: string,
     options: OptionsArray,
     onGetOptionData: (option: Object) => OptionRendererInputData,
     children?: ?OptionRenderer,
     value: any,
-    onSelect: (value: any) => void,
     orientation: $Values<typeof orientations>,
     classes?: ?{
         iconSelected?: string,
         iconDeselected?: string,
     },
+    onSelect: (value: any) => void,
 };
 
 class SingleSelectionBoxes extends React.Component<Props> {
-    handleSelect(optionData: OptionRendererInputData, isSelected: boolean) {
-        const onSelect = this.props.onSelect;
-        if (isSelected) {
-            onSelect(null);
-        }
-        onSelect(optionData.value);
-    }
-
     getCheckedIcon() {
         return (
             <CheckedIcon
@@ -44,52 +38,47 @@ class SingleSelectionBoxes extends React.Component<Props> {
         );
     }
 
-    getDefaultOption(optionData: OptionRendererInputData, isSelected: boolean) {
-        const orientation = this.props.orientation;
-        const IconElement = isSelected ? this.getCheckedIcon() : this.getUncheckedIcon();
+    getIconElement(optionData: OptionRendererInputData, isSelected: boolean) {
+        const { children } = this.props;
+        const customIconElement = children ? children(optionData, isSelected) : null;
+        if (customIconElement) {
+            return customIconElement;
+        }
+
+        return isSelected ? this.getCheckedIcon() : this.getUncheckedIcon();
+    }
+
+    getOption(optionData: OptionRendererInputData, isSelected: boolean, index: number) {
+        const { orientation, id: groupId, value, onSelect } = this.props;
         const containerClass = orientation === orientations.HORIZONTAL ?
             defaultClasses.optionContainerHorizontal : defaultClasses.optionContainerVertical;
-        const tabIndex = isSelected ? 0 : -1;
+        const tabIndex = isSelected || (index === 0 && !value && value !== false && value !== 0) ? 0 : -1;
+        const IconElement = this.getIconElement(optionData, isSelected);
 
         return (
             <div
-                role="radio"
-                name="aaa"
-                aria-checked={isSelected}
                 className={containerClass}
-                onClick={() => this.handleSelect(optionData, isSelected)}
-                tabIndex={0}
             >
-                {IconElement}
-                <span
-                    className={defaultClasses.optionName}
+                <SingleSelectBox
+                    optionData={optionData}
+                    isSelected={isSelected}
+                    tabIndex={tabIndex}
+                    groupId={groupId}
+                    onSelect={onSelect}
                 >
-                    {optionData.name}
-                </span>
+                    {IconElement}
+                </SingleSelectBox>
             </div>
         );
     }
 
-    getCustomOption(optionData: OptionRendererInputData, isSelected: boolean, children: OptionRenderer) {
-        const IconElement = children(optionData, isSelected);
-        if (!React.isValidElement(IconElement)) {
-            return IconElement;
-        }
-
-        return React.cloneElement(IconElement, {
-            onClick: () => this.handleSelect(optionData, isSelected),
-        });
-    }
-
     getSelectionOptions() {
-        const { options, onGetOptionData, children, value } = this.props;
+        const { options, onGetOptionData, value } = this.props;
         return options
-            .map((option) => {
+            .map((option, index) => {
                 const optionData = onGetOptionData ? onGetOptionData(option) : option;
                 const isSelected = optionData.value === value;
-                const OptionElement = children ?
-                    this.getCustomOption(optionData, isSelected, children) :
-                    this.getDefaultOption(optionData, isSelected);
+                const OptionElement = this.getOption(optionData, isSelected, index);
                 return OptionElement;
             });
     }

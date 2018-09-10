@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import defaultClasses from '../../d2Ui/textField/textField.mod.css';
-import Input from '../internal/Input/Input.component';
+import TextInput from '../internal/TextInput/TextInput.component';
 
 type Classes = {
     input?: ?string,
@@ -22,7 +22,7 @@ class D2TextField extends React.Component<Props> {
             <div
                 className={defaultClasses.container}
             >
-                <Input
+                <TextInput
                     classes={classes}
                     inputRef={inputRef}
                     {...passOnProps}

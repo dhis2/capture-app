@@ -236,6 +236,7 @@ const fieldForTypes = {
             metaCompulsory: metaData.compulsory,
             nullable: !metaData.compulsory,
             orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
+            id: metaData.id,
         }, options);
 
         return createFieldProps({
