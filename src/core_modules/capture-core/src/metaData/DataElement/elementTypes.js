@@ -27,6 +27,7 @@ const elementTypeCodes = [
     'IMAGE',
     'AGE',
     'COORDINATE',
+    'USERNAME',
     unknownTypeCode,
 ];
 
