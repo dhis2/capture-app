@@ -70,6 +70,10 @@ export const openEventForEditInDataEntry =
                 validatorContainers: getEventDateValidatorContainers(),
             },
             {
+                id: 'coordinate',
+                type: 'COORDINATE',
+            },
+            {
                 inId: 'status',
                 outId: 'complete',
                 onConvertIn: convertStatusIn,
@@ -89,7 +93,7 @@ export const openEventForEditInDataEntry =
                     eventId: eventContainer.event.eventId,
                 },
             );
-        
+
         const eventDataForRulesEngine = { ...eventContainer.event, ...eventContainer.values };
         return [
             ...dataEntryActions,

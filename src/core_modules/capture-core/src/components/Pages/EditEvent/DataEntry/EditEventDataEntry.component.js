@@ -10,6 +10,7 @@ import getEventDateValidatorContainers from './fieldValidators/eventDate.validat
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 
 import D2Date from '../../../../components/FormFields/DateAndTime/D2Date/D2Date.component';
+import D2Coordinate from '../../../../components/FormFields/CoordinateField/CoordinateField.component';
 import D2TrueOnly from '../../../../components/FormFields/Generic/D2TrueOnly.component';
 import D2TextField from '../../../../components/FormFields/Generic/D2TextField.component';
 import withDefaultMessages from '../../../../components/DataEntry/dataEntryField/withDefaultMessages';
@@ -78,6 +79,29 @@ const buildReportDateSettingsFn = () => {
     return reportDateSettings;
 };
 
+const buildCoordinateSettingsFn = () => {
+    const coordinateComponent = withDefaultFieldContainer()(
+        withDefaultShouldUpdateInterface()(
+            withDefaultMessages()(
+                withDefaultChangeHandler()(D2Coordinate),
+            ),
+        ),
+    );
+
+    const coordinateSettings = (props: Object) => ({
+        component: coordinateComponent,
+        componentProps: {
+            width: props && props.formHorizontal ? 150 : 350,
+            label: 'Coordinate(s)',
+            required: false,
+        },
+        propName: 'coordinate',
+        validatorContainers: getEventDateValidatorContainers(),
+    });
+
+    return coordinateSettings;
+};
+
 const buildCompleteFieldSettingsFn = () => {
     const completeComponent = withDefaultFieldContainer()(
         withDefaultShouldUpdateInterface()(
@@ -104,7 +128,8 @@ const buildCompleteFieldSettingsFn = () => {
 };
 
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(DataEntry);
-const CompleteField = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
+const CoordinateField = withDataEntryField(buildCoordinateSettingsFn())(ReportDateField);
+const CompleteField = withDataEntryField(buildCompleteFieldSettingsFn())(CoordinateField);
 const FeedbackOutput = withFeedbackOutput()(CompleteField);
 const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
 const WarningOutput = withWarningOutput()(IndicatorOutput);

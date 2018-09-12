@@ -41,11 +41,16 @@ function convertNoteIn(dataEntryValue: any) {
 const dataEntryId = 'singleEvent';
 const itemId = 'newEvent';
 const formId = getDataEntryKey(dataEntryId, itemId);
+
 const dataEntryPropsToInclude = [
     {
         id: 'eventDate',
         type: 'DATE',
         validatorContainers: getEventDateValidatorContainers(),
+    },
+    {
+        id: 'coordinate',
+        type: 'COORDINATE',
     },
     {
         inId: 'notes',
