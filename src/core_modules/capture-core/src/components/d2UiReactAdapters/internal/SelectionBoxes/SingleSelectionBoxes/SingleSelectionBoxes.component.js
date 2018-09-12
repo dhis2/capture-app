@@ -2,10 +2,13 @@
 import * as React from 'react';
 import CheckedIcon from '../../../Icons/SingleSelectionCheckedIcon.component';
 import UncheckedIcon from '../../../Icons/SingleSelectionUncheckedIcon.component';
-import SingleSelectBox from './SingleSelectBox.component';
+import SingleSelectBox from './SingleSelectBox/SingleSelectBox.component';
+import withFocusSaver from './SingleSelectBox/withFocusSaver';
 import orientations from '../../../constants/orientations.const';
 import defaultClasses from '../../../../d2Ui/internal/selectionBoxes/singleSelectionBoxes.mod.css';
 import type { OptionRendererInputData, OptionsArray, OptionRenderer } from '../selectBoxes.types';
+
+const SingleSelectBoxWrapped = withFocusSaver()(SingleSelectBox);
 
 type Props = {
     id: string,
@@ -17,6 +20,8 @@ type Props = {
     classes?: ?{
         iconSelected?: string,
         iconDeselected?: string,
+        focus?: string,
+        unFocus?: string,
     },
     onSelect: (value: any) => void,
 };
@@ -49,7 +54,7 @@ class SingleSelectionBoxes extends React.Component<Props> {
     }
 
     getOption(optionData: OptionRendererInputData, isSelected: boolean, index: number) {
-        const { orientation, id: groupId, value, onSelect } = this.props;
+        const { orientation, id: groupId, value, onSelect, classes, onSetFocus, onRemoveFocus } = this.props;
         const containerClass = orientation === orientations.HORIZONTAL ?
             defaultClasses.optionContainerHorizontal : defaultClasses.optionContainerVertical;
         const tabIndex = isSelected || (index === 0 && !value && value !== false && value !== 0) ? 0 : -1;
@@ -59,15 +64,19 @@ class SingleSelectionBoxes extends React.Component<Props> {
             <div
                 className={containerClass}
             >
-                <SingleSelectBox
+                <SingleSelectBoxWrapped
                     optionData={optionData}
                     isSelected={isSelected}
                     tabIndex={tabIndex}
                     groupId={groupId}
                     onSelect={onSelect}
+                    focusClass={classes && classes.focus}
+                    unFocusClass={classes && classes.unFocus}
+                    onSetFocus={onSetFocus}
+                    onRemoveFocus={onRemoveFocus}
                 >
                     {IconElement}
-                </SingleSelectBox>
+                </SingleSelectBoxWrapped>
             </div>
         );
     }

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import classNames from 'classnames';
-import defaultClasses from '../../../d2Ui/internal/input/input.mod.css';
+import defaultClasses from '../../../d2Ui/internal/textInput/textInput.mod.css';
 
 type Classes = {
     input?: ?string,

@@ -10,6 +10,15 @@
     padding: 0px;
 }
 
+.input:focus {
+    outline: none;
+}
+
+.iconContainer {
+    display: flex;
+    align-items: center;
+}
+
 .label {
     position: relative;
     display: flex;

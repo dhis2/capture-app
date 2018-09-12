@@ -10,6 +10,11 @@ const getStyles = (theme: Theme) => ({
     iconDeselected: {
         fill: theme.palette.grey[700],
     },
+    focus: {
+        backgroundColor: theme.palette.accent.dark,
+    },
+    unFocus: {
+    },
 });
 
 type Props = {
