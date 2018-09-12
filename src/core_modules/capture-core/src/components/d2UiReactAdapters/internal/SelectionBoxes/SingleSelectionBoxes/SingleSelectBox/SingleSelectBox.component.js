@@ -1,7 +1,8 @@
 // @flow
 import * as React from 'react';
-import defaultClasses from '../../../../d2Ui/internal/selectionBoxes/singleSelectBox.mod.css';
-import type { OptionRendererInputData } from '../selectBoxes.types';
+import classNames from 'classnames';
+import defaultClasses from '../../../../../d2Ui/internal/selectionBoxes/singleSelectBox.mod.css';
+import type { OptionRendererInputData } from '../../selectBoxes.types';
 
 type Props = {
     optionData: OptionRendererInputData,
@@ -9,6 +10,10 @@ type Props = {
     groupId: string,
     children: React.Node,
     onSelect: (value: any) => void,
+    inputRef?: (instance: ?HTMLInputElement) => void,
+    inFocus?: ?boolean,
+    focusClass?: string,
+    unFocusClass?: string,
 };
 
 class SingleSelectBox extends React.Component<Props> {
@@ -21,7 +26,7 @@ class SingleSelectBox extends React.Component<Props> {
     }
 
     render() {
-        const { optionData, isSelected, groupId, children, ...passOnProps } = this.props;
+        const { optionData, isSelected, groupId, children, inFocus, inputRef, focusClass, unFocusClass, ...passOnProps } = this.props;
         const id = groupId + (optionData.id || optionData.name);
 
         return (
@@ -31,6 +36,7 @@ class SingleSelectBox extends React.Component<Props> {
                     className={defaultClasses.label}
                 >
                     <input
+                        ref={inputRef}
                         type="radio"
                         className={defaultClasses.input}
                         name={groupId}
@@ -41,7 +47,11 @@ class SingleSelectBox extends React.Component<Props> {
                         {...passOnProps}
                     />
 
-                    {children}
+                    <div
+                        className={inFocus ? classNames(focusClass, defaultClasses.iconContainer) : classNames(defaultClasses.iconContainer, unFocusClass)}
+                    >
+                        {children}
+                    </div>
                     <span
                         className={defaultClasses.name}
                     >

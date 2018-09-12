@@ -5,38 +5,38 @@ type Props = {
 };
 
 type State = {
-    active: boolean,
+    inFocus: boolean,
 };
 
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
-        class DefaultIsActiveHandler extends React.Component<Props, State> {
+        class DefaultIsFocusedHandler extends React.Component<Props, State> {
             constructor(props: Props) {
                 super(props);
                 this.state = {
-                    active: false,
+                    inFocus: false,
                 };
             }
 
-            setActive = () => {
+            setFocus = () => {
                 this.setState({
-                    active: true,
+                    inFocus: true,
                 });
             }
 
-            setInactive = () => {
+            removeFocus = () => {
                 this.setState({
-                    active: false,
+                    inFocus: false,
                 });
             }
 
             render() {
-                const { active } = this.state;
+                const { inFocus } = this.state;
                 return (
                     <InnerComponent
-                        active={active}
-                        onSetActive={this.setActive}
-                        onSetInactive={this.setInactive}
+                        inFocus={inFocus}
+                        onSetFocus={this.setFocus}
+                        onRemoveFocus={this.removeFocus}
                         {...this.props}
                     />
                 );

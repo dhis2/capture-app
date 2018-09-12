@@ -32,7 +32,7 @@ import withHideCompatibility from './withHideCompatibility';
 import withGotoInterface from './withGotoInterface';
 import withRequiredFieldCalculation from './withRequiredFieldCalculation';
 import withLabel from '../../FormFields/New/HOC/withLabel';
-import withIsActiveHandler from './withIsActiveHandler';
+import withInFocusSaver from './withInFocusSaver';
 import withCalculateMessages from './messages/withCalculateMessages';
 import withDisplayMessages from './messages/withDisplayMessages';
 
@@ -112,7 +112,7 @@ const getBaseTextField = (metaData: MetaDataElement, options: Object) => {
                 withHideCompatibility()(
                     withDefaultShouldUpdateInterface()(
                         withRequiredFieldCalculation()(
-                            withIsActiveHandler()(
+                            withInFocusSaver()(
                                 withCalculateMessages()(
                                     withDefaultFieldContainer()(
                                         withLabel({
@@ -246,13 +246,15 @@ const fieldForTypes = {
                     withHideCompatibility()(
                         withDefaultShouldUpdateInterface()(
                             withRequiredFieldCalculation()(
-                                withDefaultFieldContainer()(
-                                    withLabel({
-                                        onGetUseVerticalOrientation: () => options.formHorizontal,
-                                        onGetCustomFieldLabeClass: () =>
-                                            `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.booleanLabel}`,
-                                    })(
-                                        withDefaultMessages()(BooleanField),
+                                withInFocusSaver()(
+                                    withDefaultFieldContainer()(
+                                        withLabel({
+                                            onGetUseVerticalOrientation: () => options.formHorizontal,
+                                            onGetCustomFieldLabeClass: () =>
+                                                `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.booleanLabel}`,
+                                        })(
+                                            withDefaultMessages()(BooleanField),
+                                        ),
                                     ),
                                 ),
                             ),

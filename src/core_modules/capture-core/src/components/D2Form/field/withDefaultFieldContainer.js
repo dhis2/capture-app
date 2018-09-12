@@ -29,7 +29,7 @@ type Props = {
         warningContainer: string,
         infoContainer: string,
     },
-    active?: ?boolean,
+    inFocus?: ?boolean,
     validatingMessage?: ?string,
     errorMessage?: ?string,
     warningMessage?: ?string,
@@ -42,15 +42,15 @@ const getFieldContainerBuilder = (InnerComponent: React.ComponentType<any>, cust
             const { classes, ...passOnProps } = this.props;
             const containerClasses = classNames(
                 classes.container, {
-                    [classes.activeContainer]: passOnProps.active,
-                    [classes.validatingContainer]: passOnProps.validatingMessage && !passOnProps.active,
+                    [classes.activeContainer]: passOnProps.inFocus,
+                    [classes.validatingContainer]: passOnProps.validatingMessage && !passOnProps.inFocus,
                     [classes.errorContainer]:
-                        passOnProps.errorMessage && !passOnProps.active && !passOnProps.validatingMessage,
+                        passOnProps.errorMessage && !passOnProps.inFocus && !passOnProps.validatingMessage,
                     [classes.warningContainer]:
-                        passOnProps.warningMessage && !passOnProps.active &&
+                        passOnProps.warningMessage && !passOnProps.inFocus &&
                         !passOnProps.validatingMessage && !passOnProps.errorMessage,
                     [classes.infoContainer]:
-                        passOnProps.infoMessage && !passOnProps.active &&
+                        passOnProps.infoMessage && !passOnProps.inFocus &&
                         !passOnProps.validatingMessage && !passOnProps.errorMessage && !passOnProps.warningMessage,
                 },
             );
