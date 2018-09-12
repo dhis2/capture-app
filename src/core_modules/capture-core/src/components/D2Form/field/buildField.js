@@ -4,7 +4,6 @@ import log from 'loglevel';
 import errorCreator from '../../../utils/errorCreator';
 import { TextField, BooleanField, orientations, withFocusSaver, withLabel } from '../../FormFields/New';
 import labelTypeClasses from './buildField.mod.css';
-import TrueFalse from '../../FormFields/Generic/D2TrueFalse.component';
 import TrueOnly from '../../FormFields/Generic/D2TrueOnly.component';
 import D2Date from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import D2DateTime from '../../FormFields/DateAndTime/D2DateTime/D2DateTime.component';
