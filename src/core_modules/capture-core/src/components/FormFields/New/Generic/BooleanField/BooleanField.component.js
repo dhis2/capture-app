@@ -11,9 +11,12 @@ const getStyles = (theme: Theme) => ({
         fill: theme.palette.grey[700],
     },
     focus: {
-        backgroundColor: theme.palette.accent.dark,
+        border: `2px solid ${theme.palette.accent.dark}`,
+        borderRadius: 16,
+        padding: 2,
     },
     unFocus: {
+        padding: 4,
     },
 });
 

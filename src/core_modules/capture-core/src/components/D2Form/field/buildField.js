@@ -2,7 +2,7 @@
 import log from 'loglevel';
 
 import errorCreator from '../../../utils/errorCreator';
-import { TextField, BooleanField, orientations } from '../../FormFields/New';
+import { TextField, BooleanField, orientations, withFocusSaver, withLabel } from '../../FormFields/New';
 import labelTypeClasses from './buildField.mod.css';
 import TrueFalse from '../../FormFields/Generic/D2TrueFalse.component';
 import TrueOnly from '../../FormFields/Generic/D2TrueOnly.component';
@@ -31,8 +31,6 @@ import withDefaultMessages from './withDefaultMessages';
 import withHideCompatibility from './withHideCompatibility';
 import withGotoInterface from './withGotoInterface';
 import withRequiredFieldCalculation from './withRequiredFieldCalculation';
-import withLabel from '../../FormFields/New/HOC/withLabel';
-import withInFocusSaver from './withInFocusSaver';
 import withCalculateMessages from './messages/withCalculateMessages';
 import withDisplayMessages from './messages/withDisplayMessages';
 
@@ -112,7 +110,7 @@ const getBaseTextField = (metaData: MetaDataElement, options: Object) => {
                 withHideCompatibility()(
                     withDefaultShouldUpdateInterface()(
                         withRequiredFieldCalculation()(
-                            withInFocusSaver()(
+                            withFocusSaver()(
                                 withCalculateMessages()(
                                     withDefaultFieldContainer()(
                                         withLabel({
@@ -246,7 +244,7 @@ const fieldForTypes = {
                     withHideCompatibility()(
                         withDefaultShouldUpdateInterface()(
                             withRequiredFieldCalculation()(
-                                withInFocusSaver()(
+                                withFocusSaver()(
                                     withDefaultFieldContainer()(
                                         withLabel({
                                             onGetUseVerticalOrientation: () => options.formHorizontal,
