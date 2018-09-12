@@ -4,20 +4,20 @@ import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import ClearIcon from '@material-ui/icons/Clear';
 import D2Date from '../DateAndTimeFields/DateField/D2Date.component';
-import D2AgeNumberInput from './D2AgeNumberInput.component';
+import AgeNumberInput from '../internal/AgeNumberInput/AgeNumberInput.component';
 import parseDate from '../../../utils/parsers/date.parser';
 
 type Props = {
     label?: ?string,
-    value: string,
+    value: ?string,
     onBlur: (value: string) => void,
 };
 
 type CalculatedValues = {
-    date: ?Date,
-    years: ?number,
-    months: ?number,
-    days: ?number,
+    date: ?string,
+    years: ?string,
+    months: ?string,
+    days: ?string,
 }
 
 const containerStyle = {
@@ -41,10 +41,15 @@ const clearIconStyle = {
     marginLeft: 10,
 };
 
-function getCalculatedValues(dateValue: string) {
+function getCalculatedValues(dateValue: ?string) {
     const parseData = parseDate(dateValue || '');
     if (!parseData.isValid) {
-        return {};
+        return {
+            date: '',
+            years: '',
+            months: '',
+            days: '',
+        };
     }
     const now = moment();
     const age = moment(parseData.momentDate);
@@ -59,10 +64,10 @@ function getCalculatedValues(dateValue: string) {
 
     return {
         // $FlowSuppress
-        date: parseData.momentDate.toDate(),
-        years,
-        months,
-        days,
+        date: parseData.momentDate.format('L'),
+        years: years.toString(),
+        months: months.toString(),
+        days: days.toString(),
     };
 }
 
@@ -73,8 +78,8 @@ class D2AgeField extends Component<Props> {
         }
         const momentDate = moment();
         momentDate.subtract(values.years || 0, 'years');
-        momentDate.subtract(values.months || 0, 'years');
-        momentDate.subtract(values.days || 0, 'years');
+        momentDate.subtract(values.months || 0, 'months');
+        momentDate.subtract(values.days || 0, 'days');
         this.props.onBlur(momentDate.format('L'));
     }
 
@@ -88,7 +93,8 @@ class D2AgeField extends Component<Props> {
     }
 
     render() {
-        const calculatedValues = getCalculatedValues(this.props.value);
+        const { value } = this.props;
+        const calculatedValues = getCalculatedValues(value);
         return (
             <div>
                 <div style={labelStyle}>{this.props.label}</div>
@@ -102,19 +108,19 @@ class D2AgeField extends Component<Props> {
                             calendarMaxMoment={moment()}
                         />
                     </div>
-                    <D2AgeNumberInput
+                    <AgeNumberInput
                         label={i18n.t('Years')}
                         value={calculatedValues.years}
                         onBlur={years => this.updateAgeByNumberFields({ ...calculatedValues, years })}
                     />
-                    <D2AgeNumberInput
+                    <AgeNumberInput
                         label={i18n.t('Months')}
-                        value={calculatedValues.years}
+                        value={calculatedValues.months}
                         onBlur={months => this.updateAgeByNumberFields({ ...calculatedValues, months })}
                     />
-                    <D2AgeNumberInput
+                    <AgeNumberInput
                         label={i18n.t('Days')}
-                        value={calculatedValues.years}
+                        value={calculatedValues.days}
                         onBlur={days => this.updateAgeByNumberFields({ ...calculatedValues, days })}
                     />
                     <ClearIcon

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
-import D2TextField from '../../TextField/D2TextField.component';
+import TextInput from '../../internal/TextInput/TextInput.component';
 import D2DatePopup from './D2DatePopup.component';
 import D2DateCalendar from './D2DateCalendar.component';
 import lowerCaseFirstLetter from '../../../../utils/string/lowerCaseFirstLetter';
@@ -127,8 +127,8 @@ class D2Date extends React.Component<Props, State> {
         document.removeEventListener('click', this.handleDocumentClick);
     }
 
-    handleTextFieldBlur(value: string, event) {
-        this.props.onBlur(value);
+    handleTextFieldBlur(event) {
+        this.props.onBlur(event);
 
         if (!event.relatedTarget || event.relatedTarget.className !== 'Cal__Container__root') {
             this.hidePopover();
@@ -173,11 +173,11 @@ class D2Date extends React.Component<Props, State> {
                 }}
             >
                 { /* // $FlowSuppress */}
-                <D2TextField
+                <TextInput
                     {...textFieldRefPropObject}
                     onFocus={this.handleTextFieldFocus}
                     onBlur={this.handleTextFieldBlur}
-                    className={classes.textField}
+                    classes={{}}
                     width={calculatedInputWidth}
                     {...splittedPassOnProps.input}
                 />
