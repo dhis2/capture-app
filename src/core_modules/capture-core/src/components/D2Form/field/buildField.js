@@ -2,7 +2,7 @@
 import log from 'loglevel';
 
 import errorCreator from '../../../utils/errorCreator';
-import { TextField, BooleanField, orientations } from '../../FormFields/New';
+import { TextField, BooleanField, AgeField, orientations } from '../../FormFields/New';
 import labelTypeClasses from './buildField.mod.css';
 import TrueFalse from '../../FormFields/Generic/D2TrueFalse.component';
 import TrueOnly from '../../FormFields/Generic/D2TrueOnly.component';
@@ -11,7 +11,6 @@ import D2DateTime from '../../FormFields/DateAndTime/D2DateTime/D2DateTime.compo
 import D2File from '../../FormFields/File/D2File.component';
 import D2Image from '../../FormFields/Image/D2Image.component';
 import D2PhoneNumber from '../../FormFields/PhoneNumber/PhoneNumber.component';
-import D2AgeField from '../../d2UiReactAdapters/AgeField/D2AgeField.component';
 import OrgUnitTree from '../../FormFields/OrgUnitTree/OrgUnitTree.component';
 
 import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
@@ -204,9 +203,7 @@ const getAgeField = (metaData: MetaDataElement, options: Object) => {
                 withDefaultShouldUpdateInterface()(
                     withRequiredFieldCalculation()(
                         withDefaultFieldContainer()(
-                            withDefaultMessages()(
-                                withInternalChangeHandler()(D2AgeField),
-                            ),
+                            withDefaultMessages()(AgeField),
                         ),
                     ),
                 ),

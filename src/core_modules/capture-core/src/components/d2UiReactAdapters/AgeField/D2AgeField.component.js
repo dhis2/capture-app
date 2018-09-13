@@ -10,7 +10,7 @@ import parseDate from '../../../utils/parsers/date.parser';
 type Props = {
     label?: ?string,
     value: ?string,
-    onBlur: (value: string) => void,
+    onAgeChanged: (value: string) => void,
 };
 
 type CalculatedValues = {
@@ -80,21 +80,22 @@ class D2AgeField extends Component<Props> {
         momentDate.subtract(values.years || 0, 'years');
         momentDate.subtract(values.months || 0, 'months');
         momentDate.subtract(values.days || 0, 'days');
-        this.props.onBlur(momentDate.format('L'));
+        this.props.onAgeChanged(momentDate.format('L'));
     }
 
-    updateAgeByDateField = (values: CalculatedValues) => {
-        if (!values.date) return;
-        this.props.onBlur(moment(values.date).format('L'));
+    updateAgeByDateField = (value: string) => {
+        if (!value) return;
+        this.props.onAgeChanged(value);
     }
 
     onClear = () => {
-        this.props.onBlur('');
+        this.props.onAgeChanged('');
     }
 
     render() {
         const { value } = this.props;
         const calculatedValues = getCalculatedValues(value);
+        console.log(calculatedValues.days);
         return (
             <div>
                 <div style={labelStyle}>{this.props.label}</div>
@@ -102,7 +103,7 @@ class D2AgeField extends Component<Props> {
                     <div style={datePickerStyle}>
                         <D2Date
                             value={calculatedValues.date}
-                            onBlur={date => this.updateAgeByDateField({ ...calculatedValues, date })}
+                            onBlur={this.updateAgeByDateField}
                             placeholder={i18n.t('mm/dd/yyyy')}
                             width={350}
                             calendarMaxMoment={moment()}

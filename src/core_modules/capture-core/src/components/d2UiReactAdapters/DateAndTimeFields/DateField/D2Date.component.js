@@ -128,7 +128,7 @@ class D2Date extends React.Component<Props, State> {
     }
 
     handleTextFieldBlur(event) {
-        this.props.onBlur(event);
+        this.props.onBlur(event.currentTarget.value);
 
         if (!event.relatedTarget || event.relatedTarget.className !== 'Cal__Container__root') {
             this.hidePopover();
