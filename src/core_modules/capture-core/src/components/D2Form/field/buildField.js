@@ -25,7 +25,6 @@ import { inputTypes as optionSetInputTypes } from '../../../metaData/OptionSet/o
 import withInternalChangeHandler from '../../FormFields/withInternalChangeHandler';
 import withDefaultShouldUpdateInterface from './withDefaultShouldUpdateInterface';
 import withDefaultFieldContainer from './withDefaultFieldContainer';
-import withDefaultMessages from './withDefaultMessages';
 import withHideCompatibility from './withHideCompatibility';
 import withGotoInterface from './withGotoInterface';
 import withRequiredFieldCalculation from './withRequiredFieldCalculation';
@@ -145,9 +144,11 @@ const getPhoneField = (metaData: MetaDataElement, options: Object) => {
           withHideCompatibility()(
               withDefaultShouldUpdateInterface()(
                   withRequiredFieldCalculation()(
-                      withDefaultFieldContainer()(
-                          withDefaultMessages()(
-                              withInternalChangeHandler()(D2PhoneNumber),
+                      withCalculateMessages()(
+                          withDefaultFieldContainer()(
+                              withDisplayMessages()(
+                                  withInternalChangeHandler()(D2PhoneNumber),
+                              ),
                           ),
                       ),
                   ),
@@ -172,9 +173,11 @@ const getOrgUnitField = (metaData: MetaDataElement, options: Object) => {
             withHideCompatibility()(
                 withDefaultShouldUpdateInterface()(
                     withRequiredFieldCalculation()(
-                        withDefaultFieldContainer()(
-                            withDefaultMessages()(
-                                withInternalChangeHandler()(OrgUnitTree),
+                        withCalculateMessages()(
+                            withDefaultFieldContainer()(
+                                withDisplayMessages()(
+                                    withInternalChangeHandler()(OrgUnitTree),
+                                ),
                             ),
                         ),
                     ),
@@ -199,9 +202,11 @@ const getAgeField = (metaData: MetaDataElement, options: Object) => {
             withHideCompatibility()(
                 withDefaultShouldUpdateInterface()(
                     withRequiredFieldCalculation()(
-                        withDefaultFieldContainer()(
-                            withDefaultMessages()(
-                                withInternalChangeHandler()(D2AgeField),
+                        withCalculateMessages()(
+                            withDefaultFieldContainer()(
+                                withDisplayMessages()(
+                                    withInternalChangeHandler()(D2AgeField),
+                                ),
                             ),
                         ),
                     ),
@@ -249,7 +254,7 @@ const fieldForTypes = {
                                                 onGetCustomFieldLabeClass: () =>
                                                     `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.booleanLabel}`,
                                             })(
-                                                withDefaultMessages()(BooleanField),
+                                                withDisplayMessages()(BooleanField),
                                             ),
                                         ),
                                     ),
@@ -284,7 +289,7 @@ const fieldForTypes = {
                                                 onGetCustomFieldLabeClass: () =>
                                                     `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
                                             })(
-                                                withDefaultMessages()(TrueOnlyField),
+                                                withDisplayMessages()(TrueOnlyField),
                                             ),
                                         ),
                                     ),
@@ -311,9 +316,11 @@ const fieldForTypes = {
                     withHideCompatibility()(
                         withDefaultShouldUpdateInterface()(
                             withRequiredFieldCalculation()(
-                                withDefaultFieldContainer()(
-                                    withDefaultMessages()(
-                                        withInternalChangeHandler()(D2Date),
+                                withCalculateMessages()(
+                                    withDefaultFieldContainer()(
+                                        withDisplayMessages()(
+                                            withInternalChangeHandler()(D2Date),
+                                        ),
                                     ),
                                 ),
                             ),
@@ -338,9 +345,11 @@ const fieldForTypes = {
                     withHideCompatibility()(
                         withDefaultShouldUpdateInterface()(
                             withRequiredFieldCalculation()(
-                                withDefaultFieldContainer()(
-                                    withDefaultMessages()(
-                                        withInternalChangeHandler()(D2DateTime),
+                                withCalculateMessages()(
+                                    withDefaultFieldContainer()(
+                                        withDisplayMessages()(
+                                            withInternalChangeHandler()(D2DateTime),
+                                        ),
                                     ),
                                 ),
                             ),
@@ -369,9 +378,11 @@ const fieldForTypes = {
                     withHideCompatibility()(
                         withDefaultShouldUpdateInterface()(
                             withRequiredFieldCalculation()(
-                                withDefaultFieldContainer()(
-                                    withDefaultMessages()(
-                                        withInternalChangeHandler()(D2File),
+                                withCalculateMessages()(
+                                    withDefaultFieldContainer()(
+                                        withDisplayMessages()(
+                                            withInternalChangeHandler()(D2File),
+                                        ),
                                     ),
                                 ),
                             ),
@@ -395,9 +406,11 @@ const fieldForTypes = {
                     withHideCompatibility()(
                         withDefaultShouldUpdateInterface()(
                             withRequiredFieldCalculation()(
-                                withDefaultFieldContainer()(
-                                    withDefaultMessages()(
-                                        withInternalChangeHandler()(D2Image),
+                                withCalculateMessages()(
+                                    withDefaultFieldContainer()(
+                                        withDisplayMessages()(
+                                            withInternalChangeHandler()(D2Image),
+                                        ),
                                     ),
                                 ),
                             ),
@@ -416,10 +429,12 @@ const getOptionSetComponent = (inputType: $Values<typeof optionSetInputTypes>) =
             withHideCompatibility()(
                 withDefaultShouldUpdateInterface()(
                     withRequiredFieldCalculation()(
-                        withDefaultFieldContainer()(
-                            withDefaultMessages()(
-                                withConvertedOptionSet()(
-                                    withSelectTranslations()(OptionsSelect),
+                        withCalculateMessages()(
+                            withDefaultFieldContainer()(
+                                withDisplayMessages()(
+                                    withConvertedOptionSet()(
+                                        withSelectTranslations()(OptionsSelect),
+                                    ),
                                 ),
                             ),
                         ),
@@ -433,9 +448,11 @@ const getOptionSetComponent = (inputType: $Values<typeof optionSetInputTypes>) =
         withHideCompatibility()(
             withDefaultShouldUpdateInterface()(
                 withRequiredFieldCalculation()(
-                    withDefaultFieldContainer()(
-                        withDefaultMessages()(
-                            withConvertedOptionSet()(SelectBoxes),
+                    withCalculateMessages()(
+                        withDefaultFieldContainer()(
+                            withDisplayMessages()(
+                                withConvertedOptionSet()(SelectBoxes),
+                            ),
                         ),
                     ),
                 ),
