@@ -2,9 +2,8 @@
 import log from 'loglevel';
 
 import errorCreator from '../../../utils/errorCreator';
-import { TextField, BooleanField, orientations, withFocusSaver, withLabel } from '../../FormFields/New';
+import { TextField, BooleanField, TrueOnlyField, orientations, withFocusSaver, withLabel } from '../../FormFields/New';
 import labelTypeClasses from './buildField.mod.css';
-import TrueOnly from '../../FormFields/Generic/D2TrueOnly.component';
 import D2Date from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import D2DateTime from '../../FormFields/DateAndTime/D2DateTime/D2DateTime.component';
 import D2File from '../../FormFields/File/D2File.component';
@@ -231,7 +230,6 @@ const fieldForTypes = {
         const props = createComponentProps({
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
-            nullable: !metaData.compulsory,
             orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
             id: metaData.id,
         }, options);
@@ -243,14 +241,16 @@ const fieldForTypes = {
                     withHideCompatibility()(
                         withDefaultShouldUpdateInterface()(
                             withRequiredFieldCalculation()(
-                                withFocusSaver()(
-                                    withDefaultFieldContainer()(
-                                        withLabel({
-                                            onGetUseVerticalOrientation: () => options.formHorizontal,
-                                            onGetCustomFieldLabeClass: () =>
-                                                `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.booleanLabel}`,
-                                        })(
-                                            withDefaultMessages()(BooleanField),
+                                withCalculateMessages()(
+                                    withFocusSaver()(
+                                        withDefaultFieldContainer()(
+                                            withLabel({
+                                                onGetUseVerticalOrientation: () => options.formHorizontal,
+                                                onGetCustomFieldLabeClass: () =>
+                                                    `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.booleanLabel}`,
+                                            })(
+                                                withDefaultMessages()(BooleanField),
+                                            ),
                                         ),
                                     ),
                                 ),
@@ -265,6 +265,8 @@ const fieldForTypes = {
         const props = createComponentProps({
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
+            orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
+            id: metaData.id,
         }, options);
 
         return createFieldProps({
@@ -274,8 +276,18 @@ const fieldForTypes = {
                     withHideCompatibility()(
                         withDefaultShouldUpdateInterface()(
                             withRequiredFieldCalculation()(
-                                withDefaultFieldContainer({ marginBottom: 0 })(
-                                    withDefaultMessages()(TrueOnly),
+                                withCalculateMessages()(
+                                    withFocusSaver()(
+                                        withDefaultFieldContainer()(
+                                            withLabel({
+                                                onGetUseVerticalOrientation: () => options.formHorizontal,
+                                                onGetCustomFieldLabeClass: () =>
+                                                    `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
+                                            })(
+                                                withDefaultMessages()(TrueOnlyField),
+                                            ),
+                                        ),
+                                    ),
                                 ),
                             ),
                         ),

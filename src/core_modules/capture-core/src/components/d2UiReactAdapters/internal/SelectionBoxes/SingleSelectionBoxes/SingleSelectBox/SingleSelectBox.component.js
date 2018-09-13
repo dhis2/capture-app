@@ -16,17 +16,53 @@ type Props = {
     unFocusClass?: string,
 };
 
+const keyboardKeys = {
+    SPACE: ' ',
+    ENTER: 'Enter',
+};
+
 class SingleSelectBox extends React.Component<Props> {
+    isSpaceClickWhenSelected: ?boolean; // Pressing space when the radio is already selected, triggers both onKeyPress and onClick. This variable is used to prevent the onClick event in these circumstances.
     handleSelect = () => {
+        if (this.isSpaceClickWhenSelected) {
+            this.isSpaceClickWhenSelected = false;
+            return;
+        }
+
         const { onSelect, optionData, isSelected } = this.props;
         if (isSelected) {
             onSelect(null);
+            return;
         }
         onSelect(optionData.value);
     }
 
+    handleKeyPress = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
+        if ([keyboardKeys.SPACE, keyboardKeys.ENTER].includes(event.key)) {
+            const { onSelect, optionData, isSelected } = this.props;
+            if (isSelected) {
+                this.isSpaceClickWhenSelected = event.key === keyboardKeys.SPACE;
+                onSelect(null);
+                return;
+            }
+            this.isSpaceClickWhenSelected = false;
+            onSelect(optionData.value);
+        }
+    }
+
     render() {
-        const { optionData, isSelected, groupId, children, inFocus, inputRef, focusClass, unFocusClass, ...passOnProps } = this.props;
+        const {
+            optionData,
+            isSelected,
+            groupId,
+            children,
+            inFocus,
+            inputRef,
+            focusClass,
+            unFocusClass,
+            onSelect,
+            ...passOnProps
+        } = this.props;
         const id = groupId + (optionData.id || optionData.name);
 
         return (
@@ -44,11 +80,15 @@ class SingleSelectBox extends React.Component<Props> {
                         checked={isSelected}
                         value={optionData.value}
                         onClick={this.handleSelect}
+                        onKeyPress={this.handleKeyPress}
                         {...passOnProps}
                     />
 
                     <div
-                        className={inFocus ? classNames(focusClass, defaultClasses.iconContainer) : classNames(defaultClasses.iconContainer, unFocusClass)}
+                        className={inFocus ?
+                            classNames(focusClass, defaultClasses.iconContainer) :
+                            classNames(defaultClasses.iconContainer, unFocusClass)
+                        }
                     >
                         {children}
                     </div>

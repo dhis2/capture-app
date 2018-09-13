@@ -9,4 +9,4 @@ export type OptionRendererInputData = {
 
 export type OptionsArray = Array<OptionRendererInputData> | Array<Object>;
 
-export type OptionRenderer = (data: OptionRendererInputData, isSelected: boolean) => React.Node;
+export type OptionRenderer = (data: OptionRendererInputData, isSelected: boolean) => React.Element<any>;

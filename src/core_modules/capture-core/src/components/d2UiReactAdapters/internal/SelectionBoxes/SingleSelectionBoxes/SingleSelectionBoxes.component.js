@@ -45,11 +45,17 @@ class SingleSelectionBoxes extends React.Component<Props> {
         );
     }
 
+    getPostProcessedCustomIcon(customElement: React.Element<any>, isSelected: boolean) {
+        return React.cloneElement(customElement, isSelected ?
+            { className: this.props.classes && this.props.classes.iconSelected } :
+            { className: this.props.classes && this.props.classes.iconDeselected }, null);
+    }
+
     getIconElement(optionData: OptionRendererInputData, isSelected: boolean) {
         const { children } = this.props;
         const customIconElement = children ? children(optionData, isSelected) : null;
         if (customIconElement) {
-            return customIconElement;
+            return this.getPostProcessedCustomIcon(customIconElement, isSelected);
         }
 
         return isSelected ? this.getCheckedIcon() : this.getUncheckedIcon();
