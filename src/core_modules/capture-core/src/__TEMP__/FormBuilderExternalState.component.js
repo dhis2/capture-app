@@ -62,9 +62,16 @@ type FieldCommitOptions = {
 class FormBuilder extends React.Component<Props> {
     static validateField(field: Field, value: any): { valid: boolean, errorMessage?: string } {
         const validatorResult = (field.validators || [])
-            .reduce((pass, currentValidator) => (pass === true
-                ? (currentValidator.validator(value) === true || currentValidator.message) : pass
-            ), true);
+            .reduce((pass, currentValidator) => {
+                if (pass === true) {
+                    const result = currentValidator.validator(value);
+                    if (result === true || (result && result.valid)) {
+                        return true;
+                    }
+                    return (result && result.errorMessage) || currentValidator.message;
+                }
+                return pass;
+            }, true);
 
         if (validatorResult !== true) {
             return {

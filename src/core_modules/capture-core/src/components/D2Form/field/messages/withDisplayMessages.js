@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
+import isObject from 'd2-utilizr/lib/isObject';
 
 const styles = (theme: Theme) => ({
     base: {
@@ -27,7 +28,7 @@ const styles = (theme: Theme) => ({
 
 type Props = {
     validatingMessage?: ?string,
-    errorMessage?: ?string,
+    errorMessage?: ?(string | Object),
     warningMessage?: ?string,
     infoMessage?: ?string,
     classes: {
@@ -38,6 +39,11 @@ type Props = {
         validating: string
     }
 };
+
+type MessageContainer = {
+    element?: ?React.Element<any>,
+    innerMessage?: ?Object,
+}
 
 const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
     class DisplayMessagesHOC extends React.Component<Props> {
@@ -51,26 +57,33 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
             );
         }
 
+        static getMessage(message, classes: string): MessageContainer {
+            return isObject(message) ?
+                // $FlowSuppress
+                { innerMessage: message } :
+                { element: DisplayMessagesHOC.createMessageElement(message, classes) }
+            ;
+        }
+
+
         getClassNames(childClass) {
             return classNames(childClass, this.props.classes.base);
         }
 
-        getMessage(errorText, warningText, infoText, validatingText, classes) {
-            let messageElement;
+        getMessage(errorMessage, warningMessage, infoMessage, validatingMessage, classes) {
+            let message = {};
 
-            if (validatingText) {
-                messageElement =
-                    DisplayMessagesHOC.createMessageElement(validatingText, this.getClassNames(classes.validating));
-            } else if (errorText) {
-                messageElement = DisplayMessagesHOC.createMessageElement(errorText, this.getClassNames(classes.error));
-            } else if (warningText) {
-                messageElement =
-                    DisplayMessagesHOC.createMessageElement(warningText, this.getClassNames(classes.warning));
-            } else if (infoText) {
-                messageElement = DisplayMessagesHOC.createMessageElement(infoText, this.getClassNames(classes.info));
+            if (validatingMessage) {
+                message = DisplayMessagesHOC.getMessage(validatingMessage, this.getClassNames(classes.validating));
+            } else if (errorMessage) {
+                message = DisplayMessagesHOC.getMessage(errorMessage, this.getClassNames(classes.error));
+            } else if (warningMessage) {
+                message = DisplayMessagesHOC.getMessage(warningMessage, this.getClassNames(classes.warning));
+            } else if (infoMessage) {
+                message = DisplayMessagesHOC.getMessage(infoMessage, this.getClassNames(classes.info));
             }
 
-            return messageElement;
+            return message;
         }
 
         render() {
@@ -83,15 +96,16 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
                 ...passOnProps
             } = this.props;
 
-            const messageElement =
+            const message =
                 this.getMessage(errorMessage, warningMessage, infoMessage, validatingMessage, classes);
 
             return (
                 <div>
                     <InnerComponent
+                        innerMessage={message.innerMessage}
                         {...passOnProps}
                     />
-                    {messageElement}
+                    {message.element}
                 </div>
             );
         }

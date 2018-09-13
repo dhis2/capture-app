@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import { Validators } from '@dhis2/d2-ui-forms';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
 import classNames from 'classnames';
@@ -10,20 +11,20 @@ import parseDate from '../../../utils/parsers/date.parser';
 import defaultClasses from '../../d2Ui/ageField/ageField.mod.css';
 import orientations from '../constants/orientations.const';
 
+type AgeValues = {
+    date?: ?string,
+    years?: ?string,
+    months?: ?string,
+    days?: ?string,
+}
+
 type Props = {
-    value: ?string,
-    onAgeChanged: (value: string) => void,
+    value: ?AgeValues,
+    onAgeChanged: (value: ?AgeValues) => void,
     orientation: $Values<typeof orientations>,
 };
 
-type CalculatedValues = {
-    date: ?string,
-    years: ?string,
-    months: ?string,
-    days: ?string,
-}
-
-function getCalculatedValues(dateValue: ?string): CalculatedValues {
+function getCalculatedValues(dateValue: ?string): AgeValues {
     const parseData = parseDate(dateValue || '');
     if (!parseData.isValid) {
         return {
@@ -54,24 +55,51 @@ function getCalculatedValues(dateValue: ?string): CalculatedValues {
 }
 
 class D2AgeField extends Component<Props> {
-    onClear = () => {
-        this.props.onAgeChanged('');
+    static isEmptyNumbers(values: AgeValues) {
+        return !values.years && !values.months && !values.days;
+    }
+    static isValidNumbers(values: AgeValues) {
+        const isValidPositiveNumberFn = Validators.isPositiveNumber;
+        return isValidPositiveNumberFn(values.years || 0) &&
+            isValidPositiveNumberFn(values.years || 0) &&
+            isValidPositiveNumberFn(values.years || 0);
     }
 
-    updateByNumberInput = (values: CalculatedValues) => {
-        if (!values.date && !values.years && !values.months && !values.days) {
+    static getNumberOrZero(value: ?string) {
+        return value || 0;
+    }
+
+    onClear = () => {
+        this.props.onAgeChanged(null);
+    }
+
+    handleNumberInput = (values: AgeValues) => {
+        if (D2AgeField.isEmptyNumbers(values)) {
+            this.props.onAgeChanged({ date: values.date });
             return;
         }
+
+        if (!D2AgeField.isValidNumbers(values)) {
+            this.props.onAgeChanged({ ...values, date: '' });
+            return;
+        }
+
         const momentDate = moment();
-        momentDate.subtract(values.years || 0, 'years');
-        momentDate.subtract(values.months || 0, 'months');
-        momentDate.subtract(values.days || 0, 'days');
-        this.props.onAgeChanged(momentDate.format('L'));
+        momentDate.subtract(D2AgeField.getNumberOrZero(values.years), 'years');
+        momentDate.subtract(D2AgeField.getNumberOrZero(values.years), 'months');
+        momentDate.subtract(D2AgeField.getNumberOrZero(values.years), 'days');
+        const calculatedValues = getCalculatedValues(momentDate.format('L'));
+        this.props.onAgeChanged(calculatedValues);
+    }
+
+    handleDateInput = (date: ?string) => {
+        const calculatedValues = getCalculatedValues(date);
+        this.props.onAgeChanged(calculatedValues);
     }
 
     render() {
         const { value, orientation } = this.props;
-        const calculatedValues = getCalculatedValues(value);
+        const currentValues = value || {};
         const containerClass = classNames(
             defaultClasses.container,
             orientation === orientations.VERTICAL ? defaultClasses.containerVertical : '',
@@ -80,23 +108,23 @@ class D2AgeField extends Component<Props> {
         return (
             <div className={containerClass}>
                 <AgeDateInput
-                    onAgeChanged={this.props.onAgeChanged}
-                    value={calculatedValues.date}
+                    onAgeChanged={this.handleDateInput}
+                    value={currentValues.date}
                 />
                 <AgeNumberInput
                     label={i18n.t('Years')}
-                    value={calculatedValues.years}
-                    onBlur={years => this.updateByNumberInput({ ...calculatedValues, years })}
+                    value={currentValues.years}
+                    onBlur={years => this.handleNumberInput({ ...currentValues, years })}
                 />
                 <AgeNumberInput
                     label={i18n.t('Months')}
-                    value={calculatedValues.months}
-                    onBlur={months => this.updateByNumberInput({ ...calculatedValues, months })}
+                    value={currentValues.months}
+                    onBlur={months => this.handleNumberInput({ ...currentValues, months })}
                 />
                 <AgeNumberInput
                     label={i18n.t('Days')}
-                    value={calculatedValues.days}
-                    onBlur={days => this.updateByNumberInput({ ...calculatedValues, days })}
+                    value={currentValues.days}
+                    onBlur={days => this.handleNumberInput({ ...currentValues, days })}
                 />
                 <ClearIcon
                     onClick={this.onClear}
