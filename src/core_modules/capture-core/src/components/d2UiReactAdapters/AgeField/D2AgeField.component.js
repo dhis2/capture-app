@@ -2,15 +2,18 @@
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
+import classNames from 'classnames';
 import ClearIcon from '@material-ui/icons/Clear';
-import D2Date from '../DateAndTimeFields/DateField/D2Date.component';
-import AgeNumberInput from '../internal/AgeNumberInput/AgeNumberInput.component';
+import AgeNumberInput from '../internal/AgeInput/AgeNumberInput.component';
+import AgeDateInput from '../internal/AgeInput/AgeDateInput.component';
 import parseDate from '../../../utils/parsers/date.parser';
+import defaultClasses from '../../d2Ui/ageField/ageField.mod.css';
+import orientations from '../constants/orientations.const';
 
 type Props = {
-    label?: ?string,
     value: ?string,
     onAgeChanged: (value: string) => void,
+    orientation: $Values<typeof orientations>,
 };
 
 type CalculatedValues = {
@@ -20,32 +23,11 @@ type CalculatedValues = {
     days: ?string,
 }
 
-const containerStyle = {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'nowrap',
-};
-
-const datePickerStyle = {
-    marginTop: 16,
-};
-
-const labelStyle = {
-    color: 'rgba(0, 0, 0, 0.54)',
-    fontSize: '1em',
-};
-
-const clearIconStyle = {
-    cursor: 'pointer',
-    marginTop: 20,
-    marginLeft: 10,
-};
-
-function getCalculatedValues(dateValue: ?string) {
+function getCalculatedValues(dateValue: ?string): CalculatedValues {
     const parseData = parseDate(dateValue || '');
     if (!parseData.isValid) {
         return {
-            date: '',
+            date: dateValue,
             years: '',
             months: '',
             days: '',
@@ -72,7 +54,11 @@ function getCalculatedValues(dateValue: ?string) {
 }
 
 class D2AgeField extends Component<Props> {
-    updateAgeByNumberFields = (values: CalculatedValues) => {
+    onClear = () => {
+        this.props.onAgeChanged('');
+    }
+
+    updateByNumberInput = (values: CalculatedValues) => {
         if (!values.date && !values.years && !values.months && !values.days) {
             return;
         }
@@ -83,52 +69,38 @@ class D2AgeField extends Component<Props> {
         this.props.onAgeChanged(momentDate.format('L'));
     }
 
-    updateAgeByDateField = (value: string) => {
-        if (!value) return;
-        this.props.onAgeChanged(value);
-    }
-
-    onClear = () => {
-        this.props.onAgeChanged('');
-    }
-
     render() {
-        const { value } = this.props;
+        const { value, orientation } = this.props;
         const calculatedValues = getCalculatedValues(value);
-        console.log(calculatedValues.days);
+        const containerClass = classNames(
+            defaultClasses.container,
+            orientation === orientations.VERTICAL ? defaultClasses.containerVertical : '',
+        );
+
         return (
-            <div>
-                <div style={labelStyle}>{this.props.label}</div>
-                <div style={containerStyle}>
-                    <div style={datePickerStyle}>
-                        <D2Date
-                            value={calculatedValues.date}
-                            onBlur={this.updateAgeByDateField}
-                            placeholder={i18n.t('mm/dd/yyyy')}
-                            width={350}
-                            calendarMaxMoment={moment()}
-                        />
-                    </div>
-                    <AgeNumberInput
-                        label={i18n.t('Years')}
-                        value={calculatedValues.years}
-                        onBlur={years => this.updateAgeByNumberFields({ ...calculatedValues, years })}
-                    />
-                    <AgeNumberInput
-                        label={i18n.t('Months')}
-                        value={calculatedValues.months}
-                        onBlur={months => this.updateAgeByNumberFields({ ...calculatedValues, months })}
-                    />
-                    <AgeNumberInput
-                        label={i18n.t('Days')}
-                        value={calculatedValues.days}
-                        onBlur={days => this.updateAgeByNumberFields({ ...calculatedValues, days })}
-                    />
-                    <ClearIcon
-                        style={clearIconStyle}
-                        onClick={this.onClear}
-                    />
-                </div>
+            <div className={containerClass}>
+                <AgeDateInput
+                    onAgeChanged={this.props.onAgeChanged}
+                    value={calculatedValues.date}
+                />
+                <AgeNumberInput
+                    label={i18n.t('Years')}
+                    value={calculatedValues.years}
+                    onBlur={years => this.updateByNumberInput({ ...calculatedValues, years })}
+                />
+                <AgeNumberInput
+                    label={i18n.t('Months')}
+                    value={calculatedValues.months}
+                    onBlur={months => this.updateByNumberInput({ ...calculatedValues, months })}
+                />
+                <AgeNumberInput
+                    label={i18n.t('Days')}
+                    value={calculatedValues.days}
+                    onBlur={days => this.updateByNumberInput({ ...calculatedValues, days })}
+                />
+                <ClearIcon
+                    onClick={this.onClear}
+                />
             </div>
         );
     }

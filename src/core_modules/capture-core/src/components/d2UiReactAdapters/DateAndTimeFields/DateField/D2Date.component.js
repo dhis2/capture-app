@@ -18,7 +18,7 @@ type Props = {
     onFocus?: ?() => void,
     onDateSelectedFromCalendar?: () => void,
     classes: Object,
-    textFieldRef?: (instance: D2TextField) => void,
+    textFieldRef?: (instance: TextInput) => void,
 };
 
 type State = {

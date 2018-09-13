@@ -193,6 +193,7 @@ const getAgeField = (metaData: MetaDataElement, options: Object) => {
         label: metaData.formName,
         multiline: false,
         metaCompulsory: metaData.compulsory,
+        orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
     }, options);
 
     return createFieldProps({
@@ -203,7 +204,11 @@ const getAgeField = (metaData: MetaDataElement, options: Object) => {
                 withDefaultShouldUpdateInterface()(
                     withRequiredFieldCalculation()(
                         withDefaultFieldContainer()(
-                            withDefaultMessages()(AgeField),
+                            withLabel({
+                                onGetUseVerticalOrientation: () => options.formHorizontal,
+                            })(
+                                withDefaultMessages()(AgeField),
+                            ),
                         ),
                     ),
                 ),
