@@ -20,6 +20,7 @@ import {
     isValidPhoneNumber,
     isValidOrgUnit,
     isValidCoordinate,
+    isValidUsername,
 } from '../../../utils/validators/form';
 import MetaDataElement from '../../../metaData/DataElement/DataElement';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
@@ -53,6 +54,7 @@ const errorMessages = {
     PHONE_NUMBER: 'Please provide a valid phone number',
     ORGANISATION_UNIT: 'Please provide a valid organisation unit',
     COORDINATE: 'Please provide valid coordinates',
+    USERNAME: 'Please provide a valid username',
 };
 
 const isCompulsoryRequirementMet = Validators.wordToValidatorMap.get(wordValidatorKeys.COMPULSORY);
@@ -122,6 +124,10 @@ const validatorsForTypes = {
     [elementTypes.COORDINATE]: () => ({
         validator: isValidCoordinate,
         message: i18n.t(errorMessages.COORDINATE),
+    }),
+    [elementTypes.USERNAME]: () => ({
+        validator: isValidUsername,
+        message: i18n.t(errorMessages.USERNAME),
     }),
 };
 
