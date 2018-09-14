@@ -2,12 +2,15 @@
 import React, { Component } from 'react';
 import FormBuilderContainer from './FormBuilder.container';
 import FormBuilder from '../../__TEMP__/FormBuilderExternalState.component';
+import withCustomForm from './D2CustomForm/withCustomForm';
 import buildField from './field/buildField';
 
 import MetaDataElement from '../../metaData/DataElement/DataElement';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 
-import type { Field } from '../../__TEMP__/FormBuilderExternalState.component';
+import type { FieldConfig } from '../../__TEMP__/FormBuilderExternalState.component';
+
+const CustomFormHOC = withCustomForm()(FormBuilderContainer);
 
 type FormsValues = {
     [id: string]: any
@@ -51,7 +54,7 @@ class D2SectionFields extends Component<Props> {
 
     handleUpdateField: (elementId: string, value: any) => void;
     formBuilderInstance: ?FormBuilder;
-    formFields: Array<Field>;
+    formFields: Array<FieldConfig>;
     rulesCompulsoryErrors: { [elementId: string]: boolean };
 
     constructor(props: Props) {
@@ -61,7 +64,7 @@ class D2SectionFields extends Component<Props> {
         this.rulesCompulsoryErrors = {};
     }
 
-    buildFormFields(): Array<Field> {
+    buildFormFields(): Array<FieldConfig> {
         const elements = this.props.fieldsMetaData;
 
         // $FlowSuppress :does not recognize filter removing nulls
@@ -137,7 +140,7 @@ class D2SectionFields extends Component<Props> {
             }, {});
     }
 
-    getFieldConfigWithRulesEffects(): Array<Field> {
+    getFieldConfigWithRulesEffects(): Array<FieldConfig> {
         return this.formFields.map(formField => ({
             ...formField,
             props: {
@@ -179,7 +182,7 @@ class D2SectionFields extends Component<Props> {
         this.buildRulesCompulsoryErrors();
 
         return (
-            <FormBuilderContainer
+            <CustomFormHOC
                 innerRef={(instance) => { this.formBuilderInstance = instance; }}
                 id={formBuilderId}
                 fields={this.getFieldConfigWithRulesEffects()}

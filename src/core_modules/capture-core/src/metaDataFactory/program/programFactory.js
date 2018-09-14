@@ -10,6 +10,7 @@ import TrackerProgram from '../../metaData/Program/TrackerProgram';
 
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import Section from '../../metaData/RenderFoundation/Section';
+import CustomForm from '../../metaData/RenderFoundation/CustomForm';
 import DataElement from '../../metaData/DataElement/DataElement';
 import OptionSet from '../../metaData/OptionSet/OptionSet';
 import { inputTypes } from '../../metaData/OptionSet/optionSet.const';
@@ -47,7 +48,7 @@ type CachedProgramStageDataElement = {
     compulsory: boolean,
     displayInReports: boolean,
     renderOptionsAsRadio?: ?boolean,
-    dataElement: CachedDataElement
+    dataElement: CachedDataElement,
 };
 
 type CachedSectionDataElements = {
@@ -60,6 +61,11 @@ type CachedProgramStageSection = {
     dataElements: ?Array<CachedSectionDataElements>
 };
 
+type CachedDataEntryForm = {
+    id: string,
+    htmlCode: string,
+};
+
 type CachedProgramStage = {
     id: string,
     access: Object,
@@ -67,7 +73,9 @@ type CachedProgramStage = {
     description: ?string,
     executionDateLabel?: ?string,
     programStageSections: ?Array<CachedProgramStageSection>,
-    programStageDataElements: ?Array<CachedProgramStageDataElement>
+    programStageDataElements: ?Array<CachedProgramStageDataElement>,
+    formType: string,
+    dataEntryForm: CachedDataEntryForm,
 };
 
 type CachedCategoryOption = {
@@ -241,6 +249,13 @@ function buildStage(d2ProgramStage: CachedProgramStage) {
         _this.addLabel({ id: 'eventDate', label: d2ProgramStage.executionDateLabel || 'Incident date' });
     });
 
+    if (d2ProgramStage.formType === 'CUSTOM' && d2ProgramStage.dataEntryForm) {
+        stage.addSection(buildMainSection(d2ProgramStage.programStageDataElements));
+        stage.customForm = new CustomForm((_this) => {
+            _this.id = d2ProgramStage.dataEntryForm.id;
+            _this.data = d2ProgramStage.dataEntryForm.htmlCode;
+        });
+    }
     if (isNonEmptyArray(d2ProgramStage.programStageSections)) {
         const d2ProgramStageDataElementsAsObject = convertProgramStageDataElementsToObject(d2ProgramStage.programStageDataElements);
         // $FlowSuppress

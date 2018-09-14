@@ -24,7 +24,7 @@ export type ValidatorContainer = {
     message: string,
 };
 
-export type Field = {
+export type FieldConfig = {
     id: string,
     component: React.ComponentType<any>,
     props?: ?Object,
@@ -41,7 +41,7 @@ type FieldUI = {
 
 type Props = {
     id: string,
-    fields: Array<Field>,
+    fields: Array<FieldConfig>,
     values: { [id: string]: any },
     fieldsUI: { [id: string]: FieldUI },
     onUpdateFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, callback: Function) => void,
@@ -52,6 +52,7 @@ type Props = {
     validateIfNoUIData?: ?boolean,
     classes: Object,
     formHorizontal: ?boolean,
+    children?: ?((field: FieldConfig) => React.Node, fields: Array<FieldConfig>) => React.Node,
 };
 
 type FieldCommitOptions = {
@@ -59,7 +60,7 @@ type FieldCommitOptions = {
 };
 
 class FormBuilder extends React.Component<Props> {
-    static validateField(field: Field, value: any): { valid: boolean, errorMessage?: string } {
+    static validateField(field: FieldConfig, value: any): { valid: boolean, errorMessage?: string } {
         const validatorResult = (field.validators || [])
             .reduce((pass, currentValidator) => (pass === true
                 ? (currentValidator.validator(value) === true || currentValidator.message) : pass
@@ -151,12 +152,12 @@ class FormBuilder extends React.Component<Props> {
      * @param fieldId
      * @returns {}
     */
-    getFieldProp(fieldId: string): Field {
+    getFieldProp(fieldId: string): FieldConfig {
         // $FlowSuppress
         return this.props.fields.find(f => f.id === fieldId);
     }
 
-    hasCommitedValueChanged(field: Field, value: any) {
+    hasCommitedValueChanged(field: FieldConfig, value: any) {
         let valueChanged = true;
         const oldValue = this.props.values[field.id];
 
@@ -234,7 +235,7 @@ class FormBuilder extends React.Component<Props> {
         }, []);
     }
 
-    renderFields() {
+    renderField = (field) => {
         const {
             fields,
             values,
@@ -247,46 +248,55 @@ class FormBuilder extends React.Component<Props> {
             onUpdateFieldAsync,
             onUpdateFieldUIOnly,
             validateIfNoUIData,
+            children,
             ...passOnProps } = this.props;
 
-        return fields.map((field) => {
-            const props = field.props || {};
-            const fieldUI = fieldsUI[field.id] || {};
-            const value = values[field.id];
+        const props = field.props || {};
+        const fieldUI = fieldsUI[field.id] || {};
+        const value = values[field.id];
 
-            const commitFieldHandler = this.commitFieldUpdate.bind(this, field.id);
-            const commitEvent = field.commitEvent || 'onBlur';
-            const commitPropObject = {
-                [commitEvent]: commitFieldHandler,
-            };
+        const commitFieldHandler = this.commitFieldUpdate.bind(this, field.id);
+        const commitEvent = field.commitEvent || 'onBlur';
+        const commitPropObject = {
+            [commitEvent]: commitFieldHandler,
+        };
 
-            const asyncProps = {};
+        const asyncProps = {};
 
-            if (props.async) {
-                asyncProps.onCommitAsync = (callback: Function) => this.handleCommitAsync(field.id, props.label, callback);
-                asyncProps.onUpdateAsyncUIState = (asyncState: Object) => this.handleUpdateAsyncState(field.id, asyncState);
-                asyncProps.asyncUIState = this.asyncUIState[field.id];
-            }
+        if (props.async) {
+            asyncProps.onCommitAsync = (callback: Function) => this.handleCommitAsync(field.id, props.label, callback);
+            asyncProps.onUpdateAsyncUIState = (asyncState: Object) => this.handleUpdateAsyncState(field.id, asyncState);
+            asyncProps.asyncUIState = this.asyncUIState[field.id];
+        }
 
-            return (
-                <div
-                    key={field.id}
-                    className={classes.fieldContainer}
-                >
-                    <field.component
-                        ref={(fieldInstance) => { this.setFieldInstance(fieldInstance, field.id); }}
-                        value={value}
-                        errorMessage={fieldUI.errorMessage}
-                        touched={fieldUI.touched}
-                        validationAttempted={validationAttempted}
-                        {...commitPropObject}
-                        {...props}
-                        {...passOnProps}
-                        {...asyncProps}
-                    />
-                </div>
-            );
-        });
+        return (
+            <div
+                key={field.id}
+                className={classes.fieldContainer}
+            >
+                <field.component
+                    ref={(fieldInstance) => { this.setFieldInstance(fieldInstance, field.id); }}
+                    value={value}
+                    errorMessage={fieldUI.errorMessage}
+                    touched={fieldUI.touched}
+                    validationAttempted={validationAttempted}
+                    {...commitPropObject}
+                    {...props}
+                    {...passOnProps}
+                    {...asyncProps}
+                />
+            </div>
+        );
+    }
+
+    renderFields() {
+        const { fields, children } = this.props;
+
+        if (children) {
+            return children(this.renderField, fields);
+        }
+
+        return fields.map(field => this.renderField(field));
     }
 
     render() {
