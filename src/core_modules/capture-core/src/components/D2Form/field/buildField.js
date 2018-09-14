@@ -13,6 +13,7 @@ import D2PhoneNumber from '../../FormFields/PhoneNumber/PhoneNumber.component';
 import D2AgeField from '../../FormFields/AgeField/AgeField.component';
 import OrgUnitTree from '../../FormFields/OrgUnitTree/OrgUnitTree.component';
 import CoordinateField from '../../FormFields/CoordinateField/CoordinateField.component';
+import UsernameField from '../../FormFields/Username/Username.component';
 
 import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
 import OptionsSelect from '../../FormFields/Options/SelectVirtualized/OptionsSelectVirtualized.component';
@@ -182,6 +183,33 @@ const getCoordinateField = (metaData: MetaDataElement, options: Object) => {
     }, metaData);
 };
 
+const getUsernameField = (metaData: MetaDataElement, options: Object) => {
+    const props = createComponentProps({
+        label: metaData.formName,
+        multiline: false,
+        metaCompulsory: metaData.compulsory,
+    }, options);
+
+    return createFieldProps({
+        id: metaData.id,
+        component:
+        withGotoInterface()(
+            withHideCompatibility()(
+                withDefaultShouldUpdateInterface()(
+                    withRequiredFieldCalculation()(
+                        withDefaultFieldContainer()(
+                            withDefaultMessages()(
+                                withInternalChangeHandler()(UsernameField),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        props,
+    }, metaData);
+};
+
 const getAgeField = (metaData: MetaDataElement, options: Object) => {
     const props = createComponentProps({
         label: metaData.formName,
@@ -330,6 +358,7 @@ const fieldForTypes = {
     [elementTypes.AGE]: (metaData: MetaDataElement, options: Object) => getAgeField(metaData, options),
     [elementTypes.ORGANISATION_UNIT]: (metaData: MetaDataElement, options: Object) => getOrgUnitField(metaData, options),
     [elementTypes.COORDINATE]: (metaData: MetaDataElement, options: Object) => getCoordinateField(metaData, options),
+    [elementTypes.USERNAME]: (metaData: MetaDataElement, options: Object) => getUsernameField(metaData, options),
     [elementTypes.FILE_RESOURCE]: (metaData: MetaDataElement, options: Object) => {
         const props = createComponentProps({
             label: metaData.formName,

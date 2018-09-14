@@ -24,11 +24,14 @@
     margin-right: 5px;
 }
 .coordinate-leaflet-map {
-    overflow: hidden;
     position: absolute;
-    z-index: 10;
+    overflow: hidden;
+    z-index: 1000;
     left: 0;
     top: 40px;
-    width: 250px;
+}
+.leaflet-container {
+    z-index: 10;
+    width: 400px;
     height: 250px;
 }

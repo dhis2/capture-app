@@ -30,7 +30,14 @@ export default class CoordinateField extends Component<Props> {
         };
     }
 
-    handleBlur = () => this.props.onBlur({ latitude: this.state.latitude, longitude: this.state.longitude });
+    handleBlur = () => {
+        const { latitude, longitude } = this.state
+        if (!latitude && !longitude) {
+            this.props.onBlur(null);
+        } else {
+            this.props.onBlur({ latitude, longitude });
+        }
+    }
 
     handleLatitudeChange = evt => this.setState({ latitude: evt.target.value });
     handleLongitudeChange = evt => this.setState({ longitude: evt.target.value });
@@ -47,7 +54,7 @@ export default class CoordinateField extends Component<Props> {
 
     render() {
         const { latitude, longitude } = this.state;
-        const position = [latitude, longitude];
+        const position = latitude && longitude ? [latitude, longitude] : [51.505, -0.09];
         return (
             <div className="coordinate-field">
                 <div className="coordinate-label">
@@ -67,7 +74,7 @@ export default class CoordinateField extends Component<Props> {
                                 <div className="coordinate-leaflet-map">
                                     <Map center={position} zoom={13} onClick={this.onMapClick}>
                                         <TileLayer
-                                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                            url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                                             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                                         />
                                     </Map>
