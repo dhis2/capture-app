@@ -16,9 +16,6 @@ const getStyles = (theme: Theme) => ({
 
 type Props = {
     value: ?string,
-    onSetFocus: () => void,
-    onRemoveFocus: () => void,
-    inFocus: boolean,
     onChange?: ?(value: string, event: SyntheticEvent<HTMLInputElement>) => void,
     onBlur?: ?(value: string, event: SyntheticEvent<HTMLInputElement>) => void,
     classes: {
@@ -33,12 +30,7 @@ class TextField extends Component<Props> {
     }
 
     handleBlur = (event: SyntheticEvent<HTMLInputElement>) => {
-        this.props.onRemoveFocus();
         this.props.onBlur && this.props.onBlur(event.currentTarget.value, event);
-    }
-
-    handleFocus = () => {
-        this.props.onSetFocus();
     }
 
     render() {
@@ -47,22 +39,15 @@ class TextField extends Component<Props> {
             onBlur,
             onChange,
             classes,
-            onSetFocus,
-            onRemoveFocus,
-            inFocus,
             ...passOnProps
         } = this.props;
-
-        const { inputWrapperFocused, inputWrapperUnfocused, ...restClasses } = classes;
-        const passOnClasses = { ...restClasses, inputWrapper: inFocus ? inputWrapperFocused : inputWrapperUnfocused };
 
         return (
             <D2TextField
                 value={value || ''}
                 onChange={this.handleChange}
                 onBlur={this.handleBlur}
-                onFocus={this.handleFocus}
-                classes={passOnClasses}
+                classes={classes}
                 {...passOnProps}
             />
         );

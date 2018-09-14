@@ -5,7 +5,6 @@ import defaultClasses from '../../../d2Ui/internal/textInput/textInput.mod.css';
 
 type Classes = {
     input?: ?string,
-    inputWrapper?: ?string,
 };
 
 type Props = {
@@ -18,9 +17,7 @@ const TextInput = (props: Props) => {
     const { multiLine, classes, inputRef, ...passOnProps } = props;
 
     return (
-        <div
-            className={classNames(defaultClasses.inputWrapper, classes.inputWrapper)}
-        >
+        <React.Fragment>
             {
                 multiLine ?
                     <textarea
@@ -34,7 +31,7 @@ const TextInput = (props: Props) => {
                         {...passOnProps}
                     />
             }
-        </div>
+        </React.Fragment>
     );
 };
 

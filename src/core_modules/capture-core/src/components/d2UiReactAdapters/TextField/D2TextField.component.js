@@ -2,6 +2,7 @@
 import * as React from 'react';
 import defaultClasses from '../../d2Ui/textField/textField.mod.css';
 import TextInput from '../internal/TextInput/TextInput.component';
+import withFocusHandler from '../internal/TextInput/withFocusHandler';
 
 type Classes = {
     input?: ?string,
@@ -15,7 +16,7 @@ type Props = {
 
 class D2TextField extends React.Component<Props> {
     render() {
-        const { inputRef, classes: optionalClasses, ...passOnProps } = this.props;
+        const { classes: optionalClasses, ...passOnProps } = this.props;
         const classes = optionalClasses || {};
 
         return (
@@ -24,7 +25,6 @@ class D2TextField extends React.Component<Props> {
             >
                 <TextInput
                     classes={classes}
-                    inputRef={inputRef}
                     {...passOnProps}
                 />
             </div>
@@ -32,4 +32,4 @@ class D2TextField extends React.Component<Props> {
     }
 }
 
-export default D2TextField;
+export default withFocusHandler()(D2TextField);

@@ -1,5 +1,5 @@
 // @flow
-import isValidPositiveInteger from './integerPositive.validator';
+import isValidZeroOrPositiveInteger from './integerZeroOrPositive.validator';
 import isValidDate from './date.validator';
 /**
  *
@@ -30,16 +30,14 @@ function getValueOrEmptyString(value: ?string) {
 function validateNumbers(years: string, months: string, days: string) {
     const errorResult = [];
 
-    errorResult.push({ years: errorMessages.years });
-
-    if (!isValidPositiveInteger(years, true)) {
+    if (!isValidZeroOrPositiveInteger(years, true)) {
         errorResult.push({ years: errorMessages.years });
     }
-    if (!isValidPositiveInteger(months, true)) {
-        errorResult.push({ years: errorMessages.years });
+    if (!isValidZeroOrPositiveInteger(months, true)) {
+        errorResult.push({ months: errorMessages.years });
     }
-    if (!isValidPositiveInteger(days, true)) {
-        errorResult.push({ years: errorMessages.years });
+    if (!isValidZeroOrPositiveInteger(days, true)) {
+        errorResult.push({ days: errorMessages.years });
     }
 
     if (errorResult.length > 0) {

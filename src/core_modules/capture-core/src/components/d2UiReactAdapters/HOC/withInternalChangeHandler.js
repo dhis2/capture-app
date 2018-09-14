@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 type Props = {
-    onChange?: ?(value: any) => void,
+    onChange: (value: any) => void,
     value: any,
 };
 
@@ -30,9 +30,9 @@ export default () =>
                 }
             }
 
-            handleChange(event: any) {
+            handleChange(value: any) {
                 this.setState({
-                    value: event.currentTarget.value,
+                    value,
                 });
             }
 

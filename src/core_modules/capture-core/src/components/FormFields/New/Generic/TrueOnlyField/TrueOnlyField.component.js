@@ -1,7 +1,7 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { D2BooleanField } from '../../../../d2UiReactAdapters';
+import { D2TrueOnlyField } from '../../../../d2UiReactAdapters';
 
 const getStyles = (theme: Theme) => ({
     iconSelected: {
@@ -12,7 +12,7 @@ const getStyles = (theme: Theme) => ({
     },
     focus: {
         border: `2px solid ${theme.palette.accent.dark}`,
-        borderRadius: 16,
+        borderRadius: 2,
         padding: 2,
     },
     unFocus: {
@@ -24,11 +24,11 @@ type Props = {
     onBlur: (value: any, event: any) => void,
 };
 
-class BooleanField extends React.Component<Props> {
+class TrueOnlyField extends React.Component<Props> {
     render() {
         const { onBlur, ...passOnProps } = this.props;
         return (
-            <D2BooleanField
+            <D2TrueOnlyField
                 onSelect={onBlur}
                 {...passOnProps}
             />
@@ -36,4 +36,4 @@ class BooleanField extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(BooleanField);
+export default withStyles(getStyles)(TrueOnlyField);

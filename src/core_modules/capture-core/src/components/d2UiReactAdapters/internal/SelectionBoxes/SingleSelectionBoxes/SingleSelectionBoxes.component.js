@@ -3,12 +3,12 @@ import * as React from 'react';
 import CheckedIcon from '../../../Icons/SingleSelectionCheckedIcon.component';
 import UncheckedIcon from '../../../Icons/SingleSelectionUncheckedIcon.component';
 import SingleSelectBox from './SingleSelectBox/SingleSelectBox.component';
-import withFocusSaver from './SingleSelectBox/withFocusSaver';
+import withFocusHandler from './SingleSelectBox/withFocusHandler';
 import orientations from '../../../constants/orientations.const';
 import defaultClasses from '../../../../d2Ui/internal/selectionBoxes/singleSelectionBoxes.mod.css';
 import type { OptionRendererInputData, OptionsArray, OptionRenderer } from '../selectBoxes.types';
 
-const SingleSelectBoxWrapped = withFocusSaver()(SingleSelectBox);
+const SingleSelectBoxWrapped = withFocusHandler()(SingleSelectBox);
 
 type Props = {
     id: string,
@@ -24,6 +24,8 @@ type Props = {
         unFocus?: string,
     },
     onSelect: (value: any) => void,
+    onSetFocus: () => void,
+    onRemoveFocus: () => void,
 };
 
 class SingleSelectionBoxes extends React.Component<Props> {
@@ -43,11 +45,17 @@ class SingleSelectionBoxes extends React.Component<Props> {
         );
     }
 
+    getPostProcessedCustomIcon(customElement: React.Element<any>, isSelected: boolean) {
+        return React.cloneElement(customElement, isSelected ?
+            { className: this.props.classes && this.props.classes.iconSelected } :
+            { className: this.props.classes && this.props.classes.iconDeselected }, null);
+    }
+
     getIconElement(optionData: OptionRendererInputData, isSelected: boolean) {
         const { children } = this.props;
         const customIconElement = children ? children(optionData, isSelected) : null;
         if (customIconElement) {
-            return customIconElement;
+            return this.getPostProcessedCustomIcon(customIconElement, isSelected);
         }
 
         return isSelected ? this.getCheckedIcon() : this.getUncheckedIcon();

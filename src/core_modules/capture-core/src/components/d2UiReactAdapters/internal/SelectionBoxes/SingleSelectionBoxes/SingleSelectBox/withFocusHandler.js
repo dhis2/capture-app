@@ -58,6 +58,7 @@ const getFocusHandler = () => (InnerComponent: React.ComponentType<any>) =>
                 });
                 this.props.onRemoveFocus && this.props.onRemoveFocus();
             }
+            this.isMouseClick = false;
         }
 
         setInputInstance = (instance: HTMLInputElement) => {

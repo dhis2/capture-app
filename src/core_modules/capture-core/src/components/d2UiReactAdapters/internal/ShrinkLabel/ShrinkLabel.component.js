@@ -2,9 +2,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
 import classNames from 'classnames';
-
+import withStyles from '@material-ui/core/styles/withStyles';
+import FormLabel from './FormLabel.component';
 
 export const styles = theme => ({
     /* Styles applied to the root element. */
@@ -40,11 +40,14 @@ export const styles = theme => ({
 
 function InputLabel(props, context) {
     const {
+        children,
         classes,
         className: classNameProp,
         disableAnimation,
+        FormLabelClasses,
         margin: marginProp,
         shrink: shrinkProp,
+        ...other
     } = props;
 
     const { muiFormControl } = context;
@@ -58,11 +61,12 @@ function InputLabel(props, context) {
     if (typeof margin === 'undefined' && muiFormControl) {
         margin = muiFormControl.margin;
     }
+    margin = 'dense';
 
     const className = classNames(
         classes.root,
         {
-            [classes.formControl]: muiFormControl,
+            [classes.formControl]: classes.formControl,
             [classes.animated]: !disableAnimation,
             [classes.shrink]: shrink,
             [classes.marginDense]: margin === 'dense',
@@ -71,8 +75,8 @@ function InputLabel(props, context) {
     );
 
     return (
-        <div data-shrink={shrink} className={className}>
-            {'Hello'}
+        <div data-shrink={shrink} className={className} classes={FormLabelClasses} >
+            {children}
         </div>
     );
 }

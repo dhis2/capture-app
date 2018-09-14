@@ -97,34 +97,49 @@ class D2AgeField extends Component<Props> {
         this.props.onAgeChanged(calculatedValues);
     }
 
+    getMessages = (innerMessage) => {
+        const messages = innerMessage && innerMessage.message;
+        if (messages) {
+            return Object.keys(messages).reduce((map, messageKey) => {
+                map[messageKey] = { message: messages[messageKey], className: innerMessage.className };
+                return map;
+            }, {});
+        }
+        return {};
+    }
+
     render() {
-        const { value, orientation } = this.props;
+        const { value, orientation, innerMessage } = this.props;
         const currentValues = value || {};
         const containerClass = classNames(
             defaultClasses.container,
             orientation === orientations.VERTICAL ? defaultClasses.containerVertical : '',
         );
-
+        const messages = this.getMessages(innerMessage);
         return (
             <div className={containerClass}>
                 <AgeDateInput
                     onAgeChanged={this.handleDateInput}
                     value={currentValues.date}
+                    message={messages.date}
                 />
                 <AgeNumberInput
                     label={i18n.t('Years')}
                     value={currentValues.years}
                     onBlur={years => this.handleNumberInput({ ...currentValues, years })}
+                    message={messages.years}
                 />
                 <AgeNumberInput
                     label={i18n.t('Months')}
                     value={currentValues.months}
                     onBlur={months => this.handleNumberInput({ ...currentValues, months })}
+                    message={messages.months}
                 />
                 <AgeNumberInput
                     label={i18n.t('Days')}
                     value={currentValues.days}
                     onBlur={days => this.handleNumberInput({ ...currentValues, days })}
+                    message={messages.days}
                 />
                 <ClearIcon
                     onClick={this.onClear}

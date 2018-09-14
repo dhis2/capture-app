@@ -26,6 +26,13 @@ const styles = (theme: Theme) => ({
     },
 });
 
+const messageTypes = {
+    error: 'error',
+    warning: 'warning',
+    info: 'info',
+    validating: 'validating',
+};
+
 type Props = {
     validatingMessage?: ?string,
     errorMessage?: ?(string | Object),
@@ -57,30 +64,27 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
             );
         }
 
-        static getMessage(message, classes: string): MessageContainer {
-            return isObject(message) ?
-                // $FlowSuppress
-                { innerMessage: message } :
-                { element: DisplayMessagesHOC.createMessageElement(message, classes) }
-            ;
-        }
+        convertMessage = (message, messageType: $Values<typeof messageTypes>): MessageContainer => (isObject(message) ?
+            // $FlowSuppress
+            { innerMessage: { message, messageType } } :
+            { element: DisplayMessagesHOC.createMessageElement(message, this.getClassNames(this.props.classes[messageType])) })
 
 
         getClassNames(childClass) {
             return classNames(childClass, this.props.classes.base);
         }
 
-        getMessage(errorMessage, warningMessage, infoMessage, validatingMessage, classes) {
+        getMessage(errorMessage, warningMessage, infoMessage, validatingMessage) {
             let message = {};
 
             if (validatingMessage) {
-                message = DisplayMessagesHOC.getMessage(validatingMessage, this.getClassNames(classes.validating));
+                message = this.convertMessage(validatingMessage, messageTypes.validating);
             } else if (errorMessage) {
-                message = DisplayMessagesHOC.getMessage(errorMessage, this.getClassNames(classes.error));
+                message = this.convertMessage(errorMessage, messageTypes.error);
             } else if (warningMessage) {
-                message = DisplayMessagesHOC.getMessage(warningMessage, this.getClassNames(classes.warning));
+                message = this.convertMessage(warningMessage, messageTypes.warning);
             } else if (infoMessage) {
-                message = DisplayMessagesHOC.getMessage(infoMessage, this.getClassNames(classes.info));
+                message = this.convertMessage(infoMessage, messageTypes.info);
             }
 
             return message;
@@ -97,7 +101,7 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
             } = this.props;
 
             const message =
-                this.getMessage(errorMessage, warningMessage, infoMessage, validatingMessage, classes);
+                this.getMessage(errorMessage, warningMessage, infoMessage, validatingMessage);
 
             return (
                 <div>
