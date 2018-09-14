@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import LocationIcon from '@material-ui/icons/LocationOn';
-import { Map, TileLayer } from 'react-leaflet';
+import { Map, TileLayer, Marker } from 'react-leaflet';
 
 import './styles.css';
 
@@ -77,6 +77,7 @@ export default class CoordinateField extends Component<Props> {
                                             url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                                             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                                         />
+                                        {latitude && longitude && <Marker position={position} />}
                                     </Map>
                                 </div>
                             )
