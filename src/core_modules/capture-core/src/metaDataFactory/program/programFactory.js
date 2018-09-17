@@ -238,6 +238,7 @@ function buildStage(d2ProgramStage: CachedProgramStage) {
         _this.access = d2ProgramStage.access;
         _this.name = d2ProgramStage.displayName;
         _this.description = d2ProgramStage.description;
+        _this.featureType = d2ProgramStage.featureType;
         _this.addLabel({ id: 'eventDate', label: d2ProgramStage.executionDateLabel || 'Incident date' });
     });
 
