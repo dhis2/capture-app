@@ -1,0 +1,118 @@
+// @flow
+import React, { Component } from 'react';
+import FormLabel from '@material-ui/core/FormLabel';
+import L from 'leaflet';
+import { Map, TileLayer, FeatureGroup } from 'react-leaflet';
+import EditControl from 'react-leaflet-draw/lib/EditControl';
+
+import './styles.css';
+
+type Props = {
+  onBlur: (value: string, event: UiEventData) => void,
+};
+
+function coordsToFeatureCollection(coordinates) {
+    if (!coordinates) {
+        return null;
+    }
+
+    const list = coordinates[0].map(c => [...c, 0]);
+    return {
+        type: 'FeatureCollection',
+        features: [
+            {
+                type: 'Feature',
+                properties: {},
+                geometry: {
+                    type: 'Polygon',
+                    coordinates: [list],
+                },
+            },
+        ],
+    };
+}
+
+export default class PolygonField extends Component<Props> {
+    constructor(props) {
+        super(props);
+
+        const featureCollection = Array.isArray(props.value) ? coordsToFeatureCollection(props.value) : [];
+        this.state = {
+            featureCollection,
+        };
+    }
+
+    onEdited = (e) => {
+        const coordinates = e.layers.toGeoJSON().features[0].geometry.coordinates;
+        this.setState({ featureCollection: coordsToFeatureCollection(coordinates) }, () => {
+            this.props.onBlur(coordinates);
+        });
+    }
+
+    onCreate = (e) => {
+        const coordinates = e.layer.toGeoJSON().geometry.coordinates;
+        this.setState({ featureCollection: coordsToFeatureCollection(coordinates) }, () => {
+            this.props.onBlur(coordinates);
+        });
+    }
+
+    onDeleted = () => {
+        this.setState({ featureCollection: null });
+        this.props.onBlur(null);
+    }
+
+    onFeatureGroupReady = (reactFGref) => {
+        const { featureCollection } = this.state;
+
+        if (featureCollection) {
+            const leafletGeoJSON = new L.GeoJSON(featureCollection);
+            if (reactFGref) {
+                const leafletFG = reactFGref.leafletElement;
+                leafletFG.clearLayers();
+
+                leafletGeoJSON.eachLayer((layer) => {
+                    leafletFG.addLayer(layer);
+                });
+            }
+        }
+    }
+
+    render() {
+        return (
+            <div className="polygon-field">
+                <div className="polygon-label">
+                    <FormLabel
+                        component="label"
+                        required={!!this.props.required}
+                        focused={false}
+                    >
+                        {this.props.label}
+                    </FormLabel>
+                </div>
+                <div className="polygon-container">
+                    <Map zoom={13} center={[51.505, -0.09]} zoomControl={false}>
+                        <TileLayer
+                            url="//cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
+                            attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+                        />
+                        <FeatureGroup ref={(reactFGref) => { this.onFeatureGroupReady(reactFGref); }}>
+                            <EditControl
+                                position="topright"
+                                onEdited={this.onEdited}
+                                onCreated={this.onCreate}
+                                onDeleted={this.onDeleted}
+                                draw={{
+                                    rectangle: false,
+                                    polyline: false,
+                                    circle: false,
+                                    marker: false,
+                                    circlemarker: false,
+                                }}
+                            />
+                        </FeatureGroup>
+                    </Map>
+                </div>
+            </div>
+        );
+    }
+}

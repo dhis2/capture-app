@@ -1,0 +1,19 @@
+.sr-only {
+    display: none;
+}
+
+.polygon-field {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.polygon-label {
+    margin-bottom: 5px;
+}
+
+.polygon-container .leaflet-container {
+    z-index: 10;
+    width: 500px;
+    height: 400px;
+}

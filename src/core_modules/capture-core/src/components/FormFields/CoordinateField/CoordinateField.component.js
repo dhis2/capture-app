@@ -31,7 +31,7 @@ export default class CoordinateField extends Component<Props> {
     }
 
     handleBlur = () => {
-        const { latitude, longitude } = this.state
+        const { latitude, longitude } = this.state;
         if (!latitude && !longitude) {
             this.props.onBlur(null);
         } else {
@@ -74,8 +74,8 @@ export default class CoordinateField extends Component<Props> {
                                 <div className="coordinate-leaflet-map">
                                     <Map center={position} zoom={13} onClick={this.onMapClick}>
                                         <TileLayer
-                                            url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-                                            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                                            url="//cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
+                                            attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
                                         />
                                         {latitude && longitude && <Marker position={position} />}
                                     </Map>
