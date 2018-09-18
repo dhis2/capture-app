@@ -6,3 +6,19 @@
 .containerVertical {
     flex-direction: column;
 }
+
+.ageClear {
+    padding-top: 16px;
+}
+
+.ageInputContainer {
+    display: inline-flex;
+    padding-top: 16px;
+    position: relative;
+    flex-grow: 1;
+}
+
+.ageNumberInputContainer {
+    position: relative;
+    min-width: 150px;
+}

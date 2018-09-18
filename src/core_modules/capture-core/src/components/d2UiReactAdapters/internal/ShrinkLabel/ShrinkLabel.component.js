@@ -1,10 +1,8 @@
 // @inheritedComponent FormLabel
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import withStyles from '@material-ui/core/styles/withStyles';
-import FormLabel from './FormLabel.component';
+import defaultClasses from '../../../d2Ui/internal/shrinkLabel/shrinkLabel.mod.css';
 
 export const styles = theme => ({
     /* Styles applied to the root element. */
@@ -14,15 +12,10 @@ export const styles = theme => ({
     /* Styles applied to the root element if the component is a descendant of `FormControl`. */
     formControl: {
         position: 'absolute',
-        left: 0,
+        left: 5,
         top: 0,
         // slight alteration to spec spacing to match visual spec result
-        transform: 'translate(0, 24px) scale(1)',
-    },
-    /* Styles applied to the root element if `margin="dense"`. */
-    marginDense: {
-    // Compensation for the `Input.inputDense` style.
-        transform: 'translate(0, 21px) scale(1)',
+        transform: 'translate(0, 26px) scale(1)',
     },
     /* Styles applied to the `input` element if `shrink={true}`. */
     shrink: {
@@ -38,104 +31,17 @@ export const styles = theme => ({
     },
 });
 
-function InputLabel(props, context) {
+function InputLabel(props) {
     const {
         children,
-        classes,
-        className: classNameProp,
-        disableAnimation,
-        FormLabelClasses,
-        margin: marginProp,
-        shrink: shrinkProp,
-        ...other
+        shrink,
     } = props;
-
-    const { muiFormControl } = context;
-    let shrink = shrinkProp;
-
-    if (typeof shrink === 'undefined' && muiFormControl) {
-        shrink = muiFormControl.filled || muiFormControl.focused || muiFormControl.adornedStart;
-    }
-
-    let margin = marginProp;
-    if (typeof margin === 'undefined' && muiFormControl) {
-        margin = muiFormControl.margin;
-    }
-    margin = 'dense';
-
-    const className = classNames(
-        classes.root,
-        {
-            [classes.formControl]: classes.formControl,
-            [classes.animated]: !disableAnimation,
-            [classes.shrink]: shrink,
-            [classes.marginDense]: margin === 'dense',
-        },
-        classNameProp,
-    );
-
+    const className = classNames(defaultClasses.label, shrink ? defaultClasses.labelShrinked : defaultClasses.labelUnshrinked);
     return (
-        <div data-shrink={shrink} className={className} classes={FormLabelClasses} >
+        <label className={className} style={{ zIndex: 11 }}>
             {children}
-        </div>
+        </label>
     );
 }
 
-InputLabel.propTypes = {
-    /**
-   * The contents of the `InputLabel`.
-   */
-    children: PropTypes.node,
-    /**
-   * Override or extend the styles applied to the component.
-   * See [CSS API](#css-api) below for more details.
-   */
-    classes: PropTypes.object.isRequired,
-    /**
-   * @ignore
-   */
-    className: PropTypes.string,
-    /**
-   * If `true`, the transition animation is disabled.
-   */
-    disableAnimation: PropTypes.bool,
-    /**
-   * If `true`, apply disabled class.
-   */
-    disabled: PropTypes.bool,
-    /**
-   * If `true`, the label will be displayed in an error state.
-   */
-    error: PropTypes.bool,
-    /**
-   * If `true`, the input of this label is focused.
-   */
-    focused: PropTypes.bool,
-    /**
-   * `classes` property applied to the [`FormLabel`](/api/form-label) element.
-   */
-    FormLabelClasses: PropTypes.object,
-    /**
-   * If `dense`, will adjust vertical spacing. This is normally obtained via context from
-   * FormControl.
-   */
-    margin: PropTypes.oneOf(['dense']),
-    /**
-   * if `true`, the label will indicate that the input is required.
-   */
-    required: PropTypes.bool,
-    /**
-   * If `true`, the label is shrunk.
-   */
-    shrink: PropTypes.bool,
-};
-
-InputLabel.defaultProps = {
-    disableAnimation: false,
-};
-
-InputLabel.contextTypes = {
-    muiFormControl: PropTypes.object,
-};
-
-export default withStyles(styles, { name: 'MuiInputLabel' })(InputLabel);
+export default InputLabel;

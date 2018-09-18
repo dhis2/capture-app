@@ -10,6 +10,7 @@ import AgeDateInput from '../internal/AgeInput/AgeDateInput.component';
 import parseDate from '../../../utils/parsers/date.parser';
 import defaultClasses from '../../d2Ui/ageField/ageField.mod.css';
 import orientations from '../constants/orientations.const';
+import withInternalChangeHandler from '../HOC/withInternalChangeHandler';
 
 type AgeValues = {
     date?: ?string,
@@ -22,6 +23,7 @@ type Props = {
     value: ?AgeValues,
     onAgeChanged: (value: ?AgeValues) => void,
     orientation: $Values<typeof orientations>,
+    innerMessage?: ?any,
 };
 
 function getCalculatedValues(dateValue: ?string): AgeValues {
@@ -58,11 +60,13 @@ class D2AgeField extends Component<Props> {
     static isEmptyNumbers(values: AgeValues) {
         return !values.years && !values.months && !values.days;
     }
+    static isPositiveOrZeroNumber(value: ?any) {
+        return Validators.isPositiveNumber(value) || Number(value) === 0;
+    }
     static isValidNumbers(values: AgeValues) {
-        const isValidPositiveNumberFn = Validators.isPositiveNumber;
-        return isValidPositiveNumberFn(values.years || 0) &&
-            isValidPositiveNumberFn(values.years || 0) &&
-            isValidPositiveNumberFn(values.years || 0);
+        return D2AgeField.isPositiveOrZeroNumber(values.years || 0) &&
+            D2AgeField.isPositiveOrZeroNumber(values.months || 0) &&
+            D2AgeField.isPositiveOrZeroNumber(values.days || 0);
     }
 
     static getNumberOrZero(value: ?string) {
@@ -86,8 +90,8 @@ class D2AgeField extends Component<Props> {
 
         const momentDate = moment();
         momentDate.subtract(D2AgeField.getNumberOrZero(values.years), 'years');
-        momentDate.subtract(D2AgeField.getNumberOrZero(values.years), 'months');
-        momentDate.subtract(D2AgeField.getNumberOrZero(values.years), 'days');
+        momentDate.subtract(D2AgeField.getNumberOrZero(values.months), 'months');
+        momentDate.subtract(D2AgeField.getNumberOrZero(values.days), 'days');
         const calculatedValues = getCalculatedValues(momentDate.format('L'));
         this.props.onAgeChanged(calculatedValues);
     }
@@ -97,10 +101,11 @@ class D2AgeField extends Component<Props> {
         this.props.onAgeChanged(calculatedValues);
     }
 
-    getMessages = (innerMessage) => {
+    getMessages = (innerMessage: ?any) => {
         const messages = innerMessage && innerMessage.message;
         if (messages) {
             return Object.keys(messages).reduce((map, messageKey) => {
+                // $FlowSuppress
                 map[messageKey] = { message: messages[messageKey], className: innerMessage.className };
                 return map;
             }, {});
@@ -115,6 +120,9 @@ class D2AgeField extends Component<Props> {
             defaultClasses.container,
             orientation === orientations.VERTICAL ? defaultClasses.containerVertical : '',
         );
+        const numberInputClass = {
+            ageInputContainer: classNames(defaultClasses.ageInputContainer, defaultClasses.ageNumberInputContainer),
+        };
         const messages = this.getMessages(innerMessage);
         return (
             <div className={containerClass}>
@@ -122,31 +130,38 @@ class D2AgeField extends Component<Props> {
                     onAgeChanged={this.handleDateInput}
                     value={currentValues.date}
                     message={messages.date}
+                    orientation={orientation}
                 />
                 <AgeNumberInput
+                    classes={numberInputClass}
                     label={i18n.t('Years')}
                     value={currentValues.years}
                     onBlur={years => this.handleNumberInput({ ...currentValues, years })}
                     message={messages.years}
                 />
                 <AgeNumberInput
+                    classes={numberInputClass}
                     label={i18n.t('Months')}
                     value={currentValues.months}
                     onBlur={months => this.handleNumberInput({ ...currentValues, months })}
                     message={messages.months}
                 />
                 <AgeNumberInput
+                    classes={numberInputClass}
                     label={i18n.t('Days')}
                     value={currentValues.days}
                     onBlur={days => this.handleNumberInput({ ...currentValues, days })}
                     message={messages.days}
                 />
-                <ClearIcon
-                    onClick={this.onClear}
-                />
+                <div className={defaultClasses.ageClear}>
+                    <ClearIcon
+                        onClick={this.onClear}
+                    />
+                </div>
+
             </div>
         );
     }
 }
 
-export default D2AgeField;
+export default withInternalChangeHandler()(D2AgeField);

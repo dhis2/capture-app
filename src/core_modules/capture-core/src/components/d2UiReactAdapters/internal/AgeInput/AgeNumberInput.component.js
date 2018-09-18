@@ -1,19 +1,24 @@
 // @flow
 import React, { Component } from 'react';
 import TextInput from '../TextInput/TextInput.component';
-import withInternalChangeHandler from '../../HOC/withInternalChangeHandler';
-import withAgeInputMessage from './withAgeInputMessage';
+import withShrinkLabel from '../../HOC/withShrinkLabel';
+import withAgeInputContainer from './withAgeInputContainer';
 import ShrinkLabel from '../ShrinkLabel/ShrinkLabel.component';
+import withFocusSaver from '../../HOC/withFocusSaver';
+import withFocusHandler from '../../internal/TextInput/withFocusHandler';
+
 
 type Props = {
     label: string,
     value: ?string,
     onBlur: (value: string) => void,
-    onChange: (value: string) => void,
+    onChange?: ?(value: string) => void,
+    classes?: ?any,
 }
 
 type State = {
     focus?: ?boolean,
+    hasValue?: ?boolean,
 }
 
 class AgeNumberInput extends Component<Props, State> {
@@ -26,34 +31,24 @@ class AgeNumberInput extends Component<Props, State> {
         this.setState({ focus: false });
     }
     handleChange = (event) => {
-        this.props.onChange(event.currentTarget.value);
+        this.props.onChange && this.props.onChange(event.currentTarget.value);
     }
-    handleFocus = (event) => {
+    handleFocus = () => {
         this.setState({ focus: true });
     }
     render() {
-        const { onBlur, label, onChange, ...passOnProps } = this.props;
+        const { onBlur, onChange, value, classes, ...passOnProps } = this.props;
         return (
-            <div style={{ position: 'relative', display: 'inline-flex', flexDirection: 'column' }}>
-                <ShrinkLabel
-                    shrink={this.state.focus}
-                >
-                    {label}
-                </ShrinkLabel>
-                <div style={{ marginTop: 16 }}>
-                    <TextInput
-                        classes={{}}
-                        onBlur={this.handleBlur}
-                        onChange={this.handleChange}
-                        onFocus={this.handleFocus}
-                        {...passOnProps}
-                    />
-                </div>
-
-            </div>
-
+            <TextInput
+                classes={{}}
+                onBlur={this.handleBlur}
+                onChange={this.handleChange}
+                onFocus={this.handleFocus}
+                value={value || ''}
+                {...passOnProps}
+            />
         );
     }
 }
 
-export default withInternalChangeHandler()(withAgeInputMessage()(AgeNumberInput));
+export default withFocusSaver()(withShrinkLabel()(withFocusHandler()(withAgeInputContainer()(AgeNumberInput))));

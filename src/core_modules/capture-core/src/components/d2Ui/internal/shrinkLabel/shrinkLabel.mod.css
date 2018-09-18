@@ -1,0 +1,17 @@
+.label {
+    color: rgba(0, 0, 0, 0.54);
+    pointer-events: none;
+    position: absolute;
+    left: 5px;
+    top: 0;
+    transform-origin: top left;
+    transition: transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+}
+
+.labelUnshrinked {
+    transform: translate(0,26px) scale(1);
+}
+
+.labelShrinked {
+    transform: translate(0, 1.5px) scale(0.75);
+}

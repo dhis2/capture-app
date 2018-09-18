@@ -1,13 +1,11 @@
 .container {
     display: flex;
     flex-wrap: wrap;
-    overflow: hidden;
 }
 
 .containerVertical {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
 }
 
 .labelContainer {
