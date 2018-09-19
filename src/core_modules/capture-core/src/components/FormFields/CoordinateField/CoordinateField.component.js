@@ -54,7 +54,7 @@ export default class CoordinateField extends Component<Props> {
 
     render() {
         const { latitude, longitude } = this.state;
-        const position = latitude && longitude ? [latitude, longitude] : [51.505, -0.09];
+        const position = latitude && longitude ? [parseFloat(latitude), parseFloat(longitude)] : [51.505, -0.09];
         return (
             <div className="coordinate-field">
                 <div className="coordinate-label">
