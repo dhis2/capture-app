@@ -180,6 +180,12 @@ Your app is ready to be deployed!
 
 See the section about [deployment](#deployment) for more information.
 
+### `npm run manualBuild`
+
+Builds the app and compresses it into a zip file to the `buildzip` folder.<br>
+
+Convenient when uploading the app to a DHIS2 server.
+
 ### `npm run eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
