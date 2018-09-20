@@ -19,13 +19,22 @@ type AgeValues = {
     days?: ?string,
 }
 
+type InputMessageClasses = {
+    error?: ?string,
+    warning?: ?string,
+    info?: ?string,
+    validating?: ?string,
+}
+
 type Props = {
     value: ?AgeValues,
     onAgeChanged: (value: ?AgeValues) => void,
+    onChange: (value: ?AgeValues) => void,
     orientation: $Values<typeof orientations>,
     innerMessage?: ?any,
+    classes: Object,
+    inputMessageClasses: ?InputMessageClasses,
 };
-
 function getCalculatedValues(dateValue: ?string): AgeValues {
     const parseData = parseDate(dateValue || '');
     if (!parseData.isValid) {
@@ -56,6 +65,13 @@ function getCalculatedValues(dateValue: ?string): AgeValues {
     };
 }
 
+const messageTypeClass = {
+    error: 'innerInputError',
+    info: 'innerInputInfo',
+    warning: 'innerInputWarning',
+    validating: 'innerInputValidating',
+};
+
 class D2AgeField extends Component<Props> {
     static isEmptyNumbers(values: AgeValues) {
         return !values.years && !values.months && !values.days;
@@ -77,9 +93,10 @@ class D2AgeField extends Component<Props> {
         this.props.onAgeChanged(null);
     }
 
-    handleNumberInput = (values: AgeValues) => {
+    handleNumberBlur = (values: AgeValues) => {
+        this.props.onRemoveFocus && this.props.onRemoveFocus();
         if (D2AgeField.isEmptyNumbers(values)) {
-            this.props.onAgeChanged({ date: values.date });
+            this.props.onAgeChanged(values.date ? { date: values.date } : null);
             return;
         }
 
@@ -88,77 +105,87 @@ class D2AgeField extends Component<Props> {
             return;
         }
 
-        const momentDate = moment();
+        const momentDate = moment(undefined, undefined, true);
         momentDate.subtract(D2AgeField.getNumberOrZero(values.years), 'years');
         momentDate.subtract(D2AgeField.getNumberOrZero(values.months), 'months');
         momentDate.subtract(D2AgeField.getNumberOrZero(values.days), 'days');
         const calculatedValues = getCalculatedValues(momentDate.format('L'));
+        const valid = momentDate.isValid();
         this.props.onAgeChanged(calculatedValues);
     }
 
-    handleDateInput = (date: ?string) => {
-        const calculatedValues = getCalculatedValues(date);
+    handleDateBlur = (date: ?string) => {
+        this.props.onRemoveFocus && this.props.onRemoveFocus();
+        const calculatedValues = date ? getCalculatedValues(date) : null;
         this.props.onAgeChanged(calculatedValues);
     }
 
-    getMessages = (innerMessage: ?any) => {
-        const messages = innerMessage && innerMessage.message;
-        if (messages) {
-            return Object.keys(messages).reduce((map, messageKey) => {
-                // $FlowSuppress
-                map[messageKey] = { message: messages[messageKey], className: innerMessage.className };
-                return map;
-            }, {});
+    renderMessage = (key: string) => {
+        const { classes, innerMessage: messageContainer } = this.props;
+        if (messageContainer) {
+            const message = messageContainer.message && messageContainer.message[key];
+            const className = (classes && classes[messageTypeClass[messageContainer.messageType]]) || '';
+            return message && (<div className={className}>{message}</div>);
         }
-        return {};
+        return null;
+    }
+
+    renderNumberInput = (currentValues: AgeValues, key: string, label: string) => {
+        const { innerMessage, onChange, inFocus, value, ...passOnProps } = this.props;
+        return (
+            <div className={defaultClasses.ageNumberInputContainer}>
+                <AgeNumberInput
+                    label={i18n.t(label)}
+                    value={currentValues[key]}
+                    onBlur={value => this.handleNumberBlur({ ...currentValues, [key]: value })}
+                    onChange={value => onChange({ ...currentValues, [key]: value })}
+                    {...passOnProps}
+                />
+                {innerMessage && this.renderMessage(key)}
+            </div>
+        );
+    }
+    renderDateInput = (currentValues: AgeValues) => {
+        const { onChange, innerMessage, inFocus, value, ...passOnProps } = this.props;
+        return (
+            <div className={defaultClasses.ageDateInputContainer}>
+                <AgeDateInput
+                    onBlur={this.handleDateBlur}
+                    value={currentValues.date}
+                    onChange={date => onChange({ ...currentValues, date })}
+                    {...passOnProps}
+                />
+                {innerMessage && this.renderMessage('date')}
+            </div>
+
+        );
     }
 
     render() {
-        const { value, orientation, innerMessage } = this.props;
+        const { value, orientation } = this.props;
         const currentValues = value || {};
         const containerClass = classNames(
             defaultClasses.container,
-            orientation === orientations.VERTICAL ? defaultClasses.containerVertical : '',
+            { [defaultClasses.containerVertical]: orientation === orientations.VERTICAL },
         );
-        const numberInputClass = {
-            ageInputContainer: classNames(defaultClasses.ageInputContainer, defaultClasses.ageNumberInputContainer),
-        };
-        const messages = this.getMessages(innerMessage);
+        const inputsContainerClass = classNames(
+            defaultClasses.inputsContainer,
+            { [defaultClasses.inputsContainerVertical]: orientation === orientations.VERTICAL },
+        );
+
         return (
             <div className={containerClass}>
-                <AgeDateInput
-                    onAgeChanged={this.handleDateInput}
-                    value={currentValues.date}
-                    message={messages.date}
-                    orientation={orientation}
-                />
-                <AgeNumberInput
-                    classes={numberInputClass}
-                    label={i18n.t('Years')}
-                    value={currentValues.years}
-                    onBlur={years => this.handleNumberInput({ ...currentValues, years })}
-                    message={messages.years}
-                />
-                <AgeNumberInput
-                    classes={numberInputClass}
-                    label={i18n.t('Months')}
-                    value={currentValues.months}
-                    onBlur={months => this.handleNumberInput({ ...currentValues, months })}
-                    message={messages.months}
-                />
-                <AgeNumberInput
-                    classes={numberInputClass}
-                    label={i18n.t('Days')}
-                    value={currentValues.days}
-                    onBlur={days => this.handleNumberInput({ ...currentValues, days })}
-                    message={messages.days}
-                />
+                <div className={inputsContainerClass}>
+                    {this.renderDateInput(currentValues)}
+                    {this.renderNumberInput(currentValues, 'years', 'Years')}
+                    {this.renderNumberInput(currentValues, 'months', 'Months')}
+                    {this.renderNumberInput(currentValues, 'days', 'Days')}
+                </div>
                 <div className={defaultClasses.ageClear}>
                     <ClearIcon
                         onClick={this.onClear}
                     />
                 </div>
-
             </div>
         );
     }

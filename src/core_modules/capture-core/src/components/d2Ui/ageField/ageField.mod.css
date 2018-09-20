@@ -1,24 +1,26 @@
 .container {
     display: flex;
-    align-items: center;
 }
-
 .containerVertical {
     flex-direction: column;
 }
-
-.ageClear {
-    padding-top: 16px;
+.inputsContainer {
+    display: flex;
 }
 
-.ageInputContainer {
-    display: inline-flex;
-    padding-top: 16px;
-    position: relative;
-    flex-grow: 1;
+.inputsContainerVertical {
+    flex-direction: column;
 }
 
 .ageNumberInputContainer {
-    position: relative;
-    min-width: 150px;
+    margin-right: 10px;
+    width: 150px;
+}
+
+.ageDateInputContainer {
+    margin-right: 10px;
+    padding-top: 16px;
+}
+.ageClear {
+    margin-top: 26px;
 }

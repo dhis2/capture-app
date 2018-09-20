@@ -2,8 +2,6 @@
 import React, { Component } from 'react';
 import TextInput from '../TextInput/TextInput.component';
 import withShrinkLabel from '../../HOC/withShrinkLabel';
-import withAgeInputContainer from './withAgeInputContainer';
-import ShrinkLabel from '../ShrinkLabel/ShrinkLabel.component';
 import withFocusSaver from '../../HOC/withFocusSaver';
 import withFocusHandler from '../../internal/TextInput/withFocusHandler';
 
@@ -12,7 +10,7 @@ type Props = {
     label: string,
     value: ?string,
     onBlur: (value: string) => void,
-    onChange?: ?(value: string) => void,
+    onChange?: ?((value: string) => void),
     classes?: ?any,
 }
 
@@ -51,4 +49,4 @@ class AgeNumberInput extends Component<Props, State> {
     }
 }
 
-export default withFocusSaver()(withShrinkLabel()(withFocusHandler()(withAgeInputContainer()(AgeNumberInput))));
+export default withFocusSaver()(withShrinkLabel()(withFocusHandler()(AgeNumberInput)));

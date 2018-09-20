@@ -2,6 +2,9 @@
 import * as React from 'react';
 
 type Props = {
+    inFocus?: ?any,
+    onSetFocus?: ?any,
+    onRemoveFocus: ?any,
 };
 
 type State = {
@@ -22,22 +25,25 @@ export default () =>
                 this.setState({
                     inFocus: true,
                 });
+                this.props.onSetFocus && this.props.onSetFocus();
             }
 
             removeFocus = () => {
                 this.setState({
                     inFocus: false,
                 });
+                this.props.onRemoveFocus && this.props.onRemoveFocus();
             }
 
             render() {
                 const { inFocus } = this.state;
+                const { inFocus: inFocusProp, onSetFocus, onRemoveFocus, ...passOnProps } = this.props;
                 return (
                     <InnerComponent
                         inFocus={inFocus}
                         onSetFocus={this.setFocus}
                         onRemoveFocus={this.removeFocus}
-                        {...this.props}
+                        {...passOnProps}
                     />
                 );
             }

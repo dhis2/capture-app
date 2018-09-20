@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import ShrinkLabel from '../internal/ShrinkLabel/ShrinkLabel.component';
+import defaultClasses from '../../d2Ui/internal/shrinkLabel/shrinkLabel.mod.css';
 
 type Props = {
     inFocus?: ?boolean,
@@ -15,7 +16,7 @@ export default (hocParams: ?HOCParamsContainer) =>
                 const shrink = !!this.props.inFocus || !!this.props.value;
 
                 return (
-                    <div style={{ position: 'relative' }}>
+                    <div className={defaultClasses.container}>
                         <ShrinkLabel
                             shrink={shrink}
                         >{this.props.label}

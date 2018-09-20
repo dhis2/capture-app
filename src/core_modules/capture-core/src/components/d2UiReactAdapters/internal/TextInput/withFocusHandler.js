@@ -28,7 +28,7 @@ export default () => (InnerCompnent: React.ComponentType<any>) =>
         }
 
         render() {
-            const { onSetFocus, onRemoveFocus, inFocus, onBlur, classes, ...passOnProps } = this.props;
+            const { onSetFocus, onRemoveFocus, onFocus, inFocus, onBlur, classes, ...passOnProps } = this.props;
             const { inputWrapperFocused, inputWrapperUnfocused, ...passOnClasses } = classes;
             const inputWrapper = inFocus ? classes.inputWrapperFocused : classes.inputWrapperUnfocused;
             return (

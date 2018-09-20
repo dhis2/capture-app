@@ -3,7 +3,6 @@ import * as React from 'react';
 import defaultClasses from '../../../d2Ui/ageField/ageField.mod.css';
 
 type Props = {
-    onChange: (value: any) => void,
     message?: ?any,
     value: any,
     classes?: any,
@@ -16,7 +15,8 @@ export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         class AgeInputContainer extends React.Component<Props, State> {
             render() {
-                const { message, classes, ...passOnProps } = this.props;
+                const { message, ...passOnProps } = this.props;
+                const classes = this.props.classes;
                 const ageInputContainerClass =
                     (classes && classes.ageInputContainer)
                     || defaultClasses.ageInputContainer;

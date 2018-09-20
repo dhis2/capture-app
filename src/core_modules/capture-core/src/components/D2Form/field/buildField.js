@@ -203,14 +203,16 @@ const getAgeField = (metaData: MetaDataElement, options: Object) => {
                 withDefaultShouldUpdateInterface()(
                     withRequiredFieldCalculation()(
                         withCalculateMessages()(
-                            withDefaultFieldContainer()(
-                                withLabel({
-                                    onGetUseVerticalOrientation: () => options.formHorizontal,
-                                    onGetCustomFieldLabeClass: () =>
-                                        `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
-                                })(
-                                    withDisplayMessages()(
-                                        withInternalChangeHandler()(AgeField),
+                            withFocusSaver()(
+                                withDefaultFieldContainer()(
+                                    withLabel({
+                                        onGetUseVerticalOrientation: () => options.formHorizontal,
+                                        onGetCustomFieldLabeClass: () =>
+                                            `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
+                                    })(
+                                        withDisplayMessages()(
+                                            withInternalChangeHandler()(AgeField),
+                                        ),
                                     ),
                                 ),
                             ),
