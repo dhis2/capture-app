@@ -54,9 +54,11 @@ export default class CoordinateField extends Component<Props> {
 
     render() {
         const { latitude, longitude } = this.state;
-        let position = [51.505, -0.09];
+        let position = null;
+        let center = [51.505, -0.09];
         if (latitude && longitude && !isNaN(parseFloat(latitude)) && !isNaN(parseFloat(longitude))) {
             position = [parseFloat(latitude), parseFloat(longitude)];
+            center = position;
         }
 
         return (
@@ -76,12 +78,12 @@ export default class CoordinateField extends Component<Props> {
                         {
                             this.state.showMap && (
                                 <div className="coordinate-leaflet-map">
-                                    <Map center={position} zoom={13} onClick={this.onMapClick}>
+                                    <Map center={center} zoom={13} onClick={this.onMapClick}>
                                         <TileLayer
                                             url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                                             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                                         />
-                                        {latitude && longitude && <Marker position={position} />}
+                                        {position && <Marker position={position} />}
                                     </Map>
                                 </div>
                             )
