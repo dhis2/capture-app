@@ -182,7 +182,7 @@ class D2SectionFields extends Component<Props> {
 
         return (
             <FormBuilderContainerHOCWrapped
-                innerRef={(instance) => { this.formBuilderInstance = instance; }}
+                formBuilderRef={(instance) => { this.formBuilderInstance = instance; }}
                 id={formBuilderId}
                 fields={this.getFieldConfigWithRulesEffects()}
                 values={values}
