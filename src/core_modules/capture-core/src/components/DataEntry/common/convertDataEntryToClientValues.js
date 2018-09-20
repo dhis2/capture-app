@@ -15,6 +15,7 @@ export default function convertDataEntryToClientValues(
         dataEntryValues,
         dataEntryValuesMeta,
         previousData,
+        formFoundation,
     );
 
     return {

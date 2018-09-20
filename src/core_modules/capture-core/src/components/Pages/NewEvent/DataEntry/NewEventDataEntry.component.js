@@ -133,7 +133,7 @@ const buildReportDateSettingsFn = () => {
 const buildCoordinateSettingsFn = () => (props: Object) => {
     const type = props.formFoundation.featureType;
 
-    if (type === 'POINT') {
+    if (type === 'Point') {
         return {
             component: withDefaultFieldContainer()(
                 withDefaultShouldUpdateInterface()(
@@ -149,7 +149,7 @@ const buildCoordinateSettingsFn = () => (props: Object) => {
             },
             propName: 'coordinate',
         };
-    } else if (type === 'POLYGON') {
+    } else if (type === 'Polygon') {
         return {
             component: withDefaultFieldContainer()(
                 withDefaultShouldUpdateInterface()(
@@ -166,20 +166,7 @@ const buildCoordinateSettingsFn = () => (props: Object) => {
             propName: 'coordinate',
         };
     }
-
-    return {
-        component: withDefaultFieldContainer()(
-            withDefaultShouldUpdateInterface()(
-                withDefaultMessages(),
-            ),
-        ),
-        componentProps: {
-            width: 0,
-            label: 'Location',
-            required: false,
-        },
-        propName: 'coordinate',
-    };
+    return null;
 };
 
 const buildCompleteFieldSettingsFn = () => {

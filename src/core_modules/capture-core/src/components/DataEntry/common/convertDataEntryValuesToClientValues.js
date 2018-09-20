@@ -1,6 +1,7 @@
 // @flow
 /* eslint-disable no-new-func */
 import { convertValue } from '../../../converters/formToClient';
+import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 
 // $FlowSuppress
 const getFunctionFromString = (functionAsString: string) => Function(`return ${functionAsString}`)();
@@ -9,6 +10,7 @@ export default function convertDataEntryValuesToClientValues(
     dataEntryValues: Object,
     dataEntryValuesMeta: Object,
     previousData: Object,
+    foundation: RenderFoundation,
 ) {
     if (!dataEntryValues) {
         return null;
@@ -24,11 +26,11 @@ export default function convertDataEntryValuesToClientValues(
                 const value = dataEntryValues[key];
                 accEventValues[key] = convertValue(type, value);
             } else if (onConvertOut) {
-                const outId = dataEntryValuesMeta[key] && dataEntryValuesMeta[key].outId;
+                const clientId = dataEntryValuesMeta[key] && dataEntryValuesMeta[key].clientId;
                 const dataEntryValue = dataEntryValues[key];
-                const prevEventValue = previousData[outId];
+                const prevEventValue = previousData[clientId];
                 const onConvertOutFn = getFunctionFromString(onConvertOut);
-                accEventValues[outId] = onConvertOutFn(dataEntryValue, prevEventValue);
+                accEventValues[clientId] = onConvertOutFn(dataEntryValue, prevEventValue, foundation);
             } else {
                 accEventValues[key] = dataEntryValues[key];
             }

@@ -54,8 +54,8 @@ export const loadDataEntryData = (action$: InputObservable, store: ReduxStore) =
                         type: 'DATE',
                     },
                     {
-                        inId: 'status',
-                        outId: 'complete',
+                        clientId: 'status',
+                        dataEntryId: 'complete',
                         onConvertIn: convertStatusIn,
                         onConvertOut: convertStatusOut,
                     },

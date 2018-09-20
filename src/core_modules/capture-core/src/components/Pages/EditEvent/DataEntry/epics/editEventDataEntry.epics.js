@@ -87,7 +87,7 @@ export const runRulesForEditSingleEventEpic = (action$: InputObservable, store: 
 
                 const currentEventValues = getCurrentClientValues(state, foundation, payload.formId, fieldData);
 
-                let currentEventMainData = getCurrentClientMainData(state, payload.itemId, payload.dataEntryId, event);
+                let currentEventMainData = getCurrentClientMainData(state, payload.itemId, payload.dataEntryId, event, foundation);
                 currentEventMainData = { ...currentEventMainData, ...state.events[eventId] };
                 const currentEventData = { ...currentEventValues, ...currentEventMainData };
 

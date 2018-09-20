@@ -9,34 +9,7 @@ import {
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import EventProgram from '../../../../metaData/Program/EventProgram';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
-
-function convertStatusIn(value: string) {
-    if (value === 'COMPLETED') {
-        return 'true';
-    }
-    return null;
-}
-
-function convertStatusOut(dataEntryValue: string, prevValue: string) {
-    if (dataEntryValue === 'true' && prevValue !== 'COMPLETED') {
-        return 'COMPLETED';
-    }
-
-    if (!dataEntryValue && prevValue === 'COMPLETED') {
-        return 'ACTIVE';
-    }
-    return prevValue;
-}
-
-function convertNoteOut(dataEntryValue: string, prevValue: string) {
-    return dataEntryValue ? [{ value: dataEntryValue }] : [];
-}
-function convertNoteIn(dataEntryValue: any) {
-    if (Array.isArray(dataEntryValue) && dataEntryValue.length > 0) {
-        return dataEntryValue[0].value;
-    }
-    return null;
-}
+import { convertCoordinateOut, convertNoteIn, convertNoteOut, convertStatusIn, convertStatusOut } from '../../crossPage/converters';
 
 const dataEntryId = 'singleEvent';
 const itemId = 'newEvent';
@@ -49,18 +22,19 @@ const dataEntryPropsToInclude = [
         validatorContainers: getEventDateValidatorContainers(),
     },
     {
-        id: 'coordinate',
-        type: 'COORDINATE',
+        clientId: 'geometry',
+        dataEntryId: 'coordinate',
+        onConvertOut: convertCoordinateOut,
     },
     {
-        inId: 'notes',
-        outId: 'notes',
+        clientId: 'notes',
+        dataEntryId: 'notes',
         onConvertIn: convertNoteIn,
         onConvertOut: convertNoteOut,
     },
     {
-        inId: 'status',
-        outId: 'complete',
+        clientId: 'status',
+        dataEntryId: 'complete',
         onConvertIn: convertStatusIn,
         onConvertOut: convertStatusOut,
     },

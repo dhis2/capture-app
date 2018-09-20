@@ -29,8 +29,8 @@ type DataEntryPropToIncludeStandard = {|
 |};
 
 type DataEntryPropToIncludeSpecial = {|
-    inId: string,
-    outId: string,
+    clientId: string,
+    dataEntryId: string,
     onConvertIn: (value: any) => any,
     onConvertOut: (dataEntryValue: any, prevValue: any) => any,
 |};
@@ -61,8 +61,8 @@ function getDataEntryValues(dataEntryPropsToInclude: Array<DataEntryPropToInclud
         .filter(propToInclude => propToInclude.onConvertIn)
         // $FlowSuppress :flow filter problem
         .map((propToInclude: DataEntryPropToIncludeSpecial) => ({
-            id: propToInclude.outId,
-            value: propToInclude.onConvertIn(event[propToInclude.inId]),
+            id: propToInclude.dataEntryId,
+            value: propToInclude.onConvertIn(event[propToInclude.clientId]),
         }));
 
     return [...standardValuesArray, ...specialValuesArray]
@@ -76,11 +76,11 @@ function getDataEntryMeta(dataEntryPropsToInclude: Array<DataEntryPropToInclude>
     return dataEntryPropsToInclude
         .reduce((accMeta, propToInclude) => {
             // $FlowSuppress
-            accMeta[propToInclude.id || propToInclude.outId] =
+            accMeta[propToInclude.id || propToInclude.dataEntryId] =
                 propToInclude.type ?
                     { type: propToInclude.type } :
                     // $FlowSuppress
-                    { onConvertOut: propToInclude.onConvertOut.toString(), outId: propToInclude.inId };
+                    { onConvertOut: propToInclude.onConvertOut.toString(), clientId: propToInclude.clientId };
             return accMeta;
         }, {});
 }

@@ -11,6 +11,7 @@ import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFounda
 
 import D2Date from '../../../../components/FormFields/DateAndTime/D2Date/D2Date.component';
 import D2Coordinate from '../../../../components/FormFields/CoordinateField/CoordinateField.component';
+import D2Polygon from '../../../../components/FormFields/PolygonField/PolygonField.component';
 import D2TrueOnly from '../../../../components/FormFields/Generic/D2TrueOnly.component';
 import D2TextField from '../../../../components/FormFields/Generic/D2TextField.component';
 import withDefaultMessages from '../../../../components/DataEntry/dataEntryField/withDefaultMessages';
@@ -79,27 +80,44 @@ const buildReportDateSettingsFn = () => {
     return reportDateSettings;
 };
 
-const buildCoordinateSettingsFn = () => {
-    const coordinateComponent = withDefaultFieldContainer()(
-        withDefaultShouldUpdateInterface()(
-            withDefaultMessages()(
-                withDefaultChangeHandler()(D2Coordinate),
+const buildCoordinateSettingsFn = () => (props: Object) => {
+    const type = props.formFoundation.featureType;
+
+    if (type === 'Point') {
+        return {
+            component: withDefaultFieldContainer()(
+                withDefaultShouldUpdateInterface()(
+                    withDefaultMessages()(
+                        withDefaultChangeHandler()(D2Coordinate),
+                    ),
+                ),
             ),
-        ),
-    );
+            componentProps: {
+                width: props && props.formHorizontal ? 150 : 350,
+                label: 'Coordinate(s)',
+                required: false,
+            },
+            propName: 'coordinate',
+        };
+    } else if (type === 'Polygon') {
+        return {
+            component: withDefaultFieldContainer()(
+                withDefaultShouldUpdateInterface()(
+                    withDefaultMessages()(
+                        withDefaultChangeHandler()(D2Polygon),
+                    ),
+                ),
+            ),
+            componentProps: {
+                width: props && props.formHorizontal ? 150 : 500,
+                label: 'Location',
+                required: false,
+            },
+            propName: 'coordinate',
+        };
+    }
 
-    const coordinateSettings = (props: Object) => ({
-        component: coordinateComponent,
-        componentProps: {
-            width: props && props.formHorizontal ? 150 : 350,
-            label: 'Coordinate(s)',
-            required: false,
-        },
-        propName: 'coordinate',
-        validatorContainers: getEventDateValidatorContainers(),
-    });
-
-    return coordinateSettings;
+    return null;
 };
 
 const buildCompleteFieldSettingsFn = () => {
