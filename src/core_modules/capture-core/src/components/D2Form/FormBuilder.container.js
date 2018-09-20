@@ -16,4 +16,14 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormBuilder);
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+    const { formBuilderRef, ...passOnOwnProps } = ownProps;
+    return {
+        ...passOnOwnProps,
+        ...stateProps,
+        ...dispatchProps,
+        innerRef: formBuilderRef,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(FormBuilder);
