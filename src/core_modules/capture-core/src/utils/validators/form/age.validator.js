@@ -52,8 +52,7 @@ function validateNumbers(years: string, months: string, days: string) {
 function validateDate(date: string) {
     return isValidDate(date, true) ?
         { valid: true } :
-        { valid: false, errorMessage: { date: errorMessages.date },
-        };
+        { valid: false, errorMessage: { date: errorMessages.date } };
 }
 
 export default function isValidAge(value: ?AgeValues, isEmptyValid: boolean = false) {
