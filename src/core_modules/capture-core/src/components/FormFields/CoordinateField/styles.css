@@ -1,0 +1,37 @@
+.coordinate-field {
+  position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.coordinate-field + div {
+    margin-left: 28px;
+}
+
+.coordinate-label {
+    margin-bottom: 5px;
+}
+
+.coordinate-fields {
+    display: flex;
+    flex-direction: row;
+}
+
+.coordinate-icon {
+    position: relative;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-right: 5px;
+}
+.coordinate-leaflet-map {
+    position: absolute;
+    overflow: hidden;
+    z-index: 1000;
+    left: 0;
+    top: 40px;
+}
+.leaflet-container {
+    z-index: 10;
+    width: 400px;
+    height: 250px;
+}

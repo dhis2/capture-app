@@ -19,6 +19,7 @@ import {
     isValidAge,
     isValidPhoneNumber,
     isValidOrgUnit,
+    isValidCoordinate,
     isValidUsername,
 } from '../../../utils/validators/form';
 import MetaDataElement from '../../../metaData/DataElement/DataElement';
@@ -52,6 +53,7 @@ const errorMessages = {
     AGE: 'Please provide a valid age',
     PHONE_NUMBER: 'Please provide a valid phone number',
     ORGANISATION_UNIT: 'Please provide a valid organisation unit',
+    COORDINATE: 'Please provide valid coordinates',
     USERNAME: 'Please provide a valid username',
 };
 
@@ -118,6 +120,10 @@ const validatorsForTypes = {
     [elementTypes.ORGANISATION_UNIT]: () => ({
         validator: isValidOrgUnit,
         message: i18n.t(errorMessages.ORGANISATION_UNIT),
+    }),
+    [elementTypes.COORDINATE]: () => ({
+        validator: isValidCoordinate,
+        message: i18n.t(errorMessages.COORDINATE),
     }),
     [elementTypes.USERNAME]: () => ({
         validator: isValidUsername,
