@@ -36,7 +36,7 @@ export default class PolygonField extends Component<Props> {
     constructor(props) {
         super(props);
 
-        const featureCollection = Array.isArray(props.value) ? coordsToFeatureCollection(props.value) : [];
+        const featureCollection = Array.isArray(props.value) ? coordsToFeatureCollection(props.value) : null;
         this.state = {
             featureCollection,
         };
@@ -47,19 +47,19 @@ export default class PolygonField extends Component<Props> {
         this.setState({ featureCollection: coordsToFeatureCollection(coordinates) }, () => {
             this.props.onBlur(coordinates);
         });
-    }
+    };
 
     onCreate = (e) => {
         const coordinates = e.layer.toGeoJSON().geometry.coordinates;
         this.setState({ featureCollection: coordsToFeatureCollection(coordinates) }, () => {
             this.props.onBlur(coordinates);
         });
-    }
+    };
 
     onDeleted = () => {
         this.setState({ featureCollection: null });
         this.props.onBlur(null);
-    }
+    };
 
     onFeatureGroupReady = (reactFGref) => {
         const { featureCollection } = this.state;
@@ -73,8 +73,23 @@ export default class PolygonField extends Component<Props> {
                 leafletGeoJSON.eachLayer((layer) => {
                     leafletFG.addLayer(layer);
                 });
+
+                const { map } = reactFGref.context;
+                const coordinates = featureCollection.features[0].geometry.coordinates[0];
+                map.fitBounds(coordinates.map(c => ([c[1], c[0]])));
             }
         }
+    };
+
+    getCenter() {
+        const { featureCollection } = this.state;
+        if (!featureCollection) {
+            return [51.505, -0.09];
+        }
+
+        const coordinates = featureCollection.features[0].geometry.coordinates[0];
+        const { lat, lng } = L.latLngBounds(coordinates.map(c => ([c[1], c[0]]))).getCenter();
+        return [lng, lat];
     }
 
     render() {
@@ -90,7 +105,7 @@ export default class PolygonField extends Component<Props> {
                     </FormLabel>
                 </div>
                 <div className="polygon-container">
-                    <Map zoom={13} center={[51.505, -0.09]} zoomControl={false}>
+                    <Map zoom={13} center={this.getCenter()} zoomControl={false}>
                         <TileLayer
                             url="//cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
                             attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
