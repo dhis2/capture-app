@@ -146,10 +146,13 @@ class D2AgeField extends Component<Props> {
             </div>
         );
     }
-    renderDateInput = (currentValues: AgeValues) => {
+    renderDateInput = (currentValues: AgeValues, isVertical: boolean) => {
         const { onChange, innerMessage, inFocus, value, ...passOnProps } = this.props;
+        const dateInputContainerClass = classNames(
+            { [defaultClasses.ageDateInputContainerHorizontal]: !isVertical },
+        );
         return (
-            <div className={defaultClasses.ageDateInputContainer}>
+            <div className={dateInputContainerClass}>
                 <AgeDateInput
                     onBlur={this.handleDateBlur}
                     value={currentValues.date}
@@ -170,13 +173,14 @@ class D2AgeField extends Component<Props> {
             { [defaultClasses.containerHorizontal]: !isVertical },
             { [defaultClasses.containerVertical]: isVertical },
         );
+        const ageClearClass = !isVertical && defaultClasses.ageClearHorizontal;
         return (
             <div className={containerClass}>
-                {this.renderDateInput(currentValues)}
+                {this.renderDateInput(currentValues, isVertical)}
                 {this.renderNumberInput(currentValues, 'years', 'Years')}
                 {this.renderNumberInput(currentValues, 'months', 'Months')}
                 {this.renderNumberInput(currentValues, 'days', 'Days')}
-                <div className={defaultClasses.ageClear}>
+                <div className={ageClearClass}>
                     <ClearIcon
                         onClick={this.onClear}
                     />

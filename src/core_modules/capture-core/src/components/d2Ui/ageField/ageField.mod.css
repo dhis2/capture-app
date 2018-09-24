@@ -4,6 +4,7 @@
 .containerVertical {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .containerHorizontal {
@@ -14,10 +15,9 @@
 .ageNumberInputContainer {
     width: 150px;
 }
-
-.ageDateInputContainer {
+.ageDateInputContainerHorizontal {
     padding-top: 16px;
 }
-.ageClear {
+.ageClearHorizontal {
     margin-top: 26px;
 }
