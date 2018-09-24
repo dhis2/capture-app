@@ -2,9 +2,13 @@
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 
 export function convertCoordinateOut(dataEntryValue: any, prevValue: string, foundation: RenderFoundation) {
+    let coordinates = dataEntryValue;
+    if (foundation.featureType === 'Point') {
+        coordinates = [dataEntryValue.longitude, dataEntryValue.latitude];
+    }
     return dataEntryValue ? {
         type: foundation.featureType,
-        coordinates: dataEntryValue,
+        coordinates,
     } : null;
 }
 
@@ -12,6 +16,9 @@ export function getConvertCoordinateIn(foundation: ?RenderFoundation) {
     return (value: any) => {
         if (!value || !foundation || value.type !== foundation.featureType) {
             return null;
+        }
+        if (foundation.featureType === 'Point') {
+            return { latitude: value.coordinates[1], longitude: value.coordinates[0] }
         }
         return value.coordinates;
     };
