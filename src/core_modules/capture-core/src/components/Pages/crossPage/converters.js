@@ -18,7 +18,7 @@ export function getConvertCoordinateIn(foundation: ?RenderFoundation) {
             return null;
         }
         if (foundation.featureType === 'Point') {
-            return { latitude: value.coordinates[1], longitude: value.coordinates[0] }
+            return { latitude: value.coordinates[1], longitude: value.coordinates[0] };
         }
         return value.coordinates;
     };
