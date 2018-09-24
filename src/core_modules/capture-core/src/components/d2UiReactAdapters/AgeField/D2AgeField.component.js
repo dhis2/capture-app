@@ -34,6 +34,7 @@ type Props = {
     innerMessage?: ?any,
     classes: Object,
     inputMessageClasses: ?InputMessageClasses,
+    inFocus?: ?boolean,
 };
 function getCalculatedValues(dateValue: ?string): AgeValues {
     const parseData = parseDate(dateValue || '');
@@ -137,8 +138,8 @@ class D2AgeField extends Component<Props> {
                 <AgeNumberInput
                     label={i18n.t(label)}
                     value={currentValues[key]}
-                    onBlur={value => this.handleNumberBlur({ ...currentValues, [key]: value })}
-                    onChange={value => onChange({ ...currentValues, [key]: value })}
+                    onBlur={numberValue => this.handleNumberBlur({ ...currentValues, [key]: numberValue })}
+                    onChange={numberValue => onChange({ ...currentValues, [key]: numberValue })}
                     {...passOnProps}
                 />
                 {innerMessage && this.renderMessage(key)}
@@ -164,23 +165,17 @@ class D2AgeField extends Component<Props> {
     render() {
         const { value, orientation } = this.props;
         const currentValues = value || {};
+        const isVertical = orientation === orientations.VERTICAL;
         const containerClass = classNames(
-            defaultClasses.container,
-            { [defaultClasses.containerVertical]: orientation === orientations.VERTICAL },
+            { [defaultClasses.containerHorizontal]: !isVertical },
+            { [defaultClasses.containerVertical]: isVertical },
         );
-        const inputsContainerClass = classNames(
-            defaultClasses.inputsContainer,
-            { [defaultClasses.inputsContainerVertical]: orientation === orientations.VERTICAL },
-        );
-
         return (
             <div className={containerClass}>
-                <div className={inputsContainerClass}>
-                    {this.renderDateInput(currentValues)}
-                    {this.renderNumberInput(currentValues, 'years', 'Years')}
-                    {this.renderNumberInput(currentValues, 'months', 'Months')}
-                    {this.renderNumberInput(currentValues, 'days', 'Days')}
-                </div>
+                {this.renderDateInput(currentValues)}
+                {this.renderNumberInput(currentValues, 'years', 'Years')}
+                {this.renderNumberInput(currentValues, 'months', 'Months')}
+                {this.renderNumberInput(currentValues, 'days', 'Days')}
                 <div className={defaultClasses.ageClear}>
                     <ClearIcon
                         onClick={this.onClear}

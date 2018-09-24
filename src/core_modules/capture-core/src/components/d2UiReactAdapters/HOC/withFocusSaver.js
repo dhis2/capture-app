@@ -2,9 +2,9 @@
 import * as React from 'react';
 
 type Props = {
-    inFocus?: ?any,
-    onSetFocus?: ?any,
-    onRemoveFocus: ?any,
+    inFocus?: ?boolean,
+    onSetFocus?: ?() => void,
+    onRemoveFocus?: ?() => void,
 };
 
 type State = {

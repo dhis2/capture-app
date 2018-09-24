@@ -6,7 +6,6 @@ import D2Date from '../../DateAndTimeFields/DateField/D2Date.component';
 import orientations from '../../constants/orientations.const';
 import withFocusSaver from '../../HOC/withFocusSaver';
 import withFocusHandler from '../../internal/TextInput/withFocusHandler';
-import defaultClasses from '../../../d2Ui/ageField/ageField.mod.css';
 
 type Props = {
     value: ?string,
@@ -25,15 +24,13 @@ class AgeDateInput extends Component<Props> {
     }
 
     render() {
-        const { value, onAgeChanged, onChange, orientation, classes, ...passOnProps } = this.props;
-        const width = orientation === orientations.VERTICAL ? 150 : 350;
+        const { value, onChange, orientation, classes, ...passOnProps } = this.props;
         return (
             <D2Date
                 value={value || ''}
                 onBlur={this.handleBlur}
                 onChange={this.handleChange}
                 placeholder={i18n.t('mm/dd/yyyy')}
-                width={width}
                 calendarMaxMoment={moment()}
                 {...passOnProps}
             />
