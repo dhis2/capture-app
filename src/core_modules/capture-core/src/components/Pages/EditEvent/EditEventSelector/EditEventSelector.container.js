@@ -29,9 +29,9 @@ const editEventDataEntryHasChanges = (state: ReduxState) => {
             const sectionId = section.id;
             const sectionKey = `${key}-${sectionId}`;
             const sectionData = state.formsSectionsFieldsUI[sectionKey];
-            return Object
+            return sectionData ? Object
                 .keys(sectionData)
-                .some(elementKey => sectionData[elementKey].modified);
+                .some(elementKey => sectionData[elementKey].modified) : false;
         });
 
     if (formIsModified) {
@@ -39,9 +39,9 @@ const editEventDataEntryHasChanges = (state: ReduxState) => {
     }
 
     const UIDataForDataValues = state.dataEntriesFieldsUI[key];
-    const dataEntryIsModified = Object
+    const dataEntryIsModified = UIDataForDataValues ? Object
         .keys(UIDataForDataValues)
-        .some(elementKey => UIDataForDataValues[elementKey].modified);
+        .some(elementKey => UIDataForDataValues[elementKey].modified) : false;
 
     return dataEntryIsModified;
 };

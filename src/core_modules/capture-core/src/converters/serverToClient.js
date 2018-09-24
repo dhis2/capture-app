@@ -36,6 +36,10 @@ const valueConvertersForType = {
     [elementTypes.DATETIME]: (d2Value: string) => moment(d2Value).toISOString(),
     [elementTypes.TRUE_ONLY]: (d2Value: string) => ((d2Value === 'true') || null),
     [elementTypes.BOOLEAN]: (d2Value: string) => (d2Value === 'true'),
+    [elementTypes.COORDINATE]: (d2Value: string) => {
+        const arr = JSON.parse(d2Value);
+        return { latitude: arr[1], longitude: arr[0] };
+    },
 };
 
 export function convertValue(type: $Values<typeof elementTypes>, value: any) {
