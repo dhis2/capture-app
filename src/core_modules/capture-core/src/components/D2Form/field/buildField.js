@@ -204,7 +204,7 @@ const getCoordinateField = (metaData: MetaDataElement, options: Object) => {
                 withDefaultShouldUpdateInterface()(
                     withRequiredFieldCalculation()(
                         withDefaultFieldContainer()(
-                            withDefaultMessages()(
+                            withDisplayMessages()(
                                 withInternalChangeHandler()(CoordinateField),
                             ),
                         ),
@@ -231,7 +231,7 @@ const getUsernameField = (metaData: MetaDataElement, options: Object) => {
                 withDefaultShouldUpdateInterface()(
                     withRequiredFieldCalculation()(
                         withDefaultFieldContainer()(
-                            withDefaultMessages()(
+                            withDisplayMessages()(
                                 withInternalChangeHandler()(UsernameField),
                             ),
                         ),
