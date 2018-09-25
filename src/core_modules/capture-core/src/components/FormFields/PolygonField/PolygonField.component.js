@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import FormLabel from '@material-ui/core/FormLabel';
 import MapIcon from '@material-ui/icons/Map';
+import CheckIcon from '@material-ui/icons/Check';
 import L from 'leaflet';
 import { Map, TileLayer, FeatureGroup } from 'react-leaflet';
 import EditControl from 'react-leaflet-draw/lib/EditControl';
@@ -112,6 +113,7 @@ export default class PolygonField extends Component<Props> {
                 <div className="polygon-field-status">
                     <MapIcon onClick={this.onMapIconClick} />
                     <div className="polygon-status">{captured ? 'Polygon captured' : 'No polygon captured'}</div>
+                    { captured && <CheckIcon color="primary" /> }
                 </div>
                 {
                     this.state.showMap && (

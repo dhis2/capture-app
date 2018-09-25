@@ -18,12 +18,12 @@
     margin-bottom: 10px;
 }
 
-.polygon-field-status svg {
+.polygon-field-status svg:first-of-type {
     cursor: pointer;
 }
 
 .polygon-status {
-    margin: 3px 0 0 5px;
+    margin: 3px 5px 0 5px;
 }
 
 .polygon-container {
