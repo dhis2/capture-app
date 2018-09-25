@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import FormLabel from '@material-ui/core/FormLabel';
+import MapIcon from '@material-ui/icons/Map';
 import L from 'leaflet';
 import { Map, TileLayer, FeatureGroup } from 'react-leaflet';
 import EditControl from 'react-leaflet-draw/lib/EditControl';
@@ -39,8 +40,11 @@ export default class PolygonField extends Component<Props> {
         const featureCollection = Array.isArray(props.value) ? coordsToFeatureCollection(props.value) : null;
         this.state = {
             featureCollection,
+            showMap: false,
         };
     }
+
+    onMapIconClick = () => this.setState({ showMap: !this.state.showMap });
 
     onEdited = (e) => {
         const coordinates = e.layers.toGeoJSON().features[0].geometry.coordinates;
@@ -93,6 +97,7 @@ export default class PolygonField extends Component<Props> {
     }
 
     render() {
+        const captured = this.state.featureCollection !== null;
         return (
             <div className="polygon-field">
                 <div className="polygon-label">
@@ -104,29 +109,37 @@ export default class PolygonField extends Component<Props> {
                         {this.props.label}
                     </FormLabel>
                 </div>
-                <div className="polygon-container">
-                    <Map zoom={13} center={this.getCenter()} zoomControl={false}>
-                        <TileLayer
-                            url="//cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
-                            attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-                        />
-                        <FeatureGroup ref={(reactFGref) => { this.onFeatureGroupReady(reactFGref); }}>
-                            <EditControl
-                                position="topright"
-                                onEdited={this.onEdited}
-                                onCreated={this.onCreate}
-                                onDeleted={this.onDeleted}
-                                draw={{
-                                    rectangle: false,
-                                    polyline: false,
-                                    circle: false,
-                                    marker: false,
-                                    circlemarker: false,
-                                }}
-                            />
-                        </FeatureGroup>
-                    </Map>
+                <div className="polygon-field-status">
+                    <MapIcon onClick={this.onMapIconClick} />
+                    <div className="polygon-status">{captured ? 'Polygon captured' : 'No polygon captured'}</div>
                 </div>
+                {
+                    this.state.showMap && (
+                        <div className="polygon-container">
+                            <Map zoom={13} center={this.getCenter()} zoomControl={false}>
+                                <TileLayer
+                                    url="//cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
+                                    attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+                                />
+                                <FeatureGroup ref={(reactFGref) => { this.onFeatureGroupReady(reactFGref); }}>
+                                    <EditControl
+                                        position="topright"
+                                        onEdited={this.onEdited}
+                                        onCreated={this.onCreate}
+                                        onDeleted={this.onDeleted}
+                                        draw={{
+                                            rectangle: false,
+                                            polyline: false,
+                                            circle: false,
+                                            marker: false,
+                                            circlemarker: false,
+                                        }}
+                                    />
+                                </FeatureGroup>
+                            </Map>
+                        </div>
+                    )
+                }
             </div>
         );
     }

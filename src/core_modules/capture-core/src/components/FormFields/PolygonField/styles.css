@@ -12,8 +12,26 @@
     margin-bottom: 5px;
 }
 
+.polygon-field-status {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.polygon-field-status svg {
+    cursor: pointer;
+}
+
+.polygon-status {
+    margin: 3px 0 0 5px;
+}
+
+.polygon-container {
+    position: absolute;
+    top: 52px;
+}
 .polygon-container .leaflet-container {
-    z-index: 10;
-    width: 500px;
-    height: 400px;
+    z-index: 500;
+    width: 400px;
+    height: 250px;
 }
