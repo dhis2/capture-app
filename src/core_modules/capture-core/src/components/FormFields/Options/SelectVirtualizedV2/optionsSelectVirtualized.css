@@ -1,0 +1,28 @@
+.Select-control {
+    padding-left: 12px;
+    font-size: 16px;
+    width: 100%;
+    border: 1px solid #C4C4C4;
+    border-radius: 3px;
+    box-shadow: 0px 0px 2px 0px #C4C4C4 inset;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+}
+
+.Select-multi-value-wrapper {
+    flex-grow: 1;
+}
+
+.Select-value {
+    padding-left: 12px!important;
+    line-height: 42px!important;
+}
+
+.Select.is-focused > .Select-control {
+    background-color: white;
+}
+.Select.is-focused:not(.is-open) > .Select-control {
+    background-color: white;
+}

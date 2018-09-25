@@ -5,4 +5,5 @@ export { default as TrueOnlyField } from './Generic/TrueOnlyField/TrueOnlyField.
 export { default as withFocusSaver } from '../../d2UiReactAdapters/HOC/withFocusSaver';
 export { default as withLabel } from './HOC/withLabel';
 export { default as orientations } from '../../d2UiReactAdapters/constants/orientations.const';
+export { default as VirtualizedSelectField } from './Generic/VirtualizedSelectField/VirtualizedSelectField.component';
 

@@ -2,7 +2,7 @@
 import log from 'loglevel';
 
 import errorCreator from '../../../utils/errorCreator';
-import { TextField, BooleanField, TrueOnlyField, AgeField, orientations, withFocusSaver, withLabel } from '../../FormFields/New';
+import { TextField, BooleanField, TrueOnlyField, AgeField, orientations, withFocusSaver, withLabel, VirtualizedSelectField } from '../../FormFields/New';
 import labelTypeClasses from './buildField.mod.css';
 import D2Date from '../../FormFields/DateAndTime/D2Date/D2Date.component';
 import D2DateTime from '../../FormFields/DateAndTime/D2DateTime/D2DateTime.component';
@@ -14,8 +14,8 @@ import CoordinateField from '../../FormFields/CoordinateField/CoordinateField.co
 import UsernameField from '../../FormFields/Username/Username.component';
 
 import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
-import OptionsSelect from '../../FormFields/Options/SelectVirtualized/OptionsSelectVirtualized.component';
-import withSelectTranslations from '../../FormFields/Options/SelectVirtualized/withTranslations';
+import OptionsSelect from '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
+import withSelectTranslations from '../../FormFields/Options/SelectVirtualizedV2/withTranslations';
 import withConvertedOptionSet from '../../FormFields/Options/withConvertedOptionSet';
 
 import getValidators from './validators';
@@ -472,10 +472,18 @@ const fieldForTypes = {
                     withHideCompatibility()(
                         withDefaultShouldUpdateInterface()(
                             withRequiredFieldCalculation()(
-                                withCalculateMessages()(
-                                    withDefaultFieldContainer()(
-                                        withDisplayMessages()(
-                                            withInternalChangeHandler()(D2Image),
+                                withFocusSaver()(
+                                    withCalculateMessages()(
+                                        withDefaultFieldContainer()(
+                                            withLabel({
+                                                onGetUseVerticalOrientation: () => options.formHorizontal,
+                                                onGetCustomFieldLabeClass: () =>
+                                                    `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
+                                            })(
+                                                withDisplayMessages()(
+                                                    withInternalChangeHandler()(D2Image),
+                                                ),
+                                            ),
                                         ),
                                     ),
                                 ),
@@ -489,17 +497,25 @@ const fieldForTypes = {
     [elementTypes.UNKNOWN]: (metaData: MetaDataElement, options: Object) => null, // eslint-disable-line no-unused-vars
 };
 
-const getOptionSetComponent = (inputType: $Values<typeof optionSetInputTypes>) => {
+const getOptionSetComponent = (inputType: $Values<typeof optionSetInputTypes>, options: Object) => {
     if (inputType === optionSetInputTypes.SELECT) {
         return withGotoInterface()(
             withHideCompatibility()(
                 withDefaultShouldUpdateInterface()(
                     withRequiredFieldCalculation()(
-                        withCalculateMessages()(
-                            withDefaultFieldContainer()(
-                                withDisplayMessages()(
-                                    withConvertedOptionSet()(
-                                        withSelectTranslations()(OptionsSelect),
+                        withFocusSaver()(
+                            withCalculateMessages()(
+                                withDefaultFieldContainer()(
+                                    withLabel({
+                                        onGetUseVerticalOrientation: () => options.formHorizontal,
+                                        onGetCustomFieldLabeClass: () =>
+                                            `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
+                                    })(
+                                        withDisplayMessages()(
+                                            withConvertedOptionSet()(
+                                                withSelectTranslations()(VirtualizedSelectField),
+                                            ),
+                                        ),
                                     ),
                                 ),
                             ),
@@ -542,7 +558,7 @@ const optionSetField = (metaData: MetaDataElement, options: Object) => {
         id: metaData.id,
         component:
             // $FlowSuppress
-            getOptionSetComponent(metaData.optionSet.inputType),
+            getOptionSetComponent(metaData.optionSet.inputType, options),
         props,
     }, metaData);
 };

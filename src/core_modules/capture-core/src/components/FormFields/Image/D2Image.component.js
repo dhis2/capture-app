@@ -151,11 +151,7 @@ class D2Image extends Component<Props> {
             button: 'medium',
             progress: 40,
         };
-        return (
-            <BorderBox contentClassName={classes.borderBoxContent}>
-                {this.renderContent(contentClasses, sizes, true)}
-            </BorderBox>
-        );
+        return this.renderContent(contentClasses, sizes, true);
     }
 
     renderContent = (contentClasses: Object, sizes: Object, enablePreview: boolean) => {
@@ -164,13 +160,6 @@ class D2Image extends Component<Props> {
         const imageUrl = this.getimageUrl();
         return (
             <div className={classes.outerContainer}>
-                <InputLabel
-                    classes={{ root: contentClasses.label }}
-                    disabled={!!disabled}
-                    required={!!required}
-                >
-                    {label}
-                </InputLabel>
                 <div className={classes.container}>
                     <input
                         className={classes.input}
