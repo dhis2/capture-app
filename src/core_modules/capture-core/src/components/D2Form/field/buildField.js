@@ -435,7 +435,7 @@ const fieldForTypes = {
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
             async: true,
-            formHorizontal: options.formHorizontal,
+            orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
         }, options);
         return createFieldProps({
             id: metaData.id,
@@ -444,10 +444,18 @@ const fieldForTypes = {
                     withHideCompatibility()(
                         withDefaultShouldUpdateInterface()(
                             withRequiredFieldCalculation()(
-                                withCalculateMessages()(
-                                    withDefaultFieldContainer()(
-                                        withDisplayMessages()(
-                                            withInternalChangeHandler()(D2File),
+                                withFocusSaver()(
+                                    withCalculateMessages()(
+                                        withDefaultFieldContainer()(
+                                            withLabel({
+                                                onGetUseVerticalOrientation: () => options.formHorizontal,
+                                                onGetCustomFieldLabeClass: () =>
+                                                    `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
+                                            })(
+                                                withDisplayMessages()(
+                                                    withInternalChangeHandler()(D2File),
+                                                ),
+                                            ),
                                         ),
                                     ),
                                 ),
@@ -463,7 +471,7 @@ const fieldForTypes = {
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
             async: true,
-            formHorizontal: options.formHorizontal,
+            orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
         }, options);
         return createFieldProps({
             id: metaData.id,

@@ -1,5 +1,6 @@
 .Select-control {
-	background: transparent;
+    background: transparent;
+    width: 100%!important;
 }
 
 .Select-input input {

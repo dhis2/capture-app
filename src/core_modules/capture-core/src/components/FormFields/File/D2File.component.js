@@ -2,84 +2,79 @@
 import CheckIcon from '@material-ui/icons/Check';
 import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
-import InputLabel from '@material-ui/core/InputLabel';
 import i18n from '@dhis2/d2-i18n';
 import BorderBox from '../../BorderBox/BorderBox.component';
 import Button from '../../Buttons/Button.component';
 import { getApi } from '../../../d2/d2Instance';
 import LoadingMask from '../../LoadingMasks/LoadingMask.component';
 import inMemoryFileStore from '../../DataEntry/file/inMemoryFileStore';
+import orientations from '../../d2UiReactAdapters/constants/orientations.const';
 
 type Props = {
-    label?: ?string,
     value: ?{ value: string, name: string, url?: ?string },
-    disabled?: ?boolean,
-    required?: ?boolean,
     classes: {
-        horizontalLabel: string,
-        outerContainer: string,
-        container: string,
-        inputContainer: string,
-        inputItemIcon: string,
-        inputItem: string,
+        horizontalContainer: string,
+        verticalContainer: string,
+        innerContainer: string,
+        horizontalSelectedFileTextContainer: string,
+        verticalSelectedFileTextContainer: string,
+        checkIcon: string,
+        deleteButton: string,
         input: string,
-        loadingProgress: string,
-        horizontalSelectButton: string,
-        horizontalDeleteButton: string,
-        verticalDeleteButton: string,
-        borderBoxContent: string,
     },
     onCommitAsync: (callback: Function) => void,
     onBlur: (value: ?Object) => void,
     onUpdateAsyncUIState: (uiStateToAdd: Object) => void,
     asyncUIState: { loading?: ?boolean },
-    formHorizontal?: ?boolean,
+    orientation: $Values<typeof orientations>,
 }
 
 const styles = theme => ({
-    horizontalLabel: theme.typography.formFieldTitle,
-    outerContainer: {
+    horizontalContainer: {
         display: 'flex',
-        flexDirection: 'column',
-    },
-    container: {
-        display: 'flex',
-        flexDirection: 'column',
-    },
-    inputContainer: {
-        display: 'flex',
-        flexDirection: 'row',
         alignItems: 'center',
+        flexWrap: 'wrap',
     },
-    inputItemIcon: {
+    verticalContainer: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+    },
+    innerContainer: {
+        padding: theme.typography.pxToRem(2),
+        paddingRight: theme.typography.pxToRem(10),
+    },
+    horizontalSelectedFileTextContainer: {
+        padding: theme.typography.pxToRem(2),
+        paddingRight: theme.typography.pxToRem(10),
+        display: 'flex',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        wordBreak: 'break-word',
+    },
+    verticalSelectedFileTextContainer: {
+        padding: theme.typography.pxToRem(2),
+        paddingRight: theme.typography.pxToRem(10),
+        display: 'flex',
+        flexWrap: 'wrap',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        wordBreak: 'break-word',
+    },
+    checkIcon: {
         color: theme.palette.success[700],
     },
-    inputItem: {
-        marginRight: theme.typography.pxToRem(10),
-    },
-    verticalDeleteButton: {
-        margin: theme.typography.pxToRem(8),
+    deleteButton: {
         color: theme.palette.error.main,
-    },
-    horizontalDeleteButton: {
-        margin: theme.typography.pxToRem(4),
-        minHeight: theme.typography.pxToRem(28),
-        color: theme.palette.error.main,
-    },
-    horizontalSelectButton: {
-        margin: theme.typography.pxToRem(4),
-        minHeight: theme.typography.pxToRem(28),
-    },
-    loadingProgress: {
-        marginRight: theme.typography.pxToRem(10),
+        textDecoration: 'underline',
+        cursor: 'pointer',
     },
     input: {
         display: 'none',
     },
-    borderBoxContent: {
-        display: 'flex',
-        alignItems: 'center',
-        margin: theme.typography.pxToRem(10),
+    horizontalLink: {
+        paddingRight: theme.typography.pxToRem(5),
     },
 });
 
@@ -123,117 +118,74 @@ class D2File extends Component<Props> {
         return null;
     }
 
-    renderHorizontal = () => {
-        const classes = this.props.classes;
-        const contentClasses = {
-            label: classes.horizontalLabel,
-            selectButton: classes.horizontalSelectButton,
-            deleteButton: classes.horizontalDeleteButton,
-        };
-        const sizes = {
-            button: 'small',
-            progress: 30,
-        };
-        return this.renderContent(contentClasses, sizes);
-    }
-
-    renderVertical = () => {
-        const classes = this.props.classes;
-        const contentClasses = {
-            deleteButton: classes.verticalDeleteButton,
-        };
-        const sizes = {
-            button: 'medium',
-            progress: 40,
-        };
-        return (
-            <BorderBox contentClassName={classes.borderBoxContent}>
-                {this.renderContent(contentClasses, sizes)}
-            </BorderBox>
-        );
-    }
-
-    renderContent = (contentClasses: Object, sizes: Object) => {
-        const { label, value, classes, asyncUIState, disabled, required } = this.props;
+    render() {
+        const { value, classes, asyncUIState, orientation } = this.props;
         const isUploading = asyncUIState && asyncUIState.loading;
         const fileUrl = this.getFileUrl();
+        const isVertical = orientation === orientations.VERTICAL;
+        const containerClass = isVertical ? classes.verticalContainer : classes.horizontalContainer;
+        const selectedFileTextContainerClass = isVertical ? classes.verticalSelectedFileTextContainer : classes.horizontalSelectedFileTextContainer;
         return (
-            <div className={classes.outerContainer}>
-                <InputLabel
-                    classes={{ root: contentClasses.label }}
-                    disabled={!!disabled}
-                    required={!!required}
-                >
-                    {label}
-                </InputLabel>
-                <div className={classes.container}>
-                    <input
-                        className={classes.input}
-                        type="file"
-                        ref={(hiddenFileSelector) => {
-                            this.hiddenFileSelectorRef = hiddenFileSelector;
-                        }}
-                        onChange={e => this.handleFileChange(e)}
-                    />
-                    {
-                        (() => {
-                            if (isUploading) {
-                                return (
-                                    <div className={classes.inputContainer}>
-                                        <LoadingMask className={classes.loadingProgress} size={sizes.progress} />
-                                        <div className={classes.inputItem}>{i18n.t('Uploading file')}</div>
-                                    </div>);
-                            } else if (value) {
-                                return (
-                                    <div className={classes.inputContainer}>
-                                        <CheckIcon className={classes.inputItemIcon} />
-                                        <div className={classes.inputItem}>
-                                            <a
-                                                download={value.name}
-                                                target="_blank"
-                                                href={fileUrl}
-                                            >
-                                                {value.name}
-                                            </a>
-                                            {` ${i18n.t('selected')}.`}
-                                        </div>
-                                        <div className={classes.inputItem}>
-                                            <Button
-                                                size={sizes.button}
-                                                onClick={this.handleRemoveClick}
-                                                className={contentClasses.deleteButton}
-                                            >
-                                                {i18n.t('Delete')}
-                                            </Button>
-                                        </div>
-                                    </div>
-                                );
-                            }
+            <div>
+                <input
+                    className={classes.input}
+                    type="file"
+                    ref={(hiddenFileSelector) => {
+                        this.hiddenFileSelectorRef = hiddenFileSelector;
+                    }}
+                    onChange={e => this.handleFileChange(e)}
+                />
+                {
+                    (() => {
+                        if (isUploading) {
                             return (
-                                <div className={classes.inputContainer}>
-                                    <div className={classes.inputItem}>
-                                        <Button
-                                            size={sizes.button}
-                                            className={contentClasses.selectButton}
-                                            onClick={this.handleButtonClick}
-                                            color="primary"
+                                <div className={containerClass}>
+                                    <div className={classes.innerContainer}>
+                                        <LoadingMask />
+                                    </div>
+                                    <div className={classes.innerContainer}>{i18n.t('Uploading file')}</div>
+                                </div>);
+                        } else if (value) {
+                            return (
+                                <div className={containerClass}>
+                                    <div className={selectedFileTextContainerClass}>
+                                        <CheckIcon className={classes.checkIcon} />
+                                        <a
+                                            className={!isVertical && classes.horizontalLink}
+                                            target="_blank"
+                                            href={fileUrl}
                                         >
-                                            {i18n.t('Select file')}
-                                        </Button>
+                                            {value.name}
+                                        </a>
+                                        {` ${i18n.t('selected')}.`}
+                                    </div>
+                                    <div className={classes.innerContainer}>
+                                        <div
+                                            role="presentation"
+                                            onClick={this.handleRemoveClick}
+                                            className={classes.deleteButton}
+                                        >
+                                            {i18n.t('Delete')}
+                                        </div>
                                     </div>
                                 </div>
-
                             );
-                        })()
-                    }
-                </div>
+                        }
+                        return (
+                            <div>
+                                <Button
+                                    onClick={this.handleButtonClick}
+                                    color="primary"
+                                >
+                                    {i18n.t('Select file')}
+                                </Button>
+                            </div>
+
+                        );
+                    })()
+                }
             </div>
         );
-    }
-
-
-    render() {
-        return this.props.formHorizontal ? this.renderHorizontal() : this.renderVertical();
     }
 }
 
