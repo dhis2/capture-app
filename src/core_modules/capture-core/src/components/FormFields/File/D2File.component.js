@@ -21,6 +21,7 @@ type Props = {
         checkIcon: string,
         deleteButton: string,
         input: string,
+        horizontalLink: string,
     },
     onCommitAsync: (callback: Function) => void,
     onBlur: (value: ?Object) => void,
