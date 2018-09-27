@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 
 import TextInput from '../../internal/TextInput/TextInput.component';
 import D2DatePopup from './D2DatePopup.component';
 import D2DateCalendar from './D2DateCalendar.component';
 import lowerCaseFirstLetter from '../../../../utils/string/lowerCaseFirstLetter';
+import DateInput from '../../internal/DateInput/DateInput.component';
 
 type Props = {
     label: string,
@@ -24,12 +24,6 @@ type Props = {
 type State = {
     popoverOpen: boolean,
 };
-
-const styles = () => ({
-    textField: {
-        width: '100%',
-    },
-});
 
 class D2Date extends React.Component<Props, State> {
     static propContainers = {
@@ -147,10 +141,10 @@ class D2Date extends React.Component<Props, State> {
     render() {
         const {
             width,
+            maxWidth,
             calendarWidth,
             calendarHeight,
             inputWidth,
-            classes,
             onBlur,
             onFocus,
             onDateSelectedFromCalendar,
@@ -170,10 +164,11 @@ class D2Date extends React.Component<Props, State> {
                 ref={(containerInstance) => { this.containerInstance = containerInstance; }}
                 style={{
                     width,
+                    maxWidth,
                 }}
             >
                 { /* // $FlowSuppress */}
-                <TextInput
+                <DateInput
                     {...textFieldRefPropObject}
                     onFocus={this.handleTextFieldFocus}
                     onBlur={this.handleTextFieldBlur}
@@ -203,4 +198,4 @@ class D2Date extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(styles)(D2Date);
+export default D2Date;

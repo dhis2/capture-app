@@ -1,19 +1,7 @@
 // @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import { anchorPositions, modes, absoluteDirections } from './d2DatePopup.const';
-
-const getStyles = () => ({
-    containerAbsolute: {
-        position: 'relative',
-    },
-    containerInline: {},
-    calendarAbsolute: {
-        position: 'absolute',
-        zIndex: 201,
-    },
-    calendarInline: {},
-});
+import defaultClasses from '../../../d2Ui/dateAndTimeFields/datePopup.mod.css';
 
 type Props = {
     open: boolean,
@@ -23,12 +11,6 @@ type Props = {
     absoluteDirection: $Values<typeof absoluteDirections>,
     inputWidth: number,
     calendarWidth: number,
-    classes: {
-        containerAbsolute: string,
-        containerInline: string,
-        calendarAbsolute: string,
-        calendarInline: string,
-    },
     inputUsesFloatingLabel: boolean,
 };
 
@@ -66,7 +48,6 @@ class D2DatePopup extends React.Component<Props> {
             mode,
             anchorPosition, // eslint-disable-line
             absoluteDirection, // eslint-disable-line
-            classes,
             children,
         } = this.props;
 
@@ -74,8 +55,8 @@ class D2DatePopup extends React.Component<Props> {
             return null;
         }
 
-        const containerClasses = mode === modes.INLINE ? classes.containerInline : classes.containerAbsolute;
-        const calendarClasses = mode === modes.INLINE ? classes.calendarInline : classes.calendarAbsolute;
+        const containerClasses = mode === modes.INLINE ? defaultClasses.containerInline : defaultClasses.containerAbsolute;
+        const calendarClasses = mode === modes.INLINE ? defaultClasses.calendarInline : defaultClasses.calendarAbsolute;
         const calendarStyle = this.getPopupStyle();
 
         return (
@@ -93,4 +74,4 @@ class D2DatePopup extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(D2DatePopup);
+export default D2DatePopup;

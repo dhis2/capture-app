@@ -2,19 +2,15 @@
 import log from 'loglevel';
 
 import errorCreator from '../../../utils/errorCreator';
-import { TextField, BooleanField, TrueOnlyField, AgeField, orientations, withFocusSaver, withLabel, VirtualizedSelectField } from '../../FormFields/New';
+import { TextField, BooleanField, TrueOnlyField, AgeField, orientations, withFocusSaver, withLabel, VirtualizedSelectField, DateField, DateTimeField } from '../../FormFields/New';
 import labelTypeClasses from './buildField.mod.css';
-import D2Date from '../../FormFields/DateAndTime/D2Date/D2Date.component';
-import D2DateTime from '../../FormFields/DateAndTime/D2DateTime/D2DateTime.component';
 import D2File from '../../FormFields/File/D2File.component';
 import D2Image from '../../FormFields/Image/D2Image.component';
-import D2PhoneNumber from '../../FormFields/PhoneNumber/PhoneNumber.component';
 import OrgUnitTree from '../../FormFields/OrgUnitTree/OrgUnitTree.component';
 import CoordinateField from '../../FormFields/CoordinateField/CoordinateField.component';
 import UsernameField from '../../FormFields/Username/Username.component';
 
 import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
-import OptionsSelect from '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import withSelectTranslations from '../../FormFields/Options/SelectVirtualizedV2/withTranslations';
 import withConvertedOptionSet from '../../FormFields/Options/withConvertedOptionSet';
 
@@ -131,35 +127,6 @@ const getBaseTextField = (metaData: MetaDataElement, options: Object) => {
     }, metaData);
 };
 
-const getPhoneField = (metaData: MetaDataElement, options: Object) => {
-    const props = createComponentProps({
-        label: metaData.formName,
-        multiline: false,
-        metaCompulsory: metaData.compulsory,
-    }, options);
-
-    return createFieldProps({
-        id: metaData.id,
-        component:
-      withGotoInterface()(
-          withHideCompatibility()(
-              withDefaultShouldUpdateInterface()(
-                  withRequiredFieldCalculation()(
-                      withCalculateMessages()(
-                          withDefaultFieldContainer()(
-                              withDisplayMessages()(
-                                  withInternalChangeHandler()(D2PhoneNumber),
-                              ),
-                          ),
-                      ),
-                  ),
-              ),
-          ),
-      ),
-        props,
-    }, metaData);
-};
-
 const getOrgUnitField = (metaData: MetaDataElement, options: Object) => {
     const props = createComponentProps({
         label: metaData.formName,
@@ -176,8 +143,14 @@ const getOrgUnitField = (metaData: MetaDataElement, options: Object) => {
                     withRequiredFieldCalculation()(
                         withCalculateMessages()(
                             withDefaultFieldContainer()(
-                                withDisplayMessages()(
-                                    withInternalChangeHandler()(OrgUnitTree),
+                                withLabel({
+                                    onGetUseVerticalOrientation: () => options.formHorizontal,
+                                    onGetCustomFieldLabeClass: () =>
+                                        `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.orgUnitLabel}`,
+                                })(
+                                    withDisplayMessages()(
+                                        withInternalChangeHandler()(OrgUnitTree),
+                                    ),
                                 ),
                             ),
                         ),
@@ -204,8 +177,14 @@ const getCoordinateField = (metaData: MetaDataElement, options: Object) => {
                 withDefaultShouldUpdateInterface()(
                     withRequiredFieldCalculation()(
                         withDefaultFieldContainer()(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(CoordinateField),
+                            withLabel({
+                                onGetUseVerticalOrientation: () => options.formHorizontal,
+                                onGetCustomFieldLabeClass: () =>
+                                    `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+                            })(
+                                withDisplayMessages()(
+                                    withInternalChangeHandler()(CoordinateField),
+                                ),
                             ),
                         ),
                     ),
@@ -230,9 +209,17 @@ const getUsernameField = (metaData: MetaDataElement, options: Object) => {
             withHideCompatibility()(
                 withDefaultShouldUpdateInterface()(
                     withRequiredFieldCalculation()(
-                        withDefaultFieldContainer()(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(UsernameField),
+                        withFocusSaver()(
+                            withDefaultFieldContainer()(
+                                withLabel({
+                                    onGetUseVerticalOrientation: () => options.formHorizontal,
+                                    onGetCustomFieldLabeClass: () =>
+                                        `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
+                                })(
+                                    withDisplayMessages()(
+                                        withInternalChangeHandler()(UsernameField),
+                                    ),
+                                ),
                             ),
                         ),
                     ),
@@ -264,7 +251,7 @@ const getAgeField = (metaData: MetaDataElement, options: Object) => {
                                     withLabel({
                                         onGetUseVerticalOrientation: () => options.formHorizontal,
                                         onGetCustomFieldLabeClass: () =>
-                                            `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
+                                            `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.ageLabel}`,
                                     })(
                                         withDisplayMessages()(
                                             withInternalChangeHandler()(AgeField),
@@ -284,7 +271,7 @@ const getAgeField = (metaData: MetaDataElement, options: Object) => {
 const fieldForTypes = {
     [elementTypes.EMAIL]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
     [elementTypes.TEXT]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
-    [elementTypes.PHONE_NUMBER]: (metaData: MetaDataElement, options: Object) => getPhoneField(metaData, options),
+    [elementTypes.PHONE_NUMBER]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
     [elementTypes.LONG_TEXT]: (metaData: MetaDataElement, options: Object) => {
         const baseField = getBaseTextField(metaData, options);
         const props = { ...baseField.props, multiLine: true };
@@ -367,7 +354,8 @@ const fieldForTypes = {
     },
     [elementTypes.DATE]: (metaData: MetaDataElement, options: Object) => {
         const props = createComponentProps({
-            width: options.formHorizontal ? 150 : 350,
+            width: options.formHorizontal ? 150 : '100%',
+            maxWidth: options.formHorizontal ? 150 : 350,
             calendarWidth: 350,
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
@@ -381,9 +369,17 @@ const fieldForTypes = {
                         withDefaultShouldUpdateInterface()(
                             withRequiredFieldCalculation()(
                                 withCalculateMessages()(
-                                    withDefaultFieldContainer()(
-                                        withDisplayMessages()(
-                                            withInternalChangeHandler()(D2Date),
+                                    withFocusSaver()(
+                                        withDefaultFieldContainer()(
+                                            withLabel({
+                                                onGetUseVerticalOrientation: () => options.formHorizontal,
+                                                onGetCustomFieldLabeClass: () =>
+                                                    `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                                            })(
+                                                withDisplayMessages()(
+                                                    withInternalChangeHandler()(DateField),
+                                                ),
+                                            ),
                                         ),
                                     ),
                                 ),
@@ -396,7 +392,9 @@ const fieldForTypes = {
     },
     [elementTypes.DATETIME]: (metaData: MetaDataElement, options: Object) => {
         const props = createComponentProps({
-            dateWidth: 200,
+            dateWidth: options.formHorizontal ? 150 : '100%',
+            dateMaxWidth: options.formHorizontal ? 150 : 350,
+            orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
             calendarWidth: 350,
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
@@ -410,11 +408,20 @@ const fieldForTypes = {
                         withDefaultShouldUpdateInterface()(
                             withRequiredFieldCalculation()(
                                 withCalculateMessages()(
-                                    withDefaultFieldContainer()(
-                                        withDisplayMessages()(
-                                            withInternalChangeHandler()(D2DateTime),
+                                    withFocusSaver()(
+                                        withDefaultFieldContainer()(
+                                            withLabel({
+                                                onGetUseVerticalOrientation: () => options.formHorizontal,
+                                                onGetCustomFieldLabeClass: () =>
+                                                    `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.dateTimeLabel}`,
+                                            })(
+                                                withDisplayMessages()(
+                                                    withInternalChangeHandler()(DateTimeField),
+                                                ),
+                                            ),
                                         ),
                                     ),
+
                                 ),
                             ),
                         ),
@@ -450,7 +457,7 @@ const fieldForTypes = {
                                             withLabel({
                                                 onGetUseVerticalOrientation: () => options.formHorizontal,
                                                 onGetCustomFieldLabeClass: () =>
-                                                    `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
+                                                    `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.fileLabel}`,
                                             })(
                                                 withDisplayMessages()(
                                                     withInternalChangeHandler()(D2File),
@@ -486,7 +493,7 @@ const fieldForTypes = {
                                             withLabel({
                                                 onGetUseVerticalOrientation: () => options.formHorizontal,
                                                 onGetCustomFieldLabeClass: () =>
-                                                    `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
+                                                    `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.imageLabel}`,
                                             })(
                                                 withDisplayMessages()(
                                                     withInternalChangeHandler()(D2Image),

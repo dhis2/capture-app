@@ -1,7 +1,6 @@
 // @flow
 /* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
-import { withStyles, withTheme } from '@material-ui/core/styles';
 import InfiniteCalendar from 'react-infinite-calendar';
 
 import 'react-infinite-calendar/styles.css';
@@ -11,7 +10,6 @@ import parseDate from '../../../../utils/parsers/date.parser';
 import moment from '../../../../utils/moment/momentResolver';
 import CurrentLocaleData from '../../../../utils/localeData/CurrentLocaleData';
 import capitalizeFirstLetter from '../../../../utils/string/capitalizeFirstLetter';
-import getTheme from './getTheme';
 
 // import makeMaxWidthContainer from 'abaris-ui/src/HOC/makeMaxWidthContainer';
 
@@ -24,12 +22,8 @@ type Props = {
     height?: ?number,
     classes: Object,
     displayOptions?: ?Object,
-    theme: Object,
+    calendarTheme: Object,
 };
-
-const styles = () => ({
-    container: {},
-});
 
 class D2DateCalendar extends Component<Props> {
     static displayOptions = {
@@ -38,7 +32,6 @@ class D2DateCalendar extends Component<Props> {
 
     handleChange: (e: any, dates: ?Array<Date>) => void;
     calendarLocaleData: Object;
-    theme: Object;
     displayOptions: Object;
 
     constructor(props: Props) {
@@ -61,9 +54,6 @@ class D2DateCalendar extends Component<Props> {
             },
             weekStartsOn: projectLocaleData.weekStartsOn,
         };
-
-        this.theme = getTheme(this.props.theme);
-
 
         this.displayOptions = {
             ...D2DateCalendar.displayOptions,
@@ -132,15 +122,12 @@ class D2DateCalendar extends Component<Props> {
             minMoment,
             maxMoment,
             onDateSelected,
-            theme,
             displayOptions,
             ...passOnProps
         } = this.props;
 
         return (
-            <div
-                className={classes.container}
-            >
+            <div>
                 <InfiniteCalendar
                     {...this.getMinMaxProps()}
                     selected={this.getValue((value))}
@@ -149,7 +136,6 @@ class D2DateCalendar extends Component<Props> {
                     width={currentWidth}
                     height={height}
                     autoFocus={false}
-                    theme={this.theme}
                     displayOptions={this.displayOptions}
                     {...passOnProps}
                 />
@@ -158,4 +144,4 @@ class D2DateCalendar extends Component<Props> {
     }
 }
 
-export default withTheme()(withStyles(styles)(D2DateCalendar));
+export default D2DateCalendar;

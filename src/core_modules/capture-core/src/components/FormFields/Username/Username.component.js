@@ -4,26 +4,21 @@ import Autosuggest from 'react-autosuggest';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 import FormLabel from '@material-ui/core/FormLabel';
-import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
 import { getApi } from '../../../d2/d2Instance';
+import D2TextField from '../../d2UiReactAdapters/TextField/D2TextField.component';
 
 
 function renderInput(inputProps) {
     const { classes, ref, ...other } = inputProps;
 
     return (
-        <TextField
-            fullWidth
-            InputProps={{
-                inputRef: ref,
-                classes: {
-                    input: classes.input,
-                },
-                ...other,
-            }}
+        <D2TextField
+            {...inputProps}
+            onChange={event => inputProps.onChange(event, { newValue: event.currentTarget.value })}
+            onBlur={event => inputProps.onBlur(event.currentTarget.value)}
         />
     );
 }
@@ -67,7 +62,6 @@ const styles = theme => ({
     container: {
         flexGrow: 1,
         position: 'relative',
-        height: 32,
     },
     suggestionsContainerOpen: {
         position: 'absolute',
@@ -86,6 +80,13 @@ const styles = theme => ({
         listStyleType: 'none',
         maxHeight: 250,
         overflow: 'hidden',
+    },
+    inputWrapperFocused: {
+        border: `2px solid ${theme.palette.accent.dark}`,
+        borderRadius: '5px',
+    },
+    inputWrapperUnfocused: {
+        padding: 2,
     },
 });
 
@@ -126,15 +127,10 @@ class UsernameAutosuggest extends React.Component {
             return u.userCredentials.username.includes(value);
         });
 
+        const inputProps = { ...this.props, value, placeholder: 'search for username', onChange: this.handleChange };
+
         return (
             <div>
-                <FormLabel
-                    component="label"
-                    required={!!this.props.required}
-                    focused={false}
-                >
-                    {this.props.label}
-                </FormLabel>
                 <Autosuggest
                     theme={{
                         container: classes.container,
@@ -150,12 +146,7 @@ class UsernameAutosuggest extends React.Component {
                     renderSuggestionsContainer={renderUsersContainer}
                     getSuggestionValue={getUserValue}
                     renderSuggestion={renderUser}
-                    inputProps={{
-                        classes,
-                        value,
-                        placeholder: 'search for username',
-                        onChange: this.handleChange,
-                    }}
+                    inputProps={inputProps}
                 />
             </div>
         );

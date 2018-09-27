@@ -63,15 +63,6 @@ export default class CoordinateField extends Component<Props> {
 
         return (
             <div className="coordinate-field">
-                <div className="coordinate-label">
-                    <FormLabel
-                        component="label"
-                        required={!!this.props.required}
-                        focused={false}
-                    >
-                        {this.props.label}
-                    </FormLabel>
-                </div>
                 <div className="coordinate-fields">
                     <div className="coordinate-icon">
                         <LocationIcon onClick={this.onLocationIconClick} />

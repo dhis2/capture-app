@@ -14,7 +14,7 @@ type Props = {
 };
 
 const TextInput = (props: Props) => {
-    const { multiLine, classes, inputRef, ...passOnProps } = props;
+    const { multiLine, classes, inputRef, style, ...passOnProps } = props;
 
     return (
         <React.Fragment>

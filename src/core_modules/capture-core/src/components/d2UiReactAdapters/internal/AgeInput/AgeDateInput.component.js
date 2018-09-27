@@ -5,26 +5,17 @@ import i18n from '@dhis2/d2-i18n';
 import D2Date from '../../DateAndTimeFields/DateField/D2Date.component';
 import orientations from '../../constants/orientations.const';
 import withFocusSaver from '../../HOC/withFocusSaver';
-import withFocusHandler from '../../internal/TextInput/withFocusHandler';
 
 type Props = {
     value: ?string,
     onBlur: (value: string) => void,
     onChange?: ?(value: string) => void,
     orientation: $Values<typeof orientations>,
-    classes?: ?any,
 }
 
 class AgeDateInput extends Component<Props> {
-    handleBlur = (value) => {
-        this.props.onBlur(value);
-    }
-    handleChange = (event) => {
-        this.props.onChange && this.props.onChange(event.currentTarget.value);
-    }
-
     render() {
-        const { value, onChange, orientation, classes, ...passOnProps } = this.props;
+        const { value, orientation, ...passOnProps } = this.props;
         const width = orientation === orientations.VERTICAL ? 150 : null;
         return (
             <D2Date
@@ -42,4 +33,4 @@ class AgeDateInput extends Component<Props> {
     }
 }
 
-export default withFocusSaver()(withFocusHandler()(AgeDateInput));
+export default withFocusSaver()(AgeDateInput);

@@ -6,4 +6,6 @@ export { default as withFocusSaver } from '../../d2UiReactAdapters/HOC/withFocus
 export { default as withLabel } from './HOC/withLabel';
 export { default as orientations } from '../../d2UiReactAdapters/constants/orientations.const';
 export { default as VirtualizedSelectField } from './Generic/VirtualizedSelectField/VirtualizedSelectField.component';
+export { default as DateField } from './DateAndTimeFields/DateField/DateField.component';
+export { default as DateTimeField } from './DateAndTimeFields/DateTimeField/DateTimeField.component';
 
