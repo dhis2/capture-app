@@ -1,7 +1,9 @@
 [ignore]
 .*/build/.*
 .*/contents/.*
-.*/node_modules/.*
+
+[declarations]
+<PROJECT_ROOT>/node_modules/.*
 
 [libs]
 flow/

@@ -23,7 +23,7 @@ export default class CustomForm {
         const data = ReactHtmlParser(html);
         this._data = data;
     }
-    get data() {
+    get data(): React.Element<any> {
         return this._data;
     }
 }
