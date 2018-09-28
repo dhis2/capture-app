@@ -4,6 +4,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import LocationIcon from '@material-ui/icons/LocationOn';
 import { Map, TileLayer, Marker } from 'react-leaflet';
+import { isPointInRect } from '../PolygonField/PolygonField.component';
 
 import './styles.css';
 
@@ -30,6 +31,27 @@ export default class CoordinateField extends Component<Props> {
         };
     }
 
+    componentWillMount() {
+        document.removeEventListener('click', this.onDocClick);
+    }
+
+    onRender = (c) => {
+        this.elMap = c;
+        document.removeEventListener('click', this.onDocClick);
+        document.addEventListener('click', this.onDocClick);
+    };
+
+    onDocClick = (evt) => {
+        if (this.elMap) {
+            const target = { x: evt.clientX, y: evt.clientY };
+            const container = this.elMap.getBoundingClientRect();
+
+            if (!isPointInRect(target, container)) {
+                this.setState({ showMap: false });
+            }
+        }
+    };
+
     handleBlur = () => {
         const { latitude, longitude } = this.state;
         if (!latitude && !longitude) {
@@ -37,7 +59,7 @@ export default class CoordinateField extends Component<Props> {
         } else {
             this.props.onBlur({ latitude, longitude });
         }
-    }
+    };
 
     handleLatitudeChange = evt => this.setState({ latitude: evt.target.value });
     handleLongitudeChange = evt => this.setState({ longitude: evt.target.value });
@@ -50,7 +72,7 @@ export default class CoordinateField extends Component<Props> {
             longitude: lng,
         });
         this.props.onBlur({ latitude: lat, longitude: lng });
-    }
+    };
 
     render() {
         const { latitude, longitude } = this.state;
@@ -77,7 +99,7 @@ export default class CoordinateField extends Component<Props> {
                         <LocationIcon onClick={this.onLocationIconClick} />
                         {
                             this.state.showMap && (
-                                <div className="coordinate-leaflet-map">
+                                <div className="coordinate-leaflet-map" ref={this.onRender}>
                                     <Map center={center} zoom={13} onClick={this.onMapClick}>
                                         <TileLayer
                                             url="//cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"

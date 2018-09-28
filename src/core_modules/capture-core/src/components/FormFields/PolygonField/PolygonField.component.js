@@ -13,6 +13,10 @@ type Props = {
   onBlur: (value: string, event: UiEventData) => void,
 };
 
+export function isPointInRect({ x, y }, { left, right, top, bottom }) {
+    return x >= left && x <= right && y >= top && y <= bottom;
+}
+
 function coordsToFeatureCollection(coordinates) {
     if (!coordinates) {
         return null;
@@ -44,6 +48,27 @@ export default class PolygonField extends Component<Props> {
             showMap: false,
         };
     }
+
+    componentWillMount() {
+        document.removeEventListener('click', this.onDocClick);
+    }
+
+    onRender = (c) => {
+        this.elMap = c;
+        document.removeEventListener('click', this.onDocClick);
+        document.addEventListener('click', this.onDocClick);
+    };
+
+    onDocClick = (evt) => {
+        if (this.elMap) {
+            const target = { x: evt.clientX, y: evt.clientY };
+            const container = this.elMap.getBoundingClientRect();
+
+            if (!isPointInRect(target, container)) {
+                this.setState({ showMap: false });
+            }
+        }
+    };
 
     onMapIconClick = () => this.setState({ showMap: !this.state.showMap });
 
@@ -117,7 +142,7 @@ export default class PolygonField extends Component<Props> {
                 </div>
                 {
                     this.state.showMap && (
-                        <div className="polygon-container">
+                        <div className="polygon-container" ref={this.onRender}>
                             <Map zoom={13} center={this.getCenter()} zoomControl={false}>
                                 <TileLayer
                                     url="//cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
