@@ -2,12 +2,11 @@
 import log from 'loglevel';
 
 import errorCreator from '../../../utils/errorCreator';
-import { TextField, BooleanField, TrueOnlyField, AgeField, orientations, withFocusSaver, withLabel, VirtualizedSelectField, DateField, DateTimeField } from '../../FormFields/New';
+import { TextField, BooleanField, TrueOnlyField, AgeField, orientations, withFocusSaver, withLabel, VirtualizedSelectField, DateField, DateTimeField, CoordinateField, withCalculateMessages, withDisplayMessages } from '../../FormFields/New';
 import labelTypeClasses from './buildField.mod.css';
 import D2File from '../../FormFields/File/D2File.component';
 import D2Image from '../../FormFields/Image/D2Image.component';
 import OrgUnitTree from '../../FormFields/OrgUnitTree/OrgUnitTree.component';
-import CoordinateField from '../../FormFields/CoordinateField/CoordinateField.component';
 import UsernameField from '../../FormFields/Username/Username.component';
 
 import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
@@ -25,8 +24,6 @@ import withDefaultFieldContainer from './withDefaultFieldContainer';
 import withHideCompatibility from './withHideCompatibility';
 import withGotoInterface from './withGotoInterface';
 import withRequiredFieldCalculation from './withRequiredFieldCalculation';
-import withCalculateMessages from './messages/withCalculateMessages';
-import withDisplayMessages from './messages/withDisplayMessages';
 
 import type { Field } from '../../../__TEMP__/FormBuilderExternalState.component';
 
@@ -167,6 +164,8 @@ const getCoordinateField = (metaData: MetaDataElement, options: Object) => {
         label: metaData.formName,
         multiline: false,
         metaCompulsory: metaData.compulsory,
+        orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
+        shrinkDisabled: options.formHorizontal,
     }, options);
 
     return createFieldProps({
@@ -177,14 +176,16 @@ const getCoordinateField = (metaData: MetaDataElement, options: Object) => {
                 withDefaultShouldUpdateInterface()(
                     withRequiredFieldCalculation()(
                         withCalculateMessages()(
-                            withDefaultFieldContainer()(
-                                withLabel({
-                                    onGetUseVerticalOrientation: () => options.formHorizontal,
-                                    onGetCustomFieldLabeClass: () =>
-                                        `$ {options.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
-                                })(
-                                    withDisplayMessages()(
-                                        withInternalChangeHandler()(CoordinateField),
+                            withFocusSaver()(
+                                withDefaultFieldContainer()(
+                                    withLabel({
+                                        onGetUseVerticalOrientation: () => options.formHorizontal,
+                                        onGetCustomFieldLabeClass: () =>
+                                            `$ {options.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+                                    })(
+                                        withDisplayMessages()(
+                                            withInternalChangeHandler()(CoordinateField),
+                                        ),
                                     ),
                                 ),
                             ),
@@ -240,6 +241,7 @@ const getAgeField = (metaData: MetaDataElement, options: Object) => {
         multiline: false,
         metaCompulsory: metaData.compulsory,
         orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
+        shrinkDisabled: options.formHorizontal,
     }, options);
 
     return createFieldProps({
@@ -399,6 +401,7 @@ const fieldForTypes = {
             dateWidth: options.formHorizontal ? 150 : '100%',
             dateMaxWidth: options.formHorizontal ? 150 : 350,
             orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
+            shrinkDisabled: options.formHorizontal,
             calendarWidth: 350,
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,

@@ -7,13 +7,26 @@ type Props = {
     inFocus?: ?boolean,
     value?: ?any,
     label?: ?string,
+    shrinkDisabled?: ?boolean,
 }
 
 export default (hocParams: ?HOCParamsContainer) =>
     (InnerComponent: React.ComponentType<any>) =>
         class ShrinkLabelHOC extends React.Component<Props> {
+            renderDisabled = (props: any) => (
+                <InnerComponent
+                    placeholder={this.props.label}
+                    {...props}
+                />
+            )
+
             render() {
+                const { shrinkDisabled, ...passOnProps } = this.props;
                 const shrink = !!this.props.inFocus || !!this.props.value;
+
+                if (shrinkDisabled) {
+                    return this.renderDisabled(passOnProps);
+                }
 
                 return (
                     <div className={defaultClasses.container}>
@@ -22,7 +35,7 @@ export default (hocParams: ?HOCParamsContainer) =>
                         >{this.props.label}
                         </ShrinkLabel>
                         <InnerComponent
-                            {...this.props}
+                            {...passOnProps}
                         />
                     </div>
                 );

@@ -23,8 +23,15 @@ const typeKeysForProperty = {
     INFO: 'infoMessage',
 };
 
+const messageKeys = {
+    errorMessage: 'errorMessage',
+    warningMessage: 'warningMessage',
+    infoMessage: 'infoMessage',
+    validatingMessage: 'validatingMessage',
+};
 
-const getCalculateMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
+
+const getCalculateMessagesHOC = (InnerComponent: React.ComponentType<any>, overrideMessagesPropNames: Object = {}) =>
     class CalculateMessagesHOC extends React.Component<Props> {
         static getMessage(errorText: ?string, warningText: ?string, infoText: ?string, validatingText: ?string) {
             let message;
@@ -85,6 +92,11 @@ const getCalculateMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
             };
         }
 
+        getMessage = (messageKey: $Values<typeof messageKeys>) => (
+            overrideMessagesPropNames[messageKey] ?
+                this.props[overrideMessagesPropNames[messageKey]] : this.props[messageKey]
+        );
+
         render() {
             const {
                 errorMessage,
@@ -100,9 +112,15 @@ const getCalculateMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
                 validationAttempted,
                 ...passOnProps
             } = this.props;
+
             let messageContainer =
                 (touched || validationAttempted) ?
-                    CalculateMessagesHOC.getMessage(errorMessage, warningMessage, infoMessage, validatingMessage) :
+                    CalculateMessagesHOC.getMessage(
+                        this.getMessage(messageKeys.errorMessage),
+                        this.getMessage(messageKeys.warningMessage),
+                        this.getMessage(messageKeys.infoMessage),
+                        this.getMessage(messageKeys.validatingMessage),
+                    ) :
                     {};
 
             if (!messageContainer.message) {
@@ -135,6 +153,6 @@ const getCalculateMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
         }
     };
 
-export default () =>
+export default (overrideMessagesPropNames: Object) =>
     (InnerComponent: React.ComponentType<any>) =>
-        (getCalculateMessagesHOC(InnerComponent));
+        (getCalculateMessagesHOC(InnerComponent, overrideMessagesPropNames));

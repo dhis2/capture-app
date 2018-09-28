@@ -12,14 +12,11 @@ import { placements } from '../../../../components/DataEntry/dataEntryField/data
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 
-import D2Date from '../../../../components/FormFields/DateAndTime/D2Date/D2Date.component';
-import D2TrueOnly from '../../../../components/FormFields/Generic/D2TrueOnly.component';
-import withDefaultMessages from '../../../../components/DataEntry/dataEntryField/withDefaultMessages';
-import withDefaultFieldContainer from '../../../../components/DataEntry/dataEntryField/withDefaultFieldContainer';
-import withDefaultChangeHandler from '../../../../components/DataEntry/dataEntryField/withDefaultChangeHandler';
+import { withInternalChangeHandler, withLabel, withFocusSaver, DateField, TextField, TrueOnlyField, withCalculateMessages, withDisplayMessages } from '../../../FormFields/New';
+import withDefaultFieldContainer from '../../../D2Form/field/withDefaultFieldContainer';
 import withFeedbackOutput from '../../../../components/DataEntry/dataEntryOutput/withFeedbackOutput';
 import withDefaultShouldUpdateInterface from
-    '../../../../components/DataEntry/dataEntryField/withDefaultShouldUpdateInterface';
+    '../../../D2Form/field/withDefaultShouldUpdateInterface';
 
 import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
 import withIndicatorOutput from '../../../DataEntry/dataEntryOutput/withIndicatorOutput';
@@ -27,6 +24,7 @@ import withErrorOutput from '../../../DataEntry/dataEntryOutput/withErrorOutput'
 import withWarningOutput from '../../../DataEntry/dataEntryOutput/withWarningOutput';
 import TextEditor from '../../../FormFields/TextEditor/TextEditor.component';
 import { newEventSaveTypes, newEventSaveTypeDefinitions } from './newEventSaveTypes';
+import labelTypeClasses from './dataEntryFieldLabels.mod.css';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -55,7 +53,17 @@ const getStyles = theme => ({
             paddingTop: '0px !important',
         },
     },
+    dataEntryVerticalContainer: {
+        backgroundColor: 'white',
+        border: '1px solid rgba(0,0,0,0.1)',
+        borderRadius: theme.typography.pxToRem(2),
+        padding: theme.typography.pxToRem(20),
+    },
 });
+
+const overrideMessagePropNames = {
+    errorMessage: 'validationError',
+};
 
 const getSaveOptions = (props: Object) => {
     const options: {color?: ?string, saveTypes?: ?Array<any>} = {
@@ -82,78 +90,133 @@ const getCancelOptions = () => ({
     color: 'primary',
 });
 
+const baseComponentStyles = {
+    labelContainerStyle: {
+        flexBasis: 200,
+    },
+    inputContainerStyle: {
+        flexBasis: 150,
+    },
+};
+
 const buildNoteSettingsFn = () => {
-    const noteComponent = withDefaultFieldContainer()(
-        withDefaultShouldUpdateInterface()(
-            withDefaultMessages()(
-                withDefaultChangeHandler()(TextEditor),
+    const getNoteComponent = (props: Object) =>
+        withCalculateMessages()(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: () => props.formHorizontal,
+                            onGetCustomFieldLabeClass: () =>
+                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.noteLabel}`,
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(TextEditor),
+                            ),
+                        ),
+                    ),
+                ),
             ),
-        ),
-    );
-    const noteSettings = (props: Object) => ({
-        component: noteComponent,
-        componentProps: {
-            style: {
-                width: '100%',
+        );
+    let component = null;
+    const noteSettings = (props: Object) => {
+        component = component || getNoteComponent(props);
+        return {
+            component: getNoteComponent(props),
+            componentProps: {
+                style: {
+                    width: '100%',
+                },
+                styles: baseComponentStyles,
+                label: 'Comment',
             },
-            label: 'Comment',
-        },
-        propName: 'notes',
-        hidden: props.formHorizontal,
-        validatorContainers: [
-        ],
-        meta: {
-            placement: placements.BOTTOM,
-        },
-    });
+            propName: 'notes',
+            hidden: props.formHorizontal,
+            validatorContainers: [
+            ],
+            meta: {
+                placement: placements.BOTTOM,
+            },
+        };
+    };
     return noteSettings;
 };
 
 const buildReportDateSettingsFn = () => {
-    const reportDateComponent = withDefaultFieldContainer()(
-        withDefaultShouldUpdateInterface()(
-            withDefaultMessages()(
-                withDefaultChangeHandler()(D2Date),
+    const getReportDateComponent = (props: Object) =>
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: () => props.formHorizontal,
+                            onGetCustomFieldLabeClass: () =>
+                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(DateField),
+                            ),
+                        ),
+                    ),
+                ),
             ),
-        ),
-    );
-
-    const reportDateSettings = (props: Object) => ({
-        component: reportDateComponent,
-        componentProps: {
-            width: props && props.formHorizontal ? 150 : 350,
-            calendarWidth: 350,
-            label: props.formFoundation.getLabel('eventDate'),
-            required: true,
-        },
-        propName: 'eventDate',
-        validatorContainers: getEventDateValidatorContainers(),
-    });
+        );
+    let component = null;
+    const reportDateSettings = (props: Object) => {
+        component = component || getReportDateComponent(props);
+        return {
+            component,
+            componentProps: {
+                width: props && props.formHorizontal ? 150 : 350,
+                calendarWidth: 350,
+                label: props.formFoundation.getLabel('eventDate'),
+                required: true,
+                styles: baseComponentStyles,
+            },
+            propName: 'eventDate',
+            validatorContainers: getEventDateValidatorContainers(),
+        };
+    };
 
     return reportDateSettings;
 };
 
 const buildCompleteFieldSettingsFn = () => {
-    const completeComponent = withDefaultFieldContainer()(
-        withDefaultShouldUpdateInterface()(
-            withDefaultMessages()(
-                withDefaultChangeHandler()(D2TrueOnly),
+    const getCompleteComponent = (props: Object) =>
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: () => props.formHorizontal,
+                            onGetCustomFieldLabeClass: () =>
+                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(TrueOnlyField),
+                            ),
+                        ),
+                    ),
+                ),
             ),
-        ),
-    );
-
-    const completeSettings = () => ({
-        component: completeComponent,
-        componentProps: {
-            label: 'Complete event',
-        },
-        propName: 'complete',
-        validatorContainers: [
-        ],
-        meta: {
-            placement: placements.BOTTOM,
-        },
-    });
+        );
+    let component = null;
+    const completeSettings = (props: Object) => {
+        component = component || getCompleteComponent(props);
+        return {
+            component,
+            componentProps: {
+                label: 'Complete event',
+                styles: baseComponentStyles,
+            },
+            propName: 'complete',
+            validatorContainers: [
+            ],
+            meta: {
+                placement: placements.BOTTOM,
+            },
+        };
+    };
 
     return completeSettings;
 };
@@ -184,6 +247,7 @@ type Props = {
         savingContextNames: string,
         topButtonsContainer: string,
         horizontalPaper: string,
+        dataEntryVerticalContainer: string,
     },
     theme: Theme,
     formHorizontal: ?boolean,
@@ -253,7 +317,7 @@ class NewEventDataEntry extends Component<Props> {
         );
     }
 
-    renderVertical = () => this.renderContent();
+    renderVertical = () => (<div className={this.props.classes.dataEntryVerticalContainer}>{this.renderContent()}</div>);
 
     renderContent = () => {
         const {
