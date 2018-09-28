@@ -62,7 +62,7 @@
   "scripts": {
     "manualBuild": "yarn localize && d2-manifest package.json ./public/manifest.webapp --manifest.activities.dhis.href='../../..' && react-app-rewired build && mkdirp buildzip/ && pushd build && bestzip ../buildzip/NewCaptureApp.zip * && popd",
     "start": "react-app-rewired start",
-    "build": "yarn localize && d2-manifest package.json ./public/manifest.webapp && react-app-rewired build",
+    "build": "yarn localize && d2-manifest package.json ./public/manifest.webapp && react-app-rewired build && cp ./package.json ./build/package.json",
     "test": "react-app-rewired test --env=jsdom",
     "test:debug": "react-app-rewired --inspect-brk test --runInBand --env=jsdom",
     "eject": "react-scripts eject",
