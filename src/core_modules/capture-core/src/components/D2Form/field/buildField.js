@@ -176,14 +176,16 @@ const getCoordinateField = (metaData: MetaDataElement, options: Object) => {
             withHideCompatibility()(
                 withDefaultShouldUpdateInterface()(
                     withRequiredFieldCalculation()(
-                        withDefaultFieldContainer()(
-                            withLabel({
-                                onGetUseVerticalOrientation: () => options.formHorizontal,
-                                onGetCustomFieldLabeClass: () =>
-                                    `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
-                            })(
-                                withDisplayMessages()(
-                                    withInternalChangeHandler()(CoordinateField),
+                        withCalculateMessages()(
+                            withDefaultFieldContainer()(
+                                withLabel({
+                                    onGetUseVerticalOrientation: () => options.formHorizontal,
+                                    onGetCustomFieldLabeClass: () =>
+                                        `$ {options.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+                                })(
+                                    withDisplayMessages()(
+                                        withInternalChangeHandler()(CoordinateField),
+                                    ),
                                 ),
                             ),
                         ),
@@ -209,15 +211,17 @@ const getUsernameField = (metaData: MetaDataElement, options: Object) => {
             withHideCompatibility()(
                 withDefaultShouldUpdateInterface()(
                     withRequiredFieldCalculation()(
-                        withFocusSaver()(
-                            withDefaultFieldContainer()(
-                                withLabel({
-                                    onGetUseVerticalOrientation: () => options.formHorizontal,
-                                    onGetCustomFieldLabeClass: () =>
-                                        `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
-                                })(
-                                    withDisplayMessages()(
-                                        withInternalChangeHandler()(UsernameField),
+                        withCalculateMessages()(
+                            withFocusSaver()(
+                                withDefaultFieldContainer()(
+                                    withLabel({
+                                        onGetUseVerticalOrientation: () => options.formHorizontal,
+                                        onGetCustomFieldLabeClass: () =>
+                                            `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
+                                    })(
+                                        withDisplayMessages()(
+                                            withInternalChangeHandler()(UsernameField),
+                                        ),
                                     ),
                                 ),
                             ),

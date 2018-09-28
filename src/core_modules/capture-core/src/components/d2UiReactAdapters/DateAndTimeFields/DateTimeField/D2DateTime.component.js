@@ -91,7 +91,7 @@ class D2DateTime extends Component<Props> {
     }
 
     render() {
-        const { value, dateMaxWidth, dateWidth, calendarWidth, calendarTheme, classes, orientation, ...passOnProps } = this.props;
+        const { value, dateMaxWidth, dateWidth, calendarWidth, calendarTheme, classes, orientation, onBlur, onChange, ...passOnProps } = this.props;
         const isVertical = orientation === orientations.VERTICAL;
         const dateValue = value.date;
         const timeValue = value.time;

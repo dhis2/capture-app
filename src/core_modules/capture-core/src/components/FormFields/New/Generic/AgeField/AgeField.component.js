@@ -47,10 +47,9 @@ type Props = {
 }
 
 const AgeField = (props: Props) => {
-    const { onBlur, ...passOnProps } = props;
+    const { ...passOnProps } = props;
     return (
         <D2AgeField
-            onAgeChanged={value => props.onBlur(value)}
             {...passOnProps}
         />
     );

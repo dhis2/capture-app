@@ -28,7 +28,7 @@ type InputMessageClasses = {
 
 type Props = {
     value: ?AgeValues,
-    onAgeChanged: (value: ?AgeValues) => void,
+    onBlur: (value: ?AgeValues) => void,
     onChange: (value: ?AgeValues) => void,
     orientation: $Values<typeof orientations>,
     innerMessage?: ?any,
@@ -91,18 +91,18 @@ class D2AgeField extends Component<Props> {
     }
 
     onClear = () => {
-        this.props.onAgeChanged(null);
+        this.props.onBlur(null);
     }
 
     handleNumberBlur = (values: AgeValues) => {
         this.props.onRemoveFocus && this.props.onRemoveFocus();
         if (D2AgeField.isEmptyNumbers(values)) {
-            this.props.onAgeChanged(values.date ? { date: values.date } : null);
+            this.props.onBlur(values.date ? { date: values.date } : null);
             return;
         }
 
         if (!D2AgeField.isValidNumbers(values)) {
-            this.props.onAgeChanged({ ...values, date: '' });
+            this.props.onBlur({ ...values, date: '' });
             return;
         }
 
@@ -111,14 +111,13 @@ class D2AgeField extends Component<Props> {
         momentDate.subtract(D2AgeField.getNumberOrZero(values.months), 'months');
         momentDate.subtract(D2AgeField.getNumberOrZero(values.days), 'days');
         const calculatedValues = getCalculatedValues(momentDate.format('L'));
-        const valid = momentDate.isValid();
-        this.props.onAgeChanged(calculatedValues);
+        this.props.onBlur(calculatedValues);
     }
 
     handleDateBlur = (date: ?string) => {
         this.props.onRemoveFocus && this.props.onRemoveFocus();
         const calculatedValues = date ? getCalculatedValues(date) : null;
-        this.props.onAgeChanged(calculatedValues);
+        this.props.onBlur(calculatedValues);
     }
 
     renderMessage = (key: string) => {
@@ -132,7 +131,7 @@ class D2AgeField extends Component<Props> {
     }
 
     renderNumberInput = (currentValues: AgeValues, key: string, label: string) => {
-        const { innerMessage, onChange, inFocus, value, ...passOnProps } = this.props;
+        const { innerMessage, onChange, inFocus, value, onBlur, ...passOnProps } = this.props;
         return (
             <div className={defaultClasses.ageNumberInputContainer}>
                 <AgeNumberInput
@@ -147,7 +146,7 @@ class D2AgeField extends Component<Props> {
         );
     }
     renderDateInput = (currentValues: AgeValues, isVertical: boolean) => {
-        const { onChange, innerMessage, inFocus, value, ...passOnProps } = this.props;
+        const { onChange, innerMessage, inFocus, value, onBlur, ...passOnProps } = this.props;
         const dateInputContainerClass = classNames(
             { [defaultClasses.ageDateInputContainerHorizontal]: !isVertical },
         );
