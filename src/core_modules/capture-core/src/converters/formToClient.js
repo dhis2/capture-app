@@ -32,6 +32,14 @@ function convertDateTime(formValue: DateTimeValue): string {
     return momentDateTime.toISOString();
 }
 
+function convertDate(dateValue: string) {
+    return parseDate(dateValue).momentDate.toISOString();
+}
+
+function convertAge(ageValue: Object) {
+    return convertDate(ageValue.date);
+}
+
 const valueConvertersForType = {
     [elementTypes.NUMBER]: parseNumber,
     [elementTypes.INTEGER]: parseNumber,
@@ -39,10 +47,11 @@ const valueConvertersForType = {
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: parseNumber,
     [elementTypes.INTEGER_NEGATIVE]: parseNumber,
     // $FlowSuppress
-    [elementTypes.DATE]: (d2Value: string) => parseDate(d2Value).momentDate.toISOString(),
+    [elementTypes.DATE]: convertDate,
     [elementTypes.DATETIME]: convertDateTime,
     [elementTypes.TRUE_ONLY]: (d2Value: string) => ((d2Value === 'true') || null),
     [elementTypes.BOOLEAN]: (d2Value: string) => (d2Value === 'true'),
+    [elementTypes.AGE]: convertAge,
 };
 
 export function convertValue(type: $Values<typeof elementTypes>, value: any) {

@@ -213,5 +213,5 @@ export interface IConvertOutputRulesEffectsValue {
     convertIntegerZeroOrPositive(value: number): any;
     convertPercentage(value: number): any;
     convertUrl(value: string): any;
-    convertAge(value: number): any;
+    convertAge(value: string): any;
 }

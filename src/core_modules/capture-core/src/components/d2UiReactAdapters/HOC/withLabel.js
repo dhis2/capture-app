@@ -29,7 +29,7 @@ type Props = {
     styles?: ?Styles,
 };
 
-type OnSplitClasses = (classes: Object) => SpiltClasses;
+type OnSplitClasses = (classes: Object, props: Props) => SpiltClasses;
 type onGetUseVerticalOrientation = (props: Props) => ?boolean
 
 type HOCParamsContainer = {
@@ -74,7 +74,7 @@ export default (hocParams: ?HOCParamsContainer) =>
                     return;
                 }
 
-                const splitClasses = hocParams.onSplitClasses(inputClasses);
+                const splitClasses = hocParams.onSplitClasses(inputClasses, this.props);
                 this.labelContainerClass = splitClasses.labelContainerClass;
                 this.labelClasses = splitClasses.labelClasses;
                 this.passOnClasses = splitClasses.passOnClasses;

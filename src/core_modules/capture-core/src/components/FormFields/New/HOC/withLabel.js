@@ -28,22 +28,23 @@ type Props = {
 };
 
 type HOCParams = {
-    onGetUseVerticalOrientation?: ?() => boolean,
-    onGetCustomFieldLabeClass?: ?() => string,
+    onGetUseVerticalOrientation?: ?(props: Object) => boolean,
+    onGetCustomFieldLabeClass?: ?(props: Object) => string,
 };
 
 export default (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<any>) => {
-    const useVerticalOrientation = hocParams && hocParams.onGetUseVerticalOrientation && hocParams.onGetUseVerticalOrientation();
-    const fieldLabelMediaBasedClasses = hocParams && hocParams.onGetCustomFieldLabeClass && hocParams.onGetCustomFieldLabeClass();
+    const onGetUseVerticalOrientation = hocParams && hocParams.onGetUseVerticalOrientation;
+    const onGetCustomFieldLabeClass = hocParams && hocParams.onGetCustomFieldLabeClass;
 
     const LabelHOCWithStyles = withLabel({
-        onGetUseVerticalOrientation: () => useVerticalOrientation,
-        onSplitClasses: (classes) => {
+        onGetUseVerticalOrientation: (props: Object) => onGetUseVerticalOrientation && onGetUseVerticalOrientation(props),
+        onSplitClasses: (classes, props: Object) => {
             const { label, labelVertical, ...rest } = classes;
+            const useVerticalOrientation = onGetUseVerticalOrientation && onGetUseVerticalOrientation(props);
             return {
                 labelContainer: null,
                 labelClasses: {
-                    label: useVerticalOrientation ? labelVertical : classNames(label, fieldLabelMediaBasedClasses),
+                    label: useVerticalOrientation ? labelVertical : classNames(label, onGetCustomFieldLabeClass && onGetCustomFieldLabeClass(props)),
                 },
                 passOnClasses: rest,
             };

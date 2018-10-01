@@ -100,15 +100,15 @@ const baseComponentStyles = {
 };
 
 const buildNoteSettingsFn = () => {
-    const getNoteComponent = (props: Object) =>
+    const noteComponent =
         withCalculateMessages()(
             withFocusSaver()(
                 withDefaultFieldContainer()(
                     withDefaultShouldUpdateInterface()(
                         withLabel({
-                            onGetUseVerticalOrientation: () => props.formHorizontal,
-                            onGetCustomFieldLabeClass: () =>
-                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.noteLabel}`,
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.noteLabel}`,
+
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(TextEditor),
@@ -118,39 +118,37 @@ const buildNoteSettingsFn = () => {
                 ),
             ),
         );
-    let component = null;
-    const noteSettings = (props: Object) => {
-        component = component || getNoteComponent(props);
-        return {
-            component: getNoteComponent(props),
-            componentProps: {
-                style: {
-                    width: '100%',
-                },
-                styles: baseComponentStyles,
-                label: 'Comment',
+    const noteSettings = (props: Object) => ({
+        component: noteComponent,
+        componentProps: {
+            style: {
+                width: '100%',
             },
-            propName: 'notes',
-            hidden: props.formHorizontal,
-            validatorContainers: [
-            ],
-            meta: {
-                placement: placements.BOTTOM,
-            },
-        };
-    };
+            styles: baseComponentStyles,
+            label: 'Comment',
+            formHorizontal: props.formHorizontal,
+            fieldOptions: props.fieldOptions,
+        },
+        propName: 'notes',
+        hidden: props.formHorizontal,
+        validatorContainers: [
+        ],
+        meta: {
+            placement: placements.BOTTOM,
+        },
+    });
     return noteSettings;
 };
 
 const buildReportDateSettingsFn = () => {
-    const getReportDateComponent = (props: Object) =>
+    const reportDateComponent =
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
                     withDefaultShouldUpdateInterface()(
                         withLabel({
-                            onGetUseVerticalOrientation: () => props.formHorizontal,
-                            onGetCustomFieldLabeClass: () =>
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) =>
                                 `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                         })(
                             withDisplayMessages()(
@@ -161,35 +159,33 @@ const buildReportDateSettingsFn = () => {
                 ),
             ),
         );
-    let component = null;
-    const reportDateSettings = (props: Object) => {
-        component = component || getReportDateComponent(props);
-        return {
-            component,
-            componentProps: {
-                width: props && props.formHorizontal ? 150 : 350,
-                calendarWidth: 350,
-                label: props.formFoundation.getLabel('eventDate'),
-                required: true,
-                styles: baseComponentStyles,
-            },
-            propName: 'eventDate',
-            validatorContainers: getEventDateValidatorContainers(),
-        };
-    };
+    const reportDateSettings = (props: Object) => ({
+        component: reportDateComponent,
+        componentProps: {
+            width: props && props.formHorizontal ? 150 : 350,
+            calendarWidth: 350,
+            label: props.formFoundation.getLabel('eventDate'),
+            required: true,
+            styles: baseComponentStyles,
+            formHorizontal: props.formHorizontal,
+            fieldOptions: props.fieldOptions,
+        },
+        propName: 'eventDate',
+        validatorContainers: getEventDateValidatorContainers(),
+    });
 
     return reportDateSettings;
 };
 
 const buildCompleteFieldSettingsFn = () => {
-    const getCompleteComponent = (props: Object) =>
+    const completeComponent =
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
                     withDefaultShouldUpdateInterface()(
                         withLabel({
-                            onGetUseVerticalOrientation: () => props.formHorizontal,
-                            onGetCustomFieldLabeClass: () =>
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) =>
                                 `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
                         })(
                             withDisplayMessages()(
@@ -200,14 +196,14 @@ const buildCompleteFieldSettingsFn = () => {
                 ),
             ),
         );
-    let component = null;
     const completeSettings = (props: Object) => {
-        component = component || getCompleteComponent(props);
         return {
-            component,
+            component: completeComponent,
             componentProps: {
                 label: 'Complete event',
                 styles: baseComponentStyles,
+                formHorizontal: props.formHorizontal,
+                fieldOptions: props.fieldOptions,
             },
             propName: 'complete',
             validatorContainers: [

@@ -68,8 +68,28 @@ class RulesValueConverter implements IConvertOutputRulesEffectsValue {
     convertUrl(value: string): string {
         return value;
     }
-    convertAge(value: number): string {
-        return value.toString();
+    convertAge(value: string): ?Object {
+        if (!value) {
+            return null;
+        }
+        const now = moment();
+        const age = moment(value);
+
+        const years = now.diff(age, 'years');
+        age.add(years, 'years');
+
+        const months = now.diff(age, 'months');
+        age.add(months, 'months');
+
+        const days = now.diff(age, 'days');
+
+        return {
+            // $FlowSuppress
+            date: moment(value).format('L'),
+            years: years.toString(),
+            months: months.toString(),
+            days: days.toString(),
+        };
     }
 }
 

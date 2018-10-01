@@ -78,8 +78,8 @@ class RulesValueConverter implements IConvertInputRulesValue {
         return value || '';
     }
 
-    convertAge(value: any): number | string {
-        return (value || value === 0) ? value : '';
+    convertAge(value: any): string {
+        return this.convertDate(value);
     }
 }
 
