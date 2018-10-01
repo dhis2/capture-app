@@ -53,15 +53,26 @@ const getCancelOptions = () => ({
     color: 'primary',
 });
 
+const getBaseComponentProps = (props: Object) => ({
+    fieldOptions: props.fieldOptions,
+    formHorizontal: props.fieldHorizontal,
+    styles: baseComponentStyles,
+});
+
+const createComponentProps = (props: Object, componentProps: Object) => ({
+    ...getBaseComponentProps(props),
+    ...componentProps,
+});
+
 const buildNoteFieldSettingsFn = () => {
-    const getNoteComponent = (props: Object) =>
+    const noteComponent =
         withCalculateMessages()(
             withFocusSaver()(
                 withDefaultFieldContainer()(
                     withDefaultShouldUpdateInterface()(
                         withLabel({
-                            onGetUseVerticalOrientation: () => props.formHorizontal,
-                            onGetCustomFieldLabeClass: () =>
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) =>
                                 `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.noteLabel}`,
                         })(
                             withDisplayMessages()(
@@ -72,31 +83,26 @@ const buildNoteFieldSettingsFn = () => {
                 ),
             ),
         );
-    let component = null;
-    const noteFieldSettings = (props: Object) => {
-        component = component || getNoteComponent(props);
-        return {
-            component,
-            componentProps: {
-                label: props.formFoundation.getLabel('New comment'),
-                styles: baseComponentStyles,
-            },
-            propName: 'note',
-        };
-    };
+    const noteFieldSettings = (props: Object) => ({
+        component: noteComponent,
+        componentProps: createComponentProps(props, {
+            label: props.formFoundation.getLabel('New comment'),
+        }),
+        propName: 'note',
+    });
 
     return noteFieldSettings;
 };
 
 const buildReportDateSettingsFn = () => {
-    const getReportDateComponent = (props: Object) =>
+    const reportDateComponent =
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
                     withDefaultShouldUpdateInterface()(
                         withLabel({
-                            onGetUseVerticalOrientation: () => props.formHorizontal,
-                            onGetCustomFieldLabeClass: () =>
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) =>
                                 `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                         })(
                             withDisplayMessages()(
@@ -107,34 +113,29 @@ const buildReportDateSettingsFn = () => {
                 ),
             ),
         );
-    let component = null;
-    const reportDateSettings = (props: Object) => {
-        component = component || getReportDateComponent(props);
-        return {
-            component,
-            componentProps: {
-                width: 350,
-                label: props.formFoundation.getLabel('eventDate'),
-                required: true,
-                styles: baseComponentStyles,
-            },
-            propName: 'eventDate',
-            validatorContainers: getEventDateValidatorContainers(),
-        };
-    };
+    const reportDateSettings = (props: Object) => ({
+        component: reportDateComponent,
+        componentProps: createComponentProps(props, {
+            width: 350,
+            label: props.formFoundation.getLabel('eventDate'),
+            required: true,
+        }),
+        propName: 'eventDate',
+        validatorContainers: getEventDateValidatorContainers(),
+    });
 
     return reportDateSettings;
 };
 
 const buildCompleteFieldSettingsFn = () => {
-    const getCompleteComponent = (props: Object) =>
+    const completeComponent =
         withCalculateMessages(overrideMessagePropNames)(
             withFocusSaver()(
                 withDefaultFieldContainer()(
                     withDefaultShouldUpdateInterface()(
                         withLabel({
-                            onGetUseVerticalOrientation: () => props.formHorizontal,
-                            onGetCustomFieldLabeClass: () =>
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) =>
                                 `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
                         })(
                             withDisplayMessages()(
@@ -145,23 +146,18 @@ const buildCompleteFieldSettingsFn = () => {
                 ),
             ),
         );
-    let component = null;
-    const completeSettings = (props: Object) => {
-        component = component || getCompleteComponent(props);
-        return {
-            component,
-            componentProps: {
-                label: 'Complete event',
-                styles: baseComponentStyles,
-            },
-            propName: 'complete',
-            validatorContainers: [
-            ],
-            meta: {
-                placement: placements.BOTTOM,
-            },
-        };
-    };
+    const completeSettings = (props: Object) => ({
+        component: completeComponent,
+        componentProps: createComponentProps(props, {
+            label: 'Complete event',
+        }),
+        propName: 'complete',
+        validatorContainers: [
+        ],
+        meta: {
+            placement: placements.BOTTOM,
+        },
+    });
 
     return completeSettings;
 };
@@ -173,7 +169,7 @@ const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
 const WarningOutput = withWarningOutput()(IndicatorOutput);
 const ErrorOutput = withErrorOutput()(WarningOutput);
 const SaveableDataEntry = withSaveButton(getSaveOptions)(ErrorOutput);
-const NotesDataEntry = withNotes(buildNoteFieldSettingsFn)(SaveableDataEntry);
+const NotesDataEntry = withNotes()(SaveableDataEntry);
 const CancelableDataEntry = withCancelButton(getCancelOptions)(NotesDataEntry);
 
 type Props = {
@@ -185,7 +181,9 @@ type Props = {
     onAddNote: (itemId: string, dataEntryId: string, note: string) => void,
     classes: {
         dataEntryContainer: string,
+        fieldLabelMediaBased?: ?string,
     },
+    theme: any,
 };
 
 class EditEventDataEntry extends Component<Props> {

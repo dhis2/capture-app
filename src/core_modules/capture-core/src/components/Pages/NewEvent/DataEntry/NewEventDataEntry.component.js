@@ -12,7 +12,7 @@ import { placements } from '../../../../components/DataEntry/dataEntryField/data
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 
-import { withInternalChangeHandler, withLabel, withFocusSaver, DateField, TextField, TrueOnlyField, withCalculateMessages, withDisplayMessages } from '../../../FormFields/New';
+import { withInternalChangeHandler, withLabel, withFocusSaver, DateField, TrueOnlyField, withCalculateMessages, withDisplayMessages } from '../../../FormFields/New';
 import withDefaultFieldContainer from '../../../D2Form/field/withDefaultFieldContainer';
 import withFeedbackOutput from '../../../../components/DataEntry/dataEntryOutput/withFeedbackOutput';
 import withDefaultShouldUpdateInterface from
@@ -99,6 +99,17 @@ const baseComponentStyles = {
     },
 };
 
+const getBaseComponentProps = (props: Object) => ({
+    fieldOptions: props.fieldOptions,
+    formHorizontal: props.fieldHorizontal,
+    styles: baseComponentStyles,
+});
+
+const createComponentProps = (props: Object, componentProps: Object) => ({
+    ...getBaseComponentProps(props),
+    ...componentProps,
+});
+
 const buildNoteSettingsFn = () => {
     const noteComponent =
         withCalculateMessages()(
@@ -120,15 +131,12 @@ const buildNoteSettingsFn = () => {
         );
     const noteSettings = (props: Object) => ({
         component: noteComponent,
-        componentProps: {
+        componentProps: createComponentProps(props, {
             style: {
                 width: '100%',
             },
-            styles: baseComponentStyles,
             label: 'Comment',
-            formHorizontal: props.formHorizontal,
-            fieldOptions: props.fieldOptions,
-        },
+        }),
         propName: 'notes',
         hidden: props.formHorizontal,
         validatorContainers: [
@@ -148,8 +156,7 @@ const buildReportDateSettingsFn = () => {
                     withDefaultShouldUpdateInterface()(
                         withLabel({
                             onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) =>
-                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                            onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(DateField),
@@ -161,15 +168,12 @@ const buildReportDateSettingsFn = () => {
         );
     const reportDateSettings = (props: Object) => ({
         component: reportDateComponent,
-        componentProps: {
+        componentProps: createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : 350,
             calendarWidth: 350,
             label: props.formFoundation.getLabel('eventDate'),
             required: true,
-            styles: baseComponentStyles,
-            formHorizontal: props.formHorizontal,
-            fieldOptions: props.fieldOptions,
-        },
+        }),
         propName: 'eventDate',
         validatorContainers: getEventDateValidatorContainers(),
     });
@@ -196,23 +200,18 @@ const buildCompleteFieldSettingsFn = () => {
                 ),
             ),
         );
-    const completeSettings = (props: Object) => {
-        return {
-            component: completeComponent,
-            componentProps: {
-                label: 'Complete event',
-                styles: baseComponentStyles,
-                formHorizontal: props.formHorizontal,
-                fieldOptions: props.fieldOptions,
-            },
-            propName: 'complete',
-            validatorContainers: [
-            ],
-            meta: {
-                placement: placements.BOTTOM,
-            },
-        };
-    };
+    const completeSettings = (props: Object) => ({
+        component: completeComponent,
+        componentProps: createComponentProps(props, {
+            label: 'Complete event',
+        }),
+        propName: 'complete',
+        validatorContainers: [
+        ],
+        meta: {
+            placement: placements.BOTTOM,
+        },
+    });
 
     return completeSettings;
 };
@@ -244,6 +243,7 @@ type Props = {
         topButtonsContainer: string,
         horizontalPaper: string,
         dataEntryVerticalContainer: string,
+        fieldLabelMediaBased: string,
     },
     theme: Theme,
     formHorizontal: ?boolean,
