@@ -200,53 +200,49 @@ const buildReportDateSettingsFn = () => {
     return reportDateSettings;
 };
 
+const pointComponent = withCalculateMessages(overrideMessagePropNames)(
+    withFocusSaver()(
+        withDefaultFieldContainer()(
+            withDefaultShouldUpdateInterface()(
+                withLabel({
+                    onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                    onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+                })(
+                    withDisplayMessages()(
+                        withInternalChangeHandler()(CoordinateField),
+                    ),
+                ),
+            ),
+        ),
+    ),
+);
 
-const buildGeometrySettingsFn = () => {
-    const getComponentByFeatureType = {
-        Point: () =>
-            withCalculateMessages(overrideMessagePropNames)(
-                withFocusSaver()(
-                    withDefaultFieldContainer()(
-                        withDefaultShouldUpdateInterface()(
-                            withLabel({
-                                onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                                onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
-                            })(
-                                withDisplayMessages()(
-                                    withInternalChangeHandler()(CoordinateField),
-                                ),
-                            ),
-                        ),
+const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
+    withFocusSaver()(
+        withDefaultFieldContainer()(
+            withDefaultShouldUpdateInterface()(
+                withLabel({
+                    onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                    onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
+                })(
+                    withDisplayMessages()(
+                        withInternalChangeHandler()(PolygonField),
                     ),
                 ),
             ),
-        Polygon: () =>
-            withCalculateMessages(overrideMessagePropNames)(
-                withFocusSaver()(
-                    withDefaultFieldContainer()(
-                        withDefaultShouldUpdateInterface()(
-                            withLabel({
-                                onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                                onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
-                            })(
-                                withDisplayMessages()(
-                                    withInternalChangeHandler()(PolygonField),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-    };
-    let selectedComponent = null;
-    const geometrySettings = (props: Object) => {
-        selectedComponent = selectedComponent || getComponentByFeatureType[props.formFoundation.featureType]();
-        const label = props.formFoundation.featureType === 'Point' ? 'Coordinate' : 'Location';
+        ),
+    ),
+);
+
+
+const buildGeometrySettingsFn = () => (props: Object) => {
+    const featureType = null;//props.formFoundation.featureType;
+    if (featureType === 'Polygon') {
         return {
-            component: selectedComponent,
+            component: polygonComponent,
             componentProps: createComponentProps(props, {
                 width: props && props.formHorizontal ? 150 : 350,
-                label,
+                label: 'Location',
                 required: false,
             }),
             propName: 'geometry',
@@ -256,8 +252,24 @@ const buildGeometrySettingsFn = () => {
                 placement: placements.TOP,
             },
         };
-    };
-    return geometrySettings;
+    }
+    if (featureType === 'Point') {
+        return {
+            component: pointComponent,
+            componentProps: createComponentProps(props, {
+                width: props && props.formHorizontal ? 150 : 350,
+                label: 'Coordinate',
+                required: false,
+            }),
+            propName: 'geometry',
+            validatorContainers: [
+            ],
+            meta: {
+                placement: placements.TOP,
+            },
+        };
+    }
+    return { hidden: true };
 };
 
 const buildCompleteFieldSettingsFn = () => {
