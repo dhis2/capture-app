@@ -164,7 +164,7 @@ export const runRulesForSingleEventEpic = (action$: InputObservable, store: Redu
                 const foundation: RenderFoundation = metadataContainer.stage;
 
                 const currentEventValues = getCurrentClientValues(state, foundation, payload.formId, fieldData);
-                const currentEventMainData = getCurrentClientMainData(state, payload.itemId, payload.dataEntryId, {});
+                const currentEventMainData = getCurrentClientMainData(state, payload.itemId, payload.dataEntryId, {}, foundation);
                 const currentEventData = { ...currentEventValues, ...currentEventMainData };
 
                 rulesActions = getRulesActionsForEvent(

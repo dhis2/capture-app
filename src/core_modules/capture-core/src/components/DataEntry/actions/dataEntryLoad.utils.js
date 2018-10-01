@@ -15,10 +15,10 @@ type DataEntryPropToIncludeStandard = {|
 |};
 
 type DataEntryPropToIncludeSpecial = {|
-    inId: string,
-    outId: string,
+    clientId: string,
+    dataEntryId: string,
     onConvertIn: (value: any) => any,
-    onConvertOut: (dataEntryValue: any, prevValue: any) => any,
+    onConvertOut: (dataEntryValue: any, prevValue: any, foundation: RenderFoundation) => any,
     validatorContainers?: ?Array<ValidatorContainer>,
 |};
 
@@ -28,11 +28,11 @@ export function getDataEntryMeta(dataEntryPropsToInclude: Array<DataEntryPropToI
     return dataEntryPropsToInclude
         .reduce((accMeta, propToInclude) => {
             // $FlowSuppress
-            accMeta[propToInclude.id || propToInclude.outId] =
+            accMeta[propToInclude.id || propToInclude.dataEntryId] =
                 propToInclude.type ?
                     { type: propToInclude.type } :
                     // $FlowSuppress
-                    { onConvertOut: propToInclude.onConvertOut.toString(), outId: propToInclude.inId };
+                    { onConvertOut: propToInclude.onConvertOut.toString(), clientId: propToInclude.clientId };
             return accMeta;
         }, {});
 }
@@ -59,8 +59,8 @@ export function getDataEntryValues(
         .filter(propToInclude => propToInclude.onConvertIn)
         // $FlowSuppress :flow filter problem
         .map((propToInclude: DataEntryPropToIncludeSpecial) => ({
-            id: propToInclude.outId,
-            value: propToInclude.onConvertIn(clientValuesForDataEntry[propToInclude.inId]),
+            id: propToInclude.dataEntryId,
+            value: propToInclude.onConvertIn(clientValuesForDataEntry[propToInclude.clientId]),
         }));
 
     return [...standardValuesArray, ...specialValuesArray]
@@ -96,7 +96,7 @@ export function validateDataEntryValues(
     return dataEntryPropsToInclude
         .reduce((accValidations, propToInclude) => {
             // $FlowSuppress
-            const id = propToInclude.outId || propToInclude.id;
+            const id = propToInclude.dataEntryId || propToInclude.id;
             const value = values[id];
             const validatorContainers = propToInclude.validatorContainers;
             const validationErrors = getValidationErrors(value, validatorContainers);

@@ -9,6 +9,7 @@ import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFounda
 import Program from '../../../../metaData/Program/Program';
 import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
+import { getConvertGeometryIn, convertGeometryOut, convertStatusIn, convertStatusOut } from '../../crossPage/converters';
 
 import type { ClientEventContainer } from '../../../../events/eventRequests';
 
@@ -41,24 +42,6 @@ export const editEventIds = {
     itemId: 'editEvent',
 };
 
-function convertStatusIn(value: string) {
-    if (value === 'COMPLETED') {
-        return 'true';
-    }
-    return null;
-}
-
-function convertStatusOut(dataEntryValue: string, prevValue: string) {
-    if (dataEntryValue === 'true' && prevValue !== 'COMPLETED') {
-        return 'COMPLETED';
-    }
-
-    if (!dataEntryValue && prevValue === 'COMPLETED') {
-        return 'ACTIVE';
-    }
-    return prevValue;
-}
-
 export const openEventForEditInDataEntry =
     (eventContainer: ClientEventContainer, orgUnit: Object, foundation: RenderFoundation, program: Program) => {
         const dataEntryId = editEventIds.dataEntryId;
@@ -70,8 +53,14 @@ export const openEventForEditInDataEntry =
                 validatorContainers: getEventDateValidatorContainers(),
             },
             {
-                inId: 'status',
-                outId: 'complete',
+                clientId: 'geometry',
+                dataEntryId: 'geometry',
+                onConvertIn: getConvertGeometryIn(foundation),
+                onConvertOut: convertGeometryOut,
+            },
+            {
+                clientId: 'status',
+                dataEntryId: 'complete',
                 onConvertIn: convertStatusIn,
                 onConvertOut: convertStatusOut,
             },
@@ -89,7 +78,7 @@ export const openEventForEditInDataEntry =
                     eventId: eventContainer.event.eventId,
                 },
             );
-        
+
         const eventDataForRulesEngine = { ...eventContainer.event, ...eventContainer.values };
         return [
             ...dataEntryActions,

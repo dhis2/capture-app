@@ -24,6 +24,7 @@ import errorCreator from '../../utils/errorCreator';
 import getRulesAndVariablesFromProgramIndicators from './getRulesAndVariablesFromIndicators';
 import type { CachedProgramIndicator } from './getRulesAndVariablesFromIndicators';
 import type { ProgramRule, ProgramRuleVariable } from '../../RulesEngine/rulesEngine.types';
+import capitalizeFirstLetter from '../../utils/string/capitalizeFirstLetter';
 
 type CachedTranslation = {
     property: string,
@@ -67,7 +68,8 @@ type CachedProgramStage = {
     description: ?string,
     executionDateLabel?: ?string,
     programStageSections: ?Array<CachedProgramStageSection>,
-    programStageDataElements: ?Array<CachedProgramStageDataElement>
+    programStageDataElements: ?Array<CachedProgramStageDataElement>,
+    featureType: string,
 };
 
 type CachedCategoryOption = {
@@ -238,6 +240,7 @@ function buildStage(d2ProgramStage: CachedProgramStage) {
         _this.access = d2ProgramStage.access;
         _this.name = d2ProgramStage.displayName;
         _this.description = d2ProgramStage.description;
+        _this.featureType = capitalizeFirstLetter(d2ProgramStage.featureType.toLowerCase());
         _this.addLabel({ id: 'eventDate', label: d2ProgramStage.executionDateLabel || 'Incident date' });
     });
 

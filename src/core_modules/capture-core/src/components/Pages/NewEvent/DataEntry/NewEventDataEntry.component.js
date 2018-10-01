@@ -12,7 +12,18 @@ import { placements } from '../../../../components/DataEntry/dataEntryField/data
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 
-import { withInternalChangeHandler, withLabel, withFocusSaver, DateField, TrueOnlyField, withCalculateMessages, withDisplayMessages } from '../../../FormFields/New';
+import {
+    withInternalChangeHandler,
+    withLabel,
+    withFocusSaver,
+    DateField,
+    TrueOnlyField,
+    CoordinateField,
+    PolygonField,
+    withCalculateMessages,
+    withDisplayMessages,
+} from '../../../FormFields/New';
+
 import withDefaultFieldContainer from '../../../D2Form/field/withDefaultFieldContainer';
 import withFeedbackOutput from '../../../../components/DataEntry/dataEntryOutput/withFeedbackOutput';
 import withDefaultShouldUpdateInterface from
@@ -98,11 +109,19 @@ const baseComponentStyles = {
         flexBasis: 150,
     },
 };
+const baseComponentStylesVertical = {
+    labelContainerStyle: {
+        width: 150,
+    },
+    inputContainerStyle: {
+        width: 150,
+    },
+};
 
 const getBaseComponentProps = (props: Object) => ({
     fieldOptions: props.fieldOptions,
-    formHorizontal: props.fieldHorizontal,
-    styles: baseComponentStyles,
+    formHorizontal: props.formHorizontal,
+    styles: props.formHorizontal ? baseComponentStylesVertical : baseComponentStyles,
 });
 
 const createComponentProps = (props: Object, componentProps: Object) => ({
@@ -181,6 +200,66 @@ const buildReportDateSettingsFn = () => {
     return reportDateSettings;
 };
 
+
+const buildGeometrySettingsFn = () => {
+    const getComponentByFeatureType = {
+        Point: () =>
+            withCalculateMessages(overrideMessagePropNames)(
+                withFocusSaver()(
+                    withDefaultFieldContainer()(
+                        withDefaultShouldUpdateInterface()(
+                            withLabel({
+                                onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                                onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+                            })(
+                                withDisplayMessages()(
+                                    withInternalChangeHandler()(CoordinateField),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        Polygon: () =>
+            withCalculateMessages(overrideMessagePropNames)(
+                withFocusSaver()(
+                    withDefaultFieldContainer()(
+                        withDefaultShouldUpdateInterface()(
+                            withLabel({
+                                onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                                onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
+                            })(
+                                withDisplayMessages()(
+                                    withInternalChangeHandler()(PolygonField),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+    };
+    let selectedComponent = null;
+    const geometrySettings = (props: Object) => {
+        selectedComponent = selectedComponent || getComponentByFeatureType[props.formFoundation.featureType]();
+        const label = props.formFoundation.featureType === 'Point' ? 'Coordinate' : 'Location';
+        return {
+            component: selectedComponent,
+            componentProps: createComponentProps(props, {
+                width: props && props.formHorizontal ? 150 : 350,
+                label,
+                required: false,
+            }),
+            propName: 'geometry',
+            validatorContainers: [
+            ],
+            meta: {
+                placement: placements.TOP,
+            },
+        };
+    };
+    return geometrySettings;
+};
+
 const buildCompleteFieldSettingsFn = () => {
     const completeComponent =
         withCalculateMessages(overrideMessagePropNames)(
@@ -217,7 +296,8 @@ const buildCompleteFieldSettingsFn = () => {
 };
 
 const CommentField = withDataEntryField(buildNoteSettingsFn())(DataEntry);
-const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(CommentField);
+const GeometryField = withDataEntryField(buildGeometrySettingsFn())(CommentField);
+const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
 const CompleteField = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
 const FeedbackOutput = withFeedbackOutput()(CompleteField);
 const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);

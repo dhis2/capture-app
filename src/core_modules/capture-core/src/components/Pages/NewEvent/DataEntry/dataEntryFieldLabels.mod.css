@@ -20,7 +20,9 @@
 .coordinateLabel {
     padding-top: 27px;
 }
-
+.polygonLabel {
+    padding-top: 4px;
+}
 
 .dateLabel {
     padding-top: 13px;

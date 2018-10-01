@@ -12,4 +12,5 @@ export { default as VirtualizedSelectField } from './Generic/VirtualizedSelectFi
 export { default as DateField } from './DateAndTimeFields/DateField/DateField.component';
 export { default as DateTimeField } from './DateAndTimeFields/DateTimeField/DateTimeField.component';
 export { default as CoordinateField } from './CoordinateField/CoordinateField.component';
+export { default as PolygonField } from './PolygonField/PolygonField.component';
 

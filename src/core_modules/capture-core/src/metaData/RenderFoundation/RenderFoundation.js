@@ -82,6 +82,14 @@ export default class RenderFoundation {
         return this._sections;
     }
 
+    set featureType(featureType: string) {
+        this._featureType = featureType;
+    }
+
+    get featureType(): string {
+        return this._featureType;
+    }
+
     addLabel({ id, label }: { id: string, label: string }) {
         this._labels[id] = label;
     }

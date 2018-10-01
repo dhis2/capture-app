@@ -7,10 +7,25 @@ import CoordinateInput from '../internal/CoordinateInput/CoordinateInput.compone
 import defaultClasses from '../../d2Ui/coordinateField/coordinateField.mod.css';
 import orientations from '../constants/orientations.const';
 
+type Coordinate = {
+    latitude?: ?string,
+    longitude?: ?string,
+}
+
+type MapCoordinate = {
+    latlng: {
+        lat?: ?string,
+        lng?: ?string,
+    }
+}
+
 type Props = {
-  onBlur: (value: string, event: UiEventData) => void,
+  onBlur: (value: any) => void,
   orientation: $Values<typeof orientations>,
   mapCenter: Array<number>,
+  onChange?: ?(value: any) => void,
+  value?: ?Coordinate,
+  shrinkDisabled?: ?boolean,
 };
 type State = {
     showMap: ?boolean,
@@ -21,17 +36,47 @@ const coordinateKeys = {
     LONGITUDE: 'longitude',
 };
 
+function isPointInRect({ x, y }, { left, right, top, bottom }) {
+    return x >= left && x <= right && y >= top && y <= bottom;
+}
+
 export default class D2Coordinate extends Component<Props, State> {
     static defaultProps = {
         mapCenter: [51.505, -0.09],
     };
-    constructor(props) {
+    mapInstance: ?HTMLElement;
+
+    constructor(props: Props) {
         super(props);
 
         this.state = {
             showMap: false,
         };
     }
+
+    componentWillUnmount() {
+        document.removeEventListener('click', this.onDocClick);
+    }
+
+    onSetMapInstance = (mapInstance: ?HTMLElement) => {
+        this.mapInstance = mapInstance;
+        if (this.mapInstance) {
+            document.addEventListener('click', this.onDocClick);
+        } else {
+            document.removeEventListener('click', this.onDocClick);
+        }
+    }
+
+    onDocClick = (event: any) => {
+        if (this.mapInstance) {
+            const target = { x: event.clientX, y: event.clientY };
+            const container = this.mapInstance.getBoundingClientRect();
+
+            if (!isPointInRect(target, container)) {
+                this.toggleMap();
+            }
+        }
+    };
 
     handleBlur = (key: string, value: any) => {
         const newValue = { ...this.props.value, [key]: value };
@@ -43,21 +88,19 @@ export default class D2Coordinate extends Component<Props, State> {
     }
 
     handleChange = (key: string, value: any) => {
-        this.props.onChange({ ...this.props.value, [key]: value });
+        this.props.onChange && this.props.onChange({ ...this.props.value, [key]: value });
     }
 
     handleClear = () => {
         this.props.onBlur(null);
     }
 
-    onLocationIconClick = () => {
+    toggleMap = () => {
         this.setState({ showMap: !this.state.showMap });
     }
 
-    onMapClick = ({ latlng: { lat, lng } }) => {
-        this.setState({
-            showMap: false,
-        });
+    onMapClick = ({ latlng: { lat, lng } }: MapCoordinate) => {
+        this.toggleMap();
         this.props.onBlur({ latitude: lat, longitude: lng });
     }
 
@@ -71,7 +114,7 @@ export default class D2Coordinate extends Component<Props, State> {
     }
 
     render() {
-        const { mapCenter, onBlur, onChange, label, value, orientation, shrinkDisabled, ...passOnProps } = this.props;
+        const { mapCenter, onBlur, onChange, value, orientation, shrinkDisabled, ...passOnProps } = this.props;
 
         const position = this.getPosition();
         const center = position || mapCenter;
@@ -81,10 +124,10 @@ export default class D2Coordinate extends Component<Props, State> {
         return (
             <div className={coordinateFieldsClass}>
                 <div className={coordinateIconClass}>
-                    <LocationIcon onClick={this.onLocationIconClick} />
+                    <LocationIcon onClick={this.toggleMap} />
                     {
                         this.state.showMap && (
-                            <div className={defaultClasses.coordinateLeafletMap}>
+                            <div className={defaultClasses.coordinateLeafletMap} ref={this.onSetMapInstance}>
                                 <Map center={center} zoom={13} onClick={this.onMapClick} className={defaultClasses.leafletContainer}>
                                     <TileLayer
                                         url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
