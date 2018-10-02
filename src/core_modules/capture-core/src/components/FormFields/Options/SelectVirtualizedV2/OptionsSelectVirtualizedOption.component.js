@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
 import type { virtualizedOptionConfig } from './OptionsSelectVirtualized.component';
 
 type Props = {
