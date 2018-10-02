@@ -4,6 +4,7 @@ import * as React from 'react';
 type Props = {
     onSetFocus?: () => void,
     onRemoveFocus?: () => void,
+    inFocus: boolean,
 };
 
 type State = {
@@ -66,7 +67,7 @@ const getFocusHandler = () => (InnerComponent: React.ComponentType<any>) =>
         }
 
         render() {
-            const { ...passOnProps } = this.props;
+            const { onSetFocus, onRemoveFocus, inFocus, ...passOnProps } = this.props;
             return (
                 <InnerComponent
                     inputRef={this.setInputInstance}

@@ -90,7 +90,6 @@ const createFieldProps = (fieldProps: Object, metaData: MetaDataElement) => ({
 const getBaseTextField = (metaData: MetaDataElement, options: Object) => {
     const props = createComponentProps({
         label: metaData.formName,
-        multiline: false,
         metaCompulsory: metaData.compulsory,
     }, options);
 
@@ -127,7 +126,6 @@ const getBaseTextField = (metaData: MetaDataElement, options: Object) => {
 const getOrgUnitField = (metaData: MetaDataElement, options: Object) => {
     const props = createComponentProps({
         label: metaData.formName,
-        multiline: false,
         metaCompulsory: metaData.compulsory,
     }, options);
 
@@ -162,7 +160,6 @@ const getOrgUnitField = (metaData: MetaDataElement, options: Object) => {
 const getCoordinateField = (metaData: MetaDataElement, options: Object) => {
     const props = createComponentProps({
         label: metaData.formName,
-        multiline: false,
         metaCompulsory: metaData.compulsory,
         orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
         shrinkDisabled: options.formHorizontal,
@@ -201,7 +198,6 @@ const getCoordinateField = (metaData: MetaDataElement, options: Object) => {
 const getUsernameField = (metaData: MetaDataElement, options: Object) => {
     const props = createComponentProps({
         label: metaData.formName,
-        multiline: false,
         metaCompulsory: metaData.compulsory,
     }, options);
 
@@ -238,7 +234,6 @@ const getUsernameField = (metaData: MetaDataElement, options: Object) => {
 const getAgeField = (metaData: MetaDataElement, options: Object) => {
     const props = createComponentProps({
         label: metaData.formName,
-        multiline: false,
         metaCompulsory: metaData.compulsory,
         orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
         shrinkDisabled: options.formHorizontal,

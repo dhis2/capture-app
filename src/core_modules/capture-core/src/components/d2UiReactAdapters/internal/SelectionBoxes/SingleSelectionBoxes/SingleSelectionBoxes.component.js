@@ -71,6 +71,7 @@ class SingleSelectionBoxes extends React.Component<Props> {
         return (
             <div
                 className={containerClass}
+                key={optionData.id || optionData.name}
             >
                 <SingleSelectBoxWrapped
                     optionData={optionData}
