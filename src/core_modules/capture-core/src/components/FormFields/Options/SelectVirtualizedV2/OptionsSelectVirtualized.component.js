@@ -2,7 +2,6 @@
 /* eslint-disable class-methods-use-this */
 
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import { debounce } from 'lodash';
 
@@ -18,9 +17,6 @@ import OptionSet from '../../../../metaData/OptionSet/OptionSet';
 import Option from '../../../../metaData/OptionSet/Option';
 import withFocusHandler from '../../../d2UiReactAdapters/internal/TextInput/withFocusHandler';
 
-
-const styles = theme => ({
-});
 
 export type virtualizedOptionConfig = {label: string, value: any};
 
@@ -223,4 +219,4 @@ class OptionsSelectVirtualized extends Component<Props, State> {
     }
 }
 
-export default withStyles(styles)(withFocusHandler()(OptionsSelectVirtualized));
+export default withFocusHandler()(OptionsSelectVirtualized);

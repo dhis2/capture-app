@@ -36,6 +36,7 @@ import withWarningOutput from '../../../DataEntry/dataEntryOutput/withWarningOut
 import TextEditor from '../../../FormFields/TextEditor/TextEditor.component';
 import { newEventSaveTypes, newEventSaveTypeDefinitions } from './newEventSaveTypes';
 import labelTypeClasses from './dataEntryFieldLabels.mod.css';
+import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -236,7 +237,7 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
 
 
 const buildGeometrySettingsFn = () => (props: Object) => {
-    const featureType = null;//props.formFoundation.featureType;
+    const featureType = props.formFoundation.featureType;
     if (featureType === 'Polygon') {
         return {
             component: polygonComponent,
@@ -269,7 +270,7 @@ const buildGeometrySettingsFn = () => (props: Object) => {
             },
         };
     }
-    return { hidden: true };
+    return null;
 };
 
 const buildCompleteFieldSettingsFn = () => {
@@ -308,7 +309,7 @@ const buildCompleteFieldSettingsFn = () => {
 };
 
 const CommentField = withDataEntryField(buildNoteSettingsFn())(DataEntry);
-const GeometryField = withDataEntryField(buildGeometrySettingsFn())(CommentField);
+const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
 const CompleteField = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
 const FeedbackOutput = withFeedbackOutput()(CompleteField);

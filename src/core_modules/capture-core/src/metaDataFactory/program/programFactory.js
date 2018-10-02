@@ -386,7 +386,7 @@ function addProgramRules(d2ProgramRules: Array<ProgramRule>) {
 
 function addRulesAndVariablesFromProgramIndicators(cachedProgramIndicators: Array<CachedProgramIndicator>) {
     const indicatorsByProgram = cachedProgramIndicators.reduce((accIndicatorsByProgram, indicator) => {
-        const programId = indicator.program && indicator.program.id;
+        const programId = indicator.programId;
         accIndicatorsByProgram[programId] = accIndicatorsByProgram[programId] || [];
         accIndicatorsByProgram[programId].push(indicator);
         return accIndicatorsByProgram;

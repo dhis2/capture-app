@@ -8,9 +8,8 @@ import withDataEntryField from '../../../../components/DataEntry/dataEntryField/
 import { placements } from '../../../../components/DataEntry/dataEntryField/dataEntryField.const';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
-
-import D2TextField from '../../../../components/FormFields/Generic/D2TextField.component';
 import withDefaultFieldContainer from '../../../D2Form/field/withDefaultFieldContainer';
+import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 
 import {
     withInternalChangeHandler,
@@ -84,36 +83,6 @@ const createComponentProps = (props: Object, componentProps: Object) => ({
     ...getBaseComponentProps(props),
     ...componentProps,
 });
-
-const buildNoteFieldSettingsFn = () => {
-    const noteComponent =
-        withCalculateMessages()(
-            withFocusSaver()(
-                withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) =>
-                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.noteLabel}`,
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(D2TextField),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
-    const noteFieldSettings = (props: Object) => ({
-        component: noteComponent,
-        componentProps: createComponentProps(props, {
-            label: props.formFoundation.getLabel('New comment'),
-        }),
-        propName: 'note',
-    });
-
-    return noteFieldSettings;
-};
 
 const buildReportDateSettingsFn = () => {
     const reportDateComponent =
@@ -217,7 +186,7 @@ const buildGeometrySettingsFn = () => (props: Object) => {
             },
         };
     }
-    return { hidden: true };
+    return null;
 };
 
 const buildCompleteFieldSettingsFn = () => {
@@ -255,9 +224,9 @@ const buildCompleteFieldSettingsFn = () => {
     return completeSettings;
 };
 
-const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(DataEntry);
-const GeometryField = withDataEntryField(buildGeometrySettingsFn())(ReportDateField);
-const CompleteField = withDataEntryField(buildCompleteFieldSettingsFn())(GeometryField);
+const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(DataEntry);
+const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
+const CompleteField = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
 const FeedbackOutput = withFeedbackOutput()(CompleteField);
 const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
 const WarningOutput = withWarningOutput()(IndicatorOutput);

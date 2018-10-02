@@ -11,6 +11,7 @@ type Props = {
     multiLine?: ?boolean,
     classes: Classes,
     inputRef?: ?(ref: any) => void,
+    style?: ?Object,
 };
 
 const TextInput = (props: Props) => {

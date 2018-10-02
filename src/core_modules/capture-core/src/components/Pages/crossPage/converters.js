@@ -2,14 +2,15 @@
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 
 export function convertGeometryOut(dataEntryValue: any, prevValue: string, foundation: RenderFoundation) {
+    if (!dataEntryValue || !['Polygon', 'Point'].includes(foundation.featureType)) return null;
     let coordinates = dataEntryValue;
     if (foundation.featureType === 'Point') {
         coordinates = [dataEntryValue.longitude, dataEntryValue.latitude];
     }
-    return dataEntryValue ? {
+    return {
         type: foundation.featureType,
         coordinates,
-    } : null;
+    };
 }
 
 export function getConvertGeometryIn(foundation: ?RenderFoundation) {

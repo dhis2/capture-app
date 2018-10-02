@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Autosuggest from 'react-autosuggest';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
-import FormLabel from '@material-ui/core/FormLabel';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
@@ -12,8 +11,6 @@ import D2TextField from '../../d2UiReactAdapters/TextField/D2TextField.component
 
 
 function renderInput(inputProps) {
-    const { classes, ref, ...other } = inputProps;
-
     return (
         <D2TextField
             {...inputProps}
