@@ -12,7 +12,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import 'react-select/dist/react-select.css';
 import 'react-virtualized/styles.css';
 import 'react-virtualized-select/styles.css';
-import './optionsSelectVirtualized.css';
 
 import VirtualizedOption from './OptionsSelectVirtualizedOption.component';
 
@@ -133,7 +132,6 @@ class OptionsSelectVirtualized extends Component<Props, State> {
         borderRadius: 0,
     };
     static defaultMenuContainerStyle = {
-        width: 'auto',
     }
 
     static defaultProps = {

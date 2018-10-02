@@ -169,11 +169,8 @@ class D2AgeField extends Component<Props> {
         const { value, orientation } = this.props;
         const currentValues = value || {};
         const isVertical = orientation === orientations.VERTICAL;
-        const containerClass = classNames(
-            { [defaultClasses.containerHorizontal]: !isVertical },
-            { [defaultClasses.containerVertical]: isVertical },
-        );
-        const ageClearClass = !isVertical && defaultClasses.ageClearHorizontal;
+        const containerClass = isVertical ? defaultClasses.containerVertical : defaultClasses.containerHorizontal;
+        const ageClearClass = !isVertical ? defaultClasses.ageClearHorizontal : null;
         return (
             <div className={containerClass}>
                 {this.renderDateInput(currentValues, isVertical)}

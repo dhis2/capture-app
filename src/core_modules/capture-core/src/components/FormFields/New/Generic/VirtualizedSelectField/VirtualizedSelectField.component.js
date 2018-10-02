@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import VirtualizedSelect from '../../../Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
+import withFocusHandler from '../../../../d2UiReactAdapters/internal/TextInput/withFocusHandler';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
@@ -23,6 +24,11 @@ type Props = {
     },
 };
 
+const VirtualizedSelectComponent =
+    withFocusHandler()(
+        VirtualizedSelect,
+    );
+
 class VirtualizedSelectField extends Component<Props> {
     handleSelect = (value: any) => {
         this.props.onBlur && this.props.onBlur(value);
@@ -38,7 +44,7 @@ class VirtualizedSelectField extends Component<Props> {
         } = this.props;
 
         return (
-            <VirtualizedSelect
+            <VirtualizedSelectComponent
                 value={value || ''}
                 onSelect={this.handleSelect}
                 classes={classes}

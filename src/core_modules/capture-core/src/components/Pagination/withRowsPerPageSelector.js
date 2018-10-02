@@ -4,7 +4,7 @@ import './rowsPerPage.css';
 
 import OptionSet from '../../metaData/OptionSet/OptionSet';
 import Option from '../../metaData/OptionSet/Option';
-import OptionsSelect from '../FormFields/Options/SelectVirtualized/OptionsSelectVirtualized.component';
+import OptionsSelect from '../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import withTranslations from '../FormFields/Options/SelectVirtualized/withTranslations';
 
 const OptionsSelectWithTranslations = withTranslations()(OptionsSelect);
@@ -42,7 +42,7 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
             return (
                 <div id="rows-per-page-selector">
                     <OptionsSelectWithTranslations
-                        onBlur={this.handleRowsSelect}
+                        onSelect={this.handleRowsSelect}
                         optionSet={this.optionSet}
                         value={rowsPerPage}
                         nullable={false}

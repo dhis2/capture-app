@@ -10,6 +10,7 @@ type Props = {
     onSelect: (selectedOption: virtualizedOptionConfig) => void,
     currentlySelectedValues: ?Array<virtualizedOptionConfig>,
     classes: { popper: string },
+    inFocus?: ?boolean,
 };
 
 const styles = () => ({
@@ -34,7 +35,6 @@ class OptionsSelectVirtualizedOption extends Component<Props> {
         const { option, style, onSelect, currentlySelectedValues, classes } = this.props;
         const { label } = option;
         const renderStyle = Object.assign({}, OptionsSelectVirtualizedOption.defaultContainerStyle, style, currentlySelectedValues && currentlySelectedValues.includes(option) ? OptionsSelectVirtualizedOption.selectedStyle : null);
-
         return (
             <Tooltip
                 title={option.label}

@@ -115,7 +115,6 @@ class DataEntry extends React.Component<Props> {
             };
         }
         return {
-            container: classes.verticalContainer,
             dataEntryContainer: classes.verticalDataEntryContainer,
             formContainer: classes.verticalFormContainer,
         };

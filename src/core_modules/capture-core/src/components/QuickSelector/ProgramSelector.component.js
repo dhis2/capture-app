@@ -7,8 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import OptionSet from 'capture-core/metaData/OptionSet/OptionSet';
 import Option from 'capture-core/metaData/OptionSet/Option';
-
-import ACSelect from 'capture-core/components/FormFields/Options/SelectVirtualized/OptionsSelectVirtualized.component';
+import VirtualizedSelect from '../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem'; 
 import ListItemText from '@material-ui/core/ListItemText';
@@ -211,12 +210,11 @@ class ProgramSelector extends Component<Props> {
                                                 const categoryOptionSet = new OptionSet('categoryOptionSet', categoryOptions);
 
                                                 return (
-                                                    <div className={this.props.classes.programAC}>
-                                                        <ACSelect optionSet={categoryOptionSet} 
-                                                                  onBlur={(option) => {this.handleClickCategoryOption(option, i.id)}}
-                                                                  placeholder={i18n.t('Select')}
-                                                        />
-                                                    </div>
+                                                    <VirtualizedSelect optionSet={categoryOptionSet} 
+                                                                onSelect={(option) => {this.handleClickCategoryOption(option, i.id)}}
+                                                                value={''}
+                                                                placeholder={i18n.t('Select')}
+                                                    />
                                                 );
                                             })()
                                         }
@@ -283,9 +281,7 @@ class ProgramSelector extends Component<Props> {
             <div>
                 <Paper elevation={1} className={this.props.classes.paper}>
                     <h4 className={this.props.classes.title}>{ i18n.t('Program') }</h4>
-                    <div className={this.props.classes.programAC}>
-                        <ACSelect optionSet={programOptionSet} onBlur={this.props.handleClickProgram} placeholder={i18n.t('Select program')} />
-                    </div>
+                        <VirtualizedSelect optionSet={programOptionSet} onSelect={this.props.handleClickProgram} placeholder={i18n.t('Select program')} value={''} />
                     {
                         (() => {
                             if(!areAllProgramsAvailable) {
