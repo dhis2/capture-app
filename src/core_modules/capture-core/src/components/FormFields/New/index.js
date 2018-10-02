@@ -7,6 +7,7 @@ export { default as withCalculateMessages } from './HOC/messages/withCalculateMe
 export { default as withDisplayMessages } from './HOC/messages/withDisplayMessages';
 export { default as withFocusSaver } from '../../d2UiReactAdapters/HOC/withFocusSaver';
 export { default as withLabel } from './HOC/withLabel';
+export { default as withFilterProps } from './HOC/withFilterProps';
 export { default as orientations } from '../../d2UiReactAdapters/constants/orientations.const';
 export { default as VirtualizedSelectField } from './Generic/VirtualizedSelectField/VirtualizedSelectField.component';
 export { default as DateField } from './DateAndTimeFields/DateField/DateField.component';

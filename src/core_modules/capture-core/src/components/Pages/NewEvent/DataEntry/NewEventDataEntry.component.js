@@ -22,6 +22,7 @@ import {
     PolygonField,
     withCalculateMessages,
     withDisplayMessages,
+    withFilterProps,
 } from '../../../FormFields/New';
 
 import withDefaultFieldContainer from '../../../D2Form/field/withDefaultFieldContainer';
@@ -119,6 +120,12 @@ const baseComponentStylesVertical = {
     },
 };
 
+
+function defaultFilterProps(props: Object) {
+    const { formHorizontal, fieldOptions, validationError, ...passOnProps } = props;
+    return passOnProps;
+}
+
 const getBaseComponentProps = (props: Object) => ({
     fieldOptions: props.fieldOptions,
     formHorizontal: props.formHorizontal,
@@ -142,7 +149,9 @@ const buildNoteSettingsFn = () => {
 
                         })(
                             withDisplayMessages()(
-                                withInternalChangeHandler()(TextEditor),
+                                withInternalChangeHandler()(
+                                    withFilterProps(defaultFilterProps)(TextEditor),
+                                ),
                             ),
                         ),
                     ),
@@ -179,7 +188,9 @@ const buildReportDateSettingsFn = () => {
                             onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                         })(
                             withDisplayMessages()(
-                                withInternalChangeHandler()(DateField),
+                                withInternalChangeHandler()(
+                                    withFilterProps(defaultFilterProps)(DateField),
+                                ),
                             ),
                         ),
                     ),
@@ -210,7 +221,9 @@ const pointComponent = withCalculateMessages(overrideMessagePropNames)(
                     onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
                 })(
                     withDisplayMessages()(
-                        withInternalChangeHandler()(CoordinateField),
+                        withInternalChangeHandler()(
+                            withFilterProps(defaultFilterProps)(CoordinateField),
+                        ),
                     ),
                 ),
             ),
@@ -227,7 +240,9 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
                     onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
                 })(
                     withDisplayMessages()(
-                        withInternalChangeHandler()(PolygonField),
+                        withInternalChangeHandler()(
+                            withFilterProps(defaultFilterProps)(PolygonField),
+                        ),
                     ),
                 ),
             ),
@@ -285,7 +300,9 @@ const buildCompleteFieldSettingsFn = () => {
                                 `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
                         })(
                             withDisplayMessages()(
-                                withInternalChangeHandler()(TrueOnlyField),
+                                withInternalChangeHandler()(
+                                    withFilterProps(defaultFilterProps)(TrueOnlyField),
+                                ),
                             ),
                         ),
                     ),

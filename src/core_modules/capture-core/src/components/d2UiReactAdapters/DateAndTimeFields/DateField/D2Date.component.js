@@ -8,7 +8,6 @@ import lowerCaseFirstLetter from '../../../../utils/string/lowerCaseFirstLetter'
 import DateInput from '../../internal/DateInput/DateInput.component';
 
 type Props = {
-    label: string,
     value: ?string,
     width: number,
     calendarWidth?: ?number,
@@ -17,7 +16,6 @@ type Props = {
     onBlur: (value: string) => void,
     onFocus?: ?() => void,
     onDateSelectedFromCalendar?: () => void,
-    classes: Object,
     textFieldRef?: (instance: TextInput) => void,
 };
 

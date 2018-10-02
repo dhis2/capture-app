@@ -103,10 +103,11 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
             const message =
                 this.getMessage(errorMessage, warningMessage, infoMessage, validatingMessage);
 
+            const calculatedMessageProps = message.innerMessage ? { innerMessage: message.innerMessage } : null;
             return (
                 <div>
                     <InnerComponent
-                        innerMessage={message.innerMessage}
+                        {...calculatedMessageProps}
                         {...passOnProps}
                     />
                     {message.element}

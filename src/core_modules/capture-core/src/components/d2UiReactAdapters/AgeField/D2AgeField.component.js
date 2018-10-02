@@ -35,6 +35,7 @@ type Props = {
     classes: Object,
     inputMessageClasses: ?InputMessageClasses,
     inFocus?: ?boolean,
+    shrinkDisabled?: ?boolean,
 };
 function getCalculatedValues(dateValue: ?string): AgeValues {
     const parseData = parseDate(dateValue || '');
@@ -146,7 +147,7 @@ class D2AgeField extends Component<Props> {
         );
     }
     renderDateInput = (currentValues: AgeValues, isVertical: boolean) => {
-        const { onChange, innerMessage, inFocus, value, onBlur, ...passOnProps } = this.props;
+        const { onChange, innerMessage, inFocus, value, onBlur, shrinkDisabled, ...passOnProps } = this.props;
         const dateInputContainerClass = classNames(
             { [defaultClasses.ageDateInputContainerHorizontal]: !isVertical },
         );

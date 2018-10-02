@@ -16,15 +16,12 @@ type Props = {
 class AgeDateInput extends Component<Props> {
     render() {
         const { value, orientation, ...passOnProps } = this.props;
-        const width = orientation === orientations.VERTICAL ? 150 : null;
         return (
             <D2Date
                 value={value || ''}
-                onBlur={this.handleBlur}
-                onChange={this.handleChange}
                 placeholder={i18n.t('mm/dd/yyyy')}
                 calendarMaxMoment={moment()}
-                width={width}
+                width={150}
                 calendarWidth={350}
                 {...passOnProps}
             />
