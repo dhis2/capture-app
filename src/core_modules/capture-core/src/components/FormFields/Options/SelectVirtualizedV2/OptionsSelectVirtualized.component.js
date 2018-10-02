@@ -2,7 +2,6 @@
 /* eslint-disable class-methods-use-this */
 
 import React, { Component } from 'react';
-import classNames from 'classnames';
 import { debounce } from 'lodash';
 
 import VirtualizedSelect from 'react-virtualized-select';
@@ -15,14 +14,13 @@ import './optionsSelectVirtualized.css';
 import VirtualizedOption from './OptionsSelectVirtualizedOption.component';
 import OptionSet from '../../../../metaData/OptionSet/OptionSet';
 import Option from '../../../../metaData/OptionSet/Option';
-import withFocusHandler from '../../../d2UiReactAdapters/internal/TextInput/withFocusHandler';
 
 
 export type virtualizedOptionConfig = {label: string, value: any};
 
 type Props = {
     onSelect: (value: any) => void,
-    onFocus: any,
+    onFocus?: ?any,
     optionSet: OptionSet,
     label?: string,
     value: any,
@@ -32,7 +30,6 @@ type Props = {
     maxHeight?: ?number,
     disabled?: ?boolean,
     useHintLabel?: ?boolean,
-    classes: Object,
     required?: ?boolean,
     withoutUnderline?: ?boolean,
     translations: {
@@ -47,6 +44,7 @@ type State = {
 }
 
 type OptionContainer = {
+    focusedOption: virtualizedOptionConfig,
     option: virtualizedOptionConfig,
     style: Object,
     selectValue: (value: virtualizedOptionConfig) => void,
@@ -57,7 +55,6 @@ class OptionsSelectVirtualized extends Component<Props, State> {
     static defaultSelectStyle = {
     };
     static defaultMenuContainerStyle = {
-        width: 'auto',
     }
 
     static defaultProps = {
@@ -148,10 +145,12 @@ class OptionsSelectVirtualized extends Component<Props, State> {
     }
 
     renderOption(optionContainer: OptionContainer) {
+        const inFocus = optionContainer.option === optionContainer.focusedOption;
         return (
             <VirtualizedOption
                 key={optionContainer.option.value}
                 option={optionContainer.option}
+                inFocus={inFocus}
                 style={optionContainer.style}
                 onSelect={optionContainer.selectValue}
                 currentlySelectedValues={optionContainer.valueArray}
@@ -172,25 +171,17 @@ class OptionsSelectVirtualized extends Component<Props, State> {
             disabled,
             required,
             useHintLabel,
-            classes,
             translations,
             withoutUnderline,
             ...toSelect } = this.props;
         const calculatedValue = toSelect.multi ? value : this.getValue();
-        const selectRootClasses = classNames(
-            classes.selectRootBase,
-            { [classes.selectRootWithLabel]: label },
-        );
         const selectStyle = { ...OptionsSelectVirtualized.defaultSelectStyle, ...style };
         const menuContainerStyle = { ...OptionsSelectVirtualized.defaultMenuContainerStyle, ...menuStyle };
         return (
             <div
                 ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}
-                className={classes.root}
             >
-                <div
-                    className={selectRootClasses}
-                >
+                <div>
                     <VirtualizedSelect
                         ref={(select) => { this.yourSelect = select; }}
                         disabled={disabled}
@@ -219,4 +210,4 @@ class OptionsSelectVirtualized extends Component<Props, State> {
     }
 }
 
-export default withFocusHandler()(OptionsSelectVirtualized);
+export default OptionsSelectVirtualized;

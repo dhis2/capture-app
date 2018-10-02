@@ -1,6 +1,23 @@
 #rows-per-page-selector .Select-control {
     width: 50px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
     background-color: inherit;
+}
+
+#rows-per-page-selector .Select-value {
+    padding-left: 7px!important;
+}
+
+
+#rows-per-page-selector .virtualized-select-option {
+    padding-top: 10px!important;
+}
+
+#rows-per-page-selector .Select-arrow-zone {
+    font-size: initial;
+    width: 15px;
 }
 
 #rows-per-page-selector .Select-menu-outer {
