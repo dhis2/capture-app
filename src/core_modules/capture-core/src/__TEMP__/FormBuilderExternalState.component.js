@@ -244,7 +244,12 @@ class FormBuilder extends React.Component<Props> {
         }, []);
     }
 
-    renderField = (field) => {
+    renderField = (
+        field: FieldConfig,
+        index: number,
+        onRenderDivider,
+        onGetContainerProps,
+    ) => {
         const {
             fields,
             values,
@@ -258,8 +263,8 @@ class FormBuilder extends React.Component<Props> {
             onUpdateFieldUIOnly,
             validateIfNoUIData,
             children,
-            onRenderDivider,
-            onGetContainerProps,
+            onRenderDivider: extractOnRenderDivider,
+            onGetContainerProps: extractOnGetContainerProps,
             ...passOnProps } = this.props;
 
         const props = field.props || {};
@@ -307,12 +312,15 @@ class FormBuilder extends React.Component<Props> {
     }
 
     renderFields() {
-        const { fields, children } = this.props;
+        const { fields, children, onRenderDivider, onGetContainerProps } = this.props;
 
         if (children) {
             return children(this.renderField, fields);
         }
-        return fields.map(field => this.renderField(field));
+        return fields.map(
+            (field, index) =>
+                this.renderField(field, index, onRenderDivider, onGetContainerProps),
+        );
     }
 
     render() {

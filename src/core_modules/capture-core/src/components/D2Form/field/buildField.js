@@ -2,7 +2,10 @@
 import log from 'loglevel';
 
 import errorCreator from '../../../utils/errorCreator';
-import { TextField, BooleanField, TrueOnlyField, AgeField, orientations, withFocusSaver, withLabel, VirtualizedSelectField, DateField, DateTimeField, CoordinateField, withCalculateMessages, withDisplayMessages } from '../../FormFields/New';
+import { createFieldConfig, createProps } from './configBase'; // remove this eventually
+import { getTextFieldConfig } from './configs';
+
+import { BooleanField, TrueOnlyField, AgeField, orientations, withFocusSaver, withLabel, VirtualizedSelectField, DateField, DateTimeField, CoordinateField, withCalculateMessages, withDisplayMessages } from '../../FormFields/New';
 import labelTypeClasses from './buildField.mod.css';
 import D2File from '../../FormFields/File/D2File.component';
 import D2Image from '../../FormFields/Image/D2Image.component';
@@ -13,7 +16,6 @@ import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.compon
 import withSelectTranslations from '../../FormFields/Options/SelectVirtualizedV2/withTranslations';
 import withConvertedOptionSet from '../../FormFields/Options/withConvertedOptionSet';
 
-import getValidators from './validators';
 import MetaDataElement from '../../../metaData/DataElement/DataElement';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 import { inputTypes as optionSetInputTypes } from '../../../metaData/OptionSet/optionSet.const';
@@ -25,102 +27,8 @@ import withHideCompatibility from './withHideCompatibility';
 import withGotoInterface from './withGotoInterface';
 import withRequiredFieldCalculation from './withRequiredFieldCalculation';
 
-import type { Field } from '../../../__TEMP__/FormBuilderExternalState.component';
-
-const commitEvents = {
-    ON_BLUR: 'onBlur',
-};
 const errorMessages = {
     NO_FORMFIELD_FOR_TYPE: 'Formfield component not specified for type',
-};
-
-const convertPx = (options: Object, value: number) => {
-    const pxToRem = options && options.theme && options.theme.typography.pxToRem;
-    return pxToRem ? pxToRem(value) : value;
-};
-
-const baseComponentStyles = {
-    labelContainerStyle: {
-        flexBasis: 200,
-    },
-    inputContainerStyle: {
-        flexBasis: 150,
-    },
-};
-
-const getBaseComponentProps = () => ({
-    style: {
-        width: '100%',
-    },
-    styles: baseComponentStyles,
-});
-
-const getBaseFieldProps = (metaData: MetaDataElement) => ({
-    validators: getValidators(metaData),
-    commitEvent: commitEvents.ON_BLUR,
-});
-
-const baseComponentStylesVertical = {
-    labelContainerStyle: {
-        width: 150,
-    },
-    inputContainerStyle: {
-        width: 150,
-    },
-};
-
-const getBaseFormHorizontalProps = (options: Object) => ({
-    style: {
-        width: convertPx(options, 150),
-    },
-    styles: baseComponentStylesVertical,
-});
-
-const createComponentProps = (componentProps: Object, options: Object) => ({
-    ...getBaseComponentProps(),
-    ...(options && options.formHorizontal ? getBaseFormHorizontalProps(options) : {}),
-    ...componentProps,
-});
-
-const createFieldProps = (fieldProps: Object, metaData: MetaDataElement) => ({
-    ...getBaseFieldProps(metaData),
-    ...fieldProps,
-});
-
-const getBaseTextField = (metaData: MetaDataElement, options: Object) => {
-    const props = createComponentProps({
-        label: metaData.formName,
-        metaCompulsory: metaData.compulsory,
-    }, options);
-
-    return createFieldProps({
-        id: metaData.id,
-        component:
-            withGotoInterface()(
-                withHideCompatibility()(
-                    withDefaultShouldUpdateInterface()(
-                        withRequiredFieldCalculation()(
-                            withFocusSaver()(
-                                withCalculateMessages()(
-                                    withDefaultFieldContainer()(
-                                        withLabel({
-                                            onGetUseVerticalOrientation: () => options.formHorizontal,
-                                            onGetCustomFieldLabeClass: () =>
-                                                `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
-                                        })(
-                                            withDisplayMessages()(
-                                                withInternalChangeHandler()(TextField),
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        props,
-    }, metaData);
 };
 
 const getOrgUnitField = (metaData: MetaDataElement, options: Object) => {
@@ -270,19 +178,18 @@ const getAgeField = (metaData: MetaDataElement, options: Object) => {
 };
 
 const fieldForTypes = {
-    [elementTypes.EMAIL]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
-    [elementTypes.TEXT]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
-    [elementTypes.PHONE_NUMBER]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
+    [elementTypes.EMAIL]: getTextFieldConfig,
+    [elementTypes.TEXT]: getTextFieldConfig,
+    [elementTypes.PHONE_NUMBER]: getTextFieldConfig,
     [elementTypes.LONG_TEXT]: (metaData: MetaDataElement, options: Object) => {
-        const baseField = getBaseTextField(metaData, options);
-        const props = { ...baseField.props, multiLine: true };
-        return { ...baseField, props };
+        const fieldConfig = getTextFieldConfig(metaData, options, { multiLine: true });
+        return fieldConfig;
     },
-    [elementTypes.NUMBER]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
-    [elementTypes.INTEGER]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
-    [elementTypes.INTEGER_POSITIVE]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
-    [elementTypes.INTEGER_NEGATIVE]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
-    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
+    [elementTypes.NUMBER]: getTextFieldConfig,
+    [elementTypes.INTEGER]: getTextFieldConfig,
+    [elementTypes.INTEGER_POSITIVE]: getTextFieldConfig,
+    [elementTypes.INTEGER_NEGATIVE]: getTextFieldConfig,
+    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: getTextFieldConfig,
     [elementTypes.BOOLEAN]: (metaData: MetaDataElement, options: Object) => {
         const props = createComponentProps({
             label: metaData.formName,
@@ -432,9 +339,9 @@ const fieldForTypes = {
             props,
         }, metaData);
     },
-    [elementTypes.TIME]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
-    [elementTypes.PERCENTAGE]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
-    [elementTypes.URL]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
+    [elementTypes.TIME]: getTextFieldConfig,
+    [elementTypes.PERCENTAGE]: getTextFieldConfig,
+    [elementTypes.URL]: getTextFieldConfig,
     [elementTypes.AGE]: (metaData: MetaDataElement, options: Object) => getAgeField(metaData, options),
     [elementTypes.ORGANISATION_UNIT]: (metaData: MetaDataElement, options: Object) => getOrgUnitField(metaData, options),
     [elementTypes.COORDINATE]: (metaData: MetaDataElement, options: Object) => getCoordinateField(metaData, options),

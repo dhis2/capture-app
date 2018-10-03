@@ -3,17 +3,6 @@ import * as React from 'react';
 import isFunction from 'd2-utilizr/src/isFunction';
 
 type Props = {
-    value: any,
-    touched?: ?boolean,
-    validationAttempted?: ?boolean,
-    errorMessage?: ?string,
-    rulesErrorMessage?: ?string,
-    rulesWarningMessage?: ?string,
-    rulesErrorMessageOnComplete?: ?string,
-    rulesWarningMessageOnComplete?: ?string,
-    rulesCompulsoryError?: ?string,
-    metaCompulsory?: ?boolean,
-    rulesCompulsory?: ?boolean,
 };
 
 export default () =>
