@@ -21,8 +21,8 @@ export default class CustomForm {
 
     set data(html: string) {
         const data = parseHtml(html, {
-            transform: this.transformNode,
-            isScriptAllowed: true,
+            onTransform: this.transformNode,
+            allowScript: true,
         });
         this._data = data;
     }
