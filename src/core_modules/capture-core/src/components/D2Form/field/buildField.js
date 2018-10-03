@@ -2,21 +2,15 @@
 import log from 'loglevel';
 
 import errorCreator from '../../../utils/errorCreator';
-import TextField from '../../FormFields/Generic/D2TextField.component';
-import TrueFalse from '../../FormFields/Generic/D2TrueFalse.component';
-import TrueOnly from '../../FormFields/Generic/D2TrueOnly.component';
-import D2Date from '../../FormFields/DateAndTime/D2Date/D2Date.component';
-import D2DateTime from '../../FormFields/DateAndTime/D2DateTime/D2DateTime.component';
+import { TextField, BooleanField, TrueOnlyField, AgeField, orientations, withFocusSaver, withLabel, VirtualizedSelectField, DateField, DateTimeField, CoordinateField, withCalculateMessages, withDisplayMessages } from '../../FormFields/New';
+import labelTypeClasses from './buildField.mod.css';
 import D2File from '../../FormFields/File/D2File.component';
 import D2Image from '../../FormFields/Image/D2Image.component';
-import D2PhoneNumber from '../../FormFields/PhoneNumber/PhoneNumber.component';
-import D2AgeField from '../../FormFields/AgeField/AgeField.component';
 import OrgUnitTree from '../../FormFields/OrgUnitTree/OrgUnitTree.component';
 import UsernameField from '../../FormFields/Username/Username.component';
 
 import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
-import OptionsSelect from '../../FormFields/Options/SelectVirtualized/OptionsSelectVirtualized.component';
-import withSelectTranslations from '../../FormFields/Options/SelectVirtualized/withTranslations';
+import withSelectTranslations from '../../FormFields/Options/SelectVirtualizedV2/withTranslations';
 import withConvertedOptionSet from '../../FormFields/Options/withConvertedOptionSet';
 
 import getValidators from './validators';
@@ -27,7 +21,6 @@ import { inputTypes as optionSetInputTypes } from '../../../metaData/OptionSet/o
 import withInternalChangeHandler from '../../FormFields/withInternalChangeHandler';
 import withDefaultShouldUpdateInterface from './withDefaultShouldUpdateInterface';
 import withDefaultFieldContainer from './withDefaultFieldContainer';
-import withDefaultMessages from './withDefaultMessages';
 import withHideCompatibility from './withHideCompatibility';
 import withGotoInterface from './withGotoInterface';
 import withRequiredFieldCalculation from './withRequiredFieldCalculation';
@@ -46,10 +39,20 @@ const convertPx = (options: Object, value: number) => {
     return pxToRem ? pxToRem(value) : value;
 };
 
+const baseComponentStyles = {
+    labelContainerStyle: {
+        flexBasis: 200,
+    },
+    inputContainerStyle: {
+        flexBasis: 150,
+    },
+};
+
 const getBaseComponentProps = () => ({
     style: {
         width: '100%',
     },
+    styles: baseComponentStyles,
 });
 
 const getBaseFieldProps = (metaData: MetaDataElement) => ({
@@ -57,10 +60,20 @@ const getBaseFieldProps = (metaData: MetaDataElement) => ({
     commitEvent: commitEvents.ON_BLUR,
 });
 
+const baseComponentStylesVertical = {
+    labelContainerStyle: {
+        width: 150,
+    },
+    inputContainerStyle: {
+        width: 150,
+    },
+};
+
 const getBaseFormHorizontalProps = (options: Object) => ({
     style: {
         width: convertPx(options, 150),
     },
+    styles: baseComponentStylesVertical,
 });
 
 const createComponentProps = (componentProps: Object, options: Object) => ({
@@ -77,7 +90,6 @@ const createFieldProps = (fieldProps: Object, metaData: MetaDataElement) => ({
 const getBaseTextField = (metaData: MetaDataElement, options: Object) => {
     const props = createComponentProps({
         label: metaData.formName,
-        multiline: false,
         metaCompulsory: metaData.compulsory,
     }, options);
 
@@ -88,9 +100,19 @@ const getBaseTextField = (metaData: MetaDataElement, options: Object) => {
                 withHideCompatibility()(
                     withDefaultShouldUpdateInterface()(
                         withRequiredFieldCalculation()(
-                            withDefaultFieldContainer()(
-                                withDefaultMessages()(
-                                    withInternalChangeHandler()(TextField),
+                            withFocusSaver()(
+                                withCalculateMessages()(
+                                    withDefaultFieldContainer()(
+                                        withLabel({
+                                            onGetUseVerticalOrientation: () => options.formHorizontal,
+                                            onGetCustomFieldLabeClass: () =>
+                                                `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
+                                        })(
+                                            withDisplayMessages()(
+                                                withInternalChangeHandler()(TextField),
+                                            ),
+                                        ),
+                                    ),
                                 ),
                             ),
                         ),
@@ -101,37 +123,9 @@ const getBaseTextField = (metaData: MetaDataElement, options: Object) => {
     }, metaData);
 };
 
-const getPhoneField = (metaData: MetaDataElement, options: Object) => {
-    const props = createComponentProps({
-        label: metaData.formName,
-        multiline: false,
-        metaCompulsory: metaData.compulsory,
-    }, options);
-
-    return createFieldProps({
-        id: metaData.id,
-        component:
-      withGotoInterface()(
-          withHideCompatibility()(
-              withDefaultShouldUpdateInterface()(
-                  withRequiredFieldCalculation()(
-                      withDefaultFieldContainer()(
-                          withDefaultMessages()(
-                              withInternalChangeHandler()(D2PhoneNumber),
-                          ),
-                      ),
-                  ),
-              ),
-          ),
-      ),
-        props,
-    }, metaData);
-};
-
 const getOrgUnitField = (metaData: MetaDataElement, options: Object) => {
     const props = createComponentProps({
         label: metaData.formName,
-        multiline: false,
         metaCompulsory: metaData.compulsory,
     }, options);
 
@@ -142,9 +136,55 @@ const getOrgUnitField = (metaData: MetaDataElement, options: Object) => {
             withHideCompatibility()(
                 withDefaultShouldUpdateInterface()(
                     withRequiredFieldCalculation()(
-                        withDefaultFieldContainer()(
-                            withDefaultMessages()(
-                                withInternalChangeHandler()(OrgUnitTree),
+                        withCalculateMessages()(
+                            withDefaultFieldContainer()(
+                                withLabel({
+                                    onGetUseVerticalOrientation: () => options.formHorizontal,
+                                    onGetCustomFieldLabeClass: () =>
+                                        `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.orgUnitLabel}`,
+                                })(
+                                    withDisplayMessages()(
+                                        withInternalChangeHandler()(OrgUnitTree),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        props,
+    }, metaData);
+};
+
+const getCoordinateField = (metaData: MetaDataElement, options: Object) => {
+    const props = createComponentProps({
+        label: metaData.formName,
+        metaCompulsory: metaData.compulsory,
+        orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
+        shrinkDisabled: options.formHorizontal,
+    }, options);
+
+    return createFieldProps({
+        id: metaData.id,
+        component:
+        withGotoInterface()(
+            withHideCompatibility()(
+                withDefaultShouldUpdateInterface()(
+                    withRequiredFieldCalculation()(
+                        withCalculateMessages()(
+                            withFocusSaver()(
+                                withDefaultFieldContainer()(
+                                    withLabel({
+                                        onGetUseVerticalOrientation: () => options.formHorizontal,
+                                        onGetCustomFieldLabeClass: () =>
+                                            `$ {options.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+                                    })(
+                                        withDisplayMessages()(
+                                            withInternalChangeHandler()(CoordinateField),
+                                        ),
+                                    ),
+                                ),
                             ),
                         ),
                     ),
@@ -158,7 +198,6 @@ const getOrgUnitField = (metaData: MetaDataElement, options: Object) => {
 const getUsernameField = (metaData: MetaDataElement, options: Object) => {
     const props = createComponentProps({
         label: metaData.formName,
-        multiline: false,
         metaCompulsory: metaData.compulsory,
     }, options);
 
@@ -169,9 +208,19 @@ const getUsernameField = (metaData: MetaDataElement, options: Object) => {
             withHideCompatibility()(
                 withDefaultShouldUpdateInterface()(
                     withRequiredFieldCalculation()(
-                        withDefaultFieldContainer()(
-                            withDefaultMessages()(
-                                withInternalChangeHandler()(UsernameField),
+                        withCalculateMessages()(
+                            withFocusSaver()(
+                                withDefaultFieldContainer()(
+                                    withLabel({
+                                        onGetUseVerticalOrientation: () => options.formHorizontal,
+                                        onGetCustomFieldLabeClass: () =>
+                                            `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
+                                    })(
+                                        withDisplayMessages()(
+                                            withInternalChangeHandler()(UsernameField),
+                                        ),
+                                    ),
+                                ),
                             ),
                         ),
                     ),
@@ -185,8 +234,9 @@ const getUsernameField = (metaData: MetaDataElement, options: Object) => {
 const getAgeField = (metaData: MetaDataElement, options: Object) => {
     const props = createComponentProps({
         label: metaData.formName,
-        multiline: false,
         metaCompulsory: metaData.compulsory,
+        orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
+        shrinkDisabled: options.formHorizontal,
     }, options);
 
     return createFieldProps({
@@ -196,9 +246,19 @@ const getAgeField = (metaData: MetaDataElement, options: Object) => {
             withHideCompatibility()(
                 withDefaultShouldUpdateInterface()(
                     withRequiredFieldCalculation()(
-                        withDefaultFieldContainer()(
-                            withDefaultMessages()(
-                                withInternalChangeHandler()(D2AgeField),
+                        withCalculateMessages()(
+                            withFocusSaver()(
+                                withDefaultFieldContainer()(
+                                    withLabel({
+                                        onGetUseVerticalOrientation: () => options.formHorizontal,
+                                        onGetCustomFieldLabeClass: () =>
+                                            `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.ageLabel}`,
+                                    })(
+                                        withDisplayMessages()(
+                                            withInternalChangeHandler()(AgeField),
+                                        ),
+                                    ),
+                                ),
                             ),
                         ),
                     ),
@@ -212,7 +272,7 @@ const getAgeField = (metaData: MetaDataElement, options: Object) => {
 const fieldForTypes = {
     [elementTypes.EMAIL]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
     [elementTypes.TEXT]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
-    [elementTypes.PHONE_NUMBER]: (metaData: MetaDataElement, options: Object) => getPhoneField(metaData, options),
+    [elementTypes.PHONE_NUMBER]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
     [elementTypes.LONG_TEXT]: (metaData: MetaDataElement, options: Object) => {
         const baseField = getBaseTextField(metaData, options);
         const props = { ...baseField.props, multiLine: true };
@@ -227,7 +287,8 @@ const fieldForTypes = {
         const props = createComponentProps({
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
-            nullable: !metaData.compulsory,
+            orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
+            id: metaData.id,
         }, options);
 
         return createFieldProps({
@@ -237,8 +298,18 @@ const fieldForTypes = {
                     withHideCompatibility()(
                         withDefaultShouldUpdateInterface()(
                             withRequiredFieldCalculation()(
-                                withDefaultFieldContainer({ marginBottom: 0 })(
-                                    withDefaultMessages()(TrueFalse),
+                                withCalculateMessages()(
+                                    withFocusSaver()(
+                                        withDefaultFieldContainer()(
+                                            withLabel({
+                                                onGetUseVerticalOrientation: () => options.formHorizontal,
+                                                onGetCustomFieldLabeClass: () =>
+                                                    `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.booleanLabel}`,
+                                            })(
+                                                withDisplayMessages()(BooleanField),
+                                            ),
+                                        ),
+                                    ),
                                 ),
                             ),
                         ),
@@ -251,6 +322,8 @@ const fieldForTypes = {
         const props = createComponentProps({
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
+            orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
+            id: metaData.id,
         }, options);
 
         return createFieldProps({
@@ -260,8 +333,18 @@ const fieldForTypes = {
                     withHideCompatibility()(
                         withDefaultShouldUpdateInterface()(
                             withRequiredFieldCalculation()(
-                                withDefaultFieldContainer({ marginBottom: 0 })(
-                                    withDefaultMessages()(TrueOnly),
+                                withCalculateMessages()(
+                                    withFocusSaver()(
+                                        withDefaultFieldContainer()(
+                                            withLabel({
+                                                onGetUseVerticalOrientation: () => options.formHorizontal,
+                                                onGetCustomFieldLabeClass: () =>
+                                                    `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
+                                            })(
+                                                withDisplayMessages()(TrueOnlyField),
+                                            ),
+                                        ),
+                                    ),
                                 ),
                             ),
                         ),
@@ -272,7 +355,8 @@ const fieldForTypes = {
     },
     [elementTypes.DATE]: (metaData: MetaDataElement, options: Object) => {
         const props = createComponentProps({
-            width: options.formHorizontal ? 150 : 350,
+            width: options.formHorizontal ? 150 : '100%',
+            maxWidth: options.formHorizontal ? 150 : 350,
             calendarWidth: 350,
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
@@ -285,9 +369,19 @@ const fieldForTypes = {
                     withHideCompatibility()(
                         withDefaultShouldUpdateInterface()(
                             withRequiredFieldCalculation()(
-                                withDefaultFieldContainer()(
-                                    withDefaultMessages()(
-                                        withInternalChangeHandler()(D2Date),
+                                withCalculateMessages()(
+                                    withFocusSaver()(
+                                        withDefaultFieldContainer()(
+                                            withLabel({
+                                                onGetUseVerticalOrientation: () => options.formHorizontal,
+                                                onGetCustomFieldLabeClass: () =>
+                                                    `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                                            })(
+                                                withDisplayMessages()(
+                                                    withInternalChangeHandler()(DateField),
+                                                ),
+                                            ),
+                                        ),
                                     ),
                                 ),
                             ),
@@ -299,7 +393,10 @@ const fieldForTypes = {
     },
     [elementTypes.DATETIME]: (metaData: MetaDataElement, options: Object) => {
         const props = createComponentProps({
-            dateWidth: 200,
+            dateWidth: options.formHorizontal ? 150 : '100%',
+            dateMaxWidth: options.formHorizontal ? 150 : 350,
+            orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
+            shrinkDisabled: options.formHorizontal,
             calendarWidth: 350,
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
@@ -312,10 +409,21 @@ const fieldForTypes = {
                     withHideCompatibility()(
                         withDefaultShouldUpdateInterface()(
                             withRequiredFieldCalculation()(
-                                withDefaultFieldContainer()(
-                                    withDefaultMessages()(
-                                        withInternalChangeHandler()(D2DateTime),
+                                withCalculateMessages()(
+                                    withFocusSaver()(
+                                        withDefaultFieldContainer()(
+                                            withLabel({
+                                                onGetUseVerticalOrientation: () => options.formHorizontal,
+                                                onGetCustomFieldLabeClass: () =>
+                                                    `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.dateTimeLabel}`,
+                                            })(
+                                                withDisplayMessages()(
+                                                    withInternalChangeHandler()(DateTimeField),
+                                                ),
+                                            ),
+                                        ),
                                     ),
+
                                 ),
                             ),
                         ),
@@ -329,13 +437,14 @@ const fieldForTypes = {
     [elementTypes.URL]: (metaData: MetaDataElement, options: Object) => getBaseTextField(metaData, options),
     [elementTypes.AGE]: (metaData: MetaDataElement, options: Object) => getAgeField(metaData, options),
     [elementTypes.ORGANISATION_UNIT]: (metaData: MetaDataElement, options: Object) => getOrgUnitField(metaData, options),
+    [elementTypes.COORDINATE]: (metaData: MetaDataElement, options: Object) => getCoordinateField(metaData, options),
     [elementTypes.USERNAME]: (metaData: MetaDataElement, options: Object) => getUsernameField(metaData, options),
     [elementTypes.FILE_RESOURCE]: (metaData: MetaDataElement, options: Object) => {
         const props = createComponentProps({
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
             async: true,
-            formHorizontal: options.formHorizontal,
+            orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
         }, options);
         return createFieldProps({
             id: metaData.id,
@@ -344,9 +453,19 @@ const fieldForTypes = {
                     withHideCompatibility()(
                         withDefaultShouldUpdateInterface()(
                             withRequiredFieldCalculation()(
-                                withDefaultFieldContainer()(
-                                    withDefaultMessages()(
-                                        withInternalChangeHandler()(D2File),
+                                withFocusSaver()(
+                                    withCalculateMessages()(
+                                        withDefaultFieldContainer()(
+                                            withLabel({
+                                                onGetUseVerticalOrientation: () => options.formHorizontal,
+                                                onGetCustomFieldLabeClass: () =>
+                                                    `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.fileLabel}`,
+                                            })(
+                                                withDisplayMessages()(
+                                                    withInternalChangeHandler()(D2File),
+                                                ),
+                                            ),
+                                        ),
                                     ),
                                 ),
                             ),
@@ -361,7 +480,7 @@ const fieldForTypes = {
             label: metaData.formName,
             metaCompulsory: metaData.compulsory,
             async: true,
-            formHorizontal: options.formHorizontal,
+            orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
         }, options);
         return createFieldProps({
             id: metaData.id,
@@ -370,9 +489,19 @@ const fieldForTypes = {
                     withHideCompatibility()(
                         withDefaultShouldUpdateInterface()(
                             withRequiredFieldCalculation()(
-                                withDefaultFieldContainer()(
-                                    withDefaultMessages()(
-                                        withInternalChangeHandler()(D2Image),
+                                withFocusSaver()(
+                                    withCalculateMessages()(
+                                        withDefaultFieldContainer()(
+                                            withLabel({
+                                                onGetUseVerticalOrientation: () => options.formHorizontal,
+                                                onGetCustomFieldLabeClass: () =>
+                                                    `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.imageLabel}`,
+                                            })(
+                                                withDisplayMessages()(
+                                                    withInternalChangeHandler()(D2Image),
+                                                ),
+                                            ),
+                                        ),
                                     ),
                                 ),
                             ),
@@ -385,16 +514,26 @@ const fieldForTypes = {
     [elementTypes.UNKNOWN]: (metaData: MetaDataElement, options: Object) => null, // eslint-disable-line no-unused-vars
 };
 
-const getOptionSetComponent = (inputType: $Values<typeof optionSetInputTypes>) => {
+const getOptionSetComponent = (inputType: $Values<typeof optionSetInputTypes>, options: Object) => {
     if (inputType === optionSetInputTypes.SELECT) {
         return withGotoInterface()(
             withHideCompatibility()(
                 withDefaultShouldUpdateInterface()(
                     withRequiredFieldCalculation()(
-                        withDefaultFieldContainer()(
-                            withDefaultMessages()(
-                                withConvertedOptionSet()(
-                                    withSelectTranslations()(OptionsSelect),
+                        withFocusSaver()(
+                            withCalculateMessages()(
+                                withDefaultFieldContainer()(
+                                    withLabel({
+                                        onGetUseVerticalOrientation: () => options.formHorizontal,
+                                        onGetCustomFieldLabeClass: () =>
+                                            `${options.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
+                                    })(
+                                        withDisplayMessages()(
+                                            withConvertedOptionSet()(
+                                                withSelectTranslations()(VirtualizedSelectField),
+                                            ),
+                                        ),
+                                    ),
                                 ),
                             ),
                         ),
@@ -408,9 +547,11 @@ const getOptionSetComponent = (inputType: $Values<typeof optionSetInputTypes>) =
         withHideCompatibility()(
             withDefaultShouldUpdateInterface()(
                 withRequiredFieldCalculation()(
-                    withDefaultFieldContainer()(
-                        withDefaultMessages()(
-                            withConvertedOptionSet()(SelectBoxes),
+                    withCalculateMessages()(
+                        withDefaultFieldContainer()(
+                            withDisplayMessages()(
+                                withConvertedOptionSet()(SelectBoxes),
+                            ),
                         ),
                     ),
                 ),
@@ -434,7 +575,7 @@ const optionSetField = (metaData: MetaDataElement, options: Object) => {
         id: metaData.id,
         component:
             // $FlowSuppress
-            getOptionSetComponent(metaData.optionSet.inputType),
+            getOptionSetComponent(metaData.optionSet.inputType, options),
         props,
     }, metaData);
 };

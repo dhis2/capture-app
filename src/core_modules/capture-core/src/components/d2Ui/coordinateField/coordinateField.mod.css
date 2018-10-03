@@ -1,0 +1,47 @@
+.coordinateField {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+  
+.coordinateFieldsHorizontal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.coordinateFieldsVertical {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+  
+.coordinateIcon {
+    position: relative;
+    cursor: pointer;
+    padding: 2px;
+}
+
+.coordinateIconWithMargin {
+    position: relative;
+    cursor: pointer;
+    padding: 2px;
+    margin-top: 28px;
+}
+
+.coordinateLeafletMap {
+    position: absolute;
+    overflow: hidden;
+    z-index: 1000;
+    left: 0;
+    top: 40px;
+}
+.leafletContainer {
+    z-index: 1000;
+    width: 400px;
+    height: 250px;
+}
+.inputContainer {
+    flex-grow: 1;
+}
+  

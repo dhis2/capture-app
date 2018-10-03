@@ -6,7 +6,7 @@ import isObject from 'd2-utilizr/lib/isObject';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = () => ({
-    fieldContainer: {
+    fieldOuterContainer: {
         position: 'relative',
     },
     fieldHorizontalContainer: {
@@ -53,6 +53,8 @@ type Props = {
     classes: Object,
     formHorizontal: ?boolean,
     children?: ?((field: FieldConfig) => React.Node, fields: Array<FieldConfig>) => React.Node,
+    onRenderDivider: (index: number, total: number, field: Field) => ?React.Element<any>,
+    onGetContainerProps: (index: number, total: number, field: Field) => ?React.Element<any>,
 };
 
 type FieldCommitOptions = {
@@ -62,9 +64,16 @@ type FieldCommitOptions = {
 class FormBuilder extends React.Component<Props> {
     static validateField(field: FieldConfig, value: any): { valid: boolean, errorMessage?: string } {
         const validatorResult = (field.validators || [])
-            .reduce((pass, currentValidator) => (pass === true
-                ? (currentValidator.validator(value) === true || currentValidator.message) : pass
-            ), true);
+            .reduce((pass, currentValidator) => {
+                if (pass === true) {
+                    const result = currentValidator.validator(value);
+                    if (result === true || (result && result.valid)) {
+                        return true;
+                    }
+                    return (result && result.errorMessage) || currentValidator.message;
+                }
+                return pass;
+            }, true);
 
         if (validatorResult !== true) {
             return {
@@ -249,6 +258,8 @@ class FormBuilder extends React.Component<Props> {
             onUpdateFieldUIOnly,
             validateIfNoUIData,
             children,
+            onRenderDivider,
+            onGetContainerProps,
             ...passOnProps } = this.props;
 
         const props = field.props || {};
@@ -272,19 +283,25 @@ class FormBuilder extends React.Component<Props> {
         return (
             <div
                 key={field.id}
-                className={classes.fieldContainer}
+                className={classes.fieldOuterContainer}
             >
-                <field.component
-                    ref={(fieldInstance) => { this.setFieldInstance(fieldInstance, field.id); }}
-                    value={value}
-                    errorMessage={fieldUI.errorMessage}
-                    touched={fieldUI.touched}
-                    validationAttempted={validationAttempted}
-                    {...commitPropObject}
-                    {...props}
-                    {...passOnProps}
-                    {...asyncProps}
-                />
+                <div
+                    {...onGetContainerProps && onGetContainerProps(index, fields.length, field)}
+                >
+                    <field.component
+                        ref={(fieldInstance) => { this.setFieldInstance(fieldInstance, field.id); }}
+                        value={value}
+                        errorMessage={fieldUI.errorMessage}
+                        touched={fieldUI.touched}
+                        validationAttempted={validationAttempted}
+                        {...commitPropObject}
+                        {...props}
+                        {...passOnProps}
+                        {...asyncProps}
+                    />
+                </div>
+
+                {onRenderDivider && onRenderDivider(index, fields.length, field)}
             </div>
         );
     }
@@ -295,7 +312,6 @@ class FormBuilder extends React.Component<Props> {
         if (children) {
             return children(this.renderField, fields);
         }
-
         return fields.map(field => this.renderField(field));
     }
 

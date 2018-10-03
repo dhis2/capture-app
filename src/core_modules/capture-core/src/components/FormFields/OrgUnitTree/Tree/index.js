@@ -130,12 +130,6 @@ export default class Tree extends React.Component {
 
         return (
             <div className="ou-tree-container">
-                <label className="ou-tree-label">
-                    {this.props.label}
-                    {
-                        this.props.required && (<span className="ou-tree-label-required"> *</span>)
-                    }
-                </label>
                 <div className="ou-tree">{this.view()}</div>
             </div>
         );

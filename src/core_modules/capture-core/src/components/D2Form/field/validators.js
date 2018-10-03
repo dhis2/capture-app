@@ -19,6 +19,7 @@ import {
     isValidAge,
     isValidPhoneNumber,
     isValidOrgUnit,
+    isValidCoordinate,
     isValidUsername,
 } from '../../../utils/validators/form';
 import MetaDataElement from '../../../metaData/DataElement/DataElement';
@@ -38,6 +39,7 @@ const wordValidatorKeys = {
 };
 
 const errorMessages = {
+    COMPULSORY: 'A value is required',
     NUMBER: 'Please provide a valid number',
     INTEGER: 'Please provide a valid integer',
     POSITIVE_INTEGER: 'Please provide a positive integer',
@@ -52,6 +54,7 @@ const errorMessages = {
     AGE: 'Please provide a valid age',
     PHONE_NUMBER: 'Please provide a valid phone number',
     ORGANISATION_UNIT: 'Please provide a valid organisation unit',
+    COORDINATE: 'Please provide valid coordinates',
     USERNAME: 'Please provide a valid username',
 };
 
@@ -119,6 +122,10 @@ const validatorsForTypes = {
         validator: isValidOrgUnit,
         message: i18n.t(errorMessages.ORGANISATION_UNIT),
     }),
+    [elementTypes.COORDINATE]: () => ({
+        validator: isValidCoordinate,
+        message: i18n.t(errorMessages.COORDINATE),
+    }),
     [elementTypes.USERNAME]: () => ({
         validator: isValidUsername,
         message: i18n.t(errorMessages.USERNAME),
@@ -159,11 +166,7 @@ function buildCompulsoryValidator(metaData: MetaDataElement): Array<ValidatorCon
         {
             validator: isCompulsoryRequirementMetWrapper,
             message:
-                i18n.t(
-                    Validators.wordToValidatorMap.get(
-                        wordValidatorKeys.COMPULSORY,
-                    ).message,
-                ),
+                i18n.t(errorMessages.COMPULSORY),
         },
     ] :
         [];

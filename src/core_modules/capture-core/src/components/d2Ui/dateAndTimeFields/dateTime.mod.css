@@ -1,0 +1,19 @@
+.fieldsContainer {
+    display: flex;
+}
+
+.fieldsContainerVertical {
+    flex-direction: column;
+}
+
+.formControl {
+    width: 100%;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.root {
+    position: relative;
+}

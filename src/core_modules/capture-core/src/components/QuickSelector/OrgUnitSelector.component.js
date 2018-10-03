@@ -74,8 +74,9 @@ const styles = () => ({
     },
     orgunitTree: {
         backgroundColor: 'white',
-        border: '1px solid lightGrey',
-        borderRadius: 5,
+        border: '1px solid #C4C4C4',
+        boxShadow: '0px 0px 2px 0px #C4C4C4 inset',
+        borderRadius: 3,
         padding: 5,
         minHeight: 42,
         paddingTop: 10,

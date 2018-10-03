@@ -1,6 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import FormBuilderContainer from './FormBuilder.container';
+import withDivider from './FieldDivider/withDivider';
+import withAlternateBackgroundColors from './FieldAlternateBackgroundColors/withAlternateBackgroundColors';
 import FormBuilder from '../../__TEMP__/FormBuilderExternalState.component';
 import withCustomForm from './D2CustomForm/withCustomForm';
 import buildField from './field/buildField';
@@ -10,8 +12,7 @@ import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reduc
 
 import type { FieldConfig } from '../../__TEMP__/FormBuilderExternalState.component';
 
-const CustomFormHOC = withCustomForm()(FormBuilderContainer);
-
+const CustomFormHOC = withCustomForm()(withDivider()(withAlternateBackgroundColors()(FormBuilderContainer)));
 type FormsValues = {
     [id: string]: any
 };
@@ -176,14 +177,13 @@ class D2SectionFields extends Component<Props> {
             rulesMessages,
             onUpdateFieldAsync,
             fieldOptions,
-            formHorizontal,
             ...passOnProps } = this.props;
 
         this.buildRulesCompulsoryErrors();
 
         return (
             <CustomFormHOC
-                innerRef={(instance) => { this.formBuilderInstance = instance; }}
+                formBuilderRef={(instance) => { this.formBuilderInstance = instance; }}
                 id={formBuilderId}
                 fields={this.getFieldConfigWithRulesEffects()}
                 values={values}

@@ -118,6 +118,7 @@ export class D2Form extends Component<Props> {
 
     renderHorizontal = (section: Section, passOnProps: any) => (
         <D2SectionContainer
+            key={section.id}
             innerRef={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
             sectionMetaData={section}
             customForm={this.props.formFoundation.customForm}

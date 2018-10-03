@@ -77,12 +77,14 @@ declare type Theme = {
             contrastText: string,
         },
         error: {
+            lighter: string,
             light: string,
             main: string,
             dark: string,
             contrastText: string,
         },
         warning: {
+            lighter: string,
             light: string,
             main: string,
             dark: string,
@@ -113,6 +115,15 @@ declare type Theme = {
             paper: string,
             default: string,
         },
+        divider: string,
+        dividerForm: string,
+        accent: {
+            lighter: string,
+            light: string,
+            main: string,
+            dark: string,
+        },
+        required: string,
     },
     typography: {
         pxToRem: (size: number) => string,
@@ -149,6 +160,12 @@ declare type Theme = {
         unit: number,
     },
     direction: string,
+    breakpoints: {
+        up: (string | number) => string,
+        down: (string | number) => string,
+        between: (string | number) => string,
+        only: (string | number) => string,
+    },
 };
 
 declare type InputObservable = rxjs$Observable<ReduxAction<any, any>>;

@@ -1,0 +1,31 @@
+.container {
+    position: relative;
+}
+.statusContainer {
+    display: flex;
+    align-items: center;
+}
+
+.mapIcon {
+    cursor: pointer;
+    padding: 2px;
+}
+.statusText {
+    padding: 2px;
+}
+.checkIcon {
+    padding: 2px;
+}
+
+.polygonLeafletMap {
+    position: absolute;
+    z-index: 1000;
+    left: 0;
+    top: 40px;
+}
+.leafletContainer {
+    z-index: 1000;
+    width: 400px;
+    height: 250px;
+}
+

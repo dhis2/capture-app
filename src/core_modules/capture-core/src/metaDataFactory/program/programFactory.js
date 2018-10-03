@@ -25,6 +25,7 @@ import errorCreator from '../../utils/errorCreator';
 import getRulesAndVariablesFromProgramIndicators from './getRulesAndVariablesFromIndicators';
 import type { CachedProgramIndicator } from './getRulesAndVariablesFromIndicators';
 import type { ProgramRule, ProgramRuleVariable } from '../../RulesEngine/rulesEngine.types';
+import capitalizeFirstLetter from '../../utils/string/capitalizeFirstLetter';
 
 type CachedTranslation = {
     property: string,
@@ -76,6 +77,7 @@ type CachedProgramStage = {
     programStageDataElements: ?Array<CachedProgramStageDataElement>,
     formType: string,
     dataEntryForm: CachedDataEntryForm,
+    featureType: string,
 };
 
 type CachedCategoryOption = {
@@ -240,12 +242,20 @@ function buildMainSection(d2ProgramStageDataElements: ?Array<CachedProgramStageD
     return section;
 }
 
+function getFeatureType(d2ProgramStage: CachedProgramStage) {
+    return d2ProgramStage.featureType ?
+        capitalizeFirstLetter(d2ProgramStage.featureType.toLowerCase())
+        :
+        'None';
+}
+
 function buildStage(d2ProgramStage: CachedProgramStage) {
     const stage = new RenderFoundation((_this) => {
         _this.id = d2ProgramStage.id;
         _this.access = d2ProgramStage.access;
         _this.name = d2ProgramStage.displayName;
         _this.description = d2ProgramStage.description;
+        _this.featureType = capitalizeFirstLetter(getFeatureType(d2ProgramStage));
         _this.addLabel({ id: 'eventDate', label: d2ProgramStage.executionDateLabel || 'Incident date' });
     });
 
@@ -391,7 +401,7 @@ function addProgramRules(d2ProgramRules: Array<ProgramRule>) {
 
 function addRulesAndVariablesFromProgramIndicators(cachedProgramIndicators: Array<CachedProgramIndicator>) {
     const indicatorsByProgram = cachedProgramIndicators.reduce((accIndicatorsByProgram, indicator) => {
-        const programId = indicator.program && indicator.program.id;
+        const programId = indicator.programId;
         accIndicatorsByProgram[programId] = accIndicatorsByProgram[programId] || [];
         accIndicatorsByProgram[programId].push(indicator);
         return accIndicatorsByProgram;

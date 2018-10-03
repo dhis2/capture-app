@@ -12,14 +12,23 @@ import { placements } from '../../../../components/DataEntry/dataEntryField/data
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 
-import D2Date from '../../../../components/FormFields/DateAndTime/D2Date/D2Date.component';
-import D2TrueOnly from '../../../../components/FormFields/Generic/D2TrueOnly.component';
-import withDefaultMessages from '../../../../components/DataEntry/dataEntryField/withDefaultMessages';
-import withDefaultFieldContainer from '../../../../components/DataEntry/dataEntryField/withDefaultFieldContainer';
-import withDefaultChangeHandler from '../../../../components/DataEntry/dataEntryField/withDefaultChangeHandler';
+import {
+    withInternalChangeHandler,
+    withLabel,
+    withFocusSaver,
+    DateField,
+    TrueOnlyField,
+    CoordinateField,
+    PolygonField,
+    withCalculateMessages,
+    withDisplayMessages,
+    withFilterProps,
+} from '../../../FormFields/New';
+
+import withDefaultFieldContainer from '../../../D2Form/field/withDefaultFieldContainer';
 import withFeedbackOutput from '../../../../components/DataEntry/dataEntryOutput/withFeedbackOutput';
 import withDefaultShouldUpdateInterface from
-    '../../../../components/DataEntry/dataEntryField/withDefaultShouldUpdateInterface';
+    '../../../D2Form/field/withDefaultShouldUpdateInterface';
 
 import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
 import withIndicatorOutput from '../../../DataEntry/dataEntryOutput/withIndicatorOutput';
@@ -27,6 +36,8 @@ import withErrorOutput from '../../../DataEntry/dataEntryOutput/withErrorOutput'
 import withWarningOutput from '../../../DataEntry/dataEntryOutput/withWarningOutput';
 import TextEditor from '../../../FormFields/TextEditor/TextEditor.component';
 import { newEventSaveTypes, newEventSaveTypeDefinitions } from './newEventSaveTypes';
+import labelTypeClasses from './dataEntryFieldLabels.mod.css';
+import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -50,7 +61,22 @@ const getStyles = theme => ({
         paddingTop: theme.typography.pxToRem(20),
         paddingBottom: theme.typography.pxToRem(15),
     },
+    fieldLabelMediaBased: {
+        [theme.breakpoints.down(481)]: {
+            paddingTop: '0px !important',
+        },
+    },
+    dataEntryVerticalContainer: {
+        backgroundColor: 'white',
+        border: '1px solid rgba(0,0,0,0.1)',
+        borderRadius: theme.typography.pxToRem(2),
+        padding: theme.typography.pxToRem(20),
+    },
 });
+
+const overrideMessagePropNames = {
+    errorMessage: 'validationError',
+};
 
 const getSaveOptions = (props: Object) => {
     const options: {color?: ?string, saveTypes?: ?Array<any>} = {
@@ -77,22 +103,69 @@ const getCancelOptions = () => ({
     color: 'primary',
 });
 
+const baseComponentStyles = {
+    labelContainerStyle: {
+        flexBasis: 200,
+    },
+    inputContainerStyle: {
+        flexBasis: 150,
+    },
+};
+const baseComponentStylesVertical = {
+    labelContainerStyle: {
+        width: 150,
+    },
+    inputContainerStyle: {
+        width: 150,
+    },
+};
+
+
+function defaultFilterProps(props: Object) {
+    const { formHorizontal, fieldOptions, validationError, ...passOnProps } = props;
+    return passOnProps;
+}
+
+const getBaseComponentProps = (props: Object) => ({
+    fieldOptions: props.fieldOptions,
+    formHorizontal: props.formHorizontal,
+    styles: props.formHorizontal ? baseComponentStylesVertical : baseComponentStyles,
+});
+
+const createComponentProps = (props: Object, componentProps: Object) => ({
+    ...getBaseComponentProps(props),
+    ...componentProps,
+});
+
 const buildNoteSettingsFn = () => {
-    const noteComponent = withDefaultFieldContainer()(
-        withDefaultShouldUpdateInterface()(
-            withDefaultMessages()(
-                withDefaultChangeHandler()(TextEditor),
+    const noteComponent =
+        withCalculateMessages()(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.noteLabel}`,
+
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(
+                                    withFilterProps(defaultFilterProps)(TextEditor),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
             ),
-        ),
-    );
+        );
     const noteSettings = (props: Object) => ({
         component: noteComponent,
-        componentProps: {
+        componentProps: createComponentProps(props, {
             style: {
                 width: '100%',
             },
             label: 'Comment',
-        },
+        }),
         propName: 'notes',
         hidden: props.formHorizontal,
         validatorContainers: [
@@ -105,22 +178,33 @@ const buildNoteSettingsFn = () => {
 };
 
 const buildReportDateSettingsFn = () => {
-    const reportDateComponent = withDefaultFieldContainer()(
-        withDefaultShouldUpdateInterface()(
-            withDefaultMessages()(
-                withDefaultChangeHandler()(D2Date),
+    const reportDateComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(
+                                    withFilterProps(defaultFilterProps)(DateField),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
             ),
-        ),
-    );
-
+        );
     const reportDateSettings = (props: Object) => ({
         component: reportDateComponent,
-        componentProps: {
+        componentProps: createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : 350,
             calendarWidth: 350,
             label: props.formFoundation.getLabel('eventDate'),
             required: true,
-        },
+        }),
         propName: 'eventDate',
         validatorContainers: getEventDateValidatorContainers(),
     });
@@ -128,20 +212,108 @@ const buildReportDateSettingsFn = () => {
     return reportDateSettings;
 };
 
-const buildCompleteFieldSettingsFn = () => {
-    const completeComponent = withDefaultFieldContainer()(
-        withDefaultShouldUpdateInterface()(
-            withDefaultMessages()(
-                withDefaultChangeHandler()(D2TrueOnly),
+const pointComponent = withCalculateMessages(overrideMessagePropNames)(
+    withFocusSaver()(
+        withDefaultFieldContainer()(
+            withDefaultShouldUpdateInterface()(
+                withLabel({
+                    onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                    onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
+                })(
+                    withDisplayMessages()(
+                        withInternalChangeHandler()(
+                            withFilterProps(defaultFilterProps)(CoordinateField),
+                        ),
+                    ),
+                ),
             ),
         ),
-    );
+    ),
+);
 
-    const completeSettings = () => ({
+const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
+    withFocusSaver()(
+        withDefaultFieldContainer()(
+            withDefaultShouldUpdateInterface()(
+                withLabel({
+                    onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                    onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
+                })(
+                    withDisplayMessages()(
+                        withInternalChangeHandler()(
+                            withFilterProps(defaultFilterProps)(PolygonField),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+    ),
+);
+
+
+const buildGeometrySettingsFn = () => (props: Object) => {
+    const featureType = props.formFoundation.featureType;
+    if (featureType === 'Polygon') {
+        return {
+            component: polygonComponent,
+            componentProps: createComponentProps(props, {
+                width: props && props.formHorizontal ? 150 : 350,
+                label: 'Location',
+                required: false,
+            }),
+            propName: 'geometry',
+            validatorContainers: [
+            ],
+            meta: {
+                placement: placements.TOP,
+            },
+        };
+    }
+    if (featureType === 'Point') {
+        return {
+            component: pointComponent,
+            componentProps: createComponentProps(props, {
+                width: props && props.formHorizontal ? 150 : 350,
+                label: 'Coordinate',
+                required: false,
+            }),
+            propName: 'geometry',
+            validatorContainers: [
+            ],
+            meta: {
+                placement: placements.TOP,
+            },
+        };
+    }
+    return null;
+};
+
+const buildCompleteFieldSettingsFn = () => {
+    const completeComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withFocusSaver()(
+                withDefaultFieldContainer()(
+                    withDefaultShouldUpdateInterface()(
+                        withLabel({
+                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                            onGetCustomFieldLabeClass: (props: Object) =>
+                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
+                        })(
+                            withDisplayMessages()(
+                                withInternalChangeHandler()(
+                                    withFilterProps(defaultFilterProps)(TrueOnlyField),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    const completeSettings = (props: Object) => ({
         component: completeComponent,
-        componentProps: {
+        componentProps: createComponentProps(props, {
             label: 'Complete event',
-        },
+        }),
         propName: 'complete',
         validatorContainers: [
         ],
@@ -154,7 +326,8 @@ const buildCompleteFieldSettingsFn = () => {
 };
 
 const CommentField = withDataEntryField(buildNoteSettingsFn())(DataEntry);
-const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(CommentField);
+const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);
+const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
 const CompleteField = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
 const FeedbackOutput = withFeedbackOutput()(CompleteField);
 const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
@@ -179,6 +352,8 @@ type Props = {
         savingContextNames: string,
         topButtonsContainer: string,
         horizontalPaper: string,
+        dataEntryVerticalContainer: string,
+        fieldLabelMediaBased: string,
     },
     theme: Theme,
     formHorizontal: ?boolean,
@@ -186,11 +361,14 @@ type Props = {
 };
 
 class NewEventDataEntry extends Component<Props> {
-    fieldOptions: {theme: Theme };
+    fieldOptions: { theme: Theme };
 
     constructor(props: Props) {
         super(props);
-        this.fieldOptions = { theme: props.theme };
+        this.fieldOptions = {
+            theme: props.theme,
+            fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
+        };
     }
 
     componentWillMount() {
@@ -245,7 +423,7 @@ class NewEventDataEntry extends Component<Props> {
         );
     }
 
-    renderVertical = () => this.renderContent();
+    renderVertical = () => (<div className={this.props.classes.dataEntryVerticalContainer}>{this.renderContent()}</div>);
 
     renderContent = () => {
         const {

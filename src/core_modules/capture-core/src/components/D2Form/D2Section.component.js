@@ -8,9 +8,9 @@ import D2SectionFields from './D2SectionFields.container';
 
 import MetaDataSection from '../../metaData/RenderFoundation/Section';
 
-const getStyles = () => ({
+const getStyles = (theme: Theme) => ({
     sectionFieldsInSection: {
-        paddingTop: 10,
+        margin: theme.spacing.unit,
     },
 });
 
