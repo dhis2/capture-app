@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import DataEntry from '../../../../components/DataEntry/DataEntry.container';
-import withSaveButton from '../../../../components/DataEntry/withSaveButton';
+import withSaveHandler from '../../../../components/DataEntry/withSaveHandler';
 import withCancelButton from '../../../../components/DataEntry/withCancelButton';
 import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
 import { placements } from '../../../../components/DataEntry/dataEntryField/dataEntryField.const';
@@ -10,6 +10,8 @@ import getEventDateValidatorContainers from './fieldValidators/eventDate.validat
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import withDefaultFieldContainer from '../../../D2Form/field/withDefaultFieldContainer';
 import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
+import withMainButton from './withMainButton';
+import withFilterProps from '../../../FormFields/New/HOC/withFilterProps';
 
 import {
     withInternalChangeHandler,
@@ -65,9 +67,10 @@ const baseComponentStylesVertical = {
     },
 };
 
-const getSaveOptions = () => ({
-    color: 'primary',
-});
+function defaultFilterProps(props: Object) {
+    const { formHorizontal, fieldOptions, validationError, modified, ...passOnProps } = props;
+    return passOnProps;
+}
 
 const getCancelOptions = () => ({
     color: 'primary',
@@ -96,7 +99,7 @@ const buildReportDateSettingsFn = () => {
                                 `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                         })(
                             withDisplayMessages()(
-                                withInternalChangeHandler()(DateField),
+                                withInternalChangeHandler()(withFilterProps(defaultFilterProps)(DateField)),
                             ),
                         ),
                     ),
@@ -126,7 +129,7 @@ const pointComponent = withCalculateMessages(overrideMessagePropNames)(
                     onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
                 })(
                     withDisplayMessages()(
-                        withInternalChangeHandler()(CoordinateField),
+                        withInternalChangeHandler()(withFilterProps(defaultFilterProps)(CoordinateField)),
                     ),
                 ),
             ),
@@ -143,7 +146,7 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
                     onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
                 })(
                     withDisplayMessages()(
-                        withInternalChangeHandler()(PolygonField),
+                        withInternalChangeHandler()(withFilterProps(defaultFilterProps)(PolygonField)),
                     ),
                 ),
             ),
@@ -231,7 +234,7 @@ const FeedbackOutput = withFeedbackOutput()(CompleteField);
 const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
 const WarningOutput = withWarningOutput()(IndicatorOutput);
 const ErrorOutput = withErrorOutput()(WarningOutput);
-const SaveableDataEntry = withSaveButton(getSaveOptions)(ErrorOutput);
+const SaveableDataEntry = withSaveHandler()(withMainButton()(ErrorOutput));
 const NotesDataEntry = withNotes()(SaveableDataEntry);
 const CancelableDataEntry = withCancelButton(getCancelOptions)(NotesDataEntry);
 

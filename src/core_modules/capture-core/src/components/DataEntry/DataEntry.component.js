@@ -64,7 +64,7 @@ type Props = {
     itemId: string,
     formFoundation: ?RenderFoundation,
     completeButton?: ?React.Element<any>,
-    saveButton?: ?React.Element<any>,
+    mainButton?: ?React.Element<any>,
     cancelButton?: ?React.Element<any>,
     notes?: ?React.Element<any>,
     fields?: ?Array<FieldContainer>,
@@ -141,7 +141,7 @@ class DataEntry extends React.Component<Props> {
             itemId,
             formFoundation,
             completeButton,
-            saveButton,
+            mainButton,
             cancelButton,
             notes,
             completionAttempted,
@@ -228,12 +228,12 @@ class DataEntry extends React.Component<Props> {
 
                     {
                         (() => {
-                            if (saveButton) {
+                            if (mainButton) {
                                 return (
                                     <div
                                         className={classes.button}
                                     >
-                                        { saveButton }
+                                        { mainButton }
                                     </div>
                                 );
                             }

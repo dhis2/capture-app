@@ -5,12 +5,13 @@ import Paper from '@material-ui/core/Paper';
 import InfoIcon from '@material-ui/icons/InfoOutline';
 import i18n from '@dhis2/d2-i18n';
 import DataEntry from '../../../../components/DataEntry/DataEntry.container';
-import withSaveButton from '../../../../components/DataEntry/withSaveButton';
+import withSaveHandler from '../../../../components/DataEntry/withSaveHandler';
 import withCancelButton from '../../../../components/DataEntry/withCancelButton';
 import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
 import { placements } from '../../../../components/DataEntry/dataEntryField/dataEntryField.const';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
+import withMainButton from './withMainButton';
 
 import {
     withInternalChangeHandler,
@@ -35,7 +36,7 @@ import withIndicatorOutput from '../../../DataEntry/dataEntryOutput/withIndicato
 import withErrorOutput from '../../../DataEntry/dataEntryOutput/withErrorOutput';
 import withWarningOutput from '../../../DataEntry/dataEntryOutput/withWarningOutput';
 import TextEditor from '../../../FormFields/TextEditor/TextEditor.component';
-import { newEventSaveTypes, newEventSaveTypeDefinitions } from './newEventSaveTypes';
+import newEventSaveTypes from './newEventSaveTypes';
 import labelTypeClasses from './dataEntryFieldLabels.mod.css';
 import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 
@@ -78,27 +79,6 @@ const overrideMessagePropNames = {
     errorMessage: 'validationError',
 };
 
-const getSaveOptions = (props: Object) => {
-    const options: {color?: ?string, saveTypes?: ?Array<any>} = {
-        color: 'primary',
-    };
-
-    if (props.formHorizontal) {
-        options.saveTypes = [
-            newEventSaveTypeDefinitions[newEventSaveTypes.SAVEANDADDANOTHER],
-            newEventSaveTypeDefinitions[newEventSaveTypes.SAVEANDEXIT],
-        ];
-        return options;
-    }
-    if (props.saveTypes) {
-        options.saveTypes = props.saveTypes.map(saveType => newEventSaveTypeDefinitions[saveType]);
-        return options;
-    }
-
-    options.saveTypes = [newEventSaveTypeDefinitions[newEventSaveTypes.SAVEANDEXIT], newEventSaveTypeDefinitions[newEventSaveTypes.SAVEANDADDANOTHER]];
-    return options;
-};
-
 const getCancelOptions = () => ({
     color: 'primary',
 });
@@ -122,7 +102,7 @@ const baseComponentStylesVertical = {
 
 
 function defaultFilterProps(props: Object) {
-    const { formHorizontal, fieldOptions, validationError, ...passOnProps } = props;
+    const { formHorizontal, fieldOptions, validationError, modified, ...passOnProps } = props;
     return passOnProps;
 }
 
@@ -333,11 +313,11 @@ const FeedbackOutput = withFeedbackOutput()(CompleteField);
 const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
 const WarningOutput = withWarningOutput()(IndicatorOutput);
 const ErrorOutput = withErrorOutput()(WarningOutput);
-const SaveableDataEntry = withSaveButton(getSaveOptions)(ErrorOutput);
-const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
+const CancelableDataEntry = withCancelButton(getCancelOptions)(ErrorOutput);
+const SaveableDataEntry = withSaveHandler()(withMainButton()(CancelableDataEntry));
 
 type Props = {
-    formFoundation: ?RenderFoundation,
+    formFoundation: RenderFoundation,
     programName: string,
     orgUnitName: string,
     onUpdateField: (innerAction: ReduxAction<any, any>) => void,
@@ -357,7 +337,6 @@ type Props = {
     },
     theme: Theme,
     formHorizontal: ?boolean,
-    saveTypes?: ?Array<$Values<typeof newEventSaveTypes>>
 };
 
 class NewEventDataEntry extends Component<Props> {
@@ -435,12 +414,11 @@ class NewEventDataEntry extends Component<Props> {
             orgUnitName, // eslint-disable-line
             classes,
             formHorizontal,
-            saveTypes,
         } = this.props;
         return (
             <div>
                 <div>
-                    <CancelableDataEntry
+                    <SaveableDataEntry
                         id={'singleEvent'}
                         formFoundation={formFoundation}
                         onUpdateFormField={onUpdateField}
@@ -448,7 +426,6 @@ class NewEventDataEntry extends Component<Props> {
                         onCancel={onCancel}
                         onSave={this.handleSave}
                         formHorizontal={formHorizontal}
-                        saveTypes={saveTypes}
                         fieldOptions={this.fieldOptions}
                     />
                 </div>
