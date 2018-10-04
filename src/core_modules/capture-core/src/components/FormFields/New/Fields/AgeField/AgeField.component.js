@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import D2AgeField from '../../../../d2UiReactAdapters/AgeField/D2AgeField.component';
+import { AgeField as UIAgeField } from '../../../../d2UiReactAdapters';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
@@ -49,7 +49,7 @@ type Props = {
 const AgeField = (props: Props) => {
     const { ...passOnProps } = props;
     return (
-        <D2AgeField
+        <UIAgeField
             {...passOnProps}
         />
     );

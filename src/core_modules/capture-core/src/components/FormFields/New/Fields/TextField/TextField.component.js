@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { D2TextField } from '../../../../d2UiReactAdapters';
+import { TextField as UITextField } from '../../../../d2UiReactAdapters';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
@@ -43,7 +43,7 @@ class TextField extends Component<Props> {
         } = this.props;
 
         return (
-            <D2TextField
+            <UITextField
                 value={value || ''}
                 onChange={this.handleChange}
                 onBlur={this.handleBlur}

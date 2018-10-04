@@ -23,13 +23,11 @@ import {
     withCalculateMessages,
     withDisplayMessages,
     withFilterProps,
+    withDefaultFieldContainer,
+    withDefaultShouldUpdateInterface,
 } from '../../../FormFields/New';
 
-import withDefaultFieldContainer from '../../../D2Form/field/withDefaultFieldContainer';
 import withFeedbackOutput from '../../../../components/DataEntry/dataEntryOutput/withFeedbackOutput';
-import withDefaultShouldUpdateInterface from
-    '../../../D2Form/field/withDefaultShouldUpdateInterface';
-
 import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
 import withIndicatorOutput from '../../../DataEntry/dataEntryOutput/withIndicatorOutput';
 import withErrorOutput from '../../../DataEntry/dataEntryOutput/withErrorOutput';

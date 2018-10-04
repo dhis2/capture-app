@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import D2Polygon from '../../../d2UiReactAdapters/PolygonField/D2Polygon.component';
+import { PolygonField as UIPolygonField } from '../../../../d2UiReactAdapters';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
@@ -25,7 +25,7 @@ type Props = {
 const PolygonField = (props: Props) => {
     const { ...passOnProps } = props;
     return (
-        <D2Polygon
+        <UIPolygonField
             {...passOnProps}
         />
     );

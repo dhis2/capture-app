@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import D2Date from '../../../../d2UiReactAdapters/DateAndTimeFields/DateField/D2Date.component';
+import { DateField as UIDateField } from '../../../../../d2UiReactAdapters';
 import getCalendarTheme from '../getCalendarTheme';
 
 const getStyles = (theme: Theme) => ({
@@ -48,7 +48,7 @@ class DateField extends React.Component<Props, State> {
     render() {
         const { theme, ...passOnProps } = this.props;
         return (
-            <D2Date
+            <UIDateField
                 calendarTheme={this.calendarTheme}
                 {...passOnProps}
             />

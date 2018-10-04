@@ -30,11 +30,10 @@ const baseComponentStyles = {
     },
 };
 
-const getBaseProps = () => ({
-    style: {
-        width: '100%',
-    },
+const getBaseProps = (metaData: MetaDataElement) => ({
     styles: baseComponentStyles,
+    label: metaData.formName,
+    metaCompulsory: metaData.compulsory,
 });
 
 const getBaseConfigForField = (metaData: MetaDataElement) => ({
@@ -59,8 +58,8 @@ const getBaseFormHorizontalProps = (options: Object) => ({
     styles: baseComponentStylesVertical,
 });
 
-export const createProps = (props?: ?Object, options?: ?Object) => ({
-    ...getBaseProps(),
+export const createProps = (props?: ?Object, options: Object, metaData: MetaDataElement) => ({
+    ...getBaseProps(metaData),
     ...(options && options.formHorizontal ? getBaseFormHorizontalProps(options) : {}),
     ...props,
 });

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { D2TrueOnlyField } from '../../../../d2UiReactAdapters';
+import { TrueOnlyField as UITrueOnlyField } from '../../../../d2UiReactAdapters';
 
 const getStyles = (theme: Theme) => ({
     iconSelected: {
@@ -28,7 +28,7 @@ class TrueOnlyField extends React.Component<Props> {
     render() {
         const { onBlur, ...passOnProps } = this.props;
         return (
-            <D2TrueOnlyField
+            <UITrueOnlyField
                 onSelect={onBlur}
                 {...passOnProps}
             />

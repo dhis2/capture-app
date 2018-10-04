@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import i18n from '@dhis2/d2-i18n';
-import D2Date from '../../DateAndTimeFields/DateField/D2Date.component';
+import UIDate from '../../DateAndTimeFields/DateField/Date.component';
 import orientations from '../../constants/orientations.const';
 import withFocusSaver from '../../HOC/withFocusSaver';
 
@@ -17,7 +17,7 @@ class AgeDateInput extends Component<Props> {
     render() {
         const { value, orientation, ...passOnProps } = this.props;
         return (
-            <D2Date
+            <UIDate
                 value={value || ''}
                 placeholder={i18n.t('mm/dd/yyyy')}
                 calendarMaxMoment={moment()}

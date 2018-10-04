@@ -8,7 +8,6 @@ import withDataEntryField from '../../../../components/DataEntry/dataEntryField/
 import { placements } from '../../../../components/DataEntry/dataEntryField/dataEntryField.const';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
-import withDefaultFieldContainer from '../../../D2Form/field/withDefaultFieldContainer';
 import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 
 import {
@@ -21,10 +20,10 @@ import {
     PolygonField,
     withCalculateMessages,
     withDisplayMessages,
+    withDefaultFieldContainer,
+    withDefaultShouldUpdateInterface,
 } from '../../../FormFields/New';
 
-import withDefaultShouldUpdateInterface from
-    '../../../D2Form/field/withDefaultShouldUpdateInterface';
 import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
 import withNotes from '../../../DataEntry/withNotes';
 import withIndicatorOutput from '../../../DataEntry/dataEntryOutput/withIndicatorOutput';
