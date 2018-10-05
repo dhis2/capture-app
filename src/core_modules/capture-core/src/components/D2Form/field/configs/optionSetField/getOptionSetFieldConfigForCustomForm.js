@@ -1,21 +1,21 @@
 // @flow
-import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
-import { OptionSetSelectFieldForForm, OptionSetBoxesFieldForForm } from '../../Components';
+import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
+import { OptionSetSelectFieldForCustomForm, OptionSetBoxesFieldForCustomForm } from '../../Components';
 import { inputTypes as optionSetInputTypes } from '../../../../../metaData/OptionSet/optionSet.const';
 
-const getOptionSetFieldConfig = (metaData: MetaDataElement, options: Object) => {
+const getOptionSetFieldConfig = (metaData: MetaDataElement) => {
     const props = createProps({
         optionSet: metaData.optionSet,
         nullable: !metaData.compulsory,
         style: {
-            width: options.formHorizontal ? 210 : '100%',
+            width: 350,
         },
-    }, options, metaData);
+    }, metaData);
 
     return createFieldConfig({
         component: (metaData.optionSet.inputType === optionSetInputTypes.SELECT
-            ? OptionSetSelectFieldForForm
-            : OptionSetBoxesFieldForForm),
+            ? OptionSetSelectFieldForCustomForm
+            : OptionSetBoxesFieldForCustomForm),
         props,
     }, metaData);
 };

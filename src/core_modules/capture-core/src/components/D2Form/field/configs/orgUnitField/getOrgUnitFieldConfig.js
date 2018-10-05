@@ -1,5 +1,5 @@
 // @flow
-import { createFieldConfig, createProps } from '../configBase';
+import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { OrgUnitFieldForForm } from '../../Components';
 
 const getOrgUnitField = (metaData: MetaDataElement, options: Object) => {

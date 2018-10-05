@@ -41,6 +41,17 @@ class D2CustomForm extends React.Component<Props> {
         return eventListenerSpecsForCurrentNode;
     }
 
+
+    static renderField(field, customFormElementProps, onRenderField) {
+        return onRenderField({
+            ...field,
+            props: {
+                ...field.props,
+                customFormElementProps,
+            },
+        });
+    }
+
     eventListenerSpecs: Array<EventListenerSpec>;
     preProcessedSourceTree: React.Element<any>;
     constructor(props: Props) {
@@ -156,8 +167,9 @@ class D2CustomForm extends React.Component<Props> {
                     const fieldId = node.props.id;
                     const field = fields.find(f => f.id === fieldId);
                     if (field) {
-                        return onRenderField(field);
+                        return D2CustomForm.renderField(field, node.props.customFormElementProps, onRenderField);
                     }
+                    return null;
                 }
                 return path.defaultHandler();
             },

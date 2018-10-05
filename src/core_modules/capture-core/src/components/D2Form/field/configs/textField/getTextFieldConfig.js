@@ -1,5 +1,5 @@
 // @flow
-import { createFieldConfig, createProps } from '../configBase';
+import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { TextFieldForForm } from '../../Components';
 
 const getTextFieldConfig = (metaData: MetaDataElement, options: Object, extraProps?: ?Object) => {

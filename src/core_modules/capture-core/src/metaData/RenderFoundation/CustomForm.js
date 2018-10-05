@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import * as React from 'react';
-import { parseHtml } from 'react-html-parser-ultimate';
+import { parseHtml,  } from 'react-html-parser-ultimate';
 
 export default class CustomForm {
     _id: string;
@@ -30,15 +30,29 @@ export default class CustomForm {
         return this._data;
     }
 
-    transformNode = (node: Object) => {
+    transformNode = (node: Object, index: number, nodeToElementFn) => {
         if (node.name === 'input') {
-            const customId = node.attribs && node.attribs.id;
-            const matchResult = customId && /-[^-]+/.exec(customId);
+            const htmlElementId = node.attribs && node.attribs.id;
+            const matchResult = htmlElementId && /-[^-]+/.exec(htmlElementId);
             if (matchResult) {
                 const id = matchResult[0].replace('-', '');
-                return React.createElement('FormField', {
-                    id,
-                });
+                const inputElement = nodeToElementFn(node, index);
+
+                const style = inputElement.props && inputElement.props.style;
+                const className = inputElement.props && inputElement.props.className;
+
+                const customFormElementProps = {
+                    id: htmlElementId,
+                    style,
+                    className,
+                };
+
+                return React.createElement(
+                    'FormField', {
+                        customFormElementProps,
+                        id,
+                    },
+                );
             }
         }
         return undefined;

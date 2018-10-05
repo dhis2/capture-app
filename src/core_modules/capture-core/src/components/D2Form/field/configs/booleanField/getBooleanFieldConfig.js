@@ -1,6 +1,6 @@
 // @flow
 import { orientations } from '../../../../FormFields/New';
-import { createFieldConfig, createProps } from '../configBase';
+import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { BooleanFieldForForm } from '../../Components';
 
 const getBooleanField = (metaData: MetaDataElement, options: Object) => {

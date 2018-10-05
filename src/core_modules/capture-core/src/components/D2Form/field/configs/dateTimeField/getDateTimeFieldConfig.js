@@ -1,6 +1,6 @@
 // @flow
 import { orientations } from '../../../../FormFields/New';
-import { createFieldConfig, createProps } from '../configBase';
+import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { DateTimeFieldForForm } from '../../Components';
 
 const getDateTimeFieldConfig = (metaData: MetaDataElement, options: Object) => {

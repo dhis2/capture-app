@@ -46,6 +46,7 @@ type Props = {
     formBuilderId: string,
     formHorizontal: boolean,
     fieldOptions?: ?Object,
+    customForm: MetadataCustomForm,
 };
 
 class D2SectionFields extends Component<Props> {
@@ -66,12 +67,19 @@ class D2SectionFields extends Component<Props> {
     }
 
     buildFormFields(): Array<FieldConfig> {
-        const elements = this.props.fieldsMetaData;
+        const { fieldsMetaData, customForm, fieldOptions } = this.props;
 
         // $FlowSuppress :does not recognize filter removing nulls
-        return Array.from(elements.entries())
+        return Array.from(fieldsMetaData.entries())
             .map(entry => entry[1])
-            .map(metaDataElement => buildField(metaDataElement, { formHorizontal: this.props.formHorizontal, ...this.props.fieldOptions }))
+            .map(metaDataElement => buildField(
+                metaDataElement,
+                {
+                    formHorizontal: this.props.formHorizontal,
+                    ...fieldOptions,
+                },
+                !!customForm,
+            ))
             .filter(field => field);
     }
 
