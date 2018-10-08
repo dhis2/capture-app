@@ -3,7 +3,7 @@ import { replace } from 'react-router-redux';
 import {
     actionTypes as newEventPageSelectorActionTypes,
     batchActionTypes as newEventPageSelectorBatchActionTypes,
-} from './NewEventSelector.actions';
+} from './selectorLevel.actions';
 
 const getArguments = (programId: string, orgUnitId: string) => {
     const argArray = [];

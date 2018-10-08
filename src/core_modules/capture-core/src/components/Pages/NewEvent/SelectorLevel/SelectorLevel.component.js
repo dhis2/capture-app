@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 
 import QuickSelector from '../../../QuickSelector/QuickSelector.container';
-import NewEvent from '../NewEvent.container';
+import IsSelectionsCompleteLevel from '../IsSelectionsCompleteLevel/IsSelectionsCompleteLevel.container';
 import WarningDialog from './WarningDialog.components';
-import withLoadHandler from '../withLoadHandler';
+import withLoadHandler from './withLoadHandler';
 import i18n from '@dhis2/d2-i18n';
 
 type Props = {
@@ -16,7 +16,6 @@ type Props = {
     onResetAllCategoryOptions: () => void,
     onStartAgain: () => void,
     onResetProgramId: (baseAction: ReduxAction<any, any>) => void,
-    selectionsIsComplete: boolean,
     formInputInProgess: boolean,
     onResetDataEntry: () => void,
 };
@@ -30,7 +29,7 @@ type State = {
     openNewEventWarning: boolean;
 };
 
-class EditEventSelector extends Component<Props, State> {
+class SelectorLevel extends Component<Props, State> {
     handleOpenStartAgainWarning: () => void;
     handleOpenOrgUnitWarning: () => void;
     handleOpenProgramWarning: () => void;
@@ -156,7 +155,7 @@ class EditEventSelector extends Component<Props, State> {
                     onStartAgain={this.handleOpenStartAgainWarning}
                     onClickNew={this.handleClickNew}
                 />
-                <NewEvent />
+                <IsSelectionsCompleteLevel />
                 <WarningDialog onAcceptClick={this.handleAcceptStartAgain} open={this.state.openStartAgainWarning} onClose={this.handleClose} titleText={i18n.t('Start Again')} contentText={i18n.t('Are you sure? All unsaved data will be lost')} />
                 <WarningDialog onAcceptClick={this.handleAcceptOrgUnit} open={this.state.openOrgUnitWarning} onClose={this.handleClose} titleText={i18n.t('Reset Organisation Unit')} contentText={i18n.t('Are you sure? All unsaved data will be lost')} />
                 <WarningDialog onAcceptClick={this.handleAcceptProgram} open={!!this.state.openProgramWarning} onClose={this.handleClose} titleText={i18n.t('Reset Program')} contentText={i18n.t('Are you sure? All unsaved data will be lost')} />
@@ -167,4 +166,4 @@ class EditEventSelector extends Component<Props, State> {
     }
 }
 
-export default withLoadHandler()(EditEventSelector);
+export default withLoadHandler()(SelectorLevel);

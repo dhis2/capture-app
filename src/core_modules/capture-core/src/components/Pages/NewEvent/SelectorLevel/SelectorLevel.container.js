@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
-import NewEventSelector from './NewEventSelector.component';
+import SelectorLevel from './SelectorLevel.component';
 import {
     resetOrgUnitIdFromNewEventPage,
     setOrgUnitFromNewEventPage,
@@ -12,7 +12,7 @@ import {
     resetAllCategoryOptionsFromNewEventPage,
     batchActionTypes,
     resetDataEntry,
-} from './NewEventSelector.actions';
+} from './selectorLevel.actions';
 import { resetProgramIdBase } from '../../../QuickSelector/actions/QuickSelector.actions';
 
 const newEventDataEntryHasChanges = (state: ReduxState) => {
@@ -36,8 +36,9 @@ const newEventDataEntryHasChanges = (state: ReduxState) => {
 const mapStateToProps = (state: ReduxState) => {
     const formInputInProgess = state.currentSelections.complete && newEventDataEntryHasChanges(state);
     return {
-        selectionsIsComplete: state.currentSelections.complete,
         formInputInProgess,
+        isLoading: state.newEventPage.isLoading,
+        selectionsError: state.newEventPage.selectionsError,
     };
 };
 
@@ -81,4 +82,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowSuppress
-export default connect(mapStateToProps, mapDispatchToProps)(NewEventSelector);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectorLevel);

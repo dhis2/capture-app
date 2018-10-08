@@ -4,7 +4,7 @@
  */
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import LoadingMask from '../../LoadingMasks/LoadingMask.component';
+import LoadingMask from '../../../LoadingMasks/LoadingMask.component';
 
 const styles = () => ({
     loaderContainer: {

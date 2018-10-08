@@ -4,10 +4,10 @@ import { actionTypes as editEventActionTypes } from '../../components/Pages/Edit
 import { actionTypes as mainPageSelectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
 import { actionTypes as setOrgUnitActionTypes } from '../../components/QuickSelector/actions/QuickSelector.actions';
 import {
-    actionTypes as newEventSelectionActionTypes,
-} from '../../components/Pages/NewEvent/newEventSelections.actions';
+    dataEntryUrlActionTypes as newEventDataEntryUrlActionTypes,
+} from '../../components/Pages/NewEvent';
 import {
-    actionTypes as mainPageSelectorActionTypes
+    actionTypes as mainPageSelectorActionTypes,
 } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
 
 export const organisationUnitDesc = createReducerDescription({
@@ -31,7 +31,7 @@ export const organisationUnitDesc = createReducerDescription({
         };
         return newState;
     },
-    [newEventSelectionActionTypes.SET_ORG_UNIT_BASED_ON_URL]: (state, action) => {
+    [newEventDataEntryUrlActionTypes.SET_ORG_UNIT_BASED_ON_URL]: (state, action) => {
         const newState = {
             ...state,
             [action.payload.id]: action.payload,

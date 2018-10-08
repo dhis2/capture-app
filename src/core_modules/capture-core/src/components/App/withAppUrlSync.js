@@ -8,7 +8,7 @@ import {
 } from '../Pages/MainPage/mainSelections.actions';
 import {
     updateSelectionsFromUrl as updateSelectionsFromUrlForNewEvent,
-} from '../Pages/NewEvent/newEventSelections.actions';
+} from '../Pages/NewEvent';
 import {
     editEventFromUrl as editEventFromUrlForNewEvent,
 } from '../Pages/EditEvent/editEvent.actions';

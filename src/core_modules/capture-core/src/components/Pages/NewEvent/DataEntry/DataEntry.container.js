@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
-import NewEventDataEntry from './NewEventDataEntry.component';
+import DataEntry from './DataEntry.component';
 import {
     startAsyncUpdateFieldForNewEvent,
     startRunRulesOnUpdateForNewSingleEvent,
@@ -11,11 +11,10 @@ import {
     batchActionTypes,
     requestSaveNewEventAddAnother,
     setNewEventSaveTypes,
-} from './newEventDataEntry.actions';
+} from './actions/dataEntry.actions';
 import {
     makeProgramNameSelector,
-    makeFormFoundationSelector,
-} from './newEventDataEntry.selector';
+} from './dataEntry.selectors';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
@@ -23,23 +22,16 @@ import { saveTypes } from './newEventSaveTypes';
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
-    const formFoundationSelector = makeFormFoundationSelector();
 
-    const mapStateToProps = (state: ReduxState) => {
-        const formFoundation = formFoundationSelector(state);
-
-        return {
-            saveTypes: state.newEventPage.saveTypes,
-            formHorizontal: !!state.newEventPage.formHorizontal,
-            ready: !state.newEventPage.dataEntryIsLoading,
-            error: !formFoundation ?
-                i18n.t('This is not an event program or the metadata is corrupt. See log for details.') : null,
-            formFoundation,
-            programName: programNameSelector(state),
-            orgUnitName: state.organisationUnits[state.currentSelections.orgUnitId] &&
-                state.organisationUnits[state.currentSelections.orgUnitId].name,
-        };
-    };
+    const mapStateToProps = (state: ReduxState, props: Object) => ({
+        saveTypes: state.newEventPage.saveTypes,
+        ready: !state.newEventPage.dataEntryIsLoading,
+        error: !props.formFoundation ?
+            i18n.t('This is not an event program or the metadata is corrupt. See log for details.') : null,
+        programName: programNameSelector(state),
+        orgUnitName: state.organisationUnits[state.currentSelections.orgUnitId] &&
+            state.organisationUnits[state.currentSelections.orgUnitId].name,
+    });
 
     // $FlowSuppress
     return mapStateToProps;
@@ -81,5 +73,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 
 // $FlowSuppress
 export default connect(makeMapStateToProps, mapDispatchToProps)(
-    withLoadingIndicator()(withErrorMessageHandler()(NewEventDataEntry)),
+    withLoadingIndicator()(withErrorMessageHandler()(DataEntry)),
 );

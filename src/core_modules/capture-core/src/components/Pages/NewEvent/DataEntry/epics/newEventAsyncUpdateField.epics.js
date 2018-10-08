@@ -8,7 +8,7 @@ import {
     actionTypes,
     startRunRulesOnUpdateForNewSingleEvent,
     batchActionTypes,
-} from '../newEventDataEntry.actions';
+} from '../actions/dataEntry.actions';
 import {
     updateFormField,
     asyncUpdateFieldFailed,

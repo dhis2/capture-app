@@ -6,15 +6,6 @@ import programCollection from '../../../../metaDataMemoryStores/programCollectio
 
 const programIdSelector = state => state.currentSelections.programId;
 
-export const makeProgramNameSelector = () => createSelector(
-    programIdSelector,
-    (programId: string) => {
-        const program = programCollection.get(programId);
-        const programName = (program && program.name) || '';
-        return programName;
-    },
-);
-
 export const makeFormFoundationSelector = () => createSelector(
     programIdSelector,
     (programId: string) => {

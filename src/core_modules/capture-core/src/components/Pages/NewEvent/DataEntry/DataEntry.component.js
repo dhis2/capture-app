@@ -355,7 +355,7 @@ type Props = {
     },
     theme: Theme,
     formHorizontal: ?boolean,
-    saveTypes?: ?Array<$Values<typeof newEventSaveTypes>>
+    saveTypes?: ?Array<$Values<typeof newEventSaveTypes>>,
 };
 
 class NewEventDataEntry extends Component<Props> {
@@ -466,7 +466,11 @@ class NewEventDataEntry extends Component<Props> {
 
 
     render() {
-        return this.props.formHorizontal ? this.renderHorizontal() : this.renderVertical();
+        return (
+            <div>
+                {this.props.formHorizontal ? this.renderHorizontal() : this.renderVertical()}
+            </div>
+        );
     }
 }
 

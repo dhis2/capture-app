@@ -3,7 +3,7 @@ import { replace } from 'react-router-redux';
 import {
     actionTypes as newEventDataEntryActionTypes,
     startSaveNewEventAfterReturnedToMainPage,
-} from '../newEventDataEntry.actions';
+} from '../actions/dataEntry.actions';
 
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';

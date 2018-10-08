@@ -6,6 +6,9 @@ import Button from '../../../Buttons/Button.component';
 import i18n from '@dhis2/d2-i18n';
 
 const getStyles = (theme: Theme) => ({
+    container: {
+        padding: 24,
+    },
     contents: {
         display: 'flex',
         justifyContent: 'center',
@@ -22,11 +25,22 @@ const getStyles = (theme: Theme) => ({
     buttonContainer: {
         paddingRight: theme.spacing.unit * 2,
     },
+    headerContainer: {
+        paddingTop: 9,
+        paddingBottom: 20,
+    },
+    header: {
+        flexGrow: 1,
+        ...theme.typography.title,
+        fontSize: 16,
+        fontWeight: 500,
+    },
 });
 type Props = {
     isProgramSelected: boolean,
     isOrgUnitSelected: boolean,
     classes: {
+        container: string,
         contents: string,
         buttonRow: string,
         buttonContainer: string,
@@ -35,6 +49,19 @@ type Props = {
 };
 
 class DataEntrySelectionsIncomplete extends Component<Props> {
+    renderHeader() {
+        return (
+            <div
+                className={this.props.classes.headerContainer}
+            >
+                <div
+                    className={this.props.classes.header}
+                >
+                    {i18n.t('New event')}
+                </div>
+            </div>
+        );
+    }
     getText() {
         let text;
         const { isProgramSelected, isOrgUnitSelected } = this.props;
@@ -54,7 +81,8 @@ class DataEntrySelectionsIncomplete extends Component<Props> {
     render() {
         const { classes, onCancel } = this.props;
         return (
-            <div>
+            <div className={classes.container}>
+                {this.renderHeader()}
                 <Paper
                     elevation={0}
                 >

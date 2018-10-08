@@ -3,12 +3,13 @@ import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import { actionTypes as mainSelectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
 import {
-    actionTypes as newEventSelectionActionTypes,
-} from '../../components/Pages/NewEvent/newEventSelections.actions';
+    dataEntryUrlActionTypes as newEventDataEntryUrlActionTypes,
+    dataEntryActionTypes as newEventDataEntryActionTypes,
+    selectorActionTypes as newEventPageSelectorActionTypes,
+    selectionsIncompleteActionTypes as newEventPageSelectionsIncompleteActionTypes,
+
+} from '../../components/Pages/NewEvent';
 import { actionTypes as tempSelectorActionTypes } from '../../components/Pages/MainPage/tempSelector.actions';
-import {
-    actionTypes as newEventDataEntryActionTypes,
-} from '../../components/Pages/NewEvent/DataEntry/newEventDataEntry.actions';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
 import {
     actionTypes as editEventDataEntryActionTypes,
@@ -24,9 +25,6 @@ import {
 import {
     actionTypes as editEventPageSelectorActionTypes,
 } from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
-import {
-    actionTypes as newEventPageSelectorActionTypes,
-} from '../../components/Pages/NewEvent/NewEventSelector/NewEventSelector.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
@@ -37,7 +35,7 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         const newState = { ...state, page: action.payload.nextPage };
         return newState;
     },
-    [newEventSelectionActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
+    [newEventDataEntryUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
         const newState = { ...state, page: action.payload.nextPage };
         return newState;
     },
@@ -75,7 +73,7 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         newState.locationSwitchInProgress = true;
         return newState;
     },
-    [newEventDataEntryActionTypes.CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE]: (state) => {
+    [newEventPageSelectionsIncompleteActionTypes.CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;
         newState.locationSwitchInProgress = true;

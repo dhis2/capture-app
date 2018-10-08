@@ -1,6 +1,6 @@
 // @flow
-import { actionCreator } from '../../../../actions/actions.utils';
-import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
+import { actionCreator } from '../../../../../actions/actions.utils';
+import { methods } from '../../../../../trackerOffline/trackerOfflineConfig.const';
 
 export const batchActionTypes = {
     UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH: 'UpdateFieldForNewSingleEventActionsBatch',
@@ -21,8 +21,6 @@ export const actionTypes = {
     NEW_EVENT_SAVED_AFTER_RETURNED_TO_MAIN_PAGE: 'SingleNewEventSavedAfterReturnedToMainPage',
     SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE: 'SaveFailedForNewSingleEventAfterReturnedToMainPage',
     SELECTIONS_NOT_COMPLETE_OPENING_NEW_EVENT: 'SelectionsNotCompleteOpeningNewEvent',
-    CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE: 'CancelNewEventFromIncompleteSelectionAndReturnToMainPage',
-    SET_NEW_EVENT_FORM_LAYOUT_DIRECTION: 'SetNewEventFormLayoutDirection',
     START_ASYNC_UPDATE_FIELD_FOR_NEW_EVENT: 'StartAsyncUpdateFieldForNewEvent',
     REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER: 'RequestSaveNewEventAddAnother',
     START_SAVE_NEW_EVENT_ADD_ANOTHER: 'startSaveNewEventAddAnother',
@@ -64,12 +62,6 @@ export const cancelNewEventUpdateWorkingList = () =>
 
 export const selectionsNotCompleteOpeningNewEvent = () =>
     actionCreator(actionTypes.SELECTIONS_NOT_COMPLETE_OPENING_NEW_EVENT)();
-
-export const cancelNewEventFromIncompleteSelectionAndReturnToMainPage = () =>
-    actionCreator(actionTypes.CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE)();
-
-export const setNewEventFormLayoutDirection = (formHorizontal: boolean) =>
-    actionCreator(actionTypes.SET_NEW_EVENT_FORM_LAYOUT_DIRECTION)({ formHorizontal });
 
 export const setNewEventSaveTypes = (newSaveTypes: ?Array<$Values<typeof saveTypes>>) =>
     actionCreator(actionTypes.SET_NEW_EVENT_SAVE_TYPES)({ saveTypes: newSaveTypes });

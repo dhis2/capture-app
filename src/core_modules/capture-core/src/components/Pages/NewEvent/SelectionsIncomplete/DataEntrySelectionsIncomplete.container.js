@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import DataEntrySelectionsIncomplete from './DataEntrySelectionsIncomplete.component';
-import { cancelNewEventFromIncompleteSelectionAndReturnToMainPage } from './newEventDataEntry.actions';
+import { cancelNewEventFromIncompleteSelectionAndReturnToMainPage } from './dataEntrySelectionsIncomplete.actions';
 
 const mapStateToProps = (state: ReduxState) => ({
     isProgramSelected: !!state.currentSelections.programId,
