@@ -8709,9 +8709,9 @@ react-event-listener@^0.6.0:
     prop-types "^15.6.0"
     warning "^4.0.1"
 
-react-html-parser-ultimate@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/react-html-parser-ultimate/-/react-html-parser-ultimate-1.0.3.tgz#654f19ff666250e6a1fbd93708fd14988ccffc15"
+react-html-parser-ultimate@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-html-parser-ultimate/-/react-html-parser-ultimate-1.0.5.tgz#9cb6ad7ebc175f716a1780cf33fc9700eaa0ea56"
   dependencies:
     htmlparser2 "^3.9.2"
 
