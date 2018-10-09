@@ -42,7 +42,7 @@
     "react-dnd": "^5.0.0",
     "react-dnd-html5-backend": "^5.0.1",
     "react-dom": "^16.3.2",
-    "react-html-parser-ultimate": "^1.0.3",
+    "react-html-parser-ultimate": "^1.0.4",
     "react-infinite-calendar": "^2.3.1",
     "react-leaflet": "^1.8",
     "react-leaflet-draw": "^0.18.0",

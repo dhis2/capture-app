@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import * as React from 'react';
-import { parseHtml,  } from 'react-html-parser-ultimate';
+import { parseHtml } from 'react-html-parser-ultimate';
 
 export default class CustomForm {
     _id: string;
