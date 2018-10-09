@@ -1,11 +1,16 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import * as React from 'react';
-import { parseHtml,  } from 'react-html-parser-ultimate';
+import { parseHtml } from 'react-html-parser-ultimate';
+
+type Data = {
+    scripts: Array<string>,
+    elements: Array<React.Node>,
+};
 
 export default class CustomForm {
     _id: string;
-    _data: React.Element<any>;
+    _data: Data;
 
     constructor(initFn: ?(_this: CustomForm) => void) {
         this._id = '';
@@ -26,7 +31,7 @@ export default class CustomForm {
         });
         this._data = data;
     }
-    get data(): React.Element<any> {
+    get data(): Data {
         return this._data;
     }
 

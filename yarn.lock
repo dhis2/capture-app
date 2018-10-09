@@ -8709,9 +8709,9 @@ react-event-listener@^0.6.0:
     prop-types "^15.6.0"
     warning "^4.0.1"
 
-react-html-parser-ultimate@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/react-html-parser-ultimate/-/react-html-parser-ultimate-1.0.5.tgz#9cb6ad7ebc175f716a1780cf33fc9700eaa0ea56"
+react-html-parser-ultimate@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/react-html-parser-ultimate/-/react-html-parser-ultimate-1.0.6.tgz#8f38fc74a7dde1df2b52dfeb56089ab70517e99e"
   dependencies:
     htmlparser2 "^3.9.2"
 
@@ -8925,9 +8925,9 @@ react-tiny-virtual-list@^2.0.0:
   dependencies:
     prop-types "^15.5.7"
 
-react-transform-tree@^1.0.33:
-  version "1.0.33"
-  resolved "https://registry.yarnpkg.com/react-transform-tree/-/react-transform-tree-1.0.33.tgz#9fe7da63768f4e634d968c2142c67526ad1622ce"
+react-transform-tree@^1.0.34:
+  version "1.0.34"
+  resolved "https://registry.yarnpkg.com/react-transform-tree/-/react-transform-tree-1.0.34.tgz#89be0454089fb994107f2b7c244a85e3cfe89d4c"
 
 react-transition-group@^1.1.3, react-transition-group@^1.2.1:
   version "1.2.1"

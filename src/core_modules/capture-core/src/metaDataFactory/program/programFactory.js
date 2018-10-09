@@ -142,6 +142,7 @@ const propertyNames = {
 };
 
 const OPTION_SET_NOT_FOUND = 'Optionset not found';
+const CUSTOM_FORM_TEMPLATE_ERROR = 'Error in custom form template';
 
 function getDataElementType(d2ValueType: string) {
     const converters = {
@@ -261,13 +262,18 @@ function buildStage(d2ProgramStage: CachedProgramStage) {
 
     if (d2ProgramStage.formType === 'CUSTOM' && d2ProgramStage.dataEntryForm) {
         stage.addSection(buildMainSection(d2ProgramStage.programStageDataElements));
-        stage.customForm = new CustomForm((_this) => {
-            _this.id = d2ProgramStage.dataEntryForm.id;
-            _this.data = d2ProgramStage.dataEntryForm.htmlCode;
-        });
-    }
-    if (isNonEmptyArray(d2ProgramStage.programStageSections)) {
-        const d2ProgramStageDataElementsAsObject = convertProgramStageDataElementsToObject(d2ProgramStage.programStageDataElements);
+        const dataEntryForm = d2ProgramStage.dataEntryForm;
+        try {
+            stage.customForm = new CustomForm((_this) => {
+                _this.id = dataEntryForm.id;
+                _this.data = dataEntryForm.htmlCode;
+            });
+        } catch (error) {
+            log.error(errorCreator(CUSTOM_FORM_TEMPLATE_ERROR)({ template: dataEntryForm.htmlCode, error }));
+        }
+    } else if (isNonEmptyArray(d2ProgramStage.programStageSections)) {
+        const d2ProgramStageDataElementsAsObject =
+            convertProgramStageDataElementsToObject(d2ProgramStage.programStageDataElements);
         // $FlowSuppress
         d2ProgramStage.programStageSections.forEach((section: CachedProgramStageSection) => {
             stage.addSection(buildSection(d2ProgramStageDataElementsAsObject, {

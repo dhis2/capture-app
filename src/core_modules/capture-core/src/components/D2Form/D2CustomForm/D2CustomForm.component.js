@@ -1,6 +1,8 @@
 // @flow
 import * as React from 'react';
+import log from 'loglevel';
 import { walk, kinds } from 'react-transform-tree';
+import errorCreator from '../../../utils/errorCreator';
 import MetadataCustomForm from '../../../metaData/RenderFoundation/CustomForm';
 import type { FieldConfig } from '../../../__TEMP__/FormBuilderExternalState.component';
 
@@ -18,7 +20,10 @@ type EventListenerSpec = {
 };
 
 class D2CustomForm extends React.Component<Props> {
-    static getEventListenersForCurrentNode(nodeProps: Object) {
+    static errorMessages = {
+        PRE_PROCESS_FAILED: 'Could not pre process custom form source tree',
+    };
+    static getEventListenersForCurrentNode(nodeProps: Object): Array<string> {
         const eventListeners =
             Object
                 .keys(nodeProps)
@@ -26,7 +31,10 @@ class D2CustomForm extends React.Component<Props> {
         return eventListeners;
     }
 
-    static getEventListenerSpecsForCurrentNode(eventListeners: Array<string>, nodeProps: Object, id: number) {
+    static getEventListenerSpecsForCurrentNode(
+        eventListeners: Array<string>,
+        nodeProps: Object,
+        id: number): Array<Object> {
         const eventListenerSpecsForCurrentNode = eventListeners
             .map((propName) => {
                 const handler = nodeProps[propName];
@@ -41,8 +49,10 @@ class D2CustomForm extends React.Component<Props> {
         return eventListenerSpecsForCurrentNode;
     }
 
-
-    static renderField(field, customFormElementProps, onRenderField) {
+    static renderField(
+        field: FieldConfig,
+        customFormElementProps: Object,
+        onRenderField: (field: FieldConfig) => React.Node) {
         return onRenderField({
             ...field,
             props: {
@@ -53,7 +63,7 @@ class D2CustomForm extends React.Component<Props> {
     }
 
     eventListenerSpecs: Array<EventListenerSpec>;
-    preProcessedSourceTree: React.Element<any>;
+    preProcessedSourceTree: Array<React.Node>;
     constructor(props: Props) {
         super(props);
         this.preProcessSourceTree();
@@ -73,46 +83,55 @@ class D2CustomForm extends React.Component<Props> {
         const sourceTree = specs.data.elements;
         let autoId = 1;
         let eventListenerSpecs = [];
+        let preProcessedSourceTree = [];
+        try {
+            // $FlowSuppress
+            preProcessedSourceTree = walk(sourceTree, {
+                [kinds.DOM_ELEMENT]: (path) => {
+                    const { node } = path;
+                    const { props: nodeProps } = node;
+                    if (nodeProps) {
+                        const eventListeners = D2CustomForm.getEventListenersForCurrentNode(nodeProps);
+                        if (eventListeners.length > 0) {
+                            const eventListenerSpecsForCurrentNode =
+                                D2CustomForm.getEventListenerSpecsForCurrentNode(eventListeners, nodeProps, autoId);
+                            eventListenerSpecs = [...eventListenerSpecs, ...eventListenerSpecsForCurrentNode];
+                            const passOnNodeProps = Object
+                                .keys(nodeProps)
+                                .reduce((accPassOnProps, key) => {
+                                    if (!eventListeners.includes(key)) {
+                                        accPassOnProps[key] = nodeProps[key];
+                                    }
+                                    return accPassOnProps;
+                                }, {});
 
-
-        const preProcessedSourceTree = walk(sourceTree, {
-            [kinds.DOM_ELEMENT]: (path) => {
-                const { node } = path;
-                const { props: nodeProps } = node;
-                if (nodeProps) {
-                    const eventListeners = D2CustomForm.getEventListenersForCurrentNode(nodeProps);
-                    if (eventListeners.length > 0) {
-                        const eventListenerSpecsForCurrentNode = D2CustomForm.getEventListenerSpecsForCurrentNode(eventListeners, nodeProps, autoId);
-                        eventListenerSpecs = [...eventListenerSpecs, ...eventListenerSpecsForCurrentNode];
-                        const passOnNodeProps = Object
-                            .keys(nodeProps)
-                            .reduce((accPassOnProps, key) => {
-                                if (!eventListeners.includes(key)) {
-                                    accPassOnProps[key] = nodeProps[key];
-                                }
-                                return accPassOnProps;
-                            }, {});
-
-                        const clonedElement = React.cloneElement(
-                            node,
-                            {
-                                ...passOnNodeProps,
-                                'data-custom-form-id': autoId,
-                            },
-                            ...path.walkChildren(),
-                        );
-                        autoId += 1;
-                        return clonedElement;
+                            const clonedElement = React.cloneElement(
+                                node,
+                                {
+                                    ...passOnNodeProps,
+                                    'data-custom-form-id': autoId,
+                                },
+                                // $FlowSuppress
+                                ...path.walkChildren(),
+                            );
+                            autoId += 1;
+                            return clonedElement;
+                        }
                     }
-                }
 
-                return React.cloneElement(
-                    node,
-                    node.props,
-                    ...path.walkChildren(),
-                );
-            },
-        });
+                    return React.cloneElement(
+                        node,
+                        node.props,
+                        // $FlowSuppress
+                        ...path.walkChildren(),
+                    );
+                },
+            });
+        } catch (error) {
+            log.error(errorCreator(D2CustomForm.errorMessages.PRE_PROCESS_FAILED)({ sourceTree, error }));
+            eventListenerSpecs = [];
+            preProcessedSourceTree = [];
+        }
 
         this.eventListenerSpecs = eventListenerSpecs;
         this.preProcessedSourceTree = preProcessedSourceTree;
@@ -126,6 +145,7 @@ class D2CustomForm extends React.Component<Props> {
                 domScriptElement.type = 'text/javascript';
                 domScriptElement.async = true;
                 domScriptElement.innerHTML = scriptData;
+                // $FlowSuppress
                 document.body.appendChild(domScriptElement);
             });
     }
@@ -137,6 +157,7 @@ class D2CustomForm extends React.Component<Props> {
                 const handlerRef = () => { eval(spec.handler); } //eslint-disable-line
                 document
                     .querySelector(`[data-custom-form-id="${spec.id}"]`)
+                    // $FlowSuppress
                     .addEventListener(spec.type, handlerRef);
 
                 return {
@@ -152,6 +173,7 @@ class D2CustomForm extends React.Component<Props> {
             .forEach((spec) => {
                 document
                     .querySelector(`[data-custom-form-id="${spec.id}"]`)
+                    // $FlowSuppress
                     .removeEventListener(spec.type, spec.handlerRef);
             });
     }
@@ -160,6 +182,7 @@ class D2CustomForm extends React.Component<Props> {
         const { fields, onRenderField } = this.props;
         const sourceTree = this.preProcessedSourceTree;
 
+        // $FlowSuppress
         const transformedTree = walk(sourceTree, {
             [kinds.DOM_ELEMENT]: (path) => {
                 const { node } = path;
