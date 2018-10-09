@@ -30,6 +30,7 @@ export const actionTypes = {
     SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER: 'SaveFailedForNewEventAddAnother',
     SET_NEW_EVENT_SAVE_TYPES: 'SetNewEventSaveTypes',
     RESET_DATA_ENTRY: 'ResetDataEntryForNewEvent',
+    ADD_NEW_EVENT_NOTE: 'AddNewEventNote',
 };
 
 export const startRunRulesOnUpdateForNewSingleEvent = (actionData: { payload: Object}) =>
@@ -73,6 +74,9 @@ export const setNewEventFormLayoutDirection = (formHorizontal: boolean) =>
 
 export const setNewEventSaveTypes = (newSaveTypes: ?Array<$Values<typeof saveTypes>>) =>
     actionCreator(actionTypes.SET_NEW_EVENT_SAVE_TYPES)({ saveTypes: newSaveTypes });
+
+export const addNewEventNote = (itemId: string, dataEntryId: string, note: string) =>
+    actionCreator(actionTypes.ADD_NEW_EVENT_NOTE)({ itemId, dataEntryId, note });
 
 export const requestSaveNewEventAddAnother = (eventId: string, dataEntryId: string, formFoundation: Object) =>
     actionCreator(actionTypes.REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER)({

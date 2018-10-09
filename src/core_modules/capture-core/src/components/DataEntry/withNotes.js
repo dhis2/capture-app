@@ -113,7 +113,7 @@ const getNotes = (InnerComponent: React.ComponentType<any>) =>
                     <TextEditor onBlur={this.onNewNoteEditorBlur} value={this.state.value} containerClassName={classes.textEditorContainer} />
                     <div className={classes.newCommentButtonContainer}>
                         <Button onClick={this.handleAddNote} color="primary">
-                            {i18n.t('Save comment')}
+                            {i18n.t('Add comment')}
                         </Button>
                         <Button onClick={this.toggleIsOpen}>
                             {i18n.t('Cancel')}

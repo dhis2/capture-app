@@ -12,6 +12,8 @@ import { placements } from '../../../../components/DataEntry/dataEntryField/data
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import withMainButton from './withMainButton';
+import getNoteValidatorContainers from './fieldValidators/note.validatorContainersGetter';
+import DataEntryNotes from '../../../DataEntry/DataEntryNotes.container';
 
 import {
     withInternalChangeHandler,
@@ -35,7 +37,6 @@ import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
 import withIndicatorOutput from '../../../DataEntry/dataEntryOutput/withIndicatorOutput';
 import withErrorOutput from '../../../DataEntry/dataEntryOutput/withErrorOutput';
 import withWarningOutput from '../../../DataEntry/dataEntryOutput/withWarningOutput';
-import TextEditor from '../../../FormFields/TextEditor/TextEditor.component';
 import newEventSaveTypes from './newEventSaveTypes';
 import labelTypeClasses from './dataEntryFieldLabels.mod.css';
 import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
@@ -116,46 +117,6 @@ const createComponentProps = (props: Object, componentProps: Object) => ({
     ...getBaseComponentProps(props),
     ...componentProps,
 });
-
-const buildNoteSettingsFn = () => {
-    const noteComponent =
-        withCalculateMessages()(
-            withFocusSaver()(
-                withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.noteLabel}`,
-
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(
-                                    withFilterProps(defaultFilterProps)(TextEditor),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
-    const noteSettings = (props: Object) => ({
-        component: noteComponent,
-        componentProps: createComponentProps(props, {
-            style: {
-                width: '100%',
-            },
-            label: 'Comment',
-        }),
-        propName: 'notes',
-        hidden: props.formHorizontal,
-        validatorContainers: [
-        ],
-        meta: {
-            placement: placements.BOTTOM,
-        },
-    });
-    return noteSettings;
-};
 
 const buildReportDateSettingsFn = () => {
     const reportDateComponent =
@@ -305,7 +266,41 @@ const buildCompleteFieldSettingsFn = () => {
     return completeSettings;
 };
 
-const CommentField = withDataEntryField(buildNoteSettingsFn())(DataEntry);
+const buildNotesSettingsFn = () => {
+    const noteComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withDefaultFieldContainer()(
+                withDefaultShouldUpdateInterface()(
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: Object) =>
+                            `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(DataEntryNotes),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    const notesSettings = (props: Object) => ({
+        component: noteComponent,
+        componentProps: createComponentProps(props, {
+            label: 'Comments',
+            onAddNote: props.onAddNote,
+            id: props.id,
+        }),
+        propName: 'note',
+        validatorContainers: getNoteValidatorContainers(),
+        meta: {
+            placement: placements.BOTTOM,
+        },
+    });
+
+    return notesSettings;
+};
+
+const CommentField = withDataEntryField(buildNotesSettingsFn())(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
 const CompleteField = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
@@ -325,6 +320,7 @@ type Props = {
     onSetSaveTypes: (saveTypes: ?Array<$Values<typeof newEventSaveTypes>>) => void,
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
     onSaveAndAddAnother: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onAddNote: (itemId: string, dataEntryId: string, note: string) => void,
     onCancel: () => void,
     classes: {
         savingContextContainer: string,
@@ -414,6 +410,7 @@ class NewEventDataEntry extends Component<Props> {
             orgUnitName, // eslint-disable-line
             classes,
             formHorizontal,
+            onAddNote,
         } = this.props;
         return (
             <div>
@@ -425,6 +422,7 @@ class NewEventDataEntry extends Component<Props> {
                         onUpdateFormFieldAsync={onStartAsyncUpdateField}
                         onCancel={onCancel}
                         onSave={this.handleSave}
+                        onAddNote={onAddNote}
                         formHorizontal={formHorizontal}
                         fieldOptions={this.fieldOptions}
                     />
