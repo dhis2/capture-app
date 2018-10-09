@@ -96,14 +96,14 @@ const getNotes = (InnerComponent: React.ComponentType<any>) =>
         }
 
         onNewNoteEditorBlur = (value: string) => {
-            this.setState({ value });
+            this.props.onBlur(value, { touched: false });
         }
 
         handleAddNote = () => {
             if (this.state.value) {
                 this.props.onAddNote(this.props.itemId, this.props.id, this.state.value);
             }
-            this.setState({ value: null });
+            this.props.onBlur(null, { touched: false });
         }
 
         renderInput = () => {
