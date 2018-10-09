@@ -12,6 +12,9 @@ import {
 } from '../../../../FormFields/New';
 import withRequiredFieldCalculation from '../../withRequiredFieldCalculation';
 import withCustomElementContainer from '../../withCustomElementContainer';
+import customFormStyles from './optionSetSelectFieldForCustomForm.mod.css';
+
+const getContainerClass = () => customFormStyles.defaultCustomContainer;
 
 export default withGotoInterface()(
     withHideCompatibility()(
@@ -22,7 +25,7 @@ export default withGotoInterface()(
                         withDisplayMessages()(
                             withConvertedOptionSet()(
                                 withSelectTranslations()(
-                                    withCustomElementContainer()(
+                                    withCustomElementContainer(getContainerClass)(
                                         VirtualizedSelectField,
                                     ),
                                 ),

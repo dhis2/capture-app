@@ -7,9 +7,6 @@ const getOptionSetFieldConfig = (metaData: MetaDataElement) => {
     const props = createProps({
         optionSet: metaData.optionSet,
         nullable: !metaData.compulsory,
-        style: {
-            width: 350,
-        },
     }, metaData);
 
     return createFieldConfig({
