@@ -20,5 +20,13 @@ export const queueConfig = {
 
 export const discardConfig = (error: ?{httpStatusCode?: number}) => {
     const statusCode = error && error.httpStatusCode;
-    return statusCode && statusCode >= 400 && statusCode < 500;
+    if (!statusCode) {
+        return false;
+    }
+
+    if ([408, 429, 502, 503, 504].includes(statusCode)) {
+        return false;
+    }
+
+    return statusCode >= 400;
 };
