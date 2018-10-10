@@ -38,16 +38,6 @@ const subValueGetterByElementType = {
                 return null;
             });
     },
-    [elementTypeKeys.IMAGE]: (value: any, eventId: string, metaElementId: string) => {
-        const baseUrl = config.baseUrl;
-        return getApi().get(`fileResources/${value}`)
-            .then(res =>
-                ({
-                    name: res.name,
-                    value: res.id,
-                    url: `${baseUrl}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
-                }));
-    },
 };
 
 
