@@ -13,21 +13,21 @@ import {
     batchActionTypes as newEventDataEntryBatchActionTypes,
     selectionsNotCompleteOpeningNewEvent,
     batchActionTypes,
-} from '../newEventDataEntry.actions';
+} from '../actions/dataEntry.actions';
 import {
     openNewEventInDataEntry,
     resetDataEntry,
-} from '../newEventDataEntryLoad.actionBatchs';
+} from '../actions/dataEntryLoad.actionBatchs';
 import {
     getRulesActionsForEvent,
 } from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
 import {
     actionTypes as newEventSelectionTypes,
-} from '../../newEventSelections.actions';
+} from '../actions/dataEntryUrl.actions';
 import getColumnsConfiguration from '../../../MainPage/EventsList/epics/getColumnsConfiguration';
 import {
     actionTypes as newEventSelectorTypes,
-} from '../../NewEventSelector/NewEventSelector.actions';
+} from '../../SelectorLevel/selectorLevel.actions';
 import {
     getCurrentClientValues,
     getCurrentClientMainData,

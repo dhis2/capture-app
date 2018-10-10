@@ -8,7 +8,7 @@ import {
     invalidSelectionsFromUrl,
     validSelectionsFromUrl,
     setEmptyOrgUnitBasedOnUrl,
-} from '../newEventSelections.actions';
+} from '../DataEntry/actions/dataEntryUrl.actions';
 import programCollection from '../../../../metaDataMemoryStores/programCollection/programCollection';
 
 export const selectionsFromUrlGetOrgUnitDataForNewEventEpic = (action$: InputObservable) =>

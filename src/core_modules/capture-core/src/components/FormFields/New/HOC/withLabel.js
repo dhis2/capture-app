@@ -2,7 +2,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import withLabel from '../../../d2UiReactAdapters/HOC/withLabel';
+import { withLabel as UIWithLabel } from '../../../d2UiReactAdapters';
 
 const getStyles = (theme: Theme) => ({
     label: {
@@ -36,7 +36,7 @@ export default (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<
     const onGetUseVerticalOrientation = hocParams && hocParams.onGetUseVerticalOrientation;
     const onGetCustomFieldLabeClass = hocParams && hocParams.onGetCustomFieldLabeClass;
 
-    const LabelHOCWithStyles = withLabel({
+    const LabelHOCWithStyles = UIWithLabel({
         onGetUseVerticalOrientation: (props: Object) => onGetUseVerticalOrientation && onGetUseVerticalOrientation(props),
         onSplitClasses: (classes, props: Object) => {
             const { label, labelVertical, ...rest } = classes;

@@ -3,17 +3,15 @@ import programs from 'capture-core/metaDataMemoryStores/programCollection/progra
 
 import { actionTypes as mainSelections } from '../MainPage/mainSelections.actions';
 import {
-    actionTypes as newEventSelectionActionTypes,
-} from '../NewEvent/newEventSelections.actions';
+    dataEntryUrlActionTypes as newEventDataEntryUrlActionTypes,
+    selectorActionTypes as newEventSelectorActionTypes,
+} from '../NewEvent';
 import {
     actionTypes as mainPageSelectorActionTypes,
 } from '../MainPage/MainPageSelector/MainPageSelector.actions';
 import {
     actionTypes as editEventPageSelectorActionTypes,
 } from '../EditEvent/EditEventSelector/EditEventSelector.actions';
-import {
-    actionTypes as newEventPageSelectorActionTypes,
-} from '../NewEvent/NewEventSelector/NewEventSelector.actions';
 
 import { selectionsCompletenessCalculated } from '../actions/crossPage.actions';
 
@@ -45,16 +43,16 @@ export const calculateSelectionsCompletenessEpic = (action$: InputObservable, st
     action$.ofType(
         mainSelections.UPDATE_MAIN_SELECTIONS,
         mainSelections.VALID_SELECTIONS_FROM_URL,
-        newEventSelectionActionTypes.VALID_SELECTIONS_FROM_URL,
+        newEventDataEntryUrlActionTypes.VALID_SELECTIONS_FROM_URL,
         mainPageSelectorActionTypes.SET_ORG_UNIT,
         mainPageSelectorActionTypes.SET_PROGRAM_ID,
         mainPageSelectorActionTypes.SET_CATEGORY_OPTION,
         editEventPageSelectorActionTypes.SET_ORG_UNIT,
         editEventPageSelectorActionTypes.SET_PROGRAM_ID,
         editEventPageSelectorActionTypes.SET_CATEGORY_OPTION,
-        newEventPageSelectorActionTypes.SET_ORG_UNIT,
-        newEventPageSelectorActionTypes.SET_PROGRAM_ID,
-        newEventPageSelectorActionTypes.SET_CATEGORY_OPTION,
+        newEventSelectorActionTypes.SET_ORG_UNIT,
+        newEventSelectorActionTypes.SET_PROGRAM_ID,
+        newEventSelectorActionTypes.SET_CATEGORY_OPTION,
     )
         .map(() => {
             const isComplete = calculateCompleteStatus(store.getState().currentSelections);

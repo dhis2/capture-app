@@ -24,7 +24,7 @@ export type ValidatorContainer = {
     message: string,
 };
 
-export type Field = {
+export type FieldConfig = {
     id: string,
     component: React.ComponentType<any>,
     props?: ?Object,
@@ -41,7 +41,7 @@ type FieldUI = {
 
 type Props = {
     id: string,
-    fields: Array<Field>,
+    fields: Array<FieldConfig>,
     values: { [id: string]: any },
     fieldsUI: { [id: string]: FieldUI },
     onUpdateFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, callback: Function) => void,
@@ -51,6 +51,8 @@ type Props = {
     validationAttempted?: ?boolean,
     validateIfNoUIData?: ?boolean,
     classes: Object,
+    formHorizontal: ?boolean,
+    children?: ?((field: FieldConfig) => React.Node, fields: Array<FieldConfig>) => React.Node,
     onRenderDivider: (index: number, total: number, field: Field) => ?React.Element<any>,
     onGetContainerProps: (index: number, total: number, field: Field) => ?React.Element<any>,
 };
@@ -60,7 +62,7 @@ type FieldCommitOptions = {
 };
 
 class FormBuilder extends React.Component<Props> {
-    static validateField(field: Field, value: any): { valid: boolean, errorMessage?: string } {
+    static validateField(field: FieldConfig, value: any): { valid: boolean, errorMessage?: string } {
         const validatorResult = (field.validators || [])
             .reduce((pass, currentValidator) => {
                 if (pass === true) {
@@ -159,12 +161,12 @@ class FormBuilder extends React.Component<Props> {
      * @param fieldId
      * @returns {}
     */
-    getFieldProp(fieldId: string): Field {
+    getFieldProp(fieldId: string): FieldConfig {
         // $FlowSuppress
         return this.props.fields.find(f => f.id === fieldId);
     }
 
-    hasCommitedValueChanged(field: Field, value: any) {
+    hasCommitedValueChanged(field: FieldConfig, value: any) {
         let valueChanged = true;
         const oldValue = this.props.values[field.id];
 
@@ -242,7 +244,12 @@ class FormBuilder extends React.Component<Props> {
         }, []);
     }
 
-    renderFields() {
+    renderField = (
+        field: FieldConfig,
+        index: number,
+        onRenderDivider,
+        onGetContainerProps,
+    ) => {
         const {
             fields,
             values,
@@ -255,54 +262,65 @@ class FormBuilder extends React.Component<Props> {
             onUpdateFieldAsync,
             onUpdateFieldUIOnly,
             validateIfNoUIData,
-            onRenderDivider,
-            onGetContainerProps,
+            children,
+            onRenderDivider: extractOnRenderDivider,
+            onGetContainerProps: extractOnGetContainerProps,
             ...passOnProps } = this.props;
 
-        return fields.map((field, index) => {
-            const props = field.props || {};
-            const fieldUI = fieldsUI[field.id] || {};
-            const value = values[field.id];
+        const props = field.props || {};
+        const fieldUI = fieldsUI[field.id] || {};
+        const value = values[field.id];
 
-            const commitFieldHandler = this.commitFieldUpdate.bind(this, field.id);
-            const commitEvent = field.commitEvent || 'onBlur';
-            const commitPropObject = {
-                [commitEvent]: commitFieldHandler,
-            };
+        const commitFieldHandler = this.commitFieldUpdate.bind(this, field.id);
+        const commitEvent = field.commitEvent || 'onBlur';
+        const commitPropObject = {
+            [commitEvent]: commitFieldHandler,
+        };
 
-            const asyncProps = {};
+        const asyncProps = {};
 
-            if (props.async) {
-                asyncProps.onCommitAsync = (callback: Function) => this.handleCommitAsync(field.id, props.label, callback);
-                asyncProps.onUpdateAsyncUIState = (asyncState: Object) => this.handleUpdateAsyncState(field.id, asyncState);
-                asyncProps.asyncUIState = this.asyncUIState[field.id];
-            }
+        if (props.async) {
+            asyncProps.onCommitAsync = (callback: Function) => this.handleCommitAsync(field.id, props.label, callback);
+            asyncProps.onUpdateAsyncUIState = (asyncState: Object) => this.handleUpdateAsyncState(field.id, asyncState);
+            asyncProps.asyncUIState = this.asyncUIState[field.id];
+        }
 
-            return (
+        return (
+            <div
+                key={field.id}
+                className={classes.fieldOuterContainer}
+            >
                 <div
-                    key={field.id}
-                    className={classes.fieldOuterContainer}
+                    {...onGetContainerProps && onGetContainerProps(index, fields.length, field)}
                 >
-                    <div
-                        {...onGetContainerProps && onGetContainerProps(index, fields.length, field)}
-                    >
-                        <field.component
-                            ref={(fieldInstance) => { this.setFieldInstance(fieldInstance, field.id); }}
-                            value={value}
-                            errorMessage={fieldUI.errorMessage}
-                            touched={fieldUI.touched}
-                            validationAttempted={validationAttempted}
-                            {...commitPropObject}
-                            {...props}
-                            {...passOnProps}
-                            {...asyncProps}
-                        />
-                    </div>
-
-                    {onRenderDivider && onRenderDivider(index, fields.length, field)}
+                    <field.component
+                        ref={(fieldInstance) => { this.setFieldInstance(fieldInstance, field.id); }}
+                        value={value}
+                        errorMessage={fieldUI.errorMessage}
+                        touched={fieldUI.touched}
+                        validationAttempted={validationAttempted}
+                        {...commitPropObject}
+                        {...props}
+                        {...passOnProps}
+                        {...asyncProps}
+                    />
                 </div>
-            );
-        });
+
+                {onRenderDivider && onRenderDivider(index, fields.length, field)}
+            </div>
+        );
+    }
+
+    renderFields() {
+        const { fields, children, onRenderDivider, onGetContainerProps } = this.props;
+
+        if (children) {
+            return children(this.renderField, fields);
+        }
+        return fields.map(
+            (field, index) =>
+                this.renderField(field, index, onRenderDivider, onGetContainerProps),
+        );
     }
 
     render() {

@@ -7,8 +7,9 @@ import {
     actionTypes as quickSelectorActionTypes,
 } from '../../components/QuickSelector/actions/QuickSelector.actions';
 import {
-    actionTypes as newEventSelectionActionTypes,
-} from '../../components/Pages/NewEvent/newEventSelections.actions';
+    dataEntryUrlActionTypes as newEventDataEntryUrlActionTypes,
+    selectorActionTypes as newEventSelectorActionTypes,
+} from '../../components/Pages/NewEvent';
 import {
     actionTypes as editEventActionTypes,
 } from '../../components/Pages/EditEvent/editEvent.actions';
@@ -18,9 +19,6 @@ import {
 import {
     actionTypes as editEventPageSelectorActionTypes,
 } from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
-import {
-    actionTypes as newEventPageSelectorActionTypes,
-} from '../../components/Pages/NewEvent/NewEventSelector/NewEventSelector.actions';
 import {
     actionTypes as crossPageActionTypes,
 } from '../../components/Pages/actions/crossPage.actions';
@@ -95,12 +93,12 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         };
         return newState;
     },
-    [newEventSelectionActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
+    [newEventDataEntryUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
         const { nextProps: selections } = action.payload;
         const newState = { ...state, ...selections, categories: null, complete: false };
         return newState;
     },
-    [newEventSelectionActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: (state) => {
+    [newEventDataEntryUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: (state) => {
         const newState = {
             ...state,
             orgUnitId: null,
@@ -216,20 +214,20 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         const newState = { ...state, categories };
         return newState;
     },
-    [newEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
+    [newEventSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
         const orgUnitId = null;
         const newState = { ...state, orgUnitId };
         newState.complete = false;
         return newState;
     },
-    [newEventPageSelectorActionTypes.SET_ORG_UNIT]: setOrgUnit,
-    [newEventPageSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
+    [newEventSelectorActionTypes.SET_ORG_UNIT]: setOrgUnit,
+    [newEventSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
         const programId = action.payload;
         const newState = { ...state, programId };
         newState.complete = false;
         return newState;
     },
-    [newEventPageSelectorActionTypes.SET_CATEGORY_OPTION]: (state, action) => {
+    [newEventSelectorActionTypes.SET_CATEGORY_OPTION]: (state, action) => {
         let categories = {};
         if (state.categories) {
             // Necessary step to prevent mutation.
@@ -242,7 +240,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         newState.complete = false;
         return newState;
     },
-    [newEventPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state, action) => {
+    [newEventSelectorActionTypes.RESET_CATEGORY_OPTION]: (state, action) => {
         let categories = {};
         if (state.categories) {
             // Necessary step to prevent mutation.
@@ -255,7 +253,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         newState.complete = false;
         return newState;
     },
-    [newEventPageSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: (state) => {
+    [newEventSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: (state) => {
         const categories = null;
         const newState = { ...state, categories };
         return newState;

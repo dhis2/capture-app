@@ -7,12 +7,12 @@ import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
 import { getApi } from '../../../d2/d2Instance';
-import D2TextField from '../../d2UiReactAdapters/TextField/D2TextField.component';
+import { TextField as UITextField } from '../../d2UiReactAdapters';
 
 
 function renderInput(inputProps) {
     return (
-        <D2TextField
+        <UITextField
             {...inputProps}
             onChange={event => inputProps.onChange(event, { newValue: event.currentTarget.value })}
             onBlur={event => inputProps.onBlur(event.currentTarget.value)}

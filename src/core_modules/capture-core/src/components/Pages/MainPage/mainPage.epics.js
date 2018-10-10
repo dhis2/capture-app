@@ -1,6 +1,6 @@
 // @flow
 import { updateEventListAfterSaveOrUpdateSingleEvent } from './mainPage.actions';
-import { actionTypes as newEventDataEntryActionTypes } from '../NewEvent/DataEntry/newEventDataEntry.actions';
+import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../NewEvent';
 import { actionTypes as editEventDataEntryActionTypes } from '../EditEvent/DataEntry/editEventDataEntry.actions';
 import isSelectionsEqual from '../../App/isSelectionsEqual';
 

@@ -8,7 +8,7 @@ import getD2 from 'capture-core/d2/d2Instance';
 import NetworkStatusBadge from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.component';
 
 import MainPageEntry from 'capture-core/components/Pages/MainPage/MainPageEntry/MainPageEntry.container';
-import NewEventEntry from 'capture-core/components/Pages/NewEvent/NewEventEntry/NewEventEntry.container';
+import { NewEventPageEntry } from 'capture-core/components/Pages/NewEvent';
 import EditEventEntry from 'capture-core/components/Pages/EditEvent/EditEventEntry/EditEventEntry.container';
 
 const styles = theme => ({
@@ -45,7 +45,7 @@ class AppContents extends Component<Props> {
                     className={classes.pageContainer}
                 >
                     <Switch>
-                        <Route path="/newEvent" component={NewEventEntry} />
+                        <Route path="/newEvent" component={NewEventPageEntry} />
                         <Route path="/editEvent" component={EditEventEntry} />
                         <Route path="/:keys" component={MainPageEntry} />
                         <Route path="/" component={MainPageEntry} />

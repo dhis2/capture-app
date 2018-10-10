@@ -17,7 +17,7 @@ import {
     workingListUpdateDataRetrieved,
     workingListUpdateRetrievalFailed,
 } from '../eventsList.actions';
-import { actionTypes as newEventDataEntryActionTypes } from '../../../NewEvent/DataEntry/newEventDataEntry.actions';
+import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../../NewEvent';
 import { actionTypes as editEventDataEntryActionTypes } from '../../../EditEvent/DataEntry/editEventDataEntry.actions';
 import {
     batchActionTypes as connectivityBatchActionTypes,

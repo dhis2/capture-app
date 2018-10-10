@@ -237,6 +237,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
             <div
                 ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}
                 className={classes.root}
+                id="option1"
             >
                 {
                     (() => (
