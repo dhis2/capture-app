@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-10-08T13:09:14.321Z\n"
-"PO-Revision-Date: 2018-10-08T13:09:14.321Z\n"
+"POT-Creation-Date: 2018-10-10T13:15:12.538Z\n"
+"PO-Revision-Date: 2018-10-10T13:15:12.538Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -236,6 +236,9 @@ msgid "Save and add another"
 msgstr ""
 
 msgid "Save and exit"
+msgstr ""
+
+msgid "Finish"
 msgstr ""
 
 msgid "events added"

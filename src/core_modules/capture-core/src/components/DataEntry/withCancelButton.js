@@ -16,26 +16,35 @@ type Options = {
 
 type OptionsFn = (props: Props) => Options;
 
-const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: ?OptionsFn) => (props: Props) => {
-    const { finalInProgress, onCancel, ...passOnProps } = props;
-    const options = (optionsFn && optionsFn(props)) || {};
+const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: ?OptionsFn) =>
+    class CancelButtonHOC extends React.Component<Props> {
+        innerInstance: any;
 
-    return (
-        <InnerComponent
-            cancelButton={
-                <ProgressButton
-                    variant="text"
-                    onClick={onCancel}
-                    color={options.color || 'primary'}
-                    inProgress={finalInProgress}
-                >
-                    { i18n.t('Cancel') }
-                </ProgressButton>
-            }
-            {...passOnProps}
-        />
-    );
-};
+        getWrappedInstance = () => this.innerInstance;
+
+
+        render() {
+            const { finalInProgress, onCancel, ...passOnProps } = this.props;
+            const options = (optionsFn && optionsFn(this.props)) || {};
+
+            return (
+                <InnerComponent
+                    ref={(innerInstance) => { this.innerInstance = innerInstance; }}
+                    cancelButton={
+                        <ProgressButton
+                            variant="text"
+                            onClick={onCancel}
+                            color={options.color || 'primary'}
+                            inProgress={finalInProgress}
+                        >
+                            { i18n.t('Cancel') }
+                        </ProgressButton>
+                    }
+                    {...passOnProps}
+                />
+            );
+        }
+    };
 
 const mapStateToProps = (state: ReduxState, props: { id: string }) => {
     const itemId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].itemId;

@@ -18,13 +18,13 @@ import {
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
-import { saveTypes } from './newEventSaveTypes';
+import saveTypes from './newEventSaveTypes';
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
 
     const mapStateToProps = (state: ReduxState, props: Object) => ({
-        saveTypes: state.newEventPage.saveTypes,
+        formHorizontal: !!state.newEventPage.formHorizontal,
         ready: !state.newEventPage.dataEntryIsLoading,
         error: !props.formFoundation ?
             i18n.t('This is not an event program or the metadata is corrupt. See log for details.') : null,
