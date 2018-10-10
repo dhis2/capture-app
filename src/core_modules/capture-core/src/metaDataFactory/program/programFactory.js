@@ -261,7 +261,9 @@ function buildStage(d2ProgramStage: CachedProgramStage) {
     });
 
     if (d2ProgramStage.formType === 'CUSTOM' && d2ProgramStage.dataEntryForm) {
-        stage.addSection(buildMainSection(d2ProgramStage.programStageDataElements));
+        const section = buildMainSection(d2ProgramStage.programStageDataElements);
+        section.showContainer = false;
+        stage.addSection(section);
         const dataEntryForm = d2ProgramStage.dataEntryForm;
         try {
             stage.customForm = new CustomForm((_this) => {
