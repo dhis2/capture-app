@@ -22,6 +22,9 @@ import {
     runRulesForSingleEventEpic,
 } from 'capture-core/components/Pages/NewEvent/DataEntry/epics/newEventDataEntry.epics';
 import {
+    addNoteForNewSingleEventEpic,
+} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/addNoteForNewSingleEvent.epics';
+import {
     saveNewEventEpic,
     saveNewEventLocationChangeEpic,
 } from 'capture-core/components/Pages/NewEvent/DataEntry/epics/saveNewSingleEvent.epics';
@@ -145,6 +148,7 @@ export default combineEpics(
     cancelEditEventLocationChangeEpic,
     cancelEditEventEpic,
     addNoteForEditSingleEventEpic,
+    addNoteForNewSingleEventEpic,
     removeNoteForEditSingleEventEpic,
     openEditPageLocationChangeEpic,
     getEventOpeningFromEventListEpic,

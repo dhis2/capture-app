@@ -16,7 +16,9 @@ const dataEntryId = 'singleEvent';
 const itemId = 'newEvent';
 const formId = getDataEntryKey(dataEntryId, itemId);
 
-const dataEntryPropsToInclude = [
+type DataEntryPropsToInclude = Array<Object>;
+
+const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     {
         id: 'eventDate',
         type: 'DATE',
@@ -31,6 +33,7 @@ const dataEntryPropsToInclude = [
         id: 'note',
         type: 'TEXT',
         validatorContainers: getNotesValidatorContainers(),
+        clientIgnore: true,
     },
     {
         clientId: 'status',

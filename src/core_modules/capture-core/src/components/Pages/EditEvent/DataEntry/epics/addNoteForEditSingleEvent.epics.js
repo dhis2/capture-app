@@ -11,6 +11,11 @@ import {
 } from '../editEventDataEntry.actions';
 
 import {
+    addEventNote,
+    removeEventNote,
+} from '../../editEvent.actions';
+
+import {
     addNote,
     removeNote,
 } from '../../../../DataEntry/actions/dataEntry.actions';
@@ -41,14 +46,18 @@ export const addNoteForEditSingleEventEpic = (action$: InputObservable, store: R
 
             return batchActions([
                 startAddNoteForEditSingleEvent(eventId, serverData, state.currentSelections, saveContext),
-                addNote(payload.dataEntryId, payload.itemId, eventId, clientNote, formNote),
+                addNote(payload.dataEntryId, payload.itemId, formNote),
+                addEventNote(eventId, clientNote),
             ], editEventDataEntryBatchActionTypes.ADD_NOTE_FOR_EDIT_SINGLE_EVENT_BATCH);
         });
 
-export const removeNoteForEditSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const removeNoteForEditSingleEventEpic = (action$: InputObservable) =>
     // $FlowSuppress
     action$.ofType(editEventDataEntryActionTypes.ADD_NOTE_FAILED_FOR_EDIT_SINGLE_EVENT)
         .map((action) => {
             const context = action.meta.context;
-            return removeNote(context.dataEntryId, context.itemId, context.eventId, context.noteClientId);
+            return batchActions([
+                removeNote(context.dataEntryId, context.itemId, context.noteClientId),
+                removeEventNote(context.eventId, context.noteClientId),
+            ], editEventDataEntryBatchActionTypes.REMOVE_NOTE_FOR_EDIT_SINGLE_EVENT_BATCH);
         });

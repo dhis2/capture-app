@@ -42,6 +42,11 @@ export const getNewEventServerData = (state: ReduxState, formFoundation: RenderF
     };
 };
 
+function getDataEntriesNotes(state: ReduxState, dataEntryKey: string) {
+    const notes = state.dataEntriesNotes && state.dataEntriesNotes[dataEntryKey];
+    return notes ? notes.map(note => { note.value }) : [];
+}
+
 export const getNewEventClientValues = (state: ReduxState, dataEntryKey: string, formFoundation: RenderFoundation) => {
     const formValues = state.formsValues[dataEntryKey];
     const dataEntryValues = state.dataEntriesFieldsValue[dataEntryKey];
@@ -55,7 +60,7 @@ export const getNewEventClientValues = (state: ReduxState, dataEntryKey: string,
         dataEntryValuesMeta,
         prevEventMainData,
     );
-    const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues };
+    const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues, notes: getDataEntriesNotes(state, dataEntryKey) };
 
     return { formClientValues, mainDataClientValues };
 };

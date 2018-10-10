@@ -1,12 +1,10 @@
 // @flow
 
 import * as React from 'react';
-import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { withStyles } from '@material-ui/core/styles';
-import getDataEntryKey from './common/getDataEntryKey';
 import Button from '../Buttons/Button.component';
 import TextEditor from '../FormFields/TextEditor/TextEditor.component';
 

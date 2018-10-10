@@ -30,7 +30,6 @@ import {
 import withDefaultShouldUpdateInterface from
     '../../../D2Form/field/withDefaultShouldUpdateInterface';
 import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
-import withNotes from '../../../DataEntry/withNotes';
 import withIndicatorOutput from '../../../DataEntry/dataEntryOutput/withIndicatorOutput';
 import withFeedbackOutput from '../../../DataEntry/dataEntryOutput/withFeedbackOutput';
 import withErrorOutput from '../../../DataEntry/dataEntryOutput/withErrorOutput';

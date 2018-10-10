@@ -1,6 +1,7 @@
 // @flow
 import { actionCreator } from '../../../../actions/actions.utils';
 import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
+import saveTypes from './newEventSaveTypes';
 
 export const batchActionTypes = {
     UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH: 'UpdateFieldForNewSingleEventActionsBatch',
