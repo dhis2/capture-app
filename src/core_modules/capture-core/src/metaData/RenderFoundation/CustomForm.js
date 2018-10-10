@@ -8,6 +8,12 @@ type Data = {
     elements: Array<React.Node>,
 };
 
+/**
+ * Stores html as react elements
+ *
+ * @export
+ * @class CustomForm
+ */
 export default class CustomForm {
     _id: string;
     _data: Data;
@@ -23,7 +29,11 @@ export default class CustomForm {
     get id() {
         return this._id;
     }
-
+    /**
+     * parses html to react elements
+     *
+     * @memberof CustomForm
+     */
     set data(html: string) {
         const data = parseHtml(html, {
             onTransform: this.transformNode,
@@ -34,7 +44,12 @@ export default class CustomForm {
     get data(): Data {
         return this._data;
     }
-
+    /**
+     * A callback function for react-html-parser replacing html elements of type input (with certain criteria) with a placeholder FormField React element.
+     *
+     * @memberof CustomForm
+     */
+    // $FlowSuppress
     transformNode = (node: Object, index: number, nodeToElementFn) => {
         if (node.name === 'input') {
             const htmlElementId = node.attribs && node.attribs.id;

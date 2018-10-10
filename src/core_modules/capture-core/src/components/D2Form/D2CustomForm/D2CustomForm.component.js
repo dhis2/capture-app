@@ -19,6 +19,12 @@ type EventListenerSpec = {
     handlerRef?: ?() => void,
 };
 
+/**
+ * Build the form based on the specs in custom form.
+ *
+ * @class D2CustomForm
+ * @extends {React.Component<Props>}
+ */
 class D2CustomForm extends React.Component<Props> {
     static errorMessages = {
         PRE_PROCESS_FAILED: 'Could not pre process custom form source tree',
@@ -78,6 +84,11 @@ class D2CustomForm extends React.Component<Props> {
         this.removeEventListeners();
     }
 
+    /**
+     * Pre process the tree, extracting all event listeners. Event listeners will be added after the component is mounted.
+     *
+     * @memberof D2CustomForm
+     */
     preProcessSourceTree() {
         const { specs } = this.props;
         const sourceTree = specs.data.elements;
@@ -137,6 +148,11 @@ class D2CustomForm extends React.Component<Props> {
         this.preProcessedSourceTree = preProcessedSourceTree;
     }
 
+    /**
+     * Add scripts to the DOM
+     *
+     * @memberof D2CustomForm
+     */
     addScripts() {
         const scripts = this.props.specs.data.scripts;
         scripts
@@ -150,6 +166,12 @@ class D2CustomForm extends React.Component<Props> {
             });
     }
 
+    /**
+     *
+     * Add event listeners
+     *
+     * @memberof D2CustomForm
+     */
     addEventListeners() {
         const eventListenerSpecs = this.eventListenerSpecs;
         const specsWithHandlerRef = eventListenerSpecs
@@ -167,7 +189,11 @@ class D2CustomForm extends React.Component<Props> {
             });
         this.eventListenerSpecs = specsWithHandlerRef;
     }
-
+    /**
+     * Remove event listeners
+     *
+     * @memberof D2CustomForm
+     */
     removeEventListeners() {
         this.eventListenerSpecs
             .forEach((spec) => {
@@ -178,6 +204,12 @@ class D2CustomForm extends React.Component<Props> {
             });
     }
 
+    /**
+     * Transform the tree, replacing all placeholder FormField elements with the real field elements.
+     *
+     * @returns the transformed tree
+     * @memberof D2CustomForm
+     */
     transform() {
         const { fields, onRenderField } = this.props;
         const sourceTree = this.preProcessedSourceTree;
