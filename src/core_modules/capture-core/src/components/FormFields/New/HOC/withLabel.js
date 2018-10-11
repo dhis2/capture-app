@@ -2,7 +2,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { withLabel as UIWithLabel } from '../../../d2UiReactAdapters';
+import { withLabel as UIWithLabel } from 'capture-ui';
 
 const getStyles = (theme: Theme) => ({
     label: {

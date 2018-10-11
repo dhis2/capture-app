@@ -2,6 +2,7 @@
 import { orientations } from '../../../../FormFields/New';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { DateTimeFieldForForm } from '../../Components';
+import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
 
 const getDateTimeFieldConfig = (metaData: MetaDataElement, options: Object) => {
     const props = createProps({

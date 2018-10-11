@@ -2,6 +2,7 @@
 import { orientations } from '../../../../FormFields/New';
 import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 import { FileResourceFieldForCustomForm } from '../../Components';
+import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
 
 const getFileResourceFieldConfig = (metaData: MetaDataElement) => {
     const props = createProps({

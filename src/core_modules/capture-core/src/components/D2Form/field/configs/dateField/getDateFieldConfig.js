@@ -1,6 +1,7 @@
 // @flow
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { DateFieldForForm } from '../../Components';
+import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
 
 const getDateFieldConfig = (metaData: MetaDataElement, options: Object) => {
     const props = createProps({

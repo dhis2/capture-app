@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { PolygonField as UIPolygonField } from '../../../../d2UiReactAdapters';
+import { PolygonField as UIPolygonField } from 'capture-ui';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
