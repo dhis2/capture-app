@@ -1,7 +1,10 @@
 // @flow
 import * as React from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
-import { AgeField as UIAgeField } from '../../../../d2UiReactAdapters';
+import { withStyles, withTheme } from '@material-ui/core/styles';
+import { AgeField as UIAgeField } from 'capture-ui';
+import withCalendarProps from '../../HOC/withCalendarProps';
+import moment from '../../../../../utils/moment/momentResolver';
+import parseDate from '../../../../../utils/parsers/date.parser';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
@@ -33,6 +36,8 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
+const parseDateOuter = (dateValue: ?string) => parseDate(dateValue || '');
+
 type Props = {
     value?: ?any,
     onBlur: (value: any) => void,
@@ -44,15 +49,25 @@ type Props = {
         innerInputInfo: string,
         innerInputValidating: string,
     },
+    calendarTheme: Object,
+    calendarLocale: Object,
+    calendarOnConvertValueIn: Function,
+    calendarOnConvertValueOut: Function,
 }
 
 const AgeField = (props: Props) => {
-    const { ...passOnProps } = props;
+    const { calendarTheme, calendarLocale, calendarOnConvertValueIn, calendarOnConvertValueOut, ...passOnProps } = props;
     return (
         <UIAgeField
+            onParseDate={parseDateOuter}
+            moment={moment}
+            dateCalendarTheme={calendarTheme}
+            dateCalendarLocale={calendarLocale}
+            dateCalendarOnConvertValueIn={calendarOnConvertValueIn}
+            dateCalendarOnConvertValueOut={calendarOnConvertValueOut}
             {...passOnProps}
         />
     );
 };
 
-export default withStyles(getStyles)(AgeField);
+export default withTheme()(withCalendarProps()(withStyles(getStyles)(AgeField)));

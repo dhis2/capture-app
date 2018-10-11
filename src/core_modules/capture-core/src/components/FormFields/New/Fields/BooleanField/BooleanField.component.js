@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { BooleanField as UIBooleanField } from '../../../../d2UiReactAdapters';
+import { BooleanField as UIBooleanField } from 'capture-ui';
 
 const getStyles = (theme: Theme) => ({
     iconSelected: {

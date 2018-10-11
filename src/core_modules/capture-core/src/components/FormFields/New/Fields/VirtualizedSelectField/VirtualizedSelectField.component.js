@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import VirtualizedSelect from '../../../Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
-import withFocusHandler from '../../../../d2UiReactAdapters/internal/TextInput/withFocusHandler';
+import withFocusHandler from './withFocusHandler';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {

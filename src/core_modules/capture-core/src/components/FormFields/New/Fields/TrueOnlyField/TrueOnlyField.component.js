@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { TrueOnlyField as UITrueOnlyField } from '../../../../d2UiReactAdapters';
+import { TrueOnlyField as UITrueOnlyField } from 'capture-ui';
 
 const getStyles = (theme: Theme) => ({
     iconSelected: {

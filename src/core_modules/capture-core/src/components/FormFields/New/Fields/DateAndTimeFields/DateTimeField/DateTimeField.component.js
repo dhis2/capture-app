@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import { DateTimeField as UIDateTimeField } from '../../../../../d2UiReactAdapters';
-import getCalendarTheme from '../getCalendarTheme';
+import { DateTimeField as UIDateTimeField } from 'capture-ui';
+import withCalendarProps from '../../../HOC/withCalendarProps';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
@@ -38,22 +38,15 @@ type Props = {
     theme: Object,
 }
 
-class DateTimeField extends React.Component<Props, State> {
-    calendarTheme: Object;
-
-    constructor(props) {
-        super(props);
-        this.calendarTheme = getCalendarTheme(this.props.theme);
-    }
+class DateTimeField extends React.Component<Props> {
     render() {
-        const { theme, ...passOnProps } = this.props;
+        const { ...passOnProps } = this.props;
         return (
             <UIDateTimeField
-                calendarTheme={this.calendarTheme}
                 {...passOnProps}
             />
         );
     }
 }
 
-export default withTheme()(withStyles(getStyles)(DateTimeField));
+export default withTheme()(withCalendarProps()(withStyles(getStyles)(DateTimeField)));

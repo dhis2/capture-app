@@ -3,18 +3,20 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator';
 import classNames from 'classnames';
-
 import i18n from '@dhis2/d2-i18n';
-import elementTypes from '../../../metaData/DataElement/elementTypes';
 
-import getTableComponents from '../../d2Ui/dataTable/getTableComponents';
-import basicTableAdapter from '../../d2UiReactAdapters/dataTable/basicTable.adapter';
-
+import {
+    Table,
+    Row,
+    Cell,
+    HeaderCell,
+    Head,
+    Body,
+    sortLabelDirections,
+    sorLabelPlacements,
+} from 'capture-ui';
 import SortLabelWrapper from '../../DataTable/SortLabelWrapper.component';
-import { directions, placements } from '../../d2UiReactAdapters/dataTable/componentGetters/sortLabel.const';
-
-// $FlowSuppress
-const { Table, Row, Cell, HeaderCell, Head, Body } = getTableComponents(basicTableAdapter);
+import elementTypes from '../../../metaData/DataElement/elementTypes';
 
 const styles = theme => ({
     loaderContainer: {
@@ -92,6 +94,7 @@ type Props = {
     sortById: string,
     sortByDirection: string,
     onRowClick: (rowData: {id: string}) => void,
+    noItemsText: ?string,
 };
 
 class OfflineList extends Component<Props> {
@@ -125,13 +128,13 @@ class OfflineList extends Component<Props> {
                         isActive={column.id === sortById}
                         initialDirection={
                             OfflineList.typesWithAscendingInitialDirection.includes(column.type)
-                                ? directions.ASC
-                                : directions.DESC
+                                ? sortLabelDirections.ASC
+                                : sortLabelDirections.DESC
                         }
                         placement={
                             OfflineList.typesWithRightPlacement.includes(column.type)
-                                ? placements.RIGHT
-                                : placements.LEFT
+                                ? sorLabelPlacements.RIGHT
+                                : sorLabelPlacements.LEFT
                         }
                         direction={sortByDirection}
                         disabled

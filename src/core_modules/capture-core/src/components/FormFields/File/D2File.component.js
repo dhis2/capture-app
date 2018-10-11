@@ -3,11 +3,11 @@ import CheckIcon from '@material-ui/icons/Check';
 import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { orientations } from 'capture-ui';
 import Button from '../../Buttons/Button.component';
 import { getApi } from '../../../d2/d2Instance';
 import LoadingMask from '../../LoadingMasks/LoadingMask.component';
 import inMemoryFileStore from '../../DataEntry/file/inMemoryFileStore';
-import orientations from '../../d2UiReactAdapters/constants/orientations.const';
 
 type Props = {
     value: ?{ value: string, name: string, url?: ?string },

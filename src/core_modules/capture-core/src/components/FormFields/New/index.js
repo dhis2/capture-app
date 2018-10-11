@@ -21,9 +21,7 @@ export { default as withFilterProps } from './HOC/withFilterProps';
 export { default as withGotoInterface } from './HOC/withGotoInterface';
 export { default as withHideCompatibility } from './HOC/withHideCompatibility';
 export { default as withLabel } from './HOC/withLabel';
-
-export { withFocusSaver } from '../../d2UiReactAdapters';
-export { withInternalChangeHandler } from '../../d2UiReactAdapters';
+export { withFocusSaver, withInternalChangeHandler } from 'capture-ui';
 
 // Constants
-export { orientations } from '../../d2UiReactAdapters';
+export { orientations } from 'capture-ui';
