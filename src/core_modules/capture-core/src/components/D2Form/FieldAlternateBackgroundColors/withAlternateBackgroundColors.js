@@ -44,9 +44,11 @@ export default () => (InnerComponent: React.ComponentType<any>) => withStyles(ge
 
         render() {
             const { formHorizontal, classes, ...passOnProps } = this.props;
+            const calculatedProps = !formHorizontal ? { onGetContainerProps: this.getContainerProps } : null;
+
             return (
                 <InnerComponent
-                    onGetContainerProps={this.getContainerProps}
+                    {...calculatedProps}
                     {...passOnProps}
                 />
             );

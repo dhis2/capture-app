@@ -28,7 +28,7 @@ type Field = {
 export default () => (InnerComponent: React.ComponentType<any>) => withStyles(getStyles)(
     class DividerHOC extends React.Component<Props> {
         renderDivider = (index: number, total: number, field: Field) => {
-            if ((field.props && field.props.hidden) || this.props.formHorizontal || (index + 1) >= total) {
+            if ((field.props && field.props.hidden) || (index + 1) >= total) {
                 return null;
             }
 
@@ -46,10 +46,13 @@ export default () => (InnerComponent: React.ComponentType<any>) => withStyles(ge
         }
 
         render() {
-            const { formHorizontal, classes, ...passOnProps } = this.props;
+            const { classes, ...passOnProps } = this.props;
+            const formHorizontal = this.props.formHorizontal;
+            const calculatedProps = !formHorizontal ? { onRenderDivider: this.renderDivider } : null;
+
             return (
                 <InnerComponent
-                    onRenderDivider={this.renderDivider}
+                    {...calculatedProps}
                     {...passOnProps}
                 />
             );
