@@ -20,7 +20,8 @@ type Props = {
     classes?: ?{
         iconSelected?: string,
         iconDeselected?: string,
-        focus?: string,
+        focusSelected?: string,
+        focusUnselected?: string,
         unFocus?: string,
     },
     onSelect: (value: any) => void,
@@ -29,6 +30,10 @@ type Props = {
 };
 
 class SingleSelectionBoxes extends React.Component<Props> {
+    static getFocusClass(classes: Object, isSelected: boolean) {
+        return isSelected ? classes.focusSelected : classes.focusUnselected;
+    }
+
     getCheckedIcon() {
         return (
             <CheckedIcon
@@ -73,13 +78,14 @@ class SingleSelectionBoxes extends React.Component<Props> {
                 className={containerClass}
                 key={optionData.id || optionData.name}
             >
+                { /* $FlowSuppress */ }
                 <SingleSelectBoxWrapped
                     optionData={optionData}
                     isSelected={isSelected}
                     tabIndex={tabIndex}
                     groupId={groupId}
                     onSelect={onSelect}
-                    focusClass={classes && classes.focus}
+                    focusClass={classes && SingleSelectionBoxes.getFocusClass(classes, isSelected)}
                     unFocusClass={classes && classes.unFocus}
                     onSetFocus={onSetFocus}
                     onRemoveFocus={onRemoveFocus}

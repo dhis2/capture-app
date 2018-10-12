@@ -41,6 +41,8 @@ const getFocusHandler = () => (InnerComponent: React.ComponentType<any>) =>
         }
 
         handleInputFocus = () => {
+            this.props.onSetFocus && this.props.onSetFocus();
+
             if (this.isMouseClick) {
                 this.isMouseClick = false;
                 return;
@@ -49,15 +51,15 @@ const getFocusHandler = () => (InnerComponent: React.ComponentType<any>) =>
             this.setState({
                 inFocus: true,
             });
-            this.props.onSetFocus && this.props.onSetFocus();
         }
 
         handleInputBlur = () => {
+            this.props.onRemoveFocus && this.props.onRemoveFocus();
+
             if (this.state.inFocus) {
                 this.setState({
                     inFocus: false,
                 });
-                this.props.onRemoveFocus && this.props.onRemoveFocus();
             }
             this.isMouseClick = false;
         }

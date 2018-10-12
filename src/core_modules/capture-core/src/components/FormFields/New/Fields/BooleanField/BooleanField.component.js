@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import { fade } from '@material-ui/core/styles/colorManipulator';
 import { BooleanField as UIBooleanField } from 'capture-ui';
 
 const getStyles = (theme: Theme) => ({
@@ -10,13 +11,8 @@ const getStyles = (theme: Theme) => ({
     iconDeselected: {
         fill: theme.palette.grey[700],
     },
-    focus: {
-        border: `2px solid ${theme.palette.accent.dark}`,
-        borderRadius: 16,
-        padding: 2,
-    },
-    unFocus: {
-        padding: 4,
+    focusSelected: {
+        backgroundColor: fade(theme.palette.secondary.main, 0.4),
     },
 });
 

@@ -85,12 +85,19 @@ class SingleSelectBox extends React.Component<Props> {
                     />
 
                     <div
-                        className={inFocus ?
-                            classNames(focusClass, defaultClasses.iconContainer) :
-                            classNames(defaultClasses.iconContainer, unFocusClass)
-                        }
+                        className={defaultClasses.iconFocusContainer}
                     >
-                        {children}
+                        <div
+                            className={inFocus
+                                ? classNames(defaultClasses.inFocus, focusClass)
+                                : classNames(unFocusClass)
+                            }
+                        />
+                        <div
+                            className={defaultClasses.iconContainer}
+                        >
+                            {children}
+                        </div>
                     </div>
                     <span
                         className={defaultClasses.name}
