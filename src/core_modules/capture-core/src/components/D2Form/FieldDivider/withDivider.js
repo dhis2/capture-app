@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Divider from '../../d2UiReactAdapters/Divider/DividerHorizontal.component';
+import { DividerHorizontal as Divider } from 'capture-ui';
 
 const getStyles = (theme: Theme) => ({
     dividerContainer: {

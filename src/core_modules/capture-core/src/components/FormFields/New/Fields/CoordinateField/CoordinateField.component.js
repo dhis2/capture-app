@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { CoordinateField as UICoordinateField } from '../../../../d2UiReactAdapters';
+import { CoordinateField as UICoordinateField } from 'capture-ui';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {

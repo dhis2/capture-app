@@ -10,6 +10,7 @@ function fileExists(filePath) {
 
 if (fileExists(path.resolve(__dirname, './../src/core_modules/capture-core/src'))) {
     alias['capture-core'] = path.resolve(__dirname, './../src/core_modules/capture-core/src');
+    alias['capture-ui'] = path.resolve(__dirname, './../src/core_modules/capture-ui/src');
 }
 
 module.exports = alias;
