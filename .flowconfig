@@ -1,7 +1,9 @@
 [ignore]
 .*/build/.*
 .*/contents/.*
-.*/node_modules/.*
+
+[declarations]
+<PROJECT_ROOT>/node_modules/.*
 
 [libs]
 flow/
@@ -10,3 +12,4 @@ src/core_modules/capture-core/flow/
 [options]
 suppress_comment= \\(.\\|\n\\)*\\$FlowSuppress
 module.name_mapper='^capture-core' ->'<PROJECT_ROOT>/src/core_modules/capture-core/src'
+module.name_mapper='^capture-ui' ->'<PROJECT_ROOT>/src/core_modules/capture-ui/src'

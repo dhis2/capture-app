@@ -16,9 +16,7 @@ const getValidatorContainers = () => {
         {
             validator: Validators.wordToValidatorMap.get('required'),
             message:
-                i18n.t(
-                    Validators.wordToValidatorMap.get('required').message,
-                ),
+                i18n.t('A value is required'),
         },
         {
             validator: preValidateDate,

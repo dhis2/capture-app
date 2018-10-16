@@ -1,6 +1,23 @@
 // @flow
 import { combineEpics } from 'redux-observable';
 import {
+    cancelNewEventEpic,
+    cancelNewEventLocationChangeEpic,
+    cancelNewEventIncompleteSelectionsLocationChangeEpic,
+    newEventAsyncUpdateFieldEpic,
+    resetDataEntryForNewEventEpic,
+    openNewEventInDataEntryEpic,
+    resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
+    runRulesForSingleEventEpic,
+    saveNewEventEpic,
+    saveNewEventLocationChangeEpic,
+    saveNewEventAddAnotherEpic,
+    saveNewEventAddAnotherFailedEpic,
+    newEventPageSelectorUpdateURLEpic,
+    newEventPageSelectorResetURLEpic,
+    addNoteForNewSingleEventEpic,
+} from 'capture-core/components/Pages/NewEvent';
+import {
     mainSelectionsCompletedEpic,
     orgUnitDataRetrivedEpic,
     mainSelectionsFromUrlGetOrgUnitDataEpic,
@@ -16,31 +33,8 @@ import {
     openNewEventPageLocationChangeEpic,
 } from 'capture-core/components/Pages/NewEvent/epics/newEvent.epics';
 import {
-    openNewEventInDataEntryEpic,
-    resetDataEntryForNewEventEpic,
-    resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
-    runRulesForSingleEventEpic,
-} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/newEventDataEntry.epics';
-import {
-    addNoteForNewSingleEventEpic,
-} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/addNoteForNewSingleEvent.epics';
-import {
-    saveNewEventEpic,
-    saveNewEventLocationChangeEpic,
-} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/saveNewSingleEvent.epics';
-import {
-    cancelNewEventEpic,
-    cancelNewEventLocationChangeEpic,
-} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/cancelNewSingleEvent.epics';
-import {
-    newEventAsyncUpdateFieldEpic,
-} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/newEventAsyncUpdateField.epics';
-import {
     editEventAsyncUpdateFieldEpic,
 } from 'capture-core/components/Pages/EditEvent/DataEntry/epics/editEventAsyncUpdateField.epics';
-import {
-    cancelNewEventIncompleteSelectionsLocationChangeEpic,
-} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/cancelNewSingleEventSelectionsIncomplete.epics';
 import {
     retrieveWorkingListOnMainSelectionsCompletedEpic,
     getWorkingListOnCancelSaveEpic,
@@ -97,16 +91,8 @@ import {
     editEventPageSelectorUpdateURLEpic,
 } from 'capture-core/components/Pages/EditEvent/EditEventSelector/EditEventSelector.epics';
 import {
-    newEventPageSelectorUpdateURLEpic,
-    newEventPageSelectorResetURLEpic,
-} from 'capture-core/components/Pages/NewEvent/NewEventSelector/NewEventSelector.epics';
-import {
     includeFiltersWithValueAfterColumnSortingEpic,
 } from 'capture-core/components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.epics';
-import {
-    saveNewEventAddAnotherEpic,
-    saveNewEventAddAnotherFailedEpic,
-} from 'capture-core/components/Pages/NewEvent/DataEntry/epics/saveNewSingleEventAddAnother.epics';
 
 import { loadStartupData } from '../init/entry.epics';
 

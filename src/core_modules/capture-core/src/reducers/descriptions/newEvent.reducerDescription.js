@@ -1,36 +1,43 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { actionTypes as selectionsActionTypes } from '../../components/Pages/NewEvent/newEventSelections.actions';
 import { actionTypes as selectorActionTypes } from '../../components/Pages/MainPage/tempSelector.actions';
-import { actionTypes as newEventDataEntryActionTypes } from '../../components/Pages/NewEvent/DataEntry/newEventDataEntry.actions';
-import { actionTypes as editEventPageActionTypes } from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
-import { actionTypes as mainPageSelectorActionTypes } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
+import {
+    dataEntryActionTypes as newEventDataEntryActionTypes,
+    dataEntryUrlActionTypes as newEventdataEntryUrlActionTypes,
+    selectionsCompleteActionTypes as newEventSelectionsCompleteActionTypes,
+} from '../../components/Pages/NewEvent';
+import {
+    actionTypes as editEventPageActionTypes,
+} from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
+import {
+    actionTypes as mainPageSelectorActionTypes,
+} from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
 
 export const newEventPageDesc = createReducerDescription({
-    [selectionsActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state) => {
+    [newEventdataEntryUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state) => {
         const newState = { ...state };
         newState.isLoading = true;
         return newState;
     },
-    [selectionsActionTypes.ERROR_RETRIEVING_ORG_UNIT_BASED_ON_URL]: (state, action) => {
+    [newEventdataEntryUrlActionTypes.ERROR_RETRIEVING_ORG_UNIT_BASED_ON_URL]: (state, action) => {
         const newState = { ...state };
         newState.isLoading = false;
         newState.selectionsError = action.payload;
         return newState;
     },
-    [selectionsActionTypes.INVALID_ORG_UNIT_FROM_URL]: (state, action) => {
+    [newEventdataEntryUrlActionTypes.INVALID_ORG_UNIT_FROM_URL]: (state, action) => {
         const newState = { ...state };
         newState.isLoading = false;
         newState.selectionsError = action.payload;
         return newState;
     },
-    [selectionsActionTypes.INVALID_SELECTIONS_FROM_URL]: (state, action) => {
+    [newEventdataEntryUrlActionTypes.INVALID_SELECTIONS_FROM_URL]: (state, action) => {
         const newState = { ...state };
         newState.isLoading = false;
         newState.selectionsError = action.payload;
         return newState;
     },
-    [selectionsActionTypes.VALID_SELECTIONS_FROM_URL]: (state) => {
+    [newEventdataEntryUrlActionTypes.VALID_SELECTIONS_FROM_URL]: (state) => {
         const newState = { ...state };
         newState.isLoading = false;
         newState.selectionsError = null;
@@ -63,7 +70,7 @@ export const newEventPageDesc = createReducerDescription({
         newState.dataEntryIsLoading = false;
         return newState;
     },
-    [newEventDataEntryActionTypes.SET_NEW_EVENT_FORM_LAYOUT_DIRECTION]: (state, action) => {
+    [newEventSelectionsCompleteActionTypes.SET_NEW_EVENT_FORM_LAYOUT_DIRECTION]: (state, action) => {
         const newState = { ...state };
         newState.formHorizontal = action.payload.formHorizontal;
         return newState;

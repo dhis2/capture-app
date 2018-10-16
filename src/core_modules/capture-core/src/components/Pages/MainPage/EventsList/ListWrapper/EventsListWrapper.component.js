@@ -6,17 +6,23 @@ import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator
 import classNames from 'classnames';
 
 import i18n from '@dhis2/d2-i18n';
+import {
+    Table,
+    Row,
+    Cell,
+    HeaderCell,
+    Head,
+    Body,
+    Pagination,
+    sortLabelDirections,
+    sorLabelPlacements,
+} from 'capture-ui';
+import SortLabelWrapper from '../../../../DataTable/SortLabelWrapper.component';
 import elementTypes from '../../../../../metaData/DataElement/elementTypes';
-
-import getTableComponents from '../../../../d2Ui/dataTable/getTableComponents';
-import basicTableAdapter from '../../../../d2UiReactAdapters/dataTable/basicTable.adapter';
-import paginationAdapter from '../../../../d2UiReactAdapters/dataTable/pagination.adapter';
 
 import withData from '../Pagination/withData';
 import withNavigation from '../../../../Pagination/withDefaultNavigation';
 import withRowsPerPageSelector from '../../../../Pagination/withRowsPerPageSelector';
-import SortLabelWrapper from '../../../../DataTable/SortLabelWrapper.component';
-import { directions, placements } from '../../../../d2UiReactAdapters/dataTable/componentGetters/sortLabel.const';
 import withFilterSelectors from '../FilterSelectors/withFilterSelectors';
 
 import ColumnSelector from '../../../../ColumnSelector/ColumnSelector.container';
@@ -25,11 +31,6 @@ import DownloadTable from '../../../../DownloadTable/DownloadTable.container';
 import withHeader from '../Header/withHeader';
 import withListHeaderWrapper from '../../ListHeaderWrapper/withListHeaderWrapper';
 import OptionSet from '../../../../../metaData/OptionSet/OptionSet';
-
-// $FlowSuppress
-const { Table, Row, Cell, HeaderCell, Head, Body } = getTableComponents(basicTableAdapter);
-// $FlowSuppress
-const { Pagination } = getTableComponents(paginationAdapter);
 
 const PaginationNavigationHOC = withNavigation()(Pagination);
 const RowsSelectorHOC = withRowsPerPageSelector()(PaginationNavigationHOC);
@@ -176,13 +177,13 @@ class EventsList extends React.Component<Props> {
                         isActive={column.id === sortById}
                         initialDirection={
                             EventsList.typesWithAscendingInitialDirection.includes(column.type)
-                                ? directions.ASC
-                                : directions.DESC
+                                ? sortLabelDirections.ASC
+                                : sortLabelDirections.DESC
                         }
                         placement={
                             EventsList.typesWithRightPlacement.includes(column.type)
-                                ? placements.RIGHT
-                                : placements.LEFT
+                                ? sorLabelPlacements.RIGHT
+                                : sorLabelPlacements.LEFT
                         }
                         direction={sortByDirection}
                         onSort={this.getSortHandler(column.id)}

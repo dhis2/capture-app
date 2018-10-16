@@ -20,6 +20,7 @@ const valueConvertersForType = {
     [elementTypes.TRUE_ONLY]: () => 'true',
     [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'true' : 'false'),
     [elementTypes.FILE_RESOURCE]: (rawValue: Object) => rawValue.value,
+    [elementTypes.IMAGE]: (rawValue: Object) => rawValue.value,
     [elementTypes.COORDINATE]: (rawValue: Object) => `[${rawValue.longitude},${rawValue.latitude}]`,
 };
 

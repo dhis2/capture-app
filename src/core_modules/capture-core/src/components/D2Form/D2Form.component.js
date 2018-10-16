@@ -121,6 +121,7 @@ export class D2Form extends Component<Props> {
             key={section.id}
             innerRef={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
             sectionMetaData={section}
+            customForm={this.props.formFoundation.customForm}
             formId={this.getFormId()}
             formBuilderId={this.getFormBuilderId(section.id)}
             sectionId={section.id}
@@ -135,6 +136,7 @@ export class D2Form extends Component<Props> {
             <D2SectionContainer
                 innerRef={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
                 sectionMetaData={section}
+                customForm={this.props.formFoundation.customForm}
                 formId={this.getFormId()}
                 formBuilderId={this.getFormBuilderId(section.id)}
                 sectionId={section.id}

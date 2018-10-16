@@ -5,7 +5,7 @@ import {
     actionTypes as newEventDataEntryActionTypes,
     batchActionTypes as newEventDataEntryBatchActionTypes,
     startSaveNewEventAddAnother,
-} from '../newEventDataEntry.actions';
+} from '../actions/dataEntry.actions';
 
 import {
     newRecentlyAddedEvent,

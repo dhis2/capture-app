@@ -7,6 +7,7 @@ import isArray from 'd2-utilizr/src/isArray';
 import isObject from 'd2-utilizr/src/isObject';
 
 import Section from './Section';
+import CustomForm from './CustomForm';
 import DataElement from '../DataElement/DataElement';
 import errorCreator from '../../utils/errorCreator';
 import type { ConvertFn } from '../DataElement/DataElement';
@@ -28,6 +29,7 @@ export default class RenderFoundation {
     _sections: Map<string, Section>;
     _labels: { [key: string]: string };
     _programRules: Array<ProgramRule>;
+    _customForm: ?CustomForm;
 
     constructor(initFn: ?(_this: RenderFoundation) => void) {
         this._sections = new Map();
@@ -82,10 +84,16 @@ export default class RenderFoundation {
         return this._sections;
     }
 
+    set customForm(customForm: CustomForm) {
+        this._customForm = customForm;
+    }
+    get customForm() {
+        return this._customForm;
+    }
+
     set featureType(featureType: string) {
         this._featureType = featureType;
     }
-
     get featureType(): string {
         return this._featureType;
     }

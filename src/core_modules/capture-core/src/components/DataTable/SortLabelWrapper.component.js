@@ -7,13 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
 import i18n from '@dhis2/d2-i18n';
-import getTableComponents from '../d2Ui/dataTable/getTableComponents';
-import sortLabelAdapter from '../d2UiReactAdapters/dataTable/sortLabel.adapter';
-
-import { directions } from '../d2UiReactAdapters/dataTable/componentGetters/sortLabel.const';
-
-// $FlowSuppress
-const { SortLabel } = getTableComponents(sortLabelAdapter);
+import { SortLabel, sortLabelDirections } from 'capture-ui';
 
 const styles = () => ({
     iconBase: {
@@ -37,25 +31,25 @@ type Props = {
 
 class SortLabelWrapper extends React.Component<Props> {
     getIconClickHandler = (
-        direction: $Values<typeof directions>,
-        onSort: (direction: $Values<typeof directions>) => void) =>
+        direction: $Values<typeof sortLabelDirections>,
+        onSort: (direction: $Values<typeof sortLabelDirections>) => void) =>
         () => {
             if (!this.props.disabled) {
                 onSort(direction);
             }
         }
 
-    getActiveIcons = (direction?: ?$Values<typeof directions>,
-        onSort: (direction: $Values<typeof directions>) => void,
+    getActiveIcons = (direction?: ?$Values<typeof sortLabelDirections>,
+        onSort: (direction: $Values<typeof sortLabelDirections>) => void,
     ) => {
         const isDisabled = this.props.disabled;
         const classes = this.props.classes;
-        const IconComponent = direction === directions.ASC ? ArrowUpwardIcon : ArrowDownwardIcon;
+        const IconComponent = direction === sortLabelDirections.ASC ? ArrowUpwardIcon : ArrowDownwardIcon;
         const icon = (
             <IconComponent
                 className={isDisabled ? classes.iconBase : classNames(classes.iconBase, classes.enabledIcon)}
                 onClick={this.getIconClickHandler(
-                    direction === directions.DESC ? directions.ASC : directions.DESC,
+                    direction === sortLabelDirections.DESC ? sortLabelDirections.ASC : sortLabelDirections.DESC,
                     onSort,
                 )}
             />
@@ -84,8 +78,8 @@ class SortLabelWrapper extends React.Component<Props> {
 
     getIcons = (
         isActive: boolean,
-        direction?: ?$Values<typeof directions>,
-        onSort: (direction: $Values<typeof directions>,
+        direction?: ?$Values<typeof sortLabelDirections>,
+        onSort: (direction: $Values<typeof sortLabelDirections>,
     ) => void) => {
         if (isActive) {
             return this.getActiveIcons(direction, onSort);

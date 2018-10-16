@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-10-09T08:49:10.411Z\n"
-"PO-Revision-Date: 2018-10-09T08:49:10.411Z\n"
+"POT-Creation-Date: 2018-10-10T13:15:12.538Z\n"
+"PO-Revision-Date: 2018-10-10T13:15:12.538Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -221,6 +221,44 @@ msgstr ""
 msgid "Selected program is invalid for registering unit"
 msgstr ""
 
+msgid "Saving to"
+msgstr ""
+
+msgid "in"
+msgstr ""
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+
+msgid "A value is required"
+msgstr ""
+
+msgid "Save and add another"
+msgstr ""
+
+msgid "Save and exit"
+msgstr ""
+
+msgid "Finish"
+msgstr ""
+
+msgid "events added"
+msgstr ""
+
+msgid "No events added"
+msgstr ""
+
+msgid "Switch to form view"
+msgstr ""
+
+msgid "Switch to row view"
+msgstr ""
+
+msgid "New event"
+msgstr ""
+
 msgid "Select a registering unit and program above to get started"
 msgstr ""
 
@@ -233,42 +271,7 @@ msgstr ""
 msgid "Select a category option to start reporting"
 msgstr ""
 
-msgid "New event"
-msgstr ""
-
-msgid "Switch to form view"
-msgstr ""
-
-msgid "Switch to row view"
-msgstr ""
-
-msgid "Saving to"
-msgstr ""
-
-msgid "in"
-msgstr ""
-
-msgid ""
-"This is not an event program or the metadata is corrupt. See log for "
-"details."
-msgstr ""
-
-msgid "Save and add another"
-msgstr ""
-
-msgid "Save and exit"
-msgstr ""
-
-msgid "Finish"
-msgstr ""
-
 msgid "Are you sure? All unsaved data will be lost"
-msgstr ""
-
-msgid "events added"
-msgstr ""
-
-msgid "No events added"
 msgstr ""
 
 msgid "Reset"

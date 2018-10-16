@@ -9,7 +9,6 @@ import { placements } from '../../../../components/DataEntry/dataEntryField/data
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import getNoteValidatorContainers from './fieldValidators/note.validatorContainersGetter';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
-import withDefaultFieldContainer from '../../../D2Form/field/withDefaultFieldContainer';
 import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import withMainButton from './withMainButton';
 import withFilterProps from '../../../FormFields/New/HOC/withFilterProps';
@@ -25,10 +24,10 @@ import {
     PolygonField,
     withCalculateMessages,
     withDisplayMessages,
+    withDefaultFieldContainer,
+    withDefaultShouldUpdateInterface,
 } from '../../../FormFields/New';
 
-import withDefaultShouldUpdateInterface from
-    '../../../D2Form/field/withDefaultShouldUpdateInterface';
 import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
 import withIndicatorOutput from '../../../DataEntry/dataEntryOutput/withIndicatorOutput';
 import withFeedbackOutput from '../../../DataEntry/dataEntryOutput/withFeedbackOutput';

@@ -6,8 +6,9 @@ import {
 } from '../../components/Pages/MainPage/EventsList/Pagination/pagination.actions';
 import { actionTypes as eventsListActionTypes } from '../../components/Pages/MainPage/EventsList/eventsList.actions';
 import {
-    actionTypes as newEventDataEntryActionTypes,
-} from '../../components/Pages/NewEvent/DataEntry/newEventDataEntry.actions';
+    dataEntryActionTypes as newEventDataEntryActionTypes,
+    selectorActionTypes as newEventSelectorActionTypes,
+} from '../../components/Pages/NewEvent';
 import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
@@ -26,9 +27,6 @@ import {
 import {
     actionTypes as quickSelectorActionTypes,
 } from '../../components/QuickSelector/actions/QuickSelector.actions';
-import {
-    actionTypes as newEventSelectorActionTypes,
-} from '../../components/Pages/NewEvent/newEventSelections.actions';
 import {
     actionTypes as editEventSelectorActionTypes,
 } from '../../components/Pages/EditEvent/editEvent.actions';

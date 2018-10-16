@@ -153,6 +153,6 @@ const getCalculateMessagesHOC = (InnerComponent: React.ComponentType<any>, overr
         }
     };
 
-export default (overrideMessagesPropNames: Object) =>
+export default (overrideMessagesPropNames?: Object) =>
     (InnerComponent: React.ComponentType<any>) =>
         (getCalculateMessagesHOC(InnerComponent, overrideMessagesPropNames));

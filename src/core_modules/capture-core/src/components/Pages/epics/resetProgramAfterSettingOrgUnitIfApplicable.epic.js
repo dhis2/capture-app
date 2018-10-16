@@ -8,7 +8,7 @@ import {
 } from '../../Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
 import {
     actionTypes as newEventSelectorActionTypes,
-} from '../../Pages/NewEvent/NewEventSelector/NewEventSelector.actions';
+} from '../../Pages/NewEvent/SelectorLevel/selectorLevel.actions';
 
 import {
     resetProgramIdBase,
