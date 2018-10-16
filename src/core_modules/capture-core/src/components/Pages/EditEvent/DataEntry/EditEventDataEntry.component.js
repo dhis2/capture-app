@@ -41,6 +41,11 @@ const getStyles = (theme: Theme) => ({
         borderRadius: theme.typography.pxToRem(2),
         padding: theme.typography.pxToRem(20),
     },
+    fieldLabelMediaBased: {
+        [theme.breakpoints.down(523)]: {
+            paddingTop: '0px !important',
+        },
+    },
 });
 
 const overrideMessagePropNames = {
@@ -108,7 +113,8 @@ const buildReportDateSettingsFn = () => {
     const reportDateSettings = (props: Object) => ({
         component: reportDateComponent,
         componentProps: createComponentProps(props, {
-            width: 350,
+            width: '100%',
+            calendarWidth: 350,
             label: props.formFoundation.getLabel('eventDate'),
             required: true,
         }),
@@ -176,7 +182,7 @@ const buildGeometrySettingsFn = () => (props: Object) => {
         return {
             component: pointComponent,
             componentProps: createComponentProps(props, {
-                width: props && props.formHorizontal ? 150 : 350,
+                width: props && props.formHorizontal ? 150 : '100%',
                 label: 'Coordinate',
                 required: false,
             }),
@@ -214,6 +220,7 @@ const buildCompleteFieldSettingsFn = () => {
         component: completeComponent,
         componentProps: createComponentProps(props, {
             label: 'Complete event',
+            id: 'complete',
         }),
         propName: 'complete',
         validatorContainers: [

@@ -6,7 +6,7 @@ import log from 'loglevel';
 import isArray from 'd2-utilizr/src/isArray';
 
 import Option from './Option';
-import { viewTypes, inputTypes } from './optionSet.const';
+import { viewTypes, inputTypes, inputTypesAsArray } from './optionSet.const';
 import errorCreator from '../../utils/errorCreator';
 import DataElement from '../DataElement/DataElement';
 
@@ -46,7 +46,7 @@ export default class OptionSet {
 
         this._id = id;
         this._dataElement = dataElement;
-        this._inputType = inputTypes.SELECT;
+        this._inputType = inputTypes.DROPDOWN;
     }
 
     set id(id: string) {
@@ -61,7 +61,7 @@ export default class OptionSet {
             return;
         }
 
-        if (inputTypes[inputType]) {
+        if (inputTypesAsArray.includes(inputType)) {
             this._inputType = inputType;
         } else {
             log.warn(errorCreator(OptionSet.errorMessages.UNSUPPORTED_INPUTTYPE)({ optionSet: this, inputType }));

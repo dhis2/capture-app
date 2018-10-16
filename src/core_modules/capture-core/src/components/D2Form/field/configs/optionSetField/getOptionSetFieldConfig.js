@@ -1,24 +1,56 @@
 // @flow
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { OptionSetSelectFieldForForm, OptionSetBoxesFieldForForm } from '../../Components';
-import { inputTypes as optionSetInputTypes } from '../../../../../metaData/OptionSet/optionSet.const';
+import { getOptions, getFormOptionSet } from './optionSetHelpers';
+import { orientations } from '../../../../FormFields/New';
+import { inputTypes } from '../../../../../metaData/OptionSet/optionSet.const';
 import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
+import OptionSet from '../../../../../metaData/OptionSet/OptionSet';
 
-const getOptionSetFieldConfig = (metaData: MetaDataElement, options: Object) => {
-    const props = createProps({
-        formHorizontal: options.formHorizontal,
-        optionSet: metaData.optionSet,
+const mapInputTypeToPropsGetterFn = {
+    [inputTypes.DROPDOWN]: (metaData: MetaDataElement) => ({
+        // $FlowSuppress
+        optionSet: getFormOptionSet(metaData.optionSet),
         nullable: !metaData.compulsory,
         style: {
             width: '100%',
         },
+    }),
+    [inputTypes.HORIZONTAL_RADIOBUTTONS]: (metaData: MetaDataElement) => ({
+        // $FlowSuppress
+        options: getOptions(metaData.optionSet),
+        id: metaData.id,
+    }),
+    [inputTypes.VERTICAL_RADIOBUTTONS]: (metaData: MetaDataElement) => ({
+        orientation: orientations.VERTICAL,
+        // $FlowSuppress
+        options: getOptions(metaData.optionSet),
+        id: metaData.id,
+    }),
+};
+
+const mapInputTypeToComponent = {
+    [inputTypes.DROPDOWN]: OptionSetSelectFieldForForm,
+    [inputTypes.HORIZONTAL_RADIOBUTTONS]: OptionSetBoxesFieldForForm,
+    [inputTypes.VERTICAL_RADIOBUTTONS]: OptionSetBoxesFieldForForm,
+};
+
+
+const getOptionSetFieldConfig = (metaData: MetaDataElement, options: Object) => {
+    // $FlowSuppress
+    const optionSet: OptionSet = metaData.optionSet;
+    const inputType = optionSet.inputType;
+    const inputTypeProps = mapInputTypeToPropsGetterFn[inputType](metaData);
+
+    const props = createProps({
+        formHorizontal: options.formHorizontal,
+        ...inputTypeProps,
     }, options, metaData);
 
     return createFieldConfig({
-        component: (metaData.optionSet.inputType === optionSetInputTypes.SELECT
-            ? OptionSetSelectFieldForForm
-            : OptionSetBoxesFieldForForm),
+        component: mapInputTypeToComponent[inputType],
         props,
+        commitEvent: inputType === inputTypes.DROPDOWN ? 'onBlur' : 'onSelect',
     }, metaData);
 };
 
