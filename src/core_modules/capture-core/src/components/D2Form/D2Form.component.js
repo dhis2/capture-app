@@ -13,6 +13,10 @@ const styles = () => ({
     container: {
         paddingTop: 10,
         paddingBottom: 10,
+    },
+    containerCustomForm: {
+        paddingTop: 10,
+        paddingBottom: 10,
         overflow: 'auto',
     },
 });
@@ -20,7 +24,10 @@ const styles = () => ({
 type Props = {
     formFoundation: RenderFoundation,
     id: string,
-    classes: Object,
+    classes: {
+        container: string,
+        containerCustomForm: string,
+    },
     formHorizontal: boolean,
 };
 
@@ -129,9 +136,9 @@ export class D2Form extends Component<Props> {
             {...passOnProps}
         />
     )
-    renderVertical = (section: Section, passOnProps: any, classes: any) => (
+    renderVertical = (section: Section, passOnProps: any, classes: Object) => (
         <div
-            className={classes.container}
+            className={this.props.formFoundation.customForm ? classes.containerCustomForm : classes.container}
             key={section.id}
         >
             <D2SectionContainer
