@@ -1,7 +1,6 @@
 // @flow
 import {
     VirtualizedSelectField,
-    withConvertedOptionSet,
     withSelectTranslations,
     withGotoInterface,
     withHideCompatibility,
@@ -23,11 +22,9 @@ export default withGotoInterface()(
                 withFocusSaver()(
                     withCalculateMessages()(
                         withDisplayMessages()(
-                            withConvertedOptionSet()(
-                                withSelectTranslations()(
-                                    withCustomElementContainer(getContainerClass)(
-                                        VirtualizedSelectField,
-                                    ),
+                            withSelectTranslations()(
+                                withCustomElementContainer(getContainerClass)(
+                                    VirtualizedSelectField,
                                 ),
                             ),
                         ),

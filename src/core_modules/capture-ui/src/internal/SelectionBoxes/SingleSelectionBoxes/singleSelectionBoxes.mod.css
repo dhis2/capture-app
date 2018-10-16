@@ -1,5 +1,6 @@
 .containerHorizontal {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .containerVertical {

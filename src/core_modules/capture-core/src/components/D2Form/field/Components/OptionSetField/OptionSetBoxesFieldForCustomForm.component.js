@@ -1,30 +1,23 @@
 // @flow
-// TODO: To use this: Create new multiSelectionBoxes and reimplement this file
 import {
+    SelectionBoxes,
     withGotoInterface,
     withHideCompatibility,
     withDefaultShouldUpdateInterface,
+    withFocusSaver,
     withCalculateMessages,
-    withDefaultFieldContainer,
     withDisplayMessages,
-    withConvertedOptionSet,
 } from '../../../../FormFields/New';
 import withRequiredFieldCalculation from '../../withRequiredFieldCalculation';
-import withCustomElementContainer from '../../withCustomElementContainer';
-import SelectBoxes from '../../../../FormFields/Options/SelectBoxes/SelectBoxes.component';
 
 export default withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withRequiredFieldCalculation()(
-                withCalculateMessages()(
-                    withDefaultFieldContainer()(
+                withFocusSaver()(
+                    withCalculateMessages()(
                         withDisplayMessages()(
-                            withConvertedOptionSet()(
-                                withCustomElementContainer()(
-                                    SelectBoxes,
-                                ),
-                            ),
+                            SelectionBoxes,
                         ),
                     ),
                 ),

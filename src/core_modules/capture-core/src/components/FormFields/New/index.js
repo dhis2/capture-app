@@ -6,6 +6,7 @@ export { default as AgeField } from './Fields/AgeField/AgeField.component';
 export { default as TrueOnlyField } from './Fields/TrueOnlyField/TrueOnlyField.component';
 export { default as VirtualizedSelectField } from './Fields/VirtualizedSelectField/VirtualizedSelectField.component';
 export { default as withSelectTranslations } from './Fields/VirtualizedSelectField/withTranslations';
+export { default as SelectionBoxes } from './Fields/SelectionBoxes/SelectionBoxes.component';
 export { default as DateField } from './Fields/DateAndTimeFields/DateField/DateField.component';
 export { default as DateTimeField } from './Fields/DateAndTimeFields/DateTimeField/DateTimeField.component';
 export { default as CoordinateField } from './Fields/CoordinateField/CoordinateField.component';

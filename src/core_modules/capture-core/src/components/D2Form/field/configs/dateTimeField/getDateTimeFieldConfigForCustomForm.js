@@ -6,7 +6,7 @@ import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
 
 const getDateTimeFieldConfig = (metaData: MetaDataElement) => {
     const props = createProps({
-        dateWidth: 350,
+        dateWidth: '100%',
         dateMaxWidth: 350,
         calendarWidth: 350,
         orientation: orientations.HORIZONTAL,

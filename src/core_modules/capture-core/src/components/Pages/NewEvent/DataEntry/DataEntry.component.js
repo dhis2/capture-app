@@ -61,7 +61,7 @@ const getStyles = theme => ({
         paddingBottom: theme.typography.pxToRem(15),
     },
     fieldLabelMediaBased: {
-        [theme.breakpoints.down(481)]: {
+        [theme.breakpoints.down(523)]: {
             paddingTop: '0px !important',
         },
     },
@@ -178,7 +178,7 @@ const buildReportDateSettingsFn = () => {
     const reportDateSettings = (props: Object) => ({
         component: reportDateComponent,
         componentProps: createComponentProps(props, {
-            width: props && props.formHorizontal ? 150 : 350,
+            width: props && props.formHorizontal ? 150 : '100%',
             calendarWidth: 350,
             label: props.formFoundation.getLabel('eventDate'),
             required: true,
@@ -291,6 +291,7 @@ const buildCompleteFieldSettingsFn = () => {
         component: completeComponent,
         componentProps: createComponentProps(props, {
             label: 'Complete event',
+            id: 'complete',
         }),
         propName: 'complete',
         validatorContainers: [

@@ -1,25 +1,42 @@
 // @flow
-// TODO: To use this: Create new multiSelectionBoxes and reimplement this file
 import {
+    SelectionBoxes,
     withGotoInterface,
     withHideCompatibility,
     withDefaultShouldUpdateInterface,
+    withFocusSaver,
     withCalculateMessages,
     withDefaultFieldContainer,
+    withLabel,
     withDisplayMessages,
-    withConvertedOptionSet,
+    withFilterProps,
 } from '../../../../FormFields/New';
 import withRequiredFieldCalculation from '../../withRequiredFieldCalculation';
-import SelectBoxes from '../../../../FormFields/Options/SelectBoxes/SelectBoxes.component';
+import labelTypeClasses from '../../buildField.mod.css';
+
+const getFilteredProps = (props: Object) => {
+    const { formHorizontal, fieldLabelMediaBasedClass, ...passOnProps } = props;
+    return passOnProps;
+};
 
 export default withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
             withRequiredFieldCalculation()(
-                withCalculateMessages()(
-                    withDefaultFieldContainer()(
-                        withDisplayMessages()(
-                            withConvertedOptionSet()(SelectBoxes),
+                withFocusSaver()(
+                    withCalculateMessages()(
+                        withDefaultFieldContainer()(
+                            withLabel({
+                                onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                                onGetCustomFieldLabeClass: (props: Object) =>
+                                    `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.optionSetBoxesLabel}`,
+                            })(
+                                withDisplayMessages()(
+                                    withFilterProps(getFilteredProps)(
+                                        SelectionBoxes,
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                 ),

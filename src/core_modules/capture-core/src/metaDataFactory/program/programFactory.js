@@ -27,6 +27,8 @@ import type { CachedProgramIndicator } from './getRulesAndVariablesFromIndicator
 import type { ProgramRule, ProgramRuleVariable } from '../../RulesEngine/rulesEngine.types';
 import capitalizeFirstLetter from '../../utils/string/capitalizeFirstLetter';
 
+type RenderType = 'DROPDOWN' | 'VERTICAL_RADIOBUTTONS' | 'HORIZONTAL RADIOBUTTONS';
+
 type CachedTranslation = {
     property: string,
     locale: string,
@@ -49,6 +51,11 @@ type CachedProgramStageDataElement = {
     compulsory: boolean,
     displayInReports: boolean,
     renderOptionsAsRadio?: ?boolean,
+    renderType: {
+        DESKTOP: {
+            type: RenderType,
+        },
+    },
     dataElement: CachedDataElement,
 };
 
@@ -151,7 +158,17 @@ function getDataElementType(d2ValueType: string) {
     return converters[d2ValueType] || d2ValueType;
 }
 
-function buildOptionSet(id: string, dataElement: DataElement, renderOptionsAsRadio: ?boolean) {
+function camelCaseRenderType(renderType: string) {
+    const lowerCased = renderType.toLowerCase();
+    const camelCased = lowerCased.replace(/_(.)/g, (_, character) => character.toUpperCase());
+    return camelCased;
+}
+
+function getRenderType(renderType: string) {
+    return renderType && camelCaseRenderType(renderType);
+}
+
+function buildOptionSet(id: string, dataElement: DataElement, renderOptionsAsRadio: ?boolean, renderType: RenderType) {
     const d2OptionSet = currentD2OptionSets && currentD2OptionSets.find(d2Os => d2Os.id === id);
 
     if (!d2OptionSet) {
@@ -171,7 +188,7 @@ function buildOptionSet(id: string, dataElement: DataElement, renderOptionsAsRad
     );
 
     const optionSet = new OptionSet(id, options, dataElement, convertOptionSetValue);
-    optionSet.inputType = renderOptionsAsRadio ? inputTypes.RADIO : null;
+    optionSet.inputType = getRenderType(renderType) || (renderOptionsAsRadio ? inputTypes.VERTICAL_RADIOBUTTONS : null);
     return optionSet;
 }
 
@@ -196,7 +213,11 @@ function buildDataElement(d2ProgramStageDataElement: CachedProgramStageDataEleme
     });
 
     if (d2DataElement.optionSet && d2DataElement.optionSet.id) {
-        dataElement.optionSet = buildOptionSet(d2DataElement.optionSet.id, dataElement, d2ProgramStageDataElement.renderOptionsAsRadio);
+        dataElement.optionSet = buildOptionSet(
+            d2DataElement.optionSet.id,
+            dataElement,
+            d2ProgramStageDataElement.renderOptionsAsRadio,
+            d2ProgramStageDataElement.renderType && d2ProgramStageDataElement.renderType.DESKTOP && d2ProgramStageDataElement.renderType.DESKTOP.type);
     }
 
     return dataElement;

@@ -23,6 +23,7 @@ const styles = theme => ({
     },
     verticalFormContainer: {
         flexGrow: 10,
+        maxWidth: '100%',
     },
     verticalDataEntryContainer: {
         display: 'flex',
