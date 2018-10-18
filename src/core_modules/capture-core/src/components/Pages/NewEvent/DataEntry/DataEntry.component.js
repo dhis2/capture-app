@@ -299,21 +299,30 @@ const buildCompleteFieldSettingsFn = () => {
         meta: {
             placement: placements.BOTTOM,
         },
+        passOnFieldData: true,
     });
 
     return completeSettings;
 };
 
+const saveHandlerConfig = {
+    onIsCompleting: (props: Object) => props.completeDataEntryFieldValue,
+    onFilterProps: (props: Object) => {
+        const { completeDataEntryFieldValue, ...passOnProps } = props;
+        return passOnProps;
+    },
+};
+
 const CommentField = withDataEntryField(buildNoteSettingsFn())(DataEntry);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
-const CompleteField = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
-const FeedbackOutput = withFeedbackOutput()(CompleteField);
+const FeedbackOutput = withFeedbackOutput()(ReportDateField);
 const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
 const WarningOutput = withWarningOutput()(IndicatorOutput);
 const ErrorOutput = withErrorOutput()(WarningOutput);
 const CancelableDataEntry = withCancelButton(getCancelOptions)(ErrorOutput);
-const SaveableDataEntry = withSaveHandler()(withMainButton()(CancelableDataEntry));
+const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(CancelableDataEntry));
+const WrappedDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(SaveableDataEntry);
 
 type Props = {
     formFoundation: RenderFoundation,
@@ -417,7 +426,7 @@ class NewEventDataEntry extends Component<Props> {
         return (
             <div>
                 <div>
-                    <SaveableDataEntry
+                    <WrappedDataEntry
                         id={'singleEvent'}
                         formFoundation={formFoundation}
                         onUpdateFormField={onUpdateField}

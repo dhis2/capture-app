@@ -228,21 +228,30 @@ const buildCompleteFieldSettingsFn = () => {
         meta: {
             placement: placements.BOTTOM,
         },
+        passOnFieldData: true,
     });
 
     return completeSettings;
 };
 
+const saveHandlerConfig = {
+    onIsCompleting: (props: Object) => props.completeDataEntryFieldValue,
+    onFilterProps: (props: Object) => {
+        const { completeDataEntryFieldValue, ...passOnProps } = props;
+        return passOnProps;
+    },
+};
+
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(DataEntry);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
-const CompleteField = withDataEntryField(buildCompleteFieldSettingsFn())(ReportDateField);
-const FeedbackOutput = withFeedbackOutput()(CompleteField);
+const FeedbackOutput = withFeedbackOutput()(ReportDateField);
 const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
 const WarningOutput = withWarningOutput()(IndicatorOutput);
 const ErrorOutput = withErrorOutput()(WarningOutput);
-const SaveableDataEntry = withSaveHandler()(withMainButton()(ErrorOutput));
+const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ErrorOutput));
 const NotesDataEntry = withNotes()(SaveableDataEntry);
 const CancelableDataEntry = withCancelButton(getCancelOptions)(NotesDataEntry);
+const DataEntryWrapper = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);
 
 type Props = {
     formFoundation: ?RenderFoundation,
@@ -255,7 +264,7 @@ type Props = {
         dataEntryContainer: string,
         fieldLabelMediaBased?: ?string,
     },
-    theme: any,
+    theme: Theme,
 };
 
 class EditEventDataEntry extends Component<Props> {
@@ -283,7 +292,7 @@ class EditEventDataEntry extends Component<Props> {
         } = this.props;
         return (
             <div className={classes.dataEntryContainer}>
-                <CancelableDataEntry
+                <DataEntryWrapper
                     id={'singleEvent'}
                     formFoundation={formFoundation}
                     onUpdateFormField={onUpdateField}

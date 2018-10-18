@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import log from 'loglevel';
 import errorCreator from '../../utils/errorCreator';
@@ -31,7 +31,7 @@ type Props = {
     formHorizontal: boolean,
 };
 
-export class D2Form extends Component<Props> {
+export class D2Form extends React.PureComponent<Props> {
     validateForm: () => void;
     sectionInstances: Map<string, D2Section>;
 
@@ -68,7 +68,7 @@ export class D2Form extends Component<Props> {
             });
     }
 
-    validateFormReturningFailedFields(): Array<any> {
+    validateFormReturningFailedFields(options: Object): Array<any> {
         return Array.from(this.sectionInstances.entries())
             .map(entry => entry[1])
             .reduce((failedFormFields: Array<any>, sectionInstance: D2Section) => {
@@ -77,7 +77,7 @@ export class D2Form extends Component<Props> {
                         .sectionFieldsInstance
                         .getWrappedInstance();
 
-                    if (!sectionFieldsInstance.isValid()) {
+                    if (!sectionFieldsInstance.isValid(options)) {
                         failedFormFields = [...failedFormFields, ...sectionFieldsInstance.getInvalidFields()];
                     }
                 } catch (error) {
@@ -95,8 +95,8 @@ export class D2Form extends Component<Props> {
             }, []);
     }
 
-    validateFormScrollToFirstFailedField() {
-        const failedFields = this.validateFormReturningFailedFields();
+    validateFormScrollToFirstFailedField(options: Object) {
+        const failedFields = this.validateFormReturningFailedFields(options);
         if (!failedFields || failedFields.length === 0) {
             return true;
         }
@@ -145,6 +145,7 @@ export class D2Form extends Component<Props> {
                 innerRef={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
                 sectionMetaData={section}
                 customForm={this.props.formFoundation.customForm}
+                validationStrategy={this.props.formFoundation.validationStrategy}
                 formId={this.getFormId()}
                 formBuilderId={this.getFormBuilderId(section.id)}
                 sectionId={section.id}

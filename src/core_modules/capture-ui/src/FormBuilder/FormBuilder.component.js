@@ -3,25 +3,13 @@
 import * as React from 'react';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import isObject from 'd2-utilizr/lib/isObject';
-import { withStyles } from '@material-ui/core/styles';
-
-const styles = () => ({
-    fieldOuterContainer: {
-        position: 'relative',
-    },
-    fieldHorizontalContainer: {
-        position: 'relative',
-        flexGrow: 1,
-    },
-    formBuilderHorizontalContainer: {
-        display: 'flex',
-    },
-});
+import defaultClasses from './formBuilder.mod.css';
 
 
 export type ValidatorContainer = {
     validator: (value: any) => boolean,
     message: string,
+    type?: ?string,
 };
 
 export type FieldConfig = {
@@ -37,7 +25,18 @@ type FieldUI = {
     touched?: ?boolean,
     valid?: ?boolean,
     errorMessage?: ?string,
+    errorType?: ?string,
 };
+
+type RenderDividerFn = (index: number, fieldsCount: number, field: FieldConfig) => React.Node;
+type GetContainerPropsFn = (index: number, fieldsCount: number, field: FieldConfig) => Object;
+
+type RenderFieldFn = (
+    field: FieldConfig,
+    index: number,
+    onRenderDivider?: ?RenderDividerFn,
+    onGetContainerProps?: ?GetContainerPropsFn
+) => React.Node
 
 type Props = {
     id: string,
@@ -50,11 +49,10 @@ type Props = {
     onFieldsValidated: (fieldsUI: { [id: string]: FieldUI }, formBuilderId: string) => void,
     validationAttempted?: ?boolean,
     validateIfNoUIData?: ?boolean,
-    classes: Object,
     formHorizontal: ?boolean,
-    children?: ?((field: FieldConfig) => React.Node, fields: Array<FieldConfig>) => React.Node,
-    onRenderDivider: (index: number, total: number, field: Field) => ?React.Element<any>,
-    onGetContainerProps: (index: number, total: number, field: Field) => ?React.Element<any>,
+    children?: ?(RenderFieldFn, fields: Array<FieldConfig>) => React.Node,
+    onRenderDivider?: ?RenderDividerFn,
+    onGetContainerProps?: ?GetContainerPropsFn,
 };
 
 type FieldCommitOptions = {
@@ -62,7 +60,9 @@ type FieldCommitOptions = {
 };
 
 class FormBuilder extends React.Component<Props> {
-    static validateField(field: FieldConfig, value: any): { valid: boolean, errorMessage?: string } {
+    static validateField(
+        field: FieldConfig,
+        value: any): { valid: boolean, errorMessage?: ?string, errorType?: ?string } {
         const validatorResult = (field.validators || [])
             .reduce((pass, currentValidator) => {
                 if (pass === true) {
@@ -70,7 +70,11 @@ class FormBuilder extends React.Component<Props> {
                     if (result === true || (result && result.valid)) {
                         return true;
                     }
-                    return (result && result.errorMessage) || currentValidator.message;
+
+                    return {
+                        message: (result && result.errorMessage) || currentValidator.message,
+                        type: currentValidator.type,
+                    };
                 }
                 return pass;
             }, true);
@@ -78,7 +82,8 @@ class FormBuilder extends React.Component<Props> {
         if (validatorResult !== true) {
             return {
                 valid: false,
-                errorMessage: validatorResult,
+                errorMessage: validatorResult.message,
+                errorType: validatorResult.type,
             };
         }
 
@@ -105,7 +110,10 @@ class FormBuilder extends React.Component<Props> {
         }, {});
     }
 
-    static updateAsyncUIState(oldFieldsUI: { [id: string]: FieldUI }, newFieldsUI: { [id: string]: FieldUI }, asyncUIState: { [id: string]: Object }) {
+    static updateAsyncUIState(
+        oldFieldsUI: { [id: string]: FieldUI },
+        newFieldsUI: { [id: string]: FieldUI },
+        asyncUIState: { [id: string]: Object }) {
         return Object.keys(newFieldsUI).reduce((accAsyncUIState, fieldId) => {
             const newFieldUI = newFieldsUI[fieldId];
             const oldFieldUI = oldFieldsUI[fieldId];
@@ -190,11 +198,12 @@ class FormBuilder extends React.Component<Props> {
             return;
         }
 
-        const { valid, errorMessage } = FormBuilder.validateField(field, value);
+        const { valid, errorMessage, errorType } = FormBuilder.validateField(field, value);
         this.props.onUpdateField(value, {
             valid,
             touched,
             errorMessage,
+            errorType,
         }, fieldId, this.props.id);
     }
 
@@ -209,7 +218,7 @@ class FormBuilder extends React.Component<Props> {
     /**
      *  Retain a reference to the form field instance
     */
-    setFieldInstance(instance, id) {
+    setFieldInstance(instance: any, id: string) {
         if (!instance) {
             if (this.fieldInstances.has(id)) {
                 this.fieldInstances.delete(id);
@@ -219,8 +228,19 @@ class FormBuilder extends React.Component<Props> {
         }
     }
 
-    isValid() {
-        return Object.keys(this.props.fieldsUI).every(key => this.props.fieldsUI[key].valid);
+    isValid(typesToCheck?: ?Array<string>) {
+        return Object
+            .keys(this.props.fieldsUI)
+            .every((key) => {
+                const fieldUI = this.props.fieldsUI[key];
+                if (typesToCheck) {
+                    const isCheckable = typesToCheck.includes(fieldUI.errorType);
+                    if (!isCheckable) {
+                        return true;
+                    }
+                }
+                return fieldUI.valid;
+            });
     }
 
     getInvalidFields(externalInvalidFields?: ?{ [id: string]: boolean }) {
@@ -247,15 +267,14 @@ class FormBuilder extends React.Component<Props> {
     renderField = (
         field: FieldConfig,
         index: number,
-        onRenderDivider,
-        onGetContainerProps,
+        onRenderDivider?: ?RenderDividerFn,
+        onGetContainerProps?: ?GetContainerPropsFn,
     ) => {
         const {
             fields,
             values,
             fieldsUI,
             validationAttempted,
-            classes,
             id,
             onFieldsValidated,
             onUpdateField,
@@ -288,7 +307,7 @@ class FormBuilder extends React.Component<Props> {
         return (
             <div
                 key={field.id}
-                className={classes.fieldOuterContainer}
+                className={defaultClasses.fieldOuterContainer}
             >
                 <div
                     {...onGetContainerProps && onGetContainerProps(index, fields.length, field)}
@@ -332,4 +351,4 @@ class FormBuilder extends React.Component<Props> {
     }
 }
 
-export default withStyles(styles)(FormBuilder);
+export default FormBuilder;
