@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Section from '../Section/Section.component';
 import SectionHeaderSimple from '../Section/SectionHeaderSimple.component';
@@ -26,7 +26,7 @@ type Props = {
     formId: string,
 };
 
-class D2Section extends Component<Props> {
+class D2Section extends React.PureComponent<Props> {
     sectionFieldsInstance: ?D2SectionFields;
     renderSectionHeader() {
         const title = this.props.sectionMetaData.name;

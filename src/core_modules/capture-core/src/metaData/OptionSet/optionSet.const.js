@@ -2,9 +2,14 @@
 // @flow
 
 export const inputTypes = {
-    SELECT: 'SELECT',
-    RADIO: 'RADIO',
+    DROPDOWN: 'dropdown',
+    VERTICAL_RADIOBUTTONS: 'verticalRadiobuttons',
+    HORIZONTAL_RADIOBUTTONS: 'horizontalRadiobuttons',
 };
+
+export const inputTypesAsArray: Array<string> = Object
+    .keys(inputTypes)
+    .map(key => inputTypes[key]);
 
 export const viewTypes = {
     ICON: 'ICON',

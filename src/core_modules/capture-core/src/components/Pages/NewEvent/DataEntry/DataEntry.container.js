@@ -25,7 +25,6 @@ const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
 
     const mapStateToProps = (state: ReduxState, props: Object) => ({
-        formHorizontal: !!state.newEventPage.formHorizontal,
         ready: !state.newEventPage.dataEntryIsLoading,
         error: !props.formFoundation ?
             i18n.t('This is not an event program or the metadata is corrupt. See log for details.') : null,

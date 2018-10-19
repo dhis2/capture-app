@@ -42,6 +42,11 @@ const getStyles = (theme: Theme) => ({
         borderRadius: theme.typography.pxToRem(2),
         padding: theme.typography.pxToRem(20),
     },
+    fieldLabelMediaBased: {
+        [theme.breakpoints.down(523)]: {
+            paddingTop: '0px !important',
+        },
+    },
 });
 
 const overrideMessagePropNames = {
@@ -109,7 +114,8 @@ const buildReportDateSettingsFn = () => {
     const reportDateSettings = (props: Object) => ({
         component: reportDateComponent,
         componentProps: createComponentProps(props, {
-            width: 350,
+            width: '100%',
+            calendarWidth: 350,
             label: props.formFoundation.getLabel('eventDate'),
             required: true,
         }),
@@ -177,7 +183,7 @@ const buildGeometrySettingsFn = () => (props: Object) => {
         return {
             component: pointComponent,
             componentProps: createComponentProps(props, {
-                width: props && props.formHorizontal ? 150 : 350,
+                width: props && props.formHorizontal ? 150 : '100%',
                 label: 'Coordinate',
                 required: false,
             }),
@@ -215,6 +221,7 @@ const buildCompleteFieldSettingsFn = () => {
         component: completeComponent,
         componentProps: createComponentProps(props, {
             label: 'Complete event',
+            id: 'complete',
         }),
         propName: 'complete',
         validatorContainers: [
@@ -222,6 +229,7 @@ const buildCompleteFieldSettingsFn = () => {
         meta: {
             placement: placements.BOTTOM,
         },
+        passOnFieldData: true,
     });
 
     return completeSettings;
@@ -261,17 +269,24 @@ const buildNotesSettingsFn = () => {
     return notesSettings;
 };
 
+const saveHandlerConfig = {
+    onIsCompleting: (props: Object) => props.completeDataEntryFieldValue,
+    onFilterProps: (props: Object) => {
+        const { completeDataEntryFieldValue, ...passOnProps } = props;
+        return passOnProps;
+    },
+};
+
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(DataEntry);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
 const NotesField = withDataEntryField(buildNotesSettingsFn())(ReportDateField);
-const CompleteField = withDataEntryField(buildCompleteFieldSettingsFn())(NotesField);
-
-const FeedbackOutput = withFeedbackOutput()(CompleteField);
+const FeedbackOutput = withFeedbackOutput()(NotesField);
 const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
 const WarningOutput = withWarningOutput()(IndicatorOutput);
 const ErrorOutput = withErrorOutput()(WarningOutput);
-const SaveableDataEntry = withSaveHandler()(withMainButton()(ErrorOutput));
+const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ErrorOutput));
 const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
+const DataEntryWrapper = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);
 
 type Props = {
     formFoundation: ?RenderFoundation,
@@ -284,7 +299,7 @@ type Props = {
         dataEntryContainer: string,
         fieldLabelMediaBased?: ?string,
     },
-    theme: any,
+    theme: Theme,
 };
 
 class EditEventDataEntry extends Component<Props> {
@@ -312,7 +327,7 @@ class EditEventDataEntry extends Component<Props> {
         } = this.props;
         return (
             <div className={classes.dataEntryContainer}>
-                <CancelableDataEntry
+                <DataEntryWrapper
                     id={'singleEvent'}
                     formFoundation={formFoundation}
                     onUpdateFormField={onUpdateField}

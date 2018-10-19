@@ -145,6 +145,12 @@ function buildTypeValidators(metaData: MetaDataElement): Array<ValidatorContaine
         [validatorContainersForType]
     ;
 
+    validatorContainersForType = validatorContainersForType
+        .map(validatorContainer => ({
+            ...validatorContainer,
+            type: 'dataType',
+        }));
+
     // $FlowSuppress
     validatorContainersForType = validatorContainersForType.map(validatorContainer => ({
         ...validatorContainer,

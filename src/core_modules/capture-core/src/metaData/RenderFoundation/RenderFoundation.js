@@ -6,6 +6,7 @@ import isFunction from 'd2-utilizr/src/isFunction';
 import isArray from 'd2-utilizr/src/isArray';
 import isObject from 'd2-utilizr/src/isObject';
 
+import { validationStrategies, validationStrategiesAsArray } from './renderFoundation.const';
 import Section from './Section';
 import CustomForm from './CustomForm';
 import DataElement from '../DataElement/DataElement';
@@ -19,6 +20,7 @@ type ValuesType = { [key: string]: any };
 export default class RenderFoundation {
     static errorMessages = {
         CONVERT_VALUES_STRUCTURE: 'Values can not be converted, data is neither an array or an object',
+        UNSUPPORTED_VALIDATION_STRATEGY: 'Tried to set an unsupported validation strategy',
     };
 
     _id: string;
@@ -30,12 +32,15 @@ export default class RenderFoundation {
     _labels: { [key: string]: string };
     _programRules: Array<ProgramRule>;
     _customForm: ?CustomForm;
+    _featureType: string;
+    _validationStrategy: $Values<typeof validationStrategies>;
 
     constructor(initFn: ?(_this: RenderFoundation) => void) {
         this._sections = new Map();
         this._labels = {};
-        initFn && isFunction(initFn) && initFn(this);
         this.programRules = [];
+        this._validationStrategy = validationStrategies.ON_UPDATE_AND_INSERT;
+        initFn && isFunction(initFn) && initFn(this);
     }
 
     set id(id: string) {
@@ -96,6 +101,24 @@ export default class RenderFoundation {
     }
     get featureType(): string {
         return this._featureType;
+    }
+
+    set validationStrategy(strategy: string) {
+        if (!strategy) {
+            return;
+        }
+
+        if (!validationStrategiesAsArray.includes(strategy)) {
+            log.warn(errorCreator(
+                RenderFoundation.errorMessages.UNSUPPORTED_VALIDATION_STRATEGY)({ renderFoundation: this, strategy }),
+            );
+            return;
+        }
+
+        this._validationStrategy = strategy;
+    }
+    get validationStrategy(): $Values<typeof validationStrategies> {
+        return this._validationStrategy;
     }
 
     addLabel({ id, label }: { id: string, label: string }) {

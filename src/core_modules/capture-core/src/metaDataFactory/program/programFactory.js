@@ -49,6 +49,11 @@ type CachedProgramStageDataElement = {
     compulsory: boolean,
     displayInReports: boolean,
     renderOptionsAsRadio?: ?boolean,
+    renderType: {
+        DESKTOP: {
+            type: string,
+        },
+    },
     dataElement: CachedDataElement,
 };
 
@@ -78,6 +83,7 @@ type CachedProgramStage = {
     formType: string,
     dataEntryForm: CachedDataEntryForm,
     featureType: string,
+    validationStrategy: string,
 };
 
 type CachedCategoryOption = {
@@ -151,7 +157,17 @@ function getDataElementType(d2ValueType: string) {
     return converters[d2ValueType] || d2ValueType;
 }
 
-function buildOptionSet(id: string, dataElement: DataElement, renderOptionsAsRadio: ?boolean) {
+function camelCaseUppercaseString(text: string) {
+    const lowerCased = text.toLowerCase();
+    const camelCased = lowerCased.replace(/_(.)/g, (_, character) => character.toUpperCase());
+    return camelCased;
+}
+
+function getRenderType(renderType: string) {
+    return renderType && camelCaseUppercaseString(renderType);
+}
+
+function buildOptionSet(id: string, dataElement: DataElement, renderOptionsAsRadio: ?boolean, renderType: string) {
     const d2OptionSet = currentD2OptionSets && currentD2OptionSets.find(d2Os => d2Os.id === id);
 
     if (!d2OptionSet) {
@@ -171,7 +187,7 @@ function buildOptionSet(id: string, dataElement: DataElement, renderOptionsAsRad
     );
 
     const optionSet = new OptionSet(id, options, dataElement, convertOptionSetValue);
-    optionSet.inputType = renderOptionsAsRadio ? inputTypes.RADIO : null;
+    optionSet.inputType = getRenderType(renderType) || (renderOptionsAsRadio ? inputTypes.VERTICAL_RADIOBUTTONS : null);
     return optionSet;
 }
 
@@ -196,7 +212,11 @@ function buildDataElement(d2ProgramStageDataElement: CachedProgramStageDataEleme
     });
 
     if (d2DataElement.optionSet && d2DataElement.optionSet.id) {
-        dataElement.optionSet = buildOptionSet(d2DataElement.optionSet.id, dataElement, d2ProgramStageDataElement.renderOptionsAsRadio);
+        dataElement.optionSet = buildOptionSet(
+            d2DataElement.optionSet.id,
+            dataElement,
+            d2ProgramStageDataElement.renderOptionsAsRadio,
+            d2ProgramStageDataElement.renderType && d2ProgramStageDataElement.renderType.DESKTOP && d2ProgramStageDataElement.renderType.DESKTOP.type);
     }
 
     return dataElement;
@@ -258,6 +278,8 @@ function buildStage(d2ProgramStage: CachedProgramStage) {
         _this.description = d2ProgramStage.description;
         _this.featureType = capitalizeFirstLetter(getFeatureType(d2ProgramStage));
         _this.addLabel({ id: 'eventDate', label: d2ProgramStage.executionDateLabel || 'Incident date' });
+        _this.validationStrategy =
+            d2ProgramStage.validationStrategy && camelCaseUppercaseString(d2ProgramStage.validationStrategy);
     });
 
     if (d2ProgramStage.formType === 'CUSTOM' && d2ProgramStage.dataEntryForm) {

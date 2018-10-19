@@ -1,16 +1,18 @@
 // @flow
 import React, { Component } from 'react';
+import FormBuilder from 'capture-ui/FormBuilder/FormBuilder.component';
+import type { FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
+
 import FormBuilderContainer from './FormBuilder.container';
 import withDivider from './FieldDivider/withDivider';
 import withAlternateBackgroundColors from './FieldAlternateBackgroundColors/withAlternateBackgroundColors';
-import FormBuilder from '../../__TEMP__/FormBuilderExternalState.component';
 import withCustomForm from './D2CustomForm/withCustomForm';
 import buildField from './field/buildField';
 
+import { validationStrategies } from '../../metaData/RenderFoundation/renderFoundation.const';
 import MetaDataElement from '../../metaData/DataElement/DataElement';
+import MetadataCustomForm from '../../metaData/RenderFoundation/CustomForm';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
-
-import type { FieldConfig } from '../../__TEMP__/FormBuilderExternalState.component';
 
 const CustomFormHOC = withCustomForm()(withDivider()(withAlternateBackgroundColors()(FormBuilderContainer)));
 type FormsValues = {
@@ -47,6 +49,7 @@ type Props = {
     formHorizontal: boolean,
     fieldOptions?: ?Object,
     customForm: MetadataCustomForm,
+    validationStrategy: $Values<typeof validationStrategies>
 };
 
 class D2SectionFields extends Component<Props> {
@@ -93,12 +96,31 @@ class D2SectionFields extends Component<Props> {
         return errorMessages.length === 0 && Object.keys(this.rulesCompulsoryErrors).length === 0;
     }
 
-    isValid() {
+    validateFull() {
         const formBuilderIsValid = this.formBuilderInstance ? this.formBuilderInstance.isValid() : false;
         if (formBuilderIsValid) {
             return this.rulesIsValid();
         }
         return false;
+    }
+
+    validateDataTypeOnly() {
+        const dataTypeIsValid = this.formBuilderInstance ? this.formBuilderInstance.isValid(['dataType']) : false;
+        return dataTypeIsValid;
+    }
+
+    isValid(options?: ?{ isCompleting: boolean }) {
+        const validationStrategy = this.props.validationStrategy;
+        if (validationStrategy === validationStrategies.NONE) {
+            return this.validateDataTypeOnly();
+        } else if (validationStrategy === validationStrategies.ON_COMPLETE) {
+            const isCompleting = options && options.isCompleting;
+            if (isCompleting) {
+                return this.validateFull();
+            }
+            return this.validateDataTypeOnly();
+        }
+        return this.validateFull();
     }
 
     getInvalidFields() {
@@ -185,6 +207,7 @@ class D2SectionFields extends Component<Props> {
             rulesMessages,
             onUpdateFieldAsync,
             fieldOptions,
+            validationStrategy,
             ...passOnProps } = this.props;
 
         this.buildRulesCompulsoryErrors();

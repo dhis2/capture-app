@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import FormBuilder from '../../__TEMP__/FormBuilderExternalState.component';
+import FormBuilder from 'capture-ui/FormBuilder/FormBuilder.component';
 import { fieldsValidated, updateFieldUIOnly } from './formBuilder.actions';
 
 const mapStateToProps = (state: ReduxState, props: { id: string }) => ({
