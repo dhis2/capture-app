@@ -7,6 +7,7 @@ import programs from 'capture-core/metaDataMemoryStores/programCollection/progra
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
 import Tooltip from '@material-ui/core/Tooltip';
+import LinkButton from '../Buttons/LinkButton.component';
 
 //Find button to be included when find(tracked entity instance) is supported
 //import SearchIcon from '@material-ui/icons/Search';
@@ -15,18 +16,15 @@ import i18n from '@dhis2/d2-i18n';
 
 const styles = () => ({
     container: {
+        display: 'flex',
+        justifyContent: 'flex-end',
         flexGrow: 1,
         padding: 10,
         textAlign: 'right',
     },
-    leftButton: {
-        float: 'left',
-    },
-    rightButton: {
-        marginRight: 5,
-    },
-    buttonWrapper: {
-        display: 'inline-block',
+    startAgainContainer: {
+        textAlign: 'start',
+        flexGrow: 1,
     },
 });
 
@@ -69,13 +67,14 @@ class ActionButtons extends Component<Props> {
             <div className={classes.container}>
                 {
                     showResetButton ?
-                        <Button
-                            onClick={this.handleStartAgainClick}
-                            color="primary"
-                            className={classes.leftButton}
-                        >
-                            { i18n.t('Reset') }
-                        </Button> :
+                        <div className={classes.startAgainContainer}>
+                            <LinkButton
+                                onClick={this.handleStartAgainClick}
+                            >
+                                { i18n.t('Start again') }
+                            </LinkButton>
+                        </div>
+                        :
                         null
                 }
                 <Tooltip title={!hasWriteAccess ? i18n.t('No write access') : ''}>

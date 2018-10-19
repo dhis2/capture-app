@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { orientations } from 'capture-ui';
 import Button from '../../Buttons/Button.component';
+import LinkButton from '../../Buttons/LinkButton.component';
 import { getApi } from '../../../d2/d2Instance';
 import LoadingMask from '../../LoadingMasks/LoadingMask.component';
 import inMemoryFileStore from '../../DataEntry/file/inMemoryFileStore';
@@ -67,8 +68,6 @@ const styles = theme => ({
     },
     deleteButton: {
         color: theme.palette.error.main,
-        textDecoration: 'underline',
-        cursor: 'pointer',
     },
     input: {
         display: 'none',
@@ -174,13 +173,12 @@ class D2Image extends Component<Props> {
                                         {` ${i18n.t('selected')}.`}
                                     </div>
                                     <div className={classes.innerContainer}>
-                                        <div
-                                            role="presentation"
-                                            onClick={this.handleRemoveClick}
+                                        <LinkButton
                                             className={classes.deleteButton}
+                                            onClick={this.handleRemoveClick}
                                         >
                                             {i18n.t('Delete')}
-                                        </div>
+                                        </LinkButton>
                                     </div>
                                 </div>
                             );
