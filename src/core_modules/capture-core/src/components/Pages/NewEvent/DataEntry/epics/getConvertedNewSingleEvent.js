@@ -44,7 +44,7 @@ export const getNewEventServerData = (state: ReduxState, formFoundation: RenderF
 
 function getDataEntriesNotes(state: ReduxState, dataEntryKey: string) {
     const notes = state.dataEntriesNotes && state.dataEntriesNotes[dataEntryKey];
-    return notes ? notes.map(note => { note.value }) : [];
+    return notes ? notes.map(note => ({ value: note.value })) : [];
 }
 
 export const getNewEventClientValues = (state: ReduxState, dataEntryKey: string, formFoundation: RenderFoundation) => {

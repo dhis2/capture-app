@@ -5,7 +5,7 @@ import { convertValue as convertListValue } from '../../../../../converters/clie
 import elementTypes from '../../../../../metaData/DataElement/elementTypes';
 import {
     actionTypes as newEventDataEntryActionTypes,
-} from '../newEventDataEntry.actions';
+} from '../actions/dataEntry.actions';
 
 import {
     addNote,
