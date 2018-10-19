@@ -15,6 +15,7 @@ type Settings = {
     validatorContainers?: ?Array<ValidatorContainer>,
     meta?: ?Object,
     hidden?: ?boolean,
+    passOnFieldData?: ?boolean,
 };
 
 type ValueMetaUpdateOutput = {
@@ -45,6 +46,7 @@ type Props = {
     completionAttempted?: ?boolean,
     saveAttempted?: ?boolean,
     itemId: string,
+    passOnFieldData: boolean,
 };
 
 type Options = {
@@ -129,13 +131,23 @@ const getDataEntryField = (InnerComponent: React.ComponentType<any>) =>
         }
 
         render() {
-            const { settings, value, valueMeta, fields, itemId, onUpdateField, ...passOnProps } = this.props;
-
+            const {
+                settings,
+                value,
+                valueMeta,
+                fields,
+                itemId,
+                onUpdateField,
+                passOnFieldData,
+                ...passOnProps
+            } = this.props;
+            const passOnFieldDataProp = passOnFieldData ? { [`${settings.propName}DataEntryFieldValue`]: value } : null;
             return (
                 <div>
                     <InnerComponent
                         ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                         fields={this.getFields()}
+                        {...passOnFieldDataProp}
                         {...passOnProps}
                     />
                 </div>
@@ -163,6 +175,7 @@ const getMapStateToProps = (settingsFn: SettingsFn) => (state: ReduxState, props
         valueMeta: state.dataEntriesFieldsUI[key][settings.propName],
         itemId,
         settings,
+        passOnFieldData: !!settings.passOnFieldData,
     };
 };
 

@@ -27,8 +27,6 @@ import type { CachedProgramIndicator } from './getRulesAndVariablesFromIndicator
 import type { ProgramRule, ProgramRuleVariable } from '../../RulesEngine/rulesEngine.types';
 import capitalizeFirstLetter from '../../utils/string/capitalizeFirstLetter';
 
-type RenderType = 'DROPDOWN' | 'VERTICAL_RADIOBUTTONS' | 'HORIZONTAL RADIOBUTTONS';
-
 type CachedTranslation = {
     property: string,
     locale: string,
@@ -53,7 +51,7 @@ type CachedProgramStageDataElement = {
     renderOptionsAsRadio?: ?boolean,
     renderType: {
         DESKTOP: {
-            type: RenderType,
+            type: string,
         },
     },
     dataElement: CachedDataElement,
@@ -85,6 +83,7 @@ type CachedProgramStage = {
     formType: string,
     dataEntryForm: CachedDataEntryForm,
     featureType: string,
+    validationStrategy: string,
 };
 
 type CachedCategoryOption = {
@@ -158,17 +157,17 @@ function getDataElementType(d2ValueType: string) {
     return converters[d2ValueType] || d2ValueType;
 }
 
-function camelCaseRenderType(renderType: string) {
-    const lowerCased = renderType.toLowerCase();
+function camelCaseUppercaseString(text: string) {
+    const lowerCased = text.toLowerCase();
     const camelCased = lowerCased.replace(/_(.)/g, (_, character) => character.toUpperCase());
     return camelCased;
 }
 
 function getRenderType(renderType: string) {
-    return renderType && camelCaseRenderType(renderType);
+    return renderType && camelCaseUppercaseString(renderType);
 }
 
-function buildOptionSet(id: string, dataElement: DataElement, renderOptionsAsRadio: ?boolean, renderType: RenderType) {
+function buildOptionSet(id: string, dataElement: DataElement, renderOptionsAsRadio: ?boolean, renderType: string) {
     const d2OptionSet = currentD2OptionSets && currentD2OptionSets.find(d2Os => d2Os.id === id);
 
     if (!d2OptionSet) {
@@ -279,6 +278,8 @@ function buildStage(d2ProgramStage: CachedProgramStage) {
         _this.description = d2ProgramStage.description;
         _this.featureType = capitalizeFirstLetter(getFeatureType(d2ProgramStage));
         _this.addLabel({ id: 'eventDate', label: d2ProgramStage.executionDateLabel || 'Incident date' });
+        _this.validationStrategy =
+            d2ProgramStage.validationStrategy && camelCaseUppercaseString(d2ProgramStage.validationStrategy);
     });
 
     if (d2ProgramStage.formType === 'CUSTOM' && d2ProgramStage.dataEntryForm) {

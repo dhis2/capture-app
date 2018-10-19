@@ -16,6 +16,7 @@ import Button from '../Buttons/Button.component';
 import DataEntry from './DataEntry.component';
 import errorCreator from '../../utils/errorCreator';
 
+import { validationStrategies } from '../../metaData/RenderFoundation/renderFoundation.const';
 import { saveValidationFailed, saveAbort } from './actions/dataEntry.actions';
 import getDataEntryKey from './common/getDataEntryKey';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
@@ -37,13 +38,16 @@ type Props = {
     hasGeneralErrors: ?boolean,
 };
 
+type IsCompletingFn = (props: Props) => boolean;
+type FilterPropsFn = (props: Object) => Object;
+
 type State = {
     warningDialogOpen: boolean,
     waitForUploadDialogOpen: boolean,
     saveType?: ?string,
 };
 
-const getSaveHandler = (InnerComponent: React.ComponentType<any>) =>
+const getSaveHandler = (InnerComponent: React.ComponentType<any>, onIsCompleting?: IsCompletingFn, onFilterProps?: FilterPropsFn) =>
     class SaveHandlerHOC extends React.Component<Props, State> {
         static errorMessages = {
             INNER_INSTANCE_NOT_FOUND: 'Inner instance not found',
@@ -135,6 +139,17 @@ const getSaveHandler = (InnerComponent: React.ComponentType<any>) =>
             });
         }
 
+        validateGeneralErrorsFromRules(isCompleting: boolean) {
+            const validationStrategy = this.props.formFoundation.validationStrategy;
+            if (validationStrategy === validationStrategies.NONE) {
+                return true;
+            } else if (validationStrategy === validationStrategies.ON_COMPLETE) {
+                return (isCompleting ? !this.props.hasGeneralErrors : true);
+            }
+
+            return !this.props.hasGeneralErrors;
+        }
+
         validateForm() {
             const formInstance = this.getFormInstance();
             if (!formInstance) {
@@ -148,7 +163,12 @@ const getSaveHandler = (InnerComponent: React.ComponentType<any>) =>
                 };
             }
 
-            const isValid = formInstance.validateFormScrollToFirstFailedField() && !this.props.hasGeneralErrors;
+            const isCompleting = !!(onIsCompleting && onIsCompleting(this.props));
+
+            const isValid =
+                formInstance.validateFormScrollToFirstFailedField({ isCompleting })
+                && this.validateGeneralErrorsFromRules(isCompleting);
+
             return {
                 isValid,
                 error: false,
@@ -246,12 +266,14 @@ const getSaveHandler = (InnerComponent: React.ComponentType<any>) =>
                 return null;
             }
 
+            const filteredProps = onFilterProps ? onFilterProps(passOnProps) : passOnProps;
+
             return (
                 <div>
                     <InnerComponent
                         ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                         onSave={saveType => this.handleSaveAttempt(saveType)}
-                        {...passOnProps}
+                        {...filteredProps}
                     />
                     <Dialog
                         open={this.state.warningDialogOpen}
@@ -325,7 +347,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-export default () =>
+export default (options?: {onIsCompleting?: IsCompletingFn, onFilterProps?: FilterPropsFn }) =>
     (InnerComponent: React.ComponentType<any>) =>
         connect(
-            mapStateToProps, mapDispatchToProps, null, { withRef: true })(getSaveHandler(InnerComponent));
+            mapStateToProps, mapDispatchToProps, null, { withRef: true })(getSaveHandler(InnerComponent, options && options.onIsCompleting, options && options.onFilterProps));
