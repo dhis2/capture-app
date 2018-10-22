@@ -104,7 +104,7 @@
     "redux-devtools-extension": "^2.13.2"
   },
   "manifest.webapp": {
-    "version": "0.9.2",
+    "version": "0.9.3",
     "name": "Capture",
     "description": "Capture App",
     "launch_path": "index.html",
