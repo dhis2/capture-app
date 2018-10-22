@@ -17,6 +17,15 @@ msgstr ""
 msgid "Column"
 msgstr ""
 
+msgid "Add comment"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Write comment"
+msgstr ""
+
 msgid "Errors"
 msgstr ""
 
@@ -29,9 +38,6 @@ msgstr ""
 msgid "Warnings"
 msgstr ""
 
-msgid "Cancel"
-msgstr ""
-
 msgid "Complete"
 msgstr ""
 
@@ -39,12 +45,6 @@ msgid "Warnings found"
 msgstr ""
 
 msgid "Abort"
-msgstr ""
-
-msgid "Save comment"
-msgstr ""
-
-msgid "Write comment"
 msgstr ""
 
 msgid "Your data is uploading. Please wait untill this message disappears"
@@ -168,6 +168,9 @@ msgid "Field"
 msgstr ""
 
 msgid "could not be updated"
+msgstr ""
+
+msgid "Please add or cancel comment before saving the event"
 msgstr ""
 
 msgid "Start Again"

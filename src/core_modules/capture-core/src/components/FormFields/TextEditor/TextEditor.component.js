@@ -10,7 +10,7 @@ type Props = {
     required?: ?boolean,
     disabled?: ?boolean,
     onChange?: ?(value: string) => void,
-    onBlur?: ?(value: string) => void,
+    onBlur?: ?(value: ?string) => void,
     format: string,
     value?: ?string,
     containerClassName?: ?string,
@@ -35,6 +35,8 @@ const styles = theme => ({
         minHeight: theme.typography.pxToRem(120),
     },
 });
+
+const editorDefaultValue = '<p><br></p>';
 
 class TextEditor extends React.Component<Props, State> {
     static defaultProps = {
@@ -92,7 +94,9 @@ class TextEditor extends React.Component<Props, State> {
     onBlur = () => {
         const onBlur = this.props.onBlur;
         if (onBlur) {
-            onBlur(this.getStringValue());
+            const value = this.getStringValue();
+            const convertedValue = value === editorDefaultValue ? null : value;
+            onBlur(convertedValue);
         }
     }
 

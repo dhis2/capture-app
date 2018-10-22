@@ -8,6 +8,8 @@ export const actionTypes = {
     ORG_UNIT_RETRIEVED_ON_URL_UPDATE: 'OrgUnitRetrievedForEditEventOnUrlUpdate',
     ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE: 'OrgUnitRetrievalFailedForEditEventOnUrlUpdate',
     START_OPEN_EVENT_FOR_EDIT: 'StartOpenEventForEditInDataEntry',
+    ADD_EVENT_NOTE: 'AddEventNote',
+    REMOVE_EVENT_NOTE: 'RemoveEventNote',
 };
 
 export const editEventFromUrl = (data: Object) =>
@@ -30,3 +32,9 @@ export const orgUnitCouldNotBeRetrievedOnUrlUpdate = (eventContainer: Object) =>
 
 export const startOpenEventForEditInDataEntry = (eventContainer: Object, orgUnit: Object) =>
     actionCreator(actionTypes.START_OPEN_EVENT_FOR_EDIT)({ eventContainer, orgUnit });
+
+export const addEventNote = (eventId: string, note: Object) =>
+    actionCreator(actionTypes.ADD_EVENT_NOTE)({ eventId, note });
+
+export const removeEventNote = (eventId: string, noteClientId: string) =>
+    actionCreator(actionTypes.REMOVE_EVENT_NOTE)({ eventId, noteClientId });
