@@ -9,6 +9,7 @@ import {
 import {
     actionTypes as mainPageSelectorActionTypes,
 } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
+import { orgUnitListActionTypes } from '../../components/QuickSelector';
 
 export const organisationUnitDesc = createReducerDescription({
     [editEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE]: (state, action) => {
@@ -51,3 +52,10 @@ export const organisationUnitDesc = createReducerDescription({
         return newState;
     },
 }, 'organisationUnits');
+
+export const registeringUnitListDesc = createReducerDescription({
+    [orgUnitListActionTypes.INIT_REG_UNIT_LIST_ROOTS]: (state, action) => ({
+        searchText: null,
+        roots: action.payload.roots,
+    }),
+}, 'registeringUnitList');

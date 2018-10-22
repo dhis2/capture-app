@@ -24,7 +24,8 @@ import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 
 import { getCurrentUser } from '../../d2/d2Instance';
-import { OrgUnitTreeMultipleRoots } from '@dhis2/d2-ui-org-unit-tree';
+//import { OrgUnitTreeMultipleRoots } from '@dhis2/d2-ui-org-unit-tree';
+import OrgUnitField from './OrgUnitField.container';
 import withLoadingIndicator from '../../HOC/withLoadingIndicator';
 
 import i18n from '@dhis2/d2-i18n';
@@ -207,9 +208,7 @@ class OrgUnitSelector extends Component<Props> {
                 <Paper elevation={1} className={this.props.classes.paper}>
                     <h4 className={this.props.classes.title}>{ i18n.t('Registering Organisation Unit') }</h4>
                     <div className={this.props.classes.orgunitTree}>
-                        <OrgUnitTreeMultipleRoots
-                            roots={this.state.roots}
-                            hideCheckboxes
+                        <OrgUnitField
                             onSelectClick={this.handleClick}
                         />
                     </div>
@@ -220,3 +219,11 @@ class OrgUnitSelector extends Component<Props> {
 }
 
 export default withLoadingIndicator()(withStyles(styles)(OrgUnitSelector));
+
+/*
+<OrgUnitTreeMultipleRoots
+roots={this.state.roots}
+hideCheckboxes
+onSelectClick={this.handleClick}
+/>
+*/
