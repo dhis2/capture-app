@@ -43,7 +43,8 @@ const getStyles = theme => ({
         paddingTop: theme.typography.pxToRem(10),
         display: 'flex',
         alignItems: 'center',
-        color: theme.palette.text.hint,
+        color: theme.palette.grey.dark,
+        fontSize: theme.typography.pxToRem(13),
     },
     savingContextText: {
         paddingLeft: theme.typography.pxToRem(10),
@@ -55,7 +56,7 @@ const getStyles = theme => ({
         display: 'flex',
         flexFlow: 'row-reverse',
     },
-    horizontalPaper: {
+    horizontal: {
         padding: theme.typography.pxToRem(10),
         paddingTop: theme.typography.pxToRem(20),
         paddingBottom: theme.typography.pxToRem(15),
@@ -66,12 +67,15 @@ const getStyles = theme => ({
         },
     },
     dataEntryVerticalContainer: {
-        backgroundColor: 'white',
-        border: '1px solid rgba(0,0,0,0.1)',
-        borderRadius: theme.typography.pxToRem(2),
         padding: theme.typography.pxToRem(20),
     },
 });
+
+const dataEntrySectionNames = {
+    BASICINFO: 'BASICINFO',
+    STATUS: 'STATUS',
+    COMMENTS: 'COMMENTS',
+};
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -150,6 +154,7 @@ const buildNoteSettingsFn = () => {
         ],
         meta: {
             placement: placements.BOTTOM,
+            section: dataEntrySectionNames.COMMENTS,
         },
     });
     return noteSettings;
@@ -185,6 +190,10 @@ const buildReportDateSettingsFn = () => {
         }),
         propName: 'eventDate',
         validatorContainers: getEventDateValidatorContainers(),
+        meta: {
+            placement: placements.TOP,
+            section: dataEntrySectionNames.BASICINFO,
+        },
     });
 
     return reportDateSettings;
@@ -244,6 +253,7 @@ const buildGeometrySettingsFn = () => (props: Object) => {
             ],
             meta: {
                 placement: placements.TOP,
+                section: dataEntrySectionNames.BASICINFO,
             },
         };
     }
@@ -260,6 +270,7 @@ const buildGeometrySettingsFn = () => (props: Object) => {
             ],
             meta: {
                 placement: placements.TOP,
+                section: dataEntrySectionNames.BASICINFO,
             },
         };
     }
@@ -298,6 +309,7 @@ const buildCompleteFieldSettingsFn = () => {
         ],
         meta: {
             placement: placements.BOTTOM,
+            section: dataEntrySectionNames.STATUS,
         },
         passOnFieldData: true,
     });
@@ -346,9 +358,28 @@ type Props = {
     theme: Theme,
     formHorizontal: ?boolean,
 };
+type DataEntrySection = {
+    placement: $Values<typeof placements>,
+    name: string,
+};
 
+const dataEntrySectionDefinitions = {
+    [dataEntrySectionNames.BASICINFO]: {
+        placement: placements.TOP,
+        name: i18n.t('Basic info'),
+    },
+    [dataEntrySectionNames.STATUS]: {
+        placement: placements.BOTTOM,
+        name: i18n.t('Status'),
+    },
+    [dataEntrySectionNames.COMMENTS]: {
+        placement: placements.BOTTOM,
+        name: i18n.t('Comments'),
+    },
+};
 class NewEventDataEntry extends Component<Props> {
     fieldOptions: { theme: Theme };
+    dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
 
     constructor(props: Props) {
         super(props);
@@ -356,6 +387,7 @@ class NewEventDataEntry extends Component<Props> {
             theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
+        this.dataEntrySections = dataEntrySectionDefinitions;
     }
 
     componentWillMount() {
@@ -402,11 +434,11 @@ class NewEventDataEntry extends Component<Props> {
     renderHorizontal = () => {
         const classes = this.props.classes;
         return (
-            <Paper
-                className={classes.horizontalPaper}
+            <div
+                className={classes.horizontal}
             >
                 {this.renderContent()}
-            </Paper>
+            </div>
         );
     }
 
@@ -435,6 +467,7 @@ class NewEventDataEntry extends Component<Props> {
                         onSave={this.handleSave}
                         formHorizontal={formHorizontal}
                         fieldOptions={this.fieldOptions}
+                        dataEntrySections={this.dataEntrySections}
                     />
                 </div>
                 <div
