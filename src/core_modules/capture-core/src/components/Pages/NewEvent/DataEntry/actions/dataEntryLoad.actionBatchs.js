@@ -9,19 +9,16 @@ import {
 import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
 import EventProgram from '../../../../../metaData/Program/EventProgram';
 import getEventDateValidatorContainers from '../fieldValidators/eventDate.validatorContainersGetter';
-import {
-    convertGeometryOut,
-    convertNoteIn,
-    convertNoteOut,
-    convertStatusIn,
-    convertStatusOut,
-} from '../../../crossPage/converters';
+import { convertGeometryOut, convertStatusIn, convertStatusOut } from '../../../crossPage/converters';
+import getNotesValidatorContainers from '../fieldValidators/note.validatorContainersGetter';
 
 const dataEntryId = 'singleEvent';
 const itemId = 'newEvent';
 const formId = getDataEntryKey(dataEntryId, itemId);
 
-const dataEntryPropsToInclude = [
+type DataEntryPropsToInclude = Array<Object>;
+
+const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     {
         id: 'eventDate',
         type: 'DATE',
@@ -33,10 +30,10 @@ const dataEntryPropsToInclude = [
         onConvertOut: convertGeometryOut,
     },
     {
-        clientId: 'notes',
-        dataEntryId: 'notes',
-        onConvertIn: convertNoteIn,
-        onConvertOut: convertNoteOut,
+        id: 'note',
+        type: 'TEXT',
+        validatorContainers: getNotesValidatorContainers(),
+        clientIgnore: true,
     },
     {
         clientId: 'status',

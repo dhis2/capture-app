@@ -21,7 +21,10 @@ export default function convertDataEntryValuesToClientValues(
         .reduce((accEventValues, key) => {
             const type = dataEntryValuesMeta[key] && dataEntryValuesMeta[key].type;
             const onConvertOut = dataEntryValuesMeta[key] && dataEntryValuesMeta[key].onConvertOut;
-
+            const clientIgnore = dataEntryValuesMeta[key] && dataEntryValuesMeta[key].clientIgnore;
+            if (clientIgnore) {
+                return accEventValues;
+            }
             if (type) {
                 const value = dataEntryValues[key];
                 accEventValues[key] = convertValue(type, value);

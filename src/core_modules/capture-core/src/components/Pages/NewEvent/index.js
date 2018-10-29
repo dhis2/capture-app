@@ -47,3 +47,6 @@ export {
     newEventPageSelectorUpdateURLEpic,
     newEventPageSelectorResetURLEpic,
 } from './SelectorLevel/selectorLevel.epics';
+export {
+    addNoteForNewSingleEventEpic,
+} from './DataEntry/epics/addNoteForNewSingleEvent.epics';

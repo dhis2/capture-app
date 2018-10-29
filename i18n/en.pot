@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-10-23T07:27:58.535Z\n"
-"PO-Revision-Date: 2018-10-23T07:27:58.535Z\n"
+"POT-Creation-Date: 2018-10-29T10:08:05.723Z\n"
+"PO-Revision-Date: 2018-10-29T10:08:05.723Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -15,6 +15,15 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
+msgstr ""
+
+msgid "Add comment"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Write comment"
 msgstr ""
 
 msgid "Errors"
@@ -29,9 +38,6 @@ msgstr ""
 msgid "Warnings"
 msgstr ""
 
-msgid "Cancel"
-msgstr ""
-
 msgid "Complete"
 msgstr ""
 
@@ -39,12 +45,6 @@ msgid "Warnings found"
 msgstr ""
 
 msgid "Abort"
-msgstr ""
-
-msgid "Save comment"
-msgstr ""
-
-msgid "Write comment"
 msgstr ""
 
 msgid "Your data is uploading. Please wait untill this message disappears"
@@ -177,6 +177,9 @@ msgid "Field"
 msgstr ""
 
 msgid "could not be updated"
+msgstr ""
+
+msgid "Please add or cancel comment before saving the event"
 msgstr ""
 
 msgid "Edit event"

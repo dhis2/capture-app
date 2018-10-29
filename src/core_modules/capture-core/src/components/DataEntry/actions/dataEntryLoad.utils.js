@@ -12,6 +12,7 @@ type DataEntryPropToIncludeStandard = {|
     id: string,
     type: string,
     validatorContainers?: ?Array<ValidatorContainer>,
+    clientIgnore?: ?boolean,
 |};
 
 type DataEntryPropToIncludeSpecial = {|
@@ -30,9 +31,9 @@ export function getDataEntryMeta(dataEntryPropsToInclude: Array<DataEntryPropToI
             // $FlowSuppress
             accMeta[propToInclude.id || propToInclude.dataEntryId] =
                 propToInclude.type ?
-                    { type: propToInclude.type } :
+                    { type: propToInclude.type, clientIgnore: propToInclude.clientIgnore } :
                     // $FlowSuppress
-                    { onConvertOut: propToInclude.onConvertOut.toString(), clientId: propToInclude.clientId };
+                    { onConvertOut: propToInclude.onConvertOut.toString(), clientId: propToInclude.clientId, clientIgnore: propToInclude.clientIgnore };
             return accMeta;
         }, {});
 }

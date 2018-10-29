@@ -11,6 +11,7 @@ import {
     batchActionTypes,
     requestSaveNewEventAddAnother,
     setNewEventSaveTypes,
+    addNewEventNote,
 } from './actions/dataEntry.actions';
 import {
     makeProgramNameSelector,
@@ -57,6 +58,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);
         dispatch(requestSaveNewEventAndReturnToMainPage(eventId, dataEntryId, formFoundation));
+    },
+    onAddNote: (itemId: string, dataEntryId: string, note: string) => {
+        dispatch(addNewEventNote(itemId, dataEntryId, note));
     },
     onSetSaveTypes: (newSaveTypes: ?Array<$Values<typeof saveTypes>>) => {
         dispatch(setNewEventSaveTypes(newSaveTypes));
