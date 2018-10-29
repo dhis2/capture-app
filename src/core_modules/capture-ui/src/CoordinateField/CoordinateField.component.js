@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import LocationIcon from '@material-ui/icons/LocationOn';
+import classNames from 'classnames';
+import AddLocationIcon from '../Icons/AddLocationIcon.component';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import ClearIcon from '@material-ui/icons/Clear';
 import CoordinateInput from '../internal/CoordinateInput/CoordinateInput.component';
@@ -26,6 +27,7 @@ type Props = {
   onChange?: ?(value: any) => void,
   value?: ?Coordinate,
   shrinkDisabled?: ?boolean,
+  classes?: ?Object,
 };
 type State = {
     showMap: ?boolean,
@@ -114,17 +116,17 @@ export default class D2Coordinate extends Component<Props, State> {
     }
 
     render() {
-        const { mapCenter, onBlur, onChange, value, orientation, shrinkDisabled, ...passOnProps } = this.props;
+        const { mapCenter, onBlur, onChange, value, orientation, shrinkDisabled, classes, ...passOnProps } = this.props;
 
         const position = this.getPosition();
         const center = position || mapCenter;
         const coordinateFieldsClass = orientation === orientations.VERTICAL ? defaultClasses.coordinateFieldsVertical : defaultClasses.coordinateFieldsHorizontal;
         const coordinateIconClass = shrinkDisabled ? defaultClasses.coordinateIcon : defaultClasses.coordinateIconWithMargin;
-
+        const mapIconClass = shrinkDisabled ? defaultClasses.mapIcon : defaultClasses.mapIconWithMargin;
         return (
             <div className={coordinateFieldsClass}>
-                <div className={coordinateIconClass}>
-                    <LocationIcon onClick={this.toggleMap} />
+                <div className={classNames(mapIconClass, classes && classes.mapIcon)}>
+                    <AddLocationIcon onClick={this.toggleMap} />
                     {
                         this.state.showMap && (
                             <div className={defaultClasses.coordinateLeafletMap} ref={this.onSetMapInstance}>
@@ -143,6 +145,7 @@ export default class D2Coordinate extends Component<Props, State> {
                     <CoordinateInput
                         shrinkDisabled={shrinkDisabled}
                         label="Latitude"
+                        className={defaultClasses.latitudeTextInput}
                         value={value && value.latitude}
                         onBlur={latValue => this.handleBlur(coordinateKeys.LATITUDE, latValue)}
                         onChange={latValue => this.handleChange(coordinateKeys.LATITUDE, latValue)}
@@ -153,6 +156,7 @@ export default class D2Coordinate extends Component<Props, State> {
                     <CoordinateInput
                         shrinkDisabled={shrinkDisabled}
                         label="Longitude"
+                        className={defaultClasses.longitudeTextInput}
                         value={value && value.longitude}
                         onBlur={lngValue => this.handleBlur(coordinateKeys.LONGITUDE, lngValue)}
                         onChange={lngValue => this.handleChange(coordinateKeys.LONGITUDE, lngValue)}

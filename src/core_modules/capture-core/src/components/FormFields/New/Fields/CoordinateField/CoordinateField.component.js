@@ -5,11 +5,13 @@ import { CoordinateField as UICoordinateField } from 'capture-ui';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
-        border: `2px solid ${theme.palette.accent.dark}`,
-        borderRadius: '5px',
+        position: 'relative',
+        boxShadow: `0px 0px 0px 2px ${theme.palette.accent.dark}`,
+        zIndex: 10,
+        margin: '2px 0px 2px 0px',
     },
     inputWrapperUnfocused: {
-        padding: 2,
+        margin: '2px 0px 2px 0px',
     },
     innerInputError: {
         color: theme.palette.error.main,
@@ -30,6 +32,9 @@ const getStyles = (theme: Theme) => ({
         color: 'orange',
         padding: theme.typography.pxToRem(3),
         fontSize: theme.typography.pxToRem(12),
+    },
+    mapIcon: {
+        fill: theme.palette.primary.dark,
     },
 });
 

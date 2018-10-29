@@ -16,10 +16,23 @@
     flex-wrap: wrap;
 }
   
-.coordinateIcon {
+.mapIcon {
     position: relative;
     cursor: pointer;
     padding: 2px;
+}
+
+.mapIconWithMargin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    width: 42px;
+    margin-top: 18px;
+    border: 1px solid #C4C4C4;
+    border-radius: 3px 0px 0px 3px;
+    box-shadow: 0px 0px 2px 0px #C4C4C4 inset;
+    background: linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%);
 }
 
 .coordinateIconWithMargin {
@@ -43,5 +56,14 @@
 }
 .inputContainer {
     flex-grow: 1;
+}
+
+.latitudeTextInput {
+    border-radius: 0px;
+}
+
+
+.longitudeTextInput {
+    border-radius: 0px 3px 3px 0px;
 }
   
