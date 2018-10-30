@@ -33,7 +33,7 @@ const getStyles = (theme: Theme) => ({
         padding: theme.typography.pxToRem(3),
         fontSize: theme.typography.pxToRem(12),
     },
-    mapIcon: {
+    mapIconContainer: {
         fill: theme.palette.primary.dark,
     },
 });

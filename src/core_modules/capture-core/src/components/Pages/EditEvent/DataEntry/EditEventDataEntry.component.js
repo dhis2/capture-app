@@ -53,13 +53,6 @@ const dataEntrySectionNames = {
     COMMENTS: 'COMMENTS',
 };
 
-const getMetaPlacement = (
-    props: Object,
-    placement: $Values<typeof placements>,
-    section: $Values<typeof dataEntrySectionNames>,
-) =>
-    (props.formHorizontal ? { section } : { placement });
-
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
 };
@@ -258,14 +251,8 @@ const buildNotesSettingsFn = () => {
         withCalculateMessages(overrideMessagePropNames)(
             withDefaultFieldContainer()(
                 withDefaultShouldUpdateInterface()(
-                    withLabel({
-                        onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                        onGetCustomFieldLabeClass: (props: Object) =>
-                            `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
-                    })(
-                        withDisplayMessages()(
-                            withInternalChangeHandler()(DataEntryNotes),
-                        ),
+                    withDisplayMessages()(
+                        withInternalChangeHandler()(DataEntryNotes),
                     ),
                 ),
             ),
@@ -281,6 +268,7 @@ const buildNotesSettingsFn = () => {
         validatorContainers: getNoteValidatorContainers(),
         meta: {
             placement: placements.BOTTOM,
+            section: dataEntrySectionNames.COMMENTS,
         },
     });
 

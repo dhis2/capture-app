@@ -282,13 +282,9 @@ const buildNotesSettingsFn = () => {
         withCalculateMessages(overrideMessagePropNames)(
             withDefaultFieldContainer()(
                 withDefaultShouldUpdateInterface()(
-                    withLabel({
-                        onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                        onGetCustomFieldLabeClass: (props: Object) =>
-                            `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
-                    })(
-                        withDisplayMessages()(
-                            withInternalChangeHandler()(DataEntryNotes),
+                    withDisplayMessages()(
+                        withInternalChangeHandler()(
+                            withFilterProps(defaultFilterProps)(DataEntryNotes),
                         ),
                     ),
                 ),

@@ -74,10 +74,10 @@ class QuickSelector extends Component<Props> {
         let programSelectorWidth = 3;
         let actionButtonsWidth = 6;
 
-        if (selectedProgram && selectedProgram.categories) {
+        if (selectedProgram && selectedProgram.categoryCombination) {
             orgUnitSelectorWidth = 3;
-            programSelectorWidth = 5;
-            actionButtonsWidth = 4;
+            programSelectorWidth = 6;
+            actionButtonsWidth = 3;
         }
 
         return {

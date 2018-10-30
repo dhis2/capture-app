@@ -117,16 +117,17 @@ export default class D2Coordinate extends Component<Props, State> {
 
     render() {
         const { mapCenter, onBlur, onChange, value, orientation, shrinkDisabled, classes, ...passOnProps } = this.props;
+        const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes;
 
         const position = this.getPosition();
         const center = position || mapCenter;
         const coordinateFieldsClass = orientation === orientations.VERTICAL ? defaultClasses.coordinateFieldsVertical : defaultClasses.coordinateFieldsHorizontal;
-        const coordinateIconClass = shrinkDisabled ? defaultClasses.coordinateIcon : defaultClasses.coordinateIconWithMargin;
-        const mapIconClass = shrinkDisabled ? defaultClasses.mapIcon : defaultClasses.mapIconWithMargin;
+        const clearIconClass = shrinkDisabled ? defaultClasses.clearIcon : defaultClasses.clearIconWithMargin;
+        const mapIconContainerClass = shrinkDisabled ? defaultClasses.mapIconContainer : defaultClasses.mapIconContainerWithMargin;
         return (
             <div className={coordinateFieldsClass}>
-                <div className={classNames(mapIconClass, classes && classes.mapIcon)}>
-                    <AddLocationIcon onClick={this.toggleMap} />
+                <div className={classNames(mapIconContainerClass, mapIconContainerCustomClass)}>
+                    <AddLocationIcon onClick={this.toggleMap} className={classNames(defaultClasses.mapIcon, mapIconCustomClass)} />
                     {
                         this.state.showMap && (
                             <div className={defaultClasses.coordinateLeafletMap} ref={this.onSetMapInstance}>
@@ -145,6 +146,7 @@ export default class D2Coordinate extends Component<Props, State> {
                     <CoordinateInput
                         shrinkDisabled={shrinkDisabled}
                         label="Latitude"
+                        classes={passOnClasses}
                         className={defaultClasses.latitudeTextInput}
                         value={value && value.latitude}
                         onBlur={latValue => this.handleBlur(coordinateKeys.LATITUDE, latValue)}
@@ -156,6 +158,7 @@ export default class D2Coordinate extends Component<Props, State> {
                     <CoordinateInput
                         shrinkDisabled={shrinkDisabled}
                         label="Longitude"
+                        classes={passOnClasses}
                         className={defaultClasses.longitudeTextInput}
                         value={value && value.longitude}
                         onBlur={lngValue => this.handleBlur(coordinateKeys.LONGITUDE, lngValue)}
@@ -163,7 +166,7 @@ export default class D2Coordinate extends Component<Props, State> {
                         {...passOnProps}
                     />
                 </div>
-                <div className={coordinateIconClass}>
+                <div className={clearIconClass}>
                     <ClearIcon onClick={this.handleClear} />
                 </div>
             </div>

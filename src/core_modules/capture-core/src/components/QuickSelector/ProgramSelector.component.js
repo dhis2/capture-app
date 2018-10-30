@@ -25,11 +25,11 @@ import i18n from '@dhis2/d2-i18n';
 import EventProgram from '../../metaData/Program/EventProgram';
 import { resetProgramIdBase } from './actions/QuickSelector.actions';
 
-const styles = () => ({
+const styles = (theme: Theme) => ({
     paper: {
         padding: 5,
         backgroundColor: '#f6f6f6',
-        borderRadius: 5,
+        borderRadius: 8,
     },
     title: {
         margin: 0,
@@ -54,13 +54,18 @@ const styles = () => ({
             borderColor: '#71a4f8', 
        },
     },
-    selectedText: {
-        marginTop: 5,
-        marginBottom: 5,
-        marginLeft: 5,
-        width: '100%',
-        padding: 5,
-        borderLeft: '2px solid #71a4f8',
+    selectedItemContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        minHeight: 28,
+        margin: '7px 0px 7px 0px',
+        paddingLeft: 5,
+        borderLeft: `2px solid ${theme.palette.primary.light}`,
+    },
+    selectedItemClear: {
+        flexGrow: 1,
+        display: 'flex',
+        justifyContent: 'flex-end',
     },
     selectedPaper: {
         backgroundColor: '#f6f6f6',
@@ -68,7 +73,6 @@ const styles = () => ({
         padding: 5,
     },
     selectedButton: {
-        float: 'right',
         width: 20,
         height: 20,
     },
@@ -178,15 +182,18 @@ class ProgramSelector extends Component<Props> {
             if (selectedProgram.categoryCombination) {
                 return (
                     <div>
-                        <Paper elevation={1} className={this.props.classes.selectedPaper}>
+                        <Paper elevation={0} className={this.props.classes.selectedPaper}>
                             <Grid container spacing={8}>
                                 <Grid item xs={12} sm={6}>
                                     <h4 className={this.props.classes.title}>{ i18n.t('Selected Program') }</h4>
-                                    <p className={this.props.classes.selectedText}>{selectedProgram.name}
-                                        <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetProgram()}>
-                                            <ClearIcon className={this.props.classes.selectedButtonIcon} />
-                                        </IconButton>
-                                    </p>
+                                    <div className={this.props.classes.selectedItemContainer}>
+                                        <div>{selectedProgram.name}</div>
+                                        <div className={this.props.classes.selectedItemClear}>
+                                            <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetProgram()}>
+                                                <ClearIcon className={this.props.classes.selectedButtonIcon} />
+                                            </IconButton>
+                                        </div>
+                                    </div>
                                 </Grid>
                                 {selectedProgram.categoryCombination.categories.map(i =>
                                     (<Grid key={i.id} item xs={12} sm={6}>
@@ -195,11 +202,15 @@ class ProgramSelector extends Component<Props> {
                                             (() => {
                                                 if(this.props.selectedCategories && this.props.selectedCategories[i.id]) {
                                                     return (
-                                                        <p className={this.props.classes.selectedText}>{i.categoryOptions.find(option => option.id === this.props.selectedCategories[i.id]).name}
-                                                            <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetCategoryOption(i.id)}>
-                                                                <ClearIcon className={this.props.classes.selectedButtonIcon} />
-                                                            </IconButton>
-                                                        </p> 
+                                                        <div className={this.props.classes.selectedItemContainer}>
+                                                            <div>{i.categoryOptions.find(option => option.id === this.props.selectedCategories[i.id]).name}</div>
+                                                            <div className={this.props.classes.selectedItemClear}>
+                                                                <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetCategoryOption(i.id)}>
+                                                                    <ClearIcon className={this.props.classes.selectedButtonIcon} />
+                                                                </IconButton>
+                                                            </div>
+
+                                                        </div> 
                                                     );
                                                 }
                                                 const categoryOptions = i.categoryOptions.map(optionCount => new Option((_this) => {
@@ -227,13 +238,18 @@ class ProgramSelector extends Component<Props> {
             }
             return (
                 <div>
-                    <Paper elevation={1} className={this.props.classes.selectedPaper}>
+                    <Paper elevation={0} className={this.props.classes.selectedPaper}>
                         <h4 className={this.props.classes.title}>{ i18n.t('Selected Program') }</h4>
-                        <p className={this.props.classes.selectedText}>{selectedProgram.name}
-                            <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetProgram()}>
-                                <ClearIcon className={this.props.classes.selectedButtonIcon} />
-                            </IconButton>
-                        </p>
+                        <div className={this.props.classes.selectedItemContainer}>
+                            <div>
+                                {selectedProgram.name}
+                            </div>
+                            <div className={this.props.classes.selectedItemClear}>
+                                <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetProgram()}>
+                                    <ClearIcon className={this.props.classes.selectedButtonIcon} />
+                                </IconButton>
+                            </div>
+                        </div>
                     </Paper>
                 </div>
             );
@@ -241,7 +257,7 @@ class ProgramSelector extends Component<Props> {
         if (programOptions.length == 0) {
             return (
                 <div>
-                    <Paper elevation={1} className={this.props.classes.paper}>
+                    <Paper elevation={0} className={this.props.classes.paper}>
                         <h4 className={this.props.classes.title}>{ i18n.t('Program') }</h4>
                         <div className={this.props.classes.noProgramsAvailableNotAvailable}>{i18n.t('No programs available.')} <a className={this.props.classes.programsHiddenTextResetOrgUnit} onClick={() => this.handleResetOrgUnit()}>{i18n.t('Show all')}</a></div>
                     </Paper>
@@ -252,7 +268,7 @@ class ProgramSelector extends Component<Props> {
         if (programOptions.length <= this.props.buttonModeMaxLength) {
             return (
                 <div>
-                    <Paper elevation={1} className={this.props.classes.paper}>
+                    <Paper elevation={0} className={this.props.classes.paper}>
                         <h4 className={this.props.classes.title}>{ i18n.t('Program') }</h4>
                         <List className={this.props.classes.programList}>
                             {programOptions.map(i =>
@@ -279,7 +295,7 @@ class ProgramSelector extends Component<Props> {
         }
         return (
             <div>
-                <Paper elevation={1} className={this.props.classes.paper}>
+                <Paper elevation={0} className={this.props.classes.paper}>
                     <h4 className={this.props.classes.title}>{ i18n.t('Program') }</h4>
                         <VirtualizedSelect optionSet={programOptionSet} onSelect={this.props.handleClickProgram} placeholder={i18n.t('Select program')} value={''} />
                     {

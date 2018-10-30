@@ -15,14 +15,21 @@
     flex-direction: column;
     flex-wrap: wrap;
 }
-  
+
 .mapIcon {
-    position: relative;
+    height: 42px;
+    width: 42px;
+    padding: 9px;
     cursor: pointer;
+}
+  
+.mapIconContainer {
+    position: relative;
     padding: 2px;
 }
 
-.mapIconWithMargin {
+.mapIconContainerWithMargin {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,8 +42,12 @@
     background: linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%);
 }
 
-.coordinateIconWithMargin {
-    position: relative;
+.clearIcon {
+    cursor: pointer;
+    padding: 2px;
+}
+
+.clearIconWithMargin {
     cursor: pointer;
     padding: 2px;
     margin-top: 28px;

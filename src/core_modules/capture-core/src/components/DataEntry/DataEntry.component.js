@@ -167,6 +167,7 @@ class DataEntry extends React.Component<Props> {
                     if (sectionFields && sectionFields.length > 0) {
                         accSections.push(
                             <Section
+                                key={sectionKey}
                                 className={this.props.classes.dataEntryFieldSection}
                                 header={
                                     <SectionHeaderSimple
@@ -212,10 +213,12 @@ class DataEntry extends React.Component<Props> {
             completionAttempted,
             saveAttempted,
             fields,
+            dataEntrySections,
             onUpdateFormField,
             onUpdateFieldInner,
             onUpdateFormFieldAsync,
             dataEntryOutputs,
+            onAddNote,
             ...passOnProps } = this.props;
 
         if (!itemId) {
