@@ -23,6 +23,14 @@ class DebounceField extends React.Component<Props, State> {
         this.debouncer = debounce(this.handleDebounced, 500);
     }
 
+    componentWillReceiveProps(nextProps: Props) {
+        if (nextProps.value !== this.props.value) {
+            this.setState({
+                value: nextProps.value || '',
+            });
+        }
+    }
+
     handleDebounced = (event: SyntheticEvent<HTMLInputElement>) => {
         this.props.onChange(event);
     }
@@ -31,14 +39,17 @@ class DebounceField extends React.Component<Props, State> {
         this.setState({
             value: event.currentTarget.value,
         });
+        event.persist();
         this.debouncer(event);
     }
 
     render() {
-        const { onChange, ...passOnProps } = this.props;
+        const { onChange, value, ...passOnProps } = this.props;
+        const { value: stateValue } = this.state;
         return (
             <TextInput
                 onChange={this.handleChange}
+                value={stateValue}
                 {...passOnProps}
             />
         );

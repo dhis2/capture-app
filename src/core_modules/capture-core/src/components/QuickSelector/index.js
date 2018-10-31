@@ -1,5 +1,5 @@
 // epics
-export { loadRegisteringUnitListRootsEpic } from './epics/orgUnitList.epics';
+export { loadRegisteringUnitListRootsEpic, searchRegisteringUnitListEpic, showRegisteringUnitListIndicatorEpic } from './epics/orgUnitList.epics';
 
 
 // actions

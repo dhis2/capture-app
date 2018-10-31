@@ -3,97 +3,47 @@ import * as React from 'react';
 import getD2 from 'capture-core/d2/d2Instance';
 import { OrgUnitTreeMultipleRoots as D2OrgUnitTree } from '@dhis2/d2-ui-org-unit-tree';
 import { withStyles } from '@material-ui/core/styles';
+import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
 
 const getStyles = () => ({
-    orgunitTree: {
-        borderBottom: '1px solid #C4C4C4',
-        borderLeft: '1px solid #C4C4C4',
-        borderRight: '1px solid #C4C4C4',
-        boxShadow: '0px 0px 2px 0px #C4C4C4 inset',
+    orgunitTree: {        
         padding: 5,
         minHeight: 42,
         paddingTop: 10,
+        backgroundColor: 'white',
     },
 });
 
-type SourceRoot = {
-    id: string,
-};
-
 type Props = {
-    roots: Array<SourceRoot>,
+    roots: Array<Object>,
     classes: {
         orgunitTree: string,
     },
+    treeKey: string,
 };
 
-type State = {
-    rootsForTree: ?Array<Object>,
-};
-
-class OrgUnitTree extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            rootsForTree: null,
-        };
-    }
-
-    componentDidMount() {
-        const rootIds = this.props.roots.map(r => r.id).join(',');
-        this.getRoots(rootIds);
-    }
-
-    componentWillReceiveProps(nextProps: Props) {
-        if (nextProps.roots !== this.props.roots) {
-            const rootIds = nextProps.roots.map(r => r.id).join(',');
-            this.setState({
-                rootsForTree: null,
-            });
-            this.getRoots(rootIds);
-        }
-    }
-
-    getRoots(rootIds: string) {
-        getD2()
-            .models
-            .organisationUnits
-            .list({
-                filter: `id:in:[${rootIds}]`,
-                paging: false,
-                fields: [
-                    'id,displayName,path,publicAccess,access,lastUpdated', 'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
-                ].join(','),
-            })
-            .then(orgUnitCollection => orgUnitCollection.toArray())
-            .then((orgUnits) => {
-                this.setState({
-                    rootsForTree: orgUnits,
-                });
-            });
-    }
-
+class OrgUnitTree extends React.Component<Props> {
     getExpandedItems() {
-        const { rootsForTree } = this.state;
-        if (rootsForTree && rootsForTree.length === 1) {
-            return rootsForTree
+        const { roots } = this.props;
+        if (roots && roots.length === 1) {
+            return roots
                 .map(r => r.path);
         }
         return undefined;
     }
 
     render() {
-        const { roots, classes, ...passOnProps } = this.props;
-        const { rootsForTree } = this.state;
+        const { roots, classes, treeKey, ...passOnProps } = this.props;
 
-        if (!rootsForTree) {
+        if (!roots) {
             return null;
         }
 
         return (
             <div className={classes.orgunitTree}>
                 <D2OrgUnitTree
-                    roots={rootsForTree}
+                    key={treeKey}
+                    roots={roots}
                     initiallyExpanded={this.getExpandedItems()}
                     hideCheckboxes
                     {...passOnProps}
@@ -103,4 +53,4 @@ class OrgUnitTree extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(getStyles)(OrgUnitTree);
+export default withStyles(getStyles)(withLoadingIndicator(() => ({ margin: 4 }), () => ({ size: 20 }))(OrgUnitTree));

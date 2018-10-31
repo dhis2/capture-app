@@ -79,6 +79,8 @@ import {
 } from 'capture-core/components/QuickSelector/epics/setSelection.epics';
 import {
     loadRegisteringUnitListRootsEpic,
+    searchRegisteringUnitListEpic,
+    showRegisteringUnitListIndicatorEpic,
 } from 'capture-core/components/QuickSelector';
 import {
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -154,4 +156,6 @@ export default combineEpics(
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,
     loadRegisteringUnitListRootsEpic,
+    searchRegisteringUnitListEpic,
+    showRegisteringUnitListIndicatorEpic,
 );
