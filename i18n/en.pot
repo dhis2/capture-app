@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-10-29T10:08:05.723Z\n"
-"PO-Revision-Date: 2018-10-29T10:08:05.723Z\n"
+"POT-Creation-Date: 2018-10-31T12:12:46.740Z\n"
+"PO-Revision-Date: 2018-10-31T12:12:46.740Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -17,10 +17,22 @@ msgstr ""
 msgid "Column"
 msgstr ""
 
-msgid "Add comment"
+msgid "Cancel"
 msgstr ""
 
-msgid "Cancel"
+msgid "Discard event?"
+msgstr ""
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+
+msgid "Discard"
+msgstr ""
+
+msgid "Back to event"
+msgstr ""
+
+msgid "Add comment"
 msgstr ""
 
 msgid "Write comment"
@@ -182,25 +194,10 @@ msgstr ""
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
 
+msgid "Show all events"
+msgstr ""
+
 msgid "Edit event"
-msgstr ""
-
-msgid "Start Again"
-msgstr ""
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
-
-msgid "Reset Organisation Unit"
-msgstr ""
-
-msgid "Reset Program"
-msgstr ""
-
-msgid "Reset Category Option"
-msgstr ""
-
-msgid "Create New Event"
 msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
@@ -283,9 +280,6 @@ msgstr ""
 msgid "Select a category option to start reporting"
 msgstr ""
 
-msgid "Are you sure? All unsaved data will be lost"
-msgstr ""
-
 msgid "Start again"
 msgstr ""
 
@@ -296,6 +290,9 @@ msgid "Find"
 msgstr ""
 
 msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
 msgstr ""
 
 msgid "Registering Oraginastion Unit"

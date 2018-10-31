@@ -344,26 +344,20 @@ class EditEventDataEntry extends Component<Props> {
     }
     render() {
         const {
-            formFoundation,
             onUpdateField,
-            onAddNote,
-            onSave,
-            onCancel,
             onStartAsyncUpdateField,
             classes,
+            ...passOnProps
         } = this.props;
         return (
             <div className={classes.dataEntryContainer}>
                 <DataEntryWrapper
                     id={'singleEvent'}
-                    formFoundation={formFoundation}
                     onUpdateFormField={onUpdateField}
                     onUpdateFormFieldAsync={onStartAsyncUpdateField}
-                    onCancel={onCancel}
-                    onSave={onSave}
-                    onAddNote={onAddNote}
                     fieldOptions={this.fieldOptions}
                     dataEntrySections={this.dataEntrySections}
+                    {...passOnProps}
                 />
             </div>
         );

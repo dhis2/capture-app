@@ -6,7 +6,7 @@ import { CoordinateField as UICoordinateField } from 'capture-ui';
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
         position: 'relative',
-        boxShadow: `0px 0px 0px 2px ${theme.palette.accent.dark}`,
+        boxShadow: `0px 0px 0px 2px ${theme.palette.primary.light}`,
         zIndex: 10,
         margin: '2px 0px 2px 0px',
     },

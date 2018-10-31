@@ -26,6 +26,7 @@ const styles = theme => ({
     verticalFormContainer: {
         flexGrow: 10,
         maxWidth: '100%',
+        paddingTop: theme.typography.pxToRem(10),
     },
     verticalDataEntryContainer: {
         display: 'flex',
@@ -43,6 +44,7 @@ const styles = theme => ({
         flexGrow: 1,
         width: theme.typography.pxToRem(300),
         margin: theme.typography.pxToRem(10),
+        marginTop: 0,
     },
     verticalOutputsContainer: {
         marginBottom: theme.typography.pxToRem(10),
@@ -50,6 +52,7 @@ const styles = theme => ({
     dataEntryFieldSection: {
         marginBottom: theme.typography.pxToRem(10),
         padding: theme.typography.pxToRem(8),
+        maxWidth: theme.typography.pxToRem(880),
     },
 });
 
@@ -97,6 +100,7 @@ type Props = {
         itemId: string,
     ) => void,
     dataEntrySections?: { [string]: {name: string, placement: $Values<typeof placements>}},
+    onAddNote?: ?Function,
 };
 
 const fieldHorizontalFilter = (placement: $Values<typeof placements>) =>

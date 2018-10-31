@@ -5,6 +5,7 @@ import {
     cancelNewEventNoWorkingListUpdateNeeded,
     cancelNewEventUpdateWorkingList,
 } from '../actions/dataEntry.actions';
+
 import isSelectionsEqual from '../../../../App/isSelectionsEqual';
 
 export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) =>

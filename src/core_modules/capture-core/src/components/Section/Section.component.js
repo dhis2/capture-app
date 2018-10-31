@@ -9,7 +9,7 @@ const styles = theme => ({
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
-        border: `1px solid ${theme.palette.blueGray}`,
+        border: `1px solid ${theme.palette.grey.blueGrey}`,
     },
     mainActionButton: {
         position: 'absolute',

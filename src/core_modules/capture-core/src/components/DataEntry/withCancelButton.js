@@ -1,13 +1,11 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
-import i18n from '@dhis2/d2-i18n';
-import ProgressButton from '../Buttons/ProgressButton.component';
-import getDataEntryKey from './common/getDataEntryKey';
+import CancelButton from './CancelButton.container';
 
 type Props = {
-    finalInProgress: boolean,
+    id: string,
     onCancel: () => void,
+    cancelButtonRef?: ?Function,
 };
 
 type Options = {
@@ -20,25 +18,28 @@ const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: ?
     class CancelButtonHOC extends React.Component<Props> {
         innerInstance: any;
 
+
         getWrappedInstance = () => this.innerInstance;
 
+        getCancelButtonInstance = (cancelContainerInstance: ?any) => {
+            const cancelButtonInstance = cancelContainerInstance && cancelContainerInstance.getWrappedInstance();
+            this.props.cancelButtonRef && this.props.cancelButtonRef(cancelButtonInstance);
+        }
 
         render() {
-            const { finalInProgress, onCancel, ...passOnProps } = this.props;
+            const { onCancel, cancelButtonRef, ...passOnProps } = this.props;
             const options = (optionsFn && optionsFn(this.props)) || {};
 
             return (
                 <InnerComponent
                     ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                     cancelButton={
-                        <ProgressButton
-                            variant="text"
-                            onClick={onCancel}
-                            color={options.color || 'primary'}
-                            inProgress={finalInProgress}
-                        >
-                            { i18n.t('Cancel') }
-                        </ProgressButton>
+                        <CancelButton
+                            id={this.props.id}
+                            ref={this.getCancelButtonInstance}
+                            onCancel={onCancel}
+                            options={options}
+                        />
                     }
                     {...passOnProps}
                 />
@@ -46,19 +47,8 @@ const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: ?
         }
     };
 
-const mapStateToProps = (state: ReduxState, props: { id: string }) => {
-    const itemId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].itemId;
-    const key = getDataEntryKey(props.id, itemId);
-    return {
-        finalInProgress: !!(state.dataEntriesUI[key] && state.dataEntriesUI[key].finalInProgress),
-    };
-};
-
-const mapDispatchToProps = () => ({});
 
 export default (optionsFn?: ?OptionsFn) =>
     (InnerComponent: React.ComponentType<any>) =>
         // $FlowSuppress
-        connect(
-            mapStateToProps, mapDispatchToProps, null, { withRef: true })(
-            getCancelButton(InnerComponent, optionsFn));
+        getCancelButton(InnerComponent, optionsFn);

@@ -8,7 +8,7 @@ const styles = (theme: Theme) => ({
         padding: 16,
     },
     activeContainer: {
-        backgroundColor: theme.palette.accent.lighter,
+        backgroundColor: theme.palette.info.main,
     },
     validatingContainer: {},
     errorContainer: {

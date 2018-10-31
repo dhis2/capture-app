@@ -9,5 +9,8 @@ const mapStateToProps = (state: ReduxState) => ({
     error: state.editEventPage.loadError,
 });
 
+const mapDispatchToProps = () => ({
+});
+
 // $FlowSuppress
-export default connect(mapStateToProps, () => ({}))(withLoadingIndicator()(withErrorMessageHandler()(EditEvent)));
+export default connect(mapStateToProps, mapDispatchToProps)(withLoadingIndicator()(withErrorMessageHandler()(EditEvent)));

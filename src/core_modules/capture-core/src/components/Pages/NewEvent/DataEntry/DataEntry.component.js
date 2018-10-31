@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import InfoIcon from '@material-ui/icons/InfoOutline';
 import i18n from '@dhis2/d2-i18n';
 import DataEntry from '../../../../components/DataEntry/DataEntry.container';
@@ -346,6 +345,7 @@ type Props = {
         horizontalPaper: string,
         dataEntryVerticalContainer: string,
         fieldLabelMediaBased: string,
+        horizontal: string,
     },
     theme: Theme,
     formHorizontal: ?boolean,
@@ -438,30 +438,28 @@ class NewEventDataEntry extends Component<Props> {
 
     renderContent = () => {
         const {
-            formFoundation,
             onUpdateField,
             onStartAsyncUpdateField,
-            onCancel,
             programName, // eslint-disable-line
             orgUnitName, // eslint-disable-line
             classes,
-            formHorizontal,
-            onAddNote,
+            onSave,
+            onSetSaveTypes,
+            onSaveAndAddAnother,
+            theme,
+            ...passOnProps
         } = this.props;
         return (
             <div>
                 <div>
                     <WrappedDataEntry
                         id={'singleEvent'}
-                        formFoundation={formFoundation}
                         onUpdateFormField={onUpdateField}
                         onUpdateFormFieldAsync={onStartAsyncUpdateField}
-                        onCancel={onCancel}
                         onSave={this.handleSave}
-                        onAddNote={onAddNote}
-                        formHorizontal={formHorizontal}
                         fieldOptions={this.fieldOptions}
                         dataEntrySections={this.dataEntrySections}
+                        {...passOnProps}
                     />
                 </div>
                 <div

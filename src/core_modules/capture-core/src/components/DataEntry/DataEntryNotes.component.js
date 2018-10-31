@@ -27,6 +27,7 @@ type Props = {
         noteItemHeader: string,
         noteItemUser: string,
         noteItemDate: string,
+        notesList: string,
     }
 };
 

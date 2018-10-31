@@ -33,7 +33,7 @@ import i18n from '@dhis2/d2-i18n';
 const styles = (theme: Theme) => ({
     paper: {
         padding: 5,
-        backgroundColor: '#f6f6f6',
+        backgroundColor: theme.palette.grey.lighter,
         borderRadius: 8,
     },
     title: {
@@ -59,7 +59,7 @@ const styles = (theme: Theme) => ({
         borderLeft: '2px solid #71a4f8',
     },
     selectedPaper: {
-        backgroundColor: '#f6f6f6',
+        backgroundColor: theme.palette.grey.lighter,
         borderRadius: 5,
         padding: 5,
     },

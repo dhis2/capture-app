@@ -47,11 +47,13 @@ const theme = createMuiTheme({
         grey: {
             main: '#9E9E9E',
             light: '#E0E0E0',
+            lighter: '#F6F6F6',
+            lightest: '#FBFBFB',
             dark: '#494949',
+            blueGrey: '#ECEFF1',
+            snow: '#F4F6F8',
+            black: '#000000',
         },
-        black: '#000000',
-        blueGray: '#ECEFF1',
-        snow: '#F4F6F8',
     },
 });
 

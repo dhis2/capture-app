@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const getStyles = (theme: Theme) => ({
     evenNumbers: {
-        backgroundColor: theme.palette.grey[30],
+        backgroundColor: theme.palette.grey.lightest,
     },
 });
 

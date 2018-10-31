@@ -28,7 +28,7 @@ import { resetProgramIdBase } from './actions/QuickSelector.actions';
 const styles = (theme: Theme) => ({
     paper: {
         padding: 5,
-        backgroundColor: '#f6f6f6',
+        backgroundColor: theme.palette.grey.lighter,
         borderRadius: 8,
     },
     title: {
@@ -68,7 +68,7 @@ const styles = (theme: Theme) => ({
         justifyContent: 'flex-end',
     },
     selectedPaper: {
-        backgroundColor: '#f6f6f6',
+        backgroundColor: theme.palette.grey.lighter,
         borderRadius: 5,
         padding: 5,
     },
