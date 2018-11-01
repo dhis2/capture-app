@@ -1,5 +1,4 @@
 // @flow
-/* eslint-disable import/prefer-default-export */
 import log from 'loglevel';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import getD2, { getCurrentUser } from 'capture-core/d2/d2Instance';
@@ -18,11 +17,11 @@ import { LOADING_INDICATOR_TIMEOUT } from '../../../constants';
 
 const RETRIEVE_ERROR = 'Could not retrieve registering unit list';
 
-export const loadRegisteringUnitListRootsEpic = action$ =>
+// get organisation units for current user
+export const loadRegisteringUnitListRootsEpic = (action$: InputObservable) =>
     action$.ofType(startupActionTypes.STARTUP_DATA_LOAD_CORE)
         .switchMap(() => {
             const currentUser = getCurrentUser();
-            // Get orgUnits assigned to currentUser and set them as roots to be used by orgUnitTree.
             return currentUser
                 .getOrganisationUnits({
                     fields: [
@@ -53,7 +52,8 @@ export const loadRegisteringUnitListRootsEpic = action$ =>
             return initRegUnitListRoots(regUnits);
         });
 
-export const searchRegisteringUnitListEpic = action$ =>
+// get organisation units based on search criteria
+export const searchRegisteringUnitListEpic = (action$: InputObservable) =>
     action$.ofType(orgUnitListActions.SEARCH_ORG_UNITS)
         .switchMap((action) => {
             const searchText = action.payload.searchText;
@@ -92,7 +92,8 @@ export const searchRegisteringUnitListEpic = action$ =>
             return setSearchRoots(regUnits, resultContainer.searchText);
         });
 
-export const showRegisteringUnitListIndicatorEpic = action$ =>
+// show loading indicator if api-request is not resolved when timeout expires
+export const showRegisteringUnitListIndicatorEpic = (action$: InputObservable) =>
     action$.ofType(orgUnitListActions.SEARCH_ORG_UNITS)
         .switchMap(() =>
             fromPromise(new Promise((resolve) => {

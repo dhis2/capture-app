@@ -42,6 +42,8 @@ type Props = {
         outerContainer: string,
         container: string,
         searchField: string,
+        debounceFieldContainer: string,
+        orgUnitTreeContainer: string,
     },
 };
 
@@ -58,18 +60,27 @@ class OrgUnitField extends React.Component<Props> {
     }
 
     handleFilterChange = (event: SyntheticEvent<HTMLInputElement>) => {
-        this.props.onSearch(event.target.value);
+        this.props.onSearch(event.currentTarget.value);
     }
 
     render() {
-        const { roots, onSelectClick, searchText, onSearch, ready, treeKey, classes, ...passOnProps } = this.props;
+        const {
+            roots,
+            onSelectClick,
+            searchText,
+            onSearch,
+            ready,
+            treeKey,
+            classes,
+            ...passOnProps // eslint-disable-line
+        } = this.props;
         return (
             <div
                 className={classes.container}
             >
                 <div className={classes.debounceFieldContainer}>
                     <DebounceField
-                        onChange={this.handleFilterChange}
+                        onDebounced={this.handleFilterChange}
                         value={searchText}
                         placeholder={i18n.t('Search')}
                         classes={this.classes}

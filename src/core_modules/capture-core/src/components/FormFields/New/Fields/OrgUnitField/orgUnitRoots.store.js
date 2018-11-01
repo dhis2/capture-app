@@ -1,5 +1,5 @@
 // @flow
-
+// Temporary container for org unit tree roots
 const rootsContainer = {};
 
 export function set(id: string, roots: Object) {

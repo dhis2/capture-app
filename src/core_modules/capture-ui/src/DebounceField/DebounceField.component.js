@@ -4,7 +4,7 @@ import { debounce } from 'lodash';
 import TextInput from '../internal/TextInput/TextInput.component';
 
 type Props = {
-    onChange: (event: SyntheticEvent<HTMLInputElement>) => void,
+    onDebounced: (event: SyntheticEvent<HTMLInputElement>) => void,
     value: ?string,
 };
 
@@ -12,6 +12,10 @@ type State = {
     value: string,
 };
 
+/**
+ * Text field exposing a callback method triggered when the input is debounced
+ * @class DebounceField
+ */
 class DebounceField extends React.Component<Props, State> {
     debouncer: Function;
     constructor(props: Props) {
@@ -32,19 +36,18 @@ class DebounceField extends React.Component<Props, State> {
     }
 
     handleDebounced = (event: SyntheticEvent<HTMLInputElement>) => {
-        this.props.onChange(event);
+        this.props.onDebounced(event);
     }
 
     handleChange = (event: SyntheticEvent<HTMLInputElement>) => {
         this.setState({
             value: event.currentTarget.value,
         });
-        event.persist();
-        this.debouncer(event);
+        this.debouncer({ ...event });
     }
 
     render() {
-        const { onChange, value, ...passOnProps } = this.props;
+        const { onDebounced, value, ...passOnProps } = this.props;
         const { value: stateValue } = this.state;
         return (
             <TextInput

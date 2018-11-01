@@ -1,12 +1,11 @@
 // @flow
 import * as React from 'react';
-import getD2 from 'capture-core/d2/d2Instance';
 import { OrgUnitTreeMultipleRoots as D2OrgUnitTree } from '@dhis2/d2-ui-org-unit-tree';
 import { withStyles } from '@material-ui/core/styles';
 import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
 
 const getStyles = () => ({
-    orgunitTree: {        
+    orgunitTree: {
         padding: 5,
         minHeight: 42,
         paddingTop: 10,
