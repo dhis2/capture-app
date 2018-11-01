@@ -13,8 +13,6 @@ import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 
 import OrgUnitField from './OrgUnitField.container';
-import withLoadingIndicator from '../../HOC/withLoadingIndicator';
-
 
 const styles = () => ({
     paper: {
@@ -166,4 +164,4 @@ class OrgUnitSelector extends Component<Props, State> {
     }
 }
 
-export default withLoadingIndicator()(withStyles(styles)(OrgUnitSelector));
+export default withStyles(styles)(OrgUnitSelector);

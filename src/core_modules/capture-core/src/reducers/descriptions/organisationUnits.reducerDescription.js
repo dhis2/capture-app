@@ -56,6 +56,12 @@ export const organisationUnitDesc = createReducerDescription({
         newState[orgUnit.id] = orgUnit;
         return newState;
     },
+    [newEventSelectorActionTypes.SET_ORG_UNIT]: (state, action) => {
+        const newState = { ...state };
+        const orgUnit = action.payload.orgUnit;
+        newState[orgUnit.id] = orgUnit;
+        return newState;
+    },
 }, 'organisationUnits');
 
 const removeSearchDataOnResetRegUnit = (state) => {
