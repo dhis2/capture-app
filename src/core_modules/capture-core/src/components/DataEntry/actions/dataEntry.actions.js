@@ -109,9 +109,9 @@ export const asyncUpdateFieldFailed =
         actionCreator(actionTypes.ASYNC_UPDATE_FIELD_FAILED)({ message });
 
 export const addNote =
-    (dataEntryId: string, itemId: string, objectId: string, clientNote: Object, formNote: Object) =>
-        actionCreator(actionTypes.ADD_NOTE)({ dataEntryId, itemId, objectId, clientNote, formNote });
+    (dataEntryId: string, itemId: string, note: Object) =>
+        actionCreator(actionTypes.ADD_NOTE)({ dataEntryId, itemId, note });
 
 export const removeNote =
-    (dataEntryId: string, itemId: string, objectId: string, noteClientId: string) =>
-        actionCreator(actionTypes.REMOVE_NOTE)({ dataEntryId, itemId, objectId, noteClientId });
+    (dataEntryId: string, itemId: string, noteClientId: string) =>
+        actionCreator(actionTypes.REMOVE_NOTE)({ dataEntryId, itemId, noteClientId });

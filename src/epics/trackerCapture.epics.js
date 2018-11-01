@@ -15,6 +15,7 @@ import {
     saveNewEventAddAnotherFailedEpic,
     newEventPageSelectorUpdateURLEpic,
     newEventPageSelectorResetURLEpic,
+    addNoteForNewSingleEventEpic,
 } from 'capture-core/components/Pages/NewEvent';
 import {
     mainSelectionsCompletedEpic,
@@ -139,6 +140,7 @@ export default combineEpics(
     cancelEditEventLocationChangeEpic,
     cancelEditEventEpic,
     addNoteForEditSingleEventEpic,
+    addNoteForNewSingleEventEpic,
     removeNoteForEditSingleEventEpic,
     openEditPageLocationChangeEpic,
     getEventOpeningFromEventListEpic,

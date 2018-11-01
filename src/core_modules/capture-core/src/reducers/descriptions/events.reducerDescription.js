@@ -67,19 +67,19 @@ export const eventsDesc = createReducerDescription({
         };
         return newState;
     },
-    [dataEntryActionTypes.ADD_NOTE]: (state, action) => {
+    [editEventActionTypes.ADD_EVENT_NOTE]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
-        if (payload.dataEntryId === 'singleEvent') {
-            newState[payload.objectId].notes = [...state[payload.objectId].notes, payload.clientNote];
+        if (newState && newState[payload.eventId]) {
+            newState[payload.eventId].notes = [...state[payload.eventId].notes, payload.note];
         }
         return newState;
     },
-    [dataEntryActionTypes.REMOVE_NOTE]: (state, action) => {
+    [editEventActionTypes.REMOVE_EVENT_NOTE]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
-        if (payload.dataEntryId === 'singleEvent') {
-            newState[payload.objectId].notes = state[payload.objectId].notes.filter(n => n.clientId !== payload.noteClientId);
+        if (newState && newState[payload.eventId]) {
+            newState[payload.eventId].notes = state[payload.eventId].notes.filter(n => n.clientId !== payload.noteClientId);
         }
         return newState;
     },

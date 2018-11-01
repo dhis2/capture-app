@@ -96,14 +96,14 @@ const getNotes = (InnerComponent: React.ComponentType<any>) =>
         }
 
         onNewNoteEditorBlur = (value: string) => {
-            this.setState({ value });
+            this.props.onBlur(value, { touched: false });
         }
 
         handleAddNote = () => {
             if (this.state.value) {
                 this.props.onAddNote(this.props.itemId, this.props.id, this.state.value);
             }
-            this.setState({ value: null });
+            this.props.onBlur(null, { touched: false });
         }
 
         renderInput = () => {
@@ -113,7 +113,7 @@ const getNotes = (InnerComponent: React.ComponentType<any>) =>
                     <TextEditor onBlur={this.onNewNoteEditorBlur} value={this.state.value} containerClassName={classes.textEditorContainer} />
                     <div className={classes.newCommentButtonContainer}>
                         <Button onClick={this.handleAddNote} color="primary">
-                            {i18n.t('Save comment')}
+                            {i18n.t('Add comment')}
                         </Button>
                         <Button onClick={this.toggleIsOpen}>
                             {i18n.t('Cancel')}

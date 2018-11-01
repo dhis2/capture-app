@@ -7,10 +7,12 @@ import withCancelButton from '../../../../components/DataEntry/withCancelButton'
 import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
 import { placements } from '../../../../components/DataEntry/dataEntryField/dataEntryField.const';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
+import getNoteValidatorContainers from './fieldValidators/note.validatorContainersGetter';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import withMainButton from './withMainButton';
 import withFilterProps from '../../../FormFields/New/HOC/withFilterProps';
+import DataEntryNotes from '../../../DataEntry/DataEntryNotes.container';
 
 import {
     withInternalChangeHandler,
@@ -27,7 +29,6 @@ import {
 } from '../../../FormFields/New';
 
 import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
-import withNotes from '../../../DataEntry/withNotes';
 import withIndicatorOutput from '../../../DataEntry/dataEntryOutput/withIndicatorOutput';
 import withFeedbackOutput from '../../../DataEntry/dataEntryOutput/withFeedbackOutput';
 import withErrorOutput from '../../../DataEntry/dataEntryOutput/withErrorOutput';
@@ -234,6 +235,40 @@ const buildCompleteFieldSettingsFn = () => {
     return completeSettings;
 };
 
+const buildNotesSettingsFn = () => {
+    const noteComponent =
+        withCalculateMessages(overrideMessagePropNames)(
+            withDefaultFieldContainer()(
+                withDefaultShouldUpdateInterface()(
+                    withLabel({
+                        onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                        onGetCustomFieldLabeClass: (props: Object) =>
+                            `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
+                    })(
+                        withDisplayMessages()(
+                            withInternalChangeHandler()(DataEntryNotes),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    const notesSettings = (props: Object) => ({
+        component: noteComponent,
+        componentProps: createComponentProps(props, {
+            label: 'Comments',
+            onAddNote: props.onAddNote,
+            id: props.id,
+        }),
+        propName: 'note',
+        validatorContainers: getNoteValidatorContainers(),
+        meta: {
+            placement: placements.BOTTOM,
+        },
+    });
+
+    return notesSettings;
+};
+
 const saveHandlerConfig = {
     onIsCompleting: (props: Object) => props.completeDataEntryFieldValue,
     onFilterProps: (props: Object) => {
@@ -244,13 +279,13 @@ const saveHandlerConfig = {
 
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(DataEntry);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
-const FeedbackOutput = withFeedbackOutput()(ReportDateField);
+const NotesField = withDataEntryField(buildNotesSettingsFn())(ReportDateField);
+const FeedbackOutput = withFeedbackOutput()(NotesField);
 const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
 const WarningOutput = withWarningOutput()(IndicatorOutput);
 const ErrorOutput = withErrorOutput()(WarningOutput);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ErrorOutput));
-const NotesDataEntry = withNotes()(SaveableDataEntry);
-const CancelableDataEntry = withCancelButton(getCancelOptions)(NotesDataEntry);
+const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
 const DataEntryWrapper = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);
 
 type Props = {
