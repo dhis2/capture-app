@@ -4,6 +4,7 @@ import log from 'loglevel';
 
 import programCollection from '../../metaDataMemoryStores/programCollection/programCollection';
 import Program from '../../metaData/Program/Program';
+import Style from '../../metaData/Style/Style';
 
 import EventProgram from '../../metaData/Program/EventProgram';
 import TrackerProgram from '../../metaData/Program/TrackerProgram';
@@ -18,6 +19,7 @@ import Option from '../../metaData/OptionSet/Option';
 import CategoryCombination from '../../metaData/CategoryCombinations/CategoryCombination';
 import Category from '../../metaData/CategoryCombinations/Category';
 
+import getProgramIconAsync from './getProgramIcon';
 import { convertOptionSetValue } from '../../converters/serverToClient';
 import isNonEmptyArray from '../../utils/isNonEmptyArray';
 import errorCreator from '../../utils/errorCreator';
@@ -104,6 +106,11 @@ type CachedCategoryCombo = {
     isDefault: boolean,
 };
 
+type CachedProgramStyle = {
+    color?: ?string,
+    icon?: ?string,
+};
+
 type CachedProgram = {
     id: string,
     access: Object,
@@ -113,6 +120,7 @@ type CachedProgram = {
     programStages: Array<CachedProgramStage>,
     programType: string,
     categoryCombo: ?CachedCategoryCombo,
+    style?: ?CachedProgramStyle,
 };
 
 type SectionSpecs = {
@@ -348,7 +356,18 @@ function buildCategoriCombination(cachedCategoriCombination: ?CachedCategoryComb
     });
 }
 
-function buildProgram(d2Program: CachedProgram) {
+async function buildProgramStyle(cachedStyle: CachedProgramStyle = {}) {
+    const style = new Style();
+    if (cachedStyle.color) {
+        style.color = cachedStyle.color;
+    }
+
+    style.icon = await getProgramIconAsync(cachedStyle.icon);
+
+    return style;
+}
+
+async function buildProgram(d2Program: CachedProgram) {
     let program;
     if (d2Program.programType === 'WITHOUT_REGISTRATION') {
         program = new EventProgram((_this) => {
@@ -372,6 +391,9 @@ function buildProgram(d2Program: CachedProgram) {
             program.addStage(buildStage(d2ProgramStage));
         });
     }
+
+    program.style = await buildProgramStyle(d2Program.style);
+
     return program;
 }
 
@@ -460,7 +482,7 @@ function sortPrograms(programs: Array<Program>) {
     return programs;
 }
 
-export default function buildProgramCollection(
+export default async function buildProgramCollection(
     cachedPrograms: ?Array<CachedProgram>,
     cachedOptionSets: ?Array<CachedOptionSet>,
     cachedProgramRulesVariables: ?Array<ProgramRuleVariable>,
@@ -471,12 +493,13 @@ export default function buildProgramCollection(
     currentD2OptionSets = cachedOptionSets;
 
     if (cachedPrograms) {
-        sortPrograms(
-            cachedPrograms.map((d2Program) => {
-                const program = buildProgram(d2Program);
-                return program;
-            }),
-        )
+        const promisePrograms = cachedPrograms.map(async (d2Program) => {
+            const program = await buildProgram(d2Program);
+            return program;
+        });
+        const programs = await Promise.all(promisePrograms);
+
+        sortPrograms(programs)
             .forEach((program) => {
                 programCollection.set(program.id, program);
             });

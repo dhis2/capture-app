@@ -3,6 +3,7 @@
 import isFunction from 'd2-utilizr/src/isFunction';
 
 import CategoryCombination from '../CategoryCombinations/CategoryCombination';
+import Style from '../Style/Style';
 import type { ProgramRule, ProgramRuleVariable } from '../../RulesEngine/rulesEngine.types';
 import type { Access } from '../Access/Access';
 
@@ -16,11 +17,12 @@ export default class Program {
     _categoryCombination: ?CategoryCombination;
     _programRules: Array<ProgramRule>;
     _programRuleVariables: Array<ProgramRuleVariable>;
+    _style: Style;
 
     constructor(initFn: ?(_this: Program) => void) {
-        initFn && isFunction(initFn) && initFn(this);
         this.programRules = [];
         this.programRuleVariables = [];
+        initFn && isFunction(initFn) && initFn(this);
     }
 
     set id(id: string): void {
@@ -77,6 +79,13 @@ export default class Program {
     }
     get programRuleVariables(): Array<ProgramRuleVariable> {
         return this._programRuleVariables;
+    }
+
+    set style(style: Style) {
+        this._style = style;
+    }
+    get style(): Style {
+        return this._style;
     }
 
     addProgramRuleVariable(programRuleVariable: ProgramRuleVariable) {

@@ -101,7 +101,8 @@
     "jsdoc-export-default-interop": "^0.3.1",
     "mkdirp": "^0.5.1",
     "react-app-rewired": "^1.5.0",
-    "redux-devtools-extension": "^2.13.2"
+    "redux-devtools-extension": "^2.13.2",
+    "svg-url-loader": "^2.3.2"
   },
   "manifest.webapp": {
     "version": "0.9.3",

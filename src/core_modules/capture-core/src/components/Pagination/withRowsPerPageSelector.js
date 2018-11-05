@@ -6,6 +6,8 @@ import OptionSet from '../../metaData/OptionSet/OptionSet';
 import Option from '../../metaData/OptionSet/Option';
 import OptionsSelect from '../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import withTranslations from '../FormFields/Options/SelectVirtualized/withTranslations';
+import type { VirtualizedOptionConfig } from
+    '../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 
 const OptionsSelectWithTranslations = withTranslations()(OptionsSelect);
 
@@ -16,20 +18,20 @@ type Props = {
 
 const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
     class RowsPerPageSelector extends React.Component<Props> {
-        static getOptionSet() {
-            const options = [10, 15, 25, 50, 100]
-                .map(optionCount => new Option((_this) => {
-                    _this.value = optionCount;
-                    _this.text = optionCount.toString();
-                }));
-
-            return new OptionSet('rowsCountOptions', options);
+        static getOptions(): Array<VirtualizedOptionConfig> {
+            const options =
+                [10, 15, 25, 50, 100]
+                    .map(optionCount => ({
+                        label: optionCount.toString(),
+                        value: optionCount,
+                    }));
+            return options;
         }
-        optionSet: OptionSet;
 
+        options: Array<VirtualizedOptionConfig>;
         constructor(props: Props) {
             super(props);
-            this.optionSet = RowsPerPageSelector.getOptionSet();
+            this.options = RowsPerPageSelector.getOptions();
         }
 
         handleRowsSelect = (rowsPerPage: number) => {
@@ -43,7 +45,7 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
                 <div id="rows-per-page-selector">
                     <OptionsSelectWithTranslations
                         onSelect={this.handleRowsSelect}
-                        optionSet={this.optionSet}
+                        options={this.options}
                         value={rowsPerPage}
                         nullable={false}
                         withoutUnderline

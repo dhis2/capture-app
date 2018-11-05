@@ -8,9 +8,9 @@ import Grid from '@material-ui/core/Grid';
 
 import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 
-import ProgramSelector from 'capture-core/components/QuickSelector/ProgramSelector.component';
-import OrgUnitSelector from 'capture-core/components/QuickSelector/OrgUnitSelector.component';
-import ActionButtons from 'capture-core/components/QuickSelector/ActionButtons.component';
+import ProgramSelector from './Program/ProgramSelector.component';
+import OrgUnitSelector from './OrgUnitSelector.component';
+import ActionButtons from './ActionButtons.component';
 
 const styles = () => ({
     paper: {
@@ -42,7 +42,7 @@ class QuickSelector extends Component<Props> {
         return programs.get(selectedProgramId) || {};
     }
 
-    handleClickProgram: (program: Object) => void;
+    handleClickProgram: (programId: string) => void;
     handleSetCatergoryCombo: (selectedCategoryOption: string, categoryId: string) => void;
     handleClickOrgUnit: (orgUnit: Object) => void;
     constructor(props) {
@@ -53,8 +53,8 @@ class QuickSelector extends Component<Props> {
         this.handleClickOrgUnit = this.handleClickOrgUnit.bind(this);
     }
 
-    handleClickProgram(program) {
-        this.props.onSetProgramId(program);
+    handleClickProgram(programId: string) {
+        this.props.onSetProgramId(programId);
     }
 
     handleSetCatergoryCombo(selectedCategoryOption, categoryId) {

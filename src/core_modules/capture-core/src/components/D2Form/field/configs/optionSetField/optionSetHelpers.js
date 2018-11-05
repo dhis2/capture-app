@@ -17,19 +17,33 @@ const buildFormOptionSet = (clientOptionSet: OptionSet) => {
     return clientOptionSet.dataElement.getConvertedOptionSet(convertValue);
 };
 
-const flattenOptionSet = (formOptionSet: OptionSet) => formOptionSet
+const flattenOptionSetForRadioButtons = (formOptionSet: OptionSet) => formOptionSet
     .options
     .map(option => ({
         name: option.text,
         value: option.value,
     }));
 
-export const getOptions = (clientOptionSet: OptionSet) => {
+const flattenOptionSetForSelect = (formOptionSet: OptionSet) => formOptionSet
+    .options
+    .map(option => ({
+        label: option.text,
+        value: option.value,
+    }));
+
+
+export const getOptionsForRadioButtons = (clientOptionSet: OptionSet) => {
     const getOptionSet = pipe(
         buildFormOptionSet,
-        flattenOptionSet,
+        flattenOptionSetForRadioButtons,
     );
     return getOptionSet(clientOptionSet);
 };
 
-export const getFormOptionSet = buildFormOptionSet;
+export const getOptionsForSelect = (clientOptionSet: OptionSet) => {
+    const getOptionSet = pipe(
+        buildFormOptionSet,
+        flattenOptionSetForSelect,
+    );
+    return getOptionSet(clientOptionSet);
+};

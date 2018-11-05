@@ -45,6 +45,20 @@ export default async function buildPrograms(
     programRulesStoreName: string,
     programIndicatorsStoreName: string) {
     const [cachedPrograms, cachedOptionSets, cachedProgramRulesVariables, cachedProgramRules, cachedProgramIndicators] =
-        await getBuilderPrerequisites(programStoreName, optionSetStoreName, programRulesVariablesStoreName, programRulesStoreName, programIndicatorsStoreName);
-    buildProgramCollection(cachedPrograms, cachedOptionSets, cachedProgramRulesVariables, cachedProgramRules, cachedProgramIndicators, locale);
+        await getBuilderPrerequisites(
+            programStoreName,
+            optionSetStoreName,
+            programRulesVariablesStoreName,
+            programRulesStoreName,
+            programIndicatorsStoreName,
+        );
+
+    await buildProgramCollection(
+        cachedPrograms,
+        cachedOptionSets,
+        cachedProgramRulesVariables,
+        cachedProgramRules,
+        cachedProgramIndicators,
+        locale,
+    );
 }
