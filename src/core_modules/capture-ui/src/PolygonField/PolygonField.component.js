@@ -4,6 +4,7 @@ import MapIcon from '@material-ui/icons/Map';
 import CheckIcon from '@material-ui/icons/Check';
 import L from 'leaflet';
 import { Map, TileLayer, FeatureGroup } from 'react-leaflet';
+import { ReactLeafletSearch } from 'react-leaflet-search';
 import EditControl from 'react-leaflet-draw/lib/EditControl';
 import defaultClasses from './polygonField.mod.css';
 import './styles.css';
@@ -159,6 +160,7 @@ export default class D2Polygon extends Component<Props, State> {
                     this.state.showMap && (
                         <div className={defaultClasses.polygonLeafletMap} ref={this.onSetMapInstance}>
                             <Map zoom={13} center={this.getCenter(featureCollection)} zoomControl={false} className={defaultClasses.leafletContainer}>
+                                <ReactLeafletSearch position="topleft" inputPlaceholder="Search" closeResultsOnClick />
                                 <TileLayer
                                     url="//cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
                                     attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'

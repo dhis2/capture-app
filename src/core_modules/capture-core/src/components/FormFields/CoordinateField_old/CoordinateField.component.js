@@ -4,7 +4,6 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import LocationIcon from '@material-ui/icons/LocationOn';
 import { Map, TileLayer, Marker } from 'react-leaflet';
-import { ReactLeafletSearch } from 'react-leaflet-search';
 import { isPointInRect } from '../PolygonField/PolygonField.component';
 
 import './styles.css';
@@ -75,14 +74,6 @@ export default class CoordinateField extends Component<Props> {
         this.props.onBlur({ latitude: lat, longitude: lng });
     };
 
-    selectSearchResult = (selectedResult) => {
-        const { value } = this.props;
-        if ((value && selectedResult.latLng[0] === value.latitude) || (value &&  selectedResult.latLng[1] === value.longitude)) {
-            return;
-        }
-        this.onMapClick({ latlng: { lat: selectedResult.latLng[0], lng: selectedResult.latLng[1] } });
-    };
-
     render() {
         const { latitude, longitude } = this.state;
         let position = null;
@@ -101,7 +92,6 @@ export default class CoordinateField extends Component<Props> {
                             this.state.showMap && (
                                 <div className="coordinate-leaflet-map" ref={this.onRender}>
                                     <Map center={center} zoom={13} onClick={this.onMapClick}>
-                                        <ReactLeafletSearch popUp={this.selectSearchResult} position="topleft" inputPlaceholder="Search" closeResultsOnClick />
                                         <TileLayer
                                             url="//cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
                                             attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
