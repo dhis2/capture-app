@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import LocationIcon from '@material-ui/icons/LocationOn';
 import { Map, TileLayer, Marker } from 'react-leaflet';
+import { ReactLeafletSearch } from 'react-leaflet-search';
 import ClearIcon from '@material-ui/icons/Clear';
 import CoordinateInput from '../internal/CoordinateInput/CoordinateInput.component';
 import defaultClasses from './coordinateField.mod.css';
@@ -99,9 +100,19 @@ export default class D2Coordinate extends Component<Props, State> {
         this.setState({ showMap: !this.state.showMap });
     }
 
-    onMapClick = ({ latlng: { lat, lng } }: MapCoordinate) => {
-        this.toggleMap();
+    onMapClick = ({ latlng: { lat, lng } }: MapCoordinate, keepMapOpen) => {
+        if (!keepMapOpen) {
+            this.toggleMap();
+        }
         this.props.onBlur({ latitude: lat, longitude: lng });
+    }
+
+    selectSearchResult = (selectedResult) => {
+        const { value } = this.props;
+        if ((value && selectedResult.latLng[0] === value.latitude) || (value &&  selectedResult.latLng[1] === value.longitude)) {
+            return;
+        }
+        this.onMapClick({ latlng: { lat: selectedResult.latLng[0], lng: selectedResult.latLng[1] } }, true);
     }
 
     getPosition = () => {
@@ -129,6 +140,7 @@ export default class D2Coordinate extends Component<Props, State> {
                         this.state.showMap && (
                             <div className={defaultClasses.coordinateLeafletMap} ref={this.onSetMapInstance}>
                                 <Map center={center} zoom={13} onClick={this.onMapClick} className={defaultClasses.leafletContainer}>
+                                    <ReactLeafletSearch popUp={this.selectSearchResult} position="topleft" inputPlaceholder="Search" closeResultsOnClick />
                                     <TileLayer
                                         url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                                         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
