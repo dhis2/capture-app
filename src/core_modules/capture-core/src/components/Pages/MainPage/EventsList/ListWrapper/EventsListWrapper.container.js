@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import EventsListWrapper from './EventsListWrapper.component';
 import { makeColumnsSelector, makeCreateEventsContainer, makeCreateWorkingListData } from './eventsList.selector';
-import { sortWorkingList, openEditEventPage } from '../eventsList.actions';
+import { sortWorkingList, openEditEventPage, requestDeleteEvent } from '../eventsList.actions';
 
 const makeMapStateToProps = () => {
     const columnsSelector = makeColumnsSelector();
@@ -10,12 +10,14 @@ const makeMapStateToProps = () => {
     const createWorkingListData = makeCreateWorkingListData();
 
     const mapStateToProps = (state: ReduxState) => {
+        const isUpdating = !!state.workingListsUI.main.isUpdating;
         const isLoading = !!state.workingListsUI.main.isLoading;
         const columns = !isLoading ? columnsSelector(state) : null;
         const eventsContainer = !isLoading ? createEventsContainer(state) : [];
         const sortById = !isLoading ? state.workingListsMeta.main.sortById : null;
         const sortByDirection = !isLoading ? state.workingListsMeta.main.sortByDirection : null;
         return {
+            isUpdating,
             columns,
             dataSource: createWorkingListData(eventsContainer),
             sortById,
@@ -32,6 +34,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onRowClick: (rowData: {eventId: string}) => {
         window.scrollTo(0, 0);
         dispatch(openEditEventPage(rowData.eventId));
+    },
+    onDelete: (eventId: string) => {
+        dispatch(requestDeleteEvent(eventId));
     },
 });
 

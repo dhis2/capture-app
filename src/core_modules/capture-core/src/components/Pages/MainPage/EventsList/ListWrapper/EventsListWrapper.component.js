@@ -31,6 +31,9 @@ import DownloadTable from '../../../../DownloadTable/DownloadTable.container';
 import withHeader from '../Header/withHeader';
 import withListHeaderWrapper from '../../ListHeaderWrapper/withListHeaderWrapper';
 import OptionSet from '../../../../../metaData/OptionSet/OptionSet';
+import withCustomEndCell from '../withCustomEndCell';
+import eventContentMenuSettings from '../EventContentMenu/eventContentMenuSettings';
+import DialogLoadingMask from '../../../../LoadingMasks/DialogLoadingMask.component';
 
 const PaginationNavigationHOC = withNavigation()(Pagination);
 const RowsSelectorHOC = withRowsPerPageSelector()(PaginationNavigationHOC);
@@ -91,6 +94,9 @@ const styles = (theme: Theme) => ({
         fontSize: theme.typography.pxToRem(13),
         color: theme.palette.text.primary,
     },
+    staticHeaderCell: {
+        width: 1,
+    },
     headerCell: {
         fontSize: theme.typography.pxToRem(12),
         color: theme.palette.text.secondary,
@@ -110,6 +116,12 @@ const styles = (theme: Theme) => ({
         '&:hover': {
             color: theme.palette.text.primary,
         },
+    },
+    updatingContainer: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        textAlign: 'center',
     },
 });
 
@@ -147,6 +159,11 @@ type Props = {
     onSort: (id: string, direction: string) => void,
     onRowClick: (rowData: {eventId: string}) => void,
     filterButtons: React.Node,
+    getCustomEndCellHeader: (props: Props) => React.Node,
+    getCustomEndCellBody: (row: {eventId: string, [elementId: string]: any}, props: Props) => React.Node,
+    customEndCellHeaderStyle?: ?Object,
+    customEndCellBodyStyle?: ?Object,
+    isUpdating?: ?boolean,
 };
 
 class EventsList extends React.Component<Props> {
@@ -203,13 +220,44 @@ class EventsList extends React.Component<Props> {
                 className={this.props.classes.row}
             >
                 {headerCells}
+                {this.getCustomEndCellHeader()}
             </Row>
         );
     }
 
+    getCustomEndCellHeader = () => {
+        const { getCustomEndCellHeader, getCustomEndCellBody, customEndCellHeaderStyle, classes } = this.props;
+
+        return getCustomEndCellBody ?
+            (
+                <HeaderCell
+                    className={classNames(classes.cell, classes.headerCell)}
+                    style={customEndCellHeaderStyle}
+                >
+                    {getCustomEndCellHeader && getCustomEndCellHeader(this.props)}
+                </HeaderCell>
+            ) :
+            null;
+    }
+
+    getCustomEndCellBody = (row: {eventId: string, [elementId: string]: any}, customEndCellBodyProps: Object) => {
+        const { getCustomEndCellBody, customEndCellBodyStyle, classes } = this.props;
+
+        return getCustomEndCellBody ?
+            (
+                <HeaderCell
+                    className={classNames(classes.cell, classes.bodyCell)}
+                    style={customEndCellBodyStyle}
+                >
+                    {getCustomEndCellBody(row, customEndCellBodyProps)}
+                </HeaderCell>
+            ) :
+            null;
+    }
+
     renderRows(visibleColumns: Array<Column>) {
         const dataSource = this.props.dataSource;
-        const classes = this.props.classes;
+        const { classes, ...customEndCellBodyProps } = this.props;
 
         if (!dataSource || dataSource.length === 0) {
             const columnsCount = visibleColumns.length;
@@ -243,6 +291,7 @@ class EventsList extends React.Component<Props> {
                         </Cell>
                     ));
 
+
                 return (
                     <Row
                         key={row.eventId}
@@ -250,11 +299,11 @@ class EventsList extends React.Component<Props> {
                         onClick={() => this.props.onRowClick(row)}
                     >
                         {cells}
+                        {this.getCustomEndCellBody(row, customEndCellBodyProps)}
                     </Row>
                 );
             });
     }
-
     getPaginationLabelDisplayedRows =
         (fromToLabel: string, totalLabel: string) => `${fromToLabel} of ${totalLabel}`
 
@@ -285,6 +334,7 @@ class EventsList extends React.Component<Props> {
                 <div
                     className={classes.tableContainer}
                 >
+                    {this.props.isUpdating && <DialogLoadingMask />}
                     <Table
                         className={classes.table}
                     >
@@ -313,4 +363,4 @@ class EventsList extends React.Component<Props> {
  * Create the event list for a event capture program
  * @namespace EventsList
  */
-export default withHeader()(withListHeaderWrapper()(withFilterSelectors()(withStyles(styles)(EventsList))));
+export default withHeader()(withListHeaderWrapper()(withCustomEndCell(eventContentMenuSettings)(withFilterSelectors()(withStyles(styles)(EventsList)))));

@@ -33,9 +33,6 @@ const getStyles = (theme: Theme) => ({
         padding: 6,
         fontSize: theme.typography.pxToRem(14),
     },
-    popperContainerHidden: {
-        display: 'none',
-    },
 });
 
 type Props = {
@@ -60,7 +57,6 @@ class FilterRestMenu extends React.Component<Props, State> {
     menuItemClasses: Object;
     managerRef: (instance: any) => void;
     menuReferenceInstance: ?HTMLDivElement;
-    updatePopper: () => void;
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -86,7 +82,6 @@ class FilterRestMenu extends React.Component<Props, State> {
     }
 
     toggleMenu() {
-        this.updatePopper();
         this.setState({
             filterSelectorOpen: !this.state.filterSelectorOpen,
         });
@@ -159,39 +154,35 @@ class FilterRestMenu extends React.Component<Props, State> {
                         }
                     }
                 </Reference>
+                {this.state.filterSelectorOpen &&
                 <Popper
                     placement="bottom-start"
                 >
                     {
-                        ({ ref, style, placement, scheduleUpdate }) => {
-                            this.updatePopper = scheduleUpdate;
-                            const popperClass = this.state.filterSelectorOpen ? '' : classes.popperContainerHidden;
-                            return (
-                                <div
-                                    ref={ref}
-                                    style={style}
-                                    className={popperClass}
-                                    data-placement={placement}
-                                >
-                                    <ClickAwayListener onClickAway={this.handleClickAway}>
-                                        <Grow
-                                            in={!!this.state.filterSelectorOpen}
-                                            id="menu-list-grow"
-                                            style={{ transformOrigin: '0 0 0' }}
-                                            timeout={{ exit: 0, enter: 200 }}
-                                        >
-                                            <Paper>
-                                                <MenuList role="menu">
-                                                    {this.renderMenuItems()}
-                                                </MenuList>
-                                            </Paper>
-                                        </Grow>
-                                    </ClickAwayListener>
-                                </div>
-                            );
-                        }
+                        ({ ref, style, placement }) => (
+                            <div
+                                ref={ref}
+                                style={style}
+                                data-placement={placement}
+                            >
+                                <ClickAwayListener onClickAway={this.handleClickAway}>
+                                    <Grow
+                                        in={!!this.state.filterSelectorOpen}
+                                        id="menu-list-grow"
+                                        style={{ transformOrigin: '0 0 0' }}
+                                        timeout={{ exit: 0, enter: 200 }}
+                                    >
+                                        <Paper>
+                                            <MenuList role="menu">
+                                                {this.renderMenuItems()}
+                                            </MenuList>
+                                        </Paper>
+                                    </Grow>
+                                </ClickAwayListener>
+                            </div>
+                        )
                     }
-                </Popper>
+                </Popper>}
             </Manager>
         );
     }

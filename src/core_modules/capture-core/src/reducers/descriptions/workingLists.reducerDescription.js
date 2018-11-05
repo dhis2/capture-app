@@ -297,6 +297,11 @@ const getLoadingState = oldState => ({
     isLoading: true,
 });
 
+const getUpdatingState = oldState => ({
+    ...oldState,
+    isUpdating: true,
+});
+
 export const workingListsUIDesc = createReducerDescription({
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS]: (state) => {
         const newState = { ...state };
@@ -338,11 +343,17 @@ export const workingListsUIDesc = createReducerDescription({
         newState.main = getLoadingState(newState.main);
         return newState;
     },
+    [eventsListActionTypes.WORKING_LIST_UPDATING]: (state) => {
+        const newState = { ...state };
+        newState.main = getUpdatingState(newState.main);
+        return newState;
+    },
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state) => {
         const newState = { ...state };
         newState.main = {
             ...newState.main,
             isLoading: false,
+            isUpdating: false,
             hasBeenLoaded: true,
             dataLoadingError: null,
         };
@@ -353,6 +364,7 @@ export const workingListsUIDesc = createReducerDescription({
         newState.main = {
             ...newState.main,
             isLoading: false,
+            isUpdating: false,
             dataLoadingError: null,
         };
         return newState;
@@ -362,6 +374,7 @@ export const workingListsUIDesc = createReducerDescription({
         newState.main = {
             dataLoadingError: action.payload,
             isLoading: false,
+            isUpdating: false,
         };
         return newState;
     },
@@ -370,6 +383,7 @@ export const workingListsUIDesc = createReducerDescription({
         newState.main = {
             dataLoadingError: null,  // reverting list to previous state and showing feedbackBar message
             isLoading: false,
+            isUpdating: false,
         };
         return newState;
     },
@@ -388,6 +402,7 @@ export const workingListsUIDesc = createReducerDescription({
         newState.main = {
             ...newState.main,
             isLoading: false,
+            isUpdating: false,
         };
         return newState;
     },
@@ -396,6 +411,7 @@ export const workingListsUIDesc = createReducerDescription({
         newState.main = {
             ...newState.main,
             isLoading: false,
+            isUpdating: false,
         };
         return newState;
     },
@@ -409,6 +425,7 @@ export const workingListsUIDesc = createReducerDescription({
         newState.main = {
             ...newState.main,
             isLoading: false,
+            isUpdating: false,
         };
         return newState;
     },
@@ -422,6 +439,7 @@ export const workingListsUIDesc = createReducerDescription({
         newState.main = {
             ...newState.main,
             isLoading: false,
+            isUpdating: false,
         };
         return newState;
     },
@@ -436,6 +454,7 @@ export const workingListsUIDesc = createReducerDescription({
             main: {
                 ...state.main,
                 isLoading: false,
+                isUpdating: false,
             },
         };
         return newState;
