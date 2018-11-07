@@ -3,7 +3,7 @@
 
 import * as React from 'react';
 import { debounce } from 'lodash';
-
+import { withStyles } from '@material-ui/core/styles';
 import VirtualizedSelect from 'react-virtualized-select';
 
 import 'react-select/dist/react-select.css';
@@ -14,6 +14,20 @@ import './optionsSelectVirtualized.css';
 import VirtualizedOption from './OptionsSelectVirtualizedOption.component';
 
 export type VirtualizedOptionConfig = {label: string, value: any, iconLeft?: ?React.Node, iconRight?: ?React.Node };
+
+const getStyles = () => ({
+    selectedOptionContainer: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    selectedIconLeftContainer: {
+        paddingRight: 5,
+    },
+    selectedIconRightContainer: {
+        paddingLeft: 5,
+    },
+});
+
 
 type Props = {
     onSelect: (value: any) => void,
@@ -34,6 +48,11 @@ type Props = {
         noResults: string,
     },
     multi?: ?boolean,
+    classes: {
+        selectedOptionContainer: string,
+        selectedIconLeftContainer: string,
+        selectedIconRightContainer: string,
+    },
 };
 
 type State = {
@@ -139,6 +158,38 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
         );
     }
 
+    renderValue = (option: VirtualizedOptionConfig) => {
+        const { classes } = this.props;
+        const { iconLeft, iconRight, label } = option;
+        return (
+            <div
+                className={classes.selectedOptionContainer}
+            >
+                {
+                    iconLeft ? (
+                        <div
+                            className={classes.selectedIconLeftContainer}
+                        >
+                            {iconLeft}
+                        </div>
+                    ) : null
+                }
+                <div>
+                    {label}
+                </div>
+                {
+                    iconRight ? (
+                        <div
+                            className={classes.selectedIconRightContainer}
+                        >
+                            {iconRight}
+                        </div>
+                    ) : null
+                }
+            </div>
+        );
+    }
+
     render() {
         const {
             options,
@@ -153,6 +204,7 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
             useHintLabel,
             translations,
             withoutUnderline,
+            classes,
             ...toSelect } = this.props;
         const calculatedValue = toSelect.multi ? value : this.getValue();
         const selectStyle = { ...OptionsSelectVirtualized.defaultSelectStyle, ...style };
@@ -167,6 +219,7 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
                         options={options}
                         onChange={this.handleChange}
                         value={calculatedValue}
+                        valueRenderer={this.renderValue}
                         clearable={nullable}
                         style={selectStyle}
                         menuContainerStyle={menuContainerStyle}
@@ -189,4 +242,4 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
     }
 }
 
-export default OptionsSelectVirtualized;
+export default withStyles(getStyles)(OptionsSelectVirtualized);

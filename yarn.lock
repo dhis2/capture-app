@@ -113,6 +113,10 @@
   dependencies:
     i18next "^10.3"
 
+"@dhis2/d2-icons@https://github.com/JoakimSM/dhis2-icons.git":
+  version "1.0.1"
+  resolved "https://github.com/JoakimSM/dhis2-icons.git#a3c52bf1086d5c2f0ac8f038a4d455d80ceb93ad"
+
 "@dhis2/d2-ui-app@^1.0.4":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@dhis2/d2-ui-app/-/d2-ui-app-1.0.4.tgz#05bba43dfb1ba868f08f9c3010fbba29551f6952"
