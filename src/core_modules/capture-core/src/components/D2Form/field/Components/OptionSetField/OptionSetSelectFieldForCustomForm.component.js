@@ -10,7 +10,7 @@ import {
     withDisplayMessages,
 } from '../../../../FormFields/New';
 import withRequiredFieldCalculation from '../../withRequiredFieldCalculation';
-import withOptionSetIconElement from './withOptionSetIconElement';
+import withOptionsIconElement from './withOptionsIconElement';
 import withCustomElementContainer from '../../withCustomElementContainer';
 import customFormStyles from './optionSetSelectFieldForCustomForm.mod.css';
 
@@ -25,7 +25,7 @@ export default withGotoInterface()(
                         withDisplayMessages()(
                             withSelectTranslations()(
                                 withCustomElementContainer(getContainerClass)(
-                                    withOptionSetIconElement()(
+                                    withOptionsIconElement()(
                                         VirtualizedSelectField,
                                     ),
                                 ),

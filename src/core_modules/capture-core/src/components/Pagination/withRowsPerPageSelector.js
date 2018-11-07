@@ -2,8 +2,6 @@
 import * as React from 'react';
 import './rowsPerPage.css';
 
-import OptionSet from '../../metaData/OptionSet/OptionSet';
-import Option from '../../metaData/OptionSet/Option';
 import OptionsSelect from '../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import withTranslations from '../FormFields/Options/SelectVirtualized/withTranslations';
 import type { VirtualizedOptionConfig } from

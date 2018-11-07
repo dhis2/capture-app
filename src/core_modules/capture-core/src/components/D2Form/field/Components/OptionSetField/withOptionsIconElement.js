@@ -28,12 +28,17 @@ type Props = {
     },
 };
 
+/**
+ * Converts icon objects in options to React nodes, with property key iconRight.
+*/
+
 export default () =>
     (InnerComponent: React.ComponentType<any>) => withStyles(getStyles)(
-        class CreateIconElementHOC extends React.Component<Props> {
+        class CreateOptionsIconElementHOC extends React.Component<Props> {
             options: Array<{icon: React.Node}>;
             constructor(props: Props) {
                 super(props);
+                // $FlowFixMe
                 this.options = this.getOptions();
             }
 
