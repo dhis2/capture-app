@@ -129,15 +129,15 @@ class ProgramSelector extends Component<Props> {
 
     getProgramIcon(program: Program) {
         const classes = this.props.classes;
-        return program.style.icon
+        return program.icon.data
             ? (
                 <div
                     className={classes.iconContainer}
                 >
                     <img
-                        style={{ backgroundColor: program.style.color }}
+                        style={{ backgroundColor: program.icon.color }}
                         className={classes.icon}
-                        src={program.style.icon}
+                        src={program.icon.data}
                         alt={program.name}
                     />
                 </div>
@@ -150,7 +150,7 @@ class ProgramSelector extends Component<Props> {
             .map(program => ({
                 label: program.name,
                 value: program.id,
-                icon: this.getProgramIcon(program),
+                iconLeft: this.getProgramIcon(program),
             }));
     }
 

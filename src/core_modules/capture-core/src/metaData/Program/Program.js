@@ -3,7 +3,7 @@
 import isFunction from 'd2-utilizr/src/isFunction';
 
 import CategoryCombination from '../CategoryCombinations/CategoryCombination';
-import Style from '../Style/Style';
+import Icon from '../Icon/Icon';
 import type { ProgramRule, ProgramRuleVariable } from '../../RulesEngine/rulesEngine.types';
 import type { Access } from '../Access/Access';
 
@@ -17,7 +17,7 @@ export default class Program {
     _categoryCombination: ?CategoryCombination;
     _programRules: Array<ProgramRule>;
     _programRuleVariables: Array<ProgramRuleVariable>;
-    _style: Style;
+    _icon: Icon;
 
     constructor(initFn: ?(_this: Program) => void) {
         this.programRules = [];
@@ -81,11 +81,11 @@ export default class Program {
         return this._programRuleVariables;
     }
 
-    set style(style: Style) {
-        this._style = style;
+    set icon(icon: Icon) {
+        this._icon = icon;
     }
-    get style(): Style {
-        return this._style;
+    get icon(): Icon {
+        return this._icon;
     }
 
     addProgramRuleVariable(programRuleVariable: ProgramRuleVariable) {

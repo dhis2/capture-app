@@ -29,6 +29,10 @@ const flattenOptionSetForSelect = (formOptionSet: OptionSet) => formOptionSet
     .map(option => ({
         label: option.text,
         value: option.value,
+        icon: option.icon ? {
+            data: option.icon.data,
+            color: option.icon.color,
+        } : null,
     }));
 
 

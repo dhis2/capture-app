@@ -6,7 +6,7 @@ export default new ApiSpecification((_this) => {
     _this.modelName = 'optionSets';
     _this.modelGetterType = getterTypes.LIST;
     _this.queryParams = {
-        fields: 'id,displayName,version,valueType,options[id,displayName,code]',
+        fields: 'id,displayName,version,valueType,options[id,displayName,code,style]',
     };
     _this.converter = (d2Model) => {
         if (!d2Model) {
@@ -22,6 +22,7 @@ export default new ApiSpecification((_this) => {
                 id: option.id,
                 displayName: option.displayName,
                 code: option.code,
+                style: option.style,
             })),
         }));
     };

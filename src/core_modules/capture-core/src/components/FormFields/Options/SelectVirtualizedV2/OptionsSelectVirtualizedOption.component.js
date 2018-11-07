@@ -8,8 +8,11 @@ const getStyles = () => ({
     popper: {
         zIndex: 9999,
     },
-    iconContainer: {
+    iconLeftContainer: {
         paddingRight: 5,
+    },
+    iconRightContainer: {
+        paddingLeft: 5,
     },
 });
 
@@ -20,9 +23,11 @@ type Props = {
     currentlySelectedValues: ?Array<VirtualizedOptionConfig>,
     classes: {
         popper: string,
-        iconContainer: string,
+        iconLeftContainer: string,
+        iconRightContainer: string,
     },
-    inFocus?: ?boolean,
+    inFocus: ?boolean,
+    onFocusOption: (option: VirtualizedOptionConfig) => void,
 };
 
 class OptionsSelectVirtualizedOption extends Component<Props> {
@@ -38,16 +43,24 @@ class OptionsSelectVirtualizedOption extends Component<Props> {
         textOverflow: 'ellipsis',
     };
 
-    static selectedStyle = {};
+    static selectedStyle = {
+        fontWeight: 'bold',
+    };
+
+    static inFocusStyle = {
+        backgroundColor: 'rgba(0,0,0,0.1)',
+    };
 
     render() {
-        const { option, style, onSelect, currentlySelectedValues, classes } = this.props;
-        const { label, icon } = option;
+        const { option, style, onSelect, currentlySelectedValues, classes, inFocus, onFocusOption } = this.props;
+        const { label, iconLeft, iconRight } = option;
+        const isSelected = !!currentlySelectedValues && currentlySelectedValues.includes(option);
         const renderStyle = Object.assign(
             {},
             OptionsSelectVirtualizedOption.defaultContainerStyle,
             style,
             currentlySelectedValues && currentlySelectedValues.includes(option) ? OptionsSelectVirtualizedOption.selectedStyle : null,
+            inFocus ? OptionsSelectVirtualizedOption.inFocusStyle : null,
         );
         return (
             <Tooltip
@@ -62,19 +75,32 @@ class OptionsSelectVirtualizedOption extends Component<Props> {
                     onClick={() => {
                         onSelect(option);
                     }}
+                    role="option"
+                    aria-selected={isSelected}
+                    tabIndex={-1}
+                    onMouseOver={() => onFocusOption(option)}
                 >
                     {
-                        icon ? (
+                        iconLeft ? (
                             <div
-                                className={classes.iconContainer}
+                                className={classes.iconLeftContainer}
                             >
-                                {icon}
+                                {iconLeft}
                             </div>
                         ) : null
                     }
                     <div>
                         {label}
                     </div>
+                    {
+                        iconRight ? (
+                            <div
+                                className={classes.iconRightContainer}
+                            >
+                                {iconRight}
+                            </div>
+                        ) : null
+                    }
                 </div>
             </Tooltip>
         );

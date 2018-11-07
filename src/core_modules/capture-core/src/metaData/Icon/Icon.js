@@ -2,11 +2,11 @@
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/src/isFunction';
 
-export default class Style {
+export default class Icon {
     _color: string;
-    _icon: ?string;
+    _data: string;
 
-    constructor(initFn: ?(_this: Style) => void) {
+    constructor(initFn: ?(_this: Icon) => void) {
         this.color = 'white';
         initFn && isFunction(initFn) && initFn(this);
     }
@@ -18,10 +18,10 @@ export default class Style {
         return this._color;
     }
 
-    set icon(icon: ?string) {
-        this._icon = icon;
+    set data(data: string) {
+        this._data = data;
     }
-    get icon(): ?string {
-        return this._icon;
+    get data(): string {
+        return this._data;
     }
 }

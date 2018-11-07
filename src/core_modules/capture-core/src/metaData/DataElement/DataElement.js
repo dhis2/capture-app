@@ -6,6 +6,7 @@ import log from 'loglevel';
 import isFunction from 'd2-utilizr/src/isFunction';
 import isArray from 'd2-utilizr/src/isArray';
 
+import Icon from '../Icon/Icon';
 import OptionSet from '../OptionSet/OptionSet';
 import errorCreator from '../../utils/errorCreator';
 import elementTypes from './elementTypes';
@@ -26,6 +27,7 @@ export default class DataElement {
     _optionSet: ?OptionSet;
     _displayInForms: boolean;
     _displayInReports: boolean;
+    _icon: ?Icon;
 
     constructor(initFn: ?(_this: DataElement) => void) {
         this._displayInReports = true;
@@ -114,6 +116,13 @@ export default class DataElement {
     }
     get optionSet(): ?OptionSet {
         return this._optionSet;
+    }
+
+    set icon(icon: ?Icon) {
+        this._icon = icon;
+    }
+    get icon(): ?Icon {
+        return this._icon;
     }
 
     * getPropertyNames(): Generator<string, void, void> {

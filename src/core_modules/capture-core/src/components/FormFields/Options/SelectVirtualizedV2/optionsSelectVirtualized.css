@@ -12,10 +12,6 @@
     background-color: white;
 }
 
-.virtualized-select-option:hover {
-    background-color: rgba(0,0,0,0.1) !important;
-}
-
 .Select-multi-value-wrapper {
     flex-grow: 1;
 }

@@ -13,6 +13,7 @@ import {
     withFilterProps,
 } from '../../../../FormFields/New';
 import withRequiredFieldCalculation from '../../withRequiredFieldCalculation';
+import withOptionSetIconElement from './withOptionSetIconElement';
 import labelTypeClasses from '../../buildField.mod.css';
 
 const getFilteredProps = (props: Object) => {
@@ -33,8 +34,10 @@ export default withGotoInterface()(
                                     `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
                             })(
                                 withDisplayMessages()(
-                                    withFilterProps(getFilteredProps)(
-                                        withSelectTranslations()(VirtualizedSelectField),
+                                    withOptionSetIconElement()(
+                                        withFilterProps(getFilteredProps)(
+                                            withSelectTranslations()(VirtualizedSelectField),
+                                        ),
                                     ),
                                 ),
                             ),

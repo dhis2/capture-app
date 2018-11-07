@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/src/isFunction';
+import Icon from '../Icon/Icon';
 
 export type Value = string | number | boolean | {};
 
@@ -9,6 +10,7 @@ export default class Option {
     _value: Value;
     _text: string;
     _description: ?string;
+    _icon: ?Icon;
 
     constructor(initFn?: (_this: Option) => void) {
         initFn && isFunction(initFn) && initFn(this);
@@ -33,5 +35,12 @@ export default class Option {
     }
     get description(): ?string {
         return this._description;
+    }
+
+    set icon(icon: ?Icon) {
+        this._icon = icon;
+    }
+    get icon(): ?Icon {
+        return this._icon;
     }
 }

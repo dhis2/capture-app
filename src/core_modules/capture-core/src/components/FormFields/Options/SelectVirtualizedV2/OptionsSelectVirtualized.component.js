@@ -13,7 +13,7 @@ import './optionsSelectVirtualized.css';
 
 import VirtualizedOption from './OptionsSelectVirtualizedOption.component';
 
-export type VirtualizedOptionConfig = {label: string, value: any, icon?: ?React.Node };
+export type VirtualizedOptionConfig = {label: string, value: any, iconLeft?: ?React.Node, iconRight?: ?React.Node };
 
 type Props = {
     onSelect: (value: any) => void,
@@ -42,6 +42,7 @@ type State = {
 
 type OptionContainer = {
     focusedOption: VirtualizedOptionConfig,
+    focusOption: (option: VirtualizedOptionConfig) => void,
     option: VirtualizedOptionConfig,
     style: Object,
     selectValue: (value: VirtualizedOptionConfig) => void,
@@ -68,7 +69,6 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
     materialUIContainerInstance: any;
     filterOptions: any;
     renderOption: () => React$Element<any>;
-    yourSelect: any;
     prevFilterValue: ?string;
     prevFilteredOptions: Array<VirtualizedOptionConfig>;
 
@@ -130,6 +130,7 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
                 key={optionContainer.option.value}
                 option={optionContainer.option}
                 inFocus={inFocus}
+                onFocusOption={optionContainer.focusOption}
                 style={optionContainer.style}
                 onSelect={optionContainer.selectValue}
                 currentlySelectedValues={optionContainer.valueArray}
@@ -162,7 +163,6 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
             >
                 <div>
                     <VirtualizedSelect
-                        ref={(select) => { this.yourSelect = select; }}
                         disabled={disabled}
                         options={options}
                         onChange={this.handleChange}
