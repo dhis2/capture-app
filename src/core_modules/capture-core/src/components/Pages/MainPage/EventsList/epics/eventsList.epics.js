@@ -18,7 +18,7 @@ import {
     workingListUpdateDataRetrieved,
     workingListUpdateRetrievalFailed,
     startDeleteEvent,
-    workingListUpdating,
+    workingListUpdatingWithDialog,
 } from '../eventsList.actions';
 import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../../NewEvent';
 import { actionTypes as editEventDataEntryActionTypes } from '../../../EditEvent/DataEntry/editEventDataEntry.actions';
@@ -201,13 +201,13 @@ export const getWorkingListOnCancelSaveEpic = (action$: InputObservable, store: 
                 );
         });
 
-export const requestDeleteEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const requestDeleteEventEpic = (action$: InputObservable) =>
     // $FlowSuppress
     action$.ofType(
         eventsListActionTypes.REQUEST_DELETE_EVENT,
     ).map((action) => {
         const eventId = action.payload.eventId;
-        return batchActions([startDeleteEvent(eventId), workingListUpdating()], eventsListBatchActionTypes.START_DELETE_EVENT_UPDATE_WORKING_LIST);
+        return batchActions([startDeleteEvent(eventId), workingListUpdatingWithDialog()], eventsListBatchActionTypes.START_DELETE_EVENT_UPDATE_WORKING_LIST);
     });
 
 export const getWorkingListOnSaveEpic = (action$: InputObservable, store: ReduxStore) =>

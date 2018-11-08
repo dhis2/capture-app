@@ -12,6 +12,7 @@ export const actionTypes = {
     DELETE_EVENT_FAILED: 'DeleteEventFailed',
     EVENT_DELETED: 'EventDeleted',
     WORKING_LIST_UPDATING: 'WorkingListUpdating',
+    WORKING_LIST_UPDATING_WITH_DIALOG: 'WorkingListUpdatingWithDialog',
 };
 
 export const batchActionTypes = {
@@ -28,6 +29,7 @@ export const sortWorkingList =
     (id: string, direction: string) => actionCreator(actionTypes.SORT_WORKING_LIST)({ id, direction });
 
 export const workingListUpdating = () => actionCreator(actionTypes.WORKING_LIST_UPDATING)({});
+export const workingListUpdatingWithDialog = () => actionCreator(actionTypes.WORKING_LIST_UPDATING_WITH_DIALOG)({});
 
 export const openEditEventPage =
     (eventId: string) => actionCreator(actionTypes.OPEN_EDIT_EVENT_PAGE)(eventId);

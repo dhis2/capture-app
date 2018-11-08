@@ -33,6 +33,7 @@ import withListHeaderWrapper from '../../ListHeaderWrapper/withListHeaderWrapper
 import OptionSet from '../../../../../metaData/OptionSet/OptionSet';
 import withCustomEndCell from '../withCustomEndCell';
 import eventContentMenuSettings from '../EventContentMenu/eventContentMenuSettings';
+import LoadingMask from '../../../../LoadingMasks/LoadingMask.component';
 import DialogLoadingMask from '../../../../LoadingMasks/DialogLoadingMask.component';
 
 const PaginationNavigationHOC = withNavigation()(Pagination);
@@ -164,6 +165,7 @@ type Props = {
     customEndCellHeaderStyle?: ?Object,
     customEndCellBodyStyle?: ?Object,
     isUpdating?: ?boolean,
+    isUpdatingWithDialog?: ?boolean,
 };
 
 class EventsList extends React.Component<Props> {
@@ -334,17 +336,20 @@ class EventsList extends React.Component<Props> {
                 <div
                     className={classes.tableContainer}
                 >
-                    {this.props.isUpdating && <DialogLoadingMask />}
-                    <Table
-                        className={classes.table}
-                    >
-                        <Head>
-                            {this.renderHeaderRow(visibleColumns)}
-                        </Head>
-                        <Body>
-                            {this.renderRows(visibleColumns)}
-                        </Body>
-                    </Table>
+                    {this.props.isUpdatingWithDialog && <DialogLoadingMask />}
+                    {this.props.isUpdating && <LoadingMask /> }
+                    {!this.props.isUpdating &&
+                        <Table
+                            className={classes.table}
+                        >
+                            <Head>
+                                {this.renderHeaderRow(visibleColumns)}
+                            </Head>
+                            <Body>
+                                {this.renderRows(visibleColumns)}
+                            </Body>
+                        </Table>
+                    }
                 </div>
                 <div
                     className={classes.paginationContainer}

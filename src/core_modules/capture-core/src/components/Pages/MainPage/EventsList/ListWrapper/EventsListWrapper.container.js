@@ -10,14 +10,14 @@ const makeMapStateToProps = () => {
     const createWorkingListData = makeCreateWorkingListData();
 
     const mapStateToProps = (state: ReduxState) => {
-        const isUpdating = !!state.workingListsUI.main.isUpdating;
         const isLoading = !!state.workingListsUI.main.isLoading;
         const columns = !isLoading ? columnsSelector(state) : null;
         const eventsContainer = !isLoading ? createEventsContainer(state) : [];
         const sortById = !isLoading ? state.workingListsMeta.main.sortById : null;
         const sortByDirection = !isLoading ? state.workingListsMeta.main.sortByDirection : null;
         return {
-            isUpdating,
+            isUpdating: !!state.workingListsUI.main.isUpdating,
+            isUpdatingWithDialog: !!state.workingListsUI.main.isUpdatingWithDialog,
             columns,
             dataSource: createWorkingListData(eventsContainer),
             sortById,

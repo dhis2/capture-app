@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper';
 import Button from '../../../Buttons/Button.component';
-import i18n from '@dhis2/d2-i18n';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -44,6 +44,8 @@ type Props = {
         contents: string,
         buttonRow: string,
         buttonContainer: string,
+        headerContainer: string,
+        header: string,
     },
     onCancel: () => void,
 };

@@ -144,30 +144,6 @@ class EventContentMenu extends React.Component<Props, State> {
                     }
                 </Popper>}
             </Manager>
-            /* <div>
-                <IconButton
-                    aria-owns={anchorEl ? 'event-content-menu' : undefined}
-                    aria-haspopup="true"
-                    onClick={this.handleClick}
-                >
-                    <MoreHoriz />
-                </IconButton>
-                <Menu
-                    id="event-content-menu"
-                    anchorEl={anchorEl}
-                    open={!!anchorEl}
-                    onClose={this.handleClose}
-                    MenuListProps={{ className: classes.menuList }}
-                    getContentAnchorEl={null}
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                    transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                >
-                    <MenuItem className={classes.menuItem} onClick={this.handleDelete}>
-                        <Delete className={classes.deleteIcon} />
-                        {i18n.t('Delete event')}
-                    </MenuItem>
-                </Menu>
-            </div> */
         );
     }
 }
