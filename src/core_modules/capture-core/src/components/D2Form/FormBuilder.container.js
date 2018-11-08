@@ -22,7 +22,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
         ...passOnOwnProps,
         ...stateProps,
         ...dispatchProps,
-        innerRef: formBuilderRef,
+        ref: formBuilderRef,
     };
 };
 

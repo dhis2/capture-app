@@ -33,6 +33,9 @@ const getStyles = (theme: Theme) => ({
         padding: 6,
         fontSize: theme.typography.pxToRem(14),
     },
+    popperContainerHidden: {
+        display: 'none',
+    },
 });
 
 type Props = {

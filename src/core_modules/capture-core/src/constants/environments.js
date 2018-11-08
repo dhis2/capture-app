@@ -1,6 +1,6 @@
 // @flow
 
-export default {  
+export default {
     prod: 'production',
     dev: 'development',
     test: 'test',

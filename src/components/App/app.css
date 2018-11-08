@@ -2,3 +2,7 @@ body {
     overflow-x: hidden;
     font-family: Roboto, Helvetica, Arial, sans-serif;
 }
+
+::placeholder {
+    color: #aaa;
+}
