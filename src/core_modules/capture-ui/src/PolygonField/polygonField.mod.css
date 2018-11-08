@@ -19,13 +19,14 @@
 
 .polygonLeafletMap {
     position: absolute;
+    width: 100%;
     z-index: 1000;
     left: 0;
-    top: 40px;
 }
 .leafletContainer {
     z-index: 1000;
-    width: 400px;
-    height: 250px;
+    height: 375px;
+    border: 1px solid black;
+    border-radius: 3px;
 }
 

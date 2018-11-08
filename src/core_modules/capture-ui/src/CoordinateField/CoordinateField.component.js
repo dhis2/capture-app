@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import LocationIcon from '@material-ui/icons/LocationOn';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search';
+import { Manager, Popper, Reference } from 'react-popper';
 import ClearIcon from '@material-ui/icons/Clear';
 import CoordinateInput from '../internal/CoordinateInput/CoordinateInput.component';
 import defaultClasses from './coordinateField.mod.css';
@@ -133,9 +134,8 @@ export default class D2Coordinate extends Component<Props, State> {
         const coordinateIconClass = shrinkDisabled ? defaultClasses.coordinateIcon : defaultClasses.coordinateIconWithMargin;
 
         return (
-            <div className={coordinateFieldsClass}>
-                <div className={coordinateIconClass}>
-                    <LocationIcon onClick={this.toggleMap} />
+            <div>
+                <div className={coordinateFieldsClass}>
                     {
                         this.state.showMap && (
                             <div className={defaultClasses.coordinateLeafletMap} ref={this.onSetMapInstance}>
@@ -150,29 +150,32 @@ export default class D2Coordinate extends Component<Props, State> {
                             </div>
                         )
                     }
-                </div>
-                <div className={defaultClasses.inputContainer}>
-                    <CoordinateInput
-                        shrinkDisabled={shrinkDisabled}
-                        label="Latitude"
-                        value={value && value.latitude}
-                        onBlur={latValue => this.handleBlur(coordinateKeys.LATITUDE, latValue)}
-                        onChange={latValue => this.handleChange(coordinateKeys.LATITUDE, latValue)}
-                        {...passOnProps}
-                    />
-                </div>
-                <div className={defaultClasses.inputContainer}>
-                    <CoordinateInput
-                        shrinkDisabled={shrinkDisabled}
-                        label="Longitude"
-                        value={value && value.longitude}
-                        onBlur={lngValue => this.handleBlur(coordinateKeys.LONGITUDE, lngValue)}
-                        onChange={lngValue => this.handleChange(coordinateKeys.LONGITUDE, lngValue)}
-                        {...passOnProps}
-                    />
-                </div>
-                <div className={coordinateIconClass}>
-                    <ClearIcon onClick={this.handleClear} />
+                    <div className={coordinateIconClass}>
+                        <LocationIcon onClick={this.toggleMap} />
+                    </div>
+                    <div className={defaultClasses.inputContainer}>
+                        <CoordinateInput
+                            shrinkDisabled={shrinkDisabled}
+                            label="Latitude"
+                            value={value && value.latitude}
+                            onBlur={latValue => this.handleBlur(coordinateKeys.LATITUDE, latValue)}
+                            onChange={latValue => this.handleChange(coordinateKeys.LATITUDE, latValue)}
+                            {...passOnProps}
+                        />
+                    </div>
+                    <div className={defaultClasses.inputContainer}>
+                        <CoordinateInput
+                            shrinkDisabled={shrinkDisabled}
+                            label="Longitude"
+                            value={value && value.longitude}
+                            onBlur={lngValue => this.handleBlur(coordinateKeys.LONGITUDE, lngValue)}
+                            onChange={lngValue => this.handleChange(coordinateKeys.LONGITUDE, lngValue)}
+                            {...passOnProps}
+                        />
+                    </div>
+                    <div className={coordinateIconClass}>
+                        <ClearIcon onClick={this.handleClear} />
+                    </div>
                 </div>
             </div>
         );
