@@ -1,33 +1,58 @@
 // @flow
 import { createMuiTheme } from '@material-ui/core/styles';
-import green from '@material-ui/core/colors/green';
 import red from '@material-ui/core/colors/red';
 import blue from '@material-ui/core/colors/blue';
-import yellow from '@material-ui/core/colors/yellow';
+
+const primary = {
+    main: '#1976D2',
+    dark: '#004BA0',
+    light: '#63A4FF',
+    lightest: '#EAF4FF',
+};
+
 
 const theme = createMuiTheme({
+    overrides: {
+        MuiButton: { // Name of the component ⚛️ / style sheet
+            raisedPrimary: { // Name of the rule
+                '&:hover': { backgroundColor: primary.main },
+                backgroundColor: primary.dark, // Some CSS
+            },
+            flatPrimary: {
+                '&:hover': { backgroundColor: primary.lightest },
+                color: primary.dark,
+            },
+        },
+    },
     palette: {
-        primary: blue,
-        error: {
-            ...red,
-            lighter: '#fbeae5',
-            light: red[300],
-            main: red[500],
-            dark: red[700],
-            contrastText: '#fff',
-        },
+        primary,
         secondary: {
-            light: green[400],
-            main: green[700],
-            dark: green[900],
+            main: '#00796B',
+            dark: '#004C40',
+            light: '#48A999',
+            lightest: '#B2DFDB',
         },
-        success: green,
+        error: {
+            main: '#E53935',
+        },
         warning: {
-            ...yellow,
-            lighter: yellow[100],
-            light: yellow[300],
-            main: yellow[600],
-            dark: yellow[900],
+            main: '#F19C02',
+        },
+        success: {
+            main: '#3D9305',
+        },
+        info: {
+            main: '#EAF4FF',
+        },
+        grey: {
+            main: '#9E9E9E',
+            light: '#E0E0E0',
+            lighter: '#F6F6F6',
+            lightest: '#FBFBFB',
+            dark: '#494949',
+            blueGrey: '#ECEFF1',
+            snow: '#F4F6F8',
+            black: '#000000',
         },
     },
 });
@@ -38,10 +63,6 @@ theme.typography.formFieldTitle = {
 
 theme.palette = {
     ...theme.palette,
-    grey: {
-        ...theme.palette.grey,
-        '30': '#FBFBFB', // eslint-disable-line
-    },
     accent: {
         lighter: blue[50],
         light: blue[100],

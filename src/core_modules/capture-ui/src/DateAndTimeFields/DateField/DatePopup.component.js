@@ -32,15 +32,29 @@ class DatePopup extends React.Component<Props> {
 
         let calendarStyle;
         if (anchorPosition === anchorPositions.RIGHT) {
-            calendarStyle = mode === modes.INLINE ?
-                { marginLeft: `-${this.calculateMarginLeftInline()}px` } :
-                { ...this.getAbsoluteVerticalPosition(), right: 0 };
+            calendarStyle = this.getRightCalendarStyle(mode);
+        } else if (anchorPosition === anchorPositions.CENTER) {
+            calendarStyle = this.getCenterCalendarStyle(mode);
         } else {
-            calendarStyle = mode === modes.INLINE ? { } : { ...this.getAbsoluteVerticalPosition(), left: 0 };
+            calendarStyle = this.getLeftCalendarStyle(mode);
         }
-
         return calendarStyle;
     }
+
+    getRightCalendarStyle = (mode: ?$Values<typeof modes>) =>
+        (mode === modes.INLINE ?
+            { marginLeft: `-${this.calculateMarginLeftInline()}px` } :
+            { ...this.getAbsoluteVerticalPosition(), right: 0 }
+        );
+
+    getLeftCalendarStyle = (mode: ?$Values<typeof modes>) =>
+        (mode === modes.INLINE ? { } : { ...this.getAbsoluteVerticalPosition(), left: 0 });
+
+    getCenterCalendarStyle = (mode: ?$Values<typeof modes>) =>
+        (mode === modes.INLINE ?
+            { marginLeft: `-${(this.calculateMarginLeftInline() / 2)}px` } :
+            { ...this.getAbsoluteVerticalPosition(), left: '50%', transform: 'translate(-50%, 0)' }
+        );
 
     render() {
         const {

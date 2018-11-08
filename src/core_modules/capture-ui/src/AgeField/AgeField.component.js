@@ -39,6 +39,8 @@ type Props = {
     onParseDate: DateParser,
     moment: any,
     dateCalendarTheme: Object,
+    dateCalendarWidth?: ?any,
+    datePopupAnchorPosition?: ?string,
     dateCalendarLocale: Object,
     dateCalendarOnConvertValueIn: (inputValue: ?string) => Date,
     dateCalendarOnConvertValueOut: (value: string) => string,
@@ -139,7 +141,21 @@ class D2AgeField extends Component<Props> {
     }
 
     renderNumberInput = (currentValues: AgeValues, key: string, label: string) => {
-        const { innerMessage, onChange, inFocus, value, onBlur, dateCalendarOnConvertValueIn, dateCalendarOnConvertValueOut, dateCalendarTheme, dateCalendarLocale, ...passOnProps } = this.props;
+        const {
+            innerMessage,
+            onChange,
+            inFocus,
+            value,
+            onBlur,
+            dateCalendarOnConvertValueIn,
+            dateCalendarOnConvertValueOut,
+            dateCalendarWidth,
+            datePopupAnchorPosition,
+            dateCalendarTheme,
+            dateCalendarLocale,
+            moment,
+            onParseDate,
+            ...passOnProps } = this.props;
         return (
             <div className={defaultClasses.ageNumberInputContainer}>
                 <AgeNumberInput
@@ -154,7 +170,23 @@ class D2AgeField extends Component<Props> {
         );
     }
     renderDateInput = (currentValues: AgeValues, isVertical: boolean) => {
-        const { onChange, innerMessage, inFocus, value, onBlur, shrinkDisabled, dateCalendarOnConvertValueIn, dateCalendarOnConvertValueOut, dateCalendarTheme, dateCalendarLocale, ...passOnProps } = this.props;
+        const {
+            onChange,
+            innerMessage,
+            inFocus,
+            value,
+            onBlur,
+            shrinkDisabled,
+            dateCalendarOnConvertValueIn,
+            dateCalendarOnConvertValueOut,
+            dateCalendarWidth,
+            datePopupAnchorPosition,
+            dateCalendarTheme,
+            dateCalendarLocale,
+            moment,
+            onParseDate,
+            ...passOnProps
+        } = this.props;
         const dateInputContainerClass = classNames(
             { [defaultClasses.ageDateInputContainerHorizontal]: !isVertical },
         );
@@ -164,6 +196,8 @@ class D2AgeField extends Component<Props> {
                     onBlur={this.handleDateBlur}
                     value={currentValues.date}
                     onChange={date => onChange({ ...currentValues, date })}
+                    calendarWidth={dateCalendarWidth}
+                    popupAnchorPosition={datePopupAnchorPosition}
                     calendarTheme={dateCalendarTheme}
                     calendarLocale={dateCalendarLocale}
                     calendarOnConvertValueIn={dateCalendarOnConvertValueIn}

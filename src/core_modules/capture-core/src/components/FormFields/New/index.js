@@ -11,6 +11,7 @@ export { default as DateField } from './Fields/DateAndTimeFields/DateField/DateF
 export { default as DateTimeField } from './Fields/DateAndTimeFields/DateTimeField/DateTimeField.component';
 export { default as CoordinateField } from './Fields/CoordinateField/CoordinateField.component';
 export { default as PolygonField } from './Fields/PolygonField/PolygonField.component';
+export { default as OrgUnitField } from './Fields/OrgUnitField/OrgUnitField.component';
 
 // Generic HOCs
 export { default as withCalculateMessages } from './HOC/messages/withCalculateMessages';

@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import i18n from '@dhis2/d2-i18n';
 import DataEntry from '../../../../components/DataEntry/DataEntry.container';
 import withSaveHandler from '../../../../components/DataEntry/withSaveHandler';
 import withCancelButton from '../../../../components/DataEntry/withCancelButton';
@@ -37,9 +38,6 @@ import labelTypeClasses from './dataEntryFieldLabels.mod.css';
 
 const getStyles = (theme: Theme) => ({
     dataEntryContainer: {
-        backgroundColor: 'white',
-        border: '1px solid rgba(0,0,0,0.1)',
-        borderRadius: theme.typography.pxToRem(2),
         padding: theme.typography.pxToRem(20),
     },
     fieldLabelMediaBased: {
@@ -48,6 +46,12 @@ const getStyles = (theme: Theme) => ({
         },
     },
 });
+
+const dataEntrySectionNames = {
+    BASICINFO: 'BASICINFO',
+    STATUS: 'STATUS',
+    COMMENTS: 'COMMENTS',
+};
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -121,6 +125,10 @@ const buildReportDateSettingsFn = () => {
         }),
         propName: 'eventDate',
         validatorContainers: getEventDateValidatorContainers(),
+        meta: {
+            placement: placements.TOP,
+            section: dataEntrySectionNames.BASICINFO,
+        },
     });
 
     return reportDateSettings;
@@ -170,12 +178,14 @@ const buildGeometrySettingsFn = () => (props: Object) => {
                 width: props && props.formHorizontal ? 150 : 350,
                 label: 'Location',
                 required: false,
+                dialogLabel: 'Location',
             }),
             propName: 'geometry',
             validatorContainers: [
             ],
             meta: {
                 placement: placements.TOP,
+                section: dataEntrySectionNames.BASICINFO,
             },
         };
     }
@@ -185,13 +195,16 @@ const buildGeometrySettingsFn = () => (props: Object) => {
             componentProps: createComponentProps(props, {
                 width: props && props.formHorizontal ? 150 : '100%',
                 label: 'Coordinate',
+                dialogLabel: 'Coordinate',
                 required: false,
+
             }),
             propName: 'geometry',
             validatorContainers: [
             ],
             meta: {
                 placement: placements.TOP,
+                section: dataEntrySectionNames.BASICINFO,
             },
         };
     }
@@ -228,6 +241,7 @@ const buildCompleteFieldSettingsFn = () => {
         ],
         meta: {
             placement: placements.BOTTOM,
+            section: dataEntrySectionNames.STATUS,
         },
         passOnFieldData: true,
     });
@@ -240,14 +254,8 @@ const buildNotesSettingsFn = () => {
         withCalculateMessages(overrideMessagePropNames)(
             withDefaultFieldContainer()(
                 withDefaultShouldUpdateInterface()(
-                    withLabel({
-                        onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                        onGetCustomFieldLabeClass: (props: Object) =>
-                            `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
-                    })(
-                        withDisplayMessages()(
-                            withInternalChangeHandler()(DataEntryNotes),
-                        ),
+                    withDisplayMessages()(
+                        withInternalChangeHandler()(DataEntryNotes),
                     ),
                 ),
             ),
@@ -263,6 +271,7 @@ const buildNotesSettingsFn = () => {
         validatorContainers: getNoteValidatorContainers(),
         meta: {
             placement: placements.BOTTOM,
+            section: dataEntrySectionNames.COMMENTS,
         },
     });
 
@@ -302,40 +311,56 @@ type Props = {
     theme: Theme,
 };
 
+type DataEntrySection = {
+    placement: $Values<typeof placements>,
+    name: string,
+};
+
+const dataEntrySectionDefinitions = {
+    [dataEntrySectionNames.BASICINFO]: {
+        placement: placements.TOP,
+        name: i18n.t('Basic info'),
+    },
+    [dataEntrySectionNames.STATUS]: {
+        placement: placements.BOTTOM,
+        name: i18n.t('Status'),
+    },
+    [dataEntrySectionNames.COMMENTS]: {
+        placement: placements.BOTTOM,
+        name: i18n.t('Comments'),
+    },
+};
+
 class EditEventDataEntry extends Component<Props> {
     fieldOptions: { theme: Theme };
-
+    dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
     constructor(props: Props) {
         super(props);
         this.fieldOptions = {
             theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
+        this.dataEntrySections = dataEntrySectionDefinitions;
     }
     componentWillUnmount() {
         inMemoryFileStore.clear();
     }
     render() {
         const {
-            formFoundation,
             onUpdateField,
-            onAddNote,
-            onSave,
-            onCancel,
             onStartAsyncUpdateField,
             classes,
+            ...passOnProps
         } = this.props;
         return (
             <div className={classes.dataEntryContainer}>
                 <DataEntryWrapper
                     id={'singleEvent'}
-                    formFoundation={formFoundation}
                     onUpdateFormField={onUpdateField}
                     onUpdateFormFieldAsync={onStartAsyncUpdateField}
-                    onCancel={onCancel}
-                    onSave={onSave}
-                    onAddNote={onAddNote}
                     fieldOptions={this.fieldOptions}
+                    dataEntrySections={this.dataEntrySections}
+                    {...passOnProps}
                 />
             </div>
         );

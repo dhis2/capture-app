@@ -7,11 +7,9 @@ import Icon from '@material-ui/core/Icon';
 
 const styles = theme => ({
     container: {
-        backgroundColor: theme.palette.primary[500],
         display: 'flex',
     },
     containerSecondary: {
-        backgroundColor: theme.palette.secondary[500],
         display: 'flex',
     },
     title: {

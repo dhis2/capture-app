@@ -34,6 +34,7 @@ type ValueMetaInput = {
 type FieldContainer = {
     field: React.Element<any>,
     placement: $Values<typeof placements>,
+    section?: ?string,
 };
 
 type Props = {
@@ -125,6 +126,7 @@ const getDataEntryField = (InnerComponent: React.ComponentType<any>) =>
             const fieldContainer = {
                 field: this.getFieldElement(),
                 placement: (settings.meta && settings.meta.placement) || placements.TOP,
+                section: settings.meta && settings.meta.section,
             };
 
             return fields ? [...fields, fieldContainer] : [fieldContainer];

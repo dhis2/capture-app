@@ -16,16 +16,41 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    align-items: center;
+}
+
+.mapIcon {
+    height: 42px;
+    width: 42px;
+    padding: 9px;
+    cursor: pointer;
 }
   
-.coordinateIcon {
+.mapIconContainer {
     position: relative;
+    padding: 2px;
+}
+
+.mapIconContainerWithMargin {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    width: 42px;
+    margin-top: 18px;
+    border: 1px solid #C4C4C4;
+    border-radius: 3px 0px 0px 3px;
+    box-shadow: 0px 0px 2px 0px #C4C4C4 inset;
+    background: linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%);
+}
+
+.clearIcon {
     cursor: pointer;
     padding: 2px;
 }
 
-.coordinateIconWithMargin {
-    position: relative;
+.clearIconWithMargin {
     cursor: pointer;
     padding: 2px;
     margin-top: 28px;
@@ -45,7 +70,21 @@
     border: 1px solid black;
     border-radius: 3px;
 }
+.dialogLeafletContainer {
+    height: 100%;
+    width: 100%;
+}
+
 .inputContainer {
     flex-grow: 1;
+}
+
+.latitudeTextInput {
+    border-radius: 0px;
+}
+
+
+.longitudeTextInput {
+    border-radius: 0px 3px 3px 0px;
 }
   

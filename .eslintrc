@@ -26,6 +26,14 @@
         "import/prefer-default-export": 0,
         "react/prefer-stateless-function": 0,
         "no-unused-expressions": 0,
+        "no-unused-vars": [
+            "warn",
+            {
+                "vars": "all",
+                "args": "after-used",
+                "ignoreRestSiblings": true
+            }
+        ],
         "react/jsx-no-bind": 0,
         "react/require-default-props": 0,
         "import/no-extraneous-dependencies": [

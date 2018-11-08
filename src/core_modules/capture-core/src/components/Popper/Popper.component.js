@@ -13,31 +13,21 @@ import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 type Props = {
-    classes: {
-        popperContainerHidden: string,
-        popperContainer: string,
-    },
-    getPopperAction: () => React.Node,
+    getPopperAction: (togglePopper: () => void) => React.Node,
     getPopperContent: () => React.Node,
+    placement?: ?string,
+    classes?: ?Object,
 }
 
 type State = {
     popperOpen: ?boolean,
 }
 
-const styles = theme => ({
-    deleteIcon: {
-        fill: theme.palette.error.main,
-    },
-    menuList: {
-        padding: 0,
-    },
-    popperContainer: {
-        zIndex: 100,
-    },
-});
+class MenuPopper extends React.Component<Props, State> {
+    static defaultProps = {
+        placement: 'bottom-end',
+    }
 
-class Popper extends React.Component<Props, State> {
     managerRef: (instance: any) => void;
     menuReferenceInstance: ?HTMLDivElement;
 
@@ -72,7 +62,8 @@ class Popper extends React.Component<Props, State> {
     }
 
     render() {
-        const { classes, getPopperAction: PopperAction, getPopperContent: PopperContent, ...passOnProps } = this.props;
+        const { classes, getPopperAction, getPopperContent } = this.props;
+
         return (
             <Manager>
                 <Reference>
@@ -83,10 +74,7 @@ class Popper extends React.Component<Props, State> {
                                 <div
                                     ref={this.handleReferenceInstanceRetrieved}
                                 >
-                                    <PopperAction
-                                        togglePopper={this.toggleMenu}
-                                        {...passOnProps}
-                                    />
+                                    {getPopperAction(this.toggleMenu)}
                                 </div>
                             );
                         }
@@ -94,14 +82,14 @@ class Popper extends React.Component<Props, State> {
                 </Reference>
                 {this.state.popperOpen &&
                 <Popper
-                    placement="bottom-end"
+                    placement={this.props.placement}
                 >
                     {
                         ({ ref, style, placement }) => (
                             <div
                                 ref={ref}
                                 style={style}
-                                className={classes.popperContainer}
+                                className={classes ? classes.popperContainer : ''}
                                 data-placement={placement}
                             >
                                 <ClickAwayListener onClickAway={this.handleClickAway}>
@@ -111,9 +99,9 @@ class Popper extends React.Component<Props, State> {
                                         style={{ transformOrigin: '0 0 0' }}
                                         timeout={{ exit: 0, enter: 200 }}
                                     >
-                                        <PopperContent
-                                            {...passOnProps}
-                                        />
+                                        <React.Fragment>
+                                            {getPopperContent()}
+                                        </React.Fragment>
                                     </Grow>
                                 </ClickAwayListener>
                             </div>
@@ -125,4 +113,4 @@ class Popper extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(styles)(Popper);
+export default MenuPopper;

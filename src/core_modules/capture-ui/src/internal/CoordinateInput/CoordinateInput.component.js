@@ -12,6 +12,7 @@ type Props = {
     onBlur: (value: string) => void,
     onChange?: ?((value: string) => void),
     classes?: ?any,
+    className: string,
 }
 
 
@@ -23,10 +24,10 @@ class CoordinateInput extends Component<Props> {
         this.props.onChange && this.props.onChange(event.currentTarget.value);
     }
     render() {
-        const { onBlur, onChange, value, classes, ...passOnProps } = this.props;
+        const { onBlur, onChange, value, classes, className, ...passOnProps } = this.props;
         return (
             <TextInput
-                classes={{}}
+                classes={{ input: className }}
                 onBlur={this.handleBlur}
                 onChange={this.handleChange}
                 value={value || ''}

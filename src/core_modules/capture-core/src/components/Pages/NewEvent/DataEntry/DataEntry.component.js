@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import InfoIcon from '@material-ui/icons/InfoOutline';
 import i18n from '@dhis2/d2-i18n';
 import DataEntry from '../../../../components/DataEntry/DataEntry.container';
@@ -28,6 +27,7 @@ import {
     withFilterProps,
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
+    orientations,
 } from '../../../FormFields/New';
 
 import withFeedbackOutput from '../../../../components/DataEntry/dataEntryOutput/withFeedbackOutput';
@@ -44,7 +44,8 @@ const getStyles = theme => ({
         paddingTop: theme.typography.pxToRem(10),
         display: 'flex',
         alignItems: 'center',
-        color: theme.palette.text.hint,
+        color: theme.palette.grey.dark,
+        fontSize: theme.typography.pxToRem(13),
     },
     savingContextText: {
         paddingLeft: theme.typography.pxToRem(10),
@@ -56,7 +57,7 @@ const getStyles = theme => ({
         display: 'flex',
         flexFlow: 'row-reverse',
     },
-    horizontalPaper: {
+    horizontal: {
         padding: theme.typography.pxToRem(10),
         paddingTop: theme.typography.pxToRem(20),
         paddingBottom: theme.typography.pxToRem(15),
@@ -67,12 +68,15 @@ const getStyles = theme => ({
         },
     },
     dataEntryVerticalContainer: {
-        backgroundColor: 'white',
-        border: '1px solid rgba(0,0,0,0.1)',
-        borderRadius: theme.typography.pxToRem(2),
         padding: theme.typography.pxToRem(20),
     },
 });
+
+const dataEntrySectionNames = {
+    BASICINFO: 'BASICINFO',
+    STATUS: 'STATUS',
+    COMMENTS: 'COMMENTS',
+};
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -116,6 +120,8 @@ const createComponentProps = (props: Object, componentProps: Object) => ({
     ...componentProps,
 });
 
+const getCalendarAnchorPosition = (formHorizontal: ?boolean) => (formHorizontal ? 'center' : 'left');
+
 const buildReportDateSettingsFn = () => {
     const reportDateComponent =
         withCalculateMessages(overrideMessagePropNames)(
@@ -140,12 +146,17 @@ const buildReportDateSettingsFn = () => {
         component: reportDateComponent,
         componentProps: createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : '100%',
-            calendarWidth: 350,
             label: props.formFoundation.getLabel('eventDate'),
             required: true,
+            calendarWidth: props.formHorizontal ? 250 : 350,
+            popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
         }),
         propName: 'eventDate',
         validatorContainers: getEventDateValidatorContainers(),
+        meta: {
+            placement: placements.TOP,
+            section: dataEntrySectionNames.BASICINFO,
+        },
     });
 
     return reportDateSettings;
@@ -189,6 +200,8 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
     ),
 );
 
+const getOrientation = (formHorizontal: ?boolean) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
+
 
 const buildGeometrySettingsFn = () => (props: Object) => {
     const featureType = props.formFoundation.featureType;
@@ -198,13 +211,16 @@ const buildGeometrySettingsFn = () => (props: Object) => {
             componentProps: createComponentProps(props, {
                 width: props && props.formHorizontal ? 150 : 350,
                 label: 'Location',
+                dialogLabel: 'Location',
                 required: false,
+                orientation: getOrientation(props.formHorizontal),
             }),
             propName: 'geometry',
             validatorContainers: [
             ],
             meta: {
                 placement: placements.TOP,
+                section: dataEntrySectionNames.BASICINFO,
             },
         };
     }
@@ -214,13 +230,16 @@ const buildGeometrySettingsFn = () => (props: Object) => {
             componentProps: createComponentProps(props, {
                 width: props && props.formHorizontal ? 150 : 350,
                 label: 'Coordinate',
+                dialogLabel: 'Coordinate',
                 required: false,
+                orientation: getOrientation(props.formHorizontal),
             }),
             propName: 'geometry',
             validatorContainers: [
             ],
             meta: {
                 placement: placements.TOP,
+                section: dataEntrySectionNames.BASICINFO,
             },
         };
     }
@@ -259,6 +278,7 @@ const buildCompleteFieldSettingsFn = () => {
         ],
         meta: {
             placement: placements.BOTTOM,
+            section: dataEntrySectionNames.STATUS,
         },
         passOnFieldData: true,
     });
@@ -271,13 +291,9 @@ const buildNotesSettingsFn = () => {
         withCalculateMessages(overrideMessagePropNames)(
             withDefaultFieldContainer()(
                 withDefaultShouldUpdateInterface()(
-                    withLabel({
-                        onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                        onGetCustomFieldLabeClass: (props: Object) =>
-                            `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
-                    })(
-                        withDisplayMessages()(
-                            withInternalChangeHandler()(DataEntryNotes),
+                    withDisplayMessages()(
+                        withInternalChangeHandler()(
+                            withFilterProps(defaultFilterProps)(DataEntryNotes),
                         ),
                     ),
                 ),
@@ -294,6 +310,7 @@ const buildNotesSettingsFn = () => {
         validatorContainers: getNoteValidatorContainers(),
         meta: {
             placement: placements.BOTTOM,
+            section: dataEntrySectionNames.COMMENTS,
         },
     });
 
@@ -338,13 +355,33 @@ type Props = {
         horizontalPaper: string,
         dataEntryVerticalContainer: string,
         fieldLabelMediaBased: string,
+        horizontal: string,
     },
     theme: Theme,
     formHorizontal: ?boolean,
 };
+type DataEntrySection = {
+    placement: $Values<typeof placements>,
+    name: string,
+};
 
+const dataEntrySectionDefinitions = {
+    [dataEntrySectionNames.BASICINFO]: {
+        placement: placements.TOP,
+        name: i18n.t('Basic info'),
+    },
+    [dataEntrySectionNames.STATUS]: {
+        placement: placements.BOTTOM,
+        name: i18n.t('Status'),
+    },
+    [dataEntrySectionNames.COMMENTS]: {
+        placement: placements.BOTTOM,
+        name: i18n.t('Comments'),
+    },
+};
 class NewEventDataEntry extends Component<Props> {
     fieldOptions: { theme: Theme };
+    dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
 
     constructor(props: Props) {
         super(props);
@@ -352,6 +389,7 @@ class NewEventDataEntry extends Component<Props> {
             theme: props.theme,
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
+        this.dataEntrySections = dataEntrySectionDefinitions;
     }
 
     componentWillMount() {
@@ -398,11 +436,11 @@ class NewEventDataEntry extends Component<Props> {
     renderHorizontal = () => {
         const classes = this.props.classes;
         return (
-            <Paper
-                className={classes.horizontalPaper}
+            <div
+                className={classes.horizontal}
             >
                 {this.renderContent()}
-            </Paper>
+            </div>
         );
     }
 
@@ -410,29 +448,28 @@ class NewEventDataEntry extends Component<Props> {
 
     renderContent = () => {
         const {
-            formFoundation,
             onUpdateField,
             onStartAsyncUpdateField,
-            onCancel,
             programName, // eslint-disable-line
             orgUnitName, // eslint-disable-line
             classes,
-            formHorizontal,
-            onAddNote,
+            onSave,
+            onSetSaveTypes,
+            onSaveAndAddAnother,
+            theme,
+            ...passOnProps
         } = this.props;
         return (
             <div>
                 <div>
                     <WrappedDataEntry
                         id={'singleEvent'}
-                        formFoundation={formFoundation}
                         onUpdateFormField={onUpdateField}
                         onUpdateFormFieldAsync={onStartAsyncUpdateField}
-                        onCancel={onCancel}
                         onSave={this.handleSave}
-                        onAddNote={onAddNote}
-                        formHorizontal={formHorizontal}
                         fieldOptions={this.fieldOptions}
+                        dataEntrySections={this.dataEntrySections}
+                        {...passOnProps}
                     />
                 </div>
                 <div

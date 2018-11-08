@@ -51,7 +51,6 @@ class AppContents extends Component<Props> {
                         <Route path="/" component={MainPageEntry} />
                     </Switch>
                 </div>
-                <div />
             </div>
         );
     }

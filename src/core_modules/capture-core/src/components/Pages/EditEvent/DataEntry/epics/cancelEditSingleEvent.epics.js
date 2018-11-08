@@ -5,6 +5,7 @@ import {
     noWorkingListUpdateNeededAfterUpdateCancelled,
     updateWorkingListAfterUpdateCancelled,
 } from '../editEventDataEntry.actions';
+
 import isSelectionsEqual from '../../../../App/isSelectionsEqual';
 
 export const cancelEditEventEpic = (action$: InputObservable, store: ReduxStore) =>

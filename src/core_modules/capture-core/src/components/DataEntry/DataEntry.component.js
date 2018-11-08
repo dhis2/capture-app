@@ -8,6 +8,8 @@ import { placements } from './dataEntryField/dataEntryField.const';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import getDataEntryKey from './common/getDataEntryKey';
 import StickyOnScroll from '../Sticky/StickyOnScroll.component';
+import Section from '../Section/Section.component';
+import SectionHeaderSimple from '../Section/SectionHeaderSimple.component';
 
 const styles = theme => ({
     footerBar: {
@@ -24,6 +26,7 @@ const styles = theme => ({
     verticalFormContainer: {
         flexGrow: 10,
         maxWidth: '100%',
+        paddingTop: theme.typography.pxToRem(10),
     },
     verticalDataEntryContainer: {
         display: 'flex',
@@ -41,15 +44,22 @@ const styles = theme => ({
         flexGrow: 1,
         width: theme.typography.pxToRem(300),
         margin: theme.typography.pxToRem(10),
+        marginTop: 0,
     },
     verticalOutputsContainer: {
         marginBottom: theme.typography.pxToRem(10),
+    },
+    dataEntryFieldSection: {
+        marginBottom: theme.typography.pxToRem(10),
+        padding: theme.typography.pxToRem(8),
+        maxWidth: theme.typography.pxToRem(880),
     },
 });
 
 type FieldContainer = {
     field: React.Element<any>,
     placement: $Values<typeof placements>,
+    section?: ?string,
 };
 
 type DirectionClasses = {
@@ -89,8 +99,17 @@ type Props = {
         dataEntryId: string,
         itemId: string,
     ) => void,
-
+    dataEntrySections?: { [string]: {name: string, placement: $Values<typeof placements>}},
+    onAddNote?: ?Function,
 };
+
+const fieldHorizontalFilter = (placement: $Values<typeof placements>) =>
+    (fieldContainer: FieldContainer) =>
+        fieldContainer.placement === placement;
+
+const fieldVerticalFilter = (placement: $Values<typeof placements>) =>
+    (fieldContainer: FieldContainer) =>
+        fieldContainer.placement === placement && !fieldContainer.section;
 
 class DataEntry extends React.Component<Props> {
     static errorMessages = {
@@ -130,9 +149,59 @@ class DataEntry extends React.Component<Props> {
 
         return fields ?
             fields
-                .filter(fieldContainer => fieldContainer.placement === placement)
+                .filter(fieldContainer => fieldContainer.placement === placement && !fieldContainer.section)
                 .map(fieldContainer => fieldContainer.field)
             : null;
+    }
+
+    getFieldSectionsWithPlacement(placement: $Values<typeof placements>) {
+        const fields = this.props.fields || [];
+        const sections = this.props.dataEntrySections || {};
+
+        return this.props.dataEntrySections ?
+            Object.keys(this.props.dataEntrySections).reduce((accSections, sectionKey) => {
+                const section = sections[sectionKey];
+                if (section.placement === placement) {
+                    const sectionFields = fields ?
+                        fields
+                            .filter(fieldContainer => fieldContainer.section === sectionKey)
+                            .map(fieldContainer => fieldContainer.field)
+                        : null;
+
+                    if (sectionFields && sectionFields.length > 0) {
+                        accSections.push(
+                            <Section
+                                key={sectionKey}
+                                className={this.props.classes.dataEntryFieldSection}
+                                header={
+                                    <SectionHeaderSimple
+                                        title={section.name}
+                                    />
+                                }
+                            >
+                                {sectionFields}
+                            </Section>,
+                        );
+                    }
+                }
+                return accSections;
+            }, [])
+            : [];
+    }
+
+    renderDataEntryFieldsByPlacement = (placement: $Values<typeof placements>) => {
+        const fields = this.props.fields || [];
+        const fieldFilter = this.props.formHorizontal ? fieldHorizontalFilter(placement) : fieldVerticalFilter(placement);
+        const fieldsByPlacement = fields ?
+            fields
+                .filter(fieldFilter)
+                .map(fieldContainer => fieldContainer.field)
+            : [];
+
+        if (!this.props.formHorizontal) {
+            return [...fieldsByPlacement, ...this.getFieldSectionsWithPlacement(placement)];
+        }
+        return fieldsByPlacement;
     }
 
     render() {
@@ -148,10 +217,12 @@ class DataEntry extends React.Component<Props> {
             completionAttempted,
             saveAttempted,
             fields,
+            dataEntrySections,
             onUpdateFormField,
             onUpdateFieldInner,
             onUpdateFormFieldAsync,
             dataEntryOutputs,
+            onAddNote,
             ...passOnProps } = this.props;
 
         if (!itemId) {
@@ -170,14 +241,11 @@ class DataEntry extends React.Component<Props> {
             );
         }
         const directionClasses = this.getClasses();
-
-        const topFields = this.getFieldWithPlacement(placements.TOP);
-        const bottomFields = this.getFieldWithPlacement(placements.BOTTOM);
         return (
             <div className={directionClasses.container}>
                 <div className={directionClasses.dataEntryContainer}>
                     <div className={directionClasses.formContainer}>
-                        {topFields}
+                        {this.renderDataEntryFieldsByPlacement(placements.TOP)}
                         <D2Form
                             innerRef={(formInstance) => { this.formInstance = formInstance; }}
                             formFoundation={formFoundation}
@@ -187,7 +255,7 @@ class DataEntry extends React.Component<Props> {
                             onUpdateFieldAsync={this.handleUpdateFieldAsync}
                             {...passOnProps}
                         />
-                        {bottomFields}
+                        {this.renderDataEntryFieldsByPlacement(placements.BOTTOM)}
                         {notes &&
                             <div className={classes.notes}>
                                 {notes}

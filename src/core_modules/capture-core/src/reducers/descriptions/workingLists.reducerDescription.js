@@ -296,6 +296,13 @@ const getLoadingState = oldState => ({
     ...oldState,
     isLoading: true,
 });
+const getReadyState = (oldState, more) => ({
+    ...oldState,
+    ...more,
+    isLoading: false,
+    isUpdating: false,
+    isUpdatingWithDialog: false,
+});
 
 export const workingListsUIDesc = createReducerDescription({
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS]: (state) => {
@@ -338,39 +345,43 @@ export const workingListsUIDesc = createReducerDescription({
         newState.main = getLoadingState(newState.main);
         return newState;
     },
+    [eventsListActionTypes.WORKING_LIST_UPDATING]: (state) => {
+        const newState = { ...state };
+        newState.main = { ...newState.main, isUpdating: true };
+        return newState;
+    },
+    [eventsListActionTypes.WORKING_LIST_UPDATING_WITH_DIALOG]: (state) => {
+        const newState = { ...state };
+        newState.main = { ...newState.main, isUpdatingWithDialog: true };
+        return newState;
+    },
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state) => {
         const newState = { ...state };
-        newState.main = {
-            ...newState.main,
-            isLoading: false,
+        newState.main = getReadyState(newState.main, {
             hasBeenLoaded: true,
             dataLoadingError: null,
-        };
+        });
         return newState;
     },
     [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state) => {
         const newState = { ...state };
-        newState.main = {
-            ...newState.main,
-            isLoading: false,
+        newState.main = getReadyState(newState.main, {
             dataLoadingError: null,
-        };
+        });
         return newState;
     },
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: (state, action) => {
         const newState = { ...state };
-        newState.main = {
+        newState.main = getReadyState({}, {
             dataLoadingError: action.payload,
-            isLoading: false,
-        };
+        });
         return newState;
     },
     [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVAL_FAILED]: (state) => {
         const newState = { ...state };
-        newState.main = {
+        newState.main = getReadyState({}, {
             dataLoadingError: null,  // reverting list to previous state and showing feedbackBar message
-            isLoading: false,
-        };
+        });
         return newState;
     },
     [newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
@@ -385,18 +396,12 @@ export const workingListsUIDesc = createReducerDescription({
     },
     [newEventDataEntryActionTypes.CANCEL_SAVE_NO_WORKING_LIST_UPDATE_NEEDED]: (state) => {
         const newState = { ...state };
-        newState.main = {
-            ...newState.main,
-            isLoading: false,
-        };
+        newState.main = getReadyState(newState.main, {});
         return newState;
     },
     [newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
-        newState.main = {
-            ...newState.main,
-            isLoading: false,
-        };
+        newState.main = getReadyState(newState.main, {});
         return newState;
     },
     [editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
@@ -406,10 +411,7 @@ export const workingListsUIDesc = createReducerDescription({
     },
     [editEventDataEntryActionTypes.EVENT_UPDATE_FAILED_AFTER_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
-        newState.main = {
-            ...newState.main,
-            isLoading: false,
-        };
+        newState.main = getReadyState(newState.main, {});
         return newState;
     },
     [editEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
@@ -419,10 +421,7 @@ export const workingListsUIDesc = createReducerDescription({
     },
     [editEventDataEntryActionTypes.NO_WORKING_LIST_UPDATE_NEEDED_AFTER_CANCEL_UPDATE]: (state) => {
         const newState = { ...state };
-        newState.main = {
-            ...newState.main,
-            isLoading: false,
-        };
+        newState.main = getReadyState(newState.main, {});
         return newState;
     },
     [connectivityActionTypes.GET_EVENT_LIST_ON_RECONNECT]: (state) => {
@@ -433,10 +432,7 @@ export const workingListsUIDesc = createReducerDescription({
     [cleanUpActionTypes.CLEAN_UP_EVENT_LIST_IN_LOADING]: (state) => {
         const newState = {
             ...state,
-            main: {
-                ...state.main,
-                isLoading: false,
-            },
+            main: getReadyState(state.main, {}),
         };
         return newState;
     },

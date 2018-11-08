@@ -7,6 +7,8 @@ import {
 import {
     makeFormFoundationSelector,
 } from './selectionsComplete.selectors';
+import getDataEntryHasChanges from '../getNewEventDataEntryHasChanges';
+
 
 const makeMapStateToProps = () => {
     const formFoundationSelector = makeFormFoundationSelector();
@@ -16,6 +18,7 @@ const makeMapStateToProps = () => {
 
         return {
             formFoundation,
+            dataEntryHasChanges: getDataEntryHasChanges(state),
             formHorizontal: (formFoundation && formFoundation.customForm ? false : !!state.newEventPage.formHorizontal),
         };
     };

@@ -2,14 +2,19 @@
 import * as React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { CoordinateField as UICoordinateField } from 'capture-ui';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { orientations } from '../../../New';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
-        border: `2px solid ${theme.palette.accent.dark}`,
-        borderRadius: '5px',
+        position: 'relative',
+        boxShadow: `0px 0px 0px 2px ${theme.palette.primary.light}`,
+        zIndex: 10,
+        margin: '2px 0px 2px 0px',
     },
     inputWrapperUnfocused: {
-        padding: 2,
+        margin: '2px 0px 2px 0px',
     },
     innerInputError: {
         color: theme.palette.error.main,
@@ -31,6 +36,15 @@ const getStyles = (theme: Theme) => ({
         padding: theme.typography.pxToRem(3),
         fontSize: theme.typography.pxToRem(12),
     },
+    mapIconContainer: {
+        fill: theme.palette.primary.dark,
+    },
+    dialogPaper: {
+        padding: 5,
+        maxWidth: 'none',
+        width: '75%',
+        height: '75%',
+    },
 });
 
 type Props = {
@@ -44,15 +58,41 @@ type Props = {
         innerInputInfo: string,
         innerInputValidating: string,
     },
+    orientation: $Values<typeof orientations>,
+    dialogLabel: string,
 }
 
-const CoordinateField = (props: Props) => {
-    const { ...passOnProps } = props;
-    return (
-        <UICoordinateField
-            {...passOnProps}
-        />
-    );
-};
+class CoordinateField extends React.Component<Props> {
+    dialogClasses: Object;
+    passOnClasses: Object;
+
+    constructor(props) {
+        super(props);
+
+        const { dialogPaper, ...passOnClasses } = props.classes;
+        this.passOnClasses = passOnClasses;
+        this.dialogClasses = {
+            paper: props.classes.dialogPaper,
+        };
+    }
+
+    render() {
+        const { classes, dialogLabel, ...passOnProps } = this.props;
+
+        return (
+            <UICoordinateField
+                mapDialog={this.props.orientation === orientations.VERTICAL ?
+                    <Dialog
+                        classes={this.dialogClasses}
+                    >
+                        <DialogTitle key="title">{dialogLabel}</DialogTitle>
+                    </Dialog> : null
+                }
+                {...passOnProps}
+                classes={this.passOnClasses}
+            />
+        );
+    }
+}
 
 export default withStyles(getStyles)(CoordinateField);
