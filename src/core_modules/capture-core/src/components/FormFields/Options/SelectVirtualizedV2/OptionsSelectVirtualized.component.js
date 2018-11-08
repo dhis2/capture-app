@@ -1,9 +1,9 @@
 // @flow
 /* eslint-disable class-methods-use-this */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import { debounce } from 'lodash';
-
+import { withStyles } from '@material-ui/core/styles';
 import VirtualizedSelect from 'react-virtualized-select';
 
 import 'react-select/dist/react-select.css';
@@ -12,16 +12,27 @@ import 'react-virtualized-select/styles.css';
 import './optionsSelectVirtualized.css';
 
 import VirtualizedOption from './OptionsSelectVirtualizedOption.component';
-import OptionSet from '../../../../metaData/OptionSet/OptionSet';
-import Option from '../../../../metaData/OptionSet/Option';
 
+export type VirtualizedOptionConfig = {label: string, value: any, iconLeft?: ?React.Node, iconRight?: ?React.Node };
 
-export type virtualizedOptionConfig = {label: string, value: any};
+const getStyles = () => ({
+    selectedOptionContainer: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    selectedIconLeftContainer: {
+        paddingRight: 5,
+    },
+    selectedIconRightContainer: {
+        paddingLeft: 5,
+    },
+});
+
 
 type Props = {
     onSelect: (value: any) => void,
     onFocus?: ?any,
-    optionSet: OptionSet,
+    options: Array<VirtualizedOptionConfig>,
     label?: string,
     value: any,
     nullable?: boolean,
@@ -37,6 +48,11 @@ type Props = {
         noResults: string,
     },
     multi?: ?boolean,
+    classes: {
+        selectedOptionContainer: string,
+        selectedIconLeftContainer: string,
+        selectedIconRightContainer: string,
+    },
 };
 
 type State = {
@@ -44,14 +60,15 @@ type State = {
 }
 
 type OptionContainer = {
-    focusedOption: virtualizedOptionConfig,
-    option: virtualizedOptionConfig,
+    focusedOption: VirtualizedOptionConfig,
+    focusOption: (option: VirtualizedOptionConfig) => void,
+    option: VirtualizedOptionConfig,
     style: Object,
-    selectValue: (value: virtualizedOptionConfig) => void,
-    valueArray: ?Array<virtualizedOptionConfig>,
+    selectValue: (value: VirtualizedOptionConfig) => void,
+    valueArray: ?Array<VirtualizedOptionConfig>,
 }
 
-class OptionsSelectVirtualized extends Component<Props, State> {
+class OptionsSelectVirtualized extends React.Component<Props, State> {
     static defaultSelectStyle = {
     };
     static defaultMenuContainerStyle = {
@@ -63,18 +80,16 @@ class OptionsSelectVirtualized extends Component<Props, State> {
             noResults: '',
         },
     };
-    static getFilteredOptions(options: ?Array<{label: string, value: any}>, filterValue: any) {
+    static getFilteredOptions(options: Array<VirtualizedOptionConfig>, filterValue: any): Array<VirtualizedOptionConfig> {
         return (options && options.filter(o => o.label.toLowerCase().indexOf(filterValue) > -1)) || [];
     }
 
-    handleChange: (e: Object, index: number, value: any) => void;
+    handleChange: (selectedItem: VirtualizedOptionConfig) => void;
     materialUIContainerInstance: any;
-    options: ?Array<{label: string, value: any}>;
     filterOptions: any;
     renderOption: () => React$Element<any>;
-    yourSelect: any;
     prevFilterValue: ?string;
-    prevFilteredOptions: ?Array<{label: string, value: any}>;
+    prevFilteredOptions: Array<VirtualizedOptionConfig>;
 
 
     constructor(props: Props) {
@@ -83,20 +98,13 @@ class OptionsSelectVirtualized extends Component<Props, State> {
         this.handleChange = this.handleChange.bind(this);
         this.renderOption = this.renderOption.bind(this);
         this.handleInputChange = debounce(this.handleInputChange, 500);
-
-        this.options = this.buildOptions(this.props.optionSet);
+        this.prevFilteredOptions = [];
         this.state = {};
-    }
-
-    componentWillReceiveProps(nextProps: Props) {
-        if (nextProps.optionSet !== this.props.optionSet) {
-            this.options = this.buildOptions(nextProps.optionSet);
-        }
     }
 
     filterOptions = () => {
         if (!this.state.filterValue) {
-            return this.options;
+            return this.props.options;
         }
         if (this.prevFilterValue === this.state.filterValue) {
             return this.prevFilteredOptions;
@@ -108,7 +116,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
             this.prevFilteredOptions =
                 OptionsSelectVirtualized.getFilteredOptions(this.prevFilteredOptions, this.state.filterValue);
         }
-        this.prevFilteredOptions = OptionsSelectVirtualized.getFilteredOptions(this.options, this.state.filterValue);
+        this.prevFilteredOptions = OptionsSelectVirtualized.getFilteredOptions(this.props.options, this.state.filterValue);
         this.prevFilterValue = this.state.filterValue;
 
         return this.prevFilteredOptions;
@@ -118,17 +126,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
         this.setState({ filterValue: value });
     }
 
-    buildOptions(optionSet: OptionSet) {
-        const options = optionSet.options.map(
-            (o: Option) => ({
-                label: o.text,
-                value: o.value,
-            }),
-        );
-        return options;
-    }
-
-    handleChange(selectedItem: ?virtualizedOptionConfig) {
+    handleChange(selectedItem: VirtualizedOptionConfig) {
         const selectedValue = selectedItem && selectedItem.value;
         if (selectedValue !== this.props.value) {
             this.props.onSelect(selectedValue === '' ? null : selectedValue);
@@ -136,7 +134,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
     }
 
     getValue() {
-        const options = this.options;
+        const options = this.props.options;
         const selectedValue = this.props.value;
         if (options && selectedValue) {
             return options.find(option => option.value === selectedValue);
@@ -151,6 +149,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
                 key={optionContainer.option.value}
                 option={optionContainer.option}
                 inFocus={inFocus}
+                onFocusOption={optionContainer.focusOption}
                 style={optionContainer.style}
                 onSelect={optionContainer.selectValue}
                 currentlySelectedValues={optionContainer.valueArray}
@@ -159,9 +158,41 @@ class OptionsSelectVirtualized extends Component<Props, State> {
         );
     }
 
+    renderValue = (option: VirtualizedOptionConfig) => {
+        const { classes } = this.props;
+        const { iconLeft, iconRight, label } = option;
+        return (
+            <div
+                className={classes.selectedOptionContainer}
+            >
+                {
+                    iconLeft ? (
+                        <div
+                            className={classes.selectedIconLeftContainer}
+                        >
+                            {iconLeft}
+                        </div>
+                    ) : null
+                }
+                <div>
+                    {label}
+                </div>
+                {
+                    iconRight ? (
+                        <div
+                            className={classes.selectedIconRightContainer}
+                        >
+                            {iconRight}
+                        </div>
+                    ) : null
+                }
+            </div>
+        );
+    }
+
     render() {
         const {
-            optionSet,
+            options,
             label,
             value,
             nullable,
@@ -173,6 +204,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
             useHintLabel,
             translations,
             withoutUnderline,
+            classes,
             ...toSelect } = this.props;
         const calculatedValue = toSelect.multi ? value : this.getValue();
         const selectStyle = { ...OptionsSelectVirtualized.defaultSelectStyle, ...style };
@@ -183,11 +215,11 @@ class OptionsSelectVirtualized extends Component<Props, State> {
             >
                 <div>
                     <VirtualizedSelect
-                        ref={(select) => { this.yourSelect = select; }}
                         disabled={disabled}
-                        options={this.options}
+                        options={options}
                         onChange={this.handleChange}
                         value={calculatedValue}
+                        valueRenderer={this.renderValue}
                         clearable={nullable}
                         style={selectStyle}
                         menuContainerStyle={menuContainerStyle}
@@ -210,4 +242,4 @@ class OptionsSelectVirtualized extends Component<Props, State> {
     }
 }
 
-export default OptionsSelectVirtualized;
+export default withStyles(getStyles)(OptionsSelectVirtualized);

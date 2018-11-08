@@ -4,6 +4,7 @@ import log from 'loglevel';
 
 import programCollection from '../../metaDataMemoryStores/programCollection/programCollection';
 import Program from '../../metaData/Program/Program';
+import Icon from '../../metaData/Icon/Icon';
 
 import EventProgram from '../../metaData/Program/EventProgram';
 import TrackerProgram from '../../metaData/Program/TrackerProgram';
@@ -18,6 +19,8 @@ import Option from '../../metaData/OptionSet/Option';
 import CategoryCombination from '../../metaData/CategoryCombinations/CategoryCombination';
 import Category from '../../metaData/CategoryCombinations/Category';
 
+import getProgramIconAsync from './getProgramIcon';
+import getDhisIconAsync from './getDhisIcon';
 import { convertOptionSetValue } from '../../converters/serverToClient';
 import isNonEmptyArray from '../../utils/isNonEmptyArray';
 import errorCreator from '../../utils/errorCreator';
@@ -33,6 +36,11 @@ type CachedTranslation = {
     value: string
 };
 
+type CachedStyle = {
+    color?: ?string,
+    icon?: ?string,
+};
+
 type CachedDataElement = {
     id: string,
     displayName: string,
@@ -42,7 +50,8 @@ type CachedDataElement = {
     translations: Array<CachedTranslation>,
     description: string,
     optionSetValue: boolean,
-    optionSet: { id: string }
+    optionSet: { id: string },
+    style: CachedStyle,
 };
 
 type CachedProgramStageDataElement = {
@@ -113,6 +122,7 @@ type CachedProgram = {
     programStages: Array<CachedProgramStage>,
     programType: string,
     categoryCombo: ?CachedCategoryCombo,
+    style?: ?CachedStyle,
 };
 
 type SectionSpecs = {
@@ -128,7 +138,8 @@ type CachedProgramStageDataElementsAsObject = {
 type CachedOption = {
     id: string,
     code: string,
-    displayName: string
+    displayName: string,
+    style?: ?CachedStyle,
 };
 
 type CachedOptionSet = {
@@ -167,7 +178,30 @@ function getRenderType(renderType: string) {
     return renderType && camelCaseUppercaseString(renderType);
 }
 
-function buildOptionSet(id: string, dataElement: DataElement, renderOptionsAsRadio: ?boolean, renderType: string) {
+async function buildOptionIcon(cachedStyle: CachedStyle = {}) {
+    const icon = cachedStyle && cachedStyle.icon;
+    if (!icon) {
+        return null;
+    }
+
+    try {
+        const iconData = await getDhisIconAsync(icon);
+        return new Icon((_this) => {
+            if (cachedStyle.color) {
+                _this.color = cachedStyle.color;
+            }
+            _this.data = iconData;
+        });
+    } catch (error) {
+        return null;
+    }
+}
+
+async function buildOptionSet(
+    id: string,
+    dataElement: DataElement,
+    renderOptionsAsRadio: ?boolean,
+    renderType: string) {
     const d2OptionSet = currentD2OptionSets && currentD2OptionSets.find(d2Os => d2Os.id === id);
 
     if (!d2OptionSet) {
@@ -179,12 +213,19 @@ function buildOptionSet(id: string, dataElement: DataElement, renderOptionsAsRad
 
     dataElement.type = getDataElementType(d2OptionSet.valueType);
 
-    const options = d2OptionSet.options.map(d2Option =>
-        new Option((_this) => {
-            _this.value = d2Option.code;
-            _this.text = d2Option.displayName;
-        }),
-    );
+    const optionsPromises = d2OptionSet
+        .options
+        .map(async (d2Option) => {
+            const icon = await buildOptionIcon(d2Option.style);
+
+            return new Option((_this) => {
+                _this.value = d2Option.code;
+                _this.text = d2Option.displayName;
+                _this.icon = icon;
+            });
+        });
+
+    const options = await Promise.all(optionsPromises);
 
     const optionSet = new OptionSet(id, options, dataElement, convertOptionSetValue);
     optionSet.inputType = getRenderType(renderType) || (renderOptionsAsRadio ? inputTypes.VERTICAL_RADIOBUTTONS : null);
@@ -195,7 +236,26 @@ function getDataElementTranslation(d2DataElement: CachedDataElement, property: $
     return currentLocale && d2DataElement.translations[currentLocale] && d2DataElement.translations[currentLocale][property];
 }
 
-function buildDataElement(d2ProgramStageDataElement: CachedProgramStageDataElement) {
+async function buildDataElementIconAsync(cachedStyle: CachedStyle = {}) {
+    const icon = cachedStyle && cachedStyle.icon;
+    if (!icon) {
+        return null;
+    }
+
+    try {
+        const iconData = await getDhisIconAsync(icon);
+        return new Icon((_this) => {
+            if (cachedStyle.color) {
+                _this.color = cachedStyle.color;
+            }
+            _this.data = iconData;
+        });
+    } catch (error) {
+        return null;
+    }
+}
+
+async function buildDataElement(d2ProgramStageDataElement: CachedProgramStageDataElement) {
     const d2DataElement = d2ProgramStageDataElement.dataElement;
 
     const dataElement = new DataElement((_this) => {
@@ -211,8 +271,10 @@ function buildDataElement(d2ProgramStageDataElement: CachedProgramStageDataEleme
         _this.type = getDataElementType(d2DataElement.valueType);
     });
 
+    dataElement.icon = await buildDataElementIconAsync(d2DataElement.style);
+
     if (d2DataElement.optionSet && d2DataElement.optionSet.id) {
-        dataElement.optionSet = buildOptionSet(
+        dataElement.optionSet = await buildOptionSet(
             d2DataElement.optionSet.id,
             dataElement,
             d2ProgramStageDataElement.renderOptionsAsRadio,
@@ -233,33 +295,36 @@ function convertProgramStageDataElementsToObject(d2ProgramStageDataElements: ?Ar
     }, {});
 }
 
-function buildSection(d2ProgramStageDataElements: CachedProgramStageDataElementsAsObject, sectionSpecs: SectionSpecs) {
+async function buildSection(
+    d2ProgramStageDataElements: CachedProgramStageDataElementsAsObject,
+    sectionSpecs: SectionSpecs) {
     const section = new Section((_this) => {
         _this.id = sectionSpecs.id;
         _this.name = sectionSpecs.displayName;
     });
 
     if (sectionSpecs.dataElements) {
-        sectionSpecs.dataElements.forEach((sectionDataElement: CachedSectionDataElements) => {
+        await sectionSpecs.dataElements.asyncForEach(async (sectionDataElement: CachedSectionDataElements) => {
             const id = sectionDataElement.id;
             const d2ProgramStageDataElement = d2ProgramStageDataElements[id];
-            section.addElement(buildDataElement(d2ProgramStageDataElement));
+            section.addElement(await buildDataElement(d2ProgramStageDataElement));
         });
     }
 
     return section;
 }
 
-function buildMainSection(d2ProgramStageDataElements: ?Array<CachedProgramStageDataElement>) {
+async function buildMainSection(d2ProgramStageDataElements: ?Array<CachedProgramStageDataElement>) {
     const section = new Section((_this) => {
         _this.id = Section.MAIN_SECTION_ID;
     });
 
     if (d2ProgramStageDataElements) {
-        d2ProgramStageDataElements.forEach(((d2ProgramStageDataElement) => {
-            section.addElement(buildDataElement(d2ProgramStageDataElement));
+        await d2ProgramStageDataElements.asyncForEach((async (d2ProgramStageDataElement) => {
+            section.addElement(await buildDataElement(d2ProgramStageDataElement));
         }));
     }
+
     return section;
 }
 
@@ -270,7 +335,7 @@ function getFeatureType(d2ProgramStage: CachedProgramStage) {
         'None';
 }
 
-function buildStage(d2ProgramStage: CachedProgramStage) {
+async function buildStage(d2ProgramStage: CachedProgramStage) {
     const stage = new RenderFoundation((_this) => {
         _this.id = d2ProgramStage.id;
         _this.access = d2ProgramStage.access;
@@ -283,7 +348,7 @@ function buildStage(d2ProgramStage: CachedProgramStage) {
     });
 
     if (d2ProgramStage.formType === 'CUSTOM' && d2ProgramStage.dataEntryForm) {
-        const section = buildMainSection(d2ProgramStage.programStageDataElements);
+        const section = await buildMainSection(d2ProgramStage.programStageDataElements);
         section.showContainer = false;
         stage.addSection(section);
         const dataEntryForm = d2ProgramStage.dataEntryForm;
@@ -299,15 +364,15 @@ function buildStage(d2ProgramStage: CachedProgramStage) {
         const d2ProgramStageDataElementsAsObject =
             convertProgramStageDataElementsToObject(d2ProgramStage.programStageDataElements);
         // $FlowSuppress
-        d2ProgramStage.programStageSections.forEach((section: CachedProgramStageSection) => {
-            stage.addSection(buildSection(d2ProgramStageDataElementsAsObject, {
+        await d2ProgramStage.programStageSections.asyncForEach(async (section: CachedProgramStageSection) => {
+            stage.addSection(await buildSection(d2ProgramStageDataElementsAsObject, {
                 id: section.id,
                 displayName: section.displayName,
                 dataElements: section.dataElements,
             }));
         });
     } else {
-        stage.addSection(buildMainSection(d2ProgramStage.programStageDataElements));
+        stage.addSection(await buildMainSection(d2ProgramStage.programStageDataElements));
     }
 
     return stage;
@@ -348,7 +413,18 @@ function buildCategoriCombination(cachedCategoriCombination: ?CachedCategoryComb
     });
 }
 
-function buildProgram(d2Program: CachedProgram) {
+async function buildProgramIcon(cachedStyle: CachedStyle = {}) {
+    const icon = new Icon();
+    if (cachedStyle.color) {
+        icon.color = cachedStyle.color;
+    }
+
+    icon.data = await getProgramIconAsync(cachedStyle.icon);
+
+    return icon;
+}
+
+async function buildProgram(d2Program: CachedProgram) {
     let program;
     if (d2Program.programType === 'WITHOUT_REGISTRATION') {
         program = new EventProgram((_this) => {
@@ -360,7 +436,7 @@ function buildProgram(d2Program: CachedProgram) {
             _this.categoryCombination = buildCategoriCombination(d2Program.categoryCombo);
         });
         const d2Stage = d2Program.programStages && d2Program.programStages[0];
-        program.stage = buildStage(d2Stage);
+        program.stage = await buildStage(d2Stage);
     } else {
         program = new TrackerProgram((_this) => {
             _this.id = d2Program.id;
@@ -368,10 +444,13 @@ function buildProgram(d2Program: CachedProgram) {
             _this.shortName = d2Program.displayShortName;
         });
 
-        d2Program.programStages.forEach((d2ProgramStage: CachedProgramStage) => {
-            program.addStage(buildStage(d2ProgramStage));
+        await d2Program.programStages.asyncForEach(async (d2ProgramStage: CachedProgramStage) => {
+            program.addStage(await buildStage(d2ProgramStage));
         });
     }
+
+    program.icon = await buildProgramIcon(d2Program.style);
+
     return program;
 }
 
@@ -460,7 +539,7 @@ function sortPrograms(programs: Array<Program>) {
     return programs;
 }
 
-export default function buildProgramCollection(
+export default async function buildProgramCollection(
     cachedPrograms: ?Array<CachedProgram>,
     cachedOptionSets: ?Array<CachedOptionSet>,
     cachedProgramRulesVariables: ?Array<ProgramRuleVariable>,
@@ -471,12 +550,13 @@ export default function buildProgramCollection(
     currentD2OptionSets = cachedOptionSets;
 
     if (cachedPrograms) {
-        sortPrograms(
-            cachedPrograms.map((d2Program) => {
-                const program = buildProgram(d2Program);
-                return program;
-            }),
-        )
+        const promisePrograms = cachedPrograms.map(async (d2Program) => {
+            const program = await buildProgram(d2Program);
+            return program;
+        });
+        const programs = await Promise.all(promisePrograms);
+
+        sortPrograms(programs)
             .forEach((program) => {
                 programCollection.set(program.id, program);
             });

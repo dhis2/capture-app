@@ -107,7 +107,17 @@ export default new ApiSpecification((_this) => {
     _this.modelGetterType = getterTypes.LIST;
     _this.queryParams = {
         fields:
-            '*,dataEntryForm[*],access[*],relatedProgram[id,displayName],relationshipType[id,displayName],trackedEntity[id,displayName],categoryCombo[id,displayName,isDefault,categories[id,displayName,categoryOptions[id,displayName,organisationUnits[id]]]],organisationUnits[id,displayName],userRoles[id,displayName],programStages[*,dataEntryForm[*],programStageSections[id,displayName,description,sortOrder,dataElements[id]],programStageDataElements[*,dataElement[*,optionSet[id]]]],programTrackedEntityAttributes[*,trackedEntityAttribute[id,unique]]',
+            '*,' +
+            'dataEntryForm[*],' +
+            'access[*],' +
+            'relatedProgram[id,displayName],' +
+            'relationshipType[id,displayName],' +
+            'trackedEntity[id,displayName],' +
+            'categoryCombo[id,displayName,isDefault,categories[id,displayName,categoryOptions[id,displayName,organisationUnits[id]]]],' +
+            'organisationUnits[id,displayName],' +
+            'userRoles[id,displayName],' +
+            'programStages[*,dataEntryForm[*],programStageSections[id,displayName,description,sortOrder,dataElements[id]],programStageDataElements[*,dataElement[*,optionSet[id]]]],' +
+            'programTrackedEntityAttributes[*,trackedEntityAttribute[id,unique]]`,',
     };
     _this.converter = (d2Programs) => {
         if (!d2Programs || d2Programs.length === 0) {
@@ -127,6 +137,7 @@ export default new ApiSpecification((_this) => {
             programStages: getProgramStages(d2Program.programStages),
             organisationUnits: getOrganisationUnits(d2Program.organisationUnits),
             programType: d2Program.programType,
+            style: d2Program.style,
         }));
 
         return programs;

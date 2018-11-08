@@ -79,6 +79,11 @@ import {
     goBackToListContext,
 } from 'capture-core/components/QuickSelector/epics/setSelection.epics';
 import {
+    loadRegisteringUnitListRootsEpic,
+    searchRegisteringUnitListEpic,
+    showRegisteringUnitListIndicatorEpic,
+} from 'capture-core/components/QuickSelector';
+import {
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
 } from 'capture-core/components/Pages/epics/resetProgramAfterSettingOrgUnitIfApplicable.epic';
 import {
@@ -94,12 +99,13 @@ import {
     includeFiltersWithValueAfterColumnSortingEpic,
 } from 'capture-core/components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.epics';
 
-import { loadStartupData } from '../init/entry.epics';
+import { loadStartupData, loadStartupDataCore } from '../init/entry.epics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
     calculateSelectionsCompletenessEpic,
     loadStartupData,
+    loadStartupDataCore,
     mainSelectionsCompletedEpic,
     orgUnitDataRetrivedEpic,
     retrieveWorkingListOnMainSelectionsCompletedEpic,
@@ -151,4 +157,7 @@ export default combineEpics(
     includeFiltersWithValueAfterColumnSortingEpic,
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,
+    loadRegisteringUnitListRootsEpic,
+    searchRegisteringUnitListEpic,
+    showRegisteringUnitListIndicatorEpic,
 );

@@ -8,6 +8,7 @@ export { default as PolygonField } from './PolygonField/PolygonField.component';
 export { default as SelectionBoxes } from './SelectionBoxes/SelectionBoxes.component';
 export { default as TextField } from './TextField/TextField.component';
 export { default as TrueOnlyField } from './TrueOnlyField/TrueOnlyField.component';
+export { default as DebounceField } from './DebounceField/DebounceField.component';
 
 // Field constants
 export { default as orientations } from './constants/orientations.const';

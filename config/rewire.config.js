@@ -8,6 +8,7 @@ const path = require('path');
 const fs = require('fs');
 const customAlias = require('./alias.config');
 const getCssMod = require('./cssMod.config');
+const svgMod = require('./svgMod.config');
 
 const isDevBuild = process.argv[1].indexOf('start.js') !== -1;
 
@@ -140,6 +141,7 @@ function rewireModules(config){
     // TODO: Temporary, probably isn't needed whenever create-react-app is updated to v2
     const cssMod = getCssMod(isDevBuild);
     config.module.rules[1].oneOf.splice(0, 0, cssMod);
+    config.module.rules[1].oneOf.splice(0, 0, svgMod);
     return config;
 }
 

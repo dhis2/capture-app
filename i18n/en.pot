@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-10-31T12:12:46.740Z\n"
-"PO-Revision-Date: 2018-10-31T12:12:46.740Z\n"
+"POT-Creation-Date: 2018-11-08T09:23:54.594Z\n"
+"PO-Revision-Date: 2018-11-08T09:23:54.594Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -158,6 +158,9 @@ msgstr ""
 msgid "Select image"
 msgstr ""
 
+msgid "Search"
+msgstr ""
+
 msgid "Clear"
 msgstr ""
 
@@ -295,9 +298,6 @@ msgstr ""
 msgid "Start Again"
 msgstr ""
 
-msgid "Registering Oraginastion Unit"
-msgstr ""
-
 msgid "Registering Organisation Unit"
 msgstr ""
 
@@ -307,19 +307,19 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-msgid "Program"
-msgstr ""
-
-msgid "No programs available."
+msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Show all"
 msgstr ""
 
-msgid "Some programs are being filtered."
+msgid "Program"
 msgstr ""
 
 msgid "Select program"
+msgstr ""
+
+msgid "No programs available."
 msgstr ""
 
 msgid "An error has occured. See log for details"

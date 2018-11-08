@@ -1,7 +1,7 @@
 // @flow
 import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 import { OptionSetSelectFieldForCustomForm, OptionSetBoxesFieldForCustomForm } from '../../Components';
-import { getOptions, getFormOptionSet } from './optionSetHelpers';
+import { getOptionsForRadioButtons, getOptionsForSelect } from './optionSetHelpers';
 import { orientations } from '../../../../FormFields/New';
 import { inputTypes } from '../../../../../metaData/OptionSet/optionSet.const';
 import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
@@ -10,18 +10,18 @@ import OptionSet from '../../../../../metaData/OptionSet/OptionSet';
 const mapInputTypeToPropsGetterFn = {
     [inputTypes.DROPDOWN]: (metaData: MetaDataElement) => ({
         // $FlowSuppress
-        optionSet: getFormOptionSet(metaData.optionSet),
+        options: getOptionsForSelect(metaData.optionSet),
         nullable: !metaData.compulsory,
     }),
     [inputTypes.HORIZONTAL_RADIOBUTTONS]: (metaData: MetaDataElement) => ({
         // $FlowSuppress
-        options: getOptions(metaData.optionSet),
+        options: getOptionsForRadioButtons(metaData.optionSet),
         id: metaData.id,
     }),
     [inputTypes.VERTICAL_RADIOBUTTONS]: (metaData: MetaDataElement) => ({
         orientation: orientations.VERTICAL,
         // $FlowSuppress
-        options: getOptions(metaData.optionSet),
+        options: getOptionsForRadioButtons(metaData.optionSet),
         id: metaData.id,
     }),
 };
