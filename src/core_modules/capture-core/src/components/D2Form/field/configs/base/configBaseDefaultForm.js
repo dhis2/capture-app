@@ -1,8 +1,9 @@
 // @flow
+import type { FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
+
 import { convertPx, getBaseConfigForField } from './configBase';
 import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
 import type { FieldConfigForType } from './configBase';
-import type { FieldConfig } from '../../../../../__TEMP__/FormBuilderExternalState.component';
 
 const baseComponentStyles = {
     labelContainerStyle: {
@@ -26,6 +27,10 @@ const getBaseProps = (metaData: MetaDataElement) => ({
     styles: baseComponentStyles,
     label: metaData.formName,
     metaCompulsory: metaData.compulsory,
+    icon: metaData.icon ? {
+        data: metaData.icon.data,
+        color: metaData.icon.color,
+    } : null,
 });
 
 const getBaseFormHorizontalProps = (options: Object) => ({
