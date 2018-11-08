@@ -223,7 +223,7 @@ class ProgramSelector extends Component<Props> {
         if (selectedProgram.categoryCombination) {
             return (
                 <div>
-                    <Paper elevation={1} className={this.props.classes.selectedPaper}>
+                    <Paper elevation={0} className={this.props.classes.selectedPaper}>
                         <Grid container spacing={8}>
                             <Grid item xs={12} sm={6}>
                                 {this.renderSelectedProgram(selectedProgram)}
@@ -239,7 +239,7 @@ class ProgramSelector extends Component<Props> {
                                                         <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetCategoryOption(i.id)}>
                                                             <ClearIcon className={this.props.classes.selectedButtonIcon} />
                                                         </IconButton>
-                                                    </p> 
+                                                    </p>
                                                 );
                                             }
                                             const categoryOptions = i
@@ -269,7 +269,7 @@ class ProgramSelector extends Component<Props> {
 
         return (
             <div>
-                <Paper elevation={1} className={this.props.classes.selectedPaper}>
+                <Paper elevation={0} className={this.props.classes.selectedPaper}>
                     {this.renderSelectedProgram(selectedProgram)}
                 </Paper>
             </div>
@@ -297,7 +297,7 @@ class ProgramSelector extends Component<Props> {
             : null;
 
         return (
-            <Paper elevation={1} className={classes.paper}>
+            <Paper elevation={0} className={classes.paper}>
                 <h4 className={classes.title}>
                     { i18n.t('Program') }
                 </h4>
@@ -333,7 +333,7 @@ class ProgramSelector extends Component<Props> {
     renderEmpty() {
         return (
             <div>
-                <Paper elevation={1} className={this.props.classes.paper}>
+                <Paper elevation={0} className={this.props.classes.paper}>
                     <h4 className={this.props.classes.title}>{ i18n.t('Program') }</h4>
                     <div
                         className={this.props.classes.noProgramsAvailableNotAvailable}
