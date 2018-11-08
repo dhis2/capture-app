@@ -13,7 +13,7 @@ export default (OfflineListContainerCreator: any) => {
         OfflineListContainerCreator(OfflineList) :
         OfflineList;
 
-    const OfflineEventsListWrapper = (props: Props) => {
+    const OfflineListWrapper = (props: Props) => {
         const { hasData, ...passOnProps } = props;
         if (!hasData) {
             return (
@@ -27,5 +27,5 @@ export default (OfflineListContainerCreator: any) => {
             />
         );
     };
-    return OfflineEventsListWrapper;
+    return OfflineListWrapper;
 };

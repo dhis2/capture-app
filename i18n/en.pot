@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-11-08T09:23:54.594Z\n"
-"PO-Revision-Date: 2018-11-08T09:23:54.594Z\n"
+"POT-Creation-Date: 2018-11-08T09:28:50.899Z\n"
+"PO-Revision-Date: 2018-11-08T09:28:50.899Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -210,6 +210,9 @@ msgid "Event could not be loaded"
 msgstr ""
 
 msgid "Organisation unit could not be loaded"
+msgstr ""
+
+msgid "Delete event"
 msgstr ""
 
 msgid "Update"

@@ -171,4 +171,4 @@ export const getUpdateWorkingListDataAsync = (
 ) => {
     const mainColumns = workingListsColumnsOrder ? getMainColumns(workingListsColumnsOrder) : {};
     return getEvents(createApiQueryArgs(queryArgs, mainColumns));
-}
+};

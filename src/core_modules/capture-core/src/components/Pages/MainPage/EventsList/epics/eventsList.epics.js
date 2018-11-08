@@ -13,9 +13,12 @@ import {
 } from '../../mainSelections.actions';
 import { actionTypes as paginationActionTypes } from '../Pagination/pagination.actions';
 import {
+    batchActionTypes as eventsListBatchActionTypes,
     actionTypes as eventsListActionTypes,
     workingListUpdateDataRetrieved,
     workingListUpdateRetrievalFailed,
+    startDeleteEvent,
+    workingListUpdatingWithDialog,
 } from '../eventsList.actions';
 import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../../NewEvent';
 import { actionTypes as editEventDataEntryActionTypes } from '../../../EditEvent/DataEntry/editEventDataEntry.actions';
@@ -28,11 +31,13 @@ import {
     actionTypes as filterSelectorActionTypes,
     batchActionTypes as filterSelectorBatchActionTypes,
 } from '../FilterSelectors/filterSelector.actions';
+import { batchActions } from 'redux-batched-actions';
 
 const errorMessages = {
     WORKING_LIST_RETRIEVE_ERROR: 'Working list could not be loaded',
     WORKING_LIST_UPDATE_ERROR: 'Working list could not be updated',
 };
+
 
 const getUnprocessedQueryArgsForInitialWorkingList = (state: ReduxState) => {
     const { programId, orgUnitId, categories } = state.currentSelections;
@@ -196,6 +201,15 @@ export const getWorkingListOnCancelSaveEpic = (action$: InputObservable, store: 
                 );
         });
 
+export const requestDeleteEventEpic = (action$: InputObservable) =>
+    // $FlowSuppress
+    action$.ofType(
+        eventsListActionTypes.REQUEST_DELETE_EVENT,
+    ).map((action) => {
+        const eventId = action.payload.eventId;
+        return batchActions([startDeleteEvent(eventId), workingListUpdatingWithDialog()], eventsListBatchActionTypes.START_DELETE_EVENT_UPDATE_WORKING_LIST);
+    });
+
 export const getWorkingListOnSaveEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
     action$.ofType(
@@ -249,6 +263,7 @@ export const updateWorkingListEpic = (action$: InputObservable, store: ReduxStor
         eventsListActionTypes.SORT_WORKING_LIST,
         filterSelectorActionTypes.CLEAR_FILTER,
         filterSelectorBatchActionTypes.SET_FILTER_BATCH,
+        eventsListActionTypes.EVENT_DELETED,
     )
         .switchMap(() => {
             const state = store.getState();

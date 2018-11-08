@@ -41,6 +41,7 @@ import {
     getWorkingListOnSaveEpic,
     updateWorkingListEpic,
     getEventListOnReconnectEpic,
+    requestDeleteEventEpic,
 } from 'capture-core/components/Pages/MainPage/EventsList/epics/eventsList.epics';
 import {
     getEventFromUrlEpic,
@@ -157,6 +158,7 @@ export default combineEpics(
     includeFiltersWithValueAfterColumnSortingEpic,
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,
+    requestDeleteEventEpic,
     loadRegisteringUnitListRootsEpic,
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
