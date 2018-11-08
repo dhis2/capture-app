@@ -24,6 +24,7 @@ type Props = {
     calendarLocale: Object,
     calendarOnConvertValueIn: Function,
     calendarOnConvertValueOut: Function,
+    popupAnchorPosition?: ?any,
     classes: Object,
 };
 
@@ -96,7 +97,7 @@ class D2DateTime extends Component<Props> {
     }
 
     render() {
-        const { value, dateMaxWidth, dateWidth, calendarWidth, calendarTheme, calendarLocale, calendarOnConvertValueIn, calendarOnConvertValueOut,  classes, orientation, onBlur, onChange, ...passOnProps } = this.props;
+        const { value, dateMaxWidth, dateWidth, calendarWidth, popupAnchorPosition, calendarTheme, calendarLocale, calendarOnConvertValueIn, calendarOnConvertValueOut,  classes, orientation, onBlur, onChange, ...passOnProps } = this.props;
         const isVertical = orientation === orientations.VERTICAL;
         const dateValue = value.date;
         const timeValue = value.time;
@@ -121,6 +122,7 @@ class D2DateTime extends Component<Props> {
                             onBlur={this.handleDateBlur}
                             label="Date"
                             calendarTheme={calendarTheme}
+                            popupAnchorPosition={popupAnchorPosition}
                             calendarLocale={calendarLocale}
                             calendarOnConvertValueIn={calendarOnConvertValueIn}
                             calendarOnConvertValueOut={calendarOnConvertValueOut}

@@ -178,6 +178,7 @@ const buildGeometrySettingsFn = () => (props: Object) => {
                 width: props && props.formHorizontal ? 150 : 350,
                 label: 'Location',
                 required: false,
+                dialogLabel: 'Location',
             }),
             propName: 'geometry',
             validatorContainers: [
@@ -194,7 +195,9 @@ const buildGeometrySettingsFn = () => (props: Object) => {
             componentProps: createComponentProps(props, {
                 width: props && props.formHorizontal ? 150 : '100%',
                 label: 'Coordinate',
+                dialogLabel: 'Coordinate',
                 required: false,
+
             }),
             propName: 'geometry',
             validatorContainers: [

@@ -3,6 +3,7 @@
 export const anchorPositions = {
     LEFT: 'left',
     RIGHT: 'right',
+    CENTER: 'center',
 };
 
 export const absoluteDirections = {

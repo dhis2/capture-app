@@ -39,6 +39,8 @@ type Props = {
     onParseDate: DateParser,
     moment: any,
     dateCalendarTheme: Object,
+    dateCalendarWidth?: ?any,
+    datePopupAnchorPosition?: ?string,
     dateCalendarLocale: Object,
     dateCalendarOnConvertValueIn: (inputValue: ?string) => Date,
     dateCalendarOnConvertValueOut: (value: string) => string,
@@ -147,6 +149,8 @@ class D2AgeField extends Component<Props> {
             onBlur,
             dateCalendarOnConvertValueIn,
             dateCalendarOnConvertValueOut,
+            dateCalendarWidth,
+            datePopupAnchorPosition,
             dateCalendarTheme,
             dateCalendarLocale,
             moment,
@@ -175,6 +179,8 @@ class D2AgeField extends Component<Props> {
             shrinkDisabled,
             dateCalendarOnConvertValueIn,
             dateCalendarOnConvertValueOut,
+            dateCalendarWidth,
+            datePopupAnchorPosition,
             dateCalendarTheme,
             dateCalendarLocale,
             moment,
@@ -190,6 +196,8 @@ class D2AgeField extends Component<Props> {
                     onBlur={this.handleDateBlur}
                     value={currentValues.date}
                     onChange={date => onChange({ ...currentValues, date })}
+                    calendarWidth={dateCalendarWidth}
+                    popupAnchorPosition={datePopupAnchorPosition}
                     calendarTheme={dateCalendarTheme}
                     calendarLocale={dateCalendarLocale}
                     calendarOnConvertValueIn={dateCalendarOnConvertValueIn}

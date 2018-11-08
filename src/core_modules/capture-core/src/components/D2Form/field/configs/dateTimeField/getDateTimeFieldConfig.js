@@ -4,6 +4,8 @@ import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { DateTimeFieldForForm } from '../../Components';
 import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
 
+const getCalendarAnchorPosition = (formHorizontal: ?boolean) => (formHorizontal ? 'center' : 'left');
+
 const getDateTimeFieldConfig = (metaData: MetaDataElement, options: Object) => {
     const props = createProps({
         formHorizontal: options.formHorizontal,
@@ -12,7 +14,8 @@ const getDateTimeFieldConfig = (metaData: MetaDataElement, options: Object) => {
         dateMaxWidth: options.formHorizontal ? 150 : 350,
         orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
         shrinkDisabled: options.formHorizontal,
-        calendarWidth: 350,
+        calendarWidth: options.formHorizontal ? 250 : 350,
+        popupAnchorPosition: getCalendarAnchorPosition(options.formHorizontal),
     }, options, metaData);
 
     return createFieldConfig({

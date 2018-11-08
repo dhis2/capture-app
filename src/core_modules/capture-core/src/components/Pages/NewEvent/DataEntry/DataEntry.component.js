@@ -27,6 +27,7 @@ import {
     withFilterProps,
     withDefaultFieldContainer,
     withDefaultShouldUpdateInterface,
+    orientations,
 } from '../../../FormFields/New';
 
 import withFeedbackOutput from '../../../../components/DataEntry/dataEntryOutput/withFeedbackOutput';
@@ -119,6 +120,8 @@ const createComponentProps = (props: Object, componentProps: Object) => ({
     ...componentProps,
 });
 
+const getCalendarAnchorPosition = (formHorizontal: ?boolean) => (formHorizontal ? 'center' : 'left');
+
 const buildReportDateSettingsFn = () => {
     const reportDateComponent =
         withCalculateMessages(overrideMessagePropNames)(
@@ -143,9 +146,10 @@ const buildReportDateSettingsFn = () => {
         component: reportDateComponent,
         componentProps: createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : '100%',
-            calendarWidth: 350,
             label: props.formFoundation.getLabel('eventDate'),
             required: true,
+            calendarWidth: props.formHorizontal ? 250 : 350,
+            popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
         }),
         propName: 'eventDate',
         validatorContainers: getEventDateValidatorContainers(),
@@ -196,6 +200,8 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
     ),
 );
 
+const getOrientation = (formHorizontal: ?boolean) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
+
 
 const buildGeometrySettingsFn = () => (props: Object) => {
     const featureType = props.formFoundation.featureType;
@@ -205,7 +211,9 @@ const buildGeometrySettingsFn = () => (props: Object) => {
             componentProps: createComponentProps(props, {
                 width: props && props.formHorizontal ? 150 : 350,
                 label: 'Location',
+                dialogLabel: 'Location',
                 required: false,
+                orientation: getOrientation(props.formHorizontal),
             }),
             propName: 'geometry',
             validatorContainers: [
@@ -222,7 +230,9 @@ const buildGeometrySettingsFn = () => (props: Object) => {
             componentProps: createComponentProps(props, {
                 width: props && props.formHorizontal ? 150 : 350,
                 label: 'Coordinate',
+                dialogLabel: 'Coordinate',
                 required: false,
+                orientation: getOrientation(props.formHorizontal),
             }),
             propName: 'geometry',
             validatorContainers: [

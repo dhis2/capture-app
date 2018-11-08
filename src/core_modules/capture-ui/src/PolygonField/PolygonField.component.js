@@ -1,9 +1,10 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import MapIcon from '@material-ui/icons/Map';
 import CheckIcon from '@material-ui/icons/Check';
 import L from 'leaflet';
 import { Map, TileLayer, FeatureGroup } from 'react-leaflet';
+import { ReactLeafletSearch } from 'react-leaflet-search';
 import EditControl from 'react-leaflet-draw/lib/EditControl';
 import defaultClasses from './polygonField.mod.css';
 import './styles.css';
@@ -12,6 +13,7 @@ type Props = {
   onBlur: (value: any) => void,
   value?: ?any,
   mapCenter: Array<number>,
+  mapDialog?: ?React.Element<any>,
 };
 
 type State = {
@@ -58,7 +60,7 @@ function coordsToFeatureCollection(coordinates): ?FeatureCollection {
     };
 }
 
-export default class D2Polygon extends Component<Props, State> {
+export default class D2Polygon extends React.Component<Props, State> {
     static defaultProps = {
         mapCenter: [51.505, -0.09],
     }
@@ -143,9 +145,59 @@ export default class D2Polygon extends Component<Props, State> {
 
     getFeatureCollection = () => (Array.isArray(this.props.value) ? coordsToFeatureCollection(this.props.value) : null)
 
+
+    renderAbsoluteMap = () => this.state.showMap && (
+        <div className={defaultClasses.polygonLeafletMap} ref={this.onSetMapInstance}>
+            {this.renderMap()}
+        </div>
+    );
+
+    renderDialogMap = () => {
+        const clonedMapDialog = React.cloneElement(
+            // $FlowSuppress
+            this.props.mapDialog,
+            { open: this.state.showMap, onClose: this.toggleMap },
+            // $FlowSuppress
+            [...React.Children.toArray(this.props.mapDialog.props.children), this.renderMap(true)],
+        );
+        return clonedMapDialog;
+    }
+
+    renderMap = (useDialog?: ?boolean) => {
+        const featureCollection = this.getFeatureCollection();
+        const leafletContainerClass = useDialog ? defaultClasses.dialogLeafletContainer : defaultClasses.leafletContainer;
+        return (
+            <Map zoom={13} center={this.getCenter(featureCollection)} zoomControl={false} className={leafletContainerClass} key="map">
+                <ReactLeafletSearch position="topleft" inputPlaceholder="Search" closeResultsOnClick />
+                <TileLayer
+                    url="//cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
+                    attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+                />
+                <FeatureGroup ref={(reactFGref) => { this.onFeatureGroupReady(reactFGref, featureCollection); }}>
+                    <EditControl
+                        position="topright"
+                        onEdited={this.onEdited}
+                        onCreated={this.onCreate}
+                        onDeleted={this.onDeleted}
+                        draw={{
+                            rectangle: false,
+                            polyline: false,
+                            circle: false,
+                            marker: false,
+                            circlemarker: false,
+                        }}
+                    />
+                </FeatureGroup>
+            </Map>
+        );
+    };
+
+    renderMapContainer = (useDialog: boolean) => (useDialog ? this.renderDialogMap() : this.renderAbsoluteMap());
+
     render() {
         const featureCollection = this.getFeatureCollection();
         const hasValue = !!featureCollection;
+        const useDialog = !!this.props.mapDialog;
         return (
             <div className={defaultClasses.container}>
                 <div className={defaultClasses.statusContainer}>
@@ -155,33 +207,7 @@ export default class D2Polygon extends Component<Props, State> {
                     </div>
                     { hasValue && <CheckIcon className={defaultClasses.checkIcon} color="primary" /> }
                 </div>
-                {
-                    this.state.showMap && (
-                        <div className={defaultClasses.polygonLeafletMap} ref={this.onSetMapInstance}>
-                            <Map zoom={13} center={this.getCenter(featureCollection)} zoomControl={false} className={defaultClasses.leafletContainer}>
-                                <TileLayer
-                                    url="//cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
-                                    attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-                                />
-                                <FeatureGroup ref={(reactFGref) => { this.onFeatureGroupReady(reactFGref, featureCollection); }}>
-                                    <EditControl
-                                        position="topright"
-                                        onEdited={this.onEdited}
-                                        onCreated={this.onCreate}
-                                        onDeleted={this.onDeleted}
-                                        draw={{
-                                            rectangle: false,
-                                            polyline: false,
-                                            circle: false,
-                                            marker: false,
-                                            circlemarker: false,
-                                        }}
-                                    />
-                                </FeatureGroup>
-                            </Map>
-                        </div>
-                    )
-                }
+                {this.renderMapContainer(useDialog)}
             </div>
         );
     }

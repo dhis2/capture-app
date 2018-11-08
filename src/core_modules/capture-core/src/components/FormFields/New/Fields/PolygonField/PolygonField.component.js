@@ -2,6 +2,8 @@
 import * as React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { PolygonField as UIPolygonField } from 'capture-ui';
+import { Dialog, DialogTitle } from '@material-ui/core';
+import { orientations } from '../../../New';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
@@ -10,6 +12,12 @@ const getStyles = (theme: Theme) => ({
     },
     inputWrapperUnfocused: {
         padding: 2,
+    },
+    dialogPaper: {
+        padding: 5,
+        maxWidth: 'none',
+        width: '75%',
+        height: '75%',
     },
 });
 
@@ -20,15 +28,39 @@ type Props = {
         inputWrapperFocused: string,
         inputWrapperUnfocused: string,
     },
+    orientation: $Values<typeof orientations>,
+    dialogLabel: string,
 }
 
-const PolygonField = (props: Props) => {
-    const { ...passOnProps } = props;
-    return (
-        <UIPolygonField
-            {...passOnProps}
-        />
-    );
-};
+class PolygonField extends React.Component<Props> {
+    dialogClasses: Object;
+    passOnClasses: Object;
+
+    constructor(props) {
+        super(props);
+
+        const { dialogPaper, ...passOnClasses } = props.classes;
+        this.passOnClasses = passOnClasses;
+        this.dialogClasses = {
+            paper: props.classes.dialogPaper,
+        };
+    }
+
+    render() {
+        const { classes, dialogLabel, ...passOnProps } = this.props;
+        return (
+            <UIPolygonField
+                mapDialog={this.props.orientation === orientations.VERTICAL ?
+                    <Dialog
+                        classes={this.dialogClasses}
+                    >
+                        <DialogTitle key="title">{dialogLabel}</DialogTitle>
+                    </Dialog> : null
+                }
+                {...passOnProps}
+            />
+        );
+    }
+}
 
 export default withStyles(getStyles)(PolygonField);

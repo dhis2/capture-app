@@ -5,15 +5,18 @@
 }
   
 .coordinateFieldsHorizontal {
+    position: relative;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
 .coordinateFieldsVertical {
+    position: relative;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .mapIcon {
@@ -58,13 +61,20 @@
     overflow: hidden;
     z-index: 1000;
     left: 0;
-    top: 40px;
+    top: 62px;
+    width: 100%;
 }
 .leafletContainer {
     z-index: 1000;
-    width: 400px;
-    height: 250px;
+    height: 375px;
+    border: 1px solid black;
+    border-radius: 3px;
 }
+.dialogLeafletContainer {
+    height: 100%;
+    width: 100%;
+}
+
 .inputContainer {
     flex-grow: 1;
 }

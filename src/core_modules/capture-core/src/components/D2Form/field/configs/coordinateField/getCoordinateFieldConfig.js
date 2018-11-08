@@ -10,6 +10,7 @@ const getCoordinateField = (metaData: MetaDataElement, options: Object) => {
         fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
         orientation: options.formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL,
         shrinkDisabled: options.formHorizontal,
+        dialogLabel: metaData.formName,
     }, options, metaData);
 
     return createFieldConfig({
