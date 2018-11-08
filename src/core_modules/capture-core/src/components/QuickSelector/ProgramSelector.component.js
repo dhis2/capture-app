@@ -24,6 +24,7 @@ import i18n from '@dhis2/d2-i18n';
 
 import EventProgram from '../../metaData/Program/EventProgram';
 import { resetProgramIdBase } from './actions/QuickSelector.actions';
+import './programSelector.css';
 
 const styles = () => ({
     paper: {
@@ -281,7 +282,9 @@ class ProgramSelector extends Component<Props> {
             <div>
                 <Paper elevation={1} className={this.props.classes.paper}>
                     <h4 className={this.props.classes.title}>{ i18n.t('Program') }</h4>
-                        <VirtualizedSelect optionSet={programOptionSet} onSelect={this.props.handleClickProgram} placeholder={i18n.t('Select program')} value={''} />
+                        <div id="program-selector">
+                            <VirtualizedSelect optionSet={programOptionSet} onSelect={this.props.handleClickProgram} placeholder={i18n.t('Select program')} value={''} />
+                        </div>
                     {
                         (() => {
                             if(!areAllProgramsAvailable) {

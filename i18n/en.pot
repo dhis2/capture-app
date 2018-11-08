@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-10-10T13:15:12.538Z\n"
-"PO-Revision-Date: 2018-10-10T13:15:12.538Z\n"
+"POT-Creation-Date: 2018-11-01T09:31:56.150Z\n"
+"PO-Revision-Date: 2018-11-01T09:31:56.150Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -144,6 +144,9 @@ msgid "Uploading image"
 msgstr ""
 
 msgid "Select image"
+msgstr ""
+
+msgid "Search"
 msgstr ""
 
 msgid "Clear"
@@ -284,9 +287,6 @@ msgid "Find"
 msgstr ""
 
 msgid "Selected registering unit"
-msgstr ""
-
-msgid "Registering Oraginastion Unit"
 msgstr ""
 
 msgid "Registering Organisation Unit"

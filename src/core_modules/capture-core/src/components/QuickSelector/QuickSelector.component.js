@@ -99,7 +99,6 @@ class QuickSelector extends Component<Props> {
                             handleClickOrgUnit={this.handleClickOrgUnit}
                             selectedOrgUnit={this.props.selectedOrgUnit}
                             onReset={this.props.onResetOrgUnitId}
-                            ready={!(this.props.selectedOrgUnitId && !this.props.selectedOrgUnit)}
                         />
                     </Grid>
                     <Grid item xs={12} sm={programSelectorWidth}>
