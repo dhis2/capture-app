@@ -67,19 +67,6 @@ const styles = (theme: Theme) => ({
         display: 'flex',
         justifyContent: 'flex-end',
     },
-    selectedItemContainer: {
-        display: 'flex',
-        alignItems: 'center',
-        minHeight: 28,
-        margin: '7px 0px 7px 0px',
-        paddingLeft: 5,
-        borderLeft: `2px solid ${theme.palette.primary.light}`,
-    },
-    selectedItemClear: {
-        flexGrow: 1,
-        display: 'flex',
-        justifyContent: 'flex-end',
-    },
 });
 
 type Props = {
