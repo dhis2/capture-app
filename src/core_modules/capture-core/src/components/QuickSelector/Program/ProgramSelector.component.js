@@ -16,12 +16,13 @@ import EventProgram from '../../../metaData/Program/EventProgram';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
 import './programSelector.css';
 import Program from '../../../metaData/Program/Program';
+import LinkButton from '../../Buttons/LinkButton.component';
 
-const styles = () => ({
+const styles = (theme: Theme) => ({
     paper: {
-        padding: 5,
-        backgroundColor: '#f6f6f6',
-        borderRadius: 5,
+        padding: 8,
+        backgroundColor: theme.palette.grey.lighter,
+        borderRadius: 8,
     },
     title: {
         margin: 0,
@@ -42,6 +43,11 @@ const styles = () => ({
         alignItems: 'center',
         justifyContent: 'space-between',
     },
+    selectedTextContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        overflow: 'hidden',
+    },
     selectedTextAndIconContainer: {
         display: 'flex',
         alignItems: 'center',
@@ -52,10 +58,15 @@ const styles = () => ({
         textOverflow: 'ellipsis',
         overflow: 'hidden',
     },
+    selectedCategoryNameContainer: {
+        whiteSpace: 'nowrap',
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
+    },
     selectedPaper: {
-        backgroundColor: '#f6f6f6',
-        borderRadius: 5,
-        padding: 5,
+        backgroundColor: theme.palette.grey.lighter,
+        borderRadius: 8,
+        padding: 8,
     },
     selectedButton: {
         float: 'right',
@@ -66,21 +77,17 @@ const styles = () => ({
         width: 20,
         height: 20,
     },
-    programAC: {
-        backgroundColor: 'white',
-        border: '1px solid lightGrey',
-        borderRadius: 5,
-        padding: '0px 5px 2px 5px',
-    },
     programsHiddenText: {
         fontSize: 12,
-        color: 'grey',
+        color: theme.palette.grey.dark,
         paddingTop: 5,
     },
     programsHiddenTextResetOrgUnit: {
         cursor: 'pointer',
+        color: 'inherit',
+        paddingLeft: 2,
     },
-    noProgramsAvailableNotAvailable: {
+    noProgramsContainer: {
         fontSize: 14,
         textAlign: 'center',
         backgroundColor: 'white',
@@ -235,11 +242,12 @@ class ProgramSelector extends Component<Props> {
                                         (() => {
                                             if (this.props.selectedCategories && this.props.selectedCategories[i.id]) {
                                                 return (
-                                                    <p className={this.props.classes.selectedText}>{i.categoryOptions.find(option => option.id === this.props.selectedCategories[i.id]).name}
+                                                    <div className={this.props.classes.selectedText}>
+                                                        <div className={this.props.classes.selectedCategoryNameContainer}>{i.categoryOptions.find(option => option.id === this.props.selectedCategories[i.id]).name}</div>
                                                         <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetCategoryOption(i.id)}>
                                                             <ClearIcon className={this.props.classes.selectedButtonIcon} />
                                                         </IconButton>
-                                                    </p>
+                                                    </div>
                                                 );
                                             }
                                             const categoryOptions = i
@@ -285,13 +293,12 @@ class ProgramSelector extends Component<Props> {
                     className={this.props.classes.programsHiddenText}
                 >
                     {i18n.t('Some programs are being filtered.')}
-                    <a
+                    <LinkButton
                         className={this.props.classes.programsHiddenTextResetOrgUnit}
                         onClick={() => this.handleResetOrgUnit()}
-                        role="button"
                     >
                         {i18n.t('Show all')}
-                    </a>
+                    </LinkButton>
                 </div>
             )
             : null;
@@ -336,16 +343,15 @@ class ProgramSelector extends Component<Props> {
                 <Paper elevation={0} className={this.props.classes.paper}>
                     <h4 className={this.props.classes.title}>{ i18n.t('Program') }</h4>
                     <div
-                        className={this.props.classes.noProgramsAvailableNotAvailable}
+                        className={this.props.classes.noProgramsContainer}
                     >
                         {i18n.t('No programs available.')}
-                        <a
+                        <LinkButton
                             className={this.props.classes.programsHiddenTextResetOrgUnit}
                             onClick={() => this.handleResetOrgUnit()}
-                            role="button"
                         >
                             {i18n.t('Show all')}
-                        </a>
+                        </LinkButton>
                     </div>
                 </Paper>
             </div>
