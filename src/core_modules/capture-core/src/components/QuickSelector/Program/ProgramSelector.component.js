@@ -96,6 +96,7 @@ const styles = () => ({
     icon: {
         width: 22,
         height: 22,
+        borderRadius: 2,
     },
 });
 

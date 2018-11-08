@@ -1,5 +1,5 @@
 // @flow
-import defaultIcon from '@dhis2/d2-icons/icons/square_large_negative.svg';
+import defaultIcon from '@dhis2/d2-icons/icons/clinical_fe_outline.svg';
 import getDhisIconAsync from './getDhisIcon';
 
 export default async (name: ?string) => {

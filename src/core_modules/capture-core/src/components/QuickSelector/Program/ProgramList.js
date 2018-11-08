@@ -24,12 +24,9 @@ const getStyles = () => ({
         display: 'flex',
         alignItems: 'center',
     },
-    iconContainer: {
-        paddingRight: 5,
-    },
 });
 
-type Item = { label: string, value: string, icon: React.Node };
+type Item = { label: string, value: string, iconLeft: React.Node };
 
 type Props = {
     items: Array<Item>,
@@ -38,7 +35,6 @@ type Props = {
         list: string,
         item: string,
         itemContents: string,
-        iconContainer: string,
     },
 };
 
@@ -59,7 +55,7 @@ const ProgramList = (props: Props) => {
                                 <div
                                     className={classes.itemContents}
                                 >
-                                    {item.icon}
+                                    {item.iconLeft}
                                     {item.label}
                                 </div>
                             )}

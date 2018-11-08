@@ -415,10 +415,7 @@ function buildCategoriCombination(cachedCategoriCombination: ?CachedCategoryComb
 
 async function buildProgramIcon(cachedStyle: CachedStyle = {}) {
     const icon = new Icon();
-    if (cachedStyle.color) {
-        icon.color = cachedStyle.color;
-    }
-
+    icon.color = cachedStyle.color || '#e0e0e0';
     icon.data = await getProgramIconAsync(cachedStyle.icon);
 
     return icon;
