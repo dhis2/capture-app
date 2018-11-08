@@ -15,7 +15,7 @@ import OrgUnitField from './OrgUnitField.container';
 
 const styles = (theme: Theme) => ({
     paper: {
-        padding: 5,
+        padding: 8,
         backgroundColor: theme.palette.grey.lighter,
         borderRadius: 8,
     },
@@ -44,7 +44,7 @@ const styles = (theme: Theme) => ({
     selectedPaper: {
         backgroundColor: theme.palette.grey.lighter,
         borderRadius: 5,
-        padding: 5,
+        padding: 8,
     },
     selectedButton: {
         width: 20,

@@ -6,7 +6,6 @@ import classNames from 'classnames';
 const styles = (theme: Theme) => ({
     button: {
         display: 'inline-block',
-        color: theme.palette.primary,
         textDecoration: 'underline',
         cursor: 'pointer',
     },
