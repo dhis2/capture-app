@@ -79,7 +79,7 @@ const styles = theme => ({
         overflow: 'hidden',
     },
     inputWrapperFocused: {
-        border: `2px solid ${theme.palette.accent.dark}`,
+        border: `2px solid ${theme.palette.primary.light}`,
         borderRadius: '5px',
     },
     inputWrapperUnfocused: {

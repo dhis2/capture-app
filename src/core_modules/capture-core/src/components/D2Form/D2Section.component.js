@@ -12,6 +12,9 @@ const getStyles = (theme: Theme) => ({
     sectionFieldsInSection: {
         margin: theme.spacing.unit,
     },
+    section: {
+        maxWidth: theme.typography.pxToRem(880),
+    },
 });
 
 type Props = {
@@ -19,6 +22,7 @@ type Props = {
     isHidden?: ?boolean,
     classes: {
         sectionFieldsInSection: string,
+        section: string,
     },
     formHorizontal: ?boolean,
     sectionId: string,
@@ -63,6 +67,7 @@ class D2Section extends React.PureComponent<Props> {
                 <Section
                     header={this.renderSectionHeader()}
                     elevation={2}
+                    className={classes.section}
                 >
                     <div
                         className={classes.sectionFieldsInSection}

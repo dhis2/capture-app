@@ -1,11 +1,17 @@
 // @flow
 import React, { Component } from 'react';
-
+import i18n from '@dhis2/d2-i18n';
 import QuickSelector from '../../../QuickSelector/QuickSelector.container';
 import IsSelectionsCompleteLevel from '../IsSelectionsCompleteLevel/IsSelectionsCompleteLevel.container';
-import WarningDialog from './WarningDialog.components';
+import ConfirmDialog from '../../../Dialogs/ConfirmDialog.component';
 import withLoadHandler from './withLoadHandler';
-import i18n from '@dhis2/d2-i18n';
+
+const defaultDialogProps = {
+    header: i18n.t('Discard event?'),
+    text: i18n.t('Leaving this page will discard the changes you made to this event.'),
+    confirmText: i18n.t('Discard'),
+    cancelText: i18n.t('Back to event'),
+};
 
 type Props = {
     onSetOrgUnit: (id: string, orgUnit: Object) => void,
@@ -156,11 +162,11 @@ class SelectorLevel extends Component<Props, State> {
                     onClickNew={this.handleClickNew}
                 />
                 <IsSelectionsCompleteLevel />
-                <WarningDialog onAcceptClick={this.handleAcceptStartAgain} open={this.state.openStartAgainWarning} onClose={this.handleClose} titleText={i18n.t('Start Again')} contentText={i18n.t('Are you sure? All unsaved data will be lost')} />
-                <WarningDialog onAcceptClick={this.handleAcceptOrgUnit} open={this.state.openOrgUnitWarning} onClose={this.handleClose} titleText={i18n.t('Reset Organisation Unit')} contentText={i18n.t('Are you sure? All unsaved data will be lost')} />
-                <WarningDialog onAcceptClick={this.handleAcceptProgram} open={!!this.state.openProgramWarning} onClose={this.handleClose} titleText={i18n.t('Reset Program')} contentText={i18n.t('Are you sure? All unsaved data will be lost')} />
-                <WarningDialog onAcceptClick={this.handleAcceptCatCombo} open={this.state.openCatComboWarning} onClose={this.handleClose} titleText={i18n.t('Reset Category Option')} contentText={i18n.t('Are you sure? All unsaved data will be lost')} />
-                <WarningDialog onAcceptClick={this.handleAcceptNew} open={this.state.openNewEventWarning} onClose={this.handleClose} titleText={i18n.t('Create New Event')} contentText={i18n.t('Are you sure? All unsaved data will be lost')} />
+                <ConfirmDialog onConfirm={this.handleAcceptStartAgain} open={this.state.openStartAgainWarning} onCancel={this.handleClose} {...defaultDialogProps} />
+                <ConfirmDialog onConfirm={this.handleAcceptOrgUnit} open={this.state.openOrgUnitWarning} onCancel={this.handleClose} {...defaultDialogProps} />
+                <ConfirmDialog onConfirm={this.handleAcceptProgram} open={!!this.state.openProgramWarning} onCancel={this.handleClose} {...defaultDialogProps} />
+                <ConfirmDialog onConfirm={this.handleAcceptCatCombo} open={this.state.openCatComboWarning} onCancel={this.handleClose} {...defaultDialogProps} />
+                <ConfirmDialog onConfirm={this.handleAcceptNew} open={this.state.openNewEventWarning} onCancel={this.handleClose} {...defaultDialogProps} />
             </div>
         );
     }

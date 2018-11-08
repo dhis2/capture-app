@@ -69,9 +69,13 @@ const styles = (theme: Theme) => ({
         color: theme.palette.primary.main,
     },
     table: {},
-    row: {},
+    row: {
+    },
     dataRow: {
         cursor: 'pointer',
+        '&:hover': {
+            backgroundColor: '#F1FBFF',
+        },
     },
     cell: {
         padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit * 7}px ${theme.spacing.unit /

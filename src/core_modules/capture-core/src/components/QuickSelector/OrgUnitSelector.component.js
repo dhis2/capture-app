@@ -14,11 +14,11 @@ import ClearIcon from '@material-ui/icons/Clear';
 
 import OrgUnitField from './OrgUnitField.container';
 
-const styles = () => ({
+const styles = (theme: Theme) => ({
     paper: {
         padding: 5,
-        backgroundColor: '#f6f6f6',
-        borderRadius: 5,
+        backgroundColor: theme.palette.grey.lighter,
+        borderRadius: 8,
     },
     title: {
         margin: 0,
@@ -43,18 +43,30 @@ const styles = () => ({
         borderLeft: '2px solid #71a4f8',
     },
     selectedPaper: {
-        backgroundColor: '#f6f6f6',
+        backgroundColor: theme.palette.grey.lighter,
         borderRadius: 5,
         padding: 5,
     },
     selectedButton: {
-        float: 'right',
         width: 20,
         height: 20,
     },
     selectedButtonIcon: {
         width: 20,
         height: 20,
+    },
+    selectedItemContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        minHeight: 28,
+        margin: '7px 0px 7px 0px',
+        paddingLeft: 5,
+        borderLeft: `2px solid ${theme.palette.primary.light}`,
+    },
+    selectedItemClear: {
+        flexGrow: 1,
+        display: 'flex',
+        justifyContent: 'flex-end',
     },
 });
 
@@ -115,16 +127,16 @@ class OrgUnitSelector extends Component<Props, State> {
         if (this.props.selectedOrgUnitId) {
             return (
                 <div>
-                    <Paper elevation={1} className={this.props.classes.selectedPaper}>
+                    <Paper elevation={0} className={this.props.classes.selectedPaper}>
                         <h4 className={this.props.classes.title}>{ i18n.t('Selected registering unit') }</h4>
-                        <p className={this.props.classes.selectedText}>{this.props.selectedOrgUnit.name}
-                            <IconButton
-                                className={this.props.classes.selectedButton}
-                                onClick={() => this.props.onReset()}
-                            >
-                                <ClearIcon className={this.props.classes.selectedButtonIcon} />
-                            </IconButton>
-                        </p>
+                        <div className={this.props.classes.selectedItemContainer}>
+                            <div>{this.props.selectedOrgUnit.name}</div>
+                            <div className={this.props.classes.selectedItemClear}>
+                                <IconButton className={this.props.classes.selectedButton} onClick={() => this.props.onReset()}>
+                                    <ClearIcon className={this.props.classes.selectedButtonIcon} />
+                                </IconButton>
+                            </div>
+                        </div>
                     </Paper>
                     <Dialog
                         open={this.state.open}
@@ -151,7 +163,7 @@ class OrgUnitSelector extends Component<Props, State> {
 
         return (
             <div>
-                <Paper elevation={1} className={this.props.classes.paper}>
+                <Paper elevation={0} className={this.props.classes.paper}>
                     <h4 className={this.props.classes.title}>{ i18n.t('Registering Organisation Unit') }</h4>
                     <div>
                         <OrgUnitField

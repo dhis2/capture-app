@@ -14,27 +14,10 @@ import {
     resetDataEntry,
 } from './selectorLevel.actions';
 import { resetProgramIdBase } from '../../../QuickSelector/actions/QuickSelector.actions';
-
-const newEventDataEntryHasChanges = (state: ReduxState) => {
-    const formValues = state.formsValues['singleEvent-newEvent'] || {};
-    const formHasChanges = Object
-        .keys(formValues)
-        .some(key => formValues[key]);
-
-    if (formHasChanges) {
-        return true;
-    }
-
-    const dataEntryValues = state.dataEntriesFieldsValue['singleEvent-newEvent'] || {};
-    const dataEntryHasChanges = Object
-        .keys(dataEntryValues)
-        .some(key => dataEntryValues[key]);
-
-    return dataEntryHasChanges;
-};
+import dataEntryHasChanges from '../../../DataEntry/common/dataEntryHasChanges';
 
 const mapStateToProps = (state: ReduxState) => {
-    const formInputInProgess = state.currentSelections.complete && newEventDataEntryHasChanges(state);
+    const formInputInProgess = state.currentSelections.complete && dataEntryHasChanges(state, 'singleEvent-newEvent');
     return {
         formInputInProgess,
         isLoading: state.newEventPage.isLoading,

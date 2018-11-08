@@ -27,6 +27,7 @@ type Props = {
         noteItemHeader: string,
         noteItemUser: string,
         noteItemDate: string,
+        notesList: string,
     }
 };
 
@@ -72,6 +73,9 @@ const styles = theme => ({
     },
     noteItemDate: {
         color: theme.palette.grey[600],
+    },
+    notesList: {
+        padding: 0,
     },
 });
 
@@ -134,7 +138,7 @@ class DataEntryNotes extends React.Component<Props, State> {
         const { notes, classes } = this.props;
         return (
             <div className={classes.notesContainer}>
-                <List dense>
+                <List dense className={classes.notesList}>
                     {notes.map(n => (
                         <ListItem className={classes.noteItem} key={n.key}>
                             <div className={classes.noteItemHeader}>

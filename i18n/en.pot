@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-11-05T12:30:55.506Z\n"
-"PO-Revision-Date: 2018-11-05T12:30:55.506Z\n"
+"POT-Creation-Date: 2018-11-08T09:23:54.594Z\n"
+"PO-Revision-Date: 2018-11-08T09:23:54.594Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -17,10 +17,22 @@ msgstr ""
 msgid "Column"
 msgstr ""
 
-msgid "Add comment"
+msgid "Cancel"
 msgstr ""
 
-msgid "Cancel"
+msgid "Discard event?"
+msgstr ""
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+
+msgid "Discard"
+msgstr ""
+
+msgid "Back to event"
+msgstr ""
+
+msgid "Add comment"
 msgstr ""
 
 msgid "Write comment"
@@ -167,6 +179,15 @@ msgstr ""
 msgid "Syncing"
 msgstr ""
 
+msgid "Basic info"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Comments"
+msgstr ""
+
 msgid "Field"
 msgstr ""
 
@@ -176,22 +197,10 @@ msgstr ""
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
 
-msgid "Start Again"
+msgid "Show all events"
 msgstr ""
 
-msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
-
-msgid "Reset Organisation Unit"
-msgstr ""
-
-msgid "Reset Program"
-msgstr ""
-
-msgid "Reset Category Option"
-msgstr ""
-
-msgid "Create New Event"
+msgid "Edit event"
 msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
@@ -274,10 +283,7 @@ msgstr ""
 msgid "Select a category option to start reporting"
 msgstr ""
 
-msgid "Are you sure? All unsaved data will be lost"
-msgstr ""
-
-msgid "Reset"
+msgid "Start again"
 msgstr ""
 
 msgid "New"
@@ -287,6 +293,9 @@ msgid "Find"
 msgstr ""
 
 msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
 msgstr ""
 
 msgid "Registering Organisation Unit"

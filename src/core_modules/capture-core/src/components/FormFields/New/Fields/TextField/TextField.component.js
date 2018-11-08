@@ -5,7 +5,7 @@ import { TextField as UITextField } from 'capture-ui';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
-        border: `2px solid ${theme.palette.accent.dark}`,
+        border: `2px solid ${theme.palette.primary.light}`,
         borderRadius: '5px',
         backgroundColor: 'red',
     },

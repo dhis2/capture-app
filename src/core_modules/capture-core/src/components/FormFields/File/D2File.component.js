@@ -8,6 +8,7 @@ import Button from '../../Buttons/Button.component';
 import { getApi } from '../../../d2/d2Instance';
 import LoadingMask from '../../LoadingMasks/LoadingMask.component';
 import inMemoryFileStore from '../../DataEntry/file/inMemoryFileStore';
+import LinkButton from '../../Buttons/LinkButton.component';
 
 type Props = {
     value: ?{ value: string, name: string, url?: ?string },
@@ -160,13 +161,12 @@ class D2File extends Component<Props> {
                                         {` ${i18n.t('selected')}.`}
                                     </div>
                                     <div className={classes.innerContainer}>
-                                        <div
-                                            role="presentation"
+                                        <LinkButton
                                             onClick={this.handleRemoveClick}
                                             className={classes.deleteButton}
                                         >
                                             {i18n.t('Delete')}
-                                        </div>
+                                        </LinkButton>
                                     </div>
                                 </div>
                             );

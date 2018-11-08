@@ -33,6 +33,9 @@ const getStyles = (theme: Theme) => ({
         padding: 6,
         fontSize: theme.typography.pxToRem(14),
     },
+    popperContainerHidden: {
+        display: 'none',
+    },
 });
 
 type Props = {
@@ -44,6 +47,7 @@ type Props = {
         restMenuButtonLabel: string,
         menuPaper: string,
         menuItemRoot: string,
+        popperContainerHidden: string,
     },
 };
 
@@ -161,10 +165,12 @@ class FilterRestMenu extends React.Component<Props, State> {
                     {
                         ({ ref, style, placement, scheduleUpdate }) => {
                             this.updatePopper = scheduleUpdate;
+                            const popperClass = this.state.filterSelectorOpen ? '' : classes.popperContainerHidden;
                             return (
                                 <div
                                     ref={ref}
                                     style={style}
+                                    className={popperClass}
                                     data-placement={placement}
                                 >
                                     <ClickAwayListener onClickAway={this.handleClickAway}>

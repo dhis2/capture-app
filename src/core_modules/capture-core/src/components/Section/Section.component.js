@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import classNames from 'classnames';
 
 const styles = theme => ({
     container: {
@@ -9,6 +9,7 @@ const styles = theme => ({
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
+        border: `1px solid ${theme.palette.grey.blueGrey}`,
     },
     mainActionButton: {
         position: 'absolute',
@@ -28,6 +29,7 @@ type Props = {
     onChangeCollapseState?: ?() => void,
     extendedCollapsibility?: boolean,
     classes: any,
+    className?: ?string,
 };
 
 class Section extends Component<Props> {
@@ -75,18 +77,10 @@ class Section extends Component<Props> {
     }
 
     render() {
-        const { elevation, style } = this.props;
-
-        if (elevation) {
-            return (
-                <Paper elevation={elevation} style={style} className={this.props.classes.container}>
-                    {this.renderContents()}
-                </Paper>
-            );
-        }
-
+        const { style, className } = this.props;
+        const containerClass = classNames(this.props.classes.container, className);
         return (
-            <div className={this.props.classes.container}>
+            <div className={containerClass} style={style}>
                 {this.renderContents()}
             </div>
         );

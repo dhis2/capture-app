@@ -1,6 +1,5 @@
 // @flow
 import { connect } from 'react-redux';
-import programCollection from '../../../../metaDataMemoryStores/programCollection/programCollection';
 import { batchActions } from 'redux-batched-actions';
 import EditEventSelector from './EditEventSelector.component';
 import {
@@ -15,41 +14,13 @@ import {
     batchActionTypes,
 } from './EditEventSelector.actions';
 import { resetProgramIdBase } from '../../../QuickSelector/actions/QuickSelector.actions';
+import dataEntryHasChanges from '../../../DataEntry/common/dataEntryHasChanges';
 
-const editEventDataEntryHasChanges = (state: ReduxState) => {
-    const program = programCollection.get(state.currentSelections.programId);
-    if (!program) {
-        return false;
-    }
-
-    const key = 'singleEvent-editEvent';
-    // $FlowSuppress
-    const formIsModified = Array.from(program.getStage().sections.values())
-        .some((section) => {
-            const sectionId = section.id;
-            const sectionKey = `${key}-${sectionId}`;
-            const sectionData = state.formsSectionsFieldsUI[sectionKey];
-            return sectionData ? Object
-                .keys(sectionData)
-                .some(elementKey => sectionData[elementKey].modified) : false;
-        });
-
-    if (formIsModified) {
-        return true;
-    }
-
-    const UIDataForDataValues = state.dataEntriesFieldsUI[key];
-    const dataEntryIsModified = UIDataForDataValues ? Object
-        .keys(UIDataForDataValues)
-        .some(elementKey => UIDataForDataValues[elementKey].modified) : false;
-
-    return dataEntryIsModified;
-};
 
 const mapStateToProps = (state: ReduxState) => ({
     selectedProgramId: state.currentSelections.programId,
     selectedOrgUnitId: state.currentSelections.orgUnitId,
-    formInputInProgress: state.currentSelections.complete && editEventDataEntryHasChanges(state),
+    formInputInProgress: state.currentSelections.complete && dataEntryHasChanges(state, 'singleEvent-editEvent'),
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({

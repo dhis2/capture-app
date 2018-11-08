@@ -8,7 +8,7 @@ import parseDate from '../../../../../utils/parsers/date.parser';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
-        border: `2px solid ${theme.palette.accent.dark}`,
+        border: `2px solid ${theme.palette.primary.light}`,
         borderRadius: '5px',
     },
     inputWrapperUnfocused: {
