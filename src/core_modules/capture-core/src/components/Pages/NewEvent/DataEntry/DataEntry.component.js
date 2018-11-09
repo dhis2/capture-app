@@ -233,6 +233,7 @@ const buildGeometrySettingsFn = () => (props: Object) => {
                 dialogLabel: 'Coordinate',
                 required: false,
                 orientation: getOrientation(props.formHorizontal),
+                shrinkDisabled: props.formHorizontal,
             }),
             propName: 'geometry',
             validatorContainers: [

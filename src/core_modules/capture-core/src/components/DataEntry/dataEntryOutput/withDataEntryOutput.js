@@ -8,8 +8,14 @@ type Props = {
 
 const getDataEntryOutput = (InnerComponent: React.ComponentType<any>, Output: React.ComponentType<any>) =>
     class DataEntryOutputBuilder extends React.Component<Props> {
+        name: string;
         innerInstance: ?any;
         outputInstance: ?any;
+        constructor(props: Props) {
+            super(props);
+            this.name = 'DataEntryOutputBuilder';
+        }
+
         getWrappedInstance() {
             return this.innerInstance;
         }

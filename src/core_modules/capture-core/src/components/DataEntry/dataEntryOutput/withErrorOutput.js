@@ -47,6 +47,11 @@ const styles = (theme: Theme) => ({
 
 const getErrorOutput = () =>
     class ErrorOutputBuilder extends React.Component<Props> {
+        name: string;
+        constructor(props) {
+            super(props);
+            this.name = 'ErrorOutputBuilder';
+        }
         renderErrorItems = (errorItems: any, classes: any) =>
             (<div>
                 {errorItems &&

@@ -77,7 +77,7 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
             let done;
             while (!done) {
                 currentInstance = currentInstance.getWrappedInstance && currentInstance.getWrappedInstance();
-                if (!currentInstance || currentInstance.constructor.name === 'D2Form') {
+                if (!currentInstance || currentInstance.name === 'D2Form') {
                     done = true;
                 }
             }
@@ -92,7 +92,7 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
                 currentInstance = currentInstance.getWrappedInstance && currentInstance.getWrappedInstance();
                 if (!currentInstance || currentInstance instanceof DataEntry) {
                     done = true;
-                } else if (currentInstance.constructor.name === 'EventFieldBuilder') {
+                } else if (currentInstance.name === 'EventFieldBuilder') {
                     eventFields.push(currentInstance);
                 }
             }

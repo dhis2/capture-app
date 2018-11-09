@@ -56,12 +56,14 @@ type Options = {
 
 const getDataEntryField = (InnerComponent: React.ComponentType<any>) =>
     class DataEntryFieldBuilder extends React.Component<Props> {
+        name: string;
         handleBlur: (value: any, options?: ?Options) => void;
         innerInstance: any;
         gotoInstance: any;
         constructor(props: Props) {
             super(props);
             this.handleBlur = this.handleBlur.bind(this);
+            this.name = 'DataEntryFieldBuilder';
         }
 
         getWrappedInstance() {

@@ -108,7 +108,7 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn: Optio
                 currentInstance = currentInstance.getWrappedInstance && currentInstance.getWrappedInstance();
                 if (!currentInstance || currentInstance instanceof DataEntry) {
                     done = true;
-                } else if (currentInstance.constructor.name === 'DataEntryFieldBuilder') {
+                } else if (currentInstance.name === 'DataEntryFieldBuilder') {
                     dataEntryFields.push(currentInstance);
                 }
             }
@@ -122,7 +122,7 @@ const getSaveButton = (InnerComponent: React.ComponentType<any>, optionFn: Optio
                 currentInstance = currentInstance.getWrappedInstance && currentInstance.getWrappedInstance();
                 if (!currentInstance || currentInstance instanceof DataEntry) {
                     done = true;
-                } else if (currentInstance.constructor.name === 'DataEntryOutputBuilder' && currentInstance.outputInstance.constructor.name === 'ErrorOutputBuilder') {
+                } else if (currentInstance.name === 'DataEntryOutputBuilder' && currentInstance.outputInstance.name === 'ErrorOutputBuilder') {
                     return currentInstance.outputInstance;
                 }
             }

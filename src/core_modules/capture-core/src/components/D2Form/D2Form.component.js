@@ -32,12 +32,13 @@ type Props = {
 };
 
 export class D2Form extends React.PureComponent<Props> {
+    name: string;
     validateForm: () => void;
     sectionInstances: Map<string, D2Section>;
 
     constructor(props: Props) {
         super(props);
-
+        this.name = 'D2Form';
         this.validateForm = this.validateForm.bind(this);
 
         this.sectionInstances = new Map();
