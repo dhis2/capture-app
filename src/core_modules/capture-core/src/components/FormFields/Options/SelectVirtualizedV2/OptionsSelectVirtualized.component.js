@@ -81,7 +81,8 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
         },
     };
     static getFilteredOptions(options: Array<VirtualizedOptionConfig>, filterValue: any): Array<VirtualizedOptionConfig> {
-        return (options && options.filter(o => o.label.toLowerCase().indexOf(filterValue) > -1)) || [];
+        const filterValueLC = filterValue.toLowerCase();
+        return (options && options.filter(o => o.label.toLowerCase().indexOf(filterValueLC) > -1)) || [];
     }
 
     handleChange: (selectedItem: VirtualizedOptionConfig) => void;
