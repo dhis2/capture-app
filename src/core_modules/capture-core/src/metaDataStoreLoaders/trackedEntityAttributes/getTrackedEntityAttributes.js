@@ -4,9 +4,10 @@ import chunk from '../../utils/chunk';
 import metaTrackedEntityAttributesSpec from '../../api/apiSpecifications/metaTrackedEntityAttributes.apiSpecification';
 import trackedEntityAttributesSpec from '../../api/apiSpecifications/trackedEntityAttributes.apiSpecification';
 
-import getTrackedEntityAttributesLoadSpecification from '../../apiToStore/loadSpecifications/getTrackedEntityAttributesLoadSpecification';
+import getTrackedEntityAttributesLoadSpecification
+    from '../../apiToStore/loadSpecifications/getTrackedEntityAttributesLoadSpecification';
 
-import StorageContainer from '../../storage/StorageContainer';
+import StorageController from '../../storage/StorageController';
 import trackedEntityStoresKeys from './trackedEntityAttributesStoresKeys';
 
 const batchSize = 50;
@@ -32,18 +33,18 @@ function getTrackedEntityAttributeIds(trackedEntityAttributes) {
 }
 
 
-async function getTrackedEntityAttributes(ids: Array<number>, store: string, storageContainer: StorageContainer) {
+async function getTrackedEntityAttributes(ids: Array<number>, store: string, storageController: StorageController) {
     trackedEntityAttributesSpec.updateQueryParams({
         filter: `id:in:[${ids.toString()}]`,
     });
 
-    return getTrackedEntityAttributesLoadSpecification(store, trackedEntityAttributesSpec).load(storageContainer);
+    return getTrackedEntityAttributesLoadSpecification(store, trackedEntityAttributesSpec).load(storageController);
 }
 
 async function getIdsForOptionSetsToRetrieve(
     metaTrackedEntityAttributes,
     optionSetStore: string,
-    storageContainer: StorageContainer) {
+    storageController: StorageController) {
     let optionSetIds = [];
 
     if (metaTrackedEntityAttributes) {
@@ -58,7 +59,7 @@ async function getIdsForOptionSetsToRetrieve(
         const attributePromises = metaTrackedEntityAttributes.reduce((accPromises, teAttribute) => {
             if (teAttribute.optionSet && teAttribute.optionSet.id) {
                 const optionSet = teAttribute.optionSet;
-                const resolvedPromise = storageContainer.get(optionSetStore, optionSet.id)
+                const resolvedPromise = storageController.get(optionSetStore, optionSet.id)
                     .then(storeData => includeOptionSetIdIfApplicable(optionSet, storeData));
                 accPromises.push(resolvedPromise);
             }
@@ -72,18 +73,18 @@ async function getIdsForOptionSetsToRetrieve(
 }
 
 export default async function getTrackedEntityAttributesData(
-    storageContainer: StorageContainer,
+    storageController: StorageController,
     stores: Object,
     trackedEntityAttributesFromPrograms?: ?Array<Object>) {
     let metaAttributes = await metaTrackedEntityAttributesSpec.get();
     metaAttributes = getMetaTrackedEntityAttributes(metaAttributes, trackedEntityAttributesFromPrograms);
-    const missingOptionSetIdsFromTrackedEntityAttributes = await getIdsForOptionSetsToRetrieve(metaAttributes, stores[trackedEntityStoresKeys.OPTION_SETS], storageContainer);
+    const missingOptionSetIdsFromTrackedEntityAttributes = await getIdsForOptionSetsToRetrieve(metaAttributes, stores[trackedEntityStoresKeys.OPTION_SETS], storageController);
     const attributeIdBatches = chunk(getTrackedEntityAttributeIds(metaAttributes), batchSize);
 
     await Promise.all(
         attributeIdBatches.map(
             batch =>
-                getTrackedEntityAttributes(batch, stores[trackedEntityStoresKeys.TRACKED_ENTITY_ATTRIBUTES], storageContainer),
+                getTrackedEntityAttributes(batch, stores[trackedEntityStoresKeys.TRACKED_ENTITY_ATTRIBUTES], storageController),
         ),
     );
 

@@ -1,5 +1,5 @@
 // @flow
-import StorageContainer from '../../storage/StorageContainer';
+import StorageController from '../../storage/StorageController';
 import IndexedDBAdapter from '../../storage/IndexedDBAdapter';
 import LocalStorageAdapter from '../../storage/DomLocalStorageAdapter';
 import programStoresKeys from '../programs/programsStoresKeys';
@@ -9,17 +9,19 @@ import LoadSpecification from '../../apiToStore/LoadSpecificationDefinition/Load
 import getConstantsLoadSpecification from '../../apiToStore/loadSpecifications/getConstantsLoadSpecification';
 import getOrgUnitLevelsLoadSpecification from '../../apiToStore/loadSpecifications/getOrgUnitLevelsLoadSpecification';
 import getRelationshipsLoadSpecification from '../../apiToStore/loadSpecifications/getRelationshipsLoadSpecification';
-import getTrackedEntitiesLoadSpecification from '../../apiToStore/loadSpecifications/getTrackedEntitiesLoadSpecification';
+import getTrackedEntitiesLoadSpecification
+    from '../../apiToStore/loadSpecifications/getTrackedEntitiesLoadSpecification';
 
 import organisationUnitApiSpecification from '../../api/apiSpecifications/organisationUnits.apiSpecification';
-import getOrganisationUnitsLoadSpecification from '../../apiToStore/loadSpecifications/getOrganisationUnitsLoadSpecification';
+import getOrganisationUnitsLoadSpecification
+    from '../../apiToStore/loadSpecifications/getOrganisationUnitsLoadSpecification';
 
 import getProgramsData from '../programs/getPrograms';
 import getTrackedEntityAttributes from '../trackedEntityAttributes/getTrackedEntityAttributes';
 import getOptionSets from '../optionSets/getOptionSets';
 
 import objectStores from './metaDataObjectStores.const';
-import { set as setStorageContainer } from '../../metaDataMemoryStores/storageContainer/metaDataStorageContainer';
+import { set as setStorageController } from '../../metaDataStores/storageController/metaDataStorageController';
 
 const coreLoadSpecifications: Array<LoadSpecification> = [
     getConstantsLoadSpecification(objectStores.CONSTANTS),
@@ -29,22 +31,40 @@ const coreLoadSpecifications: Array<LoadSpecification> = [
     getOrganisationUnitsLoadSpecification(objectStores.ORGANISATION_UNITS, organisationUnitApiSpecification),
 ];
 
-function loadCoreMetaData(storageContainer: StorageContainer) {
-    return Promise.all(coreLoadSpecifications.map(loadSpecification => loadSpecification.load(storageContainer)));
+function loadCoreMetaData(storageController: StorageController) {
+    return Promise.all(coreLoadSpecifications.map(loadSpecification => loadSpecification.load(storageController)));
 }
 
-async function openStorageContainer() {
+function getCacheVersion() {
+    const appCacheVersionAsString = appPackage.CACHE_VERSION; // eslint-disable-line
+    if (!appCacheVersionAsString) {
+        throw new Error('cache version not specified');
+    }
+    const appCacheVersion = Number(appCacheVersionAsString);
+    if (Number.isNaN(appCacheVersion) || !Number.isSafeInteger(appCacheVersion)) {
+        throw new Error('invalid cache version');
+    }
+    return appCacheVersion;
+}
+
+function createStorageController() {
     const objectStoreList = Object.keys(objectStores).map(key => objectStores[key]);
-    const storageContainer = new StorageContainer('dhis2ca', [IndexedDBAdapter, LocalStorageAdapter], objectStoreList);
-    setStorageContainer(storageContainer);
-    await storageContainer.open();
-    return storageContainer;
+    const appCacheVersion = getCacheVersion();
+    const storageController =
+        new StorageController('dhis2ca', appCacheVersion, [IndexedDBAdapter, LocalStorageAdapter], objectStoreList);
+    setStorageController(storageController);
+    return storageController;
+}
+
+async function openStorage(storageController: StorageController) {
+    await storageController.open();
 }
 
 export default async function loadMetaData() {
-    const storageContainer = await openStorageContainer();
-    await loadCoreMetaData(storageContainer);
-    const { missingPrograms, missingOptionSetIdsFromPrograms } = await getProgramsData(storageContainer, {
+    const storageController = createStorageController();
+    await openStorage(storageController);
+    await loadCoreMetaData(storageController);
+    const { missingPrograms, missingOptionSetIdsFromPrograms } = await getProgramsData(storageController, {
         [programStoresKeys.PROGRAMS]: objectStores.PROGRAMS,
         [programStoresKeys.PROGRAM_RULES]: objectStores.PROGRAM_RULES,
         [programStoresKeys.PROGRAM_RULES_VARIABLES]: objectStores.PROGRAM_RULES_VARIABLES,
@@ -64,11 +84,11 @@ export default async function loadMetaData() {
         }, [])
         : null;
 
-    const { missingOptionSetIdsFromTrackedEntityAttributes } = await getTrackedEntityAttributes(storageContainer, {
+    const { missingOptionSetIdsFromTrackedEntityAttributes } = await getTrackedEntityAttributes(storageController, {
         [trackedEntityStoresKeys.TRACKED_ENTITY_ATTRIBUTES]: objectStores.TRACKED_ENTITY_ATTRIBUTES,
         [trackedEntityStoresKeys.OPTION_SETS]: objectStores.OPTION_SETS,
     }, trackedEntityAttributesFromPrograms);
 
     const missingOptionSetIds = [...missingOptionSetIdsFromPrograms, ...missingOptionSetIdsFromTrackedEntityAttributes];
-    await getOptionSets(missingOptionSetIds, objectStores.OPTION_SETS, storageContainer);
+    await getOptionSets(missingOptionSetIds, objectStores.OPTION_SETS, storageController);
 }
