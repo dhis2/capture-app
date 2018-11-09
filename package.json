@@ -107,7 +107,7 @@
     "svg-url-loader": "^2.3.2"
   },
   "manifest.webapp": {
-    "version": "0.9.3",
+    "version": "0.9.4",
     "name": "Capture",
     "description": "Capture App",
     "launch_path": "index.html",
