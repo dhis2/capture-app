@@ -9,16 +9,18 @@ import programIndicatorsSpec from '../../api/apiSpecifications/programIndicators
 
 import getProgramsLoadSpecification from '../../apiToStore/loadSpecifications/getProgramsLoadSpecification';
 import getProgramRulesLoadSpecification from '../../apiToStore/loadSpecifications/getProgramRulesLoadSpecification';
-import getProgramRulesVariablesLoadSpecification from '../../apiToStore/loadSpecifications/getProgramRulesVariablesLoadSpecification';
-import getProgramIndicatorsLoadSpecification from '../../apiToStore/loadSpecifications/getProgramIndicatorsLoadSpecification';
+import getProgramRulesVariablesLoadSpecification
+    from '../../apiToStore/loadSpecifications/getProgramRulesVariablesLoadSpecification';
+import getProgramIndicatorsLoadSpecification
+    from '../../apiToStore/loadSpecifications/getProgramIndicatorsLoadSpecification';
 
 
-import StorageContainer from '../../storage/StorageContainer';
+import StorageController from '../../storage/StorageController';
 import programsStoresKeys from './programsStoresKeys';
 
 const batchSize = 50;
 
-async function getMissingPrograms(programs, storageContainer: StorageContainer, store: string) {
+async function getMissingPrograms(programs, storageController: StorageController, store: string) {
     if (!programs) {
         return null;
     }
@@ -26,7 +28,7 @@ async function getMissingPrograms(programs, storageContainer: StorageContainer, 
     const storePrograms = {};
     await Promise.all(
         programs.map(
-            program => storageContainer
+            program => storageController
                 .get(store, program.id)
                 .then((storeProgram) => { storePrograms[program.id] = storeProgram; }),
         ),
@@ -40,43 +42,43 @@ async function getMissingPrograms(programs, storageContainer: StorageContainer, 
     return missingPrograms.length > 0 ? missingPrograms : null;
 }
 
-function getPrograms(programs, store, storageContainer) {
+function getPrograms(programs, store, storageController) {
     programsSpec.updateQueryParams({
         filter: `id:in:[${programs.map(program => program.id).toString()}]`,
     });
 
     const programsLoadSpecification = getProgramsLoadSpecification(store, programsSpec);
-    return programsLoadSpecification.load(storageContainer);
+    return programsLoadSpecification.load(storageController);
 }
 
-function getProgramIndicators(programs, store, storageContainer) {
+function getProgramIndicators(programs, store, storageController) {
     programIndicatorsSpec.updateQueryParams({
         // $FlowSuppress
         filter: `program.id:in:[${programs.map(program => program.id).toString()}]`,
     });
 
-    return getProgramIndicatorsLoadSpecification(store, programIndicatorsSpec).load(storageContainer);
+    return getProgramIndicatorsLoadSpecification(store, programIndicatorsSpec).load(storageController);
 }
 
-function getProgramRules(programs, store, storageContainer) {
+function getProgramRules(programs, store, storageController) {
     programRulesSpec.updateQueryParams({
         // $FlowSuppress
         filter: `program.id:in:[${programs.map(program => program.id).toString()}]`,
     });
 
-    return getProgramRulesLoadSpecification(store, programRulesSpec).load(storageContainer);
+    return getProgramRulesLoadSpecification(store, programRulesSpec).load(storageController);
 }
 
-function getProgramRulesVariables(programs, store, storageContainer) {
+function getProgramRulesVariables(programs, store, storageController) {
     programRulesVariablesSpec.updateQueryParams({
         // $FlowSuppress
         filter: `program.id:in:[${programs.map(program => program.id).toString()}]`,
     });
 
-    return getProgramRulesVariablesLoadSpecification(store, programRulesVariablesSpec).load(storageContainer);
+    return getProgramRulesVariablesLoadSpecification(store, programRulesVariablesSpec).load(storageController);
 }
 
-async function getOptionSetIdsToRetrieve(metaPrograms, optionSetStore: string, storageContainer: StorageContainer) {
+async function getOptionSetIdsToRetrieve(metaPrograms, optionSetStore: string, storageController: StorageController) {
     let optionSetIds = [];
 
     if (metaPrograms) {
@@ -91,7 +93,7 @@ async function getOptionSetIdsToRetrieve(metaPrograms, optionSetStore: string, s
             const prStDesPromises = prStDes.reduce((accPrStDesPromises, prStDe) => {
                 if (prStDe.dataElement && prStDe.dataElement.optionSet && prStDe.dataElement.optionSet.id) {
                     const optionSet = prStDe.dataElement.optionSet;
-                    const resolvedPromise = storageContainer
+                    const resolvedPromise = storageController
                         .get(optionSetStore, optionSet.id)
                         .then(storeData => includeOptionSetIdIfApplicable(optionSet, storeData));
 
@@ -123,27 +125,26 @@ async function getOptionSetIdsToRetrieve(metaPrograms, optionSetStore: string, s
             }
             return accProgramsPromises;
         }, []);
-
         const missingOptionSetIdsAsArray = await Promise.all(programsPromises);
         optionSetIds = missingOptionSetIdsAsArray.filter(optionSetId => !!optionSetId);
     }
     return optionSetIds;
 }
 
-export default async function getProgramsData(storageContainer: StorageContainer, stores: Object) {
+export default async function getProgramsData(storageController: StorageController, stores: Object) {
     const metaPrograms = await metaProgramsSpec.get();
-    const missingOptionSetIdsFromPrograms = await getOptionSetIdsToRetrieve(metaPrograms, stores[programsStoresKeys.OPTION_SETS], storageContainer);
-    const missingPrograms = await getMissingPrograms(metaPrograms, storageContainer, stores[programsStoresKeys.PROGRAMS]);
+    const missingOptionSetIdsFromPrograms = await getOptionSetIdsToRetrieve(metaPrograms, stores[programsStoresKeys.OPTION_SETS], storageController);
+    const missingPrograms = await getMissingPrograms(metaPrograms, storageController, stores[programsStoresKeys.PROGRAMS]);
 
     const programBatches = chunk(missingPrograms, batchSize);
 
     await Promise.all(
         programBatches.map(
             batch =>
-                getPrograms(batch, stores[programsStoresKeys.PROGRAMS], storageContainer)
-                    .then(programs => getProgramRules(programs, stores[programsStoresKeys.PROGRAM_RULES], storageContainer)
-                        .then(() => getProgramRulesVariables(programs, stores[programsStoresKeys.PROGRAM_RULES_VARIABLES], storageContainer))
-                        .then(() => getProgramIndicators(programs, stores[programsStoresKeys.PROGRAM_INDICATORS], storageContainer))),
+                getPrograms(batch, stores[programsStoresKeys.PROGRAMS], storageController)
+                    .then(programs => getProgramRules(programs, stores[programsStoresKeys.PROGRAM_RULES], storageController)
+                        .then(() => getProgramRulesVariables(programs, stores[programsStoresKeys.PROGRAM_RULES_VARIABLES], storageController))
+                        .then(() => getProgramIndicators(programs, stores[programsStoresKeys.PROGRAM_INDICATORS], storageController))),
         ),
     );
 

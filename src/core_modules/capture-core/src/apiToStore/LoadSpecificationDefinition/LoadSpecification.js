@@ -1,12 +1,12 @@
 // @flow
 /* eslint-disable no-unused-expressions */
 import ApiSpecification from '../../api/ApiSpecificationDefinition/ApiSpecification';
-import StorageContainer from '../../storage/StorageContainer';
+import StorageController from '../../storage/StorageController';
 import getterTypes from '../../api/fetcher/getterTypes.const';
 import type { Converter } from '../../api/fetcher/apiFetchers';
 
 type Loader = (
-storageContainer: StorageContainer,
+storageController: StorageController,
 objectStore: string,
 queryParams: ?Object,
 d2ModelName: string,
@@ -31,9 +31,9 @@ class LoadSpecification {
         }
     }
 
-    load(storageContainer: StorageContainer) {
+    load(storageController: StorageController) {
         return this.loader(
-            storageContainer,
+            storageController,
             this.objectStore,
             this.queryParams,
             this.d2ModelName,

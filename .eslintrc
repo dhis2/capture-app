@@ -18,7 +18,8 @@
         "document": true,
         "window": true,
         "it": true,
-        "expect": true
+        "expect": true,
+        "appPackage": true
     },
     "rules": {
         "no-param-reassign": 0,

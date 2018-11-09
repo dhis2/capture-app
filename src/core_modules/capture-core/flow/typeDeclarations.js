@@ -170,3 +170,7 @@ declare type OfflineEffect = {
     data: any,
     method: $Values<typeof methods>,
 };
+
+declare var appPackage: {
+    CACHE_VERSION: string,
+};

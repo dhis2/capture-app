@@ -21,6 +21,8 @@ class IndexedDBAdapter {
         COUNT_FAILED: 'Count from indexedDB failed',
         CLOSE_FAILED: 'Close indexedDB failed',
         DESTROY_FAILED: 'Destroy indexedDB failed',
+        DESTROY_BLOCKED: 'Destroy indexedDB blocked',
+        CLOSE_FAILED_FROM_DESTROY: 'Close indexedDB failed from destroy',
     };
 
     static transactionMode = {
@@ -454,7 +456,21 @@ class IndexedDBAdapter {
     }
 
     async destroy() {
-        await this.close();
+        await new Promise((resolve, reject) => {
+            this.close()
+                .then(() => {
+                    resolve();
+                })
+                .catch((error) => {
+                    reject(
+                        errorCreator(
+                            IndexedDBAdapter.errorMessages.CLOSE_FAILED_FROM_DESTROY)(
+                            { adapter: this, error },
+                        ),
+                    );
+                });
+        });
+
         await new Promise((resolve, reject) => {
             const request = IndexedDBAdapter.indexedDB.deleteDatabase(this.name);
 
@@ -464,6 +480,10 @@ class IndexedDBAdapter {
 
             request.onerror = (error) => {
                 reject(errorCreator(IndexedDBAdapter.errorMessages.DESTROY_FAILED)({ adapter: this, error }));
+            };
+
+            request.onblocked = (error) => {
+                reject(errorCreator(IndexedDBAdapter.errorMessages.DESTROY_BLOCKED)({ adapter: this, error }));
             };
         });
     }

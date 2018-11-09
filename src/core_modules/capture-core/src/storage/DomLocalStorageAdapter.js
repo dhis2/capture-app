@@ -119,8 +119,8 @@ class DomLocalStorageAdapter {
         if (!dataArray || !isArray(dataArray)) {
             return Promise.reject(errorCreator(DomLocalStorageAdapter.errorMessages.STORAGE_ARRAY_NOT_PROVIDED)({ adapter: this }));
         }
-
-        return Promise.all(dataArray.map(dataObject => this.set(store, dataObject)));
+        const promises = dataArray.map(dataObject => this.set(store, dataObject));
+        return Promise.all(promises);
     }
 
     get(store, key) {
@@ -136,6 +136,7 @@ class DomLocalStorageAdapter {
                 responseObject[this.keyPath] = key;
                 resolve(responseObject);
             }
+            resolve();
         });
     }
 
