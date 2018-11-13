@@ -1,4 +1,5 @@
 /* eslint-disable class-methods-use-this */
+/* eslint-disable no-underscore-dangle */
 import isDefined from 'd2-utilizr/lib/isDefined';
 import isArray from 'd2-utilizr/lib/isArray';
 import errorCreator from '../utils/errorCreator';
@@ -58,8 +59,8 @@ class Indexer {
 
 class DomLocalStorageAdapter {
     static storage = window.localStorage;
-
     static adapterName = 'DomLocalStorageAdapter';
+    static CACHEVERSIONKEY = '__VERSION__';
 
     static isSupported() {
         return !!DomLocalStorageAdapter.storage;
@@ -70,44 +71,70 @@ class DomLocalStorageAdapter {
         SET_FAILED: 'Save to localStorage failed',
         INVALID_KEY: 'Key is invalid',
         KEY_BASED_COUNT_IS_NOT_SUPPORTED: 'Key based count is not supported by DomLocalStorageAdapter',
+        STORAGE_NOT_OPENED: 'Please call open first in the DomLocalStorageAdapter',
     };
 
     constructor(options) {
-        this.indexer = {};
-
         this.name = options.name;
-        this.version = options.version;
+        this.version = options.version || 1;
         this.objectStoreNames = options.objectStores;
         this.keyPath = options.keyPath;
+        this.indexer = this.objectStoreNames
+            .reduce((accIndexers, store) => {
+                accIndexers[store] = new Indexer(this.name, store, DomLocalStorageAdapter.storage);
+                return accIndexers;
+            }, {});
+        this.isOpened = false;
     }
 
     open() {
-        return new Promise((resolve) => {
-            this.objectStoreNames.forEach((store) => {
-                this.indexer[store] = new Indexer(this.name, store, DomLocalStorageAdapter.storage);
-            });
-            resolve();
-        });
+        const versionKey = `${this.name}.${DomLocalStorageAdapter.CACHEVERSIONKEY}`;
+        const inUseVersionString = DomLocalStorageAdapter.storage.getItem(versionKey);
+        const inUseVersion = inUseVersionString && JSON.parse(inUseVersionString);
+
+        if (this.version !== inUseVersion) {
+            this._executeDestroy();
+            DomLocalStorageAdapter.storage.setItem(versionKey, JSON.stringify(this.version));
+        }
+        this.isOpened = true;
+        return Promise.resolve();
+    }
+
+    _validatePrerequisitesForSet(store, dataObject) {
+        const isOpenError = this.validateIsOpened();
+        if (isOpenError) {
+            return isOpenError;
+        }
+
+        if (!isDefined(dataObject) || !isDefined(dataObject[this.keyPath])) {
+            return errorCreator(DomLocalStorageAdapter.errorMessages.INVALID_STORAGE_OBJECT)({ adapter: this });
+        }
+        return null;
+    }
+
+    _executeSet(store, dataObject) {
+        const storeObject = JSON.parse(JSON.stringify(dataObject));
+        const key = storeObject[this.keyPath];
+        delete storeObject[this.keyPath];
+
+        const storeKey = this.getStoreKey(store, key);
+        if (!this.indexer[store].exists(storeKey)) {
+            this.indexer[store].add(storeKey);
+        }
+
+        DomLocalStorageAdapter.storage.setItem(storeKey, JSON.stringify(storeObject));
     }
 
     set(store, dataObject) {
         return new Promise((resolve, reject) => {
-            if (!isDefined(dataObject) || !isDefined(dataObject[this.keyPath])) {
-                reject(errorCreator(DomLocalStorageAdapter.errorMessages.INVALID_STORAGE_OBJECT)({ adapter: this }));
+            const prerequisitesError = this._validatePrerequisitesForSet(store, dataObject);
+            if (prerequisitesError) {
+                reject(prerequisitesError);
                 return;
             }
 
-            const storeObject = JSON.parse(JSON.stringify(dataObject));
-            const key = storeObject[this.keyPath];
-            delete storeObject[this.keyPath];
-
-            const storeKey = this.getStoreKey(store, key);
-            if (!this.indexer[store].exists(storeKey)) {
-                this.indexer[store].add(storeKey);
-            }
-
             try {
-                DomLocalStorageAdapter.storage.setItem(storeKey, JSON.stringify(storeObject));
+                this._executeSet(store, dataObject);
                 resolve();
             } catch (error) {
                 reject(errorCreator(DomLocalStorageAdapter.errorMessages.SET_FAILED)({ adapter: this, error }));
@@ -115,32 +142,71 @@ class DomLocalStorageAdapter {
         });
     }
 
-    setAll(store, dataArray) {
-        if (!dataArray || !isArray(dataArray)) {
-            return Promise.reject(errorCreator(DomLocalStorageAdapter.errorMessages.STORAGE_ARRAY_NOT_PROVIDED)({ adapter: this }));
+    _validatePrerequisitesForSetAll(store, dataArray) {
+        const isOpenError = this.validateIsOpened();
+        if (isOpenError) {
+            return isOpenError;
         }
-        const promises = dataArray.map(dataObject => this.set(store, dataObject));
-        return Promise.all(promises);
+
+        if (!dataArray || !isArray(dataArray)) {
+            return errorCreator(DomLocalStorageAdapter.errorMessages.STORAGE_ARRAY_NOT_PROVIDED)({ adapter: this });
+        }
+
+        return null;
+    }
+
+    setAll(store, dataArray) {
+        const prerequisitesError = this._validatePrerequisitesForSetAll(store, dataArray);
+        if (prerequisitesError) {
+            return Promise.reject(prerequisitesError);
+        }
+
+        try {
+            dataArray.forEach((dataObject) => {
+                this._executeSet(store, dataObject);
+            });
+            return Promise.resolve();
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
+
+    _validatePrerequisitesForGet(store, key) {
+        const isOpenError = this.validateIsOpened();
+        if (isOpenError) {
+            return isOpenError;
+        }
+
+        if (!key) {
+            return errorCreator(DomLocalStorageAdapter.errorMessages.INVALID_KEY)({ adapter: this });
+        }
+        return null;
     }
 
     get(store, key) {
         return new Promise((resolve, reject) => {
-            if (!key) {
-                reject(errorCreator(DomLocalStorageAdapter.errorMessages.INVALID_KEY)({ adapter: this }));
+            const prerequisitesError = this._validatePrerequisitesForGet(store, key);
+            if (prerequisitesError) {
+                reject(prerequisitesError);
+                return;
             }
 
             const storeObject = DomLocalStorageAdapter.storage.getItem(this.getStoreKey(store, key));
-
+            let responseObject;
             if (storeObject) {
-                const responseObject = JSON.parse(storeObject);
+                responseObject = JSON.parse(storeObject);
                 responseObject[this.keyPath] = key;
-                resolve(responseObject);
             }
-            resolve();
+            resolve(responseObject);
         });
     }
 
     getAll(store, predicate) {
+        const isOpenError = this.validateIsOpened();
+        if (isOpenError) {
+            return Promise.reject(isOpenError);
+        }
+
         const keys = this.indexer[store].all();
         const filtered = typeof predicate === 'function';
 
@@ -158,32 +224,65 @@ class DomLocalStorageAdapter {
             return accObjects;
         }, []);
 
-        return responseObjects;
+        return Promise.resolve(responseObjects);
+    }
+
+    _executeGetKeys(store) {
+        const keys = this.indexer[store].all();
+        return keys
+            .map(key => this.mainKeyFromStoreKey(key, store));
     }
 
     getKeys(store) {
-        const keys = this.indexer[store].all();
-        return Promise.resolve(keys.map(key => this.mainKeyFromStoreKey(key, store)));
+        const isOpenError = this.validateIsOpened();
+        if (isOpenError) {
+            return Promise.reject(isOpenError);
+        }
+        return Promise.resolve(this._executeGetKeys(store));
+    }
+
+    _executeRemove(store, key) {
+        const storeKey = this.getStoreKey(store, key);
+        this.indexer[store].remove(storeKey);
+        DomLocalStorageAdapter.storage.removeItem(storeKey);
     }
 
     remove(store, key) {
+        const isOpenError = this.validateIsOpened();
+        if (isOpenError) {
+            return Promise.reject(isOpenError);
+        }
+
         if (!key) {
             return Promise.reject(errorCreator(DomLocalStorageAdapter.errorMessages.INVALID_KEY)({ adapter: this }));
         }
 
-        const storeKey = this.getStoreKey(store, key);
-        this.indexer[store].remove(storeKey);
-        DomLocalStorageAdapter.storage.removeItem(storeKey);
+        this._executeRemove(store, key);
 
         return Promise.resolve();
     }
 
-    async removeAll(store) {
-        const keys = await this.getKeys(store);
-        return Promise.all(keys.map(key => this.remove(store, key)));
+    _executeRemoveAll(store) {
+        const keys = this._executeGetKeys(store);
+        keys.forEach((key) => {
+            this._executeRemove(store, key);
+        });
+    }
+
+    removeAll(store) {
+        const isOpenError = this.validateIsOpened();
+        if (isOpenError) {
+            return Promise.reject(isOpenError);
+        }
+        return Promise.resolve(this._executeRemoveAll(store));
     }
 
     contains(store, key) {
+        const isOpenError = this.validateIsOpened();
+        if (isOpenError) {
+            return Promise.reject(isOpenError);
+        }
+
         if (!key) {
             Promise.reject(errorCreator(DomLocalStorageAdapter.errorMessages.INVALID_KEY)({ adapter: this }));
         }
@@ -193,22 +292,33 @@ class DomLocalStorageAdapter {
     }
 
     count(store, key) {
+        const isOpenError = this.validateIsOpened();
+        if (isOpenError) {
+            return Promise.reject(isOpenError);
+        }
+
         if (key) {
-            Promise.reject(errorCreator(DomLocalStorageAdapter.errorMessages.KEY_BASED_COUNT_IS_NOT_SUPPORTED)({ adapter: this }));
+            Promise.reject(
+                errorCreator(DomLocalStorageAdapter.errorMessages.KEY_BASED_COUNT_IS_NOT_SUPPORTED)({ adapter: this }));
         }
 
         return Promise.resolve(this.indexer[store].all().length);
     }
 
     close() {
+        this.isOpened = false;
         return Promise.resolve();
     }
 
-    destroy() {
+    _executeDestroy() {
         this.objectStoreNames.forEach((store) => {
-            this.removeAll(store);
+            this._executeRemoveAll(store);
             this.indexer[store].destroy();
         });
+    }
+    destroy() {
+        this._executeDestroy();
+        return Promise.resolve();
     }
 
     getStoreKey(store, key) {
@@ -217,6 +327,12 @@ class DomLocalStorageAdapter {
 
     mainKeyFromStoreKey(storeKey, store) {
         return storeKey.replace(`${this.name}.${store}.`, '');
+    }
+
+    validateIsOpened() {
+        return !this.isOpened
+            ? errorCreator(DomLocalStorageAdapter.errorMessages.STORAGE_NOT_OPENED)({ adapter: this })
+            : null;
     }
 }
 

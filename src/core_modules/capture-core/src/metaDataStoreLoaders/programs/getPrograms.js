@@ -38,7 +38,6 @@ async function getMissingPrograms(programs, storageController: StorageController
         const storeProgram = storePrograms[program.id];
         return !storeProgram || storeProgram.version !== program.version;
     });
-
     return missingPrograms.length > 0 ? missingPrograms : null;
 }
 
