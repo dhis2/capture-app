@@ -1,12 +1,17 @@
 // @flow
 import { connect } from 'react-redux';
-import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
 import EditEventSelector from '../EditEventSelector/EditEventSelector.container';
+import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
+import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
 
 const mapStateToProps = (state: ReduxState) => ({
+    ready: !state.editEventPage.isLoading,
     error: state.editEventPage.loadError,
 });
 
+const mapDispatchToProps = () => ({
+});
 
-export default connect(mapStateToProps, () => ({}))(withErrorMessageHandler()(EditEventSelector));
-
+// $FlowSuppress
+export default connect(
+    mapStateToProps, mapDispatchToProps)(withLoadingIndicator()(withErrorMessageHandler()(EditEventSelector)));
