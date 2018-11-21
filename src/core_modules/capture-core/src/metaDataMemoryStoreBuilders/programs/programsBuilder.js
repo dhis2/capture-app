@@ -1,7 +1,7 @@
 // @flow
 import buildProgramCollection from '../../metaDataFactory/program/programFactory';
 
-import getStorageController from '../../metaDataStores/storageController/metaDataStorageController';
+import { getUserStorageController } from '../../storageControllers';
 import StorageController from '../../storage/StorageController';
 
 function getPrograms(storageController: StorageController, storeName: string): Promise<Array<Object>> {
@@ -25,7 +25,7 @@ function getProgramIndicators(storageController: StorageController, storeName: s
 }
 
 async function getBuilderPrerequisites(...storeNames: Array<string>) {
-    const storageController = getStorageController();
+    const storageController = getUserStorageController();
 
     const cachedProgramsPromise = getPrograms(storageController, storeNames[0]);
     const cachedOptionSetsPromise = getOptionSets(storageController, storeNames[1]);

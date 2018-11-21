@@ -1,7 +1,4 @@
 // @flow
-import StorageController from '../../storage/StorageController';
-import IndexedDBAdapter from '../../storage/IndexedDBAdapter';
-import LocalStorageAdapter from '../../storage/DomLocalStorageAdapter';
 import programStoresKeys from '../programs/programsStoresKeys';
 import trackedEntityStoresKeys from '../trackedEntityAttributes/trackedEntityAttributesStoresKeys';
 
@@ -16,12 +13,14 @@ import organisationUnitApiSpecification from '../../api/apiSpecifications/organi
 import getOrganisationUnitsLoadSpecification
     from '../../apiToStore/loadSpecifications/getOrganisationUnitsLoadSpecification';
 
+import executeUsersCacheMaintenance from '../maintenance/usersCacheMaintenance';
 import getProgramsData from '../programs/getPrograms';
 import getTrackedEntityAttributes from '../trackedEntityAttributes/getTrackedEntityAttributes';
 import getOptionSets from '../optionSets/getOptionSets';
 
-import objectStores from './metaDataObjectStores.const';
-import { set as setStorageController } from '../../metaDataStores/storageController/metaDataStorageController';
+import { metaDataStores as objectStores } from '../../storageControllers/stores';
+import { getUserStorageController } from '../../storageControllers';
+import StorageController from '../../storage/StorageController';
 
 const coreLoadSpecifications: Array<LoadSpecification> = [
     getConstantsLoadSpecification(objectStores.CONSTANTS),
@@ -35,34 +34,9 @@ function loadCoreMetaData(storageController: StorageController) {
     return Promise.all(coreLoadSpecifications.map(loadSpecification => loadSpecification.load(storageController)));
 }
 
-function getCacheVersion() {
-    const appCacheVersionAsString = appPackage.CACHE_VERSION; // eslint-disable-line
-    if (!appCacheVersionAsString) {
-        throw new Error('cache version not specified');
-    }
-    const appCacheVersion = Number(appCacheVersionAsString);
-    if (Number.isNaN(appCacheVersion) || !Number.isSafeInteger(appCacheVersion)) {
-        throw new Error('invalid cache version');
-    }
-    return appCacheVersion;
-}
-
-function createStorageController() {
-    const objectStoreList = Object.keys(objectStores).map(key => objectStores[key]);
-    const appCacheVersion = getCacheVersion();
-    const storageController =
-        new StorageController('dhis2ca', appCacheVersion, [IndexedDBAdapter, LocalStorageAdapter], objectStoreList);
-    setStorageController(storageController);
-    return storageController;
-}
-
-async function openStorage(storageController: StorageController) {
-    await storageController.open();
-}
-
 export default async function loadMetaData() {
-    const storageController = createStorageController();
-    await openStorage(storageController);
+    const storageController = getUserStorageController();
+    await executeUsersCacheMaintenance();
     await loadCoreMetaData(storageController);
     const { missingPrograms, missingOptionSetIdsFromPrograms } = await getProgramsData(storageController, {
         [programStoresKeys.PROGRAMS]: objectStores.PROGRAMS,

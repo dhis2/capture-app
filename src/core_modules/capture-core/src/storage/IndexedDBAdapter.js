@@ -1,4 +1,5 @@
 /* eslint-disable complexity */
+/* eslint-disable no-underscore-dangle */
 import isDefined from 'd2-utilizr/lib/isDefined';
 import isArray from 'd2-utilizr/lib/isArray';
 import errorCreator from '../utils/errorCreator';
@@ -77,13 +78,30 @@ class IndexedDBAdapter {
         this.keyPath = options.keyPath;
     }
 
-    open() {
+    _upgrade() {
+        this.objectStoreNames.forEach((name) => {
+            if (this.db.objectStoreNames.contains(name)) {
+                this.db.deleteObjectStore(name);
+            }
+        });
+
+        this.objectStoreNames.forEach((name) => {
+            this.db.createObjectStore(name);
+        });
+    }
+
+    open(onBeforeUpgrade, onAfterUpgrade) {
         const request = IndexedDBAdapter.indexedDB.open(this.name, this.version);
 
+        let successEventExecuted = false;
+        let upgradeIsExecuting = false;
         return new Promise((resolve, reject) => {
             request.onsuccess = (e) => {
                 this.db = e.target.result;
-                resolve();
+                successEventExecuted = true;
+                if (!upgradeIsExecuting) {
+                    resolve();
+                }
             };
 
             request.onerror = (error) => {
@@ -96,18 +114,27 @@ class IndexedDBAdapter {
 
             request.onupgradeneeded = (e) => {
                 this.db = e.target.result;
-
-                this.objectStoreNames.forEach((name) => {
-                    if (this.db.objectStoreNames.contains(name)) {
-                        this.db.deleteObjectStore(name);
-                    }
-                });
-
-                this.objectStoreNames.forEach((name) => {
-                    this.db.createObjectStore(name);
-                });
+                const tx = e.target.transaction;
+                upgradeIsExecuting = true;
+                const onBeforeUpgradePromise = onBeforeUpgrade ? onBeforeUpgrade({ get: (store, key) => this._get(store, key, tx) }) : Promise.resolve();
+                onBeforeUpgradePromise
+                    .then(() => {
+                        this._upgrade();
+                    })
+                    .then(() => {
+                        return onAfterUpgrade && onAfterUpgrade({ set: (store, data) => this.set_(store, data, tx) });
+                    })
+                    .then(() => {
+                        if (successEventExecuted) {
+                            resolve();
+                        }
+                    });
             };
         });
+    }
+
+    _set(store, dataObject, tx) {
+        
     }
 
     set(store, dataObject) {
@@ -210,6 +237,26 @@ class IndexedDBAdapter {
         });
     }
 
+    _get(store, key, tx) {
+        return new Promise((resolve, reject) => {
+            const objectStore = tx.objectStore(store);
+            const request = objectStore.get(key);
+            request.onsuccess = (e) => {
+                const object = e.target.result;
+
+                if (isDefined(object)) {
+                    object[this.keyPath] = key;
+                }
+
+                resolve(object);
+            };
+
+            request.onerror = (error) => {
+                reject(errorCreator(IndexedDBAdapter.errorMessages.GET_FAILED)({ adapter: this, error }));
+            };
+        });
+    }
+
     get(store, key) {
         return new Promise((resolve, reject) => {
             if (!this.verifyDbSet(reject)) {
@@ -223,21 +270,13 @@ class IndexedDBAdapter {
 
             try {
                 const tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
-                const objectStore = tx.objectStore(store);
-                const request = objectStore.get(key);
-                request.onsuccess = (e) => {
-                    const object = e.target.result;
-
-                    if (isDefined(object)) {
-                        object[this.keyPath] = key;
-                    }
-
-                    resolve(object);
-                };
-
-                request.onerror = (error) => {
-                    reject(errorCreator(IndexedDBAdapter.errorMessages.GET_FAILED)({ adapter: this, error }));
-                };
+                this._get(store, key, tx)
+                    .then((object) => {
+                        resolve(object);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
             } catch (error) {
                 reject(errorCreator(IndexedDBAdapter.errorMessages.GET_FAILED)({ adapter: this, error }));
             }

@@ -90,13 +90,13 @@ function getDhisConfig() {
     if(!dhisConfig) {
         const dhisConfigPath = process.env.DHIS2_HOME && `${process.env.DHIS2_HOME}/config`;
         try {
-            dhisConfig = require(dhisConfigPath);
+            dhisConfig = require(dhisConfigPath);            
         } catch (e) {
             // Failed to load config file - use default config
             console.log('\nWARNING! Failed to load DHIS config:' + e.message);
             dhisConfig = {
                 baseUrl: 'http://localhost:8080/',
-                authorization: 'Basic YWRtaW46ZGlzdHJpY3Q=', // admin:district
+                authorization: 'Basic YWRtaW46ZGlzdHJpY3Q=', // admin:district YWRtaW46ZGlzdHJpY3Q= portal:aaBB11!! cG9ydGFsOmFhQkIxMSEh
             };
         }
     }

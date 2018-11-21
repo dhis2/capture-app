@@ -22,6 +22,7 @@ export default class StorageController {
         if (!name) {
             throw new Error(StorageController.errorMessages.INVALID_NAME);
         }
+        this.name = name;
 
         if (!objectStores || !isArray(objectStores) || objectStores.length === 0) {
             throw new Error(StorageController.errorMessages.NO_OBJECTSTORES_DEFINED);
@@ -37,6 +38,7 @@ export default class StorageController {
             }
             if (Adapter.isSupported()) {
                 this.adapter = new Adapter({ name, version, objectStores, keyPath: 'id' });
+                this.adapterType = Adapter;
                 return true;
             }
             return false;

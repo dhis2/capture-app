@@ -2,7 +2,7 @@
   "name": "capture-app",
   "homepage": ".",
   "version": "31.0.0",
-  "cacheVersion": "2",
+  "cacheVersion": "3",
   "private": false,
   "dependencies": {
     "@dhis2/d2-i18n": "^1.0.3",
@@ -83,7 +83,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn extract-pot && CI=true yarn test && git add -A ."
+      "pre-commit": "yarn extract-pot && git add -A ."
     }
   },
   "devDependencies": {
