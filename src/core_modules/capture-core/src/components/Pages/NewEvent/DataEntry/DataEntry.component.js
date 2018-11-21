@@ -13,6 +13,7 @@ import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFounda
 import withMainButton from './withMainButton';
 import getNoteValidatorContainers from './fieldValidators/note.validatorContainersGetter';
 import DataEntryNotes from '../../../DataEntry/DataEntryNotes.container';
+import DataEntryRelationships from '../../../DataEntry/DataEntryRelationships.component';
 
 import {
     withInternalChangeHandler,
@@ -76,6 +77,7 @@ const dataEntrySectionNames = {
     BASICINFO: 'BASICINFO',
     STATUS: 'STATUS',
     COMMENTS: 'COMMENTS',
+    LINKTO: 'LINKTO',
 };
 
 const overrideMessagePropNames = {
@@ -318,6 +320,30 @@ const buildNotesSettingsFn = () => {
     return notesSettings;
 };
 
+const buildRelationshipsSettingsFn = () => {
+    const relationshipsComponent =
+        withDefaultFieldContainer()(
+            withDefaultShouldUpdateInterface()(
+                withFilterProps(defaultFilterProps)(DataEntryRelationships),
+            ),
+        );
+    const relationshipsSettings = (props: Object) => ({
+        component: relationshipsComponent,
+        componentProps: createComponentProps(props, {
+            id: props.id,
+        }),
+        validatorContainers: [
+        ],
+        propName: 'relationship',
+        meta: {
+            placement: placements.BOTTOM,
+            section: dataEntrySectionNames.LINKTO,
+        },
+    });
+
+    return relationshipsSettings;
+};
+
 const saveHandlerConfig = {
     onIsCompleting: (props: Object) => props.completeDataEntryFieldValue,
     onFilterProps: (props: Object) => {
@@ -325,8 +351,8 @@ const saveHandlerConfig = {
         return passOnProps;
     },
 };
-
-const CommentField = withDataEntryField(buildNotesSettingsFn())(DataEntry);
+const RelationshipField = withDataEntryField(buildRelationshipsSettingsFn())(DataEntry);
+const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
 const FeedbackOutput = withFeedbackOutput()(ReportDateField);
@@ -378,6 +404,10 @@ const dataEntrySectionDefinitions = {
     [dataEntrySectionNames.COMMENTS]: {
         placement: placements.BOTTOM,
         name: i18n.t('Comments'),
+    },
+    [dataEntrySectionNames.LINKTO]: {
+        placement: placements.BOTTOM,
+        name: i18n.t('Link to'),
     },
 };
 class NewEventDataEntry extends Component<Props> {

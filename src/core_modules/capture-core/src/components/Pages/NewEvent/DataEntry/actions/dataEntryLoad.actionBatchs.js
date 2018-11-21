@@ -36,6 +36,11 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
         clientIgnore: true,
     },
     {
+        id: 'relationship',
+        type: 'TEXT',
+        clientIgnore: true,
+    },
+    {
         clientId: 'status',
         dataEntryId: 'complete',
         onConvertIn: convertStatusIn,

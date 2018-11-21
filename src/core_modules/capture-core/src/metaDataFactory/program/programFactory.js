@@ -29,123 +29,27 @@ import getRulesAndVariablesFromProgramIndicators from './getRulesAndVariablesFro
 import type { CachedProgramIndicator } from './getRulesAndVariablesFromIndicators';
 import type { ProgramRule, ProgramRuleVariable } from '../../RulesEngine/rulesEngine.types';
 import capitalizeFirstLetter from '../../utils/string/capitalizeFirstLetter';
+import buildSearchGroups from './searchGroupFactory';
 
-type CachedTranslation = {
-    property: string,
-    locale: string,
-    value: string
-};
+import type {
+    CachedStyle,
+    CachedDataElement,
+    CachedProgramStageDataElement,
+    CachedSectionDataElements,
+    CachedProgramStageSection,
+    CachedProgramStage,
+    CachedCategory,
+    CachedCategoryCombo,
+    CachedProgram,
+    CachedProgramStageDataElementsAsObject,
+    CachedOptionSet,
 
-type CachedStyle = {
-    color?: ?string,
-    icon?: ?string,
-};
-
-type CachedDataElement = {
-    id: string,
-    displayName: string,
-    displayShortName: string,
-    displayFormName: string,
-    valueType: string,
-    translations: Array<CachedTranslation>,
-    description: string,
-    optionSetValue: boolean,
-    optionSet: { id: string },
-    style: CachedStyle,
-};
-
-type CachedProgramStageDataElement = {
-    compulsory: boolean,
-    displayInReports: boolean,
-    renderOptionsAsRadio?: ?boolean,
-    renderType: {
-        DESKTOP: {
-            type: string,
-        },
-    },
-    dataElement: CachedDataElement,
-};
-
-type CachedSectionDataElements = {
-    id: string
-};
-
-type CachedProgramStageSection = {
-    id: string,
-    displayName: string,
-    dataElements: ?Array<CachedSectionDataElements>
-};
-
-type CachedDataEntryForm = {
-    id: string,
-    htmlCode: string,
-};
-
-type CachedProgramStage = {
-    id: string,
-    access: Object,
-    displayName: string,
-    description: ?string,
-    executionDateLabel?: ?string,
-    programStageSections: ?Array<CachedProgramStageSection>,
-    programStageDataElements: ?Array<CachedProgramStageDataElement>,
-    formType: string,
-    dataEntryForm: CachedDataEntryForm,
-    featureType: string,
-    validationStrategy: string,
-};
-
-type CachedCategoryOption = {
-    id: string,
-    displayName: string,
-};
-
-type CachedCategory = {
-    id: string,
-    displayName: string,
-    categoryOptions: ?Array<CachedCategoryOption>,
-};
-
-type CachedCategoryCombo = {
-    id: string,
-    displayName: string,
-    categories: ?Array<CachedCategory>,
-    isDefault: boolean,
-};
-
-type CachedProgram = {
-    id: string,
-    access: Object,
-    displayName: string,
-    displayShortName: string,
-    organisationUnits: Array<Object>,
-    programStages: Array<CachedProgramStage>,
-    programType: string,
-    categoryCombo: ?CachedCategoryCombo,
-    style?: ?CachedStyle,
-};
+} from './cache.types';
 
 type SectionSpecs = {
     id: string,
     displayName: string,
     dataElements: ?Array<CachedSectionDataElements>
-};
-
-type CachedProgramStageDataElementsAsObject = {
-    [id: string]: CachedProgramStageDataElement
-};
-
-type CachedOption = {
-    id: string,
-    code: string,
-    displayName: string,
-    style?: ?CachedStyle,
-};
-
-type CachedOptionSet = {
-    id: string,
-    valueType: string,
-    options: Array<CachedOption>
 };
 
 let currentLocale: ?string;
@@ -441,6 +345,7 @@ async function buildProgram(d2Program: CachedProgram) {
             _this.shortName = d2Program.displayShortName;
         });
 
+        program.searchGroups = await buildSearchGroups(d2Program, currentLocale);
         await d2Program.programStages.asyncForEach(async (d2ProgramStage: CachedProgramStage) => {
             program.addStage(await buildStage(d2ProgramStage));
         });

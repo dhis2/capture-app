@@ -1,6 +1,7 @@
 // @flow
 import isDefined from 'd2-utilizr/lib/isDefined';
 import Model from 'd2/lib/model/Model';
+import i18n from '@dhis2/d2-i18n';
 
 import ApiSpecification from '../ApiSpecificationDefinition/ApiSpecification';
 import getterTypes from '../fetcher/getterTypes.const';
@@ -91,7 +92,7 @@ function getProgramStages(d2ProgramStagesCollection) {
 
 function getOrganisationUnits(d2OrganisationUnitsCollection) {
     const d2OrganisationUnits = convertFromCollectionToArray(d2OrganisationUnitsCollection);
-
+    i18n.t('noTeiFound', { tei: 'person' });
     return d2OrganisationUnits.reduce((accOrganisationUnits, organisationUnit) => {
         accOrganisationUnits[organisationUnit.id] = {
             id: organisationUnit.id,
@@ -112,12 +113,12 @@ export default new ApiSpecification((_this) => {
             'access[*],' +
             'relatedProgram[id,displayName],' +
             'relationshipType[id,displayName],' +
-            'trackedEntity[id,displayName],' +
+            'trackedEntityType[id,displayName],' +
             'categoryCombo[id,displayName,isDefault,categories[id,displayName,categoryOptions[id,displayName,organisationUnits[id]]]],' +
             'organisationUnits[id,displayName],' +
             'userRoles[id,displayName],' +
             'programStages[*,dataEntryForm[*],programStageSections[id,displayName,description,sortOrder,dataElements[id]],programStageDataElements[*,dataElement[*,optionSet[id]]]],' +
-            'programTrackedEntityAttributes[*,trackedEntityAttribute[id,unique]]`,',
+            'programTrackedEntityAttributes[*,trackedEntityAttribute[*,optionSet[id]]]`,',
     };
     _this.converter = (d2Programs) => {
         if (!d2Programs || d2Programs.length === 0) {
@@ -138,6 +139,9 @@ export default new ApiSpecification((_this) => {
             organisationUnits: getOrganisationUnits(d2Program.organisationUnits),
             programType: d2Program.programType,
             style: d2Program.style,
+            trackedEntityType: d2Program.trackedEntityType,
+            programTrackedEntityAttributes: d2Program.programTrackedEntityAttributes,
+            minAttributesRequiredToSearch: d2Program.minAttributesRequiredToSearch,
         }));
 
         return programs;

@@ -5,9 +5,11 @@ import isFunction from 'd2-utilizr/src/isFunction';
 import Program from './Program';
 import RenderFoundation from '../RenderFoundation/RenderFoundation';
 import errorCreator from '../../utils/errorCreator';
+import SearchGroup from '../SearchGroup/SearchGroup';
 
 export default class TrackerProgram extends Program {
     _stages: Map<string, RenderFoundation>;
+    _searchGroups: Array<SearchGroup>;
 
     static errorMessages = {
         STAGE_NOT_FOUND: 'Stage was not found',
@@ -29,6 +31,14 @@ export default class TrackerProgram extends Program {
 
     get stages(): Map<string, RenderFoundation> {
         return this._stages;
+    }
+
+    get searchGroups(): Array<SearchGroup> {
+        return this._searchGroups;
+    }
+
+    set searchGroups(searchGroups: Array<SearchGroup>) {
+        this._searchGroups = searchGroups;
     }
 
     addStage(stage: RenderFoundation) {
