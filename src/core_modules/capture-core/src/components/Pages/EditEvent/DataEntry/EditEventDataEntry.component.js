@@ -266,6 +266,7 @@ const buildNotesSettingsFn = () => {
             label: 'Comments',
             onAddNote: props.onAddNote,
             id: props.id,
+            addNoteDisabled: !props.formFoundation.access.data.write,
         }),
         propName: 'note',
         validatorContainers: getNoteValidatorContainers(),
