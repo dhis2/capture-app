@@ -92,7 +92,6 @@ function getProgramStages(d2ProgramStagesCollection) {
 
 function getOrganisationUnits(d2OrganisationUnitsCollection) {
     const d2OrganisationUnits = convertFromCollectionToArray(d2OrganisationUnitsCollection);
-    i18n.t('noTeiFound', { tei: 'person' });
     return d2OrganisationUnits.reduce((accOrganisationUnits, organisationUnit) => {
         accOrganisationUnits[organisationUnit.id] = {
             id: organisationUnit.id,

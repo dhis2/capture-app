@@ -5,13 +5,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-11-19T13:41:21.607Z\n"
-"PO-Revision-Date: 2018-11-19T13:41:21.607Z\n"
+"POT-Creation-Date: 2018-11-22T08:33:43.504Z\n"
+"PO-Revision-Date: 2018-11-22T08:33:43.504Z\n"
 
 msgid "Please provide a valid date"
-msgstr ""
-
-msgid "noTeiFound"
 msgstr ""
 
 msgid "Columns to show in table"
