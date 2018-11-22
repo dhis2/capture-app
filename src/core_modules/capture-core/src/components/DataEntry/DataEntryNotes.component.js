@@ -10,6 +10,7 @@ import TextEditor from '../FormFields/TextEditor/TextEditor.component';
 
 type Props = {
     notes: Array<Object>,
+    addNoteDisabled?: ?boolean,
     onAddNote: (itemId: string, dataEntryId: string, value: string) => void,
     onBlur: (value: ?string, options: any) => void,
     value: ?string,
@@ -135,7 +136,7 @@ class DataEntryNotes extends React.Component<Props, State> {
     )
 
     render = () => {
-        const { notes, classes } = this.props;
+        const { notes, classes, addNoteDisabled } = this.props;
         return (
             <div className={classes.notesContainer}>
                 <List dense className={classes.notesList}>
@@ -153,9 +154,12 @@ class DataEntryNotes extends React.Component<Props, State> {
                         </ListItem>
                     ))}
                 </List>
-                <div className={classes.newNoteContainer}>
-                    { this.state.addIsOpen ? this.renderInput() : this.renderButton() }
-                </div>
+                {
+                    !addNoteDisabled &&
+                    <div className={classes.newNoteContainer}>
+                        { this.state.addIsOpen ? this.renderInput() : this.renderButton() }
+                    </div>
+                }
 
             </div>
         );
