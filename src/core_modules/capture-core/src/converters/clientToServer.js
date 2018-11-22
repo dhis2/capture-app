@@ -22,6 +22,7 @@ const valueConvertersForType = {
     [elementTypes.FILE_RESOURCE]: (rawValue: Object) => rawValue.value,
     [elementTypes.IMAGE]: (rawValue: Object) => rawValue.value,
     [elementTypes.COORDINATE]: (rawValue: Object) => `[${rawValue.longitude},${rawValue.latitude}]`,
+    [elementTypes.PERCENTAGE]: (rawValue: Object) => rawValue.replace('%', ''),
 };
 
 export function convertValue(type: $Values<typeof elementTypes>, value: any) {
