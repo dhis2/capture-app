@@ -25,7 +25,7 @@ function convertDateForEdit(rawValue: string): string {
 function convertDateTimeForEdit(rawValue: string): DateTimeFormValue {
     const dateTime = moment(rawValue);
     const dateString = dateTime.format('L');
-    const timeString = dateTime.format('LT');
+    const timeString = dateTime.format('HH:mm');
     return {
         date: dateString,
         time: timeString,
