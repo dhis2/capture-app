@@ -1,3 +1,5 @@
+// @flow
+
 import { actionCreator } from '../../actions/actions.utils';
 
 export const actionTypes = {
@@ -5,4 +7,4 @@ export const actionTypes = {
 };
 
 export const networkStatusChange =
-    (status: Boolean) => actionCreator(actionTypes.NETWORK_STATUS_CHANGE)({status});
+    (status: boolean) => actionCreator(actionTypes.NETWORK_STATUS_CHANGE)({ status });
