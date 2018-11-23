@@ -33,7 +33,6 @@ export const saveNewEventAddAnotherEpic = (action$: InputObservable, store: Redu
             const { formClientValues, mainDataClientValues } = getNewEventClientValues(state, dataEntryKey, formFoundation);
 
             const serverData = getNewEventServerData(state, formFoundation, formClientValues, mainDataClientValues);
-
             const clientEvent = {
                 ...mainDataClientValues,
                 eventId: uuid(),
@@ -44,7 +43,7 @@ export const saveNewEventAddAnotherEpic = (action$: InputObservable, store: Redu
             const clientEventValues = { ...formClientValues, created: moment().toISOString() };
 
             return batchActions([
-                startSaveNewEventAddAnother(serverData, state.currentSelections),
+                startSaveNewEventAddAnother(serverData, state.currentSelections, clientEvent.eventId),
                 newRecentlyAddedEvent(clientEvent, clientEventValues),
                 prependListItem(listId, clientEvent.eventId),
             ], newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH);
@@ -53,7 +52,7 @@ export const saveNewEventAddAnotherEpic = (action$: InputObservable, store: Redu
 export const saveNewEventAddAnotherFailedEpic = (action$: InputObservable) =>
     // $FlowSuppress
     action$.ofType(newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER)
-        .map(() => {
-            const clientId = '';
+        .map((action) => {
+            const clientId = action.meta.clientId;
             return removeListItem(listId, clientId);
         });

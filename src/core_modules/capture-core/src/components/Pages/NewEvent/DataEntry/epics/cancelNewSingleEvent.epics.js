@@ -13,6 +13,10 @@ export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) 
     action$.ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE)
         .map(() => {
             const state = store.getState();
+            if (!state.offline.online) {
+                return cancelNewEventNoWorkingListUpdateNeeded();
+            }
+
             const recentlyAddedEventsCount = Object
                 .keys(state.recentlyAddedEvents)
                 .length;

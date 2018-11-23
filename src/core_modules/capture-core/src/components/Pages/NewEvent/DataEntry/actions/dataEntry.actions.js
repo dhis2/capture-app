@@ -78,17 +78,17 @@ export const requestSaveNewEventAddAnother = (eventId: string, dataEntryId: stri
         formFoundation,
     }, { skipLogging: ['formFoundation'] });
 
-export const startSaveNewEventAddAnother = (serverData: Object, selections: Object) =>
+export const startSaveNewEventAddAnother = (serverData: Object, selections: Object, clientId: string) =>
     actionCreator(actionTypes.START_SAVE_NEW_EVENT_ADD_ANOTHER)({ selections }, {
         offline: {
             effect: {
                 url: 'events',
                 method: methods.POST,
                 data: serverData,
-                clientId: 'thisisanid',
+                clientId,
             },
             commit: { type: actionTypes.NEW_EVENT_SAVED_ADD_ANOTHER, meta: { selections } },
-            rollback: { type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER, meta: { selections } },
+            rollback: { type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER, meta: { selections, clientId } },
         },
     });
 
