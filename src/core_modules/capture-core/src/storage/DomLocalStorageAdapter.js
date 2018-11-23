@@ -87,16 +87,32 @@ class DomLocalStorageAdapter {
         this.isOpened = false;
     }
 
-    open() {
+    /*
+        onBeforeUpgrade: a callback method, getting an object with a "get" property as argument. The "get" property can be used to retrieve something from Local Storage
+        onAfterUpgrade: a callback method, getting an ojbect with a "set" property as argument. The "set" property can be used to set something in Local Storage
+    */
+    open(onBeforeUpgrade, onAfterUpgrade) {
         const versionKey = `${this.name}.${DomLocalStorageAdapter.CACHEVERSIONKEY}`;
         const inUseVersionString = DomLocalStorageAdapter.storage.getItem(versionKey);
         const inUseVersion = inUseVersionString && JSON.parse(inUseVersionString);
+        this.isOpened = true;
 
         if (this.version !== inUseVersion) {
-            this._executeDestroy();
-            DomLocalStorageAdapter.storage.setItem(versionKey, JSON.stringify(this.version));
+            return Promise.resolve()
+                .then(() => onBeforeUpgrade
+                    && onBeforeUpgrade({
+                        get: this.get.bind(this),
+                    }),
+                )
+                .then(() => {
+                    this._executeDestroy();
+                    DomLocalStorageAdapter.storage.setItem(versionKey, JSON.stringify(this.version));
+                    return Promise.resolve();
+                })
+                .then(() => onAfterUpgrade && onAfterUpgrade({
+                    set: this.set.bind(this),
+                }));
         }
-        this.isOpened = true;
         return Promise.resolve();
     }
 

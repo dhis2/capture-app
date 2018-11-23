@@ -12,13 +12,32 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-    const idbAdapter = new IndexedDBAdapter(options);
-    idbAdapter.close();
 });
 
 it('open IndexedDB without error', async () => {
     const idbAdapter = new IndexedDBAdapter(options);
     await idbAdapter.open();
+});
+
+it('upgrade IndexedDB and retain some data', async () => {
+    const idbAdapter = new IndexedDBAdapter(options);
+    await idbAdapter.open();
+    await idbAdapter.set(storeName, { id: '1', value: { prop1: 'prop1value' } });
+    await idbAdapter.close();
+
+    const idbAdapterVersion2 = new IndexedDBAdapter({
+        ...options,
+        version: 2,
+    });
+    let tempValue;
+    await idbAdapterVersion2.open((adapter) => {
+        return adapter.get(storeName, '1').then((v) => { tempValue = v; });
+    },
+    (adapter) => {
+        return adapter.set(storeName, tempValue);
+    });
+    const valueAfterUpgrade = await idbAdapterVersion2.get(storeName, '1');
+    expect(valueAfterUpgrade.value.prop1).toEqual('prop1value');
 });
 
 it('close IndexedDB without error', async () => {

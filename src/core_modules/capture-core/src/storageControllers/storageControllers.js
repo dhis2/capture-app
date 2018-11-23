@@ -4,6 +4,7 @@ import IndexedDBAdapter from '../storage/IndexedDBAdapter';
 import LocalStorageAdapter from '../storage/DomLocalStorageAdapter';
 import createUserStorageController from './userStorageController';
 import createMainStorageController from './mainStorageController';
+import { reduxPersistStores } from './stores/index';
 
 const MAIN_STORAGE_KEY = 'dhis2ca';
 
@@ -16,16 +17,17 @@ function initUserControllerAsync(adapterType: typeof IndexedDBAdapter | typeof L
 
     let upgradeTempData;
     return userStorageController.open(
+        storage => storage
+            .get(reduxPersistStores.REDUX_PERSIST, 'reduxPersist:offline')
+            .then((data) => {
+                upgradeTempData = data;
+            }),
         (storage) => {
+            if (!upgradeTempData) {
+                return null;
+            }
             return storage
-                .get('reduxPersist', 'reduxPersist:offline')
-                .then((data) => {
-                    upgradeTempData = data;
-                });
-        },
-        (storage) => {
-            return storage
-                .set('reduxPersist,', upgradeTempData);
+                .set(reduxPersistStores.REDUX_PERSIST, upgradeTempData);
         },
     );
 }

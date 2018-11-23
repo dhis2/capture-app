@@ -90,18 +90,16 @@ class IndexedDBAdapter {
         });
     }
 
+    /*
+        onBeforeUpgrade: a callback method, getting an object with a "get" property as argument. The "get" property can be used to retrieve something from IndexedDB
+        onAfterUpgrade: a callback method, getting an ojbect with a "set" property as argument. The "set" property can be used to set something in IndexedDB
+    */
     open(onBeforeUpgrade, onAfterUpgrade) {
         const request = IndexedDBAdapter.indexedDB.open(this.name, this.version);
-
-        let successEventExecuted = false;
-        let upgradeIsExecuting = false;
         return new Promise((resolve, reject) => {
             request.onsuccess = (e) => {
                 this.db = e.target.result;
-                successEventExecuted = true;
-                if (!upgradeIsExecuting) {
-                    resolve();
-                }
+                resolve();
             };
 
             request.onerror = (error) => {
@@ -115,26 +113,52 @@ class IndexedDBAdapter {
             request.onupgradeneeded = (e) => {
                 this.db = e.target.result;
                 const tx = e.target.transaction;
-                upgradeIsExecuting = true;
-                const onBeforeUpgradePromise = onBeforeUpgrade ? onBeforeUpgrade({ get: (store, key) => this._get(store, key, tx) }) : Promise.resolve();
-                onBeforeUpgradePromise
+
+                return Promise.resolve()
+                    .then(() => onBeforeUpgrade
+                        && onBeforeUpgrade({
+                            get: (store, key) => {
+                                if (!this.db.objectStoreNames.contains(store)) {
+                                    return Promise.resolve(null);
+                                }
+                                return this._get(store, key, tx);
+                            },
+                        }),
+                    )
                     .then(() => {
                         this._upgrade();
+                        return Promise.resolve();
                     })
-                    .then(() => {
-                        return onAfterUpgrade && onAfterUpgrade({ set: (store, data) => this.set_(store, data, tx) });
-                    })
-                    .then(() => {
-                        if (successEventExecuted) {
-                            resolve();
-                        }
-                    });
+                    .then(() => onAfterUpgrade && onAfterUpgrade({
+                        set: (store, data) => {
+                            const abortTransaction = IndexedDBAdapter.getAbortTransaction(tx, reject);
+                            return this
+                                ._set(store, data, tx)
+                                .catch((error) => {
+                                    abortTransaction(error);
+                                });
+                        },
+                    }));
             };
         });
     }
 
     _set(store, dataObject, tx) {
-        
+        return new Promise((resolve, reject) => {
+            const storeObject = JSON.parse(JSON.stringify(dataObject));
+            const key = storeObject[this.keyPath];
+            delete storeObject[this.keyPath];
+            const objectStore = tx.objectStore(store);
+            const request = objectStore.put(storeObject, key);
+
+            request.onsuccess = () => {
+                resolve(storeObject);
+            };
+
+            request.onerror = (error) => {
+                reject(errorCreator(IndexedDBAdapter.errorMessages.SET_FAILED)({ adapter: this, error }));
+            };
+        });
     }
 
     set(store, dataObject) {
@@ -148,28 +172,19 @@ class IndexedDBAdapter {
                 return;
             }
 
-            const storeObject = JSON.parse(JSON.stringify(dataObject));
-            const key = storeObject[this.keyPath];
-            delete storeObject[this.keyPath];
-
             let tx;
             let abortTransaction;
             try {
                 tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_WRITE);
                 abortTransaction = IndexedDBAdapter.getAbortTransaction(tx, reject);
-                const objectStore = tx.objectStore(store);
-                const request = objectStore.put(storeObject, key);
-
-                request.onsuccess = () => {
-                    resolve(storeObject);
-                };
-
-                request.onerror = (error) => {
-                    if (tx) {
-                        abortTransaction(errorCreator(IndexedDBAdapter.errorMessages.SET_FAILED)({ adapter: this, error }));
-                    }
-                    reject(errorCreator(IndexedDBAdapter.errorMessages.SET_FAILED)({ adapter: this, error }));
-                };
+                this
+                    ._set(store, dataObject, tx)
+                    .then((storeObject) => {
+                        resolve(storeObject);
+                    })
+                    .catch((error) => {
+                        abortTransaction(error);
+                    });
             } catch (error) {
                 if (tx) {
                     abortTransaction(errorCreator(IndexedDBAdapter.errorMessages.SET_FAILED)({ adapter: this, error }));
