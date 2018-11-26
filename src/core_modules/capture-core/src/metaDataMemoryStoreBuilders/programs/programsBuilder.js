@@ -1,8 +1,8 @@
 // @flow
-import buildProgramCollection from '../../metaDataFactory/program/programFactory';
+import StorageController from 'capture-core-utils/storage/StorageController';
 
+import buildProgramCollection from '../../metaDataFactory/program/programFactory';
 import { getUserStorageController } from '../../storageControllers';
-import StorageController from '../../storage/StorageController';
 
 function getPrograms(storageController: StorageController, storeName: string): Promise<Array<Object>> {
     return storageController.getAll(storeName);

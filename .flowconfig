@@ -14,3 +14,4 @@ suppress_comment= \\(.\\|\n\\)*\\$FlowSuppress
 suppress_comment= \\(.\\|\n\\)*\\$FlowFixMe
 module.name_mapper='^capture-core' ->'<PROJECT_ROOT>/src/core_modules/capture-core/src'
 module.name_mapper='^capture-ui' ->'<PROJECT_ROOT>/src/core_modules/capture-ui/src'
+module.name_mapper='^capture-core-utils' ->'<PROJECT_ROOT>/src/core_modules/capture-core-utils/src'

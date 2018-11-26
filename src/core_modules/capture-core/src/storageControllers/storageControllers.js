@@ -1,7 +1,7 @@
 // @flow
-import StorageController from '../storage/StorageController';
-import IndexedDBAdapter from '../storage/IndexedDBAdapter';
-import LocalStorageAdapter from '../storage/DomLocalStorageAdapter';
+import StorageController from 'capture-core-utils/storage/StorageController';
+import IndexedDBAdapter from 'capture-core-utils/storage/IndexedDBAdapter';
+import LocalStorageAdapter from 'capture-core-utils/storage/DomLocalStorageAdapter';
 import createUserStorageController from './userStorageController';
 import createMainStorageController from './mainStorageController';
 import { reduxPersistStores } from './stores/index';

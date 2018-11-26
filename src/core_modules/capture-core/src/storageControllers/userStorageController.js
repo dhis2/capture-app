@@ -1,6 +1,6 @@
 // @flow
+import StorageController from 'capture-core-utils/storage/StorageController';
 import { getCurrentUser } from '../d2/d2Instance';
-import StorageController from '../storage/StorageController';
 import { metaDataStores, reduxPersistStores } from './stores/index';
 
 function getStorageName(mainStorageName: string) {

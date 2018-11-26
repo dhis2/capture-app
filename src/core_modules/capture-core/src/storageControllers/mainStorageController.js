@@ -1,5 +1,5 @@
 // @flow
-import StorageController from '../storage/StorageController';
+import StorageController from 'capture-core-utils/storage/StorageController';
 import { maintenanceStores } from './stores';
 
 function createStorageController(storageName: string, AdapterClasses: Array<any>) {

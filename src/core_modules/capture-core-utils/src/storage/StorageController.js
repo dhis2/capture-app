@@ -1,6 +1,6 @@
 /* eslint-disable complexity */
 import isArray from 'd2-utilizr/lib/isArray';
-import errorCreator from '../utils/errorCreator';
+import errorCreator from '../errorCreator';
 
 export default class StorageController {
     static errorMessages = {

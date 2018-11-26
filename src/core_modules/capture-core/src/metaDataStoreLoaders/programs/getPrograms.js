@@ -1,4 +1,6 @@
 // @flow
+import StorageController from 'capture-core-utils/storage/StorageController';
+
 import chunk from '../../utils/chunk';
 
 import metaProgramsSpec from '../../api/apiSpecifications/metaPrograms.apiSpecification';
@@ -14,8 +16,6 @@ import getProgramRulesVariablesLoadSpecification
 import getProgramIndicatorsLoadSpecification
     from '../../apiToStore/loadSpecifications/getProgramIndicatorsLoadSpecification';
 
-
-import StorageController from '../../storage/StorageController';
 import programsStoresKeys from './programsStoresKeys';
 
 const batchSize = 50;

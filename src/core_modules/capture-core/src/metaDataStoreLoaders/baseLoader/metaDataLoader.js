@@ -1,4 +1,5 @@
 // @flow
+import StorageController from 'capture-core-utils/storage/StorageController';
 import programStoresKeys from '../programs/programsStoresKeys';
 import trackedEntityStoresKeys from '../trackedEntityAttributes/trackedEntityAttributesStoresKeys';
 
@@ -20,7 +21,6 @@ import getOptionSets from '../optionSets/getOptionSets';
 
 import { metaDataStores as objectStores } from '../../storageControllers/stores';
 import { getUserStorageController } from '../../storageControllers';
-import StorageController from '../../storage/StorageController';
 
 const coreLoadSpecifications: Array<LoadSpecification> = [
     getConstantsLoadSpecification(objectStores.CONSTANTS),

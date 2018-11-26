@@ -1,10 +1,9 @@
 // @flow
+import StorageController from 'capture-core-utils/storage/StorageController';
 import chunk from '../../utils/chunk';
 
 import optionSetsApiSpec from '../../api/apiSpecifications/optionSets.apiSpecification';
 import getOptionSetsLoadSpecification from '../../apiToStore/loadSpecifications/getOptionSetsLoadSpecification';
-
-import StorageController from '../../storage/StorageController';
 
 const batchSize = 50;
 
