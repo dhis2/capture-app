@@ -67,13 +67,15 @@ const styles = (theme: Theme) => ({
         justifyContent: 'flex-end',
     },
     tableContainer: {
-        overflow: 'auto',
+        overflowX: 'auto',
     },
     optionsIcon: {
         color: theme.palette.primary.main,
     },
     table: {},
-    row: {
+    row: {},
+    loadingRow: {
+        height: 100,
     },
     dataRow: {
         cursor: 'pointer',
@@ -102,6 +104,9 @@ const styles = (theme: Theme) => ({
         fontSize: theme.typography.pxToRem(12),
         color: theme.palette.text.secondary,
         fontWeight: theme.typography.fontWeightMedium,
+    },
+    loadingCell: {
+        textAlign: 'center',
     },
     paginationContainer: {
         fontSize: theme.typography.pxToRem(12),
@@ -151,8 +156,10 @@ type Props = {
         headerCell: string,
         bodyCell: string,
         footerCell: string,
+        loadingCell: string,
         row: string,
         dataRow: string,
+        loadingRow: string,
         sortLabelChilden: string,
     },
     sortById: string,
@@ -181,9 +188,19 @@ class EventsList extends React.Component<Props> {
         elementTypes.INTEGER_NEGATIVE,
         elementTypes.INTEGER_ZERO_OR_POSITIVE,
     ];
-
+    columnHeaderInstances: Array<HTMLElement>;
+    constructor(props: Props) {
+        super(props);
+        this.columnHeaderInstances = [];
+    }
     getSortHandler = (id: string) => (direction: string) => {
         this.props.onSort(id, direction);
+    }
+
+    setColumnWidth(columnInstance, index) {
+        if (columnInstance && !this.props.isUpdating) {
+            this.columnHeaderInstances[index] = columnInstance;
+        }
     }
 
     renderHeaderRow(visibleColumns: Array<Column>) {
@@ -191,10 +208,12 @@ class EventsList extends React.Component<Props> {
         const sortByDirection = this.props.sortByDirection;
 
         const headerCells = visibleColumns
-            .map(column => (
+            .map((column, index) => (
                 <HeaderCell
+                    innerRef={(instance) => { this.setColumnWidth(instance, index); }}
                     key={column.id}
                     className={classNames(this.props.classes.cell, this.props.classes.headerCell)}
+                    style={{ width: this.props.isUpdating && this.columnHeaderInstances.length - 1 >= index ? this.columnHeaderInstances[index].clientWidth : 'auto' }}
                 >
                     <SortLabelWrapper
                         isActive={column.id === sortById}
@@ -257,12 +276,29 @@ class EventsList extends React.Component<Props> {
             null;
     }
 
-    renderRows(visibleColumns: Array<Column>) {
-        const dataSource = this.props.dataSource;
-        const { classes, ...customEndCellBodyProps } = this.props;
+    renderBody(visibleColumns: Array<Column>) {
+        const { classes, getCustomEndCellBody, isUpdating } = this.props;
+        const columnsCount = visibleColumns.length + (getCustomEndCellBody ? 1 : 0);
+
+        return isUpdating ?
+            (
+                <Row
+                    className={classes.loadingRow}
+                >
+                    <Cell
+                        colSpan={columnsCount}
+                        className={classNames(classes.cell, classes.bodyCell, classes.loadingCell)}
+                    >
+                        <LoadingMask />
+                    </Cell>
+                </Row>
+            ) : this.renderRows(visibleColumns, columnsCount);
+    }
+
+    renderRows(visibleColumns: Array<Column>, columnsCount: number) {
+        const { dataSource, classes, ...customEndCellBodyProps } = this.props;
 
         if (!dataSource || dataSource.length === 0) {
-            const columnsCount = visibleColumns.length;
             return (
                 <Row
                     className={classes.row}
@@ -336,20 +372,16 @@ class EventsList extends React.Component<Props> {
                 <div
                     className={classes.tableContainer}
                 >
-                    {this.props.isUpdatingWithDialog && <DialogLoadingMask />}
-                    {this.props.isUpdating && <LoadingMask /> }
-                    {!this.props.isUpdating &&
-                        <Table
-                            className={classes.table}
-                        >
-                            <Head>
-                                {this.renderHeaderRow(visibleColumns)}
-                            </Head>
-                            <Body>
-                                {this.renderRows(visibleColumns)}
-                            </Body>
-                        </Table>
-                    }
+                    <Table
+                        className={classes.table}
+                    >
+                        <Head>
+                            {this.renderHeaderRow(visibleColumns)}
+                        </Head>
+                        <Body>
+                            {this.renderBody(visibleColumns)}
+                        </Body>
+                    </Table>
                 </div>
                 <div
                     className={classes.paginationContainer}
@@ -359,13 +391,17 @@ class EventsList extends React.Component<Props> {
                         onGetLabelDisplayedRows={this.getPaginationLabelDisplayedRows}
                     />
                 </div>
+                {this.props.isUpdatingWithDialog && <DialogLoadingMask />}
             </div>
         );
     }
 }
-
 /**
  * Create the event list for a event capture program
  * @namespace EventsList
  */
-export default withHeader()(withListHeaderWrapper()(withCustomEndCell(eventContentMenuSettings)(withFilterSelectors()(withStyles(styles)(EventsList)))));
+export default withHeader()(
+    withListHeaderWrapper()(
+        withCustomEndCell(eventContentMenuSettings)(
+            withFilterSelectors()(
+                withStyles(styles)(EventsList)))));
