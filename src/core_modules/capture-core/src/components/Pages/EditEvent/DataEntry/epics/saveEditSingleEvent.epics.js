@@ -1,5 +1,5 @@
 // @flow
-import { replace } from 'react-router-redux';
+import { push } from 'react-router-redux';
 import moment from '../../../../../utils/moment/momentResolver';
 import {
     actionTypes as editEventDataEntryActionTypes,
@@ -62,5 +62,5 @@ export const saveEditEventLocationChangeEpic = (action$: InputObservable, store:
             const state = store.getState();
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
-            return replace(`/programId=${programId}&orgUnitId=${orgUnitId}`);
+            return push(`/programId=${programId}&orgUnitId=${orgUnitId}`);
         });
