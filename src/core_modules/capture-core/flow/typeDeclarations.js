@@ -118,6 +118,9 @@ declare type Theme = {
             dark: string,
         },
         required: string,
+        info: {
+            main: string,
+        }
     },
     typography: {
         pxToRem: (size: number) => string,

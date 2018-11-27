@@ -10,19 +10,19 @@ const styles = (theme: Theme) => ({
     },
     error: {
         color: theme.palette.error.main,
-        fontSize: theme.typography.pxToRem(12),
+        fontSize: theme.typography.pxToRem(14),
     },
     warning: {
         color: theme.palette.warning.dark,
-        fontSize: theme.typography.pxToRem(12),
+        fontSize: theme.typography.pxToRem(14),
     },
     info: {
         color: 'green',
-        fontSize: theme.typography.pxToRem(12),
+        fontSize: theme.typography.pxToRem(14),
     },
     validating: {
         color: 'orange',
-        fontSize: theme.typography.pxToRem(12),
+        fontSize: theme.typography.pxToRem(14),
     },
 });
 
