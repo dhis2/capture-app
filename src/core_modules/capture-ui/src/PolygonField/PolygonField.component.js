@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import ReactDOM from 'react-dom';
 import i18n from '@dhis2/d2-i18n';
 import MapIcon from '@material-ui/icons/Map';
 import CheckIcon from '@material-ui/icons/Check';
@@ -41,11 +40,6 @@ type FeatureCollection = {
     type: string,
     features: Array<Feature>,
 };
-
-
-function isPointInRect({ x, y }, { left, right, top, bottom }) {
-    return x >= left && x <= right && y >= top && y <= bottom;
-}
 
 function coordsToFeatureCollection(coordinates): ?FeatureCollection {
     if (!coordinates) {
@@ -99,6 +93,9 @@ export default class D2Polygon extends React.Component<Props, State> {
                 const bounds = coordinates.map(c => ([c[1], c[0]]));
                 map.fitBounds(bounds);
             }
+        } else if (reactFGref) {
+            const leafletFG = reactFGref.leafletElement;
+            leafletFG.clearLayers();
         }
     };
 
@@ -131,7 +128,7 @@ export default class D2Polygon extends React.Component<Props, State> {
         const coordinates = e.layers.getLayers()[0].toGeoJSON().geometry.coordinates;
         this.setState({ mapCoordinates: coordinates, zoom: e.target.getZoom() });
     };
-    onMapPolygonDelete = (e: any) => {
+    onMapPolygonDelete = () => {
         this.setState({ mapCoordinates: null });
     };
 
@@ -147,7 +144,7 @@ export default class D2Polygon extends React.Component<Props, State> {
             { open: this.state.showMap, onClose: this.closeMap },
             // $FlowSuppress
             [...React.Children.toArray(this.props.mapDialog.props.children), (
-                <div className={defaultClasses.dialogContent}>
+                <div className={defaultClasses.dialogContent} key="dialogContent">
                     {this.renderMap()}
                     {this.renderDialogActions()}
                 </div>
@@ -156,16 +153,10 @@ export default class D2Polygon extends React.Component<Props, State> {
         return clonedDialog;
     }
 
-    setEditControlInstance = (instance: any) => {
-        var s = 1;
-    }
-    removeTest = () => {
-        var s = 1;
-    }
-
     renderMap = () => {
-        const { zoom, bounds } = this.state;
+        const { zoom } = this.state;
         const featureCollection = this.getFeatureCollection(this.state.mapCoordinates);
+        const hasPosition = !!featureCollection;
         const center = this.getCenter(featureCollection);
         return (
             <div className={defaultClasses.mapContainer}>
@@ -176,9 +167,7 @@ export default class D2Polygon extends React.Component<Props, State> {
                         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                     />
                     <FeatureGroup ref={(reactFGref) => { this.onFeatureGroupReady(reactFGref, featureCollection); }}>
-                        <DeleteControl onClick={this.removeTest}/>
                         <EditControl
-                            ref={(editControlInstance) => { this.setEditControlInstance(editControlInstance); }}
                             position="topright"
                             onEdited={this.onMapPolygonEdited}
                             onCreated={this.onMapPolygonCreated}
@@ -194,6 +183,7 @@ export default class D2Polygon extends React.Component<Props, State> {
                                 remove: false,
                             }}
                         />
+                        <DeleteControl onClick={this.onMapPolygonDelete} disabled={!hasPosition} />
                     </FeatureGroup>
                 </Map>
             </div>

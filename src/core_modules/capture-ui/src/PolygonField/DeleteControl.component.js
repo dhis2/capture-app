@@ -1,24 +1,58 @@
+// @flow
 import React from 'react';
 import ReactDOM from 'react-dom';
+import i18n from '@dhis2/d2-i18n';
+import classNames from 'classnames';
 import L from 'leaflet';
 import { MapControl } from 'react-leaflet';
 
-export default class CenterControl extends MapControl {  // note we're extending MapControl from react-leaflet, not Component from react
+type Props = {
+    position?: any,
+    onClick: () => void,
+    disabled?: ?boolean,
+}
+
+export default class DeleteControl extends MapControl<any, Props> {
     componentWillMount() {
-        const centerControl = L.control({ position: 'topright' });  // see http://leafletjs.com/reference.html#control-positions for other positions
+        const deleteControl = L.control({ position: 'topright' });
+        const text = i18n.t('Delete polygon');
         const jsx = (
-            // PUT YOUR JSX FOR THE COMPONENT HERE:
-            <div onClick={this.props.onClick}>
-              Delete
+            <div className="leaflet-draw-toolbar leaflet-bar">
+                <a
+                    className={classNames('leaflet-draw-edit-remove', { 'leaflet-disabled': this.props.disabled })}
+                    onClick={this.onClick}
+                    title={text}
+                    role="button"
+                    tabIndex="0"
+                >
+                    <span />
+                </a>
             </div>
         );
 
-        centerControl.onAdd = function (map) {
+        deleteControl.onAdd = (map) => {
             const div = L.DomUtil.create('div', '');
             ReactDOM.render(jsx, div);
             return div;
         };
+        this.leafletElement = deleteControl;
+    }
 
-        this.leafletElement = centerControl;
+    onClick = () => {
+        if (!this.props.disabled) {
+            this.props.onClick();
+        }
+    }
+
+    updateLeafletElement(fromProps: Props, toProps: Props): void {
+        if (toProps.position !== fromProps.position) {
+            this.leafletElement.setPosition(toProps.position);
+        }
+        if (toProps.disabled !== fromProps.disabled) {
+            const buttons = this.leafletElement.getContainer().getElementsByClassName('leaflet-draw-edit-remove');
+            if (buttons && buttons.length > 0) {
+                buttons[0].className = classNames('leaflet-draw-edit-remove', { 'leaflet-disabled': toProps.disabled });
+            }
+        }
     }
 }

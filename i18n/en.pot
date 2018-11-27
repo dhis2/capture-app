@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-11-08T09:28:50.899Z\n"
-"PO-Revision-Date: 2018-11-08T09:28:50.899Z\n"
+"POT-Creation-Date: 2018-11-27T21:16:26.766Z\n"
+"PO-Revision-Date: 2018-11-27T21:16:26.766Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -332,6 +332,9 @@ msgid "Error saving event"
 msgstr ""
 
 msgid "Could not save event. See log for details"
+msgstr ""
+
+msgid "Delete polygon"
 msgstr ""
 
 msgid "Choose one or more dates..."

@@ -2,10 +2,10 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
-import AddLocationIcon from '../Icons/AddLocationIcon.component';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search';
 import ClearIcon from '@material-ui/icons/Clear';
+import AddLocationIcon from '../Icons/AddLocationIcon.component';
 import CoordinateInput from '../internal/CoordinateInput/CoordinateInput.component';
 import defaultClasses from './coordinateField.mod.css';
 import orientations from '../constants/orientations.const';
@@ -15,13 +15,6 @@ import Button from '../Buttons/Button.component';
 type Coordinate = {
     latitude?: ?string,
     longitude?: ?string,
-}
-
-type MapCoordinates = {
-    latlng: {
-        lat: number,
-        lng: number,
-    }
 }
 
 type Props = {
@@ -49,7 +42,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
     static defaultProps = {
         mapCenter: [51.505, -0.09],
     };
-    mapInstance: ?HTMLElement;
+    mapInstance: ?any;
 
     constructor(props: Props) {
         super(props);
@@ -77,17 +70,13 @@ export default class D2Coordinate extends React.Component<Props, State> {
         this.props.onBlur(null);
     }
 
-    selectSearchResult = (selectedResult: {latLng: Array<any>}) => {
-        const { value } = this.props;
-        if ((value && selectedResult.latLng[0] === value.latitude) || (value && selectedResult.latLng[1] === value.longitude)) {
+    selectSearchResult = (selectedResult: any) => {
+        const { position } = this.state;
+        if ((position && selectedResult.latLng[0] === position[0]) || (position && selectedResult.latLng[1] === position[1])) {
             return;
         }
-        this.onMapPositionChange({
-            latlng: {
-                lat: selectedResult.latLng[0],
-                lng: selectedResult.latLng[1],
-            },
-        });
+        const zoom = this.mapInstance && this.mapInstance.leafletElement ? this.mapInstance.leafletElement.getZoom() : 13;
+        this.setMapPosition([...selectedResult.latLng], zoom);
     }
 
     getPosition = () => {
@@ -109,7 +98,11 @@ export default class D2Coordinate extends React.Component<Props, State> {
 
     onMapPositionChange = (mapCoordinates: any) => {
         const latlng = mapCoordinates.latlng;
-        this.setState({ position: [latlng.lat, latlng.lng], zoom: mapCoordinates.target.getZoom() });
+        this.setMapPosition([latlng.lat, latlng.lng], mapCoordinates.target.getZoom());
+    }
+
+    setMapPosition = (position: Array<any>, zoom: number) => {
+        this.setState({ position, zoom });
     }
 
     onSetCoordinate = () => {
@@ -145,7 +138,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
             { open: this.state.showMap, onClose: this.closeMap },
             // $FlowSuppress
             [...React.Children.toArray(this.props.mapDialog.props.children), (
-                <div className={defaultClasses.dialogContent}>
+                <div className={defaultClasses.dialogContent} key="dialogContent">
                     {this.renderMap()}
                     {this.renderDialogActions()}
                 </div>
@@ -154,13 +147,24 @@ export default class D2Coordinate extends React.Component<Props, State> {
         return clonedDialog;
     }
 
+    setMapInstance = (mapInstance: any) => {
+        this.mapInstance = mapInstance;
+    }
+
     renderMap = () => {
         const { position, zoom } = this.state;
         const center = position || this.props.mapCenter;
         return (
             <div className={defaultClasses.mapContainer}>
-                <Map center={center} zoom={zoom} onClick={this.onMapPositionChange} className={defaultClasses.leafletContainer} key="map">
-                    <ReactLeafletSearch popUp={this.selectSearchResult} position="topleft" inputPlaceholder="Search" closeResultsOnClick />
+                <Map
+                    center={center}
+                    zoom={zoom}
+                    onClick={this.onMapPositionChange}
+                    className={defaultClasses.leafletContainer}
+                    key="map"
+                    ref={(mapInstance) => { this.setMapInstance(mapInstance); }}
+                >
+                    <ReactLeafletSearch popUp={this.selectSearchResult} position="topleft" inputPlaceholder="Search" closeResultsOnClick search={null} />
                     <TileLayer
                         url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"

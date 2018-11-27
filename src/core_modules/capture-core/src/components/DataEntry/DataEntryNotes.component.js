@@ -4,15 +4,14 @@ import * as React from 'react';
 import { Editor, Parser } from '@dhis2/d2-ui-rich-text';
 import i18n from '@dhis2/d2-i18n';
 import List from '@material-ui/core/List';
-import { withFocusSaver, withInternalChangeHandler } from 'capture-ui';
+import { withFocusSaver } from 'capture-ui';
 import ListItem from '@material-ui/core/ListItem';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '../Buttons/Button.component';
-import TextEditor from '../FormFields/TextEditor/TextEditor.component';
 import { TextField } from '../FormFields/New';
 
 
-const FocusTextField = withFocusSaver()(withInternalChangeHandler()(TextField));
+const FocusTextField = withFocusSaver()(TextField);
 
 type Props = {
     notes: Array<Object>,
@@ -40,6 +39,7 @@ type Props = {
 
 type State = {
     addIsOpen: boolean,
+    value: ?string,
 }
 
 const styles = theme => ({
@@ -92,7 +92,17 @@ class DataEntryNotes extends React.Component<Props, State> {
         super(props);
         this.state = {
             addIsOpen: !!this.props.value,
+            value: this.props.value || null,
         };
+    }
+
+    componentWillReceiveProps(nextProps: Props) {
+        if (nextProps.value !== this.props.value
+            || this.props.value !== this.state.value) {
+            this.setState({
+                value: nextProps.value,
+            });
+        }
     }
 
     toggleIsOpen = () => {
@@ -117,8 +127,8 @@ class DataEntryNotes extends React.Component<Props, State> {
         this.props.onBlur(null, { touched: false });
     }
 
-    updateNewText = (value: any) => {
-        var s = 1;
+    handleChange = (value: ?string) => {
+        this.setState({ value });
     }
 
     renderInput = () => {
@@ -126,12 +136,14 @@ class DataEntryNotes extends React.Component<Props, State> {
         return (
             <div className={classes.newNoteFormContainer}>
 
-                <Editor onEdit={this.updateNewText}>
-                    <FocusTextField onBlur={this.onNewNoteEditorBlur} />
-
+                <Editor onEdit={this.handleChange}>
+                    <FocusTextField
+                        onBlur={this.onNewNoteEditorBlur}
+                        onChange={this.handleChange}
+                        value={this.state.value}
+                        multiLine
+                    />
                 </Editor>
-
-                { /* <TextEditor onBlur={this.onNewNoteEditorBlur} value={this.props.value} containerClassName={classes.textEditorContainer} /> */ }
                 <div className={classes.newCommentButtonContainer}>
                     <Button onClick={this.handleAddNote} color="primary">
                         {i18n.t('Add comment')}

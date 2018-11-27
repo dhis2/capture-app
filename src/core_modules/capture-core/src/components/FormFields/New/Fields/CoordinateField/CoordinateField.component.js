@@ -4,9 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { CoordinateField as UICoordinateField } from 'capture-ui';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogActions from '@material-ui/core/DialogActions';
 import { orientations } from '../../../New';
-import { Button } from '@material-ui/core';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
