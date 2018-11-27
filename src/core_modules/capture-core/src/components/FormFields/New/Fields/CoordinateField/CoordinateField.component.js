@@ -81,12 +81,12 @@ class CoordinateField extends React.Component<Props> {
 
         return (
             <UICoordinateField
-                mapDialog={this.props.orientation === orientations.VERTICAL ?
+                mapDialog={
                     <Dialog
                         classes={this.dialogClasses}
                     >
                         <DialogTitle key="title">{dialogLabel}</DialogTitle>
-                    </Dialog> : null
+                    </Dialog>
                 }
                 {...passOnProps}
                 classes={this.passOnClasses}

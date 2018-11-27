@@ -1,12 +1,17 @@
 // @flow
 
 import * as React from 'react';
+import { Editor, Parser } from '@dhis2/d2-ui-rich-text';
 import i18n from '@dhis2/d2-i18n';
 import List from '@material-ui/core/List';
+import { withFocusSaver } from 'capture-ui';
 import ListItem from '@material-ui/core/ListItem';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '../Buttons/Button.component';
-import TextEditor from '../FormFields/TextEditor/TextEditor.component';
+import { TextField } from '../FormFields/New';
+
+
+const FocusTextField = withFocusSaver()(TextField);
 
 type Props = {
     notes: Array<Object>,
@@ -34,6 +39,7 @@ type Props = {
 
 type State = {
     addIsOpen: boolean,
+    value: ?string,
 }
 
 const styles = theme => ({
@@ -86,7 +92,17 @@ class DataEntryNotes extends React.Component<Props, State> {
         super(props);
         this.state = {
             addIsOpen: !!this.props.value,
+            value: this.props.value || null,
         };
+    }
+
+    componentWillReceiveProps(nextProps: Props) {
+        if (nextProps.value !== this.props.value
+            || this.props.value !== this.state.value) {
+            this.setState({
+                value: nextProps.value,
+            });
+        }
     }
 
     toggleIsOpen = () => {
@@ -111,11 +127,23 @@ class DataEntryNotes extends React.Component<Props, State> {
         this.props.onBlur(null, { touched: false });
     }
 
+    handleChange = (value: ?string) => {
+        this.setState({ value });
+    }
+
     renderInput = () => {
         const { classes } = this.props;
         return (
             <div className={classes.newNoteFormContainer}>
-                <TextEditor onBlur={this.onNewNoteEditorBlur} value={this.props.value} containerClassName={classes.textEditorContainer} />
+
+                <Editor onEdit={this.handleChange}>
+                    <FocusTextField
+                        onBlur={this.onNewNoteEditorBlur}
+                        onChange={this.handleChange}
+                        value={this.state.value}
+                        multiLine
+                    />
+                </Editor>
                 <div className={classes.newCommentButtonContainer}>
                     <Button onClick={this.handleAddNote} color="primary">
                         {i18n.t('Add comment')}
@@ -150,7 +178,9 @@ class DataEntryNotes extends React.Component<Props, State> {
                                     {n.storedDate}
                                 </div>
                             </div>
-                            <div dangerouslySetInnerHTML={{ __html: n.value }} />
+                            <div>
+                                <Parser>{n.value}</Parser>
+                            </div>
                         </ListItem>
                     ))}
                 </List>
