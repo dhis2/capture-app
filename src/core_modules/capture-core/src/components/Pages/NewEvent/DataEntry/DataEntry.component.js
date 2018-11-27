@@ -38,6 +38,7 @@ import withWarningOutput from '../../../DataEntry/dataEntryOutput/withWarningOut
 import newEventSaveTypes from './newEventSaveTypes';
 import labelTypeClasses from './dataEntryFieldLabels.mod.css';
 import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
+import withBrowserBackWarning from '../../../DataEntry/withBrowserBackWarning';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -335,7 +336,8 @@ const WarningOutput = withWarningOutput()(IndicatorOutput);
 const ErrorOutput = withErrorOutput()(WarningOutput);
 const CancelableDataEntry = withCancelButton(getCancelOptions)(ErrorOutput);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(CancelableDataEntry));
-const WrappedDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(SaveableDataEntry);
+const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(SaveableDataEntry);
+const WrappedDataEntry = withBrowserBackWarning()(CompletableDataEntry);
 
 type Props = {
     formFoundation: RenderFoundation,

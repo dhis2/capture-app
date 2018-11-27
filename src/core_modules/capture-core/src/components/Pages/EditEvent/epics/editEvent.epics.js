@@ -1,11 +1,10 @@
 // @flow
 import log from 'loglevel';
-import { replace } from 'react-router-redux';
+import { push } from 'react-router-redux';
+import i18n from '@dhis2/d2-i18n';
 import errorCreator from '../../../../utils/errorCreator';
 import getErrorMessageAndDetails from '../../../../utils/errors/getErrorMessageAndDetails';
 import getOrganisationUnitApiSpec from '../../../../api/apiSpecifications/organisationUnit.apiSpecificationGetter';
-
-import i18n from '@dhis2/d2-i18n';
 import {
     actionTypes as editEventActionTypes,
     eventFromUrlCouldNotBeRetrieved,
@@ -82,5 +81,5 @@ export const openEditPageLocationChangeEpic = (action$: InputObservable) =>
     // $FlowSuppress
     action$.ofType(eventListActionTypes.OPEN_EDIT_EVENT_PAGE)
         .map(action =>
-            replace(`/editEvent/${action.payload}`),
+            push(`/editEvent/${action.payload}`),
         );

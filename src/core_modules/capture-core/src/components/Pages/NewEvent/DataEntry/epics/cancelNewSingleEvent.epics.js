@@ -1,5 +1,5 @@
 // @flow
-import { replace } from 'react-router-redux';
+import { push } from 'react-router-redux';
 import {
     actionTypes as newEventDataEntryActionTypes,
     cancelNewEventNoWorkingListUpdateNeeded,
@@ -42,5 +42,5 @@ export const cancelNewEventLocationChangeEpic = (action$: InputObservable, store
             const state = store.getState();
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
-            return replace(`/programId=${programId}&orgUnitId=${orgUnitId}`);
+            return push(`/programId=${programId}&orgUnitId=${orgUnitId}`);
         });

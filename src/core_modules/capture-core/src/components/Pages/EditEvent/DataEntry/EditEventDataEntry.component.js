@@ -34,6 +34,7 @@ import withIndicatorOutput from '../../../DataEntry/dataEntryOutput/withIndicato
 import withFeedbackOutput from '../../../DataEntry/dataEntryOutput/withFeedbackOutput';
 import withErrorOutput from '../../../DataEntry/dataEntryOutput/withErrorOutput';
 import withWarningOutput from '../../../DataEntry/dataEntryOutput/withWarningOutput';
+import withBrowserBackWarning from '../../../DataEntry/withBrowserBackWarning';
 import labelTypeClasses from './dataEntryFieldLabels.mod.css';
 
 const getStyles = (theme: Theme) => ({
@@ -296,7 +297,8 @@ const WarningOutput = withWarningOutput()(IndicatorOutput);
 const ErrorOutput = withErrorOutput()(WarningOutput);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ErrorOutput));
 const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
-const DataEntryWrapper = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);
+const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);
+const DataEntryWrapper = withBrowserBackWarning()(CompletableDataEntry);
 
 type Props = {
     formFoundation: ?RenderFoundation,
