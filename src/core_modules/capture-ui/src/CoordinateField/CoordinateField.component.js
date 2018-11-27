@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
+import i18n from '@dhis2/d2-i18n';
 import AddLocationIcon from '../Icons/AddLocationIcon.component';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search';
@@ -8,16 +9,18 @@ import ClearIcon from '@material-ui/icons/Clear';
 import CoordinateInput from '../internal/CoordinateInput/CoordinateInput.component';
 import defaultClasses from './coordinateField.mod.css';
 import orientations from '../constants/orientations.const';
+import Button from '../Buttons/Button.component';
+
 
 type Coordinate = {
     latitude?: ?string,
     longitude?: ?string,
 }
 
-type MapCoordinate = {
+type MapCoordinates = {
     latlng: {
-        lat?: ?string,
-        lng?: ?string,
+        lat: number,
+        lng: number,
     }
 }
 
@@ -29,20 +32,18 @@ type Props = {
   value?: ?Coordinate,
   shrinkDisabled?: ?boolean,
   classes?: ?Object,
-  mapDialog?: ?React.Element<any>,
+  mapDialog: React.Element<any>,
 };
 type State = {
     showMap: ?boolean,
+    position?: ?Array<number>,
+    zoom: number,
 }
 
 const coordinateKeys = {
     LATITUDE: 'latitude',
     LONGITUDE: 'longitude',
 };
-
-function isPointInRect({ x, y }, { left, right, top, bottom }) {
-    return x >= left && x <= right && y >= top && y <= bottom;
-}
 
 export default class D2Coordinate extends React.Component<Props, State> {
     static defaultProps = {
@@ -55,32 +56,9 @@ export default class D2Coordinate extends React.Component<Props, State> {
 
         this.state = {
             showMap: false,
+            zoom: 13,
         };
     }
-
-    componentWillUnmount() {
-        document.removeEventListener('click', this.onDocClick);
-    }
-
-    onSetMapInstance = (mapInstance: ?HTMLElement) => {
-        this.mapInstance = mapInstance;
-        if (this.mapInstance) {
-            document.addEventListener('click', this.onDocClick);
-        } else {
-            document.removeEventListener('click', this.onDocClick);
-        }
-    }
-
-    onDocClick = (event: any) => {
-        if (this.mapInstance) {
-            const target = { x: event.clientX, y: event.clientY };
-            const container = this.mapInstance.getBoundingClientRect();
-
-            if (!isPointInRect(target, container)) {
-                this.toggleMap();
-            }
-        }
-    };
 
     handleBlur = (key: string, value: any) => {
         const newValue = { ...this.props.value, [key]: value };
@@ -99,23 +77,17 @@ export default class D2Coordinate extends React.Component<Props, State> {
         this.props.onBlur(null);
     }
 
-    toggleMap = () => {
-        this.setState({ showMap: !this.state.showMap });
-    }
-
-    onMapClick = ({ latlng: { lat, lng } }: MapCoordinate, keepMapOpen: boolean) => {
-        if (!keepMapOpen) {
-            this.toggleMap();
-        }
-        this.props.onBlur({ latitude: lat, longitude: lng });
-    }
-
     selectSearchResult = (selectedResult: {latLng: Array<any>}) => {
         const { value } = this.props;
         if ((value && selectedResult.latLng[0] === value.latitude) || (value && selectedResult.latLng[1] === value.longitude)) {
             return;
         }
-        this.onMapClick({ latlng: { lat: selectedResult.latLng[0], lng: selectedResult.latLng[1] } }, true);
+        this.onMapPositionChange({
+            latlng: {
+                lat: selectedResult.latLng[0],
+                lng: selectedResult.latLng[1],
+            },
+        });
     }
 
     getPosition = () => {
@@ -127,71 +99,104 @@ export default class D2Coordinate extends React.Component<Props, State> {
         return convertedValue;
     }
 
-    renderAbsoluteMap = () => this.state.showMap && (
-        <div className={defaultClasses.coordinateLeafletMap} ref={this.onSetMapInstance}>
-            {this.renderMap()}
-        </div>
-    );
-
-    renderDialogMap = () => {
-        const clonedMapDialog = React.cloneElement(
-            // $FlowSuppress
-            this.props.mapDialog,
-            { open: this.state.showMap, onClose: this.toggleMap },
-            // $FlowSuppress
-            [...React.Children.toArray(this.props.mapDialog.props.children), this.renderMap(true)],
-        );
-        return clonedMapDialog;
+    closeMap = () => {
+        this.setState({ showMap: false });
     }
 
-    renderMap = (useDialog?: ?boolean) => {
-        const position = this.getPosition();
-        const center = position || this.props.mapCenter;
-        const leafletContainerClass = useDialog ? defaultClasses.dialogLeafletContainer : defaultClasses.leafletContainer;
-        return (
-            <Map center={center} zoom={13} onClick={this.onMapClick} className={leafletContainerClass} key="map">
-                <ReactLeafletSearch popUp={this.selectSearchResult} position="topleft" inputPlaceholder="Search" closeResultsOnClick />
-                <TileLayer
-                    url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-                    attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                />
-                {position && <Marker position={position} />}
-            </Map>
-        );
-    };
+    openMap = () => {
+        this.setState({ showMap: true, position: this.getPosition() });
+    }
 
-    renderAddLocation = (useDialog: boolean) => {
+    onMapPositionChange = (mapCoordinates: any) => {
+        const latlng = mapCoordinates.latlng;
+        this.setState({ position: [latlng.lat, latlng.lng], zoom: mapCoordinates.target.getZoom() });
+    }
+
+    onSetCoordinate = () => {
+        const position = this.state.position;
+        const value = position && position.length === 2 ? {
+            latitude: position[0],
+            longitude: position[1],
+        } : null;
+        this.props.onBlur(value);
+        this.setState({ showMap: false });
+    }
+
+    renderMapIcon = () => {
         const { classes, shrinkDisabled } = this.props;
         const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass } = classes || {};
         const mapIconContainerClass = shrinkDisabled ?
             defaultClasses.mapIconContainer :
             defaultClasses.mapIconContainerWithMargin;
         return (
-            <React.Fragment>
-                {
-                    useDialog ? this.renderDialogMap() : this.renderAbsoluteMap()
-                }
-                <div className={classNames(mapIconContainerClass, mapIconContainerCustomClass)}>
-                    <AddLocationIcon
-                        onClick={this.toggleMap}
-                        className={classNames(defaultClasses.mapIcon, mapIconCustomClass)}
-                    />
-                </div>
-            </React.Fragment>
+            <div className={classNames(mapIconContainerClass, mapIconContainerCustomClass)}>
+                <AddLocationIcon
+                    onClick={this.openMap}
+                    className={classNames(defaultClasses.mapIcon, mapIconCustomClass)}
+                />
+            </div>
         );
     }
+
+    renderMapDialog = () => {
+        const clonedDialog = React.cloneElement(
+            // $FlowSuppress
+            this.props.mapDialog,
+            { open: this.state.showMap, onClose: this.closeMap },
+            // $FlowSuppress
+            [...React.Children.toArray(this.props.mapDialog.props.children), (
+                <div className={defaultClasses.dialogContent}>
+                    {this.renderMap()}
+                    {this.renderDialogActions()}
+                </div>
+            )],
+        );
+        return clonedDialog;
+    }
+
+    renderMap = () => {
+        const { position, zoom } = this.state;
+        const center = position || this.props.mapCenter;
+        return (
+            <div className={defaultClasses.mapContainer}>
+                <Map center={center} zoom={zoom} onClick={this.onMapPositionChange} className={defaultClasses.leafletContainer} key="map">
+                    <ReactLeafletSearch popUp={this.selectSearchResult} position="topleft" inputPlaceholder="Search" closeResultsOnClick />
+                    <TileLayer
+                        url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+                        attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                    />
+                    {position && <Marker position={position} />}
+                </Map>
+            </div>
+        );
+    }
+
+    renderDialogActions = () => (
+        <div className={defaultClasses.dialogActionOuterContainer}>
+            <div className={defaultClasses.dialogActionInnerContainer}>
+                <Button kind="basic" onClick={this.closeMap}>
+                    {i18n.t('Cancel')}
+                </Button>
+            </div>
+            <div className={defaultClasses.dialogActionInnerContainer}>
+                <Button kind="primary" onClick={this.onSetCoordinate}>
+                    {i18n.t('Save')}
+                </Button>
+            </div>
+        </div>
+    );
 
     render() {
         const { mapCenter, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, ...passOnProps } = this.props;
         const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes || {};
-        const useDialog = !!mapDialog;
         const coordinateFieldsClass = orientation === orientations.VERTICAL ? defaultClasses.coordinateFieldsVertical : defaultClasses.coordinateFieldsHorizontal;
         const clearIconClass = shrinkDisabled ? defaultClasses.clearIcon : defaultClasses.clearIconWithMargin;
 
         return (
             <div>
                 <div className={coordinateFieldsClass}>
-                    {this.renderAddLocation(useDialog)}
+                    {this.renderMapDialog()}
+                    {this.renderMapIcon()}
                     <div className={defaultClasses.inputContainer}>
                         <CoordinateInput
                             shrinkDisabled={shrinkDisabled}

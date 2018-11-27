@@ -50,12 +50,12 @@ class PolygonField extends React.Component<Props> {
         const { classes, dialogLabel, ...passOnProps } = this.props;
         return (
             <UIPolygonField
-                mapDialog={this.props.orientation === orientations.VERTICAL ?
+                mapDialog={
                     <Dialog
                         classes={this.dialogClasses}
                     >
                         <DialogTitle key="title">{dialogLabel}</DialogTitle>
-                    </Dialog> : null
+                    </Dialog>
                 }
                 {...passOnProps}
             />

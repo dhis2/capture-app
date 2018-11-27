@@ -1,5 +1,7 @@
 // @flow
 import * as React from 'react';
+import ReactDOM from 'react-dom';
+import i18n from '@dhis2/d2-i18n';
 import MapIcon from '@material-ui/icons/Map';
 import CheckIcon from '@material-ui/icons/Check';
 import L from 'leaflet';
@@ -8,6 +10,9 @@ import { ReactLeafletSearch } from 'react-leaflet-search';
 import EditControl from 'react-leaflet-draw/lib/EditControl';
 import defaultClasses from './polygonField.mod.css';
 import './styles.css';
+import Button from '../Buttons/Button.component';
+import DeleteControl from './DeleteControl.component';
+
 
 type Props = {
   onBlur: (value: any) => void,
@@ -18,6 +23,9 @@ type Props = {
 
 type State = {
     showMap: ?boolean,
+    mapCoordinates?: ?Array<any>,
+    zoom: number,
+    bounds?: ?any,
 }
 
 type Feature = {
@@ -71,50 +79,9 @@ export default class D2Polygon extends React.Component<Props, State> {
 
         this.state = {
             showMap: false,
+            zoom: 13,
         };
     }
-
-    componentWillUnmount() {
-        document.removeEventListener('click', this.onDocClick);
-    }
-
-    onSetMapInstance = (mapInstance: ?HTMLElement) => {
-        this.mapInstance = mapInstance;
-        if (this.mapInstance) {
-            document.addEventListener('click', this.onDocClick);
-        } else {
-            document.removeEventListener('click', this.onDocClick);
-        }
-    }
-
-    onDocClick = (event: any) => {
-        if (this.mapInstance) {
-            const target = { x: event.clientX, y: event.clientY };
-            const container = this.mapInstance.getBoundingClientRect();
-
-            if (!isPointInRect(target, container)) {
-                this.toggleMap();
-            }
-        }
-    };
-
-    toggleMap = () => this.setState({ showMap: !this.state.showMap });
-
-    onEdited = (e: any) => {
-        const coordinates = e.layers.toGeoJSON().features[0].geometry.coordinates;
-        this.toggleMap();
-        this.props.onBlur(coordinates);
-    };
-
-    onCreate = (e: any) => {
-        const coordinates = e.layer.toGeoJSON().geometry.coordinates;
-        this.toggleMap();
-        this.props.onBlur(coordinates);
-    };
-
-    onDeleted = () => {
-        this.props.onBlur(null);
-    };
 
     onFeatureGroupReady = (reactFGref: any, featureCollection: ?FeatureCollection) => {
         if (featureCollection) {
@@ -129,7 +96,8 @@ export default class D2Polygon extends React.Component<Props, State> {
 
                 const { map } = reactFGref.context;
                 const coordinates = featureCollection.features[0].geometry.coordinates[0];
-                map.fitBounds(coordinates.map(c => ([c[1], c[0]])));
+                const bounds = coordinates.map(c => ([c[1], c[0]]));
+                map.fitBounds(bounds);
             }
         }
     };
@@ -139,75 +107,126 @@ export default class D2Polygon extends React.Component<Props, State> {
             return this.props.mapCenter;
         }
         const coordinates = featureCollection.features[0].geometry.coordinates[0];
-        const { lat, lng } = L.latLngBounds(coordinates.map(c => ([c[1], c[0]]))).getCenter();
+        const { lat, lng } = L.latLngBounds(coordinates.map(c => ([c[0], c[1]]))).getCenter();
         return [lng, lat];
     }
 
-    getFeatureCollection = () => (Array.isArray(this.props.value) ? coordsToFeatureCollection(this.props.value) : null)
+    getFeatureCollection = (coordinates: any) => (Array.isArray(coordinates) ? coordsToFeatureCollection(coordinates) : null)
 
 
-    renderAbsoluteMap = () => this.state.showMap && (
-        <div className={defaultClasses.polygonLeafletMap} ref={this.onSetMapInstance}>
-            {this.renderMap()}
+    closeMap = () => {
+        this.setState({ showMap: false });
+    }
+
+    openMap = () => {
+        this.setState({ showMap: true, mapCoordinates: this.props.value });
+    }
+
+    onMapPolygonCreated = (e: any) => {
+        const coordinates = e.layer.toGeoJSON().geometry.coordinates;
+        this.setState({ mapCoordinates: coordinates, zoom: e.target.getZoom() });
+    };
+
+    onMapPolygonEdited = (e: any) => {
+        const coordinates = e.layers.getLayers()[0].toGeoJSON().geometry.coordinates;
+        this.setState({ mapCoordinates: coordinates, zoom: e.target.getZoom() });
+    };
+    onMapPolygonDelete = (e: any) => {
+        this.setState({ mapCoordinates: null });
+    };
+
+    onSetPolygon = () => {
+        this.props.onBlur(this.state.mapCoordinates);
+        this.closeMap();
+    }
+
+    renderMapDialog = () => {
+        const clonedDialog = React.cloneElement(
+            // $FlowSuppress
+            this.props.mapDialog,
+            { open: this.state.showMap, onClose: this.closeMap },
+            // $FlowSuppress
+            [...React.Children.toArray(this.props.mapDialog.props.children), (
+                <div className={defaultClasses.dialogContent}>
+                    {this.renderMap()}
+                    {this.renderDialogActions()}
+                </div>
+            )],
+        );
+        return clonedDialog;
+    }
+
+    setEditControlInstance = (instance: any) => {
+        var s = 1;
+    }
+    removeTest = () => {
+        var s = 1;
+    }
+
+    renderMap = () => {
+        const { zoom, bounds } = this.state;
+        const featureCollection = this.getFeatureCollection(this.state.mapCoordinates);
+        const center = this.getCenter(featureCollection);
+        return (
+            <div className={defaultClasses.mapContainer}>
+                <Map zoom={zoom} center={center} className={defaultClasses.map} key="map">
+                    <ReactLeafletSearch position="topleft" inputPlaceholder="Search" closeResultsOnClick />
+                    <TileLayer
+                        url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
+                        attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                    />
+                    <FeatureGroup ref={(reactFGref) => { this.onFeatureGroupReady(reactFGref, featureCollection); }}>
+                        <DeleteControl onClick={this.removeTest}/>
+                        <EditControl
+                            ref={(editControlInstance) => { this.setEditControlInstance(editControlInstance); }}
+                            position="topright"
+                            onEdited={this.onMapPolygonEdited}
+                            onCreated={this.onMapPolygonCreated}
+                            onDeleted={this.onMapPolygonDelete}
+                            draw={{
+                                rectangle: false,
+                                polyline: false,
+                                circle: false,
+                                marker: false,
+                                circlemarker: false,
+                            }}
+                            edit={{
+                                remove: false,
+                            }}
+                        />
+                    </FeatureGroup>
+                </Map>
+            </div>
+        );
+    }
+
+    renderDialogActions = () => (
+        <div className={defaultClasses.dialogActionOuterContainer}>
+            <div className={defaultClasses.dialogActionInnerContainer}>
+                <Button kind="basic" onClick={this.closeMap}>
+                    {i18n.t('Cancel')}
+                </Button>
+            </div>
+            <div className={defaultClasses.dialogActionInnerContainer}>
+                <Button kind="primary" onClick={this.onSetPolygon}>
+                    {i18n.t('Save')}
+                </Button>
+            </div>
         </div>
     );
 
-    renderDialogMap = () => {
-        const clonedMapDialog = React.cloneElement(
-            // $FlowSuppress
-            this.props.mapDialog,
-            { open: this.state.showMap, onClose: this.toggleMap },
-            // $FlowSuppress
-            [...React.Children.toArray(this.props.mapDialog.props.children), this.renderMap(true)],
-        );
-        return clonedMapDialog;
-    }
-
-    renderMap = (useDialog?: ?boolean) => {
-        const featureCollection = this.getFeatureCollection();
-        const leafletContainerClass = useDialog ? defaultClasses.dialogLeafletContainer : defaultClasses.leafletContainer;
-        return (
-            <Map zoom={13} center={this.getCenter(featureCollection)} zoomControl={false} className={leafletContainerClass} key="map">
-                <ReactLeafletSearch position="topleft" inputPlaceholder="Search" closeResultsOnClick />
-                <TileLayer
-                    url="//cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
-                    attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-                />
-                <FeatureGroup ref={(reactFGref) => { this.onFeatureGroupReady(reactFGref, featureCollection); }}>
-                    <EditControl
-                        position="topright"
-                        onEdited={this.onEdited}
-                        onCreated={this.onCreate}
-                        onDeleted={this.onDeleted}
-                        draw={{
-                            rectangle: false,
-                            polyline: false,
-                            circle: false,
-                            marker: false,
-                            circlemarker: false,
-                        }}
-                    />
-                </FeatureGroup>
-            </Map>
-        );
-    };
-
-    renderMapContainer = (useDialog: boolean) => (useDialog ? this.renderDialogMap() : this.renderAbsoluteMap());
-
     render() {
-        const featureCollection = this.getFeatureCollection();
-        const hasValue = !!featureCollection;
-        const useDialog = !!this.props.mapDialog;
+        const hasValue = !!this.props.value;
         return (
             <div className={defaultClasses.container}>
                 <div className={defaultClasses.statusContainer}>
-                    <MapIcon className={defaultClasses.mapIcon} onClick={this.toggleMap} />
+                    <MapIcon className={defaultClasses.mapIcon} onClick={this.openMap} />
                     <div className={defaultClasses.statusText}>
                         {hasValue ? 'Polygon captured' : 'No polygon captured'}
                     </div>
                     { hasValue && <CheckIcon className={defaultClasses.checkIcon} color="primary" /> }
                 </div>
-                {this.renderMapContainer(useDialog)}
+                {this.renderMapDialog()}
             </div>
         );
     }

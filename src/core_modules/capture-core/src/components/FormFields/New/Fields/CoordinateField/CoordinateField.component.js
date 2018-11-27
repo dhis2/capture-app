@@ -4,7 +4,9 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { CoordinateField as UICoordinateField } from 'capture-ui';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogActions from '@material-ui/core/DialogActions';
 import { orientations } from '../../../New';
+import { Button } from '@material-ui/core';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
@@ -81,12 +83,12 @@ class CoordinateField extends React.Component<Props> {
 
         return (
             <UICoordinateField
-                mapDialog={this.props.orientation === orientations.VERTICAL ?
+                mapDialog={
                     <Dialog
                         classes={this.dialogClasses}
                     >
                         <DialogTitle key="title">{dialogLabel}</DialogTitle>
-                    </Dialog> : null
+                    </Dialog>
                 }
                 {...passOnProps}
                 classes={this.passOnClasses}

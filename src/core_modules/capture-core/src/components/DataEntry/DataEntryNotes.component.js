@@ -1,12 +1,18 @@
 // @flow
 
 import * as React from 'react';
+import { Editor, Parser } from '@dhis2/d2-ui-rich-text';
 import i18n from '@dhis2/d2-i18n';
 import List from '@material-ui/core/List';
+import { withFocusSaver, withInternalChangeHandler } from 'capture-ui';
 import ListItem from '@material-ui/core/ListItem';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '../Buttons/Button.component';
 import TextEditor from '../FormFields/TextEditor/TextEditor.component';
+import { TextField } from '../FormFields/New';
+
+
+const FocusTextField = withFocusSaver()(withInternalChangeHandler()(TextField));
 
 type Props = {
     notes: Array<Object>,
@@ -111,11 +117,21 @@ class DataEntryNotes extends React.Component<Props, State> {
         this.props.onBlur(null, { touched: false });
     }
 
+    updateNewText = (value: any) => {
+        var s = 1;
+    }
+
     renderInput = () => {
         const { classes } = this.props;
         return (
             <div className={classes.newNoteFormContainer}>
-                <TextEditor onBlur={this.onNewNoteEditorBlur} value={this.props.value} containerClassName={classes.textEditorContainer} />
+
+                <Editor onEdit={this.updateNewText}>
+                    <FocusTextField onBlur={this.onNewNoteEditorBlur} />
+
+                </Editor>
+
+                { /* <TextEditor onBlur={this.onNewNoteEditorBlur} value={this.props.value} containerClassName={classes.textEditorContainer} /> */ }
                 <div className={classes.newCommentButtonContainer}>
                     <Button onClick={this.handleAddNote} color="primary">
                         {i18n.t('Add comment')}
@@ -150,7 +166,9 @@ class DataEntryNotes extends React.Component<Props, State> {
                                     {n.storedDate}
                                 </div>
                             </div>
-                            <div dangerouslySetInnerHTML={{ __html: n.value }} />
+                            <div>
+                                <Parser>{n.value}</Parser>
+                            </div>
                         </ListItem>
                     ))}
                 </List>
