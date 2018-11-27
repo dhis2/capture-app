@@ -20,7 +20,7 @@ const getStyles = (theme: Theme) => ({
     },
     header: {
         ...theme.typography.title,
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 500,
         paddingTop: 8,
         paddingBottom: 8,
