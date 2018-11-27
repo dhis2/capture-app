@@ -1,5 +1,5 @@
 // @flow
-import { replace } from 'react-router-redux';
+import { push } from 'react-router-redux';
 import { actionTypes as editEventSelectorActionTypes } from '../../EditEvent/EditEventSelector/EditEventSelector.actions';
 import { actionTypes as mainPageSelectorActionTypes } from '../../MainPage/MainPageSelector/MainPageSelector.actions';
 
@@ -22,5 +22,5 @@ export const openNewEventPageLocationChangeEpic = (action$: InputObservable, sto
             const state = store.getState();
             const { programId, orgUnitId } = state.currentSelections;
             const args = getArguments(programId, orgUnitId);
-            return replace(`/newEvent/${args}`);
+            return push(`/newEvent/${args}`);
         });
