@@ -199,7 +199,7 @@ export default class D2Polygon extends React.Component<Props, State> {
             </div>
             <div className={defaultClasses.dialogActionInnerContainer}>
                 <Button kind="primary" onClick={this.onSetPolygon}>
-                    {i18n.t('Save')}
+                    {i18n.t('Set area')}
                 </Button>
             </div>
         </div>

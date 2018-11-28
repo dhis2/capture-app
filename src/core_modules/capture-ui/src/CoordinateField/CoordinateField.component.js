@@ -70,15 +70,6 @@ export default class D2Coordinate extends React.Component<Props, State> {
         this.props.onBlur(null);
     }
 
-    selectSearchResult = (selectedResult: any) => {
-        const { position } = this.state;
-        if ((position && selectedResult.latLng[0] === position[0]) || (position && selectedResult.latLng[1] === position[1])) {
-            return;
-        }
-        const zoom = this.mapInstance && this.mapInstance.leafletElement ? this.mapInstance.leafletElement.getZoom() : 13;
-        this.setMapPosition([...selectedResult.latLng], zoom);
-    }
-
     getPosition = () => {
         const { value } = this.props;
         let convertedValue = null;
@@ -151,6 +142,11 @@ export default class D2Coordinate extends React.Component<Props, State> {
         this.mapInstance = mapInstance;
     }
 
+    search = (position: any) => {
+        const zoom = this.mapInstance && this.mapInstance.leafletElement ? this.mapInstance.leafletElement.getZoom() : 13;
+        this.setMapPosition([...position], zoom);
+    }
+
     renderMap = () => {
         const { position, zoom } = this.state;
         const center = position || this.props.mapCenter;
@@ -164,7 +160,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
                     key="map"
                     ref={(mapInstance) => { this.setMapInstance(mapInstance); }}
                 >
-                    <ReactLeafletSearch popUp={this.selectSearchResult} position="topleft" inputPlaceholder="Search" closeResultsOnClick search={null} />
+                    <ReactLeafletSearch position="topleft" inputPlaceholder="Search" closeResultsOnClick search={null} mapStateModifier={this.search} showMarker={false} />
                     <TileLayer
                         url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
@@ -184,7 +180,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
             </div>
             <div className={defaultClasses.dialogActionInnerContainer}>
                 <Button kind="primary" onClick={this.onSetCoordinate}>
-                    {i18n.t('Save')}
+                    {i18n.t('Set coordinate')}
                 </Button>
             </div>
         </div>

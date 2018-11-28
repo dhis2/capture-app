@@ -40,7 +40,6 @@ const getStyles = (theme: Theme) => ({
         fill: theme.palette.primary.dark,
     },
     dialogPaper: {
-        padding: 5,
         maxWidth: 'none',
         width: '75%',
         height: '75%',
