@@ -75,7 +75,7 @@
     justify-content: flex-end;
 }
 .dialogActionInnerContainer {
-    padding: 10px 5px 8px 5px;
+    padding: 24px 0px 0px 5px;
 }
 
 
@@ -94,5 +94,6 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    padding: 0px 24px 24px 24px;
 }
   

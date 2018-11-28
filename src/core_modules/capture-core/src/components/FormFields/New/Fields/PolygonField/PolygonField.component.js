@@ -14,7 +14,6 @@ const getStyles = (theme: Theme) => ({
         padding: 2,
     },
     dialogPaper: {
-        padding: 5,
         maxWidth: 'none',
         width: '75%',
         height: '75%',

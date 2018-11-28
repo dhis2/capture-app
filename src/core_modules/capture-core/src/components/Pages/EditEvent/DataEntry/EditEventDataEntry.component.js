@@ -177,9 +177,9 @@ const buildGeometrySettingsFn = () => (props: Object) => {
             component: polygonComponent,
             componentProps: createComponentProps(props, {
                 width: props && props.formHorizontal ? 150 : 350,
-                label: 'Location',
+                label: i18n.t('Area'),
                 required: false,
-                dialogLabel: 'Location',
+                dialogLabel: i18n.t('Area'),
             }),
             propName: 'geometry',
             validatorContainers: [
