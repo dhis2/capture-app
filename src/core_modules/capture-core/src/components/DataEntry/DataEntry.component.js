@@ -14,6 +14,7 @@ import SectionHeaderSimple from '../Section/SectionHeaderSimple.component';
 const styles = theme => ({
     footerBar: {
         display: 'flex',
+        paddingTop: theme.typography.pxToRem(10),
     },
     button: {
         paddingRight: theme.spacing.unit * 2,
@@ -32,7 +33,6 @@ const styles = theme => ({
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        margin: theme.typography.pxToRem(10),
     },
     verticalContainer: {
         display: 'flex',
@@ -49,8 +49,11 @@ const styles = theme => ({
     verticalOutputsContainer: {
         marginBottom: theme.typography.pxToRem(10),
     },
+    dataEntryFieldSectionContainer: {
+        paddingTop: theme.typography.pxToRem(10),
+        paddingBottom: theme.typography.pxToRem(10),
+    },
     dataEntryFieldSection: {
-        marginBottom: theme.typography.pxToRem(10),
         padding: theme.typography.pxToRem(8),
         maxWidth: theme.typography.pxToRem(880),
     },
@@ -170,17 +173,21 @@ class DataEntry extends React.Component<Props> {
 
                     if (sectionFields && sectionFields.length > 0) {
                         accSections.push(
-                            <Section
+                            <div
                                 key={sectionKey}
-                                className={this.props.classes.dataEntryFieldSection}
-                                header={
-                                    <SectionHeaderSimple
-                                        title={section.name}
-                                    />
-                                }
+                                className={this.props.classes.dataEntryFieldSectionContainer}
                             >
-                                {sectionFields}
-                            </Section>,
+                                <Section
+                                    className={this.props.classes.dataEntryFieldSection}
+                                    header={
+                                        <SectionHeaderSimple
+                                            title={section.name}
+                                        />
+                                    }
+                                >
+                                    {sectionFields}
+                                </Section>
+                            </div>,
                         );
                     }
                 }

@@ -69,7 +69,7 @@ const getStyles = theme => ({
         },
     },
     dataEntryVerticalContainer: {
-        padding: theme.typography.pxToRem(20),
+        padding: theme.typography.pxToRem(8),
     },
 });
 

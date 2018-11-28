@@ -24,7 +24,7 @@ const getStyles = (theme: Theme) => ({
         fontWeight: 500,
         paddingTop: 8,
         paddingBottom: 8,
-        paddingLeft: 16,
+        paddingLeft: 8,
     },
     showAllEvents: {
         paddingLeft: 8,

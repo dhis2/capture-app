@@ -39,7 +39,7 @@ import labelTypeClasses from './dataEntryFieldLabels.mod.css';
 
 const getStyles = (theme: Theme) => ({
     dataEntryContainer: {
-        padding: theme.typography.pxToRem(20),
+        padding: theme.typography.pxToRem(8),
     },
     fieldLabelMediaBased: {
         [theme.breakpoints.down(523)]: {
