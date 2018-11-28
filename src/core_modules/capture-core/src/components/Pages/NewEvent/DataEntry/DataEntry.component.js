@@ -211,8 +211,8 @@ const buildGeometrySettingsFn = () => (props: Object) => {
             component: polygonComponent,
             componentProps: createComponentProps(props, {
                 width: props && props.formHorizontal ? 150 : 350,
-                label: 'Location',
-                dialogLabel: 'Location',
+                label: i18n.t('Area'),
+                dialogLabel: i18n.t('Area'),
                 required: false,
                 orientation: getOrientation(props.formHorizontal),
             }),

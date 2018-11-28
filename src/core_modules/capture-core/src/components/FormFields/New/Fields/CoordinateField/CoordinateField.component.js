@@ -40,7 +40,6 @@ const getStyles = (theme: Theme) => ({
         fill: theme.palette.primary.dark,
     },
     dialogPaper: {
-        padding: 5,
         maxWidth: 'none',
         width: '75%',
         height: '75%',
@@ -81,12 +80,12 @@ class CoordinateField extends React.Component<Props> {
 
         return (
             <UICoordinateField
-                mapDialog={this.props.orientation === orientations.VERTICAL ?
+                mapDialog={
                     <Dialog
                         classes={this.dialogClasses}
                     >
                         <DialogTitle key="title">{dialogLabel}</DialogTitle>
-                    </Dialog> : null
+                    </Dialog>
                 }
                 {...passOnProps}
                 classes={this.passOnClasses}
