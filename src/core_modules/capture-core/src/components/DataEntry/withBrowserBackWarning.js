@@ -60,7 +60,7 @@ const getEventListener = (InnerComponent: React.ComponentType<any>) =>
         }
 
         render() {
-            const { dataEntryHasChanges, history, ...passOnProps } = this.props;
+            const { dataEntryHasChanges, history, location, match, staticContext, ...passOnProps } = this.props;
             return (
                 <React.Fragment>
                     <InnerComponent
