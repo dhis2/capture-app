@@ -1,5 +1,5 @@
 // @flow
-import { replace } from 'react-router-redux';
+import { push } from 'react-router-redux';
 import {
     actionTypes as newEventDataEntryActionTypes,
     cancelNewEventNoWorkingListUpdateNeeded,
@@ -13,6 +13,10 @@ export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) 
     action$.ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE)
         .map(() => {
             const state = store.getState();
+            if (!state.offline.online) {
+                return cancelNewEventNoWorkingListUpdateNeeded();
+            }
+
             const recentlyAddedEventsCount = Object
                 .keys(state.recentlyAddedEvents)
                 .length;
@@ -38,5 +42,5 @@ export const cancelNewEventLocationChangeEpic = (action$: InputObservable, store
             const state = store.getState();
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
-            return replace(`/programId=${programId}&orgUnitId=${orgUnitId}`);
+            return push(`/programId=${programId}&orgUnitId=${orgUnitId}`);
         });

@@ -20,11 +20,11 @@ const getStyles = (theme: Theme) => ({
     },
     header: {
         ...theme.typography.title,
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 500,
         paddingTop: 8,
         paddingBottom: 8,
-        paddingLeft: 16,
+        paddingLeft: 8,
     },
     showAllEvents: {
         paddingLeft: 8,

@@ -39,6 +39,7 @@ import withWarningOutput from '../../../DataEntry/dataEntryOutput/withWarningOut
 import newEventSaveTypes from './newEventSaveTypes';
 import labelTypeClasses from './dataEntryFieldLabels.mod.css';
 import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
+import withBrowserBackWarning from '../../../DataEntry/withBrowserBackWarning';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -69,7 +70,7 @@ const getStyles = theme => ({
         },
     },
     dataEntryVerticalContainer: {
-        padding: theme.typography.pxToRem(20),
+        padding: theme.typography.pxToRem(8),
     },
 });
 
@@ -212,8 +213,8 @@ const buildGeometrySettingsFn = () => (props: Object) => {
             component: polygonComponent,
             componentProps: createComponentProps(props, {
                 width: props && props.formHorizontal ? 150 : 350,
-                label: 'Location',
-                dialogLabel: 'Location',
+                label: i18n.t('Area'),
+                dialogLabel: i18n.t('Area'),
                 required: false,
                 orientation: getOrientation(props.formHorizontal),
             }),
@@ -361,7 +362,8 @@ const WarningOutput = withWarningOutput()(IndicatorOutput);
 const ErrorOutput = withErrorOutput()(WarningOutput);
 const CancelableDataEntry = withCancelButton(getCancelOptions)(ErrorOutput);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(CancelableDataEntry));
-const WrappedDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(SaveableDataEntry);
+const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(SaveableDataEntry);
+const WrappedDataEntry = withBrowserBackWarning()(CompletableDataEntry);
 
 type Props = {
     formFoundation: RenderFoundation,

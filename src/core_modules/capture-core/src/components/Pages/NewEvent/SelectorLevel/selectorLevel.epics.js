@@ -1,5 +1,5 @@
 // @flow
-import { replace } from 'react-router-redux';
+import { push } from 'react-router-redux';
 import {
     actionTypes as newEventPageSelectorActionTypes,
     batchActionTypes as newEventPageSelectorBatchActionTypes,
@@ -24,7 +24,7 @@ export const newEventPageSelectorUpdateURLEpic = (action$: InputObservable, stor
             const state = store.getState();
             const { programId, orgUnitId } = state.currentSelections;
             const args = getArguments(programId, orgUnitId);
-            return replace(`/newEvent/${args}`);
+            return push(`/newEvent/${args}`);
         });
 
 export const newEventPageSelectorResetURLEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -34,5 +34,5 @@ export const newEventPageSelectorResetURLEpic = (action$: InputObservable, store
             const state = store.getState();
             const { programId, orgUnitId } = state.currentSelections;
             const args = getArguments(programId, orgUnitId);
-            return replace(`/${args}`);
+            return push(`/${args}`);
         });

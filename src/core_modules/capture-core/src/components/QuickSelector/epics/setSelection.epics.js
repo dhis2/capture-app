@@ -1,5 +1,5 @@
 // @flow
-import { replace } from 'react-router-redux';
+import { push } from 'react-router-redux';
 import {
     actionTypes as selectionActionTypes,
 } from '../actions/QuickSelector.actions';
@@ -23,7 +23,7 @@ export const setOrgUnit = (action$: InputObservable, store: ReduxStore) =>
             const state = store.getState();
             const { programId, orgUnitId } = state.currentSelections;
             const args = getArguments(programId, orgUnitId);
-            return replace(`/${args}`);
+            return push(`/${args}`);
         });
 
 export const setProgram = (action$: InputObservable, store: ReduxStore) =>
@@ -33,7 +33,7 @@ export const setProgram = (action$: InputObservable, store: ReduxStore) =>
             const state = store.getState();
             const { programId, orgUnitId } = state.currentSelections;
             const args = getArguments(programId, orgUnitId);
-            return replace(`/${args}`);
+            return push(`/${args}`);
         });
 
 export const goBackToListContext = (action$: InputObservable, store: ReduxStore) =>
@@ -43,5 +43,5 @@ export const goBackToListContext = (action$: InputObservable, store: ReduxStore)
             const state = store.getState();
             const { programId, orgUnitId } = state.currentSelections;
             const args = getArguments(programId, orgUnitId);
-            return replace(`/${args}`);
+            return push(`/${args}`);
         });

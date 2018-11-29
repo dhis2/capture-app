@@ -6,8 +6,6 @@
  * @param {string} value
  * @returns
  */
-const isValidPhoneNumber = (value: string) => {
-    return !value ? false : true;
-};
+const isValidPhoneNumber = (value: string) => /^[^a-zA-Z]+$/.test(value);
 
 export default isValidPhoneNumber;

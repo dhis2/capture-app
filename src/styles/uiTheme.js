@@ -2,6 +2,7 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import red from '@material-ui/core/colors/red';
 import blue from '@material-ui/core/colors/blue';
+import yellow from '@material-ui/core/colors/yellow';
 
 const primary = {
     main: '#1976D2',
@@ -33,10 +34,17 @@ const theme = createMuiTheme({
             lightest: '#B2DFDB',
         },
         error: {
+            lighter: '#FBEAE5',
+            light: red[300],
             main: '#E53935',
+            dark: red[700],
         },
         warning: {
+            ...yellow,
+            lighter: yellow[100],
+            light: yellow[300],
             main: '#F19C02',
+            dark: yellow[900],
         },
         success: {
             main: '#3D9305',

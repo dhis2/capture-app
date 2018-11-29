@@ -45,6 +45,7 @@ export const editEventPageDesc = createReducerDescription({
         const newState = {
             ...state,
             eventId: action.payload,
+            isLoading: false,
             dataEntryIsLoading: true,
             loadError: null,
         };

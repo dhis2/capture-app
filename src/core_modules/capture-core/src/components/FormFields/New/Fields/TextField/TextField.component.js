@@ -7,7 +7,6 @@ const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
         border: `2px solid ${theme.palette.primary.light}`,
         borderRadius: '5px',
-        backgroundColor: 'red',
     },
     inputWrapperUnfocused: {
         padding: 2,

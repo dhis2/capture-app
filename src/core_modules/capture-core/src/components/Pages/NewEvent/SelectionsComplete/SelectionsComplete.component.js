@@ -22,7 +22,7 @@ const getStyles = (theme: Theme) => ({
     header: {
         flexGrow: 1,
         ...theme.typography.title,
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 500,
         paddingLeft: 8,
     },

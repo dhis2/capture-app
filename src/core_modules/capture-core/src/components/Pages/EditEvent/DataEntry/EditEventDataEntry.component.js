@@ -34,11 +34,12 @@ import withIndicatorOutput from '../../../DataEntry/dataEntryOutput/withIndicato
 import withFeedbackOutput from '../../../DataEntry/dataEntryOutput/withFeedbackOutput';
 import withErrorOutput from '../../../DataEntry/dataEntryOutput/withErrorOutput';
 import withWarningOutput from '../../../DataEntry/dataEntryOutput/withWarningOutput';
+import withBrowserBackWarning from '../../../DataEntry/withBrowserBackWarning';
 import labelTypeClasses from './dataEntryFieldLabels.mod.css';
 
 const getStyles = (theme: Theme) => ({
     dataEntryContainer: {
-        padding: theme.typography.pxToRem(20),
+        padding: theme.typography.pxToRem(8),
     },
     fieldLabelMediaBased: {
         [theme.breakpoints.down(523)]: {
@@ -176,9 +177,9 @@ const buildGeometrySettingsFn = () => (props: Object) => {
             component: polygonComponent,
             componentProps: createComponentProps(props, {
                 width: props && props.formHorizontal ? 150 : 350,
-                label: 'Location',
+                label: i18n.t('Area'),
                 required: false,
-                dialogLabel: 'Location',
+                dialogLabel: i18n.t('Area'),
             }),
             propName: 'geometry',
             validatorContainers: [
@@ -266,6 +267,7 @@ const buildNotesSettingsFn = () => {
             label: 'Comments',
             onAddNote: props.onAddNote,
             id: props.id,
+            addNoteDisabled: !props.formFoundation.access.data.write,
         }),
         propName: 'note',
         validatorContainers: getNoteValidatorContainers(),
@@ -295,7 +297,8 @@ const WarningOutput = withWarningOutput()(IndicatorOutput);
 const ErrorOutput = withErrorOutput()(WarningOutput);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(ErrorOutput));
 const CancelableDataEntry = withCancelButton(getCancelOptions)(SaveableDataEntry);
-const DataEntryWrapper = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);
+const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(CancelableDataEntry);
+const DataEntryWrapper = withBrowserBackWarning()(CompletableDataEntry);
 
 type Props = {
     formFoundation: ?RenderFoundation,

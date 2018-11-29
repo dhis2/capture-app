@@ -12,5 +12,5 @@ export const networkMonitorStatusEpic = (action$: InputObservable) =>
     // $FlowSuppress
     action$
         .ofType(OFFLINE_STATUS_CHANGED)
-        .map((action) => networkStatusChange(action.payload.online));
+        .map(action => networkStatusChange(action.payload.online));
 

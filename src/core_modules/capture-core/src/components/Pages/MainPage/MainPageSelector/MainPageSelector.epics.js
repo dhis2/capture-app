@@ -1,5 +1,5 @@
 // @flow
-import { replace } from 'react-router-redux';
+import { push } from 'react-router-redux';
 import {
     actionTypes as mainPageSelectorActionTypes,
     batchActionTypes as mainPageSelectorBatchActionTypes,
@@ -26,5 +26,5 @@ export const mainPageSelectorUpdateURLEpic = (action$: InputObservable, store: R
             const state = store.getState();
             const { programId, orgUnitId } = state.currentSelections;
             const args = getArguments(programId, orgUnitId);
-            return replace(`/${args}`);
+            return push(`/${args}`);
         });

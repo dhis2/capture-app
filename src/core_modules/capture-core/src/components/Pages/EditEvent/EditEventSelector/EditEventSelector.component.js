@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import QuickSelector from '../../../QuickSelector/QuickSelector.container';
-import EditEvent from '../EditEvent.container';
+import EditEvent from '../EditEvent.component';
 import ConfirmDialog from '../../../Dialogs/ConfirmDialog.component';
 
 type Props = {

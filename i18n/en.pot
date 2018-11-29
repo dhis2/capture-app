@@ -188,6 +188,9 @@ msgstr ""
 msgid "Syncing"
 msgstr ""
 
+msgid "Area"
+msgstr ""
+
 msgid "Basic info"
 msgstr ""
 
@@ -344,6 +347,15 @@ msgid "Error saving event"
 msgstr ""
 
 msgid "Could not save event. See log for details"
+msgstr ""
+
+msgid "Set coordinate"
+msgstr ""
+
+msgid "Delete polygon"
+msgstr ""
+
+msgid "Set area"
 msgstr ""
 
 msgid "Choose one or more dates..."
