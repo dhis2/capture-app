@@ -7,7 +7,8 @@ import { reduxPersistStores } from './stores/index';
 
 const MAIN_STORAGE_KEY = 'dhis2ca';
 
-const adapterTypes = [availableAdapters.INDEXED_DB, availableAdapters.LOCAL_STORAGE, availableAdapters.MEMORY];
+const adapterTypes = [availableAdapters.MEMORY, availableAdapters.INDEXED_DB, availableAdapters.LOCAL_STORAGE];
+// const adapterTypes = [availableAdapters.INDEXED_DB, availableAdapters.LOCAL_STORAGE, availableAdapters.MEMORY];
 const storageControllers: { [key: string]: StorageController } = {};
 
 function initUserControllerAsync(adapterType: any) {

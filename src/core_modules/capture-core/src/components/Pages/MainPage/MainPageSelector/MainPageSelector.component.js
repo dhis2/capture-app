@@ -1,7 +1,5 @@
 // @flow
 import React, { Component } from 'react';
-
-import withLoadHandler from '../withLoadHandler';
 import QuickSelector from '../../../QuickSelector/QuickSelector.container';
 import MainPage from '../MainPage.container';
 
@@ -68,4 +66,4 @@ class MainPageSelector extends Component<Props> {
     }
 }
 
-export default withLoadHandler()(MainPageSelector);
+export default MainPageSelector;
