@@ -20,8 +20,6 @@ const mapStateToProps = (state: ReduxState) => {
     const formInputInProgess = state.currentSelections.complete && dataEntryHasChanges(state, 'singleEvent-newEvent');
     return {
         formInputInProgess,
-        isLoading: state.newEventPage.isLoading,
-        selectionsError: state.newEventPage.selectionsError,
     };
 };
 
