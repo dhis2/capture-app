@@ -1,17 +1,16 @@
 // @flow
 import StorageController from 'capture-core-utils/storage/StorageController';
-import IndexedDBAdapter from 'capture-core-utils/storage/IndexedDBAdapter';
-import LocalStorageAdapter from 'capture-core-utils/storage/DomLocalStorageAdapter';
+import availableAdapters from 'capture-core-utils/storage/availableAdapters';
 import createUserStorageController from './userStorageController';
 import createMainStorageController from './mainStorageController';
 import { reduxPersistStores } from './stores/index';
 
 const MAIN_STORAGE_KEY = 'dhis2ca';
 
-const adapterTypes = [IndexedDBAdapter, LocalStorageAdapter];
+const adapterTypes = [availableAdapters.INDEXED_DB, availableAdapters.LOCAL_STORAGE, availableAdapters.MEMORY];
 const storageControllers: { [key: string]: StorageController } = {};
 
-function initUserControllerAsync(adapterType: typeof IndexedDBAdapter | typeof LocalStorageAdapter) {
+function initUserControllerAsync(adapterType: any) {
     const userStorageController = createUserStorageController(MAIN_STORAGE_KEY, [adapterType]);
     storageControllers.user = userStorageController;
 

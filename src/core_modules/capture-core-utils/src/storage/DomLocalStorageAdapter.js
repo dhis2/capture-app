@@ -1,7 +1,5 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-underscore-dangle */
-import isDefined from 'd2-utilizr/lib/isDefined';
-import isArray from 'd2-utilizr/lib/isArray';
 import errorCreator from '../errorCreator';
 
 class Indexer {
@@ -84,7 +82,7 @@ class DomLocalStorageAdapter {
                 accIndexers[store] = new Indexer(this.name, store, DomLocalStorageAdapter.storage);
                 return accIndexers;
             }, {});
-        this.isOpened = false;
+        this.opened = false;
     }
 
     /*
@@ -95,7 +93,7 @@ class DomLocalStorageAdapter {
         const versionKey = `${this.name}.${DomLocalStorageAdapter.CACHEVERSIONKEY}`;
         const inUseVersionString = DomLocalStorageAdapter.storage.getItem(versionKey);
         const inUseVersion = inUseVersionString && JSON.parse(inUseVersionString);
-        this.isOpened = true;
+        this.opened = true;
 
         if (this.version !== inUseVersion) {
             return Promise.resolve()
@@ -116,18 +114,6 @@ class DomLocalStorageAdapter {
         return Promise.resolve();
     }
 
-    _validatePrerequisitesForSet(store, dataObject) {
-        const isOpenError = this.validateIsOpened();
-        if (isOpenError) {
-            return isOpenError;
-        }
-
-        if (!isDefined(dataObject) || !isDefined(dataObject[this.keyPath])) {
-            return errorCreator(DomLocalStorageAdapter.errorMessages.INVALID_STORAGE_OBJECT)({ adapter: this });
-        }
-        return null;
-    }
-
     _executeSet(store, dataObject) {
         const storeObject = JSON.parse(JSON.stringify(dataObject));
         const key = storeObject[this.keyPath];
@@ -143,12 +129,6 @@ class DomLocalStorageAdapter {
 
     set(store, dataObject) {
         return new Promise((resolve, reject) => {
-            const prerequisitesError = this._validatePrerequisitesForSet(store, dataObject);
-            if (prerequisitesError) {
-                reject(prerequisitesError);
-                return;
-            }
-
             try {
                 this._executeSet(store, dataObject);
                 resolve();
@@ -158,25 +138,7 @@ class DomLocalStorageAdapter {
         });
     }
 
-    _validatePrerequisitesForSetAll(store, dataArray) {
-        const isOpenError = this.validateIsOpened();
-        if (isOpenError) {
-            return isOpenError;
-        }
-
-        if (!dataArray || !isArray(dataArray)) {
-            return errorCreator(DomLocalStorageAdapter.errorMessages.STORAGE_ARRAY_NOT_PROVIDED)({ adapter: this });
-        }
-
-        return null;
-    }
-
     setAll(store, dataArray) {
-        const prerequisitesError = this._validatePrerequisitesForSetAll(store, dataArray);
-        if (prerequisitesError) {
-            return Promise.reject(prerequisitesError);
-        }
-
         try {
             dataArray.forEach((dataObject) => {
                 this._executeSet(store, dataObject);
@@ -187,26 +149,8 @@ class DomLocalStorageAdapter {
         }
     }
 
-    _validatePrerequisitesForGet(store, key) {
-        const isOpenError = this.validateIsOpened();
-        if (isOpenError) {
-            return isOpenError;
-        }
-
-        if (!key) {
-            return errorCreator(DomLocalStorageAdapter.errorMessages.INVALID_KEY)({ adapter: this });
-        }
-        return null;
-    }
-
     get(store, key) {
-        return new Promise((resolve, reject) => {
-            const prerequisitesError = this._validatePrerequisitesForGet(store, key);
-            if (prerequisitesError) {
-                reject(prerequisitesError);
-                return;
-            }
-
+        return new Promise((resolve) => {
             const storeObject = DomLocalStorageAdapter.storage.getItem(this.getStoreKey(store, key));
             let responseObject;
             if (storeObject) {
@@ -218,11 +162,6 @@ class DomLocalStorageAdapter {
     }
 
     getAll(store, predicate) {
-        const isOpenError = this.validateIsOpened();
-        if (isOpenError) {
-            return Promise.reject(isOpenError);
-        }
-
         const keys = this.indexer[store].all();
         const filtered = typeof predicate === 'function';
 
@@ -250,10 +189,6 @@ class DomLocalStorageAdapter {
     }
 
     getKeys(store) {
-        const isOpenError = this.validateIsOpened();
-        if (isOpenError) {
-            return Promise.reject(isOpenError);
-        }
         return Promise.resolve(this._executeGetKeys(store));
     }
 
@@ -264,17 +199,7 @@ class DomLocalStorageAdapter {
     }
 
     remove(store, key) {
-        const isOpenError = this.validateIsOpened();
-        if (isOpenError) {
-            return Promise.reject(isOpenError);
-        }
-
-        if (!key) {
-            return Promise.reject(errorCreator(DomLocalStorageAdapter.errorMessages.INVALID_KEY)({ adapter: this }));
-        }
-
         this._executeRemove(store, key);
-
         return Promise.resolve();
     }
 
@@ -286,33 +211,15 @@ class DomLocalStorageAdapter {
     }
 
     removeAll(store) {
-        const isOpenError = this.validateIsOpened();
-        if (isOpenError) {
-            return Promise.reject(isOpenError);
-        }
         return Promise.resolve(this._executeRemoveAll(store));
     }
 
     contains(store, key) {
-        const isOpenError = this.validateIsOpened();
-        if (isOpenError) {
-            return Promise.reject(isOpenError);
-        }
-
-        if (!key) {
-            Promise.reject(errorCreator(DomLocalStorageAdapter.errorMessages.INVALID_KEY)({ adapter: this }));
-        }
-
         const storeKey = this.getStoreKey(store, key);
         return Promise.resolve(this.indexer[store].exists(storeKey));
     }
 
     count(store, key) {
-        const isOpenError = this.validateIsOpened();
-        if (isOpenError) {
-            return Promise.reject(isOpenError);
-        }
-
         if (key) {
             Promise.reject(
                 errorCreator(DomLocalStorageAdapter.errorMessages.KEY_BASED_COUNT_IS_NOT_SUPPORTED)({ adapter: this }));
@@ -322,7 +229,7 @@ class DomLocalStorageAdapter {
     }
 
     close() {
-        this.isOpened = false;
+        this.opened = false;
         return Promise.resolve();
     }
 
@@ -337,18 +244,16 @@ class DomLocalStorageAdapter {
         return Promise.resolve();
     }
 
+    isOpen() {
+        return this.opened;
+    }
+
     getStoreKey(store, key) {
         return `${this.name}.${store}.${key}`;
     }
 
     mainKeyFromStoreKey(storeKey, store) {
         return storeKey.replace(`${this.name}.${store}.`, '');
-    }
-
-    validateIsOpened() {
-        return !this.isOpened
-            ? errorCreator(DomLocalStorageAdapter.errorMessages.STORAGE_NOT_OPENED)({ adapter: this })
-            : null;
     }
 }
 

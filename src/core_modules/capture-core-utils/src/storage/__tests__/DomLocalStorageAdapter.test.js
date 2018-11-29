@@ -114,13 +114,3 @@ it('removeAll', async () => {
     expect(resultKey1).toEqual(false);
     expect(resultKey2).toEqual(false);
 });
-
-it('set to fail because db not open', async () => {
-    expect.assertions(1);
-    const lsAdapter = new DomLocalStorageAdapter(options);
-    try {
-        await lsAdapter.set(storeName, { id: '1', test });
-    } catch (error) {
-        expect(error).toBeDefined();
-    }
-});

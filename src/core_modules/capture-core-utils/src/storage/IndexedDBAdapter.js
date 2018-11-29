@@ -1,7 +1,6 @@
 /* eslint-disable complexity */
 /* eslint-disable no-underscore-dangle */
 import isDefined from 'd2-utilizr/lib/isDefined';
-import isArray from 'd2-utilizr/lib/isArray';
 import errorCreator from '../errorCreator';
 
 class IndexedDBAdapter {
@@ -163,15 +162,6 @@ class IndexedDBAdapter {
 
     set(store, dataObject) {
         return new Promise((resolve, reject) => {
-            if (!this.verifyDbSet(reject)) {
-                return;
-            }
-
-            if (!isDefined(dataObject) || !isDefined(dataObject[this.keyPath])) {
-                reject(errorCreator(IndexedDBAdapter.errorMessages.INVALID_STORAGE_OBJECT)({ adapter: this }));
-                return;
-            }
-
             let tx;
             let abortTransaction;
             try {
@@ -196,15 +186,6 @@ class IndexedDBAdapter {
 
     setAll(store, dataArray) {
         return new Promise((resolve, reject) => {
-            if (!this.verifyDbSet(reject)) {
-                return;
-            }
-
-            if (!dataArray || !isArray(dataArray)) {
-                reject(errorCreator(IndexedDBAdapter.errorMessages.STORAGE_ARRAY_NOT_PROVIDED)({ adapter: this }));
-                return;
-            }
-
             let tx;
             let abortTransaction;
             try {
@@ -274,15 +255,6 @@ class IndexedDBAdapter {
 
     get(store, key) {
         return new Promise((resolve, reject) => {
-            if (!this.verifyDbSet(reject)) {
-                return;
-            }
-
-            if (!key) {
-                reject(errorCreator(IndexedDBAdapter.errorMessages.INVALID_KEY)({ adapter: this }));
-                return;
-            }
-
             try {
                 const tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
                 this._get(store, key, tx)
@@ -300,10 +272,6 @@ class IndexedDBAdapter {
 
     getAll(store, predicate) {
         return new Promise((resolve, reject) => {
-            if (!this.verifyDbSet(reject)) {
-                return;
-            }
-
             const records = [];
             const filtered = typeof predicate === 'function';
 
@@ -343,10 +311,6 @@ class IndexedDBAdapter {
 
     getKeys(store) {
         return new Promise((resolve, reject) => {
-            if (!this.verifyDbSet(reject)) {
-                return;
-            }
-
             const keys = [];
 
             try {
@@ -376,15 +340,6 @@ class IndexedDBAdapter {
 
     remove(store, key) {
         return new Promise((resolve, reject) => {
-            if (!this.verifyDbSet(reject)) {
-                return;
-            }
-
-            if (!key) {
-                reject(errorCreator(IndexedDBAdapter.errorMessages.INVALID_KEY)({ adapter: this }));
-                return;
-            }
-
             try {
                 const tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_WRITE);
                 const objectStore = tx.objectStore(store);
@@ -405,10 +360,6 @@ class IndexedDBAdapter {
 
     removeAll(store) {
         return new Promise((resolve, reject) => {
-            if (!this.verifyDbSet(reject)) {
-                return;
-            }
-
             try {
                 const tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_WRITE);
                 const objectStore = tx.objectStore(store);
@@ -429,15 +380,6 @@ class IndexedDBAdapter {
 
     contains(store, key) {
         return new Promise((resolve, reject) => {
-            if (!this.verifyDbSet(reject)) {
-                return;
-            }
-
-            if (!key) {
-                reject(errorCreator(IndexedDBAdapter.errorMessages.INVALID_KEY)({ adapter: this }));
-                return;
-            }
-
             try {
                 const tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
                 const objectStore = tx.objectStore(store);
@@ -459,10 +401,6 @@ class IndexedDBAdapter {
 
     count(store, key) {
         return new Promise((resolve, reject) => {
-            if (!this.verifyDbSet(reject)) {
-                return;
-            }
-
             if (!key) {
                 key = null;
             }
@@ -542,12 +480,8 @@ class IndexedDBAdapter {
         });
     }
 
-    verifyDbSet(onNotFulfilled) {
-        if (!this.db) {
-            onNotFulfilled(errorCreator(IndexedDBAdapter.errorMessages.OPEN_DATABASE_FIRST)({ adapter: this }));
-            return false;
-        }
-        return true;
+    isOpen() {
+        return !!this.db;
     }
 }
 
