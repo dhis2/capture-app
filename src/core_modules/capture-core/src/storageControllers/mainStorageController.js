@@ -9,6 +9,10 @@ function createStorageController(storageName: string, AdapterClasses: Array<any>
             1,
             AdapterClasses,
             Object.keys(maintenanceStores).map(key => maintenanceStores[key]),
+            storage => storage.set(maintenanceStores.STATUS, {
+                id: 'fallback',
+                value: true,
+            }),
         );
     return storageController;
 }

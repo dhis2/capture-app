@@ -2,6 +2,7 @@ import indexedDB from 'fake-indexeddb';
 import StorageController from '../StorageController';
 import availableAdapters from '../availableAdapters';
 import IndexedDBAdapter from '../IndexedDBAdapter';
+import '../../extensions/asyncForEachArray';
 
 IndexedDBAdapter.indexedDB = indexedDB;
 IndexedDBAdapter.iDBKeyRange = {};
@@ -9,8 +10,7 @@ IndexedDBAdapter.iDBTransaction = {};
 
 let dbName = 'testDB';
 const storeNames = ['testStore', 'testStore2'];
-const Adapters = [availableAdapters.MEMORY, availableAdapters.INDEXED_DB, availableAdapters.LOCAL_STORAGE];
-
+const Adapters = [availableAdapters.INDEXED_DB, availableAdapters.LOCAL_STORAGE, availableAdapters.MEMORY];
 
 let testCnt = 0;
 let storageController;
@@ -109,4 +109,30 @@ it('set to fail because db not open', async () => {
     } catch (error) {
         expect(error).toBeDefined();
     }
+});
+
+it('fallback to memory storage on set', async () => {
+    await storageController.open();
+    storageController.adapter.set = () => { throw Error('testError'); };
+    await storageController.set(storeNames[0], { id: '1', name: 'test' });
+    expect(storageController.adapterType).toBe(availableAdapters.MEMORY);
+    const retrievedObject = await storageController.get(storeNames[0], '1');
+    expect(retrievedObject.name).toEqual('test');
+});
+
+it('fallback to memory storage on setAll', async () => {
+    await storageController.open();
+
+    let executionAttempt = 1;
+    storageController.adapter.setAll = (...args) => {
+        if (executionAttempt === 1) {
+            executionAttempt = 2;
+            throw Error('testError');
+        }
+        return storageController.adapter.setAll(...args);
+    };
+    await storageController.setAll(storeNames[0], [{ id: '1', name: 'test' }]);
+    expect(storageController.adapterType).toBe(availableAdapters.MEMORY);
+    const retrievedObject = await storageController.get(storeNames[0], '1');
+    expect(retrievedObject.name).toEqual('test');
 });

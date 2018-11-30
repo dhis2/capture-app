@@ -1,7 +1,7 @@
 // @flow
 import StorageController from 'capture-core-utils/storage/StorageController';
 import { getCurrentUser } from '../d2/d2Instance';
-import { metaDataStores, reduxPersistStores } from './stores/index';
+import { metaDataStores, reduxPersistStores, maintenanceStores } from './stores/index';
 
 function getStorageName(mainStorageName: string) {
     const user = getCurrentUser();
@@ -26,12 +26,25 @@ function getStores() {
     return [...metaDataStoreList, ...persistStoreList];
 }
 
-function createStorageController(mainStorageName: string, AdapterClasses: Array<any>) {
+function createStorageController(
+    mainStorageName: string,
+    AdapterClasses: Array<any>,
+    mainStorageController: StorageController,
+) {
     const storageName = getStorageName(mainStorageName);
     const appCacheVersion = getCacheVersion();
     const stores = getStores();
     const storageController =
-        new StorageController(storageName, appCacheVersion, AdapterClasses, stores);
+        new StorageController(
+            storageName,
+            appCacheVersion,
+            AdapterClasses,
+            stores,
+            () => mainStorageController.setWithoutFallback(maintenanceStores.STATUS, {
+                id: 'fallback',
+                value: true,
+            }),
+        );
     return storageController;
 }
 

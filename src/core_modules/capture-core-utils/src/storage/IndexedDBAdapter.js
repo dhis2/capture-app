@@ -154,6 +154,10 @@ class IndexedDBAdapter {
                 resolve(storeObject);
             };
 
+            tx.oncomplete = () => {
+                // debugger;
+            };
+
             request.onerror = (error) => {
                 reject(errorCreator(IndexedDBAdapter.errorMessages.SET_FAILED)({ adapter: this, error }));
             };
@@ -279,7 +283,6 @@ class IndexedDBAdapter {
                 const tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
                 const objectStore = tx.objectStore(store);
                 const request = objectStore.openCursor();
-
                 request.onsuccess = (e) => {
                     const cursor = e.target.result;
 
@@ -295,12 +298,14 @@ class IndexedDBAdapter {
                         }
 
                         cursor.continue();
-                    } else {
-                        resolve(records);
                     }
                 };
 
-                request.onerror = (error) => {
+                tx.oncomplete = () => {
+                    resolve(records);
+                };
+
+                tx.onerror = (error) => {
                     reject(errorCreator(IndexedDBAdapter.errorMessages.GET_ALL_FAILED)({ adapter: this, error }));
                 };
             } catch (error) {
@@ -430,16 +435,10 @@ class IndexedDBAdapter {
                 resolve();
                 return;
             }
-
             try {
-                this.db.close();
-
-                this.db.onerror = (error) => {
-                    reject(errorCreator(IndexedDBAdapter.errorMessages.CLOSE_FAILED)({ adapter: this, error }));
-                };
-
+                const db = this.db;
+                db.close();
                 this.db = null;
-
                 resolve();
             } catch (error) {
                 reject(errorCreator(IndexedDBAdapter.errorMessages.CLOSE_FAILED)({ adapter: this, error }));
