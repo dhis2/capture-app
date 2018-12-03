@@ -52,24 +52,6 @@ class IndexedDBAdapter {
         return IndexedDBAdapter.indexedDB && IndexedDBAdapter.iDBKeyRange && IndexedDBAdapter.iDBTransaction;
     }
 
-    static getAbortTransaction(tx, onAborted) {
-        let abortMessage;
-        let aborted = false;
-        tx.onabort = () => {
-            onAborted(abortMessage);
-        };
-        return (error) => {
-            if (!abortMessage) {
-                abortMessage = error;
-            }
-
-            if (!aborted) {
-                aborted = true;
-                tx.abort();
-            }
-        };
-    }
-
     constructor(options) {
         this.name = options.name;
         this.version = options.version;
@@ -120,7 +102,7 @@ class IndexedDBAdapter {
                                 if (!this.db.objectStoreNames.contains(store)) {
                                     return Promise.resolve(null);
                                 }
-                                return this._get(store, key, tx);
+                                return this.getForUpgrade(store, key, tx);
                             },
                         }),
                     )
@@ -129,33 +111,22 @@ class IndexedDBAdapter {
                         return Promise.resolve();
                     })
                     .then(() => onAfterUpgrade && onAfterUpgrade({
-                        set: (store, data) => {
-                            const abortTransaction = IndexedDBAdapter.getAbortTransaction(tx, reject);
-                            return this
-                                ._set(store, data, tx)
-                                .catch((error) => {
-                                    abortTransaction(error);
-                                });
-                        },
+                        set: (store, data) => this
+                            .setForUpgrade(store, data, tx),
                     }));
             };
         });
     }
 
-    _set(store, dataObject, tx) {
+    setForUpgrade(store, dataObject, tx) {
         return new Promise((resolve, reject) => {
             const storeObject = JSON.parse(JSON.stringify(dataObject));
             const key = storeObject[this.keyPath];
             delete storeObject[this.keyPath];
             const objectStore = tx.objectStore(store);
             const request = objectStore.put(storeObject, key);
-
             request.onsuccess = () => {
                 resolve(storeObject);
-            };
-
-            tx.oncomplete = () => {
-                // debugger;
             };
 
             request.onerror = (error) => {
@@ -167,23 +138,37 @@ class IndexedDBAdapter {
     set(store, dataObject) {
         return new Promise((resolve, reject) => {
             let tx;
-            let abortTransaction;
+            let catchError;
+            const abortTx = (error) => {
+                catchError = error;
+                tx.abort();
+            };
+
             try {
+                const storeObject = JSON.parse(JSON.stringify(dataObject));
+                const key = storeObject[this.keyPath];
+                delete storeObject[this.keyPath];
+
                 tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_WRITE);
-                abortTransaction = IndexedDBAdapter.getAbortTransaction(tx, reject);
-                this
-                    ._set(store, dataObject, tx)
-                    .then((storeObject) => {
-                        resolve(storeObject);
-                    })
-                    .catch((error) => {
-                        abortTransaction(error);
-                    });
+                tx.oncomplete = () => {
+                    resolve(storeObject);
+                };
+                tx.onerror = (error) => {
+                    reject(errorCreator(IndexedDBAdapter.errorMessages.SET_FAILED)({ adapter: this, error }));
+                };
+                tx.onabort = () => {
+                    reject(
+                        errorCreator(IndexedDBAdapter.errorMessages.SET_FAILED)(
+                            { adapter: this, aborted: true, error: catchError }));
+                };
+                const objectStore = tx.objectStore(store);
+                objectStore.put(storeObject, key);
             } catch (error) {
                 if (tx) {
-                    abortTransaction(errorCreator(IndexedDBAdapter.errorMessages.SET_FAILED)({ adapter: this, error }));
+                    abortTx(error);
+                } else {
+                    reject(errorCreator(IndexedDBAdapter.errorMessages.SET_FAILED)({ adapter: this, error }));
                 }
-                reject(errorCreator(IndexedDBAdapter.errorMessages.SET_FAILED)({ adapter: this, error }));
             }
         });
     }
@@ -191,10 +176,24 @@ class IndexedDBAdapter {
     setAll(store, dataArray) {
         return new Promise((resolve, reject) => {
             let tx;
-            let abortTransaction;
+            let catchError;
+            const abortTx = (error) => {
+                catchError = error;
+                tx.abort();
+            };
+
             try {
                 tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_WRITE);
-                abortTransaction = IndexedDBAdapter.getAbortTransaction(tx, reject);
+                tx.oncomplete = () => {
+                    resolve();
+                };
+                tx.onerror = (error) => {
+                    reject(errorCreator(IndexedDBAdapter.errorMessages.SET_FAILED)({ adapter: this, error }));
+                };
+                tx.onabort = () => {
+                    reject(errorCreator(IndexedDBAdapter.errorMessages.SET_FAILED)(
+                        { adapter: this, aborted: true, error: catchError }));
+                };
 
                 const objectStore = tx.objectStore(store);
                 let storedCount = 0;
@@ -204,40 +203,31 @@ class IndexedDBAdapter {
                         const storeObject = JSON.parse(JSON.stringify(dataObject));
 
                         if (!isDefined(storeObject) || !isDefined(storeObject[this.keyPath])) {
-                            abortTransaction(errorCreator(IndexedDBAdapter.errorMessages.INVALID_STORAGE_OBJECT)({ adapter: this }));
+                            abortTx(errorCreator(IndexedDBAdapter.errorMessages.INVALID_STORAGE_OBJECT)(
+                                { adapter: this }));
                         }
 
                         const key = storeObject[this.keyPath];
                         delete storeObject[this.keyPath];
-
                         const request = objectStore.put(storeObject, key);
 
                         request.onsuccess = () => {
                             storedCount += 1;
                             insertItem();
                         };
-
-                        request.onerror = (error) => {
-                            if (tx) {
-                                abortTransaction(errorCreator(IndexedDBAdapter.errorMessages.SET_FAILED)({ adapter: this, error }));
-                            }
-                            reject(errorCreator(IndexedDBAdapter.errorMessages.SET_FAILED)({ adapter: this, error }));
-                        };
-                    } else {
-                        resolve();
                     }
                 };
                 insertItem();
             } catch (error) {
                 if (tx) {
-                    abortTransaction(errorCreator(IndexedDBAdapter.errorMessages.SET_FAILED)({ adapter: this, error }));
+                    abortTx(error);
                 }
                 reject(errorCreator(IndexedDBAdapter.errorMessages.SET_FAILED)({ adapter: this, error }));
             }
         });
     }
 
-    _get(store, key, tx) {
+    getForUpgrade(store, key, tx) {
         return new Promise((resolve, reject) => {
             const objectStore = tx.objectStore(store);
             const request = objectStore.get(key);
@@ -259,16 +249,41 @@ class IndexedDBAdapter {
 
     get(store, key) {
         return new Promise((resolve, reject) => {
+            let tx;
+            let catchError;
+            const abortTx = (error) => {
+                catchError = error;
+                tx.abort();
+            };
+
             try {
-                const tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
-                this._get(store, key, tx)
-                    .then((object) => {
-                        resolve(object);
-                    })
-                    .catch((error) => {
-                        reject(error);
-                    });
+                let resultObject;
+                tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
+                tx.oncomplete = () => {
+                    resolve(resultObject);
+                };
+                tx.onerror = (error) => {
+                    reject(errorCreator(IndexedDBAdapter.errorMessages.GET_FAILED)({ adapter: this, error }));
+                };
+                tx.onabort = () => {
+                    reject(errorCreator(IndexedDBAdapter.errorMessages.GET_FAILED)(
+                        { adapter: this, aborted: true, error: catchError }));
+                };
+
+                const objectStore = tx.objectStore(store);
+                const request = objectStore.get(key);
+                request.onsuccess = (e) => {
+                    const object = e.target.result;
+
+                    if (isDefined(object)) {
+                        object[this.keyPath] = key;
+                    }
+                    resultObject = object;
+                };
             } catch (error) {
+                if (tx) {
+                    abortTx(error);
+                }
                 reject(errorCreator(IndexedDBAdapter.errorMessages.GET_FAILED)({ adapter: this, error }));
             }
         });
@@ -276,11 +291,31 @@ class IndexedDBAdapter {
 
     getAll(store, predicate) {
         return new Promise((resolve, reject) => {
-            const records = [];
-            const filtered = typeof predicate === 'function';
+            let tx;
+            let catchError;
+            const abortTx = (error) => {
+                catchError = error;
+                tx.abort();
+            };
 
             try {
-                const tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
+                const records = [];
+                const filtered = typeof predicate === 'function';
+
+                tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
+                tx.oncomplete = () => {
+                    resolve(records);
+                };
+
+                tx.onerror = (error) => {
+                    reject(errorCreator(IndexedDBAdapter.errorMessages.GET_ALL_FAILED)({ adapter: this, error }));
+                };
+
+                tx.onabort = () => {
+                    reject(errorCreator(IndexedDBAdapter.errorMessages.GET_ALL_FAILED)(
+                        { adapter: this, aborted: true, error: catchError }));
+                };
+
                 const objectStore = tx.objectStore(store);
                 const request = objectStore.openCursor();
                 request.onsuccess = (e) => {
@@ -300,15 +335,10 @@ class IndexedDBAdapter {
                         cursor.continue();
                     }
                 };
-
-                tx.oncomplete = () => {
-                    resolve(records);
-                };
-
-                tx.onerror = (error) => {
-                    reject(errorCreator(IndexedDBAdapter.errorMessages.GET_ALL_FAILED)({ adapter: this, error }));
-                };
             } catch (error) {
+                if (tx) {
+                    abortTx(error);
+                }
                 reject(errorCreator(IndexedDBAdapter.errorMessages.GET_ALL_FAILED)({ adapter: this, error }));
             }
         });
@@ -316,10 +346,26 @@ class IndexedDBAdapter {
 
     getKeys(store) {
         return new Promise((resolve, reject) => {
-            const keys = [];
-
+            let tx;
+            let catchError;
+            const abortTx = (error) => {
+                catchError = error;
+                tx.abort();
+            };
             try {
-                const tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
+                const keys = [];
+                tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
+                tx.oncomplete = () => {
+                    resolve(keys);
+                };
+                tx.onerror = (error) => {
+                    reject(errorCreator(IndexedDBAdapter.errorMessages.GET_KEYS_FAILED)({ adapter: this, error }));
+                };
+                tx.onabort = () => {
+                    reject(errorCreator(IndexedDBAdapter.errorMessages.GET_KEYS_FAILED)(
+                        { adapter: this, aborted: true, error: catchError }));
+                };
+
                 const objectStore = tx.objectStore(store);
                 const request = objectStore.openCursor();
 
@@ -329,15 +375,12 @@ class IndexedDBAdapter {
                     if (cursor) {
                         keys.push(cursor.key);
                         cursor.continue();
-                    } else {
-                        resolve(keys);
                     }
                 };
-
-                request.onerror = (error) => {
-                    reject(errorCreator(IndexedDBAdapter.errorMessages.GET_KEYS_FAILED)({ adapter: this, error }));
-                };
             } catch (error) {
+                if (tx) {
+                    abortTx(error);
+                }
                 reject(errorCreator(IndexedDBAdapter.errorMessages.GET_KEYS_FAILED)({ adapter: this, error }));
             }
         });
@@ -345,19 +388,31 @@ class IndexedDBAdapter {
 
     remove(store, key) {
         return new Promise((resolve, reject) => {
+            let tx;
+            let catchError;
+            const abortTx = (error) => {
+                catchError = error;
+                tx.abort();
+            };
             try {
-                const tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_WRITE);
-                const objectStore = tx.objectStore(store);
-                const request = objectStore.delete(key);
-
-                request.onsuccess = () => {
+                tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_WRITE);
+                tx.oncomplete = () => {
                     resolve();
                 };
-
-                request.onerror = (error) => {
+                tx.onerror = (error) => {
                     reject(errorCreator(IndexedDBAdapter.errorMessages.REMOVE_FAILED)({ adapter: this, error }));
                 };
+                tx.onabort = () => {
+                    reject(errorCreator(IndexedDBAdapter.errorMessages.REMOVE_FAILED)(
+                        { adapter: this, aborted: true, error: catchError }));
+                };
+
+                const objectStore = tx.objectStore(store);
+                objectStore.delete(key);
             } catch (error) {
+                if (tx) {
+                    abortTx(error);
+                }
                 reject(errorCreator(IndexedDBAdapter.errorMessages.REMOVE_FAILED)({ adapter: this, error }));
             }
         });
@@ -365,19 +420,31 @@ class IndexedDBAdapter {
 
     removeAll(store) {
         return new Promise((resolve, reject) => {
+            let tx;
+            let catchError;
+            const abortTx = (error) => {
+                catchError = error;
+                tx.abort();
+            };
             try {
-                const tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_WRITE);
-                const objectStore = tx.objectStore(store);
-                const request = objectStore.clear();
-
-                request.onsuccess = () => {
+                tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_WRITE);
+                tx.oncomplete = () => {
                     resolve();
                 };
-
-                request.onerror = (error) => {
+                tx.onerror = (error) => {
                     reject(errorCreator(IndexedDBAdapter.errorMessages.REMOVE_ALL_FAILED)({ adapter: this, error }));
                 };
+                tx.onabort = () => {
+                    reject(errorCreator(IndexedDBAdapter.errorMessages.REMOVE_ALL_FAILED)(
+                        { adapter: this, aborted: true, error: catchError }));
+                };
+
+                const objectStore = tx.objectStore(store);
+                objectStore.clear();
             } catch (error) {
+                if (tx) {
+                    abortTx(error);
+                }
                 reject(errorCreator(IndexedDBAdapter.errorMessages.REMOVE_ALL_FAILED)({ adapter: this, error }));
             }
         });
@@ -385,20 +452,36 @@ class IndexedDBAdapter {
 
     contains(store, key) {
         return new Promise((resolve, reject) => {
+            let tx;
+            let catchError;
+            const abortTx = (error) => {
+                catchError = error;
+                tx.abort();
+            };
             try {
-                const tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
+                let result;
+                tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
+                tx.oncomplete = () => {
+                    resolve(result);
+                };
+                tx.onerror = (error) => {
+                    reject(errorCreator(IndexedDBAdapter.errorMessages.CONTAINS_FAILED)({ adapter: this, error }));
+                };
+                tx.onabort = () => {
+                    reject(errorCreator(IndexedDBAdapter.errorMessages.CONTAINS_FAILED)(
+                        { adapter: this, aborted: true, error: catchError }));
+                };
                 const objectStore = tx.objectStore(store);
                 const request = objectStore.get(key);
 
                 request.onsuccess = (e) => {
                     const object = e.target.result;
-                    resolve(!!object);
-                };
-
-                request.onerror = (error) => {
-                    reject(errorCreator(IndexedDBAdapter.errorMessages.CONTAINS_FAILED)({ adapter: this, error }));
+                    result = !!object;
                 };
             } catch (error) {
+                if (tx) {
+                    abortTx(error);
+                }
                 reject(errorCreator(IndexedDBAdapter.errorMessages.CONTAINS_FAILED)({ adapter: this, error }));
             }
         });
@@ -406,24 +489,41 @@ class IndexedDBAdapter {
 
     count(store, key) {
         return new Promise((resolve, reject) => {
+            let tx;
+            let catchError;
+            const abortTx = (error) => {
+                catchError = error;
+                tx.abort();
+            };
+
             if (!key) {
                 key = null;
             }
 
             try {
-                const tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
+                let result;
+                tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
+                tx.oncomplete = () => {
+                    resolve(result);
+                };
+                tx.onerror = (error) => {
+                    reject(errorCreator(IndexedDBAdapter.errorMessages.COUNT_FAILED)({ adapter: this, error }));
+                };
+                tx.onabort = () => {
+                    reject(errorCreator(IndexedDBAdapter.errorMessages.COUNT_FAILED)(
+                        { adapter: this, aborted: true, error: catchError }));
+                };
+
                 const objectStore = tx.objectStore(store);
                 const request = objectStore.count(key);
 
                 request.onsuccess = (e) => {
-                    const result = e.target.result;
-                    resolve(result);
-                };
-
-                request.onerror = (error) => {
-                    reject(errorCreator(IndexedDBAdapter.errorMessages.COUNT_FAILED)({ adapter: this, error }));
+                    result = e.target.result;
                 };
             } catch (error) {
+                if (tx) {
+                    abortTx(error);
+                }
                 reject(errorCreator(IndexedDBAdapter.errorMessages.COUNT_FAILED)({ adapter: this, error }));
             }
         });

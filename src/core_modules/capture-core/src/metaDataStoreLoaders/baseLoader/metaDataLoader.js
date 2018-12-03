@@ -30,8 +30,10 @@ const coreLoadSpecifications: Array<LoadSpecification> = [
     getOrganisationUnitsLoadSpecification(objectStores.ORGANISATION_UNITS, organisationUnitApiSpecification),
 ];
 
-function loadCoreMetaData(storageController: StorageController) {
-    return Promise.all(coreLoadSpecifications.map(loadSpecification => loadSpecification.load(storageController)));
+async function loadCoreMetaData(storageController: StorageController) {
+    // uses asyncForEach instead of Promise.all to make sure indexedDB is not blocked if fallback to memory storage is needed
+    // $FlowFixMe
+    await coreLoadSpecifications.asyncForEach(loadSpecification => loadSpecification.load(storageController));
 }
 
 export default async function loadMetaData() {

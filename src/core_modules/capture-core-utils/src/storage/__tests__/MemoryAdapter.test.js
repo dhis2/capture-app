@@ -14,11 +14,13 @@ afterEach(() => {
 
 it('set object without error', () => {
     const adapter = new MemoryAdapter(options);
+    adapter.open();
     adapter.set(storeName, { id: 1, value: { name: 'test ' } });
 });
 
 it('set and retrieve', () => {
     const adapter = new MemoryAdapter(options);
+    adapter.open();
     const objectToStore = { id: 1, value: { name: 'test ' } };
     adapter.set(storeName, objectToStore);
     const retrievedObject = adapter.get(storeName, 1);
@@ -28,6 +30,7 @@ it('set and retrieve', () => {
 
 it('get all', () => {
     const adapter = new MemoryAdapter(options);
+    adapter.open();
     const objectToStore1 = { id: 1, value: { name: 'test' } };
     const objectToStore2 = { id: 2, value: { name: 'test2' } };
     adapter.set(storeName, objectToStore1);
@@ -39,6 +42,7 @@ it('get all', () => {
 
 it('set all without error', () => {
     const adapter = new MemoryAdapter(options);
+    adapter.open();
     const objectToStore1 = { id: 1, value: { name: 'test' } };
     const objectToStore2 = { id: 2, value: { name: 'test2' } };
     const objectsToStore = [
@@ -50,6 +54,7 @@ it('set all without error', () => {
 
 it('get keys', () => {
     const adapter = new MemoryAdapter(options);
+    adapter.open();
     const objectToStore1 = { id: 1, value: { name: 'test' } };
     const objectToStore2 = { id: 2, value: { name: 'test2' } };
     adapter.set(storeName, objectToStore1);
@@ -61,6 +66,7 @@ it('get keys', () => {
 
 it('contains', () => {
     const adapter = new MemoryAdapter(options);
+    adapter.open();
     const objectToStore1 = { id: 1, value: { name: 'test' } };
     const objectToStore2 = { id: 2, value: { name: 'test2' } };
     adapter.set(storeName, objectToStore1);
@@ -71,6 +77,7 @@ it('contains', () => {
 
 it('count', () => {
     const adapter = new MemoryAdapter(options);
+    adapter.open();
     const objectToStore1 = { id: 1, value: { name: 'test' } };
     const objectToStore2 = { id: 2, value: { name: 'test2' } };
     adapter.set(storeName, objectToStore1);
@@ -80,6 +87,7 @@ it('count', () => {
 
 it('remove', () => {
     const adapter = new MemoryAdapter(options);
+    adapter.open();
     const objectToStore1 = { id: 1, value: { name: 'test' } };
     const objectToStore2 = { id: 2, value: { name: 'test2' } };
     adapter.set(storeName, objectToStore1);
@@ -90,6 +98,7 @@ it('remove', () => {
 
 it('remove all', () => {
     const adapter = new MemoryAdapter(options);
+    adapter.open();
     const objectToStore1 = { id: 1, value: { name: 'test' } };
     const objectToStore2 = { id: 2, value: { name: 'test2' } };
     adapter.set(storeName, objectToStore1);
@@ -100,6 +109,7 @@ it('remove all', () => {
 
 it('destroy', () => {
     const adapter = new MemoryAdapter(options);
+    adapter.open();
     const objectToStore1 = { id: 1, value: { name: 'test' } };
     const objectToStore2 = { id: 2, value: { name: 'test2' } };
     adapter.set(storeName, objectToStore1);

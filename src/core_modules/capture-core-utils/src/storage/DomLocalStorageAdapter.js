@@ -77,11 +77,6 @@ class DomLocalStorageAdapter {
         this.version = options.version || 1;
         this.objectStoreNames = options.objectStores;
         this.keyPath = options.keyPath;
-        this.indexer = this.objectStoreNames
-            .reduce((accIndexers, store) => {
-                accIndexers[store] = new Indexer(this.name, store, DomLocalStorageAdapter.storage);
-                return accIndexers;
-            }, {});
         this.opened = false;
     }
 
@@ -90,6 +85,11 @@ class DomLocalStorageAdapter {
         onAfterUpgrade: a callback method, getting an ojbect with a "set" property as argument. The "set" property can be used to set something in Local Storage
     */
     open(onBeforeUpgrade, onAfterUpgrade) {
+        this.indexer = this.objectStoreNames
+            .reduce((accIndexers, store) => {
+                accIndexers[store] = new Indexer(this.name, store, DomLocalStorageAdapter.storage);
+                return accIndexers;
+            }, {});
         const versionKey = `${this.name}.${DomLocalStorageAdapter.CACHEVERSIONKEY}`;
         const inUseVersionString = DomLocalStorageAdapter.storage.getItem(versionKey);
         const inUseVersion = inUseVersionString && JSON.parse(inUseVersionString);
@@ -240,6 +240,7 @@ class DomLocalStorageAdapter {
         });
     }
     destroy() {
+        this.opened = false;
         this._executeDestroy();
         return Promise.resolve();
     }

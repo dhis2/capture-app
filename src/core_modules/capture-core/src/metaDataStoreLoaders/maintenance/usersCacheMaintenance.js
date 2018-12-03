@@ -1,4 +1,6 @@
 // @flow
+import log from 'loglevel';
+import errorCreator from 'capture-core-utils/errorCreator';
 import StorageController from 'capture-core-utils/storage/StorageController';
 import LocalStorageAdapter from 'capture-core-utils/storage/DomLocalStorageAdapter';
 import { getMainStorageController, getUserStorageController } from '../../storageControllers';
@@ -8,6 +10,9 @@ const ACCESS_HISTORY_KEY = 'accessHistory';
 const cacheKeepCount = {
     LOCAL_STORAGE: 1,
     INDEXED_DB: 5,
+};
+const errorMessages = {
+    DESTROY_FAILED: 'Could not delete user storage',
 };
 
 async function addUserCacheToHistory(
@@ -44,10 +49,15 @@ async function removeCaches(
     if (history.length > keepCount) {
         const historyPartToRemove = history.slice(keepCount);
         const remainingHistory = history.slice(0, keepCount);
+        // $FlowFixMe
         await historyPartToRemove.asyncForEach(async (cache) => {
             const controllerForStorageToRemove =
-                new StorageController(cache, 1, [currentAdapterType], ['some store']);
-            await controllerForStorageToRemove.destroy();
+                new StorageController(cache, 1, [currentAdapterType]);
+            try {
+                await controllerForStorageToRemove.destroy();
+            } catch (error) {
+                log.warn(errorCreator(errorMessages.DESTROY_FAILED)({ cache, error }));
+            }
         });
         await mainStorageController.set(maintenanceStores.USER_CACHES, {
             id: ACCESS_HISTORY_KEY,

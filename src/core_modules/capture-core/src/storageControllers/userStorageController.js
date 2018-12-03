@@ -27,18 +27,16 @@ function getStores() {
 }
 
 function createStorageController(
-    mainStorageName: string,
-    AdapterClasses: Array<any>,
     mainStorageController: StorageController,
 ) {
-    const storageName = getStorageName(mainStorageName);
+    const storageName = getStorageName(mainStorageController.name);
     const appCacheVersion = getCacheVersion();
     const stores = getStores();
     const storageController =
         new StorageController(
             storageName,
             appCacheVersion,
-            AdapterClasses,
+            [mainStorageController.adapterType],
             stores,
             () => mainStorageController.setWithoutFallback(maintenanceStores.STATUS, {
                 id: 'fallback',
@@ -48,4 +46,27 @@ function createStorageController(
     return storageController;
 }
 
-export default createStorageController;
+async function initUserControllerAsync(mainStorageController: StorageController) {
+    const userStorageController =
+        createStorageController(mainStorageController);
+
+    let upgradeTempData;
+    await userStorageController
+        .open(
+            storage => storage
+                .get(reduxPersistStores.REDUX_PERSIST, 'reduxPersist:offline')
+                .then((data) => {
+                    upgradeTempData = data;
+                }),
+            (storage) => {
+                if (!upgradeTempData) {
+                    return null;
+                }
+                return storage
+                    .set(reduxPersistStores.REDUX_PERSIST, upgradeTempData);
+            },
+        );
+    return userStorageController;
+}
+
+export default initUserControllerAsync;

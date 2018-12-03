@@ -35,10 +35,6 @@ export default class StorageController {
         this.name = name;
         this.onFallback = onFallback;
 
-        if (!objectStores || !isArray(objectStores) || objectStores.length === 0) {
-            throw new Error(StorageController.errorMessages.NO_OBJECTSTORES_DEFINED);
-        }
-
         if (!adapters || !isArray(adapters || adapters.length === 0)) {
             throw new Error(StorageController.errorMessages.NO_ADAPTERS_DEFINED);
         }
@@ -157,6 +153,11 @@ export default class StorageController {
                 errorCreator(StorageController.errorMessages.STORAGE_ALREADY_OPEN)({ adapter: this.adapter }),
             );
         }
+        const objectStores = this.adapter.objectStoreNames;
+        if (!objectStores || !isArray(objectStores) || objectStores.length === 0) {
+            throw new Error(StorageController.errorMessages.NO_OBJECTSTORES_DEFINED);
+        }
+
         return this.adapter.open(...args);
     }
 
@@ -174,11 +175,14 @@ export default class StorageController {
         this.throwIfDataObjectError(dataObject);
 
         return Promise.resolve()
-            .then(() => { throw Error('error'); })
             .then(() => this.adapter.set(store, dataObject))
-            .catch(() => this.fallbackToMemoryStorageAsync()
-                .then(() => this.adapter.set(store, dataObject)),
-            );
+            .catch((error) => {
+                if (this.adapterType === MemoryAdapter) {
+                    return Promise.reject(error);
+                }
+                return this.fallbackToMemoryStorageAsync()
+                    .then(() => this.adapter.set(store, dataObject));
+            });
     }
 
     // using async ensures that the the return value is wrapped in a promise
@@ -189,9 +193,13 @@ export default class StorageController {
 
         return Promise.resolve()
             .then(() => this.adapter.setAll(store, dataArray))
-            .catch(() => this.fallbackToMemoryStorageAsync()
-                .then(() => this.adapter.setAll(store, dataArray)),
-            );
+            .catch((error) => {
+                if (this.adapterType === MemoryAdapter) {
+                    return Promise.reject(error);
+                }
+                return this.fallbackToMemoryStorageAsync()
+                    .then(() => this.adapter.setAll(store, dataArray));
+            });
     }
 
     // using async ensures that the the return value is wrapped in a promise

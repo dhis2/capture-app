@@ -17,15 +17,15 @@ class MemoryAdapter {
         this.version = options.version || 1;
         this.objectStoreNames = options.objectStores;
         this.keyPath = options.keyPath;
-        this.storage =
-            options.objectStores.reduce((accStorage, name) => {
-                accStorage[name] = new Map();
-                return accStorage;
-            }, {});
         this.opened = false;
     }
 
     open() {
+        this.storage =
+            this.objectStoreNames.reduce((accStorage, name) => {
+                accStorage[name] = new Map();
+                return accStorage;
+            }, {});
         this.opened = true;
     }
 
@@ -100,6 +100,7 @@ class MemoryAdapter {
     }
 
     destroy() {
+        this.opened = false;
         this.storage =
             this.objectStoreNames.reduce((accStorage, name) => {
                 accStorage[name] = new Map();
