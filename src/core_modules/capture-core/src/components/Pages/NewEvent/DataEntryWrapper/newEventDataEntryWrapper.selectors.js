@@ -16,12 +16,12 @@ export const makeFormFoundationSelector = () => createSelector(
         }
 
         // $FlowSuppress
-        const foundation = program.getStage();
-        if (!foundation) {
+        const stage = program.getStage();
+        if (!stage) {
             log.error(errorCreator('stage not found for program')({ method: 'getFormFoundation' }));
             return null;
         }
 
-        return foundation;
+        return stage.stageForm;
     },
 );

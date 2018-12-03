@@ -40,7 +40,8 @@ export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
             if (metadataContainer.error) {
                 return prerequisitesErrorOpeningEventForEditInDataEntry(metadataContainer.error);
             }
-            const foundation = metadataContainer.stage;
+            // $FlowFixMe
+            const foundation = metadataContainer.stage.stageForm;
             const program = metadataContainer.program;
 
             // $FlowSuppress
@@ -68,10 +69,10 @@ export const runRulesForEditSingleEventEpic = (action$: InputObservable, store: 
                     errorCreator(
                         errorMessages.COULD_NOT_GET_EVENT_FROM_STATE)(
                         { method: 'runRulesForEditSingleEventEpic' }));
-
+                const foundation = metadataContainer.stage ? metadataContainer.stage.stageForm : null;
                 rulesActions = getRulesActionsForEvent(
                     metadataContainer.program,
-                    metadataContainer.stage,
+                    foundation,
                     payload.formId,
                     orgUnit,
                 );
@@ -93,7 +94,7 @@ export const runRulesForEditSingleEventEpic = (action$: InputObservable, store: 
 
                 rulesActions = getRulesActionsForEvent(
                     metadataContainer.program,
-                    metadataContainer.stage,
+                    foundation,
                     payload.formId,
                     orgUnit,
                     currentEventData,

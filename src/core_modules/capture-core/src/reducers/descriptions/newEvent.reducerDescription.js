@@ -4,7 +4,8 @@ import { actionTypes as selectorActionTypes } from '../../components/Pages/MainP
 import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
     dataEntryUrlActionTypes as newEventdataEntryUrlActionTypes,
-    selectionsCompleteActionTypes as newEventSelectionsCompleteActionTypes,
+    dataEntryWrapperActionTypes as newEventDataEntryWrapperActionTypes,
+    newRelationshipActionTypes as newEventNewRelationshipActionTypes,
 } from '../../components/Pages/NewEvent';
 import {
     actionTypes as editEventPageActionTypes,
@@ -70,7 +71,17 @@ export const newEventPageDesc = createReducerDescription({
         newState.dataEntryIsLoading = false;
         return newState;
     },
-    [newEventSelectionsCompleteActionTypes.SET_NEW_EVENT_FORM_LAYOUT_DIRECTION]: (state, action) => {
+    [newEventDataEntryActionTypes.NEW_EVENT_ADD_RELATIONSHIP]: (state) => {
+        const newState = { ...state };
+        newState.showAddRelationship = true;
+        return newState;
+    },
+    [newEventNewRelationshipActionTypes.NEW_EVENT_CANCEL_NEW_RELATIONSHIP]: (state) => {
+        const newState = { ...state };
+        newState.showAddRelationship = false;
+        return newState;
+    },
+    [newEventDataEntryWrapperActionTypes.SET_NEW_EVENT_FORM_LAYOUT_DIRECTION]: (state, action) => {
         const newState = { ...state };
         newState.formHorizontal = action.payload.formHorizontal;
         return newState;

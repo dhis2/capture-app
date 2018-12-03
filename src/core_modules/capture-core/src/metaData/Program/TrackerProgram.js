@@ -3,12 +3,12 @@
 /* eslint-disable no-restricted-syntax */
 import isFunction from 'd2-utilizr/src/isFunction';
 import Program from './Program';
-import RenderFoundation from '../RenderFoundation/RenderFoundation';
+import ProgramStage from './ProgramStage';
 import errorCreator from '../../utils/errorCreator';
 import SearchGroup from '../SearchGroup/SearchGroup';
 
 export default class TrackerProgram extends Program {
-    _stages: Map<string, RenderFoundation>;
+    _stages: Map<string, ProgramStage>;
     _searchGroups: Array<SearchGroup>;
 
     static errorMessages = {
@@ -23,13 +23,13 @@ export default class TrackerProgram extends Program {
     }
 
     // $FlowSuppress
-    * [Symbol.iterator](): Iterator<RenderFoundation> {
+    * [Symbol.iterator](): Iterator<ProgramStage> {
         for (const stage of this._stages.values()) {
             yield stage;
         }
     }
 
-    get stages(): Map<string, RenderFoundation> {
+    get stages(): Map<string, ProgramStage> {
         return this._stages;
     }
 
@@ -41,15 +41,15 @@ export default class TrackerProgram extends Program {
         this._searchGroups = searchGroups;
     }
 
-    addStage(stage: RenderFoundation) {
+    addStage(stage: ProgramStage) {
         this.stages.set(stage.id, stage);
     }
 
-    getStage(id: string): ?RenderFoundation {
+    getStage(id: string): ?ProgramStage {
         return this.stages.get(id);
     }
 
-    getStageThrowIfNotFound(id: string): RenderFoundation {
+    getStageThrowIfNotFound(id: string): ProgramStage {
         const stage = this.stages.get(id);
         if (!stage) {
             throw new Error(
@@ -59,7 +59,7 @@ export default class TrackerProgram extends Program {
         return stage;
     }
 
-    getStageFromIndex(index: number): RenderFoundation {
+    getStageFromIndex(index: number): ProgramStage {
         const stage = this.stages.entries()[index];
         if (!stage) {
             throw new Error(

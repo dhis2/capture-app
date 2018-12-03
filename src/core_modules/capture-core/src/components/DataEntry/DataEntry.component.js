@@ -104,6 +104,7 @@ type Props = {
     ) => void,
     dataEntrySections?: { [string]: {name: string, placement: $Values<typeof placements>}},
     onAddNote?: ?Function,
+    onAddRelationship?: ?Function,
 };
 
 const fieldHorizontalFilter = (placement: $Values<typeof placements>) =>
@@ -230,6 +231,7 @@ class DataEntry extends React.Component<Props> {
             onUpdateFormFieldAsync,
             dataEntryOutputs,
             onAddNote,
+            onAddRelationship,
             ...passOnProps } = this.props;
 
         if (!itemId) {

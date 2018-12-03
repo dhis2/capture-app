@@ -24,6 +24,10 @@ function getProgramIndicators(storageController: StorageController, storeName: s
     return storageController.getAll(storeName);
 }
 
+function getRelationshipTypes(storageController: StorageController, storeName: string): Promise<Array<Object>> {
+    return storageController.getAll(storeName);
+}
+
 async function getBuilderPrerequisites(...storeNames: Array<string>) {
     const storageController = getStorageController();
 
@@ -32,6 +36,7 @@ async function getBuilderPrerequisites(...storeNames: Array<string>) {
     const cachedProgramRulesVariables = getProgramRulesVariables(storageController, storeNames[2]);
     const cachedProgramRules = getProgramRules(storageController, storeNames[3]);
     const cachedProgramIndicatorsPromise = getProgramIndicators(storageController, storeNames[4]);
+    const cachedRelationshipTypesPromise = getRelationshipTypes(storageController, storeNames[5]);
 
     const values =
         await Promise.all([
@@ -40,6 +45,7 @@ async function getBuilderPrerequisites(...storeNames: Array<string>) {
             cachedProgramRulesVariables,
             cachedProgramRules,
             cachedProgramIndicatorsPromise,
+            cachedRelationshipTypesPromise,
         ]);
     return values;
 }
@@ -50,14 +56,17 @@ export default async function buildPrograms(
     optionSetStoreName: string,
     programRulesVariablesStoreName: string,
     programRulesStoreName: string,
-    programIndicatorsStoreName: string) {
-    const [cachedPrograms, cachedOptionSets, cachedProgramRulesVariables, cachedProgramRules, cachedProgramIndicators] =
+    programIndicatorsStoreName: string,
+    relationshipTypesStoreName: string,
+) {
+    const [cachedPrograms, cachedOptionSets, cachedProgramRulesVariables, cachedProgramRules, cachedProgramIndicators, cachedRelationshipTypes] =
         await getBuilderPrerequisites(
             programStoreName,
             optionSetStoreName,
             programRulesVariablesStoreName,
             programRulesStoreName,
             programIndicatorsStoreName,
+            relationshipTypesStoreName,
         );
 
     await buildProgramCollection(
@@ -66,6 +75,7 @@ export default async function buildPrograms(
         cachedProgramRulesVariables,
         cachedProgramRules,
         cachedProgramIndicators,
+        cachedRelationshipTypes,
         locale,
     );
 }

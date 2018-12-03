@@ -18,6 +18,7 @@ export default function getProgramAndStageFromProgramId(programId: string) {
         return { error: i18n.t(errorMessages.GENERIC_ERROR), stage: null, program: null };
     }
 
+    // $FlowSuppress
     const stage = program.getStage();
     if (!stage) {
         log.error(errorCreator(errorMessages.STAGE_NOT_FOUND)({ program, programId }));

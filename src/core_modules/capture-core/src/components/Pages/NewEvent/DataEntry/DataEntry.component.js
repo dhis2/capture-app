@@ -332,6 +332,7 @@ const buildRelationshipsSettingsFn = () => {
         component: relationshipsComponent,
         componentProps: createComponentProps(props, {
             id: props.id,
+            onAddRelationship: props.onAddRelationship,
         }),
         validatorContainers: [
         ],

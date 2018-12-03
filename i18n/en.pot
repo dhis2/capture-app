@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-11-22T08:33:43.504Z\n"
-"PO-Revision-Date: 2018-11-22T08:33:43.504Z\n"
+"POT-Creation-Date: 2018-12-03T14:55:22.175Z\n"
+"PO-Revision-Date: 2018-12-03T14:55:22.175Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -274,10 +274,7 @@ msgstr ""
 msgid "Finish"
 msgstr ""
 
-msgid "events added"
-msgstr ""
-
-msgid "No events added"
+msgid "New event"
 msgstr ""
 
 msgid "Switch to form view"
@@ -286,7 +283,16 @@ msgstr ""
 msgid "Switch to row view"
 msgstr ""
 
-msgid "New event"
+msgid "New event relationship"
+msgstr ""
+
+msgid "Discard relationship?"
+msgstr ""
+
+msgid "events added"
+msgstr ""
+
+msgid "No events added"
 msgstr ""
 
 msgid "Select a registering unit and program above to get started"
@@ -299,6 +305,12 @@ msgid "Select a registering unit to start reporting"
 msgstr ""
 
 msgid "Select a category option to start reporting"
+msgstr ""
+
+msgid "Link to an existing {trackedEntityType}"
+msgstr ""
+
+msgid "Create new {trackedEntityType}"
 msgstr ""
 
 msgid "Start again"

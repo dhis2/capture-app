@@ -4,6 +4,8 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import LinkIcon from '@material-ui/icons/Link';
+import { connect } from 'react-redux';
+import getDataEntryKey from './common/getDataEntryKey';
 import LinkButton from '../Buttons/LinkButton.component';
 import Button from '../Buttons/Button.component';
 
@@ -11,7 +13,10 @@ type Props = {
     classes: {
         relationship: string,
         relationshipText: string,
-    }
+    },
+    onAddRelationship: (itemId: string, id: string) => void,
+    itemId: string,
+    id: string,
 };
 
 
@@ -54,7 +59,7 @@ class DataEntryRelationships extends React.Component<Props> {
     };
 
     handleAdd = () => {
-
+        this.props.onAddRelationship(this.props.itemId, this.props.id);
     }
 
     getRelationships = () => {
@@ -93,4 +98,12 @@ class DataEntryRelationships extends React.Component<Props> {
     }
 }
 
-export default withStyles(styles)(DataEntryRelationships);
+const mapStateToProps = (state: ReduxState, props: { id: string }) => {
+    const itemId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].itemId;
+    return {
+        itemId,
+    };
+};
+
+export default connect(mapStateToProps, () => ({}), null, { withRef: true })(
+    withStyles(styles)(DataEntryRelationships));

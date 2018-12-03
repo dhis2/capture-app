@@ -17,8 +17,11 @@ export {
     actionTypes as selectorActionTypes,
 } from './SelectorLevel/selectorLevel.actions';
 export {
-    actionTypes as selectionsCompleteActionTypes,
-} from './SelectionsComplete/selectionsComplete.actions';
+    actionTypes as dataEntryWrapperActionTypes,
+} from './DataEntryWrapper/newEventDataEntryWrapper.actions';
+export {
+    actionTypes as newRelationshipActionTypes,
+} from './NewRelationshipWrapper/NewEventNewRelationshipWrapper.actions';
 export {
     actionTypes as selectionsIncompleteActionTypes,
 } from './SelectionsIncomplete/dataEntrySelectionsIncomplete.actions';

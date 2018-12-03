@@ -3,12 +3,11 @@
  * @module rulesEngineActionsCreatorForEvent
  */
 import log from 'loglevel';
-
+import i18n from '@dhis2/d2-i18n';
 import RulesEngine from '../RulesEngine/RulesEngine';
 import inputValueConverter from './inputValueConverter';
 import outputRulesEffectsValueConverter from './rulesEffectsValueConverter';
 import momentConverter from './momentConverter';
-import i18n from '@dhis2/d2-i18n';
 import errorCreator from '../utils/errorCreator';
 import Program from '../metaData/Program/Program';
 import TrackerProgram from '../metaData/Program/TrackerProgram';
@@ -73,7 +72,7 @@ function getProgramRulesContainer(program: Program, foundation: RenderFoundation
 function getTrackerDataElements(trackerProgram: TrackerProgram): Array<DataElement> {
     const elements = Array.from(trackerProgram.stages.values())
         .reduce((accElements, stage) => {
-            const stageElements = Array.from(stage.sections.values())
+            const stageElements = Array.from(stage.stageForm.sections.values())
                 .reduce((accStageElements, section) =>
                     [...accStageElements, ...Array.from(section.elements.values())]
                     , []);
@@ -84,7 +83,7 @@ function getTrackerDataElements(trackerProgram: TrackerProgram): Array<DataEleme
 
 function getEventDataElements(eventProgram: EventProgram): Array<DataElement> {
     const elements = eventProgram.stage ?
-        Array.from(eventProgram.stage.sections.values()).reduce((accElements, section) =>
+        Array.from(eventProgram.stage.stageForm.sections.values()).reduce((accElements, section) =>
             [...accElements, ...Array.from(section.elements.values())], []) :
         [];
     return elements;

@@ -30,6 +30,7 @@ export const actionTypes = {
     SET_NEW_EVENT_SAVE_TYPES: 'SetNewEventSaveTypes',
     RESET_DATA_ENTRY: 'ResetDataEntryForNewEvent',
     ADD_NEW_EVENT_NOTE: 'AddNewEventNote',
+    NEW_EVENT_ADD_RELATIONSHIP: 'NewEventAddRelationship',
 };
 
 export const startRunRulesOnUpdateForNewSingleEvent = (actionData: { payload: Object}) =>
@@ -111,3 +112,6 @@ export const startAsyncUpdateFieldForNewEvent =
             dataEntryId,
             itemId,
         });
+
+export const newEventAddRelationship = (eventId: string, dataEntryId: string) =>
+    actionCreator(actionTypes.NEW_EVENT_ADD_RELATIONSHIP)({ eventId, dataEntryId });

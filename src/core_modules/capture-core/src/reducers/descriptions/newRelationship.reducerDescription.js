@@ -1,14 +1,18 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
+import {
+    actionTypes as newRelationshipActionTypes,
+} from '../../components/Pages/NewRelationship/newRelationship.actions';
 
-export const newRelationshipPageDesc = createReducerDescription({
-    [actionTypes.OPEN_NEW_RELATIONSHIP_PAGE]: (state, action) => {
+export const newRelationshipDesc = createReducerDescription({
+    [newRelationshipActionTypes.SET_SELECTED_RELATIONSHIP_TYPE]: (state, action) => {
         const newState = { ...state };
-        const payload = action.payload;
-        newState.relationshipType = {};
-        newState.relationshipFrom = {
-            ...payload.from,
-        };
+        newState.selectedRelationshipTypeId = action.payload.selectedRelationshipTypeId;
         return newState;
     },
-}, 'newRelationshipPage');
+    [newRelationshipActionTypes.DESELECT_RELATIONSHIP_TYPE]: (state, action) => {
+        const newState = { ...state };
+        newState.selectedRelationshipTypeId = null;
+        return newState;
+    }
+}, 'newRelationship', {});

@@ -33,7 +33,11 @@ import {
 import { mainPageDesc } from 'capture-core/reducers/descriptions/mainPage.reducerDescription';
 import { newEventPageDesc } from 'capture-core/reducers/descriptions/newEvent.reducerDescription';
 import { editEventPageDesc } from 'capture-core/reducers/descriptions/editEvent.reducerDescription';
-import { organisationUnitDesc, registeringUnitListDesc } from 'capture-core/reducers/descriptions/organisationUnits.reducerDescription';
+import { newRelationshipDesc } from 'capture-core/reducers/descriptions/newRelationship.reducerDescription';
+import {
+    organisationUnitDesc,
+    registeringUnitListDesc,
+} from 'capture-core/reducers/descriptions/organisationUnits.reducerDescription';
 import { networkStatusDesc } from 'capture-core/reducers/descriptions/networkStatus.reducerDescription';
 import {
     recentlyAddedEventsDesc,
@@ -76,6 +80,7 @@ export default [
     mainPageDesc,
     newEventPageDesc,
     editEventPageDesc,
+    newRelationshipDesc,
     organisationUnitDesc,
     registeringUnitListDesc,
     networkStatusDesc,

@@ -12,6 +12,7 @@ import {
     requestSaveNewEventAddAnother,
     setNewEventSaveTypes,
     addNewEventNote,
+    newEventAddRelationship,
 } from './actions/dataEntry.actions';
 import {
     makeProgramNameSelector,
@@ -71,6 +72,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onCancel: () => {
         window.scrollTo(0, 0);
         dispatch(cancelNewEventAndReturnToMainPage());
+    },
+    onAddRelationship: (eventId: string, dataEntryId: string) => {
+        dispatch(newEventAddRelationship(eventId, dataEntryId));
     },
 });
 

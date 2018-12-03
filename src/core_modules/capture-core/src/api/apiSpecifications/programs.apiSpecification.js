@@ -1,7 +1,6 @@
 // @flow
 import isDefined from 'd2-utilizr/lib/isDefined';
 import Model from 'd2/lib/model/Model';
-import i18n from '@dhis2/d2-i18n';
 
 import ApiSpecification from '../ApiSpecificationDefinition/ApiSpecification';
 import getterTypes from '../fetcher/getterTypes.const';

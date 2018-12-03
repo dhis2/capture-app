@@ -69,10 +69,11 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
                         { method: 'resetDataEntryForNewEventEpic' }),
                 );
             }
-
+            
+            const foundation = metadataContainer.stage && metadataContainer.stage.stageForm;
             return batchActions(
                 // $FlowSuppress
-                [...resetDataEntry(metadataContainer.program, metadataContainer.stage, orgUnit)],
+                [...resetDataEntry(metadataContainer.program, foundation, orgUnit)],
                 batchActionTypes.RESET_DATA_ENTRY_ACTIONS_BATCH,
             );
         });
@@ -105,10 +106,10 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
                         { method: 'openNewEventInDataEntryEpic' }),
                 );
             }
-
+            const foundation = metadataContainer.stage && metadataContainer.stage.stageForm;
             return batchActions(
                 // $FlowSuppress
-                [...openNewEventInDataEntry(metadataContainer.program, metadataContainer.stage, orgUnit)],
+                [...openNewEventInDataEntry(metadataContainer.program, foundation, orgUnit)],
                 batchActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH,
             );
         });
@@ -153,15 +154,16 @@ export const runRulesForSingleEventEpic = (action$: InputObservable, store: Redu
 
             let rulesActions;
             if (metadataContainer.error) {
+                const foundation = metadataContainer.stage ? metadataContainer.stage.stageForm : null;
                 rulesActions = getRulesActionsForEvent(
                     metadataContainer.program,
-                    metadataContainer.stage,
+                    foundation,
                     payload.formId,
                     orgUnit,
                 );
             } else {
                 // $FlowSuppress
-                const foundation: RenderFoundation = metadataContainer.stage;
+                const foundation: RenderFoundation = metadataContainer.stage.stageForm;
 
                 const currentEventValues = getCurrentClientValues(state, foundation, payload.formId, fieldData);
                 const currentEventMainData = getCurrentClientMainData(state, payload.itemId, payload.dataEntryId, {}, foundation);
@@ -169,7 +171,7 @@ export const runRulesForSingleEventEpic = (action$: InputObservable, store: Redu
 
                 rulesActions = getRulesActionsForEvent(
                     metadataContainer.program,
-                    metadataContainer.stage,
+                    foundation,
                     payload.formId,
                     orgUnit,
                     currentEventData,

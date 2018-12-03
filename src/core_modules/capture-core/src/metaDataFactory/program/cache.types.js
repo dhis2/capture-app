@@ -136,3 +136,18 @@ export type CachedOptionSet = {
     valueType: string,
     options: Array<CachedOption>
 };
+
+export type CachedRelationshipConstraint = {
+    relationshipEntity: string,
+    trackedEntityType?: ?{ id: string },
+    program?: ?{ id: string },
+    programStage?: ?{ id: string },
+}
+
+export type CachedRelationshipType = {
+    id: string,
+    displayName: string,
+    access: Object,
+    fromConstraint: CachedRelationshipConstraint,
+    toConstraint: CachedRelationshipConstraint,
+}
