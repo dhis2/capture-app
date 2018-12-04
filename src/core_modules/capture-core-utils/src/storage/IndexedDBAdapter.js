@@ -60,11 +60,12 @@ class IndexedDBAdapter {
     }
 
     _upgrade() {
-        this.objectStoreNames.forEach((name) => {
-            if (this.db.objectStoreNames.contains(name)) {
+        if (this.db.objectStoreNames) {
+            const dbStoreNames = Array.from(this.db.objectStoreNames);
+            dbStoreNames.forEach((name) => {
                 this.db.deleteObjectStore(name);
-            }
-        });
+            });
+        }
 
         this.objectStoreNames.forEach((name) => {
             this.db.createObjectStore(name);

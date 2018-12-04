@@ -1,5 +1,6 @@
 /* eslint-disable complexity */
 import isArray from 'd2-utilizr/lib/isArray';
+import log from 'loglevel';
 import errorCreator from '../errorCreator';
 import MemoryAdapter from './MemoryAdapter';
 
@@ -16,6 +17,7 @@ export default class StorageController {
         INVALID_STORAGE_OBJECT: 'Invalid storage object',
         INVALID_STORAGE_ARRAY: 'Invalid storage array',
         MISSING_KEY: 'Please specifiy key',
+        FALLBACK_TO_MEMORY_STORAGE_TRIGGERED: 'Fallback to memory storage triggered',
     };
 
     static isAdapterValid(Adapter) {
@@ -180,6 +182,7 @@ export default class StorageController {
                 if (this.adapterType === MemoryAdapter) {
                     return Promise.reject(error);
                 }
+                log.error(errorCreator(StorageController.errorMessages.FALLBACK_TO_MEMORY_STORAGE_TRIGGERED)({ method: 'set', adapter: this.adapter }));
                 return this.fallbackToMemoryStorageAsync()
                     .then(() => this.adapter.set(store, dataObject));
             });
@@ -197,6 +200,7 @@ export default class StorageController {
                 if (this.adapterType === MemoryAdapter) {
                     return Promise.reject(error);
                 }
+                log.error(errorCreator(StorageController.errorMessages.FALLBACK_TO_MEMORY_STORAGE_TRIGGERED)({ method: 'setAll', adapter: this.adapter }));
                 return this.fallbackToMemoryStorageAsync()
                     .then(() => this.adapter.setAll(store, dataArray));
             });
