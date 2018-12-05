@@ -7,9 +7,9 @@ import RelationshipType from '../../../../metaData/RelationshipType/Relationship
 
 type Props = {
     relationshipTypes: ?Array<RelationshipType>,
-    selectedRelationshipTypeId?: ?string,
-    onSetSelectedRelationshipType: (relationshipTypeId: string) => void,
-    onDeseletRelationshipType: () => void,
+    selectedRelationshipType?: ?RelationshipType,
+    onSelectRelationshipType: (relationshipTypeId: string) => void,
+    onDeselectRelationshipType: () => void,
     classes: {
         relationshipType: string,
         relationshipTypeSelected: string,
@@ -30,7 +30,14 @@ const getStyles = theme => ({
     relationshipTypeSelectable: {
         cursor: 'pointer',
     },
-    relationshipSelected: {
+    relationshipTypeSelected: {
+        backgroundColor: '#f0f9f8',
+    },
+    relationshipTypeSelectedText: {
+        paddingLeft: theme.typography.pxToRem(5),
+        display: 'flex',
+        alignItems: 'center',
+        borderLeft: '2px solid #4ca899',
     },
     container: {
         display: 'flex',
@@ -39,35 +46,34 @@ const getStyles = theme => ({
 
 
 class RelationshipTypeSelector extends React.Component<Props> {
-    onRelationshipTypeSelected = (relationshipType: Object) => {
-        this.props.onSetSelectedRelationshipType(relationshipType.id);
-    };
     renderRelationshipTypes = () => {
-        const { classes, relationshipTypes } = this.props;
+        const { classes, relationshipTypes, onSelectRelationshipType } = this.props;
         return relationshipTypes ? relationshipTypes.map(rt => (
-            <div className={classNames(classes.relationshipType, classes.relationshipTypeSelectable)} key={rt.id} role="button" tabIndex="0" onClick={() => this.onRelationshipTypeSelected(rt)}>
+            <div className={classNames(classes.relationshipType, classes.relationshipTypeSelectable)} key={rt.id} role="button" tabIndex="0" onClick={() => onSelectRelationshipType(rt.id)}>
                 {rt.displayName}
             </div>
         )) : [];
     }
 
     renderSelectedRelationshipType = () => {
-        const { classes, selectedRelationshipTypeId, relationshipTypes, onDeseletRelationshipType } = this.props;
-        // $FlowFixMe
-        const relationshipType = relationshipTypes.find(r => r.id === selectedRelationshipTypeId);
+        const { classes, selectedRelationshipType, onDeselectRelationshipType } = this.props;
         return (
             <div className={classNames(classes.relationshipType, classes.relationshipTypeSelected)}>
-                { /* $FlowFixMe */}
-                <div>{relationshipType.displayName}</div>
-                <ClearIcon fontSize="small" onClick={onDeseletRelationshipType} />
+                <div className={classes.relationshipTypeSelectedText}>
+                    <div>{selectedRelationshipType.displayName}</div>
+                    <ClearIcon fontSize="small" onClick={onDeselectRelationshipType} />
+                </div>
+                {/* $FlowFixMe */}
+
             </div>
         );
     }
 
     render() {
+        const { selectedRelationshipType, classes } = this.props;
         return (
-            <div className={this.props.classes.container}>
-                {this.props.selectedRelationshipTypeId ?
+            <div className={classes.container}>
+                {selectedRelationshipType ?
                     this.renderSelectedRelationshipType() :
                     this.renderRelationshipTypes()
                 }

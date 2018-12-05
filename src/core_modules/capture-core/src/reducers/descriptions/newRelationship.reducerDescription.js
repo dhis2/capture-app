@@ -5,7 +5,7 @@ import {
 } from '../../components/Pages/NewRelationship/newRelationship.actions';
 
 export const newRelationshipDesc = createReducerDescription({
-    [newRelationshipActionTypes.SET_SELECTED_RELATIONSHIP_TYPE]: (state, action) => {
+    [newRelationshipActionTypes.SELECT_RELATIONSHIP_TYPE]: (state, action) => {
         const newState = { ...state };
         newState.selectedRelationshipTypeId = action.payload.selectedRelationshipTypeId;
         return newState;
@@ -14,5 +14,5 @@ export const newRelationshipDesc = createReducerDescription({
         const newState = { ...state };
         newState.selectedRelationshipTypeId = null;
         return newState;
-    }
+    },
 }, 'newRelationship', {});

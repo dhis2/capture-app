@@ -2,19 +2,34 @@
 import { connect } from 'react-redux';
 import NewRelationship from './NewRelationship.component';
 import {
-    setSelectedRelationshipType,
+    selectRelationshipType,
+    deselectRelationshipType,
 } from './newRelationship.actions';
 
+import {
+    makeSelectedRelationshipTypeSelector,
+} from './newRelationship.selectors';
 
-const mapStateToProps = (state: ReduxState) => ({
-    selectedRelationshipTypeId: state.newRelationship.selectedRelationshipTypeId,
-});
+
+const makeMapStateToProps = () => {
+    const relationshipTypesSelector = makeSelectedRelationshipTypeSelector();
+
+    const mapStateToProps = (state: ReduxState, props: Object) => ({
+        selectedRelationshipType: relationshipTypesSelector(state, props),
+    });
+
+    // $FlowSuppress
+    return mapStateToProps;
+};
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onSetSelectedRelationshipType: (selectedRelationshipTypeId: string) => {
-        dispatch(setSelectedRelationshipType(selectedRelationshipTypeId));
+    onSelectRelationshipType: (selectedRelationshipTypeId: string) => {
+        dispatch(selectRelationshipType(selectedRelationshipTypeId));
+    },
+    onDeselectRelationshipType: () => {
+        dispatch(deselectRelationshipType());
     },
 });
 
 // $FlowSuppress
-export default connect(mapStateToProps, mapDispatchToProps)(NewRelationship);
+export default connect(makeMapStateToProps, mapDispatchToProps)(NewRelationship);

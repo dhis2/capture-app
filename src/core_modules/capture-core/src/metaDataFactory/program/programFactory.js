@@ -92,6 +92,8 @@ async function buildProgram(d2Program: CachedProgram) {
             _this.id = d2Program.id;
             _this.name = d2Program.displayName;
             _this.shortName = d2Program.displayShortName;
+            // $FlowFixMe
+            _this.trackedEntityType = d2Program.trackedEntityType;
         });
 
         program.searchGroups = await buildSearchGroups(d2Program, currentLocale);

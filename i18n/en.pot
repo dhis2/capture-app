@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-12-03T14:55:22.175Z\n"
-"PO-Revision-Date: 2018-12-03T14:55:22.175Z\n"
+"POT-Creation-Date: 2018-12-05T08:25:25.150Z\n"
+"PO-Revision-Date: 2018-12-05T08:25:25.150Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -307,10 +307,10 @@ msgstr ""
 msgid "Select a category option to start reporting"
 msgstr ""
 
-msgid "Link to an existing {trackedEntityType}"
+msgid "Link to an existing {{trackedEntityType}}"
 msgstr ""
 
-msgid "Create new {trackedEntityType}"
+msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Start again"

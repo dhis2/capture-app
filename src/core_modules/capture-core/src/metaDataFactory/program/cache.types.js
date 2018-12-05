@@ -106,6 +106,11 @@ export type CachedCategoryCombo = {
     isDefault: boolean,
 };
 
+export type CachedProgramTrackedEntityType = {
+    id: string,
+    displayName: string,
+}
+
 export type CachedProgram = {
     id: string,
     access: Object,
@@ -118,6 +123,7 @@ export type CachedProgram = {
     style?: ?CachedStyle,
     minAttributesRequiredToSearch: number,
     programTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>,
+    trackedEntityType: ?CachedProgramTrackedEntityType,
 };
 
 export type CachedProgramStageDataElementsAsObject = {

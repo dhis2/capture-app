@@ -127,7 +127,7 @@ export default class DataElement {
 
     * getPropertyNames(): Generator<string, void, void> {
         const excluded = ['getPropertyNames', 'constructor', 'copyPropertiesTo'];
-        // $FlowSuppress        
+        // $FlowSuppress
         for (const name of Object.getOwnPropertyNames(Object.getPrototypeOf(this))) {
             if (!excluded.includes(name)) {
                 yield name;

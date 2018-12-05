@@ -98,6 +98,8 @@
     "Select a program to start reporting": "",
     "Select a registering unit to start reporting": "",
     "Select a category option to start reporting": "",
+    "Link to an existing {trackedEntityType}": "",
+    "Create new {trackedEntityType}": "",
     "Start again": "",
     "New": "",
     "Find": "",
