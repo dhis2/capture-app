@@ -10,6 +10,9 @@ import {
     updateSelectionsFromUrl as updateSelectionsFromUrlForNewEvent,
 } from '../Pages/NewEvent';
 import {
+    updateSelectionsFromUrl as updateSelectionsFromUrlForNewEnrollment,
+} from '../Pages/NewEnrollment';
+import {
     editEventFromUrl as editEventFromUrlForNewEvent,
 } from '../Pages/EditEvent/editEvent.actions';
 import { reservedUrlKeys } from '../UrlSync/withUrlSync';
@@ -26,13 +29,14 @@ type Props = {
 };
 
 const pageKeys = {
-    main: 'main',
-    newEvent: 'newEvent',
-    editEvent: 'editEvent',
+    MAIN: 'main',
+    NEW_EVENT: 'newEvent',
+    EDIT_EVENT: 'editEvent',
+    NEW_ENROLLMENT: 'newEnrollment',
 };
 
 const specificationForPages = {
-    [pageKeys.main]: [
+    [pageKeys.MAIN]: [
         {
             urlKey: 'programId',
             propKey: 'programId',
@@ -42,7 +46,7 @@ const specificationForPages = {
             propKey: 'orgUnitId',
         },
     ],
-    [pageKeys.newEvent]: [
+    [pageKeys.NEW_EVENT]: [
         {
             urlKey: 'programId',
             propKey: 'programId',
@@ -52,18 +56,29 @@ const specificationForPages = {
             propKey: 'orgUnitId',
         },
     ],
-    [pageKeys.editEvent]: [
+    [pageKeys.EDIT_EVENT]: [
         {
             urlKey: reservedUrlKeys.ENTIRE_PARAM_STRING,
             propKey: 'eventId',
         },
     ],
+    [pageKeys.NEW_ENROLLMENT]: [
+        {
+            urlKey: 'programId',
+            propKey: 'programId',
+        },
+        {
+            urlKey: 'orgUnitId',
+            propKey: 'orgUnitId',
+        },
+    ],
 };
 
 const updaterForPages = {
-    [pageKeys.main]: updateMainSelectionsFromUrlForMainPage,
-    [pageKeys.newEvent]: updateSelectionsFromUrlForNewEvent,
-    [pageKeys.editEvent]: editEventFromUrlForNewEvent,
+    [pageKeys.MAIN]: updateMainSelectionsFromUrlForMainPage,
+    [pageKeys.NEW_EVENT]: updateSelectionsFromUrlForNewEvent,
+    [pageKeys.EDIT_EVENT]: editEventFromUrlForNewEvent,
+    [pageKeys.NEW_ENROLLMENT]: updateSelectionsFromUrlForNewEnrollment,
 };
 
 const getUrlParts = (pathName: string) => {
@@ -87,7 +102,7 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
         }
 
         getSyncSpecification() {
-            const page = this.page || pageKeys.main;
+            const page = this.page || pageKeys.MAIN;
             return specificationForPages[page] || [];
         }
 
@@ -95,7 +110,7 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
             const urlParts = getUrlParts(this.props.location.pathname);
 
             if (urlParts.length === 0) {
-                this.page = pageKeys.main;
+                this.page = pageKeys.MAIN;
                 this.params = null;
                 return;
             }
@@ -112,7 +127,7 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
                     this.params = null;
                 } else {
                     this.params = singlePart;
-                    this.page = pageKeys.main;
+                    this.page = pageKeys.MAIN;
                 }
             } else {
                 this.page = urlParts[0];
@@ -140,7 +155,7 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
 
             return (
                 <InnerComponent
-                    statePage={page || pageKeys.main}
+                    statePage={page || pageKeys.MAIN}
                     urlPage={this.page}
                     urlParams={this.params}
                     onUpdate={this.handleUpdate}

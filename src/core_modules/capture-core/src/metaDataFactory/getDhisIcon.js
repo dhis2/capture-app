@@ -1,5 +1,5 @@
 // @flow
-import { getApi } from '../../d2/d2Instance';
+import { getApi } from '../d2/d2Instance';
 
 export default async (name: string) => {
     let icon;

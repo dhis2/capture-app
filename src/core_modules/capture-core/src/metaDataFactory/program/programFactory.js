@@ -15,7 +15,8 @@ import getRulesAndVariablesFromProgramIndicators from './getRulesAndVariablesFro
 import type { CachedProgramIndicator } from './getRulesAndVariablesFromIndicators';
 import type { ProgramRule, ProgramRuleVariable } from '../../RulesEngine/rulesEngine.types';
 import buildSearchGroups from './searchGroupFactory';
-import buildStage from './programStageFactory';
+import { buildProgramStage as buildStage } from '../programStage';
+import { buildEnrollment } from '../enrollment';
 
 import type {
     CachedStyle,
@@ -26,7 +27,7 @@ import type {
     CachedOptionSet,
     CachedRelationshipType,
 
-} from './cache.types';
+} from '../cache.types';
 
 let currentLocale: ?string;
 let currentD2OptionSets: ?Array<CachedOptionSet>;
@@ -98,8 +99,18 @@ async function buildProgram(d2Program: CachedProgram) {
 
         program.searchGroups = await buildSearchGroups(d2Program, currentLocale);
         await d2Program.programStages.asyncForEach(async (d2ProgramStage: CachedProgramStage) => {
-            program.addStage(await buildStage(d2ProgramStage, currentD2OptionSets, currentD2RelationshipTypes, program.id, currentLocale));
+            program.addStage(
+                await buildStage(
+                    d2ProgramStage,
+                    currentD2OptionSets,
+                    currentD2RelationshipTypes,
+                    program.id,
+                    currentLocale,
+                ),
+            );
         });
+
+        program.enrollment = await buildEnrollment(d2Program, currentD2OptionSets, currentLocale);
     }
     program.icon = await buildProgramIcon(d2Program.style);
 

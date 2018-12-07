@@ -6,6 +6,7 @@ import Program from './Program';
 import ProgramStage from './ProgramStage';
 import errorCreator from '../../utils/errorCreator';
 import SearchGroup from '../SearchGroup/SearchGroup';
+import { Enrollment } from './Enrollment';
 
 type ProgramTrackedEntityType = {
     id: string,
@@ -16,6 +17,7 @@ export default class TrackerProgram extends Program {
     _stages: Map<string, ProgramStage>;
     _searchGroups: Array<SearchGroup>;
     _trackedEntityType: ProgramTrackedEntityType;
+    _enrollment: Enrollment;
 
     static errorMessages = {
         STAGE_NOT_FOUND: 'Stage was not found',
@@ -42,7 +44,6 @@ export default class TrackerProgram extends Program {
     get searchGroups(): Array<SearchGroup> {
         return this._searchGroups;
     }
-
     set searchGroups(searchGroups: Array<SearchGroup>) {
         this._searchGroups = searchGroups;
     }
@@ -50,9 +51,15 @@ export default class TrackerProgram extends Program {
     get trackedEntityType(): ProgramTrackedEntityType {
         return this._trackedEntityType;
     }
-
     set trackedEntityType(trackedEntityType: ProgramTrackedEntityType) {
         this._trackedEntityType = trackedEntityType;
+    }
+
+    get enrollment(): Enrollment {
+        return this._enrollment;
+    }
+    set enrollment(enrollment: Enrollment) {
+        this._enrollment = enrollment;
     }
 
     addStage(stage: ProgramStage) {

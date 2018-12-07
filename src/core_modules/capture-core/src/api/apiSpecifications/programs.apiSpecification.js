@@ -140,6 +140,9 @@ export default new ApiSpecification((_this) => {
             trackedEntityType: d2Program.trackedEntityType,
             programTrackedEntityAttributes: d2Program.programTrackedEntityAttributes,
             minAttributesRequiredToSearch: d2Program.minAttributesRequiredToSearch,
+            enrollmentDateLabel: d2Program.enrollmentDateLabel,
+            incidentDateLabel: d2Program.incidentDateLabel,
+            dataEntryForm: d2Program.dataEntryForm,
         }));
 
         return programs;

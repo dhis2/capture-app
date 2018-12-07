@@ -99,7 +99,11 @@ import {
 import {
     includeFiltersWithValueAfterColumnSortingEpic,
 } from 'capture-core/components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.epics';
-
+import {
+    getOrgUnitDataForNewEnrollmentUrlUpdateEpic,
+    emptyOrgUnitForNewEnrollmentUrlUpdateEpic,
+    validationForNewEnrollmentUrlUpdateEpic,
+} from 'capture-core/components/Pages/NewEnrollment';
 import { loadStartupData, loadStartupDataCore } from '../init/entry.epics';
 
 export default combineEpics(
@@ -162,4 +166,7 @@ export default combineEpics(
     loadRegisteringUnitListRootsEpic,
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
+    getOrgUnitDataForNewEnrollmentUrlUpdateEpic,
+    emptyOrgUnitForNewEnrollmentUrlUpdateEpic,
+    validationForNewEnrollmentUrlUpdateEpic,
 );

@@ -10,7 +10,7 @@ import type {
     CachedRelationshipType,
     CachedRelationshipConstraint,
 
-} from './cache.types';
+} from '../cache.types';
 import errorCreator from '../../utils/errorCreator';
 import Section from '../../metaData/RenderFoundation/Section';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
@@ -18,7 +18,7 @@ import CustomForm from '../../metaData/RenderFoundation/CustomForm';
 import capitalizeFirstLetter from '../../utils/string/capitalizeFirstLetter';
 import isNonEmptyArray from '../../utils/isNonEmptyArray';
 import ProgramStage from '../../metaData/Program/ProgramStage';
-import getCamelCaseUppercaseString from './getCamelCaseUppercaseString';
+import getCamelCaseUppercaseString from '../getCamelCaseUppercaseString';
 import buildDataElement from './dataElementFactory';
 import RelationshipType from '../../metaData/RelationshipType/RelationshipType';
 

@@ -8,7 +8,7 @@ import type {
     CachedProgram,
     CachedAttributeTranslation,
     CachedProgramTrackedEntityAttribute,
-} from './cache.types';
+} from '../cache.types';
 
 const translationPropertyNames = {
     NAME: 'NAME',

@@ -6,16 +6,11 @@ import type {
     CachedProgramStageDataElement,
     CachedOptionSet,
 
-} from './cache.types';
-import getDhisIconAsync from './getDhisIcon';
-import Icon from '../../metaData/Icon/Icon';
-import DataElement from '../../metaData/DataElement/DataElement';
-import OptionSet from '../../metaData/OptionSet/OptionSet';
-import Option from '../../metaData/OptionSet/Option';
+} from '../cache.types';
+import getDhisIconAsync from '../getDhisIcon';
+import { DataElement, Icon } from '../../metaData';
 import errorCreator from '../../utils/errorCreator';
-import getCamelCaseUppercaseString from './getCamelCaseUppercaseString';
-import { inputTypes } from '../../metaData/OptionSet/optionSet.const';
-import { convertOptionSetValue } from '../../converters/serverToClient';
+import { buildOptionSet } from '../optionSet';
 
 const OPTION_SET_NOT_FOUND = 'Optionset not found';
 
@@ -59,55 +54,6 @@ function getDataElementType(d2ValueType: string) {
     return converters[d2ValueType] || d2ValueType;
 }
 
-async function buildOptionIcon(cachedStyle: CachedStyle = {}) {
-    const icon = cachedStyle && cachedStyle.icon;
-    if (!icon) {
-        return null;
-    }
-
-    try {
-        const iconData = await getDhisIconAsync(icon);
-        return new Icon((_this) => {
-            if (cachedStyle.color) {
-                _this.color = cachedStyle.color;
-            }
-            _this.data = iconData;
-        });
-    } catch (error) {
-        return null;
-    }
-}
-
-function getRenderType(renderType: string) {
-    return renderType && getCamelCaseUppercaseString(renderType);
-}
-
-async function buildOptionSet(
-    d2OptionSet: CachedOptionSet,
-    dataElement: DataElement,
-    renderOptionsAsRadio: ?boolean,
-    renderType: string) {
-    dataElement.type = getDataElementType(d2OptionSet.valueType);
-
-    const optionsPromises = d2OptionSet
-        .options
-        .map(async (d2Option) => {
-            const icon = await buildOptionIcon(d2Option.style);
-
-            return new Option((_this) => {
-                _this.value = d2Option.code;
-                _this.text = d2Option.displayName;
-                _this.icon = icon;
-            });
-        });
-
-    const options = await Promise.all(optionsPromises);
-
-    const optionSet = new OptionSet(d2OptionSet.id, options, dataElement, convertOptionSetValue);
-    optionSet.inputType = getRenderType(renderType) || (renderOptionsAsRadio ? inputTypes.VERTICAL_RADIOBUTTONS : null);
-    return optionSet;
-}
-
 export default async function buildDataElement(
     d2ProgramStageDataElement: CachedProgramStageDataElement,
     d2OptionSets: ?Array<CachedOptionSet>,
@@ -142,7 +88,12 @@ export default async function buildDataElement(
                 d2OptionSet,
                 dataElement,
                 d2ProgramStageDataElement.renderOptionsAsRadio,
-                d2ProgramStageDataElement.renderType && d2ProgramStageDataElement.renderType.DESKTOP && d2ProgramStageDataElement.renderType.DESKTOP.type);
+                d2ProgramStageDataElement.renderType &&
+                d2ProgramStageDataElement.renderType.DESKTOP &&
+                d2ProgramStageDataElement.renderType.DESKTOP.type,
+                getDataElementType,
+                locale,
+            );
         }
     }
     return dataElement;
