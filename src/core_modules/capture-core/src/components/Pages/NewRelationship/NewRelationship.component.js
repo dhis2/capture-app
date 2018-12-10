@@ -2,7 +2,7 @@
 import * as React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import RelationshipTypeSelector from './RelationshipTypeSelector/RelationshipTypeSelector.component';
-import TeiRelationship from './TeiRelationship/TeiRelationship.component';
+import TeiRelationship from './TeiRelationship/TeiRelationship.container';
 import RelationshipType from '../../../metaData/RelationshipType/RelationshipType';
 
 type Props = {

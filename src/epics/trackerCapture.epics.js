@@ -99,6 +99,13 @@ import {
 import {
     includeFiltersWithValueAfterColumnSortingEpic,
 } from 'capture-core/components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.epics';
+import {
+    openRelationshipTeiSearchEpic,
+} from 'capture-core/components/Pages/NewRelationship/TeiRelationship/teiRelationship.epics';
+import {
+    teiSearchEpic,
+} from 'capture-core/components/TeiSearch/epics/teiSearch.epics';
+
 
 import { loadStartupData, loadStartupDataCore } from '../init/entry.epics';
 
@@ -162,4 +169,6 @@ export default combineEpics(
     loadRegisteringUnitListRootsEpic,
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
+    openRelationshipTeiSearchEpic,
+    teiSearchEpic,
 );

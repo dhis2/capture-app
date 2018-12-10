@@ -8,14 +8,18 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import ProgramCollection from '../../../../metaDataMemoryStores/programCollection/programCollection';
 import RelationshipType from '../../../../metaData/RelationshipType/RelationshipType';
 import Button from '../../../Buttons/Button.component';
-import Search from '../../../Search/Search.component';
+import TeiSearch from '../../../TeiSearch/TeiSearch.container';
 
 type Props = {
+    findMode: string,
+    onOpenSearch: (trackedEntityTypeId: string, programId: ?string) => void,
+    onSelectFindMode: (findMode: string) => void,
     selectedRelationshipType: RelationshipType,
     classes: {
         container: string,
         button: string,
         buttonIcon: string,
+        modeSelectionsContainer: string,
     }
 }
 
@@ -38,79 +42,87 @@ const getStyles = theme => ({
         flexGrow: 1,
         fontSize: theme.typography.pxToRem(80),
     },
-
 });
 
-type TeiRelationshipOptions = {
-    trackedEntityType: {
-        id: string,
-        displayName: string,
-    },
-    searchGroups: any,
-    program: ?{
-        displayName: string,
-        id: string,
-    },
+const findModes = {
+    TEI_SEARCH: 'TEI_SEARCH',
+    TEI_REGISTER: 'TEI_REGISTER',
+};
+
+const findModeComponent = {
+    [findModes.TEI_SEARCH]: props => (
+        <TeiSearch
+            id="relationshipTeiSearch"
+            programId={props.selectedRelationshipType.to.programId}
+            trackedEntityTypeId={props.selectedRelationshipType.to.trackedEntityTypeId}
+        />
+    ),
+};
+
+type TrackedEntityType = {
+    id: string,
+    displayName: string,
 }
 
+const defaultTrackedEntityTypeName = 'Tracked entity instance';
+
 class TeiRelationship extends React.Component<Props> {
-    static getByProgram = (programId: string) => {
-        const program = ProgramCollection.get(programId);
-        return {
+    getTrackedEntityTypeName = () => {
+        const to = this.props.selectedRelationshipType.to;
+        if (to.programId) {
             // $FlowFixMe
-            trackedEntityType: program.trackedEntityType,
-            // $FlowFixMe
-            program: { id: program.id, displayName: program.displayName },
-            // $FlowFixMe
-            searchGroups: program.searchGroups,
-        };
-    }
-
-    static getByTrackedEntityType = (trackedEntityTypeId: string) => {
-        return {};
-    }
-
-    relationshipOptions: TeiRelationshipOptions;
-    constructor(props: Props) {
-        super(props);
-        const to = props.selectedRelationshipType.to;
-        this.relationshipOptions = to.programId ?
-            TeiRelationship.getByProgram(to.programId) : {};
+            return ProgramCollection.get(to.programId).trackedEntityType.displayName;
+        }
+        return defaultTrackedEntityTypeName;
     }
 
     renderModeSelections = () => {
-        const { classes } = this.props;
-        const trackedEntityTypeName = this.relationshipOptions.trackedEntityType.displayName.toLowerCase();
+        const { classes, selectedRelationshipType } = this.props;
+        const to = selectedRelationshipType.to;
+        const trackedEntityTypeName = this.getTrackedEntityTypeName();
         return (
-            <div className={classes.modeSelectionsContainer}>
+            <div
+                className={classes.modeSelectionsContainer}
+            >
                 <div className={classes.button}>
                     <SearchIcon fontSize="large" className={classes.buttonIcon} />
-                    <Button color="primary">{i18n.t('Link to an existing {{trackedEntityType}}', { trackedEntityType: trackedEntityTypeName })}</Button>
+                    <Button
+                        color="primary"
+                        onClick={() => this.props.onOpenSearch(to.trackedEntityTypeId, to.programId)}
+                    >
+                        {i18n.t('Link to an existing {{trackedEntityType}}', { trackedEntityType: trackedEntityTypeName })}
+                    </Button>
                 </div>
                 <div className={classes.button}>
                     <AddIcon className={classes.buttonIcon} />
-                    <Button color="primary">{i18n.t('Create new {{trackedEntityType}}', { trackedEntityType: trackedEntityTypeName })}</Button>
+                    <Button
+                        color="primary"
+                        onClick={() => this.props.onSelectFindMode(findModes.TEI_REGISTER)}
+                    >
+                        {i18n.t('Create new {{trackedEntityType}}', { trackedEntityType: trackedEntityTypeName })}
+                    </Button>
                 </div>
             </div>
 
         );
     }
 
-    renderByMode = (mode: any) => {
-        return mode === 'search' ?
-            this.relationshipOptions.searchGroups.map(s => (
-                <Search
-                    searchForm={s.searchForm}
-                />
-            )) : null;
+    getModeComponentFn = (findMode: string) => {
+        if (findMode) {
+            return findModeComponent[findMode];
+        }
+        return null;
     }
 
     render() {
-        const { classes } = this.props;
-        const mode = null;
+        const { classes, findMode } = this.props;
+        const getModeComponent = this.getModeComponentFn(findMode);
         return (
             <div className={classes.container}>
-                { mode ? this.renderByMode(mode) : this.renderModeSelections() }
+                {getModeComponent ?
+                    getModeComponent(this.props) :
+                    this.renderModeSelections()
+                }
             </div>
         );
     }

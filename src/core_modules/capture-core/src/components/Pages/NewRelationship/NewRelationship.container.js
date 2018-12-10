@@ -4,6 +4,7 @@ import NewRelationship from './NewRelationship.component';
 import {
     selectRelationshipType,
     deselectRelationshipType,
+    selectFindMode,
 } from './newRelationship.actions';
 
 import {
@@ -16,6 +17,7 @@ const makeMapStateToProps = () => {
 
     const mapStateToProps = (state: ReduxState, props: Object) => ({
         selectedRelationshipType: relationshipTypesSelector(state, props),
+        findMode: state.newRelationship.findMode,
     });
 
     // $FlowSuppress

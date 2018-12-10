@@ -43,6 +43,9 @@ import {
     recentlyAddedEventsDesc,
     recentlyAddedEventsValuesDesc,
 } from 'capture-core/reducers/descriptions/recentlyAddedEvents.reducerDescription';
+import {
+    teiSearchDesc,
+} from 'capture-core/reducers/descriptions/teiSearch.reducerDescription';
 
 import { appReducerDesc } from './app.reducerDescription';
 import { currentSelectionsReducerDesc } from './currentSelections.reducerDescription';
@@ -86,4 +89,5 @@ export default [
     networkStatusDesc,
     recentlyAddedEventsDesc,
     recentlyAddedEventsValuesDesc,
+    teiSearchDesc,
 ];

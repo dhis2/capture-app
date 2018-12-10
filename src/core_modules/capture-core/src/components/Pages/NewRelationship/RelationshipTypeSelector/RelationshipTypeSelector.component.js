@@ -15,6 +15,7 @@ type Props = {
         relationshipTypeSelected: string,
         relationshipTypeSelectable: string,
         container: string,
+        relationshipTypeSelectedText: string,
     }
 }
 
@@ -55,16 +56,14 @@ class RelationshipTypeSelector extends React.Component<Props> {
         )) : [];
     }
 
-    renderSelectedRelationshipType = () => {
-        const { classes, selectedRelationshipType, onDeselectRelationshipType } = this.props;
+    renderSelectedRelationshipType = (selectedRelationshipType: RelationshipType) => {
+        const { classes, onDeselectRelationshipType } = this.props;
         return (
             <div className={classNames(classes.relationshipType, classes.relationshipTypeSelected)}>
                 <div className={classes.relationshipTypeSelectedText}>
                     <div>{selectedRelationshipType.displayName}</div>
                     <ClearIcon fontSize="small" onClick={onDeselectRelationshipType} />
                 </div>
-                {/* $FlowFixMe */}
-
             </div>
         );
     }
@@ -74,7 +73,7 @@ class RelationshipTypeSelector extends React.Component<Props> {
         return (
             <div className={classes.container}>
                 {selectedRelationshipType ?
-                    this.renderSelectedRelationshipType() :
+                    this.renderSelectedRelationshipType(selectedRelationshipType) :
                     this.renderRelationshipTypes()
                 }
             </div>

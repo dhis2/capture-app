@@ -163,4 +163,4 @@ export default class DataElement {
     }
 }
 
-export type ConvertFn = (type: $Values<typeof elementTypes>, value: any, element: ?DataElement) => any;
+export type ConvertFn = (type: $Values<typeof elementTypes>, value: any, element: DataElement) => any;

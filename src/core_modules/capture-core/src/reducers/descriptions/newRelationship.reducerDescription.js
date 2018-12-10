@@ -6,13 +6,23 @@ import {
 
 export const newRelationshipDesc = createReducerDescription({
     [newRelationshipActionTypes.SELECT_RELATIONSHIP_TYPE]: (state, action) => {
-        const newState = { ...state };
-        newState.selectedRelationshipTypeId = action.payload.selectedRelationshipTypeId;
+        const newState = {
+            ...state,
+            selectedRelationshipTypeId: action.payload.selectedRelationshipTypeId,
+        };
         return newState;
     },
-    [newRelationshipActionTypes.DESELECT_RELATIONSHIP_TYPE]: (state, action) => {
+    [newRelationshipActionTypes.DESELECT_RELATIONSHIP_TYPE]: (state) => {
+        const newState = {
+            ...state,
+            findMode: null,
+            selectedRelationshipTypeId: null,
+        };
+        return newState;
+    },
+    [newRelationshipActionTypes.SELECT_FIND_MODE]: (state, action) => {
         const newState = { ...state };
-        newState.selectedRelationshipTypeId = null;
+        newState.findMode = action.payload.findMode;
         return newState;
     },
 }, 'newRelationship', {});

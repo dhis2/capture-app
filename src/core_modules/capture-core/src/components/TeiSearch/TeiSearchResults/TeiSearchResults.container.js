@@ -1,0 +1,16 @@
+// @flow
+
+import { connect } from 'react-redux';
+import TeiSearchResults from './TeiSearchResults.component';
+
+
+const mapStateToProps = (state: ReduxState, props: Object) => ({
+    resultsLoading: state.teiSearch[props.id].resultsLoading,
+    results: state.teiSearch[props.id].results,
+});
+
+const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+});
+
+// $FlowSuppress
+export default connect(mapStateToProps, mapDispatchToProps)(TeiSearchResults);
