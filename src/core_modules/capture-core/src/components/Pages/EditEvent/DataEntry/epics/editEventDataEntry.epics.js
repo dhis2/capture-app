@@ -12,7 +12,7 @@ import {
     batchActionTypes as editEventDataEntryBatchActionTypes,
     actionTypes as editEventDataEntryActionTypes,
 } from '../editEventDataEntry.actions';
-import getProgramAndStageFromEvent from '../../../../../metaData/helpers/EventProgram/getProgramAndStageFromEvent';
+import { getProgramAndStageFromEvent } from '../../../../../metaData';
 import { getRulesActionsForEvent } from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
 import {
     getCurrentClientValues,

@@ -26,7 +26,7 @@ import {
     actionTypes as editEventPageSelectorActionTypes,
 } from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
 import {
-    actionTypes as newEnrollmentUrlActionTypes,
+    urlActionTypes as newEnrollmentUrlActionTypes,
 } from '../../components/Pages/NewEnrollment';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
@@ -48,7 +48,7 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     },
     [newEnrollmentUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => ({
         ...state,
-        page: action.payload.page,
+        page: action.payload.nextPage,
     }),
     [tempSelectorActionTypes.OPEN_NEW_EVENT_PAGE]: (state) => {
         const newState = { ...state };

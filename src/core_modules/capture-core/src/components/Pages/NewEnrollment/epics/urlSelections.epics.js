@@ -10,6 +10,7 @@ import {
     setEmptyOrgUnitBasedOnUrl,
 } from '../actions/url.actions';
 import { programCollection } from '../../../../metaDataMemoryStores';
+import { TrackerProgram } from '../../../../metaData';
 
 export const getOrgUnitDataForNewEnrollmentUrlUpdateEpic = (action$: InputObservable) =>
     // $FlowSuppress
@@ -42,8 +43,14 @@ export const validationForNewEnrollmentUrlUpdateEpic = (action$: InputObservable
                     return invalidSelectionsFromUrl(i18n.t("Program doesn't exist"));
                 }
 
+                if (!(program instanceof TrackerProgram)) {
+                    return invalidSelectionsFromUrl(i18n.t(
+                        "Program with programid {{programId}} isn't a tracker program. Enrollments can only be done in tracker programs.",
+                        { programId }));
+                }
+
                 if (orgUnitId && !program.organisationUnits[orgUnitId]) {
-                    return invalidSelectionsFromUrl(i18n.t('Selected program is invalid for registering unit'));
+                    return invalidSelectionsFromUrl(i18n.t('Selected program is invalid for selected registering unit'));
                 }
             }
 

@@ -14,3 +14,12 @@ export { Program, ProgramStage, EventProgram, TrackerProgram, Enrollment } from 
 export { RelationshipType } from './RelationshipType';
 export { RenderFoundation, Section, CustomForm } from './RenderFoundation';
 export { SearchGroup } from './SearchGroup';
+
+// helpers
+export {
+    getProgramAndStageFromEvent,
+    getStageFromEvent,
+    getProgramAndStageFromProgramIdForEventProgram,
+    getStageFromProgramIdForEventProgram,
+    getProgramFromProgramIdThrowIfNotFound,
+} from './helpers';

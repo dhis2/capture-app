@@ -1,5 +1,5 @@
 // @flow
-import getStageFromProgramIdForEventProgram from '../../../../../metaData/helpers/EventProgram/getStageFromProgramIdForEventProgram';
+import { getStageFromProgramIdForEventProgram } from '../../../../../metaData';
 import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
 import mainPropertyNames from '../../../../../events/mainPropertyNames.const';
 

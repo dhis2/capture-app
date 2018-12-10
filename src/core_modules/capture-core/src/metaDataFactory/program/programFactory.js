@@ -91,8 +91,10 @@ async function buildProgram(d2Program: CachedProgram) {
     } else {
         program = new TrackerProgram((_this) => {
             _this.id = d2Program.id;
+            _this.access = d2Program.access;
             _this.name = d2Program.displayName;
             _this.shortName = d2Program.displayShortName;
+            _this.organisationUnits = d2Program.organisationUnits;
             // $FlowFixMe
             _this.trackedEntityType = d2Program.trackedEntityType;
         });

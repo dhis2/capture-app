@@ -8,10 +8,10 @@ import programCollection from '../../../metaDataMemoryStores/programCollection/p
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found',
     STAGE_NOT_FOUND: 'Stage not found',
-    GENERIC_ERROR: 'An error has occured. See log for details'
+    GENERIC_ERROR: 'An error has occured. See log for details',
 };
 
-export default function getProgramAndStageFromProgramId(programId: string) {   
+export default function getProgramAndStageFromProgramId(programId: string) {
     const program = programCollection.get(programId);
     if (!program) {
         log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ programId }));

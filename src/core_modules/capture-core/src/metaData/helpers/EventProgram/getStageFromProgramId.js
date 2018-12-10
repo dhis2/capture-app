@@ -8,7 +8,7 @@ import programCollection from '../../../metaDataMemoryStores/programCollection/p
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found',
     STAGE_NOT_FOUND: 'Stage not found',
-    GENERIC_ERROR: 'An error has occured. See log for details'
+    GENERIC_ERROR: 'An error has occured. See log for details',
 };
 
 export default function getStageForEventProgram(programId: string) {

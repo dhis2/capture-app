@@ -1,7 +1,7 @@
 // @flow
 import { createSelectorCreator, createSelector, defaultMemoize } from 'reselect';
 
-import getStageFromProgramIdForEventProgram from '../../../metaData/helpers/EventProgram/getStageFromProgramIdForEventProgram';
+import { getStageFromProgramIdForEventProgram } from '../../../metaData';
 import getStageFromEvent from '../../../metaData/helpers/getStageFromEvent';
 import { convertMainEvent } from '../../../events/mainEventConverter';
 import { convertValue } from '../../../converters/clientToList';

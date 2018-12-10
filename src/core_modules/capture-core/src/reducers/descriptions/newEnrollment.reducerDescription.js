@@ -2,6 +2,7 @@
 import { createReducerDescription } from '../../trackerRedux';
 import {
     urlActionTypes,
+    openDataEntryActionTypes,
 } from '../../components/Pages/NewEnrollment';
 
 export const newEnrollmentPageDesc = createReducerDescription({
@@ -29,4 +30,8 @@ export const newEnrollmentPageDesc = createReducerDescription({
         newState.selectionsError = action.payload.error;
         return newState;
     },
+    [openDataEntryActionTypes.OPEN_DATA_ENTRY_FOR_NEW_ENROLLMENT]: state => ({
+        ...state,
+        dataEntryIsLoading: false,
+    }),
 }, 'newEnrollmentPage');

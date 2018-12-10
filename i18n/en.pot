@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-12-05T08:25:25.150Z\n"
-"PO-Revision-Date: 2018-12-05T08:25:25.150Z\n"
+"POT-Creation-Date: 2018-12-10T16:09:00.266Z\n"
+"PO-Revision-Date: 2018-12-10T16:09:00.266Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -248,13 +248,24 @@ msgstr ""
 msgid "Selected program is invalid for registering unit"
 msgstr ""
 
-msgid "Link to"
+msgid "Enrollment"
 msgstr ""
 
 msgid "Saving to"
 msgstr ""
 
 msgid "in"
+msgstr ""
+
+msgid "Link to"
+msgstr ""
+
+msgid ""
+"Program with programid {{programId}} isn't a tracker program. Enrollments "
+"can only be done in tracker programs."
+msgstr ""
+
+msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid ""
