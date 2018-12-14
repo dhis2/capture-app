@@ -30,8 +30,12 @@ export async function loadStoreDataIfNotExists(
 ) {
     const keys = await storageController.getKeys(objectStore);
     const alreadyExists = keys && keys.length > 0;
-    if (!alreadyExists) {
-        await loadStoreData(storageController, objectStore, queryParams, d2ModelName, d2ModelGetterType, converter);
+    if (alreadyExists) {
+        return null;
     }
+
+    const loadedData =
+        await loadStoreData(storageController, objectStore, queryParams, d2ModelName, d2ModelGetterType, converter);
+    return loadedData;
 }
 

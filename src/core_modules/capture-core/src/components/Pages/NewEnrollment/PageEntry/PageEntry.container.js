@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
-import { DataEntry } from '../DataEntry';
+import DataEntryWrapper from '../DataEntryWrapper/DataEntryWrapper.container';
 
 const mapStateToProps = (state: ReduxState) => ({
     error: state.newEnrollmentPage.selectionsError,
@@ -12,9 +12,9 @@ const mapStateToProps = (state: ReduxState) => ({
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 
 });
-
+// $FlowFixMe
 export default connect(mapStateToProps, mapDispatchToProps)(
     withLoadingIndicator(() => ({ margin: 4 }))(
-        withErrorMessageHandler()(DataEntry),
+        withErrorMessageHandler()(DataEntryWrapper),
     ),
 );

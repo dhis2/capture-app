@@ -116,7 +116,7 @@ export default new ApiSpecification((_this) => {
             'organisationUnits[id,displayName],' +
             'userRoles[id,displayName],' +
             'programStages[*,dataEntryForm[*],programStageSections[id,displayName,description,sortOrder,dataElements[id]],programStageDataElements[*,dataElement[*,optionSet[id]]]],' +
-            'programTrackedEntityAttributes[*,trackedEntityAttribute[*,optionSet[id]]]`,',
+            'programTrackedEntityAttributes[*]',
     };
     _this.converter = (d2Programs) => {
         if (!d2Programs || d2Programs.length === 0) {

@@ -7,6 +7,7 @@ import { labelKeys, defaultLabelValues } from './labels.const';
 export default class Enrollment {
     _labels: { [key: $Values<typeof labelKeys>]: string };
     _enrollmentForm: RenderFoundation;
+    _trackedEntityType: string;
 
     constructor(initFn: ?(_this: Enrollment) => void) {
         this._labels = {
@@ -35,5 +36,12 @@ export default class Enrollment {
     }
     get enrollmentDateLabel(): string {
         return this._labels[labelKeys.ENROLLMENT_DATE];
+    }
+
+    set trackedEntityType(type: string) {
+        this._trackedEntityType = type;
+    }
+    get trackedEntityType(): string {
+        return this._trackedEntityType;
     }
 }

@@ -7,7 +7,7 @@ import DataEntry from '../../../../components/DataEntry/DataEntry.container';
 import withSaveHandler from '../../../../components/DataEntry/withSaveHandler';
 import withCancelButton from '../../../../components/DataEntry/withCancelButton';
 import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
-import { placements } from '../../../../components/DataEntry/dataEntryField/dataEntryField.const';
+import { placements } from '../../../../components/DataEntry';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import withMainButton from './withMainButton';

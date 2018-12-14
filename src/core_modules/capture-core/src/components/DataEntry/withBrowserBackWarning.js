@@ -18,7 +18,7 @@ type State = {
 };
 
 const getEventListener = (InnerComponent: React.ComponentType<any>) =>
-    class BeforeUnloadEventListenerForDataEntryHOC extends React.Component<Props, State> {
+    class BrowserBackWarningForDataEntryHOC extends React.Component<Props, State> {
         unblock: () => void;
         constructor(props: Props) {
             super(props);

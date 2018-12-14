@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { updateField } from '../actions/dataEntry.actions';
 import getDataEntryKey from '../common/getDataEntryKey';
-import { placements } from './dataEntryField.const';
+import placements from '../constants/placements.const';
 import { getValidationErrors } from './dataEntryField.utils';
 
 import type { ValidatorContainer } from './dataEntryField.utils';

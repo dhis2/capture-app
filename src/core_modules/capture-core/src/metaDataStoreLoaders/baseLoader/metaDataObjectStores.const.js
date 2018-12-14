@@ -5,7 +5,7 @@ export default {
     ORGANISATION_UNITS: 'organisationUnits',
     ORGANISATION_UNIT_LEVELS: 'ouLevels',
     RELATIONSHIP_TYPES: 'relationshipTypes',
-    TRACKED_ENTITIES: 'trackedEntities',
+    TRACKED_ENTITY_TYPES: 'trackedEntityTypes',
     PROGRAMS: 'programs',
     PROGRAM_RULES: 'programRules',
     PROGRAM_RULES_VARIABLES: 'programRulesVariables',

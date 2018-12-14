@@ -6,21 +6,25 @@ import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../..
 
 const programIdSelector = state => state.currentSelections.programId;
 
-export const makeFormFoundationSelector = () => createSelector(
+// $FlowFixMe
+export const makeEnrollmentMetadataSelector = () => createSelector(
     programIdSelector,
     (programId: string) => {
         let program: TrackerProgram;
         try {
-            // $FlowSuppress Prechecked that program is a trackerProgram
+            // $FlowSuppress Prechecked that program is a tracker program
             program = getProgramFromProgramIdThrowIfNotFound(programId);
         } catch (error) {
             return null;
         }
 
         if (!program.enrollment) {
-            
+            log.error(
+                errorCreator(`could not find enrollment specification for ${programId}`)({ program }),
+            );
+            return null;
         }
 
-        return stage.stageForm;
+        return program.enrollment;
     },
 );

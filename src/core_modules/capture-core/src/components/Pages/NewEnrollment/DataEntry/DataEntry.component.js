@@ -3,40 +3,11 @@ import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import InfoIcon from '@material-ui/icons/InfoOutline';
 import i18n from '@dhis2/d2-i18n';
-import DataEntry from '../../../../components/DataEntry/DataEntry.container';
-import withSaveHandler from '../../../../components/DataEntry/withSaveHandler';
-import withCancelButton from '../../../../components/DataEntry/withCancelButton';
-import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
-import { placements } from '../../../../components/DataEntry/dataEntryField/dataEntryField.const';
-// import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
-import { RenderFoundation } from '../../../../metaData';
-// import withMainButton from './withMainButton';
-
-import {
-    withInternalChangeHandler,
-    withLabel,
-    withFocusSaver,
-    DateField,
-    TrueOnlyField,
-    CoordinateField,
-    PolygonField,
-    withCalculateMessages,
-    withDisplayMessages,
-    withFilterProps,
-    withDefaultFieldContainer,
-    withDefaultShouldUpdateInterface,
-    orientations,
-} from '../../../FormFields/New';
-
-import withFeedbackOutput from '../../../../components/DataEntry/dataEntryOutput/withFeedbackOutput';
-import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
-import withIndicatorOutput from '../../../DataEntry/dataEntryOutput/withIndicatorOutput';
-import withErrorOutput from '../../../DataEntry/dataEntryOutput/withErrorOutput';
-import withWarningOutput from '../../../DataEntry/dataEntryOutput/withWarningOutput';
+import { placements } from '../../../../components/DataEntry';
+import { Enrollment } from '../../../../metaData';
+import ConfiguredDataEntry from './ConfiguredDataEntry.component';
+import dataEntrySectionKeys from './constants/dataEntrySectionKeys.const';
 // import newEventSaveTypes from './newEventSaveTypes';
-// import labelTypeClasses from './dataEntryFieldLabels.mod.css';
-// import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
-import withBrowserBackWarning from '../../../DataEntry/withBrowserBackWarning';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -71,300 +42,8 @@ const getStyles = theme => ({
     },
 });
 
-const dataEntrySectionKeys = {
-    ENROLLMENT: 'enrollment',
-};
-
-const overrideMessagePropNames = {
-    errorMessage: 'validationError',
-};
-
-const getCancelOptions = () => ({
-    color: 'primary',
-});
-
-const baseComponentStyles = {
-    labelContainerStyle: {
-        flexBasis: 200,
-    },
-    inputContainerStyle: {
-        flexBasis: 150,
-    },
-};
-const baseComponentStylesVertical = {
-    labelContainerStyle: {
-        width: 150,
-    },
-    inputContainerStyle: {
-        width: 150,
-    },
-};
-
-/*
-function defaultFilterProps(props: Object) {
-    const { formHorizontal, fieldOptions, validationError, modified, ...passOnProps } = props;
-    return passOnProps;
-}
-
-const getBaseComponentProps = (props: Object) => ({
-    fieldOptions: props.fieldOptions,
-    formHorizontal: props.formHorizontal,
-    styles: props.formHorizontal ? baseComponentStylesVertical : baseComponentStyles,
-});
-
-const createComponentProps = (props: Object, componentProps: Object) => ({
-    ...getBaseComponentProps(props),
-    ...componentProps,
-});
-
-const getCalendarAnchorPosition = (formHorizontal: ?boolean) => (formHorizontal ? 'center' : 'left');
-
-const buildReportDateSettingsFn = () => {
-    const reportDateComponent =
-        withCalculateMessages(overrideMessagePropNames)(
-            withFocusSaver()(
-                withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(
-                                    withFilterProps(defaultFilterProps)(DateField),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
-    const reportDateSettings = (props: Object) => ({
-        component: reportDateComponent,
-        componentProps: createComponentProps(props, {
-            width: props && props.formHorizontal ? 150 : '100%',
-            label: props.formFoundation.getLabel('eventDate'),
-            required: true,
-            calendarWidth: props.formHorizontal ? 250 : 350,
-            popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
-        }),
-        propName: 'eventDate',
-        validatorContainers: getEventDateValidatorContainers(),
-        meta: {
-            placement: placements.TOP,
-            section: dataEntrySectionNames.BASICINFO,
-        },
-    });
-
-    return reportDateSettings;
-};
-
-const pointComponent = withCalculateMessages(overrideMessagePropNames)(
-    withFocusSaver()(
-        withDefaultFieldContainer()(
-            withDefaultShouldUpdateInterface()(
-                withLabel({
-                    onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.coordinateLabel}`,
-                })(
-                    withDisplayMessages()(
-                        withInternalChangeHandler()(
-                            withFilterProps(defaultFilterProps)(CoordinateField),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
-
-const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
-    withFocusSaver()(
-        withDefaultFieldContainer()(
-            withDefaultShouldUpdateInterface()(
-                withLabel({
-                    onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                    onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.polygonLabel}`,
-                })(
-                    withDisplayMessages()(
-                        withInternalChangeHandler()(
-                            withFilterProps(defaultFilterProps)(PolygonField),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-);
-
-const getOrientation = (formHorizontal: ?boolean) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
-
-
-const buildGeometrySettingsFn = () => (props: Object) => {
-    const featureType = props.formFoundation.featureType;
-    if (featureType === 'Polygon') {
-        return {
-            component: polygonComponent,
-            componentProps: createComponentProps(props, {
-                width: props && props.formHorizontal ? 150 : 350,
-                label: i18n.t('Area'),
-                dialogLabel: i18n.t('Area'),
-                required: false,
-                orientation: getOrientation(props.formHorizontal),
-            }),
-            propName: 'geometry',
-            validatorContainers: [
-            ],
-            meta: {
-                placement: placements.TOP,
-                section: dataEntrySectionNames.BASICINFO,
-            },
-        };
-    }
-    if (featureType === 'Point') {
-        return {
-            component: pointComponent,
-            componentProps: createComponentProps(props, {
-                width: props && props.formHorizontal ? 150 : 350,
-                label: 'Coordinate',
-                dialogLabel: 'Coordinate',
-                required: false,
-                orientation: getOrientation(props.formHorizontal),
-                shrinkDisabled: props.formHorizontal,
-            }),
-            propName: 'geometry',
-            validatorContainers: [
-            ],
-            meta: {
-                placement: placements.TOP,
-                section: dataEntrySectionNames.BASICINFO,
-            },
-        };
-    }
-    return null;
-};
-
-const buildCompleteFieldSettingsFn = () => {
-    const completeComponent =
-        withCalculateMessages(overrideMessagePropNames)(
-            withFocusSaver()(
-                withDefaultFieldContainer()(
-                    withDefaultShouldUpdateInterface()(
-                        withLabel({
-                            onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) =>
-                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.trueOnlyLabel}`,
-                        })(
-                            withDisplayMessages()(
-                                withInternalChangeHandler()(
-                                    withFilterProps(defaultFilterProps)(TrueOnlyField),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
-    const completeSettings = (props: Object) => ({
-        component: completeComponent,
-        componentProps: createComponentProps(props, {
-            label: 'Complete event',
-            id: 'complete',
-        }),
-        propName: 'complete',
-        validatorContainers: [
-        ],
-        meta: {
-            placement: placements.BOTTOM,
-            section: dataEntrySectionNames.STATUS,
-        },
-        passOnFieldData: true,
-    });
-
-    return completeSettings;
-};
-
-const buildNotesSettingsFn = () => {
-    const noteComponent =
-        withCalculateMessages(overrideMessagePropNames)(
-            withDefaultFieldContainer()(
-                withDefaultShouldUpdateInterface()(
-                    withDisplayMessages()(
-                        withInternalChangeHandler()(
-                            withFilterProps(defaultFilterProps)(DataEntryNotes),
-                        ),
-                    ),
-                ),
-            ),
-        );
-    const notesSettings = (props: Object) => ({
-        component: noteComponent,
-        componentProps: createComponentProps(props, {
-            label: 'Comments',
-            onAddNote: props.onAddNote,
-            id: props.id,
-        }),
-        propName: 'note',
-        validatorContainers: getNoteValidatorContainers(),
-        meta: {
-            placement: placements.BOTTOM,
-            section: dataEntrySectionNames.COMMENTS,
-        },
-    });
-
-    return notesSettings;
-};
-
-const buildRelationshipsSettingsFn = () => {
-    const relationshipsComponent =
-        withDefaultFieldContainer()(
-            withDefaultShouldUpdateInterface()(
-                withFilterProps(defaultFilterProps)(DataEntryRelationships),
-            ),
-        );
-    const relationshipsSettings = (props: Object) => ({
-        component: relationshipsComponent,
-        componentProps: createComponentProps(props, {
-            id: props.id,
-            onAddRelationship: props.onAddRelationship,
-        }),
-        validatorContainers: [
-        ],
-        propName: 'relationship',
-        meta: {
-            placement: placements.BOTTOM,
-            section: dataEntrySectionNames.LINKTO,
-        },
-    });
-
-    return relationshipsSettings;
-};
-
-const saveHandlerConfig = {
-    onIsCompleting: (props: Object) => props.completeDataEntryFieldValue,
-    onFilterProps: (props: Object) => {
-        const { completeDataEntryFieldValue, ...passOnProps } = props;
-        return passOnProps;
-    },
-};
-const RelationshipField = withDataEntryField(buildRelationshipsSettingsFn())(DataEntry);
-const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);
-const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);
-const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
-const FeedbackOutput = withFeedbackOutput()(ReportDateField);
-const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
-const WarningOutput = withWarningOutput()(IndicatorOutput);
-const ErrorOutput = withErrorOutput()(WarningOutput);
-const CancelableDataEntry = withCancelButton(getCancelOptions)(ErrorOutput);
-const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(CancelableDataEntry));
-const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(SaveableDataEntry);
-const WrappedDataEntry = withBrowserBackWarning()(CompletableDataEntry);
-*/
-
-const WrappedDataEntry = DataEntry;
-
 type Props = {
-    formFoundation: RenderFoundation,
+    enrollmentMetadata: Enrollment,
     programName: string,
     orgUnitName: string,
     onUpdateField: (innerAction: ReduxAction<any, any>) => void,
@@ -413,11 +92,11 @@ class NewEnrollmentDataEntry extends Component<Props> {
     }
 
     componentWillMount() {
-        this.props.onSetSaveTypes(null);
+        // this.props.onSetSaveTypes(null);
     }
 
     componentWillUnmount() {
-        inMemoryFileStore.clear();
+        // inMemoryFileStore.clear();
     }
 
     handleSave = (itemId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: ?string) => {
@@ -477,18 +156,20 @@ class NewEnrollmentDataEntry extends Component<Props> {
             onSetSaveTypes,
             onSaveAndAddAnother,
             theme,
+            enrollmentMetadata,
             ...passOnProps
         } = this.props;
         return (
             <div>
                 <div>
-                    <WrappedDataEntry
+                    <ConfiguredDataEntry
                         id={'enrollment'}
                         onUpdateFormField={onUpdateField}
                         onUpdateFormFieldAsync={onStartAsyncUpdateField}
                         onSave={this.handleSave}
                         fieldOptions={this.fieldOptions}
                         dataEntrySections={this.dataEntrySections}
+                        enrollmentMetadata={enrollmentMetadata}
                         {...passOnProps}
                     />
                 </div>
@@ -516,5 +197,5 @@ class NewEnrollmentDataEntry extends Component<Props> {
     }
 }
 
-
+// $FlowFixMe
 export default withStyles(getStyles)(withTheme()(NewEnrollmentDataEntry));

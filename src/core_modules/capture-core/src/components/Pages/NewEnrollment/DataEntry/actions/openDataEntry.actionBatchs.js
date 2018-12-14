@@ -2,6 +2,8 @@
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import { loadNewDataEntry } from '../../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { openDataEntryForNewEnrollment } from '../actions/openDataEntry.actions';
+import { getEnrollmentDateValidatorContainer, getIncidentDateValidatorContainer } from '../fieldValidators';
+import { convertGeometryOut } from '../../../crossPage/converters';
 
 const dataEntryId = 'enrollment';
 const itemId = 'newEnrollment';
@@ -11,9 +13,18 @@ type DataEntryPropsToInclude = Array<Object>;
 
 const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     {
-        id: 'eventDate',
+        id: 'enrollmentDate',
         type: 'DATE',
-        validatorContainers: [],
+        validatorContainers: getEnrollmentDateValidatorContainer(),
+    },
+    {
+        id: 'incidentDate',
+        type: 'DATE',
+        validatorContainers: getIncidentDateValidatorContainer(),
+    },
+    {
+        id: 'geometry',
+        onConvertOut: convertGeometryOut,
     },
 ];
 
