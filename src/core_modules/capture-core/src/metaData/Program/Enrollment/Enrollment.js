@@ -2,12 +2,13 @@
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/src/isFunction';
 import { RenderFoundation } from '../../RenderFoundation';
+import { TrackedEntityType } from '../../TrackedEntityType';
 import { labelKeys, defaultLabelValues } from './labels.const';
 
 export default class Enrollment {
     _labels: { [key: $Values<typeof labelKeys>]: string };
     _enrollmentForm: RenderFoundation;
-    _trackedEntityType: string;
+    _trackedEntityType: TrackedEntityType;
 
     constructor(initFn: ?(_this: Enrollment) => void) {
         this._labels = {
@@ -38,10 +39,10 @@ export default class Enrollment {
         return this._labels[labelKeys.ENROLLMENT_DATE];
     }
 
-    set trackedEntityType(type: string) {
+    set trackedEntityType(type: TrackedEntityType) {
         this._trackedEntityType = type;
     }
-    get trackedEntityType(): string {
+    get trackedEntityType(): TrackedEntityType {
         return this._trackedEntityType;
     }
 }

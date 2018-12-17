@@ -1,6 +1,6 @@
 // @flow
 import defaultIcon from '@dhis2/d2-icons/icons/clinical_fe_outline.svg';
-import getDhisIconAsync from '../getDhisIcon';
+import getDhisIconAsync from '../../../common/getDhisIcon';
 
 export default async (name: ?string) => {
     if (!name) {

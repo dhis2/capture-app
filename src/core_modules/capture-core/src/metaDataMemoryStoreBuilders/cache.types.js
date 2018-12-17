@@ -49,7 +49,7 @@ export type CachedDataElement = {
     displayShortName: string,
     displayFormName: string,
     valueType: string,
-    translations: Array<CachedDataElementTranslation>,
+    translations: { [locale: string]: { [propertyName: string]: string }},
     description: string,
     optionSetValue: boolean,
     optionSet: { id: string },
@@ -115,14 +115,25 @@ export type CachedCategoryCombo = {
     isDefault: boolean,
 };
 
-export type CachedProgramTrackedEntityType = {
+export type CachedTrackedEntityTypeAttribute = {
+    trackedEntityAttribute: {
+        id: string,
+    },
+    displayInList: boolean,
+    mandatory: boolean,
+};
+
+export type CachedTrackedEntityTypeTranslation = {
+    property: string,
+    locale: string,
+    value: string,
+};
+
+export type CachedTrackedEntityType = {
     id: string,
     displayName: string,
-    trackedEntityTypeAttributes: {
-        trackedEntityAttribute: {
-            id: string,
-        },
-    }
+    trackedEntityTypeAttributes: ?Array<CachedTrackedEntityTypeAttribute>,
+    translations: Array<CachedTrackedEntityTypeTranslation>,
 }
 
 export type CachedProgram = {
@@ -137,7 +148,7 @@ export type CachedProgram = {
     style?: ?CachedStyle,
     minAttributesRequiredToSearch: number,
     programTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute>,
-    trackedEntityType: ?CachedProgramTrackedEntityType,
+    trackedEntityTypeId: ?string,
     incidentDateLabel: ?string,
     enrollmentDateLabel: ?string,
     dataEntryForm: ?CachedDataEntryForm,
@@ -157,6 +168,7 @@ export type CachedOption = {
 
 export type CachedOptionSet = {
     id: string,
+    displayName: string,
     valueType: string,
     options: Array<CachedOption>,
     translations: Array<CachedOptionSetTranslation>,

@@ -3,7 +3,6 @@
 /* eslint-disable no-underscore-dangle */
 import {
     TrackedEntityType,
-    Program,
     Icon,
     EventProgram,
     TrackerProgram,
@@ -12,8 +11,8 @@ import {
 } from '../../../../metaData';
 
 import getProgramIconAsync from './getProgramIcon';
-import buildSearchGroups from './searchGroupFactory';
-import { buildEnrollment } from '../enrollment';
+import SearchGroupFactory from './SearchGroupFactory';
+import { EnrollmentFactory } from '../enrollment';
 import {
     ProgramStageFactory,
 } from '../programStage';
@@ -31,6 +30,8 @@ import type {
 
 class ProgramFactory {
     programStageFactory: ProgramStageFactory;
+    enrollmentFactory: EnrollmentFactory;
+    searchGroupFactory: SearchGroupFactory;
 
     constructor(
         cachedOptionSets: Array<CachedOptionSet>,
@@ -42,6 +43,16 @@ class ProgramFactory {
         this.programStageFactory = new ProgramStageFactory(
             cachedOptionSets,
             cachedRelationshipTypes,
+            locale,
+        );
+        this.enrollmentFactory = new EnrollmentFactory(
+            cachedTrackedEntityAttributes,
+            cachedOptionSets,
+            locale,
+            trackedEntityTypeCollection,
+        );
+        this.searchGroupFactory = new SearchGroupFactory(
+            cachedTrackedEntityAttributes,
             locale,
         );
     }
@@ -118,7 +129,7 @@ class ProgramFactory {
                 _this.trackedEntityType = cachedProgram.trackedEntityType;
             });
 
-            // program.searchGroups = await buildSearchGroups(d2Program, this.locale);
+            program.searchGroups = await this.searchGroupFactory.build(cachedProgram);
             // $FlowFixMe
             await cachedProgram.programStages.asyncForEach(async (cachedProgramStage: CachedProgramStage) => {
                 // $FlowFixMe
@@ -130,7 +141,7 @@ class ProgramFactory {
                 );
             });
 
-            // program.enrollment = await buildEnrollment(d2Program, this.cachedOptionSets, this.locale);
+            program.enrollment = await this.enrollmentFactory.build(cachedProgram);
         }
         // $FlowFixMe
         program.icon = await ProgramFactory._buildProgramIcon(cachedProgram.style);

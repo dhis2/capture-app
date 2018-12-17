@@ -3,7 +3,7 @@
 import log from 'loglevel';
 import type {
     CachedAttributeTranslation,
-    CachedProgramTrackedEntityAttribute,
+    CachedTrackedEntityTypeAttribute,
     CachedOptionSet,
     CachedTrackedEntityAttribute,
 } from '../../../cache.types';
@@ -50,24 +50,24 @@ class DataElementFactory {
     }
 
     async build(
-        cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
+        cachedTrackedEntityTypeAttribute: CachedTrackedEntityTypeAttribute,
     ) {
-        const cachedAttribute = cachedProgramTrackedEntityAttribute.trackedEntityAttribute.id &&
+        const cachedAttribute = cachedTrackedEntityTypeAttribute.trackedEntityAttribute.id &&
             this.cachedTrackedEntityAttributes.find(
-                TEA => TEA.id === cachedProgramTrackedEntityAttribute.trackedEntityAttribute.id,
+                TEA => TEA.id === cachedTrackedEntityTypeAttribute.trackedEntityAttribute.id,
             );
 
         if (!cachedAttribute) {
             log.error(
                 errorCreator(
                     DataElementFactory.errorMessages.TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND)(
-                    { cachedProgramTrackedEntityAttribute }));
+                    { cachedTrackedEntityTypeAttribute }));
             return null;
         }
 
         const dataElement = new DataElement((_this) => {
             _this.id = cachedAttribute.id;
-            _this.compulsory = cachedProgramTrackedEntityAttribute.mandatory;
+            _this.compulsory = cachedTrackedEntityTypeAttribute.mandatory;
             _this.name =
                 this._getAttributeTranslation(
                     cachedAttribute.translations, DataElementFactory.translationPropertyNames.NAME) ||
@@ -85,7 +85,7 @@ class DataElementFactory {
                     cachedAttribute.translations, DataElementFactory.translationPropertyNames.DESCRIPTION) ||
                     cachedAttribute.description;
             _this.displayInForms = true;
-            _this.displayInReports = cachedProgramTrackedEntityAttribute.displayInList;
+            _this.displayInReports = cachedTrackedEntityTypeAttribute.displayInList;
             _this.disabled = false;
             _this.type = cachedAttribute.valueType;
         });
@@ -94,7 +94,7 @@ class DataElementFactory {
             dataElement.optionSet = await this.optionSetFactory.build(
                 dataElement,
                 cachedAttribute.optionSet.id,
-                cachedProgramTrackedEntityAttribute.renderOptionsAsRadio,
+                cachedTrackedEntityTypeAttribute.renderOptionsAsRadio,
                 null,
                 value => value,
             );

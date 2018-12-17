@@ -1,2 +1,2 @@
 // @flow
-export { default as buildEnrollment } from './enrollmentFactory';
+export { default as EnrollmentFactory } from './EnrollmentFactory';

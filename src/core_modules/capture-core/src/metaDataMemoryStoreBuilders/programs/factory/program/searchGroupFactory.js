@@ -1,14 +1,19 @@
 // @flow
-
-import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
-import Section from '../../../../metaData/RenderFoundation/Section';
-import SearchGroup from '../../../../metaData/SearchGroup/SearchGroup';
-import DataElement from '../../../../metaData/DataElement/DataElement';
+/* eslint-disable no-underscore-dangle */
+import log from 'loglevel';
+import {
+    RenderFoundation,
+    Section,
+    SearchGroup,
+    DataElement,
+} from '../../../../metaData';
 import type {
     CachedProgram,
     CachedAttributeTranslation,
     CachedProgramTrackedEntityAttribute,
+    CachedTrackedEntityAttribute,
 } from '../../../cache.types';
+import errorCreator from '../../../../utils/errorCreator';
 
 const translationPropertyNames = {
     NAME: 'NAME',
@@ -16,91 +21,136 @@ const translationPropertyNames = {
     SHORT_NAME: 'SHORT_NAME',
 };
 
-let currentLocale: ?string;
-
-function getAttributeTranslation(translations: Array<CachedAttributeTranslation>, property: $Values<typeof translationPropertyNames>) {
-    if (currentLocale) {
-        const translation = translations.find(t => t.property === property && t.locale === currentLocale);
-        return translation && translation.value;
-    }
-    return null;
-}
-
-async function buildElement(programAttribute: CachedProgramTrackedEntityAttribute) {
-    const attribute = programAttribute.trackedEntityAttribute;
-
-    const element = new DataElement((_this) => {
-        _this.id = attribute.id;
-        _this.name = getAttributeTranslation(attribute.translations, translationPropertyNames.NAME) || attribute.displayName;
-        _this.shortName = getAttributeTranslation(attribute.translations, translationPropertyNames.SHORT_NAME) || attribute.displayShortName;
-        _this.formName = getAttributeTranslation(attribute.translations, translationPropertyNames.NAME) || attribute.displayName;
-        _this.description = getAttributeTranslation(attribute.translations, translationPropertyNames.DESCRIPTION) || attribute.description;
-        _this.displayInForms = true;
-        _this.displayInReports = programAttribute.displayInList;
-        _this.compulsory = !!attribute.unique;
-        _this.disabled = false;
-        _this.type = attribute.valueType;
-    });
-
-    /* if (attribute.optionSet && attribute.optionSet.id ) {
-        element.optionSet = await buildOptionSet(
-            attribute.optionSet.id,
-            element,
-            programAttribute.renderOptionsAsRadio,
-            programAttribute.renderType && programAttribute.renderType.DESKTOP && programAttribute.renderType.DESKTOP.type);
-    } */
-
-    await Promise.resolve();
-
-    return element;
-}
-
-async function buildSection(searchGroupAttributes: Array<CachedProgramTrackedEntityAttribute>) {
-    const section = new Section((_this) => {
-        _this.id = Section.MAIN_SECTION_ID;
-    });
-
-    // $FlowFixMe
-    await searchGroupAttributes.asyncForEach(async (programAttribute) => {
-        section.addElement(await buildElement(programAttribute));
-    });
-    return section;
-}
-
-
-async function buildRenderFoundation(searchGroupAttributes: Array<CachedProgramTrackedEntityAttribute>) {
-    const renderFoundation = new RenderFoundation();
-    renderFoundation.addSection(await buildSection(searchGroupAttributes));
-    return renderFoundation;
-}
-
-async function buildSearchGroup(key: string, searchGroupAttributes: Array<CachedProgramTrackedEntityAttribute>, program: CachedProgram) {
-    const searchGroup = new SearchGroup();
-    searchGroup.searchForm = await buildRenderFoundation(searchGroupAttributes);
-    if (key === 'main') {
-        searchGroup.minAttributesRequiredToSearch = program.minAttributesRequiredToSearch;
-    } else {
-        searchGroup.unique = true;
+class SearchGroupFactory {
+    static errorMessages = {
+        TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND: 'Tracked entity attribute not found',
+    };
+    cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute>;
+    locale: ?string;
+    constructor(
+        cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute>,
+        locale: ?string,
+    ) {
+        this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
+        this.locale = locale;
     }
 
-    return searchGroup;
+    _getAttributeTranslation(
+        translations: Array<CachedAttributeTranslation>,
+        property: $Values<typeof translationPropertyNames>,
+    ) {
+        if (this.locale) {
+            const translation = translations.find(t => t.property === property && t.locale === this.locale);
+            return translation && translation.value;
+        }
+        return null;
+    }
+
+    async _buildElement(cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute) {
+        const cachedAttribute = cachedProgramTrackedEntityAttribute.trackedEntityAttribute.id &&
+            this.cachedTrackedEntityAttributes.find(
+                TEA => TEA.id === cachedProgramTrackedEntityAttribute.trackedEntityAttribute.id,
+            );
+
+        if (!cachedAttribute) {
+            log.error(
+                errorCreator(
+                    SearchGroupFactory.errorMessages.TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND)(
+                    { cachedProgramTrackedEntityAttribute }));
+            return null;
+        }
+
+        const element = new DataElement((_this) => {
+            _this.id = cachedAttribute.id;
+            _this.name = this._getAttributeTranslation(
+                cachedAttribute.translations, translationPropertyNames.NAME) ||
+                cachedAttribute.displayName;
+            _this.shortName = this._getAttributeTranslation(
+                cachedAttribute.translations, translationPropertyNames.SHORT_NAME) ||
+                cachedAttribute.displayShortName;
+            _this.formName = this._getAttributeTranslation(
+                cachedAttribute.translations, translationPropertyNames.NAME) ||
+                cachedAttribute.displayName;
+            _this.description = this._getAttributeTranslation(
+                cachedAttribute.translations, translationPropertyNames.DESCRIPTION) ||
+                cachedAttribute.description;
+            _this.displayInForms = true;
+            _this.displayInReports = cachedProgramTrackedEntityAttribute.displayInList;
+            _this.compulsory = !!cachedAttribute.unique;
+            _this.disabled = false;
+            _this.type = cachedAttribute.valueType;
+        });
+
+        /* if (attribute.optionSet && attribute.optionSet.id ) {
+            element.optionSet = await buildOptionSet(
+                attribute.optionSet.id,
+                element,
+                programAttribute.renderOptionsAsRadio,
+                programAttribute.renderType && programAttribute.renderType.DESKTOP && programAttribute.renderType.DESKTOP.type);
+        } */
+
+        await Promise.resolve();
+
+        return element;
+    }
+
+    async _buildSection(searchGroupAttributes: Array<CachedProgramTrackedEntityAttribute>) {
+        const section = new Section((_this) => {
+            _this.id = Section.MAIN_SECTION_ID;
+        });
+
+        // $FlowFixMe
+        await searchGroupAttributes.asyncForEach(async (programAttribute) => {
+            const element = await this._buildElement(programAttribute);
+            element && section.addElement(element);
+        });
+        return section;
+    }
+
+
+    async _buildRenderFoundation(searchGroupAttributes: Array<CachedProgramTrackedEntityAttribute>) {
+        const renderFoundation = new RenderFoundation();
+        renderFoundation.addSection(await this._buildSection(searchGroupAttributes));
+        return renderFoundation;
+    }
+
+    async _buildSearchGroup(
+        key: string,
+        searchGroupAttributes: Array<CachedProgramTrackedEntityAttribute>,
+        program: CachedProgram,
+    ) {
+        const searchGroup = new SearchGroup();
+        searchGroup.searchForm = await this._buildRenderFoundation(searchGroupAttributes);
+        if (key === 'main') {
+            searchGroup.minAttributesRequiredToSearch = program.minAttributesRequiredToSearch;
+        } else {
+            searchGroup.unique = true;
+        }
+
+        return searchGroup;
+    }
+
+    build(program: CachedProgram) {
+        if (!program.programTrackedEntityAttributes) {
+            return Promise.resolve([]);
+        }
+
+        const attributesBySearchGroup = program.programTrackedEntityAttributes
+            .filter(attribute => attribute.searchable || attribute.trackedEntityAttribute.unique)
+            .reduce((accGroups, attribute) => {
+                if (attribute.trackedEntityAttribute.unique) {
+                    accGroups[attribute.trackedEntityAttribute.id] = [attribute];
+                } else {
+                    accGroups.main = accGroups.main ? [...accGroups.main, attribute] : [attribute];
+                }
+                return accGroups;
+            }, {});
+
+        const searchGroupPromises = Object.keys(attributesBySearchGroup)
+            .map(attrByGroupKey =>
+                this._buildSearchGroup(attrByGroupKey, attributesBySearchGroup[attrByGroupKey], program));
+        return Promise.all(searchGroupPromises);
+    }
 }
 
-export default function buildSearchGroups(program: CachedProgram, locale: ?string) {
-    currentLocale = locale;
-
-    const attributesBySearchGroup = program.programTrackedEntityAttributes
-        .filter(attribute => attribute.searchable || attribute.trackedEntityAttribute.unique)
-        .reduce((accGroups, attribute) => {
-            if (attribute.trackedEntityAttribute.unique) {
-                accGroups[attribute.trackedEntityAttribute.id] = [attribute];
-            } else {
-                accGroups.main = accGroups.main ? [...accGroups.main, attribute] : [attribute];
-            }
-            return accGroups;
-        }, {});
-
-    const searchGroupPromises = Object.keys(attributesBySearchGroup)
-        .map(attrByGroupKey => buildSearchGroup(attrByGroupKey, attributesBySearchGroup[attrByGroupKey], program));
-    return Promise.all(searchGroupPromises);
-}
+export default SearchGroupFactory;

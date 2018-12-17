@@ -11,6 +11,11 @@ function converter(d2Model) {
         id: item.id,
         displayName: item.displayName,
         trackedEntityTypeAttributes: item.trackedEntityTypeAttributes,
+        translations: item.translations,
+        featureType: item.featureType,
+        access: item.access,
+        maxTeiCountToReturn: item.maxTeiCountToReturn,
+        displayDescription: item.displayDescription,
     }));
 }
 
@@ -18,7 +23,7 @@ export default new ApiSpecification((_this) => {
     _this.modelName = 'trackedEntityTypes';
     _this.modelGetterType = getterTypes.LIST;
     _this.queryParams = {
-        fields: 'id,displayName, trackedEntityTypeAttributes[*]',
+        fields: '*, trackedEntityTypeAttributes[*]',
     };
     _this.converter = converter;
 });

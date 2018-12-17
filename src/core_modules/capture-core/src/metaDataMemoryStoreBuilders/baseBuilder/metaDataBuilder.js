@@ -6,26 +6,31 @@ import buildTrackedEntityTypes from '../trackedEntityTypes/trackedEntityTypesBui
 import stores from '../../metaDataStoreLoaders/baseLoader/metaDataObjectStores.const';
 import getCommonPrerequisites from './commonPrerequisitesGetter';
 
-
 export default async function buildMetaData(locale: string) {
-    const preRequisitesData = await getCommonPrerequisites(stores.TRACKED_ENTITY_ATTRIBUTES, stores.OPTION_SETS);
+    const preRequisitesData: Object =
+        await getCommonPrerequisites(stores.TRACKED_ENTITY_ATTRIBUTES, stores.OPTION_SETS);
     const trackedEntityTypeCollection =
         // $FlowFixMe
-        await buildTrackedEntityTypes(stores.TRACKED_ENTITY_TYPES, preRequisitesData[stores.TRACKED_ENTITY_ATTRIBUTES]);
+        await buildTrackedEntityTypes(
+            stores.TRACKED_ENTITY_TYPES,
+            preRequisitesData[stores.TRACKED_ENTITY_ATTRIBUTES],
+            preRequisitesData[stores.OPTION_SETS],
+            locale,
+        );
 
     const programsBuilderPromise =
         buildPrograms(
             locale,
             stores.PROGRAMS,
-            stores.OPTION_SETS,
             stores.PROGRAM_RULES_VARIABLES,
             stores.PROGRAM_RULES,
             stores.PROGRAM_INDICATORS,
             stores.RELATIONSHIP_TYPES,
+            preRequisitesData[stores.OPTION_SETS],
             preRequisitesData[stores.TRACKED_ENTITY_ATTRIBUTES],
             trackedEntityTypeCollection,
         );
     const constantsBuilderPromise = buildConstants(stores.CONSTANTS);
-    const optionSetsBuilderPromise = buildOptionSets(stores.OPTION_SETS);
-    await Promise.all([programsBuilderPromise, constantsBuilderPromise, optionSetsBuilderPromise]);
+    buildOptionSets(preRequisitesData[stores.OPTION_SETS]);
+    await Promise.all([programsBuilderPromise, constantsBuilderPromise]);
 }

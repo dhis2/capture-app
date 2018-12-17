@@ -1,9 +1,10 @@
 // @flow
 import type {
-    CachedProgramTrackedEntityType,
+    CachedTrackedEntityAttribute,
+    CachedOptionSet,
 } from '../cache.types';
 import { trackedEntityTypesCollection } from '../../metaDataMemoryStores';
-import { TrackedEntityType } from '../../metaData';
+import { TrackedEntityTypeFactory } from './factory';
 import getStorageController from '../../metaDataStores/storageController/metaDataStorageController';
 import StorageController from '../../storage/StorageController';
 
@@ -13,16 +14,22 @@ function getCachedTrackedEntityTypes(storageController: StorageController, store
 
 export default async function buildTrackedEntityTypes(
     store: string,
-    trackedEntityAttributes: Array<CachedProgramTrackedEntityType> = [],
+    cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute> = [],
+    cachedOptionSets: Array<CachedOptionSet> = [],
+    locale: ?string,
 ) {
     const storageController = getStorageController();
     const cachedTrackedEntityTypes = (await getCachedTrackedEntityTypes(storageController, store)) || [];
 
-    cachedTrackedEntityTypes.forEach((cachedType) => {
-        const trackedEntityType = new TrackedEntityType((_this) => {
-            _this.id = cachedType.id;
-            _this.name = cachedType.displayName;
-        });
+    const trackedEntityTypeFactory = new TrackedEntityTypeFactory(
+        cachedTrackedEntityAttributes,
+        cachedOptionSets,
+        locale,
+    );
+
+    // $FlowFixMe
+    await cachedTrackedEntityTypes.asyncForEach(async (cachedType) => {
+        const trackedEntityType = await trackedEntityTypeFactory.build(cachedType);
         trackedEntityTypesCollection.set(trackedEntityType.id, trackedEntityType);
     });
 

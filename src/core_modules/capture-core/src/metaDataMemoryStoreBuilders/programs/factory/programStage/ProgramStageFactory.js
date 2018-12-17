@@ -19,7 +19,7 @@ import capitalizeFirstLetter from '../../../../utils/string/capitalizeFirstLette
 import isNonEmptyArray from '../../../../utils/isNonEmptyArray';
 import ProgramStage from '../../../../metaData/Program/ProgramStage';
 import getCamelCaseUppercaseString from '../../../../utils/string/getCamelCaseFromUppercase';
-import buildDataElement from './dataElementFactory';
+import DataElementFactory from './DataElementFactory';
 import RelationshipTypesFactory from './RelationshipTypesFactory';
 
 type SectionSpecs = {
@@ -34,6 +34,7 @@ class ProgramStageFactory {
 
     cachedOptionSets: Array<CachedOptionSet>;
     locale: ?string;
+    dataElementFactory: DataElementFactory;
     relationshipTypesFactory: RelationshipTypesFactory;
 
     constructor(
@@ -46,10 +47,14 @@ class ProgramStageFactory {
         this.relationshipTypesFactory = new RelationshipTypesFactory(
             cachedRelationshipTypes,
         );
+        this.dataElementFactory = new DataElementFactory(
+            cachedOptionSets,
+            locale,
+        );
     }
 
     async _buildSection(
-        d2ProgramStageDataElements: CachedProgramStageDataElementsAsObject,
+        cachedProgramStageDataElements: CachedProgramStageDataElementsAsObject,
         sectionSpecs: SectionSpecs) {
         const section = new Section((_this) => {
             _this.id = sectionSpecs.id;
@@ -60,8 +65,8 @@ class ProgramStageFactory {
             // $FlowFixMe
             await sectionSpecs.dataElements.asyncForEach(async (sectionDataElement: CachedSectionDataElements) => {
                 const id = sectionDataElement.id;
-                const d2ProgramStageDataElement = d2ProgramStageDataElements[id];
-                section.addElement(await buildDataElement(d2ProgramStageDataElement, this.cachedOptionSets, this.locale));
+                const cachedProgramStageDataElement = cachedProgramStageDataElements[id];
+                section.addElement(await this.dataElementFactory.build(cachedProgramStageDataElement));
             });
         }
 
@@ -76,7 +81,7 @@ class ProgramStageFactory {
         if (cachedProgramStageDataElements) {
             // $FlowFixMe
             await cachedProgramStageDataElements.asyncForEach((async (cachedProgramStageDataElement) => {
-                section.addElement(await buildDataElement(cachedProgramStageDataElement, this.cachedOptionSets, this.locale));
+                section.addElement(await this.dataElementFactory.build(cachedProgramStageDataElement));
             }));
         }
 
@@ -84,12 +89,12 @@ class ProgramStageFactory {
     }
 
     static _convertProgramStageDataElementsToObject(
-        d2ProgramStageDataElements: ?Array<CachedProgramStageDataElement>): CachedProgramStageDataElementsAsObject {
-        if (!d2ProgramStageDataElements) {
+        cachedProgramStageDataElements: ?Array<CachedProgramStageDataElement>): CachedProgramStageDataElementsAsObject {
+        if (!cachedProgramStageDataElements) {
             return {};
         }
 
-        return d2ProgramStageDataElements.reduce((accObject, d2ProgramStageDataElement) => {
+        return cachedProgramStageDataElements.reduce((accObject, d2ProgramStageDataElement) => {
             accObject[d2ProgramStageDataElement.dataElement.id] = d2ProgramStageDataElement;
             return accObject;
         }, {});
