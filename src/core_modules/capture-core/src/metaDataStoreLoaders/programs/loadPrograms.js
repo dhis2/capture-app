@@ -131,7 +131,7 @@ function getTrackedEntityAttributeIds(missingPrograms) {
             if (program.programTrackedEntityAttributes) {
                 const attributeIds =
                     program.programTrackedEntityAttributes
-                        .map(programAttribute => programAttribute.trackedEntityAttribute && programAttribute.trackedEntityAttribute.id)
+                        .map(programAttribute => programAttribute.trackedEntityAttributeId)
                         .filter(TEAId => TEAId);
 
                 return [...accAttributeIds, ...attributeIds];
@@ -151,16 +151,23 @@ export default async function loadProgramsData(storageController: StorageControl
     );
 
     const programBatches = chunk(missingPrograms, batchSize);
-
-    await Promise.all(
+    const programGroups = await Promise.all(
         programBatches.map(
             batch =>
                 getPrograms(batch, stores[programsStoresKeys.PROGRAMS], storageController)
-                    .then(programs => getProgramRules(programs, stores[programsStoresKeys.PROGRAM_RULES], storageController)
-                        .then(() => getProgramRulesVariables(programs, stores[programsStoresKeys.PROGRAM_RULES_VARIABLES], storageController))
-                        .then(() => getProgramIndicators(programs, stores[programsStoresKeys.PROGRAM_INDICATORS], storageController))),
+                    .then(programs =>
+                        getProgramRules(programs, stores[programsStoresKeys.PROGRAM_RULES], storageController)
+                            .then(() => getProgramRulesVariables(programs, stores[programsStoresKeys.PROGRAM_RULES_VARIABLES], storageController))
+                            .then(() => getProgramIndicators(programs, stores[programsStoresKeys.PROGRAM_INDICATORS], storageController))
+                            .then(() => programs),
+                    ),
         ),
     );
 
-    return { optionSetsMeta, trackedEntityAttributeIds: getTrackedEntityAttributeIds(missingPrograms) };
+    const missingProgramsWithData = programGroups
+        .filter(programs => programs)
+        // $FlowFixMe
+        .reduce((accPrograms, programs) => ([...accPrograms, ...programs]), []);
+
+    return { optionSetsMeta, trackedEntityAttributeIds: getTrackedEntityAttributeIds(missingProgramsWithData) };
 }

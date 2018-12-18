@@ -44,7 +44,7 @@ export default async function loadTrackedEntityTypes(
             if (TET.trackedEntityTypeAttributes) {
                 const attributeIds = TET
                     .trackedEntityTypeAttributes
-                    .map(TETA => TETA.trackedEntityAttribute && TETA.trackedEntityAttribute.id)
+                    .map(TETA => TETA.trackedEntityAttributeId)
                     .filter(TEAId => TEAId);
 
                 return [...accAttributeIds, ...attributeIds];

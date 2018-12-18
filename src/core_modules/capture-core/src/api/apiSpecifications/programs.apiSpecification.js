@@ -101,6 +101,17 @@ function getOrganisationUnits(d2OrganisationUnitsCollection) {
     }, {});
 }
 
+function getProgramTrackedEntityAttributes(attributes) {
+    return attributes ?
+        attributes.map((a) => {
+            const { trackedEntityAttribute, ...attribute } = a;
+            return {
+                ...attribute,
+                trackedEntityAttributeId: trackedEntityAttribute.id,
+            };
+        }) : null;
+}
+
 export default new ApiSpecification((_this) => {
     _this.modelName = 'programs';
     _this.modelGetterType = getterTypes.LIST;
@@ -138,7 +149,7 @@ export default new ApiSpecification((_this) => {
             programType: d2Program.programType,
             style: d2Program.style,
             trackedEntityTypeId: d2Program.trackedEntityType && d2Program.trackedEntityType.id,
-            programTrackedEntityAttributes: d2Program.programTrackedEntityAttributes,
+            programTrackedEntityAttributes: getProgramTrackedEntityAttributes(d2Program.programTrackedEntityAttributes),
             minAttributesRequiredToSearch: d2Program.minAttributesRequiredToSearch,
             enrollmentDateLabel: d2Program.enrollmentDateLabel,
             incidentDateLabel: d2Program.incidentDateLabel,

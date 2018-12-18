@@ -25,10 +25,10 @@ export type CachedTrackedEntityAttribute = {
 }
 
 export type CachedProgramTrackedEntityAttribute = {
-    trackedEntityAttribute: CachedTrackedEntityAttribute,
-    displayInList: ?boolean,
-    searchable: ?boolean,
-    mandatory: ?boolean,
+    trackedEntityAttributeId: string,
+    displayInList: boolean,
+    searchable: boolean,
+    mandatory: boolean,
     renderOptionsAsRadio: ?boolean,
 }
 
@@ -116,11 +116,10 @@ export type CachedCategoryCombo = {
 };
 
 export type CachedTrackedEntityTypeAttribute = {
-    trackedEntityAttribute: {
-        id: string,
-    },
+    trackedEntityAttributeId: string,
     displayInList: boolean,
     mandatory: boolean,
+    searchable: boolean,
 };
 
 export type CachedTrackedEntityTypeTranslation = {
@@ -134,6 +133,7 @@ export type CachedTrackedEntityType = {
     displayName: string,
     trackedEntityTypeAttributes: ?Array<CachedTrackedEntityTypeAttribute>,
     translations: Array<CachedTrackedEntityTypeTranslation>,
+    minAttributesRequiredToSearch: number,
 }
 
 export type CachedProgram = {

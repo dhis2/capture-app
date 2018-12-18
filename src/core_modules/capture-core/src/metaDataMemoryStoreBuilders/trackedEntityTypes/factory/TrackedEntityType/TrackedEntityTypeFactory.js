@@ -7,6 +7,7 @@ import {
     Section,
 } from '../../../../metaData';
 import DataElementFactory from './DataElementFactory';
+import { SearchGroupFactory } from '../../../common/factory';
 import type {
     CachedTrackedEntityType,
     CachedTrackedEntityTypeAttribute,
@@ -24,6 +25,8 @@ class TrackedEntityTypeFactory {
 
     locale: ?string;
     dataElementFactory: DataElementFactory;
+    searchGroupFactory: SearchGroupFactory;
+
     constructor(
         cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
         cachedOptionSets: Map<string, CachedOptionSet>,
@@ -33,6 +36,10 @@ class TrackedEntityTypeFactory {
         this.dataElementFactory = new DataElementFactory(
             cachedTrackedEntityAttributes,
             cachedOptionSets,
+            locale,
+        );
+        this.searchGroupFactory = new SearchGroupFactory(
+            cachedTrackedEntityAttributes,
             locale,
         );
     }
@@ -88,7 +95,14 @@ class TrackedEntityTypeFactory {
         });
 
         trackedEntityType.foundation = await this._buildFoundation(cachedType);
+        if (cachedType.trackedEntityTypeAttributes) {
+            trackedEntityType.searchGroups = await this.searchGroupFactory.build(
+                cachedType.trackedEntityTypeAttributes,
+                cachedType.minAttributesRequiredToSearch,
+            );
+        }
 
+        debugger;
 
         return trackedEntityType;
     }

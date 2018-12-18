@@ -16,6 +16,16 @@ import type {
 } from '../../../cache.types';
 import errorCreator from '../../../../utils/errorCreator';
 
+type InputSearchAttribute = {
+    trackedEntityAttributeId: string,
+    searchable: boolean,
+    displayInList: boolean,
+}
+
+type SearchAttribute = InputSearchAttribute & {
+    trackedEntityAttribute: CachedTrackedEntityAttribute
+}
+
 const translationPropertyNames = {
     NAME: 'NAME',
     DESCRIPTION: 'DESCRIPTION',
@@ -30,6 +40,7 @@ const searchAttributeElementTypes = {
     [dataElementTypes.INTEGER_NEGATIVE]: dataElementTypes.INTEGER_NEGATIVE_RANGE,
     [dataElementTypes.DATE]: dataElementTypes.DATE_RANGE,
 };
+
 
 class SearchGroupFactory {
     static errorMessages = {
@@ -61,39 +72,27 @@ class SearchGroupFactory {
         return null;
     }
 
-    async _buildElement(cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute) {
-        const cachedAttribute = cachedProgramTrackedEntityAttribute.trackedEntityAttribute.id &&
-            this.cachedTrackedEntityAttributes.get(
-                cachedProgramTrackedEntityAttribute.trackedEntityAttribute.id,
-            );
-
-        if (!cachedAttribute) {
-            log.error(
-                errorCreator(
-                    SearchGroupFactory.errorMessages.TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND)(
-                    { cachedProgramTrackedEntityAttribute }));
-            return null;
-        }
-
+    async _buildElement(searchAttribute: SearchAttribute) {
+        const trackedEntityAttribute = searchAttribute.trackedEntityAttribute;
         const element = new DataElement((_this) => {
-            _this.id = cachedAttribute.id;
+            _this.id = trackedEntityAttribute.id;
             _this.name = this._getAttributeTranslation(
-                cachedAttribute.translations, translationPropertyNames.NAME) ||
-                cachedAttribute.displayName;
+                trackedEntityAttribute.translations, translationPropertyNames.NAME) ||
+                trackedEntityAttribute.displayName;
             _this.shortName = this._getAttributeTranslation(
-                cachedAttribute.translations, translationPropertyNames.SHORT_NAME) ||
-                cachedAttribute.displayShortName;
+                trackedEntityAttribute.translations, translationPropertyNames.SHORT_NAME) ||
+                trackedEntityAttribute.displayShortName;
             _this.formName = this._getAttributeTranslation(
-                cachedAttribute.translations, translationPropertyNames.NAME) ||
-                cachedAttribute.displayName;
+                trackedEntityAttribute.translations, translationPropertyNames.NAME) ||
+                trackedEntityAttribute.displayName;
             _this.description = this._getAttributeTranslation(
-                cachedAttribute.translations, translationPropertyNames.DESCRIPTION) ||
-                cachedAttribute.description;
+                trackedEntityAttribute.translations, translationPropertyNames.DESCRIPTION) ||
+                trackedEntityAttribute.description;
             _this.displayInForms = true;
-            _this.displayInReports = cachedProgramTrackedEntityAttribute.displayInList;
-            _this.compulsory = !!cachedAttribute.unique;
+            _this.displayInReports = searchAttribute.displayInList;
+            _this.compulsory = !!trackedEntityAttribute.unique;
             _this.disabled = false;
-            _this.type = SearchGroupFactory._getSearchAttributeValueType(cachedAttribute.valueType, cachedAttribute.unique);
+            _this.type = SearchGroupFactory._getSearchAttributeValueType(trackedEntityAttribute.valueType, trackedEntityAttribute.unique);
         });
 
         /* if (attribute.optionSet && attribute.optionSet.id ) {
@@ -109,7 +108,7 @@ class SearchGroupFactory {
         return element;
     }
 
-    async _buildSection(searchGroupAttributes: Array<CachedProgramTrackedEntityAttribute>) {
+    async _buildSection(searchGroupAttributes: Array<SearchAttribute>) {
         const section = new Section((_this) => {
             _this.id = Section.MAIN_SECTION_ID;
         });
@@ -123,7 +122,7 @@ class SearchGroupFactory {
     }
 
 
-    async _buildRenderFoundation(searchGroupAttributes: Array<CachedProgramTrackedEntityAttribute>) {
+    async _buildRenderFoundation(searchGroupAttributes: Array<SearchAttribute>) {
         const renderFoundation = new RenderFoundation();
         renderFoundation.addSection(await this._buildSection(searchGroupAttributes));
         return renderFoundation;
@@ -131,13 +130,13 @@ class SearchGroupFactory {
 
     async _buildSearchGroup(
         key: string,
-        searchGroupAttributes: Array<CachedProgramTrackedEntityAttribute>,
-        program: CachedProgram,
+        searchGroupAttributes: Array<SearchAttribute>,
+        minAttributesRequiredToSearch: number,
     ) {
         const searchGroup = new SearchGroup();
         searchGroup.searchForm = await this._buildRenderFoundation(searchGroupAttributes);
         if (key === 'main') {
-            searchGroup.minAttributesRequiredToSearch = program.minAttributesRequiredToSearch;
+            searchGroup.minAttributesRequiredToSearch = minAttributesRequiredToSearch;
         } else {
             searchGroup.unique = true;
         }
@@ -145,12 +144,9 @@ class SearchGroupFactory {
         return searchGroup;
     }
 
-    build(program: CachedProgram) {
-        if (!program.programTrackedEntityAttributes) {
-            return Promise.resolve([]);
-        }
-
-        const attributesBySearchGroup = program.programTrackedEntityAttributes
+    build(searchAttributes: $ReadOnlyArray<InputSearchAttribute>, minAttributesRequiredToSearch: number) {
+        const attributesBySearchGroup = searchAttributes
+            .map(attribute => ({ ...attribute, trackedEntityAttribute: this.cachedTrackedEntityAttributes.get(attribute.trackedEntityAttributeId) }))
             .filter(attribute => attribute.searchable || attribute.trackedEntityAttribute.unique)
             .reduce((accGroups, attribute) => {
                 if (attribute.trackedEntityAttribute.unique) {
@@ -163,7 +159,7 @@ class SearchGroupFactory {
 
         const searchGroupPromises = Object.keys(attributesBySearchGroup)
             .map(attrByGroupKey =>
-                this._buildSearchGroup(attrByGroupKey, attributesBySearchGroup[attrByGroupKey], program));
+                this._buildSearchGroup(attrByGroupKey, attributesBySearchGroup[attrByGroupKey], minAttributesRequiredToSearch));
         return Promise.all(searchGroupPromises);
     }
 }

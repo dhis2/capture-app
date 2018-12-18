@@ -11,7 +11,7 @@ import {
 } from '../../../../metaData';
 
 import getProgramIconAsync from './getProgramIcon';
-import SearchGroupFactory from './SearchGroupFactory';
+import { SearchGroupFactory } from '../../../common/factory';
 import { EnrollmentFactory } from '../enrollment';
 import {
     ProgramStageFactory,
@@ -32,6 +32,7 @@ class ProgramFactory {
     programStageFactory: ProgramStageFactory;
     enrollmentFactory: EnrollmentFactory;
     searchGroupFactory: SearchGroupFactory;
+    trackedEntityTypeCollection: Map<string, TrackedEntityType>;
 
     constructor(
         cachedOptionSets: Map<string, CachedOptionSet>,
@@ -40,6 +41,7 @@ class ProgramFactory {
         trackedEntityTypeCollection: Map<string, TrackedEntityType>,
         locale: ?string,
     ) {
+        this.trackedEntityTypeCollection = trackedEntityTypeCollection;
         this.programStageFactory = new ProgramStageFactory(
             cachedOptionSets,
             cachedRelationshipTypes,
@@ -126,10 +128,16 @@ class ProgramFactory {
                 _this.shortName = cachedProgram.displayShortName;
                 _this.organisationUnits = cachedProgram.organisationUnits;
                 // $FlowFixMe
-                _this.trackedEntityType = cachedProgram.trackedEntityType;
+                _this.trackedEntityType = this.trackedEntityTypeCollection.get(cachedProgram.trackedEntityTypeId);
             });
 
-            program.searchGroups = await this.searchGroupFactory.build(cachedProgram);
+            if (cachedProgram.programTrackedEntityAttributes) {
+                program.searchGroups = await this.searchGroupFactory.build(
+                    cachedProgram.programTrackedEntityAttributes,
+                    cachedProgram.minAttributesRequiredToSearch,
+                );
+            }
+
             // $FlowFixMe
             await cachedProgram.programStages.asyncForEach(async (cachedProgramStage: CachedProgramStage) => {
                 // $FlowFixMe

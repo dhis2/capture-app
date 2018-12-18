@@ -52,9 +52,9 @@ class DataElementFactory {
     async build(
         cachedTrackedEntityTypeAttribute: CachedTrackedEntityTypeAttribute,
     ) {
-        const cachedAttribute = cachedTrackedEntityTypeAttribute.trackedEntityAttribute.id &&
+        const cachedAttribute = cachedTrackedEntityTypeAttribute.trackedEntityAttributeId &&
             this.cachedTrackedEntityAttributes.get(
-                cachedTrackedEntityTypeAttribute.trackedEntityAttribute.id,
+                cachedTrackedEntityTypeAttribute.trackedEntityAttributeId,
             );
 
         if (!cachedAttribute) {

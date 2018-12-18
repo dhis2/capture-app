@@ -4,19 +4,16 @@
 import isFunction from 'd2-utilizr/src/isFunction';
 import Program from './Program';
 import ProgramStage from './ProgramStage';
+import { TrackedEntityType } from '../TrackedEntityType';
 import errorCreator from '../../utils/errorCreator';
-import SearchGroup from '../SearchGroup/SearchGroup';
+import { SearchGroup } from '../SearchGroup';
 import { Enrollment } from './Enrollment';
 
-type ProgramTrackedEntityType = {
-    id: string,
-    displayName: string,
-}
 
 export default class TrackerProgram extends Program {
     _stages: Map<string, ProgramStage>;
     _searchGroups: Array<SearchGroup>;
-    _trackedEntityType: ProgramTrackedEntityType;
+    _trackedEntityType: TrackedEntityType;
     _enrollment: Enrollment;
 
     static errorMessages = {
@@ -48,10 +45,10 @@ export default class TrackerProgram extends Program {
         this._searchGroups = searchGroups;
     }
 
-    get trackedEntityType(): ProgramTrackedEntityType {
+    get trackedEntityType(): TrackedEntityType {
         return this._trackedEntityType;
     }
-    set trackedEntityType(trackedEntityType: ProgramTrackedEntityType) {
+    set trackedEntityType(trackedEntityType: TrackedEntityType) {
         this._trackedEntityType = trackedEntityType;
     }
 
