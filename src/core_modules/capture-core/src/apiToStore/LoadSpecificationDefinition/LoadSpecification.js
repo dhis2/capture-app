@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable no-unused-expressions */
+import StorageController from 'capture-core-utils/storage/StorageController';
 import ApiSpecification from '../../api/ApiSpecificationDefinition/ApiSpecification';
-import StorageController from '../../storage/StorageController';
 import getterTypes from '../../api/fetcher/getterTypes.const';
 import type { Converter } from '../../api/fetcher/apiFetchers';
 

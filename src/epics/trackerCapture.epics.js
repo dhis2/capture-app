@@ -109,7 +109,12 @@ import {
 import {
     teiSearchEpic,
 } from 'capture-core/components/TeiSearch/epics/teiSearch.epics';
-
+import {
+    getOrgUnitDataForNewEnrollmentUrlUpdateEpic,
+    emptyOrgUnitForNewEnrollmentUrlUpdateEpic,
+    validationForNewEnrollmentUrlUpdateEpic,
+    openNewEnrollmentInDataEntryEpic,
+} from 'capture-core/components/Pages/NewEnrollment';
 import { loadStartupData, loadStartupDataCore } from '../init/entry.epics';
 
 export default combineEpics(
@@ -178,4 +183,8 @@ export default combineEpics(
     addRelationshipForNewSingleEventEpic,
     saveNewEventRelationshipsIfExistsEpic,
     saveNewEventRelationshipFinishedEpic,
+    getOrgUnitDataForNewEnrollmentUrlUpdateEpic,
+    emptyOrgUnitForNewEnrollmentUrlUpdateEpic,
+    validationForNewEnrollmentUrlUpdateEpic,
+    openNewEnrollmentInDataEntryEpic,
 );

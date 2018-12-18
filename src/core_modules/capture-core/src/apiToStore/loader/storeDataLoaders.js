@@ -1,7 +1,6 @@
 // @flow
+import StorageController from 'capture-core-utils/storage/StorageController';
 import getData from '../../api/fetcher/apiFetchers';
-
-import StorageController from '../../storage/StorageController';
 import getterTypes from '../../api/fetcher/getterTypes.const';
 import type { Converter } from '../../api/fetcher/apiFetchers';
 
@@ -30,8 +29,12 @@ export async function loadStoreDataIfNotExists(
 ) {
     const keys = await storageController.getKeys(objectStore);
     const alreadyExists = keys && keys.length > 0;
-    if (!alreadyExists) {
-        await loadStoreData(storageController, objectStore, queryParams, d2ModelName, d2ModelGetterType, converter);
+    if (alreadyExists) {
+        return null;
     }
+
+    const loadedData =
+        await loadStoreData(storageController, objectStore, queryParams, d2ModelName, d2ModelGetterType, converter);
+    return loadedData;
 }
 

@@ -111,12 +111,12 @@ export default new ApiSpecification((_this) => {
             'access[*],' +
             'relatedProgram[id,displayName],' +
             'relationshipType[id,displayName],' +
-            'trackedEntityType[id,displayName],' +
+            'trackedEntityType[id],' +
             'categoryCombo[id,displayName,isDefault,categories[id,displayName,categoryOptions[id,displayName,organisationUnits[id]]]],' +
             'organisationUnits[id,displayName],' +
             'userRoles[id,displayName],' +
             'programStages[*,dataEntryForm[*],programStageSections[id,displayName,description,sortOrder,dataElements[id]],programStageDataElements[*,dataElement[*,optionSet[id]]]],' +
-            'programTrackedEntityAttributes[*,trackedEntityAttribute[*,optionSet[id]]]`,',
+            'programTrackedEntityAttributes[*]',
     };
     _this.converter = (d2Programs) => {
         if (!d2Programs || d2Programs.length === 0) {
@@ -137,9 +137,12 @@ export default new ApiSpecification((_this) => {
             organisationUnits: getOrganisationUnits(d2Program.organisationUnits),
             programType: d2Program.programType,
             style: d2Program.style,
-            trackedEntityType: d2Program.trackedEntityType,
+            trackedEntityTypeId: d2Program.trackedEntityType && d2Program.trackedEntityType.id,
             programTrackedEntityAttributes: d2Program.programTrackedEntityAttributes,
             minAttributesRequiredToSearch: d2Program.minAttributesRequiredToSearch,
+            enrollmentDateLabel: d2Program.enrollmentDateLabel,
+            incidentDateLabel: d2Program.incidentDateLabel,
+            dataEntryForm: d2Program.dataEntryForm,
         }));
 
         return programs;

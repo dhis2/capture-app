@@ -8,6 +8,9 @@ import {
     selectorActionTypes as newEventSelectorActionTypes,
 } from '../../components/Pages/NewEvent';
 import {
+    urlActionTypes as newEnrollmentUrlActionTypes,
+} from '../../components/Pages/NewEnrollment';
+import {
     actionTypes as mainPageSelectorActionTypes,
 } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
 import {
@@ -44,6 +47,10 @@ export const organisationUnitDesc = createReducerDescription({
         };
         return newState;
     },
+    [newEnrollmentUrlActionTypes.SET_ORG_UNIT_BASED_ON_URL]: (state, action) => ({
+        ...state,
+        [action.payload.orgUnit.id]: action.payload.orgUnit,
+    }),
     [setOrgUnitActionTypes.STORE_ORG_UNIT_OBJECT]: (state, action) => {
         const newState = { ...state };
         const orgUnit = action.payload;
@@ -121,4 +128,5 @@ export const registeringUnitListDesc = createReducerDescription({
     [newEventSelectorActionTypes.RESET_ORG_UNIT_ID]: removeSearchDataOnResetRegUnit,
     [newEventDataEntryUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: removeSearchDataOnResetRegUnit,
     [editEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: removeSearchDataOnResetRegUnit,
+    [newEnrollmentUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: removeSearchDataOnResetRegUnit,
 }, 'registeringUnitList');

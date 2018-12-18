@@ -251,7 +251,10 @@ msgstr ""
 msgid "Selected program is invalid for registering unit"
 msgstr ""
 
-msgid "Link to"
+msgid "Coordinate"
+msgstr ""
+
+msgid "Enrollment"
 msgstr ""
 
 msgid "Saving to"
@@ -260,12 +263,23 @@ msgstr ""
 msgid "in"
 msgstr ""
 
-msgid ""
-"This is not an event program or the metadata is corrupt. See log for "
-"details."
+msgid "Link to"
 msgstr ""
 
 msgid "A value is required"
+msgstr ""
+
+msgid ""
+"Program with programid {{programId}} isn't a tracker program. Enrollments "
+"can only be done in tracker programs."
+msgstr ""
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr ""
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
 msgstr ""
 
 msgid "Save and add another"
@@ -359,6 +373,9 @@ msgid "No programs available."
 msgstr ""
 
 msgid "An error has occured. See log for details"
+msgstr ""
+
+msgid "Profile"
 msgstr ""
 
 msgid "Error saving event"

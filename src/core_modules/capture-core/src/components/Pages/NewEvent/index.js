@@ -1,5 +1,5 @@
 // @flow
-export { default as NewEventPageEntry } from './PageEntry/NewEventPageEntry.container';
+export { default as NewEventPage } from './PageEntry/NewEventPageEntry.container';
 
 // actions
 export {

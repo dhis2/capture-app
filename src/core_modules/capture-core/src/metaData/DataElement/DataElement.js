@@ -33,6 +33,7 @@ export default class DataElement {
         this._displayInReports = true;
         this._displayInForms = true;
         this.disabled = false;
+        this.compulsory = false;
         initFn && isFunction(initFn) && initFn(this);
     }
 
@@ -78,14 +79,14 @@ export default class DataElement {
         return this._displayInReports;
     }
 
-    set disabled(disabled: boolean) {
+    set disabled(disabled: ?boolean) {
         this._disabled = !!disabled;
     }
     get disabled(): boolean {
         return this._disabled;
     }
 
-    set compulsory(compulsory: boolean) {
+    set compulsory(compulsory: ?boolean) {
         this._compulsory = !!compulsory;
     }
     get compulsory(): boolean {

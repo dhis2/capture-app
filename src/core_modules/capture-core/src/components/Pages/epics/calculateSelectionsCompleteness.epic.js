@@ -12,6 +12,10 @@ import {
 import {
     actionTypes as editEventPageSelectorActionTypes,
 } from '../EditEvent/EditEventSelector/EditEventSelector.actions';
+import {
+    urlActionTypes as newEnrollmentUrlActionTypes,
+} from '../NewEnrollment';
+
 
 import { selectionsCompletenessCalculated } from '../actions/crossPage.actions';
 
@@ -53,6 +57,7 @@ export const calculateSelectionsCompletenessEpic = (action$: InputObservable, st
         newEventSelectorActionTypes.SET_ORG_UNIT,
         newEventSelectorActionTypes.SET_PROGRAM_ID,
         newEventSelectorActionTypes.SET_CATEGORY_OPTION,
+        newEnrollmentUrlActionTypes.VALID_SELECTIONS_FROM_URL,
     )
         .map(() => {
             const isComplete = calculateCompleteStatus(store.getState().currentSelections);

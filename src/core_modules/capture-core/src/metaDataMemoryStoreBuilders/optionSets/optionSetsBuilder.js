@@ -1,13 +1,10 @@
 // @flow
 import optionSetsStore from '../../metaDataMemoryStores/optionSets/optionSets.store';
-import getStorageController from '../../metaDataStores/storageController/metaDataStorageController';
+import type {
+    CachedOptionSet,
+} from '../cache.types';
 
-async function getOptionSets(storeName: string) {
-    const storageController = getStorageController();
-    return storageController.getAll(storeName);
-}
-
-export default async function buildOptionSets(storeName: string) {
-    const storeOptionSets = await getOptionSets(storeName);
-    optionSetsStore.set(storeOptionSets);
+export default function buildOptionSets(cachedOptionSets: Array<CachedOptionSet>) {
+    // $FlowFixMe
+    optionSetsStore.set(cachedOptionSets);
 }

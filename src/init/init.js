@@ -9,8 +9,9 @@ import CurrentLocaleData from 'capture-core/utils/localeData/CurrentLocaleData';
 import { setD2 } from 'capture-core/d2/d2Instance';
 import i18n from '@dhis2/d2-i18n';
 
-import loadMetaData from 'capture-core/metaDataStoreLoaders/baseLoader/metaDataLoader';
-import buildMetaData from 'capture-core/metaDataMemoryStoreBuilders/baseBuilder/metaDataBuilder';
+import { loadMetaData } from 'capture-core/metaDataStoreLoaders';
+import { buildMetaData } from 'capture-core/metaDataMemoryStoreBuilders';
+import { initControllersAsync } from 'capture-core/storageControllers';
 
 import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocaleData';
 
@@ -135,29 +136,28 @@ async function setLocaleData(uiLocale: string) { //eslint-disable-line
     changeI18nLocale(locale);
 }
 
-/*
-async function getSystemSettings(d2: D2) {
-    const systemSettings = await d2.system.settings.all();
-    return systemSettings;
-}
-*/
-
 async function initializeMetaData(dbLocale: string) {
     await loadMetaData();
     await buildMetaData(dbLocale);
 }
 
-export async function initialize() {
+export async function initializeAsync() {
     setLogLevel();
 
+    // initialize d2
     await initializeManifest();
     const userSettings = await getUserSettings();
     const d2 = await init();
     setD2(d2);
-    // const systemSettings = await getSystemSettings(d2);
 
+    // initialize storage controllers
+    await initControllersAsync();
+
+    // set locale data
     const uiLocale = userSettings.keyUiLocale;
     const dbLocale = userSettings.keyDbLocale;
     await setLocaleData(uiLocale);
+
+    // initialize metadata
     await initializeMetaData(dbLocale);
 }

@@ -4,7 +4,7 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 import D2Form from '../D2Form/D2Form.component';
-import { placements } from './dataEntryField/dataEntryField.const';
+import placements from './constants/placements.const';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import getDataEntryKey from './common/getDataEntryKey';
 import StickyOnScroll from '../Sticky/StickyOnScroll.component';

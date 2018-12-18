@@ -7,8 +7,9 @@ import { withStyles } from '@material-ui/core/styles';
 import getD2 from 'capture-core/d2/d2Instance';
 import NetworkStatusBadge from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.component';
 
+import { NewEventPage } from 'capture-core/components/Pages/NewEvent';
+import { NewEnrollmentPage } from 'capture-core/components/Pages/NewEnrollment';
 import MainPageEntry from 'capture-core/components/Pages/MainPage/MainPageEntry/MainPageEntry.container';
-import { NewEventPageEntry } from 'capture-core/components/Pages/NewEvent';
 import EditEventEntry from 'capture-core/components/Pages/EditEvent/EditEventEntry/EditEventEntry.container';
 
 const styles = theme => ({
@@ -45,8 +46,9 @@ class AppContents extends Component<Props> {
                     className={classes.pageContainer}
                 >
                     <Switch>
-                        <Route path="/newEvent" component={NewEventPageEntry} />
+                        <Route path="/newEvent" component={NewEventPage} />
                         <Route path="/editEvent" component={EditEventEntry} />
+                        <Route path="/newEnrollment" component={NewEnrollmentPage} />
                         <Route path="/:keys" component={MainPageEntry} />
                         <Route path="/" component={MainPageEntry} />
                     </Switch>

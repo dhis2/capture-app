@@ -1,29 +1,19 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-
-type Option = {
-    code: string,
-    displayName: string,
-    id: string,
-};
-
-export type OptionSet = {
-    id: string,
-    displayName: string,
-    options: Array<Option>,
-};
+import type {
+    CachedOptionSet,
+} from '../../metaDataMemoryStoreBuilders/cache.types';
 
 class OptionSetStore {
-    _optionSets: { [id: string]: OptionSet };
+    _optionSets: { [id: string]: CachedOptionSet };
     constructor() {
         this._optionSets = {};
     }
 
-    set(optionSets: Array<OptionSet>) {
-        this._optionSets = optionSets.reduce((accObjectOptionSets, optionSet) => {
-            accObjectOptionSets[optionSet.id] = optionSet;
-            return accObjectOptionSets;
-        }, {});
+    set(optionSets: Map<string, CachedOptionSet>) {
+        optionSets.forEach((value, key) => {
+            this._optionSets[key] = value;
+        });
     }
 
     get() {
