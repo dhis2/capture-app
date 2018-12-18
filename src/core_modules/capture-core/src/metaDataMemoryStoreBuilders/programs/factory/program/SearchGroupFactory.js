@@ -6,6 +6,7 @@ import {
     Section,
     SearchGroup,
     DataElement,
+    dataElementTypes,
 } from '../../../../metaData';
 import type {
     CachedProgram,
@@ -21,10 +22,24 @@ const translationPropertyNames = {
     SHORT_NAME: 'SHORT_NAME',
 };
 
+const searchAttributeElementTypes = {
+    [dataElementTypes.NUMBER]: dataElementTypes.NUMBER_RANGE,
+    [dataElementTypes.INTEGER]: dataElementTypes.INTEGER_RANGE,
+    [dataElementTypes.INTEGER_POSITIVE]: dataElementTypes.INTEGER_POSITIVE_RANGE,
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE,
+    [dataElementTypes.INTEGER_NEGATIVE]: dataElementTypes.INTEGER_NEGATIVE_RANGE,
+    [dataElementTypes.DATE]: dataElementTypes.DATE_RANGE,
+};
+
 class SearchGroupFactory {
     static errorMessages = {
         TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND: 'Tracked entity attribute not found',
     };
+    static _getSearchAttributeValueType(valueType: string, isUnique: ?boolean) {
+        const searchAttributeValueType = searchAttributeElementTypes[valueType];
+        return !isUnique && searchAttributeValueType ? searchAttributeValueType : valueType;
+    }
+
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
     locale: ?string;
     constructor(
@@ -78,7 +93,7 @@ class SearchGroupFactory {
             _this.displayInReports = cachedProgramTrackedEntityAttribute.displayInList;
             _this.compulsory = !!cachedAttribute.unique;
             _this.disabled = false;
-            _this.type = cachedAttribute.valueType;
+            _this.type = SearchGroupFactory._getSearchAttributeValueType(cachedAttribute.valueType, cachedAttribute.unique);
         });
 
         /* if (attribute.optionSet && attribute.optionSet.id ) {
