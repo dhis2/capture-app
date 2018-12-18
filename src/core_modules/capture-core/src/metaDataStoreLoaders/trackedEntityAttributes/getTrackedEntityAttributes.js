@@ -1,13 +1,11 @@
 // @flow
-import chunk from '../../utils/chunk';
+import StorageController from 'capture-core-utils/storage/StorageController';
 
+import chunk from '../../utils/chunk';
 import metaTrackedEntityAttributesSpec from '../../api/apiSpecifications/metaTrackedEntityAttributes.apiSpecification';
 import trackedEntityAttributesSpec from '../../api/apiSpecifications/trackedEntityAttributes.apiSpecification';
-
 import getTrackedEntityAttributesLoadSpecification
     from '../../apiToStore/loadSpecifications/getTrackedEntityAttributesLoadSpecification';
-
-import StorageController from '../../storage/StorageController';
 import trackedEntityStoresKeys from './trackedEntityAttributesStoresKeys';
 
 const batchSize = 50;

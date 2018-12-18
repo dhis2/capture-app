@@ -1,9 +1,9 @@
 // @flow
 import optionSetsStore from '../../metaDataMemoryStores/optionSets/optionSets.store';
-import getStorageController from '../../metaDataStores/storageController/metaDataStorageController';
+import { getUserStorageController } from '../../storageControllers';
 
-async function getOptionSets(storeName: string) {
-    const storageController = getStorageController();
+function getOptionSets(storeName: string) {
+    const storageController = getUserStorageController();
     return storageController.getAll(storeName);
 }
 

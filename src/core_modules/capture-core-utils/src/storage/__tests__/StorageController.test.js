@@ -2,6 +2,7 @@ import indexedDB from 'fake-indexeddb';
 import StorageController from '../StorageController';
 import availableAdapters from '../availableAdapters';
 import IndexedDBAdapter from '../IndexedDBAdapter';
+import '../../extensions/asyncForEachArray';
 
 IndexedDBAdapter.indexedDB = indexedDB;
 IndexedDBAdapter.iDBKeyRange = {};
@@ -9,8 +10,7 @@ IndexedDBAdapter.iDBTransaction = {};
 
 let dbName = 'testDB';
 const storeNames = ['testStore', 'testStore2'];
-const Adapters = [availableAdapters.INDEXED_DB, availableAdapters.LOCAL_STORAGE];
-
+const Adapters = [availableAdapters.INDEXED_DB, availableAdapters.LOCAL_STORAGE, availableAdapters.MEMORY];
 
 let testCnt = 0;
 let storageController;
@@ -33,6 +33,16 @@ it('open and close storageContainer', async () => {
 it('set data', async () => {
     await storageController.open();
     await storageController.set('testStore', { id: '1', name: 'test' });
+});
+
+it('set data on unopened adapater', async () => {
+    let errorEncountered = 0;
+    try {
+        await storageController.set('testStore', { id: '1', name: 'test' });
+    } catch (error) {
+        errorEncountered += 1;
+    }
+    expect(errorEncountered).toBe(1);
 });
 
 it('set all data', async () => {
@@ -90,4 +100,39 @@ it('getKeys', async () => {
     const keys = await storageController.getKeys(storeNames[0]);
     expect(keys[0]).toEqual('1');
     expect(keys[1]).toEqual('2');
+});
+
+it('set to fail because db not open', async () => {
+    expect.assertions(1);
+    try {
+        await storageController.set(storeNames[0], { id: '1', test });
+    } catch (error) {
+        expect(error).toBeDefined();
+    }
+});
+
+it('fallback to memory storage on set', async () => {
+    await storageController.open();
+    storageController.adapter.set = () => { throw Error('testError'); };
+    await storageController.set(storeNames[0], { id: '1', name: 'test' });
+    expect(storageController.adapterType).toBe(availableAdapters.MEMORY);
+    const retrievedObject = await storageController.get(storeNames[0], '1');
+    expect(retrievedObject.name).toEqual('test');
+});
+
+it('fallback to memory storage on setAll', async () => {
+    await storageController.open();
+
+    let executionAttempt = 1;
+    storageController.adapter.setAll = (...args) => {
+        if (executionAttempt === 1) {
+            executionAttempt = 2;
+            throw Error('testError');
+        }
+        return storageController.adapter.setAll(...args);
+    };
+    await storageController.setAll(storeNames[0], [{ id: '1', name: 'test' }]);
+    expect(storageController.adapterType).toBe(availableAdapters.MEMORY);
+    const retrievedObject = await storageController.get(storeNames[0], '1');
+    expect(retrievedObject.name).toEqual('test');
 });

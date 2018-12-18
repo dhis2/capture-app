@@ -1,8 +1,8 @@
 // @flow
-import buildProgramCollection from '../../metaDataFactory/program/programFactory';
+import StorageController from 'capture-core-utils/storage/StorageController';
 
-import getStorageController from '../../metaDataStores/storageController/metaDataStorageController';
-import StorageController from '../../storage/StorageController';
+import buildProgramCollection from '../../metaDataFactory/program/programFactory';
+import { getUserStorageController } from '../../storageControllers';
 
 function getPrograms(storageController: StorageController, storeName: string): Promise<Array<Object>> {
     return storageController.getAll(storeName);
@@ -25,7 +25,7 @@ function getProgramIndicators(storageController: StorageController, storeName: s
 }
 
 async function getBuilderPrerequisites(...storeNames: Array<string>) {
-    const storageController = getStorageController();
+    const storageController = getUserStorageController();
 
     const cachedProgramsPromise = getPrograms(storageController, storeNames[0]);
     const cachedOptionSetsPromise = getOptionSets(storageController, storeNames[1]);

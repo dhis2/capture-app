@@ -1,6 +1,6 @@
 // @flow
-import StorageContainer from 'capture-core/storage/StorageContainer';
-import LocalStorageAdapter from 'capture-core/storage/DomLocalStorageAdapter';
+import StorageContainer from 'capture-core-utils/storage/StorageController';
+import LocalStorageAdapter from 'capture-core-utils/storage/DomLocalStorageAdapter';
 import getD2 from 'capture-core/d2/d2Instance';
 
 import objectStores from './sessionCacheObjectStores.const';
