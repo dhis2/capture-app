@@ -25,14 +25,15 @@ import {
 
 const searchId = 'relationshipTeiSearch';
 
-export const openRelationshipTeiSearchEpic = (action$: InputObservable, store: ReduxStore) =>
+export const openRelationshipTeiSearchEpic = (action$: InputObservable) =>
     // $FlowSuppress
     action$.ofType(actionTypes.OPEN_TEI_SEARCH)
         .map((action) => {
-            const state = store.getState();
             const { programId, trackedEntityTypeId } = action.payload;
 
-            const searchGroups = programId ? getSearchGroupsByProgram(programId) : getSearchGroupsByTrackedEntityType(trackedEntityTypeId);
+            const searchGroups = programId ?
+                getSearchGroupsByProgram(programId) :
+                getSearchGroupsByTrackedEntityType(trackedEntityTypeId);
 
             const addFormDataActions = searchGroups ? searchGroups.map((sg, i) => {
                 const key = `${searchId}-${i}`;

@@ -6,6 +6,7 @@ import {
     dataEntriesUIDesc,
     dataEntriesFieldsValueDesc,
     dataEntriesNotesDesc,
+    dataEntriesRelationshipsDesc,
     dataEntriesFieldsMetaDesc,
     dataEntriesFieldsUIDesc,
 } from 'capture-core/reducers/descriptions/dataEntry.reducerDescription';
@@ -61,6 +62,7 @@ export default [
     dataEntriesUIDesc,
     dataEntriesFieldsValueDesc,
     dataEntriesNotesDesc,
+    dataEntriesRelationshipsDesc,
     dataEntriesFieldsMetaDesc,
     dataEntriesFieldsUIDesc,
     feedbackDesc,

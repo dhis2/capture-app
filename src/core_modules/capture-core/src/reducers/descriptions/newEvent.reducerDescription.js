@@ -49,16 +49,19 @@ export const newEventPageDesc = createReducerDescription({
         const newState = { ...state };
         newState.dataEntryIsLoading = true;
         newState.selectionsError = null;
+        newState.showAddRelationship = false;
         return newState;
     },
     [editEventPageActionTypes.OPEN_NEW_EVENT]: (state) => {
         const newState = { ...state };
         newState.dataEntryIsLoading = true;
+        newState.showAddRelationship = false;
         return newState;
     },
     [mainPageSelectorActionTypes.OPEN_NEW_EVENT]: (state) => {
         const newState = { ...state };
         newState.dataEntryIsLoading = true;
+        newState.showAddRelationship = false;
         return newState;
     },
     [newEventDataEntryActionTypes.SELECTIONS_NOT_COMPLETE_OPENING_NEW_EVENT]: (state) => {
@@ -71,11 +74,14 @@ export const newEventPageDesc = createReducerDescription({
         newState.dataEntryIsLoading = false;
         return newState;
     },
-    [newEventDataEntryActionTypes.NEW_EVENT_ADD_RELATIONSHIP]: (state) => {
-        const newState = { ...state };
-        newState.showAddRelationship = true;
-        return newState;
-    },
+    [newEventDataEntryActionTypes.NEW_EVENT_OPEN_NEW_RELATIONSHIP]: state => ({
+        ...state,
+        showAddRelationship: true,
+    }),
+    [newEventNewRelationshipActionTypes.ADD_NEW_EVENT_RELATIONSHIP]: state => ({
+        ...state,
+        showAddRelationship: false,
+    }),
     [newEventNewRelationshipActionTypes.NEW_EVENT_CANCEL_NEW_RELATIONSHIP]: (state) => {
         const newState = { ...state };
         newState.showAddRelationship = false;

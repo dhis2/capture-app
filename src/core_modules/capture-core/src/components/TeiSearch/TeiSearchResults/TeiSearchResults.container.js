@@ -6,7 +6,7 @@ import TeiSearchResults from './TeiSearchResults.component';
 
 const mapStateToProps = (state: ReduxState, props: Object) => ({
     resultsLoading: state.teiSearch[props.id].resultsLoading,
-    results: state.teiSearch[props.id].results,
+    results: state.teiSearch[props.id].results ? state.teiSearch[props.id].results.teis : [],
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({

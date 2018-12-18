@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import { newEventCancelNewRelationship } from './NewEventNewRelationshipWrapper.actions';
+import { newEventCancelNewRelationship, addNewEventRelationship } from './NewEventNewRelationshipWrapper.actions';
 import NewRelationshipWrapper from './NewEventNewRelationshipWrapper.component';
 import { makeRelationshipTypesSelector } from './NewEventNewRelationshipWrapper.selectors';
 
@@ -22,6 +22,9 @@ const makeMapStateToProps = () => {
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onCancel: (formHorizontal: boolean) => {
         dispatch(newEventCancelNewRelationship());
+    },
+    onAddRelationship: (relationshipTypeId: string, entityId: string, entityType: string) => {
+        dispatch(addNewEventRelationship(relationshipTypeId, entityId, entityType));
     },
 });
 

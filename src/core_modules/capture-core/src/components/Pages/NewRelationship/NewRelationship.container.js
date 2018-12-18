@@ -4,7 +4,6 @@ import NewRelationship from './NewRelationship.component';
 import {
     selectRelationshipType,
     deselectRelationshipType,
-    selectFindMode,
 } from './newRelationship.actions';
 
 import {

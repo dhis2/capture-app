@@ -1,14 +1,13 @@
 // @flow
 import { connect } from 'react-redux';
 import SelectionsComplete from './SelectionsComplete.component';
-import getDataEntryHasChanges from '../getNewEventDataEntryHasChanges';
 
 
 const mapStateToProps = (state: ReduxState) => ({
     showAddRelationship: !!state.newEventPage.showAddRelationship,
 });
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+const mapDispatchToProps = () => ({
 });
 
 // $FlowSuppress

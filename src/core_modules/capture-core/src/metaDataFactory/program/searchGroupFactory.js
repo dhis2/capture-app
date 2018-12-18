@@ -4,11 +4,21 @@ import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import Section from '../../metaData/RenderFoundation/Section';
 import SearchGroup from '../../metaData/SearchGroup/SearchGroup';
 import DataElement from '../../metaData/DataElement/DataElement';
+import elementTypes from '../../metaData/DataElement/elementTypes';
 import type {
     CachedProgram,
     CachedAttributeTranslation,
     CachedProgramTrackedEntityAttribute,
 } from './cache.types';
+
+const searchAttributeElementTypes = {
+    [elementTypes.NUMBER]: elementTypes.NUMBER_RANGE,
+    [elementTypes.INTEGER]: elementTypes.INTEGER_RANGE,
+    [elementTypes.INTEGER_POSITIVE]: elementTypes.INTEGER_POSITIVE_RANGE,
+    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: elementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE,
+    [elementTypes.INTEGER_NEGATIVE]: elementTypes.INTEGER_NEGATIVE_RANGE,
+    [elementTypes.DATE]: elementTypes.DATE_RANGE,
+};
 
 const translationPropertyNames = {
     NAME: 'NAME',
@@ -26,6 +36,11 @@ function getAttributeTranslation(translations: Array<CachedAttributeTranslation>
     return null;
 }
 
+function getSearchAttributeValueType(valueType: string, isUnique: ?boolean) {
+    const searchAttributeValueType = searchAttributeElementTypes[valueType];
+    return !isUnique && searchAttributeValueType ? searchAttributeValueType : valueType;
+}
+
 async function buildElement(programAttribute: CachedProgramTrackedEntityAttribute) {
     const attribute = programAttribute.trackedEntityAttribute;
 
@@ -39,7 +54,7 @@ async function buildElement(programAttribute: CachedProgramTrackedEntityAttribut
         _this.displayInReports = programAttribute.displayInList;
         _this.compulsory = !!attribute.unique;
         _this.disabled = false;
-        _this.type = attribute.valueType;
+        _this.type = getSearchAttributeValueType(attribute.valueType, attribute.unique);
     });
 
     /* if (attribute.optionSet && attribute.optionSet.id ) {

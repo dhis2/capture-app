@@ -246,3 +246,35 @@ export const dataEntriesFieldsUIDesc = createReducerDescription({
         return newState;
     },
 }, 'dataEntriesFieldsUI');
+
+export const dataEntriesRelationshipsDesc = createReducerDescription({
+    [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {
+        const newState = { ...state };
+        newState[action.payload.key] = [];
+        return newState;
+    },
+    [loadEditActionTypes.LOAD_EDIT_DATA_ENTRY]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const key = payload.key;
+        newState[key] = payload.dataEntryRelationships ? [...payload.dataEntryRelationships] : [];
+        return newState;
+    },
+    [actionTypes.ADD_RELATIONSHIP]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+
+        const key = getDataEntryKey(payload.dataEntryId, payload.itemId);
+        newState[key] = state[key] ? [...state[key], { ...payload.relationship }] : [{ ...payload.relationship }];
+        return newState;
+    },
+    [actionTypes.REMOVE_RELATIONSHIP]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+
+        const key = getDataEntryKey(payload.dataEntryId, payload.itemId);
+
+        newState[key] = state[key].filter(n => n.clientId !== payload.noteClientId);
+        return newState;
+    },
+}, 'dataEntriesRelationships', {});

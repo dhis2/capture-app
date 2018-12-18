@@ -1,15 +1,8 @@
 // @flow
 
-import log from 'loglevel';
 import { getApi } from '../d2/d2Instance';
 import RenderFoundation from '../metaData/RenderFoundation/RenderFoundation';
 import { convertValue } from '../converters/serverToClient';
-
-
-const errorMessages = {
-    PROGRAM_NOT_FOUND: 'Program not found',
-    TRACKED_ENTITY_TYPE_NOT_FOUND: 'Tracked entity type not found',
-};
 
 type ApiTeiAttribute = {
     attribute: any,

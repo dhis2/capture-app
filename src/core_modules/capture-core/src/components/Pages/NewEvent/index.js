@@ -53,3 +53,10 @@ export {
 export {
     addNoteForNewSingleEventEpic,
 } from './DataEntry/epics/addNoteForNewSingleEvent.epics';
+
+export {
+    openRelationshipForNewSingleEventEpic,
+    addRelationshipForNewSingleEventEpic,
+    saveNewEventRelationshipsIfExistsEpic,
+    saveNewEventRelationshipFinishedEpic,
+} from './DataEntry/epics/addRelationshipForNewSingleEvent.epics';

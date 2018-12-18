@@ -16,6 +16,10 @@ import {
     newEventPageSelectorUpdateURLEpic,
     newEventPageSelectorResetURLEpic,
     addNoteForNewSingleEventEpic,
+    openRelationshipForNewSingleEventEpic,
+    addRelationshipForNewSingleEventEpic,
+    saveNewEventRelationshipsIfExistsEpic,
+    saveNewEventRelationshipFinishedEpic,
 } from 'capture-core/components/Pages/NewEvent';
 import {
     mainSelectionsCompletedEpic,
@@ -106,7 +110,6 @@ import {
     teiSearchEpic,
 } from 'capture-core/components/TeiSearch/epics/teiSearch.epics';
 
-
 import { loadStartupData, loadStartupDataCore } from '../init/entry.epics';
 
 export default combineEpics(
@@ -171,4 +174,8 @@ export default combineEpics(
     showRegisteringUnitListIndicatorEpic,
     openRelationshipTeiSearchEpic,
     teiSearchEpic,
+    openRelationshipForNewSingleEventEpic,
+    addRelationshipForNewSingleEventEpic,
+    saveNewEventRelationshipsIfExistsEpic,
+    saveNewEventRelationshipFinishedEpic,
 );

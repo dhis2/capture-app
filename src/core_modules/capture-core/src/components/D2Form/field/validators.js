@@ -21,6 +21,7 @@ import {
     isValidOrgUnit,
     isValidCoordinate,
     isValidUsername,
+    getNumberRangeValidator,
 } from '../../../utils/validators/form';
 import MetaDataElement from '../../../metaData/DataElement/DataElement';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
@@ -65,15 +66,19 @@ const isCompulsoryRequirementMetWrapper = (value: any) => {
     return isCompulsoryRequirementMet(testValue);
 };
 
+const validatorForInteger = () => ({
+    validator: isValidInteger,
+    message: i18n.t(errorMessages.INTEGER),
+});
+
+const validatorForNumber = () => ({
+    validator: isValidNumber,
+    message: i18n.t(errorMessages.NUMBER),
+});
+
 const validatorsForTypes = {
-    [elementTypes.NUMBER]: () => ({
-        validator: isValidNumber,
-        message: i18n.t(errorMessages.NUMBER),
-    }),
-    [elementTypes.INTEGER]: () => ({
-        validator: isValidInteger,
-        message: i18n.t(errorMessages.INTEGER),
-    }),
+    [elementTypes.NUMBER]: validatorForNumber,
+    [elementTypes.INTEGER]: validatorForInteger,
     [elementTypes.INTEGER_POSITIVE]: () => ({
         validator: isValidPositiveInteger,
         message: i18n.t(errorMessages.POSITIVE_INTEGER),
@@ -129,6 +134,10 @@ const validatorsForTypes = {
     [elementTypes.USERNAME]: () => ({
         validator: isValidUsername,
         message: i18n.t(errorMessages.USERNAME),
+    }),
+    [elementTypes.NUMBER_RANGE]: () => ({
+        validator: getNumberRangeValidator(validatorForNumber()),
+        message: i18n.t('Invalid range'),
     }),
 };
 

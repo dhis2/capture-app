@@ -12,7 +12,7 @@ import {
     requestSaveNewEventAddAnother,
     setNewEventSaveTypes,
     addNewEventNote,
-    newEventAddRelationship,
+    newEventOpenNewRelationship,
 } from './actions/dataEntry.actions';
 import {
     makeProgramNameSelector,
@@ -74,7 +74,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         dispatch(cancelNewEventAndReturnToMainPage());
     },
     onAddRelationship: (eventId: string, dataEntryId: string) => {
-        dispatch(newEventAddRelationship(eventId, dataEntryId));
+        dispatch(newEventOpenNewRelationship(eventId, dataEntryId));
     },
 });
 

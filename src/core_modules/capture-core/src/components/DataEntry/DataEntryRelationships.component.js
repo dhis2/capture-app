@@ -5,7 +5,6 @@ import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import LinkIcon from '@material-ui/icons/Link';
 import { connect } from 'react-redux';
-import getDataEntryKey from './common/getDataEntryKey';
 import LinkButton from '../Buttons/LinkButton.component';
 import Button from '../Buttons/Button.component';
 

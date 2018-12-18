@@ -10,6 +10,11 @@ type DateTimeValue = {
     time: string,
 };
 
+type RangeValue = {
+    from: string,
+    to: string,
+}
+
 function convertDateTime(formValue: DateTimeValue): string {
     const editedDate = formValue.date;
     const editedTime = formValue.time;
@@ -40,12 +45,24 @@ function convertAge(ageValue: Object) {
     return convertDate(ageValue.date);
 }
 
+function convertRange(parser: Function, value: RangeValue) {
+    return {
+        from: parser(value.from),
+        to: parser(value.to),
+    };
+}
+
 const valueConvertersForType = {
     [elementTypes.NUMBER]: parseNumber,
+    [elementTypes.NUMBER_RANGE]: (value: RangeValue) => convertRange(parseNumber, value),
     [elementTypes.INTEGER]: parseNumber,
+    [elementTypes.INTEGER_RANGE]: (value: RangeValue) => convertRange(parseNumber, value),
     [elementTypes.INTEGER_POSITIVE]: parseNumber,
+    [elementTypes.INTEGER_POSITIVE_RANGE]: (value: RangeValue) => convertRange(parseNumber, value),
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: parseNumber,
+    [elementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: (value: RangeValue) => convertRange(parseNumber, value),
     [elementTypes.INTEGER_NEGATIVE]: parseNumber,
+    [elementTypes.INTEGER_NEGATIVE_RANGE]: (value: RangeValue) => convertRange(parseNumber, value),
     // $FlowSuppress
     [elementTypes.DATE]: convertDate,
     [elementTypes.DATETIME]: convertDateTime,

@@ -41,9 +41,9 @@ export const saveNewEventAddAnotherEpic = (action$: InputObservable, store: Redu
                 orgUnitId: state.currentSelections.orgUnitId,
             };
             const clientEventValues = { ...formClientValues, created: moment().toISOString() };
-
+            const relationshipData = state.dataEntriesRelationships[dataEntryKey];
             return batchActions([
-                startSaveNewEventAddAnother(serverData, state.currentSelections, clientEvent.eventId),
+                startSaveNewEventAddAnother(serverData, relationshipData, state.currentSelections, clientEvent.eventId),
                 newRecentlyAddedEvent(clientEvent, clientEventValues),
                 prependListItem(listId, clientEvent.eventId),
             ], newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH);

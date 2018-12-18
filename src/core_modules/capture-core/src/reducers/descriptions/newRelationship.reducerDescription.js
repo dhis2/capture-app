@@ -5,6 +5,7 @@ import {
 } from '../../components/Pages/NewRelationship/newRelationship.actions';
 
 export const newRelationshipDesc = createReducerDescription({
+    [newRelationshipActionTypes.INITIALIZE_NEW_RELATIONSHIP]: () => ({}),
     [newRelationshipActionTypes.SELECT_RELATIONSHIP_TYPE]: (state, action) => {
         const newState = {
             ...state,

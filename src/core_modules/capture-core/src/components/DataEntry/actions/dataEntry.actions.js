@@ -22,6 +22,8 @@ export const actionTypes = {
     ASYNC_UPDATE_FIELD_FAILED: 'AsyncUpdateFieldFailed',
     ADD_NOTE: 'AddNote',
     REMOVE_NOTE: 'RemoveNote',
+    ADD_RELATIONSHIP: 'AddRelationship',
+    REMOVE_RELATIONSHIP: 'RemoveRelationship',
 };
 
 // COMPLETE
@@ -115,3 +117,11 @@ export const addNote =
 export const removeNote =
     (dataEntryId: string, itemId: string, noteClientId: string) =>
         actionCreator(actionTypes.REMOVE_NOTE)({ dataEntryId, itemId, noteClientId });
+
+export const addRelationship =
+    (dataEntryId: string, itemId: string, relationship: Object) =>
+        actionCreator(actionTypes.ADD_RELATIONSHIP)({ dataEntryId, itemId, relationship });
+
+export const removeRelationship =
+    (dataEntryId: string, itemId: string, relationshipClientId: string) =>
+        actionCreator(actionTypes.REMOVE_RELATIONSHIP)({ dataEntryId, itemId, relationshipClientId });

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-12-05T08:25:25.150Z\n"
-"PO-Revision-Date: 2018-12-05T08:25:25.150Z\n"
+"POT-Creation-Date: 2018-12-18T08:34:42.139Z\n"
+"PO-Revision-Date: 2018-12-18T08:34:42.139Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -15,6 +15,9 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
+msgstr ""
+
+msgid "Invalid range"
 msgstr ""
 
 msgid "Cancel"
@@ -311,6 +314,9 @@ msgid "Link to an existing {{trackedEntityType}}"
 msgstr ""
 
 msgid "Create new {{trackedEntityType}}"
+msgstr ""
+
+msgid "Link"
 msgstr ""
 
 msgid "Start again"

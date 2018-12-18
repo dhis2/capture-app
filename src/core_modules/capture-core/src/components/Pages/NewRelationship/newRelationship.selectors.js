@@ -1,6 +1,5 @@
 // @flow
 import { createSelector } from 'reselect';
-import log from 'loglevel';
 
 const relationshipTypeIdSelector = state => state.newRelationship.selectedRelationshipTypeId;
 const relationshipTypesSelector = (state, props) => props.relationshipTypes;

@@ -16,6 +16,8 @@ import {
     getFileResourceFieldConfig,
     getImageFieldConfig,
     getOptionSetFieldConfig,
+    getNumberRangeFieldConfig,
+    getDateRangeFieldConfig,
 } from './configs';
 
 const errorMessages = {
@@ -31,13 +33,19 @@ const fieldForTypes = {
         return fieldConfig;
     },
     [elementTypes.NUMBER]: getTextFieldConfig,
+    [elementTypes.NUMBER_RANGE]: getNumberRangeFieldConfig,
     [elementTypes.INTEGER]: getTextFieldConfig,
+    [elementTypes.INTEGER_RANGE]: getNumberRangeFieldConfig,
     [elementTypes.INTEGER_POSITIVE]: getTextFieldConfig,
+    [elementTypes.INTEGER_POSITIVE_RANGE]: getNumberRangeFieldConfig,
     [elementTypes.INTEGER_NEGATIVE]: getTextFieldConfig,
+    [elementTypes.INTEGER_NEGATIVE_RANGE]: getNumberRangeFieldConfig,
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: getTextFieldConfig,
+    [elementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: getNumberRangeFieldConfig,
     [elementTypes.BOOLEAN]: getBooleanFieldConfig,
     [elementTypes.TRUE_ONLY]: getTrueOnlyFieldConfig,
     [elementTypes.DATE]: getDateFieldConfig,
+    [elementTypes.DATE_RANGE]: getDateRangeFieldConfig,
     [elementTypes.DATETIME]: getDateTimeFieldConfig,
     [elementTypes.TIME]: getTextFieldConfig,
     [elementTypes.PERCENTAGE]: getTextFieldConfig,

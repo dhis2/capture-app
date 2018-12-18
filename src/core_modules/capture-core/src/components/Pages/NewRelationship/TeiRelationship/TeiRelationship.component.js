@@ -9,6 +9,7 @@ import ProgramCollection from '../../../../metaDataMemoryStores/programCollectio
 import RelationshipType from '../../../../metaData/RelationshipType/RelationshipType';
 import Button from '../../../Buttons/Button.component';
 import TeiSearch from '../../../TeiSearch/TeiSearch.container';
+import TeiRelationshipSearchResults from './TeiRelationshipSearchResults.component';
 
 type Props = {
     findMode: string,
@@ -48,21 +49,6 @@ const findModes = {
     TEI_SEARCH: 'TEI_SEARCH',
     TEI_REGISTER: 'TEI_REGISTER',
 };
-
-const findModeComponent = {
-    [findModes.TEI_SEARCH]: props => (
-        <TeiSearch
-            id="relationshipTeiSearch"
-            programId={props.selectedRelationshipType.to.programId}
-            trackedEntityTypeId={props.selectedRelationshipType.to.trackedEntityTypeId}
-        />
-    ),
-};
-
-type TrackedEntityType = {
-    id: string,
-    displayName: string,
-}
 
 const defaultTrackedEntityTypeName = 'Tracked entity instance';
 
@@ -107,20 +93,43 @@ class TeiRelationship extends React.Component<Props> {
         );
     }
 
-    getModeComponentFn = (findMode: string) => {
-        if (findMode) {
-            return findModeComponent[findMode];
+    renderSearch = (props: Object) => {
+        const { selectedRelationshipType, onAddRelationship, ...passOnProps } = props;
+        return (
+            <TeiSearch
+                id="relationshipTeiSearch"
+                programId={selectedRelationshipType.to.programId}
+                trackedEntityTypeId={selectedRelationshipType.to.trackedEntityTypeId}
+                getResultsView={viewProps => (
+                    <TeiRelationshipSearchResults
+                        onAddRelationship={onAddRelationship}
+                        {...viewProps}
+                    />
+                )}
+                {...passOnProps}
+            />
+        );
+    }
+
+    renderRegister = (props: Object) => (<div />);
+
+    renderByMode = (findMode, props) => {
+        if (findMode === findModes.TEI_SEARCH) {
+            return this.renderSearch(props);
+        }
+        if (findMode === findModes.TEI_REGISTER) {
+            return this.renderRegister(props);
         }
         return null;
     }
 
     render() {
-        const { classes, findMode } = this.props;
-        const getModeComponent = this.getModeComponentFn(findMode);
+        const { classes, findMode, onOpenSearch, onSelectFindMode, ...passOnProps } = this.props;
+
         return (
             <div className={classes.container}>
-                {getModeComponent ?
-                    getModeComponent(this.props) :
+                {findMode ?
+                    this.renderByMode(findMode, passOnProps) :
                     this.renderModeSelections()
                 }
             </div>

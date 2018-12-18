@@ -10,17 +10,12 @@ type Props = {
 class TeiSearchResultsWrapper extends React.Component<Props> {
     renderDefaultResultsView = () => (<div />);
 
-    renderCustomResultsView = () => {
-        const { getResultsView, ...passOnProps } = this.props;
-        // $FlowFixMe
-        return getResultsView(passOnProps);
-    }
     render() {
-        const { getResultsView } = this.props;
+        const { getResultsView, ...passOnProps } = this.props;
         return (
             <div>
                 <div>
-                    { getResultsView ? this.renderDefaultResultsView() : this.renderDefaultResultsView() }
+                    { getResultsView ? getResultsView(passOnProps) : this.renderDefaultResultsView() }
                 </div>
             </div>
         );
