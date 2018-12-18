@@ -102,8 +102,6 @@ class TrackedEntityTypeFactory {
             );
         }
 
-        debugger;
-
         return trackedEntityType;
     }
 }
