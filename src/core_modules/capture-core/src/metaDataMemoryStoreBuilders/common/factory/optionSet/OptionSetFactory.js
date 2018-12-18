@@ -46,10 +46,10 @@ class OptionSetFactory {
         return renderType && getCamelCaseUppercaseString(renderType);
     }
 
-    cachedOptionSets: Array<CachedOptionSet>;
+    cachedOptionSets: Map<string, CachedOptionSet>;
     locale: ?string;
     constructor(
-        cachedOptionSets: Array<CachedOptionSet>,
+        cachedOptionSets: Map<string, CachedOptionSet>,
         locale: ?string,
     ) {
         this.cachedOptionSets = cachedOptionSets;
@@ -74,7 +74,7 @@ class OptionSetFactory {
         renderType: ?string,
         onGetDataElementType: (valueType: string) => string,
     ) {
-        const cachedOptionSet = this.cachedOptionSets.find(d2Os => d2Os.id === optionSetId);
+        const cachedOptionSet = this.cachedOptionSets.get(optionSetId);
         if (!cachedOptionSet) {
             log.warn(
                 errorCreator(OptionSetFactory.OPTION_SET_NOT_FOUND)({ id: optionSetId }),

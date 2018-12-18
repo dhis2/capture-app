@@ -1,6 +1,13 @@
 // @flow
 import getStorageController from '../../metaDataStores/storageController/metaDataStorageController';
 
+function arrayToMap(array: Array<Object>) {
+    return array.reduce((accMap, item) => {
+        accMap.set(item.id, item);
+        return accMap;
+    }, new Map());
+}
+
 export default function getCommonPreRequisitesAsync(...stores: Array<string>) {
     const storageController = getStorageController();
     const storePromises = stores
@@ -8,7 +15,7 @@ export default function getCommonPreRequisitesAsync(...stores: Array<string>) {
     return Promise
         .all(storePromises)
         .then(storesDataArray => storesDataArray.reduce((accStoresData, storeData, index) => {
-            accStoresData[stores[index]] = storeData;
+            accStoresData[stores[index]] = arrayToMap(storeData);
             return accStoresData;
         }, {}));
 }

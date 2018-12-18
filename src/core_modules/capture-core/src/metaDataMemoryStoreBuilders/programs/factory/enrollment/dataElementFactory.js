@@ -24,10 +24,10 @@ class DataElementFactory {
 
     locale: ?string;
     optionSetFactory: OptionSetFactory;
-    cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute>;
+    cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
     constructor(
-        cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute>,
-        cachedOptionSets: Array<CachedOptionSet>,
+        cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
+        cachedOptionSets: Map<string, CachedOptionSet>,
         locale: ?string,
     ) {
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
@@ -53,8 +53,8 @@ class DataElementFactory {
         cachedProgramTrackedEntityAttribute: CachedProgramTrackedEntityAttribute,
     ) {
         const cachedAttribute = cachedProgramTrackedEntityAttribute.trackedEntityAttribute.id &&
-            this.cachedTrackedEntityAttributes.find(
-                TEA => TEA.id === cachedProgramTrackedEntityAttribute.trackedEntityAttribute.id,
+            this.cachedTrackedEntityAttributes.get(
+                cachedProgramTrackedEntityAttribute.trackedEntityAttribute.id,
             );
 
         if (!cachedAttribute) {

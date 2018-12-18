@@ -32,13 +32,13 @@ type SectionSpecs = {
 class ProgramStageFactory {
     static CUSTOM_FORM_TEMPLATE_ERROR = 'Error in custom form template';
 
-    cachedOptionSets: Array<CachedOptionSet>;
+    cachedOptionSets: Map<string, CachedOptionSet>;
     locale: ?string;
     dataElementFactory: DataElementFactory;
     relationshipTypesFactory: RelationshipTypesFactory;
 
     constructor(
-        cachedOptionSets: Array<CachedOptionSet>,
+        cachedOptionSets: Map<string, CachedOptionSet>,
         cachedRelationshipTypes: Array<CachedRelationshipType>,
         locale: ?string,
     ) {

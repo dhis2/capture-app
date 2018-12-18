@@ -50,7 +50,7 @@ class DataElementFactory {
     optionSetFactory: OptionSetFactory;
 
     constructor(
-        cachedOptionSets: Array<CachedOptionSet>,
+        cachedOptionSets: Map<string, CachedOptionSet>,
         locale: ?string,
     ) {
         this.locale = locale;

@@ -30,8 +30,8 @@ class EnrollmentFactory {
     dataElementFactory: DataElementFactory;
     trackedEntityTypeCollection: Map<string, TrackedEntityType>;
     constructor(
-        cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute>,
-        cachedOptionSets: Array<CachedOptionSet>,
+        cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
+        cachedOptionSets: Map<string, CachedOptionSet>,
         locale: ?string,
         trackedEntityTypeCollection: Map<string, TrackedEntityType>,
     ) {

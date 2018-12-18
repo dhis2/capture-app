@@ -146,9 +146,9 @@ function sortPrograms(programs: Array<Program>) {
 
 async function getBuiltPrograms(
     cachedPrograms: Array<CachedProgram>,
-    cachedOptionSets: Array<CachedOptionSet>,
+    cachedOptionSets: Map<string, CachedOptionSet>,
     cachedRelationshipTypes: Array<CachedRelationshipType>,
-    cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute>,
+    cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
     trackedEntityTypeCollection: Map<string, TrackedEntityType>,
     locale: ?string,
 ) {
@@ -203,8 +203,8 @@ export default async function buildPrograms(
     programRulesStoreName: string,
     programIndicatorsStoreName: string,
     relationshipTypesStoreName: string,
-    cachedOptionSets: Array<CachedOptionSet>,
-    cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute>,
+    cachedOptionSets: Map<string, CachedOptionSet>,
+    cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
     trackedEntityTypeCollection: Map<string, TrackedEntityType>,
 ) {
     const [

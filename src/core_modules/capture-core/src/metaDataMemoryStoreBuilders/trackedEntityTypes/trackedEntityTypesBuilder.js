@@ -14,8 +14,8 @@ function getCachedTrackedEntityTypes(storageController: StorageController, store
 
 export default async function buildTrackedEntityTypes(
     store: string,
-    cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute> = [],
-    cachedOptionSets: Array<CachedOptionSet> = [],
+    cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
+    cachedOptionSets: Map<string, CachedOptionSet>,
     locale: ?string,
 ) {
     const storageController = getStorageController();

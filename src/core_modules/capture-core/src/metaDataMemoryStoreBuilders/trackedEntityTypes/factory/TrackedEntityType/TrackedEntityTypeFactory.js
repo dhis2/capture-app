@@ -25,8 +25,8 @@ class TrackedEntityTypeFactory {
     locale: ?string;
     dataElementFactory: DataElementFactory;
     constructor(
-        cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute>,
-        cachedOptionSets: Array<CachedOptionSet>,
+        cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
+        cachedOptionSets: Map<string, CachedOptionSet>,
         locale: ?string,
     ) {
         this.locale = locale;

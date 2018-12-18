@@ -34,9 +34,9 @@ class ProgramFactory {
     searchGroupFactory: SearchGroupFactory;
 
     constructor(
-        cachedOptionSets: Array<CachedOptionSet>,
+        cachedOptionSets: Map<string, CachedOptionSet>,
         cachedRelationshipTypes: Array<CachedRelationshipType>,
-        cachedTrackedEntityAttributes: Array<CachedTrackedEntityAttribute>,
+        cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
         trackedEntityTypeCollection: Map<string, TrackedEntityType>,
         locale: ?string,
     ) {
