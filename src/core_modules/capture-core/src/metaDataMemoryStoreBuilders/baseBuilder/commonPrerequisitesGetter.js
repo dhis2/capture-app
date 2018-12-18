@@ -1,5 +1,5 @@
 // @flow
-import getStorageController from '../../metaDataStores/storageController/metaDataStorageController';
+import { getUserStorageController } from '../../storageControllers';
 
 function arrayToMap(array: Array<Object>) {
     return array.reduce((accMap, item) => {
@@ -9,7 +9,7 @@ function arrayToMap(array: Array<Object>) {
 }
 
 export default function getCommonPreRequisitesAsync(...stores: Array<string>) {
-    const storageController = getStorageController();
+    const storageController = getUserStorageController();
     const storePromises = stores
         .map(store => storageController.getAll(store));
     return Promise

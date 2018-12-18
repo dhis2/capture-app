@@ -1,7 +1,5 @@
 // @flow
-import StorageController from '../../storage/StorageController';
-import IndexedDBAdapter from '../../storage/IndexedDBAdapter';
-import LocalStorageAdapter from '../../storage/DomLocalStorageAdapter';
+import StorageController from 'capture-core-utils/storage/StorageController';
 import programStoresKeys from '../programs/programsStoresKeys';
 
 import LoadSpecification from '../../apiToStore/LoadSpecificationDefinition/LoadSpecification';
@@ -17,9 +15,10 @@ import loadPrograms from '../programs/loadPrograms';
 import loadTrackedEntityAttributes from '../trackedEntityAttributes/loadTrackedEntityAttributes';
 import loadOptionSets from '../optionSets/loadOptionSets';
 import loadTrackedEntityTypes from '../trackedEntityTypes/loadTrackedEntityTypes';
+import executeUsersCacheMaintenance from '../maintenance/usersCacheMaintenance';
 
-import objectStores from './metaDataObjectStores.const';
-import { set as setStorageController } from '../../metaDataStores/storageController/metaDataStorageController';
+import { metaDataStores as objectStores } from '../../storageControllers/stores';
+import { getUserStorageController } from '../../storageControllers';
 
 const coreLoadSpecifications: Array<LoadSpecification> = [
     getConstantsLoadSpecification(objectStores.CONSTANTS),
@@ -28,33 +27,10 @@ const coreLoadSpecifications: Array<LoadSpecification> = [
     getOrganisationUnitsLoadSpecification(objectStores.ORGANISATION_UNITS, organisationUnitApiSpecification),
 ];
 
-function loadCoreMetaData(storageController: StorageController) {
-    return Promise.all(coreLoadSpecifications.map(loadSpecification => loadSpecification.load(storageController)));
-}
-
-function getCacheVersion() {
-    const appCacheVersionAsString = appPackage.CACHE_VERSION; // eslint-disable-line
-    if (!appCacheVersionAsString) {
-        throw new Error('cache version not specified');
-    }
-    const appCacheVersion = Number(appCacheVersionAsString);
-    if (Number.isNaN(appCacheVersion) || !Number.isSafeInteger(appCacheVersion)) {
-        throw new Error('invalid cache version');
-    }
-    return appCacheVersion;
-}
-
-function createStorageController() {
-    const objectStoreList = Object.keys(objectStores).map(key => objectStores[key]);
-    const appCacheVersion = getCacheVersion();
-    const storageController =
-        new StorageController('dhis2ca', appCacheVersion, [IndexedDBAdapter, LocalStorageAdapter], objectStoreList);
-    setStorageController(storageController);
-    return storageController;
-}
-
-async function openStorage(storageController: StorageController) {
-    await storageController.open();
+async function loadCoreMetaData(storageController: StorageController) {
+    // uses asyncForEach instead of Promise.all to make sure indexedDB is not blocked if fallback to memory storage is needed
+    // $FlowFixMe
+    await coreLoadSpecifications.asyncForEach(loadSpecification => loadSpecification.load(storageController));
 }
 
 function removeDuplicatesFromStringArray(array: Array<string>) {
@@ -63,8 +39,8 @@ function removeDuplicatesFromStringArray(array: Array<string>) {
 }
 
 export default async function loadMetaData() {
-    const storageController = createStorageController();
-    await openStorage(storageController);
+    const storageController = getUserStorageController();
+    await executeUsersCacheMaintenance();
     await loadCoreMetaData(storageController);
 
     const {

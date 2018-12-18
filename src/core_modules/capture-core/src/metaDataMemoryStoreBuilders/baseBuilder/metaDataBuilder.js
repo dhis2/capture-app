@@ -3,8 +3,8 @@ import buildPrograms from '../programs/programsBuilder';
 import buildConstants from '../constants/constantsBuilder';
 import buildOptionSets from '../optionSets/optionSetsBuilder';
 import buildTrackedEntityTypes from '../trackedEntityTypes/trackedEntityTypesBuilder';
-import stores from '../../metaDataStoreLoaders/baseLoader/metaDataObjectStores.const';
 import getCommonPrerequisites from './commonPrerequisitesGetter';
+import { metaDataStores as stores } from '../../storageControllers/stores';
 
 export default async function buildMetaData(locale: string) {
     const preRequisitesData: Object =

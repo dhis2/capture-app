@@ -1,4 +1,5 @@
 // @flow
+import StorageController from 'capture-core-utils/storage/StorageController';
 import { ProgramFactory } from './factory';
 import {
     Program,
@@ -6,8 +7,7 @@ import {
 } from '../../metaData';
 import { programCollection } from '../../metaDataMemoryStores';
 import getRulesAndVariablesFromProgramIndicators from './getRulesAndVariablesFromIndicators';
-import getStorageController from '../../metaDataStores/storageController/metaDataStorageController';
-import StorageController from '../../storage/StorageController';
+import { getUserStorageController } from '../../storageControllers';
 
 import type {
     CachedProgram,
@@ -40,7 +40,7 @@ function getRelationshipTypes(storageController: StorageController, storeName: s
 }
 
 async function getBuilderPrerequisites(...storeNames: Array<string>) {
-    const storageController = getStorageController();
+    const storageController = getUserStorageController();
 
     const cachedProgramsPromise = getPrograms(storageController, storeNames[0]);
     const cachedProgramRulesVariables = getProgramRulesVariables(storageController, storeNames[1]);

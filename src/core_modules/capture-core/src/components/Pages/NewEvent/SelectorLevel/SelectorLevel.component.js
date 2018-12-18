@@ -4,7 +4,6 @@ import i18n from '@dhis2/d2-i18n';
 import QuickSelector from '../../../QuickSelector/QuickSelector.container';
 import IsSelectionsCompleteLevel from '../IsSelectionsCompleteLevel/IsSelectionsCompleteLevel.container';
 import ConfirmDialog from '../../../Dialogs/ConfirmDialog.component';
-import withLoadHandler from './withLoadHandler';
 
 const defaultDialogProps = {
     header: i18n.t('Discard event?'),
@@ -172,4 +171,4 @@ class SelectorLevel extends Component<Props, State> {
     }
 }
 
-export default withLoadHandler()(SelectorLevel);
+export default SelectorLevel;

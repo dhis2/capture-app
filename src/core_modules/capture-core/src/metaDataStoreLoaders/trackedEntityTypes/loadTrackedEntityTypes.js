@@ -1,5 +1,5 @@
 // @flow
-import StorageController from '../../storage/StorageController';
+import StorageController from 'capture-core-utils/storage/StorageController';
 import { metaTrackedEntityTypesApiSpecification, trackedEntityTypesApiSpecification } from '../../api';
 import getTrackedEntityTypesLoadSpecification
     from '../../apiToStore/loadSpecifications/getTrackedEntityTypesLoadSpecification';

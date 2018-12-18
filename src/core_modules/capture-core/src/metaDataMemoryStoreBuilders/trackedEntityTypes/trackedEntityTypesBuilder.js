@@ -1,12 +1,12 @@
 // @flow
+import StorageController from 'capture-core-utils/storage/StorageController';
 import type {
     CachedTrackedEntityAttribute,
     CachedOptionSet,
 } from '../cache.types';
 import { trackedEntityTypesCollection } from '../../metaDataMemoryStores';
 import { TrackedEntityTypeFactory } from './factory';
-import getStorageController from '../../metaDataStores/storageController/metaDataStorageController';
-import StorageController from '../../storage/StorageController';
+import { getUserStorageController } from '../../storageControllers';
 
 function getCachedTrackedEntityTypes(storageController: StorageController, storeName: string): Promise<Array<Object>> {
     return storageController.getAll(storeName);
@@ -18,7 +18,7 @@ export default async function buildTrackedEntityTypes(
     cachedOptionSets: Map<string, CachedOptionSet>,
     locale: ?string,
 ) {
-    const storageController = getStorageController();
+    const storageController = getUserStorageController();
     const cachedTrackedEntityTypes = (await getCachedTrackedEntityTypes(storageController, store)) || [];
 
     const trackedEntityTypeFactory = new TrackedEntityTypeFactory(

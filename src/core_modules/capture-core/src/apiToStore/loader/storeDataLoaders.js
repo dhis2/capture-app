@@ -1,7 +1,6 @@
 // @flow
+import StorageController from 'capture-core-utils/storage/StorageController';
 import getData from '../../api/fetcher/apiFetchers';
-
-import StorageController from '../../storage/StorageController';
 import getterTypes from '../../api/fetcher/getterTypes.const';
 import type { Converter } from '../../api/fetcher/apiFetchers';
 
