@@ -10,7 +10,7 @@ import type {
     CachedProgramStageDataElementsAsObject,
     CachedOptionSet,
     CachedRelationshipType,
-} from '../../../cache.types';
+} from '../../../../storageControllers/cache.types';
 import errorCreator from '../../../../utils/errorCreator';
 import Section from '../../../../metaData/RenderFoundation/Section';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';

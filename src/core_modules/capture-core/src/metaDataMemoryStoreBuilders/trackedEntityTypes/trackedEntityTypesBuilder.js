@@ -3,7 +3,7 @@ import StorageController from 'capture-core-utils/storage/StorageController';
 import type {
     CachedTrackedEntityAttribute,
     CachedOptionSet,
-} from '../cache.types';
+} from '../../storageControllers/cache.types';
 import { trackedEntityTypesCollection } from '../../metaDataMemoryStores';
 import { TrackedEntityTypeFactory } from './factory';
 import { getUserStorageController } from '../../storageControllers';

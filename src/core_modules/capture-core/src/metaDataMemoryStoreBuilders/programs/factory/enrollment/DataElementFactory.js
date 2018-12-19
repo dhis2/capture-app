@@ -6,7 +6,7 @@ import type {
     CachedProgramTrackedEntityAttribute,
     CachedOptionSet,
     CachedTrackedEntityAttribute,
-} from '../../../cache.types';
+} from '../../../../storageControllers/cache.types';
 import { DataElement } from '../../../../metaData';
 import { OptionSetFactory } from '../../../common/factory';
 import errorCreator from '../../../../utils/errorCreator';

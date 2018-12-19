@@ -7,7 +7,7 @@ import type {
     CachedProgramTrackedEntityAttribute,
     CachedOptionSet,
     CachedTrackedEntityAttribute,
-} from '../../../cache.types';
+} from '../../../../storageControllers/cache.types';
 import { RenderFoundation, Section, Enrollment, CustomForm, TrackedEntityType } from '../../../../metaData';
 import DataElementFactory from './DataElementFactory';
 import errorCreator from '../../../../utils/errorCreator';

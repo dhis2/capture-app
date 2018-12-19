@@ -26,7 +26,7 @@ import type {
     CachedOptionSet,
     CachedRelationshipType,
     CachedTrackedEntityAttribute,
-} from '../../../cache.types';
+} from '../../../../storageControllers/cache.types';
 
 class ProgramFactory {
     programStageFactory: ProgramStageFactory;

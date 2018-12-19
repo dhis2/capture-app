@@ -7,7 +7,7 @@ import type {
     CachedProgramStageDataElement,
     CachedOptionSet,
 
-} from '../../../cache.types';
+} from '../../../../storageControllers/cache.types';
 import getDhisIconAsync from '../../../common/getDhisIcon';
 import { DataElement, Icon } from '../../../../metaData';
 import { OptionSetFactory } from '../../../common/factory';

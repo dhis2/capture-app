@@ -14,7 +14,7 @@ import type {
     CachedOptionSet,
     CachedRelationshipType,
     CachedTrackedEntityAttribute,
-} from '../cache.types';
+} from '../../storageControllers/cache.types';
 import type { CachedProgramIndicator } from './getRulesAndVariablesFromIndicators';
 import type { ProgramRule, ProgramRuleVariable } from '../../RulesEngine/rulesEngine.types';
 

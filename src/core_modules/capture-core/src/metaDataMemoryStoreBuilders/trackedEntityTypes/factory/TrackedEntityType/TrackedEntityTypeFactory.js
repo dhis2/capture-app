@@ -14,7 +14,7 @@ import type {
     CachedTrackedEntityTypeTranslation,
     CachedTrackedEntityAttribute,
     CachedOptionSet,
-} from '../../../cache.types';
+} from '../../../../storageControllers/cache.types';
 
 class TrackedEntityTypeFactory {
     static translationPropertyNames = {

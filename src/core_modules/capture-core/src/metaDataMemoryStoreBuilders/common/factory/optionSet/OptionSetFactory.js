@@ -6,7 +6,7 @@ import type {
     CachedOptionSet,
     CachedOptionSetTranslation,
     CachedOptionTranslation,
-} from '../../../cache.types';
+} from '../../../../storageControllers/cache.types';
 import { DataElement, OptionSet, Option, optionSetInputTypes as inputTypes, Icon } from '../../../../metaData';
 import getCamelCaseUppercaseString from '../../../../utils/string/getCamelCaseFromUppercase';
 import { convertOptionSetValue } from '../../../../converters/serverToClient';

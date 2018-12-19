@@ -9,11 +9,9 @@ import {
     dataElementTypes,
 } from '../../../../metaData';
 import type {
-    CachedProgram,
     CachedAttributeTranslation,
-    CachedProgramTrackedEntityAttribute,
     CachedTrackedEntityAttribute,
-} from '../../../cache.types';
+} from '../../../../storageControllers/cache.types';
 import errorCreator from '../../../../utils/errorCreator';
 
 type InputSearchAttribute = {
