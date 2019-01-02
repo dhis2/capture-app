@@ -13,11 +13,11 @@ import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../editEventDataEntry.actions';
 import { getProgramAndStageFromEvent } from '../../../../../metaData';
-import { getRulesActionsForEvent } from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+import { getRulesActionsForEvent } from '../../../../../rulesEngineActionsCreator';
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
-} from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorInputHelpers';
+} from '../../../../../rulesEngineActionsCreator/inputHelpers';
 import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
 import type { FieldData } from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
 

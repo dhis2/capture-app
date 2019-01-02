@@ -2,7 +2,7 @@
 import log from 'loglevel';
 import isString from 'd2-utilizr/lib/isString';
 // TODO: add some kind of errorcreator to d2 before moving
-import errorCreator from '../../utils/errorCreator';
+import { errorCreator } from '../../errorCreator';
 import typeKeys from '../typeKeys.const';
 import mapTypeToInterfaceFnName from '../typeToInterfaceFnName.const';
 import trimQuotes from '../commonUtils/trimQuotes';

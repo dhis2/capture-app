@@ -41,7 +41,7 @@ type Props = {
     disabled: boolean,
     onClick?: ?() => void,
     children?: ?any,
-
+    className: string,
 };
 
 class Button extends React.Component<Props> {
@@ -52,10 +52,11 @@ class Button extends React.Component<Props> {
     }
 
     render() {
-        const { kind, size, disabled, onClick, children } = this.props;
+        const { kind, size, disabled, onClick, children, className } = this.props;
 
         return (
             <MuiButton
+                className={className}
                 size={size}
                 onClick={onClick}
                 disabled={disabled}

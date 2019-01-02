@@ -4,7 +4,7 @@ import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
 import { loadEditDataEntry } from '../../../DataEntry/actions/dataEntryLoadEdit.actions';
 import {
     getRulesActionsForEvent,
-} from '../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+} from '../../../../rulesEngineActionsCreator';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import Program from '../../../../metaData/Program/Program';
 import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';

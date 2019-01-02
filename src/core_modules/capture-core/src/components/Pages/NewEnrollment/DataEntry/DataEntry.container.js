@@ -6,6 +6,9 @@ import DataEntry from './DataEntry.component';
 import {
     makeProgramNameSelector,
 } from './dataEntry.selectors';
+import {
+    updateFieldBatch,
+} from './actions/dataEntry.actionBatchs';
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
@@ -23,7 +26,9 @@ const makeMapStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-
+    onUpdateField: (innerAction: ReduxAction<any, any>) => {
+        dispatch(updateFieldBatch(innerAction));
+    },
 });
 
 export default connect(makeMapStateToProps, mapDispatchToProps)(

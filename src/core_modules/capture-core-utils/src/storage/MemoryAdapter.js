@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-underscore-dangle */
-import errorCreator from '../errorCreator';
+import { errorCreator } from '../errorCreator';
 
 class MemoryAdapter {
     static errorMessages = {

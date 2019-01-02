@@ -1,4 +1,5 @@
 // @flow
+import { batchActions } from 'redux-batched-actions';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import { loadNewDataEntry } from '../../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { openDataEntryForNewEnrollment } from '../actions/openDataEntry.actions';
@@ -32,10 +33,10 @@ export const openDataEntryForNewEnrollmentBatch =
     () => {
         const dataEntryActions = loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude);
 
-        return [
+        return batchActions([
             ...dataEntryActions,
             openDataEntryForNewEnrollment(),
-        ];
+        ]);
 
         /*
         const rulesActions = getRulesActionsForEvent(

@@ -3,36 +3,34 @@
  * @module rulesEngineActionsCreatorForEvent
  */
 import log from 'loglevel';
-import i18n from '@dhis2/d2-i18n';
-import RulesEngine from '../RulesEngine/RulesEngine';
-import inputValueConverter from './inputValueConverter';
-import outputRulesEffectsValueConverter from './rulesEffectsValueConverter';
-import momentConverter from './momentConverter';
-import errorCreator from '../utils/errorCreator';
-import Program from '../metaData/Program/Program';
-import TrackerProgram from '../metaData/Program/TrackerProgram';
-import EventProgram from '../metaData/Program/EventProgram';
-import RenderFoundation from '../metaData/RenderFoundation/RenderFoundation';
-
-import constantsStore from '../metaDataMemoryStores/constants/constants.store';
-import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store';
-import DataElement from '../metaData/DataElement/DataElement';
-
-import { updateRulesEffects, updateFieldFromRuleEffect } from './rulesEngine.actions';
-import effectActions from '../RulesEngine/effectActions.const';
-
-import type {
+import { RulesEngine, effectActions, processTypes } from 'capture-core-utils/RulesEngine';
+import type
+{
     OptionSets,
     ProgramRulesContainer,
     DataElement as DataElementForRulesEngine,
     EventData,
     OrgUnit,
-    OutputEffect,
     AssignOutputEffect,
     HideOutputEffect,
     EventMain,
     EventValues,
-} from '../RulesEngine/rulesEngine.types';
+} from 'capture-core-utils/RulesEngine/rulesEngine.types';
+
+import errorCreator from '../utils/errorCreator';
+import {
+    Program,
+    TrackerProgram,
+    EventProgram,
+    RenderFoundation,
+    DataElement,
+} from '../metaData';
+
+import constantsStore from '../metaDataMemoryStores/constants/constants.store';
+import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store';
+import { postProcessRulesEffects } from './outputHelpers';
+
+import { updateRulesEffects, updateFieldFromRuleEffect } from './rulesEngine.actions';
 
 export type EventContainer = {
     main: EventMain,
@@ -45,8 +43,6 @@ export type FieldData = {
     valid: boolean,
 };
 
-const rulesEngine =
-    new RulesEngine(inputValueConverter, momentConverter, i18n.t, outputRulesEffectsValueConverter);
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found in loadAndExecuteRulesForEvent',
@@ -114,177 +110,32 @@ function getDataElements(program: Program) {
     return getRulesEngineDataElementsAsObject(dataElements);
 }
 
-function buildEffectsHierarchy(effects: Array<OutputEffect>) {
-    return effects.reduce((accEffectsObject, effect) => {
-        const actionType = effect.type;
-        accEffectsObject[actionType] = accEffectsObject[actionType] || {};
-
-        const id = effect.id;
-        // $FlowSuppress
-        accEffectsObject[actionType][id] = accEffectsObject[actionType][id] || [];
-        // $FlowSuppress
-        accEffectsObject[actionType][id].push(effect);
-        return accEffectsObject;
-    }, {});
-}
-
-function createAssignActions(assignEffects: ?{ [elementId: string]: Array<AssignOutputEffect> }, formId: string) {
-    if (!assignEffects) {
-        return [];
-    }
-
-    return Object.keys(assignEffects).map((elementId: string) => {
-        // $FlowSuppress
-        const effectsForId = assignEffects[elementId];
-        const applicableEffectForId = effectsForId[effectsForId.length - 1];
-        return updateFieldFromRuleEffect(applicableEffectForId.value, applicableEffectForId.id, formId);
-    });
-}
-
-function filterFieldsHideEffects(
-    hideEffects: ?{ [elementId: string]: Array<HideOutputEffect> },
-    makeCompulsoryEffects: { [elementId: string]: Array<OutputEffect>} = {},
-    foundation: RenderFoundation) {
-    if (!hideEffects) {
-        return hideEffects;
-    }
-
-    const elementIds = Object.keys(hideEffects);
-    return elementIds
-        .filter((elementId) => {
-            const element = foundation.getElement(elementId);
-            const dataCompulsory = element && element.compulsory;
-            const compulsoryEffect = makeCompulsoryEffects[elementId];
-            return !(dataCompulsory || compulsoryEffect);
-        })
-        .reduce((accFilteredEffects, elementId) => {
-            // $FlowSuppress
-            accFilteredEffects[elementId] = hideEffects[elementId];
-            return accFilteredEffects;
-        }, {});
-}
-
-function filterSectionsHideEffects(
-    hideEffects: ?{ [elementId: string]: Array<HideOutputEffect> },
-    makeCompulsoryEffects: { [elementId: string]: Array<OutputEffect>} = {},
-    foundation: RenderFoundation) {
-    if (!hideEffects) {
-        return hideEffects;
-    }
-
-    const sectionIds = Object.keys(hideEffects);
-    return sectionIds
-        .filter((sectionId) => {
-            const section = foundation.getSection(sectionId);
-            if (!section) {
-                return false;
-            }
-
-            const compulsoryFieldFound = Array.from(section.elements.entries())
-                .map(entry => entry[1])
-                .some((element) => {
-                    const dataCompulsory = element.compulsory;
-                    const compulsoryEffect = makeCompulsoryEffects[element.id];
-                    return dataCompulsory || compulsoryEffect;
-                });
-
-            return !compulsoryFieldFound;
-        })
-        .reduce((accFilteredEffects, sectionId) => {
-            // $FlowSuppress
-            accFilteredEffects[sectionId] = hideEffects[sectionId];
-            return accFilteredEffects;
-        }, {});
-}
-
-function createHideFieldsResetActions(hideEffects: ?{ [elementId: string]: Array<HideOutputEffect> }, formId: string) {
-    if (!hideEffects) {
-        return [];
-    }
-
-    return Object.keys(hideEffects)
-        .map((elementId: string) => updateFieldFromRuleEffect(null, elementId, formId));
-}
-
-function createHideSectionsResetActions(
-    hideEffects: ?{ [sectionId: string]: Array<HideOutputEffect> },
-    foundation: RenderFoundation,
-    formId: string) {
-    if (!hideEffects) {
-        return [];
-    }
-
-    return Object.keys(hideEffects)
-        .map((sectionId: string) => {
-            const section = foundation.getSection(sectionId);
-
-            if (!section) {
-                return null;
-            }
-
-            return Array.from(section.elements.entries())
-                .map(entry => entry[1])
-                .map(element => updateFieldFromRuleEffect(null, element.id, formId));
-        })
-        .filter(action => action)
-        // $FlowSuppress
-        .reduce((accActions, sectionActions) => [...accActions, ...sectionActions], []);
-}
-
-function createRulesEffectsActions(
-    rulesEffects: ?Array<OutputEffect>,
-    formId: string,
-    foundation: RenderFoundation) {
-    if (!rulesEffects) {
-        return [updateRulesEffects(null, formId)];
-    }
-
-    let actions = [];
-    const effectsHierarchy = buildEffectsHierarchy(rulesEffects);
-
-    effectsHierarchy[effectActions.HIDE_FIELD] =
-        filterFieldsHideEffects(
-            effectsHierarchy[effectActions.HIDE_FIELD],
-            effectsHierarchy[effectActions.MAKE_COMPULSORY],
-            foundation,
-        );
-    effectsHierarchy[effectActions.HIDE_SECTION] =
-        filterSectionsHideEffects(
-            effectsHierarchy[effectActions.HIDE_SECTION],
-            effectsHierarchy[effectActions.MAKE_COMPULSORY],
-            foundation,
-        );
-
-    actions.push(updateRulesEffects(effectsHierarchy, formId));
-
-    actions = [...actions, ...createAssignActions(effectsHierarchy[effectActions.ASSIGN_VALUE], formId)];
-    actions = [...actions, ...createHideFieldsResetActions(effectsHierarchy[effectActions.HIDE_FIELD], formId)];
-    actions = [
-        ...actions,
-        ...createHideSectionsResetActions(effectsHierarchy[effectActions.HIDE_SECTION], foundation, formId),
-    ];
-
-    return actions;
-}
-
 function runRulesEngine(
+    rulesEngine: RulesEngine,
     programRulesContainer: ProgramRulesContainer,
     dataElementsInProgram: { [elementId: string]: DataElementForRulesEngine },
     orgUnit: OrgUnit,
     optionSets: ?OptionSets,
     currentEventData: ?EventData,
     allEventsData: ?Array<EventData>) {
-    const effects = rulesEngine.executeRulesForEvent(
+    const effects = rulesEngine.executeRules(
         programRulesContainer,
         currentEventData,
         allEventsData,
         dataElementsInProgram,
+        null,
+        null,
+        null,
         orgUnit,
-        optionSets);
+        optionSets,
+        processTypes.EVENT,
+    );
+
     return effects;
 }
 
-export function getRulesActionsForEvent(
+export default function getRulesActionsForEvent(
+    rulesEngine: RulesEngine,
     program: ?Program,
     foundation: ?RenderFoundation,
     formId: string,
@@ -295,7 +146,8 @@ export function getRulesActionsForEvent(
     if (!program || !foundation) {
         log.error(
             errorCreator(
-                errorMessages.PROGRAM_OR_FOUNDATION_MISSING)({ program, foundation, method: 'getRulesActions' }));
+                errorMessages.PROGRAM_OR_FOUNDATION_MISSING)(
+                { program, foundation, method: 'getRulesActionsForEvent' }));
         return [updateRulesEffects(null, formId)];
     }
 
@@ -310,6 +162,7 @@ export function getRulesActionsForEvent(
 
     const rulesEffects =
         runRulesEngine(
+            rulesEngine,
             programRulesContainer,
             dataElementsInProgram,
             orgUnit,
@@ -318,5 +171,6 @@ export function getRulesActionsForEvent(
             allEventsData,
         );
 
-    return createRulesEffectsActions(rulesEffects, formId, foundation);
+    const effectsHierarchy = postProcessRulesEffects(rulesEffects, foundation);
+    return [updateRulesEffects(effectsHierarchy, formId)];
 }

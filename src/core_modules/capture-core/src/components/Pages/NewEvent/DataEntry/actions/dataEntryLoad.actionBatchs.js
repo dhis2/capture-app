@@ -5,7 +5,7 @@ import { loadNewDataEntry } from '../../../../DataEntry/actions/dataEntryLoadNew
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import {
     getRulesActionsForEvent,
-} from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+} from '../../../../../rulesEngineActionsCreator';
 import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
 import EventProgram from '../../../../../metaData/Program/EventProgram';
 import getEventDateValidatorContainers from '../fieldValidators/eventDate.validatorContainersGetter';

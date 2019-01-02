@@ -144,12 +144,14 @@ export type TrackedEntityAttributes = {
     [id: string]: TrackedEntityAttribute
 };
 
-export type Entity = {
-    [attributeId: string]: any,
+export type Enrollment = {
+    enrollmentDate: ?string,
+    incidentDate: ?string,
+    enrollmentId: ?string,
 };
 
-export type Enrollment = {
-    enrollmentDate: string,
+export type TEIValues = {
+    [attributeId: string]: any,
 };
 
 export type OrgUnit = {

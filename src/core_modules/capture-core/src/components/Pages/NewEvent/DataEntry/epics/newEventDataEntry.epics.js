@@ -20,7 +20,7 @@ import {
 } from '../actions/dataEntryLoad.actionBatchs';
 import {
     getRulesActionsForEvent,
-} from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+} from '../../../../../rulesEngineActionsCreator';
 import {
     actionTypes as newEventSelectionTypes,
 } from '../actions/dataEntryUrl.actions';
@@ -31,7 +31,7 @@ import {
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
-} from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorInputHelpers';
+} from '../../../../../rulesEngineActionsCreator/inputHelpers';
 import getProgramAndStageFromProgramId from
     '../../../../../metaData/helpers/EventProgram/getProgramAndStageFromProgramId';
 import errorCreator from '../../../../../utils/errorCreator';
@@ -69,7 +69,7 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
                         { method: 'resetDataEntryForNewEventEpic' }),
                 );
             }
-            
+
             const foundation = metadataContainer.stage && metadataContainer.stage.stageForm;
             return batchActions(
                 // $FlowSuppress

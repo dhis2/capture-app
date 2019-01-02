@@ -111,25 +111,22 @@ class NewEnrollmentDataEntry extends Component<Props> {
     }
 
     getSavingText() {
-        const { classes, orgUnitName, programName } = this.props;
-        const firstPart = `${i18n.t('Saving to')} `;
-        const secondPart = ` ${i18n.t('in')} `;
+        const { classes, orgUnitName, programName, enrollmentMetadata } = this.props;
+        const translatedText = i18n.t('Creating a new {{TET}} in {{program}} in {{orgUnit}}', {
+            TET: enrollmentMetadata.trackedEntityType.name,
+            program: programName,
+            orgUnit: orgUnitName,
+        });
+
+        const replacedProgramText =
+            translatedText.replace(programName, `<span class="${classes.savingContextNames}">${programName}</span>`);
+        const replacedText =
+            replacedProgramText.replace(
+                orgUnitName, `<span class="${classes.savingContextNames}">${orgUnitName}</span>`,
+            );
 
         return (
-            <span>
-                {firstPart}
-                <span
-                    className={classes.savingContextNames}
-                >
-                    {programName}
-                </span>
-                {secondPart}
-                <span
-                    className={classes.savingContextNames}
-                >
-                    {orgUnitName}
-                </span>
-            </span>
+            <span dangerouslySetInnerHTML={{ __html: replacedText }} /> // eslint-disable-line
         );
     }
     renderHorizontal = () => {

@@ -1,6 +1,5 @@
 // @flow
 import log from 'loglevel';
-import { batchActions } from 'redux-batched-actions';
 import errorCreator from '../../../../../utils/errorCreator';
 import { actionTypes as urlActionTypes } from '../../actions/url.actions';
 import { selectionsNotCompleteOpeningNewEnrollment } from '../actions/openDataEntry.actions';
@@ -23,9 +22,7 @@ export const openNewEnrollmentInDataEntryEpic = (action$: InputObservable, store
                 return selectionsNotCompleteOpeningNewEnrollment();
             }
 
-            return batchActions([
-                ...openDataEntryForNewEnrollmentBatch(),
-            ]);
+            return openDataEntryForNewEnrollmentBatch();
 
             /*
             const programId = state.currentSelections.programId;
