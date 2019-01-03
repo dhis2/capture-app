@@ -145,9 +145,9 @@ export type TrackedEntityAttributes = {
 };
 
 export type Enrollment = {
-    enrollmentDate: ?string,
-    incidentDate: ?string,
-    enrollmentId: ?string,
+    enrollmentDate?: ?string,
+    incidentDate?: ?string,
+    enrollmentId?: ?string,
 };
 
 export type TEIValues = {

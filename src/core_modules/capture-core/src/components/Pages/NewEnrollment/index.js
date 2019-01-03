@@ -15,4 +15,5 @@ export {
 } from './epics/urlSelections.epics';
 export {
     openNewEnrollmentInDataEntryEpic,
+    runRulesOnNewEnrollmentFieldUpdateEpic,
 } from './DataEntry/epics/dataEntry.epics';

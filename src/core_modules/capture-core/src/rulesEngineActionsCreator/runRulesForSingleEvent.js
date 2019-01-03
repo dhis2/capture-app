@@ -1,9 +1,6 @@
 // @flow
-/**
- * @module rulesEngineActionsCreatorForEvent
- */
 import log from 'loglevel';
-import { RulesEngine, effectActions, processTypes } from 'capture-core-utils/RulesEngine';
+import { RulesEngine, processTypes } from 'capture-core-utils/RulesEngine';
 import type
 {
     OptionSets,
@@ -11,8 +8,6 @@ import type
     DataElement as DataElementForRulesEngine,
     EventData,
     OrgUnit,
-    AssignOutputEffect,
-    HideOutputEffect,
     EventMain,
     EventValues,
 } from 'capture-core-utils/RulesEngine/rulesEngine.types';
@@ -25,24 +20,13 @@ import {
     RenderFoundation,
     DataElement,
 } from '../metaData';
-
 import constantsStore from '../metaDataMemoryStores/constants/constants.store';
 import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store';
-import { postProcessRulesEffects } from './outputHelpers';
-
-import { updateRulesEffects, updateFieldFromRuleEffect } from './rulesEngine.actions';
 
 export type EventContainer = {
     main: EventMain,
     values: EventValues
 };
-
-export type FieldData = {
-    elementId: string,
-    value: any,
-    valid: boolean,
-};
-
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found in loadAndExecuteRulesForEvent',
@@ -134,7 +118,7 @@ function runRulesEngine(
     return effects;
 }
 
-export default function getRulesActionsForEvent(
+export default function runRulesForSingleEvent(
     rulesEngine: RulesEngine,
     program: ?Program,
     foundation: ?RenderFoundation,
@@ -142,23 +126,22 @@ export default function getRulesActionsForEvent(
     orgUnit: Object,
     currentEventData: ?EventData,
     allEventsData: ?Array<EventData>,
-): Array<ReduxAction<any, any>> {
+) {
     if (!program || !foundation) {
         log.error(
             errorCreator(
                 errorMessages.PROGRAM_OR_FOUNDATION_MISSING)(
                 { program, foundation, method: 'getRulesActionsForEvent' }));
-        return [updateRulesEffects(null, formId)];
+        return null;
     }
 
     const programRulesContainer = getProgramRulesContainer(program, foundation);
     if (!programRulesContainer.programRules || programRulesContainer.programRules.length === 0) {
-        return [updateRulesEffects(null, formId)];
+        return null;
     }
 
     const dataElementsInProgram = getDataElements(program);
     const optionSets = optionSetsStore.get();
-
 
     const rulesEffects =
         runRulesEngine(
@@ -170,7 +153,5 @@ export default function getRulesActionsForEvent(
             currentEventData,
             allEventsData,
         );
-
-    const effectsHierarchy = postProcessRulesEffects(rulesEffects, foundation);
-    return [updateRulesEffects(effectsHierarchy, formId)];
+    return rulesEffects;
 }

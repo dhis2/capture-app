@@ -1,4 +1,6 @@
 // @flow
+import { effectActions } from 'capture-core-utils/RulesEngine';
+import type { OutputEffect } from 'capture-core-utils/RulesEngine/rulesEngine.types';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as fieldActionTypes } from '../../components/D2Form/D2SectionFields.actions';
 import { actionTypes as loaderActionTypes } from '../../components/D2Form/actions/form.actions';
@@ -32,6 +34,22 @@ export const formsValuesDesc = createReducerDescription({
         const payload = action.payload;
         const formValues = newState[payload.formId] = { ...newState[payload.formId] };
         formValues[payload.elementId] = payload.value;
+        return newState;
+    },
+    [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
+        const assignEffects: { [id: string]: Array<OutputEffect> } =
+            action.payload.rulesEffects && action.payload.rulesEffects[effectActions.ASSIGN_VALUE];
+        if (!assignEffects) {
+            return state;
+        }
+        const payload = action.payload;
+        const newState = {
+            ...state,
+            [payload.formId]: {
+                ...state[payload.formId],
+                ...assignEffects,
+            },
+        };
         return newState;
     },
 

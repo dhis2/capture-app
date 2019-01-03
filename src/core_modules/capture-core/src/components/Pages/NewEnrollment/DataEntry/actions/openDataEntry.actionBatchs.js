@@ -1,5 +1,9 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
+import {
+    getRulesActionsForTEI,
+} from '../../../../../rulesEngineActionsCreator';
+import { RenderFoundation, TrackerProgram } from '../../../../../metaData';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import { loadNewDataEntry } from '../../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { openDataEntryForNewEnrollment } from '../actions/openDataEntry.actions';
@@ -30,26 +34,24 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
 ];
 
 export const openDataEntryForNewEnrollmentBatch =
-    () => {
+    (program: ?TrackerProgram, foundation: ?RenderFoundation, orgUnit: Object) => {
         const dataEntryActions = loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude);
+
+        let rulesActions;
+        if (program && foundation) {
+            rulesActions = getRulesActionsForTEI(
+                program,
+                foundation,
+                formId,
+                orgUnit,
+            );
+        } else {
+            rulesActions = [];
+        }
 
         return batchActions([
             ...dataEntryActions,
+            ...rulesActions,
             openDataEntryForNewEnrollment(),
         ]);
-
-        /*
-        const rulesActions = getRulesActionsForEvent(
-            program,
-            foundation,
-            formId,
-            orgUnit,
-        );
-
-        return [
-            ...dataEntryActions,
-            ...rulesActions,
-            actionCreator(actionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY)(),
-        ];
-        */
     };

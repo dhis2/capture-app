@@ -25,7 +25,9 @@ function getAssignEffects(assignEffects: ?{ [elementId: string]: Array<AssignOut
             };
         });
 }
-
+/*
+reset values for hidden fields
+*/
 function getAssignEffectsBasedOnHideField(hideEffects: ?{ [elementId: string]: Array<HideOutputEffect> }) {
     if (!hideEffects) {
         return [];
@@ -39,6 +41,9 @@ function getAssignEffectsBasedOnHideField(hideEffects: ?{ [elementId: string]: A
         }));
 }
 
+/*
+reset values for fields in hidden sections
+*/
 function getAssignEffectsBasedOnHideSection(
     hideEffects: ?{ [sectionId: string]: Array<HideOutputEffect> },
     foundation: RenderFoundation,
@@ -88,7 +93,7 @@ function postProcessAssignEffects(
         return accProcessedHideEffects;
     }, {});
 }
-// ------------------------------------------------------------------------------------------------------
+
 function buildEffectsHierarchy(effects: Array<OutputEffect>) {
     return effects.reduce((accEffectsObject, effect) => {
         const actionType = effect.type;
@@ -102,7 +107,9 @@ function buildEffectsHierarchy(effects: Array<OutputEffect>) {
         return accEffectsObject;
     }, {});
 }
-
+/*
+Disable hiding for compulsory fields
+*/
 function filterFieldsHideEffects(
     hideEffects: ?{ [elementId: string]: Array<HideOutputEffect> },
     makeCompulsoryEffects: { [elementId: string]: Array<OutputEffect>} = {},
@@ -126,6 +133,9 @@ function filterFieldsHideEffects(
         }, {});
 }
 
+/*
+Disable hiding of sections containing compulsory fields
+*/
 function filterSectionsHideEffects(
     hideEffects: ?{ [elementId: string]: Array<HideOutputEffect> },
     makeCompulsoryEffects: { [elementId: string]: Array<OutputEffect>} = {},
@@ -159,10 +169,10 @@ function filterSectionsHideEffects(
         }, {});
 }
 
-export function postProcessRulesEffects(
+export default function postProcessRulesEffects(
     rulesEffects: ?Array<OutputEffect>,
-    foundation: RenderFoundation) {
-    if (!rulesEffects) {
+    foundation: ?RenderFoundation) {
+    if (!rulesEffects || !foundation) {
         return null;
     }
 

@@ -806,7 +806,7 @@ export default function getExecutionService(onTranslate, variableService, dateUt
             location: action.location,
             action:action.programRuleActionType,
             dataElementId: action.dataElementId,
-            trackedEntityAttributeId: action.trackedEntityAttribute,
+            trackedEntityAttributeId: action.trackedEntityAttributeId,
             programStageId: action.programStageId,
             programStageSectionId: action.programStageSectionId,
             content: action.content,

@@ -19,7 +19,7 @@ import {
     getCurrentClientMainData,
 } from '../../../../../rulesEngineActionsCreator/inputHelpers';
 import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
-import type { FieldData } from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+import type { FieldData } from '../../../../../rulesEngineActionsCreator/inputHelpers';
 
 const errorMessages = {
     COULD_NOT_GET_EVENT_FROM_STATE: 'Could not get event from state',

@@ -33,7 +33,7 @@ type ExecutionService = {
         events: ?EventsDataContainer,
         dataElements: ?DataElements,
         trackedEntityAttributes: ?TrackedEntityAttributes,
-        selectedEntity: ?Entity,
+        selectedTrackedEntityAttributes: ?TEIValues,
         selectedEnrollment: ?Enrollment,
         selectedOrgUnit: OrgUnit,
         optionSets: ?OptionSets,
@@ -109,50 +109,9 @@ export default class RulesEngine {
             { debug: true },
         );
 
-        const processedEffects = effects ? this.onProcessRulesEffects(effects, processType, dataElements) : null;
+        const processedEffects = effects ?
+            this.onProcessRulesEffects(effects, processType, dataElements, trackedEntityAttributes) :
+            null;
         return processedEffects;
-    }
-
-    executeRulesForEvent(
-        programRulesContainer: ProgramRulesContainer,
-        executingEvent: ?EventData,
-        eventsData: ?EventsData,
-        dataElements: DataElements,
-        selectedOrgUnit: OrgUnit,
-        optionSets: ?OptionSets): ?Array<OutputEffect> {
-        let eventsContainer;
-        if (eventsData && eventsData.length > 0) {
-            // create eventsByStage provisionally
-            const eventsDataByStage = eventsData.reduce((accEventsByStage, event) => {
-                const hasProgramStage = !!event.programStageId;
-                if (hasProgramStage) {
-                    accEventsByStage[event.programStageId] = accEventsByStage[event.programStageId] || [];
-                    accEventsByStage[event.programStageId].push(event);
-                }
-                return accEventsByStage;
-            }, {});
-
-            eventsContainer = {
-                all: eventsData,
-                byStage: eventsDataByStage,
-            };
-        } else {
-            eventsContainer = null;
-        }
-
-        const effects = this.executionService.executeRules(
-            programRulesContainer,
-            executingEvent,
-            eventsContainer,
-            dataElements,
-            null,
-            null,
-            null,
-            selectedOrgUnit,
-            optionSets,
-            { debug: true },
-        );
-        const effectsForEvent = effects ? this.onProcessRulesEffects(effects, processTypes.EVENT, dataElements) : null;
-        return effectsForEvent;
     }
 }

@@ -1,25 +1,19 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { RulesEngine, effectActions, processTypes } from 'capture-core-utils/RulesEngine';
+import { RulesEngine, processTypes } from 'capture-core-utils/RulesEngine';
 import type {
     OptionSets,
     ProgramRulesContainer,
     TrackedEntityAttribute as TrackedEntityAttributeForRulesEngine,
-    TrackedEntityAttributes,
     OrgUnit,
-    OutputEffect,
-    AssignOutputEffect,
-    HideOutputEffect,
     Enrollment,
     TEIValues,
 } from 'capture-core-utils/RulesEngine/rulesEngine.types';
 
-import { updateRulesEffects, updateFieldFromRuleEffect } from './rulesEngine.actions';
 import { TrackerProgram, DataElement, RenderFoundation } from '../metaData';
 import constantsStore from '../metaDataMemoryStores/constants/constants.store';
 import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store';
-import { postProcessRulesEffects } from './outputHelpers';
 
 const errorMessages = {
     PROGRAM_MISSING_OR_INVALID: 'Program is missing or is invalid',
@@ -72,8 +66,8 @@ function runRulesEngine(
     trackedEntityAttributes: { [elementId: string]: TrackedEntityAttributeForRulesEngine },
     orgUnit: OrgUnit,
     optionSets: ?OptionSets,
-    enrollmentData: Enrollment,
-    teiValues: TEIValues,
+    enrollmentData: ?Enrollment,
+    teiValues: ?TEIValues,
 ) {
     const effects = rulesEngine.executeRules(
         programRulesContainer,
@@ -105,28 +99,28 @@ function getPrerequisitesError(
     return null;
 }
 
-export default function getRulesActionsForTEI(
+export default function runRulesForTEI(
     rulesEngine: RulesEngine,
     program: ?TrackerProgram,
     foundation: ?RenderFoundation,
     formId: string,
     orgUnit: Object,
-    enrollmentData: Enrollment,
-    teiValues: TEIValues,
+    enrollmentData: ?Enrollment,
+    teiValues: ?TEIValues,
 
-): Array<ReduxAction<any, any>> {
+) {
     const prerequisitesError = getPrerequisitesError(foundation, program);
     if (prerequisitesError) {
         log.error(
             errorCreator(
                 prerequisitesError)(
                 { program, method: 'getRulesActionsForTEI' }));
-        return [updateRulesEffects(null, formId)];
+        return null;
     }
 
     const programRulesContainer = getProgramRulesContainer(program);
     if (!programRulesContainer.programRules || programRulesContainer.programRules.length === 0) {
-        return [updateRulesEffects(null, formId)];
+        return null;
     }
 
     const trackedEntityAttributes = getTrackedEntityAttributes(program);
@@ -143,6 +137,5 @@ export default function getRulesActionsForTEI(
             enrollmentData,
             teiValues,
         );
-    const effectsHierarchy = postProcessRulesEffects(rulesEffects, foundation);
-    return [updateRulesEffects(effectsHierarchy, formId)];
+    return rulesEffects;
 }
