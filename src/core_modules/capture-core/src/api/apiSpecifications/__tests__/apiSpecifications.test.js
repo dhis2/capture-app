@@ -1,5 +1,4 @@
 import metaPrograms from '../metaPrograms.apiSpecification';
-import metaTrackedEntityAttributes from '../metaTrackedEntityAttributes.apiSpecification';
 import optionSets from '../optionSets.apiSpecification';
 import programIndicators from '../programIndicators.apiSpecification';
 import programRules from '../programRules.apiSpecification';
@@ -11,17 +10,6 @@ it('metaPrograms converter', () => {
     const ids = [{ id }];
     const convertedData = metaPrograms.converter(ids);
     expect(convertedData[0].id).toEqual(id);
-});
-
-it('metaTrackedEntityAttributes converter', () => {
-    const id = '1';
-    const optionSet = { id: 'o1', name: 'o1name', code: 'o1code' };
-    const convertedData = metaTrackedEntityAttributes.converter([{ id, optionSet }]);
-    expect(convertedData[0].id).toEqual(id);
-
-    const emptyConvertedData = metaTrackedEntityAttributes.converter();
-    expect(emptyConvertedData).toBeDefined();
-    expect(emptyConvertedData).toHaveLength(0);
 });
 
 it('optionSets converter', () => {
