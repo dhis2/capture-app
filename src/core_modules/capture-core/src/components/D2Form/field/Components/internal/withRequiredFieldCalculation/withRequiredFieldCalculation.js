@@ -8,7 +8,7 @@ type Props = {
 
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
-        class HideFieldCompatibilityInterface extends React.Component<Props> {
+        class RequiredFieldCalculationHOC extends React.Component<Props> {
             render() {
                 const { metaCompulsory, rulesCompulsory, ...passOnProps } = this.props;
 

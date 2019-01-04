@@ -12,7 +12,10 @@ import {
     withDisplayMessages,
     withFilterProps,
 } from '../../../../FormFields/New';
-import withRequiredFieldCalculation from '../../withRequiredFieldCalculation';
+import {
+    withRequiredFieldCalculation,
+    withDisabledFieldCalculation,
+} from '../internal';
 import withOptionsIconElement from './withOptionsIconElement';
 import labelTypeClasses from '../../buildField.mod.css';
 
@@ -24,19 +27,21 @@ const getFilteredProps = (props: Object) => {
 export default withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
-            withRequiredFieldCalculation()(
-                withFocusSaver()(
-                    withCalculateMessages()(
-                        withDefaultFieldContainer()(
-                            withLabel({
-                                onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                                onGetCustomFieldLabeClass: (props: Object) =>
-                                    `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
-                            })(
-                                withDisplayMessages()(
-                                    withOptionsIconElement()(
-                                        withFilterProps(getFilteredProps)(
-                                            withSelectTranslations()(VirtualizedSelectField),
+            withDisabledFieldCalculation()(
+                withRequiredFieldCalculation()(
+                    withFocusSaver()(
+                        withCalculateMessages()(
+                            withDefaultFieldContainer()(
+                                withLabel({
+                                    onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                                    onGetCustomFieldLabeClass: (props: Object) =>
+                                        `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.textLabel}`,
+                                })(
+                                    withDisplayMessages()(
+                                        withOptionsIconElement()(
+                                            withFilterProps(getFilteredProps)(
+                                                withSelectTranslations()(VirtualizedSelectField),
+                                            ),
                                         ),
                                     ),
                                 ),

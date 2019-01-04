@@ -147,3 +147,18 @@ export const rulesEffectsGeneralWarningsDesc = createReducerDescription({
         return newState;
     },
 }, 'rulesEffectsGeneralWarnings', {});
+
+export const rulesEffectsDisabledFieldsDesc = createReducerDescription({
+    [actionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
+        const newState = { ...state };
+        const assignEffects: { [id: string]: Array<OutputEffect> } =
+            action.payload.rulesEffects && action.payload.rulesEffects[effectActions.ASSIGN_VALUE];
+        newState[action.payload.formId] = assignEffects ?
+            Object.keys(assignEffects).reduce((accState, key) => {
+                accState[key] = true;
+                return accState;
+            }, {}) :
+            null;
+        return newState;
+    },
+}, 'rulesEffectsDisabledFields');

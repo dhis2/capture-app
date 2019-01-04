@@ -25,6 +25,7 @@ type RulesHiddenFields = {
 };
 
 type RulesCompulsoryFields = { [id: string]: boolean };
+type RulesDisabledFields = { [id: string]: boolean };
 
 type RulesMessage = {
     error?: ?string,
@@ -42,6 +43,7 @@ type Props = {
     rulesMessages: RulesMessages,
     rulesHiddenFields: RulesHiddenFields,
     rulesCompulsoryFields: RulesCompulsoryFields,
+    rulesDisabledFields: RulesDisabledFields,
     onUpdateField: (value: any, uiState: Object, elementId: string, formBuilderId: string, formId: string) => void,
     onUpdateFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, formId: string, callback: Function) => void,
     formId: string,
@@ -191,6 +193,7 @@ class D2SectionFields extends Component<Props> {
                     this.props.rulesMessages[formField.id][messageStateKeys.WARNING_ON_COMPLETE],
                 rulesCompulsory: this.props.rulesCompulsoryFields[formField.id],
                 rulesCompulsoryError: this.rulesCompulsoryErrors[formField.id],
+                rulesDisabled: this.props.rulesDisabledFields[formField.id],
             },
         }));
     }
@@ -203,6 +206,7 @@ class D2SectionFields extends Component<Props> {
             formId,
             formBuilderId,
             rulesCompulsoryFields,
+            rulesDisabledFields,
             rulesHiddenFields,
             rulesMessages,
             onUpdateFieldAsync,

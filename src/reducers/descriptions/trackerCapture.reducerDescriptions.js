@@ -20,6 +20,7 @@ import {
     rulesEffectsIndicatorsDesc,
     rulesEffectsGeneralWarningsDesc,
     rulesEffectsGeneralErrorsDesc,
+    rulesEffectsDisabledFieldsDesc,
 } from 'capture-core/reducers/descriptions/rulesEffects.reducerDescription';
 import {
     workingListsDesc,
@@ -75,6 +76,7 @@ export default [
     rulesEffectsIndicatorsDesc,
     rulesEffectsGeneralWarningsDesc,
     rulesEffectsGeneralErrorsDesc,
+    rulesEffectsDisabledFieldsDesc,
     workingListsDesc,
     workingListsMetaDesc,
     workingListsUIDesc,

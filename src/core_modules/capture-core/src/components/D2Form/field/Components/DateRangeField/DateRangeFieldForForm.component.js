@@ -12,7 +12,10 @@ import {
     withFilterProps,
     withInternalChangeHandler,
 } from '../../../../FormFields/New';
-import withRequiredFieldCalculation from '../../withRequiredFieldCalculation';
+import {
+    withRequiredFieldCalculation,
+    withDisabledFieldCalculation,
+} from '../internal';
 import labelTypeClasses from '../../buildField.mod.css';
 
 const getFilteredProps = (props: Object) => {
@@ -23,18 +26,20 @@ const getFilteredProps = (props: Object) => {
 export default withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
-            withRequiredFieldCalculation()(
-                withCalculateMessages()(
-                    withFocusSaver()(
-                        withDefaultFieldContainer()(
-                            withLabel({
-                                onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                                onGetCustomFieldLabeClass: (props: Object) =>
-                                    `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
-                            })(
-                                withDisplayMessages()(
-                                    withFilterProps(getFilteredProps)(
-                                        withInternalChangeHandler()(DateRangeField),
+            withDisabledFieldCalculation()(
+                withRequiredFieldCalculation()(
+                    withCalculateMessages()(
+                        withFocusSaver()(
+                            withDefaultFieldContainer()(
+                                withLabel({
+                                    onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
+                                    onGetCustomFieldLabeClass: (props: Object) =>
+                                        `${props.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                                })(
+                                    withDisplayMessages()(
+                                        withFilterProps(getFilteredProps)(
+                                            withInternalChangeHandler()(DateRangeField),
+                                        ),
                                     ),
                                 ),
                             ),
