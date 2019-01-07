@@ -2,17 +2,14 @@
 import { batchActions } from 'redux-batched-actions';
 import {
     getRulesActionsForTEI,
-} from '../../../../../rulesEngineActionsCreator';
-import { RenderFoundation, TrackerProgram } from '../../../../../metaData';
-import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
-import { loadNewDataEntry } from '../../../../DataEntry/actions/dataEntryLoadNew.actions';
-import { openDataEntryForNewEnrollment } from '../actions/openDataEntry.actions';
+} from '../../../../rulesEngineActionsCreator';
+import { RenderFoundation, TrackerProgram } from '../../../../metaData';
+import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
+import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
 import { getEnrollmentDateValidatorContainer, getIncidentDateValidatorContainer } from '../fieldValidators';
-import { convertGeometryOut } from '../../../crossPage/converters';
+import { convertGeometryOut } from '../../converters';
 
-const dataEntryId = 'enrollment';
 const itemId = 'newEnrollment';
-const formId = getDataEntryKey(dataEntryId, itemId);
 
 type DataEntryPropsToInclude = Array<Object>;
 
@@ -34,7 +31,14 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
 ];
 
 export const openDataEntryForNewEnrollmentBatch =
-    (program: ?TrackerProgram, foundation: ?RenderFoundation, orgUnit: Object) => {
+    (
+        program: ?TrackerProgram,
+        foundation: ?RenderFoundation,
+        orgUnit: Object,
+        dataEntryId: string,
+        extraActions: Array<ReduxAction<any, any>> = [],
+    ) => {
+        const formId = getDataEntryKey(dataEntryId, itemId);
         const dataEntryActions = loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude);
 
         let rulesActions;
@@ -52,6 +56,6 @@ export const openDataEntryForNewEnrollmentBatch =
         return batchActions([
             ...dataEntryActions,
             ...rulesActions,
-            openDataEntryForNewEnrollment(),
+            ...extraActions,
         ]);
     };

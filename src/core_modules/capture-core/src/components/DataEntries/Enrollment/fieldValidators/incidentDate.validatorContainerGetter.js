@@ -1,7 +1,7 @@
 // @flow
 import { Validators } from '@dhis2/d2-ui-forms';
 import i18n from '@dhis2/d2-i18n';
-import isValidDate from '../../../../../utils/validators/form/date.validator';
+import isValidDate from '../../../../utils/validators/form/date.validator';
 
 const preValidateDate = (value?: ?string) => {
     if (!value) {

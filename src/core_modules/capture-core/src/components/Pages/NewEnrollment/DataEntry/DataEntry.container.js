@@ -9,6 +9,9 @@ import {
 import {
     updateFieldBatch,
 } from './actions/dataEntry.actionBatchs';
+import {
+    requestSaveNewEnrollmentAndReturnToMainPage,
+} from './actions/dataEntry.actions';
 
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
@@ -28,6 +31,10 @@ const makeMapStateToProps = () => {
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onUpdateField: (innerAction: ReduxAction<any, any>) => {
         dispatch(updateFieldBatch(innerAction));
+    },
+    onSave: (itemId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
+        window.scrollTo(0, 0);
+        dispatch(requestSaveNewEnrollmentAndReturnToMainPage(dataEntryId, itemId, formFoundation));
     },
 });
 

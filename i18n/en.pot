@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-12-20T09:00:24.375Z\n"
-"PO-Revision-Date: 2018-12-20T09:00:24.375Z\n"
+"POT-Creation-Date: 2019-01-07T13:47:02.390Z\n"
+"PO-Revision-Date: 2019-01-07T13:47:02.390Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -18,6 +18,15 @@ msgid "Column"
 msgstr ""
 
 msgid "Invalid range"
+msgstr ""
+
+msgid "Area"
+msgstr ""
+
+msgid "Coordinate"
+msgstr ""
+
+msgid "A value is required"
 msgstr ""
 
 msgid "Cancel"
@@ -191,9 +200,6 @@ msgstr ""
 msgid "Syncing"
 msgstr ""
 
-msgid "Area"
-msgstr ""
-
 msgid "Basic info"
 msgstr ""
 
@@ -251,25 +257,19 @@ msgstr ""
 msgid "Selected program is invalid for registering unit"
 msgstr ""
 
-msgid "Coordinate"
-msgstr ""
-
 msgid "Enrollment"
 msgstr ""
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
-msgid "Link to"
+msgid "Save and add another"
 msgstr ""
 
-msgid "Saving to"
+msgid "Save and exit"
 msgstr ""
 
-msgid "in"
-msgstr ""
-
-msgid "A value is required"
+msgid "Finish"
 msgstr ""
 
 msgid "Switch to form view"
@@ -292,18 +292,18 @@ msgstr ""
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
+msgid "Link to"
+msgstr ""
+
+msgid "Saving to"
+msgstr ""
+
+msgid "in"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
-msgstr ""
-
-msgid "Save and add another"
-msgstr ""
-
-msgid "Save and exit"
-msgstr ""
-
-msgid "Finish"
 msgstr ""
 
 msgid "New event"

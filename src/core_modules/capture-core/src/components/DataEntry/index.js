@@ -16,5 +16,8 @@ export { default as withWarningOutput } from './dataEntryOutput/withWarningOutpu
 export { default as withErrorOutput } from './dataEntryOutput/withErrorOutput';
 export { default as withIndicatorOutput } from './dataEntryOutput/withIndicatorOutput';
 
+// misc
+export { default as inMemoryFileStore } from './file/inMemoryFileStore';
+
 // constants
 export { default as placements } from './constants/placements.const';

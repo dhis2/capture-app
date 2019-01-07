@@ -9,7 +9,7 @@ import {
 import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
 import EventProgram from '../../../../../metaData/Program/EventProgram';
 import getEventDateValidatorContainers from '../fieldValidators/eventDate.validatorContainersGetter';
-import { convertGeometryOut, convertStatusIn, convertStatusOut } from '../../../crossPage/converters';
+import { convertGeometryOut, convertStatusIn, convertStatusOut } from '../../../../DataEntries';
 import getNotesValidatorContainers from '../fieldValidators/note.validatorContainersGetter';
 
 const dataEntryId = 'singleEvent';

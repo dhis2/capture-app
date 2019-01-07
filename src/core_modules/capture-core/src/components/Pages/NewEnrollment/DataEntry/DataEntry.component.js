@@ -3,11 +3,16 @@ import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import InfoIcon from '@material-ui/icons/InfoOutline';
 import i18n from '@dhis2/d2-i18n';
-import { placements } from '../../../../components/DataEntry';
-import { Enrollment } from '../../../../metaData';
+
+import {
+    placements,
+} from '../../../DataEntry';
+import { Enrollment, RenderFoundation } from '../../../../metaData';
+import {
+    sectionKeysForEnrollmentDataEntry as dataEntrySectionKeys,
+} from '../../../DataEntries';
 import ConfiguredDataEntry from './ConfiguredDataEntry.component';
-import dataEntrySectionKeys from './constants/dataEntrySectionKeys.const';
-// import newEventSaveTypes from './newEventSaveTypes';
+import newEnrollmentSaveTypes from './newEnrollmentSaveTypes';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -48,9 +53,9 @@ type Props = {
     orgUnitName: string,
     onUpdateField: (innerAction: ReduxAction<any, any>) => void,
     onStartAsyncUpdateField: Object,
-    onSetSaveTypes: (saveTypes: ?Array<$Values<typeof newEventSaveTypes>>) => void,
-    onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
-    onSaveAndAddAnother: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => void,
+    onSetSaveTypes: (saveTypes: ?Array<$Values<typeof newEnrollmentSaveTypes>>) => void,
+    onSave: (dataEntryId: string, itemId: string, formFoundation: RenderFoundation) => void,
+    onSaveAndAddAnother: (dataEntryId: string, itemId: string, formFoundation: RenderFoundation) => void,
     onAddNote: (itemId: string, dataEntryId: string, note: string) => void,
     onCancel: () => void,
     classes: {
@@ -100,13 +105,13 @@ class NewEnrollmentDataEntry extends Component<Props> {
     }
 
     handleSave = (itemId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: ?string) => {
-        if (saveType === newEventSaveTypes.SAVEANDADDANOTHER) {
+        if (saveType === newEnrollmentSaveTypes.SAVEANDADDANOTHER) {
             if (!this.props.formHorizontal) {
-                this.props.onSetSaveTypes([newEventSaveTypes.SAVEANDADDANOTHER, newEventSaveTypes.SAVEANDEXIT]);
+                this.props.onSetSaveTypes([newEnrollmentSaveTypes.SAVEANDADDANOTHER, newEnrollmentSaveTypes.SAVEANDEXIT]);
             }
             this.props.onSaveAndAddAnother(itemId, dataEntryId, formFoundation);
-        } else if (saveType === newEventSaveTypes.SAVEANDEXIT) {
-            this.props.onSave(itemId, dataEntryId, formFoundation);
+        } else if (saveType === newEnrollmentSaveTypes.SAVEANDEXIT) {
+            this.props.onSave(dataEntryId, itemId, formFoundation);
         }
     }
 

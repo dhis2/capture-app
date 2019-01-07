@@ -2,11 +2,17 @@
 import log from 'loglevel';
 import errorCreator from '../../../../../utils/errorCreator';
 import { actionTypes as urlActionTypes } from '../../actions/url.actions';
-import { batchActionTypes, runRulesOnUpdateFieldBatch } from '../actions/dataEntry.actionBatchs';
+import { batchActionTypes } from '../actions/dataEntry.actionBatchs';
 import { actionTypes } from '../actions/dataEntry.actions';
-import { selectionsNotCompleteOpeningNewEnrollment } from '../actions/openDataEntry.actions';
-import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram, Program } from '../../../../../metaData';
-import { openDataEntryForNewEnrollmentBatch } from '../actions/openDataEntry.actionBatchs';
+import {
+    openDataEntryForNewEnrollment,
+    selectionsNotCompleteOpeningNewEnrollment,
+} from '../actions/openDataEntry.actions';
+import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../metaData';
+import {
+    openDataEntryForNewEnrollmentBatch,
+    runRulesOnUpdateFieldBatch,
+} from '../../../../DataEntries';
 import { getCurrentClientValues, getCurrentClientMainData } from '../../../../../rulesEngineActionsCreator';
 import type { FieldData } from '../../../../../rulesEngineActionsCreator/inputHelpers';
 
@@ -55,6 +61,8 @@ export const openNewEnrollmentInDataEntryEpic = (action$: InputObservable, store
                 trackerProgram,
                 foundation,
                 orgUnit,
+                'enrollment',
+                [openDataEntryForNewEnrollment()],
             );
         });
 
