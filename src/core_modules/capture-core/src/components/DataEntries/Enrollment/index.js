@@ -5,3 +5,4 @@ export { openDataEntryForNewEnrollmentBatch } from './actions/open.actionBatchs'
 export {
     runRulesOnUpdateFieldBatch,
 } from './actions/enrollment.actionBatchs';
+export { default as buildServerData } from './helpers/buildServerData';

@@ -25,7 +25,7 @@ const valueConvertersForType = {
     [elementTypes.PERCENTAGE]: (rawValue: Object) => rawValue.replace('%', ''),
 };
 
-export function convertValue(type: $Values<typeof elementTypes>, value: any) {
+export function convertValue(value: any, type: $Values<typeof elementTypes>) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }

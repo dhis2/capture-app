@@ -115,6 +115,7 @@ import {
     validationForNewEnrollmentUrlUpdateEpic,
     openNewEnrollmentInDataEntryEpic,
     runRulesOnNewEnrollmentFieldUpdateEpic,
+    saveNewEnrollmentEpic,
 } from 'capture-core/components/Pages/NewEnrollment';
 import { loadStartupData, loadStartupDataCore } from '../init/entry.epics';
 
@@ -189,4 +190,5 @@ export default combineEpics(
     validationForNewEnrollmentUrlUpdateEpic,
     openNewEnrollmentInDataEntryEpic,
     runRulesOnNewEnrollmentFieldUpdateEpic,
+    saveNewEnrollmentEpic,
 );

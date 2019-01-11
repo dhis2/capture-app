@@ -71,7 +71,7 @@ const valueConvertersForType = {
     [elementTypes.AGE]: convertAge,
 };
 
-export function convertValue(type: $Values<typeof elementTypes>, value: any) {
+export function convertValue(value: any, type: $Values<typeof elementTypes>) {
     if (value == null) {
         return null;
     }

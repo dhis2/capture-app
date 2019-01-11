@@ -62,7 +62,7 @@ const mapEventInputKeyToOutputKey = {
 function getConvertedValue(valueToConvert: any, inputKey: string) {
     let convertedValue;
     if (inputKey === 'eventDate' || inputKey === 'dueDate' || inputKey === 'completedDate') {
-        convertedValue = convertValue(elementTypes.DATE, valueToConvert);
+        convertedValue = convertValue(valueToConvert, elementTypes.DATE);
     } else {
         convertedValue = valueToConvert;
     }

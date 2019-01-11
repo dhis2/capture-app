@@ -26,7 +26,7 @@ export const teiSearchEpic = (action$: InputObservable, store: ReduxStore) =>
 
             const filterValues = searchGroup.searchForm.convertValues(formValues,
                 (type, value, element) =>
-                    convertToFilters(type, convertToServer(type, convertToClient(type, value)), element));
+                    convertToFilters(type, convertToServer(convertToClient(value, type)), type, element));
 
             const filters = Object.keys(filterValues).reduce((accFilters, key) => {
                 const value = filterValues[key];

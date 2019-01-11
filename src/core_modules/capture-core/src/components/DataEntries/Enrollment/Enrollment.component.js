@@ -1,4 +1,5 @@
 // @flow
+import { connect } from 'react-redux';
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -198,7 +199,7 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
 const getOrientation = (formHorizontal: ?boolean) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
 
 const getGeometrySettings = () => (props: Object) => {
-    const featureType = 'Point';
+    const featureType = props.enrollmentMetadata.enrollmentForm.featureType;
     if (featureType === 'Polygon') {
         return {
             component: polygonComponent,
@@ -251,7 +252,14 @@ const FilterPropsForDataEntry = (props: Object) => {
     );
 };
 
-const FeedbackOutput = withFeedbackOutput()(FilterPropsForDataEntry);
+const mapStateToProps = (state: ReduxState) => ({
+    onGetValidationContext: () => ({
+        orgUnitId: state.currentSelections.orgUnitId,
+    }),
+});
+
+const ValidationContext = connect(mapStateToProps, () => ({}))(FilterPropsForDataEntry);
+const FeedbackOutput = withFeedbackOutput()(ValidationContext);
 const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
 const WarningOutput = withWarningOutput()(IndicatorOutput);
 const ErrorOutput = withErrorOutput()(WarningOutput);

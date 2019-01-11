@@ -111,7 +111,7 @@ class NewEnrollmentDataEntry extends Component<Props> {
             }
             this.props.onSaveAndAddAnother(itemId, dataEntryId, formFoundation);
         } else if (saveType === newEnrollmentSaveTypes.SAVEANDEXIT) {
-            this.props.onSave(dataEntryId, itemId, formFoundation);
+            this.props.onSave(itemId, dataEntryId, formFoundation);
         }
     }
 

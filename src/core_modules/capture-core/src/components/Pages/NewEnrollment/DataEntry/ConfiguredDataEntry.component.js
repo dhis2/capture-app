@@ -13,6 +13,9 @@ const getCancelOptions = () => ({
 });
 const CancelButtonHOC = withCancelButton(getCancelOptions)(EnrollmentDataEntry);
 
-const SaveHandlerHOC = withSaveHandler()(withMainButton()(CancelButtonHOC));
+const SaveHandlerHOC =
+    withSaveHandler(
+        { onGetFormFoundation: (props: Object) => props.enrollmentMetadata.enrollmentForm })(
+        withMainButton()(CancelButtonHOC));
 
 export default SaveHandlerHOC;

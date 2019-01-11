@@ -10,6 +10,7 @@ export type ValidatorContainer = {
     validator: (value: any) => boolean,
     message: string,
     type?: ?string,
+    async?: ?boolean,
 };
 
 export type FieldConfig = {
@@ -53,6 +54,7 @@ type Props = {
     children?: ?(RenderFieldFn, fields: Array<FieldConfig>) => React.Node,
     onRenderDivider?: ?RenderDividerFn,
     onGetContainerProps?: ?GetContainerPropsFn,
+    onGetValidationContext: () => ?Object,
 };
 
 type FieldCommitOptions = {
@@ -60,13 +62,26 @@ type FieldCommitOptions = {
 };
 
 class FormBuilder extends React.Component<Props> {
-    static validateField(
+    static async validateField(
         field: FieldConfig,
-        value: any): { valid: boolean, errorMessage?: ?string, errorType?: ?string } {
-        const validatorResult = (field.validators || [])
-            .reduce((pass, currentValidator) => {
+        value: any,
+        validationContext: ?Object,
+    ): Promise<{ valid: boolean, errorMessage?: ?string, errorType?: ?string }> {
+        if (!field.validators || field.validators.length === 0) {
+            return {
+                valid: true,
+            };
+        }
+
+        const validatorResult = await field.validators
+            .reduce(async (passPromise, currentValidator) => {
+                const pass = await passPromise;
                 if (pass === true) {
-                    const result = currentValidator.validator(value);
+                    let result = currentValidator.validator(value, validationContext);
+                    if (result instanceof Promise) {
+                        result = await result;
+                    }
+
                     if (result === true || (result && result.valid)) {
                         return true;
                     }
@@ -77,7 +92,7 @@ class FormBuilder extends React.Component<Props> {
                     };
                 }
                 return pass;
-            }, true);
+            }, Promise.resolve(true));
 
         if (validatorResult !== true) {
             return {
@@ -134,7 +149,10 @@ class FormBuilder extends React.Component<Props> {
         this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
 
         if (this.props.validateIfNoUIData) {
-            this.props.onFieldsValidated(this.validateAllFields(), this.props.id);
+            this.validateAllFields()
+                .then((validationResult) => {
+                    this.props.onFieldsValidated(validationResult, this.props.id);
+                });
         }
     }
 
@@ -149,7 +167,10 @@ class FormBuilder extends React.Component<Props> {
         if (this.props.validateIfNoUIData &&
             (newProps.id !== this.props.id || newProps.fields.length !== Object.keys(newProps.fieldsUI).length)
         ) {
-            this.props.onFieldsValidated(this.validateAllFields(), this.props.id);
+            this.validateAllFields()
+                .then((validationResult) => {
+                    this.props.onFieldsValidated(validationResult, this.props.id);
+                });
         }
     }
 
@@ -157,10 +178,24 @@ class FormBuilder extends React.Component<Props> {
         const fields = this.props.fields;
         const values = this.props.values;
 
-        return fields.reduce((accFieldsUI, field) => {
-            accFieldsUI[field.id] = FormBuilder.validateField(field, values[field.id]);
-            return accFieldsUI;
-        }, {});
+        const validationContext = this.props.onGetValidationContext();
+        const validationPromises = fields
+            .map(async (field) => {
+                const validationData = await FormBuilder.validateField(field, values[field.id], validationContext);
+                return {
+                    id: field.id,
+                    validationData,
+                };
+            });
+
+        return Promise
+            .all(validationPromises)
+            .then(validationContainers => validationContainers
+                .reduce((accFieldsUI, container) => {
+                    accFieldsUI[container.id] = container.validationData;
+                    return accFieldsUI;
+                }, {}),
+            );
     }
 
     /**
@@ -189,7 +224,7 @@ class FormBuilder extends React.Component<Props> {
         return valueChanged;
     }
 
-    commitFieldUpdate(fieldId: string, value: any, options?: ?FieldCommitOptions) {
+    async commitFieldUpdate(fieldId: string, value: any, options?: ?FieldCommitOptions) {
         const field = this.getFieldProp(fieldId);
         const touched = options && isDefined(options.touched) ? options.touched : true;
 
@@ -198,7 +233,9 @@ class FormBuilder extends React.Component<Props> {
             return;
         }
 
-        const { valid, errorMessage, errorType } = FormBuilder.validateField(field, value);
+        const { valid, errorMessage, errorType } =
+            await FormBuilder.validateField(field, value, this.props.onGetValidationContext());
+
         this.props.onUpdateField(value, {
             valid,
             touched,

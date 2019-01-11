@@ -1,5 +1,7 @@
 // @flow
 import * as React from 'react';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { connect } from 'react-redux';
 import { updateField } from '../actions/dataEntry.actions';
 import getDataEntryKey from '../common/getDataEntryKey';
@@ -54,7 +56,7 @@ type Options = {
     touched?: ?boolean,
 };
 
-const getDataEntryField = (InnerComponent: React.ComponentType<any>) =>
+const getDataEntryField = (InnerComponent: React.ComponentType<any>) => {
     class DataEntryFieldBuilder extends React.Component<Props> {
         name: string;
         handleBlur: (value: any, options?: ?Options) => void;
@@ -158,7 +160,38 @@ const getDataEntryField = (InnerComponent: React.ComponentType<any>) =>
             );
         }
     }
-;
+
+    const DataEntryFieldBuilderWithRef = (props: Object) => {
+        const dataEntryFieldRef = props.dataEntryFieldRef;
+
+        const handleRef = (instance) => {
+            if (dataEntryFieldRef) {
+                let key = props.settings && props.settings.componentProps && props.settings.componentProps.id;
+                if (!key) {
+                    key = props.settings && props.settings.componentProps && props.settings.componentProps.label;
+                }
+
+                if (!key) {
+                    log.error(
+                        errorCreator(
+                            'data entry field needs a key, but neither id nor label was specified in component props')({
+                            compenentSettings: props.settings.componentProps }));
+                    return;
+                }
+                dataEntryFieldRef(instance, key);
+            }
+        };
+
+        return (
+            <DataEntryFieldBuilder
+                ref={handleRef}
+                {...props}
+            />
+        );
+    };
+
+    return DataEntryFieldBuilderWithRef;
+};
 
 type ContainerProps = {
     id: string,

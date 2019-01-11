@@ -5,7 +5,6 @@ export { updateSelectionsFromUrl } from './actions/url.actions';
 
 // actions
 export { actionTypes as urlActionTypes } from './actions/url.actions';
-export { actionTypes as openDataEntryActionTypes } from './DataEntry/actions/openDataEntry.actions';
 
 // epics
 export {
@@ -13,7 +12,11 @@ export {
     emptyOrgUnitForNewEnrollmentUrlUpdateEpic,
     validationForNewEnrollmentUrlUpdateEpic,
 } from './epics/urlSelections.epics';
+
+// data entry
 export {
+    openDataEntryActionTypes,
     openNewEnrollmentInDataEntryEpic,
     runRulesOnNewEnrollmentFieldUpdateEpic,
-} from './DataEntry/epics/dataEntry.epics';
+    saveNewEnrollmentEpic,
+} from './DataEntry';

@@ -77,7 +77,7 @@ export function getDataEntryNotes(
     const notes = clientValuesForDataEntry.notes || [];
     return notes.map((note, index) => ({
         ...note,
-        storedDate: convertListValue(elementTypes.DATETIME, note.storedDate),
+        storedDate: convertListValue(note.storedDate, elementTypes.DATETIME),
         key: index,
     }));
 }

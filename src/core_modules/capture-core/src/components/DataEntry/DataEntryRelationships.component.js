@@ -98,7 +98,7 @@ class DataEntryRelationships extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: ReduxState, props: { id: string }) => {
-    const itemId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].itemId;
+    const itemId = state.dataEntries && state.dataEntries[props.dataEntryId] && state.dataEntries[props.dataEntryId].itemId;
     return {
         itemId,
     };

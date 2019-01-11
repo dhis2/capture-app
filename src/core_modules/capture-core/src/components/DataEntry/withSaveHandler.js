@@ -13,7 +13,6 @@ import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 
 import Button from '../Buttons/Button.component';
-import DataEntry from './DataEntry.component';
 import errorCreator from '../../utils/errorCreator';
 
 import { validationStrategies } from '../../metaData/RenderFoundation/renderFoundation.const';
@@ -40,6 +39,7 @@ type Props = {
 
 type IsCompletingFn = (props: Props) => boolean;
 type FilterPropsFn = (props: Object) => Object;
+type GetFormFoundationFn = (props: Object) => RenderFoundation;
 
 type State = {
     warningDialogOpen: boolean,
@@ -47,7 +47,11 @@ type State = {
     saveType?: ?string,
 };
 
-const getSaveHandler = (InnerComponent: React.ComponentType<any>, onIsCompleting?: IsCompletingFn, onFilterProps?: FilterPropsFn) =>
+const getSaveHandler = (
+    InnerComponent: React.ComponentType<any>,
+    onIsCompleting?: IsCompletingFn,
+    onFilterProps?: FilterPropsFn,
+    onGetFormFoundation?: GetFormFoundationFn) =>
     class SaveHandlerHOC extends React.Component<Props, State> {
         static errorMessages = {
             INNER_INSTANCE_NOT_FOUND: 'Inner instance not found',
@@ -55,6 +59,8 @@ const getSaveHandler = (InnerComponent: React.ComponentType<any>, onIsCompleting
         };
 
         innerInstance: any;
+        formInstance: D2Form;
+        dataEntryFieldInstances: Map<string, any>;
         handleSaveAttempt: (saveType?: ?string) => void;
         handleCloseDialog: () => void;
         handleSaveDialog: () => void;
@@ -64,6 +70,7 @@ const getSaveHandler = (InnerComponent: React.ComponentType<any>, onIsCompleting
             this.handleCloseDialog = this.handleCloseDialog.bind(this);
             this.handleSaveDialog = this.handleSaveDialog.bind(this);
 
+            this.dataEntryFieldInstances = new Map();
             this.state = {
                 warningDialogOpen: false,
                 waitForUploadDialogOpen: false,
@@ -74,45 +81,8 @@ const getSaveHandler = (InnerComponent: React.ComponentType<any>, onIsCompleting
             return this.innerInstance;
         }
 
-        getFormInstance() {
-            let currentInstance = this.innerInstance;
-            let done;
-            while (!done) {
-                currentInstance = currentInstance.getWrappedInstance && currentInstance.getWrappedInstance();
-                if (!currentInstance || currentInstance instanceof D2Form) {
-                    done = true;
-                }
-            }
-            return currentInstance;
-        }
-
         getDataEntryFieldInstances() {
-            let currentInstance = this.innerInstance;
-            let done;
-            const dataEntryFields = [];
-            while (!done) {
-                currentInstance = currentInstance.getWrappedInstance && currentInstance.getWrappedInstance();
-                if (!currentInstance || currentInstance instanceof DataEntry) {
-                    done = true;
-                } else if (currentInstance.name === 'DataEntryFieldBuilder') {
-                    dataEntryFields.push(currentInstance);
-                }
-            }
-            return dataEntryFields;
-        }
-
-        getErrorInstance() {
-            let currentInstance = this.innerInstance;
-            let done;
-            while (!done) {
-                currentInstance = currentInstance.getWrappedInstance && currentInstance.getWrappedInstance();
-                if (!currentInstance || currentInstance instanceof DataEntry) {
-                    done = true;
-                } else if (currentInstance.name === 'DataEntryOutputBuilder' && currentInstance.outputInstance.name === 'ErrorOutputBuilder') {
-                    return currentInstance.outputInstance;
-                }
-            }
-            return null;
+            return Array.from(this.dataEntryFieldInstances.entries()).map(entry => entry[1]);
         }
 
         validateDataEntryFields() {
@@ -135,12 +105,19 @@ const getSaveHandler = (InnerComponent: React.ComponentType<any>, onIsCompleting
             this.setState({ waitForUploadDialogOpen: true });
             AsyncFieldHandler.getDataEntryItemPromise(this.props.id, this.props.itemId).then(() => {
                 this.setState({ waitForUploadDialogOpen: false });
-                this.props.onSave(this.props.itemId, this.props.id, this.props.formFoundation, saveType);
+                this.props.onSave(
+                    this.props.itemId,
+                    this.props.id,
+                    onGetFormFoundation ? onGetFormFoundation(this.props) : this.props.formFoundation,
+                    saveType,
+                );
             });
         }
 
         validateGeneralErrorsFromRules(isCompleting: boolean) {
-            const validationStrategy = this.props.formFoundation.validationStrategy;
+            const validationStrategy = onGetFormFoundation ?
+                onGetFormFoundation(this.props).validationStrategy :
+                this.props.formFoundation.validationStrategy;
             if (validationStrategy === validationStrategies.NONE) {
                 return true;
             } else if (validationStrategy === validationStrategies.ON_COMPLETE) {
@@ -151,7 +128,7 @@ const getSaveHandler = (InnerComponent: React.ComponentType<any>, onIsCompleting
         }
 
         validateForm() {
-            const formInstance = this.getFormInstance();
+            const formInstance = this.formInstance;
             if (!formInstance) {
                 log.error(
                     errorCreator(
@@ -221,13 +198,13 @@ const getSaveHandler = (InnerComponent: React.ComponentType<any>, onIsCompleting
             if (AsyncFieldHandler.hasPromises(this.props.id, this.props.itemId)) {
                 this.showWaitForUploadPopup(saveType);
             } else {
-                this.props.onSave(this.props.itemId, this.props.id, this.props.formFoundation, saveType);
+                this.props.onSave(this.props.itemId, this.props.id, onGetFormFoundation ? onGetFormFoundation(this.props) : this.props.formFoundation, saveType);
             }
         }
 
         getDialogWarningContents() {
             if (this.state.warningDialogOpen) {
-                const foundation = this.props.formFoundation;
+                const foundation = onGetFormFoundation ? onGetFormFoundation(this.props) : this.props.formFoundation;
                 const warnings = this.props.warnings;
 
                 return warnings ?
@@ -251,6 +228,14 @@ const getSaveHandler = (InnerComponent: React.ComponentType<any>, onIsCompleting
             </div>
         );
 
+        setFormInstance = (formInstance) => {
+            this.formInstance = formInstance;
+        }
+
+        setDataEntryFieldInstance = (dataEntryFieldInstance, id) => {
+            this.dataEntryFieldInstances.set(id, dataEntryFieldInstance);
+        }
+
         render() {
             const {
                 itemId,
@@ -272,6 +257,8 @@ const getSaveHandler = (InnerComponent: React.ComponentType<any>, onIsCompleting
                 <div>
                     <InnerComponent
                         ref={(innerInstance) => { this.innerInstance = innerInstance; }}
+                        formRef={this.setFormInstance}
+                        dataEntryFieldRef={this.setDataEntryFieldInstance}
                         onSave={saveType => this.handleSaveAttempt(saveType)}
                         {...filteredProps}
                     />
@@ -347,7 +334,11 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-export default (options?: {onIsCompleting?: IsCompletingFn, onFilterProps?: FilterPropsFn }) =>
+export default (
+    options?: {
+        onIsCompleting?: IsCompletingFn,
+        onFilterProps?: FilterPropsFn,
+        onGetFormFoundation?: GetFormFoundationFn }) =>
     (InnerComponent: React.ComponentType<any>) =>
         connect(
-            mapStateToProps, mapDispatchToProps, null, { withRef: true })(getSaveHandler(InnerComponent, options && options.onIsCompleting, options && options.onFilterProps));
+            mapStateToProps, mapDispatchToProps, null, { withRef: true })(getSaveHandler(InnerComponent, options && options.onIsCompleting, options && options.onFilterProps, options && options.onGetFormFoundation));

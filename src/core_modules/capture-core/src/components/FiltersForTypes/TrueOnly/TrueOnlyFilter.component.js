@@ -31,8 +31,8 @@ class TrueOnlyFilter extends Component<Props> implements UpdatableFilterContent<
     static getRequestData(values: Array<any>, type: $Values<typeof elementTypes>) {
         const valueString = values
             .map((value) => {
-                const clientValue = convertToClientValue(type, value);
-                const filterValue = convertToServerValue(type, clientValue); // should work for now
+                const clientValue = convertToClientValue(value, type);
+                const filterValue = convertToServerValue(clientValue, type); // should work for now
                 return filterValue;
             })
             .join(';');

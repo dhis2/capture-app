@@ -4,6 +4,7 @@ export {
     sectionKeys as sectionKeysForEnrollmentDataEntry,
     openDataEntryForNewEnrollmentBatch,
     runRulesOnUpdateFieldBatch,
+    buildServerData as buildServerDataForEnrollmentDataEntry,
 } from './Enrollment';
 export {
     convertGeometryOut,

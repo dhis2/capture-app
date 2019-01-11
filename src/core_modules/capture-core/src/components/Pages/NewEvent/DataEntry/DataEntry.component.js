@@ -308,7 +308,8 @@ const buildNotesSettingsFn = () => {
         componentProps: createComponentProps(props, {
             label: 'Comments',
             onAddNote: props.onAddNote,
-            id: props.id,
+            id: 'comments',
+            dataEntryId: props.id,
         }),
         propName: 'note',
         validatorContainers: getNoteValidatorContainers(),
@@ -331,7 +332,8 @@ const buildRelationshipsSettingsFn = () => {
     const relationshipsSettings = (props: Object) => ({
         component: relationshipsComponent,
         componentProps: createComponentProps(props, {
-            id: props.id,
+            id: 'relationship',
+            dataEntryId: props.id,
             onAddRelationship: props.onAddRelationship,
         }),
         validatorContainers: [

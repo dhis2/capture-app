@@ -23,7 +23,7 @@ import {
     isValidUsername,
     getNumberRangeValidator,
 } from '../../../utils/validators/form';
-import MetaDataElement from '../../../metaData/DataElement/DataElement';
+import { DataElement as MetaDataElement } from '../../../metaData';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 
 type Validator = (value: any) => boolean;
@@ -57,13 +57,14 @@ const errorMessages = {
     ORGANISATION_UNIT: 'Please provide a valid organisation unit',
     COORDINATE: 'Please provide valid coordinates',
     USERNAME: 'Please provide a valid username',
+    UNIQUENESS: 'This value already exists',
 };
 
-const isCompulsoryRequirementMet = Validators.wordToValidatorMap.get(wordValidatorKeys.COMPULSORY);
+const compulsoryValidator = Validators.wordToValidatorMap.get(wordValidatorKeys.COMPULSORY);
 
-const isCompulsoryRequirementMetWrapper = (value: any) => {
+const compulsoryValidatorWrapper = (value: any) => {
     const testValue = (value && isString(value)) ? value.trim() : value;
-    return isCompulsoryRequirementMet(testValue);
+    return compulsoryValidator(testValue);
 };
 
 const validatorForInteger = () => ({
@@ -179,12 +180,26 @@ function buildTypeValidators(metaData: MetaDataElement): Array<ValidatorContaine
 function buildCompulsoryValidator(metaData: MetaDataElement): Array<ValidatorContainer> {
     return metaData.compulsory ? [
         {
-            validator: isCompulsoryRequirementMetWrapper,
+            validator: compulsoryValidatorWrapper,
             message:
                 i18n.t(errorMessages.COMPULSORY),
         },
     ] :
         [];
+}
+
+function buildUniqueValidator(metaData: MetaDataElement) {
+    return metaData.unique ? [
+        {
+            validator: (value: any, contextProps: ?Object) => {
+                if (!value && value !== 0 && value !== false) {
+                    return true;
+                }
+                return metaData.unique.onValidate(value, contextProps);
+            },
+            message: i18n.t(errorMessages.UNIQUENESS),
+        },
+    ] : [];
 }
 
 function compose(validatorBuilders: Array<ValidatorBuilder>, metaData: MetaDataElement) {
@@ -195,6 +210,6 @@ function compose(validatorBuilders: Array<ValidatorBuilder>, metaData: MetaDataE
 }
 
 export default function getValidators(metaData: MetaDataElement) {
-    const builders = [buildCompulsoryValidator, buildTypeValidators];
+    const builders = [buildCompulsoryValidator, buildTypeValidators, buildUniqueValidator];
     return compose(builders, metaData);
 }

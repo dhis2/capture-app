@@ -20,7 +20,7 @@ type CompareKeys = {
 function getConvertedValue(valueToConvert: any, key: string, onConvertValue: ConverterFn, compareKeys: CompareKeys) {
     let convertedValue;
     if (key === compareKeys.eventDate || key === compareKeys.dueDate || key === compareKeys.completedDate) {
-        convertedValue = onConvertValue(elementTypes.DATE, valueToConvert);
+        convertedValue = onConvertValue(valueToConvert, elementTypes.DATE);
     } else {
         convertedValue = valueToConvert;
     }

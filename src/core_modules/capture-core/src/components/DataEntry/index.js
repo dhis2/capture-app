@@ -8,7 +8,6 @@ export { default as withDataEntryField } from './dataEntryField/withDataEntryFie
 export { default as withDataEntryFieldIfApplicable } from './dataEntryField/withDataEntryFieldIfApplicable';
 export { default as withBrowserBackWarning } from './withBrowserBackWarning';
 export { default as withCancelButton } from './withCancelButton';
-export { default as withSaveButton } from './withSaveButton';
 export { default as withSaveHandler } from './withSaveHandler';
 export { default as withNotes } from './withNotes';
 export { default as withFeedbackOutput } from './dataEntryOutput/withFeedbackOutput';

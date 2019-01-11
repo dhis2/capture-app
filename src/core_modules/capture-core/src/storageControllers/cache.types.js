@@ -18,10 +18,12 @@ export type CachedTrackedEntityAttribute = {
     displayShortName: string,
     description: string,
     translations: Array<CachedAttributeTranslation>,
-    unique: ?boolean,
     valueType: string,
     optionSetValue: boolean,
     optionSet: { id: string },
+    unique: ?boolean,
+    orgunitScope: ?boolean,
+    pattern: ?string,
 }
 
 export type CachedProgramTrackedEntityAttribute = {
@@ -93,7 +95,7 @@ export type CachedProgramStage = {
     programStageDataElements: ?Array<CachedProgramStageDataElement>,
     formType: string,
     dataEntryForm: ?CachedDataEntryForm,
-    featureType: string,
+    featureType: ?string,
     validationStrategy: string,
 };
 
@@ -152,6 +154,7 @@ export type CachedProgram = {
     incidentDateLabel: ?string,
     enrollmentDateLabel: ?string,
     dataEntryForm: ?CachedDataEntryForm,
+    featureType: ?string,
 };
 
 export type CachedProgramStageDataElementsAsObject = {

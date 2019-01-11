@@ -103,6 +103,7 @@ type Props = {
         itemId: string,
     ) => void,
     dataEntrySections?: { [string]: {name: string, placement: $Values<typeof placements>}},
+    dataEntryFieldRef: any,
     onAddNote?: ?Function,
     onAddRelationship?: ?Function,
 };
@@ -232,6 +233,7 @@ class DataEntry extends React.Component<Props> {
             dataEntryOutputs,
             onAddNote,
             onAddRelationship,
+            dataEntryFieldRef,
             ...passOnProps } = this.props;
 
         if (!itemId) {

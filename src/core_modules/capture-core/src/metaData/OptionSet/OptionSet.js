@@ -35,7 +35,7 @@ export default class OptionSet {
         this._options = !options ? [] : options.reduce((accOptions: Array<Option>, currentOption: Option) => {
             if (currentOption.value || currentOption.value === false || currentOption.value === 0) {
                 currentOption.value = onConvert && dataElement ?
-                    onConvert(dataElement.type, currentOption.value, dataElement) :
+                    onConvert(currentOption.value, dataElement.type, dataElement) :
                     currentOption.value;
                 accOptions.push(currentOption);
             } else {

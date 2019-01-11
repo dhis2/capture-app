@@ -264,9 +264,10 @@ const buildNotesSettingsFn = () => {
     const notesSettings = (props: Object) => ({
         component: noteComponent,
         componentProps: createComponentProps(props, {
+            id: 'comments',
             label: 'Comments',
             onAddNote: props.onAddNote,
-            id: props.id,
+            dataEntryId: props.id,
             addNoteDisabled: !props.formFoundation.access.data.write,
         }),
         propName: 'note',

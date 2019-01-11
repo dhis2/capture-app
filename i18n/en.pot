@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-01-07T13:47:02.390Z\n"
-"PO-Revision-Date: 2019-01-07T13:47:02.390Z\n"
+"POT-Creation-Date: 2019-01-10T08:09:23.015Z\n"
+"PO-Revision-Date: 2019-01-10T08:09:23.015Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -81,9 +81,6 @@ msgid "Abort"
 msgstr ""
 
 msgid "Your data is uploading. Please wait untill this message disappears"
-msgstr ""
-
-msgid "No write access"
 msgstr ""
 
 msgid "Save"
@@ -216,6 +213,9 @@ msgid "could not be updated"
 msgstr ""
 
 msgid "Please add or cancel comment before saving the event"
+msgstr ""
+
+msgid "No write access"
 msgstr ""
 
 msgid "Show all events"

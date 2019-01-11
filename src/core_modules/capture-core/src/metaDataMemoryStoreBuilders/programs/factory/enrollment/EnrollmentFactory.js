@@ -9,6 +9,7 @@ import type {
     CachedTrackedEntityAttribute,
 } from '../../../../storageControllers/cache.types';
 import { RenderFoundation, Section, Enrollment, CustomForm, TrackedEntityType } from '../../../../metaData';
+import capitalizeFirstLetter from '../../../../utils/string/capitalizeFirstLetter';
 import DataElementFactory from './DataElementFactory';
 import errorCreator from '../../../../utils/errorCreator';
 
@@ -24,6 +25,13 @@ class EnrollmentFactory {
         if (cachedProgram.incidentDateLabel) {
             enrollment.incidentDateLabel = cachedProgram.incidentDateLabel;
         }
+    }
+
+    static _getFeatureType(cachedFeatureType: ?string) {
+        return cachedFeatureType ?
+            capitalizeFirstLetter(cachedFeatureType.toLowerCase())
+            :
+            'None';
     }
 
     locale: ?string;
@@ -63,7 +71,9 @@ class EnrollmentFactory {
     async _buildEnrollmentForm(
         cachedProgram: CachedProgram,
     ) {
-        const enrollmentForm = new RenderFoundation();
+        const enrollmentForm = new RenderFoundation((_this) => {
+            _this.featureType = EnrollmentFactory._getFeatureType(cachedProgram.featureType);
+        });
         let section;
         if (cachedProgram.programTrackedEntityAttributes && cachedProgram.programTrackedEntityAttributes.length > 0) {
             section = await this._buildSection(cachedProgram.programTrackedEntityAttributes);

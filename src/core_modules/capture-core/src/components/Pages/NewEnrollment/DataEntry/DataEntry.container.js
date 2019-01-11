@@ -1,5 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
+import { RenderFoundation } from '../../../../metaData';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import DataEntry from './DataEntry.component';

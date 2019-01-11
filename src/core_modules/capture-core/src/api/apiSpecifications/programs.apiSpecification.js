@@ -154,6 +154,7 @@ export default new ApiSpecification((_this) => {
             enrollmentDateLabel: d2Program.enrollmentDateLabel,
             incidentDateLabel: d2Program.incidentDateLabel,
             dataEntryForm: d2Program.dataEntryForm,
+            featureType: d2Program.featureType,
         }));
 
         return programs;

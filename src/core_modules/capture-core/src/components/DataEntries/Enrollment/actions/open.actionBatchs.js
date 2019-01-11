@@ -25,7 +25,8 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
         validatorContainers: getIncidentDateValidatorContainer(),
     },
     {
-        id: 'geometry',
+        clientId: 'geometry',
+        dataEntryId: 'geometry',
         onConvertOut: convertGeometryOut,
     },
 ];

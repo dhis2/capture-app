@@ -20,12 +20,11 @@ export const requestSaveNewEnrollmentAndReturnToMainPage =
         );
 
 export const startSaveNewEnrollmentAfterReturnedToMainPage =
-    (serverData: Object, selections: Object) => {
-        const actionType = actionTypes.START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE;
-        return actionCreator(actionType)({ selections }, {
+    (serverData: Object, selections: Object) =>
+        actionCreator(actionTypes.START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE)({ selections }, {
             offline: {
                 effect: {
-                    url: 'events',
+                    url: 'trackedEntityInstances',
                     method: methods.POST,
                     data: serverData,
                 },
@@ -33,4 +32,3 @@ export const startSaveNewEnrollmentAfterReturnedToMainPage =
                 rollback: { type: actionTypes.ENROLLMENT_SAVE_FAILED, meta: { selections } },
             },
         });
-    };

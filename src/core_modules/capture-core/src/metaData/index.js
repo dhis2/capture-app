@@ -1,7 +1,12 @@
 // @flow
 export { Access } from './Access';
 export { Category, CategoryCombination } from './CategoryCombinations';
-export { DataElement, elementTypes as dataElementTypes } from './DataElement';
+export {
+    DataElement,
+    elementTypes as dataElementTypes,
+    Unique as DataElementUnique,
+    uniqueScope as dataElementUniqueScope,
+} from './DataElement';
 export { Icon } from './Icon';
 export {
     Option,

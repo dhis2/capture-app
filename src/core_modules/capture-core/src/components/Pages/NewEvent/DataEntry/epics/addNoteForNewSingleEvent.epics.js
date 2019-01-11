@@ -23,7 +23,7 @@ export const addNoteForNewSingleEventEpic = (action$: InputObservable) =>
             const note = {
                 value: payload.note,
                 storedBy: userName,
-                storedDate: convertListValue(elementTypes.DATETIME, storedDate),
+                storedDate: convertListValue(storedDate, elementTypes.DATETIME),
                 clientId: uuid(),
             };
 
