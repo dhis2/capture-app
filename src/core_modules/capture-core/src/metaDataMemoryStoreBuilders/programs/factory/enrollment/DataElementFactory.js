@@ -18,6 +18,7 @@ import { OptionSetFactory } from '../../../common/factory';
 import errorCreator from '../../../../utils/errorCreator';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
 import { getApi } from '../../../../d2/d2Instance';
+import { timeout } from 'rxjs/operator/timeout';
 
 class DataElementFactory {
     static translationPropertyNames = {
@@ -110,6 +111,12 @@ class DataElementFactory {
                         convertClientToServer,
                     )(value, cachedAttribute.valueType);
                     let requestPromise;
+                    return new Promise((r, rej) => {
+                        setTimeout(() => {
+                            r(true);
+                        }, 10000);
+                    });
+
                     if (_this.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
                         const orgUnitId = contextProps.orgUnitId;
                         requestPromise = getApi()

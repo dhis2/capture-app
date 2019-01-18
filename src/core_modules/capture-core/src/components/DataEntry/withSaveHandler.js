@@ -35,6 +35,8 @@ type Props = {
     id: string,
     warnings: ?Array<{id: string, warning: string }>,
     hasGeneralErrors: ?boolean,
+    onIsValidating: (innerAction: ReduxAction<any, any>) => void,
+    onFieldsValidated: (innerAction: ReduxAction<any, any>) => void,
 };
 
 type IsCompletingFn = (props: Props) => boolean;
@@ -198,7 +200,12 @@ const getSaveHandler = (
             if (AsyncFieldHandler.hasPromises(this.props.id, this.props.itemId)) {
                 this.showWaitForUploadPopup(saveType);
             } else {
-                this.props.onSave(this.props.itemId, this.props.id, onGetFormFoundation ? onGetFormFoundation(this.props) : this.props.formFoundation, saveType);
+                this.props.onSave(
+                    this.props.itemId,
+                    this.props.id,
+                    onGetFormFoundation ? onGetFormFoundation(this.props) : this.props.formFoundation,
+                    saveType,
+                );
             }
         }
 
@@ -236,6 +243,30 @@ const getSaveHandler = (
             this.dataEntryFieldInstances.set(id, dataEntryFieldInstance);
         }
 
+        handleIsValidating = (
+            elementId: string,
+            formBuilderId: string,
+            onGetCompletePromise: Promise<any>,
+            innerAction: ReduxAction<any, any>,
+        ) => {
+            const dataEntryKey = getDataEntryKey(this.props.id, this.props.itemId);
+            AsyncFieldHandler.setPromise(dataEntryKey, onGetCompletePromise);
+            this.props.onIsValidating(innerAction);
+        }
+
+        handleFieldsValidated = (
+            formBuilderId: string,
+            promisesForIsValidating: Array<Promise<any>>,
+            innerAction: ReduxAction<any, any>,
+        ) => {
+            const dataEntryKey = getDataEntryKey(this.props.id, this.props.itemId);
+            promisesForIsValidating
+                .forEach((promise) => {
+                    AsyncFieldHandler.removePromise(dataEntryKey, promise);
+                });
+            this.props.onFieldsValidated(innerAction);
+        }
+
         render() {
             const {
                 itemId,
@@ -244,6 +275,8 @@ const getSaveHandler = (
                 onSaveAbort,
                 warnings,
                 hasGeneralErrors,
+                onIsValidating,
+                onFieldsValidated,
                 ...passOnProps
             } = this.props;
 
@@ -260,6 +293,8 @@ const getSaveHandler = (
                         formRef={this.setFormInstance}
                         dataEntryFieldRef={this.setDataEntryFieldInstance}
                         onSave={saveType => this.handleSaveAttempt(saveType)}
+                        onIsValidating={this.handleIsValidating}
+                        onFieldsValidated={this.handleFieldsValidated}
                         {...filteredProps}
                     />
                     <Dialog
@@ -331,6 +366,16 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
     onSaveAbort: (itemId: string, id: string) => {
         dispatch(saveAbort(itemId, id));
+    },
+    onIsValidating: (
+        innerAction: ReduxAction<any, any>,
+    ) => {
+        dispatch(innerAction);
+    },
+    onFieldsValidated: (
+        innerAction: ReduxAction<any, any>,
+    ) => {
+        dispatch(innerAction);
     },
 });
 

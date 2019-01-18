@@ -51,7 +51,7 @@ type Props = {
     formHorizontal: boolean,
     fieldOptions?: ?Object,
     customForm: MetadataCustomForm,
-    validationStrategy: $Values<typeof validationStrategies>
+    validationStrategy: $Values<typeof validationStrategies>,
 };
 
 class D2SectionFields extends Component<Props> {
@@ -154,6 +154,10 @@ class D2SectionFields extends Component<Props> {
 
     handleUpdateFieldAsync = (fieldId: string, fieldLabel: string, formBuilderId: string, callback: Function) => {
         this.props.onUpdateFieldAsync(fieldId, fieldLabel, formBuilderId, this.props.formId, callback);
+    }
+
+    handleIsValidatingAsync = (elementId: string, formBuilderId: string) => {
+        // this.props.
     }
 
     buildRulesCompulsoryErrors() {

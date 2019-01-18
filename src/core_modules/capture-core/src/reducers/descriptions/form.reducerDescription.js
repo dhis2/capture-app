@@ -74,7 +74,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
         const payload = action.payload;
 
         newState[payload.id] = Object.keys(payload.fieldsUI).reduce((accSectionFieldsUI, key) => {
-            accSectionFieldsUI[key] = { ...accSectionFieldsUI[key], ...payload.fieldsUI[key] };
+            accSectionFieldsUI[key] = { ...accSectionFieldsUI[key], ...payload.fieldsUI[key], validating: false };
             return accSectionFieldsUI;
         }, { ...newState[payload.id] });
         return newState;
@@ -84,7 +84,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
         const payload = action.payload;
         newState[payload.sectionId] = { ...newState[payload.sectionId] };
         const sectionFieldsUI = newState[payload.sectionId];
-        sectionFieldsUI[payload.elementId] = { ...sectionFieldsUI[payload.elementId], ...payload.uiState, modified: true };
+        sectionFieldsUI[payload.elementId] = { ...sectionFieldsUI[payload.elementId], ...payload.uiState, modified: true, validating: false };
         return newState;
     },
     [dataEntryActionTypes.UPDATE_FORM_FIELD]: (state, action) => {
@@ -92,7 +92,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
         const payload = action.payload;
         newState[payload.formBuilderId] = { ...newState[payload.formBuilderId] };
         const formBuilderFieldsUI = newState[payload.formBuilderId];
-        formBuilderFieldsUI[payload.elementId] = { ...formBuilderFieldsUI[payload.elementId], ...payload.uiState, modified: true };
+        formBuilderFieldsUI[payload.elementId] = { ...formBuilderFieldsUI[payload.elementId], ...payload.uiState, modified: true, validating: false };
         return newState;
     },
     [formBuilderActionTypes.UPDATE_FIELD_UI_ONLY]: (state, action) => {
@@ -102,5 +102,18 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
         const sectionFieldsUI = newState[payload.sectionId];
         sectionFieldsUI[payload.elementId] = { ...sectionFieldsUI[payload.elementId], ...payload.uiState };
         return newState;
+    },
+    [formBuilderActionTypes.FIELD_IS_VALIDATING]: (state, action) => {
+        const { fieldId, formBuilderId } = action.payload;
+        return {
+            ...state,
+            [formBuilderId]: {
+                ...state[formBuilderId],
+                [fieldId]: {
+                    ...(state[formBuilderId] && state[formBuilderId][fieldId]),
+                    validating: true,
+                },
+            },
+        };
     },
 }, 'formsSectionsFieldsUI');

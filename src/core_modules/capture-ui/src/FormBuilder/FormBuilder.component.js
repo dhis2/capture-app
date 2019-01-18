@@ -39,22 +39,31 @@ type RenderFieldFn = (
     onGetContainerProps?: ?GetContainerPropsFn
 ) => React.Node
 
+type IsValidatingInnerFn = (
+    fieldId: string,
+    formBuilderId: string,
+    onGetCompleteStatus: Promise<any>,
+    onIsValidating: ?Function) => void;
+
 type Props = {
     id: string,
     fields: Array<FieldConfig>,
     values: { [id: string]: any },
     fieldsUI: { [id: string]: FieldUI },
     onUpdateFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, callback: Function) => void,
-    onUpdateField: (value: any, uiState: FieldUI, fieldId: string, formBuilderId: string) => void,
+    onUpdateField: (value: any, uiState: FieldUI, fieldId: string, formBuilderId: string, promiseForIsValidating: Promise<any>) => void,
     onUpdateFieldUIOnly: (uiState: FieldUI, fieldId: string, formBuilderId: string) => void,
-    onFieldsValidated: (fieldsUI: { [id: string]: FieldUI }, formBuilderId: string) => void,
+    onFieldsValidated: ?Function,
+    onFieldsValidatedInner: (fieldsUI: { [id: string]: FieldUI }, formBuilderId: string, promisesForIsValidating: Array<Promise<any>>, onFieldsValidated: ?Function) => void,
     validationAttempted?: ?boolean,
     validateIfNoUIData?: ?boolean,
     formHorizontal: ?boolean,
     children?: ?(RenderFieldFn, fields: Array<FieldConfig>) => React.Node,
     onRenderDivider?: ?RenderDividerFn,
     onGetContainerProps?: ?GetContainerPropsFn,
-    onGetValidationContext: () => ?Object,
+    onGetValidationContext: ?() => ?Object,
+    onIsValidating: ?Function,
+    onIsValidatingInner: IsValidatingInnerFn,
 };
 
 type FieldCommitOptions = {
@@ -66,6 +75,7 @@ class FormBuilder extends React.Component<Props> {
         field: FieldConfig,
         value: any,
         validationContext: ?Object,
+        onIsValidatingInternal: ?Function,
     ): Promise<{ valid: boolean, errorMessage?: ?string, errorType?: ?string }> {
         if (!field.validators || field.validators.length === 0) {
             return {
@@ -73,12 +83,21 @@ class FormBuilder extends React.Component<Props> {
             };
         }
 
+        let isValidating = false;
+        const triggerValidatingInProgress = () => {
+            if (!isValidating) {
+                onIsValidatingInternal && onIsValidatingInternal();
+                isValidating = true;
+            }
+        };
+
         const validatorResult = await field.validators
             .reduce(async (passPromise, currentValidator) => {
                 const pass = await passPromise;
                 if (pass === true) {
                     let result = currentValidator.validator(value, validationContext);
                     if (result instanceof Promise) {
+                        triggerValidatingInProgress();
                         result = await result;
                     }
 
@@ -140,6 +159,80 @@ class FormBuilder extends React.Component<Props> {
         }, asyncUIState);
     }
 
+    static executeValidateAllFields(
+        props: Props,
+    ) {
+        const { id, fields, values, onGetValidationContext, onIsValidatingInner, onIsValidating } = props;
+        const validationCompletePromiseContainers = [];
+        const validationContext = onGetValidationContext && onGetValidationContext();
+        const validationPromises = fields
+            .map(async (field) => {
+                const handleIsValidatingInternal = () => {
+                    let fieldValidatingCompletePromiseResolver;
+                    const fieldValidatingCompletePromise: Promise<any> = new Promise((resolve) => {
+                        fieldValidatingCompletePromiseResolver = resolve;
+                    });
+
+                    validationCompletePromiseContainers.push({
+                        promise: fieldValidatingCompletePromise,
+                        resolve: fieldValidatingCompletePromiseResolver,
+                    });
+
+                    onIsValidatingInner(
+                        field.id,
+                        id,
+                        fieldValidatingCompletePromise,
+                        onIsValidating,
+                    );
+                };
+
+                const validationData = await FormBuilder.validateField(
+                    field,
+                    values[field.id],
+                    validationContext,
+                    handleIsValidatingInternal,
+                );
+                return {
+                    id: field.id,
+                    validationData,
+                };
+            });
+
+        return Promise
+            .all(validationPromises)
+            .then(validationContainers => validationContainers
+                .reduce((accFieldsUI, container) => {
+                    accFieldsUI[container.id] = container.validationData;
+                    return accFieldsUI;
+                }, {}),
+            )
+            .then(validationData => ({
+                validationData,
+                validationCompletePromiseContainers,
+            }));
+    }
+
+    static validateAllFields(
+        props: Props,
+    ) {
+        FormBuilder.executeValidateAllFields(props)
+            .then((validationResult) => {
+                const { validationData, validationCompletePromiseContainers } = validationResult;
+                props.onFieldsValidatedInner(
+                    validationData,
+                    props.id,
+                    validationCompletePromiseContainers
+                        .map(container => container.promise),
+                    props.onFieldsValidated,
+                );
+                validationCompletePromiseContainers
+                    .map(container => container.resolve)
+                    .forEach((resolve) => {
+                        resolve();
+                    });
+            });
+    }
+
     fieldInstances: Map<string, any>;
     asyncUIState: { [id: string]: FieldUI };
 
@@ -149,10 +242,7 @@ class FormBuilder extends React.Component<Props> {
         this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
 
         if (this.props.validateIfNoUIData) {
-            this.validateAllFields()
-                .then((validationResult) => {
-                    this.props.onFieldsValidated(validationResult, this.props.id);
-                });
+            FormBuilder.validateAllFields(this.props);
         }
     }
 
@@ -167,35 +257,8 @@ class FormBuilder extends React.Component<Props> {
         if (this.props.validateIfNoUIData &&
             (newProps.id !== this.props.id || newProps.fields.length !== Object.keys(newProps.fieldsUI).length)
         ) {
-            this.validateAllFields()
-                .then((validationResult) => {
-                    this.props.onFieldsValidated(validationResult, this.props.id);
-                });
+            FormBuilder.validateAllFields(newProps);
         }
-    }
-
-    validateAllFields() {
-        const fields = this.props.fields;
-        const values = this.props.values;
-
-        const validationContext = this.props.onGetValidationContext();
-        const validationPromises = fields
-            .map(async (field) => {
-                const validationData = await FormBuilder.validateField(field, values[field.id], validationContext);
-                return {
-                    id: field.id,
-                    validationData,
-                };
-            });
-
-        return Promise
-            .all(validationPromises)
-            .then(validationContainers => validationContainers
-                .reduce((accFieldsUI, container) => {
-                    accFieldsUI[container.id] = container.validationData;
-                    return accFieldsUI;
-                }, {}),
-            );
     }
 
     /**
@@ -225,23 +288,52 @@ class FormBuilder extends React.Component<Props> {
     }
 
     async commitFieldUpdate(fieldId: string, value: any, options?: ?FieldCommitOptions) {
+        const {
+            onUpdateFieldUIOnly,
+            onUpdateField,
+            onGetValidationContext,
+            id,
+            onIsValidatingInner,
+            onIsValidating,
+        } = this.props;
         const field = this.getFieldProp(fieldId);
         const touched = options && isDefined(options.touched) ? options.touched : true;
 
         if (!this.hasCommitedValueChanged(field, value)) {
-            this.props.onUpdateFieldUIOnly({ touched }, fieldId, this.props.id);
+            onUpdateFieldUIOnly({ touched }, fieldId, id);
             return;
         }
 
-        const { valid, errorMessage, errorType } =
-            await FormBuilder.validateField(field, value, this.props.onGetValidationContext());
+        let resolveUpdateCompletePromise;
+        const updateCompletePromise = new Promise((resolve) => {
+            resolveUpdateCompletePromise = resolve;
+        });
+        const handleIsValidatingInternal = () => {
+            onIsValidatingInner(fieldId, id, updateCompletePromise, onIsValidating);
+        };
 
-        this.props.onUpdateField(value, {
-            valid,
-            touched,
-            errorMessage,
-            errorType,
-        }, fieldId, this.props.id);
+        const updatePromise = FormBuilder.validateField(
+            field,
+            value,
+            onGetValidationContext && onGetValidationContext(),
+            handleIsValidatingInternal,
+        )
+            .then(({ valid, errorMessage, errorType }) => {
+                onUpdateField(
+                    value,
+                    {
+                        valid,
+                        touched,
+                        errorMessage,
+                        errorType,
+                    },
+                    fieldId,
+                    id,
+                    updateCompletePromise,
+                );
+                resolveUpdateCompletePromise();
+            });
+        await updatePromise;
     }
 
     handleUpdateAsyncState = (fieldId: string, asyncStateToAdd: Object) => {
