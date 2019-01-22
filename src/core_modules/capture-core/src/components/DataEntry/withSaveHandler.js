@@ -22,8 +22,6 @@ import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 import AsyncFieldHandler from './asyncFields/AsyncFieldHandler';
 
-import { D2Form } from '../D2Form/D2Form.component';
-
 type Props = {
     classes: Object,
     formFoundation: RenderFoundation,
@@ -37,6 +35,7 @@ type Props = {
     hasGeneralErrors: ?boolean,
     onIsValidating: (innerAction: ReduxAction<any, any>) => void,
     onFieldsValidated: (innerAction: ReduxAction<any, any>) => void,
+    onUpdateFormField: (innerAction: ReduxAction<any, any>) => void,
 };
 
 type IsCompletingFn = (props: Props) => boolean;
@@ -45,7 +44,7 @@ type GetFormFoundationFn = (props: Object) => RenderFoundation;
 
 type State = {
     warningDialogOpen: boolean,
-    waitForUploadDialogOpen: boolean,
+    waitForPromisesDialogOpen: boolean,
     saveType?: ?string,
 };
 
@@ -61,21 +60,17 @@ const getSaveHandler = (
         };
 
         innerInstance: any;
-        formInstance: D2Form;
+        formInstance: any;
         dataEntryFieldInstances: Map<string, any>;
-        handleSaveAttempt: (saveType?: ?string) => void;
+        handleSaveAttemptAsync: (saveType?: ?string) => void;
         handleCloseDialog: () => void;
         handleSaveDialog: () => void;
         constructor(props: Props) {
             super(props);
-            this.handleSaveAttempt = this.handleSaveAttempt.bind(this);
-            this.handleCloseDialog = this.handleCloseDialog.bind(this);
-            this.handleSaveDialog = this.handleSaveDialog.bind(this);
-
             this.dataEntryFieldInstances = new Map();
             this.state = {
                 warningDialogOpen: false,
-                waitForUploadDialogOpen: false,
+                waitForPromisesDialogOpen: false,
             };
         }
 
@@ -103,17 +98,10 @@ const getSaveHandler = (
             this.setState({ warningDialogOpen: true, saveType });
         }
 
-        showWaitForUploadPopup = (saveType?: ?string) => {
-            this.setState({ waitForUploadDialogOpen: true });
-            AsyncFieldHandler.getDataEntryItemPromise(this.props.id, this.props.itemId).then(() => {
-                this.setState({ waitForUploadDialogOpen: false });
-                this.props.onSave(
-                    this.props.itemId,
-                    this.props.id,
-                    onGetFormFoundation ? onGetFormFoundation(this.props) : this.props.formFoundation,
-                    saveType,
-                );
-            });
+        async waitForPromisesWithPopupAsync() {
+            this.setState({ waitForPromisesDialogOpen: true });
+            await AsyncFieldHandler.getDataEntryItemPromise(this.props.id, this.props.itemId);
+            this.setState({ waitForPromisesDialogOpen: false });
         }
 
         validateGeneralErrorsFromRules(isCompleting: boolean) {
@@ -154,12 +142,9 @@ const getSaveHandler = (
             };
         }
 
-        handleSaveAttempt(saveType?: ?string) {
-            if (!this.innerInstance) {
-                log.error(
-                    errorCreator(
-                        SaveHandlerHOC.errorMessages.INNER_INSTANCE_NOT_FOUND)({ SaveButtonBuilder: this }));
-                return;
+        handleSaveAttemptAsync = async (saveType?: ?string) => {
+            if (AsyncFieldHandler.hasPromises(this.props.id, this.props.itemId)) {
+                await this.waitForPromisesWithPopupAsync();
             }
 
             const isDataEntryFieldsValid = this.validateDataEntryFields();
@@ -186,27 +171,23 @@ const getSaveHandler = (
             }
         }
 
-        handleCloseDialog() {
+        handleCloseDialog = () => {
             this.props.onSaveAbort(this.props.itemId, this.props.id);
             this.setState({ warningDialogOpen: false });
         }
 
-        handleSaveDialog() {
+        handleSaveDialog = () => {
             this.handleSave(this.state.saveType);
             this.setState({ warningDialogOpen: false });
         }
 
         handleSave = (saveType?: ?string) => {
-            if (AsyncFieldHandler.hasPromises(this.props.id, this.props.itemId)) {
-                this.showWaitForUploadPopup(saveType);
-            } else {
-                this.props.onSave(
-                    this.props.itemId,
-                    this.props.id,
-                    onGetFormFoundation ? onGetFormFoundation(this.props) : this.props.formFoundation,
-                    saveType,
-                );
-            }
+            this.props.onSave(
+                this.props.itemId,
+                this.props.id,
+                onGetFormFoundation ? onGetFormFoundation(this.props) : this.props.formFoundation,
+                saveType,
+            );
         }
 
         getDialogWarningContents() {
@@ -231,7 +212,7 @@ const getSaveHandler = (
 
         getDialogWaitForUploadContents = () => (
             <div>
-                {i18n.t('Your data is uploading. Please wait untill this message disappears')}
+                {i18n.t('Some operations are still runnning. Please wait..')}
             </div>
         );
 
@@ -246,11 +227,11 @@ const getSaveHandler = (
         handleIsValidating = (
             elementId: string,
             formBuilderId: string,
-            onGetCompletePromise: Promise<any>,
+            validatingPromise: Promise<any>,
             innerAction: ReduxAction<any, any>,
         ) => {
             const dataEntryKey = getDataEntryKey(this.props.id, this.props.itemId);
-            AsyncFieldHandler.setPromise(dataEntryKey, onGetCompletePromise);
+            AsyncFieldHandler.setPromise(dataEntryKey, validatingPromise);
             this.props.onIsValidating(innerAction);
         }
 
@@ -267,6 +248,20 @@ const getSaveHandler = (
             this.props.onFieldsValidated(innerAction);
         }
 
+        handleUpdateField = (
+            innerAction: ReduxAction<any, any>,
+            updateCompletePromise: ?Promise<any>,
+        ) => {
+            const dataEntryKey = getDataEntryKey(this.props.id, this.props.itemId);
+            updateCompletePromise && AsyncFieldHandler.removePromise(dataEntryKey, updateCompletePromise);
+            this.props.onUpdateFormField(innerAction);
+        }
+
+        handleValidatingPromiseComplete = (validatingPromise: Promise<any>) => {
+            const dataEntryKey = getDataEntryKey(this.props.id, this.props.itemId);
+            AsyncFieldHandler.removePromise(dataEntryKey, validatingPromise);
+        }
+
         render() {
             const {
                 itemId,
@@ -277,6 +272,7 @@ const getSaveHandler = (
                 hasGeneralErrors,
                 onIsValidating,
                 onFieldsValidated,
+                onUpdateFormField,
                 ...passOnProps
             } = this.props;
 
@@ -292,9 +288,11 @@ const getSaveHandler = (
                         ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                         formRef={this.setFormInstance}
                         dataEntryFieldRef={this.setDataEntryFieldInstance}
-                        onSave={saveType => this.handleSaveAttempt(saveType)}
+                        onSave={saveType => this.handleSaveAttemptAsync(saveType)}
                         onIsValidating={this.handleIsValidating}
                         onFieldsValidated={this.handleFieldsValidated}
+                        onUpdateFormField={this.handleUpdateField}
+                        onValidatingPromiseComplete={this.handleValidatingPromiseComplete}
                         {...filteredProps}
                     />
                     <Dialog
@@ -318,10 +316,10 @@ const getSaveHandler = (
                             </Button> </DialogActions>
                     </Dialog>
                     <Dialog
-                        open={this.state.waitForUploadDialogOpen}
+                        open={this.state.waitForPromisesDialogOpen}
                     >
                         <DialogTitle>
-                            {i18n.t('Uploading data')}
+                            {i18n.t('Operations running')}
                         </DialogTitle>
                         <DialogContent>
                             <DialogContentText>
@@ -377,7 +375,21 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     ) => {
         dispatch(innerAction);
     },
+    onUpdateFormField: (
+        innerAction: ReduxAction<any, any>,
+    ) => {
+        dispatch(innerAction);
+    },
 });
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+    const defaultMergedProps = Object.assign({}, ownProps, stateProps, dispatchProps);
+
+    const mergedProps = ownProps.onUpdateFormField ?
+        { ...defaultMergedProps, onUpdateFormField: ownProps.onUpdateFormField } :
+        defaultMergedProps;
+    return mergedProps;
+};
 
 export default (
     options?: {
@@ -385,5 +397,13 @@ export default (
         onFilterProps?: FilterPropsFn,
         onGetFormFoundation?: GetFormFoundationFn }) =>
     (InnerComponent: React.ComponentType<any>) =>
+        // $FlowFixMe
         connect(
-            mapStateToProps, mapDispatchToProps, null, { withRef: true })(getSaveHandler(InnerComponent, options && options.onIsCompleting, options && options.onFilterProps, options && options.onGetFormFoundation));
+            mapStateToProps, mapDispatchToProps, mergeProps, { withRef: true })(
+            getSaveHandler(
+                InnerComponent,
+                options && options.onIsCompleting,
+                options && options.onFilterProps,
+                options && options.onGetFormFoundation,
+            ),
+        );

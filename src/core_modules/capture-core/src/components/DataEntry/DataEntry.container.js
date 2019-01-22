@@ -10,22 +10,24 @@ const mapStateToProps = (state: Object, props: { id: string }) => ({
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onUpdateFieldInner: (
+        dataEntryId: string,
+        itemId: string,
+        onUpdateField: ?(innerAction: ReduxAction<any, any>, promise?: ?Promise<any>) => void,
         value: any,
         uiState: Object,
         elementId: string,
         formBuilderId: string,
         formId: string,
-        dataEntryId: string,
-        itemId: string,
-        onUpdateField: ?(innerAction: ReduxAction<any, any>) => void) => {
+        updateCompletePromise: ?Promise<any>,
+    ) => {
         const updateAction = updateFormField(value, uiState, elementId, formBuilderId, formId, dataEntryId, itemId);
 
         if (onUpdateField) {
-            onUpdateField(updateAction);
+            onUpdateField(updateAction, updateCompletePromise);
         } else {
             dispatch(updateAction);
         }
     },
 });
-
+// $FlowFixMe
 export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(DataEntry);

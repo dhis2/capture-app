@@ -44,7 +44,7 @@ type Props = {
     rulesHiddenFields: RulesHiddenFields,
     rulesCompulsoryFields: RulesCompulsoryFields,
     rulesDisabledFields: RulesDisabledFields,
-    onUpdateField: (value: any, uiState: Object, elementId: string, formBuilderId: string, formId: string) => void,
+    onUpdateField: (value: any, uiState: Object, elementId: string, formBuilderId: string, formId: string, updateCompletePromise: ?Promise<any>) => void,
     onUpdateFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, formId: string, callback: Function) => void,
     formId: string,
     formBuilderId: string,
@@ -148,16 +148,18 @@ class D2SectionFields extends Component<Props> {
         return invalidFields;
     }
 
-    handleUpdateField(value: any, uiState: Object, elementId: string, formBuilderId: string) {
-        this.props.onUpdateField(value, uiState, elementId, formBuilderId, this.props.formId);
+    handleUpdateField(
+        value: any,
+        uiState: Object,
+        elementId: string,
+        formBuilderId: string,
+        updateCompletePromise: ?Promise<any>,
+    ) {
+        this.props.onUpdateField(value, uiState, elementId, formBuilderId, this.props.formId, updateCompletePromise);
     }
 
     handleUpdateFieldAsync = (fieldId: string, fieldLabel: string, formBuilderId: string, callback: Function) => {
         this.props.onUpdateFieldAsync(fieldId, fieldLabel, formBuilderId, this.props.formId, callback);
-    }
-
-    handleIsValidatingAsync = (elementId: string, formBuilderId: string) => {
-        // this.props.
     }
 
     buildRulesCompulsoryErrors() {

@@ -122,14 +122,14 @@ class DataEntry extends React.Component<Props> {
         FORM_FOUNDATION_MISSING: 'form foundation missing. see log for details',
     };
 
-    formInstance: ?D2Form;
+    formInstance: ?any;
 
     getWrappedInstance() {
         return this.formInstance;
     }
 
     handleUpdateField = (...args) => {
-        this.props.onUpdateFieldInner(...args, this.props.id, this.props.itemId, this.props.onUpdateFormField);
+        this.props.onUpdateFieldInner(this.props.id, this.props.itemId, this.props.onUpdateFormField, ...args);
     }
 
     getClasses = (): DirectionClasses => {
@@ -341,6 +341,7 @@ class DataEntry extends React.Component<Props> {
     }
 }
 
+// $FlowFixMe
 const StylesHOC = withStyles(styles)(DataEntry);
 
 type ContainerProps = {

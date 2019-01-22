@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-01-10T08:09:23.015Z\n"
-"PO-Revision-Date: 2019-01-10T08:09:23.015Z\n"
+"POT-Creation-Date: 2019-01-21T08:59:37.343Z\n"
+"PO-Revision-Date: 2019-01-21T08:59:37.343Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -18,6 +18,9 @@ msgid "Column"
 msgstr ""
 
 msgid "Invalid range"
+msgstr ""
+
+msgid "This value is validating"
 msgstr ""
 
 msgid "Area"
@@ -80,13 +83,13 @@ msgstr ""
 msgid "Abort"
 msgstr ""
 
-msgid "Your data is uploading. Please wait untill this message disappears"
+msgid "Some operations are still runnning. Please wait.."
 msgstr ""
 
 msgid "Save"
 msgstr ""
 
-msgid "Uploading data"
+msgid "Operations running"
 msgstr ""
 
 msgid "Sort"

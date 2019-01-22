@@ -7,8 +7,9 @@ import defaultClasses from './formBuilder.mod.css';
 
 
 export type ValidatorContainer = {
-    validator: (value: any) => boolean,
+    validator: (value: any, validationContext: ?Object) => boolean,
     message: string,
+    validatingMessage?: ?string,
     type?: ?string,
     async?: ?boolean,
 };
@@ -27,6 +28,7 @@ type FieldUI = {
     valid?: ?boolean,
     errorMessage?: ?string,
     errorType?: ?string,
+    validatingMessage?: ?string,
 };
 
 type RenderDividerFn = (index: number, fieldsCount: number, field: FieldConfig) => React.Node;
@@ -42,8 +44,11 @@ type RenderFieldFn = (
 type IsValidatingInnerFn = (
     fieldId: string,
     formBuilderId: string,
-    onGetCompleteStatus: Promise<any>,
-    onIsValidating: ?Function) => void;
+    validatingPromise: Promise<any>,
+    onIsValidating: ?Function,
+    message: ?string,
+    fieldUIUpdates: ?FieldUI,
+) => void;
 
 type Props = {
     id: string,
@@ -64,11 +69,14 @@ type Props = {
     onGetValidationContext: ?() => ?Object,
     onIsValidating: ?Function,
     onIsValidatingInner: IsValidatingInnerFn,
+    onValidatingPromiseComplete: (validatingPromise: Promise<any>) => void,
 };
 
 type FieldCommitOptions = {
     touched?: boolean,
 };
+
+type FieldsValidatingPromiseContainer = { [fieldId: string]: ?{ promise: Promise<any>, resolver: Function } };
 
 class FormBuilder extends React.Component<Props> {
     static async validateField(
@@ -84,9 +92,9 @@ class FormBuilder extends React.Component<Props> {
         }
 
         let isValidating = false;
-        const triggerValidatingInProgress = () => {
+        const triggerValidatingInProgress = (message: ?string) => {
             if (!isValidating) {
-                onIsValidatingInternal && onIsValidatingInternal();
+                onIsValidatingInternal && onIsValidatingInternal(message);
                 isValidating = true;
             }
         };
@@ -97,7 +105,7 @@ class FormBuilder extends React.Component<Props> {
                 if (pass === true) {
                     let result = currentValidator.validator(value, validationContext);
                     if (result instanceof Promise) {
-                        triggerValidatingInProgress();
+                        triggerValidatingInProgress(currentValidator.validatingMessage);
                         result = await result;
                     }
 
@@ -161,29 +169,57 @@ class FormBuilder extends React.Component<Props> {
 
     static executeValidateAllFields(
         props: Props,
+        fieldsValdatingPromiseContainer: FieldsValidatingPromiseContainer,
     ) {
-        const { id, fields, values, onGetValidationContext, onIsValidatingInner, onIsValidating } = props;
+        const {
+            id,
+            fields,
+            values,
+            onGetValidationContext,
+            onIsValidatingInner,
+            onIsValidating,
+            onValidatingPromiseComplete,
+        } = props;
         const validationCompletePromiseContainers = [];
         const validationContext = onGetValidationContext && onGetValidationContext();
         const validationPromises = fields
             .map(async (field) => {
-                const handleIsValidatingInternal = () => {
-                    let fieldValidatingCompletePromiseResolver;
-                    const fieldValidatingCompletePromise: Promise<any> = new Promise((resolve) => {
-                        fieldValidatingCompletePromiseResolver = resolve;
-                    });
+                let fieldValidatingCompletePromiseResolver;
+                const fieldValidatingCompletePromise: Promise<any> = new Promise((resolve: Function) => {
+                    fieldValidatingCompletePromiseResolver = resolve;
+                });
 
-                    validationCompletePromiseContainers.push({
-                        promise: fieldValidatingCompletePromise,
-                        resolve: fieldValidatingCompletePromiseResolver,
-                    });
+                // resolve previous field validating promise if there is any
+                const previousFieldValidatingPromiseContainer = fieldsValdatingPromiseContainer[field.id];
+                if (previousFieldValidatingPromiseContainer) {
+                    previousFieldValidatingPromiseContainer.resolver();
+                    onValidatingPromiseComplete(previousFieldValidatingPromiseContainer.promise);
+                }
 
-                    onIsValidatingInner(
-                        field.id,
-                        id,
-                        fieldValidatingCompletePromise,
-                        onIsValidating,
-                    );
+                // set active promise and resolver
+                fieldsValdatingPromiseContainer[field.id] = {
+                    promise: fieldValidatingCompletePromise,
+                    // $FlowFixMe
+                    resolver: fieldValidatingCompletePromiseResolver,
+                };
+
+                const handleIsValidatingInternal = (message: ?string) => {
+                    if (fieldValidatingCompletePromise === (
+                        fieldsValdatingPromiseContainer[field.id] &&
+                        fieldsValdatingPromiseContainer[field.id].promise)) {
+                        validationCompletePromiseContainers.push({
+                            promise: fieldValidatingCompletePromise,
+                            resolve: fieldValidatingCompletePromiseResolver,
+                        });
+
+                        onIsValidatingInner(
+                            field.id,
+                            id,
+                            fieldValidatingCompletePromise,
+                            onIsValidating,
+                            message,
+                        );
+                    }
                 };
 
                 const validationData = await FormBuilder.validateField(
@@ -214,8 +250,9 @@ class FormBuilder extends React.Component<Props> {
 
     static validateAllFields(
         props: Props,
+        fieldsValdatingPromiseContainer: FieldsValidatingPromiseContainer,
     ) {
-        FormBuilder.executeValidateAllFields(props)
+        FormBuilder.executeValidateAllFields(props, fieldsValdatingPromiseContainer)
             .then((validationResult) => {
                 const { validationData, validationCompletePromiseContainers } = validationResult;
                 props.onFieldsValidatedInner(
@@ -235,14 +272,16 @@ class FormBuilder extends React.Component<Props> {
 
     fieldInstances: Map<string, any>;
     asyncUIState: { [id: string]: FieldUI };
+    fieldsValdatingPromiseContainer: FieldsValidatingPromiseContainer;
 
     constructor(props: Props) {
         super(props);
         this.fieldInstances = new Map();
         this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
+        this.fieldsValdatingPromiseContainer = {};
 
         if (this.props.validateIfNoUIData) {
-            FormBuilder.validateAllFields(this.props);
+            FormBuilder.validateAllFields(this.props, this.fieldsValdatingPromiseContainer);
         }
     }
 
@@ -257,7 +296,7 @@ class FormBuilder extends React.Component<Props> {
         if (this.props.validateIfNoUIData &&
             (newProps.id !== this.props.id || newProps.fields.length !== Object.keys(newProps.fieldsUI).length)
         ) {
-            FormBuilder.validateAllFields(newProps);
+            FormBuilder.validateAllFields(newProps, this.fieldsValdatingPromiseContainer);
         }
     }
 
@@ -295,6 +334,7 @@ class FormBuilder extends React.Component<Props> {
             id,
             onIsValidatingInner,
             onIsValidating,
+            onValidatingPromiseComplete,
         } = this.props;
         const field = this.getFieldProp(fieldId);
         const touched = options && isDefined(options.touched) ? options.touched : true;
@@ -308,8 +348,37 @@ class FormBuilder extends React.Component<Props> {
         const updateCompletePromise = new Promise((resolve) => {
             resolveUpdateCompletePromise = resolve;
         });
-        const handleIsValidatingInternal = () => {
-            onIsValidatingInner(fieldId, id, updateCompletePromise, onIsValidating);
+
+        // resolve previous field validating promise if there is any
+        const previousFieldValidatingPromiseContainer = this.fieldsValdatingPromiseContainer[fieldId];
+        if (previousFieldValidatingPromiseContainer) {
+            previousFieldValidatingPromiseContainer.resolver();
+            onValidatingPromiseComplete(previousFieldValidatingPromiseContainer.promise);
+        }
+
+        // set active promise and resolver
+        this.fieldsValdatingPromiseContainer[fieldId] = {
+            promise: updateCompletePromise,
+            // $FlowFixMe
+            resolver: resolveUpdateCompletePromise,
+        };
+
+        const handleIsValidatingInternal = (message: ?string) => {
+            // is this still the last commit field update request
+            if (updateCompletePromise === (
+                this.fieldsValdatingPromiseContainer[fieldId] &&
+                this.fieldsValdatingPromiseContainer[fieldId].promise)) {
+                onIsValidatingInner(
+                    fieldId,
+                    id,
+                    updateCompletePromise,
+                    onIsValidating,
+                    message,
+                    {
+                        touched: true,
+                    },
+                );
+            }
         };
 
         const updatePromise = FormBuilder.validateField(
@@ -319,19 +388,25 @@ class FormBuilder extends React.Component<Props> {
             handleIsValidatingInternal,
         )
             .then(({ valid, errorMessage, errorType }) => {
-                onUpdateField(
-                    value,
-                    {
-                        valid,
-                        touched,
-                        errorMessage,
-                        errorType,
-                    },
-                    fieldId,
-                    id,
-                    updateCompletePromise,
-                );
-                resolveUpdateCompletePromise();
+                // is this still the last commit field update request
+                if (updateCompletePromise === (
+                    this.fieldsValdatingPromiseContainer[fieldId] &&
+                    this.fieldsValdatingPromiseContainer[fieldId].promise)) {
+                    onUpdateField(
+                        value,
+                        {
+                            valid,
+                            touched,
+                            errorMessage,
+                            errorType,
+                        },
+                        fieldId,
+                        id,
+                        updateCompletePromise,
+                    );
+                    resolveUpdateCompletePromise();
+                    this.fieldsValdatingPromiseContainer[fieldId] = null;
+                }
             });
         await updatePromise;
     }
@@ -406,6 +481,7 @@ class FormBuilder extends React.Component<Props> {
             validationAttempted,
             id,
             onFieldsValidated,
+            onFieldsValidatedInner,
             onUpdateField,
             onUpdateFieldAsync,
             onUpdateFieldUIOnly,
@@ -413,6 +489,9 @@ class FormBuilder extends React.Component<Props> {
             children,
             onRenderDivider: extractOnRenderDivider,
             onGetContainerProps: extractOnGetContainerProps,
+            onIsValidating,
+            onIsValidatingInner,
+            onGetValidationContext,
             ...passOnProps } = this.props;
 
         const props = field.props || {};
@@ -447,6 +526,7 @@ class FormBuilder extends React.Component<Props> {
                         errorMessage={fieldUI.errorMessage}
                         touched={fieldUI.touched}
                         validationAttempted={validationAttempted}
+                        validatingMessage={fieldUI.validatingMessage}
                         {...commitPropObject}
                         {...props}
                         {...passOnProps}
@@ -465,6 +545,7 @@ class FormBuilder extends React.Component<Props> {
         if (children) {
             return children(this.renderField, fields);
         }
+        // $FlowFixMe
         return fields.map(
             (field, index) =>
                 this.renderField(field, index, onRenderDivider, onGetContainerProps),

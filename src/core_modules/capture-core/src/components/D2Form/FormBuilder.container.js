@@ -27,12 +27,14 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onIsValidatingInner: (
         fieldId: string,
         formBuilderId: string,
-        onGetValidationPromise: Function,
-        onIsValidating: ?(fieldId: string, formBuilderId: string, validationPromise: Function, innerAction: ReduxAction<any, any>) => void,
+        validatingPromise: Promise<any>,
+        onIsValidating: ?(fieldId: string, formBuilderId: string, validationPromise: Promise<any>, innerAction: ReduxAction<any, any>) => void,
+        message: ?string,
+        fieldUIUpdates: ?Object,
     ) => {
-        const innerAction = fieldIsValidating(fieldId, formBuilderId);
+        const innerAction = fieldIsValidating(fieldId, formBuilderId, message, fieldUIUpdates);
         if (onIsValidating) {
-            onIsValidating(fieldId, formBuilderId, onGetValidationPromise, innerAction);
+            onIsValidating(fieldId, formBuilderId, validatingPromise, innerAction);
         } else {
             dispatch(innerAction);
         }
@@ -49,4 +51,5 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     };
 };
 
+// $FlowFixMe
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(FormBuilder);

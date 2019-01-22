@@ -60,6 +60,10 @@ const errorMessages = {
     UNIQUENESS: 'This value already exists',
 };
 
+const validationMessages = {
+    UNIQUENESS: 'This value is validating uniqueness',
+};
+
 const compulsoryValidator = Validators.wordToValidatorMap.get(wordValidatorKeys.COMPULSORY);
 
 const compulsoryValidatorWrapper = (value: any) => {
@@ -198,6 +202,7 @@ function buildUniqueValidator(metaData: MetaDataElement) {
                 return metaData.unique.onValidate(value, contextProps);
             },
             message: i18n.t(errorMessages.UNIQUENESS),
+            validatingMessage: i18n.t(validationMessages.UNIQUENESS),
         },
     ] : [];
 }

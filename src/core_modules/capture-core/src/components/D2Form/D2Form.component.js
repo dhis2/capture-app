@@ -31,7 +31,7 @@ type Props = {
     formHorizontal: boolean,
 };
 
-export class D2Form extends React.PureComponent<Props> {
+class D2Form extends React.PureComponent<Props> {
     name: string;
     validateForm: () => void;
     sectionInstances: Map<string, D2Section>;

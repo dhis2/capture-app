@@ -16,10 +16,10 @@ class AsyncFieldHandler {
             if (index >= 0) {
                 // $FlowSuppress
                 this.dataEntryItemPromises[dataEntryKey].splice(index, 1);
-            }
-            // $FlowSuppress
-            if (this.dataEntryItemPromises[dataEntryKey].length === 0) {
-                this.dataEntryItemPromises[dataEntryKey] = null;
+                // $FlowSuppress
+                if (this.dataEntryItemPromises[dataEntryKey].length === 0) {
+                    this.dataEntryItemPromises[dataEntryKey] = null;
+                }
             }
         }
     }
@@ -28,8 +28,11 @@ class AsyncFieldHandler {
         if (!this.dataEntryItemPromises[dataEntryKey]) {
             this.dataEntryItemPromises[dataEntryKey] = [];
         }
-        // $FlowSuppress
-        this.dataEntryItemPromises[dataEntryKey].push(promise);
+        // $FlowFixMe
+        if (this.dataEntryItemPromises[dataEntryKey].indexOf(promise) < 0) {
+            // $FlowFixMe
+            this.dataEntryItemPromises[dataEntryKey].push(promise);
+        }
     }
 
     hasPromises = (dataEntryId: string, itemId: string) => {
