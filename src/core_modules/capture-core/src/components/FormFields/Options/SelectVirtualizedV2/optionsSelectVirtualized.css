@@ -16,6 +16,10 @@
     flex-grow: 1;
 }
 
+.Select-menu-outer {
+    z-index: 200;
+}
+
 .Select-input {
     padding-left: 0px;
     height: inherit;

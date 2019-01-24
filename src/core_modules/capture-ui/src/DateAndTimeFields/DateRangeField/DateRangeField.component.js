@@ -1,11 +1,13 @@
 // @flow
 import * as React from 'react';
+import i18n from '@dhis2/d2-i18n';
 import DateField from '../DateField/Date.component';
 import withFocusSaver from '../../HOC/withFocusSaver';
+import withShrinkLabel from '../../HOC/withShrinkLabel';
 import defaultClasses from './dateRangeField.mod.css';
 
 
-const RangeInputField = withFocusSaver()(DateField);
+const RangeInputField = withFocusSaver()(withShrinkLabel()(DateField));
 
 type Props = {
     value: any,
@@ -32,13 +34,14 @@ class DateRangeField extends React.Component<Props> {
     }
 
     render() {
-        const { onBlur, onChange, classes, value, ...passOnProps } = this.props;
+        const { onBlur, onChange, value, ...passOnProps } = this.props;
         const fromValue = value && value.from ? value.from : '';
         const toValue = value && value.to ? value.to : '';
         return (
             <div className={defaultClasses.container}>
                 <div className={defaultClasses.inputContainer}>
                     <RangeInputField
+                        label={i18n.t('From')}
                         value={fromValue}
                         onBlur={(newFromValue) => { this.onBlur({ from: newFromValue }); }}
                         onChange={(newFromValue) => { this.onChange({ from: newFromValue }); }}
@@ -47,6 +50,7 @@ class DateRangeField extends React.Component<Props> {
                 </div>
                 <div className={defaultClasses.inputContainer}>
                     <RangeInputField
+                        label={i18n.t('To')}
                         value={toValue}
                         onBlur={(newToValue) => { this.onBlur({ to: newToValue }); }}
                         onChange={(newToValue) => { this.onChange({ to: newToValue }); }}
@@ -58,5 +62,4 @@ class DateRangeField extends React.Component<Props> {
         );
     }
 }
- 
 export default DateRangeField;

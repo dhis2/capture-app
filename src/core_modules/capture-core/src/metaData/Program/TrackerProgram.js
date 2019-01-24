@@ -8,12 +8,14 @@ import { TrackedEntityType } from '../TrackedEntityType';
 import errorCreator from '../../utils/errorCreator';
 import { SearchGroup } from '../SearchGroup';
 import { Enrollment } from './Enrollment';
+import { DataElement } from '../DataElement';
 
 
 export default class TrackerProgram extends Program {
     _stages: Map<string, ProgramStage>;
     _searchGroups: Array<SearchGroup>;
     _trackedEntityType: TrackedEntityType;
+    _attributes: Array<DataElement>;
     _enrollment: Enrollment;
 
     static errorMessages = {
@@ -23,6 +25,7 @@ export default class TrackerProgram extends Program {
 
     constructor(initFn: ?(_this: Program) => void) {
         super();
+        this._attributes = [];
         this._stages = new Map();
         initFn && isFunction(initFn) && initFn(this);
     }
@@ -57,6 +60,13 @@ export default class TrackerProgram extends Program {
     }
     set enrollment(enrollment: Enrollment) {
         this._enrollment = enrollment;
+    }
+
+    get attributes(): Array<DataElement> {
+        return this._attributes;
+    }
+    set attributes(attributes: Array<DataElement>) {
+        this._attributes = attributes;
     }
 
     addStage(stage: ProgramStage) {

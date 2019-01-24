@@ -105,9 +105,12 @@ import {
 } from 'capture-core/components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.epics';
 import {
     openRelationshipTeiSearchEpic,
+    requestRelationshipTeiSearchEpic,
 } from 'capture-core/components/Pages/NewRelationship/TeiRelationship/teiRelationship.epics';
 import {
     teiSearchEpic,
+    teiSearchSetProgramEpic,
+    teiNewSearchEpic,
 } from 'capture-core/components/TeiSearch/epics/teiSearch.epics';
 import {
     getOrgUnitDataForNewEnrollmentUrlUpdateEpic,
@@ -115,6 +118,12 @@ import {
     validationForNewEnrollmentUrlUpdateEpic,
     openNewEnrollmentInDataEntryEpic,
 } from 'capture-core/components/Pages/NewEnrollment';
+
+import {
+    loadSearchOrgUnitRootsEpic,
+    loadCaptureOrgUnitRootsEpic,
+} from 'capture-core/components/organisationUnits/organisationUnitRoots.epics';
+
 import { loadStartupData, loadStartupDataCore } from '../init/entry.epics';
 
 export default combineEpics(
@@ -174,11 +183,15 @@ export default combineEpics(
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,
     requestDeleteEventEpic,
-    loadRegisteringUnitListRootsEpic,
+    loadSearchOrgUnitRootsEpic,
+    loadCaptureOrgUnitRootsEpic,
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
     openRelationshipTeiSearchEpic,
+    requestRelationshipTeiSearchEpic,
     teiSearchEpic,
+    teiSearchSetProgramEpic,
+    teiNewSearchEpic,
     openRelationshipForNewSingleEventEpic,
     addRelationshipForNewSingleEventEpic,
     saveNewEventRelationshipsIfExistsEpic,

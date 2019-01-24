@@ -38,6 +38,7 @@ import { newEnrollmentPageDesc } from 'capture-core/reducers/descriptions/newEnr
 import { newRelationshipDesc } from 'capture-core/reducers/descriptions/newRelationship.reducerDescription';
 import {
     organisationUnitDesc,
+    organisationUnitRootsDesc,
     registeringUnitListDesc,
 } from 'capture-core/reducers/descriptions/organisationUnits.reducerDescription';
 import { networkStatusDesc } from 'capture-core/reducers/descriptions/networkStatus.reducerDescription';
@@ -89,6 +90,7 @@ export default [
     newEnrollmentPageDesc,
     newRelationshipDesc,
     organisationUnitDesc,
+    organisationUnitRootsDesc,
     registeringUnitListDesc,
     networkStatusDesc,
     recentlyAddedEventsDesc,

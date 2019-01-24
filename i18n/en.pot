@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-12-18T08:34:42.139Z\n"
-"PO-Revision-Date: 2018-12-18T08:34:42.139Z\n"
+"POT-Creation-Date: 2019-01-22T14:42:21.463Z\n"
+"PO-Revision-Date: 2019-01-22T14:42:21.463Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -41,13 +41,10 @@ msgstr ""
 msgid "Write comment"
 msgstr ""
 
-msgid "Linked to "
+msgid "This event"
 msgstr ""
 
-msgid "Remove"
-msgstr ""
-
-msgid "Add link"
+msgid "Add relationship"
 msgstr ""
 
 msgid "Errors"
@@ -277,6 +274,9 @@ msgstr ""
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
+msgid "Relationships"
+msgstr ""
+
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
@@ -306,6 +306,14 @@ msgstr ""
 msgid "Discard relationship?"
 msgstr ""
 
+msgid ""
+"Leaving this page will discard any selections you made for a new "
+"relationship"
+msgstr ""
+
+msgid "Back to relationship"
+msgstr ""
+
 msgid "events added"
 msgstr ""
 
@@ -324,6 +332,9 @@ msgstr ""
 msgid "Select a category option to start reporting"
 msgstr ""
 
+msgid "Search results"
+msgstr ""
+
 msgid "Link to an existing {{trackedEntityType}}"
 msgstr ""
 
@@ -333,10 +344,19 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-msgid "Start again"
+msgid "No {{trackedEntityType}} found"
+msgstr ""
+
+msgid "Register"
+msgstr ""
+
+msgid "New {{typeName}}"
 msgstr ""
 
 msgid "New"
+msgstr ""
+
+msgid "Start again"
 msgstr ""
 
 msgid "Find"
@@ -370,6 +390,9 @@ msgid "Select program"
 msgstr ""
 
 msgid "No programs available."
+msgstr ""
+
+msgid "Search attributes"
 msgstr ""
 
 msgid "An error has occured. See log for details"

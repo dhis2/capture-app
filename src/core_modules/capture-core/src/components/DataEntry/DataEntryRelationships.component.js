@@ -2,34 +2,47 @@
 
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import withStyles from '@material-ui/core/styles/withStyles';
-import LinkIcon from '@material-ui/icons/Link';
+import { IconButton, withStyles } from '@material-ui/core';
+import { ArrowForward as ArrowIcon, MoreHoriz as MoreHorizIcon } from '@material-ui/icons';
 import { connect } from 'react-redux';
 import LinkButton from '../Buttons/LinkButton.component';
 import Button from '../Buttons/Button.component';
+import getDataEntryKey from './common/getDataEntryKey';
 
 type Props = {
     classes: {
+        container: string,
+        relationshipsContainer: string,
         relationship: string,
-        relationshipText: string,
+        relationshipDetails: string,
+        relationshipTypeName: string,
+        relationshipEntities: string,
+        arrowIcon: string,
+        relationshipActions: string,
     },
+    relationships: Array<Object>,
     onAddRelationship: (itemId: string, id: string) => void,
     itemId: string,
     id: string,
+    fromEntity: string,
 };
 
 
-const styles = theme => ({
+const styles = (theme: Theme) => ({
     relationship: {
         display: 'flex',
         alignItems: 'center',
         padding: 5,
-        borderBottom: '2px solid #ECEFF1',
     },
-    relationshipText: {
+    relationshipDetails: {
+        backgroundColor: theme.palette.grey.lighter,
+        padding: 7,
         flexGrow: 1,
-        display: 'flex',
-        alignItems: 'center',
+    },
+    relationshipTypeName: {
+        fontSize: 14,
+        fontWeight: 600,
+        color: 'rgba(0,0,0,0.7)',
     },
     relationshipsContainer: {
         marginBottom: 10,
@@ -38,21 +51,27 @@ const styles = theme => ({
         display: 'flex',
         flexDirection: 'column',
     },
+    relationshipEntities: {
+        marginTop: 7,
+        fontSize: 15,
+        display: 'flex',
+        alignItems: 'center',
+    },
+    arrowIcon: {
+        marginLeft: 10,
+        marginRight: 10,
+        fontSize: 15,
+    },
+    relationshipActions: {
+        padding: 7,
+    },
 });
 
+const fromDisplayNames = {
+    EVENT: i18n.t('This event'),
+};
+
 class DataEntryRelationships extends React.Component<Props> {
-    relationships: any;
-
-    constructor(props: Props) {
-        super(props);
-        this.relationships = [
-            {
-                id: '1',
-                displayName: 'Sabla Osman',
-            },
-        ];
-    }
-
     handleRemove = () => {
 
     };
@@ -62,18 +81,24 @@ class DataEntryRelationships extends React.Component<Props> {
     }
 
     getRelationships = () => {
-        const classes = this.props.classes;
-        return this.relationships.map(r => (
+        const { classes, fromEntity, relationships } = this.props;
+        return relationships.map(r => (
             <div className={classes.relationship} key={r.id}>
-                <div className={classes.relationshipText}>
-                    <LinkIcon />
-                    {i18n.t('Linked to ')}
-                    {r.displayName}
+                <div className={classes.relationshipDetails}>
+                    <div className={classes.relationshipTypeName}>
+                        {r.relationshipType.name}
+                    </div>
+                    <div className={classes.relationshipEntities}>
+                        {fromDisplayNames[fromEntity]}
+                        <ArrowIcon className={classes.arrowIcon} />
+                        {r.entity.displayName}
+                    </div>
                 </div>
-                <LinkButton onClick={this.handleRemove}>
-                    {i18n.t('Remove')}
-                </LinkButton>
-
+                <div className={classes.relationshipActions}>
+                    <IconButton>
+                        <MoreHorizIcon />
+                    </IconButton>
+                </div>
             </div>
         ),
         );
@@ -88,7 +113,7 @@ class DataEntryRelationships extends React.Component<Props> {
                 </div>
                 <div>
                     <Button onClick={this.handleAdd}>
-                        {i18n.t('Add link')}
+                        {i18n.t('Add relationship')}
                     </Button>
                 </div>
 
@@ -99,7 +124,9 @@ class DataEntryRelationships extends React.Component<Props> {
 
 const mapStateToProps = (state: ReduxState, props: { id: string }) => {
     const itemId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].itemId;
+    const dataEntryKey = getDataEntryKey(props.id, itemId);
     return {
+        relationships: state.dataEntriesRelationships[dataEntryKey],
         itemId,
     };
 };

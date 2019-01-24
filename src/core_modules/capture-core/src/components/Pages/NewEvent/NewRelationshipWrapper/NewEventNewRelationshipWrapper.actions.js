@@ -9,5 +9,5 @@ export const actionTypes = {
 export const newEventCancelNewRelationship = () =>
     actionCreator(actionTypes.NEW_EVENT_CANCEL_NEW_RELATIONSHIP)({});
 
-export const addNewEventRelationship = (relationshipTypeId: string, entityId: string, entityType: string) =>
-    actionCreator(actionTypes.ADD_NEW_EVENT_RELATIONSHIP)({ relationshipTypeId, entityId, entityType });
+export const addNewEventRelationship = (relationshipType: { id: string, name: string }, entity: Object, entityType: string) =>
+    actionCreator(actionTypes.ADD_NEW_EVENT_RELATIONSHIP)({ relationshipType, entity, entityType });

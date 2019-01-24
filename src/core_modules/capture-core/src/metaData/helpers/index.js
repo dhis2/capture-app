@@ -6,3 +6,4 @@ export {
 export { default as getProgramAndStageFromEvent } from './getProgramAndStageFromEvent';
 export { default as getStageFromEvent } from './getStageFromEvent';
 export { default as getProgramFromProgramIdThrowIfNotFound } from './getProgramFromProgramIdThrowIfNotFound';
+export { convertValues as convertDataElementsValues } from './DataElements';

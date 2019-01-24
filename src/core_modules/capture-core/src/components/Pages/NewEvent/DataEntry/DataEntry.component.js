@@ -78,7 +78,7 @@ const dataEntrySectionNames = {
     BASICINFO: 'BASICINFO',
     STATUS: 'STATUS',
     COMMENTS: 'COMMENTS',
-    LINKTO: 'LINKTO',
+    RELATIONSHIPS: 'RELATIONSHIPS',
 };
 
 const overrideMessagePropNames = {
@@ -333,13 +333,14 @@ const buildRelationshipsSettingsFn = () => {
         componentProps: createComponentProps(props, {
             id: props.id,
             onAddRelationship: props.onAddRelationship,
+            fromEntity: 'EVENT',
         }),
         validatorContainers: [
         ],
         propName: 'relationship',
         meta: {
             placement: placements.BOTTOM,
-            section: dataEntrySectionNames.LINKTO,
+            section: dataEntrySectionNames.RELATIONSHIPS,
         },
     });
 
@@ -408,9 +409,9 @@ const dataEntrySectionDefinitions = {
         placement: placements.BOTTOM,
         name: i18n.t('Comments'),
     },
-    [dataEntrySectionNames.LINKTO]: {
+    [dataEntrySectionNames.RELATIONSHIPS]: {
         placement: placements.BOTTOM,
-        name: i18n.t('Link to'),
+        name: i18n.t('Relationships'),
     },
 };
 class NewEventDataEntry extends Component<Props> {

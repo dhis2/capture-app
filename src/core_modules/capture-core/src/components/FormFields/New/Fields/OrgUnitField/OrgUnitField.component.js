@@ -38,6 +38,7 @@ type Props = {
     onSearch: (searchText: string) => void,
     searchText: ?string,
     ready?: ?boolean,
+    selected?: ?string,
     classes: {
         outerContainer: string,
         container: string,
@@ -72,6 +73,7 @@ class OrgUnitField extends React.Component<Props> {
             ready,
             treeKey,
             classes,
+            selected,
             ...passOnProps // eslint-disable-line
         } = this.props;
         return (
@@ -92,6 +94,7 @@ class OrgUnitField extends React.Component<Props> {
                         onSelectClick={onSelectClick}
                         ready={ready}
                         treeKey={treeKey}
+                        selected={selected}
                     />
                 </div>
 

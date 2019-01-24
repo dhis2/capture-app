@@ -2,6 +2,7 @@
 
 import { connect } from 'react-redux';
 import TeiSearchResults from './TeiSearchResults.component';
+import { newSearch, editSearch } from './teiSearchResults.actions';
 
 
 const mapStateToProps = (state: ReduxState, props: Object) => ({

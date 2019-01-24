@@ -6,24 +6,18 @@ import {
 
 export const newRelationshipDesc = createReducerDescription({
     [newRelationshipActionTypes.INITIALIZE_NEW_RELATIONSHIP]: () => ({}),
-    [newRelationshipActionTypes.SELECT_RELATIONSHIP_TYPE]: (state, action) => {
-        const newState = {
-            ...state,
-            selectedRelationshipTypeId: action.payload.selectedRelationshipTypeId,
-        };
-        return newState;
-    },
-    [newRelationshipActionTypes.DESELECT_RELATIONSHIP_TYPE]: (state) => {
-        const newState = {
-            ...state,
-            findMode: null,
-            selectedRelationshipTypeId: null,
-        };
-        return newState;
-    },
-    [newRelationshipActionTypes.SELECT_FIND_MODE]: (state, action) => {
-        const newState = { ...state };
-        newState.findMode = action.payload.findMode;
-        return newState;
-    },
+    [newRelationshipActionTypes.SELECT_RELATIONSHIP_TYPE]: (state, action) => ({
+        ...state,
+        selectedRelationshipType: action.payload.selectedRelationshipType,
+        findMode: null,
+    }),
+    [newRelationshipActionTypes.SELECT_FIND_MODE]: (state, action) => ({
+        ...state,
+        findMode: action.payload.findMode,
+        searching: false,
+    }),
+    [newRelationshipActionTypes.SET_SEARCHING]: state => ({
+        ...state,
+        searching: true,
+    }),
 }, 'newRelationship', {});

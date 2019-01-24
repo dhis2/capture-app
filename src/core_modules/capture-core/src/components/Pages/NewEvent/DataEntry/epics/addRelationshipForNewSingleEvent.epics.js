@@ -42,9 +42,9 @@ export const addRelationshipForNewSingleEventEpic = (action$: InputObservable) =
             const payload = action.payload;
 
             const relationship = {
-                to: typeToRelationshipConstraint[payload.entityType](payload.entityId),
-                relationshipType: payload.relationshipTypeId,
-                from: typeToRelationshipConstraint.PROGRAM_STAGE_INSTANCE(),
+                entity: { ...payload.entity },
+                entityType: payload.entityType,
+                relationshipType: { ...payload.relationshipType },
             };
 
             return addRelationship('singleEvent', 'newEvent', relationship);
@@ -54,7 +54,8 @@ const saveNewEventRelationships = (action: Object) => {
     const eventId = action.payload.response.importSummaries[0].reference;
     const serverRelationshipData = {
         relationships: action.meta.relationshipData.map(r => ({
-            ...r,
+            relationshipType: r.relationshipType.id,
+            to: typeToRelationshipConstraint[r.entityType](r.entity.id),
             from: typeToRelationshipConstraint.PROGRAM_STAGE_INSTANCE(eventId),
         })),
     };

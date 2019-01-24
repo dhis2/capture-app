@@ -5,17 +5,19 @@ import i18n from '@dhis2/d2-i18n';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
 import withStyles from '@material-ui/core/styles/withStyles';
-import ProgramCollection from '../../../../metaDataMemoryStores/programCollection/programCollection';
-import RelationshipType from '../../../../metaData/RelationshipType/RelationshipType';
+import type { SelectedRelationshipType } from '../newRelationship.types';
 import Button from '../../../Buttons/Button.component';
 import TeiSearch from '../../../TeiSearch/TeiSearch.container';
 import TeiRelationshipSearchResults from './TeiRelationshipSearchResults.component';
+import { makeTrackedEntityTypeSelector } from './teiRelationship.selectors';
+import { TrackedEntityType } from '../../../../metaData';
+import { findModes } from '../findModes';
 
 type Props = {
-    findMode: string,
+    findMode?: ?$Values<typeof findModes>,
     onOpenSearch: (trackedEntityTypeId: string, programId: ?string) => void,
-    onSelectFindMode: (findMode: string) => void,
-    selectedRelationshipType: RelationshipType,
+    onSelectFindMode: (findMode: $Values<typeof findModes>) => void,
+    selectedRelationshipType: SelectedRelationshipType,
     classes: {
         container: string,
         button: string,
@@ -45,21 +47,20 @@ const getStyles = theme => ({
     },
 });
 
-const findModes = {
-    TEI_SEARCH: 'TEI_SEARCH',
-    TEI_REGISTER: 'TEI_REGISTER',
-};
-
 const defaultTrackedEntityTypeName = 'Tracked entity instance';
 
 class TeiRelationship extends React.Component<Props> {
+    trackedEntityTypeSelector: (props: Props) => ?TrackedEntityType;
+    constructor(props: Props) {
+        super(props);
+        this.trackedEntityTypeSelector = makeTrackedEntityTypeSelector();
+    }
     getTrackedEntityTypeName = () => {
-        const to = this.props.selectedRelationshipType.to;
-        if (to.programId) {
-            // $FlowFixMe
-            return ProgramCollection.get(to.programId).trackedEntityType.displayName;
+        const trackedEntityType = this.trackedEntityTypeSelector(this.props);
+        if (!trackedEntityType) {
+            return defaultTrackedEntityTypeName;
         }
-        return defaultTrackedEntityTypeName;
+        return trackedEntityType.name;
     }
 
     renderModeSelections = () => {
@@ -74,7 +75,7 @@ class TeiRelationship extends React.Component<Props> {
                     <SearchIcon fontSize="large" className={classes.buttonIcon} />
                     <Button
                         color="primary"
-                        onClick={() => this.props.onOpenSearch(to.trackedEntityTypeId, to.programId)}
+                        onClick={() => this.props.onSelectFindMode(findModes.TEI_SEARCH)}
                     >
                         {i18n.t('Link to an existing {{trackedEntityType}}', { trackedEntityType: trackedEntityTypeName })}
                     </Button>
@@ -95,14 +96,14 @@ class TeiRelationship extends React.Component<Props> {
 
     renderSearch = (props: Object) => {
         const { selectedRelationshipType, onAddRelationship, ...passOnProps } = props;
+        const trackedEntityTypeName = this.getTrackedEntityTypeName();
         return (
             <TeiSearch
                 id="relationshipTeiSearch"
-                programId={selectedRelationshipType.to.programId}
-                trackedEntityTypeId={selectedRelationshipType.to.trackedEntityTypeId}
                 getResultsView={viewProps => (
                     <TeiRelationshipSearchResults
                         onAddRelationship={onAddRelationship}
+                        trackedEntityTypeName={trackedEntityTypeName}
                         {...viewProps}
                     />
                 )}

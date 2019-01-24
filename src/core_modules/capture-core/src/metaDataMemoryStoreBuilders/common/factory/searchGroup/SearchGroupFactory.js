@@ -1,6 +1,5 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-import log from 'loglevel';
 import {
     RenderFoundation,
     Section,
@@ -9,12 +8,9 @@ import {
     dataElementTypes,
 } from '../../../../metaData';
 import type {
-    CachedProgram,
     CachedAttributeTranslation,
-    CachedProgramTrackedEntityAttribute,
     CachedTrackedEntityAttribute,
 } from '../../../cache.types';
-import errorCreator from '../../../../utils/errorCreator';
 
 type InputSearchAttribute = {
     trackedEntityAttributeId: string,

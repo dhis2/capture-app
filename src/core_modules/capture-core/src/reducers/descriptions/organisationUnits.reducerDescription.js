@@ -19,6 +19,10 @@ import {
 import { orgUnitListActionTypes } from '../../components/QuickSelector';
 import { set as setStoreRoots } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 
+import {
+    actionTypes as orgUnitRootsActionTypes,
+} from '../../components/organisationUnits/organisationUnitRoots.actions';
+
 export const organisationUnitDesc = createReducerDescription({
     [editEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE]: (state, action) => {
         const newState = { ...state };
@@ -71,8 +75,19 @@ export const organisationUnitDesc = createReducerDescription({
     },
 }, 'organisationUnits');
 
+export const organisationUnitRootsDesc = createReducerDescription({
+    [orgUnitRootsActionTypes.SET_ORG_UNIT_SEARCH_ROOTS]: (state, action) => ({
+        ...state,
+        searchRoots: action.payload.roots,
+    }),
+    [orgUnitRootsActionTypes.SET_ORG_UNIT_CAPTURE_ROOTS]: (state, action) => ({
+        ...state,
+        captureRoots: action.payload.roots,
+    }),
+}, 'organisationUnitRoots');
+
 const removeSearchDataOnResetRegUnit = (state) => {
-    setStoreRoots('regUnit', { searchRoots: null });
+    setStoreRoots('regUnit', null);
     return {
         ...state,
         searchRoots: null,
@@ -99,7 +114,7 @@ export const registeringUnitListDesc = createReducerDescription({
         searchText: action.payload.searchText,
     }),
     [orgUnitListActionTypes.CLEAR_ORG_UNIT_SEARCH]: (state) => {
-        setStoreRoots('regUnit', { searchRoots: null });
+        setStoreRoots('regUnit', null);
         return {
             ...state,
             searchText: null,

@@ -13,6 +13,7 @@ const getStyles = (theme: Theme) => ({
         margin: theme.spacing.unit,
     },
     section: {
+        backgroundColor: 'white',
         maxWidth: theme.typography.pxToRem(880),
     },
 });
