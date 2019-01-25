@@ -1,9 +1,9 @@
 // @flow
 import { createSelector } from 'reselect';
-import { trackedEntityTypesCollection, programCollection } from '../../../../metaDataMemoryStores';
-import { TrackerProgram } from '../../../../metaData';
-import errorCreator from '../../../../utils/errorCreator';
-import chunk from '../../../../utils/chunk';
+import { trackedEntityTypesCollection, programCollection } from '../../../../../metaDataMemoryStores';
+import { TrackerProgram } from '../../../../../metaData';
+import errorCreator from '../../../../../utils/errorCreator';
+import chunk from '../../../../../utils/chunk';
 
 const trackedEntityTypeIdSelector = props => props.selectedTrackedEntityTypeId;
 const programIdSelector = props => props.selectedProgramId;

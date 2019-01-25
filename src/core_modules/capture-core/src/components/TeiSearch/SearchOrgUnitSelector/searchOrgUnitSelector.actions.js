@@ -9,6 +9,7 @@ export const actionTypes = {
     TEI_SEARCH_SET_SEARCH_ORG_UNIT_RESULTS_FAILED: 'TeiSearchSetSearchOrgUnitResultsFailed',
     TEI_SEARCH_SET_ORG_UNIT_SCOPE: 'TeiSearchSetOrgUnitScope',
     TEI_SEARCH_SET_ORG_UNIT: 'TeiSearchSetOrgUnit',
+    TEI_SEARCH_SET_ORG_UNIT_SEARCH_TEXT: 'TeiSearchSetOrgUnitSearchText',
 };
 
 export const setOrgUnitScope = (searchId: string, orgUnitScope: string) =>
@@ -28,3 +29,6 @@ export const setSearchOrgUnitResults = (searchId: string, roots: ?Array<any>, se
 
 export const setSearchOrgUnitResultsFailed = (searchId: string, error: any) =>
     actionCreator(actionTypes.TEI_SEARCH_SET_SEARCH_ORG_UNIT_RESULTS_FAILED)({ searchId, error });
+
+export const teiSearchSetOrgUnitSearchText = (searchId: string, searchText: string) =>
+    actionCreator(actionTypes.TEI_SEARCH_SET_ORG_UNIT_SEARCH_TEXT)({ searchId, searchText });

@@ -111,6 +111,7 @@ import {
     teiSearchEpic,
     teiSearchSetProgramEpic,
     teiNewSearchEpic,
+    teiSearchChangePageEpic,
 } from 'capture-core/components/TeiSearch/epics/teiSearch.epics';
 import {
     getOrgUnitDataForNewEnrollmentUrlUpdateEpic,
@@ -121,6 +122,7 @@ import {
 
 import {
     loadSearchOrgUnitRootsEpic,
+    filterOrgUnitRootsEpic,
     loadCaptureOrgUnitRootsEpic,
 } from 'capture-core/components/organisationUnits/organisationUnitRoots.epics';
 
@@ -185,11 +187,13 @@ export default combineEpics(
     requestDeleteEventEpic,
     loadSearchOrgUnitRootsEpic,
     loadCaptureOrgUnitRootsEpic,
+    filterOrgUnitRootsEpic,
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
     openRelationshipTeiSearchEpic,
     requestRelationshipTeiSearchEpic,
     teiSearchEpic,
+    teiSearchChangePageEpic,
     teiSearchSetProgramEpic,
     teiNewSearchEpic,
     openRelationshipForNewSingleEventEpic,

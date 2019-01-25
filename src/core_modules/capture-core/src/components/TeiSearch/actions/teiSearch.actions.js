@@ -16,6 +16,7 @@ export const actionTypes = {
     SET_TEI_SEARCH_PROGRAM_AND_TET: 'SetTeiSearchProgramAndTet',
     TEI_NEW_SEARCH: 'TeiNewSearch',
     TEI_EDIT_SEARCH: 'TeiEditSearch',
+    TEI_SEARCH_RESULTS_CHANGE_PAGE: 'TeiSearchResultsChangePage',
 };
 
 
@@ -66,3 +67,6 @@ export const teiNewSearch = (searchId: string) =>
 
 export const teiEditSearch = (searchId: string) =>
     actionCreator(actionTypes.TEI_EDIT_SEARCH)({ searchId });
+
+export const teiSearchResultsChangePage = (searchId: string, pageNumber: number) =>
+    actionCreator(actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE)({ searchId, pageNumber });

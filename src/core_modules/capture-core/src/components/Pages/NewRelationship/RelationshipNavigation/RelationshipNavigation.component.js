@@ -33,9 +33,7 @@ class RelationshipNavigation extends React.Component<Props> {
         );
     }
 
-    renderSlash = () => {
-        return (<span style={{ padding: 5 }}>/</span>);
-    }
+    renderSlash = () => (<span style={{ padding: 5 }}>/</span>)
 
     renderForFindMode = (findMode: $Values<typeof findModes>) => {
         const { onSelectFindMode, searching } = this.props;

@@ -3,20 +3,21 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Avatar, Grid, withStyles } from '@material-ui/core';
-import Button from '../../../Buttons/Button.component';
-import LoadingMask from '../../../LoadingMasks/LoadingMaskElementCenter.component';
-import { DataElement } from '../../../../metaData';
-import { convertValue } from '../../../../converters/clientToList';
+import Button from '../../../../Buttons/Button.component';
+import LoadingMask from '../../../../LoadingMasks/LoadingMaskElementCenter.component';
+import { DataElement } from '../../../../../metaData';
+import { convertValue } from '../../../../../converters/clientToList';
 import { makeAttributesContainerSelector } from './teiRelationshipSearchResults.selectors';
 
 type Props = {
     resultsLoading: ?boolean,
-    results: Array<any>,
+    teis: Array<any>,
     onAddRelationship: (entity: { id: string, displayName: string }) => void,
     onNewSearch: () => void,
     onEditSearch: () => void,
     classes: Object,
     trackedEntityTypeName: string,
+    navigationElements: React.Element<any>,
 }
 
 type AttributesContainer = {
@@ -44,6 +45,14 @@ const getStyles = (theme: Theme) => ({
     itemValuesContainer: {
         flexGrow: 1,
         padding: theme.typography.pxToRem(10),
+    },
+    resultsContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    pagination: {
+        display: 'flex',
+        justifyContent: 'flex-end',
     },
     emptyResultsContainer: {
         fontStyle: 'italic',
@@ -89,7 +98,7 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
     ))
 
     renderChunks = (attributeChunks: any, values: Object, classes: Object) => attributeChunks.map((attrChunk, i) => (
-        <Grid xs={12} md={6} lg={3} key={i.toString()}>
+        <Grid item xs={12} md={6} lg={3} key={i.toString()}>
             {this.renderChunkValues(attrChunk, values, classes)}
         </Grid>
     ));
@@ -154,10 +163,17 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
         </div>
     )
 
-    renderResults = (results: Array<any>, classes: Object) => {
-        if (results && results.length > 0) {
+    renderResults = (teis: Array<any>, classes: Object) => {
+        if (teis && teis.length > 0) {
             const attributesContainer = this.getAttributesContainer(this.props);
-            return results.map(r => this.renderItem(r, classes, attributesContainer));
+            return (
+                <div className={classes.resultsContainer}>
+                    {teis.map(tei => this.renderItem(tei, classes, attributesContainer))}
+                    <div className={classes.pagination}>
+                        {this.props.navigationElements}
+                    </div>
+                </div>
+            );
         }
 
         return (
@@ -175,14 +191,14 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
     );
 
     render() {
-        const { results, resultsLoading, classes } = this.props;
+        const { teis, resultsLoading, classes } = this.props;
         return (
             <div>
                 {resultsLoading ?
                     this.renderLoading(classes) :
                     <div>
                         {this.renderActions(classes)}
-                        {this.renderResults(results, classes)}
+                        {this.renderResults(teis, classes)}
                     </div>
                 }
             </div>

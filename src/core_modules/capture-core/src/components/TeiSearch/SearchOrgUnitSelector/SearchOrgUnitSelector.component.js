@@ -113,8 +113,12 @@ class SearchOrgUnitSelector extends React.Component<Props> {
         return null;
     }
 
+    handleSearchOrgUnit = (searchText: ?string) => {
+        this.props.onSearchOrgUnit(this.props.searchId, searchText);
+    }
+
     renderOrgUnitField = () => {
-        const { selectedOrgUnit, treeRoots, treeReady, treeKey, treeSearchText } = this.props;
+        const { selectedOrgUnit, treeRoots, treeReady, treeKey, treeSearchText, onSearchOrgUnit } = this.props;
         return (
             <TeiSearchOrgUnitField
                 label="Organisation unit"
@@ -127,6 +131,7 @@ class SearchOrgUnitSelector extends React.Component<Props> {
                 selectedOrgUnit={selectedOrgUnit}
                 validationAttempted={this.props.searchAttempted}
                 errorMessage={this.getErrorMessage()}
+                onSearch={this.handleSearchOrgUnit}
             />
         );
     }

@@ -10,6 +10,7 @@ import {
     withDisplayMessages,
     withInternalChangeHandler,
     withFilterProps,
+    SingleOrgUnitSelectField,
 } from '../../../../FormFields/New';
 import withRequiredFieldCalculation from '../../withRequiredFieldCalculation';
 import labelTypeClasses from '../../buildField.mod.css';
@@ -32,7 +33,7 @@ export default withGotoInterface()(
                         })(
                             withFilterProps(getFilteredProps)(
                                 withDisplayMessages()(
-                                    withInternalChangeHandler()(OrgUnitTree),
+                                    withInternalChangeHandler()(SingleOrgUnitSelectField),
                                 ),
                             ),
                         ),

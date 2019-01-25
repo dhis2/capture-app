@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-01-22T14:42:21.463Z\n"
-"PO-Revision-Date: 2019-01-22T14:42:21.463Z\n"
+"POT-Creation-Date: 2019-01-25T08:13:10.009Z\n"
+"PO-Revision-Date: 2019-01-25T08:13:10.009Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -335,16 +335,16 @@ msgstr ""
 msgid "Search results"
 msgstr ""
 
-msgid "Link to an existing {{trackedEntityType}}"
-msgstr ""
-
-msgid "Create new {{trackedEntityType}}"
-msgstr ""
-
 msgid "Link"
 msgstr ""
 
 msgid "No {{trackedEntityType}} found"
+msgstr ""
+
+msgid "Link to an existing {{trackedEntityType}}"
+msgstr ""
+
+msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Register"

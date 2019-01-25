@@ -1,26 +1,33 @@
 // @flow
 import { connect } from 'react-redux';
-import { searchOrgUnits, clearOrgUnitsSearch, setOrgUnitScope, setOrgUnit } from './searchOrgUnitSelector.actions';
+import { requestFilterOrgUnitRoots, clearOrgUnitRoots } from '../../organisationUnits/organisationUnitRoots.actions';
+import { setOrgUnitScope, setOrgUnit } from './searchOrgUnitSelector.actions';
 import { get as getOrgUnitRoots } from '../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import SearchOrgUnitSelector from './SearchOrgUnitSelector.component';
+import { batchActionTypes } from '../SearchProgramSelector/searchProgramSelector.actions';
 
 const mapStateToProps = (state: ReduxState, props: Object) => {
-    const teiSearchOrgUnitRootsState = getOrgUnitRoots(props.searchId) || getOrgUnitRoots('searchRoots');
+    const searchId = props.searchId;
+
+    const filteredRoots = getOrgUnitRoots(searchId);
+    const roots = filteredRoots || getOrgUnitRoots('searchRoots');
 
     return {
-        selectedOrgUnit: state.teiSearch[props.searchId].selectedOrgUnit,
-        selectedOrgUnitScope: state.teiSearch[props.searchId].selectedOrgUnitScope,
-        treeRoots: teiSearchOrgUnitRootsState,
-        treeSearchText: state.teiSearch[props.searchId].orgUnitSearchText,
-        treeReady: !state.teiSearch[props.searchId].orgUnitIsLoading,
-        treeKey: state.teiSearch[props.searchId].orgUnitKey,
+        selectedOrgUnit: state.teiSearch[searchId].selectedOrgUnit,
+        selectedOrgUnitScope: state.teiSearch[searchId].selectedOrgUnitScope,
+        treeRoots: roots,
+        treeSearchText: filteredRoots && state.organisationUnitRoots[searchId].searchText,
+        treeReady: !(filteredRoots && state.organisationUnitRoots[searchId].isLoading),
+        treeKey: filteredRoots && state.organisationUnitRoots[searchId].searchText,
     };
 };
 
 // $FlowFixMe
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onSearchOrgUnit: (searchId: string, searchText: string) => {
-        const action = searchText ? searchOrgUnits(searchId, searchText) : clearOrgUnitsSearch(searchId);
+        const action = searchText ?
+            requestFilterOrgUnitRoots(searchId, searchText, { withinUserHierarchy: true }) :
+            clearOrgUnitRoots(searchId);
         dispatch(action);
     },
     onSetOrgUnit: (searchId: string, orgUnit: ?any) => {

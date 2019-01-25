@@ -23,6 +23,7 @@ import {
 } from '../../../D2Form/actions/form.actions';
 
 import getSearchGroups from '../../../TeiSearch/getSearchGroups';
+import { clearOrgUnitRoots } from '../../../organisationUnits/organisationUnitRoots.actions';
 
 const searchId = 'relationshipTeiSearch';
 
@@ -47,6 +48,7 @@ export const openRelationshipTeiSearchEpic = (action$: InputObservable, store: R
 
             return batchActions([
                 ...addFormDataActions,
+                clearOrgUnitRoots(searchId),
                 initializeTeiSearch(searchId, programId, trackedEntityTypeId),
             ], batchActionTypes.BATCH_OPEN_TEI_SEARCH);
         });

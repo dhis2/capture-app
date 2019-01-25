@@ -2,15 +2,19 @@
 
 import { connect } from 'react-redux';
 import TeiSearchResults from './TeiSearchResults.component';
-import { newSearch, editSearch } from './teiSearchResults.actions';
 
 
-const mapStateToProps = (state: ReduxState, props: Object) => ({
-    resultsLoading: state.teiSearch[props.id].resultsLoading,
-    results: state.teiSearch[props.id].results ? state.teiSearch[props.id].results.teis : [],
-});
+const mapStateToProps = (state: ReduxState, props: Object) => {
+    const currentTeiSearch = state.teiSearch[props.id] || {};
+    const searchResults = currentTeiSearch.searchResults || {};
+    return {
+        resultsLoading: searchResults.resultsLoading,
+        teis: searchResults.teis || [],
+        paging: searchResults.paging,
+    };
+};
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+const mapDispatchToProps = () => ({
 });
 
 // $FlowSuppress

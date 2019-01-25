@@ -8,6 +8,7 @@ import {
     searchFormValidationFailed,
     teiNewSearch,
     teiEditSearch,
+    teiSearchResultsChangePage,
 } from './actions/teiSearch.actions';
 import { makeSearchGroupsSelector } from './teiSearch.selectors';
 
@@ -17,12 +18,12 @@ const makeMapStateToProps = () => {
 
     const mapStateToProps = (state: ReduxState, props: Object) => {
         const searchGroups = searchGroupsSelector(state, props);
-        const searchId = props.id;
+        const currentTeiSearch = state.teiSearch[props.id];
         return {
             searchGroups,
-            showResults: state.teiSearch[props.id] && state.teiSearch[props.id].showResults,
-            selectedProgramId: state.teiSearch[searchId].selectedProgramId,
-            selectedTrackedEntityTypeId: state.teiSearch[searchId].selectedTrackedEntityTypeId,
+            showResults: !!currentTeiSearch.searchResults,
+            selectedProgramId: currentTeiSearch.selectedProgramId,
+            selectedTrackedEntityTypeId: currentTeiSearch.selectedTrackedEntityTypeId,
         };
     };
 
@@ -33,6 +34,9 @@ const makeMapStateToProps = () => {
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onSearch: (formId: string, searchGroupId: string, searchId: string) => {
         dispatch(requestSearchTei(formId, searchGroupId, searchId));
+    },
+    onSearchResultsChangePage: (searchId: string, pageNumber: number) => {
+        dispatch(teiSearchResultsChangePage(searchId, pageNumber));
     },
     onSearchValidationFailed: (formId: string, searchGroupId: string, searchId: string) => {
         dispatch(searchFormValidationFailed(formId, searchGroupId, searchId));

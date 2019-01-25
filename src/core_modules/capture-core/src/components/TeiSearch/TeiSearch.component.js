@@ -16,6 +16,7 @@ type Props = {
     onSearch: Function,
     onSearchValidationFailed: Function,
     showResults?: ?boolean,
+    onSearchResultsChangePage: (searchId: string, pageNumber: number) => void,
     onNewSearch: (searchId: string) => void,
     onEditSearch: (searchId: string) => void,
     classes: {
@@ -49,6 +50,10 @@ class TeiSearch extends React.Component<Props> {
     handleSearch = (formId: string, searchGroupId: string) => {
         const { id } = this.props;
         this.props.onSearch(formId, searchGroupId, id);
+    }
+
+    handleSearchResultsChangePage = (pageNumber: number) => {
+        this.props.onSearchResultsChangePage(this.props.id, pageNumber);
     }
 
     handleNewSearch = () => {
@@ -91,9 +96,10 @@ class TeiSearch extends React.Component<Props> {
         );
     })
     renderSearchResult = () => {
-        const { onSearch, showResults, onNewSearch, onEditSearch, classes, ...passOnProps } = this.props;
+        const { onSearch, showResults, onNewSearch, onEditSearch, onSearchResultsChangePage, classes, ...passOnProps } = this.props;
         return (
             <TeiSearchResults
+                onChangePage={this.handleSearchResultsChangePage}
                 onNewSearch={this.handleNewSearch}
                 onEditSearch={this.handleEditSearch}
                 {...passOnProps}
