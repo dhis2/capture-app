@@ -12,6 +12,7 @@ import {
     withErrorOutput,
     withWarningOutput,
     withBrowserBackWarning,
+    withSearchGroups,
     inMemoryFileStore,
 } from '../../DataEntry';
 import {
@@ -242,6 +243,13 @@ const getGeometrySettings = () => (props: Object) => {
     return null;
 };
 
+const getSearchGroups = (props: Object) => props.enrollmentMetadata.inputSearchGroups;
+const getSearchContext = (props: Object) => ({
+    ...props.onGetValidationContext(),
+    trackedEntityType: props.enrollmentMetadata.trackedEntityType.id,
+});
+
+
 const FilterPropsForDataEntry = (props: Object) => {
     const { enrollmentMetadata, ...passOnProps } = props;
     return (
@@ -258,7 +266,8 @@ const mapStateToProps = (state: ReduxState) => ({
     }),
 });
 
-const ValidationContext = connect(mapStateToProps, () => ({}))(FilterPropsForDataEntry);
+const SearchGroupsHOC = withSearchGroups(getSearchGroups, getSearchContext)(FilterPropsForDataEntry);
+const ValidationContext = connect(mapStateToProps, () => ({}))(SearchGroupsHOC);
 const FeedbackOutput = withFeedbackOutput()(ValidationContext);
 const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
 const WarningOutput = withWarningOutput()(IndicatorOutput);

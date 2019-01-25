@@ -135,8 +135,10 @@ class SearchGroupFactory {
         searchGroup.searchForm = await this._buildRenderFoundation(searchGroupAttributes);
         if (key === 'main') {
             searchGroup.minAttributesRequiredToSearch = minAttributesRequiredToSearch;
+            searchGroup.id = 'main';
         } else {
             searchGroup.unique = true;
+            searchGroup.id = 'unique';
         }
 
         return searchGroup;

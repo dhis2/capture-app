@@ -149,7 +149,7 @@ class ProgramFactory {
                 );
             });
 
-            program.enrollment = await this.enrollmentFactory.build(cachedProgram);
+            program.enrollment = await this.enrollmentFactory.build(cachedProgram, program.searchGroups);
         }
         // $FlowFixMe
         program.icon = await ProgramFactory._buildProgramIcon(cachedProgram.style);

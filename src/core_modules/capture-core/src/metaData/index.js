@@ -19,6 +19,7 @@ export { Program, ProgramStage, EventProgram, TrackerProgram, Enrollment } from 
 export { RelationshipType } from './RelationshipType';
 export { RenderFoundation, Section, CustomForm } from './RenderFoundation';
 export { SearchGroup } from './SearchGroup';
+export { InputSearchGroup } from './InputSearchGroup';
 export { TrackedEntityType } from './TrackedEntityType';
 
 // helpers

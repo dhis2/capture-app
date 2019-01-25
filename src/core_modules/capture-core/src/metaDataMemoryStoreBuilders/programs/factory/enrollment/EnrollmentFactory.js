@@ -8,10 +8,19 @@ import type {
     CachedOptionSet,
     CachedTrackedEntityAttribute,
 } from '../../../../storageControllers/cache.types';
-import { RenderFoundation, Section, Enrollment, CustomForm, TrackedEntityType } from '../../../../metaData';
+import {
+    RenderFoundation,
+    Section,
+    Enrollment,
+    CustomForm,
+    TrackedEntityType,
+    SearchGroup,
+    InputSearchGroup,
+} from '../../../../metaData';
 import capitalizeFirstLetter from '../../../../utils/string/capitalizeFirstLetter';
 import DataElementFactory from './DataElementFactory';
 import errorCreator from '../../../../utils/errorCreator';
+import { getApi } from '../../../../d2/d2Instance';
 
 class EnrollmentFactory {
     static errorMessages = {
@@ -103,6 +112,7 @@ class EnrollmentFactory {
 
     async build(
         cachedProgram: CachedProgram,
+        programSearchGroups: Array<SearchGroup> = [],
     ) {
         const enrollment = new Enrollment((_this) => {
             EnrollmentFactory._addLabels(_this, cachedProgram);
@@ -112,6 +122,32 @@ class EnrollmentFactory {
                     _this.trackedEntityType = trackedEntityType;
                 }
             }
+            _this.inputSearchGroups = programSearchGroups
+                .filter(searchGroup => !searchGroup.unique)
+                .map(searchGroup => new InputSearchGroup((_thisInputSearchGroup) => {
+                    _thisInputSearchGroup.id = searchGroup.id;
+                    _thisInputSearchGroup.minAttributesRequiredToSearch = searchGroup.minAttributesRequiredToSearch;
+                    _thisInputSearchGroup.searchFoundation = searchGroup.searchForm;
+                    _thisInputSearchGroup.onSearch = (values: Object = {}, contextProps: Object = {}) => {
+                        const { orgUnitId, trackedEntityType } = contextProps;
+                        return getApi()
+                            .get(
+                                'trackedEntityInstances/count.json',
+                                {
+                                    ou: orgUnitId,
+                                    trackedEntityType,
+                                    ouMode: 'ACCESSIBLE',
+                                    filter: Object
+                                        .keys(values)
+                                        .map(key => `${key}:LIKE:${values[key]}`),
+                                    pageSize: 1,
+                                    page: 1,
+                                    totalPages: true,
+                                },
+                            );
+                        // trackedEntityInstances/count.json?ou=DiszpKrYNg8&ouMode=ACCESSIBLE&trackedEntityType=nEenWmSyUEp&filter=w75KJ2mc4zz:LIKE:kjell&filter=zDhUuAYrxNC:LIKE:haugen&pageSize=1&page=1&totalPages=true
+                    };
+                }));
         });
 
         enrollment.enrollmentForm = await this._buildEnrollmentForm(cachedProgram);

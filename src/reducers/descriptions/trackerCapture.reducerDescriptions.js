@@ -9,6 +9,7 @@ import {
     dataEntriesRelationshipsDesc,
     dataEntriesFieldsMetaDesc,
     dataEntriesFieldsUIDesc,
+    dataEntriesSearchGroupsResultsDesc,
 } from 'capture-core/reducers/descriptions/dataEntry.reducerDescription';
 import { feedbackDesc } from 'capture-core/reducers/descriptions/feedback.reducerDescription';
 import {
@@ -67,6 +68,7 @@ export default [
     dataEntriesRelationshipsDesc,
     dataEntriesFieldsMetaDesc,
     dataEntriesFieldsUIDesc,
+    dataEntriesSearchGroupsResultsDesc,
     feedbackDesc,
     rulesEffectsHiddenFieldsDesc,
     rulesEffectsErrorMessagesDesc,

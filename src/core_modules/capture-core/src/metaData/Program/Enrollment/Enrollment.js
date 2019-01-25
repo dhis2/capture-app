@@ -2,12 +2,14 @@
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/src/isFunction';
 import { RenderFoundation } from '../../RenderFoundation';
+import { InputSearchGroup } from '../../InputSearchGroup';
 import { TrackedEntityType } from '../../TrackedEntityType';
 import { labelKeys, defaultLabelValues } from './labels.const';
 
 export default class Enrollment {
     _labels: { [key: $Values<typeof labelKeys>]: string };
     _enrollmentForm: RenderFoundation;
+    _inputSearchGroups: ?Array<InputSearchGroup>;
     _trackedEntityType: TrackedEntityType;
 
     constructor(initFn: ?(_this: Enrollment) => void) {
@@ -37,6 +39,13 @@ export default class Enrollment {
     }
     get enrollmentDateLabel(): string {
         return this._labels[labelKeys.ENROLLMENT_DATE];
+    }
+
+    set inputSearchGroups(searchGroups: Array<InputSearchGroup>) {
+        this._inputSearchGroups = searchGroups;
+    }
+    get inputSearchGroups(): ?Array<InputSearchGroup> {
+        return this._inputSearchGroups;
     }
 
     set trackedEntityType(type: TrackedEntityType) {

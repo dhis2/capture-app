@@ -4,6 +4,7 @@ import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
 import { actionTypes as loadNewActionTypes } from '../../components/DataEntry/actions/dataEntryLoadNew.actions';
 import { actionTypes as loadEditActionTypes } from '../../components/DataEntry/actions/dataEntryLoadEdit.actions';
+import { searchGroupActionTypes } from '../../components/DataEntry';
 
 import getDataEntryKey from '../../components/DataEntry/common/getDataEntryKey';
 
@@ -278,3 +279,19 @@ export const dataEntriesRelationshipsDesc = createReducerDescription({
         return newState;
     },
 }, 'dataEntriesRelationships', {});
+
+export const dataEntriesSearchGroupsResultsDesc = createReducerDescription({
+    [searchGroupActionTypes.SEARCH_GROUP_RESULT_COUNT_RETRIVED]: (state, action) => {
+        const { dataEntryKey, count, groupId } = action.payload;
+        return {
+            ...state,
+            [dataEntryKey]: {
+                ...state[dataEntryKey],
+                [groupId]: {
+                    ...(state[dataEntryKey] && state[dataEntryKey][groupId]),
+                    count,
+                },
+            },
+        };
+    },
+}, 'dataEntriesSearchGroupsResults');

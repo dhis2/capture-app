@@ -36,6 +36,7 @@ type Props = {
     onIsValidating: (innerAction: ReduxAction<any, any>) => void,
     onFieldsValidated: (innerAction: ReduxAction<any, any>) => void,
     onUpdateFormField: (innerAction: ReduxAction<any, any>) => void,
+    onSearchGroupResultCountRetrieved: (innerAction: ReduxAction<any, any>) => void,
 };
 
 type IsCompletingFn = (props: Props) => boolean;
@@ -249,17 +250,34 @@ const getSaveHandler = (
         }
 
         handleUpdateField = (
+            fieldId: string,
+            value: any,
             innerAction: ReduxAction<any, any>,
             updateCompletePromise: ?Promise<any>,
+            searchCompletePromises: ?Array<Promise<any>>,
         ) => {
             const dataEntryKey = getDataEntryKey(this.props.id, this.props.itemId);
             updateCompletePromise && AsyncFieldHandler.removePromise(dataEntryKey, updateCompletePromise);
+            searchCompletePromises && searchCompletePromises
+                .forEach(p => AsyncFieldHandler.setPromise(dataEntryKey, p));
             this.props.onUpdateFormField(innerAction);
         }
 
-        handleValidatingPromiseComplete = (validatingPromise: Promise<any>) => {
+        handleSearchGroupResultCountRetrieved = (
+            innerAction: ReduxAction<any, any>,
+            completePromise: Promise<any>,
+        ) => {
             const dataEntryKey = getDataEntryKey(this.props.id, this.props.itemId);
-            AsyncFieldHandler.removePromise(dataEntryKey, validatingPromise);
+            AsyncFieldHandler.removePromise(dataEntryKey, completePromise);
+            this.props.onSearchGroupResultCountRetrieved(innerAction);
+        }
+
+        handleCleanUpFromFormSections = (
+            remainingPromises: Array<Promise<any>>,
+        ) => {
+            const dataEntryKey = getDataEntryKey(this.props.id, this.props.itemId);
+            remainingPromises
+                .forEach(p => AsyncFieldHandler.removePromise(dataEntryKey, p));
         }
 
         render() {
@@ -292,7 +310,8 @@ const getSaveHandler = (
                         onIsValidating={this.handleIsValidating}
                         onFieldsValidated={this.handleFieldsValidated}
                         onUpdateFormField={this.handleUpdateField}
-                        onValidatingPromiseComplete={this.handleValidatingPromiseComplete}
+                        onSearchGroupResultCountRetrieved={this.handleSearchGroupResultCountRetrieved}
+                        onCleanUp={this.handleCleanUpFromFormSections}
                         {...filteredProps}
                     />
                     <Dialog
@@ -376,6 +395,11 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         dispatch(innerAction);
     },
     onUpdateFormField: (
+        innerAction: ReduxAction<any, any>,
+    ) => {
+        dispatch(innerAction);
+    },
+    onSearchGroupResultCountRetrieved: (
         innerAction: ReduxAction<any, any>,
     ) => {
         dispatch(innerAction);

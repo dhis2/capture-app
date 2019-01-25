@@ -14,9 +14,13 @@ export { default as withFeedbackOutput } from './dataEntryOutput/withFeedbackOut
 export { default as withWarningOutput } from './dataEntryOutput/withWarningOutput';
 export { default as withErrorOutput } from './dataEntryOutput/withErrorOutput';
 export { default as withIndicatorOutput } from './dataEntryOutput/withIndicatorOutput';
+export { default as withSearchGroups } from './withSearchGroups';
 
 // misc
 export { default as inMemoryFileStore } from './file/inMemoryFileStore';
 
 // constants
 export { default as placements } from './constants/placements.const';
+
+// actions
+export { actionTypes as searchGroupActionTypes } from './actions/searchGroup.actions';

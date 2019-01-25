@@ -3,16 +3,16 @@
 import isFunction from 'd2-utilizr/src/isFunction';
 import RenderFoundation from '../RenderFoundation/RenderFoundation';
 
+type Searcher = (values: Object, contextProps: Object) => Promise<any>;
 
-export default class SearchGroup {
+export default class InputSearchGroup {
     _id: string;
     _minAttributesRequiredToSearch: number;
-    _searchForm: RenderFoundation;
-    _unique: boolean;
+    _searchFoundation: RenderFoundation;
+    _onSearch: Searcher;
 
-    constructor(initFn: ?(_this: SearchGroup) => void) {
+    constructor(initFn: ?(_this: InputSearchGroup) => void) {
         this._minAttributesRequiredToSearch = 0;
-        this._unique = false;
         initFn && isFunction(initFn) && initFn(this);
     }
 
@@ -30,17 +30,17 @@ export default class SearchGroup {
         return this._minAttributesRequiredToSearch;
     }
 
-    set searchForm(searchForm: RenderFoundation) {
-        this._searchForm = searchForm;
+    set searchFoundation(searchFoundation: RenderFoundation) {
+        this._searchFoundation = searchFoundation;
     }
-    get searchForm(): RenderFoundation {
-        return this._searchForm;
+    get searchFoundation(): RenderFoundation {
+        return this._searchFoundation;
     }
 
-    set unique(unique: boolean) {
-        this._unique = unique;
+    set onSearch(searcher: Searcher) {
+        this._onSearch = searcher;
     }
-    get unique(): boolean {
-        return this._unique;
+    get onSearch(): Searcher {
+        return this._onSearch;
     }
 }
