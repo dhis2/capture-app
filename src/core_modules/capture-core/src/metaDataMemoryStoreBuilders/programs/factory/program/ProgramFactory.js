@@ -13,6 +13,7 @@ import {
 import getProgramIconAsync from './getProgramIcon';
 import { SearchGroupFactory } from '../../../common/factory';
 import { EnrollmentFactory } from '../enrollment';
+import DataElementFactory from '../enrollment/DataElementFactory';
 import {
     ProgramStageFactory,
 } from '../programStage';
@@ -32,6 +33,7 @@ class ProgramFactory {
     programStageFactory: ProgramStageFactory;
     enrollmentFactory: EnrollmentFactory;
     searchGroupFactory: SearchGroupFactory;
+    dataElementFactory: DataElementFactory;
     trackedEntityTypeCollection: Map<string, TrackedEntityType>;
 
     constructor(
@@ -55,6 +57,11 @@ class ProgramFactory {
         );
         this.searchGroupFactory = new SearchGroupFactory(
             cachedTrackedEntityAttributes,
+            locale,
+        );
+        this.dataElementFactory = new DataElementFactory(
+            cachedTrackedEntityAttributes,
+            cachedOptionSets,
             locale,
         );
     }
@@ -103,6 +110,16 @@ class ProgramFactory {
         return icon;
     }
 
+    async _buildProgramAttributes(cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>) {
+        const attributePromises = cachedProgramTrackedEntityAttributes.map(async (ptea) => {
+            const dataElement = await this.dataElementFactory.build(ptea);
+            return dataElement;
+        });
+
+        const attributes = await Promise.all(attributePromises);
+        return attributes;
+    }
+
     async build(cachedProgram: CachedProgram) {
         let program;
         if (cachedProgram.programType === 'WITHOUT_REGISTRATION') {
@@ -136,6 +153,9 @@ class ProgramFactory {
                     cachedProgram.programTrackedEntityAttributes,
                     cachedProgram.minAttributesRequiredToSearch,
                 );
+
+                // $FlowFixMe
+                program.attributes = await this._buildProgramAttributes(cachedProgram.programTrackedEntityAttributes);
             }
 
             // $FlowFixMe

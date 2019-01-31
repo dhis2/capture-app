@@ -7,3 +7,20 @@ export type NewRelationshipData = {
     },
     relationshipTypeId: string,
 };
+
+export type SelectedRelationshipType = {
+    id: string,
+    displayName: string,
+    from: {
+        entity: string,
+        programId?: ?string,
+        programStageId?: ?string,
+        trackedEntityTypeId: string,
+    },
+    to: {
+        entity: string,
+        programId?: ?string,
+        programStageId?: ?string,
+        trackedEntityTypeId: string,
+    },
+}

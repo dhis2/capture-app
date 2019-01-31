@@ -36,11 +36,19 @@ function convertRange(value: RangeValue, elementId: string) {
 const valueConvertersForType = {
     [elementTypes.TEXT]: like,
     [elementTypes.NUMBER_RANGE]: convertRange,
+    [elementTypes.DATE_RANGE]: convertRange,
 };
 
-export function convertValue(type: $Values<typeof elementTypes>, value: any, metaElement: DataElement) {
+export function convertValue(value: any, type: $Values<typeof elementTypes>, metaElement: DataElement) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }
     return valueConvertersForType[type] ? valueConvertersForType[type](value, metaElement.id) : equals(value, metaElement.id);
+}
+
+export function convertValueToEqual(value: any, type: $Values<typeof elementTypes>, metaElement: DataElement) {
+    if (!value && value !== 0 && value !== false) {
+        return value;
+    }
+    return equals(value, metaElement.id);
 }

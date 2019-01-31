@@ -82,6 +82,7 @@ class D2SectionFields extends Component<Props> {
                 metaDataElement,
                 {
                     formHorizontal: this.props.formHorizontal,
+                    formId: this.props.formId,
                     ...fieldOptions,
                 },
                 !!customForm,

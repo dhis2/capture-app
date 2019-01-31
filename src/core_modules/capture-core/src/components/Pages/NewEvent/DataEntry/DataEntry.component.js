@@ -80,7 +80,7 @@ const dataEntrySectionNames = {
     BASICINFO: 'BASICINFO',
     STATUS: 'STATUS',
     COMMENTS: 'COMMENTS',
-    LINKTO: 'LINKTO',
+    RELATIONSHIPS: 'RELATIONSHIPS',
 };
 
 const overrideMessagePropNames = {
@@ -331,21 +331,29 @@ const buildRelationshipsSettingsFn = () => {
                 withFilterProps(defaultFilterProps)(DataEntryRelationships),
             ),
         );
-    const relationshipsSettings = (props: Object) => ({
-        component: relationshipsComponent,
-        componentProps: createComponentProps(props, {
-            id: 'relationship',
-            dataEntryId: props.id,
-            onAddRelationship: props.onAddRelationship,
-        }),
-        validatorContainers: [
-        ],
-        propName: 'relationship',
-        meta: {
-            placement: placements.BOTTOM,
-            section: dataEntrySectionNames.LINKTO,
-        },
-    });
+    const relationshipsSettings = (props: Object) => {
+        const hasRelationships =
+            props.stage &&
+            props.stage.relationshipTypes &&
+            props.stage.relationshipTypes.length > 0;
+
+        return hasRelationships ? {
+            component: relationshipsComponent,
+            componentProps: createComponentProps(props, {
+                id: 'relationship',
+                dataEntryId: props.id,
+                onAddRelationship: props.onAddRelationship,
+                fromEntity: 'EVENT',
+            }),
+            validatorContainers: [
+            ],
+            propName: 'relationship',
+            meta: {
+                placement: placements.BOTTOM,
+                section: dataEntrySectionNames.RELATIONSHIPS,
+            },
+        } : null;
+    };
 
     return relationshipsSettings;
 };
@@ -359,7 +367,7 @@ const saveHandlerConfig = {
 };
 
 const CleanUpHOC = withCleanUpHOC()(DataEntry);
-const RelationshipField = withDataEntryField(buildRelationshipsSettingsFn())(CleanUpHOC);
+const RelationshipField = withDataEntryFieldIfApplicable(buildRelationshipsSettingsFn())(CleanUpHOC);
 const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
@@ -414,9 +422,9 @@ const dataEntrySectionDefinitions = {
         placement: placements.BOTTOM,
         name: i18n.t('Comments'),
     },
-    [dataEntrySectionNames.LINKTO]: {
+    [dataEntrySectionNames.RELATIONSHIPS]: {
         placement: placements.BOTTOM,
-        name: i18n.t('Link to'),
+        name: i18n.t('Relationships'),
     },
 };
 class NewEventDataEntry extends Component<Props> {

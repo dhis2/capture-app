@@ -55,6 +55,7 @@ const valueConvertersForType = {
     [elementTypes.AGE]: convertDataForListDisplay,
     [elementTypes.FILE_RESOURCE]: convertResourceForDisplay,
     [elementTypes.IMAGE]: convertResourceForDisplay,
+    [elementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.displayName,
 };
 
 export function convertValue(value: any, type: $Values<typeof elementTypes>, dataElement?: ?DataElement) {

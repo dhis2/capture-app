@@ -4,11 +4,12 @@ import classNames from 'classnames';
 import ClearIcon from '@material-ui/icons/Clear';
 import withStyles from '@material-ui/core/styles/withStyles';
 import RelationshipType from '../../../../metaData/RelationshipType/RelationshipType';
+import type { SelectedRelationshipType } from '../newRelationship.types';
 
 type Props = {
     relationshipTypes: ?Array<RelationshipType>,
-    selectedRelationshipType?: ?RelationshipType,
-    onSelectRelationshipType: (relationshipTypeId: string) => void,
+    selectedRelationshipType?: ?SelectedRelationshipType,
+    onSelectRelationshipType: (relationshipType: SelectedRelationshipType) => void,
     onDeselectRelationshipType: () => void,
     classes: {
         relationshipType: string,
@@ -47,16 +48,24 @@ const getStyles = theme => ({
 
 
 class RelationshipTypeSelector extends React.Component<Props> {
+    onSelectRelationshipType = (rt: RelationshipType) => {
+        this.props.onSelectRelationshipType({
+            id: rt.id,
+            displayName: rt.displayName,
+            from: { ...rt.from },
+            to: { ...rt.to },
+        });
+    }
     renderRelationshipTypes = () => {
         const { classes, relationshipTypes, onSelectRelationshipType } = this.props;
         return relationshipTypes ? relationshipTypes.map(rt => (
-            <div className={classNames(classes.relationshipType, classes.relationshipTypeSelectable)} key={rt.id} role="button" tabIndex="0" onClick={() => onSelectRelationshipType(rt.id)}>
+            <div className={classNames(classes.relationshipType, classes.relationshipTypeSelectable)} key={rt.id} role="button" tabIndex="0" onClick={() => this.onSelectRelationshipType(rt)}>
                 {rt.displayName}
             </div>
         )) : [];
     }
 
-    renderSelectedRelationshipType = (selectedRelationshipType: RelationshipType) => {
+    renderSelectedRelationshipType = (selectedRelationshipType: SelectedRelationshipType) => {
         const { classes, onDeselectRelationshipType } = this.props;
         return (
             <div className={classNames(classes.relationshipType, classes.relationshipTypeSelected)}>

@@ -24,6 +24,7 @@ export const actionTypes = {
     REMOVE_NOTE: 'RemoveNote',
     ADD_RELATIONSHIP: 'AddRelationship',
     REMOVE_RELATIONSHIP: 'RemoveRelationship',
+    DUPLICATE_RELATIONSHIP: 'DuplicateRelationship',
 };
 
 // COMPLETE
@@ -125,3 +126,7 @@ export const addRelationship =
 export const removeRelationship =
     (dataEntryId: string, itemId: string, relationshipClientId: string) =>
         actionCreator(actionTypes.REMOVE_RELATIONSHIP)({ dataEntryId, itemId, relationshipClientId });
+
+export const duplicateRelationship =
+    (dataEntryId: string, itemId: string, message: string) =>
+        actionCreator(actionTypes.DUPLICATE_RELATIONSHIP)({ dataEntryId, itemId, message });

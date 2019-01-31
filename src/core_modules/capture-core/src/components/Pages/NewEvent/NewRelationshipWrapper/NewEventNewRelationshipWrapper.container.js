@@ -23,8 +23,8 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onCancel: (formHorizontal: boolean) => {
         dispatch(newEventCancelNewRelationship());
     },
-    onAddRelationship: (relationshipTypeId: string, entityId: string, entityType: string) => {
-        dispatch(addNewEventRelationship(relationshipTypeId, entityId, entityType));
+    onAddRelationship: (relationshipType: { id: string, name: string}, entity: Object, entityType: string) => {
+        dispatch(addNewEventRelationship(relationshipType, entity, entityType));
     },
 });
 

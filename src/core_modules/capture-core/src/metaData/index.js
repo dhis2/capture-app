@@ -29,4 +29,5 @@ export {
     getProgramAndStageFromProgramIdForEventProgram,
     getStageFromProgramIdForEventProgram,
     getProgramFromProgramIdThrowIfNotFound,
+    convertDataElementsValues,
 } from './helpers';

@@ -9,6 +9,7 @@ import Button from '../../../Buttons/Button.component';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import DataEntry from '../DataEntry/DataEntry.container';
 import EventsList from '../RecentlyAddedEventsList/RecentlyAddedEventsList.container';
+import { ProgramStage } from '../../../../metaData';
 
 
 const getStyles = (theme: Theme) => ({
@@ -50,6 +51,7 @@ type Props = {
     formHorizontal: ?boolean,
     onFormLayoutDirectionChange: (formHorizontal: boolean) => void,
     formFoundation: ?RenderFoundation,
+    stage: ?ProgramStage,
 }
 
 type State = {
@@ -106,7 +108,7 @@ class NewEventDataEntryWrapper extends React.Component<Props, State> {
     }
 
     render() {
-        const { classes, formFoundation, formHorizontal } = this.props;
+        const { classes, formFoundation, formHorizontal, stage } = this.props;
         return (
             <div>
                 <Button className={classes.showAllEvents} variant="raised" onClick={this.handleGoBackToAllEvents}>
@@ -116,6 +118,7 @@ class NewEventDataEntryWrapper extends React.Component<Props, State> {
                 <Paper className={classes.dataEntryPaper}>
                     {this.renderHeader()}
                     <DataEntry
+                        stage={stage}
                         cancelButtonRef={this.setCancelButtonInstance}
                         formFoundation={formFoundation}
                         formHorizontal={formHorizontal}

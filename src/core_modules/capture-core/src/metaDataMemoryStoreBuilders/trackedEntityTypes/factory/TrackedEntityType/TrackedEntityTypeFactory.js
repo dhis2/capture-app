@@ -84,6 +84,15 @@ class TrackedEntityTypeFactory {
         return foundation;
     }
 
+    async _buildAttributes(cachedTrackedEntityTypeAttributes: Array<CachedTrackedEntityTypeAttribute>) {
+        const attributePromises = cachedTrackedEntityTypeAttributes.map(async (teta) => {
+            const attribute = await this.dataElementFactory.build(teta);
+            return attribute;
+        });
+        const attributes = await Promise.all(attributePromises);
+        return attributes;
+    }
+
     async build(
         cachedType: CachedTrackedEntityType,
     ) {
@@ -100,6 +109,8 @@ class TrackedEntityTypeFactory {
                 cachedType.trackedEntityTypeAttributes,
                 cachedType.minAttributesRequiredToSearch,
             );
+            // $FlowFixMe
+            trackedEntityType.attributes = await this._buildAttributes(cachedType.trackedEntityTypeAttributes);
         }
 
         return trackedEntityType;

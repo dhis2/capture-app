@@ -65,11 +65,11 @@ export const runRulesForEditSingleEventEpic = (action$: InputObservable, store: 
 
             let rulesActions;
             if (metadataContainer.error) {
+                const foundation = metadataContainer.stage ? metadataContainer.stage.stageForm : null;
                 log.error(
                     errorCreator(
                         errorMessages.COULD_NOT_GET_EVENT_FROM_STATE)(
                         { method: 'runRulesForEditSingleEventEpic' }));
-                const foundation = metadataContainer.stage ? metadataContainer.stage.stageForm : null;
                 rulesActions = getRulesActionsForEvent(
                     metadataContainer.program,
                     foundation,
@@ -82,9 +82,8 @@ export const runRulesForEditSingleEventEpic = (action$: InputObservable, store: 
                     value: payload.value,
                     valid: payload.uiState.valid,
                 };
-
-                // $FlowSuppress
-                const foundation: RenderFoundation = metadataContainer.stage;
+                // $FlowFixMe
+                const foundation = metadataContainer.stage.stageForm;
 
                 const currentEventValues = getCurrentClientValues(state, foundation, payload.formId, fieldData);
 

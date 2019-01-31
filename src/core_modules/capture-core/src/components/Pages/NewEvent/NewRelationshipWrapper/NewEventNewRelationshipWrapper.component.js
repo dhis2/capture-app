@@ -86,16 +86,16 @@ class NewEventNewRelationshipWrapper extends React.Component<Props, State> {
                     {i18n.t('Back to event')}
                 </Button>
                 <Paper className={classes.newRelationshipPaper}>
-                    {this.renderHeader()}
                     <NewRelatonship
+                        header={i18n.t('New event relationship')}
                         {...passOnProps}
                     />
                 </Paper>
                 <ConfirmDialog
                     header={i18n.t('Discard relationship?')}
-                    text={i18n.t('Leaving this page will discard the changes you made to this event.')}
+                    text={i18n.t('Leaving this page will discard any selections you made for a new relationship')}
                     confirmText={i18n.t('Discard')}
-                    cancelText={i18n.t('Back to event')}
+                    cancelText={i18n.t('Back to relationship')}
                     onConfirm={this.props.onCancel}
                     open={!!this.state.discardDialogOpen}
                     onCancel={this.handleCancelDiscard}

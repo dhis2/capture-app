@@ -2,14 +2,10 @@
 // Temporary container for org unit tree roots
 const rootsContainer = {};
 
-export function set(id: string, roots: Object) {
-    const currentRoots = rootsContainer[id];
-    rootsContainer[id] = {
-        ...currentRoots,
-        ...roots,
-    };
+export function set(id: string, roots: ?Array<any>) {
+    rootsContainer[id] = roots;
 }
 
-export function get(id: string) {
+export function get(id: string): ?Array<any> {
     return rootsContainer[id];
 }

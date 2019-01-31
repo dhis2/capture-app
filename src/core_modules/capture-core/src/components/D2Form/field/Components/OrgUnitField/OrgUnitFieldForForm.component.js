@@ -1,5 +1,4 @@
 // @flow
-import OrgUnitTree from '../../../../FormFields/OrgUnitTree/OrgUnitTree.component';
 import {
     withGotoInterface,
     withHideCompatibility,
@@ -10,11 +9,13 @@ import {
     withDisplayMessages,
     withInternalChangeHandler,
     withFilterProps,
+    SingleOrgUnitSelectField,
 } from '../../../../FormFields/New';
 import {
     withRequiredFieldCalculation,
     withDisabledFieldCalculation,
 } from '../internal';
+import withFormFieldOrgUnitsHandler from './withFormFieldOrgUnitsHandler';
 import labelTypeClasses from '../../buildField.mod.css';
 
 const getFilteredProps = (props: Object) => {
@@ -36,7 +37,11 @@ export default withGotoInterface()(
                             })(
                                 withFilterProps(getFilteredProps)(
                                     withDisplayMessages()(
-                                        withInternalChangeHandler()(OrgUnitTree),
+                                        withInternalChangeHandler()(
+                                            withFormFieldOrgUnitsHandler()(
+                                                SingleOrgUnitSelectField,
+                                            ),
+                                        ),
                                     ),
                                 ),
                             ),

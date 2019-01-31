@@ -8,19 +8,33 @@ import errorCreator from '../../../utils/errorCreator';
 import Button from '../../Buttons/Button.component';
 import Form, { D2Form } from '../../D2Form/D2Form.component';
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
+import SearchOrgUnitSelector from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
+import { Section } from '../../Section';
+import { SearchGroup } from '../../../metaData';
+import { withGotoInterface } from '../../FormFields/New';
 
-const getStyles = theme => ({
+const TeiSearchOrgUnitSelector = withGotoInterface()(SearchOrgUnitSelector);
 
+const getStyles = (theme: Theme) => ({
+    orgUnitSection: {
+        backgroundColor: 'white',
+        padding: theme.typography.pxToRem(8),
+        maxWidth: theme.typography.pxToRem(880),
+    },
 });
 
 type Props = {
     id: string,
-    itemId: string,
-    onSearch: (formId: string, itemId: string) => void,
-    searchForm: RenderFoundation,
+    searchGroupId: string,
+    onSearch: (formId: string, searchGroupId: string) => void,
+    onSearchValidationFailed: (formId: string, SearchGroupId: string) => void,
+    searchAttempted: boolean,
+    searchId: string,
+    searchGroup: SearchGroup,
     classes: {
         container: string,
         searchButtonContainer: string,
+        orgUnitSection: string,
     },
 };
 
@@ -30,6 +44,7 @@ class SearchForm extends React.Component<Props> {
         SEARCH_FORM_MISSING: 'search form is missing. see log for details',
     };
     formInstance: D2Form;
+    orgUnitSelectorInstance: SearchOrgUnitSelector;
 
     validateForm() {
         if (!this.formInstance) {
@@ -43,7 +58,9 @@ class SearchForm extends React.Component<Props> {
             };
         }
 
-        const isValid = this.formInstance.validateFormScrollToFirstFailedField({});
+        let isValid = this.formInstance.validateFormScrollToFirstFailedField({});
+
+        if (isValid && !this.props.searchGroup.unique) isValid = this.orgUnitSelectorInstance.validateAndScrollToIfFailed();
 
         return {
             isValid,
@@ -54,18 +71,39 @@ class SearchForm extends React.Component<Props> {
     handleSearchAttempt = () => {
         const { error: validateFormError, isValid: isFormValid } = this.validateForm();
         if (validateFormError || !isFormValid) {
+            this.props.onSearchValidationFailed(this.props.id, this.props.searchGroupId);
             return;
         }
-        this.props.onSearch(this.props.id, this.props.itemId);
+        this.props.onSearch(this.props.id, this.props.searchGroupId);
     }
+
+    getUniqueSearchButtonText = (searchForm) => {
+        const attributeName = searchForm.getElements()[0].formName;
+        return `Search for ${attributeName}`;
+    }
+
+    renderOrgUnitSelector = () => (
+        <Section className={this.props.classes.orgUnitSection}>
+            <TeiSearchOrgUnitSelector
+                innerRef={(instance) => { this.orgUnitSelectorInstance = instance; }}
+                searchId={this.props.searchId}
+                searchAttempted={this.props.searchAttempted}
+            />
+        </Section>
+    );
 
     render() {
         const {
-            searchForm,
+            searchGroup,
             classes,
-            itemId,
+            searchGroupId,
             onSearch,
+            searchId,
+            onSearchValidationFailed,
+            searchAttempted,
             ...passOnProps } = this.props;
+
+        const searchForm = searchGroup && searchGroup.searchForm;
 
         if (!searchForm) {
             return (
@@ -74,18 +112,20 @@ class SearchForm extends React.Component<Props> {
                 </div>
             );
         }
+        const searchButtonText = searchGroup.unique ? this.getUniqueSearchButtonText(searchForm) : i18n.t('Search attributes');
         return (
             <div className={classes.container}>
                 <Form
                     innerRef={(formInstance) => { this.formInstance = formInstance; }}
-                    formFoundation={searchForm}
+                    formFoundation={searchGroup.searchForm}
                     {...passOnProps}
                 />
+                {!searchGroup.unique && this.renderOrgUnitSelector()}
                 <div
                     className={classes.searchButtonContainer}
                 >
                     <Button onClick={this.handleSearchAttempt}>
-                        {i18n.t('Search')}
+                        {searchButtonText}
                     </Button>
                 </div>
             </div>

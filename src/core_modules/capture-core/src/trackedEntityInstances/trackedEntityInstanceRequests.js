@@ -1,8 +1,9 @@
 // @flow
 
 import { getApi } from '../d2/d2Instance';
-import RenderFoundation from '../metaData/RenderFoundation/RenderFoundation';
+import { convertDataElementsValues } from '../metaData';
 import { convertValue } from '../converters/serverToClient';
+import { getSubValues } from './getSubValues';
 
 type ApiTeiAttribute = {
     attribute: any,
@@ -27,9 +28,11 @@ function getValuesById(apiAttributeValues: Array<ApiTeiAttribute>) {
     }, {});
 }
 
-function convertToClientTei(apiTei: ApiTrackedEntityInstance, foundation: RenderFoundation) {
+async function convertToClientTei(apiTei: ApiTrackedEntityInstance, attributes: Array<DataElments>) {
     const attributeValuesById = getValuesById(apiTei.attributes);
-    const convertedAttributeValues = foundation.convertValues(attributeValuesById, convertValue);
+    const convertedAttributeValues = convertDataElementsValues(attributeValuesById, attributes, convertValue);
+
+    await getSubValues(apiTei.trackedEntityInstance, attributes, convertedAttributeValues);
 
     return {
         id: apiTei.trackedEntityInstance,
@@ -38,14 +41,14 @@ function convertToClientTei(apiTei: ApiTrackedEntityInstance, foundation: Render
     };
 }
 
-export async function getTrackedEntityInstances(queryParams: ?Object, foundation: RenderFoundation) {
+export async function getTrackedEntityInstances(queryParams: ?Object, attributes: Array<DataElments>) {
     const api = getApi();
     const apiRes = await api
         .get('trackedEntityInstances', { ...queryParams, totalPages: true });
 
     const trackedEntityInstanceContainers = apiRes && apiRes.trackedEntityInstances ? await apiRes.trackedEntityInstances.reduce(async (accTeiPromise, apiTei) => {
         const accTeis = await accTeiPromise;
-        const teiContainer = convertToClientTei(apiTei, foundation);
+        const teiContainer = await convertToClientTei(apiTei, attributes);
         if (teiContainer) {
             accTeis.push(teiContainer);
         }

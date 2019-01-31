@@ -2,16 +2,17 @@
 import * as React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import RelationshipTypeSelector from './RelationshipTypeSelector/RelationshipTypeSelector.component';
-import TeiRelationship from './TeiRelationship/TeiRelationship.container';
-import RelationshipType from '../../../metaData/RelationshipType/RelationshipType';
+import TeiRelationship from './TeiRelationship/TeiRelationship.component';
+import type { SelectedRelationshipType } from './newRelationship.types';
+import RelationshipNavigation from './RelationshipNavigation/RelationshipNavigation.container';
 
 
 type Props = {
-    onAddRelationship: (relationshipTypeId: string, entityId: string, entityType: string) => void,
+    onAddRelationship: (relationshipType: { id: string, name: string }, entity: Object, entityType: string) => void,
     classes: {
         container: string,
     },
-    selectedRelationshipType: ?RelationshipType,
+    selectedRelationshipType: ?SelectedRelationshipType,
 }
 
 const getStyles = theme => ({
@@ -25,7 +26,7 @@ const relationshipComponentByEntityType = {
 };
 
 class NewRelationship extends React.Component<Props> {
-    renderRelationship = (selectedRelationshipType: RelationshipType, props: Object) => {
+    renderRelationship = (selectedRelationshipType: SelectedRelationshipType, props: Object) => {
         const RelationshipComponent = relationshipComponentByEntityType[selectedRelationshipType.to.entity];
         return (
             <RelationshipComponent
@@ -35,13 +36,13 @@ class NewRelationship extends React.Component<Props> {
         );
     }
 
-    handleAddRelationship = (entityId: string) => {
+    handleAddRelationship = (entity: Object) => {
         const relationshipType = this.props.selectedRelationshipType;
         if (!relationshipType) {
             return;
         }
 
-        this.props.onAddRelationship(relationshipType.id, entityId, relationshipType.to.entity);
+        this.props.onAddRelationship({ id: relationshipType.id, name: relationshipType.displayName }, entity, relationshipType.to.entity);
     }
 
     render() {
@@ -49,9 +50,13 @@ class NewRelationship extends React.Component<Props> {
         const selectedRelationshipType = this.props.selectedRelationshipType;
         return (
             <div className={this.props.classes.container}>
-                <RelationshipTypeSelector
+                <RelationshipNavigation
                     {...passOnProps}
                 />
+                { !selectedRelationshipType && <RelationshipTypeSelector
+                    {...passOnProps}
+                />
+                }
                 {selectedRelationshipType && this.renderRelationship(selectedRelationshipType, passOnProps)}
             </div>
         );

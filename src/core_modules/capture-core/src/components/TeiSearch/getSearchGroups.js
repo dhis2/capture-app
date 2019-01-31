@@ -1,18 +1,22 @@
 // @flow
 import errorCreator from '../../utils/errorCreator';
-import ProgramCollection from '../../metaDataMemoryStores/programCollection/programCollection';
-import SearchGroup from '../../metaData/SearchGroup/SearchGroup';
+import { trackedEntityTypesCollection, programCollection } from '../../metaDataMemoryStores';
+import { SearchGroup } from '../../metaData';
 
-export const getSearchGroupsByProgram = (programId: string): Array<SearchGroup> => {
-    const program = ProgramCollection.get(programId);
-    if (!program) {
-        throw new Error(errorCreator('programId not found')({ method: 'getSearchGroupsByProgram' }));
+
+export default function getSearchGroups(trackedEntityTypeId: string, programId: ?string): Array<SearchGroup> {
+    if (programId) {
+        const program = programCollection.get(programId);
+        if (!program) {
+            throw new Error(errorCreator('programId not found')({ method: 'getSearchGroups' }));
+        }
+        // $FlowFixMe
+        return program.searchGroups;
     }
-    // $FlowFixMe
-    return program.searchGroups;
-};
-
-export const getSearchGroupsByTrackedEntityType = (trackedEntityTypeId: string): Array<SearchGroup> => {
-    throw new Error('not implemented');
-};
+    const trackedEntityType = trackedEntityTypesCollection.get(trackedEntityTypeId);
+    if (!trackedEntityType) {
+        throw new Error(errorCreator('trackedEntityTypeId not found')({ method: 'getSearchGroups' }));
+    }
+    return trackedEntityType.searchGroups;
+}
 

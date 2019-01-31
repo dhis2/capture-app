@@ -84,7 +84,6 @@ import {
     goBackToListContext,
 } from 'capture-core/components/QuickSelector/epics/setSelection.epics';
 import {
-    loadRegisteringUnitListRootsEpic,
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
 } from 'capture-core/components/QuickSelector';
@@ -105,9 +104,13 @@ import {
 } from 'capture-core/components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.epics';
 import {
     openRelationshipTeiSearchEpic,
+    requestRelationshipTeiSearchEpic,
 } from 'capture-core/components/Pages/NewRelationship/TeiRelationship/teiRelationship.epics';
 import {
     teiSearchEpic,
+    teiSearchSetProgramEpic,
+    teiNewSearchEpic,
+    teiSearchChangePageEpic,
 } from 'capture-core/components/TeiSearch/epics/teiSearch.epics';
 import {
     getOrgUnitDataForNewEnrollmentUrlUpdateEpic,
@@ -117,6 +120,21 @@ import {
     runRulesOnNewEnrollmentFieldUpdateEpic,
     saveNewEnrollmentEpic,
 } from 'capture-core/components/Pages/NewEnrollment';
+
+import {
+    loadSearchOrgUnitRootsEpic,
+    filterOrgUnitRootsEpic,
+    loadCaptureOrgUnitRootsEpic,
+} from 'capture-core/components/organisationUnits/organisationUnitRoots.epics';
+
+import {
+    filterFormFieldOrgUnitsEpic,
+} from 'capture-core/components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.epics';
+
+import {
+    teiSearchFilterOrgUnitsEpic,
+} from 'capture-core/components/TeiSearch/SearchOrgUnitSelector/searchOrgUnitSelector.epics';
+
 import { loadStartupData, loadStartupDataCore } from '../init/entry.epics';
 
 export default combineEpics(
@@ -176,11 +194,17 @@ export default combineEpics(
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,
     requestDeleteEventEpic,
-    loadRegisteringUnitListRootsEpic,
+    loadSearchOrgUnitRootsEpic,
+    loadCaptureOrgUnitRootsEpic,
+    filterOrgUnitRootsEpic,
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
     openRelationshipTeiSearchEpic,
+    requestRelationshipTeiSearchEpic,
     teiSearchEpic,
+    teiSearchChangePageEpic,
+    teiSearchSetProgramEpic,
+    teiNewSearchEpic,
     openRelationshipForNewSingleEventEpic,
     addRelationshipForNewSingleEventEpic,
     saveNewEventRelationshipsIfExistsEpic,
@@ -191,4 +215,6 @@ export default combineEpics(
     openNewEnrollmentInDataEntryEpic,
     runRulesOnNewEnrollmentFieldUpdateEpic,
     saveNewEnrollmentEpic,
+    filterFormFieldOrgUnitsEpic,
+    teiSearchFilterOrgUnitsEpic,
 );
