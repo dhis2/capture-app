@@ -67,36 +67,52 @@ export const teiSearchDesc = createReducerDescription({
             },
         };
     },
-    [teiSearchOrgUnitActionTypes.TEI_SEARCH_SEARCH_ORG_UNITS]: (state, action) => {
+    [teiSearchOrgUnitActionTypes.TEI_SEARCH_REQUEST_FILTER_ORG_UNITS]: (state, action) => {
         const searchId = action.payload.searchId;
         return {
             ...state,
             [searchId]: {
                 ...state[searchId],
-                orgUnitSearchText: action.payload.searchText,
+                orgUnitsLoading: true,
+                orgUnitsSearchText: action.payload.searchText,
             },
         };
     },
-    [teiSearchOrgUnitActionTypes.TEI_SEARCH_CLEAR_ORG_UNITS_SEARCH]: (state, action) => {
+    [teiSearchOrgUnitActionTypes.TEI_SEARCH_CLEAR_ORG_UNITS_FILTER]: (state, action) => {
         const searchId = action.payload.searchId;
         setOrgUnitRoots(searchId, null);
         return {
             ...state,
             [searchId]: {
                 ...state[searchId],
-                searchText: null,
-                orgUnitSearchRoots: null,
+                orgUnitsLoading: false,
+                orgUnitsSearchText: null,
+                orgUnitsRoots: null,
             },
         };
     },
-    [teiSearchOrgUnitActionTypes.TEI_SEARCH_SET_SEARCH_ORG_UNIT_RESULTS]: (state, action) => {
+    [teiSearchOrgUnitActionTypes.TEI_SEARCH_FILTERED_ORG_UNITS_RETRIEVED]: (state, action) => {
         const searchId = action.payload.searchId;
         return {
             ...state,
             [searchId]: {
                 ...state[searchId],
-                searchText: action.payload.searchText,
-                orgUnitSearchRoots: action.payload.roots,
+                orgUnitsLoading: false,
+                orgUnitsSearchText: action.payload.searchText,
+                orgUnitsRoots: action.payload.roots,
+            },
+        };
+    },
+    [teiSearchOrgUnitActionTypes.TEI_SEARCH_FILTER_ORG_UNITS_FAILED]: (state, action) => {
+        const searchId = action.payload.searchId;
+        setOrgUnitRoots(searchId, null);
+        return {
+            ...state,
+            [searchId]: {
+                ...state[searchId],
+                orgUnitsLoading: false,
+                orgUnitsSearchText: null,
+                orgUnitsRoots: null,
             },
         };
     },
@@ -175,16 +191,6 @@ export const teiSearchDesc = createReducerDescription({
                     ...state[searchId].searchResults,
                     resultsLoading: true,
                 },
-            },
-        };
-    },
-    [teiSearchOrgUnitActionTypes.TEI_SEARCH_SET_ORG_UNIT_SEARCH_TEXT]: (state, action) => {
-        const searchId = action.payload.searchId;
-        return {
-            ...state,
-            [searchId]: {
-                ...state[searchId],
-                searchText: action.payload.searchText,
             },
         };
     },

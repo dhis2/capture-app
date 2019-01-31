@@ -274,7 +274,7 @@ export const dataEntriesRelationshipsDesc = createReducerDescription({
 
         const key = getDataEntryKey(payload.dataEntryId, payload.itemId);
 
-        newState[key] = state[key].filter(n => n.clientId !== payload.noteClientId);
+        newState[key] = state[key].filter(r => r.clientId !== payload.relationshipClientId);
         return newState;
     },
 }, 'dataEntriesRelationships', {});

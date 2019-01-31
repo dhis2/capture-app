@@ -43,7 +43,14 @@ const getPagingQueryArgs = (pageNumber: ?number) => (pageNumber ? { page: pageNu
 const searchTei = (state: ReduxState, searchId: string, formId: string, searchGroupId: any, pageNumber?: ?number) => {
     const currentTeiSearch = state.teiSearch[searchId];
     const formValues = state.formsValues[formId];
-    const { selectedProgramId, selectedTrackedEntityTypeId, selectedOrgUnit, selectedOrgUnitScope } = currentTeiSearch;
+
+    const {
+        selectedProgramId,
+        selectedTrackedEntityTypeId,
+        selectedOrgUnit,
+        selectedOrgUnitScope,
+    } = currentTeiSearch;
+
     const searchGroups = getSearchGroups(selectedTrackedEntityTypeId, selectedProgramId);
     const searchGroup = searchGroups[searchGroupId];
     const filterConverter = searchGroup.unique ? convertToUniqueFilters : convertToFilters;

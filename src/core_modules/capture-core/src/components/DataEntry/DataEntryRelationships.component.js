@@ -3,11 +3,12 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconButton, withStyles } from '@material-ui/core';
-import { ArrowForward as ArrowIcon, MoreHoriz as MoreHorizIcon } from '@material-ui/icons';
+import { ArrowForward as ArrowIcon, Clear as ClearIcon } from '@material-ui/icons';
 import { connect } from 'react-redux';
 import LinkButton from '../Buttons/LinkButton.component';
 import Button from '../Buttons/Button.component';
 import getDataEntryKey from './common/getDataEntryKey';
+import { removeRelationship } from './actions/dataEntry.actions';
 
 type Props = {
     classes: {
@@ -21,6 +22,7 @@ type Props = {
         relationshipActions: string,
     },
     relationships: Array<Object>,
+    onRemoveRelationship: (itemId: string, id: string, clientId: string) => void,
     onAddRelationship: (itemId: string, id: string) => void,
     itemId: string,
     id: string,
@@ -45,7 +47,6 @@ const styles = (theme: Theme) => ({
         color: 'rgba(0,0,0,0.7)',
     },
     relationshipsContainer: {
-        marginBottom: 10,
     },
     container: {
         display: 'flex',
@@ -72,8 +73,8 @@ const fromDisplayNames = {
 };
 
 class DataEntryRelationships extends React.Component<Props> {
-    handleRemove = () => {
-
+    handleRemove = (clientId: string) => {
+        this.props.onRemoveRelationship(this.props.itemId, this.props.id, clientId);
     };
 
     handleAdd = () => {
@@ -83,7 +84,7 @@ class DataEntryRelationships extends React.Component<Props> {
     getRelationships = () => {
         const { classes, fromEntity, relationships } = this.props;
         return relationships.map(r => (
-            <div className={classes.relationship} key={r.id}>
+            <div className={classes.relationship} key={r.clientId}>
                 <div className={classes.relationshipDetails}>
                     <div className={classes.relationshipTypeName}>
                         {r.relationshipType.name}
@@ -95,8 +96,8 @@ class DataEntryRelationships extends React.Component<Props> {
                     </div>
                 </div>
                 <div className={classes.relationshipActions}>
-                    <IconButton>
-                        <MoreHorizIcon />
+                    <IconButton onClick={() => { this.handleRemove(r.clientId); }} >
+                        <ClearIcon />
                     </IconButton>
                 </div>
             </div>
@@ -131,5 +132,11 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
     };
 };
 
-export default connect(mapStateToProps, () => ({}), null, { withRef: true })(
+const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+    onRemoveRelationship: (itemId: string, id: string, relationshipClientId: string) => {
+        dispatch(removeRelationship(id, itemId, relationshipClientId));
+    },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(
     withStyles(styles)(DataEntryRelationships));

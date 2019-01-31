@@ -5,6 +5,11 @@ import { actionTypes as loaderActionTypes } from '../../components/D2Form/action
 import { actionTypes as formBuilderActionTypes } from '../../components/D2Form/formBuilder.actions';
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
 import { actionTypes as rulesEffectsActionTypes } from '../../rulesEngineActionsCreator/rulesEngine.actions';
+import { actionTypes as orgUnitFormFieldActionTypes } from '../../components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.actions';
+import getOrgUnitRootsKey from '../../components/D2Form/field/Components/OrgUnitField/getOrgUnitRootsKey';
+import {
+    set as setStoreRoots,
+} from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 
 export const formsValuesDesc = createReducerDescription({
     [loaderActionTypes.ADD_FORM_DATA]: (state, action) => {
@@ -86,3 +91,68 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
         return newState;
     },
 }, 'formsSectionsFieldsUI');
+
+
+export const formsFieldsMiscDesc = createReducerDescription({
+    [loaderActionTypes.ADD_FORM_DATA]: (state, action) => ({
+        ...state,
+        [action.payload.formId]: {},
+    }),
+    [orgUnitFormFieldActionTypes.REQUEST_FILTER_FORM_FIELD_ORG_UNITS]: (state, action) => {
+        const { formId, elementId, searchText } = action.payload;
+        return {
+            ...state,
+            [formId]: {
+                ...state[formId],
+                [elementId]: {
+                    ...state[formId][elementId],
+                    orgUnitsLoading: true,
+                    orgUnitsSearchText: searchText,
+                },
+            },
+        };
+    },
+    [orgUnitFormFieldActionTypes.FILTERED_FORM_FIELD_ORG_UNITS_RETRIEVED]: (state, action) => {
+        const { formId, elementId, roots } = action.payload;
+        return {
+            ...state,
+            [formId]: {
+                ...state[formId],
+                [elementId]: {
+                    ...state[formId][elementId],
+                    orgUnitsLoading: false,
+                    orgUnitsRoots: roots,
+                },
+            },
+        };
+    },
+    [orgUnitFormFieldActionTypes.FILTER_FORM_FIELD_ORG_UNITS_FAILED]: (state, action) => {
+        const { formId, elementId } = action.payload;
+        return {
+            ...state,
+            [formId]: {
+                ...state[formId],
+                [elementId]: {
+                    ...state[formId][elementId],
+                    orgUnitsLoading: false,
+                },
+            },
+        };
+    },
+    [orgUnitFormFieldActionTypes.RESET_FORM_FIELD_ORG_UNITS_FILTER]: (state, action) => {
+        const { formId, elementId } = action.payload;
+        setStoreRoots(getOrgUnitRootsKey(formId, elementId), null);
+        return {
+            ...state,
+            [formId]: {
+                ...state[formId],
+                [elementId]: {
+                    ...state[formId][elementId],
+                    orgUnitsLoading: false,
+                    orgUnitsRoots: null,
+                    orgUnitsSearchText: null,
+                },
+            },
+        };
+    },
+}, 'formsFieldsMisc');

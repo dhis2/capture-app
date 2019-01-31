@@ -1,10 +1,9 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { SelectionBoxes, withDefaultFieldContainer, withLabel, withFocusSaver, withCalculateMessages, withDisplayMessages } from '../../FormFields/New';
-import OrgUnitField from './SearchOrgUnitField.component';
+import { SelectionBoxes, withDefaultFieldContainer, withLabel, withFocusSaver, withCalculateMessages, withDisplayMessages, SingleOrgUnitSelectField } from '../../FormFields/New';
 
-const TeiSearchOrgUnitField = withFocusSaver()(withCalculateMessages()(withDefaultFieldContainer()(withLabel()(withDisplayMessages()(OrgUnitField)))));
+const TeiSearchOrgUnitField = withFocusSaver()(withCalculateMessages()(withDefaultFieldContainer()(withLabel()(withDisplayMessages()(SingleOrgUnitSelectField)))));
 const TeiSearchSelectionBoxes = withDefaultFieldContainer()(withLabel()(SelectionBoxes));
 
 type Props = {
@@ -17,6 +16,7 @@ type Props = {
     treeSearchText?: ?string,
     onSelectOrgUnitScope: (searchId: string, orgUnitScope: string) => void,
     onSetOrgUnit: (searchId: string, orgUnit: ?Object) => void,
+    onFilterOrgUnits: (searchId: string, searchText: ?string) => void,
     searchAttempted: ?boolean,
 }
 
@@ -113,12 +113,12 @@ class SearchOrgUnitSelector extends React.Component<Props> {
         return null;
     }
 
-    handleSearchOrgUnit = (searchText: ?string) => {
-        this.props.onSearchOrgUnit(this.props.searchId, searchText);
+    handleFilterOrgUnits = (searchText: ?string) => {
+        this.props.onFilterOrgUnits(this.props.searchId, searchText);
     }
 
     renderOrgUnitField = () => {
-        const { selectedOrgUnit, treeRoots, treeReady, treeKey, treeSearchText, onSearchOrgUnit } = this.props;
+        const { selectedOrgUnit, treeRoots, treeReady, treeKey, treeSearchText, onFilterOrgUnits } = this.props;
         return (
             <TeiSearchOrgUnitField
                 label="Organisation unit"
@@ -127,11 +127,11 @@ class SearchOrgUnitSelector extends React.Component<Props> {
                 roots={treeRoots}
                 ready={treeReady}
                 treeKey={treeKey}
-                onSetOrgUnit={this.onSetOrgUnit}
-                selectedOrgUnit={selectedOrgUnit}
+                onBlur={this.onSetOrgUnit}
+                value={selectedOrgUnit}
                 validationAttempted={this.props.searchAttempted}
                 errorMessage={this.getErrorMessage()}
-                onSearch={this.handleSearchOrgUnit}
+                onSearch={this.handleFilterOrgUnits}
             />
         );
     }

@@ -84,7 +84,6 @@ import {
     goBackToListContext,
 } from 'capture-core/components/QuickSelector/epics/setSelection.epics';
 import {
-    loadRegisteringUnitListRootsEpic,
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
 } from 'capture-core/components/QuickSelector';
@@ -125,6 +124,14 @@ import {
     filterOrgUnitRootsEpic,
     loadCaptureOrgUnitRootsEpic,
 } from 'capture-core/components/organisationUnits/organisationUnitRoots.epics';
+
+import {
+    filterFormFieldOrgUnitsEpic,
+} from 'capture-core/components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.epics';
+
+import {
+    teiSearchFilterOrgUnitsEpic,
+} from 'capture-core/components/TeiSearch/SearchOrgUnitSelector/searchOrgUnitSelector.epics';
 
 import { loadStartupData, loadStartupDataCore } from '../init/entry.epics';
 
@@ -204,4 +211,6 @@ export default combineEpics(
     emptyOrgUnitForNewEnrollmentUrlUpdateEpic,
     validationForNewEnrollmentUrlUpdateEpic,
     openNewEnrollmentInDataEntryEpic,
+    filterFormFieldOrgUnitsEpic,
+    teiSearchFilterOrgUnitsEpic,
 );

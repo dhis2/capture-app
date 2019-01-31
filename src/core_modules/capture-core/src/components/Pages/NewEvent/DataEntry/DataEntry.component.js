@@ -328,21 +328,28 @@ const buildRelationshipsSettingsFn = () => {
                 withFilterProps(defaultFilterProps)(DataEntryRelationships),
             ),
         );
-    const relationshipsSettings = (props: Object) => ({
-        component: relationshipsComponent,
-        componentProps: createComponentProps(props, {
-            id: props.id,
-            onAddRelationship: props.onAddRelationship,
-            fromEntity: 'EVENT',
-        }),
-        validatorContainers: [
-        ],
-        propName: 'relationship',
-        meta: {
-            placement: placements.BOTTOM,
-            section: dataEntrySectionNames.RELATIONSHIPS,
-        },
-    });
+    const relationshipsSettings = (props: Object) => {
+        const hasRelationships =
+            props.stage &&
+            props.stage.relationshipTypes &&
+            props.stage.relationshipTypes.length > 0;
+
+        return hasRelationships ? {
+            component: relationshipsComponent,
+            componentProps: createComponentProps(props, {
+                id: props.id,
+                onAddRelationship: props.onAddRelationship,
+                fromEntity: 'EVENT',
+            }),
+            validatorContainers: [
+            ],
+            propName: 'relationship',
+            meta: {
+                placement: placements.BOTTOM,
+                section: dataEntrySectionNames.RELATIONSHIPS,
+            },
+        } : null;
+    };
 
     return relationshipsSettings;
 };
@@ -354,7 +361,7 @@ const saveHandlerConfig = {
         return passOnProps;
     },
 };
-const RelationshipField = withDataEntryField(buildRelationshipsSettingsFn())(DataEntry);
+const RelationshipField = withDataEntryFieldIfApplicable(buildRelationshipsSettingsFn())(DataEntry);
 const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);

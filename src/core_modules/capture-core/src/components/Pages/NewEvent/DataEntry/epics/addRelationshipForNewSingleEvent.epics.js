@@ -1,4 +1,7 @@
 // @flow
+import uuid from 'd2-utilizr/src/uuid';
+import i18n from '@dhis2/d2-i18n';
+
 import {
     initializeNewRelationship,
 } from '../../../NewRelationship/newRelationship.actions';
@@ -15,7 +18,10 @@ import {
 
 import {
     addRelationship,
+    duplicateRelationship,
 } from '../../../../DataEntry/actions/dataEntry.actions';
+import { ObjectUnsubscribedError } from 'rxjs';
+import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 
 const typeToRelationshipConstraint = {
     TRACKED_ENTITY_INSTANCE: (entityId: ?string) => ({
@@ -29,25 +35,46 @@ const typeToRelationshipConstraint = {
         },
     }),
 };
+const dataEntryId = 'singleEvent';
+const itemId = 'newEvent';
+const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
 
 export const openRelationshipForNewSingleEventEpic = (action$: InputObservable) =>
     // $FlowSuppress
     action$.ofType(newEventDataEntryActionTypes.NEW_EVENT_OPEN_NEW_RELATIONSHIP)
         .map(() => initializeNewRelationship());
 
-export const addRelationshipForNewSingleEventEpic = (action$: InputObservable) =>
+export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
     action$.ofType(newEventNewRelationshipActionTypes.ADD_NEW_EVENT_RELATIONSHIP)
         .map((action) => {
+            const state = store.getState();
+            const existingRelationships = state.dataEntriesRelationships[dataEntryKey] || [];
             const payload = action.payload;
-
-            const relationship = {
+            
+            const newRelationship = {
+                clientId: uuid(),
                 entity: { ...payload.entity },
                 entityType: payload.entityType,
                 relationshipType: { ...payload.relationshipType },
             };
 
-            return addRelationship('singleEvent', 'newEvent', relationship);
+            if (existingRelationships.some(r =>
+                r.relationshipType.id === newRelationship.relationshipType.id &&
+                r.entity.id &&
+                r.entity.id === newRelationship.entity.id)
+            ) {
+                const message = i18n.t(
+                    'Relationship of type {{relationshipTypeName}} to {{entityName}} already exists',
+                    {
+                        entityName: newRelationship.entity.displayName,
+                        relationshipTypeName: newRelationship.relationshipType.name,
+                    },
+                );
+                return duplicateRelationship(dataEntryId, itemId, message);
+            }
+
+            return addRelationship(dataEntryId, itemId, newRelationship);
         });
 
 const saveNewEventRelationships = (action: Object) => {

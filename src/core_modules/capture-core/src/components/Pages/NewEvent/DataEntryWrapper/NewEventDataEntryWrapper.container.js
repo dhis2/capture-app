@@ -5,18 +5,19 @@ import {
     setNewEventFormLayoutDirection,
 } from './newEventDataEntryWrapper.actions';
 import {
-    makeFormFoundationSelector,
+    makeFormFoundationSelector, makeStageSelector,
 } from './newEventDataEntryWrapper.selectors';
 import getDataEntryHasChanges from '../getNewEventDataEntryHasChanges';
 
 
 const makeMapStateToProps = () => {
-    const formFoundationSelector = makeFormFoundationSelector();
+    const stageSelector = makeStageSelector();
 
     const mapStateToProps = (state: ReduxState) => {
-        const formFoundation = formFoundationSelector(state);
-
+        const stage = stageSelector(state);
+        const formFoundation = stage && stage.stageForm ? stage.stageForm : null;
         return {
+            stage,
             formFoundation,
             dataEntryHasChanges: getDataEntryHasChanges(state),
             formHorizontal: (formFoundation && formFoundation.customForm ? false : !!state.newEventPage.formHorizontal),

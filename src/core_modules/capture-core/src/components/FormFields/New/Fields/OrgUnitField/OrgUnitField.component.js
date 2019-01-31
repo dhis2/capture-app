@@ -39,6 +39,7 @@ type Props = {
     searchText: ?string,
     ready?: ?boolean,
     selected?: ?string,
+    maxTreeHeight?: ?number,
     classes: {
         outerContainer: string,
         container: string,
@@ -74,8 +75,10 @@ class OrgUnitField extends React.Component<Props> {
             treeKey,
             classes,
             selected,
+            maxTreeHeight,
             ...passOnProps // eslint-disable-line
         } = this.props;
+        const styles = maxTreeHeight ? { maxHeight: maxTreeHeight, overflowY: 'auto' } : null;
         return (
             <div
                 className={classes.container}
@@ -88,7 +91,7 @@ class OrgUnitField extends React.Component<Props> {
                         classes={this.classes}
                     />
                 </div>
-                <div className={classes.orgUnitTreeContainer}>
+                <div className={classes.orgUnitTreeContainer} style={styles}>
                     <OrgUnitTree
                         roots={roots}
                         onSelectClick={onSelectClick}

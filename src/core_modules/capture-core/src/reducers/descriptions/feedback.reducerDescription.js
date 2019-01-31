@@ -92,5 +92,7 @@ export const feedbackDesc = createReducerDescription({
         addErrorFeedback(state, i18n.t(action.payload.message)),
     [orgUnitListActionTypes.SET_SEARCH_ROOTS_FAILED]: (state, action) =>
         addErrorFeedback(state, i18n.t(action.payload.message)),
+    [dataEntryActionTypes.DUPLICATE_RELATIONSHIP]: (state, action) =>
+        addErrorFeedback(state, action.payload.message),
 }, 'feedbacks', []);
 
