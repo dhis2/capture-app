@@ -130,6 +130,12 @@ class EnrollmentFactory {
                     _thisInputSearchGroup.searchFoundation = searchGroup.searchForm;
                     _thisInputSearchGroup.onSearch = (values: Object = {}, contextProps: Object = {}) => {
                         const { orgUnitId, trackedEntityType } = contextProps;
+                        return new Promise((resolve) => {
+                            setTimeout(() => {
+                                resolve();
+                            }, 30000);
+                        });
+
                         return getApi()
                             .get(
                                 'trackedEntityInstances/count.json',

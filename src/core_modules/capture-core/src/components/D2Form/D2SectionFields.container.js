@@ -23,6 +23,7 @@ const makeMapStateToProps = () => {
         rulesMessages: getRulesMessages(state, props),
         rulesCompulsoryFields: getCompulsory(state, props),
         rulesDisabledFields: getDisabled(state, props),
+        loadNr: state.forms[props.formId].loadNr,
     });
     return mapStateToProps;
 };

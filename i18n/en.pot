@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-01-25T13:05:06.009Z\n"
-"PO-Revision-Date: 2019-01-25T13:05:06.009Z\n"
+"POT-Creation-Date: 2019-01-29T12:23:28.983Z\n"
+"PO-Revision-Date: 2019-01-29T12:23:28.983Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -90,6 +90,9 @@ msgid "Save"
 msgstr ""
 
 msgid "Operations running"
+msgstr ""
+
+msgid "search group result could not be retrieved"
 msgstr ""
 
 msgid "Sort"

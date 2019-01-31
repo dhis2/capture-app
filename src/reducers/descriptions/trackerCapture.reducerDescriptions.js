@@ -1,5 +1,9 @@
 // @flow
-import { formsValuesDesc, formsSectionsFieldsUIDesc } from 'capture-core/reducers/descriptions/form.reducerDescription';
+import {
+    formsValuesDesc,
+    formsSectionsFieldsUIDesc,
+    formsDesc,
+} from 'capture-core/reducers/descriptions/form.reducerDescription';
 import { eventsDesc, eventsValuesDesc } from 'capture-core/reducers/descriptions/events.reducerDescription';
 import {
     dataEntriesDesc,
@@ -59,6 +63,7 @@ export default [
     currentSelectionsReducerDesc,
     formsValuesDesc,
     formsSectionsFieldsUIDesc,
+    formsDesc,
     eventsDesc,
     eventsValuesDesc,
     dataEntriesDesc,

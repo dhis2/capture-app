@@ -15,6 +15,7 @@ export { default as withWarningOutput } from './dataEntryOutput/withWarningOutpu
 export { default as withErrorOutput } from './dataEntryOutput/withErrorOutput';
 export { default as withIndicatorOutput } from './dataEntryOutput/withIndicatorOutput';
 export { default as withSearchGroups } from './withSearchGroups';
+export { default as withCleanUpHOC } from './withCleanUp';
 
 // misc
 export { default as inMemoryFileStore } from './file/inMemoryFileStore';

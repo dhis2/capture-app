@@ -1,11 +1,14 @@
 // @flow
 import * as React from 'react';
+import log from 'loglevel';
 import { connect } from 'react-redux';
-import { pipe } from 'capture-core-utils';
+import { pipe, makeCancelablePromise } from 'capture-core-utils';
+import type { CancelablePromise } from 'capture-core-utils/cancelablePromise/makeCancelable';
+import i18n from '@dhis2/d2-i18n';
 import { InputSearchGroup, RenderFoundation } from '../../metaData';
 import getDataEntryKey from './common/getDataEntryKey';
 import { convertFormToClient, convertClientToServer } from '../../converters';
-import { searchGroupResultCountRetrieved } from './actions/searchGroup.actions';
+import { searchGroupResultCountRetrieved, searchGroupResultCountRetrievalFailed } from './actions/searchGroup.actions';
 
 type Props = {
     dataEntryKey: string,
@@ -13,6 +16,9 @@ type Props = {
     onUpdateFormField: (fieldId: string, value: any, innerAction: ReduxAction<any, any>, updateCompletePromise: ?Promise<any>, searchCompletePromises: ?Array<Promise<any>>) => void,
     onSearchGroupResultCountRetrievedInner: (count: number, dataEntryKey: string, groupId: string, completePromise?: ?Promise<any>, onSearchGroupResultCountRetrieved: ?Function) => void,
     onSearchGroupResultCountRetrieved: ?(innerAction: ReduxAction<any, any>, completePromise?: ?Promise<any>) => void,
+    onSearchGroupResultCountRetrievalFailedInner: (error: number, dataEntryKey: string, groupId: string, completePromise?: ?Promise<any>, onSearchGroupResultCountRetrieved: ?Function) => void,
+    onSearchGroupResultCountRetrievalFailed: ?(innerAction: ReduxAction<any, any>, completePromise?: ?Promise<any>) => void,
+    onCleanUp?: ?(remainingPromises: Array<Promise<any>>) => void,
 };
 
 type SearchGroupsGetter = (props: Props) => Array<InputSearchGroup>;
@@ -21,13 +27,16 @@ type SearchContextGetter = (props: Props) => Object;
 type SearchGroupPromises = {
     completePromise: Promise<any>,
     completePromiseResolver: () => void,
-    currentSearchPromise: Promise<any>,
+    currentSearchCancelablePromise: CancelablePromise<any>,
 };
+
+const searchGroupsPromises: { [dataEntryKey: string]: { [groupId: string]: ?SearchGroupPromises }} = {};
 
 const getSearchGroupsHOC = (
     InnerComponent: React.ComponentType<any>,
     onGetSearchGroups: SearchGroupsGetter,
     onGetSearchContext: ?SearchContextGetter,
+    keepPromisesAliveOnUnmount: boolean,
 ) => {
     class SearchGroupPostHOC extends React.PureComponent<Object> {
         render() {
@@ -55,11 +64,31 @@ const getSearchGroupsHOC = (
         }
 
         searchGroups: Array<InputSearchGroup>;
-        searchGroupsPromises: { [groupId: string]: ?SearchGroupPromises };
         constructor(props: Props) {
             super(props);
             this.searchGroups = onGetSearchGroups(this.props);
-            this.searchGroupsPromises = {};
+        }
+
+        componentWillUnmount() {
+            if (!keepPromisesAliveOnUnmount) {
+                this.props.onCleanUp && this.props.onCleanUp(this.cleanUpPromises());
+            }
+        }
+
+        cleanUpPromises() {
+            const { dataEntryKey } = this.props;
+            const currentSearchGroupsPromises = searchGroupsPromises[dataEntryKey] || {};
+            const remainingCompletePromises: Array<Promise<any>> = Object
+                .keys(currentSearchGroupsPromises)
+                .map((key) => {
+                    const { currentSearchCancelablePromise, completePromise } =
+                        currentSearchGroupsPromises[key] || {};
+                    currentSearchCancelablePromise && currentSearchCancelablePromise.cancel();
+                    return completePromise;
+                })
+                .filter(promise => !!promise);
+            searchGroupsPromises[dataEntryKey] = {};
+            return remainingCompletePromises;
         }
 
         getSearchGroupsForField(
@@ -87,38 +116,56 @@ const getSearchGroupsHOC = (
             const {
                 onSearchGroupResultCountRetrievedInner,
                 onSearchGroupResultCountRetrieved,
+                onSearchGroupResultCountRetrievalFailedInner,
+                onSearchGroupResultCountRetrievalFailed,
                 dataEntryKey,
             } = this.props;
             const searchGroupId = searchGroupForField.id;
 
-            const promiseContainer = this.searchGroupsPromises[searchGroupId] || {};
+            const promiseContainer = (
+                searchGroupsPromises[dataEntryKey] && searchGroupsPromises[dataEntryKey][searchGroupId]
+            ) || {};
             if (!promiseContainer.completePromise) {
                 promiseContainer.completePromise = new Promise((resolve) => {
                     promiseContainer.completePromiseResolver = resolve;
                 });
             }
-
-            promiseContainer.currentSearchPromise = searchGroupForField
+            promiseContainer.currentSearchCancelablePromise && promiseContainer.currentSearchCancelablePromise.cancel();
+            promiseContainer.currentSearchCancelablePromise = makeCancelablePromise(searchGroupForField
                 .onSearch(
                     SearchGroupsHOC.getServerValues(updatedFormValues, searchGroupForField.searchFoundation),
                     onGetSearchContext ? onGetSearchContext(this.props) : {},
-                )
+                ),
+            );
+            promiseContainer.currentSearchCancelablePromise
+                .promise
                 .then((result) => {
-                    if (promiseContainer.currentSearchPromise ===
-                        (this.searchGroupsPromises[searchGroupId] &&
-                        this.searchGroupsPromises[searchGroupId].currentSearchPromise)) {
-                        onSearchGroupResultCountRetrievedInner(
-                            result,
+                    onSearchGroupResultCountRetrievedInner(
+                        result,
+                        dataEntryKey,
+                        searchGroupId,
+                        promiseContainer.completePromise,
+                        onSearchGroupResultCountRetrieved,
+                    );
+                    promiseContainer.completePromiseResolver();
+                    searchGroupsPromises[dataEntryKey][searchGroupId] = null;
+                })
+                .catch((reason) => {
+                    if (!reason.isCanceled) {
+                        log.error({ reason });
+                        onSearchGroupResultCountRetrievalFailedInner(
+                            i18n.t('search group result could not be retrieved'),
                             dataEntryKey,
                             searchGroupId,
                             promiseContainer.completePromise,
-                            onSearchGroupResultCountRetrieved,
+                            onSearchGroupResultCountRetrievalFailed,
                         );
-                        promiseContainer.completePromiseResolver();
-                        this.searchGroupsPromises[searchGroupId] = null;
                     }
                 });
-            this.searchGroupsPromises[searchGroupId] = promiseContainer;
+            if (!searchGroupsPromises[dataEntryKey]) {
+                searchGroupsPromises[dataEntryKey] = {};
+            }
+            searchGroupsPromises[dataEntryKey][searchGroupId] = promiseContainer;
             return promiseContainer.completePromise;
         }
 
@@ -153,6 +200,8 @@ const getSearchGroupsHOC = (
                 onUpdateFormField,
                 onSearchGroupResultCountRetrievedInner,
                 onSearchGroupResultCountRetrieved,
+                onSearchGroupResultCountRetrievalFailedInner,
+                onSearchGroupResultCountRetrievalFailed,
                 ...passOnProps
             } = this.props;
 
@@ -196,6 +245,20 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
             dispatch(action);
         }
     },
+    onSearchGroupResultCountRetrievalFailedInner: (
+        error: string,
+        dataEntryKey: string,
+        groupId: string,
+        completePromise?: ?Promise<any>,
+        onSearchGroupResultCountRetrievalFailed: ?Function,
+    ) => {
+        const action = searchGroupResultCountRetrievalFailed(error, dataEntryKey, groupId);
+        if (onSearchGroupResultCountRetrievalFailed) {
+            onSearchGroupResultCountRetrievalFailed(action, completePromise);
+        } else {
+            dispatch(action);
+        }
+    },
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
@@ -209,9 +272,13 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     return mergedProps;
 };
 
-export default (onGetSearchGroups: SearchGroupsGetter, onGetSearchContext?: ?SearchContextGetter) =>
+export default (
+    onGetSearchGroups: SearchGroupsGetter,
+    onGetSearchContext?: ?SearchContextGetter,
+    keepPromisesAliveOnUnmount: boolean = false,
+) =>
     (InnerComponent: React.ComponentType<any>) =>
         // $FlowSuppress
         connect(
             mapStateToProps, mapDispatchToProps, mergeProps)(
-            getSearchGroupsHOC(InnerComponent, onGetSearchGroups, onGetSearchContext));
+            getSearchGroupsHOC(InnerComponent, onGetSearchGroups, onGetSearchContext, keepPromisesAliveOnUnmount));

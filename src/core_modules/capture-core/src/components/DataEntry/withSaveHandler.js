@@ -37,6 +37,7 @@ type Props = {
     onFieldsValidated: (innerAction: ReduxAction<any, any>) => void,
     onUpdateFormField: (innerAction: ReduxAction<any, any>) => void,
     onSearchGroupResultCountRetrieved: (innerAction: ReduxAction<any, any>) => void,
+    onSearchGroupResultCountRetrievalFailed: (innerAction: ReduxAction<any, any>) => void,
 };
 
 type IsCompletingFn = (props: Props) => boolean;
@@ -272,7 +273,16 @@ const getSaveHandler = (
             this.props.onSearchGroupResultCountRetrieved(innerAction);
         }
 
-        handleCleanUpFromFormSections = (
+        handleSearchGroupResultCountRetrievalFailed = (
+            innerAction: ReduxAction<any, any>,
+            completePromise: Promise<any>,
+        ) => {
+            const dataEntryKey = getDataEntryKey(this.props.id, this.props.itemId);
+            AsyncFieldHandler.removePromise(dataEntryKey, completePromise);
+            this.props.onSearchGroupResultCountRetrievalFailed(innerAction);
+        }
+
+        handleCleanUpPromises = (
             remainingPromises: Array<Promise<any>>,
         ) => {
             const dataEntryKey = getDataEntryKey(this.props.id, this.props.itemId);
@@ -291,6 +301,8 @@ const getSaveHandler = (
                 onIsValidating,
                 onFieldsValidated,
                 onUpdateFormField,
+                onSearchGroupResultCountRetrieved,
+                onSearchGroupResultCountRetrievalFailed,
                 ...passOnProps
             } = this.props;
 
@@ -311,7 +323,8 @@ const getSaveHandler = (
                         onFieldsValidated={this.handleFieldsValidated}
                         onUpdateFormField={this.handleUpdateField}
                         onSearchGroupResultCountRetrieved={this.handleSearchGroupResultCountRetrieved}
-                        onCleanUp={this.handleCleanUpFromFormSections}
+                        onSearchGroupResultCountRetrievalFailed={this.handleSearchGroupResultCountRetrievalFailed}
+                        onCleanUp={this.handleCleanUpPromises}
                         {...filteredProps}
                     />
                     <Dialog
@@ -400,6 +413,11 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         dispatch(innerAction);
     },
     onSearchGroupResultCountRetrieved: (
+        innerAction: ReduxAction<any, any>,
+    ) => {
+        dispatch(innerAction);
+    },
+    onSearchGroupResultCountRetrievalFailed: (
         innerAction: ReduxAction<any, any>,
     ) => {
         dispatch(innerAction);

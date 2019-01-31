@@ -6,7 +6,6 @@ import DataEntry from '../../../../components/DataEntry/DataEntry.container';
 import withSaveHandler from '../../../../components/DataEntry/withSaveHandler';
 import withCancelButton from '../../../../components/DataEntry/withCancelButton';
 import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
-import { placements } from '../../../../components/DataEntry';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import getNoteValidatorContainers from './fieldValidators/note.validatorContainersGetter';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
@@ -15,6 +14,10 @@ import withMainButton from './withMainButton';
 import withFilterProps from '../../../FormFields/New/HOC/withFilterProps';
 import DataEntryNotes from '../../../DataEntry/DataEntryNotes.container';
 
+import {
+    placements,
+    withCleanUpHOC,
+} from '../../../../components/DataEntry';
 import {
     withInternalChangeHandler,
     withLabel,
@@ -289,7 +292,8 @@ const saveHandlerConfig = {
     },
 };
 
-const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(DataEntry);
+const CleanUpHOC = withCleanUpHOC()(DataEntry);
+const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CleanUpHOC);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
 const NotesField = withDataEntryField(buildNotesSettingsFn())(ReportDateField);
 const FeedbackOutput = withFeedbackOutput()(NotesField);

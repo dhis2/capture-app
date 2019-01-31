@@ -7,14 +7,16 @@ import DataEntry from '../../../../components/DataEntry/DataEntry.container';
 import withSaveHandler from '../../../../components/DataEntry/withSaveHandler';
 import withCancelButton from '../../../../components/DataEntry/withCancelButton';
 import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
-import { placements } from '../../../../components/DataEntry';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import withMainButton from './withMainButton';
 import getNoteValidatorContainers from './fieldValidators/note.validatorContainersGetter';
 import DataEntryNotes from '../../../DataEntry/DataEntryNotes.container';
 import DataEntryRelationships from '../../../DataEntry/DataEntryRelationships.component';
-
+import {
+    placements,
+    withCleanUpHOC,
+} from '../../../DataEntry';
 import {
     withInternalChangeHandler,
     withLabel,
@@ -355,7 +357,9 @@ const saveHandlerConfig = {
         return passOnProps;
     },
 };
-const RelationshipField = withDataEntryField(buildRelationshipsSettingsFn())(DataEntry);
+
+const CleanUpHOC = withCleanUpHOC()(DataEntry);
+const RelationshipField = withDataEntryField(buildRelationshipsSettingsFn())(CleanUpHOC);
 const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);

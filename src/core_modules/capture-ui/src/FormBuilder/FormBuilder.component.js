@@ -73,13 +73,14 @@ type Props = {
     onIsValidating: ?Function,
     onIsValidatingInner: IsValidatingInnerFn,
     onCleanUp?: ?(remainingPromises: Array<Promise<any>>) => void,
+    loadNr: number,
 };
 
 type FieldCommitOptions = {
     touched?: boolean,
 };
 
-type FieldsValidatingPromiseContainer = { [fieldId: string]: ?{ cancelableValidatingPromise?: ?CancelablePromise, validatingCompletePromise: Promise<any>, validatingCompletePromiseResolver: Function } };
+type FieldsValidatingPromiseContainer = { [fieldId: string]: ?{ cancelableValidatingPromise?: ?CancelablePromise<any>, validatingCompletePromise: Promise<any>, validatingCompletePromiseResolver: Function } };
 
 class FormBuilder extends React.Component<Props> {
     static async validateField(
@@ -238,11 +239,67 @@ class FormBuilder extends React.Component<Props> {
             );
     }
 
-    static validateAllFields(
+    fieldInstances: Map<string, any>;
+    asyncUIState: { [id: string]: FieldUI };
+    fieldsValidatingPromiseContainer: FieldsValidatingPromiseContainer;
+    validateAllCancelablePromise: ?CancelablePromise<any>;
+
+    constructor(props: Props) {
+        super(props);
+        this.fieldInstances = new Map();
+        this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
+        this.fieldsValidatingPromiseContainer = {};
+
+        if (this.props.validateIfNoUIData) {
+            this.validateAllFields(this.props, this.fieldsValidatingPromiseContainer);
+        }
+    }
+
+    componentWillReceiveProps(newProps: Props) {
+        if (newProps.id !== this.props.id) {
+            this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
+        } else {
+            this.asyncUIState =
+                FormBuilder.updateAsyncUIState(this.props.fieldsUI, newProps.fieldsUI, this.asyncUIState);
+        }
+
+        if (this.props.validateIfNoUIData &&
+            (newProps.id !== this.props.id || newProps.loadNr !== this.props.loadNr)
+        ) {
+            newProps.onCleanUp && newProps.onCleanUp(this.getCleanUpData());
+            this.validateAllFields(newProps, this.fieldsValidatingPromiseContainer);
+        }
+    }
+
+    componentWillUnmount() {
+        this.props.onCleanUp && this.props.onCleanUp(this.getCleanUpData());
+    }
+
+    getCleanUpData() {
+        const remainingCompletePromises: Array<Promise<any>> = Object
+            .keys(this.fieldsValidatingPromiseContainer)
+            .map((key) => {
+                const { cancelableValidatingPromise, validatingCompletePromise } =
+                    this.fieldsValidatingPromiseContainer[key] || {};
+                cancelableValidatingPromise && cancelableValidatingPromise.cancel();
+                return validatingCompletePromise;
+            })
+            .filter(promise => !!promise);
+
+        this.fieldsValidatingPromiseContainer = {};
+        return remainingCompletePromises;
+    }
+
+    validateAllFields(
         props: Props,
-        fieldsValidatingPromiseContainer: FieldsValidatingPromiseContainer,
     ) {
-        FormBuilder.executeValidateAllFields(props, fieldsValidatingPromiseContainer)
+        this.validateAllCancelablePromise && this.validateAllCancelablePromise.cancel();
+        this.validateAllCancelablePromise = makeCancelablePromise(
+            FormBuilder.executeValidateAllFields(props, this.fieldsValidatingPromiseContainer),
+        );
+
+        this.validateAllCancelablePromise
+            .promise
             .then((validationContainerArray) => {
                 const validationContainers = validationContainerArray
                     .reduce((accFieldsUI, container) => {
@@ -252,7 +309,7 @@ class FormBuilder extends React.Component<Props> {
 
                 const promisesAndIdForActuallyValidatedFields = validationContainerArray
                     .map(validationDataContainer => ({
-                        promises: fieldsValidatingPromiseContainer[validationDataContainer.id],
+                        promises: this.fieldsValidatingPromiseContainer[validationDataContainer.id],
                         id: validationDataContainer.id,
                     }));
 
@@ -266,57 +323,11 @@ class FormBuilder extends React.Component<Props> {
                 promisesAndIdForActuallyValidatedFields
                     .forEach((container) => {
                         container.promises.validatingCompletePromiseResolver();
-                        fieldsValidatingPromiseContainer[container.id] = null;
+                        this.fieldsValidatingPromiseContainer[container.id] = null;
                     });
+
+                this.validateAllCancelablePromise = null;
             });
-    }
-
-    fieldInstances: Map<string, any>;
-    asyncUIState: { [id: string]: FieldUI };
-    fieldsValidatingPromiseContainer: FieldsValidatingPromiseContainer;
-
-    constructor(props: Props) {
-        super(props);
-        this.fieldInstances = new Map();
-        this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
-        this.fieldsValidatingPromiseContainer = {};
-
-        if (this.props.validateIfNoUIData) {
-            FormBuilder.validateAllFields(this.props, this.fieldsValidatingPromiseContainer);
-        }
-    }
-
-    componentWillReceiveProps(newProps: Props) {
-        if (newProps.id !== this.props.id) {
-            this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
-        } else {
-            this.asyncUIState =
-                FormBuilder.updateAsyncUIState(this.props.fieldsUI, newProps.fieldsUI, this.asyncUIState);
-        }
-
-        if (this.props.validateIfNoUIData &&
-            (newProps.id !== this.props.id || newProps.fields.length !== Object.keys(newProps.fieldsUI).length)
-        ) {
-            newProps.onCleanUp && newProps.onCleanUp(this.getCleanUpData());
-            FormBuilder.validateAllFields(newProps, this.fieldsValidatingPromiseContainer);
-        }
-    }
-
-    componentWillUnmount() {
-        this.props.onCleanUp && this.props.onCleanUp(this.getCleanUpData());
-    }
-
-    getCleanUpData() {
-        const remainingCompletePromises: Array<Promise<any>> = Object
-            .keys(this.fieldsValidatingPromiseContainer)
-            .map((key) => {
-                // $FlowFixMe
-                const { cancelableValidatingPromise, validatingCompletePromise } =
-                    this.fieldsValidatingPromiseContainer[key];
-                cancelableValidatingPromise && cancelableValidatingPromise.cancel();
-                return validatingCompletePromise;
-            });
-        return remainingCompletePromises;
     }
 
     /**

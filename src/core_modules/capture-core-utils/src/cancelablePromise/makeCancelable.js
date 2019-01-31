@@ -1,7 +1,7 @@
 // @flow
 
-export type CancelablePromise = {
-    promise: Promise<any>,
+export type CancelablePromise<T> = {
+    promise: Promise<T>,
     cancel: () => void,
 };
 

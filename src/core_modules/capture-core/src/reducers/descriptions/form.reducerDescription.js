@@ -128,3 +128,25 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
         };
     },
 }, 'formsSectionsFieldsUI');
+
+export const formsDesc = createReducerDescription({
+    [loaderActionTypes.ADD_FORM_DATA]: (state, action) => {
+        const payload = action.payload;
+
+        const prevLoadNr = state[payload.formId] && state[payload.formId].loadNr;
+        let nextLoadNr;
+        if (!prevLoadNr) {
+            nextLoadNr = 1;
+        } else {
+            nextLoadNr = prevLoadNr === 999 ? 1 : prevLoadNr + 1;
+        }
+
+        return {
+            ...state,
+            [payload.formId]: {
+                ...state[payload.formId],
+                loadNr: nextLoadNr,
+            },
+        };
+    },
+}, 'forms');

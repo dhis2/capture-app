@@ -52,6 +52,7 @@ type Props = {
     fieldOptions?: ?Object,
     customForm: MetadataCustomForm,
     validationStrategy: $Values<typeof validationStrategies>,
+    loadNr: number,
 };
 
 class D2SectionFields extends Component<Props> {
@@ -218,6 +219,7 @@ class D2SectionFields extends Component<Props> {
             onUpdateFieldAsync,
             fieldOptions,
             validationStrategy,
+            loadNr,
             ...passOnProps } = this.props;
 
         this.buildRulesCompulsoryErrors();
@@ -231,6 +233,7 @@ class D2SectionFields extends Component<Props> {
                 onUpdateField={this.handleUpdateField}
                 onUpdateFieldAsync={this.handleUpdateFieldAsync}
                 validateIfNoUIData
+                loadNr={loadNr}
                 {...passOnProps}
             />
         );

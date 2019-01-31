@@ -282,7 +282,7 @@ export const dataEntriesRelationshipsDesc = createReducerDescription({
 
 export const dataEntriesSearchGroupsResultsDesc = createReducerDescription({
     [searchGroupActionTypes.SEARCH_GROUP_RESULT_COUNT_RETRIVED]: (state, action) => {
-        const { dataEntryKey, count, groupId } = action.payload;
+        const { count, dataEntryKey, groupId } = action.payload;
         return {
             ...state,
             [dataEntryKey]: {
@@ -290,6 +290,19 @@ export const dataEntriesSearchGroupsResultsDesc = createReducerDescription({
                 [groupId]: {
                     ...(state[dataEntryKey] && state[dataEntryKey][groupId]),
                     count,
+                },
+            },
+        };
+    },
+    [searchGroupActionTypes.SEARCH_GROUP_RESULT_COUNT_RETRIEVAL_FAILED]: (state, action) => {
+        const { error: countError, dataEntryKey, groupId } = action.payload;
+        return {
+            ...state,
+            [dataEntryKey]: {
+                ...state[dataEntryKey],
+                [groupId]: {
+                    ...(state[dataEntryKey] && state[dataEntryKey][groupId]),
+                    countError,
                 },
             },
         };
