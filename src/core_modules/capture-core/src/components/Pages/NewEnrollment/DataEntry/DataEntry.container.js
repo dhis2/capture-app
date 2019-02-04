@@ -30,8 +30,8 @@ const makeMapStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onUpdateField: (innerAction: ReduxAction<any, any>) => {
-        dispatch(updateFieldBatch(innerAction));
+    onUpdateField: (innerAction: ReduxAction<any, any>, extraActions: { searchActions: ?Array<ReduxAction<any, any>>}) => {
+        dispatch(updateFieldBatch(innerAction, extraActions));
     },
     onSave: (itemId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);

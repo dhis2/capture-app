@@ -21,6 +21,7 @@ import getDataEntryKey from './common/getDataEntryKey';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 import AsyncFieldHandler from './asyncFields/AsyncFieldHandler';
+import { updateFieldAndRunOtherSaveHandlerActionsBatch } from './actions/saveHandler.actionBatches';
 
 type Props = {
     classes: Object,
@@ -35,7 +36,7 @@ type Props = {
     hasGeneralErrors: ?boolean,
     onIsValidating: (innerAction: ReduxAction<any, any>) => void,
     onFieldsValidated: (innerAction: ReduxAction<any, any>) => void,
-    onUpdateFormField: (innerAction: ReduxAction<any, any>) => void,
+    onUpdateFormField: (innerAction: ReduxAction<any, any>, extraActions: { searchActions: ?Array<ReduxAction<any, any>>}) => void,
     onSearchGroupResultCountRetrieved: (innerAction: ReduxAction<any, any>) => void,
     onSearchGroupResultCountRetrievalFailed: (innerAction: ReduxAction<any, any>) => void,
 };
@@ -255,13 +256,27 @@ const getSaveHandler = (
             value: any,
             innerAction: ReduxAction<any, any>,
             updateCompletePromise: ?Promise<any>,
-            searchCompletePromises: ?Array<Promise<any>>,
+            extraArgs?: ?{
+                searchCompletePromises: ?Array<Promise<any>>,
+                searchActions: ?Array<ReduxAction<any, any>>,
+            },
         ) => {
             const dataEntryKey = getDataEntryKey(this.props.id, this.props.itemId);
             updateCompletePromise && AsyncFieldHandler.removePromise(dataEntryKey, updateCompletePromise);
-            searchCompletePromises && searchCompletePromises
-                .forEach(p => AsyncFieldHandler.setPromise(dataEntryKey, p));
-            this.props.onUpdateFormField(innerAction);
+
+            if (extraArgs && extraArgs.searchCompletePromises) {
+                const searchCompletePromises = extraArgs.searchCompletePromises;
+                searchCompletePromises && searchCompletePromises
+                    .forEach((p) => {
+                        AsyncFieldHandler.setPromise(dataEntryKey, p.promise);
+                    });
+            }
+
+            const extraActions = {
+                searchActions: extraArgs && extraArgs.searchActions,
+            };
+
+            this.props.onUpdateFormField(innerAction, extraActions);
         }
 
         handleSearchGroupResultCountRetrieved = (
@@ -409,8 +424,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
     onUpdateFormField: (
         innerAction: ReduxAction<any, any>,
+        extraActions: { searchActions: ?Array<ReduxAction<any, any>> },
     ) => {
-        dispatch(innerAction);
+        dispatch(updateFieldAndRunOtherSaveHandlerActionsBatch(innerAction, extraActions));
     },
     onSearchGroupResultCountRetrieved: (
         innerAction: ReduxAction<any, any>,

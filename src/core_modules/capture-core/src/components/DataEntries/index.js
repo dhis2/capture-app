@@ -5,6 +5,8 @@ export {
     openDataEntryForNewEnrollmentBatch,
     runRulesOnUpdateFieldBatch,
     buildServerData as buildServerDataForEnrollmentDataEntry,
+    openBatchActionTypes as enrollmentOpenBatchActionTypes,
+    enrollmentBatchActionTypes,
 } from './Enrollment';
 export {
     convertGeometryOut,

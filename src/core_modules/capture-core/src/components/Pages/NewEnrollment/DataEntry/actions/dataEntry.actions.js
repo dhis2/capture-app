@@ -10,8 +10,8 @@ export const actionTypes = {
     ENROLLMENT_SAVE_FAILED: 'EnrollmentSaveFailed',
 };
 
-export const startRunRulesOnUpdateForNewEnrollment = (actionData: { payload: Object}) =>
-    actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)(actionData);
+export const startRunRulesOnUpdateForNewEnrollment = (actionData: { payload: Object}, searchActions: any) =>
+    actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)({ actionData, searchActions }, { skipLogging: ['searchActions'] });
 
 export const requestSaveNewEnrollmentAndReturnToMainPage =
     (dataEntryId: string, itemId: string, formFoundation: Object) =>

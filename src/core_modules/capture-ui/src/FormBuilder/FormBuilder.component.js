@@ -523,6 +523,7 @@ class FormBuilder extends React.Component<Props> {
             onIsValidatingInner,
             onGetValidationContext,
             onCleanUp,
+            loadNr,
             ...passOnProps } = this.props;
 
         const props = field.props || {};

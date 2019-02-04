@@ -25,3 +25,6 @@ export { default as placements } from './constants/placements.const';
 
 // actions
 export { actionTypes as searchGroupActionTypes } from './actions/searchGroup.actions';
+
+// epics
+export { executeSearchForSearchGroupEpic } from './epics/searchGroups.epics';
