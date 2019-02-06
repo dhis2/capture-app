@@ -13,8 +13,9 @@ export { default as OrgUnitFieldForForm } from './OrgUnitField/OrgUnitFieldForFo
 export { default as TextFieldForForm } from './TextField/TextFieldForForm.component';
 export { default as TrueOnlyFieldForForm } from './TrueOnlyField/TrueOnlyFieldForForm.component';
 export { default as UserNameFieldForForm } from './UserNameField/UserNameFieldForForm.component';
-export { default as NumberRangeFieldForForm } from './NumberRangeField/NumberRangeFieldForForm.component';
+export { default as TextRangeFieldForForm } from './TextRangeField/TextRangeFieldForForm.component';
 export { default as DateRangeFieldForForm } from './DateRangeField/DateRangeFieldForForm.component';
+export { default as DateTimeRangeFieldForForm } from './DateTimeRangeField/DateTimeRangeFieldForForm.component';
 
 // custom form
 export { default as AgeFieldForCustomForm } from './AgeField/AgeFieldForCustomForm.component';

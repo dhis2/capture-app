@@ -12,8 +12,9 @@ export { default as getOrgUnitFieldConfig } from './orgUnitField/getOrgUnitField
 export { default as getTextFieldConfig } from './textField/getTextFieldConfig';
 export { default as getTrueOnlyFieldConfig } from './trueOnlyField/getTrueOnlyFieldConfig';
 export { default as getUserNameFieldConfig } from './userNameField/getUserNameFieldConfig';
-export { default as getNumberRangeFieldConfig } from './numberRangeField/getNumberRangeFieldConfig';
+export { default as getTextRangeFieldConfig } from './textRangeField/getTextRangeFieldConfig';
 export { default as getDateRangeFieldConfig } from './dateRangeField/getDateRangeFieldConfig';
+export { default as getDateTimeRangeFieldConfig } from './dateTimeRangeField/getDateTimeRangeFieldConfig';
 
 // custom form
 export { default as getAgeFieldConfigForCustomForm } from './ageField/getAgeFieldConfigForCustomForm';

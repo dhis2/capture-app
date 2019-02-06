@@ -1,26 +1,34 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import DateField from '../DateField/Date.component';
+import DateTimeField from '../DateTimeField/DateTime.component';
 import withFocusSaver from '../../HOC/withFocusSaver';
-import withShrinkLabel from '../../HOC/withShrinkLabel';
-import defaultClasses from './dateRangeField.mod.css';
+import defaultClasses from './dateTimeRangeField.mod.css';
 import InnerMessage from '../../internal/InnerMessage/InnerMessage.component';
 
+const RangeInputField = withFocusSaver()(DateTimeField);
 
-const RangeInputField = withFocusSaver()(withShrinkLabel()(DateField));
 
-type DateRangeValue = {
-    from?: ?string,
-    to?: ?string,
+type DateTimeValue = {
+    date?: ?string,
+    time?: ?string,
+};
+
+type DateTimeRangeValue = {
+    from?: ?DateTimeValue,
+    to?: ?DateTimeValue,
+}
+
+type BlurOpts = {
+    touched?: ?boolean,
 }
 
 type Props = {
-    value: DateRangeValue,
-    onBlur: (value: ?DateRangeValue, opts: any) => void,
-    onChange: (value: ?DateRangeValue) => void,
-    classes: Object,
+    classes?: ?Object,
     innerMessage?: ?Object,
+    value: DateTimeRangeValue,
+    onBlur: (value: ?DateTimeRangeValue, options: Object) => void,
+    onChange: (value: ?DateTimeRangeValue) => void,
 }
 
 const inputKeys = {
@@ -28,48 +36,72 @@ const inputKeys = {
     TO: 'to',
 };
 
-
-class DateRangeField extends React.Component<Props> {
+class DateTimeRangeField extends React.Component<Props> {
     static defaultProps = {
         value: {},
-    }
+    };
     touchedFields: Set<string>;
     constructor(props: Props) {
         super(props);
         this.touchedFields = new Set();
     }
 
-    handleFromChange = (value: string) => {
+
+    getNewValue = (key: string, newValue: any) => {
+        const value = {
+            ...this.props.value,
+            [key]: newValue,
+        };
+        if (!value.from && !value.to) {
+            return null;
+        }
+        return value;
+    }
+
+    handleFromChange = (value: ?DateTimeValue) => {
         this.props.onChange({
             from: value,
             to: this.props.value.to,
         });
     }
-
-    handleToChange = (value: string) => {
+    handleToChange = (value: ?DateTimeValue) => {
         this.props.onChange({
             from: this.props.value.from,
             to: value,
         });
     }
 
-    handleFromBlur = (value: string) => {
-        this.touchedFields.add('fromTouched');
+    toHasValue = () => {
+        const value = this.props.value;
+        return !!(value.to && value.to.date && value.to.time);
+    }
+
+    fromHasValue = () => {
+        const value = this.props.value;
+        return !!(value.to && value.to.date && value.to.time);
+    }
+
+    handleFromBlur = (value: ?DateTimeValue, opts?: ?BlurOpts) => {
+        if (opts && opts.touched) {
+            this.touchedFields.add('fromTouched');
+        }
         this.handleBlur({
             from: value,
             to: this.props.value.to,
-        }, !!this.props.value.to);
+        }, this.toHasValue());
     }
 
-    handleToBlur = (value: string) => {
-        this.touchedFields.add('toTouched');
+    handleToBlur = (value: ?DateTimeValue, opts?: ?BlurOpts) => {
+        if (opts && opts.touched) {
+            this.touchedFields.add('toTouched');
+        }
         this.handleBlur({
             from: this.props.value.from,
             to: value,
-        }, !!this.props.value.from);
+        }, this.fromHasValue());
     }
 
-    handleBlur = (value: DateRangeValue, otherFieldHasValue: boolean) => {
+    handleBlur = (value: DateTimeRangeValue, otherFieldHasValue: boolean) => {
         const touched = this.touchedFields.size === 2;
         if (!value.from && !value.to) {
             this.props.onBlur(undefined, {
@@ -94,14 +126,16 @@ class DateRangeField extends React.Component<Props> {
     }
 
     render() {
-        const { onBlur, onChange, value, innerMessage, ...passOnProps } = this.props;
+        const { onBlur, onChange, value, ...passOnProps } = this.props;
         const fromValue = value && value.from ? value.from : '';
         const toValue = value && value.to ? value.to : '';
+
         return (
             <div className={defaultClasses.container}>
                 <div className={defaultClasses.inputContainer}>
                     <RangeInputField
-                        label={i18n.t('From')}
+                        dateLabel={i18n.t('From date')}
+                        timeLabel={i18n.t('From time')}
                         value={fromValue}
                         onBlur={this.handleFromBlur}
                         onChange={this.handleFromChange}
@@ -111,7 +145,8 @@ class DateRangeField extends React.Component<Props> {
                 </div>
                 <div className={defaultClasses.inputContainer}>
                     <RangeInputField
-                        label={i18n.t('To')}
+                        dateLabel={i18n.t('To date')}
+                        timeLabel={i18n.t('To time')}
                         value={toValue}
                         onBlur={this.handleToBlur}
                         onChange={this.handleToChange}
@@ -124,4 +159,4 @@ class DateRangeField extends React.Component<Props> {
         );
     }
 }
-export default DateRangeField;
+export default DateTimeRangeField;

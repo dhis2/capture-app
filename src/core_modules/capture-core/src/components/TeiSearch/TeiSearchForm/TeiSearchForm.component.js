@@ -4,6 +4,7 @@ import * as React from 'react';
 import log from 'loglevel';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
+import classNames from 'classnames';
 import errorCreator from '../../../utils/errorCreator';
 import Button from '../../Buttons/Button.component';
 import Form, { D2Form } from '../../D2Form/D2Form.component';
@@ -21,6 +22,18 @@ const getStyles = (theme: Theme) => ({
         padding: theme.typography.pxToRem(8),
         maxWidth: theme.typography.pxToRem(880),
     },
+    searchButtonContainer: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    minAttributesRequired: {
+        flexGrow: 1,
+        textAlign: 'right',
+        fontSize: theme.typography.pxToRem(14),
+    },
+    minAttribtuesRequiredInvalid: {
+        color: theme.palette.error.main,
+    },
 });
 
 type Props = {
@@ -35,6 +48,8 @@ type Props = {
         container: string,
         searchButtonContainer: string,
         orgUnitSection: string,
+        minAttributesRequired: string,
+        minAttribtuesRequiredInvalid: string,
     },
 };
 
@@ -45,6 +60,13 @@ class SearchForm extends React.Component<Props> {
     };
     formInstance: D2Form;
     orgUnitSelectorInstance: SearchOrgUnitSelector;
+
+
+    validNumberOfAttributes = () => {
+        const attributesWithValuesCount = this.props.attributesWithValuesCount;
+        const minAttributesRequiredToSearch = this.props.searchGroup.minAttributesRequiredToSearch;
+        return attributesWithValuesCount >= minAttributesRequiredToSearch;
+    }
 
     validateForm() {
         if (!this.formInstance) {
@@ -61,6 +83,8 @@ class SearchForm extends React.Component<Props> {
         let isValid = this.formInstance.validateFormScrollToFirstFailedField({});
 
         if (isValid && !this.props.searchGroup.unique) isValid = this.orgUnitSelectorInstance.validateAndScrollToIfFailed();
+
+        if (isValid && !this.props.searchGroup.unique) isValid = this.validNumberOfAttributes();
 
         return {
             isValid,
@@ -92,6 +116,27 @@ class SearchForm extends React.Component<Props> {
         </Section>
     );
 
+    renderMinAttributesRequired = () => {
+        const { classes, searchAttempted, searchGroup } = this.props;
+        const displayInvalidNumberOfAttributes = searchAttempted && !this.validNumberOfAttributes();
+        const minAttributesRequiredClass = classNames(
+            classes.minAttributesRequired, {
+                [classes.minAttribtuesRequiredInvalid]: displayInvalidNumberOfAttributes,
+            },
+        );
+
+        return (
+            <div className={minAttributesRequiredClass}>
+                {i18n.t(
+                    'Fill in at least {{minAttributesRequired}} attributes to search',
+                    {
+                        minAttributesRequired: searchGroup.minAttributesRequiredToSearch,
+                    })}
+            </div>
+        );
+
+    }
+
     render() {
         const {
             searchGroup,
@@ -116,7 +161,7 @@ class SearchForm extends React.Component<Props> {
         return (
             <div className={classes.container}>
                 <Form
-                    innerRef={(formInstance) => { this.formInstance = formInstance; }}
+                    formRef={(formInstance) => { this.formInstance = formInstance; }}
                     formFoundation={searchGroup.searchForm}
                     {...passOnProps}
                 />
@@ -127,6 +172,7 @@ class SearchForm extends React.Component<Props> {
                     <Button onClick={this.handleSearchAttempt}>
                         {searchButtonText}
                     </Button>
+                    {!searchGroup.unique && this.renderMinAttributesRequired()}
                 </div>
             </div>
         );

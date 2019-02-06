@@ -4,9 +4,14 @@
 import isFunction from 'd2-utilizr/src/isFunction';
 import Program from './Program';
 import ProgramStage from './ProgramStage';
+import errorCreator from '../../utils/errorCreator';
 
 export default class EventProgram extends Program {
     _stage: ?ProgramStage;
+
+    static errorMessages = {
+        STAGE_NOT_FOUND: 'Stage was not found',
+    };
 
     constructor(initFn: ?(_this: Program) => void) {
         super();
@@ -22,6 +27,15 @@ export default class EventProgram extends Program {
     }
 
     getStage() {
+        return this._stage;
+    }
+
+    getStageThrowIfNull(): ProgramStage {
+        if (!this._stage) {
+            throw new Error(
+                errorCreator(EventProgram.errorMessages.STAGE_NOT_FOUND)({ program: this }),
+            );
+        }
         return this._stage;
     }
 }

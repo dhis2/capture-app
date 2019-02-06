@@ -1,35 +1,35 @@
 // @flow
+
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import DateField from '../DateField/Date.component';
-import withFocusSaver from '../../HOC/withFocusSaver';
-import withShrinkLabel from '../../HOC/withShrinkLabel';
-import defaultClasses from './dateRangeField.mod.css';
-import InnerMessage from '../../internal/InnerMessage/InnerMessage.component';
 
+import withFocusSaver from '../HOC/withFocusSaver';
+import withShrinkLabel from '../HOC/withShrinkLabel';
+import withFocusHandler from '../internal/TextInput/withFocusHandler';
+import TextInput from '../internal/TextInput/TextInput.component';
+import defaultClasses from './textRangeField.mod.css';
+import InnerMessage from '../internal/InnerMessage/InnerMessage.component';
 
-const RangeInputField = withFocusSaver()(withShrinkLabel()(DateField));
-
-type DateRangeValue = {
-    from?: ?string,
-    to?: ?string,
-}
-
-type Props = {
-    value: DateRangeValue,
-    onBlur: (value: ?DateRangeValue, opts: any) => void,
-    onChange: (value: ?DateRangeValue) => void,
-    classes: Object,
-    innerMessage?: ?Object,
-}
+const RangeInputField = withFocusSaver()(withShrinkLabel()(withFocusHandler()(TextInput)));
 
 const inputKeys = {
     FROM: 'from',
     TO: 'to',
 };
 
+type TextRangeValue = {
+    from?: ?string,
+    to?: ?string,
+}
 
-class DateRangeField extends React.Component<Props> {
+type Props = {
+    classes?: ?Object,
+    innerMessage?: ?Object,
+    value: TextRangeValue,
+    onChange: (value: ?TextRangeValue) => void,
+    onBlur: (value: ?TextRangeValue, opts?: ?Object) => void,
+}
+class TextRangeField extends React.Component<Props> {
     static defaultProps = {
         value: {},
     }
@@ -38,38 +38,48 @@ class DateRangeField extends React.Component<Props> {
         super(props);
         this.touchedFields = new Set();
     }
+    getNewValue = (key: string, newValue: any) => {
+        const value = {
+            ...this.props.value,
+            [key]: newValue,
+        };
+        if (!value.from && !value.to) {
+            return null;
+        }
+        return value;
+    }
 
-    handleFromChange = (value: string) => {
+    handleFromChange = (event: any) => {
         this.props.onChange({
-            from: value,
+            from: event.currentTarget.value,
             to: this.props.value.to,
         });
     }
 
-    handleToChange = (value: string) => {
+    handleToChange = (event: any) => {
         this.props.onChange({
             from: this.props.value.from,
-            to: value,
+            to: event.currentTarget.value,
         });
     }
 
-    handleFromBlur = (value: string) => {
+    handleFromBlur = (event: any) => {
         this.touchedFields.add('fromTouched');
         this.handleBlur({
-            from: value,
+            from: event.currentTarget.value,
             to: this.props.value.to,
         }, !!this.props.value.to);
     }
 
-    handleToBlur = (value: string) => {
+    handleToBlur = (event: any) => {
         this.touchedFields.add('toTouched');
         this.handleBlur({
             from: this.props.value.from,
-            to: value,
+            to: event.currentTarget.value,
         }, !!this.props.value.from);
     }
 
-    handleBlur = (value: DateRangeValue, otherFieldHasValue: boolean) => {
+    handleBlur = (value: TextRangeValue, otherFieldHasValue: boolean) => {
         const touched = this.touchedFields.size === 2;
         if (!value.from && !value.to) {
             this.props.onBlur(undefined, {
@@ -87,14 +97,15 @@ class DateRangeField extends React.Component<Props> {
         return (
             <InnerMessage
                 classes={classes}
-                innerMessage={innerMessage}
                 messageKey={key}
+                innerMessage={innerMessage}
             />
         );
     }
 
+
     render() {
-        const { onBlur, onChange, value, innerMessage, ...passOnProps } = this.props;
+        const { value, onChange, onBlur, ...passOnProps } = this.props;
         const fromValue = value && value.from ? value.from : '';
         const toValue = value && value.to ? value.to : '';
         return (
@@ -102,9 +113,9 @@ class DateRangeField extends React.Component<Props> {
                 <div className={defaultClasses.inputContainer}>
                     <RangeInputField
                         label={i18n.t('From')}
-                        value={fromValue}
-                        onBlur={this.handleFromBlur}
                         onChange={this.handleFromChange}
+                        onBlur={this.handleFromBlur}
+                        value={fromValue}
                         {...passOnProps}
                     />
                     {this.getInnerMessage(inputKeys.FROM)}
@@ -112,16 +123,17 @@ class DateRangeField extends React.Component<Props> {
                 <div className={defaultClasses.inputContainer}>
                     <RangeInputField
                         label={i18n.t('To')}
-                        value={toValue}
-                        onBlur={this.handleToBlur}
                         onChange={this.handleToChange}
+                        onBlur={this.handleToBlur}
+                        value={toValue}
                         {...passOnProps}
                     />
                     {this.getInnerMessage(inputKeys.TO)}
                 </div>
-
             </div>
+
+
         );
     }
 }
-export default DateRangeField;
+export default TextRangeField;

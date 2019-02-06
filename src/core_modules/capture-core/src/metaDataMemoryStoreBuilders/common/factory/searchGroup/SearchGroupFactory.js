@@ -35,6 +35,8 @@ const searchAttributeElementTypes = {
     [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: dataElementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE,
     [dataElementTypes.INTEGER_NEGATIVE]: dataElementTypes.INTEGER_NEGATIVE_RANGE,
     [dataElementTypes.DATE]: dataElementTypes.DATE_RANGE,
+    [dataElementTypes.DATETIME]: dataElementTypes.DATETIME_RANGE,
+    [dataElementTypes.TIME]: dataElementTypes.TIME_RANGE,
 };
 
 

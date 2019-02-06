@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-01-31T14:21:46.190Z\n"
-"PO-Revision-Date: 2019-01-31T14:21:46.190Z\n"
+"POT-Creation-Date: 2019-02-06T08:41:39.210Z\n"
+"PO-Revision-Date: 2019-02-06T08:41:39.210Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -15,9 +15,6 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr ""
-
-msgid "Invalid range"
 msgstr ""
 
 msgid "This value is validating"
@@ -355,7 +352,13 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-msgid "No {{trackedEntityType}} found"
+msgid "No {{trackedEntityTypeName}} found."
+msgstr ""
+
+msgid "New search"
+msgstr ""
+
+msgid "Edit search"
 msgstr ""
 
 msgid "Link to an existing {{trackedEntityType}}"
@@ -409,6 +412,9 @@ msgstr ""
 msgid "No programs available."
 msgstr ""
 
+msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgstr ""
+
 msgid "Search attributes"
 msgstr ""
 
@@ -425,6 +431,24 @@ msgid "Could not save event. See log for details"
 msgstr ""
 
 msgid "Set coordinate"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Time"
+msgstr ""
+
+msgid "From date"
+msgstr ""
+
+msgid "From time"
+msgstr ""
+
+msgid "To date"
+msgstr ""
+
+msgid "To time"
 msgstr ""
 
 msgid "error encountered during field validation"

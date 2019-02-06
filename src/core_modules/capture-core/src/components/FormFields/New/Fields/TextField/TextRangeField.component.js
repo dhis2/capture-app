@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import { NumberRangeField as UINumberRangeField } from 'capture-ui';
+import { TextRangeField as UITextRangeField } from 'capture-ui';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
@@ -46,13 +46,13 @@ type Props = {
     },
 }
 
-const NumberRangeField = (props: Props) => {
+const TextRangeField = (props: Props) => {
     const { ...passOnProps } = props;
     return (
-        <UINumberRangeField
+        <UITextRangeField
             {...passOnProps}
         />
     );
 };
 
-export default withTheme()(withStyles(getStyles)(NumberRangeField));
+export default withTheme()(withStyles(getStyles)(TextRangeField));

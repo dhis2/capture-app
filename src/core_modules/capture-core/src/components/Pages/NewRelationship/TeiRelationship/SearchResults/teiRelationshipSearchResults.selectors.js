@@ -1,7 +1,6 @@
 // @flow
 import { createSelector } from 'reselect';
-import { trackedEntityTypesCollection, programCollection } from '../../../../../metaDataMemoryStores';
-import { TrackerProgram } from '../../../../../metaData';
+import { getTrackerProgramThrowIfNotFound, getTrackedEntityTypeThrowIfNotFound } from '../../../../../metaData';
 import errorCreator from '../../../../../utils/errorCreator';
 import chunk from '../../../../../utils/chunk';
 
@@ -13,31 +12,13 @@ const makeAttributesSelector = () => createSelector(
     trackedEntityTypeIdSelector,
     (programId: ?string, trackedEntityTypeId: string) => {
         if (programId) {
-            const program = programCollection.get(programId);
-            // $FlowFixMe
+            const program = getTrackerProgramThrowIfNotFound(programId);
             return program.attributes.filter(a => a.displayInReports);
         }
-        const tet = trackedEntityTypesCollection.get(trackedEntityTypeId);
-        // $FlowFixMe
+        const tet = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId);
         return tet.attributes.filter(a => a.displayInReports);
     },
 );
 
-export const makeAttributesContainerSelector = () => {
-    const attributesSelector = makeAttributesSelector();
-    return createSelector(
-        attributesSelector,
-        (attributes) => {
-            const tempAttributes = [...attributes];
-            const profilePicture = tempAttributes.find(a => a.type === 'IMAGE');
-            if (profilePicture) {
-                tempAttributes.splice(tempAttributes.indexOf(profilePicture), 1);
-            }
-            return {
-                attributeChunks: chunk(tempAttributes, 5),
-                profilePictureAttribute: profilePicture,
-            };
-        },
-    );
-};
+export default makeAttributesSelector;
 

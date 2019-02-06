@@ -20,4 +20,8 @@ export const newRelationshipDesc = createReducerDescription({
         ...state,
         searching: true,
     }),
+    [newRelationshipActionTypes.UNSET_SEARCHING]: state => ({
+        ...state,
+        searching: false,
+    }),
 }, 'newRelationship', {});

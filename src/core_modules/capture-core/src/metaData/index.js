@@ -29,5 +29,8 @@ export {
     getProgramAndStageFromProgramIdForEventProgram,
     getStageFromProgramIdForEventProgram,
     getProgramFromProgramIdThrowIfNotFound,
+    getTrackerProgramThrowIfNotFound,
+    getTrackedEntityTypeThrowIfNotFound,
     convertDataElementsValues,
+    getEventProgramThrowIfNotFound,
 } from './helpers';

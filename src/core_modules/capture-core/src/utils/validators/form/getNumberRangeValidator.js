@@ -1,5 +1,5 @@
 // @flow
-
+import parseNumber from '../../parsers/number.parser';
 /**
  *
  * @export
@@ -7,13 +7,19 @@
  * @returns
  */
 
+
+function isValid(value: any, validatorContainer: Object) {
+    return value && validatorContainer.validator(value);
+}
+
 function getNumberRangeValidator(validatorContainer: Object) {
-    return (value: { from?: string, to?: string}) => {
+    return (value: { from?: any, to?: any}) => {
         const errorResult = [];
-        if (!validatorContainer.validator(value.from)) {
+
+        if (!isValid(value.from, validatorContainer)) {
             errorResult.push({ from: validatorContainer.message });
         }
-        if (!validatorContainer.validator(value.to)) {
+        if (!isValid(value.to, validatorContainer)) {
             errorResult.push({ to: validatorContainer.message });
         }
         if (errorResult.length > 0) {
@@ -22,7 +28,8 @@ function getNumberRangeValidator(validatorContainer: Object) {
                 errorMessage: errorResult.reduce((map, error) => ({ ...map, ...error }), {}),
             };
         }
-        return true;
+        // $FlowFixMe
+        return parseNumber(value.from) <= parseNumber(value.to);
     };
 }
 

@@ -43,12 +43,12 @@ class Pagination extends React.Component<Props> {
         ) : rowsCountSelector;
     }
 
-    static wrapDisplayedRowsElement(displayedRowsTable: React.Node) {
+    static wrapDisplayedRowsElement(displayedRows: React.Node) {
         return (
             <div
                 className={defaultClasses.paginationDisplayRowsContainer}
             >
-                {displayedRowsTable}
+                {displayedRows}
             </div>
         );
     }
@@ -64,7 +64,7 @@ class Pagination extends React.Component<Props> {
             onGetLabelDisplayedRows } = this.props;
 
         const rowsCountElement = Pagination.getRowsCountElement(rowsCountSelectorLabel, rowsCountSelector);
-        const displayedRowsTable = onGetLabelDisplayedRows &&
+        const displayedRows = onGetLabelDisplayedRows &&
         Pagination.wrapDisplayedRowsElement(
             onGetLabelDisplayedRows(
                 Pagination.getFromToLabel(rowsCount, rowsPerPage, currentPage), rowsCount.toString()),
@@ -74,7 +74,7 @@ class Pagination extends React.Component<Props> {
                 className={defaultClasses.pagination}
             >
                 {rowsCountElement}
-                {displayedRowsTable}
+                {displayedRows}
                 {navigationElements}
             </div>
         );
