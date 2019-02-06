@@ -100,7 +100,6 @@ class FormBuilder extends React.Component<Props> {
                 const pass = await passPromise;
                 if (pass === true) {
                     let result = currentValidator.validator(value, validationContext);
-                    var sss = 1;
                     if (result instanceof Promise) {
                         result = onIsValidatingInternal ? onIsValidatingInternal(currentValidator.validatingMessage, result) : result;
                         result = await result;
@@ -109,7 +108,6 @@ class FormBuilder extends React.Component<Props> {
                     if (result === true || (result && result.valid)) {
                         return true;
                     }
-                    var s = 1;
                     return {
                         message: (result && result.errorMessage) || currentValidator.message,
                         type: currentValidator.type,
@@ -117,8 +115,6 @@ class FormBuilder extends React.Component<Props> {
                 }
                 return pass;
             }, Promise.resolve(true));
-
-        var g = 1;
 
         if (validatorResult !== true) {
             return {
