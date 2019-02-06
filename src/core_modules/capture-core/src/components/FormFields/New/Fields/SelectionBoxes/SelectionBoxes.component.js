@@ -8,6 +8,9 @@ const getStyles = (theme: Theme) => ({
     iconSelected: {
         fill: theme.palette.secondary.main,
     },
+    iconDisabled: {
+        fill: 'rgba(0,0,0,0.30)',
+    },
     iconDeselected: {
         fill: theme.palette.grey[700],
     },

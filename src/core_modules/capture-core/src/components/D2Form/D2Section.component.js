@@ -14,7 +14,7 @@ const getStyles = (theme: Theme) => ({
     },
     section: {
         backgroundColor: 'white',
-        maxWidth: theme.typography.pxToRem(880),
+        maxWidth: theme.typography.pxToRem(892),
     },
 });
 

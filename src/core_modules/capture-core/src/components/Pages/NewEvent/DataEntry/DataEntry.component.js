@@ -366,6 +366,11 @@ const saveHandlerConfig = {
     },
 };
 
+const dataEntryFilterProps = (props: Object) => {
+    const { stage, ...passOnProps } = props;
+    return passOnProps;
+};
+
 const CleanUpHOC = withCleanUpHOC()(DataEntry);
 const RelationshipField = withDataEntryFieldIfApplicable(buildRelationshipsSettingsFn())(CleanUpHOC);
 const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);
@@ -378,7 +383,7 @@ const ErrorOutput = withErrorOutput()(WarningOutput);
 const CancelableDataEntry = withCancelButton(getCancelOptions)(ErrorOutput);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(CancelableDataEntry));
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(SaveableDataEntry);
-const WrappedDataEntry = withBrowserBackWarning()(CompletableDataEntry);
+const WrappedDataEntry = withBrowserBackWarning()(withFilterProps(dataEntryFilterProps)(CompletableDataEntry));
 
 type Props = {
     formFoundation: RenderFoundation,

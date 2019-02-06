@@ -20,7 +20,7 @@ const getStyles = (theme: Theme) => ({
     orgUnitSection: {
         backgroundColor: 'white',
         padding: theme.typography.pxToRem(8),
-        maxWidth: theme.typography.pxToRem(880),
+        maxWidth: theme.typography.pxToRem(892),
     },
     searchButtonContainer: {
         display: 'flex',
