@@ -12,13 +12,16 @@ import {
     actionTypes as searchActionTypes,
     searchGroupResultCountRetrieved,
     searchGroupResultCountRetrievalFailed,
+    startSearchGroupCountSearch,
 } from '../actions/searchGroup.actions';
+import {
+    batchActionTypes as searchBatchActionTypes,
+    filteredSearchActionsForSearchBatch,
+} from '../actions/searchGroup.actionBatches';
 import { actionTypes as loadNewActionTypes } from '../actions/dataEntryLoadNew.actions';
 import { actionTypes as loadEditActionTypes } from '../actions/dataEntryLoadEdit.actions';
 
 import AsyncFieldHandler from '../asyncFields/AsyncFieldHandler';
-import { enrollmentBatchActionTypes, enrollmentOpenBatchActionTypes } from '../../DataEntries';
-
 
 function getServerValues(
     updatedFormValues: Object,
@@ -47,7 +50,7 @@ function executeSearch(
 
 const saveWaitPromises = {};
 
-function cleanUpPromisesAfterSearch(dataEntryKey, searchGroupId) {
+function cleanUpPromisesAfterSearch(dataEntryKey: string, searchGroupId: string) {
     saveWaitPromises[dataEntryKey][searchGroupId]
         .forEach((container) => {
             container.resolver();
@@ -56,7 +59,7 @@ function cleanUpPromisesAfterSearch(dataEntryKey, searchGroupId) {
     saveWaitPromises[dataEntryKey][searchGroupId] = null;
 }
 
-function searchHasRequiredValues(searchGroup, values) {
+function searchHasRequiredValues(searchGroup: InputSearchGroup, values: Object) {
     const searchFoundation = searchGroup.searchFoundation;
     const elements = searchFoundation.getElements();
     const elementsWithValue = elements
@@ -64,63 +67,121 @@ function searchHasRequiredValues(searchGroup, values) {
     return elementsWithValue.length >= searchGroup.minAttributesRequiredToSearch;
 }
 
-export const executeSearchForSearchGroupEpic = (action$: ActionsObservable, store: ReduxStore) =>
-    action$
-        .ofType(enrollmentBatchActionTypes.RULES_EXECUTED_POST_UPDATE_FIELD_FOR_ENROLLMENT) // this is a temporary cheat
-        .map((actionBatch) => {
-            const searchActions =
-                actionBatch.payload.filter(action => action.type === searchActionTypes.START_SEARCH_GROUP_COUNT_SEARCH);
-            if (searchActions.length === 0) {
-                return null;
-            }
+function searchHasUpdatedValues(searchGroup: InputSearchGroup, values: Object, previousValues: Object) {
+    const searchFoundation = searchGroup.searchFoundation;
+    const elements = searchFoundation.getElements();
+    return !!elements.find((element) => {
+        const previousRawValue = previousValues[element.id];
+        let previousValue = previousRawValue;
+        if (!previousValue && previousValue !== false && previousValue !== 0) {
+            previousValue = null;
+        }
+        const currentRawValue = values[element.id];
+        let currentValue = currentRawValue;
+        if (!currentValue && currentValue !== false && currentValue !== 0) {
+            currentValue = null;
+        }
 
-            const searchActionsWithValues = searchActions
-                .filter((sa) => {
-                    const { dataEntryKey, searchGroup } = sa.payload;
-                    const formValues = store.getState().formsValues[dataEntryKey];
-                    return searchHasRequiredValues(searchGroup, formValues);
-                });
-            return searchActionsWithValues;
-        })
-        .filter(searchActions => searchActions && searchActions.length > 0)
-        .mergeMap(searchActions => searchActions.map((search1Action) => {
-            // const search1Action = searchActions[0];
-            const { dataEntryKey, contextProps, searchGroup, promiseContainer } = search1Action.payload;
-            const formValues = store.getState().formsValues[dataEntryKey];
-            if (!saveWaitPromises[dataEntryKey]) {
-                saveWaitPromises[dataEntryKey] = {};
-            }
-            if (!saveWaitPromises[dataEntryKey][searchGroup.id]) {
-                saveWaitPromises[dataEntryKey][searchGroup.id] = [];
-            }
-            saveWaitPromises[dataEntryKey][searchGroup.id].push(promiseContainer);
+        return currentValue !== previousValue;
+    });
+}
 
-            return race(
-                fromPromise(executeSearch(searchGroup, formValues, contextProps))
-                    .takeUntil(
-                        action$
-                            .ofType(enrollmentBatchActionTypes.RULES_EXECUTED_POST_UPDATE_FIELD_FOR_ENROLLMENT)
-                            .filter(ab => ab.payload.find(a => a.type === searchActionTypes.START_SEARCH_GROUP_COUNT_SEARCH && a.payload.searchGroup === searchGroup)),
-                    )
-                    .map((count) => {
-                        cleanUpPromisesAfterSearch(dataEntryKey, searchGroup.id);
-                        return searchGroupResultCountRetrieved(count, dataEntryKey, searchGroup.id);
-                    })
-                    .catch((error) => {
-                        log.error(errorCreator(error)({ dataEntryKey, searchGroupId: searchGroup.id }));
-                        cleanUpPromisesAfterSearch(dataEntryKey, searchGroup.id);
-                        return of(
-                            searchGroupResultCountRetrievalFailed(
-                                i18n.t('search group result could not be retrieved'), dataEntryKey, searchGroup.id));
-                    }),
-                action$
-                    .ofType(enrollmentOpenBatchActionTypes.OPEN_DATA_ENYRY_FOR_NEW_ENROLLMENT_BATCH) // this is a temporary cheat
-                    .filter(ab => ab.payload.find(a => a.type === (loadNewActionTypes.LOAD_NEW_DATA_ENTRY || loadEditActionTypes.LOAD_EDIT_DATA_ENTRY) && a.payload.key === dataEntryKey))
-                    .map(() => {
-                        saveWaitPromises[dataEntryKey] = null;
+export const getFilterSearchGroupForSearchEpic =
+    (triggerBatches: Array<string>) =>
+        (action$: ActionsObservable, store: ReduxStore) =>
+            action$
+                .ofType(...triggerBatches)
+                .map((actionBatch) => {
+                    const searchActions =
+                        actionBatch.payload.filter(
+                            action => action.type === searchActionTypes.FILTER_SEARCH_GROUP_FOR_COUNT_SEARCH,
+                        );
+                    if (searchActions.length === 0) {
                         return null;
-                    }),
-            );
-        }))
-        .mergeAll()
-        .filter(action => action);
+                    }
+
+                    const filteredSearchActions = searchActions
+                        .filter((sa) => {
+                            const { dataEntryKey, searchGroup } = sa.payload;
+                            const state = store.getState();
+                            const formValues = state.formsValues[dataEntryKey] || {};
+                            const previousValues = (state.dataEntriesSearchGroupsPreviousValues[dataEntryKey] &&
+                                state.dataEntriesSearchGroupsPreviousValues[dataEntryKey][searchGroup.id]) || {};
+                            return searchHasRequiredValues(searchGroup, formValues) &&
+                                searchHasUpdatedValues(searchGroup, formValues, previousValues);
+                        })
+                        .map((sa) => {
+                            const { dataEntryKey, searchGroup, promiseContainer, contextProps } = sa.payload;
+                            const state = store.getState();
+                            const values = state.formsValues[dataEntryKey];
+                            return startSearchGroupCountSearch(
+                                searchGroup,
+                                searchGroup.id,
+                                promiseContainer,
+                                dataEntryKey,
+                                contextProps,
+                                values,
+                            );
+                        });
+                    return filteredSearchActions;
+                })
+                .filter(searchActions => searchActions && searchActions.length > 0)
+                .map(searchActions => filteredSearchActionsForSearchBatch(searchActions));
+
+export const getExecuteSearchForSearchGroupEpic =
+    (cancelBatches: Array<string>) =>
+        (action$: ActionsObservable, store: ReduxStore) =>
+            action$
+                .ofType(searchBatchActionTypes.FILTERED_SEARCH_ACTIONS_FOR_SEARCH_BATCH)
+                .map(actionBatch => actionBatch.payload)
+                .mergeMap(searchActions => searchActions.map((searchAction) => {
+                    const { dataEntryKey, contextProps, searchGroup, promiseContainer } = searchAction.payload;
+                    const formValues = store.getState().formsValues[dataEntryKey];
+                    if (!saveWaitPromises[dataEntryKey]) {
+                        saveWaitPromises[dataEntryKey] = {};
+                    }
+                    if (!saveWaitPromises[dataEntryKey][searchGroup.id]) {
+                        saveWaitPromises[dataEntryKey][searchGroup.id] = [];
+                    }
+                    saveWaitPromises[dataEntryKey][searchGroup.id].push(promiseContainer);
+
+                    return race(
+                        fromPromise(executeSearch(searchGroup, formValues, contextProps))
+                            .takeUntil(
+                                action$
+                                    .ofType(searchBatchActionTypes.FILTERED_SEARCH_ACTIONS_FOR_SEARCH_BATCH)
+                                    .filter(ab =>
+                                        ab.payload.find(a =>
+                                            a.type === searchActionTypes.START_SEARCH_GROUP_COUNT_SEARCH &&
+                                            a.payload.searchGroup === searchGroup)),
+                            )
+                            .map((count) => {
+                                cleanUpPromisesAfterSearch(dataEntryKey, searchGroup.id);
+                                return searchGroupResultCountRetrieved(count, dataEntryKey, searchGroup.id);
+                            })
+                            .catch((error) => {
+                                log.error(errorCreator(error)({ dataEntryKey, searchGroupId: searchGroup.id }));
+                                cleanUpPromisesAfterSearch(dataEntryKey, searchGroup.id);
+                                return of(
+                                    searchGroupResultCountRetrievalFailed(
+                                        i18n.t('search group result could not be retrieved'),
+                                        dataEntryKey,
+                                        searchGroup.id,
+                                    ),
+                                );
+                            }),
+                        action$
+                            .ofType(...cancelBatches)
+                            .filter(ab =>
+                                ab.payload.find(a =>
+                                    a.type === (loadNewActionTypes.LOAD_NEW_DATA_ENTRY ||
+                                        loadEditActionTypes.LOAD_EDIT_DATA_ENTRY) &&
+                                    a.payload.key === dataEntryKey))
+                            .map(() => {
+                                saveWaitPromises[dataEntryKey] = null;
+                                return null;
+                            }),
+                    );
+                }))
+                .mergeAll()
+                .filter(action => action);

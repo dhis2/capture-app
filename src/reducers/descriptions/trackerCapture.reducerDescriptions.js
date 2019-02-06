@@ -15,6 +15,7 @@ import {
     dataEntriesFieldsMetaDesc,
     dataEntriesFieldsUIDesc,
     dataEntriesSearchGroupsResultsDesc,
+    dataEntriesSearchGroupsPreviousValuesDesc,
 } from 'capture-core/reducers/descriptions/dataEntry.reducerDescription';
 import { feedbackDesc } from 'capture-core/reducers/descriptions/feedback.reducerDescription';
 import {
@@ -77,6 +78,7 @@ export default [
     dataEntriesFieldsMetaDesc,
     dataEntriesFieldsUIDesc,
     dataEntriesSearchGroupsResultsDesc,
+    dataEntriesSearchGroupsPreviousValuesDesc,
     feedbackDesc,
     rulesEffectsHiddenFieldsDesc,
     rulesEffectsErrorMessagesDesc,

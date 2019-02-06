@@ -135,8 +135,9 @@ import {
     teiSearchFilterOrgUnitsEpic,
 } from 'capture-core/components/TeiSearch/SearchOrgUnitSelector/searchOrgUnitSelector.epics';
 
-import { executeSearchForSearchGroupEpic } from 'capture-core/components/DataEntry';
 import { loadStartupData, loadStartupDataCore } from '../init/entry.epics';
+
+import getDataEntryEpics from './getDataEntryEpics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -218,5 +219,5 @@ export default combineEpics(
     saveNewEnrollmentEpic,
     filterFormFieldOrgUnitsEpic,
     teiSearchFilterOrgUnitsEpic,
-    executeSearchForSearchGroupEpic,
+    ...getDataEntryEpics(),
 );

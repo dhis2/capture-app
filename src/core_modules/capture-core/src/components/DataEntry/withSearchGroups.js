@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { InputSearchGroup } from '../../metaData';
 import getDataEntryKey from './common/getDataEntryKey';
-import { startSearchGroupCountSearch } from './actions/searchGroup.actions';
+import { filterSearchGroupForCountSearch } from './actions/searchGroup.actions';
 import { updateFieldAndRunSearchGroupSearchesBatch } from './actions/searchGroup.actionBatches';
 
 type Props = {
@@ -63,6 +63,7 @@ const getSearchGroupsHOC = (
             const {
                 dataEntryKey,
                 onUpdateFormField,
+                onUpdateFormFieldInner,
                 ...passOnProps
             } = this.props;
 
@@ -98,7 +99,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         searchContext: Object,
         onUpdateFormField: ?Function,
     ) => {
-        const searchCompletePromises = searchGroups
+        const searchCompletePromiseContainers = searchGroups
             .map(() => {
                 let resolver;
                 const promise = new Promise((resolve) => {
@@ -111,9 +112,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
             });
 
         const searchActions = searchGroups
-            .map((sg, index) => startSearchGroupCountSearch(
+            .map((sg, index) => filterSearchGroupForCountSearch(
                 sg,
-                searchCompletePromises[index],
+                searchCompletePromiseContainers[index],
                 dataEntryKey,
                 searchContext,
             ));
@@ -124,7 +125,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
                 value,
                 innerAction,
                 updateCompletePromise,
-                { searchActions, searchCompletePromises },
+                { searchActions, searchCompletePromiseContainers },
             );
         } else {
             dispatch(updateFieldAndRunSearchGroupSearchesBatch(innerAction, searchActions));

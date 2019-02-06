@@ -308,3 +308,32 @@ export const dataEntriesSearchGroupsResultsDesc = createReducerDescription({
         };
     },
 }, 'dataEntriesSearchGroupsResults');
+
+export const dataEntriesSearchGroupsPreviousValuesDesc = createReducerDescription({
+    [searchGroupActionTypes.START_SEARCH_GROUP_COUNT_SEARCH]: (state, action) => {
+        const { dataEntryKey, searchGroupId, values } = action.payload;
+        return {
+            ...state,
+            [dataEntryKey]: {
+                ...state[dataEntryKey],
+                [searchGroupId]: {
+                    ...values,
+                },
+            },
+        };
+    },
+    [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {
+        const { key } = action.payload;
+        return {
+            ...state,
+            [key]: null,
+        };
+    },
+    [loadEditActionTypes.LOAD_EDIT_DATA_ENTRY]: (state, action) => {
+        const { key } = action.payload;
+        return {
+            ...state,
+            [key]: null,
+        };
+    },
+}, 'dataEntriesSearchGroupsPreviousValues');

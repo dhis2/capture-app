@@ -257,18 +257,18 @@ const getSaveHandler = (
             innerAction: ReduxAction<any, any>,
             updateCompletePromise: ?Promise<any>,
             extraArgs?: ?{
-                searchCompletePromises: ?Array<Promise<any>>,
+                searchCompletePromiseContainers: ?Array<{ promise: Promise<any>, resolver: Function }>,
                 searchActions: ?Array<ReduxAction<any, any>>,
             },
         ) => {
             const dataEntryKey = getDataEntryKey(this.props.id, this.props.itemId);
             updateCompletePromise && AsyncFieldHandler.removePromise(dataEntryKey, updateCompletePromise);
 
-            if (extraArgs && extraArgs.searchCompletePromises) {
-                const searchCompletePromises = extraArgs.searchCompletePromises;
-                searchCompletePromises && searchCompletePromises
-                    .forEach((p) => {
-                        AsyncFieldHandler.setPromise(dataEntryKey, p.promise);
+            if (extraArgs && extraArgs.searchCompletePromiseContainers) {
+                const searchCompletePromiseContainers = extraArgs.searchCompletePromiseContainers;
+                searchCompletePromiseContainers && searchCompletePromiseContainers
+                    .forEach((pc) => {
+                        AsyncFieldHandler.setPromise(dataEntryKey, pc.promise);
                     });
             }
 
@@ -277,24 +277,6 @@ const getSaveHandler = (
             };
 
             this.props.onUpdateFormField(innerAction, extraActions);
-        }
-
-        handleSearchGroupResultCountRetrieved = (
-            innerAction: ReduxAction<any, any>,
-            completePromise: Promise<any>,
-        ) => {
-            const dataEntryKey = getDataEntryKey(this.props.id, this.props.itemId);
-            AsyncFieldHandler.removePromise(dataEntryKey, completePromise);
-            this.props.onSearchGroupResultCountRetrieved(innerAction);
-        }
-
-        handleSearchGroupResultCountRetrievalFailed = (
-            innerAction: ReduxAction<any, any>,
-            completePromise: Promise<any>,
-        ) => {
-            const dataEntryKey = getDataEntryKey(this.props.id, this.props.itemId);
-            AsyncFieldHandler.removePromise(dataEntryKey, completePromise);
-            this.props.onSearchGroupResultCountRetrievalFailed(innerAction);
         }
 
         handleCleanUpPromises = (
@@ -337,8 +319,6 @@ const getSaveHandler = (
                         onIsValidating={this.handleIsValidating}
                         onFieldsValidated={this.handleFieldsValidated}
                         onUpdateFormField={this.handleUpdateField}
-                        onSearchGroupResultCountRetrieved={this.handleSearchGroupResultCountRetrieved}
-                        onSearchGroupResultCountRetrievalFailed={this.handleSearchGroupResultCountRetrievalFailed}
                         onCleanUp={this.handleCleanUpPromises}
                         {...filteredProps}
                     />

@@ -4,6 +4,7 @@ import { actionCreator } from '../../../actions/actions.utils';
 export const actionTypes = {
     SEARCH_GROUP_RESULT_COUNT_RETRIVED: 'SearchGroupResultCountRetrieved',
     SEARCH_GROUP_RESULT_COUNT_RETRIEVAL_FAILED: 'SearchGroupResultCountRetrievalFailed',
+    FILTER_SEARCH_GROUP_FOR_COUNT_SEARCH: 'FilterSearchGroupForCountSearch',
     START_SEARCH_GROUP_COUNT_SEARCH: 'StartSearchGroupCountSearch',
 };
 
@@ -13,7 +14,19 @@ export const searchGroupResultCountRetrieved = (count: number, dataEntryKey: str
 export const searchGroupResultCountRetrievalFailed = (error: string, dataEntryKey: string, groupId: string) =>
     actionCreator(actionTypes.SEARCH_GROUP_RESULT_COUNT_RETRIEVAL_FAILED)({ error, dataEntryKey, groupId });
 
-export const startSearchGroupCountSearch =
+export const filterSearchGroupForCountSearch =
     (searchGroup: Object, promiseContainer: Object, dataEntryKey: string, contextProps: Object) =>
-        actionCreator(actionTypes.START_SEARCH_GROUP_COUNT_SEARCH)(
+        actionCreator(actionTypes.FILTER_SEARCH_GROUP_FOR_COUNT_SEARCH)(
             { searchGroup, promiseContainer, dataEntryKey, contextProps });
+
+export const startSearchGroupCountSearch =
+    (
+        searchGroup: Object,
+        searchGroupId: string,
+        promiseContainer: Object,
+        dataEntryKey: string,
+        contextProps: Object,
+        values: Object,
+    ) =>
+        actionCreator(actionTypes.START_SEARCH_GROUP_COUNT_SEARCH)(
+            { searchGroup, searchGroupId, promiseContainer, dataEntryKey, contextProps, values });
