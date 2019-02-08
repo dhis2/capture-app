@@ -371,7 +371,7 @@ const dataEntryFilterProps = (props: Object) => {
     return passOnProps;
 };
 
-const CleanUpHOC = withCleanUpHOC()(DataEntry);
+const CleanUpHOC = withCleanUpHOC()(withFilterProps(dataEntryFilterProps)(DataEntry));
 const RelationshipField = withDataEntryFieldIfApplicable(buildRelationshipsSettingsFn())(CleanUpHOC);
 const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);
@@ -383,7 +383,7 @@ const ErrorOutput = withErrorOutput()(WarningOutput);
 const CancelableDataEntry = withCancelButton(getCancelOptions)(ErrorOutput);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(CancelableDataEntry));
 const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(SaveableDataEntry);
-const WrappedDataEntry = withBrowserBackWarning()(withFilterProps(dataEntryFilterProps)(CompletableDataEntry));
+const WrappedDataEntry = withBrowserBackWarning()(CompletableDataEntry);
 
 type Props = {
     formFoundation: RenderFoundation,
