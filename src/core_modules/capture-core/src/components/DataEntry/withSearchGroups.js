@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
+import uuid from 'uuid/v4';
 import { InputSearchGroup } from '../../metaData';
 import getDataEntryKey from './common/getDataEntryKey';
 import { filterSearchGroupForCountSearch } from './actions/searchGroup.actions';
@@ -42,7 +43,6 @@ const getSearchGroupsHOC = (
             fieldId: string,
             value: any,
             innerAction: ReduxAction<any, any>,
-            updateCompletePromise: ?Promise<any>,
         ) => {
             const { onUpdateFormField, onUpdateFormFieldInner, dataEntryKey } = this.props;
             const searchGroupsForField = this.searchGroups;
@@ -51,7 +51,6 @@ const getSearchGroupsHOC = (
                 fieldId,
                 value,
                 innerAction,
-                updateCompletePromise,
                 searchGroupsForField,
                 dataEntryKey,
                 onGetSearchContext && onGetSearchContext(this.props),
@@ -93,28 +92,18 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         fieldId: string,
         value: any,
         innerAction: ReduxAction<any, any>,
-        updateCompletePromise: ?Promise<any>,
         searchGroups: Array<InputSearchGroup>,
         dataEntryKey: string,
         searchContext: Object,
         onUpdateFormField: ?Function,
     ) => {
-        const searchCompletePromiseContainers = searchGroups
-            .map(() => {
-                let resolver;
-                const promise = new Promise((resolve) => {
-                    resolver = resolve;
-                });
-                return {
-                    resolver,
-                    promise,
-                };
-            });
+        const searchUids = searchGroups
+            .map(() => uuid());
 
         const searchActions = searchGroups
             .map((sg, index) => filterSearchGroupForCountSearch(
                 sg,
-                searchCompletePromiseContainers[index],
+                searchUids[index],
                 dataEntryKey,
                 searchContext,
             ));
@@ -124,8 +113,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
                 fieldId,
                 value,
                 innerAction,
-                updateCompletePromise,
-                { searchActions, searchCompletePromiseContainers },
+                { searchActions },
             );
         } else {
             dispatch(updateFieldAndRunSearchGroupSearchesBatch(innerAction, searchActions));

@@ -13,6 +13,8 @@ import {
     searchGroupResultCountRetrieved,
     searchGroupResultCountRetrievalFailed,
     startSearchGroupCountSearch,
+    abortSearchGroupCountSearch,
+    cancelSearchGroupCountSearch,
 } from '../actions/searchGroup.actions';
 import {
     batchActionTypes as searchBatchActionTypes,
@@ -20,8 +22,6 @@ import {
 } from '../actions/searchGroup.actionBatches';
 import { actionTypes as loadNewActionTypes } from '../actions/dataEntryLoadNew.actions';
 import { actionTypes as loadEditActionTypes } from '../actions/dataEntryLoadEdit.actions';
-
-import AsyncFieldHandler from '../asyncFields/AsyncFieldHandler';
 
 function getServerValues(
     updatedFormValues: Object,
@@ -48,15 +48,10 @@ function executeSearch(
         );
 }
 
-const saveWaitPromises = {};
+const saveWaitUids = {};
 
-function cleanUpPromisesAfterSearch(dataEntryKey: string, searchGroupId: string) {
-    saveWaitPromises[dataEntryKey][searchGroupId]
-        .forEach((container) => {
-            container.resolver();
-            AsyncFieldHandler.removePromise(dataEntryKey, container.promise);
-        });
-    saveWaitPromises[dataEntryKey][searchGroupId] = null;
+function cleanUpUidsAfterSearch(dataEntryKey: string, searchGroupId: string) {
+    saveWaitUids[dataEntryKey][searchGroupId] = null;
 }
 
 function searchHasRequiredValues(searchGroup: InputSearchGroup, values: Object) {
@@ -92,38 +87,66 @@ export const getFilterSearchGroupForSearchEpic =
             action$
                 .ofType(...triggerBatches)
                 .map((actionBatch) => {
-                    const searchActions =
+                    const potentialSearchActions =
                         actionBatch.payload.filter(
                             action => action.type === searchActionTypes.FILTER_SEARCH_GROUP_FOR_COUNT_SEARCH,
                         );
-                    if (searchActions.length === 0) {
+                    if (potentialSearchActions.length === 0) {
                         return null;
                     }
 
-                    const filteredSearchActions = searchActions
-                        .filter((sa) => {
+                    const outputActions = potentialSearchActions
+                        .map((sa) => {
                             const { dataEntryKey, searchGroup } = sa.payload;
                             const state = store.getState();
                             const formValues = state.formsValues[dataEntryKey] || {};
                             const previousValues = (state.dataEntriesSearchGroupsPreviousValues[dataEntryKey] &&
                                 state.dataEntriesSearchGroupsPreviousValues[dataEntryKey][searchGroup.id]) || {};
-                            return searchHasRequiredValues(searchGroup, formValues) &&
-                                searchHasUpdatedValues(searchGroup, formValues, previousValues);
+
+                            const abortSearchGroupSearch = !searchHasRequiredValues(searchGroup, formValues);
+                            if (abortSearchGroupSearch) {
+                                return {
+                                    ...sa,
+                                    abort: true,
+                                };
+                            }
+
+                            const cancelSearch = !searchHasUpdatedValues(searchGroup, formValues, previousValues);
+                            if (cancelSearch) {
+                                return {
+                                    ...sa,
+                                    cancel: true,
+                                };
+                            }
+
+                            return sa;
                         })
                         .map((sa) => {
-                            const { dataEntryKey, searchGroup, promiseContainer, contextProps } = sa.payload;
+                            if (sa.abort) {
+                                const { dataEntryKey, searchGroup, uid } = sa.payload;
+                                const currentlyActiveUids = (saveWaitUids[dataEntryKey] &&
+                                    saveWaitUids[dataEntryKey][searchGroup.id]) || [];
+                                cleanUpUidsAfterSearch(dataEntryKey, searchGroup.id);
+                                return abortSearchGroupCountSearch(dataEntryKey, [...currentlyActiveUids, uid]);
+                            }
+                            if (sa.cancel) {
+                                const { dataEntryKey, uid } = sa.payload;
+                                return cancelSearchGroupCountSearch(dataEntryKey, uid);
+                            }
+
+                            const { dataEntryKey, searchGroup, uid, contextProps } = sa.payload;
                             const state = store.getState();
                             const values = state.formsValues[dataEntryKey];
                             return startSearchGroupCountSearch(
                                 searchGroup,
                                 searchGroup.id,
-                                promiseContainer,
+                                uid,
                                 dataEntryKey,
                                 contextProps,
                                 values,
                             );
                         });
-                    return filteredSearchActions;
+                    return outputActions;
                 })
                 .filter(searchActions => searchActions && searchActions.length > 0)
                 .map(searchActions => filteredSearchActionsForSearchBatch(searchActions));
@@ -133,17 +156,21 @@ export const getExecuteSearchForSearchGroupEpic =
         (action$: ActionsObservable, store: ReduxStore) =>
             action$
                 .ofType(searchBatchActionTypes.FILTERED_SEARCH_ACTIONS_FOR_SEARCH_BATCH)
-                .map(actionBatch => actionBatch.payload)
+                .map((actionBatch) => {
+                    const actions = actionBatch.payload;
+                    return actions.filter(action => action.type === searchActionTypes.START_SEARCH_GROUP_COUNT_SEARCH);
+                })
+                .filter(actions => actions && actions.length > 0)
                 .mergeMap(searchActions => searchActions.map((searchAction) => {
-                    const { dataEntryKey, contextProps, searchGroup, promiseContainer } = searchAction.payload;
+                    const { dataEntryKey, contextProps, searchGroup, uid } = searchAction.payload;
                     const formValues = store.getState().formsValues[dataEntryKey];
-                    if (!saveWaitPromises[dataEntryKey]) {
-                        saveWaitPromises[dataEntryKey] = {};
+                    if (!saveWaitUids[dataEntryKey]) {
+                        saveWaitUids[dataEntryKey] = {};
                     }
-                    if (!saveWaitPromises[dataEntryKey][searchGroup.id]) {
-                        saveWaitPromises[dataEntryKey][searchGroup.id] = [];
+                    if (!saveWaitUids[dataEntryKey][searchGroup.id]) {
+                        saveWaitUids[dataEntryKey][searchGroup.id] = [];
                     }
-                    saveWaitPromises[dataEntryKey][searchGroup.id].push(promiseContainer);
+                    saveWaitUids[dataEntryKey][searchGroup.id].push(uid);
 
                     return race(
                         fromPromise(executeSearch(searchGroup, formValues, contextProps))
@@ -152,21 +179,24 @@ export const getExecuteSearchForSearchGroupEpic =
                                     .ofType(searchBatchActionTypes.FILTERED_SEARCH_ACTIONS_FOR_SEARCH_BATCH)
                                     .filter(ab =>
                                         ab.payload.find(a =>
-                                            a.type === searchActionTypes.START_SEARCH_GROUP_COUNT_SEARCH &&
+                                            a.type === (searchActionTypes.START_SEARCH_GROUP_COUNT_SEARCH || searchActionTypes.ABORT_SEARCH_GROUP_COUNT_SEARCH) &&
                                             a.payload.searchGroup === searchGroup)),
                             )
                             .map((count) => {
-                                cleanUpPromisesAfterSearch(dataEntryKey, searchGroup.id);
-                                return searchGroupResultCountRetrieved(count, dataEntryKey, searchGroup.id);
+                                const currentlyActiveUids = saveWaitUids[dataEntryKey][searchGroup.id];
+                                cleanUpUidsAfterSearch(dataEntryKey, searchGroup.id);
+                                return searchGroupResultCountRetrieved(count, dataEntryKey, searchGroup.id, currentlyActiveUids);
                             })
                             .catch((error) => {
                                 log.error(errorCreator(error)({ dataEntryKey, searchGroupId: searchGroup.id }));
-                                cleanUpPromisesAfterSearch(dataEntryKey, searchGroup.id);
+                                const currentlyActiveUids = saveWaitUids[dataEntryKey][searchGroup.id];
+                                cleanUpUidsAfterSearch(dataEntryKey, searchGroup.id);
                                 return of(
                                     searchGroupResultCountRetrievalFailed(
                                         i18n.t('search group result could not be retrieved'),
                                         dataEntryKey,
                                         searchGroup.id,
+                                        currentlyActiveUids,
                                     ),
                                 );
                             }),
@@ -178,7 +208,7 @@ export const getExecuteSearchForSearchGroupEpic =
                                         loadEditActionTypes.LOAD_EDIT_DATA_ENTRY) &&
                                     a.payload.key === dataEntryKey))
                             .map(() => {
-                                saveWaitPromises[dataEntryKey] = null;
+                                saveWaitUids[dataEntryKey] = null;
                                 return null;
                             }),
                     );

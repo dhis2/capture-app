@@ -99,9 +99,19 @@ export const updateFormField =
         formId: string,
         dataEntryId: string,
         itemId: string,
+        updateCompleteUid: string,
     ) =>
         actionCreator(
-            actionTypes.UPDATE_FORM_FIELD)({ value, uiState, formId, formBuilderId, elementId, dataEntryId, itemId });
+            actionTypes.UPDATE_FORM_FIELD)({
+            value,
+            uiState,
+            formId,
+            formBuilderId,
+            elementId,
+            dataEntryId,
+            itemId,
+            updateCompleteUid,
+        });
 
 export const rulesExecutedPostUpdateField =
     (dataEntryId: string, itemId: string) =>

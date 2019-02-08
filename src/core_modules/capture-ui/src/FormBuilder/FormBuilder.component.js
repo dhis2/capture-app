@@ -2,6 +2,7 @@
 /* eslint-disable complexity */
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
+import uuid from 'uuid/v4';
 import { makeCancelablePromise } from 'capture-core-utils';
 import type { CancelablePromise } from 'capture-core-utils/cancelablePromise/makeCancelable';
 import * as React from 'react';
@@ -44,11 +45,10 @@ type RenderFieldFn = (
     onGetContainerProps?: ?GetContainerPropsFn
 ) => React.Node
 
-type IsValidatingInnerFn = (
+type IsValidatingFn = (
     fieldId: string,
     formBuilderId: string,
-    validatingPromise: Promise<any>,
-    onIsValidating: ?Function,
+    validatingUid: string,
     message: ?string,
     fieldUIUpdates: ?FieldUI,
 ) => void;
@@ -59,10 +59,9 @@ type Props = {
     values: { [id: string]: any },
     fieldsUI: { [id: string]: FieldUI },
     onUpdateFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, callback: Function) => void,
-    onUpdateField: (value: any, uiState: FieldUI, fieldId: string, formBuilderId: string, promiseForIsValidating: Promise<any>) => void,
+    onUpdateField: (value: any, uiState: FieldUI, fieldId: string, formBuilderId: string, promiseForIsValidating: string) => void,
     onUpdateFieldUIOnly: (uiState: FieldUI, fieldId: string, formBuilderId: string) => void,
-    onFieldsValidated: ?Function,
-    onFieldsValidatedInner: (fieldsUI: { [id: string]: FieldUI }, formBuilderId: string, promisesForIsValidating: Array<Promise<any>>, onFieldsValidated: ?Function) => void,
+    onFieldsValidated: ?(fieldsUI: { [id: string]: FieldUI }, formBuilderId: string, uidsForIsValidating: Array<string>) => void,
     validationAttempted?: ?boolean,
     validateIfNoUIData?: ?boolean,
     formHorizontal: ?boolean,
@@ -70,9 +69,8 @@ type Props = {
     onRenderDivider?: ?RenderDividerFn,
     onGetContainerProps?: ?GetContainerPropsFn,
     onGetValidationContext: ?() => ?Object,
-    onIsValidating: ?Function,
-    onIsValidatingInner: IsValidatingInnerFn,
-    onCleanUp?: ?(remainingPromises: Array<Promise<any>>) => void,
+    onIsValidating: ?IsValidatingFn,
+    onCleanUp?: ?(remainingUids: Array<string>) => void,
     loadNr: number,
 };
 
@@ -80,7 +78,8 @@ type FieldCommitOptions = {
     touched?: boolean,
 };
 
-type FieldsValidatingPromiseContainer = { [fieldId: string]: ?{ cancelableValidatingPromise?: ?CancelablePromise<any>, validatingCompletePromise: Promise<any>, validatingCompletePromiseResolver: Function } };
+// type FieldsValidatingPromiseContainer = { [fieldId: string]: ?{ cancelableValidatingPromise?: ?CancelablePromise<any>, validatingCompletePromise: Promise<any>, validatingCompletePromiseResolver: Function } };
+type FieldsValidatingPromiseContainer = { [fieldId: string]: ?{ cancelableValidatingPromise?: ?CancelablePromise<any>, validatingCompleteUid: string } };
 
 class FormBuilder extends React.Component<Props> {
     static async validateField(
@@ -172,7 +171,6 @@ class FormBuilder extends React.Component<Props> {
             fields,
             values,
             onGetValidationContext,
-            onIsValidatingInner,
             onIsValidating,
         } = props;
         const validationContext = onGetValidationContext && onGetValidationContext();
@@ -181,21 +179,19 @@ class FormBuilder extends React.Component<Props> {
                 const fieldId = field.id;
                 const fieldValidatingPromiseContainer = fieldsValidatingPromiseContainer[fieldId] || {};
                 fieldsValidatingPromiseContainer[fieldId] = fieldValidatingPromiseContainer;
-                if (!fieldValidatingPromiseContainer.validatingCompletePromise) {
-                    fieldValidatingPromiseContainer.validatingCompletePromise = new Promise((resolve) => {
-                        fieldValidatingPromiseContainer.validatingCompletePromiseResolver = resolve;
-                    });
+
+                if (!fieldValidatingPromiseContainer.validatingCompleteUid) {
+                    fieldValidatingPromiseContainer.validatingCompleteUid = uuid();
                 }
                 fieldValidatingPromiseContainer.cancelableValidatingPromise &&
                 fieldValidatingPromiseContainer.cancelableValidatingPromise.cancel();
 
                 const handleIsValidatingInternal = (message: ?string, promise: Promise<any>) => {
                     fieldValidatingPromiseContainer.cancelableValidatingPromise = makeCancelablePromise(promise);
-                    onIsValidatingInner(
+                    onIsValidating && onIsValidating(
                         field.id,
                         id,
-                        fieldValidatingPromiseContainer.validatingCompletePromise,
-                        onIsValidating,
+                        fieldValidatingPromiseContainer.validatingCompleteUid,
                         message,
                     );
                     // $FlowFixMe
@@ -251,7 +247,7 @@ class FormBuilder extends React.Component<Props> {
         this.fieldsValidatingPromiseContainer = {};
 
         if (this.props.validateIfNoUIData) {
-            this.validateAllFields(this.props, this.fieldsValidatingPromiseContainer);
+            this.validateAllFields(this.props);
         }
     }
 
@@ -266,28 +262,30 @@ class FormBuilder extends React.Component<Props> {
         if (this.props.validateIfNoUIData &&
             (newProps.id !== this.props.id || newProps.loadNr !== this.props.loadNr)
         ) {
-            newProps.onCleanUp && newProps.onCleanUp(this.getCleanUpData());
-            this.validateAllFields(newProps, this.fieldsValidatingPromiseContainer);
+            const onCleanUp = newProps.onCleanUp;
+            onCleanUp && onCleanUp(this.getCleanUpData());
+            this.validateAllFields(newProps);
         }
     }
 
     componentWillUnmount() {
-        this.props.onCleanUp && this.props.onCleanUp(this.getCleanUpData());
+        const onCleanUp = this.props.onCleanUp;
+        onCleanUp && onCleanUp(this.getCleanUpData());
     }
 
     getCleanUpData() {
-        const remainingCompletePromises: Array<Promise<any>> = Object
+        const remainingCompleteUids: Array<string> = Object
             .keys(this.fieldsValidatingPromiseContainer)
             .map((key) => {
-                const { cancelableValidatingPromise, validatingCompletePromise } =
+                const { cancelableValidatingPromise, validatingCompleteUid } =
                     this.fieldsValidatingPromiseContainer[key] || {};
                 cancelableValidatingPromise && cancelableValidatingPromise.cancel();
-                return validatingCompletePromise;
+                return validatingCompleteUid;
             })
             .filter(promise => !!promise);
 
         this.fieldsValidatingPromiseContainer = {};
-        return remainingCompletePromises;
+        return remainingCompleteUids;
     }
 
     validateAllFields(
@@ -312,12 +310,11 @@ class FormBuilder extends React.Component<Props> {
                         promises: this.fieldsValidatingPromiseContainer[validationDataContainer.id],
                         id: validationDataContainer.id,
                     }));
-
-                props.onFieldsValidatedInner(
+                // $FlowFixMe
+                props.onFieldsValidated && props.onFieldsValidated(
                     validationContainers,
                     props.id,
-                    promisesAndIdForActuallyValidatedFields.map(c => c.promises.validatingCompletePromise),
-                    props.onFieldsValidated,
+                    promisesAndIdForActuallyValidatedFields.map(c => c.promises.validatingCompleteUid),
                 );
 
                 promisesAndIdForActuallyValidatedFields
@@ -362,7 +359,6 @@ class FormBuilder extends React.Component<Props> {
             onUpdateField,
             onGetValidationContext,
             id,
-            onIsValidatingInner,
             onIsValidating,
         } = this.props;
         const field = this.getFieldProp(fieldId);
@@ -375,21 +371,18 @@ class FormBuilder extends React.Component<Props> {
 
         const fieldValidatingPromiseContainer = this.fieldsValidatingPromiseContainer[fieldId] || {};
         this.fieldsValidatingPromiseContainer[fieldId] = fieldValidatingPromiseContainer;
-        if (!fieldValidatingPromiseContainer.validatingCompletePromise) {
-            fieldValidatingPromiseContainer.validatingCompletePromise = new Promise((resolve) => {
-                fieldValidatingPromiseContainer.validatingCompletePromiseResolver = resolve;
-            });
+        if (!fieldValidatingPromiseContainer.validatingCompleteUid) {
+            fieldValidatingPromiseContainer.validatingCompleteUid = uuid();
         }
         fieldValidatingPromiseContainer.cancelableValidatingPromise &&
         fieldValidatingPromiseContainer.cancelableValidatingPromise.cancel();
 
         const handleIsValidatingInternal = (message: ?string, promise: Promise<any>) => {
             fieldValidatingPromiseContainer.cancelableValidatingPromise = makeCancelablePromise(promise);
-            onIsValidatingInner(
+            onIsValidating && onIsValidating(
                 fieldId,
                 id,
-                fieldValidatingPromiseContainer.validatingCompletePromise,
-                onIsValidating,
+                fieldValidatingPromiseContainer.validatingCompleteUid,
                 message,
                 {
                     touched: true,
@@ -416,9 +409,8 @@ class FormBuilder extends React.Component<Props> {
                     },
                     fieldId,
                     id,
-                    fieldValidatingPromiseContainer.validatingCompletePromise,
+                    fieldValidatingPromiseContainer.validatingCompleteUid,
                 );
-                fieldValidatingPromiseContainer.validatingCompletePromiseResolver();
                 this.fieldsValidatingPromiseContainer[fieldId] = null;
             })
             .catch((reason) => {
@@ -434,7 +426,7 @@ class FormBuilder extends React.Component<Props> {
                         },
                         fieldId,
                         id,
-                        fieldValidatingPromiseContainer.validatingCompletePromise,
+                        fieldValidatingPromiseContainer.validatingCompleteUid,
                     );
                 }
             });
@@ -511,7 +503,6 @@ class FormBuilder extends React.Component<Props> {
             validationAttempted,
             id,
             onFieldsValidated,
-            onFieldsValidatedInner,
             onUpdateField,
             onUpdateFieldAsync,
             onUpdateFieldUIOnly,
@@ -520,7 +511,6 @@ class FormBuilder extends React.Component<Props> {
             onRenderDivider: extractOnRenderDivider,
             onGetContainerProps: extractOnGetContainerProps,
             onIsValidating,
-            onIsValidatingInner,
             onGetValidationContext,
             onCleanUp,
             loadNr,

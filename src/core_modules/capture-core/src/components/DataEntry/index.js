@@ -25,6 +25,9 @@ export { default as placements } from './constants/placements.const';
 
 // actions
 export { actionTypes as searchGroupActionTypes } from './actions/searchGroup.actions';
+export { actionTypes as mainActionTypes } from './actions/dataEntry.actions';
+export { actionTypes as loadNewActionTypes } from './actions/dataEntryLoadNew.actions';
+export { actionTypes as loadEditActionTypes } from './actions/dataEntryLoadEdit.actions';
 
 // epics
 export {

@@ -18,12 +18,21 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         elementId: string,
         formBuilderId: string,
         formId: string,
-        updateCompletePromise: ?Promise<any>,
+        updateCompleteUid: string,
     ) => {
-        const updateAction = updateFormField(value, uiState, elementId, formBuilderId, formId, dataEntryId, itemId);
+        const updateAction = updateFormField(
+            value,
+            uiState,
+            elementId,
+            formBuilderId,
+            formId,
+            dataEntryId,
+            itemId,
+            updateCompleteUid,
+        );
 
         if (onUpdateField) {
-            onUpdateField(elementId, value, updateAction, updateCompletePromise);
+            onUpdateField(elementId, value, updateAction);
         } else {
             dispatch(updateAction);
         }
