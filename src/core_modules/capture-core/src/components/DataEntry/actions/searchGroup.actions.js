@@ -5,6 +5,7 @@ export const actionTypes = {
     SEARCH_GROUP_RESULT_COUNT_RETRIVED: 'SearchGroupResultCountRetrieved',
     SEARCH_GROUP_RESULT_COUNT_RETRIEVAL_FAILED: 'SearchGroupResultCountRetrievalFailed',
     FILTER_SEARCH_GROUP_FOR_COUNT_SEARCH: 'FilterSearchGroupForCountSearch',
+    FILTER_SEARCH_GROUP_FOR_COUNT_TO_BE_EXECUTED: 'FilterSearchGroupForCountSearchToBeExecuted',
     START_SEARCH_GROUP_COUNT_SEARCH: 'StartSearchGroupCountSearch',
     ABORT_SEARCH_GROUP_COUNT_SEARCH: 'AbortSearchGroupCountSearch',
     CANCEL_SEARCH_GROUP_COUNT_SEARCH: 'CancelSearchGroupCountSearch',
@@ -27,6 +28,11 @@ export const filterSearchGroupForCountSearch =
         actionCreator(actionTypes.FILTER_SEARCH_GROUP_FOR_COUNT_SEARCH)(
             { searchGroup, uid, dataEntryKey, contextProps });
 
+export const filterSearchGroupForCountSearchToBeExecuted =
+    (filterSearchGroupForCountSearchAction: Object) =>
+        actionCreator(actionTypes.FILTER_SEARCH_GROUP_FOR_COUNT_TO_BE_EXECUTED)(
+            { ...filterSearchGroupForCountSearchAction.payload });
+
 export const startSearchGroupCountSearch =
     (
         searchGroup: Object,
@@ -40,9 +46,9 @@ export const startSearchGroupCountSearch =
             { searchGroup, searchGroupId, uid, dataEntryKey, contextProps, values });
 
 export const abortSearchGroupCountSearch =
-(dataEntryKey: string, uids: Array<string>) =>
+(dataEntryKey: string, searchGroup: Object, groupId: string, uids: Array<string>) =>
     actionCreator(actionTypes.ABORT_SEARCH_GROUP_COUNT_SEARCH)(
-        { dataEntryKey, uids });
+        { dataEntryKey, searchGroup, groupId, uids });
 
 export const cancelSearchGroupCountSearch =
     (dataEntryKey: string, uid: string) =>

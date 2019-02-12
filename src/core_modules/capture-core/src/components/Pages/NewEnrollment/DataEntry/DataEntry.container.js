@@ -30,7 +30,7 @@ const makeMapStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onUpdateField: (innerAction: ReduxAction<any, any>, extraActions: { searchActions: ?Array<ReduxAction<any, any>>}) => {
+    onUpdateField: (innerAction: ReduxAction<any, any>, extraActions: { filterActions: Array<ReduxAction<any, any>>, filterActionsToBeExecuted: Array<ReduxAction<any, any>>}) => {
         dispatch(updateFieldBatch(innerAction, extraActions));
     },
     onSave: (itemId: string, dataEntryId: string, formFoundation: RenderFoundation) => {

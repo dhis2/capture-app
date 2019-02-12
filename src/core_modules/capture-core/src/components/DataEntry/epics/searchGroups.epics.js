@@ -51,12 +51,22 @@ function executeSearch(
 const saveWaitUids = {};
 
 function cleanUpUidsAfterSearch(dataEntryKey: string, searchGroupId: string) {
-    saveWaitUids[dataEntryKey][searchGroupId] = null;
+    if (saveWaitUids[dataEntryKey] && saveWaitUids[dataEntryKey][searchGroupId]) {
+        saveWaitUids[dataEntryKey][searchGroupId] = null;
+    }
 }
 
-function searchHasRequiredValues(searchGroup: InputSearchGroup, values: Object) {
+function searchHasValidAndRequiredValues(searchGroup: InputSearchGroup, values: Object, fieldsUI: Object) {
     const searchFoundation = searchGroup.searchFoundation;
     const elements = searchFoundation.getElements();
+    if (
+        elements
+            .filter(e => fieldsUI[e.id] && fieldsUI[e.id].errorType === 'dataType' && !fieldsUI[e.id].valid)
+            .length > 0
+    ) {
+        return false;
+    }
+
     const elementsWithValue = elements
         .filter(e => values[e.id]);
     return elementsWithValue.length >= searchGroup.minAttributesRequiredToSearch;
@@ -102,8 +112,18 @@ export const getFilterSearchGroupForSearchEpic =
                             const formValues = state.formsValues[dataEntryKey] || {};
                             const previousValues = (state.dataEntriesSearchGroupsPreviousValues[dataEntryKey] &&
                                 state.dataEntriesSearchGroupsPreviousValues[dataEntryKey][searchGroup.id]) || {};
+                            const fieldsUI = Object
+                                .keys(state.formsSectionsFieldsUI)
+                                .filter(key => key.startsWith(dataEntryKey))
+                                .reduce((accFieldsUI, key) => {
+                                    const sectionUI = state.formsSectionsFieldsUI[key];
+                                    return {
+                                        ...accFieldsUI,
+                                        ...sectionUI,
+                                    };
+                                }, {});
 
-                            const abortSearchGroupSearch = !searchHasRequiredValues(searchGroup, formValues);
+                            const abortSearchGroupSearch = !searchHasValidAndRequiredValues(searchGroup, formValues, fieldsUI);
                             if (abortSearchGroupSearch) {
                                 return {
                                     ...sa,
@@ -127,7 +147,9 @@ export const getFilterSearchGroupForSearchEpic =
                                 const currentlyActiveUids = (saveWaitUids[dataEntryKey] &&
                                     saveWaitUids[dataEntryKey][searchGroup.id]) || [];
                                 cleanUpUidsAfterSearch(dataEntryKey, searchGroup.id);
-                                return abortSearchGroupCountSearch(dataEntryKey, [...currentlyActiveUids, uid]);
+                                return abortSearchGroupCountSearch(
+                                    dataEntryKey, searchGroup, searchGroup.id, [...currentlyActiveUids, uid],
+                                );
                             }
                             if (sa.cancel) {
                                 const { dataEntryKey, uid } = sa.payload;
@@ -179,13 +201,18 @@ export const getExecuteSearchForSearchGroupEpic =
                                     .ofType(searchBatchActionTypes.FILTERED_SEARCH_ACTIONS_FOR_SEARCH_BATCH)
                                     .filter(ab =>
                                         ab.payload.find(a =>
-                                            a.type === (searchActionTypes.START_SEARCH_GROUP_COUNT_SEARCH || searchActionTypes.ABORT_SEARCH_GROUP_COUNT_SEARCH) &&
+                                            [
+                                                searchActionTypes.START_SEARCH_GROUP_COUNT_SEARCH,
+                                                searchActionTypes.ABORT_SEARCH_GROUP_COUNT_SEARCH,
+                                            ].includes(a.type) &&
                                             a.payload.searchGroup === searchGroup)),
                             )
                             .map((count) => {
                                 const currentlyActiveUids = saveWaitUids[dataEntryKey][searchGroup.id];
                                 cleanUpUidsAfterSearch(dataEntryKey, searchGroup.id);
-                                return searchGroupResultCountRetrieved(count, dataEntryKey, searchGroup.id, currentlyActiveUids);
+                                return searchGroupResultCountRetrieved(
+                                    count, dataEntryKey, searchGroup.id, currentlyActiveUids,
+                                );
                             })
                             .catch((error) => {
                                 log.error(errorCreator(error)({ dataEntryKey, searchGroupId: searchGroup.id }));

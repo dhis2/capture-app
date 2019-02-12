@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import { InputSearchGroup } from '../../metaData';
 import getDataEntryKey from './common/getDataEntryKey';
-import { filterSearchGroupForCountSearch } from './actions/searchGroup.actions';
+import { filterSearchGroupForCountSearch, filterSearchGroupForCountSearchToBeExecuted } from './actions/searchGroup.actions';
 import { updateFieldAndRunSearchGroupSearchesBatch } from './actions/searchGroup.actionBatches';
 
 type Props = {
@@ -40,16 +40,12 @@ const getSearchGroupsHOC = (
         }
 
         handleFieldUpdate = (
-            fieldId: string,
-            value: any,
             innerAction: ReduxAction<any, any>,
         ) => {
             const { onUpdateFormField, onUpdateFormFieldInner, dataEntryKey } = this.props;
-            const searchGroupsForField = this.searchGroups;
+            const searchGroupsForField = this.searchGroups || [];
 
             onUpdateFormFieldInner(
-                fieldId,
-                value,
                 innerAction,
                 searchGroupsForField,
                 dataEntryKey,
@@ -89,8 +85,6 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onUpdateFormFieldInner: (
-        fieldId: string,
-        value: any,
         innerAction: ReduxAction<any, any>,
         searchGroups: Array<InputSearchGroup>,
         dataEntryKey: string,
@@ -100,7 +94,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         const searchUids = searchGroups
             .map(() => uuid());
 
-        const searchActions = searchGroups
+        const filterActions = searchGroups
             .map((sg, index) => filterSearchGroupForCountSearch(
                 sg,
                 searchUids[index],
@@ -108,15 +102,15 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
                 searchContext,
             ));
 
+        const filterActionsToBeExecuted = filterActions.map(fa => filterSearchGroupForCountSearchToBeExecuted(fa));
+
         if (onUpdateFormField) {
             onUpdateFormField(
-                fieldId,
-                value,
                 innerAction,
-                { searchActions },
+                { filterActions, filterActionsToBeExecuted },
             );
         } else {
-            dispatch(updateFieldAndRunSearchGroupSearchesBatch(innerAction, searchActions));
+            dispatch(updateFieldAndRunSearchGroupSearchesBatch(innerAction, filterActions, filterActionsToBeExecuted));
         }
     },
 });

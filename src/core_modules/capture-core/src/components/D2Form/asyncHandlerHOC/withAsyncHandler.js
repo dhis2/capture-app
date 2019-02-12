@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { fieldIsValidating, fieldsValidated, cleanUpFormBuilder } from './actions';
 
 type Props = {
-    formId: string,
+    id: string,
     onIsValidating: Function,
     onFieldsValidated: Function,
     onCleanUp: Function,
@@ -13,22 +13,22 @@ type Props = {
 const getAsyncHandler = (InnerComponent: React.ComponentType<any>) =>
     class AsyncHandlerHOC extends React.Component<Props> {
         handleIsValidating = (...args) => {
-            const { formId } = this.props;
-            this.props.onIsValidating(...args, formId);
+            const { id } = this.props;
+            this.props.onIsValidating(...args, id);
         }
 
         handleFieldsValidated = (...args) => {
-            const { formId } = this.props;
-            this.props.onFieldsValidated(...args, formId);
+            const { id } = this.props;
+            this.props.onFieldsValidated(...args, id);
         }
 
         handleCleanUp = (...args) => {
-            const { formId } = this.props;
-            this.props.onCleanUp(...args, formId);
+            const { id } = this.props;
+            this.props.onCleanUp(...args, id);
         }
 
         render() {
-            const { onIsValidating, onFieldsValidated, ...passOnProps } = this.props;
+            const { onIsValidating, onFieldsValidated, onCleanUp, ...passOnProps } = this.props;
             return (
                 <InnerComponent
                     onIsValidating={this.handleIsValidating}
@@ -40,7 +40,7 @@ const getAsyncHandler = (InnerComponent: React.ComponentType<any>) =>
         }
     };
 
-const mapStateToProps = (state: ReduxState) => ({});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onIsValidating: (

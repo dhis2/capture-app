@@ -32,9 +32,6 @@ type Props = {
     id: string,
     warnings: ?Array<{id: string, warning: string }>,
     hasGeneralErrors: ?boolean,
-    onIsValidating: (innerAction: ReduxAction<any, any>) => void,
-    onFieldsValidated: (innerAction: ReduxAction<any, any>) => void,
-    onUpdateFormField: (innerAction: ReduxAction<any, any>, extraActions: { searchActions: ?Array<ReduxAction<any, any>>}) => void,
     inProgressList: Array<string>,
 };
 
@@ -240,9 +237,6 @@ const getSaveHandler = (
                 onSaveAbort,
                 warnings,
                 hasGeneralErrors,
-                onIsValidating,
-                onFieldsValidated,
-                onUpdateFormField,
                 inProgressList,
                 ...passOnProps
             } = this.props;
@@ -335,15 +329,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    const defaultMergedProps = Object.assign({}, ownProps, stateProps, dispatchProps);
-
-    const mergedProps = ownProps.onUpdateFormField ?
-        { ...defaultMergedProps, onUpdateFormField: ownProps.onUpdateFormField } :
-        defaultMergedProps;
-    return mergedProps;
-};
-
 export default (
     options?: {
         onIsCompleting?: IsCompletingFn,
@@ -352,7 +337,7 @@ export default (
     (InnerComponent: React.ComponentType<any>) =>
         // $FlowFixMe
         connect(
-            mapStateToProps, mapDispatchToProps, mergeProps, { withRef: true })(
+            mapStateToProps, mapDispatchToProps, null, { withRef: true })(
             getSaveHandler(
                 InnerComponent,
                 options && options.onIsCompleting,

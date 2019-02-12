@@ -4,6 +4,7 @@ import type { OutputEffect } from 'capture-core-utils/RulesEngine/rulesEngine.ty
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as fieldActionTypes } from '../../components/D2Form/D2SectionFields.actions';
 import { actionTypes as loaderActionTypes } from '../../components/D2Form/actions/form.actions';
+import { actionTypes as formAsyncActionTypes } from '../../components/D2Form/asyncHandlerHOC/actions';
 import { actionTypes as formBuilderActionTypes } from '../../components/D2Form/formBuilder.actions';
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
 import { actionTypes as rulesEffectsActionTypes } from '../../rulesEngineActionsCreator/rulesEngine.actions';
@@ -74,14 +75,14 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
 
         return newState;
     },
-    [formBuilderActionTypes.FIELDS_VALIDATED]: (state, action) => {
+    [formAsyncActionTypes.FIELDS_VALIDATED]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
 
-        newState[payload.id] = Object.keys(payload.fieldsUI).reduce((accSectionFieldsUI, key) => {
+        newState[payload.formBuilderId] = Object.keys(payload.fieldsUI).reduce((accSectionFieldsUI, key) => {
             accSectionFieldsUI[key] = { ...accSectionFieldsUI[key], ...payload.fieldsUI[key], validatingMessage: null };
             return accSectionFieldsUI;
-        }, { ...newState[payload.id] });
+        }, { ...newState[payload.formBuilderId] });
         return newState;
     },
     [fieldActionTypes.UPDATE_FIELD]: (state, action) => {
@@ -118,7 +119,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
         sectionFieldsUI[payload.elementId] = { ...sectionFieldsUI[payload.elementId], ...payload.uiState };
         return newState;
     },
-    [formBuilderActionTypes.FIELD_IS_VALIDATING]: (state, action) => {
+    [formAsyncActionTypes.FIELD_IS_VALIDATING]: (state, action) => {
         const { fieldId, formBuilderId, message, fieldUIUpdates } = action.payload;
         return {
             ...state,

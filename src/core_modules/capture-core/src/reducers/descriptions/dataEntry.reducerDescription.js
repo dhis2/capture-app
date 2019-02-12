@@ -308,6 +308,16 @@ export const dataEntriesSearchGroupsResultsDesc = createReducerDescription({
             },
         };
     },
+    [searchGroupActionTypes.ABORT_SEARCH_GROUP_COUNT_SEARCH]: (state, action) => {
+        const { dataEntryKey, groupId } = action.payload;
+        return {
+            ...state,
+            [dataEntryKey]: {
+                ...state[dataEntryKey],
+                [groupId]: null,
+            },
+        };
+    },
 }, 'dataEntriesSearchGroupsResults');
 
 export const dataEntriesSearchGroupsPreviousValuesDesc = createReducerDescription({
@@ -354,7 +364,7 @@ export const dataEntriesInProgressListDesc = createReducerDescription({
             [key]: null,
         };
     },
-    [searchGroupActionTypes.FILTER_SEARCH_GROUP_FOR_COUNT_SEARCH]: (state, action) => {
+    [searchGroupActionTypes.FILTER_SEARCH_GROUP_FOR_COUNT_TO_BE_EXECUTED]: (state, action) => {
         const { uid, dataEntryKey } = action.payload;
         return {
             ...state,

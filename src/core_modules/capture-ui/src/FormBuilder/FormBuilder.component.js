@@ -239,12 +239,14 @@ class FormBuilder extends React.Component<Props> {
     asyncUIState: { [id: string]: FieldUI };
     fieldsValidatingPromiseContainer: FieldsValidatingPromiseContainer;
     validateAllCancelablePromise: ?CancelablePromise<any>;
+    commitUpdateTriggeredForFields: { [fieldId: string]: boolean };
 
     constructor(props: Props) {
         super(props);
         this.fieldInstances = new Map();
         this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
         this.fieldsValidatingPromiseContainer = {};
+        this.commitUpdateTriggeredForFields = {};
 
         if (this.props.validateIfNoUIData) {
             this.validateAllFields(this.props);
@@ -252,19 +254,17 @@ class FormBuilder extends React.Component<Props> {
     }
 
     componentWillReceiveProps(newProps: Props) {
-        if (newProps.id !== this.props.id) {
+        if (newProps.id !== this.props.id || newProps.loadNr !== this.props.loadNr) {
             this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
+            this.commitUpdateTriggeredForFields = {};
+            const onCleanUp = newProps.onCleanUp;
+            onCleanUp && onCleanUp(this.getCleanUpData());
+            if (this.props.validateIfNoUIData) {
+                this.validateAllFields(newProps);
+            }
         } else {
             this.asyncUIState =
                 FormBuilder.updateAsyncUIState(this.props.fieldsUI, newProps.fieldsUI, this.asyncUIState);
-        }
-
-        if (this.props.validateIfNoUIData &&
-            (newProps.id !== this.props.id || newProps.loadNr !== this.props.loadNr)
-        ) {
-            const onCleanUp = newProps.onCleanUp;
-            onCleanUp && onCleanUp(this.getCleanUpData());
-            this.validateAllFields(newProps);
         }
     }
 
@@ -309,7 +309,10 @@ class FormBuilder extends React.Component<Props> {
                     .map(validationDataContainer => ({
                         promises: this.fieldsValidatingPromiseContainer[validationDataContainer.id],
                         id: validationDataContainer.id,
-                    }));
+                        commitUpdateTriggeredForField: this.commitUpdateTriggeredForFields[validationDataContainer.id],
+                    }))
+                    .filter(c => !c.commitUpdateTriggeredForField);
+
                 // $FlowFixMe
                 props.onFieldsValidated && props.onFieldsValidated(
                     validationContainers,
@@ -319,7 +322,6 @@ class FormBuilder extends React.Component<Props> {
 
                 promisesAndIdForActuallyValidatedFields
                     .forEach((container) => {
-                        container.promises.validatingCompletePromiseResolver();
                         this.fieldsValidatingPromiseContainer[container.id] = null;
                     });
 
@@ -392,6 +394,7 @@ class FormBuilder extends React.Component<Props> {
             return fieldValidatingPromiseContainer.cancelableValidatingPromise.promise;
         };
 
+        this.commitUpdateTriggeredForFields[fieldId] = true;
         const updatePromise = FormBuilder.validateField(
             field,
             value,
@@ -428,6 +431,7 @@ class FormBuilder extends React.Component<Props> {
                         id,
                         fieldValidatingPromiseContainer.validatingCompleteUid,
                     );
+                    this.fieldsValidatingPromiseContainer[fieldId] = null;
                 }
             });
         await updatePromise;

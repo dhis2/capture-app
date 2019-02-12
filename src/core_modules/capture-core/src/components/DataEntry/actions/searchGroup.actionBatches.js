@@ -7,8 +7,8 @@ export const batchActionTypes = {
 };
 
 export const updateFieldAndRunSearchGroupSearchesBatch =
-    (innerAction: ReduxAction<any, any>, searchActions: Array<ReduxAction<any, any>>) =>
-        batchActions([innerAction, ...searchActions], batchActionTypes.UPDATE_FIELD_AND_RUN_SEARCH_GROUP_SEARCHES_BATCH);
+    (innerAction: ReduxAction<any, any>, filterActions: Array<ReduxAction<any, any>>, filterActionsToBeExecuted: Array<ReduxAction<any, any>>) =>
+        batchActions([innerAction, ...filterActions, ...filterActionsToBeExecuted], batchActionTypes.UPDATE_FIELD_AND_RUN_SEARCH_GROUP_SEARCHES_BATCH);
 
 export const filteredSearchActionsForSearchBatch =
     (searchActions: Array<ReduxAction<any, any>>) =>
