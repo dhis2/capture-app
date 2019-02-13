@@ -6,6 +6,9 @@ export const actionTypes = {
     FIELDS_VALIDATED: 'FieldsValidated',
     FIELD_IS_VALIDATING: 'FieldIsValidating',
     CLEAN_UP_FORM_BUILDER: 'CleanUpFormBuilder',
+    START_UPDATE_FIELD_ASYNC: 'StartUpdateFieldAsync',
+    UPDATE_FIELD_FROM_ASYNC: 'UpdateFieldFromAsync',
+    ASYNC_UPDATE_FIELD_FAILED: 'AsyncUpdateFieldFailed',
 };
 
 export const fieldIsValidating = (
@@ -39,3 +42,32 @@ export const fieldsValidated = (
 export const cleanUpFormBuilder = (remainingUids: Array<string>, formId: string) =>
     actionCreator(actionTypes.CLEAN_UP_FORM_BUILDER)(
         { remainingUids, formId });
+
+export const startUpdateFieldAsync = (
+    elementId: string,
+    fieldLabel: string,
+    formBuilderId: string,
+    formId: string,
+    uid: string,
+    callback: Function,
+) => actionCreator(actionTypes.START_UPDATE_FIELD_ASYNC)(
+    { elementId, fieldLabel, formBuilderId, formId, uid, callback });
+
+export const updateFieldFromAsync = (
+    value: any,
+    uiState: Object,
+    elementId: string,
+    formBuilderId: string,
+    formId: string,
+    uid: string,
+) => actionCreator(actionTypes.UPDATE_FIELD_FROM_ASYNC)(
+    { value, uiState, elementId, formBuilderId, formId, uid });
+
+export const asyncUpdateFieldFailed = (
+    message: string,
+    uiState: Object,
+    elementId: string,
+    formBuilderId: string,
+    uid: string,
+) =>
+    actionCreator(actionTypes.ASYNC_UPDATE_FIELD_FAILED)({ message, uiState, elementId, formBuilderId, uid });

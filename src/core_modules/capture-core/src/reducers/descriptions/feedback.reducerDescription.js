@@ -3,8 +3,8 @@ import * as React from 'react';
 import log from 'loglevel';
 import isString from 'd2-utilizr/lib/isString';
 import isObject from 'd2-utilizr/lib/isObject';
-import errorCreator from '../../utils/errorCreator';
 import i18n from '@dhis2/d2-i18n';
+import errorCreator from '../../utils/errorCreator';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as feedbackActionTypes } from '../../components/FeedbackBar/actions/feedback.actions';
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
@@ -18,6 +18,7 @@ import {
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
 import { actionTypes as eventsListActionTypes } from '../../components/Pages/MainPage/EventsList/eventsList.actions';
 import { orgUnitListActionTypes } from '../../components/QuickSelector';
+import { asyncHandlerActionTypes } from '../../components/D2Form';
 
 function addErrorFeedback(state: ReduxState, message: string, action?: ?React.Node) {
     const newState = [...state];
@@ -75,7 +76,7 @@ export const feedbackDesc = createReducerDescription({
         ...state,
         getErrorFeedback(action.payload),
     ],
-    [dataEntryActionTypes.ASYNC_UPDATE_FIELD_FAILED]: (state, action) =>
+    [asyncHandlerActionTypes.ASYNC_UPDATE_FIELD_FAILED]: (state, action) =>
         addErrorFeedback(state, action.payload.message),
     [newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER]: (state, action) => {
         const error = action.payload;

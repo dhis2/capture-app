@@ -4,7 +4,6 @@ import {
     cancelNewEventEpic,
     cancelNewEventLocationChangeEpic,
     cancelNewEventIncompleteSelectionsLocationChangeEpic,
-    newEventAsyncUpdateFieldEpic,
     resetDataEntryForNewEventEpic,
     openNewEventInDataEntryEpic,
     resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
@@ -36,9 +35,6 @@ import {
 import {
     openNewEventPageLocationChangeEpic,
 } from 'capture-core/components/Pages/NewEvent/epics/newEvent.epics';
-import {
-    editEventAsyncUpdateFieldEpic,
-} from 'capture-core/components/Pages/EditEvent/DataEntry/epics/editEventAsyncUpdateField.epics';
 import {
     retrieveWorkingListOnMainSelectionsCompletedEpic,
     getWorkingListOnCancelSaveEpic,
@@ -128,6 +124,9 @@ import {
 } from 'capture-core/components/organisationUnits/organisationUnitRoots.epics';
 
 import {
+    asyncUpdateFieldEpic,
+} from 'capture-core/components/D2Form';
+import {
     filterFormFieldOrgUnitsEpic,
 } from 'capture-core/components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.epics';
 
@@ -166,8 +165,6 @@ export default combineEpics(
     saveNewEventEpic,
     cancelNewEventLocationChangeEpic,
     cancelNewEventEpic,
-    newEventAsyncUpdateFieldEpic,
-    editEventAsyncUpdateFieldEpic,
     cancelNewEventIncompleteSelectionsLocationChangeEpic,
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,
@@ -218,6 +215,7 @@ export default combineEpics(
     runRulesOnNewEnrollmentFieldUpdateEpic,
     saveNewEnrollmentEpic,
     filterFormFieldOrgUnitsEpic,
+    asyncUpdateFieldEpic,
     teiSearchFilterOrgUnitsEpic,
     ...getDataEntryEpics(),
 );

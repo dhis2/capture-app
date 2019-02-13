@@ -134,11 +134,14 @@ class EnrollmentFactory {
         cachedProgram: CachedProgram,
         searchGroup: SearchGroup,
     ) {
-        const programTeiAttributes = cachedProgram.programTrackedEntityAttributes;
+        const programTeiAttributes = cachedProgram.programTrackedEntityAttributes || [];
         const teiAttributesAsObject = programTeiAttributes.reduce((accTeiAttributes, programTeiAttribute) => {
             const teiAttribute = this.cachedTrackedEntityAttributes.get(programTeiAttribute.trackedEntityAttributeId);
-            // error handling
-            accTeiAttributes[teiAttribute.id] = teiAttribute;
+            if (!teiAttribute) {
+                log.error(errorCreator('could not retrieve tei attribute')({ programTeiAttribute }));
+            } else {
+                accTeiAttributes[teiAttribute.id] = teiAttribute;
+            }
             return accTeiAttributes;
         }, {});
 
@@ -151,6 +154,7 @@ class EnrollmentFactory {
         Array.from(
             searchGroupFoundation
                 .getSection(Section.MAIN_SECTION_ID)
+                // $FlowFixMe : there should be one
                 .elements
                 .entries())
             .map(entry => entry[1])

@@ -78,7 +78,6 @@ type FieldCommitOptions = {
     touched?: boolean,
 };
 
-// type FieldsValidatingPromiseContainer = { [fieldId: string]: ?{ cancelableValidatingPromise?: ?CancelablePromise<any>, validatingCompletePromise: Promise<any>, validatingCompletePromiseResolver: Function } };
 type FieldsValidatingPromiseContainer = { [fieldId: string]: ?{ cancelableValidatingPromise?: ?CancelablePromise<any>, validatingCompleteUid: string } };
 
 class FormBuilder extends React.Component<Props> {
@@ -194,7 +193,7 @@ class FormBuilder extends React.Component<Props> {
                         fieldValidatingPromiseContainer.validatingCompleteUid,
                         message,
                     );
-                    // $FlowFixMe
+
                     return fieldValidatingPromiseContainer.cancelableValidatingPromise.promise;
                 };
 
@@ -534,7 +533,6 @@ class FormBuilder extends React.Component<Props> {
 
         if (props.async) {
             asyncProps.onCommitAsync = (callback: Function) => this.handleCommitAsync(field.id, props.label, callback);
-            asyncProps.onUpdateAsyncUIState = (asyncState: Object) => this.handleUpdateAsyncState(field.id, asyncState);
             asyncProps.asyncUIState = this.asyncUIState[field.id];
         }
 

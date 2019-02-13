@@ -444,4 +444,12 @@ export const dataEntriesInProgressListDesc = createReducerDescription({
             [formId]: updatedList,
         };
     },
+    [formAsyncActionTypes.UPDATE_FIELD_FROM_ASYNC]: (state, action) => {
+        const { formId, uid } = action.payload;
+        const updatedList = (state[formId] || []).filter(item => item !== uid);
+        return {
+            ...state,
+            [formId]: updatedList,
+        };
+    },
 }, 'dataEntriesInProgressList');

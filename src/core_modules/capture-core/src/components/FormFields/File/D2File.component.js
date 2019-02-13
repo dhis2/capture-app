@@ -88,7 +88,6 @@ class D2File extends Component<Props> {
         e.target.value = null;
 
         if (file) {
-            this.props.onUpdateAsyncUIState({ loading: true });
             this.props.onCommitAsync(() => {
                 const formData = new FormData();
                 formData.append('file', file);

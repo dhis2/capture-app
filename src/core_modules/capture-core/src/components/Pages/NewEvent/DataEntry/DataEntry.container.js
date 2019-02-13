@@ -46,15 +46,15 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         ], batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH));
     },
     onStartAsyncUpdateField: (
-        fieldId: string,
-        fieldLabel: string,
-        formBuilderId: string,
-        formId: string,
-        callback: Function,
-        dataEntryId: string,
-        itemId: string,
+        innerAction: ReduxAction<any, any>,
     ) => {
-        dispatch(startAsyncUpdateFieldForNewEvent(fieldId, fieldLabel, formBuilderId, formId, callback, dataEntryId, itemId));
+        const completedData = {
+            successActionCreators: [startRunRulesOnUpdateForNewSingleEvent],
+            successBatchName: batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH,
+            errorActionCreators: [],
+            errorBatchName: batchActionTypes.ASYNC_UPDATE_FIELD_FAILED_BATCH,
+        };
+        dispatch(startAsyncUpdateFieldForNewEvent(innerAction, completedData));
     },
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);

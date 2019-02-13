@@ -11,7 +11,6 @@ import {
 } from '../actions/dataEntry.actions';
 import {
     updateFormField,
-    asyncUpdateFieldFailed,
     batchActionTypes as dataEntryBatchActionTypes,
 } from '../../../../DataEntry/actions/dataEntry.actions';
 
@@ -54,7 +53,7 @@ export const newEventAsyncUpdateFieldEpic = (action$: InputObservable) =>
 
                     return batchActions([
                         updateFieldUIOnly(uiState, payload.fieldId, payload.formBuilderId),
-                        asyncUpdateFieldFailed(errorMessage),
+                        // asyncUpdateFieldFailed(errorMessage),
                     ], dataEntryBatchActionTypes.ASYNC_UPDATE_FIELD_FAILED_BATCH);
                 });
         });

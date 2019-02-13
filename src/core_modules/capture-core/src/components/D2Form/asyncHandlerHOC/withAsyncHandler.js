@@ -1,13 +1,16 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { fieldIsValidating, fieldsValidated, cleanUpFormBuilder } from './actions';
+import uuid from 'uuid/v4';
+import { fieldIsValidating, fieldsValidated, cleanUpFormBuilder, startUpdateFieldAsync } from './actions';
 
 type Props = {
     id: string,
     onIsValidating: Function,
     onFieldsValidated: Function,
     onCleanUp: Function,
+    onUpdateFieldAsyncInner: Function,
+    onUpdateFieldAsync: ?Function,
 };
 
 const getAsyncHandler = (InnerComponent: React.ComponentType<any>) =>
@@ -27,12 +30,24 @@ const getAsyncHandler = (InnerComponent: React.ComponentType<any>) =>
             this.props.onCleanUp(...args, id);
         }
 
+        handleUpdateFieldAsyncInner = (...args) => {
+            const { onUpdateFieldAsyncInner, onUpdateFieldAsync } = this.props;
+            onUpdateFieldAsyncInner(...args, onUpdateFieldAsync);
+        };
+
         render() {
-            const { onIsValidating, onFieldsValidated, onCleanUp, ...passOnProps } = this.props;
+            const {
+                onIsValidating,
+                onFieldsValidated,
+                onCleanUp,
+                onUpdateFieldAsyncInner,
+                onUpdateFieldAsync,
+                ...passOnProps } = this.props;
             return (
                 <InnerComponent
                     onIsValidating={this.handleIsValidating}
                     onFieldsValidated={this.handleFieldsValidated}
+                    onUpdateFieldAsync={this.handleUpdateFieldAsyncInner}
                     onCleanUp={this.handleCleanUp}
                     {...passOnProps}
                 />
@@ -68,6 +83,29 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         formId: string,
     ) => {
         dispatch(cleanUpFormBuilder(remainingUids, formId));
+    },
+    onUpdateFieldAsyncInner: (
+        fieldId: string,
+        fieldLabel: string,
+        formBuilderId: string,
+        formId: string,
+        callback: Function,
+        onUpdateFieldAsync: ?Function,
+    ) => {
+        const action = startUpdateFieldAsync(
+            fieldId,
+            fieldLabel,
+            formBuilderId,
+            formId,
+            uuid(),
+            callback,
+        );
+
+        if (onUpdateFieldAsync) {
+            onUpdateFieldAsync(action);
+        } else {
+            dispatch(action);
+        }
     },
 });
 

@@ -19,7 +19,6 @@ export const actionTypes = {
     UPDATE_FIELD: 'UpdateDataEntryField',
     UPDATE_FORM_FIELD: 'UpdateDataEntryFormField',
     RULES_EXECUTED_POST_UPDATE_FIELD: 'RulesExecutedPostUpdateFieldDataEntry',
-    ASYNC_UPDATE_FIELD_FAILED: 'AsyncUpdateFieldFailed',
     ADD_NOTE: 'AddNote',
     REMOVE_NOTE: 'RemoveNote',
     ADD_RELATIONSHIP: 'AddRelationship',
@@ -116,10 +115,6 @@ export const updateFormField =
 export const rulesExecutedPostUpdateField =
     (dataEntryId: string, itemId: string) =>
         actionCreator(actionTypes.RULES_EXECUTED_POST_UPDATE_FIELD)({ dataEntryId, itemId });
-
-export const asyncUpdateFieldFailed =
-    (message: string) =>
-        actionCreator(actionTypes.ASYNC_UPDATE_FIELD_FAILED)({ message });
 
 export const addNote =
     (dataEntryId: string, itemId: string, note: Object) =>

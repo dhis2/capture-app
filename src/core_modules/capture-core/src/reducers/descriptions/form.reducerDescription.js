@@ -2,6 +2,7 @@
 import { effectActions } from 'capture-core-utils/RulesEngine';
 import type { OutputEffect } from 'capture-core-utils/RulesEngine/rulesEngine.types';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
+import { asyncHandlerActionTypes } from '../../components/D2Form';
 import { actionTypes as fieldActionTypes } from '../../components/D2Form/D2SectionFields.actions';
 import { actionTypes as loaderActionTypes } from '../../components/D2Form/actions/form.actions';
 import { actionTypes as formAsyncActionTypes } from '../../components/D2Form/asyncHandlerHOC/actions';
@@ -27,6 +28,16 @@ export const formsValuesDesc = createReducerDescription({
         const formValues = newState[payload.formId] = { ...newState[payload.formId] };
         formValues[payload.elementId] = payload.value;
         return newState;
+    },
+    [asyncHandlerActionTypes.UPDATE_FIELD_FROM_ASYNC]: (state, action) => {
+        const { formId, elementId, value } = action.payload;
+        return {
+            ...state,
+            [formId]: {
+                ...state[formId],
+                [elementId]: value,
+            },
+        };
     },
     [dataEntryActionTypes.UPDATE_FORM_FIELD]: (state, action) => {
         const newState = { ...state };
@@ -97,6 +108,52 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
             validatingMessage: null,
         };
         return newState;
+    },
+    [asyncHandlerActionTypes.START_UPDATE_FIELD_ASYNC]: (state, action) => {
+        const { formBuilderId, elementId } = action.payload;
+        return {
+            ...state,
+            [formBuilderId]: {
+                ...state[formBuilderId],
+                [elementId]: {
+                    ...(state[formBuilderId] && state[formBuilderId][elementId]),
+                    loading: true,
+                },
+            },
+        };
+    },
+    [asyncHandlerActionTypes.UPDATE_FIELD_FROM_ASYNC]: (state, action) => {
+        const { uiState, formBuilderId, elementId } = action.payload;
+        return {
+            ...state,
+            [formBuilderId]: {
+                ...state[formBuilderId],
+                [elementId]: {
+                    ...(state[formBuilderId] && state[formBuilderId][elementId]),
+                    ...uiState,
+                    modified: true,
+                    validatingMessage: null,
+                    loading: false,
+                },
+            },
+        };
+    },
+    [asyncHandlerActionTypes.ASYNC_UPDATE_FIELD_FAILED]: (state, action) => {
+        const { uiState, formBuilderId, elementId, errorMessage } = action.payload;
+        return {
+            ...state,
+            [formBuilderId]: {
+                ...state[formBuilderId],
+                [elementId]: {
+                    ...(state[formBuilderId] && state[formBuilderId][elementId]),
+                    ...uiState,
+                    modified: true,
+                    validatingMessage: null,
+                    loading: false,
+                    warning: errorMessage,
+                },
+            },
+        };
     },
     [dataEntryActionTypes.UPDATE_FORM_FIELD]: (state, action) => {
         const newState = { ...state };

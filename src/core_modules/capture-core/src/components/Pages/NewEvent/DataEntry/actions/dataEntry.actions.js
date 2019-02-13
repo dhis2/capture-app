@@ -1,10 +1,11 @@
 // @flow
-import { actionCreator } from '../../../../../actions/actions.utils';
+import { actionCreator, actionPayloadAppender } from '../../../../../actions/actions.utils';
 import { methods } from '../../../../../trackerOffline/trackerOfflineConfig.const';
 import saveTypes from '../newEventSaveTypes';
 
 export const batchActionTypes = {
     UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH: 'UpdateFieldForNewSingleEventActionsBatch',
+    ASYNC_UPDATE_FIELD_FAILED_BATCH: 'AsyncUpdateFieldFailedBatch',
     OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH: 'OpenNewEventInDataEntryActionsBatch',
     RESET_DATA_ENTRY_ACTIONS_BATCH: 'ResetDataEntryForNewEventActionsBatch',
     RULES_EFFECTS_ACTIONS_BATCH: 'RulesEffectsForNewSingleEventActionsBatch',
@@ -128,25 +129,11 @@ export const startSaveNewEventAddAnother =
 export const newEventSavedAddAnother = (selections: Object) =>
     actionCreator(actionTypes.NEW_EVENT_SAVED_ADD_ANOTHER)(null, { selections });
 
-export const startAsyncUpdateFieldForNewEvent =
-    (
-        fieldId: string,
-        fieldLabel: string,
-        formBuilderId: string,
-        formId: string,
-        callback: Function,
-        dataEntryId: string,
-        itemId: string,
-    ) =>
-        actionCreator(actionTypes.START_ASYNC_UPDATE_FIELD_FOR_NEW_EVENT)({
-            fieldId,
-            fieldLabel,
-            formBuilderId,
-            formId,
-            callback,
-            dataEntryId,
-            itemId,
-        });
+export const startAsyncUpdateFieldForNewEvent = (
+    innerAction: ReduxAction<any, any>,
+    completedData: Object,
+) =>
+    actionPayloadAppender(innerAction)({ completedData });
 
 export const newEventOpenNewRelationship = (eventId: string, dataEntryId: string) =>
     actionCreator(actionTypes.NEW_EVENT_OPEN_NEW_RELATIONSHIP)({ eventId, dataEntryId });

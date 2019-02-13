@@ -13,7 +13,6 @@ import {
     withWarningOutput,
     withBrowserBackWarning,
     withSearchGroups,
-    inMemoryFileStore,
 } from '../../DataEntry';
 import {
     withInternalChangeHandler,

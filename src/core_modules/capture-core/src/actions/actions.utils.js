@@ -16,3 +16,13 @@ export function actionCreator(type: string) {
         error,
     });
 }
+
+export function actionPayloadAppender(action: ReduxAction<Object, any>) {
+    return (payload: Object) => ({
+        ...action,
+        payload: {
+            ...action.payload,
+            ...payload,
+        },
+    });
+}
