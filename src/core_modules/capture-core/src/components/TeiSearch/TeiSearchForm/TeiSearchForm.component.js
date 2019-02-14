@@ -6,8 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import errorCreator from '../../../utils/errorCreator';
 import Button from '../../Buttons/Button.component';
-import Form, { D2Form } from '../../D2Form/D2Form.component';
-import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
+import Form from '../../D2Form/D2Form.component';
 import SearchOrgUnitSelector from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
 import { Section } from '../../Section';
 import { SearchGroup } from '../../../metaData';
@@ -43,7 +42,7 @@ class SearchForm extends React.Component<Props> {
         NO_ITEM_SELECTED: 'No item selected',
         SEARCH_FORM_MISSING: 'search form is missing. see log for details',
     };
-    formInstance: D2Form;
+    formInstance: any;
     orgUnitSelectorInstance: SearchOrgUnitSelector;
 
     validateForm() {

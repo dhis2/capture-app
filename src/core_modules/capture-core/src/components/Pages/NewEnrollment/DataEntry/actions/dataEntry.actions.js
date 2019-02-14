@@ -1,5 +1,5 @@
 // @flow
-import { actionCreator } from '../../../../../actions/actions.utils';
+import { actionCreator, actionPayloadAppender } from '../../../../../actions/actions.utils';
 import { methods } from '../../../../../trackerOffline/trackerOfflineConfig.const';
 
 export const actionTypes = {
@@ -10,8 +10,13 @@ export const actionTypes = {
     ENROLLMENT_SAVE_FAILED: 'EnrollmentSaveFailed',
 };
 
-export const startRunRulesOnUpdateForNewEnrollment = (actionData: { payload: Object}, searchActions: any) =>
-    actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)({ actionData, searchActions }, { skipLogging: ['searchActions'] });
+export const startRunRulesOnUpdateForNewEnrollment = (
+    payload: Object,
+    searchActions: any,
+    uid: string,
+) =>
+    actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)(
+        { innerPayload: payload, searchActions, uid }, { skipLogging: ['searchActions'] });
 
 export const requestSaveNewEnrollmentAndReturnToMainPage =
     (dataEntryId: string, itemId: string, formFoundation: Object) =>
@@ -32,3 +37,10 @@ export const startSaveNewEnrollmentAfterReturnedToMainPage =
                 rollback: { type: actionTypes.ENROLLMENT_SAVE_FAILED, meta: { selections } },
             },
         });
+
+export const startAsyncUpdateFieldForNewEnrollment = (
+    innerAction: ReduxAction<any, any>,
+    onSuccess: Function,
+    onError: Function,
+) =>
+    actionPayloadAppender(innerAction)({ onSuccess, onError });

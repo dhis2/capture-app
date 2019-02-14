@@ -8,10 +8,6 @@ import {
     actionTypes as teiSearchOrgUnitActionTypes,
 } from '../../components/TeiSearch/SearchOrgUnitSelector/searchOrgUnitSelector.actions';
 
-import {
-    actionTypes as teiSearchProgramActionTypes,
-} from '../../components/TeiSearch/SearchProgramSelector/searchProgramSelector.actions';
-
 import { set as setOrgUnitRoots } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 
 export const teiSearchDesc = createReducerDescription({

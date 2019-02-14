@@ -1,7 +1,6 @@
 // @flow
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import { batchActions } from 'redux-batched-actions';
 import errorCreator from '../../../utils/errorCreator';
 import getErrorMessageAndDetails from '../../../utils/errors/getErrorMessageAndDetails';
 import {
@@ -15,13 +14,7 @@ export const asyncUpdateFieldEpic = (action$: InputObservable) =>
     action$.ofType(actionTypes.START_UPDATE_FIELD_ASYNC)
         .concatMap((action) => {
             const payload = action.payload;
-            const { elementId, formBuilderId, formId, callback, uid, completedData } = payload;
-            const {
-                successActionCreators = [],
-                successBatchName,
-                errorActionCreators = [],
-                errorBatchName,
-            } = completedData;
+            const { elementId, formBuilderId, formId, callback, uid, onSuccess, onError } = payload;
 
             const uiState = {
                 valid: true,
@@ -39,26 +32,14 @@ export const asyncUpdateFieldEpic = (action$: InputObservable) =>
                         formId,
                         uid,
                     );
-
-                    const successActions = successActionCreators
-                        .map(creator => creator(innerAction.payload));
-
-                    return batchActions([
-                        innerAction,
-                        ...successActions,
-                    ], successBatchName);
+                    return onSuccess ? onSuccess(innerAction) : innerAction;
                 })
                 .catch((error) => {
                     const { message } = getErrorMessageAndDetails(error);
                     const errorMessage = i18n.t('Async field update failed');
                     log.error(errorCreator(message || errorMessage)({ error }));
-
-                    const errorActions = errorActionCreators
-                        .map(creator => creator());
-
-                    return batchActions([
-                        asyncUpdateFieldFailed(errorMessage, uiState, elementId, formBuilderId, uid),
-                        ...errorActions,
-                    ], errorBatchName);
+                    const innerErrorAction =
+                        asyncUpdateFieldFailed(errorMessage, uiState, elementId, formBuilderId, formId, uid);
+                    return onError ? onError(innerErrorAction) : innerErrorAction;
                 });
         });

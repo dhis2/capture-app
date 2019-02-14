@@ -110,11 +110,6 @@ class DataElementFactory {
                         convertClientToServer,
                     )(value, cachedAttribute.valueType);
                     let requestPromise;
-
-                    return new Promise((resolve) => {
-                        setTimeout(() => { resolve(true); }, 5000);
-                    });
-
                     if (_this.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
                         const orgUnitId = contextProps.orgUnitId;
                         requestPromise = getApi()

@@ -18,7 +18,6 @@ import {
     getCurrentClientValues,
     getCurrentClientMainData,
 } from '../../../../../rulesEngineActionsCreator/inputHelpers';
-import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
 import type { FieldData } from '../../../../../rulesEngineActionsCreator/inputHelpers';
 
 const errorMessages = {
@@ -103,7 +102,7 @@ export const runRulesForEditSingleEventEpic = (action$: InputObservable, store: 
 
             return batchActions([
                 ...rulesActions,
-                rulesExecutedPostUpdateField(payload.dataEntryId, payload.itemId),
+                rulesExecutedPostUpdateField(payload.dataEntryId, payload.itemId, payload.uid),
             ],
             editEventDataEntryBatchActionTypes.RULES_EFFECTS_ACTIONS_BATCH);
         });

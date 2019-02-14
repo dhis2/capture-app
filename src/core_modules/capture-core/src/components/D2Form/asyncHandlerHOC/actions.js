@@ -68,6 +68,7 @@ export const asyncUpdateFieldFailed = (
     uiState: Object,
     elementId: string,
     formBuilderId: string,
+    formId: string,
     uid: string,
 ) =>
-    actionCreator(actionTypes.ASYNC_UPDATE_FIELD_FAILED)({ message, uiState, elementId, formBuilderId, uid });
+    actionCreator(actionTypes.ASYNC_UPDATE_FIELD_FAILED)({ message, uiState, elementId, formBuilderId, formId, uid });

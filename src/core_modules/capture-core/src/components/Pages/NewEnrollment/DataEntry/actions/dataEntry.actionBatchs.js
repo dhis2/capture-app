@@ -1,5 +1,7 @@
 // @flow
+import uuid from 'uuid/v4';
 import { batchActions } from 'redux-batched-actions';
+import { startRunRulesPostUpdateField } from '../../../../DataEntry';
 import { startRunRulesOnUpdateForNewEnrollment } from './dataEntry.actions';
 
 
@@ -14,10 +16,33 @@ export const updateFieldBatch = (
         filterActionsToBeExecuted: Array<ReduxAction<any, any>>
     }) => {
     const { filterActions, filterActionsToBeExecuted } = extraActions;
+    const { dataEntryId, itemId } = innerAction.payload;
+    const uid = uuid();
 
     return batchActions([
         innerAction,
         ...filterActionsToBeExecuted,
-        startRunRulesOnUpdateForNewEnrollment(innerAction.payload, filterActions),
+        startRunRulesPostUpdateField(dataEntryId, itemId, uid),
+        startRunRulesOnUpdateForNewEnrollment(innerAction.payload, filterActions, uid),
+    ], batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH);
+};
+
+export const asyncUpdateSuccessBatch = (
+    innerAction: ReduxAction<any, any>,
+    extraActions: {
+        filterActions: Array<ReduxAction<any, any>>,
+        filterActionsToBeExecuted: Array<ReduxAction<any, any>>,
+    },
+    dataEntryId: string,
+    itemId: string,
+) => {
+    const { filterActions, filterActionsToBeExecuted } = extraActions;
+    const uid = uuid();
+
+    return batchActions([
+        innerAction,
+        ...filterActionsToBeExecuted,
+        startRunRulesPostUpdateField(dataEntryId, itemId, uid),
+        startRunRulesOnUpdateForNewEnrollment({ ...innerAction.payload, dataEntryId, itemId }, filterActions, uid),
     ], batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH);
 };

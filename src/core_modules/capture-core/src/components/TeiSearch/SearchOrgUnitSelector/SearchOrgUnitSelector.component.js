@@ -118,7 +118,7 @@ class SearchOrgUnitSelector extends React.Component<Props> {
     }
 
     renderOrgUnitField = () => {
-        const { selectedOrgUnit, treeRoots, treeReady, treeKey, treeSearchText, onFilterOrgUnits } = this.props;
+        const { selectedOrgUnit, treeRoots, treeReady, treeKey, treeSearchText, onFilterOrgUnits } = this.props; // eslint-disable-line
         return (
             <TeiSearchOrgUnitField
                 label="Organisation unit"

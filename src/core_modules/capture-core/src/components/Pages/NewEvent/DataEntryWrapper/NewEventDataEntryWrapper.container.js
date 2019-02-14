@@ -5,7 +5,7 @@ import {
     setNewEventFormLayoutDirection,
 } from './newEventDataEntryWrapper.actions';
 import {
-    makeFormFoundationSelector, makeStageSelector,
+    makeStageSelector,
 } from './newEventDataEntryWrapper.selectors';
 import getDataEntryHasChanges from '../getNewEventDataEntryHasChanges';
 

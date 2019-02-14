@@ -62,7 +62,6 @@ export const loadSearchOrgUnitRootsEpic = (action$: InputObservable) =>
                 return Promise.resolve({ regUnitArray: getStoreRoots('captureRoots') });
             }
             const filterIds = currentUser.teiSearchOrganisationUnits.map(o => o.id).join(',');
-            const fields = defaultFields;
             return getD2()
                 .models
                 .organisationUnits

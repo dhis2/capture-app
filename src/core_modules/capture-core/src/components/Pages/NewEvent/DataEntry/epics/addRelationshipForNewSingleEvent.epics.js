@@ -20,7 +20,6 @@ import {
     addRelationship,
     duplicateRelationship,
 } from '../../../../DataEntry/actions/dataEntry.actions';
-import { ObjectUnsubscribedError } from 'rxjs';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 
 const typeToRelationshipConstraint = {

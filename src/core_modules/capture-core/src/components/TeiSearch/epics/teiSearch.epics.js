@@ -25,7 +25,6 @@ import {
     addFormData,
 } from '../../D2Form/actions/form.actions';
 import { programCollection, trackedEntityTypesCollection } from '../../../metaDataMemoryStores';
-import errorCreator from '../../../utils/errorCreator';
 import getSearchFormId from '../getSearchFormId';
 import { clearOrgUnitRoots } from '../../organisationUnits/organisationUnitRoots.actions';
 

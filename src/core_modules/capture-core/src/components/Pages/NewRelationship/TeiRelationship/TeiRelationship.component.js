@@ -69,8 +69,7 @@ class TeiRelationship extends React.Component<Props> {
     }
 
     renderModeSelections = () => {
-        const { classes, selectedRelationshipType } = this.props;
-        const to = selectedRelationshipType.to;
+        const { classes } = this.props;
         const trackedEntityTypeName = this.getTrackedEntityTypeName();
         return (
             <div

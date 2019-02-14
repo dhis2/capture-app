@@ -25,7 +25,6 @@ type Props = {
     },
     onCommitAsync: (callback: Function) => void,
     onBlur: (value: ?Object) => void,
-    onUpdateAsyncUIState: (uiStateToAdd: Object) => void,
     asyncUIState: { loading?: ?boolean },
     orientation: $Values<typeof orientations>,
 }

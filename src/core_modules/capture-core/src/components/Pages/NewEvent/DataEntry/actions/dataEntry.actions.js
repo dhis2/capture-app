@@ -5,7 +5,6 @@ import saveTypes from '../newEventSaveTypes';
 
 export const batchActionTypes = {
     UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH: 'UpdateFieldForNewSingleEventActionsBatch',
-    ASYNC_UPDATE_FIELD_FAILED_BATCH: 'AsyncUpdateFieldFailedBatch',
     OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH: 'OpenNewEventInDataEntryActionsBatch',
     RESET_DATA_ENTRY_ACTIONS_BATCH: 'ResetDataEntryForNewEventActionsBatch',
     RULES_EFFECTS_ACTIONS_BATCH: 'RulesEffectsForNewSingleEventActionsBatch',
@@ -131,9 +130,10 @@ export const newEventSavedAddAnother = (selections: Object) =>
 
 export const startAsyncUpdateFieldForNewEvent = (
     innerAction: ReduxAction<any, any>,
-    completedData: Object,
+    onSuccess: Function,
+    onError: Function,
 ) =>
-    actionPayloadAppender(innerAction)({ completedData });
+    actionPayloadAppender(innerAction)({ onSuccess, onError });
 
 export const newEventOpenNewRelationship = (eventId: string, dataEntryId: string) =>
     actionCreator(actionTypes.NEW_EVENT_OPEN_NEW_RELATIONSHIP)({ eventId, dataEntryId });

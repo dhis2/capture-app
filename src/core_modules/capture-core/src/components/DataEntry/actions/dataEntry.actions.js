@@ -19,6 +19,7 @@ export const actionTypes = {
     UPDATE_FIELD: 'UpdateDataEntryField',
     UPDATE_FORM_FIELD: 'UpdateDataEntryFormField',
     RULES_EXECUTED_POST_UPDATE_FIELD: 'RulesExecutedPostUpdateFieldDataEntry',
+    START_RUN_RULES_POST_UPDATE_FIELD: 'StartRunRulesPostUpdateFieldDataEntry',
     ADD_NOTE: 'AddNote',
     REMOVE_NOTE: 'RemoveNote',
     ADD_RELATIONSHIP: 'AddRelationship',
@@ -112,9 +113,13 @@ export const updateFormField =
             updateCompleteUid,
         });
 
+export const startRunRulesPostUpdateField =
+    (dataEntryId: string, itemId: string, uid: string) =>
+        actionCreator(actionTypes.START_RUN_RULES_POST_UPDATE_FIELD)({ dataEntryId, itemId, uid });
+
 export const rulesExecutedPostUpdateField =
-    (dataEntryId: string, itemId: string) =>
-        actionCreator(actionTypes.RULES_EXECUTED_POST_UPDATE_FIELD)({ dataEntryId, itemId });
+    (dataEntryId: string, itemId: string, uid: string) =>
+        actionCreator(actionTypes.RULES_EXECUTED_POST_UPDATE_FIELD)({ dataEntryId, itemId, uid });
 
 export const addNote =
     (dataEntryId: string, itemId: string, note: Object) =>

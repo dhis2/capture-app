@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-02-13T13:56:32.266Z\n"
-"PO-Revision-Date: 2019-02-13T13:56:32.266Z\n"
+"POT-Creation-Date: 2019-02-14T15:19:34.647Z\n"
+"PO-Revision-Date: 2019-02-14T15:19:34.647Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -210,12 +210,6 @@ msgid "Status"
 msgstr ""
 
 msgid "Comments"
-msgstr ""
-
-msgid "Field"
-msgstr ""
-
-msgid "could not be updated"
 msgstr ""
 
 msgid "Please add or cancel comment before saving the event"

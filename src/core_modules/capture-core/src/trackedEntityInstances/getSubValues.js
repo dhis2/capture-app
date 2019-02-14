@@ -4,7 +4,6 @@ import { config } from 'd2/lib/d2';
 import isDefined from 'd2-utilizr/src/isDefined';
 import errorCreator from '../utils/errorCreator';
 import { getApi } from '../d2/d2Instance';
-import RenderFoundation from '../metaData/RenderFoundation/RenderFoundation';
 import elementTypeKeys from '../metaData/DataElement/elementTypes';
 import { DataElement } from '../metaData';
 

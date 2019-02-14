@@ -4,13 +4,22 @@ import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import { InputSearchGroup } from '../../metaData';
 import getDataEntryKey from './common/getDataEntryKey';
-import { filterSearchGroupForCountSearch, filterSearchGroupForCountSearchToBeExecuted } from './actions/searchGroup.actions';
-import { updateFieldAndRunSearchGroupSearchesBatch } from './actions/searchGroup.actionBatches';
+import {
+    filterSearchGroupForCountSearch,
+    filterSearchGroupForCountSearchToBeExecuted,
+    startAsyncUpdateField,
+} from './actions/searchGroup.actions';
+import {
+    updateFieldAndRunSearchGroupSearchesBatch,
+    asyncUpdateSuccessBatch,
+} from './actions/searchGroup.actionBatches';
 
 type Props = {
     dataEntryKey: string,
     onUpdateFormFieldInner: Function,
     onUpdateFormField: ?Function,
+    onUpdateFormFieldInnerAsync: Function,
+    onUpdateFormFieldAsync: ?Function,
 };
 
 type SearchGroupsGetter = (props: Props) => Array<InputSearchGroup>;
@@ -39,18 +48,49 @@ const getSearchGroupsHOC = (
             this.searchGroups = onGetSearchGroups(this.props);
         }
 
+        getFilterActions(
+        ) {
+            const { dataEntryKey } = this.props;
+            const searchGroups = this.searchGroups;
+            const searchContext = (onGetSearchContext && onGetSearchContext(this.props)) || {};
+
+            const searchUids = searchGroups
+                .map(() => uuid());
+
+            const filterActions = searchGroups
+                .map((sg, index) => filterSearchGroupForCountSearch(
+                    sg,
+                    searchUids[index],
+                    dataEntryKey,
+                    searchContext,
+                ));
+
+            const filterActionsToBeExecuted = filterActions.map(fa => filterSearchGroupForCountSearchToBeExecuted(fa));
+
+            return {
+                filterActions,
+                filterActionsToBeExecuted,
+            };
+        }
+
         handleFieldUpdate = (
             innerAction: ReduxAction<any, any>,
         ) => {
-            const { onUpdateFormField, onUpdateFormFieldInner, dataEntryKey } = this.props;
-            const searchGroupsForField = this.searchGroups || [];
+            const { onUpdateFormField, onUpdateFormFieldInner } = this.props;
 
             onUpdateFormFieldInner(
                 innerAction,
-                searchGroupsForField,
-                dataEntryKey,
-                onGetSearchContext && onGetSearchContext(this.props),
+                this.getFilterActions(),
                 onUpdateFormField,
+            );
+        }
+
+        handleAsyncFieldUpdate = (...args) => {
+            const { onUpdateFormFieldAsync, onUpdateFormFieldInnerAsync } = this.props;
+            onUpdateFormFieldInnerAsync(
+                ...args,
+                this.getFilterActions(),
+                onUpdateFormFieldAsync,
             );
         }
 
@@ -59,12 +99,15 @@ const getSearchGroupsHOC = (
                 dataEntryKey,
                 onUpdateFormField,
                 onUpdateFormFieldInner,
+                onUpdateFormFieldAsync,
+                onUpdateFormFieldInnerAsync,
                 ...passOnProps
             } = this.props;
 
             return (
                 <SearchGroupPostHOC
                     onUpdateFormField={this.handleFieldUpdate}
+                    onUpdateFormFieldAsync={this.handleAsyncFieldUpdate}
                     {...passOnProps}
                 />
             );
@@ -86,24 +129,13 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onUpdateFormFieldInner: (
         innerAction: ReduxAction<any, any>,
-        searchGroups: Array<InputSearchGroup>,
-        dataEntryKey: string,
-        searchContext: Object,
+        searchGroupActionsContainer: {
+            filterActions: Array<ReduxAction<any, any>>,
+            filterActionsToBeExecuted: Array<ReduxAction<any, any>>,
+        },
         onUpdateFormField: ?Function,
     ) => {
-        const searchUids = searchGroups
-            .map(() => uuid());
-
-        const filterActions = searchGroups
-            .map((sg, index) => filterSearchGroupForCountSearch(
-                sg,
-                searchUids[index],
-                dataEntryKey,
-                searchContext,
-            ));
-
-        const filterActionsToBeExecuted = filterActions.map(fa => filterSearchGroupForCountSearchToBeExecuted(fa));
-
+        const { filterActions, filterActionsToBeExecuted } = searchGroupActionsContainer;
         if (onUpdateFormField) {
             onUpdateFormField(
                 innerAction,
@@ -111,6 +143,32 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
             );
         } else {
             dispatch(updateFieldAndRunSearchGroupSearchesBatch(innerAction, filterActions, filterActionsToBeExecuted));
+        }
+    },
+    onUpdateFormFieldInnerAsync: (
+        innerAction: ReduxAction<any, any>,
+        dataEntryId: string,
+        itemId: string,
+        searchGroupActionsContainer: {
+            filterActions: Array<ReduxAction<any, any>>,
+            filterActionsToBeExecuted: Array<ReduxAction<any, any>>,
+        },
+        onUpdateFormFieldAsync: ?Function,
+    ) => {
+        const { filterActions, filterActionsToBeExecuted } = searchGroupActionsContainer;
+        if (onUpdateFormFieldAsync) {
+            onUpdateFormFieldAsync(
+                innerAction,
+                { filterActions, filterActionsToBeExecuted },
+                dataEntryId,
+                itemId,
+            );
+        } else {
+            const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) =>
+                asyncUpdateSuccessBatch(successInnerAction, filterActions, filterActionsToBeExecuted);
+            const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
+
+            dispatch(startAsyncUpdateField(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
         }
     },
 });

@@ -57,7 +57,7 @@ class RelationshipTypeSelector extends React.Component<Props> {
         });
     }
     renderRelationshipTypes = () => {
-        const { classes, relationshipTypes, onSelectRelationshipType } = this.props;
+        const { classes, relationshipTypes } = this.props;
         return relationshipTypes ? relationshipTypes.map(rt => (
             <div className={classNames(classes.relationshipType, classes.relationshipTypeSelectable)} key={rt.id} role="button" tabIndex="0" onClick={() => this.onSelectRelationshipType(rt)}>
                 {rt.displayName}

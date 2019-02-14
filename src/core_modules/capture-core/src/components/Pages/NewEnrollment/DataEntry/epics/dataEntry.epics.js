@@ -73,7 +73,7 @@ export const runRulesOnNewEnrollmentFieldUpdateEpic = (action$: InputObservable,
             actionBatch.payload.find(action => action.type === actionTypes.START_RUN_RULES_ON_UPDATE))
         .map((action) => {
             const state = store.getState();
-            const { actionData: payload, searchActions } = action.payload;
+            const { innerPayload: payload, searchActions, uid } = action.payload;
 
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
@@ -111,6 +111,7 @@ export const runRulesOnNewEnrollmentFieldUpdateEpic = (action$: InputObservable,
                     null,
                     null,
                     searchActions,
+                    uid,
                 );
             }
 
@@ -134,5 +135,6 @@ export const runRulesOnNewEnrollmentFieldUpdateEpic = (action$: InputObservable,
                 currentEnrollmentValues,
                 currentTEIValues,
                 searchActions,
+                uid,
             );
         });

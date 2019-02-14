@@ -22,6 +22,7 @@ export const runRulesOnUpdateFieldBatch = (
     enrollment: ?Enrollment,
     teiValues: ?TEIValues,
     extraActions: Array<ReduxAction<any, any>> = [],
+    uid: string,
 ) => {
     let rulesActions = [];
     if (program && foundation) {
@@ -37,7 +38,7 @@ export const runRulesOnUpdateFieldBatch = (
 
     return batchActions([
         ...rulesActions,
-        rulesExecutedPostUpdateField(dataEntryId, itemId),
+        rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
         ...extraActions,
     ], batchActionTypes.RULES_EXECUTED_POST_UPDATE_FIELD_FOR_ENROLLMENT);
 };

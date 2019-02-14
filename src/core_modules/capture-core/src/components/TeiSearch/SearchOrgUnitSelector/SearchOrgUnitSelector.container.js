@@ -8,7 +8,6 @@ import {
 } from './searchOrgUnitSelector.actions';
 import { get as getOrgUnitRoots } from '../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import SearchOrgUnitSelector from './SearchOrgUnitSelector.component';
-import { batchActionTypes } from '../SearchProgramSelector/searchProgramSelector.actions';
 
 const mapStateToProps = (state: ReduxState, props: Object) => {
     const searchId = props.searchId;

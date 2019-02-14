@@ -1,8 +1,10 @@
 // @flow
+import uuid from 'uuid/v4';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
 import DataEntry from './DataEntry.component';
+import { startRunRulesPostUpdateField } from '../../../DataEntry';
 import {
     startAsyncUpdateFieldForNewEvent,
     startRunRulesOnUpdateForNewSingleEvent,
@@ -40,21 +42,31 @@ const makeMapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onUpdateField: (innerAction: ReduxAction<any, any>) => {
+        const { dataEntryId, itemId } = innerAction.payload;
+        const uid = uuid();
+
         dispatch(batchActions([
             innerAction,
-            startRunRulesOnUpdateForNewSingleEvent(innerAction.payload),
+            startRunRulesPostUpdateField(dataEntryId, itemId, uid),
+            startRunRulesOnUpdateForNewSingleEvent({ ...innerAction.payload, uid }),
         ], batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH));
     },
     onStartAsyncUpdateField: (
         innerAction: ReduxAction<any, any>,
+        dataEntryId: string,
+        itemId: string,
     ) => {
-        const completedData = {
-            successActionCreators: [startRunRulesOnUpdateForNewSingleEvent],
-            successBatchName: batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH,
-            errorActionCreators: [],
-            errorBatchName: batchActionTypes.ASYNC_UPDATE_FIELD_FAILED_BATCH,
+        const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) => {
+            const uid = uuid();
+            return batchActions([
+                successInnerAction,
+                startRunRulesPostUpdateField(dataEntryId, itemId, uid),
+                startRunRulesOnUpdateForNewSingleEvent({ ...successInnerAction.payload, dataEntryId, itemId, uid }),
+            ], batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH);
         };
-        dispatch(startAsyncUpdateFieldForNewEvent(innerAction, completedData));
+        const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
+
+        dispatch(startAsyncUpdateFieldForNewEvent(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
     },
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);

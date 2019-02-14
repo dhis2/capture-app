@@ -1,5 +1,5 @@
 // @flow
-import { actionCreator } from '../../../actions/actions.utils';
+import { actionCreator, actionPayloadAppender } from '../../../actions/actions.utils';
 
 export const actionTypes = {
     SEARCH_GROUP_RESULT_COUNT_RETRIVED: 'SearchGroupResultCountRetrieved',
@@ -54,3 +54,9 @@ export const cancelSearchGroupCountSearch =
     (dataEntryKey: string, uid: string) =>
         actionCreator(actionTypes.CANCEL_SEARCH_GROUP_COUNT_SEARCH)(
             { dataEntryKey, uid });
+
+export const startAsyncUpdateField = (
+    innerAction: ReduxAction<any, any>,
+    onSuccess: Function,
+    onError: Function,
+) => actionPayloadAppender(innerAction)({ onSuccess, onError });

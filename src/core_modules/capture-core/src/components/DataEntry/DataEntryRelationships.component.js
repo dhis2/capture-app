@@ -5,7 +5,6 @@ import i18n from '@dhis2/d2-i18n';
 import { IconButton, withStyles } from '@material-ui/core';
 import { ArrowForward as ArrowIcon, Clear as ClearIcon } from '@material-ui/icons';
 import { connect } from 'react-redux';
-import LinkButton from '../Buttons/LinkButton.component';
 import Button from '../Buttons/Button.component';
 import getDataEntryKey from './common/getDataEntryKey';
 import { removeRelationship } from './actions/dataEntry.actions';

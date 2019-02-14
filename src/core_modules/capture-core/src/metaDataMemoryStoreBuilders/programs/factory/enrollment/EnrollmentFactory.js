@@ -178,10 +178,6 @@ class EnrollmentFactory {
                 _this.searchFoundation = this._buildInputSearchGroupFoundation(cachedProgram, searchGroup);
                 _this.onSearch = (values: Object = {}, contextProps: Object = {}) => {
                     const { orgUnitId, trackedEntityType } = contextProps;
-
-                    return new Promise((resolve) => {
-                        setTimeout(() => { resolve(); }, 10000);
-                    });
                     return getApi()
                         .get(
                             'trackedEntityInstances/count.json',

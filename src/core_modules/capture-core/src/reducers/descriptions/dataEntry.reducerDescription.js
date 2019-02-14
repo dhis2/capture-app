@@ -444,12 +444,50 @@ export const dataEntriesInProgressListDesc = createReducerDescription({
             [formId]: updatedList,
         };
     },
+    [formAsyncActionTypes.START_UPDATE_FIELD_ASYNC]: (state, action) => {
+        const { formId, uid } = action.payload;
+        return {
+            ...state,
+            [formId]: [
+                ...(state[formId] || []),
+                uid,
+            ],
+        };
+    },
     [formAsyncActionTypes.UPDATE_FIELD_FROM_ASYNC]: (state, action) => {
         const { formId, uid } = action.payload;
         const updatedList = (state[formId] || []).filter(item => item !== uid);
         return {
             ...state,
             [formId]: updatedList,
+        };
+    },
+    [formAsyncActionTypes.ASYNC_UPDATE_FIELD_FAILED]: (state, action) => {
+        const { formId, uid } = action.payload;
+        const updatedList = (state[formId] || []).filter(item => item !== uid);
+        return {
+            ...state,
+            [formId]: updatedList,
+        };
+    },
+    [actionTypes.START_RUN_RULES_POST_UPDATE_FIELD]: (state, action) => {
+        const { dataEntryId, itemId, uid } = action.payload;
+        const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
+        return {
+            ...state,
+            [dataEntryKey]: [
+                ...(state[dataEntryKey] || []),
+                uid,
+            ],
+        };
+    },
+    [actionTypes.RULES_EXECUTED_POST_UPDATE_FIELD]: (state, action) => {
+        const { dataEntryId, itemId, uid } = action.payload;
+        const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
+        const updatedList = (state[dataEntryKey] || []).filter(item => item !== uid);
+        return {
+            ...state,
+            [dataEntryKey]: updatedList,
         };
     },
 }, 'dataEntriesInProgressList');

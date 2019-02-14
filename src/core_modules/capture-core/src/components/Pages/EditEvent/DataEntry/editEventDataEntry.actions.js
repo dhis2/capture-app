@@ -1,5 +1,5 @@
 // @flow
-import { actionCreator } from '../../../../actions/actions.utils';
+import { actionCreator, actionPayloadAppender } from '../../../../actions/actions.utils';
 import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
 import { loadEditDataEntry } from '../../../DataEntry/actions/dataEntryLoadEdit.actions';
 import {
@@ -37,7 +37,6 @@ export const actionTypes = {
     START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE: 'CancelUpdateForSingleEventReturnToMainPage',
     NO_WORKING_LIST_UPDATE_NEEDED_AFTER_CANCEL_UPDATE: 'NoWorkingListUpdateNeededAfterEventUpdateCancelled',
     UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE: 'UpdateWorkingListAfterEventUpdateCancelled',
-    START_ASYNC_UPDATE_FIELD_FOR_EDIT_EVENT: 'StartAsyncUpdateFieldForEditEvent',
     REQUEST_ADD_NOTE_FOR_EDIT_SINGLE_EVENT: 'RequestAddNoteForEditSingleEvent',
     START_ADD_NOTE_FOR_EDIT_SINGLE_EVENT: 'StartAddNoteForEditSingleEvent',
     NOTE_ADDED_FOR_EDIT_SINGLE_EVENT: 'NoteAddedForEditSingleEvent',
@@ -138,25 +137,12 @@ export const noWorkingListUpdateNeededAfterUpdateCancelled = () =>
 export const updateWorkingListAfterUpdateCancelled = () =>
     actionCreator(actionTypes.UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE)();
 
-export const startAsyncUpdateFieldForEditEvent =
-    (
-        fieldId: string,
-        fieldLabel: string,
-        formBuilderId: string,
-        formId: string,
-        callback: Function,
-        dataEntryId: string,
-        itemId: string,
-    ) =>
-        actionCreator(actionTypes.START_ASYNC_UPDATE_FIELD_FOR_EDIT_EVENT)({
-            fieldId,
-            fieldLabel,
-            formBuilderId,
-            formId,
-            callback,
-            dataEntryId,
-            itemId,
-        });
+export const startAsyncUpdateFieldForEditEvent = (
+    innerAction: ReduxAction<any, any>,
+    onSuccess: Function,
+    onError: Function,
+) =>
+    actionPayloadAppender(innerAction)({ onSuccess, onError });
 
 export const requestAddNoteForEditSingleEvent = (itemId: string, dataEntryId: string, note: string) =>
     actionCreator(actionTypes.REQUEST_ADD_NOTE_FOR_EDIT_SINGLE_EVENT)({ itemId, dataEntryId, note });
