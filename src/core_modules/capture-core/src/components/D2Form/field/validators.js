@@ -22,6 +22,9 @@ import {
     isValidCoordinate,
     isValidUsername,
     getNumberRangeValidator,
+    getDateRangeValidator,
+    getDateTimeRangeValidator,
+    getTimeRangeValidator,
 } from '../../../utils/validators/form';
 import { DataElement as MetaDataElement } from '../../../metaData';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
@@ -58,6 +61,7 @@ const errorMessages = {
     COORDINATE: 'Please provide valid coordinates',
     USERNAME: 'Please provide a valid username',
     UNIQUENESS: 'This value already exists',
+    RANGE: '"From" cannot be greater than "To"',
 };
 
 const validationMessages = {
@@ -76,6 +80,21 @@ const validatorForInteger = () => ({
     message: i18n.t(errorMessages.INTEGER),
 });
 
+const validatorForPositiveInteger = () => ({
+    validator: isValidPositiveInteger,
+    message: i18n.t(errorMessages.POSITIVE_INTEGER),
+});
+
+const validatorForZeroOrPositiveInteger = () => ({
+    validator: isValidZeroOrPositiveInteger,
+    message: i18n.t(errorMessages.ZERO_OR_POSITIVE_INTEGER),
+});
+
+const validatorForNegativeInteger = () => ({
+    validator: isValidNegativeInteger,
+    message: i18n.t(errorMessages.NEGATIVE_INTEGER),
+});
+
 const validatorForNumber = () => ({
     validator: isValidNumber,
     message: i18n.t(errorMessages.NUMBER),
@@ -84,18 +103,9 @@ const validatorForNumber = () => ({
 const validatorsForTypes = {
     [elementTypes.NUMBER]: validatorForNumber,
     [elementTypes.INTEGER]: validatorForInteger,
-    [elementTypes.INTEGER_POSITIVE]: () => ({
-        validator: isValidPositiveInteger,
-        message: i18n.t(errorMessages.POSITIVE_INTEGER),
-    }),
-    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: () => ({
-        validator: isValidZeroOrPositiveInteger,
-        message: i18n.t(errorMessages.ZERO_OR_POSITIVE_INTEGER),
-    }),
-    [elementTypes.INTEGER_NEGATIVE]: () => ({
-        validator: isValidNegativeInteger,
-        message: i18n.t(errorMessages.NEGATIVE_INTEGER),
-    }),
+    [elementTypes.INTEGER_POSITIVE]: validatorForPositiveInteger,
+    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: validatorForZeroOrPositiveInteger,
+    [elementTypes.INTEGER_NEGATIVE]: validatorForNegativeInteger,
     [elementTypes.TIME]: () => ({
         validator: isValidTime,
         message: i18n.t(errorMessages.TIME),
@@ -140,9 +150,38 @@ const validatorsForTypes = {
         validator: isValidUsername,
         message: i18n.t(errorMessages.USERNAME),
     }),
+    [elementTypes.DATE_RANGE]: () => ({
+        validator: getDateRangeValidator(errorMessages.DATE),
+        message: i18n.t(errorMessages.RANGE),
+    }),
+    [elementTypes.DATETIME_RANGE]: () => ({
+        validator: getDateTimeRangeValidator(errorMessages.DATETIME),
+        message: i18n.t(errorMessages.RANGE),
+    }),
+    [elementTypes.TIME_RANGE]: () => ({
+        validator: getTimeRangeValidator(errorMessages.TIME),
+        message: i18n.t(errorMessages.RANGE),
+    }),
     [elementTypes.NUMBER_RANGE]: () => ({
         validator: getNumberRangeValidator(validatorForNumber()),
-        message: i18n.t('Invalid range'),
+        message: i18n.t(errorMessages.RANGE),
+    }),
+    [elementTypes.INTEGER_RANGE]: () => ({
+        validator: getNumberRangeValidator(validatorForInteger()),
+        message: i18n.t(errorMessages.RANGE),
+    }),
+    [elementTypes.INTEGER_POSITIVE_RANGE]: () => ({
+        validator: getNumberRangeValidator(validatorForPositiveInteger()),
+        message: i18n.t(errorMessages.RANGE),
+    }),
+    [elementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: () => ({
+        validator: getNumberRangeValidator(validatorForZeroOrPositiveInteger()),
+        message: i18n.t(errorMessages.RANGE),
+    }),
+
+    [elementTypes.INTEGER_NEGATIVE_RANGE]: () => ({
+        validator: getNumberRangeValidator(validatorForNegativeInteger()),
+        message: i18n.t(errorMessages.RANGE),
     }),
 };
 

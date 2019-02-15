@@ -1,10 +1,10 @@
 // @flow
 import { createSelector } from 'reselect';
-import { trackedEntityTypesCollection } from '../../../../metaDataMemoryStores';
+import { getTrackedEntityTypeThrowIfNotFound } from '../../../../metaData';
 
 const trackedEntityTypeIdSelector = props => props.selectedRelationshipType.to.trackedEntityTypeId;
 
 export const makeTrackedEntityTypeSelector = () => createSelector(
     trackedEntityTypeIdSelector,
-    (trackedEntityTypeId: string) => trackedEntityTypesCollection.get(trackedEntityTypeId),
+    (trackedEntityTypeId: string) => getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId),
 );

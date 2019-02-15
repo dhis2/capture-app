@@ -24,7 +24,10 @@ import { getTrackedEntityInstances } from '../../../trackedEntityInstances/track
 import {
     addFormData,
 } from '../../D2Form/actions/form.actions';
-import { programCollection, trackedEntityTypesCollection } from '../../../metaDataMemoryStores';
+import {
+    getTrackerProgramThrowIfNotFound as getTrackerProgram,
+    getTrackedEntityTypeThrowIfNotFound as getTrackedEntityType,
+} from '../../../metaData';
 import getSearchFormId from '../getSearchFormId';
 import { clearOrgUnitRoots } from '../../organisationUnits/organisationUnitRoots.actions';
 
@@ -61,7 +64,7 @@ const searchTei = (state: ReduxState, searchId: string, formId: string, searchGr
     const filters = Object.keys(filterValues).reduce((accFilters, key) => {
         const value = filterValues[key];
         return isArray(value) ? [...accFilters, ...value] : [...accFilters, value];
-    }, []);
+    }, []).filter(f => f !== null && f !== undefined);
 
     const queryArgs = {
         filter: filters,
@@ -72,8 +75,8 @@ const searchTei = (state: ReduxState, searchId: string, formId: string, searchGr
     };
 
     const attributes = selectedProgramId ?
-        programCollection.get(selectedProgramId).attributes :
-        trackedEntityTypesCollection.get(selectedTrackedEntityTypeId).attributes;
+        getTrackerProgram(selectedProgramId).attributes :
+        getTrackedEntityType(selectedTrackedEntityTypeId).attributes;
 
     return getTrackedEntityInstances(queryArgs, attributes).then(data =>
         searchTeiResultRetrieved(
@@ -83,7 +86,9 @@ const searchTei = (state: ReduxState, searchId: string, formId: string, searchGr
             searchId,
         ),
     )
-        .catch(error => searchTeiFailed(formId, searchGroupId, searchId));
+        .catch((error) => {
+            return searchTeiFailed(formId, searchGroupId, searchId);
+        });
 };
 
 export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -136,8 +141,7 @@ export const teiSearchSetProgramEpic = (action$: InputObservable, store: ReduxSt
             let trackedEntityTypeId = state.teiSearch[searchId].selectedTrackedEntityTypeId;
             const contextId = programId || trackedEntityTypeId;
             if (programId) {
-                const program = programCollection.get(programId);
-                // $FlowFixMe
+                const program = getTrackerProgram(programId);
                 trackedEntityTypeId = program.trackedEntityType.id;
             }
             let searchGroups = [];

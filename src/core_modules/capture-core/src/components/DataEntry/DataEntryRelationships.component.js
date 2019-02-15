@@ -24,7 +24,7 @@ type Props = {
     onRemoveRelationship: (itemId: string, id: string, clientId: string) => void,
     onAddRelationship: (itemId: string, id: string) => void,
     itemId: string,
-    id: string,
+    dataEntryId: string,
     fromEntity: string,
 };
 
@@ -73,11 +73,11 @@ const fromDisplayNames = {
 
 class DataEntryRelationships extends React.Component<Props> {
     handleRemove = (clientId: string) => {
-        this.props.onRemoveRelationship(this.props.itemId, this.props.id, clientId);
+        this.props.onRemoveRelationship(this.props.itemId, this.props.dataEntryId, clientId);
     };
 
     handleAdd = () => {
-        this.props.onAddRelationship(this.props.itemId, this.props.id);
+        this.props.onAddRelationship(this.props.itemId, this.props.dataEntryId);
     }
 
     getRelationships = () => {

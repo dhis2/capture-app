@@ -5,36 +5,96 @@ import DateField from '../DateField/Date.component';
 import withFocusSaver from '../../HOC/withFocusSaver';
 import withShrinkLabel from '../../HOC/withShrinkLabel';
 import defaultClasses from './dateRangeField.mod.css';
+import InnerMessage from '../../internal/InnerMessage/InnerMessage.component';
 
 
 const RangeInputField = withFocusSaver()(withShrinkLabel()(DateField));
 
-type Props = {
-    value: any,
-    onBlur: (value: any) => void,
-    onChange: (value: any) => void,
-    classes: Object,
+type DateRangeValue = {
+    from?: ?string,
+    to?: ?string,
 }
 
+type Props = {
+    value: DateRangeValue,
+    onBlur: (value: ?DateRangeValue, opts: any) => void,
+    onChange: (value: ?DateRangeValue) => void,
+    classes: Object,
+    innerMessage?: ?Object,
+}
+
+const inputKeys = {
+    FROM: 'from',
+    TO: 'to',
+};
+
+
 class DateRangeField extends React.Component<Props> {
-    getNewValue = (newValues: Object) => {
-        const value = { ...this.props.value, ...newValues };
+    static defaultProps = {
+        value: {},
+    }
+    touchedFields: Set<string>;
+    constructor(props: Props) {
+        super(props);
+        this.touchedFields = new Set();
+    }
+
+    handleFromChange = (value: string) => {
+        this.props.onChange({
+            from: value,
+            to: this.props.value.to,
+        });
+    }
+
+    handleToChange = (value: string) => {
+        this.props.onChange({
+            from: this.props.value.from,
+            to: value,
+        });
+    }
+
+    handleFromBlur = (value: string) => {
+        this.touchedFields.add('fromTouched');
+        this.handleBlur({
+            from: value,
+            to: this.props.value.to,
+        }, !!this.props.value.to);
+    }
+
+    handleToBlur = (value: string) => {
+        this.touchedFields.add('toTouched');
+        this.handleBlur({
+            from: this.props.value.from,
+            to: value,
+        }, !!this.props.value.from);
+    }
+
+    handleBlur = (value: DateRangeValue, otherFieldHasValue: boolean) => {
+        const touched = this.touchedFields.size === 2;
         if (!value.from && !value.to) {
-            return null;
+            this.props.onBlur(undefined, {
+                touched,
+            });
+            return;
         }
-        return value;
+        this.props.onBlur(value, {
+            touched: touched || otherFieldHasValue,
+        });
     }
 
-    onChange = (inputValueObject: Object) => {
-        this.props.onChange && this.props.onChange(this.getNewValue(inputValueObject));
-    }
-
-    onBlur = (inputValueObject: Object) => {
-        this.props.onBlur && this.props.onBlur(this.getNewValue(inputValueObject));
+    getInnerMessage = (key: string) => {
+        const { classes, innerMessage } = this.props;
+        return (
+            <InnerMessage
+                classes={classes}
+                innerMessage={innerMessage}
+                messageKey={key}
+            />
+        );
     }
 
     render() {
-        const { onBlur, onChange, value, ...passOnProps } = this.props;
+        const { onBlur, onChange, value, innerMessage, ...passOnProps } = this.props;
         const fromValue = value && value.from ? value.from : '';
         const toValue = value && value.to ? value.to : '';
         return (
@@ -43,19 +103,21 @@ class DateRangeField extends React.Component<Props> {
                     <RangeInputField
                         label={i18n.t('From')}
                         value={fromValue}
-                        onBlur={(newFromValue) => { this.onBlur({ from: newFromValue }); }}
-                        onChange={(newFromValue) => { this.onChange({ from: newFromValue }); }}
+                        onBlur={this.handleFromBlur}
+                        onChange={this.handleFromChange}
                         {...passOnProps}
                     />
+                    {this.getInnerMessage(inputKeys.FROM)}
                 </div>
                 <div className={defaultClasses.inputContainer}>
                     <RangeInputField
                         label={i18n.t('To')}
                         value={toValue}
-                        onBlur={(newToValue) => { this.onBlur({ to: newToValue }); }}
-                        onChange={(newToValue) => { this.onChange({ to: newToValue }); }}
+                        onBlur={this.handleToBlur}
+                        onChange={this.handleToChange}
                         {...passOnProps}
                     />
+                    {this.getInnerMessage(inputKeys.TO)}
                 </div>
 
             </div>

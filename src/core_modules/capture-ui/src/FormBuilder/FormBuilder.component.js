@@ -107,7 +107,6 @@ class FormBuilder extends React.Component<Props> {
                     if (result === true || (result && result.valid)) {
                         return true;
                     }
-
                     return {
                         message: (result && result.errorMessage) || currentValidator.message,
                         type: currentValidator.type,

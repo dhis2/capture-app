@@ -55,7 +55,7 @@ const styles = theme => ({
     },
     dataEntryFieldSection: {
         padding: theme.typography.pxToRem(8),
-        maxWidth: theme.typography.pxToRem(880),
+        maxWidth: theme.typography.pxToRem(892),
     },
 });
 

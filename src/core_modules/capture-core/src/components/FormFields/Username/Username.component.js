@@ -11,11 +11,13 @@ import { getApi } from '../../../d2/d2Instance';
 
 
 function renderInput(inputProps) {
+    const { onChange, onBlur, ref, ...passOnInputProps } = inputProps;
     return (
         <UITextField
-            {...inputProps}
-            onChange={event => inputProps.onChange(event, { newValue: event.currentTarget.value })}
-            onBlur={event => inputProps.onBlur(event.currentTarget.value)}
+            {...passOnInputProps}
+            onChange={event => onChange(event, { newValue: event.currentTarget.value })}
+            onBlur={event => onBlur(event.currentTarget.value)}
+            inputRef={ref}
         />
     );
 }

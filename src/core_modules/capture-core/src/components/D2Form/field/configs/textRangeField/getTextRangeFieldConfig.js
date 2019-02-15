@@ -1,6 +1,6 @@
 // @flow
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
-import { NumberRangeFieldForForm } from '../../Components';
+import { TextRangeFieldForForm } from '../../Components';
 import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
 
 const getNumberFieldConfig = (metaData: MetaDataElement, options: Object, extraProps?: ?Object) => {
@@ -11,7 +11,7 @@ const getNumberFieldConfig = (metaData: MetaDataElement, options: Object, extraP
     }, options, metaData);
 
     return createFieldConfig({
-        component: NumberRangeFieldForForm,
+        component: TextRangeFieldForForm,
         props,
     }, metaData);
 };

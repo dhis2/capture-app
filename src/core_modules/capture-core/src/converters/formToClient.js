@@ -67,6 +67,7 @@ const valueConvertersForType = {
     [elementTypes.DATE]: convertDate,
     [elementTypes.DATE_RANGE]: (value: RangeValue) => convertRange(convertDate, value),
     [elementTypes.DATETIME]: convertDateTime,
+    [elementTypes.DATETIME_RANGE]: (value: RangeValue) => convertRange(convertDateTime, value),
     [elementTypes.TRUE_ONLY]: (d2Value: string) => ((d2Value === 'true') || null),
     [elementTypes.BOOLEAN]: (d2Value: string) => (d2Value === 'true'),
     [elementTypes.AGE]: convertAge,

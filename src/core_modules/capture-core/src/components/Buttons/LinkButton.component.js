@@ -5,9 +5,15 @@ import classNames from 'classnames';
 
 const styles = (theme: Theme) => ({
     button: {
+        border: 'none',
+        fontSize: theme.typography.pxToRem(16),
         display: 'inline-block',
         textDecoration: 'underline',
         cursor: 'pointer',
+        '&:disabled': {
+            color: 'rgba(0, 0, 0, 0.26)',
+            cursor: 'default',
+        },
     },
 });
 
@@ -20,20 +26,19 @@ type Props = {
     className?: ?string,
     muiClasses: Object,
     children: React.Node,
+    disabled?: ?boolean,
     muiButtonRef: (muiButtonInstance: any) => void,
 };
 
 const LinkButton = (props: Props) => {
     const { classes, children, muiClasses, muiButtonRef, className, ...passOnProps } = props;
     return (
-        <div
+        <button
             className={classNames(classes.button, className)}
-            role="button"
-            tabIndex="0"
             {...passOnProps}
         >
             {children}
-        </div>
+        </button>
     );
 };
 

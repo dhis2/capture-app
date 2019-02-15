@@ -1,8 +1,10 @@
 // @flow
 import * as React from 'react';
+import classNames from 'classnames';
 import { withStyles, IconButton } from '@material-ui/core';
 import { Clear as ClearIcon } from '@material-ui/icons';
 import OrgUnitField from './OrgUnitField.component';
+
 
 
 const getStyles = (theme: Theme) => ({
@@ -33,9 +35,11 @@ type OrgUnitValue = {
 type Props = {
     value?: ?OrgUnitValue,
     onBlur: (value: any) => void,
+    disabled?: ?boolean,
     classes: {
         selectedOrgUnitContainer: string,
         clearSelectedOrgUnitButton: string,
+        clearSelectedOrgUnitButtonDisabled: string,
         clearSelectedOrgUnitIcon: string,
         selectedOrgUnitText: string,
     }
@@ -43,12 +47,15 @@ type Props = {
 
 class SingleOrgUnitSelectField extends React.Component<Props> {
     renderSelectedOrgUnit = (selectedOrgUnit: OrgUnitValue) => {
-        const { classes } = this.props;
+        const { classes, disabled } = this.props;
+        const buttonClass = classNames(classes.clearSelectedOrgUnitButton, {
+            [classes.clearSelectedOrgUnitButtonDisabled]: disabled,
+        });
         return (
             <div className={classes.selectedOrgUnitContainer}>
                 <div className={classes.selectedOrgUnitText}>{selectedOrgUnit.displayName}</div>
                 <IconButton
-                    className={classes.clearSelectedOrgUnitButton}
+                    className={buttonClass}
                     onClick={this.onDeselectOrgUnit}
                 >
                     <ClearIcon className={classes.clearSelectedOrgUnitIcon} />

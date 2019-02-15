@@ -9,10 +9,12 @@ import { findModes, findModeDisplayNames } from '../findModes';
 
 type Props = {
     selectedRelationshipType?: ?SelectedRelationshipType,
+    onInitializeNewRelationship: () => void,
     findMode?: ?$Values<typeof findModes>,
     searching?: ?boolean,
     onSelectRelationshipType: Function,
     onSelectFindMode: Function,
+    header: any,
 }
 
 class RelationshipNavigation extends React.Component<Props> {

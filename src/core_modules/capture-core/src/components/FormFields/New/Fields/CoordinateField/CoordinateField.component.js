@@ -39,6 +39,9 @@ const getStyles = (theme: Theme) => ({
     mapIconContainer: {
         fill: theme.palette.primary.dark,
     },
+    mapIconContainerDisabled: {
+        fill: 'rgba(0,0,0,0.30)',
+    },
     dialogPaper: {
         maxWidth: 'none',
         width: '75%',

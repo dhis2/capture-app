@@ -101,6 +101,7 @@ import {
 import {
     openRelationshipTeiSearchEpic,
     requestRelationshipTeiSearchEpic,
+    TeiRelationshipNewOrEditSearchEpic,
 } from 'capture-core/components/Pages/NewRelationship/TeiRelationship/teiRelationship.epics';
 import {
     teiSearchEpic,
@@ -200,6 +201,7 @@ export default combineEpics(
     showRegisteringUnitListIndicatorEpic,
     openRelationshipTeiSearchEpic,
     requestRelationshipTeiSearchEpic,
+    TeiRelationshipNewOrEditSearchEpic,
     teiSearchEpic,
     teiSearchChangePageEpic,
     teiSearchSetProgramEpic,

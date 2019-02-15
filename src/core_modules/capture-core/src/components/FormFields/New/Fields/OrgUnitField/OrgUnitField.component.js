@@ -40,6 +40,7 @@ type Props = {
     ready?: ?boolean,
     selected?: ?string,
     maxTreeHeight?: ?number,
+    disabled?: ?boolean,
     classes: {
         outerContainer: string,
         container: string,
@@ -76,6 +77,7 @@ class OrgUnitField extends React.Component<Props> {
             classes,
             selected,
             maxTreeHeight,
+            disabled,
             ...passOnProps // eslint-disable-line
         } = this.props;
         const styles = maxTreeHeight ? { maxHeight: maxTreeHeight, overflowY: 'auto' } : null;
@@ -89,18 +91,20 @@ class OrgUnitField extends React.Component<Props> {
                         value={searchText}
                         placeholder={i18n.t('Search')}
                         classes={this.classes}
+                        disabled={disabled}
                     />
                 </div>
-                <div className={classes.orgUnitTreeContainer} style={styles}>
-                    <OrgUnitTree
-                        roots={roots}
-                        onSelectClick={onSelectClick}
-                        ready={ready}
-                        treeKey={treeKey}
-                        selected={selected}
-                    />
-                </div>
-
+                {!disabled &&
+                    <div className={classes.orgUnitTreeContainer} style={styles}>
+                        <OrgUnitTree
+                            roots={roots}
+                            onSelectClick={onSelectClick}
+                            ready={ready}
+                            treeKey={treeKey}
+                            selected={selected}
+                        />
+                    </div>
+                }
             </div>
         );
     }

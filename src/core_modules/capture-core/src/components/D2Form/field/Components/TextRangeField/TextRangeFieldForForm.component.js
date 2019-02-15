@@ -1,6 +1,6 @@
 // @flow
 import {
-    NumberRangeField,
+    TextRangeField,
     withGotoInterface,
     withHideCompatibility,
     withDefaultShouldUpdateInterface,
@@ -38,7 +38,7 @@ export default withGotoInterface()(
                                 })(
                                     withDisplayMessages()(
                                         withFilterProps(getFilteredProps)(
-                                            withInternalChangeHandler()(NumberRangeField),
+                                            withInternalChangeHandler()(TextRangeField),
                                         ),
                                     ),
                                 ),

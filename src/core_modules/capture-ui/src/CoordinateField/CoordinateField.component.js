@@ -5,6 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search';
 import ClearIcon from '@material-ui/icons/Clear';
+import IconButton from '@material-ui/core/IconButton';
 import AddLocationIcon from '../Icons/AddLocationIcon.component';
 import CoordinateInput from '../internal/CoordinateInput/CoordinateInput.component';
 import defaultClasses from './coordinateField.mod.css';
@@ -26,6 +27,7 @@ type Props = {
   shrinkDisabled?: ?boolean,
   classes?: ?Object,
   mapDialog: React.Element<any>,
+  disabled?: ?boolean,
 };
 type State = {
     showMap: ?boolean,
@@ -107,17 +109,27 @@ export default class D2Coordinate extends React.Component<Props, State> {
     }
 
     renderMapIcon = () => {
-        const { classes, shrinkDisabled } = this.props;
-        const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass } = classes || {};
-        const mapIconContainerClass = shrinkDisabled ?
-            defaultClasses.mapIconContainer :
-            defaultClasses.mapIconContainerWithMargin;
+        const { classes, shrinkDisabled, disabled } = this.props;
+        const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, mapIconContainerDisabled: mapIconContainerDisabledCustomClass } = classes || {};
+        const mapIconContainerClass = classNames(
+            { [defaultClasses.mapIconContainer]: shrinkDisabled },
+            { [defaultClasses.mapIconContainerWithMargin]: !shrinkDisabled },
+            mapIconContainerCustomClass,
+            { [mapIconContainerDisabledCustomClass]: disabled },
+        );
         return (
-            <div className={classNames(mapIconContainerClass, mapIconContainerCustomClass)}>
-                <AddLocationIcon
-                    onClick={this.openMap}
-                    className={classNames(defaultClasses.mapIcon, mapIconCustomClass)}
-                />
+            <div className={mapIconContainerClass}>
+                <IconButton
+                    disabled={disabled}
+                    style={{ height: 42, width: 42, borderRadius: 0 }}
+                    classes={{ root: classNames(defaultClasses.mapIcon, mapIconCustomClass) }}
+                >
+                    <AddLocationIcon
+                        onClick={this.openMap}
+                        
+                    />
+                </IconButton>
+
             </div>
         );
     }
@@ -187,7 +199,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
     );
 
     render() {
-        const { mapCenter, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, ...passOnProps } = this.props;
+        const { mapCenter, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
         const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes || {};
         const coordinateFieldsClass = orientation === orientations.VERTICAL ? defaultClasses.coordinateFieldsVertical : defaultClasses.coordinateFieldsHorizontal;
         const clearIconClass = shrinkDisabled ? defaultClasses.clearIcon : defaultClasses.clearIconWithMargin;
@@ -206,6 +218,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
                             className={defaultClasses.latitudeTextInput}
                             onBlur={latValue => this.handleBlur(coordinateKeys.LATITUDE, latValue)}
                             onChange={latValue => this.handleChange(coordinateKeys.LATITUDE, latValue)}
+                            disabled={disabled}
                             {...passOnProps}
                         />
                     </div>
@@ -218,11 +231,14 @@ export default class D2Coordinate extends React.Component<Props, State> {
                             classes={passOnClasses}
                             onBlur={lngValue => this.handleBlur(coordinateKeys.LONGITUDE, lngValue)}
                             onChange={lngValue => this.handleChange(coordinateKeys.LONGITUDE, lngValue)}
+                            disabled={disabled}
                             {...passOnProps}
                         />
                     </div>
                     <div className={clearIconClass}>
-                        <ClearIcon onClick={this.handleClear} />
+                        <IconButton style={{ height: 42, width: 42 }} disabled={disabled}>
+                            <ClearIcon onClick={this.handleClear} />
+                        </IconButton>
                     </div>
                 </div>
             </div>

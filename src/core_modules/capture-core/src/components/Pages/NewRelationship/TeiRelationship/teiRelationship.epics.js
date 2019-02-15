@@ -8,6 +8,7 @@ import {
 import {
     actionTypes as newRelationshipActionTypes,
     setSearching,
+    unsetSearching,
 } from '../newRelationship.actions';
 
 import {
@@ -57,3 +58,12 @@ export const requestRelationshipTeiSearchEpic = (action$: InputObservable) =>
     action$.ofType(teiSearchActionTypes.REQUEST_SEARCH_TEI)
         .filter(action => action.payload.searchId && action.payload.searchId === searchId)
         .map(() => setSearching());
+
+export const TeiRelationshipNewOrEditSearchEpic = (action$: InputObservable) =>
+    // $FlowSuppress
+    action$.ofType(
+        teiSearchActionTypes.TEI_NEW_SEARCH,
+        teiSearchActionTypes.TEI_EDIT_SEARCH,
+    )
+        .filter(action => action.payload.searchId && action.payload.searchId === searchId)
+        .map(() => unsetSearching());

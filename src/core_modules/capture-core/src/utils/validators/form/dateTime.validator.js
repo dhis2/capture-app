@@ -8,6 +8,7 @@ type DateTimeValue = {
 };
 
 export default function isValidDateTime(value: DateTimeValue) {
+    if (!value) return false;
     const date = value.date;
     const time = value.time;
 

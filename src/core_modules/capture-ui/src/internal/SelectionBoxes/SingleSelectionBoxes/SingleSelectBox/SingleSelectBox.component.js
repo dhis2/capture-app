@@ -14,6 +14,7 @@ type Props = {
     inFocus?: ?boolean,
     focusClass?: string,
     unFocusClass?: string,
+    disabled?: ?boolean,
 };
 
 const keyboardKeys = {
@@ -61,15 +62,15 @@ class SingleSelectBox extends React.Component<Props> {
             focusClass,
             unFocusClass,
             onSelect,
+            disabled,
             ...passOnProps
         } = this.props;
         const id = groupId + (optionData.id || optionData.name);
-
         return (
             <div>
                 <label
                     htmlFor={id}
-                    className={defaultClasses.label}
+                    className={classNames(defaultClasses.label, { [defaultClasses.labelDisabled]: disabled })}
                 >
                     <input
                         ref={inputRef}
@@ -81,6 +82,7 @@ class SingleSelectBox extends React.Component<Props> {
                         value={optionData.value}
                         onClick={this.handleSelect}
                         onKeyPress={this.handleKeyPress}
+                        disabled={disabled}
                         {...passOnProps}
                     />
 

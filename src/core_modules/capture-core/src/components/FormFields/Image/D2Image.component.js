@@ -14,6 +14,7 @@ import inMemoryFileStore from '../../DataEntry/file/inMemoryFileStore';
 type Props = {
     value: ?{ value: string, name: string, url?: ?string },
     orientation: $Values<typeof orientations>,
+    disabled?: ?boolean,
     classes: {
         container: string,
         verticalContainer: string,
@@ -117,7 +118,7 @@ class D2Image extends Component<Props> {
     }
 
     render = () => {
-        const { value, classes, asyncUIState, orientation } = this.props;
+        const { value, classes, asyncUIState, orientation, disabled } = this.props;
         const isVertical = orientation === orientations.VERTICAL;
         const isUploading = asyncUIState && asyncUIState.loading;
         const imageUrl = this.getimageUrl();
@@ -172,6 +173,7 @@ class D2Image extends Component<Props> {
                                     </div>
                                     <div className={classes.innerContainer}>
                                         <LinkButton
+                                            disabled={disabled}
                                             className={classes.deleteButton}
                                             onClick={this.handleRemoveClick}
                                         >
@@ -184,6 +186,7 @@ class D2Image extends Component<Props> {
                         return (
                             <div>
                                 <Button
+                                    disabled={disabled}
                                     onClick={this.handleButtonClick}
                                     color="primary"
                                 >

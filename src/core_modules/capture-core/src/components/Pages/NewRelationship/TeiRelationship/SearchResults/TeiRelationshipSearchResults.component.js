@@ -2,75 +2,44 @@
 
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { Avatar, Grid, withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
+import { Pagination } from 'capture-ui';
+import withNavigation from '../../../../Pagination/withDefaultNavigation';
 import Button from '../../../../Buttons/Button.component';
-import LoadingMask from '../../../../LoadingMasks/LoadingMaskElementCenter.component';
-import { DataElement } from '../../../../../metaData';
-import { convertValue } from '../../../../../converters/clientToList';
-import { makeAttributesContainerSelector } from './teiRelationshipSearchResults.selectors';
+import { DataElement, TrackedEntityType } from '../../../../../metaData';
+import makeAttributesSelector from './teiRelationshipSearchResults.selectors';
+import CardList from '../../../../CardList/CardList.component';
+import LoadingMask from '../../../../LoadingMasks/LoadingMask.component';
+
+const SearchResultsPager = withNavigation()(Pagination);
 
 type Props = {
     resultsLoading: ?boolean,
     teis: Array<any>,
-    onAddRelationship: (entity: { id: string, displayName: string }) => void,
     onNewSearch: () => void,
     onEditSearch: () => void,
-    classes: Object,
+    paging: Object,
+    onChangePage: (page: number) => void,
+    onAddRelationship: (entity: { id: string, displayName: string }) => void,
     trackedEntityTypeName: string,
-    navigationElements: React.Element<any>,
-}
-
-type AttributesContainer = {
-    attributeChunks: Array<Array<DataElement>>,
-    profilePictureAttribute: ?DataElement,
+    classes: {
+        itemActionsContainer: string,
+        addRelationshipButton: string,
+        pagination: string,
+        topActionsContainer: string,
+        actionButton: string,
+    },
 }
 
 const getStyles = (theme: Theme) => ({
-    itemContainer: {
-        display: 'flex',
-        margin: theme.typography.pxToRem(10),
+    itemActionsContainer: {
         padding: theme.typography.pxToRem(10),
-        borderRadius: theme.typography.pxToRem(4),
-        border: `2px solid ${theme.palette.grey.light}`,
-        backgroundColor: theme.palette.grey.lighter,
-        flexDirection: 'column',
-    },
-    itemInnerContainer: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    value: {
-        padding: theme.typography.pxToRem(2),
-    },
-    itemValuesContainer: {
-        flexGrow: 1,
-        padding: theme.typography.pxToRem(10),
-    },
-    resultsContainer: {
-        display: 'flex',
-        flexDirection: 'column',
     },
     pagination: {
         display: 'flex',
         justifyContent: 'flex-end',
     },
-    emptyResultsContainer: {
-        fontStyle: 'italic',
-        padding: theme.typography.pxToRem(10),
-    },
-    attributeName: {
-        paddingRight: theme.typography.pxToRem(10),
-        fontWeight: 500,
-    },
-    profilePicture: {
-        width: theme.typography.pxToRem(60),
-        height: theme.typography.pxToRem(60),
-    },
-    profilePictureContainer: {
-        margin: theme.typography.pxToRem(6),
-        minWidth: theme.typography.pxToRem(70),
-    },
-    actionContainer: {
+    topActionsContainer: {
         margin: theme.typography.pxToRem(10),
         backgroundColor: theme.palette.grey.lighter,
     },
@@ -83,125 +52,94 @@ const getStyles = (theme: Theme) => ({
 });
 
 class TeiRelationshipSearchResults extends React.Component<Props> {
-    getAttributesContainer: Function;
-    trackedEntityTypeAttibutesSelector: Function;
+    getAttributes: Function;
     constructor(props: Props) {
         super(props);
-        this.getAttributesContainer = makeAttributesContainerSelector();
+        this.getAttributes = makeAttributesSelector();
     }
 
-    renderChunkValues = (attributes: Array<DataElement>, values: Object, classes: Object) => attributes.map(attribute => (
-        <div key={attribute.id} className={classes.value}>
-            <span className={classes.attributeName}>{attribute.name}:</span>
-            <span>{attribute.convertValue(values[attribute.id], convertValue)}</span>
-        </div>
-    ))
+    onAddRelationship = (item, attributes) => {
+        const displayName = this.getDisplayName(item, attributes);
+        this.props.onAddRelationship({
+            id: item.id,
+            displayName,
+        });
+    }
 
-    renderChunks = (attributeChunks: any, values: Object, classes: Object) => attributeChunks.map((attrChunk, i) => (
-        <Grid item xs={12} md={6} lg={3} key={i.toString()}>
-            {this.renderChunkValues(attrChunk, values, classes)}
-        </Grid>
-    ));
-
-
-    getDisplayName = (tei, attributeChunks) => {
-        if (tei.displayName) return tei.displayName;
-        const valueIds = Object.keys(tei.values);
-        const attributes = attributeChunks && attributeChunks.length > 0 ? attributeChunks[0] : [];
+    getDisplayName = (item, attributes) => {
+        const valueIds = Object.keys(item.values);
         return attributes
             .filter(a => valueIds.some(id => id === a.id))
             .slice(0, 2)
-            .map(a => tei.values[a.id])
+            .map(a => item.values[a.id])
             .join(' ');
-    }
+    };
 
-    renderValues = (values: any, attributeChunks: Array<Array<DataElement>>, classes: Object) => (
-        <div className={classes.itemValuesContainer}>
-            <Grid container spacing={16}>
-                {this.renderChunks(attributeChunks, values, classes)}
-            </Grid>
-        </div>
-    );
-
-    renderProfilePicture = (values: any, profilePictureAttribute: ?DataElement, classes: Object) => {
-        const pictureValue = profilePictureAttribute && values[profilePictureAttribute.id];
+    getItemActions = (itemProps: Object, attributes: Array<DataElement>) => {
+        const classes = this.props.classes;
         return (
-            <div className={classes.profilePictureContainer}>
-                {pictureValue && <Avatar src={pictureValue.url} alt={pictureValue.name} className={classes.profilePicture} />}
+            <div className={classes.itemActionsContainer}>
+                <Button
+                    color="primary"
+                    onClick={() => this.onAddRelationship(itemProps.item, attributes)}
+                >
+                    {i18n.t('Link')}
+                </Button>
             </div>
         );
     }
 
-    renderItem = (tei: any, classes: Object, attributesContainer: AttributesContainer) => {
-        const { attributeChunks, profilePictureAttribute } = attributesContainer;
-        const displayName = this.getDisplayName(tei, attributesContainer.attributeChunks);
+    renderResults = () => {
+        const attributes = this.getAttributes(this.props);
+        const { teis, trackedEntityTypeName } = this.props;
+        const hasResults = teis && teis.length > 0;
         return (
-            <div
-                key={tei.id}
-                className={classes.itemContainer}
-            >
-                <div className={classes.itemInnerContainer}>
-                    {this.renderProfilePicture(tei.values, profilePictureAttribute, classes)}
-                    {this.renderValues(tei.values, attributeChunks, classes)}
-                </div>
-                <div>
-                    <Button
-                        onClick={() => this.props.onAddRelationship({ id: tei.id, displayName })}
-                        color="primary"
-                    >
-                        {i18n.t('Link')}
-                    </Button>
-                </div>
+            <React.Fragment>
+                {this.renderTopActions()}
+                <CardList
+                    items={teis}
+                    dataElements={attributes}
+                    noItemsText={i18n.t('No {{trackedEntityTypeName}} found.', { trackedEntityTypeName })}
+                    getCustomItemBottomElements={itemProps => this.getItemActions(itemProps, attributes)}
+                />
+                {this.renderPager()}
+            </React.Fragment>
+        );
+    }
 
+    renderTopActions = () => {
+        const { onNewSearch, onEditSearch, classes } = this.props;
+        return (
+            <div className={classes.topActionsContainer}>
+                <Button className={classes.actionButton} onClick={onNewSearch}>
+                    {i18n.t('New search')}
+                </Button>
+                <Button className={classes.actionButton} onClick={onEditSearch}>
+                    {i18n.t('Edit search')}
+                </Button>
             </div>
         );
     }
 
-    renderLoading = (classes: Object) => (
-        <div className={classes.loadingContainer}>
-            <LoadingMask />
-        </div>
-    )
-
-    renderResults = (teis: Array<any>, classes: Object) => {
-        if (teis && teis.length > 0) {
-            const attributesContainer = this.getAttributesContainer(this.props);
-            return (
-                <div className={classes.resultsContainer}>
-                    {teis.map(tei => this.renderItem(tei, classes, attributesContainer))}
-                    <div className={classes.pagination}>
-                        {this.props.navigationElements}
-                    </div>
-                </div>
-            );
-        }
-
+    renderPager = () => {
+        const { classes, onChangePage, paging } = this.props;
         return (
-            <div className={classes.emptyResultsContainer}>
-                {i18n.t('No {{trackedEntityType}} found', { trackedEntityType: this.props.trackedEntityTypeName })}
+            <div className={this.props.classes.pagination}>
+                <SearchResultsPager
+                    onChangePage={onChangePage}
+                    onGetLabelDisplayedRows={(a, b) => `${a} of ${b}`}
+                    {...paging}
+                />
             </div>
         );
     }
-
-    renderActions = (classes: Object) => (
-        <div className={classes.actionContainer}>
-            <Button onClick={this.props.onNewSearch} className={classes.actionButton}>New search</Button>
-            <Button onClick={this.props.onEditSearch} className={classes.actionButton}>Edit search</Button>
-        </div>
-    );
 
     render() {
-        const { teis, resultsLoading, classes } = this.props;
         return (
             <div>
-                {resultsLoading ?
-                    this.renderLoading(classes) :
-                    <div>
-                        {this.renderActions(classes)}
-                        {this.renderResults(teis, classes)}
-                    </div>
-                }
+                { this.props.resultsLoading ? <LoadingMask /> : this.renderResults() }
             </div>
+
         );
     }
 }

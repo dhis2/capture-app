@@ -14,3 +14,7 @@
 .optionContainerVertical {
 
 }
+
+.disabledIcon {
+    fill: rgba(0,0,0,0.30);
+}

@@ -366,7 +366,12 @@ const saveHandlerConfig = {
     },
 };
 
-const CleanUpHOC = withCleanUpHOC()(DataEntry);
+const dataEntryFilterProps = (props: Object) => {
+    const { stage, ...passOnProps } = props;
+    return passOnProps;
+};
+
+const CleanUpHOC = withCleanUpHOC()(withFilterProps(dataEntryFilterProps)(DataEntry));
 const RelationshipField = withDataEntryFieldIfApplicable(buildRelationshipsSettingsFn())(CleanUpHOC);
 const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);

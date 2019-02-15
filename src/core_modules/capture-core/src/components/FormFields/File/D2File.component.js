@@ -12,6 +12,7 @@ import LinkButton from '../../Buttons/LinkButton.component';
 
 type Props = {
     value: ?{ value: string, name: string, url?: ?string },
+    disabled?: ?boolean,
     classes: {
         horizontalContainer: string,
         verticalContainer: string,
@@ -118,7 +119,7 @@ class D2File extends Component<Props> {
     }
 
     render() {
-        const { value, classes, asyncUIState, orientation } = this.props;
+        const { value, classes, asyncUIState, orientation, disabled } = this.props;
         const isUploading = asyncUIState && asyncUIState.loading;
         const fileUrl = this.getFileUrl();
         const isVertical = orientation === orientations.VERTICAL;
@@ -160,6 +161,7 @@ class D2File extends Component<Props> {
                                     </div>
                                     <div className={classes.innerContainer}>
                                         <LinkButton
+                                            disabled={disabled}
                                             onClick={this.handleRemoveClick}
                                             className={classes.deleteButton}
                                         >
@@ -174,6 +176,7 @@ class D2File extends Component<Props> {
                                 <Button
                                     onClick={this.handleButtonClick}
                                     color="primary"
+                                    disabled={disabled}
                                 >
                                     {i18n.t('Select file')}
                                 </Button>
