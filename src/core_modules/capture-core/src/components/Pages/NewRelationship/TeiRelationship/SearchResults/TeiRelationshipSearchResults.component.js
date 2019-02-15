@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core';
 import { Pagination } from 'capture-ui';
 import withNavigation from '../../../../Pagination/withDefaultNavigation';
 import Button from '../../../../Buttons/Button.component';
-import { DataElement, TrackedEntityType } from '../../../../../metaData';
+import { DataElement } from '../../../../../metaData';
 import makeAttributesSelector from './teiRelationshipSearchResults.selectors';
 import CardList from '../../../../CardList/CardList.component';
 import LoadingMask from '../../../../LoadingMasks/LoadingMask.component';
@@ -92,7 +92,6 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
     renderResults = () => {
         const attributes = this.getAttributes(this.props);
         const { teis, trackedEntityTypeName } = this.props;
-        const hasResults = teis && teis.length > 0;
         return (
             <React.Fragment>
                 {this.renderTopActions()}
@@ -122,7 +121,7 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
     }
 
     renderPager = () => {
-        const { classes, onChangePage, paging } = this.props;
+        const { onChangePage, paging } = this.props;
         return (
             <div className={this.props.classes.pagination}>
                 <SearchResultsPager
@@ -143,5 +142,5 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
         );
     }
 }
-
+// $FlowFixMe
 export default withStyles(getStyles)(TeiRelationshipSearchResults);
