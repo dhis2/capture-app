@@ -13,6 +13,7 @@ type Props = {
     onUpdateFieldAsync: ?Function,
 };
 
+// HOC wrapped around D2Form handling callbacks for async functionality
 const getAsyncHandler = (InnerComponent: React.ComponentType<any>) =>
     class AsyncHandlerHOC extends React.Component<Props> {
         handleIsValidating = (...args) => {

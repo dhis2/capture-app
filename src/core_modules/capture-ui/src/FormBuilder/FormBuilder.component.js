@@ -78,6 +78,7 @@ type FieldCommitOptions = {
     touched?: boolean,
 };
 
+// container for handling async validations
 type FieldsValidatingPromiseContainer = { [fieldId: string]: ?{ cancelableValidatingPromise?: ?CancelablePromise<any>, validatingCompleteUid: string } };
 
 class FormBuilder extends React.Component<Props> {

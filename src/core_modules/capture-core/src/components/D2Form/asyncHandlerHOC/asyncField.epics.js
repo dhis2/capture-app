@@ -9,6 +9,7 @@ import {
     asyncUpdateFieldFailed,
 } from './actions';
 
+// epic for handlng async field updates, e.g. file and image
 export const asyncUpdateFieldEpic = (action$: InputObservable) =>
     // $FlowSuppress
     action$.ofType(actionTypes.START_UPDATE_FIELD_ASYNC)

@@ -1,4 +1,5 @@
 // @flow
+// epics for handling search group searches
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { pipe, errorCreator } from 'capture-core-utils';

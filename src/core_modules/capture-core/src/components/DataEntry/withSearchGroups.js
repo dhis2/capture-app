@@ -1,4 +1,5 @@
 // @flow
+// HOC for adding search group actions to field updates (async and sync)
 import * as React from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
