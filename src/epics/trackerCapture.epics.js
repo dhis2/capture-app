@@ -114,7 +114,6 @@ import {
     emptyOrgUnitForNewEnrollmentUrlUpdateEpic,
     validationForNewEnrollmentUrlUpdateEpic,
     openNewEnrollmentInDataEntryEpic,
-    runRulesOnNewEnrollmentFieldUpdateEpic,
     saveNewEnrollmentEpic,
 } from 'capture-core/components/Pages/NewEnrollment';
 
@@ -134,6 +133,10 @@ import {
 import {
     teiSearchFilterOrgUnitsEpic,
 } from 'capture-core/components/TeiSearch/SearchOrgUnitSelector/searchOrgUnitSelector.epics';
+
+import { openRegisterTeiForRelationshipEpic } from 'capture-core/components/Pages/NewRelationship';
+
+import { runRulesOnEnrollmentFieldUpdateEpic } from 'capture-core/components/DataEntries';
 
 import { loadStartupData, loadStartupDataCore } from '../init/entry.epics';
 
@@ -214,10 +217,11 @@ export default combineEpics(
     emptyOrgUnitForNewEnrollmentUrlUpdateEpic,
     validationForNewEnrollmentUrlUpdateEpic,
     openNewEnrollmentInDataEntryEpic,
-    runRulesOnNewEnrollmentFieldUpdateEpic,
+    runRulesOnEnrollmentFieldUpdateEpic,
     saveNewEnrollmentEpic,
     filterFormFieldOrgUnitsEpic,
     asyncUpdateFieldEpic,
     teiSearchFilterOrgUnitsEpic,
+    openRegisterTeiForRelationshipEpic,
     ...getDataEntryEpics(),
 );
