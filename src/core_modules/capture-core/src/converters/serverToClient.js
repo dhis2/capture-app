@@ -17,7 +17,7 @@ const optionSetConvertersForType = {
     // [elementTypes.DURATION_MINUTES]: (d2Value: string) => parseDurationRepresentationtoMinutes(d2Value),
 };
 
-export function convertOptionSetValue(type: $Values<typeof elementTypes>, value: any) {
+export function convertOptionSetValue(value: any, type: $Values<typeof elementTypes>) {
     if (value == null) {
         return null;
     }
@@ -42,7 +42,7 @@ const valueConvertersForType = {
     },
 };
 
-export function convertValue(type: $Values<typeof elementTypes>, value: any) {
+export function convertValue(value: any, type: $Values<typeof elementTypes>) {
     if (value == null) {
         return null;
     }

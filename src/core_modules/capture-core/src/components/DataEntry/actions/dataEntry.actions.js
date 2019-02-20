@@ -19,9 +19,12 @@ export const actionTypes = {
     UPDATE_FIELD: 'UpdateDataEntryField',
     UPDATE_FORM_FIELD: 'UpdateDataEntryFormField',
     RULES_EXECUTED_POST_UPDATE_FIELD: 'RulesExecutedPostUpdateFieldDataEntry',
-    ASYNC_UPDATE_FIELD_FAILED: 'AsyncUpdateFieldFailed',
+    START_RUN_RULES_POST_UPDATE_FIELD: 'StartRunRulesPostUpdateFieldDataEntry',
     ADD_NOTE: 'AddNote',
     REMOVE_NOTE: 'RemoveNote',
+    ADD_RELATIONSHIP: 'AddRelationship',
+    REMOVE_RELATIONSHIP: 'RemoveRelationship',
+    DUPLICATE_RELATIONSHIP: 'DuplicateRelationship',
 };
 
 // COMPLETE
@@ -96,17 +99,27 @@ export const updateFormField =
         formId: string,
         dataEntryId: string,
         itemId: string,
+        updateCompleteUid: string,
     ) =>
         actionCreator(
-            actionTypes.UPDATE_FORM_FIELD)({ value, uiState, formId, formBuilderId, elementId, dataEntryId, itemId });
+            actionTypes.UPDATE_FORM_FIELD)({
+            value,
+            uiState,
+            formId,
+            formBuilderId,
+            elementId,
+            dataEntryId,
+            itemId,
+            updateCompleteUid,
+        });
+
+export const startRunRulesPostUpdateField =
+    (dataEntryId: string, itemId: string, uid: string) =>
+        actionCreator(actionTypes.START_RUN_RULES_POST_UPDATE_FIELD)({ dataEntryId, itemId, uid });
 
 export const rulesExecutedPostUpdateField =
-    (dataEntryId: string, itemId: string) =>
-        actionCreator(actionTypes.RULES_EXECUTED_POST_UPDATE_FIELD)({ dataEntryId, itemId });
-
-export const asyncUpdateFieldFailed =
-    (message: string) =>
-        actionCreator(actionTypes.ASYNC_UPDATE_FIELD_FAILED)({ message });
+    (dataEntryId: string, itemId: string, uid: string) =>
+        actionCreator(actionTypes.RULES_EXECUTED_POST_UPDATE_FIELD)({ dataEntryId, itemId, uid });
 
 export const addNote =
     (dataEntryId: string, itemId: string, note: Object) =>
@@ -115,3 +128,15 @@ export const addNote =
 export const removeNote =
     (dataEntryId: string, itemId: string, noteClientId: string) =>
         actionCreator(actionTypes.REMOVE_NOTE)({ dataEntryId, itemId, noteClientId });
+
+export const addRelationship =
+    (dataEntryId: string, itemId: string, relationship: Object) =>
+        actionCreator(actionTypes.ADD_RELATIONSHIP)({ dataEntryId, itemId, relationship });
+
+export const removeRelationship =
+    (dataEntryId: string, itemId: string, relationshipClientId: string) =>
+        actionCreator(actionTypes.REMOVE_RELATIONSHIP)({ dataEntryId, itemId, relationshipClientId });
+
+export const duplicateRelationship =
+    (dataEntryId: string, itemId: string, message: string) =>
+        actionCreator(actionTypes.DUPLICATE_RELATIONSHIP)({ dataEntryId, itemId, message });

@@ -5,10 +5,10 @@ import { searchOrgUnits, clearOrgUnitsSearch } from './actions/orgUnitList.actio
 import { get as getOrgUnitRoots } from '../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 
 const mapStateToProps = (state: ReduxState) => {
-    const regUnitRootsState = getOrgUnitRoots('regUnit') || {};
+    const regUnitRootsState = getOrgUnitRoots('regUnit') || getOrgUnitRoots('captureRoots');
 
     return {
-        roots: regUnitRootsState.searchRoots || regUnitRootsState.userRoots,
+        roots: regUnitRootsState,
         searchText: state.registeringUnitList.searchText,
         ready: !state.registeringUnitList.isLoading,
         treeKey: state.registeringUnitList.key,

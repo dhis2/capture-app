@@ -1,8 +1,8 @@
 // @flow
+import { effectActions } from 'capture-core-utils/RulesEngine';
+import type { OutputEffect } from 'capture-core-utils/RulesEngine/rulesEngine.types';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes } from '../../rulesEngineActionsCreator/rulesEngine.actions';
-import effectActions from '../../RulesEngine/effectActions.const';
-import type { OutputEffect } from '../../RulesEngine/rulesEngine.types';
 
 export const messageStateKeys = {
     ERROR: 'error',
@@ -12,7 +12,7 @@ export const messageStateKeys = {
 };
 
 export const rulesEffectsHiddenFieldsDesc = createReducerDescription({
-    [actionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
+    [actionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
         const hideEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.HIDE_FIELD];
@@ -28,7 +28,7 @@ export const rulesEffectsHiddenFieldsDesc = createReducerDescription({
 }, 'rulesEffectsHiddenFields');
 
 export const rulesEffectsCompulsoryFieldsDesc = createReducerDescription({
-    [actionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
+    [actionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
         const compulsoryEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.MAKE_COMPULSORY];
@@ -44,7 +44,7 @@ export const rulesEffectsCompulsoryFieldsDesc = createReducerDescription({
 }, 'rulesEffectsCompulsoryFields');
 
 export const rulesEffectsHiddenSectionsDesc = createReducerDescription({
-    [actionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
+    [actionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
         const hideEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.HIDE_SECTION];
@@ -67,7 +67,7 @@ const mapMessageEffectTypeToStateKey = {
 };
 
 export const rulesEffectsErrorMessagesDesc = createReducerDescription({
-    [actionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
+    [actionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
         const errorEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_ERROR];
@@ -96,7 +96,7 @@ export const rulesEffectsErrorMessagesDesc = createReducerDescription({
 }, 'rulesEffectsMessages');
 
 export const rulesEffectsFeedbackDesc = createReducerDescription({
-    [actionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
+    [actionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
         const displayTextEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_TEXT];
@@ -111,7 +111,7 @@ export const rulesEffectsFeedbackDesc = createReducerDescription({
 }, 'rulesEffectsFeedback', {});
 
 export const rulesEffectsIndicatorsDesc = createReducerDescription({
-    [actionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
+    [actionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
         const displayTextEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_TEXT];
@@ -127,7 +127,7 @@ export const rulesEffectsIndicatorsDesc = createReducerDescription({
 
 
 export const rulesEffectsGeneralErrorsDesc = createReducerDescription({
-    [actionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
+    [actionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
         const errors: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_ERROR];
@@ -138,7 +138,7 @@ export const rulesEffectsGeneralErrorsDesc = createReducerDescription({
 }, 'rulesEffectsGeneralErrors', {});
 
 export const rulesEffectsGeneralWarningsDesc = createReducerDescription({
-    [actionTypes.UPDATE_RULES_EFFECTS_EVENT]: (state, action) => {
+    [actionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
         const warnings: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_WARNING];
@@ -147,3 +147,18 @@ export const rulesEffectsGeneralWarningsDesc = createReducerDescription({
         return newState;
     },
 }, 'rulesEffectsGeneralWarnings', {});
+
+export const rulesEffectsDisabledFieldsDesc = createReducerDescription({
+    [actionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
+        const newState = { ...state };
+        const assignEffects: { [id: string]: Array<OutputEffect> } =
+            action.payload.rulesEffects && action.payload.rulesEffects[effectActions.ASSIGN_VALUE];
+        newState[action.payload.formId] = assignEffects ?
+            Object.keys(assignEffects).reduce((accState, key) => {
+                accState[key] = true;
+                return accState;
+            }, {}) :
+            null;
+        return newState;
+    },
+}, 'rulesEffectsDisabledFields');

@@ -3,7 +3,7 @@ import log from 'loglevel';
 import { config } from 'd2/lib/d2';
 import isDefined from 'd2-utilizr/src/isDefined';
 import errorCreator from '../utils/errorCreator';
-import { getApi } from '../d2/d2Instance';
+import getD2, { getApi } from '../d2/d2Instance';
 import RenderFoundation from '../metaData/RenderFoundation/RenderFoundation';
 import elementTypeKeys from '../metaData/DataElement/elementTypes';
 
@@ -33,6 +33,23 @@ const subValueGetterByElementType = {
                     value: res.id,
                     url: `${baseUrl}/events/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
                 }))
+            .catch((error) => {
+                log.warn(errorCreator(GET_SUBVALUE_ERROR)({ value, eventId, metaElementId, error }));
+                return null;
+            });
+    },
+    [elementTypeKeys.ORGANISATION_UNIT]: (value: any, eventId: string, metaElementId: string) => {
+        const ouIds = value.split('/');
+        const id = ouIds[ouIds.length - 1];
+        return getD2()
+            .models
+            .organisationUnits
+            .get(id)
+            .then(res => ({
+                id: res.id,
+                displayName: res.displayName,
+                path: res.path,
+            }))
             .catch((error) => {
                 log.warn(errorCreator(GET_SUBVALUE_ERROR)({ value, eventId, metaElementId, error }));
                 return null;

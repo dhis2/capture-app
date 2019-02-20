@@ -1,13 +1,10 @@
 // @flow
 import log from 'loglevel';
 import { fromPromise } from 'rxjs/observable/fromPromise';
-import getD2, { getCurrentUser } from 'capture-core/d2/d2Instance';
+import getD2 from 'capture-core/d2/d2Instance';
 import errorCreator from '../../../utils/errorCreator';
-import { actionTypes as startupActionTypes } from '../../../init/init.actions';
 import {
     actionTypes as orgUnitListActions,
-    initRegUnitListRoots,
-    initRegUnitListRootsFailed,
     setSearchRoots,
     setSearchRootsFailed,
     showLoadingIndicator,
@@ -16,41 +13,6 @@ import { set as setStoreRoots } from '../../FormFields/New/Fields/OrgUnitField/o
 import { LOADING_INDICATOR_TIMEOUT } from '../../../constants';
 
 const RETRIEVE_ERROR = 'Could not retrieve registering unit list';
-
-// get organisation units for current user
-export const loadRegisteringUnitListRootsEpic = (action$: InputObservable) =>
-    action$.ofType(startupActionTypes.STARTUP_DATA_LOAD_CORE)
-        .switchMap(() => {
-            const currentUser = getCurrentUser();
-            return currentUser
-                .getOrganisationUnits({
-                    fields: [
-                        'id,displayName,path,publicAccess,access,lastUpdated',
-                        'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
-                    ].join(','),
-                    paging: false,
-                })
-                .then(d2RegUnitArray => ({ regUnitArray: d2RegUnitArray.toArray() }))
-                .catch(error => ({ error }));
-        })
-        .map((resultContainer) => {
-            if (resultContainer.error) {
-                log.error(errorCreator(RETRIEVE_ERROR)(
-                    { error: resultContainer.error, method: 'loadRegisteringUnitListRootsEpic' }),
-                );
-                return initRegUnitListRootsFailed(RETRIEVE_ERROR);
-            }
-
-            const regUnitArray = resultContainer.regUnitArray;
-            setStoreRoots('regUnit', { userRoots: regUnitArray, searchRoots: null });
-            const regUnits = regUnitArray
-                .map(unit => ({
-                    id: unit.id,
-                    path: unit.path,
-                    displayName: unit.displayName,
-                }));
-            return initRegUnitListRoots(regUnits);
-        });
 
 // get organisation units based on search criteria
 export const searchRegisteringUnitListEpic = (action$: InputObservable) =>
@@ -82,7 +44,7 @@ export const searchRegisteringUnitListEpic = (action$: InputObservable) =>
             }
 
             const regUnitArray = resultContainer.regUnitArray;
-            setStoreRoots('regUnit', { searchRoots: regUnitArray });
+            setStoreRoots('regUnit', regUnitArray);
             const regUnits = resultContainer.regUnitArray
                 .map(unit => ({
                     id: unit.id,

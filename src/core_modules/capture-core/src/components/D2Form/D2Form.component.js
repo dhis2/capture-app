@@ -8,6 +8,7 @@ import D2SectionContainer from './D2Section.container';
 import D2Section from './D2Section.component';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import Section from '../../metaData/RenderFoundation/Section';
+import { withAsyncHandler } from './asyncHandlerHOC';
 
 const styles = () => ({
     container: {
@@ -31,7 +32,7 @@ type Props = {
     formHorizontal: boolean,
 };
 
-export class D2Form extends React.PureComponent<Props> {
+class D2Form extends React.PureComponent<Props> {
     name: string;
     validateForm: () => void;
     sectionInstances: Map<string, D2Section>;
@@ -88,6 +89,7 @@ export class D2Form extends React.PureComponent<Props> {
                             {
                                 method: 'validateFormReturningFailedFields',
                                 object: this,
+                                error,
                             },
                         ),
                     );
@@ -170,4 +172,21 @@ export class D2Form extends React.PureComponent<Props> {
     }
 }
 
-export default withStyles(styles)(D2Form);
+const D2FormWithRef = (props: Object) => {
+    const { formRef, ...passOnProps } = props;
+
+    const handleRef = (instance) => {
+        if (formRef) {
+            formRef(instance);
+        }
+    };
+
+    return (
+        <D2Form
+            ref={handleRef}
+            {...passOnProps}
+        />
+    );
+};
+
+export default withAsyncHandler()(withStyles(styles)(D2FormWithRef));

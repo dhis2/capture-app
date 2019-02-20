@@ -8,16 +8,21 @@ import {
     withCalculateMessages,
     withDisplayMessages,
 } from '../../../../FormFields/New';
-import withRequiredFieldCalculation from '../../withRequiredFieldCalculation';
+import {
+    withRequiredFieldCalculation,
+    withDisabledFieldCalculation,
+} from '../internal';
 
 export default withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
-            withRequiredFieldCalculation()(
-                withFocusSaver()(
-                    withCalculateMessages()(
-                        withDisplayMessages()(
-                            SelectionBoxes,
+            withDisabledFieldCalculation()(
+                withRequiredFieldCalculation()(
+                    withFocusSaver()(
+                        withCalculateMessages()(
+                            withDisplayMessages()(
+                                SelectionBoxes,
+                            ),
                         ),
                     ),
                 ),

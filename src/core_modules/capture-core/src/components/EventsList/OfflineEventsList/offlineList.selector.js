@@ -1,7 +1,7 @@
 // @flow
 import { createSelectorCreator, createSelector, defaultMemoize } from 'reselect';
 
-import getStageFromProgramIdForEventProgram from '../../../metaData/helpers/getStageFromProgramIdForEventProgram';
+import { getStageFromProgramIdForEventProgram } from '../../../metaData';
 import getStageFromEvent from '../../../metaData/helpers/getStageFromEvent';
 import { convertMainEvent } from '../../../events/mainEventConverter';
 import { convertValue } from '../../../converters/clientToList';
@@ -36,7 +36,7 @@ export const makeColumnsSelector = () => createSelector(
         }
 
         // $FlowSuppress
-        const stage: RenderFoundation = stageContainer.stage;
+        const stageForm: RenderFoundation = stageContainer.stage.stageForm;
 
         return columnsOrderFromState
             .map((column) => {
@@ -44,14 +44,14 @@ export const makeColumnsSelector = () => createSelector(
                     if (column.id === mainPropertyNames.EVENT_DATE) {
                         return {
                             ...column,
-                            header: stage.getLabel(mainPropertyNames.EVENT_DATE),
+                            header: stageForm.getLabel(mainPropertyNames.EVENT_DATE),
                             type: elementTypeKeys.DATE,
                         };
                     }
                     // fallback
                     return columnsOrderFromState;
                 }
-                const element = stage.getElement(column.id);
+                const element = stageForm.getElement(column.id);
                 return {
                     ...column,
                     header: element.formName,
@@ -112,7 +112,7 @@ const buildWorkingListData = (eventsContainer: Array<EventContainer>) => {
 
     return eventsContainer
         .map((eventContainer) => {
-            const convertedValues = stage.convertValues(eventContainer.eventValues, convertValue);
+            const convertedValues = stage.stageForm.convertValues(eventContainer.eventValues, convertValue);
             const convertedMainEvent = convertMainEvent(eventContainer.event, convertValue);
             return {
                 ...convertedMainEvent,

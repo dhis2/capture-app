@@ -1,7 +1,7 @@
 /* eslint-disable complexity */
 /* eslint-disable no-underscore-dangle */
 import isDefined from 'd2-utilizr/lib/isDefined';
-import errorCreator from '../errorCreator';
+import { errorCreator } from '../errorCreator';
 
 class IndexedDBAdapter {
     static errorMessages = {

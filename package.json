@@ -66,7 +66,8 @@
     "redux-observable": "^0.18.0",
     "reselect": "^3.0.1",
     "rxjs": "^5.5.10",
-    "typeface-roboto": "^0.0.54"
+    "typeface-roboto": "^0.0.54",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "manualBuild": "yarn localize && d2-manifest package.json ./public/manifest.webapp --manifest.activities.dhis.href='../../..' && GENERATE_SOURCEMAP=false react-app-rewired build && mkdirp buildzip/ && pushd build && bestzip ../buildzip/NewCaptureApp.zip * && popd",
@@ -98,7 +99,7 @@
     "eslint-plugin-flowtype": "^2.46.2",
     "eslint-plugin-import": "^2.11.0",
     "expose-loader": "^0.7.5",
-    "flow-bin": "^0.81.0",
+    "flow-bin": "^0.87.0",
     "flow-typed": "^2.4.0",
     "jsdoc": "^3.5.5",
     "jsdoc-babel": "^0.4.0",

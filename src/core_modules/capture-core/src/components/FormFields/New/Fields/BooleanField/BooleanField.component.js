@@ -11,6 +11,9 @@ const getStyles = (theme: Theme) => ({
     iconDeselected: {
         fill: theme.palette.grey[700],
     },
+    iconDisabled: {
+        fill: 'rgba(0,0,0,0.30)',
+    },
     focusSelected: {
         backgroundColor: fade(theme.palette.secondary.main, 0.4),
     },

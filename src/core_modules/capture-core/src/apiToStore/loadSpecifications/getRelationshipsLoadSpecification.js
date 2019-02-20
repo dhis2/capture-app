@@ -11,8 +11,9 @@ function converter(d2Model) {
     return d2Model.map(item => ({
         id: item.id,
         displayName: item.displayName,
-        aIsToB: item.aIsToB,
-        bIsToA: item.bIsToA,
+        fromConstraint: item.fromConstraint,
+        toConstraint: item.toConstraint,
+        access: item.access,
     }));
 }
 
@@ -24,7 +25,7 @@ export default function getRelationshipsLoadSpecification(storeName: string = 'r
         _this.loader = loadStoreDataIfNotExists;
         _this.objectStore = storeName;
         _this.queryParams = {
-            fields: 'id,displayName,aIsToB,bIsToA',
+            fields: 'id,displayName,fromConstraint[*],toConstraint[*],access[*]',
         };
     });
 }

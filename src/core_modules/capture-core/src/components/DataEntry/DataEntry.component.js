@@ -4,7 +4,7 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 import D2Form from '../D2Form/D2Form.component';
-import { placements } from './dataEntryField/dataEntryField.const';
+import placements from './constants/placements.const';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import getDataEntryKey from './common/getDataEntryKey';
 import StickyOnScroll from '../Sticky/StickyOnScroll.component';
@@ -55,7 +55,7 @@ const styles = theme => ({
     },
     dataEntryFieldSection: {
         padding: theme.typography.pxToRem(8),
-        maxWidth: theme.typography.pxToRem(880),
+        maxWidth: theme.typography.pxToRem(892),
     },
 });
 
@@ -103,7 +103,9 @@ type Props = {
         itemId: string,
     ) => void,
     dataEntrySections?: { [string]: {name: string, placement: $Values<typeof placements>}},
+    dataEntryFieldRef: any,
     onAddNote?: ?Function,
+    onAddRelationship?: ?Function,
 };
 
 const fieldHorizontalFilter = (placement: $Values<typeof placements>) =>
@@ -120,14 +122,14 @@ class DataEntry extends React.Component<Props> {
         FORM_FOUNDATION_MISSING: 'form foundation missing. see log for details',
     };
 
-    formInstance: ?D2Form;
+    formInstance: ?any;
 
     getWrappedInstance() {
         return this.formInstance;
     }
 
     handleUpdateField = (...args) => {
-        this.props.onUpdateFieldInner(...args, this.props.id, this.props.itemId, this.props.onUpdateFormField);
+        this.props.onUpdateFieldInner(this.props.id, this.props.itemId, this.props.onUpdateFormField, ...args);
     }
 
     getClasses = (): DirectionClasses => {
@@ -230,6 +232,8 @@ class DataEntry extends React.Component<Props> {
             onUpdateFormFieldAsync,
             dataEntryOutputs,
             onAddNote,
+            onAddRelationship,
+            dataEntryFieldRef,
             ...passOnProps } = this.props;
 
         if (!itemId) {
@@ -337,6 +341,7 @@ class DataEntry extends React.Component<Props> {
     }
 }
 
+// $FlowFixMe
 const StylesHOC = withStyles(styles)(DataEntry);
 
 type ContainerProps = {

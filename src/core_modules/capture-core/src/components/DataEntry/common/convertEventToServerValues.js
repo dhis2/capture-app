@@ -18,7 +18,7 @@ export default function getServerValuesToSaveFromMainEvent(event: CaptureClientE
             const valueToConvert = event[inputKey];
             let convertedValue;
             if (inputKey === 'eventDate' || inputKey === 'dueDate' || inputKey === 'completedDate') {
-                convertedValue = convertValue(elementTypes.DATE, valueToConvert);
+                convertedValue = convertValue(valueToConvert, elementTypes.DATE);
             } else {
                 convertedValue = valueToConvert;
             }

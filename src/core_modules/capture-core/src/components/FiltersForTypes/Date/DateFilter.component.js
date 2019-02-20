@@ -120,12 +120,12 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
 
     static convertDateFilterValueToClientValue(formValue: string): string {
         // $FlowSuppress
-        return convertToClientValue(elementTypes.DATE, formValue);
+        return convertToClientValue(formValue, elementTypes.DATE);
     }
 
     static convertDateFilterValueToFormValue(clientValue: string): string {
         // $FlowSuppress
-        return convertToFormValue(elementTypes.DATE, clientValue);
+        return convertToFormValue(clientValue, elementTypes.DATE);
     }
 
     static mapMainSelectionsToRequests = {

@@ -66,7 +66,7 @@ const valueConvertersForType = {
     [elementTypes.AGE]: convertAgeForEdit,
 };
 
-export function convertValue(type: $Values<typeof elementTypes>, value: any) {
+export function convertValue(value: any, type: $Values<typeof elementTypes>) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }

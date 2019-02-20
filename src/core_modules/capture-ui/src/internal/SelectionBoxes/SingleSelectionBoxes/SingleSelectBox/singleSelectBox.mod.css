@@ -1,7 +1,7 @@
 .input {
     cursor: inherit;
     position: absolute;
-    z-index: 200;
+    z-index: 199;
     opacity: 0;
     width: 100%;
     height: 100%;
@@ -13,6 +13,10 @@
 
 .input:focus {
     outline: none;
+}
+
+.input:disabled {
+    cursor: not-allowed;
 }
 
 .iconContainer {
@@ -47,6 +51,11 @@
     animation: focus-pulsate 2500ms cubic-bezier(0.4, 0, 0.2, 1) 200ms infinite;
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 50%;
+}
+
+.labelDisabled {
+    color: rgba(0, 0, 0, 0.30);
+    cursor: not-allowed;
 }
 
 @keyframes focus-pulsate {

@@ -32,6 +32,11 @@
     margin-bottom: -4px;
 }
 
+.textArea:disabled {
+    background-color: #F5F6F7;
+    cursor: not-allowed;
+}
+
 .textArea:focus {
     outline: none;
 }

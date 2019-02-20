@@ -1,5 +1,5 @@
 // @flow
-export { default as NewEventPageEntry } from './PageEntry/NewEventPageEntry.container';
+export { default as NewEventPage } from './PageEntry/NewEventPageEntry.container';
 
 // actions
 export {
@@ -17,8 +17,11 @@ export {
     actionTypes as selectorActionTypes,
 } from './SelectorLevel/selectorLevel.actions';
 export {
-    actionTypes as selectionsCompleteActionTypes,
-} from './SelectionsComplete/selectionsComplete.actions';
+    actionTypes as dataEntryWrapperActionTypes,
+} from './DataEntryWrapper/newEventDataEntryWrapper.actions';
+export {
+    actionTypes as newRelationshipActionTypes,
+} from './NewRelationshipWrapper/NewEventNewRelationshipWrapper.actions';
 export {
     actionTypes as selectionsIncompleteActionTypes,
 } from './SelectionsIncomplete/dataEntrySelectionsIncomplete.actions';
@@ -28,7 +31,6 @@ export { cancelNewEventEpic, cancelNewEventLocationChangeEpic } from './DataEntr
 export {
     cancelNewEventIncompleteSelectionsLocationChangeEpic,
 } from './epics/cancelNewSingleEventSelectionsIncomplete.epics';
-export { newEventAsyncUpdateFieldEpic } from './DataEntry/epics/newEventAsyncUpdateField.epics';
 export {
     resetDataEntryForNewEventEpic,
     openNewEventInDataEntryEpic,
@@ -50,3 +52,10 @@ export {
 export {
     addNoteForNewSingleEventEpic,
 } from './DataEntry/epics/addNoteForNewSingleEvent.epics';
+
+export {
+    openRelationshipForNewSingleEventEpic,
+    addRelationshipForNewSingleEventEpic,
+    saveNewEventRelationshipsIfExistsEpic,
+    saveNewEventRelationshipFinishedEpic,
+} from './DataEntry/epics/addRelationshipForNewSingleEvent.epics';

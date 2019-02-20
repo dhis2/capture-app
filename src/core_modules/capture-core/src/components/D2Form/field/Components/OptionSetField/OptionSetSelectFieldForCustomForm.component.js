@@ -9,9 +9,12 @@ import {
     withCalculateMessages,
     withDisplayMessages,
 } from '../../../../FormFields/New';
-import withRequiredFieldCalculation from '../../withRequiredFieldCalculation';
+import {
+    withRequiredFieldCalculation,
+    withDisabledFieldCalculation,
+    withCustomElementContainer,
+} from '../internal';
 import withOptionsIconElement from './withOptionsIconElement';
-import withCustomElementContainer from '../../withCustomElementContainer';
 import customFormStyles from './optionSetSelectFieldForCustomForm.mod.css';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;
@@ -19,14 +22,16 @@ const getContainerClass = () => customFormStyles.defaultCustomContainer;
 export default withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
-            withRequiredFieldCalculation()(
-                withFocusSaver()(
-                    withCalculateMessages()(
-                        withDisplayMessages()(
-                            withSelectTranslations()(
-                                withCustomElementContainer(getContainerClass)(
-                                    withOptionsIconElement()(
-                                        VirtualizedSelectField,
+            withDisabledFieldCalculation()(
+                withRequiredFieldCalculation()(
+                    withFocusSaver()(
+                        withCalculateMessages()(
+                            withDisplayMessages()(
+                                withSelectTranslations()(
+                                    withCustomElementContainer(getContainerClass)(
+                                        withOptionsIconElement()(
+                                            VirtualizedSelectField,
+                                        ),
                                     ),
                                 ),
                             ),

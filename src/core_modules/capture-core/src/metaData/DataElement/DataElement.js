@@ -10,6 +10,7 @@ import Icon from '../Icon/Icon';
 import OptionSet from '../OptionSet/OptionSet';
 import errorCreator from '../../utils/errorCreator';
 import elementTypes from './elementTypes';
+import { Unique } from './Unique';
 
 export default class DataElement {
     static errorMessages = {
@@ -28,11 +29,13 @@ export default class DataElement {
     _displayInForms: boolean;
     _displayInReports: boolean;
     _icon: ?Icon;
+    _unique: ?Unique;
 
     constructor(initFn: ?(_this: DataElement) => void) {
         this._displayInReports = true;
         this._displayInForms = true;
         this.disabled = false;
+        this.compulsory = false;
         initFn && isFunction(initFn) && initFn(this);
     }
 
@@ -78,14 +81,14 @@ export default class DataElement {
         return this._displayInReports;
     }
 
-    set disabled(disabled: boolean) {
+    set disabled(disabled: ?boolean) {
         this._disabled = !!disabled;
     }
     get disabled(): boolean {
         return this._disabled;
     }
 
-    set compulsory(compulsory: boolean) {
+    set compulsory(compulsory: ?boolean) {
         this._compulsory = !!compulsory;
     }
     get compulsory(): boolean {
@@ -125,9 +128,15 @@ export default class DataElement {
         return this._icon;
     }
 
+    set unique(unique: Unique) {
+        this._unique = unique;
+    }
+    get unique(): ?Unique {
+        return this._unique;
+    }
+
     * getPropertyNames(): Generator<string, void, void> {
-        const excluded = ['getPropertyNames', 'constructor', 'copyPropertiesTo'];
-        // $FlowSuppress        
+        const excluded = ['getPropertyNames', 'constructor', 'copyPropertiesTo', 'getConvertedOptionSet', 'convertValue'];
         for (const name of Object.getOwnPropertyNames(Object.getPrototypeOf(this))) {
             if (!excluded.includes(name)) {
                 yield name;
@@ -158,9 +167,9 @@ export default class DataElement {
 
     convertValue(rawValue: any, onConvert: ConvertFn) {
         return isArray(rawValue)
-            ? rawValue.map(valuePart => onConvert(this.type, valuePart, this))
-            : onConvert(this.type, rawValue, this);
+            ? rawValue.map(valuePart => onConvert(valuePart, this.type, this))
+            : onConvert(rawValue, this.type, this);
     }
 }
 
-export type ConvertFn = (type: $Values<typeof elementTypes>, value: any, element: ?DataElement) => any;
+export type ConvertFn = (type: $Values<typeof elementTypes>, value: any, element: DataElement) => any;

@@ -1,0 +1,7 @@
+// @flow
+
+export default {
+    SAVEANDADDANOTHER: 'SAVEANDADDANOTHER',
+    SAVEANDEXIT: 'SAVEANDEXIT',
+    FINISH: 'FINISH',
+};

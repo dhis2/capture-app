@@ -22,6 +22,9 @@ import {
 import {
     actionTypes as crossPageActionTypes,
 } from '../../components/Pages/actions/crossPage.actions';
+import {
+    urlActionTypes as newEnrollmentUrlActionTypes,
+} from '../../components/Pages/NewEnrollment';
 
 const setOrgUnit = (state, action) => {
     const orgUnitId = action.payload.id;
@@ -99,6 +102,18 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         return newState;
     },
     [newEventDataEntryUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: (state) => {
+        const newState = {
+            ...state,
+            orgUnitId: null,
+        };
+        return newState;
+    },
+    [newEnrollmentUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
+        const { nextProps: selections } = action.payload;
+        const newState = { ...state, ...selections, categories: null, complete: false };
+        return newState;
+    },
+    [newEnrollmentUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: (state) => {
         const newState = {
             ...state,
             orgUnitId: null,

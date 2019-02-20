@@ -8,20 +8,25 @@ import {
     withDisplayMessages,
     withInternalChangeHandler,
 } from '../../../../FormFields/New';
-import withRequiredFieldCalculation from '../../withRequiredFieldCalculation';
+import {
+    withRequiredFieldCalculation,
+    withDisabledFieldCalculation,
+    withCustomElementContainer,
+} from '../internal';
 import FileField from '../../../../FormFields/File/D2File.component';
-import withCustomElementContainer from '../../withCustomElementContainer';
 
 export default withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
-            withRequiredFieldCalculation()(
-                withCalculateMessages()(
-                    withFocusSaver()(
-                        withDisplayMessages()(
-                            withCustomElementContainer()(
-                                withInternalChangeHandler()(
-                                    FileField,
+            withDisabledFieldCalculation()(
+                withRequiredFieldCalculation()(
+                    withCalculateMessages()(
+                        withFocusSaver()(
+                            withDisplayMessages()(
+                                withCustomElementContainer()(
+                                    withInternalChangeHandler()(
+                                        FileField,
+                                    ),
                                 ),
                             ),
                         ),

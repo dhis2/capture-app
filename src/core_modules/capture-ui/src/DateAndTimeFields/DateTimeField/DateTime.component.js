@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import defaultClasses from './dateTime.mod.css';
 
@@ -26,10 +27,14 @@ type Props = {
     calendarOnConvertValueOut: Function,
     popupAnchorPosition?: ?any,
     classes: Object,
+    dateLabel: string,
+    timeLabel: string,
 };
 
 class D2DateTime extends Component<Props> {
     static defaultProps = {
+        dateLabel: i18n.t('Date'),
+        timeLabel: i18n.t('Time'),
         value: {},
     };
 
@@ -47,6 +52,7 @@ class D2DateTime extends Component<Props> {
         this.handleTimeBlur = this.handleTimeBlur.bind(this);
         this.handleDateBlur = this.handleDateBlur.bind(this);
         this.touchedFields = new Set();
+
     }
 
     handleTimeChange(timeValue: string) {
@@ -68,7 +74,7 @@ class D2DateTime extends Component<Props> {
         this.handleBlur({
             time: timeValue,
             date: this.props.value.date,
-        });
+        }, !!this.props.value.date);
     }
 
     handleDateBlur(dateValue: string) {
@@ -76,12 +82,10 @@ class D2DateTime extends Component<Props> {
         this.handleBlur({
             time: this.props.value.time,
             date: dateValue,
-        });
+        }, !!this.props.value.time);
     }
 
-    handleBlur(value: Value) {
-        this.setState({ inFocus: false });
-
+    handleBlur(value: Value, otherFieldHasValue: boolean) {
         const onBlur = this.props.onBlur;
         const touched = this.touchedFields.size === 2;
         if (!value.date && !value.time) {
@@ -90,14 +94,29 @@ class D2DateTime extends Component<Props> {
             });
             return;
         }
-
         onBlur(value, {
-            touched,
+            touched: touched || otherFieldHasValue,
         });
     }
 
     render() {
-        const { value, dateMaxWidth, dateWidth, calendarWidth, popupAnchorPosition, calendarTheme, calendarLocale, calendarOnConvertValueIn, calendarOnConvertValueOut,  classes, orientation, onBlur, onChange, ...passOnProps } = this.props;
+        const {
+            value,
+            dateMaxWidth,
+            dateWidth,
+            calendarWidth,
+            popupAnchorPosition,
+            calendarTheme,
+            calendarLocale,
+            calendarOnConvertValueIn,
+            calendarOnConvertValueOut,
+            classes,
+            orientation,
+            onBlur,
+            dateLabel,
+            timeLabel,
+            onChange,
+            ...passOnProps } = this.props;
         const isVertical = orientation === orientations.VERTICAL;
         const dateValue = value.date;
         const timeValue = value.time;
@@ -120,7 +139,7 @@ class D2DateTime extends Component<Props> {
                             calendarWidth={calendarWidth}
                             onChange={this.handleDateChange}
                             onBlur={this.handleDateBlur}
-                            label="Date"
+                            label={dateLabel}
                             calendarTheme={calendarTheme}
                             popupAnchorPosition={popupAnchorPosition}
                             calendarLocale={calendarLocale}
@@ -135,7 +154,7 @@ class D2DateTime extends Component<Props> {
                         value={timeValue}
                         onChange={this.handleTimeChange}
                         onBlur={this.handleTimeBlur}
-                        label="Time"
+                        label={timeLabel}
                         classes={classes}
                         {...passOnProps}
                     />

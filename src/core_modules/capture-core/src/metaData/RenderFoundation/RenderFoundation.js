@@ -1,10 +1,8 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
-
 import isFunction from 'd2-utilizr/src/isFunction';
-import isArray from 'd2-utilizr/src/isArray';
-import isObject from 'd2-utilizr/src/isObject';
+import type { ProgramRule } from 'capture-core-utils/RulesEngine/rulesEngine.types';
 
 import { validationStrategies, validationStrategiesAsArray } from './renderFoundation.const';
 import Section from './Section';
@@ -12,14 +10,12 @@ import CustomForm from './CustomForm';
 import DataElement from '../DataElement/DataElement';
 import errorCreator from '../../utils/errorCreator';
 import type { ConvertFn } from '../DataElement/DataElement';
-import type { ProgramRule } from '../../RulesEngine/rulesEngine.types';
 import type { Access } from '../Access/Access';
-
-type ValuesType = { [key: string]: any };
+import { convertDataElementsValues } from '../helpers';
+import type { ValuesType } from '../helpers/DataElements/convertValues';
 
 export default class RenderFoundation {
     static errorMessages = {
-        CONVERT_VALUES_STRUCTURE: 'Values can not be converted, data is neither an array or an object',
         UNSUPPORTED_VALIDATION_STRATEGY: 'Tried to set an unsupported validation strategy',
     };
 
@@ -171,33 +167,8 @@ export default class RenderFoundation {
     }
 
     convertValues<T: ?ValuesType | Array<ValuesType>>(values: T, onConvert: ConvertFn): T {
-        if (values) {
-            if (isArray(values)) {
-                // $FlowSuppress
-                return this.convertArrayValues(values, onConvert);
-            } else if (isObject(values)) {
-                // $FlowSuppress
-                return this.convertObjectValues(values, onConvert);
-            }
-
-            log.error(errorCreator(RenderFoundation.errorMessages.CONVERT_VALUES_STRUCTURE)({ values }));
-        }
-        return values;
-    }
-
-    convertArrayValues(arrayOfValues: Array<ValuesType>, onConvert: ConvertFn) {
-        // $FlowSuppress
-        return arrayOfValues.map((values: ValuesType) => this.convertObjectValues(values, onConvert));
-    }
-
-    convertObjectValues(values: ValuesType, onConvert: ConvertFn) {
-        const elementsById = this.getElementsById();
-        return Object.keys(values).reduce((inProgressValues, id) => {
-            const metaElement = elementsById[id];
-            const rawValue = values[id];
-            const convertedValue = metaElement ? metaElement.convertValue(rawValue, onConvert) : rawValue;
-            return { ...inProgressValues, [id]: convertedValue };
-        }, {});
+        const dataElements = this.getElements();
+        return convertDataElementsValues(values, dataElements, onConvert);
     }
 
     /*

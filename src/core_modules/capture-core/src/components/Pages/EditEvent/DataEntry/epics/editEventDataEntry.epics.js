@@ -12,14 +12,13 @@ import {
     batchActionTypes as editEventDataEntryBatchActionTypes,
     actionTypes as editEventDataEntryActionTypes,
 } from '../editEventDataEntry.actions';
-import getProgramAndStageFromEvent from '../../../../../metaData/helpers/EventProgram/getProgramAndStageFromEvent';
-import { getRulesActionsForEvent } from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+import { getProgramAndStageFromEvent } from '../../../../../metaData';
+import { getRulesActionsForEvent } from '../../../../../rulesEngineActionsCreator';
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
-} from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorInputHelpers';
-import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
-import type { FieldData } from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+} from '../../../../../rulesEngineActionsCreator/inputHelpers';
+import type { FieldData } from '../../../../../rulesEngineActionsCreator/inputHelpers';
 
 const errorMessages = {
     COULD_NOT_GET_EVENT_FROM_STATE: 'Could not get event from state',
@@ -40,7 +39,8 @@ export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
             if (metadataContainer.error) {
                 return prerequisitesErrorOpeningEventForEditInDataEntry(metadataContainer.error);
             }
-            const foundation = metadataContainer.stage;
+            // $FlowFixMe
+            const foundation = metadataContainer.stage.stageForm;
             const program = metadataContainer.program;
 
             // $FlowSuppress
@@ -64,14 +64,14 @@ export const runRulesForEditSingleEventEpic = (action$: InputObservable, store: 
 
             let rulesActions;
             if (metadataContainer.error) {
+                const foundation = metadataContainer.stage ? metadataContainer.stage.stageForm : null;
                 log.error(
                     errorCreator(
                         errorMessages.COULD_NOT_GET_EVENT_FROM_STATE)(
                         { method: 'runRulesForEditSingleEventEpic' }));
-
                 rulesActions = getRulesActionsForEvent(
                     metadataContainer.program,
-                    metadataContainer.stage,
+                    foundation,
                     payload.formId,
                     orgUnit,
                 );
@@ -81,9 +81,8 @@ export const runRulesForEditSingleEventEpic = (action$: InputObservable, store: 
                     value: payload.value,
                     valid: payload.uiState.valid,
                 };
-
-                // $FlowSuppress
-                const foundation: RenderFoundation = metadataContainer.stage;
+                // $FlowFixMe
+                const foundation = metadataContainer.stage.stageForm;
 
                 const currentEventValues = getCurrentClientValues(state, foundation, payload.formId, fieldData);
 
@@ -93,7 +92,7 @@ export const runRulesForEditSingleEventEpic = (action$: InputObservable, store: 
 
                 rulesActions = getRulesActionsForEvent(
                     metadataContainer.program,
-                    metadataContainer.stage,
+                    foundation,
                     payload.formId,
                     orgUnit,
                     currentEventData,
@@ -103,7 +102,7 @@ export const runRulesForEditSingleEventEpic = (action$: InputObservable, store: 
 
             return batchActions([
                 ...rulesActions,
-                rulesExecutedPostUpdateField(payload.dataEntryId, payload.itemId),
+                rulesExecutedPostUpdateField(payload.dataEntryId, payload.itemId, payload.uid),
             ],
             editEventDataEntryBatchActionTypes.RULES_EFFECTS_ACTIONS_BATCH);
         });

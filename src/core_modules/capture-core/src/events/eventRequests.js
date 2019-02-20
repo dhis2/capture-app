@@ -62,7 +62,7 @@ const mapEventInputKeyToOutputKey = {
 function getConvertedValue(valueToConvert: any, inputKey: string) {
     let convertedValue;
     if (inputKey === 'eventDate' || inputKey === 'dueDate' || inputKey === 'completedDate') {
-        convertedValue = convertValue(elementTypes.DATE, valueToConvert);
+        convertedValue = convertValue(valueToConvert, elementTypes.DATE);
     } else {
         convertedValue = valueToConvert;
     }
@@ -97,10 +97,11 @@ async function convertToClientEvent(event: ApiTEIEvent) {
         log.error(errorCreator(errorMessages.STAGE_NOT_FOUND)({ fn: 'convertToClientEvent', event }));
         return null;
     }
+    const stageForm = stageMetaData.stageForm;
 
     const dataValuesById = getValuesById(event.dataValues);
-    const convertedDataValues = stageMetaData.convertValues(dataValuesById, convertValue);
-    await getSubValues(event.event, stageMetaData, convertedDataValues);
+    const convertedDataValues = stageForm.convertValues(dataValuesById, convertValue);
+    await getSubValues(event.event, stageForm, convertedDataValues);
 
     const convertedMainProperties = convertMainProperties(event);
 

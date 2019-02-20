@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import classNames from 'classnames';
 import CheckedIcon from '../../../Icons/SingleSelectionCheckedIcon.component';
 import UncheckedIcon from '../../../Icons/SingleSelectionUncheckedIcon.component';
 import SingleSelectBox from './SingleSelectBox/SingleSelectBox.component';
@@ -20,6 +21,7 @@ type Props = {
     classes?: ?{
         iconSelected?: string,
         iconDeselected?: string,
+        iconDisabled?: string,
         focusSelected?: string,
         focusUnselected?: string,
         unFocus?: string,
@@ -27,6 +29,7 @@ type Props = {
     onSelect: (value: any) => void,
     onSetFocus: () => void,
     onRemoveFocus: () => void,
+    disabled?: ?boolean,
 };
 
 class SingleSelectionBoxes extends React.Component<Props> {
@@ -34,26 +37,42 @@ class SingleSelectionBoxes extends React.Component<Props> {
         return isSelected ? classes.focusSelected : classes.focusUnselected;
     }
 
+    getCheckedClass = (iconSelected: ?string, iconDisabled?: string, isDisabled: ?boolean) => classNames(
+        iconSelected,
+        iconDisabled && { [iconDisabled]: isDisabled },
+    );
+
+    getUncheckedClass = (iconDeselected: ?string, iconDisabled?: string, isDisabled: ?boolean) => classNames(
+        iconDeselected,
+        iconDisabled && { [iconDisabled]: isDisabled },
+    );
+
     getCheckedIcon() {
+        const { classes, disabled } = this.props;
+        const { iconDisabled, iconSelected } = classes || {};
         return (
             <CheckedIcon
-                className={this.props.classes && this.props.classes.iconSelected}
+                className={this.getCheckedClass(iconSelected, iconDisabled, disabled)}
             />
         );
     }
 
     getUncheckedIcon() {
+        const { classes, disabled } = this.props;
+        const { iconDisabled, iconDeselected } = classes || {};
         return (
             <UncheckedIcon
-                className={this.props.classes && this.props.classes.iconDeselected}
+                className={this.getUncheckedClass(iconDeselected, iconDisabled, disabled)}
             />
         );
     }
 
     getPostProcessedCustomIcon(customElement: React.Element<any>, isSelected: boolean) {
+        const { classes, disabled } = this.props;
+        const { iconSelected, iconDeselected, iconDisabled } = classes || {};
         return React.cloneElement(customElement, isSelected ?
-            { className: this.props.classes && this.props.classes.iconSelected } :
-            { className: this.props.classes && this.props.classes.iconDeselected }, null);
+            { className: this.getCheckedClass(iconSelected, iconDisabled, disabled) } :
+            { className: this.getUncheckedClass(iconDeselected, iconDisabled, disabled) }, null);
     }
 
     getIconElement(optionData: OptionRendererInputData, isSelected: boolean) {
@@ -67,7 +86,7 @@ class SingleSelectionBoxes extends React.Component<Props> {
     }
 
     getOption(optionData: OptionRendererInputData, isSelected: boolean, index: number) {
-        const { orientation, id: groupId, value, onSelect, classes, onSetFocus, onRemoveFocus } = this.props;
+        const { orientation, id: groupId, value, onSelect, classes, onSetFocus, onRemoveFocus, disabled } = this.props;
         const containerClass = orientation === orientations.HORIZONTAL ?
             defaultClasses.optionContainerHorizontal : defaultClasses.optionContainerVertical;
         const tabIndex = isSelected || (index === 0 && !value && value !== false && value !== 0) ? 0 : -1;
@@ -89,6 +108,7 @@ class SingleSelectionBoxes extends React.Component<Props> {
                     unFocusClass={classes && classes.unFocus}
                     onSetFocus={onSetFocus}
                     onRemoveFocus={onRemoveFocus}
+                    disabled={disabled}
                 >
                     {IconElement}
                 </SingleSelectBoxWrapped>

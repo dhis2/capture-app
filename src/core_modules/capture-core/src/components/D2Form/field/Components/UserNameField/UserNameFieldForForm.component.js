@@ -1,5 +1,5 @@
 // @flow
-import withDefaultFieldWrapper from '../internal/withDefaultFieldWrapperForForm/withDefaultFieldWrapperForForm';
+import { withDefaultFieldWrapperForForm } from '../internal';
 import UserNameField from '../../../../FormFields/Username/Username.component';
 
-export default withDefaultFieldWrapper()(UserNameField);
+export default withDefaultFieldWrapperForForm()(UserNameField);

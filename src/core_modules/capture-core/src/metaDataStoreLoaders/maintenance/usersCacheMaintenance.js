@@ -1,6 +1,6 @@
 // @flow
 import log from 'loglevel';
-import errorCreator from 'capture-core-utils/errorCreator';
+import { errorCreator } from 'capture-core-utils/errorCreator';
 import StorageController from 'capture-core-utils/storage/StorageController';
 import LocalStorageAdapter from 'capture-core-utils/storage/DomLocalStorageAdapter';
 import { getMainStorageController, getUserStorageController } from '../../storageControllers';

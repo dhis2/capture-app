@@ -7,13 +7,16 @@ import DataEntry from '../../../../components/DataEntry/DataEntry.container';
 import withSaveHandler from '../../../../components/DataEntry/withSaveHandler';
 import withCancelButton from '../../../../components/DataEntry/withCancelButton';
 import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
-import { placements } from '../../../../components/DataEntry/dataEntryField/dataEntryField.const';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import withMainButton from './withMainButton';
 import getNoteValidatorContainers from './fieldValidators/note.validatorContainersGetter';
 import DataEntryNotes from '../../../DataEntry/DataEntryNotes.container';
-
+import DataEntryRelationships from '../../../DataEntry/DataEntryRelationships.component';
+import {
+    placements,
+    withCleanUpHOC,
+} from '../../../DataEntry';
 import {
     withInternalChangeHandler,
     withLabel,
@@ -77,6 +80,7 @@ const dataEntrySectionNames = {
     BASICINFO: 'BASICINFO',
     STATUS: 'STATUS',
     COMMENTS: 'COMMENTS',
+    RELATIONSHIPS: 'RELATIONSHIPS',
 };
 
 const overrideMessagePropNames = {
@@ -306,7 +310,8 @@ const buildNotesSettingsFn = () => {
         componentProps: createComponentProps(props, {
             label: 'Comments',
             onAddNote: props.onAddNote,
-            id: props.id,
+            id: 'comments',
+            dataEntryId: props.id,
         }),
         propName: 'note',
         validatorContainers: getNoteValidatorContainers(),
@@ -319,6 +324,40 @@ const buildNotesSettingsFn = () => {
     return notesSettings;
 };
 
+const buildRelationshipsSettingsFn = () => {
+    const relationshipsComponent =
+        withDefaultFieldContainer()(
+            withDefaultShouldUpdateInterface()(
+                withFilterProps(defaultFilterProps)(DataEntryRelationships),
+            ),
+        );
+    const relationshipsSettings = (props: Object) => {
+        const hasRelationships =
+            props.stage &&
+            props.stage.relationshipTypes &&
+            props.stage.relationshipTypes.length > 0;
+
+        return hasRelationships ? {
+            component: relationshipsComponent,
+            componentProps: createComponentProps(props, {
+                id: 'relationship',
+                dataEntryId: props.id,
+                onAddRelationship: props.onAddRelationship,
+                fromEntity: 'EVENT',
+            }),
+            validatorContainers: [
+            ],
+            propName: 'relationship',
+            meta: {
+                placement: placements.BOTTOM,
+                section: dataEntrySectionNames.RELATIONSHIPS,
+            },
+        } : null;
+    };
+
+    return relationshipsSettings;
+};
+
 const saveHandlerConfig = {
     onIsCompleting: (props: Object) => props.completeDataEntryFieldValue,
     onFilterProps: (props: Object) => {
@@ -327,7 +366,14 @@ const saveHandlerConfig = {
     },
 };
 
-const CommentField = withDataEntryField(buildNotesSettingsFn())(DataEntry);
+const dataEntryFilterProps = (props: Object) => {
+    const { stage, ...passOnProps } = props;
+    return passOnProps;
+};
+
+const CleanUpHOC = withCleanUpHOC()(withFilterProps(dataEntryFilterProps)(DataEntry));
+const RelationshipField = withDataEntryFieldIfApplicable(buildRelationshipsSettingsFn())(CleanUpHOC);
+const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
 const FeedbackOutput = withFeedbackOutput()(ReportDateField);
@@ -380,6 +426,10 @@ const dataEntrySectionDefinitions = {
     [dataEntrySectionNames.COMMENTS]: {
         placement: placements.BOTTOM,
         name: i18n.t('Comments'),
+    },
+    [dataEntrySectionNames.RELATIONSHIPS]: {
+        placement: placements.BOTTOM,
+        name: i18n.t('Relationships'),
     },
 };
 class NewEventDataEntry extends Component<Props> {

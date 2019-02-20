@@ -1,8 +1,10 @@
 // @flow
+import uuid from 'uuid/v4';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
 import DataEntry from './DataEntry.component';
+import { startRunRulesPostUpdateField } from '../../../DataEntry';
 import {
     startAsyncUpdateFieldForNewEvent,
     startRunRulesOnUpdateForNewSingleEvent,
@@ -12,6 +14,7 @@ import {
     requestSaveNewEventAddAnother,
     setNewEventSaveTypes,
     addNewEventNote,
+    newEventOpenNewRelationship,
 } from './actions/dataEntry.actions';
 import {
     makeProgramNameSelector,
@@ -39,21 +42,31 @@ const makeMapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onUpdateField: (innerAction: ReduxAction<any, any>) => {
+        const { dataEntryId, itemId } = innerAction.payload;
+        const uid = uuid();
+
         dispatch(batchActions([
             innerAction,
-            startRunRulesOnUpdateForNewSingleEvent(innerAction.payload),
+            startRunRulesPostUpdateField(dataEntryId, itemId, uid),
+            startRunRulesOnUpdateForNewSingleEvent({ ...innerAction.payload, uid }),
         ], batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH));
     },
     onStartAsyncUpdateField: (
-        fieldId: string,
-        fieldLabel: string,
-        formBuilderId: string,
-        formId: string,
-        callback: Function,
+        innerAction: ReduxAction<any, any>,
         dataEntryId: string,
         itemId: string,
     ) => {
-        dispatch(startAsyncUpdateFieldForNewEvent(fieldId, fieldLabel, formBuilderId, formId, callback, dataEntryId, itemId));
+        const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) => {
+            const uid = uuid();
+            return batchActions([
+                successInnerAction,
+                startRunRulesPostUpdateField(dataEntryId, itemId, uid),
+                startRunRulesOnUpdateForNewSingleEvent({ ...successInnerAction.payload, dataEntryId, itemId, uid }),
+            ], batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH);
+        };
+        const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
+
+        dispatch(startAsyncUpdateFieldForNewEvent(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
     },
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);
@@ -71,6 +84,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onCancel: () => {
         window.scrollTo(0, 0);
         dispatch(cancelNewEventAndReturnToMainPage());
+    },
+    onAddRelationship: (eventId: string, dataEntryId: string) => {
+        dispatch(newEventOpenNewRelationship(eventId, dataEntryId));
     },
 });
 

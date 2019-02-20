@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
 import Tooltip from '@material-ui/core/Tooltip';
 import LinkButton from '../Buttons/LinkButton.component';
+import { TrackerProgram } from '../../metaData';
 
 // Find button to be included when find(tracked entity instance) is supported
 // import SearchIcon from '@material-ui/icons/Search';
@@ -56,9 +57,21 @@ class ActionButtons extends Component<Props> {
         alert('Not implemented yet.');
     }
 
+    getButtonText = () => {
+        if (this.props.selectedProgram) {
+            const typeName = this.props.selectedProgram instanceof TrackerProgram ?
+                this.props.selectedProgram.trackedEntityType.name :
+                'Event';
+
+            return i18n.t('New {{typeName}}', { typeName });
+        }
+        return i18n.t('New');
+    }
+
     render() {
         const { classes, showResetButton } = this.props;
         const program = this.props.selectedProgram ? programs.get(this.props.selectedProgram) : null;
+        
         const hasWriteAccess = program ?
             program.access.data.write : true;
 
@@ -84,7 +97,7 @@ class ActionButtons extends Component<Props> {
                             disabled={!hasWriteAccess}
                         >
                             <AddIcon className={classes.rightButton} />
-                            { i18n.t('New') }
+                            {this.getButtonText()}
                         </Button>
                     </div>
                 </Tooltip>

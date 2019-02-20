@@ -1,13 +1,22 @@
 // @flow
-import { formsValuesDesc, formsSectionsFieldsUIDesc } from 'capture-core/reducers/descriptions/form.reducerDescription';
+import {
+    formsValuesDesc,
+    formsSectionsFieldsUIDesc,
+    formsDesc,
+    formsFieldsMiscDesc,
+} from 'capture-core/reducers/descriptions/form.reducerDescription';
 import { eventsDesc, eventsValuesDesc } from 'capture-core/reducers/descriptions/events.reducerDescription';
 import {
     dataEntriesDesc,
     dataEntriesUIDesc,
     dataEntriesFieldsValueDesc,
     dataEntriesNotesDesc,
+    dataEntriesRelationshipsDesc,
     dataEntriesFieldsMetaDesc,
     dataEntriesFieldsUIDesc,
+    dataEntriesSearchGroupsResultsDesc,
+    dataEntriesSearchGroupsPreviousValuesDesc,
+    dataEntriesInProgressListDesc,
 } from 'capture-core/reducers/descriptions/dataEntry.reducerDescription';
 import { feedbackDesc } from 'capture-core/reducers/descriptions/feedback.reducerDescription';
 import {
@@ -19,6 +28,7 @@ import {
     rulesEffectsIndicatorsDesc,
     rulesEffectsGeneralWarningsDesc,
     rulesEffectsGeneralErrorsDesc,
+    rulesEffectsDisabledFieldsDesc,
 } from 'capture-core/reducers/descriptions/rulesEffects.reducerDescription';
 import {
     workingListsDesc,
@@ -33,12 +43,21 @@ import {
 import { mainPageDesc } from 'capture-core/reducers/descriptions/mainPage.reducerDescription';
 import { newEventPageDesc } from 'capture-core/reducers/descriptions/newEvent.reducerDescription';
 import { editEventPageDesc } from 'capture-core/reducers/descriptions/editEvent.reducerDescription';
-import { organisationUnitDesc, registeringUnitListDesc } from 'capture-core/reducers/descriptions/organisationUnits.reducerDescription';
+import { newEnrollmentPageDesc } from 'capture-core/reducers/descriptions/newEnrollment.reducerDescription';
+import { newRelationshipDesc } from 'capture-core/reducers/descriptions/newRelationship.reducerDescription';
+import {
+    organisationUnitDesc,
+    organisationUnitRootsDesc,
+    registeringUnitListDesc,
+} from 'capture-core/reducers/descriptions/organisationUnits.reducerDescription';
 import { networkStatusDesc } from 'capture-core/reducers/descriptions/networkStatus.reducerDescription';
 import {
     recentlyAddedEventsDesc,
     recentlyAddedEventsValuesDesc,
 } from 'capture-core/reducers/descriptions/recentlyAddedEvents.reducerDescription';
+import {
+    teiSearchDesc,
+} from 'capture-core/reducers/descriptions/teiSearch.reducerDescription';
 
 import { appReducerDesc } from './app.reducerDescription';
 import { currentSelectionsReducerDesc } from './currentSelections.reducerDescription';
@@ -48,14 +67,20 @@ export default [
     currentSelectionsReducerDesc,
     formsValuesDesc,
     formsSectionsFieldsUIDesc,
+    formsDesc,
+    formsFieldsMiscDesc,
     eventsDesc,
     eventsValuesDesc,
     dataEntriesDesc,
     dataEntriesUIDesc,
     dataEntriesFieldsValueDesc,
     dataEntriesNotesDesc,
+    dataEntriesRelationshipsDesc,
     dataEntriesFieldsMetaDesc,
     dataEntriesFieldsUIDesc,
+    dataEntriesSearchGroupsResultsDesc,
+    dataEntriesSearchGroupsPreviousValuesDesc,
+    dataEntriesInProgressListDesc,
     feedbackDesc,
     rulesEffectsHiddenFieldsDesc,
     rulesEffectsErrorMessagesDesc,
@@ -65,6 +90,7 @@ export default [
     rulesEffectsIndicatorsDesc,
     rulesEffectsGeneralWarningsDesc,
     rulesEffectsGeneralErrorsDesc,
+    rulesEffectsDisabledFieldsDesc,
     workingListsDesc,
     workingListsMetaDesc,
     workingListsUIDesc,
@@ -76,9 +102,13 @@ export default [
     mainPageDesc,
     newEventPageDesc,
     editEventPageDesc,
+    newEnrollmentPageDesc,
+    newRelationshipDesc,
     organisationUnitDesc,
+    organisationUnitRootsDesc,
     registeringUnitListDesc,
     networkStatusDesc,
     recentlyAddedEventsDesc,
     recentlyAddedEventsValuesDesc,
+    teiSearchDesc,
 ];

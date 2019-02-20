@@ -20,8 +20,8 @@ export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
             const { formClientValues, mainDataClientValues } = getNewEventClientValues(state, dataEntryKey, formFoundation);
 
             const serverData = getNewEventServerData(state, formFoundation, formClientValues, mainDataClientValues);
-
-            return startSaveNewEventAfterReturnedToMainPage(serverData, state.currentSelections);
+            const relationshipData = state.dataEntriesRelationships[dataEntryKey];
+            return startSaveNewEventAfterReturnedToMainPage(serverData, relationshipData, state.currentSelections);
         });
 
 export const saveNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>

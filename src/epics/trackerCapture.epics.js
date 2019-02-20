@@ -4,7 +4,6 @@ import {
     cancelNewEventEpic,
     cancelNewEventLocationChangeEpic,
     cancelNewEventIncompleteSelectionsLocationChangeEpic,
-    newEventAsyncUpdateFieldEpic,
     resetDataEntryForNewEventEpic,
     openNewEventInDataEntryEpic,
     resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
@@ -16,6 +15,10 @@ import {
     newEventPageSelectorUpdateURLEpic,
     newEventPageSelectorResetURLEpic,
     addNoteForNewSingleEventEpic,
+    openRelationshipForNewSingleEventEpic,
+    addRelationshipForNewSingleEventEpic,
+    saveNewEventRelationshipsIfExistsEpic,
+    saveNewEventRelationshipFinishedEpic,
 } from 'capture-core/components/Pages/NewEvent';
 import {
     mainSelectionsCompletedEpic,
@@ -32,9 +35,6 @@ import {
 import {
     openNewEventPageLocationChangeEpic,
 } from 'capture-core/components/Pages/NewEvent/epics/newEvent.epics';
-import {
-    editEventAsyncUpdateFieldEpic,
-} from 'capture-core/components/Pages/EditEvent/DataEntry/epics/editEventAsyncUpdateField.epics';
 import {
     retrieveWorkingListOnMainSelectionsCompletedEpic,
     getWorkingListOnCancelSaveEpic,
@@ -80,7 +80,6 @@ import {
     goBackToListContext,
 } from 'capture-core/components/QuickSelector/epics/setSelection.epics';
 import {
-    loadRegisteringUnitListRootsEpic,
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
 } from 'capture-core/components/QuickSelector';
@@ -99,8 +98,46 @@ import {
 import {
     includeFiltersWithValueAfterColumnSortingEpic,
 } from 'capture-core/components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.epics';
+import {
+    openRelationshipTeiSearchEpic,
+    requestRelationshipTeiSearchEpic,
+    TeiRelationshipNewOrEditSearchEpic,
+} from 'capture-core/components/Pages/NewRelationship/TeiRelationship/teiRelationship.epics';
+import {
+    teiSearchEpic,
+    teiSearchSetProgramEpic,
+    teiNewSearchEpic,
+    teiSearchChangePageEpic,
+} from 'capture-core/components/TeiSearch/epics/teiSearch.epics';
+import {
+    getOrgUnitDataForNewEnrollmentUrlUpdateEpic,
+    emptyOrgUnitForNewEnrollmentUrlUpdateEpic,
+    validationForNewEnrollmentUrlUpdateEpic,
+    openNewEnrollmentInDataEntryEpic,
+    runRulesOnNewEnrollmentFieldUpdateEpic,
+    saveNewEnrollmentEpic,
+} from 'capture-core/components/Pages/NewEnrollment';
+
+import {
+    loadSearchOrgUnitRootsEpic,
+    filterOrgUnitRootsEpic,
+    loadCaptureOrgUnitRootsEpic,
+} from 'capture-core/components/organisationUnits/organisationUnitRoots.epics';
+
+import {
+    asyncUpdateFieldEpic,
+} from 'capture-core/components/D2Form';
+import {
+    filterFormFieldOrgUnitsEpic,
+} from 'capture-core/components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.epics';
+
+import {
+    teiSearchFilterOrgUnitsEpic,
+} from 'capture-core/components/TeiSearch/SearchOrgUnitSelector/searchOrgUnitSelector.epics';
 
 import { loadStartupData, loadStartupDataCore } from '../init/entry.epics';
+
+import getDataEntryEpics from './getDataEntryEpics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -129,8 +166,6 @@ export default combineEpics(
     saveNewEventEpic,
     cancelNewEventLocationChangeEpic,
     cancelNewEventEpic,
-    newEventAsyncUpdateFieldEpic,
-    editEventAsyncUpdateFieldEpic,
     cancelNewEventIncompleteSelectionsLocationChangeEpic,
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,
@@ -159,7 +194,30 @@ export default combineEpics(
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,
     requestDeleteEventEpic,
-    loadRegisteringUnitListRootsEpic,
+    loadSearchOrgUnitRootsEpic,
+    loadCaptureOrgUnitRootsEpic,
+    filterOrgUnitRootsEpic,
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
+    openRelationshipTeiSearchEpic,
+    requestRelationshipTeiSearchEpic,
+    TeiRelationshipNewOrEditSearchEpic,
+    teiSearchEpic,
+    teiSearchChangePageEpic,
+    teiSearchSetProgramEpic,
+    teiNewSearchEpic,
+    openRelationshipForNewSingleEventEpic,
+    addRelationshipForNewSingleEventEpic,
+    saveNewEventRelationshipsIfExistsEpic,
+    saveNewEventRelationshipFinishedEpic,
+    getOrgUnitDataForNewEnrollmentUrlUpdateEpic,
+    emptyOrgUnitForNewEnrollmentUrlUpdateEpic,
+    validationForNewEnrollmentUrlUpdateEpic,
+    openNewEnrollmentInDataEntryEpic,
+    runRulesOnNewEnrollmentFieldUpdateEpic,
+    saveNewEnrollmentEpic,
+    filterFormFieldOrgUnitsEpic,
+    asyncUpdateFieldEpic,
+    teiSearchFilterOrgUnitsEpic,
+    ...getDataEntryEpics(),
 );

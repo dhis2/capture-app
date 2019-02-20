@@ -23,8 +23,7 @@ export default () =>
             }
 
             componentWillReceiveProps(nextProps: Props) {
-                if (nextProps.value !== this.props.value
-                    || this.props.value !== this.state.value) {
+                if (nextProps.value !== this.props.value) {
                     this.setState({
                         value: nextProps.value,
                     });

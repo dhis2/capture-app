@@ -36,7 +36,7 @@ export const addNoteForEditSingleEventEpic = (action$: InputObservable, store: R
             };
 
             const clientNote = { value: payload.note, storedBy: userName, storedDate: moment().toISOString(), clientId: uuid() };
-            const formNote = { ...clientNote, storedDate: convertListValue(elementTypes.DATETIME, clientNote.storedDate) };
+            const formNote = { ...clientNote, storedDate: convertListValue(clientNote.storedDate, elementTypes.DATETIME) };
             const saveContext = {
                 dataEntryId: payload.dataEntryId,
                 itemId: payload.itemId,

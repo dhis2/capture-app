@@ -1,10 +1,9 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/src/isFunction';
-
+import type { ProgramRule, ProgramRuleVariable } from 'capture-core-utils/RulesEngine/rulesEngine.types';
 import CategoryCombination from '../CategoryCombinations/CategoryCombination';
 import Icon from '../Icon/Icon';
-import type { ProgramRule, ProgramRuleVariable } from '../../RulesEngine/rulesEngine.types';
 import type { Access } from '../Access/Access';
 
 export default class Program {

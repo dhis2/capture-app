@@ -25,6 +25,7 @@ type RulesHiddenFields = {
 };
 
 type RulesCompulsoryFields = { [id: string]: boolean };
+type RulesDisabledFields = { [id: string]: boolean };
 
 type RulesMessage = {
     error?: ?string,
@@ -42,14 +43,16 @@ type Props = {
     rulesMessages: RulesMessages,
     rulesHiddenFields: RulesHiddenFields,
     rulesCompulsoryFields: RulesCompulsoryFields,
-    onUpdateField: (value: any, uiState: Object, elementId: string, formBuilderId: string, formId: string) => void,
+    rulesDisabledFields: RulesDisabledFields,
+    onUpdateField: (value: any, uiState: Object, elementId: string, formBuilderId: string, formId: string, updateCompletePromise: ?Promise<any>) => void,
     onUpdateFieldAsync: (fieldId: string, fieldLabel: string, formBuilderId: string, formId: string, callback: Function) => void,
     formId: string,
     formBuilderId: string,
     formHorizontal: boolean,
     fieldOptions?: ?Object,
     customForm: MetadataCustomForm,
-    validationStrategy: $Values<typeof validationStrategies>
+    validationStrategy: $Values<typeof validationStrategies>,
+    loadNr: number,
 };
 
 class D2SectionFields extends Component<Props> {
@@ -79,6 +82,7 @@ class D2SectionFields extends Component<Props> {
                 metaDataElement,
                 {
                     formHorizontal: this.props.formHorizontal,
+                    formId: this.props.formId,
                     ...fieldOptions,
                 },
                 !!customForm,
@@ -146,8 +150,14 @@ class D2SectionFields extends Component<Props> {
         return invalidFields;
     }
 
-    handleUpdateField(value: any, uiState: Object, elementId: string, formBuilderId: string) {
-        this.props.onUpdateField(value, uiState, elementId, formBuilderId, this.props.formId);
+    handleUpdateField(
+        value: any,
+        uiState: Object,
+        elementId: string,
+        formBuilderId: string,
+        updateCompletePromise: ?Promise<any>,
+    ) {
+        this.props.onUpdateField(value, uiState, elementId, formBuilderId, this.props.formId, updateCompletePromise);
     }
 
     handleUpdateFieldAsync = (fieldId: string, fieldLabel: string, formBuilderId: string, callback: Function) => {
@@ -191,6 +201,7 @@ class D2SectionFields extends Component<Props> {
                     this.props.rulesMessages[formField.id][messageStateKeys.WARNING_ON_COMPLETE],
                 rulesCompulsory: this.props.rulesCompulsoryFields[formField.id],
                 rulesCompulsoryError: this.rulesCompulsoryErrors[formField.id],
+                rulesDisabled: this.props.rulesDisabledFields[formField.id],
             },
         }));
     }
@@ -203,11 +214,13 @@ class D2SectionFields extends Component<Props> {
             formId,
             formBuilderId,
             rulesCompulsoryFields,
+            rulesDisabledFields,
             rulesHiddenFields,
             rulesMessages,
             onUpdateFieldAsync,
             fieldOptions,
             validationStrategy,
+            loadNr,
             ...passOnProps } = this.props;
 
         this.buildRulesCompulsoryErrors();
@@ -221,6 +234,7 @@ class D2SectionFields extends Component<Props> {
                 onUpdateField={this.handleUpdateField}
                 onUpdateFieldAsync={this.handleUpdateFieldAsync}
                 validateIfNoUIData
+                loadNr={loadNr}
                 {...passOnProps}
             />
         );

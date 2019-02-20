@@ -4,7 +4,8 @@ import { actionTypes as selectorActionTypes } from '../../components/Pages/MainP
 import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
     dataEntryUrlActionTypes as newEventdataEntryUrlActionTypes,
-    selectionsCompleteActionTypes as newEventSelectionsCompleteActionTypes,
+    dataEntryWrapperActionTypes as newEventDataEntryWrapperActionTypes,
+    newRelationshipActionTypes as newEventNewRelationshipActionTypes,
 } from '../../components/Pages/NewEvent';
 import {
     actionTypes as editEventPageActionTypes,
@@ -48,16 +49,19 @@ export const newEventPageDesc = createReducerDescription({
         const newState = { ...state };
         newState.dataEntryIsLoading = true;
         newState.selectionsError = null;
+        newState.showAddRelationship = false;
         return newState;
     },
     [editEventPageActionTypes.OPEN_NEW_EVENT]: (state) => {
         const newState = { ...state };
         newState.dataEntryIsLoading = true;
+        newState.showAddRelationship = false;
         return newState;
     },
     [mainPageSelectorActionTypes.OPEN_NEW_EVENT]: (state) => {
         const newState = { ...state };
         newState.dataEntryIsLoading = true;
+        newState.showAddRelationship = false;
         return newState;
     },
     [newEventDataEntryActionTypes.SELECTIONS_NOT_COMPLETE_OPENING_NEW_EVENT]: (state) => {
@@ -70,7 +74,20 @@ export const newEventPageDesc = createReducerDescription({
         newState.dataEntryIsLoading = false;
         return newState;
     },
-    [newEventSelectionsCompleteActionTypes.SET_NEW_EVENT_FORM_LAYOUT_DIRECTION]: (state, action) => {
+    [newEventDataEntryActionTypes.NEW_EVENT_OPEN_NEW_RELATIONSHIP]: state => ({
+        ...state,
+        showAddRelationship: true,
+    }),
+    [newEventNewRelationshipActionTypes.ADD_NEW_EVENT_RELATIONSHIP]: state => ({
+        ...state,
+        showAddRelationship: false,
+    }),
+    [newEventNewRelationshipActionTypes.NEW_EVENT_CANCEL_NEW_RELATIONSHIP]: (state) => {
+        const newState = { ...state };
+        newState.showAddRelationship = false;
+        return newState;
+    },
+    [newEventDataEntryWrapperActionTypes.SET_NEW_EVENT_FORM_LAYOUT_DIRECTION]: (state, action) => {
         const newState = { ...state };
         newState.formHorizontal = action.payload.formHorizontal;
         return newState;

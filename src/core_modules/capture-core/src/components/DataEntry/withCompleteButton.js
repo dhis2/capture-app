@@ -162,20 +162,15 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
             this.setState({ warningDialogOpen: false });
         }
 
-        getFoundation() {
-            const event = this.props.event;
-            return getStageFromEvent(event);
-        }
-
         getDialogWarningContents() {
             if (this.state.warningDialogOpen) {
-                const foundationContainer = this.getFoundation();
+                const stageContainer = getStageFromEvent(this.props.event);
 
-                if (!foundationContainer || !foundationContainer.stage) {
+                if (!stageContainer || !stageContainer.stage) {
                     return null;
                 }
 
-                const foundation = foundationContainer.stage;
+                const foundation = stageContainer.stage.stageForm;
                 const warnings = this.props.warnings;
 
                 return warnings ?

@@ -5,11 +5,11 @@ import { loadNewDataEntry } from '../../../../DataEntry/actions/dataEntryLoadNew
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import {
     getRulesActionsForEvent,
-} from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+} from '../../../../../rulesEngineActionsCreator';
 import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
 import EventProgram from '../../../../../metaData/Program/EventProgram';
 import getEventDateValidatorContainers from '../fieldValidators/eventDate.validatorContainersGetter';
-import { convertGeometryOut, convertStatusIn, convertStatusOut } from '../../../crossPage/converters';
+import { convertGeometryOut, convertStatusIn, convertStatusOut } from '../../../../DataEntries';
 import getNotesValidatorContainers from '../fieldValidators/note.validatorContainersGetter';
 
 const dataEntryId = 'singleEvent';
@@ -33,6 +33,11 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
         id: 'note',
         type: 'TEXT',
         validatorContainers: getNotesValidatorContainers(),
+        clientIgnore: true,
+    },
+    {
+        id: 'relationship',
+        type: 'TEXT',
         clientIgnore: true,
     },
     {

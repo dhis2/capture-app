@@ -9,6 +9,9 @@ export { default as SelectionBoxes } from './SelectionBoxes/SelectionBoxes.compo
 export { default as TextField } from './TextField/TextField.component';
 export { default as TrueOnlyField } from './TrueOnlyField/TrueOnlyField.component';
 export { default as DebounceField } from './DebounceField/DebounceField.component';
+export { default as TextRangeField } from './TextField/TextRangeField.component';
+export { default as DateRangeField } from './DateAndTimeFields/DateRangeField/DateRangeField.component';
+export { default as DateTimeRangeField } from './DateAndTimeFields/DateTimeRangeField/DateTimeRange.component';
 
 // Field constants
 export { default as orientations } from './constants/orientations.const';
@@ -36,6 +39,7 @@ export {
 
 // UI-Elements
 export { default as DividerHorizontal } from './Divider/DividerHorizontal.component';
+export { default as Button } from './Buttons/Button.component';
 
 // Icons
 export { default as MultiSelectionCheckedIcon } from './Icons/MultiSelectionCheckedIcon.component';

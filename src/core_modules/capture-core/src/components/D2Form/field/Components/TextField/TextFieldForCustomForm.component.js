@@ -9,8 +9,11 @@ import {
     withDisplayMessages,
     withInternalChangeHandler,
 } from '../../../../FormFields/New';
-import withRequiredFieldCalculation from '../../withRequiredFieldCalculation';
-import withCustomElementContainer from '../../withCustomElementContainer';
+import {
+    withRequiredFieldCalculation,
+    withDisabledFieldCalculation,
+    withCustomElementContainer,
+} from '../internal';
 import customFormStyles from './textFieldCustomForm.mod.css';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;
@@ -18,13 +21,15 @@ const getContainerClass = () => customFormStyles.defaultCustomContainer;
 export default withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
-            withRequiredFieldCalculation()(
-                withFocusSaver()(
-                    withCalculateMessages()(
-                        withDisplayMessages()(
-                            withCustomElementContainer(getContainerClass)(
-                                withInternalChangeHandler()(
-                                    TextField,
+            withDisabledFieldCalculation()(
+                withRequiredFieldCalculation()(
+                    withFocusSaver()(
+                        withCalculateMessages()(
+                            withDisplayMessages()(
+                                withCustomElementContainer(getContainerClass)(
+                                    withInternalChangeHandler()(
+                                        TextField,
+                                    ),
                                 ),
                             ),
                         ),

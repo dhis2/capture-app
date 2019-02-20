@@ -8,18 +8,23 @@ import {
     withCalculateMessages,
     withDisplayMessages,
 } from '../../../../FormFields/New';
-import withRequiredFieldCalculation from '../../withRequiredFieldCalculation';
-import withCustomElementContainer from '../../withCustomElementContainer';
+import {
+    withRequiredFieldCalculation,
+    withDisabledFieldCalculation,
+    withCustomElementContainer,
+} from '../internal';
 
 export default withGotoInterface()(
     withHideCompatibility()(
         withDefaultShouldUpdateInterface()(
-            withRequiredFieldCalculation()(
-                withCalculateMessages()(
-                    withFocusSaver()(
-                        withDisplayMessages()(
-                            withCustomElementContainer()(
-                                TrueOnlyField,
+            withDisabledFieldCalculation()(
+                withRequiredFieldCalculation()(
+                    withCalculateMessages()(
+                        withFocusSaver()(
+                            withDisplayMessages()(
+                                withCustomElementContainer()(
+                                    TrueOnlyField,
+                                ),
                             ),
                         ),
                     ),

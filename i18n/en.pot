@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2018-11-28T09:40:30.446Z\n"
-"PO-Revision-Date: 2018-11-28T09:40:30.446Z\n"
+"POT-Creation-Date: 2019-02-15T10:15:43.379Z\n"
+"PO-Revision-Date: 2019-02-15T10:15:43.379Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -15,6 +15,21 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
+msgstr ""
+
+msgid "This value is validating"
+msgstr ""
+
+msgid "Async field update failed"
+msgstr ""
+
+msgid "Area"
+msgstr ""
+
+msgid "Coordinate"
+msgstr ""
+
+msgid "A value is required"
 msgstr ""
 
 msgid "Cancel"
@@ -38,6 +53,12 @@ msgstr ""
 msgid "Write comment"
 msgstr ""
 
+msgid "This event"
+msgstr ""
+
+msgid "Add relationship"
+msgstr ""
+
 msgid "Errors"
 msgstr ""
 
@@ -50,6 +71,9 @@ msgstr ""
 msgid "Warnings"
 msgstr ""
 
+msgid "search group result could not be retrieved"
+msgstr ""
+
 msgid "Complete"
 msgstr ""
 
@@ -59,16 +83,13 @@ msgstr ""
 msgid "Abort"
 msgstr ""
 
-msgid "Your data is uploading. Please wait untill this message disappears"
-msgstr ""
-
-msgid "No write access"
+msgid "Some operations are still runnning. Please wait.."
 msgstr ""
 
 msgid "Save"
 msgstr ""
 
-msgid "Uploading data"
+msgid "Operations running"
 msgstr ""
 
 msgid "Sort"
@@ -179,9 +200,6 @@ msgstr ""
 msgid "Syncing"
 msgstr ""
 
-msgid "Area"
-msgstr ""
-
 msgid "Basic info"
 msgstr ""
 
@@ -191,13 +209,10 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-msgid "Field"
-msgstr ""
-
-msgid "could not be updated"
-msgstr ""
-
 msgid "Please add or cancel comment before saving the event"
+msgstr ""
+
+msgid "No write access"
 msgstr ""
 
 msgid "Show all events"
@@ -239,18 +254,10 @@ msgstr ""
 msgid "Selected program is invalid for registering unit"
 msgstr ""
 
-msgid "Saving to"
+msgid "Enrollment"
 msgstr ""
 
-msgid "in"
-msgstr ""
-
-msgid ""
-"This is not an event program or the metadata is corrupt. See log for "
-"details."
-msgstr ""
-
-msgid "A value is required"
+msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
 msgid "Save and add another"
@@ -262,19 +269,66 @@ msgstr ""
 msgid "Finish"
 msgstr ""
 
-msgid "events added"
-msgstr ""
-
-msgid "No events added"
-msgstr ""
-
 msgid "Switch to form view"
 msgstr ""
 
 msgid "Switch to row view"
 msgstr ""
 
+msgid "New {{TET}}"
+msgstr ""
+
+msgid "Working Lists"
+msgstr ""
+
+msgid ""
+"Program with programid {{programId}} isn't a tracker program. Enrollments "
+"can only be done in tracker programs."
+msgstr ""
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr ""
+
+msgid "Relationships"
+msgstr ""
+
+msgid "Saving to"
+msgstr ""
+
+msgid "in"
+msgstr ""
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+
+msgid ""
+"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
+"exists"
+msgstr ""
+
 msgid "New event"
+msgstr ""
+
+msgid "New event relationship"
+msgstr ""
+
+msgid "Discard relationship?"
+msgstr ""
+
+msgid ""
+"Leaving this page will discard any selections you made for a new "
+"relationship"
+msgstr ""
+
+msgid "Back to relationship"
+msgstr ""
+
+msgid "events added"
+msgstr ""
+
+msgid "No events added"
 msgstr ""
 
 msgid "Select a registering unit and program above to get started"
@@ -289,10 +343,37 @@ msgstr ""
 msgid "Select a category option to start reporting"
 msgstr ""
 
-msgid "Start again"
+msgid "Search results"
+msgstr ""
+
+msgid "Link"
+msgstr ""
+
+msgid "No {{trackedEntityTypeName}} found."
+msgstr ""
+
+msgid "New search"
+msgstr ""
+
+msgid "Edit search"
+msgstr ""
+
+msgid "Link to an existing {{trackedEntityType}}"
+msgstr ""
+
+msgid "Create new {{trackedEntityType}}"
+msgstr ""
+
+msgid "Register"
+msgstr ""
+
+msgid "New {{typeName}}"
 msgstr ""
 
 msgid "New"
+msgstr ""
+
+msgid "Start again"
 msgstr ""
 
 msgid "Find"
@@ -328,7 +409,16 @@ msgstr ""
 msgid "No programs available."
 msgstr ""
 
+msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgstr ""
+
+msgid "Search attributes"
+msgstr ""
+
 msgid "An error has occured. See log for details"
+msgstr ""
+
+msgid "Profile"
 msgstr ""
 
 msgid "Error saving event"
@@ -338,6 +428,30 @@ msgid "Could not save event. See log for details"
 msgstr ""
 
 msgid "Set coordinate"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Time"
+msgstr ""
+
+msgid "From date"
+msgstr ""
+
+msgid "From time"
+msgstr ""
+
+msgid "To date"
+msgstr ""
+
+msgid "To time"
+msgstr ""
+
+msgid "error encountered during field validation"
+msgstr ""
+
+msgid "error"
 msgstr ""
 
 msgid "Delete polygon"

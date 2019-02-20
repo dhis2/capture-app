@@ -1,5 +1,5 @@
 // @flow
-import getStageFromProgramIdForEventProgram from '../../../../../metaData/helpers/getStageFromProgramIdForEventProgram';
+import { getStageFromProgramIdForEventProgram } from '../../../../../metaData';
 import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
 import mainPropertyNames from '../../../../../events/mainPropertyNames.const';
 
@@ -33,11 +33,11 @@ const getColumnsConfiguration = (programId: string): Promise<Array<ColumnConfig>
         }
 
         // $FlowSuppress
-        const stage: Stage = stageContainer.stage;
+        const stageForm: RenderFoundation = stageContainer.stage.stageForm;
         resolve(
             [
                 getDefaultMainConfig(),
-                ...getMetaDataConfig(stage),
+                ...getMetaDataConfig(stageForm),
             ],
         );
     })

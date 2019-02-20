@@ -9,9 +9,9 @@ import CurrentLocaleData from 'capture-core/utils/localeData/CurrentLocaleData';
 import { setD2 } from 'capture-core/d2/d2Instance';
 import i18n from '@dhis2/d2-i18n';
 
+import { loadMetaData } from 'capture-core/metaDataStoreLoaders';
+import { buildMetaData } from 'capture-core/metaDataMemoryStoreBuilders';
 import { initControllersAsync } from 'capture-core/storageControllers';
-import loadMetaData from 'capture-core/metaDataStoreLoaders/baseLoader/metaDataLoader';
-import buildMetaData from 'capture-core/metaDataMemoryStoreBuilders/baseBuilder/metaDataBuilder';
 
 import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocaleData';
 

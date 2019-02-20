@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Validators } from '@dhis2/d2-ui-forms';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
+import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 import AgeNumberInput from '../internal/AgeInput/AgeNumberInput.component';
 import AgeDateInput from '../internal/AgeInput/AgeDateInput.component';
@@ -44,6 +45,7 @@ type Props = {
     dateCalendarLocale: Object,
     dateCalendarOnConvertValueIn: (inputValue: ?string) => Date,
     dateCalendarOnConvertValueOut: (value: string) => string,
+    disabled?: ?boolean,
 };
 function getCalculatedValues(dateValue: ?string, parseDate: DateParser, moment: any): AgeValues {
     const parseData = parseDate(dateValue);
@@ -211,7 +213,7 @@ class D2AgeField extends Component<Props> {
     }
 
     render() {
-        const { value, orientation } = this.props;
+        const { value, orientation, disabled } = this.props;
         const currentValues = value || {};
         const isVertical = orientation === orientations.VERTICAL;
         const containerClass = isVertical ? defaultClasses.containerVertical : defaultClasses.containerHorizontal;
@@ -223,9 +225,12 @@ class D2AgeField extends Component<Props> {
                 {this.renderNumberInput(currentValues, 'months', 'Months')}
                 {this.renderNumberInput(currentValues, 'days', 'Days')}
                 <div className={ageClearClass}>
-                    <ClearIcon
-                        onClick={this.onClear}
-                    />
+                    <IconButton style={{ width: 42, height: 42 }} disabled={disabled}>
+                        <ClearIcon
+                            onClick={this.onClear}
+                        />
+                    </IconButton>
+
                 </div>
             </div>
         );

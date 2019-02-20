@@ -1,7 +1,7 @@
 /* eslint-disable complexity */
 import isArray from 'd2-utilizr/lib/isArray';
 import log from 'loglevel';
-import errorCreator from '../errorCreator';
+import { errorCreator } from '../errorCreator';
 import MemoryAdapter from './MemoryAdapter';
 
 export default class StorageController {

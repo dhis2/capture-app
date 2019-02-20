@@ -27,7 +27,7 @@ export default function convertDataEntryValuesToClientValues(
             }
             if (type) {
                 const value = dataEntryValues[key];
-                accEventValues[key] = convertValue(type, value);
+                accEventValues[key] = convertValue(value, type);
             } else if (onConvertOut) {
                 const clientId = dataEntryValuesMeta[key] && dataEntryValuesMeta[key].clientId;
                 const dataEntryValue = dataEntryValues[key];

@@ -1,10 +1,12 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-
-import { actionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
-import { actionTypes as loadNewActionTypes } from '../../components/DataEntry/actions/dataEntryLoadNew.actions';
-import { actionTypes as loadEditActionTypes } from '../../components/DataEntry/actions/dataEntryLoadEdit.actions';
-
+import { actionTypes as formAsyncActionTypes } from '../../components/D2Form/asyncHandlerHOC/actions';
+import {
+    mainActionTypes as actionTypes,
+    searchGroupActionTypes,
+    loadNewActionTypes,
+    loadEditActionTypes,
+} from '../../components/DataEntry';
 import getDataEntryKey from '../../components/DataEntry/common/getDataEntryKey';
 
 export const dataEntriesDesc = createReducerDescription({
@@ -246,3 +248,246 @@ export const dataEntriesFieldsUIDesc = createReducerDescription({
         return newState;
     },
 }, 'dataEntriesFieldsUI');
+
+export const dataEntriesRelationshipsDesc = createReducerDescription({
+    [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {
+        const newState = { ...state };
+        newState[action.payload.key] = [];
+        return newState;
+    },
+    [loadEditActionTypes.LOAD_EDIT_DATA_ENTRY]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const key = payload.key;
+        newState[key] = payload.dataEntryRelationships ? [...payload.dataEntryRelationships] : [];
+        return newState;
+    },
+    [actionTypes.ADD_RELATIONSHIP]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+
+        const key = getDataEntryKey(payload.dataEntryId, payload.itemId);
+        newState[key] = state[key] ? [...state[key], { ...payload.relationship }] : [{ ...payload.relationship }];
+        return newState;
+    },
+    [actionTypes.REMOVE_RELATIONSHIP]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+
+        const key = getDataEntryKey(payload.dataEntryId, payload.itemId);
+
+        newState[key] = state[key].filter(r => r.clientId !== payload.relationshipClientId);
+        return newState;
+    },
+}, 'dataEntriesRelationships', {});
+
+export const dataEntriesSearchGroupsResultsDesc = createReducerDescription({
+    [searchGroupActionTypes.SEARCH_GROUP_RESULT_COUNT_RETRIVED]: (state, action) => {
+        const { count, dataEntryKey, groupId } = action.payload;
+        return {
+            ...state,
+            [dataEntryKey]: {
+                ...state[dataEntryKey],
+                [groupId]: {
+                    ...(state[dataEntryKey] && state[dataEntryKey][groupId]),
+                    count,
+                },
+            },
+        };
+    },
+    [searchGroupActionTypes.SEARCH_GROUP_RESULT_COUNT_RETRIEVAL_FAILED]: (state, action) => {
+        const { error: countError, dataEntryKey, groupId } = action.payload;
+        return {
+            ...state,
+            [dataEntryKey]: {
+                ...state[dataEntryKey],
+                [groupId]: {
+                    ...(state[dataEntryKey] && state[dataEntryKey][groupId]),
+                    countError,
+                },
+            },
+        };
+    },
+    [searchGroupActionTypes.ABORT_SEARCH_GROUP_COUNT_SEARCH]: (state, action) => {
+        const { dataEntryKey, groupId } = action.payload;
+        return {
+            ...state,
+            [dataEntryKey]: {
+                ...state[dataEntryKey],
+                [groupId]: null,
+            },
+        };
+    },
+}, 'dataEntriesSearchGroupsResults');
+
+export const dataEntriesSearchGroupsPreviousValuesDesc = createReducerDescription({
+    [searchGroupActionTypes.START_SEARCH_GROUP_COUNT_SEARCH]: (state, action) => {
+        const { dataEntryKey, searchGroupId, values } = action.payload;
+        return {
+            ...state,
+            [dataEntryKey]: {
+                ...state[dataEntryKey],
+                [searchGroupId]: {
+                    ...values,
+                },
+            },
+        };
+    },
+    [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {
+        const { key } = action.payload;
+        return {
+            ...state,
+            [key]: null,
+        };
+    },
+    [loadEditActionTypes.LOAD_EDIT_DATA_ENTRY]: (state, action) => {
+        const { key } = action.payload;
+        return {
+            ...state,
+            [key]: null,
+        };
+    },
+}, 'dataEntriesSearchGroupsPreviousValues');
+
+export const dataEntriesInProgressListDesc = createReducerDescription({
+    [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {
+        const { key } = action.payload;
+        return {
+            ...state,
+            [key]: null,
+        };
+    },
+    [loadEditActionTypes.LOAD_EDIT_DATA_ENTRY]: (state, action) => {
+        const { key } = action.payload;
+        return {
+            ...state,
+            [key]: null,
+        };
+    },
+    [searchGroupActionTypes.FILTER_SEARCH_GROUP_FOR_COUNT_TO_BE_EXECUTED]: (state, action) => {
+        const { uid, dataEntryKey } = action.payload;
+        return {
+            ...state,
+            [dataEntryKey]: [
+                ...(state[dataEntryKey] || []),
+                uid,
+            ],
+        };
+    },
+    [searchGroupActionTypes.SEARCH_GROUP_RESULT_COUNT_RETRIVED]: (state, action) => {
+        const { uids, dataEntryKey } = action.payload;
+        const updatedList = [
+            ...(state[dataEntryKey] || []).filter(entry => !uids.includes(entry)),
+        ];
+
+        return {
+            ...state,
+            [dataEntryKey]: updatedList,
+        };
+    },
+    [searchGroupActionTypes.SEARCH_GROUP_RESULT_COUNT_RETRIEVAL_FAILED]: (state, action) => {
+        const { uids, dataEntryKey } = action.payload;
+        const updatedList = [
+            ...(state[dataEntryKey] || []).filter(entry => !uids.includes(entry)),
+        ];
+
+        return {
+            ...state,
+            [dataEntryKey]: updatedList,
+        };
+    },
+    [searchGroupActionTypes.ABORT_SEARCH_GROUP_COUNT_SEARCH]: (state, action) => {
+        const { uids, dataEntryKey } = action.payload;
+        const updatedList = [
+            ...(state[dataEntryKey] || []).filter(entry => !uids.includes(entry)),
+        ];
+
+        return {
+            ...state,
+            [dataEntryKey]: updatedList,
+        };
+    },
+    [searchGroupActionTypes.CANCEL_SEARCH_GROUP_COUNT_SEARCH]: (state, action) => {
+        const { uid, dataEntryKey } = action.payload;
+        const updatedList = [
+            ...(state[dataEntryKey] || []).filter(entry => uid !== entry),
+        ];
+
+        return {
+            ...state,
+            [dataEntryKey]: updatedList,
+        };
+    },
+    [formAsyncActionTypes.FIELD_IS_VALIDATING]: (state, action) => {
+        const { formId, validatingUid } = action.payload;
+        const listWithPotentialDupes = [...(state[formId] || []), validatingUid];
+        const listSet = new Set(listWithPotentialDupes);
+
+        return {
+            ...state,
+            [formId]: Array.from(listSet),
+        };
+    },
+    [formAsyncActionTypes.FIELDS_VALIDATED]: (state, action) => {
+        const { formId, validatingUids } = action.payload;
+        const updatedList = (state[formId] || []).filter(item => !validatingUids.includes(item));
+        return {
+            ...state,
+            [formId]: updatedList,
+        };
+    },
+    [actionTypes.UPDATE_FORM_FIELD]: (state, action) => {
+        const { formId, updateCompleteUid } = action.payload;
+        const updatedList = (state[formId] || []).filter(item => item !== updateCompleteUid);
+        return {
+            ...state,
+            [formId]: updatedList,
+        };
+    },
+    [formAsyncActionTypes.START_UPDATE_FIELD_ASYNC]: (state, action) => {
+        const { formId, uid } = action.payload;
+        return {
+            ...state,
+            [formId]: [
+                ...(state[formId] || []),
+                uid,
+            ],
+        };
+    },
+    [formAsyncActionTypes.UPDATE_FIELD_FROM_ASYNC]: (state, action) => {
+        const { formId, uid } = action.payload;
+        const updatedList = (state[formId] || []).filter(item => item !== uid);
+        return {
+            ...state,
+            [formId]: updatedList,
+        };
+    },
+    [formAsyncActionTypes.ASYNC_UPDATE_FIELD_FAILED]: (state, action) => {
+        const { formId, uid } = action.payload;
+        const updatedList = (state[formId] || []).filter(item => item !== uid);
+        return {
+            ...state,
+            [formId]: updatedList,
+        };
+    },
+    [actionTypes.START_RUN_RULES_POST_UPDATE_FIELD]: (state, action) => {
+        const { dataEntryId, itemId, uid } = action.payload;
+        const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
+        return {
+            ...state,
+            [dataEntryKey]: [
+                ...(state[dataEntryKey] || []),
+                uid,
+            ],
+        };
+    },
+    [actionTypes.RULES_EXECUTED_POST_UPDATE_FIELD]: (state, action) => {
+        const { dataEntryId, itemId, uid } = action.payload;
+        const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
+        const updatedList = (state[dataEntryKey] || []).filter(item => item !== uid);
+        return {
+            ...state,
+            [dataEntryKey]: updatedList,
+        };
+    },
+}, 'dataEntriesInProgressList');

@@ -21,8 +21,12 @@ import {
     isValidOrgUnit,
     isValidCoordinate,
     isValidUsername,
+    getNumberRangeValidator,
+    getDateRangeValidator,
+    getDateTimeRangeValidator,
+    getTimeRangeValidator,
 } from '../../../utils/validators/form';
-import MetaDataElement from '../../../metaData/DataElement/DataElement';
+import { DataElement as MetaDataElement } from '../../../metaData';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 
 type Validator = (value: any) => boolean;
@@ -56,36 +60,52 @@ const errorMessages = {
     ORGANISATION_UNIT: 'Please provide a valid organisation unit',
     COORDINATE: 'Please provide valid coordinates',
     USERNAME: 'Please provide a valid username',
+    UNIQUENESS: 'This value already exists',
+    RANGE: '"From" cannot be greater than "To"',
 };
 
-const isCompulsoryRequirementMet = Validators.wordToValidatorMap.get(wordValidatorKeys.COMPULSORY);
+const validationMessages = {
+    UNIQUENESS: 'This value is validating uniqueness',
+};
 
-const isCompulsoryRequirementMetWrapper = (value: any) => {
+const compulsoryValidator = Validators.wordToValidatorMap.get(wordValidatorKeys.COMPULSORY);
+
+const compulsoryValidatorWrapper = (value: any) => {
     const testValue = (value && isString(value)) ? value.trim() : value;
-    return isCompulsoryRequirementMet(testValue);
+    return compulsoryValidator(testValue);
 };
+
+const validatorForInteger = () => ({
+    validator: isValidInteger,
+    message: i18n.t(errorMessages.INTEGER),
+});
+
+const validatorForPositiveInteger = () => ({
+    validator: isValidPositiveInteger,
+    message: i18n.t(errorMessages.POSITIVE_INTEGER),
+});
+
+const validatorForZeroOrPositiveInteger = () => ({
+    validator: isValidZeroOrPositiveInteger,
+    message: i18n.t(errorMessages.ZERO_OR_POSITIVE_INTEGER),
+});
+
+const validatorForNegativeInteger = () => ({
+    validator: isValidNegativeInteger,
+    message: i18n.t(errorMessages.NEGATIVE_INTEGER),
+});
+
+const validatorForNumber = () => ({
+    validator: isValidNumber,
+    message: i18n.t(errorMessages.NUMBER),
+});
 
 const validatorsForTypes = {
-    [elementTypes.NUMBER]: () => ({
-        validator: isValidNumber,
-        message: i18n.t(errorMessages.NUMBER),
-    }),
-    [elementTypes.INTEGER]: () => ({
-        validator: isValidInteger,
-        message: i18n.t(errorMessages.INTEGER),
-    }),
-    [elementTypes.INTEGER_POSITIVE]: () => ({
-        validator: isValidPositiveInteger,
-        message: i18n.t(errorMessages.POSITIVE_INTEGER),
-    }),
-    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: () => ({
-        validator: isValidZeroOrPositiveInteger,
-        message: i18n.t(errorMessages.ZERO_OR_POSITIVE_INTEGER),
-    }),
-    [elementTypes.INTEGER_NEGATIVE]: () => ({
-        validator: isValidNegativeInteger,
-        message: i18n.t(errorMessages.NEGATIVE_INTEGER),
-    }),
+    [elementTypes.NUMBER]: validatorForNumber,
+    [elementTypes.INTEGER]: validatorForInteger,
+    [elementTypes.INTEGER_POSITIVE]: validatorForPositiveInteger,
+    [elementTypes.INTEGER_ZERO_OR_POSITIVE]: validatorForZeroOrPositiveInteger,
+    [elementTypes.INTEGER_NEGATIVE]: validatorForNegativeInteger,
     [elementTypes.TIME]: () => ({
         validator: isValidTime,
         message: i18n.t(errorMessages.TIME),
@@ -130,6 +150,39 @@ const validatorsForTypes = {
         validator: isValidUsername,
         message: i18n.t(errorMessages.USERNAME),
     }),
+    [elementTypes.DATE_RANGE]: () => ({
+        validator: getDateRangeValidator(errorMessages.DATE),
+        message: i18n.t(errorMessages.RANGE),
+    }),
+    [elementTypes.DATETIME_RANGE]: () => ({
+        validator: getDateTimeRangeValidator(errorMessages.DATETIME),
+        message: i18n.t(errorMessages.RANGE),
+    }),
+    [elementTypes.TIME_RANGE]: () => ({
+        validator: getTimeRangeValidator(errorMessages.TIME),
+        message: i18n.t(errorMessages.RANGE),
+    }),
+    [elementTypes.NUMBER_RANGE]: () => ({
+        validator: getNumberRangeValidator(validatorForNumber()),
+        message: i18n.t(errorMessages.RANGE),
+    }),
+    [elementTypes.INTEGER_RANGE]: () => ({
+        validator: getNumberRangeValidator(validatorForInteger()),
+        message: i18n.t(errorMessages.RANGE),
+    }),
+    [elementTypes.INTEGER_POSITIVE_RANGE]: () => ({
+        validator: getNumberRangeValidator(validatorForPositiveInteger()),
+        message: i18n.t(errorMessages.RANGE),
+    }),
+    [elementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: () => ({
+        validator: getNumberRangeValidator(validatorForZeroOrPositiveInteger()),
+        message: i18n.t(errorMessages.RANGE),
+    }),
+
+    [elementTypes.INTEGER_NEGATIVE_RANGE]: () => ({
+        validator: getNumberRangeValidator(validatorForNegativeInteger()),
+        message: i18n.t(errorMessages.RANGE),
+    }),
 };
 
 function buildTypeValidators(metaData: MetaDataElement): Array<ValidatorContainer> {
@@ -170,12 +223,27 @@ function buildTypeValidators(metaData: MetaDataElement): Array<ValidatorContaine
 function buildCompulsoryValidator(metaData: MetaDataElement): Array<ValidatorContainer> {
     return metaData.compulsory ? [
         {
-            validator: isCompulsoryRequirementMetWrapper,
+            validator: compulsoryValidatorWrapper,
             message:
                 i18n.t(errorMessages.COMPULSORY),
         },
     ] :
         [];
+}
+
+function buildUniqueValidator(metaData: MetaDataElement) {
+    return metaData.unique ? [
+        {
+            validator: (value: any, contextProps: ?Object) => {
+                if (!value && value !== 0 && value !== false) {
+                    return true;
+                }
+                return metaData.unique.onValidate(value, contextProps);
+            },
+            message: i18n.t(errorMessages.UNIQUENESS),
+            validatingMessage: i18n.t(validationMessages.UNIQUENESS),
+        },
+    ] : [];
 }
 
 function compose(validatorBuilders: Array<ValidatorBuilder>, metaData: MetaDataElement) {
@@ -186,6 +254,6 @@ function compose(validatorBuilders: Array<ValidatorBuilder>, metaData: MetaDataE
 }
 
 export default function getValidators(metaData: MetaDataElement) {
-    const builders = [buildCompulsoryValidator, buildTypeValidators];
+    const builders = [buildCompulsoryValidator, buildTypeValidators, buildUniqueValidator];
     return compose(builders, metaData);
 }

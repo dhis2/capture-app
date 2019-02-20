@@ -12,6 +12,10 @@ export { default as DateTimeField } from './Fields/DateAndTimeFields/DateTimeFie
 export { default as CoordinateField } from './Fields/CoordinateField/CoordinateField.component';
 export { default as PolygonField } from './Fields/PolygonField/PolygonField.component';
 export { default as OrgUnitField } from './Fields/OrgUnitField/OrgUnitField.component';
+export { default as SingleOrgUnitSelectField } from './Fields/OrgUnitField/SingleOrgUnitSelectField.component';
+export { default as TextRangeField } from './Fields/TextField/TextRangeField.component';
+export { default as DateRangeField } from './Fields/DateAndTimeFields/DateRangeField/DateRangeField.component';
+export { default as DateTimeRangeField } from './Fields/DateAndTimeFields/DateTimeRangeField/DateTimeRangeField.component';
 
 // Generic HOCs
 export { default as withCalculateMessages } from './HOC/messages/withCalculateMessages';
