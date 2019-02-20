@@ -17,7 +17,7 @@ export const newRelationshipDesc = createReducerDescription({
     [newRelationshipActionTypes.SELECT_FIND_MODE]: (state, action) => ({
         ...state,
         findMode: action.payload.findMode,
-        loading: true,
+        // loading: true,
         searching: false,
     }),
     [newRelationshipActionTypes.SET_SEARCHING]: state => ({
@@ -30,7 +30,7 @@ export const newRelationshipDesc = createReducerDescription({
     }),
     [registerTeiActionTypes.INITIALIZE_REGISTER_TEI]: (state, action) => ({
         ...state,
-        loading: false,
+        // loading: false,
     }),
 }, 'newRelationship', {});
 
