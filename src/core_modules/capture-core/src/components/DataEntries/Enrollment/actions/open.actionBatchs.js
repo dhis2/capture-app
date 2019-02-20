@@ -42,9 +42,11 @@ export const openDataEntryForNewEnrollmentBatch =
         orgUnit: Object,
         dataEntryId: string,
         extraActions: Array<ReduxAction<any, any>> = [],
+        extraDataEntryProps: Array<Object>,
+        defaultValues?: ?Object,
     ) => {
         const formId = getDataEntryKey(dataEntryId, itemId);
-        const dataEntryActions = loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude);
+        const dataEntryActions = loadNewDataEntry(dataEntryId, itemId, [...dataEntryPropsToInclude, ...extraDataEntryProps], defaultValues);
 
         let rulesActions;
         if (program && foundation) {

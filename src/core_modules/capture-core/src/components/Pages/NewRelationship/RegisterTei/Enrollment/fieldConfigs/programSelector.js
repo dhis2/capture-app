@@ -2,7 +2,7 @@
 import i18n from '@dhis2/d2-i18n';
 import {
     placements,
-} from '../../../../DataEntry';
+} from '../../../../../DataEntry';
 import {
     VirtualizedSelectField,
     withSelectTranslations,
@@ -10,36 +10,29 @@ import {
     withFocusSaver,
     withDefaultFieldContainer,
     withLabel,
-} from '../../../../FormFields/New';
+} from '../../../../../FormFields/New';
 import { programCollection } from '../../../../../../metaDataMemoryStores';
 
 import labelTypeClasses from './fieldLabels.mod.css';
-import dataEntrySectionKeys from '../../../../DataEntries/Enrollment/constants/sectionKeys.const';
-import { TrackerProgram } from '../../../../../../metaData';
+import dataEntrySectionKeys from '../../../../../DataEntries/Enrollment/constants/sectionKeys.const';
+import { TrackerProgram, Program } from '../../../../../../metaData';
 
-const programsArray = Array.from(programCollection.values());
-
-getOptionsFromPrograms(programs: Array<Program>) {
-    return programs
+const getProgramSelectorSettings = () => {
+    const getOptionsFromPrograms = (programs: Array<Program>) => programs
         .map(program => ({
             label: program.name,
             value: program.id,
             // iconLeft: this.getProgramIcon(program),
         }));
-}
 
-const getOptions = (selectedOrgUnitId: ?string) => {
-    programOptions = this.getOptionsFromPrograms(
-        programsArray
+    const getOptions = (selectedOrgUnitId: ?string) => getOptionsFromPrograms(
+        Array.from(programCollection.values())
             .filter(program =>
                 program instanceof TrackerProgram &&
-                (!selectedOrgUnitId || program.organisationUnits[selectedOrgUnitId]) && 
+                (!selectedOrgUnitId || program.organisationUnits[selectedOrgUnitId]) &&
                 program.access.data.write),
     );
-};
 
-
-const getProgramSelectorSettings = () => {
     const programSelectorComponent =
         withDefaultShouldUpdateInterface()(
             withFocusSaver()(
@@ -55,7 +48,7 @@ const getProgramSelectorSettings = () => {
                 ),
             ),
         );
-    /*
+
     const baseComponentStyles = {
         labelContainerStyle: {
             flexBasis: 200,
@@ -64,16 +57,15 @@ const getProgramSelectorSettings = () => {
             flexBasis: 150,
         },
     };
-    */
 
     const programSelectorSettings = (props: Object) => ({
         component: programSelectorComponent,
         componentProps: {
             ...props,
-            width: '100%',
+            styles: baseComponentStyles,
             label: i18n.t('Program'),
             required: false,
-            options: getOptions(),
+            options: getOptions(props.orgUnitId),
         },
         propName: 'program',
         meta: {
@@ -84,3 +76,5 @@ const getProgramSelectorSettings = () => {
 
     return programSelectorSettings;
 };
+
+export default getProgramSelectorSettings;

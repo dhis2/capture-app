@@ -2,22 +2,14 @@
 import {
     withSaveHandler,
     withDataEntryField,
-    withCancelButton,
 } from '../../../../DataEntry';
 import {
     EnrollmentDataEntry,
 } from '../../../../DataEntries';
 import withMainButton from './withMainButton';
-/*
-const getCancelOptions = () => ({
-    color: 'primary',
-});
-const CancelButtonHOC = withCancelButton(getCancelOptions)(EnrollmentDataEntry);
-*/
+import getProgramSelectorConfig from './fieldConfigs/programSelector';
 
-
-
-const programSelectorHOC = withDataEntryField()(EnrollmentDataEntry);
+const programSelectorHOC = withDataEntryField(getProgramSelectorConfig())(EnrollmentDataEntry);
 const SaveHandlerHOC =
     withSaveHandler(
         { onGetFormFoundation: (props: Object) => props.enrollmentMetadata.enrollmentForm })(

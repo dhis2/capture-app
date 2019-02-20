@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from 'capture-ui';
-import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
+// import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 // import getDataEntryHasChanges from '../getNewEventDataEntryHasChanges';
 
 type Props = {
@@ -49,8 +49,8 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
     };
 
 const mapStateToProps = (state: ReduxState, props: { id: string }) => {
-    const itemId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].itemId;
-    const key = getDataEntryKey(props.id, itemId);
+    // const itemId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].itemId;
+    // const key = getDataEntryKey(props.id, itemId);
     // const dataEntryHasChanges = getDataEntryHasChanges(state);
     return {
         dataEntryHasChanges: false, // dataEntryHasChanges,

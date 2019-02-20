@@ -6,7 +6,7 @@ import {
 } from '../newRelationship.actions';
 import {
     openDataEntryForNewEnrollmentBatch,
-    runRulesOnUpdateFieldBatch,
+    // runRulesOnUpdateFieldBatch,
 } from '../../../DataEntries';
 import {
     initializeRegisterTei,
@@ -19,14 +19,22 @@ const errorMessages = {
     NOT_TRACKER_PROGRAM: 'Program is not a tracker program',
 };
 
+const dataEntryPropsForRegisterTei = [
+    {
+        id: 'program',
+        type: 'TEXT',
+        validatorContainers: [],
+    },
+];
+
 export const openRegisterTeiForRelationshipEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
     action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE)
         .filter(action => action.payload.findMode && action.payload.findMode === findModes.TEI_REGISTER)
-        .map((action) => {
+        .map((action) => { // eslint-disable-line
             const state = store.getState();
             const selectedRelationshipType = state.newRelationship.selectedRelationshipType;
-            const { programId, trackedEntityTypeId } = selectedRelationshipType.to;
+            const { programId, trackedEntityTypeId } = selectedRelationshipType.to; // eslint-disable-line
             const { orgUnitId } = state.currentSelections;
             const orgUnit = state.organisationUnits[orgUnitId];
 
@@ -57,8 +65,11 @@ export const openRegisterTeiForRelationshipEpic = (action$: InputObservable, sto
                     orgUnit,
                     'relationship',
                     [initializeRegisterTei(programId, orgUnitId)],
+                    dataEntryPropsForRegisterTei,
+                    {
+                        program: programId,
+                    },
                 );
-            } else { // TEI form (TEI from TET attributes)
-
             }
+            // TEI form (TEI from TET attributes)
         });

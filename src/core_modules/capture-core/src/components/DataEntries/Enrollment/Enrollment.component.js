@@ -1,6 +1,5 @@
 // @flow
 /* eslint-disable react/no-multi-comp */
-import { connect } from 'react-redux';
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
