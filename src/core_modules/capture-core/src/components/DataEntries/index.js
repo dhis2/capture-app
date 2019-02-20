@@ -7,6 +7,7 @@ export {
     buildServerData as buildServerDataForEnrollmentDataEntry,
     openBatchActionTypes as enrollmentOpenBatchActionTypes,
     enrollmentBatchActionTypes,
+    runRulesOnEnrollmentFieldUpdateEpic,
 } from './Enrollment';
 export {
     convertGeometryOut,

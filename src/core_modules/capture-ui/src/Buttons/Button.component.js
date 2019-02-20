@@ -40,7 +40,7 @@ type Props = {
     size: $Values<typeof buttonSizes>,
     disabled: boolean,
     onClick?: ?() => void,
-    children?: ?any,
+    children: any,
     className: string,
 };
 

@@ -1,5 +1,5 @@
 // @flow
-import { connect } from 'react-redux';
+/* eslint-disable react/no-multi-comp */
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import {
@@ -13,6 +13,7 @@ import {
     withWarningOutput,
     withBrowserBackWarning,
     withSearchGroups,
+    inMemoryFileStore,
 } from '../../DataEntry';
 import {
     withInternalChangeHandler,
@@ -248,26 +249,32 @@ const getSearchContext = (props: Object) => ({
     trackedEntityType: props.enrollmentMetadata.trackedEntityType.id,
 });
 
+// final step before the generic dataEntry is inserted
+class FinalEnrollmentDataEntry extends React.Component<Object> {
+    static dataEntrySectionDefinitions = {
+        [dataEntrySectionKeys.ENROLLMENT]: {
+            placement: placements.TOP,
+            name: i18n.t('Enrollment'),
+        },
+    };
+    componentWillUnmount() {
+        inMemoryFileStore.clear();
+    }
 
-const FilterPropsForDataEntry = (props: Object) => {
-    const { enrollmentMetadata, ...passOnProps } = props;
-    return (
-        <DataEntry
-            {...passOnProps}
-            formFoundation={enrollmentMetadata.enrollmentForm}
-        />
-    );
-};
+    render() {
+        const { enrollmentMetadata, ...passOnProps } = this.props;
+        return (
+            <DataEntry
+                dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
+                {...passOnProps}
+                formFoundation={enrollmentMetadata.enrollmentForm}
+            />
+        );
+    }
+}
 
-const mapStateToProps = (state: ReduxState) => ({
-    onGetValidationContext: () => ({
-        orgUnitId: state.currentSelections.orgUnitId,
-    }),
-});
-
-const SearchGroupsHOC = withSearchGroups(getSearchGroups, getSearchContext)(FilterPropsForDataEntry);
-const ValidationContext = connect(mapStateToProps, () => ({}))(SearchGroupsHOC);
-const FeedbackOutput = withFeedbackOutput()(ValidationContext);
+const SearchGroupsHOC = withSearchGroups(getSearchGroups, getSearchContext)(FinalEnrollmentDataEntry);
+const FeedbackOutput = withFeedbackOutput()(SearchGroupsHOC);
 const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
 const WarningOutput = withWarningOutput()(IndicatorOutput);
 const ErrorOutput = withErrorOutput()(WarningOutput);
@@ -275,4 +282,58 @@ const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(ErrorO
 const IncidentDateFieldHOC = withDataEntryField(getIncidentDateSettings())(LocationHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);
 const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);
-export default BrowserBackWarningHOC;
+
+type PreEnrollmentDataEntryProps = {
+    programId: string,
+    orgUnitId: string,
+    onUpdateField: Function,
+    onStartAsyncUpdateField: Function,
+};
+
+class PreEnrollmentDataEntryPure extends React.PureComponent<Object> {
+    render() {
+        return (
+            <BrowserBackWarningHOC
+                {...this.props}
+            />
+        );
+    }
+}
+
+class PreEnrollmentDataEntry extends React.Component<PreEnrollmentDataEntryProps> {
+    getValidationContext = () => {
+        const { orgUnitId } = this.props;
+        return {
+            orgUnitId,
+        };
+    }
+
+    handleUpdateField = (...args: Array<any>) => {
+        const { programId, orgUnitId } = this.props;
+        this.props.onUpdateField(...args, programId, orgUnitId);
+    }
+
+    handleStartAsyncUpdateField = (...args: Array<any>) => {
+        const { programId, orgUnitId } = this.props;
+        this.props.onStartAsyncUpdateField(...args, programId, orgUnitId);
+    }
+
+    render() {
+        const {
+            programId,
+            orgUnitId,
+            onUpdateField,
+            onStartAsyncUpdateField,
+            ...passOnProps } = this.props;
+        return (
+            <PreEnrollmentDataEntryPure
+                onGetValidationContext={this.getValidationContext}
+                onUpdateFormField={this.handleUpdateField}
+                onUpdateFormFieldAsync={this.handleStartAsyncUpdateField}
+                {...passOnProps}
+            />
+        );
+    }
+}
+
+export default PreEnrollmentDataEntry;

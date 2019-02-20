@@ -14,13 +14,15 @@ export function loadNewDataEntry(
     dataEntryId: string,
     itemId: string,
     dataEntryPropsToInclude?: ?Array<DataEntryPropToInclude>,
+    defaultDataEntryValues?: ?Object,
 ) {
-    const values = {};
+    const dataEntryValues = defaultDataEntryValues || {};
+    const formValues = {};
     const dataEntryMeta = dataEntryPropsToInclude ? getDataEntryMeta(dataEntryPropsToInclude) : {};
-    const dataEntryUI = dataEntryPropsToInclude ? validateDataEntryValues(values, dataEntryPropsToInclude) : {};
+    const dataEntryUI = dataEntryPropsToInclude ? validateDataEntryValues(dataEntryValues, dataEntryPropsToInclude) : {};
     const key = getDataEntryKey(dataEntryId, itemId);
     return [
-        actionCreator(actionTypes.LOAD_NEW_DATA_ENTRY)({ key, itemId, dataEntryId, dataEntryMeta, dataEntryUI }),
-        addFormData(key, values),
+        actionCreator(actionTypes.LOAD_NEW_DATA_ENTRY)({ key, itemId, dataEntryId, dataEntryMeta, dataEntryUI, dataEntryValues }),
+        addFormData(key, formValues),
     ];
 }

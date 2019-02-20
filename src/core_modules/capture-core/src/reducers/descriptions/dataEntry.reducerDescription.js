@@ -133,9 +133,8 @@ export const dataEntriesUIDesc = createReducerDescription({
 export const dataEntriesFieldsValueDesc = createReducerDescription({
     [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {
         const newState = { ...state };
-        const payload = action.payload;
-        const key = payload.key;
-        newState[key] = {};
+        const { dataEntryValues, key } = action.payload;
+        newState[key] = dataEntryValues || {};
         return newState;
     },
     [loadEditActionTypes.LOAD_EDIT_DATA_ENTRY]: (state, action) => {
