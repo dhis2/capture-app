@@ -9,18 +9,17 @@ import ListItem from '@material-ui/core/ListItem';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '../Buttons/Button.component';
 import { TextField } from '../FormFields/New';
+import type { Note } from './notes.types';
 
 
 const FocusTextField = withFocusSaver()(TextField);
 
 type Props = {
-    notes: Array<Object>,
+    notes: Array<Note>,
     addNoteDisabled?: ?boolean,
-    onAddNote: (itemId: string, dataEntryId: string, value: string) => void,
+    onAddNote: (value: string) => void,
     onBlur: (value: ?string, options: any) => void,
     value: ?string,
-    id: string,
-    itemId: string,
     classes: {
         noteItem: string,
         inputContainer: string,
@@ -86,7 +85,7 @@ const styles = theme => ({
     },
 });
 
-class DataEntryNotes extends React.Component<Props, State> {
+class Notes extends React.Component<Props, State> {
     innerInstance: ?any;
     constructor(props: Props) {
         super(props);
@@ -122,7 +121,7 @@ class DataEntryNotes extends React.Component<Props, State> {
 
     handleAddNote = () => {
         if (this.props.value) {
-            this.props.onAddNote(this.props.itemId, this.props.id, this.props.value);
+            this.props.onAddNote(this.props.value);
         }
         this.props.onBlur(null, { touched: false });
     }
@@ -169,7 +168,7 @@ class DataEntryNotes extends React.Component<Props, State> {
             <div className={classes.notesContainer}>
                 <List dense className={classes.notesList}>
                     {notes.map(n => (
-                        <ListItem className={classes.noteItem} key={n.key}>
+                        <ListItem className={classes.noteItem} key={n.clientId}>
                             <div className={classes.noteItemHeader}>
                                 <div className={classes.noteItemUser}>
                                     {n.storedBy}
@@ -196,4 +195,4 @@ class DataEntryNotes extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(styles)(DataEntryNotes);
+export default withStyles(styles)(Notes);

@@ -1,8 +1,6 @@
 // @flow
 import { createSelector } from 'reselect';
 import { getTrackerProgramThrowIfNotFound, getTrackedEntityTypeThrowIfNotFound } from '../../../../../metaData';
-import errorCreator from '../../../../../utils/errorCreator';
-import chunk from '../../../../../utils/chunk';
 
 const trackedEntityTypeIdSelector = props => props.selectedTrackedEntityTypeId;
 const programIdSelector = props => props.selectedProgramId;

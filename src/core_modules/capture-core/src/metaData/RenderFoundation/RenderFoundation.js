@@ -3,8 +3,6 @@
 import log from 'loglevel';
 
 import isFunction from 'd2-utilizr/src/isFunction';
-import isArray from 'd2-utilizr/src/isArray';
-import isObject from 'd2-utilizr/src/isObject';
 
 import { validationStrategies, validationStrategiesAsArray } from './renderFoundation.const';
 import Section from './Section';

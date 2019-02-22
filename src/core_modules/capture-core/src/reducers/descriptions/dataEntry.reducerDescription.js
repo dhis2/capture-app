@@ -4,6 +4,7 @@ import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
 import { actionTypes as loadNewActionTypes } from '../../components/DataEntry/actions/dataEntryLoadNew.actions';
 import { actionTypes as loadEditActionTypes } from '../../components/DataEntry/actions/dataEntryLoadEdit.actions';
+import { actionTypes as loadViewActionTypes } from '../../components/DataEntry/actions/dataEntryLoadView.actions';
 import { searchGroupActionTypes } from '../../components/DataEntry';
 
 import getDataEntryKey from '../../components/DataEntry/common/getDataEntryKey';
@@ -26,6 +27,26 @@ export const dataEntriesDesc = createReducerDescription({
         };
         return newState;
     },
+    [loadViewActionTypes.LOAD_VIEW_DATA_ENTRY]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        newState[payload.dataEntryId] = {
+            ...newState[payload.dataEntryId],
+            itemId: payload.itemId,
+            ...payload.extraProps,
+        };
+        return newState;
+    },
+    [actionTypes.SET_CURRENT_DATA_ENTRY]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        newState[payload.dataEntryId] = {
+            ...newState[payload.dataEntryId],
+            itemId: payload.itemId,
+            ...payload.extraProps,
+        };
+        return newState;
+    } 
     /*
     [loadActionTypes.OPEN_DATA_ENTRY_EVENT_ALREADY_LOADED]: (state, action) => {
         const newState = { ...state };
@@ -48,6 +69,15 @@ export const dataEntriesUIDesc = createReducerDescription({
         return newState;
     },
     [loadEditActionTypes.LOAD_EDIT_DATA_ENTRY]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const key = payload.key;
+        newState[key] = {
+            loaded: true,
+        };
+        return newState;
+    },
+    [loadViewActionTypes.LOAD_VIEW_DATA_ENTRY]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
         const key = payload.key;
@@ -144,6 +174,13 @@ export const dataEntriesFieldsValueDesc = createReducerDescription({
         newState[key] = payload.dataEntryValues;
         return newState;
     },
+    [loadViewActionTypes.LOAD_VIEW_DATA_ENTRY]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const key = payload.key;
+        newState[key] = payload.dataEntryValues;
+        return newState;
+    },
     [actionTypes.UPDATE_FIELD]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
@@ -169,7 +206,7 @@ export const dataEntriesNotesDesc = createReducerDescription({
         newState[key] = payload.dataEntryNotes ? [...payload.dataEntryNotes] : [];
         return newState;
     },
-    [actionTypes.ADD_NOTE]: (state, action) => {
+    [actionTypes.ADD_DATA_ENTRY_NOTE]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
 
@@ -179,7 +216,7 @@ export const dataEntriesNotesDesc = createReducerDescription({
         newState[key] = [...state[key], { ...payload.note, key: noteKey }];
         return newState;
     },
-    [actionTypes.REMOVE_NOTE]: (state, action) => {
+    [actionTypes.REMOVE_DATA_ENTRY_NOTE]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
 
@@ -205,6 +242,13 @@ export const dataEntriesFieldsMetaDesc = createReducerDescription({
         newState[key] = payload.dataEntryMeta;
         return newState;
     },
+    [loadViewActionTypes.LOAD_VIEW_DATA_ENTRY]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const key = payload.key;
+        newState[key] = payload.dataEntryMeta;
+        return newState;
+    },
 }, 'dataEntriesFieldsMeta');
 
 export const dataEntriesFieldsUIDesc = createReducerDescription({
@@ -223,6 +267,20 @@ export const dataEntriesFieldsUIDesc = createReducerDescription({
         return newState;
     },
     [loadEditActionTypes.LOAD_EDIT_DATA_ENTRY]: (state, action) => {
+        const newState = { ...state };
+        const payload = action.payload;
+        const key = payload.key;
+        newState[key] = Object.keys(payload.dataEntryUI).reduce((accValuesUI, elementKey) => {
+            accValuesUI[elementKey] = {
+                ...payload.dataEntryUI[elementKey],
+                touched: false,
+            };
+            return accValuesUI;
+        }, {});
+
+        return newState;
+    },
+    [loadViewActionTypes.LOAD_VIEW_DATA_ENTRY]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
         const key = payload.key;

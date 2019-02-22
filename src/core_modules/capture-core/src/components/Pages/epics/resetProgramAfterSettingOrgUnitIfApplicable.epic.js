@@ -7,6 +7,9 @@ import {
     actionTypes as editEventSelectorActionTypes,
 } from '../../Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
 import {
+    actionTypes as viewEventSelectorActionTypes,
+} from '../../Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
+import {
     actionTypes as newEventSelectorActionTypes,
 } from '../../Pages/NewEvent/SelectorLevel/selectorLevel.actions';
 
@@ -37,6 +40,7 @@ export const resetProgramAfterSettingOrgUnitIfApplicableEpic = (action$: InputOb
         .ofType(
             mainPageSelectorActionTypes.SET_ORG_UNIT,
             editEventSelectorActionTypes.SET_ORG_UNIT,
+            viewEventSelectorActionTypes.SET_ORG_UNIT,
             newEventSelectorActionTypes.SET_ORG_UNIT,
         )
         .filter((action) => {

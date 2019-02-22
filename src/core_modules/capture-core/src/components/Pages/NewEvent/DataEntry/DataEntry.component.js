@@ -7,12 +7,14 @@ import DataEntry from '../../../../components/DataEntry/DataEntry.container';
 import withSaveHandler from '../../../../components/DataEntry/withSaveHandler';
 import withCancelButton from '../../../../components/DataEntry/withCancelButton';
 import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
+import withDataEntryNotesHandler from '../../../../components/DataEntry/dataEntryNotes/withDataEntryNotesHandler';
+import Notes from '../../../Notes/Notes.component';
+import withDataEntryRelationshipsHandler from '../../../../components/DataEntry/dataEntryRelationships/withDataEntryRelationshipsHandler';
+import Relationships from '../../../Relationships/Relationships.component';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import withMainButton from './withMainButton';
 import getNoteValidatorContainers from './fieldValidators/note.validatorContainersGetter';
-import DataEntryNotes from '../../../DataEntry/DataEntryNotes.container';
-import DataEntryRelationships from '../../../DataEntry/DataEntryRelationships.component';
 import {
     placements,
     withCleanUpHOC,
@@ -299,7 +301,9 @@ const buildNotesSettingsFn = () => {
                 withDefaultShouldUpdateInterface()(
                     withDisplayMessages()(
                         withInternalChangeHandler()(
-                            withFilterProps(defaultFilterProps)(DataEntryNotes),
+                            withFilterProps(defaultFilterProps)(
+                                withDataEntryNotesHandler()(Notes),
+                            ),
                         ),
                     ),
                 ),
@@ -328,7 +332,9 @@ const buildRelationshipsSettingsFn = () => {
     const relationshipsComponent =
         withDefaultFieldContainer()(
             withDefaultShouldUpdateInterface()(
-                withFilterProps(defaultFilterProps)(DataEntryRelationships),
+                withFilterProps(defaultFilterProps)(
+                    withDataEntryRelationshipsHandler()(Relationships),
+                ),
             ),
         );
     const relationshipsSettings = (props: Object) => {
@@ -342,8 +348,9 @@ const buildRelationshipsSettingsFn = () => {
             componentProps: createComponentProps(props, {
                 id: 'relationship',
                 dataEntryId: props.id,
-                onAddRelationship: props.onAddRelationship,
-                fromEntity: 'EVENT',
+                onOpenAddRelationship: props.onOpenAddRelationship,
+                fromEntity: 'PROGRAM_STAGE_INSTANCE',
+                currentEntityId: 'newEvent',
             }),
             validatorContainers: [
             ],

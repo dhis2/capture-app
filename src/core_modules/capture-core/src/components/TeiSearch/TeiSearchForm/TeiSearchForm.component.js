@@ -8,7 +8,6 @@ import classNames from 'classnames';
 import errorCreator from '../../../utils/errorCreator';
 import Button from '../../Buttons/Button.component';
 import Form, { D2Form } from '../../D2Form/D2Form.component';
-import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 import SearchOrgUnitSelector from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
 import { Section } from '../../Section';
 import { SearchGroup } from '../../../metaData';

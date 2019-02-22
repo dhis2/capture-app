@@ -52,10 +52,6 @@ const styles = theme => ({
 });
 
 class D2DateTime extends Component<Props, State> {
-    static defaultProps = {
-        value: {},
-    };
-
     handleTimeChange: (timeValue: string) => void;
     handleDateChange: (dateValue: string) => void;
     handleTimeBlur: (timeValue: string) => void;
@@ -79,16 +75,18 @@ class D2DateTime extends Component<Props, State> {
         };
     }
 
+    getValue = () => this.props.value || {};
+
     handleTimeChange(timeValue: string) {
         this.props.onChange({
             time: timeValue,
-            date: this.props.value.date,
+            date: this.getValue().date,
         });
     }
 
     handleDateChange(dateValue: string) {
         this.props.onChange({
-            time: this.props.value.time,
+            time: this.getValue().time,
             date: dateValue,
         });
     }
@@ -97,14 +95,14 @@ class D2DateTime extends Component<Props, State> {
         this.touchedFields.add('timeTouched');
         this.handleBlur({
             time: timeValue,
-            date: this.props.value.date,
+            date: this.getValue().date,
         });
     }
 
     handleDateBlur(dateValue: string) {
         this.touchedFields.add('dateTouched');
         this.handleBlur({
-            time: this.props.value.time,
+            time: this.getValue().time,
             date: dateValue,
         });
     }
@@ -131,10 +129,11 @@ class D2DateTime extends Component<Props, State> {
     }
 
     render() {
-        const { value, dateWidth, calendarWidth, label, required, disabled, classes } = this.props;
+        const { dateWidth, calendarWidth, label, required, disabled, classes } = this.props;
         const { inFocus } = this.state;
-        const dateValue = value.date;
-        const timeValue = value.time;
+        const currentValue = this.getValue();
+        const dateValue = currentValue.date;
+        const timeValue = currentValue.time;
 
         return (
             <div

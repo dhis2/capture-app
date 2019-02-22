@@ -16,6 +16,7 @@ export { default as UserNameFieldForForm } from './UserNameField/UserNameFieldFo
 export { default as TextRangeFieldForForm } from './TextRangeField/TextRangeFieldForForm.component';
 export { default as DateRangeFieldForForm } from './DateRangeField/DateRangeFieldForForm.component';
 export { default as DateTimeRangeFieldForForm } from './DateTimeRangeField/DateTimeRangeFieldForForm.component';
+export { default as ViewModeFieldForForm } from './ViewModeField/ViewModeFieldForForm.component';
 
 // custom form
 export { default as AgeFieldForCustomForm } from './AgeField/AgeFieldForCustomForm.component';

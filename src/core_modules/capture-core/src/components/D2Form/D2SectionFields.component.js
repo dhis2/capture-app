@@ -53,6 +53,7 @@ type Props = {
     customForm: MetadataCustomForm,
     validationStrategy: $Values<typeof validationStrategies>,
     loadNr: number,
+    viewMode?: ?boolean,
 };
 
 class D2SectionFields extends Component<Props> {
@@ -83,6 +84,7 @@ class D2SectionFields extends Component<Props> {
                 {
                     formHorizontal: this.props.formHorizontal,
                     formId: this.props.formId,
+                    viewMode: this.props.viewMode,
                     ...fieldOptions,
                 },
                 !!customForm,

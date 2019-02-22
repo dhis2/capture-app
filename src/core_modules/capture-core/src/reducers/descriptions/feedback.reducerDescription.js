@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
 import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
 import isString from 'd2-utilizr/lib/isString';
 import isObject from 'd2-utilizr/lib/isObject';
 import errorCreator from '../../utils/errorCreator';
-import i18n from '@dhis2/d2-i18n';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as feedbackActionTypes } from '../../components/FeedbackBar/actions/feedback.actions';
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
@@ -18,6 +18,9 @@ import {
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
 import { actionTypes as eventsListActionTypes } from '../../components/Pages/MainPage/EventsList/eventsList.actions';
 import { orgUnitListActionTypes } from '../../components/QuickSelector';
+import {
+    actionTypes as viewEventNewRelationshipActionTypes,
+} from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
 
 function addErrorFeedback(state: ReduxState, message: string, action?: ?React.Node) {
     const newState = [...state];
@@ -92,7 +95,9 @@ export const feedbackDesc = createReducerDescription({
         addErrorFeedback(state, i18n.t(action.payload.message)),
     [orgUnitListActionTypes.SET_SEARCH_ROOTS_FAILED]: (state, action) =>
         addErrorFeedback(state, i18n.t(action.payload.message)),
-    [dataEntryActionTypes.DUPLICATE_RELATIONSHIP]: (state, action) =>
+    [dataEntryActionTypes.RELATIONSHIP_ALREADY_EXISTS]: (state, action) =>
+        addErrorFeedback(state, action.payload.message),
+    [viewEventNewRelationshipActionTypes.EVENT_RELATIONSHIP_ALREADY_EXISTS]: (state, action) =>
         addErrorFeedback(state, action.payload.message),
 }, 'feedbacks', []);
 

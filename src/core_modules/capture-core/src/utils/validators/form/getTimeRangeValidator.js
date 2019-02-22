@@ -1,7 +1,6 @@
 // @flow
 import timeValidator from './time.validator';
 import moment from '../../../utils/moment/momentResolver';
-import parseDate from '../../parsers/date.parser';
 /**
  *
  * @export

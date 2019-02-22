@@ -8,6 +8,7 @@ import RelationshipType from '../RelationshipType/RelationshipType';
 
 export default class ProgramStage {
     _id: string;
+    _name: string;
     _stageForm: RenderFoundation;
     _relationshipTypes: Array<RelationshipType>;
 
@@ -31,8 +32,20 @@ export default class ProgramStage {
         this._id = id;
     }
 
+    get name(): string {
+        return this._name;
+    }
+
+    set name(name: string) {
+        this._name = name;
+    }
+
     get relationshipTypes(): Array<RelationshipType> {
         return this._relationshipTypes;
+    }
+
+    get relationshipTypesWhereStageIsFrom(): Array<RelationshipType> {
+        return this._relationshipTypes.filter(r => r.from.programStageId && r.from.programStageId === this.id);
     }
 
     set relationshipTypes(relationshipTypes: Array<RelationshipType>) {

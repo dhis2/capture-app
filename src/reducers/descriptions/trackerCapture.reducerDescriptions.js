@@ -41,6 +41,7 @@ import {
 import { mainPageDesc } from 'capture-core/reducers/descriptions/mainPage.reducerDescription';
 import { newEventPageDesc } from 'capture-core/reducers/descriptions/newEvent.reducerDescription';
 import { editEventPageDesc } from 'capture-core/reducers/descriptions/editEvent.reducerDescription';
+import { viewEventPageDesc } from 'capture-core/reducers/descriptions/viewEvent.reducerDescription';
 import { newEnrollmentPageDesc } from 'capture-core/reducers/descriptions/newEnrollment.reducerDescription';
 import { newRelationshipDesc } from 'capture-core/reducers/descriptions/newRelationship.reducerDescription';
 import {
@@ -56,6 +57,9 @@ import {
 import {
     teiSearchDesc,
 } from 'capture-core/reducers/descriptions/teiSearch.reducerDescription';
+
+import { notesDesc } from 'capture-core/reducers/descriptions/notes.reducerDescription';
+import { relationshipsDesc } from 'capture-core/reducers/descriptions/relationships.reducerDescription';
 
 import { appReducerDesc } from './app.reducerDescription';
 import { currentSelectionsReducerDesc } from './currentSelections.reducerDescription';
@@ -98,6 +102,7 @@ export default [
     mainPageDesc,
     newEventPageDesc,
     editEventPageDesc,
+    viewEventPageDesc,
     newEnrollmentPageDesc,
     newRelationshipDesc,
     organisationUnitDesc,
@@ -107,4 +112,6 @@ export default [
     recentlyAddedEventsDesc,
     recentlyAddedEventsValuesDesc,
     teiSearchDesc,
+    notesDesc,
+    relationshipsDesc,
 ];

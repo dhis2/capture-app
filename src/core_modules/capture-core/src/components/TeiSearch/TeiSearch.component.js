@@ -4,7 +4,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import SearchGroup from '../../metaData/SearchGroup/SearchGroup';
 import TeiSearchForm from './TeiSearchForm/TeiSearchForm.container';
 import TeiSearchResults from './TeiSearchResults/TeiSearchResults.container';
-import SearchOrgUnitSelector from './SearchOrgUnitSelector/SearchOrgUnitSelector.container';
 import SearchProgramSelector from './SearchProgramSelector/SearchProgramSelector.container';
 import { Section } from '../Section';
 

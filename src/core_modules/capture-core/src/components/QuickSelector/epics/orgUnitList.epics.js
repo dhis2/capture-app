@@ -1,13 +1,10 @@
 // @flow
 import log from 'loglevel';
 import { fromPromise } from 'rxjs/observable/fromPromise';
-import getD2, { getCurrentUser } from 'capture-core/d2/d2Instance';
+import getD2 from 'capture-core/d2/d2Instance';
 import errorCreator from '../../../utils/errorCreator';
-import { actionTypes as startupActionTypes } from '../../../init/init.actions';
 import {
     actionTypes as orgUnitListActions,
-    initRegUnitListRoots,
-    initRegUnitListRootsFailed,
     setSearchRoots,
     setSearchRootsFailed,
     showLoadingIndicator,

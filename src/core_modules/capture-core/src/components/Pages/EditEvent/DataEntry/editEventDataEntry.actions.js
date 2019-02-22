@@ -9,7 +9,6 @@ import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFounda
 import Program from '../../../../metaData/Program/Program';
 import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
-import getNoteValidatorContainers from './fieldValidators/note.validatorContainersGetter';
 import {
     getConvertGeometryIn,
     convertGeometryOut,
@@ -58,12 +57,6 @@ export const openEventForEditInDataEntry =
                 id: 'eventDate',
                 type: 'DATE',
                 validatorContainers: getEventDateValidatorContainers(),
-            },
-            {
-                id: 'note',
-                type: 'TEXT',
-                validatorContainers: getNoteValidatorContainers(),
-                clientIgnore: true,
             },
             {
                 clientId: 'geometry',

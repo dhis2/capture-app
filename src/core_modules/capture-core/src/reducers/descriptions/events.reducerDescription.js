@@ -6,6 +6,7 @@ import { actionTypes as mainSelectionsActionTypes } from '../../components/Pages
 import { actionTypes as enrollmentActionTypes } from '../../actions/__TEMP__/enrollment.actions';
 import { actionTypes as eventListActionTypes } from '../../components/Pages/MainPage/EventsList/eventsList.actions';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
+import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/viewEvent.actions';
 
 const getFromWorkingListRetrieval = (eventContainers, containerProperty) => {
     if (!eventContainers || eventContainers.length === 0) {
@@ -67,7 +68,15 @@ export const eventsDesc = createReducerDescription({
         };
         return newState;
     },
-    [editEventActionTypes.ADD_EVENT_NOTE]: (state, action) => {
+    [viewEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
+        const event = action.payload.eventContainer.event;
+        const newState = {
+            ...state,
+            [event.eventId]: event,
+        };
+        return newState;
+    },
+    [viewEventActionTypes.ADD_EVENT_NOTE]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
         if (newState && newState[payload.eventId]) {
@@ -75,7 +84,7 @@ export const eventsDesc = createReducerDescription({
         }
         return newState;
     },
-    [editEventActionTypes.REMOVE_EVENT_NOTE]: (state, action) => {
+    [viewEventActionTypes.REMOVE_EVENT_NOTE]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
         if (newState && newState[payload.eventId]) {
@@ -83,6 +92,7 @@ export const eventsDesc = createReducerDescription({
         }
         return newState;
     },
+
 }, 'events', {});
 
 export const eventsValuesDesc = createReducerDescription({

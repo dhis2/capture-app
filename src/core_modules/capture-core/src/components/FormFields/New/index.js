@@ -16,6 +16,7 @@ export { default as SingleOrgUnitSelectField } from './Fields/OrgUnitField/Singl
 export { default as TextRangeField } from './Fields/TextField/TextRangeField.component';
 export { default as DateRangeField } from './Fields/DateAndTimeFields/DateRangeField/DateRangeField.component';
 export { default as DateTimeRangeField } from './Fields/DateAndTimeFields/DateTimeRangeField/DateTimeRangeField.component';
+export { default as ViewModeField } from './Fields/ViewModeField/ViewModeField.component';
 
 // Generic HOCs
 export { default as withCalculateMessages } from './HOC/messages/withCalculateMessages';

@@ -7,7 +7,6 @@ import {
 
 import {
     actionTypes as newRelationshipActionTypes,
-    selectFindMode,
     setSearching,
     unsetSearching,
 } from '../newRelationship.actions';

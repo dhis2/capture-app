@@ -1,6 +1,7 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
+import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/viewEvent.actions';
 import { actionTypes as mainPageSelectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
 import { actionTypes as setOrgUnitActionTypes } from '../../components/QuickSelector/actions/QuickSelector.actions';
 import {
@@ -16,6 +17,9 @@ import {
 import {
     actionTypes as editEventPageSelectorActionTypes,
 } from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
+import {
+    actionTypes as viewEventPageSelectorActionTypes,
+} from '../../components/Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
 import { orgUnitListActionTypes } from '../../components/QuickSelector';
 import { set as setStoreRoots } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 
@@ -25,6 +29,12 @@ import {
 
 export const organisationUnitDesc = createReducerDescription({
     [editEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE]: (state, action) => {
+        const newState = { ...state };
+        const orgUnit = action.payload.orgUnit;
+        newState[orgUnit.id] = orgUnit;
+        return newState;
+    },
+    [viewEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE]: (state, action) => {
         const newState = { ...state };
         const orgUnit = action.payload.orgUnit;
         newState[orgUnit.id] = orgUnit;
@@ -179,5 +189,6 @@ export const registeringUnitListDesc = createReducerDescription({
     [newEventSelectorActionTypes.RESET_ORG_UNIT_ID]: removeSearchDataOnResetRegUnit,
     [newEventDataEntryUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: removeSearchDataOnResetRegUnit,
     [editEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: removeSearchDataOnResetRegUnit,
+    [viewEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: removeSearchDataOnResetRegUnit,
     [newEnrollmentUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: removeSearchDataOnResetRegUnit,
 }, 'registeringUnitList');

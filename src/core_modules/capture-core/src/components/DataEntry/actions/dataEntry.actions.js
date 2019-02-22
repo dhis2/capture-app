@@ -20,11 +20,12 @@ export const actionTypes = {
     UPDATE_FORM_FIELD: 'UpdateDataEntryFormField',
     RULES_EXECUTED_POST_UPDATE_FIELD: 'RulesExecutedPostUpdateFieldDataEntry',
     ASYNC_UPDATE_FIELD_FAILED: 'AsyncUpdateFieldFailed',
-    ADD_NOTE: 'AddNote',
-    REMOVE_NOTE: 'RemoveNote',
+    ADD_DATA_ENTRY_NOTE: 'AddDataEntryNote',
+    REMOVE_DATA_ENTRY_NOTE: 'RemoveDataEntryNote',
     ADD_RELATIONSHIP: 'AddRelationship',
     REMOVE_RELATIONSHIP: 'RemoveRelationship',
-    DUPLICATE_RELATIONSHIP: 'DuplicateRelationship',
+    RELATIONSHIP_ALREADY_EXISTS: 'RelationshipAlreadyExists',
+    SET_CURRENT_DATA_ENTRY: 'SetCurrentDataEntry',
 };
 
 // COMPLETE
@@ -113,11 +114,11 @@ export const asyncUpdateFieldFailed =
 
 export const addNote =
     (dataEntryId: string, itemId: string, note: Object) =>
-        actionCreator(actionTypes.ADD_NOTE)({ dataEntryId, itemId, note });
+        actionCreator(actionTypes.ADD_DATA_ENTRY_NOTE)({ dataEntryId, itemId, note });
 
 export const removeNote =
     (dataEntryId: string, itemId: string, noteClientId: string) =>
-        actionCreator(actionTypes.REMOVE_NOTE)({ dataEntryId, itemId, noteClientId });
+        actionCreator(actionTypes.REMOVE_DATA_ENTRY_NOTE)({ dataEntryId, itemId, noteClientId });
 
 export const addRelationship =
     (dataEntryId: string, itemId: string, relationship: Object) =>
@@ -127,6 +128,10 @@ export const removeRelationship =
     (dataEntryId: string, itemId: string, relationshipClientId: string) =>
         actionCreator(actionTypes.REMOVE_RELATIONSHIP)({ dataEntryId, itemId, relationshipClientId });
 
-export const duplicateRelationship =
+export const relationshipAlreadyExists =
     (dataEntryId: string, itemId: string, message: string) =>
-        actionCreator(actionTypes.DUPLICATE_RELATIONSHIP)({ dataEntryId, itemId, message });
+        actionCreator(actionTypes.RELATIONSHIP_ALREADY_EXISTS)({ dataEntryId, itemId, message });
+
+export const setCurrentDataEntry =
+    (dataEntryId: string, itemId: string, extraProps?: ?any) =>
+        actionCreator(actionTypes.SET_CURRENT_DATA_ENTRY)({ dataEntryId, itemId, extraProps });

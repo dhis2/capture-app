@@ -73,7 +73,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         window.scrollTo(0, 0);
         dispatch(cancelNewEventAndReturnToMainPage());
     },
-    onAddRelationship: (eventId: string, dataEntryId: string) => {
+    onOpenAddRelationship: (eventId: string, dataEntryId: string) => {
         dispatch(newEventOpenNewRelationship(eventId, dataEntryId));
     },
 });

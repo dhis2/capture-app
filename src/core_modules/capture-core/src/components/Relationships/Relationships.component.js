@@ -4,11 +4,8 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconButton, withStyles } from '@material-ui/core';
 import { ArrowForward as ArrowIcon, Clear as ClearIcon } from '@material-ui/icons';
-import { connect } from 'react-redux';
-import LinkButton from '../Buttons/LinkButton.component';
 import Button from '../Buttons/Button.component';
-import getDataEntryKey from './common/getDataEntryKey';
-import { removeRelationship } from './actions/dataEntry.actions';
+import type { Relationship, Entity } from './relationships.types';
 
 type Props = {
     classes: {
@@ -21,16 +18,14 @@ type Props = {
         arrowIcon: string,
         relationshipActions: string,
     },
-    relationships: Array<Object>,
-    onRemoveRelationship: (itemId: string, id: string, clientId: string) => void,
-    onAddRelationship: (itemId: string, id: string) => void,
-    itemId: string,
-    dataEntryId: string,
-    fromEntity: string,
+    relationships: Array<Relationship>,
+    onRemoveRelationship: (relationshipClientId: string) => void,
+    onOpenAddRelationship: () => void,
+    currentEntityId: string,
 };
 
 
-const styles = (theme: Theme) => ({
+const getStyles = (theme: Theme) => ({
     relationship: {
         display: 'flex',
         alignItems: 'center',
@@ -68,52 +63,52 @@ const styles = (theme: Theme) => ({
     },
 });
 
-const fromDisplayNames = {
-    EVENT: i18n.t('This event'),
+const fromNames = {
+    PROGRAM_STAGE_INSTANCE: i18n.t('This event'),
 };
 
-class DataEntryRelationships extends React.Component<Props> {
-    handleRemove = (clientId: string) => {
-        this.props.onRemoveRelationship(this.props.itemId, this.props.dataEntryId, clientId);
-    };
-
-    handleAdd = () => {
-        this.props.onAddRelationship(this.props.itemId, this.props.dataEntryId);
-    }
-
+class Relationships extends React.Component<Props> {
     getRelationships = () => {
-        const { classes, fromEntity, relationships } = this.props;
+        const { classes, relationships, onRemoveRelationship } = this.props;
         return relationships.map(r => (
-            <div className={classes.relationship} key={r.clientId}>
+            <div className={classes.relationship} key={r.id || r.clientId}>
                 <div className={classes.relationshipDetails}>
                     <div className={classes.relationshipTypeName}>
                         {r.relationshipType.name}
                     </div>
                     <div className={classes.relationshipEntities}>
-                        {fromDisplayNames[fromEntity]}
+                        {this.getEntityName(r.from)}
                         <ArrowIcon className={classes.arrowIcon} />
-                        {r.entity.displayName}
+                        {this.getEntityName(r.to)}
                     </div>
                 </div>
                 <div className={classes.relationshipActions}>
-                    <IconButton onClick={() => { this.handleRemove(r.clientId); }} >
-                        <ClearIcon />
-                    </IconButton>
+                    {this.canDelete(r) &&
+                        <IconButton onClick={() => { onRemoveRelationship(r.clientId); }} >
+                            <ClearIcon />
+                        </IconButton>
+                    }
                 </div>
             </div>
         ),
         );
     }
 
+    getEntityName = (entity: Entity) =>
+        (entity.id === this.props.currentEntityId ?
+            fromNames[entity.type] : entity.name);
+
+    canDelete = (relationship: Relationship) => relationship.from.id === this.props.currentEntityId;
+
     render() {
-        const { classes } = this.props;
+        const { classes, onOpenAddRelationship } = this.props;
         return (
             <div className={classes.container}>
                 <div className={classes.relationshipsContainer}>
                     {this.getRelationships()}
                 </div>
                 <div>
-                    <Button onClick={this.handleAdd}>
+                    <Button onClick={onOpenAddRelationship}>
                         {i18n.t('Add relationship')}
                     </Button>
                 </div>
@@ -123,21 +118,4 @@ class DataEntryRelationships extends React.Component<Props> {
     }
 }
 
-const mapStateToProps = (state: ReduxState, props: { dataEntryId: string }) => {
-    const itemId = state.dataEntries && state.dataEntries[props.dataEntryId] && state.dataEntries[props.dataEntryId].itemId;
-    const dataEntryKey = getDataEntryKey(props.dataEntryId, itemId);
-    return {
-        relationships: state.dataEntriesRelationships[dataEntryKey],
-        itemId,
-    };
-};
-
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onRemoveRelationship: (itemId: string, id: string, relationshipClientId: string) => {
-        dispatch(removeRelationship(id, itemId, relationshipClientId));
-    },
-});
-
-// $FlowFixMe
-export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(
-    withStyles(styles)(DataEntryRelationships));
+export default withStyles(getStyles)(Relationships);

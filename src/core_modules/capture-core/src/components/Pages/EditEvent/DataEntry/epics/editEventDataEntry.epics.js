@@ -18,7 +18,6 @@ import {
     getCurrentClientValues,
     getCurrentClientMainData,
 } from '../../../../../rulesEngineActionsCreator/inputHelpers';
-import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
 import type { FieldData } from '../../../../../rulesEngineActionsCreator/inputHelpers';
 
 const errorMessages = {

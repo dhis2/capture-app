@@ -12,7 +12,8 @@ import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFounda
 import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import withMainButton from './withMainButton';
 import withFilterProps from '../../../FormFields/New/HOC/withFilterProps';
-import DataEntryNotes from '../../../DataEntry/DataEntryNotes.container';
+import withDataEntryNotesHandler from '../../../../components/DataEntry/dataEntryNotes/withDataEntryNotesHandler';
+import Notes from '../../../Notes/Notes.component';
 
 import {
     placements,
@@ -259,7 +260,7 @@ const buildNotesSettingsFn = () => {
             withDefaultFieldContainer()(
                 withDefaultShouldUpdateInterface()(
                     withDisplayMessages()(
-                        withInternalChangeHandler()(DataEntryNotes),
+                        withInternalChangeHandler()(withDataEntryNotesHandler()(Notes)),
                     ),
                 ),
             ),

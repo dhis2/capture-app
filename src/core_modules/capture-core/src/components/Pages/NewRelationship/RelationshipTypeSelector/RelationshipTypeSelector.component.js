@@ -51,16 +51,16 @@ class RelationshipTypeSelector extends React.Component<Props> {
     onSelectRelationshipType = (rt: RelationshipType) => {
         this.props.onSelectRelationshipType({
             id: rt.id,
-            displayName: rt.displayName,
+            name: rt.name,
             from: { ...rt.from },
             to: { ...rt.to },
         });
     }
     renderRelationshipTypes = () => {
-        const { classes, relationshipTypes, onSelectRelationshipType } = this.props;
+        const { classes, relationshipTypes } = this.props;
         return relationshipTypes ? relationshipTypes.map(rt => (
             <div className={classNames(classes.relationshipType, classes.relationshipTypeSelectable)} key={rt.id} role="button" tabIndex="0" onClick={() => this.onSelectRelationshipType(rt)}>
-                {rt.displayName}
+                {rt.name}
             </div>
         )) : [];
     }
@@ -70,7 +70,7 @@ class RelationshipTypeSelector extends React.Component<Props> {
         return (
             <div className={classNames(classes.relationshipType, classes.relationshipTypeSelected)}>
                 <div className={classes.relationshipTypeSelectedText}>
-                    <div>{selectedRelationshipType.displayName}</div>
+                    <div>{selectedRelationshipType.name}</div>
                     <ClearIcon fontSize="small" onClick={onDeselectRelationshipType} />
                 </div>
             </div>

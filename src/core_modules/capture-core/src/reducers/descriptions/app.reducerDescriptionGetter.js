@@ -11,6 +11,7 @@ import {
 } from '../../components/Pages/NewEvent';
 import { actionTypes as tempSelectorActionTypes } from '../../components/Pages/MainPage/tempSelector.actions';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
+import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/viewEvent.actions';
 import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
@@ -43,6 +44,10 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
     [editEventActionTypes.EDIT_EVENT_FROM_URL]: (state, action) => {
+        const newState = { ...state, page: action.payload.page };
+        return newState;
+    },
+    [viewEventActionTypes.VIEW_EVENT_FROM_URL]: (state, action) => {
         const newState = { ...state, page: action.payload.page };
         return newState;
     },
@@ -98,10 +103,24 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         newState.locationSwitchInProgress = true;
         return newState;
     },
+    [viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE]: (state) => {
+        const newState = { ...state };
+        newState.page = null;
+        newState.locationSwitchInProgress = true;
+        return newState;
+    },
     [eventListActionTypes.OPEN_EDIT_EVENT_PAGE]: (state) => {
         const newState = {
             ...state,
             page: 'editEvent',
+            locationSwitchInProgress: true,
+        };
+        return newState;
+    },
+    [eventListActionTypes.OPEN_VIEW_EVENT_PAGE]: (state) => {
+        const newState = {
+            ...state,
+            page: 'viewEvent',
             locationSwitchInProgress: true,
         };
         return newState;

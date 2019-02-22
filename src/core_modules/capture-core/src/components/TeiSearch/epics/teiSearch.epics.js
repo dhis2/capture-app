@@ -28,7 +28,6 @@ import {
     getTrackerProgramThrowIfNotFound as getTrackerProgram,
     getTrackedEntityTypeThrowIfNotFound as getTrackedEntityType,
 } from '../../../metaData';
-import errorCreator from '../../../utils/errorCreator';
 import getSearchFormId from '../getSearchFormId';
 import { clearOrgUnitRoots } from '../../organisationUnits/organisationUnitRoots.actions';
 

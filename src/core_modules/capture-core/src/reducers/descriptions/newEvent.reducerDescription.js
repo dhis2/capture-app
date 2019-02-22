@@ -11,6 +11,9 @@ import {
     actionTypes as editEventPageActionTypes,
 } from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
 import {
+    actionTypes as viewEventPageActionTypes,
+} from '../../components/Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
+import {
     actionTypes as mainPageSelectorActionTypes,
 } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
 
@@ -53,6 +56,12 @@ export const newEventPageDesc = createReducerDescription({
         return newState;
     },
     [editEventPageActionTypes.OPEN_NEW_EVENT]: (state) => {
+        const newState = { ...state };
+        newState.dataEntryIsLoading = true;
+        newState.showAddRelationship = false;
+        return newState;
+    },
+    [viewEventPageActionTypes.OPEN_NEW_EVENT]: (state) => {
         const newState = { ...state };
         newState.dataEntryIsLoading = true;
         newState.showAddRelationship = false;

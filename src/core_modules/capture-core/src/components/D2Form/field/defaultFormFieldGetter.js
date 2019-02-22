@@ -19,6 +19,7 @@ import {
     getTextRangeFieldConfig,
     getDateRangeFieldConfig,
     getDateTimeRangeFieldConfig,
+    getViewModeFieldConfig,
 } from './configs';
 
 const errorMessages = {
@@ -67,6 +68,10 @@ const fieldForTypes: FieldForTypes = {
 };
 
 export default function getDefaultFormField(metaData: MetaDataElement, options: Object, context: Object) {
+    if (options.viewMode) {
+        return getViewModeFieldConfig(metaData, options);
+    }
+
     const type = metaData.type;
     if (!fieldForTypes[type]) {
         log.warn(errorCreator(errorMessages.NO_FORMFIELD_FOR_TYPE)({ metaData }));
