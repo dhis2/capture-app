@@ -3,21 +3,23 @@ import * as React from 'react';
 import withDataEntryField from './withDataEntryField';
 
 type Props = {
+
 };
 
-type SettingsFn = (props: Object) => ?Object;
+type Settings = {
+    isApplicable: (props: Props) => boolean,
+};
 
-
-const getDataEntryFieldIfApplicable = (settingsFn: SettingsFn, InnerComponent: React.ComponentType<any>) =>
+const getDataEntryFieldIfApplicable = (settings: Settings, InnerComponent: React.ComponentType<any>) =>
     class DataEntryFieldIfApplicableHOC extends React.Component<Props> {
         innerInstance: any;
         Component: React.ComponentType<any>;
         constructor(props: Props) {
             super(props);
-            const settings = settingsFn(this.props);
-            if (settings) {
-                // $FlowSuppress
-                this.Component = withDataEntryField(settingsFn)(InnerComponent);
+            const applicable = settings.isApplicable(this.props);
+            if (applicable) {
+                // $FlowFixMe
+                this.Component = withDataEntryField(settings)(InnerComponent);
             } else {
                 this.Component = InnerComponent;
             }
@@ -37,6 +39,6 @@ const getDataEntryFieldIfApplicable = (settingsFn: SettingsFn, InnerComponent: R
         }
     };
 
-export default (settingsFn: SettingsFn) =>
+export default (settings: Settings) =>
     (InnerComponent: React.ComponentType<any>) =>
-        getDataEntryFieldIfApplicable(settingsFn, InnerComponent);
+        getDataEntryFieldIfApplicable(settings, InnerComponent);

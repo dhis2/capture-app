@@ -58,6 +58,7 @@ const getProgramSelectorSettings = () => {
         },
     };
 
+    /*
     const programSelectorSettings = (props: Object) => ({
         component: programSelectorComponent,
         componentProps: {
@@ -72,6 +73,24 @@ const getProgramSelectorSettings = () => {
             placement: placements.TOP,
             section: dataEntrySectionKeys.ENROLLMENT,
         },
+    });
+    */
+
+    const programSelectorSettings = ({
+        getComponent: () => programSelectorComponent,
+        getComponentProps: (props: Object) => ({
+            ...props,
+            styles: baseComponentStyles,
+            label: i18n.t('Program'),
+            required: false,
+            options: getOptions(props.orgUnitId),
+        }),
+        getPropName: () => 'program',
+        getMeta: () => ({
+            placement: placements.TOP,
+            section: dataEntrySectionKeys.ENROLLMENT,
+        }),
+        onUpdateField: (innerAction: ReduxAction<any, any>) => {},
     });
 
     return programSelectorSettings;
