@@ -164,6 +164,7 @@ import {
     addRelationshipForViewEventEpic,
     saveRelationshipFailedForViewEventEpic,
     RelationshipSavedForViewEventEpic,
+    deleteRelationshipForViewEventEpic,
 } from 'capture-core/components/Pages/ViewEvent/Relationship/ViewEventRelationships.epics';
 
 import {
@@ -266,6 +267,7 @@ export default combineEpics(
     addRelationshipForViewEventEpic,
     saveRelationshipFailedForViewEventEpic,
     RelationshipSavedForViewEventEpic,
+    deleteRelationshipForViewEventEpic,
     addNoteForViewEventEpic,
     saveNoteForViewEventFailedEpic,
     loadNotesForViewEventEpic,

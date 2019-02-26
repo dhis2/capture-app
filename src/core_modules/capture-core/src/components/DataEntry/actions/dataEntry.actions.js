@@ -22,9 +22,9 @@ export const actionTypes = {
     ASYNC_UPDATE_FIELD_FAILED: 'AsyncUpdateFieldFailed',
     ADD_DATA_ENTRY_NOTE: 'AddDataEntryNote',
     REMOVE_DATA_ENTRY_NOTE: 'RemoveDataEntryNote',
-    ADD_RELATIONSHIP: 'AddRelationship',
-    REMOVE_RELATIONSHIP: 'RemoveRelationship',
-    RELATIONSHIP_ALREADY_EXISTS: 'RelationshipAlreadyExists',
+    ADD_DATA_ENTRY_RELATIONSHIP: 'AddDataEntryRelationship',
+    REMOVE_DATA_ENTRY_RELATIONSHIP: 'RemoveDataEntryRelationship',
+    DATA_ENTRY_RELATIONSHIP_ALREADY_EXISTS: 'DataEntryRelationshipAlreadyExists',
     SET_CURRENT_DATA_ENTRY: 'SetCurrentDataEntry',
 };
 
@@ -122,15 +122,15 @@ export const removeNote =
 
 export const addRelationship =
     (dataEntryId: string, itemId: string, relationship: Object) =>
-        actionCreator(actionTypes.ADD_RELATIONSHIP)({ dataEntryId, itemId, relationship });
+        actionCreator(actionTypes.ADD_DATA_ENTRY_RELATIONSHIP)({ dataEntryId, itemId, relationship });
 
 export const removeRelationship =
     (dataEntryId: string, itemId: string, relationshipClientId: string) =>
-        actionCreator(actionTypes.REMOVE_RELATIONSHIP)({ dataEntryId, itemId, relationshipClientId });
+        actionCreator(actionTypes.REMOVE_DATA_ENTRY_RELATIONSHIP)({ dataEntryId, itemId, relationshipClientId });
 
 export const relationshipAlreadyExists =
     (dataEntryId: string, itemId: string, message: string) =>
-        actionCreator(actionTypes.RELATIONSHIP_ALREADY_EXISTS)({ dataEntryId, itemId, message });
+        actionCreator(actionTypes.DATA_ENTRY_RELATIONSHIP_ALREADY_EXISTS)({ dataEntryId, itemId, message });
 
 export const setCurrentDataEntry =
     (dataEntryId: string, itemId: string, extraProps?: ?any) =>

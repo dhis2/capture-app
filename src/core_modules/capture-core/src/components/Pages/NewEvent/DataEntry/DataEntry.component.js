@@ -340,8 +340,7 @@ const buildRelationshipsSettingsFn = () => {
     const relationshipsSettings = (props: Object) => {
         const hasRelationships =
             props.stage &&
-            props.stage.relationshipTypes &&
-            props.stage.relationshipTypes.length > 0;
+            props.stage.relationshipTypesWhereStageIsFrom.length > 0;
 
         return hasRelationships ? {
             component: relationshipsComponent,

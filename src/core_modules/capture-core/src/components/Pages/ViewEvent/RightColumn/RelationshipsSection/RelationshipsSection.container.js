@@ -4,6 +4,10 @@ import RelationshipsSection from './RelationshipsSection.component';
 
 import { openAddRelationship } from '../../viewEvent.actions';
 
+import {
+    requestDeleteEventRelationship,
+} from '../../Relationship/ViewEventRelationships.actions';
+
 const mapStateToProps = (state: ReduxState, props: Object) => ({
     eventId: state.viewEventPage.eventId,
     relationships: state.relationships.viewEvent || [],
@@ -12,6 +16,9 @@ const mapStateToProps = (state: ReduxState, props: Object) => ({
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onOpenAddRelationship: () => {
         dispatch(openAddRelationship());
+    },
+    onDeleteRelationship: (clientId: string) => {
+        dispatch(requestDeleteEventRelationship(clientId));
     },
 });
 

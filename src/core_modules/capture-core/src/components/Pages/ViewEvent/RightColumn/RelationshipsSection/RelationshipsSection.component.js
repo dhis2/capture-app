@@ -14,6 +14,7 @@ type Props = {
     classes: Object,
     relationships: ?Array<any>,
     onOpenAddRelationship: () => void,
+    onDeleteRelationship: (clientId: string) => void,
     eventId: string,
     programStage: ProgramStage,
 }
@@ -51,8 +52,8 @@ class RelationshipsSection extends React.Component<Props> {
         this.props.onOpenAddRelationship();
     }
 
-    handleRemoveRelationship = (id: string) => {
-
+    handleRemoveRelationship = (clientId: string) => {
+        this.props.onDeleteRelationship(clientId);
     }
 
     renderItems = (relationships: Array<any>) => relationships.map(relationship => (

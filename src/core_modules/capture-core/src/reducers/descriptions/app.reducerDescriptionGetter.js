@@ -27,6 +27,9 @@ import {
     actionTypes as editEventPageSelectorActionTypes,
 } from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
 import {
+    actionTypes as viewEventPageSelectorActionTypes,
+} from '../../components/Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
+import {
     urlActionTypes as newEnrollmentUrlActionTypes,
 } from '../../components/Pages/NewEnrollment';
 
@@ -68,6 +71,12 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
     [editEventPageSelectorActionTypes.OPEN_NEW_EVENT]: (state) => {
+        const newState = { ...state };
+        newState.page = 'newEvent';
+        newState.locationSwitchInProgress = true;
+        return newState;
+    },
+    [viewEventPageSelectorActionTypes.OPEN_NEW_EVENT]: (state) => {
         const newState = { ...state };
         newState.page = 'newEvent';
         newState.locationSwitchInProgress = true;

@@ -17,12 +17,19 @@ import { resetProgramIdBase } from '../../../QuickSelector/actions/QuickSelector
 import dataEntryHasChanges from '../../../DataEntry/common/dataEntryHasChanges';
 
 
-const mapStateToProps = (state: ReduxState) => ({
-    selectedProgramId: state.currentSelections.programId,
-    selectedOrgUnitId: state.currentSelections.orgUnitId,
-    formInputInProgress: state.currentSelections.complete && dataEntryHasChanges(state, 'singleEvent-viewEvent'),
-    showAddRelationship: state.viewEventPage.showAddRelationship,
-});
+const mapStateToProps = (state: ReduxState) => {
+    const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
+    const formHasChanges =
+        state.currentSelections.complete &&
+        eventDetailsSection.showEditEvent &&
+        dataEntryHasChanges(state, 'singleEvent-editEvent');
+    return {
+        selectedProgramId: state.currentSelections.programId,
+        selectedOrgUnitId: state.currentSelections.orgUnitId,
+        formInputInProgress: formHasChanges,
+        showAddRelationship: state.viewEventPage.showAddRelationship,
+    };
+};
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onSetOrgUnit: (id: string, orgUnit: Object) => {

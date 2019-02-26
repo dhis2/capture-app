@@ -17,16 +17,17 @@ import {
     batchActionTypes as viewEventNewRelationshipBatchActionTypes,
     startSaveEventRelationship,
     eventRelationshipAlreadyExists,
+    startDeleteEventRelationship,
 } from './ViewEventRelationships.actions';
 import {
     convertClientRelationshipToServer,
     getRelationshipsForEvent,
 } from '../../../../relationships';
+import { ActionsObservable } from 'redux-observable';
 
 const relationshipKey = 'viewEvent';
 
-export const loadRelationshipsForViewEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+export const loadRelationshipsForViewEventEpic = (action$: ActionsObservable) =>
     action$.ofType(
         viewEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
         viewEventActionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE,
@@ -39,9 +40,22 @@ export const loadRelationshipsForViewEventEpic = (action$: InputObservable, stor
                 .then(relationships => setRelationships(relationshipKey, relationships || []));
         });
 
+export const deleteRelationshipForViewEventEpic = (action$: ActionsObservable, store: ReduxStore) =>
+    action$.ofType(
+        viewEventNewRelationshipActionTypes.REQUEST_DELETE_EVENT_RELATIONSHIP,
+    ).map((action) => {
+        const clientId = action.payload.clientId;
+        const state = store.getState();
+        const relationship = state.relationships.viewEvent.find(r => r.clientId === clientId);
 
-export const addRelationshipForViewEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+        return batchActions([
+            removeRelationship(relationshipKey, clientId),
+            startDeleteEventRelationship(relationship.id, clientId, state.currentSelections),
+        ], viewEventNewRelationshipBatchActionTypes.DELETE_EVENT_RELATIONSHIP_BATCH);
+    });
+
+
+export const addRelationshipForViewEventEpic = (action$: ActionsObservable, store: ReduxStore) =>
     action$.ofType(viewEventNewRelationshipActionTypes.REQUEST_ADD_EVENT_RELATIONSHIP)
         .map((action) => {
             const state = store.getState();
@@ -90,13 +104,11 @@ export const addRelationshipForViewEventEpic = (action$: InputObservable, store:
             ], viewEventNewRelationshipBatchActionTypes.SAVE_EVENT_RELATIONSHIP_BATCH);
         });
 
-export const saveRelationshipFailedForViewEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+export const saveRelationshipFailedForViewEventEpic = (action$: ActionsObservable) =>
     action$.ofType(viewEventNewRelationshipActionTypes.SAVE_FAILED_FOR_EVENT_RELATIONSHIP)
         .map(action => removeRelationship(relationshipKey, action.meta.clientId));
 
-export const RelationshipSavedForViewEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+export const RelationshipSavedForViewEventEpic = (action$: ActionsObservable, store: ReduxStore) =>
     action$.ofType(viewEventNewRelationshipActionTypes.EVENT_RELATIONSHIP_SAVED)
         .map((action) => {
             const state = store.getState();

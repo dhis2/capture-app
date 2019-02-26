@@ -21,7 +21,7 @@ export const cancelEditEventDataEntry = () =>
     actionCreator(actionTypes.CANCEL_EDIT_EVENT_DATA_ENTRY)();
 
 export const requestSaveEditEventDataEntry = (itemId: string, dataEntryId: string, formFoundation: Object) =>
-    actionCreator(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY)({ itemId, dataEntryId, formFoundation });
+    actionCreator(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY)({ itemId, dataEntryId, formFoundation }, { skipLogging: ['formFoundation'] });
 
 
 export const startSaveEditEventDataEntry = (eventId: string, serverData: Object, selections: Object) =>

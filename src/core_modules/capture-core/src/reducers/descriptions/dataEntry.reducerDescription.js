@@ -319,7 +319,7 @@ export const dataEntriesRelationshipsDesc = createReducerDescription({
         newState[key] = payload.dataEntryRelationships ? [...payload.dataEntryRelationships] : [];
         return newState;
     },
-    [actionTypes.ADD_RELATIONSHIP]: (state, action) => {
+    [actionTypes.ADD_DATA_ENTRY_RELATIONSHIP]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
 
@@ -327,7 +327,7 @@ export const dataEntriesRelationshipsDesc = createReducerDescription({
         newState[key] = state[key] ? [...state[key], { ...payload.relationship }] : [{ ...payload.relationship }];
         return newState;
     },
-    [actionTypes.REMOVE_RELATIONSHIP]: (state, action) => {
+    [actionTypes.REMOVE_DATA_ENTRY_RELATIONSHIP]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
 

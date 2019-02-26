@@ -10,6 +10,9 @@ import ConfirmDialog from '../../../Dialogs/ConfirmDialog.component';
 
 
 const getStyles = theme => ({
+    container: {
+        padding: `${theme.typography.pxToRem(10)} ${theme.typography.pxToRem(24)}`,
+    },
     headerContainer: {
         display: 'flex',
         justifyContent: 'space-between',
@@ -80,7 +83,7 @@ class ViewEventNewRelationshipWrapper extends React.Component<Props, State> {
     render() {
         const { classes, onCancel, ...passOnProps } = this.props;
         return (
-            <div>
+            <div className={classes.container}>
                 <Button className={classes.backToEventButton} variant="raised" onClick={this.handleDiscard}>
                     <ChevronLeft />
                     {i18n.t('Back to event')}
