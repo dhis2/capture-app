@@ -20,6 +20,10 @@ export const viewEventPageDesc = createReducerDescription({
     [viewEventActionTypes.VIEW_EVENT_FROM_URL]: (state, action) => {
         const newState = { ...state };
         newState.eventId = action.payload.eventId;
+        if (newState.eventId !== state.eventId) {
+            newState.eventHasChanged = false;
+            newState.saveInProgress = false;
+        }
         newState.isLoading = true;
         newState.loadError = null;
         return newState;
@@ -74,6 +78,8 @@ export const viewEventPageDesc = createReducerDescription({
             ...state,
             eventDetailsSection: {},
             eventId: action.payload,
+            eventHasChanged: false,
+            saveInProgress: false,
             isLoading: false,
             dataEntryIsLoading: true,
             loadError: null,
@@ -122,11 +128,31 @@ export const viewEventPageDesc = createReducerDescription({
     }),
     [editEventDataEntryActionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY]: (state, action) => ({
         ...state,
+        saveInProgress: true,
         eventDetailsSection: {
             ...state.eventDetailsSection,
             showEditEvent: false,
         },
     }),
+    [editEventDataEntryActionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED]: (state, action) => {
+        if (action.meta.eventId !== state.eventId) {
+            return state;
+        }
+        return {
+            ...state,
+            saveInProgress: false,
+        };
+    },
+    [editEventDataEntryActionTypes.EDIT_EVENT_DATA_ENTRY_SAVED]: (state, action) => {
+        if (action.meta.eventId !== state.eventId) {
+            return state;
+        }
+        return {
+            ...state,
+            saveInProgress: false,
+            eventHasChanged: true,
+        };
+    },
     [viewEventActionTypes.UPDATE_EVENT_CONTAINER]: (state, action) => ({
         ...state,
         prevEventContainer: {

@@ -2,6 +2,7 @@
 import log from 'loglevel';
 import { push } from 'react-router-redux';
 import i18n from '@dhis2/d2-i18n';
+import { fromPromise } from 'rxjs/observable/fromPromise';
 import isSelectionsEqual from '../../../App/isSelectionsEqual';
 import errorCreator from '../../../../utils/errorCreator';
 import getErrorMessageAndDetails from '../../../../utils/errors/getErrorMessageAndDetails';
@@ -15,6 +16,7 @@ import {
     startOpenEventForView,
     noWorkingListUpdateNeededOnBackToMainPage,
     updateWorkingListOnBackToMainPage,
+    updateWorkingListPendingOnBackToMainPage,
 } from '../viewEvent.actions';
 import { actionTypes as eventListActionTypes } from '../../MainPage/EventsList/eventsList.actions';
 import { getEvent } from '../../../../events/eventRequests';
@@ -22,21 +24,18 @@ import {
     initializeNewRelationship,
 } from '../../NewRelationship/newRelationship.actions';
 
+
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
     action$.ofType(eventListActionTypes.OPEN_VIEW_EVENT_PAGE)
-        .map((action) => {
+        .switchMap((action) => {
             const eventId = action.payload;
-            const state = store.getState();
-            const event = state.events[eventId];
-            const values = state.eventsValues[eventId];
-            const eventContainer = {
-                event,
-                values,
-                id: event.eventId,
-            };
 
-            const orgUnit = state.organisationUnits[event.orgUnitId];
+            return fromPromise(getEvent(eventId));
+        })
+        .map((eventContainer) => {
+            const state = store.getState();
+            const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
             return startOpenEventForView(eventContainer, orgUnit);
         });
 
@@ -108,6 +107,15 @@ export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) 
             if (currentSelections.complete && !isSelectionsEqual(listSelections, currentSelections)) {
                 return updateWorkingListOnBackToMainPage();
             }
+
+            if (state.viewEventPage.eventHasChanged) {
+                return updateWorkingListOnBackToMainPage();
+            }
+
+            if (state.viewEventPage.saveInProgress) {
+                return updateWorkingListPendingOnBackToMainPage();
+            }
+
             return noWorkingListUpdateNeededOnBackToMainPage();
         });
 

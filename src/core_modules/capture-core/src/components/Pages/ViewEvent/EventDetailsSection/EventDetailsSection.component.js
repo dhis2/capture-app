@@ -12,7 +12,8 @@ import { ProgramStage } from '../../../../metaData';
 
 const getStyles = (theme: Theme) => ({
     container: {
-        flexGrow: 3,
+        flexGrow: 2,
+        flexBasis: 0,
     },
     content: {
         display: 'flex',

@@ -36,6 +36,7 @@ const getStyles = (theme: Theme) => ({
     },
     contentContainer: {
         display: 'flex',
+        flexWrap: 'wrap',
     },
 });
 

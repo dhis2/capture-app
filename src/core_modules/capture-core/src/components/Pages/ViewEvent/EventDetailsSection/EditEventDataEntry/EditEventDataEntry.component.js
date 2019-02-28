@@ -313,16 +313,14 @@ class EditEventDataEntry extends Component<Props> {
             ...passOnProps
         } = this.props;
         return (
-            <div className={classes.dataEntryContainer}>
-                <DataEntryWrapper
-                    id={'singleEvent'}
-                    onUpdateFormField={onUpdateField}
-                    onUpdateFormFieldAsync={onStartAsyncUpdateField}
-                    fieldOptions={this.fieldOptions}
-                    dataEntrySections={this.dataEntrySections}
-                    {...passOnProps}
-                />
-            </div>
+            <DataEntryWrapper
+                id={'singleEvent'}
+                onUpdateFormField={onUpdateField}
+                onUpdateFormFieldAsync={onStartAsyncUpdateField}
+                fieldOptions={this.fieldOptions}
+                dataEntrySections={this.dataEntrySections}
+                {...passOnProps}
+            />
         );
     }
 }

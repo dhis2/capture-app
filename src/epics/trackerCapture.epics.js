@@ -97,6 +97,7 @@ import {
 } from 'capture-core/components/Connectivity/connectivity.epics';
 import {
     updateEventListAfterSaveOrUpdateEventEpic,
+    updateEventListAfterUpdateEventEpic,
 } from 'capture-core/components/Pages/MainPage/mainPage.epics';
 import {
     networkMonitorStatusEpic,
@@ -276,4 +277,5 @@ export default combineEpics(
     loadEditEventDataEntryEpic,
     saveEditedEventEpic,
     saveEditedEventFailedEpic,
+    updateEventListAfterUpdateEventEpic,
 );

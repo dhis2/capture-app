@@ -17,7 +17,7 @@ type Props = {
 
 const getStyles = (theme: Theme) => ({
     container: {
-        flexBasis: theme.typography.pxToRem(400),
+        flexBasis: theme.typography.pxToRem(0),
         flexGrow: 1,
     },
 });

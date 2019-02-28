@@ -15,6 +15,7 @@ export const actionTypes = {
     START_GO_BACK_TO_MAIN_PAGE: 'StartGoBackToMainPageForViewEvent',
     VIEW_EVENT_OPEN_NEW_RELATIONSHIP: 'ViewEventOpenAddRelationship',
     UPDATE_EVENT_CONTAINER: 'UpdateEventContainerForViewEvent',
+    UPDATE_WORKING_LIST_PENDING_ON_BACK_TO_MAIN_PAGE: 'UpdateWorkingListPendingOnBackToMainPageForViewEvent',
 };
 
 export const viewEventFromUrl = (data: Object) =>
@@ -52,6 +53,9 @@ export const noWorkingListUpdateNeededOnBackToMainPage = () =>
 
 export const updateWorkingListOnBackToMainPage = () =>
     actionCreator(actionTypes.UPDATE_WORKING_LIST_ON_BACK_TO_MAIN_PAGE)();
+
+export const updateWorkingListPendingOnBackToMainPage = () =>
+    actionCreator(actionTypes.UPDATE_WORKING_LIST_PENDING_ON_BACK_TO_MAIN_PAGE)();
 
 export const openAddRelationship = () =>
     actionCreator(actionTypes.VIEW_EVENT_OPEN_NEW_RELATIONSHIP)();
