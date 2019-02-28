@@ -50,16 +50,21 @@ class IndicatorsSection extends React.Component<Props> {
         );
     }
 
-    renderTextItems = (displayTexts: Array<any>, classes: Object) => displayTexts.map(text => (
-        <div className={classNames(classes.indicator, classes.textIndicator)}>{text}</div>
+    renderTextItems = (displayTexts: Array<any>, classes: Object) => displayTexts.map(displayText => (
+        <div
+            className={classNames(classes.indicator, classes.textIndicator)}
+            key={displayText.id}
+        >
+            {displayText.message}
+        </div>
     ))
 
     renderKeyValueItems = (keyValuePairs: Array<any>, classes: Object) => keyValuePairs.map(pair => (
-        <div className={classNames(classes.indicator, classes.keyValueIndicator)}>
+        <div className={classNames(classes.indicator, classes.keyValueIndicator)} key={pair.id}>
             <div className={classes.keyValueIndicatorItem}>{pair.key}</div>
             <div className={classes.keyValueIndicatorItem}>{pair.value}</div>
         </div>
-    ))
+    ));
 
     getIndicators = () => this.props.indicators || {};
 

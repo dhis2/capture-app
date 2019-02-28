@@ -44,8 +44,14 @@ class ErrorsSection extends React.Component<Props> {
     }
 
     renderItems = (errors: Array<any>) => errors.map(error => (
-        <div className={this.props.classes.error}>{error}</div>
-    ))
+        <div
+            className={this.props.classes.error}
+            key={error.id}
+        >
+            {error.message}
+        </div>
+    ));
+
     render() {
         const { errors } = this.props;
         return errors && errors.length > 0 ? (
@@ -60,3 +66,4 @@ class ErrorsSection extends React.Component<Props> {
 }
 
 export default withStyles(getStyles)(ErrorsSection);
+

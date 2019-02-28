@@ -43,7 +43,12 @@ class WarningsSection extends React.Component<Props> {
     }
 
     renderItems = (warnings: Array<any>) => warnings.map(warning => (
-        <div className={this.props.classes.warning}>{warning}</div>
+        <div
+            className={this.props.classes.warning}
+            key={warning.id}
+        >
+            {warning.message}
+        </div>
     ))
     render() {
         const { warnings } = this.props;

@@ -15,7 +15,15 @@ export type HideOutputEffect = OutputEffect & {
 };
 
 export type MessageEffect = OutputEffect & {
-    message: string,
+     message: string,
+};
+
+export type GeneralErrorEffect = OutputEffect & {
+    error: { id: string, message: string },
+};
+
+export type GeneralWarningEffect = OutputEffect & {
+    warning: { id: string, message: string },
 };
 
 export type CompulsoryEffect = OutputEffect & {

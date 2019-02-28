@@ -22,26 +22,25 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const components = [
-    ErrorsSection,
-    WarningsSection,
-    FeedbacksSection,
-    IndicatorsSection,
-    RelationshipsSection,
-    NotesSection,
+const componentContainers = [
+    { id: 'ErrorsSection', Component: ErrorsSection },
+    { id: 'WarningsSection', Component: WarningsSection },
+    { id: 'FeedbacksSection', Component: FeedbacksSection },
+    { id: 'IndicatorsSection', Component: IndicatorsSection },
+    { id: 'RelationshipsSection', Component: RelationshipsSection },
+    { id: 'NotesSection', Component: NotesSection },
 ];
 
 class RightColumnWrapper extends React.Component<Props> {
-
-    renderComponent = (Component: React.ComponentType<any>, props: Object) => (
-        <Component {...props} />
+    renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: Object) => (
+        <container.Component key={container.id} {...props} />
     )
 
     render() {
         const { classes, ...passOnProps } = this.props;
         return (
             <div className={this.props.classes.container}>
-                {components.map(c => this.renderComponent(c, passOnProps))}
+                {componentContainers.map(c => this.renderComponent(c, passOnProps))}
             </div>
         );
     }

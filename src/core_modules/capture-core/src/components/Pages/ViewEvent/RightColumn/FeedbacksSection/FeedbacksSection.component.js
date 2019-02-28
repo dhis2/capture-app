@@ -51,12 +51,17 @@ class FeedbacksSection extends React.Component<Props> {
         );
     }
 
-    renderTextItems = (displayTexts: Array<any>, classes: Object) => displayTexts.map(text => (
-        <div className={classNames(classes.feedback, classes.textFeedback)}>{text}</div>
+    renderTextItems = (displayTexts: Array<any>, classes: Object) => displayTexts.map(displayText => (
+        <div
+            className={classNames(classes.feedback, classes.textFeedback)}
+            key={displayText.id}
+        >
+            {displayText.message}
+        </div>
     ))
 
     renderKeyValueItems = (keyValuePairs: Array<any>, classes: Object) => keyValuePairs.map(pair => (
-        <div className={classNames(classes.feedback, classes.keyValueFeedback)}>
+        <div className={classNames(classes.feedback, classes.keyValueFeedback)} key={pair.id}>
             <div className={classes.keyValueFeedbackItem}>{pair.key}</div>
             <div className={classes.keyValueFeedbackItem}>{pair.value}</div>
         </div>

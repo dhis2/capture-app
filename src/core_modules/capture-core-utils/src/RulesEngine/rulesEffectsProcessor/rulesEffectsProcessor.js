@@ -11,6 +11,8 @@ import type {
     AssignOutputEffect,
     HideOutputEffect,
     MessageEffect,
+    GeneralErrorEffect,
+    GeneralWarningEffect,
     CompulsoryEffect,
 } from '../rulesEngine.types';
 
@@ -77,12 +79,15 @@ export default function getRulesEffectsProcessor(
         };
     }
 
-    function processShowError(effect: ProgramRuleEffect, processIdName: string): ?MessageEffect {
+    function processShowError(effect: ProgramRuleEffect, processIdName: string): ?(MessageEffect | GeneralErrorEffect) {
         if (!effect[processIdName]) {
             return {
                 type: actions.SHOW_ERROR,
                 id: 'generalErrors',
-                message: `${effect.content} ${effect.data ? effect.data : ''}`,
+                error: {
+                    id: effect.id,
+                    message: `${effect.content} ${effect.data ? effect.data : ''}`,
+                },
             };
         }
 
@@ -93,12 +98,12 @@ export default function getRulesEffectsProcessor(
         };
     }
 
-    function processShowWarning(effect: ProgramRuleEffect, processIdName: string): ?MessageEffect {
+    function processShowWarning(effect: ProgramRuleEffect, processIdName: string): ?(MessageEffect | GeneralWarningEffect) {
         if (!effect[processIdName]) {
             return {
                 type: actions.SHOW_WARNING,
                 id: 'generalWarnings',
-                message: `${effect.content} ${effect.data ? effect.data : ''}`,
+                warning: { id: effect.id, message: `${effect.content} ${effect.data ? effect.data : ''}` },
             };
         }
 
@@ -162,7 +167,10 @@ export default function getRulesEffectsProcessor(
         return {
             type: actions.DISPLAY_TEXT,
             id: effect.location,
-            message: `${effect.content} ${effect.data ? effect.data : ''}`,
+            displayText: {
+                id: effect.id,
+                message: `${effect.content} ${effect.data ? effect.data : ''}`,
+            },
         };
     }
 
@@ -170,8 +178,11 @@ export default function getRulesEffectsProcessor(
         return {
             type: actions.DISPLAY_KEY_VALUE_PAIR,
             id: effect.location,
-            message: effect.content,
-            value: effect.data,
+            displayKeyValuePair: {
+                id: effect.id,
+                key: effect.content,
+                value: effect.data,
+            },
         };
     }
 
