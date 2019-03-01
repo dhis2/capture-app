@@ -3,11 +3,13 @@ import { actionCreator } from '../../../../actions/actions.utils';
 import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
 
 export const batchActionTypes = {
+    LOAD_EVENT_RELATIONSHIPS_BATCH: 'LoadEventRelationshipsBatch',
     SAVE_EVENT_RELATIONSHIP_BATCH: 'SaveEventRelationshipBatch',
     DELETE_EVENT_RELATIONSHIP_BATCH: 'DeleteEventRelationshipBatch',
 };
 
 export const actionTypes = {
+    EVENT_RELATIONSHIPS_LOADED: 'EventRelationshipsLoaded',
     EVENT_CANCEL_NEW_RELATIONSHIP: 'EventCancelNewRelationship',
     REQUEST_ADD_EVENT_RELATIONSHIP: 'RequestAddEventRelationship',
     START_SAVE_EVENT_RELATIONSHIP: 'StartSaveEventRelationship',
@@ -19,6 +21,9 @@ export const actionTypes = {
     DELETE_FAILED_FOR_EVENT_RELATIONSHIP: 'DeleteFailedForEventRelationship',
     REQUEST_DELETE_EVENT_RELATIONSHIP: 'RequestDeleteEventRelationship',
 };
+
+export const eventRelationshipsLoaded = () =>
+    actionCreator(actionTypes.EVENT_RELATIONSHIPS_LOADED)();
 
 export const eventCancelNewRelationship = () =>
     actionCreator(actionTypes.EVENT_CANCEL_NEW_RELATIONSHIP)({});

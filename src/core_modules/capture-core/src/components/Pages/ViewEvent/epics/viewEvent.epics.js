@@ -17,6 +17,7 @@ import {
     noWorkingListUpdateNeededOnBackToMainPage,
     updateWorkingListOnBackToMainPage,
     updateWorkingListPendingOnBackToMainPage,
+    openViewEventPageFailed,
 } from '../viewEvent.actions';
 import { actionTypes as eventListActionTypes } from '../../MainPage/EventsList/eventsList.actions';
 import { getEvent } from '../../../../events/eventRequests';
@@ -29,14 +30,26 @@ export const getEventOpeningFromEventListEpic = (action$: InputObservable, store
     // $FlowSuppress
     action$.ofType(eventListActionTypes.OPEN_VIEW_EVENT_PAGE)
         .switchMap((action) => {
-            const eventId = action.payload;
-
-            return fromPromise(getEvent(eventId));
-        })
-        .map((eventContainer) => {
             const state = store.getState();
-            const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
-            return startOpenEventForView(eventContainer, orgUnit);
+            const eventId = action.payload;
+            return getEvent(eventId)
+                .then((eventContainer) => {
+                    if (!eventContainer) {
+                        return openViewEventPageFailed(
+                            i18n.t('Event could not be loaded. Are you sure it exists?'));
+                    }
+                    const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
+                    return startOpenEventForView(eventContainer, orgUnit);
+                })
+                .catch((error) => {
+                    const { message, details } = getErrorMessageAndDetails(error);
+                    log.error(
+                        errorCreator(
+                            message ||
+                            i18n.t('Event could not be loaded'))(details));
+                    return openViewEventPageFailed(
+                        i18n.t('Event could not be loaded. Are you sure it exists?'));
+                });
         });
 
 export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>

@@ -9,6 +9,7 @@ import {
     actionTypes as viewEventNotesActionTypes,
     batchActionTypes as viewEventNotesBatchActionTypes,
     startSaveEventNote,
+    eventNotesLoaded,
 } from './viewEventNotes.actions';
 import {
     actionTypes as viewEventActionTypes,
@@ -34,7 +35,10 @@ export const loadNotesForViewEventEpic = (action$: InputObservable, store: Redux
             const notes = (eventContainer && eventContainer.event && eventContainer.event.notes) || [];
             // Load event relationships
 
-            return setNotes(noteKey, notes);
+            return batchActions([
+                eventNotesLoaded(),
+                setNotes(noteKey, notes),
+            ], viewEventNotesBatchActionTypes.LOAD_EVENT_NOTES_BATCH);
         });
 
 export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxStore) =>

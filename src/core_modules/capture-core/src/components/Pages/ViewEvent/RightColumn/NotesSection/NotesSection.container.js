@@ -3,10 +3,14 @@ import { connect } from 'react-redux';
 import NotesSection from './NotesSection.component';
 import { requestSaveEventNote, updateEventNoteField } from '../../Notes/viewEventNotes.actions';
 
-const mapStateToProps = (state: ReduxState, props: Object) => ({
-    notes: state.notes.viewEvent || [],
-    fieldValue: state.viewEventPage.notesSection && state.viewEventPage.notesSection.fieldValue,
-});
+const mapStateToProps = (state: ReduxState, props: Object) => {
+    const notesSection = state.viewEventPage.notesSection || {};
+    return {
+        notes: state.notes.viewEvent || [],
+        ready: !notesSection.isLoading,
+        fieldValue: notesSection.fieldValue,
+    };
+};
 
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({

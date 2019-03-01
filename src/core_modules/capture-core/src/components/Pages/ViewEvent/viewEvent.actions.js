@@ -16,6 +16,7 @@ export const actionTypes = {
     VIEW_EVENT_OPEN_NEW_RELATIONSHIP: 'ViewEventOpenAddRelationship',
     UPDATE_EVENT_CONTAINER: 'UpdateEventContainerForViewEvent',
     UPDATE_WORKING_LIST_PENDING_ON_BACK_TO_MAIN_PAGE: 'UpdateWorkingListPendingOnBackToMainPageForViewEvent',
+    OPEN_VIEW_EVENT_PAGE_FAILED: 'OpenViewEventPageFailed',
 };
 
 export const viewEventFromUrl = (data: Object) =>
@@ -62,3 +63,6 @@ export const openAddRelationship = () =>
 
 export const updateEventContainer = (eventContainer: Object, orgUnit: Object) =>
     actionCreator(actionTypes.UPDATE_EVENT_CONTAINER)({ eventContainer, orgUnit });
+
+export const openViewEventPageFailed = (error: string) =>
+    actionCreator(actionTypes.OPEN_VIEW_EVENT_PAGE_FAILED)({ error });

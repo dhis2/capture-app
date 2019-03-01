@@ -7,7 +7,9 @@ import { withStyles } from '@material-ui/core';
 import ViewEventSection from '../../Section/ViewEventSection.component';
 import ViewEventSectionHeader from '../../Section/ViewEventSectionHeader.component';
 import Notes from '../../../../Notes/Notes.component';
+import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
 
+const LoadingNotes = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Notes);
 
 type Props = {
     classes: Object,
@@ -15,7 +17,13 @@ type Props = {
     onAddNote: () => void,
     onUpdateNoteField: (value: string) => void,
     fieldValue: ?string,
+    ready: boolean,
 }
+
+const loadingIndicatorStyle = {
+    height: 36,
+    width: 36,
+};
 
 const headerText = i18n.t('Comments');
 
@@ -34,8 +42,9 @@ const getStyles = (theme: Theme) => ({
 
 class NotesSection extends React.Component<Props> {
     renderHeader = () => {
-        const { classes, notes } = this.props;
-        const count = notes ? notes.length : 0;
+        const { classes, notes, ready } = this.props;
+        let count = notes ? notes.length : 0;
+        count = ready ? count : null;
         return (
             <ViewEventSectionHeader
                 icon={ChatIcon}
@@ -47,13 +56,15 @@ class NotesSection extends React.Component<Props> {
     }
 
     render() {
-        const { notes, fieldValue, onAddNote } = this.props;
+        const { notes, fieldValue, onAddNote, ready } = this.props;
         return (
             <ViewEventSection
                 collapsable
                 header={this.renderHeader()}
             >
-                <Notes
+                <LoadingNotes
+                    loadingIndicatorStyle={loadingIndicatorStyle}
+                    ready={ready}
                     notes={notes}
                     onAddNote={onAddNote}
                     onBlur={this.props.onUpdateNoteField}

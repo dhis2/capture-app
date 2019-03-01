@@ -61,8 +61,6 @@ const styles = theme => ({
         marginTop: theme.typography.pxToRem(10),
     },
     newNoteContainer: {
-        marginTop: theme.typography.pxToRem(5),
-        marginBottom: theme.typography.pxToRem(5),
     },
     newNoteFormContainer: {
         background: theme.palette.grey[200],

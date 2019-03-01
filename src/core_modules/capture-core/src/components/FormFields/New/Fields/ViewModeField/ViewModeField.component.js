@@ -7,12 +7,15 @@ import { withStyles } from '@material-ui/core';
 type Props = {
     value?: ?any,
     valueConverter?: ?(value: any) => any,
+    classes: {
+        container: string,
+    },
 }
 
 const getStyles = (theme: Theme) => ({
     container: {
-        paddingLeft: '12px',
         width: '100%',
+        fontWeight: 500,
     },
 });
 

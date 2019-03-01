@@ -8,6 +8,7 @@ import getDataEntryKey from '../../DataEntry/common/getDataEntryKey';
 import { editEventIds } from '../EditEvent/DataEntry/editEventDataEntry.actions';
 import { viewEventIds } from './EventDetailsSection/eventDetails.actions';
 import { getEventProgramThrowIfNotFound } from '../../../metaData';
+import withErrorMessageHandler from '../../../HOC/withErrorMessageHandler';
 
 const getStage = (state: ReduxState) => {
     const program = getEventProgramThrowIfNotFound(state.currentSelections.programId);
@@ -18,7 +19,6 @@ const mapStateToProps = (state: ReduxState) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
     return {
         programStage: getStage(state),
-        ready: !state.viewEventPage.isLoading,
         error: state.viewEventPage.loadError,
         currentDataEntryKey: eventDetailsSection.showEditEvent ? getDataEntryKey(editEventIds.dataEntryId, editEventIds.itemId) : getDataEntryKey(viewEventIds.dataEntryId, viewEventIds.itemId),
     };
@@ -31,4 +31,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowSuppress
-export default connect(mapStateToProps, mapDispatchToProps)(ViewEvent);
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorMessageHandler()(ViewEvent));

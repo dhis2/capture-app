@@ -1,6 +1,7 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
 import i18n from '@dhis2/d2-i18n';
+import { ActionsObservable } from 'redux-observable';
 import uuid from 'd2-utilizr/src/uuid';
 import {
     addRelationship,
@@ -13,17 +14,17 @@ import {
 } from '../viewEvent.actions';
 
 import {
-    actionTypes as viewEventNewRelationshipActionTypes,
-    batchActionTypes as viewEventNewRelationshipBatchActionTypes,
+    actionTypes as viewEventRelationshipsActionTypes,
+    batchActionTypes as viewEventRelationshipsBatchActionTypes,
     startSaveEventRelationship,
     eventRelationshipAlreadyExists,
     startDeleteEventRelationship,
+    eventRelationshipsLoaded,
 } from './ViewEventRelationships.actions';
 import {
     convertClientRelationshipToServer,
     getRelationshipsForEvent,
 } from '../../../../relationships';
-import { ActionsObservable } from 'redux-observable';
 
 const relationshipKey = 'viewEvent';
 
@@ -37,12 +38,15 @@ export const loadRelationshipsForViewEventEpic = (action$: ActionsObservable) =>
             // Load event relationships
             const event = action.payload.eventContainer.event;
             return getRelationshipsForEvent(event.eventId, event.programId)
-                .then(relationships => setRelationships(relationshipKey, relationships || []));
+                .then(relationships => batchActions([
+                    eventRelationshipsLoaded(),
+                    setRelationships(relationshipKey, relationships || []),
+                ], viewEventRelationshipsBatchActionTypes.LOAD_EVENT_RELATIONSHIPS_BATCH));
         });
 
 export const deleteRelationshipForViewEventEpic = (action$: ActionsObservable, store: ReduxStore) =>
     action$.ofType(
-        viewEventNewRelationshipActionTypes.REQUEST_DELETE_EVENT_RELATIONSHIP,
+        viewEventRelationshipsActionTypes.REQUEST_DELETE_EVENT_RELATIONSHIP,
     ).map((action) => {
         const clientId = action.payload.clientId;
         const state = store.getState();
@@ -51,12 +55,12 @@ export const deleteRelationshipForViewEventEpic = (action$: ActionsObservable, s
         return batchActions([
             removeRelationship(relationshipKey, clientId),
             startDeleteEventRelationship(relationship.id, clientId, state.currentSelections),
-        ], viewEventNewRelationshipBatchActionTypes.DELETE_EVENT_RELATIONSHIP_BATCH);
+        ], viewEventRelationshipsBatchActionTypes.DELETE_EVENT_RELATIONSHIP_BATCH);
     });
 
 
 export const addRelationshipForViewEventEpic = (action$: ActionsObservable, store: ReduxStore) =>
-    action$.ofType(viewEventNewRelationshipActionTypes.REQUEST_ADD_EVENT_RELATIONSHIP)
+    action$.ofType(viewEventRelationshipsActionTypes.REQUEST_ADD_EVENT_RELATIONSHIP)
         .map((action) => {
             const state = store.getState();
             const eventId = state.viewEventPage.eventId;
@@ -87,7 +91,7 @@ export const addRelationshipForViewEventEpic = (action$: ActionsObservable, stor
                 const message = i18n.t(
                     'Relationship of type {{relationshipTypeName}} to {{entityName}} already exists',
                     {
-                        entityName: clientRelationship.entity.name,
+                        entityName: clientRelationship.from.name,
                         relationshipTypeName: clientRelationship.relationshipType.name,
                     },
                 );
@@ -101,15 +105,15 @@ export const addRelationshipForViewEventEpic = (action$: ActionsObservable, stor
             return batchActions([
                 addRelationship(relationshipKey, clientRelationship),
                 startSaveEventRelationship(serverRelationshipData, state.currentSelections, relationshipClientId),
-            ], viewEventNewRelationshipBatchActionTypes.SAVE_EVENT_RELATIONSHIP_BATCH);
+            ], viewEventRelationshipsBatchActionTypes.SAVE_EVENT_RELATIONSHIP_BATCH);
         });
 
 export const saveRelationshipFailedForViewEventEpic = (action$: ActionsObservable) =>
-    action$.ofType(viewEventNewRelationshipActionTypes.SAVE_FAILED_FOR_EVENT_RELATIONSHIP)
+    action$.ofType(viewEventRelationshipsActionTypes.SAVE_FAILED_FOR_EVENT_RELATIONSHIP)
         .map(action => removeRelationship(relationshipKey, action.meta.clientId));
 
 export const RelationshipSavedForViewEventEpic = (action$: ActionsObservable, store: ReduxStore) =>
-    action$.ofType(viewEventNewRelationshipActionTypes.EVENT_RELATIONSHIP_SAVED)
+    action$.ofType(viewEventRelationshipsActionTypes.EVENT_RELATIONSHIP_SAVED)
         .map((action) => {
             const state = store.getState();
             const relationship = state.relationships[relationshipKey].find(r => r.clientId === action.meta.clientId);

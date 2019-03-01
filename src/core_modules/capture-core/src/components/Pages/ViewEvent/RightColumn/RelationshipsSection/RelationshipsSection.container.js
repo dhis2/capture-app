@@ -8,10 +8,14 @@ import {
     requestDeleteEventRelationship,
 } from '../../Relationship/ViewEventRelationships.actions';
 
-const mapStateToProps = (state: ReduxState, props: Object) => ({
-    eventId: state.viewEventPage.eventId,
-    relationships: state.relationships.viewEvent || [],
-});
+const mapStateToProps = (state: ReduxState, props: Object) => {
+    const relationshipsSection = state.viewEventPage.relationshipsSection || {};
+    return {
+        eventId: state.viewEventPage.eventId,
+        ready: !relationshipsSection.isLoading,
+        relationships: state.relationships.viewEvent || [],
+    };
+};
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onOpenAddRelationship: () => {

@@ -1,7 +1,7 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/viewEvent.actions';
-import { actionTypes as viewEventNewRelationshipActionTypes } from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
+import { actionTypes as viewEventRelationshipsActionTypes } from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
 import {
     actionTypes as viewEventDetailsActionTypes,
 } from '../../components/Pages/ViewEvent/EventDetailsSection/eventDetails.actions';
@@ -18,14 +18,14 @@ import { actionTypes as viewEventNotesActionTypes } from '../../components/Pages
 
 export const viewEventPageDesc = createReducerDescription({
     [viewEventActionTypes.VIEW_EVENT_FROM_URL]: (state, action) => {
-        const newState = { ...state };
-        newState.eventId = action.payload.eventId;
-        if (newState.eventId !== state.eventId) {
-            newState.eventHasChanged = false;
-            newState.saveInProgress = false;
-        }
-        newState.isLoading = true;
-        newState.loadError = null;
+        const newState = {
+            eventDetailsSection: {},
+            notesSection: { isLoading: true },
+            relationshipsSection: { isLoading: true },
+            eventId: action.payload.eventId,
+            dataEntryIsLoading: true,
+            isLoading: true,
+        };
         return newState;
     },
     [viewEventActionTypes.START_OPEN_EVENT_FOR_VIEW]: (state, action) => {
@@ -35,6 +35,10 @@ export const viewEventPageDesc = createReducerDescription({
         };
         return newState;
     },
+    [viewEventActionTypes.OPEN_VIEW_EVENT_PAGE_FAILED]: (state, action) => ({
+        ...state,
+        loadError: action.payload.error,
+    }),
     [viewEventActionTypes.EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED]: (state, action) => {
         const newState = { ...state };
         newState.isLoading = false;
@@ -75,14 +79,11 @@ export const viewEventPageDesc = createReducerDescription({
     },
     [eventListActionTypes.OPEN_VIEW_EVENT_PAGE]: (state, action) => {
         const newState = {
-            ...state,
             eventDetailsSection: {},
+            notesSection: { isLoading: true },
+            relationshipsSection: { isLoading: true },
             eventId: action.payload,
-            eventHasChanged: false,
-            saveInProgress: false,
-            isLoading: false,
             dataEntryIsLoading: true,
-            loadError: null,
         };
         return newState;
     },
@@ -90,15 +91,29 @@ export const viewEventPageDesc = createReducerDescription({
         ...state,
         showAddRelationship: true,
     }),
-    [viewEventNewRelationshipActionTypes.REQUEST_ADD_EVENT_RELATIONSHIP]: state => ({
+    [viewEventRelationshipsActionTypes.EVENT_RELATIONSHIPS_LOADED]: state => ({
+        ...state,
+        relationshipsSection: {
+            ...state.relationshipsSection,
+            isLoading: false,
+        },
+    }),
+    [viewEventRelationshipsActionTypes.REQUEST_ADD_EVENT_RELATIONSHIP]: state => ({
         ...state,
         showAddRelationship: false,
     }),
-    [viewEventNewRelationshipActionTypes.EVENT_CANCEL_NEW_RELATIONSHIP]: (state) => {
+    [viewEventRelationshipsActionTypes.EVENT_CANCEL_NEW_RELATIONSHIP]: (state) => {
         const newState = { ...state };
         newState.showAddRelationship = false;
         return newState;
     },
+    [viewEventNotesActionTypes.EVENT_NOTES_LOADED]: state => ({
+        ...state,
+        notesSection: {
+            ...state.notesSection,
+            isLoading: false,
+        },
+    }),
     [viewEventNotesActionTypes.UPDATE_EVENT_NOTE_FIELD]: (state, action) => ({
         ...state,
         notesSection: {

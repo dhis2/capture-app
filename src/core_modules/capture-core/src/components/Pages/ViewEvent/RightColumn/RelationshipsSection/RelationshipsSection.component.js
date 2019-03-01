@@ -8,7 +8,9 @@ import ViewEventSection from '../../Section/ViewEventSection.component';
 import ViewEventSectionHeader from '../../Section/ViewEventSectionHeader.component';
 import Relationships from '../../../../Relationships/Relationships.component';
 import { ProgramStage } from '../../../../../metaData';
+import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
 
+const LoadingRelationships = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Relationships);
 
 type Props = {
     classes: Object,
@@ -17,7 +19,13 @@ type Props = {
     onDeleteRelationship: (clientId: string) => void,
     eventId: string,
     programStage: ProgramStage,
+    ready: boolean,
 }
+
+const loadingIndicatorStyle = {
+    height: 36,
+    width: 36,
+};
 
 const headerText = i18n.t('Relationships');
 
@@ -36,8 +44,9 @@ const getStyles = (theme: Theme) => ({
 
 class RelationshipsSection extends React.Component<Props> {
     renderHeader = () => {
-        const { classes, relationships } = this.props;
-        const count = relationships ? relationships.length : 0;
+        const { classes, relationships, ready } = this.props;
+        let count = relationships ? relationships.length : 0;
+        count = ready ? count : null;
         return (
             <ViewEventSectionHeader
                 icon={LinkIcon}
@@ -60,7 +69,7 @@ class RelationshipsSection extends React.Component<Props> {
         <div className={this.props.classes.relationship}>{relationship}</div>
     ))
     render() {
-        const { programStage } = this.props;
+        const { programStage, eventId, relationships, ready } = this.props;
 
         const hasRelationshipTypes = programStage.relationshipTypes && programStage.relationshipTypes.length > 0;
 
@@ -69,11 +78,13 @@ class RelationshipsSection extends React.Component<Props> {
                 collapsable
                 header={this.renderHeader()}
             >
-                <Relationships
-                    relationships={this.props.relationships}
+                <LoadingRelationships
+                    loadingIndicatorStyle={loadingIndicatorStyle}
+                    ready={ready}
+                    relationships={relationships}
                     onOpenAddRelationship={this.handleOpenAddRelationship}
                     onRemoveRelationship={this.handleRemoveRelationship}
-                    currentEntityId={this.props.eventId}
+                    currentEntityId={eventId}
                 />
             </ViewEventSection>
         );
