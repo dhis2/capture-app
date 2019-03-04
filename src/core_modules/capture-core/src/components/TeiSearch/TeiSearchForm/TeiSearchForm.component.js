@@ -9,7 +9,6 @@ import errorCreator from '../../../utils/errorCreator';
 import Button from '../../Buttons/Button.component';
 import Form from '../../D2Form/D2Form.component';
 import SearchOrgUnitSelector from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';
-import { Section } from '../../Section';
 import { SearchGroup } from '../../../metaData';
 import { withGotoInterface } from '../../FormFields/New';
 
@@ -22,6 +21,7 @@ const getStyles = (theme: Theme) => ({
         maxWidth: theme.typography.pxToRem(892),
     },
     searchButtonContainer: {
+        padding: theme.typography.pxToRem(10),
         display: 'flex',
         alignItems: 'center',
     },
@@ -102,17 +102,15 @@ class SearchForm extends React.Component<Props> {
 
     getUniqueSearchButtonText = (searchForm) => {
         const attributeName = searchForm.getElements()[0].formName;
-        return `Search for ${attributeName}`;
+        return `Search ${attributeName}`;
     }
 
     renderOrgUnitSelector = () => (
-        <Section className={this.props.classes.orgUnitSection}>
-            <TeiSearchOrgUnitSelector
-                innerRef={(instance) => { this.orgUnitSelectorInstance = instance; }}
-                searchId={this.props.searchId}
-                searchAttempted={this.props.searchAttempted}
-            />
-        </Section>
+        <TeiSearchOrgUnitSelector
+            innerRef={(instance) => { this.orgUnitSelectorInstance = instance; }}
+            searchId={this.props.searchId}
+            searchAttempted={this.props.searchAttempted}
+        />
     );
 
     renderMinAttributesRequired = () => {
@@ -156,7 +154,7 @@ class SearchForm extends React.Component<Props> {
                 </div>
             );
         }
-        const searchButtonText = searchGroup.unique ? this.getUniqueSearchButtonText(searchForm) : i18n.t('Search attributes');
+        const searchButtonText = searchGroup.unique ? this.getUniqueSearchButtonText(searchForm) : i18n.t('Search by attributes');
         return (
             <div className={classes.container}>
                 <Form

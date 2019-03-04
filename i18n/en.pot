@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-02-20T11:16:57.439Z\n"
-"PO-Revision-Date: 2019-02-20T11:16:57.439Z\n"
+"POT-Creation-Date: 2019-03-04T13:18:50.067Z\n"
+"PO-Revision-Date: 2019-03-04T13:18:50.067Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -358,6 +358,9 @@ msgstr ""
 msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
 
+msgid "{{teiCount}} results found for"
+msgstr ""
+
 msgid "New search"
 msgstr ""
 
@@ -412,10 +415,16 @@ msgstr ""
 msgid "No programs available."
 msgstr ""
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgid "Selected program"
 msgstr ""
 
-msgid "Search attributes"
+msgid "Search {{uniqueAttrName}}"
+msgstr ""
+
+msgid "Search by attributes"
+msgstr ""
+
+msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 
 msgid "An error has occured. See log for details"

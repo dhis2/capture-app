@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { pipe } from 'capture-core-utils';
 import { withStyles } from '@material-ui/core';
 import { Pagination } from 'capture-ui';
 import withNavigation from '../../../../Pagination/withDefaultNavigation';
@@ -10,6 +11,15 @@ import { DataElement } from '../../../../../metaData';
 import makeAttributesSelector from './teiRelationshipSearchResults.selectors';
 import CardList from '../../../../CardList/CardList.component';
 import LoadingMask from '../../../../LoadingMasks/LoadingMask.component';
+import {
+    convertFormToClient,
+    convertClientToList,
+} from '../../../../../converters';
+
+const formToListConverterFn = pipe(
+    convertFormToClient,
+    convertClientToList,
+);
 
 const SearchResultsPager = withNavigation()(Pagination);
 
@@ -26,7 +36,8 @@ type Props = {
         itemActionsContainer: string,
         addRelationshipButton: string,
         pagination: string,
-        topActionsContainer: string,
+        topSection: string,
+        topSectionActionsContainer: string,
         actionButton: string,
     },
 }
@@ -39,9 +50,16 @@ const getStyles = (theme: Theme) => ({
         display: 'flex',
         justifyContent: 'flex-end',
     },
-    topActionsContainer: {
+    topSection: {
+        display: 'flex',
+        flexDirection: 'column',
         margin: theme.typography.pxToRem(10),
         backgroundColor: theme.palette.grey.lighter,
+    },
+    topSectionValuesContainer: {
+        padding: theme.typography.pxToRem(10),
+    },
+    topSectionActionsContainer: {
     },
     actionButton: {
         margin: theme.typography.pxToRem(10),
@@ -94,7 +112,7 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
         const { teis, trackedEntityTypeName } = this.props;
         return (
             <React.Fragment>
-                {this.renderTopActions()}
+                {this.renderTopSection()}
                 <CardList
                     items={teis}
                     dataElements={attributes}
@@ -106,16 +124,51 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
         );
     }
 
-    renderTopActions = () => {
+    getSearchValues = () => {
+        const { searchValues, searchGroup, teis, classes } = this.props;
+        const searchForm = searchGroup.searchForm;
+        const attributeValues = Object.keys(searchValues)
+            .filter(key => searchValues[key] !== null)
+            .map((key) => {
+                const element = searchForm.getElement(key);
+                const value = searchValues[key];
+                const listValue = element.convertValue(value, formToListConverterFn);
+                return (
+                    <span key={key}>
+                        {element.formName}: {listValue}
+                    </span>
+                );
+            }).reduce((accValues, value) => {
+                if (accValues.length > 0) return [...accValues, ', ', value];
+                return [' ', value];
+            }, []);
+
+        const text = i18n.t('{{teiCount}} results found for', {
+            teiCount: teis.length,
+        });
+
+        return (
+            <div className={classes.topSectionValuesContainer}>
+                {text}
+                {attributeValues}
+            </div>
+        );
+    }
+
+    renderTopSection = () => {
         const { onNewSearch, onEditSearch, classes } = this.props;
         return (
-            <div className={classes.topActionsContainer}>
-                <Button className={classes.actionButton} onClick={onNewSearch}>
-                    {i18n.t('New search')}
-                </Button>
-                <Button className={classes.actionButton} onClick={onEditSearch}>
-                    {i18n.t('Edit search')}
-                </Button>
+            <div className={classes.topSection}>
+                {this.getSearchValues()}
+                <div className={classes.topSectionActionsContainer}>
+                    <Button className={classes.actionButton} onClick={onNewSearch}>
+                        {i18n.t('New search')}
+                    </Button>
+                    <Button className={classes.actionButton} onClick={onEditSearch}>
+                        {i18n.t('Edit search')}
+                    </Button>
+                </div>
+
             </div>
         );
     }

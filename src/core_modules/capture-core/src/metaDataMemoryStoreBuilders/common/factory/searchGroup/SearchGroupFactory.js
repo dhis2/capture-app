@@ -109,6 +109,7 @@ class SearchGroupFactory {
     async _buildSection(searchGroupAttributes: Array<SearchAttribute>) {
         const section = new Section((_this) => {
             _this.id = Section.MAIN_SECTION_ID;
+            _this.showContainer = false;
         });
 
         // $FlowFixMe
