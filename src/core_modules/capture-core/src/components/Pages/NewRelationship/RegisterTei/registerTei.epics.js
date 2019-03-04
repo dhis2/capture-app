@@ -19,13 +19,39 @@ const errorMessages = {
     NOT_TRACKER_PROGRAM: 'Program is not a tracker program',
 };
 
-const dataEntryPropsForRegisterTei = [
-    {
-        id: 'program',
-        type: 'TEXT',
-        validatorContainers: [],
-    },
-];
+// get tracker program if the suggested program id is valid for the current context
+function getTrackerProgram(suggestedProgramId: string) {
+    let trackerProgram: TrackerProgram;
+    try {
+        const program = getProgramFromProgramIdThrowIfNotFound(suggestedProgramId);
+        if (!(program instanceof TrackerProgram)) {
+            log.error(
+                errorCreator(
+                    errorMessages.NOT_TRACKER_PROGRAM)(
+                    { method: 'openRelationshipRegisterTeiEpic', program }),
+            );
+        } else if (program.access.data.write) {
+            trackerProgram = program;
+        }
+    } catch (error) {
+        log.error(
+            errorCreator(
+                errorMessages.PROGRAM_NOT_FOUND)(
+                { method: 'openRelationshipRegisterTeiEpic', error, suggestedProgramId }),
+        );
+    }
+    return trackerProgram;
+}
+
+function getOrgUnitId(suggestedOrgUnitId: string, trackerProgram: ?TrackerProgram) {
+    let orgUnitId;
+    if (trackerProgram) {
+        orgUnitId = trackerProgram.organisationUnits[suggestedOrgUnitId] ? suggestedOrgUnitId : null;
+    } else {
+        orgUnitId = suggestedOrgUnitId;
+    }
+    return orgUnitId;
+}
 
 export const openRegisterTeiForRelationshipEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
@@ -34,42 +60,28 @@ export const openRegisterTeiForRelationshipEpic = (action$: InputObservable, sto
         .map((action) => { // eslint-disable-line
             const state = store.getState();
             const selectedRelationshipType = state.newRelationship.selectedRelationshipType;
-            const { programId, trackedEntityTypeId } = selectedRelationshipType.to; // eslint-disable-line
-            const { orgUnitId } = state.currentSelections;
-            const orgUnit = state.organisationUnits[orgUnitId];
+            const { programId: suggestedProgramId, trackedEntityTypeId } = selectedRelationshipType.to; // eslint-disable-line
+            const { orgUnitId: suggestedOrgUnitId } = state.currentSelections;
 
-            if (programId) { // enrollment form
-                let trackerProgram: TrackerProgram;
-                try {
-                    const program = getProgramFromProgramIdThrowIfNotFound(programId);
-                    if (!(program instanceof TrackerProgram)) {
-                        log.error(
-                            errorCreator(
-                                errorMessages.NOT_TRACKER_PROGRAM)(
-                                { method: 'openRelationshipRegisterTeiEpic', program }),
-                        );
-                    } else {
-                        trackerProgram = program;
-                    }
-                } catch (error) {
-                    log.error(
-                        errorCreator(
-                            errorMessages.PROGRAM_NOT_FOUND)(
-                            { method: 'openRelationshipRegisterTeiEpic', error, programId }),
-                    );
-                }
+            const trackerProgram: ?TrackerProgram = suggestedProgramId ? getTrackerProgram(suggestedProgramId) : null;
+            const orgUnitId = getOrgUnitId(suggestedOrgUnitId, trackerProgram);
 
+            // can't run rules when no valid organisation unit is specified, i.e. only the registration section will be visible
+            if (!orgUnitId) {
+                return initializeRegisterTei(trackerProgram && trackerProgram.id);
+            }
+
+            if (trackerProgram) { // enrollment form
+                const orgUnit = state.organisationUnits[orgUnitId];
                 return openDataEntryForNewEnrollmentBatch(
                     trackerProgram,
                     trackerProgram && trackerProgram.enrollment.enrollmentForm,
                     orgUnit,
                     'relationship',
-                    [initializeRegisterTei(programId, orgUnitId)],
-                    dataEntryPropsForRegisterTei,
-                    {
-                        program: programId,
-                    },
+                    [initializeRegisterTei(trackerProgram.id, orgUnitId)],
                 );
             }
+
+
             // TEI form (TEI from TET attributes)
         });

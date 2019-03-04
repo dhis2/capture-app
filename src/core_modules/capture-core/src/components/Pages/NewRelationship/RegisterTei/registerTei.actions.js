@@ -6,6 +6,6 @@ export const actionTypes = {
 };
 
 export const initializeRegisterTei = (
-    programId: string,
-    orgUnitId: string,
+    programId: ?string,
+    orgUnitId?: ?string,
 ) => actionCreator(actionTypes.INITIALIZE_REGISTER_TEI)({ programId, orgUnitId });

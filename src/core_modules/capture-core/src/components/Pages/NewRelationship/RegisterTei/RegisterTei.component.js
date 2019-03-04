@@ -1,16 +1,17 @@
 // @flow
 import * as React from 'react';
-import { Enrollment } from './Enrollment';
+import DataEntry from './DataEntry.container';
+import { RegistrationSection } from './RegistrationSection';
 
 type Props = {};
 
 class RegisterTei extends React.Component<Props> {
     render() {
-        const { ...passOnProps } = this.props;
         return (
-            <Enrollment
-                {...passOnProps}
-            />
+            <React.Fragment>
+                <RegistrationSection />
+                <DataEntry />
+            </React.Fragment>
         );
     }
 }

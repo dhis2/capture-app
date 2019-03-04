@@ -29,7 +29,6 @@ import {
     getTrackedEntityTypeThrowIfNotFound as getTrackedEntityType,
 } from '../../../metaData';
 import getSearchFormId from '../getSearchFormId';
-import { clearOrgUnitRoots } from '../../organisationUnits/organisationUnitRoots.actions';
 
 const getOuQueryArgs = (orgUnit: ?string, orgUnitScope: string) =>
     (orgUnitScope !== 'ACCESSIBLE' ?
@@ -156,7 +155,6 @@ export const teiSearchSetProgramEpic = (action$: InputObservable, store: ReduxSt
 
             return batchActions([
                 ...addFormDataActions,
-                clearOrgUnitRoots(searchId),
                 setProgramAndTrackedEntityType(searchId, programId, trackedEntityTypeId),
             ], batchActionTypes.BATCH_SET_TEI_SEARCH_PROGRAM_AND_TET);
         });
@@ -180,6 +178,5 @@ export const teiNewSearchEpic = (action$: InputObservable, store: ReduxStore) =>
 
             return batchActions([
                 ...addFormDataActions,
-                clearOrgUnitRoots(searchId),
             ], batchActionTypes.RESET_SEARCH_FORMS);
         });

@@ -6,6 +6,7 @@ import {
 import {
     registerTeiActionTypes,
 } from '../../components/Pages/NewRelationship';
+import { registrationSectionActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
 
 export const newRelationshipDesc = createReducerDescription({
     [newRelationshipActionTypes.INITIALIZE_NEW_RELATIONSHIP]: () => ({}),
@@ -43,4 +44,22 @@ export const newRelationshipRegisterTeiDesc = createReducerDescription({
             orgUnitId,
         };
     },
+    [registrationSectionActionTypes.PROGRAM_CHANGE]: (state, action) => {
+        const { programId } = action.payload;
+        return {
+            ...state,
+            programId,
+        };
+    },
+    [registrationSectionActionTypes.ORG_UNIT_CHANGE]: (state, action) => {
+        const { orgUnit } = action.payload;
+        return {
+            ...state,
+            orgUnit,
+        };
+    },
+    [registrationSectionActionTypes.PROGRAM_FILTER_CLEAR]: state => ({
+        ...state,
+        orgUnit: null,
+    }),
 }, 'newRelationshipRegisterTei');

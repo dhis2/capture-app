@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-02-20T11:16:57.439Z\n"
-"PO-Revision-Date: 2019-02-20T11:16:57.439Z\n"
+"POT-Creation-Date: 2019-03-04T15:53:49.102Z\n"
+"PO-Revision-Date: 2019-03-04T15:53:49.102Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -343,10 +343,22 @@ msgstr ""
 msgid "Select a category option to start reporting"
 msgstr ""
 
+msgid "Create person and link"
+msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Show all"
+msgstr ""
+
 msgid "Program"
 msgstr ""
 
-msgid "Create person and link"
+msgid "Organisation Unit"
+msgstr ""
+
+msgid "Registration"
 msgstr ""
 
 msgid "Search results"
@@ -400,12 +412,6 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-msgid "Some programs are being filtered."
-msgstr ""
-
-msgid "Show all"
-msgstr ""
-
 msgid "Select program"
 msgstr ""
 
@@ -428,6 +434,9 @@ msgid "Error saving event"
 msgstr ""
 
 msgid "Could not save event. See log for details"
+msgstr ""
+
+msgid "Organisation unit search failed. See log for details"
 msgstr ""
 
 msgid "Set coordinate"
