@@ -9,6 +9,7 @@ import {
     teiNewSearch,
     teiEditSearch,
     teiSearchResultsChangePage,
+    setOpenSearchGroupSection,
 } from './actions/teiSearch.actions';
 import { makeSearchGroupsSelector } from './teiSearch.selectors';
 
@@ -24,6 +25,7 @@ const makeMapStateToProps = () => {
             showResults: !!currentTeiSearch.searchResults,
             selectedProgramId: currentTeiSearch.selectedProgramId,
             selectedTrackedEntityTypeId: currentTeiSearch.selectedTrackedEntityTypeId,
+            openSearchGroupSection: currentTeiSearch.openSearchGroupSection,
         };
     };
 
@@ -46,6 +48,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
     onEditSearch: (searchId: string) => {
         dispatch(teiEditSearch(searchId));
+    },
+    onSetOpenSearchGroupSection: (searchId: string, searchGroupId: ?string) => {
+        dispatch(setOpenSearchGroupSection(searchId, searchGroupId));
     },
 });
 

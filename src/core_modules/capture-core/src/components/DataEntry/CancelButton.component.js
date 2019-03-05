@@ -49,10 +49,10 @@ export default class CancelButton extends React.Component<Props, State> {
                     { i18n.t('Cancel') }
                 </ProgressButton>
                 <ConfirmDialog
-                    header={i18n.t('Discard event?')}
+                    header={i18n.t('Unsaved changes')}
                     text={i18n.t('Leaving this page will discard the changes you made to this event.')}
-                    confirmText={i18n.t('Discard')}
-                    cancelText={i18n.t('Back to event')}
+                    confirmText={i18n.t('Yes, discard')}
+                    cancelText={i18n.t('No, stay here')}
                     onConfirm={this.props.onCancel}
                     open={this.state.dialogOpen}
                     onCancel={this.handleCancelDiscard}

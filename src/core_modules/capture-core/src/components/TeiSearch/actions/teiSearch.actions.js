@@ -17,6 +17,7 @@ export const actionTypes = {
     TEI_NEW_SEARCH: 'TeiNewSearch',
     TEI_EDIT_SEARCH: 'TeiEditSearch',
     TEI_SEARCH_RESULTS_CHANGE_PAGE: 'TeiSearchResultsChangePage',
+    TEI_SEARCH_SET_OPEN_SEARCH_GROUP_SECTION: 'TeiSearchSetOpenSearchGroupSection',
 };
 
 
@@ -70,3 +71,6 @@ export const teiEditSearch = (searchId: string) =>
 
 export const teiSearchResultsChangePage = (searchId: string, pageNumber: number) =>
     actionCreator(actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE)({ searchId, pageNumber });
+
+export const setOpenSearchGroupSection = (searchId: string, searchGroupId: ?string) =>
+    actionCreator(actionTypes.TEI_SEARCH_SET_OPEN_SEARCH_GROUP_SECTION)({ searchId, searchGroupId });

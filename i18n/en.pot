@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-03-04T13:18:50.067Z\n"
-"PO-Revision-Date: 2019-03-04T13:18:50.067Z\n"
+"POT-Creation-Date: 2019-03-05T09:00:14.415Z\n"
+"PO-Revision-Date: 2019-03-05T09:00:14.415Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -38,16 +38,16 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-msgid "Discard event?"
+msgid "Unsaved changes"
 msgstr ""
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 
-msgid "Discard"
+msgid "Yes, discard"
 msgstr ""
 
-msgid "Back to event"
+msgid "No, stay here"
 msgstr ""
 
 msgid "Add comment"
@@ -314,15 +314,15 @@ msgstr ""
 msgid "New event relationship"
 msgstr ""
 
-msgid "Discard relationship?"
+msgid "Adding relationship to event."
+msgstr ""
+
+msgid "Go back to event without saving relationship"
 msgstr ""
 
 msgid ""
-"Leaving this page will discard any selections you made for a new "
+"Leaving this page will discard the selections you made for a new "
 "relationship"
-msgstr ""
-
-msgid "Back to relationship"
 msgstr ""
 
 msgid "events added"

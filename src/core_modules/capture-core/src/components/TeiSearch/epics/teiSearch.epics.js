@@ -31,9 +31,9 @@ import {
 import getSearchFormId from '../getSearchFormId';
 import { clearOrgUnitRoots } from '../../organisationUnits/organisationUnitRoots.actions';
 
-const getOuQueryArgs = (orgUnit: ?string, orgUnitScope: string) =>
+const getOuQueryArgs = (orgUnit: ?Object, orgUnitScope: string) =>
     (orgUnitScope !== 'ACCESSIBLE' ?
-        { ou: orgUnit, ouMode: orgUnitScope } :
+        { ou: orgUnit && orgUnit.id, ouMode: orgUnitScope } :
         { ouMode: orgUnitScope });
 
 const getContextQueryArgs = (programId: ?string, trackedEntityTypeId: string) =>

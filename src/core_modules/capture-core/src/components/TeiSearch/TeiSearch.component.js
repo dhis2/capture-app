@@ -15,6 +15,8 @@ type Props = {
     searchGroups: ?Array<SearchGroup>,
     onSearch: Function,
     onSearchValidationFailed: Function,
+    onSetOpenSearchGroupSection: (searchId: string, searchGroupId: ?string) => void,
+    openSearchGroupSection: ?string,
     showResults?: ?boolean,
     onSearchResultsChangePage: (searchId: string, pageNumber: number) => void,
     onNewSearch: (searchId: string) => void,
@@ -40,13 +42,12 @@ const getStyles = (theme: Theme) => ({
 
 type State = {
     programSectionOpen: boolean,
-    openSearchGroup: ?string,
 }
 
 class TeiSearch extends React.Component<Props, State> {
     constructor(props) {
         super(props);
-        this.state = { openSearchGroup: null, programSectionOpen: true };
+        this.state = { programSectionOpen: true };
     }
 
 
@@ -105,18 +106,18 @@ class TeiSearch extends React.Component<Props, State> {
     }
 
     onChangeSectionCollapseState = (id) => {
-        if (this.state.openSearchGroup === id) {
-            this.setState({ openSearchGroup: null });
+        if (this.props.openSearchGroupSection === id) {
+            this.props.onSetOpenSearchGroupSection(this.props.id, null);
             return;
         }
-        this.setState({ openSearchGroup: id });
+        this.props.onSetOpenSearchGroupSection(this.props.id, id);
     }
 
     renderSearchGroups = (searchGroups: Array<SearchGroup>) => searchGroups.map((sg, i) => {
         const searchGroupId = i.toString();
         const formId = this.getFormId(searchGroupId);
         const header = sg.unique ? i18n.t('Search {{uniqueAttrName}}', { uniqueAttrName: sg.searchForm.getElements()[0].formName }) : i18n.t('Search by attributes');
-        const collapsed = this.state.openSearchGroup !== searchGroupId;
+        const collapsed = this.props.openSearchGroupSection !== searchGroupId;
         return (
             <Section
                 isCollapsed={collapsed}
