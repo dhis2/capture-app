@@ -95,10 +95,10 @@ class ViewEventNewRelationshipWrapper extends React.Component<Props, State> {
                     />
                 </Paper>
                 <ConfirmDialog
-                    header={i18n.t('Discard relationship?')}
+                    header={i18n.t('Unsaved changes')}
                     text={i18n.t('Leaving this page will discard any selections you made for a new relationship')}
-                    confirmText={i18n.t('Discard')}
-                    cancelText={i18n.t('Back to relationship')}
+                    confirmText={i18n.t('Yes, discard')}
+                    cancelText={i18n.t('No, stay here')}
                     onConfirm={this.props.onCancel}
                     open={!!this.state.discardDialogOpen}
                     onCancel={this.handleCancelDiscard}

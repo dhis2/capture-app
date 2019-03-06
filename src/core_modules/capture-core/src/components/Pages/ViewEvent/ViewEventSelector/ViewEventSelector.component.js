@@ -32,10 +32,10 @@ type State = {
 };
 
 const defaultDialogProps = {
-    header: i18n.t('Discard event?'),
+    header: i18n.t('Unsaved changes'),
     text: i18n.t('Leaving this page will discard the changes you made to this event.'),
-    confirmText: i18n.t('Discard'),
-    cancelText: i18n.t('Back to event'),
+    confirmText: i18n.t('Yes, discard'),
+    cancelText: i18n.t('No, stay here'),
 };
 
 class ViewEventSelector extends Component<Props, State> {
