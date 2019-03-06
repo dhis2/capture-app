@@ -1,12 +1,11 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import Paper from '@material-ui/core/Paper';
 import withStyles from '@material-ui/core/styles/withStyles';
-import Button from '../../../Buttons/Button.component';
 import NewRelatonship from '../../NewRelationship/NewRelationship.container';
 import ConfirmDialog from '../../../Dialogs/ConfirmDialog.component';
+import LinkButton from '../../../Buttons/LinkButton.component';
 
 
 const getStyles = theme => ({
@@ -29,23 +28,29 @@ const getStyles = theme => ({
         marginBottom: theme.typography.pxToRem(10),
         padding: theme.typography.pxToRem(10),
     },
-    backToEventButton: {
-        paddingLeft: 8,
+    backToEventContainer: {
+        padding: 8,
+        borderRadius: 4,
+        display: 'inline-block',
         marginBottom: 10,
-        textTransform: 'none',
         backgroundColor: '#E9EEF4',
-        boxShadow: 'none',
         color: '#494949',
         fontSize: 14,
-        fontWeight: 'normal',
+    },
+    backToEventButton: {
+        backgroundColor: 'inherit',
+        fontSize: 'inherit',
+        color: 'inherit',
     },
 });
 
 type Props = {
     onCancel: () => void,
     classes: {
+        container: string,
         headerContainer: string,
         header: string,
+        backToEventContainer: string,
         backToEventButton: string,
         newRelationshipPaper: string,
     },
@@ -84,10 +89,15 @@ class ViewEventNewRelationshipWrapper extends React.Component<Props, State> {
         const { classes, onCancel, ...passOnProps } = this.props;
         return (
             <div className={classes.container}>
-                <Button className={classes.backToEventButton} variant="raised" onClick={this.handleDiscard}>
-                    <ChevronLeft />
-                    {i18n.t('Back to event')}
-                </Button>
+                <div className={classes.backToEventContainer}>
+                    <span>{i18n.t('Adding relationship to event.')}</span>
+                    <LinkButton
+                        className={classes.backToEventButton}
+                        onClick={this.handleDiscard}
+                    >
+                        {i18n.t('Go back to event without saving relationship')}
+                    </LinkButton>
+                </div>
                 <Paper className={classes.newRelationshipPaper}>
                     <NewRelatonship
                         header={i18n.t('New event relationship')}
