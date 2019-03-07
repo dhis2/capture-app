@@ -1,0 +1,42 @@
+[
+    {
+        "type": "File",
+        "name": "/Users/Joakim/Projects/dhis2/create-react-app-tracker/tracker-capture-app/src/core_modules/capture-core/src/metaDataMemoryStoreBuilders/trackedEntityTypes/factory/TrackedEntityType/TrackedEntityTypeFactory.js",
+        "parent_id": null,
+        "workspaceRoot": "/Users/Joakim/Projects/dhis2/create-react-app-tracker/tracker-capture-app",
+        "workspacePath": "src/core_modules/capture-core/src/metaDataMemoryStoreBuilders/trackedEntityTypes/factory/TrackedEntityType/TrackedEntityTypeFactory.js",
+        "id": "HLoSdhm26QyFWl9C"
+    },
+    {
+        "type": "File",
+        "name": "/Users/Joakim/Projects/dhis2/create-react-app-tracker/tracker-capture-app/src/core_modules/capture-core/src/metaData/TrackedEntityType/TeiRegistration/TeiRegistration.js",
+        "parent_id": null,
+        "workspaceRoot": "/Users/Joakim/Projects/dhis2/create-react-app-tracker/tracker-capture-app",
+        "workspacePath": "src/core_modules/capture-core/src/metaData/TrackedEntityType/TeiRegistration/TeiRegistration.js",
+        "id": "X6jiCndScR9Q5vEr"
+    },
+    {
+        "type": "File",
+        "name": "/Users/Joakim/Projects/dhis2/create-react-app-tracker/tracker-capture-app/src/core_modules/capture-core/src/metaData/TrackedEntityType/TrackedEntityType.js",
+        "parent_id": null,
+        "workspaceRoot": "/Users/Joakim/Projects/dhis2/create-react-app-tracker/tracker-capture-app",
+        "workspacePath": "src/core_modules/capture-core/src/metaData/TrackedEntityType/TrackedEntityType.js",
+        "id": "l1sfrCYodVDgSRNc"
+    },
+    {
+        "type": "File",
+        "name": "/Users/Joakim/Projects/dhis2/create-react-app-tracker/tracker-capture-app/src/core_modules/capture-core/src/components/Pages/NewRelationship/RegisterTei/DataEntry/DataEntry.component.js",
+        "parent_id": null,
+        "workspaceRoot": "/Users/Joakim/Projects/dhis2/create-react-app-tracker/tracker-capture-app",
+        "workspacePath": "src/core_modules/capture-core/src/components/Pages/NewRelationship/RegisterTei/DataEntry/DataEntry.component.js",
+        "id": "2Nq8YHLXp7UBxlnK"
+    },
+    {
+        "type": "File",
+        "name": "/Users/Joakim/Projects/dhis2/create-react-app-tracker/tracker-capture-app/src/core_modules/capture-core/src/components/DataEntries/TrackedEntityInstance/TrackedEntityInstance.component.js",
+        "parent_id": null,
+        "workspaceRoot": "/Users/Joakim/Projects/dhis2/create-react-app-tracker/tracker-capture-app",
+        "workspacePath": "src/core_modules/capture-core/src/components/DataEntries/TrackedEntityInstance/TrackedEntityInstance.component.js",
+        "id": "dn9U3GRNFMLvrTuk"
+    }
+]

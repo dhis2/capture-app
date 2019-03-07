@@ -1,15 +1,18 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
+import { pipe } from 'capture-core-utils';
 import type {
     CachedAttributeTranslation,
     CachedTrackedEntityTypeAttribute,
     CachedOptionSet,
     CachedTrackedEntityAttribute,
 } from '../../../../storageControllers/cache.types';
-import { DataElement } from '../../../../metaData';
+import { DataElement, DataElementUnique, dataElementUniqueScope } from '../../../../metaData';
 import { OptionSetFactory } from '../../../common/factory';
 import errorCreator from '../../../../utils/errorCreator';
+import { convertFormToClient, convertClientToServer } from '../../../../converters';
+import { getApi } from '../../../../d2/d2Instance';
 
 class DataElementFactory {
     static translationPropertyNames = {
@@ -90,11 +93,53 @@ class DataElementFactory {
             _this.type = cachedAttribute.valueType;
         });
 
+        if (cachedAttribute.unique) {
+            dataElement.unique = new DataElementUnique((_this) => {
+                _this.scope = cachedAttribute.orgunitScope ?
+                    dataElementUniqueScope.ORGANISATION_UNIT :
+                    dataElementUniqueScope.ENTIRE_SYSTEM;
+
+                _this.onValidate = (value: any, contextProps: Object = {}) => {
+                    const serverValue = pipe(
+                        convertFormToClient,
+                        convertClientToServer,
+                    )(value, cachedAttribute.valueType);
+                    let requestPromise;
+                    if (_this.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
+                        const orgUnitId = contextProps.orgUnitId;
+                        requestPromise = getApi()
+                            .get(
+                                'trackedEntityInstances',
+                                {
+                                    ou: orgUnitId,
+                                    filter: `${dataElement.id}:EQ:${serverValue}`,
+                                },
+                            );
+                    } else {
+                        requestPromise = getApi()
+                            .get(
+                                'trackedEntityInstances',
+                                {
+                                    ouMode: 'ACCESSIBLE',
+                                    filter: `${dataElement.id}:EQ:${serverValue}`,
+                                },
+                            );
+                    }
+                    return requestPromise
+                        .then(result => result.trackedEntityInstances.length === 0);
+                };
+
+                if (cachedAttribute.pattern) {
+                    _this.generatorPattern = cachedAttribute.pattern;
+                }
+            });
+        }
+
         if (cachedAttribute.optionSet && cachedAttribute.optionSet.id) {
             dataElement.optionSet = await this.optionSetFactory.build(
                 dataElement,
                 cachedAttribute.optionSet.id,
-                cachedTrackedEntityTypeAttribute.renderOptionsAsRadio,
+                null,
                 null,
                 value => value,
             );

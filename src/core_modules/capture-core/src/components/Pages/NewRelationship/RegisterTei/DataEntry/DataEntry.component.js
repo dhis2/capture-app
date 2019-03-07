@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
-import { Enrollment } from './Enrollment';
+import { Enrollment } from '../Enrollment';
+import { TrackedEntityInstance } from '../TrackedEntityInstance';
 
 type Props = {
     showDataEntry: boolean,
@@ -24,7 +25,7 @@ class RegisterTeiDataEntry extends React.Component<Props> {
         }
 
         return (
-            <Enrollment
+            <TrackedEntityInstance
                 {...passOnProps}
             />
         );

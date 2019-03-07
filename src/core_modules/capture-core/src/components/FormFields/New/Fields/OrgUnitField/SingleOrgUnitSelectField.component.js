@@ -26,7 +26,7 @@ const getStyles = (theme: Theme) => ({
 
 type OrgUnitValue = {
     id: string,
-    displayName: string,
+    name: string,
     path: string,
 }
 
@@ -51,7 +51,7 @@ class SingleOrgUnitSelectField extends React.Component<Props> {
         });
         return (
             <div className={classes.selectedOrgUnitContainer}>
-                <div className={classes.selectedOrgUnitText}>{selectedOrgUnit.displayName}</div>
+                <div className={classes.selectedOrgUnitText}>{selectedOrgUnit.name}</div>
                 <IconButton
                     className={buttonClass}
                     onClick={this.onDeselectOrgUnit}
@@ -65,7 +65,7 @@ class SingleOrgUnitSelectField extends React.Component<Props> {
     onSelectOrgUnit = (event: any, orgUnit: Object) => {
         this.props.onBlur({
             id: orgUnit.id,
-            displayName: orgUnit.displayName,
+            name: orgUnit.displayName,
             path: orgUnit.path,
         });
     }

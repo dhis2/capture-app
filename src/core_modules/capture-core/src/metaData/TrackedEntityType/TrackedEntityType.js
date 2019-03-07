@@ -3,12 +3,13 @@ import isFunction from 'd2-utilizr/src/isFunction';
 import { RenderFoundation } from '../RenderFoundation';
 import { SearchGroup } from '../SearchGroup';
 import { DataElement } from '../DataElement';
+import { TeiRegistration } from './TeiRegistration';
 
 /* eslint-disable no-underscore-dangle */
 class TrackedEntityType {
     _id: string;
     _name: string;
-    _foundation: RenderFoundation;
+    _teiRegistration: TeiRegistration;
     _attributes: Array<DataElement>;
     _searchGroups: Array<SearchGroup>;
 
@@ -31,11 +32,11 @@ class TrackedEntityType {
         return this._name;
     }
 
-    set foundation(foundation: RenderFoundation) {
-        this._foundation = foundation;
+    set teiRegistration(teiRegistration: TeiRegistration) {
+        this._teiRegistration = teiRegistration;
     }
-    get foundation(): RenderFoundation {
-        return this._foundation;
+    get teiRegistration(): TeiRegistration {
+        return this._teiRegistration;
     }
 
     set searchGroups(searchGroups: Array<SearchGroup>) {

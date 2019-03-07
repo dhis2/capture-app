@@ -85,6 +85,7 @@ class EnrollmentFactory {
     ) {
         const enrollmentForm = new RenderFoundation((_this) => {
             _this.featureType = EnrollmentFactory._getFeatureType(cachedProgram.featureType);
+            _this.name = cachedProgram.displayName;
         });
         let section;
         if (cachedProgram.programTrackedEntityAttributes && cachedProgram.programTrackedEntityAttributes.length > 0) {

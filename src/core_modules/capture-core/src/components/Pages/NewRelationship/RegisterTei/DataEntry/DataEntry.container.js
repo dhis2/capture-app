@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import DataEntry from './DataEntry.component';
 
 const mapStateToProps = (state: ReduxState) => ({
-    showDataEntry: state.newRelationshipRegisterTei.orgUnitId && !state.newRelationshipRegisterTei.isLoading,
+    showDataEntry: state.newRelationshipRegisterTei.orgUnit && !state.newRelationshipRegisterTei.isLoading,
     programId: state.newRelationshipRegisterTei.programId,
 });
 

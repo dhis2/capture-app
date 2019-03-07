@@ -127,7 +127,10 @@ import {
     teiSearchFilterOrgUnitsEpic,
 } from 'capture-core/components/TeiSearch/SearchOrgUnitSelector/searchOrgUnitSelector.epics';
 
-import { openRegisterTeiForRelationshipEpic } from 'capture-core/components/Pages/NewRelationship';
+import {
+    openNewRelationshipRegisterTeiEpic,
+    openNewRelationshipRegisterTeiDataEntryEpic,
+} from 'capture-core/components/Pages/NewRelationship/RegisterTei';
 
 import { runRulesOnEnrollmentFieldUpdateEpic } from 'capture-core/components/DataEntries';
 
@@ -215,6 +218,7 @@ export default combineEpics(
     filterFormFieldOrgUnitsEpic,
     asyncUpdateFieldEpic,
     teiSearchFilterOrgUnitsEpic,
-    openRegisterTeiForRelationshipEpic,
+    openNewRelationshipRegisterTeiEpic,
+    openNewRelationshipRegisterTeiDataEntryEpic,
     ...getDataEntryEpics(),
 );

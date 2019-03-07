@@ -2,79 +2,19 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import LinkButton from '../../../../../Buttons/LinkButton.component';
-import { ProgramFilterer } from '../../../../../ProgramFilterer';
-import { Program, TrackerProgram } from '../../../../../../metaData';
-import {
-    VirtualizedSelectField,
-    withSelectTranslations,
-    withDefaultShouldUpdateInterface,
-    withFocusSaver,
-    withDefaultFieldContainer,
-    withLabel,
-    withFilterProps,
-} from '../../../../../FormFields/New';
+import ComposedProgramSelector from './ComposedProgramSelector.component';
 
 const getStyles = (theme: Theme) => ({
-    dropdownLabel: {
+    programLabel: {
         paddingTop: '10px',
         [theme.breakpoints.down(523)]: {
             paddingTop: '0px !important',
         },
     },
-    iconContainer: {
-        display: 'flex',
-        alignItems: 'center',
-        paddingRight: 5,
-    },
-    icon: {
-        width: 22,
-        height: 22,
-        borderRadius: 2,
-    },
-    isFilteredContainer: {
-        fontSize: 12,
-        color: theme.palette.grey.dark,
-        paddingTop: 5,
-    },
-    isFilteredLink: {
-        paddingLeft: 2,
-    },
 });
 
-const ProgramSelectorDropdown =
-        withDefaultShouldUpdateInterface()(
-            withFocusSaver()(
-                withDefaultFieldContainer()(
-                    withLabel({
-                        onGetCustomFieldLabeClass: (props: Object) =>
-                            props.dropdownLabelClass,
-                    })(
-                        withFilterProps((props: Object) => {
-                            const { dropdownLabelClass, ...passOnProps } = props;
-                            return passOnProps;
-                        })(
-                            withSelectTranslations()(
-                                VirtualizedSelectField,
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
-
-type Option = {
-    label: string,
-    value: string,
-    iconLeft?: ?React.Node,
-};
-
 type Props = {
-    orgUnitIds: ?Array<string>,
-    value: string,
     classes: Object,
-    onUpdateSelectedProgram: (programId: string) => void,
-    onClearFilter: () => void,
 };
 
 class ProgramSelector extends React.Component<Props> {
@@ -86,79 +26,16 @@ class ProgramSelector extends React.Component<Props> {
             flexBasis: 150,
         },
     };
-    static baseLineFilter(program: Program) {
-        return program instanceof TrackerProgram &&
-        program.access.data.write;
-    }
-
-    getProgramIcon(program: Program) {
-        const classes = this.props.classes;
-        return program.icon.data
-            ? (
-                <div
-                    className={classes.iconContainer}
-                >
-                    <img
-                        style={{ backgroundColor: program.icon.color }}
-                        className={classes.icon}
-                        src={program.icon.data}
-                        alt={program.name}
-                    />
-                </div>
-            )
-            : null;
-    }
-
-    getOptionsFromPrograms = (programs: Array<Program>): Array<Option> =>
-        programs
-            .map(program => ({
-                label: program.name,
-                value: program.id,
-                iconLeft: this.getProgramIcon(program),
-            }));
-
-
-    renderIsFilteredText() {
-        const { classes, onClearFilter } = this.props;
-        return (
-            <div
-                className={classes.isFilteredContainer}
-            >
-                {i18n.t('Some programs are being filtered.')}
-                <LinkButton
-                    className={classes.isFilteredLink}
-                    onClick={onClearFilter}
-                >
-                    {i18n.t('Show all')}
-                </LinkButton>
-            </div>
-        );
-    }
 
     render() {
-        const { classes, orgUnitIds, onUpdateSelectedProgram, onClearFilter, ...passOnProps } = this.props;
+        const { classes, ...passOnProps } = this.props;
         return (
-            <ProgramFilterer
-                orgUnitIds={orgUnitIds}
-                baselineFilter={ProgramSelector.baseLineFilter}
-            >
-                {
-                    (programs, isFiltered) => (
-                        <div>
-                            <ProgramSelectorDropdown
-                                options={this.getOptionsFromPrograms(programs)}
-                                styles={ProgramSelector.baseComponentStyles}
-                                label={i18n.t('Program')}
-                                required={false}
-                                dropdownLabelClass={classes.dropdownLabel}
-                                onSelect={onUpdateSelectedProgram}
-                                {...passOnProps}
-                            />
-                            {isFiltered ? this.renderIsFilteredText() : null }
-                        </div>
-                    )
-                }
-            </ProgramFilterer>
+            <ComposedProgramSelector
+                styles={ProgramSelector.baseComponentStyles}
+                programLabelClass={classes.programLabel}
+                label={i18n.t('Program')}
+                {...passOnProps}
+            />
         );
     }
 }

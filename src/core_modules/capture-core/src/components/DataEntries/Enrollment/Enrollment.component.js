@@ -36,6 +36,7 @@ import {
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
 import dataEntrySectionKeys from './constants/sectionKeys.const';
+import { Enrollment } from '../../../metaData';
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -247,8 +248,11 @@ const getSearchContext = (props: Object) => ({
     trackedEntityType: props.enrollmentMetadata.trackedEntityType.id,
 });
 
+type FinalTeiDataEntryProps = {
+    enrollmentMetaData: Enrollment,
+};
 // final step before the generic dataEntry is inserted
-class FinalEnrollmentDataEntry extends React.Component<Object> {
+class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     static dataEntrySectionDefinitions = {
         [dataEntrySectionKeys.ENROLLMENT]: {
             placement: placements.TOP,
@@ -283,7 +287,7 @@ const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);
 
 type PreEnrollmentDataEntryProps = {
     programId: string,
-    orgUnitId: string,
+    orgUnit: Object,
     onUpdateField: Function,
     onStartAsyncUpdateField: Function,
 };
@@ -300,26 +304,26 @@ class PreEnrollmentDataEntryPure extends React.PureComponent<Object> {
 
 class PreEnrollmentDataEntry extends React.Component<PreEnrollmentDataEntryProps> {
     getValidationContext = () => {
-        const { orgUnitId } = this.props;
+        const { orgUnit } = this.props;
         return {
-            orgUnitId,
+            orgUnit: orgUnit.id,
         };
     }
 
     handleUpdateField = (...args: Array<any>) => {
-        const { programId, orgUnitId } = this.props;
-        this.props.onUpdateField(...args, programId, orgUnitId);
+        const { programId, orgUnit } = this.props;
+        this.props.onUpdateField(...args, programId, orgUnit.id);
     }
 
     handleStartAsyncUpdateField = (...args: Array<any>) => {
-        const { programId, orgUnitId } = this.props;
-        this.props.onStartAsyncUpdateField(...args, programId, orgUnitId);
+        const { programId, orgUnit } = this.props;
+        this.props.onStartAsyncUpdateField(...args, programId, orgUnit.id);
     }
 
     render() {
         const {
             programId,
-            orgUnitId,
+            orgUnit,
             onUpdateField,
             onStartAsyncUpdateField,
             ...passOnProps } = this.props;

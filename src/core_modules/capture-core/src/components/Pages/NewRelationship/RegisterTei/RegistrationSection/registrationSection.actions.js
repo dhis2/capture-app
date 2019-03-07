@@ -12,8 +12,8 @@ export const actionTypes = {
 export const changeProgram = (programId: string) =>
     actionCreator(actionTypes.PROGRAM_CHANGE)({ programId });
 
-export const changeOrgUnit = (orgUnit: ?Object) =>
-    actionCreator(actionTypes.ORG_UNIT_CHANGE)({ orgUnit });
+export const changeOrgUnit = (orgUnit: ?Object, resetProgramSelection: boolean) =>
+    actionCreator(actionTypes.ORG_UNIT_CHANGE)({ orgUnit, resetProgramSelection });
 
 export const searchOrgUnitFailed = () =>
     actionCreator(actionTypes.ORG_UNIT_SEARCH_FAILED)();

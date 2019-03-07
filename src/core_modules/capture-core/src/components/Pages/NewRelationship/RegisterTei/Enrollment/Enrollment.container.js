@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {
     makeEnrollmentMetadataSelector,
 } from './enrollment.selectors';
-import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
 import NewEnrollmentRelationship from './Enrollment.component';
 
 const makeMapStateToProps = () => {
@@ -15,13 +14,11 @@ const makeMapStateToProps = () => {
         return {
             enrollmentMetadata,
             programId: state.newRelationshipRegisterTei.programId,
-            orgUnitId: state.newRelationshipRegisterTei.orgUnitId,
-            ready: !state.newRelationship.loading,
+            orgUnit: state.newRelationshipRegisterTei.orgUnit,
         };
     };
     return mapStateToProps;
 };
 
-// $FlowSuppress
-export default connect(makeMapStateToProps, () => ({}))(
-    withLoadingIndicator()(NewEnrollmentRelationship));
+// $FlowFixMe
+export default connect(makeMapStateToProps, () => ({}))(NewEnrollmentRelationship);

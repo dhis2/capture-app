@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-03-04T15:53:49.102Z\n"
-"PO-Revision-Date: 2019-03-04T15:53:49.102Z\n"
+"POT-Creation-Date: 2019-03-07T15:26:59.155Z\n"
+"PO-Revision-Date: 2019-03-07T15:26:59.155Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -33,6 +33,9 @@ msgid "Enrollment"
 msgstr ""
 
 msgid "A value is required"
+msgstr ""
+
+msgid "An error has occured. See log for details"
 msgstr ""
 
 msgid "Cancel"
@@ -424,7 +427,10 @@ msgstr ""
 msgid "Search attributes"
 msgstr ""
 
-msgid "An error has occured. See log for details"
+msgid "Program not found"
+msgstr ""
+
+msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"

@@ -1,12 +1,10 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-import i18n from '@dhis2/d2-i18n';
 import {
     TrackedEntityType,
-    RenderFoundation,
-    Section,
 } from '../../../../metaData';
 import DataElementFactory from './DataElementFactory';
+import TeiRegistrationFactory from './TeiRegistrationFactory';
 import { SearchGroupFactory } from '../../../common/factory';
 import type {
     CachedTrackedEntityType,
@@ -26,6 +24,7 @@ class TrackedEntityTypeFactory {
     locale: ?string;
     dataElementFactory: DataElementFactory;
     searchGroupFactory: SearchGroupFactory;
+    teiRegistrationFactory: TeiRegistrationFactory;
 
     constructor(
         cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
@@ -42,6 +41,12 @@ class TrackedEntityTypeFactory {
             cachedTrackedEntityAttributes,
             locale,
         );
+
+        this.teiRegistrationFactory = new TeiRegistrationFactory(
+            cachedTrackedEntityAttributes,
+            cachedOptionSets,
+            locale,
+        );
     }
 
     _getTranslation(
@@ -53,35 +58,6 @@ class TrackedEntityTypeFactory {
             return translation && translation.value;
         }
         return null;
-    }
-
-    async _buildSection(
-        cachedTrackedEntityTypeAttributes: Array<CachedTrackedEntityTypeAttribute>,
-    ) {
-        const section = new Section((_this) => {
-            _this.id = Section.MAIN_SECTION_ID;
-            _this.name = i18n.t('Profile');
-        });
-
-        // $FlowFixMe
-        await cachedTrackedEntityTypeAttributes.asyncForEach(async (ttea) => {
-            const element = await this.dataElementFactory.build(ttea);
-            element && section.addElement(element);
-        });
-
-        return section;
-    }
-
-    async _buildFoundation(
-        cachedType: CachedTrackedEntityType,
-    ) {
-        const foundation = new RenderFoundation();
-        if (cachedType.trackedEntityTypeAttributes && cachedType.trackedEntityTypeAttributes.length > 0) {
-            const section = await this._buildSection(cachedType.trackedEntityTypeAttributes);
-            foundation.addSection(section);
-        }
-
-        return foundation;
     }
 
     async _buildAttributes(cachedTrackedEntityTypeAttributes: Array<CachedTrackedEntityTypeAttribute>) {
@@ -103,7 +79,6 @@ class TrackedEntityTypeFactory {
                 || cachedType.displayName;
         });
 
-        trackedEntityType.foundation = await this._buildFoundation(cachedType);
         if (cachedType.trackedEntityTypeAttributes) {
             trackedEntityType.searchGroups = await this.searchGroupFactory.build(
                 cachedType.trackedEntityTypeAttributes,
@@ -112,6 +87,8 @@ class TrackedEntityTypeFactory {
             // $FlowFixMe
             trackedEntityType.attributes = await this._buildAttributes(cachedType.trackedEntityTypeAttributes);
         }
+
+        trackedEntityType.teiRegistration = await this.teiRegistrationFactory.build(cachedType);
 
         return trackedEntityType;
     }

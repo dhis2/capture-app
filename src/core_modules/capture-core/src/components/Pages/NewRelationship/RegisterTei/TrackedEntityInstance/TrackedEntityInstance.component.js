@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import { Enrollment, RenderFoundation } from '../../../../../metaData';
-import ConfiguredEnrollment from './ConfiguredEnrollment.component';
+import { RenderFoundation, TeiRegistration } from '../../../../../metaData';
+import ConfiguredTei from './ConfiguredTei.component';
 import { DATA_ENTRY_ID } from '../registerTei.const';
 
 const getStyles = theme => ({
@@ -14,11 +14,8 @@ const getStyles = theme => ({
 });
 
 type Props = {
-    enrollmentMetadata: Enrollment,
-    onUpdateField: (innerAction: ReduxAction<any, any>) => void,
-    onStartAsyncUpdateField: Object,
+    teiRegistrationMetadata: ?TeiRegistration,
     onSave: (dataEntryId: string, itemId: string, formFoundation: RenderFoundation) => void,
-    // onAddNote: (itemId: string, dataEntryId: string, note: string) => void,
     onCancel: () => void,
     classes: {
         fieldLabelMediaBased: string,
@@ -26,7 +23,7 @@ type Props = {
     theme: Theme,
 };
 
-class NewEnrollmentRelationship extends Component<Props> {
+class RelationshipTrackedEntityInstance extends Component<Props> {
     fieldOptions: { theme: Theme };
 
     constructor(props: Props) {
@@ -46,16 +43,14 @@ class NewEnrollmentRelationship extends Component<Props> {
             classes,
             onSave,
             theme,
-            enrollmentMetadata,
             ...passOnProps
         } = this.props;
         return (
             <div>
-                <ConfiguredEnrollment
+                <ConfiguredTei
                     id={DATA_ENTRY_ID}
                     onSave={this.handleSave}
                     fieldOptions={this.fieldOptions}
-                    enrollmentMetadata={enrollmentMetadata}
                     {...passOnProps}
                 />
             </div>
@@ -64,4 +59,4 @@ class NewEnrollmentRelationship extends Component<Props> {
 }
 
 // $FlowFixMe
-export default withStyles(getStyles)(withTheme()(NewEnrollmentRelationship));
+export default withStyles(getStyles)(withTheme()(RelationshipTrackedEntityInstance));
