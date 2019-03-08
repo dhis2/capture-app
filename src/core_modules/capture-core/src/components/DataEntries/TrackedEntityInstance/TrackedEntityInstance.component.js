@@ -13,7 +13,7 @@ import { TeiRegistration } from '../../../metaData';
 const getSearchGroups = (props: Object) => props.teiRegistrationMetadata.inputSearchGroups;
 const getSearchContext = (props: Object) => ({
     ...props.onGetValidationContext(),
-    trackedEntityType: props.enrollmentMetadata.trackedEntityType.id,
+    trackedEntityType: props.teiRegistrationMetadata.form.id,
 });
 
 type FinalTeiDataEntryProps = {

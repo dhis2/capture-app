@@ -249,7 +249,7 @@ const getSearchContext = (props: Object) => ({
 });
 
 type FinalTeiDataEntryProps = {
-    enrollmentMetaData: Enrollment,
+    enrollmentMetadata: Enrollment,
 };
 // final step before the generic dataEntry is inserted
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
@@ -306,18 +306,18 @@ class PreEnrollmentDataEntry extends React.Component<PreEnrollmentDataEntryProps
     getValidationContext = () => {
         const { orgUnit } = this.props;
         return {
-            orgUnit: orgUnit.id,
+            orgUnit,
         };
     }
 
     handleUpdateField = (...args: Array<any>) => {
         const { programId, orgUnit } = this.props;
-        this.props.onUpdateField(...args, programId, orgUnit.id);
+        this.props.onUpdateField(...args, programId, orgUnit);
     }
 
     handleStartAsyncUpdateField = (...args: Array<any>) => {
         const { programId, orgUnit } = this.props;
-        this.props.onStartAsyncUpdateField(...args, programId, orgUnit.id);
+        this.props.onStartAsyncUpdateField(...args, programId, orgUnit);
     }
 
     render() {

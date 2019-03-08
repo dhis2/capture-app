@@ -19,8 +19,7 @@ export const runRulesOnEnrollmentFieldUpdateEpic = (action$: InputObservable, st
             actionBatch.payload.find(action => action.type === actionTypes.START_RUN_RULES_ON_UPDATE))
         .map((action) => {
             const state = store.getState();
-            const { innerPayload: payload, searchActions, uid, programId, orgUnitId } = action.payload;
-            const orgUnit = state.organisationUnits[orgUnitId];
+            const { innerPayload: payload, searchActions, uid, programId, orgUnit } = action.payload;
 
             let trackerProgram: TrackerProgram;
             try {

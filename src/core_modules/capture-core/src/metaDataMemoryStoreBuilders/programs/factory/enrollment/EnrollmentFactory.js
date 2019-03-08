@@ -72,6 +72,7 @@ class EnrollmentFactory {
             _this.name = i18n.t('Profile');
         });
 
+        // $FlowFixMe
         await cachedProgramTrackedEntityAttributes.asyncForEach(async (ptea) => {
             const element = await this.dataElementFactory.build(ptea);
             element && section.addElement(element);
@@ -178,12 +179,12 @@ class EnrollmentFactory {
                 _this.minAttributesRequiredToSearch = searchGroup.minAttributesRequiredToSearch;
                 _this.searchFoundation = this._buildInputSearchGroupFoundation(cachedProgram, searchGroup);
                 _this.onSearch = (values: Object = {}, contextProps: Object = {}) => {
-                    const { orgUnitId, trackedEntityType } = contextProps;
+                    const { orgUnit, trackedEntityType } = contextProps;
                     return getApi()
                         .get(
                             'trackedEntityInstances/count.json',
                             {
-                                ou: orgUnitId,
+                                ou: orgUnit.id,
                                 trackedEntityType,
                                 ouMode: 'ACCESSIBLE',
                                 filter: Object
