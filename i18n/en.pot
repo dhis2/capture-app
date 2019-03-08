@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-03-07T15:26:59.155Z\n"
-"PO-Revision-Date: 2019-03-07T15:26:59.155Z\n"
+"POT-Creation-Date: 2019-03-08T15:16:10.386Z\n"
+"PO-Revision-Date: 2019-03-08T15:16:10.386Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -23,6 +23,63 @@ msgstr ""
 msgid "Async field update failed"
 msgstr ""
 
+msgid "A value is required"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr ""
+
+msgid "Please provide a valid integer"
+msgstr ""
+
+msgid "Please provide a positive integer"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr ""
+
+msgid "Please provide a negative integer"
+msgstr ""
+
+msgid "Please provide a valid date and time"
+msgstr ""
+
+msgid "Please provide a valid time"
+msgstr ""
+
+msgid "Please provide a valid percentage"
+msgstr ""
+
+msgid "Please provide a valid url"
+msgstr ""
+
+msgid "Please provide a valid email address"
+msgstr ""
+
+msgid "Please provide a valid age"
+msgstr ""
+
+msgid "Please provide a valid phone number"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr ""
+
+msgid "Please provide valid coordinates"
+msgstr ""
+
+msgid "Please provide a valid username"
+msgstr ""
+
+msgid "This value already exists"
+msgstr ""
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr ""
+
+msgid "Checking..."
+msgstr ""
+
 msgid "Area"
 msgstr ""
 
@@ -30,9 +87,6 @@ msgid "Coordinate"
 msgstr ""
 
 msgid "Enrollment"
-msgstr ""
-
-msgid "A value is required"
 msgstr ""
 
 msgid "An error has occured. See log for details"
