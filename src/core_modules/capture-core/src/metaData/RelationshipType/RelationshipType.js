@@ -12,7 +12,7 @@ type RelationshipConstraint = {
 
 export default class RelationshipType {
     _id: string;
-    _displayName: string;
+    _name: string;
     _access: Access;
     _from: RelationshipConstraint;
     _to: RelationshipConstraint;
@@ -29,12 +29,12 @@ export default class RelationshipType {
         return this._id;
     }
 
-    set displayName(displayName: string) {
-        this._displayName = displayName;
+    set name(name: string) {
+        this._name = name;
     }
 
-    get displayName(): string {
-        return this._displayName;
+    get name(): string {
+        return this._name;
     }
 
     set access(access: Access) {

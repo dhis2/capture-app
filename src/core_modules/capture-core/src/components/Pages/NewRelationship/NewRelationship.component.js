@@ -42,7 +42,7 @@ class NewRelationship extends React.Component<Props> {
             return;
         }
 
-        this.props.onAddRelationship({ id: relationshipType.id, name: relationshipType.displayName }, entity, relationshipType.to.entity);
+        this.props.onAddRelationship({ id: relationshipType.id, name: relationshipType.name }, entity, relationshipType.to.entity);
     }
 
     render() {

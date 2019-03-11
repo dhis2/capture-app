@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import EventsListWrapper from './EventsListWrapper.component';
 import { makeColumnsSelector, makeCreateEventsContainer, makeCreateWorkingListData } from './eventsList.selector';
-import { sortWorkingList, openEditEventPage, requestDeleteEvent } from '../eventsList.actions';
+import { sortWorkingList, openViewEventPage, requestDeleteEvent } from '../eventsList.actions';
 
 const makeMapStateToProps = () => {
     const columnsSelector = makeColumnsSelector();
@@ -33,7 +33,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
     onRowClick: (rowData: {eventId: string}) => {
         window.scrollTo(0, 0);
-        dispatch(openEditEventPage(rowData.eventId));
+        dispatch(openViewEventPage(rowData.eventId));
     },
     onDelete: (eventId: string) => {
         dispatch(requestDeleteEvent(eventId));

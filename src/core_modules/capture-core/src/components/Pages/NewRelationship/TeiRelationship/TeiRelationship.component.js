@@ -14,6 +14,7 @@ import { TrackedEntityType } from '../../../../metaData';
 import { findModes } from '../findModes';
 import withDefaultNavigation from '../../../Pagination/withDefaultNavigation';
 import withPaginationData from './SearchResults/withPaginationData';
+import getTeiDisplayName from '../../../../trackedEntityInstances/getDisplayName';
 import { RegisterTei } from '../RegisterTei';
 
 
@@ -23,6 +24,7 @@ type Props = {
     findMode?: ?$Values<typeof findModes>,
     onOpenSearch: (trackedEntityTypeId: string, programId: ?string) => void,
     onSelectFindMode: (findMode: $Values<typeof findModes>) => void,
+    onAddRelationship: (entity: {id: string, name: string }) => void,
     selectedRelationshipType: SelectedRelationshipType,
     classes: {
         container: string,
@@ -69,6 +71,15 @@ class TeiRelationship extends React.Component<Props> {
         return trackedEntityType.name;
     }
 
+
+    handleAddRelationship = (teiId: string, values: Object) => {
+        const trackedEntityType = this.trackedEntityTypeSelector(this.props);
+        this.props.onAddRelationship({
+            id: teiId,
+            name: getTeiDisplayName(values, trackedEntityType),
+        });
+    }
+
     renderModeSelections = () => {
         const { classes } = this.props;
         const trackedEntityTypeName = this.getTrackedEntityTypeName();
@@ -82,7 +93,10 @@ class TeiRelationship extends React.Component<Props> {
                         color="primary"
                         onClick={() => this.props.onSelectFindMode(findModes.TEI_SEARCH)}
                     >
-                        {i18n.t('Link to an existing {{trackedEntityType}}', { trackedEntityType: trackedEntityTypeName })}
+                        {i18n.t(
+                            'Link to an existing {{trackedEntityType}}',
+                            { trackedEntityType: trackedEntityTypeName },
+                        )}
                     </Button>
                 </div>
                 <div className={classes.button}>
@@ -107,7 +121,7 @@ class TeiRelationship extends React.Component<Props> {
                 id="relationshipTeiSearch"
                 getResultsView={viewProps => (
                     <SearchResultsWithPager
-                        onAddRelationship={onAddRelationship}
+                        onAddRelationship={this.handleAddRelationship}
                         trackedEntityTypeName={trackedEntityTypeName}
                         {...viewProps}
                     />
@@ -117,10 +131,8 @@ class TeiRelationship extends React.Component<Props> {
         );
     }
 
-    renderRegister = (props: Object) => (
-        <RegisterTei
-
-        />
+    renderRegister = () => (
+        <RegisterTei />
     );
 
     renderByMode = (findMode, props) => {
@@ -128,7 +140,7 @@ class TeiRelationship extends React.Component<Props> {
             return this.renderSearch(props);
         }
         if (findMode === findModes.TEI_REGISTER) {
-            return this.renderRegister(props);
+            return this.renderRegister();
         }
         return null;
     }

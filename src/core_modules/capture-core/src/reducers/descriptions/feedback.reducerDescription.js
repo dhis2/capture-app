@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
 import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
 import isString from 'd2-utilizr/lib/isString';
 import isObject from 'd2-utilizr/lib/isObject';
-import i18n from '@dhis2/d2-i18n';
 import errorCreator from '../../utils/errorCreator';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as feedbackActionTypes } from '../../components/FeedbackBar/actions/feedback.actions';
@@ -18,6 +18,9 @@ import {
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
 import { actionTypes as eventsListActionTypes } from '../../components/Pages/MainPage/EventsList/eventsList.actions';
 import { orgUnitListActionTypes } from '../../components/QuickSelector';
+import {
+    actionTypes as viewEventNewRelationshipActionTypes,
+} from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
 import { asyncHandlerActionTypes } from '../../components/D2Form';
 import { registrationSectionActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
 
@@ -94,7 +97,9 @@ export const feedbackDesc = createReducerDescription({
         addErrorFeedback(state, i18n.t(action.payload.message)),
     [orgUnitListActionTypes.SET_SEARCH_ROOTS_FAILED]: (state, action) =>
         addErrorFeedback(state, i18n.t(action.payload.message)),
-    [dataEntryActionTypes.DUPLICATE_RELATIONSHIP]: (state, action) =>
+    [dataEntryActionTypes.DATA_ENTRY_RELATIONSHIP_ALREADY_EXISTS]: (state, action) =>
+        addErrorFeedback(state, action.payload.message),
+    [viewEventNewRelationshipActionTypes.EVENT_RELATIONSHIP_ALREADY_EXISTS]: (state, action) =>
         addErrorFeedback(state, action.payload.message),
     [registrationSectionActionTypes.ORG_UNIT_SEARCH_FAILED]: state =>
         addErrorFeedback(state, i18n.t('Organisation unit search failed. See log for details')),

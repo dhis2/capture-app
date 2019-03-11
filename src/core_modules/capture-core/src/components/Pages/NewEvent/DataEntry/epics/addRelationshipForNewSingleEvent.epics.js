@@ -18,22 +18,11 @@ import {
 
 import {
     addRelationship,
-    duplicateRelationship,
+    relationshipAlreadyExists,
 } from '../../../../DataEntry/actions/dataEntry.actions';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
+import convertClientRelationshipToServer from '../../../../../relationships/convertClientToServer';
 
-const typeToRelationshipConstraint = {
-    TRACKED_ENTITY_INSTANCE: (entityId: ?string) => ({
-        trackedEntityInstance: {
-            trackedEntityInstance: entityId,
-        },
-    }),
-    PROGRAM_STAGE_INSTANCE: (entityId: ?string) => ({
-        event: {
-            event: entityId,
-        },
-    }),
-};
 const dataEntryId = 'singleEvent';
 const itemId = 'newEvent';
 const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
@@ -50,27 +39,34 @@ export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, s
             const state = store.getState();
             const existingRelationships = state.dataEntriesRelationships[dataEntryKey] || [];
             const payload = action.payload;
-            
+
             const newRelationship = {
                 clientId: uuid(),
-                entity: { ...payload.entity },
-                entityType: payload.entityType,
+                from: {
+                    id: 'newEvent',
+                    name: i18n.t('This event'),
+                    type: 'PROGRAM_STAGE_INSTANCE',
+                },
+                to: {
+                    ...payload.entity,
+                    type: payload.entityType,
+                },
                 relationshipType: { ...payload.relationshipType },
             };
 
             if (existingRelationships.some(r =>
                 r.relationshipType.id === newRelationship.relationshipType.id &&
-                r.entity.id &&
-                r.entity.id === newRelationship.entity.id)
+                r.to.id &&
+                r.to.id === newRelationship.to.id)
             ) {
                 const message = i18n.t(
                     'Relationship of type {{relationshipTypeName}} to {{entityName}} already exists',
                     {
-                        entityName: newRelationship.entity.displayName,
+                        entityName: newRelationship.to.name,
                         relationshipTypeName: newRelationship.relationshipType.name,
                     },
                 );
-                return duplicateRelationship(dataEntryId, itemId, message);
+                return relationshipAlreadyExists(dataEntryId, itemId, message);
             }
 
             return addRelationship(dataEntryId, itemId, newRelationship);
@@ -79,11 +75,16 @@ export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, s
 const saveNewEventRelationships = (action: Object) => {
     const eventId = action.payload.response.importSummaries[0].reference;
     const serverRelationshipData = {
-        relationships: action.meta.relationshipData.map(r => ({
-            relationshipType: r.relationshipType.id,
-            to: typeToRelationshipConstraint[r.entityType](r.entity.id),
-            from: typeToRelationshipConstraint.PROGRAM_STAGE_INSTANCE(eventId),
-        })),
+        relationships: action.meta.relationshipData.map((r) => {
+            const clientRelationship = {
+                ...r,
+                from: {
+                    ...r.from,
+                    id: eventId,
+                },
+            };
+            return convertClientRelationshipToServer(clientRelationship);
+        }),
     };
     return startSaveNewEventRelationships(serverRelationshipData, action.meta.selections, action.meta.triggerAction);
 };

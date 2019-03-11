@@ -37,9 +37,6 @@ const inputKeys = {
 };
 
 class DateTimeRangeField extends React.Component<Props> {
-    static defaultProps = {
-        value: {},
-    };
     touchedFields: Set<string>;
     constructor(props: Props) {
         super(props);
@@ -47,9 +44,13 @@ class DateTimeRangeField extends React.Component<Props> {
     }
 
 
+    getValue = () => this.props.value || {};
+
+
     getNewValue = (key: string, newValue: any) => {
+        const currentValue = this.getValue();
         const value = {
-            ...this.props.value,
+            ...currentValue,
             [key]: newValue,
         };
         if (!value.from && !value.to) {
@@ -61,23 +62,23 @@ class DateTimeRangeField extends React.Component<Props> {
     handleFromChange = (value: ?DateTimeValue) => {
         this.props.onChange({
             from: value,
-            to: this.props.value.to,
+            to: this.getValue().to,
         });
     }
     handleToChange = (value: ?DateTimeValue) => {
         this.props.onChange({
-            from: this.props.value.from,
+            from: this.getValue().from,
             to: value,
         });
     }
 
     toHasValue = () => {
-        const value = this.props.value;
+        const value = this.getValue();
         return !!(value.to && value.to.date && value.to.time);
     }
 
     fromHasValue = () => {
-        const value = this.props.value;
+        const value = this.getValue();
         return !!(value.to && value.to.date && value.to.time);
     }
 
@@ -87,7 +88,7 @@ class DateTimeRangeField extends React.Component<Props> {
         }
         this.handleBlur({
             from: value,
-            to: this.props.value.to,
+            to: this.getValue().to,
         }, this.toHasValue());
     }
 
@@ -96,7 +97,7 @@ class DateTimeRangeField extends React.Component<Props> {
             this.touchedFields.add('toTouched');
         }
         this.handleBlur({
-            from: this.props.value.from,
+            from: this.getValue().from,
             to: value,
         }, this.fromHasValue());
     }

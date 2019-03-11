@@ -35,7 +35,6 @@ class D2DateTime extends Component<Props> {
     static defaultProps = {
         dateLabel: i18n.t('Date'),
         timeLabel: i18n.t('Time'),
-        value: {},
     };
 
     handleTimeChange: (timeValue: string) => void;
@@ -52,37 +51,38 @@ class D2DateTime extends Component<Props> {
         this.handleTimeBlur = this.handleTimeBlur.bind(this);
         this.handleDateBlur = this.handleDateBlur.bind(this);
         this.touchedFields = new Set();
-
     }
 
     handleTimeChange(timeValue: string) {
         this.props.onChange({
             time: timeValue,
-            date: this.props.value.date,
+            date: this.getValue().date,
         });
     }
 
     handleDateChange(dateValue: string) {
         this.props.onChange({
-            time: this.props.value.time,
+            time: this.getValue().time,
             date: dateValue,
         });
     }
 
     handleTimeBlur(timeValue: string) {
         this.touchedFields.add('timeTouched');
+        const currentValue = this.getValue();
         this.handleBlur({
             time: timeValue,
-            date: this.props.value.date,
-        }, !!this.props.value.date);
+            date: currentValue.date,
+        }, !!currentValue.date);
     }
 
     handleDateBlur(dateValue: string) {
         this.touchedFields.add('dateTouched');
+        const currentValue = this.getValue();
         this.handleBlur({
-            time: this.props.value.time,
+            time: currentValue.time,
             date: dateValue,
-        }, !!this.props.value.time);
+        }, !!currentValue.time);
     }
 
     handleBlur(value: Value, otherFieldHasValue: boolean) {
@@ -98,6 +98,8 @@ class D2DateTime extends Component<Props> {
             touched: touched || otherFieldHasValue,
         });
     }
+
+    getValue = () => this.props.value || {};
 
     render() {
         const {
@@ -118,8 +120,9 @@ class D2DateTime extends Component<Props> {
             onChange,
             ...passOnProps } = this.props;
         const isVertical = orientation === orientations.VERTICAL;
-        const dateValue = value.date;
-        const timeValue = value.time;
+        const currentValue = this.getValue();
+        const dateValue = currentValue.date;
+        const timeValue = currentValue.time;
         const dateStyle = {
             width: dateWidth,
             maxWidth: dateMaxWidth,

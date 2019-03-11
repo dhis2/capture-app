@@ -6,7 +6,6 @@ import { withStyles } from '@material-ui/core';
 import { Pagination } from 'capture-ui';
 import withNavigation from '../../../../Pagination/withDefaultNavigation';
 import Button from '../../../../Buttons/Button.component';
-import { DataElement } from '../../../../../metaData';
 import makeAttributesSelector from './teiRelationshipSearchResults.selectors';
 import CardList from '../../../../CardList/CardList.component';
 import LoadingMask from '../../../../LoadingMasks/LoadingMask.component';
@@ -20,7 +19,7 @@ type Props = {
     onEditSearch: () => void,
     paging: Object,
     onChangePage: (page: number) => void,
-    onAddRelationship: (entity: { id: string, displayName: string }) => void,
+    onAddRelationship: (id: string, values: Object) => void,
     trackedEntityTypeName: string,
     classes: {
         itemActionsContainer: string,
@@ -58,30 +57,17 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
         this.getAttributes = makeAttributesSelector();
     }
 
-    onAddRelationship = (item, attributes) => {
-        const displayName = this.getDisplayName(item, attributes);
-        this.props.onAddRelationship({
-            id: item.id,
-            displayName,
-        });
+    onAddRelationship = (item) => {
+        this.props.onAddRelationship(item.id, item.values);
     }
 
-    getDisplayName = (item, attributes) => {
-        const valueIds = Object.keys(item.values);
-        return attributes
-            .filter(a => valueIds.some(id => id === a.id))
-            .slice(0, 2)
-            .map(a => item.values[a.id])
-            .join(' ');
-    };
-
-    getItemActions = (itemProps: Object, attributes: Array<DataElement>) => {
+    getItemActions = (itemProps: Object) => {
         const classes = this.props.classes;
         return (
             <div className={classes.itemActionsContainer}>
                 <Button
                     color="primary"
-                    onClick={() => this.onAddRelationship(itemProps.item, attributes)}
+                    onClick={() => this.onAddRelationship(itemProps.item)}
                 >
                     {i18n.t('Link')}
                 </Button>
@@ -99,7 +85,7 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
                     items={teis}
                     dataElements={attributes}
                     noItemsText={i18n.t('No {{trackedEntityTypeName}} found.', { trackedEntityTypeName })}
-                    getCustomItemBottomElements={itemProps => this.getItemActions(itemProps, attributes)}
+                    getCustomItemBottomElements={itemProps => this.getItemActions(itemProps)}
                 />
                 {this.renderPager()}
             </React.Fragment>
@@ -121,9 +107,9 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
     }
 
     renderPager = () => {
-        const { onChangePage, paging } = this.props;
+        const { onChangePage, paging, classes } = this.props;
         return (
-            <div className={this.props.classes.pagination}>
+            <div className={classes.pagination}>
                 <SearchResultsPager
                     onChangePage={onChangePage}
                     onGetLabelDisplayedRows={(a, b) => `${a} of ${b}`}

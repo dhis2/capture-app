@@ -15,6 +15,7 @@ export { default as OrgUnitField } from './Fields/OrgUnitField/OrgUnitField.comp
 export { default as SingleOrgUnitSelectField } from './Fields/OrgUnitField/SingleOrgUnitSelectField.component';
 export { default as TextRangeField } from './Fields/TextField/TextRangeField.component';
 export { default as DateRangeField } from './Fields/DateAndTimeFields/DateRangeField/DateRangeField.component';
+export { default as ViewModeField } from './Fields/ViewModeField/ViewModeField.component';
 export {
     default as DateTimeRangeField,
 } from './Fields/DateAndTimeFields/DateTimeRangeField/DateTimeRangeField.component';

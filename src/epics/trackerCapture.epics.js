@@ -54,6 +54,29 @@ import {
     runRulesForEditSingleEventEpic,
 } from 'capture-core/components/Pages/EditEvent/DataEntry/epics/editEventDataEntry.epics';
 import {
+    loadEditEventDataEntryEpic,
+    saveEditedEventEpic,
+    saveEditedEventFailedEpic,
+} from 'capture-core/components/Pages/ViewEvent/EventDetailsSection/EditEventDataEntry/editEventDataEntry.epics';
+
+import {
+    loadViewEventDataEntryEpic,
+} from 'capture-core/components/Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/viewEventDataEntry.epics';
+import {
+    getEventOpeningFromEventListEpic as getViewEventOpeningFromEventListEpic,
+    getEventFromUrlEpic as getViewEventFromUrlEpic,
+    getOrgUnitOnUrlUpdateEpic as getViewEventOrgUnitOnUrlUpdateEpic,
+    openViewPageLocationChangeEpic,
+    backToMainPageEpic,
+    backToMainPageLocationChangeEpic,
+    openAddRelationshipForViewEventEpic,
+} from 'capture-core/components/Pages/ViewEvent/epics/viewEvent.epics';
+
+import {
+    viewEventPageSelectorUpdateURLEpic,
+} from 'capture-core/components/Pages/ViewEvent/ViewEventSelector/ViewEventSelector.epics';
+
+import {
     saveEditEventEpic,
     saveEditEventLocationChangeEpic,
 } from 'capture-core/components/Pages/EditEvent/DataEntry/epics/saveEditSingleEvent.epics';
@@ -70,6 +93,7 @@ import {
 } from 'capture-core/components/Connectivity/connectivity.epics';
 import {
     updateEventListAfterSaveOrUpdateEventEpic,
+    updateEventListAfterUpdateEventEpic,
 } from 'capture-core/components/Pages/MainPage/mainPage.epics';
 import {
     networkMonitorStatusEpic,
@@ -126,6 +150,20 @@ import {
 import {
     teiSearchFilterOrgUnitsEpic,
 } from 'capture-core/components/TeiSearch/SearchOrgUnitSelector/searchOrgUnitSelector.epics';
+
+import {
+    loadRelationshipsForViewEventEpic,
+    addRelationshipForViewEventEpic,
+    saveRelationshipFailedForViewEventEpic,
+    RelationshipSavedForViewEventEpic,
+    deleteRelationshipForViewEventEpic,
+} from 'capture-core/components/Pages/ViewEvent/Relationship/ViewEventRelationships.epics';
+
+import {
+    loadNotesForViewEventEpic,
+    addNoteForViewEventEpic,
+    saveNoteForViewEventFailedEpic,
+} from 'capture-core/components/Pages/ViewEvent/Notes/viewEventNotes.epics';
 
 import {
     openNewRelationshipRegisterTeiEpic,
@@ -218,6 +256,27 @@ export default combineEpics(
     filterFormFieldOrgUnitsEpic,
     asyncUpdateFieldEpic,
     teiSearchFilterOrgUnitsEpic,
+    getViewEventOpeningFromEventListEpic,
+    getViewEventFromUrlEpic,
+    getViewEventOrgUnitOnUrlUpdateEpic,
+    openViewPageLocationChangeEpic,
+    viewEventPageSelectorUpdateURLEpic,
+    backToMainPageEpic,
+    backToMainPageLocationChangeEpic,
+    openAddRelationshipForViewEventEpic,
+    addRelationshipForViewEventEpic,
+    saveRelationshipFailedForViewEventEpic,
+    RelationshipSavedForViewEventEpic,
+    deleteRelationshipForViewEventEpic,
+    addNoteForViewEventEpic,
+    saveNoteForViewEventFailedEpic,
+    loadNotesForViewEventEpic,
+    loadRelationshipsForViewEventEpic,
+    loadViewEventDataEntryEpic,
+    loadEditEventDataEntryEpic,
+    saveEditedEventEpic,
+    saveEditedEventFailedEpic,
+    updateEventListAfterUpdateEventEpic,
     openNewRelationshipRegisterTeiEpic,
     openNewRelationshipRegisterTeiDataEntryEpic,
     ...getDataEntryEpics(),

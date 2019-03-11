@@ -11,6 +11,7 @@ import {
 } from '../../components/Pages/NewEvent';
 import { actionTypes as tempSelectorActionTypes } from '../../components/Pages/MainPage/tempSelector.actions';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
+import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/viewEvent.actions';
 import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
@@ -25,6 +26,9 @@ import {
 import {
     actionTypes as editEventPageSelectorActionTypes,
 } from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
+import {
+    actionTypes as viewEventPageSelectorActionTypes,
+} from '../../components/Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
 import {
     urlActionTypes as newEnrollmentUrlActionTypes,
 } from '../../components/Pages/NewEnrollment';
@@ -46,6 +50,10 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         const newState = { ...state, page: action.payload.page };
         return newState;
     },
+    [viewEventActionTypes.VIEW_EVENT_FROM_URL]: (state, action) => {
+        const newState = { ...state, page: action.payload.page };
+        return newState;
+    },
     [newEnrollmentUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => ({
         ...state,
         page: action.payload.nextPage,
@@ -63,6 +71,12 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
     [editEventPageSelectorActionTypes.OPEN_NEW_EVENT]: (state) => {
+        const newState = { ...state };
+        newState.page = 'newEvent';
+        newState.locationSwitchInProgress = true;
+        return newState;
+    },
+    [viewEventPageSelectorActionTypes.OPEN_NEW_EVENT]: (state) => {
         const newState = { ...state };
         newState.page = 'newEvent';
         newState.locationSwitchInProgress = true;
@@ -98,10 +112,24 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         newState.locationSwitchInProgress = true;
         return newState;
     },
+    [viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE]: (state) => {
+        const newState = { ...state };
+        newState.page = null;
+        newState.locationSwitchInProgress = true;
+        return newState;
+    },
     [eventListActionTypes.OPEN_EDIT_EVENT_PAGE]: (state) => {
         const newState = {
             ...state,
             page: 'editEvent',
+            locationSwitchInProgress: true,
+        };
+        return newState;
+    },
+    [eventListActionTypes.OPEN_VIEW_EVENT_PAGE]: (state) => {
+        const newState = {
+            ...state,
+            page: 'viewEvent',
             locationSwitchInProgress: true,
         };
         return newState;

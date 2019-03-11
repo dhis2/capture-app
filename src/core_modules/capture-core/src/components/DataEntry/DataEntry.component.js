@@ -105,7 +105,7 @@ type Props = {
     dataEntrySections?: { [string]: {name: string, placement: $Values<typeof placements>}},
     dataEntryFieldRef: any,
     onAddNote?: ?Function,
-    onAddRelationship?: ?Function,
+    onOpenAddRelationship?: ?Function,
 };
 
 const fieldHorizontalFilter = (placement: $Values<typeof placements>) =>
@@ -229,7 +229,7 @@ class DataEntry extends React.Component<Props> {
             onUpdateFormFieldAsync,
             dataEntryOutputs,
             onAddNote,
-            onAddRelationship,
+            onOpenAddRelationship,
             dataEntryFieldRef,
             ...passOnProps } = this.props;
 
@@ -270,7 +270,7 @@ class DataEntry extends React.Component<Props> {
                             </div>
                         }
                     </div>
-                    {!this.props.formHorizontal ?
+                    {!this.props.formHorizontal && dataEntryOutputs ?
                         <StickyOnScroll
                             offsetTop={50}
                             minViewpointWidth={769}

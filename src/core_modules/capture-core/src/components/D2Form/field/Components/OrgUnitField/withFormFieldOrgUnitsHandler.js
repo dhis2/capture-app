@@ -54,7 +54,6 @@ const mapStateToProps = (state: ReduxState, props: { formId: string, elementId: 
         treeKey: formFieldMisc.orgUnitsSearchText || 'initial',
         roots,
     };
-    console.log('formfield', a);
     return a;
 };
 

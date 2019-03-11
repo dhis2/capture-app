@@ -20,16 +20,16 @@ type Props = {
 class RelationshipNavigation extends React.Component<Props> {
     renderForRelationshipType = (selectedRelationshipType: SelectedRelationshipType) => {
         const { onSelectRelationshipType, findMode } = this.props;
-        const displayName = selectedRelationshipType.displayName;
+        const relationshipTypeName = selectedRelationshipType.name;
         return (
             <React.Fragment>
                 {this.renderSlash()}
                 { findMode ?
                     <React.Fragment>
-                        <LinkButton onClick={() => onSelectRelationshipType(selectedRelationshipType)}>{displayName}</LinkButton>
+                        <LinkButton onClick={() => onSelectRelationshipType(selectedRelationshipType)}>{relationshipTypeName}</LinkButton>
                         {this.renderForFindMode(findMode)}
                     </React.Fragment> :
-                    displayName
+                    relationshipTypeName
                 }
             </React.Fragment>
         );

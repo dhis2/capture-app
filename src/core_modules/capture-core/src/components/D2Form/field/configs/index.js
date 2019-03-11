@@ -15,6 +15,7 @@ export { default as getUserNameFieldConfig } from './userNameField/getUserNameFi
 export { default as getTextRangeFieldConfig } from './textRangeField/getTextRangeFieldConfig';
 export { default as getDateRangeFieldConfig } from './dateRangeField/getDateRangeFieldConfig';
 export { default as getDateTimeRangeFieldConfig } from './dateTimeRangeField/getDateTimeRangeFieldConfig';
+export { default as getViewModeFieldConfig } from './viewModeField/getViewModeFieldConfig';
 
 // custom form
 export { default as getAgeFieldConfigForCustomForm } from './ageField/getAgeFieldConfigForCustomForm';
