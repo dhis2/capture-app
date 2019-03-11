@@ -1,18 +1,20 @@
 // @flow
 import * as React from 'react';
-import { Enrollment } from './Enrollment';
+import DataEntry from './DataEntry/DataEntry.container';
+import { RegistrationSection } from './RegistrationSection';
+import withStateBoundLoadingIndicator from '../../../../HOC/withStateBoundLoadingIndicator';
 
 type Props = {};
 
 class RegisterTei extends React.Component<Props> {
     render() {
-        const { ...passOnProps } = this.props;
         return (
-            <Enrollment
-                {...passOnProps}
-            />
+            <React.Fragment>
+                <RegistrationSection />
+                <DataEntry />
+            </React.Fragment>
         );
     }
 }
 
-export default RegisterTei;
+export default withStateBoundLoadingIndicator((state: ReduxState) => !state.newRelationship.loading)(RegisterTei);

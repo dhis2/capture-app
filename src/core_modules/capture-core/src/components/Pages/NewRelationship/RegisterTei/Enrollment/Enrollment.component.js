@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { Enrollment, RenderFoundation } from '../../../../../metaData';
 import ConfiguredEnrollment from './ConfiguredEnrollment.component';
+import { DATA_ENTRY_ID } from '../registerTei.const';
 
 const getStyles = theme => ({
     fieldLabelMediaBased: {
@@ -51,7 +52,7 @@ class NewEnrollmentRelationship extends Component<Props> {
         return (
             <div>
                 <ConfiguredEnrollment
-                    id={'relationship'}
+                    id={DATA_ENTRY_ID}
                     onSave={this.handleSave}
                     fieldOptions={this.fieldOptions}
                     enrollmentMetadata={enrollmentMetadata}

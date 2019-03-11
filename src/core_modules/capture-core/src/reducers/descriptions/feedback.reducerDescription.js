@@ -19,6 +19,7 @@ import {
 import { actionTypes as eventsListActionTypes } from '../../components/Pages/MainPage/EventsList/eventsList.actions';
 import { orgUnitListActionTypes } from '../../components/QuickSelector';
 import { asyncHandlerActionTypes } from '../../components/D2Form';
+import { registrationSectionActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
 
 function addErrorFeedback(state: ReduxState, message: string, action?: ?React.Node) {
     const newState = [...state];
@@ -95,5 +96,7 @@ export const feedbackDesc = createReducerDescription({
         addErrorFeedback(state, i18n.t(action.payload.message)),
     [dataEntryActionTypes.DUPLICATE_RELATIONSHIP]: (state, action) =>
         addErrorFeedback(state, action.payload.message),
+    [registrationSectionActionTypes.ORG_UNIT_SEARCH_FAILED]: state =>
+        addErrorFeedback(state, i18n.t('Organisation unit search failed. See log for details')),
 }, 'feedbacks', []);
 

@@ -4,8 +4,10 @@ import {
     actionTypes as newRelationshipActionTypes,
 } from '../../components/Pages/NewRelationship/newRelationship.actions';
 import {
-    registerTeiActionTypes,
-} from '../../components/Pages/NewRelationship';
+    registrationSectionActionTypes,
+    dataEntryActionTypes,
+    actionTypes as registerTeiActionTypes,
+} from '../../components/Pages/NewRelationship/RegisterTei';
 
 export const newRelationshipDesc = createReducerDescription({
     [newRelationshipActionTypes.INITIALIZE_NEW_RELATIONSHIP]: () => ({}),
@@ -17,7 +19,7 @@ export const newRelationshipDesc = createReducerDescription({
     [newRelationshipActionTypes.SELECT_FIND_MODE]: (state, action) => ({
         ...state,
         findMode: action.payload.findMode,
-        // loading: true,
+        loading: true,
         searching: false,
     }),
     [newRelationshipActionTypes.SET_SEARCHING]: state => ({
@@ -28,19 +30,49 @@ export const newRelationshipDesc = createReducerDescription({
         ...state,
         searching: false,
     }),
-    [registerTeiActionTypes.INITIALIZE_REGISTER_TEI]: (state, action) => ({
+    [registerTeiActionTypes.INITIALIZE_REGISTER_TEI]: state => ({
         ...state,
-        // loading: false,
+        loading: false,
     }),
 }, 'newRelationship', {});
 
 export const newRelationshipRegisterTeiDesc = createReducerDescription({
     [registerTeiActionTypes.INITIALIZE_REGISTER_TEI]: (state, action) => {
-        const { programId, orgUnitId } = action.payload;
+        const { programId, orgUnit } = action.payload;
         return {
             ...state,
             programId,
-            orgUnitId,
+            orgUnit,
+            dataEntryIsLoading: false,
         };
     },
+    [registrationSectionActionTypes.PROGRAM_CHANGE]: (state, action) => {
+        const { programId } = action.payload;
+        return {
+            ...state,
+            programId,
+            dataEntryIsLoading: true,
+        };
+    },
+    [registrationSectionActionTypes.ORG_UNIT_CHANGE]: (state, action) => {
+        const { orgUnit, resetProgramSelection } = action.payload;
+        return {
+            ...state,
+            orgUnit,
+            programId: resetProgramSelection ? null : state.programId,
+            dataEntryIsLoading: true,
+        };
+    },
+    [registrationSectionActionTypes.PROGRAM_FILTER_CLEAR]: state => ({
+        ...state,
+        orgUnit: null,
+    }),
+    [dataEntryActionTypes.DATA_ENTRY_OPEN]: state => ({
+        ...state,
+        dataEntryIsLoading: false,
+    }),
+    [dataEntryActionTypes.DATA_ENTRY_OPEN_CANCELLED]: state => ({
+        ...state,
+        dataEntryIsLoading: false,
+    }),
 }, 'newRelationshipRegisterTei');

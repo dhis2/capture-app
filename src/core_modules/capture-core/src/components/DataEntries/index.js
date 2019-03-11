@@ -10,6 +10,12 @@ export {
     runRulesOnEnrollmentFieldUpdateEpic,
 } from './Enrollment';
 export {
+    TrackedEntityInstance as TrackedEntityInstanceDataEntry,
+    openDataEntryForNewTeiBatch,
+    batchActionTypes as teiBatchActionTypes,
+    openBatchActionTypes as teiOpenBatchActionTypes,
+} from './TrackedEntityInstance';
+export {
     convertGeometryOut,
     convertNoteIn,
     convertNoteOut,

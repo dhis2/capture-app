@@ -21,6 +21,7 @@ type Props = {
     value: ?string,
     id: string,
     itemId: string,
+    dataEntryId: string,
     classes: {
         noteItem: string,
         inputContainer: string,
@@ -122,7 +123,7 @@ class DataEntryNotes extends React.Component<Props, State> {
 
     handleAddNote = () => {
         if (this.props.value) {
-            this.props.onAddNote(this.props.itemId, this.props.id, this.props.value);
+            this.props.onAddNote(this.props.itemId, this.props.dataEntryId, this.props.value);
         }
         this.props.onBlur(null, { touched: false });
     }

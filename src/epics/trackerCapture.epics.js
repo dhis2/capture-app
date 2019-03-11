@@ -116,13 +116,6 @@ import {
     openNewEnrollmentInDataEntryEpic,
     saveNewEnrollmentEpic,
 } from 'capture-core/components/Pages/NewEnrollment';
-
-import {
-    loadSearchOrgUnitRootsEpic,
-    filterOrgUnitRootsEpic,
-    loadCaptureOrgUnitRootsEpic,
-} from 'capture-core/components/organisationUnits/organisationUnitRoots.epics';
-
 import {
     asyncUpdateFieldEpic,
 } from 'capture-core/components/D2Form';
@@ -134,19 +127,25 @@ import {
     teiSearchFilterOrgUnitsEpic,
 } from 'capture-core/components/TeiSearch/SearchOrgUnitSelector/searchOrgUnitSelector.epics';
 
-import { openRegisterTeiForRelationshipEpic } from 'capture-core/components/Pages/NewRelationship';
+import {
+    openNewRelationshipRegisterTeiEpic,
+    openNewRelationshipRegisterTeiDataEntryEpic,
+} from 'capture-core/components/Pages/NewRelationship/RegisterTei';
 
 import { runRulesOnEnrollmentFieldUpdateEpic } from 'capture-core/components/DataEntries';
 
-import { loadStartupData, loadStartupDataCore } from '../init/entry.epics';
+import { loadCoreEpic } from 'capture-core/init';
+import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../init/entry.epics';
 
 import getDataEntryEpics from './getDataEntryEpics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
     calculateSelectionsCompletenessEpic,
-    loadStartupData,
-    loadStartupDataCore,
+    triggerLoadCoreEpic,
+    loadCoreEpic,
+    loadAppEpic,
+    loadCoreFailedEpic,
     mainSelectionsCompletedEpic,
     orgUnitDataRetrivedEpic,
     retrieveWorkingListOnMainSelectionsCompletedEpic,
@@ -197,9 +196,6 @@ export default combineEpics(
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,
     requestDeleteEventEpic,
-    loadSearchOrgUnitRootsEpic,
-    loadCaptureOrgUnitRootsEpic,
-    filterOrgUnitRootsEpic,
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
     openRelationshipTeiSearchEpic,
@@ -222,6 +218,7 @@ export default combineEpics(
     filterFormFieldOrgUnitsEpic,
     asyncUpdateFieldEpic,
     teiSearchFilterOrgUnitsEpic,
-    openRegisterTeiForRelationshipEpic,
+    openNewRelationshipRegisterTeiEpic,
+    openNewRelationshipRegisterTeiDataEntryEpic,
     ...getDataEntryEpics(),
 );

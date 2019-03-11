@@ -21,6 +21,7 @@ export default class Program {
     constructor(initFn: ?(_this: Program) => void) {
         this.programRules = [];
         this.programRuleVariables = [];
+        this.organisationUnits = {};
         initFn && isFunction(initFn) && initFn(this);
     }
 

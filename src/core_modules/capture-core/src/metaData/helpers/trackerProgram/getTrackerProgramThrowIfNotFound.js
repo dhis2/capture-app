@@ -6,15 +6,24 @@ import { programCollection } from '../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../Program';
 
 const errorMessages = {
-    PROGRAM_NOT_FOUND: 'Program not found or program not a tracker program',
-    GENERIC_ERROR: 'An error has occured. See log for details',
+    PROGRAM_NOT_FOUND: 'Program not found',
+    PROGRAM_NOT_FOUND_DISPLAY: i18n.t('Program not found'),
+    NOT_TRACKER_PROGRAM: 'Program is not a tracker program',
+    NOT_TRACKER_PROGRAM_DISPLAY: i18n.t('Program is not a tracker program'),
 };
 
 export default function getTrackerProgramThrowIfNotFound(programId: string): TrackerProgram {
     const program = programCollection.get(programId);
-    if (!program || !(program instanceof TrackerProgram)) {
+
+    if (!program) {
         log.error(errorCreator(errorMessages.PROGRAM_NOT_FOUND)({ programId }));
-        throw Error(i18n.t(errorMessages.GENERIC_ERROR));
+        throw Error(errorMessages.PROGRAM_NOT_FOUND_DISPLAY);
     }
+
+    if (!(program instanceof TrackerProgram)) {
+        log.error(errorCreator(errorMessages.NOT_TRACKER_PROGRAM)({ programId }));
+        throw Error(errorMessages.NOT_TRACKER_PROGRAM_DISPLAY);
+    }
+
     return program;
 }
