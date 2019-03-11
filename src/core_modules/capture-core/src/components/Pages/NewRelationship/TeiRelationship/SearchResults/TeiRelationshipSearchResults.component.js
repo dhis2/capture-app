@@ -107,7 +107,7 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
     }
 
     renderPager = () => {
-        const { classes, onChangePage, paging } = this.props;
+        const { onChangePage, paging, classes } = this.props;
         return (
             <div className={classes.pagination}>
                 <SearchResultsPager
@@ -128,5 +128,5 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
         );
     }
 }
-
+// $FlowFixMe
 export default withStyles(getStyles)(TeiRelationshipSearchResults);

@@ -186,7 +186,7 @@ export const runRulesForSingleEventEpic = (action$: InputObservable, store: Redu
 
             return batchActions([
                 ...rulesActions,
-                rulesExecutedPostUpdateField(payload.dataEntryId, payload.itemId),
+                rulesExecutedPostUpdateField(payload.dataEntryId, payload.itemId, payload.uid),
             ],
             batchActionTypes.RULES_EFFECTS_ACTIONS_BATCH,
             );

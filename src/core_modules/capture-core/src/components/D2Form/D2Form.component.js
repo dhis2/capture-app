@@ -8,6 +8,7 @@ import D2SectionContainer from './D2Section.container';
 import D2Section from './D2Section.component';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import Section from '../../metaData/RenderFoundation/Section';
+import { withAsyncHandler } from './asyncHandlerHOC';
 
 const styles = () => ({
     container: {
@@ -88,6 +89,7 @@ class D2Form extends React.PureComponent<Props> {
                             {
                                 method: 'validateFormReturningFailedFields',
                                 object: this,
+                                error,
                             },
                         ),
                     );
@@ -187,4 +189,4 @@ const D2FormWithRef = (props: Object) => {
     );
 };
 
-export default withStyles(styles)(D2FormWithRef);
+export default withAsyncHandler()(withStyles(styles)(D2FormWithRef));

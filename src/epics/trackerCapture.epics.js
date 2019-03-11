@@ -4,7 +4,6 @@ import {
     cancelNewEventEpic,
     cancelNewEventLocationChangeEpic,
     cancelNewEventIncompleteSelectionsLocationChangeEpic,
-    newEventAsyncUpdateFieldEpic,
     resetDataEntryForNewEventEpic,
     openNewEventInDataEntryEpic,
     resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
@@ -36,9 +35,6 @@ import {
 import {
     openNewEventPageLocationChangeEpic,
 } from 'capture-core/components/Pages/NewEvent/epics/newEvent.epics';
-import {
-    editEventAsyncUpdateFieldEpic,
-} from 'capture-core/components/Pages/EditEvent/DataEntry/epics/editEventAsyncUpdateField.epics';
 import {
     retrieveWorkingListOnMainSelectionsCompletedEpic,
     getWorkingListOnCancelSaveEpic,
@@ -142,16 +138,11 @@ import {
     emptyOrgUnitForNewEnrollmentUrlUpdateEpic,
     validationForNewEnrollmentUrlUpdateEpic,
     openNewEnrollmentInDataEntryEpic,
-    runRulesOnNewEnrollmentFieldUpdateEpic,
     saveNewEnrollmentEpic,
 } from 'capture-core/components/Pages/NewEnrollment';
-
 import {
-    loadSearchOrgUnitRootsEpic,
-    filterOrgUnitRootsEpic,
-    loadCaptureOrgUnitRootsEpic,
-} from 'capture-core/components/organisationUnits/organisationUnitRoots.epics';
-
+    asyncUpdateFieldEpic,
+} from 'capture-core/components/D2Form';
 import {
     filterFormFieldOrgUnitsEpic,
 } from 'capture-core/components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.epics';
@@ -174,13 +165,25 @@ import {
     saveNoteForViewEventFailedEpic,
 } from 'capture-core/components/Pages/ViewEvent/Notes/viewEventNotes.epics';
 
-import { loadStartupData, loadStartupDataCore } from '../init/entry.epics';
+import {
+    openNewRelationshipRegisterTeiEpic,
+    openNewRelationshipRegisterTeiDataEntryEpic,
+} from 'capture-core/components/Pages/NewRelationship/RegisterTei';
+
+import { runRulesOnEnrollmentFieldUpdateEpic } from 'capture-core/components/DataEntries';
+
+import { loadCoreEpic } from 'capture-core/init';
+import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../init/entry.epics';
+
+import getDataEntryEpics from './getDataEntryEpics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
     calculateSelectionsCompletenessEpic,
-    loadStartupData,
-    loadStartupDataCore,
+    triggerLoadCoreEpic,
+    loadCoreEpic,
+    loadAppEpic,
+    loadCoreFailedEpic,
     mainSelectionsCompletedEpic,
     orgUnitDataRetrivedEpic,
     retrieveWorkingListOnMainSelectionsCompletedEpic,
@@ -203,8 +206,6 @@ export default combineEpics(
     saveNewEventEpic,
     cancelNewEventLocationChangeEpic,
     cancelNewEventEpic,
-    newEventAsyncUpdateFieldEpic,
-    editEventAsyncUpdateFieldEpic,
     cancelNewEventIncompleteSelectionsLocationChangeEpic,
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,
@@ -233,9 +234,6 @@ export default combineEpics(
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,
     requestDeleteEventEpic,
-    loadSearchOrgUnitRootsEpic,
-    loadCaptureOrgUnitRootsEpic,
-    filterOrgUnitRootsEpic,
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
     openRelationshipTeiSearchEpic,
@@ -253,9 +251,10 @@ export default combineEpics(
     emptyOrgUnitForNewEnrollmentUrlUpdateEpic,
     validationForNewEnrollmentUrlUpdateEpic,
     openNewEnrollmentInDataEntryEpic,
-    runRulesOnNewEnrollmentFieldUpdateEpic,
+    runRulesOnEnrollmentFieldUpdateEpic,
     saveNewEnrollmentEpic,
     filterFormFieldOrgUnitsEpic,
+    asyncUpdateFieldEpic,
     teiSearchFilterOrgUnitsEpic,
     getViewEventOpeningFromEventListEpic,
     getViewEventFromUrlEpic,
@@ -278,4 +277,7 @@ export default combineEpics(
     saveEditedEventEpic,
     saveEditedEventFailedEpic,
     updateEventListAfterUpdateEventEpic,
+    openNewRelationshipRegisterTeiEpic,
+    openNewRelationshipRegisterTeiDataEntryEpic,
+    ...getDataEntryEpics(),
 );

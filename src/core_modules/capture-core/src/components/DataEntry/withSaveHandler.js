@@ -20,7 +20,6 @@ import { saveValidationFailed, saveAbort } from './actions/dataEntry.actions';
 import getDataEntryKey from './common/getDataEntryKey';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
-import AsyncFieldHandler from './asyncFields/AsyncFieldHandler';
 
 type Props = {
     classes: Object,
@@ -33,11 +32,7 @@ type Props = {
     id: string,
     warnings: ?Array<{id: string, warning: string }>,
     hasGeneralErrors: ?boolean,
-    onIsValidating: (innerAction: ReduxAction<any, any>) => void,
-    onFieldsValidated: (innerAction: ReduxAction<any, any>) => void,
-    onUpdateFormField: (innerAction: ReduxAction<any, any>) => void,
-    onSearchGroupResultCountRetrieved: (innerAction: ReduxAction<any, any>) => void,
-    onSearchGroupResultCountRetrievalFailed: (innerAction: ReduxAction<any, any>) => void,
+    inProgressList: Array<string>,
 };
 
 type IsCompletingFn = (props: Props) => boolean;
@@ -76,6 +71,16 @@ const getSaveHandler = (
             };
         }
 
+        componentDidUpdate(prevProps: Props) {
+            if (this.state.waitForPromisesDialogOpen &&
+                this.props.inProgressList.length === 0 &&
+                prevProps.inProgressList.length > 0
+            ) {
+                this.validateAndSave(this.state.saveType);
+                this.setState({ waitForPromisesDialogOpen: false, saveType: null });
+            }
+        }
+
         getWrappedInstance() {
             return this.innerInstance;
         }
@@ -98,12 +103,6 @@ const getSaveHandler = (
 
         showWarningsPopup(saveType?: ?string) {
             this.setState({ warningDialogOpen: true, saveType });
-        }
-
-        async waitForPromisesWithPopupAsync() {
-            this.setState({ waitForPromisesDialogOpen: true });
-            await AsyncFieldHandler.getDataEntryItemPromise(this.props.id, this.props.itemId);
-            this.setState({ waitForPromisesDialogOpen: false });
         }
 
         validateGeneralErrorsFromRules(isCompleting: boolean) {
@@ -144,11 +143,7 @@ const getSaveHandler = (
             };
         }
 
-        handleSaveAttemptAsync = async (saveType?: ?string) => {
-            if (AsyncFieldHandler.hasPromises(this.props.id, this.props.itemId)) {
-                await this.waitForPromisesWithPopupAsync();
-            }
-
+        validateAndSave(saveType?: ?string) {
             const isDataEntryFieldsValid = this.validateDataEntryFields();
             if (!isDataEntryFieldsValid) {
                 this.props.onSaveValidationFailed(this.props.itemId, this.props.id);
@@ -161,6 +156,14 @@ const getSaveHandler = (
             }
 
             this.handleSaveValidationOutcome(saveType, isFormValid);
+        }
+
+        handleSaveAttempt = (saveType?: ?string) => {
+            if (this.props.inProgressList.length > 0) {
+                this.setState({ waitForPromisesDialogOpen: true, saveType });
+                return;
+            }
+            this.validateAndSave(saveType);
         }
 
         handleSaveValidationOutcome(saveType?: ?string, isFormValid: boolean) {
@@ -226,70 +229,6 @@ const getSaveHandler = (
             this.dataEntryFieldInstances.set(id, dataEntryFieldInstance);
         }
 
-        handleIsValidating = (
-            elementId: string,
-            formBuilderId: string,
-            validatingPromise: Promise<any>,
-            innerAction: ReduxAction<any, any>,
-        ) => {
-            const dataEntryKey = getDataEntryKey(this.props.id, this.props.itemId);
-            AsyncFieldHandler.setPromise(dataEntryKey, validatingPromise);
-            this.props.onIsValidating(innerAction);
-        }
-
-        handleFieldsValidated = (
-            formBuilderId: string,
-            promisesForIsValidating: Array<Promise<any>>,
-            innerAction: ReduxAction<any, any>,
-        ) => {
-            const dataEntryKey = getDataEntryKey(this.props.id, this.props.itemId);
-            promisesForIsValidating
-                .forEach((promise) => {
-                    AsyncFieldHandler.removePromise(dataEntryKey, promise);
-                });
-            this.props.onFieldsValidated(innerAction);
-        }
-
-        handleUpdateField = (
-            fieldId: string,
-            value: any,
-            innerAction: ReduxAction<any, any>,
-            updateCompletePromise: ?Promise<any>,
-            searchCompletePromises: ?Array<Promise<any>>,
-        ) => {
-            const dataEntryKey = getDataEntryKey(this.props.id, this.props.itemId);
-            updateCompletePromise && AsyncFieldHandler.removePromise(dataEntryKey, updateCompletePromise);
-            searchCompletePromises && searchCompletePromises
-                .forEach(p => AsyncFieldHandler.setPromise(dataEntryKey, p));
-            this.props.onUpdateFormField(innerAction);
-        }
-
-        handleSearchGroupResultCountRetrieved = (
-            innerAction: ReduxAction<any, any>,
-            completePromise: Promise<any>,
-        ) => {
-            const dataEntryKey = getDataEntryKey(this.props.id, this.props.itemId);
-            AsyncFieldHandler.removePromise(dataEntryKey, completePromise);
-            this.props.onSearchGroupResultCountRetrieved(innerAction);
-        }
-
-        handleSearchGroupResultCountRetrievalFailed = (
-            innerAction: ReduxAction<any, any>,
-            completePromise: Promise<any>,
-        ) => {
-            const dataEntryKey = getDataEntryKey(this.props.id, this.props.itemId);
-            AsyncFieldHandler.removePromise(dataEntryKey, completePromise);
-            this.props.onSearchGroupResultCountRetrievalFailed(innerAction);
-        }
-
-        handleCleanUpPromises = (
-            remainingPromises: Array<Promise<any>>,
-        ) => {
-            const dataEntryKey = getDataEntryKey(this.props.id, this.props.itemId);
-            remainingPromises
-                .forEach(p => AsyncFieldHandler.removePromise(dataEntryKey, p));
-        }
-
         render() {
             const {
                 itemId,
@@ -298,11 +237,7 @@ const getSaveHandler = (
                 onSaveAbort,
                 warnings,
                 hasGeneralErrors,
-                onIsValidating,
-                onFieldsValidated,
-                onUpdateFormField,
-                onSearchGroupResultCountRetrieved,
-                onSearchGroupResultCountRetrievalFailed,
+                inProgressList,
                 ...passOnProps
             } = this.props;
 
@@ -318,13 +253,7 @@ const getSaveHandler = (
                         ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                         formRef={this.setFormInstance}
                         dataEntryFieldRef={this.setDataEntryFieldInstance}
-                        onSave={saveType => this.handleSaveAttemptAsync(saveType)}
-                        onIsValidating={this.handleIsValidating}
-                        onFieldsValidated={this.handleFieldsValidated}
-                        onUpdateFormField={this.handleUpdateField}
-                        onSearchGroupResultCountRetrieved={this.handleSearchGroupResultCountRetrieved}
-                        onSearchGroupResultCountRetrievalFailed={this.handleSearchGroupResultCountRetrievalFailed}
-                        onCleanUp={this.handleCleanUpPromises}
+                        onSave={this.handleSaveAttempt}
                         {...filteredProps}
                     />
                     <Dialog
@@ -387,6 +316,7 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
                 })
                 .filter(element => element.warning),
         hasGeneralErrors: (generalErrors && generalErrors.length > 0),
+        inProgressList: state.dataEntriesInProgressList[key] || [],
     };
 };
 
@@ -397,41 +327,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onSaveAbort: (itemId: string, id: string) => {
         dispatch(saveAbort(itemId, id));
     },
-    onIsValidating: (
-        innerAction: ReduxAction<any, any>,
-    ) => {
-        dispatch(innerAction);
-    },
-    onFieldsValidated: (
-        innerAction: ReduxAction<any, any>,
-    ) => {
-        dispatch(innerAction);
-    },
-    onUpdateFormField: (
-        innerAction: ReduxAction<any, any>,
-    ) => {
-        dispatch(innerAction);
-    },
-    onSearchGroupResultCountRetrieved: (
-        innerAction: ReduxAction<any, any>,
-    ) => {
-        dispatch(innerAction);
-    },
-    onSearchGroupResultCountRetrievalFailed: (
-        innerAction: ReduxAction<any, any>,
-    ) => {
-        dispatch(innerAction);
-    },
 });
-
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    const defaultMergedProps = Object.assign({}, ownProps, stateProps, dispatchProps);
-
-    const mergedProps = ownProps.onUpdateFormField ?
-        { ...defaultMergedProps, onUpdateFormField: ownProps.onUpdateFormField } :
-        defaultMergedProps;
-    return mergedProps;
-};
 
 export default (
     options?: {
@@ -441,7 +337,7 @@ export default (
     (InnerComponent: React.ComponentType<any>) =>
         // $FlowFixMe
         connect(
-            mapStateToProps, mapDispatchToProps, mergeProps, { withRef: true })(
+            mapStateToProps, mapDispatchToProps, null, { withRef: true })(
             getSaveHandler(
                 InnerComponent,
                 options && options.onIsCompleting,

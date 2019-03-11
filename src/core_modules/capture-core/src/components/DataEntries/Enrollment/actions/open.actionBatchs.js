@@ -31,6 +31,10 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     },
 ];
 
+export const batchActionTypes = {
+    OPEN_DATA_ENYRY_FOR_NEW_ENROLLMENT_BATCH: 'OpenDataEntryForNewEnrollmentBatch',
+};
+
 export const openDataEntryForNewEnrollmentBatch =
     (
         program: ?TrackerProgram,
@@ -38,9 +42,11 @@ export const openDataEntryForNewEnrollmentBatch =
         orgUnit: Object,
         dataEntryId: string,
         extraActions: Array<ReduxAction<any, any>> = [],
+        extraDataEntryProps: Array<Object> = [],
+        defaultValues?: ?Object,
     ) => {
         const formId = getDataEntryKey(dataEntryId, itemId);
-        const dataEntryActions = loadNewDataEntry(dataEntryId, itemId, dataEntryPropsToInclude);
+        const dataEntryActions = loadNewDataEntry(dataEntryId, itemId, [...dataEntryPropsToInclude, ...extraDataEntryProps], defaultValues);
 
         let rulesActions;
         if (program && foundation) {
@@ -58,5 +64,5 @@ export const openDataEntryForNewEnrollmentBatch =
             ...dataEntryActions,
             ...rulesActions,
             ...extraActions,
-        ]);
+        ], batchActionTypes.OPEN_DATA_ENYRY_FOR_NEW_ENROLLMENT_BATCH);
     };

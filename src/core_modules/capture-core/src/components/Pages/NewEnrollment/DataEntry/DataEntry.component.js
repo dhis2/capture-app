@@ -6,6 +6,7 @@ import i18n from '@dhis2/d2-i18n';
 
 import {
     placements,
+    inMemoryFileStore,
 } from '../../../DataEntry';
 import { Enrollment, RenderFoundation } from '../../../../metaData';
 import {
@@ -101,13 +102,16 @@ class NewEnrollmentDataEntry extends Component<Props> {
     }
 
     componentWillUnmount() {
-        // inMemoryFileStore.clear();
+        inMemoryFileStore.clear();
     }
 
     handleSave = (itemId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: ?string) => {
         if (saveType === newEnrollmentSaveTypes.SAVEANDADDANOTHER) {
             if (!this.props.formHorizontal) {
-                this.props.onSetSaveTypes([newEnrollmentSaveTypes.SAVEANDADDANOTHER, newEnrollmentSaveTypes.SAVEANDEXIT]);
+                this.props.onSetSaveTypes([
+                    newEnrollmentSaveTypes.SAVEANDADDANOTHER,
+                    newEnrollmentSaveTypes.SAVEANDEXIT],
+                );
             }
             this.props.onSaveAndAddAnother(itemId, dataEntryId, formFoundation);
         } else if (saveType === newEnrollmentSaveTypes.SAVEANDEXIT) {

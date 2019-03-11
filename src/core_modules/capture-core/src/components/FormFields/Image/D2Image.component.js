@@ -27,7 +27,6 @@ type Props = {
     },
     onCommitAsync: (callback: Function) => void,
     onBlur: (value: ?Object) => void,
-    onUpdateAsyncUIState: (uiStateToAdd: Object) => void,
     asyncUIState: { loading?: ?boolean },
 }
 
@@ -88,7 +87,6 @@ class D2Image extends Component<Props> {
         e.target.value = null;
 
         if (image) {
-            this.props.onUpdateAsyncUIState({ loading: true });
             this.props.onCommitAsync(() => {
                 const formData = new FormData();
                 formData.append('file', image);

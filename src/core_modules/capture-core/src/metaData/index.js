@@ -20,7 +20,7 @@ export { RelationshipType } from './RelationshipType';
 export { RenderFoundation, Section, CustomForm } from './RenderFoundation';
 export { SearchGroup } from './SearchGroup';
 export { InputSearchGroup } from './InputSearchGroup';
-export { TrackedEntityType } from './TrackedEntityType';
+export { TrackedEntityType, TeiRegistration } from './TrackedEntityType';
 
 // helpers
 export {

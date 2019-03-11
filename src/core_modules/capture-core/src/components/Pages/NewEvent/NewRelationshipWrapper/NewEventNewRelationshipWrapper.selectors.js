@@ -6,6 +6,7 @@ import {
 
 const programIdSelector = state => state.currentSelections.programId;
 
+// $FlowFixMe
 export const makeRelationshipTypesSelector = () => createSelector(
     programIdSelector,
     (programId: string) => {

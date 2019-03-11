@@ -115,65 +115,53 @@ const buildReportDateSettingsFn = () => {
         _this.type = dataElementTypes.DATE;
     });
 
-    const reportDateSettings = (props: Object) => ({
-        component: viewModeComponent,
-        componentProps: createComponentProps(props, {
+    const reportDateSettings = {
+        getComponent: () => viewModeComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
             label: props.formFoundation.getLabel(dataElement.id),
             valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
-        propName: dataElement.id,
-        meta: {
+        getPropName: () => dataElement.id,
+        getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
-        },
-    });
+        }),
+    };
 
     return reportDateSettings;
 };
 
-const buildPolygonSettingsFn = (props: Object) => ({
-    component: viewModeComponent,
-    componentProps: createComponentProps(props, {
-        label: i18n.t('Area'),
-        valueConverter: value => (value ? 'Polygon captured' : 'No polygon captured'),
-    }),
-    propName: 'geometry',
-    meta: {
-        placement: placements.TOP,
-        section: dataEntrySectionNames.BASICINFO,
+const buildGeometrySettingsFn = () => ({
+    isApplicable: (props: Object) => {
+        const featureType = props.formFoundation.featureType;
+        return ['Polygon', 'Point'].includes(featureType);
     },
-});
+    getComponent: () => viewModeComponent,
+    getComponentProps: (props: Object) => {
+        const featureType = props.formFoundation.featureType;
+        if (featureType === 'Polygon') {
+            return createComponentProps(props, {
+                label: i18n.t('Area'),
+                valueConverter: value => (value ? 'Polygon captured' : 'No polygon captured'),
+            });
+        }
+        const pointDataElement = new DataElement((_this) => {
+            _this.id = 'geometry';
+            _this.type = dataElementTypes.COORDINATE;
+        });
 
-const buildPointSettingsFn = (props: Object) => {
-    const pointDataElement = new DataElement((_this) => {
-        _this.id = 'geometry';
-        _this.type = dataElementTypes.COORDINATE;
-    });
-    return {
-        component: viewModeComponent,
-        componentProps: createComponentProps(props, {
+        return createComponentProps(props, {
             label: 'Coordinate',
             valueConverter: value => pointDataElement.convertValue(value, valueConvertFn),
-        }),
-        propName: pointDataElement.id,
-        meta: {
-            placement: placements.TOP,
-            section: dataEntrySectionNames.BASICINFO,
-        },
-    };
-};
-
-
-const buildGeometrySettingsFn = () => (props: Object) => {
-    const featureType = props.formFoundation.featureType;
-    if (featureType === 'Polygon') {
-        return buildPolygonSettingsFn(props);
-    }
-    if (featureType === 'Point') {
-        return buildPointSettingsFn(props);
-    }
-    return null;
-};
+        });
+    },
+    getPropName: () => 'geometry',
+    getValidatorContainers: () => [],
+    getMeta: () => ({
+        placement: placements.TOP,
+        section: dataEntrySectionNames.BASICINFO,
+    }),
+});
 
 const buildCompleteFieldSettingsFn = () => {
     const dataElement = new DataElement((_this) => {
@@ -181,21 +169,20 @@ const buildCompleteFieldSettingsFn = () => {
         _this.type = dataElementTypes.BOOLEAN;
     });
 
-    const completeSettings = (props: Object) => ({
-        component: viewModeComponent,
-        componentProps: createComponentProps(props, {
+    const completeSettings = {
+        getComponent: () => viewModeComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
             label: 'Event completed',
             id: dataElement.id,
             valueConverter: value => dataElement.convertValue(!!value, valueConvertFn),
         }),
-        propName: dataElement.id,
-        meta: {
+        getPropName: () => dataElement.id,
+        getMeta: () => ({
             placement: placements.BOTTOM,
             section: dataEntrySectionNames.STATUS,
-        },
+        }),
         passOnFieldData: true,
-    });
-
+    };
     return completeSettings;
 };
 

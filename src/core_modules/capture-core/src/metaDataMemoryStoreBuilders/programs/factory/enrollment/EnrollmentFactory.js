@@ -21,6 +21,7 @@ import capitalizeFirstLetter from '../../../../utils/string/capitalizeFirstLette
 import DataElementFactory from './DataElementFactory';
 import errorCreator from '../../../../utils/errorCreator';
 import { getApi } from '../../../../d2/d2Instance';
+import { DataElement } from '../../../../metaData/DataElement';
 
 class EnrollmentFactory {
     static errorMessages = {
@@ -46,6 +47,7 @@ class EnrollmentFactory {
     locale: ?string;
     dataElementFactory: DataElementFactory;
     trackedEntityTypeCollection: Map<string, TrackedEntityType>;
+    cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
     constructor(
         cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
         cachedOptionSets: Map<string, CachedOptionSet>,
@@ -54,6 +56,7 @@ class EnrollmentFactory {
     ) {
         this.locale = locale;
         this.trackedEntityTypeCollection = trackedEntityTypeCollection;
+        this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
         this.dataElementFactory = new DataElementFactory(
             cachedTrackedEntityAttributes,
             cachedOptionSets,
@@ -69,6 +72,7 @@ class EnrollmentFactory {
             _this.name = i18n.t('Profile');
         });
 
+        // $FlowFixMe
         await cachedProgramTrackedEntityAttributes.asyncForEach(async (ptea) => {
             const element = await this.dataElementFactory.build(ptea);
             element && section.addElement(element);
@@ -82,6 +86,7 @@ class EnrollmentFactory {
     ) {
         const enrollmentForm = new RenderFoundation((_this) => {
             _this.featureType = EnrollmentFactory._getFeatureType(cachedProgram.featureType);
+            _this.name = cachedProgram.displayName;
         });
         let section;
         if (cachedProgram.programTrackedEntityAttributes && cachedProgram.programTrackedEntityAttributes.length > 0) {
@@ -110,6 +115,92 @@ class EnrollmentFactory {
         return enrollmentForm;
     }
 
+    static _buildSearchGroupElement(searchGroupElement: DataElement, teiAttribute: Object) {
+        const element = new DataElement((_this) => {
+            _this.id = searchGroupElement.id;
+            _this.name = searchGroupElement.name;
+            _this.shortName = searchGroupElement.shortName;
+            _this.formName = searchGroupElement.formName;
+            _this.description = searchGroupElement.description;
+            _this.displayInForms = true;
+            _this.displayInReports = searchGroupElement.displayInReports;
+            _this.compulsory = searchGroupElement.compulsory;
+            _this.disabled = searchGroupElement.disabled;
+            _this.type = teiAttribute.valueType;
+            _this.optionSet = searchGroupElement.optionSet;
+        });
+        return element;
+    }
+
+    _buildInputSearchGroupFoundation(
+        cachedProgram: CachedProgram,
+        searchGroup: SearchGroup,
+    ) {
+        const programTeiAttributes = cachedProgram.programTrackedEntityAttributes || [];
+        const teiAttributesAsObject = programTeiAttributes.reduce((accTeiAttributes, programTeiAttribute) => {
+            const teiAttribute = this.cachedTrackedEntityAttributes.get(programTeiAttribute.trackedEntityAttributeId);
+            if (!teiAttribute) {
+                log.error(errorCreator('could not retrieve tei attribute')({ programTeiAttribute }));
+            } else {
+                accTeiAttributes[teiAttribute.id] = teiAttribute;
+            }
+            return accTeiAttributes;
+        }, {});
+
+        const searchGroupFoundation = searchGroup.searchForm;
+
+        const foundation = new RenderFoundation();
+        const section = new Section((_thisSection) => {
+            _thisSection.id = Section.MAIN_SECTION_ID;
+        });
+        Array.from(
+            searchGroupFoundation
+                .getSection(Section.MAIN_SECTION_ID)
+                // $FlowFixMe : there should be one
+                .elements
+                .entries())
+            .map(entry => entry[1])
+            .forEach((e) => {
+                const element = EnrollmentFactory._buildSearchGroupElement(e, teiAttributesAsObject[e.id]);
+                element && section.addElement(element);
+            });
+        foundation.addSection(section);
+        return foundation;
+    }
+
+    _buildInputSearchGroups(
+        cachedProgram: CachedProgram,
+        programSearchGroups: Array<SearchGroup> = [],
+    ) {
+        const inputSearchGroups: Array<InputSearchGroup> = programSearchGroups
+            .filter(searchGroup => !searchGroup.unique)
+            .map(searchGroup => new InputSearchGroup((_this) => {
+                _this.id = searchGroup.id;
+                _this.minAttributesRequiredToSearch = searchGroup.minAttributesRequiredToSearch;
+                _this.searchFoundation = this._buildInputSearchGroupFoundation(cachedProgram, searchGroup);
+                _this.onSearch = (values: Object = {}, contextProps: Object = {}) => {
+                    const { orgUnit, trackedEntityType } = contextProps;
+                    return getApi()
+                        .get(
+                            'trackedEntityInstances/count.json',
+                            {
+                                ou: orgUnit.id,
+                                trackedEntityType,
+                                ouMode: 'ACCESSIBLE',
+                                filter: Object
+                                    .keys(values)
+                                    .map(key => `${key}:LIKE:${values[key]}`),
+                                pageSize: 1,
+                                page: 1,
+                                totalPages: true,
+                            },
+                        );
+                    // trackedEntityInstances/count.json?ou=DiszpKrYNg8&ouMode=ACCESSIBLE&trackedEntityType=nEenWmSyUEp&filter=w75KJ2mc4zz:LIKE:kjell&filter=zDhUuAYrxNC:LIKE:haugen&pageSize=1&page=1&totalPages=true
+                };
+            }));
+        return inputSearchGroups;
+    }
+
     async build(
         cachedProgram: CachedProgram,
         programSearchGroups: Array<SearchGroup> = [],
@@ -122,38 +213,7 @@ class EnrollmentFactory {
                     _this.trackedEntityType = trackedEntityType;
                 }
             }
-            _this.inputSearchGroups = programSearchGroups
-                .filter(searchGroup => !searchGroup.unique)
-                .map(searchGroup => new InputSearchGroup((_thisInputSearchGroup) => {
-                    _thisInputSearchGroup.id = searchGroup.id;
-                    _thisInputSearchGroup.minAttributesRequiredToSearch = searchGroup.minAttributesRequiredToSearch;
-                    _thisInputSearchGroup.searchFoundation = searchGroup.searchForm;
-                    _thisInputSearchGroup.onSearch = (values: Object = {}, contextProps: Object = {}) => {
-                        const { orgUnitId, trackedEntityType } = contextProps;
-                        return new Promise((resolve) => {
-                            setTimeout(() => {
-                                resolve();
-                            }, 30000);
-                        });
-
-                        return getApi()
-                            .get(
-                                'trackedEntityInstances/count.json',
-                                {
-                                    ou: orgUnitId,
-                                    trackedEntityType,
-                                    ouMode: 'ACCESSIBLE',
-                                    filter: Object
-                                        .keys(values)
-                                        .map(key => `${key}:LIKE:${values[key]}`),
-                                    pageSize: 1,
-                                    page: 1,
-                                    totalPages: true,
-                                },
-                            );
-                        // trackedEntityInstances/count.json?ou=DiszpKrYNg8&ouMode=ACCESSIBLE&trackedEntityType=nEenWmSyUEp&filter=w75KJ2mc4zz:LIKE:kjell&filter=zDhUuAYrxNC:LIKE:haugen&pageSize=1&page=1&totalPages=true
-                    };
-                }));
+            _this.inputSearchGroups = this._buildInputSearchGroups(cachedProgram, programSearchGroups);
         });
 
         enrollment.enrollmentForm = await this._buildEnrollmentForm(cachedProgram);

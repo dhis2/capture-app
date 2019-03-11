@@ -3,8 +3,8 @@ import { pipe } from 'capture-core-utils';
 import { Enrollment, RenderFoundation } from '../../../../metaData';
 import { convertValue as convertFormToClient } from '../../../../converters/formToClient';
 import { convertValue as convertClientToServer } from '../../../../converters/clientToServer';
-import convertDataEntryValuesToClientValues from '../../../DataEntry/common/convertDataEntryValuesToClientValues';
-import { convertEnrollmentClientToServerWithKeysMap } from '../../../../enrollment';
+// import convertDataEntryValuesToClientValues from '../../../DataEntry/common/convertDataEntryValuesToClientValues';
+// import { convertEnrollmentClientToServerWithKeysMap } from '../../../../enrollment';
 
 type Selections = {
     programId: string,
@@ -25,6 +25,7 @@ function getFormServerValues(
     return formServerValues;
 }
 
+/*
 function getEnrollmentServerValues(
     dataEntryKey: string,
     dataEntryValues: Object,
@@ -43,6 +44,7 @@ function getEnrollmentServerValues(
         enrollmentClientValues && convertEnrollmentClientToServerWithKeysMap(enrollmentClientValues);
     return enrollmentServerValues;
 }
+*/
 
 function getTEIServerData(
     enrollment: Enrollment,
@@ -63,6 +65,7 @@ function getTEIServerData(
     };
 }
 
+/*
 function getEnrollmentServerData(
     selections: Selections,
     enrollmentServerValues: Object,
@@ -74,6 +77,7 @@ function getEnrollmentServerData(
         ...enrollmentServerValues,
     };
 }
+*/
 
 export default function buildServerData(
     dataEntryKey: string,
@@ -86,6 +90,8 @@ export default function buildServerData(
 ) {
     const formFoundation = enrollment.enrollmentForm;
     const formServerValues = getFormServerValues(formValues, formFoundation);
+
+    /*
     const enrollmentServerValues = getEnrollmentServerValues(
         dataEntryKey,
         dataEntryValues,
@@ -93,16 +99,20 @@ export default function buildServerData(
         prevEnrollmentData,
         formFoundation,
     );
+    */
 
     const teiServerData = getTEIServerData(
         enrollment,
         selections,
         formServerValues,
     );
+
+    /*
     const enrollmentServerData = getEnrollmentServerData(
         selections,
         enrollmentServerValues,
     );
+    */
 
     return {
         ...teiServerData,

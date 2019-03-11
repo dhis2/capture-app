@@ -19,13 +19,13 @@ export const actionTypes = {
     UPDATE_FIELD: 'UpdateDataEntryField',
     UPDATE_FORM_FIELD: 'UpdateDataEntryFormField',
     RULES_EXECUTED_POST_UPDATE_FIELD: 'RulesExecutedPostUpdateFieldDataEntry',
-    ASYNC_UPDATE_FIELD_FAILED: 'AsyncUpdateFieldFailed',
     ADD_DATA_ENTRY_NOTE: 'AddDataEntryNote',
     REMOVE_DATA_ENTRY_NOTE: 'RemoveDataEntryNote',
     ADD_DATA_ENTRY_RELATIONSHIP: 'AddDataEntryRelationship',
     REMOVE_DATA_ENTRY_RELATIONSHIP: 'RemoveDataEntryRelationship',
     DATA_ENTRY_RELATIONSHIP_ALREADY_EXISTS: 'DataEntryRelationshipAlreadyExists',
     SET_CURRENT_DATA_ENTRY: 'SetCurrentDataEntry',
+    START_RUN_RULES_POST_UPDATE_FIELD: 'StartRunRulesPostUpdateFieldDataEntry',
 };
 
 // COMPLETE
@@ -100,17 +100,27 @@ export const updateFormField =
         formId: string,
         dataEntryId: string,
         itemId: string,
+        updateCompleteUid: string,
     ) =>
         actionCreator(
-            actionTypes.UPDATE_FORM_FIELD)({ value, uiState, formId, formBuilderId, elementId, dataEntryId, itemId });
+            actionTypes.UPDATE_FORM_FIELD)({
+            value,
+            uiState,
+            formId,
+            formBuilderId,
+            elementId,
+            dataEntryId,
+            itemId,
+            updateCompleteUid,
+        });
+
+export const startRunRulesPostUpdateField =
+    (dataEntryId: string, itemId: string, uid: string) =>
+        actionCreator(actionTypes.START_RUN_RULES_POST_UPDATE_FIELD)({ dataEntryId, itemId, uid });
 
 export const rulesExecutedPostUpdateField =
-    (dataEntryId: string, itemId: string) =>
-        actionCreator(actionTypes.RULES_EXECUTED_POST_UPDATE_FIELD)({ dataEntryId, itemId });
-
-export const asyncUpdateFieldFailed =
-    (message: string) =>
-        actionCreator(actionTypes.ASYNC_UPDATE_FIELD_FAILED)({ message });
+    (dataEntryId: string, itemId: string, uid: string) =>
+        actionCreator(actionTypes.RULES_EXECUTED_POST_UPDATE_FIELD)({ dataEntryId, itemId, uid });
 
 export const addNote =
     (dataEntryId: string, itemId: string, note: Object) =>

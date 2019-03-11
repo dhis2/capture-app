@@ -1,5 +1,5 @@
 // @flow
-import { actionCreator } from '../../../../../actions/actions.utils';
+import { actionCreator, actionPayloadAppender } from '../../../../../actions/actions.utils';
 import { methods } from '../../../../../trackerOffline/trackerOfflineConfig.const';
 import saveTypes from '../newEventSaveTypes';
 
@@ -128,25 +128,12 @@ export const startSaveNewEventAddAnother =
 export const newEventSavedAddAnother = (selections: Object) =>
     actionCreator(actionTypes.NEW_EVENT_SAVED_ADD_ANOTHER)(null, { selections });
 
-export const startAsyncUpdateFieldForNewEvent =
-    (
-        fieldId: string,
-        fieldLabel: string,
-        formBuilderId: string,
-        formId: string,
-        callback: Function,
-        dataEntryId: string,
-        itemId: string,
-    ) =>
-        actionCreator(actionTypes.START_ASYNC_UPDATE_FIELD_FOR_NEW_EVENT)({
-            fieldId,
-            fieldLabel,
-            formBuilderId,
-            formId,
-            callback,
-            dataEntryId,
-            itemId,
-        });
+export const startAsyncUpdateFieldForNewEvent = (
+    innerAction: ReduxAction<any, any>,
+    onSuccess: Function,
+    onError: Function,
+) =>
+    actionPayloadAppender(innerAction)({ onSuccess, onError });
 
 export const newEventOpenNewRelationship = (eventId: string, dataEntryId: string) =>
     actionCreator(actionTypes.NEW_EVENT_OPEN_NEW_RELATIONSHIP)({ eventId, dataEntryId });

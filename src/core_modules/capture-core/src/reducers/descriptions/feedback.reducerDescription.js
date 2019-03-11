@@ -21,6 +21,8 @@ import { orgUnitListActionTypes } from '../../components/QuickSelector';
 import {
     actionTypes as viewEventNewRelationshipActionTypes,
 } from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
+import { asyncHandlerActionTypes } from '../../components/D2Form';
+import { registrationSectionActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
 
 function addErrorFeedback(state: ReduxState, message: string, action?: ?React.Node) {
     const newState = [...state];
@@ -78,7 +80,7 @@ export const feedbackDesc = createReducerDescription({
         ...state,
         getErrorFeedback(action.payload),
     ],
-    [dataEntryActionTypes.ASYNC_UPDATE_FIELD_FAILED]: (state, action) =>
+    [asyncHandlerActionTypes.ASYNC_UPDATE_FIELD_FAILED]: (state, action) =>
         addErrorFeedback(state, action.payload.message),
     [newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER]: (state, action) => {
         const error = action.payload;
@@ -99,5 +101,7 @@ export const feedbackDesc = createReducerDescription({
         addErrorFeedback(state, action.payload.message),
     [viewEventNewRelationshipActionTypes.EVENT_RELATIONSHIP_ALREADY_EXISTS]: (state, action) =>
         addErrorFeedback(state, action.payload.message),
+    [registrationSectionActionTypes.ORG_UNIT_SEARCH_FAILED]: state =>
+        addErrorFeedback(state, i18n.t('Organisation unit search failed. See log for details')),
 }, 'feedbacks', []);
 

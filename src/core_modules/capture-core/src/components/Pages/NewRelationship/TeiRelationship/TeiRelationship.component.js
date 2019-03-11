@@ -15,6 +15,7 @@ import { findModes } from '../findModes';
 import withDefaultNavigation from '../../../Pagination/withDefaultNavigation';
 import withPaginationData from './SearchResults/withPaginationData';
 import getTeiDisplayName from '../../../../trackedEntityInstances/getDisplayName';
+import { RegisterTei } from '../RegisterTei';
 
 
 const SearchResultsWithPager = withPaginationData()(withDefaultNavigation()(TeiRelationshipSearchResults));
@@ -130,14 +131,16 @@ class TeiRelationship extends React.Component<Props> {
         );
     }
 
-    renderRegister = () => (<div />);
+    renderRegister = () => (
+        <RegisterTei />
+    );
 
     renderByMode = (findMode, props) => {
         if (findMode === findModes.TEI_SEARCH) {
             return this.renderSearch(props);
         }
         if (findMode === findModes.TEI_REGISTER) {
-            return this.renderRegister(props);
+            return this.renderRegister();
         }
         return null;
     }

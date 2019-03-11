@@ -2,7 +2,6 @@
 import log from 'loglevel';
 import { push } from 'react-router-redux';
 import i18n from '@dhis2/d2-i18n';
-import { fromPromise } from 'rxjs/observable/fromPromise';
 import isSelectionsEqual from '../../../App/isSelectionsEqual';
 import errorCreator from '../../../../utils/errorCreator';
 import getErrorMessageAndDetails from '../../../../utils/errors/getErrorMessageAndDetails';

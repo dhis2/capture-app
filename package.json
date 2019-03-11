@@ -66,7 +66,8 @@
     "redux-observable": "^0.18.0",
     "reselect": "^3.0.1",
     "rxjs": "^5.5.10",
-    "typeface-roboto": "^0.0.54"
+    "typeface-roboto": "^0.0.54",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "manualBuild": "yarn localize && d2-manifest package.json ./public/manifest.webapp --manifest.activities.dhis.href='../../..' && GENERATE_SOURCEMAP=false react-app-rewired build && mkdirp buildzip/ && pushd build && bestzip ../buildzip/NewCaptureApp.zip * && popd",

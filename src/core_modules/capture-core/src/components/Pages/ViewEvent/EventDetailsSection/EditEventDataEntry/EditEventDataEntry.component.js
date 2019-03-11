@@ -111,21 +111,21 @@ const buildReportDateSettingsFn = () => {
                 ),
             ),
         );
-    const reportDateSettings = (props: Object) => ({
-        component: reportDateComponent,
-        componentProps: createComponentProps(props, {
+    const reportDateSettings = {
+        getComponent: () => reportDateComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
             width: '100%',
             calendarWidth: 350,
             label: props.formFoundation.getLabel('eventDate'),
             required: true,
         }),
-        propName: 'eventDate',
-        validatorContainers: getEventDateValidatorContainers(),
-        meta: {
+        getPropName: () => 'eventDate',
+        getValidatorContainers: () => getEventDateValidatorContainers(),
+        getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionNames.BASICINFO,
-        },
-    });
+        }),
+    };
 
     return reportDateSettings;
 };
@@ -165,47 +165,42 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
 );
 
 
-const buildGeometrySettingsFn = () => (props: Object) => {
-    const featureType = props.formFoundation.featureType;
-    if (featureType === 'Polygon') {
-        return {
-            component: polygonComponent,
-            componentProps: createComponentProps(props, {
+const buildGeometrySettingsFn = () => ({
+    isApplicable: (props: Object) => {
+        const featureType = props.formFoundation.featureType;
+        return ['Polygon', 'Point'].includes(featureType);
+    },
+    getComponent: (props: Object) => {
+        const featureType = props.formFoundation.featureType;
+        if (featureType === 'Polygon') {
+            return polygonComponent;
+        }
+        return pointComponent;
+    },
+    getComponentProps: (props: Object) => {
+        const featureType = props.formFoundation.featureType;
+        if (featureType === 'Polygon') {
+            return createComponentProps(props, {
                 width: props && props.formHorizontal ? 150 : 350,
                 label: i18n.t('Area'),
-                required: false,
                 dialogLabel: i18n.t('Area'),
-            }),
-            propName: 'geometry',
-            validatorContainers: [
-            ],
-            meta: {
-                placement: placements.TOP,
-                section: dataEntrySectionNames.BASICINFO,
-            },
-        };
-    }
-    if (featureType === 'Point') {
-        return {
-            component: pointComponent,
-            componentProps: createComponentProps(props, {
-                width: props && props.formHorizontal ? 150 : '100%',
-                label: 'Coordinate',
-                dialogLabel: 'Coordinate',
                 required: false,
-
-            }),
-            propName: 'geometry',
-            validatorContainers: [
-            ],
-            meta: {
-                placement: placements.TOP,
-                section: dataEntrySectionNames.BASICINFO,
-            },
-        };
-    }
-    return null;
-};
+            });
+        }
+        return createComponentProps(props, {
+            width: props && props.formHorizontal ? 150 : '100%',
+            label: i18n.t('Coordinate'),
+            dialogLabel: i18n.t('Coordinate'),
+            required: false,
+        });
+    },
+    getPropName: () => 'geometry',
+    getValidatorContainers: () => [],
+    getMeta: () => ({
+        placement: placements.TOP,
+        section: dataEntrySectionNames.BASICINFO,
+    }),
+});
 
 const buildCompleteFieldSettingsFn = () => {
     const completeComponent =
@@ -226,21 +221,20 @@ const buildCompleteFieldSettingsFn = () => {
                 ),
             ),
         );
-    const completeSettings = (props: Object) => ({
-        component: completeComponent,
-        componentProps: createComponentProps(props, {
+    const completeSettings = {
+        getComponent: () => completeComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
             label: 'Complete event',
             id: 'complete',
         }),
-        propName: 'complete',
-        validatorContainers: [
-        ],
-        meta: {
+        getPropName: () => 'complete',
+        getValidatorContainers: () => [],
+        getMeta: () => ({
             placement: placements.BOTTOM,
             section: dataEntrySectionNames.STATUS,
-        },
-        passOnFieldData: true,
-    });
+        }),
+        getPassOnFieldData: () => true,
+    };
 
     return completeSettings;
 };

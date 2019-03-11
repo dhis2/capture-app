@@ -15,6 +15,8 @@ import {
     dataEntriesFieldsMetaDesc,
     dataEntriesFieldsUIDesc,
     dataEntriesSearchGroupsResultsDesc,
+    dataEntriesSearchGroupsPreviousValuesDesc,
+    dataEntriesInProgressListDesc,
 } from 'capture-core/reducers/descriptions/dataEntry.reducerDescription';
 import { feedbackDesc } from 'capture-core/reducers/descriptions/feedback.reducerDescription';
 import {
@@ -43,7 +45,10 @@ import { newEventPageDesc } from 'capture-core/reducers/descriptions/newEvent.re
 import { editEventPageDesc } from 'capture-core/reducers/descriptions/editEvent.reducerDescription';
 import { viewEventPageDesc } from 'capture-core/reducers/descriptions/viewEvent.reducerDescription';
 import { newEnrollmentPageDesc } from 'capture-core/reducers/descriptions/newEnrollment.reducerDescription';
-import { newRelationshipDesc } from 'capture-core/reducers/descriptions/newRelationship.reducerDescription';
+import {
+    newRelationshipDesc,
+    newRelationshipRegisterTeiDesc,
+} from 'capture-core/reducers/descriptions/newRelationship.reducerDescription';
 import {
     organisationUnitDesc,
     organisationUnitRootsDesc,
@@ -81,6 +86,8 @@ export default [
     dataEntriesFieldsMetaDesc,
     dataEntriesFieldsUIDesc,
     dataEntriesSearchGroupsResultsDesc,
+    dataEntriesSearchGroupsPreviousValuesDesc,
+    dataEntriesInProgressListDesc,
     feedbackDesc,
     rulesEffectsHiddenFieldsDesc,
     rulesEffectsErrorMessagesDesc,
@@ -105,6 +112,7 @@ export default [
     viewEventPageDesc,
     newEnrollmentPageDesc,
     newRelationshipDesc,
+    newRelationshipRegisterTeiDesc,
     organisationUnitDesc,
     organisationUnitRootsDesc,
     registeringUnitListDesc,

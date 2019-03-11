@@ -1,7 +1,15 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { SelectionBoxes, withDefaultFieldContainer, withLabel, withFocusSaver, withCalculateMessages, withDisplayMessages, SingleOrgUnitSelectField } from '../../FormFields/New';
+import {
+    SelectionBoxes,
+    withDefaultFieldContainer,
+    withLabel,
+    withFocusSaver,
+    withCalculateMessages,
+    withDisplayMessages,
+    SingleOrgUnitSelectField,
+} from '../../FormFields/New';
 
 const TeiSearchOrgUnitField = withFocusSaver()(withCalculateMessages()(withDefaultFieldContainer()(withLabel()(withDisplayMessages()(SingleOrgUnitSelectField)))));
 const TeiSearchSelectionBoxes = withDefaultFieldContainer()(withLabel()(SelectionBoxes));

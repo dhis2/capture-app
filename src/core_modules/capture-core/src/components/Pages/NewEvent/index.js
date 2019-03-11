@@ -31,7 +31,6 @@ export { cancelNewEventEpic, cancelNewEventLocationChangeEpic } from './DataEntr
 export {
     cancelNewEventIncompleteSelectionsLocationChangeEpic,
 } from './epics/cancelNewSingleEventSelectionsIncomplete.epics';
-export { newEventAsyncUpdateFieldEpic } from './DataEntry/epics/newEventAsyncUpdateField.epics';
 export {
     resetDataEntryForNewEventEpic,
     openNewEventInDataEntryEpic,

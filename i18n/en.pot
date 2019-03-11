@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-03-06T08:54:29.342Z\n"
-"PO-Revision-Date: 2019-03-06T08:54:29.342Z\n"
+"POT-Creation-Date: 2019-03-11T17:22:21.492Z\n"
+"PO-Revision-Date: 2019-03-11T17:22:21.492Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -20,13 +20,76 @@ msgstr ""
 msgid "This value is validating"
 msgstr ""
 
+msgid "Async field update failed"
+msgstr ""
+
+msgid "A value is required"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr ""
+
+msgid "Please provide a valid integer"
+msgstr ""
+
+msgid "Please provide a positive integer"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr ""
+
+msgid "Please provide a negative integer"
+msgstr ""
+
+msgid "Please provide a valid date and time"
+msgstr ""
+
+msgid "Please provide a valid time"
+msgstr ""
+
+msgid "Please provide a valid percentage"
+msgstr ""
+
+msgid "Please provide a valid url"
+msgstr ""
+
+msgid "Please provide a valid email address"
+msgstr ""
+
+msgid "Please provide a valid age"
+msgstr ""
+
+msgid "Please provide a valid phone number"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr ""
+
+msgid "Please provide valid coordinates"
+msgstr ""
+
+msgid "Please provide a valid username"
+msgstr ""
+
+msgid "This value already exists"
+msgstr ""
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr ""
+
+msgid "Checking..."
+msgstr ""
+
 msgid "Area"
 msgstr ""
 
 msgid "Coordinate"
 msgstr ""
 
-msgid "A value is required"
+msgid "Enrollment"
+msgstr ""
+
+msgid "An error has occured. See log for details"
 msgstr ""
 
 msgid "Cancel"
@@ -56,6 +119,9 @@ msgstr ""
 msgid "Warnings"
 msgstr ""
 
+msgid "search group result could not be retrieved"
+msgstr ""
+
 msgid "Complete"
 msgstr ""
 
@@ -78,9 +144,6 @@ msgid "Save"
 msgstr ""
 
 msgid "Operations running"
-msgstr ""
-
-msgid "search group result could not be retrieved"
 msgstr ""
 
 msgid "Sort"
@@ -200,12 +263,6 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-msgid "Field"
-msgstr ""
-
-msgid "could not be updated"
-msgstr ""
-
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
 
@@ -249,9 +306,6 @@ msgid "Program doesn't exist"
 msgstr ""
 
 msgid "Selected program is invalid for registering unit"
-msgstr ""
-
-msgid "Enrollment"
 msgstr ""
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
@@ -343,6 +397,24 @@ msgstr ""
 msgid "Select a category option to start reporting"
 msgstr ""
 
+msgid "Create person and link"
+msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Show all"
+msgstr ""
+
+msgid "Program"
+msgstr ""
+
+msgid "Organisation Unit"
+msgstr ""
+
+msgid "Registration"
+msgstr ""
+
 msgid "Search results"
 msgstr ""
 
@@ -412,15 +484,6 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-msgid "Some programs are being filtered."
-msgstr ""
-
-msgid "Show all"
-msgstr ""
-
-msgid "Program"
-msgstr ""
-
 msgid "Select program"
 msgstr ""
 
@@ -436,7 +499,10 @@ msgstr ""
 msgid "Search attributes"
 msgstr ""
 
-msgid "An error has occured. See log for details"
+msgid "Program not found"
+msgstr ""
+
+msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
@@ -446,6 +512,9 @@ msgid "Error saving event"
 msgstr ""
 
 msgid "Could not save event. See log for details"
+msgstr ""
+
+msgid "Organisation unit search failed. See log for details"
 msgstr ""
 
 msgid "Tracked entity instance"

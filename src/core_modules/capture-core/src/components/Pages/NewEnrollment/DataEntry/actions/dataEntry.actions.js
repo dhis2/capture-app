@@ -3,15 +3,11 @@ import { actionCreator } from '../../../../../actions/actions.utils';
 import { methods } from '../../../../../trackerOffline/trackerOfflineConfig.const';
 
 export const actionTypes = {
-    START_RUN_RULES_ON_UPDATE: 'StartRunRulesOnUpdateForNewEnrollment',
-    REQUEST_SAVE_RETURN_TO_MAIN_PAGE: 'RequestSaveAndReturnToMainPageForNewEnrollment',
     START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE: 'StartSaveAfterReturnedToMainPageForNewEnrollment',
+    REQUEST_SAVE_RETURN_TO_MAIN_PAGE: 'RequestSaveAndReturnToMainPageForNewEnrollment',
     ENROLLMENT_SAVED: 'EnrollmentSaved',
     ENROLLMENT_SAVE_FAILED: 'EnrollmentSaveFailed',
 };
-
-export const startRunRulesOnUpdateForNewEnrollment = (actionData: { payload: Object}) =>
-    actionCreator(actionTypes.START_RUN_RULES_ON_UPDATE)(actionData);
 
 export const requestSaveNewEnrollmentAndReturnToMainPage =
     (dataEntryId: string, itemId: string, formFoundation: Object) =>

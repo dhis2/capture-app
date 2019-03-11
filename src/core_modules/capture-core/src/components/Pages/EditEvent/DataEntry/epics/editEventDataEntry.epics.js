@@ -102,7 +102,7 @@ export const runRulesForEditSingleEventEpic = (action$: InputObservable, store: 
 
             return batchActions([
                 ...rulesActions,
-                rulesExecutedPostUpdateField(payload.dataEntryId, payload.itemId),
+                rulesExecutedPostUpdateField(payload.dataEntryId, payload.itemId, payload.uid),
             ],
             editEventDataEntryBatchActionTypes.RULES_EFFECTS_ACTIONS_BATCH);
         });
