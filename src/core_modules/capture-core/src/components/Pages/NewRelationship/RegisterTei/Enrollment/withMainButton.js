@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
-import { Button } from 'capture-ui';
+// import { Button } from 'capture-ui';
 // import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 // import getDataEntryHasChanges from '../getNewEventDataEntryHasChanges';
 
@@ -19,7 +19,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
         }
 
         renderButton() {
-            const { onSave } = this.props;
+            // const { onSave } = this.props;
 
             return (
                 <div />
