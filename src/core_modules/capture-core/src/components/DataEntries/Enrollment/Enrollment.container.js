@@ -14,9 +14,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
             filterActionsToBeExecuted: Array<ReduxAction<any, any>>,
         },
         programId: string,
-        orgUnitId: string,
+        orgUnit: Object,
     ) => {
-        dispatch(updateFieldBatch(innerAction, extraActions, programId, orgUnitId));
+        dispatch(updateFieldBatch(innerAction, extraActions, programId, orgUnit));
     },
     onStartAsyncUpdateField: (
         innerAction: ReduxAction<any, any>,
@@ -27,15 +27,16 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         dataEntryId: string,
         itemId: string,
         programId: string,
-        orgUnitId: string,
+        orgUnit: Object,
     ) => {
         const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) =>
-            asyncUpdateSuccessBatch(successInnerAction, extraActions, dataEntryId, itemId, programId, orgUnitId);
+            asyncUpdateSuccessBatch(successInnerAction, extraActions, dataEntryId, itemId, programId, orgUnit);
         const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
 
         dispatch(startAsyncUpdateFieldForNewEnrollment(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
     },
 });
 
+// $FlowFixMe
 export default connect(mapStateToProps, mapDispatchToProps)(Enrollment);
 

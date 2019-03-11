@@ -43,29 +43,29 @@ const wordValidatorKeys = {
 };
 
 const errorMessages = {
-    COMPULSORY: 'A value is required',
-    NUMBER: 'Please provide a valid number',
-    INTEGER: 'Please provide a valid integer',
-    POSITIVE_INTEGER: 'Please provide a positive integer',
-    ZERO_OR_POSITIVE_INTEGER: 'Please provide zero or a positive integer',
-    NEGATIVE_INTEGER: 'Please provide a negative integer',
-    DATE: 'Please provide a valid date',
-    DATETIME: 'Please provide a valid date and time',
-    TIME: 'Please provide a valid time',
-    PERCENTAGE: 'Please provide a valid percentage',
-    URL: 'Please provide a valid url',
-    EMAIL: 'Please provide a valid email address',
-    AGE: 'Please provide a valid age',
-    PHONE_NUMBER: 'Please provide a valid phone number',
-    ORGANISATION_UNIT: 'Please provide a valid organisation unit',
-    COORDINATE: 'Please provide valid coordinates',
-    USERNAME: 'Please provide a valid username',
-    UNIQUENESS: 'This value already exists',
-    RANGE: '"From" cannot be greater than "To"',
+    COMPULSORY: i18n.t('A value is required'),
+    NUMBER: i18n.t('Please provide a valid number'),
+    INTEGER: i18n.t('Please provide a valid integer'),
+    POSITIVE_INTEGER: i18n.t('Please provide a positive integer'),
+    ZERO_OR_POSITIVE_INTEGER: i18n.t('Please provide zero or a positive integer'),
+    NEGATIVE_INTEGER: i18n.t('Please provide a negative integer'),
+    DATE: i18n.t('Please provide a valid date'),
+    DATETIME: i18n.t('Please provide a valid date and time'),
+    TIME: i18n.t('Please provide a valid time'),
+    PERCENTAGE: i18n.t('Please provide a valid percentage'),
+    URL: i18n.t('Please provide a valid url'),
+    EMAIL: i18n.t('Please provide a valid email address'),
+    AGE: i18n.t('Please provide a valid age'),
+    PHONE_NUMBER: i18n.t('Please provide a valid phone number'),
+    ORGANISATION_UNIT: i18n.t('Please provide a valid organisation unit'),
+    COORDINATE: i18n.t('Please provide valid coordinates'),
+    USERNAME: i18n.t('Please provide a valid username'),
+    UNIQUENESS: i18n.t('This value already exists'),
+    RANGE: i18n.t('"From" cannot be greater than "To"'),
 };
 
 const validationMessages = {
-    UNIQUENESS: 'This value is validating uniqueness',
+    UNIQUENESS: i18n.t('Checking...'),
 };
 
 const compulsoryValidator = Validators.wordToValidatorMap.get(wordValidatorKeys.COMPULSORY);
@@ -77,27 +77,27 @@ const compulsoryValidatorWrapper = (value: any) => {
 
 const validatorForInteger = () => ({
     validator: isValidInteger,
-    message: i18n.t(errorMessages.INTEGER),
+    message: errorMessages.INTEGER,
 });
 
 const validatorForPositiveInteger = () => ({
     validator: isValidPositiveInteger,
-    message: i18n.t(errorMessages.POSITIVE_INTEGER),
+    message: errorMessages.POSITIVE_INTEGER,
 });
 
 const validatorForZeroOrPositiveInteger = () => ({
     validator: isValidZeroOrPositiveInteger,
-    message: i18n.t(errorMessages.ZERO_OR_POSITIVE_INTEGER),
+    message: errorMessages.ZERO_OR_POSITIVE_INTEGER,
 });
 
 const validatorForNegativeInteger = () => ({
     validator: isValidNegativeInteger,
-    message: i18n.t(errorMessages.NEGATIVE_INTEGER),
+    message: errorMessages.NEGATIVE_INTEGER,
 });
 
 const validatorForNumber = () => ({
     validator: isValidNumber,
-    message: i18n.t(errorMessages.NUMBER),
+    message: errorMessages.NUMBER,
 });
 
 const validatorsForTypes = {
@@ -108,80 +108,80 @@ const validatorsForTypes = {
     [elementTypes.INTEGER_NEGATIVE]: validatorForNegativeInteger,
     [elementTypes.TIME]: () => ({
         validator: isValidTime,
-        message: i18n.t(errorMessages.TIME),
+        message: errorMessages.TIME,
     }),
     [elementTypes.DATE]: () => ({
         validator: isValidDate,
-        message: i18n.t(errorMessages.DATE),
+        message: errorMessages.DATE,
     }),
     [elementTypes.DATETIME]: () => ({
         validator: isValidDateTime,
-        message: i18n.t(errorMessages.DATETIME),
+        message: errorMessages.DATETIME,
     }),
     [elementTypes.EMAIL]: () => ({
         validator: isValidEmail,
-        message: i18n.t(errorMessages.EMAIL),
+        message: errorMessages.EMAIL,
     }),
     [elementTypes.PERCENTAGE]: () => ({
         validator: isValidPercentage,
-        message: i18n.t(errorMessages.PERCENTAGE),
+        message: errorMessages.PERCENTAGE,
     }),
     [elementTypes.URL]: () => ({
         validator: isValidUrl,
-        message: i18n.t(errorMessages.URL),
+        message: errorMessages.URL,
     }),
     [elementTypes.AGE]: () => ({
         validator: isValidAge,
-        message: i18n.t(errorMessages.AGE),
+        message: errorMessages.AGE,
     }),
     [elementTypes.PHONE_NUMBER]: () => ({
         validator: isValidPhoneNumber,
-        message: i18n.t(errorMessages.PHONE_NUMBER),
+        message: errorMessages.PHONE_NUMBER,
     }),
     [elementTypes.ORGANISATION_UNIT]: () => ({
         validator: isValidOrgUnit,
-        message: i18n.t(errorMessages.ORGANISATION_UNIT),
+        message: errorMessages.ORGANISATION_UNIT,
     }),
     [elementTypes.COORDINATE]: () => ({
         validator: isValidCoordinate,
-        message: i18n.t(errorMessages.COORDINATE),
+        message: errorMessages.COORDINATE,
     }),
     [elementTypes.USERNAME]: () => ({
         validator: isValidUsername,
-        message: i18n.t(errorMessages.USERNAME),
+        message: errorMessages.USERNAME,
     }),
     [elementTypes.DATE_RANGE]: () => ({
         validator: getDateRangeValidator(errorMessages.DATE),
-        message: i18n.t(errorMessages.RANGE),
+        message: errorMessages.RANGE,
     }),
     [elementTypes.DATETIME_RANGE]: () => ({
         validator: getDateTimeRangeValidator(errorMessages.DATETIME),
-        message: i18n.t(errorMessages.RANGE),
+        message: errorMessages.RANGE,
     }),
     [elementTypes.TIME_RANGE]: () => ({
         validator: getTimeRangeValidator(errorMessages.TIME),
-        message: i18n.t(errorMessages.RANGE),
+        message: errorMessages.RANGE,
     }),
     [elementTypes.NUMBER_RANGE]: () => ({
         validator: getNumberRangeValidator(validatorForNumber()),
-        message: i18n.t(errorMessages.RANGE),
+        message: errorMessages.RANGE,
     }),
     [elementTypes.INTEGER_RANGE]: () => ({
         validator: getNumberRangeValidator(validatorForInteger()),
-        message: i18n.t(errorMessages.RANGE),
+        message: errorMessages.RANGE,
     }),
     [elementTypes.INTEGER_POSITIVE_RANGE]: () => ({
         validator: getNumberRangeValidator(validatorForPositiveInteger()),
-        message: i18n.t(errorMessages.RANGE),
+        message: errorMessages.RANGE,
     }),
     [elementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: () => ({
         validator: getNumberRangeValidator(validatorForZeroOrPositiveInteger()),
-        message: i18n.t(errorMessages.RANGE),
+        message: errorMessages.RANGE,
     }),
 
     [elementTypes.INTEGER_NEGATIVE_RANGE]: () => ({
         validator: getNumberRangeValidator(validatorForNegativeInteger()),
-        message: i18n.t(errorMessages.RANGE),
+        message: errorMessages.RANGE,
     }),
 };
 
@@ -225,7 +225,7 @@ function buildCompulsoryValidator(metaData: MetaDataElement): Array<ValidatorCon
         {
             validator: compulsoryValidatorWrapper,
             message:
-                i18n.t(errorMessages.COMPULSORY),
+                errorMessages.COMPULSORY,
         },
     ] :
         [];
@@ -240,8 +240,8 @@ function buildUniqueValidator(metaData: MetaDataElement) {
                 }
                 return metaData.unique.onValidate(value, contextProps);
             },
-            message: i18n.t(errorMessages.UNIQUENESS),
-            validatingMessage: i18n.t(validationMessages.UNIQUENESS),
+            message: errorMessages.UNIQUENESS,
+            validatingMessage: validationMessages.UNIQUENESS,
         },
     ] : [];
 }

@@ -14,6 +14,9 @@ import {
     actionTypes as editEventActionTypes,
 } from '../../components/Pages/EditEvent/editEvent.actions';
 import {
+    actionTypes as viewEventActionTypes,
+} from '../../components/Pages/ViewEvent/viewEvent.actions';
+import {
     actionTypes as mainPageSelectorActionTypes,
 } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
 import {
@@ -121,6 +124,20 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         return newState;
     },
     [editEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
+        const payload = action.payload;
+        const event = payload.eventContainer.event;
+        const categories = buildCategoriesFromEvent(event);
+        const newState = {
+            ...state,
+            programId: event.programId,
+            orgUnitId: event.orgUnitId,
+            categories,
+            complete: true,
+        };
+
+        return newState;
+    },
+    [viewEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
         const payload = action.payload;
         const event = payload.eventContainer.event;
         const categories = buildCategoriesFromEvent(event);

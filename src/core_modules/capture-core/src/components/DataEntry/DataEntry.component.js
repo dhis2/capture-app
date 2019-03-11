@@ -109,7 +109,7 @@ type Props = {
     dataEntrySections?: { [string]: {name: string, placement: $Values<typeof placements>}},
     dataEntryFieldRef: any,
     onAddNote?: ?Function,
-    onAddRelationship?: ?Function,
+    onOpenAddRelationship?: ?Function,
 };
 
 const fieldHorizontalFilter = (placement: $Values<typeof placements>) =>
@@ -153,16 +153,6 @@ class DataEntry extends React.Component<Props> {
         this.props.onUpdateFormFieldAsync(...args, this.props.id, this.props.itemId);
     }
 
-    getFieldWithPlacement(placement: $Values<typeof placements>) {
-        const fields = this.props.fields;
-
-        return fields ?
-            fields
-                .filter(fieldContainer => fieldContainer.placement === placement && !fieldContainer.section)
-                .map(fieldContainer => fieldContainer.field)
-            : null;
-    }
-
     getFieldSectionsWithPlacement(placement: $Values<typeof placements>) {
         const fields = this.props.fields || [];
         const sections = this.props.dataEntrySections || {};
@@ -174,7 +164,14 @@ class DataEntry extends React.Component<Props> {
                     const sectionFields = fields ?
                         fields
                             .filter(fieldContainer => fieldContainer.section === sectionKey)
-                            .map(fieldContainer => fieldContainer.field)
+                            .map((fieldContainer, index) => (
+                                <React.Fragment
+                                    // using index for now
+                                    key={index} // eslint-disable-line
+                                >
+                                    { fieldContainer.field }
+                                </React.Fragment>
+                            ))
                         : null;
 
                     if (sectionFields && sectionFields.length > 0) {
@@ -236,7 +233,7 @@ class DataEntry extends React.Component<Props> {
             onUpdateFormFieldAsync,
             dataEntryOutputs,
             onAddNote,
-            onAddRelationship,
+            onOpenAddRelationship,
             dataEntryFieldRef,
             ...passOnProps } = this.props;
 
@@ -280,7 +277,7 @@ class DataEntry extends React.Component<Props> {
                             </div>
                         }
                     </div>
-                    {!this.props.formHorizontal ?
+                    {!this.props.formHorizontal && dataEntryOutputs ?
                         <StickyOnScroll
                             offsetTop={50}
                             minViewpointWidth={769}

@@ -13,6 +13,9 @@ import {
     actionTypes as editEventPageSelectorActionTypes,
 } from '../EditEvent/EditEventSelector/EditEventSelector.actions';
 import {
+    actionTypes as viewEventPageSelectorActionTypes,
+} from '../ViewEvent/ViewEventSelector/ViewEventSelector.actions';
+import {
     urlActionTypes as newEnrollmentUrlActionTypes,
 } from '../NewEnrollment';
 
@@ -54,6 +57,9 @@ export const calculateSelectionsCompletenessEpic = (action$: InputObservable, st
         editEventPageSelectorActionTypes.SET_ORG_UNIT,
         editEventPageSelectorActionTypes.SET_PROGRAM_ID,
         editEventPageSelectorActionTypes.SET_CATEGORY_OPTION,
+        viewEventPageSelectorActionTypes.SET_ORG_UNIT,
+        viewEventPageSelectorActionTypes.SET_PROGRAM_ID,
+        viewEventPageSelectorActionTypes.SET_CATEGORY_OPTION,
         newEventSelectorActionTypes.SET_ORG_UNIT,
         newEventSelectorActionTypes.SET_PROGRAM_ID,
         newEventSelectorActionTypes.SET_CATEGORY_OPTION,

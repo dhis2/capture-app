@@ -22,6 +22,7 @@ import {
 } from '../eventsList.actions';
 import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../../NewEvent';
 import { actionTypes as editEventDataEntryActionTypes } from '../../../EditEvent/DataEntry/editEventDataEntry.actions';
+import { actionTypes as viewEventActionTypes } from '../../../ViewEvent/viewEvent.actions';
 import {
     batchActionTypes as connectivityBatchActionTypes,
     actionTypes as connectivityActionTypes,
@@ -155,6 +156,7 @@ export const retrieveWorkingListOnMainSelectionsCompletedEpic = (action$: InputO
                         mainPageActionTypes.UPDATE_EVENT_LIST_AFTER_SAVE_OR_UPDATE_FOR_SINGLE_EVENT,
                         newEventDataEntryActionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST,
                         editEventDataEntryActionTypes.UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE,
+                        viewEventActionTypes.UPDATE_WORKING_LIST_ON_BACK_TO_MAIN_PAGE,
                         paginationActionTypes.CHANGE_PAGE,
                         paginationActionTypes.CHANGE_ROWS_PER_PAGE,
                         eventsListActionTypes.SORT_WORKING_LIST,
@@ -176,6 +178,7 @@ export const getWorkingListOnCancelSaveEpic = (action$: InputObservable, store: 
     action$.ofType(
         newEventDataEntryActionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST,
         editEventDataEntryActionTypes.UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE,
+        viewEventActionTypes.UPDATE_WORKING_LIST_ON_BACK_TO_MAIN_PAGE,
     )
         .switchMap(() => {
             const initialPromise = getInitialWorkingListActionAsync(store.getState());
@@ -223,6 +226,7 @@ export const getWorkingListOnSaveEpic = (action$: InputObservable, store: ReduxS
                 mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
                 newEventDataEntryActionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST,
                 editEventDataEntryActionTypes.UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE,
+                viewEventActionTypes.UPDATE_WORKING_LIST_ON_BACK_TO_MAIN_PAGE,
                 paginationActionTypes.CHANGE_PAGE,
                 paginationActionTypes.CHANGE_ROWS_PER_PAGE,
                 eventsListActionTypes.SORT_WORKING_LIST,
@@ -273,6 +277,7 @@ export const updateWorkingListEpic = (action$: InputObservable, store: ReduxStor
                     mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
                     newEventDataEntryActionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST,
                     editEventDataEntryActionTypes.UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE,
+                    viewEventActionTypes.UPDATE_WORKING_LIST_ON_BACK_TO_MAIN_PAGE,
                     mainPageActionTypes.UPDATE_EVENT_LIST_AFTER_SAVE_OR_UPDATE_FOR_SINGLE_EVENT,
                 ))
                 .takeUntil(
@@ -306,6 +311,7 @@ export const getEventListOnReconnectEpic = (action$: InputObservable, store: Red
                 mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
                 newEventDataEntryActionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST,
                 editEventDataEntryActionTypes.UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE,
+                viewEventActionTypes.UPDATE_WORKING_LIST_ON_BACK_TO_MAIN_PAGE,
                 mainPageActionTypes.UPDATE_EVENT_LIST_AFTER_SAVE_OR_UPDATE_FOR_SINGLE_EVENT,
                 paginationActionTypes.CHANGE_PAGE,
                 paginationActionTypes.CHANGE_ROWS_PER_PAGE,

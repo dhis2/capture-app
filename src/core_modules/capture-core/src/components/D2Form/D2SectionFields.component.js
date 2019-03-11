@@ -53,12 +53,32 @@ type Props = {
     customForm: MetadataCustomForm,
     validationStrategy: $Values<typeof validationStrategies>,
     loadNr: number,
+    viewMode?: ?boolean,
 };
 
 class D2SectionFields extends Component<Props> {
     static defaultProps = {
         values: {},
     };
+
+    static buildFormFields(props: Props): Array<FieldConfig> {
+        const { fieldsMetaData, customForm, fieldOptions } = props;
+
+        // $FlowSuppress :does not recognize filter removing nulls
+        return Array.from(fieldsMetaData.entries())
+            .map(entry => entry[1])
+            .map(metaDataElement => buildField(
+                metaDataElement,
+                {
+                    formHorizontal: props.formHorizontal,
+                    formId: props.formId,
+                    viewMode: props.viewMode,
+                    ...fieldOptions,
+                },
+                !!customForm,
+            ))
+            .filter(field => field);
+    }
 
     handleUpdateField: (elementId: string, value: any) => void;
     formBuilderInstance: ?FormBuilder;
@@ -68,26 +88,14 @@ class D2SectionFields extends Component<Props> {
     constructor(props: Props) {
         super(props);
         this.handleUpdateField = this.handleUpdateField.bind(this);
-        this.formFields = this.buildFormFields();
+        this.formFields = D2SectionFields.buildFormFields(this.props);
         this.rulesCompulsoryErrors = {};
     }
 
-    buildFormFields(): Array<FieldConfig> {
-        const { fieldsMetaData, customForm, fieldOptions } = this.props;
-
-        // $FlowSuppress :does not recognize filter removing nulls
-        return Array.from(fieldsMetaData.entries())
-            .map(entry => entry[1])
-            .map(metaDataElement => buildField(
-                metaDataElement,
-                {
-                    formHorizontal: this.props.formHorizontal,
-                    formId: this.props.formId,
-                    ...fieldOptions,
-                },
-                !!customForm,
-            ))
-            .filter(field => field);
+    componentWillReceiveProps(newProps: Props) {
+        if (newProps.fieldsMetaData !== this.props.fieldsMetaData) {
+            this.formFields = D2SectionFields.buildFormFields(newProps);
+        }
     }
 
     rulesIsValid() {

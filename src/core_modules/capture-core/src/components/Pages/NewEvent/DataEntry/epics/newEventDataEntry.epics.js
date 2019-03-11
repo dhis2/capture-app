@@ -6,6 +6,9 @@ import {
     actionTypes as editEventSelectorActionTypes,
 } from '../../../EditEvent/EditEventSelector/EditEventSelector.actions';
 import {
+    actionTypes as viewEventSelectorActionTypes,
+} from '../../../ViewEvent/ViewEventSelector/ViewEventSelector.actions';
+import {
     actionTypes as mainPageSelectorActionTypes,
 } from '../../../MainPage/MainPageSelector/MainPageSelector.actions';
 import {
@@ -83,6 +86,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
     // $FlowSuppress
     action$.ofType(
         editEventSelectorActionTypes.OPEN_NEW_EVENT,
+        viewEventSelectorActionTypes.OPEN_NEW_EVENT,
         mainPageSelectorActionTypes.OPEN_NEW_EVENT,
         newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
         newEventSelectorTypes.SET_PROGRAM_ID,
@@ -118,6 +122,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
 // $FlowSuppress
     action$.ofType(
         editEventSelectorActionTypes.OPEN_NEW_EVENT,
+        viewEventSelectorActionTypes.OPEN_NEW_EVENT,
         mainPageSelectorActionTypes.OPEN_NEW_EVENT,
         newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
         newEventSelectorTypes.SET_CATEGORY_OPTION,

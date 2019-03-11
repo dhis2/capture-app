@@ -102,8 +102,8 @@ export const rulesEffectsFeedbackDesc = createReducerDescription({
         const displayTextEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_TEXT];
         const displayKeyValuePairEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_KEY_VALUE_PAIR];
         newState[action.payload.formId] = {
-            displayTexts: displayTextEffects && displayTextEffects.feedback ? displayTextEffects.feedback.map(e => e.message) : null,
-            displayKeyValuePairs: displayKeyValuePairEffects && displayKeyValuePairEffects.feedback ? displayKeyValuePairEffects.feedback.map(e => ({ key: e.message, value: e.value })) : null,
+            displayTexts: displayTextEffects && displayTextEffects.feedback ? displayTextEffects.feedback.map(e => e.displayText) : null,
+            displayKeyValuePairs: displayKeyValuePairEffects && displayKeyValuePairEffects.feedback ? displayKeyValuePairEffects.feedback.map(e => e.displayKeyValuePair) : null,
         };
 
         return newState;
@@ -117,8 +117,8 @@ export const rulesEffectsIndicatorsDesc = createReducerDescription({
         const displayTextEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_TEXT];
         const displayKeyValuePairEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_KEY_VALUE_PAIR];
         newState[action.payload.formId] = {
-            displayTexts: displayTextEffects && displayTextEffects.indicators ? displayTextEffects.indicators.map(e => e.message) : null,
-            displayKeyValuePairs: displayKeyValuePairEffects && displayKeyValuePairEffects.indicators ? displayKeyValuePairEffects.indicators.map(e => ({ key: e.message, value: e.value })) : null,
+            displayTexts: displayTextEffects && displayTextEffects.indicators ? displayTextEffects.indicators.map(e => e.displayText) : null,
+            displayKeyValuePairs: displayKeyValuePairEffects && displayKeyValuePairEffects.indicators ? displayKeyValuePairEffects.indicators.map(e => e.displayKeyValuePair) : null,
         };
 
         return newState;
@@ -131,7 +131,7 @@ export const rulesEffectsGeneralErrorsDesc = createReducerDescription({
         const newState = { ...state };
 
         const errors: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_ERROR];
-        newState[action.payload.formId] = errors && errors.generalErrors ? errors.generalErrors.map(e => e.message) : null;
+        newState[action.payload.formId] = errors && errors.generalErrors ? errors.generalErrors.map(e => e.error) : null;
 
         return newState;
     },
@@ -142,7 +142,7 @@ export const rulesEffectsGeneralWarningsDesc = createReducerDescription({
         const newState = { ...state };
 
         const warnings: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_WARNING];
-        newState[action.payload.formId] = warnings && warnings.generalWarnings ? warnings.generalWarnings.map(e => e.message) : null;
+        newState[action.payload.formId] = warnings && warnings.generalWarnings ? warnings.generalWarnings.map(e => e.warning) : null;
 
         return newState;
     },

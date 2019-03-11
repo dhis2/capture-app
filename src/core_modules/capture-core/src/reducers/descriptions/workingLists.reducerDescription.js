@@ -31,6 +31,9 @@ import {
     actionTypes as editEventSelectorActionTypes,
 } from '../../components/Pages/EditEvent/editEvent.actions';
 import {
+    actionTypes as viewEventActionTypes,
+} from '../../components/Pages/ViewEvent/viewEvent.actions';
+import {
     actionTypes as listActionTypes,
 } from '../../components/List/list.actions';
 import {
@@ -283,6 +286,15 @@ export const workingListsMetaDesc = createReducerDescription({
         }
         return state;
     },
+    [viewEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
+        const payload = action.payload;
+        const nextProgramId = payload.eventContainer.event.programId;
+        const prevProgramId = payload.prevProgramId;
+        if (nextProgramId !== prevProgramId) {
+            return updateListsMetaOnResetProgramId(state);
+        }
+        return state;
+    },
     [cleanUpActionTypes.CLEAN_UP_EVENT_LIST_IN_LOADING]: state => ({
         ...state,
         main: {
@@ -424,6 +436,16 @@ export const workingListsUIDesc = createReducerDescription({
         newState.main = getReadyState(newState.main, {});
         return newState;
     },
+    [viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE]: (state) => {
+        const newState = { ...state };
+        newState.main = getLoadingState(newState.main);
+        return newState;
+    },
+    [viewEventActionTypes.NO_WORKING_LIST_UPDATE_NEEDED_ON_BACK_TO_MAIN_PAGE]: (state) => {
+        const newState = { ...state };
+        newState.main = getReadyState(newState.main, {});
+        return newState;
+    },
     [connectivityActionTypes.GET_EVENT_LIST_ON_RECONNECT]: (state) => {
         const newState = { ...state };
         newState.main = getLoadingState(newState.main);
@@ -490,6 +512,15 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
         }
         return state;
     },
+    [viewEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
+        const payload = action.payload;
+        const nextProgramId = payload.eventContainer.event.programId;
+        const prevProgramId = payload.prevProgramId;
+        if (nextProgramId !== prevProgramId) {
+            return updateColumnsOrderOnResetProgram(state);
+        }
+        return state;
+    },
 }, 'workingListsColumnsOrder');
 
 export const workingListsContextDesc = createReducerDescription({
@@ -535,6 +566,18 @@ export const workingListsContextDesc = createReducerDescription({
         return state;
     },
     [editEventSelectorActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
+        const payload = action.payload;
+        const nextProgramId = payload.eventContainer.event.programId;
+        const prevProgramId = payload.prevProgramId;
+        if (nextProgramId !== prevProgramId) {
+            return {
+                ...state,
+                main: null,
+            };
+        }
+        return state;
+    },
+    [viewEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
         const payload = action.payload;
         const nextProgramId = payload.eventContainer.event.programId;
         const prevProgramId = payload.prevProgramId;
@@ -608,6 +651,18 @@ export const workingListFiltersEditDesc = createReducerDescription({
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateFiltersEditOnUrlUpdate,
     [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateFiltersEditOnUrlUpdate,
     [editEventSelectorActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
+        const payload = action.payload;
+        const nextProgramId = payload.eventContainer.event.programId;
+        const prevProgramId = payload.prevProgramId;
+        if (nextProgramId !== prevProgramId) {
+            return {
+                ...state,
+                main: {},
+            };
+        }
+        return state;
+    },
+    [viewEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
         const payload = action.payload;
         const nextProgramId = payload.eventContainer.event.programId;
         const prevProgramId = payload.prevProgramId;
@@ -731,6 +786,15 @@ export const workingListsAppliedFiltersDesc = createReducerDescription({
         }
         return state;
     },
+    [viewEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
+        const payload = action.payload;
+        const nextProgramId = payload.eventContainer.event.programId;
+        const prevProgramId = payload.prevProgramId;
+        if (nextProgramId !== prevProgramId) {
+            return updateApplitedFiltersOnProgramReset(state);
+        }
+        return state;
+    },
     [cleanUpActionTypes.CLEAN_UP_EVENT_LIST_IN_LOADING]: state => ({
         ...state,
         main: {
@@ -766,6 +830,15 @@ export const workingListsUserSelectedFiltersDesc = createReducerDescription({
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateUserSelectedFilersOnUrlUpdate,
     [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateUserSelectedFilersOnUrlUpdate,
     [editEventSelectorActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
+        const payload = action.payload;
+        const nextProgramId = payload.eventContainer.event.programId;
+        const prevProgramId = payload.prevProgramId;
+        if (nextProgramId !== prevProgramId) {
+            return {};
+        }
+        return state;
+    },
+    [viewEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
         const payload = action.payload;
         const nextProgramId = payload.eventContainer.event.programId;
         const prevProgramId = payload.prevProgramId;

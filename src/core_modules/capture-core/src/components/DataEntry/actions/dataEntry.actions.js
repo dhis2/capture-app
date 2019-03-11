@@ -19,12 +19,13 @@ export const actionTypes = {
     UPDATE_FIELD: 'UpdateDataEntryField',
     UPDATE_FORM_FIELD: 'UpdateDataEntryFormField',
     RULES_EXECUTED_POST_UPDATE_FIELD: 'RulesExecutedPostUpdateFieldDataEntry',
+    ADD_DATA_ENTRY_NOTE: 'AddDataEntryNote',
+    REMOVE_DATA_ENTRY_NOTE: 'RemoveDataEntryNote',
+    ADD_DATA_ENTRY_RELATIONSHIP: 'AddDataEntryRelationship',
+    REMOVE_DATA_ENTRY_RELATIONSHIP: 'RemoveDataEntryRelationship',
+    DATA_ENTRY_RELATIONSHIP_ALREADY_EXISTS: 'DataEntryRelationshipAlreadyExists',
+    SET_CURRENT_DATA_ENTRY: 'SetCurrentDataEntry',
     START_RUN_RULES_POST_UPDATE_FIELD: 'StartRunRulesPostUpdateFieldDataEntry',
-    ADD_NOTE: 'AddNote',
-    REMOVE_NOTE: 'RemoveNote',
-    ADD_RELATIONSHIP: 'AddRelationship',
-    REMOVE_RELATIONSHIP: 'RemoveRelationship',
-    DUPLICATE_RELATIONSHIP: 'DuplicateRelationship',
 };
 
 // COMPLETE
@@ -123,20 +124,24 @@ export const rulesExecutedPostUpdateField =
 
 export const addNote =
     (dataEntryId: string, itemId: string, note: Object) =>
-        actionCreator(actionTypes.ADD_NOTE)({ dataEntryId, itemId, note });
+        actionCreator(actionTypes.ADD_DATA_ENTRY_NOTE)({ dataEntryId, itemId, note });
 
 export const removeNote =
     (dataEntryId: string, itemId: string, noteClientId: string) =>
-        actionCreator(actionTypes.REMOVE_NOTE)({ dataEntryId, itemId, noteClientId });
+        actionCreator(actionTypes.REMOVE_DATA_ENTRY_NOTE)({ dataEntryId, itemId, noteClientId });
 
 export const addRelationship =
     (dataEntryId: string, itemId: string, relationship: Object) =>
-        actionCreator(actionTypes.ADD_RELATIONSHIP)({ dataEntryId, itemId, relationship });
+        actionCreator(actionTypes.ADD_DATA_ENTRY_RELATIONSHIP)({ dataEntryId, itemId, relationship });
 
 export const removeRelationship =
     (dataEntryId: string, itemId: string, relationshipClientId: string) =>
-        actionCreator(actionTypes.REMOVE_RELATIONSHIP)({ dataEntryId, itemId, relationshipClientId });
+        actionCreator(actionTypes.REMOVE_DATA_ENTRY_RELATIONSHIP)({ dataEntryId, itemId, relationshipClientId });
 
-export const duplicateRelationship =
+export const relationshipAlreadyExists =
     (dataEntryId: string, itemId: string, message: string) =>
-        actionCreator(actionTypes.DUPLICATE_RELATIONSHIP)({ dataEntryId, itemId, message });
+        actionCreator(actionTypes.DATA_ENTRY_RELATIONSHIP_ALREADY_EXISTS)({ dataEntryId, itemId, message });
+
+export const setCurrentDataEntry =
+    (dataEntryId: string, itemId: string, extraProps?: ?any) =>
+        actionCreator(actionTypes.SET_CURRENT_DATA_ENTRY)({ dataEntryId, itemId, extraProps });

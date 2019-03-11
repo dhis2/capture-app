@@ -5,8 +5,8 @@ import { convertValue as convertListValue } from '../../../converters/clientToLi
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 
-import { getValidationErrors } from '../dataEntryField/dataEntryField.utils';
-import type { ValidatorContainer } from '../dataEntryField/dataEntryField.utils';
+import { getValidationErrors } from '../dataEntryField/internal/dataEntryField.utils';
+import type { ValidatorContainer } from '../dataEntryField/internal/dataEntryField.utils';
 
 type DataEntryPropToIncludeStandard = {|
     id: string,

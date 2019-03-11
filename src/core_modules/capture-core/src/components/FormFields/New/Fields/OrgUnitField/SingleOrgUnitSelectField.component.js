@@ -5,8 +5,6 @@ import { withStyles, IconButton } from '@material-ui/core';
 import { Clear as ClearIcon } from '@material-ui/icons';
 import OrgUnitField from './OrgUnitField.component';
 
-
-
 const getStyles = (theme: Theme) => ({
     selectedOrgUnitContainer: {
         display: 'flex',
@@ -28,7 +26,7 @@ const getStyles = (theme: Theme) => ({
 
 type OrgUnitValue = {
     id: string,
-    displayName: string,
+    name: string,
     path: string,
 }
 
@@ -53,7 +51,7 @@ class SingleOrgUnitSelectField extends React.Component<Props> {
         });
         return (
             <div className={classes.selectedOrgUnitContainer}>
-                <div className={classes.selectedOrgUnitText}>{selectedOrgUnit.displayName}</div>
+                <div className={classes.selectedOrgUnitText}>{selectedOrgUnit.name}</div>
                 <IconButton
                     className={buttonClass}
                     onClick={this.onDeselectOrgUnit}
@@ -67,7 +65,7 @@ class SingleOrgUnitSelectField extends React.Component<Props> {
     onSelectOrgUnit = (event: any, orgUnit: Object) => {
         this.props.onBlur({
             id: orgUnit.id,
-            displayName: orgUnit.displayName,
+            name: orgUnit.displayName,
             path: orgUnit.path,
         });
     }
@@ -91,5 +89,5 @@ class SingleOrgUnitSelectField extends React.Component<Props> {
         return value ? this.renderSelectedOrgUnit(value) : this.renderOrgUnitField();
     }
 }
-
+// $FlowFixMe
 export default withStyles(getStyles)(SingleOrgUnitSelectField);

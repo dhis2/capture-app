@@ -36,6 +36,7 @@ import {
     getIncidentDateValidatorContainer,
 } from './fieldValidators';
 import dataEntrySectionKeys from './constants/sectionKeys.const';
+import { Enrollment } from '../../../metaData';
 
 const overrideMessagePropNames = {
     errorMessage: 'validationError',
@@ -96,22 +97,22 @@ const getEnrollmentDateSettings = () => {
                 ),
             ),
         );
-    const enrollmentDateSettings = (props: Object) => ({
-        component: reportDateComponent,
-        componentProps: createComponentProps(props, {
+    const enrollmentDateSettings = {
+        getComponent: () => reportDateComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : '100%',
             label: props.enrollmentMetadata.enrollmentDateLabel,
             required: true,
             calendarWidth: props.formHorizontal ? 250 : 350,
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
         }),
-        propName: 'enrollmentDate',
-        validatorContainers: getEnrollmentDateValidatorContainer(),
-        meta: {
+        getPropName: () => 'enrollmentDate',
+        getValidatorContainers: () => getEnrollmentDateValidatorContainer(),
+        getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionKeys.ENROLLMENT,
-        },
-    });
+        }),
+    };
 
     return enrollmentDateSettings;
 };
@@ -137,22 +138,22 @@ const getIncidentDateSettings = () => {
                 ),
             ),
         );
-    const incidentDateSettings = (props: Object) => ({
-        component: reportDateComponent,
-        componentProps: createComponentProps(props, {
+    const incidentDateSettings = {
+        getComponent: () => reportDateComponent,
+        getComponentProps: (props: Object) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : '100%',
             label: props.enrollmentMetadata.incidentDateLabel,
             required: true,
             calendarWidth: props.formHorizontal ? 250 : 350,
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
         }),
-        propName: 'incidentDate',
-        validatorContainers: getIncidentDateValidatorContainer(),
-        meta: {
+        getPropName: () => 'incidentDate',
+        getValidatorContainers: () => getIncidentDateValidatorContainer(),
+        getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionKeys.ENROLLMENT,
-        },
-    });
+        }),
+    };
 
     return incidentDateSettings;
 };
@@ -199,49 +200,47 @@ const polygonComponent = withCalculateMessages(overrideMessagePropNames)(
 
 const getOrientation = (formHorizontal: ?boolean) => (formHorizontal ? orientations.VERTICAL : orientations.HORIZONTAL);
 
-const getGeometrySettings = () => (props: Object) => {
-    const featureType = props.enrollmentMetadata.enrollmentForm.featureType;
-    if (featureType === 'Polygon') {
-        return {
-            component: polygonComponent,
-            componentProps: createComponentProps(props, {
+const getGeometrySettings = () => ({
+    isApplicable: (props: Object) => {
+        const featureType = props.enrollmentMetadata.enrollmentForm.featureType;
+        return ['Polygon', 'Point'].includes(featureType);
+    },
+    getComponent: (props: Object) => {
+        const featureType = props.enrollmentMetadata.enrollmentForm.featureType;
+        if (featureType === 'Polygon') {
+            return polygonComponent;
+        }
+
+        return pointComponent;
+    },
+    getComponentProps: (props: Object) => {
+        const featureType = props.enrollmentMetadata.enrollmentForm.featureType;
+        if (featureType === 'Polygon') {
+            return createComponentProps(props, {
                 width: props && props.formHorizontal ? 150 : 350,
                 label: i18n.t('Area'),
                 dialogLabel: i18n.t('Area'),
                 required: false,
                 orientation: getOrientation(props.formHorizontal),
-            }),
-            propName: 'geometry',
-            validatorContainers: [
-            ],
-            meta: {
-                placement: placements.TOP,
-                section: dataEntrySectionKeys.ENROLLMENT,
-            },
-        };
-    }
-    if (featureType === 'Point') {
-        return {
-            component: pointComponent,
-            componentProps: createComponentProps(props, {
-                width: props && props.formHorizontal ? 150 : 350,
-                label: i18n.t('Coordinate'),
-                dialogLabel: i18n.t('Coordinate'),
-                required: false,
-                orientation: getOrientation(props.formHorizontal),
-                shrinkDisabled: props.formHorizontal,
-            }),
-            propName: 'geometry',
-            validatorContainers: [
-            ],
-            meta: {
-                placement: placements.TOP,
-                section: dataEntrySectionKeys.ENROLLMENT,
-            },
-        };
-    }
-    return null;
-};
+            });
+        }
+
+        return createComponentProps(props, {
+            width: props && props.formHorizontal ? 150 : 350,
+            label: i18n.t('Coordinate'),
+            dialogLabel: i18n.t('Coordinate'),
+            required: false,
+            orientation: getOrientation(props.formHorizontal),
+            shrinkDisabled: props.formHorizontal,
+        });
+    },
+    getPropName: () => 'geometry',
+    getValidatorContainers: () => [],
+    getMeta: () => ({
+        placement: placements.TOP,
+        section: dataEntrySectionKeys.ENROLLMENT,
+    }),
+});
 
 const getSearchGroups = (props: Object) => props.enrollmentMetadata.inputSearchGroups;
 const getSearchContext = (props: Object) => ({
@@ -249,8 +248,11 @@ const getSearchContext = (props: Object) => ({
     trackedEntityType: props.enrollmentMetadata.trackedEntityType.id,
 });
 
+type FinalTeiDataEntryProps = {
+    enrollmentMetadata: Enrollment,
+};
 // final step before the generic dataEntry is inserted
-class FinalEnrollmentDataEntry extends React.Component<Object> {
+class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     static dataEntrySectionDefinitions = {
         [dataEntrySectionKeys.ENROLLMENT]: {
             placement: placements.TOP,
@@ -285,7 +287,7 @@ const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);
 
 type PreEnrollmentDataEntryProps = {
     programId: string,
-    orgUnitId: string,
+    orgUnit: Object,
     onUpdateField: Function,
     onStartAsyncUpdateField: Function,
 };
@@ -302,26 +304,26 @@ class PreEnrollmentDataEntryPure extends React.PureComponent<Object> {
 
 class PreEnrollmentDataEntry extends React.Component<PreEnrollmentDataEntryProps> {
     getValidationContext = () => {
-        const { orgUnitId } = this.props;
+        const { orgUnit } = this.props;
         return {
-            orgUnitId,
+            orgUnit,
         };
     }
 
     handleUpdateField = (...args: Array<any>) => {
-        const { programId, orgUnitId } = this.props;
-        this.props.onUpdateField(...args, programId, orgUnitId);
+        const { programId, orgUnit } = this.props;
+        this.props.onUpdateField(...args, programId, orgUnit);
     }
 
     handleStartAsyncUpdateField = (...args: Array<any>) => {
-        const { programId, orgUnitId } = this.props;
-        this.props.onStartAsyncUpdateField(...args, programId, orgUnitId);
+        const { programId, orgUnit } = this.props;
+        this.props.onStartAsyncUpdateField(...args, programId, orgUnit);
     }
 
     render() {
         const {
             programId,
-            orgUnitId,
+            orgUnit,
             onUpdateField,
             onStartAsyncUpdateField,
             ...passOnProps } = this.props;

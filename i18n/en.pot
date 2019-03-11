@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-03-05T09:00:14.415Z\n"
-"PO-Revision-Date: 2019-03-05T09:00:14.415Z\n"
+"POT-Creation-Date: 2019-03-11T19:01:58.900Z\n"
+"PO-Revision-Date: 2019-03-11T19:01:58.900Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -23,6 +23,63 @@ msgstr ""
 msgid "Async field update failed"
 msgstr ""
 
+msgid "A value is required"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr ""
+
+msgid "Please provide a valid integer"
+msgstr ""
+
+msgid "Please provide a positive integer"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr ""
+
+msgid "Please provide a negative integer"
+msgstr ""
+
+msgid "Please provide a valid date and time"
+msgstr ""
+
+msgid "Please provide a valid time"
+msgstr ""
+
+msgid "Please provide a valid percentage"
+msgstr ""
+
+msgid "Please provide a valid url"
+msgstr ""
+
+msgid "Please provide a valid email address"
+msgstr ""
+
+msgid "Please provide a valid age"
+msgstr ""
+
+msgid "Please provide a valid phone number"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr ""
+
+msgid "Please provide valid coordinates"
+msgstr ""
+
+msgid "Please provide a valid username"
+msgstr ""
+
+msgid "This value already exists"
+msgstr ""
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr ""
+
+msgid "Checking..."
+msgstr ""
+
 msgid "Area"
 msgstr ""
 
@@ -32,7 +89,7 @@ msgstr ""
 msgid "Enrollment"
 msgstr ""
 
-msgid "A value is required"
+msgid "An error has occured. See log for details"
 msgstr ""
 
 msgid "Cancel"
@@ -48,18 +105,6 @@ msgid "Yes, discard"
 msgstr ""
 
 msgid "No, stay here"
-msgstr ""
-
-msgid "Add comment"
-msgstr ""
-
-msgid "Write comment"
-msgstr ""
-
-msgid "This event"
-msgstr ""
-
-msgid "Add relationship"
 msgstr ""
 
 msgid "Errors"
@@ -84,6 +129,12 @@ msgid "Warnings found"
 msgstr ""
 
 msgid "Abort"
+msgstr ""
+
+msgid "Add comment"
+msgstr ""
+
+msgid "Write comment"
 msgstr ""
 
 msgid "Some operations are still runnning. Please wait.."
@@ -303,6 +354,9 @@ msgid ""
 "details."
 msgstr ""
 
+msgid "This event"
+msgstr ""
+
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
@@ -343,10 +397,22 @@ msgstr ""
 msgid "Select a category option to start reporting"
 msgstr ""
 
+msgid "Create person and link"
+msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Show all"
+msgstr ""
+
 msgid "Program"
 msgstr ""
 
-msgid "Create person and link"
+msgid "Organisation Unit"
+msgstr ""
+
+msgid "Registration"
 msgstr ""
 
 msgid "Search results"
@@ -376,6 +442,14 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
+msgid ""
+"Leaving this page will discard any selections you made for a new "
+"relationship"
+msgstr ""
+
+msgid "Feedbacks"
+msgstr ""
+
 msgid "New {{typeName}}"
 msgstr ""
 
@@ -403,16 +477,13 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-msgid "Some programs are being filtered."
-msgstr ""
-
-msgid "Show all"
-msgstr ""
-
 msgid "Select program"
 msgstr ""
 
 msgid "No programs available."
+msgstr ""
+
+msgid "Add relationship"
 msgstr ""
 
 msgid "Selected program"
@@ -427,7 +498,10 @@ msgstr ""
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 
-msgid "An error has occured. See log for details"
+msgid "Program not found"
+msgstr ""
+
+msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
@@ -437,6 +511,12 @@ msgid "Error saving event"
 msgstr ""
 
 msgid "Could not save event. See log for details"
+msgstr ""
+
+msgid "Organisation unit search failed. See log for details"
+msgstr ""
+
+msgid "Tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"

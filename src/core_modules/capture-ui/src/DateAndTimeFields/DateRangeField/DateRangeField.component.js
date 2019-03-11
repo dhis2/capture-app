@@ -30,43 +30,44 @@ const inputKeys = {
 
 
 class DateRangeField extends React.Component<Props> {
-    static defaultProps = {
-        value: {},
-    }
     touchedFields: Set<string>;
     constructor(props: Props) {
         super(props);
         this.touchedFields = new Set();
     }
 
+    getValue = () => this.props.value || {};
+
     handleFromChange = (value: string) => {
         this.props.onChange({
             from: value,
-            to: this.props.value.to,
+            to: this.getValue().to,
         });
     }
 
     handleToChange = (value: string) => {
         this.props.onChange({
-            from: this.props.value.from,
+            from: this.getValue().from,
             to: value,
         });
     }
 
     handleFromBlur = (value: string) => {
         this.touchedFields.add('fromTouched');
+        const currentValue = this.getValue();
         this.handleBlur({
             from: value,
-            to: this.props.value.to,
-        }, !!this.props.value.to);
+            to: currentValue.to,
+        }, !!currentValue.to);
     }
 
     handleToBlur = (value: string) => {
         this.touchedFields.add('toTouched');
+        const currentValue = this.getValue();
         this.handleBlur({
-            from: this.props.value.from,
+            from: currentValue.from,
             to: value,
-        }, !!this.props.value.from);
+        }, !!currentValue.from);
     }
 
     handleBlur = (value: DateRangeValue, otherFieldHasValue: boolean) => {

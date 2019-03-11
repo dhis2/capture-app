@@ -20,6 +20,7 @@ type Props = {
         popperContainer: string,
     },
     onDelete: (eventId: string) => void,
+    onEdit: (eventId: string) => void,
     row: Object,
 }
 
@@ -54,6 +55,12 @@ class EventContentMenu extends React.Component<Props, State> {
         event.stopPropagation();
     }
 
+    handleEdit = (event: SyntheticEvent<any>) => {
+        this.closeMenu();
+        this.props.onEdit(this.props.row.eventId);
+        event.stopPropagation();
+    }
+
     handleReferenceInstanceRetrieved = (instance) => {
         this.managerRef(instance);
         this.menuReferenceInstance = instance;
@@ -83,6 +90,9 @@ class EventContentMenu extends React.Component<Props, State> {
         const { classes } = this.props;
         return (
             <React.Fragment>
+                <MenuItem onClick={this.handleEdit}>
+                    {i18n.t('Edit event')}
+                </MenuItem>
                 <MenuItem onClick={this.handleDelete}>
                     <Delete className={classes.deleteIcon} />
                     {i18n.t('Delete event')}

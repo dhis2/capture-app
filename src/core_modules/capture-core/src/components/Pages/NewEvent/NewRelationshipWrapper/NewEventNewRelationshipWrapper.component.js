@@ -6,7 +6,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import NewRelatonship from '../../NewRelationship/NewRelationship.container';
 import ConfirmDialog from '../../../Dialogs/ConfirmDialog.component';
 import LinkButton from '../../../Buttons/LinkButton.component';
-import { Button } from '@material-ui/core';
 
 
 const getStyles = theme => ({

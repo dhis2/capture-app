@@ -3,6 +3,7 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import isObject from 'd2-utilizr/lib/isObject';
+import LoadingMask from '../../../../LoadingMasks/LoadingMask.component';
 
 const styles = (theme: Theme) => ({
     base: {
@@ -21,8 +22,18 @@ const styles = (theme: Theme) => ({
         fontSize: theme.typography.pxToRem(14),
     },
     validating: {
-        color: 'orange',
+        color: theme.palette.grey.dark,
         fontSize: theme.typography.pxToRem(14),
+    },
+    validatingContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        color: theme.palette.grey.dark,
+    },
+    validatingIndicator: {
+        fontSize: 12,
+        marginTop: 1,
+        marginRight: 4,
     },
 });
 
@@ -43,7 +54,9 @@ type Props = {
         error: string,
         warning: string,
         info: string,
-        validating: string
+        validating: string,
+        validatingContainer: string,
+        validatingIndicator: string,
     }
 };
 
@@ -54,24 +67,62 @@ type MessageContainer = {
 
 const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
     class DisplayMessagesHOC extends React.Component<Props> {
-        static createMessageElement(text, classes) {
+        static createMessageElement(text, baseClass, messageClass, validatorClasses, type) {
+            if (type === messageTypes.validating) {
+                return (
+                    <div
+                        className={baseClass}
+                    >
+                        <div
+                            className={validatorClasses.container}
+                        >
+                            <div
+                                className={validatorClasses.indicator}
+                            >
+                                <LoadingMask
+                                    size={14}
+                                    color={'inherit'}
+                                />
+                            </div>
+                            <div
+                                className={messageClass}
+                            >
+                                {text}
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+
             return (
                 <div
-                    className={classes}
+                    className={classNames(baseClass, messageClass)}
                 >
                     {text}
                 </div>
             );
         }
 
-        convertMessage = (message, messageType: $Values<typeof messageTypes>): MessageContainer => (isObject(message) ?
-            // $FlowSuppress
-            { innerMessage: { message, messageType } } :
-            { element: DisplayMessagesHOC.createMessageElement(message, this.getClassNames(this.props.classes[messageType])) })
+        convertMessage = (message, messageType: $Values<typeof messageTypes>): MessageContainer => {
+            if (isObject(message)) {
+                return {
+                    innerMessage: { message, messageType },
+                };
+            }
 
-
-        getClassNames(childClass) {
-            return classNames(childClass, this.props.classes.base);
+            const { classes } = this.props;
+            return {
+                element: DisplayMessagesHOC.createMessageElement(
+                    message,
+                    classes.base,
+                    classes[messageType],
+                    {
+                        container: classes.validatingContainer,
+                        indicator: classes.validatingIndicator,
+                    },
+                    messageType,
+                ),
+            };
         }
 
         getMessage(errorMessage, warningMessage, infoMessage, validatingMessage) {

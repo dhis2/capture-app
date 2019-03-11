@@ -10,7 +10,7 @@ export type NewRelationshipData = {
 
 export type SelectedRelationshipType = {
     id: string,
-    displayName: string,
+    name: string,
     from: {
         entity: string,
         programId?: ?string,

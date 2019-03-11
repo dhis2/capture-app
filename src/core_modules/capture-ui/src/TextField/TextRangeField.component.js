@@ -30,17 +30,17 @@ type Props = {
     onBlur: (value: ?TextRangeValue, opts?: ?Object) => void,
 }
 class TextRangeField extends React.Component<Props> {
-    static defaultProps = {
-        value: {},
-    }
     touchedFields: Set<string>;
     constructor(props: Props) {
         super(props);
         this.touchedFields = new Set();
     }
+
+    getValue = () => this.props.value || {};
+
     getNewValue = (key: string, newValue: any) => {
         const value = {
-            ...this.props.value,
+            ...this.getValue(),
             [key]: newValue,
         };
         if (!value.from && !value.to) {
@@ -52,31 +52,33 @@ class TextRangeField extends React.Component<Props> {
     handleFromChange = (event: any) => {
         this.props.onChange({
             from: event.currentTarget.value,
-            to: this.props.value.to,
+            to: this.getValue().to,
         });
     }
 
     handleToChange = (event: any) => {
         this.props.onChange({
-            from: this.props.value.from,
+            from: this.getValue().from,
             to: event.currentTarget.value,
         });
     }
 
     handleFromBlur = (event: any) => {
         this.touchedFields.add('fromTouched');
+        const currentValue = this.getValue();
         this.handleBlur({
             from: event.currentTarget.value,
-            to: this.props.value.to,
-        }, !!this.props.value.to);
+            to: currentValue.to,
+        }, !!currentValue.to);
     }
 
     handleToBlur = (event: any) => {
         this.touchedFields.add('toTouched');
+        const currentValue = this.getValue();
         this.handleBlur({
-            from: this.props.value.from,
+            from: currentValue.from,
             to: event.currentTarget.value,
-        }, !!this.props.value.from);
+        }, !!currentValue.from);
     }
 
     handleBlur = (value: TextRangeValue, otherFieldHasValue: boolean) => {

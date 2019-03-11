@@ -10,7 +10,6 @@ export default async function buildMetaData(locale: string) {
     const preRequisitesData: Object =
         await getCommonPrerequisites(stores.TRACKED_ENTITY_ATTRIBUTES, stores.OPTION_SETS);
     const trackedEntityTypeCollection =
-        // $FlowFixMe
         await buildTrackedEntityTypes(
             stores.TRACKED_ENTITY_TYPES,
             preRequisitesData[stores.TRACKED_ENTITY_ATTRIBUTES],

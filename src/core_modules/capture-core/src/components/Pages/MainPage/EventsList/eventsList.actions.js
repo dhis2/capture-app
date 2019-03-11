@@ -7,6 +7,7 @@ export const actionTypes = {
     WORKING_LIST_UPDATE_DATA_RETRIEVAL_FAILED: 'WorkingListUpdateDataRetrievalFailed',
     SORT_WORKING_LIST: 'SortWorkingList',
     OPEN_EDIT_EVENT_PAGE: 'OpenEditEventPage',
+    OPEN_VIEW_EVENT_PAGE: 'OpenViewEventPage',
     REQUEST_DELETE_EVENT: 'RequestDeleteEvent',
     START_DELETE_EVENT: 'StartDeleteEvent',
     DELETE_EVENT_FAILED: 'DeleteEventFailed',
@@ -33,6 +34,9 @@ export const workingListUpdatingWithDialog = () => actionCreator(actionTypes.WOR
 
 export const openEditEventPage =
     (eventId: string) => actionCreator(actionTypes.OPEN_EDIT_EVENT_PAGE)(eventId);
+
+export const openViewEventPage =
+    (eventId: string) => actionCreator(actionTypes.OPEN_VIEW_EVENT_PAGE)(eventId);
 
 export const requestDeleteEvent = (eventId: string) => actionCreator(actionTypes.REQUEST_DELETE_EVENT)({ eventId });
 

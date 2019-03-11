@@ -43,6 +43,7 @@ type Props = {
     searchAttempted: boolean,
     searchId: string,
     searchGroup: SearchGroup,
+    attributesWithValuesCount: number,
     classes: {
         container: string,
         searchButtonContainer: string,
@@ -131,7 +132,6 @@ class SearchForm extends React.Component<Props> {
                     })}
             </div>
         );
-
     }
 
     render() {

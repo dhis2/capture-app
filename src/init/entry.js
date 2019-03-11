@@ -21,7 +21,7 @@ import './addRxjsOperators';
 import App from '../components/App/App.component';
 import getStore from '../store/getStore';
 import { initializeAsync } from './init';
-import { startupDataLoad } from './entry.actions';
+import { loadApp } from './entry.actions';
 import { addBeforeUnloadEventListener } from '../unload';
 
 const DOM_ID = 'app';
@@ -32,7 +32,7 @@ const jss = create(jssPreset());
 jss.options.insertionPoint = document.getElementById('jss-insertion-point');
 
 function runApp(domElement: HTMLElement, store: ReduxStore, history: HashHistory) {
-    store.dispatch(startupDataLoad());
+    store.dispatch(loadApp());
     addBeforeUnloadEventListener(store);
     render(
         <JssProvider jss={jss} generateClassName={generateClassName}>

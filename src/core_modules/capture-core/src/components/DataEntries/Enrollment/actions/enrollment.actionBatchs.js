@@ -54,7 +54,7 @@ export const updateFieldBatch = (
         filterActionsToBeExecuted: Array<ReduxAction<any, any>>
     },
     programId: string,
-    orgUnitId: string,
+    orgUnit: Object,
 ) => {
     const { filterActions, filterActionsToBeExecuted } = extraActions;
     const { dataEntryId, itemId } = innerAction.payload;
@@ -64,7 +64,7 @@ export const updateFieldBatch = (
         innerAction,
         ...filterActionsToBeExecuted,
         startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-        startRunRulesOnUpdateForNewEnrollment(innerAction.payload, filterActions, uid, programId, orgUnitId),
+        startRunRulesOnUpdateForNewEnrollment(innerAction.payload, filterActions, uid, programId, orgUnit),
     ], batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH);
 };
 
@@ -77,7 +77,7 @@ export const asyncUpdateSuccessBatch = (
     dataEntryId: string,
     itemId: string,
     programId: string,
-    orgUnitId: string,
+    orgUnit: Object,
 ) => {
     const { filterActions, filterActionsToBeExecuted } = extraActions;
     const uid = uuid();
@@ -86,6 +86,6 @@ export const asyncUpdateSuccessBatch = (
         innerAction,
         ...filterActionsToBeExecuted,
         startRunRulesPostUpdateField(dataEntryId, itemId, uid),
-        startRunRulesOnUpdateForNewEnrollment({ ...innerAction.payload, dataEntryId, itemId }, filterActions, uid, programId, orgUnitId),
+        startRunRulesOnUpdateForNewEnrollment({ ...innerAction.payload, dataEntryId, itemId }, filterActions, uid, programId, orgUnit),
     ], batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH);
 };

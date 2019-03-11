@@ -32,6 +32,7 @@ export {
 } from './actions/dataEntry.actions';
 export { actionTypes as loadNewActionTypes } from './actions/dataEntryLoadNew.actions';
 export { actionTypes as loadEditActionTypes } from './actions/dataEntryLoadEdit.actions';
+export { actionTypes as loadViewActionTypes } from './actions/dataEntryLoadView.actions';
 
 // epics
 export {

@@ -1,7 +1,15 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { SelectionBoxes, withDefaultFieldContainer, withLabel, withFocusSaver, withCalculateMessages, withDisplayMessages, SingleOrgUnitSelectField } from '../../FormFields/New';
+import {
+    SelectionBoxes,
+    withDefaultFieldContainer,
+    withLabel,
+    withFocusSaver,
+    withCalculateMessages,
+    withDisplayMessages,
+    SingleOrgUnitSelectField,
+} from '../../FormFields/New';
 
 const TeiSearchOrgUnitField = withFocusSaver()(withCalculateMessages()(withDefaultFieldContainer()(withLabel()(withDisplayMessages()(SingleOrgUnitSelectField)))));
 const TeiSearchSelectionBoxes = withDefaultFieldContainer()(withLabel()(SelectionBoxes));
@@ -120,7 +128,7 @@ class SearchOrgUnitSelector extends React.Component<Props> {
     }
 
     renderOrgUnitField = () => {
-        const { selectedOrgUnit, treeRoots, treeReady, treeKey, treeSearchText, onFilterOrgUnits } = this.props; // eslint-disable-line
+        const { selectedOrgUnit, treeRoots, treeReady, treeKey, treeSearchText } = this.props;
         return (
             <TeiSearchOrgUnitField
                 label="Organisation unit"

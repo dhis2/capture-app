@@ -42,7 +42,7 @@ export const openDataEntryForNewEnrollmentBatch =
         orgUnit: Object,
         dataEntryId: string,
         extraActions: Array<ReduxAction<any, any>> = [],
-        extraDataEntryProps: Array<Object>,
+        extraDataEntryProps: Array<Object> = [],
         defaultValues?: ?Object,
     ) => {
         const formId = getDataEntryKey(dataEntryId, itemId);

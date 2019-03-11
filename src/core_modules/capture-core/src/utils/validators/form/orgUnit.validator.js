@@ -9,13 +9,13 @@
 
 type OrgUnitValue = {
     id: string,
-    displayName: string,
+    name: string,
     path: string,
 }
 
 const isValidOrgUnit = (value: OrgUnitValue) => {
-    const valid = !!(value && value.id && value.displayName && value.path);
+    const valid = !!(value && value.id && value.name);
     return valid;
-} 
+};
 
 export default isValidOrgUnit;

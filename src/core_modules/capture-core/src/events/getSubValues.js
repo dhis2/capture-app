@@ -70,7 +70,7 @@ export async function getSubValues(eventId: string, programStage: RenderFoundati
         // $FlowSuppress
         const value = values[metaElementId];
         const metaElement = elementsById[metaElementId];
-        if (isDefined(value) && metaElement) {
+        if (isDefined(value) && value !== null && metaElement) {
             const subValueGetter = subValueGetterByElementType[metaElement.type];
             if (subValueGetter) {
                 const subValue = await subValueGetter(value, eventId, metaElementId);
