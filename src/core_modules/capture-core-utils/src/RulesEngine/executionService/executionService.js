@@ -150,391 +150,394 @@ export default function getExecutionService(onTranslate, variableService, dateUt
                 var brokenExecution = false;
                 dhisFunctions.forEach(dhisFunction => {
                     //Select the function call, with any number of parameters inside single quotations, or number parameters witout quotations
-                    var regularExFunctionCall = new RegExp(dhisFunction.name + "\\( *(([\\d/\\*\\+\\-%\.]+)|( *'[^']*'))*( *, *(([\\d/\\*\\+\\-%\.]+)|'[^']*'))* *\\)",'g');
+                    var regularExFunctionCall = new RegExp(dhisFunction.name + "\\( *(([\\d/\\*\\+\\-%\. ]+)|( *'[^']*'))*( *, *(([\\d/\\*\\+\\-%\. ]+)|'[^']*'))* *\\)",'g');
+
                     var callsToThisFunction = expression.match(regularExFunctionCall);
-                    callsToThisFunction.forEach(callToThisFunction => {
-                        //Remove the function name and paranthesis:
-                        var justparameters = callToThisFunction.replace(/(^[^\(]+\()|\)$/g,"");
-                        //Remove white spaces before and after parameters:
-                        justparameters = justparameters.trim();
-                        //Then split into single parameters:
-                        var parameters = justparameters.match(/(('[^']+')|([^,]+))/g);
+                    if(callsToThisFunction) {
+                        callsToThisFunction.forEach(callToThisFunction => {
+                            //Remove the function name and paranthesis:
+                            var justparameters = callToThisFunction.replace(/(^[^\(]+\()|\)$/g,"");
+                            //Remove white spaces before and after parameters:
+                            justparameters = justparameters.trim();
+                            //Then split into single parameters:
+                            var parameters = justparameters.match(/(('[^']+')|([^,]+))/g);
 
-                        //Show error if no parameters is given and the function requires parameters,
-                        //or if the number of parameters is wrong.
-                        if(isDefined(dhisFunction.parameters)){
-                            //But we are only checking parameters where the dhisFunction actually has a defined set of parameters(concatenate, for example, does not have a fixed number);
-                            var numParameters = parameters ? parameters.length : 0;
-                            
-                            if(numParameters !== dhisFunction.parameters){
-                                log.warn(dhisFunction.name + " was called with the incorrect number of parameters");
+                            //Show error if no parameters is given and the function requires parameters,
+                            //or if the number of parameters is wrong.
+                            if(isDefined(dhisFunction.parameters)){
+                                //But we are only checking parameters where the dhisFunction actually has a defined set of parameters(concatenate, for example, does not have a fixed number);
+                                var numParameters = parameters ? parameters.length : 0;
                                 
-                                //Mark this function call as broken:
-                                brokenExecution = true;
-                            }
-                        }
-
-                        //In case the function call is nested, the parameter itself contains an expression, run the expression.
-                        if(!brokenExecution && isDefined(parameters) && parameters !== null) {
-                            for (var i = 0; i < parameters.length; i++) {
-                                parameters[i] = runExpression(parameters[i],dhisFunction.name,"parameter:" + i, flag, variablesHash);
-                            }
-                        }
-
-                        //Special block for d2:weeksBetween(*,*) - add such a block for all other dhis functions.
-                        if(brokenExecution) {
-                            //Function call is not possible to evaluate, remove the call:
-                            expression = expression.replace(callToThisFunction, "false");
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:daysBetween") {
-                            const daysBetween = dateUtils.daysBetween(parameters[0], parameters[1]);
-                            //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, daysBetween);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:weeksBetween") {
-                            const weeksBetween = dateUtils.weeksBetween(parameters[0], parameters[1]);                          
-                            //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, weeksBetween);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:monthsBetween") {
-                            const monthsBetween = dateUtils.monthsBetween(parameters[0], parameters[1]);
-                            //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, monthsBetween);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:yearsBetween") {
-                            const yearsBetween = dateUtils.yearsBetween(parameters[0], parameters[1]);                          
-                            //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, yearsBetween);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:floor") {
-                            var floored = Math.floor(parameters[0]);
-                            //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, floored);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:modulus") {
-                            var dividend = Number(parameters[0]);
-                            var divisor = Number(parameters[1]);
-                            var rest = dividend % divisor;
-                            //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, rest);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:concatenate") {
-                            var returnString = "'";
-                            for (var i = 0; i < parameters.length; i++) {
-                                returnString += parameters[i];
-                            }
-                            returnString += "'";
-                            expression = expression.replace(callToThisFunction, returnString);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:addDays") {
-                            const newDate = dateUtils.addDays(date, daysToAdd);
-                            //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, newDate);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:zing") {
-                            var number = parameters[0];
-                            if( number < 0 ) {
-                                number = 0;
-                            }
-
-                            //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, number);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:oizp") {
-                            var number = parameters[0];
-                            var output = 1;
-                            if( number < 0 ) {
-                                output = 0;
-                            }
-
-                            //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, output);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:count") {
-                            var variableName = parameters[0];
-                            var variableObject = variablesHash[variableName];
-                            var count = 0;
-                            if(variableObject)
-                            {
-                                if(variableObject.hasValue){
-                                    if(variableObject.allValues)
-                                    {
-                                        count = variableObject.allValues.length;
-                                    } else {
-                                        //If there is a value found for the variable, the count is 1 even if there is no list of alternate values
-                                        //This happens for variables of "DATAELEMENT_CURRENT_STAGE" and "TEI_ATTRIBUTE"
-                                        count = 1;
-                                    }
+                                if(numParameters !== dhisFunction.parameters){
+                                    log.warn(dhisFunction.name + " was called with the incorrect number of parameters");
+                                    
+                                    //Mark this function call as broken:
+                                    brokenExecution = true;
                                 }
                             }
-                            else
-                            {
-                                log.warn("could not find variable to count: " + variableName);
+
+                            //In case the function call is nested, the parameter itself contains an expression, run the expression.
+                            if(!brokenExecution && isDefined(parameters) && parameters !== null) {
+                                for (var i = 0; i < parameters.length; i++) {
+                                    parameters[i] = runExpression(parameters[i],dhisFunction.name,"parameter:" + i, flag, variablesHash);
+                                }
                             }
 
-                            //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, count);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:countIfZeroPos") {
-                            var variableName = $filter('trimvariablequalifiers') (parameters[0]);
-                            var variableObject = variablesHash[variableName];
+                            //Special block for d2:weeksBetween(*,*) - add such a block for all other dhis functions.
+                            if(brokenExecution) {
+                                //Function call is not possible to evaluate, remove the call:
+                                expression = expression.replace(callToThisFunction, "false");
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:daysBetween") {
+                                const daysBetween = dateUtils.daysBetween(parameters[0], parameters[1]);
+                                //Replace the end evaluation of the dhis function:
+                                expression = expression.replace(callToThisFunction, daysBetween);
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:weeksBetween") {
+                                const weeksBetween = dateUtils.weeksBetween(parameters[0], parameters[1]);                          
+                                //Replace the end evaluation of the dhis function:
+                                expression = expression.replace(callToThisFunction, weeksBetween);
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:monthsBetween") {
+                                const monthsBetween = dateUtils.monthsBetween(parameters[0], parameters[1]);
+                                //Replace the end evaluation of the dhis function:
+                                expression = expression.replace(callToThisFunction, monthsBetween);
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:yearsBetween") {
+                                const yearsBetween = dateUtils.yearsBetween(parameters[0], parameters[1]);                          
+                                //Replace the end evaluation of the dhis function:
+                                expression = expression.replace(callToThisFunction, yearsBetween);
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:floor") {
+                                var floored = Math.floor(parameters[0]);
+                                //Replace the end evaluation of the dhis function:
+                                expression = expression.replace(callToThisFunction, floored);
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:modulus") {
+                                var dividend = Number(parameters[0]);
+                                var divisor = Number(parameters[1]);
+                                var rest = dividend % divisor;
+                                //Replace the end evaluation of the dhis function:
+                                expression = expression.replace(callToThisFunction, rest);
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:concatenate") {
+                                var returnString = "'";
+                                for (var i = 0; i < parameters.length; i++) {
+                                    returnString += parameters[i];
+                                }
+                                returnString += "'";
+                                expression = expression.replace(callToThisFunction, returnString);
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:addDays") {
+                                const newDate = dateUtils.addDays(date, daysToAdd);
+                                //Replace the end evaluation of the dhis function:
+                                expression = expression.replace(callToThisFunction, newDate);
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:zing") {
+                                var number = parameters[0];
+                                if( number < 0 ) {
+                                    number = 0;
+                                }
 
-                            var count = 0;
-                            if(variableObject)
-                            {
-                                if( variableObject.hasValue ) {
-                                    if(variableObject.allValues && variableObject.allValues.length > 0)
-                                    {
-                                        for(var i = 0; i < variableObject.allValues.length; i++)
+                                //Replace the end evaluation of the dhis function:
+                                expression = expression.replace(callToThisFunction, number);
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:oizp") {
+                                var number = parameters[0];
+                                var output = 1;
+                                if( number < 0 ) {
+                                    output = 0;
+                                }
+
+                                //Replace the end evaluation of the dhis function:
+                                expression = expression.replace(callToThisFunction, output);
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:count") {
+                                var variableName = parameters[0];
+                                var variableObject = variablesHash[variableName];
+                                var count = 0;
+                                if(variableObject)
+                                {
+                                    if(variableObject.hasValue){
+                                        if(variableObject.allValues)
                                         {
-                                            if(variableObject.allValues[i] >= 0) {
-                                                count++;
+                                            count = variableObject.allValues.length;
+                                        } else {
+                                            //If there is a value found for the variable, the count is 1 even if there is no list of alternate values
+                                            //This happens for variables of "DATAELEMENT_CURRENT_STAGE" and "TEI_ATTRIBUTE"
+                                            count = 1;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    log.warn("could not find variable to count: " + variableName);
+                                }
+
+                                //Replace the end evaluation of the dhis function:
+                                expression = expression.replace(callToThisFunction, count);
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:countIfZeroPos") {
+                                var variableName = $filter('trimvariablequalifiers') (parameters[0]);
+                                var variableObject = variablesHash[variableName];
+
+                                var count = 0;
+                                if(variableObject)
+                                {
+                                    if( variableObject.hasValue ) {
+                                        if(variableObject.allValues && variableObject.allValues.length > 0)
+                                        {
+                                            for(var i = 0; i < variableObject.allValues.length; i++)
+                                            {
+                                                if(variableObject.allValues[i] >= 0) {
+                                                    count++;
+                                                }
                                             }
                                         }
+                                        else {
+                                            //The variable has a value, but no list of alternates. This means we only compare the elements real value
+                                            if(variableObject.variableValue >= 0) {
+                                                count = 1;
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    log.warn("could not find variable to countifzeropos: " + variableName);
+                                }
+
+                                //Replace the end evaluation of the dhis function:
+                                expression = expression.replace(callToThisFunction, count);
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:countIfValue") {
+                                var variableName = parameters[0];
+                                var variableObject = variablesHash[variableName];
+
+                                var valueToCompare = variableService.processValue(parameters[1],variableObject.variableType);
+
+                                var count = 0;
+                                if(variableObject)
+                                {
+                                    if( variableObject.hasValue )
+                                    {
+                                        if( variableObject.allValues )
+                                        {
+                                            for(var i = 0; i < variableObject.allValues.length; i++)
+                                            {
+                                                if(valueToCompare === variableObject.allValues[i]) {
+                                                    count++;
+                                                }
+                                            }
+                                        } else {
+                                            //The variable has a value, but no list of alternates. This means we compare the standard variablevalue
+                                            if(valueToCompare === variableObject.variableValue) {
+                                                count = 1;
+                                            }
+                                        }
+
+                                    }
+                                }
+                                else
+                                {
+                                    log.warn("could not find variable to countifvalue: " + variableName);
+                                }
+
+                                //Replace the end evaluation of the dhis function:
+                                expression = expression.replace(callToThisFunction, count);
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:ceil") {
+                                var ceiled = Math.ceil(parameters[0]);
+                                //Replace the end evaluation of the dhis function:
+                                expression = expression.replace(callToThisFunction, ceiled);
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:round") {
+                                var rounded = Math.round(parameters[0]);
+                                //Replace the end evaluation of the dhis function:
+                                expression = expression.replace(callToThisFunction, rounded);
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:hasValue") {
+                                var variableName = parameters[0];
+                                var variableObject = variablesHash[variableName];
+                                var valueFound = false;
+                                if(variableObject)
+                                {
+                                    if(variableObject.hasValue){
+                                        valueFound = true;
+                                    }
+                                }
+                                else
+                                {
+                                    log.warn("could not find variable to check if has value: " + variableName);
+                                }
+
+                                //Replace the end evaluation of the dhis function:
+                                expression = expression.replace(callToThisFunction, valueFound);
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:lastEventDate") {
+                                var variableName = parameters[0];
+                                var variableObject = variablesHash[variableName];
+                                var valueFound = "''";
+                                if(variableObject)
+                                {
+                                    if(variableObject.variableEventDate){
+                                        valueFound = variableService.processValue(variableObject.variableEventDate, 'DATE');
                                     }
                                     else {
-                                        //The variable has a value, but no list of alternates. This means we only compare the elements real value
-                                        if(variableObject.variableValue >= 0) {
-                                            count = 1;
-                                        }
+                                        log.warn("no last event date found for variable: " + variableName);
                                     }
                                 }
-                            }
-                            else
-                            {
-                                log.warn("could not find variable to countifzeropos: " + variableName);
-                            }
-
-                            //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, count);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:countIfValue") {
-                            var variableName = parameters[0];
-                            var variableObject = variablesHash[variableName];
-
-                            var valueToCompare = variableService.processValue(parameters[1],variableObject.variableType);
-
-                            var count = 0;
-                            if(variableObject)
-                            {
-                                if( variableObject.hasValue )
+                                else
                                 {
-                                    if( variableObject.allValues )
-                                    {
-                                        for(var i = 0; i < variableObject.allValues.length; i++)
-                                        {
-                                            if(valueToCompare === variableObject.allValues[i]) {
-                                                count++;
-                                            }
-                                        }
-                                    } else {
-                                        //The variable has a value, but no list of alternates. This means we compare the standard variablevalue
-                                        if(valueToCompare === variableObject.variableValue) {
-                                            count = 1;
-                                        }
+                                    log.warn("could not find variable to check last event date: " + variableName);
+                                }
+
+                                //Replace the end evaluation of the dhis function:
+                                expression = expression.replace(callToThisFunction, valueFound);
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:validatePattern") {
+                                var inputToValidate = parameters[0].toString();
+                                var pattern = parameters[1];
+                                var regEx = new RegExp(pattern,'g');
+                                var match = inputToValidate.match(regEx);
+                                
+                                var matchFound = false;
+                                if(match !== null && inputToValidate === match[0]) {
+                                    matchFound = true;
+                                }
+
+                                //Replace the end evaluation of the dhis function:
+                                expression = expression.replace(callToThisFunction, matchFound);
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:addControlDigits") {
+
+                                var baseNumber = parameters[0];
+                                var baseDigits = baseNumber.split('');
+                                var error = false;
+
+                                var firstDigit = 0;
+                                var secondDigit = 0;
+
+                                if(baseDigits && baseDigits.length < 10 ) {
+                                    var firstSum = 0;
+                                    var baseNumberLength = baseDigits.length;
+                                    //weights support up to 9 base digits:
+                                    var firstWeights = [3,7,6,1,8,9,4,5,2];
+                                    for(var i = 0; i < baseNumberLength && !error; i++) {
+                                        firstSum += parseInt(baseDigits[i]) * firstWeights[i];
                                     }
+                                    firstDigit = firstSum % 11;
 
+                                    //Push the first digit to the array before continuing, as the second digit is a result of the
+                                    //base digits and the first control digit.
+                                    baseDigits.push(firstDigit);
+                                    //Weights support up to 9 base digits plus first control digit:
+                                    var secondWeights = [5,4,3,2,7,6,5,4,3,2];
+                                    var secondSum = 0;
+                                    for(var i = 0; i < baseNumberLength + 1 && !error; i++) {
+                                        secondSum += parseInt(baseDigits[i]) * secondWeights[i];
+                                    }
+                                    secondDigit = secondSum % 11;
+
+                                    if(firstDigit === 10) {
+                                        log.warn("First control digit became 10, replacing with 0");
+                                        firstDigit = 0;
+                                    }
+                                    if(secondDigit === 10) {
+                                        log.warn("Second control digit became 10, replacing with 0");
+                                        secondDigit = 0;
+                                    }
+                                }
+                                else
+                                {
+                                    log.warn("Base nuber not well formed(" + baseNumberLength + " digits): " + baseNumber);
+                                }
+
+                                if(!error) {
+                                    //Replace the end evaluation of the dhis function:
+                                    expression = expression.replace(callToThisFunction, baseNumber + firstDigit + secondDigit);
+                                    expressionUpdated = true;
+                                }
+                                else
+                                {
+                                    //Replace the end evaluation of the dhis function:
+                                    expression = expression.replace(callToThisFunction, baseNumber);
+                                    expressionUpdated = true;
                                 }
                             }
-                            else
-                            {
-                                log.warn("could not find variable to countifvalue: " + variableName);
-                            }
+                            else if(dhisFunction.name === "d2:checkControlDigits") {
+                                log.warn("checkControlDigits not implemented yet");
 
-                            //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, count);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:ceil") {
-                            var ceiled = Math.ceil(parameters[0]);
-                            //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, ceiled);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:round") {
-                            var rounded = Math.round(parameters[0]);
-                            //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, rounded);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:hasValue") {
-                            var variableName = parameters[0];
-                            var variableObject = variablesHash[variableName];
-                            var valueFound = false;
-                            if(variableObject)
-                            {
-                                if(variableObject.hasValue){
-                                    valueFound = true;
-                                }
-                            }
-                            else
-                            {
-                                log.warn("could not find variable to check if has value: " + variableName);
-                            }
-
-                            //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, valueFound);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:lastEventDate") {
-                            var variableName = parameters[0];
-                            var variableObject = variablesHash[variableName];
-                            var valueFound = "''";
-                            if(variableObject)
-                            {
-                                if(variableObject.variableEventDate){
-                                    valueFound = variableService.processValue(variableObject.variableEventDate, 'DATE');
-                                }
-                                else {
-                                    log.warn("no last event date found for variable: " + variableName);
-                                }
-                            }
-                            else
-                            {
-                                log.warn("could not find variable to check last event date: " + variableName);
-                            }
-
-                            //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, valueFound);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:validatePattern") {
-                            var inputToValidate = parameters[0].toString();
-                            var pattern = parameters[1];
-                            var regEx = new RegExp(pattern,'g');
-                            var match = inputToValidate.match(regEx);
-                            
-                            var matchFound = false;
-                            if(match !== null && inputToValidate === match[0]) {
-                                matchFound = true;
-                            }
-
-                            //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, matchFound);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:addControlDigits") {
-
-                            var baseNumber = parameters[0];
-                            var baseDigits = baseNumber.split('');
-                            var error = false;
-
-                            var firstDigit = 0;
-                            var secondDigit = 0;
-
-                            if(baseDigits && baseDigits.length < 10 ) {
-                                var firstSum = 0;
-                                var baseNumberLength = baseDigits.length;
-                                //weights support up to 9 base digits:
-                                var firstWeights = [3,7,6,1,8,9,4,5,2];
-                                for(var i = 0; i < baseNumberLength && !error; i++) {
-                                    firstSum += parseInt(baseDigits[i]) * firstWeights[i];
-                                }
-                                firstDigit = firstSum % 11;
-
-                                //Push the first digit to the array before continuing, as the second digit is a result of the
-                                //base digits and the first control digit.
-                                baseDigits.push(firstDigit);
-                                //Weights support up to 9 base digits plus first control digit:
-                                var secondWeights = [5,4,3,2,7,6,5,4,3,2];
-                                var secondSum = 0;
-                                for(var i = 0; i < baseNumberLength + 1 && !error; i++) {
-                                    secondSum += parseInt(baseDigits[i]) * secondWeights[i];
-                                }
-                                secondDigit = secondSum % 11;
-
-                                if(firstDigit === 10) {
-                                    log.warn("First control digit became 10, replacing with 0");
-                                    firstDigit = 0;
-                                }
-                                if(secondDigit === 10) {
-                                    log.warn("Second control digit became 10, replacing with 0");
-                                    secondDigit = 0;
-                                }
-                            }
-                            else
-                            {
-                                log.warn("Base nuber not well formed(" + baseNumberLength + " digits): " + baseNumber);
-                            }
-
-                            if(!error) {
                                 //Replace the end evaluation of the dhis function:
-                                expression = expression.replace(callToThisFunction, baseNumber + firstDigit + secondDigit);
+                                expression = expression.replace(callToThisFunction, parameters[0]);
                                 expressionUpdated = true;
                             }
-                            else
-                            {
-                                //Replace the end evaluation of the dhis function:
-                                expression = expression.replace(callToThisFunction, baseNumber);
-                                expressionUpdated = true;
-                            }
-                        }
-                        else if(dhisFunction.name === "d2:checkControlDigits") {
-                            log.warn("checkControlDigits not implemented yet");
-
-                            //Replace the end evaluation of the dhis function:
-                            expression = expression.replace(callToThisFunction, parameters[0]);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:left") {
-                            var string = String(parameters[0]);
-                            var numChars = string.length < parameters[1] ? string.length : parameters[1];
-                            var returnString =  string.substring(0,numChars);
-                            returnString = variableService.processValue(returnString, 'TEXT');
-                            expression = expression.replace(callToThisFunction, returnString);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:right") {
-                            var string = String(parameters[0]);
-                            var numChars = string.length < parameters[1] ? string.length : parameters[1];
-                            var returnString =  string.substring(string.length - numChars, string.length);
-                            returnString = variableService.processValue(returnString, 'TEXT');
-                            expression = expression.replace(callToThisFunction, returnString);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:substring") {
-                            var string = String(parameters[0]);
-                            var startChar = string.length < parameters[1] - 1 ? -1 : parameters[1];
-                            var endChar = string.length < parameters[2] ? -1 : parameters[2];
-                            if(startChar < 0 || endChar < 0) {
-                                expression = expression.replace(callToThisFunction, "''");
-                                expressionUpdated = true;
-                            } else {
-                                var returnString =  string.substring(startChar, endChar);
+                            else if(dhisFunction.name === "d2:left") {
+                                var string = String(parameters[0]);
+                                var numChars = string.length < parameters[1] ? string.length : parameters[1];
+                                var returnString =  string.substring(0,numChars);
                                 returnString = variableService.processValue(returnString, 'TEXT');
                                 expression = expression.replace(callToThisFunction, returnString);
                                 expressionUpdated = true;
                             }
-                        }
-                        else if(dhisFunction.name === "d2:split") {
-                            var string = String(parameters[0]);
-                            var splitArray = string.split(parameters[1]);
-                            var returnPart = "";
-                            if (splitArray.length >= parameters[2]) {
-                                returnPart = splitArray[parameters[2]];
+                            else if(dhisFunction.name === "d2:right") {
+                                var string = String(parameters[0]);
+                                var numChars = string.length < parameters[1] ? string.length : parameters[1];
+                                var returnString =  string.substring(string.length - numChars, string.length);
+                                returnString = variableService.processValue(returnString, 'TEXT');
+                                expression = expression.replace(callToThisFunction, returnString);
+                                expressionUpdated = true;
                             }
-                            returnPart = variableService.processValue(returnPart, 'TEXT');
-                            expression = expression.replace(callToThisFunction, returnPart);
-                            expressionUpdated = true;
-                        }
-                        else if(dhisFunction.name === "d2:length") {
-                            expression = expression.replace(callToThisFunction, String(parameters[0]).length);
-                            expressionUpdated = true;
-                        }
-                    });
+                            else if(dhisFunction.name === "d2:substring") {
+                                var string = String(parameters[0]);
+                                var startChar = string.length < parameters[1] - 1 ? -1 : parameters[1];
+                                var endChar = string.length < parameters[2] ? -1 : parameters[2];
+                                if(startChar < 0 || endChar < 0) {
+                                    expression = expression.replace(callToThisFunction, "''");
+                                    expressionUpdated = true;
+                                } else {
+                                    var returnString =  string.substring(startChar, endChar);
+                                    returnString = variableService.processValue(returnString, 'TEXT');
+                                    expression = expression.replace(callToThisFunction, returnString);
+                                    expressionUpdated = true;
+                                }
+                            }
+                            else if(dhisFunction.name === "d2:split") {
+                                var string = String(parameters[0]);
+                                var splitArray = string.split(parameters[1]);
+                                var returnPart = "";
+                                if (splitArray.length >= parameters[2]) {
+                                    returnPart = splitArray[parameters[2]];
+                                }
+                                returnPart = variableService.processValue(returnPart, 'TEXT');
+                                expression = expression.replace(callToThisFunction, returnPart);
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:length") {
+                                expression = expression.replace(callToThisFunction, String(parameters[0]).length);
+                                expressionUpdated = true;
+                            }
+                        });
+                    }
                 });
 
                 //We only want to continue looping until we made a successful replacement,

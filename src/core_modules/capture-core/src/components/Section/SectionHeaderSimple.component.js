@@ -55,7 +55,7 @@ class SectionHeaderSimple extends Component<Props> {
     render() {
         const { titleStyle, extendedCollapsibility, containerStyle, classes, secondary, onChangeCollapseState } = this.props;
 
-        const containerProps = extendedCollapsibility ? { onTouchTap: this.handleChangeCollapse } : null;
+        const containerProps = extendedCollapsibility ? { onClick: this.handleChangeCollapse } : null;
 
         const accContainerStyle = extendedCollapsibility ? { ...containerStyle, ...{ cursor: 'pointer' } } : containerStyle;
 
@@ -81,7 +81,7 @@ class SectionHeaderSimple extends Component<Props> {
                                 return (
                                     <IconButton
                                         title={this.props.isCollapsed ? 'Åpne' : 'Lukk'}
-                                        onTouchTap={this.handleChangeCollapse}
+                                        onClick={this.handleChangeCollapse}
                                     >
                                         <Icon>
                                             {this.props.isCollapsed ? 'keyboard_arrow_down' : 'keyboard_arrow_up'}

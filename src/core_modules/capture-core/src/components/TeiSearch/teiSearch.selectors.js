@@ -8,5 +8,5 @@ const programIdSelector = (state, props) => state.teiSearch[props.id].selectedPr
 export const makeSearchGroupsSelector = () => createSelector(
     trackedEntityTypeIdSelector,
     programIdSelector,
-    (trackedEntityTypeId: string, programId: ?string) => getSearchGroups(trackedEntityTypeId, programId),
+    (trackedEntityTypeId: string, programId: ?string) => getSearchGroups(trackedEntityTypeId, programId).sort((a, b) => a.unique === b.unique ? 0 : (a.unique ? -1 : 1)),
 );

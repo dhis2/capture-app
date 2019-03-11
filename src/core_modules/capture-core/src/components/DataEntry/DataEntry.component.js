@@ -12,6 +12,10 @@ import Section from '../Section/Section.component';
 import SectionHeaderSimple from '../Section/SectionHeaderSimple.component';
 
 const styles = theme => ({
+    d2FormContainer: {
+        paddingTop: 10,
+        paddingBottom: 10,
+    },
     footerBar: {
         display: 'flex',
         paddingTop: theme.typography.pxToRem(10),
@@ -254,15 +258,18 @@ class DataEntry extends React.Component<Props> {
                 <div className={directionClasses.dataEntryContainer}>
                     <div className={directionClasses.formContainer}>
                         {this.renderDataEntryFieldsByPlacement(placements.TOP)}
-                        <D2Form
-                            innerRef={(formInstance) => { this.formInstance = formInstance; }}
-                            formFoundation={formFoundation}
-                            id={getDataEntryKey(id, itemId)}
-                            validationAttempted={completionAttempted || saveAttempted}
-                            onUpdateField={this.handleUpdateField}
-                            onUpdateFieldAsync={this.handleUpdateFieldAsync}
-                            {...passOnProps}
-                        />
+                        <div className={classes.d2FormContainer}>
+                            <D2Form
+                                innerRef={(formInstance) => { this.formInstance = formInstance; }}
+                                formFoundation={formFoundation}
+                                id={getDataEntryKey(id, itemId)}
+                                validationAttempted={completionAttempted || saveAttempted}
+                                onUpdateField={this.handleUpdateField}
+                                onUpdateFieldAsync={this.handleUpdateFieldAsync}
+                                {...passOnProps}
+                            />
+                        </div>
+
                         {this.renderDataEntryFieldsByPlacement(placements.BOTTOM)}
                         {notes &&
                             <div className={classes.notes}>

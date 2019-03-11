@@ -41,6 +41,14 @@ function convertResourceForDisplay(clientValue: FileClientValue) {
     );
 }
 
+function convertRangeForDisplay(parser: any, clientValue: any) {
+    return (
+        <span>
+            {parser(clientValue.from)} {'->'} {parser(clientValue.to)}
+        </span>
+    );
+}
+
 const valueConvertersForType = {
     [elementTypes.NUMBER]: stringifyNumber,
     [elementTypes.INTEGER]: stringifyNumber,
@@ -48,6 +56,7 @@ const valueConvertersForType = {
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: stringifyNumber,
     [elementTypes.INTEGER_NEGATIVE]: stringifyNumber,
     [elementTypes.DATE]: convertDataForListDisplay,
+    [elementTypes.DATE_RANGE]: value => convertRangeForDisplay(convertDataForListDisplay, value),
     [elementTypes.DATETIME]: convertDateTimeForListDisplay,
     [elementTypes.TRUE_ONLY]: () => 'Yes',
     [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'Yes' : 'No'),

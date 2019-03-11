@@ -46,7 +46,7 @@ class SearchProgramSelector extends React.Component<Props> {
                 styles={programFieldStyles}
                 options={this.programOptions}
                 onSelect={this.onSelectProgram}
-                label={i18n.t('Select program')}
+                label={i18n.t('Selected program')}
                 value={this.props.selectedProgramId}
             />
         );

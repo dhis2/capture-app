@@ -8,8 +8,7 @@ const mapStateToProps = (state: ReduxState) => ({
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onRowClick: (rowData: {eventId: string}) => {
-        console.log();
+    onRowClick: () => {
     },
 });
 

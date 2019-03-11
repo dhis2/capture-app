@@ -15,6 +15,7 @@ export const teiSearchDesc = createReducerDescription({
         ...state,
         [action.payload.searchId]: {
             selectedOrgUnitScope: 'ACCESSIBLE',
+            openSearchGroupSection: '0',
             selectedProgramId: action.payload.programId,
             selectedTrackedEntityTypeId: action.payload.trackedEntityTypeId,
         },
@@ -140,6 +141,7 @@ export const teiSearchDesc = createReducerDescription({
                 ...state[searchId],
                 selectedProgramId: action.payload.programId,
                 selectedTrackedEntityTypeId: action.payload.trackedEntityTypeId,
+                openSearchGroupSection: '0',
             },
         };
     },
@@ -187,6 +189,16 @@ export const teiSearchDesc = createReducerDescription({
                     ...state[searchId].searchResults,
                     resultsLoading: true,
                 },
+            },
+        };
+    },
+    [teiSearchActionTypes.TEI_SEARCH_SET_OPEN_SEARCH_GROUP_SECTION]: (state, action) => {
+        const searchId = action.payload.searchId;
+        return {
+            ...state,
+            [searchId]: {
+                ...state[searchId],
+                openSearchGroupSection: action.payload.searchGroupId,
             },
         };
     },

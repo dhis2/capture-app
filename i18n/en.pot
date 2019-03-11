@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-03-11T17:22:21.492Z\n"
-"PO-Revision-Date: 2019-03-11T17:22:21.492Z\n"
+"POT-Creation-Date: 2019-03-11T19:01:58.900Z\n"
+"PO-Revision-Date: 2019-03-11T19:01:58.900Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -95,16 +95,16 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-msgid "Discard event?"
+msgid "Unsaved changes"
 msgstr ""
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 
-msgid "Discard"
+msgid "Yes, discard"
 msgstr ""
 
-msgid "Back to event"
+msgid "No, stay here"
 msgstr ""
 
 msgid "Errors"
@@ -368,15 +368,15 @@ msgstr ""
 msgid "New event relationship"
 msgstr ""
 
-msgid "Discard relationship?"
+msgid "Adding relationship to event."
+msgstr ""
+
+msgid "Go back to event without saving relationship"
 msgstr ""
 
 msgid ""
-"Leaving this page will discard any selections you made for a new "
+"Leaving this page will discard the selections you made for a new "
 "relationship"
-msgstr ""
-
-msgid "Back to relationship"
 msgstr ""
 
 msgid "events added"
@@ -424,6 +424,9 @@ msgstr ""
 msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
 
+msgid "{{teiCount}} results found for"
+msgstr ""
+
 msgid "New search"
 msgstr ""
 
@@ -439,19 +442,9 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
-msgid "Adding relationship to event."
-msgstr ""
-
-msgid "Go back to event without saving relationship"
-msgstr ""
-
-msgid "Unsaved changes"
-msgstr ""
-
-msgid "Yes, discard"
-msgstr ""
-
-msgid "No, stay here"
+msgid ""
+"Leaving this page will discard any selections you made for a new "
+"relationship"
 msgstr ""
 
 msgid "Feedbacks"
@@ -493,10 +486,16 @@ msgstr ""
 msgid "Add relationship"
 msgstr ""
 
-msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgid "Selected program"
 msgstr ""
 
-msgid "Search attributes"
+msgid "Search {{uniqueAttrName}}"
+msgstr ""
+
+msgid "Search by attributes"
+msgstr ""
+
+msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 
 msgid "Program not found"

@@ -29,13 +29,9 @@ const isRequestFilterFormFieldOrgUnits = (action: Object, formId: string, elemen
 
 const cancelActionFilter = (action: Object, formId: string, elementId: string) => {
     if (isArray(action.payload)) {
-        const a = action.payload.some(innerAction => isAddFormData(innerAction, formId));
-        console.log(a);
-        return a;
+        return action.payload.some(innerAction => isAddFormData(innerAction, formId));
     }
-    const aa = isAddFormData(action, formId) || isRequestFilterFormFieldOrgUnits(action, formId, elementId);
-    console.log(aa);
-    return aa;
+    return isAddFormData(action, formId) || isRequestFilterFormFieldOrgUnits(action, formId, elementId);
 };
 
 export const filterFormFieldOrgUnitsEpic = (action$: InputObservable, store: ReduxStore) =>

@@ -57,14 +57,14 @@ const options = [
         name: 'Selected',
         value: 'SELECTED',
     },
-    {
+    /*{
         name: 'Immidiate children',
         value: 'CHILDREN',
     },
     {
         name: 'Children',
         value: 'DESCENDANTS',
-    },
+    },*/
 ];
 
 const errorMessage = 'Please select an organisation unit';
@@ -73,7 +73,9 @@ class SearchOrgUnitSelector extends React.Component<Props> {
     gotoInstance: any;
 
     onSelectOrgUnitScope = (value: any) => {
-        this.props.onSelectOrgUnitScope(this.props.searchId, value);
+        if (value) {
+            this.props.onSelectOrgUnitScope(this.props.searchId, value);
+        }
     }
     onSetOrgUnit = (orgUnit: ?Object) => {
         this.props.onSetOrgUnit(this.props.searchId, orgUnit);

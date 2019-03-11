@@ -12,8 +12,6 @@ import { withAsyncHandler } from './asyncHandlerHOC';
 
 const styles = () => ({
     container: {
-        paddingTop: 10,
-        paddingBottom: 10,
     },
     containerCustomForm: {
         paddingTop: 10,

@@ -43,7 +43,6 @@ import withWarningOutput from '../../../DataEntry/dataEntryOutput/withWarningOut
 import newEventSaveTypes from './newEventSaveTypes';
 import labelTypeClasses from './dataEntryFieldLabels.mod.css';
 import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
-import withBrowserBackWarning from '../../../DataEntry/withBrowserBackWarning';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -372,6 +371,7 @@ const dataEntryFilterProps = (props: Object) => {
     return passOnProps;
 };
 
+
 const CleanUpHOC = withCleanUpHOC()(withFilterProps(dataEntryFilterProps)(DataEntry));
 const RelationshipField = withDataEntryFieldIfApplicable(buildRelationshipsSettingsFn())(CleanUpHOC);
 const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);
@@ -383,8 +383,7 @@ const WarningOutput = withWarningOutput()(IndicatorOutput);
 const ErrorOutput = withErrorOutput()(WarningOutput);
 const CancelableDataEntry = withCancelButton(getCancelOptions)(ErrorOutput);
 const SaveableDataEntry = withSaveHandler(saveHandlerConfig)(withMainButton()(CancelableDataEntry));
-const CompletableDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(SaveableDataEntry);
-const WrappedDataEntry = withBrowserBackWarning()(CompletableDataEntry);
+const WrappedDataEntry = withDataEntryField(buildCompleteFieldSettingsFn())(SaveableDataEntry);
 
 type Props = {
     formFoundation: RenderFoundation,

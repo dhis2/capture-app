@@ -26,6 +26,7 @@ type ColumnsOrderFromState = Array<ColumnOrderFromState>;
 const programIdSelector = state => state.currentSelections.programId;
 const columnsOrderStateSelector = state => state.workingListsColumnsOrder.main;
 
+// $FlowFixMe
 export const makeColumnsSelector = () => createSelector(
     programIdSelector,
     columnsOrderStateSelector,
@@ -75,6 +76,7 @@ const createEventsContainer = (events, eventsValues, sortOrder): Array<EventCont
             eventValues: eventsValues[eventId],
         }));
 
+// $FlowFixMe
 export const makeCreateEventsContainer = () => createSelector(
     eventsMainDataSelector,
     eventsValuesSelector,
@@ -102,9 +104,6 @@ const createDeepEqualSelector = createSelectorCreator(
 const eventsContainerSelector = eventContainers => eventContainers;
 
 const buildWorkingListData = (eventsContainer: Array<EventContainer>) => {
-
-    console.log('buildWorkingListData', eventsContainer);
-
     if (eventsContainer.length === 0) {
         return [];
     }
@@ -125,7 +124,7 @@ const buildWorkingListData = (eventsContainer: Array<EventContainer>) => {
         });
 };
 
-
+// $FlowFixMe
 export const makeCreateWorkingListData = () => createDeepEqualSelector(
     eventsContainerSelector,
     eventsContainer =>
