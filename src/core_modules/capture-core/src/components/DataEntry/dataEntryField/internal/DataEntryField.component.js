@@ -31,6 +31,7 @@ type Props = {
     valueMeta: ValueMetaInput,
     itemId: string,
     onUpdateFieldInner: (value: any, valueMeta: ValueMetaUpdateOutput, fieldId: string, dataEntryId: string, itemId: string, onUpdateField: ?Function) => void,
+    componentProps: Object,
 };
 
 type Options = {
@@ -87,8 +88,11 @@ class DataEntryField extends React.Component<Props> {
             validatorContainers,
             propName,
             onUpdateField,
+            onUpdateFieldInner,
             valueMeta,
             itemId,
+            dataEntryId,
+            componentProps,
             ...passOnProps
         } = this.props;
         const { isValid, type, ...passOnValueMeta } = valueMeta;
@@ -102,6 +106,7 @@ class DataEntryField extends React.Component<Props> {
                     validationAttempted={!!(completionAttempted || saveAttempted)}
                     {...passOnValueMeta}
                     {...passOnProps}
+                    {...componentProps}
                 />
             </div>
         );

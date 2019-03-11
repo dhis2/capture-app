@@ -6,6 +6,7 @@ import { errorCreator } from 'capture-core-utils';
 import placements from '../constants/placements.const';
 import DataEntryField from './internal/DataEntryField.component';
 import getDataEntryKey from '../common/getDataEntryKey';
+import { makeReselectComponentProps } from './withDataEntryField.selectors';
 
 import type { ValidatorContainer } from './internal/dataEntryField.utils';
 
@@ -37,6 +38,11 @@ type Settings = {
 
 const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentType<any>) => {
     class DataEntryFieldBuilder extends React.Component<Props> {
+        reselectComponentProps: (?Object) => Object;
+        constructor(props: Props) {
+            super(props);
+            this.reselectComponentProps = makeReselectComponentProps();
+        }
         handleRef = (instance: DataEntryField) => {
             if (this.props.dataEntryFieldRef) {
                 const { getPropName } = settings;
@@ -58,7 +64,7 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
             const { getComponent, getComponentProps, getValidatorContainers, getPropName, onUpdateField } = settings;
 
             const Component = getComponent(this.props);
-            const componentProps = getComponentProps && getComponentProps(this.props);
+            const componentProps = this.reselectComponentProps(getComponentProps && getComponentProps(this.props));
             const validatorContainers = (getValidatorContainers && getValidatorContainers(this.props)) || [];
 
             return (
@@ -71,7 +77,7 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
                     validatorContainers={validatorContainers}
                     propName={getPropName(this.props)}
                     onUpdateField={onUpdateField}
-                    {...componentProps}
+                    componentProps={componentProps}
                 />
             );
         }
