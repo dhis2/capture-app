@@ -26,7 +26,7 @@ const renderSectionHeader = () => {
 };
 
 const RegistrationSection = (props: Props) => {
-    const { classes, ...passOnProps } = props;
+    const { classes } = props;
     return (
         <Section
             header={renderSectionHeader()}

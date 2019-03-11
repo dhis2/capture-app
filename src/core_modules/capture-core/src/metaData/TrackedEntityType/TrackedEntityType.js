@@ -1,6 +1,5 @@
 // @flow
 import isFunction from 'd2-utilizr/src/isFunction';
-import { RenderFoundation } from '../RenderFoundation';
 import { SearchGroup } from '../SearchGroup';
 import { DataElement } from '../DataElement';
 import { TeiRegistration } from './TeiRegistration';

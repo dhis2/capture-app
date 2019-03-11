@@ -14,7 +14,7 @@ type Props = {
 };
 
 const SectionContents = (props: Props) => {
-    const { classes, ...passOnProps } = props;
+    const { classes } = props;
     return (
         <div
             className={classes.sectionFieldsInSection}
