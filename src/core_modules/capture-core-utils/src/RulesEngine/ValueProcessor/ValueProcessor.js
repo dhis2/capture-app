@@ -15,7 +15,7 @@ export default class ValueProcessor {
     };
 
     static addQuotesToValueIfString(value: any) {
-        return isString(value) ? `"${value}"` : value;
+        return isString(value) ? `'${value}'` : value;
     }
 
     converterObject: IConvertInputRulesValue;

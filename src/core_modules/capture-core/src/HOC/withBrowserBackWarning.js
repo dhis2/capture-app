@@ -1,25 +1,35 @@
 // @flow
 import * as React from 'react';
-import i18n from '@dhis2/d2-i18n';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router'; //eslint-disable-line
-
-import ConfirmDialog from '../Dialogs/ConfirmDialog.component';
-import getDataEntryKey from './common/getDataEntryKey';
-import getDataEntryHasChanges from './common/dataEntryHasChanges';
+import ConfirmDialog from '../components/Dialogs/ConfirmDialog.component';
 
 type Props = {
     dataEntryHasChanges: boolean,
     history: Object,
+    inEffect: boolean,
+    location: any,
+    match: any,
+    staticContext: any,
 };
 
 type State = {
     dialogOpen: boolean,
 };
 
-const getEventListener = (InnerComponent: React.ComponentType<any>) =>
+type DialogConfig = {
+    header: string,
+    text: string,
+    confirmText: string,
+    cancelText: string,
+}
+
+const getEventListener = (InnerComponent: React.ComponentType<any>, dialogConfig: DialogConfig) =>
     class BrowserBackWarningForDataEntryHOC extends React.Component<Props, State> {
         unblock: () => void;
+        Dialog: React.Element<any>;
+        historyLength: number;
+
         constructor(props: Props) {
             super(props);
             this.state = {
@@ -29,9 +39,11 @@ const getEventListener = (InnerComponent: React.ComponentType<any>) =>
 
         componentDidMount() {
             const { history } = this.props;
+            this.historyLength = window.history.length;
             this.unblock = history.block((nextLocation, method) => {
-                const { dataEntryHasChanges } = this.props;
-                if (method === 'POP' && dataEntryHasChanges) {
+                const { inEffect } = this.props;
+                const isBack = window.history.length === this.historyLength;
+                if (method === 'POP' && inEffect && isBack) {
                     this.setState({
                         dialogOpen: true,
                     });
@@ -50,7 +62,7 @@ const getEventListener = (InnerComponent: React.ComponentType<any>) =>
                 dialogOpen: false,
             });
             this.unblock();
-            //this.props.history.goBack();
+            this.props.history.goBack();
         }
 
         handleDialogCancel = () => {
@@ -60,17 +72,14 @@ const getEventListener = (InnerComponent: React.ComponentType<any>) =>
         }
 
         render() {
-            const { dataEntryHasChanges, history, location, match, staticContext, ...passOnProps } = this.props;
+            const { inEffect, history, location, match, staticContext, ...passOnProps } = this.props;
             return (
                 <React.Fragment>
                     <InnerComponent
                         {...passOnProps}
                     />
                     <ConfirmDialog
-                        header={i18n.t('Unsaved changes')}
-                        text={i18n.t('Leaving this page will discard the changes you made to this event.')}
-                        confirmText={i18n.t('Yes, discard')}
-                        cancelText={i18n.t('No, stay here')}
+                        {...dialogConfig}
                         onConfirm={this.handleDialogConfirm}
                         open={this.state.dialogOpen}
                         onCancel={this.handleDialogCancel}
@@ -80,19 +89,19 @@ const getEventListener = (InnerComponent: React.ComponentType<any>) =>
         }
     };
 
-const mapStateToProps = (state: ReduxState, props: { id: string }) => {
-    const itemId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].itemId;
-    const key = getDataEntryKey(props.id, itemId);
-    const dataEntryHasChanges = getDataEntryHasChanges(state, key);
+type InEffectFn = (state: ReduxState, props: Object) => boolean;
+
+const getMapStateToProps = (inEffectFn: InEffectFn) => (state: ReduxState, props: { id: string }) => {
+    const inEffect = inEffectFn(state, props);
     return {
-        dataEntryHasChanges,
+        inEffect,
     };
 };
 
 const mapDispatchToProps = () => ({});
 
-export default () =>
+export default (dialogConfig: DialogConfig, inEffect: InEffectFn) =>
     (InnerComponent: React.ComponentType<any>) =>
         // $FlowSuppress
         connect(
-            mapStateToProps, mapDispatchToProps)(withRouter(getEventListener(InnerComponent)));
+            getMapStateToProps(inEffect), mapDispatchToProps)(withRouter(getEventListener(InnerComponent, dialogConfig)));

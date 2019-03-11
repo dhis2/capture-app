@@ -18,8 +18,10 @@ import dataEntryHasChanges from '../../../DataEntry/common/dataEntryHasChanges';
 
 const mapStateToProps = (state: ReduxState) => {
     const formInputInProgess = state.currentSelections.complete && dataEntryHasChanges(state, 'singleEvent-newEvent');
+    const inAddRelationship = state.newEventPage.showAddRelationship;
     return {
         formInputInProgess,
+        inAddRelationship,
     };
 };
 

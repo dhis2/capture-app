@@ -53,7 +53,7 @@ export const teiSearchFilterOrgUnitsEpic = (action$: InputObservable) =>
                         'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
                     ].join(','),
                     paging: true,
-                    withinUserHierarchy: true,
+                    withinUserSearchHierarchy: true,
                     query: searchText,
                     pageSize: 15,
                 })

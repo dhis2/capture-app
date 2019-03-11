@@ -23,6 +23,7 @@ type Props = {
     onResetProgramId: (baseAction: ReduxAction<any, any>) => void,
     formInputInProgess: boolean,
     onResetDataEntry: () => void,
+    inAddRelationship: boolean,
 };
 
 type State = {
@@ -47,7 +48,7 @@ class SelectorLevel extends Component<Props, State> {
     handleClickNew: () => void;
     handleAcceptNew: () => void;
 
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
 
         this.state = {
@@ -72,8 +73,10 @@ class SelectorLevel extends Component<Props, State> {
         this.handleAcceptNew = this.handleAcceptNew.bind(this);
     }
 
+    dontShowWarning = () => !this.props.formInputInProgess && !this.props.inAddRelationship;
+
     handleOpenStartAgainWarning() {
-        if (!this.props.formInputInProgess) {
+        if (this.dontShowWarning()) {
             this.props.onStartAgain();
             return;
         }
@@ -81,7 +84,7 @@ class SelectorLevel extends Component<Props, State> {
     }
 
     handleOpenOrgUnitWarning() {
-        if (!this.props.formInputInProgess) {
+        if (this.dontShowWarning()) {
             this.props.onResetOrgUnitId();
             return;
         }
@@ -89,15 +92,15 @@ class SelectorLevel extends Component<Props, State> {
     }
 
     handleOpenProgramWarning(baseAction: ReduxAction<any, any>) {
-        if (!this.props.formInputInProgess) {
+        if (this.dontShowWarning()) {
             this.props.onResetProgramId(baseAction);
             return;
         }
         this.setState({ openProgramWarning: baseAction });
     }
 
-    handleOpenCatComboWarning(categoryId) {
-        if (!this.props.formInputInProgess) {
+    handleOpenCatComboWarning(categoryId: string) {
+        if (this.dontShowWarning()) {
             this.props.onResetCategoryOption(categoryId);
             return;
         }
@@ -125,6 +128,7 @@ class SelectorLevel extends Component<Props, State> {
     }
 
     handleAcceptProgram() {
+        // $FlowFixMe
         this.props.onResetProgramId(this.state.openProgramWarning);
         this.handleClose();
     }
@@ -135,7 +139,7 @@ class SelectorLevel extends Component<Props, State> {
     }
 
     handleClickNew() {
-        if (!this.props.formInputInProgess) {
+        if (this.dontShowWarning()) {
             return;
         }
         this.setState({ openNewEventWarning: true });

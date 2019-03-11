@@ -48,14 +48,12 @@ const mapStateToProps = (state: ReduxState, props: { formId: string, elementId: 
     const orgUnitRootsKey = getOrgUnitRootsKey(props.formId, props.elementId);
     const formFieldMisc = state.formsFieldsMisc[props.formId][props.elementId] || {};
     const roots = getOrgUnitRoots(orgUnitRootsKey) || getOrgUnitRoots('searchRoots');
-    const a = {
+    return {
         searchText: formFieldMisc.orgUnitsSearchText,
         ready: !formFieldMisc.orgUnitsLoading,
         treeKey: formFieldMisc.orgUnitsSearchText || 'initial',
         roots,
     };
-    console.log('formfield', a);
-    return a;
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
