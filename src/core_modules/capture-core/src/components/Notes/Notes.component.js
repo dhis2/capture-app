@@ -46,7 +46,7 @@ const styles = theme => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'normal',
-        background: theme.palette.grey[200],
+        background: theme.palette.grey.lighter,
         marginBottom: theme.typography.pxToRem(3),
         fontSize: theme.typography.pxToRem(14),
     },
@@ -63,7 +63,7 @@ const styles = theme => ({
     newNoteContainer: {
     },
     newNoteFormContainer: {
-        background: theme.palette.grey[200],
+        background: theme.palette.grey.lighter,
         padding: theme.typography.pxToRem(10),
     },
     notesContainer: {
@@ -121,6 +121,7 @@ class Notes extends React.Component<Props, State> {
         if (this.props.value) {
             this.props.onAddNote(this.props.value);
         }
+        this.toggleIsOpen();
         this.props.onBlur(null, { touched: false });
     }
 
