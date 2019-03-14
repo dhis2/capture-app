@@ -16,10 +16,10 @@ const FocusTextField = withFocusSaver()(TextField);
 
 type Props = {
     notes: Array<Note>,
-    addNoteDisabled?: ?boolean,
     onAddNote: (value: string) => void,
     onBlur: (value: ?string, options: any) => void,
     value: ?string,
+    readonly?: ?boolean,
     classes: {
         noteItem: string,
         inputContainer: string,
@@ -162,7 +162,7 @@ class Notes extends React.Component<Props, State> {
     )
 
     render = () => {
-        const { notes, classes, addNoteDisabled } = this.props;
+        const { notes, classes, readonly } = this.props;
         return (
             <div className={classes.notesContainer}>
                 <List dense className={classes.notesList}>
@@ -183,7 +183,7 @@ class Notes extends React.Component<Props, State> {
                     ))}
                 </List>
                 {
-                    !addNoteDisabled &&
+                    !readonly &&
                     <div className={classes.newNoteContainer}>
                         { this.state.addIsOpen ? this.renderInput() : this.renderButton() }
                     </div>

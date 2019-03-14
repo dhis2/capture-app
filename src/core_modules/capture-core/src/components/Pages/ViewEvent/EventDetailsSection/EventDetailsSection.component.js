@@ -76,10 +76,12 @@ class EventDetailsSection extends Component<Props> {
             classes,
             onOpenEditEvent,
             showEditEvent,
+            programStage,
         } = this.props;
+        const allowEdit = programStage.stageForm.access.data.write && !showEditEvent;
         return (
             <div className={classes.actionsContainer}>
-                {!showEditEvent &&
+                {allowEdit &&
                     <Button
                         className={classes.button}
                         variant="raised"

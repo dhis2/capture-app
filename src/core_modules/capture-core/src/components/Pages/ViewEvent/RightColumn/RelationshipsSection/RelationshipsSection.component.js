@@ -70,8 +70,9 @@ class RelationshipsSection extends React.Component<Props> {
     ))
     render() {
         const { programStage, eventId, relationships, ready } = this.props;
-
-        const hasRelationshipTypes = programStage.relationshipTypes && programStage.relationshipTypes.length > 0;
+        const relationshipTypes = programStage.relationshipTypes || [];
+        const hasRelationshipTypes = relationshipTypes.length > 0;
+        const allowAdd = programStage.stageForm.access.data.write && relationshipTypes.some(rt => rt.access.data.write);
 
         return hasRelationshipTypes && (
             <ViewEventSection
@@ -82,6 +83,7 @@ class RelationshipsSection extends React.Component<Props> {
                     loadingIndicatorStyle={loadingIndicatorStyle}
                     ready={ready}
                     relationships={relationships}
+                    readonly={!allowAdd}
                     onOpenAddRelationship={this.handleOpenAddRelationship}
                     onRemoveRelationship={this.handleRemoveRelationship}
                     currentEntityId={eventId}

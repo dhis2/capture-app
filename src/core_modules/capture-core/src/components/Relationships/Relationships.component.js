@@ -22,6 +22,7 @@ type Props = {
     onRemoveRelationship: (relationshipClientId: string) => void,
     onOpenAddRelationship: () => void,
     currentEntityId: string,
+    readonly?: ?boolean,
 };
 
 
@@ -101,16 +102,18 @@ class Relationships extends React.Component<Props> {
     canDelete = (relationship: Relationship) => relationship.from.id === this.props.currentEntityId;
 
     render() {
-        const { classes, onOpenAddRelationship } = this.props;
+        const { classes, onOpenAddRelationship, readonly } = this.props;
         return (
             <div className={classes.container}>
                 <div className={classes.relationshipsContainer}>
                     {this.getRelationships()}
                 </div>
                 <div>
-                    <Button onClick={onOpenAddRelationship}>
-                        {i18n.t('Add relationship')}
-                    </Button>
+                    {!readonly &&
+                        <Button onClick={onOpenAddRelationship}>
+                            {i18n.t('Add relationship')}
+                        </Button>
+                    }
                 </div>
 
             </div>
