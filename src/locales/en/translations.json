@@ -56,6 +56,7 @@
     "Online": "",
     "Offline": "",
     "Syncing": "",
+    "Area": "",
     "Basic info": "",
     "Status": "",
     "Comments": "",
@@ -107,7 +108,9 @@
     "An error has occured. See log for details": "",
     "Error saving event": "",
     "Could not save event. See log for details": "",
+    "Set coordinate": "",
     "Delete polygon": "",
+    "Set area": "",
     "Choose one or more dates...": "",
     "Choose a date...": "",
     "Today": ""
