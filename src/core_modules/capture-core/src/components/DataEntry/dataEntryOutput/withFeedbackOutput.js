@@ -47,12 +47,12 @@ const getFeedbackOutput = () =>
                 {feedbackItems.displayTexts &&
                     feedbackItems.displayTexts.map(item => (
                         <ListItem
-                            key={item}
+                            key={item.id}
                             className={classes.listItem}
                             button={false}
                         >
                             <Typography variant="body1">
-                                {item}
+                                {item.message}
                             </Typography>
                         </ListItem>
                     ),
@@ -60,7 +60,7 @@ const getFeedbackOutput = () =>
                 {feedbackItems.displayKeyValuePairs &&
                     feedbackItems.displayKeyValuePairs.map(item => (
                         <ListItem
-                            key={item}
+                            key={item.id}
                             className={classes.listItem}
                             button={false}
                         >

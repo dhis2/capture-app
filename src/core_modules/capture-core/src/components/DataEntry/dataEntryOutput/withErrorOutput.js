@@ -57,11 +57,11 @@ const getErrorOutput = () =>
                 {errorItems &&
                     errorItems.map(item => (
                         <li
-                            key={item}
+                            key={item.id}
                             className={classes.listItem}
                         >
                             <Typography variant="body1">
-                                {item}
+                                {item.message}
                             </Typography>
                         </li>
                     ),
