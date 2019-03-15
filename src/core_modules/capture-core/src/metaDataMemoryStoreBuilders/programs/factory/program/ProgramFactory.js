@@ -8,6 +8,7 @@ import {
     TrackerProgram,
     CategoryCombination,
     Category,
+    CategoryOption,
 } from '../../../../metaData';
 
 import getProgramIconAsync from './getProgramIcon';
@@ -21,6 +22,7 @@ import {
 import type {
     CachedStyle,
     CachedProgramStage,
+    CachedCategoryOption,
     CachedCategory,
     CachedCategoryCombo,
     CachedProgram,
@@ -66,19 +68,27 @@ class ProgramFactory {
         );
     }
 
-    static _buildCategories(cachedCategories: Array<CachedCategory>): Array<Category> {
-        return cachedCategories
-            .map(cachedCategory =>
-                new Category((_this) => {
-                    _this.id = cachedCategory.id;
-                    _this.name = cachedCategory.displayName;
-                    _this.categoryOptions = cachedCategory.categoryOptions ?
-                        cachedCategory.categoryOptions.map(cachedOption => ({
-                            id: cachedOption.id,
-                            name: cachedOption.displayName,
-                        })) : null;
-                }),
-            );
+    static _buildCategoryOptions(cachedCategoryOptions: Array<CachedCategoryOption>): Map<string, CategoryOption> {
+        return cachedCategoryOptions.reduce((accCategoryOptionsMap, cachedOption) => {
+            accCategoryOptionsMap.set(cachedOption.id, new CategoryOption((_this) => {
+                _this.id = cachedOption.id;
+                _this.name = cachedOption.displayName;
+                _this.access = cachedOption.access;
+            }));
+            return accCategoryOptionsMap;
+        }, new Map());
+    }
+
+    static _buildCategories(cachedCategories: Array<CachedCategory>): Map<string, Category> {
+        return cachedCategories.reduce((accCategoriesMap, cachedCategory) => {
+            const category = new Category((_this) => {
+                _this.id = cachedCategory.id;
+                _this.name = cachedCategory.displayName;
+                _this.categoryOptions = ProgramFactory._buildCategoryOptions(cachedCategory.categoryOptions || []);
+            });
+            accCategoriesMap.set(cachedCategory.id, category);
+            return accCategoriesMap;
+        }, new Map());
     }
 
     static _buildCategoriCombination(

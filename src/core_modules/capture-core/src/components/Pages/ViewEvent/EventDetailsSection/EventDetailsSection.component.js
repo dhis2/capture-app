@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { Info as InfoIcon } from '@material-ui/icons';
-import { withStyles } from '@material-ui/core/';
+import { withStyles, Tooltip } from '@material-ui/core/';
 import i18n from '@dhis2/d2-i18n';
 import Button from '../../../Buttons/Button.component';
 import ViewEventSection from '../Section/ViewEventSection.component';
@@ -30,18 +30,23 @@ const getStyles = (theme: Theme) => ({
     button: {
         whiteSpace: 'nowrap',
     },
+    editButtonContainer: {
+        display: 'inline-block',
+    },
 });
 
 type Props = {
     showEditEvent: ?boolean,
     onOpenEditEvent: () => void,
     programStage: ProgramStage,
+    eventAccess: { read: boolean, write: boolean },
     classes: {
         container: string,
         content: string,
         dataEntryContainer: string,
         actionsContainer: string,
         button: string,
+        editButtonContainer: string,
     },
 };
 
@@ -76,19 +81,25 @@ class EventDetailsSection extends Component<Props> {
             classes,
             onOpenEditEvent,
             showEditEvent,
-            programStage,
+            eventAccess,
         } = this.props;
-        const allowEdit = programStage.stageForm.access.data.write && !showEditEvent;
+        const canEdit = eventAccess.write;
         return (
             <div className={classes.actionsContainer}>
-                {allowEdit &&
-                    <Button
-                        className={classes.button}
-                        variant="raised"
-                        onClick={onOpenEditEvent}
-                    >
-                        {i18n.t('Edit event')}
-                    </Button>
+                {!showEditEvent &&
+                <Tooltip title={canEdit ? '' : i18n.t('You dont have access to edit this event')}>
+                    <div className={classes.editButtonContainer}>
+                        <Button
+                            className={classes.button}
+                            variant="raised"
+                            onClick={onOpenEditEvent}
+                            disabled={!canEdit}
+                        >
+                            {i18n.t('Edit event')}
+                        </Button>
+                    </div>
+                </Tooltip>
+
                 }
             </div>
         );

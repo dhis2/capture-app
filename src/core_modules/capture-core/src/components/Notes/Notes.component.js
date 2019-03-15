@@ -2,11 +2,14 @@
 
 import * as React from 'react';
 import { Editor, Parser } from '@dhis2/d2-ui-rich-text';
+import {
+    List,
+    ListItem,
+    Tooltip,
+    withStyles,
+} from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
-import List from '@material-ui/core/List';
 import { withFocusSaver } from 'capture-ui';
-import ListItem from '@material-ui/core/ListItem';
-import { withStyles } from '@material-ui/core/styles';
 import Button from '../Buttons/Button.component';
 import { TextField } from '../FormFields/New';
 import type { Note } from './notes.types';
@@ -19,7 +22,7 @@ type Props = {
     onAddNote: (value: string) => void,
     onBlur: (value: ?string, options: any) => void,
     value: ?string,
-    readonly?: ?boolean,
+    entityAccess: { read: boolean, write: boolean },
     classes: {
         noteItem: string,
         inputContainer: string,
@@ -81,9 +84,15 @@ const styles = theme => ({
     notesList: {
         padding: 0,
     },
+    newNoteButtonContainer: {
+        display: 'inline-block',
+    },
 });
 
 class Notes extends React.Component<Props, State> {
+    static defaultProps = {
+        entityAccess: { read: true, write: true },
+    }
     innerInstance: ?any;
     constructor(props: Props) {
         super(props);
@@ -155,14 +164,19 @@ class Notes extends React.Component<Props, State> {
         );
     }
 
-    renderButton = () => (
-        <Button onClick={this.toggleIsOpen}>
-            {i18n.t('Write comment')}
-        </Button>
+    renderButton = (canAddComment: boolean) => (
+        <Tooltip title={canAddComment ? '' : i18n.t('You dont have access to write comments')}>
+            <div className={this.props.classes.newNoteButtonContainer}>
+                <Button onClick={this.toggleIsOpen} disabled={!canAddComment}>
+                    {i18n.t('Write comment')}
+                </Button>
+            </div>
+        </Tooltip>
+
     )
 
     render = () => {
-        const { notes, classes, readonly } = this.props;
+        const { notes, classes, entityAccess } = this.props;
         return (
             <div className={classes.notesContainer}>
                 <List dense className={classes.notesList}>
@@ -183,9 +197,8 @@ class Notes extends React.Component<Props, State> {
                     ))}
                 </List>
                 {
-                    !readonly &&
                     <div className={classes.newNoteContainer}>
-                        { this.state.addIsOpen ? this.renderInput() : this.renderButton() }
+                        { this.state.addIsOpen ? this.renderInput() : this.renderButton(entityAccess.write) }
                     </div>
                 }
 

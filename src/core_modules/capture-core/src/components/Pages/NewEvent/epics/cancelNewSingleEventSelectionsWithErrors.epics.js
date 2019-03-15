@@ -4,6 +4,10 @@ import {
     actionTypes as dataEntrySelectionsIncompleteActionTypes,
 } from '../SelectionsIncomplete/dataEntrySelectionsIncomplete.actions';
 
+import {
+    actionTypes as dataEntrySelectionsNoAccessActionTypes,
+} from '../SelectionsNoAccess/dataEntrySelectionsNoAccess.actions';
+
 const getArguments = (programId: string, orgUnitId: string) => {
     const argArray = [];
     if (programId) {
@@ -16,9 +20,12 @@ const getArguments = (programId: string, orgUnitId: string) => {
     return argArray.join('&');
 };
 
-export const cancelNewEventIncompleteSelectionsLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
+export const cancelNewEventSelectionsWithErrorLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(dataEntrySelectionsIncompleteActionTypes.CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE)
+    action$.ofType(
+        dataEntrySelectionsIncompleteActionTypes.CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE,
+        dataEntrySelectionsNoAccessActionTypes.CANCEL_NEW_EVENT_FROM_SELECTIONS_NO_ACCESS_RETURN_TO_MAIN_PAGE,
+    )
         .map(() => {
             const state = store.getState();
             const { programId, orgUnitId } = state.currentSelections;

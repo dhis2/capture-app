@@ -102,6 +102,7 @@ export type CachedProgramStage = {
 export type CachedCategoryOption = {
     id: string,
     displayName: string,
+    access: Object,
 };
 
 export type CachedCategory = {

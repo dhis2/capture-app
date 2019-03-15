@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-03-11T19:01:58.900Z\n"
-"PO-Revision-Date: 2019-03-11T19:01:58.900Z\n"
+"POT-Creation-Date: 2019-03-15T12:11:11.721Z\n"
+"PO-Revision-Date: 2019-03-15T12:11:11.721Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -254,6 +254,9 @@ msgstr ""
 msgid "Syncing"
 msgstr ""
 
+msgid "You dont have access to write comments"
+msgstr ""
+
 msgid "Basic info"
 msgstr ""
 
@@ -397,6 +400,9 @@ msgstr ""
 msgid "Select a category option to start reporting"
 msgstr ""
 
+msgid "You dont have access to create a new program in the current selections"
+msgstr ""
+
 msgid "Create person and link"
 msgstr ""
 
@@ -442,6 +448,9 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
+msgid "You dont have access to edit this event"
+msgstr ""
+
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
@@ -481,6 +490,12 @@ msgid "Select program"
 msgstr ""
 
 msgid "No programs available."
+msgstr ""
+
+msgid "You dont have access to delete this relationship"
+msgstr ""
+
+msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"

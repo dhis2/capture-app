@@ -4,6 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import SelectionsComplete from './SelectionsComplete.component';
 import withBrowserBackWarning from '../../../../HOC/withBrowserBackWarning';
 import dataEntryHasChanges from '../../../DataEntry/common/dataEntryHasChanges';
+import { makeEventAccessSelector } from './selectionsComplete.selectors';
 
 const dialogConfig = {
     header: i18n.t('Unsaved changes'),
@@ -14,12 +15,16 @@ const dialogConfig = {
 
 const inEffect = (state: ReduxState) => dataEntryHasChanges(state, 'singleEvent-newEvent') || state.newEventPage.showAddRelationship;
 
-const mapStateToProps = (state: ReduxState) => ({
-    showAddRelationship: !!state.newEventPage.showAddRelationship,
-});
+const makeMapStateToProps = () => {
+    const eventAccessSelector = makeEventAccessSelector();
+    return (state: ReduxState) => ({
+        showAddRelationship: !!state.newEventPage.showAddRelationship,
+        eventAccess: eventAccessSelector(state),
+    });
+};
 
 const mapDispatchToProps = () => ({
 });
 
 // $FlowSuppress
-export default connect(mapStateToProps, mapDispatchToProps)(withBrowserBackWarning(dialogConfig, inEffect)(SelectionsComplete));
+export default connect(makeMapStateToProps, mapDispatchToProps)(withBrowserBackWarning(dialogConfig, inEffect)(SelectionsComplete));
