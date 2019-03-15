@@ -48,7 +48,7 @@ export const filterFormFieldOrgUnitsEpic = (action$: InputObservable, store: Red
                     ].join(','),
                     paging: false,
                     query: searchText,
-                    inUserSearchHierarchy: true,
+                    withinUserSearchHierarchy: true,
                 })
                 .then(orgUnitCollection => ({ orgUnitArray: orgUnitCollection.toArray(), searchText, formId, elementId }))
                 .catch(error => ({ error, formId, elementId }))).takeUntil(action$.filter(a => cancelActionFilter(a, formId, elementId)));
