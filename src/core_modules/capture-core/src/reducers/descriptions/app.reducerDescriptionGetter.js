@@ -7,8 +7,6 @@ import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
     selectorActionTypes as newEventPageSelectorActionTypes,
     selectionsIncompleteActionTypes as newEventPageSelectionsIncompleteActionTypes,
-    selectionsNoAccessActionTypes as newEventPageSelectionsNoAccessActionTypes,
-
 } from '../../components/Pages/NewEvent';
 import { actionTypes as tempSelectorActionTypes } from '../../components/Pages/MainPage/tempSelector.actions';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
@@ -96,12 +94,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
     [newEventPageSelectionsIncompleteActionTypes.CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE]: (state) => {
-        const newState = { ...state };
-        newState.page = null;
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [newEventPageSelectionsNoAccessActionTypes.CANCEL_NEW_EVENT_FROM_SELECTIONS_NO_ACCESS_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;
         newState.locationSwitchInProgress = true;

@@ -3,7 +3,7 @@ import { combineEpics } from 'redux-observable';
 import {
     cancelNewEventEpic,
     cancelNewEventLocationChangeEpic,
-    cancelNewEventSelectionsWithErrorLocationChangeEpic,
+    cancelNewEventIncompleteSelectionsLocationChangeEpic,
     resetDataEntryForNewEventEpic,
     openNewEventInDataEntryEpic,
     resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
@@ -206,7 +206,7 @@ export default combineEpics(
     saveNewEventEpic,
     cancelNewEventLocationChangeEpic,
     cancelNewEventEpic,
-    cancelNewEventSelectionsWithErrorLocationChangeEpic,
+    cancelNewEventIncompleteSelectionsLocationChangeEpic,
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,
     openEditEventInDataEntryEpic,

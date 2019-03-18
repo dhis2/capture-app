@@ -73,7 +73,7 @@ class DataEntrySelectionsNoAccess extends Component<Props> {
                     <div
                         className={classes.contents}
                     >
-                        {i18n.t('You dont have access to create a new program in the current selections')}
+                        {i18n.t('You dont have access to create an event in the current selections')}
                     </div>
                 </Paper>
                 <div

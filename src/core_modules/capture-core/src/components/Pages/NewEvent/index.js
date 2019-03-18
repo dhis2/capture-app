@@ -26,15 +26,11 @@ export {
     actionTypes as selectionsIncompleteActionTypes,
 } from './SelectionsIncomplete/dataEntrySelectionsIncomplete.actions';
 
-export {
-    actionTypes as selectionsNoAccessActionTypes,
-} from './SelectionsNoAccess/dataEntrySelectionsNoAccess.actions';
-
 // epics
 export { cancelNewEventEpic, cancelNewEventLocationChangeEpic } from './DataEntry/epics/cancelNewSingleEvent.epics';
 export {
-    cancelNewEventSelectionsWithErrorLocationChangeEpic,
-} from './epics/cancelNewSingleEventSelectionsWithErrors.epics';
+    cancelNewEventIncompleteSelectionsLocationChangeEpic,
+} from './epics/cancelNewSingleEventSelectionsIncomplete.epics';
 export {
     resetDataEntryForNewEventEpic,
     openNewEventInDataEntryEpic,

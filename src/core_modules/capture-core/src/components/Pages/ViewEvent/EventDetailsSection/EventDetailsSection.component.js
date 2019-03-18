@@ -57,6 +57,7 @@ class EventDetailsSection extends Component<Props> {
             onOpenEditEvent,
             showEditEvent,
             programStage,
+            eventAccess,
             ...passOnProps } = this.props;
 
         const formFoundation = programStage.stageForm;

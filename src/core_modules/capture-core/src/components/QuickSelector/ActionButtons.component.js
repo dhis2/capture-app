@@ -3,11 +3,8 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 
-import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
-
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
-import Tooltip from '@material-ui/core/Tooltip';
 import LinkButton from '../Buttons/LinkButton.component';
 import { TrackerProgram } from '../../metaData';
 
