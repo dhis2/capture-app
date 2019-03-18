@@ -19,6 +19,7 @@ import getOrganisationUnitsLoadSpecification
 import getProgramsData from '../programs/getPrograms';
 import getTrackedEntityAttributes from '../trackedEntityAttributes/getTrackedEntityAttributes';
 import getOptionSets from '../optionSets/getOptionSets';
+import loadCategories from '../categories/loadCategories';
 
 import objectStores from './metaDataObjectStores.const';
 import { set as setStorageController } from '../../metaDataStores/storageController/metaDataStorageController';
@@ -64,7 +65,11 @@ export default async function loadMetaData() {
     const storageController = createStorageController();
     await openStorage(storageController);
     await loadCoreMetaData(storageController);
-    const { missingPrograms, missingOptionSetIdsFromPrograms } = await getProgramsData(storageController, {
+    const {
+        missingPrograms,
+        missingOptionSetIdsFromPrograms,
+        categoryIds,
+    } = await getProgramsData(storageController, {
         [programStoresKeys.PROGRAMS]: objectStores.PROGRAMS,
         [programStoresKeys.PROGRAM_RULES]: objectStores.PROGRAM_RULES,
         [programStoresKeys.PROGRAM_RULES_VARIABLES]: objectStores.PROGRAM_RULES_VARIABLES,
@@ -90,5 +95,6 @@ export default async function loadMetaData() {
     }, trackedEntityAttributesFromPrograms);
 
     const missingOptionSetIds = [...missingOptionSetIdsFromPrograms, ...missingOptionSetIdsFromTrackedEntityAttributes];
+    await loadCategories(storageController, objectStores.CATEGORIES, categoryIds);
     await getOptionSets(missingOptionSetIds, objectStores.OPTION_SETS, storageController);
 }

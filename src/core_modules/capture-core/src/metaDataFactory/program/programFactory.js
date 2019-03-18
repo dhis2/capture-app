@@ -150,6 +150,7 @@ type CachedOptionSet = {
 
 let currentLocale: ?string;
 let currentD2OptionSets: ?Array<CachedOptionSet>;
+let currentCategories: Object;
 
 const propertyNames = {
     NAME: 'NAME',
@@ -378,17 +379,30 @@ async function buildStage(d2ProgramStage: CachedProgramStage) {
     return stage;
 }
 
+function buildCategoryOptions(cachedCategoryOptions: Array<Object>) {
+    return cachedCategoryOptions
+        .map(cachedOption => ({
+            id: cachedOption.id,
+            name: cachedOption.displayName,
+            organisationUnitIds: cachedOption.organisationUnitIds,
+        }));
+}
 
-function buildCategories(cachedCategories: Array<CachedCategory>) {
-    return cachedCategories
-        .map(cachedCategory =>
+function buildCategories(cachedProgramCategories: Array<CachedCategory>) {
+    return cachedProgramCategories
+        .map(cachedProgramCategory =>
             new Category((_this) => {
-                _this.id = cachedCategory.id;
-                _this.name = cachedCategory.displayName;
-                _this.categoryOptions = cachedCategory.categoryOptions ? cachedCategory.categoryOptions.map(cachedOption => ({
-                    id: cachedOption.id,
-                    name: cachedOption.displayName,
-                })) : null;
+                const id = cachedProgramCategory.id;
+                _this.id = id;
+                const cachedCategory = currentCategories[id];
+                if (!cachedCategory) {
+                    log.error(errorCreator('Could not retrieve cachedCategory')({ id }));
+                    _this.categoryOptions = [];
+                } else {
+                    _this.name = cachedCategory.displayName;
+                    _this.categoryOptions =
+                        buildCategoryOptions(cachedCategory.categoryOptions);
+                }
             }),
         );
 }
@@ -542,9 +556,11 @@ export default async function buildProgramCollection(
     cachedProgramRulesVariables: ?Array<ProgramRuleVariable>,
     cachedProgramRules: ?Array<ProgramRule>,
     cachedProgramIndicators: ?Array<CachedProgramIndicator>,
+    cachedCategories: Object,
     locale: ?string) {
     currentLocale = locale;
     currentD2OptionSets = cachedOptionSets;
+    currentCategories = cachedCategories;
 
     if (cachedPrograms) {
         const promisePrograms = cachedPrograms.map(async (d2Program) => {

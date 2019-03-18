@@ -130,6 +130,15 @@ async function getOptionSetIdsToRetrieve(metaPrograms, optionSetStore: string, s
     return optionSetIds;
 }
 
+function getCategories(missingPrograms) {
+    return missingPrograms
+        ? missingPrograms.reduce((accCategories, program) => {
+            const programCategories = program.categoryCombo &&
+                program.categoryCombo.categories;
+            return programCategories ? [...accCategories, ...programCategories] : [];
+        }, []) : [];
+}
+
 export default async function getProgramsData(storageController: StorageController, stores: Object) {
     const metaPrograms = await metaProgramsSpec.get();
     const missingOptionSetIdsFromPrograms = await getOptionSetIdsToRetrieve(metaPrograms, stores[programsStoresKeys.OPTION_SETS], storageController);
@@ -137,16 +146,28 @@ export default async function getProgramsData(storageController: StorageControll
 
     const programBatches = chunk(missingPrograms, batchSize);
 
-    await Promise.all(
+    const programGroups = await Promise.all(
         programBatches.map(
             batch =>
                 getPrograms(batch, stores[programsStoresKeys.PROGRAMS], storageController)
-                    .then(programs => getProgramRules(programs, stores[programsStoresKeys.PROGRAM_RULES], storageController)
-                        .then(() => getProgramRulesVariables(programs, stores[programsStoresKeys.PROGRAM_RULES_VARIABLES], storageController))
-                        .then(() => getProgramIndicators(programs, stores[programsStoresKeys.PROGRAM_INDICATORS], storageController))),
+                    .then(programs =>
+                        getProgramRules(programs, stores[programsStoresKeys.PROGRAM_RULES], storageController)
+                            .then(() => getProgramRulesVariables(programs, stores[programsStoresKeys.PROGRAM_RULES_VARIABLES], storageController))
+                            .then(() => getProgramIndicators(programs, stores[programsStoresKeys.PROGRAM_INDICATORS], storageController))
+                            .then(() => programs),
+                    ),
         ),
     );
 
+    const missingProgramsWithData = programGroups
+        .filter(programs => programs)
+        // $FlowFixMe
+        .reduce((accPrograms, programs) => ([...accPrograms, ...programs]), []);
 
-    return { missingPrograms, missingOptionSetIdsFromPrograms };
+
+    return {
+        missingPrograms,
+        missingOptionSetIdsFromPrograms,
+        categoryIds: getCategories(missingProgramsWithData),
+    };
 }

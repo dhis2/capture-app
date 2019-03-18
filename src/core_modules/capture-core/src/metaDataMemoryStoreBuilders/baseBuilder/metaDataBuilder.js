@@ -13,6 +13,7 @@ export default async function buildMetaData(locale: string) {
             stores.PROGRAM_RULES_VARIABLES,
             stores.PROGRAM_RULES,
             stores.PROGRAM_INDICATORS,
+            stores.CATEGORIES,
         );
     const constantsBuilderPromise = buildConstants(stores.CONSTANTS);
     const optionSetsBuilderPromise = buildOptionSets(stores.OPTION_SETS);

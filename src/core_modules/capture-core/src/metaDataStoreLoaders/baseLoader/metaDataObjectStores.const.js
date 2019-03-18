@@ -12,4 +12,5 @@ export default {
     PROGRAM_INDICATORS: 'programIndicators',
     TRACKED_ENTITY_ATTRIBUTES: 'trackedEntityAttributes',
     OPTION_SETS: 'optionSets',
+    CATEGORIES: 'categories',
 };

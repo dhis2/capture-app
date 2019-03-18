@@ -24,6 +24,17 @@ function getProgramIndicators(storageController: StorageController, storeName: s
     return storageController.getAll(storeName);
 }
 
+function getCategories(
+    storageController: StorageController,
+    storeName: string,
+): Promise<Object> {
+    return storageController.getAll(storeName)
+        .then(categoryArray => categoryArray.reduce((accCategories, category) => {
+            accCategories[category.id] = category;
+            return accCategories;
+        }, {}));
+}
+
 async function getBuilderPrerequisites(...storeNames: Array<string>) {
     const storageController = getStorageController();
 
@@ -32,6 +43,7 @@ async function getBuilderPrerequisites(...storeNames: Array<string>) {
     const cachedProgramRulesVariables = getProgramRulesVariables(storageController, storeNames[2]);
     const cachedProgramRules = getProgramRules(storageController, storeNames[3]);
     const cachedProgramIndicatorsPromise = getProgramIndicators(storageController, storeNames[4]);
+    const cachedCategoriesPromise = getCategories(storageController, storeNames[5]);
 
     const values =
         await Promise.all([
@@ -40,6 +52,7 @@ async function getBuilderPrerequisites(...storeNames: Array<string>) {
             cachedProgramRulesVariables,
             cachedProgramRules,
             cachedProgramIndicatorsPromise,
+            cachedCategoriesPromise,
         ]);
     return values;
 }
@@ -50,14 +63,17 @@ export default async function buildPrograms(
     optionSetStoreName: string,
     programRulesVariablesStoreName: string,
     programRulesStoreName: string,
-    programIndicatorsStoreName: string) {
-    const [cachedPrograms, cachedOptionSets, cachedProgramRulesVariables, cachedProgramRules, cachedProgramIndicators] =
+    programIndicatorsStoreName: string,
+    categoriesStoreName: string,
+) {
+    const [cachedPrograms, cachedOptionSets, cachedProgramRulesVariables, cachedProgramRules, cachedProgramIndicators, cachedCategories] =
         await getBuilderPrerequisites(
             programStoreName,
             optionSetStoreName,
             programRulesVariablesStoreName,
             programRulesStoreName,
             programIndicatorsStoreName,
+            categoriesStoreName,
         );
 
     await buildProgramCollection(
@@ -66,6 +82,7 @@ export default async function buildPrograms(
         cachedProgramRulesVariables,
         cachedProgramRules,
         cachedProgramIndicators,
+        cachedCategories,
         locale,
     );
 }
