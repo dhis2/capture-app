@@ -8,7 +8,7 @@ export default class CategoryOption {
     _name: string;
     _id: string;
     _access: Access;
-    _organisationUnitIds: ?Array<string>;
+    _organisationUnitIds: ?Object;
 
     constructor(initFn: ?(_this: CategoryOption) => void) {
         this.name = '';
@@ -41,11 +41,11 @@ export default class CategoryOption {
         this._access = access;
     }
 
-    get organisationUnitIds(): ?Array<string> {
+    get organisationUnitIds(): ?Object {
         return this._organisationUnitIds;
     }
 
-    set organisationUnitIds(ids: ?Array<string>) {
+    set organisationUnitIds(ids: ?Object) {
         this._organisationUnitIds = ids;
     }
 }

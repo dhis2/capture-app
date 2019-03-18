@@ -8,14 +8,13 @@ import ClearIcon from '@material-ui/icons/Clear';
 import Grid from '@material-ui/core/Grid';
 import i18n from '@dhis2/d2-i18n';
 
-import programCollection from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
+import { programCollection } from '../../../metaDataMemoryStores';
 import VirtualizedSelect from '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import ProgramList from './ProgramList';
 
-import EventProgram from '../../../metaData/Program/EventProgram';
+import { Program, EventProgram, CategoryOption } from '../../../metaData';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
 import './programSelector.css';
-import Program from '../../../metaData/Program/Program';
 import LinkButton from '../../Buttons/LinkButton.component';
 
 const styles = (theme: Theme) => ({
@@ -227,6 +226,22 @@ class ProgramSelector extends Component<Props> {
         );
     }
 
+    getCategoryOptions(categoryOptions: Array<CategoryOption>) {
+        const { selectedOrgUnitId } = this.props;
+
+        const ouFilteredCategoryOptions = !selectedOrgUnitId ?
+            categoryOptions :
+            categoryOptions
+                .filter(option =>
+                    !option.organisationUnitIds || option.organisationUnitIds[selectedOrgUnitId]);
+
+        return ouFilteredCategoryOptions
+            .map(option => ({
+                label: option.name,
+                value: option.id,
+            }));
+    }
+
     renderWithSelectedProgram(selectedProgram) {
         if (selectedProgram.categoryCombination) {
             return (
@@ -253,11 +268,7 @@ class ProgramSelector extends Component<Props> {
                                                         </div>
                                                     );
                                                 }
-                                                const categoryOptions = Array.from(i.categoryOptions.values())
-                                                    .map(optionCount => ({
-                                                        label: optionCount.name,
-                                                        value: optionCount.id,
-                                                    }));
+                                                const categoryOptions = this.getCategoryOptions([...i.categoryOptions.values()]);
 
                                                 return (
                                                     <VirtualizedSelect
