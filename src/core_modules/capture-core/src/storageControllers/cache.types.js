@@ -102,18 +102,23 @@ export type CachedProgramStage = {
 export type CachedCategoryOption = {
     id: string,
     displayName: string,
+    organisationUnitIds: ?Array<string>,
 };
 
 export type CachedCategory = {
     id: string,
     displayName: string,
-    categoryOptions: ?Array<CachedCategoryOption>,
+    categoryOptions: Array<CachedCategoryOption>,
 };
 
-export type CachedCategoryCombo = {
+export type ProgramCachedCategory = {
+    id: string,
+};
+
+export type ProgramCachedCategoryCombo = {
     id: string,
     displayName: string,
-    categories: ?Array<CachedCategory>,
+    categories: ?Array<ProgramCachedCategory>,
     isDefault: boolean,
 };
 
@@ -146,7 +151,7 @@ export type CachedProgram = {
     organisationUnits: Object,
     programStages: Array<CachedProgramStage>,
     programType: string,
-    categoryCombo: ?CachedCategoryCombo,
+    categoryCombo: ?ProgramCachedCategoryCombo,
     style?: ?CachedStyle,
     minAttributesRequiredToSearch: number,
     programTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute>,

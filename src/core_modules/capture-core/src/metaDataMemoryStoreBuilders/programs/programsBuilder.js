@@ -8,12 +8,14 @@ import {
 import { programCollection } from '../../metaDataMemoryStores';
 import getRulesAndVariablesFromProgramIndicators from './getRulesAndVariablesFromIndicators';
 import { getUserStorageController } from '../../storageControllers';
+import { metaDataStores as stores } from '../../storageControllers/stores';
 
 import type {
     CachedProgram,
     CachedOptionSet,
     CachedRelationshipType,
     CachedTrackedEntityAttribute,
+    CachedCategory,
 } from '../../storageControllers/cache.types';
 import type { CachedProgramIndicator } from './getRulesAndVariablesFromIndicators';
 import type { ProgramRule, ProgramRuleVariable } from '../../RulesEngine/rulesEngine.types';
@@ -39,14 +41,26 @@ function getRelationshipTypes(storageController: StorageController, storeName: s
     return storageController.getAll(storeName);
 }
 
-async function getBuilderPrerequisites(...storeNames: Array<string>) {
+function getCategories(
+    storageController: StorageController,
+    storeName: string,
+): Promise<{[categoryId: string]: CachedCategory}> {
+    return storageController.getAll(storeName)
+        .then(categoryArray => categoryArray.reduce((accCategories, category) => {
+            accCategories[category.id] = category;
+            return accCategories;
+        }, {}));
+}
+
+async function getBuilderPrerequisites() {
     const storageController = getUserStorageController();
 
-    const cachedProgramsPromise = getPrograms(storageController, storeNames[0]);
-    const cachedProgramRulesVariables = getProgramRulesVariables(storageController, storeNames[1]);
-    const cachedProgramRules = getProgramRules(storageController, storeNames[2]);
-    const cachedProgramIndicatorsPromise = getProgramIndicators(storageController, storeNames[3]);
-    const cachedRelationshipTypesPromise = getRelationshipTypes(storageController, storeNames[4]);
+    const cachedProgramsPromise = getPrograms(storageController, stores.PROGRAMS);
+    const cachedProgramRulesVariables = getProgramRulesVariables(storageController, stores.PROGRAM_RULES_VARIABLES);
+    const cachedProgramRules = getProgramRules(storageController, stores.PROGRAM_RULES);
+    const cachedProgramIndicatorsPromise = getProgramIndicators(storageController, stores.PROGRAM_INDICATORS);
+    const cachedRelationshipTypesPromise = getRelationshipTypes(storageController, stores.RELATIONSHIP_TYPES);
+    const cachedCategoriesPromise = getCategories(storageController, stores.CATEGORIES);
 
     const values =
         await Promise.all([
@@ -55,6 +69,7 @@ async function getBuilderPrerequisites(...storeNames: Array<string>) {
             cachedProgramRules,
             cachedProgramIndicatorsPromise,
             cachedRelationshipTypesPromise,
+            cachedCategoriesPromise,
         ]);
     return values;
 }
@@ -149,6 +164,7 @@ async function getBuiltPrograms(
     cachedOptionSets: Map<string, CachedOptionSet>,
     cachedRelationshipTypes: Array<CachedRelationshipType>,
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
+    cachedCategories: {[categoryId: string]: CachedCategory},
     trackedEntityTypeCollection: Map<string, TrackedEntityType>,
     locale: ?string,
 ) {
@@ -160,6 +176,7 @@ async function getBuiltPrograms(
         cachedOptionSets,
         cachedRelationshipTypes,
         cachedTrackedEntityAttributes,
+        cachedCategories,
         trackedEntityTypeCollection,
         locale,
     );
@@ -198,11 +215,6 @@ function postProcessPrograms(
 
 export default async function buildPrograms(
     locale: string,
-    programStoreName: string,
-    programRulesVariablesStoreName: string,
-    programRulesStoreName: string,
-    programIndicatorsStoreName: string,
-    relationshipTypesStoreName: string,
     cachedOptionSets: Map<string, CachedOptionSet>,
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
     trackedEntityTypeCollection: Map<string, TrackedEntityType>,
@@ -213,20 +225,16 @@ export default async function buildPrograms(
         cachedProgramRules,
         cachedProgramIndicators,
         cachedRelationshipTypes,
+        cachedCategories,
     ] =
-        await getBuilderPrerequisites(
-            programStoreName,
-            programRulesVariablesStoreName,
-            programRulesStoreName,
-            programIndicatorsStoreName,
-            relationshipTypesStoreName,
-        );
+        await getBuilderPrerequisites();
 
     const programs = await getBuiltPrograms(
         cachedPrograms,
         cachedOptionSets,
         cachedRelationshipTypes,
         cachedTrackedEntityAttributes,
+        cachedCategories,
         trackedEntityTypeCollection,
         locale,
     );
