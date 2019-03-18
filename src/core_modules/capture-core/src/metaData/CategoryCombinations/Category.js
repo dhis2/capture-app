@@ -2,17 +2,22 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-restricted-syntax */
 import isFunction from 'd2-utilizr/src/isFunction';
-
-type Option = {name: string, id: string};
+import errorCreator from '../../utils/errorCreator';
+import CategoryOption from './CategoryOption';
 
 export default class Category {
     _name: string;
     _id: string;
-    _options: ?Array<Option>;
+    _options: Map<string, CategoryOption>;
+
+    static errorMessages = {
+        CATEGORY_OPTION_NOT_FOUND: 'Category option was not found',
+    };
 
     constructor(initFn: ?(_this: Category) => void) {
         this.name = '';
         this.id = '';
+        this._options = new Map();
         initFn && isFunction(initFn) && initFn(this);
     }
 
@@ -32,15 +37,25 @@ export default class Category {
         this._id = id;
     }
 
-    get categoryOptions(): ?Array<Option> {
+    get categoryOptions(): Map<string, CategoryOption> {
         return this._options;
     }
 
-    set categoryOptions(options: ?Array<Option>) {
+    set categoryOptions(options: Map<string, CategoryOption>) {
         this._options = options;
     }
 
-    getOption(optionId: string) {
-        return this.categoryOptions && this.categoryOptions.find(option => option.id === optionId);
+    getOptionThrowIfNotFound(id: string): CategoryOption {
+        const option = this.categoryOptions.get(id);
+        if (!option) {
+            throw new Error(
+                errorCreator(Category.errorMessages.CATEGORY_OPTION_NOT_FOUND)({ category: this, categoryOptionId: id }),
+            );
+        }
+        return option;
+    }
+
+    getOption(optionId: string): ?CategoryOption {
+        return this.categoryOptions.get(optionId);
     }
 }

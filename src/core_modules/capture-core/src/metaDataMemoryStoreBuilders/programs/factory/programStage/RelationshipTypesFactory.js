@@ -69,8 +69,9 @@ class RelationshipTypesFactory {
 
         const filteredRelationshipTypes =
             this.cachedRelationshipTypes.filter(rt =>
-                this._relationshipConstraintIsStage(rt.fromConstraint) ||
-                this._relationshipConstraintIsStage(rt.toConstraint),
+                rt.access.data.read &&
+                (this._relationshipConstraintIsStage(rt.fromConstraint) ||
+                this._relationshipConstraintIsStage(rt.toConstraint)),
             );
 
         return filteredRelationshipTypes

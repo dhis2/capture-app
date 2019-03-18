@@ -344,6 +344,7 @@ const buildRelationshipsSettingsFn = () => {
             id: 'relationship',
             dataEntryId: props.id,
             onOpenAddRelationship: props.onOpenAddRelationship,
+            writableRelationshipTypes: props.stage.relationshipTypesWhereStageIsFrom.filter(rt => rt.access.data.write),
             fromEntity: 'PROGRAM_STAGE_INSTANCE',
             currentEntityId: 'newEvent',
         }),

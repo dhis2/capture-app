@@ -3,11 +3,8 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 
-import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
-
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
-import Tooltip from '@material-ui/core/Tooltip';
 import LinkButton from '../Buttons/LinkButton.component';
 import { TrackerProgram } from '../../metaData';
 
@@ -70,10 +67,6 @@ class ActionButtons extends Component<Props> {
 
     render() {
         const { classes, showResetButton } = this.props;
-        const program = this.props.selectedProgram ? programs.get(this.props.selectedProgram) : null;
-        
-        const hasWriteAccess = program ?
-            program.access.data.write : true;
 
         return (
             <div className={classes.container}>
@@ -89,18 +82,13 @@ class ActionButtons extends Component<Props> {
                         :
                         null
                 }
-                <Tooltip title={!hasWriteAccess ? i18n.t('No write access') : ''}>
-                    <div className={classes.buttonWrapper}>
-                        <Button
-                            onClick={this.handleNewClick}
-                            color="primary"
-                            disabled={!hasWriteAccess}
-                        >
-                            <AddIcon className={classes.rightButton} />
-                            {this.getButtonText()}
-                        </Button>
-                    </div>
-                </Tooltip>
+                <Button
+                    onClick={this.handleNewClick}
+                    color="primary"
+                >
+                    <AddIcon className={classes.rightButton} />
+                    {this.getButtonText()}
+                </Button>
                 {/* Find button to be included when find(tracked entity instance)
                 is supported:
                 <Button

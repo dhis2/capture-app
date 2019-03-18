@@ -3,6 +3,7 @@ export {
     getProgramAndStageFromProgramId as getProgramAndStageFromProgramIdForEventProgram,
     getStageFromProgramId as getStageFromProgramIdForEventProgram,
     getEventProgramThrowIfNotFound,
+    getEventProgramEventAccess,
 } from './EventProgram';
 export {
     default as getTrackerProgramThrowIfNotFound,

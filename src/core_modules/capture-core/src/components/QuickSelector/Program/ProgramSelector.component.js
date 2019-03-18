@@ -236,39 +236,40 @@ class ProgramSelector extends Component<Props> {
                             <Grid item xs={12} sm={6}>
                                 {this.renderSelectedProgram(selectedProgram)}
                             </Grid>
-                            {selectedProgram.categoryCombination.categories.map(i =>
-                                (<Grid key={i.id} item xs={12} sm={6}>
-                                    <h4 className={this.props.classes.title}>{i.name}</h4>
-                                    {
-                                        (() => {
-                                            if (this.props.selectedCategories && this.props.selectedCategories[i.id]) {
-                                                return (
-                                                    <div className={this.props.classes.selectedText}>
-                                                        <div className={this.props.classes.selectedCategoryNameContainer}>{i.categoryOptions.find(option => option.id === this.props.selectedCategories[i.id]).name}</div>
-                                                        <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetCategoryOption(i.id)}>
-                                                            <ClearIcon className={this.props.classes.selectedButtonIcon} />
-                                                        </IconButton>
-                                                    </div>
-                                                );
-                                            }
-                                            const categoryOptions = i
-                                                .categoryOptions
-                                                .map(optionCount => ({
-                                                    label: optionCount.name,
-                                                    value: optionCount.id,
-                                                }));
+                            {
+                                // $FlowFixMe
+                                Array.from(selectedProgram.categoryCombination.categories.values()).map(i =>
+                                    (<Grid key={i.id} item xs={12} sm={6}>
+                                        <h4 className={this.props.classes.title}>{i.name}</h4>
+                                        {
+                                            (() => {
+                                                if (this.props.selectedCategories && this.props.selectedCategories[i.id]) {
+                                                    return (
+                                                        <div className={this.props.classes.selectedText}>
+                                                            <div className={this.props.classes.selectedCategoryNameContainer}>{i.getOptionThrowIfNotFound(this.props.selectedCategories[i.id]).name}</div>
+                                                            <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetCategoryOption(i.id)}>
+                                                                <ClearIcon className={this.props.classes.selectedButtonIcon} />
+                                                            </IconButton>
+                                                        </div>
+                                                    );
+                                                }
+                                                const categoryOptions = Array.from(i.categoryOptions.values())
+                                                    .map(optionCount => ({
+                                                        label: optionCount.name,
+                                                        value: optionCount.id,
+                                                    }));
 
-                                            return (
-                                                <VirtualizedSelect
-                                                    options={categoryOptions}
-                                                    onSelect={(option) => { this.handleClickCategoryOption(option, i.id); }}
-                                                    value={''}
-                                                    placeholder={i18n.t('Select')}
-                                                />
-                                            );
-                                        })()
-                                    }
-                                </Grid>))
+                                                return (
+                                                    <VirtualizedSelect
+                                                        options={categoryOptions}
+                                                        onSelect={(option) => { this.handleClickCategoryOption(option, i.id); }}
+                                                        value={''}
+                                                        placeholder={i18n.t('Select')}
+                                                    />
+                                                );
+                                            })()
+                                        }
+                                    </Grid>))
                             }
                         </Grid>
                     </Paper>
