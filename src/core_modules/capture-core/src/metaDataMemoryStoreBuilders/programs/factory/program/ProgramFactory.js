@@ -10,6 +10,7 @@ import {
     TrackerProgram,
     CategoryCombination,
     Category,
+    CategoryOption,
 } from '../../../../metaData';
 
 import getProgramIconAsync from './getProgramIcon';
@@ -35,6 +36,18 @@ import type {
 } from '../../../../storageControllers/cache.types';
 
 class ProgramFactory {
+    static _buildCategoryOptions(cachedCategoryOptions: Array<CachedCategoryOption>): Map<string, CategoryOption> {
+        return cachedCategoryOptions.reduce((accCategoryOptionsMap, cachedOption) => {
+            accCategoryOptionsMap.set(cachedOption.id, new CategoryOption((_this) => {
+                _this.id = cachedOption.id;
+                _this.name = cachedOption.displayName;
+                _this.organisationUnitIds = cachedOption.organisationUnitIds;
+                _this.access = cachedOption.access;
+            }));
+            return accCategoryOptionsMap;
+        }, new Map());
+    }
+
     static _buildCategories(
         cachedProgramCategories: Array<ProgramCachedCategory>,
         cachedCategories: {[categoryId: string]: CachedCategory}): Map<string, Category> {
@@ -48,17 +61,11 @@ class ProgramFactory {
                         const cachedCategory = cachedCategories[id];
                         if (!cachedCategory) {
                             log.error(errorCreator('Could not retrieve cachedCategory')({ id }));
+                            _this.categoryOptions = new Map();
                         } else {
                             _this.name = cachedCategory.displayName;
-                            _this.categoryOptions = new Map(cachedCategory.categoryOptions
-                                .map(cachedOption => ([
-                                    cachedOption.id, {
-                                        id: cachedOption.id,
-                                        name: cachedOption.displayName,
-                                        organisationUnitIds: cachedOption.organisationUnitIds,
-                                    },
-                                ])),
-                            );
+                            _this.categoryOptions =
+                                ProgramFactory._buildCategoryOptions(cachedCategory.categoryOptions);
                         }
                     }),
                 ])),

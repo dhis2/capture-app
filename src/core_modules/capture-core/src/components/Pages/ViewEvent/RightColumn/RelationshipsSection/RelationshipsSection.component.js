@@ -20,6 +20,7 @@ type Props = {
     eventId: string,
     programStage: ProgramStage,
     ready: boolean,
+    eventAccess: any,
 }
 
 const loadingIndicatorStyle = {
@@ -69,9 +70,11 @@ class RelationshipsSection extends React.Component<Props> {
         <div className={this.props.classes.relationship}>{relationship}</div>
     ))
     render() {
-        const { programStage, eventId, relationships, ready } = this.props;
+        const { programStage, eventId, relationships, ready, eventAccess } = this.props;
+        const relationshipTypes = programStage.relationshipTypes || [];
+        const hasRelationshipTypes = relationshipTypes.length > 0;
 
-        const hasRelationshipTypes = programStage.relationshipTypes && programStage.relationshipTypes.length > 0;
+        const writableRelationshipTypes = programStage.relationshipTypesWhereStageIsFrom.filter(rt => rt.access.data.write);
 
         return hasRelationshipTypes && (
             <ViewEventSection
@@ -82,9 +85,11 @@ class RelationshipsSection extends React.Component<Props> {
                     loadingIndicatorStyle={loadingIndicatorStyle}
                     ready={ready}
                     relationships={relationships}
+                    writableRelationshipTypes={writableRelationshipTypes}
                     onOpenAddRelationship={this.handleOpenAddRelationship}
                     onRemoveRelationship={this.handleRemoveRelationship}
                     currentEntityId={eventId}
+                    entityAccess={eventAccess}
                 />
             </ViewEventSection>
         );

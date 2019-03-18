@@ -17,6 +17,7 @@ type ApiCategoryOption = {
     organisationUnits: {
         toArray: () => Array<{id: string}>,
     },
+    access: Object,
 };
 
 async function getCategoryOptionsAsync(
@@ -26,7 +27,7 @@ async function getCategoryOptionsAsync(
         _this.modelName = 'categoryOptions';
         _this.modelGetterType = getterTypes.LIST_WITH_PAGER;
         _this.queryParams = {
-            fields: 'id,displayName,categories, organisationUnits',
+            fields: 'id,displayName,categories, organisationUnits, access[*]',
             paging: true,
             pageSize: 10000,
         };
@@ -64,6 +65,7 @@ function getOptionsByCategory(categoryOptionsBatches: Array<Array<ApiCategoryOpt
                 accOptionsByCategoryForBatchInProgress[category.id] = currentOptionsForCategory.set(option.id, {
                     id: option.id,
                     displayName: option.displayName,
+                    access: option.access,
                     organisationUnitIds: organisationUnits && organisationUnits.length > 0 ?
                         organisationUnits.map(ou => ou.id) :
                         null,

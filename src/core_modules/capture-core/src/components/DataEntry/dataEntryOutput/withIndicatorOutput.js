@@ -45,12 +45,12 @@ const getIndicatorOutput = () =>
                 {indicatorItems.displayTexts &&
                     indicatorItems.displayTexts.map(item => (
                         <ListItem
-                            key={item}
+                            key={item.id}
                             className={classes.listItem}
                             button={false}
                         >
                             <Typography variant="body1">
-                                {item}
+                                {item.message}
                             </Typography>
                         </ListItem>
                     ),
@@ -58,7 +58,7 @@ const getIndicatorOutput = () =>
                 {indicatorItems.displayKeyValuePairs &&
                     indicatorItems.displayKeyValuePairs.map(item => (
                         <ListItem
-                            key={item}
+                            key={item.id}
                             className={classes.listItem}
                             button={false}
                         >

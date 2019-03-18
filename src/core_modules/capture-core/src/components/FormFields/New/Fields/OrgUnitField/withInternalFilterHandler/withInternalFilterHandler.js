@@ -46,7 +46,7 @@ export default () =>
             filterOrgUnits(filterText: string) {
                 const { scope, onSearchError } = this.props;
                 const hierarchyProp =
-                    scope === scopes.USER_CAPTURE ? { inUserHierarchy: true } : { inUserSearchHierarchy: true };
+                    scope === scopes.USER_CAPTURE ? { withinUserHierarchy: true } : { withinUserSearchHierarchy: true };
                 this.setState({
                     inProgress: true,
                 });

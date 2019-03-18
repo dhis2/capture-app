@@ -7,20 +7,22 @@ import ViewEvent from './ViewEvent.component';
 import getDataEntryKey from '../../DataEntry/common/getDataEntryKey';
 import { editEventIds } from '../EditEvent/DataEntry/editEventDataEntry.actions';
 import { viewEventIds } from './EventDetailsSection/eventDetails.actions';
-import { getEventProgramThrowIfNotFound } from '../../../metaData';
 import withErrorMessageHandler from '../../../HOC/withErrorMessageHandler';
+import { makeProgramStageSelector, makeEventAccessSelector } from './viewEvent.selectors';
 
-const getStage = (state: ReduxState) => {
-    const program = getEventProgramThrowIfNotFound(state.currentSelections.programId);
-    return program.getStageThrowIfNull();
-};
 
-const mapStateToProps = (state: ReduxState) => {
-    const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
-    return {
-        programStage: getStage(state),
-        error: state.viewEventPage.loadError,
-        currentDataEntryKey: eventDetailsSection.showEditEvent ? getDataEntryKey(editEventIds.dataEntryId, editEventIds.itemId) : getDataEntryKey(viewEventIds.dataEntryId, viewEventIds.itemId),
+const makeMapStateToProps = () => {
+    const programStageSelector = makeProgramStageSelector();
+    const eventAccessSelector = makeEventAccessSelector();
+
+    return (state: ReduxState) => {
+        const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
+        return {
+            programStage: programStageSelector(state),
+            eventAccess: eventAccessSelector(state),
+            error: state.viewEventPage.loadError,
+            currentDataEntryKey: eventDetailsSection.showEditEvent ? getDataEntryKey(editEventIds.dataEntryId, editEventIds.itemId) : getDataEntryKey(viewEventIds.dataEntryId, viewEventIds.itemId),
+        };
     };
 };
 
@@ -31,4 +33,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowSuppress
-export default connect(mapStateToProps, mapDispatchToProps)(withErrorMessageHandler()(ViewEvent));
+export default connect(makeMapStateToProps, mapDispatchToProps)(withErrorMessageHandler()(ViewEvent));

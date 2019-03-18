@@ -103,6 +103,7 @@ export type CachedCategoryOption = {
     id: string,
     displayName: string,
     organisationUnitIds: ?Array<string>,
+    access: Object,
 };
 
 export type CachedCategory = {

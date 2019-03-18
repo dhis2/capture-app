@@ -8,6 +8,7 @@ import ViewEventSection from '../../Section/ViewEventSection.component';
 import ViewEventSectionHeader from '../../Section/ViewEventSectionHeader.component';
 import Notes from '../../../../Notes/Notes.component';
 import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
+import { ProgramStage } from '../../../../../metaData';
 
 const LoadingNotes = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Notes);
 
@@ -18,6 +19,8 @@ type Props = {
     onUpdateNoteField: (value: string) => void,
     fieldValue: ?string,
     ready: boolean,
+    programStage: ProgramStage,
+    eventAccess: any,
 }
 
 const loadingIndicatorStyle = {
@@ -56,7 +59,7 @@ class NotesSection extends React.Component<Props> {
     }
 
     render() {
-        const { notes, fieldValue, onAddNote, ready } = this.props;
+        const { notes, fieldValue, onAddNote, ready, programStage, eventAccess } = this.props;
         return (
             <ViewEventSection
                 collapsable
@@ -66,6 +69,8 @@ class NotesSection extends React.Component<Props> {
                     loadingIndicatorStyle={loadingIndicatorStyle}
                     ready={ready}
                     notes={notes}
+                    entityAccess={eventAccess}
+                    addNotAllowed={!programStage.stageForm.access.data.write}
                     onAddNote={onAddNote}
                     onBlur={this.props.onUpdateNoteField}
                     value={fieldValue}

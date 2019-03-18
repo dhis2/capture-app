@@ -47,7 +47,8 @@ const subValueGetterByElementType = {
             .get(id)
             .then(res => ({
                 id: res.id,
-                displayName: res.displayName,
+                code: res.code,
+                name: res.displayName,
                 path: res.path,
             }))
             .catch((error) => {
