@@ -20,6 +20,20 @@ type ApiCategoryOption = {
     },
 };
 
+async function requestCategoryOptions(specification: ApiSpecification, pageNr: number, pageSize: number) {
+    specification.updateQueryParams({ page: pageNr, pageSize });
+
+    const categoryOptionsContainer = await specification.get();
+    const categoryOptions = categoryOptionsContainer && [...categoryOptionsContainer.values()];
+
+    if (categoryOptions && categoryOptions.length === pageSize) {
+        const categoryOptionsFromPageHierarchy = await requestCategoryOptions(specification, pageNr += 1, pageSize);
+        return [...categoryOptions, ...categoryOptionsFromPageHierarchy];
+    }
+
+    return categoryOptions || [];
+}
+
 async function getCategoryOptionsAsync(
     ids: Array<string>,
 ): Promise<Array<ApiCategoryOption>> {
@@ -29,30 +43,13 @@ async function getCategoryOptionsAsync(
         _this.queryParams = {
             fields: 'id,displayName,categories, organisationUnits',
             paging: true,
-            pageSize: 10000,
+            totalPages: false,
         };
     });
     categoryOptionsApiSpec.setFilter(`categories.id:in:[${ids.toString()}]`);
     categoryOptionsApiSpec.setFilter('access.data.read:in:[true]');
-    // $FlowFixMe
-    const categoryOptionsContainer = await categoryOptionsApiSpec.get();
-    let categoryOptions = [...categoryOptionsContainer.values()];
-
-    // $FlowFixMe
-    const pagePromises = [];
-    const pageCount = categoryOptionsContainer.pager.pageCount;
-    for (let currentPage = categoryOptionsContainer.pager.page + 1; currentPage <= pageCount; currentPage++) {
-        categoryOptionsApiSpec.updateQueryParams({ page: currentPage });
-        pagePromises.push(categoryOptionsApiSpec.get());
-    }
-
-    categoryOptions = (await Promise
-        .all(pagePromises))
-        .reduce((accCategoryOptions, pageData) => {
-            pageData.values && categoryOptions.push(...pageData.values());
-            return categoryOptions;
-        }, categoryOptions);
-    return categoryOptions || [];
+    const categoryOptions = await requestCategoryOptions(categoryOptionsApiSpec, 1, 10000);
+    return categoryOptions;
 }
 
 function getOptionsByCategory(categoryOptionsBatches: Array<Array<ApiCategoryOption>>) {
