@@ -1,8 +1,8 @@
 {
   "name": "capture-app",
   "homepage": ".",
-  "version": "31.0.0",
-  "cacheVersion": "2",
+  "version": "31.0.1",
+  "cacheVersion": "3",
   "private": false,
   "dependencies": {
     "@dhis2/d2-i18n": "^1.0.3",
