@@ -227,6 +227,22 @@ class ProgramSelector extends Component<Props> {
         );
     }
 
+    getCategoryOptions(categoryOptions: Array<Object>) {
+        const { selectedOrgUnitId } = this.props;
+
+        const ouFilteredCategoryOptions = !selectedOrgUnitId ?
+            categoryOptions :
+            categoryOptions
+                .filter(option =>
+                    !option.organisationUnitIds || option.organisationUnitIds[selectedOrgUnitId]);
+
+        return ouFilteredCategoryOptions
+            .map(option => ({
+                label: option.name,
+                value: option.id,
+            }));
+    }
+
     renderWithSelectedProgram(selectedProgram) {
         if (selectedProgram.categoryCombination) {
             return (
@@ -251,13 +267,8 @@ class ProgramSelector extends Component<Props> {
                                                     </div>
                                                 );
                                             }
-                                            const categoryOptions = i
-                                                .categoryOptions
-                                                .map(optionCount => ({
-                                                    label: optionCount.name,
-                                                    value: optionCount.id,
-                                                }));
-
+                                            
+                                            const categoryOptions = this.getCategoryOptions(i.categoryOptions);
                                             return (
                                                 <VirtualizedSelect
                                                     options={categoryOptions}

@@ -66,7 +66,10 @@ function getOptionsByCategory(categoryOptionsBatches: Array<Array<ApiCategoryOpt
                     id: option.id,
                     displayName: option.displayName,
                     organisationUnitIds: organisationUnits && organisationUnits.length > 0 ?
-                        organisationUnits.map(ou => ou.id) :
+                        organisationUnits.reduce((accOusAsObject, ou) => {
+                            accOusAsObject[ou.id] = true;
+                            return accOusAsObject;
+                        }, {}) :
                         null,
                 });
                 return accOptionsByCategoryForBatchInProgress;
