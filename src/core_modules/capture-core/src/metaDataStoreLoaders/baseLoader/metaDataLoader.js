@@ -13,6 +13,7 @@ import getOrganisationUnitsLoadSpecification
 
 import loadPrograms from '../programs/loadPrograms';
 import loadTrackedEntityAttributes from '../trackedEntityAttributes/loadTrackedEntityAttributes';
+import loadCategories from '../categories/loadCategories';
 import loadOptionSets from '../optionSets/loadOptionSets';
 import loadTrackedEntityTypes from '../trackedEntityTypes/loadTrackedEntityTypes';
 import executeUsersCacheMaintenance from '../maintenance/usersCacheMaintenance';
@@ -46,6 +47,7 @@ export default async function loadMetaData() {
     const {
         optionSetsMeta: optionSetsMetaFromPrograms,
         trackedEntityAttributeIds: trackedEntityAttributeIdsFromPrograms,
+        categoryIds,
     } = await loadPrograms(storageController, {
         [programStoresKeys.PROGRAMS]: objectStores.PROGRAMS,
         [programStoresKeys.PROGRAM_RULES]: objectStores.PROGRAM_RULES,
@@ -68,5 +70,6 @@ export default async function loadMetaData() {
         ]),
     );
 
+    await loadCategories(storageController, objectStores.CATEGORIES, categoryIds);
     await loadOptionSets(storageController, objectStores.OPTION_SETS, [...optionSetsMetaFromPrograms, ...optionSetsMetaFromTrackedEntityTypes]);
 }

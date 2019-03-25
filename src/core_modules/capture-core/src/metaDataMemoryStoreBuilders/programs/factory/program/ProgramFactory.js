@@ -1,6 +1,8 @@
 // @flow
 /* eslint-disable complexity */
 /* eslint-disable no-underscore-dangle */
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import {
     TrackedEntityType,
     Icon,
@@ -22,30 +24,71 @@ import {
 import type {
     CachedStyle,
     CachedProgramStage,
-    CachedCategoryOption,
+    ProgramCachedCategoryCombo,
+    ProgramCachedCategory,
     CachedCategory,
-    CachedCategoryCombo,
+    CachedCategoryOption,
     CachedProgram,
     CachedOptionSet,
     CachedRelationshipType,
     CachedTrackedEntityAttribute,
+    CachedProgramTrackedEntityAttribute,
 } from '../../../../storageControllers/cache.types';
 
 class ProgramFactory {
+    static _buildCategoryOptions(cachedCategoryOptions: Array<CachedCategoryOption>): Map<string, CategoryOption> {
+        return cachedCategoryOptions.reduce((accCategoryOptionsMap, cachedOption) => {
+            accCategoryOptionsMap.set(cachedOption.id, new CategoryOption((_this) => {
+                _this.id = cachedOption.id;
+                _this.name = cachedOption.displayName;
+                _this.organisationUnitIds = cachedOption.organisationUnitIds;
+                _this.access = cachedOption.access;
+            }));
+            return accCategoryOptionsMap;
+        }, new Map());
+    }
+
+    static _buildCategories(
+        cachedProgramCategories: Array<ProgramCachedCategory>,
+        cachedCategories: {[categoryId: string]: CachedCategory}): Map<string, Category> {
+        return new Map(
+            cachedProgramCategories
+                .map(cachedProgramCategory => ([
+                    cachedProgramCategory.id,
+                    new Category((_this) => {
+                        const id = cachedProgramCategory.id;
+                        _this.id = id;
+                        const cachedCategory = cachedCategories[id];
+                        if (!cachedCategory) {
+                            log.error(errorCreator('Could not retrieve cachedCategory')({ id }));
+                            _this.categoryOptions = new Map();
+                        } else {
+                            _this.name = cachedCategory.displayName;
+                            _this.categoryOptions =
+                                ProgramFactory._buildCategoryOptions(cachedCategory.categoryOptions);
+                        }
+                    }),
+                ])),
+        );
+    }
+
     programStageFactory: ProgramStageFactory;
     enrollmentFactory: EnrollmentFactory;
     searchGroupFactory: SearchGroupFactory;
     dataElementFactory: DataElementFactory;
     trackedEntityTypeCollection: Map<string, TrackedEntityType>;
+    cachedCategories: {[categoryId: string]: CachedCategory};
 
     constructor(
         cachedOptionSets: Map<string, CachedOptionSet>,
         cachedRelationshipTypes: Array<CachedRelationshipType>,
         cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
+        cachedCategories: {[categoryId: string]: CachedCategory},
         trackedEntityTypeCollection: Map<string, TrackedEntityType>,
         locale: ?string,
     ) {
         this.trackedEntityTypeCollection = trackedEntityTypeCollection;
+        this.cachedCategories = cachedCategories;
         this.programStageFactory = new ProgramStageFactory(
             cachedOptionSets,
             cachedRelationshipTypes,
@@ -68,48 +111,26 @@ class ProgramFactory {
         );
     }
 
-    static _buildCategoryOptions(cachedCategoryOptions: Array<CachedCategoryOption>): Map<string, CategoryOption> {
-        return cachedCategoryOptions.reduce((accCategoryOptionsMap, cachedOption) => {
-            accCategoryOptionsMap.set(cachedOption.id, new CategoryOption((_this) => {
-                _this.id = cachedOption.id;
-                _this.name = cachedOption.displayName;
-                _this.access = cachedOption.access;
-            }));
-            return accCategoryOptionsMap;
-        }, new Map());
-    }
-
-    static _buildCategories(cachedCategories: Array<CachedCategory>): Map<string, Category> {
-        return cachedCategories.reduce((accCategoriesMap, cachedCategory) => {
-            const category = new Category((_this) => {
-                _this.id = cachedCategory.id;
-                _this.name = cachedCategory.displayName;
-                _this.categoryOptions = ProgramFactory._buildCategoryOptions(cachedCategory.categoryOptions || []);
-            });
-            accCategoriesMap.set(cachedCategory.id, category);
-            return accCategoriesMap;
-        }, new Map());
-    }
-
-    static _buildCategoriCombination(
-        cachedCategoriCombination: ?CachedCategoryCombo,
+    _buildCategoryCombination(
+        cachedCategoryCombination: ?ProgramCachedCategoryCombo,
     ) {
         if (!(
-            cachedCategoriCombination &&
-            !cachedCategoriCombination.isDefault &&
-            cachedCategoriCombination.categories &&
-            cachedCategoriCombination.categories.length > 0
+            cachedCategoryCombination &&
+            !cachedCategoryCombination.isDefault &&
+            cachedCategoryCombination.categories &&
+            cachedCategoryCombination.categories.length > 0
         )) {
             return null;
         }
 
         return new CategoryCombination((_this) => {
-            // $FlowSuppress
-            _this.name = cachedCategoriCombination.displayName;
-            // $FlowSuppress
-            _this.id = cachedCategoriCombination.id;
-            // $FlowSuppress
-            _this.categories = ProgramFactory._buildCategories(cachedCategoriCombination.categories);
+            // $FlowFixMe
+            _this.name = cachedCategoryCombination.displayName;
+            // $FlowFixMe
+            _this.id = cachedCategoryCombination.id;
+            _this.categories =
+            // $FlowFixMe
+                ProgramFactory._buildCategories(cachedCategoryCombination.categories, this.cachedCategories);
         });
     }
 
@@ -139,7 +160,7 @@ class ProgramFactory {
                 _this.name = cachedProgram.displayName;
                 _this.shortName = cachedProgram.displayShortName;
                 _this.organisationUnits = cachedProgram.organisationUnits;
-                _this.categoryCombination = ProgramFactory._buildCategoriCombination(cachedProgram.categoryCombo);
+                _this.categoryCombination = this._buildCategoryCombination(cachedProgram.categoryCombo);
             });
             const d2Stage = cachedProgram.programStages && cachedProgram.programStages[0];
             program.stage =

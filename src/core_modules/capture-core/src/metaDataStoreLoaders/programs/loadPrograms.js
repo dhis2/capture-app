@@ -141,6 +141,15 @@ function getTrackedEntityAttributeIds(missingPrograms) {
         : [];
 }
 
+function getCategories(missingPrograms) {
+    return missingPrograms
+        ? missingPrograms.reduce((accCategories, program) => {
+            const programCategories = program.categoryCombo &&
+                program.categoryCombo.categories;
+            return programCategories ? [...accCategories, ...programCategories] : [];
+        }, []) : [];
+}
+
 export default async function loadProgramsData(storageController: StorageController, stores: Object) {
     const metaPrograms = await metaProgramsSpec.get();
     const optionSetsMeta = getOptionSetsMeta(metaPrograms);
@@ -169,5 +178,9 @@ export default async function loadProgramsData(storageController: StorageControl
         // $FlowFixMe
         .reduce((accPrograms, programs) => ([...accPrograms, ...programs]), []);
 
-    return { optionSetsMeta, trackedEntityAttributeIds: getTrackedEntityAttributeIds(missingProgramsWithData) };
+    return {
+        optionSetsMeta,
+        trackedEntityAttributeIds: getTrackedEntityAttributeIds(missingProgramsWithData),
+        categoryIds: getCategories(missingProgramsWithData),
+    };
 }
