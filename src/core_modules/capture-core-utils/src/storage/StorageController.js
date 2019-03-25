@@ -1,4 +1,5 @@
 /* eslint-disable complexity */
+/* eslint-disable no-underscore-dangle */
 import isArray from 'd2-utilizr/lib/isArray';
 import log from 'loglevel';
 import { errorCreator } from '../errorCreator';
@@ -18,6 +19,7 @@ export default class StorageController {
         INVALID_STORAGE_ARRAY: 'Invalid storage array',
         MISSING_KEY: 'Please specifiy key',
         FALLBACK_TO_MEMORY_STORAGE_TRIGGERED: 'Fallback to memory storage triggered',
+        OPEN_FAILED: 'Open storage failed',
     };
 
     static isAdapterValid(Adapter) {
@@ -30,32 +32,35 @@ export default class StorageController {
         return adapterMethods.every(method => Adapter.prototype[method]);
     }
 
-    constructor(name, version, adapters, objectStores, onFallback) {
+    constructor(name, version, Adapters, objectStores, onFallback) {
         if (!name) {
             throw new Error(StorageController.errorMessages.INVALID_NAME);
         }
         this.name = name;
         this.onFallback = onFallback;
 
-        if (!adapters || !isArray(adapters || adapters.length === 0)) {
+        if (!Adapters || !isArray(Adapters || Adapters.length === 0)) {
             throw new Error(StorageController.errorMessages.NO_ADAPTERS_DEFINED);
         }
 
-        const validAdapterFound = adapters.some((Adapter) => {
-            if (!StorageController.isAdapterValid(Adapter)) {
-                throw new Error(errorCreator(StorageController.errorMessages.INVALID_ADAPTER_PROVIDED)({ Adapter }));
-            }
-            if (Adapter.isSupported()) {
-                this.adapter = new Adapter({ name, version, objectStores, keyPath: 'id' });
-                this.adapterType = Adapter;
-                return true;
-            }
-            return false;
-        });
+        const ValidAdapters = Adapters
+            .filter((Adapter) => {
+                if (!StorageController.isAdapterValid(Adapter)) {
+                    throw new Error(
+                        errorCreator(StorageController.errorMessages.INVALID_ADAPTER_PROVIDED)({ Adapter }));
+                }
+                return Adapter.isSupported();
+            });
 
-        if (!validAdapterFound) {
+        if (ValidAdapters.length <= 0) {
             throw new Error(StorageController.errorMessages.NO_VALID_ADAPTERS_FOUND);
         }
+
+        this.Adapters = Adapters;
+        this.AvailableAdapters = ValidAdapters;
+        const CurrentAdapter = ValidAdapters[0];
+        this.adapter = new CurrentAdapter({ name, version, objectStores, keyPath: 'id' });
+        this.adapterType = CurrentAdapter;
     }
 
     getOpenStatusError() {
@@ -148,6 +153,25 @@ export default class StorageController {
         await this.restoreBackupDataAsync(backupData);
     }
 
+    async _openFallbackAdapter(...args) {
+        const currentAdapterIndex = this.AvailableAdapters.findIndex(AA => AA === this.adapterType);
+        const nextAdapterIndex = currentAdapterIndex + 1;
+        if (this.AvailableAdapters.length <= nextAdapterIndex) {
+            throw new Error(StorageController.errorMessages.OPEN_FAILED);
+        }
+
+        const Adapter = this.AvailableAdapters[nextAdapterIndex];
+        const fallbackAdapter = new Adapter({
+            name: this.adapter.name,
+            version: this.adapter.version,
+            objectStores: this.adapter.objectStoreNames,
+            keyPath: 'id',
+        });
+        this.adapter = fallbackAdapter;
+        this.adapterType = Adapter;
+        await this.open(...args);
+    }
+
     // using async ensures that the the return value is wrapped in a promise
     async open(...args) {
         if (this.adapter.isOpen()) {
@@ -160,7 +184,11 @@ export default class StorageController {
             throw new Error(StorageController.errorMessages.NO_OBJECTSTORES_DEFINED);
         }
 
-        return this.adapter.open(...args);
+        try {
+            await this.adapter.open(...args);
+        } catch (error) {
+            await this._openFallbackAdapter(...args);
+        }
     }
 
     async setWithoutFallback(store, dataObject) {
