@@ -7,6 +7,7 @@ import Icon from '../Icon/Icon';
 export type Value = string | number | boolean | {};
 
 export default class Option {
+    _id: string;
     _value: Value;
     _text: string;
     _description: ?string;
@@ -14,6 +15,14 @@ export default class Option {
 
     constructor(initFn?: (_this: Option) => void) {
         initFn && isFunction(initFn) && initFn(this);
+    }
+
+    set id(id: string) {
+        this._id = id;
+    }
+
+    get id(): string {
+        return this._id;
     }
 
     set value(value: Value) {

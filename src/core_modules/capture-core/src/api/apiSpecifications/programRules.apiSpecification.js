@@ -23,6 +23,8 @@ function getProgramRuleActions(d2ProgramRuleActionsCollection): Array<ProgramRul
         programStageId: programRuleAction.programStage && programRuleAction.programStage.id,
         programStageSectionId: programRuleAction.programStageSection && programRuleAction.programStageSection.id,
         trackedEntityAttributeId: programRuleAction.trackedEntityAttribute && programRuleAction.trackedEntityAttribute.id,
+        optionGroupId: programRuleAction.optionGroup && programRuleAction.optionGroup.id,
+        optionId: programRuleAction.option && programRuleAction.option.id,
     }));
 }
 
@@ -31,7 +33,7 @@ export default new ApiSpecification((_this) => {
     _this.modelName = 'programRules';
     _this.modelGetterType = getterTypes.LIST;
     _this.queryParams = {
-        fields: 'id,displayName,condition,description,program[id],programStage[id],priority,programRuleActions[id,content,location,data,programRuleActionType,programStageSection[id],dataElement[id],trackedEntityAttribute[id],programIndicator[id],programStage[id]]',
+        fields: 'id,displayName,condition,description,program[id],programStage[id],priority,programRuleActions[id,content,location,data,programRuleActionType,programStageSection[id],dataElement[id],trackedEntityAttribute[id],programIndicator[id],programStage[id],optionGroup[id],option[id]]',
         filter: 'program.id:in:',
     };
     _this.converter = (d2ProgramRules: ?Array<Object>): ?Array<ProgramRule> => {

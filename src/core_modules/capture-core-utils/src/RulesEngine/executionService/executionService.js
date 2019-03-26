@@ -812,6 +812,8 @@ export default function getExecutionService(onTranslate, variableService, dateUt
             trackedEntityAttributeId: action.trackedEntityAttributeId,
             programStageId: action.programStageId,
             programStageSectionId: action.programStageSectionId,
+            optionGroupId: action.optionGroupId,
+            optionId: action.optionId,
             content: action.content,
             data: action.data ? getRuleEffectData(action, variablesHash, flag) : action.data,
             ineffect: true,
