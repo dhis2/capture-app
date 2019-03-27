@@ -162,3 +162,19 @@ export const rulesEffectsDisabledFieldsDesc = createReducerDescription({
         return newState;
     },
 }, 'rulesEffectsDisabledFields');
+
+
+export const ruleEffectsOptionsVisibilityDesc = createReducerDescription({
+    [actionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
+        const newState = { ...state };
+        const rulesEffects = action.payload.rulesEffects;
+        if (action.payload.rulesEffects) {
+            newState[action.payload.formId] = {
+                hideOptions: rulesEffects[effectActions.HIDE_OPTION],
+                hideOptionGroups: rulesEffects[effectActions.HIDE_OPTION_GROUP],
+                showOptionGroups: rulesEffects[effectActions.SHOW_OPTION_GROUP],
+            };
+        }
+        return newState;
+    },
+}, 'rulesEffectsOptionsVisibility');

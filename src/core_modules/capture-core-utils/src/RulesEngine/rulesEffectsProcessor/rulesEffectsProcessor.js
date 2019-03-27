@@ -186,6 +186,42 @@ export default function getRulesEffectsProcessor(
         };
     }
 
+    function processHideOptionGroup(effect: ProgramRuleEffect, processIdName: string): ?any {
+        if (!effect[processIdName]) {
+            return null;
+        }
+
+        return {
+            type: actions.HIDE_OPTION_GROUP,
+            id: effect[processIdName],
+            optionGroupId: effect.optionGroupId,
+        };
+    }
+
+    function processHideOption(effect: ProgramRuleEffect, processIdName: string): ?any {
+        if (!effect[processIdName]) {
+            return null;
+        }
+
+        return {
+            type: actions.HIDE_OPTION,
+            id: effect[processIdName],
+            optionId: effect.optionId,
+        };
+    }
+
+    function processShowOptionGroup(effect: ProgramRuleEffect, processIdName: string): ?any {
+        if (!effect[processIdName]) {
+            return null;
+        }
+
+        return {
+            type: actions.SHOW_OPTION_GROUP,
+            id: effect[processIdName],
+            optionGroupId: effect.optionGroupId,
+        };
+    }
+
     const mapActionsToProcessor = {
         [actions.ASSIGN_VALUE]: processAssignValue,
         [actions.HIDE_FIELD]: processHideField,
@@ -197,6 +233,9 @@ export default function getRulesEffectsProcessor(
         [actions.MAKE_COMPULSORY]: processMakeCompulsory,
         [actions.DISPLAY_TEXT]: processDisplayText,
         [actions.DISPLAY_KEY_VALUE_PAIR]: processDisplayKeyValuePair,
+        [actions.HIDE_OPTION_GROUP]: processHideOptionGroup,
+        [actions.HIDE_OPTION]: processHideOption,
+        [actions.SHOW_OPTION_GROUP]: processShowOptionGroup,
     };
 
     function processRulesEffects(

@@ -103,6 +103,12 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
         this.state = {};
     }
 
+    componentWillReceiveProps(newProps: Props) {
+        if (newProps.options !== this.props.options) {
+            this.prevFilterValue = null;
+        }
+    }
+
     filterOptions = () => {
         if (!this.state.filterValue) {
             return this.props.options;

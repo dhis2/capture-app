@@ -19,13 +19,11 @@ const mapInputTypeToPropsGetterFn = {
     [inputTypes.HORIZONTAL_RADIOBUTTONS]: (metaData: MetaDataElement) => ({
         // $FlowSuppress
         options: getOptionsForRadioButtons(metaData.optionSet),
-        id: metaData.id,
     }),
     [inputTypes.VERTICAL_RADIOBUTTONS]: (metaData: MetaDataElement) => ({
         orientation: orientations.VERTICAL,
         // $FlowSuppress
         options: getOptionsForRadioButtons(metaData.optionSet),
-        id: metaData.id,
     }),
 };
 
@@ -43,7 +41,10 @@ const getOptionSetFieldConfig = (metaData: MetaDataElement, options: Object) => 
     const inputTypeProps = mapInputTypeToPropsGetterFn[inputType](metaData);
 
     const props = createProps({
+        id: metaData.id,
+        formId: options.formId,
         formHorizontal: options.formHorizontal,
+        optionGroups: optionSet.optionGroups,
         ...inputTypeProps,
     }, options, metaData);
 
