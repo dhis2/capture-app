@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-03-18T07:04:56.175Z\n"
-"PO-Revision-Date: 2019-03-18T07:04:56.175Z\n"
+"POT-Creation-Date: 2019-03-27T08:58:04.646Z\n"
+"PO-Revision-Date: 2019-03-27T08:58:04.646Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -300,6 +300,12 @@ msgid "More filters"
 msgstr ""
 
 msgid "Rows per page"
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid "Completed"
 msgstr ""
 
 msgid "Could not get organisation unit"

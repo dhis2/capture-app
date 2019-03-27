@@ -1,13 +1,12 @@
 // @flow
 import { createSelectorCreator, createSelector, defaultMemoize } from 'reselect';
 
-import { getStageFromProgramIdForEventProgram } from '../../../../../metaData';
+import { getStageFromProgramIdForEventProgram, OptionSet, Option, DataElement } from '../../../../../metaData';
 import getStageFromEvent from '../../../../../metaData/helpers/getStageFromEvent';
 import { convertMainEvent } from '../../../../../events/mainEventConverter';
 import { convertValue } from '../../../../../converters/clientToList';
 import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
-import mainPropertyNames from '../../../../../events/mainPropertyNames.const';
-import elementTypeKeys from '../../../../../metaData/DataElement/elementTypes';
+import elementTypes from '../../../../../metaData/DataElement/elementTypes';
 
 type EventContainer = {
     event: CaptureClientEvent,
@@ -18,6 +17,9 @@ type ColumnOrderFromState = {
     id: string,
     visible: boolean,
     isMainProperty?: ?boolean,
+    header?: ?string,
+    type?: ?$Values<typeof elementTypes>,
+    options?: ?Array<{text: string, value: string}>,
 };
 
 type ColumnsOrderFromState = Array<ColumnOrderFromState>;
@@ -26,6 +28,25 @@ type ColumnsOrderFromState = Array<ColumnOrderFromState>;
 const programIdSelector = state => state.currentSelections.programId;
 const columnsOrderStateSelector = state => state.workingListsColumnsOrder.main;
 
+
+const createMainPropertyOptionSet = (column: ColumnOrderFromState) => {
+    const dataElement = new DataElement((_this) => {
+        _this.id = column.id;
+        // $FlowFixMe
+        _this.type = column.type;
+    });
+
+    // $FlowFixMe
+    const options = column.options.map(o =>
+        new Option((_this) => {
+            _this.text = o.text;
+            _this.value = o.value;
+        }),
+    );
+    const optionSet = new OptionSet(column.id, options, dataElement);
+    dataElement.optionSet = optionSet;
+    return optionSet;
+};
 // $FlowFixMe
 export const makeColumnsSelector = () => createSelector(
     programIdSelector,
@@ -42,15 +63,11 @@ export const makeColumnsSelector = () => createSelector(
         return columnsOrderFromState
             .map((column) => {
                 if (column.isMainProperty) {
-                    if (column.id === mainPropertyNames.EVENT_DATE) {
-                        return {
-                            ...column,
-                            header: stageForm.getLabel(mainPropertyNames.EVENT_DATE),
-                            type: elementTypeKeys.DATE,
-                        };
-                    }
-                    // fallback
-                    return columnsOrderFromState;
+                    return {
+                        ...column,
+                        header: column.header || stageForm.getLabel(column.id),
+                        optionSet: column.options && createMainPropertyOptionSet(column),
+                    };
                 }
                 const element = stageForm.getElement(column.id);
                 return {

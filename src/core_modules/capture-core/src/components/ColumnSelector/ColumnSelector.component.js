@@ -51,7 +51,14 @@ class ColumnSelector extends Component<Props, State> {
     };
 
     getListToSave = () => this.state.columnList
-        .map(column => ({ id: column.id, visible: column.visible, isMainProperty: column.isMainProperty }));
+        .map(column => ({
+            id: column.id,
+            visible: column.visible,
+            isMainProperty: column.isMainProperty,
+            header: column.header,
+            type: column.type,
+            options: column.options,
+        }));
 
     handleSave = () => {
         this.props.onUpdateWorkinglistOrder(this.getListToSave());

@@ -36,6 +36,7 @@ type Props = {
     itemId: string,
     type: string,
     optionSet?: ?OptionSet,
+    singleSelect?: ?boolean,
     title: string,
     classes: {
         icon: string,
@@ -101,12 +102,13 @@ class FilterButton extends Component<Props, State> {
     }
 
     renderSelectorContents() {
-        const { itemId: id, type, optionSet } = this.props;
+        const { itemId: id, type, optionSet, singleSelect } = this.props;
 
         return (
             <FilterSelectorContents
                 type={type}
                 optionSet={optionSet}
+                singleSelect={singleSelect}
                 id={id}
                 onCommitValue={this.handleEditFilterContents}
                 onUpdate={this.handleFilterUpdate}
