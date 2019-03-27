@@ -63,11 +63,13 @@ function convertTranslationsToObject(translations) {
 }
 
 function getProgramStageDataElements(programStageDataElements) {
-    return programStageDataElements.map((programStageDataElement) => {
-        programStageDataElement.dataElement.translations =
-            convertTranslationsToObject(programStageDataElement.dataElement.translations);
-        return programStageDataElement;
-    });
+    return programStageDataElements
+        .filter(programStageDataElement => programStageDataElement.dataElement)
+        .map((programStageDataElement) => {
+            programStageDataElement.dataElement.translations =
+                convertTranslationsToObject(programStageDataElement.dataElement.translations);
+            return programStageDataElement;
+        });
 }
 
 function getProgramStages(d2ProgramStagesCollection) {
