@@ -20,6 +20,7 @@ const buildFormOptionSet = (clientOptionSet: OptionSet) => {
 const flattenOptionSetForRadioButtons = (formOptionSet: OptionSet) => formOptionSet
     .options
     .map(option => ({
+        id: option.id,
         name: option.text,
         value: option.value,
     }));
@@ -27,6 +28,7 @@ const flattenOptionSetForRadioButtons = (formOptionSet: OptionSet) => formOption
 const flattenOptionSetForSelect = (formOptionSet: OptionSet) => formOptionSet
     .options
     .map(option => ({
+        id: option.id,
         label: option.text,
         value: option.value,
         icon: option.icon ? {

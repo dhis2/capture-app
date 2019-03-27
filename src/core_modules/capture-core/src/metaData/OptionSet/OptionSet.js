@@ -6,6 +6,7 @@ import log from 'loglevel';
 import isArray from 'd2-utilizr/src/isArray';
 
 import Option from './Option';
+import OptionGroup from './OptionGroup';
 import { viewTypes, inputTypes, inputTypesAsArray } from './optionSet.const';
 import errorCreator from '../../utils/errorCreator';
 import DataElement from '../DataElement/DataElement';
@@ -23,6 +24,7 @@ export default class OptionSet {
     _id: ?string;
     _emptyText: ?string;
     _options: Array<Option>;
+    _optionGroups: Map<string, OptionGroup>;
     _viewType: $Values<typeof viewTypes>;
     _inputType: $Values<typeof inputTypes>;
     _dataElement: ?DataElement;
@@ -30,6 +32,7 @@ export default class OptionSet {
     constructor(
         id?: ?string,
         options?: ?Array<Option>,
+        optionGroups?: ?Map<string, OptionGroup>,
         dataElement?: ?DataElement,
         onConvert?: ?ConvertFn) {
         this._options = !options ? [] : options.reduce((accOptions: Array<Option>, currentOption: Option) => {
@@ -43,6 +46,8 @@ export default class OptionSet {
             }
             return accOptions;
         }, []);
+
+        this._optionGroups = optionGroups || new Map();
 
         this._id = id;
         this._dataElement = dataElement;
@@ -95,6 +100,14 @@ export default class OptionSet {
 
     get options(): Array<Option> {
         return this._options;
+    }
+
+    get optionGroups(): Map<string, OptionGroup> {
+        return this._optionGroups;
+    }
+
+    set optionGroups(optionGroups: Map<string, OptionGroup>) {
+        this._optionGroups = optionGroups;
     }
 
     get dataElement(): ?DataElement {
@@ -178,87 +191,4 @@ export default class OptionSet {
         // $FlowSuppress
         return this.getOptionText(values);
     }
-
-    /*
-    resolveViewElement(
-        values: Value | Array<Value>,
-        onGetStyle?: (viewType: ?$Values<typeof viewTypes>) => ?Object): ?React$Element<any> | any {
-        if (isArray(values)) {
-            // $FlowSuppress
-            return values.reduce((accElements, value: Value) => {
-                const option = this.options.find(o => o.value === value);
-                if (!option) {
-                    log.warn(
-                        errorCreator(OptionSet.errorMessages.OPTION_NOT_FOUND)({ OptionSet: this, value }),
-                    );
-                } else {
-                    accElements.push(
-                        <div>
-                            {
-                                this.getSingleViewElement(option, onGetStyle)
-                            }
-                        </div>,
-                    );
-                }
-
-                return accElements;
-            }, []);
-        }
-
-        // $FlowSuppress
-        return this.getSingleViewElementFromValue(values, onGetStyle);
-    }
-
-    getSingleViewElementFromValue(
-        value: Value,
-        onGetStyle?: (viewType: ?$Values<typeof viewTypes>) => ?Object): ?React$Element<any> | any {
-        const option = this._options.find(o => o.value === value);
-        if (!option) {
-            log.warn(
-                errorCreator(OptionSet.errorMessages.OPTION_NOT_FOUND)({ OptionSet: this, value }),
-            );
-            return null;
-        }
-        return this.getSingleViewElement(option, onGetStyle);
-    }
-
-    getSingleViewElement(
-        option: Option,
-        onGetStyle?: (viewType: ?$Values<typeof viewTypes>)
-        => ?Object): ?React$Element<any> | any {
-        let element;
-        if (this.viewType) {
-            const extraStyle = onGetStyle && onGetStyle(this._viewType);
-            if (this._viewType === viewTypes.iconWithColor) {
-                const [color, icon] = option._text.split(';');
-                element = (
-                    <FontIcon
-                        title={option.description}
-                        color={color}
-                        style={extraStyle}
-                        className="material-icons"
-                    >
-                        {icon}
-                    </FontIcon>
-                );
-            } else if (this._viewType === viewTypes.icon) {
-                element = (
-                    <FontIcon
-                        title={option.description}
-                        style={extraStyle}
-                        className="material-icons"
-                    >
-                        {option.text}
-                    </FontIcon>
-                );
-            } else {
-                element = option.text;
-            }
-        } else {
-            element = option.text;
-        }
-
-        return element;
-    }
-    */
 }

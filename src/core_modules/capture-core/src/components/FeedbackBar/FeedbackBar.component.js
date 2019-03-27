@@ -1,10 +1,16 @@
 // @flow
 import * as React from 'react';
-import isDefined from 'd2-utilizr/lib/isDefined';
 import SnackBar from '@material-ui/core/Snackbar';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import i18n from '@dhis2/d2-i18n';
+import isDefined from 'd2-utilizr/lib/isDefined';
 
 const styles = theme => ({
     closeButton: {
@@ -17,15 +23,15 @@ const styles = theme => ({
 });
 
 type Feedback = {
-    message: string,
+    message: string | { title: string, content: string},
     action?: ?React.Node,
+    displayType?: ?string,
 };
 
 type Props = {
     feedback: Feedback,
     onClose: () => void,
     classes: Object,
-    theme: Object,
 };
 
 class FeedbackBar extends React.Component<Props> {
@@ -40,13 +46,12 @@ class FeedbackBar extends React.Component<Props> {
         feedback: {},
     };
 
-    handleClose: (event?: ?Object, reason: string) => void;
     constructor(props: Props) {
         super(props);
         this.handleClose = this.handleClose.bind(this);
     }
 
-    handleClose(event?: ?Object, reason: string) {
+    handleClose = (event?: ?Object, reason?: ?string) => {
         if (reason !== FeedbackBar.CLICKAWAY_KEY) {
             this.props.onClose();
         }
@@ -87,18 +92,37 @@ class FeedbackBar extends React.Component<Props> {
 
     render() {
         const { feedback } = this.props;
-
+        const { message, displayType } = feedback;
+        const isSnackBarOpen = isDefined(message) && !displayType;
+        const isDialogOpen = isDefined(message) && displayType === 'dialog';
         return (
-            <SnackBar
-                open={isDefined(feedback.message)}
-                anchorOrigin={FeedbackBar.ANCHOR_ORIGION}
-                autoHideDuration={5000}
-                onClose={this.handleClose}
-                message={<span>{feedback.message}</span>}
-                action={this.getAction()}
-            />
+            <React.Fragment>
+                <SnackBar
+                    open={isSnackBarOpen}
+                    anchorOrigin={FeedbackBar.ANCHOR_ORIGION}
+                    autoHideDuration={5000}
+                    onClose={this.handleClose}
+                    message={<span>{message}</span>}
+                    action={this.getAction()}
+                />
+                <Dialog
+                    open={isDefined(message) && displayType === 'dialog'}
+                >
+                    <DialogTitle>
+                        {isDialogOpen ? message && message.title : ''}
+                    </DialogTitle>
+                    <DialogContent>
+                        {isDialogOpen ? message && message.content : ''}
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleClose} color="primary" autoFocus>
+                            {i18n.t('Close')}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </React.Fragment>
         );
     }
 }
 
-export default withStyles(styles)(withTheme()(FeedbackBar));
+export default withStyles(styles)(FeedbackBar);

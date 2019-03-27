@@ -175,11 +175,18 @@ export type CachedOption = {
     translations: Array<CachedOptionTranslation>,
 };
 
+export type CachedOptionGroup = {
+    id: string,
+    displayName: string,
+    options: Array<string>,
+}
+
 export type CachedOptionSet = {
     id: string,
     displayName: string,
     valueType: string,
     options: Array<CachedOption>,
+    optionGroups: Array<CachedOptionGroup>,
     translations: Array<CachedOptionSetTranslation>,
 };
 

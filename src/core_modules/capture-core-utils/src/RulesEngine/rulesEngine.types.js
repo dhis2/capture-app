@@ -38,6 +38,8 @@ export type ProgramRuleEffect = {
     trackedEntityAttributeId: ?string,
     programStageId: ?string,
     programStageSectionId: ?string,
+    optionGroupId: ?string,
+    optionId: ?string,
     content: string,
     data: ?string,
     ineffect: boolean,

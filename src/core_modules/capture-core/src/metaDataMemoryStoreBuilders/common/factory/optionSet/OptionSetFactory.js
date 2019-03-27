@@ -4,6 +4,7 @@ import log from 'loglevel';
 import type {
     CachedStyle,
     CachedOptionSet,
+    CachedOptionGroup,
     CachedOptionSetTranslation,
     CachedOptionTranslation,
 } from '../../../../storageControllers/cache.types';
@@ -12,6 +13,7 @@ import getCamelCaseUppercaseString from '../../../../utils/string/getCamelCaseFr
 import { convertOptionSetValue } from '../../../../converters/serverToClient';
 import getDhisIconAsync from '../../getDhisIcon';
 import errorCreator from '../../../../utils/errorCreator';
+import OptionGroup from '../../../../metaData/OptionSet/OptionGroup';
 
 class OptionSetFactory {
     static OPTION_SET_NOT_FOUND = 'Optionset not found';
@@ -47,6 +49,7 @@ class OptionSetFactory {
     }
 
     cachedOptionSets: Map<string, CachedOptionSet>;
+    cachedOptionGroups: Array<CachedOptionGroup>;
     locale: ?string;
     constructor(
         cachedOptionSets: Map<string, CachedOptionSet>,
@@ -89,6 +92,7 @@ class OptionSetFactory {
                 const icon = await OptionSetFactory._buildOptionIcon(cachedOption.style);
 
                 return new Option((_this) => {
+                    _this.id = cachedOption.id;
                     _this.value = cachedOption.code;
                     _this.text =
                         this._getTranslation(
@@ -101,7 +105,12 @@ class OptionSetFactory {
 
         const options = await Promise.all(optionsPromises);
 
-        const optionSet = new OptionSet(cachedOptionSet.id, options, dataElement, convertOptionSetValue);
+        const optionGroups = cachedOptionSet.optionGroups && new Map(cachedOptionSet.optionGroups.map(group => [group.id, new OptionGroup((_this) => {
+            _this.id = group.id;
+            _this.optionIds = new Map(group.options.map(option => [option, option]));
+        })]));
+
+        const optionSet = new OptionSet(cachedOptionSet.id, options, optionGroups, dataElement, convertOptionSetValue);
         optionSet.inputType = OptionSetFactory.getRenderType(renderType) ||
             (renderOptionsAsRadio ? inputTypes.VERTICAL_RADIOBUTTONS : null);
         return optionSet;

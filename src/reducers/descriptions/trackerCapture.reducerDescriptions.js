@@ -18,7 +18,6 @@ import {
     dataEntriesSearchGroupsPreviousValuesDesc,
     dataEntriesInProgressListDesc,
 } from 'capture-core/reducers/descriptions/dataEntry.reducerDescription';
-import { feedbackDesc } from 'capture-core/reducers/descriptions/feedback.reducerDescription';
 import {
     rulesEffectsHiddenFieldsDesc,
     rulesEffectsErrorMessagesDesc,
@@ -29,6 +28,7 @@ import {
     rulesEffectsGeneralWarningsDesc,
     rulesEffectsGeneralErrorsDesc,
     rulesEffectsDisabledFieldsDesc,
+    ruleEffectsOptionsVisibilityDesc,
 } from 'capture-core/reducers/descriptions/rulesEffects.reducerDescription';
 import {
     workingListsDesc,
@@ -68,6 +68,7 @@ import { relationshipsDesc } from 'capture-core/reducers/descriptions/relationsh
 
 import { appReducerDesc } from './app.reducerDescription';
 import { currentSelectionsReducerDesc } from './currentSelections.reducerDescription';
+import { feedbackDesc } from './feedback.reducerDescription';
 
 export default [
     appReducerDesc,
@@ -98,6 +99,7 @@ export default [
     rulesEffectsGeneralWarningsDesc,
     rulesEffectsGeneralErrorsDesc,
     rulesEffectsDisabledFieldsDesc,
+    ruleEffectsOptionsVisibilityDesc,
     workingListsDesc,
     workingListsMetaDesc,
     workingListsUIDesc,
