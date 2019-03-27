@@ -31,7 +31,7 @@ export const loadViewEventDataEntry =
             {
                 clientId: 'status',
                 dataEntryId: 'complete',
-                onConvertIn: convertStatusIn,
+                onConvertIn: value => (value === 'COMPLETED' ? 'true' : 'false'),
                 onConvertOut: convertStatusOut,
             },
         ];

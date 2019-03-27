@@ -174,7 +174,7 @@ const buildCompleteFieldSettingsFn = () => {
         getComponentProps: (props: Object) => createComponentProps(props, {
             label: 'Event completed',
             id: dataElement.id,
-            valueConverter: value => dataElement.convertValue(!!value, valueConvertFn),
+            valueConverter: value => dataElement.convertValue(value, valueConvertFn),
         }),
         getPropName: () => dataElement.id,
         getMeta: () => ({
