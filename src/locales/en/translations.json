@@ -48,6 +48,7 @@
     "Sort": "",
     "No events to display": "",
     "Data for offline list not present": "",
+    "Close": "",
     "Last week": "",
     "Last month": "",
     "Last 3 months": "",
@@ -94,9 +95,10 @@
     "Organisation unit could not be loaded": "",
     "Delete event": "",
     "Update": "",
-    "Close": "",
     "More filters": "",
     "Rows per page": "",
+    "Active": "",
+    "Completed": "",
     "Could not get organisation unit": "",
     "Program doesn't exist": "",
     "Selected program is invalid for registering unit": "",
@@ -184,5 +186,6 @@
     "Set area": "",
     "Choose one or more dates...": "",
     "Choose a date...": "",
-    "Today": ""
+    "Today": "",
+    "Compatibility mode": ""
 }

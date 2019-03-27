@@ -302,6 +302,12 @@ msgstr ""
 msgid "Rows per page"
 msgstr ""
 
+msgid "Active"
+msgstr ""
+
+msgid "Completed"
+msgstr ""
+
 msgid "Could not get organisation unit"
 msgstr ""
 

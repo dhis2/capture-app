@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
-import MultiSelectBoxes from '../../FormFields/Options/MultiSelectBoxes/MultiSelectBoxes.component';
+import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
 import { orientations } from '../../FormFields/Options/MultiSelectBoxes/multiSelectBoxes.const';
 import withConvertedOptionSet from '../../FormFields/Options/withConvertedOptionSet';
 import OptionSet from '../../../metaData/OptionSet/OptionSet';
@@ -11,7 +11,7 @@ import { convertValue as convertToClientValue } from '../../../converters/formTo
 
 import type{ UpdatableFilterContent } from '../filters.types';
 
-const MultiSelectBoxesWithConvertedOptionSet = withConvertedOptionSet()(MultiSelectBoxes);
+const SelectBoxesWithConvertedOptionSet = withConvertedOptionSet()(SelectBoxes);
 
 const getStyles = (theme: Theme) => ({
     selectBoxesContainer: {
@@ -21,13 +21,12 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-type Value = ?Array<any>;
 
 type Props = {
     type: $Values<typeof elementTypes>,
     optionSet: OptionSet,
-    value: Value,
-    onCommitValue: (value: Value) => void,
+    value: any,
+    onCommitValue: (value: any) => void,
     classes: {
         selectBoxesContainer: string,
     },
@@ -58,15 +57,22 @@ class OptionSetFilter extends Component<Props> implements UpdatableFilterContent
     }
 
     onGetUpdateData() {
-        const value = this.props.value;
+        const { value, singleSelect, optionSet, type } = this.props;
 
         if (!value) {
             return null;
         }
 
+        if (singleSelect) {
+            return {
+                requestData: `eq:${value}`,
+                appliedText: optionSet.getOptionText(value),
+            };
+        }
+
         return {
-            requestData: OptionSetFilter.getRequestData(value, this.props.type),
-            appliedText: OptionSetFilter.getAppliedText(value, this.props.optionSet),
+            requestData: OptionSetFilter.getRequestData(value, type),
+            appliedText: OptionSetFilter.getAppliedText(value, optionSet),
         };
     }
 
@@ -75,17 +81,18 @@ class OptionSetFilter extends Component<Props> implements UpdatableFilterContent
     }
 
     render() {
-        const { onCommitValue, optionSet, value, classes } = this.props;
+        const { onCommitValue, optionSet, value, classes, singleSelect } = this.props;
 
         return (
             <div
                 className={classes.selectBoxesContainer}
             >
-                <MultiSelectBoxesWithConvertedOptionSet
+                <SelectBoxesWithConvertedOptionSet
                     optionSet={optionSet}
                     value={value}
                     onBlur={onCommitValue}
                     orientation={orientations.VERTICAL}
+                    multiSelect={!singleSelect}
                 />
             </div>
         );

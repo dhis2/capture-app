@@ -155,7 +155,7 @@ export default class DataElement {
     getConvertedOptionSet(onConvert: ?ConvertFn): ?OptionSet {
         if (this.optionSet) {
             const currentOptions = [...this.optionSet.options];
-            const convertedOptionSet = new OptionSet(this.optionSet.id, currentOptions, this, onConvert);
+            const convertedOptionSet = new OptionSet(this.optionSet.id, currentOptions, null, this, onConvert);
             convertedOptionSet.inputType = this.optionSet.inputType;
             convertedOptionSet.viewType = this.optionSet.viewType;
             convertedOptionSet.emptyText = this.optionSet.emptyText;
