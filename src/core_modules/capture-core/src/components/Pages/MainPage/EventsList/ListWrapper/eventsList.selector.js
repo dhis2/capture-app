@@ -43,7 +43,7 @@ const createMainPropertyOptionSet = (column: ColumnOrderFromState) => {
             _this.value = o.value;
         }),
     );
-    const optionSet = new OptionSet(column.id, options, dataElement);
+    const optionSet = new OptionSet(column.id, options, null, dataElement);
     dataElement.optionSet = optionSet;
     return optionSet;
 };

@@ -16,7 +16,7 @@ const eventStatusOptionSet = new OptionSet('statusOptionSet', [
         _this.text = i18n.t('Completed');
         _this.value = 'COMPLETED';
     }),
-], eventStatusElement);
+], null, eventStatusElement);
 
 eventStatusElement.optionSet = eventStatusOptionSet;
 
