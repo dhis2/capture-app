@@ -23,6 +23,7 @@ import {
 } from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
 import { asyncHandlerActionTypes } from '../../components/D2Form';
 import { registrationSectionActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
+import type { Updaters } from '../../trackerRedux/trackerReducer';
 
 function addErrorFeedback(state: ReduxState, message: string, action?: ?React.Node) {
     const newState = [...state];
@@ -42,7 +43,8 @@ function getErrorFeedback(message: string, action?: ?React.Node) {
     };
 }
 
-export const feedbackDesc = createReducerDescription({
+export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescription({
+    ...appUpdaters,
     [feedbackActionTypes.CLOSE_FEEDBACK]: (state) => {
         const newState = [...state];
         newState.shift();
