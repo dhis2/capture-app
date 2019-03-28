@@ -4,8 +4,8 @@ import ColumnSelector from './ColumnSelector.component';
 import { updateWorkinglistOrder } from './actions/ColumnSelector.actions';
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onUpdateWorkinglistOrder: (workinglist: Array<Object>) => {
-        dispatch(updateWorkinglistOrder(workinglist));
+    onUpdateWorkinglistOrder: (listId: string, workinglist: Array<Object>) => {
+        dispatch(updateWorkinglistOrder(listId, workinglist));
     },
 });
 

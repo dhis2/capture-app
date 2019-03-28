@@ -43,22 +43,19 @@ import {
 export const workingListsDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
-
-        const eventContainers = action.payload.eventContainers;
-        newState.main = {
+        const { listId, eventContainers } = action.payload;
+        newState[listId] = {
             order: eventContainers ?
                 eventContainers
                     .map(container => container.event.eventId) : [],
             type: 'event',
         };
-
         return newState;
     },
     [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
-
-        const eventContainers = action.payload.eventContainers;
-        newState.main = {
+        const { listId, eventContainers } = action.payload;
+        newState[listId] = {
             order: eventContainers ?
                 eventContainers
                     .map(container => container.event.eventId) : [],
@@ -99,46 +96,15 @@ export const workingListsDesc = createReducerDescription({
 
 }, 'workingLists');
 
-const updateListsMetaOnResetProgramId = (state) => {
-    const newState = {
-        ...state,
-        main: {
-            ...state.main,
-            next: {
-                ...(state.main ? state.main.next : null),
-                sortById: 'eventDate',
-                sortByDirection: 'desc',
-                filters: (state.main && state.main.filters) ?
-                    Object
-                        .keys(state.main.filters)
-                        .reduce((accFilters, key) => {
-                            accFilters[key] = null;
-                            return accFilters;
-                        }, {}) :
-                    null,
-            },
-        },
-    };
-    return newState;
-};
-
-const updateListsMetaOnUrlUpdate = (state, action) => {
-    const payload = action.payload;
-    const nextProgramId = payload.nextProps.programId;
-    const prevProgramId = payload.prevProps.programId;
-    if (nextProgramId !== prevProgramId) {
-        return updateListsMetaOnResetProgramId(state);
-    }
-    return state;
-};
 
 export const workingListsMetaDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
+        const listId = payload.listId;
 
-        const oldData = newState.main;
-        const newData = newState.main && newState.main.next;
+        const oldData = newState[listId];
+        const newData = newState[listId] && newState[listId].next;
 
         const filtersWithNull = {
             ...(oldData ? oldData.filters : null),
@@ -154,7 +120,7 @@ export const workingListsMetaDesc = createReducerDescription({
                 return accFilters;
             }, {});
 
-        newState.main = {
+        newState[listId] = {
             ...oldData,
             ...newData,
             ...payload.argsWithDefaults,
@@ -165,56 +131,60 @@ export const workingListsMetaDesc = createReducerDescription({
 
         return newState;
     },
-    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: state => ({
-        ...state,
-        main: {
-            ...state.main,
-            next: {},
-        },
-    }),
+    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: (state, action) => {
+        const listId = action.payload.listId;
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                next: {},
+            },
+        };
+    },
     [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
-        const pagingData = action.payload.pagingData;
-        const next = newState.main.next;
-        newState.main = {
-            ...newState.main,
+        const { listId, pagingData } = action.payload;
+        const next = newState[listId].next;
+        newState[listId] = {
+            ...newState[listId],
             ...next,
             ...pagingData,
             filters: {
-                ...newState.main.filters,
-                ...newState.main.next.filters,
+                ...newState[listId].filters,
+                ...newState[listId].next.filters,
             },
             next: {},
         };
         return newState;
     },
-    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVAL_FAILED]: (state) => {
+    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVAL_FAILED]: (state, action) => {
         const newState = { ...state };
-        newState.main = {
-            ...newState.main,
+        const listId = action.payload.listId;
+        newState[listId] = {
+            ...newState[listId],
             next: {},
         };
         return newState;
     },
     [paginationActionTypes.CHANGE_PAGE]: (state, action) => {
         const newState = { ...state };
-        const page = action.payload;
-        newState.main = {
-            ...newState.main,
+        const { pageNumber, listId } = action.payload;
+        newState[listId] = {
+            ...newState[listId],
             next: {
-                ...newState.main.next,
-                currentPage: page,
+                ...newState[listId].next,
+                currentPage: pageNumber,
             },
         };
         return newState;
     },
     [eventsListActionTypes.SORT_WORKING_LIST]: (state, action) => {
         const newState = { ...state };
-        const { id, direction } = action.payload;
-        newState.main = {
-            ...newState.main,
+        const { listId, id, direction } = action.payload;
+        newState[listId] = {
+            ...newState[listId],
             next: {
-                ...newState.main.next,
+                ...newState[listId].next,
                 sortById: id,
                 sortByDirection: direction,
                 currentPage: 1,
@@ -224,11 +194,11 @@ export const workingListsMetaDesc = createReducerDescription({
     },
     [paginationActionTypes.CHANGE_ROWS_PER_PAGE]: (state, action) => {
         const newState = { ...state };
-        const rowsPerPage = action.payload;
-        newState.main = {
-            ...newState.main,
+        const { rowsPerPage, listId } = action.payload;
+        newState[listId] = {
+            ...newState[listId],
             next: {
-                ...newState.main.next,
+                ...newState[listId].next,
                 rowsPerPage,
                 currentPage: 1,
             },
@@ -238,12 +208,13 @@ export const workingListsMetaDesc = createReducerDescription({
     [filterSelectorActionTypes.SET_FILTER]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
-        newState.main = {
-            ...newState.main,
+        const listId = payload.listId;
+        newState[listId] = {
+            ...newState[listId],
             next: {
-                ...newState.main.next,
+                ...newState[listId].next,
                 filters: {
-                    ...(newState.main.next ? newState.main.next.filters : null),
+                    ...(newState[listId].next ? newState[listId].next.filters : null),
                     [payload.itemId]: payload.requestData,
                 },
             },
@@ -252,17 +223,17 @@ export const workingListsMetaDesc = createReducerDescription({
     },
     [filterSelectorActionTypes.CLEAR_FILTER]: (state, action) => {
         const newState = { ...state };
-        const itemId = action.payload.itemId;
+        const { itemId, listId } = action.payload;
 
         const nextMainStateFilters = {
-            ...(newState.main.next ? newState.main.next.filters : null),
+            ...(newState[listId].next ? newState[listId].next.filters : null),
             [itemId]: null,
         };
 
-        newState.main = {
-            ...newState.main,
+        newState[listId] = {
+            ...newState[listId],
             next: {
-                ...newState.main.next,
+                ...newState[listId].next,
                 filters: nextMainStateFilters,
             },
         };
@@ -274,34 +245,6 @@ export const workingListsMetaDesc = createReducerDescription({
         newState[action.payload.listId] = action.payload.meta;
         return newState;
     },
-    [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: updateListsMetaOnResetProgramId,
-    [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateListsMetaOnUrlUpdate,
-    [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateListsMetaOnUrlUpdate,
-    [editEventSelectorActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
-        const payload = action.payload;
-        const nextProgramId = payload.eventContainer.event.programId;
-        const prevProgramId = payload.prevProgramId;
-        if (nextProgramId !== prevProgramId) {
-            return updateListsMetaOnResetProgramId(state);
-        }
-        return state;
-    },
-    [viewEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
-        const payload = action.payload;
-        const nextProgramId = payload.eventContainer.event.programId;
-        const prevProgramId = payload.prevProgramId;
-        if (nextProgramId !== prevProgramId) {
-            return updateListsMetaOnResetProgramId(state);
-        }
-        return state;
-    },
-    [cleanUpActionTypes.CLEAN_UP_EVENT_LIST_IN_LOADING]: state => ({
-        ...state,
-        main: {
-            ...state.main,
-            next: {},
-        },
-    }),
 }, 'workingListsMeta');
 
 const getLoadingState = oldState => ({
@@ -317,182 +260,88 @@ const getReadyState = (oldState, more) => ({
 });
 
 export const workingListsUIDesc = createReducerDescription({
-    [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS]: (state) => {
+    [paginationActionTypes.CHANGE_PAGE]: (state, action) => {
         const newState = { ...state };
-        newState.main = getLoadingState(newState.main);
+        const listId = action.payload.listId;
+        newState[listId] = getLoadingState(newState[listId]);
         return newState;
     },
-    [mainPageSelectorActionTypes.SET_ORG_UNIT]: (state) => {
+    [paginationActionTypes.CHANGE_ROWS_PER_PAGE]: (state, action) => {
         const newState = { ...state };
-        newState.main = getLoadingState(newState.main);
+        const listId = action.payload.listId;
+        newState[listId] = getLoadingState(newState[listId]);
         return newState;
     },
-    [mainPageSelectorActionTypes.SET_PROGRAM_ID]: (state) => {
+    [eventsListActionTypes.SORT_WORKING_LIST]: (state, action) => {
         const newState = { ...state };
-        newState.main = getLoadingState(newState.main);
+        const listId = action.payload.listId;
+        newState[listId] = getLoadingState(newState[listId]);
         return newState;
     },
-    [mainPageSelectorActionTypes.SET_CATEGORY_OPTION]: (state) => {
+    [eventsListActionTypes.WORKING_LIST_UPDATING]: (state, action) => {
         const newState = { ...state };
-        newState.main = getLoadingState(newState.main);
+        const listId = action.payload.listId;
+        newState[listId] = { ...newState[listId], isUpdating: true };
         return newState;
     },
-    [mainSelectionsActionTypes.VALID_SELECTIONS_FROM_URL]: (state) => {
+    [eventsListActionTypes.WORKING_LIST_UPDATING_WITH_DIALOG]: (state, action) => {
         const newState = { ...state };
-        newState.main = getLoadingState(newState.main);
+        const listId = action.payload.listId;
+        newState[listId] = { ...newState[listId], isUpdatingWithDialog: true };
         return newState;
     },
-    [paginationActionTypes.CHANGE_PAGE]: (state) => {
+    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
-        newState.main = getLoadingState(newState.main);
-        return newState;
-    },
-    [paginationActionTypes.CHANGE_ROWS_PER_PAGE]: (state) => {
-        const newState = { ...state };
-        newState.main = getLoadingState(newState.main);
-        return newState;
-    },
-    [eventsListActionTypes.SORT_WORKING_LIST]: (state) => {
-        const newState = { ...state };
-        newState.main = getLoadingState(newState.main);
-        return newState;
-    },
-    [eventsListActionTypes.WORKING_LIST_UPDATING]: (state) => {
-        const newState = { ...state };
-        newState.main = { ...newState.main, isUpdating: true };
-        return newState;
-    },
-    [eventsListActionTypes.WORKING_LIST_UPDATING_WITH_DIALOG]: (state) => {
-        const newState = { ...state };
-        newState.main = { ...newState.main, isUpdatingWithDialog: true };
-        return newState;
-    },
-    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state) => {
-        const newState = { ...state };
-        newState.main = getReadyState(newState.main, {
+        const listId = action.payload.listId;
+        newState[listId] = getReadyState(newState[listId], {
             hasBeenLoaded: true,
             dataLoadingError: null,
         });
         return newState;
     },
-    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state) => {
+    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
-        newState.main = getReadyState(newState.main, {
+        const listId = action.payload.listId;
+        newState[listId] = getReadyState(newState[listId], {
             dataLoadingError: null,
         });
         return newState;
     },
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: (state, action) => {
         const newState = { ...state };
-        newState.main = getReadyState({}, {
-            dataLoadingError: action.payload,
+        const payload = action.payload;
+        newState[payload.listId] = getReadyState({}, {
+            dataLoadingError: payload,
         });
         return newState;
     },
-    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVAL_FAILED]: (state) => {
+    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVAL_FAILED]: (state, action) => {
         const newState = { ...state };
-        newState.main = getReadyState({}, {
+        const listId = action.payload.listId;
+        newState[listId] = getReadyState({}, {
             dataLoadingError: null,  // reverting list to previous state and showing feedbackBar message
         });
         return newState;
     },
-    [newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
-        const newState = { ...state };
-        newState.main = getLoadingState(newState.main);
-        return newState;
-    },
-    [newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
-        const newState = { ...state };
-        newState.main = getLoadingState(newState.main);
-        return newState;
-    },
-    [newEventDataEntryActionTypes.CANCEL_SAVE_NO_WORKING_LIST_UPDATE_NEEDED]: (state) => {
-        const newState = { ...state };
-        newState.main = getReadyState(newState.main, {});
-        return newState;
-    },
-    [newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE]: (state) => {
-        const newState = { ...state };
-        newState.main = getReadyState(newState.main, {});
-        return newState;
-    },
-    [editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
-        const newState = { ...state };
-        newState.main = getLoadingState(newState.main);
-        return newState;
-    },
-    [editEventDataEntryActionTypes.EVENT_UPDATE_FAILED_AFTER_RETURN_TO_MAIN_PAGE]: (state) => {
-        const newState = { ...state };
-        newState.main = getReadyState(newState.main, {});
-        return newState;
-    },
-    [editEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
-        const newState = { ...state };
-        newState.main = getLoadingState(newState.main);
-        return newState;
-    },
-    [editEventDataEntryActionTypes.NO_WORKING_LIST_UPDATE_NEEDED_AFTER_CANCEL_UPDATE]: (state) => {
-        const newState = { ...state };
-        newState.main = getReadyState(newState.main, {});
-        return newState;
-    },
-    [viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE]: (state) => {
-        const newState = { ...state };
-        newState.main = getLoadingState(newState.main);
-        return newState;
-    },
-    [viewEventActionTypes.NO_WORKING_LIST_UPDATE_NEEDED_ON_BACK_TO_MAIN_PAGE]: (state) => {
-        const newState = { ...state };
-        newState.main = getReadyState(newState.main, {});
-        return newState;
-    },
-    [connectivityActionTypes.GET_EVENT_LIST_ON_RECONNECT]: (state) => {
-        const newState = { ...state };
-        newState.main = getLoadingState(newState.main);
-        return newState;
-    },
-    [cleanUpActionTypes.CLEAN_UP_EVENT_LIST_IN_LOADING]: (state) => {
-        const newState = {
-            ...state,
-            main: getReadyState(state.main, {}),
-        };
-        return newState;
-    },
 }, 'workingListsUI');
-
-const updateColumnsOrderOnResetProgram = (state) => {
-    const newState = {
-        ...state,
-        main: null,
-    };
-    return newState;
-};
-
-const updateColumnsOrderOnUrlUpdate = (state, action) => {
-    const payload = action.payload;
-    const nextProgramId = payload.nextProps.programId;
-    const prevProgramId = payload.prevProps.programId;
-    if (nextProgramId !== prevProgramId) {
-        return updateColumnsOrderOnResetProgram(state);
-    }
-    return state;
-};
 
 export const workingListsColumnsOrderDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
         const newColumnsOrder = action.payload.columnsOrder;
+        const payload = action.payload;
 
         if (!newColumnsOrder) {
             return state;
         }
 
         const newState = { ...state };
-        newState.main = action.payload.columnsOrder;
+        newState[payload.listId] = payload.columnsOrder;
         return newState;
     },
     [columnSelectorActionTypes.UPDATE_WORKINGLIST_ORDER]: (state, action) => {
         const newState = { ...state };
-        newState.main = [...action.payload];
+        const listId = action.payload.listId;
+        newState[listId] = [...action.payload.workinglist];
         return newState;
     },
     [listActionTypes.RESET_LIST]: (state, action) => {
@@ -500,33 +349,13 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
         newState[action.payload.listId] = [...action.payload.columnsOrder];
         return newState;
     },
-    [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: updateColumnsOrderOnResetProgram,
-    [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateColumnsOrderOnUrlUpdate,
-    [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateColumnsOrderOnUrlUpdate,
-    [editEventSelectorActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
-        const payload = action.payload;
-        const nextProgramId = payload.eventContainer.event.programId;
-        const prevProgramId = payload.prevProgramId;
-        if (nextProgramId !== prevProgramId) {
-            return updateColumnsOrderOnResetProgram(state);
-        }
-        return state;
-    },
-    [viewEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
-        const payload = action.payload;
-        const nextProgramId = payload.eventContainer.event.programId;
-        const prevProgramId = payload.prevProgramId;
-        if (nextProgramId !== prevProgramId) {
-            return updateColumnsOrderOnResetProgram(state);
-        }
-        return state;
-    },
 }, 'workingListsColumnsOrder');
 
 export const workingListsContextDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
-        newState.main = action.payload.selections;
+        const payload = action.payload;
+        newState[payload.listId] = payload.selections;
         return newState;
     },
     [listActionTypes.RESET_LIST]: (state, action) => {
@@ -542,18 +371,6 @@ export const workingListsContextDesc = createReducerDescription({
         return newState;
     },
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: (state, action) => {
-        const payload = action.payload;
-        const nextProgramId = payload.nextProps.programId;
-        const prevProgramId = payload.prevProps.programId;
-        if (nextProgramId !== prevProgramId) {
-            return {
-                ...state,
-                main: null,
-            };
-        }
-        return state;
-    },
-    [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
         const payload = action.payload;
         const nextProgramId = payload.nextProps.programId;
         const prevProgramId = payload.prevProps.programId;
@@ -606,40 +423,42 @@ const updateFiltersEditOnUrlUpdate = (state, action) => {
 
 export const workingListFiltersEditDesc = createReducerDescription({
     [filterSelectorActionTypes.EDIT_CONTENTS]: (state, action) => {
-        const payload = action.payload;
+        const { itemId, listId, value } = action.payload;
         const newState = { ...state };
-        newState.main = {
-            ...newState.main,
+        newState[listId] = {
+            ...newState[listId],
             next: {
-                ...(newState.main ? newState.main.next : null),
-                [payload.itemId]: payload.value,
+                ...(newState[listId] ? newState[listId].next : null),
+                [itemId]: value,
             },
         };
         return newState;
     },
     [filterSelectorActionTypes.CLEAR_FILTER]: (state, action) => {
-        const itemId = action.payload.itemId;
+        const { itemId, listId } = action.payload;
         const newState = { ...state };
-        newState.main = {
-            ...newState.main,
+        newState[listId] = {
+            ...newState[listId],
             [itemId]: null,
             next: {},
         };
         return newState;
     },
-    [filterSelectorActionTypes.SET_FILTER]: (state) => {
+    [filterSelectorActionTypes.SET_FILTER]: (state, action) => {
         const newState = { ...state };
-        newState.main = {
-            ...newState.main,
-            ...(newState.main ? newState.main.next : null),
+        const listId = action.payload.listId;
+        newState[listId] = {
+            ...newState[listId],
+            ...(newState[listId] ? newState[listId].next : null),
             next: {},
         };
         return newState;
     },
-    [filterSelectorActionTypes.REVERT_FILTER]: (state) => {
+    [filterSelectorActionTypes.REVERT_FILTER]: (state, action) => {
         const newState = { ...state };
-        newState.main = {
-            ...newState.main,
+        const listId = action.payload.listId;
+        newState[listId] = {
+            ...newState[listId],
             next: {},
         };
         return newState;
@@ -649,7 +468,6 @@ export const workingListFiltersEditDesc = createReducerDescription({
         main: {},
     }),
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateFiltersEditOnUrlUpdate,
-    [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateFiltersEditOnUrlUpdate,
     [editEventSelectorActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
         const payload = action.payload;
         const nextProgramId = payload.eventContainer.event.programId;
@@ -676,76 +494,56 @@ export const workingListFiltersEditDesc = createReducerDescription({
     },
 }, 'workingListFiltersEdit');
 
-const updateApplitedFiltersOnProgramReset = state => ({
-    ...state,
-    main: {
-        ...state.main,
-        next: state.main ? Object.keys(state.main).reduce((accNextKeys, key) => {
-            if (key !== 'next') {
-                accNextKeys[key] = null;
-            }
-            return accNextKeys;
-        }, {}) : null,
-    },
-});
-
-const updateApplitedFiltersOnUrlUpdate = (state, action) => {
-    const payload = action.payload;
-    const nextProgramId = payload.nextProps.programId;
-    const prevProgramId = payload.prevProps.programId;
-    if (nextProgramId !== prevProgramId) {
-        return updateApplitedFiltersOnProgramReset(state);
-    }
-    return state;
-};
-
 export const workingListsAppliedFiltersDesc = createReducerDescription({
-    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state) => {
+    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
-        const next = newState.main ? newState.main.next : null;
+        const listId = action.payload.listId;
+        const next = newState[listId] ? newState[listId].next : null;
 
-        const mainStateWithNulls = {
-            ...newState.main,
+        const stateWithNulls = {
+            ...newState[listId],
             ...next,
         };
 
-        const mainStateWithoutNulls = Object
-            .keys(mainStateWithNulls)
+        const stateWithoutNulls = Object
+            .keys(stateWithNulls)
             .reduce((accNewState, key) => {
-                if (mainStateWithNulls[key]) {
-                    accNewState[key] = mainStateWithNulls[key];
+                if (stateWithNulls[key]) {
+                    accNewState[key] = stateWithNulls[key];
                 }
                 return accNewState;
             }, {});
 
-        newState.main = {
-            ...mainStateWithoutNulls,
+        newState[listId] = {
+            ...stateWithoutNulls,
             next: {},
         };
 
         return newState;
     },
-    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: (state) => {
+    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: (state, action) => {
         const newState = {
             ...state,
-            main: {},
+            [action.payload.listId]: {},
         };
         return newState;
     },
-    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state) => {
+    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
-        const next = newState.main.next;
-        newState.main = {
-            ...newState.main,
+        const listId = action.payload.listId;
+        const next = newState[listId].next;
+        newState[listId] = {
+            ...newState[listId],
             ...next,
             next: {},
         };
         return newState;
     },
-    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVAL_FAILED]: (state) => {
+    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVAL_FAILED]: (state, action) => {
         const newState = { ...state };
-        newState.main = {
-            ...newState.main,
+        const listId = action.payload.listId;
+        newState[listId] = {
+            ...newState[listId],
             next: {},
         };
         return newState;
@@ -753,10 +551,11 @@ export const workingListsAppliedFiltersDesc = createReducerDescription({
     [filterSelectorActionTypes.SET_FILTER]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
-        newState.main = {
-            ...newState.main,
+        const listId = payload.listId;
+        newState[listId] = {
+            ...newState[listId],
             next: {
-                ...(newState.main ? newState.main.next : null),
+                ...(newState[listId] ? newState[listId].next : null),
                 [payload.itemId]: payload.appliedText,
             },
         };
@@ -764,44 +563,16 @@ export const workingListsAppliedFiltersDesc = createReducerDescription({
     },
     [filterSelectorActionTypes.CLEAR_FILTER]: (state, action) => {
         const newState = { ...state };
-        const itemId = action.payload.itemId;
-        newState.main = {
-            ...newState.main,
+        const { itemId, listId } = action.payload;
+        newState[listId] = {
+            ...newState[listId],
             next: {
-                ...(newState.main ? newState.main.next : null),
+                ...(newState[listId] ? newState[listId].next : null),
                 [itemId]: null,
             },
         };
         return newState;
     },
-    [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: updateApplitedFiltersOnProgramReset,
-    [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateApplitedFiltersOnUrlUpdate,
-    [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateApplitedFiltersOnUrlUpdate,
-    [editEventSelectorActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
-        const payload = action.payload;
-        const nextProgramId = payload.eventContainer.event.programId;
-        const prevProgramId = payload.prevProgramId;
-        if (nextProgramId !== prevProgramId) {
-            return updateApplitedFiltersOnProgramReset(state);
-        }
-        return state;
-    },
-    [viewEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
-        const payload = action.payload;
-        const nextProgramId = payload.eventContainer.event.programId;
-        const prevProgramId = payload.prevProgramId;
-        if (nextProgramId !== prevProgramId) {
-            return updateApplitedFiltersOnProgramReset(state);
-        }
-        return state;
-    },
-    [cleanUpActionTypes.CLEAN_UP_EVENT_LIST_IN_LOADING]: state => ({
-        ...state,
-        main: {
-            ...state.main,
-            next: {},
-        },
-    }),
 }, 'workingListsAppliedFilters');
 
 const updateUserSelectedFilersOnUrlUpdate = (state, action) => {
@@ -828,7 +599,6 @@ export const workingListsUserSelectedFiltersDesc = createReducerDescription({
     },
     [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: () => ({}),
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateUserSelectedFilersOnUrlUpdate,
-    [newEventSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: updateUserSelectedFilersOnUrlUpdate,
     [editEventSelectorActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
         const payload = action.payload;
         const nextProgramId = payload.eventContainer.event.programId;

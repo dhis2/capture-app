@@ -140,6 +140,7 @@ export type Column = {
 };
 
 type Props = {
+    listId: string,
     dataSource: Array<{eventId: string, [elementId: string]: any}>,
     columns: ?Array<Column>,
     classes: {
@@ -164,7 +165,7 @@ type Props = {
     },
     sortById: string,
     sortByDirection: string,
-    onSort: (id: string, direction: string) => void,
+    onSort: (listId: string, id: string, direction: string) => void,
     onRowClick: (rowData: {eventId: string}) => void,
     filterButtons: React.Node,
     getCustomEndCellHeader: (props: Props) => React.Node,
@@ -194,7 +195,7 @@ class EventsList extends React.Component<Props> {
         this.columnHeaderInstances = [];
     }
     getSortHandler = (id: string) => (direction: string) => {
-        this.props.onSort(id, direction);
+        this.props.onSort(this.props.listId, id, direction);
     }
 
     setColumnWidth(columnInstance, index) {

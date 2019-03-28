@@ -33,6 +33,7 @@ const POPOVER_TRANSFORM_ORIGIN = {
 };
 
 type Props = {
+    listId: string,
     itemId: string,
     type: string,
     optionSet?: ?OptionSet,
@@ -44,10 +45,10 @@ type Props = {
         inactiveFilterButtonLabel: string,
     },
     filterValue: ?string,
-    onEditFilterContents: (value: any, itemId: string) => void,
-    onFilterUpdate: (data: ?Object, itemId: string, commitValue?: any) => void,
-    onClearFilter: (itemId: string) => void,
-    onRevertFilter: () => void,
+    onEditFilterContents: (listId: string, value: any, itemId: string) => void,
+    onFilterUpdate: (listId: string, data: ?Object, itemId: string, commitValue?: any) => void,
+    onClearFilter: (listId: string, itemId: string) => void,
+    onRevertFilter: (listId: string) => void,
 };
 
 type State = {
@@ -83,22 +84,24 @@ class FilterButton extends Component<Props, State> {
 
     handleCloseFilterSelector = () => {
         this.closeFilterSelector();
-        this.props.onRevertFilter();
+        const { onRevertFilter, listId } = this.props;
+        onRevertFilter(listId);
     }
 
     handleEditFilterContents = (value: any) => {
-        this.props.onEditFilterContents(value, this.props.itemId);
+        const { onEditFilterContents, itemId, listId } = this.props;
+        onEditFilterContents(listId, value, itemId);
     }
 
     handleFilterUpdate = (data: ?Object, commitValue?: any) => {
-        const itemId = this.props.itemId;
-        this.props.onFilterUpdate(data, itemId, commitValue);
+        const { itemId, onFilterUpdate, listId } = this.props;
+        onFilterUpdate(listId, data, itemId, commitValue);
         this.closeFilterSelector();
     }
 
     handleClearFilter = () => {
-        const itemId = this.props.itemId;
-        this.props.onClearFilter(itemId);
+        const { listId, itemId, onClearFilter } = this.props;
+        onClearFilter(listId, itemId);
     }
 
     renderSelectorContents() {

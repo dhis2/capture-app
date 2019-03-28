@@ -23,9 +23,10 @@ const styles = theme => ({
 });
 
 type Props = {
+    listId: string,
     classes: Object,
     columns: Array<Object>,
-    onUpdateWorkinglistOrder: (workinglist: Array<Object>) => void,
+    onUpdateWorkinglistOrder: (listId: string, workinglist: Array<Object>) => void,
 };
 
 type State = {
@@ -61,7 +62,7 @@ class ColumnSelector extends Component<Props, State> {
         }));
 
     handleSave = () => {
-        this.props.onUpdateWorkinglistOrder(this.getListToSave());
+        this.props.onUpdateWorkinglistOrder(this.props.listId, this.getListToSave());
         this.setState({ open: false });
     };
 

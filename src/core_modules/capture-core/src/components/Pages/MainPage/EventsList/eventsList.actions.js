@@ -21,16 +21,17 @@ export const batchActionTypes = {
 };
 
 export const workingListUpdateDataRetrieved =
-    (data: Object) => actionCreator(actionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED)(data);
+    (listId: string, data: Object) => actionCreator(actionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED)({ ...data, listId });
 
 export const workingListUpdateRetrievalFailed =
-    (errorMessage: string) => actionCreator(actionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVAL_FAILED)(errorMessage);
+    (listId: string, errorMessage: string) => actionCreator(actionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVAL_FAILED)({ listId, errorMessage });
 
 export const sortWorkingList =
-    (id: string, direction: string) => actionCreator(actionTypes.SORT_WORKING_LIST)({ id, direction });
+    (listId: string, id: string, direction: string) => actionCreator(actionTypes.SORT_WORKING_LIST)({ listId, id, direction });
 
-export const workingListUpdating = () => actionCreator(actionTypes.WORKING_LIST_UPDATING)({});
-export const workingListUpdatingWithDialog = () => actionCreator(actionTypes.WORKING_LIST_UPDATING_WITH_DIALOG)({});
+export const workingListUpdating = (listId: string) => actionCreator(actionTypes.WORKING_LIST_UPDATING)({ listId });
+export const workingListUpdatingWithDialog =
+    (listId: string) => actionCreator(actionTypes.WORKING_LIST_UPDATING_WITH_DIALOG)({ listId });
 
 export const openEditEventPage =
     (eventId: string) => actionCreator(actionTypes.OPEN_EDIT_EVENT_PAGE)(eventId);

@@ -16,20 +16,20 @@ const mapStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onEditFilterContents: (value: any, itemId: string) => {
-        dispatch(editContents(value, itemId));
+    onEditFilterContents: (listId: string, value: any, itemId: string) => {
+        dispatch(editContents(listId, value, itemId));
     },
-    onFilterUpdate: (data: ?Object, itemId: string, commitValue?: any) => {
-        const actions = isDefined(commitValue) ? [editContents(commitValue, itemId)] : [];
-        actions.push(data == null ? clearFilter(itemId) : setFilter(data, itemId));
-        actions.push(workingListUpdating());
+    onFilterUpdate: (listId: string, data: ?Object, itemId: string, commitValue?: any) => {
+        const actions = isDefined(commitValue) ? [editContents(listId, commitValue, itemId)] : [];
+        actions.push(data == null ? clearFilter(listId, itemId) : setFilter(listId, data, itemId));
+        actions.push(workingListUpdating(listId));
         dispatch(batchActions(actions, batchActionTypes.SET_FILTER_BATCH));
     },
-    onClearFilter: (itemId: string) => {
-        dispatch(clearFilter(itemId));
+    onClearFilter: (listId: string, itemId: string) => {
+        dispatch(clearFilter(listId, itemId));
     },
-    onRevertFilter: () => {
-        dispatch(revertFilter());
+    onRevertFilter: (listId: string) => {
+        dispatch(revertFilter(listId));
     },
 });
 

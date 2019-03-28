@@ -17,8 +17,8 @@ export const cancelEditEventEpic = (action$: InputObservable, store: ReduxStore)
             if (!state.offline.online) {
                 return noWorkingListUpdateNeededAfterUpdateCancelled();
             }
-
-            const listSelections = state.workingListsContext.main;
+            const listId = state.workingListSelector.currentWorkingListId;
+            const listSelections = listId && state.workingListsContext[listId];
             if (!listSelections) {
                 return updateWorkingListAfterUpdateCancelled();
             }

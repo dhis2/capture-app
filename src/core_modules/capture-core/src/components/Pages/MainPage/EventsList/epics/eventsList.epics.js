@@ -2,6 +2,8 @@
 import { fromPromise } from 'rxjs/observable/fromPromise';
 
 import log from 'loglevel';
+import { batchActions } from 'redux-batched-actions';
+import { ActionsObservable } from 'redux-observable';
 import errorCreator from 'capture-core/utils/errorCreator';
 import { getInitialWorkingListDataAsync, getUpdateWorkingListDataAsync } from './workingListDataRetriever';
 import isSelectionsEqual from '../../../../App/isSelectionsEqual';
@@ -32,7 +34,6 @@ import {
     actionTypes as filterSelectorActionTypes,
     batchActionTypes as filterSelectorBatchActionTypes,
 } from '../FilterSelectors/filterSelector.actions';
-import { batchActions } from 'redux-batched-actions';
 
 const errorMessages = {
     WORKING_LIST_RETRIEVE_ERROR: 'Working list could not be loaded',
@@ -42,9 +43,10 @@ const errorMessages = {
 
 const getUnprocessedQueryArgsForInitialWorkingList = (state: ReduxState) => {
     const { programId, orgUnitId, categories } = state.currentSelections;
+    const listId = state.workingListSelector.event.currentWorkingListId;
 
-    const currentMeta = state.workingListsMeta.main || {};
-    const nextMeta = (state.workingListsMeta.main && state.workingListsMeta.main.next) || {};
+    const currentMeta = state.workingListsMeta[listId] || {};
+    const nextMeta = (state.workingListsMeta[listId] && state.workingListsMeta[listId].next) || {};
     const meta = {
         ...currentMeta,
         ...nextMeta,
@@ -64,10 +66,11 @@ const getUnprocessedQueryArgsForInitialWorkingList = (state: ReduxState) => {
 };
 
 const getUnprocessedQueryArgsForUpdateWorkingList = (state: ReduxState) => {
-    const { programId, orgUnitId, categories } = state.workingListsContext.main;
+    const listId = state.workingListSelector.event.currentWorkingListId;
+    const { programId, orgUnitId, categories } = state.workingListsContext[listId];
 
-    const currentMeta = state.workingListsMeta.main;
-    const nextMeta = state.workingListsMeta.main.next;
+    const currentMeta = state.workingListsMeta[listId];
+    const nextMeta = state.workingListsMeta[listId].next;
     const meta = {
         ...currentMeta,
         ...nextMeta,
@@ -108,10 +111,11 @@ const getInitialWorkingListActionAsync = (
     };
 
     const { programId, orgUnitId, categories } = allQueryArgs;
+    const listId = state.workingListSelector.event.currentWorkingListId;
 
-    return getInitialWorkingListDataAsync(allQueryArgs, state.workingListsColumnsOrder.main)
+    return getInitialWorkingListDataAsync(allQueryArgs, state.workingListsColumnsOrder[listId])
         .then(data =>
-            workingListInitialDataRetrieved({
+            workingListInitialDataRetrieved(listId, {
                 ...data,
                 argsWithDefaults: queryArgsWithDefaultFallbacks,
                 selections: { programId, orgUnitId, categories },
@@ -119,7 +123,7 @@ const getInitialWorkingListActionAsync = (
         )
         .catch((error) => {
             log.error(errorCreator(errorMessages.WORKING_LIST_RETRIEVE_ERROR)({ error }));
-            return workingListInitialRetrievalFailed(errorMessages.WORKING_LIST_RETRIEVE_ERROR);
+            return workingListInitialRetrievalFailed(listId, errorMessages.WORKING_LIST_RETRIEVE_ERROR);
         });
 };
 
@@ -132,19 +136,29 @@ const getUpdateWorkingListActionAsync = (
         ...queryArgsFromState,
         ...customArgs,
     };
-
-    return getUpdateWorkingListDataAsync(queryArgs, state.workingListsColumnsOrder.main)
+    const listId = state.workingListSelector.event.currentWorkingListId;
+    return getUpdateWorkingListDataAsync(queryArgs, state.workingListsColumnsOrder[listId])
         .then(data =>
-            workingListUpdateDataRetrieved(data),
+            workingListUpdateDataRetrieved(listId, data),
         )
         .catch((error) => {
             log.error(errorCreator(errorMessages.WORKING_LIST_UPDATE_ERROR)({ error }));
-            return workingListUpdateRetrievalFailed(errorMessages.WORKING_LIST_UPDATE_ERROR);
+            return workingListUpdateRetrievalFailed(listId, errorMessages.WORKING_LIST_UPDATE_ERROR);
         });
 };
 
-export const retrieveWorkingListOnMainSelectionsCompletedEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+
+export const retrieveWorkingListConfigsFromServer = (action$: ActionsObservable, store: ReduxStore) =>
+    action$.ofType(mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED)
+        .switchMap(() => {
+            const promise = new Promise((r) => { r(); }).then((workingListConfigs) => {
+                const currentWorkingList = 'default';
+                return null; // setWorkingListSelectorData(currentWorkingList, workingListConfigs);
+            });
+            return fromPromise(promise);
+        });
+
+export const retrieveWorkingListOnMainSelectionsCompletedEpic = (action$: ActionsObservable, store: ReduxStore) =>
     action$.ofType(
         mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
     )
@@ -173,8 +187,7 @@ export const retrieveWorkingListOnMainSelectionsCompletedEpic = (action$: InputO
                 );
         });
 
-export const getWorkingListOnCancelSaveEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+export const getWorkingListOnCancelSaveEpic = (action$: ActionsObservable, store: ReduxStore) =>
     action$.ofType(
         newEventDataEntryActionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST,
         editEventDataEntryActionTypes.UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE,
@@ -204,23 +217,27 @@ export const getWorkingListOnCancelSaveEpic = (action$: InputObservable, store: 
                 );
         });
 
-export const requestDeleteEventEpic = (action$: InputObservable) =>
-    // $FlowSuppress
+export const requestDeleteEventEpic = (action$: ActionsObservable, store: ReduxStore) =>
     action$.ofType(
         eventsListActionTypes.REQUEST_DELETE_EVENT,
     ).map((action) => {
+        const state = store.getState();
         const eventId = action.payload.eventId;
-        return batchActions([startDeleteEvent(eventId), workingListUpdatingWithDialog()], eventsListBatchActionTypes.START_DELETE_EVENT_UPDATE_WORKING_LIST);
+        const listId = state.workingListSelector.event.currentWorkingListId;
+        return batchActions([
+            startDeleteEvent(eventId),
+            workingListUpdatingWithDialog(listId),
+        ], eventsListBatchActionTypes.START_DELETE_EVENT_UPDATE_WORKING_LIST);
     });
 
-export const getWorkingListOnSaveEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+export const getWorkingListOnSaveEpic = (action$: ActionsObservable, store: ReduxStore) =>
     action$.ofType(
         mainPageActionTypes.UPDATE_EVENT_LIST_AFTER_SAVE_OR_UPDATE_FOR_SINGLE_EVENT,
     )
         .switchMap(() => {
             const state = store.getState();
-            const listSelections = state.workingListsContext.main;
+            const listId = state.workingListSelector.event.currentWorkingListId;
+            const listSelections = state.workingListsContext[listId];
 
             const cancelActionTypes = [
                 mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
@@ -259,8 +276,7 @@ export const getWorkingListOnSaveEpic = (action$: InputObservable, store: ReduxS
                 );
         });
 
-export const updateWorkingListEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+export const updateWorkingListEpic = (action$: ActionsObservable, store: ReduxStore) =>
     action$.ofType(
         paginationActionTypes.CHANGE_PAGE,
         paginationActionTypes.CHANGE_ROWS_PER_PAGE,
@@ -289,8 +305,7 @@ export const updateWorkingListEpic = (action$: InputObservable, store: ReduxStor
                 );
         });
 
-export const getEventListOnReconnectEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+export const getEventListOnReconnectEpic = (action$: ActionsObservable, store: ReduxStore) =>
     action$.ofType(
         connectivityBatchActionTypes.GOING_ONLINE_EXECUTED_BATCH,
     )
@@ -304,8 +319,8 @@ export const getEventListOnReconnectEpic = (action$: InputObservable, store: Red
                 orgUnitId: state.currentSelections.orgUnitId,
                 categories: state.currentSelections.categories,
             };
-
-            const listSelections = state.workingListsContext.main;
+            const listId = state.workingListSelector.event.currentWorkingListId;
+            const listSelections = state.workingListsContext[listId];
 
             const cancelActionTypes = [
                 mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,

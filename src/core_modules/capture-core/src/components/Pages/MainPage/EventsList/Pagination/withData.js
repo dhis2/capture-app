@@ -4,18 +4,18 @@ import { connect } from 'react-redux';
 
 import { changePage, changeRowsPerPage } from './pagination.actions';
 
-const mapStateToProps = (state: ReduxState) => ({
-    rowsPerPage: state.workingListsMeta.main.rowsPerPage,
-    currentPage: state.workingListsMeta.main.currentPage,
-    rowsCount: state.workingListsMeta.main.rowsCount,
+const mapStateToProps = (state: ReduxState, props: { listId: string }) => ({
+    rowsPerPage: state.workingListsMeta[props.listId].rowsPerPage,
+    currentPage: state.workingListsMeta[props.listId].currentPage,
+    rowsCount: state.workingListsMeta[props.listId].rowsCount,
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onChangeRowsPerPage: (rowsPerPage: number) => {
-        dispatch(changeRowsPerPage(rowsPerPage));
+    onChangeRowsPerPage: (listId: string, rowsPerPage: number) => {
+        dispatch(changeRowsPerPage(listId, rowsPerPage));
     },
-    onChangePage: (page: number) => {
-        dispatch(changePage(page));
+    onChangePage: (listId: string, page: number) => {
+        dispatch(changePage(listId, page));
     },
 });
 

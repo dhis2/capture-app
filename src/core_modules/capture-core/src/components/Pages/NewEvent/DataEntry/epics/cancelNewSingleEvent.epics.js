@@ -23,8 +23,8 @@ export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) 
             if (recentlyAddedEventsCount > 0) {
                 return cancelNewEventUpdateWorkingList();
             }
-
-            const listSelections = state.workingListsContext.main;
+            const listId = state.workingListSelector.currentWorkingListId;
+            const listSelections = listId && state.workingListsContext[listId];
             if (!listSelections) {
                 return cancelNewEventUpdateWorkingList();
             }

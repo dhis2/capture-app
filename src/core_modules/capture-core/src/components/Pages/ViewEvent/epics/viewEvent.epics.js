@@ -110,8 +110,8 @@ export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) 
             if (!state.offline.online) {
                 return noWorkingListUpdateNeededOnBackToMainPage();
             }
-
-            const listSelections = state.workingListsContext.main;
+            const listId = state.workingListSelector.currentWorkingListId;
+            const listSelections = listId && state.workingListsContext[listId];
             if (!listSelections) {
                 return updateWorkingListOnBackToMainPage();
             }
