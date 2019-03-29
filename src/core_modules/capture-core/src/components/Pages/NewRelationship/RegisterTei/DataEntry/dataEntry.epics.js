@@ -33,6 +33,8 @@ export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObserv
                     orgUnit,
                     DATA_ENTRY_ID,
                     [openDataEntry()],
+                    [],
+                    state.generatedUniqueValuesCache[DATA_ENTRY_ID],
                 );
             }
 

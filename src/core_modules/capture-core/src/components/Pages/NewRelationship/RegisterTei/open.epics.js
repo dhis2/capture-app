@@ -66,6 +66,8 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
                     orgUnit,
                     DATA_ENTRY_ID,
                     [initializeRegisterTei(trackerProgram.id, orgUnit)],
+                    [],
+                    state.generatedUniqueValuesCache[DATA_ENTRY_ID],
                 );
             }
 

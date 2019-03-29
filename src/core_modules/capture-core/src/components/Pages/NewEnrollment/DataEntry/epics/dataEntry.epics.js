@@ -52,11 +52,14 @@ export const openNewEnrollmentInDataEntryEpic = (action$: InputObservable, store
             }
 
             const foundation = trackerProgram && trackerProgram.enrollment.enrollmentForm;
+            const dataEntryId = 'enrollment';
             return openDataEntryForNewEnrollmentBatchAsync(
                 trackerProgram,
                 foundation,
                 orgUnit,
-                'enrollment',
+                dataEntryId,
                 [openDataEntryForNewEnrollment()],
+                [],
+                state.generatedUniqueValuesCache[dataEntryId],
             );
         });
