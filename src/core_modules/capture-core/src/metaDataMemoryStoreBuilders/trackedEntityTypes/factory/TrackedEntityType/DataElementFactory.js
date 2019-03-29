@@ -130,7 +130,7 @@ class DataElementFactory {
                 };
 
                 if (cachedAttribute.pattern) {
-                    _this.generatorPattern = cachedAttribute.pattern;
+                    _this.generatable = !!cachedAttribute.pattern;
                 }
             });
         }

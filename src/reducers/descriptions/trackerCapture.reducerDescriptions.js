@@ -65,6 +65,9 @@ import {
 
 import { notesDesc } from 'capture-core/reducers/descriptions/notes.reducerDescription';
 import { relationshipsDesc } from 'capture-core/reducers/descriptions/relationships.reducerDescription';
+import {
+    generatedUniqueValuesCacheDesc,
+} from 'capture-core/reducers/descriptions/generatedUniqueValuesCache.reducerDescription';
 
 import { appReducerDesc } from './app.reducerDescription';
 import { currentSelectionsReducerDesc } from './currentSelections.reducerDescription';
@@ -122,4 +125,5 @@ export default [
     teiSearchDesc,
     notesDesc,
     relationshipsDesc,
+    generatedUniqueValuesCacheDesc,
 ];

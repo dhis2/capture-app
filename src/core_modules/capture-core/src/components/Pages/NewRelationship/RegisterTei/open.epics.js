@@ -3,7 +3,7 @@ import {
     actionTypes as newRelationshipActionTypes,
 } from '../newRelationship.actions';
 import {
-    openDataEntryForNewEnrollmentBatch,
+    openDataEntryForNewEnrollmentBatchAsync,
     openDataEntryForNewTeiBatch,
 } from '../../../DataEntries';
 import {
@@ -42,7 +42,7 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
     // $FlowSuppress
     action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE)
         .filter(action => action.payload.findMode && action.payload.findMode === findModes.TEI_REGISTER)
-        .map((action) => { // eslint-disable-line
+        .switchMap((action) => { // eslint-disable-line
             const state = store.getState();
             const selectedRelationshipType = state.newRelationship.selectedRelationshipType;
             const { programId: suggestedProgramId, trackedEntityTypeId } = selectedRelationshipType.to; // eslint-disable-line
@@ -60,7 +60,7 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
                 .organisationUnits[orgUnitId];
 
             if (trackerProgram) { // enrollment form
-                return openDataEntryForNewEnrollmentBatch(
+                return openDataEntryForNewEnrollmentBatchAsync(
                     trackerProgram,
                     trackerProgram && trackerProgram.enrollment.enrollmentForm,
                     orgUnit,

@@ -3,7 +3,7 @@ import { actionTypes as registrationSectionActionTypes } from '../RegistrationSe
 import { openDataEntry, openDataEntryCancelled } from './dataEntry.actions';
 import { DATA_ENTRY_ID } from '../registerTei.const';
 import {
-    openDataEntryForNewEnrollmentBatch,
+    openDataEntryForNewEnrollmentBatchAsync,
     openDataEntryForNewTeiBatch,
 } from '../../../../DataEntries';
 import { getTrackerProgramThrowIfNotFound, TrackerProgram } from '../../../../../metaData';
@@ -11,7 +11,7 @@ import { getTrackerProgramThrowIfNotFound, TrackerProgram } from '../../../../..
 export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
     action$.ofType(registrationSectionActionTypes.PROGRAM_CHANGE, registrationSectionActionTypes.ORG_UNIT_CHANGE)
-        .map((action) => {
+        .switchMap((action) => {
             const state = store.getState();
             const { programId, orgUnit } = state.newRelationshipRegisterTei;
 
@@ -27,7 +27,7 @@ export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObserv
                     return openDataEntryCancelled();
                 }
 
-                return openDataEntryForNewEnrollmentBatch(
+                return openDataEntryForNewEnrollmentBatchAsync(
                     trackerProgram,
                     trackerProgram && trackerProgram.enrollment.enrollmentForm,
                     orgUnit,

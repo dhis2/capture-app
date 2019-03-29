@@ -15,9 +15,10 @@ export function loadNewDataEntry(
     itemId: string,
     dataEntryPropsToInclude?: ?Array<DataEntryPropToInclude>,
     defaultDataEntryValues?: ?Object,
+    defaultFormValues?: ?Object,
 ) {
     const dataEntryValues = defaultDataEntryValues || {};
-    const formValues = {};
+    const formValues = defaultFormValues || {};
     const dataEntryMeta = dataEntryPropsToInclude ? getDataEntryMeta(dataEntryPropsToInclude) : {};
     const dataEntryUI = dataEntryPropsToInclude ? validateDataEntryValues(dataEntryValues, dataEntryPropsToInclude) : {};
     const key = getDataEntryKey(dataEntryId, itemId);

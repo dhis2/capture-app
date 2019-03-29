@@ -2,7 +2,7 @@
 export {
     Enrollment as EnrollmentDataEntry,
     sectionKeys as sectionKeysForEnrollmentDataEntry,
-    openDataEntryForNewEnrollmentBatch,
+    openDataEntryForNewEnrollmentBatchAsync,
     runRulesOnUpdateFieldBatch,
     buildServerData as buildServerDataForEnrollmentDataEntry,
     openBatchActionTypes as enrollmentOpenBatchActionTypes,
