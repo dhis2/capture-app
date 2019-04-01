@@ -2,7 +2,7 @@
 import { actionCreator } from '../../../../../actions/actions.utils';
 import { RenderFoundation, Program } from '../../../../../metaData';
 import { viewEventIds } from '../eventDetails.actions';
-import { getConvertGeometryIn, convertGeometryOut, convertStatusIn, convertStatusOut } from '../../../../DataEntries';
+import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../../../DataEntries';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import { loadViewDataEntry } from '../../../../DataEntry/actions/dataEntryLoadView.actions';
 import { getRulesActionsForEvent } from '../../../../../rulesEngineActionsCreator';
@@ -31,7 +31,7 @@ export const loadViewEventDataEntry =
             {
                 clientId: 'status',
                 dataEntryId: 'complete',
-                onConvertIn: convertStatusIn,
+                onConvertIn: value => (value === 'COMPLETED' ? 'true' : 'false'),
                 onConvertOut: convertStatusOut,
             },
         ];

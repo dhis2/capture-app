@@ -2,10 +2,12 @@
 
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { IconButton, withStyles } from '@material-ui/core';
+import { IconButton, withStyles, Tooltip } from '@material-ui/core';
 import { ArrowForward as ArrowIcon, Clear as ClearIcon } from '@material-ui/icons';
 import Button from '../Buttons/Button.component';
+import { RelationshipType } from '../../metaData';
 import type { Relationship, Entity } from './relationships.types';
+
 
 type Props = {
     classes: {
@@ -19,6 +21,8 @@ type Props = {
         relationshipActions: string,
     },
     relationships: Array<Relationship>,
+    writableRelationshipTypes: Array<RelationshipType>,
+    entityAccess: { read: boolean, write: boolean },
     onRemoveRelationship: (relationshipClientId: string) => void,
     onOpenAddRelationship: () => void,
     currentEntityId: string,
@@ -61,6 +65,9 @@ const getStyles = (theme: Theme) => ({
     relationshipActions: {
         padding: 7,
     },
+    addButtonContainer: {
+        display: 'inline-block',
+    },
 });
 
 const fromNames = {
@@ -68,29 +75,40 @@ const fromNames = {
 };
 
 class Relationships extends React.Component<Props> {
-    getRelationships = () => {
-        const { classes, relationships, onRemoveRelationship } = this.props;
-        return relationships.map(r => (
-            <div className={classes.relationship} key={r.id || r.clientId}>
+    static defaultProps = {
+        entityAccess: { read: true, write: true },
+    }
+
+    renderRelationships = () => this.props.relationships.map(r => this.renderRelationship(r))
+
+    renderRelationship = (relationship: Relationship) => {
+        const { classes, onRemoveRelationship } = this.props;
+        const canDelete = this.canDelete(relationship);
+        return (
+            <div className={classes.relationship} key={relationship.clientId}>
                 <div className={classes.relationshipDetails}>
                     <div className={classes.relationshipTypeName}>
-                        {r.relationshipType.name}
+                        {relationship.relationshipType.name}
                     </div>
                     <div className={classes.relationshipEntities}>
-                        {this.getEntityName(r.from)}
+                        {this.getEntityName(relationship.from)}
                         <ArrowIcon className={classes.arrowIcon} />
-                        {this.getEntityName(r.to)}
+                        {this.getEntityName(relationship.to)}
                     </div>
                 </div>
                 <div className={classes.relationshipActions}>
-                    {this.canDelete(r) &&
-                        <IconButton onClick={() => { onRemoveRelationship(r.clientId); }} >
-                            <ClearIcon />
-                        </IconButton>
-                    }
+                    <Tooltip title={canDelete ? '' : i18n.t('You dont have access to delete this relationship')}>
+                        <div>
+                            <IconButton
+                                onClick={() => { onRemoveRelationship(relationship.clientId); }}
+                                disabled={!canDelete}
+                            >
+                                <ClearIcon />
+                            </IconButton>
+                        </div>
+                    </Tooltip>
                 </div>
             </div>
-        ),
         );
     }
 
@@ -98,19 +116,34 @@ class Relationships extends React.Component<Props> {
         (entity.id === this.props.currentEntityId ?
             fromNames[entity.type] : entity.name);
 
-    canDelete = (relationship: Relationship) => relationship.from.id === this.props.currentEntityId;
+    canDelete = (relationship: Relationship) => {
+        const { entityAccess, writableRelationshipTypes } = this.props;
+        return (
+            relationship.from.id === this.props.currentEntityId &&
+            entityAccess.write &&
+            writableRelationshipTypes.some(rt => rt.id === relationship.relationshipType.id && rt.access.data.write)
+        );
+    }
 
     render() {
-        const { classes, onOpenAddRelationship } = this.props;
+        const { classes, onOpenAddRelationship, entityAccess, writableRelationshipTypes } = this.props;
+        const canCreate = entityAccess.write && writableRelationshipTypes.length > 0;
         return (
             <div className={classes.container}>
                 <div className={classes.relationshipsContainer}>
-                    {this.getRelationships()}
+                    {this.renderRelationships()}
                 </div>
                 <div>
-                    <Button onClick={onOpenAddRelationship}>
-                        {i18n.t('Add relationship')}
-                    </Button>
+                    <Tooltip title={canCreate ? '' : i18n.t('You dont have access to create any relationships')}>
+                        <div className={classes.addButtonContainer}>
+                            <Button
+                                onClick={onOpenAddRelationship}
+                                disabled={!canCreate}
+                            >
+                                {i18n.t('Add relationship')}
+                            </Button>
+                        </div>
+                    </Tooltip>
                 </div>
 
             </div>

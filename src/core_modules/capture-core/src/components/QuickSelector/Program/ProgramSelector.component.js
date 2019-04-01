@@ -8,14 +8,13 @@ import ClearIcon from '@material-ui/icons/Clear';
 import Grid from '@material-ui/core/Grid';
 import i18n from '@dhis2/d2-i18n';
 
-import programCollection from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
+import { programCollection } from '../../../metaDataMemoryStores';
 import VirtualizedSelect from '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import ProgramList from './ProgramList';
 
-import EventProgram from '../../../metaData/Program/EventProgram';
+import { Program, EventProgram, CategoryOption } from '../../../metaData';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
 import './programSelector.css';
-import Program from '../../../metaData/Program/Program';
 import LinkButton from '../../Buttons/LinkButton.component';
 
 const styles = (theme: Theme) => ({
@@ -227,6 +226,22 @@ class ProgramSelector extends Component<Props> {
         );
     }
 
+    getCategoryOptions(categoryOptions: Array<CategoryOption>) {
+        const { selectedOrgUnitId } = this.props;
+
+        const ouFilteredCategoryOptions = !selectedOrgUnitId ?
+            categoryOptions :
+            categoryOptions
+                .filter(option =>
+                    !option.organisationUnitIds || option.organisationUnitIds[selectedOrgUnitId]);
+
+        return ouFilteredCategoryOptions
+            .map(option => ({
+                label: option.name,
+                value: option.id,
+            }));
+    }
+
     renderWithSelectedProgram(selectedProgram) {
         if (selectedProgram.categoryCombination) {
             return (
@@ -236,39 +251,36 @@ class ProgramSelector extends Component<Props> {
                             <Grid item xs={12} sm={6}>
                                 {this.renderSelectedProgram(selectedProgram)}
                             </Grid>
-                            {selectedProgram.categoryCombination.categories.map(i =>
-                                (<Grid key={i.id} item xs={12} sm={6}>
-                                    <h4 className={this.props.classes.title}>{i.name}</h4>
-                                    {
-                                        (() => {
-                                            if (this.props.selectedCategories && this.props.selectedCategories[i.id]) {
-                                                return (
-                                                    <div className={this.props.classes.selectedText}>
-                                                        <div className={this.props.classes.selectedCategoryNameContainer}>{i.categoryOptions.find(option => option.id === this.props.selectedCategories[i.id]).name}</div>
-                                                        <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetCategoryOption(i.id)}>
-                                                            <ClearIcon className={this.props.classes.selectedButtonIcon} />
-                                                        </IconButton>
-                                                    </div>
-                                                );
-                                            }
-                                            const categoryOptions = i
-                                                .categoryOptions
-                                                .map(optionCount => ({
-                                                    label: optionCount.name,
-                                                    value: optionCount.id,
-                                                }));
+                            {
+                                // $FlowFixMe
+                                Array.from(selectedProgram.categoryCombination.categories.values()).map(i =>
+                                    (<Grid key={i.id} item xs={12} sm={6}>
+                                        <h4 className={this.props.classes.title}>{i.name}</h4>
+                                        {
+                                            (() => {
+                                                if (this.props.selectedCategories && this.props.selectedCategories[i.id]) {
+                                                    return (
+                                                        <div className={this.props.classes.selectedText}>
+                                                            <div className={this.props.classes.selectedCategoryNameContainer}>{i.getOptionThrowIfNotFound(this.props.selectedCategories[i.id]).name}</div>
+                                                            <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetCategoryOption(i.id)}>
+                                                                <ClearIcon className={this.props.classes.selectedButtonIcon} />
+                                                            </IconButton>
+                                                        </div>
+                                                    );
+                                                }
+                                                const categoryOptions = this.getCategoryOptions([...i.categoryOptions.values()]);
 
-                                            return (
-                                                <VirtualizedSelect
-                                                    options={categoryOptions}
-                                                    onSelect={(option) => { this.handleClickCategoryOption(option, i.id); }}
-                                                    value={''}
-                                                    placeholder={i18n.t('Select')}
-                                                />
-                                            );
-                                        })()
-                                    }
-                                </Grid>))
+                                                return (
+                                                    <VirtualizedSelect
+                                                        options={categoryOptions}
+                                                        onSelect={(option) => { this.handleClickCategoryOption(option, i.id); }}
+                                                        value={''}
+                                                        placeholder={i18n.t('Select')}
+                                                    />
+                                                );
+                                            })()
+                                        }
+                                    </Grid>))
                             }
                         </Grid>
                     </Paper>

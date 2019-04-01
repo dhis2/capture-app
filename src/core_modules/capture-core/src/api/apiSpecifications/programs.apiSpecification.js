@@ -63,11 +63,13 @@ function convertTranslationsToObject(translations) {
 }
 
 function getProgramStageDataElements(programStageDataElements) {
-    return programStageDataElements.map((programStageDataElement) => {
-        programStageDataElement.dataElement.translations =
-            convertTranslationsToObject(programStageDataElement.dataElement.translations);
-        return programStageDataElement;
-    });
+    return programStageDataElements
+        .filter(programStageDataElement => programStageDataElement.dataElement)
+        .map((programStageDataElement) => {
+            programStageDataElement.dataElement.translations =
+                convertTranslationsToObject(programStageDataElement.dataElement.translations);
+            return programStageDataElement;
+        });
 }
 
 function getProgramStages(d2ProgramStagesCollection) {
@@ -123,7 +125,7 @@ export default new ApiSpecification((_this) => {
             'relatedProgram[id,displayName],' +
             'relationshipType[id,displayName],' +
             'trackedEntityType[id],' +
-            'categoryCombo[id,displayName,isDefault,categories[id,displayName,categoryOptions[id,displayName,organisationUnits[id]]]],' +
+            'categoryCombo[id,displayName,isDefault,categories[id,displayName]]' +
             'organisationUnits[id,displayName],' +
             'userRoles[id,displayName],' +
             'programStages[*,dataEntryForm[*],programStageSections[id,displayName,description,sortOrder,dataElements[id]],programStageDataElements[*,dataElement[*,optionSet[id]]]],' +

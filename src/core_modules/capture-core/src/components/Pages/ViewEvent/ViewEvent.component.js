@@ -68,7 +68,7 @@ class ViewEvent extends Component<Props, State> {
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, programStage, currentDataEntryKey, eventAccess } = this.props;
         return (
             <div className={classes.container}>
                 <Button className={classes.showAllEvents} variant="raised" onClick={this.handleGoBackToAllEvents}>
@@ -77,11 +77,13 @@ class ViewEvent extends Component<Props, State> {
                 </Button>
                 <div className={classes.contentContainer}>
                     <EventDetails
-                        programStage={this.props.programStage}
+                        eventAccess={eventAccess}
+                        programStage={programStage}
                     />
                     <RightColumnWrapper
-                        programStage={this.props.programStage}
-                        dataEntryKey={this.props.currentDataEntryKey}
+                        eventAccess={eventAccess}
+                        programStage={programStage}
+                        dataEntryKey={currentDataEntryKey}
                     />
                 </div>
 

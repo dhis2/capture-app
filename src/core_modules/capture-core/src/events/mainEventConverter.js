@@ -2,6 +2,7 @@
 import elementTypes from '../metaData/DataElement/elementTypes';
 import { convertValue as convertToServerValue } from '../converters/clientToServer';
 import { convertValue as convertToClientValue } from '../converters/serverToClient';
+import eventStatusElement from './eventStatusElement';
 
 type ConverterFn = (type: $Values<typeof elementTypes>, value: any) => any;
 
@@ -9,18 +10,23 @@ type InputCompareKeys = {
     eventDate?: ?string,
     dueDate?: ?string,
     completedDate?: ?string,
+    status?: ?string,
 };
 
 type CompareKeys = {
     eventDate: string,
     dueDate: string,
     completedDate: string,
+    status: string,
 };
+
 
 function getConvertedValue(valueToConvert: any, key: string, onConvertValue: ConverterFn, compareKeys: CompareKeys) {
     let convertedValue;
     if (key === compareKeys.eventDate || key === compareKeys.dueDate || key === compareKeys.completedDate) {
         convertedValue = onConvertValue(valueToConvert, elementTypes.DATE);
+    } else if (key === compareKeys.status) {
+        convertedValue = onConvertValue(valueToConvert, elementTypes.TEXT, eventStatusElement);
     } else {
         convertedValue = valueToConvert;
     }
@@ -36,6 +42,7 @@ export function convertMainEvent(
         eventDate: compareKeysMapFromDefault.eventDate || 'eventDate',
         dueDate: compareKeysMapFromDefault.dueDate || 'dueDate',
         completedDate: compareKeysMapFromDefault.completedDate || 'completedDate',
+        status: compareKeysMapFromDefault.status || 'status',
     };
 
     return Object

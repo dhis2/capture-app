@@ -75,7 +75,6 @@ export const makeGetHiddenFieldsValues = () => createDeepEqualSelector(
     sectionHiddenFields => sectionHiddenFields,
 );
 
-
 const createMessagesDeepEqualSelector = createSelectorCreator(
     defaultMemoize,
     (prevValues, currentValues) =>

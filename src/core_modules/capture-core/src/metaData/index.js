@@ -1,6 +1,6 @@
 // @flow
 export { Access } from './Access';
-export { Category, CategoryCombination } from './CategoryCombinations';
+export { Category, CategoryCombination, CategoryOption } from './CategoryCombinations';
 export {
     DataElement,
     elementTypes as dataElementTypes,
@@ -33,4 +33,5 @@ export {
     getTrackedEntityTypeThrowIfNotFound,
     convertDataElementsValues,
     getEventProgramThrowIfNotFound,
+    getEventProgramEventAccess,
 } from './helpers';

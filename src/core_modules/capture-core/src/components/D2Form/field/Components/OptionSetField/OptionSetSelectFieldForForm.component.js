@@ -18,6 +18,7 @@ import {
 } from '../internal';
 import withOptionsIconElement from './withOptionsIconElement';
 import labelTypeClasses from '../../buildField.mod.css';
+import withRulesOptionVisibilityHandler from './withRulesOptionVisibilityHandler';
 
 const getFilteredProps = (props: Object) => {
     const { formHorizontal, fieldLabelMediaBasedClass, ...passOnProps } = props;
@@ -39,8 +40,10 @@ export default withGotoInterface()(
                                 })(
                                     withDisplayMessages()(
                                         withOptionsIconElement()(
-                                            withFilterProps(getFilteredProps)(
-                                                withSelectTranslations()(VirtualizedSelectField),
+                                            withRulesOptionVisibilityHandler()(
+                                                withFilterProps(getFilteredProps)(
+                                                    withSelectTranslations()(VirtualizedSelectField),
+                                                ),
                                             ),
                                         ),
                                     ),

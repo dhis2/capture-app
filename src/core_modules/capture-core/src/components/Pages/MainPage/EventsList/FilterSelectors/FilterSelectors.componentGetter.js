@@ -29,6 +29,7 @@ type Props = {
 const INDIVIDUAL_DISPLAY_COUNT = 4;
 
 export default (InnerComponent: React.ComponentType<any>) =>
+// $FlowFixMe
     withStyles(getStyles)(class EventListFilterSelectors extends React.Component<Props> {
         static getCalculatedIndividiualColumns(filterColumns: Array<Column>) {
             const visibleColumns = filterColumns
@@ -90,6 +91,7 @@ export default (InnerComponent: React.ComponentType<any>) =>
                                 type={column.type}
                                 title={column.header}
                                 optionSet={column.optionSet}
+                                singleSelect={column.singleSelect}
                             />
                         </div>
                     ),

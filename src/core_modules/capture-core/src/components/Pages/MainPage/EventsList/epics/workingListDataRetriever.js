@@ -76,6 +76,10 @@ const getMainApiFilterQueryArguments = (filters: ?{ [id: string]: string}, mainC
                         } else {
                             filtersForCurrentMain.endDate = filter.replace('le:', '');
                         }
+                    } else if (key === 'status') {
+                        if (filter.startsWith('eq:')) {
+                            filtersForCurrentMain.status = filter.replace('eq:', '');
+                        }
                     }
                     return {
                         ...accMainFilters,

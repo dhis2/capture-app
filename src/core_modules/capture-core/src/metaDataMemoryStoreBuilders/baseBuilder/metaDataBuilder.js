@@ -20,11 +20,6 @@ export default async function buildMetaData(locale: string) {
     const programsBuilderPromise =
         buildPrograms(
             locale,
-            stores.PROGRAMS,
-            stores.PROGRAM_RULES_VARIABLES,
-            stores.PROGRAM_RULES,
-            stores.PROGRAM_INDICATORS,
-            stores.RELATIONSHIP_TYPES,
             preRequisitesData[stores.OPTION_SETS],
             preRequisitesData[stores.TRACKED_ENTITY_ATTRIBUTES],
             trackedEntityTypeCollection,

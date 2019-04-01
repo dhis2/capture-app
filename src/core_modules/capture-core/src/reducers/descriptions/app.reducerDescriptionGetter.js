@@ -7,7 +7,6 @@ import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
     selectorActionTypes as newEventPageSelectorActionTypes,
     selectionsIncompleteActionTypes as newEventPageSelectionsIncompleteActionTypes,
-
 } from '../../components/Pages/NewEvent';
 import { actionTypes as tempSelectorActionTypes } from '../../components/Pages/MainPage/tempSelector.actions';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';

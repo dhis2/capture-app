@@ -55,7 +55,7 @@ const valueConvertersForType = {
     [elementTypes.AGE]: convertDateForView,
     [elementTypes.FILE_RESOURCE]: convertResourceForView,
     [elementTypes.IMAGE]: convertResourceForView,
-    [elementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.displayName,
+    [elementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.name,
 };
 
 export function convertValue(value: any, type: $Values<typeof elementTypes>, dataElement?: ?DataElement) {
