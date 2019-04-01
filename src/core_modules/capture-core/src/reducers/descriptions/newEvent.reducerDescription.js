@@ -18,11 +18,9 @@ import {
 } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
 
 export const newEventPageDesc = createReducerDescription({
-    [newEventdataEntryUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state) => {
-        const newState = { ...state };
-        newState.isLoading = true;
-        return newState;
-    },
+    [newEventdataEntryUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: () => ({
+        isLoading: true,
+    }),
     [newEventdataEntryUrlActionTypes.ERROR_RETRIEVING_ORG_UNIT_BASED_ON_URL]: (state, action) => {
         const newState = { ...state };
         newState.isLoading = false;
