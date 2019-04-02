@@ -1,15 +1,23 @@
 // @flow
+import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
+import { errorCreator } from 'capture-core-utils';
 import {
     actionTypes as newRelationshipActionTypes,
 } from '../newRelationship.actions';
 import {
     openDataEntryForNewEnrollmentBatchAsync,
-    openDataEntryForNewTeiBatch,
+    openDataEntryForNewTeiBatchAsync,
 } from '../../../DataEntries';
 import {
     initializeRegisterTei,
+    initializeRegisterTeiFailed,
 } from './registerTei.actions';
-import { getTrackerProgramThrowIfNotFound, TrackerProgram } from '../../../../metaData';
+import {
+    getTrackerProgramThrowIfNotFound,
+    getTrackedEntityTypeThrowIfNotFound,
+    TrackerProgram,
+} from '../../../../metaData';
 import { findModes } from '../findModes';
 import { DATA_ENTRY_ID } from './registerTei.const';
 
@@ -23,7 +31,10 @@ function getTrackerProgram(suggestedProgramId: string) {
             trackerProgram = program;
         }
     } catch (error) {
-        trackerProgram = null;
+        log.error(
+            errorCreator('tracker program for id not found')({ suggestedProgramId, error }),
+        );
+        throw Error(i18n('Metadata error. see log for details'));
     }
     return trackerProgram;
 }
@@ -45,15 +56,22 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
         .switchMap((action) => { // eslint-disable-line
             const state = store.getState();
             const selectedRelationshipType = state.newRelationship.selectedRelationshipType;
-            const { programId: suggestedProgramId, trackedEntityTypeId } = selectedRelationshipType.to; // eslint-disable-line
+            const { programId: suggestedProgramId, trackedEntityTypeId } = selectedRelationshipType.to;
             const { orgUnitId: suggestedOrgUnitId } = state.currentSelections;
 
-            const trackerProgram: ?TrackerProgram = suggestedProgramId ? getTrackerProgram(suggestedProgramId) : null;
+            let trackerProgram: ?TrackerProgram;
+            if (suggestedProgramId) {
+                try {
+                    trackerProgram = getTrackerProgram(suggestedProgramId);
+                } catch (error) {
+                    return Promise.resolve(initializeRegisterTeiFailed(error));
+                }
+            }
             const orgUnitId = getOrgUnitId(suggestedOrgUnitId, trackerProgram);
 
             // can't run rules when no valid organisation unit is specified, i.e. only the registration section will be visible
             if (!orgUnitId) {
-                return initializeRegisterTei(trackerProgram && trackerProgram.id);
+                return Promise.resolve(initializeRegisterTei(trackerProgram && trackerProgram.id));
             }
 
             const orgUnit = state
@@ -72,8 +90,21 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
             }
 
             // tei (tet attribues) form
-            return openDataEntryForNewTeiBatch(
+            let TETType;
+            try {
+                TETType = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId);
+            } catch (error) {
+                log.error(
+                    errorCreator('TET for id not found')({ trackedEntityTypeId, error }),
+                );
+                return Promise.resolve(initializeRegisterTeiFailed(i18n.t('Metadata error. see log for details')));
+            }
+
+            return openDataEntryForNewTeiBatchAsync(
+                TETType.teiRegistration.form,
+                orgUnit,
                 DATA_ENTRY_ID,
                 [initializeRegisterTei(null, orgUnit)],
+                state.generatedUniqueValuesCache[DATA_ENTRY_ID],
             );
         });

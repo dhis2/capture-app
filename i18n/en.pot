@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-03-25T14:06:26.195Z\n"
-"PO-Revision-Date: 2019-03-25T14:06:26.195Z\n"
+"POT-Creation-Date: 2019-04-02T12:42:27.291Z\n"
+"PO-Revision-Date: 2019-04-02T12:42:27.291Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -407,6 +407,9 @@ msgid "Select a category option to start reporting"
 msgstr ""
 
 msgid "You dont have access to create an event in the current selections"
+msgstr ""
+
+msgid "Metadata error. see log for details"
 msgstr ""
 
 msgid "Create person and link"

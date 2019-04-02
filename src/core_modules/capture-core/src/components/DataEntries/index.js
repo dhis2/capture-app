@@ -11,7 +11,7 @@ export {
 } from './Enrollment';
 export {
     TrackedEntityInstance as TrackedEntityInstanceDataEntry,
-    openDataEntryForNewTeiBatch,
+    openDataEntryForNewTeiBatchAsync,
     batchActionTypes as teiBatchActionTypes,
     openBatchActionTypes as teiOpenBatchActionTypes,
 } from './TrackedEntityInstance';

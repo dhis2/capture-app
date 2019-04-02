@@ -43,8 +43,13 @@ async function generateUniqueValueAsync(
         ORG_UNIT_CODE: staticPatternValues.orgUnitCode,
     } : null;
 
+    const queryParameters = {
+        ...orgUnitCodeQueryParameter,
+        expiration: '3',
+    };
+
     const generatedValue = await api
-        .get(`trackedEntityAttributes/${teaId}/generate`, orgUnitCodeQueryParameter)
+        .get(`trackedEntityAttributes/${teaId}/generate`, queryParameters)
         .then(response => response && response.value)
         .catch((error) => {
             log.error(

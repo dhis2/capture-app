@@ -11,7 +11,7 @@ export const batchActionTypes = {
     NEW_TEI_DATA_ENTRY_OPEN_BATCH: 'NewTeiDataEntryOpenBatch',
 };
 
-export const openDataEntryForNewTeiBatch = async (
+export const openDataEntryForNewTeiBatchAsync = async (
     foundation: ?RenderFoundation,
     orgUnit: Object,
     dataEntryId: string,
@@ -20,7 +20,6 @@ export const openDataEntryForNewTeiBatch = async (
 ) => {
     const generatedItemContainers = await
         getGeneratedUniqueValuesAsync(foundation, generatedUniqueValuesCache, { orgUnitCode: orgUnit.code });
-    debugger;
     const dataEntryActions = loadNewDataEntry(
         dataEntryId,
         itemId,

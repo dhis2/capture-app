@@ -206,7 +206,7 @@ class FormBuilder extends React.Component<Props> {
                         handleIsValidatingInternal,
                     );
                 } catch (reason) {
-                    if (reason.isCanceled) {
+                    if (reason && isObject(reason) && reason.isCanceled) {
                         validationData = null;
                     } else {
                         validationData = {
@@ -325,6 +325,14 @@ class FormBuilder extends React.Component<Props> {
                     });
 
                 this.validateAllCancelablePromise = null;
+            })
+            .catch((reason) => {
+                if (!reason || !isObject(reason) || !reason.isCanceled) {
+                    log.error({
+                        reason,
+                        message: 'formBuilder validate all fields failed',
+                    });
+                }
             });
     }
 
@@ -416,7 +424,7 @@ class FormBuilder extends React.Component<Props> {
                 this.fieldsValidatingPromiseContainer[fieldId] = null;
             })
             .catch((reason) => {
-                if (!reason.isCanceled) {
+                if (!reason || !isObject(reason) || !reason.isCanceled) {
                     log.error({ reason, field, value });
                     onUpdateField(
                         value,

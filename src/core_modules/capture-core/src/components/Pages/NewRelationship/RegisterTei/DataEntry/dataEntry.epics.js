@@ -1,13 +1,13 @@
 // @flow
-/* eslint-disable */
 import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { actionTypes as registrationSectionActionTypes } from '../RegistrationSection';
-import { openDataEntry, openDataEntryCancelled } from './dataEntry.actions';
+import { openDataEntry, openDataEntryCancelled, openDataEntryFailed } from './dataEntry.actions';
 import { DATA_ENTRY_ID } from '../registerTei.const';
 import {
     openDataEntryForNewEnrollmentBatchAsync,
-    openDataEntryForNewTeiBatch,
+    openDataEntryForNewTeiBatchAsync,
 } from '../../../../DataEntries';
 import {
     getTrackerProgramThrowIfNotFound,
@@ -18,8 +18,12 @@ import {
 
 export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(registrationSectionActionTypes.PROGRAM_CHANGE, registrationSectionActionTypes.ORG_UNIT_CHANGE)
-        .switchMap((action) => {
+    action$.ofType(
+        registrationSectionActionTypes.PROGRAM_CHANGE,
+        registrationSectionActionTypes.ORG_UNIT_CHANGE,
+        registrationSectionActionTypes.PROGRAM_FILTER_CLEAR,
+    )
+        .switchMap(() => {
             const state = store.getState();
             const { programId, orgUnit } = state.newRelationshipRegisterTei;
             const TETTypeId = state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId;
@@ -30,11 +34,11 @@ export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObserv
                     trackerProgram = getTrackerProgramThrowIfNotFound(programId);
                 } catch (error) {
                     log.error(
-                        errorCreator('tracker program for id not found')({ programId }),
+                        errorCreator('tracker program for id not found')({ programId, error }),
                     );
-                    return openDataEntryCancelled();
+                    return Promise.resolve(openDataEntryFailed(i18n.t('Metadata error. see log for details')));
                 }
-                
+
                 return openDataEntryForNewEnrollmentBatchAsync(
                     trackerProgram,
                     trackerProgram && trackerProgram.enrollment.enrollmentForm,
@@ -47,17 +51,17 @@ export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObserv
             }
 
             if (orgUnit) {
-                let TETType;
+                let TETType: ?TrackedEntityType;
                 try {
-                    TETType = getTrackedEntityTypeThrowIfNotFound(TETTypeId);    
+                    TETType = getTrackedEntityTypeThrowIfNotFound(TETTypeId);
                 } catch (error) {
                     log.error(
-                        errorCreator('TET for id not found')({ TETTypeId }),
+                        errorCreator('TET for id not found')({ TETTypeId, error }),
                     );
-                    return openDataEntryCancelled();
+                    return Promise.resolve(openDataEntryFailed(i18n.t('Metadata error. see log for details')));
                 }
-                
-                return openDataEntryForNewTeiBatch(
+
+                return openDataEntryForNewTeiBatchAsync(
                     TETType.teiRegistration.form,
                     orgUnit,
                     DATA_ENTRY_ID,
@@ -66,5 +70,5 @@ export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObserv
                 );
             }
 
-            return openDataEntryCancelled();
+            return Promise.resolve(openDataEntryCancelled());
         });
