@@ -8,7 +8,7 @@ import {
 } from '../actions/openDataEntry.actions';
 import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../metaData';
 import {
-    openDataEntryForNewEnrollmentBatch,
+    openDataEntryForNewEnrollmentBatchAsync,
 } from '../../../../DataEntries';
 
 const errorMessages = {
@@ -21,7 +21,7 @@ export const openNewEnrollmentInDataEntryEpic = (action$: InputObservable, store
     action$.ofType(
         urlActionTypes.VALID_SELECTIONS_FROM_URL,
     )
-        .map(() => {
+        .switchMap(() => {
             const state = store.getState();
             const selectionsComplete = state.currentSelections.complete;
             if (!selectionsComplete) {
@@ -52,11 +52,14 @@ export const openNewEnrollmentInDataEntryEpic = (action$: InputObservable, store
             }
 
             const foundation = trackerProgram && trackerProgram.enrollment.enrollmentForm;
-            return openDataEntryForNewEnrollmentBatch(
+            const dataEntryId = 'enrollment';
+            return openDataEntryForNewEnrollmentBatchAsync(
                 trackerProgram,
                 foundation,
                 orgUnit,
-                'enrollment',
+                dataEntryId,
                 [openDataEntryForNewEnrollment()],
+                [],
+                state.generatedUniqueValuesCache[dataEntryId],
             );
         });

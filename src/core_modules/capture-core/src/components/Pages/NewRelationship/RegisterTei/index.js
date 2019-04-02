@@ -1,5 +1,5 @@
 // @flow
-export { default as RegisterTei } from './RegisterTei.component';
+export { default as RegisterTei } from './RegisterTei.container';
 export { openNewRelationshipRegisterTeiEpic } from './open.epics';
 export { openNewRelationshipRegisterTeiDataEntryEpic } from './DataEntry/dataEntry.epics';
 export { actionTypes } from './registerTei.actions';

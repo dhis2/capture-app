@@ -7,20 +7,21 @@ import scopes from './scopes.const';
 type Validator = (value: any, contextProps: any) => Promise<any>;
 
 export default class Unique {
-    _generatorPattern: ?string;
+    _generatable: boolean;
     _scope: $Values<typeof scopes>;
     _onValidate: ?Validator;
 
     constructor(initFn: ?(_this: Unique) => void) {
         this._scope = scopes.ENTIRE_SYSTEM;
+        this._generatable = false;
         initFn && initFn(this);
     }
 
-    set generatorPattern(pattern: string) {
-        this._generatorPattern = pattern;
+    set generatable(generatable: boolean) {
+        this._generatable = generatable;
     }
-    get generatorPattern(): ?string {
-        return this._generatorPattern;
+    get generatable(): boolean {
+        return this._generatable;
     }
 
     set scope(scope: $Values<typeof scopes>) {

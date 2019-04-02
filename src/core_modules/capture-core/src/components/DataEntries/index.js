@@ -2,7 +2,7 @@
 export {
     Enrollment as EnrollmentDataEntry,
     sectionKeys as sectionKeysForEnrollmentDataEntry,
-    openDataEntryForNewEnrollmentBatch,
+    openDataEntryForNewEnrollmentBatchAsync,
     runRulesOnUpdateFieldBatch,
     buildServerData as buildServerDataForEnrollmentDataEntry,
     openBatchActionTypes as enrollmentOpenBatchActionTypes,
@@ -11,7 +11,7 @@ export {
 } from './Enrollment';
 export {
     TrackedEntityInstance as TrackedEntityInstanceDataEntry,
-    openDataEntryForNewTeiBatch,
+    openDataEntryForNewTeiBatchAsync,
     batchActionTypes as teiBatchActionTypes,
     openBatchActionTypes as teiOpenBatchActionTypes,
 } from './TrackedEntityInstance';
