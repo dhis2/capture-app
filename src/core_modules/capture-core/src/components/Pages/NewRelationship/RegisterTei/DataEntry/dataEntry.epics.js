@@ -1,9 +1,11 @@
 // @flow
+import { fromPromise } from 'rxjs/observable/fromPromise';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { actionTypes as registrationSectionActionTypes } from '../RegistrationSection';
 import { openDataEntry, openDataEntryCancelled, openDataEntryFailed } from './dataEntry.actions';
+import { actionTypes as newRelationshipActionTypes } from '../../newRelationship.actions';
 import { DATA_ENTRY_ID } from '../registerTei.const';
 import {
     openDataEntryForNewEnrollmentBatchAsync,
@@ -39,7 +41,7 @@ export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObserv
                     return Promise.resolve(openDataEntryFailed(i18n.t('Metadata error. see log for details')));
                 }
 
-                return openDataEntryForNewEnrollmentBatchAsync(
+                const openEnrollmentPromise = openDataEntryForNewEnrollmentBatchAsync(
                     trackerProgram,
                     trackerProgram && trackerProgram.enrollment.enrollmentForm,
                     orgUnit,
@@ -48,6 +50,9 @@ export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObserv
                     [],
                     state.generatedUniqueValuesCache[DATA_ENTRY_ID],
                 );
+
+                return fromPromise(openEnrollmentPromise)
+                    .takeUntil(action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE));
             }
 
             if (orgUnit) {
@@ -61,13 +66,16 @@ export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObserv
                     return Promise.resolve(openDataEntryFailed(i18n.t('Metadata error. see log for details')));
                 }
 
-                return openDataEntryForNewTeiBatchAsync(
+                const openTeiPromise = openDataEntryForNewTeiBatchAsync(
                     TETType.teiRegistration.form,
                     orgUnit,
                     DATA_ENTRY_ID,
                     [openDataEntry()],
                     state.generatedUniqueValuesCache[DATA_ENTRY_ID],
                 );
+
+                return fromPromise(openTeiPromise)
+                    .takeUntil(action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE));
             }
 
             return Promise.resolve(openDataEntryCancelled());

@@ -1,4 +1,5 @@
 // @flow
+import { fromPromise } from 'rxjs/observable/fromPromise';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
@@ -20,7 +21,6 @@ import {
 } from '../../../../metaData';
 import { findModes } from '../findModes';
 import { DATA_ENTRY_ID } from './registerTei.const';
-
 
 // get tracker program if the suggested program id is valid for the current context
 function getTrackerProgram(suggestedProgramId: string) {
@@ -78,7 +78,7 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
                 .organisationUnits[orgUnitId];
 
             if (trackerProgram) { // enrollment form
-                return openDataEntryForNewEnrollmentBatchAsync(
+                const openEnrollmentPromise = openDataEntryForNewEnrollmentBatchAsync(
                     trackerProgram,
                     trackerProgram && trackerProgram.enrollment.enrollmentForm,
                     orgUnit,
@@ -87,6 +87,9 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
                     [],
                     state.generatedUniqueValuesCache[DATA_ENTRY_ID],
                 );
+
+                return fromPromise(openEnrollmentPromise)
+                    .takeUntil(action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE));
             }
 
             // tei (tet attribues) form
@@ -100,11 +103,14 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
                 return Promise.resolve(initializeRegisterTeiFailed(i18n.t('Metadata error. see log for details')));
             }
 
-            return openDataEntryForNewTeiBatchAsync(
+            const openTeiPromise = openDataEntryForNewTeiBatchAsync(
                 TETType.teiRegistration.form,
                 orgUnit,
                 DATA_ENTRY_ID,
                 [initializeRegisterTei(null, orgUnit)],
                 state.generatedUniqueValuesCache[DATA_ENTRY_ID],
             );
+
+            return fromPromise(openTeiPromise)
+                .takeUntil(action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE));
         });
