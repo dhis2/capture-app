@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-04-02T12:42:27.291Z\n"
-"PO-Revision-Date: 2019-04-02T12:42:27.291Z\n"
+"POT-Creation-Date: 2019-04-07T13:29:35.429Z\n"
+"PO-Revision-Date: 2019-04-07T13:29:35.429Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -409,6 +409,29 @@ msgstr ""
 msgid "You dont have access to create an event in the current selections"
 msgstr ""
 
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr ""
+
+msgid ""
+"An item with this {{attributeName}} already exists, but you don't have "
+"access to it"
+msgstr ""
+
+msgid "A {{trackedEntityTypeName}} with this {{attributeName}} already exists"
+msgstr ""
+
+msgid "Show"
+msgstr ""
+
+msgid "existing {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Existing person"
+msgstr ""
+
+msgid "Link"
+msgstr ""
+
 msgid "Metadata error. see log for details"
 msgstr ""
 
@@ -431,9 +454,6 @@ msgid "Registration"
 msgstr ""
 
 msgid "Search results"
-msgstr ""
-
-msgid "Link"
 msgstr ""
 
 msgid "No {{trackedEntityTypeName}} found."
