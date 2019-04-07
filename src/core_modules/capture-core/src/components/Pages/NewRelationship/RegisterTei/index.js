@@ -5,3 +5,9 @@ export { openNewRelationshipRegisterTeiDataEntryEpic } from './DataEntry/dataEnt
 export { actionTypes } from './registerTei.actions';
 export { actionTypes as registrationSectionActionTypes } from './RegistrationSection';
 export { actionTypes as dataEntryActionTypes } from './DataEntry/dataEntry.actions';
+export {
+    actionTypes as searchGroupDuplicateActionTypes,
+} from './GeneralOutput/WarningSection/SearchGroupDuplicate/searchGroupDuplicate.actions';
+export {
+    loadSearchGroupDuplicatesForReviewEpic,
+} from './GeneralOutput/WarningSection/SearchGroupDuplicate/searchGroupDuplicate.epics';

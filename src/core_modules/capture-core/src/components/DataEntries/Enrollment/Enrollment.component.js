@@ -276,11 +276,13 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
 }
 
 const SearchGroupsHOC = withSearchGroups(getSearchGroups, getSearchContext)(FinalEnrollmentDataEntry);
+/*
 const FeedbackOutput = withFeedbackOutput()(SearchGroupsHOC);
 const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
 const WarningOutput = withWarningOutput()(IndicatorOutput);
 const ErrorOutput = withErrorOutput()(WarningOutput);
-const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(ErrorOutput);
+*/
+const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(SearchGroupsHOC);
 const IncidentDateFieldHOC = withDataEntryField(getIncidentDateSettings())(LocationHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);
 const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);

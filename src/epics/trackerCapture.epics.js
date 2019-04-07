@@ -168,6 +168,7 @@ import {
 import {
     openNewRelationshipRegisterTeiEpic,
     openNewRelationshipRegisterTeiDataEntryEpic,
+    loadSearchGroupDuplicatesForReviewEpic,
 } from 'capture-core/components/Pages/NewRelationship/RegisterTei';
 
 import { runRulesOnEnrollmentFieldUpdateEpic } from 'capture-core/components/DataEntries';
@@ -279,5 +280,6 @@ export default combineEpics(
     updateEventListAfterUpdateEventEpic,
     openNewRelationshipRegisterTeiEpic,
     openNewRelationshipRegisterTeiDataEntryEpic,
+    loadSearchGroupDuplicatesForReviewEpic,
     ...getDataEntryEpics(),
 );

@@ -7,6 +7,7 @@ import {
     registrationSectionActionTypes,
     dataEntryActionTypes,
     actionTypes as registerTeiActionTypes,
+    searchGroupDuplicateActionTypes,
 } from '../../components/Pages/NewRelationship/RegisterTei';
 
 export const newRelationshipDesc = createReducerDescription({
@@ -86,5 +87,20 @@ export const newRelationshipRegisterTeiDesc = createReducerDescription({
         ...state,
         dataEntryIsLoading: false,
         dataEntryError: null,
+    }),
+    [searchGroupDuplicateActionTypes.DUPLICATES_REVIEW]: state => ({
+        ...state,
+        duplicatesReviewIsLoading: true,
+    }),
+    [searchGroupDuplicateActionTypes.DUPLICATES_REVIEW_RETRIEVAL_SUCCESS]: (state, action) => ({
+        ...state,
+        duplicatesReviewIsLoading: false,
+        duplicateTeis: action.payload.teis,
+        duplicatesReviewLoadError: false,
+    }),
+    [searchGroupDuplicateActionTypes.DUPLICATES_REVIEW_RETRIEVAL_FAILED]: state => ({
+        ...state,
+        duplicatesReviewIsLoading: false,
+        duplicatesReviewLoadError: true,
     }),
 }, 'newRelationshipRegisterTei');

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-04-07T13:29:35.429Z\n"
-"PO-Revision-Date: 2019-04-07T13:29:35.429Z\n"
+"POT-Creation-Date: 2019-04-07T22:01:52.053Z\n"
+"PO-Revision-Date: 2019-04-07T22:01:52.053Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -436,6 +436,12 @@ msgid "Metadata error. see log for details"
 msgstr ""
 
 msgid "Create person and link"
+msgstr ""
+
+msgid "An error occured loading possible duplicates"
+msgstr ""
+
+msgid "Possible duplicates found"
 msgstr ""
 
 msgid "Some programs are being filtered."
