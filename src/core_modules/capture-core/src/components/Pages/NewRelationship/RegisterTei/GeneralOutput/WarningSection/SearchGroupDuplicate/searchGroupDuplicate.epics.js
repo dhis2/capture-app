@@ -74,14 +74,15 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                 })
                 .filter(f => f);
 
+            const contextParam = programId ? { program: programId } : { trackedEntityType: tetId };
             const queryParams = {
                 ou: orgUnit.id,
                 ouMode: 'ACCESSIBLE',
-                program: programId,
                 pageSize: 5,
                 page: requestPage,
                 totalPages: !isChangePage,
                 filter: filters,
+                ...contextParam,
             };
 
             return getApi()

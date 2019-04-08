@@ -19,6 +19,7 @@ import {
     addRelationshipForNewSingleEventEpic,
     saveNewEventRelationshipsIfExistsEpic,
     saveNewEventRelationshipFinishedEpic,
+    teiForNewEventRelationshipSavedEpic,
 } from 'capture-core/components/Pages/NewEvent';
 import {
     mainSelectionsCompletedEpic,
@@ -281,5 +282,6 @@ export default combineEpics(
     openNewRelationshipRegisterTeiEpic,
     openNewRelationshipRegisterTeiDataEntryEpic,
     loadSearchGroupDuplicatesForReviewEpic,
+    teiForNewEventRelationshipSavedEpic,
     ...getDataEntryEpics(),
 );

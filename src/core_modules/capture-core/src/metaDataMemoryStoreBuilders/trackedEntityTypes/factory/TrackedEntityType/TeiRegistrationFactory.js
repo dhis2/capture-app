@@ -129,6 +129,7 @@ class TeiRegistrationFactory {
         const inputSearchGroups: Array<InputSearchGroup> = trackedEntityTypeSearchGroups
             .filter(searchGroup => !searchGroup.unique)
             .map(searchGroup => new InputSearchGroup((_this) => {
+                debugger;
                 _this.id = searchGroup.id;
                 _this.minAttributesRequiredToSearch = searchGroup.minAttributesRequiredToSearch;
                 _this.searchFoundation = this._buildInputSearchGroupFoundation(cachedType, searchGroup);

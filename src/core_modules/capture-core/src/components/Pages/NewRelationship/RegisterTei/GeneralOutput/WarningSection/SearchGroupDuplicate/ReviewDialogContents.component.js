@@ -18,20 +18,20 @@ const getStyles = (theme: Theme) => ({
 type Props = {
     dataElements: Array<DataElement>,
     teis: Array<{id: string, values: Object}>,
-    onLink: (teiId: string) => void,
+    onLink: Function,
     classes: Object,
 };
 
 class ReviewDialogContents extends React.Component<Props> {
     getLinkButton = (itemProps: Object) => {
         const { onLink, classes } = this.props;
-        const teiId = itemProps.item.id;
+        const { id, values } = itemProps.item;
         return (
             <div
                 className={classes.linkButtonCotainer}
             >
                 <Button
-                    onClick={() => { onLink(teiId); }}
+                    onClick={() => { onLink(id, values); }}
                     color="primary"
                 >
                     {i18n.t('Link')}

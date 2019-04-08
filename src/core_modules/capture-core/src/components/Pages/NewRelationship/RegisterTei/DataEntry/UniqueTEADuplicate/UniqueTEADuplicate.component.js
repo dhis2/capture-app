@@ -7,7 +7,7 @@ import type { ErrorData } from './uniqueTEADuplicate.types';
 type Props = {
     id: string,
     errorData: ErrorData,
-    onLink: (teiId: string) => void,
+    onLink: (teiId: string, values: Object) => void,
 };
 
 type State = {
@@ -34,12 +34,12 @@ class UniqueTEADuplicate extends React.Component<Props, State> {
         });
     }
 
-    handleLink = () => {
+    handleLink = (values: Object) => {
         this.setState({
             existingTeiDialogOpen: false,
         });
         const teiId = this.props.errorData.id;
-        this.props.onLink(teiId);
+        this.props.onLink(teiId, values);
     }
 
     render() {
