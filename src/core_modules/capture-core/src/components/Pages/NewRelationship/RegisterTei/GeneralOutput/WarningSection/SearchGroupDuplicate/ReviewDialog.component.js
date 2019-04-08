@@ -9,11 +9,12 @@ import ReviewDialogContents from './ReviewDialogContents.container';
 type Props = {
     open: boolean,
     onCancel: () => void,
+    onLink: Function,
 };
 
 class ReviewDialog extends React.Component<Props> {
     render() {
-        const { open, onCancel, ...passOnProps } = this.props;
+        const { open, onCancel, onLink } = this.props;
         return (
             <Dialog
                 open={open}
@@ -21,7 +22,9 @@ class ReviewDialog extends React.Component<Props> {
                 maxWidth={'md'}
                 onClose={onCancel}
             >
-                <ReviewDialogContents />
+                <ReviewDialogContents
+                    onLink={onLink}
+                />
                 <DialogActions>
                     <Button onClick={onCancel} color="primary">
                         {i18n.t('Cancel')}

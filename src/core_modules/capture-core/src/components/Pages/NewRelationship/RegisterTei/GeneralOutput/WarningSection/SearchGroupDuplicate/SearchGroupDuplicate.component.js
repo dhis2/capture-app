@@ -4,7 +4,7 @@ import WarningMessageCreator from './WarningMessageCreator.container';
 import ReviewDialog from './ReviewDialog.component';
 
 type Props = {
-
+    onLink: Function,
 };
 
 type State = {
@@ -32,7 +32,7 @@ class SearchGroupDuplicate extends React.Component<Props, State> {
     }
 
     render() {
-        const { ...passOnProps } = this.props;
+        const { onLink } = this.props;
         const { duplicatesReviewDialogOpen } = this.state;
 
         return (
@@ -43,6 +43,7 @@ class SearchGroupDuplicate extends React.Component<Props, State> {
                 <ReviewDialog
                     open={duplicatesReviewDialogOpen}
                     onCancel={this.handleCloseReviewDialog}
+                    onLink={onLink}
                 />
             </React.Fragment>
         );

@@ -161,6 +161,7 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
 
     renderPager = () => {
         const { onChangePage, paging, classes } = this.props;
+        debugger;
         return (
             <div className={classes.pagination}>
                 <SearchResultsPager

@@ -48,6 +48,7 @@ import { newEnrollmentPageDesc } from 'capture-core/reducers/descriptions/newEnr
 import {
     newRelationshipDesc,
     newRelationshipRegisterTeiDesc,
+    newRelationshipRegisterTeiDuplicatesReviewDesc,
 } from 'capture-core/reducers/descriptions/newRelationship.reducerDescription';
 import {
     organisationUnitDesc,
@@ -118,6 +119,7 @@ export default [
     newEnrollmentPageDesc,
     newRelationshipDesc,
     newRelationshipRegisterTeiDesc,
+    newRelationshipRegisterTeiDuplicatesReviewDesc,
     organisationUnitDesc,
     organisationUnitRootsDesc,
     registeringUnitListDesc,

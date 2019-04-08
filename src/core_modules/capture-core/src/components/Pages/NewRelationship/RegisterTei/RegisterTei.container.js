@@ -10,6 +10,9 @@ const mapStateToProps = (state: ReduxState) => ({
 });
 
 const mapDispatchToProps = () => ({
+    onLink: () => {
+        debugger;
+    },
 });
 
 // $FlowSuppress

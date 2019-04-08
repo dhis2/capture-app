@@ -88,19 +88,28 @@ export const newRelationshipRegisterTeiDesc = createReducerDescription({
         dataEntryIsLoading: false,
         dataEntryError: null,
     }),
+}, 'newRelationshipRegisterTei');
+
+export const newRelationshipRegisterTeiDuplicatesReviewDesc = createReducerDescription({
     [searchGroupDuplicateActionTypes.DUPLICATES_REVIEW]: state => ({
         ...state,
-        duplicatesReviewIsLoading: true,
+        isLoading: true,
     }),
     [searchGroupDuplicateActionTypes.DUPLICATES_REVIEW_RETRIEVAL_SUCCESS]: (state, action) => ({
         ...state,
-        duplicatesReviewIsLoading: false,
-        duplicateTeis: action.payload.teis,
-        duplicatesReviewLoadError: false,
+        isLoading: false,
+        teis: action.payload.teis,
+        loadError: false,
+        paginationData: { ...state.paginationData, ...action.payload.paginationData },
     }),
     [searchGroupDuplicateActionTypes.DUPLICATES_REVIEW_RETRIEVAL_FAILED]: state => ({
         ...state,
-        duplicatesReviewIsLoading: false,
-        duplicatesReviewLoadError: true,
+        isLoading: false,
+        loadError: true,
     }),
-}, 'newRelationshipRegisterTei');
+    [searchGroupDuplicateActionTypes.DUPLICATES_REVIEW_CHANGE_PAGE]: (state, action) => ({
+        ...state,
+        isLoading: true,
+        paginationData: { ...state.paginationData, currentPage: action.payload.page },
+    }),
+}, 'newRelationshipRegisterTeiDuplicatesReview');

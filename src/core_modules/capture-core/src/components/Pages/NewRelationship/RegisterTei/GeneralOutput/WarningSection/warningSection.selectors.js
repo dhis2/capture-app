@@ -5,12 +5,16 @@ import SearchGroupDuplicate from './SearchGroupDuplicate/SearchGroupDuplicate.co
 
 const searchGroupCountSelector = (state, props) =>
     state.dataEntriesSearchGroupsResults[props.dataEntryKey] &&
+    state.dataEntriesSearchGroupsResults[props.dataEntryKey].main &&
     state.dataEntriesSearchGroupsResults[props.dataEntryKey].main.count;
+
+const onLinkSelector = (state, props) => props.onLink;
 
 // $FlowFixMe
 export const makeGetSearchGroupWarning = () => createSelector(
     searchGroupCountSelector,
-    (count: ?number) => {
+    onLinkSelector,
+    (count: ?number, onLink: Function) => {
         if (!count) {
             return null;
         }
@@ -18,7 +22,9 @@ export const makeGetSearchGroupWarning = () => createSelector(
         return {
             id: 'duplicateWarning',
             message: (
-                <SearchGroupDuplicate />
+                <SearchGroupDuplicate
+                    onLink={onLink}
+                />
             ),
         };
     },

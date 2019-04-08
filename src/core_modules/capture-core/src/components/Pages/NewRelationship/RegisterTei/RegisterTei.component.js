@@ -18,11 +18,12 @@ const getStyles = () => ({
 
 type Props = {
     classes: Object,
+    onLink: (teiId: string) => void,
 };
 
 class RegisterTei extends React.Component<Props> {
     render() {
-        const { classes } = this.props;
+        const { onLink, classes } = this.props;
         return (
             <div
                 className={classes.container}
@@ -31,9 +32,13 @@ class RegisterTei extends React.Component<Props> {
                     className={classes.leftContainer}
                 >
                     <RegistrationSection />
-                    <DataEntry />
+                    <DataEntry
+                        onLink={onLink}
+                    />
                 </div>
-                <GeneralOutput />
+                <GeneralOutput
+                    onLink={onLink}
+                />
             </div>
         );
     }

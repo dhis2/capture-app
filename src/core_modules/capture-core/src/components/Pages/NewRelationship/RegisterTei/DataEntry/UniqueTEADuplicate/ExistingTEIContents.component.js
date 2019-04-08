@@ -25,7 +25,7 @@ class ExistingTEIContents extends React.Component<Props> {
         return (
             <DialogContent>
                 <DialogTitle>
-                    {i18n.t('Existing person')}
+                    {i18n.t('Registered person')}
                 </DialogTitle>
                 <CardList
                     items={items}

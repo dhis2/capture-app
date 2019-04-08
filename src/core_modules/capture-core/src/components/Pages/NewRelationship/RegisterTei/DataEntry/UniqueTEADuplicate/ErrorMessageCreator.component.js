@@ -43,7 +43,7 @@ class UniqueTEADuplicateErrorMessageCreator extends React.Component<Props> {
         return (
             <div>
                 {i18n.t(
-                    'An item with this {{attributeName}} already exists, but you don\'t have access to it',
+                    'An item with this {{attributeName}} is already registered, but you don\'t have access to it',
                     { attributeName: attributeNameLC },
                 )}
             </div>
@@ -56,7 +56,7 @@ class UniqueTEADuplicateErrorMessageCreator extends React.Component<Props> {
         return (
             <div>
                 {i18n.t(
-                    'A {{trackedEntityTypeName}} with this {{attributeName}} already exists',
+                    'A {{trackedEntityTypeName}} with this {{attributeName}} is already registered',
                     { trackedEntityTypeName: trackedEntityTypeNameLC, attributeName: attributeNameLC },
                 )}
             </div>
@@ -74,7 +74,7 @@ class UniqueTEADuplicateErrorMessageCreator extends React.Component<Props> {
             <React.Fragment>
                 <div>
                     {i18n.t(
-                        'A {{trackedEntityTypeName}} with this {{attributeName}} already exists',
+                        'A {{trackedEntityTypeName}} with this {{attributeName}} is already registered',
                         { trackedEntityTypeName: trackedEntityTypeNameLC, attributeName: attributeNameLC },
                     )}
                 </div>
@@ -83,13 +83,11 @@ class UniqueTEADuplicateErrorMessageCreator extends React.Component<Props> {
                         onClick={this.handleShowExisting}
                         className={linkButtonClass}
                     >
-                        {i18n.t('Show')}
+                        {i18n.t(
+                            'Show registered {{trackedEntityTypeName}}',
+                            { trackedEntityTypeName: trackedEntityTypeNameLC },
+                        )}
                     </LinkButton>
-
-                    {i18n.t(
-                        'existing {{trackedEntityTypeName}}',
-                        { trackedEntityTypeName: trackedEntityTypeNameLC },
-                    )}
                 </div>
             </React.Fragment>
         );

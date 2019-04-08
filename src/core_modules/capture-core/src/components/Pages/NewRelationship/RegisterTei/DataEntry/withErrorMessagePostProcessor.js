@@ -54,7 +54,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
         }
 
         render() {
-            const { ...passOnProps } = this.props;
+            const { onLink, ...passOnProps } = this.props;
 
             return (
                 <InnerComponent

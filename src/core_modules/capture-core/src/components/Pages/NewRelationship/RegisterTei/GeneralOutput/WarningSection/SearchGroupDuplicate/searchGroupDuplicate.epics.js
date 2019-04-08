@@ -42,8 +42,11 @@ const getFormMetadata = (programId: ?string, tetId: string) =>
 
 export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(actionTypes.DUPLICATES_REVIEW)
-        .switchMap(() => {
+    action$.ofType(actionTypes.DUPLICATES_REVIEW, actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE)
+        .switchMap((action) => {
+            const isChangePage = action.type === actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE;
+            const requestPage = isChangePage ? action.payload.page : 1;
+
             const dataEntryId = 'relationship';
             const state = store.getState();
             const { programId, orgUnit } = state.newRelationshipRegisterTei;
@@ -75,9 +78,9 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                 ou: orgUnit.id,
                 ouMode: 'ACCESSIBLE',
                 program: programId,
-                pageSize: 50,
-                page: 1,
-                totalPages: true,
+                pageSize: 5,
+                page: requestPage,
+                totalPages: !isChangePage,
                 filter: filters,
             };
 
@@ -85,6 +88,13 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                 .get('trackedEntityInstances', queryParams)
                 .then((response) => {
                     const formFoundation = getFormMetadata(programId, tetId);
+                    const pager = (response && response.pager) || {};
+                    const paginationData = !isChangePage ? {
+                        rowsCount: pager.total,
+                        rowsPerPage: pager.pageSize,
+                        currentPage: pager.page,
+                    } : null;
+
                     const teInstances = (response && response.trackedEntityInstances) || [];
                     const convertedInstances = teInstances
                         .map((instance) => {
@@ -99,18 +109,19 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                             const convertedValues = formFoundation.convertValues(values, convertServerToClient);
 
                             return {
-                                id: instance.trackedEntityAttribute,
+                                id: instance.trackedEntityInstance,
                                 values: {
                                     ...convertedValues,
                                     registrationDate: convertServerToClient(instance.created, dataElementTypes.DATETIME),
                                     registrationUnit: convertServerToClient(instance.orgUnit, dataElementTypes.TEXT),
                                     inactive: convertServerToClient(instance.inactive, dataElementTypes.BOOLEAN),
-                                }
+                                },
                             };
                         });
 
                     return duplicatesForReviewRetrievalSuccess(
                         convertedInstances,
+                        paginationData,
                     );
                 })
                 .catch(() =>

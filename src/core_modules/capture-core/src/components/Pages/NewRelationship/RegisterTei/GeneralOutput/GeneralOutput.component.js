@@ -8,6 +8,7 @@ import FeedbacksSection from '../../../ViewEvent/RightColumn/FeedbacksSection/Fe
 import IndicatorsSection from '../../../ViewEvent/RightColumn/IndicatorsSection/IndicatorsSection.container';
 
 type Props = {
+    onLink: (teiId: string) => void,
     classes: {
         container: string,
     }
@@ -28,9 +29,14 @@ const componentContainers = [
 ];
 
 class GeneralOutput extends React.Component<Props> {
-    renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: Object) => (
-        <container.Component key={container.id} {...props} />
-    )
+    renderComponent = (container: {id: string, Component: React.ComponentType<any> }, props: Object) => {
+        const { onLink, ...otherProps } = props;
+        const passOnProps = container.id === 'WarningsSection' ? props : otherProps;
+
+        return (
+            <container.Component key={container.id} {...passOnProps} />
+        );
+    }
 
     render() {
         const { classes, ...passOnProps } = this.props;
