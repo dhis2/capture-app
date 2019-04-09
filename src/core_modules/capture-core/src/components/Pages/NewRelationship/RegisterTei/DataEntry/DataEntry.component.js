@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { Enrollment } from '../Enrollment';
 import { TrackedEntityInstance } from '../TrackedEntityInstance';
+import withErrorMessagePostProcessor from './withErrorMessagePostProcessor';
 
 type Props = {
     showDataEntry: boolean,
@@ -32,4 +33,4 @@ class RegisterTeiDataEntry extends React.Component<Props> {
     }
 }
 
-export default RegisterTeiDataEntry;
+export default withErrorMessagePostProcessor()(RegisterTeiDataEntry);
