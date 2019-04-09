@@ -3,19 +3,21 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from 'capture-ui';
+import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 
 type Props = {
     onSave: () => void,
+    possibleDuplicatesFound: boolean,
 };
 
 const getMainButton = (InnerComponent: React.ComponentType<any>) =>
     class MainButtonHOC extends React.Component<Props> {
-        static getButtonText() {
-            return i18n.t('Create person and link');
+        static getButtonText(duplicatesFound: boolean) {
+            return duplicatesFound ? i18n.t('Review Duplicates') : i18n.t('Create person and link');
         }
 
         renderButton() {
-            const { onSave } = this.props;
+            const { onSave, possibleDuplicatesFound } = this.props;
 
             return (
                 <Button
@@ -23,7 +25,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
                     size="medium"
                     onClick={onSave}
                 >
-                    {MainButtonHOC.getButtonText()}
+                    {MainButtonHOC.getButtonText(possibleDuplicatesFound)}
                 </Button>
             );
         }
@@ -31,6 +33,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
         render() {
             const {
                 onSave,
+                possibleDuplicatesFound,
                 ...passOnProps
             } = this.props;
             const mainButton = this.renderButton();
@@ -43,8 +46,16 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
         }
     };
 
-const mapStateToProps = () => ({
-});
+const mapStateToProps = (state: ReduxState, props: {id: string}) => {
+    const dataEntryId = props.id;
+    const dataEntryKey = getDataEntryKey(dataEntryId, state.dataEntries[dataEntryId].itemId);
+
+    return {
+        possibleDuplicatesFound: !!(state.dataEntriesSearchGroupsResults[dataEntryKey] &&
+            state.dataEntriesSearchGroupsResults[dataEntryKey].main &&
+            state.dataEntriesSearchGroupsResults[dataEntryKey].main.count),
+    };
+};
 
 const mapDispatchToProps = () => ({});
 

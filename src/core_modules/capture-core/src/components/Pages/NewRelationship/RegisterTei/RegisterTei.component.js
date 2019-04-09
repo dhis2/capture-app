@@ -26,6 +26,7 @@ type Props = {
     onSave: Function,
     possibleDuplicates: ?boolean,
     tetName: ?string,
+    onReviewDuplicates: Function,
 };
 
 type State = {
@@ -43,8 +44,10 @@ class RegisterTei extends React.Component<Props, State> {
     handleSaveAttempt = (...args) => {
         if (this.props.possibleDuplicates) {
             this.args = args;
-            this.setState({
-                duplicatesOpen: true,
+            this.props.onReviewDuplicates(() => {
+                this.setState({
+                    duplicatesOpen: true,
+                });
             });
         } else {
             this.props.onSave(...args);
