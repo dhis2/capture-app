@@ -143,6 +143,7 @@ class TeiRegistrationFactory {
                                 ouMode: 'ACCESSIBLE',
                                 filter: Object
                                     .keys(values)
+                                    .filter(key => (values[key] || values[key] === 0 || values[key] === false))
                                     .map(key => `${key}:LIKE:${values[key]}`),
                             },
                         );

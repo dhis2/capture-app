@@ -13,6 +13,7 @@ import {
     startSaveNewEventRelationships,
     newEventSavedAfterReturnedToMainPage,
     newEventSavedAddAnother,
+    startSaveTeiForNewEventRelationship,
     actionTypes as newEventDataEntryActionTypes,
 } from '../../DataEntry/actions/dataEntry.actions';
 
@@ -22,6 +23,7 @@ import {
 } from '../../../../DataEntry/actions/dataEntry.actions';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import convertClientRelationshipToServer from '../../../../../relationships/convertClientToServer';
+import { getRelationshipNewTei } from '../../../NewRelationship/RegisterTei';
 
 const dataEntryId = 'singleEvent';
 const itemId = 'newEvent';
@@ -39,6 +41,9 @@ export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, s
             const state = store.getState();
             const existingRelationships = state.dataEntriesRelationships[dataEntryKey] || [];
             const payload = action.payload;
+            const entity = payload.entity;
+
+            const toEntity = entity.id ? entity : getRelationshipNewTei(entity.dataEntryId, entity.itemId, state);
 
             const newRelationship = {
                 clientId: uuid(),
@@ -48,7 +53,7 @@ export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, s
                     type: 'PROGRAM_STAGE_INSTANCE',
                 },
                 to: {
-                    ...payload.entity,
+                    ...toEntity,
                     type: payload.entityType,
                 },
                 relationshipType: { ...payload.relationshipType },
@@ -72,22 +77,20 @@ export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, s
             return addRelationship(dataEntryId, itemId, newRelationship);
         });
 
-const saveNewEventRelationships = (action: Object) => {
-    const eventId = action.payload.response.importSummaries[0].reference;
+const saveNewEventRelationships = (relationshipData, selections, triggerAction) => {
+    const relationship = relationshipData.find(rd => rd.to.data);
+    if (relationship) {
+        const teiPayload = relationship.to.data;
+        return startSaveTeiForNewEventRelationship(teiPayload, selections, triggerAction, relationshipData, relationship.clientId);
+    }
+
     const serverRelationshipData = {
-        relationships: action.meta.relationshipData.map((r) => {
-            const clientRelationship = {
-                ...r,
-                from: {
-                    ...r.from,
-                    id: eventId,
-                },
-            };
-            return convertClientRelationshipToServer(clientRelationship);
-        }),
+        relationships: relationshipData.map(convertClientRelationshipToServer),
     };
-    return startSaveNewEventRelationships(serverRelationshipData, action.meta.selections, action.meta.triggerAction);
+
+    return startSaveNewEventRelationships(serverRelationshipData, selections, triggerAction);
 };
+
 
 export const saveNewEventRelationshipsIfExistsEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
@@ -95,7 +98,18 @@ export const saveNewEventRelationshipsIfExistsEpic = (action$: InputObservable, 
         .map((action) => {
             const meta = action.meta;
             if (meta.relationshipData) {
-                return saveNewEventRelationships(action);
+                const eventId = action.payload.response.importSummaries[0].reference;
+                const relationshipData = action.meta.relationshipData.map((r) => {
+                    const clientRelationship = {
+                        ...r,
+                        from: {
+                            ...r.from,
+                            id: eventId,
+                        },
+                    };
+                    return clientRelationship;
+                });
+                return saveNewEventRelationships(relationshipData, action.meta.selections, action.meta.triggerAction);
             }
             if (meta.triggerAction === newEventDataEntryActionTypes.START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE) {
                 return newEventSavedAfterReturnedToMainPage(meta.selections);
@@ -112,6 +126,7 @@ export const saveNewEventRelationshipFinishedEpic = (action$: InputObservable, s
     action$.ofType(
         newEventDataEntryActionTypes.NEW_EVENT_RELATIONSHIPS_SAVED,
         newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_RELATIONSHIPS,
+        newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_RELATIONSHIPS_TEI,
     )
         .map((action) => {
             const meta = action.meta;
@@ -122,4 +137,18 @@ export const saveNewEventRelationshipFinishedEpic = (action$: InputObservable, s
                 return newEventSavedAddAnother(meta.selections);
             }
             return null;
+        });
+
+export const teiForNewEventRelationshipSavedEpic = (action$: InputObservable, store: ReduxStore) =>
+    // $FlowSuppress
+    action$.ofType(
+        newEventDataEntryActionTypes.TEI_FOR_NEW_EVENT_RELATIONSHIPS_SAVED,
+    )
+        .map((action) => {
+            const teiId = action.payload.response.importSummaries[0].reference;
+            const { relationshipData, relationshipClientId, selections, triggerAction } = action.meta;
+            const relationship = relationshipData.find(rd => rd.clientId === relationshipClientId);
+            relationship.to.id = teiId;
+            relationship.to.data = null;
+            return saveNewEventRelationships(relationshipData, selections, triggerAction);
         });

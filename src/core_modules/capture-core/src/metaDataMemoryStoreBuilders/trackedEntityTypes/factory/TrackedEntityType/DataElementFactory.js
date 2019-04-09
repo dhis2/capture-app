@@ -126,7 +126,19 @@ class DataElementFactory {
                             );
                     }
                     return requestPromise
-                        .then(result => result.trackedEntityInstances.length === 0);
+                        .then((result) => {
+                            const trackedEntityInstance =
+                                (result.trackedEntityInstances && result.trackedEntityInstances[0]) || {};
+                            const data = {
+                                id: trackedEntityInstance.trackedEntityInstance,
+                                tetId: trackedEntityInstance.trackedEntityType,
+                            };
+
+                            return {
+                                valid: result.trackedEntityInstances.length === 0,
+                                data,
+                            };
+                        });
                 };
 
                 if (cachedAttribute.pattern) {

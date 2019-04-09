@@ -19,6 +19,7 @@ import {
     addRelationshipForNewSingleEventEpic,
     saveNewEventRelationshipsIfExistsEpic,
     saveNewEventRelationshipFinishedEpic,
+    teiForNewEventRelationshipSavedEpic,
 } from 'capture-core/components/Pages/NewEvent';
 import {
     mainSelectionsCompletedEpic,
@@ -155,8 +156,10 @@ import {
     loadRelationshipsForViewEventEpic,
     addRelationshipForViewEventEpic,
     saveRelationshipFailedForViewEventEpic,
-    RelationshipSavedForViewEventEpic,
+    relationshipSavedForViewEventEpic,
     deleteRelationshipForViewEventEpic,
+    saveRelationshipAfterSavingTeiForViewEventEpic,
+    handleViewEventRelationshipSaveTeiFailedEpic,
 } from 'capture-core/components/Pages/ViewEvent/Relationship/ViewEventRelationships.epics';
 
 import {
@@ -168,6 +171,7 @@ import {
 import {
     openNewRelationshipRegisterTeiEpic,
     openNewRelationshipRegisterTeiDataEntryEpic,
+    loadSearchGroupDuplicatesForReviewEpic,
 } from 'capture-core/components/Pages/NewRelationship/RegisterTei';
 
 import { runRulesOnEnrollmentFieldUpdateEpic } from 'capture-core/components/DataEntries';
@@ -266,8 +270,10 @@ export default combineEpics(
     openAddRelationshipForViewEventEpic,
     addRelationshipForViewEventEpic,
     saveRelationshipFailedForViewEventEpic,
-    RelationshipSavedForViewEventEpic,
+    relationshipSavedForViewEventEpic,
     deleteRelationshipForViewEventEpic,
+    saveRelationshipAfterSavingTeiForViewEventEpic,
+    handleViewEventRelationshipSaveTeiFailedEpic,
     addNoteForViewEventEpic,
     saveNoteForViewEventFailedEpic,
     loadNotesForViewEventEpic,
@@ -279,5 +285,7 @@ export default combineEpics(
     updateEventListAfterUpdateEventEpic,
     openNewRelationshipRegisterTeiEpic,
     openNewRelationshipRegisterTeiDataEntryEpic,
+    loadSearchGroupDuplicatesForReviewEpic,
+    teiForNewEventRelationshipSavedEpic,
     ...getDataEntryEpics(),
 );

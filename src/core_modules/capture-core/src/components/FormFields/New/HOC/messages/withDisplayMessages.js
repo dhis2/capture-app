@@ -104,7 +104,7 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
         }
 
         convertMessage = (message, messageType: $Values<typeof messageTypes>): MessageContainer => {
-            if (isObject(message)) {
+            if (isObject(message) && !React.isValidElement(message)) {
                 return {
                     innerMessage: { message, messageType },
                 };
