@@ -37,7 +37,7 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-class TeiRelationshipSearchResults extends React.Component<Props> {
+class CardList extends React.Component<Props> {
     static defaultProps = {
         itemTypeName: 'item',
     }
@@ -99,4 +99,4 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(TeiRelationshipSearchResults);
+export default withStyles(getStyles)(CardList);

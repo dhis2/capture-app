@@ -10,6 +10,7 @@ const makeMapStateToProps = () => {
     const dataElementsSelector = makeDataElementsSelector();
     const mapStateToProps = (state: ReduxState, props: Object) => ({
         ready: !state.newRelationshipRegisterTeiDuplicatesReview.isLoading,
+        isUpdating: state.newRelationshipRegisterTeiDuplicatesReview.isUpdating,
         error: state.newRelationshipRegisterTeiDuplicatesReview.loadError ?
             i18n.t('An error occured loading possible duplicates') : null,
         teis: state.newRelationshipRegisterTeiDuplicatesReview.teis,

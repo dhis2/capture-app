@@ -42,9 +42,17 @@ function executeSearch(
     updatedFormValues: Object,
     searchContext: Object,
 ) {
+    const searchGroupValues = searchGroup
+        .searchFoundation
+        .getElements()
+        .reduce((acc, element) => {
+            acc[element.id] = updatedFormValues[element.id];
+            return acc;
+        }, {});
+
     return searchGroup
         .onSearch(
-            getServerValues(updatedFormValues, searchGroup.searchFoundation),
+            getServerValues(searchGroupValues, searchGroup.searchFoundation),
             searchContext,
         );
 }

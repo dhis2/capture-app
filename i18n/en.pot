@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-04-08T16:42:27.596Z\n"
-"PO-Revision-Date: 2019-04-08T16:42:27.596Z\n"
+"POT-Creation-Date: 2019-04-09T16:38:54.094Z\n"
+"PO-Revision-Date: 2019-04-09T16:38:54.094Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -441,6 +441,12 @@ msgid "Possible duplicates found"
 msgstr ""
 
 msgid "An error occured loading possible duplicates"
+msgstr ""
+
+msgid "Hide"
+msgstr ""
+
+msgid "Save as new {{tetName}}"
 msgstr ""
 
 msgid "Some programs are being filtered."

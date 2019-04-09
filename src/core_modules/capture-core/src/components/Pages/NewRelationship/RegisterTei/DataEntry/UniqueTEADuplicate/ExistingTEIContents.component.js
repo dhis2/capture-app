@@ -18,7 +18,6 @@ type Props = {
 class ExistingTEIContents extends React.Component<Props> {
     handleLink = () => {
         this.props.onLink(this.props.attributeValues);
-        debugger;
     }
     render() {
         const { attributeValues, dataElements, onCancel } = this.props;

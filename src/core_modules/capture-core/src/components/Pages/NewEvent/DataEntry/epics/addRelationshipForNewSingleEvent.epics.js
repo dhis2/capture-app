@@ -23,7 +23,7 @@ import {
 } from '../../../../DataEntry/actions/dataEntry.actions';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import convertClientRelationshipToServer from '../../../../../relationships/convertClientToServer';
-import getRelationshipNewTei from './getRelationshipNewTei';
+import { getRelationshipNewTei } from '../../../NewRelationship/RegisterTei';
 
 const dataEntryId = 'singleEvent';
 const itemId = 'newEvent';

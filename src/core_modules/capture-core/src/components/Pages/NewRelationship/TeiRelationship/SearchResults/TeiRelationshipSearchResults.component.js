@@ -38,7 +38,10 @@ type Props = {
         topSection: string,
         topSectionActionsContainer: string,
         actionButton: string,
+        topSectionValuesContainer: string,
     },
+    searchValues: any,
+    searchGroup: any,
 }
 
 const getStyles = (theme: Theme) => ({
@@ -161,7 +164,6 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
 
     renderPager = () => {
         const { onChangePage, paging, classes } = this.props;
-        debugger;
         return (
             <div className={classes.pagination}>
                 <SearchResultsPager

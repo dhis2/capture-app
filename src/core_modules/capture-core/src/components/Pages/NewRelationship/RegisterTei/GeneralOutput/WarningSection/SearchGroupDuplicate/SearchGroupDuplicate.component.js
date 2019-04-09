@@ -1,5 +1,7 @@
 // @flow
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import i18n from '@dhis2/d2-i18n';
 import WarningMessageCreator from './WarningMessageCreator.container';
 import ReviewDialog from './ReviewDialog.component';
 
@@ -31,6 +33,14 @@ class SearchGroupDuplicate extends React.Component<Props, State> {
         });
     }
 
+    getHideButton() {
+        return (
+            <Button onClick={this.handleCloseReviewDialog} color="primary">
+                {i18n.t('Hide')}
+            </Button>
+        );
+    }
+
     render() {
         const { onLink } = this.props;
         const { duplicatesReviewDialogOpen } = this.state;
@@ -44,6 +54,7 @@ class SearchGroupDuplicate extends React.Component<Props, State> {
                     open={duplicatesReviewDialogOpen}
                     onCancel={this.handleCloseReviewDialog}
                     onLink={onLink}
+                    extraActions={this.getHideButton()}
                 />
             </React.Fragment>
         );

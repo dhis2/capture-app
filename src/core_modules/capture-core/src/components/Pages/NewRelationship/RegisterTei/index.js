@@ -11,3 +11,4 @@ export {
 export {
     loadSearchGroupDuplicatesForReviewEpic,
 } from './GeneralOutput/WarningSection/SearchGroupDuplicate/searchGroupDuplicate.epics';
+export { default as getRelationshipNewTei } from './exposedHelpers/getRelationshipNewTei';

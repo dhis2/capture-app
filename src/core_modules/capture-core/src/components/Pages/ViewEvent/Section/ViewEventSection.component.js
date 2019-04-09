@@ -7,7 +7,6 @@ import { ArrowDropDown, ArrowDropUp } from '@material-ui/icons';
 const getStyles = (theme: Theme) => ({
     container: {
         margin: theme.typography.pxToRem(10),
-        minWidth: theme.typography.pxToRem(300),
     },
     headerContainer: {
         display: 'flex',
@@ -32,6 +31,7 @@ type Props = {
     children: React.Element<any>,
     collapsable?: ?boolean,
     collapsed?: ?boolean,
+    classes: Object,
 }
 
 type State = {

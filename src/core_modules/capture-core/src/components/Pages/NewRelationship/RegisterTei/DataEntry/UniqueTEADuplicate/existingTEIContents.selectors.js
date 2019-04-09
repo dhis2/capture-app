@@ -5,7 +5,6 @@ import { convertServerToClient } from '../../../../../../converters';
 import {
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
-    TrackedEntityType,
     TrackerProgram,
     DataElement,
 } from '../../../../../../metaData';

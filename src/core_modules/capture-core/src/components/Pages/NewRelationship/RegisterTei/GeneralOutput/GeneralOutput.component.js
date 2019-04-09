@@ -2,6 +2,7 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core';
+import StickyOnScroll from '../../../../Sticky/StickyOnScroll.component';
 import ErrorsSection from '../../../ViewEvent/RightColumn/ErrorsSection/ErrorsSection.container';
 import WarningsSection from './WarningSection/WaningSection.container';
 import FeedbacksSection from '../../../ViewEvent/RightColumn/FeedbacksSection/FeedbacksSection.container';
@@ -10,14 +11,17 @@ import IndicatorsSection from '../../../ViewEvent/RightColumn/IndicatorsSection/
 type Props = {
     onLink: (teiId: string) => void,
     classes: {
-        container: string,
+        stickyOnScroll: string,
     }
 };
 
 const getStyles = (theme: Theme) => ({
-    container: {
-        flexBasis: theme.typography.pxToRem(0),
+    stickyOnScroll: {
+        position: 'relative',
         flexGrow: 1,
+        width: theme.typography.pxToRem(300),
+        margin: theme.typography.pxToRem(10),
+        marginTop: 0,
     },
 });
 
@@ -41,9 +45,14 @@ class GeneralOutput extends React.Component<Props> {
     render() {
         const { classes, ...passOnProps } = this.props;
         return (
-            <div className={this.props.classes.container}>
-                {componentContainers.map(c => this.renderComponent(c, passOnProps))}
-            </div>
+            <StickyOnScroll
+                offsetTop={50}
+                containerClass={classes.stickyOnScroll}
+            >
+                <div>
+                    {componentContainers.map(c => this.renderComponent(c, passOnProps))}
+                </div>
+            </StickyOnScroll>
         );
     }
 }
