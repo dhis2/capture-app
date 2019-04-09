@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import Input from './Input.component';
+import getTextFilterData from './getTextFilterData';
 import type { UpdatableFilterContent } from '../filters.types';
 
 type Value = ?string;
@@ -20,10 +21,7 @@ class TextFilter extends Component<Props> implements UpdatableFilterContent<Valu
             return null;
         }
 
-        return {
-            requestData: `like:${value}`,
-            appliedText: value,
-        };
+        return getTextFilterData(value);
     }
 
     handleEnterKey = (value: ?string) => {

@@ -3,11 +3,8 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 import D2TrueFalse from '../../FormFields/Generic/D2TrueFalse.component';
-import OptionSet from '../../../metaData/OptionSet/OptionSet';
 import { orientations } from '../../FormFields/Options/MultiSelectBoxes/multiSelectBoxes.const';
-import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
-import { convertValue as convertToClientValue } from '../../../converters/formToClient';
-
+import getBooleanFilterData from './getBooleanFilterData';
 import type { UpdatableFilterContent } from '../filters.types';
 
 const getStyles = (theme: Theme) => ({
@@ -28,29 +25,6 @@ type Props = {
 };
 // $FlowSuppress
 class BooleanFilter extends Component<Props> implements UpdatableFilterContent<Value> {
-    static getRequestData(values: Array<any>, type: $Values<typeof elementTypes>) {
-        const valueString = values
-            .map((value) => {
-                const clientValue = convertToClientValue(value, type);
-                const filterValue = convertToServerValue(clientValue, type); // should work for now
-                return filterValue;
-            })
-            .join(';');
-
-        return `in:${valueString}`;
-    }
-
-    static getAppliedText(values: Array<any>, optionSet: ?OptionSet) {
-        const valueString = values
-            .map((value) => {
-                const text = optionSet ? optionSet.getOptionText(value) : value;
-                return text;
-            })
-            .join(', ');
-
-        return valueString;
-    }
-
     booleanFieldInstance: ?D2TrueFalse;
     onGetUpdateData() {
         const value = this.props.value;
@@ -58,14 +32,8 @@ class BooleanFilter extends Component<Props> implements UpdatableFilterContent<V
         if (!value) {
             return null;
         }
-
-        return {
-            requestData: BooleanFilter.getRequestData(value, this.props.type),
-            appliedText:
-                BooleanFilter.getAppliedText(
-                    value,
-                    this.booleanFieldInstance && this.booleanFieldInstance.optionSet),
-        };
+        const optionSet = this.booleanFieldInstance && this.booleanFieldInstance.optionSet;
+        return getBooleanFilterData(value, this.props.type, optionSet);
     }
 
     onIsValid() { //eslint-disable-line

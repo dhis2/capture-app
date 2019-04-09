@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-03-25T14:06:26.195Z\n"
-"PO-Revision-Date: 2019-03-25T14:06:26.195Z\n"
+"POT-Creation-Date: 2019-04-08T07:14:30.520Z\n"
+"PO-Revision-Date: 2019-04-08T07:14:30.520Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -158,6 +158,21 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
+msgid "to"
+msgstr ""
+
+msgid "From"
+msgstr ""
+
+msgid "To"
+msgstr ""
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
+msgstr ""
+
 msgid "Last week"
 msgstr ""
 
@@ -168,21 +183,6 @@ msgid "Last 3 months"
 msgstr ""
 
 msgid "Custom range"
-msgstr ""
-
-msgid "to"
-msgstr ""
-
-msgid "after or equal to"
-msgstr ""
-
-msgid "before or equal to"
-msgstr ""
-
-msgid "From"
-msgstr ""
-
-msgid "To"
 msgstr ""
 
 msgid "Max"

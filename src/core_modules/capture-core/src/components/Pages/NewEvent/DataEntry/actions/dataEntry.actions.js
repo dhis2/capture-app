@@ -35,6 +35,7 @@ export const actionTypes = {
     START_SAVE_NEW_EVENT_RELATIONSHIPS: 'StartSaveNewEventRelationships',
     NEW_EVENT_RELATIONSHIPS_SAVED: 'NewEventRelationshipsSaved',
     SAVE_FAILED_FOR_NEW_EVENT_RELATIONSHIPS: 'SaveFailedForNewEventRelationships',
+    CANCEL_SAVE_INITIALIZE_WORKING_LISTS: 'CancelSaveInitializeWorkingListsForSingleNewEvent',
 };
 
 export const startRunRulesOnUpdateForNewSingleEvent = (actionData: { payload: Object}) =>
@@ -86,6 +87,9 @@ export const cancelNewEventNoWorkingListUpdateNeeded = () =>
 
 export const cancelNewEventUpdateWorkingList = () =>
     actionCreator(actionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST)();
+
+export const cancelNewEventInitializeWorkingLists = () =>
+    actionCreator(actionTypes.CANCEL_SAVE_INITIALIZE_WORKING_LISTS)();
 
 export const selectionsNotCompleteOpeningNewEvent = () =>
     actionCreator(actionTypes.SELECTIONS_NOT_COMPLETE_OPENING_NEW_EVENT)();

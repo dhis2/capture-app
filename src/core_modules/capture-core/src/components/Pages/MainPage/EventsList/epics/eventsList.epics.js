@@ -1,6 +1,6 @@
 // @flow
 import { fromPromise } from 'rxjs/observable/fromPromise';
-
+import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { batchActions } from 'redux-batched-actions';
 import { ActionsObservable } from 'redux-observable';
@@ -21,6 +21,8 @@ import {
     workingListUpdateRetrievalFailed,
     startDeleteEvent,
     workingListUpdatingWithDialog,
+    setCurrentWorkingList,
+    workingListConfigsRetrieved,
 } from '../eventsList.actions';
 import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../../NewEvent';
 import { actionTypes as editEventDataEntryActionTypes } from '../../../EditEvent/DataEntry/editEventDataEntry.actions';
@@ -34,6 +36,9 @@ import {
     actionTypes as filterSelectorActionTypes,
     batchActionTypes as filterSelectorBatchActionTypes,
 } from '../FilterSelectors/filterSelector.actions';
+import {
+    getEventProgramWorkingListConfigs,
+} from '../../../../../eventWorkingListConfig/eventWorkingListConfigRequests';
 
 const errorMessages = {
     WORKING_LIST_RETRIEVE_ERROR: 'Working list could not be loaded',
@@ -43,7 +48,7 @@ const errorMessages = {
 
 const getUnprocessedQueryArgsForInitialWorkingList = (state: ReduxState) => {
     const { programId, orgUnitId, categories } = state.currentSelections;
-    const listId = state.workingListSelector.event.currentWorkingListId;
+    const listId = state.workingListConfigSelector.eventMainPage.currentWorkingListId;
 
     const currentMeta = state.workingListsMeta[listId] || {};
     const nextMeta = (state.workingListsMeta[listId] && state.workingListsMeta[listId].next) || {};
@@ -66,7 +71,7 @@ const getUnprocessedQueryArgsForInitialWorkingList = (state: ReduxState) => {
 };
 
 const getUnprocessedQueryArgsForUpdateWorkingList = (state: ReduxState) => {
-    const listId = state.workingListSelector.event.currentWorkingListId;
+    const listId = state.workingListConfigSelector.eventMainPage.currentWorkingListId;
     const { programId, orgUnitId, categories } = state.workingListsContext[listId];
 
     const currentMeta = state.workingListsMeta[listId];
@@ -111,7 +116,7 @@ const getInitialWorkingListActionAsync = (
     };
 
     const { programId, orgUnitId, categories } = allQueryArgs;
-    const listId = state.workingListSelector.event.currentWorkingListId;
+    const listId = state.workingListConfigSelector.eventMainPage.currentWorkingListId;
 
     return getInitialWorkingListDataAsync(allQueryArgs, state.workingListsColumnsOrder[listId])
         .then(data =>
@@ -136,7 +141,7 @@ const getUpdateWorkingListActionAsync = (
         ...queryArgsFromState,
         ...customArgs,
     };
-    const listId = state.workingListSelector.event.currentWorkingListId;
+    const listId = state.workingListConfigSelector.eventMainPage.currentWorkingListId;
     return getUpdateWorkingListDataAsync(queryArgs, state.workingListsColumnsOrder[listId])
         .then(data =>
             workingListUpdateDataRetrieved(listId, data),
@@ -147,20 +152,43 @@ const getUpdateWorkingListActionAsync = (
         });
 };
 
+const getWorkingListConfigsAsync = (state: ReduxState) => {
+    const programId = state.currentSelections.programId;
+    return getEventProgramWorkingListConfigs(programId).then((workingListConfigs) => {
+        const defaultWorkingListConfig = {
+            id: `${programId}-default`,
+            name: 'default',
+            sortById: 'eventDate',
+            sortByDirection: 'desc',
+        };
+        const workingListConfigsWithDefault = [defaultWorkingListConfig, ...workingListConfigs];
+        return batchActions([
+            setCurrentWorkingList(defaultWorkingListConfig.id, defaultWorkingListConfig),
+            workingListConfigsRetrieved(workingListConfigsWithDefault),
+        ], eventsListBatchActionTypes.WORKING_LIST_CONFIGS_RETRIEVED_BATCH);
+    });
+};
 
 export const retrieveWorkingListConfigsFromServer = (action$: ActionsObservable, store: ReduxStore) =>
-    action$.ofType(mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED)
+    action$.ofType(
+        mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
+        viewEventActionTypes.INITIALIZE_WORKING_LISTS_ON_BACK_TO_MAIN_PAGE,
+        newEventDataEntryActionTypes.CANCEL_SAVE_INITIALIZE_WORKING_LISTS,
+    )
+        .filter(() => {
+            const state = store.getState();
+            return state.offline.online;
+        })
         .switchMap(() => {
-            const promise = new Promise((r) => { r(); }).then((workingListConfigs) => {
-                const currentWorkingList = 'default';
-                return null; // setWorkingListSelectorData(currentWorkingList, workingListConfigs);
-            });
+            const promise = getWorkingListConfigsAsync(store.getState());
             return fromPromise(promise);
         });
 
-export const retrieveWorkingListOnMainSelectionsCompletedEpic = (action$: ActionsObservable, store: ReduxStore) =>
+
+export const retrieveCurrentWorkingListDataEpic = (action$: ActionsObservable, store: ReduxStore) =>
     action$.ofType(
-        mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
+        eventsListActionTypes.SET_CURRENT_WORKING_LIST_CONFIG,
+        eventsListBatchActionTypes.WORKING_LIST_CONFIGS_RETRIEVED_BATCH,
     )
         .switchMap(() => {
             const initialPromise = getInitialWorkingListActionAsync(store.getState());
@@ -194,7 +222,7 @@ export const getWorkingListOnCancelSaveEpic = (action$: ActionsObservable, store
         viewEventActionTypes.UPDATE_WORKING_LIST_ON_BACK_TO_MAIN_PAGE,
     )
         .switchMap(() => {
-            const initialPromise = getInitialWorkingListActionAsync(store.getState());
+            const initialPromise = getUpdateWorkingListActionAsync(store.getState());
             return fromPromise(initialPromise)
                 .takeUntil(
                     action$
@@ -223,7 +251,7 @@ export const requestDeleteEventEpic = (action$: ActionsObservable, store: ReduxS
     ).map((action) => {
         const state = store.getState();
         const eventId = action.payload.eventId;
-        const listId = state.workingListSelector.event.currentWorkingListId;
+        const listId = state.workingListConfigSelector.eventMainPage.currentWorkingListId;
         return batchActions([
             startDeleteEvent(eventId),
             workingListUpdatingWithDialog(listId),
@@ -236,7 +264,7 @@ export const getWorkingListOnSaveEpic = (action$: ActionsObservable, store: Redu
     )
         .switchMap(() => {
             const state = store.getState();
-            const listId = state.workingListSelector.event.currentWorkingListId;
+            const listId = state.workingListConfigSelector.eventMainPage.currentWorkingListId;
             const listSelections = state.workingListsContext[listId];
 
             const cancelActionTypes = [
@@ -264,7 +292,7 @@ export const getWorkingListOnSaveEpic = (action$: ActionsObservable, store: Redu
                     );
             }
 
-            const initialPromise = getInitialWorkingListActionAsync(state);
+            const initialPromise = getWorkingListConfigsAsync(state);
             return fromPromise(initialPromise)
                 .takeUntil(action$.ofType(...cancelActionTypes))
                 .takeUntil(
@@ -319,7 +347,7 @@ export const getEventListOnReconnectEpic = (action$: ActionsObservable, store: R
                 orgUnitId: state.currentSelections.orgUnitId,
                 categories: state.currentSelections.categories,
             };
-            const listId = state.workingListSelector.event.currentWorkingListId;
+            const listId = state.workingListConfigSelector.eventMainPage.currentWorkingListId;
             const listSelections = state.workingListsContext[listId];
 
             const cancelActionTypes = [
@@ -341,7 +369,7 @@ export const getEventListOnReconnectEpic = (action$: ActionsObservable, store: R
                     .takeUntil(action$.ofType(...cancelActionTypes));
             }
 
-            const initialPromise = getInitialWorkingListActionAsync(state);
+            const initialPromise = getWorkingListConfigsAsync(state);
             return fromPromise(initialPromise)
                 .takeUntil(action$.ofType(...cancelActionTypes));
         });

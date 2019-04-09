@@ -17,6 +17,7 @@ import {
     updateWorkingListOnBackToMainPage,
     updateWorkingListPendingOnBackToMainPage,
     openViewEventPageFailed,
+    initializeWorkingListsOnBackToMainPage,
 } from '../viewEvent.actions';
 import { actionTypes as eventListActionTypes } from '../../MainPage/EventsList/eventsList.actions';
 import { getEvent } from '../../../../events/eventRequests';
@@ -110,14 +111,14 @@ export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) 
             if (!state.offline.online) {
                 return noWorkingListUpdateNeededOnBackToMainPage();
             }
-            const listId = state.workingListSelector.currentWorkingListId;
+            const listId = state.workingListConfigSelector.eventMainPage && state.workingListConfigSelector.eventMainPage.currentWorkingListId;
             const listSelections = listId && state.workingListsContext[listId];
             if (!listSelections) {
-                return updateWorkingListOnBackToMainPage();
+                return initializeWorkingListsOnBackToMainPage();
             }
             const currentSelections = state.currentSelections;
             if (currentSelections.complete && !isSelectionsEqual(listSelections, currentSelections)) {
-                return updateWorkingListOnBackToMainPage();
+                return initializeWorkingListsOnBackToMainPage();
             }
 
             if (state.viewEventPage.eventHasChanged) {

@@ -105,10 +105,11 @@ class FilterButton extends Component<Props, State> {
     }
 
     renderSelectorContents() {
-        const { itemId: id, type, optionSet, singleSelect } = this.props;
+        const { itemId: id, type, optionSet, singleSelect, listId } = this.props;
 
         return (
             <FilterSelectorContents
+                listId={listId}
                 type={type}
                 optionSet={optionSet}
                 singleSelect={singleSelect}
@@ -125,7 +126,7 @@ class FilterButton extends Component<Props, State> {
     }
 
     renderWithAppliedFilter() {
-        const { classes, title, filterValue } = this.props;
+        const { classes, title, filterValue, listId } = this.props;
 
         const arrowIconElement = this.state.filterSelectorOpen ?
             <ArrowUpwardIcon className={classes.icon} /> :
@@ -133,6 +134,7 @@ class FilterButton extends Component<Props, State> {
 
         return (
             <ActiveFilterButton
+                listId={listId}
                 innerRef={this.refActiveFilterInstance}
                 onChange={this.openFilterSelector}
                 onClear={this.handleClearFilter}

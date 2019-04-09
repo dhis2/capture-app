@@ -39,6 +39,7 @@ import {
     workingListFiltersEditDesc,
     workingListsAppliedFiltersDesc,
     workingListsUserSelectedFiltersDesc,
+    workingListConfigSelectorDesc,
 } from 'capture-core/reducers/descriptions/workingLists.reducerDescription';
 import { mainPageDesc } from 'capture-core/reducers/descriptions/mainPage.reducerDescription';
 import { newEventPageDesc } from 'capture-core/reducers/descriptions/newEvent.reducerDescription';
@@ -108,6 +109,7 @@ export default [
     workingListFiltersEditDesc,
     workingListsAppliedFiltersDesc,
     workingListsUserSelectedFiltersDesc,
+    workingListConfigSelectorDesc,
     mainPageDesc,
     newEventPageDesc,
     editEventPageDesc,

@@ -1,11 +1,15 @@
 // @flow
 import React from 'react';
 import OfflineEventsList from '../OfflineEventsList/OfflineEventsList.container';
-import EventsListLoadWrapper from '../EventsList/EventsListLoadWrapper.container';
+import WorkingListConfigSelector from '../EventsList/WorkingListConfigSelector/WorkingListConfigSelector.container';
+import withListHeaderWrapper from '../ListHeaderWrapper/withListHeaderWrapper';
+import withEventsListHeader from '../EventsList/Header/withHeader';
 
 type Props = {
     isOnline: boolean,
 };
+
+const OnlineEventsListWithHeader = withEventsListHeader()(withListHeaderWrapper()(WorkingListConfigSelector));
 
 const EventsListConnectivityWrapper = (props: Props) => (
     <div>
@@ -17,7 +21,7 @@ const EventsListConnectivityWrapper = (props: Props) => (
                     );
                 }
                 return (
-                    <EventsListLoadWrapper />
+                    <OnlineEventsListWithHeader />
                 );
             })()
         }

@@ -5,9 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 import D2TrueOnly from '../../FormFields/Generic/D2TrueOnly.component';
 import { orientations } from '../../FormFields/Options/MultiSelectBoxes/multiSelectBoxes.const';
-import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
-import { convertValue as convertToClientValue } from '../../../converters/formToClient';
-
+import getTrueOnlyFilterData from './getTrueOnlyFilterData';
 import type { UpdatableFilterContent } from '../filters.types';
 
 const getStyles = (theme: Theme) => ({
@@ -28,29 +26,6 @@ type Props = {
 };
 // $FlowSuppress
 class TrueOnlyFilter extends Component<Props> implements UpdatableFilterContent<Value> {
-    static getRequestData(values: Array<any>, type: $Values<typeof elementTypes>) {
-        const valueString = values
-            .map((value) => {
-                const clientValue = convertToClientValue(value, type);
-                const filterValue = convertToServerValue(clientValue, type); // should work for now
-                return filterValue;
-            })
-            .join(';');
-
-        return `in:${valueString}`;
-    }
-
-    static getAppliedText(values: Array<any>) {
-        const valueString = values
-            .map(() => {
-                const text = i18n.t('Yes');
-                return text;
-            })
-            .join(', ');
-
-        return valueString;
-    }
-
     onGetUpdateData() {
         const value = this.props.value;
 
@@ -58,10 +33,7 @@ class TrueOnlyFilter extends Component<Props> implements UpdatableFilterContent<
             return null;
         }
 
-        return {
-            requestData: TrueOnlyFilter.getRequestData(value, this.props.type),
-            appliedText: TrueOnlyFilter.getAppliedText(value),
-        };
+        return getTrueOnlyFilterData(value, this.props.type);
     }
 
     onIsValid() { //eslint-disable-line

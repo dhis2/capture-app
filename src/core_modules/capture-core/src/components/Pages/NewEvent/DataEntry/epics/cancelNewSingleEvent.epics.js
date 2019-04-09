@@ -4,6 +4,7 @@ import {
     actionTypes as newEventDataEntryActionTypes,
     cancelNewEventNoWorkingListUpdateNeeded,
     cancelNewEventUpdateWorkingList,
+    cancelNewEventInitializeWorkingLists,
 } from '../actions/dataEntry.actions';
 
 import isSelectionsEqual from '../../../../App/isSelectionsEqual';
@@ -17,19 +18,20 @@ export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) 
                 return cancelNewEventNoWorkingListUpdateNeeded();
             }
 
+            const listId = state.workingListConfigSelector.eventMainPage && state.workingListConfigSelector.eventMainPage.currentWorkingListId;
+            const listSelections = listId && state.workingListsContext[listId];
+            if (!listSelections) {
+                return cancelNewEventInitializeWorkingLists();
+            }
+            const currentSelections = state.currentSelections;
+            if (currentSelections.complete && !isSelectionsEqual(listSelections, currentSelections)) {
+                return cancelNewEventInitializeWorkingLists();
+            }
+
             const recentlyAddedEventsCount = Object
                 .keys(state.recentlyAddedEvents)
                 .length;
             if (recentlyAddedEventsCount > 0) {
-                return cancelNewEventUpdateWorkingList();
-            }
-            const listId = state.workingListSelector.currentWorkingListId;
-            const listSelections = listId && state.workingListsContext[listId];
-            if (!listSelections) {
-                return cancelNewEventUpdateWorkingList();
-            }
-            const currentSelections = state.currentSelections;
-            if (currentSelections.complete && !isSelectionsEqual(listSelections, currentSelections)) {
                 return cancelNewEventUpdateWorkingList();
             }
             return cancelNewEventNoWorkingListUpdateNeeded();

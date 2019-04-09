@@ -26,7 +26,10 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         dispatch(batchActions(actions, batchActionTypes.SET_FILTER_BATCH));
     },
     onClearFilter: (listId: string, itemId: string) => {
-        dispatch(clearFilter(listId, itemId));
+        dispatch(batchActions([
+            clearFilter(listId, itemId),
+            workingListUpdating(listId),
+        ], batchActionTypes.SET_FILTER_BATCH));
     },
     onRevertFilter: (listId: string) => {
         dispatch(revertFilter(listId));

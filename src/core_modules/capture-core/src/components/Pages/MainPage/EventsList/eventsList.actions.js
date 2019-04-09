@@ -14,9 +14,14 @@ export const actionTypes = {
     EVENT_DELETED: 'EventDeleted',
     WORKING_LIST_UPDATING: 'WorkingListUpdating',
     WORKING_LIST_UPDATING_WITH_DIALOG: 'WorkingListUpdatingWithDialog',
+
+    SET_CURRENT_WORKING_LIST_CONFIG: 'SetCurrentWorkingListConfig',
+    WORKING_LIST_CONFIGS_RETRIEVED: 'WorkingListConfigsRetrieved',
+    WORKING_LIST_CONFIGS_RETRIEVAL_FAILED: 'WorkingListConfigsRetrievalFailed',
 };
 
 export const batchActionTypes = {
+    WORKING_LIST_CONFIGS_RETRIEVED_BATCH: 'WorkingListConfigsRetrievedBatch',
     START_DELETE_EVENT_UPDATE_WORKING_LIST: 'StartDeleteEventUpdateWorkingList',
 };
 
@@ -52,3 +57,12 @@ export const startDeleteEvent = (eventId: string) =>
             rollback: { type: actionTypes.DELETE_EVENT_FAILED },
         },
     });
+
+export const workingListConfigsRetrieved = (workingListConfigs: Array<any>) =>
+    actionCreator(actionTypes.WORKING_LIST_CONFIGS_RETRIEVED)({ workingListConfigs });
+
+export const workingListConfigsRetrievalFailed = (error: string) =>
+    actionCreator(actionTypes.WORKING_LIST_CONFIGS_RETRIEVAL_FAILED)({ error });
+
+export const setCurrentWorkingList = (listId: string, data?: ?Object) =>
+    actionCreator(actionTypes.SET_CURRENT_WORKING_LIST_CONFIG)({ ...data, listId });

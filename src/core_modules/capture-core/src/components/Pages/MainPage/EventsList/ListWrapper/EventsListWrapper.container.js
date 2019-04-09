@@ -12,8 +12,8 @@ const makeMapStateToProps = () => {
     const mapStateToProps = (state: ReduxState, props: { listId: string }) => {
         const listId = props.listId;
         const isLoading = !!state.workingListsUI[listId].isLoading;
-        const columns = !isLoading ? columnsSelector(state) : null;
-        const eventsContainer = !isLoading ? createEventsContainer(state) : [];
+        const columns = !isLoading ? columnsSelector(state, props) : null;
+        const eventsContainer = !isLoading ? createEventsContainer(state, props) : [];
         const sortById = !isLoading ? state.workingListsMeta[listId].sortById : null;
         const sortByDirection = !isLoading ? state.workingListsMeta[listId].sortByDirection : null;
         return {

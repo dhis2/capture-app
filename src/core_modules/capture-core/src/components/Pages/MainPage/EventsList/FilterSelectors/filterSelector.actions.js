@@ -21,7 +21,7 @@ export const setFilter = (listId: string, data: Object, itemId: string) =>
     actionCreator(actionTypes.SET_FILTER)({ ...data, itemId, listId });
 
 export const clearFilter = (listId: string, itemId: string) =>
-    actionCreator(actionTypes.CLEAR_FILTER)({ itemId });
+    actionCreator(actionTypes.CLEAR_FILTER)({ listId, itemId });
 
 export const revertFilter = (listId: string) =>
     actionCreator(actionTypes.REVERT_FILTER)({ listId });
