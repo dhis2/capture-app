@@ -90,6 +90,14 @@ export const newEventPageDesc = createReducerDescription({
         ...state,
         showAddRelationship: false,
     }),
+    [newEventNewRelationshipActionTypes.RECENTLY_ADDED_RELATIONSHIP]: (state, action) => ({
+        ...state,
+        recentlyAddedRelationshipId: action.payload.relationshipId,
+    }),
+    [newEventDataEntryActionTypes.SCROLLED_TO_RELATIONSHIPS]: state => ({
+        ...state,
+        recentlyAddedRelationshipId: null,
+    }),
     [newEventNewRelationshipActionTypes.NEW_EVENT_CANCEL_NEW_RELATIONSHIP]: (state) => {
         const newState = { ...state };
         newState.showAddRelationship = false;

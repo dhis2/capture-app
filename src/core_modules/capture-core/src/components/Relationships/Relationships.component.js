@@ -1,6 +1,7 @@
 // @flow
 
 import * as React from 'react';
+import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { IconButton, withStyles, Tooltip } from '@material-ui/core';
 import { ArrowForward as ArrowIcon, Clear as ClearIcon } from '@material-ui/icons';
@@ -19,8 +20,10 @@ type Props = {
         relationshipEntities: string,
         arrowIcon: string,
         relationshipActions: string,
+        relationshipHighlight: string,
     },
     relationships: Array<Relationship>,
+    highlightRelationshipId?: ?string,
     writableRelationshipTypes: Array<RelationshipType>,
     entityAccess: { read: boolean, write: boolean },
     onRemoveRelationship: (relationshipClientId: string) => void,
@@ -68,6 +71,20 @@ const getStyles = (theme: Theme) => ({
     addButtonContainer: {
         display: 'inline-block',
     },
+    '@keyframes background-fade': {
+        '0%': {
+            backgroundColor: theme.palette.secondary.lightest,
+        },
+        '70%': {
+            backgroundColor: theme.palette.secondary.lightest,
+        },
+        '100%': {
+            backgroundColor: theme.palette.grey.lighter,
+        },
+    },
+    relationshipHighlight: {
+        animation: 'background-fade 2.5s forwards',
+    },
 });
 
 const fromNames = {
@@ -79,14 +96,32 @@ class Relationships extends React.Component<Props> {
         entityAccess: { read: true, write: true },
     }
 
+
+    shouldComponentUpdate(nextProps: Props) {
+        const changes = Object.keys(nextProps).filter(propName => nextProps[propName] !== this.props[propName]);
+        const numberOfChanges = changes.length;
+
+        if (
+            numberOfChanges === 1 &&
+            changes[0] === 'highlightRelationshipId' &&
+            !nextProps.highlightRelationshipId
+        ) {
+            return false;
+        }
+        return numberOfChanges > 0;
+    }
+
     renderRelationships = () => this.props.relationships.map(r => this.renderRelationship(r))
 
     renderRelationship = (relationship: Relationship) => {
         const { classes, onRemoveRelationship } = this.props;
         const canDelete = this.canDelete(relationship);
+        const relationshipDetailsClass = classNames(classes.relationshipDetails, {
+            [classes.relationshipHighlight]: this.shouldHighlightRelationship(relationship),
+        });
         return (
             <div className={classes.relationship} key={relationship.clientId}>
-                <div className={classes.relationshipDetails}>
+                <div className={relationshipDetailsClass}>
                     <div className={classes.relationshipTypeName}>
                         {relationship.relationshipType.name}
                     </div>
@@ -112,6 +147,11 @@ class Relationships extends React.Component<Props> {
         );
     }
 
+    shouldHighlightRelationship = (relationship: Relationship) => {
+        const highlightRelationshipId = this.props.highlightRelationshipId;
+        return highlightRelationshipId && highlightRelationshipId === relationship.clientId;
+    }
+
     getEntityName = (entity: Entity) =>
         (entity.id === this.props.currentEntityId ?
             fromNames[entity.type] : entity.name);
@@ -126,10 +166,10 @@ class Relationships extends React.Component<Props> {
     }
 
     render() {
-        const { classes, onOpenAddRelationship, entityAccess, writableRelationshipTypes } = this.props;
+        const { classes, onOpenAddRelationship, entityAccess, writableRelationshipTypes, relationshipsRef } = this.props;
         const canCreate = entityAccess.write && writableRelationshipTypes.length > 0;
         return (
-            <div className={classes.container}>
+            <div className={classes.container} ref={relationshipsRef}>
                 <div className={classes.relationshipsContainer}>
                     {this.renderRelationships()}
                 </div>
