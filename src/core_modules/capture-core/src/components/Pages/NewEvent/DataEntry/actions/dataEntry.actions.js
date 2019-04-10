@@ -38,6 +38,7 @@ export const actionTypes = {
     START_SAVE_TEI_FOR_NEW_EVENT_RELATIONSHIPS: 'StartSaveTeiForNewEventRelationships',
     TEI_FOR_NEW_EVENT_RELATIONSHIPS_SAVED: 'TeiForNewEventRelationshipSaved',
     SAVE_FAILED_FOR_NEW_EVENT_RELATIONSHIPS_TEI: 'SaveFailedForNewEventRelationshipTei',
+    SCROLLED_TO_RELATIONSHIPS: 'NewEventScrolledToRelationships',
 };
 
 export const startRunRulesOnUpdateForNewSingleEvent = (actionData: { payload: Object}) =>
@@ -153,3 +154,6 @@ export const startAsyncUpdateFieldForNewEvent = (
 
 export const newEventOpenNewRelationship = (eventId: string, dataEntryId: string) =>
     actionCreator(actionTypes.NEW_EVENT_OPEN_NEW_RELATIONSHIP)({ eventId, dataEntryId });
+
+export const scrolledToRelationships = () =>
+    actionCreator(actionTypes.SCROLLED_TO_RELATIONSHIPS)();
