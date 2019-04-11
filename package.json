@@ -2,7 +2,7 @@
   "name": "capture-app",
   "homepage": ".",
   "version": "32.0.1",
-  "cacheVersion": "4",
+  "cacheVersion": "6",
   "private": false,
   "dependencies": {
     "@dhis2/d2-i18n": "^1.0.3",

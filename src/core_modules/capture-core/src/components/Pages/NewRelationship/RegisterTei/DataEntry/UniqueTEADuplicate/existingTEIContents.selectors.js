@@ -27,7 +27,9 @@ export const makeDataElementsSelector = () => createSelector(
                 return [];
             }
 
-            return teType.attributes;
+            return teType
+                .attributes
+                .filter(a => a.displayInReports);
         }
 
         let program: TrackerProgram;
@@ -38,7 +40,9 @@ export const makeDataElementsSelector = () => createSelector(
             return [];
         }
 
-        return program.attributes;
+        return program
+            .attributes
+            .filter(a => a.displayInReports);
     },
 );
 

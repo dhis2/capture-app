@@ -229,7 +229,7 @@ export default class VariableService {
             log.warn(
                 `Variable id:${programVariable.id} name:${programVariable.displayName} has sourcetype${programVariable.programRuleVariableSourceType}, but no selectedEntity was found`,
             );
-            return this.buildVariable(EMPTY_STRING, null, typeKeys.TEXT, true, variablePrefixes.TRACKED_ENTITY_ATTRIBUTE, null, programVariable.useNameForOptionSet);
+            return this.buildVariable(EMPTY_STRING, null, typeKeys.TEXT, false, variablePrefixes.TRACKED_ENTITY_ATTRIBUTE, null, programVariable.useNameForOptionSet);
         }
 
         // $FlowSuppress preChecked
