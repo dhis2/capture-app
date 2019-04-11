@@ -1,12 +1,15 @@
 // @flow
 import uuid from 'd2-utilizr/src/uuid';
 import i18n from '@dhis2/d2-i18n';
+import { batchActions } from 'redux-batched-actions';
 
 import {
     initializeNewRelationship,
 } from '../../../NewRelationship/newRelationship.actions';
 import {
+    recentlyAddedRelationship,
     actionTypes as newEventNewRelationshipActionTypes,
+    batchActionTypes as newEventNewRelationshipBatchActionTypes,
 } from '../../NewRelationshipWrapper/NewEventNewRelationshipWrapper.actions';
 
 import {
@@ -74,7 +77,10 @@ export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, s
                 return relationshipAlreadyExists(dataEntryId, itemId, message);
             }
 
-            return addRelationship(dataEntryId, itemId, newRelationship);
+            return batchActions([
+                recentlyAddedRelationship(newRelationship.clientId),
+                addRelationship(dataEntryId, itemId, newRelationship),
+            ], newEventNewRelationshipBatchActionTypes.ADD_RELATIONSHIP_BATCH);
         });
 
 const saveNewEventRelationships = (relationshipData, selections, triggerAction) => {

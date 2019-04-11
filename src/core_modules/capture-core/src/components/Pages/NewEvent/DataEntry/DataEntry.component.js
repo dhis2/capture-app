@@ -43,6 +43,7 @@ import withWarningOutput from '../../../DataEntry/dataEntryOutput/withWarningOut
 import newEventSaveTypes from './newEventSaveTypes';
 import labelTypeClasses from './dataEntryFieldLabels.mod.css';
 import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
+import { makeWritableRelationshipTypesSelector } from './dataEntry.selectors';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -325,6 +326,7 @@ const buildNotesSettingsFn = () => {
 };
 
 const buildRelationshipsSettingsFn = () => {
+    const writableRelationshipTypesSelector = makeWritableRelationshipTypesSelector();
     const relationshipsComponent =
         withDefaultFieldContainer()(
             withDefaultShouldUpdateInterface()(
@@ -343,8 +345,10 @@ const buildRelationshipsSettingsFn = () => {
         getComponentProps: (props: Object) => createComponentProps(props, {
             id: 'relationship',
             dataEntryId: props.id,
+            highlightRelationshipId: props.recentlyAddedRelationshipId,
+            relationshipsRef: props.relationshipsRef,
             onOpenAddRelationship: props.onOpenAddRelationship,
-            writableRelationshipTypes: props.stage.relationshipTypesWhereStageIsFrom.filter(rt => rt.access.data.write),
+            writableRelationshipTypes: writableRelationshipTypesSelector(props),
             fromEntity: 'PROGRAM_STAGE_INSTANCE',
             currentEntityId: 'newEvent',
         }),
@@ -409,6 +413,7 @@ type Props = {
     },
     theme: Theme,
     formHorizontal: ?boolean,
+    recentlyAddedRelationshipId?: ?string,
 };
 type DataEntrySection = {
     placement: $Values<typeof placements>,
@@ -436,6 +441,7 @@ const dataEntrySectionDefinitions = {
 class NewEventDataEntry extends Component<Props> {
     fieldOptions: { theme: Theme };
     dataEntrySections: { [$Values<typeof dataEntrySectionNames>]: DataEntrySection };
+    relationshipsInstance: ?HTMLDivElement;
 
     constructor(props: Props) {
         super(props);
@@ -450,8 +456,19 @@ class NewEventDataEntry extends Component<Props> {
         this.props.onSetSaveTypes(null);
     }
 
+    componentDidMount() {
+        if (this.relationshipsInstance && this.props.recentlyAddedRelationshipId) {
+            this.relationshipsInstance.scrollIntoView();
+            this.props.onScrollToRelationships();
+        }
+    }
+
     componentWillUnmount() {
         inMemoryFileStore.clear();
+    }
+
+    setRelationshipsInstance = (instance: ?HTMLDivElement) => {
+        this.relationshipsInstance = instance;
     }
 
     handleSave = (itemId: string, dataEntryId: string, formFoundation: RenderFoundation, saveType?: ?string) => {
@@ -523,6 +540,7 @@ class NewEventDataEntry extends Component<Props> {
                         onSave={this.handleSave}
                         fieldOptions={this.fieldOptions}
                         dataEntrySections={this.dataEntrySections}
+                        relationshipsRef={this.setRelationshipsInstance}
                         {...passOnProps}
                     />
                 </div>

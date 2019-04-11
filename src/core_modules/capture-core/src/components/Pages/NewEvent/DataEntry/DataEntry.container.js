@@ -15,6 +15,7 @@ import {
     setNewEventSaveTypes,
     addNewEventNote,
     newEventOpenNewRelationship,
+    scrolledToRelationships,
 } from './actions/dataEntry.actions';
 import {
     makeProgramNameSelector,
@@ -28,6 +29,7 @@ const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
 
     const mapStateToProps = (state: ReduxState, props: Object) => ({
+        recentlyAddedRelationshipId: state.newEventPage.recentlyAddedRelationshipId,
         ready: !state.newEventPage.dataEntryIsLoading,
         error: !props.formFoundation ?
             i18n.t('This is not an event program or the metadata is corrupt. See log for details.') : null,
@@ -87,6 +89,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
     onOpenAddRelationship: (eventId: string, dataEntryId: string) => {
         dispatch(newEventOpenNewRelationship(eventId, dataEntryId));
+    },
+    onScrollToRelationships: () => {
+        dispatch(scrolledToRelationships());
     },
 });
 

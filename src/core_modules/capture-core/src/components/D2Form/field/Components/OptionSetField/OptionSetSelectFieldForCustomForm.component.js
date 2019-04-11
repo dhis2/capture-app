@@ -16,6 +16,7 @@ import {
 } from '../internal';
 import withOptionsIconElement from './withOptionsIconElement';
 import customFormStyles from './optionSetSelectFieldForCustomForm.mod.css';
+import withRulesOptionVisibilityHandler from './withRulesOptionVisibilityHandler';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;
 
@@ -30,7 +31,9 @@ export default withGotoInterface()(
                                 withSelectTranslations()(
                                     withCustomElementContainer(getContainerClass)(
                                         withOptionsIconElement()(
-                                            VirtualizedSelectField,
+                                            withRulesOptionVisibilityHandler()(
+                                                VirtualizedSelectField,
+                                            ),
                                         ),
                                     ),
                                 ),

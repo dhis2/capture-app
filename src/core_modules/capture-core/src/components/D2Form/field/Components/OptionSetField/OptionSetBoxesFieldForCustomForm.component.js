@@ -12,6 +12,7 @@ import {
     withRequiredFieldCalculation,
     withDisabledFieldCalculation,
 } from '../internal';
+import withRulesOptionVisibilityHandler from './withRulesOptionVisibilityHandler';
 
 export default withGotoInterface()(
     withHideCompatibility()(
@@ -21,7 +22,9 @@ export default withGotoInterface()(
                     withFocusSaver()(
                         withCalculateMessages()(
                             withDisplayMessages()(
-                                SelectionBoxes,
+                                withRulesOptionVisibilityHandler()(
+                                    SelectionBoxes,
+                                ),
                             ),
                         ),
                     ),
