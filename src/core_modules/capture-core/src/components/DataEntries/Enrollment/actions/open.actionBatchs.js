@@ -70,6 +70,8 @@ export const openDataEntryForNewEnrollmentBatchAsync = async (
             foundation,
             formId,
             orgUnit,
+            {},
+            {},
         );
     } else {
         rulesActions = [];
