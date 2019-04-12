@@ -58,7 +58,7 @@ const getStyles = theme => ({
 const defaultTrackedEntityTypeName = 'Tracked entity instance';
 
 class TeiRelationship extends React.Component<Props> {
-    trackedEntityTypeSelector: (props: Props) => ?TrackedEntityType;
+    trackedEntityTypeSelector: (props: Props) => TrackedEntityType;
     constructor(props: Props) {
         super(props);
         this.trackedEntityTypeSelector = makeTrackedEntityTypeSelector();
@@ -76,7 +76,7 @@ class TeiRelationship extends React.Component<Props> {
         const trackedEntityType = this.trackedEntityTypeSelector(this.props);
         this.props.onAddRelationship({
             id: teiId,
-            name: getTeiDisplayName(values, trackedEntityType.attributes),
+            name: getTeiDisplayName(values, trackedEntityType.attributes, trackedEntityType.name),
         });
     }
 
