@@ -239,10 +239,13 @@ const getGeometrySettings = () => ({
 });
 
 const getSearchGroups = (props: Object) => props.enrollmentMetadata.inputSearchGroups;
-const getSearchContext = (props: Object) => ({
-    ...props.onGetValidationContext(),
-    trackedEntityType: props.enrollmentMetadata.trackedEntityType.id,
-});
+const getSearchContext = (props: Object) => {
+    return {
+        ...props.onGetValidationContext(),
+        trackedEntityType: props.enrollmentMetadata.trackedEntityType.id,
+        program: props.programId,
+    };
+};
 
 type FinalTeiDataEntryProps = {
     enrollmentMetadata: Enrollment,
@@ -320,7 +323,6 @@ class PreEnrollmentDataEntry extends React.Component<PreEnrollmentDataEntryProps
 
     render() {
         const {
-            programId,
             orgUnit,
             onUpdateField,
             onStartAsyncUpdateField,

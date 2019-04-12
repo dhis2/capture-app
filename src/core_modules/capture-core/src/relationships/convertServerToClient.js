@@ -13,7 +13,7 @@ const getClientConstraintByType = {
         }, {});
         return {
             id: tei.trackedEntityInstance,
-            name: getTeiDisplayName(values, trackedEntityType.attributes),
+            name: getTeiDisplayName(values, trackedEntityType.attributes, trackedEntityType.name),
             type: 'TRACKED_ENTITY_INSTANCE',
         };
     },

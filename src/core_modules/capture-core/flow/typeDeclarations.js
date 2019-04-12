@@ -71,6 +71,8 @@ declare type Theme = {
             contrastText: string,
         },
         secondary: {
+            lightest: string,
+            lighter: string,
             light: string,
             main: string,
             dark: string,
