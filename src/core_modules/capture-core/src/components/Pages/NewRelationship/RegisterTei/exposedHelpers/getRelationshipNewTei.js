@@ -14,7 +14,8 @@ function getTrackerProgramMetadata(programId: string) {
     const program = getTrackerProgramThrowIfNotFound(programId);
     return {
         form: program.enrollment.enrollmentForm,
-        attributes: program.attributes,
+        attributes: program.trackedEntityType.attributes,
+        tetName: program.trackedEntityType.name,
     };
 }
 
@@ -23,6 +24,7 @@ function getTETMetadata(tetId: string) {
     return {
         form: tet.teiRegistration.form,
         attributes: tet.attributes,
+        tetName: tet.name,
     };
 }
 
@@ -66,9 +68,9 @@ export default function getRelationshipNewTei(dataEntryId: string, itemId: strin
     const { programId, orgUnit } = state.newRelationshipRegisterTei;
     const tetId = state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId;
 
-    const { attributes, form: formFoundation } = getMetadata(programId, tetId);
+    const { attributes, form: formFoundation, tetName } = getMetadata(programId, tetId);
     const clientValuesForFormData = getClientValuesForFormData(formValues, formFoundation);
-    const displayName = getDisplayName(clientValuesForFormData, attributes);
+    const displayName = getDisplayName(clientValuesForFormData, attributes, tetName);
 
     const serverValuesForFormValues = formFoundation.convertValues(clientValuesForFormData, convertClientToServer);
     const serverValuesForMainValues = getServerValuesForMainValues(
