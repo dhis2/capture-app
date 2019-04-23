@@ -1,6 +1,7 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import type {
     CachedStyle,
     CachedDataElement,
@@ -71,6 +72,13 @@ class DataElementFactory {
     async build(
         cachedProgramStageDataElement: CachedProgramStageDataElement,
     ) {
+        if (!cachedProgramStageDataElement.dataElement) {
+            log.error(
+                errorCreator('programStageDataElement does not contain a dataElement')(
+                    { programStageDataElement: cachedProgramStageDataElement }));
+            return null;
+        }
+
         const cachedDataElement = cachedProgramStageDataElement.dataElement;
 
         const dataElement = new DataElement((_this) => {
