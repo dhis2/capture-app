@@ -4,7 +4,7 @@
 /* eslint-disable no-restricted-syntax */
 import scopes from './scopes.const';
 
-type Validator = (value: any, contextProps: any) => Promise<any>;
+type Validator = (value: any, contextProps: any) => Promise<any> | any;
 
 export default class Unique {
     _generatable: boolean;

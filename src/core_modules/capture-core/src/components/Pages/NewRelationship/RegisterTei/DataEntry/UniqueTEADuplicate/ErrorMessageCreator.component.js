@@ -50,6 +50,18 @@ class UniqueTEADuplicateErrorMessageCreator extends React.Component<Props> {
         );
     }
 
+    static renderAttributeValueExistsUnsaved(attributeName: string) {
+        const attributeNameLC = attributeName.toLowerCase();
+        return (
+            <div>
+                {i18n.t(
+                    'You have already registered this {{attributeName}}',
+                    { attributeName: attributeNameLC },
+                )}
+            </div>
+        );
+    }
+
     static renderTypeDifference(attributeName: string, trackedEntityTypeName: string) {
         const trackedEntityTypeNameLC = trackedEntityTypeName.toLowerCase();
         const attributeNameLC = attributeName.toLowerCase();
@@ -102,6 +114,10 @@ class UniqueTEADuplicateErrorMessageCreator extends React.Component<Props> {
 
         if (!errorData) {
             return UniqueTEADuplicateErrorMessageCreator.renderNoAccess(attributeName);
+        }
+
+        if (errorData.attributeValueExistsUnsaved) {
+            return UniqueTEADuplicateErrorMessageCreator.renderAttributeValueExistsUnsaved(attributeName);
         }
 
         if (errorData.tetId !== trackedEntityType.id) {

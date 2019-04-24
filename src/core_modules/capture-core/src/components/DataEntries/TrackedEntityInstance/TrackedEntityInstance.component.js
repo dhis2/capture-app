@@ -54,13 +54,15 @@ type PreTeiDataEntryProps = {
     onUpdateField: Function,
     onStartAsyncUpdateField: Function,
     teiRegistrationMetadata: ?TeiRegistration,
+    onGetUnsavedAttributeValues?: ?Function,
 };
 
 class PreTeiDataEntry extends React.Component<PreTeiDataEntryProps> {
     getValidationContext = () => {
-        const { orgUnit } = this.props;
+        const { orgUnit, onGetUnsavedAttributeValues } = this.props;
         return {
             orgUnitId: orgUnit.id,
+            onGetUnsavedAttributeValues,
         };
     }
 
@@ -70,6 +72,7 @@ class PreTeiDataEntry extends React.Component<PreTeiDataEntryProps> {
             onUpdateField,
             onStartAsyncUpdateField,
             teiRegistrationMetadata,
+            onGetUnsavedAttributeValues,
             ...passOnProps } = this.props;
 
         if (!teiRegistrationMetadata) {

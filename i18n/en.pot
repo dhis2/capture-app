@@ -420,6 +420,9 @@ msgid ""
 "have access to it"
 msgstr ""
 
+msgid "You have already registered this {{attributeName}}"
+msgstr ""
+
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
