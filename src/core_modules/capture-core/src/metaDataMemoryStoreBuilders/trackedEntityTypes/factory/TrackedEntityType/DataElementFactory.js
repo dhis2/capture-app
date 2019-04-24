@@ -104,6 +104,22 @@ class DataElementFactory {
                         convertFormToClient,
                         convertClientToServer,
                     )(value, cachedAttribute.valueType);
+
+                    if (contextProps.onGetUnsavedAttributeValues) {
+                        const unsavedAttributeValues = contextProps.onGetUnsavedAttributeValues(dataElement.id);
+                        if (unsavedAttributeValues) {
+                            const foundValue = unsavedAttributeValues.find(usav => usav === serverValue);
+                            if (foundValue) {
+                                return {
+                                    valid: false,
+                                    data: {
+                                        attributeValueExistsUnsaved: true,
+                                    },
+                                };
+                            }
+                        }
+                    }
+
                     let requestPromise;
                     if (_this.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
                         const orgUnitId = contextProps.orgUnitId;
