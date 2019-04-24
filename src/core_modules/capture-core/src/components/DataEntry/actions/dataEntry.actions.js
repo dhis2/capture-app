@@ -21,11 +21,11 @@ export const actionTypes = {
     RULES_EXECUTED_POST_UPDATE_FIELD: 'RulesExecutedPostUpdateFieldDataEntry',
     ADD_DATA_ENTRY_NOTE: 'AddDataEntryNote',
     REMOVE_DATA_ENTRY_NOTE: 'RemoveDataEntryNote',
-    ADD_DATA_ENTRY_RELATIONSHIP: 'AddDataEntryRelationship',
-    REMOVE_DATA_ENTRY_RELATIONSHIP: 'RemoveDataEntryRelationship',
-    DATA_ENTRY_RELATIONSHIP_ALREADY_EXISTS: 'DataEntryRelationshipAlreadyExists',
     SET_CURRENT_DATA_ENTRY: 'SetCurrentDataEntry',
     START_RUN_RULES_POST_UPDATE_FIELD: 'StartRunRulesPostUpdateFieldDataEntry',
+    REMOVE_DATA_ENTRY_RELATIONSHIP: 'RemoveDataEntryRelationship',
+    ADD_DATA_ENTRY_RELATIONSHIP: 'AddDataEntryRelationship',
+    DATA_ENTRY_RELATIONSHIP_ALREADY_EXISTS: 'DataEntryRelationshipAlreadyExists',
 };
 
 // COMPLETE
@@ -130,18 +130,18 @@ export const removeNote =
     (dataEntryId: string, itemId: string, noteClientId: string) =>
         actionCreator(actionTypes.REMOVE_DATA_ENTRY_NOTE)({ dataEntryId, itemId, noteClientId });
 
-export const addRelationship =
-    (dataEntryId: string, itemId: string, relationship: Object) =>
-        actionCreator(actionTypes.ADD_DATA_ENTRY_RELATIONSHIP)({ dataEntryId, itemId, relationship });
+export const setCurrentDataEntry =
+    (dataEntryId: string, itemId: string, extraProps?: ?any) =>
+        actionCreator(actionTypes.SET_CURRENT_DATA_ENTRY)({ dataEntryId, itemId, extraProps });
 
 export const removeRelationship =
     (dataEntryId: string, itemId: string, relationshipClientId: string) =>
         actionCreator(actionTypes.REMOVE_DATA_ENTRY_RELATIONSHIP)({ dataEntryId, itemId, relationshipClientId });
 
+export const addRelationship =
+    (dataEntryId: string, itemId: string, relationship: Object, newToEntity: Object) =>
+        actionCreator(actionTypes.ADD_DATA_ENTRY_RELATIONSHIP)({ dataEntryId, itemId, relationship, newToEntity });
+
 export const relationshipAlreadyExists =
     (dataEntryId: string, itemId: string, message: string) =>
         actionCreator(actionTypes.DATA_ENTRY_RELATIONSHIP_ALREADY_EXISTS)({ dataEntryId, itemId, message });
-
-export const setCurrentDataEntry =
-    (dataEntryId: string, itemId: string, extraProps?: ?any) =>
-        actionCreator(actionTypes.SET_CURRENT_DATA_ENTRY)({ dataEntryId, itemId, extraProps });
