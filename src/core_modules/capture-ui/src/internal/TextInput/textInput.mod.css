@@ -20,6 +20,7 @@
 .inputWrapper {}
 
 .textArea {
+    margin: 0px;
     padding-left: 12px;
     padding-top: 10px;
     font-size: 16px;
@@ -29,7 +30,6 @@
     box-shadow: 0px 0px 2px 0px #C4C4C4 inset;
     height: 100px;
     resize: vertical;
-    margin-bottom: -4px;
 }
 
 .textArea:disabled {
