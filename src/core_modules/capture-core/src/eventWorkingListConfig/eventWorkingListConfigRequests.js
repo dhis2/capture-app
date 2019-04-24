@@ -1,6 +1,7 @@
 // @flow
 import convertToClientEventWorkingListConfig from './convertToClientEventWorkingListConfig';
 import { getEventProgramThrowIfNotFound } from '../metaData';
+import { getApi } from '../d2/d2Instance';
 
 
 const tempServerWorkingListConfigs = [
@@ -29,12 +30,10 @@ const tempServerWorkingListConfigs = [
 ];
 
 export const getEventProgramWorkingListConfigs = async (programId: string) => {
+    const api = getApi();
     const program = getEventProgramThrowIfNotFound(programId);
     const stage = program.getStageThrowIfNull();
 
-    const promise = new Promise((resolve) => { setTimeout(() => resolve(tempServerWorkingListConfigs), 1000); });
-
-    const result = await promise;
-
-    return result && result.map(wc => convertToClientEventWorkingListConfig(wc, stage.stageForm));
+    const apiRes = await api.get('eventFilters', { program: programId });
+    return apiRes ? apiRes.map(wc => convertToClientEventWorkingListConfig(wc, stage.stageForm)) : [];
 };
