@@ -32,6 +32,7 @@ type FieldUI = {
     valid?: ?boolean,
     errorMessage?: ?string,
     errorType?: ?string,
+    errorData?: any,
     validatingMessage?: ?string,
 };
 
@@ -72,6 +73,7 @@ type Props = {
     onIsValidating: ?IsValidatingFn,
     onCleanUp?: ?(remainingUids: Array<string>) => void,
     loadNr: number,
+    onPostProcessErrorMessage: (message: string, type: ?string, messageData: ?string, id: string, fieldId: string) => React.Node,
 };
 
 type FieldCommitOptions = {
@@ -110,6 +112,7 @@ class FormBuilder extends React.Component<Props> {
                     return {
                         message: (result && result.errorMessage) || currentValidator.message,
                         type: currentValidator.type,
+                        data: result && result.data,
                     };
                 }
                 return pass;
@@ -120,6 +123,7 @@ class FormBuilder extends React.Component<Props> {
                 valid: false,
                 errorMessage: validatorResult.message,
                 errorType: validatorResult.type,
+                errorData: validatorResult.data,
             };
         }
 
@@ -206,7 +210,7 @@ class FormBuilder extends React.Component<Props> {
                         handleIsValidatingInternal,
                     );
                 } catch (reason) {
-                    if (reason.isCanceled) {
+                    if (reason && isObject(reason) && reason.isCanceled) {
                         validationData = null;
                     } else {
                         validationData = {
@@ -325,6 +329,14 @@ class FormBuilder extends React.Component<Props> {
                     });
 
                 this.validateAllCancelablePromise = null;
+            })
+            .catch((reason) => {
+                if (!reason || !isObject(reason) || !reason.isCanceled) {
+                    log.error({
+                        reason,
+                        message: 'formBuilder validate all fields failed',
+                    });
+                }
             });
     }
 
@@ -400,7 +412,7 @@ class FormBuilder extends React.Component<Props> {
             onGetValidationContext && onGetValidationContext(),
             handleIsValidatingInternal,
         )
-            .then(({ valid, errorMessage, errorType }) => {
+            .then(({ valid, errorMessage, errorType, errorData }) => {
                 onUpdateField(
                     value,
                     {
@@ -408,6 +420,7 @@ class FormBuilder extends React.Component<Props> {
                         touched,
                         errorMessage,
                         errorType,
+                        errorData,
                     },
                     fieldId,
                     id,
@@ -416,7 +429,7 @@ class FormBuilder extends React.Component<Props> {
                 this.fieldsValidatingPromiseContainer[fieldId] = null;
             })
             .catch((reason) => {
-                if (!reason.isCanceled) {
+                if (!reason || !isObject(reason) || !reason.isCanceled) {
                     log.error({ reason, field, value });
                     onUpdateField(
                         value,
@@ -517,6 +530,7 @@ class FormBuilder extends React.Component<Props> {
             onGetValidationContext,
             onCleanUp,
             loadNr,
+            onPostProcessErrorMessage,
             ...passOnProps } = this.props;
 
         const props = field.props || {};
@@ -536,6 +550,16 @@ class FormBuilder extends React.Component<Props> {
             asyncProps.asyncUIState = this.asyncUIState[field.id];
         }
 
+        const errorMessage = onPostProcessErrorMessage && fieldUI.errorMessage ?
+            onPostProcessErrorMessage(
+                fieldUI.errorMessage,
+                fieldUI.errorType,
+                fieldUI.errorData,
+                `${id}-${field.id}`,
+                field.id,
+            ) :
+            fieldUI.errorMessage;
+
         return (
             <div
                 key={field.id}
@@ -547,7 +571,7 @@ class FormBuilder extends React.Component<Props> {
                     <field.component
                         ref={(fieldInstance) => { this.setFieldInstance(fieldInstance, field.id); }}
                         value={value}
-                        errorMessage={fieldUI.errorMessage}
+                        errorMessage={errorMessage}
                         touched={fieldUI.touched}
                         validationAttempted={validationAttempted}
                         validatingMessage={fieldUI.validatingMessage}

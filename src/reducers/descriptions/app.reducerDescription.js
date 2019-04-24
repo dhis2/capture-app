@@ -3,7 +3,8 @@ import { getAppReducerDesc } from 'capture-core/reducers/descriptions/app.reduce
 import { actionTypes as entryActionTypes } from '../../init/entry.actions';
 
 export const appReducerDesc = getAppReducerDesc({
-    [entryActionTypes.APP_LOAD]: (state, action) => ({
+    [entryActionTypes.APP_LOAD]: state => ({
+        ...state,
         initDone: false,
     }),
     [entryActionTypes.APP_LOAD_SUCESS]: (state, action) => {

@@ -4,6 +4,7 @@ const svgMod = {
         loader: 'svg-url-loader',
         options: {
             noquotes: true,
+            encoding: 'base64',
         },
     },
 };

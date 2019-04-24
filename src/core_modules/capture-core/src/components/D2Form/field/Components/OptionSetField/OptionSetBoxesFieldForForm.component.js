@@ -16,6 +16,7 @@ import {
     withDisabledFieldCalculation,
 } from '../internal';
 import labelTypeClasses from '../../buildField.mod.css';
+import withRulesOptionVisibilityHandler from './withRulesOptionVisibilityHandler';
 
 const getFilteredProps = (props: Object) => {
     const { formHorizontal, fieldLabelMediaBasedClass, ...passOnProps } = props;
@@ -37,7 +38,9 @@ export default withGotoInterface()(
                                 })(
                                     withDisplayMessages()(
                                         withFilterProps(getFilteredProps)(
-                                            SelectionBoxes,
+                                            withRulesOptionVisibilityHandler()(
+                                                SelectionBoxes,
+                                            ),
                                         ),
                                     ),
                                 ),

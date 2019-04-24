@@ -242,6 +242,7 @@ function buildUniqueValidator(metaData: MetaDataElement) {
             },
             message: errorMessages.UNIQUENESS,
             validatingMessage: validationMessages.UNIQUENESS,
+            type: 'unique',
         },
     ] : [];
 }

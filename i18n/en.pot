@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-04-08T07:14:30.520Z\n"
-"PO-Revision-Date: 2019-04-08T07:14:30.520Z\n"
+"POT-Creation-Date: 2019-04-09T16:55:25.873Z\n"
+"PO-Revision-Date: 2019-04-09T16:55:25.873Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -409,7 +409,47 @@ msgstr ""
 msgid "You dont have access to create an event in the current selections"
 msgstr ""
 
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr ""
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr ""
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr ""
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Registered person"
+msgstr ""
+
+msgid "Link"
+msgstr ""
+
+msgid "Metadata error. see log for details"
+msgstr ""
+
+msgid "Review Duplicates"
+msgstr ""
+
 msgid "Create person and link"
+msgstr ""
+
+msgid "Possible duplicates found"
+msgstr ""
+
+msgid "An error occured loading possible duplicates"
+msgstr ""
+
+msgid "Hide"
+msgstr ""
+
+msgid "Save as new {{tetName}}"
 msgstr ""
 
 msgid "Some programs are being filtered."
@@ -428,9 +468,6 @@ msgid "Registration"
 msgstr ""
 
 msgid "Search results"
-msgstr ""
-
-msgid "Link"
 msgstr ""
 
 msgid "No {{trackedEntityTypeName}} found."
@@ -537,7 +574,7 @@ msgstr ""
 msgid "Organisation unit search failed. See log for details"
 msgstr ""
 
-msgid "Tracked entity instance"
+msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"

@@ -292,6 +292,16 @@ export const dataEntriesRelationshipsDesc = createReducerDescription({
 }, 'dataEntriesRelationships', {});
 
 export const dataEntriesSearchGroupsResultsDesc = createReducerDescription({
+    [loadNewActionTypes.LOAD_NEW_DATA_ENTRY]: (state, action) => {
+        const newState = { ...state };
+        newState[action.payload.key] = null;
+        return newState;
+    },
+    [loadEditActionTypes.LOAD_EDIT_DATA_ENTRY]: (state, action) => {
+        const newState = { ...state };
+        newState[action.payload.key] = null;
+        return newState;
+    },
     [searchGroupActionTypes.SEARCH_GROUP_RESULT_COUNT_RETRIVED]: (state, action) => {
         const { count, dataEntryKey, groupId } = action.payload;
         return {
@@ -340,6 +350,16 @@ export const dataEntriesSearchGroupsPreviousValuesDesc = createReducerDescriptio
                 [searchGroupId]: {
                     ...values,
                 },
+            },
+        };
+    },
+    [searchGroupActionTypes.ABORT_SEARCH_GROUP_COUNT_SEARCH]: (state, action) => {
+        const { dataEntryKey, groupId } = action.payload;
+        return {
+            ...state,
+            [dataEntryKey]: {
+                ...state[dataEntryKey],
+                [groupId]: null,
             },
         };
     },

@@ -27,7 +27,7 @@ const getBaseProps = (metaData: MetaDataElement) => ({
     styles: baseComponentStyles,
     label: metaData.formName,
     metaCompulsory: metaData.compulsory,
-    metaDisabled: metaData.disabled,
+    metaDisabled: metaData.disabled || (metaData.unique && metaData.unique.generatable),
     icon: metaData.icon ? {
         data: metaData.icon.data,
         color: metaData.icon.color,

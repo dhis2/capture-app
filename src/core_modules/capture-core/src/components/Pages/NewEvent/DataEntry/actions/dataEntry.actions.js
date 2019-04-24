@@ -36,6 +36,10 @@ export const actionTypes = {
     NEW_EVENT_RELATIONSHIPS_SAVED: 'NewEventRelationshipsSaved',
     SAVE_FAILED_FOR_NEW_EVENT_RELATIONSHIPS: 'SaveFailedForNewEventRelationships',
     CANCEL_SAVE_INITIALIZE_WORKING_LISTS: 'CancelSaveInitializeWorkingListsForSingleNewEvent',
+    START_SAVE_TEI_FOR_NEW_EVENT_RELATIONSHIPS: 'StartSaveTeiForNewEventRelationships',
+    TEI_FOR_NEW_EVENT_RELATIONSHIPS_SAVED: 'TeiForNewEventRelationshipSaved',
+    SAVE_FAILED_FOR_NEW_EVENT_RELATIONSHIPS_TEI: 'SaveFailedForNewEventRelationshipTei',
+    SCROLLED_TO_RELATIONSHIPS: 'NewEventScrolledToRelationships',
 };
 
 export const startRunRulesOnUpdateForNewSingleEvent = (actionData: { payload: Object}) =>
@@ -75,6 +79,19 @@ export const startSaveNewEventRelationships = (serverData: Object, selections: O
             },
             commit: { type: actionTypes.NEW_EVENT_RELATIONSHIPS_SAVED, meta: { selections, triggerAction } },
             rollback: { type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_RELATIONSHIPS, meta: { selections, triggerAction } },
+        },
+    });
+
+export const startSaveTeiForNewEventRelationship = (teiPayload: Object, selections: Object, triggerAction: string, relationshipData: Array<any>, relationshipClientId: string) =>
+    actionCreator(actionTypes.START_SAVE_TEI_FOR_NEW_EVENT_RELATIONSHIPS)({ selections }, {
+        offline: {
+            effect: {
+                url: 'trackedEntityInstances',
+                method: methods.POST,
+                data: teiPayload,
+            },
+            commit: { type: actionTypes.TEI_FOR_NEW_EVENT_RELATIONSHIPS_SAVED, meta: { selections, triggerAction, relationshipData, relationshipClientId } },
+            rollback: { type: actionTypes.SAVE_FAILED_FOR_NEW_EVENT_RELATIONSHIPS_TEI, meta: { selections, triggerAction } },
         },
     });
 
@@ -141,3 +158,6 @@ export const startAsyncUpdateFieldForNewEvent = (
 
 export const newEventOpenNewRelationship = (eventId: string, dataEntryId: string) =>
     actionCreator(actionTypes.NEW_EVENT_OPEN_NEW_RELATIONSHIP)({ eventId, dataEntryId });
+
+export const scrolledToRelationships = () =>
+    actionCreator(actionTypes.SCROLLED_TO_RELATIONSHIPS)();

@@ -7,6 +7,7 @@ import isObject from 'd2-utilizr/lib/isObject';
 import isArray from 'd2-utilizr/lib/isArray';
 import isString from 'd2-utilizr/lib/isString';
 
+import getZScoreWFA from './zScoreWFA';
 import OptionSetHelper from '../OptionSetHelper/OptionSetHelper';
 import trimQuotes from '../commonUtils/trimQuotes';
 import typeKeys from '../typeKeys.const';
@@ -142,6 +143,7 @@ export default function getExecutionService(onTranslate, variableService, dateUt
                 {name:"d2:right",parameters:2},
                 {name:"d2:substring",parameters:3},
                 {name:"d2:split",parameters:3},
+                {name:"d2:zScoreWFA", parameters:3},
                 {name:"d2:length",parameters:1}];
             var continueLooping = true;
             //Safety harness on 10 loops, in case of unanticipated syntax causing unintencontinued looping
@@ -530,6 +532,10 @@ export default function getExecutionService(onTranslate, variableService, dateUt
                                 }
                                 returnPart = variableService.processValue(returnPart, 'TEXT');
                                 expression = expression.replace(callToThisFunction, returnPart);
+                                expressionUpdated = true;
+                            }
+                            else if(dhisFunction.name === "d2:zScoreWFA") {
+                                expression = expression.replace(callToThisFunction, getZScoreWFA(parameters[0],parameters[1],parameters[2]));
                                 expressionUpdated = true;
                             }
                             else if(dhisFunction.name === "d2:length") {

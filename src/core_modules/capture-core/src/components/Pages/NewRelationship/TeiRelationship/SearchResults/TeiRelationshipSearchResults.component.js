@@ -38,7 +38,10 @@ type Props = {
         topSection: string,
         topSectionActionsContainer: string,
         actionButton: string,
+        topSectionValuesContainer: string,
     },
+    searchValues: any,
+    searchGroup: any,
 }
 
 const getStyles = (theme: Theme) => ({

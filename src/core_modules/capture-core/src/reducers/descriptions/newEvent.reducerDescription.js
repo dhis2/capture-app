@@ -18,11 +18,9 @@ import {
 } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
 
 export const newEventPageDesc = createReducerDescription({
-    [newEventdataEntryUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state) => {
-        const newState = { ...state };
-        newState.isLoading = true;
-        return newState;
-    },
+    [newEventdataEntryUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: () => ({
+        isLoading: true,
+    }),
     [newEventdataEntryUrlActionTypes.ERROR_RETRIEVING_ORG_UNIT_BASED_ON_URL]: (state, action) => {
         const newState = { ...state };
         newState.isLoading = false;
@@ -91,6 +89,14 @@ export const newEventPageDesc = createReducerDescription({
     [newEventNewRelationshipActionTypes.ADD_NEW_EVENT_RELATIONSHIP]: state => ({
         ...state,
         showAddRelationship: false,
+    }),
+    [newEventNewRelationshipActionTypes.RECENTLY_ADDED_RELATIONSHIP]: (state, action) => ({
+        ...state,
+        recentlyAddedRelationshipId: action.payload.relationshipId,
+    }),
+    [newEventDataEntryActionTypes.SCROLLED_TO_RELATIONSHIPS]: state => ({
+        ...state,
+        recentlyAddedRelationshipId: null,
     }),
     [newEventNewRelationshipActionTypes.NEW_EVENT_CANCEL_NEW_RELATIONSHIP]: (state) => {
         const newState = { ...state };

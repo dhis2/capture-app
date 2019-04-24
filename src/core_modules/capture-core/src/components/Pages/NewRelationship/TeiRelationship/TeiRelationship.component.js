@@ -24,7 +24,7 @@ type Props = {
     findMode?: ?$Values<typeof findModes>,
     onOpenSearch: (trackedEntityTypeId: string, programId: ?string) => void,
     onSelectFindMode: (findMode: $Values<typeof findModes>) => void,
-    onAddRelationship: (entity: {id: string, name: string }) => void,
+    onAddRelationship: (entity: Object) => void,
     selectedRelationshipType: SelectedRelationshipType,
     classes: {
         container: string,
@@ -58,7 +58,7 @@ const getStyles = theme => ({
 const defaultTrackedEntityTypeName = 'Tracked entity instance';
 
 class TeiRelationship extends React.Component<Props> {
-    trackedEntityTypeSelector: (props: Props) => ?TrackedEntityType;
+    trackedEntityTypeSelector: (props: Props) => TrackedEntityType;
     constructor(props: Props) {
         super(props);
         this.trackedEntityTypeSelector = makeTrackedEntityTypeSelector();
@@ -76,7 +76,14 @@ class TeiRelationship extends React.Component<Props> {
         const trackedEntityType = this.trackedEntityTypeSelector(this.props);
         this.props.onAddRelationship({
             id: teiId,
-            name: getTeiDisplayName(values, trackedEntityType),
+            name: getTeiDisplayName(values, trackedEntityType.attributes, trackedEntityType.name),
+        });
+    }
+
+    handleAddRelationshipWithNewTei = (itemId: string, dataEntryId: string) => {
+        this.props.onAddRelationship({
+            itemId,
+            dataEntryId,
         });
     }
 
@@ -132,7 +139,10 @@ class TeiRelationship extends React.Component<Props> {
     }
 
     renderRegister = () => (
-        <RegisterTei />
+        <RegisterTei
+            onLink={this.handleAddRelationship}
+            onSave={this.handleAddRelationshipWithNewTei}
+        />
     );
 
     renderByMode = (findMode, props) => {

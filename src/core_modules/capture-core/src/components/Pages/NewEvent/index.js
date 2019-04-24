@@ -58,4 +58,5 @@ export {
     addRelationshipForNewSingleEventEpic,
     saveNewEventRelationshipsIfExistsEpic,
     saveNewEventRelationshipFinishedEpic,
+    teiForNewEventRelationshipSavedEpic,
 } from './DataEntry/epics/addRelationshipForNewSingleEvent.epics';

@@ -20,11 +20,13 @@ import {
     eventRelationshipAlreadyExists,
     startDeleteEventRelationship,
     eventRelationshipsLoaded,
+    saveEventRelationshipNewTei,
 } from './ViewEventRelationships.actions';
 import {
     convertClientRelationshipToServer,
     getRelationshipsForEvent,
 } from '../../../../relationships';
+import { getRelationshipNewTei } from '../../NewRelationship/RegisterTei';
 
 const relationshipKey = 'viewEvent';
 
@@ -66,9 +68,11 @@ export const addRelationshipForViewEventEpic = (action$: ActionsObservable, stor
             const eventId = state.viewEventPage.eventId;
             const existingRelationships = state.dataEntriesRelationships[relationshipKey] || [];
             const payload = action.payload;
+            const entity = payload.entity;
+
+            const toEntity = entity.id ? entity : getRelationshipNewTei(entity.dataEntryId, entity.itemId, state);
 
             const relationshipClientId = uuid();
-
             const clientRelationship = {
                 clientId: relationshipClientId,
                 from: {
@@ -77,7 +81,7 @@ export const addRelationshipForViewEventEpic = (action$: ActionsObservable, stor
                     type: 'PROGRAM_STAGE_INSTANCE',
                 },
                 to: {
-                    ...payload.entity,
+                    ...toEntity,
                     type: payload.entityType,
                 },
                 relationshipType: { ...payload.relationshipType },
@@ -98,21 +102,47 @@ export const addRelationshipForViewEventEpic = (action$: ActionsObservable, stor
                 return eventRelationshipAlreadyExists(message);
             }
 
-            const serverRelationshipData = {
-                relationships: [convertClientRelationshipToServer(clientRelationship)],
-            };
+            let saveAction;
+            if (toEntity.data) {
+                // save new tei before saving the relationship
+                saveAction = saveEventRelationshipNewTei(clientRelationship, state.currentSelections, relationshipClientId);
+            } else {
+                const serverRelationshipData = {
+                    relationships: [convertClientRelationshipToServer(clientRelationship)],
+                };
+                saveAction = startSaveEventRelationship(serverRelationshipData, state.currentSelections, relationshipClientId);
+            }
 
             return batchActions([
                 addRelationship(relationshipKey, clientRelationship),
-                startSaveEventRelationship(serverRelationshipData, state.currentSelections, relationshipClientId),
+                saveAction,
             ], viewEventRelationshipsBatchActionTypes.SAVE_EVENT_RELATIONSHIP_BATCH);
         });
+
+export const saveRelationshipAfterSavingTeiForViewEventEpic = (action$: ActionsObservable) =>
+    action$.ofType(viewEventRelationshipsActionTypes.EVENT_RELATIONSHIP_NEW_TEI_SAVE_SUCCESS)
+        .map((action) => {
+            const teiId = action.payload.response.importSummaries[0].reference;
+            const { clientData, selections, clientId } = action.meta;
+            const to = clientData.to;
+            to.data = null;
+            to.id = teiId;
+
+            const serverRelationshipData = {
+                relationships: [convertClientRelationshipToServer(clientData)],
+            };
+            return startSaveEventRelationship(serverRelationshipData, selections, clientId);
+        });
+
+export const handleViewEventRelationshipSaveTeiFailedEpic = (action$: ActionsObservable) =>
+    action$.ofType(viewEventRelationshipsActionTypes.EVENT_RELATIONSHIP_NEW_TEI_SAVE_FAILED)
+        .map(action => removeRelationship(relationshipKey, action.meta.clientId));
 
 export const saveRelationshipFailedForViewEventEpic = (action$: ActionsObservable) =>
     action$.ofType(viewEventRelationshipsActionTypes.SAVE_FAILED_FOR_EVENT_RELATIONSHIP)
         .map(action => removeRelationship(relationshipKey, action.meta.clientId));
 
-export const RelationshipSavedForViewEventEpic = (action$: ActionsObservable, store: ReduxStore) =>
+export const relationshipSavedForViewEventEpic = (action$: ActionsObservable, store: ReduxStore) =>
     action$.ofType(viewEventRelationshipsActionTypes.EVENT_RELATIONSHIP_SAVED)
         .map((action) => {
             const state = store.getState();
