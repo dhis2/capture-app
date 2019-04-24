@@ -33,11 +33,15 @@ export const loadNotesForViewEventEpic = (action$: InputObservable, store: Redux
         .map((action) => {
             const eventContainer = action.payload.eventContainer;
             const notes = (eventContainer && eventContainer.event && eventContainer.event.notes) || [];
+            const convertedNotes = notes.map(note => ({
+                ...note,
+                storedDate: convertListValue(note.storedDate, elementTypes.DATETIME),
+            }));
             // Load event relationships
 
             return batchActions([
                 eventNotesLoaded(),
-                setNotes(noteKey, notes),
+                setNotes(noteKey, convertedNotes),
             ], viewEventNotesBatchActionTypes.LOAD_EVENT_NOTES_BATCH);
         });
 

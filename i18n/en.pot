@@ -290,6 +290,9 @@ msgstr ""
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
+msgid "View event info"
+msgstr ""
+
 msgid "Delete event"
 msgstr ""
 

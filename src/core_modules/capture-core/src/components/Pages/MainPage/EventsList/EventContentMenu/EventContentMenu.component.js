@@ -20,7 +20,7 @@ type Props = {
         popperContainer: string,
     },
     onDelete: (eventId: string) => void,
-    onEdit: (eventId: string) => void,
+    onView: (eventId: string) => void,
     row: Object,
 }
 
@@ -55,9 +55,9 @@ class EventContentMenu extends React.Component<Props, State> {
         event.stopPropagation();
     }
 
-    handleEdit = (event: SyntheticEvent<any>) => {
+    handleView = (event: SyntheticEvent<any>) => {
         this.closeMenu();
-        this.props.onEdit(this.props.row.eventId);
+        this.props.onView(this.props.row.eventId);
         event.stopPropagation();
     }
 
@@ -91,7 +91,7 @@ class EventContentMenu extends React.Component<Props, State> {
         return (
             <React.Fragment>
                 <MenuItem onClick={this.handleEdit}>
-                    {i18n.t('Edit event')}
+                    {i18n.t('View event info')}
                 </MenuItem>
                 <MenuItem onClick={this.handleDelete}>
                     <Delete className={classes.deleteIcon} />
