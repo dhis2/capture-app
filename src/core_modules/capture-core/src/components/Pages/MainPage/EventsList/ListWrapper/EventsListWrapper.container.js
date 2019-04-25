@@ -35,6 +35,10 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         window.scrollTo(0, 0);
         dispatch(openViewEventPage(rowData.eventId));
     },
+    onView: (rowData: {eventId: string}) => {
+        window.scrollTo(0, 0);
+        dispatch(openViewEventPage(rowData.eventId));
+    },
     onDelete: (eventId: string) => {
         dispatch(requestDeleteEvent(eventId));
     },

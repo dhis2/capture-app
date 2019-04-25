@@ -2,6 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 
 import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import type {
     CachedProgramStageDataElement,
     CachedSectionDataElements,
@@ -11,7 +12,6 @@ import type {
     CachedOptionSet,
     CachedRelationshipType,
 } from '../../../../storageControllers/cache.types';
-import errorCreator from '../../../../utils/errorCreator';
 import Section from '../../../../metaData/RenderFoundation/Section';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import CustomForm from '../../../../metaData/RenderFoundation/CustomForm';
@@ -66,7 +66,14 @@ class ProgramStageFactory {
             await sectionSpecs.dataElements.asyncForEach(async (sectionDataElement: CachedSectionDataElements) => {
                 const id = sectionDataElement.id;
                 const cachedProgramStageDataElement = cachedProgramStageDataElements[id];
-                section.addElement(await this.dataElementFactory.build(cachedProgramStageDataElement));
+                if (!cachedProgramStageDataElement) {
+                    log.error(
+                        errorCreator('could not find programStageDataElement')(
+                            { sectionDataElement }));
+                    return;
+                }
+                const element = await this.dataElementFactory.build(cachedProgramStageDataElement);
+                element && section.addElement(element);
             });
         }
 
@@ -81,7 +88,8 @@ class ProgramStageFactory {
         if (cachedProgramStageDataElements) {
             // $FlowFixMe
             await cachedProgramStageDataElements.asyncForEach((async (cachedProgramStageDataElement) => {
-                section.addElement(await this.dataElementFactory.build(cachedProgramStageDataElement));
+                const element = await this.dataElementFactory.build(cachedProgramStageDataElement);
+                element && section.addElement(element);
             }));
         }
 

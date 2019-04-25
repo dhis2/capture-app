@@ -20,6 +20,9 @@ export const actionTypes = {
     EVENT_RELATIONSHIP_DELETED: 'EventRelationshipDeleted',
     DELETE_FAILED_FOR_EVENT_RELATIONSHIP: 'DeleteFailedForEventRelationship',
     REQUEST_DELETE_EVENT_RELATIONSHIP: 'RequestDeleteEventRelationship',
+    EVENT_RELATIONSHIP_NEW_TEI_SAVE: 'EventRelationshipNewTeiSave',
+    EVENT_RELATIONSHIP_NEW_TEI_SAVE_SUCCESS: 'EventRelationshipNewTeiSaveSuccess',
+    EVENT_RELATIONSHIP_NEW_TEI_SAVE_FAILED: 'EventRelationshipNewTeiSaveFailed',
 };
 
 export const eventRelationshipsLoaded = () =>
@@ -33,6 +36,20 @@ export const requestAddEventRelationship = (relationshipType: { id: string, name
 
 export const eventRelationshipAlreadyExists = (message: string) =>
     actionCreator(actionTypes.EVENT_RELATIONSHIP_ALREADY_EXISTS)({ message });
+
+export const saveEventRelationshipNewTei = (clientData: Object, selections: Object, clientId: string) =>
+    actionCreator(actionTypes.EVENT_RELATIONSHIP_NEW_TEI_SAVE)({ selections }, {
+        offline: {
+            effect: {
+                url: 'trackedEntityInstances',
+                method: methods.POST,
+                data: clientData.to.data,
+                clientId,
+            },
+            commit: { type: actionTypes.EVENT_RELATIONSHIP_NEW_TEI_SAVE_SUCCESS, meta: { clientData, selections, clientId } },
+            rollback: { type: actionTypes.EVENT_RELATIONSHIP_NEW_TEI_SAVE_FAILED, meta: { clientData, selections, clientId } },
+        },
+    });
 
 export const startSaveEventRelationship = (serverData: Object, selections: Object, clientId: string) =>
     actionCreator(actionTypes.START_SAVE_EVENT_RELATIONSHIP)({ selections }, {

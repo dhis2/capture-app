@@ -4,7 +4,7 @@ import * as React from 'react';
 import LoadingMaskElementCenter from '../components/LoadingMasks/LoadingMaskElementCenter.component';
 
 type Props = {
-    ready: boolean,
+    ready?: ?boolean,
 };
 
 const withLoadingIndicator =

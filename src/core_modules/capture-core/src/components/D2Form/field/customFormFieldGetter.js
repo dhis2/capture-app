@@ -51,7 +51,7 @@ const fieldForTypes = {
     [elementTypes.UNKNOWN]: (metaData: MetaDataElement) => null, // eslint-disable-line no-unused-vars
 };
 
-export default function getCustomFormField(metaData: MetaDataElement) {
+export default function getCustomFormField(metaData: MetaDataElement, options: Object) {
     const type = metaData.type;
     if (!fieldForTypes[type]) {
         log.warn(errorCreator(errorMessages.NO_FORMFIELD_FOR_TYPE)({ metaData }));
@@ -59,7 +59,7 @@ export default function getCustomFormField(metaData: MetaDataElement) {
     }
 
     if (metaData.optionSet) {
-        return getOptionSetFieldConfig(metaData);
+        return getOptionSetFieldConfig(metaData, options);
     }
 
     return fieldForTypes[type](metaData);

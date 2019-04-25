@@ -179,16 +179,17 @@ class EnrollmentFactory {
                 _this.minAttributesRequiredToSearch = searchGroup.minAttributesRequiredToSearch;
                 _this.searchFoundation = this._buildInputSearchGroupFoundation(cachedProgram, searchGroup);
                 _this.onSearch = (values: Object = {}, contextProps: Object = {}) => {
-                    const { orgUnit, trackedEntityType } = contextProps;
+                    const { orgUnit, program } = contextProps;
                     return getApi()
                         .get(
                             'trackedEntityInstances/count.json',
                             {
                                 ou: orgUnit.id,
-                                trackedEntityType,
+                                program,
                                 ouMode: 'ACCESSIBLE',
                                 filter: Object
                                     .keys(values)
+                                    .filter(key => (values[key] || values[key] === 0 || values[key] === false))
                                     .map(key => `${key}:LIKE:${values[key]}`),
                                 pageSize: 1,
                                 page: 1,

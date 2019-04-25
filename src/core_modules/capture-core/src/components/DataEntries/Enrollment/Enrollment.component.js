@@ -7,10 +7,6 @@ import {
     placements,
     withDataEntryField,
     withDataEntryFieldIfApplicable,
-    withFeedbackOutput,
-    withIndicatorOutput,
-    withErrorOutput,
-    withWarningOutput,
     withBrowserBackWarning,
     withSearchGroups,
     inMemoryFileStore,
@@ -243,10 +239,13 @@ const getGeometrySettings = () => ({
 });
 
 const getSearchGroups = (props: Object) => props.enrollmentMetadata.inputSearchGroups;
-const getSearchContext = (props: Object) => ({
-    ...props.onGetValidationContext(),
-    trackedEntityType: props.enrollmentMetadata.trackedEntityType.id,
-});
+const getSearchContext = (props: Object) => {
+    return {
+        ...props.onGetValidationContext(),
+        trackedEntityType: props.enrollmentMetadata.trackedEntityType.id,
+        program: props.programId,
+    };
+};
 
 type FinalTeiDataEntryProps = {
     enrollmentMetadata: Enrollment,
@@ -276,11 +275,13 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
 }
 
 const SearchGroupsHOC = withSearchGroups(getSearchGroups, getSearchContext)(FinalEnrollmentDataEntry);
+/*
 const FeedbackOutput = withFeedbackOutput()(SearchGroupsHOC);
 const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
 const WarningOutput = withWarningOutput()(IndicatorOutput);
 const ErrorOutput = withErrorOutput()(WarningOutput);
-const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(ErrorOutput);
+*/
+const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(SearchGroupsHOC);
 const IncidentDateFieldHOC = withDataEntryField(getIncidentDateSettings())(LocationHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);
 const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);
@@ -322,7 +323,6 @@ class PreEnrollmentDataEntry extends React.Component<PreEnrollmentDataEntryProps
 
     render() {
         const {
-            programId,
             orgUnit,
             onUpdateField,
             onStartAsyncUpdateField,

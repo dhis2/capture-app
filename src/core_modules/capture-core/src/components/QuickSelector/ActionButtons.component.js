@@ -17,10 +17,8 @@ const styles = () => ({
         justifyContent: 'flex-end',
         flexGrow: 1,
         padding: 10,
-        textAlign: 'right',
     },
     startAgainContainer: {
-        textAlign: 'start',
         flexGrow: 1,
     },
 });

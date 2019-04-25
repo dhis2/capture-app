@@ -19,6 +19,7 @@ const getStyles = (theme: Theme) => ({
     container: {
         flexBasis: theme.typography.pxToRem(0),
         flexGrow: 1,
+        minWidth: theme.typography.pxToRem(300),
     },
 });
 
