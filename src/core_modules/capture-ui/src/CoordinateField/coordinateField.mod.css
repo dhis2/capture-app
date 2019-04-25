@@ -92,4 +92,8 @@
     flex-direction: column;
     padding: 0px 24px 24px 24px;
 }
+
+.buttonsContainerVertical {
+    display: flex;
+}
   

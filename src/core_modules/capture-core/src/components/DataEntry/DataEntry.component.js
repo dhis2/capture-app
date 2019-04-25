@@ -214,12 +214,11 @@ class DataEntry extends React.Component<Props> {
         return fieldsByPlacement;
     }
 
-    render() {
+    renderD2Form = () => {
         const {
             id,
             classes,
             itemId,
-            formFoundation,
             completeButton,
             mainButton,
             cancelButton,
@@ -235,7 +234,33 @@ class DataEntry extends React.Component<Props> {
             onAddNote,
             onOpenAddRelationship,
             dataEntryFieldRef,
-            ...passOnProps } = this.props;
+            ...passOnProps
+        } = this.props;
+
+        const d2Form = (
+            <D2Form
+                innerRef={(formInstance) => { this.formInstance = formInstance; }}
+                id={getDataEntryKey(id, itemId)}
+                validationAttempted={completionAttempted || saveAttempted}
+                onUpdateField={this.handleUpdateField}
+                onUpdateFieldAsync={this.handleUpdateFieldAsync}
+                {...passOnProps}
+            />
+        );
+        return this.props.formHorizontal ? d2Form : <div className={classes.d2FormContainer}>{d2Form}</div>;
+    }
+
+    render() {
+        const {
+            classes,
+            itemId,
+            formFoundation,
+            completeButton,
+            mainButton,
+            cancelButton,
+            notes,
+            dataEntryOutputs,
+        } = this.props;
 
         if (!itemId) {
             return (
@@ -253,23 +278,13 @@ class DataEntry extends React.Component<Props> {
             );
         }
         const directionClasses = this.getClasses();
+
         return (
             <div className={directionClasses.container}>
                 <div className={directionClasses.dataEntryContainer}>
                     <div className={directionClasses.formContainer}>
                         {this.renderDataEntryFieldsByPlacement(placements.TOP)}
-                        <div className={classes.d2FormContainer}>
-                            <D2Form
-                                innerRef={(formInstance) => { this.formInstance = formInstance; }}
-                                formFoundation={formFoundation}
-                                id={getDataEntryKey(id, itemId)}
-                                validationAttempted={completionAttempted || saveAttempted}
-                                onUpdateField={this.handleUpdateField}
-                                onUpdateFieldAsync={this.handleUpdateFieldAsync}
-                                {...passOnProps}
-                            />
-                        </div>
-
+                        {this.renderD2Form()}
                         {this.renderDataEntryFieldsByPlacement(placements.BOTTOM)}
                         {notes &&
                             <div className={classes.notes}>

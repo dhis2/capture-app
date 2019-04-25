@@ -120,7 +120,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
         return (
             <div className={mapIconContainerClass}>
                 <IconButton
-                    disabled={disabled}
+                    disabled={!!disabled}
                     style={{ height: 42, width: 42, borderRadius: 0 }}
                     classes={{ root: classNames(defaultClasses.mapIcon, mapIconCustomClass) }}
                 >
@@ -198,50 +198,95 @@ export default class D2Coordinate extends React.Component<Props, State> {
         </div>
     );
 
-    render() {
+    renderLatitude = () => {
         const { mapCenter, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
         const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes || {};
-        const coordinateFieldsClass = orientation === orientations.VERTICAL ? defaultClasses.coordinateFieldsVertical : defaultClasses.coordinateFieldsHorizontal;
-        const clearIconClass = shrinkDisabled ? defaultClasses.clearIcon : defaultClasses.clearIconWithMargin;
+        return (
+            <CoordinateInput
+                shrinkDisabled={shrinkDisabled}
+                label="Latitude"
+                value={value && value.latitude}
+                classes={passOnClasses}
+                className={defaultClasses.latitudeTextInput}
+                onBlur={latValue => this.handleBlur(coordinateKeys.LATITUDE, latValue)}
+                onChange={latValue => this.handleChange(coordinateKeys.LATITUDE, latValue)}
+                disabled={disabled}
+                {...passOnProps}
+            />
+        );
+    }
 
+    renderLongitude = () => {
+        const { mapCenter, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
+        const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes || {};
+        return (
+            <CoordinateInput
+                shrinkDisabled={shrinkDisabled}
+                label="Longitude"
+                value={value && value.longitude}
+                className={defaultClasses.longitudeTextInput}
+                classes={passOnClasses}
+                onBlur={lngValue => this.handleBlur(coordinateKeys.LONGITUDE, lngValue)}
+                onChange={lngValue => this.handleChange(coordinateKeys.LONGITUDE, lngValue)}
+                disabled={disabled}
+                {...passOnProps}
+            />
+        );
+    }
+
+    renderClearButton = () => {
+        const { shrinkDisabled, disabled } = this.props;
+        const clearIconClass = shrinkDisabled ? defaultClasses.clearIcon : defaultClasses.clearIconWithMargin;
+        return (
+            <div className={clearIconClass}>
+                <IconButton style={{ height: 42, width: 42, borderRadius: 0 }} disabled={!!disabled}>
+                    <ClearIcon onClick={this.handleClear} />
+                </IconButton>
+            </div>
+
+        );
+    }
+
+
+    renderVertical = () => {
         return (
             <div>
-                <div className={coordinateFieldsClass}>
+                <div className={defaultClasses.coordinateFieldsVertical}>
                     {this.renderMapDialog()}
-                    {this.renderMapIcon()}
-                    <div className={defaultClasses.inputContainer}>
-                        <CoordinateInput
-                            shrinkDisabled={shrinkDisabled}
-                            label="Latitude"
-                            value={value && value.latitude}
-                            classes={passOnClasses}
-                            className={defaultClasses.latitudeTextInput}
-                            onBlur={latValue => this.handleBlur(coordinateKeys.LATITUDE, latValue)}
-                            onChange={latValue => this.handleChange(coordinateKeys.LATITUDE, latValue)}
-                            disabled={disabled}
-                            {...passOnProps}
-                        />
+                    <div className={defaultClasses.buttonsContainerVertical}>
+                        {this.renderMapIcon()}
+                        {this.renderClearButton()}
                     </div>
                     <div className={defaultClasses.inputContainer}>
-                        <CoordinateInput
-                            shrinkDisabled={shrinkDisabled}
-                            label="Longitude"
-                            value={value && value.longitude}
-                            className={defaultClasses.longitudeTextInput}
-                            classes={passOnClasses}
-                            onBlur={lngValue => this.handleBlur(coordinateKeys.LONGITUDE, lngValue)}
-                            onChange={lngValue => this.handleChange(coordinateKeys.LONGITUDE, lngValue)}
-                            disabled={disabled}
-                            {...passOnProps}
-                        />
+                        {this.renderLatitude()}
                     </div>
-                    <div className={clearIconClass}>
-                        <IconButton style={{ height: 42, width: 42 }} disabled={disabled}>
-                            <ClearIcon onClick={this.handleClear} />
-                        </IconButton>
+                    <div className={defaultClasses.inputContainer}>
+                        {this.renderLongitude()}
                     </div>
                 </div>
             </div>
         );
+    }
+
+    renderHorizontal = () => {
+        return (
+            <div>
+                <div className={defaultClasses.coordinateFieldsHorizontal}>
+                    {this.renderMapDialog()}
+                    {this.renderMapIcon()}
+                    <div className={defaultClasses.inputContainer}>
+                        {this.renderLatitude()}
+                    </div>
+                    <div className={defaultClasses.inputContainer}>
+                        {this.renderLongitude()}
+                    </div>
+                    {this.renderClearButton()}
+                </div>
+            </div>
+        );
+    }
+
+    render() {
+        return this.props.orientation === orientations.VERTICAL ? this.renderVertical() : this.renderHorizontal();
     }
 }
