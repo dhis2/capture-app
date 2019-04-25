@@ -5,9 +5,9 @@
   "cacheVersion": "6",
   "private": false,
   "dependencies": {
-    "@dhis2/d2-i18n": "^1.0.3",
+    "@dhis2/d2-i18n": "^1.0.4",
     "@dhis2/d2-i18n-extract": "^1.0.7",
-    "@dhis2/d2-i18n-generate": "^1.0.18",
+    "@dhis2/d2-i18n-generate": "^1.1.1",
     "@dhis2/d2-icons": "^1.0.1",
     "@dhis2/d2-ui-app": "^1.0.4",
     "@dhis2/d2-ui-core": "^1.2.0",
