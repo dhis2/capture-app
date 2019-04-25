@@ -5,9 +5,10 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
 import FileDownloadIcon from '@material-ui/icons/FileDownload';
+import moment from '../../utils/moment/momentResolver';
 
 import { getApi } from '../../d2/d2Instance';
-import getProgramAndStageFromProgramId from '../../metaData/helpers/EventProgram/getProgramAndStageFromProgramId';
+import { ProgramStage, EventProgram } from '../../metaData';
 
 const styles = () => ({
     menuButtons: {
@@ -18,8 +19,8 @@ const styles = () => ({
 
 type Props = {
     classes: Object,
-    selectedOrgUnitId: string,
-    selectedProgramId: string,
+    programAndStageContainer: { program: ?EventProgram, stage: ?ProgramStage },
+    orgUnit: ?Object,
     selectedCategoryOptions: { [key: string]: string },
 };
 
@@ -47,12 +48,16 @@ class DownloadTable extends Component<Props, State> {
         this.setState({ anchorEl: null });
     };
 
+    getFileName = (program: EventProgram, orgUnit: { id: string, name: string }) => {
+        const today = moment().format('YYYYMMDD');
+        return `${orgUnit.name} - ${program.name} - ${today}`;
+    }
+
     render() {
         const { anchorEl } = this.state;
-        const { classes, selectedProgramId, selectedCategoryOptions } = this.props;
+        const { classes, programAndStageContainer, orgUnit, selectedCategoryOptions } = this.props;
+        const { orgUnitId } = orgUnit || {};
         const baseUrl = getApi().baseUrl;
-
-        const programAndStageContainer = getProgramAndStageFromProgramId(selectedProgramId);
 
         // Generate Category filter for URL.
         let categoryFilter = '';
@@ -72,6 +77,8 @@ class DownloadTable extends Component<Props, State> {
         }
         const selectedProgramStageId = programAndStageContainer.stage.id;
 
+        // $FlowFixMe
+        const fileName = this.getFileName(programAndStageContainer.program, orgUnit);
         return (
             <span>
                 <IconButton
@@ -92,9 +99,9 @@ class DownloadTable extends Component<Props, State> {
                     <a
                         className={classes.menuButtons}
                         href={
-                            `${baseUrl}/events/query.json?orgUnit=${this.props.selectedOrgUnitId}&programStage=${selectedProgramStageId}${categoryFilter}&skipPaging=true`
+                            `${baseUrl}/events/query.json?orgUnit=${orgUnitId}&programStage=${selectedProgramStageId}${categoryFilter}&skipPaging=true`
                         }
-                        download
+                        download={fileName}
                         tabIndex={-1}
                     >
                         <MenuItem onClick={this.handleClose}>JSON</MenuItem>
@@ -102,9 +109,9 @@ class DownloadTable extends Component<Props, State> {
                     <a
                         className={classes.menuButtons}
                         href={
-                            `${baseUrl}/events/query.xml?orgUnit=${this.props.selectedOrgUnitId}&programStage=${selectedProgramStageId}${categoryFilter}&skipPaging=true`
+                            `${baseUrl}/events/query.xml?orgUnit=${orgUnitId}&programStage=${selectedProgramStageId}${categoryFilter}&skipPaging=true`
                         }
-                        download
+                        download={fileName}
                         tabIndex={-1}
                     >
                         <MenuItem onClick={this.handleClose}>XML</MenuItem>
@@ -112,9 +119,9 @@ class DownloadTable extends Component<Props, State> {
                     <a
                         className={classes.menuButtons}
                         href={
-                            `${baseUrl}/events/query.csv?orgUnit=${this.props.selectedOrgUnitId}&programStage=${selectedProgramStageId}${categoryFilter}&skipPaging=true`
+                            `${baseUrl}/events/query.csv?orgUnit=${orgUnitId}&programStage=${selectedProgramStageId}${categoryFilter}&skipPaging=true`
                         }
-                        download
+                        download={fileName}
                         tabIndex={-1}
                     >
                         <MenuItem onClick={this.handleClose}>CSV</MenuItem>
