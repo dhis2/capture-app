@@ -22,6 +22,7 @@ type Props = {
     completionAttempted?: ?boolean,
     saveAttempted?: ?boolean,
     dataEntryFieldRef?: ?(instance: any, key: string) => void,
+    onUpdateDataEntryField?: ?(innerAction: ReduxAction<any, any>, data: { value: any }) => void,
 };
 
 type Settings = {
@@ -32,7 +33,7 @@ type Settings = {
     getMeta?: ?(props: Props) => Object,
     getIsHidden?: ?(props: Object) => boolean,
     getPassOnFieldData?: ?(props: Props) => boolean,
-    onUpdateField?: ?(innerAction: ReduxAction<any, any>, data: { value: any }) => void,
+    getOnUpdateField?: ?(props: Object) => (innerAction: ReduxAction<any, any>, data: { value: any }) => void,
 };
 
 
@@ -60,8 +61,8 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
         };
 
         getFieldElement() {
-            const { id, completionAttempted, saveAttempted } = this.props;
-            const { getComponent, getComponentProps, getValidatorContainers, getPropName, onUpdateField } = settings;
+            const { id, completionAttempted, saveAttempted, onUpdateDataEntryField } = this.props;
+            const { getComponent, getComponentProps, getValidatorContainers, getPropName } = settings;
 
             const Component = getComponent(this.props);
             const componentProps = this.reselectComponentProps(getComponentProps && getComponentProps(this.props));
@@ -76,7 +77,7 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
                     Component={Component}
                     validatorContainers={validatorContainers}
                     propName={getPropName(this.props)}
-                    onUpdateField={onUpdateField}
+                    onUpdateField={onUpdateDataEntryField}
                     componentProps={componentProps}
                 />
             );

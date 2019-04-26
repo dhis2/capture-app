@@ -47,6 +47,7 @@ import type {
 import {
     listId,
 } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
+import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 
 const errorMessages = {
     PROGRAM_OR_STAGE_NOT_FOUND: 'Program or stage not found',
@@ -137,57 +138,72 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
                 resetList(listId, columnsConfig, newEventsMeta, state.currentSelections));
         });
 
-export const runRulesForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
+
+const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemId: string, uid: string, fieldData?: ?FieldData) => {
+    const state = store.getState();
+    const formId = getDataEntryKey(dataEntryId, itemId);
+    const programId = state.currentSelections.programId;
+    const metadataContainer = getProgramAndStageFromProgramId(programId);
+
+    const orgUnitId = state.currentSelections.orgUnitId;
+    const orgUnit = state.organisationUnits[orgUnitId];
+
+    let rulesActions;
+    if (metadataContainer.error) {
+        const foundation = metadataContainer.stage ? metadataContainer.stage.stageForm : null;
+        rulesActions = getRulesActionsForEvent(
+            metadataContainer.program,
+            foundation,
+            formId,
+            orgUnit,
+        );
+    } else {
+        // $FlowSuppress
+        const foundation: RenderFoundation = metadataContainer.stage.stageForm;
+
+        const currentEventValues = getCurrentClientValues(state, foundation, formId, fieldData);
+        const currentEventMainData = getCurrentClientMainData(state, itemId, dataEntryId, {}, foundation);
+        const currentEventData = { ...currentEventValues, ...currentEventMainData };
+
+        rulesActions = getRulesActionsForEvent(
+            metadataContainer.program,
+            foundation,
+            formId,
+            orgUnit,
+            currentEventData,
+            [currentEventData],
+        );
+    }
+
+    return batchActions([
+        ...rulesActions,
+        rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
+    ],
+    batchActionTypes.RULES_EFFECTS_ACTIONS_BATCH,
+    );
+};
+
+export const runRulesOnUpdateDataEntryFieldForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
+    // $FlowSuppress
+    action$.ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH)
+        .map(actionBatch =>
+            actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE))
+        .map((action) => {
+            const { dataEntryId, itemId, uid } = action.payload;
+            return runRulesForNewSingleEvent(store, dataEntryId, itemId, uid);
+        });
+
+export const runRulesOnUpdateFieldForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
     action$.ofType(batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH)
         .map(actionBatch =>
             actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE))
         .map((action) => {
-            const state = store.getState();
-            const programId = state.currentSelections.programId;
-            const metadataContainer = getProgramAndStageFromProgramId(programId);
-
-            const orgUnitId = state.currentSelections.orgUnitId;
-            const orgUnit = state.organisationUnits[orgUnitId];
-
-            const payload = action.payload;
+            const { dataEntryId, itemId, uid, elementId, value, uiState } = action.payload;
             const fieldData: FieldData = {
-                elementId: payload.elementId,
-                value: payload.value,
-                valid: payload.uiState.valid,
+                elementId,
+                value,
+                valid: uiState.valid,
             };
-
-            let rulesActions;
-            if (metadataContainer.error) {
-                const foundation = metadataContainer.stage ? metadataContainer.stage.stageForm : null;
-                rulesActions = getRulesActionsForEvent(
-                    metadataContainer.program,
-                    foundation,
-                    payload.formId,
-                    orgUnit,
-                );
-            } else {
-                // $FlowSuppress
-                const foundation: RenderFoundation = metadataContainer.stage.stageForm;
-
-                const currentEventValues = getCurrentClientValues(state, foundation, payload.formId, fieldData);
-                const currentEventMainData = getCurrentClientMainData(state, payload.itemId, payload.dataEntryId, {}, foundation);
-                const currentEventData = { ...currentEventValues, ...currentEventMainData };
-
-                rulesActions = getRulesActionsForEvent(
-                    metadataContainer.program,
-                    foundation,
-                    payload.formId,
-                    orgUnit,
-                    currentEventData,
-                    [currentEventData],
-                );
-            }
-
-            return batchActions([
-                ...rulesActions,
-                rulesExecutedPostUpdateField(payload.dataEntryId, payload.itemId, payload.uid),
-            ],
-            batchActionTypes.RULES_EFFECTS_ACTIONS_BATCH,
-            );
+            return runRulesForNewSingleEvent(store, dataEntryId, itemId, uid, fieldData);
         });

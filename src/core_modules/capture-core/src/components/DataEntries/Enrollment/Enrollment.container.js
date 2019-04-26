@@ -1,12 +1,20 @@
 // @flow
 import { connect } from 'react-redux';
-import { updateFieldBatch, asyncUpdateSuccessBatch } from './actions/enrollment.actionBatchs';
+import { updateFieldBatch, asyncUpdateSuccessBatch, updateDataEntryFieldBatch } from './actions/enrollment.actionBatchs';
 import { startAsyncUpdateFieldForNewEnrollment } from './actions/enrollment.actions';
 import Enrollment from './Enrollment.component';
 
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+    onUpdateDataEntryField: (
+        innerAction: ReduxAction<any, any>,
+        data: any,
+        programId: string,
+        orgUnit: Object,
+    ) => {
+        dispatch(updateDataEntryFieldBatch(innerAction, programId, orgUnit));
+    },
     onUpdateField: (
         innerAction: ReduxAction<any, any>,
         extraActions: {

@@ -290,6 +290,7 @@ type PreEnrollmentDataEntryProps = {
     programId: string,
     orgUnit: Object,
     onUpdateField: Function,
+    onUpdateDataEntryField: Function,
     onStartAsyncUpdateField: Function,
     onGetUnsavedAttributeValues?: ?Function,
 };
@@ -318,6 +319,11 @@ class PreEnrollmentDataEntry extends React.Component<PreEnrollmentDataEntryProps
         this.props.onUpdateField(...args, programId, orgUnit);
     }
 
+    handleUpdateDataEntryField = (...args: Array<any>) => {
+        const { programId, orgUnit } = this.props;
+        this.props.onUpdateDataEntryField(...args, programId, orgUnit);
+    }
+
     handleStartAsyncUpdateField = (...args: Array<any>) => {
         const { programId, orgUnit } = this.props;
         this.props.onStartAsyncUpdateField(...args, programId, orgUnit);
@@ -327,6 +333,7 @@ class PreEnrollmentDataEntry extends React.Component<PreEnrollmentDataEntryProps
         const {
             orgUnit,
             onUpdateField,
+            onUpdateDataEntryField,
             onStartAsyncUpdateField,
             onGetUnsavedAttributeValues,
             ...passOnProps } = this.props;
@@ -334,6 +341,7 @@ class PreEnrollmentDataEntry extends React.Component<PreEnrollmentDataEntryProps
             <PreEnrollmentDataEntryPure
                 onGetValidationContext={this.getValidationContext}
                 onUpdateFormField={this.handleUpdateField}
+                onUpdateDataEntryField={this.handleUpdateDataEntryField}
                 onUpdateFormFieldAsync={this.handleStartAsyncUpdateField}
                 {...passOnProps}
             />
