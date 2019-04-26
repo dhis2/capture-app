@@ -110,6 +110,7 @@ type Props = {
     dataEntryFieldRef: any,
     onAddNote?: ?Function,
     onOpenAddRelationship?: ?Function,
+    onUpdateDataEntryField?: ?Function,
 };
 
 const fieldHorizontalFilter = (placement: $Values<typeof placements>) =>
@@ -227,6 +228,7 @@ class DataEntry extends React.Component<Props> {
             saveAttempted,
             fields,
             dataEntrySections,
+            onUpdateDataEntryField,
             onUpdateFormField,
             onUpdateFieldInner,
             onUpdateFormFieldAsync,
