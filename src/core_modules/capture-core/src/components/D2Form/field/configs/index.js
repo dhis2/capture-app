@@ -30,3 +30,4 @@ export { default as getOrgUnitFieldConfigForCustomForm } from './orgUnitField/ge
 export { default as getTextFieldConfigForCustomForm } from './textField/getTextFieldConfigForCustomForm';
 export { default as getTrueOnlyFieldConfigForCustomForm } from './trueOnlyField/getTrueOnlyFieldConfigForCustomForm';
 export { default as getUserNameFieldConfigForCustomForm } from './userNameField/getUserNameFieldConfigForCustomForm';
+export { default as getViewModeFieldConfigForCustomForm } from './viewModeField/getViewModeFieldConfigForCustomForm';
