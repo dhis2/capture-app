@@ -11,4 +11,7 @@ export {
     runRulesOnUpdateFieldBatch,
 } from './actions/enrollment.actionBatchs';
 export { default as buildServerData } from './helpers/buildServerData';
-export { runRulesOnEnrollmentFieldUpdateEpic } from './epics/enrollment.epics';
+export {
+    runRulesOnEnrollmentFieldUpdateEpic,
+    runRulesOnEnrollmentDataEntryFieldUpdateEpic,
+} from './epics/enrollment.epics';
