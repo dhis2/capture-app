@@ -133,6 +133,7 @@
     "You dont have access to create an event in the current selections": "",
     "A duplicate exists (but there were some errors, see log for details": "",
     "An item with this {{attributeName}} is already registered, but you don't have access to it": "",
+    "You have already registered this {{attributeName}}": "",
     "A {{trackedEntityTypeName}} with this {{attributeName}} is already registered": "",
     "Show registered {{trackedEntityTypeName}}": "",
     "Registered person": "",

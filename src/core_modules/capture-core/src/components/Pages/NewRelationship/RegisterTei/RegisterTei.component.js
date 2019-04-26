@@ -27,6 +27,7 @@ type Props = {
     possibleDuplicates: ?boolean,
     tetName: ?string,
     onReviewDuplicates: Function,
+    onGetUnsavedAttributeValues?: ?Function,
 };
 
 type State = {
@@ -93,7 +94,7 @@ class RegisterTei extends React.Component<Props, State> {
     }
 
     render() {
-        const { onLink, classes } = this.props;
+        const { onLink, classes, onGetUnsavedAttributeValues } = this.props;
         const { duplicatesOpen } = this.state;
 
         return (
@@ -107,6 +108,7 @@ class RegisterTei extends React.Component<Props, State> {
                     <DataEntry
                         onLink={onLink}
                         onSave={this.handleSaveAttempt}
+                        onGetUnsavedAttributeValues={onGetUnsavedAttributeValues}
                     />
                 </div>
                 <GeneralOutput
