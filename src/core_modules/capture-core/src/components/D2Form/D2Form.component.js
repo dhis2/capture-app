@@ -17,7 +17,6 @@ const styles = () => ({
     containerCustomForm: {
         paddingTop: 10,
         paddingBottom: 10,
-        overflow: 'auto',
     },
 });
 

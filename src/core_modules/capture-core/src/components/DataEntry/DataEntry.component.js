@@ -19,7 +19,7 @@ const styles = theme => ({
     button: {
         paddingRight: theme.spacing.unit * 2,
     },
-    horizontalFormContainer: {
+    horizontalFormInnerContainer: {
         display: 'flex',
         flexWrap: 'wrap',
         alignItems: 'flex-start',
@@ -28,6 +28,10 @@ const styles = theme => ({
         flexGrow: 10,
         maxWidth: '100%',
         paddingTop: theme.typography.pxToRem(10),
+    },
+    verticalFormInnerContainer: {
+        overflow: 'auto',
+        maxWidth: theme.typography.pxToRem(892),
     },
     verticalDataEntryContainer: {
         display: 'flex',
@@ -71,6 +75,7 @@ type DirectionClasses = {
     outputsContainer?: ?string,
     outputsInnerContainer?: ?string,
     formContainer?: ?string,
+    formInnerContainer?: ?string,
 }
 
 type Props = {
@@ -134,12 +139,13 @@ class DataEntry extends React.Component<Props> {
         const { classes, formHorizontal } = this.props;
         if (formHorizontal) {
             return {
-                formContainer: classes.horizontalFormContainer,
+                formInnerContainer: classes.horizontalFormInnerContainer,
             };
         }
         return {
             dataEntryContainer: classes.verticalDataEntryContainer,
             formContainer: classes.verticalFormContainer,
+            formInnerContainer: classes.verticalFormInnerContainer,
         };
     }
 
@@ -252,22 +258,24 @@ class DataEntry extends React.Component<Props> {
             <div className={directionClasses.container}>
                 <div className={directionClasses.dataEntryContainer}>
                     <div className={directionClasses.formContainer}>
-                        {this.renderDataEntryFieldsByPlacement(placements.TOP)}
-                        <D2Form
-                            innerRef={(formInstance) => { this.formInstance = formInstance; }}
-                            formFoundation={formFoundation}
-                            id={getDataEntryKey(id, itemId)}
-                            validationAttempted={completionAttempted || saveAttempted}
-                            onUpdateField={this.handleUpdateField}
-                            onUpdateFieldAsync={this.handleUpdateFieldAsync}
-                            {...passOnProps}
-                        />
-                        {this.renderDataEntryFieldsByPlacement(placements.BOTTOM)}
-                        {notes &&
-                            <div className={classes.notes}>
-                                {notes}
-                            </div>
-                        }
+                        <div className={directionClasses.formInnerContainer}>
+                            {this.renderDataEntryFieldsByPlacement(placements.TOP)}
+                            <D2Form
+                                innerRef={(formInstance) => { this.formInstance = formInstance; }}
+                                formFoundation={formFoundation}
+                                id={getDataEntryKey(id, itemId)}
+                                validationAttempted={completionAttempted || saveAttempted}
+                                onUpdateField={this.handleUpdateField}
+                                onUpdateFieldAsync={this.handleUpdateFieldAsync}
+                                {...passOnProps}
+                            />
+                            {this.renderDataEntryFieldsByPlacement(placements.BOTTOM)}
+                            {notes &&
+                                <div className={classes.notes}>
+                                    {notes}
+                                </div>
+                            }
+                        </div>
                     </div>
                     {!this.props.formHorizontal ?
                         <StickyOnScroll
