@@ -43,7 +43,8 @@ type Props = {
     settings: Settings,
     id: string,
     fields?: ?Array<FieldContainer>,
-    onUpdateField: (value: any, valueMeta: ValueMetaUpdateOutput, fieldId: string, dataEntryId: string, itemId: string) => void,
+    onUpdateDataEntryField?: ?Function,
+    onUpdateFieldInner: (value: any, valueMeta: ValueMetaUpdateOutput, fieldId: string, dataEntryId: string, itemId: string, onUpdateField: ?Function) => void,
     completionAttempted?: ?boolean,
     saveAttempted?: ?boolean,
     itemId: string,
@@ -94,15 +95,15 @@ const getDataEntryField = (InnerComponent: React.ComponentType<any>) =>
 
         handleBlur(value: any, options?: ?Options) {
             const validationErrors = getValidationErrors(value, this.props.settings.validatorContainers);
-            this.props.onUpdateField(value, {
+            this.props.onUpdateFieldInner(value, {
                 isValid: validationErrors.length === 0,
                 validationError: validationErrors.length > 0 ? validationErrors[0] : null,
                 touched: options && options.touched != null ? options.touched : true,
-            }, this.props.settings.propName, this.props.id, this.props.itemId);
+            }, this.props.settings.propName, this.props.id, this.props.itemId, this.props.onUpdateDataEntryField);
         }
 
         getFieldElement() {
-            const { settings, value, valueMeta, completionAttempted, saveAttempted } = this.props;
+            const { settings, value, valueMeta, completionAttempted, saveAttempted, onUpdateDataEntryField } = this.props;
             const { isValid, type, ...passOnValueMeta } = valueMeta;
             return (
                 <div
@@ -113,6 +114,7 @@ const getDataEntryField = (InnerComponent: React.ComponentType<any>) =>
                         onBlur={this.handleBlur}
                         value={value}
                         validationAttempted={!!(completionAttempted || saveAttempted)}
+                        onUpdateField={onUpdateDataEntryField}
                         {...passOnValueMeta}
                         {...settings.componentProps}
                     />
@@ -141,7 +143,7 @@ const getDataEntryField = (InnerComponent: React.ComponentType<any>) =>
                 valueMeta,
                 fields,
                 itemId,
-                onUpdateField,
+                onUpdateFieldInner,
                 passOnFieldData,
                 ...passOnProps
             } = this.props;
@@ -184,8 +186,19 @@ const getMapStateToProps = (settingsFn: SettingsFn) => (state: ReduxState, props
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onUpdateField: (value: any, valueMeta: ValueMetaUpdateOutput, fieldId: string, dataEntryId: string, itemId: string) => {
-        dispatch(updateField(value, valueMeta, fieldId, dataEntryId, itemId));
+    onUpdateFieldInner: (value: any, valueMeta: ValueMetaUpdateOutput, fieldId: string, dataEntryId: string, itemId: string, onUpdateField: ?Function) => {
+        const action = updateField(value, valueMeta, fieldId, dataEntryId, itemId);
+        if (onUpdateField) {
+            onUpdateField(action, {
+                value,
+                valueMeta,
+                fieldId,
+                dataEntryId,
+                itemId,
+            });
+        } else {
+            dispatch(updateField(value, valueMeta, fieldId, dataEntryId, itemId));
+        }
     },
 });
 

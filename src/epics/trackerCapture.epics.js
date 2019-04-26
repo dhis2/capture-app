@@ -8,7 +8,8 @@ import {
     resetDataEntryForNewEventEpic,
     openNewEventInDataEntryEpic,
     resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
-    runRulesForSingleEventEpic,
+    runRulesUpdateDataEntryFieldForSingleEventEpic,
+    runRulesUpdateFieldForSingleEventEpic,
     saveNewEventEpic,
     saveNewEventLocationChangeEpic,
     saveNewEventAddAnotherEpic,
@@ -51,7 +52,8 @@ import {
 } from 'capture-core/components/Pages/EditEvent/epics/editEvent.epics';
 import {
     openEditEventInDataEntryEpic,
-    runRulesForEditSingleEventEpic,
+    runRulesUpdateDataEntryFieldForEditSingleEventEpic,
+    runRulesUpdateFieldForEditSingleEventEpic,
 } from 'capture-core/components/Pages/EditEvent/DataEntry/epics/editEventDataEntry.epics';
 import {
     saveEditEventEpic,
@@ -124,7 +126,8 @@ export default combineEpics(
     openNewEventInDataEntryEpic,
     resetDataEntryForNewEventEpic,
     resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
-    runRulesForSingleEventEpic,
+    runRulesUpdateDataEntryFieldForSingleEventEpic,
+    runRulesUpdateFieldForSingleEventEpic,
     saveNewEventLocationChangeEpic,
     saveNewEventEpic,
     cancelNewEventLocationChangeEpic,
@@ -135,7 +138,8 @@ export default combineEpics(
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,
     openEditEventInDataEntryEpic,
-    runRulesForEditSingleEventEpic,
+    runRulesUpdateDataEntryFieldForEditSingleEventEpic,
+    runRulesUpdateFieldForEditSingleEventEpic,
     saveEditEventLocationChangeEpic,
     saveEditEventEpic,
     cancelEditEventLocationChangeEpic,

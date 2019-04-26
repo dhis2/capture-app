@@ -15,6 +15,7 @@ import { getConvertGeometryIn, convertGeometryOut, convertStatusIn, convertStatu
 import type { ClientEventContainer } from '../../../../events/eventRequests';
 
 export const batchActionTypes = {
+    UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForEditSingleEventActionsBatch',
     UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH: 'UpdateFieldForEditSingleEventActionsBatch',
     RULES_EFFECTS_ACTIONS_BATCH: 'RulesEffectsForEditSingleEventActionsBatch',
     ADD_NOTE_FOR_EDIT_SINGLE_EVENT_BATCH: 'AddNoteForEditSingleEventBatch',

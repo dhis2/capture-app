@@ -42,6 +42,12 @@ const mapStateToProps = (state: ReduxState) => ({
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
+    onUpdateDataEntryField: (innerAction: ReduxAction<any, any>) => {
+        dispatch(batchActions([
+            innerAction,
+            startRunRulesOnUpdateForEditSingleEvent(innerAction.payload),
+        ], batchActionTypes.UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH));
+    },
     onUpdateField: (innerAction: ReduxAction<any, any>) => {
         dispatch(batchActions([
             innerAction,

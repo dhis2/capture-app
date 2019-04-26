@@ -38,6 +38,12 @@ const makeMapStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+    onUpdateDataEntryField: (innerAction: ReduxAction<any, any>) => {
+        dispatch(batchActions([
+            innerAction,
+            startRunRulesOnUpdateForNewSingleEvent(innerAction.payload),
+        ], batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH));
+    },
     onUpdateField: (innerAction: ReduxAction<any, any>) => {
         dispatch(batchActions([
             innerAction,

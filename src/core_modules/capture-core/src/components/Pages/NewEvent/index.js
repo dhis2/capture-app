@@ -33,7 +33,8 @@ export {
     resetDataEntryForNewEventEpic,
     openNewEventInDataEntryEpic,
     resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
-    runRulesForSingleEventEpic,
+    runRulesUpdateDataEntryFieldForSingleEventEpic,
+    runRulesUpdateFieldForSingleEventEpic,
 } from './DataEntry/epics/newEventDataEntry.epics';
 export {
     saveNewEventEpic,
