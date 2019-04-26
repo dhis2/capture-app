@@ -32,3 +32,4 @@ export { default as OrgUnitFieldForCustomForm } from './OrgUnitField/OrgUnitFiel
 export { default as TextFieldForCustomForm } from './TextField/TextFieldForCustomForm.component';
 export { default as TrueOnlyFieldForCustomForm } from './TrueOnlyField/TrueOnlyFieldForCustomForm.component';
 export { default as UserNameFieldForCustomForm } from './UserNameField/UserNameFieldForCustomForm.component';
+export { default as ViewModeFieldForCustomForm } from './ViewModeField/ViewModeFieldForCustomForm.component';
