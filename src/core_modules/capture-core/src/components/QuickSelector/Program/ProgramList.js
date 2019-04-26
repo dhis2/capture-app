@@ -10,6 +10,8 @@ const getStyles = () => ({
         padding: 0,
     },
     item: {
+        wordBreak: 'break-word',
+        hyphens: 'auto',
         backgroundColor: '#ffffff',
         borderRadius: 5,
         marginBottom: 5,
