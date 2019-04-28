@@ -290,7 +290,9 @@ type PreEnrollmentDataEntryProps = {
     programId: string,
     orgUnit: Object,
     onUpdateField: Function,
+    onUpdateDataEntryField: Function,
     onStartAsyncUpdateField: Function,
+    onGetUnsavedAttributeValues?: ?Function,
 };
 
 class PreEnrollmentDataEntryPure extends React.PureComponent<Object> {
@@ -305,15 +307,21 @@ class PreEnrollmentDataEntryPure extends React.PureComponent<Object> {
 
 class PreEnrollmentDataEntry extends React.Component<PreEnrollmentDataEntryProps> {
     getValidationContext = () => {
-        const { orgUnit } = this.props;
+        const { orgUnit, onGetUnsavedAttributeValues } = this.props;
         return {
-            orgUnit,
+            orgUnitId: orgUnit.id,
+            onGetUnsavedAttributeValues,
         };
     }
 
     handleUpdateField = (...args: Array<any>) => {
         const { programId, orgUnit } = this.props;
         this.props.onUpdateField(...args, programId, orgUnit);
+    }
+
+    handleUpdateDataEntryField = (...args: Array<any>) => {
+        const { programId, orgUnit } = this.props;
+        this.props.onUpdateDataEntryField(...args, programId, orgUnit);
     }
 
     handleStartAsyncUpdateField = (...args: Array<any>) => {
@@ -325,12 +333,15 @@ class PreEnrollmentDataEntry extends React.Component<PreEnrollmentDataEntryProps
         const {
             orgUnit,
             onUpdateField,
+            onUpdateDataEntryField,
             onStartAsyncUpdateField,
+            onGetUnsavedAttributeValues,
             ...passOnProps } = this.props;
         return (
             <PreEnrollmentDataEntryPure
                 onGetValidationContext={this.getValidationContext}
                 onUpdateFormField={this.handleUpdateField}
+                onUpdateDataEntryField={this.handleUpdateDataEntryField}
                 onUpdateFormFieldAsync={this.handleStartAsyncUpdateField}
                 {...passOnProps}
             />

@@ -47,6 +47,10 @@ export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, s
             const entity = payload.entity;
 
             const toEntity = entity.id ? entity : getRelationshipNewTei(entity.dataEntryId, entity.itemId, state);
+            const toEntityIsNew = !entity.id;
+            const newToEntity = toEntityIsNew ? {
+                dataEntryId: entity.dataEntryId,
+            } : null;
 
             const newRelationship = {
                 clientId: uuid(),
@@ -79,7 +83,7 @@ export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, s
 
             return batchActions([
                 recentlyAddedRelationship(newRelationship.clientId),
-                addRelationship(dataEntryId, itemId, newRelationship),
+                addRelationship(dataEntryId, itemId, newRelationship, newToEntity),
             ], newEventNewRelationshipBatchActionTypes.ADD_RELATIONSHIP_BATCH);
         });
 

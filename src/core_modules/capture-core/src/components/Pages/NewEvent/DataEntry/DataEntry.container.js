@@ -43,6 +43,16 @@ const makeMapStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+    onUpdateDataEntryField: (innerAction: ReduxAction<any, any>) => {
+        const { dataEntryId, itemId } = innerAction.payload;
+        const uid = uuid();
+
+        dispatch(batchActions([
+            innerAction,
+            startRunRulesPostUpdateField(dataEntryId, itemId, uid),
+            startRunRulesOnUpdateForNewSingleEvent({ ...innerAction.payload, uid }),
+        ], batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH));
+    },
     onUpdateField: (innerAction: ReduxAction<any, any>) => {
         const { dataEntryId, itemId } = innerAction.payload;
         const uid = uuid();

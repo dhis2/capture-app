@@ -8,6 +8,7 @@ export {
     openBatchActionTypes as enrollmentOpenBatchActionTypes,
     enrollmentBatchActionTypes,
     runRulesOnEnrollmentFieldUpdateEpic,
+    runRulesOnEnrollmentDataEntryFieldUpdateEpic,
 } from './Enrollment';
 export {
     TrackedEntityInstance as TrackedEntityInstanceDataEntry,

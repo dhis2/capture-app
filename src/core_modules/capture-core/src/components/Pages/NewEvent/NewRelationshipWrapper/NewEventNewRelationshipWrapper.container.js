@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { newEventCancelNewRelationship, addNewEventRelationship } from './NewEventNewRelationshipWrapper.actions';
 import NewRelationshipWrapper from './NewEventNewRelationshipWrapper.component';
 import { makeRelationshipTypesSelector } from './NewEventNewRelationshipWrapper.selectors';
+import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
 
 const makeMapStateToProps = () => {
     const relationshipTypesSelector = makeRelationshipTypesSelector();
@@ -10,12 +11,15 @@ const makeMapStateToProps = () => {
     const mapStateToProps = (state: ReduxState) => {
         const relationshipTypes = relationshipTypesSelector(state);
 
+        const dataEntryId = 'singleEvent';
+        const dataEntryKey = getDataEntryKey(dataEntryId, state.dataEntries[dataEntryId].itemId);
+        const unsavedRelationships = state.dataEntriesRelationships[dataEntryKey];
         return {
             relationshipTypes,
+            unsavedRelationships,
         };
     };
 
-    // $FlowSuppress
     return mapStateToProps;
 };
 

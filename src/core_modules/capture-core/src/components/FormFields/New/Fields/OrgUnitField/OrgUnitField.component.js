@@ -28,6 +28,7 @@ const getStyles = () => ({
     orgUnitTreeContainer: {
         padding: 2,
         borderTop: '1px solid #C4C4C4',
+        overflow: 'auto',
     },
 });
 
@@ -65,7 +66,6 @@ class OrgUnitField extends React.Component<Props> {
     handleFilterChange = (event: SyntheticEvent<HTMLInputElement>) => {
         this.props.onSearch(event.currentTarget.value);
     }
-
     render() {
         const {
             roots,

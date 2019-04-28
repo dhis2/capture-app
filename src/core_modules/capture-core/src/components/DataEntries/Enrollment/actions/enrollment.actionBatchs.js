@@ -14,6 +14,7 @@ import { startRunRulesOnUpdateForNewEnrollment } from './enrollment.actions';
 export const batchActionTypes = {
     RULES_EXECUTED_POST_UPDATE_FIELD_FOR_ENROLLMENT: 'RulesExecutedPostUpdateFieldForEnrollment',
     UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH: 'UpdateFieldNewEnrollmentActionBatch',
+    UPDATE_DATA_ENTRY_FIELD_NEW_ENROLLMENT_ACTION_BATCH: 'UpdateDataEntryFieldNewEnrollmentActionBatch',
 };
 
 export const runRulesOnUpdateFieldBatch = (
@@ -45,6 +46,21 @@ export const runRulesOnUpdateFieldBatch = (
         rulesExecutedPostUpdateField(dataEntryId, itemId, uid),
         ...extraActions,
     ], batchActionTypes.RULES_EXECUTED_POST_UPDATE_FIELD_FOR_ENROLLMENT);
+};
+
+export const updateDataEntryFieldBatch = (
+    innerAction: ReduxAction<any, any>,
+    programId: string,
+    orgUnit: Object,
+) => {
+    const { dataEntryId, itemId } = innerAction.payload;
+    const uid = uuid();
+
+    return batchActions([
+        innerAction,
+        startRunRulesPostUpdateField(dataEntryId, itemId, uid),
+        startRunRulesOnUpdateForNewEnrollment(innerAction.payload, null, uid, programId, orgUnit),
+    ], batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_ENROLLMENT_ACTION_BATCH);
 };
 
 export const updateFieldBatch = (

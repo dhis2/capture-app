@@ -16,6 +16,7 @@ import {
     getTextFieldConfigForCustomForm as getTextFieldConfig,
     getTrueOnlyFieldConfigForCustomForm as getTrueOnlyFieldConfig,
     getUserNameFieldConfigForCustomForm as getUserNameFieldConfig,
+    getViewModeFieldConfigForCustomForm as getViewModeFieldConfig,
 } from './configs';
 
 const errorMessages = {
@@ -52,6 +53,10 @@ const fieldForTypes = {
 };
 
 export default function getCustomFormField(metaData: MetaDataElement, options: Object) {
+    if (options.viewMode) {
+        return getViewModeFieldConfig(metaData, options);
+    }
+
     const type = metaData.type;
     if (!fieldForTypes[type]) {
         log.warn(errorCreator(errorMessages.NO_FORMFIELD_FOR_TYPE)({ metaData }));

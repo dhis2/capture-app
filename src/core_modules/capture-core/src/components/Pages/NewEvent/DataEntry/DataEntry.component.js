@@ -372,7 +372,7 @@ const saveHandlerConfig = {
 };
 
 const dataEntryFilterProps = (props: Object) => {
-    const { stage, ...passOnProps } = props;
+    const { stage, onScrollToRelationships, recentlyAddedRelationshipId, relationshipsRef, ...passOnProps } = props;
     return passOnProps;
 };
 

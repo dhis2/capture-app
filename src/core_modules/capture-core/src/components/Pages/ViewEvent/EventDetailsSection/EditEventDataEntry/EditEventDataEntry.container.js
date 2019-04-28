@@ -1,4 +1,5 @@
 // @flow
+import uuid from 'uuid/v4';
 import { connect } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
 import EditEventDataEntry from './EditEventDataEntry.component';
@@ -12,7 +13,7 @@ import {
 import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
 
 import {
-    setCurrentDataEntry,
+    setCurrentDataEntry, startRunRulesPostUpdateField,
 } from '../../../../DataEntry/actions/dataEntry.actions';
 
 import {
@@ -32,32 +33,44 @@ const mapStateToProps = (state: ReduxState) => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
-    onUpdateField: (innerAction: ReduxAction<any, any>) => {
+    onUpdateDataEntryField: (innerAction: ReduxAction<any, any>) => {
+        const { dataEntryId, itemId } = innerAction.payload;
+        const uid = uuid();
         dispatch(batchActions([
             innerAction,
-            startRunRulesOnUpdateForEditSingleEvent(innerAction.payload),
+            startRunRulesPostUpdateField(dataEntryId, itemId, uid),
+            startRunRulesOnUpdateForEditSingleEvent({ ...innerAction.payload, uid }),
+        ], batchActionTypes.UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH));
+    },
+    onUpdateField: (innerAction: ReduxAction<any, any>) => {
+        const { dataEntryId, itemId } = innerAction.payload;
+        const uid = uuid();
+
+        dispatch(batchActions([
+            innerAction,
+            startRunRulesPostUpdateField(dataEntryId, itemId, uid),
+            startRunRulesOnUpdateForEditSingleEvent({ ...innerAction.payload, uid }),
         ], batchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH));
     },
     onAddNote: (itemId: string, dataEntryId: string, note: string) => {
         dispatch(requestAddNoteForEditSingleEvent(itemId, dataEntryId, note));
     },
     onStartAsyncUpdateField: (
-        fieldId: string,
-        fieldLabel: string,
-        formBuilderId: string,
-        formId: string,
-        callback: Function,
+        innerAction: ReduxAction<any, any>,
         dataEntryId: string,
         itemId: string,
     ) => {
-        dispatch(startAsyncUpdateFieldForEditEvent(
-            fieldId,
-            fieldLabel,
-            formBuilderId,
-            formId,
-            callback,
-            dataEntryId,
-            itemId));
+        const onAsyncUpdateSuccess = (successInnerAction: ReduxAction<any, any>) => {
+            const uid = uuid();
+            return batchActions([
+                successInnerAction,
+                startRunRulesPostUpdateField(dataEntryId, itemId, uid),
+                startRunRulesOnUpdateForEditSingleEvent({ ...successInnerAction.payload, dataEntryId, itemId, uid }),
+            ], batchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH);
+        };
+        const onAsyncUpdateError = (errorInnerAction: ReduxAction<any, any>) => errorInnerAction;
+
+        dispatch(startAsyncUpdateFieldForEditEvent(innerAction, onAsyncUpdateSuccess, onAsyncUpdateError));
     },
     onSave: (eventId: string, dataEntryId: string, formFoundation: RenderFoundation) => {
         window.scrollTo(0, 0);

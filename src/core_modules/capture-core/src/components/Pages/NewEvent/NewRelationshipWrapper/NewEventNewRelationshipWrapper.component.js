@@ -50,6 +50,7 @@ type Props = {
         backToEventButton: string,
         newRelationshipPaper: string,
     },
+    unsavedRelationships: Object,
 }
 
 type State = {
@@ -81,6 +82,20 @@ class NewEventNewRelationshipWrapper extends React.Component<Props, State> {
         </div>
     );
 
+    onGetUnsavedAttributeValues = (id: string) => {
+        const { unsavedRelationships } = this.props;
+        return unsavedRelationships 
+            .map(r => {
+                if (!r.to.data || !r.to.data.attributes) {
+                    return null;
+                }
+
+                const attributeItem = r.to.data.attributes.find(a => a.attribute === id);
+                return attributeItem && attributeItem.value;
+            })
+            .filter(v => v);
+    }
+
     render() {
         const { classes, onCancel, ...passOnProps } = this.props;
         return (
@@ -97,6 +112,7 @@ class NewEventNewRelationshipWrapper extends React.Component<Props, State> {
                 <Paper className={classes.newRelationshipPaper}>
                     <NewRelatonship
                         header={i18n.t('New event relationship')}
+                        onGetUnsavedAttributeValues={this.onGetUnsavedAttributeValues}
                         {...passOnProps}
                     />
                 </Paper>

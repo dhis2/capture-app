@@ -31,7 +31,8 @@ type Props = {
         button: string,
         buttonIcon: string,
         modeSelectionsContainer: string,
-    }
+    },
+    onGetUnsavedAttributeValues?: ?Function,
 }
 
 const getStyles = theme => ({
@@ -142,6 +143,7 @@ class TeiRelationship extends React.Component<Props> {
         <RegisterTei
             onLink={this.handleAddRelationship}
             onSave={this.handleAddRelationshipWithNewTei}
+            onGetUnsavedAttributeValues={this.props.onGetUnsavedAttributeValues}
         />
     );
 
