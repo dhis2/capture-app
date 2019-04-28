@@ -31,6 +31,8 @@ const getStyles = (theme: Theme) => ({
     },
     menuItemRoot: {
         padding: 6,
+        paddingLeft: 24,
+        paddingRight: 24,
         fontSize: theme.typography.pxToRem(14),
     },
     popperContainerHidden: {

@@ -11,9 +11,13 @@ import { getApi } from '../../d2/d2Instance';
 import { ProgramStage, EventProgram } from '../../metaData';
 
 const styles = () => ({
-    menuButtons: {
+    menuButtonHref: {
         textDecoration: 'none',
         outline: 'none',
+    },
+    menuButton: {
+        paddingLeft: 24,
+        paddingRight: 24,
     },
 });
 
@@ -97,34 +101,34 @@ class DownloadTable extends Component<Props, State> {
                     onClose={this.handleClose}
                 >
                     <a
-                        className={classes.menuButtons}
+                        className={classes.menuButtonHref}
                         href={
                             `${baseUrl}/events/query.json?orgUnit=${orgUnitId}&programStage=${selectedProgramStageId}${categoryFilter}&skipPaging=true`
                         }
                         download={fileName}
                         tabIndex={-1}
                     >
-                        <MenuItem onClick={this.handleClose}>JSON</MenuItem>
+                        <MenuItem className={classes.menuButton} onClick={this.handleClose}>JSON</MenuItem>
                     </a>
                     <a
-                        className={classes.menuButtons}
+                        className={classes.menuButtonHref}
                         href={
                             `${baseUrl}/events/query.xml?orgUnit=${orgUnitId}&programStage=${selectedProgramStageId}${categoryFilter}&skipPaging=true`
                         }
                         download={fileName}
                         tabIndex={-1}
                     >
-                        <MenuItem onClick={this.handleClose}>XML</MenuItem>
+                        <MenuItem className={classes.menuButton} onClick={this.handleClose}>XML</MenuItem>
                     </a>
                     <a
-                        className={classes.menuButtons}
+                        className={classes.menuButtonHref}
                         href={
                             `${baseUrl}/events/query.csv?orgUnit=${orgUnitId}&programStage=${selectedProgramStageId}${categoryFilter}&skipPaging=true`
                         }
                         download={fileName}
                         tabIndex={-1}
                     >
-                        <MenuItem onClick={this.handleClose}>CSV</MenuItem>
+                        <MenuItem className={classes.menuButton} onClick={this.handleClose}>CSV</MenuItem>
                     </a>
                 </Menu>
             </span>
