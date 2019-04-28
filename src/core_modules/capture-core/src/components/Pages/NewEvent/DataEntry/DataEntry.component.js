@@ -4,7 +4,6 @@ import { withStyles, withTheme } from '@material-ui/core/styles';
 import InfoIcon from '@material-ui/icons/InfoOutline';
 import i18n from '@dhis2/d2-i18n';
 import DataEntry from '../../../../components/DataEntry/DataEntry.container';
-import withSaveHandler from '../../../../components/DataEntry/withSaveHandler';
 import withCancelButton from '../../../../components/DataEntry/withCancelButton';
 import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
 import withDataEntryNotesHandler from '../../../../components/DataEntry/dataEntryNotes/withDataEntryNotesHandler';
@@ -16,6 +15,7 @@ import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFounda
 import withMainButton from './withMainButton';
 import getNoteValidatorContainers from './fieldValidators/note.validatorContainersGetter';
 import {
+    withSaveHandler,
     placements,
     withCleanUpHOC,
 } from '../../../DataEntry';

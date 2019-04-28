@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-04-24T11:57:03.480Z\n"
-"PO-Revision-Date: 2019-04-24T11:57:03.480Z\n"
+"POT-Creation-Date: 2019-04-26T15:16:02.242Z\n"
+"PO-Revision-Date: 2019-04-26T15:16:02.242Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -137,10 +137,22 @@ msgstr ""
 msgid "Write comment"
 msgstr ""
 
-msgid "Some operations are still runnning. Please wait.."
+msgid "Back to form"
 msgstr ""
 
-msgid "Save"
+msgid "Save anyway"
+msgstr ""
+
+msgid "Validation errors and warnings"
+msgstr ""
+
+msgid "Validation errors"
+msgstr ""
+
+msgid "Validation warnings"
+msgstr ""
+
+msgid "Some operations are still runnning. Please wait.."
 msgstr ""
 
 msgid "Operations running"
@@ -273,6 +285,9 @@ msgid "Please add or cancel comment before saving the event"
 msgstr ""
 
 msgid "No write access"
+msgstr ""
+
+msgid "Save"
 msgstr ""
 
 msgid "Show all events"

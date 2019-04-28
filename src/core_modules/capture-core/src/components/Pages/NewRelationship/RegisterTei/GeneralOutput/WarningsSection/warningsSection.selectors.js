@@ -30,11 +30,11 @@ export const makeGetSearchGroupWarning = () => createSelector(
     },
 );
 
-const rulesWarningsSelector = (state, props) => state.rulesEffectsGeneralWarnings[props.dataEntryKey];
+const rulesWarningsSelector = (searchGroupWarning, rulesWarnings) => rulesWarnings;
 // $FlowFixMe
 export const makeGetWarningMessages = () => createSelector(
     rulesWarningsSelector,
-    (state, props, searchGroupWarning) => searchGroupWarning,
+    searchGroupWarning => searchGroupWarning,
     (rulesWarnings: Array<{id: string, message: string}>, searchGroupWarning: {id: string, message: string}) => {
         rulesWarnings = rulesWarnings || [];
         return (searchGroupWarning ? [...rulesWarnings, searchGroupWarning] : rulesWarnings);

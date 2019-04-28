@@ -11,7 +11,9 @@ import withDataEntryOutput from './withDataEntryOutput';
 
 
 type Props = {
-    warningItems: Array<any>,
+    warningItems: ?Array<any>,
+    warningOnCompleteItems: ?Array<any>,
+    saveAttempted: boolean,
     classes: {
         list: string,
         listItem: string,
@@ -46,7 +48,7 @@ const styles = theme => ({
 
 const getWarningOutput = () =>
     class WarningOutputBuilder extends React.Component<Props> {
-        renderWarningItems = (warningItems: any, classes: any) =>
+        static renderWarningItems = (warningItems: any, classes: any) =>
             (<div>
                 {warningItems &&
                     warningItems.map(item => (
@@ -62,11 +64,26 @@ const getWarningOutput = () =>
                     )}
             </div>)
 
+        getVisibleWarningItems() {
+            const { warningItems, warningOnCompleteItems, saveAttempted } = this.props;
+            if (saveAttempted) {
+                const warningItemsNoNull = warningItems || [];
+                const warningOnCompleteItemsNoNull = warningOnCompleteItems || [];
+                return [
+                    ...warningItemsNoNull,
+                    ...warningOnCompleteItemsNoNull,
+                ];
+            }
+
+            return warningItems || [];
+        }
+
         render = () => {
-            const { warningItems, classes } = this.props;
+            const { classes } = this.props;
+            const visibleItems = this.getVisibleWarningItems();
             return (
                 <div>
-                    {warningItems &&
+                    {visibleItems && visibleItems.length > 0 &&
                     <Card className={classes.card}>
                         <div className={classes.header}>
                             <Warning />
@@ -75,7 +92,7 @@ const getWarningOutput = () =>
                             </div>
                         </div>
                         <ul className={classes.list}>
-                            {warningItems && this.renderWarningItems(warningItems, classes)}
+                            {WarningOutputBuilder.renderWarningItems(visibleItems, classes)}
                         </ul>
                     </Card>
                     }
@@ -90,8 +107,10 @@ const mapStateToProps = (state: ReduxState, props: any) => {
     const itemId = state.dataEntries[props.id].itemId;
     const key = getDataEntryKey(props.id, itemId);
     return {
-        warningItems: state.rulesEffectsGeneralWarnings && state.rulesEffectsGeneralWarnings[key] ?
-            state.rulesEffectsGeneralWarnings[key] : null,
+        warningItems: state.rulesEffectsGeneralWarnings[key] ?
+            state.rulesEffectsGeneralWarnings[key].warning : null,
+        warningOnCompleteItems: state.rulesEffectsGeneralWarnings[key] ?
+            state.rulesEffectsGeneralWarnings[key].warningOnComplete : null,
     };
 };
 
@@ -99,7 +118,6 @@ const mapDispatchToProps = () => ({});
 
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
-        // $FlowSuppress
         withDataEntryOutput()(
             InnerComponent,
             withStyles(styles)(connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(getWarningOutput())));

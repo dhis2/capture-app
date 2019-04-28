@@ -41,7 +41,7 @@ it('set filter', () => {
         Object.assign(_this, baseSpec);
     });
     spec.setFilter('filter');
-    expect(spec.queryParams.filter).toEqual('filter');
+    expect(spec.queryParams.filter[0]).toEqual('filter');
     expect(spec.queryParams.base).toEqual('base');
 });
 

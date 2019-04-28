@@ -4,7 +4,7 @@ import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
 import RegisterTei from './RegisterTei.component';
 import { makeTETNameSelector } from './registerTei.selectors';
-import { reviewDuplicates } from './GeneralOutput/WarningSection/SearchGroupDuplicate/searchGroupDuplicate.actions';
+import { reviewDuplicates } from './GeneralOutput/WarningsSection/SearchGroupDuplicate/searchGroupDuplicate.actions';
 import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
 
 const makeStateToProps = () => {
