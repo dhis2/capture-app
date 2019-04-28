@@ -8,13 +8,13 @@ import { validationStrategies } from '../../../../metaData/RenderFoundation/rend
 
 type Props = {
     open: boolean,
-    warnings: ?Array<{name: string, warning: string }>,
-    errors: ?Array<{name: string, warning: string }>,
+    warnings: ?Array<{key: string, name: ?string, warning: string }>,
+    errors: ?Array<{key: string, name: ?string, error: string }>,
     isCompleting: boolean,
     validationStrategy: $Values<typeof validationStrategies>,
 };
 
-function isSaveAllowedWithErrors(isCompleting: boolean, validationStrategy: boolean) {
+function isSaveAllowedWithErrors(isCompleting: boolean, validationStrategy: $Values<typeof validationStrategies>) {
     if (validationStrategy === validationStrategies.NONE) {
         return true;
     }
@@ -45,6 +45,7 @@ const MessagesDialogContents = (props: Props) => {
 
     if (errors && errors.length > 0) {
         return (
+            // $FlowFixMe
             <ErrorDialog
                 errors={errors}
                 saveEnabled={isSaveAllowedWithErrors(isCompleting, validationStrategy)}
@@ -54,6 +55,7 @@ const MessagesDialogContents = (props: Props) => {
     }
 
     return (
+        // $FlowFixMe
         <WarningDialog
             warnings={warnings}
             {...passOnProps}

@@ -7,8 +7,8 @@ export { actionTypes as registrationSectionActionTypes } from './RegistrationSec
 export { actionTypes as dataEntryActionTypes } from './DataEntry/dataEntry.actions';
 export {
     actionTypes as searchGroupDuplicateActionTypes,
-} from './GeneralOutput/WarningSection/SearchGroupDuplicate/searchGroupDuplicate.actions';
+} from './GeneralOutput/WarningsSection/SearchGroupDuplicate/searchGroupDuplicate.actions';
 export {
     loadSearchGroupDuplicatesForReviewEpic,
-} from './GeneralOutput/WarningSection/SearchGroupDuplicate/searchGroupDuplicate.epics';
+} from './GeneralOutput/WarningsSection/SearchGroupDuplicate/searchGroupDuplicate.epics';
 export { default as getRelationshipNewTei } from './exposedHelpers/getRelationshipNewTei';

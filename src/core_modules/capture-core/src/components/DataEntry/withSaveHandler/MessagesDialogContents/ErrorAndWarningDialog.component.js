@@ -25,8 +25,8 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
-    errors: Array<{name: string, error: string }>,
-    warnings: Array<{name: string, warning: string }>,
+    errors: Array<{key: string, name: string, error: string }>,
+    warnings: Array<{key: string, name: string, warning: string }>,
     onSave: () => void,
     onAbort: () => void,
     saveEnabled: boolean,
@@ -34,21 +34,46 @@ type Props = {
 };
 
 class ErrorAndWarningDialog extends React.Component<Props> {
+    static getItemWithName(name: string, message: string) {
+        return (
+            <React.Fragment>
+                {name}: {message}
+            </React.Fragment>
+        );
+    }
+
+    static getItemWithoutName(message: string) {
+        return (
+            <React.Fragment>
+                {message}
+            </React.Fragment>
+        );
+    }
     getContents(): React.Node {
         const { warnings, errors, classes } = this.props;
 
         const warningElements = warnings
-            .map((warningData, index) => (
-                <div>
-                    {(index + 1).toString()}. {warningData.name}: {warningData.warning}
-                </div>
+            .map(warningData => (
+                <li
+                    key={warningData.key}
+                >
+                    {warningData.name ?
+                        ErrorAndWarningDialog.getItemWithName(warningData.name, warningData.warning) :
+                        ErrorAndWarningDialog.getItemWithoutName(warningData.warning)
+                    }
+                </li>
             ));
 
         const errorElements = errors
-            .map((errorData, index) => (
-                <div>
-                    {(index + 1).toString()}. {errorData.name}: {errorData.error}
-                </div>
+            .map(errorData => (
+                <li
+                    key={errorData.key}
+                >
+                    {errorData.name ?
+                        ErrorAndWarningDialog.getItemWithName(errorData.name, errorData.error) :
+                        ErrorAndWarningDialog.getItemWithoutName(errorData.error)
+                    }
+                </li>
             ));
 
         return (
@@ -117,4 +142,5 @@ class ErrorAndWarningDialog extends React.Component<Props> {
     }
 }
 
+// $FlowFixMe
 export default withStyles(getStyles)(ErrorAndWarningDialog);

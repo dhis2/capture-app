@@ -29,8 +29,8 @@ type Props = {
     onSaveAbort: (itemId: string, id: string) => void,
     saveAttempted?: ?boolean,
     id: string,
-    warnings: ?Array<{name: string, warning: string }>,
-    errors: ?Array<{name: string, warning: string }>,
+    warnings: ?Array<any>,
+    errors: ?Array<any>,
     hasGeneralErrors: ?boolean,
     inProgressList: Array<string>,
     calculatedFoundation: RenderFoundation,
@@ -278,7 +278,7 @@ const getSaveHandler = (
         const mapStateToProps = (state: ReduxState, props: { id: string, formFoundation: RenderFoundation }) => {
             const itemId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].itemId;
             const key = getDataEntryKey(props.id, itemId);
-            const generalErrors = state.rulesEffectsGeneralErrors && state.rulesEffectsGeneralErrors[key];
+            const generalErrors = state.rulesEffectsGeneralErrors[key] && state.rulesEffectsGeneralErrors[key].error;
             const foundation = onGetFormFoundation ? onGetFormFoundation(props) : props.formFoundation;
 
             return {

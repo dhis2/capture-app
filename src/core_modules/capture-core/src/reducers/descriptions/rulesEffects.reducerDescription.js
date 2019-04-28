@@ -1,6 +1,10 @@
 // @flow
 import { effectActions } from 'capture-core-utils/RulesEngine';
-import type { OutputEffect } from 'capture-core-utils/RulesEngine/rulesEngine.types';
+import type {
+    OutputEffect,
+    GeneralErrorEffect,
+    GeneralWarningEffect,
+} from 'capture-core-utils/RulesEngine/rulesEngine.types';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes } from '../../rulesEngineActionsCreator/rulesEngine.actions';
 
@@ -130,8 +134,20 @@ export const rulesEffectsGeneralErrorsDesc = createReducerDescription({
     [actionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
-        const errors: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_ERROR];
-        newState[action.payload.formId] = errors && errors.generalErrors ? errors.generalErrors.map(e => e.error) : null;
+        const errorEffects: { [id: string]: Array<GeneralErrorEffect> } =
+            action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_ERROR];
+        const errorEffectsOnComplete: { [id: string]: Array<GeneralErrorEffect> } =
+            action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_ERROR_ONCOMPLETE];
+
+        const generalErrors = errorEffects && errorEffects.general ? errorEffects.general.map(e => e.error) : null;
+        const generalErrorsOnComplete = errorEffectsOnComplete && errorEffectsOnComplete.general ?
+            errorEffectsOnComplete.general.map(e => e.error) :
+            null;
+
+        newState[action.payload.formId] = {
+            [mapMessageEffectTypeToStateKey[effectActions.SHOW_ERROR]]: generalErrors,
+            [mapMessageEffectTypeToStateKey[effectActions.SHOW_ERROR_ONCOMPLETE]]: generalErrorsOnComplete,
+        };
 
         return newState;
     },
@@ -141,8 +157,20 @@ export const rulesEffectsGeneralWarningsDesc = createReducerDescription({
     [actionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const newState = { ...state };
 
-        const warnings: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_WARNING];
-        newState[action.payload.formId] = warnings && warnings.generalWarnings ? warnings.generalWarnings.map(e => e.warning) : null;
+        const warningsEffects: { [id: string]: Array<GeneralWarningEffect> } =
+            action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_WARNING];
+        const warningsEffectsOnComplete: { [id: string]: Array<GeneralWarningEffect> } =
+            action.payload.rulesEffects && action.payload.rulesEffects[effectActions.SHOW_WARNING_ONCOMPLETE];
+
+        const generalWarnings = warningsEffects && warningsEffects.general ?
+            warningsEffects.general.map(w => w.warning) : null;
+        const generalWarningsOnComplete = warningsEffectsOnComplete && warningsEffectsOnComplete.general ?
+            warningsEffectsOnComplete.general.map(w => w.warning) : null;
+
+        newState[action.payload.formId] = {
+            [mapMessageEffectTypeToStateKey[effectActions.SHOW_WARNING]]: generalWarnings,
+            [mapMessageEffectTypeToStateKey[effectActions.SHOW_WARNING_ONCOMPLETE]]: generalWarningsOnComplete,
+        };
 
         return newState;
     },

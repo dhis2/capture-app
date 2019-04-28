@@ -6,7 +6,7 @@ import i18n from '@dhis2/d2-i18n';
 import DataEntry from './DataEntry/DataEntry.container';
 import { RegistrationSection } from './RegistrationSection';
 import GeneralOutput from './GeneralOutput/GeneralOutput.container';
-import ReviewDialog from './GeneralOutput/WarningSection/SearchGroupDuplicate/ReviewDialog.component';
+import ReviewDialog from './GeneralOutput/WarningsSection/SearchGroupDuplicate/ReviewDialog.component';
 
 const getStyles = () => ({
     container: {

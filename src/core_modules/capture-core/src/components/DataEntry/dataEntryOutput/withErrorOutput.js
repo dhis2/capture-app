@@ -11,7 +11,9 @@ import withDataEntryOutput from './withDataEntryOutput';
 
 
 type Props = {
-    errorItems: Array<any>,
+    errorItems: ?Array<any>,
+    errorOnCompleteItems: ?Array<any>,
+    saveAttempted: boolean,
     outputRef: (any) => void,
     classes: {
         list: string,
@@ -47,15 +49,10 @@ const styles = (theme: Theme) => ({
 
 const getErrorOutput = () =>
     class ErrorOutputBuilder extends React.Component<Props> {
-        name: string;
-        constructor(props) {
-            super(props);
-            this.name = 'ErrorOutputBuilder';
-        }
-        renderErrorItems = (errorItems: any, classes: any) =>
+        static renderErrorItems = (errorItems: any, classes: any) =>
             (<div>
-                {errorItems &&
-                    errorItems.map(item => (
+                {errorItems
+                    .map(item => (
                         <li
                             key={item.id}
                             className={classes.listItem}
@@ -64,15 +61,36 @@ const getErrorOutput = () =>
                                 {item.message}
                             </Typography>
                         </li>
-                    ),
-                    )}
+                    ))
+                }
             </div>)
 
+        name: string;
+        constructor(props) {
+            super(props);
+            this.name = 'ErrorOutputBuilder';
+        }
+
+        getVisibleErrorItems() {
+            const { errorItems, errorOnCompleteItems, saveAttempted } = this.props;
+            if (saveAttempted) {
+                const errorItemsNoNull = errorItems || [];
+                const errorOnCompleteItemsNoNull = errorOnCompleteItems || [];
+                return [
+                    ...errorItemsNoNull,
+                    ...errorOnCompleteItemsNoNull,
+                ];
+            }
+
+            return errorItems || [];
+        }
+
         render = () => {
-            const { errorItems, classes } = this.props;
+            const { classes } = this.props;
+            const visibleItems = this.getVisibleErrorItems();
             return (
                 <div>
-                    {errorItems &&
+                    {visibleItems && visibleItems.length > 0 &&
                     <Card className={classes.card}>
                         <div className={classes.header}>
                             <Error />
@@ -81,7 +99,7 @@ const getErrorOutput = () =>
                             </div>
                         </div>
                         <ul className={classes.list}>
-                            {this.renderErrorItems(errorItems, classes)}
+                            {ErrorOutputBuilder.renderErrorItems(visibleItems, classes)}
                         </ul>
 
                     </Card>
@@ -97,8 +115,10 @@ const mapStateToProps = (state: ReduxState, props: any) => {
     const itemId = state.dataEntries[props.id].itemId;
     const key = getDataEntryKey(props.id, itemId);
     return {
-        errorItems: state.rulesEffectsGeneralErrors && state.rulesEffectsGeneralErrors[key] ?
-            state.rulesEffectsGeneralErrors[key] : null,
+        errorItems: state.rulesEffectsGeneralErrors[key] ?
+            state.rulesEffectsGeneralErrors[key].error : null,
+        errorOnCompleteItems: state.rulesEffectsGeneralErrors[key] ?
+            state.rulesEffectsGeneralErrors[key].errorOnComplete : null,
     };
 };
 
@@ -106,7 +126,7 @@ const mapDispatchToProps = () => ({});
 
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
-        // $FlowSuppress
         withDataEntryOutput()(
             InnerComponent,
-            withStyles(styles)(connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(getErrorOutput())));
+            withStyles(styles)(
+                connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(getErrorOutput())));

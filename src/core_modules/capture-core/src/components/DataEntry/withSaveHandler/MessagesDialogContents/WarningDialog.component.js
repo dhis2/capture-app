@@ -8,20 +8,40 @@ import i18n from '@dhis2/d2-i18n';
 import Button from '../../../Buttons/Button.component';
 
 type Props = {
-    warnings: Array<{name: string, warning: string }>,
+    warnings: Array<{key: string, name: ?string, warning: string }>,
     onSave: () => void,
     onAbort: () => void,
 };
 
-class ErrorAndWarningDialog extends React.Component<Props> {
+class WarningDialog extends React.Component<Props> {
+    static getItemWithName(name: string, message: string) {
+        return (
+            <React.Fragment>
+                {name}: {message}
+            </React.Fragment>
+        );
+    }
+
+    static getItemWithoutName(message: string) {
+        return (
+            <React.Fragment>
+                {message}
+            </React.Fragment>
+        );
+    }
     getContents(): Array<React.Node> {
         const { warnings } = this.props;
 
         return warnings
-            .map((warningData, index) => (
-                <div>
-                    {(index + 1).toString()}. {warningData.name}: {warningData.warning}
-                </div>
+            .map(warningData => (
+                <li
+                    key={warningData.key}
+                >
+                    {warningData.name ?
+                        WarningDialog.getItemWithName(warningData.name, warningData.warning) :
+                        WarningDialog.getItemWithoutName(warningData.warning)
+                    }
+                </li>
             ));
     }
 
@@ -50,4 +70,4 @@ class ErrorAndWarningDialog extends React.Component<Props> {
     }
 }
 
-export default ErrorAndWarningDialog;
+export default WarningDialog;
