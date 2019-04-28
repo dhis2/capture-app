@@ -102,7 +102,7 @@ class D2SectionFields extends Component<Props> {
         const rulesMessages = this.props.rulesMessages;
         const errorMessages = Object.keys(rulesMessages)
             .map(id => rulesMessages[id] &&
-                (rulesMessages[id][messageStateKeys.ERROR] || rulesMessages[id][messageStateKeys.ERROR_ON_COMPLETE]))
+                (rulesMessages[id][messageStateKeys.ERROR]))
             .filter(errorMessage => errorMessage);
 
         return errorMessages.length === 0 && Object.keys(this.rulesCompulsoryErrors).length === 0;

@@ -3,8 +3,8 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core';
 import StickyOnScroll from '../../../../Sticky/StickyOnScroll.component';
-import ErrorsSection from '../../../ViewEvent/RightColumn/ErrorsSection/ErrorsSection.container';
-import WarningsSection from './WarningSection/WaningSection.container';
+import ErrorsSection from './ErrorsSection/ErrorsSection.container';
+import WarningsSection from './WarningsSection/WaningsSection.container';
 import FeedbacksSection from '../../../ViewEvent/RightColumn/FeedbacksSection/FeedbacksSection.container';
 import IndicatorsSection from '../../../ViewEvent/RightColumn/IndicatorsSection/IndicatorsSection.container';
 
@@ -57,5 +57,6 @@ class GeneralOutput extends React.Component<Props> {
     }
 }
 
+// $FlowFixMe
 export default withStyles(getStyles)(GeneralOutput);
 

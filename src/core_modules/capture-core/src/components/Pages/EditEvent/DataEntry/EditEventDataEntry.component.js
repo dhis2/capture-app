@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import DataEntry from '../../../../components/DataEntry/DataEntry.container';
-import withSaveHandler from '../../../../components/DataEntry/withSaveHandler';
 import withCancelButton from '../../../../components/DataEntry/withCancelButton';
 import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
@@ -16,6 +15,7 @@ import withDataEntryNotesHandler from '../../../../components/DataEntry/dataEntr
 import Notes from '../../../Notes/Notes.component';
 
 import {
+    withSaveHandler,
     placements,
     withCleanUpHOC,
 } from '../../../../components/DataEntry';

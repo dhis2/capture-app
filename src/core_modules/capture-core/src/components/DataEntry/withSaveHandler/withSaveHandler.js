@@ -3,7 +3,6 @@ import * as React from 'react';
 import log from 'loglevel';
 
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -12,14 +11,14 @@ import { connect } from 'react-redux';
 
 import i18n from '@dhis2/d2-i18n';
 
-import Button from '../Buttons/Button.component';
-import errorCreator from '../../utils/errorCreator';
+import errorCreator from '../../../utils/errorCreator';
+import { validationStrategies } from '../../../metaData/RenderFoundation/renderFoundation.const';
+import { saveValidationFailed, saveAbort } from '../actions/dataEntry.actions';
+import getDataEntryKey from '../common/getDataEntryKey';
+import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 
-import { validationStrategies } from '../../metaData/RenderFoundation/renderFoundation.const';
-import { saveValidationFailed, saveAbort } from './actions/dataEntry.actions';
-import getDataEntryKey from './common/getDataEntryKey';
-import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
-import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
+import { MessagesDialogContents } from './MessagesDialogContents';
+import { makeGetWarnings, makeGetErrors } from './withSaveHandler.selectors';
 
 type Props = {
     classes: Object,
@@ -30,9 +29,11 @@ type Props = {
     onSaveAbort: (itemId: string, id: string) => void,
     saveAttempted?: ?boolean,
     id: string,
-    warnings: ?Array<{id: string, warning: string }>,
+    warnings: ?Array<any>,
+    errors: ?Array<any>,
     hasGeneralErrors: ?boolean,
     inProgressList: Array<string>,
+    calculatedFoundation: RenderFoundation,
 };
 
 type IsCompletingFn = (props: Props) => boolean;
@@ -40,7 +41,7 @@ type FilterPropsFn = (props: Object) => Object;
 type GetFormFoundationFn = (props: Object) => RenderFoundation;
 
 type State = {
-    warningDialogOpen: boolean,
+    messagesDialogOpen: boolean,
     waitForPromisesDialogOpen: boolean,
     saveType?: ?string,
 };
@@ -49,7 +50,7 @@ const getSaveHandler = (
     InnerComponent: React.ComponentType<any>,
     onIsCompleting?: IsCompletingFn,
     onFilterProps?: FilterPropsFn,
-    onGetFormFoundation?: GetFormFoundationFn) =>
+    onGetFormFoundation?: GetFormFoundationFn) => {
     class SaveHandlerHOC extends React.Component<Props, State> {
         static errorMessages = {
             INNER_INSTANCE_NOT_FOUND: 'Inner instance not found',
@@ -59,14 +60,14 @@ const getSaveHandler = (
         innerInstance: any;
         formInstance: any;
         dataEntryFieldInstances: Map<string, any>;
-        handleSaveAttemptAsync: (saveType?: ?string) => void;
-        handleCloseDialog: () => void;
-        handleSaveDialog: () => void;
+        handleSaveAttemptAsync: Function;
+        isCompleting: boolean;
+
         constructor(props: Props) {
             super(props);
             this.dataEntryFieldInstances = new Map();
             this.state = {
-                warningDialogOpen: false,
+                messagesDialogOpen: false,
                 waitForPromisesDialogOpen: false,
             };
         }
@@ -101,14 +102,12 @@ const getSaveHandler = (
             return fieldsValid;
         }
 
-        showWarningsPopup(saveType?: ?string) {
-            this.setState({ warningDialogOpen: true, saveType });
+        showMessagesPopup(saveType?: ?string) {
+            this.setState({ messagesDialogOpen: true, saveType });
         }
 
         validateGeneralErrorsFromRules(isCompleting: boolean) {
-            const validationStrategy = onGetFormFoundation ?
-                onGetFormFoundation(this.props).validationStrategy :
-                this.props.formFoundation.validationStrategy;
+            const validationStrategy = this.props.calculatedFoundation.validationStrategy;
             if (validationStrategy === validationStrategies.NONE) {
                 return true;
             } else if (validationStrategy === validationStrategies.ON_COMPLETE) {
@@ -167,52 +166,34 @@ const getSaveHandler = (
         }
 
         handleSaveValidationOutcome(saveType?: ?string, isFormValid: boolean) {
+            const { onSaveValidationFailed, itemId, id, warnings, errors } = this.props;
             if (!isFormValid) {
-                this.props.onSaveValidationFailed(this.props.itemId, this.props.id);
-            } else if (this.props.warnings && this.props.warnings.length > 0) {
-                this.showWarningsPopup(saveType);
+                onSaveValidationFailed(itemId, id);
+            } else if ((errors && errors.length > 0) || (warnings && warnings.length > 0)) {
+                this.showMessagesPopup(saveType);
             } else {
                 this.handleSave(saveType);
             }
         }
 
-        handleCloseDialog = () => {
+        handleAbortDialog = () => {
             this.props.onSaveAbort(this.props.itemId, this.props.id);
-            this.setState({ warningDialogOpen: false });
+            this.setState({ messagesDialogOpen: false });
         }
 
         handleSaveDialog = () => {
             this.handleSave(this.state.saveType);
-            this.setState({ warningDialogOpen: false });
+            this.setState({ messagesDialogOpen: false });
         }
 
         handleSave = (saveType?: ?string) => {
-            this.props.onSave(
-                this.props.itemId,
-                this.props.id,
-                onGetFormFoundation ? onGetFormFoundation(this.props) : this.props.formFoundation,
+            const { onSave, itemId, id, calculatedFoundation } = this.props;
+            onSave(
+                itemId,
+                id,
+                calculatedFoundation,
                 saveType,
             );
-        }
-
-        getDialogWarningContents() {
-            if (this.state.warningDialogOpen) {
-                const foundation = onGetFormFoundation ? onGetFormFoundation(this.props) : this.props.formFoundation;
-                const warnings = this.props.warnings;
-
-                return warnings ?
-                    warnings
-                        .map((warningData) => {
-                            const element = foundation.getElement(warningData.id);
-                            return (
-                                <div>
-                                    {element.formName}: {warningData.warning}
-                                </div>
-                            );
-                        }) :
-                    null;
-            }
-            return null;
         }
 
         getDialogWaitForUploadContents = () => (
@@ -236,8 +217,10 @@ const getSaveHandler = (
                 onSaveValidationFailed,
                 onSaveAbort,
                 warnings,
+                errors,
                 hasGeneralErrors,
                 inProgressList,
+                calculatedFoundation,
                 ...passOnProps
             } = this.props;
 
@@ -246,6 +229,7 @@ const getSaveHandler = (
             }
 
             const filteredProps = onFilterProps ? onFilterProps(passOnProps) : passOnProps;
+            this.isCompleting = !!(onIsCompleting && onIsCompleting(this.props));
 
             return (
                 <div>
@@ -257,24 +241,18 @@ const getSaveHandler = (
                         {...filteredProps}
                     />
                     <Dialog
-                        open={this.state.warningDialogOpen}
-                        onClose={this.handleCloseDialog}
+                        open={this.state.messagesDialogOpen}
+                        onClose={this.handleAbortDialog}
                     >
-                        <DialogTitle id="complete-dialog-title">
-                            {i18n.t('Warnings found')}
-                        </DialogTitle>
-                        <DialogContent>
-                            <DialogContentText>
-                                {this.getDialogWarningContents()}
-                            </DialogContentText>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={this.handleCloseDialog} color="primary">
-                                {i18n.t('Abort')}
-                            </Button>
-                            <Button onClick={this.handleSaveDialog} color="primary" autoFocus>
-                                {i18n.t('Save')}
-                            </Button> </DialogActions>
+                        <MessagesDialogContents
+                            open={this.state.messagesDialogOpen}
+                            onAbort={this.handleAbortDialog}
+                            onSave={this.handleSaveDialog}
+                            errors={errors}
+                            warnings={warnings}
+                            isCompleting={this.isCompleting}
+                            validationStrategy={calculatedFoundation.validationStrategy}
+                        />
                     </Dialog>
                     <Dialog
                         open={this.state.waitForPromisesDialogOpen}
@@ -291,43 +269,47 @@ const getSaveHandler = (
                 </div>
             );
         }
+    }
+
+    const makeStateToProps = () => {
+        const getWarnings = makeGetWarnings();
+        const getErrors = makeGetErrors();
+
+        const mapStateToProps = (state: ReduxState, props: { id: string, formFoundation: RenderFoundation }) => {
+            const itemId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].itemId;
+            const key = getDataEntryKey(props.id, itemId);
+            const generalErrors = state.rulesEffectsGeneralErrors[key] && state.rulesEffectsGeneralErrors[key].error;
+            const foundation = onGetFormFoundation ? onGetFormFoundation(props) : props.formFoundation;
+
+            return {
+                itemId,
+                saveAttempted:
+                    state.dataEntriesUI &&
+                    state.dataEntriesUI[key] &&
+                    state.dataEntriesUI[key].saveAttempted,
+                warnings: getWarnings(state, props, { key, foundation }),
+                errors: getErrors(state, props, { key, foundation }),
+                hasGeneralErrors: (generalErrors && generalErrors.length > 0),
+                inProgressList: state.dataEntriesInProgressList[key] || [],
+                calculatedFoundation: foundation,
+            };
+        };
+
+        return mapStateToProps;
     };
 
-const mapStateToProps = (state: ReduxState, props: { id: string }) => {
-    const itemId = state.dataEntries && state.dataEntries[props.id] && state.dataEntries[props.id].itemId;
-    const key = getDataEntryKey(props.id, itemId);
-    const generalErrors = state.rulesEffectsGeneralErrors && state.rulesEffectsGeneralErrors[key];
-    return {
-        itemId,
-        saveAttempted:
-            state.dataEntriesUI &&
-            state.dataEntriesUI[key] &&
-            state.dataEntriesUI[key].saveAttempted,
-        warnings: state.rulesEffectsMessages[itemId] &&
-            Object.keys(state.rulesEffectsMessages[itemId])
-                .map((elementId) => {
-                    const warning = state.rulesEffectsMessages[itemId][elementId] &&
-                    (state.rulesEffectsMessages[itemId][elementId][messageStateKeys.WARNING] ||
-                        state.rulesEffectsMessages[itemId][elementId][messageStateKeys.WARNING_ON_COMPLETE]);
-                    return {
-                        id: elementId,
-                        warning,
-                    };
-                })
-                .filter(element => element.warning),
-        hasGeneralErrors: (generalErrors && generalErrors.length > 0),
-        inProgressList: state.dataEntriesInProgressList[key] || [],
-    };
+    const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+        onSaveValidationFailed: (itemId: string, id: string) => {
+            dispatch(saveValidationFailed(itemId, id));
+        },
+        onSaveAbort: (itemId: string, id: string) => {
+            dispatch(saveAbort(itemId, id));
+        },
+    });
+
+    // $FlowFixMe
+    return connect(makeStateToProps, mapDispatchToProps, null, { withRef: true })(SaveHandlerHOC);
 };
-
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onSaveValidationFailed: (itemId: string, id: string) => {
-        dispatch(saveValidationFailed(itemId, id));
-    },
-    onSaveAbort: (itemId: string, id: string) => {
-        dispatch(saveAbort(itemId, id));
-    },
-});
 
 export default (
     options?: {
@@ -335,13 +317,9 @@ export default (
         onFilterProps?: FilterPropsFn,
         onGetFormFoundation?: GetFormFoundationFn }) =>
     (InnerComponent: React.ComponentType<any>) =>
-        // $FlowFixMe
-        connect(
-            mapStateToProps, mapDispatchToProps, null, { withRef: true })(
-            getSaveHandler(
-                InnerComponent,
-                options && options.onIsCompleting,
-                options && options.onFilterProps,
-                options && options.onGetFormFoundation,
-            ),
+        getSaveHandler(
+            InnerComponent,
+            options && options.onIsCompleting,
+            options && options.onFilterProps,
+            options && options.onGetFormFoundation,
         );

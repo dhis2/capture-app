@@ -79,11 +79,11 @@ export default function getRulesEffectsProcessor(
         };
     }
 
-    function processShowError(effect: ProgramRuleEffect, processIdName: string): ?(MessageEffect | GeneralErrorEffect) {
+    function processShowError(effect: ProgramRuleEffect, processIdName: string): MessageEffect | GeneralErrorEffect {
         if (!effect[processIdName]) {
             return {
                 type: actions.SHOW_ERROR,
-                id: 'generalErrors',
+                id: 'general',
                 error: {
                     id: effect.id,
                     message: `${effect.content} ${effect.data ? effect.data : ''}`,
@@ -98,11 +98,12 @@ export default function getRulesEffectsProcessor(
         };
     }
 
-    function processShowWarning(effect: ProgramRuleEffect, processIdName: string): ?(MessageEffect | GeneralWarningEffect) {
+    function processShowWarning(
+        effect: ProgramRuleEffect, processIdName: string): MessageEffect | GeneralWarningEffect {
         if (!effect[processIdName]) {
             return {
                 type: actions.SHOW_WARNING,
-                id: 'generalWarnings',
+                id: 'general',
                 warning: { id: effect.id, message: `${effect.content} ${effect.data ? effect.data : ''}` },
             };
         }
@@ -114,9 +115,17 @@ export default function getRulesEffectsProcessor(
         };
     }
 
-    function processShowErrorOnComplete(effect: ProgramRuleEffect, processIdName: string): ?MessageEffect {
+    function processShowErrorOnComplete(
+        effect: ProgramRuleEffect, processIdName: string): MessageEffect | GeneralErrorEffect {
         if (!effect[processIdName]) {
-            return null;
+            return {
+                type: actions.SHOW_ERROR_ONCOMPLETE,
+                id: 'general',
+                error: {
+                    id: effect.id,
+                    message: `${effect.content} ${effect.data ? effect.data : ''}`,
+                },
+            };
         }
 
         return {
@@ -126,9 +135,17 @@ export default function getRulesEffectsProcessor(
         };
     }
 
-    function processShowWarningOnComplete(effect: ProgramRuleEffect, processIdName: string): ?MessageEffect {
+    function processShowWarningOnComplete(
+        effect: ProgramRuleEffect, processIdName: string): MessageEffect | GeneralWarningEffect {
         if (!effect[processIdName]) {
-            return null;
+            return {
+                type: actions.SHOW_WARNING_ONCOMPLETE,
+                id: 'general',
+                warning: {
+                    id: effect.id,
+                    message: `${effect.content} ${effect.data ? effect.data : ''}`,
+                },
+            };
         }
 
         return {
