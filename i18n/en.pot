@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-04-09T16:55:25.873Z\n"
-"PO-Revision-Date: 2019-04-09T16:55:25.873Z\n"
+"POT-Creation-Date: 2019-05-06T13:57:59.285Z\n"
+"PO-Revision-Date: 2019-05-06T13:57:59.285Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -149,6 +149,18 @@ msgstr ""
 msgid "Sort"
 msgstr ""
 
+msgid "Download as JSON"
+msgstr ""
+
+msgid "Download as XML"
+msgstr ""
+
+msgid "Download as CSV"
+msgstr ""
+
+msgid "Download with current filters"
+msgstr ""
+
 msgid "No events to display"
 msgstr ""
 
@@ -171,6 +183,18 @@ msgid "after or equal to"
 msgstr ""
 
 msgid "before or equal to"
+msgstr ""
+
+msgid "Today"
+msgstr ""
+
+msgid "This week"
+msgstr ""
+
+msgid "This month"
+msgstr ""
+
+msgid "This Year"
 msgstr ""
 
 msgid "Last week"
@@ -300,6 +324,15 @@ msgid "More filters"
 msgstr ""
 
 msgid "Rows per page"
+msgstr ""
+
+msgid "Show/hide columns"
+msgstr ""
+
+msgid "Save filter as..."
+msgstr ""
+
+msgid "Download as..."
 msgstr ""
 
 msgid "Active"
@@ -614,9 +647,6 @@ msgid "Choose one or more dates..."
 msgstr ""
 
 msgid "Choose a date..."
-msgstr ""
-
-msgid "Today"
 msgstr ""
 
 msgid "Compatibility mode"

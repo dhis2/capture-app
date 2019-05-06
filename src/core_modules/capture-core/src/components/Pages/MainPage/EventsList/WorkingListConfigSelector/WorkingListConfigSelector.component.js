@@ -39,12 +39,14 @@ const getStyles = (theme: Theme) => ({
 
 type WorkingListConfig = {
     id: string,
+    isDefault?: ?boolean,
     name: string,
     filters: Object,
 }
 
 type Props = {
     workingListConfigs: Array<WorkingListConfig>,
+    defaultWorkingListConfig: WorkingListConfig,
     onSetWorkingListConfig: (id: string, data?: ?Object) => void,
     selectedListId: ?string,
     classes: {
@@ -57,9 +59,23 @@ type Props = {
 };
 class WorkingListConfigSelector extends React.Component<Props> {
 
+    handleWorkingListConfigClick = (id, data) => {
+        const { selectedListId } = this.props;
+        if (id === selectedListId) {
+            this.handleSetDefaultWorkingListConfig();
+        } else {
+            this.props.onSetWorkingListConfig(id, data);
+        }
+    }
+
+    handleSetDefaultWorkingListConfig = () => {
+        const { id, name, ...data } = this.props.defaultWorkingListConfig;
+        this.props.onSetWorkingListConfig(id, data);
+    }
+
     renderWorkingListConfigs = () => {
-        const { workingListConfigs, selectedListId, classes, onSetWorkingListConfig } = this.props;
-        return workingListConfigs.map((w) => {
+        const { workingListConfigs, selectedListId, classes } = this.props;
+        return workingListConfigs.filter(w => !w.isDefault).map((w) => {
             const { id, name, ...data } = w;
             return (
                 <div className={classes.chipContainer}>
@@ -67,7 +83,7 @@ class WorkingListConfigSelector extends React.Component<Props> {
                         label={name}
                         key={id}
                         className={classNames(classes.chip, { [classes.chipSelected]: selectedListId === w.id })}
-                        onClick={() => onSetWorkingListConfig(id, data)}
+                        onClick={() => this.handleWorkingListConfigClick(id, data)}
                     />
                 </div>
             );

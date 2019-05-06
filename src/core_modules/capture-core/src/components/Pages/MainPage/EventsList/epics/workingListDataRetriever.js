@@ -24,6 +24,11 @@ const getMainColumns = (columnsOrder: Array<ColumnConfig>) => columnsOrder
         return accMainColumns;
     }, {});
 
+const getFilter = (filterContainer: any) => {
+    if (filterContainer && filterContainer.filter) return filterContainer.filter;
+    return filterContainer;
+};
+
 const getApiFilterQueryArgument = (filters: ?{ [id: string]: string}, mainColumns: { [id: string]: boolean}) => {
     const filterQueries =
         filters ?
@@ -33,7 +38,7 @@ const getApiFilterQueryArgument = (filters: ?{ [id: string]: string}, mainColumn
                 .filter(key => filters[key] != null && !mainColumns[key])
                 .reduce((accFilterQueries, filterKey) => {
                     // $FlowSuppress
-                    const filter = filters[filterKey];
+                    const filter = getFilter(filters[filterKey]);
                     if (Array.isArray(filter)) {
                         const filtersFromArray = filter
                             .map(filterPart => `${filterKey}:${filterPart}`);
@@ -58,7 +63,7 @@ const getMainApiFilterQueryArguments = (filters: ?{ [id: string]: string}, mainC
                 .filter(key => mainColumns[key] && filters[key] != null)
                 .reduce((accMainFilters, key) => {
                     // $FlowSuppress
-                    const filter = filters[key];
+                    const filter = getFilter(filters[key]);
                     let filtersForCurrentMain = {};
                     if (key === 'eventDate') {
                         if (Array.isArray(filter)) {

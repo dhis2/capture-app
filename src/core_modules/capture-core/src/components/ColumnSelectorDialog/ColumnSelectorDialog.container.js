@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
-import ColumnSelector from './ColumnSelector.component';
-import { updateWorkinglistOrder } from './actions/ColumnSelector.actions';
+import ColumnSelectorDialog from './ColumnSelectorDialog.component';
+import { updateWorkinglistOrder } from './actions/ColumnSelectorDialog.actions';
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onUpdateWorkinglistOrder: (listId: string, workinglist: Array<Object>) => {
@@ -10,4 +10,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowSuppress
-export default connect(null, mapDispatchToProps)(ColumnSelector);
+export default connect(null, mapDispatchToProps)(ColumnSelectorDialog);

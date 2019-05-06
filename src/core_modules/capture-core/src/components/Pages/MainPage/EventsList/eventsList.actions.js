@@ -18,6 +18,7 @@ export const actionTypes = {
     SET_CURRENT_WORKING_LIST_CONFIG: 'SetCurrentWorkingListConfig',
     WORKING_LIST_CONFIGS_RETRIEVED: 'WorkingListConfigsRetrieved',
     WORKING_LIST_CONFIGS_RETRIEVAL_FAILED: 'WorkingListConfigsRetrievalFailed',
+    ADD_WORKING_LIST_CONFIG: 'AddWorkingListConfig',
 };
 
 export const batchActionTypes = {
@@ -64,5 +65,8 @@ export const workingListConfigsRetrieved = (workingListConfigs: Array<any>) =>
 export const workingListConfigsRetrievalFailed = (error: string) =>
     actionCreator(actionTypes.WORKING_LIST_CONFIGS_RETRIEVAL_FAILED)({ error });
 
-export const setCurrentWorkingList = (listId: string, data?: ?Object) =>
+export const setCurrentWorkingListConfig = (listId: string, data?: ?Object) =>
     actionCreator(actionTypes.SET_CURRENT_WORKING_LIST_CONFIG)({ ...data, listId });
+
+export const addWorkingListConfig = (name: string, description: string) =>
+    actionCreator(actionTypes.ADD_WORKING_LIST_CONFIG)({ name, description });

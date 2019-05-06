@@ -84,6 +84,22 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
 
     static mainOptionSet = new OptionSet('mainOptions', [
         new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.TODAY];
+            _this.value = mainOptionKeys.TODAY;
+        }),
+        new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.THIS_WEEK];
+            _this.value = mainOptionKeys.THIS_WEEK;
+        }),
+        new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.THIS_MONTH];
+            _this.value = mainOptionKeys.THIS_MONTH;
+        }),
+        new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.THIS_YEAR];
+            _this.value = mainOptionKeys.THIS_YEAR;
+        }),
+        new Option((_this) => {
             _this.text = mainOptionTranslatedTexts[mainOptionKeys.LAST_WEEK];
             _this.value = mainOptionKeys.LAST_WEEK;
         }),

@@ -8,8 +8,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import SettingsIcon from '@material-ui/icons/Settings';
 
 import i18n from '@dhis2/d2-i18n';
 
@@ -23,6 +21,8 @@ const styles = theme => ({
 });
 
 type Props = {
+    open: ?boolean,
+    onClose: Function,
     listId: string,
     classes: Object,
     columns: Array<Object>,
@@ -30,7 +30,6 @@ type Props = {
 };
 
 type State = {
-    open: boolean,
     columnList: Array<Object>,
 };
 
@@ -38,18 +37,9 @@ class ColumnSelector extends Component<Props, State> {
     constructor(props) {
         super(props);
         this.state = {
-            open: false,
             columnList: [...this.props.columns],
         };
     }
-
-    handleClickOpen = () => {
-        this.setState({ open: true });
-    };
-
-    handleClose = () => {
-        this.setState({ open: false });
-    };
 
     getListToSave = () => this.state.columnList
         .map(column => ({
@@ -63,7 +53,7 @@ class ColumnSelector extends Component<Props, State> {
 
     handleSave = () => {
         this.props.onUpdateWorkinglistOrder(this.props.listId, this.getListToSave());
-        this.setState({ open: false });
+        this.props.onClose();
     };
 
     handleToggle = id => () => {
@@ -80,18 +70,13 @@ class ColumnSelector extends Component<Props, State> {
     };
 
     render() {
-        const { classes } = this.props;
+        const { classes, open, onClose } = this.props;
 
         return (
             <span>
-                <IconButton onClick={this.handleClickOpen}>
-                    <SettingsIcon
-                        className={classes.optionsIcon}
-                    />
-                </IconButton>
                 <Dialog
-                    open={this.state.open}
-                    onClose={this.handleClose}
+                    open={!!open}
+                    onClose={onClose}
                     fullWidth
                 >
                     <DialogTitle>{i18n.t('Columns to show in table')}</DialogTitle>

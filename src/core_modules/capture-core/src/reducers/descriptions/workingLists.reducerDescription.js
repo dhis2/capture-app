@@ -20,7 +20,7 @@ import {
 } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
 import {
     actionTypes as columnSelectorActionTypes,
-} from '../../components/ColumnSelector/actions/ColumnSelector.actions';
+} from '../../components/ColumnSelectorDialog/actions/ColumnSelectorDialog.actions';
 import {
     actionTypes as filterSelectorActionTypes,
 } from '../../components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.actions';
@@ -107,23 +107,25 @@ export const workingListConfigSelectorDesc = createReducerDescription({
 export const workingListsDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
-        const { listId, eventContainers } = action.payload;
+        const { listId, eventContainers, request } = action.payload;
         newState[listId] = {
             order: eventContainers ?
                 eventContainers
                     .map(container => container.event.eventId) : [],
             type: 'event',
+            currentRequest: request,
         };
         return newState;
     },
     [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
-        const { listId, eventContainers } = action.payload;
+        const { listId, eventContainers, request } = action.payload;
         newState[listId] = {
             order: eventContainers ?
                 eventContainers
                     .map(container => container.event.eventId) : [],
             type: 'event',
+            currentRequest: request,
         };
 
         return newState;
@@ -167,7 +169,7 @@ export const workingListsMetaDesc = createReducerDescription({
         const { listId, sortById, sortByDirection, filters } = action.payload;
         const metaFilters = filters ? filters.reduce((accFilters, filter) => ({
             ...accFilters,
-            [filter.itemId]: filter.requestData,
+            [filter.id]: filter.requestData,
         }), {}) : {};
 
         newState[listId] = {
@@ -397,7 +399,7 @@ export const workingListsUIDesc = createReducerDescription({
         const newState = { ...state };
         const payload = action.payload;
         newState[payload.listId] = getReadyState({}, {
-            dataLoadingError: payload,
+            dataLoadingError: payload.errorMessage,
         });
         return newState;
     },
@@ -544,6 +546,20 @@ export const workingListFiltersEditDesc = createReducerDescription({
         };
         return newState;
     },
+    [eventsListActionTypes.SET_CURRENT_WORKING_LIST_CONFIG]: (state, action) => {
+        const newState = { ...state };
+        const { listId, filters } = action.payload;
+        const filterEditValues = filters ? filters.reduce((accFilters, filter) => ({
+            ...accFilters,
+            [filter.id]: filter.value,
+        }), {}) : {};
+
+        newState[listId] = {
+            ...filterEditValues,
+        };
+
+        return newState;
+    },
     [filterSelectorActionTypes.REVERT_FILTER]: (state, action) => {
         const newState = { ...state };
         const listId = action.payload.listId;
@@ -590,7 +606,7 @@ export const workingListsAppliedFiltersDesc = createReducerDescription({
         const { listId, filters } = action.payload;
         const filterTexts = filters ? filters.reduce((accFilters, filter) => ({
             ...accFilters,
-            [filter.itemId]: filter.appliedText,
+            [filter.id]: filter.appliedText,
         }), {}) : {};
 
         newState[listId] = {
@@ -696,6 +712,17 @@ export const workingListsUserSelectedFiltersDesc = createReducerDescription({
         };
 
         return newState;
+    },
+    [eventsListActionTypes.SET_CURRENT_WORKING_LIST_CONFIG]: (state, action) => {
+        const { filters } = action.payload;
+        const selectedFilters = filters ? filters.reduce((accFilters, filter) => ({
+            [filter.id]: true,
+        }), {}) : {};
+
+        return {
+            ...state,
+            ...selectedFilters,
+        };
     },
     [filterSelectorActionTypes.UPDATE_INCLUDED_FILTERS_AFTER_COLUMN_SORTING]: (state, action) => {
         const newState = action.payload.includeFilters;

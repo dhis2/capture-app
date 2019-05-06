@@ -21,7 +21,7 @@ import {
     workingListUpdateRetrievalFailed,
     startDeleteEvent,
     workingListUpdatingWithDialog,
-    setCurrentWorkingList,
+    setCurrentWorkingListConfig,
     workingListConfigsRetrieved,
 } from '../eventsList.actions';
 import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../../NewEvent';
@@ -36,9 +36,7 @@ import {
     actionTypes as filterSelectorActionTypes,
     batchActionTypes as filterSelectorBatchActionTypes,
 } from '../FilterSelectors/filterSelector.actions';
-import {
-    getEventProgramWorkingListConfigs,
-} from '../../../../../eventWorkingListConfig/eventWorkingListConfigRequests';
+import { getWorkingListConfigsAsync } from './workingListConfigDataRetriever';
 
 const errorMessages = {
     WORKING_LIST_RETRIEVE_ERROR: 'Working list could not be loaded',
@@ -152,39 +150,6 @@ const getUpdateWorkingListActionAsync = (
         });
 };
 
-const getWorkingListConfigsAsync = (state: ReduxState) => {
-    const programId = state.currentSelections.programId;
-    return getEventProgramWorkingListConfigs(programId).then((workingListConfigs) => {
-        const defaultWorkingListConfig = {
-            id: `${programId}-default`,
-            name: 'default',
-            sortById: 'eventDate',
-            sortByDirection: 'desc',
-        };
-        const workingListConfigsWithDefault = [defaultWorkingListConfig, ...workingListConfigs];
-        return batchActions([
-            setCurrentWorkingList(defaultWorkingListConfig.id, defaultWorkingListConfig),
-            workingListConfigsRetrieved(workingListConfigsWithDefault),
-        ], eventsListBatchActionTypes.WORKING_LIST_CONFIGS_RETRIEVED_BATCH);
-    });
-};
-
-export const retrieveWorkingListConfigsFromServer = (action$: ActionsObservable, store: ReduxStore) =>
-    action$.ofType(
-        mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
-        viewEventActionTypes.INITIALIZE_WORKING_LISTS_ON_BACK_TO_MAIN_PAGE,
-        newEventDataEntryActionTypes.CANCEL_SAVE_INITIALIZE_WORKING_LISTS,
-    )
-        .filter(() => {
-            const state = store.getState();
-            return state.offline.online;
-        })
-        .switchMap(() => {
-            const promise = getWorkingListConfigsAsync(store.getState());
-            return fromPromise(promise);
-        });
-
-
 export const retrieveCurrentWorkingListDataEpic = (action$: ActionsObservable, store: ReduxStore) =>
     action$.ofType(
         eventsListActionTypes.SET_CURRENT_WORKING_LIST_CONFIG,
@@ -292,7 +257,10 @@ export const getWorkingListOnSaveEpic = (action$: ActionsObservable, store: Redu
                     );
             }
 
-            const initialPromise = getWorkingListConfigsAsync(state);
+            const initialPromise = getWorkingListConfigsAsync(state).then(container => batchActions([
+                setCurrentWorkingListConfig(container.default.id, container.default),
+                workingListConfigsRetrieved(container.workingListConfigs),
+            ], eventsListBatchActionTypes.WORKING_LIST_CONFIGS_RETRIEVED_BATCH));
             return fromPromise(initialPromise)
                 .takeUntil(action$.ofType(...cancelActionTypes))
                 .takeUntil(
@@ -369,7 +337,10 @@ export const getEventListOnReconnectEpic = (action$: ActionsObservable, store: R
                     .takeUntil(action$.ofType(...cancelActionTypes));
             }
 
-            const initialPromise = getWorkingListConfigsAsync(state);
+            const initialPromise = getWorkingListConfigsAsync(state).then(container => batchActions([
+                setCurrentWorkingListConfig(container.default.id, container.default),
+                workingListConfigsRetrieved(container.workingListConfigs),
+            ], eventsListBatchActionTypes.WORKING_LIST_CONFIGS_RETRIEVED_BATCH));
             return fromPromise(initialPromise)
                 .takeUntil(action$.ofType(...cancelActionTypes));
         });

@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import { setCurrentWorkingList } from '../eventsList.actions';
+import { setCurrentWorkingListConfig } from '../eventsList.actions';
 import WorkingListConfigSelector from './WorkingListConfigSelector.component';
 import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../../HOC/withErrorMessageHandler';
@@ -8,8 +8,11 @@ import withErrorMessageHandler from '../../../../../HOC/withErrorMessageHandler'
 const mapStateToProps = (state: ReduxState) => {
     const workingListConfigSelector = state.workingListConfigSelector.eventMainPage || {};
     const selectedListId = workingListConfigSelector.currentWorkingListId;
+    const workingListConfigs = workingListConfigSelector.workingListConfigs || [];
+    const defaultWorkingListConfig = workingListConfigs.find(w => w.isDefault);
     return {
-        workingListConfigs: workingListConfigSelector.workingListConfigs || [],
+        workingListConfigs,
+        defaultWorkingListConfig,
         selectedListId,
         ready: workingListConfigSelector && !workingListConfigSelector.isLoading,
         error: workingListConfigSelector && workingListConfigSelector.loadError,
@@ -18,7 +21,7 @@ const mapStateToProps = (state: ReduxState) => {
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onSetWorkingListConfig: (id: string, data?: ?Object) => {
-        dispatch(setCurrentWorkingList(id, data));
+        dispatch(setCurrentWorkingListConfig(id, data));
     },
 });
 

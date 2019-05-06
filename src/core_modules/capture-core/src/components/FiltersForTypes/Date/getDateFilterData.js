@@ -25,6 +25,14 @@ const convertDateFilterValueToFormValue = (clientValue: string): string =>
 
 
 const mapMainSelectionsToAppliedText = {
+    [mainOptionKeys.TODAY]: () =>
+        mainOptionTranslatedTexts[mainOptionKeys.TODAY],
+    [mainOptionKeys.THIS_WEEK]: () =>
+        mainOptionTranslatedTexts[mainOptionKeys.THIS_WEEK],
+    [mainOptionKeys.THIS_MONTH]: () =>
+        mainOptionTranslatedTexts[mainOptionKeys.THIS_MONTH],
+    [mainOptionKeys.THIS_YEAR]: () =>
+        mainOptionTranslatedTexts[mainOptionKeys.THIS_YEAR],
     [mainOptionKeys.LAST_WEEK]: () =>
         mainOptionTranslatedTexts[mainOptionKeys.LAST_WEEK],
     [mainOptionKeys.LAST_MONTH]: () =>
@@ -60,6 +68,42 @@ const mapMainSelectionsToAppliedText = {
 };
 
 const mapMainSelectionsToRequests = {
+    [mainOptionKeys.TODAY]: () => {
+        const startDate = moment();
+        const endDate = startDate;
+
+        return [
+            `ge:${formatDateForFilterRequest(startDate)}`,
+            `le:${formatDateForFilterRequest(endDate)}`,
+        ];
+    },
+    [mainOptionKeys.THIS_WEEK]: () => {
+        const startDate = moment().startOf('week');
+        const endDate = moment().endOf('week');
+
+        return [
+            `ge:${formatDateForFilterRequest(startDate)}`,
+            `le:${formatDateForFilterRequest(endDate)}`,
+        ];
+    },
+    [mainOptionKeys.THIS_MONTH]: () => {
+        const startDate = moment().startOf('month');
+        const endDate = moment().endOf('month');
+
+        return [
+            `ge:${formatDateForFilterRequest(startDate)}`,
+            `le:${formatDateForFilterRequest(endDate)}`,
+        ];
+    },
+    [mainOptionKeys.THIS_YEAR]: () => {
+        const startDate = moment().startOf('year');
+        const endDate = moment().endOf('year');
+
+        return [
+            `ge:${formatDateForFilterRequest(startDate)}`,
+            `le:${formatDateForFilterRequest(endDate)}`,
+        ];
+    },
     [mainOptionKeys.LAST_WEEK]: () => {
         const startDate = moment().subtract(1, 'weeks').startOf('week');
         const endDate = moment().subtract(1, 'weeks').endOf('week');
@@ -105,7 +149,7 @@ const mapMainSelectionsToRequests = {
 
 
 const getRequestData = (value: Value) =>
-    mapMainSelectionsToRequests[value.main](value.from, value.to);
+    ({ ...value, filter: mapMainSelectionsToRequests[value.main](value.from, value.to) });
 
 const getAppliedText = (value: Value) =>
     mapMainSelectionsToAppliedText[value.main](value.from, value.to);

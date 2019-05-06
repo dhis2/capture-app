@@ -12,7 +12,6 @@ import withNavigation from '../../../../Pagination/withDefaultNavigation';
 import withRowsPerPageSelector from '../../../../Pagination/withRowsPerPageSelector';
 import withFilterSelectors from '../FilterSelectors/withFilterSelectors';
 
-import ColumnSelector from '../../../../ColumnSelector/ColumnSelector.container';
 import DownloadTable from '../../../../DownloadTable/DownloadTable.container';
 import OptionSet from '../../../../../metaData/OptionSet/OptionSet';
 import withCustomEndCell from '../withCustomEndCell';
@@ -20,6 +19,7 @@ import eventContentMenuSettings from '../EventContentMenu/eventContentMenuSettin
 import DialogLoadingMask from '../../../../LoadingMasks/DialogLoadingMask.component';
 
 import List from '../../../../List/OnlineList/List.component';
+import ListWrapperMenu from '../ListWrapperMenu/ListWrapperMenu.component';
 
 const EventListPagination = withData()(withRowsPerPageSelector()(withNavigation()(Pagination)));
 const EventList = withCustomEndCell(eventContentMenuSettings)(List);
@@ -74,7 +74,7 @@ class EventListWrapper extends React.Component<Props> {
         (fromToLabel: string, totalLabel: string) => `${fromToLabel} of ${totalLabel}`;
 
     renderTopBar = () => {
-        const { classes, filterButtons, columns } = this.props;
+        const { classes, filterButtons, columns, listId } = this.props;
         return (
             <div
                 className={classes.topBarContainer}
@@ -85,8 +85,10 @@ class EventListWrapper extends React.Component<Props> {
                     {filterButtons}
                 </div>
                 <div>
-                    <ColumnSelector columns={columns} />
-                    <DownloadTable />
+                    <ListWrapperMenu
+                        columns={columns}
+                        listId={listId}
+                    />
                 </div>
             </div>
         );

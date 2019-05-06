@@ -14,7 +14,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 type Props = {
     getPopperAction: (togglePopper: () => void) => React.Node,
-    getPopperContent: () => React.Node,
+    getPopperContent: (togglePopper: Function) => React.Node,
     placement?: ?string,
     classes?: ?Object,
 }
@@ -36,16 +36,16 @@ class MenuPopper extends React.Component<Props, State> {
         this.state = { popperOpen: false };
     }
 
-    handleReferenceInstanceRetrieved = (instance) => {
+    handleReferenceInstanceRetrieved = (instance: any) => {
         this.managerRef(instance);
         this.menuReferenceInstance = instance;
     }
 
-    toggleMenu = (event: any) => {
+    toggleMenu = (event?: any) => {
         this.setState({
             popperOpen: !this.state.popperOpen,
         });
-        event.stopPropagation();
+        event && event.stopPropagation();
     }
 
     closeMenu = () => {
@@ -88,7 +88,7 @@ class MenuPopper extends React.Component<Props, State> {
                         ({ ref, style, placement }) => (
                             <div
                                 ref={ref}
-                                style={style}
+                                style={{ ...style, zIndex: 1 }}
                                 className={classes ? classes.popperContainer : ''}
                                 data-placement={placement}
                             >
@@ -100,7 +100,7 @@ class MenuPopper extends React.Component<Props, State> {
                                         timeout={{ exit: 0, enter: 200 }}
                                     >
                                         <React.Fragment>
-                                            {getPopperContent()}
+                                            {getPopperContent(this.toggleMenu)}
                                         </React.Fragment>
                                     </Grow>
                                 </ClickAwayListener>

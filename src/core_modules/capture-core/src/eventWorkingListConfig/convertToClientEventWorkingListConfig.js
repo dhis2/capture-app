@@ -1,4 +1,5 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
 import {
     getBooleanFilterData,
     getDateFilterData,
@@ -8,15 +9,39 @@ import {
     getTextFilterData,
     getTrueOnlyFilterData,
 } from '../components/FiltersForTypes';
-import { dataElementTypes as elementTypes, DataElement, RenderFoundation } from '../metaData';
+import { dataElementTypes as elementTypes, DataElement, RenderFoundation, OptionSet, Option } from '../metaData';
 import eventStatusElement from '../events/eventStatusElement';
 import {
     MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS,
 } from '../components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.const';
 
+const getBooleanOptionSet = () => {
+    const trueText = i18n.t('Yes');
+    const falseText = i18n.t('No');
+
+    const optionSet = new OptionSet();
+    optionSet.addOption(new Option((_this) => { _this.text = trueText; _this.value = 'true'; }));
+    optionSet.addOption(new Option((_this) => { _this.text = falseText; _this.value = 'false'; }));
+    return optionSet;
+};
+
+const booleanOptionSet = new OptionSet('booleanOptionSet', [
+    new Option((_this) => { _this.text = i18n.t('Yes'); _this.value = 'true'; }),
+    new Option((_this) => { _this.text = i18n.t('No'); _this.value = 'false'; }),
+]);
+
+type DataFilter = {
+    dataItem: string,
+    ge?: any,
+    le?: any,
+    in?: any,
+    like?: any,
+    eq?: any,
+    period?: any,
+}
 
 type EventQueryCriteria = {
-    filters?: ?Array<Object>,
+    dataFilters?: ?Array<DataFilter>,
     order?: ?string,
     eventDate?: ?Object,
     status?: ?string,
@@ -29,7 +54,7 @@ type ServerWorkingListConfig = {
 }
 
 const getNumericFilter = (filter: Object) => {
-    const value = { from: filter.ge, to: filter.le };
+    const value = { min: filter.ge, max: filter.le };
     return {
         ...getNumericFilterData(value),
         value,
@@ -39,7 +64,7 @@ const getNumericFilter = (filter: Object) => {
 const getBooleanFilter = (filter: Object, element: DataElement) => {
     const value = [...(filter.in || [])];
     return {
-        ...getBooleanFilterData(value, element.type, element.optionSet),
+        ...getBooleanFilterData(value, element.type, element.optionSet || booleanOptionSet),
         value,
     };
 };
@@ -113,16 +138,16 @@ const getSortOrder = (order: ?string) => {
     return null;
 };
 
-const getDataElementFilters = (filters: ?Array<any>, stageForm: RenderFoundation) => {
+const getDataElementFilters = (filters: ?Array<DataFilter>, stageForm: RenderFoundation) => {
     if (filters) {
         return filters.map((serverFilter) => {
-            const element = stageForm.getElement(serverFilter.elementId);
+            const element = stageForm.getElement(serverFilter.dataItem);
             if (element) {
                 if (element.optionSet && element.optionSet.options.length <= MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS) {
-                    return { id: serverFilter.elementId, ...getMultiSelectOptionSetFilter(serverFilter.filter, element) };
+                    return { id: serverFilter.dataItem, ...getMultiSelectOptionSetFilter(serverFilter, element) };
                 }
                 // $FlowFixMe
-                return { id: serverFilter.elementId, ...(getFilterByType[element.type] ? getFilterByType[element.type](serverFilter.filter, element) : null) };
+                return { id: serverFilter.dataItem, ...(getFilterByType[element.type] ? getFilterByType[element.type](serverFilter, element) : null) };
             }
             return null;
         }).filter(clientFilter => clientFilter !== null);
@@ -137,16 +162,17 @@ const getMainDataFilters = (eventQueryCriteria: EventQueryCriteria) => {
         filters.push({ id: 'status', ...getSingleSelectOptionSetFilter({ eq: status }, eventStatusElement) });
     }
     if (eventDate) {
-        filters.push({ id: 'eventDate', ...getDateFilter(eventDate.data) });
+        filters.push({ id: 'eventDate', ...getDateFilter(eventDate) });
     }
     return filters;
 };
 
 export default function (serverWorkingListConfig: ServerWorkingListConfig, stageForm: RenderFoundation) {
-    const { name, eventQueryCriteria } = serverWorkingListConfig;
+    const { id, name, eventQueryCriteria } = serverWorkingListConfig;
     const { sortById, sortByDirection } = getSortOrder(eventQueryCriteria.order) || {};
-    const filters = [...getDataElementFilters(eventQueryCriteria.filters, stageForm), ...getMainDataFilters(eventQueryCriteria)];
+    const filters = [...getDataElementFilters(eventQueryCriteria.dataFilters, stageForm), ...getMainDataFilters(eventQueryCriteria)];
     return {
+        id,
         name,
         filters,
         sortById,
