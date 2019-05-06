@@ -1,20 +1,15 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
 /node_modules
+/.pnp
+.pnp.js
 
 # testing
 /coverage
 
 # production
 /build
-/buildzip
-
-# docs
-/docs
-
-# flow
-/flow-typed
 
 # misc
 .DS_Store
@@ -26,12 +21,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-.vscode/
-.DS_Store
-npm-debug.log
-/public/manifest.webapp
-
-# generated localization files
-src/locales/
-public/manifest.webapp
