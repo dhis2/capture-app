@@ -1,5 +1,7 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import {
     RenderFoundation,
     Section,
@@ -13,7 +15,7 @@ import type {
 } from '../../../../storageControllers/cache.types';
 
 type InputSearchAttribute = {
-    trackedEntityAttributeId: string,
+    trackedEntityAttributeId: ?string,
     searchable: boolean,
     displayInList: boolean,
 }
@@ -145,12 +147,31 @@ class SearchGroupFactory {
         return searchGroup;
     }
 
+    getTrackedEntityAttribute(attribute: InputSearchAttribute): ?CachedTrackedEntityAttribute {
+        const id = attribute.trackedEntityAttributeId;
+        const trackedEntityAttribute = id ? this.cachedTrackedEntityAttributes.get(id) : null;
+        if (!trackedEntityAttribute) {
+            log.error(
+                errorCreator(
+                    'Tried to create a searchAttribute where trackedEntityAttributeId was not specified or the trackedEntityAttribute could not be retrieved from the cache')(
+                    { attribute }),
+            );
+        }
+        return trackedEntityAttribute;
+    }
+
     build(searchAttributes: $ReadOnlyArray<InputSearchAttribute>, minAttributesRequiredToSearch: number) {
         const attributesBySearchGroup = searchAttributes
-            .map(attribute => ({ ...attribute, trackedEntityAttribute: this.cachedTrackedEntityAttributes.get(attribute.trackedEntityAttributeId) }))
-            .filter(attribute => attribute.searchable || attribute.trackedEntityAttribute.unique)
+            .map(attribute => ({
+                ...attribute,
+                trackedEntityAttribute: this.getTrackedEntityAttribute(attribute),
+            }))
+            .filter(attribute =>
+                attribute.trackedEntityAttribute && (attribute.searchable || attribute.trackedEntityAttribute.unique))
             .reduce((accGroups, attribute) => {
+                // $FlowFixMe
                 if (attribute.trackedEntityAttribute.unique) {
+                    // $FlowFixMe
                     accGroups[attribute.trackedEntityAttribute.id] = [attribute];
                 } else {
                     accGroups.main = accGroups.main ? [...accGroups.main, attribute] : [attribute];
@@ -160,7 +181,11 @@ class SearchGroupFactory {
 
         const searchGroupPromises = Object.keys(attributesBySearchGroup)
             .map(attrByGroupKey =>
-                this._buildSearchGroup(attrByGroupKey, attributesBySearchGroup[attrByGroupKey], minAttributesRequiredToSearch));
+                this._buildSearchGroup(
+                    attrByGroupKey,
+                    attributesBySearchGroup[attrByGroupKey],
+                    minAttributesRequiredToSearch,
+                ));
         return Promise.all(searchGroupPromises);
     }
 }

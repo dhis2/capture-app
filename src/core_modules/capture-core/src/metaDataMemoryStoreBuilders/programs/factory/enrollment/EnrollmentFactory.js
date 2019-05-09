@@ -138,6 +138,12 @@ class EnrollmentFactory {
     ) {
         const programTeiAttributes = cachedProgram.programTrackedEntityAttributes || [];
         const teiAttributesAsObject = programTeiAttributes.reduce((accTeiAttributes, programTeiAttribute) => {
+            if (!programTeiAttribute.trackedEntityAttributeId) {
+                log.error(
+                    errorCreator('TrackedEntityAttributeId missing from programTrackedEntityAttribute')(
+                        { programTeiAttribute }));
+                return accTeiAttributes;
+            }
             const teiAttribute = this.cachedTrackedEntityAttributes.get(programTeiAttribute.trackedEntityAttributeId);
             if (!teiAttribute) {
                 log.error(errorCreator('could not retrieve tei attribute')({ programTeiAttribute }));

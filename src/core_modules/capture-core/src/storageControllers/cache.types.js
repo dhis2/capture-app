@@ -27,7 +27,7 @@ export type CachedTrackedEntityAttribute = {
 }
 
 export type CachedProgramTrackedEntityAttribute = {
-    trackedEntityAttributeId: string,
+    trackedEntityAttributeId: ?string,
     displayInList: boolean,
     searchable: boolean,
     mandatory: boolean,
@@ -124,7 +124,7 @@ export type ProgramCachedCategoryCombo = {
 };
 
 export type CachedTrackedEntityTypeAttribute = {
-    trackedEntityAttributeId: string,
+    trackedEntityAttributeId: ?string,
     displayInList: boolean,
     mandatory: boolean,
     searchable: boolean,
