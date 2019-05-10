@@ -1,16 +1,31 @@
 // @flow
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import ApiSpecification from '../ApiSpecificationDefinition/ApiSpecification';
 import getterTypes from '../fetcher/getterTypes.const';
 
+function getTrackedEntityTypeAttribute(typeAttribute) {
+    const { trackedEntityAttribute, ...attribute } = typeAttribute;
+    const trackedEntityAttributeId = trackedEntityAttribute && trackedEntityAttribute.id;
+    if (!trackedEntityAttributeId) {
+        log.error(
+            errorCreator(
+                'encountered a trackedEntityTypeAttribute without a trackedEntityAttribe id',
+            )({ typeAttribute }),
+        );
+    }
+
+    return {
+        ...attribute,
+        trackedEntityAttributeId,
+    };
+}
+
 function getTrackedEntityTypeAttributes(attributes) {
     return attributes ?
-        attributes.map((a) => {
-            const { trackedEntityAttribute, ...attribute } = a;
-            return {
-                ...attribute,
-                trackedEntityAttributeId: trackedEntityAttribute.id,
-            };
-        }) : null;
+        attributes
+            .map(ta => getTrackedEntityTypeAttribute(ta))
+            .filter(ta => ta) : null;
 }
 
 function converter(d2Model) {

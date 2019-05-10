@@ -92,6 +92,12 @@ class TeiRegistrationFactory {
     ) {
         const typeTeiAttributes = cachedType.trackedEntityTypeAttributes || [];
         const teiAttributesAsObject = typeTeiAttributes.reduce((accTeiAttributes, typeTeiAttribute) => {
+            if (!typeTeiAttribute.trackedEntityAttributeId) {
+                log.error(
+                    errorCreator('TrackedEntityAttributeId missing from trackedEntityTypeAttribute')(
+                        { typeTeiAttribute }));
+                return accTeiAttributes;
+            }
             const teiAttribute = this.cachedTrackedEntityAttributes.get(typeTeiAttribute.trackedEntityAttributeId);
             if (!teiAttribute) {
                 log.error(errorCreator('could not retrieve tei attribute')({ typeTeiAttribute }));

@@ -1,4 +1,6 @@
 // @flow
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import Model from 'd2/lib/model/Model';
 
@@ -103,15 +105,26 @@ function getOrganisationUnits(d2OrganisationUnitsCollection) {
     }, {});
 }
 
+function getProgramTrackedEntityAttribute(programAttribute) {
+    const { trackedEntityAttribute, ...attribute } = programAttribute;
+    const trackedEntityAttributeId = trackedEntityAttribute && trackedEntityAttribute.id;
+    if (!trackedEntityAttributeId) {
+        log.error(
+            errorCreator('encountered a programAttribute without a trackedEntityAttributeId')({ programAttribute }),
+        );
+    }
+
+    return {
+        ...attribute,
+        trackedEntityAttributeId,
+    };
+}
+
 function getProgramTrackedEntityAttributes(attributes) {
     return attributes ?
-        attributes.map((a) => {
-            const { trackedEntityAttribute, ...attribute } = a;
-            return {
-                ...attribute,
-                trackedEntityAttributeId: trackedEntityAttribute.id,
-            };
-        }) : null;
+        attributes
+            .map(pa => getProgramTrackedEntityAttribute(pa))
+            .filter(pa => pa) : null;
 }
 
 export default new ApiSpecification((_this) => {

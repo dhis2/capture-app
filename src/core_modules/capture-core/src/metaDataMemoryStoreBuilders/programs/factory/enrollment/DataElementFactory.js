@@ -27,7 +27,7 @@ class DataElementFactory {
     };
 
     static errorMessages = {
-        TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND: 'Tracked entity attribute not found',
+        TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND: 'TrackedEntityAttributeId missing from programTrackedEntityAttribute or trackedEntityAttribute not found',
     };
 
     locale: ?string;
