@@ -89,7 +89,7 @@ class TrackedEntityTypeFactory {
         }
 
         trackedEntityType.teiRegistration =
-            await this.teiRegistrationFactory.build(cachedType, trackedEntityType.searchGroups);
+            await this.teiRegistrationFactory.build(cachedType, trackedEntityType.searchGroups, trackedEntityType);
 
         return trackedEntityType;
     }

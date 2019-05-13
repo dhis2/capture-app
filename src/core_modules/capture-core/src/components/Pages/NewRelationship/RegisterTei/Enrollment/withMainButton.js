@@ -4,20 +4,24 @@ import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from 'capture-ui';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
+import { Enrollment } from '../../../../../metaData';
 
 type Props = {
     onSave: () => void,
     possibleDuplicatesFound: boolean,
+    enrollmentMetadata: Enrollment,
 };
 
 const getMainButton = (InnerComponent: React.ComponentType<any>) =>
     class MainButtonHOC extends React.Component<Props> {
-        static getButtonText(duplicatesFound: boolean) {
-            return duplicatesFound ? i18n.t('Review Duplicates') : i18n.t('Create person and link');
+        static getButtonText(duplicatesFound: boolean, trackedEntityTypeName: string) {
+            return duplicatesFound ?
+                i18n.t('Review Duplicates') :
+                i18n.t('Create {{trackedEntityTypeName}} and link', { trackedEntityTypeName });
         }
 
         renderButton() {
-            const { onSave, possibleDuplicatesFound } = this.props;
+            const { onSave, possibleDuplicatesFound, enrollmentMetadata } = this.props;
 
             return (
                 <Button
@@ -25,7 +29,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
                     size="medium"
                     onClick={onSave}
                 >
-                    {MainButtonHOC.getButtonText(possibleDuplicatesFound)}
+                    {MainButtonHOC.getButtonText(possibleDuplicatesFound, enrollmentMetadata.trackedEntityType.name)}
                 </Button>
             );
         }

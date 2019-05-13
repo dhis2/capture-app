@@ -5,6 +5,7 @@ import { changeProgram, clearProgramFilter } from '../registrationSection.action
 
 const mapStateToProps = (state: ReduxState) => ({
     orgUnitIds: state.newRelationshipRegisterTei.orgUnit ? [state.newRelationshipRegisterTei.orgUnit.id] : null,
+    trackedEntityTypeId: state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId,
     value: state.newRelationshipRegisterTei.programId,
 });
 
