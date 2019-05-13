@@ -19,6 +19,7 @@ import type {
     CachedOptionSet,
 } from '../../../../storageControllers/cache.types';
 import DataElementFactory from './DataElementFactory';
+import { TrackedEntityType } from '../../../../metaData/TrackedEntityType';
 
 class TeiRegistrationFactory {
     static _buildSearchGroupElement(searchGroupElement: DataElement, teiAttribute: Object) {
@@ -162,6 +163,7 @@ class TeiRegistrationFactory {
     async build(
         cachedType: CachedTrackedEntityType,
         trackedEntityTypeSearchGroups: Array<SearchGroup> = [],
+        trackedEntityType: TrackedEntityType,
     ) {
         const foundation = await this._buildFoundation(cachedType);
         const inputSearchGroups = this._buildInputSearchGroups(cachedType, trackedEntityTypeSearchGroups);
@@ -169,6 +171,7 @@ class TeiRegistrationFactory {
         return new TeiRegistration((_this) => {
             _this.form = foundation;
             _this.inputSearchGroups = inputSearchGroups;
+            _this.trackedEntityType = trackedEntityType;
         });
     }
 }

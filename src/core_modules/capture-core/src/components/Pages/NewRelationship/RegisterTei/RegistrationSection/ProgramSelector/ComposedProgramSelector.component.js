@@ -45,16 +45,28 @@ type Option = {
 type Props = {
     orgUnitIds: ?Array<string>,
     value: string,
+    trackedEntityTypeId: string,
     classes: Object,
     onUpdateSelectedProgram: (programId: string) => void,
     onClearFilter: () => void,
 };
 
 class ProgramSelector extends React.Component<Props> {
-    static baseLineFilter(program: Program) {
+    baseLineFilter = (program: Program) => {
+        const { trackedEntityTypeId } = this.props;
+
         return program instanceof TrackerProgram &&
+        program.trackedEntityType.id === trackedEntityTypeId &&
         program.access.data.write;
     }
+
+    getOptionsFromPrograms = (programs: Array<Program>): Array<Option> =>
+        programs
+            .map(program => ({
+                label: program.name,
+                value: program.id,
+                iconLeft: this.getProgramIcon(program),
+            }));
 
     getProgramIcon(program: Program) {
         const classes = this.props.classes;
@@ -73,15 +85,6 @@ class ProgramSelector extends React.Component<Props> {
             )
             : null;
     }
-
-    getOptionsFromPrograms = (programs: Array<Program>): Array<Option> =>
-        programs
-            .map(program => ({
-                label: program.name,
-                value: program.id,
-                iconLeft: this.getProgramIcon(program),
-            }));
-
 
     renderIsFilteredText() {
         const { classes, onClearFilter } = this.props;
@@ -105,7 +108,7 @@ class ProgramSelector extends React.Component<Props> {
         return (
             <ProgramFilterer
                 orgUnitIds={orgUnitIds}
-                baselineFilter={ProgramSelector.baseLineFilter}
+                baselineFilter={this.baseLineFilter}
             >
                 {
                     (programs, isFiltered) => (
