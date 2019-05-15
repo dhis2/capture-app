@@ -37,6 +37,12 @@ class EnrollmentFactory {
         }
     }
 
+    static _addFlags(enrollment: Enrollment, cachedProgram: CachedProgram) {
+        enrollment.allowFutureEnrollmentDate = cachedProgram.selectEnrollmentDatesInFuture;
+        enrollment.allowFutureIncidentDate = cachedProgram.selectIncidentDatesInFuture;
+        enrollment.showIncidentDate = cachedProgram.displayIncidentDate;
+    }
+
     static _getFeatureType(cachedFeatureType: ?string) {
         return cachedFeatureType ?
             capitalizeFirstLetter(cachedFeatureType.toLowerCase())
@@ -214,6 +220,7 @@ class EnrollmentFactory {
     ) {
         const enrollment = new Enrollment((_this) => {
             EnrollmentFactory._addLabels(_this, cachedProgram);
+            EnrollmentFactory._addFlags(_this, cachedProgram);
             if (cachedProgram.trackedEntityTypeId) {
                 const trackedEntityType = this.trackedEntityTypeCollection.get(cachedProgram.trackedEntityTypeId);
                 if (trackedEntityType) {

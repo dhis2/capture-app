@@ -1,22 +1,31 @@
 // @flow
-type Validator = (value: any) => boolean;
+import i18n from '@dhis2/d2-i18n';
+
+type Validator = (value: any) => boolean | { valid: boolean, message: ?string };
 
 export type ValidatorContainer = {
     validator: Validator,
     message: string,
 };
 
-export function getValidationErrors(value: any, validatorContainers: ?Array<ValidatorContainer>) {
+export function getValidationError(value: any, validatorContainers: ?Array<ValidatorContainer>) {
     if (!validatorContainers) {
-        return [];
+        return null;
     }
 
-    return validatorContainers.reduce((accErrors, validatorContainer) => {
+    let message;
+    const errorEncountered = validatorContainers.some((validatorContainer) => {
         const validator = validatorContainer.validator;
-        const isValid = validator(value);
-        if (!isValid) {
-            accErrors.push(validatorContainer.message);
+        const result = validator(value);
+
+        if (result === true || (result && result.valid)) {
+            return false;
         }
-        return accErrors;
-    }, []);
+
+        message = (result && result.message) || validatorContainer.message;
+        return true;
+    });
+
+
+    return (errorEncountered ? (message || i18n.t('validation failed')) : null);
 }

@@ -2,6 +2,7 @@
 /* eslint-disable react/no-multi-comp */
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
+import moment from '../../../utils/moment/momentResolver';
 import {
     DataEntry,
     placements,
@@ -81,7 +82,8 @@ const getEnrollmentDateSettings = () => {
                     withDefaultShouldUpdateInterface()(
                         withLabel({
                             onGetUseVerticalOrientation: (props: Object) => props.formHorizontal,
-                            onGetCustomFieldLabeClass: (props: Object) => `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
+                            onGetCustomFieldLabeClass: (props: Object) =>
+                                `${props.fieldOptions.fieldLabelMediaBasedClass} ${labelTypeClasses.dateLabel}`,
                         })(
                             withDisplayMessages()(
                                 withInternalChangeHandler()(
@@ -101,9 +103,11 @@ const getEnrollmentDateSettings = () => {
             required: true,
             calendarWidth: props.formHorizontal ? 250 : 350,
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
+            calendarMaxMoment: !props.enrollmentMetadata.allowFutureEnrollmentDate ? moment() : undefined,
         }),
         getPropName: () => 'enrollmentDate',
-        getValidatorContainers: () => getEnrollmentDateValidatorContainer(),
+        getValidatorContainers: (props: Object) =>
+            getEnrollmentDateValidatorContainer(props.enrollmentMetadata.allowFutureEnrollmentDate),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionKeys.ENROLLMENT,
@@ -135,6 +139,10 @@ const getIncidentDateSettings = () => {
             ),
         );
     const incidentDateSettings = {
+        isApplicable: (props: Object) => {
+            const showIncidentDate = props.enrollmentMetadata.showIncidentDate;
+            return showIncidentDate;
+        },
         getComponent: () => reportDateComponent,
         getComponentProps: (props: Object) => createComponentProps(props, {
             width: props && props.formHorizontal ? 150 : '100%',
@@ -142,9 +150,11 @@ const getIncidentDateSettings = () => {
             required: true,
             calendarWidth: props.formHorizontal ? 250 : 350,
             popupAnchorPosition: getCalendarAnchorPosition(props.formHorizontal),
+            calendarMaxMoment: !props.enrollmentMetadata.allowFutureIncidentDate ? moment() : undefined,
         }),
         getPropName: () => 'incidentDate',
-        getValidatorContainers: () => getIncidentDateValidatorContainer(),
+        getValidatorContainers: (props: Object) =>
+            getIncidentDateValidatorContainer(props.enrollmentMetadata.allowFutureIncidentDate),
         getMeta: () => ({
             placement: placements.TOP,
             section: dataEntrySectionKeys.ENROLLMENT,
@@ -239,13 +249,11 @@ const getGeometrySettings = () => ({
 });
 
 const getSearchGroups = (props: Object) => props.enrollmentMetadata.inputSearchGroups;
-const getSearchContext = (props: Object) => {
-    return {
-        ...props.onGetValidationContext(),
-        trackedEntityType: props.enrollmentMetadata.trackedEntityType.id,
-        program: props.programId,
-    };
-};
+const getSearchContext = (props: Object) => ({
+    ...props.onGetValidationContext(),
+    trackedEntityType: props.enrollmentMetadata.trackedEntityType.id,
+    program: props.programId,
+});
 
 type FinalTeiDataEntryProps = {
     enrollmentMetadata: Enrollment,
@@ -282,7 +290,7 @@ const WarningOutput = withWarningOutput()(IndicatorOutput);
 const ErrorOutput = withErrorOutput()(WarningOutput);
 */
 const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(SearchGroupsHOC);
-const IncidentDateFieldHOC = withDataEntryField(getIncidentDateSettings())(LocationHOC);
+const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(LocationHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);
 const BrowserBackWarningHOC = withBrowserBackWarning()(EnrollmentDateFieldHOC);
 

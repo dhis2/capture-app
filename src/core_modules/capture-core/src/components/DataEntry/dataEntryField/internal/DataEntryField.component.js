@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { updateField } from '../../actions/dataEntry.actions';
-import { getValidationErrors } from './dataEntryField.utils';
+import { getValidationError } from './dataEntryField.utils';
 import getDataEntryKey from '../../common/getDataEntryKey';
 import type { ValidatorContainer } from './dataEntryField.utils';
 
@@ -24,7 +24,7 @@ type Props = {
     completionAttempted?: ?boolean,
     saveAttempted?: ?boolean,
     Component: React.ComponentType<any>,
-    validatorContainers: Array<ValidatorContainer>,
+    validatorContainers: ?Array<ValidatorContainer>,
     propName: string,
     onUpdateField?: ?(innerAction: ReduxAction<any, any>, data: { value: any }) => void,
     value: any,
@@ -71,11 +71,11 @@ class DataEntryField extends React.Component<Props> {
 
     handleBlur = (value: any, options?: ?Options) => {
         const { validatorContainers, onUpdateFieldInner, onUpdateField } = this.props;
-        const validationErrors =
-            getValidationErrors(value, validatorContainers);
+        const validationError =
+            getValidationError(value, validatorContainers);
         onUpdateFieldInner(value, {
-            isValid: validationErrors.length === 0,
-            validationError: validationErrors.length > 0 ? validationErrors[0] : null,
+            isValid: !validationError,
+            validationError,
             touched: options && options.touched != null ? options.touched : true,
         }, this.props.propName, this.props.dataEntryId, this.props.itemId, onUpdateField);
     }
