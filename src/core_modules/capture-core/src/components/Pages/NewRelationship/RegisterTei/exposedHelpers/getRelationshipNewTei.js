@@ -1,5 +1,6 @@
 // @flow
 import uuid from 'd2-utilizr/src/uuid';
+import moment from '../../../../../utils/moment/momentResolver';
 import {
     getTrackerProgramThrowIfNotFound,
     getTrackedEntityTypeThrowIfNotFound,
@@ -83,6 +84,7 @@ export default function getRelationshipNewTei(dataEntryId: string, itemId: strin
         program: programId,
         status: 'ACTIVE',
         orgUnit: orgUnit.id,
+        incidentDate: moment().format('YYYY-MM-DD'),
         ...serverValuesForMainValues,
     } : null;
 

@@ -5,7 +5,7 @@ import { convertValue as convertListValue } from '../../../converters/clientToLi
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 
-import { getValidationErrors } from '../dataEntryField/internal/dataEntryField.utils';
+import { getValidationError } from '../dataEntryField/internal/dataEntryField.utils';
 import type { ValidatorContainer } from '../dataEntryField/internal/dataEntryField.utils';
 
 type DataEntryPropToIncludeStandard = {|
@@ -100,11 +100,11 @@ export function validateDataEntryValues(
             const id = propToInclude.dataEntryId || propToInclude.id;
             const value = values[id];
             const validatorContainers = propToInclude.validatorContainers;
-            const validationErrors = getValidationErrors(value, validatorContainers);
+            const validationError = getValidationError(value, validatorContainers);
 
             accValidations[id] = {
-                isValid: validationErrors.length === 0,
-                validationError: validationErrors.length > 0 ? validationErrors[0] : null,
+                isValid: !validationError,
+                validationError,
             };
 
             return accValidations;

@@ -161,6 +161,9 @@ export type CachedProgram = {
     enrollmentDateLabel: ?string,
     dataEntryForm: ?CachedDataEntryForm,
     featureType: ?string,
+    selectEnrollmentDatesInFuture: boolean,
+    selectIncidentDatesInFuture: boolean,
+    displayIncidentDate: boolean,
 };
 
 export type CachedProgramStageDataElementsAsObject = {
