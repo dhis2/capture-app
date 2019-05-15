@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-05-13T10:49:52.363Z\n"
-"PO-Revision-Date: 2019-05-13T10:49:52.363Z\n"
+"POT-Creation-Date: 2019-05-15T10:39:07.214Z\n"
+"PO-Revision-Date: 2019-05-15T10:39:07.214Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -89,6 +89,9 @@ msgstr ""
 msgid "Enrollment"
 msgstr ""
 
+msgid "A future date is not allowed"
+msgstr ""
+
 msgid "An error has occured. See log for details"
 msgstr ""
 
@@ -105,6 +108,9 @@ msgid "Yes, discard"
 msgstr ""
 
 msgid "No, stay here"
+msgstr ""
+
+msgid "validation failed"
 msgstr ""
 
 msgid "Errors"

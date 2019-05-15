@@ -6,7 +6,9 @@ import {
 import DataElementFactory from './DataElementFactory';
 import TeiRegistrationFactory from './TeiRegistrationFactory';
 import { SearchGroupFactory } from '../../../common/factory';
-import type {
+import { DataElement } from '../../../../metaData/DataElement';
+import type
+{
     CachedTrackedEntityType,
     CachedTrackedEntityTypeAttribute,
     CachedTrackedEntityTypeTranslation,
@@ -60,13 +62,16 @@ class TrackedEntityTypeFactory {
         return null;
     }
 
-    async _buildAttributes(cachedTrackedEntityTypeAttributes: Array<CachedTrackedEntityTypeAttribute>) {
+    async _buildAttributes(
+        cachedTrackedEntityTypeAttributes: Array<CachedTrackedEntityTypeAttribute>): Promise<Array<DataElement>> {
         const attributePromises = cachedTrackedEntityTypeAttributes.map(async (teta) => {
             const attribute = await this.dataElementFactory.build(teta);
             return attribute;
         });
         const attributes = await Promise.all(attributePromises);
-        return attributes;
+
+        return attributes
+            .filter(a => a);
     }
 
     async build(
