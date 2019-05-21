@@ -30,6 +30,7 @@ export { default as withFilterProps } from './HOC/withFilterProps';
 export { default as withGotoInterface } from './HOC/withGotoInterface';
 export { default as withHideCompatibility } from './HOC/withHideCompatibility';
 export { default as withLabel } from './HOC/withLabel';
+export { default as withStyledContainer } from './HOC/withStyledContainer';
 export { withFocusSaver, withInternalChangeHandler } from 'capture-ui';
 
 // OrgUnit HOCs

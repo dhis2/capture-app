@@ -7,6 +7,7 @@ import type {
     CachedProgramTrackedEntityAttribute,
     CachedOptionSet,
     CachedTrackedEntityAttribute,
+    CachedTrackedEntityType,
 } from '../../../../storageControllers/cache.types';
 import {
     RenderFoundation,
@@ -54,15 +55,18 @@ class EnrollmentFactory {
     dataElementFactory: DataElementFactory;
     trackedEntityTypeCollection: Map<string, TrackedEntityType>;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
+    cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>;
     constructor(
         cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
         cachedOptionSets: Map<string, CachedOptionSet>,
+        cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>,
         locale: ?string,
         trackedEntityTypeCollection: Map<string, TrackedEntityType>,
     ) {
         this.locale = locale;
         this.trackedEntityTypeCollection = trackedEntityTypeCollection;
         this.cachedTrackedEntityAttributes = cachedTrackedEntityAttributes;
+        this.cachedTrackedEntityTypes = cachedTrackedEntityTypes;
         this.dataElementFactory = new DataElementFactory(
             cachedTrackedEntityAttributes,
             cachedOptionSets,
@@ -70,19 +74,45 @@ class EnrollmentFactory {
         );
     }
 
+    _buildTetFeatureTypeField(trackedEntityTypeId: ?string) {
+        const teType = trackedEntityTypeId && this.cachedTrackedEntityTypes.get(trackedEntityTypeId);
+        if (!teType) {
+            return null;
+        }
+
+        const featureType = teType.featureType;
+        if (!featureType || !['POINT', 'POLYGON'].includes(featureType)) {
+            return null;
+        }
+
+        // $FlowFixMe
+        return DataElementFactory.buildtetFeatureType(featureType);
+    }
+
     async _buildSection(
-        cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>,
+        cachedProgramTrackedEntityAttributes: ?Array<CachedProgramTrackedEntityAttribute>,
+        cachedProgramTrackedEntityTypeId: ?string,
     ) {
+        const featureTypeField = this._buildTetFeatureTypeField(cachedProgramTrackedEntityTypeId);
+        if ((!cachedProgramTrackedEntityAttributes ||
+            cachedProgramTrackedEntityAttributes.length <= 0) &&
+            !featureTypeField) {
+            return null;
+        }
+
         const section = new Section((_this) => {
             _this.id = Section.MAIN_SECTION_ID;
             _this.name = i18n.t('Profile');
         });
 
-        // $FlowFixMe
-        await cachedProgramTrackedEntityAttributes.asyncForEach(async (ptea) => {
-            const element = await this.dataElementFactory.build(ptea);
-            element && section.addElement(element);
-        });
+        featureTypeField && section.addElement(featureTypeField);
+        if (cachedProgramTrackedEntityAttributes && cachedProgramTrackedEntityAttributes.length > 0) {
+            // $FlowFixMe
+            await cachedProgramTrackedEntityAttributes.asyncForEach(async (ptea) => {
+                const element = await this.dataElementFactory.build(ptea);
+                element && section.addElement(element);
+            });
+        }
 
         return section;
     }
@@ -94,11 +124,10 @@ class EnrollmentFactory {
             _this.featureType = EnrollmentFactory._getFeatureType(cachedProgram.featureType);
             _this.name = cachedProgram.displayName;
         });
-        let section;
-        if (cachedProgram.programTrackedEntityAttributes && cachedProgram.programTrackedEntityAttributes.length > 0) {
-            section = await this._buildSection(cachedProgram.programTrackedEntityAttributes);
-            enrollmentForm.addSection(section);
-        }
+
+        let section =
+            await this._buildSection(cachedProgram.programTrackedEntityAttributes, cachedProgram.trackedEntityTypeId);
+        section && enrollmentForm.addSection(section);
 
         if (cachedProgram.dataEntryForm) {
             if (!section) {

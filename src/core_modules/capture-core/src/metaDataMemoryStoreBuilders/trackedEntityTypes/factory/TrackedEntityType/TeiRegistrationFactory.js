@@ -14,7 +14,6 @@ import {
 } from '../../../../metaData';
 import type {
     CachedTrackedEntityType,
-    CachedTrackedEntityTypeAttribute,
     CachedTrackedEntityAttribute,
     CachedOptionSet,
 } from '../../../../storageControllers/cache.types';
@@ -39,6 +38,18 @@ class TeiRegistrationFactory {
         return element;
     }
 
+    static _buildTetFeatureTypeField(
+        cachedType: CachedTrackedEntityType,
+    ) {
+        const featureType = cachedType.featureType;
+        if (!featureType || !['POINT', 'POLYGON'].includes(featureType)) {
+            return null;
+        }
+
+        // $FlowFixMe
+        return DataElementFactory.buildtetFeatureType(featureType);
+    }
+
     dataElementFactory: DataElementFactory;
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>;
 
@@ -56,18 +67,29 @@ class TeiRegistrationFactory {
     }
 
     async _buildSection(
-        cachedTrackedEntityTypeAttributes: Array<CachedTrackedEntityTypeAttribute>,
+        cachedType: CachedTrackedEntityType,
     ) {
+        const featureTypeField = TeiRegistrationFactory._buildTetFeatureTypeField(cachedType);
+        const cachedTrackedEntityTypeAttributes = cachedType.trackedEntityTypeAttributes;
+        if ((!cachedTrackedEntityTypeAttributes ||
+            cachedTrackedEntityTypeAttributes.length <= 0) &&
+            !featureTypeField) {
+            return null;
+        }
+
         const section = new Section((_this) => {
             _this.id = Section.MAIN_SECTION_ID;
             _this.name = i18n.t('Profile');
         });
 
-        // $FlowFixMe
-        await cachedTrackedEntityTypeAttributes.asyncForEach(async (ttea) => {
-            const element = await this.dataElementFactory.build(ttea);
-            element && section.addElement(element);
-        });
+        featureTypeField && section.addElement(featureTypeField);
+        if (cachedTrackedEntityTypeAttributes && cachedTrackedEntityTypeAttributes.length > 0) {
+            // $FlowFixMe
+            await cachedTrackedEntityTypeAttributes.asyncForEach(async (ttea) => {
+                const element = await this.dataElementFactory.build(ttea);
+                element && section.addElement(element);
+            });
+        }
 
         return section;
     }
@@ -79,10 +101,9 @@ class TeiRegistrationFactory {
             _this.name = cachedType.displayName;
             _this.id = cachedType.id;
         });
-        if (cachedType.trackedEntityTypeAttributes && cachedType.trackedEntityTypeAttributes.length > 0) {
-            const section = await this._buildSection(cachedType.trackedEntityTypeAttributes);
-            foundation.addSection(section);
-        }
+
+        const section = await this._buildSection(cachedType);
+        section && foundation.addSection(section);
 
         return foundation;
     }

@@ -142,6 +142,7 @@ export type CachedTrackedEntityType = {
     trackedEntityTypeAttributes: ?Array<CachedTrackedEntityTypeAttribute>,
     translations: Array<CachedTrackedEntityTypeTranslation>,
     minAttributesRequiredToSearch: number,
+    featureType: ?string,
 }
 
 export type CachedProgram = {

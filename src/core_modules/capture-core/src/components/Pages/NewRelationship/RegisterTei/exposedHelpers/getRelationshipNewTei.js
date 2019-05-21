@@ -10,6 +10,7 @@ import { convertFormToClient, convertClientToServer } from '../../../../../conve
 import getDisplayName from '../../../../../trackedEntityInstances/getDisplayName';
 import convertDataEntryValuesToClientValues from '../../../../DataEntry/common/convertDataEntryValuesToClientValues';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
+import capitalizeFirstLetter from '../../../../../utils/string/capitalizeFirstLetter';
 
 function getTrackerProgramMetadata(programId: string) {
     const program = getTrackerProgramThrowIfNotFound(programId);
@@ -47,20 +48,38 @@ function getServerValuesForMainValues(
     const clientValues = convertDataEntryValuesToClientValues(
         values,
         meta,
-        null,
+        {},
         formFoundation,
     ) || {};
 
+    // potientally run this through a server to client converter for enrollment, the same way as for event
     const serverValues = Object
         .keys(clientValues)
         .reduce((acc, key) => {
-            const value = values[key];
+            const value = clientValues[key];
             const type = meta[key].type;
             acc[key] = convertClientToServer(value, type);
             return acc;
         }, {});
 
     return serverValues;
+}
+
+function getPossibleTetFeatureTypeKey(serverValues: Object) {
+    return Object
+        .keys(serverValues)
+        .find(key => key.startsWith('FEATURETYPE_'));
+}
+
+function buildGeometryProp(key: string, serverValues: Object) {
+    if (!serverValues[key]) {
+        return undefined;
+    }
+    const type = capitalizeFirstLetter(key.replace('FEATURETYPE_', '').toLocaleLowerCase());
+    return {
+        type,
+        coordinates: serverValues[key],
+    };
 }
 
 export default function getRelationshipNewTei(dataEntryId: string, itemId: string, state: ReduxState) {
@@ -88,6 +107,13 @@ export default function getRelationshipNewTei(dataEntryId: string, itemId: strin
         ...serverValuesForMainValues,
     } : null;
 
+    const tetFeatureTypeKey = getPossibleTetFeatureTypeKey(serverValuesForFormValues);
+    let geometry;
+    if (tetFeatureTypeKey) {
+        geometry = buildGeometryProp(tetFeatureTypeKey, serverValuesForFormValues);
+        delete serverValuesForFormValues[tetFeatureTypeKey];
+    }
+
     const teiPayload = {
         // $FlowFixMe
         attributes: Object
@@ -98,6 +124,7 @@ export default function getRelationshipNewTei(dataEntryId: string, itemId: strin
             })),
         orgUnit: orgUnit.id,
         trackedEntityType: tetId,
+        geometry,
         enrollments: enrollment ? [enrollment] : [],
     };
 

@@ -11,6 +11,7 @@ class TrackedEntityType {
     _teiRegistration: TeiRegistration;
     _attributes: Array<DataElement>;
     _searchGroups: Array<SearchGroup>;
+    _featureType: string;
 
     constructor(initFn: ?(_this: TrackedEntityType) => void) {
         this._attributes = [];

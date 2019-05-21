@@ -44,6 +44,7 @@ const getOptionSetFieldConfig = (metaData: MetaDataElement, options: Object) => 
         id: metaData.id,
         formId: options.formId,
         formHorizontal: options.formHorizontal,
+        fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
         optionGroups: optionSet.optionGroups,
         ...inputTypeProps,
     }, options, metaData);
