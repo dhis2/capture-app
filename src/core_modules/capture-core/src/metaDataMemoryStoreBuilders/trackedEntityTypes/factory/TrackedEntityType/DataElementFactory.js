@@ -1,6 +1,7 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
 import { pipe } from 'capture-core-utils';
 import type {
     CachedAttributeTranslation,
@@ -8,7 +9,12 @@ import type {
     CachedOptionSet,
     CachedTrackedEntityAttribute,
 } from '../../../../storageControllers/cache.types';
-import { DataElement, DataElementUnique, dataElementUniqueScope } from '../../../../metaData';
+import {
+    DataElement,
+    DataElementUnique,
+    dataElementUniqueScope,
+    dataElementTypes,
+} from '../../../../metaData';
 import { OptionSetFactory } from '../../../common/factory';
 import errorCreator from '../../../../utils/errorCreator';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
@@ -24,6 +30,19 @@ class DataElementFactory {
     static errorMessages = {
         TRACKED_ENTITY_ATTRIBUTE_NOT_FOUND: 'TrackedEntityAttributeId missing from trackedEntityTypeAttribute or trackedEntityAttribute not found',
     };
+
+    static buildtetFeatureType(featureType: 'POINT' | 'POLYGON') {
+        const dataElement = new DataElement((_this) => {
+            _this.id = `FEATURETYPE_${featureType}`;
+            _this.name = featureType === 'POINT' ? i18n.t('Coordinate') : i18n.t('Area');
+            _this.formName = _this.name;
+            _this.compulsory = false;
+            _this.displayInForms = true;
+            _this.disabled = false;
+            _this.type = featureType === 'POINT' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON;
+        });
+        return dataElement;
+    }
 
     locale: ?string;
     optionSetFactory: OptionSetFactory;

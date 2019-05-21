@@ -1,5 +1,6 @@
 // @flow
 import StorageController from 'capture-core-utils/storage/StorageController';
+import type { ProgramRule, ProgramRuleVariable } from 'capture-core-utils/RulesEngine/rulesEngine.types';
 import { ProgramFactory } from './factory';
 import {
     Program,
@@ -15,10 +16,10 @@ import type {
     CachedOptionSet,
     CachedRelationshipType,
     CachedTrackedEntityAttribute,
+    CachedTrackedEntityType,
     CachedCategory,
 } from '../../storageControllers/cache.types';
 import type { CachedProgramIndicator } from './getRulesAndVariablesFromIndicators';
-import type { ProgramRule, ProgramRuleVariable } from '../../RulesEngine/rulesEngine.types';
 
 
 function getPrograms(storageController: StorageController, storeName: string): Promise<Array<Object>> {
@@ -164,6 +165,7 @@ async function getBuiltPrograms(
     cachedOptionSets: Map<string, CachedOptionSet>,
     cachedRelationshipTypes: Array<CachedRelationshipType>,
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
+    cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>,
     cachedCategories: {[categoryId: string]: CachedCategory},
     trackedEntityTypeCollection: Map<string, TrackedEntityType>,
     locale: ?string,
@@ -176,6 +178,7 @@ async function getBuiltPrograms(
         cachedOptionSets,
         cachedRelationshipTypes,
         cachedTrackedEntityAttributes,
+        cachedTrackedEntityTypes,
         cachedCategories,
         trackedEntityTypeCollection,
         locale,
@@ -217,6 +220,7 @@ export default async function buildPrograms(
     locale: string,
     cachedOptionSets: Map<string, CachedOptionSet>,
     cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
+    cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>,
     trackedEntityTypeCollection: Map<string, TrackedEntityType>,
 ) {
     const [
@@ -234,6 +238,7 @@ export default async function buildPrograms(
         cachedOptionSets,
         cachedRelationshipTypes,
         cachedTrackedEntityAttributes,
+        cachedTrackedEntityTypes,
         cachedCategories,
         trackedEntityTypeCollection,
         locale,
