@@ -32,6 +32,7 @@ import type {
     CachedOptionSet,
     CachedRelationshipType,
     CachedTrackedEntityAttribute,
+    CachedTrackedEntityType,
     CachedProgramTrackedEntityAttribute,
 } from '../../../../storageControllers/cache.types';
 
@@ -83,6 +84,7 @@ class ProgramFactory {
         cachedOptionSets: Map<string, CachedOptionSet>,
         cachedRelationshipTypes: Array<CachedRelationshipType>,
         cachedTrackedEntityAttributes: Map<string, CachedTrackedEntityAttribute>,
+        cachedTrackedEntityTypes: Map<string, CachedTrackedEntityType>,
         cachedCategories: {[categoryId: string]: CachedCategory},
         trackedEntityTypeCollection: Map<string, TrackedEntityType>,
         locale: ?string,
@@ -97,6 +99,7 @@ class ProgramFactory {
         this.enrollmentFactory = new EnrollmentFactory(
             cachedTrackedEntityAttributes,
             cachedOptionSets,
+            cachedTrackedEntityTypes,
             locale,
             trackedEntityTypeCollection,
         );

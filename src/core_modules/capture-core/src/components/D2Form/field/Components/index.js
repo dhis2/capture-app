@@ -10,6 +10,7 @@ export { default as ImageFieldForForm } from './ImageField/ImageFieldForForm.com
 export { default as OptionSetSelectFieldForForm } from './OptionSetField/OptionSetSelectFieldForForm.component';
 export { default as OptionSetBoxesFieldForForm } from './OptionSetField/OptionSetBoxesFieldForForm.component';
 export { default as OrgUnitFieldForForm } from './OrgUnitField/OrgUnitFieldForForm.component';
+export { default as PolygonFieldForForm } from './PolygonField/PolygonFieldForForm.component';
 export { default as TextFieldForForm } from './TextField/TextFieldForForm.component';
 export { default as TrueOnlyFieldForForm } from './TrueOnlyField/TrueOnlyFieldForForm.component';
 export { default as UserNameFieldForForm } from './UserNameField/UserNameFieldForForm.component';
@@ -29,6 +30,7 @@ export { default as ImageFieldForCustomForm } from './ImageField/ImageFieldForCu
 export { default as OptionSetSelectFieldForCustomForm } from './OptionSetField/OptionSetSelectFieldForCustomForm.component';
 export { default as OptionSetBoxesFieldForCustomForm } from './OptionSetField/OptionSetBoxesFieldForCustomForm.component';
 export { default as OrgUnitFieldForCustomForm } from './OrgUnitField/OrgUnitFieldForCustomForm.component';
+export { default as PolygonFieldForCustomForm } from './PolygonField/PolygonFieldForCustomForm.component';
 export { default as TextFieldForCustomForm } from './TextField/TextFieldForCustomForm.component';
 export { default as TrueOnlyFieldForCustomForm } from './TrueOnlyField/TrueOnlyFieldForCustomForm.component';
 export { default as UserNameFieldForCustomForm } from './UserNameField/UserNameFieldForCustomForm.component';

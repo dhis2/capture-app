@@ -9,6 +9,7 @@ export { default as getFileResourceFieldConfig } from './fileResourceField/getFi
 export { default as getImageFieldConfig } from './imageField/getImageFieldConfig';
 export { default as getOptionSetFieldConfig } from './optionSetField/getOptionSetFieldConfig';
 export { default as getOrgUnitFieldConfig } from './orgUnitField/getOrgUnitFieldConfig';
+export { default as getPolygonFieldConfig } from './polygonField/getPolygonFieldConfig';
 export { default as getTextFieldConfig } from './textField/getTextFieldConfig';
 export { default as getTrueOnlyFieldConfig } from './trueOnlyField/getTrueOnlyFieldConfig';
 export { default as getUserNameFieldConfig } from './userNameField/getUserNameFieldConfig';
@@ -27,6 +28,7 @@ export { default as getFileResourceFieldConfigForCustomForm } from './fileResour
 export { default as getImageFieldConfigForCustomForm } from './imageField/getImageFieldConfigForCustomForm';
 export { default as getOptionSetFieldConfigForCustomForm } from './optionSetField/getOptionSetFieldConfigForCustomForm';
 export { default as getOrgUnitFieldConfigForCustomForm } from './orgUnitField/getOrgUnitFieldConfigForCustomForm';
+export { default as getPolygonFieldConfigForCustomForm } from './polygonField/getPolygonFieldConfigForCustomForm';
 export { default as getTextFieldConfigForCustomForm } from './textField/getTextFieldConfigForCustomForm';
 export { default as getTrueOnlyFieldConfigForCustomForm } from './trueOnlyField/getTrueOnlyFieldConfigForCustomForm';
 export { default as getUserNameFieldConfigForCustomForm } from './userNameField/getUserNameFieldConfigForCustomForm';

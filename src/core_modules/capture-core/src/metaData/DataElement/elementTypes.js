@@ -31,6 +31,7 @@ const elementTypeCodes = [
     'IMAGE',
     'AGE',
     'COORDINATE',
+    'POLYGON',
     'USERNAME',
     unknownTypeCode,
 ];

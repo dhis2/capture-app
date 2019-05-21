@@ -1,17 +1,10 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { withTheme } from '@material-ui/core/styles';
 import { Enrollment, RenderFoundation } from '../../../../../metaData';
 import ConfiguredEnrollment from './ConfiguredEnrollment.component';
 import { DATA_ENTRY_ID } from '../registerTei.const';
-
-const getStyles = theme => ({
-    fieldLabelMediaBased: {
-        [theme.breakpoints.down(523)]: {
-            paddingTop: '0px !important',
-        },
-    },
-});
+import enrollmentClasses from './enrollment.mod.css';
 
 type Props = {
     enrollmentMetadata: Enrollment,
@@ -33,7 +26,7 @@ class NewEnrollmentRelationship extends Component<Props> {
         super(props);
         this.fieldOptions = {
             theme: props.theme,
-            fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
+            fieldLabelMediaBasedClass: enrollmentClasses.fieldLabelMediaBased,
         };
     }
 
@@ -64,4 +57,4 @@ class NewEnrollmentRelationship extends Component<Props> {
 }
 
 // $FlowFixMe
-export default withStyles(getStyles)(withTheme()(NewEnrollmentRelationship));
+export default withTheme()(NewEnrollmentRelationship);

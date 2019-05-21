@@ -1,17 +1,10 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { withTheme } from '@material-ui/core/styles';
 import { RenderFoundation, TeiRegistration } from '../../../../../metaData';
 import ConfiguredTei from './ConfiguredTei.component';
 import { DATA_ENTRY_ID } from '../registerTei.const';
-
-const getStyles = theme => ({
-    fieldLabelMediaBased: {
-        [theme.breakpoints.down(523)]: {
-            paddingTop: '0px !important',
-        },
-    },
-});
+import teiClasses from './trackedEntityInstance.mod.css';
 
 type Props = {
     teiRegistrationMetadata: ?TeiRegistration,
@@ -30,7 +23,7 @@ class RelationshipTrackedEntityInstance extends Component<Props> {
         super(props);
         this.fieldOptions = {
             theme: props.theme,
-            fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
+            fieldLabelMediaBasedClass: teiClasses.fieldLabelMediaBased,
         };
     }
 
@@ -59,4 +52,4 @@ class RelationshipTrackedEntityInstance extends Component<Props> {
 }
 
 // $FlowFixMe
-export default withStyles(getStyles)(withTheme()(RelationshipTrackedEntityInstance));
+export default withTheme()(RelationshipTrackedEntityInstance);
