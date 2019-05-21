@@ -14,7 +14,6 @@ import {
 } from '../../../../metaData';
 import type {
     CachedTrackedEntityType,
-    CachedTrackedEntityTypeAttribute,
     CachedTrackedEntityAttribute,
     CachedOptionSet,
 } from '../../../../storageControllers/cache.types';
