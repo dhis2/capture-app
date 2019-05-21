@@ -14,7 +14,9 @@ module.exports = {
         ];
 
         config.moduleNameMapper = Object.assign({}, config.moduleNameMapper, {
-            "^capture-core(.*)$": "<rootDir>/src/core_modules/capture-core/src$1"
+            "^capture-core-utils(.*)$": "<rootDir>/src/core_modules/capture-core-utils/src$1",
+            "^capture-core(.*)$": "<rootDir>/src/core_modules/capture-core/src$1",
+            "^capture-ui(.*)$": "<rootDir>/src/core_modules/capture-ui/src$1",
         });
         
         return config;
