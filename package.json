@@ -54,7 +54,7 @@
     "react-redux": "^5.0.7",
     "react-router-redux": "^5.0.0-alpha.9",
     "react-rte": "^0.16.1",
-    "react-scripts": "1.1.4",
+    "react-scripts": "3.0.1",
     "react-select": "^1.2.1",
     "react-select-fast-filter-options": "^0.2.3",
     "react-transform-tree": "^1.0.35",
@@ -71,7 +71,7 @@
   },
   "scripts": {
     "manualBuild": "yarn localize && d2-manifest package.json ./public/manifest.webapp --manifest.activities.dhis.href='../../..' && GENERATE_SOURCEMAP=false react-app-rewired build && mkdirp buildzip/ && pushd build && bestzip ../buildzip/NewCaptureApp.zip * && popd",
-    "start": "react-app-rewired start",
+    "start": "react-scripts start",
     "build": "yarn localize && d2-manifest package.json ./public/manifest.webapp && GENERATE_SOURCEMAP=false react-app-rewired build && cp ./package.json ./build/package.json",
     "test": "react-app-rewired test --env=jsdom",
     "test:debug": "react-app-rewired --inspect-brk test --runInBand --env=jsdom",
@@ -129,5 +129,17 @@
         "href": ".."
       }
     }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

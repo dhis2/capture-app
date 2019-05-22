@@ -22,7 +22,8 @@ function setLogLevel() {
         [environments.test]: log.levels.INFO,
         [environments.prod]: log.levels.ERROR,
     };
-
+    debugger;
+    var x = process.env;
     // $FlowSuppress
     let level = levels[process.env.NODE_ENV];
     if (!level && level !== 0) {

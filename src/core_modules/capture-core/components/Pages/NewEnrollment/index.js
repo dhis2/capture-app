@@ -17,6 +17,5 @@ export {
 export {
     openDataEntryActionTypes,
     openNewEnrollmentInDataEntryEpic,
-    runRulesOnNewEnrollmentFieldUpdateEpic,
     saveNewEnrollmentEpic,
 } from './DataEntry';
