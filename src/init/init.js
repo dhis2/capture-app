@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable import/prefer-default-export */
 import log from 'loglevel';
-import { init, config, getUserSettings, getManifest } from 'd2/lib/d2';
+import { init, config, getUserSettings } from 'd2/lib/d2';
 import environments from 'capture-core/constants/environments';
 // import moment from 'capture-core/utils/moment/momentResolver';
 import moment from 'moment';
@@ -22,8 +22,6 @@ function setLogLevel() {
         [environments.test]: log.levels.INFO,
         [environments.prod]: log.levels.ERROR,
     };
-    debugger;
-    var x = process.env;
     // $FlowSuppress
     let level = levels[process.env.NODE_ENV];
     if (!level && level !== 0) {
@@ -33,11 +31,18 @@ function setLogLevel() {
     log.setLevel(level);
 }
 
-async function initializeManifest() {
-    const manifest = await getManifest('manifest.webapp');
-    const baseUrl = manifest.getBaseUrl();
+function setConfig() {
+    const { REACT_APP_DHIS2_BASE_URL, REACT_APP_DHIS2_AUTHORIZATION, NODE_ENV } = process.env;
+    //const baseUrl = NODE_ENV === environments.prod ? REACT_APP_DHIS2_BASE_URL : '';
+    const baseUrl = REACT_APP_DHIS2_BASE_URL;
     config.baseUrl = `${baseUrl}/api`;
-    log.info(`Loading: ${manifest.name} v${manifest.version}`);
+
+    if (NODE_ENV !== environments.prod) {
+        config.headers = {
+            'X-Requested-With': 'XMLHttpRequest',
+            Authorization: REACT_APP_DHIS2_AUTHORIZATION,
+        };
+    }
 }
 
 function isLangRTL(code) {
@@ -146,11 +151,10 @@ export async function initializeAsync() {
     setLogLevel();
 
     // initialize d2
-    await initializeManifest();
-    const userSettings = await getUserSettings();
+    setConfig();
     const d2 = await init();
+    const userSettings = await getUserSettings();
     setD2(d2);
-
     // initialize storage controllers
     await initControllersAsync();
 

@@ -34,6 +34,7 @@ function convertResourceForView(clientValue: FileClientValue) {
         <a
             href={clientValue.url}
             target="_blank"
+            rel="noopener noreferrer"
             onClick={(event) => { event.stopPropagation(); }}
         >
             {clientValue.name}

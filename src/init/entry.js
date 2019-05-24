@@ -26,10 +26,14 @@ import { addBeforeUnloadEventListener } from '../unload';
 
 const DOM_ID = 'app';
 
-// change the insertion point for jss styles so they don't collide
+// Change the insertion point for jss styles.
+// For this app the insertion point should be below the css.
+var insertionPoint = document.createElement('noscript');
+insertionPoint.setAttribute('id', 'jss-insertion-point');
+document.head.appendChild(insertionPoint);
 const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());
-jss.options.insertionPoint = document.getElementById('jss-insertion-point');
+jss.options.insertionPoint = insertionPoint;
 
 function runApp(domElement: HTMLElement, store: ReduxStore, history: HashHistory) {
     store.dispatch(loadApp());

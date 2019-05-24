@@ -9,7 +9,7 @@ function getStorageName(mainStorageName: string) {
 }
 
 function getCacheVersion() {
-    const appCacheVersionAsString = appPackage.CACHE_VERSION; // eslint-disable-line
+    const appCacheVersionAsString = process.env.REACT_APP_CACHE_VERSION;
     if (!appCacheVersionAsString) {
         throw new Error('cache version not specified');
     }

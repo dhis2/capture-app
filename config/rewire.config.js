@@ -110,7 +110,7 @@ function rewirePlugins(config) {
     const updatedPlugins = config.plugins.map(plugin => {
         if(plugin instanceof webpack.DefinePlugin){
             plugin.definitions = Object.assign({}, plugin.definitions, {
-                DHIS_CONFIG: JSON.stringify(dhisConfig),
+                // DHIS_CONFIG: JSON.stringify(dhisConfig),
                 "appPackage.CACHE_VERSION": JSON.stringify(process.env.npm_package_cacheVersion),
             });          
         }

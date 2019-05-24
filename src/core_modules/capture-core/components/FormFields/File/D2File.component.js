@@ -154,6 +154,7 @@ class D2File extends Component<Props> {
                                             className={!isVertical && classes.horizontalLink}
                                             target="_blank"
                                             href={fileUrl}
+                                            rel="noopener noreferrer"
                                         >
                                             {value.name}
                                         </a>

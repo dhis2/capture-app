@@ -28,6 +28,7 @@
     "draft-js": "^0.10.5",
     "fake-indexeddb": "^2.0.4",
     "html-webpack-plugin": "^3.2.0",
+    "http-proxy-middleware": "^0.19.1",
     "husky": "^1.0.0-rc.8",
     "jest-localstorage-mock": "^2.2.0",
     "jquery": "^3.3.1",

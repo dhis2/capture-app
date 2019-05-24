@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import classNames from 'classnames';
-import defaultClasses from './textInput.mod.css';
+import defaultClasses from './textInput.module.css';
 
 type Classes = {
     input?: ?string,

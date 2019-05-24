@@ -153,6 +153,7 @@ class D2Image extends Component<Props> {
                                             <a
                                                 target="_blank"
                                                 href={imageUrl}
+                                                rel="noopener noreferrer"
                                             >
                                                 <img src={imageUrl} alt="" className={classes.image} />
                                             </a>
@@ -165,6 +166,7 @@ class D2Image extends Component<Props> {
                                             <a
                                                 target="_blank"
                                                 href={imageUrl}
+                                                rel="noopener noreferrer"
                                             >
                                                 {value.name}
                                             </a>
