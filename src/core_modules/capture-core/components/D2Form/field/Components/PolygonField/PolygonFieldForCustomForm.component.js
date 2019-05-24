@@ -14,7 +14,7 @@ import {
     withDisabledFieldCalculation,
     withCustomElementContainer,
 } from '../internal';
-import customFormStyles from './polygonFieldCustomForm.mod.css';
+import customFormStyles from './polygonFieldCustomForm.module.css';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;
 

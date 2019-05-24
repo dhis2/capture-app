@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { anchorPositions, modes, absoluteDirections } from './datePopup.const';
-import defaultClasses from './datePopup.mod.css';
+import defaultClasses from './datePopup.module.css';
 
 type Props = {
     open: boolean,

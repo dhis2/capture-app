@@ -7,7 +7,7 @@ import L from 'leaflet';
 import { Map, TileLayer, FeatureGroup } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search';
 import EditControl from 'react-leaflet-draw/lib/EditControl';
-import defaultClasses from './polygonField.mod.css';
+import defaultClasses from './polygonField.module.css';
 import './styles.css';
 import Button from '../Buttons/Button.component';
 import DeleteControl from './DeleteControl.component';

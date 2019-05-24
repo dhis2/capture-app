@@ -2,7 +2,7 @@
 
 import React from 'react';
 import classNames from 'classnames';
-import defaultClasses from './shrinkLabel.mod.css';
+import defaultClasses from './shrinkLabel.module.css';
 
 function InputLabel(props) {
     const {

@@ -14,7 +14,7 @@ import {
     withDisabledFieldCalculation,
     withCustomElementContainer,
 } from '../internal';
-import customFormStyles from './coordinateFieldCustomForm.mod.css';
+import customFormStyles from './coordinateFieldCustomForm.module.css';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;
 

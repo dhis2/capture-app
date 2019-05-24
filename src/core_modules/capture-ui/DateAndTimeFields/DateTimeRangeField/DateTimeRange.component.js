@@ -3,7 +3,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import DateTimeField from '../DateTimeField/DateTime.component';
 import withFocusSaver from '../../HOC/withFocusSaver';
-import defaultClasses from './dateTimeRangeField.mod.css';
+import defaultClasses from './dateTimeRangeField.module.css';
 import InnerMessage from '../../internal/InnerMessage/InnerMessage.component';
 
 const RangeInputField = withFocusSaver()(DateTimeField);

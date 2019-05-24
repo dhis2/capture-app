@@ -16,7 +16,7 @@ import {
     withRequiredFieldCalculation,
     withDisabledFieldCalculation,
 } from '../internal';
-import labelTypeClasses from '../../buildField.mod.css';
+import labelTypeClasses from '../../buildField.module.css';
 
 const getFilteredProps = (props: Object) => {
     const { formHorizontal, fieldLabelMediaBasedClass, ...passOnProps } = props;

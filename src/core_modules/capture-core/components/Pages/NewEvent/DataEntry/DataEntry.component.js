@@ -41,7 +41,7 @@ import withIndicatorOutput from '../../../DataEntry/dataEntryOutput/withIndicato
 import withErrorOutput from '../../../DataEntry/dataEntryOutput/withErrorOutput';
 import withWarningOutput from '../../../DataEntry/dataEntryOutput/withWarningOutput';
 import newEventSaveTypes from './newEventSaveTypes';
-import labelTypeClasses from './dataEntryFieldLabels.mod.css';
+import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import { makeWritableRelationshipTypesSelector } from './dataEntry.selectors';
 

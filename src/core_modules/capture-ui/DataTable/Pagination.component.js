@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import defaultClasses from './table.mod.css';
+import defaultClasses from './table.module.css';
 
 type Props = {
     rowsCount: number,

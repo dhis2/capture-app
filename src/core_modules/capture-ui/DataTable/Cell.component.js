@@ -2,7 +2,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import defaultClasses from './table.mod.css';
+import defaultClasses from './table.module.css';
 
 type Props = {
     children: React.Node,

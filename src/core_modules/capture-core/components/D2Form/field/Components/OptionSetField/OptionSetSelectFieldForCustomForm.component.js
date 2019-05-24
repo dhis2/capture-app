@@ -15,7 +15,7 @@ import {
     withCustomElementContainer,
 } from '../internal';
 import withOptionsIconElement from './withOptionsIconElement';
-import customFormStyles from './optionSetSelectFieldForCustomForm.mod.css';
+import customFormStyles from './optionSetSelectFieldForCustomForm.module.css';
 import withRulesOptionVisibilityHandler from './withRulesOptionVisibilityHandler';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;

@@ -6,7 +6,7 @@ import UncheckedIcon from '../../../Icons/SingleSelectionUncheckedIcon.component
 import SingleSelectBox from './SingleSelectBox/SingleSelectBox.component';
 import withFocusHandler from './SingleSelectBox/withFocusHandler';
 import orientations from '../../../constants/orientations.const';
-import defaultClasses from './singleSelectionBoxes.mod.css';
+import defaultClasses from './singleSelectionBoxes.module.css';
 import type { OptionRendererInputData, OptionsArray, OptionRenderer } from '../selectBoxes.types';
 
 const SingleSelectBoxWrapped = withFocusHandler()(SingleSelectBox);

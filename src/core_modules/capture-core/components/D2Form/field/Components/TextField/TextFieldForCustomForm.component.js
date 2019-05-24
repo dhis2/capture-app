@@ -14,7 +14,7 @@ import {
     withDisabledFieldCalculation,
     withCustomElementContainer,
 } from '../internal';
-import customFormStyles from './textFieldCustomForm.mod.css';
+import customFormStyles from './textFieldCustomForm.module.css';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;
 

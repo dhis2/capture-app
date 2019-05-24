@@ -2,7 +2,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import Label from '../internal/Label/Label.component';
-import defaultClasses from './withLabel.mod.css';
+import defaultClasses from './withLabel.module.css';
 
 type LabelHOCClasses = {
     labelContainerClass?: ?string,

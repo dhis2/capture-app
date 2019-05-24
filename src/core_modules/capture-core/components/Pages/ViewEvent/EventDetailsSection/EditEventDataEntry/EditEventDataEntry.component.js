@@ -32,7 +32,7 @@ import {
 } from '../../../../FormFields/New';
 
 import inMemoryFileStore from '../../../../DataEntry/file/inMemoryFileStore';
-import labelTypeClasses from '../../../EditEvent/DataEntry/dataEntryFieldLabels.mod.css';
+import labelTypeClasses from '../../../EditEvent/DataEntry/dataEntryFieldLabels.module.css';
 
 const getStyles = (theme: Theme) => ({
     dataEntryContainer: {

@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import DateField from '../DateField/Date.component';
 import withFocusSaver from '../../HOC/withFocusSaver';
 import withShrinkLabel from '../../HOC/withShrinkLabel';
-import defaultClasses from './dateRangeField.mod.css';
+import defaultClasses from './dateRangeField.module.css';
 import InnerMessage from '../../internal/InnerMessage/InnerMessage.component';
 
 

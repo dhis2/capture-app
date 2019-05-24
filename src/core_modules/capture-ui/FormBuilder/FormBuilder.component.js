@@ -8,7 +8,7 @@ import type { CancelablePromise } from 'capture-core-utils/cancelablePromise/mak
 import * as React from 'react';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import isObject from 'd2-utilizr/lib/isObject';
-import defaultClasses from './formBuilder.mod.css';
+import defaultClasses from './formBuilder.module.css';
 
 export type ValidatorContainer = {
     validator: (value: any, validationContext: ?Object) => boolean,

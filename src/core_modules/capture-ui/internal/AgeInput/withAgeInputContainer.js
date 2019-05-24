@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import defaultClasses from './ageInput.mod.css';
+import defaultClasses from './ageInput.module.css';
 
 type Props = {
     message?: ?any,

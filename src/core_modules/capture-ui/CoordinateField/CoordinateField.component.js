@@ -8,7 +8,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import IconButton from '@material-ui/core/IconButton';
 import AddLocationIcon from '../Icons/AddLocationIcon.component';
 import CoordinateInput from '../internal/CoordinateInput/CoordinateInput.component';
-import defaultClasses from './coordinateField.mod.css';
+import defaultClasses from './coordinateField.module.css';
 import orientations from '../constants/orientations.const';
 import Button from '../Buttons/Button.component';
 

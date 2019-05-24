@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
-import defaultClasses from './selectField.mod.css';
+import defaultClasses from './selectField.module.css';
 
 type Props = {
     onSetFocus: () => void,

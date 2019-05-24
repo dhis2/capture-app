@@ -7,7 +7,7 @@ import withFocusSaver from '../HOC/withFocusSaver';
 import withShrinkLabel from '../HOC/withShrinkLabel';
 import withFocusHandler from '../internal/TextInput/withFocusHandler';
 import TextInput from '../internal/TextInput/TextInput.component';
-import defaultClasses from './textRangeField.mod.css';
+import defaultClasses from './textRangeField.module.css';
 import InnerMessage from '../internal/InnerMessage/InnerMessage.component';
 
 const RangeInputField = withFocusSaver()(withShrinkLabel()(withFocusHandler()(TextInput)));

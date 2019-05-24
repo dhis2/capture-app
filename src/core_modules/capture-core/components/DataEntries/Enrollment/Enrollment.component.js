@@ -27,7 +27,7 @@ import {
     orientations,
 } from '../../FormFields/New';
 
-import labelTypeClasses from './fieldLabels.mod.css';
+import labelTypeClasses from './fieldLabels.module.css';
 import {
     getEnrollmentDateValidatorContainer,
     getIncidentDateValidatorContainer,

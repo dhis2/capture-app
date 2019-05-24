@@ -39,7 +39,7 @@ import withFeedbackOutput from '../../../DataEntry/dataEntryOutput/withFeedbackO
 import withErrorOutput from '../../../DataEntry/dataEntryOutput/withErrorOutput';
 import withWarningOutput from '../../../DataEntry/dataEntryOutput/withWarningOutput';
 import withBrowserBackWarning from '../../../DataEntry/withBrowserBackWarning';
-import labelTypeClasses from './dataEntryFieldLabels.mod.css';
+import labelTypeClasses from './dataEntryFieldLabels.module.css';
 
 const getStyles = (theme: Theme) => ({
     dataEntryContainer: {

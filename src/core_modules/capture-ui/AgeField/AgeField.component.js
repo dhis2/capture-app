@@ -7,7 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 import AgeNumberInput from '../internal/AgeInput/AgeNumberInput.component';
 import AgeDateInput from '../internal/AgeInput/AgeDateInput.component';
-import defaultClasses from './ageField.mod.css';
+import defaultClasses from './ageField.module.css';
 import orientations from '../constants/orientations.const';
 import withInternalChangeHandler from '../HOC/withInternalChangeHandler';
 

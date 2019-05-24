@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import defaultClasses from './textField.mod.css';
+import defaultClasses from './textField.module.css';
 import TextInput from '../internal/TextInput/TextInput.component';
 import withFocusHandler from '../internal/TextInput/withFocusHandler';
 

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
-import defaultClasses from './label.mod.css';
+import defaultClasses from './label.module.css';
 
 type Classes = {
     label?: ?string,

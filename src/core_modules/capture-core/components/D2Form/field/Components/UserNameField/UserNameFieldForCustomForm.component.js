@@ -14,7 +14,7 @@ import {
     withDisabledFieldCalculation,
     withCustomElementContainer,
 } from '../internal';
-import customFormStyles from './userNameFieldCustomForm.mod.css';
+import customFormStyles from './userNameFieldCustomForm.module.css';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;
 

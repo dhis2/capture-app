@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import classNames from 'classnames';
-import defaultClasses from './divider.mod.css';
+import defaultClasses from './divider.module.css';
 
 type Props = {
     className?: ?string,

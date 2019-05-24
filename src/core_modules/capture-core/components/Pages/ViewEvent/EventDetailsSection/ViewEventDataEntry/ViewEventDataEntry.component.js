@@ -21,7 +21,7 @@ import {
     ViewModeField,
     withFilterProps,
 } from '../../../../FormFields/New';
-import labelTypeClasses from './viewEventDataEntryFieldLabels.mod.css';
+import labelTypeClasses from './viewEventDataEntryFieldLabels.module.css';
 
 const valueConvertFn = pipe(convertFormToClient, convertClientToView);
 

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import ShrinkLabel from '../internal/ShrinkLabel/ShrinkLabel.component';
-import defaultClasses from './withShrinkLabel.mod.css';
+import defaultClasses from './withShrinkLabel.module.css';
 
 type Props = {
     inFocus?: ?boolean,

@@ -5,7 +5,7 @@ import {
     withFilterProps,
     ViewModeField,
 } from '../../../../FormFields/New';
-import labelTypeClasses from '../../buildField.mod.css';
+import labelTypeClasses from '../../buildField.module.css';
 
 
 const getFilteredProps = (props: Object) => {

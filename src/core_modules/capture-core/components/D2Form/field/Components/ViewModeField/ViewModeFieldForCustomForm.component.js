@@ -5,7 +5,7 @@ import {
 import {
     withCustomElementContainer,
 } from '../internal';
-import customFormStyles from './ViewModeFieldCustomForm.mod.css';
+import customFormStyles from './ViewModeFieldCustomForm.module.css';
 
 const getContainerClass = () => customFormStyles.defaultCustomContainer;
 

@@ -15,7 +15,7 @@ import {
     withRequiredFieldCalculation,
     withDisabledFieldCalculation,
 } from '../internal';
-import labelTypeClasses from '../../buildField.mod.css';
+import labelTypeClasses from '../../buildField.module.css';
 import withRulesOptionVisibilityHandler from './withRulesOptionVisibilityHandler';
 
 const getFilteredProps = (props: Object) => {

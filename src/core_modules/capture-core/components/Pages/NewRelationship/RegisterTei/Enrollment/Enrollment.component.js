@@ -4,7 +4,7 @@ import { withTheme } from '@material-ui/core/styles';
 import { Enrollment, RenderFoundation } from '../../../../../metaData';
 import ConfiguredEnrollment from './ConfiguredEnrollment.component';
 import { DATA_ENTRY_ID } from '../registerTei.const';
-import enrollmentClasses from './enrollment.mod.css';
+import enrollmentClasses from './enrollment.module.css';
 
 type Props = {
     enrollmentMetadata: Enrollment,
