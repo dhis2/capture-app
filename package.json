@@ -1,7 +1,7 @@
 {
   "name": "capture-app",
   "homepage": ".",
-  "version": "32.0.1",
+  "version": "33.0.1",
   "cacheVersion": "6",
   "private": false,
   "dependencies": {
@@ -27,7 +27,6 @@
     "date-fns": "^1.29.0",
     "draft-js": "^0.10.5",
     "fake-indexeddb": "^2.0.4",
-    "html-webpack-plugin": "^3.2.0",
     "http-proxy-middleware": "^0.19.1",
     "husky": "^1.0.0-rc.8",
     "jest-localstorage-mock": "^2.2.0",
@@ -71,11 +70,11 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "manualBuild": "yarn localize && d2-manifest package.json ./public/manifest.webapp --manifest.activities.dhis.href='../../..' && GENERATE_SOURCEMAP=false react-app-rewired build && mkdirp buildzip/ && pushd build && bestzip ../buildzip/NewCaptureApp.zip * && popd",
+    "manualBuild": "yarn localize && d2-manifest package.json ./public/manifest.webapp && REACT_APP_DHIS2_BASE_URL='../../..' react-scripts build && mkdirp buildzip/ && pushd build && bestzip ../buildzip/NewCaptureApp.zip * && popd",
     "start": "react-scripts start",
-    "build": "yarn localize && d2-manifest package.json ./public/manifest.webapp && GENERATE_SOURCEMAP=false react-app-rewired build && cp ./package.json ./build/package.json",
-    "test": "react-app-rewired test --env=jsdom",
-    "test:debug": "react-app-rewired --inspect-brk test --runInBand --env=jsdom",
+    "build": "yarn localize && d2-manifest package.json ./public/manifest.webapp && GENERATE_SOURCEMAP=false react-scripts build && cp ./package.json ./build/package.json",
+    "test": "react-scripts test --env=jsdom",
+    "test:debug": "react-scripts --inspect-brk test --runInBand --env=jsdom",
     "eject": "react-scripts eject",
     "add-flow-types": "flow-typed install",
     "extract-pot": "d2-i18n-extract -p src/ -o i18n/",
@@ -89,19 +88,15 @@
     }
   },
   "devDependencies": {
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
     "bestzip": "^1.1.4",
     "docdash": "^0.4.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint-config-dhis2": "^3.0.7",
     "eslint-import-resolver-webpack": "^0.9.0",
-    "eslint-plugin-flowtype": "^2.46.2",
     "eslint-plugin-import": "^2.11.0",
     "expose-loader": "^0.7.5",
     "flow-bin": "^0.87.0",
-    "flow-typed": "^2.4.0",
     "jsdoc": "^3.5.5",
     "jsdoc-babel": "^0.4.0",
     "jsdoc-export-default-interop": "^0.3.1",
@@ -111,14 +106,14 @@
     "svg-url-loader": "^2.3.2"
   },
   "manifest.webapp": {
-    "version": "0.9.4",
+    "version": "1.0.1",
     "name": "Capture",
     "description": "Capture App",
     "launch_path": "index.html",
     "icons": {
-      "16": "/assets/icons/track16.png",
-      "48": "/assets/icons/track48.png",
-      "128": "/assets/icons/track128.png"
+      "16": "assets/icons/track16.png",
+      "48": "assets/icons/track48.png",
+      "128": "assets/icons/track128.png"
     },
     "developer": {
       "name": "HISP",

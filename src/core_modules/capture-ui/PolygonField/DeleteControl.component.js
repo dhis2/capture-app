@@ -16,16 +16,18 @@ export default class DeleteControl extends MapControl<any, Props> {
     componentWillMount() {
         const deleteControl = L.control({ position: 'topright' });
         const text = i18n.t('Delete polygon');
+        // eslint-disable-next-line
         const jsx = (
-            <div className="leaflet-draw-toolbar leaflet-bar">
-                <a
+            <div className="leaflet-draw-toolbar leaflet-bar">{
+                // eslint-disable-next-line
+                }<a
                     className={classNames('leaflet-draw-edit-remove', { 'leaflet-disabled': this.props.disabled })}
                     onClick={this.onClick}
                     title={text}
                     role="button"
                     tabIndex="0"
                 >
-                    <span />
+                    
                 </a>
             </div>
         );

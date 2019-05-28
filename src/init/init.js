@@ -33,8 +33,7 @@ function setLogLevel() {
 
 function setConfig() {
     const { REACT_APP_DHIS2_BASE_URL, REACT_APP_DHIS2_AUTHORIZATION, NODE_ENV } = process.env;
-    //const baseUrl = NODE_ENV === environments.prod ? REACT_APP_DHIS2_BASE_URL : '';
-    const baseUrl = REACT_APP_DHIS2_BASE_URL;
+    const baseUrl = REACT_APP_DHIS2_BASE_URL || '';
     config.baseUrl = `${baseUrl}/api`;
 
     if (NODE_ENV !== environments.prod) {
