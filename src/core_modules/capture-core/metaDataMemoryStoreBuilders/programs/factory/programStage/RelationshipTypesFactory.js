@@ -51,12 +51,12 @@ class RelationshipTypesFactory {
     }
 
     _buildRelationshipType(cachedRelationshipType: CachedRelationshipType) {
-        return new RelationshipType((_this) => {
-            _this.id = cachedRelationshipType.id;
-            _this.name = cachedRelationshipType.displayName;
-            _this.from = this._convertConstraint(cachedRelationshipType.fromConstraint);
-            _this.to = this._convertConstraint(cachedRelationshipType.toConstraint);
-            _this.access = cachedRelationshipType.access;
+        return new RelationshipType((o) => {
+            o.id = cachedRelationshipType.id;
+            o.name = cachedRelationshipType.displayName;
+            o.from = this._convertConstraint(cachedRelationshipType.fromConstraint);
+            o.to = this._convertConstraint(cachedRelationshipType.toConstraint);
+            o.access = cachedRelationshipType.access;
         });
     }
 

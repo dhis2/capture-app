@@ -46,11 +46,11 @@ function converter(d2Model) {
     }));
 }
 
-export default new ApiSpecification((_this) => {
-    _this.modelName = 'trackedEntityTypes';
-    _this.modelGetterType = getterTypes.LIST;
-    _this.queryParams = {
+export default new ApiSpecification((o) => {
+    o.modelName = 'trackedEntityTypes';
+    o.modelGetterType = getterTypes.LIST;
+    o.queryParams = {
         fields: '*, trackedEntityTypeAttributes[*]',
     };
-    _this.converter = converter;
+    o.converter = converter;
 });

@@ -46,9 +46,9 @@ export function getDataEntryValues(
         // $FlowSuppress :flow filter problem
         .filter(propToInclude => propToInclude.type)
         // $FlowSuppress :flow filter problem
-        .map((propToInclude: DataEntryPropToIncludeStandard) => new DataElement((_this) => {
-            _this.id = propToInclude.id;
-            _this.type = propToInclude.type;
+        .map((propToInclude: DataEntryPropToIncludeStandard) => new DataElement((o) => {
+            o.id = propToInclude.id;
+            o.type = propToInclude.type;
         }))
         .map(dataElement => ({
             id: dataElement.id,

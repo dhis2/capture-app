@@ -2,11 +2,11 @@
 import ApiSpecification from '../ApiSpecificationDefinition/ApiSpecification';
 import getterTypes from '../fetcher/getterTypes.const';
 
-export default new ApiSpecification((_this) => {
-    _this.modelName = 'trackedEntityAttributes';
-    _this.modelGetterType = getterTypes.LIST;
-    _this.queryParams = {
+export default new ApiSpecification((o) => {
+    o.modelName = 'trackedEntityAttributes';
+    o.modelGetterType = getterTypes.LIST;
+    o.queryParams = {
         fields: ':all,optionSet[id,version],trackedEntity[id,displayName]',
     };
-    _this.converter = d2Model => d2Model;
+    o.converter = d2Model => d2Model;
 });

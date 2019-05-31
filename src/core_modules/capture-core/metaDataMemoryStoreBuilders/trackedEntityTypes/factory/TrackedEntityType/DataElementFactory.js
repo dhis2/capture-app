@@ -32,14 +32,14 @@ class DataElementFactory {
     };
 
     static buildtetFeatureType(featureType: 'POINT' | 'POLYGON') {
-        const dataElement = new DataElement((_this) => {
-            _this.id = `FEATURETYPE_${featureType}`;
-            _this.name = featureType === 'POINT' ? i18n.t('Coordinate') : i18n.t('Area');
-            _this.formName = _this.name;
-            _this.compulsory = false;
-            _this.displayInForms = true;
-            _this.disabled = false;
-            _this.type = featureType === 'POINT' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON;
+        const dataElement = new DataElement((o) => {
+            o.id = `FEATURETYPE_${featureType}`;
+            o.name = featureType === 'POINT' ? i18n.t('Coordinate') : i18n.t('Area');
+            o.formName = o.name;
+            o.compulsory = false;
+            o.displayInForms = true;
+            o.disabled = false;
+            o.type = featureType === 'POINT' ? dataElementTypes.COORDINATE : dataElementTypes.POLYGON;
         });
         return dataElement;
     }
@@ -87,38 +87,38 @@ class DataElementFactory {
             return null;
         }
 
-        const dataElement = new DataElement((_this) => {
-            _this.id = cachedAttribute.id;
-            _this.compulsory = cachedTrackedEntityTypeAttribute.mandatory;
-            _this.name =
+        const dataElement = new DataElement((o) => {
+            o.id = cachedAttribute.id;
+            o.compulsory = cachedTrackedEntityTypeAttribute.mandatory;
+            o.name =
                 this._getAttributeTranslation(
                     cachedAttribute.translations, DataElementFactory.translationPropertyNames.NAME) ||
                     cachedAttribute.displayName;
-            _this.shortName =
+            o.shortName =
                 this._getAttributeTranslation(
                     cachedAttribute.translations, DataElementFactory.translationPropertyNames.SHORT_NAME) ||
                     cachedAttribute.displayShortName;
-            _this.formName =
+            o.formName =
                 this._getAttributeTranslation(
                     cachedAttribute.translations, DataElementFactory.translationPropertyNames.NAME) ||
                     cachedAttribute.displayName;
-            _this.description =
+            o.description =
                 this._getAttributeTranslation(
                     cachedAttribute.translations, DataElementFactory.translationPropertyNames.DESCRIPTION) ||
                     cachedAttribute.description;
-            _this.displayInForms = true;
-            _this.displayInReports = cachedTrackedEntityTypeAttribute.displayInList;
-            _this.disabled = false;
-            _this.type = cachedAttribute.valueType;
+            o.displayInForms = true;
+            o.displayInReports = cachedTrackedEntityTypeAttribute.displayInList;
+            o.disabled = false;
+            o.type = cachedAttribute.valueType;
         });
 
         if (cachedAttribute.unique) {
-            dataElement.unique = new DataElementUnique((_this) => {
-                _this.scope = cachedAttribute.orgunitScope ?
+            dataElement.unique = new DataElementUnique((o) => {
+                o.scope = cachedAttribute.orgunitScope ?
                     dataElementUniqueScope.ORGANISATION_UNIT :
                     dataElementUniqueScope.ENTIRE_SYSTEM;
 
-                _this.onValidate = (value: any, contextProps: Object = {}) => {
+                o.onValidate = (value: any, contextProps: Object = {}) => {
                     const serverValue = pipe(
                         convertFormToClient,
                         convertClientToServer,
@@ -140,7 +140,7 @@ class DataElementFactory {
                     }
 
                     let requestPromise;
-                    if (_this.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
+                    if (o.scope === dataElementUniqueScope.ORGANISATION_UNIT) {
                         const orgUnitId = contextProps.orgUnitId;
                         requestPromise = getApi()
                             .get(
@@ -177,7 +177,7 @@ class DataElementFactory {
                 };
 
                 if (cachedAttribute.pattern) {
-                    _this.generatable = !!cachedAttribute.pattern;
+                    o.generatable = !!cachedAttribute.pattern;
                 }
             });
         }

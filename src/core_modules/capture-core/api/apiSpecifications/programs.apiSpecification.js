@@ -127,10 +127,10 @@ function getProgramTrackedEntityAttributes(attributes) {
             .filter(pa => pa) : null;
 }
 
-export default new ApiSpecification((_this) => {
-    _this.modelName = 'programs';
-    _this.modelGetterType = getterTypes.LIST;
-    _this.queryParams = {
+export default new ApiSpecification((o) => {
+    o.modelName = 'programs';
+    o.modelGetterType = getterTypes.LIST;
+    o.queryParams = {
         fields:
             '*,' +
             'dataEntryForm[*],' +
@@ -144,7 +144,7 @@ export default new ApiSpecification((_this) => {
             'programStages[*,dataEntryForm[*],programStageSections[id,displayName,description,sortOrder,dataElements[id]],programStageDataElements[*,dataElement[*,optionSet[id]]]],' +
             'programTrackedEntityAttributes[*]',
     };
-    _this.converter = (d2Programs) => {
+    o.converter = (d2Programs) => {
         if (!d2Programs || d2Programs.length === 0) {
             return null;
         }

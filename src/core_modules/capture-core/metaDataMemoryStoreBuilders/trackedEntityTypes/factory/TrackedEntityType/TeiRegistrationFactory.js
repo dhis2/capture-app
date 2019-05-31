@@ -22,18 +22,18 @@ import { TrackedEntityType } from '../../../../metaData/TrackedEntityType';
 
 class TeiRegistrationFactory {
     static _buildSearchGroupElement(searchGroupElement: DataElement, teiAttribute: Object) {
-        const element = new DataElement((_this) => {
-            _this.id = searchGroupElement.id;
-            _this.name = searchGroupElement.name;
-            _this.shortName = searchGroupElement.shortName;
-            _this.formName = searchGroupElement.formName;
-            _this.description = searchGroupElement.description;
-            _this.displayInForms = true;
-            _this.displayInReports = searchGroupElement.displayInReports;
-            _this.compulsory = searchGroupElement.compulsory;
-            _this.disabled = searchGroupElement.disabled;
-            _this.type = teiAttribute.valueType;
-            _this.optionSet = searchGroupElement.optionSet;
+        const element = new DataElement((o) => {
+            o.id = searchGroupElement.id;
+            o.name = searchGroupElement.name;
+            o.shortName = searchGroupElement.shortName;
+            o.formName = searchGroupElement.formName;
+            o.description = searchGroupElement.description;
+            o.displayInForms = true;
+            o.displayInReports = searchGroupElement.displayInReports;
+            o.compulsory = searchGroupElement.compulsory;
+            o.disabled = searchGroupElement.disabled;
+            o.type = teiAttribute.valueType;
+            o.optionSet = searchGroupElement.optionSet;
         });
         return element;
     }
@@ -77,9 +77,9 @@ class TeiRegistrationFactory {
             return null;
         }
 
-        const section = new Section((_this) => {
-            _this.id = Section.MAIN_SECTION_ID;
-            _this.name = i18n.t('Profile');
+        const section = new Section((o) => {
+            o.id = Section.MAIN_SECTION_ID;
+            o.name = i18n.t('Profile');
         });
 
         featureTypeField && section.addElement(featureTypeField);
@@ -97,9 +97,9 @@ class TeiRegistrationFactory {
     async _buildFoundation(
         cachedType: CachedTrackedEntityType,
     ) {
-        const foundation = new RenderFoundation((_this) => {
-            _this.name = cachedType.displayName;
-            _this.id = cachedType.id;
+        const foundation = new RenderFoundation((o) => {
+            o.name = cachedType.displayName;
+            o.id = cachedType.id;
         });
 
         const section = await this._buildSection(cachedType);
@@ -132,8 +132,8 @@ class TeiRegistrationFactory {
         const searchGroupFoundation = searchGroup.searchForm;
 
         const foundation = new RenderFoundation();
-        const section = new Section((_thisSection) => {
-            _thisSection.id = Section.MAIN_SECTION_ID;
+        const section = new Section((o) => {
+            o.id = Section.MAIN_SECTION_ID;
         });
         Array.from(
             searchGroupFoundation
@@ -156,11 +156,11 @@ class TeiRegistrationFactory {
     ) {
         const inputSearchGroups: Array<InputSearchGroup> = trackedEntityTypeSearchGroups
             .filter(searchGroup => !searchGroup.unique)
-            .map(searchGroup => new InputSearchGroup((_this) => {
-                _this.id = searchGroup.id;
-                _this.minAttributesRequiredToSearch = searchGroup.minAttributesRequiredToSearch;
-                _this.searchFoundation = this._buildInputSearchGroupFoundation(cachedType, searchGroup);
-                _this.onSearch = (values: Object = {}, contextProps: Object = {}) => {
+            .map(searchGroup => new InputSearchGroup((o) => {
+                o.id = searchGroup.id;
+                o.minAttributesRequiredToSearch = searchGroup.minAttributesRequiredToSearch;
+                o.searchFoundation = this._buildInputSearchGroupFoundation(cachedType, searchGroup);
+                o.onSearch = (values: Object = {}, contextProps: Object = {}) => {
                     const { orgUnitId, trackedEntityType } = contextProps;
                     return getApi()
                         .get(
@@ -189,10 +189,10 @@ class TeiRegistrationFactory {
         const foundation = await this._buildFoundation(cachedType);
         const inputSearchGroups = this._buildInputSearchGroups(cachedType, trackedEntityTypeSearchGroups);
         // const inputSearchGroups = await this._build
-        return new TeiRegistration((_this) => {
-            _this.form = foundation;
-            _this.inputSearchGroups = inputSearchGroups;
-            _this.trackedEntityType = trackedEntityType;
+        return new TeiRegistration((o) => {
+            o.form = foundation;
+            o.inputSearchGroups = inputSearchGroups;
+            o.trackedEntityType = trackedEntityType;
         });
     }
 }

@@ -6,8 +6,8 @@ import ApiSpecification from '../../api/ApiSpecificationDefinition/ApiSpecificat
 export default function getProgramIndicatorsLoadSpecification(
     storeName: string = 'programIndicators',
     apiSpecification: ApiSpecification): LoadSpecification {
-    return new LoadSpecification((_this) => {
-        _this.loader = loadStoreData;
-        _this.objectStore = storeName;
+    return new LoadSpecification((o) => {
+        o.loader = loadStoreData;
+        o.objectStore = storeName;
     }, apiSpecification);
 }

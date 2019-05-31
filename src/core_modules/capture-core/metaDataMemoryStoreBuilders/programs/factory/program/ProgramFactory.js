@@ -39,11 +39,11 @@ import type {
 class ProgramFactory {
     static _buildCategoryOptions(cachedCategoryOptions: Array<CachedCategoryOption>): Map<string, CategoryOption> {
         return cachedCategoryOptions.reduce((accCategoryOptionsMap, cachedOption) => {
-            accCategoryOptionsMap.set(cachedOption.id, new CategoryOption((_this) => {
-                _this.id = cachedOption.id;
-                _this.name = cachedOption.displayName;
-                _this.organisationUnitIds = cachedOption.organisationUnitIds;
-                _this.access = cachedOption.access;
+            accCategoryOptionsMap.set(cachedOption.id, new CategoryOption((o) => {
+                o.id = cachedOption.id;
+                o.name = cachedOption.displayName;
+                o.organisationUnitIds = cachedOption.organisationUnitIds;
+                o.access = cachedOption.access;
             }));
             return accCategoryOptionsMap;
         }, new Map());
@@ -56,16 +56,16 @@ class ProgramFactory {
             cachedProgramCategories
                 .map(cachedProgramCategory => ([
                     cachedProgramCategory.id,
-                    new Category((_this) => {
+                    new Category((o) => {
                         const id = cachedProgramCategory.id;
-                        _this.id = id;
+                        o.id = id;
                         const cachedCategory = cachedCategories[id];
                         if (!cachedCategory) {
                             log.error(errorCreator('Could not retrieve cachedCategory')({ id }));
-                            _this.categoryOptions = new Map();
+                            o.categoryOptions = new Map();
                         } else {
-                            _this.name = cachedCategory.displayName;
-                            _this.categoryOptions =
+                            o.name = cachedCategory.displayName;
+                            o.categoryOptions =
                                 ProgramFactory._buildCategoryOptions(cachedCategory.categoryOptions);
                         }
                     }),
@@ -126,12 +126,12 @@ class ProgramFactory {
             return null;
         }
 
-        return new CategoryCombination((_this) => {
+        return new CategoryCombination((o) => {
             // $FlowFixMe
-            _this.name = cachedCategoryCombination.displayName;
+            o.name = cachedCategoryCombination.displayName;
             // $FlowFixMe
-            _this.id = cachedCategoryCombination.id;
-            _this.categories =
+            o.id = cachedCategoryCombination.id;
+            o.categories =
             // $FlowFixMe
                 ProgramFactory._buildCategories(cachedCategoryCombination.categories, this.cachedCategories);
         });
@@ -157,13 +157,13 @@ class ProgramFactory {
     async build(cachedProgram: CachedProgram) {
         let program;
         if (cachedProgram.programType === 'WITHOUT_REGISTRATION') {
-            program = new EventProgram((_this) => {
-                _this.id = cachedProgram.id;
-                _this.access = cachedProgram.access;
-                _this.name = cachedProgram.displayName;
-                _this.shortName = cachedProgram.displayShortName;
-                _this.organisationUnits = cachedProgram.organisationUnits;
-                _this.categoryCombination = this._buildCategoryCombination(cachedProgram.categoryCombo);
+            program = new EventProgram((o) => {
+                o.id = cachedProgram.id;
+                o.access = cachedProgram.access;
+                o.name = cachedProgram.displayName;
+                o.shortName = cachedProgram.displayShortName;
+                o.organisationUnits = cachedProgram.organisationUnits;
+                o.categoryCombination = this._buildCategoryCombination(cachedProgram.categoryCombo);
             });
             const d2Stage = cachedProgram.programStages && cachedProgram.programStages[0];
             program.stage =
@@ -172,14 +172,14 @@ class ProgramFactory {
                     program.id,
                 );
         } else {
-            program = new TrackerProgram((_this) => {
-                _this.id = cachedProgram.id;
-                _this.access = cachedProgram.access;
-                _this.name = cachedProgram.displayName;
-                _this.shortName = cachedProgram.displayShortName;
-                _this.organisationUnits = cachedProgram.organisationUnits;
+            program = new TrackerProgram((o) => {
+                o.id = cachedProgram.id;
+                o.access = cachedProgram.access;
+                o.name = cachedProgram.displayName;
+                o.shortName = cachedProgram.displayShortName;
+                o.organisationUnits = cachedProgram.organisationUnits;
                 // $FlowFixMe
-                _this.trackedEntityType = this.trackedEntityTypeCollection.get(cachedProgram.trackedEntityTypeId);
+                o.trackedEntityType = this.trackedEntityTypeCollection.get(cachedProgram.trackedEntityTypeId);
             });
 
             if (cachedProgram.programTrackedEntityAttributes) {

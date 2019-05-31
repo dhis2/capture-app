@@ -30,17 +30,17 @@ const columnsOrderStateSelector = state => state.workingListsColumnsOrder.main;
 
 
 const createMainPropertyOptionSet = (column: ColumnOrderFromState) => {
-    const dataElement = new DataElement((_this) => {
-        _this.id = column.id;
+    const dataElement = new DataElement((o) => {
+        o.id = column.id;
         // $FlowFixMe
-        _this.type = column.type;
+        o.type = column.type;
     });
 
     // $FlowFixMe
     const options = column.options.map(o =>
-        new Option((_this) => {
-            _this.text = o.text;
-            _this.value = o.value;
+        new Option((o) => {
+            o.text = o.text;
+            o.value = o.value;
         }),
     );
     const optionSet = new OptionSet(column.id, options, null, dataElement);

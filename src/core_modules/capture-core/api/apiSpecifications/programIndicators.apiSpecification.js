@@ -2,14 +2,14 @@
 import ApiSpecification from '../ApiSpecificationDefinition/ApiSpecification';
 import getterTypes from '../fetcher/getterTypes.const';
 
-export default new ApiSpecification((_this) => {
-    _this.modelName = 'programIndicators';
-    _this.modelGetterType = getterTypes.LIST;
-    _this.queryParams = {
+export default new ApiSpecification((o) => {
+    o.modelName = 'programIndicators';
+    o.modelGetterType = getterTypes.LIST;
+    o.queryParams = {
         fields: 'id,displayName,code,shortName,displayInForm,expression,displayDescription,description,filter,program[id]',
         filter: 'program.id:in',
     };
-    _this.converter = (d2ProgramIndicators: ?Array<Object>) => {
+    o.converter = (d2ProgramIndicators: ?Array<Object>) => {
         if (!d2ProgramIndicators || d2ProgramIndicators.length === 0) {
             return null;
         }

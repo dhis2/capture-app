@@ -77,9 +77,9 @@ class TrackedEntityTypeFactory {
     async build(
         cachedType: CachedTrackedEntityType,
     ) {
-        const trackedEntityType = new TrackedEntityType((_this) => {
-            _this.id = cachedType.id;
-            _this.name = this._getTranslation(
+        const trackedEntityType = new TrackedEntityType((o) => {
+            o.id = cachedType.id;
+            o.name = this._getTranslation(
                 cachedType.translations, TrackedEntityTypeFactory.translationPropertyNames.NAME)
                 || cachedType.displayName;
         });

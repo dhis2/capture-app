@@ -57,10 +57,10 @@ async function request(specification: ApiSpecification, pageNr: number, pageSize
 async function getOptionSetsAsync(
     ids: Array<string>,
 ): Promise<Array<ApiOptionSet>> {
-    const optionSetsApiSpec = new ApiSpecification((_this) => {
-        _this.modelName = 'optionSets';
-        _this.modelGetterType = getterTypes.LIST_WITH_PAGER;
-        _this.queryParams = {
+    const optionSetsApiSpec = new ApiSpecification((o) => {
+        o.modelName = 'optionSets';
+        o.modelGetterType = getterTypes.LIST_WITH_PAGER;
+        o.queryParams = {
             fields: 'id,displayName,version,valueType,options[id,displayName,code,style, translations]',
             paging: true,
             totalPages: false,
@@ -74,10 +74,10 @@ async function getOptionSetsAsync(
 async function getOptionGroupsAsync(
     optionSetIds: Array<string>,
 ): Promise<Array<ApiOptionGroup>> {
-    const optionGroupsApiSpec = new ApiSpecification((_this) => {
-        _this.modelName = 'optionGroups';
-        _this.modelGetterType = getterTypes.LIST_WITH_PAGER;
-        _this.queryParams = {
+    const optionGroupsApiSpec = new ApiSpecification((o) => {
+        o.modelName = 'optionGroups';
+        o.modelGetterType = getterTypes.LIST_WITH_PAGER;
+        o.queryParams = {
             fields: 'id,displayName,options[id],optionSet[id]',
             paging: true,
             totalPages: false,

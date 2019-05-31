@@ -6,8 +6,8 @@ import { loadStoreDataIfNotExists } from '../loader/storeDataLoaders';
 export default function getTrackedEntitiesLoadSpecification(
     storeName: string = 'trackedEntityTypes',
     apiSpecification: ApiSpecification): LoadSpecification {
-    return new LoadSpecification((_this) => {
-        _this.loader = loadStoreDataIfNotExists;
-        _this.objectStore = storeName;
+    return new LoadSpecification((o) => {
+        o.loader = loadStoreDataIfNotExists;
+        o.objectStore = storeName;
     }, apiSpecification);
 }

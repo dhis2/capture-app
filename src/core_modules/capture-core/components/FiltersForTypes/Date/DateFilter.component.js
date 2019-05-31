@@ -96,21 +96,21 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
     };
 
     static mainOptionSet = new OptionSet('mainOptions', [
-        new Option((_this) => {
-            _this.text = DateFilter.mainOptionsTranslatedTexts[DateFilter.mainOptionKeys.LAST_WEEK];
-            _this.value = DateFilter.mainOptionKeys.LAST_WEEK;
+        new Option((o) => {
+            o.text = DateFilter.mainOptionsTranslatedTexts[DateFilter.mainOptionKeys.LAST_WEEK];
+            o.value = DateFilter.mainOptionKeys.LAST_WEEK;
         }),
-        new Option((_this) => {
-            _this.text = DateFilter.mainOptionsTranslatedTexts[DateFilter.mainOptionKeys.LAST_MONTH];
-            _this.value = DateFilter.mainOptionKeys.LAST_MONTH;
+        new Option((o) => {
+            o.text = DateFilter.mainOptionsTranslatedTexts[DateFilter.mainOptionKeys.LAST_MONTH];
+            o.value = DateFilter.mainOptionKeys.LAST_MONTH;
         }),
-        new Option((_this) => {
-            _this.text = DateFilter.mainOptionsTranslatedTexts[DateFilter.mainOptionKeys.LAST_3_MONTHS];
-            _this.value = DateFilter.mainOptionKeys.LAST_3_MONTHS;
+        new Option((o) => {
+            o.text = DateFilter.mainOptionsTranslatedTexts[DateFilter.mainOptionKeys.LAST_3_MONTHS];
+            o.value = DateFilter.mainOptionKeys.LAST_3_MONTHS;
         }),
-        new Option((_this) => {
-            _this.text = DateFilter.mainOptionsTranslatedTexts[DateFilter.mainOptionKeys.CUSTOM_RANGE];
-            _this.value = DateFilter.mainOptionKeys.CUSTOM_RANGE;
+        new Option((o) => {
+            o.text = DateFilter.mainOptionsTranslatedTexts[DateFilter.mainOptionKeys.CUSTOM_RANGE];
+            o.value = DateFilter.mainOptionKeys.CUSTOM_RANGE;
         }),
     ]);
 

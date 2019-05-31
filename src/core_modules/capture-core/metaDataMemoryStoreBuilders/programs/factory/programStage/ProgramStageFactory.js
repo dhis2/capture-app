@@ -56,9 +56,9 @@ class ProgramStageFactory {
     async _buildSection(
         cachedProgramStageDataElements: CachedProgramStageDataElementsAsObject,
         sectionSpecs: SectionSpecs) {
-        const section = new Section((_this) => {
-            _this.id = sectionSpecs.id;
-            _this.name = sectionSpecs.displayName;
+        const section = new Section((o) => {
+            o.id = sectionSpecs.id;
+            o.name = sectionSpecs.displayName;
         });
 
         if (sectionSpecs.dataElements) {
@@ -81,8 +81,8 @@ class ProgramStageFactory {
     }
 
     async _buildMainSection(cachedProgramStageDataElements: ?Array<CachedProgramStageDataElement>) {
-        const section = new Section((_this) => {
-            _this.id = Section.MAIN_SECTION_ID;
+        const section = new Section((o) => {
+            o.id = Section.MAIN_SECTION_ID;
         });
 
         if (cachedProgramStageDataElements) {
@@ -147,11 +147,11 @@ class ProgramStageFactory {
             stageForm.addSection(section);
             const dataEntryForm = cachedProgramStage.dataEntryForm;
             try {
-                stageForm.customForm = new CustomForm((_this) => {
+                stageForm.customForm = new CustomForm((o) => {
                     // $FlowFixMe
-                    _this.id = dataEntryForm.id;
+                    o.id = dataEntryForm.id;
                     // $FlowFixMe
-                    _this.data = dataEntryForm.htmlCode;
+                    o.data = dataEntryForm.htmlCode;
                 });
             } catch (error) {
                 log.error(errorCreator(ProgramStageFactory.CUSTOM_FORM_TEMPLATE_ERROR)(

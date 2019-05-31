@@ -110,9 +110,9 @@ const viewModeComponent = withDefaultFieldContainer()(
 );
 
 const buildReportDateSettingsFn = () => {
-    const dataElement = new DataElement((_this) => {
-        _this.id = 'eventDate';
-        _this.type = dataElementTypes.DATE;
+    const dataElement = new DataElement((o) => {
+        o.id = 'eventDate';
+        o.type = dataElementTypes.DATE;
     });
 
     const reportDateSettings = {
@@ -145,9 +145,9 @@ const buildGeometrySettingsFn = () => ({
                 valueConverter: value => (value ? 'Polygon captured' : 'No polygon captured'),
             });
         }
-        const pointDataElement = new DataElement((_this) => {
-            _this.id = 'geometry';
-            _this.type = dataElementTypes.COORDINATE;
+        const pointDataElement = new DataElement((o) => {
+            o.id = 'geometry';
+            o.type = dataElementTypes.COORDINATE;
         });
 
         return createComponentProps(props, {
@@ -164,9 +164,9 @@ const buildGeometrySettingsFn = () => ({
 });
 
 const buildCompleteFieldSettingsFn = () => {
-    const dataElement = new DataElement((_this) => {
-        _this.id = 'complete';
-        _this.type = dataElementTypes.BOOLEAN;
+    const dataElement = new DataElement((o) => {
+        o.id = 'complete';
+        o.type = dataElementTypes.BOOLEAN;
     });
 
     const completeSettings = {

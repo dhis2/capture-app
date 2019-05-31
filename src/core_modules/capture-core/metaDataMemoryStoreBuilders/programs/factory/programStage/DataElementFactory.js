@@ -36,11 +36,11 @@ class DataElementFactory {
 
         try {
             const iconData = await getDhisIconAsync(icon);
-            return new Icon((_this) => {
+            return new Icon((o) => {
                 if (cachedStyle.color) {
-                    _this.color = cachedStyle.color;
+                    o.color = cachedStyle.color;
                 }
-                _this.data = iconData;
+                o.data = iconData;
             });
         } catch (error) {
             return null;
@@ -81,21 +81,21 @@ class DataElementFactory {
 
         const cachedDataElement = cachedProgramStageDataElement.dataElement;
 
-        const dataElement = new DataElement((_this) => {
-            _this.id = cachedDataElement.id;
-            _this.name = this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.NAME) ||
+        const dataElement = new DataElement((o) => {
+            o.id = cachedDataElement.id;
+            o.name = this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.NAME) ||
                 cachedDataElement.displayName;
-            _this.shortName = this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.SHORT_NAME) ||
+            o.shortName = this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.SHORT_NAME) ||
                 cachedDataElement.displayShortName;
-            _this.formName = this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.FORM_NAME) ||
+            o.formName = this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.FORM_NAME) ||
                 cachedDataElement.displayFormName;
-            _this.description = this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.DESCRIPTION) ||
+            o.description = this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.DESCRIPTION) ||
                 cachedDataElement.description;
-            _this.displayInForms = true;
-            _this.displayInReports = cachedProgramStageDataElement.displayInReports;
-            _this.compulsory = cachedProgramStageDataElement.compulsory;
-            _this.disabled = false;
-            _this.type = DataElementFactory._getDataElementType(cachedDataElement.valueType);
+            o.displayInForms = true;
+            o.displayInReports = cachedProgramStageDataElement.displayInReports;
+            o.compulsory = cachedProgramStageDataElement.compulsory;
+            o.disabled = false;
+            o.type = DataElementFactory._getDataElementType(cachedDataElement.valueType);
         });
 
         dataElement.icon = await DataElementFactory._buildDataElementIconAsync(cachedDataElement.style);

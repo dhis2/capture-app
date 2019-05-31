@@ -2,13 +2,13 @@
 import ApiSpecification from '../ApiSpecificationDefinition/ApiSpecification';
 import getterTypes from '../fetcher/getterTypes.const';
 
-export default new ApiSpecification((_this) => {
-    _this.modelName = 'optionSets';
-    _this.modelGetterType = getterTypes.LIST;
-    _this.queryParams = {
+export default new ApiSpecification((o) => {
+    o.modelName = 'optionSets';
+    o.modelGetterType = getterTypes.LIST;
+    o.queryParams = {
         fields: 'id,displayName,version,valueType,options[id,displayName,code,style, translations]',
     };
-    _this.converter = (d2Model) => {
+    o.converter = (d2Model) => {
         if (!d2Model) {
             return [];
         }

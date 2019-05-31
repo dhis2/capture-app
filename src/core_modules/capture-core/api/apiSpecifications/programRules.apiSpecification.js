@@ -29,14 +29,14 @@ function getProgramRuleActions(d2ProgramRuleActionsCollection): Array<ProgramRul
 }
 
 
-export default new ApiSpecification((_this) => {
-    _this.modelName = 'programRules';
-    _this.modelGetterType = getterTypes.LIST;
-    _this.queryParams = {
+export default new ApiSpecification((o) => {
+    o.modelName = 'programRules';
+    o.modelGetterType = getterTypes.LIST;
+    o.queryParams = {
         fields: 'id,displayName,condition,description,program[id],programStage[id],priority,programRuleActions[id,content,location,data,programRuleActionType,programStageSection[id],dataElement[id],trackedEntityAttribute[id],programIndicator[id],programStage[id],optionGroup[id],option[id]]',
         filter: 'program.id:in:',
     };
-    _this.converter = (d2ProgramRules: ?Array<Object>): ?Array<ProgramRule> => {
+    o.converter = (d2ProgramRules: ?Array<Object>): ?Array<ProgramRule> => {
         if (!d2ProgramRules || d2ProgramRules.length === 0) {
             return null;
         }

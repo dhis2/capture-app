@@ -37,10 +37,10 @@ async function requestCategoryOptions(specification: ApiSpecification, pageNr: n
 async function getCategoryOptionsAsync(
     ids: Array<string>,
 ): Promise<Array<ApiCategoryOption>> {
-    const categoryOptionsApiSpec = new ApiSpecification((_this) => {
-        _this.modelName = 'categoryOptions';
-        _this.modelGetterType = getterTypes.LIST_WITH_PAGER;
-        _this.queryParams = {
+    const categoryOptionsApiSpec = new ApiSpecification((o) => {
+        o.modelName = 'categoryOptions';
+        o.modelGetterType = getterTypes.LIST_WITH_PAGER;
+        o.queryParams = {
             fields: 'id,displayName,categories, organisationUnits, access[*]',
             paging: true,
             totalPages: false,

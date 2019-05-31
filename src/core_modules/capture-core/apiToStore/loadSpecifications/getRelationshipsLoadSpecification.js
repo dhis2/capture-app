@@ -18,13 +18,13 @@ function converter(d2Model) {
 }
 
 export default function getRelationshipsLoadSpecification(storeName: string = 'relationshipTypes'): LoadSpecification {
-    return new LoadSpecification((_this) => {
-        _this.converter = converter;
-        _this.d2ModelGetterType = getterTypes.LIST;
-        _this.d2ModelName = 'relationshipTypes';
-        _this.loader = loadStoreDataIfNotExists;
-        _this.objectStore = storeName;
-        _this.queryParams = {
+    return new LoadSpecification((o) => {
+        o.converter = converter;
+        o.d2ModelGetterType = getterTypes.LIST;
+        o.d2ModelName = 'relationshipTypes';
+        o.loader = loadStoreDataIfNotExists;
+        o.objectStore = storeName;
+        o.queryParams = {
             fields: 'id,displayName,fromConstraint[*],toConstraint[*],access[*]',
         };
     });

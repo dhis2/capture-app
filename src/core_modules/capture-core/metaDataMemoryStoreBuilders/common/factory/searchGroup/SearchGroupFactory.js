@@ -74,25 +74,25 @@ class SearchGroupFactory {
 
     async _buildElement(searchAttribute: SearchAttribute) {
         const trackedEntityAttribute = searchAttribute.trackedEntityAttribute;
-        const element = new DataElement((_this) => {
-            _this.id = trackedEntityAttribute.id;
-            _this.name = this._getAttributeTranslation(
+        const element = new DataElement((o) => {
+            o.id = trackedEntityAttribute.id;
+            o.name = this._getAttributeTranslation(
                 trackedEntityAttribute.translations, translationPropertyNames.NAME) ||
                 trackedEntityAttribute.displayName;
-            _this.shortName = this._getAttributeTranslation(
+            o.shortName = this._getAttributeTranslation(
                 trackedEntityAttribute.translations, translationPropertyNames.SHORT_NAME) ||
                 trackedEntityAttribute.displayShortName;
-            _this.formName = this._getAttributeTranslation(
+            o.formName = this._getAttributeTranslation(
                 trackedEntityAttribute.translations, translationPropertyNames.NAME) ||
                 trackedEntityAttribute.displayName;
-            _this.description = this._getAttributeTranslation(
+            o.description = this._getAttributeTranslation(
                 trackedEntityAttribute.translations, translationPropertyNames.DESCRIPTION) ||
                 trackedEntityAttribute.description;
-            _this.displayInForms = true;
-            _this.displayInReports = searchAttribute.displayInList;
-            _this.compulsory = !!trackedEntityAttribute.unique;
-            _this.disabled = false;
-            _this.type = SearchGroupFactory._getSearchAttributeValueType(trackedEntityAttribute.valueType, trackedEntityAttribute.unique);
+            o.displayInForms = true;
+            o.displayInReports = searchAttribute.displayInList;
+            o.compulsory = !!trackedEntityAttribute.unique;
+            o.disabled = false;
+            o.type = SearchGroupFactory._getSearchAttributeValueType(trackedEntityAttribute.valueType, trackedEntityAttribute.unique);
         });
 
         /* if (attribute.optionSet && attribute.optionSet.id ) {
@@ -109,9 +109,9 @@ class SearchGroupFactory {
     }
 
     async _buildSection(searchGroupAttributes: Array<SearchAttribute>) {
-        const section = new Section((_this) => {
-            _this.id = Section.MAIN_SECTION_ID;
-            _this.showContainer = false;
+        const section = new Section((o) => {
+            o.id = Section.MAIN_SECTION_ID;
+            o.showContainer = false;
         });
 
         // $FlowFixMe

@@ -6,14 +6,14 @@ import getterTypes from '../fetcher/getterTypes.const';
 
 import type { ProgramRuleVariable } from '../../RulesEngine/rulesEngine.types';
 
-export default new ApiSpecification((_this) => {
-    _this.modelName = 'programRuleVariables';
-    _this.modelGetterType = getterTypes.LIST;
-    _this.queryParams = {
+export default new ApiSpecification((o) => {
+    o.modelName = 'programRuleVariables';
+    o.modelGetterType = getterTypes.LIST;
+    o.queryParams = {
         fields: 'id,displayName,programRuleVariableSourceType,program[id],programStage[id],dataElement[id],trackedEntityAttribute[id],useCodeForOptionSet',
         filter: 'program.id:in:',
     };
-    _this.converter = (d2ProgramRulesVariables: ?Array<Object>): ?Array<ProgramRuleVariable> => {
+    o.converter = (d2ProgramRulesVariables: ?Array<Object>): ?Array<ProgramRuleVariable> => {
         if (!d2ProgramRulesVariables || d2ProgramRulesVariables.length === 0) {
             return null;
         }

@@ -20,16 +20,16 @@ const baseSpec = {
 };
 
 it('create', () => {
-    const spec = new ApiSpecification((_this) => {
-        Object.assign(_this, baseSpec);
+    const spec = new ApiSpecification((o) => {
+        Object.assign(o, baseSpec);
     });
     expect(spec.modelName).toEqual(baseSpec.modelName);
     expect(spec.modelGetterType).toEqual(baseSpec.modelGetterType);
 });
 
 it('updateQuery params', () => {
-    const spec = new ApiSpecification((_this) => {
-        Object.assign(_this, baseSpec);
+    const spec = new ApiSpecification((o) => {
+        Object.assign(o, baseSpec);
     });
     spec.updateQueryParams({ test: 'test' });
     expect(spec.queryParams.test).toEqual('test');
@@ -37,8 +37,8 @@ it('updateQuery params', () => {
 });
 
 it('set filter', () => {
-    const spec = new ApiSpecification((_this) => {
-        Object.assign(_this, baseSpec);
+    const spec = new ApiSpecification((o) => {
+        Object.assign(o, baseSpec);
     });
     spec.setFilter('filter');
     expect(spec.queryParams.filter[0]).toEqual('filter');
@@ -46,8 +46,8 @@ it('set filter', () => {
 });
 
 it('get data', () => {
-    const spec = new ApiSpecification((_this) => {
-        Object.assign(_this, baseSpec);
+    const spec = new ApiSpecification((o) => {
+        Object.assign(o, baseSpec);
     });
     spec.get();
     expect(mockGetData).toBeCalled();

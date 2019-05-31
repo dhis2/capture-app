@@ -32,12 +32,12 @@ class OptionSetFactory {
 
         try {
             const iconData = await getDhisIconAsync(icon);
-            return new Icon((_this) => {
+            return new Icon((o) => {
                 // $FlowFixMe
                 if (cachedStyle.color) {
-                    _this.color = cachedStyle.color;
+                    o.color = cachedStyle.color;
                 }
-                _this.data = iconData;
+                o.data = iconData;
             });
         } catch (error) {
             return null;
@@ -91,23 +91,23 @@ class OptionSetFactory {
             .map(async (cachedOption) => {
                 const icon = await OptionSetFactory._buildOptionIcon(cachedOption.style);
 
-                return new Option((_this) => {
-                    _this.id = cachedOption.id;
-                    _this.value = cachedOption.code;
-                    _this.text =
+                return new Option((o) => {
+                    o.id = cachedOption.id;
+                    o.value = cachedOption.code;
+                    o.text =
                         this._getTranslation(
                             cachedOption.translations,
                             OptionSetFactory.translationPropertyNames.NAME) ||
                         cachedOption.displayName;
-                    _this.icon = icon;
+                    o.icon = icon;
                 });
             });
 
         const options = await Promise.all(optionsPromises);
 
-        const optionGroups = cachedOptionSet.optionGroups && new Map(cachedOptionSet.optionGroups.map(group => [group.id, new OptionGroup((_this) => {
-            _this.id = group.id;
-            _this.optionIds = new Map(group.options.map(option => [option, option]));
+        const optionGroups = cachedOptionSet.optionGroups && new Map(cachedOptionSet.optionGroups.map(group => [group.id, new OptionGroup((o) => {
+            o.id = group.id;
+            o.optionIds = new Map(group.options.map(option => [option, option]));
         })]));
 
         const optionSet = new OptionSet(cachedOptionSet.id, options, optionGroups, dataElement, convertOptionSetValue);
