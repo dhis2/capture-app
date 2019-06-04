@@ -7,7 +7,7 @@ import { openEventForEditInDataEntry } from '../../../EditEvent/DataEntry/editEv
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import convertDataEntryToClientValues from '../../../../DataEntry/common/convertDataEntryToClientValues';
 import { convertMainEventClientToServerWithKeysMap } from '../../../../../events/mainEventConverter';
-import moment from '../../../../../utils/moment/momentResolver';
+import moment from 'capture-core-utils/moment/momentResolver';
 
 import {
     actionTypes,

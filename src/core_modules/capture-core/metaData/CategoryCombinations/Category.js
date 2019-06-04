@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-restricted-syntax */
 import isFunction from 'd2-utilizr/src/isFunction';
-import errorCreator from '../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import CategoryOption from './CategoryOption';
 
 export default class Category {

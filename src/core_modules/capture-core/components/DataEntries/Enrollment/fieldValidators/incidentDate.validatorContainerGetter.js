@@ -1,8 +1,8 @@
 // @flow
-import { Validators } from '@dhis2/d2-ui-forms';
+import { hasValue } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
-import moment from '../../../../utils/moment/momentResolver';
-import parseDate from '../../../../utils/parsers/date.parser';
+import moment from 'capture-core-utils/moment/momentResolver';
+import parseDate from 'capture-core-utils/parsers/date.parser';
 
 const isValidIncidentDate = (value: string, isFutureDateAllowed: boolean) => {
     const dateContainer = parseDate(value);
@@ -28,7 +28,7 @@ const isValidIncidentDate = (value: string, isFutureDateAllowed: boolean) => {
 const getValidatorContainers = (isFutureIncidentDateAllowed: boolean) => {
     const validatorContainers = [
         {
-            validator: Validators.wordToValidatorMap.get('required'),
+            validator: hasValue,
             message:
                 i18n.t('A value is required'),
         },

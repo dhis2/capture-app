@@ -1,7 +1,7 @@
 // @flow
 import StorageController from 'capture-core-utils/storage/StorageController';
 import { ApiSpecification, getterTypes } from '../../api';
-import chunk from '../../utils/chunk';
+import { chunk } from 'capture-core-utils';
 
 type InputCategory = {
     id: string,

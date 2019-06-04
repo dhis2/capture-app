@@ -1,7 +1,7 @@
 // @flow
-import { Validators } from '@dhis2/d2-ui-forms';
+import { hasValue } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
-import isValidDate from '../../../../../utils/validators/form/date.validator';
+import { isValidDate } from 'capture-core-utils/validators/form';
 
 const preValidateDate = (value?: ?string) => {
     if (!value) {
@@ -14,11 +14,8 @@ const preValidateDate = (value?: ?string) => {
 const getValidatorContainers = () => {
     const validatorContainers = [
         {
-            validator: Validators.wordToValidatorMap.get('required'),
-            message:
-                i18n.t(
-                    Validators.wordToValidatorMap.get('required').message,
-                ),
+            validator: hasValue,
+            message: i18n.t('A value is required'), 
         },
         {
             validator: preValidateDate,

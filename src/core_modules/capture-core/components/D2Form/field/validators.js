@@ -1,10 +1,10 @@
 // @flow
-import { Validators } from '@dhis2/d2-ui-forms';
 import isArray from 'd2-utilizr/src/isArray';
 import isString from 'd2-utilizr/src/isString';
 import i18n from '@dhis2/d2-i18n';
 
 import {
+    hasValue,
     isValidDate,
     isValidDateTime,
     isValidEmail,
@@ -25,7 +25,7 @@ import {
     getDateRangeValidator,
     getDateTimeRangeValidator,
     getTimeRangeValidator,
-} from '../../../utils/validators/form';
+} from 'capture-core-utils/validators/form';
 import { DataElement as MetaDataElement } from '../../../metaData';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 
@@ -37,10 +37,6 @@ type ValidatorContainer = {
 }
 
 type ValidatorBuilder = (metaData: MetaDataElement) => Array<ValidatorContainer>;
-
-const wordValidatorKeys = {
-    COMPULSORY: 'required',
-};
 
 const errorMessages = {
     COMPULSORY: i18n.t('A value is required'),
@@ -68,11 +64,9 @@ const validationMessages = {
     UNIQUENESS: i18n.t('Checking...'),
 };
 
-const compulsoryValidator = Validators.wordToValidatorMap.get(wordValidatorKeys.COMPULSORY);
-
 const compulsoryValidatorWrapper = (value: any) => {
-    const testValue = (value && isString(value)) ? value.trim() : value;
-    return compulsoryValidator(testValue);
+    const trimmedValue = (value && isString(value)) ? value.trim() : value;
+    return hasValue(trimmedValue);
 };
 
 const validatorForInteger = () => ({

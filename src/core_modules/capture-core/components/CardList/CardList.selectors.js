@@ -1,6 +1,6 @@
 // @flow
 import { createSelector } from 'reselect';
-import chunk from '../../utils/chunk';
+import { chunk } from 'capture-core-utils';
 import { elementTypes } from '../../metaData/DataElement';
 
 

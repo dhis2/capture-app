@@ -5,7 +5,7 @@ import React, { PureComponent } from 'react';
 import Sync from '@material-ui/icons/Sync';
 import Grow from '@material-ui/core/Grow'
 import { withStyles } from '@material-ui/core/styles';
-import moment from '../../utils/moment/momentResolver';
+import moment from 'capture-core-utils/moment/momentResolver';
 import i18n from '@dhis2/d2-i18n';
 
 const styles = theme => ({

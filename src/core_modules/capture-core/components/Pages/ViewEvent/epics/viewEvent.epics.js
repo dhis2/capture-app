@@ -3,7 +3,7 @@ import log from 'loglevel';
 import { push } from 'react-router-redux';
 import i18n from '@dhis2/d2-i18n';
 import isSelectionsEqual from '../../../App/isSelectionsEqual';
-import errorCreator from '../../../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import getErrorMessageAndDetails from '../../../../utils/errors/getErrorMessageAndDetails';
 import getOrganisationUnitApiSpec from '../../../../api/apiSpecifications/organisationUnit.apiSpecificationGetter';
 import {

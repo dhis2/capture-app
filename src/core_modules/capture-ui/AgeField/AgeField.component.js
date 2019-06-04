@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { Validators } from '@dhis2/d2-ui-forms';
+import { isValidPositiveInteger } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import IconButton from '@material-ui/core/IconButton';
@@ -89,7 +89,7 @@ class D2AgeField extends Component<Props> {
         return !values.years && !values.months && !values.days;
     }
     static isPositiveOrZeroNumber(value: ?any) {
-        return Validators.isPositiveNumber(value) || Number(value) === 0;
+        return isValidPositiveInteger(value) || Number(value) === 0;
     }
     static isValidNumbers(values: AgeValues) {
         return D2AgeField.isPositiveOrZeroNumber(values.years || 0) &&

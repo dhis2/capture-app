@@ -18,7 +18,7 @@ import {
 
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
-import moment from '../../../../../utils/moment/momentResolver';
+import moment from 'capture-core-utils/moment/momentResolver';
 import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
 
 export const saveNewEventAddAnotherEpic = (action$: InputObservable, store: ReduxStore) =>

@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { batchActions } from 'redux-batched-actions';
-import errorCreator from '../../../../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import { rulesExecutedPostUpdateField } from '../../../../DataEntry/actions/dataEntry.actions';
 import {
     actionTypes as editEventActionTypes,

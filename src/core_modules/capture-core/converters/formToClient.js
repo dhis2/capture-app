@@ -2,8 +2,8 @@
 import isString from 'd2-utilizr/lib/isString';
 
 import elementTypes from '../metaData/DataElement/elementTypes';
-import parseNumber from '../utils/parsers/number.parser';
-import parseDate from '../utils/parsers/date.parser';
+import parseNumber from 'capture-core-utils/parsers/number.parser';
+import parseDate from 'capture-core-utils/parsers/date.parser';
 
 type DateTimeValue = {
     date: string,

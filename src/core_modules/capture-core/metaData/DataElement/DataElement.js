@@ -8,7 +8,7 @@ import isArray from 'd2-utilizr/src/isArray';
 
 import Icon from '../Icon/Icon';
 import OptionSet from '../OptionSet/OptionSet';
-import errorCreator from '../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import elementTypes from './elementTypes';
 import { Unique } from './Unique';
 

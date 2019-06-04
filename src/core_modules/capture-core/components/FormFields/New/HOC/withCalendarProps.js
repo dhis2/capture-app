@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
 import getCalendarTheme from '../Fields/DateAndTimeFields/getCalendarTheme';
-import parseDate from '../../../../utils/parsers/date.parser';
-import moment from '../../../../utils/moment/momentResolver';
+import parseDate from 'capture-core-utils/parsers/date.parser';
+import moment from 'capture-core-utils/moment/momentResolver';
 import CurrentLocaleData from '../../../../utils/localeData/CurrentLocaleData';
-import capitalizeFirstLetter from '../../../../utils/string/capitalizeFirstLetter';
+import capitalizeFirstLetter from 'capture-core-utils/string/capitalizeFirstLetter';
 
 type Props = {
     theme: Object,

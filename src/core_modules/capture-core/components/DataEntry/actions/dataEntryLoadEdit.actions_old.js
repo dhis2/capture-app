@@ -5,7 +5,7 @@ import { batchActions } from 'redux-batched-actions';
 import metaDataCollection from '../../../metaDataMemoryStores/programCollection/programCollection';
 import DataElement from '../../../metaData/DataElement/DataElement';
 import { convertValue } from '../../../converters/clientToForm';
-import errorCreator from '../../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import { actionCreator } from '../../../actions/actions.utils';
 import { addFormData } from '../../D2Form/actions/form.actions';
 import { getRulesActionsOnLoad, getRulesActionsOnLoadForSingleNewEvent } from '../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';

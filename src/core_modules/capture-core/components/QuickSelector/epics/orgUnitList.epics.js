@@ -2,7 +2,7 @@
 import log from 'loglevel';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import getD2 from 'capture-core/d2/d2Instance';
-import errorCreator from '../../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import {
     actionTypes as orgUnitListActions,
     setSearchRoots,

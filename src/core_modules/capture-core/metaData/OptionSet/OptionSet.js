@@ -8,7 +8,7 @@ import isArray from 'd2-utilizr/src/isArray';
 import Option from './Option';
 import OptionGroup from './OptionGroup';
 import { viewTypes, inputTypes, inputTypesAsArray } from './optionSet.const';
-import errorCreator from '../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import DataElement from '../DataElement/DataElement';
 
 import type { ConvertFn } from '../DataElement/DataElement';

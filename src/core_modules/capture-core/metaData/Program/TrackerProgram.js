@@ -5,7 +5,7 @@ import isFunction from 'd2-utilizr/src/isFunction';
 import Program from './Program';
 import ProgramStage from './ProgramStage';
 import { TrackedEntityType } from '../TrackedEntityType';
-import errorCreator from '../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import { SearchGroup } from '../SearchGroup';
 import { Enrollment } from './Enrollment';
 import { DataElement } from '../DataElement';

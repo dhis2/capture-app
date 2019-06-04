@@ -11,7 +11,7 @@ import {
     isValidPositiveInteger,
     isValidNegativeInteger,
     isValidZeroOrPositiveInteger,
-} from '../../../utils/validators/form';
+} from 'capture-core-utils/validators/form';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 import D2TextField from '../../FormFields/Generic/D2TextField.component';
 import type { UpdatableFilterContent } from '../filters.types';

@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import InfiniteCalendar, { Calendar, defaultMultipleDateInterpolation, withMultipleDates } from 'react-infinite-calendar';
 
-import moment from '../../../utils/moment/momentResolver';
+import moment from 'capture-core-utils/moment/momentResolver';
 import 'react-infinite-calendar/styles.css';
 import CurrentLocaleData from '../../../utils/localeData/CurrentLocaleData';
 

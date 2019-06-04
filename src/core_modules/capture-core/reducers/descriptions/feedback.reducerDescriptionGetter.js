@@ -4,7 +4,7 @@ import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import isString from 'd2-utilizr/lib/isString';
 import isObject from 'd2-utilizr/lib/isObject';
-import errorCreator from '../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as feedbackActionTypes } from '../../components/FeedbackBar/actions/feedback.actions';
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';

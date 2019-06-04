@@ -12,7 +12,7 @@ import type
     EventValues,
 } from 'capture-core-utils/RulesEngine/rulesEngine.types';
 
-import errorCreator from '../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import {
     Program,
     TrackerProgram,

@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { pipe } from 'capture-core-utils';
-import errorCreator from '../../../../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import OptionSet from '../../../../../metaData/OptionSet/OptionSet';
 import { convertValue } from '../../../../../converters/clientToForm';
 

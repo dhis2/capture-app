@@ -9,10 +9,10 @@ import type {
     CachedOptionTranslation,
 } from '../../../../storageControllers/cache.types';
 import { DataElement, OptionSet, Option, optionSetInputTypes as inputTypes, Icon } from '../../../../metaData';
-import getCamelCaseUppercaseString from '../../../../utils/string/getCamelCaseFromUppercase';
+import getCamelCaseUppercaseString from 'capture-core-utils/string/getCamelCaseFromUppercase';
 import { convertOptionSetValue } from '../../../../converters/serverToClient';
 import getDhisIconAsync from '../../getDhisIcon';
-import errorCreator from '../../../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import OptionGroup from '../../../../metaData/OptionSet/OptionGroup';
 
 class OptionSetFactory {

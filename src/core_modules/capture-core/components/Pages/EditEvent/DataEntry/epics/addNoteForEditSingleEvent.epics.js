@@ -1,7 +1,7 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
 import uuid from 'd2-utilizr/src/uuid';
-import moment from '../../../../../utils/moment/momentResolver';
+import moment from 'capture-core-utils/moment/momentResolver';
 import { convertValue as convertListValue } from '../../../../../converters/clientToList';
 import elementTypes from '../../../../../metaData/DataElement/elementTypes';
 import {

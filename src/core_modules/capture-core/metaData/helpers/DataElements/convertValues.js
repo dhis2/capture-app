@@ -3,7 +3,7 @@ import log from 'loglevel';
 import isArray from 'd2-utilizr/src/isArray';
 import isObject from 'd2-utilizr/src/isObject';
 import { DataElement } from '../../DataElement';
-import errorCreator from '../../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import type { ConvertFn } from '../../DataElement/DataElement';
 
 export type ValuesType = { [key: string]: any };

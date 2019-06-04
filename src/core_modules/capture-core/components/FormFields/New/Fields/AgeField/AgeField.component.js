@@ -3,8 +3,8 @@ import * as React from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { AgeField as UIAgeField } from 'capture-ui';
 import withCalendarProps from '../../HOC/withCalendarProps';
-import moment from '../../../../../utils/moment/momentResolver';
-import parseDate from '../../../../../utils/parsers/date.parser';
+import moment from 'capture-core-utils/moment/momentResolver';
+import parseDate from 'capture-core-utils/parsers/date.parser';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {

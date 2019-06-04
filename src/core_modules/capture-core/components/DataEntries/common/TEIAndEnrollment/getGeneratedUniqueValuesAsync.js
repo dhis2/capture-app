@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator, pipe } from 'capture-core-utils';
-import moment from '../../../../utils/moment/momentResolver';
+import moment from 'capture-core-utils/moment/momentResolver';
 import { convertServerToClient, convertClientToForm } from '../../../../converters';
 import { getApi } from '../../../../d2/d2Instance';
 import { RenderFoundation } from '../../../../metaData';

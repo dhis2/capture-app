@@ -1,6 +1,4 @@
 // @flow
-import { Validators } from '@dhis2/d2-ui-forms';
-
 /**
  *
  * @export
@@ -8,13 +6,12 @@ import { Validators } from '@dhis2/d2-ui-forms';
  * @returns
  */
 const isValidPositiveInteger = (value: string) => {
-    const isValidPositiveNumberFn = Validators.isPositiveNumber;
-    if (!isValidPositiveNumberFn(value)) {
+    if (isNaN(value)) {
         return false;
     }
 
     const number = Number(value);
-    return Number.isSafeInteger(number);
+    return Number.isSafeInteger(number) && number > 0;
 };
 
 export default isValidPositiveInteger;

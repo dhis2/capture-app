@@ -8,7 +8,7 @@ import { validationStrategies, validationStrategiesAsArray } from './renderFound
 import Section from './Section';
 import CustomForm from './CustomForm';
 import DataElement from '../DataElement/DataElement';
-import errorCreator from '../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import type { ConvertFn } from '../DataElement/DataElement';
 import type { Access } from '../Access/Access';
 import { convertDataElementsValues } from '../helpers';

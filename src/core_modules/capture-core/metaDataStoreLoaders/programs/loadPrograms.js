@@ -1,7 +1,7 @@
 // @flow
 import StorageController from 'capture-core-utils/storage/StorageController';
 
-import chunk from '../../utils/chunk';
+import { chunk } from 'capture-core-utils';
 
 import metaProgramsSpec from '../../api/apiSpecifications/metaPrograms.apiSpecification';
 import programsSpec from '../../api/apiSpecifications/programs.apiSpecification';

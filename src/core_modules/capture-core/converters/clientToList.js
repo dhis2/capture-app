@@ -3,7 +3,7 @@ import React from 'react';
 import elementTypes from '../metaData/DataElement/elementTypes';
 import DataElement from '../metaData/DataElement/DataElement';
 
-import { displayTypes, displayDate, displayDateTime } from '../utils/date/date.utils';
+import { displayTypes, displayDate, displayDateTime } from 'capture-core-utils/date/date.utils';
 import stringifyNumber from './common/stringifyNumber';
 
 function convertDataForListDisplay(rawValue: string): string {

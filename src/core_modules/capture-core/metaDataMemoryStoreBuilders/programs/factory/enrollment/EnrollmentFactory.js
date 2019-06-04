@@ -18,9 +18,9 @@ import {
     SearchGroup,
     InputSearchGroup,
 } from '../../../../metaData';
-import capitalizeFirstLetter from '../../../../utils/string/capitalizeFirstLetter';
+import capitalizeFirstLetter from 'capture-core-utils/string/capitalizeFirstLetter';
 import DataElementFactory from './DataElementFactory';
-import errorCreator from '../../../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import { getApi } from '../../../../d2/d2Instance';
 import { DataElement } from '../../../../metaData/DataElement';
 

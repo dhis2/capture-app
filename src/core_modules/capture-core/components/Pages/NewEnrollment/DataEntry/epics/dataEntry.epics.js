@@ -1,6 +1,6 @@
 // @flow
 import log from 'loglevel';
-import errorCreator from '../../../../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import { actionTypes as urlActionTypes } from '../../actions/url.actions';
 import {
     openDataEntryForNewEnrollment,

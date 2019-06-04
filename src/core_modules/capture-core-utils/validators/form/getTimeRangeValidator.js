@@ -1,6 +1,6 @@
 // @flow
 import timeValidator from './time.validator';
-import moment from '../../../utils/moment/momentResolver';
+import moment from 'capture-core-utils/moment/momentResolver';
 /**
  *
  * @export

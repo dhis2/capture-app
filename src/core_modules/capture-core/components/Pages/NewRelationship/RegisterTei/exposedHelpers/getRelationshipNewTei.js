@@ -1,6 +1,6 @@
 // @flow
 import uuid from 'd2-utilizr/src/uuid';
-import moment from '../../../../../utils/moment/momentResolver';
+import moment from 'capture-core-utils/moment/momentResolver';
 import {
     getTrackerProgramThrowIfNotFound,
     getTrackedEntityTypeThrowIfNotFound,
@@ -10,7 +10,7 @@ import { convertFormToClient, convertClientToServer } from '../../../../../conve
 import getDisplayName from '../../../../../trackedEntityInstances/getDisplayName';
 import convertDataEntryValuesToClientValues from '../../../../DataEntry/common/convertDataEntryValuesToClientValues';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
-import capitalizeFirstLetter from '../../../../../utils/string/capitalizeFirstLetter';
+import capitalizeFirstLetter from 'capture-core-utils/string/capitalizeFirstLetter';
 
 function getTrackerProgramMetadata(programId: string) {
     const program = getTrackerProgramThrowIfNotFound(programId);

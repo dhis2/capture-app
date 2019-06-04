@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import errorCreator from '../../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import getErrorMessageAndDetails from '../../../utils/errors/getErrorMessageAndDetails';
 import {
     actionTypes,

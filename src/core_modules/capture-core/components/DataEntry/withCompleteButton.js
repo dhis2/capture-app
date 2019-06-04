@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import Button from '../Buttons/Button.component';
 import ProgressButton from '../Buttons/ProgressButton.component';
 import DataEntry from './DataEntry.component';
-import errorCreator from '../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 
 import { startCompleteEvent, completeValidationFailed, completeAbort } from './actions/dataEntry.actions';
 import getDataEntryKey from './common/getDataEntryKey';

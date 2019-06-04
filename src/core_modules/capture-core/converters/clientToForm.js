@@ -1,5 +1,5 @@
 // @flow
-import moment from '../utils/moment/momentResolver';
+import moment from 'capture-core-utils/moment/momentResolver';
 import elementTypes from '../metaData/DataElement/elementTypes';
 
 import stringifyNumber from './common/stringifyNumber';

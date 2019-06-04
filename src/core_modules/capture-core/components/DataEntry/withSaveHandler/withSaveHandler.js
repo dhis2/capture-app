@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 
 import i18n from '@dhis2/d2-i18n';
 
-import errorCreator from '../../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import { validationStrategies } from '../../../metaData/RenderFoundation/renderFoundation.const';
 import { saveValidationFailed, saveAbort } from '../actions/dataEntry.actions';
 import getDataEntryKey from '../common/getDataEntryKey';

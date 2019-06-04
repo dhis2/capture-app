@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { LoadingMask } from '@dhis2/d2-ui-core';
+import LoadingMask from '../components/LoadingMasks/LoadingMaskForPage.component';
 import LoadingMaskElementCenter from '../components/LoadingMasks/LoadingMaskElementCenter.component';
 
 type Props = {

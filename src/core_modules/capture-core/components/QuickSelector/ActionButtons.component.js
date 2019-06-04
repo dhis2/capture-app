@@ -65,7 +65,7 @@ class ActionButtons extends Component<Props> {
 
     render() {
         const { classes, showResetButton } = this.props;
-
+        return (<div></div>);
         return (
             <div className={classes.container}>
                 {

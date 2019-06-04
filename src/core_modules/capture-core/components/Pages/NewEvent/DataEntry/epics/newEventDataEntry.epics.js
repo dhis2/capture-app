@@ -37,7 +37,7 @@ import {
 } from '../../../../../rulesEngineActionsCreator/inputHelpers';
 import getProgramAndStageFromProgramId from
     '../../../../../metaData/helpers/EventProgram/getProgramAndStageFromProgramId';
-import errorCreator from '../../../../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import {
     resetList,
 } from '../../../../List/list.actions';

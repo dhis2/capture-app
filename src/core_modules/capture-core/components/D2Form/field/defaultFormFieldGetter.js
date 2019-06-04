@@ -1,6 +1,6 @@
 // @flow
 import log from 'loglevel';
-import errorCreator from '../../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import MetaDataElement from '../../../metaData/DataElement/DataElement';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 import {

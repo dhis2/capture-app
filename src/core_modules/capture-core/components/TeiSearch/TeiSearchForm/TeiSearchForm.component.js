@@ -5,7 +5,7 @@ import log from 'loglevel';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
-import errorCreator from '../../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import Button from '../../Buttons/Button.component';
 import Form from '../../D2Form/D2Form.component';
 import SearchOrgUnitSelector from '../SearchOrgUnitSelector/SearchOrgUnitSelector.container';

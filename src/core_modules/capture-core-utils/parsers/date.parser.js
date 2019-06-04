@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable complexity */
 import log from 'loglevel';
-import moment from '../../utils/moment/momentResolver';
+import moment from 'capture-core-utils/moment/momentResolver';
 
 const getReturnObject = (momentDate: ?moment$Moment) => ({
     momentDate,

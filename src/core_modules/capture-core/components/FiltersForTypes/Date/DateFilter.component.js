@@ -8,12 +8,12 @@ import { orientations } from '../../FormFields/Options/SingleSelectBoxes/singleS
 import OptionSet from '../../../metaData/OptionSet/OptionSet';
 import Option from '../../../metaData/OptionSet/Option';
 
-import moment from '../../../utils/moment/momentResolver';
+import moment from 'capture-core-utils/moment/momentResolver';
 import From from './From.component';
 import To from './To.component';
 import {
     isValidDate,
-} from '../../../utils/validators/form';
+} from 'capture-core-utils/validators/form';
 import { convertValue as convertToClientValue } from '../../../converters/formToClient';
 import { convertValue as convertToFormValue } from '../../../converters/clientToForm';
 import elementTypes from '../../../metaData/DataElement/elementTypes';

@@ -6,8 +6,8 @@ import log from 'loglevel';
 import 'typeface-roboto';
 import createHistory from 'history/createHashHistory';
 
-import D2UIApp from '@dhis2/d2-ui-app';
-import { LoadingMask } from '@dhis2/d2-ui-core';
+// import D2UIApp from '@dhis2/d2-ui-app';
+import LoadingMask from 'capture-core/components/LoadingMasks/LoadingMaskForPage.component';
 
 import JssProvider from 'react-jss/lib/JssProvider';
 import { create } from 'jss';
@@ -51,9 +51,9 @@ function runApp(domElement: HTMLElement, store: ReduxStore, history: HashHistory
 
 async function loadAppAsync(domElement: HTMLElement) {
     render(
-        <D2UIApp>
-            <LoadingMask />
-        </D2UIApp>,
+       
+            <LoadingMask />,
+       
         domElement,
     );
 

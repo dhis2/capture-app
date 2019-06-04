@@ -1,7 +1,7 @@
 // @flow
 import { createSelector } from 'reselect';
 import log from 'loglevel';
-import errorCreator from '../../../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../metaData';
 
 const programIdSelector = state => state.currentSelections.programId;

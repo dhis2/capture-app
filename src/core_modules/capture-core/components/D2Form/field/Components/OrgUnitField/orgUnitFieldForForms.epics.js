@@ -3,7 +3,7 @@ import log from 'loglevel';
 import getD2 from 'capture-core/d2/d2Instance';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import isArray from 'd2-utilizr/lib/isArray';
-import errorCreator from '../../../../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import getOrgUnitRootsKey from './getOrgUnitRootsKey';
 
 import { actionTypes as formActionTypes } from '../../../actions/form.actions';

@@ -16,7 +16,7 @@ import {
     dataElementTypes,
 } from '../../../../metaData';
 import { OptionSetFactory } from '../../../common/factory';
-import errorCreator from '../../../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import { convertFormToClient, convertClientToServer } from '../../../../converters';
 import { getApi } from '../../../../d2/d2Instance';
 

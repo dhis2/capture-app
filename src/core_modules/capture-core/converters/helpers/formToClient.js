@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 
-import errorCreator from '../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import programCollection from '../../metaDataMemoryStores/programCollection/programCollection';
 import i18n from '@dhis2/d2-i18n';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';

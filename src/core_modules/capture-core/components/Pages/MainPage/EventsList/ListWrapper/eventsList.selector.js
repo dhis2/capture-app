@@ -37,10 +37,10 @@ const createMainPropertyOptionSet = (column: ColumnOrderFromState) => {
     });
 
     // $FlowFixMe
-    const options = column.options.map(o =>
+    const options = column.options.map(option =>
         new Option((o) => {
-            o.text = o.text;
-            o.value = o.value;
+            o.text = option.text;
+            o.value = option.value;
         }),
     );
     const optionSet = new OptionSet(column.id, options, null, dataElement);

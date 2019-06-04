@@ -1,6 +1,4 @@
 // @flow
-import { Validators } from '@dhis2/d2-ui-forms';
-
 /**
  *
  * @export
@@ -8,8 +6,7 @@ import { Validators } from '@dhis2/d2-ui-forms';
  * @returns
  */
 const isNumber = (value: string) => {
-    const isValidNumberFn = Validators.isNumber;
-    return isValidNumberFn(value);
+    return !!(!isNaN(value) && Number(value) !== Infinity);
 };
 
 export default isNumber;

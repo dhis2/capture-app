@@ -2,7 +2,7 @@
 import * as React from 'react';
 import log from 'loglevel';
 import { walk, kinds } from 'react-transform-tree';
-import errorCreator from '../../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import MetadataCustomForm from '../../../metaData/RenderFoundation/CustomForm';
 import type { FieldConfig } from '../../../__TEMP__/FormBuilderExternalState.component';
 

@@ -4,7 +4,7 @@
 import isFunction from 'd2-utilizr/src/isFunction';
 import Program from './Program';
 import ProgramStage from './ProgramStage';
-import errorCreator from '../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 
 export default class EventProgram extends Program {
     _stage: ?ProgramStage;

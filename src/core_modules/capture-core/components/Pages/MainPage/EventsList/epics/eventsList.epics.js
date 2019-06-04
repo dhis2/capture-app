@@ -2,7 +2,7 @@
 import { fromPromise } from 'rxjs/observable/fromPromise';
 
 import log from 'loglevel';
-import errorCreator from 'capture-core/utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import { getInitialWorkingListDataAsync, getUpdateWorkingListDataAsync } from './workingListDataRetriever';
 import isSelectionsEqual from '../../../../App/isSelectionsEqual';
 

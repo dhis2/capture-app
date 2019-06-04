@@ -1,6 +1,6 @@
 // @flow
 import { push } from 'react-router-redux';
-import moment from '../../../../../utils/moment/momentResolver';
+import moment from 'capture-core-utils/moment/momentResolver';
 import {
     actionTypes as editEventDataEntryActionTypes,
     startSaveEditEventAfterReturnedToMainPage,

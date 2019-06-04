@@ -1,4 +1,5 @@
 // @flow
+export { default as hasValue } from './compulsory.validator';
 export { default as isValidDate } from './date.validator';
 export { default as isValidDateTime } from './dateTime.validator';
 export { default as isValidEmail } from './email.validator';

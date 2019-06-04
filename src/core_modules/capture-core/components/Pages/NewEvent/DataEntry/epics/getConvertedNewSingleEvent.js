@@ -1,5 +1,5 @@
 // @flow
-import moment from '../../../../../utils/moment/momentResolver';
+import moment from 'capture-core-utils/moment/momentResolver';
 import convertDataEntryToClientValues from '../../../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../../../converters/clientToServer';
 import { convertMainEventClientToServerWithKeysMap } from '../../../../../events/mainEventConverter';

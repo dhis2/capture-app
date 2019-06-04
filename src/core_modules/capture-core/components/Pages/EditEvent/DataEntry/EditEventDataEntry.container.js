@@ -7,7 +7,7 @@ import EditEventDataEntry from './EditEventDataEntry.component';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
 import programCollection from '../../../../metaDataMemoryStores/programCollection/programCollection';
-import errorCreator from '../../../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import {
     startAsyncUpdateFieldForEditEvent,
     startRunRulesOnUpdateForEditSingleEvent,

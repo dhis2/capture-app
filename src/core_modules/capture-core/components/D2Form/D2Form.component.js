@@ -2,7 +2,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import log from 'loglevel';
-import errorCreator from '../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 
 import D2SectionContainer from './D2Section.container';
 import D2Section from './D2Section.component';

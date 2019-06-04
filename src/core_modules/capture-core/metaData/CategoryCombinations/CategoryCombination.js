@@ -3,7 +3,7 @@
 /* eslint-disable no-restricted-syntax */
 import isFunction from 'd2-utilizr/src/isFunction';
 import Category from './Category';
-import errorCreator from '../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 
 export default class CategoryCombination {
     _name: string;

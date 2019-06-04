@@ -5,7 +5,7 @@
 import isFunction from 'd2-utilizr/src/isFunction';
 import isDefined from 'd2-utilizr/src/isDefined';
 
-import errorCreator from '../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import DataElement from '../DataElement/DataElement';
 
 export default class Section {

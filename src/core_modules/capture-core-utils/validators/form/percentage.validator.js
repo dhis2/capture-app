@@ -1,6 +1,4 @@
 // @flow
-import { Validators } from '@dhis2/d2-ui-forms';
-
 /**
  *
  * @export
@@ -9,8 +7,7 @@ import { Validators } from '@dhis2/d2-ui-forms';
  */
 const isValidPercentage = (value: string) => {
     const replacedValue = value.replace('%', '');
-    const numberValidator = Validators.isNumber;
-    return numberValidator(replacedValue);
+    return !!(!isNaN(replacedValue) && Number(replacedValue) !== Infinity);
 };
 
 export default isValidPercentage;

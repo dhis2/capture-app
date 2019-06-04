@@ -4,8 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
-import FileDownloadIcon from '@material-ui/icons/FileDownload';
-import moment from '../../utils/moment/momentResolver';
+import FileDownloadIcon from '@material-ui/icons/CloudDownload';
+import moment from 'capture-core-utils/moment/momentResolver';
 
 import { getApi } from '../../d2/d2Instance';
 import { ProgramStage, EventProgram } from '../../metaData';

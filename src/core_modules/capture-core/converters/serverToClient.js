@@ -2,7 +2,7 @@
 import moment from 'moment';
 
 import elementTypes from '../metaData/DataElement/elementTypes';
-import parseNumber from '../utils/parsers/number.parser';
+import parseNumber from 'capture-core-utils/parsers/number.parser';
 
 const optionSetConvertersForType = {
     [elementTypes.NUMBER]: parseNumber,

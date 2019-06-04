@@ -1,6 +1,6 @@
 // @flow
 import log from 'loglevel';
-import errorCreator from '../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 
 import getEnrollmentEvents from '../../events/getEnrollmentEvents';
 import { loadDataEntryEvent } from '../../components/DataEntry/actions/dataEntryLoadEdit.actions';

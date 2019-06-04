@@ -2,7 +2,7 @@
 /* eslint-disable react/no-multi-comp */
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import moment from '../../../utils/moment/momentResolver';
+import moment from 'capture-core-utils/moment/momentResolver';
 import {
     DataEntry,
     placements,

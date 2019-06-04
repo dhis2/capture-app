@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import InfoIcon from '@material-ui/icons/InfoOutline';
+import InfoIcon from '@material-ui/icons/Info';
 import i18n from '@dhis2/d2-i18n';
 
 import {

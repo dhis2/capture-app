@@ -15,10 +15,10 @@ import type {
 import Section from '../../../../metaData/RenderFoundation/Section';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import CustomForm from '../../../../metaData/RenderFoundation/CustomForm';
-import capitalizeFirstLetter from '../../../../utils/string/capitalizeFirstLetter';
+import capitalizeFirstLetter from 'capture-core-utils/string/capitalizeFirstLetter';
 import isNonEmptyArray from '../../../../utils/isNonEmptyArray';
 import ProgramStage from '../../../../metaData/Program/ProgramStage';
-import getCamelCaseUppercaseString from '../../../../utils/string/getCamelCaseFromUppercase';
+import getCamelCaseUppercaseString from 'capture-core-utils/string/getCamelCaseFromUppercase';
 import DataElementFactory from './DataElementFactory';
 import RelationshipTypesFactory from './RelationshipTypesFactory';
 
