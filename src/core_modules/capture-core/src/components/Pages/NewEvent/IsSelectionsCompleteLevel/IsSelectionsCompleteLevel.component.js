@@ -3,6 +3,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import DataEntrySelectionsComplete from '../SelectionsComplete/SelectionsComplete.container';
 import DataEntrySelectionsIncomplete from '../SelectionsIncomplete/DataEntrySelectionsIncomplete.container';
+import { TrackerProgramHandler } from '../../../TrackerProgramHandler';
 
 const getStyles = () => ({
 
@@ -23,7 +24,9 @@ class IsSelectionsCompleteLevel extends React.Component<Props> {
         }
 
         return (
-            <DataEntrySelectionsComplete />
+            <TrackerProgramHandler>
+                <DataEntrySelectionsComplete />
+            </TrackerProgramHandler>
         );
     }
     render() {

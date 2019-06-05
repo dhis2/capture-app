@@ -10,6 +10,7 @@ import {
     actionTypes as mainSelectionActionTypes,
     workingListInitialDataRetrieved,
     workingListInitialRetrievalFailed,
+    workingListDataRetrievalCanceled,
 } from '../../mainSelections.actions';
 import { actionTypes as paginationActionTypes } from '../Pagination/pagination.actions';
 import {
@@ -33,6 +34,7 @@ import {
     batchActionTypes as filterSelectorBatchActionTypes,
 } from '../FilterSelectors/filterSelector.actions';
 import { batchActions } from 'redux-batched-actions';
+import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../metaData';
 
 const errorMessages = {
     WORKING_LIST_RETRIEVE_ERROR: 'Working list could not be loaded',
@@ -91,6 +93,7 @@ const getInitialWorkingListActionAsync = (
     customArgs?: { [id: string]: string},
 ): Promise<ReduxAction<any, any>> => {
     const queryArgsFromState = getUnprocessedQueryArgsForInitialWorkingList(state);
+
     const queryArgs = {
         ...queryArgsFromState,
         ...customArgs,
@@ -108,6 +111,10 @@ const getInitialWorkingListActionAsync = (
     };
 
     const { programId, orgUnitId, categories } = allQueryArgs;
+    const program = getProgramFromProgramIdThrowIfNotFound(programId);
+    if (program instanceof TrackerProgram) {
+        return Promise.resolve(workingListDataRetrievalCanceled());
+    }
 
     return getInitialWorkingListDataAsync(allQueryArgs, state.workingListsColumnsOrder.main)
         .then(data =>

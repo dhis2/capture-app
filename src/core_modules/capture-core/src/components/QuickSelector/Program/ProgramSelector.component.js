@@ -186,13 +186,12 @@ class ProgramSelector extends Component<Props> {
         if (this.props.selectedOrgUnitId) {
             programOptions = this.getOptionsFromPrograms(this.programsArray
                 .filter(program =>
-                    program instanceof EventProgram
-                    && program.organisationUnits[this.props.selectedOrgUnitId]
-                    && program.access.data.read),
+                    program.organisationUnits[this.props.selectedOrgUnitId] &&
+                    program.access.data.read),
             );
         } else {
             programOptions = this.getOptionsFromPrograms(this.programsArray
-                .filter(program => program instanceof EventProgram && program.access.data.read),
+                .filter(program => program.access.data.read),
             );
         }
         return programOptions;
@@ -200,7 +199,7 @@ class ProgramSelector extends Component<Props> {
 
     areAllProgramsAvailable(programOptions) {
         return (programOptions.length === this.programsArray
-            .filter(program => program instanceof EventProgram && program.access.data.read).length);
+            .filter(program => program.access.data.read).length);
     }
 
     renderSelectedProgram(selectedProgram) {

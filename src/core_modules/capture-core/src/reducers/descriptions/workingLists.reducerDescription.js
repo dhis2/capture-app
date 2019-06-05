@@ -172,6 +172,13 @@ export const workingListsMetaDesc = createReducerDescription({
             next: {},
         },
     }),
+    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_CANCELED]: state => ({
+        ...state,
+        main: {
+            ...state.main,
+            next: {},
+        },
+    }),
     [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
         const pagingData = action.payload.pagingData;
@@ -386,6 +393,13 @@ export const workingListsUIDesc = createReducerDescription({
         const newState = { ...state };
         newState.main = getReadyState({}, {
             dataLoadingError: action.payload,
+        });
+        return newState;
+    },
+    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_CANCELED]: (state) => {
+        const newState = { ...state };
+        newState.main = getReadyState(newState.main, {
+            dataLoadingError: null,
         });
         return newState;
     },
@@ -726,6 +740,13 @@ export const workingListsAppliedFiltersDesc = createReducerDescription({
         return newState;
     },
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: (state) => {
+        const newState = {
+            ...state,
+            main: {},
+        };
+        return newState;
+    },
+    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_CANCELED]: (state) => {
         const newState = {
             ...state,
             main: {},

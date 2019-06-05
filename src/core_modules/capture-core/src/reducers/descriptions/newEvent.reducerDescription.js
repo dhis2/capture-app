@@ -71,7 +71,7 @@ export const newEventPageDesc = createReducerDescription({
         newState.showAddRelationship = false;
         return newState;
     },
-    [newEventDataEntryActionTypes.SELECTIONS_NOT_COMPLETE_OPENING_NEW_EVENT]: (state) => {
+    [newEventDataEntryActionTypes.NEW_EVENT_IN_DATAENTRY_OPENING_CANCEL]: (state) => {
         const newState = { ...state };
         newState.dataEntryIsLoading = false;
         return newState;

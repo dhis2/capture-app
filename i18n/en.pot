@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-05-15T10:39:07.214Z\n"
-"PO-Revision-Date: 2019-05-15T10:39:07.214Z\n"
+"POT-Creation-Date: 2019-06-05T10:14:43.507Z\n"
+"PO-Revision-Date: 2019-06-05T10:14:43.507Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -581,6 +581,12 @@ msgid "Search by attributes"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgstr ""
+
+msgid "To work with the selected program,"
+msgstr ""
+
+msgid "open the Tracker Capture app"
 msgstr ""
 
 msgid "Program not found"

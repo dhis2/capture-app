@@ -14,7 +14,7 @@ import {
 import {
     actionTypes as newEventDataEntryActionTypes,
     batchActionTypes as newEventDataEntryBatchActionTypes,
-    selectionsNotCompleteOpeningNewEvent,
+    cancelOpenNewEventInDataEntry,
     batchActionTypes,
 } from '../actions/dataEntry.actions';
 import {
@@ -48,6 +48,7 @@ import {
     listId,
 } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
+import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../metaData';
 
 const errorMessages = {
     PROGRAM_OR_STAGE_NOT_FOUND: 'Program or stage not found',
@@ -63,6 +64,13 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
         .map(() => {
             const state = store.getState();
             const programId = state.currentSelections.programId;
+
+            // cancel if tracker program
+            const program = getProgramFromProgramIdThrowIfNotFound(programId);
+            if (program instanceof TrackerProgram) {
+                return cancelOpenNewEventInDataEntry();
+            }
+
             const orgUnitId = state.currentSelections.orgUnitId;
             const orgUnit = state.organisationUnits[orgUnitId];
             const metadataContainer = getProgramAndStageFromProgramId(programId);
@@ -98,9 +106,15 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
             const state = store.getState();
             const selectionsComplete = state.currentSelections.complete;
             if (!selectionsComplete) {
-                return selectionsNotCompleteOpeningNewEvent();
+                return cancelOpenNewEventInDataEntry();
             }
             const programId = state.currentSelections.programId;
+            // cancel if tracker program
+            const program = getProgramFromProgramIdThrowIfNotFound(programId);
+            if (program instanceof TrackerProgram) {
+                return cancelOpenNewEventInDataEntry();
+            }
+
             const orgUnitId = state.currentSelections.orgUnitId;
             const orgUnit = state.organisationUnits[orgUnitId];
             const metadataContainer = getProgramAndStageFromProgramId(programId);
@@ -129,12 +143,22 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
         newEventSelectorTypes.SET_CATEGORY_OPTION,
         newEventSelectorTypes.SET_ORG_UNIT,
         newEventSelectorTypes.SET_PROGRAM_ID)
-        .filter(() => store.getState().currentSelections.complete)
+        .filter(() => {
+            const state = store.getState();
+            const { complete, programId } = state.currentSelections;
+            if (!complete) {
+                return false;
+            }
+            // cancel if tracker program
+            const program = getProgramFromProgramIdThrowIfNotFound(programId);
+            return !(program instanceof TrackerProgram);
+        })
         .switchMap(() => {
             const state = store.getState();
+            const { programId } = state.currentSelections;
             // const newEventsListColumnsOrder = state.workingListsColumnsOrder.main || [];
             const newEventsMeta = { sortById: 'created', sortByDirection: 'desc' };
-            return getColumnsConfiguration(state.currentSelections.programId).then(columnsConfig =>
+            return getColumnsConfiguration(programId).then(columnsConfig =>
                 resetList(listId, columnsConfig, newEventsMeta, state.currentSelections));
         });
 
