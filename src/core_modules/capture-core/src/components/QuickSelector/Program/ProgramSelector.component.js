@@ -12,7 +12,7 @@ import { programCollection } from '../../../metaDataMemoryStores';
 import VirtualizedSelect from '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import ProgramList from './ProgramList';
 
-import { Program, EventProgram, CategoryOption } from '../../../metaData';
+import { Program, CategoryOption } from '../../../metaData';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
 import './programSelector.css';
 import LinkButton from '../../Buttons/LinkButton.component';
