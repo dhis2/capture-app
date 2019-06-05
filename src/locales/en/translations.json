@@ -186,6 +186,8 @@
     "Search {{uniqueAttrName}}": "",
     "Search by attributes": "",
     "Fill in at least {{minAttributesRequired}} attributes to search": "",
+    "To work with the selected program,": "",
+    "open the Tracker Capture app": "",
     "Program not found": "",
     "Program is not a tracker program": "",
     "Profile": "",
