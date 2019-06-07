@@ -49,6 +49,7 @@ const styles = (theme: Theme) => ({
     selectedButton: {
         width: 20,
         height: 20,
+        padding: 0,
     },
     selectedButtonIcon: {
         width: 20,

@@ -15,7 +15,10 @@ const styles = () => ({
         flexDirection: 'row',
     },
     arrowButton: {
-        padding: 0,
+        paddingTop: 6,
+        paddingBottom: 6,
+        paddingLeft: 6,
+        paddingRight: 6,
         minWidth: 0,
         borderBottomLeftRadius: 0,
         borderTopLeftRadius: 0,

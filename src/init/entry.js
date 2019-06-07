@@ -28,32 +28,40 @@ const DOM_ID = 'app';
 
 // Change the insertion point for jss styles.
 // For this app the insertion point should be below the css.
-var insertionPoint = document.createElement('noscript');
+const insertionPoint = document.createElement('noscript');
 insertionPoint.setAttribute('id', 'jss-insertion-point');
 document.head.appendChild(insertionPoint);
 const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());
 jss.options.insertionPoint = insertionPoint;
 
+function JSSProviderShell(props) {
+    return (
+        <JssProvider jss={jss} generateClassName={generateClassName}>
+            {props.children}
+        </JssProvider>
+    );
+}
+
 function runApp(domElement: HTMLElement, store: ReduxStore, history: HashHistory) {
     store.dispatch(loadApp());
     addBeforeUnloadEventListener(store);
     render(
-        <JssProvider jss={jss} generateClassName={generateClassName}>
+        <JSSProviderShell>
             <App
                 store={store}
                 history={history}
             />
-        </JssProvider>,
+        </JSSProviderShell>,
         domElement,
     );
 }
 
 async function loadAppAsync(domElement: HTMLElement) {
     render(
-       
-            <LoadingMask />,
-       
+        <JSSProviderShell>
+            <LoadingMask />
+        </JSSProviderShell>,
         domElement,
     );
 

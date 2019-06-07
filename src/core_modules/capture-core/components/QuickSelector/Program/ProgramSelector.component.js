@@ -71,6 +71,7 @@ const styles = (theme: Theme) => ({
         float: 'right',
         width: 20,
         height: 20,
+        padding: 0,
     },
     selectedButtonIcon: {
         width: 20,
@@ -386,4 +387,4 @@ class ProgramSelector extends Component<Props> {
     }
 }
 
-export default withStyles(styles)(ProgramSelector);
+export default withStyles(styles, { index: 1 })(ProgramSelector);
