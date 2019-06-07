@@ -3,7 +3,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { Map, TileLayer, Marker } from 'react-leaflet';
-import { ReactLeafletSearch } from 'react-leaflet-search';
+import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import ClearIcon from '@material-ui/icons/Clear';
 import IconButton from '@material-ui/core/IconButton';
 import AddLocationIcon from '../Icons/AddLocationIcon.component';

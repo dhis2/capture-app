@@ -5,7 +5,7 @@ import MapIcon from '@material-ui/icons/Map';
 import CheckIcon from '@material-ui/icons/Check';
 import L from 'leaflet';
 import { Map, TileLayer, FeatureGroup } from 'react-leaflet';
-import { ReactLeafletSearch } from 'react-leaflet-search';
+import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import EditControl from 'react-leaflet-draw/lib/EditControl';
 import defaultClasses from './polygonField.module.css';
 import './styles.css';
