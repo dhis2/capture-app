@@ -146,6 +146,10 @@ async function initializeMetaData(dbLocale: string) {
     await buildMetaData(dbLocale);
 }
 
+function setHeaderBarStrings(d2){
+    d2.i18n.addStrings(['app_search_placeholder=search']);
+}
+
 export async function initializeAsync() {
     setLogLevel();
 
@@ -154,6 +158,7 @@ export async function initializeAsync() {
     const d2 = await init();
     const userSettings = await getUserSettings();
     setD2(d2);
+    setHeaderBarStrings(d2);
     // initialize storage controllers
     await initControllersAsync();
 
