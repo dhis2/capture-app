@@ -5,7 +5,7 @@ import Popover from '@material-ui/core/Popover';
 import ArrowDownwardIcon from '@material-ui/icons/KeyboardArrowDown';
 import ArrowUpwardIcon from '@material-ui/icons/KeyboardArrowUp';
 
-import Button from '../../../../../Buttons/Button.component';
+import { Button } from '../../../../../Buttons';
 import ActiveFilterButton from './ActiveFilterButton.component';
 import FilterSelectorContents from '../Contents/FilterSelectorContents.component';
 import OptionSet from '../../../../../../metaData/OptionSet/OptionSet';
@@ -146,11 +146,6 @@ class FilterButton extends Component<Props, State> {
 
         return (
             <Button
-                variant="outlined"
-                color="default"
-                size={'small'}
-                classes={{ button: classes.inactiveFilterButton }}
-                muiClasses={{ label: classes.inactiveFilterButtonLabel }}
                 onClick={this.openFilterSelector}
             >
                 {title}

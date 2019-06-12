@@ -21,6 +21,7 @@ type Props = {
         arrowIcon: string,
         relationshipActions: string,
         relationshipHighlight: string,
+        addButtonContainer: string,
     },
     relationships: Array<Relationship>,
     highlightRelationshipId?: ?string,
@@ -29,6 +30,7 @@ type Props = {
     onRemoveRelationship: (relationshipClientId: string) => void,
     onOpenAddRelationship: () => void,
     currentEntityId: string,
+    smallMainButton: boolean,
 };
 
 
@@ -166,7 +168,7 @@ class Relationships extends React.Component<Props> {
     }
 
     render() {
-        const { classes, onOpenAddRelationship, entityAccess, writableRelationshipTypes, relationshipsRef } = this.props;
+        const { classes, onOpenAddRelationship, entityAccess, writableRelationshipTypes, relationshipsRef, smallMainButton } = this.props;
         const canCreate = entityAccess.write && writableRelationshipTypes.length > 0;
         return (
             <div className={classes.container} ref={relationshipsRef}>
@@ -179,6 +181,7 @@ class Relationships extends React.Component<Props> {
                             <Button
                                 onClick={onOpenAddRelationship}
                                 disabled={!canCreate}
+                                small={smallMainButton}
                             >
                                 {i18n.t('Add relationship')}
                             </Button>

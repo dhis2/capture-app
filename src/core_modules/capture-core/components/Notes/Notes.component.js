@@ -10,39 +10,12 @@ import {
 } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { withFocusSaver } from 'capture-ui';
-import Button from '../Buttons/Button.component';
+import { Button } from '../Buttons';
 import { TextField } from '../FormFields/New';
 import type { Note } from './notes.types';
 
 
 const FocusTextField = withFocusSaver()(TextField);
-
-type Props = {
-    notes: Array<Note>,
-    onAddNote: (value: string) => void,
-    onBlur: (value: ?string, options: any) => void,
-    value: ?string,
-    entityAccess: { read: boolean, write: boolean },
-    classes: {
-        noteItem: string,
-        inputContainer: string,
-        borderBoxContent: string,
-        newCommentButtonContainer: string,
-        newNoteContainer: string,
-        newNoteFormContainer: string,
-        textEditorContainer: string,
-        notesContainer: string,
-        noteItemHeader: string,
-        noteItemUser: string,
-        noteItemDate: string,
-        notesList: string,
-    }
-};
-
-type State = {
-    addIsOpen: boolean,
-    value: ?string,
-}
 
 const styles = theme => ({
     noteItem: {
@@ -87,7 +60,41 @@ const styles = theme => ({
     newNoteButtonContainer: {
         display: 'inline-block',
     },
+    addCommentContainer: {
+        marginRight: 5,
+        marginLeft: 2,
+    },
 });
+
+type Props = {
+    notes: Array<Note>,
+    onAddNote: (value: string) => void,
+    onBlur: (value: ?string, options: any) => void,
+    value: ?string,
+    entityAccess: { read: boolean, write: boolean },
+    smallMainButton: boolean,
+    classes: {
+        noteItem: string,
+        inputContainer: string,
+        borderBoxContent: string,
+        newCommentButtonContainer: string,
+        newNoteContainer: string,
+        newNoteFormContainer: string,
+        textEditorContainer: string,
+        notesContainer: string,
+        noteItemHeader: string,
+        noteItemUser: string,
+        noteItemDate: string,
+        notesList: string,
+        addCommentContainer: string,
+        newNoteButtonContainer: string,
+    },
+};
+
+type State = {
+    addIsOpen: boolean,
+    value: ?string,
+}
 
 class Notes extends React.Component<Props, State> {
     static defaultProps = {
@@ -152,10 +159,16 @@ class Notes extends React.Component<Props, State> {
                     />
                 </Editor>
                 <div className={classes.newCommentButtonContainer}>
-                    <Button onClick={this.handleAddNote} color="primary">
+                    <Button
+                        onClick={this.handleAddNote}
+                        className={classes.addCommentContainer}
+                        primary
+                    >
                         {i18n.t('Add comment')}
                     </Button>
-                    <Button onClick={this.onCancel}>
+                    <Button
+                        onClick={this.onCancel}
+                    >
                         {i18n.t('Cancel')}
                     </Button>
                 </div>
@@ -164,16 +177,22 @@ class Notes extends React.Component<Props, State> {
         );
     }
 
-    renderButton = (canAddComment: boolean) => (
-        <Tooltip title={canAddComment ? '' : i18n.t('You dont have access to write comments')}>
-            <div className={this.props.classes.newNoteButtonContainer}>
-                <Button onClick={this.toggleIsOpen} disabled={!canAddComment}>
-                    {i18n.t('Write comment')}
-                </Button>
-            </div>
-        </Tooltip>
-
-    )
+    renderButton = (canAddComment: boolean) => {
+        const { smallMainButton, classes } = this.props;
+        return (
+            <Tooltip title={canAddComment ? '' : i18n.t('You dont have access to write comments')}>
+                <div className={classes.newNoteButtonContainer}>
+                    <Button
+                        onClick={this.toggleIsOpen}
+                        disabled={!canAddComment}
+                        small={smallMainButton}
+                    >
+                        {i18n.t('Write comment')}
+                    </Button>
+                </div>
+            </Tooltip>
+        );
+    }
 
     render = () => {
         const { notes, classes, entityAccess } = this.props;

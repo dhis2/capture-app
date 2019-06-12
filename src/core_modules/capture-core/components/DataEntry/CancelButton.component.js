@@ -1,14 +1,12 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import ProgressButton from '../Buttons/ProgressButton.component';
+import { Button } from '../Buttons';
 import ConfirmDialog from '../Dialogs/ConfirmDialog.component';
 
 type Props = {
-    finalInProgress: boolean,
     dataEntryHasChanges: boolean,
     onCancel: () => void,
-    options: Object,
 }
 
 type State = {
@@ -33,21 +31,14 @@ export default class CancelButton extends React.Component<Props, State> {
     }
 
     render() {
-        const {
-            finalInProgress,
-            options,
-        } = this.props;
-
         return (
             <div>
-                <ProgressButton
-                    variant="text"
+                <Button
                     onClick={this.handleCancel}
-                    color={options.color || 'primary'}
-                    inProgress={finalInProgress}
+                    secondary
                 >
                     { i18n.t('Cancel') }
-                </ProgressButton>
+                </Button>
                 <ConfirmDialog
                     header={i18n.t('Unsaved changes')}
                     text={i18n.t('Leaving this page will discard the changes you made to this event.')}

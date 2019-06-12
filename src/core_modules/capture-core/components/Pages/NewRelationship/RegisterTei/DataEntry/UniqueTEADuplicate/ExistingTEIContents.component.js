@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
-import Button from '@material-ui/core/Button';
+import { Button } from '../../../../../Buttons';
 import CardList from '../../../../../CardList/CardList.component';
 import { DataElement } from '../../../../../../metaData';
 
@@ -41,10 +41,16 @@ class ExistingTEIContents extends React.Component<Props> {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={onCancel} color="primary">
+                    <Button
+                        onClick={onCancel}
+                        secondary
+                    >
                         {i18n.t('Cancel')}
                     </Button>
-                    <Button onClick={this.handleLink} color="primary" autoFocus>
+                    <Button
+                        onClick={this.handleLink}
+                        primary
+                    >
                         {i18n.t('Link')}
                     </Button>
                 </DialogActions>

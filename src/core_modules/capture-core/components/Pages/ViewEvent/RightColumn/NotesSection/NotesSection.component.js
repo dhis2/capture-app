@@ -74,6 +74,7 @@ class NotesSection extends React.Component<Props> {
                     onAddNote={onAddNote}
                     onBlur={this.props.onUpdateNoteField}
                     value={fieldValue}
+                    smallMainButton
                 />
             </ViewEventSection>
         );

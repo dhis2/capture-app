@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import { Button } from '../../../Buttons';
 import i18n from '@dhis2/d2-i18n';
 import DataEntry from './DataEntry/DataEntry.container';
 import { RegistrationSection } from './RegistrationSection';
@@ -63,7 +63,7 @@ class RegisterTei extends React.Component<Props, State> {
         return (
             <Button
                 onClick={this.handleSaveFromDialog}
-                color="primary"
+                primary
             >
                 {i18n.t('Save as new {{tetName}}', { tetName: this.props.tetName })}
             </Button>
@@ -72,7 +72,10 @@ class RegisterTei extends React.Component<Props, State> {
 
     getCancelButton() {
         return (
-            <Button onClick={this.handleDialogCancel} color="primary">
+            <Button
+                onClick={this.handleDialogCancel}
+                secondary
+            >
                 {i18n.t('Cancel')}
             </Button>
         );

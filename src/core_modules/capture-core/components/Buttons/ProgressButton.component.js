@@ -3,7 +3,7 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
 
-import Button from './Button.component';
+import Button from './ButtonOld.component';
 import LoadingMaskForButton from '../LoadingMasks/LoadingMaskForButton.component';
 
 const styles = () => ({

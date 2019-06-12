@@ -30,14 +30,7 @@ const getStyles = (theme: Theme) => ({
         padding: theme.typography.pxToRem(10),
     },
     showAllEvents: {
-        paddingLeft: 8,
         marginBottom: 10,
-        textTransform: 'none',
-        backgroundColor: '#E9EEF4',
-        boxShadow: 'none',
-        color: '#494949',
-        fontSize: 14,
-        fontWeight: 'normal',
     },
 });
 
@@ -99,8 +92,8 @@ class NewEventDataEntryWrapper extends React.Component<Props, State> {
 
         return (
             <Button
-                color="primary"
                 onClick={() => this.props.onFormLayoutDirectionChange(!this.props.formHorizontal)}
+                secondary
             >
                 {this.props.formHorizontal ? i18n.t('Switch to form view') : i18n.t('Switch to row view')}
             </Button>
@@ -111,7 +104,7 @@ class NewEventDataEntryWrapper extends React.Component<Props, State> {
         const { classes, formFoundation, formHorizontal, stage } = this.props;
         return (
             <div>
-                <Button className={classes.showAllEvents} variant="raised" onClick={this.handleGoBackToAllEvents}>
+                <Button className={classes.showAllEvents} onClick={this.handleGoBackToAllEvents}>
                     <ChevronLeft />
                     {i18n.t('Show all events')}
                 </Button>

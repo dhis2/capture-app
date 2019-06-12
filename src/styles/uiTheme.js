@@ -7,7 +7,7 @@ import yellow from '@material-ui/core/colors/yellow';
 const primary = {
     main: '#1976D2',
     dark: '#004BA0',
-    light: '#63A4FF',
+    light: '#147cd7',
     lightest: '#EAF4FF',
 };
 

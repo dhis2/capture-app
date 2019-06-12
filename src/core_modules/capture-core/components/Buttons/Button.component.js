@@ -1,47 +1,16 @@
 // @flow
 import * as React from 'react';
+import { Button as D2Button } from '@dhis2/ui-core';
 
-import MuiButton from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
-
-const styles = () => ({
-    button: {},
-    contents: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
-
-type Props = {
-    classes: {
-        contents: string,
-        button: string,
-    },
-    muiClasses: Object,
-    children: React.Node,
-    muiButtonRef: (muiButtonInstance: any) => void,
-};
+type Props = {};
 
 const Button = (props: Props) => {
-    const { classes, children, muiClasses, muiButtonRef, ...passOnProps } = props;
-    const buttonRefPropObject = muiButtonRef ? { buttonRef: muiButtonRef } : null;
-
-    return (
-        <MuiButton
-            {...buttonRefPropObject}
-            className={classes.button}
-            classes={muiClasses}
+    const { ...passOnProps } = props;
+    return(
+        <D2Button
             {...passOnProps}
-        >
-            <div
-                className={classes.contents}
-            >
-                {children}
-            </div>
-        </MuiButton>
+        />
     );
-};
+}
 
-export default withStyles(styles)(Button);
-
+export default Button;

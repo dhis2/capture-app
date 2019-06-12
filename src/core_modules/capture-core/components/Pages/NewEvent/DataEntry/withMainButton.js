@@ -6,7 +6,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import newEventSaveTypes from './newEventSaveTypes';
 import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
-import MultiButton from '../../../Buttons/MultiButton.component';
+import { SimpleSplitButton } from '../../../Buttons';
 import getDataEntryHasChanges from '../getNewEventDataEntryHasChanges';
 
 type Props = {
@@ -82,19 +82,16 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
             const secondaries = buttons.slice(1);
             return (
                 <Tooltip title={!hasWriteAccess ? i18n.t('No write access') : ''}>
-                    <MultiButton
-                        variant="raised"
-                        color={'primary'}
-                        buttonType="progress"
-                        buttonText={primary.text}
-                        disabled={!hasWriteAccess}
-                        buttonProps={{
-                            onClick: primary.onClick,
-                            color: 'primary',
-                            inProgress: finalInProgress,
-                        }}
-                        dropDownItems={secondaries}
-                    />
+                    <div>
+                        <SimpleSplitButton
+                            primary
+                            disabled={!hasWriteAccess}
+                            onClick={primary.onClick}
+                            dropDownItems={secondaries}
+                        >
+                            {primary.text}
+                        </SimpleSplitButton>
+                    </div>
                 </Tooltip>
             );
         }

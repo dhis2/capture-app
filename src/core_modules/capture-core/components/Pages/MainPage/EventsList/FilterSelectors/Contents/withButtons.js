@@ -1,8 +1,8 @@
-// @flow
+
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import Button from '../../../../../Buttons/Button.component';
+import { Button } from '../../../../../Buttons';
 import type { UpdatableFilterContent } from '../../../../../FiltersForTypes/filters.types';
 
 const getStyles = (theme: Theme) => ({
@@ -85,8 +85,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
                         >
                             <Button
                                 muiButtonRef={this.setUpdateButtonInstance}
-                                variant="raised"
-                                color="primary"
+                                primary
                                 onClick={this.handleUpdateClick}
                             >
                                 {i18n.t('Update')}
@@ -94,8 +93,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
                         </div>
                         <Button
                             muiButtonRef={this.setCloseButtonInstance}
-                            variant="text"
-                            color="primary"
+                            secondary
                             onClick={onClose}
                         >
                             {i18n.t('Close')}

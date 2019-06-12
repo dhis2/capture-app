@@ -7,7 +7,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import Button from '@material-ui/core/Button';
+import { Button } from '../Buttons';
 import IconButton from '@material-ui/core/IconButton';
 import SettingsIcon from '@material-ui/icons/Settings';
 
@@ -102,8 +102,11 @@ class ColumnSelector extends Component<Props, State> {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleSave} color="primary" autoFocus>
-                            Save
+                        <Button
+                            onClick={this.handleSave}
+                            primary
+                        >
+                            {i18n.t('Save')}
                         </Button>
                     </DialogActions>
                 </Dialog>

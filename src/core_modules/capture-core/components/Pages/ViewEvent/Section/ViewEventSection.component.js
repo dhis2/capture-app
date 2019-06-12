@@ -17,8 +17,7 @@ const getStyles = (theme: Theme) => ({
 
     },
     toggleCollapseButton: {
-        height: theme.typography.pxToRem(32),
-        width: theme.typography.pxToRem(32),
+        padding: 4,
     },
     contentContainer: {
         padding: theme.typography.pxToRem(10),

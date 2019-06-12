@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 
-import Button from '@material-ui/core/Button';
+import { Button } from '../Buttons';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -43,10 +43,10 @@ class ConfirmDialog extends Component<Props> {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={onCancel} color="primary">
+                    <Button onClick={onCancel} secondary>
                         {cancelText}
                     </Button>
-                    <Button onClick={onConfirm} color="primary">
+                    <Button onClick={onConfirm} primary>
                         {confirmText}
                     </Button>
                 </DialogActions>

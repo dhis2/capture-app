@@ -8,7 +8,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Button from '@material-ui/core/Button';
+import { Button } from '../Buttons';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 import OrgUnitField from './OrgUnitField.container';
@@ -145,15 +145,21 @@ class OrgUnitSelector extends Component<Props, State> {
                         <DialogTitle>{i18n.t('Start Again')}</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
-                                Are you sure? All unsaved data will be lost.
+                                {i18n.t('Are you sure? All unsaved data will be lost.')}
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={this.handleClose} color="secondary">
-                                Cancel
+                            <Button
+                                onClick={this.handleClose}
+                                secondary
+                            >
+                                {i18n.t('Cancel')}
                             </Button>
-                            <Button onClick={this.handleReset} color="primary" autoFocus>
-                                Accept
+                            <Button
+                                onClick={this.handleReset}
+                                primary
+                            >
+                                {i18n.t('Accept')}
                             </Button>
                         </DialogActions>
                     </Dialog>

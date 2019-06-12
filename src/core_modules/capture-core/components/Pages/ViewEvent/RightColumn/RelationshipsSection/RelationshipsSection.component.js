@@ -90,6 +90,7 @@ class RelationshipsSection extends React.Component<Props> {
                     onRemoveRelationship={this.handleRemoveRelationship}
                     currentEntityId={eventId}
                     entityAccess={eventAccess}
+                    smallMainButton
                 />
             </ViewEventSection>
         );

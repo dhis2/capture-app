@@ -7,7 +7,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { withStyles } from '@material-ui/core/styles';
 import getDataEntryKey from './common/getDataEntryKey';
-import Button from '../Buttons/Button.component';
+import { Button } from '../Buttons';
 import TextEditor from '../FormFields/TextEditor/TextEditor.component';
 
 type Props = {
@@ -125,7 +125,7 @@ const getNotes = (InnerComponent: React.ComponentType<any>) =>
         }
 
         renderButton = () => (
-            <Button onClick={this.toggleIsOpen}>
+            <Button onClick={this.toggleIsOpen} small>
                 {i18n.t('Write comment')}
             </Button>
         )

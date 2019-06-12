@@ -3,9 +3,8 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 
-import Button from '@material-ui/core/Button';
+import { Button } from '../Buttons';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
-import LinkButton from '../Buttons/LinkButton.component';
 import { TrackerProgram } from '../../metaData';
 
 // Find button to be included when find(tracked entity instance) is supported
@@ -16,10 +15,12 @@ const styles = () => ({
         display: 'flex',
         justifyContent: 'flex-end',
         flexGrow: 1,
-        padding: 10,
     },
     startAgainContainer: {
         flexGrow: 1,
+    },
+    icon: {
+        paddingRight: 5,
     },
 });
 
@@ -71,20 +72,21 @@ class ActionButtons extends Component<Props> {
                 {
                     showResetButton ?
                         <div className={classes.startAgainContainer}>
-                            <LinkButton
+                            <Button
                                 onClick={this.handleStartAgainClick}
+                                small
+                                secondary
                             >
                                 { i18n.t('Start again') }
-                            </LinkButton>
+                            </Button>
                         </div>
                         :
                         null
                 }
                 <Button
                     onClick={this.handleNewClick}
-                    color="primary"
                 >
-                    <AddIcon className={classes.rightButton} />
+                    <AddIcon className={classes.icon} />
                     {this.getButtonText()}
                 </Button>
                 {/* Find button to be included when find(tracked entity instance)

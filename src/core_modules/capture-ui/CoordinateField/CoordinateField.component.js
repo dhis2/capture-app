@@ -121,7 +121,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
             <div className={mapIconContainerClass}>
                 <IconButton
                     disabled={!!disabled}
-                    style={{ height: 42, width: 42, borderRadius: 0 }}
+                    style={{ height: 42, width: 42, borderRadius: 0, padding: 0 }}
                     classes={{ root: classNames(defaultClasses.mapIcon, mapIconCustomClass) }}
                 >
                     <AddLocationIcon
@@ -239,7 +239,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
         const clearIconClass = shrinkDisabled ? defaultClasses.clearIcon : defaultClasses.clearIconWithMargin;
         return (
             <div className={clearIconClass}>
-                <IconButton style={{ height: 42, width: 42, borderRadius: 0 }} disabled={!!disabled}>
+                <IconButton style={{ height: 42, width: 42, borderRadius: 0, padding: 0 }} disabled={!!disabled}>
                     <ClearIcon onClick={this.handleClear} />
                 </IconButton>
             </div>

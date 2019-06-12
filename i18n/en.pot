@@ -5,13 +5,16 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-05-22T12:12:04.076Z\n"
-"PO-Revision-Date: 2019-05-22T12:12:04.076Z\n"
+"POT-Creation-Date: 2019-06-12T12:55:57.105Z\n"
+"PO-Revision-Date: 2019-06-12T12:55:57.105Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
 
 msgid "Columns to show in table"
+msgstr ""
+
+msgid "Save"
 msgstr ""
 
 msgid "Column"
@@ -293,9 +296,6 @@ msgstr ""
 msgid "No write access"
 msgstr ""
 
-msgid "Save"
-msgstr ""
-
 msgid "Show all events"
 msgstr ""
 
@@ -545,6 +545,12 @@ msgid "Selected registering unit"
 msgstr ""
 
 msgid "Start Again"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Accept"
 msgstr ""
 
 msgid "Registering Organisation Unit"
