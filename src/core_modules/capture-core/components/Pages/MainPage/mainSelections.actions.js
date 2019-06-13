@@ -6,6 +6,7 @@ export const actionTypes = {
     MAIN_SELECTIONS_COMPLETED: 'MainSelectionsCompleted',
     WORKING_LIST_DATA_RETRIEVED: 'WorkingListDataRetrieved',
     WORKING_LIST_DATA_RETRIEVAL_FAILED: 'WorkingListDataRetrievalFailed',
+    WORKING_LIST_DATA_RETRIEVAL_CANCELED: 'WorkingListDataRetrievalCanceled',
     ORG_UNIT_DATA_RETRIVED: 'OrgUnitDataRetrived',
     UPDATE_MAIN_SELECTIONS_FROM_URL: 'UpdateMainSelectionsFromUrl',
     SET_ORG_UNIT_BASED_ON_URL: 'SetOrgUnitBasedOnUrl',
@@ -27,6 +28,9 @@ export const workingListInitialDataRetrieved =
 
 export const workingListInitialRetrievalFailed =
     (errorMessage: string) => actionCreator(actionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED)(errorMessage);
+
+export const workingListDataRetrievalCanceled =
+    () => actionCreator(actionTypes.WORKING_LIST_DATA_RETRIEVAL_CANCELED)();
 
 export const orgUnitDataRetrived =
     (orgUnit: Object) => actionCreator(actionTypes.ORG_UNIT_DATA_RETRIVED)(orgUnit);

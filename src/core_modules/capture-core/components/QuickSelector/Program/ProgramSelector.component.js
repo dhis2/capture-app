@@ -12,7 +12,7 @@ import { programCollection } from '../../../metaDataMemoryStores';
 import VirtualizedSelect from '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import ProgramList from './ProgramList';
 
-import { Program, EventProgram, CategoryOption } from '../../../metaData';
+import { Program, CategoryOption } from '../../../metaData';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
 import './programSelector.css';
 import LinkButton from '../../Buttons/LinkButton.component';
@@ -187,13 +187,12 @@ class ProgramSelector extends Component<Props> {
         if (this.props.selectedOrgUnitId) {
             programOptions = this.getOptionsFromPrograms(this.programsArray
                 .filter(program =>
-                    program instanceof EventProgram
-                    && program.organisationUnits[this.props.selectedOrgUnitId]
-                    && program.access.data.read),
+                    program.organisationUnits[this.props.selectedOrgUnitId] &&
+                    program.access.data.read),
             );
         } else {
             programOptions = this.getOptionsFromPrograms(this.programsArray
-                .filter(program => program instanceof EventProgram && program.access.data.read),
+                .filter(program => program.access.data.read),
             );
         }
         return programOptions;
@@ -201,7 +200,7 @@ class ProgramSelector extends Component<Props> {
 
     areAllProgramsAvailable(programOptions) {
         return (programOptions.length === this.programsArray
-            .filter(program => program instanceof EventProgram && program.access.data.read).length);
+            .filter(program => program.access.data.read).length);
     }
 
     renderSelectedProgram(selectedProgram) {

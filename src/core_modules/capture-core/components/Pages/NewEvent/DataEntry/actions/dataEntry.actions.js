@@ -22,7 +22,7 @@ export const actionTypes = {
     CANCEL_SAVE_UPDATE_WORKING_LIST: 'CancelSaveUpdateWorkingListForSingleNewEvent',
     NEW_EVENT_SAVED_AFTER_RETURNED_TO_MAIN_PAGE: 'SingleNewEventSavedAfterReturnedToMainPage',
     SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE: 'SaveFailedForNewSingleEventAfterReturnedToMainPage',
-    SELECTIONS_NOT_COMPLETE_OPENING_NEW_EVENT: 'SelectionsNotCompleteOpeningNewEvent',
+    NEW_EVENT_IN_DATAENTRY_OPENING_CANCEL: 'NewEventInDataEntryOpeningCancel',
     START_ASYNC_UPDATE_FIELD_FOR_NEW_EVENT: 'StartAsyncUpdateFieldForNewEvent',
     REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER: 'RequestSaveNewEventAddAnother',
     START_SAVE_NEW_EVENT_ADD_ANOTHER: 'startSaveNewEventAddAnother',
@@ -105,8 +105,8 @@ export const cancelNewEventNoWorkingListUpdateNeeded = () =>
 export const cancelNewEventUpdateWorkingList = () =>
     actionCreator(actionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST)();
 
-export const selectionsNotCompleteOpeningNewEvent = () =>
-    actionCreator(actionTypes.SELECTIONS_NOT_COMPLETE_OPENING_NEW_EVENT)();
+export const cancelOpenNewEventInDataEntry = () =>
+    actionCreator(actionTypes.NEW_EVENT_IN_DATAENTRY_OPENING_CANCEL)();
 
 export const setNewEventSaveTypes = (newSaveTypes: ?Array<$Values<typeof saveTypes>>) =>
     actionCreator(actionTypes.SET_NEW_EVENT_SAVE_TYPES)({ saveTypes: newSaveTypes });

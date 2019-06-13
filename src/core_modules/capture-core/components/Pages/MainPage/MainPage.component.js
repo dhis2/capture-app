@@ -5,6 +5,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import EventsListConnectivityWrapper from './EventsListConnectivityWrapper/EventsListConnectivityWrapper.container';
+import { TrackerProgramHandler } from '../../TrackerProgramHandler';
 
 const getStyles = () => ({
     listContainer: {
@@ -32,11 +33,13 @@ class MainPage extends Component<Props> {
                         }
 
                         return (
-                            <div
-                                className={classes.listContainer}
-                            >
-                                <EventsListConnectivityWrapper />
-                            </div>
+                            <TrackerProgramHandler>
+                                <div
+                                    className={classes.listContainer}
+                                >
+                                    <EventsListConnectivityWrapper />
+                                </div>
+                            </TrackerProgramHandler>
                         );
                     })()
                 }
