@@ -2,12 +2,11 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
-// import ClearIcon from '@material-ui/icons/RemoveCircle';
 import createSvgIcon from '@material-ui/icons/utils/createSvgIcon';
 import Tooltip from '@material-ui/core/Tooltip';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
-import Button from '../../../../../Buttons/Button.component';
+import { Button } from '../../../../../Buttons';
 
 const ClearIcon = createSvgIcon(
     <React.Fragment>
@@ -18,25 +17,16 @@ const ClearIcon = createSvgIcon(
 
 const getStyles = (theme: Theme) => ({
     button: {
-        backgroundColor: lighten(theme.palette.primary.light, 0.7),
-        '&:hover': {
-            backgroundColor: lighten(theme.palette.primary.light, 0.7),
-        },
+        backgroundColor: lighten(theme.palette.primary.light, 0.7) + '!important',
     },
     hovered: {
         backgroundColor: `${lighten(theme.palette.primary.light, 0.4)} !important`,
-    },
-    contents: {
-        color: theme.palette.text.primary,
     },
     clearIcon: {
         color: theme.palette.text.secondary,
         '&:hover': {
             color: theme.palette.text.primary,
         },
-    },
-    label: {
-        textTransform: 'none',
     },
 });
 
@@ -106,39 +96,38 @@ class ActiveFilterButton extends React.Component<Props, State> {
         const buttonClasses = classNames(classes.button, { [classes.hovered]: isHovered });
 
         return (
-            <Button
-                variant="text"
-                color="default"
-                size={'small'}
-                classes={{ button: buttonClasses, contents: classes.contents }}
-                muiClasses={{ label: classes.label }}
-                onClick={onChange}
+            <div
                 onMouseEnter={this.setIsHovered}
                 onMouseLeave={this.clearIsHovered}
             >
-                {title}
-                {ActiveFilterButton.getViewValueForFilter(filterValue)}
-                {arrowIconElement}
-                <Tooltip
-                    title={i18n.t('Clear')}
-                    placement={'bottom'}
-                    enterDelay={300}
+                <Button
+                    className={buttonClasses}
+                    onClick={onChange}
                 >
-                    <ClearIcon
-                        onMouseEnter={this.clearIsHovered}
-                        onMouseLeave={this.setIsHovered}
-                        className={classNames(iconClass, classes.clearIcon)}
-                        onClick={this.handleClearClick}
-                        onMouseDown={ActiveFilterButton.stopClearPropagation}
-                        onMouseUp={ActiveFilterButton.stopClearPropagation}
-                        onTouchStart={ActiveFilterButton.stopClearPropagation}
-                        onTouchEnd={ActiveFilterButton.stopClearPropagation}
-                        onTouchMove={ActiveFilterButton.stopClearPropagation}
-                        onKeyDown={ActiveFilterButton.stopClearPropagation}
-                        onKeyUp={ActiveFilterButton.stopClearPropagation}
-                    />
-                </Tooltip>
-            </Button>
+                    {title}
+                    {ActiveFilterButton.getViewValueForFilter(filterValue)}
+                    {arrowIconElement}
+                    <Tooltip
+                        title={i18n.t('Clear')}
+                        placement={'bottom'}
+                        enterDelay={300}
+                    >
+                        <ClearIcon
+                            onMouseEnter={this.clearIsHovered}
+                            onMouseLeave={this.setIsHovered}
+                            className={classNames(iconClass, classes.clearIcon)}
+                            onClick={this.handleClearClick}
+                            onMouseDown={ActiveFilterButton.stopClearPropagation}
+                            onMouseUp={ActiveFilterButton.stopClearPropagation}
+                            onTouchStart={ActiveFilterButton.stopClearPropagation}
+                            onTouchEnd={ActiveFilterButton.stopClearPropagation}
+                            onTouchMove={ActiveFilterButton.stopClearPropagation}
+                            onKeyDown={ActiveFilterButton.stopClearPropagation}
+                            onKeyUp={ActiveFilterButton.stopClearPropagation}
+                        />
+                    </Tooltip>
+                </Button>
+            </div>
         );
     }
 }
