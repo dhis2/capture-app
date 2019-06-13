@@ -56,6 +56,7 @@ class TrackerProgramHandler extends React.Component<Props> {
                                 <a
                                     href={this.getUrl()}
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     {i18n.t('open the Tracker Capture app')}
                                 </a>

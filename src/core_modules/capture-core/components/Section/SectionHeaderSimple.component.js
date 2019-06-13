@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
 import IconButton from '@material-ui/core/IconButton';
-import Icon from '@material-ui/core/Icon';
+import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
 
 const styles = theme => ({
     container: {
@@ -83,9 +83,7 @@ class SectionHeaderSimple extends Component<Props> {
                                         title={this.props.isCollapsed ? 'Åpne' : 'Lukk'}
                                         onClick={this.handleChangeCollapse}
                                     >
-                                        <Icon>
-                                            {this.props.isCollapsed ? 'keyboard_arrow_down' : 'keyboard_arrow_up'}
-                                        </Icon>
+                                        {this.props.isCollapsed ? <KeyboardArrowDown/> : <KeyboardArrowUp/>}
                                     </IconButton>
                                 );
                             }
