@@ -110,7 +110,7 @@ function rewirePlugins(config) {
     const updatedPlugins = config.plugins.map(plugin => {
         if(plugin instanceof webpack.DefinePlugin){
             plugin.definitions = Object.assign({}, plugin.definitions, {
-                DHIS_CONFIG: JSON.stringify(dhisConfig),
+                // DHIS_CONFIG: JSON.stringify(dhisConfig),
                 "appPackage.CACHE_VERSION": JSON.stringify(process.env.npm_package_cacheVersion),
                 "process.env.TRACKER_CAPTURE_APP_PATH": JSON.stringify(process.env.NODE_ENV === "production" ? '../dhis-web-tracker-capture' : 'http://localhost:8080/dhis/dhis-web-tracker-capture')
             });          
