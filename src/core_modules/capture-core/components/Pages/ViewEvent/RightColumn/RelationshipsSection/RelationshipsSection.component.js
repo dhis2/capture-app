@@ -9,8 +9,11 @@ import ViewEventSectionHeader from '../../Section/ViewEventSectionHeader.compone
 import Relationships from '../../../../Relationships/Relationships.component';
 import { ProgramStage } from '../../../../../metaData';
 import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
+import { ConnectedEntity } from './ConnectedEntity';
+import type { Entity } from '../../../../Relationships/relationships.types';
 
-const LoadingRelationships = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Relationships);
+const LoadingRelationships =
+    withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Relationships);
 
 type Props = {
     classes: Object,
@@ -21,6 +24,7 @@ type Props = {
     programStage: ProgramStage,
     ready: boolean,
     eventAccess: any,
+    orgUnitId: string,
 }
 
 const loadingIndicatorStyle = {
@@ -69,12 +73,24 @@ class RelationshipsSection extends React.Component<Props> {
     renderItems = (relationships: Array<any>) => relationships.map(relationship => (
         <div className={this.props.classes.relationship}>{relationship}</div>
     ))
+
+    renderConnectedEntity = (entity: Entity) => {
+        const { orgUnitId } = this.props;
+        return (
+            <ConnectedEntity
+                orgUnitId={orgUnitId}
+                {...entity}
+            />
+        );
+    }
+
     render() {
         const { programStage, eventId, relationships, ready, eventAccess } = this.props;
         const relationshipTypes = programStage.relationshipTypes || [];
         const hasRelationshipTypes = relationshipTypes.length > 0;
 
-        const writableRelationshipTypes = programStage.relationshipTypesWhereStageIsFrom.filter(rt => rt.access.data.write);
+        const writableRelationshipTypes =
+            programStage.relationshipTypesWhereStageIsFrom.filter(rt => rt.access.data.write);
 
         return hasRelationshipTypes && (
             <ViewEventSection
@@ -91,6 +107,7 @@ class RelationshipsSection extends React.Component<Props> {
                     currentEntityId={eventId}
                     entityAccess={eventAccess}
                     smallMainButton
+                    onRenderConnectedEntity={this.renderConnectedEntity}
                 />
             </ViewEventSection>
         );

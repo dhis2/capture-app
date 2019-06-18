@@ -4,7 +4,7 @@ import { programCollection } from '../metaDataMemoryStores';
 import getTeiDisplayName from '../trackedEntityInstances/getDisplayName';
 
 const getClientConstraintByType = {
-    TRACKED_ENTITY_INSTANCE: (constraint) => {
+    TRACKED_ENTITY_INSTANCE: (constraint,relationshipConstraint) => {
         const tei = constraint.trackedEntityInstance;
         const trackedEntityType = getTrackedEntityTypeThrowIfNotFound(tei.trackedEntityType);
         const values = tei.attributes.reduce((accValues, attr) => {
@@ -15,6 +15,7 @@ const getClientConstraintByType = {
             id: tei.trackedEntityInstance,
             name: getTeiDisplayName(values, trackedEntityType.attributes, trackedEntityType.name),
             type: 'TRACKED_ENTITY_INSTANCE',
+            linkProgramId: relationshipConstraint.programId,
         };
     },
     PROGRAM_STAGE_INSTANCE: (constraint) => {
@@ -51,7 +52,7 @@ export default function convertToClientRelationship(serverRelationship: Object, 
             id: relationshipType.id,
             name: relationshipType.name,
         },
-        from: getClientConstraintByType[relationshipType.from.entity](serverRelationship.from),
-        to: getClientConstraintByType[relationshipType.to.entity](serverRelationship.to),
+        from: getClientConstraintByType[relationshipType.from.entity](serverRelationship.from, relationshipType.from),
+        to: getClientConstraintByType[relationshipType.to.entity](serverRelationship.to, relationshipType.to),
     };
 }
