@@ -14,6 +14,7 @@ const mapStateToProps = (state: ReduxState, props: Object) => {
         eventId: state.viewEventPage.eventId,
         ready: !relationshipsSection.isLoading,
         relationships: state.relationships.viewEvent || [],
+        orgUnitId: state.currentSelections.orgUnitId,
     };
 };
 
