@@ -129,4 +129,4 @@ export default () =>
         withDataEntryOutput()(
             InnerComponent,
             withStyles(styles)(
-                connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(getErrorOutput())));
+                connect(mapStateToProps, mapDispatchToProps)(getErrorOutput())));

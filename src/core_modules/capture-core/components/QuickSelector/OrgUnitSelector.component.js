@@ -43,7 +43,7 @@ const styles = (theme: Theme) => ({
     },
     selectedPaper: {
         backgroundColor: theme.palette.grey.lighter,
-        borderRadius: 5,
+        borderRadius: 8,
         padding: 8,
     },
     selectedButton: {

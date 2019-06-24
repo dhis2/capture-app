@@ -120,4 +120,4 @@ export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         withDataEntryOutput()(
             InnerComponent,
-            withStyles(styles)(connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(getWarningOutput())));
+            withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(getWarningOutput())));

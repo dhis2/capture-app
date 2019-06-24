@@ -2,7 +2,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
-import { Map, TileLayer, Marker } from 'react-leaflet';
+import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import ClearIcon from '@material-ui/icons/Clear';
 import IconButton from '@material-ui/core/IconButton';
@@ -12,6 +12,7 @@ import defaultClasses from './coordinateField.module.css';
 import orientations from '../constants/orientations.const';
 import Button from '../Buttons/Button.component';
 
+const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
 
 type Coordinate = {
     latitude?: ?string,
@@ -172,7 +173,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
                     key="map"
                     ref={(mapInstance) => { this.setMapInstance(mapInstance); }}
                 >
-                    <ReactLeafletSearch position="topleft" inputPlaceholder="Search" closeResultsOnClick search={null} mapStateModifier={this.search} showMarker={false} />
+                    <WrappedLeafletSearch position="topleft" inputPlaceholder="Search" closeResultsOnClick search={null} mapStateModifier={this.search} showMarker={false} />
                     <TileLayer
                         url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"

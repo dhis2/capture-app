@@ -32,8 +32,7 @@ export const reservedUrlKeys = {
 
 const getUrlSyncer = (
     InnerComponent: React.ComponentType<any>,
-    onGetSyncSpecification: SyncSpecificationGetter,
-    runOnlyOnCreate?: ?boolean) =>
+    onGetSyncSpecification: SyncSpecificationGetter) =>
     class UrlSyncer extends React.Component<Props> {
         static getValueFromParam(param: ?Array<string>, id: string) {
             let value = null;
@@ -56,10 +55,34 @@ const getUrlSyncer = (
             return nextParams;
         }
 
-        constructor(props: Props) {
-            super(props);
-            if (runOnlyOnCreate) {
-                this.updateIfOutOfSync();
+        queuedUpdate: ?Object;
+        componentDidMount() {
+            this.triggerSyncCallback();
+        }
+
+        componentDidUpdate() {
+            this.triggerSyncCallback();
+        }
+
+        update(updateData: UpdateDataContainer) {
+            this.props.onUpdate(updateData);
+        }
+
+        noUpdateRequired() {
+            this.props.onNoUpdateRequired && this.props.onNoUpdateRequired();
+        }
+
+        triggerSyncCallback() {
+            if (this.queuedUpdate) {
+                this.update({
+                    nextProps: this.queuedUpdate.nextProps,
+                    prevProps: this.props.stateParams || {},
+                    nextPage: this.props.urlPage,
+                    prevPage: this.props.statePage,
+                });
+                this.queuedUpdate = null;
+            } else {
+                this.noUpdateRequired();
             }
         }
 
@@ -98,46 +121,31 @@ const getUrlSyncer = (
                 });
         }
 
-        update(updateData: UpdateDataContainer) {
-            this.props.onUpdate(updateData);
-        }
-
-        noUpdateRequired() {
-            this.props.onNoUpdateRequired && this.props.onNoUpdateRequired();
-        }
-
-        updateIfOutOfSync() {
+        isOutOfSync() {
             const syncSpecification = onGetSyncSpecification(this.props);
             const locationParams = this.getLocationParams(syncSpecification);
             if (this.props.urlPage !== this.props.statePage ||
                 this.paramsNeedsUpdate(syncSpecification, locationParams)) {
                 const nextProps = UrlSyncer.getNextProps(locationParams, syncSpecification);
-                this.update({
+                this.queuedUpdate = {
                     nextProps,
-                    prevProps: this.props.stateParams || {},
-                    nextPage: this.props.urlPage,
-                    prevPage: this.props.statePage,
-                });
+                };
                 return true;
             }
-
-            this.noUpdateRequired();
             return false;
         }
 
         render() {
             const { onUpdate, urlParams, stateParams, urlPage, statePage, ...passOnProps } = this.props;
 
-            if (!runOnlyOnCreate) {
-                const urlOutOfSync = this.updateIfOutOfSync();
-                if (urlOutOfSync) {
-                    return (
-                        <InnerComponent
-                            urlOutOfSync
-                            {...passOnProps}
-                        />
-                    );
-                }
+            const urlOutOfSync = this.isOutOfSync();
+            if (urlOutOfSync) {
+                return (
+                    <InnerComponent
+                        urlOutOfSync
+                        {...passOnProps}
+                    />
+                );
             }
 
             return (
@@ -154,6 +162,6 @@ const getUrlSyncer = (
  * @memberof UrlSync
  * @example withUrlSync(props => [{ urlKey: 'programId', propKey: 'programId' }])([InnerComponent])
  */
-export default (onGetSyncSpecification: SyncSpecificationGetter, runOnlyOnCreate?: ?boolean) =>
+export default (onGetSyncSpecification: SyncSpecificationGetter) =>
     (InnerComponent: React.ComponentType<any>) =>
-        getUrlSyncer(InnerComponent, onGetSyncSpecification, runOnlyOnCreate);
+        getUrlSyncer(InnerComponent, onGetSyncSpecification);

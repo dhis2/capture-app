@@ -1,5 +1,7 @@
 // @flow
 import React, { Component } from 'react';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import FormBuilder from 'capture-ui/FormBuilder/FormBuilder.component';
 import type { FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
 
@@ -80,6 +82,11 @@ class D2SectionFields extends Component<Props> {
             .filter(field => field);
     }
 
+    static validateDataTypeOnly(formBuilderInstance: FormBuilder) {
+        const dataTypeIsValid = formBuilderInstance.isValid(['dataType']);
+        return dataTypeIsValid;
+    }
+
     handleUpdateField: (elementId: string, value: any) => void;
     formBuilderInstance: ?FormBuilder;
     formFields: Array<FieldConfig>;
@@ -108,31 +115,44 @@ class D2SectionFields extends Component<Props> {
         return errorMessages.length === 0 && Object.keys(this.rulesCompulsoryErrors).length === 0;
     }
 
-    validateFull() {
-        const formBuilderIsValid = this.formBuilderInstance ? this.formBuilderInstance.isValid() : false;
-        if (formBuilderIsValid) {
-            return this.rulesIsValid();
+    validateFull(formBuilderInstance: FormBuilder) {
+        const formBuilderIsValid = formBuilderInstance.isValid();
+        if (!formBuilderIsValid) {
+            return false;
         }
-        return false;
-    }
 
-    validateDataTypeOnly() {
-        const dataTypeIsValid = this.formBuilderInstance ? this.formBuilderInstance.isValid(['dataType']) : false;
-        return dataTypeIsValid;
+        return this.rulesIsValid();
     }
 
     isValid(options?: ?{ isCompleting: boolean }) {
+        const formBuilderInstance = this.formBuilderInstance;
+        if (!formBuilderInstance) {
+            log.error(
+                errorCreator(
+                    'could not get formbuilder instance')(
+                    {
+                        method: 'isValid',
+                        object: this,
+                    },
+                ),
+            );
+            return false;
+        }
+        return this.validateBasedOnStrategy(options, formBuilderInstance);
+    }
+
+    validateBasedOnStrategy(options?: ?{ isCompleting: boolean }, formBuilderInstance: FormBuilder) {
         const validationStrategy = this.props.validationStrategy;
         if (validationStrategy === validationStrategies.NONE) {
-            return this.validateDataTypeOnly();
+            return D2SectionFields.validateDataTypeOnly(formBuilderInstance);
         } else if (validationStrategy === validationStrategies.ON_COMPLETE) {
             const isCompleting = options && options.isCompleting;
             if (isCompleting) {
-                return this.validateFull();
+                return this.validateFull(formBuilderInstance);
             }
-            return this.validateDataTypeOnly();
+            return D2SectionFields.validateDataTypeOnly(formBuilderInstance);
         }
-        return this.validateFull();
+        return this.validateFull(formBuilderInstance);
     }
 
     getInvalidFields() {

@@ -289,4 +289,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 export default (optionFn?: ?OptionFn) =>
     (InnerComponent: React.ComponentType<any>) =>
         connect(
-            mapStateToProps, mapDispatchToProps, null, { withRef: true })(getCompleteButton(InnerComponent, optionFn));
+            mapStateToProps, mapDispatchToProps)(getCompleteButton(InnerComponent, optionFn));

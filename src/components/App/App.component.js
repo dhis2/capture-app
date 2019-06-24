@@ -5,7 +5,7 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
-import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import { withRouter } from 'react-router';
 import type { HashHistory } from 'history/createHashHistory';
 

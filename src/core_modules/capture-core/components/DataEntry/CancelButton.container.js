@@ -15,4 +15,4 @@ const mapStateToProps = (state: ReduxState, props: {id: string}) => {
 const mapDispatchToProps = () => ({
 });
 
-export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(CancelButton);
+export default connect(mapStateToProps, mapDispatchToProps, null, { forwardRef: true })(CancelButton);

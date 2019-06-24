@@ -142,4 +142,4 @@ export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         // $FlowSuppress
         connect(
-            mapStateToProps, mapDispatchToProps, null, { withRef: true })(getMainButton(InnerComponent));
+            mapStateToProps, mapDispatchToProps)(getMainButton(InnerComponent));

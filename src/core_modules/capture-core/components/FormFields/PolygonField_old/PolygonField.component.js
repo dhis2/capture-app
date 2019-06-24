@@ -5,7 +5,7 @@ import MapIcon from '@material-ui/icons/Map';
 import CheckIcon from '@material-ui/icons/Check';
 import L from 'leaflet';
 import { Map, TileLayer, FeatureGroup } from 'react-leaflet';
-import EditControl from 'react-leaflet-draw/lib/EditControl';
+import { EditControl } from 'react-leaflet-draw';
 
 import './styles.css';
 

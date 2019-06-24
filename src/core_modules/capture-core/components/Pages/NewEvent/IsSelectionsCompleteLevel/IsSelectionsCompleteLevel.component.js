@@ -16,7 +16,6 @@ type Props = {
 class IsSelectionsCompleteLevel extends React.Component<Props> {
     renderContents() {
         const { isSelectionsComplete } = this.props;
-
         if (!isSelectionsComplete) {
             return (
                 <DataEntrySelectionsIncomplete />

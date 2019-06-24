@@ -39,4 +39,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 // $FlowFixMe
-export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(DataEntry);
+export default connect(mapStateToProps, mapDispatchToProps, null)(DataEntry);

@@ -18,7 +18,6 @@ type Props = {
     formFoundation: RenderFoundation,
     finalInProgress?: ?boolean,
     hasRecentlyAddedEvents?: ?boolean,
-
 };
 
 const buttonTypes = {
@@ -46,12 +45,6 @@ const buttonDefinitions = {
 
 const getMainButton = (InnerComponent: React.ComponentType<any>) =>
     class MainButtonHOC extends React.Component<Props> {
-        innerInstance: any;
-
-        getWrappedInstance() {
-            return this.innerInstance;
-        }
-
         getButtonDefinition = (type: $Values<typeof buttonTypes>) => buttonDefinitions[type](this.props)
 
         getFormHorizontalButtons = (dataEntryHasChanges: ?boolean, hasRecentlyAddedEvents: ?boolean) => {
@@ -133,4 +126,4 @@ export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         // $FlowSuppress
         connect(
-            mapStateToProps, mapDispatchToProps, null, { withRef: true })(getMainButton(InnerComponent));
+            mapStateToProps, mapDispatchToProps)(getMainButton(InnerComponent));

@@ -1,5 +1,5 @@
 // @flow
-import { push } from 'react-router-redux';
+import { push } from 'connected-react-router';
 import moment from 'capture-core-utils/moment/momentResolver';
 import {
     actionTypes as editEventDataEntryActionTypes,

@@ -150,12 +150,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    const { innerFieldRef, ...editedOwnProps } = ownProps;
-    const mergedProps = Object.assign({
-        ref: innerFieldRef,
-    }, editedOwnProps, stateProps, dispatchProps);
-    return mergedProps;
-};
 // $FlowFixMe
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(DataEntryField);
+export default connect(mapStateToProps, mapDispatchToProps, null, { forwardRef: true })(DataEntryField);

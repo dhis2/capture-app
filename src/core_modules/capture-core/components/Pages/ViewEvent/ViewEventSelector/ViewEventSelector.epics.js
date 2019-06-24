@@ -1,5 +1,5 @@
 // @flow
-import { push } from 'react-router-redux';
+import { push } from 'connected-react-router';
 import {
     actionTypes as viewEventPageSelectorActionTypes,
     batchActionTypes as viewEventPageSelectorBatchActionTypes,

@@ -13,4 +13,4 @@ const mapStateToProps = (state: Object, props: { sectionMetaData: MetaDataSectio
 const mapDispatchToProps = () => ({});
 
 // $FlowSuppress
-export default connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(D2Section);
+export default connect(mapStateToProps, mapDispatchToProps)(D2Section);
