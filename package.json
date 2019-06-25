@@ -1,8 +1,8 @@
 {
   "name": "capture-app",
   "homepage": ".",
-  "version": "32.0.1",
-  "cacheVersion": "6",
+  "version": "32.0.2",
+  "cacheVersion": "7",
   "private": false,
   "dependencies": {
     "@dhis2/d2-i18n": "^1.0.3",
@@ -110,7 +110,7 @@
     "svg-url-loader": "^2.3.2"
   },
   "manifest.webapp": {
-    "version": "0.9.5",
+    "version": "0.9.6",
     "name": "Capture",
     "description": "Capture App",
     "launch_path": "index.html",
