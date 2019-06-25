@@ -1,8 +1,8 @@
 {
   "name": "capture-app",
   "homepage": ".",
-  "version": "33.0.1",
-  "cacheVersion": "6",
+  "version": "33.0.2",
+  "cacheVersion": "15",
   "private": false,
   "dependencies": {
     "@dhis2/app-runtime": "^1.2.0",
@@ -108,7 +108,7 @@
     "svg-url-loader": "^2.3.2"
   },
   "manifest.webapp": {
-    "version": "1.0.1",
+    "version": "1.0.2",
     "name": "Capture",
     "description": "Capture App",
     "launch_path": "index.html",
