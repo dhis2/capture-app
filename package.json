@@ -110,14 +110,14 @@
     "svg-url-loader": "^2.3.2"
   },
   "manifest.webapp": {
-    "version": "0.9.4",
+    "version": "0.9.5",
     "name": "Capture",
     "description": "Capture App",
     "launch_path": "index.html",
     "icons": {
-      "16": "/assets/icons/track16.png",
-      "48": "/assets/icons/track48.png",
-      "128": "/assets/icons/track128.png"
+      "16": "assets/icons/track16.png",
+      "48": "assets/icons/track48.png",
+      "128": "assets/icons/track128.png"
     },
     "developer": {
       "name": "HISP",
