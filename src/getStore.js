@@ -45,6 +45,9 @@ export default function getStore(history: BrowserHistory | HashHistory, onRehydr
         effect: effectConfig,
         persistCallback: onRehydrated,
         queue: queueConfig,
+        persistOptions: {
+            whitelist: ['offline', 'networkStatus'],
+        },
     });
 
     return createStore(
