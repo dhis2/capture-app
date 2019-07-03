@@ -11,6 +11,6 @@ export const makeRelationshipTypesSelector = () => createSelector(
     (programId: string) => {
         const program = getEventProgramThrowIfNotFound(programId);
 
-        return program.getStageThrowIfNull().relationshipTypesWhereStageIsFrom;
+        return program.stage.relationshipTypesWhereStageIsFrom;
     },
 );

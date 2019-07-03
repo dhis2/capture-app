@@ -18,7 +18,7 @@ export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) 
                 return cancelNewEventNoWorkingListUpdateNeeded();
             }
 
-            const listId = state.workingListConfigSelector.eventMainPage && state.workingListConfigSelector.eventMainPage.currentWorkingListId;
+            const listId = state.workingListConfigSelector.eventMainPage && state.workingListConfigSelector.eventMainPage.currentListId;
             const listSelections = listId && state.workingListsContext[listId];
             if (!listSelections) {
                 return cancelNewEventInitializeWorkingLists();

@@ -4,6 +4,10 @@ import { getEventProgramThrowIfNotFound } from '../metaData';
 import { getApi } from '../d2/d2Instance';
 import convertToServerEventWorkingListConfig from './convertToServerEventWorkingListConfig';
 
+type ApiConfig = {
+    eventFilters: Array<Object>,
+    pager: Object,
+};
 
 const tempServerWorkingListConfigs = [
     {
@@ -33,16 +37,17 @@ const tempServerWorkingListConfigs = [
 export const getEventProgramWorkingListConfigs = async (programId: string) => {
     const api = getApi();
     const program = getEventProgramThrowIfNotFound(programId);
-    const stage = program.getStageThrowIfNull();
+    const stage = program.stage;
 
-    const apiRes = await api.get('eventFilters', { program: programId });
-    return apiRes ? apiRes.map(wc => convertToClientEventWorkingListConfig(wc, stage.stageForm)) : [];
+    const apiRes: ApiConfig = await api.get('eventFilters', { filter: `program:eq:${programId}`, fields: '*' });
+    const configs = apiRes && apiRes.eventFilters;
+    return configs ? configs.map(wc => convertToClientEventWorkingListConfig(wc, stage.stageForm)) : [];
 };
 
 export const addEventProgramWorkingListConfig = async (workingListConfigData: any) => {
     const api = getApi();
     const program = getEventProgramThrowIfNotFound(workingListConfigData.programId);
-    const stage = program.getStageThrowIfNull();
+    const stage = program.stage;
     const serverData = convertToServerEventWorkingListConfig(workingListConfigData, stage.stageForm);
 
     const apiRes = await api.post('eventFilters', serverData);

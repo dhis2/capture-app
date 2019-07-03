@@ -1,7 +1,7 @@
 // @flow
 import {
     actionTypes as columnSelectorActionTypes,
-} from '../../../../ColumnSelectorDialog/actions/ColumnSelectorDialog.actions';
+} from '../ListWrapperMenu/actions/columnSelectorDialog.actions';
 import { updateIncludedFiltersAfterColumnSorting } from './filterSelector.actions';
 
 export const includeFiltersWithValueAfterColumnSortingEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -9,7 +9,7 @@ export const includeFiltersWithValueAfterColumnSortingEpic = (action$: InputObse
     action$.ofType(columnSelectorActionTypes.UPDATE_WORKINGLIST_ORDER)
         .map(() => {
             const state = store.getState();
-            const listId = state.workingListConfigSelector.eventMainPage.currentWorkingListId;
+            const listId = state.workingListConfigSelector.eventMainPage.currentListId;
             const appliedFilters = (state.workingListsAppliedFilters && state.workingListsAppliedFilters[listId]) || {};
             const nextAppliedFilters = (
                 state.workingListsAppliedFilters &&

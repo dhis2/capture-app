@@ -19,7 +19,7 @@ import eventContentMenuSettings from '../EventContentMenu/eventContentMenuSettin
 import DialogLoadingMask from '../../../../LoadingMasks/DialogLoadingMask.component';
 
 import List from '../../../../List/OnlineList/List.component';
-import ListWrapperMenu from '../ListWrapperMenu/ListWrapperMenu.component';
+import ListWrapperMenu from '../ListWrapperMenu/ListWrapperMenu.container';
 
 const EventListPagination = withData()(withRowsPerPageSelector()(withNavigation()(Pagination)));
 const EventList = withCustomEndCell(eventContentMenuSettings)(List);

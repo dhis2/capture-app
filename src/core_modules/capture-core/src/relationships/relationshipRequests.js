@@ -15,7 +15,7 @@ async function getRelationships(queryParams: Object, relationshipTypes: Array<Re
 
 export function getRelationshipsForEvent(eventId: string, programId: string) {
     const relationshipTypes = getEventProgramThrowIfNotFound(programId)
-        .getStageThrowIfNull()
+        .stage
         .relationshipTypes;
     return getRelationships({ event: eventId }, relationshipTypes);
 }

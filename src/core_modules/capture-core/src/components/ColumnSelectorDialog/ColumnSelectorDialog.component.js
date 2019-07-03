@@ -23,10 +23,9 @@ const styles = theme => ({
 type Props = {
     open: ?boolean,
     onClose: Function,
-    listId: string,
+    onSave: Function,
     classes: Object,
     columns: Array<Object>,
-    onUpdateWorkinglistOrder: (listId: string, workinglist: Array<Object>) => void,
 };
 
 type State = {
@@ -52,8 +51,8 @@ class ColumnSelector extends Component<Props, State> {
         }));
 
     handleSave = () => {
-        this.props.onUpdateWorkinglistOrder(this.props.listId, this.getListToSave());
-        this.props.onClose();
+        const { onSave } = this.props;
+        onSave(this.getListToSave());
     };
 
     handleToggle = id => () => {

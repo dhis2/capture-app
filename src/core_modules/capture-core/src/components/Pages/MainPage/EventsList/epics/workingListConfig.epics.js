@@ -30,7 +30,7 @@ export const retrieveWorkingListConfigsFromServer = (action$: ActionsObservable,
         })
         .switchMap(() => {
             const promise = getWorkingListConfigsAsync(store.getState()).then(container => batchActions([
-                setCurrentWorkingListConfig(container.default.id, container.default),
+                setCurrentWorkingListConfig(container.default.id, 'eventList', container.default),
                 workingListConfigsRetrieved(container.workingListConfigs),
             ], eventsListBatchActionTypes.WORKING_LIST_CONFIGS_RETRIEVED_BATCH));
             return fromPromise(promise);
@@ -43,7 +43,7 @@ export const addWorkingListConfigEpic = (action$: ActionsObservable, store: Redu
         .switchMap((action) => {
             const state = store.getState();
             const programId = state.currentSelections.programId;
-            const selectedListId = state.workingListConfigSelector.eventMainPage.currentWorkingListId;
+            const selectedListId = state.workingListConfigSelector.eventMainPage.currentListId;
             const filtersByKey = state.workingListFiltersEdit[selectedListId];
             const { name, description } = action.payload;
             const workingListConfigData = {

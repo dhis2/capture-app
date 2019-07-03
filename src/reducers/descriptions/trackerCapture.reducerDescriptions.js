@@ -40,7 +40,7 @@ import {
     workingListsAppliedFiltersDesc,
     workingListsUserSelectedFiltersDesc,
     workingListConfigSelectorDesc,
-} from 'capture-core/reducers/descriptions/workingLists.reducerDescription';
+} from 'capture-core/reducers/descriptions/workingLists';
 import { mainPageDesc } from 'capture-core/reducers/descriptions/mainPage.reducerDescription';
 import { newEventPageDesc } from 'capture-core/reducers/descriptions/newEvent.reducerDescription';
 import { editEventPageDesc } from 'capture-core/reducers/descriptions/editEvent.reducerDescription';

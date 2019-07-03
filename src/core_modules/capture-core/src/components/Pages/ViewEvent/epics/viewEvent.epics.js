@@ -111,7 +111,7 @@ export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) 
             if (!state.offline.online) {
                 return noWorkingListUpdateNeededOnBackToMainPage();
             }
-            const listId = state.workingListConfigSelector.eventMainPage && state.workingListConfigSelector.eventMainPage.currentWorkingListId;
+            const listId = state.workingListConfigSelector.eventMainPage && state.workingListConfigSelector.eventMainPage.currentListId;
             const listSelections = listId && state.workingListsContext[listId];
             if (!listSelections) {
                 return initializeWorkingListsOnBackToMainPage();

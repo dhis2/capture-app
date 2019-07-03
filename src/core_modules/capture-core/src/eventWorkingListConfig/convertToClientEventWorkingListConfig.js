@@ -2,7 +2,6 @@
 import i18n from '@dhis2/d2-i18n';
 import {
     getBooleanFilterData,
-    getDateFilterData,
     getMultiSelectOptionSetFilterData,
     getSingleSelectOptionSetFilterData,
     getNumericFilterData,
@@ -14,6 +13,7 @@ import eventStatusElement from '../events/eventStatusElement';
 import {
     MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS,
 } from '../components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.const';
+import { convertServerToClient } from '../converters';
 
 const getBooleanOptionSet = () => {
     const trueText = i18n.t('Yes');
@@ -49,7 +49,7 @@ type EventQueryCriteria = {
 
 type ServerWorkingListConfig = {
     id: string,
-    name: string,
+    displayName: string,
     eventQueryCriteria: EventQueryCriteria,
 }
 
@@ -103,17 +103,30 @@ const getTextFilter = (filter: Object) => {
     };
 };
 
+// moving the conversion of date to the actual loading of the working list, to make relative dates load correctly
+const getDateFilter = (filter: Object) => ({
+    type: 'DATE',
+    clientData: {
+        ...filter,
+        startDate: filter.startDate && convertServerToClient(filter.startDate, elementTypes.DATE),
+        endDate: filter.endDate && convertServerToClient(filter.endDate, elementTypes.DATE),
+    },
+});
+
+/*
 const getDateFilter = (filter: Object) => {
     const value = {
         main: filter.period || 'CUSTOM_RANGE',
-        from: filter.ge,
-        to: filter.le,
+        from: filter.startDate,
+        to: filter.endDate,
     };
+
     return {
         ...getDateFilterData(value),
         value,
     };
 };
+*/
 
 const getFilterByType = {
     [elementTypes.TEXT]: getTextFilter,
@@ -139,20 +152,21 @@ const getSortOrder = (order: ?string) => {
 };
 
 const getDataElementFilters = (filters: ?Array<DataFilter>, stageForm: RenderFoundation) => {
-    if (filters) {
-        return filters.map((serverFilter) => {
-            const element = stageForm.getElement(serverFilter.dataItem);
-            if (element) {
-                if (element.optionSet && element.optionSet.options.length <= MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS) {
-                    return { id: serverFilter.dataItem, ...getMultiSelectOptionSetFilter(serverFilter, element) };
-                }
-                // $FlowFixMe
-                return { id: serverFilter.dataItem, ...(getFilterByType[element.type] ? getFilterByType[element.type](serverFilter, element) : null) };
-            }
-            return null;
-        }).filter(clientFilter => clientFilter !== null);
+    if (!filters) {
+        return [];
     }
-    return [];
+
+    return filters.map((serverFilter) => {
+        const element = stageForm.getElement(serverFilter.dataItem);
+        if (element) {
+            if (element.optionSet && element.optionSet.options.length <= MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS) {
+                return { id: serverFilter.dataItem, ...getMultiSelectOptionSetFilter(serverFilter, element) };
+            }
+            // $FlowFixMe
+            return { id: serverFilter.dataItem, ...(getFilterByType[element.type] ? getFilterByType[element.type](serverFilter, element) : null) };
+        }
+        return null;
+    }).filter(clientFilter => clientFilter !== null);
 };
 
 const getMainDataFilters = (eventQueryCriteria: EventQueryCriteria) => {
@@ -168,7 +182,7 @@ const getMainDataFilters = (eventQueryCriteria: EventQueryCriteria) => {
 };
 
 export default function (serverWorkingListConfig: ServerWorkingListConfig, stageForm: RenderFoundation) {
-    const { id, name, eventQueryCriteria } = serverWorkingListConfig;
+    const { id, displayName: name, eventQueryCriteria = {} } = serverWorkingListConfig;
     const { sortById, sortByDirection } = getSortOrder(eventQueryCriteria.order) || {};
     const filters = [...getDataElementFilters(eventQueryCriteria.dataFilters, stageForm), ...getMainDataFilters(eventQueryCriteria)];
     return {

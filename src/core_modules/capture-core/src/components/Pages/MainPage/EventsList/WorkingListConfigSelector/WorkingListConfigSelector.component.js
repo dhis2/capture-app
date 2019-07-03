@@ -47,8 +47,8 @@ type WorkingListConfig = {
 type Props = {
     workingListConfigs: Array<WorkingListConfig>,
     defaultWorkingListConfig: WorkingListConfig,
-    onSetWorkingListConfig: (id: string, data?: ?Object) => void,
-    selectedListId: ?string,
+    onSetWorkingListConfig: (configId: string, listId: string, data?: ?Object) => void,
+    configId: ?string,
     classes: {
         container: string,
         workingListConfigsContainer: string,
@@ -58,31 +58,35 @@ type Props = {
     }
 };
 class WorkingListConfigSelector extends React.Component<Props> {
+    static listId = 'eventList';
 
     handleWorkingListConfigClick = (id, data) => {
-        const { selectedListId } = this.props;
-        if (id === selectedListId) {
+        const { configId } = this.props;
+        if (id === configId) {
             this.handleSetDefaultWorkingListConfig();
         } else {
-            this.props.onSetWorkingListConfig(id, data);
+            this.props.onSetWorkingListConfig(id, WorkingListConfigSelector.listId, data);
         }
     }
 
     handleSetDefaultWorkingListConfig = () => {
         const { id, name, ...data } = this.props.defaultWorkingListConfig;
-        this.props.onSetWorkingListConfig(id, data);
+        this.props.onSetWorkingListConfig(id, WorkingListConfigSelector.listId, data);
     }
 
     renderWorkingListConfigs = () => {
-        const { workingListConfigs, selectedListId, classes } = this.props;
+        const { workingListConfigs, configId, classes } = this.props;
         return workingListConfigs.filter(w => !w.isDefault).map((w) => {
             const { id, name, ...data } = w;
             return (
-                <div className={classes.chipContainer}>
+                <div
+                    className={classes.chipContainer}
+                    key={id}
+                >
                     <Chip
                         label={name}
                         key={id}
-                        className={classNames(classes.chip, { [classes.chipSelected]: selectedListId === w.id })}
+                        className={classNames(classes.chip, { [classes.chipSelected]: configId === w.id })}
                         onClick={() => this.handleWorkingListConfigClick(id, data)}
                     />
                 </div>
@@ -91,14 +95,14 @@ class WorkingListConfigSelector extends React.Component<Props> {
     }
 
     render() {
-        const { workingListConfigs, classes, selectedListId, ...passOnProps } = this.props;
+        const { workingListConfigs, classes, ...passOnProps } = this.props;
         return (
             <div className={classes.container}>
                 <div className={classes.workingListConfigsContainer}>
                     {this.renderWorkingListConfigs()}
                 </div>
                 <EventListLoadWrapper
-                    listId={selectedListId}
+                    listId={WorkingListConfigSelector.listId}
                     {...passOnProps}
                 />
             </div>

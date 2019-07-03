@@ -7,21 +7,21 @@ import withErrorMessageHandler from '../../../../../HOC/withErrorMessageHandler'
 
 const mapStateToProps = (state: ReduxState) => {
     const workingListConfigSelector = state.workingListConfigSelector.eventMainPage || {};
-    const selectedListId = workingListConfigSelector.currentWorkingListId;
+    const configId = workingListConfigSelector.currentConfigId;
     const workingListConfigs = workingListConfigSelector.workingListConfigs || [];
     const defaultWorkingListConfig = workingListConfigs.find(w => w.isDefault);
     return {
         workingListConfigs,
         defaultWorkingListConfig,
-        selectedListId,
+        configId,
         ready: workingListConfigSelector && !workingListConfigSelector.isLoading,
         error: workingListConfigSelector && workingListConfigSelector.loadError,
     };
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onSetWorkingListConfig: (id: string, data?: ?Object) => {
-        dispatch(setCurrentWorkingListConfig(id, data));
+    onSetWorkingListConfig: (configId: string, listId: string, data?: ?Object) => {
+        dispatch(setCurrentWorkingListConfig(configId, listId, data));
     },
 });
 

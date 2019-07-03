@@ -9,7 +9,7 @@ const categoriesSelector = state => state.currentSelections.categories;
 
 export const makeProgramStageSelector = () => createSelector(
     programIdSelector,
-    (programId: string) => getEventProgramThrowIfNotFound(programId).getStageThrowIfNull());
+    (programId: string) => getEventProgramThrowIfNotFound(programId).stage);
 
 export const makeEventAccessSelector = () => createSelector(
     programIdSelector,

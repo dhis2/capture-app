@@ -11,21 +11,28 @@ type Props = {
 
 const OnlineEventsListWithHeader = withEventsListHeader()(withListHeaderWrapper()(WorkingListConfigSelector));
 
-const EventsListConnectivityWrapper = (props: Props) => (
-    <div>
-        {
-            (() => {
-                if (!props.isOnline) {
+const EventsListConnectivityWrapper = (props: Props) => {
+    const { isOnline, ...passOnProps } = props;
+    return (
+        <div>
+            {
+                (() => {
+                    if (!isOnline) {
+                        return (
+                            <OfflineEventsList
+                                {...passOnProps}
+                            />
+                        );
+                    }
                     return (
-                        <OfflineEventsList />
+                        <OnlineEventsListWithHeader
+                            {...passOnProps}
+                        />
                     );
-                }
-                return (
-                    <OnlineEventsListWithHeader />
-                );
-            })()
-        }
-    </div>
-);
+                })()
+            }
+        </div>
+    );
+};
 
 export default EventsListConnectivityWrapper;

@@ -46,7 +46,7 @@ const errorMessages = {
 
 const getUnprocessedQueryArgsForInitialWorkingList = (state: ReduxState) => {
     const { programId, orgUnitId, categories } = state.currentSelections;
-    const listId = state.workingListConfigSelector.eventMainPage.currentWorkingListId;
+    const listId = state.workingListConfigSelector.eventMainPage.currentListId;
 
     const currentMeta = state.workingListsMeta[listId] || {};
     const nextMeta = (state.workingListsMeta[listId] && state.workingListsMeta[listId].next) || {};
@@ -69,7 +69,7 @@ const getUnprocessedQueryArgsForInitialWorkingList = (state: ReduxState) => {
 };
 
 const getUnprocessedQueryArgsForUpdateWorkingList = (state: ReduxState) => {
-    const listId = state.workingListConfigSelector.eventMainPage.currentWorkingListId;
+    const listId = state.workingListConfigSelector.eventMainPage.currentListId;
     const { programId, orgUnitId, categories } = state.workingListsContext[listId];
 
     const currentMeta = state.workingListsMeta[listId];
@@ -114,7 +114,7 @@ const getInitialWorkingListActionAsync = (
     };
 
     const { programId, orgUnitId, categories } = allQueryArgs;
-    const listId = state.workingListConfigSelector.eventMainPage.currentWorkingListId;
+    const listId = state.workingListConfigSelector.eventMainPage.currentListId;
 
     return getInitialWorkingListDataAsync(allQueryArgs, state.workingListsColumnsOrder[listId])
         .then(data =>
@@ -139,7 +139,7 @@ const getUpdateWorkingListActionAsync = (
         ...queryArgsFromState,
         ...customArgs,
     };
-    const listId = state.workingListConfigSelector.eventMainPage.currentWorkingListId;
+    const listId = state.workingListConfigSelector.eventMainPage.currentListId;
     return getUpdateWorkingListDataAsync(queryArgs, state.workingListsColumnsOrder[listId])
         .then(data =>
             workingListUpdateDataRetrieved(listId, data),
@@ -216,7 +216,7 @@ export const requestDeleteEventEpic = (action$: ActionsObservable, store: ReduxS
     ).map((action) => {
         const state = store.getState();
         const eventId = action.payload.eventId;
-        const listId = state.workingListConfigSelector.eventMainPage.currentWorkingListId;
+        const listId = state.workingListConfigSelector.eventMainPage.currentListId;
         return batchActions([
             startDeleteEvent(eventId),
             workingListUpdatingWithDialog(listId),
@@ -229,7 +229,7 @@ export const getWorkingListOnSaveEpic = (action$: ActionsObservable, store: Redu
     )
         .switchMap(() => {
             const state = store.getState();
-            const listId = state.workingListConfigSelector.eventMainPage.currentWorkingListId;
+            const listId = state.workingListConfigSelector.eventMainPage.currentListId;
             const listSelections = state.workingListsContext[listId];
 
             const cancelActionTypes = [
@@ -315,7 +315,7 @@ export const getEventListOnReconnectEpic = (action$: ActionsObservable, store: R
                 orgUnitId: state.currentSelections.orgUnitId,
                 categories: state.currentSelections.categories,
             };
-            const listId = state.workingListConfigSelector.eventMainPage.currentWorkingListId;
+            const listId = state.workingListConfigSelector.eventMainPage.currentListId;
             const listSelections = state.workingListsContext[listId];
 
             const cancelActionTypes = [
