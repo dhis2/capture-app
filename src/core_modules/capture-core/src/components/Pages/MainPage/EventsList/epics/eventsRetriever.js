@@ -1,12 +1,10 @@
 // @flow
-import getColumnsConfiguration from './getColumnsConfiguration';
 import { getEvents } from '../../../../../events/eventRequests';
 import type { ColumnConfig } from './getColumnsConfiguration';
 import programCollection from '../../../../../metaDataMemoryStores/programCollection/programCollection';
 
 type InputQueryArgs = {
-    programId: string,
-    [key: string]: string,
+    [key: string]: any,
 };
 
 const mapArgumentNameFromClientToServer = {
@@ -148,36 +146,11 @@ const createApiQueryArgs = (queryArgs: Object, mainColumns: Object) => {
     return apiQueryArgsWithServerPropName;
 };
 
-export const getInitialWorkingListDataAsync = async (
+export const getEventWorkingListDataAsync = async (
     queryArgs: InputQueryArgs,
-    workingListsColumnsOrder: ?Array<ColumnConfig>,
+    workingListsColumnsOrder: Array<ColumnConfig>,
 ) => {
-    let columnsOrderRetrieved;
-    if (!workingListsColumnsOrder) {
-        columnsOrderRetrieved = await getColumnsConfiguration(queryArgs.programId);
-    }
-
-    const mainColumns = getMainColumns(columnsOrderRetrieved || workingListsColumnsOrder);
-
-    const events = await getEvents(createApiQueryArgs({
-        ...queryArgs,
-        page: 1,
-    }, mainColumns));
-
-    if (columnsOrderRetrieved) {
-        return {
-            ...events,
-            columnsOrder: columnsOrderRetrieved,
-        };
-    }
-
+    const mainColumns = getMainColumns(workingListsColumnsOrder);
+    const events = await getEvents(createApiQueryArgs(queryArgs, mainColumns));
     return events;
-};
-
-export const getUpdateWorkingListDataAsync = (
-    queryArgs: InputQueryArgs,
-    workingListsColumnsOrder: ?Array<ColumnConfig>,
-) => {
-    const mainColumns = workingListsColumnsOrder ? getMainColumns(workingListsColumnsOrder) : {};
-    return getEvents(createApiQueryArgs(queryArgs, mainColumns));
 };

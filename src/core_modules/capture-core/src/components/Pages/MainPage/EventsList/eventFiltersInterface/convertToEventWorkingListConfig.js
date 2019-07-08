@@ -1,5 +1,6 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
+import { pipe } from 'capture-core-utils';
 import {
     getBooleanFilterData,
     getMultiSelectOptionSetFilterData,
@@ -7,13 +8,22 @@ import {
     getNumericFilterData,
     getTextFilterData,
     getTrueOnlyFilterData,
-} from '../components/FiltersForTypes';
-import { dataElementTypes as elementTypes, DataElement, RenderFoundation, OptionSet, Option } from '../metaData';
-import eventStatusElement from '../events/eventStatusElement';
+    getDateFilterData,
+} from '../../../../FiltersForTypes';
+import {
+    dataElementTypes as elementTypes,
+    DataElement,
+    RenderFoundation,
+    OptionSet,
+    Option,
+} from '../../../../../metaData';
+import eventStatusElement from '../../../../../events/eventStatusElement';
 import {
     MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS,
-} from '../components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.const';
-import { convertServerToClient } from '../converters';
+} from '../FilterSelectors/filterSelector.const';
+import { convertServerToClient, convertClientToForm } from '../../../../../converters';
+import { getColumnsConfiguration } from './getColumnsConfiguration';
+import type { DataFilter, EventQueryCriteria } from '../eventList.types';
 
 const getBooleanOptionSet = () => {
     const trueText = i18n.t('Yes');
@@ -29,29 +39,6 @@ const booleanOptionSet = new OptionSet('booleanOptionSet', [
     new Option((_this) => { _this.text = i18n.t('Yes'); _this.value = 'true'; }),
     new Option((_this) => { _this.text = i18n.t('No'); _this.value = 'false'; }),
 ]);
-
-type DataFilter = {
-    dataItem: string,
-    ge?: any,
-    le?: any,
-    in?: any,
-    like?: any,
-    eq?: any,
-    period?: any,
-}
-
-type EventQueryCriteria = {
-    dataFilters?: ?Array<DataFilter>,
-    order?: ?string,
-    eventDate?: ?Object,
-    status?: ?string,
-}
-
-type ServerWorkingListConfig = {
-    id: string,
-    displayName: string,
-    eventQueryCriteria: EventQueryCriteria,
-}
 
 const getNumericFilter = (filter: Object) => {
     const value = { min: filter.ge, max: filter.le };
@@ -103,22 +90,11 @@ const getTextFilter = (filter: Object) => {
     };
 };
 
-// moving the conversion of date to the actual loading of the working list, to make relative dates load correctly
-const getDateFilter = (filter: Object) => ({
-    type: 'DATE',
-    clientData: {
-        ...filter,
-        startDate: filter.startDate && convertServerToClient(filter.startDate, elementTypes.DATE),
-        endDate: filter.endDate && convertServerToClient(filter.endDate, elementTypes.DATE),
-    },
-});
-
-/*
 const getDateFilter = (filter: Object) => {
     const value = {
         main: filter.period || 'CUSTOM_RANGE',
-        from: filter.startDate,
-        to: filter.endDate,
+        from: filter.startDate && pipe(convertServerToClient, convertClientToForm)(filter.startDate, elementTypes.DATE),
+        to: filter.endDate && pipe(convertServerToClient, convertClientToForm)(filter.endDate, elementTypes.DATE),
     };
 
     return {
@@ -126,7 +102,6 @@ const getDateFilter = (filter: Object) => {
         value,
     };
 };
-*/
 
 const getFilterByType = {
     [elementTypes.TEXT]: getTextFilter,
@@ -181,14 +156,25 @@ const getMainDataFilters = (eventQueryCriteria: EventQueryCriteria) => {
     return filters;
 };
 
-export default function (serverWorkingListConfig: ServerWorkingListConfig, stageForm: RenderFoundation) {
-    const { id, displayName: name, eventQueryCriteria = {} } = serverWorkingListConfig;
+export function convertToEventWorkingListConfig(
+    eventQueryCriteria: ?EventQueryCriteria,
+    stageForm: RenderFoundation,
+) {
+    if (!eventQueryCriteria) {
+        return undefined;
+    }
+
     const { sortById, sortByDirection } = getSortOrder(eventQueryCriteria.order) || {};
-    const filters = [...getDataElementFilters(eventQueryCriteria.dataFilters, stageForm), ...getMainDataFilters(eventQueryCriteria)];
+    const filters = [
+        ...getDataElementFilters(eventQueryCriteria.dataFilters, stageForm),
+        ...getMainDataFilters(eventQueryCriteria),
+    ];
+
+    const columnOrder = getColumnsConfiguration(eventQueryCriteria.displayColumnOrder, stageForm);
+
     return {
-        id,
-        name,
         filters,
+        columnOrder,
         sortById,
         sortByDirection,
     };

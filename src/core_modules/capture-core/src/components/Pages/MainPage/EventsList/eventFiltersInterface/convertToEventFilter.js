@@ -107,7 +107,10 @@ type WorkingListConfigData = {
     programId: string,
 }
 
-export default function (workingListConfigData: WorkingListConfigData, stageForm: RenderFoundation) {
+export function convertToEventFilter(
+    workingListConfigData: WorkingListConfigData,
+    stageForm: RenderFoundation,
+) {
     const { id, name, description, filtersByKey, programId } = workingListConfigData;
     const { eventDate, status, ...elementFilters } = filtersByKey;
 

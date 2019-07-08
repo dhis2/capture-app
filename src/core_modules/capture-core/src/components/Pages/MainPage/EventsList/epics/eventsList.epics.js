@@ -1,17 +1,13 @@
 // @flow
 import { fromPromise } from 'rxjs/observable/fromPromise';
-import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { batchActions } from 'redux-batched-actions';
 import { ActionsObservable } from 'redux-observable';
 import errorCreator from 'capture-core/utils/errorCreator';
-import { getInitialWorkingListDataAsync, getUpdateWorkingListDataAsync } from './workingListDataRetriever';
 import isSelectionsEqual from '../../../../App/isSelectionsEqual';
 
 import {
     actionTypes as mainSelectionActionTypes,
-    workingListInitialDataRetrieved,
-    workingListInitialRetrievalFailed,
 } from '../../mainSelections.actions';
 import { actionTypes as paginationActionTypes } from '../Pagination/pagination.actions';
 import {
@@ -38,34 +34,11 @@ import {
 } from '../FilterSelectors/filterSelector.actions';
 import { getWorkingListConfigsAsync } from './workingListConfigDataRetriever';
 
+import { initEventWorkingListAsync } from './initEventWorkingList';
+
 const errorMessages = {
     WORKING_LIST_RETRIEVE_ERROR: 'Working list could not be loaded',
     WORKING_LIST_UPDATE_ERROR: 'Working list could not be updated',
-};
-
-
-const getUnprocessedQueryArgsForInitialWorkingList = (state: ReduxState) => {
-    const { programId, orgUnitId, categories } = state.currentSelections;
-    const listId = state.workingListConfigSelector.eventMainPage.currentListId;
-
-    const currentMeta = state.workingListsMeta[listId] || {};
-    const nextMeta = (state.workingListsMeta[listId] && state.workingListsMeta[listId].next) || {};
-    const meta = {
-        ...currentMeta,
-        ...nextMeta,
-        filters: {
-            ...currentMeta.filters,
-            ...nextMeta.filters,
-        },
-    };
-    meta.hasOwnProperty('next') && delete meta.next;
-
-    return {
-        programId,
-        orgUnitId,
-        categories,
-        ...meta,
-    };
 };
 
 const getUnprocessedQueryArgsForUpdateWorkingList = (state: ReduxState) => {
@@ -90,44 +63,6 @@ const getUnprocessedQueryArgsForUpdateWorkingList = (state: ReduxState) => {
         categories,
         ...meta,
     };
-};
-
-const getInitialWorkingListActionAsync = (
-    state: ReduxState,
-    customArgs?: { [id: string]: string},
-): Promise<ReduxAction<any, any>> => {
-    const queryArgsFromState = getUnprocessedQueryArgsForInitialWorkingList(state);
-    const queryArgs = {
-        ...queryArgsFromState,
-        ...customArgs,
-    };
-
-    const queryArgsWithDefaultFallbacks = {
-        rowsPerPage: queryArgs.rowsPerPage || 15,
-        sortById: queryArgs.sortById || 'eventDate',
-        sortByDirection: queryArgs.sortByDirection || 'desc',
-    };
-
-    const allQueryArgs = {
-        ...queryArgs,
-        ...queryArgsWithDefaultFallbacks,
-    };
-
-    const { programId, orgUnitId, categories } = allQueryArgs;
-    const listId = state.workingListConfigSelector.eventMainPage.currentListId;
-
-    return getInitialWorkingListDataAsync(allQueryArgs, state.workingListsColumnsOrder[listId])
-        .then(data =>
-            workingListInitialDataRetrieved(listId, {
-                ...data,
-                argsWithDefaults: queryArgsWithDefaultFallbacks,
-                selections: { programId, orgUnitId, categories },
-            }),
-        )
-        .catch((error) => {
-            log.error(errorCreator(errorMessages.WORKING_LIST_RETRIEVE_ERROR)({ error }));
-            return workingListInitialRetrievalFailed(listId, errorMessages.WORKING_LIST_RETRIEVE_ERROR);
-        });
 };
 
 const getUpdateWorkingListActionAsync = (
@@ -155,8 +90,9 @@ export const retrieveCurrentWorkingListDataEpic = (action$: ActionsObservable, s
         eventsListActionTypes.SET_CURRENT_WORKING_LIST_CONFIG,
         eventsListBatchActionTypes.WORKING_LIST_CONFIGS_RETRIEVED_BATCH,
     )
-        .switchMap(() => {
-            const initialPromise = getInitialWorkingListActionAsync(store.getState());
+        .switchMap((action) => {
+            const { programId, orgUnitId, categories } = store.getState().currentSelections;
+            const initialPromise = initEventWorkingListAsync(action.data, { programId, orgUnitId, categories }, action.listId);
             return fromPromise(initialPromise)
                 .takeUntil(
                     action$.ofType(
@@ -175,8 +111,8 @@ export const retrieveCurrentWorkingListDataEpic = (action$: ActionsObservable, s
                     action$
                         .ofType(connectivityBatchActionTypes.GOING_ONLINE_EXECUTED_BATCH)
                         .filter(actionBatch =>
-                            actionBatch.payload.some(action =>
-                                action.type === connectivityActionTypes.GET_EVENT_LIST_ON_RECONNECT)),
+                            actionBatch.payload.some(a =>
+                                a.type === connectivityActionTypes.GET_EVENT_LIST_ON_RECONNECT)),
                 );
         });
 
