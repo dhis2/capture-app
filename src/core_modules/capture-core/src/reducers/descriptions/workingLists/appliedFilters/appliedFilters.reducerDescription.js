@@ -7,34 +7,12 @@ import { actionTypes as mainSelectionsActionTypes } from '../../../../components
 import {
     actionTypes as filterSelectorActionTypes,
 } from '../../../../components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.actions';
-import { handleChooseWorkingList } from './chooseWorkingList.actionHandler';
 
 export const workingListsAppliedFiltersDesc = createReducerDescription({
-    [eventsListActionTypes.SET_CURRENT_WORKING_LIST_CONFIG]: handleChooseWorkingList,
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
-        const listId = action.payload.listId;
-        const next = newState[listId] ? newState[listId].next : null;
-
-        const stateWithNulls = {
-            ...newState[listId],
-            ...next,
-        };
-
-        const stateWithoutNulls = Object
-            .keys(stateWithNulls)
-            .reduce((accNewState, key) => {
-                if (stateWithNulls[key]) {
-                    accNewState[key] = stateWithNulls[key];
-                }
-                return accNewState;
-            }, {});
-
-        newState[listId] = {
-            ...stateWithoutNulls,
-            next: {},
-        };
-
+        const { listId, config } = action.payload;
+       
         return newState;
     },
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: (state, action) => {

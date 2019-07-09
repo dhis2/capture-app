@@ -1,6 +1,8 @@
 // @flow
 import { createReducerDescription } from '../../../../trackerRedux/trackerReducer';
-import { actionTypes as eventsListActionTypes } from '../../../../components/Pages/MainPage/EventsList/eventsList.actions';
+import {
+    actionTypes as eventsListActionTypes,
+} from '../../../../components/Pages/MainPage/EventsList/eventsList.actions';
 import { actionTypes as mainSelectionsActionTypes } from '../../../../components/Pages/MainPage/mainSelections.actions';
 import {
     actionTypes as paginationActionTypes,
@@ -12,42 +14,14 @@ import {
     actionTypes as listActionTypes,
 } from '../../../../components/List/list.actions';
 
-import { handleChooseWorkingList } from './chooseWorkingList.actionHandler';
-
-
 export const workingListsMetaDesc = createReducerDescription({
-    [eventsListActionTypes.SET_CURRENT_WORKING_LIST_CONFIG]: handleChooseWorkingList,
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
-        const payload = action.payload;
-        const listId = payload.listId;
-
-        const oldData = newState[listId];
-        const newData = newState[listId] && newState[listId].next;
-
-        const filtersWithNull = {
-            ...(oldData ? oldData.filters : null),
-            ...(newData ? newData.filters : null),
-        };
-
-        const filtersWithoutNull = Object
-            .keys(filtersWithNull)
-            .reduce((accFilters, key) => {
-                if (filtersWithNull[key]) {
-                    accFilters[key] = filtersWithNull[key];
-                }
-                return accFilters;
-            }, {});
-
+        const { listId, queryData } = action.payload;
         newState[listId] = {
-            ...oldData,
-            ...newData,
-            ...payload.argsWithDefaults,
-            ...payload.pagingData,
-            filters: filtersWithoutNull,
+            ...queryData,
             next: {},
         };
-
         return newState;
     },
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: (state, action) => {
