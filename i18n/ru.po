@@ -1,0 +1,354 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-03 09:22+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Pootle-Path: /ru/capture-app/ru.po\n"
+"X-Pootle-Revision: 52888\n"
+
+msgid "Please provide a valid date"
+msgstr "Пожалуйста, укажите корректную дату"
+
+msgid "Columns to show in table"
+msgstr "Столбцы для отображения в таблице"
+
+msgid "Column"
+msgstr "Столбец"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Discard event?"
+msgstr "Отменить событие?"
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+"Покинув страницу вы отмените все изменения, внесенные вами в это событие."
+
+msgid "Discard"
+msgstr "Отменить"
+
+msgid "Back to event"
+msgstr "Вернуться к событию"
+
+msgid "Add comment"
+msgstr "Добавить комментарий"
+
+msgid "Write comment"
+msgstr "Написать комментарий"
+
+msgid "Errors"
+msgstr "Ошибки"
+
+msgid "Feedback"
+msgstr "Обратная связь"
+
+msgid "Indicators"
+msgstr "Индикаторы"
+
+msgid "Warnings"
+msgstr "Предупреждения"
+
+msgid "Complete"
+msgstr "Завершить"
+
+msgid "Warnings found"
+msgstr "Есть предупреждения"
+
+msgid "Abort"
+msgstr "Завершить"
+
+msgid "Your data is uploading. Please wait untill this message disappears"
+msgstr ""
+"Ваши данные загружаются. Пожалуйста, подождите, пока это сообщение не "
+"исчезнет"
+
+msgid "No write access"
+msgstr "Нет доступа на запись"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Uploading data"
+msgstr "Загрузка данных"
+
+msgid "Sort"
+msgstr "Сортировка"
+
+msgid "No events to display"
+msgstr "Нет событий для отображения"
+
+msgid "Data for offline list not present"
+msgstr "Данные для офлайн списка отсутствуют"
+
+msgid "Last week"
+msgstr "Прошлая неделя"
+
+msgid "Last month"
+msgstr "Прошлый месяц"
+
+msgid "Last 3 months"
+msgstr "Последние 3 месяца"
+
+msgid "Custom range"
+msgstr "Пользовательский диапазон"
+
+msgid "to"
+msgstr "до"
+
+msgid "after or equal to"
+msgstr "после или равно"
+
+msgid "before or equal to"
+msgstr "до или равно"
+
+msgid "From"
+msgstr "От"
+
+msgid "To"
+msgstr "До"
+
+msgid "Max"
+msgstr "Макс"
+
+msgid "Min"
+msgstr "Мин"
+
+msgid "greater than or equal to"
+msgstr "больше или равно"
+
+msgid "less than or equal to"
+msgstr "меньше или равно"
+
+msgid "Contains text"
+msgstr "Содержит текст"
+
+msgid "Yes"
+msgstr "Да"
+
+msgid "mm/dd/yyyy"
+msgstr "мм/дд/гггг"
+
+msgid "Years"
+msgstr "Годы"
+
+msgid "Months"
+msgstr "Месяцы"
+
+msgid "Days"
+msgstr "Дни"
+
+msgid "Uploading file"
+msgstr "Загрузка файла"
+
+msgid "selected"
+msgstr "выбран"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Select file"
+msgstr "Выбрать файл"
+
+msgid "No"
+msgstr "Нет"
+
+msgid "Uploading image"
+msgstr "Загрузка изображения"
+
+msgid "Select image"
+msgstr "Выбрать изображение"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "Clear"
+msgstr "Очистить"
+
+msgid "No results"
+msgstr "Нет результатов"
+
+msgid "No items to display"
+msgstr "Нет элементов для отображения"
+
+msgid "Online"
+msgstr "Онлайн"
+
+msgid "Offline"
+msgstr "Офлайн"
+
+msgid "Syncing"
+msgstr "Синхронизация"
+
+msgid "Basic info"
+msgstr "Основная информация"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Comments"
+msgstr "Комментарии"
+
+msgid "Field"
+msgstr "Поле"
+
+msgid "could not be updated"
+msgstr "не может быть обновлено"
+
+msgid "Please add or cancel comment before saving the event"
+msgstr "Пожалуйста, добавьте или отмените комментарий перед сохранением события"
+
+msgid "Show all events"
+msgstr "Показать все события"
+
+msgid "Edit event"
+msgstr "Редактировать событие"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "Событие не может быть загружено. Вы уверены, что оно существует?"
+
+msgid "Event could not be loaded"
+msgstr "Событие не может быть загружено"
+
+msgid "Organisation unit could not be loaded"
+msgstr "Не удалось загрузить организационную единицу"
+
+msgid "Delete event"
+msgstr "Удалить событие"
+
+msgid "Update"
+msgstr "Обновить"
+
+msgid "Close"
+msgstr "Закрыть"
+
+msgid "More filters"
+msgstr "Больше фильтров"
+
+msgid "Rows per page"
+msgstr "Строки на страницу"
+
+msgid "Could not get organisation unit"
+msgstr "Не удалось получить организационную единицу"
+
+msgid "Program doesn't exist"
+msgstr "Программа не существует"
+
+msgid "Selected program is invalid for registering unit"
+msgstr "Выбранная программа недействительна для регистрирующей единицы"
+
+msgid "Saving to"
+msgstr "Сохранение в"
+
+msgid "in"
+msgstr "в"
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for details."
+msgstr ""
+"Данное не является программой события, либо метаданные повреждены. "
+"Обратитесь к лог-журналу для дополнительных сведений."
+
+msgid "A value is required"
+msgstr "Требуется значение"
+
+msgid "Save and add another"
+msgstr "Сохранить и добавить еще"
+
+msgid "Save and exit"
+msgstr "Сохранить и выйти"
+
+msgid "Finish"
+msgstr "Завершить"
+
+msgid "events added"
+msgstr "события добавлены"
+
+msgid "No events added"
+msgstr "События не добавлены"
+
+msgid "Switch to form view"
+msgstr "Переключиться на просмотр формы"
+
+msgid "Switch to row view"
+msgstr "Переключиться на просмотр строк"
+
+msgid "New event"
+msgstr "Новое событие"
+
+msgid "Select a registering unit and program above to get started"
+msgstr "Выбрать регистрирующую единицу и программу выше, для того чтобы начать"
+
+msgid "Select a program to start reporting"
+msgstr "Выбрать программу, чтобы начать отчет"
+
+msgid "Select a registering unit to start reporting"
+msgstr "Выбрать регистрирующую единицу, чтобы начать отчет"
+
+msgid "Select a category option to start reporting"
+msgstr "Выбрать опцию категории, чтобы начать отчет"
+
+msgid "Start again"
+msgstr "Начать сначала"
+
+msgid "New"
+msgstr "Новый"
+
+msgid "Find"
+msgstr "Найти"
+
+msgid "Selected registering unit"
+msgstr "Выбрать регистрирующую единицу"
+
+msgid "Start Again"
+msgstr "Начать сначала"
+
+msgid "Registering Organisation Unit"
+msgstr "Регистрация организационной единицы"
+
+msgid "Selected Program"
+msgstr "Выбранная программа"
+
+msgid "Select"
+msgstr "Выбрать"
+
+msgid "Some programs are being filtered."
+msgstr "Некоторые программы на даннай момент фильтруются."
+
+msgid "Show all"
+msgstr "Показать все"
+
+msgid "Program"
+msgstr "Программа"
+
+msgid "Select program"
+msgstr "Выбрать программу"
+
+msgid "No programs available."
+msgstr "Нет доступных программ."
+
+msgid "An error has occured. See log for details"
+msgstr "Произошла ошибка. Смотрите лог-журнал для деталей"
+
+msgid "Error saving event"
+msgstr "Ошибка сохранения события"
+
+msgid "Could not save event. See log for details"
+msgstr "Не удалось сохранить событие. Смотрите лог-журнал для деталей"
+
+msgid "Choose one or more dates..."
+msgstr "Выбрать одну или несколько дат ..."
+
+msgid "Choose a date..."
+msgstr "Выбрать дату ..."
+
+msgid "Today"
+msgstr "Сегодня"
