@@ -14,8 +14,6 @@ import {
     setCurrentWorkingListConfig,
     workingListConfigsRetrieved,
 } from '../eventsList.actions';
-import convertToServerEventWorkingListConfig from '../../../../../eventWorkingListConfig/convertToServerEventWorkingListConfig';
-import { addEventProgramWorkingListConfig } from '../../../../../eventWorkingListConfig/eventWorkingListConfigRequests';
 
 
 export const retrieveWorkingListConfigsFromServer = (action$: ActionsObservable, store: ReduxStore) =>
@@ -36,6 +34,7 @@ export const retrieveWorkingListConfigsFromServer = (action$: ActionsObservable,
             return fromPromise(promise);
         });
 
+/*
 export const addWorkingListConfigEpic = (action$: ActionsObservable, store: ReduxStore) =>
     action$.ofType(
         eventListActionTypes.ADD_WORKING_LIST_CONFIG,
@@ -58,3 +57,4 @@ export const addWorkingListConfigEpic = (action$: ActionsObservable, store: Redu
             });
             return fromPromise(promise);
         });
+*/

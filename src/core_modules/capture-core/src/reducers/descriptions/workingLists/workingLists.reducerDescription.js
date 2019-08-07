@@ -237,21 +237,13 @@ export const workingListsUIDesc = createReducerDescription({
 }, 'workingListsUI');
 
 export const workingListsColumnsOrderDesc = createReducerDescription({
-    [eventsListActionTypes.SET_CURRENT_WORKING_LIST_CONFIG]: (state, action) => ({
-        ...state,
-        [action.payload.listId]: null,
-    }),
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
-        const newColumnsOrder = action.payload.columnsOrder;
-        const payload = action.payload;
-
-        if (!newColumnsOrder) {
-            return state;
-        }
-
-        const newState = { ...state };
-        newState[payload.listId] = payload.columnsOrder;
-        return newState;
+        const { listId, config } = action.payload;
+        const columnOrder = config.columnOrder;
+        return {
+            ...state,
+            [listId]: columnOrder,
+        };
     },
     [columnSelectorActionTypes.UPDATE_WORKINGLIST_ORDER]: (state, action) => {
         const newState = { ...state };
@@ -261,7 +253,7 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
     },
     [listActionTypes.RESET_LIST]: (state, action) => {
         const newState = { ...state };
-        newState[action.payload.listId] = [...action.payload.columnsOrder];
+        newState[action.payload.listId] = [...action.payload.columnOrder];
         return newState;
     },
 }, 'workingListsColumnsOrder');
@@ -345,16 +337,17 @@ export const workingListsUserSelectedFiltersDesc = createReducerDescription({
 
         return newState;
     },
-    [eventsListActionTypes.SET_CURRENT_WORKING_LIST_CONFIG]: (state, action) => {
-        const { filters } = action.payload;
-        const selectedFilters = filters ? filters.reduce((accFilters, filter) => ({
-            ...accFilters,
+    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
+        const { listId, config = {} } = action.payload;
+        const filters = config.filters;
+        const selectedFilters = filters ? filters.reduce((acc, filter) => ({
+            ...acc,
             [filter.id]: true,
         }), {}) : {};
 
         return {
             ...state,
-            ...selectedFilters,
+            [listId]: selectedFilters,
         };
     },
     [filterSelectorActionTypes.UPDATE_INCLUDED_FILTERS_AFTER_COLUMN_SORTING]: (state, action) => {

@@ -126,7 +126,7 @@ const getSortOrder = (order: ?string) => {
     return null;
 };
 
-const getDataElementFilters = (filters: ?Array<DataFilter>, stageForm: RenderFoundation) => {
+const getDataElementFilters = (filters: ?Array<DataFilter>, stageForm: RenderFoundation): Array<Object> => {
     if (!filters) {
         return [];
     }
@@ -137,11 +137,15 @@ const getDataElementFilters = (filters: ?Array<DataFilter>, stageForm: RenderFou
             if (element.optionSet && element.optionSet.options.length <= MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS) {
                 return { id: serverFilter.dataItem, ...getMultiSelectOptionSetFilter(serverFilter, element) };
             }
-            // $FlowFixMe
-            return { id: serverFilter.dataItem, ...(getFilterByType[element.type] ? getFilterByType[element.type](serverFilter, element) : null) };
+            return {
+                id: serverFilter.dataItem,
+                // $FlowFixMe
+                ...(getFilterByType[element.type] ? getFilterByType[element.type](serverFilter, element) : null),
+            };
         }
+        // $FlowFixMe
         return null;
-    }).filter(clientFilter => clientFilter !== null);
+    }).filter(clientFilter => clientFilter);
 };
 
 const getMainDataFilters = (eventQueryCriteria: EventQueryCriteria) => {
@@ -164,18 +168,21 @@ export function convertToEventWorkingListConfig(
         return undefined;
     }
 
+    const { assignedUserMode, assignedUsers } = eventQueryCriteria;
     const { sortById, sortByDirection } = getSortOrder(eventQueryCriteria.order) || {};
     const filters = [
         ...getDataElementFilters(eventQueryCriteria.dataFilters, stageForm),
         ...getMainDataFilters(eventQueryCriteria),
     ];
 
-    const columnOrder = getColumnsConfiguration(eventQueryCriteria.displayColumnOrder, stageForm);
+    const columnOrder = getColumnsConfiguration(stageForm, eventQueryCriteria.displayColumnOrder);
 
     return {
         filters,
         columnOrder,
         sortById,
         sortByDirection,
+        assignedUserMode,
+        assignedUsers,
     };
 }

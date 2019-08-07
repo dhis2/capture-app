@@ -12,14 +12,15 @@ export const workingListsAppliedFiltersDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
         const { listId, config } = action.payload;
-       
-        return newState;
-    },
-    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: (state, action) => {
-        const newState = {
-            ...state,
-            [action.payload.listId]: {},
-        };
+        const filters = config && config.filters;
+        const appliedFilters = filters ?
+            filters
+                .reduce((acc, filter) => ({
+                    ...acc,
+                    [filter.id]: filter.appliedText,
+                }), {}) :
+            {};
+        newState[listId] = appliedFilters;
         return newState;
     },
     [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state, action) => {

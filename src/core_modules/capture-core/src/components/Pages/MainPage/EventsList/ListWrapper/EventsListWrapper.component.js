@@ -1,16 +1,11 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import i18n from '@dhis2/d2-i18n';
-import {
-    Pagination,
-} from 'capture-ui';
+
 import elementTypes from '../../../../../metaData/DataElement/elementTypes';
 
-import withData from '../Pagination/withData';
-import withNavigation from '../../../../Pagination/withDefaultNavigation';
-import withRowsPerPageSelector from '../../../../Pagination/withRowsPerPageSelector';
 import withFilterSelectors from '../FilterSelectors/withFilterSelectors';
+import { ListPagination } from '../Pagination';
 
 import DownloadTable from '../../../../DownloadTable/DownloadTable.container';
 import OptionSet from '../../../../../metaData/OptionSet/OptionSet';
@@ -21,7 +16,6 @@ import DialogLoadingMask from '../../../../LoadingMasks/DialogLoadingMask.compon
 import List from '../../../../List/OnlineList/List.component';
 import ListWrapperMenu from '../ListWrapperMenu/ListWrapperMenu.container';
 
-const EventListPagination = withData()(withRowsPerPageSelector()(withNavigation()(Pagination)));
 const EventList = withCustomEndCell(eventContentMenuSettings)(List);
 
 const getStyles = (theme: Theme) => ({
@@ -70,9 +64,6 @@ type Props = {
 };
 
 class EventListWrapper extends React.Component<Props> {
-    getPaginationLabelDisplayedRows =
-        (fromToLabel: string, totalLabel: string) => `${fromToLabel} of ${totalLabel}`;
-
     renderTopBar = () => {
         const { classes, filterButtons, columns, listId } = this.props;
         return (
@@ -100,10 +91,8 @@ class EventListWrapper extends React.Component<Props> {
             <div
                 className={classes.paginationContainer}
             >
-                <EventListPagination
+                <ListPagination
                     listId={this.props.listId}
-                    rowsCountSelectorLabel={i18n.t('Rows per page')}
-                    onGetLabelDisplayedRows={this.getPaginationLabelDisplayedRows}
                 />
             </div>
         );

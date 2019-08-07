@@ -16,6 +16,8 @@ export type EventQueryCriteria = {
     eventDate?: ?Object,
     status?: ?string,
     displayColumnOrder?: ?Array<string>,
+    assignedUserMode?: 'CURRENT' | 'PROVIDED' | 'NONE' | 'ANY',
+    assignedUsers?: Array<string>,
 }
 
 export type EventFilter = {
@@ -31,10 +33,12 @@ export type CommonQueryData = {
 }
 
 export type WorkingListConfig = {
-    filters?: ?Array<{id: string, requestData: any, appliedText: string, value: any}>,
-    sortById?: ?string,
-    sortByDirection?: ?string,
-    columnsOrder: Array<Object>,
+    filters: Array<{id: string, requestData: any, appliedText: string, value: any}>,
+    sortById: ?string,
+    sortByDirection: ?string,
+    columnOrder: Array<Object>,
+    assignedUserMode?: ?'CURRENT' | 'PROVIDED' | 'NONE' | 'ANY',
+    assignedUsers?: ?Array<string>,
 }
 
 export type ColumnConfig = {

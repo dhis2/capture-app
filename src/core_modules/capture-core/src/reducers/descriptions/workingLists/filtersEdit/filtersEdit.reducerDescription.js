@@ -4,9 +4,6 @@ import {
     actionTypes as filterSelectorActionTypes,
 } from '../../../../components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.actions';
 import {
-    actionTypes as eventsListActionTypes,
-} from '../../../../components/Pages/MainPage/EventsList/eventsList.actions';
-import {
     actionTypes as quickSelectorActionTypes,
 } from '../../../../components/QuickSelector/actions/QuickSelector.actions';
 import {
@@ -18,7 +15,6 @@ import {
 import {
     actionTypes as viewEventActionTypes,
 } from '../../../../components/Pages/ViewEvent/viewEvent.actions';
-import { handleChooseWorkingList } from './chooseWorkingList.actionHandler';
 
 const updateFiltersEditOnUrlUpdate = (state, action) => {
     const payload = action.payload;
@@ -34,6 +30,20 @@ const updateFiltersEditOnUrlUpdate = (state, action) => {
 };
 
 export const workingListFiltersEditDesc = createReducerDescription({
+    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
+        const newState = { ...state };
+        const { listId, config } = action.payload;
+        const filters = config && config.filters;
+        const filtersEdit = filters ?
+            filters
+                .reduce((acc, filter) => ({
+                    ...acc,
+                    [filter.id]: filter.value,
+                }), {}) :
+            {};
+        newState[listId] = filtersEdit;
+        return newState;
+    },
     [filterSelectorActionTypes.EDIT_CONTENTS]: (state, action) => {
         const { itemId, listId, value } = action.payload;
         const newState = { ...state };
@@ -66,7 +76,6 @@ export const workingListFiltersEditDesc = createReducerDescription({
         };
         return newState;
     },
-    [eventsListActionTypes.SET_CURRENT_WORKING_LIST_CONFIG]: handleChooseWorkingList,
     [filterSelectorActionTypes.REVERT_FILTER]: (state, action) => {
         const newState = { ...state };
         const listId = action.payload.listId;

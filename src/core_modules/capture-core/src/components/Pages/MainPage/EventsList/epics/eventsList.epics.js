@@ -30,14 +30,18 @@ import { getWorkingListConfigsAsync } from './workingListConfigDataRetriever';
 import { initEventWorkingListAsync } from './initEventWorkingList';
 import { updateEventWorkingListAsync } from './updateEventWorkingList';
 
-export const initEventWorklingListEpic = (action$, store: ReduxStore) =>
+export const initEventWorkingListEpic = (action$, store: ReduxStore) =>
     action$.ofType(
         eventsListActionTypes.SET_CURRENT_WORKING_LIST_CONFIG,
         eventsListBatchActionTypes.WORKING_LIST_CONFIGS_RETRIEVED_BATCH,
     )
+        .map(action => (action.type === eventsListBatchActionTypes.WORKING_LIST_CONFIGS_RETRIEVED_BATCH ?
+            action.payload.find(a => a.type === eventsListActionTypes.SET_CURRENT_WORKING_LIST_CONFIG) :
+            action))
         .switchMap((action) => {
             const { programId, orgUnitId, categories } = store.getState().currentSelections;
-            const initialPromise = initEventWorkingListAsync(action.data, { programId, orgUnitId, categories }, action.listId);
+            const { eventQueryCriteria, listId } = action.payload;
+            const initialPromise = initEventWorkingListAsync(eventQueryCriteria, { programId, orgUnitId, categories }, listId);
             return fromPromise(initialPromise)
                 .takeUntil(
                     action$.ofType(

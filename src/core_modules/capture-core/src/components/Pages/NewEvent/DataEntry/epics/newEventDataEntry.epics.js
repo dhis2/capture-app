@@ -27,7 +27,6 @@ import {
 import {
     actionTypes as newEventSelectionTypes,
 } from '../actions/dataEntryUrl.actions';
-import getColumnsConfiguration from '../../../MainPage/EventsList/epics/getColumnsConfiguration';
 import {
     actionTypes as newEventSelectorTypes,
 } from '../../SelectorLevel/selectorLevel.actions';
@@ -38,6 +37,7 @@ import {
 import getProgramAndStageFromProgramId from
     '../../../../../metaData/helpers/EventProgram/getProgramAndStageFromProgramId';
 import errorCreator from '../../../../../utils/errorCreator';
+import { getDefaultMainConfig as getDefaultMainColumnConfig, getMetaDataConfig as getColumnMetaDataConfig } from '../../../MainPage/EventsList/defaultColumnConfiguration';
 import {
     resetList,
 } from '../../../../List/list.actions';
@@ -47,6 +47,7 @@ import type {
 import {
     listId,
 } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
+import getStageForEventProgram from '../../../../../metaData/helpers/EventProgram/getStageFromProgramId';
 
 const errorMessages = {
     PROGRAM_OR_STAGE_NOT_FOUND: 'Program or stage not found',
@@ -129,12 +130,12 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
         newEventSelectorTypes.SET_ORG_UNIT,
         newEventSelectorTypes.SET_PROGRAM_ID)
         .filter(() => store.getState().currentSelections.complete)
-        .switchMap(() => {
+        .map(() => {
             const state = store.getState();
-            // const newEventsListColumnsOrder = state.workingListsColumnsOrder.main || [];
             const newEventsMeta = { sortById: 'created', sortByDirection: 'desc' };
-            return getColumnsConfiguration(state.currentSelections.programId).then(columnsConfig =>
-                resetList(listId, columnsConfig, newEventsMeta, state.currentSelections));
+            const stageContainer = getStageForEventProgram(state.currentSelections.programId);
+            const columnConfig = [...getDefaultMainColumnConfig(), ...getColumnMetaDataConfig(stageContainer.stage.stageForm)];
+            return resetList(listId, columnConfig, newEventsMeta, state.currentSelections);
         });
 
 export const runRulesForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>

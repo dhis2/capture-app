@@ -149,7 +149,7 @@ const mapMainSelectionsToRequests = {
 
 
 export const getRequestData = (value: Value) =>
-    ({ ...value, filter: mapMainSelectionsToRequests[value.main](value.from, value.to) });
+    mapMainSelectionsToRequests[value.main](value.from, value.to);
 
 export const getAppliedText = (value: Value) =>
     mapMainSelectionsToAppliedText[value.main](value.from, value.to);

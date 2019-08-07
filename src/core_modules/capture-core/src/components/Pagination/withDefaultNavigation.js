@@ -19,11 +19,10 @@ const styles = (theme: Theme) => ({
 });
 
 type Props = {
-    listId: string,
     rowsPerPage: number,
     currentPage: number,
     rowsCount: number,
-    onChangePage: (listId, pageNumber: number) => void,
+    onChangePage: (pageNumber: number) => void,
     classes: {
         root: string,
     },
@@ -32,19 +31,19 @@ type Props = {
 const getNavigation = (InnerComponent: React.ComponentType<any>) =>
     class PaginationNavigation extends React.Component<Props> {
         handleFirstPageButtonClick = () => {
-            this.props.onChangePage(listId, 1);
+            this.props.onChangePage(1);
         };
 
         handleBackButtonClick = () => {
-            this.props.onChangePage(listId, this.props.currentPage - 1);
+            this.props.onChangePage(this.props.currentPage - 1);
         };
 
         handleNextButtonClick = () => {
-            this.props.onChangePage(listId, this.props.currentPage + 1);
+            this.props.onChangePage(this.props.currentPage + 1);
         };
 
         handleLastPageButtonClick = () => {
-            this.props.onChangePage(listId,
+            this.props.onChangePage(
                 Math.max(1, Math.ceil(this.props.rowsCount / this.props.rowsPerPage)));
         };
 

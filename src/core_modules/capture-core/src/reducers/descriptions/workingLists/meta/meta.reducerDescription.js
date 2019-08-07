@@ -17,22 +17,17 @@ import {
 export const workingListsMetaDesc = createReducerDescription({
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };
-        const { listId, queryData } = action.payload;
-        newState[listId] = {
+        const { listId, queryData, pagingData } = action.payload;
+
+        const listState = {
             ...queryData,
+            ...pagingData,
             next: {},
         };
+
+        listState.hasOwnProperty('page') && delete listState.page;
+        newState[listId] = listState;
         return newState;
-    },
-    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: (state, action) => {
-        const listId = action.payload.listId;
-        return {
-            ...state,
-            [listId]: {
-                ...state[listId],
-                next: {},
-            },
-        };
     },
     [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state, action) => {
         const newState = { ...state };

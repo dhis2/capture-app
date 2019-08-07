@@ -1,11 +1,9 @@
 // @flow
-import {
-    getEventProgramWorkingListConfigs,
-} from '../../../../../eventWorkingListConfig/eventWorkingListConfigRequests';
+import { getEventFilters } from '../eventFiltersInterface';
 
 export const getWorkingListConfigsAsync = (state: ReduxState) => {
     const programId = state.currentSelections.programId;
-    return getEventProgramWorkingListConfigs(programId).then((workingListConfigs) => {
+    return getEventFilters(programId).then((workingListConfigs) => {
         const defaultWorkingListConfig = {
             id: `${programId}-default`,
             isDefault: true,

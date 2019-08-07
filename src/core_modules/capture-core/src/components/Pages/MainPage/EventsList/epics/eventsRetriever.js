@@ -12,6 +12,7 @@ const mapArgumentNameFromClientToServer = {
     orgUnitId: 'orgUnit',
     rowsPerPage: 'pageSize',
     currentPage: 'page',
+    assignedUsers: 'assignedUser',
 };
 
 const getMainColumns = (columnsOrder: Array<ColumnConfig>) => columnsOrder
@@ -22,10 +23,7 @@ const getMainColumns = (columnsOrder: Array<ColumnConfig>) => columnsOrder
         return accMainColumns;
     }, {});
 
-const getFilter = (filterContainer: any) => {
-    if (filterContainer && filterContainer.filter) return filterContainer.filter;
-    return filterContainer;
-};
+const getFilter = (filterContainer: any) => filterContainer;
 
 const getApiFilterQueryArgument = (filters: ?{ [id: string]: string}, mainColumns: { [id: string]: boolean}) => {
     const filterQueries =
@@ -52,45 +50,56 @@ const getApiFilterQueryArgument = (filters: ?{ [id: string]: string}, mainColumn
     return filterArgument;
 };
 
+const getEventDateQueryArgs = (filter: Array<string> | string) => {
+    let eventDateQueryArgs = {};
+    if (Array.isArray(filter)) {
+        eventDateQueryArgs = filter
+            .reduce((accEventDateQueryArgs, filterPart: string) => {
+                if (filterPart.startsWith('ge')) {
+                    accEventDateQueryArgs.startDate = filterPart.replace('ge:', '');
+                } else {
+                    accEventDateQueryArgs.endDate = filterPart.replace('le:', '');
+                }
+                return accEventDateQueryArgs;
+            }, {});
+    } else if (filter.startsWith('ge')) {
+        eventDateQueryArgs.startDate = filter.replace('ge:', '');
+    } else {
+        eventDateQueryArgs.endDate = filter.replace('le:', '');
+    }
+    return eventDateQueryArgs;
+};
+
+const getStatusQueryArgs = (filter: string) => {
+    const statusQueryArgs = {
+        status: filter.replace('eq:', ''),
+    };
+    return statusQueryArgs;
+};
+
 const getMainApiFilterQueryArguments = (filters: ?{ [id: string]: string}, mainColumns: { [id: string]: boolean}) => {
-    const mainFilterQueries =
+    const mainFilterQueryArgs =
         filters ?
             Object
                 .keys(filters)
                 // $FlowSuppress
                 .filter(key => mainColumns[key] && filters[key] != null)
-                .reduce((accMainFilters, key) => {
+                .reduce((accMainQueryArgs, key) => {
                     // $FlowSuppress
                     const filter = getFilter(filters[key]);
-                    let filtersForCurrentMain = {};
+                    let queryArgsForCurrentMain = {};
                     if (key === 'eventDate') {
-                        if (Array.isArray(filter)) {
-                            filtersForCurrentMain = filter
-                                .reduce((accEventDateFilters, filterPart: string) => {
-                                    if (filterPart.startsWith('ge')) {
-                                        accEventDateFilters.startDate = filterPart.replace('ge:', '');
-                                    } else {
-                                        accEventDateFilters.endDate = filterPart.replace('le:', '');
-                                    }
-                                    return accEventDateFilters;
-                                }, {});
-                        } else if (filter.startsWith('ge')) {
-                            filtersForCurrentMain.startDate = filter.replace('ge:', '');
-                        } else {
-                            filtersForCurrentMain.endDate = filter.replace('le:', '');
-                        }
+                        queryArgsForCurrentMain = getEventDateQueryArgs(filter);
                     } else if (key === 'status') {
-                        if (filter.startsWith('eq:')) {
-                            filtersForCurrentMain.status = filter.replace('eq:', '');
-                        }
+                        queryArgsForCurrentMain = getStatusQueryArgs(filter);
                     }
                     return {
-                        ...accMainFilters,
-                        ...filtersForCurrentMain,
+                        ...accMainQueryArgs,
+                        ...queryArgsForCurrentMain,
                     };
                 }, {}) : null;
 
-    return mainFilterQueries;
+    return mainFilterQueryArgs;
 };
 
 const getApiCategoriesQueryArgument = (categories: ?{ [id: string]: string}, programId: string) => {
@@ -119,7 +128,7 @@ const getApiCategoriesQueryArgument = (categories: ?{ [id: string]: string}, pro
 };
 
 const createApiQueryArgs = (queryArgs: Object, mainColumns: Object) => {
-    const apiQueryArgs = {
+    let apiQueryArgs = {
         ...queryArgs,
         order: `${queryArgs.sortById}:${queryArgs.sortByDirection}`,
         ...getApiFilterQueryArgument(queryArgs.filters, mainColumns),
@@ -131,6 +140,16 @@ const createApiQueryArgs = (queryArgs: Object, mainColumns: Object) => {
     apiQueryArgs.hasOwnProperty('sortByDirection') && delete apiQueryArgs.sortByDirection;
     apiQueryArgs.hasOwnProperty('filters') && delete apiQueryArgs.filters;
     apiQueryArgs.hasOwnProperty('rowsCount') && delete apiQueryArgs.rowsCount;
+
+    apiQueryArgs = Object
+        .keys(apiQueryArgs)
+        .reduce((acc, key) => {
+            const value = apiQueryArgs[key];
+            if (value !== undefined) {
+                acc[key] = value;
+            }
+            return acc;
+        }, {});
 
     const apiQueryArgsWithServerPropName = Object
         .keys(apiQueryArgs)

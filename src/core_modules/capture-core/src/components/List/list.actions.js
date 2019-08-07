@@ -21,5 +21,5 @@ export const removeListItem =
         actionCreator(actionTypes.REMOVE_LIST_ITEM)({ listId, itemId });
 
 export const resetList =
-    (listId: string, columnsOrder: any, meta: any, selections: any) =>
-        actionCreator(actionTypes.RESET_LIST)({ listId, columnsOrder, meta, selections });
+    (listId: string, columnOrder: any, meta: any, selections: any) =>
+        actionCreator(actionTypes.RESET_LIST)({ listId, columnOrder, meta, selections });

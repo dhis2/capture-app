@@ -40,8 +40,7 @@ export const updateEventWorkingListAsync = (
 ): Promise<ReduxAction<any, any>> => {
     const listId = state.workingListConfigSelector.eventMainPage.currentListId;
     const queryData = getUnprocessedQueryArgsForUpdateWorkingList(state, listId);
-    const columnOrder = state.workingListColumns[listId];
-
+    const columnOrder = state.workingListsColumnsOrder[listId];
     return getEventWorkingListDataAsync(queryData, columnOrder)
         .then(data =>
             workingListUpdateDataRetrieved(listId, data),

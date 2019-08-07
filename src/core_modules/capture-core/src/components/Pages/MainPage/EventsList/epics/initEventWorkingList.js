@@ -8,6 +8,7 @@ import {
     workingListInitialDataRetrieved,
     workingListInitialRetrievalFailed,
 } from '../../mainSelections.actions';
+import { getDefaultMainConfig, getMetaDataConfig } from '../defaultColumnConfiguration';
 import type { EventQueryCriteria, CommonQueryData, WorkingListConfig } from '../eventList.types';
 
 const errorMessages = {
@@ -21,17 +22,21 @@ const queryDefaults = {
     sortByDirection: 'desc',
 };
 
-function getQueryDataFromConfig(workingListConfig: WorkingListConfig) {
-    const filters = workingListConfig.filters;
-    if (!filters) {
-        return filters;
-    }
+function getQueryDataFromConfig(workingListConfig: ?WorkingListConfig) {
+    const configOrEmptyObject = workingListConfig || {};
+    const { filters = [], sortById, sortByDirection, assignedUserMode, assignedUsers } = configOrEmptyObject;
 
-    return filters
-        .reduce((acc, filter) => ({
-            ...filter,
-            [filter.id]: filter.requestData,
-        }), {});
+    return {
+        filters: filters
+            .reduce((acc, filter) => ({
+                ...acc,
+                [filter.id]: filter.requestData,
+            }), {}),
+        sortById,
+        sortByDirection,
+        assignedUserMode,
+        assignedUsers,
+    };
 }
 
 function addDefaultsToQueryData(queryData: Object) {
@@ -43,7 +48,7 @@ function addDefaultsToQueryData(queryData: Object) {
         }), {});
 
     return {
-        queryData,
+        ...queryData,
         ...queryDefaultsWithOverrides,
     };
 }
@@ -55,15 +60,27 @@ export const initEventWorkingListAsync = (
 ): Promise<ReduxAction<any, any>> => {
     const program = getEventProgramThrowIfNotFound(commonQueryData.programId);
     const stage = program.stage;
-    const workingListConfig: WorkingListConfig = convertToEventWorkingListConfig(config, stage.stageForm) || {};
+    const workingListConfig: ?WorkingListConfig = convertToEventWorkingListConfig(config, stage.stageForm);
+
     const queryData = getQueryDataFromConfig(workingListConfig) || {};
     const queryDataWithDefaults = addDefaultsToQueryData(queryData);
+    const customColumnOrder = workingListConfig && workingListConfig.columnOrder;
+    const columnOrder = customColumnOrder || [
+        ...getDefaultMainConfig(),
+        ...getMetaDataConfig(stage.stageForm),
+    ];
 
-    return getEventWorkingListDataAsync(queryDataWithDefaults, workingListConfig.columnsOrder)
+    return getEventWorkingListDataAsync({
+        ...queryDataWithDefaults,
+        ...commonQueryData,
+    }, columnOrder)
         .then(data =>
             workingListInitialDataRetrieved(listId, {
                 ...data,
-                config: workingListConfig,
+                config: {
+                    ...workingListConfig,
+                    columnOrder,
+                },
                 queryData: queryDataWithDefaults,
                 selections: commonQueryData,
             }),

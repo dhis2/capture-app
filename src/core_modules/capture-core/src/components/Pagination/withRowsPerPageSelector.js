@@ -10,9 +10,8 @@ import type { VirtualizedOptionConfig } from
 const OptionsSelectWithTranslations = withTranslations()(OptionsSelect);
 
 type Props = {
-    listId: string,
     rowsPerPage: number,
-    onChangeRowsPerPage: (listId: string, rowsPerPage: number) => void,
+    onChangeRowsPerPage: (rowsPerPage: number) => void,
 };
 
 const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
@@ -34,7 +33,7 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
         }
 
         handleRowsSelect = (rowsPerPage: number) => {
-            this.props.onChangeRowsPerPage(this.props.listId, rowsPerPage);
+            this.props.onChangeRowsPerPage(rowsPerPage);
         }
 
         renderSelectorElement = () => {

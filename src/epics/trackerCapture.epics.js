@@ -37,7 +37,7 @@ import {
     openNewEventPageLocationChangeEpic,
 } from 'capture-core/components/Pages/NewEvent/epics/newEvent.epics';
 import {
-    initEventWorklingListEpic,
+    initEventWorkingListEpic,
     // retrieveWorkingListOnMainSelectionsCompletedEpic,
     getWorkingListOnCancelSaveEpic,
     getWorkingListOnSaveEpic,
@@ -47,7 +47,6 @@ import {
 } from 'capture-core/components/Pages/MainPage/EventsList/epics/eventsList.epics';
 import {
     retrieveWorkingListConfigsFromServer,
-    addWorkingListConfigEpic,
 } from 'capture-core/components/Pages/MainPage/EventsList/epics/workingListConfig.epics';
 import {
     getEventFromUrlEpic,
@@ -196,8 +195,7 @@ export default combineEpics(
     mainSelectionsCompletedEpic,
     orgUnitDataRetrivedEpic,
     retrieveWorkingListConfigsFromServer,
-    addWorkingListConfigEpic,
-    initEventWorklingListEpic,
+    initEventWorkingListEpic,
     // retrieveWorkingListOnMainSelectionsCompletedEpic,
     getWorkingListOnCancelSaveEpic,
     getWorkingListOnSaveEpic,

@@ -8,12 +8,12 @@ import {
     getNumericFilterData,
     getTextFilterData,
     getTrueOnlyFilterData,
-} from '../components/FiltersForTypes';
-import { dataElementTypes as elementTypes, DataElement, RenderFoundation, OptionSet, Option } from '../metaData';
-import eventStatusElement from '../events/eventStatusElement';
+} from '../../../../FiltersForTypes';
+import { dataElementTypes as elementTypes, DataElement, RenderFoundation, OptionSet, Option } from '../../../../../metaData';
+// import eventStatusElement from '../events/eventStatusElement';
 import {
     MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS,
-} from '../components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.const';
+} from '../FilterSelectors/filterSelector.const';
 
 const getNumericFilter = (filter: Object) => ({
     ge: filter.min,

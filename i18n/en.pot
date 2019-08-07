@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-05-06T13:57:59.285Z\n"
-"PO-Revision-Date: 2019-05-06T13:57:59.285Z\n"
+"POT-Creation-Date: 2019-08-06T08:04:57.618Z\n"
+"PO-Revision-Date: 2019-08-06T08:04:57.618Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -323,9 +323,6 @@ msgstr ""
 msgid "More filters"
 msgstr ""
 
-msgid "Rows per page"
-msgstr ""
-
 msgid "Show/hide columns"
 msgstr ""
 
@@ -333,6 +330,9 @@ msgid "Save filter as..."
 msgstr ""
 
 msgid "Download as..."
+msgstr ""
+
+msgid "Rows per page"
 msgstr ""
 
 msgid "Active"

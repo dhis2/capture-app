@@ -14,7 +14,6 @@ export const actionTypes = {
     EVENT_DELETED: 'EventDeleted',
     WORKING_LIST_UPDATING: 'WorkingListUpdating',
     WORKING_LIST_UPDATING_WITH_DIALOG: 'WorkingListUpdatingWithDialog',
-
     SET_CURRENT_WORKING_LIST_CONFIG: 'SetCurrentWorkingListConfig',
     WORKING_LIST_CONFIGS_RETRIEVED: 'WorkingListConfigsRetrieved',
     WORKING_LIST_CONFIGS_RETRIEVAL_FAILED: 'WorkingListConfigsRetrievalFailed',
