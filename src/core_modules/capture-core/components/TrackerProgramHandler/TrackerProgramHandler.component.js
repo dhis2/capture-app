@@ -31,7 +31,7 @@ type Props = {
 class TrackerProgramHandler extends React.Component<Props> {
     getUrl() {
         const { programId, orgUnitId } = this.props;
-        const baseUrl = `${(process.env.TRACKER_CAPTURE_APP_PATH || '..').replace(/\/$/, '')}/#/?`;
+        const baseUrl = `${(process.env.REACT_APP_TRACKER_CAPTURE_APP_PATH || '..').replace(/\/$/, '')}/#/?`;
         const params = `program=${programId}&ou=${orgUnitId}`;
         return baseUrl + params;
     }
