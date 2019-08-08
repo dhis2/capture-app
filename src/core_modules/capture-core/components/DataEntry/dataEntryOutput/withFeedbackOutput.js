@@ -111,4 +111,4 @@ export default () =>
         // $FlowSuppress
         withDataEntryOutput()(
             InnerComponent,
-            withStyles(styles)(connect(mapStateToProps, mapDispatchToProps, null, { withRef: true })(getFeedbackOutput())));
+            withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(getFeedbackOutput())));

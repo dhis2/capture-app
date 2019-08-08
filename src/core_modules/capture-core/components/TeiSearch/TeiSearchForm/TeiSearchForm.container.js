@@ -5,7 +5,7 @@ import TeiSearchForm from './TeiSearchForm.component';
 const getAttributesWithValuesCount = (state: ReduxState, formId: string) => {
     const formValues = state.formsValues[formId] || {};
     return Object.keys(formValues).filter(key => formValues[key]).length;
-}
+};
 
 const mapStateToProps = (state: ReduxState, props: Object) => {
     const searchId = props.searchId;

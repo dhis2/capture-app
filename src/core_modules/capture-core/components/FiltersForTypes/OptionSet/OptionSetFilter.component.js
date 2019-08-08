@@ -93,7 +93,6 @@ class OptionSetFilter extends Component<Props> implements UpdatableFilterContent
                     onBlur={onCommitValue}
                     orientation={orientations.VERTICAL}
                     multiSelect={!singleSelect}
-                    nullable
                 />
             </div>
         );

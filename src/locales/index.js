@@ -8,10 +8,12 @@
 //------------------------------------------------------------------------------
 import i18n from '@dhis2/d2-i18n';
 import moment from 'moment';
+import 'moment/locale/ru';
 import 'moment/locale/ur';
 import 'moment/locale/vi';
 
 import enTranslations from './en/translations.json';
+import ruTranslations from './ru/translations.json';
 import urTranslations from './ur/translations.json';
 import viTranslations from './vi/translations.json';
 
@@ -19,6 +21,7 @@ const namespace = 'NAMESPACE';
 moment.locale('en');
 
 i18n.addResources('en', namespace, enTranslations);
+i18n.addResources('ru', namespace, ruTranslations);
 i18n.addResources('ur', namespace, urTranslations);
 i18n.addResources('vi', namespace, viTranslations);
 

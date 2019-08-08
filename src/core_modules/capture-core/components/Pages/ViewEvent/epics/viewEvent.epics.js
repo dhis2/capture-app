@@ -1,6 +1,6 @@
 // @flow
 import log from 'loglevel';
-import { push } from 'react-router-redux';
+import { push } from 'connected-react-router';
 import i18n from '@dhis2/d2-i18n';
 import isSelectionsEqual from '../../../App/isSelectionsEqual';
 import { errorCreator } from 'capture-core-utils';

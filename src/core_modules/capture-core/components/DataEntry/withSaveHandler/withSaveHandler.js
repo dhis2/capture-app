@@ -57,10 +57,8 @@ const getSaveHandler = (
             FORM_INSTANCE_NOT_FOUND: 'Form instance not found',
         };
 
-        innerInstance: any;
         formInstance: any;
         dataEntryFieldInstances: Map<string, any>;
-        handleSaveAttemptAsync: Function;
         isCompleting: boolean;
 
         constructor(props: Props) {
@@ -80,10 +78,6 @@ const getSaveHandler = (
                 this.validateAndSave(this.state.saveType);
                 this.setState({ waitForPromisesDialogOpen: false, saveType: null });
             }
-        }
-
-        getWrappedInstance() {
-            return this.innerInstance;
         }
 
         getDataEntryFieldInstances() {
@@ -234,7 +228,6 @@ const getSaveHandler = (
             return (
                 <div>
                     <InnerComponent
-                        ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                         formRef={this.setFormInstance}
                         dataEntryFieldRef={this.setDataEntryFieldInstance}
                         onSave={this.handleSaveAttempt}
@@ -308,7 +301,7 @@ const getSaveHandler = (
     });
 
     // $FlowFixMe
-    return connect(makeStateToProps, mapDispatchToProps, null, { withRef: true })(SaveHandlerHOC);
+    return connect(makeStateToProps, mapDispatchToProps)(SaveHandlerHOC);
 };
 
 export default (

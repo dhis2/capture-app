@@ -40,4 +40,4 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     return mergedProps;
 };
 
-export default connect(makeMapStateToProps, mapDispatchToProps, mergeProps, { withRef: true })(D2SectionFields);
+export default connect(makeMapStateToProps, mapDispatchToProps, mergeProps, { forwardRef: true })(D2SectionFields);

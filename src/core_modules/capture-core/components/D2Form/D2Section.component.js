@@ -74,7 +74,8 @@ class D2Section extends React.PureComponent<Props> {
                         className={classes.sectionFieldsInSection}
                     >
                         <D2SectionFields
-                            ref={(instance) => { this.sectionFieldsInstance = instance; }}
+                            ref={(instance) => {
+                                this.sectionFieldsInstance = instance; }}
                             fieldsMetaData={sectionMetaData.elements}
                             {...passOnProps}
                         />

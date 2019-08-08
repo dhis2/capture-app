@@ -1,7 +1,18 @@
 // @flow
+import React from 'react';
 import { connect } from 'react-redux';
 import FormBuilder from 'capture-ui/FormBuilder/FormBuilder.component';
 import { updateFieldUIOnly } from './formBuilder.actions';
+
+const FormBuilderRefBuilder = (props: Object) => {
+    const { formBuilderRef, ...passOnProps } = props;
+    return (
+        <FormBuilder
+            ref={formBuilderRef}
+            {...passOnProps}
+        />
+    );
+};
 
 const mapStateToProps = (state: ReduxState, props: { id: string }) => ({
     fieldsUI: state.formsSectionsFieldsUI[props.id] || {},
@@ -13,15 +24,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    const { formBuilderRef, ...passOnOwnProps } = ownProps;
-    return {
-        ...passOnOwnProps,
-        ...stateProps,
-        ...dispatchProps,
-        ref: formBuilderRef,
-    };
-};
-
 // $FlowFixMe
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(FormBuilder);
+export default connect(mapStateToProps, mapDispatchToProps)(FormBuilderRefBuilder);

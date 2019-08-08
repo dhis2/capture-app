@@ -184,4 +184,4 @@ const mapStateToProps = (state: ReduxState, props: { id: string }) => {
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         withStyles(styles)(connect(
-            mapStateToProps, () => ({}), null, { withRef: true })(getNotes(InnerComponent)));
+            mapStateToProps, () => ({}))(getNotes(InnerComponent)));

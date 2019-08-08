@@ -4,14 +4,15 @@ import i18n from '@dhis2/d2-i18n';
 import MapIcon from '@material-ui/icons/Map';
 import CheckIcon from '@material-ui/icons/Check';
 import L from 'leaflet';
-import { Map, TileLayer, FeatureGroup } from 'react-leaflet';
+import { Map, TileLayer, FeatureGroup, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
-import EditControl from 'react-leaflet-draw/lib/EditControl';
+import { EditControl } from 'react-leaflet-draw';
 import defaultClasses from './polygonField.module.css';
 import './styles.css';
 import Button from '../Buttons/Button.component';
 import DeleteControl from './DeleteControl.component';
 
+const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
 
 type Props = {
   onBlur: (value: any) => void,
@@ -87,8 +88,7 @@ export default class D2Polygon extends React.Component<Props, State> {
                 leafletGeoJSON.eachLayer((layer) => {
                     leafletFG.addLayer(layer);
                 });
-
-                const { map } = reactFGref.context;
+                const { map } = reactFGref.contextValue;
                 const coordinates = featureCollection.features[0].geometry.coordinates[0];
                 const bounds = coordinates.map(c => ([c[1], c[0]]));
                 map.fitBounds(bounds);
@@ -161,7 +161,7 @@ export default class D2Polygon extends React.Component<Props, State> {
         return (
             <div className={defaultClasses.mapContainer}>
                 <Map zoom={zoom} center={center} className={defaultClasses.map} key="map">
-                    <ReactLeafletSearch position="topleft" inputPlaceholder="Search" closeResultsOnClick />
+                    <WrappedLeafletSearch position="topleft" inputPlaceholder="Search" closeResultsOnClick />
                     <TileLayer
                         url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
                         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"

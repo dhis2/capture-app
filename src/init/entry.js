@@ -4,7 +4,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import log from 'loglevel';
 import 'typeface-roboto';
-import createHistory from 'history/createHashHistory';
+import { createHashHistory as createHistory } from 'history';
 
 // import D2UIApp from '@dhis2/d2-ui-app';
 import LoadingMask from 'capture-core/components/LoadingMasks/LoadingMaskForPage.component';

@@ -143,6 +143,7 @@ class SearchForm extends React.Component<Props> {
             searchId,
             onSearchValidationFailed,
             searchAttempted,
+            attributesWithValuesCount,
             ...passOnProps } = this.props;
 
         const searchForm = searchGroup && searchGroup.searchForm;

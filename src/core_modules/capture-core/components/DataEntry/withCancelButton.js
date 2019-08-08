@@ -21,8 +21,7 @@ const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: ?
 
         getWrappedInstance = () => this.innerInstance;
 
-        getCancelButtonInstance = (cancelContainerInstance: ?any) => {
-            const cancelButtonInstance = cancelContainerInstance && cancelContainerInstance.getWrappedInstance();
+        getCancelButtonInstance = (cancelButtonInstance: ?any) => {
             this.props.cancelButtonRef && this.props.cancelButtonRef(cancelButtonInstance);
         }
 

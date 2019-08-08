@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import i18n from '@dhis2/d2-i18n';
-import { Button } from 'capture-ui';
+import { Button } from '../../../../Buttons';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import { Enrollment } from '../../../../../metaData';
 
@@ -15,9 +15,10 @@ type Props = {
 const getMainButton = (InnerComponent: React.ComponentType<any>) =>
     class MainButtonHOC extends React.Component<Props> {
         static getButtonText(duplicatesFound: boolean, trackedEntityTypeName: string) {
+            const trackedEntityTypeNameLC = trackedEntityTypeName.toLocaleLowerCase();
             return duplicatesFound ?
-                i18n.t('Review Duplicates') :
-                i18n.t('Create {{trackedEntityTypeName}} and link', { trackedEntityTypeName });
+                i18n.t('Review duplicates') :
+                i18n.t('Create {{trackedEntityTypeName}} and link', { trackedEntityTypeName: trackedEntityTypeNameLC });
         }
 
         renderButton() {
@@ -25,8 +26,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
 
             return (
                 <Button
-                    kind="primary"
-                    size="medium"
+                    primary
                     onClick={onSave}
                 >
                     {MainButtonHOC.getButtonText(possibleDuplicatesFound, enrollmentMetadata.trackedEntityType.name)}
@@ -67,4 +67,4 @@ export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         // $FlowSuppress
         connect(
-            mapStateToProps, mapDispatchToProps, null, { withRef: true })(getMainButton(InnerComponent));
+            mapStateToProps, mapDispatchToProps)(getMainButton(InnerComponent));

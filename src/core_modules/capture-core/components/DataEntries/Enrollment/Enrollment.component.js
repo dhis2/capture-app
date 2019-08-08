@@ -257,6 +257,7 @@ const getSearchContext = (props: Object) => ({
 
 type FinalTeiDataEntryProps = {
     enrollmentMetadata: Enrollment,
+    programId: string,
 };
 // final step before the generic dataEntry is inserted
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
@@ -271,7 +272,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     }
 
     render() {
-        const { enrollmentMetadata, ...passOnProps } = this.props;
+        const { enrollmentMetadata, programId, ...passOnProps } = this.props;
         return (
             <DataEntry
                 dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import L from 'leaflet';
-import { MapControl } from 'react-leaflet';
+import { MapControl, withLeaflet } from 'react-leaflet';
 
 type Props = {
     position?: any,
@@ -12,7 +12,7 @@ type Props = {
     disabled?: ?boolean,
 }
 
-export default class DeleteControl extends MapControl<any, Props> {
+class DeleteControl extends MapControl<any, Props> {
     componentWillMount() {
         const deleteControl = L.control({ position: 'topright' });
         const text = i18n.t('Delete polygon');
@@ -46,6 +46,10 @@ export default class DeleteControl extends MapControl<any, Props> {
         }
     }
 
+    createLeafletElement () {
+        return this.leafletElement;
+    }
+
     updateLeafletElement(fromProps: Props, toProps: Props): void {
         if (toProps.position !== fromProps.position) {
             this.leafletElement.setPosition(toProps.position);
@@ -58,3 +62,5 @@ export default class DeleteControl extends MapControl<any, Props> {
         }
     }
 }
+
+export default withLeaflet(DeleteControl);

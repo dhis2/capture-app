@@ -131,12 +131,6 @@ class DataEntry extends React.Component<Props> {
         FORM_FOUNDATION_MISSING: 'form foundation missing. see log for details',
     };
 
-    formInstance: ?any;
-
-    getWrappedInstance() {
-        return this.formInstance;
-    }
-
     handleUpdateField = (...args) => {
         this.props.onUpdateFieldInner(this.props.id, this.props.itemId, this.props.onUpdateFormField, ...args);
     }
@@ -246,7 +240,6 @@ class DataEntry extends React.Component<Props> {
 
         const d2Form = (
             <D2Form
-                innerRef={(formInstance) => { this.formInstance = formInstance; }}
                 id={getDataEntryKey(id, itemId)}
                 validationAttempted={completionAttempted || saveAttempted}
                 onUpdateField={this.handleUpdateField}
@@ -370,29 +363,4 @@ class DataEntry extends React.Component<Props> {
 }
 
 // $FlowFixMe
-const StylesHOC = withStyles(styles)(DataEntry);
-
-type ContainerProps = {
-
-};
-
-class DataEntryContainer extends React.Component<ContainerProps> {
-    dataEntryInstance: DataEntry;
-
-    getWrappedInstance() {
-        return this.dataEntryInstance;
-    }
-
-    render() {
-        return (
-            <StylesHOC
-                innerRef={(dataEntryInstance) => {
-                    this.dataEntryInstance = dataEntryInstance;
-                }}
-                {...this.props}
-            />
-        );
-    }
-}
-
-export default DataEntryContainer;
+export default withStyles(styles)(DataEntry);

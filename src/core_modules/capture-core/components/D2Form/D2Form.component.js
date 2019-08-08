@@ -31,78 +31,56 @@ type Props = {
 
 class D2Form extends React.PureComponent<Props> {
     name: string;
-    validateForm: () => void;
     sectionInstances: Map<string, D2Section>;
 
     constructor(props: Props) {
         super(props);
         this.name = 'D2Form';
-        this.validateForm = this.validateForm.bind(this);
-
         this.sectionInstances = new Map();
     }
 
-    validateForm() {
-        return Array.from(this.sectionInstances.entries())
+    validateFormIncludeSectionFailedFields(options: Object) {
+        let failedFormFields = [];
+        const isValid = Array.from(this.sectionInstances.entries())
             .map(entry => entry[1])
-            .every((sectionInstance: D2Section) => {
-                try {
-                    const sectionFieldsInstance = sectionInstance
-                        .sectionFieldsInstance
-                        .getWrappedInstance();
-
-                    return sectionFieldsInstance.isValid();
-                } catch (error) {
-                    log.error(
-                        errorCreator(
-                            'could not get section fields instance')(
-                            {
-                                method: 'validateForm',
-                                object: this,
-                            },
-                        ),
-                    );
-                    return true;
-                }
-            });
-    }
-
-    validateFormReturningFailedFields(options: Object): Array<any> {
-        return Array.from(this.sectionInstances.entries())
-            .map(entry => entry[1])
-            .reduce((failedFormFields: Array<any>, sectionInstance: D2Section) => {
-                try {
-                    const sectionFieldsInstance = sectionInstance
-                        .sectionFieldsInstance
-                        .getWrappedInstance();
-
-                    if (!sectionFieldsInstance.isValid(options)) {
-                        failedFormFields = [...failedFormFields, ...sectionFieldsInstance.getInvalidFields()];
-                    }
-                } catch (error) {
+            .every((sectionInstance) => {
+                // $FlowFixMe
+                const sectionFieldsInstance = sectionInstance.sectionFieldsInstance;
+                if (!sectionFieldsInstance) {
                     log.error(
                         errorCreator(
                             'could not get section fields instance')(
                             {
                                 method: 'validateFormReturningFailedFields',
                                 object: this,
-                                error,
+                                sectionInstance,
                             },
                         ),
                     );
+                    return false;
                 }
-                return failedFormFields;
-            }, []);
+
+                const sectionIsValid = sectionFieldsInstance.isValid(options);
+                if (!sectionIsValid) {
+                    failedFormFields = [...failedFormFields, ...sectionFieldsInstance.getInvalidFields()];
+                }
+                return sectionIsValid;
+            });
+
+        return {
+            isValid,
+            failedFields: failedFormFields,
+        };
     }
 
     validateFormScrollToFirstFailedField(options: Object) {
-        const failedFields = this.validateFormReturningFailedFields(options);
-        if (!failedFields || failedFields.length === 0) {
+        const { isValid, failedFields } = this.validateFormIncludeSectionFailedFields(options);
+        if (isValid) {
             return true;
         }
 
-        const firstFailureInstance = failedFields[0].instance;
-        firstFailureInstance.goto && firstFailureInstance.goto();
+        const firstFailureInstance = failedFields.length > 0 ? failedFields[0].instance : null;
+        firstFailureInstance && firstFailureInstance.goto && firstFailureInstance.goto();
         return false;
     }
 

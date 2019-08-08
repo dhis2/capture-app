@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-06-12T12:55:57.105Z\n"
-"PO-Revision-Date: 2019-06-12T12:55:57.105Z\n"
+"POT-Creation-Date: 2019-06-24T21:33:11.927Z\n"
+"PO-Revision-Date: 2019-06-24T21:33:11.927Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -461,7 +461,7 @@ msgstr ""
 msgid "Metadata error. see log for details"
 msgstr ""
 
-msgid "Review Duplicates"
+msgid "Review duplicates"
 msgstr ""
 
 msgid "Create {{trackedEntityTypeName}} and link"
@@ -492,6 +492,9 @@ msgid "Organisation Unit"
 msgstr ""
 
 msgid "Registration"
+msgstr ""
+
+msgid "Review Duplicates"
 msgstr ""
 
 msgid "Search results"

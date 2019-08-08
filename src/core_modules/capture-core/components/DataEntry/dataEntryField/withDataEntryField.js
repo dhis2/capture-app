@@ -70,7 +70,7 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
 
             return (
                 <DataEntryField
-                    innerFieldRef={this.handleRef}
+                    ref={this.handleRef}
                     dataEntryId={id}
                     completionAttempted={completionAttempted}
                     saveAttempted={saveAttempted}
