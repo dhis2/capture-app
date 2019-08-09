@@ -67,7 +67,7 @@ class SortLabelWrapper extends React.Component<Props> {
             <Tooltip
                 title={i18n.t('Sort')}
                 placement={'bottom'}
-                enterDelay={300}
+                enterDelay={500}
             >
                 <span>
                     {icon}
@@ -110,7 +110,7 @@ class SortLabelWrapper extends React.Component<Props> {
                             <Tooltip
                                 title={i18n.t('Sort')}
                                 placement={'bottom'}
-                                enterDelay={300}
+                                enterDelay={500}
                             >
                                 <span>
                                     {this.props.children}

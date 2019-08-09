@@ -46,6 +46,7 @@ class ColumnSelector extends React.Component<Props, State> {
                 <Tooltip
                     disableFocusListener
                     disableTouchListener
+                    enterDelay={500}
                     title={i18n.t('Select columns')}
                 >
                     <IconButton
