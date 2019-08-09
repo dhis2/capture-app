@@ -76,7 +76,14 @@ class WorkingListConfigSelector extends React.Component<Props> {
 
     renderWorkingListConfigs = () => {
         const { workingListConfigs, configId, classes } = this.props;
-        return workingListConfigs.filter(w => !w.isDefault).map((w) => {
+        const customConfigs = workingListConfigs
+            .filter(c => !c.isDefault);
+
+        if (customConfigs.length <= 0) {
+            return null;
+        }
+
+        const configElements = customConfigs.map((w) => {
             const { id, name, ...data } = w;
             return (
                 <div
@@ -92,15 +99,21 @@ class WorkingListConfigSelector extends React.Component<Props> {
                 </div>
             );
         });
+
+        return (
+            <div
+                className={classes.workingListConfigsContainer}
+            >
+                {configElements}
+            </div>
+        );
     }
 
     render() {
         const { workingListConfigs, classes, ...passOnProps } = this.props;
         return (
             <div className={classes.container}>
-                <div className={classes.workingListConfigsContainer}>
-                    {this.renderWorkingListConfigs()}
-                </div>
+                {this.renderWorkingListConfigs()}
                 <EventListLoadWrapper
                     listId={WorkingListConfigSelector.listId}
                     {...passOnProps}

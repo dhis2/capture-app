@@ -42,9 +42,14 @@ class ListWrapperMenu extends React.Component<Props, State> {
 
     renderMenuItems = (togglePopper: Function) => (
         <React.Fragment>
+            {
+            /*
+            remove until the functionality is there
             <MenuItem onClick={() => { this.openDialog(dialogKeys.COLUMN_SELECTOR, togglePopper); }}>
                 {i18n.t('Save filter as...')}
             </MenuItem>
+            */
+            }
             <MenuItem onClick={() => { this.openDialog(dialogKeys.DOWNLOAD_TABLE, togglePopper); }}>
                 {i18n.t('Download as...')}
             </MenuItem>
