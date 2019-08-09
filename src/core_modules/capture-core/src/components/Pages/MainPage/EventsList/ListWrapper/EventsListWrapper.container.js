@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import EventsListWrapper from './EventsListWrapper.component';
 import { makeColumnsSelector, makeCreateEventsContainer, makeCreateWorkingListData } from './eventsList.selector';
 import { sortWorkingList, openViewEventPage, requestDeleteEvent } from '../eventsList.actions';
+import { updateWorkinglistOrder } from './actions/columnSelectorDialog.actions';
 
 const makeMapStateToProps = () => {
     const columnsSelector = makeColumnsSelector();
@@ -38,6 +39,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
     onDelete: (eventId: string) => {
         dispatch(requestDeleteEvent(eventId));
+    },
+    onSaveColumnOrder: (listId: string, columnOrder: Array<Object>): void => {
+        dispatch(updateWorkinglistOrder(listId, columnOrder));
     },
 });
 

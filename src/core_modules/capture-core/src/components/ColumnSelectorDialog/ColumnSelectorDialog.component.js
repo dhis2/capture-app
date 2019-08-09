@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -13,18 +12,10 @@ import i18n from '@dhis2/d2-i18n';
 
 import DragDropList from './DragDropSort/DragDropList.component';
 
-
-const styles = theme => ({
-    optionsIcon: {
-        color: theme.palette.primary.main,
-    },
-});
-
 type Props = {
     open: ?boolean,
     onClose: Function,
     onSave: Function,
-    classes: Object,
     columns: Array<Object>,
 };
 
@@ -32,15 +23,15 @@ type State = {
     columnList: Array<Object>,
 };
 
-class ColumnSelector extends Component<Props, State> {
-    constructor(props) {
+class ColumnSelectorDialog extends Component<Props, State> {
+    constructor(props: Props) {
         super(props);
         this.state = {
             columnList: [...this.props.columns],
         };
     }
 
-    getListToSave = () => this.state.columnList
+    getListToSave = (): Array<Object> => this.state.columnList
         .map(column => ({
             id: column.id,
             visible: column.visible,
@@ -55,7 +46,7 @@ class ColumnSelector extends Component<Props, State> {
         onSave(this.getListToSave());
     };
 
-    handleToggle = id => () => {
+    handleToggle = (id: string) => () => {
         const index = this.state.columnList.findIndex(column => column.id === id);
         const toggleList = this.state.columnList;
 
@@ -64,12 +55,12 @@ class ColumnSelector extends Component<Props, State> {
         this.setState({ columnList: toggleList });
     };
 
-    handleUpdateListOrder = (sortedList) => {
+    handleUpdateListOrder = (sortedList: Array<Object>) => {
         this.setState({ columnList: sortedList });
     };
 
     render() {
-        const { classes, open, onClose } = this.props;
+        const { open, onClose } = this.props;
 
         return (
             <span>
@@ -97,4 +88,4 @@ class ColumnSelector extends Component<Props, State> {
     }
 }
 
-export default withStyles(styles)(ColumnSelector);
+export default ColumnSelectorDialog;

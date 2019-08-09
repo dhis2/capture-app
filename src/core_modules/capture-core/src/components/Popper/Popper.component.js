@@ -3,14 +3,6 @@ import * as React from 'react';
 import { Manager, Popper, Reference } from 'react-popper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import MenuList from '@material-ui/core/MenuList';
-import MenuItem from '@material-ui/core/MenuItem';
-import MoreHoriz from '@material-ui/icons/MoreHoriz';
-import IconButton from '@material-ui/core/IconButton';
-import Delete from '@material-ui/icons/Delete';
-import i18n from '@dhis2/d2-i18n';
-import withStyles from '@material-ui/core/styles/withStyles';
 
 type Props = {
     getPopperAction: (togglePopper: () => void) => React.Node,

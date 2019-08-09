@@ -1,7 +1,7 @@
 // @flow
 import {
     actionTypes as columnSelectorActionTypes,
-} from '../ListWrapperMenu/actions/columnSelectorDialog.actions';
+} from '../ListWrapper/actions/columnSelectorDialog.actions';
 import { updateIncludedFiltersAfterColumnSorting } from './filterSelector.actions';
 
 export const includeFiltersWithValueAfterColumnSortingEpic = (action$: InputObservable, store: ReduxStore) =>

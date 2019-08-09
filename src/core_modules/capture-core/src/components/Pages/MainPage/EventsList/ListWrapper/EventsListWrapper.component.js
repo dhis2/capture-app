@@ -7,14 +7,15 @@ import elementTypes from '../../../../../metaData/DataElement/elementTypes';
 import withFilterSelectors from '../FilterSelectors/withFilterSelectors';
 import { ListPagination } from '../Pagination';
 
-import DownloadTable from '../../../../DownloadTable/DownloadTable.container';
+import ColumnSelector from './ColumnSelector.component';
+
 import OptionSet from '../../../../../metaData/OptionSet/OptionSet';
 import withCustomEndCell from '../withCustomEndCell';
 import eventContentMenuSettings from '../EventContentMenu/eventContentMenuSettings';
 import DialogLoadingMask from '../../../../LoadingMasks/DialogLoadingMask.component';
 
 import List from '../../../../List/OnlineList/List.component';
-import ListWrapperMenu from '../ListWrapperMenu/ListWrapperMenu.container';
+import ListWrapperMenu from './ListWrapperMenu.component';
 
 const EventList = withCustomEndCell(eventContentMenuSettings)(List);
 
@@ -30,6 +31,10 @@ const getStyles = (theme: Theme) => ({
         display: 'flex',
         alignItems: 'center',
         flexWrap: 'wrap',
+    },
+    topBarButtonContainer: {
+        display: 'flex',
+        alignItems: 'center',
     },
     paginationContainer: {
         fontSize: theme.typography.pxToRem(12),
@@ -52,18 +57,18 @@ export type Column = {
 type Props = {
     listId: string,
     dataSource: Array<{eventId: string, [elementId: string]: any}>,
-    columns: ?Array<Column>,
-    classes: {
-        container: string,
-        topBarContainer: string,
-        topBarLeftContainer: string,
-        paginationContainer: string,
-    },
+    columns: Array<Column>,
+    classes: Object,
     filterButtons: React.Node,
     isUpdatingWithDialog?: ?boolean,
+    onSaveColumnOrder: Function,
 };
 
 class EventListWrapper extends React.Component<Props> {
+    handleSaveColumnOrder = (columnOrder: Array<Object>) => {
+        this.props.onSaveColumnOrder(this.props.listId, columnOrder);
+    }
+
     renderTopBar = () => {
         const { classes, filterButtons, columns, listId } = this.props;
         return (
@@ -75,15 +80,20 @@ class EventListWrapper extends React.Component<Props> {
                 >
                     {filterButtons}
                 </div>
-                <div>
-                    <ListWrapperMenu
+                <div
+                    className={classes.topBarButtonContainer}
+                >
+                    <ColumnSelector
+                        onSave={this.handleSaveColumnOrder}
                         columns={columns}
+                    />
+                    <ListWrapperMenu
                         listId={listId}
                     />
                 </div>
             </div>
         );
-    };
+    }
 
     renderPager = () => {
         const classes = this.props.classes;
@@ -96,7 +106,7 @@ class EventListWrapper extends React.Component<Props> {
                 />
             </div>
         );
-    };
+    }
 
     renderList = () => {
         const {
@@ -111,7 +121,7 @@ class EventListWrapper extends React.Component<Props> {
                 {...passOnProps}
             />
         );
-    };
+    }
 
     render() {
         const { classes, isUpdatingWithDialog } = this.props; //eslint-disable-line

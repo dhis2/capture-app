@@ -4,9 +4,8 @@ import i18n from '@dhis2/d2-i18n';
 import { IconButton, Paper, MenuList, MenuItem } from '@material-ui/core';
 import { MoreHoriz } from '@material-ui/icons';
 import Popper from '../../../../Popper/Popper.component';
-import ColumnSelectorDialog from '../../../../ColumnSelectorDialog/ColumnSelectorDialog.component';
-import DownloadDialog from '../../../../DownloadTable/DownloadDialog.container';
 
+import DownloadDialog from './DownloadDialog.container';
 
 const dialogKeys = {
     COLUMN_SELECTOR: 'columnSelector',
@@ -14,9 +13,7 @@ const dialogKeys = {
 };
 
 type Props = {
-    columns: any,
     listId: string,
-    onUpdateWorkinglistOrder: Function,
 }
 
 type State = {
@@ -43,17 +40,8 @@ class ListWrapperMenu extends React.Component<Props, State> {
         this.setState({ dialogOpen: { ...this.state.dialogOpen, [key]: false } });
     }
 
-    handleSaveColumnOrder = (columnOrder: Array<Object>) => {
-        const { onUpdateWorkinglistOrder, listId } = this.props;
-        onUpdateWorkinglistOrder(listId, columnOrder);
-        this.closeDialog(dialogKeys.COLUMN_SELECTOR);
-    }
-
     renderMenuItems = (togglePopper: Function) => (
         <React.Fragment>
-            <MenuItem onClick={() => { this.openDialog(dialogKeys.COLUMN_SELECTOR, togglePopper); }}>
-                {i18n.t('Show/hide columns')}
-            </MenuItem>
             <MenuItem onClick={() => { this.openDialog(dialogKeys.COLUMN_SELECTOR, togglePopper); }}>
                 {i18n.t('Save filter as...')}
             </MenuItem>
@@ -77,12 +65,6 @@ class ListWrapperMenu extends React.Component<Props, State> {
                 <Popper
                     getPopperAction={this.renderPopperAction}
                     getPopperContent={this.renderPopperContent}
-                />
-                <ColumnSelectorDialog
-                    open={this.state.dialogOpen[dialogKeys.COLUMN_SELECTOR]}
-                    columns={this.props.columns}
-                    onClose={() => { this.closeDialog(dialogKeys.COLUMN_SELECTOR); }}
-                    onSave={this.handleSaveColumnOrder}
                 />
                 <DownloadDialog
                     open={this.state.dialogOpen[dialogKeys.DOWNLOAD_TABLE]}

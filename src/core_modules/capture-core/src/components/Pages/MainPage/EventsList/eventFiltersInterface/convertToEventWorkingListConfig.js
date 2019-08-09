@@ -25,16 +25,6 @@ import { convertServerToClient, convertClientToForm } from '../../../../../conve
 import { getColumnsConfiguration } from './getColumnsConfiguration';
 import type { DataFilter, EventQueryCriteria } from '../eventList.types';
 
-const getBooleanOptionSet = () => {
-    const trueText = i18n.t('Yes');
-    const falseText = i18n.t('No');
-
-    const optionSet = new OptionSet();
-    optionSet.addOption(new Option((_this) => { _this.text = trueText; _this.value = 'true'; }));
-    optionSet.addOption(new Option((_this) => { _this.text = falseText; _this.value = 'false'; }));
-    return optionSet;
-};
-
 const booleanOptionSet = new OptionSet('booleanOptionSet', [
     new Option((_this) => { _this.text = i18n.t('Yes'); _this.value = 'true'; }),
     new Option((_this) => { _this.text = i18n.t('No'); _this.value = 'false'; }),

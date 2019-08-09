@@ -13,7 +13,7 @@ import {
 } from '../../../components/Connectivity/connectivity.actions';
 import {
     actionTypes as columnSelectorActionTypes,
-} from '../../../components/Pages/MainPage/EventsList/ListWrapperMenu/actions/columnSelectorDialog.actions';
+} from '../../../components/Pages/MainPage/EventsList/ListWrapper/actions/columnSelectorDialog.actions';
 import {
     actionTypes as filterSelectorActionTypes,
 } from '../../../components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.actions';

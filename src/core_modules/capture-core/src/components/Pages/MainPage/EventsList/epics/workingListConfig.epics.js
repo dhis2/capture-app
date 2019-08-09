@@ -9,7 +9,6 @@ import { actionTypes as viewEventActionTypes } from '../../../ViewEvent/viewEven
 import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../../NewEvent';
 import { getWorkingListConfigsAsync } from './workingListConfigDataRetriever';
 import {
-    actionTypes as eventListActionTypes,
     batchActionTypes as eventsListBatchActionTypes,
     setCurrentWorkingListConfig,
     workingListConfigsRetrieved,

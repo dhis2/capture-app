@@ -1,16 +1,5 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-import {
-    getBooleanFilterData,
-    getDateFilterData,
-    getMultiSelectOptionSetFilterData,
-    getSingleSelectOptionSetFilterData,
-    getNumericFilterData,
-    getTextFilterData,
-    getTrueOnlyFilterData,
-} from '../../../../FiltersForTypes';
-import { dataElementTypes as elementTypes, DataElement, RenderFoundation, OptionSet, Option } from '../../../../../metaData';
-// import eventStatusElement from '../events/eventStatusElement';
+import { dataElementTypes as elementTypes } from '../../../../../metaData';
 import {
     MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS,
 } from '../FilterSelectors/filterSelector.const';
@@ -26,10 +15,6 @@ const getBooleanFilter = (filter: Object) => ({
 
 const getMultiSelectOptionSetFilter = (filter: Object) => ({
     in: (filter || []),
-});
-
-const getSingleSelectOptionSetFilter = (filter: Object) => ({
-    eq: filter,
 });
 
 const getTrueOnlyFilter = (filter: Object) => ({
@@ -56,17 +41,6 @@ const getFilterByType = {
     [elementTypes.DATE]: getDateFilter,
     [elementTypes.BOOLEAN]: getBooleanFilter,
     [elementTypes.TRUE_ONLY]: getTrueOnlyFilter,
-};
-
-const getSortOrder = (order: ?string) => {
-    const sortOrderParts = order && order.split(':');
-    if (sortOrderParts && sortOrderParts.length === 2) {
-        return {
-            sortById: sortOrderParts[0],
-            sortByDirection: sortOrderParts[1],
-        };
-    }
-    return null;
 };
 
 const getDataElementFilters = (elementFiltersById: ?Object, stageForm: RenderFoundation) => {

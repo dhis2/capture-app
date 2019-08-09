@@ -2,8 +2,8 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
-import Button from '../Buttons/Button.component';
-import { getApi } from '../../d2/d2Instance';
+import Button from '../../../../Buttons/Button.component';
+import { getApi } from '../../../../../d2/d2Instance';
 
 type Props = {
     open: ?boolean,
@@ -47,7 +47,7 @@ class DownloadDialog extends React.Component<Props> {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={onClose} color="primary">
-                            {i18n.t('Cancel')}
+                            {i18n.t('Close')}
                         </Button>
                     </DialogActions>
                 </Dialog>
