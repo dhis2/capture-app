@@ -18,6 +18,7 @@ const getStyles = (theme: Theme) => ({
 });
 
 type Props = {
+    listId: string,
     columns: ?Array<Column>,
     userSelectedFilters: { [id: string]: string },
     onRestMenuItemSelected: (id: string) => void,
@@ -71,6 +72,7 @@ export default (InnerComponent: React.ComponentType<any>) =>
             return (
                 <FilterRestMenu
                     key={'restMenu'}
+                    listId={this.props.listId}
                     columns={columns}
                     onItemSelected={this.props.onRestMenuItemSelected}
                 />
@@ -87,6 +89,7 @@ export default (InnerComponent: React.ComponentType<any>) =>
                             className={classes.filterButtonContainer}
                         >
                             <FilterButton
+                                listId={this.props.listId}
                                 itemId={column.id}
                                 type={column.type}
                                 title={column.header}

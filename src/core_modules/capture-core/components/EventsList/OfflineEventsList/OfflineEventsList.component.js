@@ -14,7 +14,7 @@ class OfflineEventsList extends React.Component<Props> {
 
         return (
             <OfflineListWrapper
-                listId={listId || 'main'}
+                listId={listId}
                 noItemsText={noItemsText || i18n.t('No events to display')}
                 emptyListText={emptyListText || i18n.t('Data for offline list not present')}
                 {...passOnProps}

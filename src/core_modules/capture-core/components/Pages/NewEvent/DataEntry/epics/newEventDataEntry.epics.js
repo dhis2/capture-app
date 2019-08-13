@@ -27,7 +27,6 @@ import {
 import {
     actionTypes as newEventSelectionTypes,
 } from '../actions/dataEntryUrl.actions';
-import getColumnsConfiguration from '../../../MainPage/EventsList/epics/getColumnsConfiguration';
 import {
     actionTypes as newEventSelectorTypes,
 } from '../../SelectorLevel/selectorLevel.actions';
@@ -38,6 +37,7 @@ import {
 import getProgramAndStageFromProgramId from
     '../../../../../metaData/helpers/EventProgram/getProgramAndStageFromProgramId';
 import { errorCreator } from 'capture-core-utils';
+import { getDefaultMainConfig as getDefaultMainColumnConfig, getMetaDataConfig as getColumnMetaDataConfig } from '../../../MainPage/EventsList/defaultColumnConfiguration';
 import {
     resetList,
 } from '../../../../List/list.actions';
@@ -47,6 +47,7 @@ import type {
 import {
     listId,
 } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
+import getStageForEventProgram from '../../../../../metaData/helpers/EventProgram/getStageFromProgramId';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../metaData';
 
@@ -143,23 +144,13 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
         newEventSelectorTypes.SET_CATEGORY_OPTION,
         newEventSelectorTypes.SET_ORG_UNIT,
         newEventSelectorTypes.SET_PROGRAM_ID)
-        .filter(() => {
+        .filter(() => store.getState().currentSelections.complete)
+        .map(() => {
             const state = store.getState();
-            const { complete, programId } = state.currentSelections;
-            if (!complete) {
-                return false;
-            }
-            // cancel if tracker program
-            const program = getProgramFromProgramIdThrowIfNotFound(programId);
-            return !(program instanceof TrackerProgram);
-        })
-        .switchMap(() => {
-            const state = store.getState();
-            const { programId } = state.currentSelections;
-            // const newEventsListColumnsOrder = state.workingListsColumnsOrder.main || [];
             const newEventsMeta = { sortById: 'created', sortByDirection: 'desc' };
-            return getColumnsConfiguration(programId).then(columnsConfig =>
-                resetList(listId, columnsConfig, newEventsMeta, state.currentSelections));
+            const stageContainer = getStageForEventProgram(state.currentSelections.programId);
+            const columnConfig = [...getDefaultMainColumnConfig(), ...getColumnMetaDataConfig(stageContainer.stage.stageForm)];
+            return resetList(listId, columnConfig, newEventsMeta, state.currentSelections);
         });
 
 

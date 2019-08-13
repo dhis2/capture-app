@@ -1,7 +1,7 @@
 // @flow
 import {
     actionTypes as columnSelectorActionTypes,
-} from '../../../../ColumnSelector/actions/ColumnSelector.actions';
+} from '../ListWrapper/actions/columnSelectorDialog.actions';
 import { updateIncludedFiltersAfterColumnSorting } from './filterSelector.actions';
 
 export const includeFiltersWithValueAfterColumnSortingEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -9,11 +9,12 @@ export const includeFiltersWithValueAfterColumnSortingEpic = (action$: InputObse
     action$.ofType(columnSelectorActionTypes.UPDATE_WORKINGLIST_ORDER)
         .map(() => {
             const state = store.getState();
-            const appliedFilters = (state.workingListsAppliedFilters && state.workingListsAppliedFilters.main) || {};
+            const listId = state.workingListConfigSelector.eventMainPage.currentListId;
+            const appliedFilters = (state.workingListsAppliedFilters && state.workingListsAppliedFilters[listId]) || {};
             const nextAppliedFilters = (
                 state.workingListsAppliedFilters &&
-                state.workingListsAppliedFilters.main &&
-                state.workingListsAppliedFilters.main.next) || {};
+                state.workingListsAppliedFilters[listId] &&
+                state.workingListsAppliedFilters[listId].next) || {};
 
             const filtersToIncludeFromAlreadyApplied = Object
                 .keys(appliedFilters)

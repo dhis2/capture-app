@@ -4,38 +4,25 @@
 import isFunction from 'd2-utilizr/src/isFunction';
 import Program from './Program';
 import ProgramStage from './ProgramStage';
-import { errorCreator } from 'capture-core-utils';
 
 export default class EventProgram extends Program {
-    _stage: ?ProgramStage;
+    static EVENT_PROGRAM_STAGE_KEY = 'EventProgramStage';
 
-    static errorMessages = {
-        STAGE_NOT_FOUND: 'Stage was not found',
-    };
-
-    constructor(initFn: ?(_this: Program) => void) {
+    constructor(initFn: ?(_this: EventProgram) => void) {
         super();
         initFn && isFunction(initFn) && initFn(this);
     }
 
-    get stage(): ?ProgramStage {
-        return this._stage;
-    }
-
     set stage(stage: ProgramStage) {
-        this._stage = stage;
+        this._stages.set(EventProgram.EVENT_PROGRAM_STAGE_KEY, stage);
+    }
+    get stage(): ProgramStage {
+        // $FlowSuppress
+        return this._stages.get(EventProgram.EVENT_PROGRAM_STAGE_KEY);
     }
 
-    getStage() {
-        return this._stage;
-    }
-
-    getStageThrowIfNull(): ProgramStage {
-        if (!this._stage) {
-            throw new Error(
-                errorCreator(EventProgram.errorMessages.STAGE_NOT_FOUND)({ program: this }),
-            );
-        }
-        return this._stage;
+    getStage(): ProgramStage {
+        // $FlowSuppress
+        return this._stages.get(EventProgram.EVENT_PROGRAM_STAGE_KEY);
     }
 }

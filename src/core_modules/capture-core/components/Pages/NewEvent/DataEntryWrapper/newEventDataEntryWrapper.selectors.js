@@ -16,7 +16,7 @@ export const makeFormFoundationSelector = () => createSelector(
         }
 
         // $FlowSuppress
-        const stage = program.getStage();
+        const stage = program.stage;
         if (!stage) {
             log.error(errorCreator('stage not found for program')({ method: 'getFormFoundation' }));
             return null;
@@ -36,7 +36,7 @@ export const makeStageSelector = () => createSelector(
         }
 
         // $FlowSuppress
-        const stage = program.getStage();
+        const stage = program.stage;
         if (!stage) {
             log.error(errorCreator('stage not found for program')({ method: 'getFormFoundation' }));
             return null;

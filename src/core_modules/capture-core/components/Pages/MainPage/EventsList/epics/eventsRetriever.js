@@ -1,12 +1,10 @@
 // @flow
-import getColumnsConfiguration from './getColumnsConfiguration';
 import { getEvents } from '../../../../../events/eventRequests';
 import type { ColumnConfig } from './getColumnsConfiguration';
 import programCollection from '../../../../../metaDataMemoryStores/programCollection/programCollection';
 
 type InputQueryArgs = {
-    programId: string,
-    [key: string]: string,
+    [key: string]: any,
 };
 
 const mapArgumentNameFromClientToServer = {
@@ -14,6 +12,7 @@ const mapArgumentNameFromClientToServer = {
     orgUnitId: 'orgUnit',
     rowsPerPage: 'pageSize',
     currentPage: 'page',
+    assignedUsers: 'assignedUser',
 };
 
 const getMainColumns = (columnsOrder: Array<ColumnConfig>) => columnsOrder
@@ -24,6 +23,8 @@ const getMainColumns = (columnsOrder: Array<ColumnConfig>) => columnsOrder
         return accMainColumns;
     }, {});
 
+const getFilter = (filterContainer: any) => filterContainer;
+
 const getApiFilterQueryArgument = (filters: ?{ [id: string]: string}, mainColumns: { [id: string]: boolean}) => {
     const filterQueries =
         filters ?
@@ -33,7 +34,7 @@ const getApiFilterQueryArgument = (filters: ?{ [id: string]: string}, mainColumn
                 .filter(key => filters[key] != null && !mainColumns[key])
                 .reduce((accFilterQueries, filterKey) => {
                     // $FlowSuppress
-                    const filter = filters[filterKey];
+                    const filter = getFilter(filters[filterKey]);
                     if (Array.isArray(filter)) {
                         const filtersFromArray = filter
                             .map(filterPart => `${filterKey}:${filterPart}`);
@@ -49,45 +50,56 @@ const getApiFilterQueryArgument = (filters: ?{ [id: string]: string}, mainColumn
     return filterArgument;
 };
 
+const getEventDateQueryArgs = (filter: Array<string> | string) => {
+    let eventDateQueryArgs = {};
+    if (Array.isArray(filter)) {
+        eventDateQueryArgs = filter
+            .reduce((accEventDateQueryArgs, filterPart: string) => {
+                if (filterPart.startsWith('ge')) {
+                    accEventDateQueryArgs.startDate = filterPart.replace('ge:', '');
+                } else {
+                    accEventDateQueryArgs.endDate = filterPart.replace('le:', '');
+                }
+                return accEventDateQueryArgs;
+            }, {});
+    } else if (filter.startsWith('ge')) {
+        eventDateQueryArgs.startDate = filter.replace('ge:', '');
+    } else {
+        eventDateQueryArgs.endDate = filter.replace('le:', '');
+    }
+    return eventDateQueryArgs;
+};
+
+const getStatusQueryArgs = (filter: string) => {
+    const statusQueryArgs = {
+        status: filter.replace('eq:', ''),
+    };
+    return statusQueryArgs;
+};
+
 const getMainApiFilterQueryArguments = (filters: ?{ [id: string]: string}, mainColumns: { [id: string]: boolean}) => {
-    const mainFilterQueries =
+    const mainFilterQueryArgs =
         filters ?
             Object
                 .keys(filters)
                 // $FlowSuppress
                 .filter(key => mainColumns[key] && filters[key] != null)
-                .reduce((accMainFilters, key) => {
+                .reduce((accMainQueryArgs, key) => {
                     // $FlowSuppress
-                    const filter = filters[key];
-                    let filtersForCurrentMain = {};
+                    const filter = getFilter(filters[key]);
+                    let queryArgsForCurrentMain = {};
                     if (key === 'eventDate') {
-                        if (Array.isArray(filter)) {
-                            filtersForCurrentMain = filter
-                                .reduce((accEventDateFilters, filterPart: string) => {
-                                    if (filterPart.startsWith('ge')) {
-                                        accEventDateFilters.startDate = filterPart.replace('ge:', '');
-                                    } else {
-                                        accEventDateFilters.endDate = filterPart.replace('le:', '');
-                                    }
-                                    return accEventDateFilters;
-                                }, {});
-                        } else if (filter.startsWith('ge')) {
-                            filtersForCurrentMain.startDate = filter.replace('ge:', '');
-                        } else {
-                            filtersForCurrentMain.endDate = filter.replace('le:', '');
-                        }
+                        queryArgsForCurrentMain = getEventDateQueryArgs(filter);
                     } else if (key === 'status') {
-                        if (filter.startsWith('eq:')) {
-                            filtersForCurrentMain.status = filter.replace('eq:', '');
-                        }
+                        queryArgsForCurrentMain = getStatusQueryArgs(filter);
                     }
                     return {
-                        ...accMainFilters,
-                        ...filtersForCurrentMain,
+                        ...accMainQueryArgs,
+                        ...queryArgsForCurrentMain,
                     };
                 }, {}) : null;
 
-    return mainFilterQueries;
+    return mainFilterQueryArgs;
 };
 
 const getApiCategoriesQueryArgument = (categories: ?{ [id: string]: string}, programId: string) => {
@@ -116,7 +128,7 @@ const getApiCategoriesQueryArgument = (categories: ?{ [id: string]: string}, pro
 };
 
 const createApiQueryArgs = (queryArgs: Object, mainColumns: Object) => {
-    const apiQueryArgs = {
+    let apiQueryArgs = {
         ...queryArgs,
         order: `${queryArgs.sortById}:${queryArgs.sortByDirection}`,
         ...getApiFilterQueryArgument(queryArgs.filters, mainColumns),
@@ -128,6 +140,16 @@ const createApiQueryArgs = (queryArgs: Object, mainColumns: Object) => {
     apiQueryArgs.hasOwnProperty('sortByDirection') && delete apiQueryArgs.sortByDirection;
     apiQueryArgs.hasOwnProperty('filters') && delete apiQueryArgs.filters;
     apiQueryArgs.hasOwnProperty('rowsCount') && delete apiQueryArgs.rowsCount;
+
+    apiQueryArgs = Object
+        .keys(apiQueryArgs)
+        .reduce((acc, key) => {
+            const value = apiQueryArgs[key];
+            if (value !== undefined) {
+                acc[key] = value;
+            }
+            return acc;
+        }, {});
 
     const apiQueryArgsWithServerPropName = Object
         .keys(apiQueryArgs)
@@ -143,36 +165,11 @@ const createApiQueryArgs = (queryArgs: Object, mainColumns: Object) => {
     return apiQueryArgsWithServerPropName;
 };
 
-export const getInitialWorkingListDataAsync = async (
+export const getEventWorkingListDataAsync = async (
     queryArgs: InputQueryArgs,
-    workingListsColumnsOrder: ?Array<ColumnConfig>,
+    workingListsColumnsOrder: Array<ColumnConfig>,
 ) => {
-    let columnsOrderRetrieved;
-    if (!workingListsColumnsOrder) {
-        columnsOrderRetrieved = await getColumnsConfiguration(queryArgs.programId);
-    }
-
-    const mainColumns = getMainColumns(columnsOrderRetrieved || workingListsColumnsOrder);
-
-    const events = await getEvents(createApiQueryArgs({
-        ...queryArgs,
-        page: 1,
-    }, mainColumns));
-
-    if (columnsOrderRetrieved) {
-        return {
-            ...events,
-            columnsOrder: columnsOrderRetrieved,
-        };
-    }
-
+    const mainColumns = getMainColumns(workingListsColumnsOrder);
+    const events = await getEvents(createApiQueryArgs(queryArgs, mainColumns));
     return events;
-};
-
-export const getUpdateWorkingListDataAsync = (
-    queryArgs: InputQueryArgs,
-    workingListsColumnsOrder: ?Array<ColumnConfig>,
-) => {
-    const mainColumns = workingListsColumnsOrder ? getMainColumns(workingListsColumnsOrder) : {};
-    return getEvents(createApiQueryArgs(queryArgs, mainColumns));
 };

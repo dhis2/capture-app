@@ -15,10 +15,11 @@ import {
     isValidDate,
 } from 'capture-core-utils/validators/form';
 import { convertValue as convertToClientValue } from '../../../converters/formToClient';
-import { convertValue as convertToFormValue } from '../../../converters/clientToForm';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 import type { UpdatableFilterContent } from '../filters.types';
 import './calendarFilterStyles.css';
+import { mainOptionKeys, mainOptionTranslatedTexts } from './mainOptions';
+import getDateFilterData from './getDateFilterData';
 
 const getStyles = (theme: Theme) => ({
     fromToContainer: {
@@ -81,133 +82,45 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
         [elementTypes.DATE]: isValidDate,
     };
 
-    static mainOptionKeys = {
-        LAST_WEEK: 'lastWeek',
-        LAST_MONTH: 'lastMonth',
-        LAST_3_MONTHS: 'last3Months',
-        CUSTOM_RANGE: 'customRange',
-    };
-
-    static mainOptionsTranslatedTexts = {
-        [DateFilter.mainOptionKeys.LAST_WEEK]: i18n.t('Last week'),
-        [DateFilter.mainOptionKeys.LAST_MONTH]: i18n.t('Last month'),
-        [DateFilter.mainOptionKeys.LAST_3_MONTHS]: i18n.t('Last 3 months'),
-        [DateFilter.mainOptionKeys.CUSTOM_RANGE]: i18n.t('Custom range'),
-    };
-
     static mainOptionSet = new OptionSet('mainOptions', [
-        new Option((o) => {
-            o.text = DateFilter.mainOptionsTranslatedTexts[DateFilter.mainOptionKeys.LAST_WEEK];
-            o.value = DateFilter.mainOptionKeys.LAST_WEEK;
+        new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.TODAY];
+            _this.value = mainOptionKeys.TODAY;
         }),
-        new Option((o) => {
-            o.text = DateFilter.mainOptionsTranslatedTexts[DateFilter.mainOptionKeys.LAST_MONTH];
-            o.value = DateFilter.mainOptionKeys.LAST_MONTH;
+        new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.THIS_WEEK];
+            _this.value = mainOptionKeys.THIS_WEEK;
         }),
-        new Option((o) => {
-            o.text = DateFilter.mainOptionsTranslatedTexts[DateFilter.mainOptionKeys.LAST_3_MONTHS];
-            o.value = DateFilter.mainOptionKeys.LAST_3_MONTHS;
+        new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.THIS_MONTH];
+            _this.value = mainOptionKeys.THIS_MONTH;
         }),
-        new Option((o) => {
-            o.text = DateFilter.mainOptionsTranslatedTexts[DateFilter.mainOptionKeys.CUSTOM_RANGE];
-            o.value = DateFilter.mainOptionKeys.CUSTOM_RANGE;
+        new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.THIS_YEAR];
+            _this.value = mainOptionKeys.THIS_YEAR;
+        }),
+        new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.LAST_WEEK];
+            _this.value = mainOptionKeys.LAST_WEEK;
+        }),
+        new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.LAST_MONTH];
+            _this.value = mainOptionKeys.LAST_MONTH;
+        }),
+        new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.LAST_3_MONTHS];
+            _this.value = mainOptionKeys.LAST_3_MONTHS;
+        }),
+        new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.CUSTOM_RANGE];
+            _this.value = mainOptionKeys.CUSTOM_RANGE;
         }),
     ]);
-
-    static formatDateForFilterRequest(dateMoment: moment$Moment) {
-        return dateMoment.format('YYYY-MM-DD');
-    }
 
     static convertDateFilterValueToClientValue(formValue: string): string {
         // $FlowSuppress
         return convertToClientValue(formValue, elementTypes.DATE);
     }
-
-    static convertDateFilterValueToFormValue(clientValue: string): string {
-        // $FlowSuppress
-        return convertToFormValue(clientValue, elementTypes.DATE);
-    }
-
-    static mapMainSelectionsToRequests = {
-        [DateFilter.mainOptionKeys.LAST_WEEK]: () => {
-            const startDate = moment().subtract(1, 'weeks').startOf('week');
-            const endDate = moment().subtract(1, 'weeks').endOf('week');
-
-            return [
-                `ge:${DateFilter.formatDateForFilterRequest(startDate)}`,
-                `le:${DateFilter.formatDateForFilterRequest(endDate)}`,
-            ];
-        },
-        [DateFilter.mainOptionKeys.LAST_MONTH]: () => {
-            const startDate = moment().subtract(1, 'months').startOf('month');
-            const endDate = moment().subtract(1, 'months').endOf('month');
-
-            return [
-                `ge:${DateFilter.formatDateForFilterRequest(startDate)}`,
-                `le:${DateFilter.formatDateForFilterRequest(endDate)}`,
-            ];
-        },
-        [DateFilter.mainOptionKeys.LAST_3_MONTHS]: () => {
-            const startDate = moment().subtract(3, 'months').startOf('month');
-            const endDate = moment().subtract(1, 'months').endOf('month');
-
-            return [
-                `ge:${DateFilter.formatDateForFilterRequest(startDate)}`,
-                `le:${DateFilter.formatDateForFilterRequest(endDate)}`,
-            ];
-        },
-        [DateFilter.mainOptionKeys.CUSTOM_RANGE]: (fromValue: ?string, toValue: ?string) => {
-            const requestData = [];
-            if (fromValue) {
-                // $FlowSuppress
-                const fromClientValue: string = DateFilter.convertDateFilterValueToClientValue(fromValue);
-                const fromFilterRequest = DateFilter.formatDateForFilterRequest(moment(fromClientValue));
-                requestData.push(`ge:${fromFilterRequest}`);
-            }
-            if (toValue) {
-                // $FlowSuppress
-                const toClientValue: string = DateFilter.convertDateFilterValueToClientValue(toValue);
-                const toFilterRequest = DateFilter.formatDateForFilterRequest(moment(toClientValue));
-                requestData.push(`le:${toFilterRequest}`);
-            }
-            return requestData;
-        },
-    };
-
-    static mapMainSelectionsToAppliedText = {
-        [DateFilter.mainOptionKeys.LAST_WEEK]: () =>
-            DateFilter.mainOptionsTranslatedTexts[DateFilter.mainOptionKeys.LAST_WEEK],
-        [DateFilter.mainOptionKeys.LAST_MONTH]: () =>
-            DateFilter.mainOptionsTranslatedTexts[DateFilter.mainOptionKeys.LAST_MONTH],
-        [DateFilter.mainOptionKeys.LAST_3_MONTHS]: () =>
-            DateFilter.mainOptionsTranslatedTexts[DateFilter.mainOptionKeys.LAST_3_MONTHS],
-        [DateFilter.mainOptionKeys.CUSTOM_RANGE]: (fromValue: ?string, toValue: ?string) => {
-            let appliedText = '';
-            if (fromValue && toValue) {
-                const valueFromClient = DateFilter.convertDateFilterValueToClientValue(fromValue);
-                const valueToClient = DateFilter.convertDateFilterValueToClientValue(toValue);
-                const momentFrom = moment(valueFromClient);
-                const momentTo = moment(valueToClient);
-                if (momentFrom.isSame(momentTo)) {
-                    appliedText = DateFilter.convertDateFilterValueToFormValue(valueFromClient);
-                } else {
-                    const appliedTextFrom = DateFilter.convertDateFilterValueToFormValue(valueFromClient);
-                    const appliedTextTo = DateFilter.convertDateFilterValueToFormValue(valueToClient);
-                    appliedText = `${appliedTextFrom} ${i18n.t('to')} ${appliedTextTo}`;
-                }
-            } else if (fromValue) {
-                const valueFromClient = DateFilter.convertDateFilterValueToClientValue(fromValue);
-                const appliedTextFrom = DateFilter.convertDateFilterValueToFormValue(valueFromClient);
-                appliedText = `${i18n.t('after or equal to')} ${appliedTextFrom}`;
-            } else {
-                // $FlowSuppress
-                const valueToClient = DateFilter.convertDateFilterValueToClientValue(toValue);
-                const appliedTextTo = DateFilter.convertDateFilterValueToFormValue(valueToClient);
-                appliedText = `${i18n.t('before or equal to')} ${appliedTextTo}`;
-            }
-            return appliedText;
-        },
-    };
 
     static validateField(value: ?string, type: $Values<typeof elementTypes>) {
         if (!value) {
@@ -232,7 +145,7 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
         toValue?: ?string,
         type: $Values<typeof elementTypes>,
     ) {
-        if (mainValue === DateFilter.mainOptionKeys.CUSTOM_RANGE && !fromValue && !toValue) {
+        if (mainValue === mainOptionKeys.CUSTOM_RANGE && !fromValue && !toValue) {
             return false;
         }
 
@@ -242,14 +155,6 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
         }
 
         return !(fromValue && toValue && this.isFromAfterTo(fromValue, toValue));
-    }
-
-    static getRequestData(value: { main: string, from?: ?string, to?: ?string }) {
-        return DateFilter.mapMainSelectionsToRequests[value.main](value.from, value.to);
-    }
-
-    static getAppliedText(value: { main: string, from?: ?string, to?: ?string }) {
-        return DateFilter.mapMainSelectionsToAppliedText[value.main](value.from, value.to);
     }
 
     static isFromAfterTo(valueFrom: string, valueTo: string) {
@@ -274,13 +179,8 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
         if (!value) {
             return null;
         }
-
-        return {
-            // $FlowSuppress
-            requestData: DateFilter.getRequestData(value),
-            // $FlowSuppress
-            appliedText: DateFilter.getAppliedText(value),
-        };
+        // $FlowFixMe
+        return getDateFilterData(value);
     }
 
     onIsValid() {
@@ -296,8 +196,8 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
         };
 
         if (valueObject.from || valueObject.to) {
-            valueObject.main = DateFilter.mainOptionKeys.CUSTOM_RANGE;
-        } else if (valueObject.main === DateFilter.mainOptionKeys.CUSTOM_RANGE) {
+            valueObject.main = mainOptionKeys.CUSTOM_RANGE;
+        } else if (valueObject.main === mainOptionKeys.CUSTOM_RANGE) {
             valueObject.main = null;
         }
 
@@ -348,7 +248,7 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
         const toValue = values && values.to;
         const type = this.props.type;
 
-        if (mainValue === DateFilter.mainOptionKeys.CUSTOM_RANGE && !fromValue && !toValue) {
+        if (mainValue === mainOptionKeys.CUSTOM_RANGE && !fromValue && !toValue) {
             return {
                 minValueError: null,
                 maxValueError: null,

@@ -38,6 +38,9 @@ const getStyles = (theme: Theme) => ({
     popperContainerHidden: {
         display: 'none',
     },
+    popper: {
+        zIndex: 1,
+    },
 });
 
 type Props = {
@@ -167,7 +170,7 @@ class FilterRestMenu extends React.Component<Props, State> {
                         ({ ref, style, placement }) => (
                             <div
                                 ref={ref}
-                                style={style}
+                                style={{ ...style, zIndex: 1 }}
                                 data-placement={placement}
                             >
                                 <ClickAwayListener onClickAway={this.handleClickAway}>

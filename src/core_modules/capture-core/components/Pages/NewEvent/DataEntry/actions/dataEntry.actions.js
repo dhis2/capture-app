@@ -36,6 +36,7 @@ export const actionTypes = {
     START_SAVE_NEW_EVENT_RELATIONSHIPS: 'StartSaveNewEventRelationships',
     NEW_EVENT_RELATIONSHIPS_SAVED: 'NewEventRelationshipsSaved',
     SAVE_FAILED_FOR_NEW_EVENT_RELATIONSHIPS: 'SaveFailedForNewEventRelationships',
+    CANCEL_SAVE_INITIALIZE_WORKING_LISTS: 'CancelSaveInitializeWorkingListsForSingleNewEvent',
     START_SAVE_TEI_FOR_NEW_EVENT_RELATIONSHIPS: 'StartSaveTeiForNewEventRelationships',
     TEI_FOR_NEW_EVENT_RELATIONSHIPS_SAVED: 'TeiForNewEventRelationshipSaved',
     SAVE_FAILED_FOR_NEW_EVENT_RELATIONSHIPS_TEI: 'SaveFailedForNewEventRelationshipTei',
@@ -104,6 +105,9 @@ export const cancelNewEventNoWorkingListUpdateNeeded = () =>
 
 export const cancelNewEventUpdateWorkingList = () =>
     actionCreator(actionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST)();
+
+export const cancelNewEventInitializeWorkingLists = () =>
+    actionCreator(actionTypes.CANCEL_SAVE_INITIALIZE_WORKING_LISTS)();
 
 export const cancelOpenNewEventInDataEntry = () =>
     actionCreator(actionTypes.NEW_EVENT_IN_DATAENTRY_OPENING_CANCEL)();

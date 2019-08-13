@@ -19,7 +19,7 @@ export default function getStageForEventProgram(programId: string) {
     }
 
     // $FlowSuppress
-    const stage = program.getStage();
+    const stage = program.stage;
     if (!stage) {
         log.error(errorCreator(errorMessages.STAGE_NOT_FOUND)({ programId }));
         return { error: i18n.t(errorMessages.GENERIC_ERROR), stage: null };

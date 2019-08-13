@@ -6,10 +6,8 @@ import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.compon
 import { orientations } from '../../FormFields/Options/MultiSelectBoxes/multiSelectBoxes.const';
 import withConvertedOptionSet from '../../FormFields/Options/withConvertedOptionSet';
 import OptionSet from '../../../metaData/OptionSet/OptionSet';
-import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
-import { convertValue as convertToClientValue } from '../../../converters/formToClient';
-
-import type{ UpdatableFilterContent } from '../filters.types';
+import { getSingleSelectOptionSetFilterData, getMultiSelectOptionSetFilterData } from './getOptionSetFilterData';
+import type { UpdatableFilterContent } from '../filters.types';
 
 const SelectBoxesWithConvertedOptionSet = withConvertedOptionSet()(SelectBoxes);
 
@@ -33,29 +31,6 @@ type Props = {
 };
 // $FlowSuppress
 class OptionSetFilter extends Component<Props> implements UpdatableFilterContent<Value> {
-    static getRequestData(values: Array<any>, type: $Values<typeof elementTypes>) {
-        const valueString = values
-            .map((value) => {
-                const clientValue = convertToClientValue(value, type);
-                const filterValue = convertToServerValue(clientValue, type); // should work for now
-                return filterValue;
-            })
-            .join(';');
-
-        return `in:${valueString}`;
-    }
-
-    static getAppliedText(values: Array<any>, optionSet: OptionSet) {
-        const valueString = values
-            .map((value) => {
-                const text = optionSet.getOptionText(value);
-                return text;
-            })
-            .join(', ');
-
-        return valueString;
-    }
-
     onGetUpdateData() {
         const { value, singleSelect, optionSet, type } = this.props;
 
@@ -64,16 +39,10 @@ class OptionSetFilter extends Component<Props> implements UpdatableFilterContent
         }
 
         if (singleSelect) {
-            return {
-                requestData: `eq:${value}`,
-                appliedText: optionSet.getOptionText(value),
-            };
+            return getSingleSelectOptionSetFilterData(value, optionSet);
         }
 
-        return {
-            requestData: OptionSetFilter.getRequestData(value, type),
-            appliedText: OptionSetFilter.getAppliedText(value, optionSet),
-        };
+        return getMultiSelectOptionSetFilterData(value, type, optionSet);
     }
 
     onIsValid() { //eslint-disable-line

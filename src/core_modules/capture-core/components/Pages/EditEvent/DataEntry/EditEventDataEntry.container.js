@@ -28,7 +28,7 @@ const getFormFoundation = (state: ReduxState) => {
     }
 
     // $FlowSuppress
-    const stage = program.getStage();
+    const stage = program.stage;
     if (!stage) {
         log.error(errorCreator('stage not found for program')({ method: 'getFormFoundation' }));
         return null;

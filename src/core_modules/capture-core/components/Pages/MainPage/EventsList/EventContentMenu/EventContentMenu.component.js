@@ -89,15 +89,15 @@ class EventContentMenu extends React.Component<Props, State> {
     renderMenuItems = () => {
         const { classes } = this.props;
         return (
-            <React.Fragment>
-                <MenuItem onClick={this.handleEdit}>
+            <MenuList role="menu" className={classes.menuList}>
+                <MenuItem onClick={this.handleView}>
                     {i18n.t('View event info')}
                 </MenuItem>
                 <MenuItem onClick={this.handleDelete}>
                     <Delete className={classes.deleteIcon} />
                     {i18n.t('Delete event')}
                 </MenuItem>
-            </React.Fragment>
+            </MenuList>
         );
     }
 
@@ -143,9 +143,7 @@ class EventContentMenu extends React.Component<Props, State> {
                                         timeout={{ exit: 0, enter: 200 }}
                                     >
                                         <Paper>
-                                            <MenuList role="menu" className={classes.menuList}>
-                                                {this.renderMenuItems()}
-                                            </MenuList>
+                                            {this.renderMenuItems()}
                                         </Paper>
                                     </Grow>
                                 </ClickAwayListener>

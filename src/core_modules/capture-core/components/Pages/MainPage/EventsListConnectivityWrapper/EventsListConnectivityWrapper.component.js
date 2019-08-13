@@ -1,27 +1,38 @@
 // @flow
 import React from 'react';
 import OfflineEventsList from '../OfflineEventsList/OfflineEventsList.container';
-import EventsListLoadWrapper from '../EventsList/EventsListLoadWrapper.container';
+import WorkingListConfigSelector from '../EventsList/WorkingListConfigSelector/WorkingListConfigSelector.container';
+import withListHeaderWrapper from '../ListHeaderWrapper/withListHeaderWrapper';
+import withEventsListHeader from '../EventsList/Header/withHeader';
 
 type Props = {
     isOnline: boolean,
 };
 
-const EventsListConnectivityWrapper = (props: Props) => (
-    <div>
-        {
-            (() => {
-                if (!props.isOnline) {
+const OnlineEventsListWithHeader = withEventsListHeader()(withListHeaderWrapper()(WorkingListConfigSelector));
+
+const EventsListConnectivityWrapper = (props: Props) => {
+    const { isOnline, ...passOnProps } = props;
+    return (
+        <div>
+            {
+                (() => {
+                    if (!isOnline) {
+                        return (
+                            <OfflineEventsList
+                                {...passOnProps}
+                            />
+                        );
+                    }
                     return (
-                        <OfflineEventsList />
+                        <OnlineEventsListWithHeader
+                            {...passOnProps}
+                        />
                     );
-                }
-                return (
-                    <EventsListLoadWrapper />
-                );
-            })()
-        }
-    </div>
-);
+                })()
+            }
+        </div>
+    );
+};
 
 export default EventsListConnectivityWrapper;

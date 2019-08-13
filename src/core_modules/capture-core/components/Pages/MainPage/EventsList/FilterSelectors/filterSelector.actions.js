@@ -14,17 +14,17 @@ export const batchActionTypes = {
     SET_FILTER_BATCH: 'SetFilterBatch',
 };
 
-export const editContents = (value: any, itemId: string) =>
-    actionCreator(actionTypes.EDIT_CONTENTS)({ value, itemId });
+export const editContents = (listId: string, value: any, itemId: string) =>
+    actionCreator(actionTypes.EDIT_CONTENTS)({ listId, value, itemId });
 
-export const setFilter = (data: Object, itemId: string) =>
-    actionCreator(actionTypes.SET_FILTER)({ ...data, itemId });
+export const setFilter = (listId: string, data: Object, itemId: string) =>
+    actionCreator(actionTypes.SET_FILTER)({ ...data, itemId, listId });
 
-export const clearFilter = (itemId: string) =>
-    actionCreator(actionTypes.CLEAR_FILTER)({ itemId });
+export const clearFilter = (listId: string, itemId: string) =>
+    actionCreator(actionTypes.CLEAR_FILTER)({ listId, itemId });
 
-export const revertFilter = () =>
-    actionCreator(actionTypes.REVERT_FILTER)();
+export const revertFilter = (listId: string) =>
+    actionCreator(actionTypes.REVERT_FILTER)({ listId });
 
 export const restMenuItemSelected = (id: string) =>
     actionCreator(actionTypes.REST_MENU_ITEM_SELECTED)({ id });

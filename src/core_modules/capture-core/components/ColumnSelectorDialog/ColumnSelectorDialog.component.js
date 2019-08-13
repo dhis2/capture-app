@@ -1,56 +1,37 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import { Button } from '../Buttons';
-import IconButton from '@material-ui/core/IconButton';
-import SettingsIcon from '@material-ui/icons/Settings';
+import Button from '@material-ui/core/Button';
 
 import i18n from '@dhis2/d2-i18n';
 
 import DragDropList from './DragDropSort/DragDropList.component';
 
-
-const styles = theme => ({
-    optionsIcon: {
-        color: theme.palette.primary.main,
-    },
-});
-
 type Props = {
-    classes: Object,
+    open: ?boolean,
+    onClose: Function,
+    onSave: Function,
     columns: Array<Object>,
-    onUpdateWorkinglistOrder: (workinglist: Array<Object>) => void,
 };
 
 type State = {
-    open: boolean,
     columnList: Array<Object>,
 };
 
-class ColumnSelector extends Component<Props, State> {
-    constructor(props) {
+class ColumnSelectorDialog extends Component<Props, State> {
+    constructor(props: Props) {
         super(props);
         this.state = {
-            open: false,
             columnList: [...this.props.columns],
         };
     }
 
-    handleClickOpen = () => {
-        this.setState({ open: true });
-    };
-
-    handleClose = () => {
-        this.setState({ open: false });
-    };
-
-    getListToSave = () => this.state.columnList
+    getListToSave = (): Array<Object> => this.state.columnList
         .map(column => ({
             id: column.id,
             visible: column.visible,
@@ -61,11 +42,11 @@ class ColumnSelector extends Component<Props, State> {
         }));
 
     handleSave = () => {
-        this.props.onUpdateWorkinglistOrder(this.getListToSave());
-        this.setState({ open: false });
+        const { onSave } = this.props;
+        onSave(this.getListToSave());
     };
 
-    handleToggle = id => () => {
+    handleToggle = (id: string) => () => {
         const index = this.state.columnList.findIndex(column => column.id === id);
         const toggleList = this.state.columnList;
 
@@ -74,23 +55,18 @@ class ColumnSelector extends Component<Props, State> {
         this.setState({ columnList: toggleList });
     };
 
-    handleUpdateListOrder = (sortedList) => {
+    handleUpdateListOrder = (sortedList: Array<Object>) => {
         this.setState({ columnList: sortedList });
     };
 
     render() {
-        const { classes } = this.props;
+        const { open, onClose } = this.props;
 
         return (
             <span>
-                <IconButton onClick={this.handleClickOpen}>
-                    <SettingsIcon
-                        className={classes.optionsIcon}
-                    />
-                </IconButton>
                 <Dialog
-                    open={this.state.open}
-                    onClose={this.handleClose}
+                    open={!!open}
+                    onClose={onClose}
                     fullWidth
                 >
                     <DialogTitle>{i18n.t('Columns to show in table')}</DialogTitle>
@@ -102,11 +78,8 @@ class ColumnSelector extends Component<Props, State> {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button
-                            onClick={this.handleSave}
-                            primary
-                        >
-                            {i18n.t('Save')}
+                        <Button onClick={this.handleSave} color="primary" autoFocus>
+                            Save
                         </Button>
                     </DialogActions>
                 </Dialog>
@@ -115,4 +88,4 @@ class ColumnSelector extends Component<Props, State> {
     }
 }
 
-export default withStyles(styles)(ColumnSelector);
+export default ColumnSelectorDialog;

@@ -3,21 +3,23 @@ import { connect } from 'react-redux';
 import EventsListWrapper from './EventsListWrapper.component';
 import { makeColumnsSelector, makeCreateEventsContainer, makeCreateWorkingListData } from './eventsList.selector';
 import { sortWorkingList, openViewEventPage, requestDeleteEvent } from '../eventsList.actions';
+import { updateWorkinglistOrder } from './actions/columnSelectorDialog.actions';
 
 const makeMapStateToProps = () => {
     const columnsSelector = makeColumnsSelector();
     const createEventsContainer = makeCreateEventsContainer();
     const createWorkingListData = makeCreateWorkingListData();
 
-    const mapStateToProps = (state: ReduxState) => {
-        const isLoading = !!state.workingListsUI.main.isLoading;
-        const columns = !isLoading ? columnsSelector(state) : null;
-        const eventsContainer = !isLoading ? createEventsContainer(state) : [];
-        const sortById = !isLoading ? state.workingListsMeta.main.sortById : null;
-        const sortByDirection = !isLoading ? state.workingListsMeta.main.sortByDirection : null;
+    const mapStateToProps = (state: ReduxState, props: { listId: string }) => {
+        const listId = props.listId;
+        const isLoading = !!state.workingListsUI[listId].isLoading;
+        const columns = !isLoading ? columnsSelector(state, props) : null;
+        const eventsContainer = !isLoading ? createEventsContainer(state, props) : [];
+        const sortById = !isLoading ? state.workingListsMeta[listId].sortById : null;
+        const sortByDirection = !isLoading ? state.workingListsMeta[listId].sortByDirection : null;
         return {
-            isUpdating: !!state.workingListsUI.main.isUpdating,
-            isUpdatingWithDialog: !!state.workingListsUI.main.isUpdatingWithDialog,
+            isUpdating: !!state.workingListsUI[listId].isUpdating,
+            isUpdatingWithDialog: !!state.workingListsUI[listId].isUpdatingWithDialog,
             columns,
             dataSource: createWorkingListData(eventsContainer),
             sortById,
@@ -28,19 +30,22 @@ const makeMapStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onSort: (id: string, direction: string) => {
-        dispatch(sortWorkingList(id, direction));
+    onSort: (listId: string, id: string, direction: string) => {
+        dispatch(sortWorkingList(listId, id, direction));
     },
     onRowClick: (rowData: {eventId: string}) => {
         window.scrollTo(0, 0);
         dispatch(openViewEventPage(rowData.eventId));
     },
-    onView: (rowData: {eventId: string}) => {
+    onView: (eventId: string) => {
         window.scrollTo(0, 0);
-        dispatch(openViewEventPage(rowData.eventId));
+        dispatch(openViewEventPage(eventId));
     },
     onDelete: (eventId: string) => {
         dispatch(requestDeleteEvent(eventId));
+    },
+    onSaveColumnOrder: (listId: string, columnOrder: Array<Object>): void => {
+        dispatch(updateWorkinglistOrder(listId, columnOrder));
     },
 });
 

@@ -14,6 +14,7 @@ import {
 } from 'capture-core-utils/validators/form';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 import D2TextField from '../../FormFields/Generic/D2TextField.component';
+import getNumericFilterData from './getNumericFilterData';
 import type { UpdatableFilterContent } from '../filters.types';
 
 const getStyles = (theme: Theme) => ({
@@ -103,44 +104,6 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
         return !(minValue && maxValue && Number(minValue) > Number(maxValue));
     }
 
-    static getRequestData(value: { min?: ?string, max?: ?string }) {
-        const requestData = [];
-
-        if (value.min) {
-            requestData.push(`ge:${value.min}`);
-        }
-        if (value.max) {
-            requestData.push(`le:${value.max}`);
-        }
-
-        if (requestData.length === 2) {
-            return requestData.join(':');
-        }
-
-        return requestData[0];
-    }
-
-    static getAppliedText(value: { min?: ?string, max?: ?string }) {
-        let appliedText = '';
-
-        if (value.min && value.max) {
-            if (Number(value.min) === Number(value.max)) {
-                appliedText = value.min;
-            } else {
-                // $FlowSuppress
-                appliedText = `${value.min} ${i18n.t('to')} ${value.max}`;
-            }
-        } else if (value.min) {
-            // $FlowSuppress
-            appliedText = `${i18n.t('greater than or equal to')} ${value.min}`;
-        } else {
-            // $FlowSuppress
-            appliedText = `${i18n.t('less than or equal to')} ${value.max}`;
-        }
-
-        return appliedText;
-    }
-
     maxD2TextFieldInstance: D2TextField;
     onGetUpdateData(updatedValues?: Value) {
         const value = typeof updatedValues !== 'undefined' ? updatedValues : this.props.value;
@@ -148,12 +111,7 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
         if (!value) {
             return null;
         }
-
-        return {
-            requestData: NumericFilter.getRequestData(value),
-            // $FlowSuppress
-            appliedText: NumericFilter.getAppliedText(value),
-        };
+        return getNumericFilterData(value);
     }
 
     onIsValid() {

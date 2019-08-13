@@ -4,7 +4,7 @@ import getEventProgramThrowIfNotFound from './getEventProgramThrowIfNotFound';
 
 export default function (programId: string, categories: ?{ [categoryId: string]: string }) {
     const program = getEventProgramThrowIfNotFound(programId);
-    const stage = program.getStageThrowIfNull();
+    const stage = program.stage;
     let access = {
         read: stage.stageForm.access.data.read,
         write: stage.stageForm.access.data.write,

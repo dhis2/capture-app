@@ -5,16 +5,13 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-06-24T21:33:11.927Z\n"
-"PO-Revision-Date: 2019-06-24T21:33:11.927Z\n"
+"POT-Creation-Date: 2019-08-12T07:36:23.722Z\n"
+"PO-Revision-Date: 2019-08-12T07:36:23.722Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
 
 msgid "Columns to show in table"
-msgstr ""
-
-msgid "Save"
 msgstr ""
 
 msgid "Column"
@@ -179,6 +176,33 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
+msgid "to"
+msgstr ""
+
+msgid "From"
+msgstr ""
+
+msgid "To"
+msgstr ""
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
+msgstr ""
+
+msgid "Today"
+msgstr ""
+
+msgid "This week"
+msgstr ""
+
+msgid "This month"
+msgstr ""
+
+msgid "This Year"
+msgstr ""
+
 msgid "Last week"
 msgstr ""
 
@@ -189,21 +213,6 @@ msgid "Last 3 months"
 msgstr ""
 
 msgid "Custom range"
-msgstr ""
-
-msgid "to"
-msgstr ""
-
-msgid "after or equal to"
-msgstr ""
-
-msgid "before or equal to"
-msgstr ""
-
-msgid "From"
-msgstr ""
-
-msgid "To"
 msgstr ""
 
 msgid "Max"
@@ -296,6 +305,9 @@ msgstr ""
 msgid "No write access"
 msgstr ""
 
+msgid "Save"
+msgstr ""
+
 msgid "Show all events"
 msgstr ""
 
@@ -321,6 +333,27 @@ msgid "Update"
 msgstr ""
 
 msgid "More filters"
+msgstr ""
+
+msgid "Select columns"
+msgstr ""
+
+msgid "Download as JSON"
+msgstr ""
+
+msgid "Download as XML"
+msgstr ""
+
+msgid "Download as CSV"
+msgstr ""
+
+msgid "Download with current filters"
+msgstr ""
+
+msgid "Save filter as..."
+msgstr ""
+
+msgid "Download as..."
 msgstr ""
 
 msgid "Rows per page"
@@ -656,9 +689,6 @@ msgid "Choose one or more dates..."
 msgstr ""
 
 msgid "Choose a date..."
-msgstr ""
-
-msgid "Today"
 msgstr ""
 
 msgid "Compatibility mode"

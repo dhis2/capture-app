@@ -1,16 +1,25 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
+/* eslint-disable no-restricted-syntax */
+import { errorCreator } from 'capture-core-utils';
 import isFunction from 'd2-utilizr/src/isFunction';
 import type { ProgramRule, ProgramRuleVariable } from 'capture-core-utils/RulesEngine/rulesEngine.types';
 import CategoryCombination from '../CategoryCombinations/CategoryCombination';
 import Icon from '../Icon/Icon';
 import type { Access } from '../Access/Access';
+// import ProgramStage from './ProgramStage';
 
 export default class Program {
+    static errorMessages = {
+        STAGE_NOT_FOUND: 'Stage was not found',
+        STAGE_INDEX_NOT_FOUND: 'No stage found on index',
+    }
+
     _id: string;
     _access: Access;
     _name: string;
     _shortName: string;
+    _stages: Map<string, ProgramStage>;
     _organisationUnits: Object;
     _version: string | number;
     _categoryCombination: ?CategoryCombination;
@@ -22,7 +31,15 @@ export default class Program {
         this.programRules = [];
         this.programRuleVariables = [];
         this.organisationUnits = {};
+        this._stages = new Map();
         initFn && isFunction(initFn) && initFn(this);
+    }
+
+    // $FlowSuppress
+    * [Symbol.iterator](): Iterator<ProgramStage> {
+        for (const stage of this._stages.values()) {
+            yield stage;
+        }
     }
 
     set id(id: string): void {
@@ -87,6 +104,39 @@ export default class Program {
     get icon(): Icon {
         return this._icon;
     }
+
+    get stages(): Map<string, ProgramStage> {
+        return this._stages;
+    }
+
+    addStage(stage: ProgramStage) {
+        this.stages.set(stage.id, stage);
+    }
+
+    getStage(id: string): ?ProgramStage {
+        return this.stages.get(id);
+    }
+
+    getStageThrowIfNotFound(id: string): ProgramStage {
+        const stage = this.stages.get(id);
+        if (!stage) {
+            throw new Error(
+                errorCreator(Program.errorMessages.STAGE_NOT_FOUND)({ program: this, stageId: id }),
+            );
+        }
+        return stage;
+    }
+
+    getStageFromIndex(index: number): ProgramStage {
+        const stages = [...this.stages.entries()];
+        if (stages.length <= index) {
+            throw new Error(
+                errorCreator(Program.errorMessages.STAGE_INDEX_NOT_FOUND)({ program: this, stageIndex: index }),
+            );
+        }
+        return stages[index][1];
+    }
+
 
     addProgramRuleVariable(programRuleVariable: ProgramRuleVariable) {
         this.programRuleVariables.push(programRuleVariable);

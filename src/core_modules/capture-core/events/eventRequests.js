@@ -124,8 +124,15 @@ export async function getEvent(eventId: string): Promise<?ClientEventContainer> 
 
 export async function getEvents(queryParams: ?Object) {
     const api = getApi();
+    const req = {
+        url: 'events',
+        queryParams: {
+            ...queryParams,
+            totalPages: true,
+        },
+    };
     const apiRes = await api
-        .get('events', { ...queryParams, totalPages: true });
+        .get(req.url, { ...req.queryParams });
 
     const eventContainers = apiRes && apiRes.events ? await apiRes.events.reduce(async (accEventsPromise, apiEvent) => {
         const accEvents = await accEventsPromise;
@@ -145,5 +152,6 @@ export async function getEvents(queryParams: ?Object) {
     return {
         eventContainers,
         pagingData,
+        request: req,
     };
 }

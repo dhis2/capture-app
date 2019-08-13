@@ -26,7 +26,7 @@ type ColumnsOrderFromState = Array<ColumnOrderFromState>;
 
 // #HEADERS
 const programIdSelector = state => state.currentSelections.programId;
-const columnsOrderStateSelector = state => state.workingListsColumnsOrder.main;
+const columnsOrderStateSelector = (state, props) => state.workingListsColumnsOrder[props.listId];
 
 
 const createMainPropertyOptionSet = (column: ColumnOrderFromState) => {
@@ -83,7 +83,7 @@ export const makeColumnsSelector = () => createSelector(
 
 const eventsMainDataSelector = state => state.events;
 const eventsValuesSelector = state => state.eventsValues;
-const sortOrderSelector = state => state.workingLists.main.order;
+const sortOrderSelector = (state, props) => state.workingLists[props.listId].order;
 
 
 const createEventsContainer = (events, eventsValues, sortOrder): Array<EventContainer> =>

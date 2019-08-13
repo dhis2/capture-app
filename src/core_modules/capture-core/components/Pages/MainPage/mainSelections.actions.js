@@ -24,10 +24,10 @@ export const mainSelectionCompleted =
     () => actionCreator(actionTypes.MAIN_SELECTIONS_COMPLETED)();
 
 export const workingListInitialDataRetrieved =
-    (data: Object) => actionCreator(actionTypes.WORKING_LIST_DATA_RETRIEVED)(data);
+    (listId: string, data: Object) => actionCreator(actionTypes.WORKING_LIST_DATA_RETRIEVED)({ ...data, listId });
 
 export const workingListInitialRetrievalFailed =
-    (errorMessage: string) => actionCreator(actionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED)(errorMessage);
+    (listId: string, errorMessage: string) => actionCreator(actionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED)({ listId, errorMessage });
 
 export const workingListDataRetrievalCanceled =
     () => actionCreator(actionTypes.WORKING_LIST_DATA_RETRIEVAL_CANCELED)();

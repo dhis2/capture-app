@@ -17,6 +17,7 @@ export const actionTypes = {
     UPDATE_EVENT_CONTAINER: 'UpdateEventContainerForViewEvent',
     UPDATE_WORKING_LIST_PENDING_ON_BACK_TO_MAIN_PAGE: 'UpdateWorkingListPendingOnBackToMainPageForViewEvent',
     OPEN_VIEW_EVENT_PAGE_FAILED: 'OpenViewEventPageFailed',
+    INITIALIZE_WORKING_LISTS_ON_BACK_TO_MAIN_PAGE: 'InitializeWorkingListsOnBackToMainPage',
 };
 
 export const viewEventFromUrl = (data: Object) =>
@@ -51,6 +52,9 @@ export const startGoBackToMainPage = () =>
 
 export const noWorkingListUpdateNeededOnBackToMainPage = () =>
     actionCreator(actionTypes.NO_WORKING_LIST_UPDATE_NEEDED_ON_BACK_TO_MAIN_PAGE)();
+
+export const initializeWorkingListsOnBackToMainPage = () =>
+    actionCreator(actionTypes.INITIALIZE_WORKING_LISTS_ON_BACK_TO_MAIN_PAGE)();
 
 export const updateWorkingListOnBackToMainPage = () =>
     actionCreator(actionTypes.UPDATE_WORKING_LIST_ON_BACK_TO_MAIN_PAGE)();
