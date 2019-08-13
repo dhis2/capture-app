@@ -1,4 +1,5 @@
 // @flow
+/*
 import React from 'react';
 import { Validators } from '@dhis2/d2-ui-forms';
 import DataEntry from 'capture-core/components/DataEntry/DataEntry.container';
@@ -124,3 +125,4 @@ export default (props: Props) => (
         />
     </div>
 );
+*/

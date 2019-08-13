@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-08-09T11:34:57.923Z\n"
-"PO-Revision-Date: 2019-08-09T11:34:57.923Z\n"
+"POT-Creation-Date: 2019-08-12T07:36:23.722Z\n"
+"PO-Revision-Date: 2019-08-12T07:36:23.722Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -89,6 +89,9 @@ msgstr ""
 msgid "Enrollment"
 msgstr ""
 
+msgid "A future date is not allowed"
+msgstr ""
+
 msgid "An error has occured. See log for details"
 msgstr ""
 
@@ -105,6 +108,9 @@ msgid "Yes, discard"
 msgstr ""
 
 msgid "No, stay here"
+msgstr ""
+
+msgid "validation failed"
 msgstr ""
 
 msgid "Errors"
@@ -137,10 +143,22 @@ msgstr ""
 msgid "Write comment"
 msgstr ""
 
-msgid "Some operations are still runnning. Please wait.."
+msgid "Back to form"
 msgstr ""
 
-msgid "Save"
+msgid "Save anyway"
+msgstr ""
+
+msgid "Validation errors and warnings"
+msgstr ""
+
+msgid "Validation errors"
+msgstr ""
+
+msgid "Validation warnings"
+msgstr ""
+
+msgid "Some operations are still runnning. Please wait.."
 msgstr ""
 
 msgid "Operations running"
@@ -287,6 +305,9 @@ msgstr ""
 msgid "No write access"
 msgstr ""
 
+msgid "Save"
+msgstr ""
+
 msgid "Show all events"
 msgstr ""
 
@@ -300,6 +321,9 @@ msgid "Event could not be loaded"
 msgstr ""
 
 msgid "Organisation unit could not be loaded"
+msgstr ""
+
+msgid "View event info"
 msgstr ""
 
 msgid "Delete event"
@@ -450,6 +474,9 @@ msgid ""
 "have access to it"
 msgstr ""
 
+msgid "You have already registered this {{attributeName}}"
+msgstr ""
+
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
@@ -467,10 +494,10 @@ msgstr ""
 msgid "Metadata error. see log for details"
 msgstr ""
 
-msgid "Review Duplicates"
+msgid "Review duplicates"
 msgstr ""
 
-msgid "Create person and link"
+msgid "Create {{trackedEntityTypeName}} and link"
 msgstr ""
 
 msgid "Possible duplicates found"
@@ -498,6 +525,9 @@ msgid "Organisation Unit"
 msgstr ""
 
 msgid "Registration"
+msgstr ""
+
+msgid "Review Duplicates"
 msgstr ""
 
 msgid "Search results"
@@ -553,6 +583,12 @@ msgstr ""
 msgid "Start Again"
 msgstr ""
 
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Accept"
+msgstr ""
+
 msgid "Registering Organisation Unit"
 msgstr ""
 
@@ -587,6 +623,12 @@ msgid "Search by attributes"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgstr ""
+
+msgid "To work with the selected program,"
+msgstr ""
+
+msgid "open the Tracker Capture app"
 msgstr ""
 
 msgid "Program not found"

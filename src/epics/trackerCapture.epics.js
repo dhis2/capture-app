@@ -7,7 +7,8 @@ import {
     resetDataEntryForNewEventEpic,
     openNewEventInDataEntryEpic,
     resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
-    runRulesForSingleEventEpic,
+    runRulesOnUpdateDataEntryFieldForSingleEventEpic,
+    runRulesOnUpdateFieldForSingleEventEpic,
     saveNewEventEpic,
     saveNewEventLocationChangeEpic,
     saveNewEventAddAnotherEpic,
@@ -56,7 +57,8 @@ import {
 } from 'capture-core/components/Pages/EditEvent/epics/editEvent.epics';
 import {
     openEditEventInDataEntryEpic,
-    runRulesForEditSingleEventEpic,
+    runRulesOnUpdateDataEntryFieldForEditSingleEventEpic,
+    runRulesOnUpdateFieldForEditSingleEventEpic,
 } from 'capture-core/components/Pages/EditEvent/DataEntry/epics/editEventDataEntry.epics';
 import {
     loadEditEventDataEntryEpic,
@@ -178,7 +180,10 @@ import {
     loadSearchGroupDuplicatesForReviewEpic,
 } from 'capture-core/components/Pages/NewRelationship/RegisterTei';
 
-import { runRulesOnEnrollmentFieldUpdateEpic } from 'capture-core/components/DataEntries';
+import {
+    runRulesOnEnrollmentFieldUpdateEpic,
+    runRulesOnEnrollmentDataEntryFieldUpdateEpic,
+} from 'capture-core/components/DataEntries';
 
 import { loadCoreEpic } from 'capture-core/init';
 import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../init/entry.epics';
@@ -211,7 +216,8 @@ export default combineEpics(
     openNewEventInDataEntryEpic,
     resetDataEntryForNewEventEpic,
     resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
-    runRulesForSingleEventEpic,
+    runRulesOnUpdateDataEntryFieldForSingleEventEpic,
+    runRulesOnUpdateFieldForSingleEventEpic,
     saveNewEventLocationChangeEpic,
     saveNewEventEpic,
     cancelNewEventLocationChangeEpic,
@@ -220,7 +226,8 @@ export default combineEpics(
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,
     openEditEventInDataEntryEpic,
-    runRulesForEditSingleEventEpic,
+    runRulesOnUpdateDataEntryFieldForEditSingleEventEpic,
+    runRulesOnUpdateFieldForEditSingleEventEpic,
     saveEditEventLocationChangeEpic,
     saveEditEventEpic,
     cancelEditEventLocationChangeEpic,
@@ -262,6 +269,7 @@ export default combineEpics(
     validationForNewEnrollmentUrlUpdateEpic,
     openNewEnrollmentInDataEntryEpic,
     runRulesOnEnrollmentFieldUpdateEpic,
+    runRulesOnEnrollmentDataEntryFieldUpdateEpic,
     saveNewEnrollmentEpic,
     filterFormFieldOrgUnitsEpic,
     asyncUpdateFieldEpic,

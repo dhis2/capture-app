@@ -5,7 +5,7 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
-import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import { withRouter } from 'react-router';
 import type { HashHistory } from 'history/createHashHistory';
 
@@ -16,7 +16,8 @@ import AppContents from './AppContents.component';
 import withAppUrlSync from 'capture-core/components/App/withAppUrlSync';
 import withUrlSync from 'capture-core/components/UrlSync/withUrlSync';
 
-// d2-ui
+// d2
+import { DataProvider } from '@dhis2/app-runtime';
 import D2UIApp from '@dhis2/d2-ui-app';
 
 //HOCs
@@ -58,8 +59,13 @@ class App extends React.Component<Props> {
                             theme={theme}
                         >
                             <D2UIApp>
-                                <AppContentsRouterLoader />
-                                <FeedbackBar />
+                                <DataProvider
+                                    baseUrl={process.env.REACT_APP_DHIS2_BASE_URL}
+                                    apiVersion={32}
+                                >
+                                    <AppContentsRouterLoader />
+                                    <FeedbackBar />
+                                </DataProvider>
                             </D2UIApp>
                         </MuiThemeProvider>
                     </ConnectedRouter>

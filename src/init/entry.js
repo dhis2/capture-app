@@ -4,10 +4,10 @@ import React from 'react';
 import { render } from 'react-dom';
 import log from 'loglevel';
 import 'typeface-roboto';
-import createHistory from 'history/createHashHistory';
+import { createHashHistory as createHistory } from 'history';
 
-import D2UIApp from '@dhis2/d2-ui-app';
-import { LoadingMask } from '@dhis2/d2-ui-core';
+// import D2UIApp from '@dhis2/d2-ui-app';
+import LoadingMask from 'capture-core/components/LoadingMasks/LoadingMaskForPage.component';
 
 import JssProvider from 'react-jss/lib/JssProvider';
 import { create } from 'jss';
@@ -26,30 +26,42 @@ import { addBeforeUnloadEventListener } from '../unload';
 
 const DOM_ID = 'app';
 
-// change the insertion point for jss styles so they don't collide
+// Change the insertion point for jss styles.
+// For this app the insertion point should be below the css.
+const insertionPoint = document.createElement('noscript');
+insertionPoint.setAttribute('id', 'jss-insertion-point');
+document.head.appendChild(insertionPoint);
 const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());
-jss.options.insertionPoint = document.getElementById('jss-insertion-point');
+jss.options.insertionPoint = insertionPoint;
+
+function JSSProviderShell(props) {
+    return (
+        <JssProvider jss={jss} generateClassName={generateClassName}>
+            {props.children}
+        </JssProvider>
+    );
+}
 
 function runApp(domElement: HTMLElement, store: ReduxStore, history: HashHistory) {
     store.dispatch(loadApp());
     addBeforeUnloadEventListener(store);
     render(
-        <JssProvider jss={jss} generateClassName={generateClassName}>
+        <JSSProviderShell>
             <App
                 store={store}
                 history={history}
             />
-        </JssProvider>,
+        </JSSProviderShell>,
         domElement,
     );
 }
 
 async function loadAppAsync(domElement: HTMLElement) {
     render(
-        <D2UIApp>
+        <JSSProviderShell>
             <LoadingMask />
-        </D2UIApp>,
+        </JSSProviderShell>,
         domElement,
     );
 
