@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- '8'
+- '10'
 env:
   global:
   - CC_TEST_REPORTER_ID=99c53e7494b352df65334376e53eeb1cfa022afca8f90fefa15da1e59efa4879
