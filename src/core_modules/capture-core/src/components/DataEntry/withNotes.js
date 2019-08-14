@@ -131,6 +131,7 @@ const getNotes = (InnerComponent: React.ComponentType<any>) =>
         )
 
         getNotes = () => {
+            debugger;
             const { notes, classes } = this.props;
             return (
                 <div className={classes.notesContainer}>
@@ -146,7 +147,9 @@ const getNotes = (InnerComponent: React.ComponentType<any>) =>
                                         {n.storedDate}
                                     </div>
                                 </div>
-                                <div dangerouslySetInnerHTML={{ __html: n.value }} />
+                                <div>
+                                    {n.value}
+                                </div>
                             </ListItem>
                         ))}
                     </List>
