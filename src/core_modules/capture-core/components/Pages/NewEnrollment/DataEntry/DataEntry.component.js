@@ -26,9 +26,6 @@ const getStyles = theme => ({
     savingContextText: {
         paddingLeft: theme.typography.pxToRem(10),
     },
-    savingContextNames: {
-        fontWeight: 'bold',
-    },
     topButtonsContainer: {
         display: 'flex',
         flexFlow: 'row-reverse',
@@ -62,7 +59,6 @@ type Props = {
     classes: {
         savingContextContainer: string,
         savingContextText: string,
-        savingContextNames: string,
         topButtonsContainer: string,
         horizontalPaper: string,
         dataEntryVerticalContainer: string,
@@ -120,24 +116,16 @@ class NewEnrollmentDataEntry extends Component<Props> {
     }
 
     getSavingText() {
-        const { classes, orgUnitName, programName, enrollmentMetadata } = this.props;
+        const { orgUnitName, programName, enrollmentMetadata } = this.props;
         const translatedText = i18n.t('Creating a new {{TET}} in {{program}} in {{orgUnit}}', {
             TET: enrollmentMetadata.trackedEntityType.name,
             program: programName,
             orgUnit: orgUnitName,
         });
 
-        const replacedProgramText =
-            translatedText.replace(programName, `<span class="${classes.savingContextNames}">${programName}</span>`);
-        const replacedText =
-            replacedProgramText.replace(
-                orgUnitName, `<span class="${classes.savingContextNames}">${orgUnitName}</span>`,
-            );
-
-        return (
-            <span dangerouslySetInnerHTML={{ __html: replacedText }} /> // eslint-disable-line
-        );
+        return translatedText;
     }
+
     renderHorizontal = () => {
         const classes = this.props.classes;
         return (
