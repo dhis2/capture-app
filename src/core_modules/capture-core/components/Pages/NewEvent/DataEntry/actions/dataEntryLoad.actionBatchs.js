@@ -46,6 +46,10 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
         onConvertIn: convertStatusIn,
         onConvertOut: convertStatusOut,
     },
+    {
+        id: 'assignee',
+        type: 'TEXT',
+    },
 ];
 
 export const openNewEventInDataEntry =

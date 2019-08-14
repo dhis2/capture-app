@@ -34,6 +34,7 @@ import {
     withDefaultShouldUpdateInterface,
     orientations,
 } from '../../../FormFields/New';
+import { Assignee } from './Assignee';
 
 import withFeedbackOutput from '../../../../components/DataEntry/dataEntryOutput/withFeedbackOutput';
 import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
@@ -83,6 +84,7 @@ const dataEntrySectionNames = {
     STATUS: 'STATUS',
     COMMENTS: 'COMMENTS',
     RELATIONSHIPS: 'RELATIONSHIPS',
+    ASSIGNEE: 'ASSIGNEE',
 };
 
 const overrideMessagePropNames = {
@@ -325,6 +327,28 @@ const buildNotesSettingsFn = () => {
     return notesSettings;
 };
 
+const buildAssigneeSettingsFn = () => {
+    const assigneeComponent =
+        withFocusSaver()(
+            withFilterProps((props: Object) => {
+                const defaultFiltred = defaultFilterProps(props);
+                const { validationAttempted, touched, ...passOnProps } = defaultFiltred;
+                return passOnProps;
+            })(Assignee),
+        );
+
+    return {
+        getComponent: () => assigneeComponent,
+        getComponentProps: (props: Object) => ({
+        }),
+        getPropName: () => 'assignee',
+        getValidatorContainers: () => [],
+        getMeta: () => ({
+            section: dataEntrySectionNames.ASSIGNEE,
+        }),
+    };
+};
+
 const buildRelationshipsSettingsFn = () => {
     const writableRelationshipTypesSelector = makeWritableRelationshipTypesSelector();
     const relationshipsComponent =
@@ -378,7 +402,8 @@ const dataEntryFilterProps = (props: Object) => {
 
 
 const CleanUpHOC = withCleanUpHOC()(withFilterProps(dataEntryFilterProps)(DataEntry));
-const RelationshipField = withDataEntryFieldIfApplicable(buildRelationshipsSettingsFn())(CleanUpHOC);
+const AssigneeField = withDataEntryField(buildAssigneeSettingsFn())(CleanUpHOC);
+const RelationshipField = withDataEntryFieldIfApplicable(buildRelationshipsSettingsFn())(AssigneeField);
 const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
@@ -436,6 +461,10 @@ const dataEntrySectionDefinitions = {
     [dataEntrySectionNames.RELATIONSHIPS]: {
         placement: placements.BOTTOM,
         name: i18n.t('Relationships'),
+    },
+    [dataEntrySectionNames.ASSIGNEE]: {
+        placement: placements.BOTTOM,
+        name: i18n.t('Assignee'),
     },
 };
 class NewEventDataEntry extends Component<Props> {
