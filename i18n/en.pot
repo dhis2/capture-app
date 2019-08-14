@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-05-15T10:39:07.214Z\n"
-"PO-Revision-Date: 2019-05-15T10:39:07.214Z\n"
+"POT-Creation-Date: 2019-08-14T12:27:31.878Z\n"
+"PO-Revision-Date: 2019-08-14T12:27:31.878Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -135,12 +135,6 @@ msgid "Warnings found"
 msgstr ""
 
 msgid "Abort"
-msgstr ""
-
-msgid "Add comment"
-msgstr ""
-
-msgid "Write comment"
 msgstr ""
 
 msgid "Back to form"
@@ -275,7 +269,13 @@ msgstr ""
 msgid "Syncing"
 msgstr ""
 
+msgid "Add comment"
+msgstr ""
+
 msgid "You dont have access to write comments"
+msgstr ""
+
+msgid "Write comment"
 msgstr ""
 
 msgid "Basic info"
