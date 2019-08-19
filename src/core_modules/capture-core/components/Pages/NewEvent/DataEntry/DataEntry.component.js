@@ -45,6 +45,7 @@ import newEventSaveTypes from './newEventSaveTypes';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import { makeWritableRelationshipTypesSelector } from './dataEntry.selectors';
+import { withTransformPropName } from '../../../../HOC';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -329,12 +330,14 @@ const buildNotesSettingsFn = () => {
 
 const buildAssigneeSettingsFn = () => {
     const assigneeComponent =
-        withFocusSaver()(
-            withFilterProps((props: Object) => {
-                const defaultFiltred = defaultFilterProps(props);
-                const { validationAttempted, touched, ...passOnProps } = defaultFiltred;
-                return passOnProps;
-            })(Assignee),
+        withTransformPropName(['onBlur', 'onSet'])(
+            withFocusSaver()(
+                withFilterProps((props: Object) => {
+                    const defaultFiltred = defaultFilterProps(props);
+                    const { validationAttempted, touched, ...passOnProps } = defaultFiltred;
+                    return passOnProps;
+                })(Assignee),
+            ),
         );
 
     return {

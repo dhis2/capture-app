@@ -1,5 +1,5 @@
 // @flow
-import UserNameField from '../../../../FormFields/Username/Username.component';
+import UserNameField from '../../../../FormFields/UserField/UserField.component';
 import {
     withGotoInterface,
     withHideCompatibility,

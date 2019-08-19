@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-08-14T11:58:32.150Z\n"
-"PO-Revision-Date: 2019-08-14T11:58:32.150Z\n"
+"POT-Creation-Date: 2019-08-19T11:31:59.275Z\n"
+"PO-Revision-Date: 2019-08-19T11:31:59.275Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -275,6 +275,12 @@ msgstr ""
 msgid "No results"
 msgstr ""
 
+msgid "suggestions could not be retrieved"
+msgstr ""
+
+msgid "search for username"
+msgstr ""
+
 msgid "No items to display"
 msgstr ""
 
@@ -404,6 +410,9 @@ msgid ""
 msgstr ""
 
 msgid "Selected program is invalid for selected registering unit"
+msgstr ""
+
+msgid "Assigned user"
 msgstr ""
 
 msgid "Relationships"

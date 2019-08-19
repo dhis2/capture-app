@@ -69,7 +69,7 @@ class DataEntryField extends React.Component<Props> {
         }
     }
 
-    handleBlur = (value: any, options?: ?Options) => {
+    handleSet = (value: any, options?: ?Options) => {
         const { validatorContainers, onUpdateFieldInner, onUpdateField } = this.props;
         const validationError =
             getValidationError(value, validatorContainers);
@@ -102,7 +102,7 @@ class DataEntryField extends React.Component<Props> {
                 key={propName}
             >
                 <Component
-                    onBlur={this.handleBlur}
+                    onBlur={this.handleSet}
                     validationAttempted={!!(completionAttempted || saveAttempted)}
                     {...passOnValueMeta}
                     {...passOnProps}
