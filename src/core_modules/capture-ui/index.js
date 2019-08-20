@@ -7,6 +7,7 @@ export { default as DateTimeField } from './DateAndTimeFields/DateTimeField/Date
 export { default as PolygonField } from './PolygonField/PolygonField.component';
 export { default as SelectionBoxes } from './SelectionBoxes/SelectionBoxes.component';
 export { default as TextField } from './TextField/TextField.component';
+export { default as TextFieldPlain } from './internal/TextInput/TextInput.component';
 export { default as TrueOnlyField } from './TrueOnlyField/TrueOnlyField.component';
 export { default as DebounceField } from './DebounceField/DebounceField.component';
 export { default as TextRangeField } from './TextField/TextRangeField.component';
@@ -21,6 +22,7 @@ export { default as withFocusSaver } from './HOC/withFocusSaver';
 export { default as withInternalChangeHandler } from './HOC/withInternalChangeHandler';
 export { default as withLabel } from './HOC/withLabel';
 export { default as withShrinkLabel } from './HOC/withShrinkLabel';
+export { default as withTextFieldFocusHandler } from './internal/TextInput/withFocusHandler';
 
 // Datatable
 export { default as Body } from './DataTable/Body.component';

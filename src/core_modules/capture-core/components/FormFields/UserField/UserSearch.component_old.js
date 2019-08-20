@@ -121,7 +121,7 @@ class UserSearch extends React.Component<Props, State> {
     }
 
     static getSuggestionValue(user) {
-        return user.username;
+        return user;
     }
 
     cancelablePromise: ?{cancel: () => void, promise: Promise<any>};
@@ -182,7 +182,7 @@ class UserSearch extends React.Component<Props, State> {
         }
     };
 
-    onSuggestionSelected = (event, test) => {
+    onSuggestionSelected = (event, { suggestionValue }) => {
         // this.props.onSet(suggestionValue);
     };
 
@@ -207,7 +207,6 @@ class UserSearch extends React.Component<Props, State> {
     renderInput = (inputProps) => {
         const { onChange, ref, ...passOnInputProps } = inputProps;
         const classes = this.props.classes;
-
         return (
             <TextField
                 {...passOnInputProps}

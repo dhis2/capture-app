@@ -1,0 +1,26 @@
+.container {
+    position: relative;
+}
+
+.chipContainer {
+    position: absolute;
+    padding-top: 1px;
+    z-index: 10;
+    top: 0;
+    left: 0;
+}
+
+.input:disabled {
+    background-color: inherit;
+}
+
+.inputContainer {
+    padding: 2px;
+}
+
+.inputContainer:focus {
+    border: 2px solid rgb(20, 124, 215);
+    border-radius: 5px;
+    padding: 0px;
+    outline: none;
+}

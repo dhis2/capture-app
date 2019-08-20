@@ -1,0 +1,11 @@
+.container {
+    position: relative;
+}
+
+.list {
+    position: absolute;
+    max-height: 200px;
+    width: 100%;
+    z-index: 4;
+    background-color: white;
+}

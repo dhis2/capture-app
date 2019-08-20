@@ -1,29 +1,60 @@
 // @flow
 import * as React from 'react';
-import UserSearch from './UserSearch.component';
+import { withStyles } from '@material-ui/core/styles';
+import Search from './Search.component';
+import Selected from './Selected.component';
 import type { User } from './types';
 
+const getStyles = (theme: Theme) => ({
+    inputWrapperFocused: {
+        border: `2px solid ${theme.palette.primary.light}`,
+        borderRadius: '5px',
+    },
+    inputWrapperUnfocused: {
+        padding: 2,
+    },
+});
+
 type Props = {
-    selectedUser: ?User,
-    onSet: (user: User) => void,
+    value: ?User,
+    onSet: (user?: User) => void,
+    classes: Object,
 };
 
 const UserField = (props: Props) => {
-    const { selectedUser, onSet, onSetFocus, onRemoveFocus, ...passOnProps } = props;
+    const { classes, value, onSet } = props;
+    const focusSearchInput = React.useRef(false);
 
-    if (selectedUser) {
-        return null;
+    React.useEffect(() => {
+        if (focusSearchInput) {
+            focusSearchInput.current = false;
+        }
+    });
+
+    const handleClear = () => {
+        onSet();
+        focusSearchInput.current = true;
+    };
+
+    if (value) {
+        return (
+            <Selected
+                user={value}
+                onClear={handleClear}
+                inputWrapperClasses={classes}
+            />
+        );
     }
 
     return (
         <div>
-            <UserSearch
-                onSetFocus={onSetFocus}
-                onRemoveFocus={onRemoveFocus}
+            <Search
                 onSet={onSet}
+                inputWrapperClasses={classes}
+                focusInputOnMount={focusSearchInput.current}
             />
         </div>
     );
 };
 
-export default UserField;
+export default withStyles(getStyles)(UserField);
