@@ -1,4 +1,5 @@
 // @flow
+import { withTransformPropName } from '../../../../../HOC';
 import UserNameField from '../../../../FormFields/UserField/UserField.component';
 import {
     withGotoInterface,
@@ -27,8 +28,10 @@ export default withGotoInterface()(
                         withFocusSaver()(
                             withDisplayMessages()(
                                 withCustomElementContainer(getContainerClass)(
-                                    withInternalChangeHandler()(
-                                        UserNameField,
+                                    withTransformPropName(['onBlur', 'onSet'])(
+                                        withInternalChangeHandler()(
+                                            UserNameField,
+                                        ),
                                     ),
                                 ),
                             ),

@@ -4,7 +4,8 @@
 
 .chipContainer {
     position: absolute;
-    padding-top: 1px;
+    padding-top: 3px;
+    padding-left: 1px;
     z-index: 10;
     top: 0;
     left: 0;

@@ -51,6 +51,13 @@ declare type CaptureClientEvent = {
     attributeCategoryOptions?: ?string,
 };
 
+// ClientValues
+declare type UserFormValue = {
+    id: string,
+    username: string,
+    name: string,
+};
+
 declare type UiEventData = {
     target: {
         value: any

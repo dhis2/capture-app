@@ -8,13 +8,21 @@ import type { User } from './types';
 type Props = {
     user: User,
     onClear: () => void,
+    focusInputOnMount: boolean,
 };
 
 const Selected = (props: Props) => {
-    const { user, onClear } = props;
+    const { user, onClear, focusInputOnMount } = props;
+    const inputDomElement = React.useRef();
+
+    React.useEffect(() => {
+        if (focusInputOnMount) {
+            inputDomElement.current && inputDomElement.current.focus();
+        }
+    }, [focusInputOnMount]);
 
     const handleKeyDown = (event) => {
-        if (event.keyCode === 13) {
+        if ([8, 46].includes(event.keyCode)) {
             onClear();
         }
     };
@@ -24,6 +32,7 @@ const Selected = (props: Props) => {
             className={defaultClasses.container}
         >
             <div
+                ref={(instance) => { inputDomElement.current = instance; }}
                 role={'button'}
                 className={defaultClasses.inputContainer}
                 tabIndex={0}

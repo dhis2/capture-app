@@ -48,7 +48,7 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     },
     {
         id: 'assignee',
-        type: 'TEXT',
+        type: 'USERNAME',
     },
 ];
 

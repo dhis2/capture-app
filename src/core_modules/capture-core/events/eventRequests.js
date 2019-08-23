@@ -6,6 +6,7 @@ import { errorCreator } from 'capture-core-utils';
 import { convertValue } from '../converters/serverToClient';
 import elementTypes from '../metaData/DataElement/elementTypes';
 import { getSubValues } from './getSubValues';
+import { addPostSubValues } from './postSubValues';
 
 type ApiDataValue = {
     dataElement: string,
@@ -25,7 +26,8 @@ type ApiTEIEvent = {
     eventDate: string,
     dueDate: string,
     completedDate: string,
-    dataValues: Array<ApiDataValue>
+    dataValues: Array<ApiDataValue>,
+    assignedUser?: ?string,
 };
 
 export type ClientEventContainer = {
@@ -57,6 +59,7 @@ const mapEventInputKeyToOutputKey = {
     orgUnit: 'orgUnitId',
     trackedEntityInstance: 'trackedEntityInstanceId',
     enrollment: 'enrollmentId',
+    assignedUser: 'assignedUserId',
 };
 
 function getConvertedValue(valueToConvert: any, inputKey: string) {
@@ -91,7 +94,6 @@ async function convertToClientEvent(event: ApiTEIEvent) {
         return null;
     }
 
-    // $FlowSuppress :TODO
     const stageMetaData = programMetaData.getStage(event.programStage);
     if (!stageMetaData) {
         log.error(errorCreator(errorMessages.STAGE_NOT_FOUND)({ fn: 'convertToClientEvent', event }));
@@ -143,6 +145,8 @@ export async function getEvents(queryParams: ?Object) {
         return accEvents;
     }, Promise.resolve([])) : null;
 
+    const eventContainersWithSubValues = eventContainers ? (await addPostSubValues(eventContainers)) : null;
+
     const pagingData = {
         rowsCount: apiRes.pager.total,
         rowsPerPage: apiRes.pager.pageSize,
@@ -150,7 +154,7 @@ export async function getEvents(queryParams: ?Object) {
     };
 
     return {
-        eventContainers,
+        eventContainers: eventContainersWithSubValues,
         pagingData,
         request: req,
     };

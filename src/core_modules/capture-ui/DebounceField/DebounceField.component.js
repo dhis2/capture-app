@@ -35,6 +35,10 @@ class DebounceField extends React.Component<Props, State> {
         }
     }
 
+    componentWillUnmount() {
+        this.debouncer.cancel();
+    }
+
     handleDebounced = (event: SyntheticEvent<HTMLInputElement>) => {
         this.props.onDebounced(event);
     }

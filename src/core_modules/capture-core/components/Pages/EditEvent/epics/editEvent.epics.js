@@ -29,7 +29,6 @@ export const getEventOpeningFromEventListEpic = (action$: InputObservable, store
                 values,
                 id: event.eventId,
             };
-
             const orgUnit = state.organisationUnits[event.orgUnitId];
             return startOpenEventForEditInDataEntry(eventContainer, orgUnit);
         });

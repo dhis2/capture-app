@@ -2,6 +2,8 @@
 import * as React from 'react';
 import parse from 'autosuggest-highlight/parse';
 import MenuItem from '@material-ui/core/MenuItem';
+import SearchContext from './Search.context';
+import defaultClasses from './searchSuggestion.module.css';
 import type { User } from './types';
 
 type Props = {
@@ -11,6 +13,7 @@ type Props = {
     onHighlightNext: (user: User) => void,
     onHighlightPrev: (user: User) => void,
     onSelect: (user: User) => void,
+    onExitSearch: (use: User) => void,
     suggestionRef: (ref: ?HTMLElement, user: User) => void,
 };
 
@@ -30,8 +33,34 @@ function match(text, query) {
     ];
 }
 
+function isInternalTarget(target, suggestionName, inputName) {
+    if (target.getAttribute('name') === suggestionName ||
+        target.getAttribute('name') === inputName) {
+        return true;
+    }
+
+    const parentElement = target.parentElement;
+    if (!parentElement) {
+        return false;
+    }
+
+    return (parentElement.getAttribute('name') === suggestionName);
+}
+
 const SearchSuggestion = (props: Props) => {
-    const { user, query, isHighlighted, onHighlightNext, onHighlightPrev, suggestionRef, onSelect } = props;
+    const {
+        user,
+        query,
+        isHighlighted,
+        onHighlightNext,
+        onHighlightPrev,
+        suggestionRef,
+        onSelect,
+        onExitSearch,
+    } = props;
+
+    const { inputName, suggestionName } = React.useContext(SearchContext);
+
     const userText = `${user.name} (${user.username})`;
     const matches = match(userText, query);
     const parts = parse(userText, matches);
@@ -57,18 +86,26 @@ const SearchSuggestion = (props: Props) => {
         event.stopPropagation();
     }, [onSelect, user]);
 
+    const handleBlur = React.useCallback((event) => {
+        if (!event.relatedTarget || !isInternalTarget(event.relatedTarget, suggestionName, inputName)) {
+            onExitSearch();
+        }
+    }, [onExitSearch, suggestionName, inputName]);
+
     return (
         <div
+            name={suggestionName}
             role="button"
             tabIndex={0}
             ref={handleRef}
+            className={defaultClasses.suggestion}
             onKeyDown={handleKeyDown}
             onClick={handleClick}
+            onBlur={handleBlur}
         >
             <MenuItem
                 selected={isHighlighted}
                 component="div"
-                className="User__listitem" // purpose: Prevent onBlur effects when the item is selected
             >
                 <div>
                     {parts.map((part, index) => (part.highlight ? (

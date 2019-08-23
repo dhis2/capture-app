@@ -1,10 +1,12 @@
 // @flow
 import * as React from 'react';
+import uuid from 'uuid/v4';
 import i18n from '@dhis2/d2-i18n';
 import { makeCancelablePromise } from 'capture-core-utils';
 import { getApi } from '../../../d2/d2Instance';
 import Input from './Input.component';
 import SearchSuggestions from './SearchSuggestions.component';
+import SearchContext from './Search.context';
 import type { User } from './types';
 
 type Props = {
@@ -14,10 +16,11 @@ type Props = {
 };
 
 type State = {
-    value: string,
     suggestions: Array<User>,
+    searchValue: string,
     suggestionsError?: ?string,
     highlightedSuggestion?: ?User,
+    inputKey: number,
 };
 
 class UserSearch extends React.Component<Props, State> {
@@ -35,12 +38,19 @@ class UserSearch extends React.Component<Props, State> {
     cancelablePromise: ?{cancel: () => void, promise: Promise<any>};
     suggestionElements: Map<string, HTMLElement>;
     inputDomElement: ?HTMLInputElement;
+    domNames: Object;
     constructor(props: Props) {
         super(props);
         this.suggestionElements = new Map();
         this.state = {
-            value: '',
             suggestions: [],
+            searchValue: '',
+            inputKey: 0,
+        };
+
+        this.domNames = {
+            inputName: `userfield_input${uuid()}`,
+            suggestionName: 'userfield_search_suggestion',
         };
     }
 
@@ -55,10 +65,18 @@ class UserSearch extends React.Component<Props, State> {
         this.cancelablePromise && this.cancelablePromise.cancel();
     }
 
-    setSuggestions(suggestions: Array<User>) {
+    clearInput() {
+        const currentKey = this.state.inputKey;
+        this.setState({
+            inputKey: (currentKey + 1) % 2,
+        });
+    }
+
+    setSuggestions(suggestions: Array<User>, searchValue: string) {
         this.setState({
             suggestions,
             highlightedSuggestion: undefined,
+            searchValue,
         });
     }
 
@@ -66,6 +84,7 @@ class UserSearch extends React.Component<Props, State> {
         this.setState({
             suggestions: [],
             highlightedSuggestion: undefined,
+            searchValue: '',
         });
     }
 
@@ -83,6 +102,19 @@ class UserSearch extends React.Component<Props, State> {
         element && element.focus();
     }
 
+    highlightInput() {
+        this.setState({
+            highlightedSuggestion: undefined,
+        });
+        this.inputDomElement && this.inputDomElement.focus();
+    }
+
+    resetHighlighted = () => {
+        this.setState({
+            highlightedSuggestion: undefined,
+        });
+    }
+
     search = (value: string) => getApi()
         .get('users', UserSearch.getSearchQueryParams(value))
         .then((response) => {
@@ -96,10 +128,6 @@ class UserSearch extends React.Component<Props, State> {
         });
 
     handleInputChange = (value: string) => {
-        this.setState({
-            value,
-        });
-
         this.cancelablePromise && this.cancelablePromise.cancel();
 
         if (value.length > 1) {
@@ -109,7 +137,7 @@ class UserSearch extends React.Component<Props, State> {
             cancelablePromise
                 .promise
                 .then((suggestions) => {
-                    this.setSuggestions(suggestions);
+                    this.setSuggestions(suggestions, value);
                 })
                 .catch((error) => {
                     if (!error || !error.isCanceled) {
@@ -129,6 +157,30 @@ class UserSearch extends React.Component<Props, State> {
         }
     }
 
+    handleSelectFirstSuggestion = () => {
+        const { suggestions } = this.state;
+
+        if (suggestions.length > 0) {
+            this.props.onSet(suggestions[0]);
+        }
+    }
+
+    handleExitSearchFromInput = () => {
+        const { suggestions } = this.state;
+
+        if (suggestions.length > 0) {
+            this.props.onSet(suggestions[0]);
+        } else {
+            this.clearInput();
+            this.cancelablePromise && this.cancelablePromise.cancel();
+        }
+    }
+
+    handleExitSearchFromSuggestions = () => {
+        const { highlightedSuggestion } = this.state;
+        this.props.onSet(highlightedSuggestion);
+    }
+
     handleHighlightNextSuggestion = () => {
         const { suggestions, highlightedSuggestion } = this.state;
         const index = suggestions.findIndex(s => s === highlightedSuggestion);
@@ -142,6 +194,8 @@ class UserSearch extends React.Component<Props, State> {
         const index = suggestions.findIndex(s => s === highlightedSuggestion);
         if (index > 0) {
             this.highlightSuggestion(suggestions[index - 1]);
+        } else if (index === 0) {
+            this.highlightInput();
         }
     }
 
@@ -164,32 +218,36 @@ class UserSearch extends React.Component<Props, State> {
     }
 
     renderInput() {
-        const { value } = this.state;
+        const { inputKey } = this.state;
         const { inputWrapperClasses } = this.props;
 
         return (
             <Input
+                key={inputKey}
                 inputDomRef={this.handleInputDomRef}
-                value={value}
                 onUpdateValue={this.handleInputChange}
                 onHighlightSuggestion={this.handleHighlightFirstSuggestion}
+                onSelectSuggestion={this.handleSelectFirstSuggestion}
+                onResetDisplayedHighlight={this.resetHighlighted}
+                onExitSearch={this.handleExitSearchFromInput}
                 inputWrapperClasses={inputWrapperClasses}
             />
         );
     }
 
     renderSuggestions() {
-        const { suggestions, value, highlightedSuggestion } = this.state;
+        const { suggestions, searchValue, highlightedSuggestion } = this.state;
 
         return (
             <SearchSuggestions
                 suggestionRef={this.handleSuggestionRef}
                 suggestions={suggestions}
-                query={value}
+                query={searchValue}
                 highlighted={highlightedSuggestion}
                 onHighlightNext={this.handleHighlightNextSuggestion}
                 onHighlightPrev={this.handleHighlightPrevSuggestion}
                 onSelect={this.handleSuggestionSelect}
+                onExitSearch={this.handleExitSearchFromSuggestions}
             />
         );
     }
@@ -197,8 +255,12 @@ class UserSearch extends React.Component<Props, State> {
     render() {
         return (
             <div>
-                {this.renderInput()}
-                {this.renderSuggestions()}
+                <SearchContext.Provider
+                    value={this.domNames}
+                >
+                    {this.renderInput()}
+                    {this.renderSuggestions()}
+                </SearchContext.Provider>
             </div>
         );
     }

@@ -24,10 +24,17 @@ type Props = {
 const UserField = (props: Props) => {
     const { classes, value, onSet } = props;
     const focusSearchInput = React.useRef(false);
+    const focusSelectedInput = React.useRef(false);
 
     React.useEffect(() => {
         if (focusSearchInput) {
             focusSearchInput.current = false;
+        }
+    });
+
+    React.useEffect(() => {
+        if (focusSelectedInput) {
+            focusSelectedInput.current = false;
         }
     });
 
@@ -36,12 +43,17 @@ const UserField = (props: Props) => {
         focusSearchInput.current = true;
     };
 
+    const handleSet = (user: User) => {
+        onSet(user);
+        focusSelectedInput.current = true;
+    };
+
     if (value) {
         return (
             <Selected
                 user={value}
                 onClear={handleClear}
-                inputWrapperClasses={classes}
+                focusInputOnMount={focusSelectedInput.current}
             />
         );
     }
@@ -49,7 +61,7 @@ const UserField = (props: Props) => {
     return (
         <div>
             <Search
-                onSet={onSet}
+                onSet={handleSet}
                 inputWrapperClasses={classes}
                 focusInputOnMount={focusSearchInput.current}
             />

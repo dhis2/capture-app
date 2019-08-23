@@ -15,7 +15,6 @@ export { default as isValidAge } from './age.validator';
 export { default as isValidPhoneNumber } from './phone.validator';
 export { default as isValidOrgUnit } from './orgUnit.validator';
 export { default as isValidCoordinate } from './coordinate.validator';
-export { default as isValidUsername } from './username.validator';
 export { default as getNumberRangeValidator } from './getNumberRangeValidator';
 export { default as getDateRangeValidator } from './getDateRangeValidator';
 export { default as getDateTimeRangeValidator } from './getDateTimeRangeValidator';

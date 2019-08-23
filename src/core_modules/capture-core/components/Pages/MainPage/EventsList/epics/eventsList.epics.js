@@ -143,7 +143,7 @@ export const getWorkingListOnSaveEpic = (action$, store: ReduxStore) =>
             }
 
             const initialPromise = getWorkingListConfigsAsync(state).then(container => batchActions([
-                setCurrentWorkingListConfig(container.default.id, container.default),
+                setCurrentWorkingListConfig(container.default.id, 'eventList', container.default),
                 workingListConfigsRetrieved(container.workingListConfigs),
             ], eventsListBatchActionTypes.WORKING_LIST_CONFIGS_RETRIEVED_BATCH));
             return fromPromise(initialPromise)
@@ -224,7 +224,7 @@ export const getEventListOnReconnectEpic = (action$, store: ReduxStore) =>
             }
 
             const initialPromise = getWorkingListConfigsAsync(state).then(container => batchActions([
-                setCurrentWorkingListConfig(container.default.id, container.default),
+                setCurrentWorkingListConfig(container.default.id, 'eventList', container.default),
                 workingListConfigsRetrieved(container.workingListConfigs),
             ], eventsListBatchActionTypes.WORKING_LIST_CONFIGS_RETRIEVED_BATCH));
             return fromPromise(initialPromise)

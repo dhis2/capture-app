@@ -11,7 +11,8 @@ export const actionTypes = {
     LOAD_VIEW_DATA_ENTRY: 'LoadViewDataEntry',
 };
 
-export function loadViewDataEntry(
+// eslint-disable-next-line complexity
+export async function loadViewDataEntry(
     dataEntryId: string,
     itemId: string,
     clientValuesForDataEntry: Object,
@@ -19,16 +20,31 @@ export function loadViewDataEntry(
     dataEntryPropsToInclude?: ?Array<DataEntryPropToInclude>,
     formFoundation: RenderFoundation,
     extraProps?: ?{ [key: string]: any },
+    onAddSubValues?: (preDataEntryValues: Object, preFormValues: Object, formFoundation: RenderFoundation) => { formValues?: ?Object, dataEntryValues?: ?Object },
 ) {
     const dataEntryMeta = dataEntryPropsToInclude ? getDataEntryMeta(dataEntryPropsToInclude) : {};
-    const dataEntryValues =
+    const preDataEntryValues =
         dataEntryPropsToInclude ? getDataEntryValues(dataEntryPropsToInclude, clientValuesForDataEntry) : {};
-
-    const dataEntryUI = dataEntryPropsToInclude ? validateDataEntryValues(dataEntryValues, dataEntryPropsToInclude) : {};
-    const formValues = getFormValues(clientValuesForForm, formFoundation);
+    const preFormValues = getFormValues(clientValuesForForm, formFoundation);
     const key = getDataEntryKey(dataEntryId, itemId);
+
+    const { dataEntryValues = preDataEntryValues, formValues = preFormValues } = onAddSubValues ?
+        (await onAddSubValues(preDataEntryValues, preFormValues, formFoundation)) || {} :
+        {};
+
+    const dataEntryUI =
+        dataEntryPropsToInclude ? validateDataEntryValues(dataEntryValues, dataEntryPropsToInclude) : {};
+
     return [
-        actionCreator(actionTypes.LOAD_VIEW_DATA_ENTRY)({ key, itemId, dataEntryId, dataEntryMeta, dataEntryValues, extraProps, dataEntryUI }),
+        actionCreator(actionTypes.LOAD_VIEW_DATA_ENTRY)({
+            key,
+            itemId,
+            dataEntryId,
+            dataEntryMeta,
+            dataEntryValues,
+            extraProps,
+            dataEntryUI,
+        }),
         addFormData(key, formValues),
     ];
 }

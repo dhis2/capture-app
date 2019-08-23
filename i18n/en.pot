@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-08-19T11:31:59.275Z\n"
-"PO-Revision-Date: 2019-08-19T11:31:59.275Z\n"
+"POT-Creation-Date: 2019-08-23T11:38:28.404Z\n"
+"PO-Revision-Date: 2019-08-23T11:38:28.404Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -66,9 +66,6 @@ msgid "Please provide a valid organisation unit"
 msgstr ""
 
 msgid "Please provide valid coordinates"
-msgstr ""
-
-msgid "Please provide a valid username"
 msgstr ""
 
 msgid "This value already exists"

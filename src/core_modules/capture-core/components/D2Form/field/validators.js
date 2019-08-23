@@ -20,7 +20,6 @@ import {
     isValidPhoneNumber,
     isValidOrgUnit,
     isValidCoordinate,
-    isValidUsername,
     getNumberRangeValidator,
     getDateRangeValidator,
     getDateTimeRangeValidator,
@@ -55,7 +54,6 @@ const errorMessages = {
     PHONE_NUMBER: i18n.t('Please provide a valid phone number'),
     ORGANISATION_UNIT: i18n.t('Please provide a valid organisation unit'),
     COORDINATE: i18n.t('Please provide valid coordinates'),
-    USERNAME: i18n.t('Please provide a valid username'),
     UNIQUENESS: i18n.t('This value already exists'),
     RANGE: i18n.t('"From" cannot be greater than "To"'),
 };
@@ -139,10 +137,6 @@ const validatorsForTypes = {
     [elementTypes.COORDINATE]: () => ({
         validator: isValidCoordinate,
         message: errorMessages.COORDINATE,
-    }),
-    [elementTypes.USERNAME]: () => ({
-        validator: isValidUsername,
-        message: errorMessages.USERNAME,
     }),
     [elementTypes.DATE_RANGE]: () => ({
         validator: getDateRangeValidator(errorMessages.DATE),

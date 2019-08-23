@@ -11,6 +11,7 @@ type InputCompareKeys = {
     dueDate?: ?string,
     completedDate?: ?string,
     status?: ?string,
+    assignee?: ?string,
 };
 
 type CompareKeys = {
@@ -18,32 +19,51 @@ type CompareKeys = {
     dueDate: string,
     completedDate: string,
     status: string,
+    assignee: string,
 };
 
-
+// eslint-disable-next-line complexity
 function getConvertedValue(valueToConvert: any, key: string, onConvertValue: ConverterFn, compareKeys: CompareKeys) {
     let convertedValue;
-    if (key === compareKeys.eventDate || key === compareKeys.dueDate || key === compareKeys.completedDate) {
+
+    switch (key) {
+    case compareKeys.eventDate:
+    case compareKeys.dueDate:
+    case compareKeys.completedDate:
         convertedValue = onConvertValue(valueToConvert, elementTypes.DATE);
-    } else if (key === compareKeys.status) {
+        break;
+    case compareKeys.status:
         convertedValue = onConvertValue(valueToConvert, elementTypes.TEXT, eventStatusElement);
-    } else {
+        break;
+    case compareKeys.assignee:
+        convertedValue = valueToConvert.id;
+        break;
+    default:
         convertedValue = valueToConvert;
+        break;
     }
+
     return convertedValue;
 }
+
+
+// eslint-disable-next-line complexity
+function getCalculatedCompareKeys(compareKeysMapFromDefault: InputCompareKeys) {
+    return {
+        eventDate: compareKeysMapFromDefault.eventDate || 'eventDate',
+        dueDate: compareKeysMapFromDefault.dueDate || 'dueDate',
+        completedDate: compareKeysMapFromDefault.completedDate || 'completedDate',
+        status: compareKeysMapFromDefault.status || 'status',
+        assignee: compareKeysMapFromDefault.assignee || 'assignee',
+    };
+};
 
 export function convertMainEvent(
     event: Object,
     onConvertValue: ConverterFn,
     keyMap: Object = {},
     compareKeysMapFromDefault: InputCompareKeys = {}) {
-    const calculatedCompareKeys: CompareKeys = {
-        eventDate: compareKeysMapFromDefault.eventDate || 'eventDate',
-        dueDate: compareKeysMapFromDefault.dueDate || 'dueDate',
-        completedDate: compareKeysMapFromDefault.completedDate || 'completedDate',
-        status: compareKeysMapFromDefault.status || 'status',
-    };
+    const calculatedCompareKeys = getCalculatedCompareKeys(compareKeysMapFromDefault);
 
     return Object
         .keys(event)
@@ -62,6 +82,7 @@ const mapEventClientKeyToServerKey = {
     orgUnitId: 'orgUnit',
     trackedEntityInstanceId: 'trackedEntityInstance',
     enrollmentId: 'enrollment',
+    assignee: 'assignedUser',
 };
 
 export function convertMainEventClientToServerWithKeysMap(event: Object) {
@@ -75,6 +96,7 @@ const mapEventServerKeyToClientKey = {
     orgUnit: 'orgUnitId',
     trackedEntityInstance: 'trackedEntityInstanceId',
     enrollment: 'enrollmentId',
+    assignedUser: 'assignee',
 };
 
 export function convertMainEventServerToClientWithKeysMap(event: Object) {
