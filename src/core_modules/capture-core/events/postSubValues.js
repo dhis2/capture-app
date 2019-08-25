@@ -11,7 +11,7 @@ type InputClientEvent = {
 };
 
 type InputMainEvent = {
-    assignedUserId?: ?string,
+    assignee?: ?string,
 };
 
 type OutputClientEvent = {
@@ -20,26 +20,13 @@ type OutputClientEvent = {
     values: Object,
 };
 
-/*
-const valueGetterForSubvalueRequestByType = {
-    [elementTypes.USERNAME]: (inputValue: string) => inputValue,
-};
-
-function getSubValues(inputValues: Array<Object>) {
-    inputValues
-        .reduce(requestFiltersByType, event) => {
-            Object
-                .keys(event)
-        }, {});
-}
-*/
-
 function getUsersByKeyFromIds(ids: Set<string>) {
     const idsArray = [...ids];
     return getApi()
         .get('users', {
             filter: `id:in:[${idsArray.join()}]`,
             fields: 'id,displayName,userCredentials[username]',
+            paging: false,
         })
         .then((response) => {
             const users = response.users || [];
@@ -58,7 +45,7 @@ function getUsersByKeyFromIds(ids: Set<string>) {
 async function getMainSubValues(mainEvents: Array<InputMainEvent>) {
     const requestKeysByProp = mainEvents
         .reduce((accKeysByProp, mainEvent) => {
-            const assignedUserId = mainEvent.assignedUserId;
+            const assignedUserId = mainEvent.assignee;
             if (assignedUserId) {
                 accKeysByProp.assignee.add(assignedUserId);
             }
@@ -75,12 +62,12 @@ async function getMainSubValues(mainEvents: Array<InputMainEvent>) {
 function replaceMainValues(mainEvents: Array<InputMainEvent>, mainSubValues: Object) {
     return mainEvents
         .map((e) => {
-            if (e.assignedUserId) {
-                const user = mainSubValues.user[e.assignedUserId];
+            if (e.assignee) {
+                const user = mainSubValues.user[e.assignee];
                 if (!user) {
                     log.error(
                         errorCreator('no user object found for assigned user of event')({
-                            id: e.assignedUserId,
+                            id: e.assignee,
                         }),
                     );
                     return e;

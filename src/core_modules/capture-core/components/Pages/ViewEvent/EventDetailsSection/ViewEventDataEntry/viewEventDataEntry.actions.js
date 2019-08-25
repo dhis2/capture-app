@@ -1,15 +1,16 @@
 // @flow
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { actionCreator } from '../../../../../actions/actions.utils';
 import { RenderFoundation, Program } from '../../../../../metaData';
 import { viewEventIds } from '../eventDetails.actions';
 import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../../../DataEntries';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
-import { loadViewDataEntry } from '../../../../DataEntry/actions/dataEntryLoadView.actions';
+import { loadEditDataEntryAsync } from '../../../../DataEntry/templates/dataEntryLoadEdit.template';
 import { getRulesActionsForEvent } from '../../../../../rulesEngineActionsCreator';
 import elementTypeKeys from '../../../../../metaData/DataElement/elementTypes';
 import { getApi } from '../../../../../d2/d2Instance';
-import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
+import { convertClientToForm } from '../../../../../converters';
 import type { ClientEventContainer } from '../../../../../events/eventRequests';
 
 export const actionTypes = {
@@ -32,6 +33,7 @@ async function addSubValues(preDataEntryValues, preFormValues, formFoundation: R
             .get('users', {
                 filter: `userCredentials.username:in:[${usernamesArray.join()}]`,
                 fields: 'id,displayName,userCredentials[username]',
+                paging: false,
             })
             .then(response => response
                 .users
@@ -46,7 +48,10 @@ async function addSubValues(preDataEntryValues, preFormValues, formFoundation: R
     };
 
     if (usernames.size === 0) {
-        return null;
+        return {
+            dataEntryValues: preDataEntryValues,
+            formValues: preFormValues,
+        };
     }
 
     const users = await getUsers(usernames);
@@ -70,8 +75,13 @@ async function addSubValues(preDataEntryValues, preFormValues, formFoundation: R
         }, preFormValues);
 
     return {
+        dataEntryValues: preDataEntryValues,
         formValues,
     };
+}
+
+function getAssignee(clientAssignee: ?Object) {
+    return clientAssignee ? convertClientToForm(clientAssignee, elementTypeKeys.USERNAME) : clientAssignee;
 }
 
 export const loadViewEventDataEntry =
@@ -96,9 +106,10 @@ export const loadViewEventDataEntry =
                 onConvertOut: convertStatusOut,
             },
         ];
+
         const key = getDataEntryKey(dataEntryId, itemId);
-        const dataEntryActions = await
-        loadViewDataEntry(
+        const { actions: dataEntryActions, dataEntryValues, formValues } = await
+        loadEditDataEntryAsync(
             dataEntryId,
             itemId,
             eventContainer.event,
@@ -122,7 +133,10 @@ export const loadViewEventDataEntry =
                 eventDataForRulesEngine,
                 [eventDataForRulesEngine],
             ),
-            actionCreator(actionTypes.VIEW_EVENT_DATA_ENTRY_LOADED)(),
+            actionCreator(actionTypes.VIEW_EVENT_DATA_ENTRY_LOADED)({
+                loadedValues: { dataEntryValues, formValues, eventContainer },
+                assignee: getAssignee(eventContainer.event.assignee),
+            }),
         ];
     };
 

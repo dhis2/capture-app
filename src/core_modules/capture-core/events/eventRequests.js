@@ -59,7 +59,7 @@ const mapEventInputKeyToOutputKey = {
     orgUnit: 'orgUnitId',
     trackedEntityInstance: 'trackedEntityInstanceId',
     enrollment: 'enrollmentId',
-    assignedUser: 'assignedUserId',
+    assignedUser: 'assignee',
 };
 
 function getConvertedValue(valueToConvert: any, inputKey: string) {
@@ -75,7 +75,7 @@ function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
     return Object
         .keys(apiEvent)
         .reduce((accEvent, inputKey) => {
-            if (inputKey !== 'dataValues') {
+            if (inputKey !== 'dataValues' && inputKey !== 'assignedUserUsername') {
                 const valueToConvert = apiEvent[inputKey];
                 const convertedValue = getConvertedValue(valueToConvert, inputKey);
                 // $FlowSuppress
@@ -119,9 +119,9 @@ export async function getEvent(eventId: string): Promise<?ClientEventContainer> 
     const apiRes = await api
         .get(`events/${eventId}`);
 
-
-    const eventContainer = convertToClientEvent(apiRes);
-    return eventContainer;
+    const eventContainer = await convertToClientEvent(apiRes);
+    const eventContainerWithSubValues = eventContainer ? (await addPostSubValues([eventContainer]))[0] : eventContainer;
+    return eventContainerWithSubValues;
 }
 
 export async function getEvents(queryParams: ?Object) {

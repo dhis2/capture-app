@@ -13,6 +13,8 @@ type Props = {
     onSet: (user: User) => void,
     inputWrapperClasses: Object,
     focusInputOnMount: boolean,
+    exitBehaviour: 'selectBestChoice' | 'clear' | 'doNothing',
+    inputPlaceholder?: ?string,
 };
 
 type State = {
@@ -21,6 +23,12 @@ type State = {
     suggestionsError?: ?string,
     highlightedSuggestion?: ?User,
     inputKey: number,
+};
+
+const exitBehaviours = {
+    SELECT_BEST_CHOICE: 'selectBestChoice',
+    CLEAR: 'clear',
+    DO_NOTHING: 'doNothing',
 };
 
 class UserSearch extends React.Component<Props, State> {
@@ -70,6 +78,11 @@ class UserSearch extends React.Component<Props, State> {
         this.setState({
             inputKey: (currentKey + 1) % 2,
         });
+    }
+
+    clear() {
+        this.clearInput();
+        this.resetSuggestions();
     }
 
     setSuggestions(suggestions: Array<User>, searchValue: string) {
@@ -165,20 +178,47 @@ class UserSearch extends React.Component<Props, State> {
         }
     }
 
+    // eslint-disable-next-line complexity
     handleExitSearchFromInput = () => {
+        const { exitBehaviour } = this.props;
         const { suggestions } = this.state;
 
-        if (suggestions.length > 0) {
-            this.props.onSet(suggestions[0]);
-        } else {
-            this.clearInput();
+        switch (exitBehaviour) {
+        case exitBehaviours.SELECT_BEST_CHOICE:
+            if (suggestions.length > 0) {
+                this.props.onSet(suggestions[0]);
+            } else {
+                this.clearInput();
+                this.cancelablePromise && this.cancelablePromise.cancel();
+            }
+            break;
+        case exitBehaviours.CLEAR:
+            this.clear();
             this.cancelablePromise && this.cancelablePromise.cancel();
+            break;
+        case exitBehaviours.DO_NOTHING:
+        default:
+            break;
         }
     }
 
     handleExitSearchFromSuggestions = () => {
+        const { exitBehaviour } = this.props;
         const { highlightedSuggestion } = this.state;
-        this.props.onSet(highlightedSuggestion);
+
+        switch (exitBehaviour) {
+        case exitBehaviours.SELECT_BEST_CHOICE:
+            // $FlowSuppress
+            this.props.onSet(highlightedSuggestion);
+            break;
+        case exitBehaviours.CLEAR:
+            this.clear();
+            this.cancelablePromise && this.cancelablePromise.cancel();
+            break;
+        case exitBehaviours.DO_NOTHING:
+        default:
+            break;
+        }
     }
 
     handleHighlightNextSuggestion = () => {
@@ -219,7 +259,7 @@ class UserSearch extends React.Component<Props, State> {
 
     renderInput() {
         const { inputKey } = this.state;
-        const { inputWrapperClasses } = this.props;
+        const { inputWrapperClasses, inputPlaceholder } = this.props;
 
         return (
             <Input
@@ -231,6 +271,7 @@ class UserSearch extends React.Component<Props, State> {
                 onResetDisplayedHighlight={this.resetHighlighted}
                 onExitSearch={this.handleExitSearchFromInput}
                 inputWrapperClasses={inputWrapperClasses}
+                placeholder={inputPlaceholder}
             />
         );
     }

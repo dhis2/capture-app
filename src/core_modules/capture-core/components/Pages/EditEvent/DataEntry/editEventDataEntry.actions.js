@@ -1,7 +1,6 @@
 // @flow
 import { actionCreator, actionPayloadAppender } from '../../../../actions/actions.utils';
 import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
-import { loadEditDataEntry } from '../../../DataEntry/actions/dataEntryLoadEdit.actions';
 import {
     getRulesActionsForEvent,
 } from '../../../../rulesEngineActionsCreator';
@@ -15,8 +14,9 @@ import {
     convertStatusIn,
     convertStatusOut,
 } from '../../../DataEntries';
-
-import type { ClientEventContainer } from '../../../../events/eventRequests';
+import { getDataEntryMeta, validateDataEntryValues } from '../../../DataEntry/actions/dataEntryLoad.utils';
+import { loadEditDataEntry } from '../../../DataEntry/actions/dataEntry.actions';
+import { addFormData } from '../../../D2Form/actions/form.actions';
 
 export const batchActionTypes = {
     UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH: 'UpdateDataEntryFieldForEditSingleEventActionsBatch',
@@ -48,57 +48,93 @@ export const editEventIds = {
     itemId: 'editEvent',
 };
 
-export const openEventForEditInDataEntry =
-    (eventContainer: ClientEventContainer, orgUnit: Object, foundation: RenderFoundation, program: Program) => {
-        const dataEntryId = editEventIds.dataEntryId;
-        const itemId = editEventIds.itemId;
-        const dataEntryPropsToInclude = [
-            {
-                id: 'eventDate',
-                type: 'DATE',
-                validatorContainers: getEventDateValidatorContainers(),
-            },
-            {
-                clientId: 'geometry',
-                dataEntryId: 'geometry',
-                onConvertIn: getConvertGeometryIn(foundation),
-                onConvertOut: convertGeometryOut,
-            },
-            {
-                clientId: 'status',
-                dataEntryId: 'complete',
-                onConvertIn: convertStatusIn,
-                onConvertOut: convertStatusOut,
-            },
-        ];
-        const key = getDataEntryKey(dataEntryId, itemId);
-        const dataEntryActions =
-            loadEditDataEntry(
-                dataEntryId,
-                itemId,
-                eventContainer.event,
-                eventContainer.values,
-                dataEntryPropsToInclude,
-                foundation,
-                {
-                    eventId: eventContainer.event.eventId,
-                },
-            );
+function getLoadActions(
+    dataEntryId: string,
+    itemId: string,
+    dataEntryValues: Object,
+    formValues: Object,
+    dataEntryPropsToInclude: Array<Object>,
+    formFoundation: RenderFoundation,
+    extraProps: { [key: string]: any },
+) {
+    const key = getDataEntryKey(dataEntryId, itemId);
+    const dataEntryMeta = getDataEntryMeta(dataEntryPropsToInclude);
+    const dataEntryUI = validateDataEntryValues(dataEntryValues, dataEntryPropsToInclude);
 
-        const eventDataForRulesEngine = { ...eventContainer.event, ...eventContainer.values };
-        return [
-            ...dataEntryActions,
-            ...getRulesActionsForEvent(
-                program,
-                foundation,
-                key,
-                orgUnit,
-                eventDataForRulesEngine,
-                [eventDataForRulesEngine],
-            ),
-            actionCreator(actionTypes.OPEN_EVENT_FOR_EDIT_IN_DATA_ENTRY)(),
-        ];
-    };
+    return [
+        loadEditDataEntry({
+            key,
+            itemId,
+            dataEntryId,
+            dataEntryMeta,
+            dataEntryValues,
+            extraProps,
+            dataEntryUI,
+        }),
+        addFormData(key, formValues),
+    ];
+}
+
+export const openEventForEditInDataEntry = (
+    loadedValues: {
+        eventContainer: Object,
+        dataEntryValues: Object,
+        formValues: Object,
+    },
+    orgUnit: Object,
+    foundation: RenderFoundation,
+    program: Program,
+) => {
+    const dataEntryId = editEventIds.dataEntryId;
+    const itemId = editEventIds.itemId;
+    const dataEntryPropsToInclude = [
+        {
+            id: 'eventDate',
+            type: 'DATE',
+            validatorContainers: getEventDateValidatorContainers(),
+        },
+        {
+            clientId: 'geometry',
+            dataEntryId: 'geometry',
+            onConvertIn: getConvertGeometryIn(foundation),
+            onConvertOut: convertGeometryOut,
+        },
+        {
+            clientId: 'status',
+            dataEntryId: 'complete',
+            onConvertIn: convertStatusIn,
+            onConvertOut: convertStatusOut,
+        },
+    ];
+    const key = getDataEntryKey(dataEntryId, itemId);
+    const { eventContainer, dataEntryValues, formValues } = loadedValues;
+    const dataEntryActions =
+        getLoadActions(
+            dataEntryId,
+            itemId,
+            dataEntryValues,
+            formValues,
+            dataEntryPropsToInclude,
+            foundation,
+            {
+                eventId: eventContainer.event.eventId,
+            },
+        );
+
+    const eventDataForRulesEngine = { ...eventContainer.event, ...eventContainer.values };
+    return [
+        ...dataEntryActions,
+        ...getRulesActionsForEvent(
+            program,
+            foundation,
+            key,
+            orgUnit,
+            eventDataForRulesEngine,
+            [eventDataForRulesEngine],
+        ),
+        actionCreator(actionTypes.OPEN_EVENT_FOR_EDIT_IN_DATA_ENTRY)(),
+    ];
+};
 
 export const prerequisitesErrorOpeningEventForEditInDataEntry = (message: string) =>
     actionCreator(actionTypes.PREREQUISITES_ERROR_OPENING_EVENT_FOR_EDIT_IN_DATA_ENTRY)(message);

@@ -50,8 +50,6 @@ const Input = (props: Props) => {
             event.preventDefault();
         } else if (event.keyCode === 13) {
             onSelectSuggestion();
-        } else if (event.keyCode === 9) {
-            onSelectSuggestion();
         }
     }, [onHighlightSuggestion, onSelectSuggestion]);
     const handleBlur = React.useCallback((event) => {

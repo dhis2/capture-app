@@ -22,7 +22,7 @@ import {
     filteredSearchActionsForSearchBatch,
 } from '../actions/searchGroup.actionBatches';
 import { actionTypes as loadNewActionTypes } from '../actions/dataEntryLoadNew.actions';
-import { actionTypes as loadEditActionTypes } from '../actions/dataEntryLoadEdit.actions';
+import { actionTypes as loadEditActionTypes } from '../actions/dataEntry.actions';
 
 function getServerValues(
     updatedFormValues: Object,

@@ -88,17 +88,3 @@ const mapEventClientKeyToServerKey = {
 export function convertMainEventClientToServerWithKeysMap(event: Object) {
     return convertMainEvent(event, convertToServerValue, mapEventClientKeyToServerKey);
 }
-
-const mapEventServerKeyToClientKey = {
-    event: 'eventId',
-    program: 'programId',
-    programStage: 'programStageId',
-    orgUnit: 'orgUnitId',
-    trackedEntityInstance: 'trackedEntityInstanceId',
-    enrollment: 'enrollmentId',
-    assignedUser: 'assignee',
-};
-
-export function convertMainEventServerToClientWithKeysMap(event: Object) {
-    return convertMainEvent(event, convertToClientValue, mapEventServerKeyToClientKey);
-}

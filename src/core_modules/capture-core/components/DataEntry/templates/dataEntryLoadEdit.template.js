@@ -1,18 +1,14 @@
 // @flow
-import { actionCreator } from '../../../actions/actions.utils';
 import { addFormData } from '../../D2Form/actions/form.actions';
 import getDataEntryKey from '../common/getDataEntryKey';
-import { getDataEntryMeta, getDataEntryValues, getFormValues, validateDataEntryValues } from './dataEntryLoad.utils';
+import { loadEditDataEntry } from '../actions/dataEntry.actions';
+import { getDataEntryMeta, getDataEntryValues, getFormValues, validateDataEntryValues, getDataEntryNotes } from '../actions/dataEntryLoad.utils';
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 
-import type { DataEntryPropToInclude } from './dataEntryLoad.utils';
-
-export const actionTypes = {
-    LOAD_VIEW_DATA_ENTRY: 'LoadViewDataEntry',
-};
+import type { DataEntryPropToInclude } from '../actions/dataEntryLoad.utils';
 
 // eslint-disable-next-line complexity
-export async function loadViewDataEntry(
+export async function loadEditDataEntryAsync(
     dataEntryId: string,
     itemId: string,
     clientValuesForDataEntry: Object,
@@ -20,9 +16,11 @@ export async function loadViewDataEntry(
     dataEntryPropsToInclude?: ?Array<DataEntryPropToInclude>,
     formFoundation: RenderFoundation,
     extraProps?: ?{ [key: string]: any },
-    onAddSubValues?: (preDataEntryValues: Object, preFormValues: Object, formFoundation: RenderFoundation) => { formValues?: ?Object, dataEntryValues?: ?Object },
+    onAddSubValues?: (preDataEntryValues: Object, preFormValues: Object, formFoundation: RenderFoundation) => Promise<{ formValues: Object, dataEntryValues: Object }>,
 ) {
     const dataEntryMeta = dataEntryPropsToInclude ? getDataEntryMeta(dataEntryPropsToInclude) : {};
+    const dataEntryNotes = getDataEntryNotes(clientValuesForDataEntry);
+
     const preDataEntryValues =
         dataEntryPropsToInclude ? getDataEntryValues(dataEntryPropsToInclude, clientValuesForDataEntry) : {};
     const preFormValues = getFormValues(clientValuesForForm, formFoundation);
@@ -35,16 +33,21 @@ export async function loadViewDataEntry(
     const dataEntryUI =
         dataEntryPropsToInclude ? validateDataEntryValues(dataEntryValues, dataEntryPropsToInclude) : {};
 
-    return [
-        actionCreator(actionTypes.LOAD_VIEW_DATA_ENTRY)({
-            key,
-            itemId,
-            dataEntryId,
-            dataEntryMeta,
-            dataEntryValues,
-            extraProps,
-            dataEntryUI,
-        }),
-        addFormData(key, formValues),
-    ];
+    return {
+        actions: [
+            loadEditDataEntry({
+                key,
+                itemId,
+                dataEntryId,
+                dataEntryMeta,
+                dataEntryValues,
+                dataEntryNotes,
+                extraProps,
+                dataEntryUI,
+            }),
+            addFormData(key, formValues),
+        ],
+        dataEntryValues,
+        formValues,
+    };
 }

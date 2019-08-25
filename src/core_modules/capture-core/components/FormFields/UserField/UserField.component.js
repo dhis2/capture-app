@@ -64,6 +64,7 @@ const UserField = (props: Props) => {
                 onSet={handleSet}
                 inputWrapperClasses={classes}
                 focusInputOnMount={focusSearchInput.current}
+                exitBehaviour="selectBestChoice"
             />
         </div>
     );

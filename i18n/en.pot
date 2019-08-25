@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-08-23T11:38:28.404Z\n"
-"PO-Revision-Date: 2019-08-23T11:38:28.404Z\n"
+"POT-Creation-Date: 2019-08-25T18:26:29.563Z\n"
+"PO-Revision-Date: 2019-08-25T18:26:29.563Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -569,6 +569,15 @@ msgstr ""
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
+msgstr ""
+
+msgid "Assign"
+msgstr ""
+
+msgid "Event assigned to {{name}}"
+msgstr ""
+
+msgid "Search for user"
 msgstr ""
 
 msgid "Feedbacks"

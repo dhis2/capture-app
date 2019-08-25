@@ -4,6 +4,7 @@ import { updateEventListAfterSaveOrUpdateSingleEvent } from './mainPage.actions'
 import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../NewEvent';
 import { actionTypes as editEventDataEntryActionTypes } from '../EditEvent/DataEntry/editEventDataEntry.actions';
 import { actionTypes as viewEventEditEventDataEntryActionTypes } from '../ViewEvent/EventDetailsSection/EditEventDataEntry/editEventDataEntry.actions';
+import { assigneeSectionActionTypes } from '../ViewEvent/RightColumn/AssigneeSection';
 import isSelectionsEqual from '../../App/isSelectionsEqual';
 
 
@@ -34,9 +35,10 @@ export const updateEventListAfterUpdateEventEpic = (action$: ActionsObservable, 
     action$
         .ofType(
             viewEventEditEventDataEntryActionTypes.EDIT_EVENT_DATA_ENTRY_SAVED,
+            assigneeSectionActionTypes.VIEW_EVENT_ASSIGNEE_SAVE_COMPLETED,
         ).filter((action) => {
             const state = store.getState();
             const currentPageIsMainPage = state.app.page === null;
-            return selectionsFilter(state, action) && currentPageIsMainPage;
+            return currentPageIsMainPage && selectionsFilter(state, action);
         })
         .map(() => updateEventListAfterSaveOrUpdateSingleEvent());

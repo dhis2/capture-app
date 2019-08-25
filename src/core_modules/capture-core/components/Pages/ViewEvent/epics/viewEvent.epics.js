@@ -105,6 +105,7 @@ export const openViewPageLocationChangeEpic = (action$: InputObservable) =>
 export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
     action$.ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE)
+        // eslint-disable-next-line complexity
         .map(() => {
             const state = store.getState();
 

@@ -70,7 +70,7 @@ const SearchSuggestion = (props: Props) => {
             onHighlightNext(user);
         } else if (event.keyCode === 38) {
             onHighlightPrev(user);
-        } else if (event.keyCode === 13 || event.keyCode === 9) {
+        } else if (event.keyCode === 13) {
             onSelect(user);
         }
         event.stopPropagation();
@@ -96,7 +96,7 @@ const SearchSuggestion = (props: Props) => {
         <div
             name={suggestionName}
             role="button"
-            tabIndex={0}
+            tabIndex={-1}
             ref={handleRef}
             className={defaultClasses.suggestion}
             onKeyDown={handleKeyDown}
