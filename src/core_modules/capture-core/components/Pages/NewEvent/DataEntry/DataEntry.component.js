@@ -341,6 +341,10 @@ const buildAssigneeSettingsFn = () => {
         );
 
     return {
+        isApplicable: (props: Object) => {
+            const enableUserAssignment = props.stage && props.stage.enableUserAssignment;
+            return !!enableUserAssignment;
+        },
         getComponent: () => assigneeComponent,
         getComponentProps: (props: Object) => ({
         }),
@@ -405,7 +409,7 @@ const dataEntryFilterProps = (props: Object) => {
 
 
 const CleanUpHOC = withCleanUpHOC()(withFilterProps(dataEntryFilterProps)(DataEntry));
-const AssigneeField = withDataEntryField(buildAssigneeSettingsFn())(CleanUpHOC);
+const AssigneeField = withDataEntryFieldIfApplicable(buildAssigneeSettingsFn())(CleanUpHOC);
 const RelationshipField = withDataEntryFieldIfApplicable(buildRelationshipsSettingsFn())(AssigneeField);
 const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);

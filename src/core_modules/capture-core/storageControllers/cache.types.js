@@ -97,6 +97,7 @@ export type CachedProgramStage = {
     dataEntryForm: ?CachedDataEntryForm,
     featureType: ?string,
     validationStrategy: string,
+    enableUserAssignment?: ?boolean,
 };
 
 export type CachedCategoryOption = {

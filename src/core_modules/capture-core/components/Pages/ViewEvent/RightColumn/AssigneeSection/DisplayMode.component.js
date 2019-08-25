@@ -37,12 +37,20 @@ type Props = {
     assignee: ?User,
     onEdit: () => void,
     classes: Object,
+    eventAccess: { read: boolean, write: boolean },
 };
 
 const DisplayMode = (props: Props) => {
-    const { assignee, onEdit, classes } = props;
+    const { eventAccess, assignee, onEdit, classes } = props;
 
     if (!assignee) {
+        if (!eventAccess.write) {
+            return (
+                <div>
+                    {i18n.t('No one is assigned to this event')}
+                </div>
+            );
+        }
         return (
             <div>
                 <Button
@@ -67,15 +75,18 @@ const DisplayMode = (props: Props) => {
             <div
                 className={classes.iconContainer}
             >
-                <IconButton
-                    onClick={onEdit}
-                    className={classes.editButton}
-                >
-                    <EditIcon />
-                </IconButton>
+                {eventAccess.write ?
+                    (
+                        <IconButton
+                            onClick={onEdit}
+                            className={classes.editButton}
+                        >
+                            <EditIcon />
+                        </IconButton>
+                    ) : null}
             </div>
         </div>
     );
-}
+};
 
 export default withStyles(getStyles)(DisplayMode);

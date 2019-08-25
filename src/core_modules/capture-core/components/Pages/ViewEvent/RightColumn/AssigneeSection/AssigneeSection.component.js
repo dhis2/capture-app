@@ -12,6 +12,7 @@ import { ProgramStage } from '../../../../../metaData';
 const LoadingContents = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Contents);
 
 type Props = {
+    programStage: ProgramStage,
     classes: Object,
 }
 
@@ -31,7 +32,12 @@ class AssigneeSection extends React.Component<Props> {
     }
 
     render() {
-        const { ...passOnProps } = this.props;
+        const { programStage, ...passOnProps } = this.props;
+
+        if (!programStage.enableUserAssignment) {
+            return null;
+        }
+
         return (
             <ViewEventSection
                 collapsable
