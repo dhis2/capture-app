@@ -20,7 +20,6 @@ export function loadEditDataEntry(
     formFoundation: RenderFoundation,
     extraProps?: ?{ [key: string]: any },
 ) {
-    debugger;
     const dataEntryMeta = dataEntryPropsToInclude ? getDataEntryMeta(dataEntryPropsToInclude) : {};
     const dataEntryValues =
         dataEntryPropsToInclude ? getDataEntryValues(dataEntryPropsToInclude, clientValuesForDataEntry) : {};

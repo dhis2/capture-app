@@ -60,13 +60,13 @@ export const initEventWorkingListAsync = (
 ): Promise<ReduxAction<any, any>> => {
     const program = getEventProgramThrowIfNotFound(commonQueryData.programId);
     const stage = program.stage;
-    const workingListConfig: ?WorkingListConfig = convertToEventWorkingListConfig(config, stage.stageForm);
+    const workingListConfig: ?WorkingListConfig = convertToEventWorkingListConfig(config, stage);
 
     const queryData = getQueryDataFromConfig(workingListConfig) || {};
     const queryDataWithDefaults = addDefaultsToQueryData(queryData);
     const customColumnOrder = workingListConfig && workingListConfig.columnOrder;
     const columnOrder = customColumnOrder || [
-        ...getDefaultMainConfig(),
+        ...getDefaultMainConfig(stage),
         ...getMetaDataConfig(stage.stageForm),
     ];
 

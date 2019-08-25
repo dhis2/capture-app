@@ -2,7 +2,7 @@
 import elementTypes from '../metaData/DataElement/elementTypes';
 import { convertValue as convertToServerValue } from '../converters/clientToServer';
 import { convertValue as convertToClientValue } from '../converters/serverToClient';
-import eventStatusElement from './eventStatusElement';
+import eventStatusElement from '../eventStatusElement';
 
 type ConverterFn = (type: $Values<typeof elementTypes>, value: any) => any;
 

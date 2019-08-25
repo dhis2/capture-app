@@ -16,6 +16,7 @@ import {
     RenderFoundation,
     OptionSet,
     Option,
+    ProgramStage,
 } from '../../../../../metaData';
 import eventStatusElement from '../../../../../events/eventStatusElement';
 import {
@@ -152,7 +153,7 @@ const getMainDataFilters = (eventQueryCriteria: EventQueryCriteria) => {
 
 export function convertToEventWorkingListConfig(
     eventQueryCriteria: ?EventQueryCriteria,
-    stageForm: RenderFoundation,
+    stage: ProgramStage,
 ) {
     if (!eventQueryCriteria) {
         return undefined;
@@ -161,11 +162,11 @@ export function convertToEventWorkingListConfig(
     const { assignedUserMode, assignedUsers } = eventQueryCriteria;
     const { sortById, sortByDirection } = getSortOrder(eventQueryCriteria.order) || {};
     const filters = [
-        ...getDataElementFilters(eventQueryCriteria.dataFilters, stageForm),
+        ...getDataElementFilters(eventQueryCriteria.dataFilters, stage.stageForm),
         ...getMainDataFilters(eventQueryCriteria),
     ];
 
-    const columnOrder = getColumnsConfiguration(stageForm, eventQueryCriteria.displayColumnOrder);
+    const columnOrder = getColumnsConfiguration(stage, eventQueryCriteria.displayColumnOrder);
 
     return {
         filters,

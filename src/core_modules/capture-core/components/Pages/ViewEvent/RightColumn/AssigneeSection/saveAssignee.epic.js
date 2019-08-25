@@ -2,7 +2,7 @@
 import { actionTypes, saveAssignee } from './assigneeSection.actions';
 import { getEventProgramThrowIfNotFound } from '../../../../../metaData';
 import { convertValue as convertToServerValue } from '../../../../../converters/clientToServer';
-import { convertMainEventClientToServerWithKeysMap } from '../../../../../events/mainEventConverter';
+import { convertMainEventClientToServer } from '../../../../../events/mainConverters';
 
 export const saveAssigneeEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
@@ -15,7 +15,7 @@ export const saveAssigneeEpic = (action$: InputObservable, store: ReduxStore) =>
             const program = getEventProgramThrowIfNotFound(clientMainValues.programId);
             const formFoundation = program.stage.stageForm;
             const formServerValues = formFoundation.convertValues(clientValues, convertToServerValue);
-            const mainDataServerValues: Object = convertMainEventClientToServerWithKeysMap(clientMainValues);
+            const mainDataServerValues: Object = convertMainEventClientToServer(clientMainValues);
 
             const serverData = {
                 ...mainDataServerValues,

@@ -16,7 +16,7 @@ export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
             const payload = action.payload;
             const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.eventId);
             const formFoundation = payload.formFoundation;
-
+            debugger;
             const { formClientValues, mainDataClientValues } = getNewEventClientValues(state, dataEntryKey, formFoundation);
 
             const serverData = getNewEventServerData(state, formFoundation, formClientValues, mainDataClientValues);

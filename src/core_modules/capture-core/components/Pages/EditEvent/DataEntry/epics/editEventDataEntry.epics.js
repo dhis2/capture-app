@@ -34,7 +34,6 @@ export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
         editEventActionTypes.START_OPEN_EVENT_FOR_EDIT,
     )
         .map((action) => {
-            debugger;
             const eventContainer = action.payload.eventContainer;
             const orgUnit = action.payload.orgUnit;
 

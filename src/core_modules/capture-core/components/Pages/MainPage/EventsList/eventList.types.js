@@ -45,4 +45,5 @@ export type ColumnConfig = {
     id: string,
     visible: boolean,
     isMainProperty?: ?boolean,
+    nameInConfig?: ?string,
 };

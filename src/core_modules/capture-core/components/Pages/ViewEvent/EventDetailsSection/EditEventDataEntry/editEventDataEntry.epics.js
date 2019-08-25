@@ -7,7 +7,7 @@ import { getProgramAndStageFromEvent } from '../../../../../metaData';
 import { openEventForEditInDataEntry } from '../../../EditEvent/DataEntry/editEventDataEntry.actions';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import convertDataEntryToClientValues from '../../../../DataEntry/common/convertDataEntryToClientValues';
-import { convertMainEventClientToServerWithKeysMap } from '../../../../../events/mainEventConverter';
+import { convertMainEventClientToServer } from '../../../../../events/mainConverters';
 
 import {
     actionTypes,
@@ -73,7 +73,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
 
             const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues, notes: [] };
             const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
-            const mainDataServerValues: Object = convertMainEventClientToServerWithKeysMap(mainDataClientValues);
+            const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
 
             if (mainDataServerValues.status === 'COMPLETED' && !prevEventMainData.completedDate) {
                 mainDataServerValues.completedDate = moment().format('YYYY-MM-DD');
