@@ -33,8 +33,9 @@ export const getDefaultMainConfig = (stage: ProgramStage) => {
     if (stage.enableUserAssignment) {
         const assigneeField = {
             id: mainPropertyNames.ASSIGNEE,
-            nameInConfig: 'assignedUser',
-            header: 'Assigned User',
+            type: 'ASSIGNEE',
+            apiName: 'assignedUser',
+            header: 'Assigned to',
             visible: true,
             isMainProperty: true,
         };

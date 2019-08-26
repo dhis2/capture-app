@@ -37,8 +37,8 @@ const getCustomColumnsConfiguration = (
 
     const defaultConfigOrderAsHashMapByConfigName = defaultConfig
         .reduce((acc, orderElement) => {
-            if (orderElement.nameInConfig) {
-                acc.set(orderElement.nameInConfig, orderElement);
+            if (orderElement.apiName) {
+                acc.set(orderElement.apiName, orderElement);
             }
             return acc;
         }, new Map());

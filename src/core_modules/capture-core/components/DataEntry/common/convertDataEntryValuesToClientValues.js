@@ -12,7 +12,6 @@ export default function convertDataEntryValuesToClientValues(
     previousData: Object,
     foundation: RenderFoundation,
 ) {
-    debugger;
     if (!dataEntryValues) {
         return null;
     }

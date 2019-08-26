@@ -11,6 +11,7 @@ export const filterTypesArray = [
     elementTypes.DATE,
     elementTypes.BOOLEAN,
     elementTypes.TRUE_ONLY,
+    'ASSIGNEE',
 ];
 
 export const filterTypesObject = filterTypesArray.reduce((accFilterTypesObject, type) => {

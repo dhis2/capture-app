@@ -39,7 +39,7 @@ const EditMode = (props: Props) => {
                     inputWrapperClasses={{}}
                     focusInputOnMount
                     exitBehaviour="doNothing"
-                    inputPlaceholder={i18n.t('Search for user')}
+                    inputPlaceholderText={i18n.t('Search for user')}
                     {...passOnProps}
                 />
             </div>

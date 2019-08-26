@@ -8,10 +8,15 @@ type Props = {
     suggestions: Array<User>,
     query: string,
     highlighted: ?User,
+    useUpwardList?: ?boolean,
 };
 
 class UserSearchSuggestions extends React.Component<Props> {
-    static renderSuggestions(suggestions: Array<User>, query: string, highlighted: User, passOnProps: Object) {
+    static renderSuggestions(
+        suggestions: Array<User>,
+        query: string,
+        highlighted: User,
+        passOnProps: Object) {
         const suggestionElements = suggestions
             .map(u => (
                 <SearchSuggestion
@@ -24,10 +29,12 @@ class UserSearchSuggestions extends React.Component<Props> {
             );
 
         return (
-            <div
-                className={defaultClasses.list}
-            >
-                {suggestionElements}
+            <div>
+                <div
+                    className={passOnProps.useUpwardList ? defaultClasses.listUp : defaultClasses.list}
+                >
+                    {suggestionElements}
+                </div>
             </div>
         );
     }

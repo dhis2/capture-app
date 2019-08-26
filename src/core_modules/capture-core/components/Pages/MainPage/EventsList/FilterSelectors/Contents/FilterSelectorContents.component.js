@@ -14,6 +14,7 @@ import DateFilter from '../../../../../FiltersForTypes/Date/DateFilter.component
 import BooleanFilter from '../../../../../FiltersForTypes/Boolean/BooleanFilter.component';
 import TrueOnlyFilter from '../../../../../FiltersForTypes/TrueOnly/TrueOnlyFilter.component';
 import OptionSetFilter from '../../../../../FiltersForTypes/OptionSet/OptionSetFilter.component';
+import { AssigneeFilter } from '../../../../../FiltersForTypes';
 
 import OptionSet from '../../../../../../metaData/OptionSet/OptionSet';
 
@@ -42,6 +43,7 @@ class FilterSelectorContents extends React.PureComponent<Props> {
         [filterTypesObject.DATE]: DateFilter,
         [filterTypesObject.BOOLEAN]: BooleanFilter,
         [filterTypesObject.TRUE_ONLY]: TrueOnlyFilter,
+        [filterTypesObject.ASSIGNEE]: AssigneeFilter,
     };
 
     static hasStylesHOC = [
@@ -53,6 +55,7 @@ class FilterSelectorContents extends React.PureComponent<Props> {
         filterTypesObject.DATE,
         filterTypesObject.BOOLEAN,
         filterTypesObject.TRUE_ONLY,
+        filterTypesObject.ASSIGNEE,
     ];
 
     static getOptionSetComponent() {

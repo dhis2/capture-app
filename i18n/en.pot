@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-08-25T19:00:04.115Z\n"
-"PO-Revision-Date: 2019-08-25T19:00:04.115Z\n"
+"POT-Creation-Date: 2019-08-26T23:12:18.699Z\n"
+"PO-Revision-Date: 2019-08-26T23:12:18.699Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -171,6 +171,21 @@ msgid "Data for offline list not present"
 msgstr ""
 
 msgid "Close"
+msgstr ""
+
+msgid "Search For user"
+msgstr ""
+
+msgid "Me"
+msgstr ""
+
+msgid "Anyone"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Select user"
 msgstr ""
 
 msgid "to"

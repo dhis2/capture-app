@@ -2,6 +2,7 @@
 import * as React from 'react';
 import parse from 'autosuggest-highlight/parse';
 import MenuItem from '@material-ui/core/MenuItem';
+import classNames from 'classnames';
 import SearchContext from './Search.context';
 import defaultClasses from './searchSuggestion.module.css';
 import type { User } from './types';
@@ -15,6 +16,7 @@ type Props = {
     onSelect: (user: User) => void,
     onExitSearch: (use: User) => void,
     suggestionRef: (ref: ?HTMLElement, user: User) => void,
+    useUpwardList?: ?boolean,
 };
 
 function match(text, query) {
@@ -57,6 +59,7 @@ const SearchSuggestion = (props: Props) => {
         suggestionRef,
         onSelect,
         onExitSearch,
+        useUpwardList,
     } = props;
 
     const { inputName, suggestionName } = React.useContext(SearchContext);
@@ -65,10 +68,11 @@ const SearchSuggestion = (props: Props) => {
     const matches = match(userText, query);
     const parts = parse(userText, matches);
 
+    // eslint-disable-next-line complexity
     const handleKeyDown = React.useCallback((event) => {
-        if (event.keyCode === 40) {
+        if ((event.keyCode === 40 && !useUpwardList) || (event.keyCode === 38 && useUpwardList)) {
             onHighlightNext(user);
-        } else if (event.keyCode === 38) {
+        } else if ((event.keyCode === 38 && !useUpwardList) || (event.keyCode === 40 && useUpwardList)) {
             onHighlightPrev(user);
         } else if (event.keyCode === 13) {
             onSelect(user);
@@ -98,7 +102,7 @@ const SearchSuggestion = (props: Props) => {
             role="button"
             tabIndex={-1}
             ref={handleRef}
-            className={defaultClasses.suggestion}
+            className={useUpwardList ? classNames(defaultClasses.suggestion, defaultClasses.suggestionInUpList) : defaultClasses.suggestion}
             onKeyDown={handleKeyDown}
             onClick={handleClick}
             onBlur={handleBlur}

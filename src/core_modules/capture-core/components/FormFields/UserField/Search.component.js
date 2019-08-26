@@ -14,7 +14,8 @@ type Props = {
     inputWrapperClasses: Object,
     focusInputOnMount: boolean,
     exitBehaviour: 'selectBestChoice' | 'clear' | 'doNothing',
-    inputPlaceholder?: ?string,
+    inputPlaceholderText?: ?string,
+    useUpwardList?: ?boolean,
 };
 
 type State = {
@@ -259,7 +260,7 @@ class UserSearch extends React.Component<Props, State> {
 
     renderInput() {
         const { inputKey } = this.state;
-        const { inputWrapperClasses, inputPlaceholder } = this.props;
+        const { inputWrapperClasses, inputPlaceholderText, useUpwardList } = this.props;
 
         return (
             <Input
@@ -271,13 +272,15 @@ class UserSearch extends React.Component<Props, State> {
                 onResetDisplayedHighlight={this.resetHighlighted}
                 onExitSearch={this.handleExitSearchFromInput}
                 inputWrapperClasses={inputWrapperClasses}
-                placeholder={inputPlaceholder}
+                placeholder={inputPlaceholderText}
+                useUpwardList={useUpwardList}
             />
         );
     }
 
     renderSuggestions() {
         const { suggestions, searchValue, highlightedSuggestion } = this.state;
+        const { useUpwardList } = this.props;
 
         return (
             <SearchSuggestions
@@ -289,6 +292,7 @@ class UserSearch extends React.Component<Props, State> {
                 onHighlightPrev={this.handleHighlightPrevSuggestion}
                 onSelect={this.handleSuggestionSelect}
                 onExitSearch={this.handleExitSearchFromSuggestions}
+                useUpwardList={useUpwardList}
             />
         );
     }

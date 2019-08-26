@@ -13,6 +13,7 @@ type Props = {
     onSelectSuggestion: () => void,
     onResetDisplayedHighlight: () => void,
     onExitSearch: () => void,
+    useUpwardList?: ?boolean,
 };
 
 const isSuggestionBlurTarget = (target, suggestionName) => {
@@ -37,14 +38,17 @@ const Input = (props: Props) => {
         onExitSearch,
         inputWrapperClasses,
         inputDomRef,
+        useUpwardList,
         ...passOnProps
     } = props;
 
     const { inputName, suggestionName } = React.useContext(SearchContext);
 
     const handleUpdateValue = React.useCallback(event => onUpdateValue(event.currentTarget.value), [onUpdateValue]);
+
+    // eslint-disable-next-line complexity
     const handleKeyDown = React.useCallback((event) => {
-        if (event.keyCode === 40) {
+        if ((event.keyCode === 40 && !useUpwardList) || (event.keyCode === 38 && useUpwardList)) {
             onHighlightSuggestion();
             event.stopPropagation();
             event.preventDefault();

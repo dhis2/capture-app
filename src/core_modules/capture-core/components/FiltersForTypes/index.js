@@ -13,3 +13,5 @@ export {
 } from './OptionSet/getOptionSetFilterData';
 export { default as getTextFilterData } from './Text/getTextFilterData';
 export { default as getTrueOnlyFilterData } from './TrueOnly/getTrueOnlyFilterData';
+
+export { default as AssigneeFilter } from './Assignee/AssigneeFilter.component';

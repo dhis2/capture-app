@@ -27,8 +27,8 @@ type Props = {
         unFocus?: string,
     },
     onSelect: (value: any) => void,
-    onSetFocus: () => void,
-    onRemoveFocus: () => void,
+    onSetFocus?: () => void,
+    onRemoveFocus?: () => void,
     disabled?: ?boolean,
 };
 

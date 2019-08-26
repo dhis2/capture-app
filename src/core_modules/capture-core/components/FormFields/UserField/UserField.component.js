@@ -19,12 +19,22 @@ type Props = {
     value: ?User,
     onSet: (user?: User) => void,
     classes: Object,
+    useUpwardSuggestions?: ?boolean,
+    focusOnMount?: ?boolean,
+    inputPlaceholderText?: ?string,
 };
 
 const UserField = (props: Props) => {
-    const { classes, value, onSet } = props;
-    const focusSearchInput = React.useRef(false);
-    const focusSelectedInput = React.useRef(false);
+    const {
+        classes,
+        value,
+        onSet,
+        useUpwardSuggestions,
+        focusOnMount = false,
+        inputPlaceholderText,
+    } = props;
+    const focusSearchInput = React.useRef(focusOnMount);
+    const focusSelectedInput = React.useRef(focusOnMount);
 
     React.useEffect(() => {
         if (focusSearchInput) {
@@ -64,6 +74,8 @@ const UserField = (props: Props) => {
                 onSet={handleSet}
                 inputWrapperClasses={classes}
                 focusInputOnMount={focusSearchInput.current}
+                useUpwardList={useUpwardSuggestions}
+                inputPlaceholderText={inputPlaceholderText}
                 exitBehaviour="selectBestChoice"
             />
         </div>
