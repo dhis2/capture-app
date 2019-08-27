@@ -1,6 +1,7 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { pipe } from 'capture-core-utils';
+import log from 'loglevel';
+import { pipe, errorCreator } from 'capture-core-utils';
 import {
     getBooleanFilterData,
     getMultiSelectOptionSetFilterData,
@@ -9,6 +10,8 @@ import {
     getTextFilterData,
     getTrueOnlyFilterData,
     getDateFilterData,
+    getAssigneeFilterData,
+    assigneeFilterModeKeys,
 } from '../../../../FiltersForTypes';
 import {
     dataElementTypes as elementTypes,
@@ -24,6 +27,7 @@ import {
 } from '../FilterSelectors/filterSelector.const';
 import { convertServerToClient, convertClientToForm } from '../../../../../converters';
 import { getColumnsConfiguration } from './getColumnsConfiguration';
+import { getApi } from '../../../../../d2/d2Instance';
 import type { DataFilter, EventQueryCriteria } from '../eventList.types';
 
 const booleanOptionSet = new OptionSet('booleanOptionSet', [
@@ -94,6 +98,51 @@ const getDateFilter = (filter: Object) => {
     };
 };
 
+const getUser = (userId: string) => {
+    return getApi()
+        .get(`users/${userId}`, { fields: 'id,name,userCredentials[username]' })
+        .then((user: Object) => ({
+            id: user.id,
+            name: user.name,
+            username: user.userCredentials.username,
+        }))
+        .catch((error) => {
+            log.error(
+                errorCreator('An error occured retrieving assignee user')({ error, userId }),
+            );
+            return null;
+        });
+};
+
+// eslint-disable-next-line complexity
+const getAssigneeFilter = async (
+    assignedUserMode: $Values<typeof assigneeFilterModeKeys>,
+    assignedUsers: ?Array<string>,
+) => {
+    const value = {
+        mode: assignedUserMode,
+        provided: undefined,
+    };
+
+    if (assignedUserMode === assigneeFilterModeKeys.PROVIDED) {
+        const assignedUserId = assignedUsers && assignedUsers.length > 0 && assignedUsers[0];
+        if (!assignedUserId) {
+            return undefined;
+        }
+
+        const user = await getUser(assignedUserId);
+        if (!user) {
+            return undefined;
+        }
+        value.provided = user;
+    }
+
+    return {
+        ...getAssigneeFilterData(value),
+        value,
+    };
+};
+
 const getFilterByType = {
     [elementTypes.TEXT]: getTextFilter,
     [elementTypes.NUMBER]: getNumericFilter,
@@ -139,8 +188,8 @@ const getDataElementFilters = (filters: ?Array<DataFilter>, stageForm: RenderFou
     }).filter(clientFilter => clientFilter);
 };
 
-const getMainDataFilters = (eventQueryCriteria: EventQueryCriteria) => {
-    const { eventDate, status } = eventQueryCriteria;
+const getMainDataFilters = async (eventQueryCriteria: EventQueryCriteria) => {
+    const { eventDate, status, assignedUserMode, assignedUsers } = eventQueryCriteria;
     const filters = [];
     if (status) {
         filters.push({ id: 'status', ...getSingleSelectOptionSetFilter({ eq: status }, eventStatusElement) });
@@ -148,10 +197,13 @@ const getMainDataFilters = (eventQueryCriteria: EventQueryCriteria) => {
     if (eventDate) {
         filters.push({ id: 'eventDate', ...getDateFilter(eventDate) });
     }
+    if (assignedUserMode) {
+        filters.push({ id: 'assignee', ...(await getAssigneeFilter(assignedUserMode, assignedUsers)) });
+    }
     return filters;
 };
 
-export function convertToEventWorkingListConfig(
+export async function convertToEventWorkingListConfig(
     eventQueryCriteria: ?EventQueryCriteria,
     stage: ProgramStage,
 ) {
@@ -159,11 +211,10 @@ export function convertToEventWorkingListConfig(
         return undefined;
     }
 
-    const { assignedUserMode, assignedUsers } = eventQueryCriteria;
     const { sortById, sortByDirection } = getSortOrder(eventQueryCriteria.order) || {};
     const filters = [
         ...getDataElementFilters(eventQueryCriteria.dataFilters, stage.stageForm),
-        ...getMainDataFilters(eventQueryCriteria),
+        ...(await getMainDataFilters(eventQueryCriteria)),
     ];
 
     const columnOrder = getColumnsConfiguration(stage, eventQueryCriteria.displayColumnOrder);
@@ -173,7 +224,5 @@ export function convertToEventWorkingListConfig(
         columnOrder,
         sortById,
         sortByDirection,
-        assignedUserMode,
-        assignedUsers,
     };
 }
