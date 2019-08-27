@@ -134,12 +134,6 @@ msgstr ""
 msgid "Abort"
 msgstr ""
 
-msgid "Add comment"
-msgstr ""
-
-msgid "Write comment"
-msgstr ""
-
 msgid "Back to form"
 msgstr ""
 
@@ -308,7 +302,13 @@ msgstr ""
 msgid "Syncing"
 msgstr ""
 
+msgid "Add comment"
+msgstr ""
+
 msgid "You dont have access to write comments"
+msgstr ""
+
+msgid "Write comment"
 msgstr ""
 
 msgid "Basic info"
