@@ -2,6 +2,7 @@
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { pipe, errorCreator } from 'capture-core-utils';
+import { canViewOtherUsers } from '../../../../../d2';
 import {
     getBooleanFilterData,
     getMultiSelectOptionSetFilterData,
@@ -197,7 +198,7 @@ const getMainDataFilters = async (eventQueryCriteria: EventQueryCriteria) => {
     if (eventDate) {
         filters.push({ id: 'eventDate', ...getDateFilter(eventDate) });
     }
-    if (assignedUserMode) {
+    if (assignedUserMode && canViewOtherUsers()) {
         filters.push({ id: 'assignee', ...(await getAssigneeFilter(assignedUserMode, assignedUsers)) });
     }
     return filters;

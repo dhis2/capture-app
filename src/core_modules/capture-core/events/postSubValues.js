@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { getApi } from '../d2/d2Instance';
+import { getApi, canViewOtherUsers } from '../d2/d2Instance';
 
 type InputClientEvent = {
     id: string,
@@ -82,6 +82,10 @@ function replaceMainValues(mainEvents: Array<InputMainEvent>, mainSubValues: Obj
 }
 
 async function addMainSubValues(mainEvents: Array<InputMainEvent>) {
+    // Cheating a bit here. Can not do this when other subvalues are retrieved through these methods
+    if (!canViewOtherUsers()) {
+        return mainEvents;
+    }
     const mainSubValues = await getMainSubValues(mainEvents);
     return replaceMainValues(mainEvents, mainSubValues);
 }

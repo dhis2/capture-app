@@ -1,4 +1,5 @@
 // @flow
+import { canViewOtherUsers } from '../../d2';
 import { convertClientToServer } from '../../converters';
 import { convertMainEvent } from './mainEventConverter';
 import elementTypeKeys from '../../metaData/DataElement/elementTypes';
@@ -25,7 +26,7 @@ export function convertMainEventClientToServer(event: Object) {
             convertedValue = convertClientToServer(value, elementTypeKeys.DATE);
             break;
         case 'assignee':
-            convertedValue = value.id;
+            convertedValue = canViewOtherUsers() ? value && value.id : value;
             break;
         default:
             convertedValue = value;
