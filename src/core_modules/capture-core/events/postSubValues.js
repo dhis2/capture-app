@@ -1,7 +1,6 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import elementTypes from '../metaData/DataElement/elementTypes';
 import { getApi } from '../d2/d2Instance';
 
 type InputClientEvent = {

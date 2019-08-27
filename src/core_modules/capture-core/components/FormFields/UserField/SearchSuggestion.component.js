@@ -79,7 +79,7 @@ const SearchSuggestion = (props: Props) => {
         }
         event.stopPropagation();
         event.preventDefault();
-    }, [onHighlightNext, onHighlightPrev, onSelect, user]);
+    }, [onHighlightNext, onHighlightPrev, onSelect, user, useUpwardList]);
 
     const handleRef = React.useCallback((ref) => {
         suggestionRef(ref, user);

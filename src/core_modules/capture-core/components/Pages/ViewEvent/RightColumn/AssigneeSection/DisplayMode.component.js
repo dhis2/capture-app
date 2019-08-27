@@ -2,7 +2,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { IconButton } from '@material-ui/core';
-import { Edit as EditIcon, AddCircleOutline as AddCircleOutlineIcon } from '@material-ui/icons';
+import { Edit as EditIcon } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core';
 import { Button } from '../../../../Buttons';
 

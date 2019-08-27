@@ -55,7 +55,7 @@ const Input = (props: Props) => {
         } else if (event.keyCode === 13) {
             onSelectSuggestion();
         }
-    }, [onHighlightSuggestion, onSelectSuggestion]);
+    }, [onHighlightSuggestion, onSelectSuggestion, useUpwardList]);
     const handleBlur = React.useCallback((event) => {
         if (!event.relatedTarget || !isSuggestionBlurTarget(event.relatedTarget, suggestionName)) {
             onExitSearch();
