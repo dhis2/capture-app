@@ -1,11 +1,16 @@
 // @flow
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { actionCreator } from '../../../../../actions/actions.utils';
 import { RenderFoundation, Program } from '../../../../../metaData';
 import { viewEventIds } from '../eventDetails.actions';
 import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../../../DataEntries';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
-import { loadViewDataEntry } from '../../../../DataEntry/actions/dataEntryLoadView.actions';
+import { loadEditDataEntryAsync } from '../../../../DataEntry/templates/dataEntryLoadEdit.template';
 import { getRulesActionsForEvent } from '../../../../../rulesEngineActionsCreator';
+import elementTypeKeys from '../../../../../metaData/DataElement/elementTypes';
+import { getApi } from '../../../../../d2/d2Instance';
+import { convertClientToForm } from '../../../../../converters';
 import type { ClientEventContainer } from '../../../../../events/eventRequests';
 
 export const actionTypes = {
@@ -13,8 +18,74 @@ export const actionTypes = {
     PREREQUISITES_ERROR_LOADING_VIEW_EVENT_DATA_ENTRY: 'PrerequisitesErrorLoadingViewEventDataEntryForViewSingleEvent',
 };
 
+async function addSubValues(preDataEntryValues, preFormValues, formFoundation: RenderFoundation) {
+    const formElements = formFoundation.getElements();
+    const usernames = formElements.reduce((acc, dataElement) => {
+        if (dataElement.type === elementTypeKeys.USERNAME && preFormValues[dataElement.id]) {
+            acc.add(preFormValues[dataElement.id]);
+        }
+        return acc;
+    }, new Set());
+
+    const getUsers = (usernamesSet: Set<string>) => {
+        const usernamesArray = [...usernamesSet];
+        return getApi()
+            .get('users', {
+                filter: `userCredentials.username:in:[${usernamesArray.join()}]`,
+                fields: 'id,displayName,userCredentials[username]',
+                paging: false,
+            })
+            .then(response => response
+                .users
+                .reduce((acc, u) => {
+                    acc[u.userCredentials.username] = {
+                        id: u.id,
+                        name: u.displayName,
+                        username: u.userCredentials.username,
+                    };
+                    return acc;
+                }, {}));
+    };
+
+    if (usernames.size === 0) {
+        return {
+            dataEntryValues: preDataEntryValues,
+            formValues: preFormValues,
+        };
+    }
+
+    const users = await getUsers(usernames);
+
+    const formValues = formElements
+        .reduce((accFormValues, dataElement) => {
+            if (dataElement.type === elementTypeKeys.USERNAME && accFormValues[dataElement.id]) {
+                const user = users[accFormValues[dataElement.id]];
+                if (!user) {
+                    log.error(
+                        errorCreator('no user object found for username dataelement of event')({
+                            value: accFormValues[dataElement.id],
+                        }),
+                    );
+                    accFormValues[dataElement.id] = undefined;
+                    return accFormValues;
+                }
+                accFormValues[dataElement.id] = user;
+            }
+            return accFormValues;
+        }, preFormValues);
+
+    return {
+        dataEntryValues: preDataEntryValues,
+        formValues,
+    };
+}
+
+function getAssignee(clientAssignee: ?Object) {
+    return clientAssignee ? convertClientToForm(clientAssignee, elementTypeKeys.USERNAME) : clientAssignee;
+}
+
 export const loadViewEventDataEntry =
-    (eventContainer: ClientEventContainer, orgUnit: Object, foundation: RenderFoundation, program: Program) => {
+    async (eventContainer: ClientEventContainer, orgUnit: Object, foundation: RenderFoundation, program: Program) => {
         const dataEntryId = viewEventIds.dataEntryId;
         const itemId = viewEventIds.itemId;
         const dataEntryPropsToInclude = [
@@ -35,19 +106,21 @@ export const loadViewEventDataEntry =
                 onConvertOut: convertStatusOut,
             },
         ];
+
         const key = getDataEntryKey(dataEntryId, itemId);
-        const dataEntryActions =
-            loadViewDataEntry(
-                dataEntryId,
-                itemId,
-                eventContainer.event,
-                eventContainer.values,
-                dataEntryPropsToInclude,
-                foundation,
-                {
-                    eventId: eventContainer.event.eventId,
-                },
-            );
+        const { actions: dataEntryActions, dataEntryValues, formValues } = await
+        loadEditDataEntryAsync(
+            dataEntryId,
+            itemId,
+            eventContainer.event,
+            eventContainer.values,
+            dataEntryPropsToInclude,
+            foundation,
+            {
+                eventId: eventContainer.event.eventId,
+            },
+            addSubValues,
+        );
 
         const eventDataForRulesEngine = { ...eventContainer.event, ...eventContainer.values };
         return [
@@ -60,7 +133,10 @@ export const loadViewEventDataEntry =
                 eventDataForRulesEngine,
                 [eventDataForRulesEngine],
             ),
-            actionCreator(actionTypes.VIEW_EVENT_DATA_ENTRY_LOADED)(),
+            actionCreator(actionTypes.VIEW_EVENT_DATA_ENTRY_LOADED)({
+                loadedValues: { dataEntryValues, formValues, eventContainer },
+                assignee: getAssignee(eventContainer.event.assignee),
+            }),
         ];
     };
 

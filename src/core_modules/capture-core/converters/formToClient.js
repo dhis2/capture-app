@@ -71,6 +71,7 @@ const valueConvertersForType = {
     [elementTypes.TRUE_ONLY]: (d2Value: string) => ((d2Value === 'true') || null),
     [elementTypes.BOOLEAN]: (d2Value: string) => (d2Value === 'true'),
     [elementTypes.AGE]: convertAge,
+    [elementTypes.USERNAME]: (user: UserFormValue) => user.username,
 };
 
 export function convertValue(value: any, type: $Values<typeof elementTypes>) {

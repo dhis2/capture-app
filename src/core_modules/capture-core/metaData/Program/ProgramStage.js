@@ -11,6 +11,7 @@ export default class ProgramStage {
     _name: string;
     _stageForm: RenderFoundation;
     _relationshipTypes: Array<RelationshipType>;
+    _enableUserAssignment: boolean;
 
     constructor(initFn: ?(_this: ProgramStage) => void) {
         initFn && isFunction(initFn) && initFn(this);
@@ -50,5 +51,13 @@ export default class ProgramStage {
 
     set relationshipTypes(relationshipTypes: Array<RelationshipType>) {
         this._relationshipTypes = relationshipTypes;
+    }
+
+    get enableUserAssignment(): boolean {
+        return this._enableUserAssignment;
+    }
+
+    set enableUserAssignment(enable: boolean) {
+        this._enableUserAssignment = enable;
     }
 }

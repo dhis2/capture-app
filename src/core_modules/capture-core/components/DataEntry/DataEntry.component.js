@@ -34,7 +34,7 @@ const styles = theme => ({
         paddingTop: theme.typography.pxToRem(10),
     },
     verticalFormInnerContainer: {
-        overflow: 'auto',
+        // overflow: 'auto',
         maxWidth: theme.typography.pxToRem(892),
     },
     verticalDataEntryContainer: {

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-08-14T12:09:12.575Z\n"
-"PO-Revision-Date: 2019-08-14T12:09:12.575Z\n"
+"POT-Creation-Date: 2019-08-27T15:53:46.517Z\n"
+"PO-Revision-Date: 2019-08-27T15:53:46.517Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -66,9 +66,6 @@ msgid "Please provide a valid organisation unit"
 msgstr ""
 
 msgid "Please provide valid coordinates"
-msgstr ""
-
-msgid "Please provide a valid username"
 msgstr ""
 
 msgid "This value already exists"
@@ -170,6 +167,24 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
+msgid "Please select the user"
+msgstr ""
+
+msgid "Search for user"
+msgstr ""
+
+msgid "Me"
+msgstr ""
+
+msgid "Anyone"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Select user"
+msgstr ""
+
 msgid "to"
 msgstr ""
 
@@ -267,6 +282,12 @@ msgid "Clear"
 msgstr ""
 
 msgid "No results"
+msgstr ""
+
+msgid "suggestions could not be retrieved"
+msgstr ""
+
+msgid "search for username"
 msgstr ""
 
 msgid "No items to display"
@@ -406,7 +427,13 @@ msgstr ""
 msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
+msgid "Assigned user"
+msgstr ""
+
 msgid "Relationships"
+msgstr ""
+
+msgid "Assignee"
 msgstr ""
 
 msgid "Saving to"
@@ -560,6 +587,15 @@ msgstr ""
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
+msgstr ""
+
+msgid "No one is assigned to this event"
+msgstr ""
+
+msgid "Assign"
+msgstr ""
+
+msgid "Event assigned to {{name}}"
 msgstr ""
 
 msgid "Feedbacks"

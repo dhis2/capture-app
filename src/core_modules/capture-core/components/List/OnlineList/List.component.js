@@ -239,6 +239,7 @@ class List extends React.Component<Props> {
                 </Row>
             );
         }
+
         return (
             <React.Fragment>
                 {

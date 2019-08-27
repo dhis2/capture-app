@@ -48,7 +48,7 @@ export const loadViewEventDataEntryEpic = (action$: InputObservable, store: Redu
             const viewEventPage = state.viewEventPage || {};
             return viewEventPage.eventId === eventId && !viewEventPage.showEditEvent;
         })
-        .map((action) => {
+        .switchMap(async (action) => {
             const eventContainer = action.payload.eventContainer;
             const orgUnit = action.payload.orgUnit;
             const metadataContainer = getProgramAndStageFromEvent(eventContainer.event);
@@ -59,5 +59,5 @@ export const loadViewEventDataEntryEpic = (action$: InputObservable, store: Redu
             const foundation = metadataContainer.stage.stageForm;
             const program = metadataContainer.program;
             // $FlowSuppress
-            return batchActions(loadViewEventDataEntry(eventContainer, orgUnit, foundation, program));
+            return batchActions((await loadViewEventDataEntry(eventContainer, orgUnit, foundation, program)));
         });

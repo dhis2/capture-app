@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import InfoIcon from '@material-ui/icons/Info';
 import i18n from '@dhis2/d2-i18n';
+import { canViewOtherUsers } from '../../../../d2';
 import DataEntry from '../../../../components/DataEntry/DataEntry.container';
 import withCancelButton from '../../../../components/DataEntry/withCancelButton';
 import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
@@ -34,6 +35,7 @@ import {
     withDefaultShouldUpdateInterface,
     orientations,
 } from '../../../FormFields/New';
+import { Assignee } from './Assignee';
 
 import withFeedbackOutput from '../../../../components/DataEntry/dataEntryOutput/withFeedbackOutput';
 import inMemoryFileStore from '../../../DataEntry/file/inMemoryFileStore';
@@ -44,6 +46,7 @@ import newEventSaveTypes from './newEventSaveTypes';
 import labelTypeClasses from './dataEntryFieldLabels.module.css';
 import withDataEntryFieldIfApplicable from '../../../DataEntry/dataEntryField/withDataEntryFieldIfApplicable';
 import { makeWritableRelationshipTypesSelector } from './dataEntry.selectors';
+import { withTransformPropName } from '../../../../HOC';
 
 const getStyles = theme => ({
     savingContextContainer: {
@@ -83,6 +86,7 @@ const dataEntrySectionNames = {
     STATUS: 'STATUS',
     COMMENTS: 'COMMENTS',
     RELATIONSHIPS: 'RELATIONSHIPS',
+    ASSIGNEE: 'ASSIGNEE',
 };
 
 const overrideMessagePropNames = {
@@ -325,6 +329,34 @@ const buildNotesSettingsFn = () => {
     return notesSettings;
 };
 
+const buildAssigneeSettingsFn = () => {
+    const assigneeComponent =
+        withTransformPropName(['onBlur', 'onSet'])(
+            withFocusSaver()(
+                withFilterProps((props: Object) => {
+                    const defaultFiltred = defaultFilterProps(props);
+                    const { validationAttempted, touched, ...passOnProps } = defaultFiltred;
+                    return passOnProps;
+                })(Assignee),
+            ),
+        );
+
+    return {
+        isApplicable: (props: Object) => {
+            const enableUserAssignment = props.stage && props.stage.enableUserAssignment;
+            return !!enableUserAssignment && canViewOtherUsers();
+        },
+        getComponent: () => assigneeComponent,
+        getComponentProps: (props: Object) => ({
+        }),
+        getPropName: () => 'assignee',
+        getValidatorContainers: () => [],
+        getMeta: () => ({
+            section: dataEntrySectionNames.ASSIGNEE,
+        }),
+    };
+};
+
 const buildRelationshipsSettingsFn = () => {
     const writableRelationshipTypesSelector = makeWritableRelationshipTypesSelector();
     const relationshipsComponent =
@@ -378,7 +410,8 @@ const dataEntryFilterProps = (props: Object) => {
 
 
 const CleanUpHOC = withCleanUpHOC()(withFilterProps(dataEntryFilterProps)(DataEntry));
-const RelationshipField = withDataEntryFieldIfApplicable(buildRelationshipsSettingsFn())(CleanUpHOC);
+const AssigneeField = withDataEntryFieldIfApplicable(buildAssigneeSettingsFn())(CleanUpHOC);
+const RelationshipField = withDataEntryFieldIfApplicable(buildRelationshipsSettingsFn())(AssigneeField);
 const CommentField = withDataEntryField(buildNotesSettingsFn())(RelationshipField);
 const GeometryField = withDataEntryFieldIfApplicable(buildGeometrySettingsFn())(CommentField);
 const ReportDateField = withDataEntryField(buildReportDateSettingsFn())(GeometryField);
@@ -436,6 +469,10 @@ const dataEntrySectionDefinitions = {
     [dataEntrySectionNames.RELATIONSHIPS]: {
         placement: placements.BOTTOM,
         name: i18n.t('Relationships'),
+    },
+    [dataEntrySectionNames.ASSIGNEE]: {
+        placement: placements.BOTTOM,
+        name: i18n.t('Assignee'),
     },
 };
 class NewEventDataEntry extends Component<Props> {

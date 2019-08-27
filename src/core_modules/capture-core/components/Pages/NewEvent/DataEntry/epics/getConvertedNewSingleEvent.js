@@ -2,7 +2,7 @@
 import moment from 'capture-core-utils/moment/momentResolver';
 import convertDataEntryToClientValues from '../../../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../../../converters/clientToServer';
-import { convertMainEventClientToServerWithKeysMap } from '../../../../../events/mainEventConverter';
+import { convertMainEventClientToServer } from '../../../../../events/mainConverters';
 import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
 
 const getApiCategoriesArgument = (categories: ?{ [id: string]: string}) => {
@@ -21,7 +21,7 @@ const getApiCategoriesArgument = (categories: ?{ [id: string]: string}) => {
 
 export const getNewEventServerData = (state: ReduxState, formFoundation: RenderFoundation, formClientValues: Object, mainDataClientValues: Object) => {
     const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
-    const mainDataServerValues: Object = convertMainEventClientToServerWithKeysMap(mainDataClientValues);
+    const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
 
     if (mainDataServerValues.status === 'COMPLETED') {
         mainDataServerValues.completedDate = moment().format('YYYY-MM-DD');

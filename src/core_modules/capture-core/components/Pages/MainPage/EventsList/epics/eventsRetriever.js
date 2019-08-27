@@ -12,20 +12,19 @@ const mapArgumentNameFromClientToServer = {
     orgUnitId: 'orgUnit',
     rowsPerPage: 'pageSize',
     currentPage: 'page',
-    assignedUsers: 'assignedUser',
 };
 
 const getMainColumns = (columnsOrder: Array<ColumnConfig>) => columnsOrder
     .reduce((accMainColumns, column) => {
         if (column.isMainProperty) {
-            accMainColumns[column.id] = true;
+            accMainColumns[column.id] = column;
         }
         return accMainColumns;
     }, {});
 
 const getFilter = (filterContainer: any) => filterContainer;
 
-const getApiFilterQueryArgument = (filters: ?{ [id: string]: string}, mainColumns: { [id: string]: boolean}) => {
+const getApiFilterQueryArgument = (filters: ?{ [id: string]: string}, mainColumns: { [id: string]: Object}) => {
     const filterQueries =
         filters ?
             Object
@@ -77,7 +76,7 @@ const getStatusQueryArgs = (filter: string) => {
     return statusQueryArgs;
 };
 
-const getMainApiFilterQueryArguments = (filters: ?{ [id: string]: string}, mainColumns: { [id: string]: boolean}) => {
+const getMainApiFilterQueryArguments = (filters: ?{ [id: string]: string}, mainColumns: { [id: string]: Object}) => {
     const mainFilterQueryArgs =
         filters ?
             Object
@@ -92,6 +91,8 @@ const getMainApiFilterQueryArguments = (filters: ?{ [id: string]: string}, mainC
                         queryArgsForCurrentMain = getEventDateQueryArgs(filter);
                     } else if (key === 'status') {
                         queryArgsForCurrentMain = getStatusQueryArgs(filter);
+                    } else if (key === 'assignee') {
+                        queryArgsForCurrentMain = filter;
                     }
                     return {
                         ...accMainQueryArgs,
@@ -127,10 +128,26 @@ const getApiCategoriesQueryArgument = (categories: ?{ [id: string]: string}, pro
     };
 };
 
+const getApiOrderById = (sortById: string, mainColumns: Object) => {
+    if (mainColumns[sortById]) {
+        const columnSpec = mainColumns[sortById];
+        if (columnSpec.apiName) {
+            return columnSpec.apiName;
+        }
+    }
+    return sortById;
+};
+
+const getApiOrderByQueryArgument = (sortById: string, sortByDirection: string, mainColumns: Object) => {
+    const apiId = getApiOrderById(sortById, mainColumns);
+    return `${apiId}:${sortByDirection}`;
+};
+
+// eslint-disable-next-line complexity
 const createApiQueryArgs = (queryArgs: Object, mainColumns: Object) => {
     let apiQueryArgs = {
         ...queryArgs,
-        order: `${queryArgs.sortById}:${queryArgs.sortByDirection}`,
+        order: getApiOrderByQueryArgument(queryArgs.sortById, queryArgs.sortByDirection, mainColumns),
         ...getApiFilterQueryArgument(queryArgs.filters, mainColumns),
         ...getMainApiFilterQueryArguments(queryArgs.filters, mainColumns),
         ...getApiCategoriesQueryArgument(queryArgs.categories, queryArgs.programId),

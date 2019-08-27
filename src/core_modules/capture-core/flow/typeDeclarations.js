@@ -13,7 +13,10 @@ declare type D2 = {
     i18n: Object,
     Api: {
         getApi: () => Object
-    }
+    },
+    currentUser: {
+        authorities: Set<string>,
+    },
 };
 
 // Redux
@@ -49,6 +52,13 @@ declare type CaptureClientEvent = {
     dueDate: string,
     completedDate: string,
     attributeCategoryOptions?: ?string,
+};
+
+// ClientValues
+declare type UserFormValue = {
+    id: string,
+    username: string,
+    name: string,
 };
 
 declare type UiEventData = {

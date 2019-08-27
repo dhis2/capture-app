@@ -3,7 +3,7 @@ import { createSelectorCreator, createSelector, defaultMemoize } from 'reselect'
 
 import { getStageFromProgramIdForEventProgram } from '../../../metaData';
 import getStageFromEvent from '../../../metaData/helpers/getStageFromEvent';
-import { convertMainEvent } from '../../../events/mainEventConverter';
+import { convertMainEventClientToList } from '../../../events/mainConverters';
 import { convertValue } from '../../../converters/clientToList';
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 import mainPropertyNames from '../../../events/mainPropertyNames.const';
@@ -113,7 +113,7 @@ const buildWorkingListData = (eventsContainer: Array<EventContainer>) => {
     return eventsContainer
         .map((eventContainer) => {
             const convertedValues = stage.stageForm.convertValues(eventContainer.eventValues, convertValue);
-            const convertedMainEvent = convertMainEvent(eventContainer.event, convertValue);
+            const convertedMainEvent = convertMainEventClientToList(eventContainer.event);
             return {
                 ...convertedMainEvent,
                 ...convertedValues,

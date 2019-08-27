@@ -1,19 +1,23 @@
 // @flow
 import {
-    RenderFoundation,
+    ProgramStage,
 } from '../../../../../metaData';
 import { getDefaultMainConfig, getMetaDataConfig } from '../defaultColumnConfiguration';
 import type { ColumnConfig } from '../eventList.types';
 
 const getCustomConfig = (
     customOrder: Array<string>,
-    defaultConfigOrderAsHashMap: Map<string, Object>,
+    defaultConfigOrderAsHashMapById: Map<string, Object>,
+    defaultConfigOrderAsHashMapByConfigName: Map<string, Object>,
 ) =>
     customOrder
-        .reduce((acc, elementId) => {
-            const element = defaultConfigOrderAsHashMap.get(elementId);
+        .reduce((acc, elementKey) => {
+            let element = defaultConfigOrderAsHashMapById.get(elementKey);
+            if (!element) {
+                element = defaultConfigOrderAsHashMapByConfigName.get(elementKey);
+            }
             if (element) {
-                acc.set(elementId, {
+                acc.set(element.id, {
                     ...element,
                     visible: true,
                 });
@@ -25,12 +29,25 @@ const getCustomColumnsConfiguration = (
     defaultConfig,
     customOrder,
 ) => {
-    const defaultConfigOrderAsHashMap = defaultConfig
+    const defaultConfigOrderAsHashMapById = defaultConfig
         .reduce((acc, orderElement) => {
             acc.set(orderElement.id, orderElement);
             return acc;
         }, new Map());
-    const customConfigAsHashMap = getCustomConfig(customOrder, defaultConfigOrderAsHashMap);
+
+    const defaultConfigOrderAsHashMapByConfigName = defaultConfig
+        .reduce((acc, orderElement) => {
+            if (orderElement.apiName) {
+                acc.set(orderElement.apiName, orderElement);
+            }
+            return acc;
+        }, new Map());
+
+    const customConfigAsHashMap = getCustomConfig(
+        customOrder,
+        defaultConfigOrderAsHashMapById,
+        defaultConfigOrderAsHashMapByConfigName,
+    );
     if (customConfigAsHashMap.size > 0) {
         const otherConfigElements = defaultConfig
             .filter(element => !customConfigAsHashMap.has(element.id))
@@ -47,12 +64,12 @@ const getCustomColumnsConfiguration = (
 };
 
 export const getColumnsConfiguration = (
-    stageForm: RenderFoundation,
+    stage: ProgramStage,
     customOrder?: ?Array<string>,
 ): Array<ColumnConfig> => {
     const defaultConfig = [
-        ...getDefaultMainConfig(),
-        ...getMetaDataConfig(stageForm),
+        ...getDefaultMainConfig(stage),
+        ...getMetaDataConfig(stage.stageForm),
     ];
 
     if (customOrder && customOrder.length > 0) {

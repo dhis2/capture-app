@@ -9,7 +9,7 @@ import {
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import convertDataEntryToClientValues from '../../../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../../../converters/clientToServer';
-import { convertMainEventClientToServerWithKeysMap } from '../../../../../events/mainEventConverter';
+import { convertMainEventClientToServer } from '../../../../../events/mainConverters';
 
 export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
@@ -36,7 +36,7 @@ export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =
             const mainDataClientValues = { ...prevEventMainData, ...dataEntryClientValues, notes: [] };
 
             const formServerValues = formFoundation.convertValues(formClientValues, convertToServerValue);
-            const mainDataServerValues: Object = convertMainEventClientToServerWithKeysMap(mainDataClientValues);
+            const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
 
             if (mainDataServerValues.status === 'COMPLETED' && !prevEventMainData.completedDate) {
                 mainDataServerValues.completedDate = moment().format('YYYY-MM-DD');

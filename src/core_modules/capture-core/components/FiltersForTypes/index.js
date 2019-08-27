@@ -13,3 +13,4 @@ export {
 } from './OptionSet/getOptionSetFilterData';
 export { default as getTextFilterData } from './Text/getTextFilterData';
 export { default as getTrueOnlyFilterData } from './TrueOnly/getTrueOnlyFilterData';
+export { AssigneeFilter, getAssigneeFilterData, modeKeys as assigneeFilterModeKeys } from './Assignee';

@@ -14,6 +14,7 @@ import {
 
 import { actionTypes as eventListActionTypes } from '../../components/Pages/MainPage/EventsList/eventsList.actions';
 import { actionTypes as viewEventNotesActionTypes } from '../../components/Pages/ViewEvent/Notes/viewEventNotes.actions';
+import { assigneeSectionActionTypes } from '../../components/Pages/ViewEvent/RightColumn/AssigneeSection';
 
 
 export const viewEventPageDesc = createReducerDescription({
@@ -22,16 +23,10 @@ export const viewEventPageDesc = createReducerDescription({
             eventDetailsSection: {},
             notesSection: { isLoading: true },
             relationshipsSection: { isLoading: true },
+            assigneeSection: { isLoading: true },
             eventId: action.payload.eventId,
             dataEntryIsLoading: true,
             isLoading: true,
-        };
-        return newState;
-    },
-    [viewEventActionTypes.START_OPEN_EVENT_FOR_VIEW]: (state, action) => {
-        const newState = { ...state };
-        newState.eventContainer = {
-            ...action.payload.eventContainer,
         };
         return newState;
     },
@@ -45,29 +40,28 @@ export const viewEventPageDesc = createReducerDescription({
         newState.loadError = action.payload;
         return newState;
     },
-    [viewEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE]: (state, action) => {
+    [viewEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE]: (state) => {
         const newState = { ...state };
         newState.isLoading = false;
         newState.dataEntryIsLoading = true;
-        newState.eventContainer = {
-            ...action.payload.eventContainer,
-        };
         return newState;
     },
-    [viewEventActionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE]: (state, action) => {
+    [viewEventActionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE]: (state) => {
         const newState = { ...state };
         newState.isLoading = false;
         newState.dataEntryIsLoading = true;
-        newState.eventContainer = {
-            ...action.payload.eventContainer,
-        };
         return newState;
     },
-    [viewEventDataEntryActionTypes.VIEW_EVENT_DATA_ENTRY_LOADED]: (state) => {
+    [viewEventDataEntryActionTypes.VIEW_EVENT_DATA_ENTRY_LOADED]: (state, action) => {
         const newState = { ...state };
         newState.dataEntryIsLoading = false;
         newState.eventDetailsSection = {
             ...newState.eventDetailsSection,
+        };
+        newState.loadedValues = action.payload.loadedValues;
+        newState.assigneeSection = {
+            isLoading: false,
+            assignee: action.payload.assignee,
         };
         return newState;
     },
@@ -82,6 +76,7 @@ export const viewEventPageDesc = createReducerDescription({
             eventDetailsSection: {},
             notesSection: { isLoading: true },
             relationshipsSection: { isLoading: true },
+            assigneeSection: { isLoading: true },
             eventId: action.payload,
             dataEntryIsLoading: true,
         };
@@ -121,27 +116,27 @@ export const viewEventPageDesc = createReducerDescription({
             fieldValue: action.payload.value,
         },
     }),
-    [viewEventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY]: (state, action) => ({
+    [viewEventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY]: state => ({
         ...state,
         eventDetailsSection: {
             ...state.eventDetailsSection,
         },
     }),
-    [viewEventDetailsActionTypes.SHOW_EDIT_EVENT_DATA_ENTRY]: (state, action) => ({
+    [viewEventDetailsActionTypes.SHOW_EDIT_EVENT_DATA_ENTRY]: state => ({
         ...state,
         eventDetailsSection: {
             ...state.eventDetailsSection,
             showEditEvent: true,
         },
     }),
-    [editEventDataEntryActionTypes.CANCEL_EDIT_EVENT_DATA_ENTRY]: (state, action) => ({
+    [editEventDataEntryActionTypes.CANCEL_EDIT_EVENT_DATA_ENTRY]: state => ({
         ...state,
         eventDetailsSection: {
             ...state.eventDetailsSection,
             showEditEvent: false,
         },
     }),
-    [editEventDataEntryActionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY]: (state, action) => ({
+    [editEventDataEntryActionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY]: state => ({
         ...state,
         saveInProgress: true,
         eventDetailsSection: {
@@ -168,13 +163,45 @@ export const viewEventPageDesc = createReducerDescription({
             eventHasChanged: true,
         };
     },
-    [viewEventActionTypes.UPDATE_EVENT_CONTAINER]: (state, action) => ({
-        ...state,
-        prevEventContainer: {
-            ...state.eventContainer,
-        },
-        eventContainer: {
-            ...action.payload.eventContainer,
-        },
-    }),
+    [assigneeSectionActionTypes.VIEW_EVENT_ASSIGNEE_SET]: (state, action) => {
+        const { assignee } = action.payload;
+
+        const newState = {
+            ...state,
+            saveInProgress: true,
+            loadedValues: {
+                ...state.loadedValues,
+                eventContainer: {
+                    ...state.loadedValues.eventContainer,
+                    event: {
+                        ...state.loadedValues.eventContainer.event,
+                        assignee,
+                    },
+                },
+            },
+        };
+
+        return newState;
+    },
+    [assigneeSectionActionTypes.VIEW_EVENT_ASSIGNEE_SAVE_COMPLETED]: (state, action) => {
+        if (action.meta.eventId !== state.eventId) {
+            return state;
+        }
+
+        return {
+            ...state,
+            saveInProgress: false,
+            eventHasChanged: true,
+        };
+    },
+    [assigneeSectionActionTypes.VIEW_EVENT_ASSIGNEE_SAVE_FAILED]: (state, action) => {
+        if (action.meta.eventId !== state.eventId) {
+            return state;
+        }
+
+        return {
+            ...state,
+            saveInProgress: false,
+        };
+    },
 }, 'viewEventPage');

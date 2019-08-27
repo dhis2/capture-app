@@ -37,12 +37,11 @@ export type WorkingListConfig = {
     sortById: ?string,
     sortByDirection: ?string,
     columnOrder: Array<Object>,
-    assignedUserMode?: ?'CURRENT' | 'PROVIDED' | 'NONE' | 'ANY',
-    assignedUsers?: ?Array<string>,
 }
 
 export type ColumnConfig = {
     id: string,
     visible: boolean,
     isMainProperty?: ?boolean,
+    apiName?: ?string,
 };

@@ -20,5 +20,10 @@ export const getModels = () => getD2().models;
 
 export const getCurrentUser = () => getD2().currentUser;
 
+export const canViewOtherUsers = () => {
+    const hasUserViewAuth = getD2().currentUser.authorities.has('F_USER_VIEW');
+    return hasUserViewAuth;
+};
+
 
 export default getD2;

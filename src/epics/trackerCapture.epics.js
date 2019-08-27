@@ -184,6 +184,7 @@ import {
     runRulesOnEnrollmentFieldUpdateEpic,
     runRulesOnEnrollmentDataEntryFieldUpdateEpic,
 } from 'capture-core/components/DataEntries';
+import { saveAssigneeEpic } from 'capture-core/components/Pages/ViewEvent/RightColumn/AssigneeSection';
 
 import { loadCoreEpic } from 'capture-core/init';
 import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../init/entry.epics';
@@ -301,5 +302,6 @@ export default combineEpics(
     openNewRelationshipRegisterTeiDataEntryEpic,
     loadSearchGroupDuplicatesForReviewEpic,
     teiForNewEventRelationshipSavedEpic,
+    saveAssigneeEpic,
     ...getDataEntryEpics(),
 );

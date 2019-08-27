@@ -28,12 +28,18 @@ export type DataEntryPropToInclude = DataEntryPropToIncludeStandard | DataEntryP
 export function getDataEntryMeta(dataEntryPropsToInclude: Array<DataEntryPropToInclude>) {
     return dataEntryPropsToInclude
         .reduce((accMeta, propToInclude) => {
-            // $FlowSuppress
-            accMeta[propToInclude.id || propToInclude.dataEntryId] =
-                propToInclude.type ?
-                    { type: propToInclude.type, clientIgnore: propToInclude.clientIgnore } :
-                    // $FlowSuppress
-                    { onConvertOut: propToInclude.onConvertOut.toString(), clientId: propToInclude.clientId, clientIgnore: propToInclude.clientIgnore };
+            let propMeta;
+            if (propToInclude.type) {
+                propMeta = { type: propToInclude.type };
+            } else if (propToInclude.onConvertOut) {
+                propMeta = { onConvertOut: propToInclude.onConvertOut.toString(), clientId: propToInclude.clientId };
+            } else {
+                propMeta = {};
+            }
+
+            propMeta.clientIgnore = propToInclude.clientIgnore;
+
+            accMeta[propToInclude.id || propToInclude.dataEntryId] = propMeta;
             return accMeta;
         }, {});
 }
