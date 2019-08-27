@@ -14,8 +14,8 @@ const getStyles = (theme: Theme) => ({
         overflowY: 'auto',
         marginRight: theme.typography.pxToRem(-24),
     },
-    userFieldContainer: {
-
+    error: {
+        color: theme.palette.error.main,
     },
 });
 
@@ -29,12 +29,19 @@ type Props = {
     onCommitValue: (value: any) => void,
     classes: Object,
 };
+
+type State = {
+    error: string,
+};
 // $FlowSuppress
-class AssigneeFilter extends Component<Props> implements UpdatableFilterContent<Value> {
+class AssigneeFilter extends Component<Props, State> implements UpdatableFilterContent<Value> {
     modeOptions: Array<Object>;
     constructor(props: Props) {
         super(props);
         this.modeOptions = getModeOptions();
+        this.state = {
+            error: '',
+        };
     }
 
     onGetUpdateData() {
@@ -43,14 +50,33 @@ class AssigneeFilter extends Component<Props> implements UpdatableFilterContent<
     }
 
     onIsValid() { //eslint-disable-line
+        const { value } = this.props;
+        if (value && value.mode === modeKeys.PROVIDED && !value.provided) {
+            this.setState({
+                error: i18n.t('Please select the user'),
+            });
+            return false;
+        }
         return true;
     }
 
     handleModeSelect = (value: string) => {
-        this.props.onCommitValue({ mode: value });
+        this.setState({
+            error: '',
+        });
+
+        if (!value) {
+            this.props.onCommitValue(null);
+        } else {
+            this.props.onCommitValue({ mode: value });
+        }
     }
 
-    handleUserSelect = (user: Object) => {
+    handleUserSelect = (user: ?Object) => {
+        this.setState({
+            error: '',
+        });
+
         this.props.onCommitValue({
             mode: modeKeys.PROVIDED,
             provided: user,
@@ -75,18 +101,21 @@ class AssigneeFilter extends Component<Props> implements UpdatableFilterContent<
                     />
                 </div>
                 {mode === modeKeys.PROVIDED ? (
-                    <div
-                        className={classes.userFieldContainer}
-                    >
+                    <div>
                         <UserField
                             value={provided}
                             onSet={this.handleUserSelect}
-                            inputPlaceholderText={i18n.t('Search For user')}
+                            inputPlaceholderText={i18n.t('Search for user')}
                             focusOnMount
                             useUpwardSuggestions
                         />
                     </div>
                 ) : null}
+                <div
+                    className={classes.error}
+                >
+                    {this.state.error}
+                </div>
             </div>
         );
     }
