@@ -57,14 +57,6 @@ const options = [
         name: 'Selected',
         value: 'SELECTED',
     },
-    /*{
-        name: 'Immidiate children',
-        value: 'CHILDREN',
-    },
-    {
-        name: 'Children',
-        value: 'DESCENDANTS',
-    },*/
 ];
 
 const errorMessage = 'Please select an organisation unit';
@@ -158,4 +150,5 @@ class SearchOrgUnitSelector extends React.Component<Props> {
         );
     }
 }
+
 export default SearchOrgUnitSelector;

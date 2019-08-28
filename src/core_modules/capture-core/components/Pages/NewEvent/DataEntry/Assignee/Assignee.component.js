@@ -16,7 +16,7 @@ const getStyles = () => ({
     field: {
         flexBasis: 150,
         flexGrow: 1,
-    }
+    },
 });
 
 type Props = {
@@ -28,19 +28,19 @@ const Assignee = (props: Props) => {
 
     return (
         <div
-            class={classes.container}
+            className={classes.container}
         >
             <div
-                class={classes.label}
+                className={classes.label}
             >
                 {i18n.t('Assigned user')}
             </div>
             <div
-                class={classes.field}
+                className={classes.field}
             >
-            <Username
-                {...passOnProps}
-            />
+                <Username
+                    {...passOnProps}
+                />
             </div>
         </div>
     );
