@@ -7,7 +7,7 @@ import {
     clearOrgUnitsFilter,
 } from './searchOrgUnitSelector.actions';
 import { get as getOrgUnitRoots } from '../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
-import SearchOrgUnitSelector from './SearchOrgUnitSelector.component';
+import SearchOrgUnitSelectorRefHandler from './SearchOrgUnitSelectorRefHandler.component';
 
 const mapStateToProps = (state: ReduxState, props: Object) => {
     const searchId = props.searchId;
@@ -41,14 +41,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-    const { innerRef, ...passOnOwnProps } = ownProps;
-    return {
-        ...passOnOwnProps,
-        ...stateProps,
-        ...dispatchProps,
-        ref: innerRef,
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(SearchOrgUnitSelector);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchOrgUnitSelectorRefHandler);

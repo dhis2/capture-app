@@ -66,8 +66,9 @@ class CardList extends React.Component<Props> {
 
         const dataElementsContainer = this.getDataElementsContainer(this.props);
 
-        return items.map(item => (
+        return items.map((item, index) => (
             <CardListItem
+                key={index}
                 item={item}
                 getCustomTopElements={getCustomItemTopElements}
                 getCustomBottomElements={getCustomItemBottomElements}

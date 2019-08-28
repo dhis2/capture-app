@@ -108,7 +108,9 @@ class SearchForm extends React.Component<Props> {
 
     renderOrgUnitSelector = () => (
         <TeiSearchOrgUnitSelector
-            innerRef={(instance) => { this.orgUnitSelectorInstance = instance; }}
+            innerRef={(instance) => {
+                this.orgUnitSelectorInstance = instance;
+            }}
             searchId={this.props.searchId}
             searchAttempted={this.props.searchAttempted}
         />
