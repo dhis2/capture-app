@@ -13,6 +13,7 @@ import {
     setCurrentWorkingListConfig,
     workingListConfigsRetrieved,
 } from '../eventsList.actions';
+import { getProgramFromProgramIdThrowIfNotFound, EventProgram } from '../../../../../metaData';
 
 
 export const retrieveWorkingListConfigsFromServer = (action$: ActionsObservable, store: ReduxStore) =>
@@ -23,7 +24,12 @@ export const retrieveWorkingListConfigsFromServer = (action$: ActionsObservable,
     )
         .filter(() => {
             const state = store.getState();
-            return state.offline.online;
+            if (!state.offline.online) {
+                return false;
+            }
+            const programId = state.currentSelections.programId;
+            const program = programId && getProgramFromProgramIdThrowIfNotFound(programId);
+            return (program && program instanceof EventProgram);
         })
         .switchMap(() => {
             const promise = getWorkingListConfigsAsync(store.getState()).then(container => batchActions([
