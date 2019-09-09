@@ -61,7 +61,7 @@ class App extends React.Component<Props> {
                             <D2UIApp>
                                 <DataProvider
                                     baseUrl={process.env.REACT_APP_DHIS2_BASE_URL}
-                                    apiVersion={32}
+                                    apiVersion=""
                                 >
                                     <AppContentsRouterLoader />
                                     <FeedbackBar />
