@@ -7,10 +7,6 @@ import getConstantsLoadSpecification from '../../apiToStore/loadSpecifications/g
 import getOrgUnitLevelsLoadSpecification from '../../apiToStore/loadSpecifications/getOrgUnitLevelsLoadSpecification';
 import getRelationshipsLoadSpecification from '../../apiToStore/loadSpecifications/getRelationshipsLoadSpecification';
 
-import organisationUnitApiSpecification from '../../api/apiSpecifications/organisationUnits.apiSpecification';
-import getOrganisationUnitsLoadSpecification
-    from '../../apiToStore/loadSpecifications/getOrganisationUnitsLoadSpecification';
-
 import loadPrograms from '../programs/loadPrograms';
 import loadTrackedEntityAttributes from '../trackedEntityAttributes/loadTrackedEntityAttributes';
 import loadCategories from '../categories/loadCategories';
@@ -25,7 +21,6 @@ const coreLoadSpecifications: Array<LoadSpecification> = [
     getConstantsLoadSpecification(objectStores.CONSTANTS),
     getOrgUnitLevelsLoadSpecification(objectStores.ORGANISATION_UNIT_LEVELS),
     getRelationshipsLoadSpecification(objectStores.RELATIONSHIP_TYPES),
-    getOrganisationUnitsLoadSpecification(objectStores.ORGANISATION_UNITS, organisationUnitApiSpecification),
 ];
 
 async function loadCoreMetaData(storageController: StorageController) {
@@ -70,6 +65,9 @@ export default async function loadMetaData() {
         ]),
     );
 
-    await loadCategories(storageController, objectStores.CATEGORIES, categoryIds);
+    await loadCategories(storageController, categoryIds, {
+        categories: objectStores.CATEGORIES,
+        categoryOptionsByCategory: objectStores.CATEGORY_OPTIONS_BY_CATEGORY,
+    });
     await loadOptionSets(storageController, objectStores.OPTION_SETS, [...optionSetsMetaFromPrograms, ...optionSetsMetaFromTrackedEntityTypes]);
 }

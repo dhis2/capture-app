@@ -11,6 +11,7 @@ import i18n from '@dhis2/d2-i18n';
 import { programCollection } from '../../../metaDataMemoryStores';
 import VirtualizedSelect from '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import ProgramList from './ProgramList';
+import CategorySelector from './CategorySelector.component';
 
 import { Program, EventProgram, CategoryOption } from '../../../metaData';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
@@ -226,56 +227,39 @@ class ProgramSelector extends Component<Props> {
         );
     }
 
-    getCategoryOptions(categoryOptions: Array<CategoryOption>) {
-        const { selectedOrgUnitId } = this.props;
-
-        const ouFilteredCategoryOptions = !selectedOrgUnitId ?
-            categoryOptions :
-            categoryOptions
-                .filter(option =>
-                    !option.organisationUnitIds || option.organisationUnitIds[selectedOrgUnitId]);
-
-        return ouFilteredCategoryOptions
-            .map(option => ({
-                label: option.name,
-                value: option.id,
-            }));
-    }
-
     renderWithSelectedProgram(selectedProgram) {
         if (selectedProgram.categoryCombination) {
+            const { classes, selectedCategories, selectedOrgUnitId } = this.props;
             return (
                 <div>
-                    <Paper elevation={0} className={this.props.classes.selectedPaper}>
+                    <Paper elevation={0} className={classes.selectedPaper}>
                         <Grid container spacing={8}>
                             <Grid item xs={12} sm={6}>
                                 {this.renderSelectedProgram(selectedProgram)}
                             </Grid>
                             {
                                 // $FlowFixMe
-                                Array.from(selectedProgram.categoryCombination.categories.values()).map(i =>
-                                    (<Grid key={i.id} item xs={12} sm={6}>
-                                        <h4 className={this.props.classes.title}>{i.name}</h4>
+                                Array.from(selectedProgram.categoryCombination.categories.values()).map(category =>
+                                    (<Grid key={category.id} item xs={12} sm={6}>
+                                        <h4 className={classes.title}>{category.name}</h4>
                                         {
                                             (() => {
-                                                if (this.props.selectedCategories && this.props.selectedCategories[i.id]) {
+                                                debugger;
+                                                if (selectedCategories && selectedCategories[category.id]) {
                                                     return (
-                                                        <div className={this.props.classes.selectedText}>
-                                                            <div className={this.props.classes.selectedCategoryNameContainer}>{i.getOptionThrowIfNotFound(this.props.selectedCategories[i.id]).name}</div>
-                                                            <IconButton className={this.props.classes.selectedButton} onClick={() => this.handleResetCategoryOption(i.id)}>
-                                                                <ClearIcon className={this.props.classes.selectedButtonIcon} />
+                                                        <div className={classes.selectedText}>
+                                                            <div className={classes.selectedCategoryNameContainer}>{category.getOptionThrowIfNotFound(selectedCategories[category.id]).name}</div>
+                                                            <IconButton className={classes.selectedButton} onClick={() => this.handleResetCategoryOption(category.id)}>
+                                                                <ClearIcon className={classes.selectedButtonIcon} />
                                                             </IconButton>
                                                         </div>
                                                     );
                                                 }
-                                                const categoryOptions = this.getCategoryOptions([...i.categoryOptions.values()]);
-
                                                 return (
-                                                    <VirtualizedSelect
-                                                        options={categoryOptions}
-                                                        onSelect={(option) => { this.handleClickCategoryOption(option, i.id); }}
-                                                        value={''}
-                                                        placeholder={i18n.t('Select')}
+                                                    <CategorySelector
+                                                        category={category}
+                                                        onSelect={(option) => { this.handleClickCategoryOption(option, category.id); }}
+                                                        selectedOrgUnitId={selectedOrgUnitId}
                                                     />
                                                 );
                                             })()

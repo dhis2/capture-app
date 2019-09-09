@@ -1,8 +1,6 @@
 // @flow
 /* eslint-disable complexity */
 /* eslint-disable no-underscore-dangle */
-import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
 import {
     TrackedEntityType,
     Icon,
@@ -10,7 +8,6 @@ import {
     TrackerProgram,
     CategoryCombination,
     Category,
-    CategoryOption,
 } from '../../../../metaData';
 
 import getProgramIconAsync from './getProgramIcon';
@@ -20,15 +17,16 @@ import DataElementFactory from '../enrollment/DataElementFactory';
 import {
     ProgramStageFactory,
 } from '../programStage';
+import { CategoryFactory } from '../category';
 
-import type {
+import type
+{
     CachedStyle,
     CachedProgramStage,
     ProgramCachedCategoryCombo,
+    CachedProgram,
     ProgramCachedCategory,
     CachedCategory,
-    CachedCategoryOption,
-    CachedProgram,
     CachedOptionSet,
     CachedRelationshipType,
     CachedTrackedEntityAttribute,
@@ -37,48 +35,12 @@ import type {
 } from '../../../../storageControllers/cache.types';
 
 class ProgramFactory {
-    static _buildCategoryOptions(cachedCategoryOptions: Array<CachedCategoryOption>): Map<string, CategoryOption> {
-        return cachedCategoryOptions.reduce((accCategoryOptionsMap, cachedOption) => {
-            accCategoryOptionsMap.set(cachedOption.id, new CategoryOption((_this) => {
-                _this.id = cachedOption.id;
-                _this.name = cachedOption.displayName;
-                _this.organisationUnitIds = cachedOption.organisationUnitIds;
-                _this.access = cachedOption.access;
-            }));
-            return accCategoryOptionsMap;
-        }, new Map());
-    }
-
-    static _buildCategories(
-        cachedProgramCategories: Array<ProgramCachedCategory>,
-        cachedCategories: {[categoryId: string]: CachedCategory}): Map<string, Category> {
-        return new Map(
-            cachedProgramCategories
-                .map(cachedProgramCategory => ([
-                    cachedProgramCategory.id,
-                    new Category((_this) => {
-                        const id = cachedProgramCategory.id;
-                        _this.id = id;
-                        const cachedCategory = cachedCategories[id];
-                        if (!cachedCategory) {
-                            log.error(errorCreator('Could not retrieve cachedCategory')({ id }));
-                            _this.categoryOptions = new Map();
-                        } else {
-                            _this.name = cachedCategory.displayName;
-                            _this.categoryOptions =
-                                ProgramFactory._buildCategoryOptions(cachedCategory.categoryOptions);
-                        }
-                    }),
-                ])),
-        );
-    }
-
     programStageFactory: ProgramStageFactory;
     enrollmentFactory: EnrollmentFactory;
     searchGroupFactory: SearchGroupFactory;
     dataElementFactory: DataElementFactory;
+    categoryFactory: CategoryFactory;
     trackedEntityTypeCollection: Map<string, TrackedEntityType>;
-    cachedCategories: {[categoryId: string]: CachedCategory};
 
     constructor(
         cachedOptionSets: Map<string, CachedOptionSet>,
@@ -90,7 +52,6 @@ class ProgramFactory {
         locale: ?string,
     ) {
         this.trackedEntityTypeCollection = trackedEntityTypeCollection;
-        this.cachedCategories = cachedCategories;
         this.programStageFactory = new ProgramStageFactory(
             cachedOptionSets,
             cachedRelationshipTypes,
@@ -111,6 +72,20 @@ class ProgramFactory {
             cachedTrackedEntityAttributes,
             cachedOptionSets,
             locale,
+        );
+        this.categoryFactory = new CategoryFactory(
+            cachedCategories,
+        );
+    }
+
+    _buildCategories(
+        cachedProgramCategories: Array<ProgramCachedCategory>): Map<string, Category> {
+        return new Map(
+            cachedProgramCategories
+                .map(cachedProgramCategory => ([
+                    cachedProgramCategory.id,
+                    this.categoryFactory.build(cachedProgramCategory),
+                ])),
         );
     }
 
@@ -133,7 +108,7 @@ class ProgramFactory {
             _this.id = cachedCategoryCombination.id;
             _this.categories =
             // $FlowFixMe
-                ProgramFactory._buildCategories(cachedCategoryCombination.categories, this.cachedCategories);
+                this._buildCategories(cachedCategoryCombination.categories, this.cachedCategories);
         });
     }
 
