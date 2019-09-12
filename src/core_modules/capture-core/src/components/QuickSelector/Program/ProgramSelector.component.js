@@ -244,11 +244,10 @@ class ProgramSelector extends Component<Props> {
                                         <h4 className={classes.title}>{category.name}</h4>
                                         {
                                             (() => {
-                                                debugger;
                                                 if (selectedCategories && selectedCategories[category.id]) {
                                                     return (
                                                         <div className={classes.selectedText}>
-                                                            <div className={classes.selectedCategoryNameContainer}>{category.getOptionThrowIfNotFound(selectedCategories[category.id]).name}</div>
+                                                            <div className={classes.selectedCategoryNameContainer}>{selectedCategories[category.id]}</div>
                                                             <IconButton className={classes.selectedButton} onClick={() => this.handleResetCategoryOption(category.id)}>
                                                                 <ClearIcon className={classes.selectedButtonIcon} />
                                                             </IconButton>

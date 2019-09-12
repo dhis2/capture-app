@@ -10,6 +10,7 @@ export default function (programId: string, categories: ?{ [categoryId: string]:
         write: stage.stageForm.access.data.write,
     };
 
+    /*
     if (categories && program.categoryCombination) {
         Object.keys(categories).forEach((key) => {
             // $FlowFixMe
@@ -22,5 +23,7 @@ export default function (programId: string, categories: ?{ [categoryId: string]:
             };
         });
     }
+    */
+
     return access;
 }

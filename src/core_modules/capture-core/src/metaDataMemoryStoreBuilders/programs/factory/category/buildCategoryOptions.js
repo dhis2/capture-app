@@ -6,7 +6,8 @@ import { metaDataStores } from '../../../../storageControllers/stores';
 
 async function getCacheOptionsFromKeyAsync(key: string) {
     const storageController = getUserStorageController();
-    return storageController.get(metaDataStores.CATEGORY_OPTIONS_BY_CATEGORY, key);
+    const storeData = await storageController.get(metaDataStores.CATEGORY_OPTIONS_BY_CATEGORY, key);
+    return (storeData && storeData.options) || [];
 }
 
 async function getCategoryOptions(categoryId: string) {

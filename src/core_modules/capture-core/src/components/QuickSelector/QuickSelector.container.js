@@ -12,7 +12,7 @@ import {
 
 const mapStateToProps = (state: Object) => ({
     selectedProgramId: state.currentSelections.programId,
-    selectedCategories: state.currentSelections.categories,
+    selectedCategories: state.currentSelections.categoriesName,
     selectedOrgUnitId: state.currentSelections.orgUnitId,
     selectionComplete: state.currentSelections.complete,
     selectedOrgUnit: state.currentSelections.orgUnitId ? state.organisationUnits[state.currentSelections.orgUnitId] : null,
