@@ -14,14 +14,3 @@
     box-sizing: content-box;
     margin-left: 2px;
 }
-
-.listUp {
-    position: absolute;
-    top: -250px;
-    height: 200px;
-    width: 100%;
-    z-index: 500;
-    background-color: white;
-    overflow-y: auto;
-    transform: scaleY(-1);
-}

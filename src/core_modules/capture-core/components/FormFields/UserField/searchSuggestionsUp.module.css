@@ -1,0 +1,15 @@
+.listUp {
+    position: absolute;
+    top: -250px;
+    height: 200px;
+    width: 100%;
+    z-index: 500;
+    background-color: white;
+    overflow-y: auto;
+    box-sizing: content-box;
+}
+
+.listUpInner {
+    min-height: 200px;
+    transform: scaleY(-1);
+}

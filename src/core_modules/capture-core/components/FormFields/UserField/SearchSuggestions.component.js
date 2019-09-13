@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import defaultClasses from './searchSuggestions.module.css';
+import SearchSuggestionsUp from './SearchSuggestionsUp.component';
 import SearchSuggestion from './SearchSuggestion.component';
 import type { User } from './types';
 
@@ -15,7 +16,7 @@ class UserSearchSuggestions extends React.Component<Props> {
     static renderSuggestions(
         suggestions: Array<User>,
         query: string,
-        highlighted: User,
+        highlighted: ?User,
         passOnProps: Object) {
         const suggestionElements = suggestions
             .map(u => (
@@ -28,15 +29,25 @@ class UserSearchSuggestions extends React.Component<Props> {
                 />),
             );
 
-        return (
-            <div>
-                <div
-                    className={passOnProps.useUpwardList ? defaultClasses.listUp : defaultClasses.list}
+        return passOnProps.useUpwardList ?
+            (
+                <SearchSuggestionsUp
+                    key={query}
+                    onHighlightNext={passOnProps.onHighlightNext}
+                    onHighlightPrev={passOnProps.onHighlightPrev}
                 >
                     {suggestionElements}
+                </SearchSuggestionsUp>
+            ) :
+            (
+                <div>
+                    <div
+                        className={defaultClasses.list}
+                    >
+                        {suggestionElements}
+                    </div>
                 </div>
-            </div>
-        );
+            );
     }
 
     static renderEmpty() {
