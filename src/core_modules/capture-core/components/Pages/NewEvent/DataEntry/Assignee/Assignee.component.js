@@ -39,6 +39,7 @@ const Assignee = (props: Props) => {
                 className={classes.field}
             >
                 <Username
+                    inputPlaceholderText={i18n.t('Search for user')}
                     {...passOnProps}
                 />
             </div>

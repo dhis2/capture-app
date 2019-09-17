@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import getFilterSelectorsComponent from './FilterSelectors.componentGetter';
 import { restMenuItemSelected } from './filterSelector.actions';
 
-const mapStateToProps = (state: ReduxState) => ({
-    userSelectedFilters: state.workingListsUserSelectedFilters,
+const mapStateToProps = (state: ReduxState, props: Object) => ({
+    userSelectedFilters: state.workingListsUserSelectedFilters[props.listId],
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
