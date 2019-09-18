@@ -26,8 +26,8 @@ export const clearFilter = (listId: string, itemId: string) =>
 export const revertFilter = (listId: string) =>
     actionCreator(actionTypes.REVERT_FILTER)({ listId });
 
-export const restMenuItemSelected = (id: string) =>
-    actionCreator(actionTypes.REST_MENU_ITEM_SELECTED)({ id });
+export const restMenuItemSelected = (id: string, listId: string) =>
+    actionCreator(actionTypes.REST_MENU_ITEM_SELECTED)({ id, listId });
 
-export const updateIncludedFiltersAfterColumnSorting = (includeFilters: Object) =>
-    actionCreator(actionTypes.UPDATE_INCLUDED_FILTERS_AFTER_COLUMN_SORTING)({ includeFilters });
+export const updateIncludedFiltersAfterColumnSorting = (includeFilters: Object, listId: string) =>
+    actionCreator(actionTypes.UPDATE_INCLUDED_FILTERS_AFTER_COLUMN_SORTING)({ includeFilters, listId });
