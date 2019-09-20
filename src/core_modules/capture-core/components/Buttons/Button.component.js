@@ -6,11 +6,11 @@ type Props = {};
 
 const Button = (props: Props) => {
     const { ...passOnProps } = props;
-    return(
+    return (
         <D2Button
             {...passOnProps}
         />
     );
-}
+};
 
 export default Button;
