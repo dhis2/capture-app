@@ -1,39 +1,111 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
+import { withStyles } from '@material-ui/core/styles';
 import { Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
 import Button from '../../../../Buttons/Button.component';
 import { getApi } from '../../../../../d2/d2Instance';
+
+const getStyles = () => ({
+    downloadLink: {
+        textDecoration: 'none',
+        outline: 'none',
+    },
+    downloadLinkContainer: {
+        paddingRight: 5,
+        paddingBottom: 5,
+    },
+    downloadContainer: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+});
 
 type Props = {
     open: ?boolean,
     onClose: Function,
     request: { url: string, queryParams: ?Object },
+    programStageId: string,
+    classes: Object,
 }
 
 
 class DownloadDialog extends React.Component<Props> {
-    renderButtons = (request: Object) => {
+    static getUrlEncodedParamsString(params: Object) {
+        const { filter, ...restParams } = params;
+        const searchParams = new URLSearchParams(restParams);
+
+        if (filter) {
+            filter.forEach(filterItem => {
+                searchParams.append('filter', filterItem);
+            });
+        }
+
+        return searchParams.toString();
+    }
+
+    static getUrl() {
         const baseUrl = getApi().baseUrl;
-        const { pageSize, page, totalPages, ...paramsWithoutPaging } = request.queryParams || {};
-        const searchParams = new URLSearchParams({ ...paramsWithoutPaging, skipPaging: true });
-        const searchParamsString = searchParams.toString();
+        return baseUrl + '/events/query';
+    }
+
+    renderButtons() {
+        const { request, programStageId, classes } = this.props;
+        const url = DownloadDialog.getUrl();
+        const { pageSize, page, totalPages, ...paramsFromRequest } = request.queryParams || {};
+        const paramsObject = {
+            ...paramsFromRequest,
+            programStage: programStageId,
+            skipPaging: 'true',
+        };
+        const searchParamsString = DownloadDialog.getUrlEncodedParamsString(paramsObject);
+        
         return (
-            <React.Fragment>
-                <Button download href={`${baseUrl}/${request.url}.json?${searchParamsString}`}>
-                    {i18n.t('Download as JSON')}
-                </Button>
-                <Button download href={`${baseUrl}/${request.url}.xml?${searchParamsString}`}>
-                    {i18n.t('Download as XML')}
-                </Button>
-                <Button download href={`${baseUrl}/${request.url}.csv?${searchParamsString}`}>
-                    {i18n.t('Download as CSV')}
-                </Button>
-            </React.Fragment>
+            <div
+                className={classes.downloadContainer}
+            >
+                <div
+                    className={classes.downloadLinkContainer}
+                >
+                    <a
+                        download="events.json"
+                        href={`${url}.json?${searchParamsString}`}
+                        className={classes.downloadLink}
+                    >
+                        <Button>
+                            {i18n.t('Download as JSON')}
+                        </Button>
+                    </a>
+                </div>
+                <div
+                    className={classes.downloadLinkContainer}
+                >
+                    <a
+                        download="events.xml"
+                        href={`${url}.xml?${searchParamsString}`}
+                        className={classes.downloadLink}
+                    >
+                        <Button>
+                            {i18n.t('Download as XML')}
+                        </Button>
+                    </a>
+                </div>
+                <div>
+                    <a
+                        download="events.csv"
+                        href={`${url}.csv?${searchParamsString}`}
+                        className={classes.downloadLink}
+                    >
+                        <Button>
+                            {i18n.t('Download as CSV')}
+                        </Button>
+                    </a>
+                </div>
+            </div>
         );
     }
     render() {
-        const { open, onClose, request } = this.props;
+        const { open, onClose } = this.props;
         return (
             <span>
                 <Dialog
@@ -43,7 +115,7 @@ class DownloadDialog extends React.Component<Props> {
                 >
                     <DialogTitle>{i18n.t('Download with current filters')}</DialogTitle>
                     <DialogContent>
-                        {request ? this.renderButtons(request) : null }
+                        {this.renderButtons()}
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={onClose} color="primary">
@@ -56,4 +128,4 @@ class DownloadDialog extends React.Component<Props> {
     }
 }
 
-export default DownloadDialog;
+export default withStyles(getStyles)(DownloadDialog);
