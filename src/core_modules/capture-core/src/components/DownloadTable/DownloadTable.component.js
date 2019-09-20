@@ -24,7 +24,7 @@ const styles = () => ({
 type Props = {
     classes: Object,
     programAndStageContainer: { program: ?EventProgram, stage: ?ProgramStage },
-    orgUnit: ?Object,
+    orgUnit: { id: string, name: string },
     selectedCategoryOptions: { [key: string]: string },
 };
 
@@ -60,7 +60,7 @@ class DownloadTable extends Component<Props, State> {
     render() {
         const { anchorEl } = this.state;
         const { classes, programAndStageContainer, orgUnit, selectedCategoryOptions } = this.props;
-        const { orgUnitId } = orgUnit || {};
+        const { id: orgUnitId } = orgUnit;
         const baseUrl = getApi().baseUrl;
 
         // Generate Category filter for URL.
@@ -80,9 +80,8 @@ class DownloadTable extends Component<Props, State> {
             return null;
         }
         const selectedProgramStageId = programAndStageContainer.stage.id;
-
-        // $FlowFixMe
         const fileName = this.getFileName(programAndStageContainer.program, orgUnit);
+
         return (
             <span>
                 <IconButton
