@@ -106,6 +106,8 @@ class List extends React.Component<Props> {
     static typesWithAscendingInitialDirection = [
         elementTypes.TEXT,
         elementTypes.LONG_TEXT,
+        elementTypes.USERNAME,
+        'ASSIGNEE',
     ];
 
     static typesWithRightPlacement = [
