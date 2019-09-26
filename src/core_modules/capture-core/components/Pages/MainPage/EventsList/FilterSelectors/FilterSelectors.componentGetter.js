@@ -20,7 +20,7 @@ const getStyles = (theme: Theme) => ({
 type Props = {
     listId: string,
     columns: ?Array<Column>,
-    userSelectedFilters: { [id: string]: string },
+    userSelectedFilters: ?{ [id: string]: string },
     onRestMenuItemSelected: (id: string) => void,
     classes: {
         filterButtonContainer: string,
@@ -58,7 +58,7 @@ export default (InnerComponent: React.ComponentType<any>) =>
         }
 
         getUserSelectedColumns(allColumns: Array<Column>, calculatedColumns: Array<Column>): Array<Column> {
-            const userSelectedFilters = this.props.userSelectedFilters;
+            const userSelectedFilters = this.props.userSelectedFilters || {};
             return allColumns
                 .filter(ac => calculatedColumns.every(cc => cc !== ac))
                 .filter(c => userSelectedFilters[c.id]);

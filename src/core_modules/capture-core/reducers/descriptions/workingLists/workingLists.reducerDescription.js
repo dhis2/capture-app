@@ -246,10 +246,23 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
         };
     },
     [columnSelectorActionTypes.UPDATE_WORKINGLIST_ORDER]: (state, action) => {
-        const newState = { ...state };
-        const listId = action.payload.listId;
-        newState[listId] = [...action.payload.workinglist];
-        return newState;
+        const { columnOrder, listId } = action.payload;
+
+        const currentColumnOrder = state[listId];
+        const newColumnOrder = columnOrder
+            .map(co => {
+                const stateElement = currentColumnOrder.find(cco => cco.id === co.id);
+                const newOrderELement = {
+                    ...stateElement,
+                    visible: co.visible,
+                };
+                return newOrderELement;
+            });
+
+        return {
+            ...state,
+            [listId]: newColumnOrder,
+        };
     },
     [listActionTypes.RESET_LIST]: (state, action) => {
         const newState = { ...state };
@@ -319,23 +332,18 @@ export const workingListsContextDesc = createReducerDescription({
     },
 }, 'workingListsContext');
 
-const updateUserSelectedFilersOnUrlUpdate = (state, action) => {
-    const payload = action.payload;
-    const nextProgramId = payload.nextProps.programId;
-    const prevProgramId = payload.prevProps.programId;
-    if (nextProgramId !== prevProgramId) {
-        return {};
-    }
-    return state;
-};
 export const workingListsUserSelectedFiltersDesc = createReducerDescription({
     [filterSelectorActionTypes.REST_MENU_ITEM_SELECTED]: (state, action) => {
-        const newState = {
-            ...state,
-            [action.payload.id]: true,
+        const { id, listId } = action.payload;
+        const currentListState = {
+            ...state[listId],
+            [id]: true,
         };
 
-        return newState;
+        return {
+            ...state,
+            [listId]: currentListState,
+        };
     },
     [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
         const { listId, config = {} } = action.payload;
@@ -351,27 +359,10 @@ export const workingListsUserSelectedFiltersDesc = createReducerDescription({
         };
     },
     [filterSelectorActionTypes.UPDATE_INCLUDED_FILTERS_AFTER_COLUMN_SORTING]: (state, action) => {
-        const newState = action.payload.includeFilters;
-        return newState;
-    },
-    [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: () => ({}),
-    [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: updateUserSelectedFilersOnUrlUpdate,
-    [editEventSelectorActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
-        const payload = action.payload;
-        const nextProgramId = payload.eventContainer.event.programId;
-        const prevProgramId = payload.prevProgramId;
-        if (nextProgramId !== prevProgramId) {
-            return {};
-        }
-        return state;
-    },
-    [viewEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
-        const payload = action.payload;
-        const nextProgramId = payload.eventContainer.event.programId;
-        const prevProgramId = payload.prevProgramId;
-        if (nextProgramId !== prevProgramId) {
-            return {};
-        }
-        return state;
+        const { listId, includeFilters } = action.payload;
+        return {
+            ...state,
+            [listId]: includeFilters,
+        };
     },
 }, 'workingListsUserSelectedFilters');

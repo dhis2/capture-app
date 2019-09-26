@@ -31,19 +31,9 @@ class ColumnSelectorDialog extends Component<Props, State> {
         };
     }
 
-    getListToSave = (): Array<Object> => this.state.columnList
-        .map(column => ({
-            id: column.id,
-            visible: column.visible,
-            isMainProperty: column.isMainProperty,
-            header: column.header,
-            type: column.type,
-            options: column.options,
-        }));
-
     handleSave = () => {
         const { onSave } = this.props;
-        onSave(this.getListToSave());
+        onSave(this.state.columnList);
     };
 
     handleToggle = (id: string) => () => {

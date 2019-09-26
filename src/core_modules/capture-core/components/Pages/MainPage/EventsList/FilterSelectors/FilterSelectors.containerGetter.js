@@ -3,16 +3,23 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import getFilterSelectorsComponent from './FilterSelectors.componentGetter';
 import { restMenuItemSelected } from './filterSelector.actions';
+import { makeOnItemSelectedSelector } from './filterSelectors.selectors';
 
-const mapStateToProps = (state: ReduxState) => ({
-    userSelectedFilters: state.workingListsUserSelectedFilters,
+const mapStateToProps = (state: ReduxState, props: Object) => ({
+    userSelectedFilters: state.workingListsUserSelectedFilters[props.listId],
 });
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onRestMenuItemSelected: (id: string) => {
-        dispatch(restMenuItemSelected(id));
-    },
-});
+const mapDispatchToProps = () => {
+    const onItemSelectedMemoized = makeOnItemSelectedSelector();
+
+    return (dispatch: ReduxDispatch, props: Object) => ({
+        onRestMenuItemSelected: onItemSelectedMemoized({
+            dispatch,
+            listId: props.listId,
+            onItemSelected: restMenuItemSelected,
+        }),
+    });
+};
 
 export default (InnerComponent: React.ComponentType<any>) =>
     connect(mapStateToProps, mapDispatchToProps)(getFilterSelectorsComponent(InnerComponent));
