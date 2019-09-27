@@ -6,6 +6,7 @@ import VirtualizedSelect from '../../FormFields/Options/SelectVirtualizedV2/Opti
 import { buildCategoryOptionsAsync } from '../../../metaDataMemoryStoreBuilders';
 import withLoadingIndicator from '../../../HOC/withLoadingIndicator';
 import { makeOptionsSelector, makeOnSelectSelector } from './categorySelector.selectors';
+import { getApi } from '../../../d2/d2Instance';
 
 const VirtualizedSelectLoadingIndicatorHOC =
     withLoadingIndicator(null, null, (props: Object) => props.options)(VirtualizedSelect);
@@ -28,40 +29,55 @@ type SelectOption = {
 };
 
 type State = {
-    categoryOptions: ?Array<CategoryOption>,
+    options: ?Array<SelectOption>,
 };
 
 class CategorySelector extends React.Component<Props, State> {
+    static getOptionsAsync(categoryId: string, selectedOrgUnitId: ?string) {
+        const predicate = (categoryOption: Object) => {
+            const orgUnits = categoryOption.organisationUnits;
+            if (!orgUnits) {
+                return true;
+            }
+            return !!orgUnits[selectedOrgUnitId];
+        };
+
+        const project = (categoryOption: Object) => ({
+            label: categoryOption.displayName,
+            value: categoryOption.id,
+        });
+
+        return buildCategoryOptionsAsync(categoryId, predicate, project);
+    }
+
     optionsSelector: Function;
     onSelectSelector: Function;
     constructor(props: Props) {
         super(props);
         this.state = {
-            categoryOptions: null,
+            options: null,
         };
 
         this.optionsSelector = makeOptionsSelector();
         this.onSelectSelector = makeOnSelectSelector();
 
-        buildCategoryOptionsAsync(this.props.category)
-            .then((categoryOptions) => {
+        const { category, selectedOrgUnitId } = this.props;
+
+        CategorySelector
+            .getOptionsAsync(category.id, selectedOrgUnitId)
+            .then((options) => {
                 this.setState({
-                    categoryOptions,
+                    options,
                 });
             });
     }
 
     componentWillUnmount() {
-        this.setState({
-            categoryOptions: null,
-        });
-        this.optionsSelector({ selectedOrgUnitId: null, categoryOptions: [] });
     }
 
     render() {
         const { selectedOrgUnitId, onSelect, ...passOnProps } = this.props;
-        const { categoryOptions } = this.state;
-        const options = categoryOptions && this.optionsSelector({ selectedOrgUnitId, categoryOptions });
+        const { options } = this.state;
         const handleSelect = this.onSelectSelector({ options, onSelect });
 
         return (

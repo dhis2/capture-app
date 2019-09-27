@@ -1,5 +1,5 @@
 // @flow
-import StorageController from 'capture-core-utils/storage/StorageController';
+import { StorageController, IndexedDBAdapter } from 'capture-core-utils/storage';
 import { getCurrentUser } from '../d2/d2Instance';
 import { metaDataStores, reduxPersistStores, maintenanceStores } from './stores/index';
 
@@ -64,6 +64,13 @@ async function initUserControllerAsync(mainStorageController: StorageController)
                 }
                 return storage
                     .set(reduxPersistStores.REDUX_PERSIST, upgradeTempData);
+            },
+            (objectStore, adapter) => {
+                if (adapter === IndexedDBAdapter) {
+                    if (objectStore.name === metaDataStores.CATEGORY_OPTIONS) {
+                        objectStore.createIndex('category', 'categories', { multiEntry: true });
+                    }
+                }
             },
         );
     return userStorageController;

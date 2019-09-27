@@ -13,4 +13,5 @@ export default {
     OPTION_SETS: 'optionSets',
     CATEGORIES: 'categories',
     CATEGORY_OPTIONS_BY_CATEGORY: 'categoryOptionsByCategory',
+    CATEGORY_OPTIONS: 'categoryOptions',
 };

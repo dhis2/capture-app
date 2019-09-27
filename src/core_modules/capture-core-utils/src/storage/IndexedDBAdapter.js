@@ -59,7 +59,7 @@ class IndexedDBAdapter {
         this.keyPath = options.keyPath;
     }
 
-    _upgrade() {
+    _upgrade(onCreateObjectStore) {
         if (this.db.objectStoreNames) {
             const dbStoreNames = Array.from(this.db.objectStoreNames);
             dbStoreNames.forEach((name) => {
@@ -68,7 +68,8 @@ class IndexedDBAdapter {
         }
 
         this.objectStoreNames.forEach((name) => {
-            this.db.createObjectStore(name);
+            const objectStore = this.db.createObjectStore(name);
+            onCreateObjectStore && onCreateObjectStore(objectStore, IndexedDBAdapter);
         });
     }
 
@@ -76,7 +77,7 @@ class IndexedDBAdapter {
         onBeforeUpgrade: a callback method, getting an object with a "get" property as argument. The "get" property can be used to retrieve something from IndexedDB
         onAfterUpgrade: a callback method, getting an ojbect with a "set" property as argument. The "set" property can be used to set something in IndexedDB
     */
-    open(onBeforeUpgrade, onAfterUpgrade) {
+    open(onBeforeUpgrade, onAfterUpgrade, onCreateObjectStore) {
         const request = IndexedDBAdapter.indexedDB.open(this.name, this.version);
         return new Promise((resolve, reject) => {
             request.onsuccess = (e) => {
@@ -108,7 +109,7 @@ class IndexedDBAdapter {
                         }),
                     )
                     .then(() => {
-                        this._upgrade();
+                        this._upgrade(onCreateObjectStore);
                         return Promise.resolve();
                     })
                     .then(() => onAfterUpgrade && onAfterUpgrade({
@@ -290,7 +291,7 @@ class IndexedDBAdapter {
         });
     }
 
-    getAll(store, predicate) {
+    getAll(store, options) {
         return new Promise((resolve, reject) => {
             let tx;
             let catchError;
@@ -298,10 +299,10 @@ class IndexedDBAdapter {
                 catchError = error;
                 tx.abort();
             };
+            const { predicate, project, onIDBGetRequest } = options || {};
 
             try {
                 const records = [];
-                const filtered = typeof predicate === 'function';
 
                 tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
                 tx.oncomplete = () => {
@@ -318,19 +319,20 @@ class IndexedDBAdapter {
                 };
 
                 const objectStore = tx.objectStore(store);
-                const request = objectStore.openCursor();
+                const request = onIDBGetRequest ?
+                    onIDBGetRequest(objectStore, IndexedDBAdapter) :
+                    objectStore.openCursor();
+
                 request.onsuccess = (e) => {
                     const cursor = e.target.result;
 
                     if (cursor) {
-                        cursor.value[this.keyPath] = cursor.key;
+                        cursor.value[this.keyPath] = cursor.primaryKey || cursor.key;
 
-                        if (filtered) {
-                            if (predicate(cursor.value)) {
-                                records.push(cursor.value);
-                            }
-                        } else {
-                            records.push(cursor.value);
+                        const dbValue = cursor.value;
+                        if (!predicate || predicate(dbValue)) {
+                            const value = project ? project(dbValue) : dbValue;
+                            records.push(value);
                         }
 
                         cursor.continue();

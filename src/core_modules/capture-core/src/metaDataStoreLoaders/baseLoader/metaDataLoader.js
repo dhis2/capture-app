@@ -68,6 +68,7 @@ export default async function loadMetaData() {
     await loadCategories(storageController, categoryIds, {
         categories: objectStores.CATEGORIES,
         categoryOptionsByCategory: objectStores.CATEGORY_OPTIONS_BY_CATEGORY,
+        categoryOptions: objectStores.CATEGORY_OPTIONS,
     });
     await loadOptionSets(storageController, objectStores.OPTION_SETS, [...optionSetsMetaFromPrograms, ...optionSetsMetaFromTrackedEntityTypes]);
 }

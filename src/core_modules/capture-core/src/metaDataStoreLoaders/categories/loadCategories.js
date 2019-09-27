@@ -12,8 +12,8 @@ type InputCategory = {
 type ApiCategoryOption = {
     id: string,
     displayName: string,
-    categories: Array<{id: string}>,
-    organisationUnits: Array<{id: string}>,
+    categories: Array<string>,
+    organisationUnits: Array<string>,
     access: Object,
 };
 
@@ -35,38 +35,31 @@ async function requestCategoryOptions(specification: Specification, pageNr: numb
     return categoryOptions || [];
 }
 
-function getOptionsByCategory(categoryOptions: Array<ApiCategoryOption>, requestedCategoryIds: Array<string>) {
+function addOptionsByCategory(
+    categoryOptions: Array<ApiCategoryOption>,
+    requestedCategoryIds: Array<string>,
+    prevOptionsByCategory: Object,
+) {
     return categoryOptions.reduce((accOptionsByCategory, option) => {
-        const optionCategories = option.categories;
-        const categories = optionCategories
-            .filter(oc => requestedCategoryIds.includes(oc.id));
+        const optionCategoryIds = option.categories;
+        const categoryIds = optionCategoryIds
+            .filter(ocId => requestedCategoryIds.includes(ocId));
 
-        accOptionsByCategory = categories.reduce((accOptionsByCategoryInProgress, category) => {
-            const currentOptionsForCategory = accOptionsByCategoryInProgress[category.id] || [];
-            const organisationUnits = option.organisationUnits;
-            currentOptionsForCategory.push({
-                id: option.id,
-                displayName: option.displayName,
-                access: option.access,
-                organisationUnitIds: organisationUnits && organisationUnits.length > 0 ?
-                    organisationUnits.reduce((accOusAsObject, ou) => {
-                        accOusAsObject[ou.id] = true;
-                        return accOusAsObject;
-                    }, {}) :
-                    null,
-            });
-            accOptionsByCategoryInProgress[category.id] = currentOptionsForCategory;
+        accOptionsByCategory = categoryIds.reduce((accOptionsByCategoryInProgress, categoryId) => {
+            const currentOptionsForCategory = accOptionsByCategoryInProgress[categoryId] || {};
+            currentOptionsForCategory[option.id] = true;
+            accOptionsByCategoryInProgress[categoryId] = currentOptionsForCategory;
             return accOptionsByCategoryInProgress;
         }, accOptionsByCategory);
         return accOptionsByCategory;
-    }, {});
+    }, prevOptionsByCategory);
 }
 
 function getCategoryOptionSpec(ids: Array<string>) {
     return {
         modelName: 'categoryOptions',
         queryParams: {
-            fields: 'id,displayName,categories, organisationUnits, access[*]',
+            fields: 'id,displayName,categories~pluck, organisationUnits~pluck, access[*]',
             filter: [
                 `categories.id:in:[${ids.toString()}]`,
                 'access.data.read:in:[true]',
@@ -78,77 +71,77 @@ function getCategoryOptionSpec(ids: Array<string>) {
 }
 
 function buildCacheCategoryOptions(
-    optionsByCategory: Object,
+    categoryOptions: Array<Object>,
 ) {
-    const categoriesToStore = Object
-        .keys(optionsByCategory)
-        .map(key => ({
-            id: key,
-            options: optionsByCategory[key],
-        }));
-    return categoriesToStore;
-}
-
-function getKey(
-    existingKeys: Array<string>,
-    id: string,
-) {
-    let attemptNr = 0;
-    let done = false;
-    let key;
-    while (!done) {
-        attemptNr += 1;
-        key = attemptNr === 1 ? id : `${id}##${attemptNr}`;
-        done = !existingKeys.includes(key);
-    }
-    return key;
-}
-
-async function addToStorageAsync(
-    optionsByCategory: Array<Object>,
-    storageController: StorageController,
-    storeName: string,
-) {
-    const existingKeys = await storageController.getKeys(storeName);
-    const toStore = optionsByCategory
-        .map(c => ({
-            ...c,
-            id: getKey(existingKeys, c.id),
-        }));
-    await storageController.setAll(storeName, toStore);
+    return categoryOptions
+        .map((co) => {
+            const organisationUnitsObject = co.organisationUnits && co.organisationUnits.length > 0 ?
+                co.organisationUnits.reduce((acc, orgUnitId) => {
+                    acc[orgUnitId] = true;
+                    return acc;
+                }, {}) : null;
+            co.organisationUnits = organisationUnitsObject;
+            return co;
+        });
 }
 
 async function loadCategoryOptionsBatchAsync(
     page: number,
     categoryOptionsSpec: Object,
     categoryIds: Array<string>,
+    bachSize: number,
     storageController: StorageController,
     storeName: string,
+    prevOptionsByCategory: Object,
 ) {
-    const categoryOptions = await requestCategoryOptions(categoryOptionsSpec, page, 10000);
-    const optionsByCategory = getOptionsByCategory(categoryOptions, categoryIds);
-    const optionsByCategoryToStore = buildCacheCategoryOptions(optionsByCategory);
-    await addToStorageAsync(optionsByCategoryToStore, storageController, storeName);
+    const categoryOptions = await requestCategoryOptions(categoryOptionsSpec, page, bachSize);
+    const optionsByCategory = addOptionsByCategory(categoryOptions, categoryIds, prevOptionsByCategory);
+    const categoryOptionsToStore = buildCacheCategoryOptions(categoryOptions);
+    await storageController.setAll(storeName, categoryOptionsToStore);
 
-    return categoryOptions.length;
+    return {
+        retrievedCount: categoryOptions.length,
+        optionsByCategory,
+    };
 }
 
 // This might look like horrible code!, but there is a reason. Freeing up memory is the most important thing here, ref JIRA-issue DHIS2-7259
 async function loadCategoryOptionsInBatchesAsync(
     categoryIds: Array<string>,
     storageController: StorageController,
-    storeName: string,
+    stores: {
+        categoryOptionsByCategory: string,
+        categoryOptions: string,
+    },
 ) {
     const categoryOptionsSpec = getCategoryOptionSpec(categoryIds);
 
-    const batchSize = 10000;
+    const batchSize = 5000;
     let page = 0;
     let retrievedCount;
+    let optionsByCategory = {};
     do {
         page += 1;
-        retrievedCount =
-            await loadCategoryOptionsBatchAsync(page, categoryOptionsSpec, categoryIds, storageController, storeName);
+        ({ retrievedCount, optionsByCategory } =
+            await loadCategoryOptionsBatchAsync(
+                page,
+                categoryOptionsSpec,
+                categoryIds,
+                batchSize,
+                storageController,
+                stores.categoryOptions,
+                optionsByCategory,
+            ));
     } while (batchSize === retrievedCount);
+
+    // save optionsByCategory
+    const optionsByCategoryToStore = Object
+        .keys(optionsByCategory)
+        .map(cId => ({
+            id: cId,
+            options: optionsByCategory[cId],
+        }));
+    await storageController.setAll(stores.categoryOptionsByCategory, optionsByCategoryToStore);
 }
 
 async function setCategoriesAsync(
@@ -165,6 +158,7 @@ export default async function loadCategories(
     stores: {
         categories: string,
         categoryOptionsByCategory: string,
+        categoryOptions: string,
     },
 ) {
     const uniqueCategories = [
@@ -172,12 +166,15 @@ export default async function loadCategories(
             inputCategories.map(ic => [ic.id, ic]),
         ).values(),
     ];
-    
+
     await setCategoriesAsync(uniqueCategories, storageController, stores.categories);
 
     const uniqueCateogryIds = uniqueCategories.map(uc => uc.id);
     const categoryIdBatches = chunk(uniqueCateogryIds, 50);
     await categoryIdBatches
         .asyncForEach(idBatch =>
-            loadCategoryOptionsInBatchesAsync(idBatch, storageController, stores.categoryOptionsByCategory));
+            loadCategoryOptionsInBatchesAsync(idBatch, storageController, {
+                categoryOptionsByCategory: stores.categoryOptionsByCategory,
+                categoryOptions: stores.categoryOptions,
+            }));
 }
