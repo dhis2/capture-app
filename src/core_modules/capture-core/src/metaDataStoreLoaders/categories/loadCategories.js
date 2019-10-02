@@ -29,9 +29,8 @@ async function requestCategoryOptions(specification: Specification, pageNr: numb
         pageSize,
     };
 
-    const categoryOptions = await getApi().get(specification.modelName, specification.queryParams)
+    const categoryOptions = await getApi().get(specification.modelName, { ...specification.queryParams })
         .then(response => response && response.categoryOptions);
-
     return categoryOptions || [];
 }
 

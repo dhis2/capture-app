@@ -149,7 +149,7 @@ class IndexedDBAdapter {
             try {
                 const storeObject = JSON.parse(JSON.stringify(dataObject));
                 const key = storeObject[this.keyPath];
-                delete storeObject[this.keyPath];
+                // delete storeObject[this.keyPath];
 
                 tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_WRITE);
                 tx.oncomplete = () => {
@@ -210,7 +210,7 @@ class IndexedDBAdapter {
                         }
 
                         const key = storeObject[this.keyPath];
-                        delete storeObject[this.keyPath];
+                        // delete storeObject[this.keyPath];
                         const request = objectStore.put(storeObject, key);
 
                         request.onsuccess = () => {
@@ -291,6 +291,70 @@ class IndexedDBAdapter {
         });
     }
 
+    // eslint-disable-next-line class-methods-use-this
+    async _getAllInBatches(objectStore, options, records) {
+        const { predicate, project, onIDBGetRequest, batchSize } = options || {};
+
+
+        const executeRequest = keyRange =>
+            new Promise((resolve) => {
+                const request = onIDBGetRequest ?
+                    onIDBGetRequest(objectStore, IndexedDBAdapter) :
+                    objectStore.getAll(keyRange, batchSize);
+
+                request.onsuccess = (e) => {
+                    const values = request.result;
+                    const count = values ? values.length : 0;
+                    let lastId;
+                    if (count > 0) {
+                        values.forEach((value) => {
+                            // value[this.keyPath] = cursor.primaryKey || cursor.key;
+                            this._processGetAllItem(value, predicate, project, records);
+                        });
+                        lastId = values[count - 1].id;
+                    }
+                    resolve({ count, lastId });
+                };
+            });
+
+        let keyRange;
+        let done = false;
+        do {
+            // eslint-disable-next-line no-await-in-loop
+            const { count, lastId } = await executeRequest(keyRange);
+            if (count < batchSize) {
+                done = true;
+            } else {
+                keyRange = IDBKeyRange.lowerBound(lastId, true);
+            }
+        } while (!done);
+    }
+
+    _getAllWithCursor(objectStore, options, records) {
+        const { predicate, project, onIDBGetRequest } = options || {};
+        const request = onIDBGetRequest ?
+            onIDBGetRequest(objectStore, IndexedDBAdapter) :
+            objectStore.openCursor();
+
+        request.onsuccess = (e) => {
+            const cursor = e.target.result;
+            if (cursor) {
+                cursor.value[this.keyPath] = cursor.primaryKey || cursor.key;
+                const dbValue = cursor.value;
+                this._processGetAllItem(dbValue, predicate, project, records);
+                cursor.continue();
+            }
+        };
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    _processGetAllItem(dbValue, predicate, project, records) {
+        if (!predicate || predicate(dbValue)) {
+            const value = project ? project(dbValue) : dbValue;
+            records.push(value);
+        }
+    }
+
     getAll(store, options) {
         return new Promise((resolve, reject) => {
             let tx;
@@ -299,12 +363,16 @@ class IndexedDBAdapter {
                 catchError = error;
                 tx.abort();
             };
-            const { predicate, project, onIDBGetRequest } = options || {};
+            const { batchSize } = options || {};
 
             try {
                 const records = [];
-
                 tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
+                const objectStore = tx.objectStore(store);
+                batchSize ?
+                    this._getAllInBatches(objectStore, options, records) :
+                    this._getAllWithCursor(objectStore, options, records);
+
                 tx.oncomplete = () => {
                     resolve(records);
                 };
@@ -316,27 +384,6 @@ class IndexedDBAdapter {
                 tx.onabort = () => {
                     reject(errorCreator(IndexedDBAdapter.errorMessages.GET_ALL_FAILED)(
                         { adapter: this, aborted: true, error: catchError }));
-                };
-
-                const objectStore = tx.objectStore(store);
-                const request = onIDBGetRequest ?
-                    onIDBGetRequest(objectStore, IndexedDBAdapter) :
-                    objectStore.openCursor();
-
-                request.onsuccess = (e) => {
-                    const cursor = e.target.result;
-
-                    if (cursor) {
-                        cursor.value[this.keyPath] = cursor.primaryKey || cursor.key;
-
-                        const dbValue = cursor.value;
-                        if (!predicate || predicate(dbValue)) {
-                            const value = project ? project(dbValue) : dbValue;
-                            records.push(value);
-                        }
-
-                        cursor.continue();
-                    }
                 };
             } catch (error) {
                 if (tx) {
@@ -490,18 +537,15 @@ class IndexedDBAdapter {
         });
     }
 
-    count(store, key) {
+    count(store, options) {
         return new Promise((resolve, reject) => {
+            const { onIDBGetRequest, query } = options || {};
             let tx;
             let catchError;
             const abortTx = (error) => {
                 catchError = error;
                 tx.abort();
             };
-
-            if (!key) {
-                key = null;
-            }
 
             try {
                 let result;
@@ -518,7 +562,9 @@ class IndexedDBAdapter {
                 };
 
                 const objectStore = tx.objectStore(store);
-                const request = objectStore.count(key);
+                const request = onIDBGetRequest ?
+                    onIDBGetRequest(objectStore) :
+                    objectStore.count(query);
 
                 request.onsuccess = (e) => {
                     result = e.target.result;

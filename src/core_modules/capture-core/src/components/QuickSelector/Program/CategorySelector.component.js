@@ -66,6 +66,15 @@ class CategorySelector extends React.Component<Props, State> {
         CategorySelector
             .getOptionsAsync(category.id, selectedOrgUnitId)
             .then((options) => {
+                options.sort((a, b) => {
+                    if (a.label === b.label) {
+                        return 0;
+                    }
+                    if (a.label < b.label) {
+                        return -1;
+                    }
+                    return 1;
+                });
                 this.setState({
                     options,
                 });
