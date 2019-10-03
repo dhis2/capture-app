@@ -47,7 +47,11 @@ class CategorySelector extends React.Component<Props, State> {
             value: categoryOption.id,
         });
 
-        return buildCategoryOptionsAsync(categoryId, predicate, project);
+        return buildCategoryOptionsAsync(
+            categoryId,
+            { predicate, project },
+            { organisationUnitId: selectedOrgUnitId },
+        );
     }
 
     optionsSelector: Function;

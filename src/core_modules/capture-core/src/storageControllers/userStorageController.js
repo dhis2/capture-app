@@ -1,7 +1,7 @@
 // @flow
 import { StorageController, IndexedDBAdapter } from 'capture-core-utils/storage';
 import { getCurrentUser } from '../d2/d2Instance';
-import { metaDataStores, reduxPersistStores, maintenanceStores } from './stores/index';
+import { metaDataStores, reduxPersistStores, maintenanceStores } from './stores';
 
 function getStorageName(mainStorageName: string) {
     const user = getCurrentUser();

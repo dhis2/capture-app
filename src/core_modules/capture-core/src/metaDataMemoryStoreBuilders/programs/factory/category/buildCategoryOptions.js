@@ -1,7 +1,8 @@
 // @flow
 /* eslint-disable no-await-in-loop */
+import { WebWorker } from 'capture-core-utils';
 import { MemoryAdapter } from 'capture-core-utils/storage';
-import { getUserStorageController } from '../../../../storageControllers';
+import { getUserStorageController, getUserIndexedDbWorker } from '../../../../storageControllers';
 import { metaDataStores } from '../../../../storageControllers/stores';
 
 type Predicate = (categoryOption: Object) => boolean;
@@ -15,10 +16,18 @@ async function getCategoryOptionIds(categoryId: string) {
     return storeData.options;
 }
 
-async function getCategoryOptionsThroughCursor(predicate, project, categoryId) {
+async function getCategoryOptionsThroughCursor(predicate, project, categoryId, categoryOptionIds) {
+    const internalPredicate = (categoryOption: Object) => {
+        const isOptionForCategory = categoryOptionIds[categoryOption.id];
+        if (!isOptionForCategory) {
+            return false;
+        }
+        return predicate(categoryOption);
+    };
+
     const storageController = getUserStorageController();
     const mappedOptions = await storageController.getAll(metaDataStores.CATEGORY_OPTIONS, {
-        predicate,
+        internalPredicate,
         project,
         onIDBGetRequest: source => source
             .index('category')
@@ -27,14 +36,19 @@ async function getCategoryOptionsThroughCursor(predicate, project, categoryId) {
     return mappedOptions;
 }
 
-async function getCategoryOptionsThroughBatches(predicate, project) {
-    const storageController = getUserStorageController();
-    const mappedOptions = await storageController.getAll(metaDataStores.CATEGORY_OPTIONS, {
-        predicate,
-        project,
-        batchSize,
+async function getCategoryOptionsThroughBatches(workerOptions: Object) {
+    return new Promise((resolve, reject) => {
+        const worker = getUserIndexedDbWorker();
+        worker.postMessage({ type: 'getCategoryOptionsInBatches', batchSize: 5000, workerOptions });
+        worker.addEventListener('message', (event) => {
+            const data = event.data;
+            if (data.success) {
+                resolve(data.records);
+            } else {
+                reject(data.error);
+            }
+        });
     });
-    return mappedOptions;
 }
 
 async function getLoader(categoryId: string) {
@@ -73,31 +87,41 @@ function getCategoryOptionsFromMemoryAdapterAsync(
         .then(options => options.filter(o => o));
 }
 
-async function getCategoryOptions(
-    categoryId: string,
-    categoryOptionIds: Object,
-    predicate: Predicate,
-    project: Project,
-) {
+async function getCategoryOptions({
+    categoryId,
+    categoryOptionIds,
+    workerOptions,
+    predicate,
+    project,
+}) {
     if (getUserStorageController().adapterType === MemoryAdapter) {
         return getCategoryOptionsFromMemoryAdapterAsync(categoryOptionIds, predicate, project);
     }
 
-    const internalPredicate = (categoryOption: Object) => {
-        const isOptionForCategory = categoryOptionIds[categoryOption.id];
-        if (!isOptionForCategory) {
-            return false;
-        }
-        return predicate(categoryOption);
-    };
-
-    const loader = await getLoader(categoryId);
-    // const loader = getCategoryOptionsThroughCursor;
-    const mappedOptions = await loader(internalPredicate, project, categoryId);
+    // const loader = await getLoader(categoryId);
+    const loader = getCategoryOptionsThroughCursor;
+    const mappedOptions = await (loader === getCategoryOptionsThroughCursor ?
+        getCategoryOptionsThroughCursor(predicate, project, categoryId, categoryOptionIds) :
+        getCategoryOptionsThroughBatches({ ...workerOptions, categoryOptionIds }));
     return mappedOptions;
 }
 
-export async function buildCategoryOptionsAsync(categoryId: string, predicate: Predicate, project: Project) {
+export async function buildCategoryOptionsAsync(
+    categoryId: string,
+    callbacks: {
+        predicate: Predicate,
+        project: Project,
+    },
+    workerOptions: {
+        organisationUnitId: ?string,
+    },
+) {
     const categoryOptionIds = await getCategoryOptionIds(categoryId);
-    return getCategoryOptions(categoryId, categoryOptionIds, predicate, project);
+    return getCategoryOptions({
+        categoryId,
+        categoryOptionIds,
+        workerOptions,
+        predicate: callbacks.predicate,
+        project: callbacks.project,
+    });
 }
