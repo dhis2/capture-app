@@ -16,7 +16,11 @@ async function getCategoryOptionIds(categoryId: string) {
     return storeData.options;
 }
 
-async function getCategoryOptionsThroughCursor(predicate, project, categoryId, categoryOptionIds) {
+async function getCategoryOptionsThroughCursor(
+    categoryId,
+    categoryOptionIds,
+    { predicate, project, onIsAborted },
+) {
     const internalPredicate = (categoryOption: Object) => {
         const isOptionForCategory = categoryOptionIds[categoryOption.id];
         if (!isOptionForCategory) {
@@ -27,8 +31,9 @@ async function getCategoryOptionsThroughCursor(predicate, project, categoryId, c
 
     const storageController = getUserStorageController();
     const mappedOptions = await storageController.getAll(metaDataStores.CATEGORY_OPTIONS, {
-        internalPredicate,
+        predicate: internalPredicate,
         project,
+        onIsAborted,
         onIDBGetRequest: source => source
             .index('category')
             .openCursor(IDBKeyRange.only(categoryId)),
@@ -87,22 +92,20 @@ function getCategoryOptionsFromMemoryAdapterAsync(
         .then(options => options.filter(o => o));
 }
 
-async function getCategoryOptions({
+async function getCategoryOptions(
     categoryId,
     categoryOptionIds,
-    workerOptions,
-    predicate,
-    project,
-}) {
+    callbacks: {
+        predicate: Predicate,
+        project: Project,
+        onIsAborted: Function,
+    },
+) {
+    const { predicate, project } = callbacks;
     if (getUserStorageController().adapterType === MemoryAdapter) {
         return getCategoryOptionsFromMemoryAdapterAsync(categoryOptionIds, predicate, project);
     }
-
-    // const loader = await getLoader(categoryId);
-    const loader = getCategoryOptionsThroughCursor;
-    const mappedOptions = await (loader === getCategoryOptionsThroughCursor ?
-        getCategoryOptionsThroughCursor(predicate, project, categoryId, categoryOptionIds) :
-        getCategoryOptionsThroughBatches({ ...workerOptions, categoryOptionIds }));
+    const mappedOptions = await getCategoryOptionsThroughCursor(categoryId, categoryOptionIds, callbacks);
     return mappedOptions;
 }
 
@@ -111,17 +114,13 @@ export async function buildCategoryOptionsAsync(
     callbacks: {
         predicate: Predicate,
         project: Project,
-    },
-    workerOptions: {
-        organisationUnitId: ?string,
+        onIsAborted: Function,
     },
 ) {
     const categoryOptionIds = await getCategoryOptionIds(categoryId);
-    return getCategoryOptions({
+    return getCategoryOptions(
         categoryId,
         categoryOptionIds,
-        workerOptions,
-        predicate: callbacks.predicate,
-        project: callbacks.project,
-    });
+        callbacks,
+    );
 }

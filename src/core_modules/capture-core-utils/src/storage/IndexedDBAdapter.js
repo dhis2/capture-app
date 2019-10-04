@@ -330,19 +330,24 @@ class IndexedDBAdapter {
         } while (!done);
     }
 
-    _getAllWithCursor(objectStore, options, records) {
-        const { predicate, project, onIDBGetRequest } = options || {};
+    _getAllWithCursor(objectStore, options, records, abortTx) {
+        const { predicate, project, onIsAborted, onIDBGetRequest } = options || {};
         const request = onIDBGetRequest ?
             onIDBGetRequest(objectStore, IndexedDBAdapter) :
             objectStore.openCursor();
 
         request.onsuccess = (e) => {
-            const cursor = e.target.result;
-            if (cursor) {
-                cursor.value[this.keyPath] = cursor.primaryKey || cursor.key;
-                const dbValue = cursor.value;
-                this._processGetAllItem(dbValue, predicate, project, records);
-                cursor.continue();
+            const isAborted = !!onIsAborted && onIsAborted();
+            if (isAborted) {
+                abortTx();
+            } else {
+                const cursor = e.target.result;
+                if (cursor) {
+                    cursor.value[this.keyPath] = cursor.primaryKey || cursor.key;
+                    const dbValue = cursor.value;
+                    this._processGetAllItem(dbValue, predicate, project, records);
+                    cursor.continue();
+                }
             }
         };
     }
@@ -363,21 +368,31 @@ class IndexedDBAdapter {
                 catchError = error;
                 tx.abort();
             };
-            const { batchSize } = options || {};
+            const { batchSize, isAborted } = options || {};
 
             try {
                 const records = [];
                 tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
                 const objectStore = tx.objectStore(store);
                 batchSize ?
-                    this._getAllInBatches(objectStore, options, records) :
-                    this._getAllWithCursor(objectStore, options, records);
+                    this._getAllInBatches(objectStore, options, records, abortTx) :
+                    this._getAllWithCursor(objectStore, options, records, abortTx);
 
                 tx.oncomplete = () => {
+                    if (isAborted && isAborted()) {
+                        reject(errorCreator(IndexedDBAdapter.errorMessages.GET_ALL_FAILED)(
+                            { adapter: this, aborted: true, error: catchError }));
+                        return;
+                    }
                     resolve(records);
                 };
 
                 tx.onerror = (error) => {
+                    if (isAborted && isAborted()) {
+                        reject(errorCreator(IndexedDBAdapter.errorMessages.GET_ALL_FAILED)(
+                            { adapter: this, aborted: true, error: catchError }));
+                        return;
+                    }
                     reject(errorCreator(IndexedDBAdapter.errorMessages.GET_ALL_FAILED)({ adapter: this, error }));
                 };
 
