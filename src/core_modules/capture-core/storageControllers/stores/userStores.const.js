@@ -13,4 +13,5 @@ export default {
     TRACKED_ENTITY_ATTRIBUTES: 'trackedEntityAttributes',
     OPTION_SETS: 'optionSets',
     CATEGORIES: 'categories',
+    REDUX_PERSIST: 'reduxPersist',
 };
