@@ -7,7 +7,7 @@ import InfiniteCalendar from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css';
 import './customStyles.css';
 
-import parseDate from 'capture-core-utils/parsers/date.parser';
+import { parseDate } from '../../../../utils/converters/date';
 import moment from 'capture-core-utils/moment/momentResolver';
 import CurrentLocaleData from '../../../../utils/localeData/CurrentLocaleData';
 import capitalizeFirstLetter from 'capture-core-utils/string/capitalizeFirstLetter';

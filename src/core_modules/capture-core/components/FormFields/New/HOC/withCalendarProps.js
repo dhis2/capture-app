@@ -1,9 +1,7 @@
 // @flow
 import * as React from 'react';
-import { parseDate } from 'capture-core-utils/parsers';
-import { moment } from 'capture-core-utils/moment';
 import { capitalizeFirstLetter } from 'capture-core-utils/string';
-import { systemSettingsStore } from '../../../../metaDataMemoryStores';
+import { parseDate, convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
 import getCalendarTheme from '../Fields/DateAndTimeFields/getCalendarTheme';
 import CurrentLocaleData from '../../../../utils/localeData/CurrentLocaleData';
 
@@ -20,7 +18,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
                 return null;
             }
 
-            const parseData = parseDate(inputValue, systemSettingsStore.get().dateFormat);
+            const parseData = parseDate(inputValue);
             if (!parseData.isValid) {
                 return null;
             }
@@ -29,9 +27,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
         }
 
         static convertValueOutFromCalendar(changeDate: Date) {
-            const dateFormat = systemSettingsStore.get().dateFormat;
-            const formattedDateString = moment(changeDate).format(dateFormat);
-            return formattedDateString;
+            return convertDateObjectToDateFormatString(changeDate);
         }
 
         calendarTheme: Object;

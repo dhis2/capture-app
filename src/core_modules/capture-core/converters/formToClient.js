@@ -3,7 +3,7 @@ import isString from 'd2-utilizr/lib/isString';
 
 import elementTypes from '../metaData/DataElement/elementTypes';
 import parseNumber from 'capture-core-utils/parsers/number.parser';
-import parseDate from 'capture-core-utils/parsers/date.parser';
+import { parseDate } from '../utils/converters/date';
 
 type DateTimeValue = {
     date: string,
@@ -63,7 +63,6 @@ const valueConvertersForType = {
     [elementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: (value: RangeValue) => convertRange(parseNumber, value),
     [elementTypes.INTEGER_NEGATIVE]: parseNumber,
     [elementTypes.INTEGER_NEGATIVE_RANGE]: (value: RangeValue) => convertRange(parseNumber, value),
-    // $FlowSuppress
     [elementTypes.DATE]: convertDate,
     [elementTypes.DATE_RANGE]: (value: RangeValue) => convertRange(convertDate, value),
     [elementTypes.DATETIME]: convertDateTime,
