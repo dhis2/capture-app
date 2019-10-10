@@ -4,7 +4,7 @@ import { errorCreator } from 'capture-core-utils/errorCreator';
 import StorageController from 'capture-core-utils/storage/StorageController';
 import LocalStorageAdapter from 'capture-core-utils/storage/DomLocalStorageAdapter';
 import { getMainStorageController, getUserStorageController } from '../../storageControllers';
-import { maintenanceStores } from '../../storageControllers/stores';
+import { mainStores } from '../../storageControllers/stores';
 
 const ACCESS_HISTORY_KEY = 'accessHistory';
 const cacheKeepCount = {
@@ -20,7 +20,7 @@ async function addUserCacheToHistory(
     userStorageController: StorageController,
 ) {
     const currentStorageName = userStorageController.name;
-    const historyContainer = await mainStorageController.get(maintenanceStores.USER_CACHES, ACCESS_HISTORY_KEY);
+    const historyContainer = await mainStorageController.get(mainStores.USER_CACHES, ACCESS_HISTORY_KEY);
     const history = historyContainer && historyContainer.values;
     let cleanedHistory;
     if (history) {
@@ -30,7 +30,7 @@ async function addUserCacheToHistory(
         cleanedHistory = [];
     }
     const updatedHistory = [currentStorageName, ...cleanedHistory];
-    await mainStorageController.set(maintenanceStores.USER_CACHES, {
+    await mainStorageController.set(mainStores.USER_CACHES, {
         id: ACCESS_HISTORY_KEY,
         values: updatedHistory,
     });
@@ -59,7 +59,7 @@ async function removeCaches(
                 log.warn(errorCreator(errorMessages.DESTROY_FAILED)({ cache, error }));
             }
         });
-        await mainStorageController.set(maintenanceStores.USER_CACHES, {
+        await mainStorageController.set(mainStores.USER_CACHES, {
             id: ACCESS_HISTORY_KEY,
             values: remainingHistory,
         });

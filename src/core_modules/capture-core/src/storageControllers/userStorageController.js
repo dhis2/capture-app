@@ -1,7 +1,7 @@
 // @flow
 import StorageController from 'capture-core-utils/storage/StorageController';
 import { getCurrentUser } from '../d2/d2Instance';
-import { metaDataStores, reduxPersistStores, maintenanceStores } from './stores/index';
+import { mainStores, userStores } from './stores/index';
 
 function getStorageName(mainStorageName: string) {
     const user = getCurrentUser();
@@ -21,9 +21,8 @@ function getCacheVersion() {
 }
 
 function getStores() {
-    const metaDataStoreList = Object.keys(metaDataStores).map(key => metaDataStores[key]);
-    const persistStoreList = Object.keys(reduxPersistStores).map(key => reduxPersistStores[key]);
-    return [...metaDataStoreList, ...persistStoreList];
+    const userStoresList = Object.keys(userStores).map(key => userStores[key]);
+    return userStoresList;
 }
 
 function createStorageController(
@@ -38,7 +37,7 @@ function createStorageController(
             appCacheVersion,
             [mainStorageController.adapterType],
             stores,
-            () => mainStorageController.setWithoutFallback(maintenanceStores.STATUS, {
+            () => mainStorageController.setWithoutFallback(mainStores.STATUS, {
                 id: 'fallback',
                 value: true,
             }),
@@ -54,7 +53,7 @@ async function initUserControllerAsync(mainStorageController: StorageController)
     await userStorageController
         .open(
             storage => storage
-                .get(reduxPersistStores.REDUX_PERSIST, 'reduxPersist:offline')
+                .get(userStores.REDUX_PERSIST, 'reduxPersist:offline')
                 .then((data) => {
                     upgradeTempData = data;
                 }),
@@ -63,7 +62,7 @@ async function initUserControllerAsync(mainStorageController: StorageController)
                     return null;
                 }
                 return storage
-                    .set(reduxPersistStores.REDUX_PERSIST, upgradeTempData);
+                    .set(userStores.REDUX_PERSIST, upgradeTempData);
             },
         );
     return userStorageController;

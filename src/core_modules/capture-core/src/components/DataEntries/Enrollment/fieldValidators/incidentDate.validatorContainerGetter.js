@@ -2,7 +2,7 @@
 import { Validators } from '@dhis2/d2-ui-forms';
 import i18n from '@dhis2/d2-i18n';
 import moment from '../../../../utils/moment/momentResolver';
-import parseDate from '../../../../utils/parsers/date.parser';
+import { parseDate } from '../../../../utils/converters/date';
 
 const isValidIncidentDate = (value: string, isFutureDateAllowed: boolean) => {
     const dateContainer = parseDate(value);

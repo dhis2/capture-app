@@ -1,5 +1,4 @@
 // @flow
 
-export { default as metaDataStores } from './metaDataStores.const';
-export { default as reduxPersistStores } from './reduxPersistStores.const';
-export { default as maintenanceStores } from './maintenanceStores.const';
+export { default as mainStores } from './mainStores.const';
+export { default as userStores } from './userStores.const';
