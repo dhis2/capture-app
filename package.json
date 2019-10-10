@@ -1,8 +1,8 @@
 {
   "name": "capture-app",
   "homepage": ".",
-  "version": "34.0.1",
-  "cacheVersion": "30",
+  "version": "33.0.3",
+  "cacheVersion": "16",
   "private": false,
   "dependencies": {
     "@dhis2/app-runtime": "1.3.0",
@@ -108,7 +108,7 @@
     "redux-devtools-extension": "^2.13.2"
   },
   "manifest.webapp": {
-    "version": "1.0.4",
+    "version": "1.0.3",
     "name": "Capture",
     "description": "Capture App",
     "launch_path": "index.html",
