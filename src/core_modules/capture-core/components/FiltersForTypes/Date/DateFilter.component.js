@@ -13,7 +13,7 @@ import From from './From.component';
 import To from './To.component';
 import {
     isValidDate,
-} from 'capture-core-utils/validators/form';
+} from '../../../utils/validators/form';
 import { convertValue as convertToClientValue } from '../../../converters/formToClient';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 import type { UpdatableFilterContent } from '../filters.types';
