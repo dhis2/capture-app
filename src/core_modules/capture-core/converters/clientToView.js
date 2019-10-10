@@ -1,17 +1,21 @@
 // @flow
 import React from 'react';
+import { moment } from 'capture-core-utils/moment';
 import elementTypes from '../metaData/DataElement/elementTypes';
 import DataElement from '../metaData/DataElement/DataElement';
-
-import { displayTypes, displayDate, displayDateTime } from 'capture-core-utils/date/date.utils';
+import { convertMomentToDateFormatString } from '../utils/converters/date';
 import stringifyNumber from './common/stringifyNumber';
 
 function convertDateForView(rawValue: string): string {
-    return displayDate(rawValue, displayTypes.SHORT);
+    const momentDate = moment(rawValue);
+    return convertMomentToDateFormatString(momentDate);
 }
 
 function convertDateTimeForView(rawValue: string): string {
-    return displayDateTime(rawValue, displayTypes.SHORT);
+    const momentDate = moment(rawValue);
+    const dateString = convertMomentToDateFormatString(momentDate);
+    const timeString = momentDate.format('HH:mm');
+    return `${dateString} ${timeString}`;
 }
 
 type CoordinateClientValue = {

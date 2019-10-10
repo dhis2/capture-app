@@ -1,17 +1,11 @@
 // @flow
-import dateTimeValidator from './dateTime.validator';
-import parseDate from '../../parsers/date.parser';
-/**
- *
- * @export
- * @param {string} value
- * @returns
- */
+import { isValidDateTime } from './dateTimeValidator';
+import { parseDate } from '../../converters/date';
 
-function isValidDateTime(value: ?Object) {
-    return value && dateTimeValidator(value);
+function isValidDateTimeWithEmptyCheck(value: ?Object) {
+    return value && isValidDateTime(value);
 }
-const convertDateTimeToMoment = (value: Object) =>  {
+const convertDateTimeToMoment = (value: Object) => {
     const date = value.date;
     const time = value.time;
     let hour;
@@ -31,14 +25,14 @@ const convertDateTimeToMoment = (value: Object) =>  {
     return momentDateTime;
 };
 
-const getDateTimeRangeValidator = (invalidDateTimeMessage: string) =>
+export const getDateTimeRangeValidator = (invalidDateTimeMessage: string) =>
     (value: { from?: ?Object, to?: ?Object}) => {
         const errorResult = [];
-        if (!isValidDateTime(value.from)) {
+        if (!isValidDateTimeWithEmptyCheck(value.from)) {
             errorResult.push({ from: invalidDateTimeMessage });
         }
 
-        if (!isValidDateTime(value.to)) {
+        if (!isValidDateTimeWithEmptyCheck(value.to)) {
             errorResult.push({ to: invalidDateTimeMessage });
         }
 
@@ -53,5 +47,3 @@ const getDateTimeRangeValidator = (invalidDateTimeMessage: string) =>
         const toDateTime = convertDateTimeToMoment(value.to);
         return fromDateTime <= toDateTime;
     };
-
-export default getDateTimeRangeValidator;

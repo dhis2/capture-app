@@ -8,7 +8,10 @@ declare type D2 = {
     system: {
         settings: {
             all: () => Object,
-        }
+        },
+        systemInfo: {
+            dateFormat: string,
+        },
     },
     i18n: Object,
     Api: {
@@ -16,6 +19,7 @@ declare type D2 = {
     },
     currentUser: {
         authorities: Set<string>,
+        id: string,
     },
 };
 

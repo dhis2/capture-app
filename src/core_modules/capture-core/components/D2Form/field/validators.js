@@ -2,11 +2,8 @@
 import isArray from 'd2-utilizr/src/isArray';
 import isString from 'd2-utilizr/src/isString';
 import i18n from '@dhis2/d2-i18n';
-
 import {
     hasValue,
-    isValidDate,
-    isValidDateTime,
     isValidEmail,
     isValidInteger,
     isValidNegativeInteger,
@@ -16,15 +13,19 @@ import {
     isValidPercentage,
     isValidTime,
     isValidUrl,
-    isValidAge,
     isValidPhoneNumber,
     isValidOrgUnit,
     isValidCoordinate,
+} from 'capture-core-utils/validators/form';
+import {
+    isValidAge,
+    isValidDate,
+    isValidDateTime,
     getNumberRangeValidator,
     getDateRangeValidator,
     getDateTimeRangeValidator,
     getTimeRangeValidator,
-} from 'capture-core-utils/validators/form';
+} from '../../../utils/validators/form';
 import { DataElement as MetaDataElement } from '../../../metaData';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 
