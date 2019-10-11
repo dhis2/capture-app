@@ -48,6 +48,7 @@ type Props = {
     dateCalendarLocale: Object,
     dateCalendarOnConvertValueIn: (inputValue: ?string) => Date,
     dateCalendarOnConvertValueOut: (value: string) => string,
+    datePlaceholder?: ?string,
     disabled?: ?boolean,
 };
 function getCalculatedValues(
@@ -204,6 +205,7 @@ class D2AgeField extends Component<Props> {
             datePopupAnchorPosition,
             dateCalendarTheme,
             dateCalendarLocale,
+            datePlaceholder,
             moment,
             onParseDate,
             ...passOnProps
@@ -223,6 +225,7 @@ class D2AgeField extends Component<Props> {
                     calendarLocale={dateCalendarLocale}
                     calendarOnConvertValueIn={dateCalendarOnConvertValueIn}
                     calendarOnConvertValueOut={dateCalendarOnConvertValueOut}
+                    placeholder={datePlaceholder}
                     {...passOnProps}
                 />
                 {innerMessage && this.renderMessage('date')}

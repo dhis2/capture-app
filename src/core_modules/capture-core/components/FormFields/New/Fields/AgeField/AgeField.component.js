@@ -2,9 +2,10 @@
 import * as React from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { AgeField as UIAgeField } from 'capture-ui';
+import { moment } from 'capture-core-utils/moment';
 import withCalendarProps from '../../HOC/withCalendarProps';
-import moment from 'capture-core-utils/moment/momentResolver';
 import { parseDate, convertMomentToDateFormatString } from '../../../../../utils/converters/date';
+import { systemSettingsStore } from '../../../../../metaDataMemoryStores';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
@@ -71,6 +72,7 @@ const AgeField = (props: Props) => {
             dateCalendarLocale={calendarLocale}
             dateCalendarOnConvertValueIn={calendarOnConvertValueIn}
             dateCalendarOnConvertValueOut={calendarOnConvertValueOut}
+            datePlaceholder={systemSettingsStore.get().dateFormat.toLowerCase()}
             {...passOnProps}
         />
     );
