@@ -1,7 +1,12 @@
 // @flow
 /* eslint-disable import/prefer-default-export */
 import log from 'loglevel';
-import { init, config, getUserSettings, getManifest } from 'd2/lib/d2';
+import {
+    init as initAsync,
+    config,
+    getUserSettings as getUserSettingsAsync,
+    getManifest as getManifestAsync,
+} from 'd2/lib/d2';
 import environments from 'capture-core/constants/environments';
 // import moment from 'capture-core/utils/moment/momentResolver';
 import moment from 'moment';
@@ -9,8 +14,8 @@ import CurrentLocaleData from 'capture-core/utils/localeData/CurrentLocaleData';
 import { setD2 } from 'capture-core/d2/d2Instance';
 import i18n from '@dhis2/d2-i18n';
 
-import loadMetaData from 'capture-core/metaDataStoreLoaders/baseLoader/metaDataLoader';
-import buildMetaData from 'capture-core/metaDataMemoryStoreBuilders/baseBuilder/metaDataBuilder';
+import { loadMetaDataAsync, loadSystemSettingsAsync } from 'capture-core/metaDataStoreLoaders';
+import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
 
 import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocaleData';
 
@@ -32,7 +37,7 @@ function setLogLevel() {
 }
 
 async function initializeManifest() {
-    const manifest = await getManifest('manifest.webapp');
+    const manifest = await getManifestAsync('manifest.webapp');
     const baseUrl = manifest.getBaseUrl();
     config.baseUrl = `${baseUrl}/api`;
     log.info(`Loading: ${manifest.name} v${manifest.version}`);
@@ -123,7 +128,7 @@ function changeI18nLocale(locale) {
     document.body.setAttribute('dir', isLangRTL(locale) ? 'rtl' : 'ltr');
 }
 
-async function setLocaleData(uiLocale: string) { //eslint-disable-line
+async function setLocaleDataAsync(uiLocale: string) { //eslint-disable-line
     const locale = uiLocale;
     await setMomentLocaleAsync(locale);
     const weekdays = moment.weekdays();
@@ -135,29 +140,32 @@ async function setLocaleData(uiLocale: string) { //eslint-disable-line
     changeI18nLocale(locale);
 }
 
-/*
-async function getSystemSettings(d2: D2) {
-    const systemSettings = await d2.system.settings.all();
-    return systemSettings;
+async function initializeMetaDataAsync(dbLocale: string) {
+    await loadMetaDataAsync();
+    await buildMetaDataAsync(dbLocale);
 }
-*/
 
-async function initializeMetaData(dbLocale: string) {
-    await loadMetaData();
-    await buildMetaData(dbLocale);
+async function initializeSystemSettingsAsync() {
+    const systemSettingsCacheData = await loadSystemSettingsAsync();
+    await buildSystemSettingsAsync(systemSettingsCacheData);
 }
 
 export async function initialize() {
     setLogLevel();
 
     await initializeManifest();
-    const userSettings = await getUserSettings();
-    const d2 = await init();
+    const userSettings = await getUserSettingsAsync();
+    const d2 = await initAsync();
     setD2(d2);
     // const systemSettings = await getSystemSettings(d2);
 
     const uiLocale = userSettings.keyUiLocale;
     const dbLocale = userSettings.keyDbLocale;
-    await setLocaleData(uiLocale);
-    await initializeMetaData(dbLocale);
+    await setLocaleDataAsync(uiLocale);
+
+    // initialize metadata
+    await initializeMetaDataAsync(dbLocale);
+
+    // initialize system settings
+    await initializeSystemSettingsAsync();
 }

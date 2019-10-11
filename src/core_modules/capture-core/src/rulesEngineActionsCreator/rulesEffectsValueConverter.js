@@ -1,6 +1,7 @@
 // @flow
 /* eslint-disable class-methods-use-this */
 import moment from 'moment';
+import { convertMomentToDateFormatString } from '../utils/converters/date';
 import type { IConvertOutputRulesEffectsValue } from '../RulesEngine/rulesEngine.types';
 
 const dateMomentFormat = 'YYYY-MM-DD';
@@ -32,7 +33,7 @@ class RulesValueConverter implements IConvertOutputRulesEffectsValue {
             return value;
         }
         const momentDate = moment(value, dateMomentFormat);
-        return momentDate.format('L');
+        return convertMomentToDateFormatString(momentDate);
     }
     convertDateTime(value: string): ?Object {
         if (!value) {
@@ -40,8 +41,8 @@ class RulesValueConverter implements IConvertOutputRulesEffectsValue {
         }
         const momentDateTime = moment(value);
         return {
-            date: momentDateTime.format('L'),
-            time: momentDateTime.format('LT'),
+            date: convertMomentToDateFormatString(momentDateTime),
+            time: momentDateTime.format('HH:mm'),
         };
     }
     convertTime(value: string): string {
@@ -73,7 +74,7 @@ class RulesValueConverter implements IConvertOutputRulesEffectsValue {
             return null;
         }
         const now = moment();
-        const age = moment(value);
+        const age = moment(value, dateMomentFormat);
 
         const years = now.diff(age, 'years');
         age.add(years, 'years');
@@ -84,8 +85,7 @@ class RulesValueConverter implements IConvertOutputRulesEffectsValue {
         const days = now.diff(age, 'days');
 
         return {
-            // $FlowSuppress
-            date: moment(value).format('L'),
+            date: convertMomentToDateFormatString(moment(value, dateMomentFormat)),
             years: years.toString(),
             months: months.toString(),
             days: days.toString(),

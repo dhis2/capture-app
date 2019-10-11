@@ -1,6 +1,5 @@
 // @flow
 /* eslint-disable complexity */
-import log from 'loglevel';
 import moment from '../../utils/moment/momentResolver';
 
 const getReturnObject = (momentDate: ?moment$Moment) => ({
@@ -140,20 +139,11 @@ function parseWithoutSeparator(dateString: string, localeFormat: string, separat
     return manipulateFormatAndParseWithoutSeparator(dateStringWithoutSeparator, localeFormatWithoutSeparator);
 }
 
-export default function parseDate(dateString: string) {
-    // $FlowSuppress
-    const localeFormat = moment.localeData()._longDateFormat.L; //eslint-disable-line
-
-    if (!localeFormat) {
-        // $FlowSuppress
-        log.error(`could not get locale format for ${moment.locale()}`);
-        return getReturnObject(null);
-    }
-
+export default function parseDate(dateString: string, format: string) {
     const separatorPattern = /[^\w\s]/g;
-    if (separatorPattern.test(dateString) && separatorPattern.test(localeFormat)) {
-        return parseWithSeparator(dateString, localeFormat, separatorPattern);
+    if (separatorPattern.test(dateString) && separatorPattern.test(format)) {
+        return parseWithSeparator(dateString, format, separatorPattern);
     }
 
-    return parseWithoutSeparator(dateString, localeFormat, separatorPattern);
+    return parseWithoutSeparator(dateString, format, separatorPattern);
 }
