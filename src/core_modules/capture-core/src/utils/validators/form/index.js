@@ -1,6 +1,12 @@
 // @flow
-export { default as isValidDate } from './date.validator';
-export { default as isValidDateTime } from './dateTime.validator';
+export { isValidDate } from './dateValidator';
+export { isValidDateTime } from './dateTimeValidator';
+export { isValidAge } from './ageValidator';
+export { getNumberRangeValidator } from './getNumberRangeValidator';
+export { getDateRangeValidator } from './getDateRangeValidator';
+export { getDateTimeRangeValidator } from './getDateTimeRangeValidator';
+export { getTimeRangeValidator } from './getTimeRangeValidator';
+
 export { default as isValidEmail } from './email.validator';
 export { default as isValidInteger } from './integer.validator';
 export { default as isValidPositiveInteger } from './integerPositive.validator';
@@ -10,12 +16,7 @@ export { default as isValidNumber } from './number.validator';
 export { default as isValidPercentage } from './percentage.validator';
 export { default as isValidTime } from './time.validator';
 export { default as isValidUrl } from './url.validator';
-export { default as isValidAge } from './age.validator';
 export { default as isValidPhoneNumber } from './phone.validator';
 export { default as isValidOrgUnit } from './orgUnit.validator';
 export { default as isValidCoordinate } from './coordinate.validator';
 export { default as isValidUsername } from './username.validator';
-export { default as getNumberRangeValidator } from './getNumberRangeValidator';
-export { default as getDateRangeValidator } from './getDateRangeValidator';
-export { default as getDateTimeRangeValidator } from './getDateTimeRangeValidator';
-export { default as getTimeRangeValidator } from './getTimeRangeValidator';

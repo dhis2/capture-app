@@ -1,6 +1,6 @@
 // @flow
-import dateValidator from './date.validator';
-import parseDate from '../../parsers/date.parser';
+import { isValidDate } from './dateValidator';
+import { parseDate } from '../../converters/date';
 /**
  *
  * @export
@@ -8,18 +8,18 @@ import parseDate from '../../parsers/date.parser';
  * @returns
  */
 
-function isValidDate(value: ?string) {
-    return value && dateValidator(value);
+function isValidDateWithEmptyCheck(value: ?string) {
+    return value && isValidDate(value);
 }
 
-const getDateRangeValidator = (invalidDateMessage: string) =>
+export const getDateRangeValidator = (invalidDateMessage: string) =>
     (value: { from?: ?string, to?: ?string}) => {
         const errorResult = [];
-        if (!isValidDate(value.from)) {
+        if (!isValidDateWithEmptyCheck(value.from)) {
             errorResult.push({ from: invalidDateMessage });
         }
 
-        if (!isValidDate(value.to)) {
+        if (!isValidDateWithEmptyCheck(value.to)) {
             errorResult.push({ to: invalidDateMessage });
         }
 
@@ -32,5 +32,3 @@ const getDateRangeValidator = (invalidDateMessage: string) =>
         // $FlowFixMe
         return parseDate(value.from).momentDate <= parseDate(value.to).momentDate;
     };
-
-export default getDateRangeValidator;

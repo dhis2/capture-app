@@ -1,5 +1,4 @@
 {
-    "Please provide a valid date": "",
     "Columns to show in table": "",
     "Column": "",
     "This value is validating": "",
@@ -10,6 +9,7 @@
     "Please provide a positive integer": "",
     "Please provide zero or a positive integer": "",
     "Please provide a negative integer": "",
+    "Please provide a valid date": "",
     "Please provide a valid date and time": "",
     "Please provide a valid time": "",
     "Please provide a valid percentage": "",

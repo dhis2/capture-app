@@ -5,11 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-08-14T12:27:31.878Z\n"
-"PO-Revision-Date: 2019-08-14T12:27:31.878Z\n"
-
-msgid "Please provide a valid date"
-msgstr ""
+"POT-Creation-Date: 2019-10-11T08:10:33.184Z\n"
+"PO-Revision-Date: 2019-10-11T08:10:33.185Z\n"
 
 msgid "Columns to show in table"
 msgstr ""
@@ -39,6 +36,9 @@ msgid "Please provide zero or a positive integer"
 msgstr ""
 
 msgid "Please provide a negative integer"
+msgstr ""
+
+msgid "Please provide a valid date"
 msgstr ""
 
 msgid "Please provide a valid date and time"

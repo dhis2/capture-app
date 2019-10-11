@@ -3,10 +3,7 @@ import { Validators } from '@dhis2/d2-ui-forms';
 import isArray from 'd2-utilizr/src/isArray';
 import isString from 'd2-utilizr/src/isString';
 import i18n from '@dhis2/d2-i18n';
-
 import {
-    isValidDate,
-    isValidDateTime,
     isValidEmail,
     isValidInteger,
     isValidNegativeInteger,
@@ -16,11 +13,13 @@ import {
     isValidPercentage,
     isValidTime,
     isValidUrl,
-    isValidAge,
     isValidPhoneNumber,
     isValidOrgUnit,
     isValidCoordinate,
     isValidUsername,
+    isValidAge,
+    isValidDate,
+    isValidDateTime,
     getNumberRangeValidator,
     getDateRangeValidator,
     getDateTimeRangeValidator,

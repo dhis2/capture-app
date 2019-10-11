@@ -1,7 +1,7 @@
 // @flow
 import StorageController from 'capture-core-utils/storage/StorageController';
 import availableAdapters from 'capture-core-utils/storage/availableAdapters';
-import { maintenanceStores } from './stores';
+import { mainStores } from './stores';
 
 const MAIN_STORAGE_KEY = 'dhis2ca';
 
@@ -24,8 +24,8 @@ function createStorageController(storageName: string, AdapterClasses: Array<any>
             storageName,
             appCacheVersion,
             AdapterClasses,
-            Object.keys(maintenanceStores).map(key => maintenanceStores[key]),
-            storage => storage.set(maintenanceStores.STATUS, {
+            Object.keys(mainStores).map(key => mainStores[key]),
+            storage => storage.set(mainStores.STATUS, {
                 id: 'fallback',
                 value: true,
             }),
@@ -39,7 +39,7 @@ async function initMainControllerAsync(adapterTypes: Array<any>) {
     let upgradeTempData;
     await mainStorageController.open(
         storage => storage
-            .get(maintenanceStores.USER_CACHES, 'accessHistory')
+            .get(mainStores.USER_CACHES, 'accessHistory')
             .then((data) => {
                 upgradeTempData = data;
             }),
@@ -48,11 +48,11 @@ async function initMainControllerAsync(adapterTypes: Array<any>) {
                 return null;
             }
             return storage
-                .set(maintenanceStores.USER_CACHES, upgradeTempData);
+                .set(mainStores.USER_CACHES, upgradeTempData);
         },
     );
 
-    const fallback = await mainStorageController.get(maintenanceStores.STATUS, 'fallback');
+    const fallback = await mainStorageController.get(mainStores.STATUS, 'fallback');
     if (fallback && fallback.value) {
         const fallbackStorageController = createStorageController(MAIN_STORAGE_KEY, [availableAdapters.MEMORY]);
         await fallbackStorageController.open();
