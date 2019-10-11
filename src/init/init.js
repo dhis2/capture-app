@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable import/prefer-default-export */
 import log from 'loglevel';
-import { init, config, getUserSettings } from 'd2/lib/d2';
+import { init as initAsync, config, getUserSettings as getUserSettingsAsync } from 'd2/lib/d2';
 import environments from 'capture-core/constants/environments';
 // import moment from 'capture-core/utils/moment/momentResolver';
 import moment from 'moment';
@@ -9,8 +9,8 @@ import CurrentLocaleData from 'capture-core/utils/localeData/CurrentLocaleData';
 import { setD2 } from 'capture-core/d2/d2Instance';
 import i18n from '@dhis2/d2-i18n';
 
-import { loadMetaData } from 'capture-core/metaDataStoreLoaders';
-import { buildMetaData } from 'capture-core/metaDataMemoryStoreBuilders';
+import { loadMetaDataAsync, loadSystemSettingsAsync } from 'capture-core/metaDataStoreLoaders';
+import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
 import { initControllersAsync } from 'capture-core/storageControllers';
 
 import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocaleData';
@@ -129,7 +129,7 @@ function changeI18nLocale(locale) {
     document.body.setAttribute('dir', isLangRTL(locale) ? 'rtl' : 'ltr');
 }
 
-async function setLocaleData(uiLocale: string) { //eslint-disable-line
+async function setLocaleDataAsync(uiLocale: string) { //eslint-disable-line
     const locale = uiLocale;
     await setMomentLocaleAsync(locale);
     const weekdays = moment.weekdays();
@@ -141,9 +141,14 @@ async function setLocaleData(uiLocale: string) { //eslint-disable-line
     changeI18nLocale(locale);
 }
 
-async function initializeMetaData(dbLocale: string) {
-    await loadMetaData();
-    await buildMetaData(dbLocale);
+async function initializeMetaDataAsync(dbLocale: string) {
+    await loadMetaDataAsync();
+    await buildMetaDataAsync(dbLocale);
+}
+
+async function initializeSystemSettingsAsync() {
+    const systemSettingsCacheData = await loadSystemSettingsAsync();
+    await buildSystemSettingsAsync(systemSettingsCacheData);
 }
 
 function setHeaderBarStrings(d2){
@@ -155,8 +160,8 @@ export async function initializeAsync() {
 
     // initialize d2
     setConfig();
-    const d2 = await init();
-    const userSettings = await getUserSettings();
+    const d2 = await initAsync();
+    const userSettings = await getUserSettingsAsync();
     setD2(d2);
     setHeaderBarStrings(d2);
     // initialize storage controllers
@@ -165,8 +170,11 @@ export async function initializeAsync() {
     // set locale data
     const uiLocale = userSettings.keyUiLocale;
     const dbLocale = userSettings.keyDbLocale;
-    await setLocaleData(uiLocale);
+    await setLocaleDataAsync(uiLocale);
+
+    // initialize system settings
+    await initializeSystemSettingsAsync();
 
     // initialize metadata
-    await initializeMetaData(dbLocale);
+    await initializeMetaDataAsync(dbLocale);
 }

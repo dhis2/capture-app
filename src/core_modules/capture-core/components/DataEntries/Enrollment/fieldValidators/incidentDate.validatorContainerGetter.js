@@ -2,7 +2,7 @@
 import { hasValue } from 'capture-core-utils/validators/form';
 import i18n from '@dhis2/d2-i18n';
 import moment from 'capture-core-utils/moment/momentResolver';
-import parseDate from 'capture-core-utils/parsers/date.parser';
+import { parseDate } from '../../../../utils/converters/date';
 
 const isValidIncidentDate = (value: string, isFutureDateAllowed: boolean) => {
     const dateContainer = parseDate(value);

@@ -1,6 +1,6 @@
 // @flow
-import timeValidator from './time.validator';
-import moment from 'capture-core-utils/moment/momentResolver';
+import { isValidTime } from 'capture-core-utils/validators/form';
+import { moment } from 'capture-core-utils/moment';
 /**
  *
  * @export
@@ -8,8 +8,8 @@ import moment from 'capture-core-utils/moment/momentResolver';
  * @returns
  */
 
-function isValidTime(value: ?string) {
-    return value && timeValidator(value);
+function isValidTimeWithEmptyCheck(value: ?string) {
+    return value && isValidTime(value);
 }
 
 const convertTimeToMoment = (value: string, baseDate: any) => {
@@ -32,14 +32,14 @@ const convertTimeToMoment = (value: string, baseDate: any) => {
     return momentDateTime;
 };
 
-const getTimeRangeValidator = (invalidTimeMessage: string) =>
+export const getTimeRangeValidator = (invalidTimeMessage: string) =>
     (value: { from?: ?string, to?: ?string}) => {
         const errorResult = [];
-        if (!isValidTime(value.from)) {
+        if (!isValidTimeWithEmptyCheck(value.from)) {
             errorResult.push({ from: invalidTimeMessage });
         }
 
-        if (!isValidTime(value.to)) {
+        if (!isValidTimeWithEmptyCheck(value.to)) {
             errorResult.push({ to: invalidTimeMessage });
         }
 
@@ -58,5 +58,3 @@ const getTimeRangeValidator = (invalidTimeMessage: string) =>
         // $FlowFixMe
         return fromParsed <= toParsed;
     };
-
-export default getTimeRangeValidator;
