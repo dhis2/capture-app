@@ -1,5 +1,4 @@
 {
-    "Please provide a valid date": "",
     "Columns to show in table": "",
     "Column": "",
     "Cancel": "",
@@ -62,6 +61,7 @@
     "Comments": "",
     "Field": "",
     "could not be updated": "",
+    "Please provide a valid date": "",
     "Please add or cancel comment before saving the event": "",
     "Show all events": "",
     "Edit event": "",

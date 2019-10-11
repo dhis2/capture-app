@@ -3,7 +3,7 @@ import isString from 'd2-utilizr/lib/isString';
 
 import elementTypes from '../metaData/DataElement/elementTypes';
 import parseNumber from '../utils/parsers/number.parser';
-import parseDate from '../utils/parsers/date.parser';
+import { parseDate } from '../utils/converters/date';
 
 type DateTimeValue = {
     date: string,
@@ -46,7 +46,6 @@ const valueConvertersForType = {
     [elementTypes.INTEGER_POSITIVE]: parseNumber,
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: parseNumber,
     [elementTypes.INTEGER_NEGATIVE]: parseNumber,
-    // $FlowSuppress
     [elementTypes.DATE]: convertDate,
     [elementTypes.DATETIME]: convertDateTime,
     [elementTypes.TRUE_ONLY]: (d2Value: string) => ((d2Value === 'true') || null),

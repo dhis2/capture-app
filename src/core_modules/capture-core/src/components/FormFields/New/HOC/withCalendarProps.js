@@ -1,8 +1,7 @@
 // @flow
 import * as React from 'react';
+import { parseDate, convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
 import getCalendarTheme from '../Fields/DateAndTimeFields/getCalendarTheme';
-import parseDate from '../../../../utils/parsers/date.parser';
-import moment from '../../../../utils/moment/momentResolver';
 import CurrentLocaleData from '../../../../utils/localeData/CurrentLocaleData';
 import capitalizeFirstLetter from '../../../../utils/string/capitalizeFirstLetter';
 
@@ -28,8 +27,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
         }
 
         static convertValueOutFromCalendar(changeDate: Date) {
-            const changeDateInLocalFormat = moment(changeDate).format('L');
-            return changeDateInLocalFormat;
+            return convertDateObjectToDateFormatString(changeDate);
         }
 
         calendarTheme: Object;

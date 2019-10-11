@@ -3,6 +3,7 @@ import * as React from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { DateField as UIDateField } from 'capture-ui';
 import withCalendarProps from '../../../HOC/withCalendarProps';
+import { systemSettingsStore } from '../../../../../../metaDataMemoryStores';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
@@ -42,6 +43,7 @@ class DateField extends React.Component<Props> {
         const { ...passOnProps } = this.props;
         return (
             <UIDateField
+                placeholder={systemSettingsStore.get().dateFormat.toLowerCase()}
                 {...passOnProps}
             />
         );

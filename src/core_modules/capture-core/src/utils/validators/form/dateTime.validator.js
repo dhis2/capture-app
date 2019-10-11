@@ -7,7 +7,8 @@ type DateTimeValue = {
     time?: ?string,
 };
 
-export default function isValidDateTime(value: DateTimeValue) {
+export default function isValidDateTime(value: DateTimeValue, dateFormat: string) {
+    if (!value) return false;
     const date = value.date;
     const time = value.time;
 
@@ -15,5 +16,5 @@ export default function isValidDateTime(value: DateTimeValue) {
         return false;
     }
 
-    return (isValidDate(date) && isValidTime(time));
+    return (isValidDate(date, dateFormat) && isValidTime(time));
 }

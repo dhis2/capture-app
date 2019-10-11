@@ -1,5 +1,4 @@
 .label {
-    color: rgba(0, 0, 0, 0.54);
     pointer-events: none;
     position: absolute;
     left: 10px;
@@ -10,9 +9,11 @@
 }
 
 .labelUnshrinked {
+    color: #aaa;
     transform: translate(0,30px) scale(1);
 }
 
 .labelShrinked {
+    color: rgba(0, 0, 0, 0.56);
     transform: translate(0, 1.5px) scale(0.75);
 }
