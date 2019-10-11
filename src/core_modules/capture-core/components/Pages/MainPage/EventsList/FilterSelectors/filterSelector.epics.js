@@ -36,5 +36,5 @@ export const includeFiltersWithValueAfterColumnSortingEpic = (action$: InputObse
             return updateIncludedFiltersAfterColumnSorting({
                 ...filtersToIncludeFromAlreadyApplied,
                 ...filtersToIncludeFromNext,
-            });
+            }, listId);
         });

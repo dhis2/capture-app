@@ -6,4 +6,4 @@ export const actionTypes = {
 };
 
 export const updateWorkinglistOrder =
-    (listId: string, workinglist: Array<Object>) => actionCreator(actionTypes.UPDATE_WORKINGLIST_ORDER)({ listId, workinglist });
+    (listId: string, columnOrder: Array<Object>) => actionCreator(actionTypes.UPDATE_WORKINGLIST_ORDER)({ listId, columnOrder }, { skipLogging: ['columnOrder'] });
