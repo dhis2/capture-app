@@ -76,7 +76,7 @@ const searchTei = (state: ReduxState, searchId: string, formId: string, searchGr
     const attributes = selectedProgramId ?
         getTrackerProgram(selectedProgramId).attributes :
         getTrackedEntityType(selectedTrackedEntityTypeId).attributes;
-
+    debugger;
     return getTrackedEntityInstances(queryArgs, attributes).then(data =>
         searchTeiResultRetrieved(
             data,
