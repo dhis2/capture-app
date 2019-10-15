@@ -140,7 +140,7 @@ function parseWithoutSeparator(dateString: string, localeFormat: string, separat
 }
 
 export default function parseDate(dateString: string, format: string) {
-    const separatorPattern = /[^\w\s]/g;
+    const separatorPattern = /[.,\-_/\\]/g;
     if (separatorPattern.test(dateString) && separatorPattern.test(format)) {
         return parseWithSeparator(dateString, format, separatorPattern);
     }
