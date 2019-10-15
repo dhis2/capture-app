@@ -6,8 +6,9 @@ import stringifyNumber from './common/stringifyNumber';
 
 function convertDate(rawValue: string): string {
     const editedDate = rawValue;
-    const momentDateLocal = moment(editedDate);
-    return momentDateLocal.format('YYYY-MM-DD');
+    const momentDate = moment(editedDate);
+    momentDate.locale('en');
+    return momentDate.format('YYYY-MM-DD');
 }
 
 const valueConvertersForType = {
@@ -29,5 +30,8 @@ export function convertValue(type: $Values<typeof elementTypes>, value: any) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }
-    return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
+    return (valueConvertersForType[type] ?
+        // $FlowFixMe
+        valueConvertersForType[type](value) :
+        value);
 }

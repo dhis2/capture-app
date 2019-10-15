@@ -1,4 +1,5 @@
 // @flow
+import { parseTime } from '../../parsers';
 
 /**
  *
@@ -6,6 +7,9 @@
  * @param {string} value
  * @returns
  */
-const isValidTime = (value: string) => /^(([0-1]*[0-9])|(2[0-3]))([:.])*([0-5][0-9])$/.test(value);
+function isValidTime(value: string) {
+    const momentTime = parseTime(value);
+    return momentTime.isValid;
+}
 
 export default isValidTime;

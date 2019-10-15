@@ -32,6 +32,11 @@ function convertDateTimeForEdit(rawValue: string): DateTimeFormValue {
     };
 }
 
+function convertTimeForEdit(rawValue: string) {
+    const momentTime = moment(rawValue, 'HH:mm', true);
+    return momentTime.format('HH:mm');
+}
+
 function convertAgeForEdit(rawValue: string): AgeFormValue {
     const now = moment();
     const age = moment(rawValue);
@@ -60,6 +65,7 @@ const valueConvertersForType = {
     [elementTypes.INTEGER_NEGATIVE]: stringifyNumber,
     [elementTypes.DATE]: convertDateForEdit,
     [elementTypes.DATETIME]: convertDateTimeForEdit,
+    [elementTypes.TIME]: convertTimeForEdit,
     [elementTypes.TRUE_ONLY]: () => 'true',
     [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'true' : 'false'),
     [elementTypes.AGE]: convertAgeForEdit,
@@ -69,5 +75,8 @@ export function convertValue(type: $Values<typeof elementTypes>, value: any) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }
-    return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
+    return (valueConvertersForType[type] ?
+        // $FlowFixMe
+        valueConvertersForType[type](value) :
+        value);
 }
