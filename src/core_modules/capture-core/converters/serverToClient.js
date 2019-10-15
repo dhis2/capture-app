@@ -1,8 +1,15 @@
 // @flow
-import moment from 'moment';
-
+import { moment } from 'capture-core-utils/moment';
+import { parseNumber, parseTime } from 'capture-core-utils/parsers';
 import elementTypes from '../metaData/DataElement/elementTypes';
-import parseNumber from 'capture-core-utils/parsers/number.parser';
+
+function convertTime(d2Value: string) {
+    const parseData = parseTime(d2Value);
+    if (!parseData.isValid) {
+        return null;
+    }
+    return parseData.momentTime;
+}
 
 const optionSetConvertersForType = {
     [elementTypes.NUMBER]: parseNumber,
@@ -12,6 +19,7 @@ const optionSetConvertersForType = {
     [elementTypes.INTEGER_NEGATIVE]: parseNumber,
     [elementTypes.DATE]: (d2Value: string) => moment(d2Value, 'YYYY-MM-DD').toISOString(),
     [elementTypes.DATETIME]: (d2Value: string) => moment(d2Value, 'YYYY-MM-DD HH:mm').toISOString(),
+    [elementTypes.TIME]: convertTime,
     [elementTypes.TRUE_ONLY]: (d2Value: string) => ((d2Value === 'true') || null),
     [elementTypes.BOOLEAN]: (d2Value: string) => (d2Value === 'true'),
     // [elementTypes.DURATION_MINUTES]: (d2Value: string) => parseDurationRepresentationtoMinutes(d2Value),

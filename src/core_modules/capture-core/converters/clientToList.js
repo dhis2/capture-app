@@ -18,6 +18,11 @@ function convertDateTimeForListDisplay(rawValue: string): string {
     return `${dateString} ${timeString}`;
 }
 
+function convertTimeForListDisplay(rawValue: string): string {
+    const momentDate = moment(rawValue, 'HH:mm', true);
+    return momentDate.format('HH:mm');
+}
+
 type CoordinateClientValue = {
     latitude: number,
     longitude: number,
@@ -63,6 +68,7 @@ const valueConvertersForType = {
     [elementTypes.DATE]: convertDateForListDisplay,
     [elementTypes.DATE_RANGE]: value => convertRangeForDisplay(convertDateForListDisplay, value),
     [elementTypes.DATETIME]: convertDateTimeForListDisplay,
+    [elementTypes.TIME]: convertTimeForListDisplay,
     [elementTypes.TRUE_ONLY]: () => 'Yes',
     [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'Yes' : 'No'),
     [elementTypes.COORDINATE]: convertCoordinateForDisplay,

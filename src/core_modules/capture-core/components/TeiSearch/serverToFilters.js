@@ -38,6 +38,7 @@ const valueConvertersForType = {
     [elementTypes.NUMBER_RANGE]: convertRange,
     [elementTypes.DATE_RANGE]: convertRange,
     [elementTypes.DATETIME_RANGE]: convertRange,
+    [elementTypes.TIME_RANGE]: convertRange,
 };
 
 export function convertValue(value: any, type: $Values<typeof elementTypes>, metaElement: DataElement) {
