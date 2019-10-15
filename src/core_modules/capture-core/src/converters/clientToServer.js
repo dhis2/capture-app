@@ -12,8 +12,9 @@ type RangeValue = {
 
 function convertDate(rawValue: string): string {
     const editedDate = rawValue;
-    const momentDateLocal = moment(editedDate);
-    return momentDateLocal.format('YYYY-MM-DD');
+    const momentDate = moment(editedDate);
+    momentDate.locale('en');
+    return momentDate.format('YYYY-MM-DD');
 }
 
 function convertRange(parser: (value: any) => any, rangeValue: RangeValue) {
@@ -49,5 +50,8 @@ export function convertValue(value: any, type: $Values<typeof elementTypes>) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }
-    return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
+    return (valueConvertersForType[type] ?
+        // $FlowFixMe
+        valueConvertersForType[type](value) :
+        value);
 }
