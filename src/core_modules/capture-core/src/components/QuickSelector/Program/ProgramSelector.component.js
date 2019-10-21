@@ -13,7 +13,7 @@ import VirtualizedSelect from '../../FormFields/Options/SelectVirtualizedV2/Opti
 import ProgramList from './ProgramList';
 import CategorySelector from './CategorySelector.component';
 
-import { Program, EventProgram, CategoryOption } from '../../../metaData';
+import { Program, EventProgram } from '../../../metaData';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
 import './programSelector.css';
 import LinkButton from '../../Buttons/LinkButton.component';

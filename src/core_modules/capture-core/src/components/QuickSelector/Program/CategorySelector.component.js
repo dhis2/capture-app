@@ -10,7 +10,10 @@ import withLoadingIndicator from '../../../HOC/withLoadingIndicator';
 import { makeOnSelectSelector } from './categorySelector.selectors';
 
 const VirtualizedSelectLoadingIndicatorHOC =
-    withLoadingIndicator(null, null, (props: Object) => props.options)(VirtualizedSelect);
+    withLoadingIndicator(
+        () => ({ marginTop: 5, paddingTop: 3 }),
+        () => ({ size: 22 }),
+        (props: Object) => props.options)(VirtualizedSelect);
 
 type SelectOption = {
     label: string,

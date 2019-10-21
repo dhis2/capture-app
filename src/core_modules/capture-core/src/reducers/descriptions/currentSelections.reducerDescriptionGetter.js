@@ -1,5 +1,4 @@
 // @flow
-import programCollection from '../../metaDataMemoryStores/programCollection/programCollection';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import { actionTypes as mainSelectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
@@ -20,7 +19,7 @@ import {
     actionTypes as mainPageSelectorActionTypes,
 } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
 import {
-    actionTypes as editEventPageSelectorActionTypes, resetCategoryOptionFromEditEventPage,
+    actionTypes as editEventPageSelectorActionTypes,
 } from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
 import {
     actionTypes as crossPageActionTypes,
@@ -161,7 +160,6 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         return newState;
     },
     [viewEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
-        debugger;
         const { eventContainer, categoriesData } = action.payload;
         const event = eventContainer.event;
 

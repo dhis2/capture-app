@@ -1,7 +1,6 @@
 // @flow
 import log from 'loglevel';
 import errorCreator from '../../../../utils/errorCreator';
-import programCollection from '../../../../metaDataMemoryStores/programCollection/programCollection';
 import { getApi } from '../../../../d2/d2Instance';
 import { getProgramFromProgramIdThrowIfNotFound } from '../../../../metaData';
 
@@ -28,15 +27,13 @@ export async function getCategoriesDataFromEventAsync(event: CaptureClientEvent)
         return null;
     }
 
-    debugger;
-    const programCategories = [...categoryCombination.categories];
+    const programCategories = [...categoryCombination.categories.values()];
 
     let categoryOptions = await getCategoryOptionsAsync(optionIdsFromEvent);
     if (!categoryOptions) {
         return null;
     }
 
-    debugger;
     return programCategories
         .map((c) => {
             const option = categoryOptions

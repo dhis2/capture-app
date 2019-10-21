@@ -1,13 +1,13 @@
 // @flow
 /* eslint-disable no-await-in-loop */
 import { MemoryAdapter } from 'capture-core-utils/storage';
-import { getUserStorageController, getUserIndexedDbWorker } from '../../../../storageControllers';
+import { getUserStorageController /* getUserIndexedDbWorker */ } from '../../../../storageControllers';
 import { userStores } from '../../../../storageControllers/stores';
 
 type Predicate = (categoryOption: Object) => boolean;
 type Project = (caegoryOption: Object) => any;
 
-const batchSize = 5000;
+// const batchSize = 5000;
 
 async function getCategoryOptionIds(categoryId: string) {
     const storageController = getUserStorageController();
@@ -40,6 +40,7 @@ async function getCategoryOptionsThroughCursor(
     return mappedOptions;
 }
 
+/*
 async function getCategoryOptionsThroughBatches(workerOptions: Object) {
     return new Promise((resolve, reject) => {
         const worker = getUserIndexedDbWorker();
@@ -72,6 +73,7 @@ async function getLoader(categoryId: string) {
 
     return getCategoryOptionsThroughCursor;
 }
+*/
 
 function getCategoryOptionsFromMemoryAdapterAsync(
     categoryOptionIds: Object,
