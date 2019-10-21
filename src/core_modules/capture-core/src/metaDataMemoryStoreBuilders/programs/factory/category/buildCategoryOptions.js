@@ -1,13 +1,11 @@
 // @flow
 /* eslint-disable no-await-in-loop */
 import { MemoryAdapter } from 'capture-core-utils/storage';
-import { getUserStorageController /* getUserIndexedDbWorker */ } from '../../../../storageControllers';
+import { getUserStorageController } from '../../../../storageControllers';
 import { userStores } from '../../../../storageControllers/stores';
 
 type Predicate = (categoryOption: Object) => boolean;
 type Project = (caegoryOption: Object) => any;
-
-// const batchSize = 5000;
 
 async function getCategoryOptionIds(categoryId: string) {
     const storageController = getUserStorageController();
@@ -39,41 +37,6 @@ async function getCategoryOptionsThroughCursor(
     });
     return mappedOptions;
 }
-
-/*
-async function getCategoryOptionsThroughBatches(workerOptions: Object) {
-    return new Promise((resolve, reject) => {
-        const worker = getUserIndexedDbWorker();
-        worker.postMessage({ type: 'getCategoryOptionsInBatches', batchSize: 5000, workerOptions });
-        worker.addEventListener('message', (event) => {
-            const data = event.data;
-            if (data.success) {
-                resolve(data.records);
-            } else {
-                reject(data.error);
-            }
-        });
-    });
-}
-
-async function getLoader(categoryId: string) {
-    const storageController = getUserStorageController();
-    const totalCount = await storageController.count(userStores.CATEGORY_OPTIONS);
-    const currentCategoryCount = await storageController.count(userStores.CATEGORY_OPTIONS, {
-        onIDBGetRequest: objectStore => objectStore
-            .index('category')
-            .count(IDBKeyRange.only(categoryId)),
-    });
-
-    if (currentCategoryCount > batchSize) {
-        if ((currentCategoryCount / totalCount) > 0.5) {
-            return getCategoryOptionsThroughBatches;
-        }
-    }
-
-    return getCategoryOptionsThroughCursor;
-}
-*/
 
 function getCategoryOptionsFromMemoryAdapterAsync(
     categoryOptionIds: Object,
