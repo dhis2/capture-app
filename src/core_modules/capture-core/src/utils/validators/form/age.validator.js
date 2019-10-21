@@ -23,21 +23,21 @@ const errorMessages = {
 
 };
 
-function getValueOrEmptyString(value: ?string) {
-    return value || '';
+function isValidNumberPart(value: ?string) {
+    return !value || isValidZeroOrPositiveInteger(value);
 }
 
-function validateNumbers(years: string, months: string, days: string) {
+function validateNumbers(years: ?string, months: ?string, days: ?string) {
     const errorResult = [];
 
-    if (!isValidZeroOrPositiveInteger(years, true)) {
+    if (!isValidNumberPart(years)) {
         errorResult.push({ years: errorMessages.years });
     }
-    if (!isValidZeroOrPositiveInteger(months, true)) {
-        errorResult.push({ months: errorMessages.years });
+    if (!isValidNumberPart(months)) {
+        errorResult.push({ months: errorMessages.months });
     }
-    if (!isValidZeroOrPositiveInteger(days, true)) {
-        errorResult.push({ days: errorMessages.years });
+    if (!isValidNumberPart(days)) {
+        errorResult.push({ days: errorMessages.days });
     }
 
     if (errorResult.length > 0) {
@@ -49,22 +49,27 @@ function validateNumbers(years: string, months: string, days: string) {
     return { valid: true };
 }
 
-function validateDate(date: string) {
-    return isValidDate(date, true) ?
+function validateDate(date: ?string, dateFormat: string) {
+    return (!date || isValidDate(date, dateFormat)) ?
         { valid: true } :
         { valid: false, errorMessage: { date: errorMessages.date } };
 }
 
-export default function isValidAge(value: ?AgeValues, isEmptyValid: boolean = false) {
-    if (!value || (!value.date && !value.years && !value.months && !value.days)) {
-        return isEmptyValid;
+function isAllEmpty(value: AgeValues) {
+    return (!value.date && !value.years && !value.months && !value.days);
+}
+
+export default function isValidAge(value: AgeValues, dateFormat: string) {
+    if (isAllEmpty(value)) {
+        return false;
     }
+
     const numberResult = validateNumbers(
-        getValueOrEmptyString(value.years),
-        getValueOrEmptyString(value.months),
-        getValueOrEmptyString(value.days),
+        value.years,
+        value.months,
+        value.days,
     );
 
     if (!numberResult.valid) return numberResult;
-    return validateDate(getValueOrEmptyString(value.date));
+    return validateDate(value.date, dateFormat);
 }

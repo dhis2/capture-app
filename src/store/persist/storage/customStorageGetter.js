@@ -1,9 +1,9 @@
 // @flow
 import { getUserStorageController } from 'capture-core/storageControllers';
-import { reduxPersistStores } from 'capture-core/storageControllers/stores';
+import { userStores } from 'capture-core/storageControllers/stores';
 
 export default function getCustomStorage() {
-    const store = reduxPersistStores.REDUX_PERSIST;
+    const store = userStores.REDUX_PERSIST;
     const storageController = getUserStorageController();
 
     return {

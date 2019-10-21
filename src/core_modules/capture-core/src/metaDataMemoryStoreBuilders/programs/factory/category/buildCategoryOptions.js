@@ -1,9 +1,8 @@
 // @flow
 /* eslint-disable no-await-in-loop */
-import { WebWorker } from 'capture-core-utils';
 import { MemoryAdapter } from 'capture-core-utils/storage';
 import { getUserStorageController, getUserIndexedDbWorker } from '../../../../storageControllers';
-import { metaDataStores } from '../../../../storageControllers/stores';
+import { userStores } from '../../../../storageControllers/stores';
 
 type Predicate = (categoryOption: Object) => boolean;
 type Project = (caegoryOption: Object) => any;
@@ -12,7 +11,7 @@ const batchSize = 5000;
 
 async function getCategoryOptionIds(categoryId: string) {
     const storageController = getUserStorageController();
-    const storeData = await storageController.get(metaDataStores.CATEGORY_OPTIONS_BY_CATEGORY, categoryId);
+    const storeData = await storageController.get(userStores.CATEGORY_OPTIONS_BY_CATEGORY, categoryId);
     return storeData.options;
 }
 
@@ -30,7 +29,7 @@ async function getCategoryOptionsThroughCursor(
     };
 
     const storageController = getUserStorageController();
-    const mappedOptions = await storageController.getAll(metaDataStores.CATEGORY_OPTIONS, {
+    const mappedOptions = await storageController.getAll(userStores.CATEGORY_OPTIONS, {
         predicate: internalPredicate,
         project,
         onIsAborted,
@@ -58,8 +57,8 @@ async function getCategoryOptionsThroughBatches(workerOptions: Object) {
 
 async function getLoader(categoryId: string) {
     const storageController = getUserStorageController();
-    const totalCount = await storageController.count(metaDataStores.CATEGORY_OPTIONS);
-    const currentCategoryCount = await storageController.count(metaDataStores.CATEGORY_OPTIONS, {
+    const totalCount = await storageController.count(userStores.CATEGORY_OPTIONS);
+    const currentCategoryCount = await storageController.count(userStores.CATEGORY_OPTIONS, {
         onIDBGetRequest: objectStore => objectStore
             .index('category')
             .count(IDBKeyRange.only(categoryId)),
@@ -82,7 +81,7 @@ function getCategoryOptionsFromMemoryAdapterAsync(
     const storageController = getUserStorageController();
     const optionPromises = categoryOptionIds
         .map(id => storageController
-            .get(metaDataStores.CATEGORY_OPTIONS, id)
+            .get(userStores.CATEGORY_OPTIONS, id)
             .then(co =>
                 (predicate(co) ? project(co) : null)),
         );

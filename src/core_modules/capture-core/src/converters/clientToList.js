@@ -1,17 +1,26 @@
 // @flow
 import React from 'react';
+import moment from '../utils/moment/momentResolver';
 import elementTypes from '../metaData/DataElement/elementTypes';
 import DataElement from '../metaData/DataElement/DataElement';
-
-import { displayTypes, displayDate, displayDateTime } from '../utils/date/date.utils';
+import { convertMomentToDateFormatString } from '../utils/converters/date';
 import stringifyNumber from './common/stringifyNumber';
 
-function convertDataForListDisplay(rawValue: string): string {
-    return displayDate(rawValue, displayTypes.SHORT);
+function convertDateForListDisplay(rawValue: string): string {
+    const momentDate = moment(rawValue);
+    return convertMomentToDateFormatString(momentDate);
 }
 
 function convertDateTimeForListDisplay(rawValue: string): string {
-    return displayDateTime(rawValue, displayTypes.SHORT);
+    const momentDate = moment(rawValue);
+    const dateString = convertMomentToDateFormatString(momentDate);
+    const timeString = momentDate.format('HH:mm');
+    return `${dateString} ${timeString}`;
+}
+
+function convertTimeForListDisplay(rawValue: string): string {
+    const momentDate = moment(rawValue, 'HH:mm', true);
+    return momentDate.format('HH:mm');
 }
 
 type CoordinateClientValue = {
@@ -55,13 +64,14 @@ const valueConvertersForType = {
     [elementTypes.INTEGER_POSITIVE]: stringifyNumber,
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: stringifyNumber,
     [elementTypes.INTEGER_NEGATIVE]: stringifyNumber,
-    [elementTypes.DATE]: convertDataForListDisplay,
-    [elementTypes.DATE_RANGE]: value => convertRangeForDisplay(convertDataForListDisplay, value),
+    [elementTypes.DATE]: convertDateForListDisplay,
+    [elementTypes.DATE_RANGE]: value => convertRangeForDisplay(convertDateForListDisplay, value),
     [elementTypes.DATETIME]: convertDateTimeForListDisplay,
+    [elementTypes.TIME]: convertTimeForListDisplay,
     [elementTypes.TRUE_ONLY]: () => 'Yes',
     [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'Yes' : 'No'),
     [elementTypes.COORDINATE]: convertCoordinateForDisplay,
-    [elementTypes.AGE]: convertDataForListDisplay,
+    [elementTypes.AGE]: convertDateForListDisplay,
     [elementTypes.FILE_RESOURCE]: convertResourceForDisplay,
     [elementTypes.IMAGE]: convertResourceForDisplay,
     [elementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.name,

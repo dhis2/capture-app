@@ -1,5 +1,6 @@
 // @flow
 import moment from '../utils/moment/momentResolver';
+import { convertMomentToDateFormatString } from '../utils/converters/date';
 import elementTypes from '../metaData/DataElement/elementTypes';
 
 import stringifyNumber from './common/stringifyNumber';
@@ -17,19 +18,23 @@ type AgeFormValue = {
 }
 
 function convertDateForEdit(rawValue: string): string {
-    const date = moment(rawValue);
-    const dateString = date.format('L');
-    return dateString;
+    const momentInstance = moment(rawValue);
+    return convertMomentToDateFormatString(momentInstance);
 }
 
 function convertDateTimeForEdit(rawValue: string): DateTimeFormValue {
     const dateTime = moment(rawValue);
-    const dateString = dateTime.format('L');
+    const dateString = convertMomentToDateFormatString(dateTime);
     const timeString = dateTime.format('HH:mm');
     return {
         date: dateString,
         time: timeString,
     };
+}
+
+function convertTimeForEdit(rawValue: string) {
+    const momentTime = moment(rawValue, 'HH:mm', true);
+    return momentTime.format('HH:mm');
 }
 
 function convertAgeForEdit(rawValue: string): AgeFormValue {
@@ -45,8 +50,7 @@ function convertAgeForEdit(rawValue: string): AgeFormValue {
     const days = now.diff(age, 'days');
 
     return {
-        // $FlowSuppress
-        date: moment(rawValue).format('L'),
+        date: convertMomentToDateFormatString(moment(rawValue)),
         years: years.toString(),
         months: months.toString(),
         days: days.toString(),
@@ -61,6 +65,7 @@ const valueConvertersForType = {
     [elementTypes.INTEGER_NEGATIVE]: stringifyNumber,
     [elementTypes.DATE]: convertDateForEdit,
     [elementTypes.DATETIME]: convertDateTimeForEdit,
+    [elementTypes.TIME]: convertTimeForEdit,
     [elementTypes.TRUE_ONLY]: () => 'true',
     [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'true' : 'false'),
     [elementTypes.AGE]: convertAgeForEdit,
@@ -70,5 +75,8 @@ export function convertValue(value: any, type: $Values<typeof elementTypes>) {
     if (!value && value !== 0 && value !== false) {
         return value;
     }
-    return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
+    return (valueConvertersForType[type] ?
+        // $FlowFixMe
+        valueConvertersForType[type](value) :
+        value);
 }

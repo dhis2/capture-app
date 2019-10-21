@@ -14,4 +14,5 @@ export default {
     CATEGORIES: 'categories',
     CATEGORY_OPTIONS_BY_CATEGORY: 'categoryOptionsByCategory',
     CATEGORY_OPTIONS: 'categoryOptions',
+    REDUX_PERSIST: 'reduxPersist',
 };

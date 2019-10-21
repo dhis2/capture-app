@@ -25,12 +25,14 @@ type InputMessageClasses = {
     validating?: ?string,
 }
 
-type DateParser = (value: ?string) => { isValid: boolean, momentDate: any };
+type DateParser = (value: string) => { isValid: boolean, momentDate: any };
+type DateStringFromMomentFormatter = (momentValue: Object) => string;
 
 type Props = {
     value: ?AgeValues,
     onBlur: (value: ?AgeValues) => void,
     onChange: (value: ?AgeValues) => void,
+    onRemoveFocus: () => void,
     orientation: $Values<typeof orientations>,
     innerMessage?: ?any,
     classes: Object,
@@ -38,6 +40,7 @@ type Props = {
     inFocus?: ?boolean,
     shrinkDisabled?: ?boolean,
     onParseDate: DateParser,
+    onGetFormattedDateStringFromMoment: DateStringFromMomentFormatter,
     moment: any,
     dateCalendarTheme: Object,
     dateCalendarWidth?: ?any,
@@ -45,11 +48,17 @@ type Props = {
     dateCalendarLocale: Object,
     dateCalendarOnConvertValueIn: (inputValue: ?string) => Date,
     dateCalendarOnConvertValueOut: (value: string) => string,
+    datePlaceholder?: ?string,
     disabled?: ?boolean,
 };
-function getCalculatedValues(dateValue: ?string, parseDate: DateParser, moment: any): AgeValues {
-    const parseData = parseDate(dateValue);
-    if (!parseData.isValid) {
+function getCalculatedValues(
+    dateValue: ?string,
+    onParseDate: DateParser,
+    onGetFormattedDateStringFromMoment: DateStringFromMomentFormatter,
+    moment: any,
+): AgeValues {
+    const parseData = dateValue && onParseDate(dateValue);
+    if (!parseData || !parseData.isValid) {
         return {
             date: dateValue,
             years: '',
@@ -69,8 +78,7 @@ function getCalculatedValues(dateValue: ?string, parseDate: DateParser, moment: 
     const days = now.diff(age, 'days');
 
     return {
-        // $FlowSuppress
-        date: parseData.momentDate.format('L'),
+        date: onGetFormattedDateStringFromMoment(parseData.momentDate),
         years: years.toString(),
         months: months.toString(),
         days: days.toString(),
@@ -88,13 +96,14 @@ class D2AgeField extends Component<Props> {
     static isEmptyNumbers(values: AgeValues) {
         return !values.years && !values.months && !values.days;
     }
-    static isPositiveOrZeroNumber(value: ?any) {
+    static isPositiveOrZeroNumber(value: string) {
         return Validators.isPositiveNumber(value) || Number(value) === 0;
     }
+    // eslint-disable-next-line complexity
     static isValidNumbers(values: AgeValues) {
-        return D2AgeField.isPositiveOrZeroNumber(values.years || 0) &&
-            D2AgeField.isPositiveOrZeroNumber(values.months || 0) &&
-            D2AgeField.isPositiveOrZeroNumber(values.days || 0);
+        return D2AgeField.isPositiveOrZeroNumber(values.years || '0') &&
+            D2AgeField.isPositiveOrZeroNumber(values.months || '0') &&
+            D2AgeField.isPositiveOrZeroNumber(values.days || '0');
     }
 
     static getNumberOrZero(value: ?string) {
@@ -106,8 +115,9 @@ class D2AgeField extends Component<Props> {
     }
 
     handleNumberBlur = (values: AgeValues) => {
-        const moment = this.props.moment;
-        this.props.onRemoveFocus && this.props.onRemoveFocus();
+        const { onParseDate, onGetFormattedDateStringFromMoment, onRemoveFocus, moment } = this.props;
+
+        onRemoveFocus && onRemoveFocus();
         if (D2AgeField.isEmptyNumbers(values)) {
             this.props.onBlur(values.date ? { date: values.date } : null);
             return;
@@ -122,13 +132,23 @@ class D2AgeField extends Component<Props> {
         momentDate.subtract(D2AgeField.getNumberOrZero(values.years), 'years');
         momentDate.subtract(D2AgeField.getNumberOrZero(values.months), 'months');
         momentDate.subtract(D2AgeField.getNumberOrZero(values.days), 'days');
-        const calculatedValues = getCalculatedValues(momentDate.format('L'), this.props.onParseDate, moment);
+        const calculatedValues = getCalculatedValues(
+            onGetFormattedDateStringFromMoment(momentDate),
+            onParseDate,
+            onGetFormattedDateStringFromMoment,
+            moment,
+        );
         this.props.onBlur(calculatedValues);
     }
 
     handleDateBlur = (date: ?string) => {
-        this.props.onRemoveFocus && this.props.onRemoveFocus();
-        const calculatedValues = date ? getCalculatedValues(date, this.props.onParseDate, this.props.moment) : null;
+        const { onParseDate, onGetFormattedDateStringFromMoment, onRemoveFocus, moment } = this.props;
+        onRemoveFocus && onRemoveFocus();
+        const calculatedValues = date ? getCalculatedValues(
+            date,
+            onParseDate,
+            onGetFormattedDateStringFromMoment,
+            moment) : null;
         this.props.onBlur(calculatedValues);
     }
 
@@ -185,6 +205,7 @@ class D2AgeField extends Component<Props> {
             datePopupAnchorPosition,
             dateCalendarTheme,
             dateCalendarLocale,
+            datePlaceholder,
             moment,
             onParseDate,
             ...passOnProps
@@ -204,6 +225,7 @@ class D2AgeField extends Component<Props> {
                     calendarLocale={dateCalendarLocale}
                     calendarOnConvertValueIn={dateCalendarOnConvertValueIn}
                     calendarOnConvertValueOut={dateCalendarOnConvertValueOut}
+                    placeholder={datePlaceholder}
                     {...passOnProps}
                 />
                 {innerMessage && this.renderMessage('date')}
@@ -225,7 +247,7 @@ class D2AgeField extends Component<Props> {
                 {this.renderNumberInput(currentValues, 'months', 'Months')}
                 {this.renderNumberInput(currentValues, 'days', 'Days')}
                 <div className={ageClearClass}>
-                    <IconButton style={{ width: 42, height: 42 }} disabled={disabled}>
+                    <IconButton style={{ width: 42, height: 42 }} disabled={!!disabled}>
                         <ClearIcon
                             onClick={this.onClear}
                         />

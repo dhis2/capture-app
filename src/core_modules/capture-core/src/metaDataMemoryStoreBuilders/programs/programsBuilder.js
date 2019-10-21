@@ -9,7 +9,7 @@ import {
 import { programCollection } from '../../metaDataMemoryStores';
 import getRulesAndVariablesFromProgramIndicators from './getRulesAndVariablesFromIndicators';
 import { getUserStorageController } from '../../storageControllers';
-import { metaDataStores as stores } from '../../storageControllers/stores';
+import { userStores as stores } from '../../storageControllers/stores';
 
 import type {
     CachedProgram,

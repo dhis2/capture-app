@@ -1,17 +1,26 @@
 // @flow
 import React from 'react';
+import moment from '../utils/moment/momentResolver';
 import elementTypes from '../metaData/DataElement/elementTypes';
 import DataElement from '../metaData/DataElement/DataElement';
-
-import { displayTypes, displayDate, displayDateTime } from '../utils/date/date.utils';
+import { convertMomentToDateFormatString } from '../utils/converters/date';
 import stringifyNumber from './common/stringifyNumber';
 
 function convertDateForView(rawValue: string): string {
-    return displayDate(rawValue, displayTypes.SHORT);
+    const momentDate = moment(rawValue);
+    return convertMomentToDateFormatString(momentDate);
 }
 
 function convertDateTimeForView(rawValue: string): string {
-    return displayDateTime(rawValue, displayTypes.SHORT);
+    const momentDate = moment(rawValue);
+    const dateString = convertMomentToDateFormatString(momentDate);
+    const timeString = momentDate.format('HH:mm');
+    return `${dateString} ${timeString}`;
+}
+
+function convertTimeForView(rawValue: string): string {
+    const momentDate = moment(rawValue, 'HH:mm', true);
+    return momentDate.format('HH:mm');
 }
 
 type CoordinateClientValue = {
@@ -49,6 +58,7 @@ const valueConvertersForType = {
     [elementTypes.INTEGER_NEGATIVE]: stringifyNumber,
     [elementTypes.DATE]: convertDateForView,
     [elementTypes.DATETIME]: convertDateTimeForView,
+    [elementTypes.TIME]: convertTimeForView,
     [elementTypes.TRUE_ONLY]: () => 'Yes',
     [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'Yes' : 'No'),
     [elementTypes.COORDINATE]: convertCoordinateForView,

@@ -14,7 +14,7 @@ import loadOptionSets from '../optionSets/loadOptionSets';
 import loadTrackedEntityTypes from '../trackedEntityTypes/loadTrackedEntityTypes';
 import executeUsersCacheMaintenance from '../maintenance/usersCacheMaintenance';
 
-import { metaDataStores as objectStores } from '../../storageControllers/stores';
+import { userStores as objectStores } from '../../storageControllers/stores';
 import { getUserStorageController } from '../../storageControllers';
 
 const coreLoadSpecifications: Array<LoadSpecification> = [
@@ -34,7 +34,7 @@ function removeDuplicatesFromStringArray(array: Array<string>) {
     return Array.from(set);
 }
 
-export default async function loadMetaData() {
+export default async function loadMetaDataAsync() {
     const storageController = getUserStorageController();
     await executeUsersCacheMaintenance();
     await loadCoreMetaData(storageController);

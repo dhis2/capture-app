@@ -3,14 +3,13 @@
 import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import InfiniteCalendar from 'react-infinite-calendar';
+import capitalizeFirstLetter from '../../../../utils/string/capitalizeFirstLetter';
 
 import 'react-infinite-calendar/styles.css';
 import './customStyles.css';
 
-import parseDate from '../../../../utils/parsers/date.parser';
-import moment from '../../../../utils/moment/momentResolver';
+import { parseDate, convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
 import CurrentLocaleData from '../../../../utils/localeData/CurrentLocaleData';
-import capitalizeFirstLetter from '../../../../utils/string/capitalizeFirstLetter';
 import getTheme from './getTheme';
 
 // import makeMaxWidthContainer from 'abaris-ui/src/HOC/makeMaxWidthContainer';
@@ -86,8 +85,8 @@ class D2DateCalendar extends Component<Props> {
     }
 
     handleChange(changeDate: Date) {
-        const changeDateInLocalFormat = moment(changeDate).format('L');
-        this.props.onDateSelected(changeDateInLocalFormat);
+        const dateFormatString = convertDateObjectToDateFormatString(changeDate);
+        this.props.onDateSelected(dateFormatString);
     }
 
     getValue(inputValue: ?string) {

@@ -8,12 +8,19 @@ declare type D2 = {
     system: {
         settings: {
             all: () => Object,
-        }
+        },
+        systemInfo: {
+            dateFormat: string,
+        },
     },
     i18n: Object,
     Api: {
         getApi: () => Object
-    }
+    },
+    currentUser: {
+        authorities: Set<string>,
+        id: string,
+    },
 };
 
 // Redux

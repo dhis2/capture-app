@@ -12,8 +12,8 @@ function isValid(value: any, validatorContainer: Object) {
     return value && validatorContainer.validator(value);
 }
 
-function getNumberRangeValidator(validatorContainer: Object) {
-    return (value: { from?: any, to?: any}) => {
+export const getNumberRangeValidator = (validatorContainer: Object) =>
+    (value: { from?: any, to?: any}) => {
         const errorResult = [];
 
         if (!isValid(value.from, validatorContainer)) {
@@ -31,6 +31,3 @@ function getNumberRangeValidator(validatorContainer: Object) {
         // $FlowFixMe
         return parseNumber(value.from) <= parseNumber(value.to);
     };
-}
-
-export default getNumberRangeValidator;
