@@ -2,7 +2,6 @@
 
 export default {
     CONSTANTS: 'constants',
-    ORGANISATION_UNITS: 'organisationUnits',
     ORGANISATION_UNIT_LEVELS: 'ouLevels',
     RELATIONSHIP_TYPES: 'relationshipTypes',
     TRACKED_ENTITY_TYPES: 'trackedEntityTypes',
@@ -13,5 +12,7 @@ export default {
     TRACKED_ENTITY_ATTRIBUTES: 'trackedEntityAttributes',
     OPTION_SETS: 'optionSets',
     CATEGORIES: 'categories',
+    CATEGORY_OPTIONS_BY_CATEGORY: 'categoryOptionsByCategory',
+    CATEGORY_OPTIONS: 'categoryOptions',
     REDUX_PERSIST: 'reduxPersist',
 };

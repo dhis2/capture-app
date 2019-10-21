@@ -30,10 +30,10 @@ export const resetProgramIdFromMainPage =
     () => actionCreator(actionTypes.RESET_PROGRAM_ID)();
 
 export const setCategoryOptionFromMainPage =
-    (categoryId: string, categoryOptionId: string) => actionCreator(actionTypes.SET_CATEGORY_OPTION)({ categoryId, categoryOptionId });
+    (categoryId: string, categoryOption: Object) => actionCreator(actionTypes.SET_CATEGORY_OPTION)({ categoryId, categoryOption });
 
 export const resetCategoryOptionFromMainPage =
-    (categoryId: string) => actionCreator(actionTypes.RESET_CATEGORY_OPTION)(categoryId);
+    (categoryId: string) => actionCreator(actionTypes.RESET_CATEGORY_OPTION)({ categoryId });
 
 export const resetAllCategoryOptionsFromMainPage =
     () => actionCreator(actionTypes.RESET_ALL_CATEGORY_OPTIONS)();
