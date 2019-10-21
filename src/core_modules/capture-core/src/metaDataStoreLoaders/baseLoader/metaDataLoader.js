@@ -12,10 +12,6 @@ import getRelationshipsLoadSpecification from '../../apiToStore/loadSpecificatio
 import getTrackedEntitiesLoadSpecification
     from '../../apiToStore/loadSpecifications/getTrackedEntitiesLoadSpecification';
 
-import organisationUnitApiSpecification from '../../api/apiSpecifications/organisationUnits.apiSpecification';
-import getOrganisationUnitsLoadSpecification
-    from '../../apiToStore/loadSpecifications/getOrganisationUnitsLoadSpecification';
-
 import getProgramsData from '../programs/getPrograms';
 import getTrackedEntityAttributes from '../trackedEntityAttributes/getTrackedEntityAttributes';
 import getOptionSets from '../optionSets/getOptionSets';
@@ -29,7 +25,6 @@ const coreLoadSpecifications: Array<LoadSpecification> = [
     getOrgUnitLevelsLoadSpecification(objectStores.ORGANISATION_UNIT_LEVELS),
     getRelationshipsLoadSpecification(objectStores.RELATIONSHIP_TYPES),
     getTrackedEntitiesLoadSpecification(objectStores.TRACKED_ENTITIES),
-    getOrganisationUnitsLoadSpecification(objectStores.ORGANISATION_UNITS, organisationUnitApiSpecification),
 ];
 
 function loadCoreMetaData(storageController: StorageController) {
@@ -58,7 +53,15 @@ function createStorageController() {
 }
 
 async function openStorage(storageController: StorageController) {
-    await storageController.open();
+    await storageController.open(
+        (objectStore, adapter) => {
+            if (adapter === IndexedDBAdapter) {
+                if (objectStore.name === objectStores.CATEGORY_OPTIONS) {
+                    objectStore.createIndex('category', 'categories', { multiEntry: true });
+                }
+            }
+        },
+    );
 }
 
 export default async function loadMetaData() {
@@ -95,6 +98,10 @@ export default async function loadMetaData() {
     }, trackedEntityAttributesFromPrograms);
 
     const missingOptionSetIds = [...missingOptionSetIdsFromPrograms, ...missingOptionSetIdsFromTrackedEntityAttributes];
-    await loadCategories(storageController, objectStores.CATEGORIES, categoryIds);
+    await loadCategories(storageController, categoryIds, {
+        categories: objectStores.CATEGORIES,
+        categoryOptionsByCategory: objectStores.CATEGORY_OPTIONS_BY_CATEGORY,
+        categoryOptions: objectStores.CATEGORY_OPTIONS,
+    });
     await getOptionSets(missingOptionSetIds, objectStores.OPTION_SETS, storageController);
 }

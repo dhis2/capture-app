@@ -7,12 +7,12 @@ import Category from './Category';
 export default class CategoryCombination {
     _name: string;
     _id: string;
-    _categories: Array<Category>;
+    _categories: Map<string, Category>;
 
     constructor(initFn: ?(_this: CategoryCombination) => void) {
         this.name = '';
         this.id = '';
-        this.categories = [];
+        this.categories = new Map();
         initFn && isFunction(initFn) && initFn(this);
     }
 
@@ -32,15 +32,15 @@ export default class CategoryCombination {
         this._id = id;
     }
 
-    get categories(): Array<Category> {
+    get categories(): Map<string, Category> {
         return this._categories;
     }
 
-    set categories(categories: Array<Category>) {
+    set categories(categories: Map<string, Category>) {
         this._categories = categories;
     }
 
     getCategoryForOptionId(optionId: string) {
-        return this.categories.find(category => !!category.getOption(optionId));
+        return Array.from(this.categories.values()).find(category => !!category.getOption(optionId));
     }
 }

@@ -15,6 +15,7 @@ import {
 } from '../editEvent.actions';
 import { actionTypes as eventListActionTypes } from '../../MainPage/EventsList/eventsList.actions';
 import { getEvent } from '../../../../events/eventRequests';
+import { getCategoriesDataFromEventAsync } from './getCategoriesDataFromEvent';
 
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
@@ -46,7 +47,9 @@ export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore)
                         return eventFromUrlCouldNotBeRetrieved(
                             i18n.t('Event could not be loaded. Are you sure it exists?'));
                     }
-                    return eventFromUrlRetrieved(eventContainer, prevProgramId);
+                    // need to retrieve category names from API (due to 50k category options requirement)
+                    return getCategoriesDataFromEventAsync(eventContainer.event)
+                        .then(categoriesData => eventFromUrlRetrieved(eventContainer, prevProgramId, categoriesData));
                 })
                 .catch((error) => {
                     const { message, details } = getErrorMessageAndDetails(error);

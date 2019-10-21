@@ -29,6 +29,7 @@ import getRulesAndVariablesFromProgramIndicators from './getRulesAndVariablesFro
 import type { CachedProgramIndicator } from './getRulesAndVariablesFromIndicators';
 import type { ProgramRule, ProgramRuleVariable } from '../../RulesEngine/rulesEngine.types';
 import capitalizeFirstLetter from '../../utils/string/capitalizeFirstLetter';
+import type { CachedProgramCategory } from '../../metaDataStores/cache.types';
 
 type CachedTranslation = {
     property: string,
@@ -95,21 +96,10 @@ type CachedProgramStage = {
     validationStrategy: string,
 };
 
-type CachedCategoryOption = {
+type CachedProgramCategoryCombo = {
     id: string,
     displayName: string,
-};
-
-type CachedCategory = {
-    id: string,
-    displayName: string,
-    categoryOptions: ?Array<CachedCategoryOption>,
-};
-
-type CachedCategoryCombo = {
-    id: string,
-    displayName: string,
-    categories: ?Array<CachedCategory>,
+    categories: ?Array<CachedProgramCategory>,
     isDefault: boolean,
 };
 
@@ -121,7 +111,7 @@ type CachedProgram = {
     organisationUnits: Array<Object>,
     programStages: Array<CachedProgramStage>,
     programType: string,
-    categoryCombo: ?CachedCategoryCombo,
+    categoryCombo: ?CachedProgramCategoryCombo,
     style?: ?CachedStyle,
 };
 
@@ -379,35 +369,28 @@ async function buildStage(d2ProgramStage: CachedProgramStage) {
     return stage;
 }
 
-function buildCategoryOptions(cachedCategoryOptions: Array<Object>) {
-    return cachedCategoryOptions
-        .map(cachedOption => ({
-            id: cachedOption.id,
-            name: cachedOption.displayName,
-            organisationUnitIds: cachedOption.organisationUnitIds,
-        }));
+function buildCategories(
+    cachedProgramCategories: Array<CachedProgramCategory>,
+): Map<string, Category> {
+    return new Map(
+        cachedProgramCategories
+            .map(cachedProgramCategory => ([
+                cachedProgramCategory.id,
+                new Category((_this) => {
+                    const id = cachedProgramCategory.id;
+                    _this.id = id;
+                    const cachedCategory = currentCategories[id];
+                    if (!cachedCategory) {
+                        log.error(errorCreator('Could not retrieve cachedCategory')({ id }));
+                    } else {
+                        _this.name = cachedCategory.displayName;
+                    }
+                }),
+            ])),
+    );
 }
 
-function buildCategories(cachedProgramCategories: Array<CachedCategory>) {
-    return cachedProgramCategories
-        .map(cachedProgramCategory =>
-            new Category((_this) => {
-                const id = cachedProgramCategory.id;
-                _this.id = id;
-                const cachedCategory = currentCategories[id];
-                if (!cachedCategory) {
-                    log.error(errorCreator('Could not retrieve cachedCategory')({ id }));
-                    _this.categoryOptions = [];
-                } else {
-                    _this.name = cachedCategory.displayName;
-                    _this.categoryOptions =
-                        buildCategoryOptions(cachedCategory.categoryOptions);
-                }
-            }),
-        );
-}
-
-function buildCategoriCombination(cachedCategoriCombination: ?CachedCategoryCombo) {
+function buildCategoriCombination(cachedCategoriCombination: ?CachedProgramCategoryCombo) {
     if (!(
         cachedCategoriCombination &&
         !cachedCategoriCombination.isDefault &&
