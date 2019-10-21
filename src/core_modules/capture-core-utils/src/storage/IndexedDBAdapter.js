@@ -59,7 +59,7 @@ class IndexedDBAdapter {
         this.keyPath = options.keyPath;
     }
 
-    _upgrade() {
+    _upgrade(onCreateObjectStore) {
         if (this.db.objectStoreNames) {
             const dbStoreNames = Array.from(this.db.objectStoreNames);
             dbStoreNames.forEach((name) => {
@@ -68,7 +68,8 @@ class IndexedDBAdapter {
         }
 
         this.objectStoreNames.forEach((name) => {
-            this.db.createObjectStore(name);
+            const objectStore = this.db.createObjectStore(name);
+            onCreateObjectStore && onCreateObjectStore(objectStore, IndexedDBAdapter);
         });
     }
 
@@ -76,7 +77,7 @@ class IndexedDBAdapter {
         onBeforeUpgrade: a callback method, getting an object with a "get" property as argument. The "get" property can be used to retrieve something from IndexedDB
         onAfterUpgrade: a callback method, getting an ojbect with a "set" property as argument. The "set" property can be used to set something in IndexedDB
     */
-    open(onBeforeUpgrade, onAfterUpgrade) {
+    open(onBeforeUpgrade, onAfterUpgrade, onCreateObjectStore) {
         const request = IndexedDBAdapter.indexedDB.open(this.name, this.version);
         return new Promise((resolve, reject) => {
             request.onsuccess = (e) => {
@@ -108,7 +109,7 @@ class IndexedDBAdapter {
                         }),
                     )
                     .then(() => {
-                        this._upgrade();
+                        this._upgrade(onCreateObjectStore);
                         return Promise.resolve();
                     })
                     .then(() => onAfterUpgrade && onAfterUpgrade({
@@ -148,7 +149,7 @@ class IndexedDBAdapter {
             try {
                 const storeObject = JSON.parse(JSON.stringify(dataObject));
                 const key = storeObject[this.keyPath];
-                delete storeObject[this.keyPath];
+                // delete storeObject[this.keyPath];
 
                 tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_WRITE);
                 tx.oncomplete = () => {
@@ -209,7 +210,7 @@ class IndexedDBAdapter {
                         }
 
                         const key = storeObject[this.keyPath];
-                        delete storeObject[this.keyPath];
+                        // delete storeObject[this.keyPath];
                         const request = objectStore.put(storeObject, key);
 
                         request.onsuccess = () => {
@@ -290,7 +291,76 @@ class IndexedDBAdapter {
         });
     }
 
-    getAll(store, predicate) {
+    // eslint-disable-next-line class-methods-use-this
+    async _getAllInBatches(objectStore, options, records) {
+        const { predicate, project, onIDBGetRequest, batchSize } = options || {};
+
+
+        const executeRequest = keyRange =>
+            new Promise((resolve) => {
+                const request = onIDBGetRequest ?
+                    onIDBGetRequest(objectStore, IndexedDBAdapter) :
+                    objectStore.getAll(keyRange, batchSize);
+
+                request.onsuccess = (e) => {
+                    const values = request.result;
+                    const count = values ? values.length : 0;
+                    let lastId;
+                    if (count > 0) {
+                        values.forEach((value) => {
+                            // value[this.keyPath] = cursor.primaryKey || cursor.key;
+                            this._processGetAllItem(value, predicate, project, records);
+                        });
+                        lastId = values[count - 1].id;
+                    }
+                    resolve({ count, lastId });
+                };
+            });
+
+        let keyRange;
+        let done = false;
+        do {
+            // eslint-disable-next-line no-await-in-loop
+            const { count, lastId } = await executeRequest(keyRange);
+            if (count < batchSize) {
+                done = true;
+            } else {
+                keyRange = IDBKeyRange.lowerBound(lastId, true);
+            }
+        } while (!done);
+    }
+
+    _getAllWithCursor(objectStore, options, records, abortTx) {
+        const { predicate, project, onIsAborted, onIDBGetRequest } = options || {};
+        const request = onIDBGetRequest ?
+            onIDBGetRequest(objectStore, IndexedDBAdapter) :
+            objectStore.openCursor();
+
+        request.onsuccess = (e) => {
+            const isAborted = !!onIsAborted && onIsAborted();
+            if (isAborted) {
+                abortTx();
+            } else {
+                const cursor = e.target.result;
+                if (cursor) {
+                    cursor.value[this.keyPath] = cursor.primaryKey || cursor.key;
+                    const dbValue = cursor.value;
+                    this._processGetAllItem(dbValue, predicate, project, records);
+                    cursor.continue();
+                }
+            }
+        };
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    _processGetAllItem(dbValue, predicate, project, records) {
+        if (!predicate || predicate(dbValue)) {
+            const value = project ? project(dbValue) : dbValue;
+            records.push(value);
+        }
+    }
+
+    getAll(store, options) {
         return new Promise((resolve, reject) => {
             let tx;
             let catchError;
@@ -298,43 +368,37 @@ class IndexedDBAdapter {
                 catchError = error;
                 tx.abort();
             };
+            const { batchSize, isAborted } = options || {};
 
             try {
                 const records = [];
-                const filtered = typeof predicate === 'function';
-
                 tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
+                const objectStore = tx.objectStore(store);
+                batchSize ?
+                    this._getAllInBatches(objectStore, options, records, abortTx) :
+                    this._getAllWithCursor(objectStore, options, records, abortTx);
+
                 tx.oncomplete = () => {
+                    if (isAborted && isAborted()) {
+                        reject(errorCreator(IndexedDBAdapter.errorMessages.GET_ALL_FAILED)(
+                            { adapter: this, aborted: true, error: catchError }));
+                        return;
+                    }
                     resolve(records);
                 };
 
                 tx.onerror = (error) => {
+                    if (isAborted && isAborted()) {
+                        reject(errorCreator(IndexedDBAdapter.errorMessages.GET_ALL_FAILED)(
+                            { adapter: this, aborted: true, error: catchError }));
+                        return;
+                    }
                     reject(errorCreator(IndexedDBAdapter.errorMessages.GET_ALL_FAILED)({ adapter: this, error }));
                 };
 
                 tx.onabort = () => {
                     reject(errorCreator(IndexedDBAdapter.errorMessages.GET_ALL_FAILED)(
                         { adapter: this, aborted: true, error: catchError }));
-                };
-
-                const objectStore = tx.objectStore(store);
-                const request = objectStore.openCursor();
-                request.onsuccess = (e) => {
-                    const cursor = e.target.result;
-
-                    if (cursor) {
-                        cursor.value[this.keyPath] = cursor.key;
-
-                        if (filtered) {
-                            if (predicate(cursor.value)) {
-                                records.push(cursor.value);
-                            }
-                        } else {
-                            records.push(cursor.value);
-                        }
-
-                        cursor.continue();
-                    }
                 };
             } catch (error) {
                 if (tx) {
@@ -488,18 +552,15 @@ class IndexedDBAdapter {
         });
     }
 
-    count(store, key) {
+    count(store, options) {
         return new Promise((resolve, reject) => {
+            const { onIDBGetRequest, query } = options || {};
             let tx;
             let catchError;
             const abortTx = (error) => {
                 catchError = error;
                 tx.abort();
             };
-
-            if (!key) {
-                key = null;
-            }
 
             try {
                 let result;
@@ -516,7 +577,9 @@ class IndexedDBAdapter {
                 };
 
                 const objectStore = tx.objectStore(store);
-                const request = objectStore.count(key);
+                const request = onIDBGetRequest ?
+                    onIDBGetRequest(objectStore) :
+                    objectStore.count(query);
 
                 request.onsuccess = (e) => {
                     result = e.target.result;

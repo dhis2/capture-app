@@ -28,8 +28,8 @@ export const viewEventFromUrl = (data: Object) =>
 export const eventFromUrlCouldNotBeRetrieved = (message: string) =>
     actionCreator(actionTypes.EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED)(message);
 
-export const eventFromUrlRetrieved = (eventContainer: Object, prevProgramId: ?string) =>
-    actionCreator(actionTypes.EVENT_FROM_URL_RETRIEVED)({ eventContainer, prevProgramId });
+export const eventFromUrlRetrieved = (eventContainer: Object, prevProgramId: ?string, categoriesData: ?Object) =>
+    actionCreator(actionTypes.EVENT_FROM_URL_RETRIEVED)({ eventContainer, prevProgramId, categoriesData });
 
 export const orgUnitRetrievedOnUrlUpdate = (orgUnit: Object, eventContainer: Object) =>
     actionCreator(actionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE)({ orgUnit, eventContainer });

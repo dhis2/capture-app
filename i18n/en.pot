@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-10-11T08:10:33.184Z\n"
-"PO-Revision-Date: 2019-10-11T08:10:33.185Z\n"
+"POT-Creation-Date: 2019-10-21T08:26:39.129Z\n"
+"PO-Revision-Date: 2019-10-21T08:26:39.129Z\n"
 
 msgid "Columns to show in table"
 msgstr ""
@@ -550,10 +550,10 @@ msgstr ""
 msgid "Registering Organisation Unit"
 msgstr ""
 
-msgid "Selected Program"
+msgid "Select"
 msgstr ""
 
-msgid "Select"
+msgid "Selected Program"
 msgstr ""
 
 msgid "Select program"

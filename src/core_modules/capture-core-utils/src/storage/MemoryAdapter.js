@@ -53,16 +53,14 @@ class MemoryAdapter {
         return dataObject;
     }
 
-    getAll(storeName, predicate) {
+    getAll(storeName, options) {
         const store = this.storage[storeName];
         const values = Array.from(store.values());
+        const { predicate, project, onEditSource } = options || {};
 
-        const filtered = typeof predicate === 'function';
-        if (filtered) {
-            return values
-                .filter(filtered);
-        }
-        return values;
+        const source = onEditSource ? onEditSource(values, MemoryAdapter) : values;
+        const filteredValues = predicate ? source.filter(predicate) : source;
+        return (project ? filteredValues.map(project) : filteredValues);
     }
 
     getKeys(storeName) {
