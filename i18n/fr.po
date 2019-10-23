@@ -1,0 +1,658 @@
+# Translators:
+# phil_dhis2, 2019
+# Viktor Varland <viktor@dhis2.org>, 2019
+# Bram Piot <bram.piot@gmail.com>, 2019
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2019-08-14T12:27:31.878Z\n"
+"PO-Revision-Date: 2019-08-29 11:02+0000\n"
+"Last-Translator: Bram Piot <bram.piot@gmail.com>, 2019\n"
+"Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Please provide a valid date"
+msgstr "Veuillez spécifier une date valide"
+
+msgid "Columns to show in table"
+msgstr "Colonnes à afficher dans ce tableau"
+
+msgid "Column"
+msgstr "Colonne"
+
+msgid "This value is validating"
+msgstr "Valeur en cours de validation"
+
+msgid "Async field update failed"
+msgstr ""
+
+msgid "A value is required"
+msgstr "Une valeur est requise"
+
+msgid "Please provide a valid number"
+msgstr "Veuillez saisir un chiffre valide"
+
+msgid "Please provide a valid integer"
+msgstr "Veuillez saisir un nombre entier valide"
+
+msgid "Please provide a positive integer"
+msgstr "Veuillez saisir un nombre entier positif valide"
+
+msgid "Please provide zero or a positive integer"
+msgstr "Veuillez saisir un zéro ou nombre entier positif valide"
+
+msgid "Please provide a negative integer"
+msgstr "Veuillez saisir un nombre entier négatif valide"
+
+msgid "Please provide a valid date and time"
+msgstr "Veuillez saisir une date et heure valide"
+
+msgid "Please provide a valid time"
+msgstr "Veuillez saisir une heure valide"
+
+msgid "Please provide a valid percentage"
+msgstr "Veuillez saisir un pourcentage valide"
+
+msgid "Please provide a valid url"
+msgstr "Veuillez saisir un lien URL valide"
+
+msgid "Please provide a valid email address"
+msgstr "Veuillez saisir une adresse email valide"
+
+msgid "Please provide a valid age"
+msgstr "Veuillez saisir un âge valide"
+
+msgid "Please provide a valid phone number"
+msgstr "Veuillez saisir un numéro de téléphone valide"
+
+msgid "Please provide a valid organisation unit"
+msgstr "Veuillez saisir une unité d'organisation valide"
+
+msgid "Please provide valid coordinates"
+msgstr "Veuillez saisir des coordonnées valides"
+
+msgid "Please provide a valid username"
+msgstr "Veuillez saisir un nom d'utilisateur valide"
+
+msgid "This value already exists"
+msgstr "Cette valeur existe déjà"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr ""
+
+msgid "Checking..."
+msgstr "Vérification..."
+
+msgid "Area"
+msgstr "Aire"
+
+msgid "Coordinate"
+msgstr "Coordinate"
+
+msgid "Enrollment"
+msgstr "Enrôlement"
+
+msgid "A future date is not allowed"
+msgstr "Une date future n'est pas permise"
+
+msgid "An error has occured. See log for details"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Unsaved changes"
+msgstr ""
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+
+msgid "Yes, discard"
+msgstr ""
+
+msgid "No, stay here"
+msgstr ""
+
+msgid "validation failed"
+msgstr "validation échouée"
+
+msgid "Errors"
+msgstr "Erreurs"
+
+msgid "Feedback"
+msgstr "Réaction"
+
+msgid "Indicators"
+msgstr "Indicateurs"
+
+msgid "Warnings"
+msgstr "Avertissements"
+
+msgid "search group result could not be retrieved"
+msgstr ""
+
+msgid "Complete"
+msgstr "Terminer"
+
+msgid "Warnings found"
+msgstr "Avertissements trouvés"
+
+msgid "Abort"
+msgstr "Annuler"
+
+msgid "Back to form"
+msgstr "Retour au formulaire"
+
+msgid "Save anyway"
+msgstr ""
+
+msgid "Validation errors and warnings"
+msgstr "Erreurs et avertissements de validation"
+
+msgid "Validation errors"
+msgstr "Erreurs de validation"
+
+msgid "Validation warnings"
+msgstr "Avertissements de validation"
+
+msgid "Some operations are still runnning. Please wait.."
+msgstr ""
+
+msgid "Operations running"
+msgstr "Opérations en cours"
+
+msgid "Sort"
+msgstr "Trier"
+
+msgid "No events to display"
+msgstr ""
+
+msgid "Data for offline list not present"
+msgstr ""
+
+msgid "Close"
+msgstr "Fermer"
+
+msgid "Last week"
+msgstr "Semaine passée"
+
+msgid "Last month"
+msgstr "Le mois dernier"
+
+msgid "Last 3 months"
+msgstr "3 derniers mois"
+
+msgid "Custom range"
+msgstr ""
+
+msgid "to"
+msgstr "à"
+
+msgid "after or equal to"
+msgstr "après ou egal à"
+
+msgid "before or equal to"
+msgstr "avant ou egal à"
+
+msgid "From"
+msgstr "A partir de"
+
+msgid "To"
+msgstr "A"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "greater than or equal to"
+msgstr "supérieur ou egal à"
+
+msgid "less than or equal to"
+msgstr "inférieur ou egal à"
+
+msgid "Contains text"
+msgstr "Contient le texte"
+
+msgid "Yes"
+msgstr "Oui"
+
+msgid "mm/dd/yyyy"
+msgstr "mm/jj/aaaa"
+
+msgid "Years"
+msgstr "Années"
+
+msgid "Months"
+msgstr "Months"
+
+msgid "Days"
+msgstr "Jours"
+
+msgid "Uploading file"
+msgstr "Téléchargement du fichier"
+
+msgid "selected"
+msgstr "Sélectionné"
+
+msgid "Delete"
+msgstr "Supprimer"
+
+msgid "Select file"
+msgstr "Sélectionner le fichier"
+
+msgid "No"
+msgstr "Non"
+
+msgid "Uploading image"
+msgstr "Téléchargement de l'image"
+
+msgid "Select image"
+msgstr "Sélectionner l'image"
+
+msgid "Search"
+msgstr "Chercher"
+
+msgid "Clear"
+msgstr "Effacer"
+
+msgid "No results"
+msgstr "Aucun résultat"
+
+msgid "No items to display"
+msgstr "Aucun élément à afficher"
+
+msgid "Online"
+msgstr "En ligne"
+
+msgid "Offline"
+msgstr "Hors ligne"
+
+msgid "Syncing"
+msgstr "Synchronisation"
+
+msgid "Add comment"
+msgstr "Ajouter commentaire"
+
+msgid "You dont have access to write comments"
+msgstr ""
+
+msgid "Write comment"
+msgstr "Ecrire commentaire"
+
+msgid "Basic info"
+msgstr "Infos de base"
+
+msgid "Status"
+msgstr "Statut"
+
+msgid "Comments"
+msgstr "Commentaires"
+
+msgid "Please add or cancel comment before saving the event"
+msgstr ""
+
+msgid "No write access"
+msgstr ""
+
+msgid "Save"
+msgstr "Enregistrer"
+
+msgid "Show all events"
+msgstr ""
+
+msgid "Edit event"
+msgstr ""
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr ""
+
+msgid "Event could not be loaded"
+msgstr ""
+
+msgid "Organisation unit could not be loaded"
+msgstr ""
+
+msgid "View event info"
+msgstr ""
+
+msgid "Delete event"
+msgstr "Effacer l´événement"
+
+msgid "Update"
+msgstr "Mettre à jour"
+
+msgid "More filters"
+msgstr "Filtres supplémentaires"
+
+msgid "Rows per page"
+msgstr "Lignes par page"
+
+msgid "Active"
+msgstr "Actif"
+
+msgid "Completed"
+msgstr "Terminé"
+
+msgid "Could not get organisation unit"
+msgstr ""
+
+msgid "Program doesn't exist"
+msgstr "Le programme n'existe pas"
+
+msgid "Selected program is invalid for registering unit"
+msgstr ""
+
+msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
+msgstr ""
+
+msgid "Save and add another"
+msgstr "Sauvegarder et ajouter nouveau"
+
+msgid "Save and exit"
+msgstr "Sauvegarder et quitter"
+
+msgid "Finish"
+msgstr "Terminer"
+
+msgid "Switch to form view"
+msgstr ""
+
+msgid "Switch to row view"
+msgstr ""
+
+msgid "New {{TET}}"
+msgstr ""
+
+msgid "Working Lists"
+msgstr ""
+
+msgid ""
+"Program with programid {{programId}} isn't a tracker program. Enrollments "
+"can only be done in tracker programs."
+msgstr ""
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr ""
+
+msgid "Relationships"
+msgstr "Relations"
+
+msgid "Saving to"
+msgstr ""
+
+msgid "in"
+msgstr "dans"
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+
+msgid "This event"
+msgstr ""
+
+msgid ""
+"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
+"exists"
+msgstr ""
+
+msgid "New event"
+msgstr "Nouvel événement"
+
+msgid "New event relationship"
+msgstr ""
+
+msgid "Adding relationship to event."
+msgstr ""
+
+msgid "Go back to event without saving relationship"
+msgstr ""
+
+msgid ""
+"Leaving this page will discard the selections you made for a new "
+"relationship"
+msgstr ""
+
+msgid "events added"
+msgstr ""
+
+msgid "No events added"
+msgstr ""
+
+msgid "Select a registering unit and program above to get started"
+msgstr ""
+
+msgid "Select a program to start reporting"
+msgstr ""
+
+msgid "Select a registering unit to start reporting"
+msgstr ""
+
+msgid "Select a category option to start reporting"
+msgstr ""
+
+msgid "You dont have access to create an event in the current selections"
+msgstr ""
+
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr ""
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr ""
+
+msgid "You have already registered this {{attributeName}}"
+msgstr ""
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr ""
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Registered person"
+msgstr ""
+
+msgid "Link"
+msgstr "Lien"
+
+msgid "Metadata error. see log for details"
+msgstr ""
+
+msgid "Review Duplicates"
+msgstr ""
+
+msgid "Create {{trackedEntityTypeName}} and link"
+msgstr ""
+
+msgid "Possible duplicates found"
+msgstr ""
+
+msgid "An error occured loading possible duplicates"
+msgstr ""
+
+msgid "Hide"
+msgstr "Masquer"
+
+msgid "Save as new {{tetName}}"
+msgstr "Enregister sous {{tetName}}"
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Show all"
+msgstr "Tout afficher"
+
+msgid "Program"
+msgstr "Programme"
+
+msgid "Organisation Unit"
+msgstr "Unité d'organisation"
+
+msgid "Registration"
+msgstr "Enregistrement"
+
+msgid "Search results"
+msgstr "Résultats de la recherche"
+
+msgid "No {{trackedEntityTypeName}} found."
+msgstr ""
+
+msgid "{{teiCount}} results found for"
+msgstr "{{teiCount}} résultats trouvés pour"
+
+msgid "New search"
+msgstr "Nouvelle recherche"
+
+msgid "Edit search"
+msgstr "Modifier la recherche"
+
+msgid "Link to an existing {{trackedEntityType}}"
+msgstr ""
+
+msgid "Create new {{trackedEntityType}}"
+msgstr ""
+
+msgid "Register"
+msgstr "Enregistrer"
+
+msgid "You dont have access to edit this event"
+msgstr ""
+
+msgid ""
+"Leaving this page will discard any selections you made for a new "
+"relationship"
+msgstr ""
+
+msgid "Feedbacks"
+msgstr "Feedbacks"
+
+msgid "New {{typeName}}"
+msgstr "Nouveau {{typeName}}"
+
+msgid "New"
+msgstr "Nouveau"
+
+msgid "Start again"
+msgstr "Recommencer"
+
+msgid "Find"
+msgstr "Trouver"
+
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
+msgstr "Recommencer"
+
+msgid "Registering Organisation Unit"
+msgstr ""
+
+msgid "Selected Program"
+msgstr ""
+
+msgid "Select"
+msgstr "Sélectionner"
+
+msgid "Select program"
+msgstr "Sélectionner le programme"
+
+msgid "No programs available."
+msgstr "Aucun programme disponible"
+
+msgid "You dont have access to delete this relationship"
+msgstr ""
+
+msgid "You dont have access to create any relationships"
+msgstr ""
+
+msgid "Add relationship"
+msgstr "Ajouetr relation"
+
+msgid "Selected program"
+msgstr "Programme choisi"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "Chercher {{uniqueAttrName}}"
+
+msgid "Search by attributes"
+msgstr "Chercher par attributs"
+
+msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgstr ""
+
+msgid "Program not found"
+msgstr ""
+
+msgid "Program is not a tracker program"
+msgstr ""
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "Error saving event"
+msgstr ""
+
+msgid "Could not save event. See log for details"
+msgstr ""
+
+msgid "Organisation unit search failed. See log for details"
+msgstr ""
+
+msgid "tracked entity instance"
+msgstr ""
+
+msgid "Set coordinate"
+msgstr "Définir les coordonnées"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Time"
+msgstr "Heure"
+
+msgid "From date"
+msgstr "Date de début"
+
+msgid "From time"
+msgstr ""
+
+msgid "To date"
+msgstr "Date de fin"
+
+msgid "To time"
+msgstr ""
+
+msgid "error encountered during field validation"
+msgstr ""
+
+msgid "error"
+msgstr "erreur"
+
+msgid "Delete polygon"
+msgstr "Supprimer polygone"
+
+msgid "Set area"
+msgstr "Définir l'aire"
+
+msgid "Choose one or more dates..."
+msgstr "Choisir une ou plusieurs dates..."
+
+msgid "Choose a date..."
+msgstr "Choisir une date..."
+
+msgid "Today"
+msgstr "Aujourd'hui"
+
+msgid "Compatibility mode"
+msgstr "Mode compatibilité"
