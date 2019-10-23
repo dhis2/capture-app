@@ -1,0 +1,363 @@
+# Translators:
+# phil_dhis2, 2019
+# Viktor Varland <viktor@dhis2.org>, 2019
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2018-11-28T09:40:30.446Z\n"
+"PO-Revision-Date: 2019-08-29 11:02+0000\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2019\n"
+"Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Please provide a valid date"
+msgstr ""
+
+msgid "Columns to show in table"
+msgstr ""
+
+msgid "Column"
+msgstr "Coluna"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Discard event?"
+msgstr ""
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+
+msgid "Discard"
+msgstr "Descartar"
+
+msgid "Back to event"
+msgstr ""
+
+msgid "Add comment"
+msgstr ""
+
+msgid "Write comment"
+msgstr ""
+
+msgid "Errors"
+msgstr "Erros"
+
+msgid "Feedback"
+msgstr "Retroinformacão"
+
+msgid "Indicators"
+msgstr "Indicadores"
+
+msgid "Warnings"
+msgstr ""
+
+msgid "Complete"
+msgstr "Completo"
+
+msgid "Warnings found"
+msgstr ""
+
+msgid "Abort"
+msgstr ""
+
+msgid "Your data is uploading. Please wait untill this message disappears"
+msgstr ""
+
+msgid "No write access"
+msgstr ""
+
+msgid "Save"
+msgstr "Salvar"
+
+msgid "Uploading data"
+msgstr ""
+
+msgid "Sort"
+msgstr "Ordenar"
+
+msgid "No events to display"
+msgstr ""
+
+msgid "Data for offline list not present"
+msgstr ""
+
+msgid "Last week"
+msgstr "Última semana"
+
+msgid "Last month"
+msgstr "Último mês"
+
+msgid "Last 3 months"
+msgstr "Últimos três meses"
+
+msgid "Custom range"
+msgstr ""
+
+msgid "to"
+msgstr "para"
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
+msgstr ""
+
+msgid "From"
+msgstr "A partir de"
+
+msgid "To"
+msgstr "Até"
+
+msgid "Max"
+msgstr "Máx"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "greater than or equal to"
+msgstr ""
+
+msgid "less than or equal to"
+msgstr ""
+
+msgid "Contains text"
+msgstr ""
+
+msgid "Yes"
+msgstr "Sim"
+
+msgid "mm/dd/yyyy"
+msgstr ""
+
+msgid "Years"
+msgstr "Anos"
+
+msgid "Months"
+msgstr "Meses"
+
+msgid "Days"
+msgstr ""
+
+msgid "Uploading file"
+msgstr ""
+
+msgid "selected"
+msgstr "Seleccionado"
+
+msgid "Delete"
+msgstr "Apagar"
+
+msgid "Select file"
+msgstr ""
+
+msgid "No"
+msgstr "Não"
+
+msgid "Uploading image"
+msgstr ""
+
+msgid "Select image"
+msgstr ""
+
+msgid "Search"
+msgstr "Pesquisar"
+
+msgid "Clear"
+msgstr "Limpar"
+
+msgid "No results"
+msgstr ""
+
+msgid "No items to display"
+msgstr ""
+
+msgid "Online"
+msgstr "Ligado"
+
+msgid "Offline"
+msgstr "Desligado"
+
+msgid "Syncing"
+msgstr ""
+
+msgid "Area"
+msgstr ""
+
+msgid "Basic info"
+msgstr ""
+
+msgid "Status"
+msgstr "Estado"
+
+msgid "Comments"
+msgstr "Comentarios"
+
+msgid "Field"
+msgstr ""
+
+msgid "could not be updated"
+msgstr ""
+
+msgid "Please add or cancel comment before saving the event"
+msgstr ""
+
+msgid "Show all events"
+msgstr ""
+
+msgid "Edit event"
+msgstr ""
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr ""
+
+msgid "Event could not be loaded"
+msgstr ""
+
+msgid "Organisation unit could not be loaded"
+msgstr ""
+
+msgid "Delete event"
+msgstr ""
+
+msgid "Update"
+msgstr "Actualizar"
+
+msgid "Close"
+msgstr "Fechar"
+
+msgid "More filters"
+msgstr ""
+
+msgid "Rows per page"
+msgstr ""
+
+msgid "Could not get organisation unit"
+msgstr ""
+
+msgid "Program doesn't exist"
+msgstr ""
+
+msgid "Selected program is invalid for registering unit"
+msgstr ""
+
+msgid "Saving to"
+msgstr ""
+
+msgid "in"
+msgstr ""
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+
+msgid "A value is required"
+msgstr ""
+
+msgid "Save and add another"
+msgstr ""
+
+msgid "Save and exit"
+msgstr ""
+
+msgid "Finish"
+msgstr ""
+
+msgid "events added"
+msgstr ""
+
+msgid "No events added"
+msgstr ""
+
+msgid "Switch to form view"
+msgstr ""
+
+msgid "Switch to row view"
+msgstr ""
+
+msgid "New event"
+msgstr "Novo evento"
+
+msgid "Select a registering unit and program above to get started"
+msgstr ""
+
+msgid "Select a program to start reporting"
+msgstr ""
+
+msgid "Select a registering unit to start reporting"
+msgstr ""
+
+msgid "Select a category option to start reporting"
+msgstr ""
+
+msgid "Start again"
+msgstr ""
+
+msgid "New"
+msgstr "Novo"
+
+msgid "Find"
+msgstr "Encontrar"
+
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
+msgstr ""
+
+msgid "Registering Organisation Unit"
+msgstr ""
+
+msgid "Selected Program"
+msgstr ""
+
+msgid "Select"
+msgstr "Seleccione"
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Show all"
+msgstr "Mostrar tudo"
+
+msgid "Program"
+msgstr "Programa"
+
+msgid "Select program"
+msgstr "Selecionar o programa"
+
+msgid "No programs available."
+msgstr ""
+
+msgid "An error has occured. See log for details"
+msgstr ""
+
+msgid "Error saving event"
+msgstr ""
+
+msgid "Could not save event. See log for details"
+msgstr ""
+
+msgid "Set coordinate"
+msgstr "Definir coordenadas"
+
+msgid "Delete polygon"
+msgstr ""
+
+msgid "Set area"
+msgstr ""
+
+msgid "Choose one or more dates..."
+msgstr ""
+
+msgid "Choose a date..."
+msgstr ""
+
+msgid "Today"
+msgstr "Hoje"
