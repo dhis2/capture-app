@@ -1,0 +1,330 @@
+# Translators:
+# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2019
+# Viktor Varland <viktor@dhis2.org>, 2019
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
+"PO-Revision-Date: 2019-08-29 11:02+0000\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2019\n"
+"Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: id\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Please provide a valid date"
+msgstr ""
+
+msgid "Columns to show in table"
+msgstr ""
+
+msgid "Column"
+msgstr "Kolom"
+
+msgid "Errors"
+msgstr "Kesalahan"
+
+msgid "Feedback"
+msgstr "Umpan balik"
+
+msgid "Indicators"
+msgstr "Indikator"
+
+msgid "Warnings"
+msgstr ""
+
+msgid "Cancel"
+msgstr "batal"
+
+msgid "Complete"
+msgstr "Lengkap"
+
+msgid "Warnings found"
+msgstr ""
+
+msgid "Abort"
+msgstr ""
+
+msgid "Save comment"
+msgstr ""
+
+msgid "Write comment"
+msgstr ""
+
+msgid "Your data is uploading. Please wait untill this message disappears"
+msgstr ""
+
+msgid "No write access"
+msgstr ""
+
+msgid "Save"
+msgstr "Simpan"
+
+msgid "Uploading data"
+msgstr ""
+
+msgid "Sort"
+msgstr "Urutkan"
+
+msgid "No events to display"
+msgstr ""
+
+msgid "Data for offline list not present"
+msgstr ""
+
+msgid "Last week"
+msgstr "Minggu lalu"
+
+msgid "Last month"
+msgstr "Bulan lalu"
+
+msgid "Last 3 months"
+msgstr "3 bulan terakhir"
+
+msgid "Custom range"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
+msgstr ""
+
+msgid "From"
+msgstr "Dari"
+
+msgid "To"
+msgstr "Untuk"
+
+msgid "Max"
+msgstr "Maks"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "greater than or equal to"
+msgstr ""
+
+msgid "less than or equal to"
+msgstr ""
+
+msgid "Contains text"
+msgstr ""
+
+msgid "Yes"
+msgstr "Ya"
+
+msgid "mm/dd/yyyy"
+msgstr ""
+
+msgid "Years"
+msgstr "Tahun"
+
+msgid "Months"
+msgstr "Bulan"
+
+msgid "Days"
+msgstr "Hari"
+
+msgid "Uploading file"
+msgstr ""
+
+msgid "selected"
+msgstr "Terpilih"
+
+msgid "Delete"
+msgstr "hapus"
+
+msgid "Select file"
+msgstr ""
+
+msgid "No"
+msgstr "Tidak"
+
+msgid "Uploading image"
+msgstr ""
+
+msgid "Select image"
+msgstr ""
+
+msgid "Clear"
+msgstr "Hapus"
+
+msgid "No results"
+msgstr ""
+
+msgid "No items to display"
+msgstr ""
+
+msgid "Online"
+msgstr ""
+
+msgid "Offline"
+msgstr ""
+
+msgid "Syncing"
+msgstr ""
+
+msgid "Field"
+msgstr ""
+
+msgid "could not be updated"
+msgstr ""
+
+msgid "Start Again"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Reset Organisation Unit"
+msgstr ""
+
+msgid "Reset Program"
+msgstr ""
+
+msgid "Reset Category Option"
+msgstr ""
+
+msgid "Create New Event"
+msgstr ""
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr ""
+
+msgid "Event could not be loaded"
+msgstr ""
+
+msgid "Organisation unit could not be loaded"
+msgstr ""
+
+msgid "Update"
+msgstr "perbarui"
+
+msgid "Close"
+msgstr "Tutup"
+
+msgid "More filters"
+msgstr ""
+
+msgid "Rows per page"
+msgstr ""
+
+msgid "Could not get organisation unit"
+msgstr ""
+
+msgid "Program doesn't exist"
+msgstr ""
+
+msgid "Selected program is invalid for registering unit"
+msgstr ""
+
+msgid "Select a registering unit and program above to get started"
+msgstr ""
+
+msgid "Select a program to start reporting"
+msgstr ""
+
+msgid "Select a registering unit to start reporting"
+msgstr ""
+
+msgid "Select a category option to start reporting"
+msgstr ""
+
+msgid "New event"
+msgstr "Event baru"
+
+msgid "Switch to form view"
+msgstr ""
+
+msgid "Switch to row view"
+msgstr ""
+
+msgid "Saving to"
+msgstr ""
+
+msgid "in"
+msgstr "dalam"
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+
+msgid "Save and add another"
+msgstr ""
+
+msgid "Save and exit"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost"
+msgstr ""
+
+msgid "events added"
+msgstr ""
+
+msgid "No events added"
+msgstr ""
+
+msgid "Reset"
+msgstr "Reset"
+
+msgid "New"
+msgstr "Baru"
+
+msgid "Find"
+msgstr "Cari"
+
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Registering Oraginastion Unit"
+msgstr ""
+
+msgid "Registering Organisation Unit"
+msgstr ""
+
+msgid "Selected Program"
+msgstr ""
+
+msgid "Select"
+msgstr "Pilih"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "No programs available."
+msgstr ""
+
+msgid "Show all"
+msgstr "Tampilkan semua"
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Select program"
+msgstr "Pilih program"
+
+msgid "An error has occured. See log for details"
+msgstr ""
+
+msgid "Error saving event"
+msgstr ""
+
+msgid "Could not save event. See log for details"
+msgstr ""
+
+msgid "Choose one or more dates..."
+msgstr ""
+
+msgid "Choose a date..."
+msgstr ""
+
+msgid "Today"
+msgstr "Hari ini"
