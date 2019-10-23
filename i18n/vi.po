@@ -1,0 +1,332 @@
+# Translators:
+# phil_dhis2, 2019
+# Viktor Varland <viktor@dhis2.org>, 2019
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
+"PO-Revision-Date: 2019-08-29 11:02+0000\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2019\n"
+"Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Please provide a valid date"
+msgstr "Xin vui lòng cung cấp ngày đúng"
+
+msgid "Columns to show in table"
+msgstr "Cột hiển thị trong bảng"
+
+msgid "Column"
+msgstr "Cột"
+
+msgid "Errors"
+msgstr "Lỗi"
+
+msgid "Feedback"
+msgstr "Phản hồi"
+
+msgid "Indicators"
+msgstr "Các chỉ số"
+
+msgid "Warnings"
+msgstr "Cảnh báo"
+
+msgid "Cancel"
+msgstr "Hủy"
+
+msgid "Complete"
+msgstr "Hoàn tất"
+
+msgid "Warnings found"
+msgstr "Cảnh báo đã tìm thấy"
+
+msgid "Abort"
+msgstr "Hủy bỏ"
+
+msgid "Save comment"
+msgstr "Lưu chú thích"
+
+msgid "Write comment"
+msgstr "Viết bình luận"
+
+msgid "Your data is uploading. Please wait untill this message disappears"
+msgstr ""
+
+msgid "No write access"
+msgstr "Không có quyền viết"
+
+msgid "Save"
+msgstr "Lưu lại"
+
+msgid "Uploading data"
+msgstr ""
+
+msgid "Sort"
+msgstr "Sắp xếp"
+
+msgid "No events to display"
+msgstr "Không có sự kiện để hiển thị"
+
+msgid "Data for offline list not present"
+msgstr "Dữ liệu cho danh sách ngoại tuyến không hiển thị"
+
+msgid "Last week"
+msgstr "Last week"
+
+msgid "Last month"
+msgstr "Tháng trước"
+
+msgid "Last 3 months"
+msgstr "3 tháng trước"
+
+msgid "Custom range"
+msgstr "Tùy chỉnh khoản"
+
+msgid "to"
+msgstr "thành"
+
+msgid "after or equal to"
+msgstr "sau hoặc bằng"
+
+msgid "before or equal to"
+msgstr "trước hoặc bằng"
+
+msgid "From"
+msgstr "Từ"
+
+msgid "To"
+msgstr "Đến"
+
+msgid "Max"
+msgstr "Lớn nhất"
+
+msgid "Min"
+msgstr "Nhỏ nhất"
+
+msgid "greater than or equal to"
+msgstr "lớn hơn hoặc bằng"
+
+msgid "less than or equal to"
+msgstr "nhỏ hơn hoặc bằng"
+
+msgid "Contains text"
+msgstr "Chứa văn bản"
+
+msgid "Yes"
+msgstr "Có"
+
+msgid "mm/dd/yyyy"
+msgstr ""
+
+msgid "Years"
+msgstr "Năm"
+
+msgid "Months"
+msgstr "Tháng"
+
+msgid "Days"
+msgstr "Ngày"
+
+msgid "Uploading file"
+msgstr "Đang tải tập tin lên"
+
+msgid "selected"
+msgstr "đã chọn"
+
+msgid "Delete"
+msgstr "Xóa"
+
+msgid "Select file"
+msgstr "Chọn tập tin"
+
+msgid "No"
+msgstr "Sai"
+
+msgid "Uploading image"
+msgstr "Đang tải ảnh lên"
+
+msgid "Select image"
+msgstr "Chọn ảnh"
+
+msgid "Clear"
+msgstr "Xóa"
+
+msgid "No results"
+msgstr "Không có kết quả"
+
+msgid "No items to display"
+msgstr "Không có mục để hiển thị"
+
+msgid "Online"
+msgstr "Trực tuyến"
+
+msgid "Offline"
+msgstr "Ngoại tuyến"
+
+msgid "Syncing"
+msgstr "Đang đồng bộ"
+
+msgid "Field"
+msgstr ""
+
+msgid "could not be updated"
+msgstr ""
+
+msgid "Start Again"
+msgstr "Khởi Đầu Lại"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Reset Organisation Unit"
+msgstr ""
+
+msgid "Reset Program"
+msgstr ""
+
+msgid "Reset Category Option"
+msgstr ""
+
+msgid "Create New Event"
+msgstr ""
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "Không thể tải sự kiện. Bạn có chắc nó tồn tại?"
+
+msgid "Event could not be loaded"
+msgstr "Không thể tải sự kiện"
+
+msgid "Organisation unit could not be loaded"
+msgstr "Không thể tải đơn vị"
+
+msgid "Update"
+msgstr "Cập nhật"
+
+msgid "Close"
+msgstr "Đóng lại"
+
+msgid "More filters"
+msgstr "Thêm bộ lọc"
+
+msgid "Rows per page"
+msgstr "Dòng mỗi trang"
+
+msgid "Could not get organisation unit"
+msgstr "Không thể lấy đơn vị"
+
+msgid "Program doesn't exist"
+msgstr "Chương trình không tồn tại"
+
+msgid "Selected program is invalid for registering unit"
+msgstr "Chương trình đã chọn không đúng để đăng ký đơn vị"
+
+msgid "Select a registering unit and program above to get started"
+msgstr "Chọn một đơn vị đăng ký và chương trình trên để bắt đầu"
+
+msgid "Select a program to start reporting"
+msgstr "Chọn chương trình để bắt đầu báo cáo"
+
+msgid "Select a registering unit to start reporting"
+msgstr "Chọn đơn vị đăng ký để bắt đầu báo cáo"
+
+msgid "Select a category option to start reporting"
+msgstr "Chọn Tùy Chọn Phân Loại để bắt đầu báo cáo"
+
+msgid "New event"
+msgstr "Sự kiện mới"
+
+msgid "Switch to form view"
+msgstr "Chuyển sang xem biểu nhập"
+
+msgid "Switch to row view"
+msgstr "Chuyển sang xem dòng"
+
+msgid "Saving to"
+msgstr "Đang lưu vào"
+
+msgid "in"
+msgstr "trong"
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+"Đây không phải là chương trình sự kiện hoặc dữ liệu miêu tả bị hỏng. Xem log"
+" để biết thêm chi tiết."
+
+msgid "Save and add another"
+msgstr "Lưu và thêm sự kiện khác"
+
+msgid "Save and exit"
+msgstr "Lưu và đóng"
+
+msgid "Are you sure? All unsaved data will be lost"
+msgstr ""
+
+msgid "events added"
+msgstr "sự kiện đã được thêm"
+
+msgid "No events added"
+msgstr "Không có sự kiện được thêm"
+
+msgid "Reset"
+msgstr "Phục hồi"
+
+msgid "New"
+msgstr "Mới"
+
+msgid "Find"
+msgstr "Tìm kiếm"
+
+msgid "Selected registering unit"
+msgstr "Đơn vị đăng ký đã chọn"
+
+msgid "Registering Oraginastion Unit"
+msgstr ""
+
+msgid "Registering Organisation Unit"
+msgstr "Đơn Vị Đăng Ký"
+
+msgid "Selected Program"
+msgstr "Chương Trình Đã Chọn"
+
+msgid "Select"
+msgstr "Chọn"
+
+msgid "Program"
+msgstr "Chương trình"
+
+msgid "No programs available."
+msgstr "Không có chương trình"
+
+msgid "Show all"
+msgstr "Hiển thị tất cả"
+
+msgid "Some programs are being filtered."
+msgstr "Chương trình đang được lọc"
+
+msgid "Select program"
+msgstr "Chọn Chương Trình"
+
+msgid "An error has occured. See log for details"
+msgstr "Có lỗi. Xem log để biết thêm chi tiết."
+
+msgid "Error saving event"
+msgstr "Có lỗi khi đang lưu sự kiện"
+
+msgid "Could not save event. See log for details"
+msgstr "Không thể lưu sự kiện. Xem log để biết thêm chi tiết"
+
+msgid "Choose one or more dates..."
+msgstr "Chọn một hoặc nhiều ngày..."
+
+msgid "Choose a date..."
+msgstr "Chọn một ngày..."
+
+msgid "Today"
+msgstr "Hôm Nay"
