@@ -1,14 +1,14 @@
 # Translators:
 # Wanda <wanda@frontlineaids.org>, 2019
-# phil_dhis2, 2019
 # Viktor Varland <viktor@dhis2.org>, 2019
+# phil_dhis2, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2019-08-27T15:53:46.517Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2019\n"
+"Last-Translator: phil_dhis2, 2019\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -86,7 +86,7 @@ msgid "Checking..."
 msgstr ""
 
 msgid "Area"
-msgstr ""
+msgstr "Диаграмма-области"
 
 msgid "Coordinate"
 msgstr "Координата"
@@ -155,7 +155,7 @@ msgid "Validation errors"
 msgstr ""
 
 msgid "Validation warnings"
-msgstr ""
+msgstr "Предупреждения по валидации"
 
 msgid "Some operations are still runnning. Please wait.."
 msgstr ""
@@ -326,7 +326,7 @@ msgid "Status"
 msgstr "Статус"
 
 msgid "Comments"
-msgstr ""
+msgstr "Комментарии"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
