@@ -1,0 +1,330 @@
+# Translators:
+# phil_dhis2, 2019
+# Viktor Varland <viktor@dhis2.org>, 2019
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
+"PO-Revision-Date: 2019-08-29 11:02+0000\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2019\n"
+"Language-Team: Ukrainian (https://www.transifex.com/hisp-uio/teams/100509/uk/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+msgid "Please provide a valid date"
+msgstr ""
+
+msgid "Columns to show in table"
+msgstr ""
+
+msgid "Column"
+msgstr "Стовпчик"
+
+msgid "Errors"
+msgstr "Помилки"
+
+msgid "Feedback"
+msgstr "Відгук"
+
+msgid "Indicators"
+msgstr "Показники"
+
+msgid "Warnings"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Скасувати"
+
+msgid "Complete"
+msgstr "Завершене"
+
+msgid "Warnings found"
+msgstr ""
+
+msgid "Abort"
+msgstr ""
+
+msgid "Save comment"
+msgstr "Зберегти коментар"
+
+msgid "Write comment"
+msgstr ""
+
+msgid "Your data is uploading. Please wait untill this message disappears"
+msgstr ""
+
+msgid "No write access"
+msgstr ""
+
+msgid "Save"
+msgstr "Зберегти"
+
+msgid "Uploading data"
+msgstr ""
+
+msgid "Sort"
+msgstr ""
+
+msgid "No events to display"
+msgstr ""
+
+msgid "Data for offline list not present"
+msgstr ""
+
+msgid "Last week"
+msgstr "Минулий тиждень"
+
+msgid "Last month"
+msgstr "Останній місяць"
+
+msgid "Last 3 months"
+msgstr "Останні 3 місяці"
+
+msgid "Custom range"
+msgstr ""
+
+msgid "to"
+msgstr "до"
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
+msgstr ""
+
+msgid "From"
+msgstr "Від"
+
+msgid "To"
+msgstr "До"
+
+msgid "Max"
+msgstr "Макс"
+
+msgid "Min"
+msgstr "Мін"
+
+msgid "greater than or equal to"
+msgstr ""
+
+msgid "less than or equal to"
+msgstr ""
+
+msgid "Contains text"
+msgstr ""
+
+msgid "Yes"
+msgstr "Так"
+
+msgid "mm/dd/yyyy"
+msgstr ""
+
+msgid "Years"
+msgstr "Роки"
+
+msgid "Months"
+msgstr "Місяці"
+
+msgid "Days"
+msgstr "Дні"
+
+msgid "Uploading file"
+msgstr ""
+
+msgid "selected"
+msgstr ""
+
+msgid "Delete"
+msgstr "Видалити"
+
+msgid "Select file"
+msgstr ""
+
+msgid "No"
+msgstr "Ні"
+
+msgid "Uploading image"
+msgstr ""
+
+msgid "Select image"
+msgstr ""
+
+msgid "Clear"
+msgstr "Очистити"
+
+msgid "No results"
+msgstr ""
+
+msgid "No items to display"
+msgstr ""
+
+msgid "Online"
+msgstr "Онлайн"
+
+msgid "Offline"
+msgstr "Офлайн"
+
+msgid "Syncing"
+msgstr ""
+
+msgid "Field"
+msgstr ""
+
+msgid "could not be updated"
+msgstr ""
+
+msgid "Start Again"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Reset Organisation Unit"
+msgstr ""
+
+msgid "Reset Program"
+msgstr ""
+
+msgid "Reset Category Option"
+msgstr ""
+
+msgid "Create New Event"
+msgstr ""
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr ""
+
+msgid "Event could not be loaded"
+msgstr ""
+
+msgid "Organisation unit could not be loaded"
+msgstr ""
+
+msgid "Update"
+msgstr "Оновити"
+
+msgid "Close"
+msgstr "Закрити"
+
+msgid "More filters"
+msgstr ""
+
+msgid "Rows per page"
+msgstr ""
+
+msgid "Could not get organisation unit"
+msgstr ""
+
+msgid "Program doesn't exist"
+msgstr ""
+
+msgid "Selected program is invalid for registering unit"
+msgstr ""
+
+msgid "Select a registering unit and program above to get started"
+msgstr ""
+
+msgid "Select a program to start reporting"
+msgstr ""
+
+msgid "Select a registering unit to start reporting"
+msgstr ""
+
+msgid "Select a category option to start reporting"
+msgstr ""
+
+msgid "New event"
+msgstr "Нова подія"
+
+msgid "Switch to form view"
+msgstr ""
+
+msgid "Switch to row view"
+msgstr ""
+
+msgid "Saving to"
+msgstr ""
+
+msgid "in"
+msgstr ""
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+
+msgid "Save and add another"
+msgstr ""
+
+msgid "Save and exit"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost"
+msgstr ""
+
+msgid "events added"
+msgstr ""
+
+msgid "No events added"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "New"
+msgstr "Нове"
+
+msgid "Find"
+msgstr "Знайти"
+
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Registering Oraginastion Unit"
+msgstr ""
+
+msgid "Registering Organisation Unit"
+msgstr ""
+
+msgid "Selected Program"
+msgstr ""
+
+msgid "Select"
+msgstr "Обрати"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "No programs available."
+msgstr ""
+
+msgid "Show all"
+msgstr "Показати все"
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Select program"
+msgstr "Обрати програму"
+
+msgid "An error has occured. See log for details"
+msgstr ""
+
+msgid "Error saving event"
+msgstr ""
+
+msgid "Could not save event. See log for details"
+msgstr ""
+
+msgid "Choose one or more dates..."
+msgstr ""
+
+msgid "Choose a date..."
+msgstr ""
+
+msgid "Today"
+msgstr "Today"
