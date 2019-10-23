@@ -1,18 +1,19 @@
+# Translators:
+# phil_dhis2, 2019
+# Viktor Varland <viktor@dhis2.org>, 2019
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-03 09:24+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: vi\n"
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2019-08-27T15:53:46.517Z\n"
+"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2019\n"
+"Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 2.2.5\n"
-"X-Pootle-Path: /vi/capture-app/vi.po\n"
-"X-Pootle-Revision: 43717\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Please provide a valid date"
 msgstr "Xin vui lòng cung cấp ngày đúng"
@@ -23,27 +24,99 @@ msgstr "Cột hiển thị trong bảng"
 msgid "Column"
 msgstr "Cột"
 
+msgid "This value is validating"
+msgstr ""
+
+msgid "Async field update failed"
+msgstr ""
+
+msgid "A value is required"
+msgstr "Yêu cầu có giá trị"
+
+msgid "Please provide a valid number"
+msgstr ""
+
+msgid "Please provide a valid integer"
+msgstr ""
+
+msgid "Please provide a positive integer"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr ""
+
+msgid "Please provide a negative integer"
+msgstr ""
+
+msgid "Please provide a valid date and time"
+msgstr ""
+
+msgid "Please provide a valid time"
+msgstr ""
+
+msgid "Please provide a valid percentage"
+msgstr ""
+
+msgid "Please provide a valid url"
+msgstr ""
+
+msgid "Please provide a valid email address"
+msgstr ""
+
+msgid "Please provide a valid age"
+msgstr ""
+
+msgid "Please provide a valid phone number"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr ""
+
+msgid "Please provide valid coordinates"
+msgstr ""
+
+msgid "This value already exists"
+msgstr ""
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr ""
+
+msgid "Checking..."
+msgstr ""
+
+msgid "Area"
+msgstr ""
+
+msgid "Coordinate"
+msgstr "Tọa độ"
+
+msgid "Enrollment"
+msgstr "Đăng ký"
+
+msgid "A future date is not allowed"
+msgstr ""
+
+msgid "An error has occured. See log for details"
+msgstr "Có lỗi. Xem log để biết thêm chi tiết."
+
 msgid "Cancel"
 msgstr "Hủy"
 
-msgid "Discard event?"
-msgstr "Hủy sự kiện?"
+msgid "Unsaved changes"
+msgstr ""
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 "Rời khỏi trang ngày sẽ hủy các thay đổi bạn đã thực hiện cho sự kiện này."
 
-msgid "Discard"
-msgstr "Hủy"
+msgid "Yes, discard"
+msgstr ""
 
-msgid "Back to event"
-msgstr "Quay lại sự kiện"
+msgid "No, stay here"
+msgstr ""
 
-msgid "Add comment"
-msgstr "Thêm bình luận"
-
-msgid "Write comment"
-msgstr "Viết bình luận"
+msgid "validation failed"
+msgstr ""
 
 msgid "Errors"
 msgstr "Lỗi"
@@ -52,10 +125,13 @@ msgid "Feedback"
 msgstr "Phản hồi"
 
 msgid "Indicators"
-msgstr "Chỉ số"
+msgstr "Các chỉ số"
 
 msgid "Warnings"
 msgstr "Cảnh báo"
+
+msgid "search group result could not be retrieved"
+msgstr ""
 
 msgid "Complete"
 msgstr "Hoàn tất"
@@ -66,19 +142,26 @@ msgstr "Cảnh báo đã tìm thấy"
 msgid "Abort"
 msgstr "Hủy bỏ"
 
-msgid "Your data is uploading. Please wait untill this message disappears"
+msgid "Back to form"
 msgstr ""
-"Dữ liệu của bạn đang được tải lên. Xin vui lòng đợi đến khi tin nhắn này "
-"biến mất"
 
-msgid "No write access"
-msgstr "Không có quyền viết"
+msgid "Save anyway"
+msgstr ""
 
-msgid "Save"
-msgstr "Lưu"
+msgid "Validation errors and warnings"
+msgstr ""
 
-msgid "Uploading data"
-msgstr "Đang tải dữ liệu lên"
+msgid "Validation errors"
+msgstr ""
+
+msgid "Validation warnings"
+msgstr "Cảnh báo tính hợp lệ"
+
+msgid "Some operations are still runnning. Please wait.."
+msgstr ""
+
+msgid "Operations running"
+msgstr ""
 
 msgid "Sort"
 msgstr "Sắp xếp"
@@ -89,26 +172,29 @@ msgstr "Không có sự kiện để hiển thị"
 msgid "Data for offline list not present"
 msgstr "Dữ liệu cho danh sách ngoại tuyến không hiển thị"
 
-msgid "Last week"
-msgstr "Tuần trước"
+msgid "Close"
+msgstr "Đóng lại"
 
-msgid "Last month"
-msgstr "Tháng trước"
+msgid "Please select the user"
+msgstr ""
 
-msgid "Last 3 months"
-msgstr "3 Tháng trước"
+msgid "Search for user"
+msgstr ""
 
-msgid "Custom range"
-msgstr "Tùy chỉnh khoản"
+msgid "Me"
+msgstr ""
+
+msgid "Anyone"
+msgstr ""
+
+msgid "None"
+msgstr "Không"
+
+msgid "Select user"
+msgstr ""
 
 msgid "to"
-msgstr "đến"
-
-msgid "after or equal to"
-msgstr "sau hoặc bằng"
-
-msgid "before or equal to"
-msgstr "trước hoặc bằng"
+msgstr "thành"
 
 msgid "From"
 msgstr "Từ"
@@ -116,11 +202,41 @@ msgstr "Từ"
 msgid "To"
 msgstr "Đến"
 
+msgid "after or equal to"
+msgstr "sau hoặc bằng"
+
+msgid "before or equal to"
+msgstr "trước hoặc bằng"
+
+msgid "Today"
+msgstr "Hôm Nay"
+
+msgid "This week"
+msgstr "Tuần này"
+
+msgid "This month"
+msgstr "Tháng này"
+
+msgid "This Year"
+msgstr ""
+
+msgid "Last week"
+msgstr "Last week"
+
+msgid "Last month"
+msgstr "Tháng trước"
+
+msgid "Last 3 months"
+msgstr "3 tháng trước"
+
+msgid "Custom range"
+msgstr "Tùy chỉnh khoản"
+
 msgid "Max"
-msgstr "Tối đa"
+msgstr "Lớn nhất"
 
 msgid "Min"
-msgstr "Tối thiểu"
+msgstr "Nhỏ nhất"
 
 msgid "greater than or equal to"
 msgstr "lớn hơn hoặc bằng"
@@ -159,7 +275,7 @@ msgid "Select file"
 msgstr "Chọn tập tin"
 
 msgid "No"
-msgstr "Không"
+msgstr "Sai"
 
 msgid "Uploading image"
 msgstr "Đang tải ảnh lên"
@@ -176,6 +292,12 @@ msgstr "Xóa"
 msgid "No results"
 msgstr "Không có kết quả"
 
+msgid "suggestions could not be retrieved"
+msgstr ""
+
+msgid "search for username"
+msgstr ""
+
 msgid "No items to display"
 msgstr "Không có mục để hiển thị"
 
@@ -188,23 +310,32 @@ msgstr "Ngoại tuyến"
 msgid "Syncing"
 msgstr "Đang đồng bộ"
 
+msgid "Add comment"
+msgstr "Thêm bình luận"
+
+msgid "You dont have access to write comments"
+msgstr ""
+
+msgid "Write comment"
+msgstr "Viết bình luận"
+
 msgid "Basic info"
 msgstr "Thông tin cơ bản"
 
 msgid "Status"
-msgstr "Trạng thái"
+msgstr "Tình trạng"
 
 msgid "Comments"
 msgstr "Bình luận"
 
-msgid "Field"
-msgstr "Trường"
-
-msgid "could not be updated"
-msgstr "không thể cập nhật"
-
 msgid "Please add or cancel comment before saving the event"
 msgstr "Xin vui lòng thêm hoặc xóa bình luận trước khi lưu sự kiện"
+
+msgid "No write access"
+msgstr "Không có quyền viết"
+
+msgid "Save"
+msgstr "Lưu lại"
 
 msgid "Show all events"
 msgstr "Hiện tất cả sự kiện"
@@ -221,20 +352,47 @@ msgstr "Không thể tải sự kiện"
 msgid "Organisation unit could not be loaded"
 msgstr "Không thể tải đơn vị"
 
+msgid "View event info"
+msgstr ""
+
 msgid "Delete event"
 msgstr "Xóa sự kiện"
 
 msgid "Update"
 msgstr "Cập nhật"
 
-msgid "Close"
-msgstr "Đóng"
-
 msgid "More filters"
 msgstr "Thêm bộ lọc"
 
+msgid "Select columns"
+msgstr ""
+
+msgid "Download as JSON"
+msgstr "Tải về dạng JSON"
+
+msgid "Download as XML"
+msgstr "Tải về dạng XML"
+
+msgid "Download as CSV"
+msgstr "Tải xuống với CSV"
+
+msgid "Download with current filters"
+msgstr ""
+
+msgid "Save filter as..."
+msgstr ""
+
+msgid "Download as..."
+msgstr ""
+
 msgid "Rows per page"
 msgstr "Dòng mỗi trang"
+
+msgid "Active"
+msgstr "Hoạt động"
+
+msgid "Completed"
+msgstr "Hoàn tất"
 
 msgid "Could not get organisation unit"
 msgstr "Không thể lấy đơn vị"
@@ -245,20 +403,8 @@ msgstr "Chương trình không tồn tại"
 msgid "Selected program is invalid for registering unit"
 msgstr "Chương trình đã chọn không đúng để đăng ký đơn vị"
 
-msgid "Saving to"
-msgstr "Đang lưu vào"
-
-msgid "in"
-msgstr "trong"
-
-msgid ""
-"This is not an event program or the metadata is corrupt. See log for details."
+msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
-"Đây không phải là chương trình sự kiện hoặc dữ liệu miêu tả bị hỏng. Xem log "
-"để biết thêm chi tiết."
-
-msgid "A value is required"
-msgstr "Yêu cầu có giá trị"
 
 msgid "Save and add another"
 msgstr "Lưu và thêm sự kiện khác"
@@ -269,20 +415,78 @@ msgstr "Lưu và đóng"
 msgid "Finish"
 msgstr "Hoàn tất"
 
-msgid "events added"
-msgstr "sự kiện đã được thêm"
-
-msgid "No events added"
-msgstr "Không có sự kiện được thêm"
-
 msgid "Switch to form view"
 msgstr "Chuyển sang xem biểu nhập"
 
 msgid "Switch to row view"
 msgstr "Chuyển sang xem dòng"
 
+msgid "New {{TET}}"
+msgstr ""
+
+msgid "Working Lists"
+msgstr ""
+
+msgid ""
+"Program with programid {{programId}} isn't a tracker program. Enrollments "
+"can only be done in tracker programs."
+msgstr ""
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr ""
+
+msgid "Assigned user"
+msgstr ""
+
+msgid "Relationships"
+msgstr "Mối quan hệ"
+
+msgid "Assignee"
+msgstr ""
+
+msgid "Saving to"
+msgstr "Đang lưu vào"
+
+msgid "in"
+msgstr "trong"
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+"Đây không phải là chương trình sự kiện hoặc dữ liệu miêu tả bị hỏng. Xem log"
+" để biết thêm chi tiết."
+
+msgid "This event"
+msgstr ""
+
+msgid ""
+"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
+"exists"
+msgstr ""
+
 msgid "New event"
 msgstr "Sự kiện mới"
+
+msgid "New event relationship"
+msgstr ""
+
+msgid "Adding relationship to event."
+msgstr ""
+
+msgid "Go back to event without saving relationship"
+msgstr ""
+
+msgid ""
+"Leaving this page will discard the selections you made for a new "
+"relationship"
+msgstr ""
+
+msgid "events added"
+msgstr "sự kiện đã được thêm"
+
+msgid "No events added"
+msgstr "Không có sự kiện được thêm"
 
 msgid "Select a registering unit and program above to get started"
 msgstr "Chọn một đơn vị đăng ký và chương trình trên để bắt đầu"
@@ -296,20 +500,140 @@ msgstr "Chọn đơn vị đăng ký để bắt đầu báo cáo"
 msgid "Select a category option to start reporting"
 msgstr "Chọn Tùy Chọn Phân Loại để bắt đầu báo cáo"
 
-msgid "Start again"
-msgstr "Khởi đầu lại"
+msgid "You dont have access to create an event in the current selections"
+msgstr ""
+
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr ""
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr ""
+
+msgid "You have already registered this {{attributeName}}"
+msgstr ""
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr ""
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Registered person"
+msgstr ""
+
+msgid "Link"
+msgstr ""
+
+msgid "Metadata error. see log for details"
+msgstr ""
+
+msgid "Review duplicates"
+msgstr ""
+
+msgid "Create {{trackedEntityTypeName}} and link"
+msgstr ""
+
+msgid "Possible duplicates found"
+msgstr ""
+
+msgid "An error occured loading possible duplicates"
+msgstr ""
+
+msgid "Hide"
+msgstr "Ẩn"
+
+msgid "Save as new {{tetName}}"
+msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr "Chương trình đang được lọc"
+
+msgid "Show all"
+msgstr "Hiển thị tất cả"
+
+msgid "Program"
+msgstr "Chương trình"
+
+msgid "Organisation Unit"
+msgstr "Đơn vị"
+
+msgid "Registration"
+msgstr "Đăng ký"
+
+msgid "Review Duplicates"
+msgstr ""
+
+msgid "Search results"
+msgstr "Kết quả tìm kiếm"
+
+msgid "No {{trackedEntityTypeName}} found."
+msgstr ""
+
+msgid "{{teiCount}} results found for"
+msgstr ""
+
+msgid "New search"
+msgstr ""
+
+msgid "Edit search"
+msgstr ""
+
+msgid "Link to an existing {{trackedEntityType}}"
+msgstr ""
+
+msgid "Create new {{trackedEntityType}}"
+msgstr ""
+
+msgid "Register"
+msgstr "Đăng ký"
+
+msgid "You dont have access to edit this event"
+msgstr ""
+
+msgid ""
+"Leaving this page will discard any selections you made for a new "
+"relationship"
+msgstr ""
+
+msgid "No one is assigned to this event"
+msgstr ""
+
+msgid "Assign"
+msgstr "Gán"
+
+msgid "Event assigned to {{name}}"
+msgstr ""
+
+msgid "Feedbacks"
+msgstr ""
+
+msgid "New {{typeName}}"
+msgstr ""
 
 msgid "New"
 msgstr "Mới"
 
+msgid "Start again"
+msgstr "Khởi đầu lại"
+
 msgid "Find"
-msgstr "Tìm"
+msgstr "Tìm kiếm"
 
 msgid "Selected registering unit"
 msgstr "Đơn vị đăng ký đã chọn"
 
 msgid "Start Again"
 msgstr "Khởi Đầu Lại"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Accept"
+msgstr "Chấp nhận"
 
 msgid "Registering Organisation Unit"
 msgstr "Đơn Vị Đăng Ký"
@@ -320,23 +644,47 @@ msgstr "Chương Trình Đã Chọn"
 msgid "Select"
 msgstr "Chọn"
 
-msgid "Some programs are being filtered."
-msgstr "Chương trình đang được lọc"
-
-msgid "Show all"
-msgstr "Hiện tất cả"
-
-msgid "Program"
-msgstr "Chương Trình"
-
 msgid "Select program"
-msgstr "Chọn chương trình"
+msgstr "Chọn Chương Trình"
 
 msgid "No programs available."
 msgstr "Không có chương trình"
 
-msgid "An error has occured. See log for details"
-msgstr "Có lỗi. Xem log để biết thêm chi tiết."
+msgid "You dont have access to delete this relationship"
+msgstr ""
+
+msgid "You dont have access to create any relationships"
+msgstr ""
+
+msgid "Add relationship"
+msgstr "Thêm Quan Hệ"
+
+msgid "Selected program"
+msgstr "Chương trình đã chọn"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr ""
+
+msgid "Search by attributes"
+msgstr ""
+
+msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgstr ""
+
+msgid "To work with the selected program,"
+msgstr ""
+
+msgid "open the Tracker Capture app"
+msgstr ""
+
+msgid "Program not found"
+msgstr ""
+
+msgid "Program is not a tracker program"
+msgstr ""
+
+msgid "Profile"
+msgstr "Hồ sơ"
 
 msgid "Error saving event"
 msgstr "Có lỗi khi đang lưu sự kiện"
@@ -344,11 +692,50 @@ msgstr "Có lỗi khi đang lưu sự kiện"
 msgid "Could not save event. See log for details"
 msgstr "Không thể lưu sự kiện. Xem log để biết thêm chi tiết"
 
+msgid "Organisation unit search failed. See log for details"
+msgstr ""
+
+msgid "tracked entity instance"
+msgstr ""
+
+msgid "Set coordinate"
+msgstr "Đặt tọa độ"
+
+msgid "Date"
+msgstr "Ngày"
+
+msgid "Time"
+msgstr "Thời gian"
+
+msgid "From date"
+msgstr "Từ ngày"
+
+msgid "From time"
+msgstr ""
+
+msgid "To date"
+msgstr "Đến ngày"
+
+msgid "To time"
+msgstr ""
+
+msgid "error encountered during field validation"
+msgstr ""
+
+msgid "error"
+msgstr ""
+
+msgid "Delete polygon"
+msgstr ""
+
+msgid "Set area"
+msgstr ""
+
 msgid "Choose one or more dates..."
 msgstr "Chọn một hoặc nhiều ngày..."
 
 msgid "Choose a date..."
 msgstr "Chọn một ngày..."
 
-msgid "Today"
-msgstr "Hôm nay
+msgid "Compatibility mode"
+msgstr ""
