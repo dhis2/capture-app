@@ -1,0 +1,330 @@
+# Translators:
+# phil_dhis2, 2019
+# Viktor Varland <viktor@dhis2.org>, 2019
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
+"PO-Revision-Date: 2019-08-29 11:02+0000\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2019\n"
+"Language-Team: Tetum (Tetun) (https://www.transifex.com/hisp-uio/teams/100509/tet/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tet\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Please provide a valid date"
+msgstr ""
+
+msgid "Columns to show in table"
+msgstr ""
+
+msgid "Column"
+msgstr "Koluna"
+
+msgid "Errors"
+msgstr ""
+
+msgid "Feedback"
+msgstr "Feedback"
+
+msgid "Indicators"
+msgstr "Indikadores"
+
+msgid "Warnings"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Kansela"
+
+msgid "Complete"
+msgstr "Kompletu"
+
+msgid "Warnings found"
+msgstr ""
+
+msgid "Abort"
+msgstr ""
+
+msgid "Save comment"
+msgstr "Rai komentáriu"
+
+msgid "Write comment"
+msgstr ""
+
+msgid "Your data is uploading. Please wait untill this message disappears"
+msgstr ""
+
+msgid "No write access"
+msgstr ""
+
+msgid "Save"
+msgstr "Rai"
+
+msgid "Uploading data"
+msgstr ""
+
+msgid "Sort"
+msgstr ""
+
+msgid "No events to display"
+msgstr ""
+
+msgid "Data for offline list not present"
+msgstr ""
+
+msgid "Last week"
+msgstr "Semana kotuk"
+
+msgid "Last month"
+msgstr "Fulan kotuk"
+
+msgid "Last 3 months"
+msgstr "Fulan 3 ikus"
+
+msgid "Custom range"
+msgstr ""
+
+msgid "to"
+msgstr "bá"
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
+msgstr ""
+
+msgid "From"
+msgstr ""
+
+msgid "To"
+msgstr ""
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "greater than or equal to"
+msgstr ""
+
+msgid "less than or equal to"
+msgstr ""
+
+msgid "Contains text"
+msgstr ""
+
+msgid "Yes"
+msgstr "Sim"
+
+msgid "mm/dd/yyyy"
+msgstr ""
+
+msgid "Years"
+msgstr "Tinan"
+
+msgid "Months"
+msgstr "Fulan"
+
+msgid "Days"
+msgstr ""
+
+msgid "Uploading file"
+msgstr ""
+
+msgid "selected"
+msgstr ""
+
+msgid "Delete"
+msgstr "Soe"
+
+msgid "Select file"
+msgstr ""
+
+msgid "No"
+msgstr "Lae"
+
+msgid "Uploading image"
+msgstr ""
+
+msgid "Select image"
+msgstr ""
+
+msgid "Clear"
+msgstr "Hamós"
+
+msgid "No results"
+msgstr ""
+
+msgid "No items to display"
+msgstr ""
+
+msgid "Online"
+msgstr "Online"
+
+msgid "Offline"
+msgstr "Offline"
+
+msgid "Syncing"
+msgstr ""
+
+msgid "Field"
+msgstr ""
+
+msgid "could not be updated"
+msgstr ""
+
+msgid "Start Again"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Reset Organisation Unit"
+msgstr ""
+
+msgid "Reset Program"
+msgstr ""
+
+msgid "Reset Category Option"
+msgstr ""
+
+msgid "Create New Event"
+msgstr ""
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr ""
+
+msgid "Event could not be loaded"
+msgstr ""
+
+msgid "Organisation unit could not be loaded"
+msgstr ""
+
+msgid "Update"
+msgstr "Atualiza"
+
+msgid "Close"
+msgstr "Taka"
+
+msgid "More filters"
+msgstr ""
+
+msgid "Rows per page"
+msgstr ""
+
+msgid "Could not get organisation unit"
+msgstr ""
+
+msgid "Program doesn't exist"
+msgstr ""
+
+msgid "Selected program is invalid for registering unit"
+msgstr ""
+
+msgid "Select a registering unit and program above to get started"
+msgstr ""
+
+msgid "Select a program to start reporting"
+msgstr ""
+
+msgid "Select a registering unit to start reporting"
+msgstr ""
+
+msgid "Select a category option to start reporting"
+msgstr ""
+
+msgid "New event"
+msgstr ""
+
+msgid "Switch to form view"
+msgstr ""
+
+msgid "Switch to row view"
+msgstr ""
+
+msgid "Saving to"
+msgstr ""
+
+msgid "in"
+msgstr ""
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+
+msgid "Save and add another"
+msgstr ""
+
+msgid "Save and exit"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost"
+msgstr ""
+
+msgid "events added"
+msgstr ""
+
+msgid "No events added"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "New"
+msgstr "Foun"
+
+msgid "Find"
+msgstr "Buka"
+
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Registering Oraginastion Unit"
+msgstr ""
+
+msgid "Registering Organisation Unit"
+msgstr ""
+
+msgid "Selected Program"
+msgstr ""
+
+msgid "Select"
+msgstr "Selesiona"
+
+msgid "Program"
+msgstr ""
+
+msgid "No programs available."
+msgstr ""
+
+msgid "Show all"
+msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Select program"
+msgstr ""
+
+msgid "An error has occured. See log for details"
+msgstr ""
+
+msgid "Error saving event"
+msgstr ""
+
+msgid "Could not save event. See log for details"
+msgstr ""
+
+msgid "Choose one or more dates..."
+msgstr ""
+
+msgid "Choose a date..."
+msgstr ""
+
+msgid "Today"
+msgstr ""
