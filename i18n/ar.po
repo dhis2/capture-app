@@ -1,0 +1,738 @@
+# Translators:
+# phil_dhis2, 2019
+# Viktor Varland <viktor@dhis2.org>, 2019
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2019-08-27T15:53:46.517Z\n"
+"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2019\n"
+"Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+msgid "Please provide a valid date"
+msgstr ""
+
+msgid "Columns to show in table"
+msgstr ""
+
+msgid "Column"
+msgstr "العمود"
+
+msgid "This value is validating"
+msgstr ""
+
+msgid "Async field update failed"
+msgstr ""
+
+msgid "A value is required"
+msgstr ""
+
+msgid "Please provide a valid number"
+msgstr ""
+
+msgid "Please provide a valid integer"
+msgstr ""
+
+msgid "Please provide a positive integer"
+msgstr ""
+
+msgid "Please provide zero or a positive integer"
+msgstr ""
+
+msgid "Please provide a negative integer"
+msgstr ""
+
+msgid "Please provide a valid date and time"
+msgstr ""
+
+msgid "Please provide a valid time"
+msgstr ""
+
+msgid "Please provide a valid percentage"
+msgstr ""
+
+msgid "Please provide a valid url"
+msgstr ""
+
+msgid "Please provide a valid email address"
+msgstr ""
+
+msgid "Please provide a valid age"
+msgstr ""
+
+msgid "Please provide a valid phone number"
+msgstr ""
+
+msgid "Please provide a valid organisation unit"
+msgstr ""
+
+msgid "Please provide valid coordinates"
+msgstr ""
+
+msgid "This value already exists"
+msgstr ""
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr ""
+
+msgid "Checking..."
+msgstr ""
+
+msgid "Area"
+msgstr ""
+
+msgid "Coordinate"
+msgstr "الإحداثية"
+
+msgid "Enrollment"
+msgstr "التسجيل"
+
+msgid "A future date is not allowed"
+msgstr ""
+
+msgid "An error has occured. See log for details"
+msgstr ""
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Unsaved changes"
+msgstr ""
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+
+msgid "Yes, discard"
+msgstr ""
+
+msgid "No, stay here"
+msgstr ""
+
+msgid "validation failed"
+msgstr ""
+
+msgid "Errors"
+msgstr ""
+
+msgid "Feedback"
+msgstr "التغذية الراجعة"
+
+msgid "Indicators"
+msgstr "المؤشرات"
+
+msgid "Warnings"
+msgstr ""
+
+msgid "search group result could not be retrieved"
+msgstr ""
+
+msgid "Complete"
+msgstr "مكتمل"
+
+msgid "Warnings found"
+msgstr ""
+
+msgid "Abort"
+msgstr ""
+
+msgid "Back to form"
+msgstr ""
+
+msgid "Save anyway"
+msgstr ""
+
+msgid "Validation errors and warnings"
+msgstr ""
+
+msgid "Validation errors"
+msgstr ""
+
+msgid "Validation warnings"
+msgstr "تحذيرات التحقق"
+
+msgid "Some operations are still runnning. Please wait.."
+msgstr ""
+
+msgid "Operations running"
+msgstr ""
+
+msgid "Sort"
+msgstr "فرز"
+
+msgid "No events to display"
+msgstr ""
+
+msgid "Data for offline list not present"
+msgstr ""
+
+msgid "Close"
+msgstr "إغلاق"
+
+msgid "Please select the user"
+msgstr ""
+
+msgid "Search for user"
+msgstr ""
+
+msgid "Me"
+msgstr ""
+
+msgid "Anyone"
+msgstr ""
+
+msgid "None"
+msgstr "لا شيء"
+
+msgid "Select user"
+msgstr ""
+
+msgid "to"
+msgstr "إلى"
+
+msgid "From"
+msgstr "من"
+
+msgid "To"
+msgstr "الى"
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
+msgstr ""
+
+msgid "Today"
+msgstr "اليوم"
+
+msgid "This week"
+msgstr "الأسبوع الحالي"
+
+msgid "This month"
+msgstr "الشهر الحالي"
+
+msgid "This Year"
+msgstr ""
+
+msgid "Last week"
+msgstr "الأسبوع الماضي"
+
+msgid "Last month"
+msgstr "الشهر الماضي"
+
+msgid "Last 3 months"
+msgstr "آخر 3 أشهر"
+
+msgid "Custom range"
+msgstr ""
+
+msgid "Max"
+msgstr "الأعلى"
+
+msgid "Min"
+msgstr "الأدنى"
+
+msgid "greater than or equal to"
+msgstr ""
+
+msgid "less than or equal to"
+msgstr ""
+
+msgid "Contains text"
+msgstr ""
+
+msgid "Yes"
+msgstr "نعم"
+
+msgid "mm/dd/yyyy"
+msgstr ""
+
+msgid "Years"
+msgstr "السنوات"
+
+msgid "Months"
+msgstr "الأشهر"
+
+msgid "Days"
+msgstr "‏‏الأيام"
+
+msgid "Uploading file"
+msgstr ""
+
+msgid "selected"
+msgstr "محدد"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Select file"
+msgstr ""
+
+msgid "No"
+msgstr "لا"
+
+msgid "Uploading image"
+msgstr ""
+
+msgid "Select image"
+msgstr ""
+
+msgid "Search"
+msgstr "البحث"
+
+msgid "Clear"
+msgstr "مسح"
+
+msgid "No results"
+msgstr ""
+
+msgid "suggestions could not be retrieved"
+msgstr ""
+
+msgid "search for username"
+msgstr ""
+
+msgid "No items to display"
+msgstr ""
+
+msgid "Online"
+msgstr "متصل"
+
+msgid "Offline"
+msgstr "غير متصل"
+
+msgid "Syncing"
+msgstr ""
+
+msgid "Add comment"
+msgstr ""
+
+msgid "You dont have access to write comments"
+msgstr ""
+
+msgid "Write comment"
+msgstr ""
+
+msgid "Basic info"
+msgstr ""
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "Comments"
+msgstr "التعليقات"
+
+msgid "Please add or cancel comment before saving the event"
+msgstr ""
+
+msgid "No write access"
+msgstr ""
+
+msgid "Save"
+msgstr "حفظ"
+
+msgid "Show all events"
+msgstr ""
+
+msgid "Edit event"
+msgstr ""
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr ""
+
+msgid "Event could not be loaded"
+msgstr ""
+
+msgid "Organisation unit could not be loaded"
+msgstr ""
+
+msgid "View event info"
+msgstr ""
+
+msgid "Delete event"
+msgstr ""
+
+msgid "Update"
+msgstr "تحديث"
+
+msgid "More filters"
+msgstr ""
+
+msgid "Select columns"
+msgstr ""
+
+msgid "Download as JSON"
+msgstr "تنزيل كملف JSON"
+
+msgid "Download as XML"
+msgstr "تنزيل كملف XML"
+
+msgid "Download as CSV"
+msgstr "تنزيل كملف CSV"
+
+msgid "Download with current filters"
+msgstr ""
+
+msgid "Save filter as..."
+msgstr ""
+
+msgid "Download as..."
+msgstr ""
+
+msgid "Rows per page"
+msgstr ""
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Completed"
+msgstr "مكتمل"
+
+msgid "Could not get organisation unit"
+msgstr ""
+
+msgid "Program doesn't exist"
+msgstr ""
+
+msgid "Selected program is invalid for registering unit"
+msgstr ""
+
+msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
+msgstr ""
+
+msgid "Save and add another"
+msgstr ""
+
+msgid "Save and exit"
+msgstr ""
+
+msgid "Finish"
+msgstr ""
+
+msgid "Switch to form view"
+msgstr ""
+
+msgid "Switch to row view"
+msgstr ""
+
+msgid "New {{TET}}"
+msgstr ""
+
+msgid "Working Lists"
+msgstr ""
+
+msgid ""
+"Program with programid {{programId}} isn't a tracker program. Enrollments "
+"can only be done in tracker programs."
+msgstr ""
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr ""
+
+msgid "Assigned user"
+msgstr ""
+
+msgid "Relationships"
+msgstr "علاقات"
+
+msgid "Assignee"
+msgstr ""
+
+msgid "Saving to"
+msgstr ""
+
+msgid "in"
+msgstr "في"
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+
+msgid "This event"
+msgstr ""
+
+msgid ""
+"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
+"exists"
+msgstr ""
+
+msgid "New event"
+msgstr "حدث جديد"
+
+msgid "New event relationship"
+msgstr ""
+
+msgid "Adding relationship to event."
+msgstr ""
+
+msgid "Go back to event without saving relationship"
+msgstr ""
+
+msgid ""
+"Leaving this page will discard the selections you made for a new "
+"relationship"
+msgstr ""
+
+msgid "events added"
+msgstr ""
+
+msgid "No events added"
+msgstr ""
+
+msgid "Select a registering unit and program above to get started"
+msgstr ""
+
+msgid "Select a program to start reporting"
+msgstr ""
+
+msgid "Select a registering unit to start reporting"
+msgstr ""
+
+msgid "Select a category option to start reporting"
+msgstr ""
+
+msgid "You dont have access to create an event in the current selections"
+msgstr ""
+
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr ""
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr ""
+
+msgid "You have already registered this {{attributeName}}"
+msgstr ""
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr ""
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr ""
+
+msgid "Registered person"
+msgstr ""
+
+msgid "Link"
+msgstr ""
+
+msgid "Metadata error. see log for details"
+msgstr ""
+
+msgid "Review duplicates"
+msgstr ""
+
+msgid "Create {{trackedEntityTypeName}} and link"
+msgstr ""
+
+msgid "Possible duplicates found"
+msgstr ""
+
+msgid "An error occured loading possible duplicates"
+msgstr ""
+
+msgid "Hide"
+msgstr "إخفاء"
+
+msgid "Save as new {{tetName}}"
+msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Show all"
+msgstr "إظهار الكل"
+
+msgid "Program"
+msgstr "البرنامج"
+
+msgid "Organisation Unit"
+msgstr "الوحدة التنظيمية"
+
+msgid "Registration"
+msgstr "التسجيل"
+
+msgid "Review Duplicates"
+msgstr ""
+
+msgid "Search results"
+msgstr "نتائج البحث"
+
+msgid "No {{trackedEntityTypeName}} found."
+msgstr ""
+
+msgid "{{teiCount}} results found for"
+msgstr ""
+
+msgid "New search"
+msgstr ""
+
+msgid "Edit search"
+msgstr ""
+
+msgid "Link to an existing {{trackedEntityType}}"
+msgstr ""
+
+msgid "Create new {{trackedEntityType}}"
+msgstr ""
+
+msgid "Register"
+msgstr "تسجيل"
+
+msgid "You dont have access to edit this event"
+msgstr ""
+
+msgid ""
+"Leaving this page will discard any selections you made for a new "
+"relationship"
+msgstr ""
+
+msgid "No one is assigned to this event"
+msgstr ""
+
+msgid "Assign"
+msgstr "إسناد"
+
+msgid "Event assigned to {{name}}"
+msgstr ""
+
+msgid "Feedbacks"
+msgstr ""
+
+msgid "New {{typeName}}"
+msgstr ""
+
+msgid "New"
+msgstr "جديد"
+
+msgid "Start again"
+msgstr ""
+
+msgid "Find"
+msgstr "بحث"
+
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Accept"
+msgstr "قبول"
+
+msgid "Registering Organisation Unit"
+msgstr ""
+
+msgid "Selected Program"
+msgstr ""
+
+msgid "Select"
+msgstr "تحديد"
+
+msgid "Select program"
+msgstr "تحديد البرنامج"
+
+msgid "No programs available."
+msgstr ""
+
+msgid "You dont have access to delete this relationship"
+msgstr ""
+
+msgid "You dont have access to create any relationships"
+msgstr ""
+
+msgid "Add relationship"
+msgstr "اضف علاقة"
+
+msgid "Selected program"
+msgstr ""
+
+msgid "Search {{uniqueAttrName}}"
+msgstr ""
+
+msgid "Search by attributes"
+msgstr ""
+
+msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgstr ""
+
+msgid "To work with the selected program,"
+msgstr ""
+
+msgid "open the Tracker Capture app"
+msgstr ""
+
+msgid "Program not found"
+msgstr ""
+
+msgid "Program is not a tracker program"
+msgstr ""
+
+msgid "Profile"
+msgstr "ملف التعريف"
+
+msgid "Error saving event"
+msgstr ""
+
+msgid "Could not save event. See log for details"
+msgstr ""
+
+msgid "Organisation unit search failed. See log for details"
+msgstr ""
+
+msgid "tracked entity instance"
+msgstr ""
+
+msgid "Set coordinate"
+msgstr "ضبط الإحداثية"
+
+msgid "Date"
+msgstr "التاريخ"
+
+msgid "Time"
+msgstr "الوقت"
+
+msgid "From date"
+msgstr "من تاريخ"
+
+msgid "From time"
+msgstr ""
+
+msgid "To date"
+msgstr "حتى تاريخ"
+
+msgid "To time"
+msgstr ""
+
+msgid "error encountered during field validation"
+msgstr ""
+
+msgid "error"
+msgstr ""
+
+msgid "Delete polygon"
+msgstr ""
+
+msgid "Set area"
+msgstr ""
+
+msgid "Choose one or more dates..."
+msgstr ""
+
+msgid "Choose a date..."
+msgstr ""
+
+msgid "Compatibility mode"
+msgstr ""
