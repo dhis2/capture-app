@@ -1,0 +1,363 @@
+# Translators:
+# phil_dhis2, 2019
+# Viktor Varland <viktor@dhis2.org>, 2019
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2018-11-28T09:40:30.446Z\n"
+"PO-Revision-Date: 2019-08-29 11:02+0000\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2019\n"
+"Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: lo\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Please provide a valid date"
+msgstr ""
+
+msgid "Columns to show in table"
+msgstr ""
+
+msgid "Column"
+msgstr "ຖັນ"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Discard event?"
+msgstr ""
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr ""
+
+msgid "Discard"
+msgstr "ຍົົກເລິກ"
+
+msgid "Back to event"
+msgstr ""
+
+msgid "Add comment"
+msgstr ""
+
+msgid "Write comment"
+msgstr ""
+
+msgid "Errors"
+msgstr "ຜິດພາດ"
+
+msgid "Feedback"
+msgstr "Feedback"
+
+msgid "Indicators"
+msgstr "Indicators"
+
+msgid "Warnings"
+msgstr ""
+
+msgid "Complete"
+msgstr "ສຳເລັດແລ້ວ"
+
+msgid "Warnings found"
+msgstr ""
+
+msgid "Abort"
+msgstr ""
+
+msgid "Your data is uploading. Please wait untill this message disappears"
+msgstr ""
+
+msgid "No write access"
+msgstr ""
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Uploading data"
+msgstr ""
+
+msgid "Sort"
+msgstr "Sort"
+
+msgid "No events to display"
+msgstr ""
+
+msgid "Data for offline list not present"
+msgstr ""
+
+msgid "Last week"
+msgstr "ອາທິດທີ່ຜ່ານມາ"
+
+msgid "Last month"
+msgstr "Last month"
+
+msgid "Last 3 months"
+msgstr "3 ເດືອນຍ້ອນຫຼັງ"
+
+msgid "Custom range"
+msgstr ""
+
+msgid "to"
+msgstr "ຫາ"
+
+msgid "after or equal to"
+msgstr ""
+
+msgid "before or equal to"
+msgstr ""
+
+msgid "From"
+msgstr "ຈາກ"
+
+msgid "To"
+msgstr "ຖຶງ"
+
+msgid "Max"
+msgstr "ຄ່າໃຫ່ຍສຸດ"
+
+msgid "Min"
+msgstr "ຄ່າຕໍ່າສຸດ"
+
+msgid "greater than or equal to"
+msgstr ""
+
+msgid "less than or equal to"
+msgstr ""
+
+msgid "Contains text"
+msgstr ""
+
+msgid "Yes"
+msgstr "Yes"
+
+msgid "mm/dd/yyyy"
+msgstr ""
+
+msgid "Years"
+msgstr "Years"
+
+msgid "Months"
+msgstr "Months"
+
+msgid "Days"
+msgstr "Days"
+
+msgid "Uploading file"
+msgstr ""
+
+msgid "selected"
+msgstr "ເລືອກແລ້ວ"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Select file"
+msgstr ""
+
+msgid "No"
+msgstr "No"
+
+msgid "Uploading image"
+msgstr ""
+
+msgid "Select image"
+msgstr ""
+
+msgid "Search"
+msgstr "ຄົນຫາ"
+
+msgid "Clear"
+msgstr "ລຶບ"
+
+msgid "No results"
+msgstr ""
+
+msgid "No items to display"
+msgstr ""
+
+msgid "Online"
+msgstr "ມີການເຊື່ອມຕໍ່"
+
+msgid "Offline"
+msgstr "ບໍ່ມີການເຊື່ອມຕໍ່"
+
+msgid "Syncing"
+msgstr ""
+
+msgid "Area"
+msgstr ""
+
+msgid "Basic info"
+msgstr ""
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Comments"
+msgstr "ຄຳເຫັນ"
+
+msgid "Field"
+msgstr ""
+
+msgid "could not be updated"
+msgstr ""
+
+msgid "Please add or cancel comment before saving the event"
+msgstr ""
+
+msgid "Show all events"
+msgstr ""
+
+msgid "Edit event"
+msgstr ""
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr ""
+
+msgid "Event could not be loaded"
+msgstr ""
+
+msgid "Organisation unit could not be loaded"
+msgstr ""
+
+msgid "Delete event"
+msgstr "ລືບກໍລະນີອອກ"
+
+msgid "Update"
+msgstr "Update"
+
+msgid "Close"
+msgstr "ປິດ"
+
+msgid "More filters"
+msgstr ""
+
+msgid "Rows per page"
+msgstr ""
+
+msgid "Could not get organisation unit"
+msgstr ""
+
+msgid "Program doesn't exist"
+msgstr ""
+
+msgid "Selected program is invalid for registering unit"
+msgstr ""
+
+msgid "Saving to"
+msgstr ""
+
+msgid "in"
+msgstr "in"
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+
+msgid "A value is required"
+msgstr ""
+
+msgid "Save and add another"
+msgstr ""
+
+msgid "Save and exit"
+msgstr ""
+
+msgid "Finish"
+msgstr ""
+
+msgid "events added"
+msgstr ""
+
+msgid "No events added"
+msgstr ""
+
+msgid "Switch to form view"
+msgstr ""
+
+msgid "Switch to row view"
+msgstr ""
+
+msgid "New event"
+msgstr "ກໍລະນີໃໝ່"
+
+msgid "Select a registering unit and program above to get started"
+msgstr ""
+
+msgid "Select a program to start reporting"
+msgstr ""
+
+msgid "Select a registering unit to start reporting"
+msgstr ""
+
+msgid "Select a category option to start reporting"
+msgstr ""
+
+msgid "Start again"
+msgstr ""
+
+msgid "New"
+msgstr "ສ້າງໃຫມ່"
+
+msgid "Find"
+msgstr "ຊອກ"
+
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
+msgstr ""
+
+msgid "Registering Organisation Unit"
+msgstr ""
+
+msgid "Selected Program"
+msgstr ""
+
+msgid "Select"
+msgstr "ເລືອກ"
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Show all"
+msgstr "ສະແດງທັງໝົດ"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "Select program"
+msgstr "ຂະແໜງທີ່ຖືກເລືອກ"
+
+msgid "No programs available."
+msgstr ""
+
+msgid "An error has occured. See log for details"
+msgstr ""
+
+msgid "Error saving event"
+msgstr ""
+
+msgid "Could not save event. See log for details"
+msgstr ""
+
+msgid "Set coordinate"
+msgstr "ຕັ້ງຄ່າເສັ້ນສະແດງ"
+
+msgid "Delete polygon"
+msgstr ""
+
+msgid "Set area"
+msgstr ""
+
+msgid "Choose one or more dates..."
+msgstr ""
+
+msgid "Choose a date..."
+msgstr ""
+
+msgid "Today"
+msgstr "ມື້ນີ້"
