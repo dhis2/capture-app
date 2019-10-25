@@ -90,7 +90,7 @@
     }
   },
   "devDependencies": {
-    "@dhis2/d2-i18n-extract": "^1.0.7",
+    "@dhis2/d2-i18n-extract": "^1.0.8",
     "@dhis2/d2-i18n-generate": "^1.1.1",
     "bestzip": "^2.1.4",
     "docdash": "^1.1.1",
