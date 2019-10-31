@@ -52,7 +52,7 @@ export const resetCategoriesAfterSettingOrgUnitIfApplicableEpic = (action$: Inpu
                     const categoryOptionId = selectedCategories[categoryId];
                     return isOptionAssociatedWithOrganisationUnit(categoryOptionId, orgUnitId)
                         .then(isAssociated => ({
-                            id: categoryOptionId,
+                            id: categoryId,
                             isAssociated,
                         }));
                 });

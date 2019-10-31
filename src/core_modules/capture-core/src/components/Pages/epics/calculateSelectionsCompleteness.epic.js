@@ -27,10 +27,12 @@ type CurrentSelectionsState = {
     programId?: ?string,
     orgUnitId?: ?string,
     categories?: ?Object,
+    categoryCheckInProgress?: ?boolean,
 };
 
+// eslint-disable-next-line complexity
 const calculateCompleteStatus = (state: CurrentSelectionsState) => {
-    if (!state.orgUnitId || !state.programId) {
+    if (!state.orgUnitId || !state.programId || state.categoryCheckInProgress) {
         return false;
     }
 
@@ -66,5 +68,8 @@ export const calculateSelectionsCompletenessEpic = (action$: InputObservable, st
     )
         .map((action) => {
             const isComplete = calculateCompleteStatus(store.getState().currentSelections);
-            return selectionsCompletenessCalculated(isComplete, (action.payload && action.payload.triggeringActionType) || action.type);
+            return selectionsCompletenessCalculated(
+                isComplete,
+                (action.payload && action.payload.triggeringActionType) || action.type,
+            );
         });
