@@ -18,9 +18,10 @@ import {
 import {
     urlActionTypes as newEnrollmentUrlActionTypes,
 } from '../NewEnrollment';
-
-
-import { selectionsCompletenessCalculated } from '../actions/crossPage.actions';
+import {
+    selectionsCompletenessCalculated,
+    actionTypes as crossPageActionTypes,
+} from '../actions/crossPage.actions';
 
 type CurrentSelectionsState = {
     programId?: ?string,
@@ -51,21 +52,19 @@ export const calculateSelectionsCompletenessEpic = (action$: InputObservable, st
         mainSelections.UPDATE_MAIN_SELECTIONS,
         mainSelections.VALID_SELECTIONS_FROM_URL,
         newEventDataEntryUrlActionTypes.VALID_SELECTIONS_FROM_URL,
-        mainPageSelectorActionTypes.SET_ORG_UNIT,
         mainPageSelectorActionTypes.SET_PROGRAM_ID,
         mainPageSelectorActionTypes.SET_CATEGORY_OPTION,
-        editEventPageSelectorActionTypes.SET_ORG_UNIT,
         editEventPageSelectorActionTypes.SET_PROGRAM_ID,
         editEventPageSelectorActionTypes.SET_CATEGORY_OPTION,
-        viewEventPageSelectorActionTypes.SET_ORG_UNIT,
         viewEventPageSelectorActionTypes.SET_PROGRAM_ID,
         viewEventPageSelectorActionTypes.SET_CATEGORY_OPTION,
-        newEventSelectorActionTypes.SET_ORG_UNIT,
         newEventSelectorActionTypes.SET_PROGRAM_ID,
         newEventSelectorActionTypes.SET_CATEGORY_OPTION,
         newEnrollmentUrlActionTypes.VALID_SELECTIONS_FROM_URL,
+        crossPageActionTypes.AFTER_SETTING_ORG_UNIT_SKIP_CATEGORIES_RESET,
+        crossPageActionTypes.AFTER_SETTING_ORG_UNIT_DO_CATEGORIES_RESET,
     )
-        .map(() => {
+        .map((action) => {
             const isComplete = calculateCompleteStatus(store.getState().currentSelections);
-            return selectionsCompletenessCalculated(isComplete);
+            return selectionsCompletenessCalculated(isComplete, (action.payload && action.payload.triggeringActionType) || action.type);
         });
