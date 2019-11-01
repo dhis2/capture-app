@@ -5,6 +5,7 @@ import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
     dataEntryUrlActionTypes as newEventdataEntryUrlActionTypes,
     dataEntryWrapperActionTypes as newEventDataEntryWrapperActionTypes,
+    selectorActionTypes as newEventSelectorActionTypes,
     newRelationshipActionTypes as newEventNewRelationshipActionTypes,
 } from '../../components/Pages/NewEvent';
 import {
@@ -113,4 +114,8 @@ export const newEventPageDesc = createReducerDescription({
         newState.saveTypes = action.payload.saveTypes;
         return newState;
     },
+    [newEventSelectorActionTypes.SET_ORG_UNIT]: state => ({
+        ...state,
+        dataEntryIsLoading: true,
+    }),
 }, 'newEventPage');
