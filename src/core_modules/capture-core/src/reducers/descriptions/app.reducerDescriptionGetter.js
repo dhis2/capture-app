@@ -199,6 +199,14 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         };
         return newState;
     },
+    [viewEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
+        const newState = {
+            ...state,
+            page: null,
+            locationSwitchInProgress: true,
+        };
+        return newState;
+    },
     [editEventPageSelectorActionTypes.SET_ORG_UNIT]: (state) => {
         const newState = { ...state };
         newState.locationSwitchInProgress = true;
@@ -218,6 +226,22 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
     [editEventPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state) => {
+        const newState = {
+            ...state,
+            page: null,
+            locationSwitchInProgress: true,
+        };
+        return newState;
+    },
+    [viewEventPageSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
+        const newState = {
+            ...state,
+            page: null,
+            locationSwitchInProgress: true,
+        };
+        return newState;
+    },
+    [viewEventPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state) => {
         const newState = {
             ...state,
             page: null,

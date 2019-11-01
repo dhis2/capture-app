@@ -22,6 +22,9 @@ import {
     actionTypes as editEventPageSelectorActionTypes,
 } from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
 import {
+    actionTypes as viewEventPageSelectorActionTypes,
+} from '../../components/Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
+import {
     actionTypes as crossPageActionTypes,
 } from '../../components/Pages/actions/crossPage.actions';
 import {
@@ -34,6 +37,7 @@ const setOrgUnit = (state, action) => {
         ...state,
         orgUnitId,
         complete: false,
+        categoryCheckInProgress: true,
     };
     return newState;
 };
@@ -196,6 +200,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             ...state,
             orgUnitId,
             complete: false,
+            categoryCheckInProgress: true,
         };
     },
     [mainPageSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
@@ -243,6 +248,21 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         categories: undefined,
         categoriesName: undefined,
     }),
+    [viewEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
+        const orgUnitId = null;
+        const newState = { ...state, orgUnitId };
+        newState.complete = false;
+        return newState;
+    },
+    [viewEventPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state, action) => {
+        const { categoryId } = action.payload;
+        return resetCategoryOption(state, categoryId);
+    },
+    [viewEventPageSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: state => ({
+        ...state,
+        categories: undefined,
+        categoriesName: undefined,
+    }),
     [newEventSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
         const orgUnitId = null;
         const newState = { ...state, orgUnitId };
@@ -268,5 +288,25 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         ...state,
         categories: undefined,
         categoriesName: undefined,
+    }),
+    [crossPageActionTypes.AFTER_SETTING_ORG_UNIT_DO_CATEGORIES_RESET]: (state, action) => {
+        const { resetCategories } = action.payload;
+        const { categories, categoriesName } = state;
+        const container = resetCategories.reduce((acc, categoryId) => {
+            acc.categories[categoryId] = undefined;
+            acc.categoriesName[categoryId] = undefined;
+            return acc;
+        }, { categories: { ...categories }, categoriesName: { ...categoriesName } });
+
+        return {
+            ...state,
+            categories: container.categories,
+            categoriesName: container.categoriesName,
+            categoryCheckInProgress: false,
+        };
+    },
+    [crossPageActionTypes.AFTER_SETTING_ORG_UNIT_SKIP_CATEGORIES_RESET]: state => ({
+        ...state,
+        categoryCheckInProgress: false,
     }),
 }, 'currentSelections');

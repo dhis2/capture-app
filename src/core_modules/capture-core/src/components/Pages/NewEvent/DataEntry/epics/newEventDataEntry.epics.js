@@ -43,13 +43,14 @@ import {
 } from '../../../../List/list.actions';
 import type {
     FieldData,
-} from '../../../../../rulesEngineActionsCreator/rulesEngineActionsCreatorForEvent';
+} from '../../../../../rulesEngineActionsCreator/inputHelpers';
 import {
     listId,
 } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
 import getStageForEventProgram from '../../../../../metaData/helpers/EventProgram/getStageFromProgramId';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../metaData';
+import { actionTypes as crossPageActionTypes } from '../../../actions/crossPage.actions';
 
 const errorMessages = {
     PROGRAM_OR_STAGE_NOT_FOUND: 'Program or stage not found',
@@ -100,9 +101,19 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
         mainPageSelectorActionTypes.OPEN_NEW_EVENT,
         newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
         newEventSelectorTypes.SET_PROGRAM_ID,
-        newEventSelectorTypes.SET_ORG_UNIT,
         newEventSelectorTypes.SET_CATEGORY_OPTION,
+        crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
     )
+        .filter((action) => {
+            const type = action.type;
+            const triggeringActionType = action.payload && action.payload.triggeringActionType;
+            if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED) {
+                return (!!triggeringActionType) && [
+                    newEventSelectorTypes.SET_ORG_UNIT,
+                ].includes(triggeringActionType);
+            }
+            return true;
+        })
         .map(() => {
             const state = store.getState();
             const selectionsComplete = state.currentSelections.complete;
