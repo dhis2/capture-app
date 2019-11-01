@@ -3,6 +3,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import errorCreator from '../../../utils/errorCreator';
+import { makeCancelable as makeCancelablePromise } from '../../../utils/cancelablePromise';
 import CategoryMetadata from '../../../metaData/CategoryCombinations/Category';
 import VirtualizedSelect from '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import { buildCategoryOptionsAsync } from '../../../metaDataMemoryStoreBuilders';
@@ -38,10 +39,15 @@ class CategorySelector extends React.Component<Props, State> {
         onIsAborted: Function,
     ) {
         const predicate = (categoryOption: Object) => {
+            if (!selectedOrgUnitId) {
+                return true;
+            }
+
             const orgUnits = categoryOption.organisationUnits;
             if (!orgUnits) {
                 return true;
             }
+
             return !!orgUnits[selectedOrgUnitId];
         };
 
@@ -50,11 +56,9 @@ class CategorySelector extends React.Component<Props, State> {
             value: categoryOption.id,
         });
 
-        const isRequestAborted = () => onIsAborted(selectedOrgUnitId);
-
         return buildCategoryOptionsAsync(
             categoryId,
-            { predicate, project, onIsAborted: isRequestAborted },
+            { predicate, project, onIsAborted },
         );
     }
 
@@ -69,7 +73,8 @@ class CategorySelector extends React.Component<Props, State> {
     }
 
     onSelectSelector: Function;
-    unmounted: ?boolean;
+    cancelablePromise: Object;
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -87,17 +92,34 @@ class CategorySelector extends React.Component<Props, State> {
     }
 
     componentWillUnmount() {
-        this.unmounted = true;
+        this.cancelablePromise && this.cancelablePromise.cancel();
+        this.cancelablePromise = null;
     }
-
-    isLoadAborted = (organisationUnitId: ?string) =>
-        (this.props.selectedOrgUnitId !== organisationUnitId || this.unmounted);
 
     loadCagoryOptions(props: Props) {
         const { category, selectedOrgUnitId } = props;
 
-        CategorySelector
-            .getOptionsAsync(category.id, selectedOrgUnitId, this.isLoadAborted)
+        this.setState({
+            options: null,
+        });
+        this.cancelablePromise && this.cancelablePromise.cancel();
+
+        let currentRequestCancelablePromise;
+
+        const isRequestAborted = () =>
+            (currentRequestCancelablePromise && this.cancelablePromise !== currentRequestCancelablePromise);
+
+        currentRequestCancelablePromise = makeCancelablePromise(
+            CategorySelector
+                .getOptionsAsync(
+                    category.id,
+                    selectedOrgUnitId,
+                    isRequestAborted,
+                ),
+        );
+
+        currentRequestCancelablePromise
+            .promise
             .then((options) => {
                 options.sort((a, b) => {
                     if (a.label === b.label) {
@@ -108,12 +130,14 @@ class CategorySelector extends React.Component<Props, State> {
                     }
                     return 1;
                 });
+
                 this.setState({
                     options,
                 });
+                this.cancelablePromise = null;
             })
             .catch((error) => {
-                if (!error || !error.aborted) {
+                if (!(error && (error.aborted || error.isCanceled))) {
                     log.error(
                         errorCreator('An error occured loading category options')({ error }),
                     );
@@ -122,6 +146,8 @@ class CategorySelector extends React.Component<Props, State> {
                     });
                 }
             });
+
+        this.cancelablePromise = currentRequestCancelablePromise;
     }
 
     render() {

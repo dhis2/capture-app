@@ -90,6 +90,9 @@ import {
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
 } from 'capture-core/components/Pages/epics/resetProgramAfterSettingOrgUnitIfApplicable.epic';
 import {
+    resetCategoriesAfterSettingOrgUnitIfApplicableEpic,
+} from 'capture-core/components/Pages/epics/resetCategoriesAfterSettingOrgUnitIfApplicable.epic';
+import {
     calculateSelectionsCompletenessEpic,
 } from 'capture-core/components/Pages/epics/calculateSelectionsCompleteness.epic';
 import {
@@ -106,6 +109,7 @@ import { loadStartupData, loadStartupDataCore } from '../init/entry.epics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
+    resetCategoriesAfterSettingOrgUnitIfApplicableEpic,
     calculateSelectionsCompletenessEpic,
     loadStartupData,
     loadStartupDataCore,

@@ -12,11 +12,26 @@ import {
     invalidSelectionsFromUrl,
 } from './mainSelections.actions';
 import { actionTypes as mainPageSelectorActionTypes } from '../MainPage/MainPageSelector/MainPageSelector.actions';
+import {
+    actionTypes as crossPageActionTypes,
+} from '../actions/crossPage.actions';
 import programCollection from '../../../metaDataMemoryStores/programCollection/programCollection';
 
 export const mainSelectionsCompletedEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(actionTypes.UPDATE_MAIN_SELECTIONS, actionTypes.VALID_SELECTIONS_FROM_URL, mainPageSelectorActionTypes.SET_ORG_UNIT, mainPageSelectorActionTypes.SET_PROGRAM_ID, mainPageSelectorActionTypes.SET_CATEGORY_OPTION)
+    action$.ofType(
+        crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
+    )
+        .filter((action) => {
+            const { triggeringActionType } = action.payload;
+            return [
+                actionTypes.UPDATE_MAIN_SELECTIONS,
+                actionTypes.VALID_SELECTIONS_FROM_URL,
+                mainPageSelectorActionTypes.SET_PROGRAM_ID,
+                mainPageSelectorActionTypes.SET_CATEGORY_OPTION,
+                mainPageSelectorActionTypes.SET_ORG_UNIT,
+            ].includes(triggeringActionType);
+        })
         .filter(() => {
             const currentSelectionsComplete = !!store.getState().currentSelections.complete;
             return currentSelectionsComplete;

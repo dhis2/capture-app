@@ -28,6 +28,7 @@ const setOrgUnit = (state, action) => {
         ...state,
         orgUnitId,
         complete: false,
+        categoryCheckInProgress: true,
     };
     return newState;
 };
@@ -153,6 +154,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             ...state,
             orgUnitId,
             complete: false,
+            categoryCheckInProgress: true,
         };
     },
     [mainPageSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
@@ -225,5 +227,25 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         ...state,
         categories: undefined,
         categoriesName: undefined,
+    }),
+    [crossPageActionTypes.AFTER_SETTING_ORG_UNIT_DO_CATEGORIES_RESET]: (state, action) => {
+        const { resetCategories } = action.payload;
+        const { categories, categoriesName } = state;
+        const container = resetCategories.reduce((acc, categoryId) => {
+            acc.categories[categoryId] = undefined;
+            acc.categoriesName[categoryId] = undefined;
+            return acc;
+        }, { categories: { ...categories }, categoriesName: { ...categoriesName } });
+
+        return {
+            ...state,
+            categories: container.categories,
+            categoriesName: container.categoriesName,
+            categoryCheckInProgress: false,
+        };
+    },
+    [crossPageActionTypes.AFTER_SETTING_ORG_UNIT_SKIP_CATEGORIES_RESET]: state => ({
+        ...state,
+        categoryCheckInProgress: false,
     }),
 }, 'currentSelections');
