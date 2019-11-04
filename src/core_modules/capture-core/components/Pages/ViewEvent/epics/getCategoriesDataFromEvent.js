@@ -1,6 +1,6 @@
 // @flow
 import log from 'loglevel';
-import errorCreator from '../../../../utils/errorCreator';
+import { errorCreator } from 'capture-core-utils';
 import { getApi } from '../../../../d2/d2Instance';
 import { getProgramFromProgramIdThrowIfNotFound } from '../../../../metaData';
 
