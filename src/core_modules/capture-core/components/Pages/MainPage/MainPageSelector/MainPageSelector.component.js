@@ -9,7 +9,7 @@ type Props = {
     onSetOrgUnit: (id: string, orgUnit: Object) => void,
     onResetOrgUnitId: () => void,
     onSetProgramId: (id: string) => void,
-    onSetCategoryOption: (categoryId: string, categoryOptionId: string) => void,
+    onSetCategoryOption: (categoryId: string, categoryOption: Object) => void,
     onResetCategoryOption: (categoryId: string) => void,
     onResetAllCategoryOptions: () => void,
     onOpenNewEventPage: (programId: string, orgUnitId: string) => void,
@@ -21,7 +21,7 @@ class MainPageSelector extends Component<Props> {
     handleStartAgain: () => void;
     handleClickNew: () => void;
 
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
 
         this.handleStartAgain = this.handleStartAgain.bind(this);

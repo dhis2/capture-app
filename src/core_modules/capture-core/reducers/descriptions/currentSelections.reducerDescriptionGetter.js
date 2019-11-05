@@ -1,5 +1,4 @@
 // @flow
-import programCollection from '../../metaDataMemoryStores/programCollection/programCollection';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import { actionTypes as mainSelectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
@@ -23,6 +22,9 @@ import {
     actionTypes as editEventPageSelectorActionTypes,
 } from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
 import {
+    actionTypes as viewEventPageSelectorActionTypes,
+} from '../../components/Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
+import {
     actionTypes as crossPageActionTypes,
 } from '../../components/Pages/actions/crossPage.actions';
 import {
@@ -35,35 +37,53 @@ const setOrgUnit = (state, action) => {
         ...state,
         orgUnitId,
         complete: false,
+        categoryCheckInProgress: true,
     };
     return newState;
 };
 
-const buildCategoriesFromEvent = (event: CaptureClientEvent) => {
-    const optionIdsFromEvent = event.attributeCategoryOptions;
-    if (!optionIdsFromEvent) {
-        return null;
-    }
+const setCategoryOption = (
+    state: Object,
+    categoryId: string,
+    categoryOption: { id: string, name: string, writeAccess: boolean }) => {
+    const categories = {
+        ...state.categories,
+        [categoryId]: categoryOption.id,
+    };
 
-    const program = programCollection.get(event.programId);
-    if (!program) {
-        return null;
-    }
+    const categoriesMeta = {
+        ...state.categoriesMeta,
+        [categoryId]: {
+            name: categoryOption.name,
+            writeAccess: categoryOption.writeAccess,
+        },
+    };
 
-    const categoryCombination = program.categoryCombination;
-    if (!categoryCombination) {
-        return null;
-    }
+    return {
+        ...state,
+        categories,
+        categoriesMeta,
+        complete: false,
+    };
+};
 
-    const optionIdsArray = optionIdsFromEvent.split(';');
-    return optionIdsArray
-        .reduce((accCategories, optionId) => {
-            const category = categoryCombination.getCategoryForOptionId(optionId);
-            if (category) {
-                accCategories[category.id] = optionId;
-            }
-            return accCategories;
-        }, {});
+const resetCategoryOption = (state: Object, categoryId: string) => {
+    const categories = {
+        ...state.categories,
+        [categoryId]: undefined,
+    };
+
+    const categoriesMeta = {
+        ...state.categoriesMeta,
+        [categoryId]: undefined,
+    };
+
+    return {
+        ...state,
+        categories,
+        categoriesMeta,
+        complete: false,
+    };
 };
 
 export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => createReducerDescription({
@@ -89,7 +109,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     },
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: (state, action) => {
         const { nextProps: selections } = action.payload;
-        const newState = { ...state, ...selections, categories: null, complete: false };
+        const newState = { ...state, ...selections, categories: undefined, categoriesMeta: undefined, complete: false };
         return newState;
     },
     [mainSelectionsActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: (state) => {
@@ -101,7 +121,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     },
     [newEventDataEntryUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
         const { nextProps: selections } = action.payload;
-        const newState = { ...state, ...selections, categories: null, complete: false };
+        const newState = { ...state, ...selections, categories: undefined, categoriesMeta: undefined, complete: false };
         return newState;
     },
     [newEventDataEntryUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: (state) => {
@@ -113,7 +133,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     },
     [newEnrollmentUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
         const { nextProps: selections } = action.payload;
-        const newState = { ...state, ...selections, categories: null, complete: false };
+        const newState = { ...state, ...selections, categories: undefined, categoriesMeta: undefined, complete: false };
         return newState;
     },
     [newEnrollmentUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: (state) => {
@@ -124,28 +144,57 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         return newState;
     },
     [editEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
-        const payload = action.payload;
-        const event = payload.eventContainer.event;
-        const categories = buildCategoriesFromEvent(event);
+        const { eventContainer, categoriesData } = action.payload;
+        const event = eventContainer.event;
+
+        const categories = categoriesData ? categoriesData.reduce((acc, data) => {
+            acc[data.categoryId] = data.categoryOption.id;
+            return acc;
+        }, {}) : undefined;
+
+        const categoriesMeta = categoriesData ? categoriesData.reduce((acc, data) => {
+            acc[data.categoryId] = {
+                name: data.categoryOption.name,
+                writeAccess: data.categoryOption.writeAccess,
+            };
+            return acc;
+        }, {}) : undefined;
+
+
         const newState = {
             ...state,
             programId: event.programId,
             orgUnitId: event.orgUnitId,
             categories,
+            categoriesMeta,
             complete: true,
         };
 
         return newState;
     },
     [viewEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
-        const payload = action.payload;
-        const event = payload.eventContainer.event;
-        const categories = buildCategoriesFromEvent(event);
+        const { eventContainer, categoriesData } = action.payload;
+        const event = eventContainer.event;
+
+        const categories = categoriesData ? categoriesData.reduce((acc, data) => {
+            acc[data.categoryId] = data.categoryOption.id;
+            return acc;
+        }, {}) : undefined;
+
+        const categoriesMeta = categoriesData ? categoriesData.reduce((acc, data) => {
+            acc[data.categoryId] = {
+                name: data.categoryOption.name,
+                writeAccess: data.categoryOption.writeAccess,
+            };
+            return acc;
+        }, {}) : undefined;
+
         const newState = {
             ...state,
             programId: event.programId,
             orgUnitId: event.orgUnitId,
             categories,
+            categoriesMeta,
             complete: true,
         };
 
@@ -163,6 +212,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             ...state,
             orgUnitId,
             complete: false,
+            categoryCheckInProgress: true,
         };
     },
     [mainPageSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
@@ -172,36 +222,18 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         return newState;
     },
     [mainPageSelectorActionTypes.SET_CATEGORY_OPTION]: (state, action) => {
-        let categories = {};
-        if (state.categories) {
-            // Necessary step to prevent mutation.
-            categories = Object.assign({}, state.categories);
-            categories[action.payload.categoryId] = action.payload.categoryOptionId;
-        } else {
-            categories[action.payload.categoryId] = action.payload.categoryOptionId;
-        }
-        const newState = { ...state, categories };
-        newState.complete = false;
-        return newState;
+        const { categoryId, categoryOption } = action.payload;
+        return setCategoryOption(state, categoryId, categoryOption);
     },
     [mainPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state, action) => {
-        let categories = {};
-        if (state.categories) {
-            // Necessary step to prevent mutation.
-            categories = Object.assign({}, state.categories);
-            categories[action.payload] = null;
-        } else {
-            categories[action.payload] = null;
-        }
-        const newState = { ...state, categories };
-        newState.complete = false;
-        return newState;
+        const { categoryId } = action.payload;
+        return resetCategoryOption(state, categoryId);
     },
-    [mainPageSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: (state) => {
-        const categories = null;
-        const newState = { ...state, categories };
-        return newState;
-    },
+    [mainPageSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: state => ({
+        ...state,
+        categories: undefined,
+        categoriesMeta: undefined,
+    }),
     [editEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
         const orgUnitId = null;
         const newState = { ...state, orgUnitId };
@@ -216,36 +248,33 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         return newState;
     },
     [editEventPageSelectorActionTypes.SET_CATEGORY_OPTION]: (state, action) => {
-        let categories = {};
-        if (state.categories) {
-            // Necessary step to prevent mutation.
-            categories = Object.assign({}, state.categories);
-            categories[action.payload.categoryId] = action.payload.categoryOptionId;
-        } else {
-            categories[action.payload.categoryId] = action.payload.categoryOptionId;
-        }
-        const newState = { ...state, categories };
-        newState.complete = false;
-        return newState;
+        const { categoryId, categoryOption } = action.payload;
+        return setCategoryOption(state, categoryId, categoryOption);
     },
     [editEventPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state, action) => {
-        let categories = {};
-        if (state.categories) {
-            // Necessary step to prevent mutation.
-            categories = Object.assign({}, state.categories);
-            categories[action.payload] = null;
-        } else {
-            categories[action.payload] = null;
-        }
-        const newState = { ...state, categories };
+        const { categoryId } = action.payload;
+        return resetCategoryOption(state, categoryId);
+    },
+    [editEventPageSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: state => ({
+        ...state,
+        categories: undefined,
+        categoriesMeta: undefined,
+    }),
+    [viewEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
+        const orgUnitId = null;
+        const newState = { ...state, orgUnitId };
         newState.complete = false;
         return newState;
     },
-    [editEventPageSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: (state) => {
-        const categories = null;
-        const newState = { ...state, categories };
-        return newState;
+    [viewEventPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state, action) => {
+        const { categoryId } = action.payload;
+        return resetCategoryOption(state, categoryId);
     },
+    [viewEventPageSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: state => ({
+        ...state,
+        categories: undefined,
+        categoriesMeta: undefined,
+    }),
     [newEventSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
         const orgUnitId = null;
         const newState = { ...state, orgUnitId };
@@ -260,34 +289,36 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         return newState;
     },
     [newEventSelectorActionTypes.SET_CATEGORY_OPTION]: (state, action) => {
-        let categories = {};
-        if (state.categories) {
-            // Necessary step to prevent mutation.
-            categories = Object.assign({}, state.categories);
-            categories[action.payload.categoryId] = action.payload.categoryOptionId;
-        } else {
-            categories[action.payload.categoryId] = action.payload.categoryOptionId;
-        }
-        const newState = { ...state, categories };
-        newState.complete = false;
-        return newState;
+        const { categoryId, categoryOption } = action.payload;
+        return setCategoryOption(state, categoryId, categoryOption);
     },
     [newEventSelectorActionTypes.RESET_CATEGORY_OPTION]: (state, action) => {
-        let categories = {};
-        if (state.categories) {
-            // Necessary step to prevent mutation.
-            categories = Object.assign({}, state.categories);
-            categories[action.payload] = null;
-        } else {
-            categories[action.payload] = null;
-        }
-        const newState = { ...state, categories };
-        newState.complete = false;
-        return newState;
+        const { categoryId } = action.payload;
+        return resetCategoryOption(state, categoryId);
     },
-    [newEventSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: (state) => {
-        const categories = null;
-        const newState = { ...state, categories };
-        return newState;
+    [newEventSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: state => ({
+        ...state,
+        categories: undefined,
+        categoriesMeta: undefined,
+    }),
+    [crossPageActionTypes.AFTER_SETTING_ORG_UNIT_DO_CATEGORIES_RESET]: (state, action) => {
+        const { resetCategories } = action.payload;
+        const { categories, categoriesMeta } = state;
+        const container = resetCategories.reduce((acc, categoryId) => {
+            acc.categories[categoryId] = undefined;
+            acc.categoriesMeta[categoryId] = undefined;
+            return acc;
+        }, { categories: { ...categories }, categoriesMeta: { ...categoriesMeta } });
+
+        return {
+            ...state,
+            categories: container.categories,
+            categoriesMeta: container.categoriesMeta,
+            categoryCheckInProgress: false,
+        };
     },
+    [crossPageActionTypes.AFTER_SETTING_ORG_UNIT_SKIP_CATEGORIES_RESET]: state => ({
+        ...state,
+        categoryCheckInProgress: false,
+    }),
 }, 'currentSelections');

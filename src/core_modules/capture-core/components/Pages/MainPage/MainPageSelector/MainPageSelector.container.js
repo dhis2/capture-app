@@ -30,8 +30,8 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onSetProgramId: (id: string) => {
         dispatch(setProgramIdFromMainPage(id));
     },
-    onSetCategoryOption: (categoryId: string, categoryOptionId: string) => {
-        dispatch(setCategoryOptionFromMainPage(categoryId, categoryOptionId));
+    onSetCategoryOption: (categoryId: string, categoryOption: Object) => {
+        dispatch(setCategoryOptionFromMainPage(categoryId, categoryOption));
     },
     onResetCategoryOption: (categoryId: string) => {
         dispatch(resetCategoryOptionFromMainPage(categoryId));
