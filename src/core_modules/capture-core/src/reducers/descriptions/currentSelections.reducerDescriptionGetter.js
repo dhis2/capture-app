@@ -42,21 +42,27 @@ const setOrgUnit = (state, action) => {
     return newState;
 };
 
-const setCategoryOption = (state: Object, categoryId: string, categoryOption: { id: string, name: string }) => {
+const setCategoryOption = (
+    state: Object,
+    categoryId: string,
+    categoryOption: { id: string, name: string, writeAccess: boolean }) => {
     const categories = {
         ...state.categories,
         [categoryId]: categoryOption.id,
     };
 
-    const categoriesName = {
-        ...state.categoriesName,
-        [categoryId]: categoryOption.name,
+    const categoriesMeta = {
+        ...state.categoriesMeta,
+        [categoryId]: {
+            name: categoryOption.name,
+            writeAccess: categoryOption.writeAccess,
+        },
     };
 
     return {
         ...state,
         categories,
-        categoriesName,
+        categoriesMeta,
         complete: false,
     };
 };
@@ -67,15 +73,15 @@ const resetCategoryOption = (state: Object, categoryId: string) => {
         [categoryId]: undefined,
     };
 
-    const categoriesName = {
-        ...state.categoriesName,
+    const categoriesMeta = {
+        ...state.categoriesMeta,
         [categoryId]: undefined,
     };
 
     return {
         ...state,
         categories,
-        categoriesName,
+        categoriesMeta,
         complete: false,
     };
 };
@@ -92,7 +98,9 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: (state) => {
         const newState = {
             ...state,
-            programId: null,
+            programId: undefined,
+            categories: undefined,
+            categoriesMeta: undefined,
             complete: false,
         };
         return newState;
@@ -103,7 +111,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     },
     [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: (state, action) => {
         const { nextProps: selections } = action.payload;
-        const newState = { ...state, ...selections, categories: undefined, categoriesName: undefined, complete: false };
+        const newState = { ...state, ...selections, categories: undefined, categoriesMeta: undefined, complete: false };
         return newState;
     },
     [mainSelectionsActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: (state) => {
@@ -115,7 +123,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     },
     [newEventDataEntryUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
         const { nextProps: selections } = action.payload;
-        const newState = { ...state, ...selections, categories: undefined, categoriesName: undefined, complete: false };
+        const newState = { ...state, ...selections, categories: undefined, categoriesMeta: undefined, complete: false };
         return newState;
     },
     [newEventDataEntryUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: (state) => {
@@ -127,7 +135,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     },
     [newEnrollmentUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
         const { nextProps: selections } = action.payload;
-        const newState = { ...state, ...selections, categories: undefined, categoriesName: undefined, complete: false };
+        const newState = { ...state, ...selections, categories: undefined, categoriesMeta: undefined, complete: false };
         return newState;
     },
     [newEnrollmentUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: (state) => {
@@ -146,8 +154,11 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             return acc;
         }, {}) : undefined;
 
-        const categoriesName = categoriesData ? categoriesData.reduce((acc, data) => {
-            acc[data.categoryId] = data.categoryOption.name;
+        const categoriesMeta = categoriesData ? categoriesData.reduce((acc, data) => {
+            acc[data.categoryId] = {
+                name: data.categoryOption.name,
+                writeAccess: data.categoryOption.writeAccess,
+            };
             return acc;
         }, {}) : undefined;
 
@@ -157,7 +168,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             programId: event.programId,
             orgUnitId: event.orgUnitId,
             categories,
-            categoriesName,
+            categoriesMeta,
             complete: true,
         };
 
@@ -172,8 +183,11 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             return acc;
         }, {}) : undefined;
 
-        const categoriesName = categoriesData ? categoriesData.reduce((acc, data) => {
-            acc[data.categoryId] = data.categoryOption.name;
+        const categoriesMeta = categoriesData ? categoriesData.reduce((acc, data) => {
+            acc[data.categoryId] = {
+                name: data.categoryOption.name,
+                writeAccess: data.categoryOption.writeAccess,
+            };
             return acc;
         }, {}) : undefined;
 
@@ -182,7 +196,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             programId: event.programId,
             orgUnitId: event.orgUnitId,
             categories,
-            categoriesName,
+            categoriesMeta,
             complete: true,
         };
 
@@ -220,7 +234,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     [mainPageSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: state => ({
         ...state,
         categories: undefined,
-        categoriesName: undefined,
+        categoriesMeta: undefined,
     }),
     [editEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
         const orgUnitId = null;
@@ -246,7 +260,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     [editEventPageSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: state => ({
         ...state,
         categories: undefined,
-        categoriesName: undefined,
+        categoriesMeta: undefined,
     }),
     [viewEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
         const orgUnitId = null;
@@ -261,7 +275,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     [viewEventPageSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: state => ({
         ...state,
         categories: undefined,
-        categoriesName: undefined,
+        categoriesMeta: undefined,
     }),
     [newEventSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
         const orgUnitId = null;
@@ -287,21 +301,21 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     [newEventSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: state => ({
         ...state,
         categories: undefined,
-        categoriesName: undefined,
+        categoriesMeta: undefined,
     }),
     [crossPageActionTypes.AFTER_SETTING_ORG_UNIT_DO_CATEGORIES_RESET]: (state, action) => {
         const { resetCategories } = action.payload;
-        const { categories, categoriesName } = state;
+        const { categories, categoriesMeta } = state;
         const container = resetCategories.reduce((acc, categoryId) => {
             acc.categories[categoryId] = undefined;
-            acc.categoriesName[categoryId] = undefined;
+            acc.categoriesMeta[categoryId] = undefined;
             return acc;
-        }, { categories: { ...categories }, categoriesName: { ...categoriesName } });
+        }, { categories: { ...categories }, categoriesMeta: { ...categoriesMeta } });
 
         return {
             ...state,
             categories: container.categories,
-            categoriesName: container.categoriesName,
+            categoriesMeta: container.categoriesMeta,
             categoryCheckInProgress: false,
         };
     },

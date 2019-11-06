@@ -247,7 +247,7 @@ class ProgramSelector extends Component<Props> {
                                                 if (selectedCategories && selectedCategories[category.id]) {
                                                     return (
                                                         <div className={classes.selectedText}>
-                                                            <div className={classes.selectedCategoryNameContainer}>{selectedCategories[category.id]}</div>
+                                                            <div className={classes.selectedCategoryNameContainer}>{selectedCategories[category.id].name}</div>
                                                             <IconButton className={classes.selectedButton} onClick={() => this.handleResetCategoryOption(category.id)}>
                                                                 <ClearIcon className={classes.selectedButtonIcon} />
                                                             </IconButton>

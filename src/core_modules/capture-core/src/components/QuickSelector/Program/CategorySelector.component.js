@@ -53,6 +53,7 @@ class CategorySelector extends React.Component<Props, State> {
         const project = (categoryOption: Object) => ({
             label: categoryOption.displayName,
             value: categoryOption.id,
+            writeAccess: categoryOption.access.data.write,
         });
 
         return buildCategoryOptionsAsync(
