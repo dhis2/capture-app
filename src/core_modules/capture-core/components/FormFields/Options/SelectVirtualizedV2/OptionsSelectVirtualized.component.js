@@ -91,6 +91,7 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
     renderOption: () => React$Element<any>;
     prevFilterValue: ?string;
     prevFilteredOptions: Array<VirtualizedOptionConfig>;
+    isUnmounted: boolean;
 
 
     constructor(props: Props) {
@@ -101,12 +102,17 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
         this.handleInputChange = debounce(this.handleInputChange, 500);
         this.prevFilteredOptions = [];
         this.state = {};
+        this.isUnmounted = false;
     }
 
     componentWillReceiveProps(newProps: Props) {
         if (newProps.options !== this.props.options) {
             this.prevFilterValue = null;
         }
+    }
+
+    componentWillUnmount() {
+        this.isUnmounted = true;
     }
 
     filterOptions = () => {
@@ -130,7 +136,9 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
     }
 
     handleInputChange = (value: any) => {
-        this.setState({ filterValue: value });
+        if (!this.isUnmounted) {
+            this.setState({ filterValue: value });
+        }
     }
 
     handleChange(selectedItem: VirtualizedOptionConfig) {

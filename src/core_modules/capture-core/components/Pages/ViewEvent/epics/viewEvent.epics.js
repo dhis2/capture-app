@@ -2,8 +2,8 @@
 import log from 'loglevel';
 import { push } from 'connected-react-router';
 import i18n from '@dhis2/d2-i18n';
-import isSelectionsEqual from '../../../App/isSelectionsEqual';
 import { errorCreator } from 'capture-core-utils';
+import isSelectionsEqual from '../../../App/isSelectionsEqual';
 import getErrorMessageAndDetails from '../../../../utils/errors/getErrorMessageAndDetails';
 import getOrganisationUnitApiSpec from '../../../../api/apiSpecifications/organisationUnit.apiSpecificationGetter';
 import {
@@ -24,6 +24,7 @@ import { getEvent } from '../../../../events/eventRequests';
 import {
     initializeNewRelationship,
 } from '../../NewRelationship/newRelationship.actions';
+import { getCategoriesDataFromEventAsync } from './getCategoriesDataFromEvent';
 
 
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -64,7 +65,9 @@ export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore)
                         return eventFromUrlCouldNotBeRetrieved(
                             i18n.t('Event could not be loaded. Are you sure it exists?'));
                     }
-                    return eventFromUrlRetrieved(eventContainer, prevProgramId);
+                    // need to retrieve category names from API (due to 50k category options requirement)
+                    return getCategoriesDataFromEventAsync(eventContainer.event)
+                        .then(categoriesData => eventFromUrlRetrieved(eventContainer, prevProgramId, categoriesData));
                 })
                 .catch((error) => {
                     const { message, details } = getErrorMessageAndDetails(error);
