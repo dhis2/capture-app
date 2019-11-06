@@ -1,14 +1,10 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-restricted-syntax */
 import isFunction from 'd2-utilizr/src/isFunction';
-
-type Option = {name: string, id: string};
 
 export default class Category {
     _name: string;
     _id: string;
-    _options: ?Array<Option>;
 
     constructor(initFn: ?(_this: Category) => void) {
         this.name = '';
@@ -30,17 +26,5 @@ export default class Category {
 
     set id(id: string) {
         this._id = id;
-    }
-
-    get categoryOptions(): ?Array<Option> {
-        return this._options;
-    }
-
-    set categoryOptions(options: ?Array<Option>) {
-        this._options = options;
-    }
-
-    getOption(optionId: string) {
-        return this.categoryOptions && this.categoryOptions.find(option => option.id === optionId);
     }
 }

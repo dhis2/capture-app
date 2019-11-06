@@ -66,9 +66,9 @@ export default class StorageController {
         return this.adapter.get(store, key);
     }
 
-    async getAll(store, predicate) {
+    async getAll(store, options) {
         await this.verifyStore(store, 'getAll');
-        return this.adapter.getAll(store, predicate);
+        return this.adapter.getAll(store, options);
     }
 
     async getKeys(store) {
@@ -91,9 +91,9 @@ export default class StorageController {
         return this.adapter.contains(store, key);
     }
 
-    async count(store, key) {
+    async count(store, options) {
         await this.verifyStore(store, 'count');
-        return this.adapter.count(store, key);
+        return this.adapter.count(store, options);
     }
 
     close(...args) {

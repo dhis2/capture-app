@@ -77,7 +77,7 @@ class IndexedDBAdapter {
         this.keyPath = options.keyPath;
     }
 
-    open() {
+    open(onCreateObjectStore) {
         const request = IndexedDBAdapter.indexedDB.open(this.name, this.version);
 
         return new Promise((resolve, reject) => {
@@ -104,7 +104,8 @@ class IndexedDBAdapter {
                 });
 
                 this.objectStoreNames.forEach((name) => {
-                    this.db.createObjectStore(name);
+                    const objectStore = this.db.createObjectStore(name);
+                    onCreateObjectStore && onCreateObjectStore(objectStore, IndexedDBAdapter);
                 });
             };
         });
@@ -123,7 +124,7 @@ class IndexedDBAdapter {
 
             const storeObject = JSON.parse(JSON.stringify(dataObject));
             const key = storeObject[this.keyPath];
-            delete storeObject[this.keyPath];
+            // delete storeObject[this.keyPath];
 
             let tx;
             let abortTransaction;
@@ -181,8 +182,7 @@ class IndexedDBAdapter {
                         }
 
                         const key = storeObject[this.keyPath];
-                        delete storeObject[this.keyPath];
-
+                        // delete storeObject[this.keyPath];
                         const request = objectStore.put(storeObject, key);
 
                         request.onsuccess = () => {
@@ -244,42 +244,114 @@ class IndexedDBAdapter {
         });
     }
 
-    getAll(store, predicate) {
-        return new Promise((resolve, reject) => {
-            if (!this.verifyDbSet(reject)) {
-                return;
-            }
+    // eslint-disable-next-line class-methods-use-this
+    async _getAllInBatches(objectStore, options, records) {
+        const { predicate, project, onIDBGetRequest, batchSize } = options || {};
 
-            const records = [];
-            const filtered = typeof predicate === 'function';
 
-            try {
-                const tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
-                const objectStore = tx.objectStore(store);
-                const request = objectStore.openCursor();
+        const executeRequest = keyRange =>
+            new Promise((resolve) => {
+                const request = onIDBGetRequest ?
+                    onIDBGetRequest(objectStore, IndexedDBAdapter) :
+                    objectStore.getAll(keyRange, batchSize);
 
                 request.onsuccess = (e) => {
-                    const cursor = e.target.result;
-
-                    if (cursor) {
-                        cursor.value[this.keyPath] = cursor.key;
-
-                        if (filtered) {
-                            if (predicate(cursor.value)) {
-                                records.push(cursor.value);
-                            }
-                        } else {
-                            records.push(cursor.value);
-                        }
-
-                        cursor.continue();
-                    } else {
-                        resolve(records);
+                    const values = request.result;
+                    const count = values ? values.length : 0;
+                    let lastId;
+                    if (count > 0) {
+                        values.forEach((value) => {
+                            // value[this.keyPath] = cursor.primaryKey || cursor.key;
+                            this._processGetAllItem(value, predicate, project, records);
+                        });
+                        lastId = values[count - 1].id;
                     }
+                    resolve({ count, lastId });
+                };
+            });
+
+        let keyRange;
+        let done = false;
+        do {
+            // eslint-disable-next-line no-await-in-loop
+            const { count, lastId } = await executeRequest(keyRange);
+            if (count < batchSize) {
+                done = true;
+            } else {
+                keyRange = IDBKeyRange.lowerBound(lastId, true);
+            }
+        } while (!done);
+    }
+
+    _getAllWithCursor(objectStore, options, records, abortTx) {
+        const { predicate, project, onIsAborted, onIDBGetRequest } = options || {};
+        const request = onIDBGetRequest ?
+            onIDBGetRequest(objectStore, IndexedDBAdapter) :
+            objectStore.openCursor();
+
+        request.onsuccess = (e) => {
+            const isAborted = !!onIsAborted && onIsAborted();
+            if (isAborted) {
+                abortTx();
+            } else {
+                const cursor = e.target.result;
+                if (cursor) {
+                    cursor.value[this.keyPath] = cursor.primaryKey || cursor.key;
+                    const dbValue = cursor.value;
+                    this._processGetAllItem(dbValue, predicate, project, records);
+                    cursor.continue();
+                }
+            }
+        };
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    _processGetAllItem(dbValue, predicate, project, records) {
+        if (!predicate || predicate(dbValue)) {
+            const value = project ? project(dbValue) : dbValue;
+            records.push(value);
+        }
+    }
+
+    getAll(store, options) {
+        return new Promise((resolve, reject) => {
+            let tx;
+            let catchError;
+            const abortTx = (error) => {
+                catchError = error;
+                tx.abort();
+            };
+            const { batchSize, isAborted } = options || {};
+
+            try {
+                const records = [];
+                tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
+                const objectStore = tx.objectStore(store);
+                batchSize ?
+                    this._getAllInBatches(objectStore, options, records, abortTx) :
+                    this._getAllWithCursor(objectStore, options, records, abortTx);
+
+                tx.oncomplete = () => {
+                    if (isAborted && isAborted()) {
+                        reject(errorCreator(IndexedDBAdapter.errorMessages.GET_ALL_FAILED)(
+                            { adapter: this, aborted: true, error: catchError }));
+                        return;
+                    }
+                    resolve(records);
                 };
 
-                request.onerror = (error) => {
+                tx.onerror = (error) => {
+                    if (isAborted && isAborted()) {
+                        reject(errorCreator(IndexedDBAdapter.errorMessages.GET_ALL_FAILED)(
+                            { adapter: this, aborted: true, error: catchError }));
+                        return;
+                    }
                     reject(errorCreator(IndexedDBAdapter.errorMessages.GET_ALL_FAILED)({ adapter: this, error }));
+                };
+
+                tx.onabort = () => {
+                    reject(errorCreator(IndexedDBAdapter.errorMessages.GET_ALL_FAILED)(
+                        { adapter: this, aborted: true, error: catchError }));
                 };
             } catch (error) {
                 reject(errorCreator(IndexedDBAdapter.errorMessages.GET_ALL_FAILED)({ adapter: this, error }));
@@ -403,20 +475,20 @@ class IndexedDBAdapter {
         });
     }
 
-    count(store, key) {
+    count(store, options) {
         return new Promise((resolve, reject) => {
             if (!this.verifyDbSet(reject)) {
                 return;
             }
 
-            if (!key) {
-                key = null;
-            }
+            const { onIDBGetRequest, query } = options || {};
 
             try {
                 const tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
                 const objectStore = tx.objectStore(store);
-                const request = objectStore.count(key);
+                const request = onIDBGetRequest ?
+                    onIDBGetRequest(objectStore) :
+                    objectStore.count(query);
 
                 request.onsuccess = (e) => {
                     const result = e.target.result;

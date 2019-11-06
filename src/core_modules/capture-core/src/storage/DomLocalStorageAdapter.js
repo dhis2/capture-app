@@ -201,23 +201,19 @@ class DomLocalStorageAdapter {
         });
     }
 
-    getAll(store, predicate) {
-        const isOpenError = this.validateIsOpened();
-        if (isOpenError) {
-            return Promise.reject(isOpenError);
-        }
-
+    getAll(store, options) {
+        const { predicate, project } = options || {};
         const keys = this.indexer[store].all();
-        const filtered = typeof predicate === 'function';
 
         const responseObjects = keys.reduce((accObjects, key) => {
             const storeObject = DomLocalStorageAdapter.storage.getItem(key);
 
             if (storeObject) {
-                if (!filtered || predicate(storeObject)) {
+                if (!predicate || predicate(storeObject)) {
                     const responseObject = JSON.parse(storeObject);
                     responseObject[this.keyPath] = this.mainKeyFromStoreKey(key, store);
-                    accObjects.push(responseObject);
+                    const value = project ? project(responseObject) : responseObject;
+                    accObjects.push(value);
                 }
             }
 
@@ -291,13 +287,15 @@ class DomLocalStorageAdapter {
         return Promise.resolve(this.indexer[store].exists(storeKey));
     }
 
-    count(store, key) {
+    count(store, options) {
+        const { query } = options || {};
+
         const isOpenError = this.validateIsOpened();
         if (isOpenError) {
             return Promise.reject(isOpenError);
         }
 
-        if (key) {
+        if (query) {
             Promise.reject(
                 errorCreator(DomLocalStorageAdapter.errorMessages.KEY_BASED_COUNT_IS_NOT_SUPPORTED)({ adapter: this }));
         }

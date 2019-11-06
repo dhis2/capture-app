@@ -30,10 +30,10 @@ export const resetProgramIdFromEditEventPage =
     () => actionCreator(actionTypes.RESET_PROGRAM_ID)();
 
 export const setCategoryOptionFromEditEventPage =
-    (categoryId: string, categoryOptionId: string) => actionCreator(actionTypes.SET_CATEGORY_OPTION)({ categoryId, categoryOptionId });
+    (categoryId: string, categoryOption: Object) => actionCreator(actionTypes.SET_CATEGORY_OPTION)({ categoryId, categoryOption });
 
 export const resetCategoryOptionFromEditEventPage =
-    (categoryId: string) => actionCreator(actionTypes.RESET_CATEGORY_OPTION)(categoryId);
+    (categoryId: string) => actionCreator(actionTypes.RESET_CATEGORY_OPTION)({ categoryId });
 
 export const resetAllCategoryOptionsFromEditEventPage =
     () => actionCreator(actionTypes.RESET_ALL_CATEGORY_OPTIONS)();
