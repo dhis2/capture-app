@@ -13,9 +13,6 @@ import {
     updateSelectionsFromUrl as updateSelectionsFromUrlForNewEnrollment,
 } from '../Pages/NewEnrollment';
 import {
-    editEventFromUrl as editEventFromUrlForNewEvent,
-} from '../Pages/EditEvent/editEvent.actions';
-import {
     viewEventFromUrl,
 } from '../Pages/ViewEvent/viewEvent.actions';
 import { reservedUrlKeys } from '../UrlSync/withUrlSync';
@@ -34,7 +31,6 @@ type Props = {
 const pageKeys = {
     MAIN: 'main',
     NEW_EVENT: 'newEvent',
-    EDIT_EVENT: 'editEvent',
     VIEW_EVENT: 'viewEvent',
     NEW_ENROLLMENT: 'newEnrollment',
 };
@@ -60,12 +56,6 @@ const specificationForPages = {
             propKey: 'orgUnitId',
         },
     ],
-    [pageKeys.EDIT_EVENT]: [
-        {
-            urlKey: reservedUrlKeys.ENTIRE_PARAM_STRING,
-            propKey: 'eventId',
-        },
-    ],
     [pageKeys.VIEW_EVENT]: [
         {
             urlKey: reservedUrlKeys.ENTIRE_PARAM_STRING,
@@ -87,7 +77,6 @@ const specificationForPages = {
 const updaterForPages = {
     [pageKeys.MAIN]: updateMainSelectionsFromUrlForMainPage,
     [pageKeys.NEW_EVENT]: updateSelectionsFromUrlForNewEvent,
-    [pageKeys.EDIT_EVENT]: editEventFromUrlForNewEvent,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
     [pageKeys.NEW_ENROLLMENT]: updateSelectionsFromUrlForNewEnrollment,
 };
