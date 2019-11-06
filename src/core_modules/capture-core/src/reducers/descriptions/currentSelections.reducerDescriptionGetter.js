@@ -83,7 +83,9 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: (state) => {
         const newState = {
             ...state,
-            programId: null,
+            programId: undefined,
+            categories: undefined,
+            categoriesName: undefined,
             complete: false,
         };
         return newState;
