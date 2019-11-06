@@ -5,7 +5,7 @@ import { getEventProgramEventAccess, getEventProgramThrowIfNotFound } from '../.
 
 
 const programIdSelector = state => state.currentSelections.programId;
-const categoriesSelector = state => state.currentSelections.categories;
+const categoriesMetaSelector = state => state.currentSelections.categoriesMeta;
 
 export const makeProgramStageSelector = () => createSelector(
     programIdSelector,
@@ -13,6 +13,6 @@ export const makeProgramStageSelector = () => createSelector(
 
 export const makeEventAccessSelector = () => createSelector(
     programIdSelector,
-    categoriesSelector,
-    (programId: string, categories: ?Object) => getEventProgramEventAccess(programId, categories));
+    categoriesMetaSelector,
+    (programId: string, categoriesMeta: ?Object) => getEventProgramEventAccess(programId, categoriesMeta));
 

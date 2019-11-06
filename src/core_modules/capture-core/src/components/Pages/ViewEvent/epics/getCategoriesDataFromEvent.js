@@ -7,7 +7,7 @@ import { getProgramFromProgramIdThrowIfNotFound } from '../../../../metaData';
 function getCategoryOptionsAsync(optionIds: string) {
     return getApi()
         .get('categoryOptions', {
-            fields: 'id,displayName,categories~pluck',
+            fields: 'id,displayName,categories~pluck,access',
             filter: `id:in:[${optionIds}]`,
         })
         .then(response => response && response.categoryOptions);
@@ -46,6 +46,7 @@ export async function getCategoriesDataFromEventAsync(event: CaptureClientEvent)
                     categoryOption: {
                         id: undefined,
                         name: undefined,
+                        writeAccess: undefined,
                     },
                 };
             }
@@ -58,6 +59,7 @@ export async function getCategoriesDataFromEventAsync(event: CaptureClientEvent)
                 categoryOption: {
                     id: option.id,
                     name: option.displayName,
+                    writeAccess: option.access.data.write,
                 },
             };
         });
