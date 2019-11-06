@@ -161,18 +161,19 @@ class DomLocalStorageAdapter {
         });
     }
 
-    getAll(store, predicate) {
+    getAll(store, options) {
+        const { predicate, project } = options || {};
         const keys = this.indexer[store].all();
-        const filtered = typeof predicate === 'function';
 
         const responseObjects = keys.reduce((accObjects, key) => {
             const storeObject = DomLocalStorageAdapter.storage.getItem(key);
 
             if (storeObject) {
-                if (!filtered || predicate(storeObject)) {
+                if (!predicate || predicate(storeObject)) {
                     const responseObject = JSON.parse(storeObject);
                     responseObject[this.keyPath] = this.mainKeyFromStoreKey(key, store);
-                    accObjects.push(responseObject);
+                    const value = project ? project(responseObject) : responseObject;
+                    accObjects.push(value);
                 }
             }
 

@@ -251,10 +251,10 @@ export default class StorageController {
     }
 
     // using async ensures that the the return value is wrapped in a promise
-    async getAll(store, predicate) {
+    async getAll(store, options) {
         this.throwIfNotOpen();
         this.throwIfStoreNotFound(store, 'getAll');
-        return this.adapter.getAll(store, predicate);
+        return this.adapter.getAll(store, options);
     }
 
     // using async ensures that the the return value is wrapped in a promise

@@ -110,7 +110,11 @@ export type CachedCategoryOption = {
 export type CachedCategory = {
     id: string,
     displayName: string,
-    categoryOptions: Array<CachedCategoryOption>,
+};
+
+export type CachedCategoryOptionsByCategory = {
+    id: string,
+    options: Array<CachedCategoryOption>,
 };
 
 export type ProgramCachedCategory = {
