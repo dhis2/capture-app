@@ -1,8 +1,8 @@
 {
   "name": "capture-app",
   "homepage": ".",
-  "version": "34.0.1",
-  "cacheVersion": "30",
+  "version": "34.0.2",
+  "cacheVersion": "31",
   "private": false,
   "dependencies": {
     "@dhis2/app-runtime": "1.3.0",
