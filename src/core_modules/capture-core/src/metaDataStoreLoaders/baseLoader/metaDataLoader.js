@@ -1,7 +1,6 @@
 // @flow
 import StorageController from '../../storage/StorageController';
 import IndexedDBAdapter from '../../storage/IndexedDBAdapter';
-import LocalStorageAdapter from '../../storage/DomLocalStorageAdapter';
 import programStoresKeys from '../programs/programsStoresKeys';
 import trackedEntityStoresKeys from '../trackedEntityAttributes/trackedEntityAttributesStoresKeys';
 
@@ -47,7 +46,7 @@ function createStorageController() {
     const objectStoreList = Object.keys(objectStores).map(key => objectStores[key]);
     const appCacheVersion = getCacheVersion();
     const storageController =
-        new StorageController('dhis2ca', appCacheVersion, [IndexedDBAdapter, LocalStorageAdapter], objectStoreList);
+        new StorageController('dhis2ca', appCacheVersion, [IndexedDBAdapter], objectStoreList);
     setStorageController(storageController);
     return storageController;
 }
