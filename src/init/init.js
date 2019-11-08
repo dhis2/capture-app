@@ -8,12 +8,12 @@ import moment from 'moment';
 import CurrentLocaleData from 'capture-core/utils/localeData/CurrentLocaleData';
 import { setD2 } from 'capture-core/d2/d2Instance';
 import i18n from '@dhis2/d2-i18n';
+import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocaleData';
 
 import { loadMetaDataAsync, loadSystemSettingsAsync } from 'capture-core/metaDataStoreLoaders';
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
 import { initControllersAsync } from 'capture-core/storageControllers';
-
-import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocaleData';
+import { DisplayException } from 'capture-core/utils/exceptions/DisplayException';
 
 function setLogLevel() {
     const levels = {
@@ -165,6 +165,11 @@ export async function initializeAsync() {
     setD2(d2);
     setHeaderBarStrings(d2);
     // initialize storage controllers
+    try {
+        await initControllersAsync();
+    } catch (error) {
+        throw new DisplayException(i18n.t('The browser or mode (e.g. privacy mode) is not supported.'), error);
+    }
     await initControllersAsync();
 
     // set locale data
