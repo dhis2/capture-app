@@ -1,7 +1,7 @@
 // @flow
 import { StorageController, IndexedDBAdapter } from 'capture-core-utils/storage';
 import { getCurrentUser } from '../d2/d2Instance';
-import { mainStores, userStores } from './stores/index';
+import { userStores } from './stores/index';
 
 function getStorageName(mainStorageName: string) {
     const user = getCurrentUser();
@@ -37,10 +37,6 @@ function createStorageController(
             appCacheVersion,
             [mainStorageController.adapterType],
             stores,
-            () => mainStorageController.setWithoutFallback(mainStores.STATUS, {
-                id: 'fallback',
-                value: true,
-            }),
         );
     return storageController;
 }
