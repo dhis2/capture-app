@@ -4,7 +4,7 @@ import availableAdapters from 'capture-core-utils/storage/availableAdapters';
 import initUserControllerAsync from './userStorageController';
 import initMainControllerAsync from './mainStorageController';
 
-const adapterTypes = [availableAdapters.INDEXED_DB, availableAdapters.MEMORY];
+const adapterTypes = [availableAdapters.INDEXED_DB];
 const storageControllers: { [key: string]: StorageController } = {};
 
 export async function initAsync() {
