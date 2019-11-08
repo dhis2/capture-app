@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-10-21T08:26:39.129Z\n"
-"PO-Revision-Date: 2019-10-21T08:26:39.129Z\n"
+"POT-Creation-Date: 2019-11-08T11:06:09.170Z\n"
+"PO-Revision-Date: 2019-11-08T11:06:09.170Z\n"
 
 msgid "Columns to show in table"
 msgstr ""
@@ -644,6 +644,9 @@ msgid "Choose a date..."
 msgstr ""
 
 msgid "Today"
+msgstr ""
+
+msgid "The browser or mode (e.g. privacy mode) is not supported."
 msgstr ""
 
 msgid "Compatibility mode"

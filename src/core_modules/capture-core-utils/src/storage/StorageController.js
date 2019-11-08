@@ -3,7 +3,6 @@
 import isArray from 'd2-utilizr/lib/isArray';
 import log from 'loglevel';
 import { errorCreator } from '../errorCreator';
-import MemoryAdapter from './MemoryAdapter';
 
 export default class StorageController {
     static errorMessages = {
@@ -18,8 +17,9 @@ export default class StorageController {
         INVALID_STORAGE_OBJECT: 'Invalid storage object',
         INVALID_STORAGE_ARRAY: 'Invalid storage array',
         MISSING_KEY: 'Please specifiy key',
-        FALLBACK_TO_MEMORY_STORAGE_TRIGGERED: 'Fallback to memory storage triggered',
         OPEN_FAILED: 'Open storage failed',
+        SET_FAILED: 'Could not save to cache',
+        SET_ALL_FAILED: 'Could not save all to cache',
     };
 
     static isAdapterValid(Adapter) {
@@ -32,12 +32,11 @@ export default class StorageController {
         return adapterMethods.every(method => Adapter.prototype[method]);
     }
 
-    constructor(name, version, Adapters, objectStores, onFallback) {
+    constructor(name, version, Adapters, objectStores) {
         if (!name) {
             throw new Error(StorageController.errorMessages.INVALID_NAME);
         }
         this.name = name;
-        this.onFallback = onFallback;
 
         if (!Adapters || !isArray(Adapters || Adapters.length === 0)) {
             throw new Error(StorageController.errorMessages.NO_ADAPTERS_DEFINED);
@@ -107,52 +106,6 @@ export default class StorageController {
             .forEach(this.throwIfDataObjectError);
     }
 
-    async getBackupDataAsync() {
-        const backupDataPromises = this.adapter.objectStoreNames
-            .map(async (storeName) => {
-                const storeData = await Promise.resolve().then(() => this.adapter.getAll(storeName));
-                return storeData;
-            });
-
-        const backupDataArray = await Promise.all(backupDataPromises);
-        return backupDataArray
-            .reduce((accBackupData, dataObject, index) => {
-                if (dataObject && dataObject.length > 0) {
-                    accBackupData[this.adapter.objectStoreNames[index]] = dataObject;
-                }
-                return accBackupData;
-            }, {});
-    }
-
-    restoreBackupDataAsync(backupData) {
-        return Object
-            .keys(backupData)
-            .asyncForEach(storeName =>
-                Promise.resolve().then(() => this.adapter.setAll(storeName, backupData[storeName])));
-    }
-
-    async fallbackToMemoryStorageAsync() {
-        const backupData = await this.getBackupDataAsync();
-        await Promise.resolve().then(() => this.adapter.destroy());
-        await Promise.resolve().then(() => this.adapter.open());
-        if (this.onFallback) {
-            await this.onFallback({
-                set: this.setWithoutFallback.bind(this),
-            });
-        }
-        await Promise.resolve().then(() => this.adapter.close());
-
-        this.adapter = new MemoryAdapter({
-            name: this.adapter.name,
-            version: this.adapter.version,
-            objectStores: this.adapter.objectStoreNames,
-            keyPath: 'id',
-        });
-        this.adapterType = MemoryAdapter;
-        await Promise.resolve().then(() => this.adapter.open());
-        await this.restoreBackupDataAsync(backupData);
-    }
-
     async _openFallbackAdapter(...args) {
         const currentAdapterIndex = this.AvailableAdapters.findIndex(AA => AA === this.adapterType);
         const nextAdapterIndex = currentAdapterIndex + 1;
@@ -207,12 +160,11 @@ export default class StorageController {
         return Promise.resolve()
             .then(() => this.adapter.set(store, dataObject))
             .catch((error) => {
-                if (this.adapterType === MemoryAdapter) {
-                    return Promise.reject(error);
-                }
-                log.error(errorCreator(StorageController.errorMessages.FALLBACK_TO_MEMORY_STORAGE_TRIGGERED)({ method: 'set', adapter: this.adapter }));
-                return this.fallbackToMemoryStorageAsync()
-                    .then(() => this.adapter.set(store, dataObject));
+                log.error(
+                    errorCreator(StorageController.errorMessages.SET_FAILED)(
+                        { adapter: this.adapter, store, dataObject, error }),
+                );
+                return Promise.reject(StorageController.errorMessages.SET_FAILED);
             });
     }
 
@@ -225,12 +177,11 @@ export default class StorageController {
         return Promise.resolve()
             .then(() => this.adapter.setAll(store, dataArray))
             .catch((error) => {
-                if (this.adapterType === MemoryAdapter) {
-                    return Promise.reject(error);
-                }
-                log.error(errorCreator(StorageController.errorMessages.FALLBACK_TO_MEMORY_STORAGE_TRIGGERED)({ method: 'setAll', adapter: this.adapter }));
-                return this.fallbackToMemoryStorageAsync()
-                    .then(() => this.adapter.setAll(store, dataArray));
+                log.error(
+                    errorCreator(StorageController.errorMessages.SET_ALL_FAILED)(
+                        { adapter: this.adapter, store, dataArray, error }),
+                );
+                return Promise.reject(StorageController.errorMessages.SET_ALL_FAILED);
             });
     }
 

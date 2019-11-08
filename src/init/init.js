@@ -17,6 +17,7 @@ import i18n from '@dhis2/d2-i18n';
 import { loadMetaDataAsync, loadSystemSettingsAsync } from 'capture-core/metaDataStoreLoaders';
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
 import { initControllersAsync } from 'capture-core/storageControllers';
+import { DisplayException } from 'capture-core/utils/exceptions/DisplayException';
 
 import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocaleData';
 
@@ -161,7 +162,11 @@ export async function initializeAsync() {
     setD2(d2);
 
     // initialize storage controllers
-    await initControllersAsync();
+    try {
+        await initControllersAsync();
+    } catch (error) {
+        throw new DisplayException(i18n.t('The browser or mode (e.g. privacy mode) is not supported.'), error);
+    }
 
     // set locale data
     const uiLocale = userSettings.keyUiLocale;
