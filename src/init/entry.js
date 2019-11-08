@@ -14,6 +14,7 @@ import { create } from 'jss';
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
 
 import environments from 'capture-core/constants/environments';
+import { DisplayException } from 'capture-core/utils/exceptions/DisplayException';
 
 import type { HashHistory } from 'history/createHashHistory';
 
@@ -57,6 +58,14 @@ function runApp(domElement: HTMLElement, store: ReduxStore, history: HashHistory
     );
 }
 
+function logError(error) {
+    if (error instanceof Error) {
+        log.error(error.toString());
+    } else if (error) {
+        log.error(JSON.stringify(error));
+    }
+}
+
 async function loadAppAsync(domElement: HTMLElement) {
     render(
         <JSSProviderShell>
@@ -70,10 +79,17 @@ async function loadAppAsync(domElement: HTMLElement) {
         const history = createHistory();
         const store = getStore(history, () => runApp(domElement, store, history));
     } catch (error) {
-        log.error(error);
         let message = 'The application could not be loaded.';
-        if (process.env.NODE_ENV !== environments.prod) {
-            message += ' Please verify that the server is running.';
+        if (error && error instanceof DisplayException) {
+            logError(error.innerError);
+            message += ` ${error.toString()}`;
+        } else {
+            logError(error);
+            if (process.env.NODE_ENV !== environments.prod) {
+                message += ' Please verify that the server is running.';
+            } else {
+                message += ' Please see log for details.';
+            }
         }
 
         render(
