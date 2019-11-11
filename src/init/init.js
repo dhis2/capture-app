@@ -170,7 +170,6 @@ export async function initializeAsync() {
     } catch (error) {
         throw new DisplayException(i18n.t('The browser or mode (e.g. privacy mode) is not supported.'), error);
     }
-    await initControllersAsync();
 
     // set locale data
     const uiLocale = userSettings.keyUiLocale;
