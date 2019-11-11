@@ -168,7 +168,7 @@ export async function initializeAsync() {
     try {
         await initControllersAsync();
     } catch (error) {
-        throw new DisplayException(i18n.t('The browser or mode (e.g. privacy mode) is not supported.'), error);
+        throw new DisplayException(i18n.t('Possible reason: The browser or mode (e.g. privacy mode) is not supported. See log for details.'), error);
     }
     await initControllersAsync();
 
