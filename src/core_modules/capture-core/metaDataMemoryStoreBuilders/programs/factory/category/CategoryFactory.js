@@ -20,14 +20,14 @@ class CategoryFactory {
     build(
         cachedProgramCategory: ProgramCachedCategory,
     ) {
-        return new Category((_this) => {
+        return new Category((category: Category) => {
             const id = cachedProgramCategory.id;
-            _this.id = id;
+            category.id = id;
             const cachedCategory = this.cachedCategories[id];
             if (!cachedCategory) {
                 log.error(errorCreator('Could not retrieve cachedCategory')({ id }));
             } else {
-                _this.name = cachedCategory.displayName;
+                category.name = cachedCategory.displayName;
             }
         });
     }
