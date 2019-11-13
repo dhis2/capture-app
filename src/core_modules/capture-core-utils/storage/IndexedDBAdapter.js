@@ -1,6 +1,7 @@
 /* eslint-disable complexity */
 /* eslint-disable no-underscore-dangle */
 import isDefined from 'd2-utilizr/lib/isDefined';
+import log from 'loglevel';
 import { errorCreator } from '../errorCreator';
 
 class IndexedDBAdapter {
@@ -73,13 +74,72 @@ class IndexedDBAdapter {
         });
     }
 
+    /**
+     * Facilitate downgrade by destroying the current database if existing database version is greater than the requested version.
+     * Data can be preserved through the onBeforeUpgrade callback function (will be called with the isDowngrade argument)
+     * @param {*} onBeforeUpgrade
+     * @returns Whether we are downgrading or not
+     * @memberof IndexedDBAdapter
+     */
+    _facilitateDowngradeIfApplicable(onBeforeUpgrade) {
+        const preCheckRequest = IndexedDBAdapter.indexedDB.open(this.name);
+        return new Promise((resolve, reject) => {
+            preCheckRequest.onsuccess = (event) => {
+                const foundVersion = event.target.result.version;
+                this.db = event.target.result;
+                if (foundVersion > this.version) {
+                    Promise.resolve()
+                        .then(() => onBeforeUpgrade
+                            && onBeforeUpgrade({
+                                get: (store, key) => {
+                                    if (!this.db.objectStoreNames.contains(store)) {
+                                        return Promise.resolve(null);
+                                    }
+                                    return this.get(store, key);
+                                },
+                                isDowngrade: true,
+                            }),
+                        )
+                        .then(() => {
+                            this.destroy()
+                                .then(() => {
+                                    this.db = undefined;
+                                    resolve(true);
+                                })
+                                .catch((error) => {
+                                    this.db = undefined;
+                                    log.error(errorCreator(IndexedDBAdapter.errorMessages.OPEN_FAILED)({ error }));
+                                    reject(IndexedDBAdapter.errorMessages.OPEN_FAILED);
+                                });
+                        });
+                } else {
+                    this.close()
+                        .then(() => {
+                            this.db = undefined;
+                            resolve(false);
+                        })
+                        .catch((error) => {
+                            this.db = undefined;
+                            log.error(errorCreator(IndexedDBAdapter.errorMessages.OPEN_FAILED)({ error }));
+                            reject(IndexedDBAdapter.errorMessages.OPEN_FAILED);
+                        });
+                }
+            };
+
+            preCheckRequest.onerror = (error) => {
+                log.error(errorCreator(IndexedDBAdapter.errorMessages.OPEN_FAILED)({ error }));
+                reject(IndexedDBAdapter.errorMessages.OPEN_FAILED);
+            };
+        });
+    }
     /*
         onBeforeUpgrade: a callback method, getting an object with a "get" property as argument. The "get" property can be used to retrieve something from IndexedDB
         onAfterUpgrade: a callback method, getting an ojbect with a "set" property as argument. The "set" property can be used to set something in IndexedDB
     */
-    open(onBeforeUpgrade, onAfterUpgrade, onCreateObjectStore) {
+    async open(onBeforeUpgrade, onAfterUpgrade, onCreateObjectStore) {
+        const isDowngrade = await this._facilitateDowngradeIfApplicable(onBeforeUpgrade);
         const request = IndexedDBAdapter.indexedDB.open(this.name, this.version);
-        return new Promise((resolve, reject) => {
+        await new Promise((resolve, reject) => {
             request.onsuccess = (e) => {
                 this.db = e.target.result;
                 resolve();
@@ -98,7 +158,7 @@ class IndexedDBAdapter {
                 const tx = e.target.transaction;
 
                 return Promise.resolve()
-                    .then(() => onBeforeUpgrade
+                    .then(() => !isDowngrade && onBeforeUpgrade
                         && onBeforeUpgrade({
                             get: (store, key) => {
                                 if (!this.db.objectStoreNames.contains(store)) {
@@ -124,7 +184,6 @@ class IndexedDBAdapter {
         return new Promise((resolve, reject) => {
             const storeObject = JSON.parse(JSON.stringify(dataObject));
             const key = storeObject[this.keyPath];
-            delete storeObject[this.keyPath];
             const objectStore = tx.objectStore(store);
             const request = objectStore.put(storeObject, key);
             request.onsuccess = () => {
@@ -149,7 +208,6 @@ class IndexedDBAdapter {
             try {
                 const storeObject = JSON.parse(JSON.stringify(dataObject));
                 const key = storeObject[this.keyPath];
-                // delete storeObject[this.keyPath];
 
                 tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_WRITE);
                 tx.oncomplete = () => {
@@ -210,7 +268,6 @@ class IndexedDBAdapter {
                         }
 
                         const key = storeObject[this.keyPath];
-                        // delete storeObject[this.keyPath];
                         const request = objectStore.put(storeObject, key);
 
                         request.onsuccess = () => {

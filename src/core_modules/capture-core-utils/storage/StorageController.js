@@ -36,7 +36,6 @@ export default class StorageController {
         if (!name) {
             throw new Error(StorageController.errorMessages.INVALID_NAME);
         }
-        this.name = name;
 
         if (!Adapters || !isArray(Adapters || Adapters.length === 0)) {
             throw new Error(StorageController.errorMessages.NO_ADAPTERS_DEFINED);
@@ -55,6 +54,8 @@ export default class StorageController {
             throw new Error(StorageController.errorMessages.NO_VALID_ADAPTERS_FOUND);
         }
 
+        this.name = name;
+        this.version = version;
         this.Adapters = Adapters;
         this.AvailableAdapters = ValidAdapters;
         const CurrentAdapter = ValidAdapters[0];

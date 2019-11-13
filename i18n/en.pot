@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-11-11T16:46:11.670Z\n"
-"PO-Revision-Date: 2019-11-11T16:46:11.670Z\n"
+"POT-Creation-Date: 2019-11-13T12:25:33.787Z\n"
+"PO-Revision-Date: 2019-11-13T12:25:33.788Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -725,6 +725,11 @@ msgid "Choose one or more dates..."
 msgstr ""
 
 msgid "Choose a date..."
+msgstr ""
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
 msgstr ""
 
 msgid "Compatibility mode"
