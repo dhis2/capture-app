@@ -185,4 +185,5 @@ declare type OfflineEffect = {
 
 declare var appPackage: {
     CACHE_VERSION: string,
+    VERSION: string,
 };

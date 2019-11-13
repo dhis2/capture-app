@@ -112,6 +112,7 @@ function rewirePlugins(config) {
             plugin.definitions = Object.assign({}, plugin.definitions, {
                 DHIS_CONFIG: JSON.stringify(dhisConfig),
                 "appPackage.CACHE_VERSION": JSON.stringify(process.env.npm_package_cacheVersion),
+                "appPackage.VERSION": JSON.stringify(process.env.npm_package_version),
                 "process.env.REACT_APP_TRACKER_CAPTURE_APP_PATH": JSON.stringify(process.env.NODE_ENV === "production" ? '../dhis-web-tracker-capture' : 'http://localhost:8080/dhis/dhis-web-tracker-capture')
             });          
         }
