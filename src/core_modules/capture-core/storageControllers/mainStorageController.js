@@ -3,7 +3,6 @@ import StorageController from 'capture-core-utils/storage/StorageController';
 import { mainStores } from './stores';
 
 const MAIN_STORAGE_KEY = 'dhis2ca';
-console.log(window.location.pathname);
 
 function getMajorCacheVersion() {
     const appVersion = process.env.REACT_APP_VERSION;
