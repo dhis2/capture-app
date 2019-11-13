@@ -72,16 +72,16 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "manualBuild": "yarn localize && d2-manifest package.json ./public/manifest.webapp && REACT_APP_DHIS2_BASE_URL='../../..' react-scripts build && mkdirp buildzip/ && pushd build && bestzip ../buildzip/NewCaptureApp.zip * && popd",
-    "start": "node verifyCacheVersion.js && react-scripts start",
-    "build": "yarn localize && d2-manifest package.json ./public/manifest.webapp && GENERATE_SOURCEMAP=false react-scripts build && cp ./package.json ./build/package.json",
+    "manualBuild": "node verifyCacheVersion.js && yarn localize && d2-manifest package.json ./public/manifest.webapp && REACT_APP_DHIS2_BASE_URL='../../..' react-scripts build && mkdirp buildzip/ && pushd build && bestzip ../buildzip/NewCaptureApp.zip * && popd",
+    "start": "react-scripts start",
+    "build": "node verifyCacheVersion.js && yarn localize && d2-manifest package.json ./public/manifest.webapp && GENERATE_SOURCEMAP=false react-scripts build && cp ./package.json ./build/package.json",
     "test": "react-scripts test",
     "test:debug": "react-scripts --inspect-brk test --runInBand",
     "eject": "react-scripts eject",
     "add-flow-types": "flow-typed install",
     "extract-pot": "d2-i18n-extract -p src/ -o i18n/",
     "localize": "yarn extract-pot && d2-i18n-generate -n NAMESPACE -p ./i18n/ -o ./src/locales/",
-    "prestart": "yarn localize && d2-manifest package.json ./public/manifest.webapp",
+    "prestart": "node verifyCacheVersion.js && yarn localize && d2-manifest package.json ./public/manifest.webapp",
     "docs": "NODE_ENV=development jsdoc -c jsdoc-conf.json"
   },
   "husky": {
