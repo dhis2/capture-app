@@ -8,18 +8,6 @@ function getStorageName(mainStorageName: string) {
     return mainStorageName + user.id;
 }
 
-function getCacheVersion() {
-    const appCacheVersionAsString = appPackage.CACHE_VERSION; // eslint-disable-line
-    if (!appCacheVersionAsString) {
-        throw new Error('cache version not specified');
-    }
-    const appCacheVersion = Number(appCacheVersionAsString);
-    if (Number.isNaN(appCacheVersion) || !Number.isSafeInteger(appCacheVersion)) {
-        throw new Error('invalid cache version');
-    }
-    return appCacheVersion;
-}
-
 function getStores() {
     const userStoresList = Object.keys(userStores).map(key => userStores[key]);
     return userStoresList;
@@ -29,7 +17,7 @@ function createStorageController(
     mainStorageController: StorageController,
 ) {
     const storageName = getStorageName(mainStorageController.name);
-    const appCacheVersion = getCacheVersion();
+    const appCacheVersion = mainStorageController.version;
     const stores = getStores();
     const storageController =
         new StorageController(
