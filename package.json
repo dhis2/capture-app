@@ -2,7 +2,7 @@
   "name": "capture-app",
   "homepage": ".",
   "version": "31.2.4",
-  "cacheVersion": "5",
+  "cacheVersion": "1",
   "private": false,
   "dependencies": {
     "@dhis2/d2-i18n": "^1.0.6",
@@ -67,21 +67,21 @@
     "typeface-roboto": "^0.0.54"
   },
   "scripts": {
-    "manualBuild": "yarn localize && d2-manifest package.json ./public/manifest.webapp --manifest.activities.dhis.href='../../..' && GENERATE_SOURCEMAP=false react-app-rewired build && mkdirp buildzip/ && pushd build && bestzip ../buildzip/NewCaptureApp.zip * && popd",
+    "manualBuild": "node verifyCacheVersion.js && yarn localize && d2-manifest package.json ./public/manifest.webapp --manifest.activities.dhis.href='../../..' && GENERATE_SOURCEMAP=false react-app-rewired build && mkdirp buildzip/ && pushd build && bestzip ../buildzip/NewCaptureApp.zip * && popd",
     "start": "react-app-rewired start",
-    "build": "yarn localize && d2-manifest package.json ./public/manifest.webapp && GENERATE_SOURCEMAP=false react-app-rewired build && cp ./package.json ./build/package.json",
+    "build": "node verifyCacheVersion.js && yarn localize && d2-manifest package.json ./public/manifest.webapp && GENERATE_SOURCEMAP=false react-app-rewired build && cp ./package.json ./build/package.json",
     "test": "react-app-rewired test --env=jsdom",
     "test:debug": "react-app-rewired --inspect-brk test --runInBand --env=jsdom",
     "eject": "react-scripts eject",
     "add-flow-types": "flow-typed install",
     "extract-pot": "d2-i18n-extract -p src/ -o i18n/",
     "localize": "yarn extract-pot && d2-i18n-generate -n NAMESPACE -p ./i18n/ -o ./src/locales/",
-    "prestart": "yarn localize && d2-manifest package.json ./public/manifest.webapp",
+    "prestart": "node verifyCacheVersion.js && yarn localize && d2-manifest package.json ./public/manifest.webapp",
     "docs": "NODE_ENV=development jsdoc -c jsdoc-conf.json"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn extract-pot && CI=true yarn test && git add -A ."
+      "pre-commit": "yarn extract-pot && git add -A ."
     }
   },
   "devDependencies": {

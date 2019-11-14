@@ -157,7 +157,6 @@ export async function initialize() {
     const userSettings = await getUserSettingsAsync();
     const d2 = await initAsync();
     setD2(d2);
-    // const systemSettings = await getSystemSettings(d2);
 
     const uiLocale = userSettings.keyUiLocale;
     const dbLocale = userSettings.keyDbLocale;

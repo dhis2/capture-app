@@ -30,16 +30,23 @@ function loadCoreMetaData(storageController: StorageController) {
     return Promise.all(coreLoadSpecifications.map(loadSpecification => loadSpecification.load(storageController)));
 }
 
-function getCacheVersion() {
+function getMajorCacheVersion() {
+    const appVersion = appPackage.VERSION; // eslint-disable-line
+    // $FlowSuppress: Prechecked
+    const appMajorVersion = Number(appVersion.split('.')[0]);
+    return (appMajorVersion - 30) * 1000;
+}
+
+function getMinorCacheVersion() {
     const appCacheVersionAsString = appPackage.CACHE_VERSION; // eslint-disable-line
-    if (!appCacheVersionAsString) {
-        throw new Error('cache version not specified');
-    }
     const appCacheVersion = Number(appCacheVersionAsString);
-    if (Number.isNaN(appCacheVersion) || !Number.isSafeInteger(appCacheVersion)) {
-        throw new Error('invalid cache version');
-    }
     return appCacheVersion;
+}
+
+function getCacheVersion() {
+    const majorCacheVersion = getMajorCacheVersion();
+    const minorCacheVersion = getMinorCacheVersion();
+    return (majorCacheVersion + minorCacheVersion);
 }
 
 function createStorageController() {

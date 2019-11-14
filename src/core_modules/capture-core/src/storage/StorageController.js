@@ -45,6 +45,9 @@ export default class StorageController {
         if (!validAdapterFound) {
             throw new Error(StorageController.errorMessages.NO_VALID_ADAPTERS_FOUND);
         }
+
+        this.name = name;
+        this.version = version;
     }
 
     open(...args) {
