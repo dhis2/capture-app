@@ -34,7 +34,7 @@ msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
 
 msgid "Discard"
-msgstr "Discard"
+msgstr "Отмена"
 
 msgid "Back to event"
 msgstr ""
@@ -91,7 +91,7 @@ msgid "Last week"
 msgstr "Последняя неделя"
 
 msgid "Last month"
-msgstr "Last month"
+msgstr "Последний месяц"
 
 msgid "Last 3 months"
 msgstr "Последние 3 месяца"
@@ -115,10 +115,10 @@ msgid "To"
 msgstr "До"
 
 msgid "Max"
-msgstr "Max"
+msgstr "Максимум"
 
 msgid "Min"
-msgstr "Min"
+msgstr "Минимум"
 
 msgid "greater than or equal to"
 msgstr ""
@@ -360,4 +360,4 @@ msgid "Choose a date..."
 msgstr ""
 
 msgid "Today"
-msgstr "Today"
+msgstr "Сегодня"
