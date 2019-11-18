@@ -199,7 +199,7 @@ msgid "Comments"
 msgstr "التعليقات"
 
 msgid "Field"
-msgstr "Field"
+msgstr ""
 
 msgid "could not be updated"
 msgstr ""
