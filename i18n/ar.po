@@ -172,7 +172,7 @@ msgid "Syncing"
 msgstr ""
 
 msgid "Field"
-msgstr "Field"
+msgstr ""
 
 msgid "could not be updated"
 msgstr ""
