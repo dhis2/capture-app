@@ -28,7 +28,7 @@ msgid "Errors"
 msgstr ""
 
 msgid "Feedback"
-msgstr "Feedback"
+msgstr ""
 
 msgid "Indicators"
 msgstr "Indikadores"
@@ -103,10 +103,10 @@ msgid "To"
 msgstr ""
 
 msgid "Max"
-msgstr "Max"
+msgstr ""
 
 msgid "Min"
-msgstr "Min"
+msgstr ""
 
 msgid "greater than or equal to"
 msgstr ""
@@ -163,10 +163,10 @@ msgid "No items to display"
 msgstr ""
 
 msgid "Online"
-msgstr "Online"
+msgstr ""
 
 msgid "Offline"
-msgstr "Offline"
+msgstr ""
 
 msgid "Syncing"
 msgstr ""
