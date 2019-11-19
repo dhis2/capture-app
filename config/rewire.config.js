@@ -112,6 +112,7 @@ function rewirePlugins(config) {
             plugin.definitions = Object.assign({}, plugin.definitions, {
                 DHIS_CONFIG: JSON.stringify(dhisConfig),
                 "appPackage.CACHE_VERSION": JSON.stringify(process.env.npm_package_cacheVersion),
+                "appPackage.VERSION": JSON.stringify(process.env.npm_package_version),
             });          
         }
         return plugin;

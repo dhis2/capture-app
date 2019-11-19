@@ -2,7 +2,7 @@ import indexedDB from 'fake-indexeddb';
 import IndexedDBAdapter from '../IndexedDBAdapter';
 
 const storeName = 'testStore';
-const options = { name: 'testDB', version: 1, keyPath: 'id', objectStores: [storeName] };
+const options = { name: 'testDB', version: 2, keyPath: 'id', objectStores: [storeName] };
 IndexedDBAdapter.indexedDB = indexedDB;
 
 let testCnt = 0;

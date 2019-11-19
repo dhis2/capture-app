@@ -1,5 +1,7 @@
 /* eslint-disable complexity */
+/* eslint-disable no-underscore-dangle */
 import isDefined from 'd2-utilizr/lib/isDefined';
+import log from 'loglevel';
 import isArray from 'd2-utilizr/lib/isArray';
 import errorCreator from '../utils/errorCreator';
 
@@ -77,10 +79,56 @@ class IndexedDBAdapter {
         this.keyPath = options.keyPath;
     }
 
-    open(onCreateObjectStore) {
+    /**
+     * Facilitate downgrade by destroying the current database if existing database version is greater than the requested version.
+     * @memberof IndexedDBAdapter
+     */
+    _facilitateDowngradeIfApplicable() {
+        const preCheckRequest = IndexedDBAdapter.indexedDB.open(this.name);
+        return new Promise((resolve, reject) => {
+            preCheckRequest.onsuccess = (event) => {
+                const foundVersion = event.target.result.version;
+                this.db = event.target.result;
+                if (foundVersion > this.version) {
+                    Promise.resolve()                        
+                        .then(() => {
+                            this.destroy()
+                                .then(() => {
+                                    this.db = undefined;
+                                    resolve();
+                                })
+                                .catch((error) => {
+                                    this.db = undefined;
+                                    log.error(errorCreator(IndexedDBAdapter.errorMessages.OPEN_FAILED)({ error }));
+                                    reject(IndexedDBAdapter.errorMessages.OPEN_FAILED);
+                                });
+                        });
+                } else {
+                    this.close()
+                        .then(() => {
+                            this.db = undefined;
+                            resolve();
+                        })
+                        .catch((error) => {
+                            this.db = undefined;
+                            log.error(errorCreator(IndexedDBAdapter.errorMessages.OPEN_FAILED)({ error }));
+                            reject(IndexedDBAdapter.errorMessages.OPEN_FAILED);
+                        });
+                }
+            };
+
+            preCheckRequest.onerror = (error) => {
+                log.error(errorCreator(IndexedDBAdapter.errorMessages.OPEN_FAILED)({ error }));
+                reject(IndexedDBAdapter.errorMessages.OPEN_FAILED);
+            };
+        });
+    }
+
+    async open(onCreateObjectStore) {
+        await this._facilitateDowngradeIfApplicable();
         const request = IndexedDBAdapter.indexedDB.open(this.name, this.version);
 
-        return new Promise((resolve, reject) => {
+        await new Promise((resolve, reject) => {
             request.onsuccess = (e) => {
                 this.db = e.target.result;
                 resolve();
@@ -124,7 +172,6 @@ class IndexedDBAdapter {
 
             const storeObject = JSON.parse(JSON.stringify(dataObject));
             const key = storeObject[this.keyPath];
-            // delete storeObject[this.keyPath];
 
             let tx;
             let abortTransaction;
@@ -182,7 +229,6 @@ class IndexedDBAdapter {
                         }
 
                         const key = storeObject[this.keyPath];
-                        // delete storeObject[this.keyPath];
                         const request = objectStore.put(storeObject, key);
 
                         request.onsuccess = () => {
