@@ -1,14 +1,14 @@
 # Translators:
-# phil_dhis2, 2019
 # Viktor Varland <viktor@dhis2.org>, 2019
 # Marta Vila <marta@dhis2.org>, 2019
+# phil_dhis2, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-11-28T09:40:30.446Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Marta Vila <marta@dhis2.org>, 2019\n"
+"Last-Translator: phil_dhis2, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -328,7 +328,7 @@ msgid "Show all"
 msgstr "Mostrar todo"
 
 msgid "Program"
-msgstr "Program"
+msgstr "Programa"
 
 msgid "Select program"
 msgstr "Seleccionar programa"
