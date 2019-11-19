@@ -155,7 +155,7 @@ function setHeaderBarStrings(d2){
     d2.i18n.addStrings(['app_search_placeholder=search']);
 }
 
-export async function initializeAsync() {
+export async function initializeAsync(onCacheExpired: Function) {
     setLogLevel();
 
     // initialize d2
@@ -166,9 +166,9 @@ export async function initializeAsync() {
     setHeaderBarStrings(d2);
     // initialize storage controllers
     try {
-        await initControllersAsync();
+        await initControllersAsync(onCacheExpired);
     } catch (error) {
-        throw new DisplayException(i18n.t('Possible reason: The browser or mode (e.g. privacy mode) is not supported. See log for details.'), error);
+        throw new DisplayException(i18n.t('A possible reason for this is that the browser or mode (e.g. privacy mode) is not supported. See log for details.'), error);
     }
 
     // set locale data
