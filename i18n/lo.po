@@ -1,13 +1,13 @@
 # Translators:
-# phil_dhis2, 2019
 # Viktor Varland <viktor@dhis2.org>, 2019
+# phil_dhis2, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-11-28T09:40:30.446Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2019\n"
+"Last-Translator: phil_dhis2, 2019\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +25,7 @@ msgid "Column"
 msgstr "ຖັນ"
 
 msgid "Cancel"
-msgstr "Cancel"
+msgstr "ຍົກເລີກ"
 
 msgid "Discard event?"
 msgstr ""
@@ -49,10 +49,10 @@ msgid "Errors"
 msgstr "ຜິດພາດ"
 
 msgid "Feedback"
-msgstr "Feedback"
+msgstr "ຜົນຕອບຮັບ"
 
 msgid "Indicators"
-msgstr "Indicators"
+msgstr "ຕົວຊີ້ວັດ"
 
 msgid "Warnings"
 msgstr ""
@@ -73,13 +73,13 @@ msgid "No write access"
 msgstr ""
 
 msgid "Save"
-msgstr "Save"
+msgstr "ບັນທຶກ"
 
 msgid "Uploading data"
 msgstr ""
 
 msgid "Sort"
-msgstr "Sort"
+msgstr ""
 
 msgid "No events to display"
 msgstr ""
@@ -91,7 +91,7 @@ msgid "Last week"
 msgstr "ອາທິດທີ່ຜ່ານມາ"
 
 msgid "Last month"
-msgstr "Last month"
+msgstr "ເດືອນຜ່ານມາ"
 
 msgid "Last 3 months"
 msgstr "3 ເດືອນຍ້ອນຫຼັງ"
@@ -130,19 +130,19 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr "Yes"
+msgstr "ແມ່ນ"
 
 msgid "mm/dd/yyyy"
 msgstr ""
 
 msgid "Years"
-msgstr "Years"
+msgstr "ປີ"
 
 msgid "Months"
-msgstr "Months"
+msgstr "ເດືອນ"
 
 msgid "Days"
-msgstr "Days"
+msgstr "ມື້"
 
 msgid "Uploading file"
 msgstr ""
@@ -151,13 +151,13 @@ msgid "selected"
 msgstr "ເລືອກແລ້ວ"
 
 msgid "Delete"
-msgstr "Delete"
+msgstr "ລົບ"
 
 msgid "Select file"
 msgstr ""
 
 msgid "No"
-msgstr "No"
+msgstr "ບໍ່"
 
 msgid "Uploading image"
 msgstr ""
@@ -193,7 +193,7 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr "Status"
+msgstr "ສະຖານະ"
 
 msgid "Comments"
 msgstr "ຄຳເຫັນ"
@@ -226,7 +226,7 @@ msgid "Delete event"
 msgstr "ລືບກໍລະນີອອກ"
 
 msgid "Update"
-msgstr "Update"
+msgstr "ປັບປຸງ"
 
 msgid "Close"
 msgstr "ປິດ"
@@ -327,7 +327,7 @@ msgid "Show all"
 msgstr "ສະແດງທັງໝົດ"
 
 msgid "Program"
-msgstr "Program"
+msgstr "ສາຍງານ"
 
 msgid "Select program"
 msgstr "ຂະແໜງທີ່ຖືກເລືອກ"
