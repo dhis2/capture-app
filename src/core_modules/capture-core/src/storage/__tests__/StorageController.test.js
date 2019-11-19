@@ -17,7 +17,7 @@ let storageController;
 beforeEach(() => {
     dbName = `testDB${testCnt}`;
     testCnt += 1;
-    storageController = new StorageController(dbName, 1, Adapters, storeNames);
+    storageController = new StorageController(dbName, 2, Adapters, storeNames);
 });
 
 afterEach(async () => {
