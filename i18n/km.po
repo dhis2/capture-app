@@ -52,7 +52,7 @@ msgid "Feedback"
 msgstr "មតិ​ឆ្លើយតប"
 
 msgid "Indicators"
-msgstr "Indicators"
+msgstr ""
 
 msgid "Warnings"
 msgstr ""
