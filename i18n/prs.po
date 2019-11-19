@@ -21,7 +21,7 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr ""
+msgstr "ستون"
 
 msgid "Errors"
 msgstr "خطاها"
@@ -48,7 +48,7 @@ msgid "Abort"
 msgstr ""
 
 msgid "Save comment"
-msgstr ""
+msgstr "ذخیره نظریه"
 
 msgid "Write comment"
 msgstr ""
@@ -66,7 +66,7 @@ msgid "Uploading data"
 msgstr ""
 
 msgid "Sort"
-msgstr ""
+msgstr "تنظیم"
 
 msgid "No events to display"
 msgstr ""
@@ -87,7 +87,7 @@ msgid "Custom range"
 msgstr ""
 
 msgid "to"
-msgstr ""
+msgstr "برای"
 
 msgid "after or equal to"
 msgstr ""
@@ -135,7 +135,7 @@ msgid "Uploading file"
 msgstr ""
 
 msgid "selected"
-msgstr ""
+msgstr "منتخبین"
 
 msgid "Delete"
 msgstr "حذف"
@@ -162,10 +162,10 @@ msgid "No items to display"
 msgstr ""
 
 msgid "Online"
-msgstr ""
+msgstr "آنلاین"
 
 msgid "Offline"
-msgstr ""
+msgstr "آفلاین"
 
 msgid "Syncing"
 msgstr ""
@@ -249,7 +249,7 @@ msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr ""
+msgstr "در"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -272,7 +272,7 @@ msgid "No events added"
 msgstr ""
 
 msgid "Reset"
-msgstr ""
+msgstr "مرتب سازی مجدد"
 
 msgid "New"
 msgstr "جدید"
@@ -302,13 +302,13 @@ msgid "No programs available."
 msgstr ""
 
 msgid "Show all"
-msgstr ""
+msgstr "نشان دادن همه"
 
 msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Select program"
-msgstr ""
+msgstr "پروګرام غوره کړئ"
 
 msgid "An error has occured. See log for details"
 msgstr ""
