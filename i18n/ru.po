@@ -209,13 +209,13 @@ msgid "before or equal to"
 msgstr ""
 
 msgid "Today"
-msgstr "Today"
+msgstr "Сегодня"
 
 msgid "This week"
-msgstr "This week"
+msgstr "Эта неделя"
 
 msgid "This month"
-msgstr "This month"
+msgstr "Этот месяц"
 
 msgid "This Year"
 msgstr ""
@@ -224,7 +224,7 @@ msgid "Last week"
 msgstr "Последняя неделя"
 
 msgid "Last month"
-msgstr "Last month"
+msgstr "Последний месяц"
 
 msgid "Last 3 months"
 msgstr "Последние 3 месяца"
@@ -233,10 +233,10 @@ msgid "Custom range"
 msgstr ""
 
 msgid "Max"
-msgstr "Max"
+msgstr "Максимум"
 
 msgid "Min"
-msgstr "Min"
+msgstr "Минимум"
 
 msgid "greater than or equal to"
 msgstr ""
