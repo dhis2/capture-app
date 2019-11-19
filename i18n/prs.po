@@ -21,7 +21,7 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr ""
+msgstr "ستون"
 
 msgid "This value is validating"
 msgstr ""
@@ -156,7 +156,7 @@ msgid "Validation errors"
 msgstr ""
 
 msgid "Validation warnings"
-msgstr ""
+msgstr "هشدارهای اعتبارسنجی"
 
 msgid "Some operations are still runnning. Please wait.."
 msgstr ""
@@ -165,7 +165,7 @@ msgid "Operations running"
 msgstr ""
 
 msgid "Sort"
-msgstr ""
+msgstr "تنظیم"
 
 msgid "No events to display"
 msgstr ""
@@ -189,7 +189,7 @@ msgid "Custom range"
 msgstr ""
 
 msgid "to"
-msgstr ""
+msgstr "برای"
 
 msgid "after or equal to"
 msgstr ""
@@ -237,7 +237,7 @@ msgid "Uploading file"
 msgstr ""
 
 msgid "selected"
-msgstr ""
+msgstr "منتخبین"
 
 msgid "Delete"
 msgstr "حذف"
@@ -267,10 +267,10 @@ msgid "No items to display"
 msgstr ""
 
 msgid "Online"
-msgstr ""
+msgstr "آنلاین"
 
 msgid "Offline"
-msgstr ""
+msgstr "آفلاین"
 
 msgid "Syncing"
 msgstr ""
@@ -291,7 +291,7 @@ msgid "Status"
 msgstr "وضعیت"
 
 msgid "Comments"
-msgstr ""
+msgstr "نظرات"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -333,7 +333,7 @@ msgid "Rows per page"
 msgstr ""
 
 msgid "Active"
-msgstr ""
+msgstr "فعال"
 
 msgid "Completed"
 msgstr "تکمیل شد"
@@ -386,7 +386,7 @@ msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr ""
+msgstr "در"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -489,19 +489,19 @@ msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Show all"
-msgstr ""
+msgstr "نشان دادن همه"
 
 msgid "Program"
 msgstr "برنامه"
 
 msgid "Organisation Unit"
-msgstr ""
+msgstr "واحد سازمان"
 
 msgid "Registration"
 msgstr "ثبت نام"
 
 msgid "Search results"
-msgstr ""
+msgstr "نتایج جستجو"
 
 msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
@@ -563,7 +563,7 @@ msgid "Select"
 msgstr "انتخاب"
 
 msgid "Select program"
-msgstr ""
+msgstr "پروګرام غوره کړئ"
 
 msgid "No programs available."
 msgstr ""
@@ -617,16 +617,16 @@ msgid "Date"
 msgstr "تاریخ"
 
 msgid "Time"
-msgstr ""
+msgstr "اوقات"
 
 msgid "From date"
-msgstr ""
+msgstr "از تاریخ"
 
 msgid "From time"
 msgstr ""
 
 msgid "To date"
-msgstr ""
+msgstr "تا تاریخ"
 
 msgid "To time"
 msgstr ""
