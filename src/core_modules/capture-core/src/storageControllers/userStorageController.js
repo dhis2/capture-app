@@ -23,8 +23,10 @@ function createStorageController(
         new StorageController(
             storageName,
             appCacheVersion,
-            [mainStorageController.adapterType],
-            stores,
+            {
+                Adapters: [mainStorageController.adapterType],
+                objectStores: stores,
+            },
         );
     return storageController;
 }
