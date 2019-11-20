@@ -111,6 +111,7 @@
     "Set coordinate": "",
     "Delete polygon": "",
     "Set area": "",
+    "You opened another version of the Capture App in the same domain. Currently, the Capture App only supports running one version concurrently (in the same domain). Please refresh this page if you would like to use this version again, but be aware that this will close other versions.": "",
     "Choose one or more dates...": "",
     "Choose a date...": "",
     "Today": ""

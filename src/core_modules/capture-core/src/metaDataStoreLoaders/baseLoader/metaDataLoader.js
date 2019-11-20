@@ -49,11 +49,11 @@ function getCacheVersion() {
     return (majorCacheVersion + minorCacheVersion);
 }
 
-function createStorageController() {
+function createStorageController(onCacheExpired: Function) {
     const objectStoreList = Object.keys(objectStores).map(key => objectStores[key]);
     const appCacheVersion = getCacheVersion();
     const storageController =
-        new StorageController('dhis2ca', appCacheVersion, [IndexedDBAdapter], objectStoreList);
+        new StorageController('dhis2ca', appCacheVersion, [IndexedDBAdapter], objectStoreList, onCacheExpired);
     setStorageController(storageController);
     return storageController;
 }
@@ -70,8 +70,8 @@ async function openStorage(storageController: StorageController) {
     );
 }
 
-export default async function loadMetaData() {
-    const storageController = createStorageController();
+export default async function loadMetaData(onCacheExpired: Function) {
+    const storageController = createStorageController(onCacheExpired);
     await openStorage(storageController);
     await loadCoreMetaData(storageController);
     const {

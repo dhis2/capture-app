@@ -2,7 +2,7 @@
   "name": "capture-app",
   "homepage": ".",
   "version": "31.2.4",
-  "cacheVersion": "1",
+  "cacheVersion": "2",
   "private": false,
   "dependencies": {
     "@dhis2/d2-i18n": "^1.0.6",
@@ -110,7 +110,7 @@
   },
   "manifest.webapp": {
     "version": "0.9.5",
-    "name": "Capture",
+    "name": "Capture2",
     "description": "Capture App",
     "launch_path": "index.html",
     "icons": {
