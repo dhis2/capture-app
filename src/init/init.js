@@ -152,7 +152,7 @@ async function initializeSystemSettingsAsync() {
     await buildSystemSettingsAsync(systemSettingsCacheData);
 }
 
-export async function initializeAsync() {
+export async function initializeAsync(onCacheExpired: Function) {
     setLogLevel();
 
     // initialize d2
@@ -163,7 +163,7 @@ export async function initializeAsync() {
 
     // initialize storage controllers
     try {
-        await initControllersAsync();
+        await initControllersAsync(onCacheExpired);
     } catch (error) {
         throw new DisplayException(
             i18n.t('A possible reason for this is that the browser or mode (e.g. privacy mode) is not supported. See log for details.'),

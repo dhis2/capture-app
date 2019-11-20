@@ -52,7 +52,7 @@ async function removeCaches(
         // $FlowFixMe
         await historyPartToRemove.asyncForEach(async (cache) => {
             const controllerForStorageToRemove =
-                new StorageController(cache, 1, [currentAdapterType]);
+                new StorageController(cache, 1, { Adapters: [currentAdapterType] });
             try {
                 await controllerForStorageToRemove.destroy();
             } catch (error) {

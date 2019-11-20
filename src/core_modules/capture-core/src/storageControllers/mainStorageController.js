@@ -23,20 +23,23 @@ function getCacheVersion() {
     return (majorCacheVersion + minorCacheVersion);
 }
 
-function createStorageController(storageName: string, AdapterClasses: Array<any>) {
+function createStorageController(storageName: string, AdapterClasses: Array<any>, onCacheExpired: Function) {
     const appCacheVersion = getCacheVersion();
     const storageController =
         new StorageController(
             storageName,
             appCacheVersion,
-            AdapterClasses,
-            Object.keys(mainStores).map(key => mainStores[key]),
+            {
+                Adapters: AdapterClasses,
+                objectStores: Object.keys(mainStores).map(key => mainStores[key]),
+                onCacheExpired,
+            },
         );
     return storageController;
 }
 
-async function initMainControllerAsync(adapterTypes: Array<any>) {
-    const mainStorageController = createStorageController(MAIN_STORAGE_KEY, adapterTypes);
+async function initMainControllerAsync(adapterTypes: Array<any>, onCacheExpired: Function) {
+    const mainStorageController = createStorageController(MAIN_STORAGE_KEY, adapterTypes, onCacheExpired);
     let upgradeTempData;
     await mainStorageController.open(
         storage => storage
