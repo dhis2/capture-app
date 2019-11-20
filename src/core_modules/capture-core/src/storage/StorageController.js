@@ -18,7 +18,7 @@ export default class StorageController {
         return adapterMethods.every(method => Adapter.prototype[method]);
     }
 
-    constructor(name, version, adapters, objectStores) {
+    constructor(name, version, adapters, objectStores, onCacheExpired) {
         if (!name) {
             throw new Error(StorageController.errorMessages.INVALID_NAME);
         }
@@ -36,7 +36,7 @@ export default class StorageController {
                 throw new Error(errorCreator(StorageController.errorMessages.INVALID_ADAPTER_PROVIDED)({ Adapter }));
             }
             if (Adapter.isSupported()) {
-                this.adapter = new Adapter({ name, version, objectStores, keyPath: 'id' });
+                this.adapter = new Adapter({ name, version, objectStores, keyPath: 'id', onCacheExpired });
                 return true;
             }
             return false;

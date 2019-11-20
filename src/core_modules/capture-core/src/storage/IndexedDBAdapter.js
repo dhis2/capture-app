@@ -72,48 +72,107 @@ class IndexedDBAdapter {
         };
     }
 
-    constructor(options) {
-        this.name = options.name;
-        this.version = options.version;
-        this.objectStoreNames = options.objectStores;
-        this.keyPath = options.keyPath;
+    static closeDB(db) {
+        db.close();
+    }
+
+    static destroyDB(name) {
+        return new Promise((resolve, reject) => {
+            const request = IndexedDBAdapter.indexedDB.deleteDatabase(name);
+            let wasBlocked = false;
+
+            request.onsuccess = (e) => {
+                if (wasBlocked) {
+                    return;
+                }
+                resolve(e);
+            };
+
+            request.onerror = (error) => {
+                reject(errorCreator(IndexedDBAdapter.errorMessages.DESTROY_FAILED)({ error }));
+            };
+
+            request.onblocked = (error) => {
+                wasBlocked = true;
+                reject(errorCreator(IndexedDBAdapter.errorMessages.DESTROY_BLOCKED)({ error }));
+            };
+        });
+    }
+
+    static get(store, key, db, keyPath) {
+        return new Promise((resolve, reject) => {
+            let tx;
+            let catchError;
+            const abortTx = (error) => {
+                catchError = error;
+                tx.abort();
+            };
+
+            try {
+                let resultObject;
+                tx = db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
+                tx.oncomplete = () => {
+                    resolve(resultObject);
+                };
+                tx.onerror = (error) => {
+                    reject(errorCreator(IndexedDBAdapter.errorMessages.GET_FAILED)({ error }));
+                };
+                tx.onabort = () => {
+                    reject(errorCreator(IndexedDBAdapter.errorMessages.GET_FAILED)(
+                        { aborted: true, error: catchError }));
+                };
+
+                const objectStore = tx.objectStore(store);
+                const request = objectStore.get(key);
+                request.onsuccess = (e) => {
+                    const object = e.target.result;
+
+                    if (isDefined(object)) {
+                        object[keyPath] = key;
+                    }
+                    resultObject = object;
+                };
+            } catch (error) {
+                if (tx) {
+                    abortTx(error);
+                }
+                reject(errorCreator(IndexedDBAdapter.errorMessages.GET_FAILED)({ error }));
+            }
+        });
     }
 
     /**
      * Facilitate downgrade by destroying the current database if existing database version is greater than the requested version.
+     * Data can be preserved through the onBeforeUpgrade callback function (will be called with the isDowngrade argument)
+     * @param {*} onBeforeUpgrade
+     * @returns Whether we are downgrading or not
      * @memberof IndexedDBAdapter
      */
-    _facilitateDowngradeIfApplicable() {
-        const preCheckRequest = IndexedDBAdapter.indexedDB.open(this.name);
+    static facilitateDowngradeIfApplicable(name, version) {
+        const preCheckRequest = IndexedDBAdapter.indexedDB.open(name);
         return new Promise((resolve, reject) => {
             preCheckRequest.onsuccess = (event) => {
                 const foundVersion = event.target.result.version;
-                this.db = event.target.result;
-                if (foundVersion > this.version) {
-                    Promise.resolve()                        
+                const db = event.target.result;
+                db.onversionchange = () => {
+                    db.close();
+                };
+                if (foundVersion > version) {
+                    Promise.resolve()
                         .then(() => {
-                            this.destroy()
+                            IndexedDBAdapter.closeDB(db);
+                            IndexedDBAdapter.destroyDB(name)
                                 .then(() => {
-                                    this.db = undefined;
                                     resolve();
                                 })
                                 .catch((error) => {
-                                    this.db = undefined;
                                     log.error(errorCreator(IndexedDBAdapter.errorMessages.OPEN_FAILED)({ error }));
                                     reject(IndexedDBAdapter.errorMessages.OPEN_FAILED);
                                 });
                         });
                 } else {
-                    this.close()
-                        .then(() => {
-                            this.db = undefined;
-                            resolve();
-                        })
-                        .catch((error) => {
-                            this.db = undefined;
-                            log.error(errorCreator(IndexedDBAdapter.errorMessages.OPEN_FAILED)({ error }));
-                            reject(IndexedDBAdapter.errorMessages.OPEN_FAILED);
-                        });
+                    IndexedDBAdapter.closeDB(db);
+                    resolve();
                 }
             };
 
@@ -124,13 +183,26 @@ class IndexedDBAdapter {
         });
     }
 
-    async open(onCreateObjectStore) {
-        await this._facilitateDowngradeIfApplicable();
-        const request = IndexedDBAdapter.indexedDB.open(this.name, this.version);
+    constructor(options) {
+        this.name = options.name;
+        this.version = options.version;
+        this.objectStoreNames = options.objectStores;
+        this.keyPath = options.keyPath;
+        this.onCacheExpired = options.onCacheExpired;
+    }
 
+    async open(onCreateObjectStore) {
+        await IndexedDBAdapter.facilitateDowngradeIfApplicable(this.name, this.version);
+        const request = IndexedDBAdapter.indexedDB.open(this.name, this.version);
+        let wasBlocked = false;
         await new Promise((resolve, reject) => {
             request.onsuccess = (e) => {
                 this.db = e.target.result;
+                this.db.onversionchange = () => {
+                    this.db.close();
+                    this.db = undefined;
+                    this.onCacheExpired && this.onCacheExpired();
+                };
                 resolve();
             };
 
@@ -139,11 +211,21 @@ class IndexedDBAdapter {
             };
 
             request.onblocked = (error) => {
+                wasBlocked = true;
                 reject(errorCreator(IndexedDBAdapter.errorMessages.OPEN_BLOCKED)({ adapter: this, error }));
             };
 
             request.onupgradeneeded = (e) => {
+                const tx = e.target.transaction;
+                if (wasBlocked) {
+                    tx.abort();
+                    return;
+                }
                 this.db = e.target.result;
+                this.db.onversionchange = () => {
+                    this.db.close();
+                    this.db = undefined;
+                };
 
                 this.objectStoreNames.forEach((name) => {
                     if (this.db.objectStoreNames.contains(name)) {
@@ -257,37 +339,7 @@ class IndexedDBAdapter {
     }
 
     get(store, key) {
-        return new Promise((resolve, reject) => {
-            if (!this.verifyDbSet(reject)) {
-                return;
-            }
-
-            if (!key) {
-                reject(errorCreator(IndexedDBAdapter.errorMessages.INVALID_KEY)({ adapter: this }));
-                return;
-            }
-
-            try {
-                const tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
-                const objectStore = tx.objectStore(store);
-                const request = objectStore.get(key);
-                request.onsuccess = (e) => {
-                    const object = e.target.result;
-
-                    if (isDefined(object)) {
-                        object[this.keyPath] = key;
-                    }
-
-                    resolve(object);
-                };
-
-                request.onerror = (error) => {
-                    reject(errorCreator(IndexedDBAdapter.errorMessages.GET_FAILED)({ adapter: this, error }));
-                };
-            } catch (error) {
-                reject(errorCreator(IndexedDBAdapter.errorMessages.GET_FAILED)({ adapter: this, error }));
-            }
-        });
+        return IndexedDBAdapter.get(store, key, this.db, this.keyPath);
     }
 
     // eslint-disable-next-line class-methods-use-this
@@ -558,14 +610,8 @@ class IndexedDBAdapter {
             }
 
             try {
-                this.db.close();
-
-                this.db.onerror = (error) => {
-                    reject(errorCreator(IndexedDBAdapter.errorMessages.CLOSE_FAILED)({ adapter: this, error }));
-                };
-
+                IndexedDBAdapter.closeDB(this.db);
                 this.db = null;
-
                 resolve();
             } catch (error) {
                 reject(errorCreator(IndexedDBAdapter.errorMessages.CLOSE_FAILED)({ adapter: this, error }));
@@ -589,21 +635,7 @@ class IndexedDBAdapter {
                 });
         });
 
-        await new Promise((resolve, reject) => {
-            const request = IndexedDBAdapter.indexedDB.deleteDatabase(this.name);
-
-            request.onsuccess = (e) => {
-                resolve(e);
-            };
-
-            request.onerror = (error) => {
-                reject(errorCreator(IndexedDBAdapter.errorMessages.DESTROY_FAILED)({ adapter: this, error }));
-            };
-
-            request.onblocked = (error) => {
-                reject(errorCreator(IndexedDBAdapter.errorMessages.DESTROY_BLOCKED)({ adapter: this, error }));
-            };
-        });
+        await IndexedDBAdapter.destroyDB(this.name);
     }
 
     verifyDbSet(onNotFulfilled) {
