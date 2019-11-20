@@ -3,6 +3,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
 import 'typeface-roboto';
 import { createHashHistory as createHistory } from 'history';
 
@@ -58,6 +59,20 @@ function runApp(domElement: HTMLElement, store: ReduxStore, history: HashHistory
     );
 }
 
+function handleCacheExpired(domElement: HTMLElement) {
+    render(
+        <div>
+            {
+                // keeping this on one line due to issues with i18n
+                i18n.t(
+                    'You opened another version of the Capture App in the same domain. Currently, the Capture App only supports running one version concurrently (in the same domain). Please refresh this page if you would like to use this version again, but be aware that this will close other versions.',
+                )
+            }
+        </div>,
+        domElement,
+    );
+}
+
 function logError(error) {
     if (error instanceof Error) {
         log.error(error.toString());
@@ -75,7 +90,7 @@ async function loadAppAsync(domElement: HTMLElement) {
     );
 
     try {
-        await initializeAsync();
+        await initializeAsync(() => handleCacheExpired(domElement));
         const history = createHistory();
         const store = getStore(history, () => runApp(domElement, store, history));
     } catch (error) {
