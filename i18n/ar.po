@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2019-08-14T12:27:31.878Z\n"
+"POT-Creation-Date: 2019-11-20T10:50:45.136Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -14,9 +14,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ar\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-
-msgid "Please provide a valid date"
-msgstr ""
 
 msgid "Columns to show in table"
 msgstr ""
@@ -46,6 +43,9 @@ msgid "Please provide zero or a positive integer"
 msgstr ""
 
 msgid "Please provide a negative integer"
+msgstr ""
+
+msgid "Please provide a valid date"
 msgstr ""
 
 msgid "Please provide a valid date and time"
@@ -557,11 +557,11 @@ msgstr ""
 msgid "Registering Organisation Unit"
 msgstr ""
 
-msgid "Selected Program"
-msgstr ""
-
 msgid "Select"
 msgstr "تحديد"
+
+msgid "Selected Program"
+msgstr ""
 
 msgid "Select program"
 msgstr "تحديد البرنامج"
@@ -644,6 +644,13 @@ msgstr ""
 msgid "Set area"
 msgstr ""
 
+msgid ""
+"You opened another version of the Capture App in the same domain. Currently,"
+" the Capture App only supports running one version concurrently (in the same"
+" domain). Please refresh this page if you would like to use this version "
+"again, but be aware that this will close other versions."
+msgstr ""
+
 msgid "Choose one or more dates..."
 msgstr ""
 
@@ -652,6 +659,11 @@ msgstr ""
 
 msgid "Today"
 msgstr "اليوم"
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
+msgstr ""
 
 msgid "Compatibility mode"
 msgstr ""
