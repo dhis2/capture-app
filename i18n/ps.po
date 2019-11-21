@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2018-11-28T09:40:30.446Z\n"
+"POT-Creation-Date: 2019-11-20T12:27:04.744Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: phil_dhis2, 2019\n"
 "Language-Team: Pushto (https://www.transifex.com/hisp-uio/teams/100509/ps/)\n"
@@ -14,9 +14,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ps\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-msgid "Please provide a valid date"
-msgstr ""
 
 msgid "Columns to show in table"
 msgstr ""
@@ -204,6 +201,9 @@ msgstr ""
 msgid "could not be updated"
 msgstr ""
 
+msgid "Please provide a valid date"
+msgstr ""
+
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
 
@@ -314,11 +314,11 @@ msgstr ""
 msgid "Registering Organisation Unit"
 msgstr ""
 
-msgid "Selected Program"
-msgstr ""
-
 msgid "Select"
 msgstr "غوره یې کړئ"
+
+msgid "Selected Program"
+msgstr ""
 
 msgid "Some programs are being filtered."
 msgstr ""
@@ -351,6 +351,13 @@ msgid "Delete polygon"
 msgstr ""
 
 msgid "Set area"
+msgstr ""
+
+msgid ""
+"You opened another version of the Capture App in the same domain. Currently,"
+" the Capture App only supports running one version concurrently (in the same"
+" domain). Please refresh this page if you would like to use this version "
+"again, but be aware that this will close other versions."
 msgstr ""
 
 msgid "Choose one or more dates..."
