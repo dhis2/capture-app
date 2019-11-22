@@ -129,6 +129,11 @@ function changeI18nLocale(locale) {
     document.body.setAttribute('dir', isLangRTL(locale) ? 'rtl' : 'ltr');
 }
 
+function initI18n(locale) {
+    changeI18nLocale(locale);
+    i18n.setDefaultNamespace('capture-app');
+}
+
 async function setLocaleDataAsync(uiLocale: string) { //eslint-disable-line
     const locale = uiLocale;
     await setMomentLocaleAsync(locale);
@@ -138,7 +143,7 @@ async function setLocaleDataAsync(uiLocale: string) { //eslint-disable-line
     const firstDayOfWeek = moment.localeData()._week.dow; //eslint-disable-line
 
     await setDateFnLocaleAsync(locale, weekdays, weekdaysShort, firstDayOfWeek);
-    changeI18nLocale(locale);
+    initI18n(locale);
 }
 
 async function initializeMetaDataAsync(dbLocale: string) {

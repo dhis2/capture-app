@@ -24,6 +24,7 @@ import esTranslations from './es/translations.json';
 import frTranslations from './fr/translations.json';
 import idTranslations from './id/translations.json';
 import loTranslations from './lo/translations.json';
+import prsTranslations from './prs/translations.json';
 import psTranslations from './ps/translations.json';
 import ptTranslations from './pt/translations.json';
 import ruTranslations from './ru/translations.json';
@@ -31,7 +32,7 @@ import ukTranslations from './uk/translations.json';
 import urTranslations from './ur/translations.json';
 import viTranslations from './vi/translations.json';
 
-const namespace = 'NAMESPACE';
+const namespace = 'capture-app';
 moment.locale('en');
 
 i18n.addResources('ar', namespace, arTranslations);
@@ -40,6 +41,7 @@ i18n.addResources('es', namespace, esTranslations);
 i18n.addResources('fr', namespace, frTranslations);
 i18n.addResources('id', namespace, idTranslations);
 i18n.addResources('lo', namespace, loTranslations);
+i18n.addResources('prs', namespace, prsTranslations);
 i18n.addResources('ps', namespace, psTranslations);
 i18n.addResources('pt', namespace, ptTranslations);
 i18n.addResources('ru', namespace, ruTranslations);
