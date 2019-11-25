@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2019-08-27T15:53:46.517Z\n"
+"POT-Creation-Date: 2019-11-18T14:43:03.753Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: phil_dhis2, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/hisp-uio/teams/100509/es/)\n"
@@ -636,11 +636,11 @@ msgstr "Aceptar"
 msgid "Registering Organisation Unit"
 msgstr ""
 
-msgid "Selected Program"
-msgstr ""
-
 msgid "Select"
 msgstr "Seleccionar"
+
+msgid "Selected Program"
+msgstr ""
 
 msgid "Select program"
 msgstr "Seleccionar programa"
@@ -729,10 +729,22 @@ msgstr ""
 msgid "Set area"
 msgstr ""
 
+msgid ""
+"You opened another version of the Capture App in the same domain. Currently,"
+" the Capture App only supports running one version concurrently (in the same"
+" domain). Please refresh this page if you would like to use this version "
+"again, but be aware that this will close other versions."
+msgstr ""
+
 msgid "Choose one or more dates..."
 msgstr ""
 
 msgid "Choose a date..."
+msgstr ""
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
 msgstr ""
 
 msgid "Compatibility mode"
