@@ -32,7 +32,7 @@ import ukTranslations from './uk/translations.json';
 import urTranslations from './ur/translations.json';
 import viTranslations from './vi/translations.json';
 
-const namespace = 'capture-app';
+const namespace = 'default';
 moment.locale('en');
 
 i18n.addResources('ar', namespace, arTranslations);

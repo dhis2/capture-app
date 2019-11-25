@@ -131,7 +131,7 @@ function changeI18nLocale(locale) {
 
 function initI18n(locale) {
     changeI18nLocale(locale);
-    i18n.setDefaultNamespace('capture-app');
+    i18n.setDefaultNamespace('default');
 }
 
 async function setLocaleDataAsync(uiLocale: string) { //eslint-disable-line
