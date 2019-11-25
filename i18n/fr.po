@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2019-08-14T12:27:31.878Z\n"
+"POT-Creation-Date: 2019-11-20T10:50:45.136Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: phil_dhis2, 2019\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -15,9 +15,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
-msgid "Please provide a valid date"
-msgstr "Veuillez spécifier une date valide"
 
 msgid "Columns to show in table"
 msgstr "Colonnes à afficher dans ce tableau"
@@ -48,6 +45,9 @@ msgstr "Veuillez saisir un zéro ou nombre entier positif valide"
 
 msgid "Please provide a negative integer"
 msgstr "Veuillez saisir un nombre entier négatif valide"
+
+msgid "Please provide a valid date"
+msgstr "Veuillez spécifier une date valide"
 
 msgid "Please provide a valid date and time"
 msgstr "Veuillez saisir une date et heure valide"
@@ -558,11 +558,11 @@ msgstr "Recommencer"
 msgid "Registering Organisation Unit"
 msgstr ""
 
-msgid "Selected Program"
-msgstr ""
-
 msgid "Select"
 msgstr "Sélectionner"
+
+msgid "Selected Program"
+msgstr ""
 
 msgid "Select program"
 msgstr "Sélectionner le programme"
@@ -645,6 +645,13 @@ msgstr "Supprimer polygone"
 msgid "Set area"
 msgstr "Définir l'aire"
 
+msgid ""
+"You opened another version of the Capture App in the same domain. Currently,"
+" the Capture App only supports running one version concurrently (in the same"
+" domain). Please refresh this page if you would like to use this version "
+"again, but be aware that this will close other versions."
+msgstr ""
+
 msgid "Choose one or more dates..."
 msgstr "Choisir une ou plusieurs dates..."
 
@@ -653,6 +660,11 @@ msgstr "Choisir une date..."
 
 msgid "Today"
 msgstr "Aujourd'hui"
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
+msgstr ""
 
 msgid "Compatibility mode"
 msgstr "Mode compatibilité"
