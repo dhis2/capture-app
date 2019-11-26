@@ -5,7 +5,6 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 
 import D2SectionContainer from './D2Section.container';
-import D2Section from './D2Section.component';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import Section from '../../metaData/RenderFoundation/Section';
 import { withAsyncHandler } from './asyncHandlerHOC';
@@ -31,7 +30,7 @@ type Props = {
 
 class D2Form extends React.PureComponent<Props> {
     name: string;
-    sectionInstances: Map<string, D2Section>;
+    sectionInstances: Map<string, Object>;
 
     constructor(props: Props) {
         super(props);
@@ -44,7 +43,10 @@ class D2Form extends React.PureComponent<Props> {
         const isValid = Array.from(this.sectionInstances.entries())
             .map(entry => entry[1])
             .every((sectionInstance) => {
-                // $FlowFixMe
+                const isHidden = sectionInstance.props.isHidden;
+                if (isHidden) {
+                    return true;
+                }
                 const sectionFieldsInstance = sectionInstance.sectionFieldsInstance;
                 if (!sectionFieldsInstance) {
                     log.error(
@@ -84,7 +86,7 @@ class D2Form extends React.PureComponent<Props> {
         return false;
     }
 
-    setSectionInstance(instance: ?D2Section, id: string) {
+    setSectionInstance(instance: ?Object, id: string) {
         if (!instance) {
             if (this.sectionInstances.has(id)) {
                 this.sectionInstances.delete(id);
