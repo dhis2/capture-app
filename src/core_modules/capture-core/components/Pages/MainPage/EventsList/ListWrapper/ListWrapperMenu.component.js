@@ -6,10 +6,12 @@ import { MoreHoriz } from '@material-ui/icons';
 import Popper from '../../../../Popper/Popper.component';
 
 import DownloadDialog from './DownloadDialog.container';
+import SaveConfigDialog from './SaveConfigDialog.container';
 
 const dialogKeys = {
     COLUMN_SELECTOR: 'columnSelector',
     DOWNLOAD_TABLE: 'downloadTable',
+    SAVE_CONFIG: 'saveConfig',
 };
 
 type Props = {
@@ -17,13 +19,15 @@ type Props = {
 }
 
 type State = {
-    dialogOpen: { [key: $Values<typeof dialogKeys>]: ?boolean },
+    dialogOpen: ?$Values<typeof dialogKeys>,
 }
 
 class ListWrapperMenu extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
-        this.state = { dialogOpen: {} };
+        this.state = {
+            dialogOpen: undefined,
+        };
     }
     renderPopperAction = (togglePopper: Function) => (
         <IconButton onClick={togglePopper}>
@@ -33,11 +37,15 @@ class ListWrapperMenu extends React.Component<Props, State> {
 
     openDialog = (key: $Values<typeof dialogKeys>, togglePopper: Function) => {
         togglePopper();
-        this.setState({ dialogOpen: { ...this.state.dialogOpen, [key]: true } });
+        this.setState({
+            dialogOpen: key,
+        });
     }
 
     closeDialog = (key: $Values<typeof dialogKeys>) => {
-        this.setState({ dialogOpen: { ...this.state.dialogOpen, [key]: false } });
+        this.setState({
+            dialogOpen: undefined,
+        });
     }
 
     renderMenuItems = (togglePopper: Function) => (
@@ -47,9 +55,14 @@ class ListWrapperMenu extends React.Component<Props, State> {
             {i18n.t('Save filter as...')}
         </MenuItem>
         */
-        <MenuItem onClick={() => { this.openDialog(dialogKeys.DOWNLOAD_TABLE, togglePopper); }}>
-            {i18n.t('Download as...')}
-        </MenuItem>
+       <React.Fragment>
+            <MenuItem onClick={() => { this.openDialog(dialogKeys.DOWNLOAD_TABLE, togglePopper); }}>
+                {i18n.t('Download as...')}
+            </MenuItem>
+            <MenuItem onClick={() => { this.openDialog(dialogKeys.SAVE_CONFIG, togglePopper); }}>
+                {i18n.t('Save ')}
+            </MenuItem>
+        </React.Fragment>
     )
 
     renderPopperContent = (togglePopper: Function) => (
@@ -68,7 +81,12 @@ class ListWrapperMenu extends React.Component<Props, State> {
                     getPopperContent={this.renderPopperContent}
                 />
                 <DownloadDialog
-                    open={this.state.dialogOpen[dialogKeys.DOWNLOAD_TABLE]}
+                    open={this.state.dialogOpen === dialogKeys.DOWNLOAD_TABLE}
+                    onClose={() => { this.closeDialog(dialogKeys.DOWNLOAD_TABLE); }}
+                    listId={this.props.listId}
+                />
+                <SaveConfigDialog
+                    open={this.state.dialogOpen === dialogKeys.SAVE_CONFIG}
                     onClose={() => { this.closeDialog(dialogKeys.DOWNLOAD_TABLE); }}
                     listId={this.props.listId}
                 />
