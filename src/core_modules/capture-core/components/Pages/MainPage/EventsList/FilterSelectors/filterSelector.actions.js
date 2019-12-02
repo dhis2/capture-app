@@ -18,7 +18,7 @@ export const editContents = (listId: string, value: any, itemId: string) =>
     actionCreator(actionTypes.EDIT_CONTENTS)({ listId, value, itemId });
 
 export const setFilter = (listId: string, data: Object, itemId: string) =>
-    actionCreator(actionTypes.SET_FILTER)({ ...data, itemId, listId });
+    actionCreator(actionTypes.SET_FILTER)(data, { itemId, listId });
 
 export const clearFilter = (listId: string, itemId: string) =>
     actionCreator(actionTypes.CLEAR_FILTER)({ listId, itemId });

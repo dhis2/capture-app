@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2019-11-18T14:43:03.753Z\n"
-"PO-Revision-Date: 2019-11-18T14:43:03.753Z\n"
+"POT-Creation-Date: 2020-01-22T07:56:34.947Z\n"
+"PO-Revision-Date: 2020-01-22T07:56:34.947Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -194,12 +194,6 @@ msgstr ""
 msgid "To"
 msgstr ""
 
-msgid "after or equal to"
-msgstr ""
-
-msgid "before or equal to"
-msgstr ""
-
 msgid "Today"
 msgstr ""
 
@@ -353,6 +347,15 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
+msgid "{{fromDate}} to {{toDate}}"
+msgstr ""
+
+msgid "after or equal to {{date}}"
+msgstr ""
+
+msgid "before or equal to {{date}}"
+msgstr ""
+
 msgid "More filters"
 msgstr ""
 
@@ -375,6 +378,9 @@ msgid "Save filter as..."
 msgstr ""
 
 msgid "Download as..."
+msgstr ""
+
+msgid "Save "
 msgstr ""
 
 msgid "Rows per page"

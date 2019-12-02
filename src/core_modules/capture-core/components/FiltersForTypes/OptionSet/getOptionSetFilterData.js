@@ -3,6 +3,7 @@ import { dataElementTypes as elementTypes, OptionSet } from '../../../metaData';
 import { convertValue as convertToServerValue } from '../../../converters/clientToServer';
 import { convertValue as convertToClientValue } from '../../../converters/formToClient';
 
+/*
 const getMultiSelectRequestData = (values: Array<any>, type: $Values<typeof elementTypes>) => {
     const valueString = values
         .map((value) => {
@@ -37,3 +38,23 @@ export const getSingleSelectOptionSetFilterData =
         requestData: `eq:${value}`,
         appliedText: optionSet.getOptionText(value),
     });
+
+*/
+
+function getSelectOptionSetFilterData(
+    values: Array<any>,
+    type: $Values<typeof elementTypes>,
+): { optionSet: boolean, values: Array<any> } {
+    return {
+        optionSet: true,
+        values: values
+            .map(value => convertToClientValue(value, type)),
+    };
+}
+
+export const getMultiSelectOptionSetFilterData = getSelectOptionSetFilterData;
+
+export const getSingleSelectOptionSetFilterData = (
+    value: any,
+    type: $Values<typeof elementTypes>,
+) => getSelectOptionSetFilterData([value], type);

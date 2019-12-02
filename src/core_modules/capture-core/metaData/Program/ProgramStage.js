@@ -5,8 +5,13 @@
 import isFunction from 'd2-utilizr/src/isFunction';
 import RenderFoundation from '../RenderFoundation/RenderFoundation';
 import RelationshipType from '../RelationshipType/RelationshipType';
+import { elementTypes } from '../DataElement';
 
 export default class ProgramStage {
+    static mainPropTypes = {
+        eventDate: elementTypes.DATE,
+    };
+
     _id: string;
     _name: string;
     _stageForm: RenderFoundation;
