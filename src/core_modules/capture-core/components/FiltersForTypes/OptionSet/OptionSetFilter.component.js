@@ -32,17 +32,17 @@ type Props = {
 // $FlowSuppress
 class OptionSetFilter extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData() {
-        const { value, singleSelect, optionSet, type } = this.props;
+        const { value, singleSelect, type } = this.props;
 
         if (!value) {
             return null;
         }
 
         if (singleSelect) {
-            return getSingleSelectOptionSetFilterData(value, optionSet);
+            return getSingleSelectOptionSetFilterData(value, type);
         }
 
-        return getMultiSelectOptionSetFilterData(value, type, optionSet);
+        return getMultiSelectOptionSetFilterData(value, type);
     }
 
     onIsValid() { //eslint-disable-line

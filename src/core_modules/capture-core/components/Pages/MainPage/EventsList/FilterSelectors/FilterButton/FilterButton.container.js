@@ -1,17 +1,18 @@
 // @flow
 import { connect } from 'react-redux';
-import { batchActions } from 'redux-batched-actions'; 
+import { batchActions } from 'redux-batched-actions';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import FilterButton from './FilterButton.component';
 import { editContents, setFilter, clearFilter, revertFilter, batchActionTypes } from '../filterSelector.actions';
 import { workingListUpdating } from '../../eventsList.actions';
-import { makeFilterValueSelector } from './filterButton.selectors';
+import { makeCurrentFilterSelector, makeFilterValueSelector } from './filterButton.selectors';
 
 const mapStateToProps = () => {
-    const filterValueSelector = makeFilterValueSelector();
+    const getCurrentFilter = makeCurrentFilterSelector();
+    const getFilterValue = makeFilterValueSelector();
 
     return (state: ReduxState, props: Object) => ({
-        filterValue: filterValueSelector(state, props),
+        filterValue: getFilterValue(getCurrentFilter(state, props), props),
     });
 };
 
