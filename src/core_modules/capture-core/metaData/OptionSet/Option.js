@@ -52,4 +52,21 @@ export default class Option {
     get icon(): ?Icon {
         return this._icon;
     }
+
+    clone() {
+        return new Option((cloneObject) => {
+            Object
+                .getOwnPropertyNames(this)
+                .forEach((propName) => {
+                    // $FlowFixMe
+                    if (propName === '_icon' && this[propName]) {
+                        // $FlowFixMe
+                        cloneObject.icon = this.icon.clone();
+                    } else {
+                        // $FlowFixMe
+                        cloneObject[propName] = this[propName];
+                    }
+                });
+        });
+    }
 }
