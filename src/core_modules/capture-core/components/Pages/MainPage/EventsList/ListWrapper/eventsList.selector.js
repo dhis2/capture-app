@@ -86,12 +86,15 @@ const eventsValuesSelector = state => state.eventsValues;
 const sortOrderSelector = (state, props) => state.workingLists[props.listId].order;
 
 
-const createEventsContainer = (events, eventsValues, sortOrder): Array<EventContainer> =>
-    sortOrder
-        .map(eventId => ({
-            event: events[eventId],
-            eventValues: eventsValues[eventId],
-        }));
+const createEventsContainer = (events, eventsValues, sortOrder): Array<EventContainer> => {
+    debugger;
+    return sortOrder
+    .map(eventId => ({
+        event: events[eventId],
+        eventValues: eventsValues[eventId],
+    }));
+}
+    
 
 // $FlowFixMe
 export const makeCreateEventsContainer = () => createSelector(

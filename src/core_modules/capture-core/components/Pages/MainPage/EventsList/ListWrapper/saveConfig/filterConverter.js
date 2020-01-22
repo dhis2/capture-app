@@ -10,6 +10,10 @@ const convertNumeric = (value: string) => {
     };
 };
 
+const convertDate = (value: string) => {
+    
+};
+
 const converterForType = {
     [filterTypes.TEXT]: (value: string) => {
         const valueArray = value.split(':');

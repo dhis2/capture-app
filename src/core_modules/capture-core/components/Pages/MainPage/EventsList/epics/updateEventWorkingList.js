@@ -6,13 +6,14 @@ import {
     workingListUpdateDataRetrieved,
     workingListUpdateRetrievalFailed,
 } from '../eventsList.actions';
+import { buildQueryArgs } from './eventsQueryArgsBuilder';
 
 
 const errorMessages = {
     WORKING_LIST_UPDATE_ERROR: 'Working list could not be updated',
 };
 
-const getUnprocessedQueryArgsForUpdateWorkingList = (state: ReduxState, listId: string) => {
+const getSourceQueryArgsForUpdateWorkingList = (state: ReduxState, listId: string) => {
     const { programId, orgUnitId, categories } = state.workingListsContext[listId];
 
     const currentMeta = state.workingListsMeta[listId];
@@ -39,9 +40,9 @@ export const updateEventWorkingListAsync = (
     state: ReduxState,
 ): Promise<ReduxAction<any, any>> => {
     const listId = state.workingListConfigSelector.eventMainPage.currentListId;
-    const queryData = getUnprocessedQueryArgsForUpdateWorkingList(state, listId);
+    const sourceQueryData = getSourceQueryArgsForUpdateWorkingList(state, listId);
     const columnOrder = state.workingListsColumnsOrder[listId];
-    return getEventWorkingListDataAsync(queryData, columnOrder)
+    return getEventWorkingListDataAsync(buildQueryArgs(sourceQueryData, listId), columnOrder)
         .then(data =>
             workingListUpdateDataRetrieved(listId, data),
         )

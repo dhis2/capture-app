@@ -96,14 +96,14 @@ export const workingListsMetaDesc = createReducerDescription({
     [filterSelectorActionTypes.SET_FILTER]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
-        const listId = payload.listId;
+        const { listId, itemId } = action.meta;
         newState[listId] = {
             ...newState[listId],
             next: {
                 ...newState[listId].next,
                 filters: {
                     ...(newState[listId].next ? newState[listId].next.filters : null),
-                    [payload.itemId]: payload.requestData,
+                    [itemId]: payload,
                 },
             },
         };
