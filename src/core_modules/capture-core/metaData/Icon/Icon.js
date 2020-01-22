@@ -24,4 +24,15 @@ export default class Icon {
     get data(): string {
         return this._data;
     }
+
+    clone() {
+        return new Icon((cloneObject) => {
+            Object
+                .getOwnPropertyNames(this)
+                .forEach((propName) => {
+                    // $FlowFixMe
+                    cloneObject[propName] = this[propName];
+                });
+        });
+    }
 }
