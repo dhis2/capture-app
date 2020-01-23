@@ -37,7 +37,9 @@ class MainPage extends Component<Props> {
                                 <div
                                     className={classes.listContainer}
                                 >
-                                    <EventsListConnectivityWrapper />
+                                    <EventsListConnectivityWrapper
+                                        listId={'eventList'}
+                                    />
                                 </div>
                             </TrackerProgramHandler>
                         );
