@@ -33,6 +33,7 @@ const elementTypeCodes = [
     'COORDINATE',
     'POLYGON',
     'USERNAME',
+    'ASSIGNEE',
     unknownTypeCode,
 ];
 

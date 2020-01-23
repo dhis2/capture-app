@@ -45,6 +45,7 @@ type WorkingListConfig = {
 }
 
 type Props = {
+    listId: string,
     workingListConfigs: Array<WorkingListConfig>,
     defaultWorkingListConfig: WorkingListConfig,
     onSetWorkingListConfig: (configId: string, listId: string, data?: ?Object) => void,
@@ -58,20 +59,19 @@ type Props = {
     }
 };
 class WorkingListConfigSelector extends React.Component<Props> {
-    static listId = 'eventList';
-
     handleWorkingListConfigClick = (id, data) => {
-        const { configId } = this.props;
+        const { configId, listId } = this.props;
         if (id === configId) {
             this.handleSetDefaultWorkingListConfig();
         } else {
-            this.props.onSetWorkingListConfig(id, WorkingListConfigSelector.listId, data);
+            this.props.onSetWorkingListConfig(id, listId, data);
         }
     }
 
     handleSetDefaultWorkingListConfig = () => {
         const { id, name, ...data } = this.props.defaultWorkingListConfig;
-        this.props.onSetWorkingListConfig(id, WorkingListConfigSelector.listId, data);
+        const listId = this.props.listId;
+        this.props.onSetWorkingListConfig(id, listId, data);
     }
 
     renderWorkingListConfigs = () => {
@@ -115,7 +115,6 @@ class WorkingListConfigSelector extends React.Component<Props> {
             <div className={classes.container}>
                 {this.renderWorkingListConfigs()}
                 <EventListLoadWrapper
-                    listId={WorkingListConfigSelector.listId}
                     {...passOnProps}
                 />
             </div>

@@ -21,9 +21,10 @@ const makeMapStateToProps = () => {
             isUpdating: !!state.workingListsUI[listId].isUpdating,
             isUpdatingWithDialog: !!state.workingListsUI[listId].isUpdatingWithDialog,
             columns,
-            dataSource: createWorkingListData(eventsContainer),
+            dataSource: createWorkingListData(eventsContainer, columns),
             sortById,
             sortByDirection,
+            rowIdKey: 'eventId',
         };
     };
     return mapStateToProps;

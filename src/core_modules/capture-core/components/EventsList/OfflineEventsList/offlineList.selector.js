@@ -1,13 +1,17 @@
 // @flow
 import { createSelectorCreator, createSelector, defaultMemoize } from 'reselect';
-
-import { getStageFromProgramIdForEventProgram } from '../../../metaData';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
+import {
+    getStageFromProgramIdForEventProgram,
+    OptionSet,
+    Option,
+    DataElement,
+    dataElementTypes,
+} from '../../../metaData';
 import getStageFromEvent from '../../../metaData/helpers/getStageFromEvent';
-import { convertMainEventClientToList } from '../../../events/mainConverters';
 import { convertValue } from '../../../converters/clientToList';
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
-import mainPropertyNames from '../../../events/mainPropertyNames.const';
-import elementTypeKeys from '../../../metaData/DataElement/elementTypes';
 
 type EventContainer = {
     event: CaptureClientEvent,
@@ -18,6 +22,9 @@ type ColumnOrderFromState = {
     id: string,
     visible: boolean,
     isMainProperty?: ?boolean,
+    header?: ?string,
+    type?: ?$Values<typeof dataElementTypes>,
+    options?: ?Array<{text: string, value: string}>,
 };
 
 type ColumnsOrderFromState = Array<ColumnOrderFromState>;
@@ -26,6 +33,26 @@ type ColumnsOrderFromState = Array<ColumnOrderFromState>;
 const programIdSelector = (state, props) => state.workingListsContext[props.listId].programId;
 const columnsOrderStateSelector = (state, props) => state.workingListsColumnsOrder[props.listId];
 
+const createMainPropertyOptionSet = (column: ColumnOrderFromState) => {
+    const dataElement = new DataElement((o) => {
+        o.id = column.id;
+        // $FlowFixMe
+        o.type = column.type;
+    });
+
+    // $FlowFixMe
+    const options = column.options.map(option =>
+        new Option((o) => {
+            o.text = option.text;
+            o.value = option.value;
+        }),
+    );
+    const optionSet = new OptionSet(column.id, options, null, dataElement);
+    dataElement.optionSet = optionSet;
+    return optionSet;
+};
+
+// $FlowFixMe
 export const makeColumnsSelector = () => createSelector(
     programIdSelector,
     columnsOrderStateSelector,
@@ -41,21 +68,18 @@ export const makeColumnsSelector = () => createSelector(
         return columnsOrderFromState
             .map((column) => {
                 if (column.isMainProperty) {
-                    if (column.id === mainPropertyNames.EVENT_DATE) {
-                        return {
-                            ...column,
-                            header: stageForm.getLabel(mainPropertyNames.EVENT_DATE),
-                            type: elementTypeKeys.DATE,
-                        };
-                    }
-                    // fallback
-                    return columnsOrderFromState;
+                    return {
+                        ...column,
+                        header: column.header || stageForm.getLabel(column.id),
+                        optionSet: column.options && createMainPropertyOptionSet(column),
+                    };
                 }
                 const element = stageForm.getElement(column.id);
                 return {
                     ...column,
                     header: element.formName,
                     type: element.type,
+                    optionSet: element.optionSet,
                 };
             });
     },
@@ -74,6 +98,7 @@ const createEventsContainer = (events, eventsValues, sortOrder): Array<EventCont
             eventValues: eventsValues[eventId],
         }));
 
+// $FlowFixMe
 export const makeCreateEventsContainer = () => createSelector(
     eventsMainDataSelector,
     eventsValuesSelector,
@@ -81,16 +106,19 @@ export const makeCreateEventsContainer = () => createSelector(
     createEventsContainer,
 );
 
-const onIsEventsEqual = (prevEventsContainer: Array<EventContainer>, currentEventsContainer: Array<EventContainer>) =>
-    currentEventsContainer.every(
+const onIsEventsEqual = (
+    { eventContainers: prevEventContainers }: { eventContainers: Array<EventContainer> },
+    { eventContainers: currentEventContainers }: { eventContainers: Array<EventContainer> },
+) =>
+    currentEventContainers.every(
         (eventContainer, index) =>
-            eventContainer.event === (prevEventsContainer[index] && prevEventsContainer[index].event) &&
-            eventContainer.eventValues === (prevEventsContainer[index] && prevEventsContainer[index].eventValues),
+            eventContainer.event === (prevEventContainers[index] && prevEventContainers[index].event) &&
+            eventContainer.eventValues === (prevEventContainers[index] && prevEventContainers[index].eventValues),
     ) &&
-    prevEventsContainer.every(
+    prevEventContainers.every(
         (eventContainer, index) =>
-            eventContainer.event === (currentEventsContainer[index] && currentEventsContainer[index].event) &&
-            eventContainer.eventValues === (currentEventsContainer[index] && currentEventsContainer[index].eventValues),
+            eventContainer.event === (currentEventContainers[index] && currentEventContainers[index].event) &&
+            eventContainer.eventValues === (currentEventContainers[index] && currentEventContainers[index].eventValues),
     );
 
 const createDeepEqualSelector = createSelectorCreator(
@@ -98,9 +126,10 @@ const createDeepEqualSelector = createSelectorCreator(
     onIsEventsEqual,
 );
 
-const eventsContainerSelector = eventContainers => eventContainers;
-
-const buildWorkingListData = (eventsContainer: Array<EventContainer>) => {
+const buildWorkingListData = (
+    eventsContainer: Array<EventContainer>,
+    columns,
+) => {
     if (eventsContainer.length === 0) {
         return [];
     }
@@ -113,16 +142,41 @@ const buildWorkingListData = (eventsContainer: Array<EventContainer>) => {
     return eventsContainer
         .map((eventContainer) => {
             const convertedValues = stage.stageForm.convertValues(eventContainer.eventValues, convertValue);
-            const convertedMainEvent = convertMainEventClientToList(eventContainer.event);
+            const convertedMainEvent = columns
+                .filter(column => column.isMainProperty)
+                .reduce((acc, mainColumn) => {
+                    const sourceValue = eventContainer.event[mainColumn.id];
+                    if (sourceValue) {
+                        if (mainColumn.options) {
+                            // TODO: Need is equal comparer for types
+                            const option = mainColumn.options.find(o => o.value === sourceValue);
+                            if (!option) {
+                                log.error(
+                                    errorCreator(
+                                        'Missing value in options for main values')(
+                                        { sourceValue, mainColumn }),
+                                );
+                            } else {
+                                acc[mainColumn.id] = option.text;
+                            }
+                        } else {
+                            acc[mainColumn.id] = convertValue(sourceValue, mainColumn.type);
+                        }
+                    }
+                    return acc;
+                }, {});
+
             return {
                 ...convertedMainEvent,
                 ...convertedValues,
+                eventId: eventContainer.event.eventId,
             };
         });
 };
 
-
+// $FlowFixMe
 export const makeCreateWorkingListData = () => createDeepEqualSelector(
-    eventsContainerSelector,
-    buildWorkingListData,
+    (eventContainers, columns) => ({ eventContainers, columns }),
+    ({ eventContainers, columns }) =>
+        buildWorkingListData(eventContainers, columns),
 );

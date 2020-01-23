@@ -7,6 +7,7 @@ import withEventsListHeader from '../EventsList/Header/withHeader';
 
 type Props = {
     isOnline: boolean,
+    listId: string,
 };
 
 const OnlineEventsListWithHeader = withEventsListHeader()(withListHeaderWrapper()(WorkingListConfigSelector));
