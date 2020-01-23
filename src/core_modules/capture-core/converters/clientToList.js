@@ -76,6 +76,7 @@ const valueConvertersForType = {
     [elementTypes.FILE_RESOURCE]: convertResourceForDisplay,
     [elementTypes.IMAGE]: convertResourceForDisplay,
     [elementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.name,
+    [elementTypes.ASSIGNEE]: (rawValue: Object) => `${rawValue.name} (${rawValue.username})`,
 };
 
 export function convertValue(value: any, type: $Values<typeof elementTypes>, dataElement?: ?DataElement) {

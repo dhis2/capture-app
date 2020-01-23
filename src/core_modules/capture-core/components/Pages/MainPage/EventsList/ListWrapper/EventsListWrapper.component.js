@@ -62,6 +62,7 @@ type Props = {
     filterButtons: React.Node,
     isUpdatingWithDialog?: ?boolean,
     onSaveColumnOrder: Function,
+    rowIdKey: string,
 };
 
 class EventListWrapper extends React.Component<Props> {
@@ -117,7 +118,6 @@ class EventListWrapper extends React.Component<Props> {
         } = this.props;
         return (
             <EventList
-                rowIdKey={'eventId'}
                 {...passOnProps}
             />
         );

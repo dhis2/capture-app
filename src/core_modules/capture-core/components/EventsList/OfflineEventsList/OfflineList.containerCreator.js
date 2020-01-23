@@ -20,7 +20,7 @@ const makeMapStateToProps = () => {
         return {
             columns,
             rowIdKey,
-            dataSource: createWorkingListData(eventsContainer),
+            dataSource: createWorkingListData(eventsContainer, columns),
             sortById,
             sortByDirection,
         };
