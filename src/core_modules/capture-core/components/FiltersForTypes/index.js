@@ -1,14 +1,8 @@
 // @flow
-
-export { default as getBooleanFilterData } from './Boolean/getBooleanFilterData';
-export {
-    default as getDateFilterData,
-} from './Date/getDateFilterData';
-export { default as getNumericFilterData } from './Numeric/getNumericFilterData';
-export {
-    getMultiSelectOptionSetFilterData,
-    getSingleSelectOptionSetFilterData,
-} from './OptionSet/getOptionSetFilterData';
-export { default as getTextFilterData } from './Text/getTextFilterData';
-export { default as getTrueOnlyFilterData } from './TrueOnly/getTrueOnlyFilterData';
-export { AssigneeFilter, getAssigneeFilterData, modeKeys as assigneeFilterModeKeys } from './Assignee';
+export { TextFilter } from './Text';
+export { NumericFilter } from './Numeric';
+export { TrueOnlyFilter } from './TrueOnly';
+export { BooleanFilter } from './Boolean';
+export { DateFilter } from './Date';
+export { OptionSetFilter } from './OptionSet';
+export { AssigneeFilter, modeKeys as assigneeFilterModeKeys } from './Assignee';

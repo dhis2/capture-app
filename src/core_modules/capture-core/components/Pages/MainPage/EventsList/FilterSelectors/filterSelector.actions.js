@@ -5,7 +5,6 @@ export const actionTypes = {
     EDIT_CONTENTS: 'EditFilterSelectorContentsForWorkingList',
     SET_FILTER: 'SetWorkingListFilter',
     CLEAR_FILTER: 'ClearWorkingListFilter',
-    REVERT_FILTER: 'RevertWorkingListFilter',
     REST_MENU_ITEM_SELECTED: 'RestMenuItemSelected',
     UPDATE_INCLUDED_FILTERS_AFTER_COLUMN_SORTING: 'UpdateIncludedFiltersAfterColumnSortingForWorkingList',
 };
@@ -22,9 +21,6 @@ export const setFilter = (listId: string, data: Object, itemId: string) =>
 
 export const clearFilter = (listId: string, itemId: string) =>
     actionCreator(actionTypes.CLEAR_FILTER)({ listId, itemId });
-
-export const revertFilter = (listId: string) =>
-    actionCreator(actionTypes.REVERT_FILTER)({ listId });
 
 export const restMenuItemSelected = (id: string, listId: string) =>
     actionCreator(actionTypes.REST_MENU_ITEM_SELECTED)({ id, listId });

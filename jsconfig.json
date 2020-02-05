@@ -1,6 +1,14 @@
 {
     "exclude": [
         "node_modules",
-        "**/node_modules/*"
+        "**/node_modules/*",
+        "build",
+        "buildzip",
+        "coverage",
+        "docs",
+        "flow",
+        "flow-typed",
+        "i18n",
+        "public"
     ]
 }

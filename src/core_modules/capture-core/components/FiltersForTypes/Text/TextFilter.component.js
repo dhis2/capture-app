@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import Input from './Input.component';
-import getTextFilterData from './getTextFilterData';
+import { getTextFilterData } from './textFilterDataGetter';
 import type { UpdatableFilterContent } from '../filters.types';
 
 type Value = ?string;

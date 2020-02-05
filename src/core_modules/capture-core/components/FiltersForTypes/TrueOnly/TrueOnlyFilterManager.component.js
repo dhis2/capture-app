@@ -1,0 +1,47 @@
+// @flow
+import * as React from 'react';
+import TrueOnlyFilter from './TrueOnlyFilter.component';
+import type { TrueOnlyFilterData } from '../filters.types';
+
+type Props = {
+    filter: ?TrueOnlyFilterData,
+    filterTypeRef: ?Function,
+};
+
+type State = {
+    value: ?Array<string>,
+};
+
+class TrueOnlyFilterManager extends React.Component<Props, State> {
+    static calculateDefaultState(filter: ?TrueOnlyFilterData) {
+        return {
+            value: filter && filter.value ? ['true'] : undefined,
+        };
+    }
+
+    constructor(props: Props) {
+        super(props);
+        this.state = TrueOnlyFilterManager.calculateDefaultState(this.props.filter);
+    }
+
+    handleCommitValue = (value: ?Array<string>) => {
+        this.setState({
+            value,
+        });
+    }
+
+    render() {
+        const { filter, filterTypeRef, ...passOnProps } = this.props;
+
+        return (
+            <TrueOnlyFilter
+                value={this.state.value}
+                innerRef={filterTypeRef}
+                onCommitValue={this.handleCommitValue}
+                {...passOnProps}
+            />
+        );
+    }
+}
+
+export default TrueOnlyFilterManager;

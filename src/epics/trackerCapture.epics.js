@@ -37,18 +37,19 @@ import {
 import {
     openNewEventPageLocationChangeEpic,
 } from 'capture-core/components/Pages/NewEvent/epics/newEvent.epics';
+
 import {
-    initEventWorkingListEpic,
-    // retrieveWorkingListOnMainSelectionsCompletedEpic,
-    getWorkingListOnCancelSaveEpic,
-    getWorkingListOnSaveEpic,
-    updateWorkingListEpic,
-    getEventListOnReconnectEpic,
+    initEventListEpic,
+    updateEventListEpic,
+    retrieveTemplatesEpic,
     requestDeleteEventEpic,
-} from 'capture-core/components/Pages/MainPage/EventsList/epics/eventsList.epics';
+} from 'capture-core/components/Pages/MainPage/WorkingLists';
+/*
 import {
     retrieveWorkingListConfigsFromServer,
 } from 'capture-core/components/Pages/MainPage/EventsList/epics/workingListConfig.epics';
+*/
+
 import {
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,
@@ -98,10 +99,6 @@ import {
 import {
     goingOnlineEpic,
 } from 'capture-core/components/Connectivity/connectivity.epics';
-import {
-    updateEventListAfterSaveOrUpdateEventEpic,
-    updateEventListAfterUpdateEventEpic,
-} from 'capture-core/components/Pages/MainPage/mainPage.epics';
 import {
     networkMonitorStatusEpic,
 } from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.epics';
@@ -204,13 +201,10 @@ export default combineEpics(
     loadCoreFailedEpic,
     mainSelectionsCompletedEpic,
     orgUnitDataRetrivedEpic,
-    retrieveWorkingListConfigsFromServer,
-    initEventWorkingListEpic,
-    // retrieveWorkingListOnMainSelectionsCompletedEpic,
-    getWorkingListOnCancelSaveEpic,
-    getWorkingListOnSaveEpic,
-    updateWorkingListEpic,
-    getEventListOnReconnectEpic,
+    initEventListEpic,
+    updateEventListEpic,
+    retrieveTemplatesEpic,
+    requestDeleteEventEpic,
     mainSelectionsFromUrlGetOrgUnitDataEpic,
     mainSelectionsFromUrlEmptyOrgUnitEpic,
     mainSelectionsFromUrlValidationEpic,
@@ -244,7 +238,6 @@ export default combineEpics(
     getEventOpeningFromEventListEpic,
     networkMonitorStatusEpic,
     goingOnlineEpic,
-    updateEventListAfterSaveOrUpdateEventEpic,
     setOrgUnit,
     setProgram,
     goBackToListContext,
@@ -255,7 +248,6 @@ export default combineEpics(
     includeFiltersWithValueAfterColumnSortingEpic,
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,
-    requestDeleteEventEpic,
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
     openRelationshipTeiSearchEpic,
@@ -301,7 +293,6 @@ export default combineEpics(
     loadEditEventDataEntryEpic,
     saveEditedEventEpic,
     saveEditedEventFailedEpic,
-    updateEventListAfterUpdateEventEpic,
     openNewRelationshipRegisterTeiEpic,
     openNewRelationshipRegisterTeiDataEntryEpic,
     loadSearchGroupDuplicatesForReviewEpic,

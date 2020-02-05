@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-import Min from './Min.component';
-import Max from './Max.component';
 import {
     isValidNumber,
     isValidInteger,
@@ -12,9 +10,11 @@ import {
     isValidNegativeInteger,
     isValidZeroOrPositiveInteger,
 } from 'capture-core-utils/validators/form';
-import elementTypes from '../../../metaData/DataElement/elementTypes';
+import Min from './Min.component';
+import Max from './Max.component';
+import { dataElementTypes as elementTypes } from '../../../metaData';
 import D2TextField from '../../FormFields/Generic/D2TextField.component';
-import getNumericFilterData from './getNumericFilterData';
+import { getNumericFilterData } from './numericFilterDataGetter';
 import type { UpdatableFilterContent } from '../filters.types';
 
 const getStyles = (theme: Theme) => ({

@@ -1,6 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { batchActions } from 'redux-batched-actions';
+import { errorCreator } from 'capture-core-utils';
 import { rulesExecutedPostUpdateField } from '../../../../DataEntry/actions/dataEntry.actions';
 import {
     actionTypes as editEventSelectorActionTypes,
@@ -36,8 +37,10 @@ import {
 } from '../../../../../rulesEngineActionsCreator/inputHelpers';
 import getProgramAndStageFromProgramId from
     '../../../../../metaData/helpers/EventProgram/getProgramAndStageFromProgramId';
-import { errorCreator } from 'capture-core-utils';
-import { getDefaultMainConfig as getDefaultMainColumnConfig, getMetaDataConfig as getColumnMetaDataConfig } from '../../../MainPage/EventsList/defaultColumnConfiguration';
+import {
+    getDefaultMainConfig as getDefaultMainColumnConfig,
+    getMetaDataConfig as getColumnMetaDataConfig,
+} from './defaultColumnConfiguration';
 import {
     resetList,
 } from '../../../../List/list.actions';

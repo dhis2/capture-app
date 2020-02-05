@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 import D2TrueFalse from '../../FormFields/Generic/D2TrueFalse.component';
 import { orientations } from '../../FormFields/Options/MultiSelectBoxes/multiSelectBoxes.const';
-import getBooleanFilterData from './getBooleanFilterData';
+import { getBooleanFilterData } from './booleanFilterDataGetter';
 import type { UpdatableFilterContent } from '../filters.types';
 
 const getStyles = (theme: Theme) => ({

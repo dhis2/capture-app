@@ -8,18 +8,17 @@ import { orientations } from '../../FormFields/Options/SingleSelectBoxes/singleS
 import OptionSet from '../../../metaData/OptionSet/OptionSet';
 import Option from '../../../metaData/OptionSet/Option';
 
-import moment from 'capture-core-utils/moment/momentResolver';
 import From from './From.component';
 import To from './To.component';
 import {
     isValidDate,
 } from '../../../utils/validators/form';
-import { convertValue as convertToClientValue } from '../../../converters/formToClient';
-import elementTypes from '../../../metaData/DataElement/elementTypes';
+import { parseDate } from '../../../utils/converters/date';
+import { dataElementTypes as elementTypes } from '../../../metaData';
 import type { UpdatableFilterContent } from '../filters.types';
 import './calendarFilterStyles.css';
 import { mainOptionKeys, mainOptionTranslatedTexts } from './mainOptions';
-import getDateFilterData from './getDateFilterData';
+import { getDateFilterData } from './dateFilterDataGetter';
 
 const getStyles = (theme: Theme) => ({
     fromToContainer: {
@@ -45,7 +44,7 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-type Value = ?{
+export type Value = ?{
     from?: ?string,
     to?: ?string,
     main?: ?string,
@@ -117,11 +116,6 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
         }),
     ]);
 
-    static convertDateFilterValueToClientValue(formValue: string): string {
-        // $FlowSuppress
-        return convertToClientValue(formValue, elementTypes.DATE);
-    }
-
     static validateField(value: ?string, type: $Values<typeof elementTypes>) {
         if (!value) {
             return {
@@ -139,32 +133,38 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
         };
     }
 
+    // eslint-disable-next-line complexity
     static isFilterValid(
         mainValue?: ?string,
         fromValue?: ?string,
         toValue?: ?string,
-        type: $Values<typeof elementTypes>,
     ) {
-        if (mainValue === mainOptionKeys.CUSTOM_RANGE && !fromValue && !toValue) {
+        if (mainValue !== mainOptionKeys.CUSTOM_RANGE) {
+            return true;
+        }
+
+        if (!fromValue && !toValue) {
             return false;
         }
 
-        if (!(DateFilter.validateField(fromValue, type).isValid &&
-            DateFilter.validateField(fromValue, type).isValid)) {
+        const parseResultFrom = fromValue ? parseDate(fromValue) : { isValid: true, moment: null };
+        const parseResultTo = toValue ? parseDate(toValue) : { isValid: true, moment: null };
+
+        if (!(parseResultFrom.isValid && parseResultTo.isValid)) {
             return false;
         }
 
-        return !(fromValue && toValue && this.isFromAfterTo(fromValue, toValue));
+        return !(
+            parseResultFrom.momentDate &&
+            parseResultTo.momentDate &&
+            parseResultFrom.momentDate.isAfter(parseResultTo.momentDate)
+        );
     }
 
     static isFromAfterTo(valueFrom: string, valueTo: string) {
-        const valueFromClient = DateFilter.convertDateFilterValueToClientValue(valueFrom);
-        const valueToClient = DateFilter.convertDateFilterValueToClientValue(valueTo);
-
-        // $FlowSuppress
-        const momentFrom = moment(valueFromClient);
-        // $FlowSuppress
-        const momentTo = moment(valueToClient);
+        const momentFrom = parseDate(valueFrom).momentDate;
+        const momentTo = parseDate(valueTo).momentDate;
+        // $FlowSuppress: Prechecked
         return momentFrom.isAfter(momentTo);
     }
 
@@ -186,7 +186,7 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
     onIsValid() {
         this.setState({ submitAttempted: true });
         const values = this.props.value;
-        return !values || DateFilter.isFilterValid(values.main, values.from, values.to, this.props.type);
+        return !values || DateFilter.isFilterValid(values.main, values.from, values.to);
     }
 
     getUpdatedValue(valuePart: {[key: string]: string}) {
@@ -220,7 +220,7 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
         const values = this.getUpdatedValue(value);
         this.setState({ submitAttempted: true });
 
-        if (values && !DateFilter.isFilterValid(values.main, values.from, values.to, this.props.type)) {
+        if (values && !DateFilter.isFilterValid(values.main, values.from, values.to)) {
             this.props.onCommitValue(values);
         } else {
             this.props.onUpdate(values || null);
@@ -240,6 +240,7 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
         this.toD2DateTextFieldInstance = instance;
     }
 
+    // eslint-disable-next-line complexity
     getErrors() {
         const values = this.props.value;
         const submitAttempted = this.state.submitAttempted;

@@ -4,9 +4,6 @@ import { actionCreator } from 'capture-core/actions/actions.utils';
 export const actionTypes = {
     UPDATE_MAIN_SELECTIONS: 'UpdateMainSelections',
     MAIN_SELECTIONS_COMPLETED: 'MainSelectionsCompleted',
-    WORKING_LIST_DATA_RETRIEVED: 'WorkingListDataRetrieved',
-    WORKING_LIST_DATA_RETRIEVAL_FAILED: 'WorkingListDataRetrievalFailed',
-    WORKING_LIST_DATA_RETRIEVAL_CANCELED: 'WorkingListDataRetrievalCanceled',
     ORG_UNIT_DATA_RETRIVED: 'OrgUnitDataRetrived',
     UPDATE_MAIN_SELECTIONS_FROM_URL: 'UpdateMainSelectionsFromUrl',
     SET_ORG_UNIT_BASED_ON_URL: 'SetOrgUnitBasedOnUrl',
@@ -22,15 +19,6 @@ export const updateMainSelections =
 
 export const mainSelectionCompleted =
     () => actionCreator(actionTypes.MAIN_SELECTIONS_COMPLETED)();
-
-export const workingListInitialDataRetrieved =
-    (listId: string, data: Object) => actionCreator(actionTypes.WORKING_LIST_DATA_RETRIEVED)({ ...data, listId });
-
-export const workingListInitialRetrievalFailed =
-    (listId: string, errorMessage: string) => actionCreator(actionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED)({ listId, errorMessage });
-
-export const workingListDataRetrievalCanceled =
-    () => actionCreator(actionTypes.WORKING_LIST_DATA_RETRIEVAL_CANCELED)();
 
 export const orgUnitDataRetrived =
     (orgUnit: Object) => actionCreator(actionTypes.ORG_UNIT_DATA_RETRIVED)(orgUnit);

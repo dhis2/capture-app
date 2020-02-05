@@ -1,15 +1,11 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import elementTypes from '../../../metaData/DataElement/elementTypes';
 import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
 import { orientations } from '../../FormFields/Options/MultiSelectBoxes/multiSelectBoxes.const';
-import withConvertedOptionSet from '../../FormFields/Options/withConvertedOptionSet';
 import OptionSet from '../../../metaData/OptionSet/OptionSet';
-import { getSingleSelectOptionSetFilterData, getMultiSelectOptionSetFilterData } from './getOptionSetFilterData';
+import { getSingleSelectOptionSetFilterData, getMultiSelectOptionSetFilterData } from './optionSetFilterDataGetter';
 import type { UpdatableFilterContent } from '../filters.types';
-
-const SelectBoxesWithConvertedOptionSet = withConvertedOptionSet()(SelectBoxes);
 
 const getStyles = (theme: Theme) => ({
     selectBoxesContainer: {
@@ -21,28 +17,28 @@ const getStyles = (theme: Theme) => ({
 
 
 type Props = {
-    type: $Values<typeof elementTypes>,
     optionSet: OptionSet,
     value: any,
     onCommitValue: (value: any) => void,
     classes: {
         selectBoxesContainer: string,
     },
+    singleSelect?: ?boolean,
 };
 // $FlowSuppress
 class OptionSetFilter extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData() {
-        const { value, singleSelect, type } = this.props;
+        const { value, singleSelect } = this.props;
 
         if (!value) {
             return null;
         }
 
         if (singleSelect) {
-            return getSingleSelectOptionSetFilterData(value, type);
+            return getSingleSelectOptionSetFilterData(value);
         }
 
-        return getMultiSelectOptionSetFilterData(value, type);
+        return getMultiSelectOptionSetFilterData(value);
     }
 
     onIsValid() { //eslint-disable-line
@@ -56,7 +52,7 @@ class OptionSetFilter extends Component<Props> implements UpdatableFilterContent
             <div
                 className={classes.selectBoxesContainer}
             >
-                <SelectBoxesWithConvertedOptionSet
+                <SelectBoxes
                     optionSet={optionSet}
                     value={value}
                     onBlur={onCommitValue}

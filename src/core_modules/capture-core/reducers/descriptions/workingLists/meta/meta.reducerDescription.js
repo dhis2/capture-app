@@ -3,7 +3,6 @@ import { createReducerDescription } from '../../../../trackerRedux/trackerReduce
 import {
     actionTypes as eventsListActionTypes,
 } from '../../../../components/Pages/MainPage/EventsList/eventsList.actions';
-import { actionTypes as mainSelectionsActionTypes } from '../../../../components/Pages/MainPage/mainSelections.actions';
 import {
     actionTypes as paginationActionTypes,
 } from '../../../../components/Pages/MainPage/EventsList/Pagination/pagination.actions';
@@ -13,23 +12,41 @@ import {
 import {
     actionTypes as listActionTypes,
 } from '../../../../components/List/list.actions';
+import { actionTypes as workingListsActionTypes } from '../../../../components/Pages/MainPage/WorkingLists';
 
 export const workingListsMetaDesc = createReducerDescription({
-    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
+    [workingListsActionTypes.DATA_PRE_CLEAN]: (state, action) => {
+        const { listId } = action.payload;
+        return {
+            ...state,
+            [listId]: undefined,
+        };
+    },
+    [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
-        const { listId, queryData, pagingData } = action.payload;
+        const { listId, config, pagingData } = action.payload;
+        const {
+            filters,
+            rowsPerPage,
+            currentPage,
+            sortById,
+            sortByDirection,
+        } = config;
 
         const listState = {
-            ...queryData,
+            filters,
+            rowsPerPage,
+            currentPage,
+            sortById,
+            sortByDirection,
             ...pagingData,
             next: {},
         };
 
-        listState.hasOwnProperty('page') && delete listState.page;
         newState[listId] = listState;
         return newState;
     },
-    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state, action) => {
+    [workingListsActionTypes.EVENT_LIST_UPDATE_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const { listId, pagingData } = action.payload;
         const next = newState[listId].next;
@@ -45,7 +62,7 @@ export const workingListsMetaDesc = createReducerDescription({
         };
         return newState;
     },
-    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVAL_FAILED]: (state, action) => {
+    [workingListsActionTypes.EVENT_LIST_UPDATE_ERROR]: (state, action) => {
         const newState = { ...state };
         const listId = action.payload.listId;
         newState[listId] = {
