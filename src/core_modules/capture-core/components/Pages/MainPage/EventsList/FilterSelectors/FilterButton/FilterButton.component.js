@@ -84,8 +84,6 @@ class FilterButton extends Component<Props, State> {
 
     handleCloseFilterSelector = () => {
         this.closeFilterSelector();
-        const { onRevertFilter, listId } = this.props;
-        onRevertFilter(listId);
     }
 
     handleEditFilterContents = (value: any) => {
@@ -114,7 +112,6 @@ class FilterButton extends Component<Props, State> {
                 optionSet={optionSet}
                 singleSelect={singleSelect}
                 id={id}
-                onCommitValue={this.handleEditFilterContents}
                 onUpdate={this.handleFilterUpdate}
                 onClose={this.handleCloseFilterSelector}
             />

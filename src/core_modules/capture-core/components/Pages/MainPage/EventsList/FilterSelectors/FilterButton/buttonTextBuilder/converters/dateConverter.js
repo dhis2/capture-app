@@ -1,8 +1,9 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
+import { pipe } from 'capture-core-utils';
 import { moment } from 'capture-core-utils/moment';
-import { convertClientToView } from '../../../../../../../../converters';
-import { dataElementTypes } from '../../../../../../../../metaData';
+import { convertMomentToDateFormatString } from '../../../../../../../../utils/converters/date';
+import type { DateFilterData, AbsoluteDateFilterData } from '../../../../eventList.types';
 
 const periods = {
     TODAY: 'TODAY',
@@ -25,7 +26,10 @@ const translatedPeriods = {
     [periods.LAST_3_MONTHS]: i18n.t('Last 3 months'),
 };
 
-const convertToViewValue = (clientValue: string) => convertClientToView(clientValue, dataElementTypes.DATE);
+const convertToViewValue = (filterValue: string) => pipe(
+    value => moment(value),
+    momentDate => convertMomentToDateFormatString(momentDate),
+)(filterValue);
 
 function translateAbsoluteDate(filter: AbsoluteDateFilterData) {
     let appliedText = '';
@@ -36,10 +40,10 @@ function translateAbsoluteDate(filter: AbsoluteDateFilterData) {
         const momentFrom = moment(fromValue);
         const momentTo = moment(toValue);
         if (momentFrom.isSame(momentTo)) {
-            appliedText = convertToViewValue(fromValue);
+            appliedText = convertMomentToDateFormatString(momentFrom);
         } else {
-            const appliedTextFrom = convertToViewValue(fromValue);
-            const appliedTextTo = convertToViewValue(toValue);
+            const appliedTextFrom = convertMomentToDateFormatString(momentFrom);
+            const appliedTextTo = convertMomentToDateFormatString(momentTo);
             appliedText = i18n.t('{{fromDate}} to {{toDate}}', { fromDate: appliedTextFrom, toDate: appliedTextTo });
         }
     } else if (fromValue) {

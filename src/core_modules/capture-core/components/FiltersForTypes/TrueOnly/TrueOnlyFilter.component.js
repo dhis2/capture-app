@@ -2,10 +2,9 @@
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core/styles';
-import elementTypes from '../../../metaData/DataElement/elementTypes';
 import D2TrueOnly from '../../FormFields/Generic/D2TrueOnly.component';
 import { orientations } from '../../FormFields/Options/MultiSelectBoxes/multiSelectBoxes.const';
-import getTrueOnlyFilterData from './getTrueOnlyFilterData';
+import { getTrueOnlyFilterData } from './trueOnlyFilterDataGetter';
 import type { UpdatableFilterContent } from '../filters.types';
 
 const getStyles = (theme: Theme) => ({
@@ -17,7 +16,6 @@ const getStyles = (theme: Theme) => ({
 type Value = ?Array<any>;
 
 type Props = {
-    type: $Values<typeof elementTypes>,
     value: Value,
     onCommitValue: (value: Value) => void,
     classes: {
@@ -33,7 +31,7 @@ class TrueOnlyFilter extends Component<Props> implements UpdatableFilterContent<
             return null;
         }
 
-        return getTrueOnlyFilterData(value, this.props.type);
+        return getTrueOnlyFilterData();
     }
 
     onIsValid() { //eslint-disable-line

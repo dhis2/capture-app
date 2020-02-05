@@ -1,7 +1,7 @@
 // @flow
 const unknownTypeCode = 'UNKNOWN';
 
-const elementTypeCodes = [
+const elementTypeCodes: Array<string> = [
     'TEXT',
     'LONG_TEXT',
     'NUMBER',
@@ -37,10 +37,11 @@ const elementTypeCodes = [
     unknownTypeCode,
 ];
 
-const elementTypeKeys = elementTypeCodes.reduce((accKeys, code) => {
-    accKeys[code] = code;
-    return accKeys;
-}, {});
+const elementTypeKeys =
+    elementTypeCodes.reduce((accKeys, code) => {
+        accKeys[code] = code;
+        return accKeys;
+    }, {});
 
 export default elementTypeKeys;
 

@@ -9,7 +9,7 @@ export const includeFiltersWithValueAfterColumnSortingEpic = (action$: InputObse
     action$.ofType(columnSelectorActionTypes.UPDATE_WORKINGLIST_ORDER)
         .map(() => {
             const state = store.getState();
-            const listId = state.workingListConfigSelector.eventMainPage.currentListId;
+            const listId = state.workingListsTemplates.eventList.currentListId;
             const appliedFilters = (state.workingListsAppliedFilters && state.workingListsAppliedFilters[listId]) || {};
             const nextAppliedFilters = (
                 state.workingListsAppliedFilters &&

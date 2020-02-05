@@ -189,17 +189,3 @@ declare type OfflineEffect = {
     data: any,
     method: $Values<typeof methods>,
 };
-
-// Event list
-declare type AbsoluteDateFilterData = {
-    type: 'ABSOLUTE',
-    ge?: string,
-    le?: string,
-};
-
-declare type RelativeDateFilterData = {
-    type: 'RELATIVE',
-    period: string,
-};
-
-declare type DateFilterData = AbsoluteDateFilterData | RelativeDateFilterData;
