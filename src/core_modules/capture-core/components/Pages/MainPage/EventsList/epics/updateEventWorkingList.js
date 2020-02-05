@@ -1,6 +1,6 @@
 // @flow
 import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
+import { errorCreator, pipe } from 'capture-core-utils';
 import { getEventWorkingListDataAsync } from './eventsRetriever';
 import {
     workingListUpdateDataRetrieved,
@@ -42,7 +42,23 @@ export const updateEventWorkingListAsync = (
     const listId = state.workingListConfigSelector.eventMainPage.currentListId;
     const sourceQueryData = getSourceQueryArgsForUpdateWorkingList(state, listId);
     const columnOrder = state.workingListsColumnsOrder[listId];
-    return getEventWorkingListDataAsync(buildQueryArgs(sourceQueryData, listId), columnOrder)
+    const mainColumnTypes = pipe(
+        columns => columns.filter(column => column.isMainProperty),
+        columOrderMainOnly => columOrderMainOnly.reduce((acc, column) => ({
+            ...acc,
+            [column.id]: column.type,
+        }), {}),
+    )(columnOrder);
+
+    return getEventWorkingListDataAsync(
+        buildQueryArgs(
+            sourceQueryData,
+            {
+                listId,
+                mainPropTypes: mainColumnTypes,
+                isInit: false,
+            }),
+        columnOrder)
         .then(data =>
             workingListUpdateDataRetrieved(listId, data),
         )

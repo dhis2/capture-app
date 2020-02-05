@@ -1,8 +1,16 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import { getEventProgramThrowIfNotFound, ProgramStage, dataElementTypes } from '../../../../../../metaData';
-import { convertDate } from './converters';
+import { getEventProgramThrowIfNotFound, dataElementTypes } from '../../../../../../metaData';
+import {
+    convertText,
+    convertDate,
+    convertAssignee,
+    convertOptionSet,
+    convertBoolean,
+    convertNumeric,
+    convertTrueOnly,
+} from './filterConverters';
 
 type QueryArgsSource = {
     programId: string,
@@ -11,19 +19,51 @@ type QueryArgsSource = {
     sortByDirection: string,
 };
 
-
 const mappersForTypes = {
+    [dataElementTypes.TEXT]: convertText,
+    [dataElementTypes.NUMBER]: convertNumeric,
+    [dataElementTypes.INTEGER]: convertNumeric,
+    [dataElementTypes.INTEGER_POSITIVE]: convertNumeric,
+    [dataElementTypes.INTEGER_NEGATIVE]: convertNumeric,
+    [dataElementTypes.INTEGER_ZERO_OR_POSITIVE]: convertNumeric,
     [dataElementTypes.DATE]: convertDate,
+    [dataElementTypes.ASSIGNEE]: convertAssignee,
+    [dataElementTypes.BOOLEAN]: convertBoolean,
+    [dataElementTypes.TRUE_ONLY]: convertTrueOnly,
 };
+
+function convertFilter(
+    sourceValue: Object,
+    type: string,
+    meta: {
+        key: string,
+        listId: string,
+        isInit: boolean,
+    },
+) {
+    if (sourceValue.usingOptionSet) {
+        return convertOptionSet(sourceValue, type);
+    }
+    return mappersForTypes[type] ?
+        mappersForTypes[type](sourceValue, meta.key, meta.listId, meta.isInit) :
+        sourceValue;
+}
 
 function convertFilters(
     filters: Object,
-    programId: string,
-    listId: string,
-    isInit: boolean,
+    {
+        mainPropTypes,
+        programId,
+        listId,
+        isInit,
+    }: {
+        mainPropTypes: Object,
+        programId: string,
+        listId: string,
+        isInit: boolean,
+    },
 ) {
     const elementsById = getEventProgramThrowIfNotFound(programId).stage.stageForm.getElementsById();
-    const mainPropTypes = ProgramStage.mainPropTypes;
 
     return Object
         .keys(filters)
@@ -34,9 +74,14 @@ function convertFilters(
                 log.error(errorCreator('Could not get type for key')({ key, listId, programId }));
             } else {
                 const sourceValue = filters[key];
-                const queryArgValue = mappersForTypes[type] ?
-                    mappersForTypes[type](sourceValue, key, listId, isInit) :
-                    sourceValue;
+                const queryArgValue = convertFilter(
+                    sourceValue,
+                    type,
+                    {
+                        key,
+                        listId,
+                        isInit,
+                    });
                 acc[key] = queryArgValue;
             }
             return acc;
@@ -46,13 +91,28 @@ function convertFilters(
 
 export function buildQueryArgs(
     queryArgsSource: QueryArgsSource,
-    listId: string,
-    isInit: boolean = false,
+    {
+        mainPropTypes,
+        listId,
+        isInit = false,
+    }: {
+        mainPropTypes: Object,
+        listId: string,
+        isInit: boolean,
+    },
 ) {
     const { programId, filters } = queryArgsSource;
     const queryArgs = {
         ...queryArgsSource,
-        filters: convertFilters(filters, programId, listId, isInit),
+        filters: convertFilters(
+            filters,
+            {
+                mainPropTypes,
+                programId,
+                listId,
+                isInit,
+            },
+        ),
     };
 
     return queryArgs;

@@ -36,8 +36,6 @@ import {
     workingListsUIDesc,
     workingListsColumnsOrderDesc,
     workingListsContextDesc,
-    workingListFiltersEditDesc,
-    workingListsAppliedFiltersDesc,
     workingListsUserSelectedFiltersDesc,
     workingListConfigSelectorDesc,
 } from 'capture-core/reducers/descriptions/workingLists';
@@ -110,8 +108,6 @@ export default [
     workingListsUIDesc,
     workingListsColumnsOrderDesc,
     workingListsContextDesc,
-    workingListFiltersEditDesc,
-    workingListsAppliedFiltersDesc,
     workingListsUserSelectedFiltersDesc,
     workingListConfigSelectorDesc,
     mainPageDesc,

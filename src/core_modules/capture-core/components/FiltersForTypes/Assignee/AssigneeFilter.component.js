@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { SelectionBoxes, orientations } from '../../FormFields/New';
 import { UserField } from '../../FormFields/UserField';
 import { getModeOptions, modeKeys } from './modeOptions';
-import { getAssigneeFilterData } from './assigneeFilterData';
+import { getAssigneeFilterData } from './assigneeFilterDataGetter';
 import type { UpdatableFilterContent } from '../filters.types';
 
 const getStyles = (theme: Theme) => ({
@@ -21,7 +21,7 @@ const getStyles = (theme: Theme) => ({
 
 type Value = ?{
     mode: string,
-    provided: string,
+    provided: ?Object,
 };
 
 type Props = {

@@ -1,6 +1,11 @@
 // @flow
 import { createSelector } from 'reselect';
 import { moment } from 'capture-core-utils/moment';
+import type {
+    DateFilterData,
+    RelativeDateFilterData,
+    AbsoluteDateFilterData,
+} from '../../../eventList.types';
 
 const periods = {
     TODAY: 'TODAY',

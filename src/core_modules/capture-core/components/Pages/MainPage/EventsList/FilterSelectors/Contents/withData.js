@@ -1,22 +1,27 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import isDefined from 'd2-utilizr/lib/isDefined';
 
+// eslint-disable-next-line complexity
 const mapStateToProps = (state: ReduxState, props: { listId: string, id: string }) => {
     const listId = props.listId;
+
+    const nextValue = state.workingListsMeta[listId] &&
+        state.workingListsMeta[listId].next &&
+        state.workingListsMeta[listId].next.filters &&
+        state.workingListsMeta[listId].next.filters[props.id];
+
+    const currentValue = state.workingListsMeta[listId] &&
+        state.workingListsMeta[listId].filters &&
+        state.workingListsMeta[listId].filters[props.id];
+
     return {
-        value: (
-            state.workingListFiltersEdit[listId] &&
-            state.workingListFiltersEdit[listId].next &&
-            isDefined(state.workingListFiltersEdit[listId].next[props.id])) ?
-            state.workingListFiltersEdit[listId].next[props.id] :
-            (state.workingListFiltersEdit[listId] && state.workingListFiltersEdit[listId][props.id]),
+        filter: (nextValue !== undefined ? nextValue : currentValue),
     };
 };
 
 const dispatchToProps = (dispatch: ReduxDispatch) => ({
-   
+
 });
 
 export default () => (InnerComponent: React.ComponentType<any>) => connect(mapStateToProps, dispatchToProps)(InnerComponent);

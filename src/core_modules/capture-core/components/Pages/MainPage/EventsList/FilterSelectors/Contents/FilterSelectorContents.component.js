@@ -5,18 +5,18 @@ import { filterTypesObject } from '../filterTypes';
 import { MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS } from '../filterSelector.const';
 import withButtons from './withButtons';
 import withData from './withData';
-import withRef from './withRef';
-import withStyleRef from './withStyleRef';
+// import withRef from './withRef';
+// import withStyleRef from './withStyleRef';
 
-import TextFilter from '../../../../../FiltersForTypes/Text/TextFilter.component';
-import NumericFilter from '../../../../../FiltersForTypes/Numeric/NumericFilter.component';
-import DateFilter from '../../../../../FiltersForTypes/Date/DateFilter.component';
-import BooleanFilter from '../../../../../FiltersForTypes/Boolean/BooleanFilter.component';
-import TrueOnlyFilter from '../../../../../FiltersForTypes/TrueOnly/TrueOnlyFilter.component';
-import OptionSetFilter from '../../../../../FiltersForTypes/OptionSet/OptionSetFilter.component';
-import { AssigneeFilter } from '../../../../../FiltersForTypes';
-
-import OptionSet from '../../../../../../metaData/OptionSet/OptionSet';
+import {
+    TextFilter,
+    NumericFilter,
+    AssigneeFilter,
+    TrueOnlyFilter,
+    BooleanFilter,
+    DateFilter,
+    OptionSetFilter,
+} from '../../../../../FiltersForTypes';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -61,9 +61,7 @@ class FilterSelectorContents extends React.PureComponent<Props> {
     static getOptionSetComponent() {
         return withButtons()(
             withData()(
-                withStyleRef()(
-                    OptionSetFilter,
-                ),
+                OptionSetFilter,
             ),
         );
     }
@@ -78,17 +76,13 @@ class FilterSelectorContents extends React.PureComponent<Props> {
         if (FilterSelectorContents.hasStylesHOC.includes(type)) {
             return withButtons()(
                 withData()(
-                    withStyleRef()(
-                        SelectorContent,
-                    ),
+                    SelectorContent,
                 ),
             );
         }
         return withButtons()(
             withData()(
-                withRef()(
-                    SelectorContent,
-                ),
+                SelectorContent,
             ),
         );
     }

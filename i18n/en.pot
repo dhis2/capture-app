@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-01-22T07:56:34.947Z\n"
-"PO-Revision-Date: 2020-01-22T07:56:34.947Z\n"
+"POT-Creation-Date: 2020-01-31T11:01:40.621Z\n"
+"PO-Revision-Date: 2020-01-31T11:01:40.621Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -224,12 +224,6 @@ msgstr ""
 msgid "Min"
 msgstr ""
 
-msgid "greater than or equal to"
-msgstr ""
-
-msgid "less than or equal to"
-msgstr ""
-
 msgid "Contains text"
 msgstr ""
 
@@ -354,6 +348,12 @@ msgid "after or equal to {{date}}"
 msgstr ""
 
 msgid "before or equal to {{date}}"
+msgstr ""
+
+msgid "greater than or equal to"
+msgstr ""
+
+msgid "less than or equal to"
 msgstr ""
 
 msgid "More filters"

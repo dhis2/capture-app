@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import FilterButton from './FilterButton.component';
-import { editContents, setFilter, clearFilter, revertFilter, batchActionTypes } from '../filterSelector.actions';
+import { editContents, setFilter, clearFilter, batchActionTypes } from '../filterSelector.actions';
 import { workingListUpdating } from '../../eventsList.actions';
 import { makeCurrentFilterSelector, makeFilterValueSelector } from './filterButton.selectors';
 
@@ -31,9 +31,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
             clearFilter(listId, itemId),
             workingListUpdating(listId),
         ], batchActionTypes.SET_FILTER_BATCH));
-    },
-    onRevertFilter: (listId: string) => {
-        dispatch(revertFilter(listId));
     },
 });
 
