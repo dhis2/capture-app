@@ -14,32 +14,6 @@ export {
     dateFilterTypes,
 } from '../../../FiltersForTypes/filters.types';
 
-export type DataFilter = {
-    dataItem: string,
-    ge?: any,
-    le?: any,
-    in?: any,
-    like?: any,
-    eq?: any,
-    period?: any,
-}
-
-export type EventQueryCriteria = {
-    dataFilters?: ?Array<DataFilter>,
-    order?: ?string,
-    eventDate?: ?Object,
-    status?: ?string,
-    displayColumnOrder?: ?Array<string>,
-    assignedUserMode?: 'CURRENT' | 'PROVIDED' | 'NONE' | 'ANY',
-    assignedUsers?: Array<string>,
-}
-
-export type EventFilter = {
-    id: string,
-    name: string,
-    eventQueryCriteria: EventQueryCriteria,
-}
-
 export type CommonQueryData = {
     programId: string,
     orgUnitId: string,
@@ -59,3 +33,4 @@ export type ColumnConfig = {
     isMainProperty?: ?boolean,
     apiName?: ?string,
 };
+

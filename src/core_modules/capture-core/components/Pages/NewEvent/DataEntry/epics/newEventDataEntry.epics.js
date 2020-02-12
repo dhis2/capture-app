@@ -37,7 +37,7 @@ import {
 import getProgramAndStageFromProgramId from
     '../../../../../metaData/helpers/EventProgram/getProgramAndStageFromProgramId';
 import { errorCreator } from 'capture-core-utils';
-import { getDefaultMainConfig as getDefaultMainColumnConfig, getMetaDataConfig as getColumnMetaDataConfig } from '../../../MainPage/EventsList/defaultColumnConfiguration';
+import { getDefaultMainConfig as getDefaultMainColumnConfig, getMetaDataConfig as getColumnMetaDataConfig } from '../../../MainPage/WorkingLists/defaultColumnConfiguration';
 import {
     resetList,
 } from '../../../../List/list.actions';

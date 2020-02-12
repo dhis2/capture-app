@@ -23,13 +23,10 @@ import {
     ProgramStage,
 } from '../../../../../metaData';
 import eventStatusElement from '../../../../../events/eventStatusElement';
-import {
-    MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS,
-} from '../FilterSelectors/filterSelector.const';
 import { convertServerToClient, convertClientToForm } from '../../../../../converters';
-import { getColumnsConfiguration } from './getColumnsConfiguration';
+import { getColumnsConfiguration } from './columnsConfigurationGetter';
 import { getApi } from '../../../../../d2/d2Instance';
-import type { DataFilter, EventQueryCriteria } from '../eventList.types';
+import type { ApiDataFilter, ApiEventQueryCriteria } from '../workingLists.types';
 
 const booleanOptionSet = new OptionSet('booleanOptionSet', [
     new Option((_this) => { _this.text = i18n.t('Yes'); _this.value = 'true'; }),
@@ -167,7 +164,7 @@ const getSortOrder = (order: ?string) => {
     return null;
 };
 
-const getDataElementFilters = (filters: ?Array<DataFilter>, stageForm: RenderFoundation): Array<Object> => {
+const getDataElementFilters = (filters: ?Array<ApiDataFilter>, stageForm: RenderFoundation): Array<Object> => {
     if (!filters) {
         return [];
     }
@@ -175,7 +172,7 @@ const getDataElementFilters = (filters: ?Array<DataFilter>, stageForm: RenderFou
     return filters.map((serverFilter) => {
         const element = stageForm.getElement(serverFilter.dataItem);
         if (element) {
-            if (element.optionSet && element.optionSet.options.length <= MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS) {
+            if (element.optionSet && element.optionSet.options.length <= 5) { //TODO: FIX
                 return { id: serverFilter.dataItem, ...getMultiSelectOptionSetFilter(serverFilter, element) };
             }
             return {
@@ -189,7 +186,7 @@ const getDataElementFilters = (filters: ?Array<DataFilter>, stageForm: RenderFou
     }).filter(clientFilter => clientFilter);
 };
 
-const getMainDataFilters = async (eventQueryCriteria: EventQueryCriteria) => {
+const getMainDataFilters = async (eventQueryCriteria: ApiEventQueryCriteria) => {
     const { eventDate, status, assignedUserMode, assignedUsers } = eventQueryCriteria;
     const filters = [];
     if (status) {
@@ -204,8 +201,8 @@ const getMainDataFilters = async (eventQueryCriteria: EventQueryCriteria) => {
     return filters;
 };
 
-export async function convertToEventWorkingListConfig(
-    eventQueryCriteria: ?EventQueryCriteria,
+export async function convertToListConfig(
+    eventQueryCriteria: ?ApiEventQueryCriteria,
     stage: ProgramStage,
 ) {
     if (!eventQueryCriteria) {

@@ -1,4 +1,5 @@
 // @flow
+/*
 import { dataElementTypes as elementTypes } from '../../../../../metaData';
 import {
     MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS,
@@ -101,3 +102,4 @@ export function convertToEventFilter(
         eventQueryCriteria,
     };
 }
+*/

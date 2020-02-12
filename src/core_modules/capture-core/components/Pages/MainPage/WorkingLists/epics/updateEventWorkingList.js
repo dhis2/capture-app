@@ -3,9 +3,9 @@ import log from 'loglevel';
 import { errorCreator, pipe } from 'capture-core-utils';
 import { getEventWorkingListDataAsync } from './eventsRetriever';
 import {
-    workingListUpdateDataRetrieved,
-    workingListUpdateRetrievalFailed,
-} from '../eventsList.actions';
+    updateEventListSuccess,
+    updateEventListError,
+} from '../workingLists.actions';
 import { buildQueryArgs } from './eventsQueryArgsBuilder';
 
 
@@ -39,7 +39,7 @@ const getSourceQueryArgsForUpdateWorkingList = (state: ReduxState, listId: strin
 export const updateEventWorkingListAsync = (
     state: ReduxState,
 ): Promise<ReduxAction<any, any>> => {
-    const listId = state.workingListConfigSelector.eventMainPage.currentListId;
+    const listId = state.workingListsTemplates.eventList.currentListId;
     const sourceQueryData = getSourceQueryArgsForUpdateWorkingList(state, listId);
     const columnOrder = state.workingListsColumnsOrder[listId];
     const mainColumnTypes = pipe(
@@ -60,10 +60,10 @@ export const updateEventWorkingListAsync = (
             }),
         columnOrder)
         .then(data =>
-            workingListUpdateDataRetrieved(listId, data),
+            updateEventListSuccess(listId, data),
         )
         .catch((error) => {
             log.error(errorCreator(errorMessages.WORKING_LIST_UPDATE_ERROR)({ error }));
-            return workingListUpdateRetrievalFailed(listId, errorMessages.WORKING_LIST_UPDATE_ERROR);
+            return updateEventListError(listId, errorMessages.WORKING_LIST_UPDATE_ERROR);
         });
 };

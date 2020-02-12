@@ -1,7 +1,7 @@
 // @flow
 export { workingListsMetaDesc } from './meta/meta.reducerDescription';
 export {
-    workingListConfigSelectorDesc,
+    workingListsTemplatesDesc,
     workingListsColumnsOrderDesc,
     workingListsContextDesc,
     workingListsDesc,

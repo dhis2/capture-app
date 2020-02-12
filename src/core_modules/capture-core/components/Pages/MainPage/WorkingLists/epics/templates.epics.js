@@ -2,41 +2,57 @@
 import { batchActions } from 'redux-batched-actions';
 import { ActionsObservable } from 'redux-observable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
+import i18n from '@dhis2/d2-i18n';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
+
+import {
+    actionTypes,
+    batchActionTypes,
+    fetchTemplatesSuccess,
+    fetchTemplatesError,
+    selectTemplate,
+} from '../workingLists.actions';
+import { getTemplatesAsync } from './templatesFetcher';
+
+/*
 import {
     actionTypes as mainSelectionActionTypes,
 } from '../../mainSelections.actions';
 import { actionTypes as viewEventActionTypes } from '../../../ViewEvent/viewEvent.actions';
 import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../../NewEvent';
-import { getWorkingListConfigsAsync } from './workingListConfigDataRetriever';
 import {
     batchActionTypes as eventsListBatchActionTypes,
     setCurrentWorkingListConfig,
     workingListConfigsRetrieved,
 } from '../eventsList.actions';
 import { getProgramFromProgramIdThrowIfNotFound, EventProgram } from '../../../../../metaData';
+import { workingListsActions } from '../../../MainPage/WorkingLists';
+*/
 
 
-export const retrieveWorkingListConfigsFromServer = (action$: ActionsObservable, store: ReduxStore) =>
+export const retrieveTemplatesEpic = (action$: ActionsObservable, store: ReduxStore) =>
     action$.ofType(
-        mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
+        /*mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
         viewEventActionTypes.INITIALIZE_WORKING_LISTS_ON_BACK_TO_MAIN_PAGE,
-        newEventDataEntryActionTypes.CANCEL_SAVE_INITIALIZE_WORKING_LISTS,
+        newEventDataEntryActionTypes.CANCEL_SAVE_INITIALIZE_WORKING_LISTS,*/
+        actionTypes.TEMPLATES_FETCH,
     )
-        .filter(() => {
-            const state = store.getState();
-            if (!state.offline.online) {
-                return false;
-            }
-            const programId = state.currentSelections.programId;
-            const program = programId && getProgramFromProgramIdThrowIfNotFound(programId);
-            return (program && program instanceof EventProgram);
-        })
-        .switchMap(() => {
-            const promise = getWorkingListConfigsAsync(store.getState()).then(container => batchActions([
-                setCurrentWorkingListConfig(container.default.id, 'eventList', container.default),
-                workingListConfigsRetrieved(container.workingListConfigs),
-            ], eventsListBatchActionTypes.WORKING_LIST_CONFIGS_RETRIEVED_BATCH));
-            return fromPromise(promise);
+        .switchMap((action) => {
+            const listId = action.payload.listId;
+            const promise = getTemplatesAsync(store.getState())
+                .then(container => batchActions([
+                    selectTemplate(container.default.id, listId, container.default),
+                    fetchTemplatesSuccess(container.workingListConfigs, listId),
+                ], batchActionTypes.TEMPLATES_FETCH_SUCCESS_BATCH))
+                .catch((error) => {
+                    log.error(
+                        errorCreator(error)({ epic: 'retrieveTemplatesEpic' })
+                    );
+                    return fetchTemplatesError(i18n.t('an error occurred loading working lists'), listId);
+                });
+
+                return fromPromise(promise);
         });
 
 /*

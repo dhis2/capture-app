@@ -1,13 +1,14 @@
 // @flow
 import log from 'loglevel';
+import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
-import { convertToEventWorkingListConfig } from '../eventFiltersInterface';
+import { convertToListConfig } from '../eventFiltersInterface';
 import { getEventProgramThrowIfNotFound } from '../../../../../metaData';
 import { getEventWorkingListDataAsync } from './eventsRetriever';
 import {
-    workingListInitialDataRetrieved,
-    workingListInitialRetrievalFailed,
-} from '../../mainSelections.actions';
+    initEventListSuccess,
+    initEventListError,
+} from '../workingLists.actions';
 import { getDefaultMainConfig, getMetaDataConfig } from '../defaultColumnConfiguration';
 import type { EventQueryCriteria, CommonQueryData, WorkingListConfig } from '../eventList.types';
 
@@ -58,7 +59,7 @@ export const initEventWorkingListAsync = async (
 ): Promise<ReduxAction<any, any>> => {
     const program = getEventProgramThrowIfNotFound(commonQueryData.programId);
     const stage = program.stage;
-    const workingListConfig: ?WorkingListConfig = await convertToEventWorkingListConfig(config, stage);
+    const workingListConfig: ?WorkingListConfig = await convertToListConfig(config, stage);
 
     const queryData = getQueryDataFromConfig(workingListConfig) || {};
     const queryDataWithDefaults = addDefaultsToQueryData(queryData);
@@ -73,7 +74,7 @@ export const initEventWorkingListAsync = async (
         ...commonQueryData,
     }, columnOrder)
         .then(data =>
-            workingListInitialDataRetrieved(listId, {
+            initEventListSuccess(listId, {
                 ...data,
                 config: {
                     ...workingListConfig,
@@ -85,6 +86,6 @@ export const initEventWorkingListAsync = async (
         )
         .catch((error) => {
             log.error(errorCreator(errorMessages.WORKING_LIST_RETRIEVE_ERROR)({ error }));
-            return workingListInitialRetrievalFailed(listId, errorMessages.WORKING_LIST_RETRIEVE_ERROR);
+            return initEventListError(listId, i18n.t('Working list could not be loaded'));
         });
 };

@@ -29,16 +29,48 @@ import {
 import {
     actionTypes as listActionTypes,
 } from '../../../components/List/list.actions';
+import { actionTypes as workingListsActionTypes } from '../../../components/Pages/MainPage/WorkingLists';
 
-const setMainEventPageWorkingListConfigSelectorLoading = state => ({
-    ...state,
-    eventMainPage: {
-        ...state.eventMainPage,
-        isLoading: true,
+export const workingListsTemplatesDesc = createReducerDescription({
+    [workingListsActionTypes.DATA_PRE_CLEAN]: (state, action) => {
+        const { listId } = action.payload;
+        return {
+            ...state,
+            [listId]: undefined,
+        };
     },
-});
-
-export const workingListConfigSelectorDesc = createReducerDescription({
+    [workingListsActionTypes.TEMPLATES_FETCH_SUCCESS]: (state, action) => {
+        const { listId, templates } = action.payload;
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                templates: templates,
+            },
+        };
+    },
+    [workingListsActionTypes.TEMPLATES_FETCH_ERROR]: (state, action) => {
+        const { listId, error } = action.payload;
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                loadError: error,
+            },
+        };
+    },
+    [workingListsActionTypes.TEMPLATE_SELECT]: (state, action) => {
+        const { listId, templateId } = action.payload;
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                selectedTemplateId: templateId,
+                currentListId: listId,
+            },
+        };
+    },
+    /*
     [connectivityActionTypes.GET_EVENT_LIST_ON_RECONNECT]: setMainEventPageWorkingListConfigSelectorLoading,
     [mainSelectionsActionTypes.MAIN_SELECTIONS_COMPLETED]: setMainEventPageWorkingListConfigSelectorLoading,
     [viewEventActionTypes.INITIALIZE_WORKING_LISTS_ON_BACK_TO_MAIN_PAGE]: setMainEventPageWorkingListConfigSelectorLoading,
@@ -46,56 +78,18 @@ export const workingListConfigSelectorDesc = createReducerDescription({
     [newEventDataEntryActionTypes.CANCEL_SAVE_INITIALIZE_WORKING_LISTS]: setMainEventPageWorkingListConfigSelectorLoading,
     [newEventDataEntryActionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST]: setMainEventPageWorkingListConfigSelectorLoading,
     [newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: setMainEventPageWorkingListConfigSelectorLoading,
-    [eventsListActionTypes.WORKING_LIST_CONFIGS_RETRIEVED]: (state, action) => ({
-        ...state,
-        eventMainPage: {
-            ...state.eventMainPage,
-            workingListConfigs: action.payload.workingListConfigs,
-        },
-    }),
-    [eventsListActionTypes.WORKING_LIST_CONFIGS_RETRIEVAL_FAILED]: (state, action) => ({
-        ...state,
-        eventMainPage: {
-            ...state.eventMainPage,
-            isLoading: false,
-            loadError: action.payload.error,
-        },
-    }),
-    [eventsListActionTypes.SET_CURRENT_WORKING_LIST_CONFIG]: (state, action) => ({
-        ...state,
-        eventMainPage: {
-            ...state.eventMainPage,
-            currentConfigId: action.payload.configId,
-            currentListId: action.payload.listId,
-        },
-    }),
-    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: state => ({
-        ...state,
-        eventMainPage: {
-            ...state.eventMainPage,
-            isLoading: false,
-            loadError: null,
-        },
-    }),
-    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: state => ({
-        ...state,
-        eventMainPage: {
-            ...state.eventMainPage,
-            isLoading: false,
-            loadError: null,
-        },
-    }),
-    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: state => ({
-        ...state,
-        eventMainPage: {
-            ...state.eventMainPage,
-            isLoading: false,
-        },
-    }),
-}, 'workingListConfigSelector');
+    */
+}, 'workingListsTemplates');
 
 export const workingListsDesc = createReducerDescription({
-    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
+    [workingListsActionTypes.DATA_PRE_CLEAN]: (state, action) => {
+        const { listId } = action.payload;
+        return {
+            ...state,
+            [listId]: undefined,
+        };
+    },
+    [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const { listId, eventContainers, request } = action.payload;
         newState[listId] = {
@@ -107,7 +101,7 @@ export const workingListsDesc = createReducerDescription({
         };
         return newState;
     },
-    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state, action) => {
+    [workingListsActionTypes.EVENT_LIST_UPDATE_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const { listId, eventContainers, request } = action.payload;
         newState[listId] = {
@@ -149,7 +143,6 @@ export const workingListsDesc = createReducerDescription({
         newState[action.payload.listId] = { order: [] };
         return newState;
     },
-
 }, 'workingLists');
 
 const getLoadingState = oldState => ({
@@ -165,7 +158,14 @@ const getReadyState = (oldState, more) => ({
 });
 
 export const workingListsUIDesc = createReducerDescription({
-    [eventsListActionTypes.SET_CURRENT_WORKING_LIST_CONFIG]: (state, action) => {
+    [workingListsActionTypes.DATA_PRE_CLEAN]: (state, action) => {
+        const { listId } = action.payload;
+        return {
+            ...state,
+            [listId]: undefined,
+        };
+    },
+    [workingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
         const newState = { ...state };
         const listId = action.payload.listId;
         newState[listId] = getLoadingState(newState[listId]);
@@ -201,7 +201,7 @@ export const workingListsUIDesc = createReducerDescription({
         newState[listId] = { ...newState[listId], isUpdatingWithDialog: true };
         return newState;
     },
-    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
+    [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const listId = action.payload.listId;
         newState[listId] = getReadyState(newState[listId], {
@@ -210,7 +210,7 @@ export const workingListsUIDesc = createReducerDescription({
         });
         return newState;
     },
-    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state, action) => {
+    [workingListsActionTypes.EVENT_LIST_UPDATE_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const listId = action.payload.listId;
         newState[listId] = getReadyState(newState[listId], {
@@ -218,7 +218,7 @@ export const workingListsUIDesc = createReducerDescription({
         });
         return newState;
     },
-    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: (state, action) => {
+    [workingListsActionTypes.EVENT_LIST_INIT_ERROR]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
         newState[payload.listId] = getReadyState({}, {
@@ -226,7 +226,7 @@ export const workingListsUIDesc = createReducerDescription({
         });
         return newState;
     },
-    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVAL_FAILED]: (state, action) => {
+    [workingListsActionTypes.EVENT_LIST_UPDATE_ERROR]: (state, action) => {
         const newState = { ...state };
         const listId = action.payload.listId;
         newState[listId] = getReadyState({}, {
@@ -237,7 +237,7 @@ export const workingListsUIDesc = createReducerDescription({
 }, 'workingListsUI');
 
 export const workingListsColumnsOrderDesc = createReducerDescription({
-    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
+    [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
         const { listId, config } = action.payload;
         const columnOrder = config.columnOrder;
         return {
@@ -269,70 +269,45 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
         newState[action.payload.listId] = [...action.payload.columnOrder];
         return newState;
     },
+    [workingListsActionTypes.DATA_PRE_CLEAN]: (state, action) => {
+        const { listId } = action.payload;
+        return {
+            ...state,
+            [listId]: undefined,
+        };
+    },
 }, 'workingListsColumnsOrder');
 
 export const workingListsContextDesc = createReducerDescription({
-    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
+    [workingListsActionTypes.DATA_PRE_CLEAN]: (state, action) => {
+        const { listId } = action.payload;
+        return {
+            ...state,
+            [listId]: undefined,
+        };
+    },
+    [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
         newState[payload.listId] = payload.selections;
         return newState;
     },
+    // TODO: WHAT IS THIS!??!?!?
     [listActionTypes.RESET_LIST]: (state, action) => {
         const newState = { ...state };
         newState[action.payload.listId] = action.payload.selections;
         return newState;
     },
-    // TOO COMPLICATED?? Reason about this
-    [quickSelectorActionTypes.RESET_PROGRAM_ID_BASE]: (state) => {
-        const newState = {
-            ...state,
-            eventList: null,
-        };
-        return newState;
-    },
-    // TOO COMPLICATED?? Reason about this
-    [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: (state, action) => {
-        const payload = action.payload;
-        const nextProgramId = payload.nextProps.programId;
-        const prevProgramId = payload.prevProps.programId;
-        if (nextProgramId !== prevProgramId) {
-            return {
-                ...state,
-                eventList: null,
-            };
-        }
-        return state;
-    },
-    // TOO COMPLICATED?? Reason about this
-    [editEventSelectorActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
-        const payload = action.payload;
-        const nextProgramId = payload.eventContainer.event.programId;
-        const prevProgramId = payload.prevProgramId;
-        if (nextProgramId !== prevProgramId) {
-            return {
-                ...state,
-                eventList: null,
-            };
-        }
-        return state;
-    },
-    // TOO COMPLICATED?? Reason about this
-    [viewEventActionTypes.EVENT_FROM_URL_RETRIEVED]: (state, action) => {
-        const payload = action.payload;
-        const nextProgramId = payload.eventContainer.event.programId;
-        const prevProgramId = payload.prevProgramId;
-        if (nextProgramId !== prevProgramId) {
-            return {
-                ...state,
-                eventList: null,
-            };
-        }
-        return state;
-    },
 }, 'workingListsContext');
 
 export const workingListsUserSelectedFiltersDesc = createReducerDescription({
+    [workingListsActionTypes.DATA_PRE_CLEAN]: (state, action) => {
+        const { listId } = action.payload;
+        return {
+            ...state,
+            [listId]: undefined,
+        };
+    },
     [filterSelectorActionTypes.REST_MENU_ITEM_SELECTED]: (state, action) => {
         const { id, listId } = action.payload;
         const currentListState = {
@@ -345,7 +320,7 @@ export const workingListsUserSelectedFiltersDesc = createReducerDescription({
             [listId]: currentListState,
         };
     },
-    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
+    [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
         const { listId, config = {} } = action.payload;
         const filters = config.filters;
         const selectedFilters = filters ? filters.reduce((acc, filter) => ({

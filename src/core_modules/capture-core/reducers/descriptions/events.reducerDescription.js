@@ -7,6 +7,7 @@ import { actionTypes as enrollmentActionTypes } from '../../actions/__TEMP__/enr
 import { actionTypes as eventListActionTypes } from '../../components/Pages/MainPage/EventsList/eventsList.actions';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/viewEvent.actions';
+import { actionTypes as workingListsActionTypes } from '../../components/Pages/MainPage/WorkingLists';
 
 const getFromWorkingListRetrieval = (eventContainers, containerProperty) => {
     if (!eventContainers || eventContainers.length === 0) {
@@ -22,13 +23,13 @@ const getFromWorkingListRetrieval = (eventContainers, containerProperty) => {
 };
 
 export const eventsDesc = createReducerDescription({
-    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
+    [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
         const eventContainers = action.payload.eventContainers;
         const newEventsById = getFromWorkingListRetrieval(eventContainers, 'event');
         const newState = { ...newEventsById };
         return newState;
     },
-    [eventListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state, action) => {
+    [workingListsActionTypes.EVENT_LIST_UPDATE_SUCCESS]: (state, action) => {
         const eventContainers = action.payload.eventContainers;
         const newEventsById = getFromWorkingListRetrieval(eventContainers, 'event');
         const newState = { ...newEventsById };
@@ -96,13 +97,13 @@ export const eventsDesc = createReducerDescription({
 }, 'events', {});
 
 export const eventsValuesDesc = createReducerDescription({
-    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVED]: (state, action) => {
+    [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
         const eventContainers = action.payload.eventContainers;
         const newEventsValuesById = getFromWorkingListRetrieval(eventContainers, 'values');
         const newState = { ...newEventsValuesById };
         return newState;
     },
-    [eventListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVED]: (state, action) => {
+    [workingListsActionTypes.EVENT_LIST_UPDATE_SUCCESS]: (state, action) => {
         const eventContainers = action.payload.eventContainers;
         const newEventsValuesById = getFromWorkingListRetrieval(eventContainers, 'values');
         const newState = { ...newEventsValuesById };

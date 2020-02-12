@@ -1,4 +1,5 @@
 // @flow
+/*
 import { connect } from 'react-redux';
 import { setCurrentWorkingListConfig } from '../eventsList.actions';
 import WorkingListConfigSelector from './WorkingListConfigSelector.component';
@@ -26,3 +27,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withLoadingIndicator()(withErrorMessageHandler()(WorkingListConfigSelector)));
+*/

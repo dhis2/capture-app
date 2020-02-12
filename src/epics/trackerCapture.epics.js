@@ -37,18 +37,18 @@ import {
 import {
     openNewEventPageLocationChangeEpic,
 } from 'capture-core/components/Pages/NewEvent/epics/newEvent.epics';
+
 import {
-    initEventWorkingListEpic,
-    // retrieveWorkingListOnMainSelectionsCompletedEpic,
-    getWorkingListOnCancelSaveEpic,
-    getWorkingListOnSaveEpic,
-    updateWorkingListEpic,
-    getEventListOnReconnectEpic,
-    requestDeleteEventEpic,
-} from 'capture-core/components/Pages/MainPage/EventsList/epics/eventsList.epics';
+    initEventListEpic,
+    updateEventListEpic,
+    retrieveTemplatesEpic,
+} from 'capture-core/components/Pages/MainPage/WorkingLists';
+/*
 import {
     retrieveWorkingListConfigsFromServer,
 } from 'capture-core/components/Pages/MainPage/EventsList/epics/workingListConfig.epics';
+*/
+
 import {
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,
@@ -204,13 +204,9 @@ export default combineEpics(
     loadCoreFailedEpic,
     mainSelectionsCompletedEpic,
     orgUnitDataRetrivedEpic,
-    retrieveWorkingListConfigsFromServer,
-    initEventWorkingListEpic,
-    // retrieveWorkingListOnMainSelectionsCompletedEpic,
-    getWorkingListOnCancelSaveEpic,
-    getWorkingListOnSaveEpic,
-    updateWorkingListEpic,
-    getEventListOnReconnectEpic,
+    initEventListEpic,
+    updateEventListEpic,
+    retrieveTemplatesEpic,
     mainSelectionsFromUrlGetOrgUnitDataEpic,
     mainSelectionsFromUrlEmptyOrgUnitEpic,
     mainSelectionsFromUrlValidationEpic,
@@ -255,7 +251,6 @@ export default combineEpics(
     includeFiltersWithValueAfterColumnSortingEpic,
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,
-    requestDeleteEventEpic,
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
     openRelationshipTeiSearchEpic,

@@ -1,11 +1,23 @@
 // @flow
 import { fromPromise } from 'rxjs/observable/fromPromise';
+import {
+    actionTypes,
+    batchActionTypes,
+    initEventListSuccess,
+    initEventListError,
+} from '../workingLists.actions';
+import { initEventWorkingListAsync } from './initEventWorkingList';
+import { updateEventWorkingListAsync } from './updateEventWorkingList';
+// import { paginationActionTypes } from '../../EventsList';
+/*
+
 import { batchActions } from 'redux-batched-actions';
 import isSelectionsEqual from '../../../../App/isSelectionsEqual';
+
 import {
     actionTypes as mainSelectionActionTypes,
 } from '../../mainSelections.actions';
-import { actionTypes as paginationActionTypes } from '../Pagination/pagination.actions';
+
 import {
     batchActionTypes as eventsListBatchActionTypes,
     actionTypes as eventsListActionTypes,
@@ -27,22 +39,18 @@ import {
     batchActionTypes as filterSelectorBatchActionTypes,
 } from '../FilterSelectors/filterSelector.actions';
 import { getWorkingListConfigsAsync } from './workingListConfigDataRetriever';
-import { initEventWorkingListAsync } from './initEventWorkingList';
-import { updateEventWorkingListAsync } from './updateEventWorkingList';
-
-export const initEventWorkingListEpic = (action$, store: ReduxStore) =>
+*/
+export const initEventListEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.ofType(
-        eventsListActionTypes.SET_CURRENT_WORKING_LIST_CONFIG,
-        eventsListBatchActionTypes.WORKING_LIST_CONFIGS_RETRIEVED_BATCH,
+        actionTypes.EVENT_LIST_INIT,
     )
-        .map(action => (action.type === eventsListBatchActionTypes.WORKING_LIST_CONFIGS_RETRIEVED_BATCH ?
-            action.payload.find(a => a.type === eventsListActionTypes.SET_CURRENT_WORKING_LIST_CONFIG) :
-            action))
         .switchMap((action) => {
             const { programId, orgUnitId, categories } = store.getState().currentSelections;
-            const { eventQueryCriteria, listId } = action.payload;
+            const { selectedTemplate, listId } = action.payload;
+            const eventQueryCriteria = selectedTemplate.eventQueryCriteria;
             const initialPromise = initEventWorkingListAsync(eventQueryCriteria, { programId, orgUnitId, categories }, listId);
-            return fromPromise(initialPromise)
+            return fromPromise(initialPromise);
+            /*
                 .takeUntil(
                     action$.ofType(
                         mainPageActionTypes.UPDATE_EVENT_LIST_AFTER_SAVE_OR_UPDATE_FOR_SINGLE_EVENT,
@@ -63,8 +71,36 @@ export const initEventWorkingListEpic = (action$, store: ReduxStore) =>
                             actionBatch.payload.some(a =>
                                 a.type === connectivityActionTypes.GET_EVENT_LIST_ON_RECONNECT)),
                 );
+            */
         });
 
+export const updateEventListEpic = (action$: InputObservable, store: ReduxStore) =>
+action$.ofType(
+    actionTypes.EVENT_LIST_UPDATE,
+)
+    .switchMap((action) => {
+        const state = store.getState();
+
+        const updatePromise = updateEventWorkingListAsync(state);
+        return fromPromise(updatePromise);
+            /*
+            .takeUntil(action$.ofType(
+                mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
+                newEventDataEntryActionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST,
+                editEventDataEntryActionTypes.UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE,
+                viewEventActionTypes.UPDATE_WORKING_LIST_ON_BACK_TO_MAIN_PAGE,
+                mainPageActionTypes.UPDATE_EVENT_LIST_AFTER_SAVE_OR_UPDATE_FOR_SINGLE_EVENT,
+            ))
+            .takeUntil(
+                action$
+                    .ofType(connectivityBatchActionTypes.GOING_ONLINE_EXECUTED_BATCH)
+                    .filter(actionBatch =>
+                        actionBatch.payload.some(
+                            action => action.type === connectivityActionTypes.GET_EVENT_LIST_ON_RECONNECT)),
+            );
+            */
+    });
+/*
 export const getWorkingListOnCancelSaveEpic = (action$, store: ReduxStore) =>
     action$.ofType(
         newEventDataEntryActionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST,
@@ -230,3 +266,4 @@ export const getEventListOnReconnectEpic = (action$, store: ReduxStore) =>
             return fromPromise(initialPromise)
                 .takeUntil(action$.ofType(...cancelActionTypes));
         });
+*/

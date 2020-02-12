@@ -20,7 +20,7 @@ export const saveConfigEpic = (action$: InputObservable, store: ReduxStore) =>
                 currentListId: listId,
                 workingListConfigs,
                 currentConfigId,
-            } = state.workingListConfigSelector.eventMainPage;
+            } = state.workingListsTemplates.eventList;
             const listName = workingListConfigs[currentConfigId].displayName;
             const { filters, sortById, sortByDirection } = state.workingListsMeta[listId];
             const columnsOrder = state.workingListsColumnsOrder[listId];

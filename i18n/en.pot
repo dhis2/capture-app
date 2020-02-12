@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-01-31T11:01:40.621Z\n"
-"PO-Revision-Date: 2020-01-31T11:01:40.621Z\n"
+"POT-Creation-Date: 2020-02-12T23:35:51.282Z\n"
+"PO-Revision-Date: 2020-02-12T23:35:51.282Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -390,6 +390,12 @@ msgid "Active"
 msgstr ""
 
 msgid "Completed"
+msgstr ""
+
+msgid "Working list could not be loaded"
+msgstr ""
+
+msgid "an error occurred loading working lists"
 msgstr ""
 
 msgid "Could not get organisation unit"
