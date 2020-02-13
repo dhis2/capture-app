@@ -1,13 +1,14 @@
 # Translators:
 # phil_dhis2, 2019
 # Viktor Varland <viktor@dhis2.org>, 2019
+# easylin <lin_xd@126.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2019-11-20T10:50:45.136Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2019\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2020\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -94,7 +95,7 @@ msgid "Coordinate"
 msgstr "坐标"
 
 msgid "Enrollment"
-msgstr ""
+msgstr "注册"
 
 msgid "A future date is not allowed"
 msgstr ""
@@ -381,7 +382,7 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "Relationships"
-msgstr ""
+msgstr "关系"
 
 msgid "Saving to"
 msgstr ""
@@ -576,10 +577,10 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr ""
+msgstr "添加关系"
 
 msgid "Selected program"
-msgstr ""
+msgstr "选择的项目"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
