@@ -92,7 +92,7 @@ msgid "Coordinate"
 msgstr "坐标"
 
 msgid "Enrollment"
-msgstr ""
+msgstr "注册"
 
 msgid "A future date is not allowed"
 msgstr ""
@@ -439,7 +439,7 @@ msgid "Assigned user"
 msgstr ""
 
 msgid "Relationships"
-msgstr ""
+msgstr "关系"
 
 msgid "Assignee"
 msgstr ""
@@ -655,10 +655,10 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr ""
+msgstr "添加关系"
 
 msgid "Selected program"
-msgstr ""
+msgstr "选择的项目"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
