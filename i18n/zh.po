@@ -197,10 +197,10 @@ msgid "to"
 msgstr "到"
 
 msgid "From"
-msgstr ""
+msgstr "从"
 
 msgid "To"
-msgstr ""
+msgstr "至"
 
 msgid "after or equal to"
 msgstr ""
@@ -560,7 +560,7 @@ msgid "Organisation Unit"
 msgstr "组织机构"
 
 msgid "Registration"
-msgstr ""
+msgstr "注册"
 
 msgid "Review Duplicates"
 msgstr ""
@@ -587,7 +587,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Register"
-msgstr ""
+msgstr "注册"
 
 msgid "You dont have access to edit this event"
 msgstr ""
