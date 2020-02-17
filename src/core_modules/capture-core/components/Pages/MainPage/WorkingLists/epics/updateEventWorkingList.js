@@ -13,34 +13,27 @@ const errorMessages = {
     WORKING_LIST_UPDATE_ERROR: 'Working list could not be updated',
 };
 
-const getSourceQueryArgsForUpdateWorkingList = (state: ReduxState, listId: string) => {
+const getSourceQueryArgsForUpdateWorkingList = (
+    state: ReduxState,
+    listId: string,
+    sourceQueryArgsPart: Object,
+) => {
     const { programId, orgUnitId, categories } = state.workingListsContext[listId];
-
-    const currentMeta = state.workingListsMeta[listId];
-    const nextMeta = state.workingListsMeta[listId].next;
-    const meta = {
-        ...currentMeta,
-        ...nextMeta,
-        filters: {
-            ...currentMeta.filters,
-            ...nextMeta.filters,
-        },
-    };
-    meta.hasOwnProperty('next') && delete meta.next;
 
     return {
         programId,
         orgUnitId,
         categories,
-        ...meta,
+        ...sourceQueryArgsPart,
     };
 };
 
 export const updateEventWorkingListAsync = (
+    listId: string,
+    sourceQueryArgsPart: Object,
     state: ReduxState,
 ): Promise<ReduxAction<any, any>> => {
-    const listId = state.workingListsTemplates.eventList.currentListId;
-    const sourceQueryData = getSourceQueryArgsForUpdateWorkingList(state, listId);
+    const sourceQueryData = getSourceQueryArgsForUpdateWorkingList(state, listId, sourceQueryArgsPart);
     const columnOrder = state.workingListsColumnsOrder[listId];
     const mainColumnTypes = pipe(
         columns => columns.filter(column => column.isMainProperty),

@@ -1,5 +1,5 @@
 // @flow
-export { default as WorkingLists } from './WorkingListsSetup.component';
+export { default as WorkingLists } from './WorkingLists.container';
 export { actionTypes } from './workingLists.actions';
 export {
     initEventListEpic,

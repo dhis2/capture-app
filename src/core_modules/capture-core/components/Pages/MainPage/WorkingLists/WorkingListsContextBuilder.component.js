@@ -1,6 +1,10 @@
 // @flow
 import * as React from 'react';
-import { ManagerContext, EventListLoaderContext } from './workingLists.context';
+import {
+    ManagerContext,
+    EventListConfigContext,
+    EventListLoaderContext,
+} from './workingLists.context';
 import WorkingListsPreCleaner from './WorkingListsPreCleaner.component';
 
 type PassOnProps = {|
@@ -8,16 +12,21 @@ type PassOnProps = {|
     templates: ?Object,
     onPreCleanData: Function,
     onLoadTemplates: Function,
+    onCancelLoadTemplates: Function,
+    skipReload: boolean,
+    onResetSkipReload?: ?Function,
 |};
 
 type Props = {
     selectedTemplate: ?Object,
     onSelectTemplate: Function,
-    eventListIsLoading: boolean,
     onLoadEventList: Function,
     loadEventListError: ?string,
     onUpdateEventList: Function,
-    filters: ?Object,
+    onCancelLoadEventList: Function,
+    onCancelUpdateEventList: Function,
+    listMeta: ?Object,
+    eventsData: ?Object,
     ...PassOnProps,
 };
 
@@ -25,11 +34,13 @@ const WorkingListsContextBuilder = (props: Props) => {
     const {
         selectedTemplate,
         onSelectTemplate,
-        eventListIsLoading,
         onLoadEventList,
         loadEventListError,
         onUpdateEventList,
-        filters,
+        onCancelLoadEventList,
+        onCancelUpdateEventList,
+        listMeta,
+        eventsData,
         ...passOnProps
     } = props;
 
@@ -38,22 +49,25 @@ const WorkingListsContextBuilder = (props: Props) => {
         onSelectTemplate,
     }), [selectedTemplate, onSelectTemplate]);
 
-    const currentFilters = React.useMemo(() => {
-        if(!filters) {
-            return filters;
-        }
-        
-    }, [
-        filters,
-    ]);
+    const eventListConfig = React.useMemo(() => ({
+        listMeta,
+    }), [listMeta]);
 
     const eventListData = React.useMemo(() => ({
+        eventsData,
         onLoadEventList,
-        eventListIsLoading,
         loadEventListError,
         onUpdateEventList,
-        filters,
-    }), [ onLoadEventList, eventListIsLoading, loadEventListError, onUpdateEventList ]);
+        onCancelLoadEventList,
+        onCancelUpdateEventList,
+    }), [
+        eventsData,
+        onLoadEventList,
+        loadEventListError,
+        onUpdateEventList,
+        onCancelLoadEventList,
+        onCancelUpdateEventList,
+    ]);
 
     return (
         <ManagerContext.Provider
@@ -62,9 +76,13 @@ const WorkingListsContextBuilder = (props: Props) => {
             <EventListLoaderContext.Provider
                 value={eventListData}
             >
-                <WorkingListsPreCleaner
-                    {...passOnProps}
-                />
+                <EventListConfigContext.Provider
+                    value={eventListConfig}
+                >
+                    <WorkingListsPreCleaner
+                        {...passOnProps}
+                    />
+                </EventListConfigContext.Provider>
             </EventListLoaderContext.Provider>
         </ManagerContext.Provider>
     );

@@ -6,15 +6,16 @@ export const actionTypes = {
     TEMPLATES_FETCH: 'EventWorkingListsTemplatesFetch',
     TEMPLATES_FETCH_SUCCESS: 'EventWorkingListsTemplatesFetchSuccess',
     TEMPLATES_FETCH_ERROR: 'EventWorkingListsTemplatesFetchError',
+    TEMPLATES_FETCH_CANCEL: 'EventWorkingListsTemplatesFetchCancel',
     TEMPLATE_SELECT: 'EventWorkingListsTemplateSelect',
     EVENT_LIST_INIT: 'EventWorkingListsEventListInit',
     EVENT_LIST_INIT_SUCCESS: 'EventWorkingListsEventListInitSuccess',
     EVENT_LIST_INIT_ERROR: 'EventWorkingListsEventListInitError',
     EVENT_LIST_INIT_CANCEL: 'EventWorkingListsEventListInitCancel',
-    EVENT_LIST_UPDATE: 'EventWorkingListsEventListUpdateFetch',
+    EVENT_LIST_UPDATE: 'EventWorkingListsEventListUpdate',
     EVENT_LIST_UPDATE_SUCCESS: 'EventWorkingListsEventListUpdateSuccess',
     EVENT_LIST_UPDATE_ERROR: 'EventWorkingListsEventListUpdateError',
-    EVENT_LIST_UPDATE_CANCEL: 'EventWorkingListsEventListUpdateCancel', 
+    EVENT_LIST_UPDATE_CANCEL: 'EventWorkingListsEventListUpdateCancel',
 };
 
 export const batchActionTypes = {
@@ -33,6 +34,9 @@ export const fetchTemplatesSuccess = (templates: Array<any>, listId: string) =>
 export const fetchTemplatesError = (error: string, listId: string) =>
     actionCreator(actionTypes.TEMPLATES_FETCH_ERROR)({ error, listId });
 
+export const fetchTemplatesCancel = (listId: string) =>
+    actionCreator(actionTypes.TEMPLATES_FETCH_CANCEL)({ listId });
+
 export const selectTemplate = (templateId: string, listId: string, data?: ?Object) =>
     actionCreator(actionTypes.TEMPLATE_SELECT)({ ...data, templateId, listId });
 
@@ -49,7 +53,7 @@ export const initEventListCancel =
     (listId: string) => actionCreator(actionTypes.EVENT_LIST_INIT_CANCEL)({ listId });
 
 export const updateEventList =
-    (listId: string) => actionCreator(actionTypes.EVENT_LIST_UPDATE)({ listId });
+    (listId: string, queryArgs: Object) => actionCreator(actionTypes.EVENT_LIST_UPDATE)({ listId, queryArgs });
 
 export const updateEventListSuccess =
     (listId: string, data: Object) => actionCreator(actionTypes.EVENT_LIST_UPDATE_SUCCESS)({ ...data, listId });

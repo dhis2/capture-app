@@ -1,73 +1,59 @@
 // @flow
 import * as React from 'react';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../../HOC';
-import { EventList } from '../EventsList';
+import EventListUpdater from './EventListUpdater.component';
 import { EventListLoaderContext } from './workingLists.context';
 
-const EventListWithLoadingIndicator = withErrorMessageHandler()(
-    withLoadingIndicator()(EventList));
+const EventListUpdaterWithLoadingIndicator = withErrorMessageHandler()(
+    withLoadingIndicator()(EventListUpdater));
 
 type Props = {
     listId: string,
+    eventsData: ?Object,
     selectedTemplate: Object,
     filters: Object,
+    sortById: ?string,
+    sortByDirection: ?string,
+    currentPage: ?number,
+    rowsPerPage: ?number,
 };
-  
-function useCustomCompareMemoize(value) {
-    const ref = React.useRef();
-
-    debugger;
-    // const filtersEqual = 
-
-    /*
-    if (!deepCompareEquals(value, ref.current)) {
-      ref.current = value
-    }
-    */
-  
-    return ref.current
-}
-  
-function useUpdateListEffect(callback, dependencies) {
-    const firstRun = React.useRef(true);
-
-    React.useEffect(() => {
-        if (firstRun.current) {
-            firstRun.current = false;
-            return;
-        }
-        callback();        
-    }, useCustomCompareMemoize(dependencies))
-}
 
 const EventListLoader = (props: Props) => {
-    const { selectedTemplate, listId, ...passOnProps } = props;
-    const [ isInitiating, setInitStatus ] = React.useState(true);
     const {
-        eventListIsLoading: isLoading,
+        selectedTemplate,
+        listId,
+        ...passOnProps
+    } = props;
+
+    const {
+        eventsData,
         onLoadEventList,
         loadEventListError: loadError,
+        onCancelLoadEventList,
         onUpdateEventList,
+        onCancelUpdateEventList,
     } = React.useContext(EventListLoaderContext);
 
     React.useEffect(() => {
+        if (eventsData !== undefined) {
+            return undefined;
+        }
         onLoadEventList(selectedTemplate, listId);
-        setInitStatus(false);
+        return () => onCancelLoadEventList(listId);
     }, []);
 
-    React.useUpdateListEffect(() => {
-        onUpdateEventList();
-    }, []);
-
-    const ready = !isLoading && !isInitiating;
+    const ready = eventsData !== undefined;
 
     return (
-        <EventListWithLoadingIndicator
+        <EventListUpdaterWithLoadingIndicator
+            {...passOnProps}
             ready={ready}
             error={loadError}
             listId={listId}
+            onUpdateEventList={onUpdateEventList}
+            onCancelUpdateEventList={onCancelUpdateEventList}
         />
     );
-}
+};
 
 export default EventListLoader;

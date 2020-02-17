@@ -47,12 +47,16 @@ export const retrieveTemplatesEpic = (action$: ActionsObservable, store: ReduxSt
                 ], batchActionTypes.TEMPLATES_FETCH_SUCCESS_BATCH))
                 .catch((error) => {
                     log.error(
-                        errorCreator(error)({ epic: 'retrieveTemplatesEpic' })
+                        errorCreator(error)({ epic: 'retrieveTemplatesEpic' }),
                     );
                     return fetchTemplatesError(i18n.t('an error occurred loading working lists'), listId);
                 });
 
-                return fromPromise(promise);
+            return fromPromise(promise)
+                .takeUntil(
+                    action$.ofType(actionTypes.TEMPLATES_FETCH_CANCEL)
+                        .filter(cancelAction => cancelAction.payload.listId === listId),
+                );
         });
 
 /*

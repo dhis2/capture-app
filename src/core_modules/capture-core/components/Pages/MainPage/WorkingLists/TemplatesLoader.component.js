@@ -10,6 +10,7 @@ type Props = {
     templates?: ?Object,
     loadTemplatesError: ?string,
     onLoadTemplates: Function,
+    onCancelLoadTemplates: Function,
     listId: string,
 };
 
@@ -18,17 +19,20 @@ const TemplatesLoader = (props: Props) => {
         templates,
         loadTemplatesError,
         onLoadTemplates,
+        onCancelLoadTemplates,
         listId,
         ...passOnProps
     } = props;
 
     React.useEffect(() => {
-        if (!templates) {
-            onLoadTemplates(listId);
+        if (templates !== undefined) {
+            return undefined;
         }
+        onLoadTemplates(listId);
+        return () => onCancelLoadTemplates(listId);
     }, []);
 
-    const ready = !!templates;
+    const ready = templates !== undefined;
 
     return (
         <TemplatesManangerWithLoadingIndicator

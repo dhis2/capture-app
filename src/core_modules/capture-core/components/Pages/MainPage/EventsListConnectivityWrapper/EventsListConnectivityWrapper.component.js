@@ -4,14 +4,12 @@ import OfflineEventsList from '../OfflineEventsList/OfflineEventsList.container'
 import WorkingListConfigSelector from '../EventsList/WorkingListConfigSelector/WorkingListConfigSelector.container';
 import withListHeaderWrapper from '../ListHeaderWrapper/withListHeaderWrapper';
 import withEventsListHeader from '../EventsList/Header/withHeader';
-import { WorkingLists } from '../WorkingLists';
+import { WorkingListsOnHoldWrapper } from '../WorkingListsOnHoldWrapper';
 
 type Props = {
     isOnline: boolean,
     listId: string,
 };
-
-const OnlineEventsListWithHeader = withEventsListHeader()(withListHeaderWrapper()(WorkingListConfigSelector));
 
 const EventsListConnectivityWrapper = (props: Props) => {
     const { isOnline, ...passOnProps } = props;
@@ -28,10 +26,7 @@ const EventsListConnectivityWrapper = (props: Props) => {
                     }
                     return (
                         <React.Fragment>
-                            {/*<OnlineEventsListWithHeader
-                                {...passOnProps}
-                            />*/}
-                            <WorkingLists />
+                            <WorkingListsOnHoldWrapper />
                         </React.Fragment>
                     );
                 })()

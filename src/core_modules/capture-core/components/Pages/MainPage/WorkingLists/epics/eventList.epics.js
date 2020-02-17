@@ -48,58 +48,32 @@ export const initEventListEpic = (action$: InputObservable, store: ReduxStore) =
             const { programId, orgUnitId, categories } = store.getState().currentSelections;
             const { selectedTemplate, listId } = action.payload;
             const eventQueryCriteria = selectedTemplate.eventQueryCriteria;
-            const initialPromise = initEventWorkingListAsync(eventQueryCriteria, { programId, orgUnitId, categories }, listId);
-            return fromPromise(initialPromise);
-            /*
-                .takeUntil(
-                    action$.ofType(
-                        mainPageActionTypes.UPDATE_EVENT_LIST_AFTER_SAVE_OR_UPDATE_FOR_SINGLE_EVENT,
-                        newEventDataEntryActionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST,
-                        editEventDataEntryActionTypes.UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE,
-                        viewEventActionTypes.UPDATE_WORKING_LIST_ON_BACK_TO_MAIN_PAGE,
-                        paginationActionTypes.CHANGE_PAGE,
-                        paginationActionTypes.CHANGE_ROWS_PER_PAGE,
-                        eventsListActionTypes.SORT_WORKING_LIST,
-                        filterSelectorActionTypes.CLEAR_FILTER,
-                        filterSelectorBatchActionTypes.SET_FILTER_BATCH,
-                    ),
-                )
+            const initialPromise =
+                initEventWorkingListAsync(eventQueryCriteria, { programId, orgUnitId, categories }, listId);
+            return fromPromise(initialPromise)
                 .takeUntil(
                     action$
-                        .ofType(connectivityBatchActionTypes.GOING_ONLINE_EXECUTED_BATCH)
-                        .filter(actionBatch =>
-                            actionBatch.payload.some(a =>
-                                a.type === connectivityActionTypes.GET_EVENT_LIST_ON_RECONNECT)),
+                        .ofType(actionTypes.EVENT_LIST_INIT_CANCEL)
+                        .filter(cancelAction => cancelAction.payload.listId === listId),
                 );
-            */
         });
 
 export const updateEventListEpic = (action$: InputObservable, store: ReduxStore) =>
-action$.ofType(
-    actionTypes.EVENT_LIST_UPDATE,
-)
-    .switchMap((action) => {
-        const state = store.getState();
+    action$.ofType(
+        actionTypes.EVENT_LIST_UPDATE,
+    )
+        .switchMap((action) => {
+            const state = store.getState();
+            const { listId, queryArgs } = action.payload;
+            const updatePromise = updateEventWorkingListAsync(listId, queryArgs, state);
+            return fromPromise(updatePromise)
+                .takeUntil(
+                    action$
+                        .ofType(actionTypes.EVENT_LIST_UPDATE_CANCEL)
+                        .filter(cancelAction => cancelAction.payload.listId === listId),
+                );
+        });
 
-        const updatePromise = updateEventWorkingListAsync(state);
-        return fromPromise(updatePromise);
-            /*
-            .takeUntil(action$.ofType(
-                mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
-                newEventDataEntryActionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST,
-                editEventDataEntryActionTypes.UPDATE_WORKING_LIST_AFTER_CANCEL_UPDATE,
-                viewEventActionTypes.UPDATE_WORKING_LIST_ON_BACK_TO_MAIN_PAGE,
-                mainPageActionTypes.UPDATE_EVENT_LIST_AFTER_SAVE_OR_UPDATE_FOR_SINGLE_EVENT,
-            ))
-            .takeUntil(
-                action$
-                    .ofType(connectivityBatchActionTypes.GOING_ONLINE_EXECUTED_BATCH)
-                    .filter(actionBatch =>
-                        actionBatch.payload.some(
-                            action => action.type === connectivityActionTypes.GET_EVENT_LIST_ON_RECONNECT)),
-            );
-            */
-    });
 /*
 export const getWorkingListOnCancelSaveEpic = (action$, store: ReduxStore) =>
     action$.ofType(

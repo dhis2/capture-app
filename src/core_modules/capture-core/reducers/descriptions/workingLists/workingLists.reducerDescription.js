@@ -1,31 +1,11 @@
 // @flow
 import { createReducerDescription } from '../../../trackerRedux/trackerReducer';
-import { actionTypes as mainSelectionsActionTypes } from '../../../components/Pages/MainPage/mainSelections.actions';
-import {
-    actionTypes as paginationActionTypes,
-} from '../../../components/Pages/MainPage/EventsList/Pagination/pagination.actions';
-import { actionTypes as eventsListActionTypes } from '../../../components/Pages/MainPage/EventsList/eventsList.actions';
-import {
-    dataEntryActionTypes as newEventDataEntryActionTypes,
-} from '../../../components/Pages/NewEvent';
-import {
-    actionTypes as connectivityActionTypes,
-} from '../../../components/Connectivity/connectivity.actions';
 import {
     actionTypes as columnSelectorActionTypes,
 } from '../../../components/Pages/MainPage/EventsList/ListWrapper/actions/columnSelectorDialog.actions';
 import {
     actionTypes as filterSelectorActionTypes,
 } from '../../../components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.actions';
-import {
-    actionTypes as quickSelectorActionTypes,
-} from '../../../components/QuickSelector/actions/QuickSelector.actions';
-import {
-    actionTypes as editEventSelectorActionTypes,
-} from '../../../components/Pages/EditEvent/editEvent.actions';
-import {
-    actionTypes as viewEventActionTypes,
-} from '../../../components/Pages/ViewEvent/viewEvent.actions';
 import {
     actionTypes as listActionTypes,
 } from '../../../components/List/list.actions';
@@ -45,7 +25,7 @@ export const workingListsTemplatesDesc = createReducerDescription({
             ...state,
             [listId]: {
                 ...state[listId],
-                templates: templates,
+                templates,
             },
         };
     },
@@ -70,15 +50,6 @@ export const workingListsTemplatesDesc = createReducerDescription({
             },
         };
     },
-    /*
-    [connectivityActionTypes.GET_EVENT_LIST_ON_RECONNECT]: setMainEventPageWorkingListConfigSelectorLoading,
-    [mainSelectionsActionTypes.MAIN_SELECTIONS_COMPLETED]: setMainEventPageWorkingListConfigSelectorLoading,
-    [viewEventActionTypes.INITIALIZE_WORKING_LISTS_ON_BACK_TO_MAIN_PAGE]: setMainEventPageWorkingListConfigSelectorLoading,
-    [viewEventActionTypes.UPDATE_WORKING_LIST_ON_BACK_TO_MAIN_PAGE]: setMainEventPageWorkingListConfigSelectorLoading,
-    [newEventDataEntryActionTypes.CANCEL_SAVE_INITIALIZE_WORKING_LISTS]: setMainEventPageWorkingListConfigSelectorLoading,
-    [newEventDataEntryActionTypes.CANCEL_SAVE_UPDATE_WORKING_LIST]: setMainEventPageWorkingListConfigSelectorLoading,
-    [newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: setMainEventPageWorkingListConfigSelectorLoading,
-    */
 }, 'workingListsTemplates');
 
 export const workingListsDesc = createReducerDescription({
@@ -145,14 +116,9 @@ export const workingListsDesc = createReducerDescription({
     },
 }, 'workingLists');
 
-const getLoadingState = oldState => ({
-    ...oldState,
-    isLoading: true,
-});
 const getReadyState = (oldState, more) => ({
     ...oldState,
     ...more,
-    isLoading: false,
     isUpdating: false,
     isUpdatingWithDialog: false,
 });
@@ -165,40 +131,10 @@ export const workingListsUIDesc = createReducerDescription({
             [listId]: undefined,
         };
     },
-    [workingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
-        const newState = { ...state };
-        const listId = action.payload.listId;
-        newState[listId] = getLoadingState(newState[listId]);
-        return newState;
-    },
-    [paginationActionTypes.CHANGE_PAGE]: (state, action) => {
-        const newState = { ...state };
-        const listId = action.payload.listId;
-        newState[listId] = getLoadingState(newState[listId]);
-        return newState;
-    },
-    [paginationActionTypes.CHANGE_ROWS_PER_PAGE]: (state, action) => {
-        const newState = { ...state };
-        const listId = action.payload.listId;
-        newState[listId] = getLoadingState(newState[listId]);
-        return newState;
-    },
-    [eventsListActionTypes.SORT_WORKING_LIST]: (state, action) => {
-        const newState = { ...state };
-        const listId = action.payload.listId;
-        newState[listId] = getLoadingState(newState[listId]);
-        return newState;
-    },
-    [eventsListActionTypes.WORKING_LIST_UPDATING]: (state, action) => {
+    [workingListsActionTypes.EVENT_LIST_UPDATE]: (state, action) => {
         const newState = { ...state };
         const listId = action.payload.listId;
         newState[listId] = { ...newState[listId], isUpdating: true };
-        return newState;
-    },
-    [eventsListActionTypes.WORKING_LIST_UPDATING_WITH_DIALOG]: (state, action) => {
-        const newState = { ...state };
-        const listId = action.payload.listId;
-        newState[listId] = { ...newState[listId], isUpdatingWithDialog: true };
         return newState;
     },
     [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
@@ -234,6 +170,38 @@ export const workingListsUIDesc = createReducerDescription({
         });
         return newState;
     },
+    /*
+    [paginationActionTypes.CHANGE_PAGE]: (state, action) => {
+        const newState = { ...state };
+        const listId = action.payload.listId;
+        newState[listId] = getLoadingState(newState[listId]);
+        return newState;
+    },
+    [paginationActionTypes.CHANGE_ROWS_PER_PAGE]: (state, action) => {
+        const newState = { ...state };
+        const listId = action.payload.listId;
+        newState[listId] = getLoadingState(newState[listId]);
+        return newState;
+    },
+    [eventsListActionTypes.SORT_WORKING_LIST]: (state, action) => {
+        const newState = { ...state };
+        const listId = action.payload.listId;
+        newState[listId] = getLoadingState(newState[listId]);
+        return newState;
+    },
+    [eventsListActionTypes.WORKING_LIST_UPDATING]: (state, action) => {
+        const newState = { ...state };
+        const listId = action.payload.listId;
+        newState[listId] = { ...newState[listId], isUpdating: true };
+        return newState;
+    },
+    [eventsListActionTypes.WORKING_LIST_UPDATING_WITH_DIALOG]: (state, action) => {
+        const newState = { ...state };
+        const listId = action.payload.listId;
+        newState[listId] = { ...newState[listId], isUpdatingWithDialog: true };
+        return newState;
+    },
+    */
 }, 'workingListsUI');
 
 export const workingListsColumnsOrderDesc = createReducerDescription({

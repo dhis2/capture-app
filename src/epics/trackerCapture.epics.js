@@ -99,10 +99,6 @@ import {
     goingOnlineEpic,
 } from 'capture-core/components/Connectivity/connectivity.epics';
 import {
-    updateEventListAfterSaveOrUpdateEventEpic,
-    updateEventListAfterUpdateEventEpic,
-} from 'capture-core/components/Pages/MainPage/mainPage.epics';
-import {
     networkMonitorStatusEpic,
 } from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.epics';
 import {
@@ -240,7 +236,6 @@ export default combineEpics(
     getEventOpeningFromEventListEpic,
     networkMonitorStatusEpic,
     goingOnlineEpic,
-    updateEventListAfterSaveOrUpdateEventEpic,
     setOrgUnit,
     setProgram,
     goBackToListContext,
@@ -296,7 +291,6 @@ export default combineEpics(
     loadEditEventDataEntryEpic,
     saveEditedEventEpic,
     saveEditedEventFailedEpic,
-    updateEventListAfterUpdateEventEpic,
     openNewRelationshipRegisterTeiEpic,
     openNewRelationshipRegisterTeiDataEntryEpic,
     loadSearchGroupDuplicatesForReviewEpic,

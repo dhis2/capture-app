@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import EventListLoader from './EventListLoader.component';
+import EventListConfig from './EventListConfig.component';
 import TemplateSelector from './TemplateSelector.component';
 import { ManagerContext } from './workingLists.context';
 import type { WorkingListTemplate } from './workingLists.types';
@@ -25,7 +25,6 @@ const TemplatesManager = (props: Props) => {
     };
 
 
-
     return (
         <React.Fragment>
             <TemplateSelector
@@ -33,7 +32,7 @@ const TemplatesManager = (props: Props) => {
                 selectedTemplateId={selectedTemplate.id}
                 onSelectTemplate={handleSelectTemplate}
             />
-            <EventListLoader
+            <EventListConfig
                 {...passOnProps}
                 selectedTemplate={selectedTemplate}
             />

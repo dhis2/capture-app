@@ -20,11 +20,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onEditFilterContents: (listId: string, value: any, itemId: string) => {
         dispatch(editContents(listId, value, itemId));
     },
-    onFilterUpdate: (listId: string, data: ?Object, itemId: string, commitValue?: any) => {
-        const actions = isDefined(commitValue) ? [editContents(listId, commitValue, itemId)] : [];
-        actions.push(data == null ? clearFilter(listId, itemId) : setFilter(listId, data, itemId));
-        actions.push(workingListUpdating(listId));
-        dispatch(batchActions(actions, batchActionTypes.SET_FILTER_BATCH));
+    onFilterUpdate: (listId: string, data: ?Object, itemId: string) => {
+        const action = data == null ? clearFilter(listId, itemId) : setFilter(listId, data, itemId);
+        dispatch(action);
     },
     onClearFilter: (listId: string, itemId: string) => {
         dispatch(batchActions([
