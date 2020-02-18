@@ -1,13 +1,14 @@
 # Translators:
 # phil_dhis2, 2019
 # Viktor Varland <viktor@dhis2.org>, 2019
+# easylin <lin_xd@126.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2019-11-20T12:27:04.744Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2019\n"
+"Last-Translator: easylin <lin_xd@126.com>, 2020\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -106,10 +107,10 @@ msgid "before or equal to"
 msgstr ""
 
 msgid "From"
-msgstr ""
+msgstr "从"
 
 msgid "To"
-msgstr ""
+msgstr "至"
 
 msgid "Max"
 msgstr "最大"
