@@ -17,76 +17,76 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "请提供有效的日期"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "表中显示的列"
 
 msgid "Column"
 msgstr "列"
 
 msgid "This value is validating"
-msgstr ""
+msgstr "值正在被验证"
 
 msgid "Async field update failed"
-msgstr ""
+msgstr "异步字段更新失败"
 
 msgid "A value is required"
-msgstr ""
+msgstr "需要一个值"
 
 msgid "Please provide a valid number"
-msgstr ""
+msgstr "请提供一个有效的数字"
 
 msgid "Please provide a valid integer"
-msgstr ""
+msgstr "请提供一个整数"
 
 msgid "Please provide a positive integer"
-msgstr ""
+msgstr "提供一个正整数"
 
 msgid "Please provide zero or a positive integer"
-msgstr ""
+msgstr "0或负整数"
 
 msgid "Please provide a negative integer"
-msgstr ""
+msgstr "负整数"
 
 msgid "Please provide a valid date and time"
-msgstr ""
+msgstr "日期和时间"
 
 msgid "Please provide a valid time"
-msgstr ""
+msgstr "有效的时间"
 
 msgid "Please provide a valid percentage"
-msgstr ""
+msgstr "有效的百分比"
 
 msgid "Please provide a valid url"
-msgstr ""
+msgstr "有效的URL"
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "有效的邮箱"
 
 msgid "Please provide a valid age"
-msgstr ""
+msgstr "有效的年龄"
 
 msgid "Please provide a valid phone number"
-msgstr ""
+msgstr "有效的电话号码"
 
 msgid "Please provide a valid organisation unit"
-msgstr ""
+msgstr "有效的机构"
 
 msgid "Please provide valid coordinates"
-msgstr ""
+msgstr "有效的坐标"
 
 msgid "This value already exists"
-msgstr ""
+msgstr "值已经存在"
 
 msgid "\"From\" cannot be greater than \"To\""
-msgstr ""
+msgstr "自不能大于至"
 
 msgid "Checking..."
-msgstr ""
+msgstr "检查"
 
 msgid "Area"
-msgstr ""
+msgstr "面积"
 
 msgid "Coordinate"
 msgstr "坐标"
@@ -95,31 +95,31 @@ msgid "Enrollment"
 msgstr "注册"
 
 msgid "A future date is not allowed"
-msgstr ""
+msgstr "将来的日期不允许"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "发生一个错误,看日志"
 
 msgid "Cancel"
 msgstr "取消"
 
 msgid "Unsaved changes"
-msgstr ""
+msgstr "没有保存的修改"
 
 msgid "Leaving this page will discard the changes you made to this event."
-msgstr ""
+msgstr "离开将丢失对事件的修改"
 
 msgid "Yes, discard"
-msgstr ""
+msgstr "是,忽略"
 
 msgid "No, stay here"
-msgstr ""
+msgstr "不,继续呆着"
 
 msgid "validation failed"
-msgstr ""
+msgstr "验证失败"
 
 msgid "Errors"
-msgstr ""
+msgstr "错误"
 
 msgid "Feedback"
 msgstr "反馈"
@@ -128,70 +128,70 @@ msgid "Indicators"
 msgstr "指标"
 
 msgid "Warnings"
-msgstr ""
+msgstr "错误"
 
 msgid "search group result could not be retrieved"
-msgstr ""
+msgstr "搜索组结果不能提取"
 
 msgid "Complete"
 msgstr "完成"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "发现警告"
 
 msgid "Abort"
 msgstr ""
 
 msgid "Back to form"
-msgstr ""
+msgstr "回到表单"
 
 msgid "Save anyway"
-msgstr ""
+msgstr "总是保存"
 
 msgid "Validation errors and warnings"
-msgstr ""
+msgstr "验证错误和警告"
 
 msgid "Validation errors"
-msgstr ""
+msgstr "验证错误"
 
 msgid "Validation warnings"
 msgstr "有效性警告"
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr ""
+msgstr "有些操作一直在运行,请等待"
 
 msgid "Operations running"
-msgstr ""
+msgstr "操作在运行"
 
 msgid "Sort"
 msgstr "排序"
 
 msgid "No events to display"
-msgstr ""
+msgstr "无事件可显示"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "离线列表数据不在"
 
 msgid "Close"
 msgstr "关闭"
 
 msgid "Please select the user"
-msgstr ""
+msgstr "请选择用户"
 
 msgid "Search for user"
-msgstr ""
+msgstr "搜索用户 "
 
 msgid "Me"
-msgstr ""
+msgstr "我"
 
 msgid "Anyone"
-msgstr ""
+msgstr "任何人"
 
 msgid "None"
 msgstr "无"
 
 msgid "Select user"
-msgstr ""
+msgstr "选择用户"
 
 msgid "to"
 msgstr "到"
@@ -203,10 +203,10 @@ msgid "To"
 msgstr "至"
 
 msgid "after or equal to"
-msgstr ""
+msgstr "晚或等于"
 
 msgid "before or equal to"
-msgstr ""
+msgstr "前或等于"
 
 msgid "Today"
 msgstr "今天"
@@ -215,10 +215,10 @@ msgid "This week"
 msgstr "本周"
 
 msgid "This month"
-msgstr ""
+msgstr "本月"
 
 msgid "This Year"
-msgstr ""
+msgstr "今年"
 
 msgid "Last week"
 msgstr "上周"
@@ -230,7 +230,7 @@ msgid "Last 3 months"
 msgstr "最近3个月"
 
 msgid "Custom range"
-msgstr ""
+msgstr "定制范围"
 
 msgid "Max"
 msgstr "最大"
@@ -239,13 +239,13 @@ msgid "Min"
 msgstr "最小"
 
 msgid "greater than or equal to"
-msgstr ""
+msgstr "大于等于"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "小于等于"
 
 msgid "Contains text"
-msgstr ""
+msgstr "包含文本"
 
 msgid "Yes"
 msgstr "是"
@@ -263,25 +263,25 @@ msgid "Days"
 msgstr "天"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "上传文件"
 
 msgid "selected"
-msgstr ""
+msgstr "选择的"
 
 msgid "Delete"
 msgstr "删除"
 
 msgid "Select file"
-msgstr ""
+msgstr "选择文件"
 
 msgid "No"
 msgstr "否"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "上传图像"
 
 msgid "Select image"
-msgstr ""
+msgstr "选择图像"
 
 msgid "Search"
 msgstr "搜索"
@@ -290,37 +290,37 @@ msgid "Clear"
 msgstr "清除"
 
 msgid "No results"
-msgstr ""
+msgstr "无结果"
 
 msgid "suggestions could not be retrieved"
-msgstr ""
+msgstr "建议不能提取"
 
 msgid "search for username"
-msgstr ""
+msgstr "搜索用户"
 
 msgid "No items to display"
-msgstr ""
+msgstr "无条目可显示"
 
 msgid "Online"
-msgstr ""
+msgstr "在线"
 
 msgid "Offline"
 msgstr "离线"
 
 msgid "Syncing"
-msgstr ""
+msgstr "同步"
 
 msgid "Add comment"
-msgstr ""
+msgstr "添加备注"
 
 msgid "You dont have access to write comments"
-msgstr ""
+msgstr "你没有权限写备注"
 
 msgid "Write comment"
-msgstr ""
+msgstr "写备注"
 
 msgid "Basic info"
-msgstr ""
+msgstr "基本信息"
 
 msgid "Status"
 msgstr "状态"
@@ -329,82 +329,82 @@ msgid "Comments"
 msgstr "评论"
 
 msgid "Please add or cancel comment before saving the event"
-msgstr ""
+msgstr "保存事件前请添加或取消被或许"
 
 msgid "No write access"
-msgstr ""
+msgstr "无写权限"
 
 msgid "Save"
 msgstr "保存"
 
 msgid "Show all events"
-msgstr ""
+msgstr "显示所有事件"
 
 msgid "Edit event"
-msgstr ""
+msgstr "编辑事件"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "事件不能载入"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "事件不能载入"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "机构不能载入"
 
 msgid "View event info"
-msgstr ""
+msgstr "查看事件信息"
 
 msgid "Delete event"
-msgstr ""
+msgstr "删除事件"
 
 msgid "Update"
 msgstr "更新"
 
 msgid "More filters"
-msgstr ""
+msgstr "更多过滤器"
 
 msgid "Select columns"
-msgstr ""
+msgstr "选择列"
 
 msgid "Download as JSON"
-msgstr ""
+msgstr "下载为JSON"
 
 msgid "Download as XML"
-msgstr ""
+msgstr "下载为xml"
 
 msgid "Download as CSV"
 msgstr "获取CSV格式报表"
 
 msgid "Download with current filters"
-msgstr ""
+msgstr "随着过滤器下载"
 
 msgid "Save filter as..."
-msgstr ""
+msgstr "保存过滤器为"
 
 msgid "Download as..."
-msgstr ""
+msgstr "下载为"
 
 msgid "Rows per page"
-msgstr ""
+msgstr "行每页"
 
 msgid "Active"
 msgstr "活动的"
 
 msgid "Completed"
-msgstr ""
+msgstr "已完成"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "不能获取机构"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "项目不存在"
 
 msgid "Selected program is invalid for registering unit"
-msgstr ""
+msgstr "选择的项目对注册机构是有效的"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr ""
+msgstr "在 {{orgUnit}}的 {{program}} 中创建一个新的{{TET}} 实例"
 
 msgid "Save and add another"
 msgstr ""
@@ -634,25 +634,25 @@ msgid "Accept"
 msgstr ""
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "在注册的机构"
 
 msgid "Select"
 msgstr "选择"
 
 msgid "Selected Program"
-msgstr ""
+msgstr "选择的项目"
 
 msgid "Select program"
 msgstr "选择项目"
 
 msgid "No programs available."
-msgstr ""
+msgstr "无可用项目"
 
 msgid "You dont have access to delete this relationship"
-msgstr ""
+msgstr "你v不能访问删除的关系"
 
 msgid "You dont have access to create any relationships"
-msgstr ""
+msgstr "你没有权限创建任何关系"
 
 msgid "Add relationship"
 msgstr "添加关系"
