@@ -17,16 +17,16 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "请提供有效的日期"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "表中显示的列"
 
 msgid "Column"
 msgstr "列"
 
 msgid "Errors"
-msgstr ""
+msgstr "错误"
 
 msgid "Feedback"
 msgstr "反馈"
@@ -35,7 +35,7 @@ msgid "Indicators"
 msgstr "指标"
 
 msgid "Warnings"
-msgstr ""
+msgstr "错误"
 
 msgid "Cancel"
 msgstr "取消"
@@ -44,7 +44,7 @@ msgid "Complete"
 msgstr "完成"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "发现警告"
 
 msgid "Abort"
 msgstr ""
@@ -53,13 +53,13 @@ msgid "Save comment"
 msgstr "保存注释"
 
 msgid "Write comment"
-msgstr ""
+msgstr "写备注"
 
 msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr ""
 
 msgid "No write access"
-msgstr ""
+msgstr "无写权限"
 
 msgid "Save"
 msgstr "保存"
@@ -71,10 +71,10 @@ msgid "Sort"
 msgstr "排序"
 
 msgid "No events to display"
-msgstr ""
+msgstr "无事件可显示"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "离线列表数据不在"
 
 msgid "Last week"
 msgstr "上周"
@@ -86,16 +86,16 @@ msgid "Last 3 months"
 msgstr "最近3个月"
 
 msgid "Custom range"
-msgstr ""
+msgstr "定制范围"
 
 msgid "to"
 msgstr "到"
 
 msgid "after or equal to"
-msgstr ""
+msgstr "晚或等于"
 
 msgid "before or equal to"
-msgstr ""
+msgstr "前或等于"
 
 msgid "From"
 msgstr "从"
@@ -110,13 +110,13 @@ msgid "Min"
 msgstr "最小"
 
 msgid "greater than or equal to"
-msgstr ""
+msgstr "大于等于"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "小于等于"
 
 msgid "Contains text"
-msgstr ""
+msgstr "包含文本"
 
 msgid "Yes"
 msgstr "是"
@@ -134,43 +134,43 @@ msgid "Days"
 msgstr "天"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "上传文件"
 
 msgid "selected"
-msgstr ""
+msgstr "选择的"
 
 msgid "Delete"
 msgstr "删除"
 
 msgid "Select file"
-msgstr ""
+msgstr "选择文件"
 
 msgid "No"
 msgstr "否"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "上传图像"
 
 msgid "Select image"
-msgstr ""
+msgstr "选择图像"
 
 msgid "Clear"
 msgstr "清除"
 
 msgid "No results"
-msgstr ""
+msgstr "无结果"
 
 msgid "No items to display"
-msgstr ""
+msgstr "无条目可显示"
 
 msgid "Online"
-msgstr ""
+msgstr "在线"
 
 msgid "Offline"
 msgstr "离线"
 
 msgid "Syncing"
-msgstr ""
+msgstr "同步"
 
 msgid "Field"
 msgstr "区域"
@@ -197,13 +197,13 @@ msgid "Create New Event"
 msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "事件不能载入"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "事件不能载入"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "机构不能载入"
 
 msgid "Update"
 msgstr "更新"
@@ -212,19 +212,19 @@ msgid "Close"
 msgstr "关闭"
 
 msgid "More filters"
-msgstr ""
+msgstr "更多过滤器"
 
 msgid "Rows per page"
-msgstr ""
+msgstr "行每页"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "不能获取机构"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "项目不存在"
 
 msgid "Selected program is invalid for registering unit"
-msgstr ""
+msgstr "选择的项目对注册机构是有效的"
 
 msgid "Select a registering unit and program above to get started"
 msgstr ""
@@ -289,10 +289,10 @@ msgid "Registering Oraginastion Unit"
 msgstr ""
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "在注册的机构"
 
 msgid "Selected Program"
-msgstr ""
+msgstr "选择的项目"
 
 msgid "Select"
 msgstr "选择"
@@ -301,7 +301,7 @@ msgid "Program"
 msgstr "项目"
 
 msgid "No programs available."
-msgstr ""
+msgstr "无可用项目"
 
 msgid "Show all"
 msgstr "显示全部"
@@ -313,7 +313,7 @@ msgid "Select program"
 msgstr "选择项目"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "发生一个错误,看日志"
 
 msgid "Error saving event"
 msgstr ""
