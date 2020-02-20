@@ -1,4 +1,5 @@
 // @flow
+import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
 import { actionCreator } from '../../../../actions/actions.utils';
 
 export const actionTypes = {
@@ -16,6 +17,9 @@ export const actionTypes = {
     EVENT_LIST_UPDATE_SUCCESS: 'EventWorkingListsEventListUpdateSuccess',
     EVENT_LIST_UPDATE_ERROR: 'EventWorkingListsEventListUpdateError',
     EVENT_LIST_UPDATE_CANCEL: 'EventWorkingListsEventListUpdateCancel',
+    EVENT_DELETE: 'EventWorkingListsEventListEventDelete',
+    EVENT_DELETE_SUCCESS: 'EventWorkingListsEventListEventDeleteSuccess',
+    EVENT_DELETE_ERROR: 'EventWorkingListsEventListEventDeleteError',
 };
 
 export const batchActionTypes = {
@@ -37,11 +41,11 @@ export const fetchTemplatesError = (error: string, listId: string) =>
 export const fetchTemplatesCancel = (listId: string) =>
     actionCreator(actionTypes.TEMPLATES_FETCH_CANCEL)({ listId });
 
-export const selectTemplate = (templateId: string, listId: string, data?: ?Object) =>
-    actionCreator(actionTypes.TEMPLATE_SELECT)({ ...data, templateId, listId });
+export const selectTemplate = (templateId: string, listId: string) =>
+    actionCreator(actionTypes.TEMPLATE_SELECT)({ templateId, listId });
 
 export const initEventList =
-    (selectedTemplate: Object, listId: string) => actionCreator(actionTypes.EVENT_LIST_INIT)({ selectedTemplate, listId });
+    (selectedTemplate: Object, defaultConfig: Map<string, Object>, listId: string) => actionCreator(actionTypes.EVENT_LIST_INIT)({ selectedTemplate, defaultConfig, listId });
 
 export const initEventListSuccess =
     (listId: string, data: Object) => actionCreator(actionTypes.EVENT_LIST_INIT_SUCCESS)({ ...data, listId });
@@ -59,7 +63,20 @@ export const updateEventListSuccess =
     (listId: string, data: Object) => actionCreator(actionTypes.EVENT_LIST_UPDATE_SUCCESS)({ ...data, listId });
 
 export const updateEventListError =
-    (listId: string, errorMessage: string) => actionCreator(actionTypes.EVENT_LIST_UPDATE_ERROR)({ listId, errorMessage });
+    (listId: string, errorMessage: string) =>
+        actionCreator(actionTypes.EVENT_LIST_UPDATE_ERROR)({ listId, errorMessage });
 
 export const updateEventListCancel =
     (listId: string) => actionCreator(actionTypes.EVENT_LIST_UPDATE_CANCEL)({ listId });
+
+export const deleteEvent =
+    (eventId: string, listId: string) => actionCreator(actionTypes.EVENT_DELETE)({ listId }, {
+        offline: {
+            effect: {
+                url: `events/${eventId}`,
+                method: methods.DELETE,
+            },
+            commit: { type: actionTypes.EVENT_DELETE_SUCCESS },
+            rollback: { type: actionTypes.EVENT_DELETE_ERROR },
+        },
+    });

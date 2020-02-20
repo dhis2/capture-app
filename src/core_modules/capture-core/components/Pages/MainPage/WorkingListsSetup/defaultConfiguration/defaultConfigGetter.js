@@ -2,21 +2,21 @@
 import i18n from '@dhis2/d2-i18n';
 import { canViewOtherUsers } from '../../../../../d2';
 import {
-    RenderFoundation,
     ProgramStage,
     dataElementTypes as elementTypeKeys,
+    getEventProgramThrowIfNotFound,
 } from '../../../../../metaData';
 import mainPropertyNames from '../../../../../events/mainPropertyNames.const';
 
-export const getDefaultMainConfig = (stage: ProgramStage) => {
+const getDefaultMainConfig = (stage: ProgramStage) => {
     const baseFields = [
-        {
+        [mainPropertyNames.EVENT_DATE, {
             id: mainPropertyNames.EVENT_DATE,
             visible: true,
             isMainProperty: true,
             type: elementTypeKeys.DATE,
-        },
-        {
+        }],
+        [mainPropertyNames.EVENT_STATUS, {
             id: mainPropertyNames.EVENT_STATUS,
             header: 'Status',
             visible: true,
@@ -27,7 +27,7 @@ export const getDefaultMainConfig = (stage: ProgramStage) => {
                 { text: i18n.t('Active'), value: 'ACTIVE' },
                 { text: i18n.t('Completed'), value: 'COMPLETED' },
             ],
-        },
+        }],
     ];
 
     const extraFields = [];
@@ -40,17 +40,28 @@ export const getDefaultMainConfig = (stage: ProgramStage) => {
             visible: true,
             isMainProperty: true,
         };
-        extraFields.push(assigneeField);
+        extraFields.push([mainPropertyNames.ASSIGNEE, assigneeField]);
     }
 
     return [...baseFields, ...extraFields];
 };
 
-export const getMetaDataConfig = (stage: RenderFoundation): Array<{id: string, visible: boolean}> =>
+const getMetaDataConfig = (stage: ProgramStage): Array<Array<string | {id: string, visible: boolean}>> =>
     stage
+        .stageForm
         .getElements()
-        .map(element => ({
-            id: element.id,
-            visible: element.displayInReports,
-        }));
+        .map(element => ([
+            element.id, {
+                id: element.id,
+                visible: element.displayInReports,
+            }]),
+        );
 
+export const getDefaultConfig = (programId: string): Map<string, Object> => {
+    const stage = getEventProgramThrowIfNotFound(programId).stage;
+    // $FlowFixMe
+    return new Map([
+        ...getDefaultMainConfig(stage),
+        ...getMetaDataConfig(stage),
+    ]);
+};

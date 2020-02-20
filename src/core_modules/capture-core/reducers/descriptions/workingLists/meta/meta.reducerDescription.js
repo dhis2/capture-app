@@ -25,10 +25,21 @@ export const workingListsMetaDesc = createReducerDescription({
     },
     [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
-        const { listId, queryData, pagingData } = action.payload;
+        const { listId, config, pagingData } = action.payload;
+        const {
+            filters,
+            rowsPerPage,
+            currentPage,
+            sortById,
+            sortByDirection,
+        } = config;
 
         const listState = {
-            ...queryData,
+            filters,
+            rowsPerPage,
+            currentPage,
+            sortById,
+            sortByDirection,
             ...pagingData,
             next: {},
         };

@@ -9,24 +9,29 @@ const EventListUpdaterWithLoadingIndicator = withErrorMessageHandler()(
 
 type Props = {
     listId: string,
-    eventsData: ?Object,
     selectedTemplate: Object,
     filters: Object,
     sortById: ?string,
     sortByDirection: ?string,
     currentPage: ?number,
     rowsPerPage: ?number,
+    defaultConfig: Map<string, Object>,
 };
 
 const EventListLoader = (props: Props) => {
     const {
         selectedTemplate,
         listId,
+        defaultConfig,
         ...passOnProps
     } = props;
 
+    const templateIsChanging = React.useRef(false);
+    const firstRun = React.useRef(true);
+
     const {
         eventsData,
+        eventListIsLoading,
         onLoadEventList,
         loadEventListError: loadError,
         onCancelLoadEventList,
@@ -35,14 +40,32 @@ const EventListLoader = (props: Props) => {
     } = React.useContext(EventListLoaderContext);
 
     React.useEffect(() => {
-        if (eventsData !== undefined) {
+        if (eventsData !== undefined && (!templateIsChanging.current || firstRun.current)) {
+            firstRun.current = false;
+            templateIsChanging.current = false;
             return undefined;
         }
-        onLoadEventList(selectedTemplate, listId);
-        return () => onCancelLoadEventList(listId);
-    }, []);
 
-    const ready = eventsData !== undefined;
+        onLoadEventList(selectedTemplate, defaultConfig, listId);
+        firstRun.current = false;
+        templateIsChanging.current = false;
+        return () => onCancelLoadEventList(listId);
+    }, [
+        eventsData,
+        listId,
+        onLoadEventList,
+        onCancelLoadEventList,
+        defaultConfig,
+        selectedTemplate,
+    ]);
+
+    React.useMemo(() => {
+        templateIsChanging.current = true;
+    }, [
+        selectedTemplate,
+    ]);
+
+    const ready = !templateIsChanging.current && !eventListIsLoading;
 
     return (
         <EventListUpdaterWithLoadingIndicator
@@ -50,6 +73,7 @@ const EventListLoader = (props: Props) => {
             ready={ready}
             error={loadError}
             listId={listId}
+            defaultConfig={defaultConfig}
             onUpdateEventList={onUpdateEventList}
             onCancelUpdateEventList={onCancelUpdateEventList}
         />

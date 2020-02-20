@@ -9,20 +9,19 @@ import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as feedbackActionTypes } from '../../components/FeedbackBar/actions/feedback.actions';
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
 import { actionTypes as enrollmentActionTypes } from '../../actions/__TEMP__/enrollment.actions';
-import { actionTypes as mainSelectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
 import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
 } from '../../components/Pages/NewEvent';
 import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
-import { actionTypes as eventsListActionTypes } from '../../components/Pages/MainPage/EventsList/eventsList.actions';
 import { orgUnitListActionTypes } from '../../components/QuickSelector';
 import {
     actionTypes as viewEventNewRelationshipActionTypes,
 } from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
 import { asyncHandlerActionTypes } from '../../components/D2Form';
 import { registrationSectionActionTypes } from '../../components/Pages/NewRelationship/RegisterTei';
+import { actionTypes as workingListActionTypes } from '../../components/Pages/MainPage/WorkingLists';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 
 function addErrorFeedback(state: ReduxState, message: string, action?: ?React.Node) {
@@ -54,7 +53,7 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         addErrorFeedback(state, action.payload.error, action.payload.action),
     [enrollmentActionTypes.ENROLLMENT_LOAD_FAILED]: (state, action) =>
         addErrorFeedback(state, action.payload),
-    [mainSelectionsActionTypes.WORKING_LIST_DATA_RETRIEVAL_FAILED]: (state, action) =>
+    [workingListActionTypes.EVENT_LIST_INIT_ERROR]: (state, action) =>
         addErrorFeedback(state, action.payload.errorMessage),
     [newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_AFTER_RETURNED_TO_MAIN_PAGE]: (state, action) => {
         const error = action.payload;
@@ -78,9 +77,13 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         ];
         return newState;
     },
-    [eventsListActionTypes.WORKING_LIST_UPDATE_DATA_RETRIEVAL_FAILED]: (state, action) => [
+    [workingListActionTypes.EVENT_LIST_UPDATE_ERROR]: (state, action) => [
         ...state,
         getErrorFeedback(action.payload.errorMessage),
+    ],
+    [workingListActionTypes.EVENT_DELETE_ERROR]: state => [
+        ...state,
+        getErrorFeedback(i18n.t('Could not delete event')),
     ],
     [asyncHandlerActionTypes.ASYNC_UPDATE_FIELD_FAILED]: (state, action) =>
         addErrorFeedback(state, action.payload.message),

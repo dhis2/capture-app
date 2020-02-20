@@ -38,7 +38,13 @@ const WorkingListsPreCleaner = (props: Props) => {
         onPreCleanData(listId);
         setCleaningStatus(false);
         return undefined;
-    }, []);
+    }, [
+        listId,
+        skipReload,
+        onResetSkipReload,
+        onPreCleanData,
+        setCleaningStatus,
+    ]);
 
     if (isCleaning && !skipReload) {
         return null;

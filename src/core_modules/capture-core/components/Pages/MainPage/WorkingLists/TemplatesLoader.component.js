@@ -30,7 +30,12 @@ const TemplatesLoader = (props: Props) => {
         }
         onLoadTemplates(listId);
         return () => onCancelLoadTemplates(listId);
-    }, []);
+    }, [
+        onLoadTemplates,
+        onCancelLoadTemplates,
+        templates,
+        listId,
+    ]);
 
     const ready = templates !== undefined;
 

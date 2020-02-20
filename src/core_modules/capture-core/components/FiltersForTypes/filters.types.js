@@ -13,7 +13,7 @@ export const assigneeFilterModes = Object.freeze({
 
 export type AssigneeFilterData = {
     assignedUserMode: $Values<typeof assigneeFilterModes>,
-    assignedUser: {
+    assignedUser?: ?{
         id: string,
         username: string,
         name: string,

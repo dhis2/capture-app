@@ -1,5 +1,5 @@
 // @flow
-import { getEventFilters } from '../eventFiltersInterface';
+import { getEventFilters } from './eventFiltersInterface';
 
 export const getTemplatesAsync = (state: ReduxState) => {
     const programId = state.currentSelections.programId;

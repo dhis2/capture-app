@@ -1,9 +1,5 @@
 // @flow
-import {
-    ProgramStage,
-} from '../../../../../metaData';
-import { getDefaultMainConfig, getMetaDataConfig } from '../defaultColumnConfiguration';
-import type { ColumnConfig } from '../eventList.types';
+import type { ColumnConfig } from '../../workingLists.types';
 
 const getCustomConfig = (
     customOrder: Array<string>,
@@ -64,17 +60,13 @@ const getCustomColumnsConfiguration = (
 };
 
 export const getColumnsConfiguration = (
-    stage: ProgramStage,
     customOrder?: ?Array<string>,
+    defaultConfig: Map<string, Object>,
 ): Array<ColumnConfig> => {
-    const defaultConfig = [
-        ...getDefaultMainConfig(stage),
-        ...getMetaDataConfig(stage.stageForm),
-    ];
-
+    const defaultOrderConfig = [...defaultConfig.entries()].map(entry => entry[1]);
     if (customOrder && customOrder.length > 0) {
-        return getCustomColumnsConfiguration(defaultConfig, customOrder);
+        return getCustomColumnsConfiguration(defaultOrderConfig, customOrder);
     }
 
-    return defaultConfig;
+    return defaultOrderConfig;
 };

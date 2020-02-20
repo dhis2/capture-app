@@ -1,3 +1,3 @@
 // @flow
-export { default as WorkingListsSetup } from './WorkingListsSetup.container';
+export { default as WorkingListsSetup } from './WorkingListsManualSetup.component';
 export { actionTypes } from './workingListsSetup.actions';

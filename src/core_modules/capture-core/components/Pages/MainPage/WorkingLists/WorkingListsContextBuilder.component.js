@@ -27,6 +27,7 @@ type Props = {
     onCancelUpdateEventList: Function,
     listMeta: ?Object,
     eventsData: ?Object,
+    eventListIsLoading: boolean,
     ...PassOnProps,
 };
 
@@ -41,6 +42,7 @@ const WorkingListsContextBuilder = (props: Props) => {
         onCancelUpdateEventList,
         listMeta,
         eventsData,
+        eventListIsLoading,
         ...passOnProps
     } = props;
 
@@ -55,6 +57,7 @@ const WorkingListsContextBuilder = (props: Props) => {
 
     const eventListData = React.useMemo(() => ({
         eventsData,
+        eventListIsLoading,
         onLoadEventList,
         loadEventListError,
         onUpdateEventList,

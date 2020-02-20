@@ -6,24 +6,25 @@ import { ManagerContext } from './workingLists.context';
 import type { WorkingListTemplate } from './workingLists.types';
 
 type PassOnProps = {|
-    listId: string,
+    defaultConfig: Map<string, Object>,
+    eventsData: ?Object,
 |};
 
 type Props = {
     templates: Object,
+    listId: string,
     ...PassOnProps,
 };
 
 const TemplatesManager = (props: Props) => {
-    const { templates, ...passOnProps } = props;
+    const { templates, listId, ...passOnProps } = props;
     const {
         selectedTemplate,
         onSelectTemplate,
     } = React.useContext(ManagerContext);
     const handleSelectTemplate = (template: WorkingListTemplate) => {
-        var x = onSelectTemplate;
+        onSelectTemplate(template.id, listId);
     };
-
 
     return (
         <React.Fragment>
@@ -34,6 +35,7 @@ const TemplatesManager = (props: Props) => {
             />
             <EventListConfig
                 {...passOnProps}
+                listId={listId}
                 selectedTemplate={selectedTemplate}
             />
 

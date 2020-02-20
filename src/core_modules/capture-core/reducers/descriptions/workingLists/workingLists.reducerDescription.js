@@ -1,4 +1,5 @@
 // @flow
+import { moment } from 'capture-core-utils/moment';
 import { createReducerDescription } from '../../../trackerRedux/trackerReducer';
 import {
     actionTypes as columnSelectorActionTypes,
@@ -119,6 +120,7 @@ export const workingListsDesc = createReducerDescription({
 const getReadyState = (oldState, more) => ({
     ...oldState,
     ...more,
+    isLoading: false,
     isUpdating: false,
     isUpdatingWithDialog: false,
 });
@@ -130,6 +132,12 @@ export const workingListsUIDesc = createReducerDescription({
             ...state,
             [listId]: undefined,
         };
+    },
+    [workingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
+        const newState = { ...state };
+        const listId = action.payload.listId;
+        newState[listId] = { ...newState[listId], isLoading: true };
+        return newState;
     },
     [workingListsActionTypes.EVENT_LIST_UPDATE]: (state, action) => {
         const newState = { ...state };
@@ -170,38 +178,16 @@ export const workingListsUIDesc = createReducerDescription({
         });
         return newState;
     },
-    /*
-    [paginationActionTypes.CHANGE_PAGE]: (state, action) => {
-        const newState = { ...state };
+    [workingListsActionTypes.EVENT_DELETE]: (state, action) => {
         const listId = action.payload.listId;
-        newState[listId] = getLoadingState(newState[listId]);
-        return newState;
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                isUpdatingWithDialog: true,
+            },
+        };
     },
-    [paginationActionTypes.CHANGE_ROWS_PER_PAGE]: (state, action) => {
-        const newState = { ...state };
-        const listId = action.payload.listId;
-        newState[listId] = getLoadingState(newState[listId]);
-        return newState;
-    },
-    [eventsListActionTypes.SORT_WORKING_LIST]: (state, action) => {
-        const newState = { ...state };
-        const listId = action.payload.listId;
-        newState[listId] = getLoadingState(newState[listId]);
-        return newState;
-    },
-    [eventsListActionTypes.WORKING_LIST_UPDATING]: (state, action) => {
-        const newState = { ...state };
-        const listId = action.payload.listId;
-        newState[listId] = { ...newState[listId], isUpdating: true };
-        return newState;
-    },
-    [eventsListActionTypes.WORKING_LIST_UPDATING_WITH_DIALOG]: (state, action) => {
-        const newState = { ...state };
-        const listId = action.payload.listId;
-        newState[listId] = { ...newState[listId], isUpdatingWithDialog: true };
-        return newState;
-    },
-    */
 }, 'workingListsUI');
 
 export const workingListsColumnsOrderDesc = createReducerDescription({
@@ -256,8 +242,11 @@ export const workingListsContextDesc = createReducerDescription({
     },
     [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
-        const payload = action.payload;
-        newState[payload.listId] = payload.selections;
+        const { listId, config } = action.payload;
+        newState[listId] = {
+            ...config.selections,
+            timestamp: moment().toISOString(),
+        };
         return newState;
     },
     // TODO: WHAT IS THIS!??!?!?
@@ -289,11 +278,11 @@ export const workingListsUserSelectedFiltersDesc = createReducerDescription({
         };
     },
     [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
-        const { listId, config = {} } = action.payload;
+        const { listId, config } = action.payload;
         const filters = config.filters;
-        const selectedFilters = filters ? filters.reduce((acc, filter) => ({
+        const selectedFilters = filters ? Object.keys(filters).reduce((acc, key) => ({
             ...acc,
-            [filter.id]: true,
+            [key]: true,
         }), {}) : {};
 
         return {

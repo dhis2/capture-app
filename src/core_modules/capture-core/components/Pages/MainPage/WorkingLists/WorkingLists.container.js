@@ -16,6 +16,7 @@ type OwnProps = {|
     listId: string,
     skipReload: boolean,
     onResetSkipReload?: ?Function,
+    defaultConfig: Object,
 |};
 
 type StateProps = {|
@@ -25,6 +26,7 @@ type StateProps = {|
     loadEventListError: ?string,
     listMeta: ?Object,
     eventsData: ?Object,
+    eventListIsLoading: boolean,
 |};
 
 type DispatchProps = {|
@@ -59,6 +61,7 @@ const mapStateToProps: MapStateToPropsFactory = (state: ReduxState, props: { lis
         loadEventListError: state.workingListsUI[listId] && state.workingListsUI[listId].dataLoadingError,
         listMeta: state.workingListsMeta[listId],
         eventsData: state.workingLists[listId],
+        eventListIsLoading: !!state.workingListsUI[listId] && !!state.workingListsUI[listId].isLoading,
     };
 };
 

@@ -8,6 +8,8 @@ const determinePrimitiveConfigValue = (value, nextValue) => (nextValue !== undef
 type PassOnProps = {
     listId: string,
     selectedTemplate: Object,
+    defaultConfig: Map<string, Object>,
+    eventsData: ?Object,
 };
 
 type Props = {

@@ -5,4 +5,5 @@ export {
     initEventListEpic,
     updateEventListEpic,
     retrieveTemplatesEpic,
+    requestDeleteEventEpic,
 } from './epics';

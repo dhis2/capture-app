@@ -42,6 +42,7 @@ import {
     initEventListEpic,
     updateEventListEpic,
     retrieveTemplatesEpic,
+    requestDeleteEventEpic,
 } from 'capture-core/components/Pages/MainPage/WorkingLists';
 /*
 import {
@@ -203,6 +204,7 @@ export default combineEpics(
     initEventListEpic,
     updateEventListEpic,
     retrieveTemplatesEpic,
+    requestDeleteEventEpic,
     mainSelectionsFromUrlGetOrgUnitDataEpic,
     mainSelectionsFromUrlEmptyOrgUnitEpic,
     mainSelectionsFromUrlValidationEpic,

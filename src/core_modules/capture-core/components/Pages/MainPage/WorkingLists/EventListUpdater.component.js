@@ -38,7 +38,7 @@ function useUpdateListEffect(callback, dependencies) {
             return undefined;
         }
         return callback();
-    }, useUpdateListMemoize(dependencies));
+    }, useUpdateListMemoize(dependencies)); // eslint-disable-line react-hooks/exhaustive-deps
 }
 
 type Props = {
@@ -52,7 +52,7 @@ type Props = {
     onCancelUpdateEventList: Function,
 };
 
-const EventListLoader = (props: Props) => {
+const EventListUpdater = (props: Props) => {
     const {
         listId,
         filters,
@@ -82,4 +82,4 @@ const EventListLoader = (props: Props) => {
     );
 };
 
-export default EventListLoader;
+export default EventListUpdater;
