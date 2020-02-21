@@ -1,4 +1,5 @@
 // @flow
+import i18n from '@dhis2/d2-i18n';
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator';
@@ -16,26 +17,34 @@ const getStyles = (theme: Theme) => ({
     listContainer: {
         padding: theme.typography.pxToRem(24),
     },
+    title: {
+        ...theme.typography.title,
+    },
 });
 
 type Props = {
-    header: React.Node,
     classes: {
         headerContainer: string,
         listContainer: string,
+        title: string,
     },
 };
 
-export default () => (InnerComponent: React.ComponentType<any>) =>
-    withStyles(getStyles)(class withListHeaderWrapper extends React.Component<Props> {
+const withWorkingListsHeader = () => (InnerComponent: React.ComponentType<any>) =>
+    // $FlowFixMe
+    withStyles(getStyles)(class WorkingListsHeaderHOC extends React.Component<Props> {
         render() {
-            const { header, classes, ...passOnProps } = this.props;
+            const { classes, ...passOnProps } = this.props;
             return (
                 <Paper>
                     <div
                         className={classes.headerContainer}
                     >
-                        {header}
+                        <span
+                            className={classes.title}
+                        >
+                            {i18n.t('Registered events')}
+                        </span>
                     </div>
                     <div
                         className={classes.listContainer}
@@ -48,3 +57,5 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
             );
         }
     });
+
+export default withWorkingListsHeader;

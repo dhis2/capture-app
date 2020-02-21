@@ -3,7 +3,6 @@ import { createReducerDescription } from '../../../../trackerRedux/trackerReduce
 import {
     actionTypes as eventsListActionTypes,
 } from '../../../../components/Pages/MainPage/EventsList/eventsList.actions';
-import { actionTypes as mainSelectionsActionTypes } from '../../../../components/Pages/MainPage/mainSelections.actions';
 import {
     actionTypes as paginationActionTypes,
 } from '../../../../components/Pages/MainPage/EventsList/Pagination/pagination.actions';

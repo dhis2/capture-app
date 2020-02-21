@@ -1,7 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
-import isDefined from 'd2-utilizr/lib/isDefined';
 import FilterButton from './FilterButton.component';
 import { editContents, setFilter, clearFilter, batchActionTypes } from '../filterSelector.actions';
 import { workingListUpdating } from '../../eventsList.actions';

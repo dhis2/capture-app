@@ -3,6 +3,7 @@ import * as React from 'react';
 import EventListConfig from './EventListConfig.component';
 import TemplateSelector from './TemplateSelector.component';
 import { ManagerContext } from './workingLists.context';
+import { withBorder } from './borderHOC';
 import type { WorkingListTemplate } from './workingLists.types';
 
 type PassOnProps = {|
@@ -11,7 +12,7 @@ type PassOnProps = {|
 |};
 
 type Props = {
-    templates: Object,
+    templates: Array<WorkingListTemplate>,
     listId: string,
     ...PassOnProps,
 };
@@ -19,10 +20,16 @@ type Props = {
 const TemplatesManager = (props: Props) => {
     const { templates, listId, ...passOnProps } = props;
     const {
-        selectedTemplate,
+        currentTemplate,
         onSelectTemplate,
     } = React.useContext(ManagerContext);
     const handleSelectTemplate = (template: WorkingListTemplate) => {
+        if (template.id === currentTemplate.id) {
+            const defaultTemplate = templates.find(t => t.isDefault);
+            // $FlowFixMe
+            onSelectTemplate(defaultTemplate.id, listId);
+            return;
+        }
         onSelectTemplate(template.id, listId);
     };
 
@@ -30,17 +37,17 @@ const TemplatesManager = (props: Props) => {
         <React.Fragment>
             <TemplateSelector
                 templates={templates}
-                selectedTemplateId={selectedTemplate.id}
+                currentTemplateId={currentTemplate.id}
                 onSelectTemplate={handleSelectTemplate}
             />
             <EventListConfig
                 {...passOnProps}
                 listId={listId}
-                selectedTemplate={selectedTemplate}
+                currentTemplate={currentTemplate}
             />
 
         </React.Fragment>
     );
 };
 
-export default TemplatesManager;
+export default withBorder()(TemplatesManager);

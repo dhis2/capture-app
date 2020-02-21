@@ -6,7 +6,6 @@ import { canViewOtherUsers } from '../../../../../../../d2';
 import {
     dataElementTypes as elementTypes,
 } from '../../../../../../../metaData';
-import eventStatusElement from '../../../../../../../events/eventStatusElement';
 import { getColumnsConfiguration } from '../columnsConfigurationGetter';
 import { getApi } from '../../../../../../../d2/d2Instance';
 import { getOptionSetFilter } from './optionSet';
@@ -15,8 +14,6 @@ import {
     assigneeFilterModes,
     dateFilterTypes,
     type AssigneeFilterData,
-    type AbsoluteDateFilterData,
-    type RelativeDateFilterData,
     type DateFilterData,
     type BooleanFilterData,
     type TrueOnlyFilterData,

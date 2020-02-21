@@ -9,7 +9,7 @@ const EventListUpdaterWithLoadingIndicator = withErrorMessageHandler()(
 
 type Props = {
     listId: string,
-    selectedTemplate: Object,
+    currentTemplate: Object,
     filters: Object,
     sortById: ?string,
     sortByDirection: ?string,
@@ -20,7 +20,7 @@ type Props = {
 
 const EventListLoader = (props: Props) => {
     const {
-        selectedTemplate,
+        currentTemplate,
         listId,
         defaultConfig,
         ...passOnProps
@@ -46,7 +46,7 @@ const EventListLoader = (props: Props) => {
             return undefined;
         }
 
-        onLoadEventList(selectedTemplate, defaultConfig, listId);
+        onLoadEventList(currentTemplate, defaultConfig, listId);
         firstRun.current = false;
         templateIsChanging.current = false;
         return () => onCancelLoadEventList(listId);
@@ -56,13 +56,13 @@ const EventListLoader = (props: Props) => {
         onLoadEventList,
         onCancelLoadEventList,
         defaultConfig,
-        selectedTemplate,
+        currentTemplate,
     ]);
 
     React.useMemo(() => {
         templateIsChanging.current = true;
-    }, [
-        selectedTemplate,
+    }, [ // eslint-disable-line react-hooks/exhaustive-deps
+        currentTemplate,
     ]);
 
     const ready = !templateIsChanging.current && !eventListIsLoading;

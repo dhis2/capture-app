@@ -18,7 +18,7 @@ type PassOnProps = {|
 |};
 
 type Props = {
-    selectedTemplate: ?Object,
+    currentTemplate: ?Object,
     onSelectTemplate: Function,
     onLoadEventList: Function,
     loadEventListError: ?string,
@@ -33,7 +33,7 @@ type Props = {
 
 const WorkingListsContextBuilder = (props: Props) => {
     const {
-        selectedTemplate,
+        currentTemplate,
         onSelectTemplate,
         onLoadEventList,
         loadEventListError,
@@ -47,9 +47,9 @@ const WorkingListsContextBuilder = (props: Props) => {
     } = props;
 
     const managerData = React.useMemo(() => ({
-        selectedTemplate,
+        currentTemplate,
         onSelectTemplate,
-    }), [selectedTemplate, onSelectTemplate]);
+    }), [currentTemplate, onSelectTemplate]);
 
     const eventListConfig = React.useMemo(() => ({
         listMeta,
@@ -65,6 +65,7 @@ const WorkingListsContextBuilder = (props: Props) => {
         onCancelUpdateEventList,
     }), [
         eventsData,
+        eventListIsLoading,
         onLoadEventList,
         loadEventListError,
         onUpdateEventList,

@@ -20,7 +20,7 @@ type OwnProps = {|
 |};
 
 type StateProps = {|
-    selectedTemplate: ?Object,
+    currentTemplate: ?Object,
     templates: ?Object,
     loadTemplatesError: ?string,
     loadEventListError: ?string,
@@ -51,7 +51,7 @@ type MapStateToPropsFactory = (ReduxState, OwnProps) => StateProps;
 const mapStateToProps: MapStateToPropsFactory = (state: ReduxState, props: { listId: string }) => {
     const listId = props.listId;
     return {
-        selectedTemplate: state.workingListsTemplates[listId] &&
+        currentTemplate: state.workingListsTemplates[listId] &&
             state.workingListsTemplates[listId].selectedTemplateId &&
             state.workingListsTemplates[listId].templates &&
             state.workingListsTemplates[listId].templates.find(template => template.id === state.workingListsTemplates[listId].selectedTemplateId),

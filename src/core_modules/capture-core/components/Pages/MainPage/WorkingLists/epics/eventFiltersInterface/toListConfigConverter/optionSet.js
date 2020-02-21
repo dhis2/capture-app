@@ -3,7 +3,6 @@ import { moment } from 'capture-core-utils/moment';
 import { parseNumber } from 'capture-core-utils/parsers';
 import {
     dataElementTypes as elementTypes,
-    DataElement,
 } from '../../../../../../../metaData';
 
 import type {
