@@ -85,6 +85,18 @@ export const getFeedbackDesc = (appUpdaters: Updaters) => createReducerDescripti
         ...state,
         getErrorFeedback(i18n.t('Could not delete event')),
     ],
+    [workingListActionTypes.TEMPLATE_UPDATE_ERROR]: state => [
+        ...state,
+        getErrorFeedback(i18n.t('Could not save working list')),
+    ],
+    [workingListActionTypes.TEMPLATE_ADD_ERROR]: state => [
+        ...state,
+        getErrorFeedback(i18n.t('Could not add working list')),
+    ],
+    [workingListActionTypes.TEMPLATE_DELETE_ERROR]: state => [
+        ...state,
+        getErrorFeedback(i18n.t('Could not delete working list')),
+    ],
     [asyncHandlerActionTypes.ASYNC_UPDATE_FIELD_FAILED]: (state, action) =>
         addErrorFeedback(state, action.payload.message),
     [newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER]: (state, action) => {

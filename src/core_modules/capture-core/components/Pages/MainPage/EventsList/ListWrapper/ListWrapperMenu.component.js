@@ -4,18 +4,15 @@ import i18n from '@dhis2/d2-i18n';
 import { IconButton, Paper, MenuList, MenuItem } from '@material-ui/core';
 import { MoreHoriz } from '@material-ui/icons';
 import Popper from '../../../../Popper/Popper.component';
-
 import DownloadDialog from './DownloadDialog.container';
-import SaveConfigDialog from './SaveConfigDialog.container';
 
 const dialogKeys = {
-    COLUMN_SELECTOR: 'columnSelector',
     DOWNLOAD_TABLE: 'downloadTable',
-    SAVE_CONFIG: 'saveConfig',
 };
 
 type Props = {
     listId: string,
+    customMenuContents?: ?Array<{key: string, clickHandler: Function, element: React.Element<any>}>,
 }
 
 type State = {
@@ -42,28 +39,39 @@ class ListWrapperMenu extends React.Component<Props, State> {
         });
     }
 
-    closeDialog = (key: $Values<typeof dialogKeys>) => {
+    closeDialog = () => {
         this.setState({
             dialogOpen: undefined,
         });
     }
 
-    renderMenuItems = (togglePopper: Function) => (
-        /*
-        remove until the functionality is there
-        <MenuItem onClick={() => { this.openDialog(dialogKeys.COLUMN_SELECTOR, togglePopper); }}>
-            {i18n.t('Save filter as...')}
-        </MenuItem>
-        */
-       <React.Fragment>
-            <MenuItem onClick={() => { this.openDialog(dialogKeys.DOWNLOAD_TABLE, togglePopper); }}>
+    renderMenuItems = (togglePopper: Function) => {
+        const { customMenuContents } = this.props;
+        const customMenuItems = customMenuContents ?
+            customMenuContents
+                .map(content => (
+                    <MenuItem
+                        key={content.key}
+                        onClick={() => {
+                            if (!content.clickHandler) {
+                                return;
+                            }
+                            togglePopper();
+                            content.clickHandler();
+                        }}
+                    >
+                        {content.element}
+                    </MenuItem>
+                )) : [];
+
+        return [(
+            <MenuItem key="download" onClick={() => { this.openDialog(dialogKeys.DOWNLOAD_TABLE, togglePopper); }}>
                 {i18n.t('Download as...')}
             </MenuItem>
-            <MenuItem onClick={() => { this.openDialog(dialogKeys.SAVE_CONFIG, togglePopper); }}>
-                {i18n.t('Save ')}
-            </MenuItem>
-        </React.Fragment>
-    )
+        ),
+        ...customMenuItems,
+        ];
+    }
 
     renderPopperContent = (togglePopper: Function) => (
         <Paper>
@@ -82,11 +90,6 @@ class ListWrapperMenu extends React.Component<Props, State> {
                 />
                 <DownloadDialog
                     open={this.state.dialogOpen === dialogKeys.DOWNLOAD_TABLE}
-                    onClose={() => { this.closeDialog(dialogKeys.DOWNLOAD_TABLE); }}
-                    listId={this.props.listId}
-                />
-                <SaveConfigDialog
-                    open={this.state.dialogOpen === dialogKeys.SAVE_CONFIG}
                     onClose={() => { this.closeDialog(dialogKeys.DOWNLOAD_TABLE); }}
                     listId={this.props.listId}
                 />

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-02-21T09:38:52.654Z\n"
-"PO-Revision-Date: 2020-02-21T09:38:52.655Z\n"
+"POT-Creation-Date: 2020-02-24T21:23:35.077Z\n"
+"PO-Revision-Date: 2020-02-24T21:23:35.077Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -374,16 +374,43 @@ msgstr ""
 msgid "Download with current filters"
 msgstr ""
 
-msgid "Save filter as..."
-msgstr ""
-
 msgid "Download as..."
 msgstr ""
 
-msgid "Save "
+msgid "Rows per page"
 msgstr ""
 
-msgid "Rows per page"
+msgid "Update current template"
+msgstr ""
+
+msgid "Save as template..."
+msgstr ""
+
+msgid "Delete current template"
+msgstr ""
+
+msgid "Share current template..."
+msgstr ""
+
+msgid "Delete template"
+msgstr ""
+
+msgid "Do you really want to delete the '{{templateName}}' template?"
+msgstr ""
+
+msgid "Confirm"
+msgstr ""
+
+msgid "Save As template"
+msgstr ""
+
+msgid "Template name"
+msgstr ""
+
+msgid "Show Less"
+msgstr ""
+
+msgid "Show All"
 msgstr ""
 
 msgid "Working list could not be loaded"
@@ -698,6 +725,15 @@ msgid "Could not save event. See log for details"
 msgstr ""
 
 msgid "Could not delete event"
+msgstr ""
+
+msgid "Could not save working list"
+msgstr ""
+
+msgid "Could not add working list"
+msgstr ""
+
+msgid "Could not delete working list"
 msgstr ""
 
 msgid "Organisation unit search failed. See log for details"

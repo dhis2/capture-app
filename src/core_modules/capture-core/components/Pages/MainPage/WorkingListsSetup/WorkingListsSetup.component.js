@@ -31,26 +31,37 @@ const WorkingListsSetup = (props: Props) => {
         programId,
     ]);
 
-    const skipReload = React.useMemo(() =>
+    /*
+    const {
+        skipReloadTemplates,
+        skipReloadData,
+    } = React.useMemo(() =>
         shouldSkipReload(programId, orgUnitId, categories, lastTransaction, listContext), [     // eslint-disable-line react-hooks/exhaustive-deps
         programId,
         orgUnitId,
         categories,
         lastTransaction,
     ]);
+    */
 
+    /*
     const workingListsKey = React.useMemo(() => {
         const categoriesString = categories ? Object.keys(categories).map(key => categories[key]).join('_') : '';
         return `${programId}_${orgUnitId}_${categoriesString}`;
     }, [programId, orgUnitId, categories]);
+    */
 
     return (
         <WorkingLists
             {...passOnProps}
             listId="eventList"
-            key={workingListsKey}
-            skipReload={skipReload}
+            programId={programId}
+            orgUnitId={orgUnitId}
+            categories={categories}
+            lastTransaction={lastTransaction}
+            listContext={listContext}
             defaultConfig={defaultConfig}
+            onCheckSkipReload={shouldSkipReload}
         />
     );
 };

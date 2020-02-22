@@ -6,4 +6,7 @@ export {
     updateEventListEpic,
     retrieveTemplatesEpic,
     requestDeleteEventEpic,
+    updateTemplateEpic,
+    addTemplateEpic,
+    deleteTemplateEpic,
 } from './epics';

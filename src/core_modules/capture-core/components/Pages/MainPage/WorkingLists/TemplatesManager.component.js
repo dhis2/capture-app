@@ -4,7 +4,9 @@ import EventListConfig from './EventListConfig.component';
 import TemplateSelector from './TemplateSelector.component';
 import { ManagerContext } from './workingLists.context';
 import { withBorder } from './borderHOC';
-import type { WorkingListTemplate } from './workingLists.types';
+import type {
+    WorkingListTemplate,
+} from './workingLists.types';
 
 type PassOnProps = {|
     defaultConfig: Map<string, Object>,
@@ -23,7 +25,8 @@ const TemplatesManager = (props: Props) => {
         currentTemplate,
         onSelectTemplate,
     } = React.useContext(ManagerContext);
-    const handleSelectTemplate = (template: WorkingListTemplate) => {
+
+    const handleSelectTemplate = React.useCallback((template: WorkingListTemplate) => {
         if (template.id === currentTemplate.id) {
             const defaultTemplate = templates.find(t => t.isDefault);
             // $FlowFixMe
@@ -31,22 +34,30 @@ const TemplatesManager = (props: Props) => {
             return;
         }
         onSelectTemplate(template.id, listId);
-    };
+    }, [
+        onSelectTemplate,
+        currentTemplate.id,
+        listId,
+        templates,
+    ]);
 
     return (
-        <React.Fragment>
-            <TemplateSelector
-                templates={templates}
-                currentTemplateId={currentTemplate.id}
-                onSelectTemplate={handleSelectTemplate}
-            />
-            <EventListConfig
-                {...passOnProps}
-                listId={listId}
-                currentTemplate={currentTemplate}
-            />
-
-        </React.Fragment>
+        <EventListConfig
+            {...passOnProps}
+            listId={listId}
+            currentTemplate={currentTemplate}
+        >
+            {
+                currentListIsModified => (
+                    <TemplateSelector
+                        templates={templates}
+                        currentTemplateId={currentTemplate.id}
+                        currentListIsModified={currentListIsModified}
+                        onSelectTemplate={handleSelectTemplate}
+                    />
+                )
+            }
+        </EventListConfig>
     );
 };
 

@@ -1,49 +1,36 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
-import { ActionsObservable } from 'redux-observable';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-
 import {
     actionTypes,
     batchActionTypes,
     fetchTemplatesSuccess,
     fetchTemplatesError,
     selectTemplate,
+    updateTemplateSuccess,
+    updateTemplateError,
+    addTemplateSuccess,
+    addTemplateError,
+    deleteTemplateSuccess,
+    deleteTemplateError,
 } from '../workingLists.actions';
 import { getTemplatesAsync } from './templatesFetcher';
+import { getApi } from '../../../../../d2';
 
-/*
-import {
-    actionTypes as mainSelectionActionTypes,
-} from '../../mainSelections.actions';
-import { actionTypes as viewEventActionTypes } from '../../../ViewEvent/viewEvent.actions';
-import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../../NewEvent';
-import {
-    batchActionTypes as eventsListBatchActionTypes,
-    setCurrentWorkingListConfig,
-    workingListConfigsRetrieved,
-} from '../eventsList.actions';
-import { getProgramFromProgramIdThrowIfNotFound, EventProgram } from '../../../../../metaData';
-import { workingListsActions } from '../../../MainPage/WorkingLists';
-*/
-
-
-export const retrieveTemplatesEpic = (action$: ActionsObservable, store: ReduxStore) =>
+export const retrieveTemplatesEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.ofType(
-        /*mainSelectionActionTypes.MAIN_SELECTIONS_COMPLETED,
-        viewEventActionTypes.INITIALIZE_WORKING_LISTS_ON_BACK_TO_MAIN_PAGE,
-        newEventDataEntryActionTypes.CANCEL_SAVE_INITIALIZE_WORKING_LISTS,*/
         actionTypes.TEMPLATES_FETCH,
     )
-        .switchMap((action) => {
+        .concatMap((action) => {
             const listId = action.payload.listId;
+            const programId = store.getState().currentSelections.programId;
             const promise = getTemplatesAsync(store.getState())
                 .then(container => batchActions([
                     selectTemplate(container.default.id, listId, container.default),
-                    fetchTemplatesSuccess(container.workingListConfigs, listId),
+                    fetchTemplatesSuccess(container.workingListConfigs, programId, listId),
                 ], batchActionTypes.TEMPLATES_FETCH_SUCCESS_BATCH))
                 .catch((error) => {
                     log.error(
@@ -59,27 +46,165 @@ export const retrieveTemplatesEpic = (action$: ActionsObservable, store: ReduxSt
                 );
         });
 
-/*
-export const addWorkingListConfigEpic = (action$: ActionsObservable, store: ReduxStore) =>
+export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.ofType(
-        eventListActionTypes.ADD_WORKING_LIST_CONFIG,
+        actionTypes.TEMPLATE_UPDATE,
     )
-        .switchMap((action) => {
-            const state = store.getState();
-            const programId = state.currentSelections.programId;
-            const selectedListId = state.workingListConfigSelector.eventMainPage.currentListId;
-            const filtersByKey = state.workingListFiltersEdit[selectedListId];
-            const { name, description } = action.payload;
-            const workingListConfigData = {
-                name,
-                description,
-                filtersByKey,
+        .concatMap((action) => {
+            const {
+                template,
+                eventQueryCriteria,
                 programId,
+                listId,
+            } = action.payload;
+
+            const eventFilterData = {
+                name: template.name,
+                program: programId,
+                eventQueryCriteria,
             };
 
-            const promise = addEventProgramWorkingListConfig(workingListConfigData).then((result) => {
-                const s = 1;
-            });
-            return fromPromise(promise);
+            const requestPromise = getApi()
+                .update(`eventFilters/${template.id}`, eventFilterData)
+                .then(() => {
+                    const isActiveTemplate =
+                        store.getState().workingListsTemplates[listId].selectedTemplateId === template.id;
+                    return updateTemplateSuccess(
+                        template.id,
+                        eventQueryCriteria, {
+                            listId,
+                            isActiveTemplate,
+                        });
+                })
+                .catch((error) => {
+                    log.error(
+                        errorCreator('could not update template')({
+                            error,
+                            eventFilterData,
+                        }),
+                    );
+                    const isActiveTemplate =
+                        store.getState().workingListsTemplates[listId].selectedTemplateId === template.id;
+                    return updateTemplateError(
+                        template.id,
+                        eventQueryCriteria, {
+                            listId,
+                            isActiveTemplate,
+                        });
+                });
+
+            return fromPromise(requestPromise)
+                .takeUntil(
+                    action$
+                        .ofType(actionTypes.TEMPLATE_UPDATE)
+                        .filter(cancelAction => cancelAction.payload.template.id === template.id),
+                )
+                .takeUntil(
+                    action$
+                        .ofType(actionTypes.CONTEXT_UNLOADING)
+                        .filter(cancelAction => cancelAction.payload.listId === listId),
+                );
         });
-*/
+
+export const addTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.ofType(
+        actionTypes.TEMPLATE_ADD,
+    )
+        .concatMap((action) => {
+            const {
+                name,
+                eventQueryCriteria,
+                clientId,
+                programId,
+                listId,
+            } = action.payload;
+
+            const eventFilterData = {
+                name,
+                program: programId,
+                eventQueryCriteria,
+            };
+
+            const api = getApi();
+
+            const requestPromise = api
+                .post('eventFilters', eventFilterData)
+                .then((result) => {
+                    const templateId = result.response.uid;
+                    return api
+                        .post(`sharing?type=eventFilter&id=${templateId}`, {
+                            object: {
+                                publicAccess: '--------',
+                                externalAccess: false,
+                            },
+                        })
+                        .catch((error) => {
+                            log.error(
+                                errorCreator('could not set sharing settings for template')({
+                                    error,
+                                    eventFilterData,
+                                    templateId,
+                                }),
+                            );
+                        })
+                        .then(() => {
+                            const isActiveTemplate =
+                                store.getState().workingListsTemplates[listId].selectedTemplateId === clientId;
+                            return addTemplateSuccess(result.response.uid, clientId, { listId, isActiveTemplate });
+                        });
+                })
+                .catch((error) => {
+                    log.error(
+                        errorCreator('could not add template')({
+                            error,
+                            eventFilterData,
+                        }),
+                    );
+                    const isActiveTemplate =
+                        store.getState().workingListsTemplates[listId].selectedTemplateId === clientId;
+                    return addTemplateError(clientId, { listId, isActiveTemplate });
+                });
+
+            return fromPromise(requestPromise)
+                .takeUntil(
+                    action$
+                        .ofType(actionTypes.CONTEXT_UNLOADING)
+                        .filter(cancelAction => cancelAction.payload.listId === listId),
+                );
+        });
+
+export const deleteTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.ofType(
+        actionTypes.TEMPLATE_DELETE,
+    )
+        .concatMap((action) => {
+            const {
+                template,
+                listId,
+            } = action.payload;
+
+            const requestPromise = getApi()
+                .delete(`eventFilters/${template.id}`)
+                .then(() => deleteTemplateSuccess(template, listId))
+                .catch((error) => {
+                    log.error(
+                        errorCreator('could not delete template')({
+                            error,
+                            template,
+                        }),
+                    );
+                    return deleteTemplateError(template, listId);
+                });
+
+            return fromPromise(requestPromise)
+                .takeUntil(
+                    action$
+                        .ofType(actionTypes.TEMPLATE_DELETE)
+                        .filter(cancelAction => cancelAction.payload.template.id === template.id),
+                )
+                .takeUntil(
+                    action$
+                        .ofType(actionTypes.CONTEXT_UNLOADING)
+                        .filter(cancelAction => cancelAction.payload.listId === listId),
+                );
+        });

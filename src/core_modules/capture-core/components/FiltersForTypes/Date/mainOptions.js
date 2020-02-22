@@ -8,7 +8,7 @@ export const mainOptionKeys = {
     THIS_YEAR: 'THIS_YEAR',
     LAST_WEEK: 'LAST_WEEK',
     LAST_MONTH: 'LAST_MONTH',
-    LAST_3_MONTHS: 'LAST_THREE_MONTHS',
+    LAST_3_MONTHS: 'LAST_3_MONTHS',
     CUSTOM_RANGE: 'CUSTOM_RANGE',
 };
 

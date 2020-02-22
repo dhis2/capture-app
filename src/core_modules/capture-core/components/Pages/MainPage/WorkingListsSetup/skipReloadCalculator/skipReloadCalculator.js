@@ -12,6 +12,7 @@ export function shouldSkipReload(
     if (!listContext) {
         return false;
     }
+
     const currentSelections = {
         programId,
         orgUnitId,
@@ -24,13 +25,13 @@ export function shouldSkipReload(
         ...listSelections
     } = listContext;
 
-    if (lastTransaction > contextLastTransaction) {
-        return false;
-    }
-
     if (!isSelectionsEqual(currentSelections, listSelections)) {
         return false;
     }
 
-    return moment().diff(moment(contextTimestamp), 'minutes') < 5;
+    if (lastTransaction > contextLastTransaction || moment().diff(moment(contextTimestamp), 'minutes') > 5) {
+        return false;
+    }
+
+    return true;
 }
