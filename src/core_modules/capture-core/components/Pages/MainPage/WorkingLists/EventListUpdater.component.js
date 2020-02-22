@@ -50,6 +50,7 @@ type Props = {
     rowsPerPage: ?number,
     onUpdateEventList: Function,
     onCancelUpdateEventList: Function,
+    customMenuContents: Array<Object>,
 };
 
 const EventListUpdater = (props: Props) => {
@@ -62,6 +63,7 @@ const EventListUpdater = (props: Props) => {
         rowsPerPage,
         onUpdateEventList,
         onCancelUpdateEventList,
+        customMenuContents,
     } = props;
 
     useUpdateListEffect(() => {
@@ -78,6 +80,7 @@ const EventListUpdater = (props: Props) => {
     return (
         <EventList
             listId={listId}
+            customMenuContents={customMenuContents}
         />
     );
 };

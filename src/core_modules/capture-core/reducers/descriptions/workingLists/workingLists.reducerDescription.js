@@ -188,6 +188,26 @@ export const workingListsUIDesc = createReducerDescription({
             },
         };
     },
+    [filterSelectorActionTypes.SET_FILTER]: (state, action) => {
+        const { listId } = action.payload;
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                templateModified: true,
+            },
+        };
+    },
+    [workingListsActionTypes.TEMPLATE_UPDATE]: (state, action) => {
+        const { listId } = action.payload;
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                templateModified: false,
+            },
+        };
+    },
 }, 'workingListsUI');
 
 export const workingListsColumnsOrderDesc = createReducerDescription({

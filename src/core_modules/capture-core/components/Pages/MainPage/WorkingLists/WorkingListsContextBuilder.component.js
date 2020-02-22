@@ -26,8 +26,11 @@ type Props = {
     onCancelLoadEventList: Function,
     onCancelUpdateEventList: Function,
     listMeta: ?Object,
+    columnOrder: ?Array<Object>,
     eventsData: ?Object,
     eventListIsLoading: boolean,
+    onAddTemplate: Function,
+    onUpdateTemplate: Function,
     ...PassOnProps,
 };
 
@@ -41,8 +44,11 @@ const WorkingListsContextBuilder = (props: Props) => {
         onCancelLoadEventList,
         onCancelUpdateEventList,
         listMeta,
+        columnOrder,
         eventsData,
         eventListIsLoading,
+        onAddTemplate,
+        onUpdateTemplate,
         ...passOnProps
     } = props;
 
@@ -53,7 +59,15 @@ const WorkingListsContextBuilder = (props: Props) => {
 
     const eventListConfig = React.useMemo(() => ({
         listMeta,
-    }), [listMeta]);
+        columnOrder,
+        onAddTemplate,
+        onUpdateTemplate,
+    }), [
+        listMeta,
+        columnOrder,
+        onAddTemplate,
+        onUpdateTemplate,
+    ]);
 
     const eventListData = React.useMemo(() => ({
         eventsData,

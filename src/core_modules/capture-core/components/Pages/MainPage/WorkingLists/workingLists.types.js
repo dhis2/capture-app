@@ -37,20 +37,39 @@ export type ApiDataFilterTrueOnly = {
     eq: string,
 }
 
+export const dateFilterTypes = Object.freeze({
+    ABSOLUTE: 'ABSOLUTE',
+    RELATIVE: 'RELATIVE',
+});
+
 export type ApiDataFilterDateAbsolute = {|
+    type: 'ABSOLUTE',
     startDate?: ?string,
     endDate?: ?string,
 |}
 
 export type ApiDataFilterDateRelative = {|
+    type: 'RELATIVE',
     period: string,
 |}
+
+export type ApiDataFilterDate = ApiDataFilterDateAbsolute | ApiDataFilterDateRelative;
+
+export const assigneeFilterModes = Object.freeze({
+    PROVIDED: 'PROVIDED',
+    CURRENT: 'CURRENT',
+    ANY: 'ANY',
+    NONE: 'NONE',
+});
+
+export type ApiDataFilterAssignee = {|
+    assignedUserMode: $Values<typeof assigneeFilterModes>,
+    assignedUsers: ?Array<string>,
+|};
 
 export type ApiDataFilterOptionSet = {|
     in: Array<string>,
 |};
-
-export type ApiDataFilterDate = ApiDataFilterDateAbsolute | ApiDataFilterDateRelative;
 
 export type ApiEventQueryCriteria = {
     dataFilters?: ?Array<ApiDataFilter>,

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import {
     preCleanData,
     selectTemplate,
+    addTemplate,
+    updateTemplate,
     fetchTemplates,
     fetchTemplatesCancel,
     initEventList,
@@ -25,6 +27,7 @@ type StateProps = {|
     loadTemplatesError: ?string,
     loadEventListError: ?string,
     listMeta: ?Object,
+    columnOrder: ?Array<Object>,
     eventsData: ?Object,
     eventListIsLoading: boolean,
 |};
@@ -38,6 +41,8 @@ type DispatchProps = {|
     onCancelLoadEventList: Function,
     onCancelUpdateEventList: Function,
     onCancelLoadTemplates: Function,
+    onAddTemplate: Function,
+    onUpdateTemplate: Function,
 |};
 
 type Props = {
@@ -60,6 +65,7 @@ const mapStateToProps: MapStateToPropsFactory = (state: ReduxState, props: { lis
         loadTemplatesError: state.workingListsTemplates[listId] && state.workingListsTemplates[listId].loadError,
         loadEventListError: state.workingListsUI[listId] && state.workingListsUI[listId].dataLoadingError,
         listMeta: state.workingListsMeta[listId],
+        columnOrder: state.workingListsColumnsOrder[listId],
         eventsData: state.workingLists[listId],
         eventListIsLoading: !!state.workingListsUI[listId] && !!state.workingListsUI[listId].isLoading,
     };
@@ -77,6 +83,8 @@ const mapDispatchToProps: MapDispatchToPropsFactory = (dispatch: ReduxDispatch) 
         onCancelLoadEventList: basicDispatcher(initEventListCancel),
         onCancelUpdateEventList: basicDispatcher(updateEventListCancel),
         onCancelLoadTemplates: basicDispatcher(fetchTemplatesCancel),
+        onAddTemplate: basicDispatcher(addTemplate),
+        onUpdateTemplate: basicDispatcher(updateTemplate),
     };
 };
 

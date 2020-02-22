@@ -9,6 +9,12 @@ export const actionTypes = {
     TEMPLATES_FETCH_ERROR: 'EventWorkingListsTemplatesFetchError',
     TEMPLATES_FETCH_CANCEL: 'EventWorkingListsTemplatesFetchCancel',
     TEMPLATE_SELECT: 'EventWorkingListsTemplateSelect',
+    TEMPLATE_ADD: 'EventWorkingListsTemplateAdd',
+    TEMPLATE_ADD_SUCCESS: 'EventWorkingListsTemplateAddSuccess',
+    TEMPLATE_ADD_ERROR: 'EventWorkingListsTemplateAddError',
+    TEMPLATE_UPDATE: 'EventWorkingListsTemplateUpdate',
+    TEMPLATE_UPDATE_SUCCESS: 'EventWorkingListsTemplateUpdateSuccess',
+    TEMPLATE_UPDATE_ERROR: 'EventWorkingListsTemplateUpdateError',
     EVENT_LIST_INIT: 'EventWorkingListsEventListInit',
     EVENT_LIST_INIT_SUCCESS: 'EventWorkingListsEventListInitSuccess',
     EVENT_LIST_INIT_ERROR: 'EventWorkingListsEventListInitError',
@@ -43,6 +49,18 @@ export const fetchTemplatesCancel = (listId: string) =>
 
 export const selectTemplate = (templateId: string, listId: string) =>
     actionCreator(actionTypes.TEMPLATE_SELECT)({ templateId, listId });
+
+export const addTemplate = (data: Object) =>
+    actionCreator(actionTypes.TEMPLATE_ADD)(data);
+
+export const updateTemplate = (templateId: string, data: Object) =>
+    actionCreator(actionTypes.TEMPLATE_UPDATE)({ templateId, ...data });
+
+export const updateTemplateSuccess = (templateId: string) =>
+    actionCreator(actionTypes.TEMPLATE_UPDATE_SUCCESS)({ templateId });
+
+export const updateTemplateError = (templateId: string, templateName: string) =>
+    actionCreator(actionTypes.TEMPLATE_UPDATE_ERROR)({ templateId, templateName });
 
 export const initEventList =
     (selectedTemplate: Object, defaultConfig: Map<string, Object>, listId: string) => actionCreator(actionTypes.EVENT_LIST_INIT)({ selectedTemplate, defaultConfig, listId });
