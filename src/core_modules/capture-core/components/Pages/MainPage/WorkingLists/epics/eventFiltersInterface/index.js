@@ -1,4 +1,4 @@
 // @flow
 export { getEventFilters } from './eventFilterRequests';
-// export { convertToEventFilter } from './convertToEventFilter';
+export { convertToEventQueryCriteria } from './toEventQueryCriteriaConverter';
 export { convertToListConfig } from './toListConfigConverter';

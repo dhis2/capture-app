@@ -1,21 +1,7 @@
 // @flow
 import * as React from 'react';
 import { EventList } from '../EventsList';
-
-function filtersAreEqual(prevFilters: Object, newFilters: Object) {
-    if (prevFilters === newFilters) {
-        return true;
-    }
-
-    const prevFilterKeys = Object.keys(prevFilters);
-    const newFilterKeys = Object.keys(newFilters);
-    if (prevFilterKeys.length !== newFilterKeys.length) {
-        return false;
-    }
-
-    return newFilterKeys
-        .every(key => newFilters[key] === prevFilters[key]);
-}
+import { filtersAreEqual } from './utils';
 
 function useUpdateListMemoize(value) {
     const [filters, ...rest] = value;
@@ -50,6 +36,8 @@ type Props = {
     rowsPerPage: ?number,
     onUpdateEventList: Function,
     onCancelUpdateEventList: Function,
+    customMenuContents: Array<Object>,
+    lastEventIdDeleted: ?string,
 };
 
 const EventListUpdater = (props: Props) => {
@@ -62,10 +50,12 @@ const EventListUpdater = (props: Props) => {
         rowsPerPage,
         onUpdateEventList,
         onCancelUpdateEventList,
+        customMenuContents,
+        lastEventIdDeleted,
     } = props;
 
     useUpdateListEffect(() => {
-        onUpdateEventList(listId, { filters, sortById, sortByDirection, currentPage, rowsPerPage });
+        onUpdateEventList(listId, { filters, sortById, sortByDirection, currentPage, rowsPerPage, lastEventIdDeleted });
         return () => onCancelUpdateEventList(listId);
     }, [
         filters,
@@ -73,11 +63,13 @@ const EventListUpdater = (props: Props) => {
         sortByDirection,
         currentPage,
         rowsPerPage,
+        lastEventIdDeleted,
     ]);
 
     return (
         <EventList
             listId={listId}
+            customMenuContents={customMenuContents}
         />
     );
 };

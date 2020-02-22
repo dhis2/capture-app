@@ -63,6 +63,7 @@ type Props = {
     isUpdatingWithDialog?: ?boolean,
     onSaveColumnOrder: Function,
     rowIdKey: string,
+    customMenuContents?: ?Array<Object>,
 };
 
 class EventListWrapper extends React.Component<Props> {
@@ -71,7 +72,7 @@ class EventListWrapper extends React.Component<Props> {
     }
 
     renderTopBar = () => {
-        const { classes, filterButtons, columns, listId } = this.props;
+        const { classes, filterButtons, columns, listId, customMenuContents } = this.props;
         return (
             <div
                 className={classes.topBarContainer}
@@ -90,6 +91,7 @@ class EventListWrapper extends React.Component<Props> {
                     />
                     <ListWrapperMenu
                         listId={listId}
+                        customMenuContents={customMenuContents}
                     />
                 </div>
             </div>

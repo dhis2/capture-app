@@ -5,7 +5,7 @@ import EventListUpdater from './EventListUpdater.component';
 import { EventListLoaderContext } from './workingLists.context';
 
 const EventListUpdaterWithLoadingIndicator = withErrorMessageHandler()(
-    withLoadingIndicator()(EventListUpdater));
+    withLoadingIndicator(() => ({ margin: 10 }))(EventListUpdater));
 
 type Props = {
     listId: string,
@@ -16,56 +16,95 @@ type Props = {
     currentPage: ?number,
     rowsPerPage: ?number,
     defaultConfig: Map<string, Object>,
+    programId: string,
 };
 
+// eslint-disable-next-line complexity
 const EventListLoader = (props: Props) => {
     const {
         currentTemplate,
         listId,
         defaultConfig,
+        programId,
         ...passOnProps
     } = props;
 
-    const templateIsChanging = React.useRef(false);
-    const firstRun = React.useRef(true);
-
     const {
-        eventsData,
         eventListIsLoading,
         onLoadEventList,
         loadEventListError: loadError,
         onCancelLoadEventList,
         onUpdateEventList,
         onCancelUpdateEventList,
+        onCleanSkipInitAddingTemplate,
+        orgUnitId,
+        categories,
+        lastTransaction,
+        listContext,
+        onCheckSkipReload,
+        lastEventIdDeleted,
+        dirtyEventList,
     } = React.useContext(EventListLoaderContext);
 
+    const hasContextChanged = React.useMemo(() => {
+        return !onCheckSkipReload(programId, orgUnitId, categories, lastTransaction, listContext);
+    }, [
+        onCheckSkipReload,
+        programId,
+        orgUnitId,
+        categories,
+        lastTransaction,
+        listContext,
+    ]);
+
+    const prevTemplateRef = React.useRef(undefined);
+    const prevListIdRef = React.useRef(undefined);
+    const firstRunRef = React.useRef(true);
+    // eslint-disable-next-line complexity
     React.useEffect(() => {
-        if (eventsData !== undefined && (!templateIsChanging.current || firstRun.current)) {
-            firstRun.current = false;
-            templateIsChanging.current = false;
+        if (onCheckSkipReload(programId, orgUnitId, categories, lastTransaction, listContext) &&
+            (!prevTemplateRef.current || currentTemplate.id === prevTemplateRef.current.id) &&
+            (!prevListIdRef.current || prevListIdRef.current === listId) &&
+            (!dirtyEventList || !firstRunRef.current)) {
+            prevTemplateRef.current = currentTemplate;
+            prevListIdRef.current = listId;
+            firstRunRef.current = false;
             return undefined;
         }
 
+        prevTemplateRef.current = currentTemplate;
+        prevListIdRef.current = listId;
+        firstRunRef.current = false;
+
+        if (currentTemplate.skipInitDuringAddProcedure) {
+            return () => onCleanSkipInitAddingTemplate(currentTemplate, listId);
+        }
+
         onLoadEventList(currentTemplate, defaultConfig, listId);
-        firstRun.current = false;
-        templateIsChanging.current = false;
-        return () => onCancelLoadEventList(listId);
+        return undefined;
     }, [
-        eventsData,
         listId,
         onLoadEventList,
         onCancelLoadEventList,
         defaultConfig,
         currentTemplate,
+        onCheckSkipReload,
+        onCleanSkipInitAddingTemplate,
+        programId,
+        orgUnitId,
+        categories,
+        lastTransaction,
+        listContext,
+        dirtyEventList,
     ]);
 
-    React.useMemo(() => {
-        templateIsChanging.current = true;
-    }, [ // eslint-disable-line react-hooks/exhaustive-deps
-        currentTemplate,
-    ]);
+    React.useEffect(() => () => onCancelLoadEventList(listId), [onCancelLoadEventList, listId]);
 
-    const ready = !templateIsChanging.current && !eventListIsLoading;
+    const ready = !hasContextChanged &&
+        (!prevTemplateRef.current || currentTemplate.id === prevTemplateRef.current.id || !!currentTemplate.skipInitDuringAddProcedure) &&
+        (!prevListIdRef.current || prevListIdRef.current === listId) &&
+        (!dirtyEventList || !firstRunRef.current) &&
+        !eventListIsLoading;
 
     return (
         <EventListUpdaterWithLoadingIndicator
@@ -76,6 +115,7 @@ const EventListLoader = (props: Props) => {
             defaultConfig={defaultConfig}
             onUpdateEventList={onUpdateEventList}
             onCancelUpdateEventList={onCancelUpdateEventList}
+            lastEventIdDeleted={lastEventIdDeleted}
         />
     );
 };

@@ -42,6 +42,9 @@ function setConfig() {
             Authorization: REACT_APP_DHIS2_AUTHORIZATION,
         };
     }
+
+    // Temporary setting some old d2 translations for the d2 ui sharing dialog
+    config.i18n.sources.add('i18n/i18n_module_en.properties');
 }
 
 function isLangRTL(code) {

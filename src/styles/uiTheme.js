@@ -24,6 +24,16 @@ const theme = createMuiTheme({
                 color: primary.dark,
             },
         },
+        MuiDialog: {
+            paperWidthLg: {
+                width: 800,
+            },
+        },
+        MuiSvgIcon: {
+            colorAction: {
+                color: '#494949',
+            },
+        },
     },
     typography: {
         useNextVariants: true,
