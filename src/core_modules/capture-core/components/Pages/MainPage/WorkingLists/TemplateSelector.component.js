@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { fade, lighten } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core';
-import { Chip } from '@dhis2/ui-core';
+import TemplateSelectorChip from './TemplateSelectorChip.component';
 import type { WorkingListTemplate } from './workingLists.types';
 
 const getBorder = (theme: Theme) => {
@@ -33,41 +33,46 @@ const getStyles = (theme: Theme) => ({
 
 type Props = {
     templates: Array<WorkingListTemplate>,
-    currentTemplateId: ?string,
+    currentTemplateId: string,
+    currentListIsModified: boolean,
     onSelectTemplate: Function,
     classes: Object,
 };
 
 const TemplateSelector = (props: Props) => {
-    const { templates, currentTemplateId, onSelectTemplate, classes } = props;
+    const { templates, currentTemplateId, currentListIsModified, onSelectTemplate, classes } = props;
 
-    const customTemplates = templates
-        .filter(c => !c.isDefault);
+    const customTemplates = React.useMemo(() => templates
+        .filter(c => !c.isDefault)
+        .sort((a, b) => a.name.localeCompare(b.name)), [
+        templates,
+    ]);
 
     if (customTemplates.length <= 0) {
         return null;
     }
 
     const configElements = customTemplates.map((customTemplate) => {
-        const { id, name } = customTemplate;
+        const { id } = customTemplate;
         return (
             <div
+                data-test="workinglist-template-selector-chip-container"
                 className={classes.chipContainer}
                 key={id}
             >
-                <Chip
-                    dataTest="workinglist-template-selector-chip"
-                    selected={id === currentTemplateId}
-                    onClick={() => onSelectTemplate(customTemplate)}
-                >
-                    {name}
-                </Chip>
+                <TemplateSelectorChip
+                    template={customTemplate}
+                    currentTemplateId={currentTemplateId}
+                    onSelectTemplate={onSelectTemplate}
+                    currentListIsModified={currentListIsModified}
+                />
             </div>
         );
     });
 
     return (
         <div
+            data-test="workinglist-template-selector-chips-container"
             className={classes.configsContainer}
         >
             {configElements}

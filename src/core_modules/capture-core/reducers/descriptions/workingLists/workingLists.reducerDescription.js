@@ -51,6 +51,237 @@ export const workingListsTemplatesDesc = createReducerDescription({
             },
         };
     },
+    [workingListsActionTypes.TEMPLATE_UPDATE]: (state, action) => {
+        const { eventQueryCriteria, template, listId } = action.payload;
+
+        const otherTemplates = state[listId].templates.filter(t => t.id !== template.id);
+        const updatedTemplate = {
+            ...template,
+            nextEventQueryCriteria: eventQueryCriteria,
+        };
+
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                templates: [
+                    ...otherTemplates,
+                    updatedTemplate,
+                ],
+            },
+        };
+    },
+    [workingListsActionTypes.TEMPLATE_UPDATE_SUCCESS]: (state, action) => {
+        const { eventQueryCriteria, templateId, listId } = action.payload;
+        const templates = state[listId].templates;
+        const targetTemplate = templates.find(t => t.id === templateId);
+
+        if (targetTemplate) {  // the template could be deleted
+            const otherTemplates = templates.filter(t => t.id !== templateId);
+            const updatedTemplate = {
+                ...targetTemplate,
+                eventQueryCriteria,
+                nextEventQueryCriteria: undefined,
+            };
+
+            return {
+                ...state,
+                [listId]: {
+                    ...state[listId],
+                    templates: [
+                        ...otherTemplates,
+                        updatedTemplate,
+                    ],
+                },
+            };
+        }
+        return state;
+    },
+    [workingListsActionTypes.TEMPLATE_UPDATE_ERROR]: (state, action) => {
+        const { templateId, listId } = action.payload;
+
+        const templates = state[listId].templates;
+        const targetTemplate = templates.find(t => t.id === templateId);
+
+        if (targetTemplate) {
+            const otherTemplates = templates.filter(t => t.id !== templateId);
+            const updatedTemplate = {
+                ...targetTemplate,
+                nextEventQueryCriteria: undefined,
+            };
+
+            return {
+                ...state,
+                [listId]: {
+                    ...state[listId],
+                    templates: [
+                        ...otherTemplates,
+                        updatedTemplate,
+                    ],
+                },
+            };
+        }
+        return state;
+    },
+    [workingListsActionTypes.TEMPLATE_ADD]: (state, action) => {
+        const { name, eventQueryCriteria, template, clientId, listId } = action.payload;
+
+        const newTemplate = {
+            ...template,
+            name,
+            displayName: name,
+            id: clientId,
+            eventQueryCriteria,
+            isDefault: undefined,
+            notPreserved: true,
+            skipInitDuringAddProcedure: true,
+        };
+
+        const templates = state[listId].templates;
+
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                selectedTemplateId: clientId,
+                templates: [
+                    ...templates,
+                    newTemplate,
+                ],
+            },
+        };
+    },
+    [workingListsActionTypes.TEMPLATE_ADD_SKIP_INIT_CLEAN]: (state, action) => {
+        const { template, listId } = action.payload;
+        const templates = state[listId].templates;
+        const targetTemplate = templates.find(t => t.id === template.id);
+
+        if (targetTemplate) {
+            const otherTemplates = templates.filter(t => t.id !== template.id);
+
+            const updatedTemplate = {
+                ...targetTemplate,
+                skipInitDuringAddProcedure: undefined,
+            };
+
+            return {
+                ...state,
+                [listId]: {
+                    ...state[listId],
+                    templates: [
+                        ...otherTemplates,
+                        updatedTemplate,
+                    ],
+                },
+            };
+        }
+        return state;
+    },
+    [workingListsActionTypes.TEMPLATE_ADD_SUCCESS]: (state, action) => {
+        const { templateId, clientId, listId } = action.payload;
+        const templates = state[listId].templates;
+        const targetTemplate = templates.find(t => t.id === clientId);
+        const otherTemplates = templates.filter(t => t.id !== clientId);
+
+        const currentlySelectedTemplateId = state[listId].selectedTemplateId;
+
+        let selectedTemplateId = currentlySelectedTemplateId;
+        let skipInitDuringAddProcedure;
+        if (currentlySelectedTemplateId === clientId) {
+            selectedTemplateId = templateId;
+            skipInitDuringAddProcedure = true;
+        }
+
+        const updatedTemplate = {
+            ...targetTemplate,
+            id: templateId,
+            notPreserved: undefined,
+            skipInitDuringAddProcedure,
+        };
+
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                selectedTemplateId,
+                templates: [
+                    ...otherTemplates,
+                    updatedTemplate,
+                ],
+            },
+        };
+    },
+    [workingListsActionTypes.TEMPLATE_ADD_ERROR]: (state, action) => {
+        const { clientId, listId } = action.payload;
+        const templates = state[listId].templates.filter(t => t.id !== clientId);
+        const currentlySelectedTemplateId = state[listId].selectedTemplateId;
+        const selectedTemplateId = currentlySelectedTemplateId === clientId ?
+            templates.find(t => t.isDefault).id :
+            currentlySelectedTemplateId;
+
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                selectedTemplateId,
+                templates,
+            },
+        };
+    },
+    [workingListsActionTypes.TEMPLATE_DELETE]: (state, action) => {
+        const { template, listId } = action.payload;
+
+        const otherTemplates = state[listId].templates.filter(t => t.id !== template.id);
+        const deletedTemplate = {
+            ...template,
+            deleted: true,
+        };
+
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                selectedTemplateId: otherTemplates.find(t => t.isDefault).id,
+                templates: [
+                    ...otherTemplates,
+                    deletedTemplate,
+                ],
+            },
+        };
+    },
+    [workingListsActionTypes.TEMPLATE_DELETE_SUCCESS]: (state, action) => {
+        const { template, listId } = action.payload;
+        const otherTemplates = state[listId].templates.filter(t => t.id !== template.id);
+
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                templates: [
+                    ...otherTemplates,
+                ],
+            },
+        };
+    },
+    [workingListsActionTypes.TEMPLATE_DELETE_ERROR]: (state, action) => {
+        const { template, listId } = action.payload;
+
+        const otherTemplates = state[listId].templates.filter(t => t.id !== template.id);
+        const failedToDeleteTemplate = {
+            ...template,
+            deleted: undefined,
+        };
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                templates: [
+                    ...otherTemplates,
+                    failedToDeleteTemplate,
+                ],
+            },
+        };
+    },
 }, 'workingListsTemplates');
 
 export const workingListsDesc = createReducerDescription({
@@ -185,26 +416,6 @@ export const workingListsUIDesc = createReducerDescription({
             [listId]: {
                 ...state[listId],
                 isUpdatingWithDialog: true,
-            },
-        };
-    },
-    [filterSelectorActionTypes.SET_FILTER]: (state, action) => {
-        const { listId } = action.payload;
-        return {
-            ...state,
-            [listId]: {
-                ...state[listId],
-                templateModified: true,
-            },
-        };
-    },
-    [workingListsActionTypes.TEMPLATE_UPDATE]: (state, action) => {
-        const { listId } = action.payload;
-        return {
-            ...state,
-            [listId]: {
-                ...state[listId],
-                templateModified: false,
             },
         };
     },

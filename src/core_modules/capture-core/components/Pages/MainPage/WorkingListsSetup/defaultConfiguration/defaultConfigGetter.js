@@ -54,6 +54,7 @@ const getMetaDataConfig = (stage: ProgramStage): Array<Array<string | {id: strin
             element.id, {
                 id: element.id,
                 visible: element.displayInReports,
+                type: element.type,
             }]),
         );
 

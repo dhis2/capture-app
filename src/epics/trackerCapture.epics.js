@@ -43,12 +43,10 @@ import {
     updateEventListEpic,
     retrieveTemplatesEpic,
     requestDeleteEventEpic,
+    updateTemplateEpic,
+    addTemplateEpic,
+    deleteTemplateEpic,
 } from 'capture-core/components/Pages/MainPage/WorkingLists';
-/*
-import {
-    retrieveWorkingListConfigsFromServer,
-} from 'capture-core/components/Pages/MainPage/EventsList/epics/workingListConfig.epics';
-*/
 
 import {
     getEventFromUrlEpic,
@@ -204,6 +202,9 @@ export default combineEpics(
     initEventListEpic,
     updateEventListEpic,
     retrieveTemplatesEpic,
+    updateTemplateEpic,
+    addTemplateEpic,
+    deleteTemplateEpic,
     requestDeleteEventEpic,
     mainSelectionsFromUrlGetOrgUnitDataEpic,
     mainSelectionsFromUrlEmptyOrgUnitEpic,

@@ -3,6 +3,7 @@ export type WorkingListTemplate = {
     id: string,
     isDefault?: ?boolean,
     name: string,
+    displayName: string,
     filters: Object,
 }
 

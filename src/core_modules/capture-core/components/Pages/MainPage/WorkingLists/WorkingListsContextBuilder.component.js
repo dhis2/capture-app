@@ -8,8 +8,6 @@ import {
 import WorkingListsPreCleaner from './WorkingListsPreCleaner.component';
 
 type PassOnProps = {|
-    listId: string,
-    templates: ?Object,
     onPreCleanData: Function,
     onLoadTemplates: Function,
     onCancelLoadTemplates: Function,
@@ -18,6 +16,8 @@ type PassOnProps = {|
 |};
 
 type Props = {
+    listId: string,
+    templates: ?Object,
     currentTemplate: ?Object,
     onSelectTemplate: Function,
     onLoadEventList: Function,
@@ -31,11 +31,15 @@ type Props = {
     eventListIsLoading: boolean,
     onAddTemplate: Function,
     onUpdateTemplate: Function,
+    onCleanSkipInitAddingTemplate: Function,
+    onUnloadingContext: Function,
     ...PassOnProps,
 };
 
 const WorkingListsContextBuilder = (props: Props) => {
     const {
+        listId,
+        templates: allTemplates,
         currentTemplate,
         onSelectTemplate,
         onLoadEventList,
@@ -49,6 +53,8 @@ const WorkingListsContextBuilder = (props: Props) => {
         eventListIsLoading,
         onAddTemplate,
         onUpdateTemplate,
+        onCleanSkipInitAddingTemplate,
+        onUnloadingContext,
         ...passOnProps
     } = props;
 
@@ -77,6 +83,7 @@ const WorkingListsContextBuilder = (props: Props) => {
         onUpdateEventList,
         onCancelLoadEventList,
         onCancelUpdateEventList,
+        onCleanSkipInitAddingTemplate,
     }), [
         eventsData,
         eventListIsLoading,
@@ -85,6 +92,19 @@ const WorkingListsContextBuilder = (props: Props) => {
         onUpdateEventList,
         onCancelLoadEventList,
         onCancelUpdateEventList,
+        onCleanSkipInitAddingTemplate,
+    ]);
+
+    const templates = React.useMemo(() =>
+        allTemplates && allTemplates.filter(t => !t.deleted), [
+        allTemplates,
+    ]);
+
+    React.useEffect(() => {
+        return () => onUnloadingContext(listId);
+    }, [
+        onUnloadingContext,
+        listId,
     ]);
 
     return (
@@ -99,6 +119,8 @@ const WorkingListsContextBuilder = (props: Props) => {
                 >
                     <WorkingListsPreCleaner
                         {...passOnProps}
+                        templates={templates}
+                        listId={listId}
                     />
                 </EventListConfigContext.Provider>
             </EventListLoaderContext.Provider>

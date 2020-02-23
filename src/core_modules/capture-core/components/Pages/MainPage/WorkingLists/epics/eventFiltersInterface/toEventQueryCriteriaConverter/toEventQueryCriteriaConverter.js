@@ -67,13 +67,10 @@ const getDateFilter = (filter: DateFilterData): ApiDataFilterDate => {
     };
 };
 
-const getAssigneeFilter = (filter: AssigneeFilterData): ApiDataFilterAssignee => {
-    debugger;
-    return {
-        assignedUserMode: filter.assignedUserMode,
-        assignedUsers: filter.assignedUser ? [filter.assignedUser.id] : undefined,
-    };
-};
+const getAssigneeFilter = (filter: AssigneeFilterData): ApiDataFilterAssignee => ({
+    assignedUserMode: filter.assignedUserMode,
+    assignedUsers: filter.assignedUser ? [filter.assignedUser.id] : undefined,
+});
 
 const getFilterByType = {
     [elementTypes.TEXT]: getTextFilter,
@@ -124,19 +121,20 @@ const getFilters = (filters: Object, defaultSpecs: Map<string, Object>) => Objec
 
 const getMainFilter = (filter: Object): Object => {
     let mainValue;
-    switch (filter.dataItem) {
+    const { dataItem, ...filterValues } = filter;
+    switch (dataItem) {
     case 'status':
         mainValue = {
-            status: filter.in[0],
+            status: filterValues.in[0],
         };
         break;
     case 'eventDate':
         mainValue = {
-            eventDate: filter,
+            eventDate: filterValues,
         };
         break;
     case 'assignee':
-        mainValue = filter;
+        mainValue = filterValues;
         break;
     default:
         mainValue = null;
@@ -173,24 +171,29 @@ const getColumnsOrder = (columns: Array<ColumnConfig>) =>
         .filter(column => column.visible)
         .map(column => column.apiName || column.id);
 
-export async function convertToEventFilter(
+export function convertToEventQueryCriteria({
+    filters: listFilters,
+    sortById: listSortById,
+    sortByDirection: listSortByDirection,
+    columnOrder: listColumns,
+    defaultConfig,
+}: {
     listFilters: Object,
     listSortById: string,
     listSortByDirection: string,
     listColumns: Array<Object>,
-    defaultSpecs: Map<string, Object>,
-): ApiEventQueryCriteria {
-    debugger;
+    defaultConfig: Map<string, Object>,
+}): ApiEventQueryCriteria {
     const order = getOrder(listSortById, listSortByDirection);
     const filters = pipe(
-        () => getFilters(listFilters, defaultSpecs),
-        convertedFilters => buildMainAndDataFilters(convertedFilters, defaultSpecs),
+        () => getFilters(listFilters, defaultConfig),
+        convertedFilters => buildMainAndDataFilters(convertedFilters, defaultConfig),
     )();
-    const displayOrderColumns = getColumnsOrder(listColumns);
+    const displayColumnOrder = getColumnsOrder(listColumns);
 
     return {
         ...filters,
         order,
-        displayOrderColumns,
+        displayColumnOrder,
     };
 }

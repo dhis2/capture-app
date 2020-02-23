@@ -2,10 +2,9 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import EventListLoader from './EventListLoader.component';
-import { TemplateSaver, dialogModes } from './SaveTemplate';
+import { TemplateMaintenance, dialogModes } from './TemplateMaintenance';
 
 type PassOnProps = {
-    listId: string,
     eventsData: ?Object,
     currentPage: ?number,
     rowsPerPage: ?number,
@@ -13,6 +12,7 @@ type PassOnProps = {
 
 type Props = {
     ...PassOnProps,
+    listId: string,
     currentTemplate: Object,
     filters: Object,
     sortById: ?string,
@@ -20,11 +20,13 @@ type Props = {
     columnOrder: ?Array<Object>,
     onAddTemplate: Function,
     onUpdateTemplate: Function,
+    onDeleteTemplate: Function,
     defaultConfig: Map<string, Object>,
 };
 
 const EventListConfigMenuContent = (props: Props) => {
     const {
+        listId,
         currentTemplate,
         filters,
         sortById,
@@ -32,30 +34,51 @@ const EventListConfigMenuContent = (props: Props) => {
         columnOrder,
         onAddTemplate,
         onUpdateTemplate,
+        onDeleteTemplate,
         defaultConfig,
         ...passOnProps
     } = props;
-    const [saveDialogOpenMode, setSaveDialogOpenMode] = React.useState(null);
+    const [maintenanceDialogOpenMode, setMaintenanceDialogOpenMode] = React.useState(null);
+
+    const getSaveItem = React.useCallback(() => ({
+        key: 'save',
+        clickHandler: () => {
+            setMaintenanceDialogOpenMode(dialogModes.REPLACE);
+        },
+        element: (
+            <div>
+                {i18n.t('Save template...')}
+            </div>
+        ),
+    }), [
+        setMaintenanceDialogOpenMode,
+    ]);
+
+    const getDeleteItem = React.useCallback(() => ({
+        key: 'delete',
+        clickHandler: () => {
+            setMaintenanceDialogOpenMode(dialogModes.DELETE);
+        },
+        element: (
+            <div>
+                {i18n.t('Delete template...')}
+            </div>
+        ),
+    }), [
+        setMaintenanceDialogOpenMode,
+    ]);
 
     const customMenuContents = React.useMemo(() => {
         const menuContents = [];
 
-        if (!currentTemplate.isDefault) {
-            menuContents.push({
-                clickHandler: () => {
-                    setSaveDialogOpenMode(dialogModes.REPLACE);
-                },
-                element: (
-                    <div>
-                        {i18n.t('Save template')}
-                    </div>
-                ),
-            });
+        if (!currentTemplate.isDefault && !currentTemplate.notPreserved) {
+            menuContents.push(getSaveItem());
         }
 
         menuContents.push({
+            key: 'saveAs',
             clickHandler: () => {
-                setSaveDialogOpenMode(dialogModes.NEW);
+                setMaintenanceDialogOpenMode(dialogModes.NEW);
             },
             element: (
                 <div>
@@ -64,52 +87,37 @@ const EventListConfigMenuContent = (props: Props) => {
             ),
         });
 
+        if (!currentTemplate.isDefault && !currentTemplate.notPreserved) {
+            menuContents.push(getDeleteItem());
+        }
+
         return menuContents;
-    }, [currentTemplate]);
+    }, [currentTemplate, getSaveItem, getDeleteItem]);
 
     const closeHandler = React.useCallback(() => {
-        setSaveDialogOpenMode(null);
+        setMaintenanceDialogOpenMode(null);
     }, []);
 
-    const addTemplateHandler = React.useCallback(() => {
-        onAddTemplate({
-            filters,
-            sortById,
-            sortByDirection,
-            columnOrder,
-            defaultConfig,
-        });
-    }, [
-        onAddTemplate,
-        filters,
-        sortById,
-        sortByDirection,
-        columnOrder,
-        defaultConfig,
-    ]);
+    const updateTemplateHandler = React.useCallback((...args) => {
+        setMaintenanceDialogOpenMode(null);
+        onUpdateTemplate(...args);
+    }, [onUpdateTemplate]);
 
-    const updateTemplateHandler = React.useCallback(() => {
-        onUpdateTemplate(currentTemplate, {
-            filters,
-            sortById,
-            sortByDirection,
-            columnOrder,
-            defaultConfig,
-        });
-    }, [
-        onUpdateTemplate,
-        currentTemplate,
-        filters,
-        sortById,
-        sortByDirection,
-        columnOrder,
-        defaultConfig,
-    ]);
+    const addTemplateHandler = React.useCallback((...args) => {
+        setMaintenanceDialogOpenMode(null);
+        onAddTemplate(...args);
+    }, [onAddTemplate]);
+
+    const deleteTemplateHandler = React.useCallback((...args) => {
+        setMaintenanceDialogOpenMode(null);
+        onDeleteTemplate(...args);
+    }, [onDeleteTemplate]);
 
     return (
         <React.Fragment>
             <EventListLoader
                 {...passOnProps}
+                listId={listId}
                 defaultConfig={defaultConfig}
                 filters={filters}
                 sortById={sortById}
@@ -117,15 +125,19 @@ const EventListConfigMenuContent = (props: Props) => {
                 currentTemplate={currentTemplate}
                 customMenuContents={customMenuContents}
             />
-            <TemplateSaver
-                open={!!saveDialogOpenMode}
+            <TemplateMaintenance
+                listId={listId}
                 onClose={closeHandler}
-                mode={saveDialogOpenMode}
-                onAddTemplate={addTemplateHandler}
-                onUpdateTemplate={updateTemplateHandler}
+                mode={maintenanceDialogOpenMode}
+                currentTemplate={currentTemplate}
                 filters={filters}
                 sortById={sortById}
                 sortByDirection={sortByDirection}
+                columnOrder={columnOrder}
+                onAddTemplate={addTemplateHandler}
+                onUpdateTemplate={updateTemplateHandler}
+                onDeleteTemplate={deleteTemplateHandler}
+                defaultConfig={defaultConfig}
             />
         </React.Fragment>
     );

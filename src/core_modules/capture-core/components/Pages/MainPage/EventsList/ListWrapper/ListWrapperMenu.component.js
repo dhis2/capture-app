@@ -12,7 +12,7 @@ const dialogKeys = {
 
 type Props = {
     listId: string,
-    customMenuContents?: ?Array<{clickHandler: Function, element: React.Element<any>}>,
+    customMenuContents?: ?Array<{key: string, clickHandler: Function, element: React.Element<any>}>,
 }
 
 type State = {
@@ -51,23 +51,26 @@ class ListWrapperMenu extends React.Component<Props, State> {
             customMenuContents
                 .map(content => (
                     <MenuItem
+                        key={content.key}
                         onClick={() => {
+                            if (!content.clickHandler) {
+                                return;
+                            }
                             togglePopper();
                             content.clickHandler();
                         }}
                     >
                         {content.element}
                     </MenuItem>
-                )) : null;
+                )) : [];
 
-        return (
-            <React.Fragment>
-                <MenuItem onClick={() => { this.openDialog(dialogKeys.DOWNLOAD_TABLE, togglePopper); }}>
-                    {i18n.t('Download as...')}
-                </MenuItem>
-                {customMenuItems}
-            </React.Fragment>
-        );
+        return [(
+            <MenuItem key="download" onClick={() => { this.openDialog(dialogKeys.DOWNLOAD_TABLE, togglePopper); }}>
+                {i18n.t('Download as...')}
+            </MenuItem>
+        ),
+        ...customMenuItems,
+        ];
     }
 
     renderPopperContent = (togglePopper: Function) => (

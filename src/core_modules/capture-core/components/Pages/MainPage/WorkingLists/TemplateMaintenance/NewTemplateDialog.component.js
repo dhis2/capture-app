@@ -6,7 +6,7 @@ import NewTemplateContents from './NewTemplateContents.component';
 type Props = {
     open: boolean,
     onClose: () => void,
-    onSaveTemplate: () => void,
+    onSaveTemplate: (name: string) => void,
 };
 
 const NewTemplateDialog = (props: Props) => {

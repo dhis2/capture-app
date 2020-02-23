@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-02-22T00:31:35.100Z\n"
-"PO-Revision-Date: 2020-02-22T00:31:35.100Z\n"
+"POT-Creation-Date: 2020-02-23T20:36:36.958Z\n"
+"PO-Revision-Date: 2020-02-23T20:36:36.958Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -380,10 +380,22 @@ msgstr ""
 msgid "Rows per page"
 msgstr ""
 
-msgid "Save template"
+msgid "Save template..."
+msgstr ""
+
+msgid "Delete template..."
 msgstr ""
 
 msgid "Save template as..."
+msgstr ""
+
+msgid "Delete working list"
+msgstr ""
+
+msgid "Do you really want to delete the '{{templateName}}' working list?"
+msgstr ""
+
+msgid "Confirm"
 msgstr ""
 
 msgid "Save As"
@@ -701,6 +713,15 @@ msgid "Could not save event. See log for details"
 msgstr ""
 
 msgid "Could not delete event"
+msgstr ""
+
+msgid "Could not save working list"
+msgstr ""
+
+msgid "Could not add working list"
+msgstr ""
+
+msgid "Could not delete working list"
 msgstr ""
 
 msgid "Organisation unit search failed. See log for details"

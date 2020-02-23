@@ -1,21 +1,7 @@
 // @flow
 import * as React from 'react';
 import { EventList } from '../EventsList';
-
-function filtersAreEqual(prevFilters: Object, newFilters: Object) {
-    if (prevFilters === newFilters) {
-        return true;
-    }
-
-    const prevFilterKeys = Object.keys(prevFilters);
-    const newFilterKeys = Object.keys(newFilters);
-    if (prevFilterKeys.length !== newFilterKeys.length) {
-        return false;
-    }
-
-    return newFilterKeys
-        .every(key => newFilters[key] === prevFilters[key]);
-}
+import { filtersAreEqual } from './utils';
 
 function useUpdateListMemoize(value) {
     const [filters, ...rest] = value;

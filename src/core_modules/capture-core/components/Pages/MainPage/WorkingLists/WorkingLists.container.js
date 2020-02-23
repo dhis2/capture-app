@@ -5,12 +5,15 @@ import {
     selectTemplate,
     addTemplate,
     updateTemplate,
+    deleteTemplate,
     fetchTemplates,
     fetchTemplatesCancel,
     initEventList,
     initEventListCancel,
     updateEventList,
     updateEventListCancel,
+    cleanSkipInitAddingTemplate,
+    unloadingContext,
 } from './workingLists.actions';
 import WorkingListsContextBuilder from './WorkingListsContextBuilder.component';
 
@@ -43,6 +46,9 @@ type DispatchProps = {|
     onCancelLoadTemplates: Function,
     onAddTemplate: Function,
     onUpdateTemplate: Function,
+    onDeleteTemplate: Function,
+    onCleanSkipInitAddingTemplate: Function,
+    onUnloadingContext: Function,
 |};
 
 type Props = {
@@ -85,6 +91,9 @@ const mapDispatchToProps: MapDispatchToPropsFactory = (dispatch: ReduxDispatch) 
         onCancelLoadTemplates: basicDispatcher(fetchTemplatesCancel),
         onAddTemplate: basicDispatcher(addTemplate),
         onUpdateTemplate: basicDispatcher(updateTemplate),
+        onDeleteTemplate: basicDispatcher(deleteTemplate),
+        onCleanSkipInitAddingTemplate: basicDispatcher(cleanSkipInitAddingTemplate),
+        onUnloadingContext: basicDispatcher(unloadingContext),
     };
 };
 

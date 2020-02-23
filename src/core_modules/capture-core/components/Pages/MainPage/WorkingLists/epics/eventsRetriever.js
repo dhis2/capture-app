@@ -71,7 +71,7 @@ const getEventDateQueryArgs = (filter: Array<string> | string) => {
 
 const getStatusQueryArgs = (filter: string) => {
     const statusQueryArgs = {
-        status: filter.replace('eq:', ''),
+        status: filter.replace('in:', ''),
     };
     return statusQueryArgs;
 };

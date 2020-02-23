@@ -37,9 +37,14 @@ const EventListLoader = (props: Props) => {
         onCancelLoadEventList,
         onUpdateEventList,
         onCancelUpdateEventList,
+        onCleanSkipInitAddingTemplate,
     } = React.useContext(EventListLoaderContext);
 
     React.useEffect(() => {
+        if (currentTemplate.skipInitDuringAddProcedure) {
+            templateIsChanging.current = false;
+            return () => onCleanSkipInitAddingTemplate(currentTemplate, listId);
+        }
         if (eventsData !== undefined && (!templateIsChanging.current || firstRun.current)) {
             firstRun.current = false;
             templateIsChanging.current = false;
@@ -57,15 +62,17 @@ const EventListLoader = (props: Props) => {
         onCancelLoadEventList,
         defaultConfig,
         currentTemplate,
+        onCleanSkipInitAddingTemplate,
     ]);
 
     React.useMemo(() => {
         templateIsChanging.current = true;
     }, [ // eslint-disable-line react-hooks/exhaustive-deps
-        currentTemplate,
+        currentTemplate.id,
     ]);
 
-    const ready = !templateIsChanging.current && !eventListIsLoading;
+    const ready = currentTemplate.skipInitDuringAddProcedure ||
+        (!templateIsChanging.current && !eventListIsLoading);
 
     return (
         <EventListUpdaterWithLoadingIndicator

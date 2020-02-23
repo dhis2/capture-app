@@ -22,6 +22,13 @@ export const workingListsMetaDesc = createReducerDescription({
             [listId]: undefined,
         };
     },
+    [workingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
+        const { listId } = action.payload;
+        return {
+            ...state,
+            [listId]: undefined,
+        };
+    },
     [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const { listId, config, pagingData } = action.payload;
@@ -31,7 +38,17 @@ export const workingListsMetaDesc = createReducerDescription({
             currentPage,
             sortById,
             sortByDirection,
+            columnOrder,
         } = config;
+
+        const initial = {
+            filters,
+            sortById,
+            sortByDirection,
+            columnDisplayOrder: columnOrder
+                .map(spec => (spec.visible ? spec.id : null))
+                .filter(columnId => columnId),
+        };
 
         const listState = {
             filters,
@@ -40,10 +57,11 @@ export const workingListsMetaDesc = createReducerDescription({
             sortById,
             sortByDirection,
             ...pagingData,
+            initial,
             next: {},
         };
-
         newState[listId] = listState;
+
         return newState;
     },
     [workingListsActionTypes.EVENT_LIST_UPDATE_SUCCESS]: (state, action) => {
@@ -70,6 +88,108 @@ export const workingListsMetaDesc = createReducerDescription({
             next: {},
         };
         return newState;
+    },
+    [workingListsActionTypes.TEMPLATE_UPDATE]: (state, action) => {
+        const { columnOrder, filters, sortById, sortByDirection, listId } = action.payload;
+
+        const nextInitial = {
+            filters,
+            sortById,
+            sortByDirection,
+            columnDisplayOrder: columnOrder
+                .map(spec => (spec.visible ? spec.id : null))
+                .filter(columnId => columnId),
+        };
+
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                nextInitial,
+            },
+        };
+    },
+    [workingListsActionTypes.TEMPLATE_UPDATE_SUCCESS]: (state, action) => {
+        const { isActiveTemplate, listId } = action.payload;
+
+        if (!isActiveTemplate) {
+            return state;
+        }
+
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                initial: state[listId].nextInitial,
+                nextInitial: undefined,
+            },
+        };
+    },
+    [workingListsActionTypes.TEMPLATE_UPDATE_ERROR]: (state, action) => {
+        const { isActiveTemplate, listId } = action.payload;
+
+        if (!isActiveTemplate) {
+            return state;
+        }
+
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                nextInitial: undefined,
+            },
+        };
+    },
+    [workingListsActionTypes.TEMPLATE_ADD]: (state, action) => {
+        const { columnOrder, filters, sortById, sortByDirection, listId } = action.payload;
+
+        const nextInitial = {
+            filters,
+            sortById,
+            sortByDirection,
+            columnDisplayOrder: columnOrder
+                .map(spec => (spec.visible ? spec.id : null))
+                .filter(columnId => columnId),
+        };
+
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                nextInitial,
+            },
+        };
+    },
+    [workingListsActionTypes.TEMPLATE_ADD_SUCCESS]: (state, action) => {
+        const { isActiveTemplate, listId } = action.payload;
+
+        if (!isActiveTemplate) {
+            return state;
+        }
+
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                initial: state[listId].nextInitial,
+                nextInitial: undefined,
+            },
+        };
+    },
+    [workingListsActionTypes.TEMPLATE_ADD_ERROR]: (state, action) => {
+        const { isActiveTemplate, listId } = action.payload;
+
+        if (!isActiveTemplate) {
+            return state;
+        }
+
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                nextInitial: undefined,
+            },
+        };
     },
     [paginationActionTypes.CHANGE_PAGE]: (state, action) => {
         const newState = { ...state };

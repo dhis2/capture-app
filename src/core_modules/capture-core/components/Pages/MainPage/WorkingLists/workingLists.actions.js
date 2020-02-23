@@ -12,6 +12,10 @@ export const actionTypes = {
     TEMPLATE_ADD: 'EventWorkingListsTemplateAdd',
     TEMPLATE_ADD_SUCCESS: 'EventWorkingListsTemplateAddSuccess',
     TEMPLATE_ADD_ERROR: 'EventWorkingListsTemplateAddError',
+    TEMPLATE_ADD_SKIP_INIT_CLEAN: 'EventWorkingListsTemplateAddSkipInitClean',
+    TEMPLATE_DELETE: 'EventWorkingListsTemplateDelete',
+    TEMPLATE_DELETE_SUCCESS: 'EventWorkingListsTemplateDeleteSuccess',
+    TEMPLATE_DELETE_ERROR: 'EventWorkingListsTemplateDeleteError',
     TEMPLATE_UPDATE: 'EventWorkingListsTemplateUpdate',
     TEMPLATE_UPDATE_SUCCESS: 'EventWorkingListsTemplateUpdateSuccess',
     TEMPLATE_UPDATE_ERROR: 'EventWorkingListsTemplateUpdateError',
@@ -26,6 +30,7 @@ export const actionTypes = {
     EVENT_DELETE: 'EventWorkingListsEventListEventDelete',
     EVENT_DELETE_SUCCESS: 'EventWorkingListsEventListEventDeleteSuccess',
     EVENT_DELETE_ERROR: 'EventWorkingListsEventListEventDeleteError',
+    CONTEXT_UNLOADING: 'EventWorkingListsContextUnloading',
 };
 
 export const batchActionTypes = {
@@ -50,17 +55,35 @@ export const fetchTemplatesCancel = (listId: string) =>
 export const selectTemplate = (templateId: string, listId: string) =>
     actionCreator(actionTypes.TEMPLATE_SELECT)({ templateId, listId });
 
-export const addTemplate = (data: Object) =>
-    actionCreator(actionTypes.TEMPLATE_ADD)(data);
+export const updateTemplate = (template: Object, eventQueryCriteria: Object, data: Object) =>
+    actionCreator(actionTypes.TEMPLATE_UPDATE)({ template, eventQueryCriteria, ...data });
 
-export const updateTemplate = (templateId: string, data: Object) =>
-    actionCreator(actionTypes.TEMPLATE_UPDATE)({ templateId, ...data });
+export const updateTemplateSuccess = (templateId: string, eventQueryCriteria: Object, data: Object) =>
+    actionCreator(actionTypes.TEMPLATE_UPDATE_SUCCESS)({ templateId, eventQueryCriteria, ...data });
 
-export const updateTemplateSuccess = (templateId: string) =>
-    actionCreator(actionTypes.TEMPLATE_UPDATE_SUCCESS)({ templateId });
+export const updateTemplateError = (templateId: string, eventQueryCriteria: Object, data: Object) =>
+    actionCreator(actionTypes.TEMPLATE_UPDATE_ERROR)({ templateId, eventQueryCriteria, ...data });
 
-export const updateTemplateError = (templateId: string, templateName: string) =>
-    actionCreator(actionTypes.TEMPLATE_UPDATE_ERROR)({ templateId, templateName });
+export const addTemplate = (name: string, eventQueryCriteria: Object, data: Object) =>
+    actionCreator(actionTypes.TEMPLATE_ADD)({ name, eventQueryCriteria, ...data });
+
+export const addTemplateSuccess = (templateId: string, clientId: Object, data: Object) =>
+    actionCreator(actionTypes.TEMPLATE_ADD_SUCCESS)({ templateId, clientId, ...data });
+
+export const addTemplateError = (clientId: Object, data: Object) =>
+    actionCreator(actionTypes.TEMPLATE_ADD_ERROR)({ clientId, ...data });
+
+export const cleanSkipInitAddingTemplate = (template: Object, listId: string) =>
+    actionCreator(actionTypes.TEMPLATE_ADD_SKIP_INIT_CLEAN)({ template, listId });
+
+export const deleteTemplate = (template: Object, listId: string) =>
+    actionCreator(actionTypes.TEMPLATE_DELETE)({ template, listId });
+
+export const deleteTemplateSuccess = (template: Object, listId: string) =>
+    actionCreator(actionTypes.TEMPLATE_DELETE_SUCCESS)({ template, listId });
+
+export const deleteTemplateError = (template: Object, listId: string) =>
+    actionCreator(actionTypes.TEMPLATE_DELETE_ERROR)({ template, listId });
 
 export const initEventList =
     (selectedTemplate: Object, defaultConfig: Map<string, Object>, listId: string) => actionCreator(actionTypes.EVENT_LIST_INIT)({ selectedTemplate, defaultConfig, listId });
@@ -98,3 +121,5 @@ export const deleteEvent =
             rollback: { type: actionTypes.EVENT_DELETE_ERROR },
         },
     });
+
+export const unloadingContext = (listId: string) => actionCreator(actionTypes.CONTEXT_UNLOADING)({ listId });

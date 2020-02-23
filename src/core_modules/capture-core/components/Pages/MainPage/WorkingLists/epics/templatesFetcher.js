@@ -8,6 +8,7 @@ export const getTemplatesAsync = (state: ReduxState) => {
             id: `${programId}-default`,
             isDefault: true,
             name: 'default',
+            displayName: 'default',
         };
         const workingListConfigsWithDefault = [defaultWorkingListConfig, ...workingListConfigs];
         return { workingListConfigs: workingListConfigsWithDefault, default: defaultWorkingListConfig };

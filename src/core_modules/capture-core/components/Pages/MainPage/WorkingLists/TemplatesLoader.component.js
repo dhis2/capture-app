@@ -12,6 +12,8 @@ type Props = {
     onLoadTemplates: Function,
     onCancelLoadTemplates: Function,
     listId: string,
+    onAddTemplate: Function,
+    onUpdateTemplate: Function,
 };
 
 const TemplatesLoader = (props: Props) => {

@@ -48,7 +48,7 @@ export const initEventListEpic = (action$: InputObservable, store: ReduxStore) =
             const { programId, orgUnitId, categories } = state.currentSelections;
             const lastTransaction = state.offline.lastTransaction;
             const { selectedTemplate, defaultConfig, listId } = action.payload;
-            const eventQueryCriteria = selectedTemplate.eventQueryCriteria;
+            const eventQueryCriteria = selectedTemplate.nextEventQueryCriteria || selectedTemplate.eventQueryCriteria;
             const initialPromise =
                 initEventWorkingListAsync(
                     eventQueryCriteria, {
