@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-02-23T20:36:36.958Z\n"
-"PO-Revision-Date: 2020-02-23T20:36:36.958Z\n"
+"POT-Creation-Date: 2020-02-24T21:23:35.077Z\n"
+"PO-Revision-Date: 2020-02-24T21:23:35.077Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -380,25 +380,37 @@ msgstr ""
 msgid "Rows per page"
 msgstr ""
 
-msgid "Save template..."
+msgid "Update current template"
 msgstr ""
 
-msgid "Delete template..."
+msgid "Save as template..."
 msgstr ""
 
-msgid "Save template as..."
+msgid "Delete current template"
 msgstr ""
 
-msgid "Delete working list"
+msgid "Share current template..."
 msgstr ""
 
-msgid "Do you really want to delete the '{{templateName}}' working list?"
+msgid "Delete template"
+msgstr ""
+
+msgid "Do you really want to delete the '{{templateName}}' template?"
 msgstr ""
 
 msgid "Confirm"
 msgstr ""
 
-msgid "Save As"
+msgid "Save As template"
+msgstr ""
+
+msgid "Template name"
+msgstr ""
+
+msgid "Show Less"
+msgstr ""
+
+msgid "Show All"
 msgstr ""
 
 msgid "Working list could not be loaded"

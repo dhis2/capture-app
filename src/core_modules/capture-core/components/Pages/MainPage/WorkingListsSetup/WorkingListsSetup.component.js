@@ -31,7 +31,10 @@ const WorkingListsSetup = (props: Props) => {
         programId,
     ]);
 
-    const skipReload = React.useMemo(() =>
+    const {
+        skipReloadTemplates,
+        skipReloadData,
+    } = React.useMemo(() =>
         shouldSkipReload(programId, orgUnitId, categories, lastTransaction, listContext), [     // eslint-disable-line react-hooks/exhaustive-deps
         programId,
         orgUnitId,
@@ -49,7 +52,8 @@ const WorkingListsSetup = (props: Props) => {
             {...passOnProps}
             listId="eventList"
             key={workingListsKey}
-            skipReload={skipReload}
+            skipReloadTemplates={skipReloadTemplates}
+            skipReloadData={skipReloadData}
             defaultConfig={defaultConfig}
         />
     );

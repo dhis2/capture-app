@@ -50,6 +50,7 @@ type PassOnProps = {
     defaultConfig: Map<string, Object>,
     eventsData: ?Object,
     currentTemplate: Object,
+    onDeleteTemplate: Function,
 };
 
 type Props = {
@@ -143,6 +144,7 @@ const EventListConfig = (props: Props) => {
                 rowsPerPage={calcRowsPerPage}
                 onUpdateTemplate={updateTemplateHandler}
                 onAddTemplate={addTemplateHandler}
+                currentListIsModified={currentListIsModified}
             />
         </React.Fragment>
     );

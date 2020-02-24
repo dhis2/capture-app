@@ -3,6 +3,7 @@ import * as React from 'react';
 import ExistingTemplateDialog from './ExistingTemplateDialog.component';
 import NewTemplateDialog from './NewTemplateDialog.component';
 import DeleteConfirmationDialog from './DeleteConfirmationDialog.component';
+import SharingDialog from './SharingDialog.component';
 import { dialogModes } from './dialogModes';
 
 type PassOnProps = {
@@ -24,7 +25,7 @@ type Props = {
     defaultConfig: Map<string, Object>,
 };
 
-const TemplateMaintenance = (props: Props) => {
+const TemplateMaintenance = (props: Props, ref) => {
     const {
         listId,
         mode,
@@ -89,6 +90,10 @@ const TemplateMaintenance = (props: Props) => {
         listId,
     ]);
 
+    React.useImperativeHandle(ref, () => ({
+        updateTemplateHandler,
+    }));
+
     return (
         <React.Fragment>
             <ExistingTemplateDialog
@@ -107,8 +112,13 @@ const TemplateMaintenance = (props: Props) => {
                 onDeleteTemplate={deleteTemplateHandler}
                 templateName={currentTemplate.displayName}
             />
+            <SharingDialog
+                {...passOnProps}
+                open={mode === dialogModes.SHARING}
+                templateId={currentTemplate.id}
+            />
         </React.Fragment>
     );
 };
 
-export default TemplateMaintenance;
+export default React.forwardRef(TemplateMaintenance);

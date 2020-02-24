@@ -5,6 +5,14 @@ export type WorkingListTemplate = {
     name: string,
     displayName: string,
     filters: Object,
+    access: {
+        read: boolean,
+        update: boolean,
+        delete: boolean,
+        write: boolean,
+        manage: boolean,
+    },
+    notPreserved?: ?boolean,
 }
 
 export type ApiDataFilter = {

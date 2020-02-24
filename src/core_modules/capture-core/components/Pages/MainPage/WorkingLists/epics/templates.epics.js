@@ -124,16 +124,37 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
                 eventQueryCriteria,
             };
 
-            const requestPromise = getApi()
+            const api = getApi();
+
+            const requestPromise = api
                 .post('eventFilters', eventFilterData)
                 .then((result) => {
-                    const isActiveTemplate =
-                        store.getState().workingListsTemplates[listId].selectedTemplateId === clientId;
-                    return addTemplateSuccess(result.response.uid, clientId, { listId, isActiveTemplate });
+                    const templateId = result.response.uid;
+                    return api
+                        .post('sharing?type=eventFilter&id=' + templateId, {
+                            object: {
+                                publicAccess: '--------',
+                                externalAccess: false,
+                            },
+                        })
+                        .catch((error) => {
+                            log.error(
+                                errorCreator('could not set sharing settings for template')({
+                                    error,
+                                    eventFilterData,
+                                    templateId,
+                                }),
+                            );
+                        })
+                        .then(() => {
+                            const isActiveTemplate =
+                                store.getState().workingListsTemplates[listId].selectedTemplateId === clientId;
+                            return addTemplateSuccess(result.response.uid, clientId, { listId, isActiveTemplate });
+                        });
                 })
                 .catch((error) => {
                     log.error(
-                        errorCreator('could not update template')({
+                        errorCreator('could not add template')({
                             error,
                             eventFilterData,
                         }),

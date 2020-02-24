@@ -14,7 +14,11 @@ import { actionTypes as workingListsActionTypes } from '../../../components/Page
 
 export const workingListsTemplatesDesc = createReducerDescription({
     [workingListsActionTypes.DATA_PRE_CLEAN]: (state, action) => {
-        const { listId } = action.payload;
+        const { cleanTemplates, listId } = action.payload;
+        if (!cleanTemplates) {
+            return state;
+        }
+
         return {
             ...state,
             [listId]: undefined,
@@ -135,6 +139,13 @@ export const workingListsTemplatesDesc = createReducerDescription({
             isDefault: undefined,
             notPreserved: true,
             skipInitDuringAddProcedure: true,
+            access: {
+                read: true,
+                update: true,
+                delete: true,
+                write: true,
+                manage: true,
+            },
         };
 
         const templates = state[listId].templates;

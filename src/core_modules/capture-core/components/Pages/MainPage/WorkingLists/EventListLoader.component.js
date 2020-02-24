@@ -5,7 +5,7 @@ import EventListUpdater from './EventListUpdater.component';
 import { EventListLoaderContext } from './workingLists.context';
 
 const EventListUpdaterWithLoadingIndicator = withErrorMessageHandler()(
-    withLoadingIndicator()(EventListUpdater));
+    withLoadingIndicator(() => ({ margin: 10 }))(EventListUpdater));
 
 type Props = {
     listId: string,

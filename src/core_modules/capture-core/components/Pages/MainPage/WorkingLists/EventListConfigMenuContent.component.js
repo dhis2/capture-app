@@ -3,6 +3,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import EventListLoader from './EventListLoader.component';
 import { TemplateMaintenance, dialogModes } from './TemplateMaintenance';
+import type { WorkingListTemplate } from './workingLists.types';
 
 type PassOnProps = {
     eventsData: ?Object,
@@ -13,7 +14,7 @@ type PassOnProps = {
 type Props = {
     ...PassOnProps,
     listId: string,
-    currentTemplate: Object,
+    currentTemplate: WorkingListTemplate,
     filters: Object,
     sortById: ?string,
     sortByDirection: ?string,
@@ -22,6 +23,7 @@ type Props = {
     onUpdateTemplate: Function,
     onDeleteTemplate: Function,
     defaultConfig: Map<string, Object>,
+    currentListIsModified: boolean,
 };
 
 const EventListConfigMenuContent = (props: Props) => {
@@ -36,63 +38,11 @@ const EventListConfigMenuContent = (props: Props) => {
         onUpdateTemplate,
         onDeleteTemplate,
         defaultConfig,
+        currentListIsModified,
         ...passOnProps
     } = props;
     const [maintenanceDialogOpenMode, setMaintenanceDialogOpenMode] = React.useState(null);
-
-    const getSaveItem = React.useCallback(() => ({
-        key: 'save',
-        clickHandler: () => {
-            setMaintenanceDialogOpenMode(dialogModes.REPLACE);
-        },
-        element: (
-            <div>
-                {i18n.t('Save template...')}
-            </div>
-        ),
-    }), [
-        setMaintenanceDialogOpenMode,
-    ]);
-
-    const getDeleteItem = React.useCallback(() => ({
-        key: 'delete',
-        clickHandler: () => {
-            setMaintenanceDialogOpenMode(dialogModes.DELETE);
-        },
-        element: (
-            <div>
-                {i18n.t('Delete template...')}
-            </div>
-        ),
-    }), [
-        setMaintenanceDialogOpenMode,
-    ]);
-
-    const customMenuContents = React.useMemo(() => {
-        const menuContents = [];
-
-        if (!currentTemplate.isDefault && !currentTemplate.notPreserved) {
-            menuContents.push(getSaveItem());
-        }
-
-        menuContents.push({
-            key: 'saveAs',
-            clickHandler: () => {
-                setMaintenanceDialogOpenMode(dialogModes.NEW);
-            },
-            element: (
-                <div>
-                    {i18n.t('Save template as...')}
-                </div>
-            ),
-        });
-
-        if (!currentTemplate.isDefault && !currentTemplate.notPreserved) {
-            menuContents.push(getDeleteItem());
-        }
-
-        return menuContents;
-    }, [currentTemplate, getSaveItem, getDeleteItem]);
+    const templateMaintenanceInstance = React.useRef(null);
 
     const closeHandler = React.useCallback(() => {
         setMaintenanceDialogOpenMode(null);
@@ -113,6 +63,75 @@ const EventListConfigMenuContent = (props: Props) => {
         onDeleteTemplate(...args);
     }, [onDeleteTemplate]);
 
+    const getSaveItem = React.useCallback(() => ({
+        key: 'save',
+        clickHandler: () => {
+            templateMaintenanceInstance.current.updateTemplateHandler();
+        },
+        element: (
+            <div>
+                {i18n.t('Update current template')}
+            </div>
+        ),
+    }), []);
+
+    const getSaveAsItem = React.useCallback(() => ({
+        key: 'saveAs',
+        clickHandler: () => {
+            setMaintenanceDialogOpenMode(dialogModes.NEW);
+        },
+        element: (
+            <div>
+                {i18n.t('Save as template...')}
+            </div>
+        ),
+    }), []);
+
+    const getDeleteItem = React.useCallback(() => ({
+        key: 'delete',
+        clickHandler: () => {
+            setMaintenanceDialogOpenMode(dialogModes.DELETE);
+        },
+        element: (
+            <div>
+                {i18n.t('Delete current template')}
+            </div>
+        ),
+    }), []);
+
+    const getShareItem = React.useCallback(() => ({
+        key: 'share',
+        clickHandler: () => {
+            setMaintenanceDialogOpenMode(dialogModes.SHARING);
+        },
+        element: (
+            <div>
+                {i18n.t('Share current template...')}
+            </div>
+        ),
+    }), []);
+
+    const customMenuContents = React.useMemo(() => {
+        const menuContents = [];
+        const { access, isDefault, notPreserved } = currentTemplate;
+
+        if (!isDefault && !notPreserved && access.write && access.update && currentListIsModified) {
+            menuContents.push(getSaveItem());
+        }
+
+        menuContents.push(getSaveAsItem());
+
+        if (!isDefault && !notPreserved && access.manage) {
+            menuContents.push(getShareItem());
+        }
+
+        if (!isDefault && !notPreserved && access.delete) {
+            menuContents.push(getDeleteItem());
+        }
+
+        return menuContents;
+    }, [currentTemplate, getSaveItem, getSaveAsItem, getDeleteItem, getShareItem, currentListIsModified]);
+
     return (
         <React.Fragment>
             <EventListLoader
@@ -126,6 +145,7 @@ const EventListConfigMenuContent = (props: Props) => {
                 customMenuContents={customMenuContents}
             />
             <TemplateMaintenance
+                ref={templateMaintenanceInstance}
                 listId={listId}
                 onClose={closeHandler}
                 mode={maintenanceDialogOpenMode}

@@ -38,7 +38,8 @@ export const batchActionTypes = {
 };
 
 export const preCleanData =
-    (listId: string) => actionCreator(actionTypes.DATA_PRE_CLEAN)({ listId });
+    (cleanTemplates: boolean, listId: string) =>
+        actionCreator(actionTypes.DATA_PRE_CLEAN)({ cleanTemplates, listId });
 
 export const fetchTemplates =
     (listId: string) => actionCreator(actionTypes.TEMPLATES_FETCH)({ listId });

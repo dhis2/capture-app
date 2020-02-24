@@ -11,8 +11,8 @@ type PassOnProps = {|
     onPreCleanData: Function,
     onLoadTemplates: Function,
     onCancelLoadTemplates: Function,
-    skipReload: boolean,
-    onResetSkipReload?: ?Function,
+    skipReloadTemplates: boolean,
+    skipReloadData: boolean,
 |};
 
 type Props = {

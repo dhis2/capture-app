@@ -37,9 +37,9 @@ const NewTemplateContents = (props: Props) => {
         setName(value);
     }, []);
 
-    const saveHandler = React.useCallback(() => {
+    const handleSave = React.useCallback(() => {
         if (!name) {
-            setError('Please specify a working list name');
+            setError('Please specify a template name');
             return;
         }
         onSaveTemplate(name);
@@ -47,16 +47,17 @@ const NewTemplateContents = (props: Props) => {
 
     return (
         <React.Fragment>
-            <DialogTitle>{i18n.t('Save As')}</DialogTitle>
+            <DialogTitle>{i18n.t('Save As template')}</DialogTitle>
             <DialogContent>
                 <NewTemplateTextField
                     onBlur={nameBlurHandler}
                     className={classes.input}
-                    label={'working list name'}
+                    label={i18n.t('Template name')}
                     error={!!error}
+                    initialFocus
                 />
                 <div
-                    data-test="working-list-name-error-message"
+                    data-test="template-name-error-message"
                     className={classes.error}
                 >
                     {error}
@@ -68,7 +69,7 @@ const NewTemplateContents = (props: Props) => {
                 <Button onClick={onClose}>
                     {i18n.t('Cancel')}
                 </Button>
-                <Button onClick={saveHandler} primary>
+                <Button onClick={handleSave} primary>
                     {i18n.t('Save')}
                 </Button>
             </DialogActions>

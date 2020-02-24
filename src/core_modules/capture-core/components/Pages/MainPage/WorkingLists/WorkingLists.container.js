@@ -19,8 +19,8 @@ import WorkingListsContextBuilder from './WorkingListsContextBuilder.component';
 
 type OwnProps = {|
     listId: string,
-    skipReload: boolean,
-    onResetSkipReload?: ?Function,
+    skipReloadTemplates: boolean,
+    skipReloadData: boolean,
     defaultConfig: Object,
 |};
 

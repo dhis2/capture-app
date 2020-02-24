@@ -10,8 +10,12 @@ export function shouldSkipReload(
     listContext: ?Object,
 ) {
     if (!listContext) {
-        return false;
+        return {
+            skipReloadTemplates: false,
+            skipReloadData: false,
+        };
     }
+
     const currentSelections = {
         programId,
         orgUnitId,
@@ -24,13 +28,22 @@ export function shouldSkipReload(
         ...listSelections
     } = listContext;
 
-    if (lastTransaction > contextLastTransaction) {
-        return false;
-    }
-
     if (!isSelectionsEqual(currentSelections, listSelections)) {
-        return false;
+        return {
+            skipReloadTemplates: false,
+            skipReloadData: false,
+        };
     }
 
-    return moment().diff(moment(contextTimestamp), 'minutes') < 5;
+    if (lastTransaction > contextLastTransaction || moment().diff(moment(contextTimestamp), 'minutes') > 5) {
+        return {
+            skipReloadTemplates: true,
+            skipReloadData: false,
+        };
+    }
+
+    return {
+        skipReloadTemplates: true,
+        skipReloadData: true,
+    };
 }

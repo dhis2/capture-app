@@ -7,13 +7,15 @@ type PassOnProps = {|
     onCancelLoadTemplates: Function,
     templates: ?Object,
     loadTemplatesError: ?string,
+    onAddTemplate: Function,
+    onUpdateTemplate: Function,
 |};
 
 type Props = {
     onPreCleanData: Function,
     listId: string,
-    skipReload: boolean,
-    onResetSkipReload?: ?Function,
+    skipReloadTemplates: boolean,
+    skipReloadData: boolean,
     ...PassOnProps,
 };
 
@@ -21,32 +23,30 @@ const WorkingListsPreCleaner = (props: Props) => {
     const {
         onPreCleanData,
         listId,
-        skipReload,
-        onResetSkipReload,
+        skipReloadTemplates,
+        skipReloadData,
         ...passOnProps
     } = props;
+
     const [isCleaning, setCleaningStatus] = React.useState(true);
 
     React.useEffect(() => {
-        if (skipReload) {
+        if (skipReloadTemplates && skipReloadData) {
             setCleaningStatus(false);
-            return () => {
-                onResetSkipReload && onResetSkipReload(listId);
-            };
+            return;
         }
 
-        onPreCleanData(listId);
+        onPreCleanData(!skipReloadTemplates, listId);
         setCleaningStatus(false);
-        return undefined;
     }, [
         listId,
-        skipReload,
-        onResetSkipReload,
+        skipReloadTemplates,
+        skipReloadData,
         onPreCleanData,
         setCleaningStatus,
     ]);
 
-    if (isCleaning && !skipReload) {
+    if (isCleaning && (!skipReloadTemplates || !skipReloadData)) {
         return null;
     }
 
