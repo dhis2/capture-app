@@ -7,47 +7,51 @@ const TemplatesManangerWithLoadingIndicator = withErrorMessageHandler()(
     withLoadingIndicator()(TemplatesManager));
 
 type Props = {
-    templates?: ?Object,
     loadTemplatesError: ?string,
     onLoadTemplates: Function,
     onCancelLoadTemplates: Function,
     listId: string,
-    onAddTemplate: Function,
-    onUpdateTemplate: Function,
+    programId: string,
+    templatesForProgramId: ?string,
 };
 
 const TemplatesLoader = (props: Props) => {
     const {
-        templates,
         loadTemplatesError,
         onLoadTemplates,
         onCancelLoadTemplates,
         listId,
+        programId,
+        templatesForProgramId,
         ...passOnProps
     } = props;
 
+    const listIdRef = React.useRef(undefined);
     React.useEffect(() => {
-        if (templates !== undefined) {
+        if (programId === templatesForProgramId && (listId === listIdRef.current || !listIdRef.current)) {
+            listIdRef.current = listId;
             return undefined;
         }
+        listIdRef.current = listId;
         onLoadTemplates(listId);
         return () => onCancelLoadTemplates(listId);
     }, [
         onLoadTemplates,
         onCancelLoadTemplates,
-        templates,
+        programId,
+        templatesForProgramId,
         listId,
     ]);
 
-    const ready = templates !== undefined;
+    const ready = programId === templatesForProgramId;
 
     return (
         <TemplatesManangerWithLoadingIndicator
             {...passOnProps}
             ready={ready}
-            templates={templates}
             error={loadTemplatesError}
             listId={listId}
+            programId={programId}
         />
     );
 };

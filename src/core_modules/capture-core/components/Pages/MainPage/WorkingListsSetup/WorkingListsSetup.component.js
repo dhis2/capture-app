@@ -31,6 +31,7 @@ const WorkingListsSetup = (props: Props) => {
         programId,
     ]);
 
+    /*
     const {
         skipReloadTemplates,
         skipReloadData,
@@ -41,20 +42,26 @@ const WorkingListsSetup = (props: Props) => {
         categories,
         lastTransaction,
     ]);
+    */
 
+    /*
     const workingListsKey = React.useMemo(() => {
         const categoriesString = categories ? Object.keys(categories).map(key => categories[key]).join('_') : '';
         return `${programId}_${orgUnitId}_${categoriesString}`;
     }, [programId, orgUnitId, categories]);
+    */
 
     return (
         <WorkingLists
             {...passOnProps}
             listId="eventList"
-            key={workingListsKey}
-            skipReloadTemplates={skipReloadTemplates}
-            skipReloadData={skipReloadData}
+            programId={programId}
+            orgUnitId={orgUnitId}
+            categories={categories}
+            lastTransaction={lastTransaction}
+            listContext={listContext}
             defaultConfig={defaultConfig}
+            onCheckSkipReload={shouldSkipReload}
         />
     );
 };

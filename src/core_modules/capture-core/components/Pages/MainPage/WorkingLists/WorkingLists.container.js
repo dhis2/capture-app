@@ -1,7 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
 import {
-    preCleanData,
     selectTemplate,
     addTemplate,
     updateTemplate,
@@ -19,14 +18,19 @@ import WorkingListsContextBuilder from './WorkingListsContextBuilder.component';
 
 type OwnProps = {|
     listId: string,
-    skipReloadTemplates: boolean,
-    skipReloadData: boolean,
+    programId: string,
+    orgUnitId: string,
+    categories: Object,
+    lastTransaction: number,
+    listContext: ?Object,
     defaultConfig: Object,
+    onCheckSkipReload: Function,
 |};
 
 type StateProps = {|
     currentTemplate: ?Object,
     templates: ?Object,
+    templatesForProgramId: ?string,
     loadTemplatesError: ?string,
     loadEventListError: ?string,
     listMeta: ?Object,
@@ -38,7 +42,6 @@ type StateProps = {|
 type DispatchProps = {|
     onSelectTemplate: Function,
     onLoadTemplates: Function,
-    onPreCleanData: Function,
     onLoadEventList: Function,
     onUpdateEventList: Function,
     onCancelLoadEventList: Function,
@@ -68,6 +71,8 @@ const mapStateToProps: MapStateToPropsFactory = (state: ReduxState, props: { lis
             state.workingListsTemplates[listId].templates.find(template => template.id === state.workingListsTemplates[listId].selectedTemplateId),
         templates: state.workingListsTemplates[listId] &&
         state.workingListsTemplates[listId].templates,
+        templatesForProgramId: state.workingListsTemplates[listId] &&
+        state.workingListsTemplates[listId].programId,
         loadTemplatesError: state.workingListsTemplates[listId] && state.workingListsTemplates[listId].loadError,
         loadEventListError: state.workingListsUI[listId] && state.workingListsUI[listId].dataLoadingError,
         listMeta: state.workingListsMeta[listId],
@@ -83,7 +88,6 @@ const mapDispatchToProps: MapDispatchToPropsFactory = (dispatch: ReduxDispatch) 
     return {
         onSelectTemplate: basicDispatcher(selectTemplate),
         onLoadTemplates: basicDispatcher(fetchTemplates),
-        onPreCleanData: basicDispatcher(preCleanData),
         onLoadEventList: basicDispatcher(initEventList),
         onUpdateEventList: basicDispatcher(updateEventList),
         onCancelLoadEventList: basicDispatcher(initEventListCancel),

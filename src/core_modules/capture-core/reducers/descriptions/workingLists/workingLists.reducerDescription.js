@@ -25,12 +25,13 @@ export const workingListsTemplatesDesc = createReducerDescription({
         };
     },
     [workingListsActionTypes.TEMPLATES_FETCH_SUCCESS]: (state, action) => {
-        const { listId, templates } = action.payload;
+        const { programId, templates, listId } = action.payload;
         return {
             ...state,
             [listId]: {
                 ...state[listId],
                 templates,
+                programId,
             },
         };
     },

@@ -10,10 +10,7 @@ export function shouldSkipReload(
     listContext: ?Object,
 ) {
     if (!listContext) {
-        return {
-            skipReloadTemplates: false,
-            skipReloadData: false,
-        };
+        return false;
     }
 
     const currentSelections = {
@@ -29,21 +26,12 @@ export function shouldSkipReload(
     } = listContext;
 
     if (!isSelectionsEqual(currentSelections, listSelections)) {
-        return {
-            skipReloadTemplates: false,
-            skipReloadData: false,
-        };
+        return false;
     }
 
     if (lastTransaction > contextLastTransaction || moment().diff(moment(contextTimestamp), 'minutes') > 5) {
-        return {
-            skipReloadTemplates: true,
-            skipReloadData: false,
-        };
+        return false;
     }
 
-    return {
-        skipReloadTemplates: true,
-        skipReloadData: true,
-    };
+    return true;
 }

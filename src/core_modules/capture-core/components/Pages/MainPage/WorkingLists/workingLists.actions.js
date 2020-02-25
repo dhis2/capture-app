@@ -44,8 +44,8 @@ export const preCleanData =
 export const fetchTemplates =
     (listId: string) => actionCreator(actionTypes.TEMPLATES_FETCH)({ listId });
 
-export const fetchTemplatesSuccess = (templates: Array<any>, listId: string) =>
-    actionCreator(actionTypes.TEMPLATES_FETCH_SUCCESS)({ templates, listId });
+export const fetchTemplatesSuccess = (templates: Array<any>, programId: string, listId: string) =>
+    actionCreator(actionTypes.TEMPLATES_FETCH_SUCCESS)({ templates, programId, listId });
 
 export const fetchTemplatesError = (error: string, listId: string) =>
     actionCreator(actionTypes.TEMPLATES_FETCH_ERROR)({ error, listId });

@@ -16,6 +16,7 @@ type Props = {
     currentPage: ?number,
     rowsPerPage: ?number,
     defaultConfig: Map<string, Object>,
+    programId: string,
 };
 
 const EventListLoader = (props: Props) => {
@@ -23,14 +24,11 @@ const EventListLoader = (props: Props) => {
         currentTemplate,
         listId,
         defaultConfig,
+        programId,
         ...passOnProps
     } = props;
 
-    const templateIsChanging = React.useRef(false);
-    const firstRun = React.useRef(true);
-
     const {
-        eventsData,
         eventListIsLoading,
         onLoadEventList,
         loadEventListError: loadError,
@@ -38,41 +36,65 @@ const EventListLoader = (props: Props) => {
         onUpdateEventList,
         onCancelUpdateEventList,
         onCleanSkipInitAddingTemplate,
+        orgUnitId,
+        categories,
+        lastTransaction,
+        listContext,
+        onCheckSkipReload,
     } = React.useContext(EventListLoaderContext);
 
+    const hasContextChanged = React.useMemo(() => {
+        return !onCheckSkipReload(programId, orgUnitId, categories, lastTransaction, listContext);
+    }, [
+        onCheckSkipReload,
+        programId,
+        orgUnitId,
+        categories,
+        lastTransaction,
+        listContext,
+    ]);
+
+    const prevTemplateRef = React.useRef(undefined);
+    const prevListIdRef = React.useRef(undefined);
+    // eslint-disable-next-line complexity
     React.useEffect(() => {
-        if (currentTemplate.skipInitDuringAddProcedure) {
-            templateIsChanging.current = false;
-            return () => onCleanSkipInitAddingTemplate(currentTemplate, listId);
-        }
-        if (eventsData !== undefined && (!templateIsChanging.current || firstRun.current)) {
-            firstRun.current = false;
-            templateIsChanging.current = false;
+        if (onCheckSkipReload(programId, orgUnitId, categories, lastTransaction, listContext) &&
+            (!prevTemplateRef.current || currentTemplate.id === prevTemplateRef.current.id) &&
+            (!prevListIdRef.current || prevListIdRef.current === listId)) {
+            prevTemplateRef.current = currentTemplate;
+            prevListIdRef.current = listId;
             return undefined;
         }
 
+        prevTemplateRef.current = currentTemplate;
+        prevListIdRef.current = listId;
+
+        if (currentTemplate.skipInitDuringAddProcedure) {
+            return () => onCleanSkipInitAddingTemplate(currentTemplate, listId);
+        }
+
         onLoadEventList(currentTemplate, defaultConfig, listId);
-        firstRun.current = false;
-        templateIsChanging.current = false;
-        return () => onCancelLoadEventList(listId);
+        return undefined;
     }, [
-        eventsData,
         listId,
         onLoadEventList,
         onCancelLoadEventList,
         defaultConfig,
         currentTemplate,
+        onCheckSkipReload,
         onCleanSkipInitAddingTemplate,
+        programId,
+        orgUnitId,
+        categories,
+        lastTransaction,
+        listContext,
     ]);
 
-    React.useMemo(() => {
-        templateIsChanging.current = true;
-    }, [ // eslint-disable-line react-hooks/exhaustive-deps
-        currentTemplate.id,
-    ]);
+    React.useEffect(() => () => onCancelLoadEventList(listId), [onCancelLoadEventList, listId]);
 
-    const ready = currentTemplate.skipInitDuringAddProcedure ||
-        (!templateIsChanging.current && !eventListIsLoading);
+    const ready = !hasContextChanged &&
+        (!prevTemplateRef.current || currentTemplate.id === prevTemplateRef.current.id || !!currentTemplate.skipInitDuringAddProcedure) &&
+        !eventListIsLoading;
 
     return (
         <EventListUpdaterWithLoadingIndicator
