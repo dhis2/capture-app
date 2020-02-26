@@ -19,6 +19,7 @@ type Props = {
     programId: string,
 };
 
+// eslint-disable-next-line complexity
 const EventListLoader = (props: Props) => {
     const {
         currentTemplate,
@@ -41,6 +42,8 @@ const EventListLoader = (props: Props) => {
         lastTransaction,
         listContext,
         onCheckSkipReload,
+        lastEventIdDeleted,
+        dirtyEventList,
     } = React.useContext(EventListLoaderContext);
 
     const hasContextChanged = React.useMemo(() => {
@@ -56,18 +59,22 @@ const EventListLoader = (props: Props) => {
 
     const prevTemplateRef = React.useRef(undefined);
     const prevListIdRef = React.useRef(undefined);
+    const firstRunRef = React.useRef(true);
     // eslint-disable-next-line complexity
     React.useEffect(() => {
         if (onCheckSkipReload(programId, orgUnitId, categories, lastTransaction, listContext) &&
             (!prevTemplateRef.current || currentTemplate.id === prevTemplateRef.current.id) &&
-            (!prevListIdRef.current || prevListIdRef.current === listId)) {
+            (!prevListIdRef.current || prevListIdRef.current === listId) &&
+            (!dirtyEventList || !firstRunRef.current)) {
             prevTemplateRef.current = currentTemplate;
             prevListIdRef.current = listId;
+            firstRunRef.current = false;
             return undefined;
         }
 
         prevTemplateRef.current = currentTemplate;
         prevListIdRef.current = listId;
+        firstRunRef.current = false;
 
         if (currentTemplate.skipInitDuringAddProcedure) {
             return () => onCleanSkipInitAddingTemplate(currentTemplate, listId);
@@ -88,12 +95,15 @@ const EventListLoader = (props: Props) => {
         categories,
         lastTransaction,
         listContext,
+        dirtyEventList,
     ]);
 
     React.useEffect(() => () => onCancelLoadEventList(listId), [onCancelLoadEventList, listId]);
 
     const ready = !hasContextChanged &&
         (!prevTemplateRef.current || currentTemplate.id === prevTemplateRef.current.id || !!currentTemplate.skipInitDuringAddProcedure) &&
+        (!prevListIdRef.current || prevListIdRef.current === listId) &&
+        (!dirtyEventList || !firstRunRef.current) &&
         !eventListIsLoading;
 
     return (
@@ -105,6 +115,7 @@ const EventListLoader = (props: Props) => {
             defaultConfig={defaultConfig}
             onUpdateEventList={onUpdateEventList}
             onCancelUpdateEventList={onCancelUpdateEventList}
+            lastEventIdDeleted={lastEventIdDeleted}
         />
     );
 };

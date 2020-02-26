@@ -24,7 +24,7 @@ export const retrieveTemplatesEpic = (action$: InputObservable, store: ReduxStor
     action$.ofType(
         actionTypes.TEMPLATES_FETCH,
     )
-        .switchMap((action) => {
+        .concatMap((action) => {
             const listId = action.payload.listId;
             const programId = store.getState().currentSelections.programId;
             const promise = getTemplatesAsync(store.getState())
@@ -51,10 +51,10 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) 
         actionTypes.TEMPLATE_UPDATE,
     )
         .concatMap((action) => {
-            const programId = store.getState().currentSelections.programId;
             const {
                 template,
                 eventQueryCriteria,
+                programId,
                 listId,
             } = action.payload;
 
@@ -111,11 +111,11 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
         actionTypes.TEMPLATE_ADD,
     )
         .concatMap((action) => {
-            const programId = store.getState().currentSelections.programId;
             const {
                 name,
                 eventQueryCriteria,
                 clientId,
+                programId,
                 listId,
             } = action.payload;
 
@@ -132,7 +132,7 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
                 .then((result) => {
                     const templateId = result.response.uid;
                     return api
-                        .post('sharing?type=eventFilter&id=' + templateId, {
+                        .post(`sharing?type=eventFilter&id=${templateId}`, {
                             object: {
                                 publicAccess: '--------',
                                 externalAccess: false,

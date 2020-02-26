@@ -15,20 +15,6 @@ import {
 import { actionTypes as workingListsActionTypes } from '../../../../components/Pages/MainPage/WorkingLists';
 
 export const workingListsMetaDesc = createReducerDescription({
-    [workingListsActionTypes.DATA_PRE_CLEAN]: (state, action) => {
-        const { listId } = action.payload;
-        return {
-            ...state,
-            [listId]: undefined,
-        };
-    },
-    [workingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
-        const { listId } = action.payload;
-        return {
-            ...state,
-            [listId]: undefined,
-        };
-    },
     [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const { listId, config, pagingData } = action.payload;

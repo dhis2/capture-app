@@ -11,6 +11,9 @@ type PassOnProps = {|
     onLoadTemplates: Function,
     onCancelLoadTemplates: Function,
     programId: string,
+    loadTemplatesError: Function,
+    templatesForProgramId: ?string,
+    templatesAreLoading: boolean,
 |};
 
 type Props = {
@@ -27,8 +30,11 @@ type Props = {
     columnOrder: ?Array<Object>,
     eventsData: ?Object,
     eventListIsLoading: boolean,
+    eventListIsUpdating: boolean,
+    eventListIsUpdatingWithDialog: boolean,
     onAddTemplate: Function,
     onUpdateTemplate: Function,
+    onDeleteTemplate: Function,
     onCleanSkipInitAddingTemplate: Function,
     onUnloadingContext: Function,
     orgUnitId: string,
@@ -36,6 +42,7 @@ type Props = {
     lastTransaction: number,
     listContext: ?Object,
     onCheckSkipReload: Function,
+    lastEventIdDeleted: ?string,
     ...PassOnProps,
 };
 
@@ -54,8 +61,11 @@ const WorkingListsContextBuilder = (props: Props) => {
         columnOrder,
         eventsData,
         eventListIsLoading,
+        eventListIsUpdating,
+        eventListIsUpdatingWithDialog,
         onAddTemplate,
         onUpdateTemplate,
+        onDeleteTemplate,
         onCleanSkipInitAddingTemplate,
         onUnloadingContext,
         orgUnitId,
@@ -63,8 +73,42 @@ const WorkingListsContextBuilder = (props: Props) => {
         lastTransaction,
         listContext,
         onCheckSkipReload,
+        lastEventIdDeleted,
         ...passOnProps
     } = props;
+
+    const dirtyTemplatesStateFirstRunRef = React.useRef(undefined);
+    React.useMemo(() => {
+        if (dirtyTemplatesStateFirstRunRef.current !== undefined) {
+            return;
+        }
+
+        if (!allTemplates) {
+            dirtyTemplatesStateFirstRunRef.current = false;
+            return;
+        }
+
+        dirtyTemplatesStateFirstRunRef.current = allTemplates
+            .some(template => template.nextEventQueryCriteria || template.notPreserved || template.deleted);
+    }, [allTemplates]);
+
+    const dirtyEventListStateFirstRunRef = React.useRef(undefined);
+    React.useMemo(() => {
+        if (dirtyEventListStateFirstRunRef.current !== undefined) {
+            return;
+        }
+
+        if (eventListIsLoading || eventListIsUpdating || eventListIsUpdatingWithDialog) {
+            dirtyEventListStateFirstRunRef.current = true;
+            return;
+        }
+
+        dirtyEventListStateFirstRunRef.current = false;
+    }, [
+        eventListIsLoading,
+        eventListIsUpdating,
+        eventListIsUpdatingWithDialog,
+    ]);
 
     const managerData = React.useMemo(() => ({
         currentTemplate,
@@ -76,11 +120,13 @@ const WorkingListsContextBuilder = (props: Props) => {
         columnOrder,
         onAddTemplate,
         onUpdateTemplate,
+        onDeleteTemplate,
     }), [
         listMeta,
         columnOrder,
         onAddTemplate,
         onUpdateTemplate,
+        onDeleteTemplate,
     ]);
 
     const eventListData = React.useMemo(() => ({
@@ -97,6 +143,8 @@ const WorkingListsContextBuilder = (props: Props) => {
         lastTransaction,
         listContext,
         onCheckSkipReload,
+        lastEventIdDeleted,
+        dirtyEventList: dirtyTemplatesStateFirstRunRef.current || dirtyEventListStateFirstRunRef.current,
     }), [
         eventsData,
         eventListIsLoading,
@@ -111,6 +159,7 @@ const WorkingListsContextBuilder = (props: Props) => {
         lastTransaction,
         listContext,
         onCheckSkipReload,
+        lastEventIdDeleted,
     ]);
 
     const templates = React.useMemo(() =>
@@ -139,6 +188,7 @@ const WorkingListsContextBuilder = (props: Props) => {
                         {...passOnProps}
                         templates={templates}
                         listId={listId}
+                        dirtyTemplates={!!dirtyTemplatesStateFirstRunRef.current}
                     />
                 </EventListConfigContext.Provider>
             </EventListLoaderContext.Provider>

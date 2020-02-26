@@ -13,8 +13,11 @@ type Props = {
     listId: string,
     programId: string,
     templatesForProgramId: ?string,
+    dirtyTemplates: boolean,
+    templatesAreLoading: boolean,
 };
 
+// eslint-disable-next-line complexity
 const TemplatesLoader = (props: Props) => {
     const {
         loadTemplatesError,
@@ -23,17 +26,25 @@ const TemplatesLoader = (props: Props) => {
         listId,
         programId,
         templatesForProgramId,
+        dirtyTemplates,
+        templatesAreLoading,
         ...passOnProps
     } = props;
 
     const listIdRef = React.useRef(undefined);
+    const firstRunRef = React.useRef(true);
+    // eslint-disable-next-line complexity
     React.useEffect(() => {
-        if (programId === templatesForProgramId && (listId === listIdRef.current || !listIdRef.current)) {
+        if (programId === templatesForProgramId &&
+            (listId === listIdRef.current || !listIdRef.current) &&
+            (!dirtyTemplates || !firstRunRef.current)) {
             listIdRef.current = listId;
+            firstRunRef.current = false;
             return undefined;
         }
         listIdRef.current = listId;
-        onLoadTemplates(listId);
+        firstRunRef.current = false;
+        onLoadTemplates(programId, listId);
         return () => onCancelLoadTemplates(listId);
     }, [
         onLoadTemplates,
@@ -41,10 +52,15 @@ const TemplatesLoader = (props: Props) => {
         programId,
         templatesForProgramId,
         listId,
+        dirtyTemplates,
     ]);
 
-    const ready = programId === templatesForProgramId;
+    const ready = programId === templatesForProgramId &&
+        (listId === listIdRef.current || !listIdRef.current) &&
+        (!dirtyTemplates || !firstRunRef.current) &&
+        !templatesAreLoading;
 
+    debugger;
     return (
         <TemplatesManangerWithLoadingIndicator
             {...passOnProps}

@@ -37,6 +37,7 @@ type Props = {
     onUpdateEventList: Function,
     onCancelUpdateEventList: Function,
     customMenuContents: Array<Object>,
+    lastEventIdDeleted: ?string,
 };
 
 const EventListUpdater = (props: Props) => {
@@ -50,10 +51,11 @@ const EventListUpdater = (props: Props) => {
         onUpdateEventList,
         onCancelUpdateEventList,
         customMenuContents,
+        lastEventIdDeleted,
     } = props;
 
     useUpdateListEffect(() => {
-        onUpdateEventList(listId, { filters, sortById, sortByDirection, currentPage, rowsPerPage });
+        onUpdateEventList(listId, { filters, sortById, sortByDirection, currentPage, rowsPerPage, lastEventIdDeleted });
         return () => onCancelUpdateEventList(listId);
     }, [
         filters,
@@ -61,6 +63,7 @@ const EventListUpdater = (props: Props) => {
         sortByDirection,
         currentPage,
         rowsPerPage,
+        lastEventIdDeleted,
     ]);
 
     return (

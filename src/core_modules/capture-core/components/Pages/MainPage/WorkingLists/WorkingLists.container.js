@@ -31,12 +31,16 @@ type StateProps = {|
     currentTemplate: ?Object,
     templates: ?Object,
     templatesForProgramId: ?string,
+    templatesAreLoading: boolean,
     loadTemplatesError: ?string,
     loadEventListError: ?string,
     listMeta: ?Object,
     columnOrder: ?Array<Object>,
     eventsData: ?Object,
     eventListIsLoading: boolean,
+    eventListIsUpdating: boolean,
+    eventListIsUpdatingWithDialog: boolean,
+    lastEventIdDeleted: ?string,
 |};
 
 type DispatchProps = {|
@@ -73,12 +77,17 @@ const mapStateToProps: MapStateToPropsFactory = (state: ReduxState, props: { lis
         state.workingListsTemplates[listId].templates,
         templatesForProgramId: state.workingListsTemplates[listId] &&
         state.workingListsTemplates[listId].programId,
+        templatesAreLoading: !!state.workingListsTemplates[listId] &&
+        !!state.workingListsTemplates[listId].loading,
         loadTemplatesError: state.workingListsTemplates[listId] && state.workingListsTemplates[listId].loadError,
         loadEventListError: state.workingListsUI[listId] && state.workingListsUI[listId].dataLoadingError,
         listMeta: state.workingListsMeta[listId],
         columnOrder: state.workingListsColumnsOrder[listId],
         eventsData: state.workingLists[listId],
         eventListIsLoading: !!state.workingListsUI[listId] && !!state.workingListsUI[listId].isLoading,
+        eventListIsUpdating: !!state.workingListsUI[listId] && !!state.workingListsUI[listId].isUpdating,
+        eventListIsUpdatingWithDialog: !!state.workingListsUI[listId] && !!state.workingListsUI[listId].isUpdatingWithDialog,
+        lastEventIdDeleted: state.workingListsUI[listId] && state.workingListsUI[listId].lastEventIdDeleted,
     };
 };
 

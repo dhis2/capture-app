@@ -7,21 +7,21 @@ import {
 import {
     actionTypes as filterSelectorActionTypes,
 } from '../../../components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.actions';
+import { actionTypes as eventListActionTypes } from '../../../components/Pages/MainPage/EventsList/eventsList.actions';
 import {
     actionTypes as listActionTypes,
 } from '../../../components/List/list.actions';
 import { actionTypes as workingListsActionTypes } from '../../../components/Pages/MainPage/WorkingLists';
 
 export const workingListsTemplatesDesc = createReducerDescription({
-    [workingListsActionTypes.DATA_PRE_CLEAN]: (state, action) => {
-        const { cleanTemplates, listId } = action.payload;
-        if (!cleanTemplates) {
-            return state;
-        }
-
+    [workingListsActionTypes.TEMPLATES_FETCH]: (state, action) => {
+        const { listId } = action.payload;
         return {
             ...state,
-            [listId]: undefined,
+            [listId]: {
+                ...state[listId],
+                loading: true,
+            },
         };
     },
     [workingListsActionTypes.TEMPLATES_FETCH_SUCCESS]: (state, action) => {
@@ -32,6 +32,7 @@ export const workingListsTemplatesDesc = createReducerDescription({
                 ...state[listId],
                 templates,
                 programId,
+                loading: false,
             },
         };
     },
@@ -42,6 +43,7 @@ export const workingListsTemplatesDesc = createReducerDescription({
             [listId]: {
                 ...state[listId],
                 loadError: error,
+                loading: false,
             },
         };
     },
@@ -297,13 +299,6 @@ export const workingListsTemplatesDesc = createReducerDescription({
 }, 'workingListsTemplates');
 
 export const workingListsDesc = createReducerDescription({
-    [workingListsActionTypes.DATA_PRE_CLEAN]: (state, action) => {
-        const { listId } = action.payload;
-        return {
-            ...state,
-            [listId]: undefined,
-        };
-    },
     [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const { listId, eventContainers, request } = action.payload;
@@ -369,23 +364,10 @@ const getReadyState = (oldState, more) => ({
 });
 
 export const workingListsUIDesc = createReducerDescription({
-    [workingListsActionTypes.DATA_PRE_CLEAN]: (state, action) => {
-        const { listId } = action.payload;
-        return {
-            ...state,
-            [listId]: undefined,
-        };
-    },
     [workingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
         const newState = { ...state };
         const listId = action.payload.listId;
         newState[listId] = { ...newState[listId], isLoading: true };
-        return newState;
-    },
-    [workingListsActionTypes.EVENT_LIST_UPDATE]: (state, action) => {
-        const newState = { ...state };
-        const listId = action.payload.listId;
-        newState[listId] = { ...newState[listId], isUpdating: true };
         return newState;
     },
     [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
@@ -393,14 +375,6 @@ export const workingListsUIDesc = createReducerDescription({
         const listId = action.payload.listId;
         newState[listId] = getReadyState(newState[listId], {
             hasBeenLoaded: true,
-            dataLoadingError: null,
-        });
-        return newState;
-    },
-    [workingListsActionTypes.EVENT_LIST_UPDATE_SUCCESS]: (state, action) => {
-        const newState = { ...state };
-        const listId = action.payload.listId;
-        newState[listId] = getReadyState(newState[listId], {
             dataLoadingError: null,
         });
         return newState;
@@ -413,21 +387,45 @@ export const workingListsUIDesc = createReducerDescription({
         });
         return newState;
     },
+    [workingListsActionTypes.EVENT_LIST_UPDATE]: (state, action) => {
+        const newState = { ...state };
+        const listId = action.payload.listId;
+        newState[listId] = { ...newState[listId], isUpdating: true };
+        return newState;
+    },
+    [workingListsActionTypes.EVENT_LIST_UPDATE_SUCCESS]: (state, action) => {
+        const newState = { ...state };
+        const listId = action.payload.listId;
+        newState[listId] = getReadyState(newState[listId], {
+            dataLoadingError: null,
+        });
+        return newState;
+    },
     [workingListsActionTypes.EVENT_LIST_UPDATE_ERROR]: (state, action) => {
         const newState = { ...state };
         const listId = action.payload.listId;
         newState[listId] = getReadyState({}, {
-            dataLoadingError: null,  // reverting list to previous state and showing feedbackBar message
+            dataLoadingError: null,
         });
         return newState;
     },
-    [workingListsActionTypes.EVENT_DELETE]: (state, action) => {
+    [eventListActionTypes.REQUEST_DELETE_EVENT]: (state, action) => {
         const listId = action.payload.listId;
         return {
             ...state,
             [listId]: {
                 ...state[listId],
                 isUpdatingWithDialog: true,
+            },
+        };
+    },
+    [workingListsActionTypes.EVENT_DELETE_SUCCESS]: (state, action) => {
+        const { listId, eventId } = action.payload;
+        return {
+            ...state,
+            [listId]: {
+                ...state[listId],
+                lastEventIdDeleted: eventId,
             },
         };
     },
@@ -466,23 +464,9 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
         newState[action.payload.listId] = [...action.payload.columnOrder];
         return newState;
     },
-    [workingListsActionTypes.DATA_PRE_CLEAN]: (state, action) => {
-        const { listId } = action.payload;
-        return {
-            ...state,
-            [listId]: undefined,
-        };
-    },
 }, 'workingListsColumnsOrder');
 
 export const workingListsContextDesc = createReducerDescription({
-    [workingListsActionTypes.DATA_PRE_CLEAN]: (state, action) => {
-        const { listId } = action.payload;
-        return {
-            ...state,
-            [listId]: undefined,
-        };
-    },
     [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const { listId, config } = action.payload;
@@ -501,15 +485,8 @@ export const workingListsContextDesc = createReducerDescription({
 }, 'workingListsContext');
 
 export const workingListsUserSelectedFiltersDesc = createReducerDescription({
-    [workingListsActionTypes.DATA_PRE_CLEAN]: (state, action) => {
-        const { listId } = action.payload;
-        return {
-            ...state,
-            [listId]: undefined,
-        };
-    },
     [filterSelectorActionTypes.REST_MENU_ITEM_SELECTED]: (state, action) => {
-        const { id, listId } = action.payload;
+        const { id, listId } = action.payload;
         const currentListState = {
             ...state[listId],
             [id]: true,

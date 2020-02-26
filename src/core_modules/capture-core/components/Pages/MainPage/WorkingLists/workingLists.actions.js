@@ -1,5 +1,4 @@
 // @flow
-import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
 import { actionCreator } from '../../../../actions/actions.utils';
 
 export const actionTypes = {
@@ -42,7 +41,7 @@ export const preCleanData =
         actionCreator(actionTypes.DATA_PRE_CLEAN)({ cleanTemplates, listId });
 
 export const fetchTemplates =
-    (listId: string) => actionCreator(actionTypes.TEMPLATES_FETCH)({ listId });
+    (programId: string, listId: string) => actionCreator(actionTypes.TEMPLATES_FETCH)({ programId, listId });
 
 export const fetchTemplatesSuccess = (templates: Array<any>, programId: string, listId: string) =>
     actionCreator(actionTypes.TEMPLATES_FETCH_SUCCESS)({ templates, programId, listId });
@@ -77,8 +76,8 @@ export const addTemplateError = (clientId: Object, data: Object) =>
 export const cleanSkipInitAddingTemplate = (template: Object, listId: string) =>
     actionCreator(actionTypes.TEMPLATE_ADD_SKIP_INIT_CLEAN)({ template, listId });
 
-export const deleteTemplate = (template: Object, listId: string) =>
-    actionCreator(actionTypes.TEMPLATE_DELETE)({ template, listId });
+export const deleteTemplate = (template: Object, programId: string, listId: string) =>
+    actionCreator(actionTypes.TEMPLATE_DELETE)({ template, programId, listId });
 
 export const deleteTemplateSuccess = (template: Object, listId: string) =>
     actionCreator(actionTypes.TEMPLATE_DELETE_SUCCESS)({ template, listId });
@@ -111,16 +110,10 @@ export const updateEventListError =
 export const updateEventListCancel =
     (listId: string) => actionCreator(actionTypes.EVENT_LIST_UPDATE_CANCEL)({ listId });
 
-export const deleteEvent =
-    (eventId: string, listId: string) => actionCreator(actionTypes.EVENT_DELETE)({ listId }, {
-        offline: {
-            effect: {
-                url: `events/${eventId}`,
-                method: methods.DELETE,
-            },
-            commit: { type: actionTypes.EVENT_DELETE_SUCCESS },
-            rollback: { type: actionTypes.EVENT_DELETE_ERROR },
-        },
-    });
+export const deleteEventSuccess =
+    (eventId: string, listId: string) => actionCreator(actionTypes.EVENT_DELETE_SUCCESS)({ eventId, listId });
+
+export const deleteEventError =
+    () => actionCreator(actionTypes.EVENT_DELETE_ERROR)();
 
 export const unloadingContext = (listId: string) => actionCreator(actionTypes.CONTEXT_UNLOADING)({ listId });

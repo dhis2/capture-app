@@ -50,21 +50,22 @@ type PassOnProps = {
     defaultConfig: Map<string, Object>,
     eventsData: ?Object,
     currentTemplate: Object,
-    onDeleteTemplate: Function,
 };
 
 type Props = {
     ...PassOnProps,
+    programId: string,
     children: (currentListIsModified: boolean) => React.Node,
 };
 
 const EventListConfig = (props: Props) => {
-    const { children, ...passOnProps } = props;
+    const { children, programId, ...passOnProps } = props;
     const {
         listMeta,
         columnOrder,
         onAddTemplate,
         onUpdateTemplate,
+        onDeleteTemplate,
     } = React.useContext(EventListConfigContext);
     const {
         next: nextMeta = {},
@@ -118,8 +119,11 @@ const EventListConfig = (props: Props) => {
         const eventQueryCriteria: ApiEventQueryCriteria =
             convertToEventQueryCriteria(listConfig);
 
-        onUpdateTemplate(template, eventQueryCriteria, listConfig);
-    }, [onUpdateTemplate]);
+        onUpdateTemplate(template, eventQueryCriteria, {
+            ...listConfig,
+            programId,
+        });
+    }, [onUpdateTemplate, programId]);
 
     const addTemplateHandler = React.useCallback((name, listConfig) => {
         const eventQueryCriteria: ApiEventQueryCriteria =
@@ -128,14 +132,19 @@ const EventListConfig = (props: Props) => {
             ...listConfig,
             template: listConfig.currentTemplate,
             clientId: uuid(),
+            programId,
         });
-    }, [onAddTemplate]);
+    }, [onAddTemplate, programId]);
+
+    const deleteTemplateHandler = React.useCallback((template, listId) =>
+        onDeleteTemplate(template, programId, listId), [onDeleteTemplate, programId]);
 
     return (
         <React.Fragment>
             {children(currentListIsModified)}
             <EventListConfigMenuContent
                 {...passOnProps}
+                programId={programId}
                 filters={calcFilters}
                 sortById={calcSortById}
                 sortByDirection={calcSortByDirection}
@@ -144,6 +153,7 @@ const EventListConfig = (props: Props) => {
                 rowsPerPage={calcRowsPerPage}
                 onUpdateTemplate={updateTemplateHandler}
                 onAddTemplate={addTemplateHandler}
+                onDeleteTemplate={deleteTemplateHandler}
                 currentListIsModified={currentListIsModified}
             />
         </React.Fragment>
