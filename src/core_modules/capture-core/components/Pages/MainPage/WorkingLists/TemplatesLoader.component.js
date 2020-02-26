@@ -60,7 +60,6 @@ const TemplatesLoader = (props: Props) => {
         (!dirtyTemplates || !firstRunRef.current) &&
         !templatesAreLoading;
 
-    debugger;
     return (
         <TemplatesManangerWithLoadingIndicator
             {...passOnProps}
