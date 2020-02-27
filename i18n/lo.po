@@ -1,13 +1,13 @@
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2019
 # phil_dhis2, 2019
+# Viktor Varland <viktor@dhis2.org>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2019-11-18T14:43:03.753Z\n"
+"POT-Creation-Date: 2020-02-24T21:23:35.077Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: phil_dhis2, 2019\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -201,12 +201,6 @@ msgstr "ຈາກ"
 msgid "To"
 msgstr "ຖຶງ"
 
-msgid "after or equal to"
-msgstr ""
-
-msgid "before or equal to"
-msgstr ""
-
 msgid "Today"
 msgstr "ມື້ນີ້"
 
@@ -236,12 +230,6 @@ msgstr "ຄ່າໃຫ່ຍສຸດ"
 
 msgid "Min"
 msgstr "ຄ່າຕໍ່າສຸດ"
-
-msgid "greater than or equal to"
-msgstr ""
-
-msgid "less than or equal to"
-msgstr ""
 
 msgid "Contains text"
 msgstr ""
@@ -360,6 +348,21 @@ msgstr "ລືບກໍລະນີອອກ"
 msgid "Update"
 msgstr "ປັບປຸງ"
 
+msgid "{{fromDate}} to {{toDate}}"
+msgstr ""
+
+msgid "after or equal to {{date}}"
+msgstr ""
+
+msgid "before or equal to {{date}}"
+msgstr ""
+
+msgid "greater than or equal to"
+msgstr ""
+
+msgid "less than or equal to"
+msgstr ""
+
 msgid "More filters"
 msgstr ""
 
@@ -378,14 +381,53 @@ msgstr "ດາວໂຫຼດເປັນ CSV"
 msgid "Download with current filters"
 msgstr ""
 
-msgid "Save filter as..."
-msgstr ""
-
 msgid "Download as..."
 msgstr ""
 
 msgid "Rows per page"
 msgstr ""
+
+msgid "Update current template"
+msgstr ""
+
+msgid "Save as template..."
+msgstr ""
+
+msgid "Delete current template"
+msgstr ""
+
+msgid "Share current template..."
+msgstr ""
+
+msgid "Delete template"
+msgstr ""
+
+msgid "Do you really want to delete the '{{templateName}}' template?"
+msgstr ""
+
+msgid "Confirm"
+msgstr "Confirm"
+
+msgid "Save As template"
+msgstr ""
+
+msgid "Template name"
+msgstr ""
+
+msgid "Show Less"
+msgstr ""
+
+msgid "Show All"
+msgstr ""
+
+msgid "Working list could not be loaded"
+msgstr ""
+
+msgid "an error occurred loading working lists"
+msgstr ""
+
+msgid "Registered events"
+msgstr "ເຫດການທີ່ໄດ້ລົງທະບຽນ"
 
 msgid "Active"
 msgstr "ທີ່ຍັງນໍາໃຊ້ຢູ່"
@@ -687,6 +729,18 @@ msgid "Error saving event"
 msgstr ""
 
 msgid "Could not save event. See log for details"
+msgstr ""
+
+msgid "Could not delete event"
+msgstr ""
+
+msgid "Could not save working list"
+msgstr ""
+
+msgid "Could not add working list"
+msgstr ""
+
+msgid "Could not delete working list"
 msgstr ""
 
 msgid "Organisation unit search failed. See log for details"
