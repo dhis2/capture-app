@@ -1,13 +1,13 @@
 # Translators:
-# phil_dhis2, 2019
-# Viktor Varland <viktor@dhis2.org>, 2019
+# phil_dhis2, 2020
+# Viktor Varland <viktor@dhis2.org>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2020-02-24T21:23:35.077Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2019\n"
+"PO-Revision-Date: 2020-02-28 15:06+0000\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -406,7 +406,7 @@ msgid "Do you really want to delete the '{{templateName}}' template?"
 msgstr ""
 
 msgid "Confirm"
-msgstr ""
+msgstr "تأكيد"
 
 msgid "Save As template"
 msgstr ""
@@ -427,7 +427,7 @@ msgid "an error occurred loading working lists"
 msgstr ""
 
 msgid "Registered events"
-msgstr ""
+msgstr "الأحداث المسجلة"
 
 msgid "Active"
 msgstr "فعال"
