@@ -1,12 +1,12 @@
 # Translators:
-# phil_dhis2, 2019
+# phil_dhis2, 2020
 # Viktor Varland <viktor@dhis2.org>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2020-02-24T21:23:35.077Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"PO-Revision-Date: 2020-02-28 15:06+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
@@ -100,7 +100,7 @@ msgid "An error has occured. See log for details"
 msgstr ""
 
 msgid "Cancel"
-msgstr "ຍົກເລີກ"
+msgstr "Cancel"
 
 msgid "Unsaved changes"
 msgstr ""
@@ -163,7 +163,7 @@ msgid "Operations running"
 msgstr ""
 
 msgid "Sort"
-msgstr ""
+msgstr "Sort"
 
 msgid "No events to display"
 msgstr ""
@@ -226,16 +226,16 @@ msgid "Custom range"
 msgstr ""
 
 msgid "Max"
-msgstr "ຄ່າໃຫ່ຍສຸດ"
+msgstr "ຄ່າສູງສຸດ"
 
 msgid "Min"
-msgstr "ຄ່າຕໍ່າສຸດ"
+msgstr "ຄ່ານ້ອຍສຸດ"
 
 msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr "ແມ່ນ"
+msgstr "Yes"
 
 msgid "mm/dd/yyyy"
 msgstr ""
@@ -262,7 +262,7 @@ msgid "Select file"
 msgstr ""
 
 msgid "No"
-msgstr "ບໍ່"
+msgstr "No"
 
 msgid "Uploading image"
 msgstr ""
@@ -370,10 +370,10 @@ msgid "Select columns"
 msgstr ""
 
 msgid "Download as JSON"
-msgstr ""
+msgstr "Download as JSON"
 
 msgid "Download as XML"
-msgstr ""
+msgstr "Download as XML"
 
 msgid "Download as CSV"
 msgstr "ດາວໂຫຼດເປັນ CSV"
@@ -595,7 +595,7 @@ msgid "Show all"
 msgstr "ສະແດງທັງໝົດ"
 
 msgid "Program"
-msgstr "ສາຍງານ"
+msgstr "Program"
 
 msgid "Organisation Unit"
 msgstr "ຫົວໜ່ວຍ ການຈັດຕັ້ງ"
@@ -642,7 +642,7 @@ msgid "No one is assigned to this event"
 msgstr ""
 
 msgid "Assign"
-msgstr ""
+msgstr "Assign"
 
 msgid "Event assigned to {{name}}"
 msgstr ""
@@ -759,7 +759,7 @@ msgid "Time"
 msgstr ""
 
 msgid "From date"
-msgstr ""
+msgstr "From date"
 
 msgid "From time"
 msgstr ""
