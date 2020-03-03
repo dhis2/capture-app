@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-02-24T21:23:35.077Z\n"
-"PO-Revision-Date: 2020-02-24T21:23:35.077Z\n"
+"POT-Creation-Date: 2020-03-03T16:00:01.083Z\n"
+"PO-Revision-Date: 2020-03-03T16:00:01.083Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -374,37 +374,31 @@ msgstr ""
 msgid "Download with current filters"
 msgstr ""
 
-msgid "Download as..."
+msgid "Download data"
 msgstr ""
 
 msgid "Rows per page"
 msgstr ""
 
-msgid "Update current template"
+msgid "Save current view..."
 msgstr ""
 
-msgid "Save as template..."
+msgid "Save current view as..."
 msgstr ""
 
-msgid "Delete current template"
+msgid "Delete view"
 msgstr ""
 
-msgid "Share current template..."
-msgstr ""
-
-msgid "Delete template"
-msgstr ""
-
-msgid "Do you really want to delete the '{{templateName}}' template?"
+msgid "Do you really want to delete the '{{templateName}}' view?"
 msgstr ""
 
 msgid "Confirm"
 msgstr ""
 
-msgid "Save As template"
+msgid "Save As view"
 msgstr ""
 
-msgid "Template name"
+msgid "View name"
 msgstr ""
 
 msgid "Show Less"

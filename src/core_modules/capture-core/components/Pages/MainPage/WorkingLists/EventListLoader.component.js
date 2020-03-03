@@ -80,7 +80,10 @@ const EventListLoader = (props: Props) => {
             return () => onCleanSkipInitAddingTemplate(currentTemplate, listId);
         }
 
-        onLoadEventList(currentTemplate, defaultConfig, listId);
+        onLoadEventList(currentTemplate,
+            { programId, orgUnitId, categories, lastTransaction },
+            { defaultConfig, listId },
+        );
         return undefined;
     }, [
         listId,
