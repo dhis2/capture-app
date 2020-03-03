@@ -1,5 +1,5 @@
 # Translators:
-# Wanda <wanda@frontlineaids.org>, 2019
+# Wanda <wanda@frontlineaids.org>, 2020
 # phil_dhis2, 2020
 # Viktor Varland <viktor@dhis2.org>, 2020
 # 
@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2020-02-24T21:23:35.077Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"PO-Revision-Date: 2020-02-28 15:06+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Russian (https://www.transifex.com/hisp-uio/teams/100509/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr "Столбец"
+msgstr "Столбчатая"
 
 msgid "This value is validating"
 msgstr ""
@@ -215,13 +215,13 @@ msgid "This Year"
 msgstr ""
 
 msgid "Last week"
-msgstr "Последняя неделя"
+msgstr "Прошлая неделя"
 
 msgid "Last month"
 msgstr "Последний месяц"
 
 msgid "Last 3 months"
-msgstr "Последние 3 месяца"
+msgstr "Прошлые 3 месяца"
 
 msgid "Custom range"
 msgstr ""
@@ -293,7 +293,7 @@ msgid "Online"
 msgstr "Онлайн"
 
 msgid "Offline"
-msgstr "Оффлайн"
+msgstr "Офлайн"
 
 msgid "Syncing"
 msgstr ""
@@ -596,7 +596,7 @@ msgid "Show all"
 msgstr "Показать все"
 
 msgid "Program"
-msgstr "Программа"
+msgstr "Program"
 
 msgid "Organisation Unit"
 msgstr "Организация"
@@ -751,7 +751,7 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr "Выставить координату"
+msgstr "Задать координату"
 
 msgid "Date"
 msgstr "Дата"
