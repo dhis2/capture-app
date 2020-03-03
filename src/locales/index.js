@@ -17,6 +17,7 @@ import 'moment/locale/ru';
 import 'moment/locale/uk';
 import 'moment/locale/ur';
 import 'moment/locale/vi';
+import 'moment/locale/zh-cn';
 
 import arTranslations from './ar/translations.json';
 import enTranslations from './en/translations.json';
@@ -31,6 +32,7 @@ import ruTranslations from './ru/translations.json';
 import ukTranslations from './uk/translations.json';
 import urTranslations from './ur/translations.json';
 import viTranslations from './vi/translations.json';
+import zhTranslations from './zh/translations.json';
 
 const namespace = 'default';
 moment.locale('en');
@@ -48,6 +50,7 @@ i18n.addResources('ru', namespace, ruTranslations);
 i18n.addResources('uk', namespace, ukTranslations);
 i18n.addResources('ur', namespace, urTranslations);
 i18n.addResources('vi', namespace, viTranslations);
+i18n.addResources('zh', namespace, zhTranslations);
 
 i18n.setDefaultNamespace(namespace);
 i18n.changeLanguage('en');

@@ -59,14 +59,19 @@ class ListWrapperMenu extends React.Component<Props, State> {
                             togglePopper();
                             content.clickHandler();
                         }}
+                        disabled={!content.clickHandler}
                     >
                         {content.element}
                     </MenuItem>
                 )) : [];
 
         return [(
-            <MenuItem key="download" onClick={() => { this.openDialog(dialogKeys.DOWNLOAD_TABLE, togglePopper); }}>
-                {i18n.t('Download as...')}
+            <MenuItem
+                key="download"
+                onClick={() => { this.openDialog(dialogKeys.DOWNLOAD_TABLE, togglePopper); }}
+                divider
+            >
+                {i18n.t('Download data')}
             </MenuItem>
         ),
         ...customMenuItems,

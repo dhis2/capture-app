@@ -39,7 +39,7 @@ const NewTemplateContents = (props: Props) => {
 
     const handleSave = React.useCallback(() => {
         if (!name) {
-            setError('Please specify a template name');
+            setError('Please specify a view name');
             return;
         }
         onSaveTemplate(name);
@@ -47,17 +47,20 @@ const NewTemplateContents = (props: Props) => {
 
     return (
         <React.Fragment>
-            <DialogTitle>{i18n.t('Save As template')}</DialogTitle>
+            <DialogTitle>{i18n.t('Save As view')}</DialogTitle>
             <DialogContent>
                 <NewTemplateTextField
                     onBlur={nameBlurHandler}
                     className={classes.input}
-                    label={i18n.t('Template name')}
+                    label={i18n.t('View name')}
                     error={!!error}
+                    dataTest={'view-name'}
                     initialFocus
+                    required
+                    name="viewName"
                 />
                 <div
-                    data-test="template-name-error-message"
+                    data-test="view-name-error-message"
                     className={classes.error}
                 >
                     {error}
