@@ -1,13 +1,13 @@
 # Translators:
-# phil_dhis2, 2019
 # easylin <lin_xd@126.com>, 2020
+# phil_dhis2, 2020
 # Viktor Varland <viktor@dhis2.org>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2020-02-24T21:23:35.077Z\n"
-"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"PO-Revision-Date: 2020-02-28 15:06+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
@@ -317,7 +317,7 @@ msgid "Comments"
 msgstr "评论"
 
 msgid "Please add or cancel comment before saving the event"
-msgstr "保存事件前请添加或取消被或许"
+msgstr "保存事件前请添加或取消备注"
 
 msgid "No write access"
 msgstr "无写权限"
@@ -332,7 +332,7 @@ msgid "Edit event"
 msgstr "编辑事件"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "事件不能载入"
+msgstr "事件不能载入,你确信它存在?"
 
 msgid "Event could not be loaded"
 msgstr "事件不能载入"
