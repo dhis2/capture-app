@@ -299,6 +299,13 @@ export const workingListsTemplatesDesc = createReducerDescription({
 }, 'workingListsTemplates');
 
 export const workingListsDesc = createReducerDescription({
+    [workingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
+        const { listId } = action.payload;
+        return {
+            ...state,
+            [listId]: undefined,
+        };
+    },
     [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const { listId, eventContainers, request } = action.payload;
@@ -432,6 +439,13 @@ export const workingListsUIDesc = createReducerDescription({
 }, 'workingListsUI');
 
 export const workingListsColumnsOrderDesc = createReducerDescription({
+    [workingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
+        const { listId } = action.payload;
+        return {
+            ...state,
+            [listId]: undefined,
+        };
+    },
     [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
         const { listId, config } = action.payload;
         const columnOrder = config.columnOrder;
@@ -467,11 +481,16 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
 }, 'workingListsColumnsOrder');
 
 export const workingListsContextDesc = createReducerDescription({
-    [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
+    /*
+    Setting context on init (not on success anymore) because it makes sense for the loading effect.
+    The meaning is slightly changed though, having a context now implies that a request for events was done for this context,
+    not that events was successfully retrieved for this context.
+    */
+    [workingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
         const newState = { ...state };
-        const { listId, config } = action.payload;
+        const { listId, context } = action.payload;
         newState[listId] = {
-            ...config.selections,
+            ...context,
             timestamp: moment().toISOString(),
         };
         return newState;
@@ -485,6 +504,13 @@ export const workingListsContextDesc = createReducerDescription({
 }, 'workingListsContext');
 
 export const workingListsUserSelectedFiltersDesc = createReducerDescription({
+    [workingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
+        const { listId } = action.payload;
+        return {
+            ...state,
+            [listId]: undefined,
+        };
+    },
     [filterSelectorActionTypes.REST_MENU_ITEM_SELECTED]: (state, action) => {
         const { id, listId } = action.payload;
         const currentListState = {
