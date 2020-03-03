@@ -34,10 +34,10 @@ const DeleteConfirmationDialog = (props: Props) => {
             open={open}
             onClose={onClose}
         >
-            <DialogTitle>{i18n.t('Delete template')}</DialogTitle>
+            <DialogTitle>{i18n.t('Delete view')}</DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                    {i18n.t('Do you really want to delete the \'{{templateName}}\' template?', { templateName })}
+                    {i18n.t('Do you really want to delete the \'{{templateName}}\' view?', { templateName })}
                 </DialogContentText>
             </DialogContent>
             <DialogActions
