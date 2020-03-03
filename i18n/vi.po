@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-02-24T21:23:35.077Z\n"
+"POT-Creation-Date: 2020-03-03T16:00:01.083Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -382,38 +382,32 @@ msgstr "Tải xuống với CSV"
 msgid "Download with current filters"
 msgstr ""
 
-msgid "Download as..."
-msgstr ""
+msgid "Download data"
+msgstr "Tải dữ liệu xuống"
 
 msgid "Rows per page"
 msgstr "Dòng mỗi trang"
 
-msgid "Update current template"
+msgid "Save current view..."
 msgstr ""
 
-msgid "Save as template..."
+msgid "Save current view as..."
 msgstr ""
 
-msgid "Delete current template"
+msgid "Delete view"
 msgstr ""
 
-msgid "Share current template..."
-msgstr ""
-
-msgid "Delete template"
-msgstr ""
-
-msgid "Do you really want to delete the '{{templateName}}' template?"
+msgid "Do you really want to delete the '{{templateName}}' view?"
 msgstr ""
 
 msgid "Confirm"
 msgstr "Xác nhận"
 
-msgid "Save As template"
+msgid "Save As view"
 msgstr ""
 
-msgid "Template name"
-msgstr ""
+msgid "View name"
+msgstr "Xem tên"
 
 msgid "Show Less"
 msgstr ""
