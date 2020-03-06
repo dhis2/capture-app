@@ -64,8 +64,26 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) 
                 eventQueryCriteria,
             };
 
-            const requestPromise = getApi()
+            const api = getApi();
+
+            const requestPromise = api
                 .update(`eventFilters/${template.id}`, eventFilterData)
+                .then(() => api
+                    .post(`sharing?type=eventFilter&id=${template.id}`, {
+                        object: {
+                            publicAccess: '--------',
+                            externalAccess: false,
+                        },
+                    })
+                    .catch((error) => {
+                        log.error(
+                            errorCreator('could not set sharing settings for template')({
+                                error,
+                                eventFilterData,
+                                templateId: template.id,
+                            }),
+                        );
+                    }))
                 .then(() => {
                     const isActiveTemplate =
                         store.getState().workingListsTemplates[listId].selectedTemplateId === template.id;
