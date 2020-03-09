@@ -1,12 +1,12 @@
 # Translators:
+# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2019
 # phil_dhis2, 2019
-# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2020
 # Viktor Varland <viktor@dhis2.org>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-03-03T16:00:01.083Z\n"
+"POT-Creation-Date: 2020-03-09T19:35:56.143Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -382,10 +382,13 @@ msgstr "Download dalam bentuk CSV"
 msgid "Download with current filters"
 msgstr ""
 
-msgid "Download data"
-msgstr "Unduh data"
+msgid "Download data..."
+msgstr ""
 
 msgid "Rows per page"
+msgstr ""
+
+msgid "Update view"
 msgstr ""
 
 msgid "Save current view..."
@@ -395,6 +398,9 @@ msgid "Save current view as..."
 msgstr ""
 
 msgid "Delete view"
+msgstr ""
+
+msgid "Share view..."
 msgstr ""
 
 msgid "Do you really want to delete the '{{templateName}}' view?"
