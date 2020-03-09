@@ -1,5 +1,27 @@
 // @flow
 import * as React from 'react';
-import getFiltersContainer from './FilterSelectors.containerGetter';
+import Filters from './Filters.container';
+import type { Column } from '../eventList.types';
 
-export default () => (InnerComponent: React.ComponentType<any>) => getFiltersContainer(InnerComponent);
+type Props = {
+    columns: ?Array<Column>,
+    listId: string,
+};
+
+export default () => (InnerComponent: React.ComponentType<any>) =>
+    (props: Props) => {
+        const { columns, listId } = props;
+        return (
+            <InnerComponent
+                {...props}
+                columns={columns}
+                listId={listId}
+                filterButtons={
+                    <Filters
+                        columns={columns}
+                        listId={listId}
+                    />
+                }
+            />
+        );
+    };

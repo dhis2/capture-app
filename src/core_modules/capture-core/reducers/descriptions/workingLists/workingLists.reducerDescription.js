@@ -503,7 +503,7 @@ export const workingListsContextDesc = createReducerDescription({
     },
 }, 'workingListsContext');
 
-export const workingListsUserSelectedFiltersDesc = createReducerDescription({
+export const workingListsStickyFiltersDesc = createReducerDescription({
     [workingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
         const { listId } = action.payload;
         return {
@@ -511,11 +511,30 @@ export const workingListsUserSelectedFiltersDesc = createReducerDescription({
             [listId]: undefined,
         };
     },
+    [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
+        const { listId, config } = action.payload;
+        const filters = config.filters;
+        const filtersWithValueOnInit = filters ? Object.keys(filters).reduce((acc, key) => ({
+            ...acc,
+            [key]: true,
+        }), {}) : undefined;
+
+        return {
+            ...state,
+            [listId]: {
+                filtersWithValueOnInit,
+                userSelectedFilters: undefined,
+            },
+        };
+    },
     [filterSelectorActionTypes.REST_MENU_ITEM_SELECTED]: (state, action) => {
         const { id, listId } = action.payload;
         const currentListState = {
             ...state[listId],
-            [id]: true,
+            userSelectedFilters: {
+                ...state[listId].userSelectedFilters,
+                [id]: true,
+            },
         };
 
         return {
@@ -523,24 +542,14 @@ export const workingListsUserSelectedFiltersDesc = createReducerDescription({
             [listId]: currentListState,
         };
     },
-    [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
-        const { listId, config } = action.payload;
-        const filters = config.filters;
-        const selectedFilters = filters ? Object.keys(filters).reduce((acc, key) => ({
-            ...acc,
-            [key]: true,
-        }), {}) : {};
-
-        return {
-            ...state,
-            [listId]: selectedFilters,
-        };
-    },
     [filterSelectorActionTypes.UPDATE_INCLUDED_FILTERS_AFTER_COLUMN_SORTING]: (state, action) => {
-        const { listId, includeFilters } = action.payload;
+        const { listId, includeFilters: filtersWithValueOnInit } = action.payload;
         return {
             ...state,
-            [listId]: includeFilters,
+            [listId]: {
+                filtersWithValueOnInit,
+                userSelectedFilters: undefined,
+            },
         };
     },
-}, 'workingListsUserSelectedFilters');
+}, 'workingListsStickyFilters');
