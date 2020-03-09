@@ -73,27 +73,19 @@ const EventListConfigMenuContent = (props: Props) => {
         onDeleteTemplate(...args);
     }, [onDeleteTemplate]);
 
-    const getSaveItem = React.useCallback((viewName: string) => ({
+    const getSaveItem = React.useCallback(() => ({
         key: 'save',
         clickHandler: () => {
             templateMaintenanceInstance.current.updateTemplateHandler();
         },
-        element: (
-            <div>
-                {i18n.t('Update view: {{viewName}}', { viewName })}
-            </div>
-        ),
+        element: i18n.t('Update view'),
     }), []);
 
     const getSaveAsItem = React.useCallback((isDefaultView: boolean, isModified: boolean) => {
         if (isDefaultView && !isModified) {
             return {
                 key: 'saveAs',
-                element: (
-                    <div>
-                        {i18n.t('Save current view...')}
-                    </div>
-                ),
+                element: i18n.t('Save current view...'),
             };
         }
 
@@ -102,61 +94,75 @@ const EventListConfigMenuContent = (props: Props) => {
             clickHandler: () => {
                 setMaintenanceDialogOpenMode(dialogModes.NEW);
             },
-            element: (
-                <div>
-                    {isDefaultView ? i18n.t('Save current view...') : i18n.t('Save current view as...')}
-                </div>
-            ),
+            element: isDefaultView ? i18n.t('Save current view...') : i18n.t('Save current view as...'),
         };
     }, []);
 
-    const getDeleteItem = React.useCallback((viewName: string) => ({
+    const getDeleteItem = React.useCallback(() => ({
         key: 'delete',
         clickHandler: () => {
             setMaintenanceDialogOpenMode(dialogModes.DELETE);
         },
         element: (
             <div className={classes.delete}>
-                {i18n.t('Delete view: {{viewName}}', { viewName })}
+                {i18n.t('Delete view')}
             </div>
         ),
     }), [
         classes.delete,
     ]);
 
-    const getShareItem = React.useCallback((viewName: string) => ({
+    const getShareItem = React.useCallback(() => ({
         key: 'share',
         clickHandler: () => {
             setMaintenanceDialogOpenMode(dialogModes.SHARING);
         },
-        element: (
-            <div>
-                {i18n.t('Share view: {{viewName}}', { viewName })}
-            </div>
-        ),
+        element: i18n.t('Share view...'),
+    }), []);
+
+    const getSavedViewSubHeader = React.useCallback((viewName: string) => ({
+        key: 'savedViewSubHeader',
+        subHeader: viewName.length > 30 ? `${viewName.substring(0, 27)}...` : viewName,
     }), []);
 
     // eslint-disable-next-line complexity
     const customMenuContents = React.useMemo(() => {
-        const menuContents = [];
+        const currentViewContents = [];
+        const savedViewContents = [];
+
         const { access, isDefault, notPreserved, displayName } = currentTemplate;
 
-        menuContents.push(getSaveAsItem(!!isDefault, currentListIsModified));
+        currentViewContents.push(getSaveAsItem(!!isDefault, currentListIsModified));
 
         if (!isDefault && !notPreserved && access.write && access.update && currentListIsModified) {
-            menuContents.push(getSaveItem(displayName));
+            savedViewContents.push(getSaveItem());
         }
 
         if (!isDefault && !notPreserved && access.manage) {
-            menuContents.push(getShareItem(displayName));
+            savedViewContents.push(getShareItem());
         }
 
         if (!isDefault && !notPreserved && access.delete) {
-            menuContents.push(getDeleteItem(displayName));
+            savedViewContents.push(getDeleteItem());
         }
 
-        return menuContents;
-    }, [currentTemplate, getSaveItem, getSaveAsItem, getDeleteItem, getShareItem, currentListIsModified]);
+        if (savedViewContents.length > 0) {
+            savedViewContents.splice(0, 0, getSavedViewSubHeader(displayName));
+        }
+
+        return [
+            ...currentViewContents,
+            ...savedViewContents,
+        ];
+    }, [
+        currentTemplate,
+        getSaveItem,
+        getSaveAsItem,
+        getDeleteItem,
+        getShareItem,
+        currentListIsModified,
+        getSavedViewSubHeader,
+    ]);
 
     return (
         <React.Fragment>
