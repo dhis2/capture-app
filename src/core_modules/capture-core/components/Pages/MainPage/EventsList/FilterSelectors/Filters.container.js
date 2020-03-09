@@ -1,12 +1,11 @@
 // @flow
-import * as React from 'react';
 import { connect } from 'react-redux';
-import getFilterSelectorsComponent from './FilterSelectors.componentGetter';
+import Filters from './Filters.component';
 import { restMenuItemSelected } from './filterSelector.actions';
-import { makeOnItemSelectedSelector } from './filterSelectors.selectors';
+import { makeOnItemSelectedSelector } from './filters.selectors';
 
 const mapStateToProps = (state: ReduxState, props: Object) => ({
-    userSelectedFilters: state.workingListsUserSelectedFilters[props.listId],
+    stickyFilters: state.workingListsStickyFilters[props.listId],
 });
 
 const mapDispatchToProps = () => {
@@ -21,5 +20,4 @@ const mapDispatchToProps = () => {
     });
 };
 
-export default (InnerComponent: React.ComponentType<any>) =>
-    connect(mapStateToProps, mapDispatchToProps)(getFilterSelectorsComponent(InnerComponent));
+export default connect(mapStateToProps, mapDispatchToProps)(Filters);

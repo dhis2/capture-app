@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
 import FilterButton from './FilterButton.component';
-import { editContents, setFilter, clearFilter, batchActionTypes } from '../filterSelector.actions';
+import { setFilter, clearFilter, batchActionTypes } from '../filterSelector.actions';
 import { workingListUpdating } from '../../eventsList.actions';
 import { makeCurrentFilterSelector, makeFilterValueSelector } from './filterButton.selectors';
 
@@ -16,9 +16,6 @@ const mapStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onEditFilterContents: (listId: string, value: any, itemId: string) => {
-        dispatch(editContents(listId, value, itemId));
-    },
     onFilterUpdate: (listId: string, data: ?Object, itemId: string) => {
         const action = data == null ? clearFilter(listId, itemId) : setFilter(listId, data, itemId);
         dispatch(action);
