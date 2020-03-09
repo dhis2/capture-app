@@ -523,6 +523,7 @@ export const workingListsUserSelectedFiltersDesc = createReducerDescription({
             [listId]: currentListState,
         };
     },
+    /*
     [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
         const { listId, config } = action.payload;
         const filters = config.filters;
@@ -543,4 +544,5 @@ export const workingListsUserSelectedFiltersDesc = createReducerDescription({
             [listId]: includeFilters,
         };
     },
+    */
 }, 'workingListsUserSelectedFilters');

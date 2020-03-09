@@ -1,11 +1,12 @@
 // @flow
 import * as React from 'react';
+import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { withStyles } from '@material-ui/core/styles';
 
 import FilterButton from './FilterButton/FilterButton.container';
 import FilterRestMenu from './FilterRestMenu/FilterRestMenu.component';
 import { filterTypesArray } from './filterTypes';
-import { MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS } from './filterSelector.const';
 
 import type { Column } from '../ListWrapper/EventsListWrapper.component';
 
@@ -19,8 +20,9 @@ const getStyles = (theme: Theme) => ({
 
 type Props = {
     listId: string,
-    columns: ?Array<Column>,
+    elementConfigs: Map<string, Column>,
     userSelectedFilters: ?{ [id: string]: string },
+    filters: ?Object,
     onRestMenuItemSelected: (id: string) => void,
     classes: {
         filterButtonContainer: string,
@@ -32,6 +34,100 @@ const INDIVIDUAL_DISPLAY_COUNT = 4;
 export default (InnerComponent: React.ComponentType<any>) =>
 // $FlowFixMe
     withStyles(getStyles)(class EventListFilterSelectors extends React.Component<Props> {
+        static splitBasedOnHasValue(elementConfigs: Map<string, Column>, filters: ?Object) {
+            const filtersNotEmpty = filters || {};
+            return Object
+                .keys(filtersNotEmpty)
+                .reduce((acc, key) => {
+                    const config = elementConfigs.get(key);
+
+                    if (!config) {
+                        log.error(
+                            errorCreator('a filter with no config element was found')({
+                                key,
+                                value: filtersNotEmpty[key],
+                            }),
+                        );
+                        return acc;
+                    }
+
+                    acc.individualElements.set(key, config);
+                    acc.restElements.delete(key);
+                    return acc;
+                }, {
+                    individualElements: new Map(),
+                    restElements: new Map(elementConfigs.entries()),
+                });
+        }
+
+        static addUserSelectedFiltersToIndividual(
+            individualElements: Map<string, Column>,
+            restElements: Map<string, Column>,
+            userSelectedFilters: ?Object) {
+            const userSelectedFiltersNonEmpty = userSelectedFilters || {};
+            
+            return Object
+                .keys(userSelectedFiltersNonEmpty)
+                .reduce((acc, key) => {
+                    const config = restElements.get(key);
+                    if (!config) {
+                        if (!individualElements.has(key)) {
+                            log.error(
+                                errorCreator('a userSelectedFilter was specified but no config element was found')({
+                                    key,
+                                })
+                            )
+                        }
+                        return acc;
+                    }
+
+                    acc.individualElements.set(key, config);
+                    acc.restElements.delete(key);
+                    return acc;
+                }, {
+                    individualElements,
+                    restElements,
+                });
+        }
+
+        static fillUpIndividualElements(
+            individualElements: Map<string, Column>,
+            restElements: Map<string, Column>,
+        ) {
+            const restElementsArrayByVisibility =
+                [...restElements.entries()]
+                    .map((entry, index) => ({
+                        element: entry[1],
+                        index,
+                    }))
+                    .sort((a, b) => {
+                        const aVisibility = !!a.element.visible;
+                        const bVisibility = !!b.element.visible;
+
+                        if (aVisibility === bVisibility) {
+                            return a.index - b.index;
+                        }
+
+                        if (aVisibility) {
+                            return 1;
+                        }
+
+                        return -1;
+                    });
+            
+            for (let index = 0; index < restElementsArrayByVisibility.length && individualElements.size < INDIVIDUAL_DISPLAY_COUNT; index++) {
+                const restElement = restElementsArrayByVisibility[index];
+                individualElements.set(restElement.element.id, restElement.element);
+                restElements.delete(restElement.element.id);
+            }
+
+            return {
+                individualElements,
+                restElements,
+            };
+        }
+
+
         static getCalculatedIndividiualColumns(filterColumns: Array<Column>) {
             const visibleColumns = filterColumns
                 .filter(c => c.visible);
@@ -101,15 +197,33 @@ export default (InnerComponent: React.ComponentType<any>) =>
                 );
         }
 
+        calculateFilters() {
+            const { elementConfigs, filters, userSelectedFilters } = this.props;
+
+            const validTypeElements = elementConfigs
+                .filter(config => filterTypesArray.includes(config.type));
+
+            const { individualElements, restElements } = EventListFilterSelectors.splitBasedOnHasValue(validTypeElements, filters);
+            const { individualElements, restElements } = EventListFilterSelectors.addUserSelectedFiltersToIndividual(individualElements, restElements, userSelectedFilters);
+            const { individualElements, restElements } = EventListFilterSelectors.fillUpIndividualElements(individualElements, restElements);
+
+            return {
+                individualElements,
+                restElements,
+            };
+        }
+
         renderFilterSelectorButtons() {
-            const columns = this.props.columns;
+            const { individualElements, restElements } = this.calculateFilters();
 
             if (!columns) {
                 return null;
             }
 
-            const filterColumns = columns
-                .filter(column => filterTypesArray.includes(column.type) || (column.optionSet && column.optionSet.options.length <= MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS));
+            const validTypeColumns = columns
+                .filter(column => filterTypesArray.includes(column.type));
+
+            
 
             const calculatedFilterColumns = EventListFilterSelectors.getCalculatedIndividiualColumns(filterColumns);
             const columnsForIndividualDisplay = [
