@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-02-24T21:23:35.077Z\n"
+"POT-Creation-Date: 2020-03-09T19:35:56.143Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
 "Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -382,38 +382,38 @@ msgstr "Download dalam bentuk CSV"
 msgid "Download with current filters"
 msgstr ""
 
-msgid "Download as..."
+msgid "Download data..."
 msgstr ""
 
 msgid "Rows per page"
 msgstr ""
 
-msgid "Update current template"
+msgid "Update view"
 msgstr ""
 
-msgid "Save as template..."
+msgid "Save current view..."
 msgstr ""
 
-msgid "Delete current template"
+msgid "Save current view as..."
 msgstr ""
 
-msgid "Share current template..."
+msgid "Delete view"
 msgstr ""
 
-msgid "Delete template"
+msgid "Share view..."
 msgstr ""
 
-msgid "Do you really want to delete the '{{templateName}}' template?"
+msgid "Do you really want to delete the '{{templateName}}' view?"
 msgstr ""
 
 msgid "Confirm"
 msgstr "Konfirmasi"
 
-msgid "Save As template"
+msgid "Save As view"
 msgstr ""
 
-msgid "Template name"
-msgstr ""
+msgid "View name"
+msgstr "Tampilkan nama"
 
 msgid "Show Less"
 msgstr ""
