@@ -1,13 +1,14 @@
 # Translators:
 # phil_dhis2, 2019
 # Viktor Varland <viktor@dhis2.org>, 2020
+# Hamza Assada <7amza.it@gmail.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2020-03-09T19:35:56.143Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
+"Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,73 +17,73 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "نرجوا ادخال صيغة صحيحة للتاريخ"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "الأعمدة التي سيتم عرضها في الجدول"
 
 msgid "Column"
 msgstr "العمود"
 
 msgid "This value is validating"
-msgstr ""
+msgstr "يتم التحقق من القيمة"
 
 msgid "Async field update failed"
 msgstr ""
 
 msgid "A value is required"
-msgstr ""
+msgstr "قيمة مطلوبة"
 
 msgid "Please provide a valid number"
-msgstr ""
+msgstr "نرجوا ادخال صيغة رقمية صحيحة"
 
 msgid "Please provide a valid integer"
-msgstr ""
+msgstr "من فضلك ادخل رقم صحيح، من غير كسر"
 
 msgid "Please provide a positive integer"
-msgstr ""
+msgstr "من فضلك ادخل رقم صحيح موجب"
 
 msgid "Please provide zero or a positive integer"
-msgstr ""
+msgstr "من فضلك ادخل عدد صحيح موجب، أو صفر"
 
 msgid "Please provide a negative integer"
-msgstr ""
+msgstr "من فضلك ادخل احد الأعداد الصحيحة السالبة"
 
 msgid "Please provide a valid date and time"
-msgstr ""
+msgstr "من فضلك ادخل صيغة صحيحة للتاريخ والوقت"
 
 msgid "Please provide a valid time"
-msgstr ""
+msgstr "من فضلك ادخل صيغة صحيحة للوقت"
 
 msgid "Please provide a valid percentage"
-msgstr ""
+msgstr "من فضلك ادخل صيغة نسبة مئوية سليمة"
 
 msgid "Please provide a valid url"
-msgstr ""
+msgstr "من فضلك ادخل الأرتباط التشعبي بصيغة سليمة"
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "من فضلك ادخل صيغة بريد الكتروني سليمة"
 
 msgid "Please provide a valid age"
-msgstr ""
+msgstr "من فضلك ادخل صيغة عمرية سليمة"
 
 msgid "Please provide a valid phone number"
-msgstr ""
+msgstr "من فضلك ادخل صيغة رقم تلفون سليمة"
 
 msgid "Please provide a valid organisation unit"
 msgstr ""
 
 msgid "Please provide valid coordinates"
-msgstr ""
+msgstr "من فضلك ادخل صيغة احداثيات سليمة"
 
 msgid "This value already exists"
-msgstr ""
+msgstr "هذه القيمة موجودة مسبقاً"
 
 msgid "\"From\" cannot be greater than \"To\""
-msgstr ""
+msgstr "لا يمكن ان تكون \"من\" اكبر من \"إلى\""
 
 msgid "Checking..."
-msgstr ""
+msgstr "يتم الفحص"
 
 msgid "Area"
 msgstr ""
@@ -94,7 +95,7 @@ msgid "Enrollment"
 msgstr "التسجيل"
 
 msgid "A future date is not allowed"
-msgstr ""
+msgstr "غير مسموح تاريخ بالمستقبل"
 
 msgid "An error has occured. See log for details"
 msgstr ""
@@ -103,16 +104,17 @@ msgid "Cancel"
 msgstr "إلغاء"
 
 msgid "Unsaved changes"
-msgstr ""
+msgstr "تعديلات لم يتم حفظها"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
+"ستؤدي مغادرة هذه الصفحة إلى تجاهل التغييرات التي أجريتها على هذا الحدث."
 
 msgid "Yes, discard"
-msgstr ""
+msgstr "نعم ، تجاهل"
 
 msgid "No, stay here"
-msgstr ""
+msgstr "لا ، ابق هنا"
 
 msgid "validation failed"
 msgstr ""
@@ -127,7 +129,7 @@ msgid "Indicators"
 msgstr "المؤشرات"
 
 msgid "Warnings"
-msgstr ""
+msgstr "تحذيرات"
 
 msgid "search group result could not be retrieved"
 msgstr ""
@@ -139,13 +141,13 @@ msgid "Warnings found"
 msgstr ""
 
 msgid "Abort"
-msgstr ""
+msgstr "إحباط"
 
 msgid "Back to form"
 msgstr ""
 
 msgid "Save anyway"
-msgstr ""
+msgstr "حفظ على اية حال"
 
 msgid "Validation errors and warnings"
 msgstr ""
@@ -175,10 +177,10 @@ msgid "Close"
 msgstr "إغلاق"
 
 msgid "Please select the user"
-msgstr ""
+msgstr "من فضلك قم بإختيار المستخدم"
 
 msgid "Search for user"
-msgstr ""
+msgstr "البحث عن مستخدم"
 
 msgid "Me"
 msgstr ""
@@ -190,7 +192,7 @@ msgid "None"
 msgstr "لا شيء"
 
 msgid "Select user"
-msgstr ""
+msgstr "حدد المستخدم"
 
 msgid "to"
 msgstr "إلى"
@@ -211,7 +213,7 @@ msgid "This month"
 msgstr "الشهر الحالي"
 
 msgid "This Year"
-msgstr ""
+msgstr "العام الحالي"
 
 msgid "Last week"
 msgstr "الأسبوع الماضي"
@@ -232,7 +234,7 @@ msgid "Min"
 msgstr "الأدنى"
 
 msgid "Contains text"
-msgstr ""
+msgstr "يحتوي على نص"
 
 msgid "Yes"
 msgstr "نعم"
@@ -250,7 +252,7 @@ msgid "Days"
 msgstr "‏‏الأيام"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "تحميل ملف"
 
 msgid "selected"
 msgstr "محدد"
@@ -259,16 +261,16 @@ msgid "Delete"
 msgstr "حذف"
 
 msgid "Select file"
-msgstr ""
+msgstr "اختيار ملف"
 
 msgid "No"
 msgstr "لا"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "تحميل الصورة"
 
 msgid "Select image"
-msgstr ""
+msgstr "حدد الصورة"
 
 msgid "Search"
 msgstr "البحث"
@@ -277,16 +279,16 @@ msgid "Clear"
 msgstr "مسح"
 
 msgid "No results"
-msgstr ""
+msgstr "لا توجد نتائج"
 
 msgid "suggestions could not be retrieved"
-msgstr ""
+msgstr "تعذر استرداد الاقتراحات"
 
 msgid "search for username"
-msgstr ""
+msgstr "البحث عن اسم مستخدم"
 
 msgid "No items to display"
-msgstr ""
+msgstr "لا توجد عناصر للعرض"
 
 msgid "Online"
 msgstr "متصل"
@@ -295,19 +297,19 @@ msgid "Offline"
 msgstr "غير متصل"
 
 msgid "Syncing"
-msgstr ""
+msgstr "تزامن"
 
 msgid "Add comment"
-msgstr ""
+msgstr "اضافة تعليق"
 
 msgid "You dont have access to write comments"
-msgstr ""
+msgstr "ليس لديك حق الوصول إلى كتابة التعليقات"
 
 msgid "Write comment"
 msgstr ""
 
 msgid "Basic info"
-msgstr ""
+msgstr "المعلومات الأساسية"
 
 msgid "Status"
 msgstr "الحالة"
@@ -316,7 +318,7 @@ msgid "Comments"
 msgstr "التعليقات"
 
 msgid "Please add or cancel comment before saving the event"
-msgstr ""
+msgstr "يرجى إضافة أو إلغاء التعليق قبل حفظ الحدث"
 
 msgid "No write access"
 msgstr ""
@@ -325,13 +327,13 @@ msgid "Save"
 msgstr "حفظ"
 
 msgid "Show all events"
-msgstr ""
+msgstr "عرض جميع الأحداث"
 
 msgid "Edit event"
-msgstr ""
+msgstr "تعديل الحدث"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "لا يمكن تحميل الحدث. هل أنت متأكد أنه موجود؟"
 
 msgid "Event could not be loaded"
 msgstr ""
@@ -340,10 +342,10 @@ msgid "Organisation unit could not be loaded"
 msgstr ""
 
 msgid "View event info"
-msgstr ""
+msgstr "عرض معلومات عن الحدث"
 
 msgid "Delete event"
-msgstr ""
+msgstr "حذف الحدث"
 
 msgid "Update"
 msgstr "تحديث"
@@ -382,7 +384,7 @@ msgid "Download with current filters"
 msgstr ""
 
 msgid "Download data..."
-msgstr ""
+msgstr "تنزيل البيانات"
 
 msgid "Rows per page"
 msgstr ""
@@ -448,10 +450,10 @@ msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
 msgid "Save and add another"
-msgstr ""
+msgstr "حفظ واضافة جديد"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "حفظ وخروج"
 
 msgid "Finish"
 msgstr ""
