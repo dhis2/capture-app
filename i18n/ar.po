@@ -1,13 +1,14 @@
 # Translators:
 # phil_dhis2, 2019
 # Viktor Varland <viktor@dhis2.org>, 2019
+# Hamza Assada <7amza.it@gmail.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2018-08-22T14:33:31.467Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2019\n"
+"Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,10 +17,10 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "نرجوا ادخال صيغة صحيحة للتاريخ"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "الأعمدة التي سيتم عرضها في الجدول"
 
 msgid "Column"
 msgstr "العمود"
@@ -34,7 +35,7 @@ msgid "Indicators"
 msgstr "المؤشرات"
 
 msgid "Warnings"
-msgstr ""
+msgstr "تحذيرات"
 
 msgid "Cancel"
 msgstr "إلغاء"
@@ -46,7 +47,7 @@ msgid "Warnings found"
 msgstr ""
 
 msgid "Abort"
-msgstr ""
+msgstr "إحباط"
 
 msgid "Save comment"
 msgstr "حفظ التعليق"
@@ -115,7 +116,7 @@ msgid "less than or equal to"
 msgstr ""
 
 msgid "Contains text"
-msgstr ""
+msgstr "يحتوي على نص"
 
 msgid "Yes"
 msgstr "نعم"
@@ -133,7 +134,7 @@ msgid "Days"
 msgstr "‏‏الأيام"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "تحميل ملف"
 
 msgid "selected"
 msgstr "محدد"
@@ -142,25 +143,25 @@ msgid "Delete"
 msgstr "حذف"
 
 msgid "Select file"
-msgstr ""
+msgstr "اختيار ملف"
 
 msgid "No"
 msgstr "لا"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "تحميل الصورة"
 
 msgid "Select image"
-msgstr ""
+msgstr "حدد الصورة"
 
 msgid "Clear"
 msgstr "مسح"
 
 msgid "No results"
-msgstr ""
+msgstr "لا توجد نتائج"
 
 msgid "No items to display"
-msgstr ""
+msgstr "لا توجد عناصر للعرض"
 
 msgid "Online"
 msgstr "متصل"
@@ -169,7 +170,7 @@ msgid "Offline"
 msgstr "غير متصل"
 
 msgid "Syncing"
-msgstr ""
+msgstr "تزامن"
 
 msgid "Field"
 msgstr ""
@@ -196,7 +197,7 @@ msgid "Create New Event"
 msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "لا يمكن تحميل الحدث. هل أنت متأكد أنه موجود؟"
 
 msgid "Event could not be loaded"
 msgstr ""
@@ -258,10 +259,10 @@ msgid ""
 msgstr ""
 
 msgid "Save and add another"
-msgstr ""
+msgstr "حفظ واضافة جديد"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "حفظ وخروج"
 
 msgid "Are you sure? All unsaved data will be lost"
 msgstr ""
