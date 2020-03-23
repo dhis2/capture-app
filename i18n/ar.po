@@ -26,7 +26,7 @@ msgid "Column"
 msgstr "العمود"
 
 msgid "Errors"
-msgstr ""
+msgstr "اخطاء"
 
 msgid "Feedback"
 msgstr "التغذية الراجعة"
@@ -44,7 +44,7 @@ msgid "Complete"
 msgstr "مكتمل"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "تم العثور على إشعارات تحذيرية"
 
 msgid "Abort"
 msgstr "إحباط"
@@ -53,7 +53,7 @@ msgid "Save comment"
 msgstr "حفظ التعليق"
 
 msgid "Write comment"
-msgstr ""
+msgstr "اكتب تعليقاً"
 
 msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr ""
@@ -71,7 +71,7 @@ msgid "Sort"
 msgstr "فرز"
 
 msgid "No events to display"
-msgstr ""
+msgstr "لايوجد احداث للعرض"
 
 msgid "Data for offline list not present"
 msgstr ""
@@ -110,10 +110,10 @@ msgid "Min"
 msgstr "الأدنى"
 
 msgid "greater than or equal to"
-msgstr ""
+msgstr "أكبر من أو يساوي"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "أقل من أو يساوي"
 
 msgid "Contains text"
 msgstr "يحتوي على نص"
@@ -200,7 +200,7 @@ msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "لا يمكن تحميل الحدث. هل أنت متأكد أنه موجود؟"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "تعذر تحميل الحدث"
 
 msgid "Organisation unit could not be loaded"
 msgstr ""
@@ -212,7 +212,7 @@ msgid "Close"
 msgstr "إغلاق"
 
 msgid "More filters"
-msgstr ""
+msgstr "عوامل تصفية أكثر"
 
 msgid "Rows per page"
 msgstr ""
@@ -248,7 +248,7 @@ msgid "Switch to row view"
 msgstr ""
 
 msgid "Saving to"
-msgstr ""
+msgstr "حفظ إلى"
 
 msgid "in"
 msgstr "في"
@@ -268,7 +268,7 @@ msgid "Are you sure? All unsaved data will be lost"
 msgstr ""
 
 msgid "events added"
-msgstr ""
+msgstr "تمت إضافة الأحداث"
 
 msgid "No events added"
 msgstr ""
@@ -313,7 +313,7 @@ msgid "Select program"
 msgstr "تحديد البرنامج"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
 
 msgid "Error saving event"
 msgstr ""
