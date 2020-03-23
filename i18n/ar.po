@@ -42,10 +42,10 @@ msgid "Add comment"
 msgstr "اضافة تعليق"
 
 msgid "Write comment"
-msgstr ""
+msgstr "اكتب تعليقاً"
 
 msgid "Errors"
-msgstr ""
+msgstr "اخطاء"
 
 msgid "Feedback"
 msgstr "التغذية الراجعة"
@@ -60,7 +60,7 @@ msgid "Complete"
 msgstr "مكتمل"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "تم العثور على إشعارات تحذيرية"
 
 msgid "Abort"
 msgstr "إحباط"
@@ -81,7 +81,7 @@ msgid "Sort"
 msgstr "فرز"
 
 msgid "No events to display"
-msgstr ""
+msgstr "لايوجد احداث للعرض"
 
 msgid "Data for offline list not present"
 msgstr ""
@@ -120,10 +120,10 @@ msgid "Min"
 msgstr "الأدنى"
 
 msgid "greater than or equal to"
-msgstr ""
+msgstr "أكبر من أو يساوي"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "أقل من أو يساوي"
 
 msgid "Contains text"
 msgstr "يحتوي على نص"
@@ -186,7 +186,7 @@ msgid "Syncing"
 msgstr "تزامن"
 
 msgid "Area"
-msgstr ""
+msgstr "مساحة"
 
 msgid "Basic info"
 msgstr "المعلومات الأساسية"
@@ -219,7 +219,7 @@ msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "لا يمكن تحميل الحدث. هل أنت متأكد أنه موجود؟"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "تعذر تحميل الحدث"
 
 msgid "Organisation unit could not be loaded"
 msgstr ""
@@ -234,7 +234,7 @@ msgid "Close"
 msgstr "إغلاق"
 
 msgid "More filters"
-msgstr ""
+msgstr "عوامل تصفية أكثر"
 
 msgid "Rows per page"
 msgstr ""
@@ -249,7 +249,7 @@ msgid "Selected program is invalid for registering unit"
 msgstr ""
 
 msgid "Saving to"
-msgstr ""
+msgstr "حفظ إلى"
 
 msgid "in"
 msgstr "في"
@@ -272,7 +272,7 @@ msgid "Finish"
 msgstr ""
 
 msgid "events added"
-msgstr ""
+msgstr "تمت إضافة الأحداث"
 
 msgid "No events added"
 msgstr ""
@@ -338,7 +338,7 @@ msgid "No programs available."
 msgstr ""
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
 
 msgid "Error saving event"
 msgstr ""
