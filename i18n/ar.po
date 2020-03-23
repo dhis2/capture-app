@@ -29,7 +29,7 @@ msgid "This value is validating"
 msgstr "يتم التحقق من القيمة"
 
 msgid "Async field update failed"
-msgstr ""
+msgstr "فشل تحديث حقل متزامن"
 
 msgid "A value is required"
 msgstr "قيمة مطلوبة"
@@ -86,7 +86,7 @@ msgid "Checking..."
 msgstr "جارٍ التحقق ..."
 
 msgid "Area"
-msgstr ""
+msgstr "مساحة"
 
 msgid "Coordinate"
 msgstr "الإحداثية"
@@ -98,7 +98,7 @@ msgid "A future date is not allowed"
 msgstr "غير مسموح تاريخ في المستقبل"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
 
 msgid "Cancel"
 msgstr "إلغاء"
@@ -120,7 +120,7 @@ msgid "validation failed"
 msgstr ""
 
 msgid "Errors"
-msgstr ""
+msgstr "اخطاء"
 
 msgid "Feedback"
 msgstr "التغذية الراجعة"
@@ -138,13 +138,13 @@ msgid "Complete"
 msgstr "مكتمل"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "تم العثور على إشعارات تحذيرية"
 
 msgid "Abort"
 msgstr "إحباط"
 
 msgid "Back to form"
-msgstr ""
+msgstr "العودة للنموذج"
 
 msgid "Save anyway"
 msgstr "حفظ على اية حال"
@@ -159,7 +159,7 @@ msgid "Validation warnings"
 msgstr "تحذيرات التحقق"
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr ""
+msgstr "لا تزال بعض العمليات قيد التشغيل. أرجو الإنتظار.."
 
 msgid "Operations running"
 msgstr ""
@@ -168,7 +168,7 @@ msgid "Sort"
 msgstr "فرز"
 
 msgid "No events to display"
-msgstr ""
+msgstr "لايوجد احداث للعرض"
 
 msgid "Data for offline list not present"
 msgstr ""
@@ -183,10 +183,10 @@ msgid "Search for user"
 msgstr "البحث عن مستخدم"
 
 msgid "Me"
-msgstr ""
+msgstr "أنا"
 
 msgid "Anyone"
-msgstr ""
+msgstr "أي شخص"
 
 msgid "None"
 msgstr "لا شيء"
@@ -306,7 +306,7 @@ msgid "You dont have access to write comments"
 msgstr "ليس لديك حق الوصول إلى كتابة التعليقات"
 
 msgid "Write comment"
-msgstr ""
+msgstr "اكتب تعليقاً"
 
 msgid "Basic info"
 msgstr "المعلومات الأساسية"
@@ -336,7 +336,7 @@ msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "لا يمكن تحميل الحدث. هل أنت متأكد أنه موجود؟"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "تعذر تحميل الحدث"
 
 msgid "Organisation unit could not be loaded"
 msgstr ""
@@ -360,16 +360,16 @@ msgid "before or equal to {{date}}"
 msgstr ""
 
 msgid "greater than or equal to"
-msgstr ""
+msgstr "أكبر من أو يساوي"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "أقل من أو يساوي"
 
 msgid "More filters"
-msgstr ""
+msgstr "المزيد من عوامل التصفية"
 
 msgid "Select columns"
-msgstr ""
+msgstr "حدد الأعمدة"
 
 msgid "Download as JSON"
 msgstr "تنزيل كملف JSON"
@@ -381,7 +381,7 @@ msgid "Download as CSV"
 msgstr "تنزيل كملف CSV"
 
 msgid "Download with current filters"
-msgstr ""
+msgstr "تنزيل مع اعتماد عوامل التصفية الحالية"
 
 msgid "Download data..."
 msgstr "تنزيل البيانات"
@@ -488,7 +488,7 @@ msgid "Assignee"
 msgstr ""
 
 msgid "Saving to"
-msgstr ""
+msgstr "حفظ إلى"
 
 msgid "in"
 msgstr "في"
@@ -510,13 +510,13 @@ msgid "New event"
 msgstr "حدث جديد"
 
 msgid "New event relationship"
-msgstr ""
+msgstr "علاقة جديدة مع الحدث"
 
 msgid "Adding relationship to event."
-msgstr ""
+msgstr "إضافة علاقة للحدث."
 
 msgid "Go back to event without saving relationship"
-msgstr ""
+msgstr "ارجع إلى الحدث بدون حفظ العلاقة"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
@@ -524,7 +524,7 @@ msgid ""
 msgstr ""
 
 msgid "events added"
-msgstr ""
+msgstr "تمت إضافة الأحداث"
 
 msgid "No events added"
 msgstr ""
