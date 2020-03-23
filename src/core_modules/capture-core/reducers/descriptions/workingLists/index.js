@@ -6,5 +6,5 @@ export {
     workingListsContextDesc,
     workingListsDesc,
     workingListsUIDesc,
-    workingListsUserSelectedFiltersDesc,
+    workingListsStickyFiltersDesc,
 } from './workingLists.reducerDescription';

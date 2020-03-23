@@ -6,7 +6,7 @@ import { restMenuItemSelected } from './filterSelector.actions';
 import { makeOnItemSelectedSelector } from './filterSelectors.selectors';
 
 const mapStateToProps = (state: ReduxState, props: Object) => ({
-    userSelectedFilters: state.workingListsUserSelectedFilters[props.listId],
+    stickyFilters: state.workingListsStickyFilters[props.listId],
 });
 
 const mapDispatchToProps = () => {

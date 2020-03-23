@@ -49,6 +49,8 @@ type Props = {
     onFilterUpdate: (listId: string, data: ?Object, itemId: string, commitValue?: any) => void,
     onClearFilter: (listId: string, itemId: string) => void,
     onRevertFilter: (listId: string) => void,
+    onSetVisibleSelector: Function,
+    isSelectorVisible: boolean,
 };
 
 type State = {
@@ -67,6 +69,11 @@ class FilterButton extends Component<Props, State> {
     }
 
     openFilterSelector = (event: SyntheticMouseEvent<HTMLButtonElement>) => {
+        const { itemId, onSetVisibleSelector } = this.props;
+        onSetVisibleSelector(itemId);
+
+        /*
+        debugger;
         this.setState({
             filterSelectorOpen: {
                 anchorElement: event.currentTarget,
@@ -76,20 +83,20 @@ class FilterButton extends Component<Props, State> {
         if (this.props.filterValue) {
             this.activeFilterButtonInstance && this.activeFilterButtonInstance.clearIsHovered();
         }
+        */
     }
 
     closeFilterSelector = () => {
-        this.setState({ filterSelectorOpen: null });
+        const { onSetVisibleSelector } = this.props;
+        onSetVisibleSelector(undefined);
     }
 
-    handleCloseFilterSelector = () => {
-        this.closeFilterSelector();
-    }
-
+    /*
     handleEditFilterContents = (value: any) => {
         const { onEditFilterContents, itemId, listId } = this.props;
         onEditFilterContents(listId, value, itemId);
     }
+    */
 
     handleFilterUpdate = (data: ?Object, commitValue?: any) => {
         const { itemId, onFilterUpdate, listId } = this.props;
@@ -113,7 +120,7 @@ class FilterButton extends Component<Props, State> {
                 singleSelect={singleSelect}
                 id={id}
                 onUpdate={this.handleFilterUpdate}
-                onClose={this.handleCloseFilterSelector}
+                onClose={this.closeFilterSelector}
             />
         );
     }
@@ -160,8 +167,7 @@ class FilterButton extends Component<Props, State> {
     }
 
     render() {
-        const { filterValue } = this.props;
-        const { filterSelectorOpen } = this.state;
+        const { filterValue, isSelectorVisible } = this.props;
 
         const button = filterValue ? this.renderWithAppliedFilter() : this.renderWithoutAppliedFilter();
 
@@ -169,15 +175,15 @@ class FilterButton extends Component<Props, State> {
             <React.Fragment>
                 {button}
                 <Popover
-                    open={!!filterSelectorOpen}
-                    anchorEl={filterSelectorOpen && filterSelectorOpen.anchorElement}
-                    onClose={this.handleCloseFilterSelector}
+                    open={isSelectorVisible}
+                    // anchorEl={filterSelectorOpen && filterSelectorOpen.anchorElement}
+                    onClose={this.closeFilterSelector}
                     anchorOrigin={POPOVER_ANCHOR_ORIGIN}
                     transformOrigin={POPOVER_TRANSFORM_ORIGIN}
                 >
                     {
                         (() => {
-                            if (filterSelectorOpen) {
+                            if (isSelectorVisible) {
                                 return this.renderSelectorContents();
                             }
                             return null;
