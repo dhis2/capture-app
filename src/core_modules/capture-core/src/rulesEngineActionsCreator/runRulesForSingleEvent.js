@@ -100,7 +100,7 @@ function runRulesEngine(
     dataElementsInProgram: { [elementId: string]: DataElementForRulesEngine },
     orgUnit: OrgUnit,
     optionSets: ?OptionSets,
-    currentEventData: ?EventData,
+    currentEventData: ?EventData | {} = {},
     allEventsData: ?Array<EventData>) {
     const effects = rulesEngine.executeRules(
         programRulesContainer,
