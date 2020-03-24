@@ -29,7 +29,7 @@ import type {
 type ExecutionService = {
     executeRules: (
         programRulesContainer: ProgramRulesContainer,
-        executingEvent: ?EventData,
+        executingEvent: ?EventData | {},
         events: ?EventsDataContainer,
         dataElements: ?DataElements,
         trackedEntityAttributes: ?TrackedEntityAttributes,
@@ -67,7 +67,7 @@ export default class RulesEngine {
 
     executeRules(
         programRulesContainer: ProgramRulesContainer,
-        executingEvent: ?EventData,
+        executingEvent: ?EventData | {},
         eventsData: ?EventsData,
         dataElements: ?DataElements,
         enrollmentData: ?Enrollment,
