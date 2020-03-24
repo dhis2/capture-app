@@ -131,7 +131,13 @@ export default class VariableService {
             const getterFn = this.mapSourceTypeToGetterFn[sourceType];
             if (!getterFn) {
                 log.error(`Unknown programRuleVariableSourceType:${programVariable.programRuleVariableSourceType}`);
-                variable = this.buildVariable(EMPTY_STRING, null, typeKeys.TEXT, false, variablePrefixes.DATAELEMENT, null, programVariable.useNameForOptionSet);
+                variable = this.buildVariable(
+                    EMPTY_STRING,
+                    typeKeys.TEXT, {
+                        variablePrefix: variablePrefixes.DATAELEMENT,
+                        useNameForOptionSet: programVariable.useNameForOptionSet,
+                    },
+                );
                 accVariables[variableKey] = variable;
                 return accVariables;
             }
@@ -179,17 +185,34 @@ export default class VariableService {
         return this.onProcessValue(value, type);
     }
 
-    buildVariable(value: any, allValues: ?Array<any>, type: string, valueFound: boolean, variablePrefix: string, variableEventDate: ?string, useNameForOptionSet?: ?boolean): Variable {
-        const processedValues = allValues ? allValues.map(alternateValue => this.onProcessValue(alternateValue, type)) : null;
+    buildVariable(
+        value: any,
+        type: string,
+        {
+            variablePrefix,
+            allValues,
+            variableEventDate,
+            useNameForOptionSet = false,
+        }: {
+            variablePrefix: string,
+            allValues?: ?Array<any>,
+            variableEventDate?: ?string,
+            useNameForOptionSet?: ?boolean,
+        },
+    ): Variable {
+        const processedAllValues = allValues ?
+            allValues
+                .map(alternateValue => this.onProcessValue(alternateValue, type)) :
+            null;
 
         return {
             variableValue: this.onProcessValue(value, type),
             useCodeForOptionSet: !useNameForOptionSet,
             variableType: useNameForOptionSet ? typeKeys.TEXT : type,
-            hasValue: valueFound,
+            hasValue: !!value || value === 0 || value === false,
             variableEventDate,
             variablePrefix,
-            allValues: processedValues,
+            allValues: processedAllValues,
         };
     }
 
@@ -198,7 +221,13 @@ export default class VariableService {
         const dataElement = dataElementId && dataElements && dataElements[dataElementId];
         if (!dataElement) {
             log.warn(`Variable id:${programVariable.id} name:${programVariable.displayName} contains an invalid dataelement id (id: ${dataElementId || ''})`);
-            return this.buildVariable(EMPTY_STRING, null, typeKeys.TEXT, false, variablePrefixes.DATAELEMENT, null, programVariable.useNameForOptionSet);
+            return this.buildVariable(
+                EMPTY_STRING,
+                typeKeys.TEXT, {
+                    variablePrefix: variablePrefixes.DATAELEMENT,
+                    useNameForOptionSet: programVariable.useNameForOptionSet,
+                },
+            );
         }
         return null;
     }
@@ -208,7 +237,13 @@ export default class VariableService {
         const attribute = attributeId && trackedEntityAttributes && trackedEntityAttributes[attributeId];
         if (!attribute) {
             log.warn(`Variable id:${programVariable.id} name:${programVariable.displayName} contains an invalid trackedEntityAttribute id (id: ${attributeId || ''})`);
-            return this.buildVariable(EMPTY_STRING, null, typeKeys.TEXT, false, variablePrefixes.TRACKED_ENTITY_ATTRIBUTE, null, programVariable.useNameForOptionSet);
+            return this.buildVariable(
+                EMPTY_STRING,
+                typeKeys.TEXT, {
+                    variablePrefix: variablePrefixes.TRACKED_ENTITY_ATTRIBUTE,
+                    useNameForOptionSet: programVariable.useNameForOptionSet,
+                },
+            );
         }
         return null;
     }
@@ -217,11 +252,23 @@ export default class VariableService {
         const dataElementId = programVariable.dataElementId;
         // $FlowSuppress: based on precheck over, dataElement should be found
         const dataElement: DataElement = dataElements[dataElementId];
-        return this.buildVariable(EMPTY_STRING, null, dataElement.valueType, false, variablePrefixes.DATAELEMENT, EMPTY_STRING, programVariable.useNameForOptionSet);
+        return this.buildVariable(
+            EMPTY_STRING,
+            dataElement.valueType, {
+                variablePrefix: variablePrefixes.DATAELEMENT,
+                useNameForOptionSet: programVariable.useNameForOptionSet,
+            },
+        );
     }
 
     getVariableForCalculatedValue(programVariable: ProgramRuleVariable): ?Variable {
-        return this.buildVariable(EMPTY_STRING, null, typeKeys.TEXT, false, variablePrefixes.CALCULATED_VALUE, EMPTY_STRING, programVariable.useNameForOptionSet);
+        return this.buildVariable(
+            EMPTY_STRING,
+            typeKeys.TEXT, {
+                variablePrefix: variablePrefixes.CALCULATED_VALUE,
+                useNameForOptionSet: programVariable.useNameForOptionSet,
+            },
+        );
     }
 
     getVariableForSelectedEntityAttributes(programVariable: ProgramRuleVariable, sourceData: SourceData): ?Variable {
@@ -229,7 +276,13 @@ export default class VariableService {
             log.warn(
                 `Variable id:${programVariable.id} name:${programVariable.displayName} has sourcetype${programVariable.programRuleVariableSourceType}, but no selectedEntity was found`,
             );
-            return this.buildVariable(EMPTY_STRING, null, typeKeys.TEXT, false, variablePrefixes.TRACKED_ENTITY_ATTRIBUTE, null, programVariable.useNameForOptionSet);
+            return this.buildVariable(
+                EMPTY_STRING,
+                typeKeys.TEXT, {
+                    variablePrefix: variablePrefixes.TRACKED_ENTITY_ATTRIBUTE,
+                    useNameForOptionSet: programVariable.useNameForOptionSet,
+                },
+            );
         }
 
         // $FlowSuppress preChecked
@@ -240,16 +293,28 @@ export default class VariableService {
 
         const hasValue = !!attributeValue || attributeValue === 0 || attributeValue === false;
         if (!hasValue) {
-            return this.buildVariable(EMPTY_STRING, null, attribute.valueType, false, variablePrefixes.TRACKED_ENTITY_ATTRIBUTE, null, programVariable.useNameForOptionSet);
+            return this.buildVariable(
+                EMPTY_STRING,
+                attribute.valueType, {
+                    variablePrefix: variablePrefixes.TRACKED_ENTITY_ATTRIBUTE,
+                    useNameForOptionSet: programVariable.useNameForOptionSet,
+                },
+            );
         }
 
         const variableValue = VariableService.getTrackedEntityValueForVariable(attributeValue, trackedEntityAttributeId, programVariable.useNameForOptionSet, sourceData.trackedEntityAttributes, sourceData.optionSets);
-        return this.buildVariable(variableValue, null, attribute.valueType, true, variablePrefixes.TRACKED_ENTITY_ATTRIBUTE, null, programVariable.useNameForOptionSet);
+        return this.buildVariable(
+            variableValue,
+            attribute.valueType, {
+                variablePrefix: variablePrefixes.TRACKED_ENTITY_ATTRIBUTE,
+                useNameForOptionSet: programVariable.useNameForOptionSet,
+            },
+        );
     }
 
     getVariableForCurrentEvent(programVariable: ProgramRuleVariable, sourceData: SourceData): ?Variable {
         // $FlowSuppress: prechecked
-        const dataElementId:string = programVariable.dataElementId;
+        const dataElementId: string = programVariable.dataElementId;
         // $FlowSuppress: prechecked
         const dataElement: DataElement = sourceData.dataElements[dataElementId];
         const executingEvent = sourceData.executingEvent;
@@ -263,7 +328,14 @@ export default class VariableService {
         }
 
         const value = VariableService.getDataElementValueForVariable(dataElementValue, dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets);
-        return this.buildVariable(value, null, dataElement.valueType, true, variablePrefixes.DATAELEMENT, executingEvent.eventDate, programVariable.useNameForOptionSet);
+        return this.buildVariable(
+            value,
+            dataElement.valueType, {
+                variablePrefix: variablePrefixes.DATAELEMENT,
+                variableEventDate: executingEvent.eventDate,
+                useNameForOptionSet: programVariable.useNameForOptionSet,
+            },
+        );
     }
 
     getVariableForNewestEventProgramStage(programVariable: ProgramRuleVariable, sourceData: SourceData): ?Variable {
@@ -303,7 +375,15 @@ export default class VariableService {
 
         const dataElementValue = eventWithValue[dataElementId];
         const value = VariableService.getDataElementValueForVariable(dataElementValue, dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets);
-        return this.buildVariable(value, allValues, dataElement.valueType, true, variablePrefixes.DATAELEMENT, eventWithValue.eventDate, programVariable.useNameForOptionSet);
+        return this.buildVariable(
+            value,
+            dataElement.valueType, {
+                variablePrefix: variablePrefixes.DATAELEMENT,
+                variableEventDate: eventWithValue.eventDate,
+                useNameForOptionSet: programVariable.useNameForOptionSet,
+                allValues,
+            },
+        );
     }
 
     getVariableForNewestEventProgram(programVariable: ProgramRuleVariable, sourceData: SourceData): ?Variable {
@@ -337,7 +417,15 @@ export default class VariableService {
 
         const dataElementValue = eventWithValue[dataElementId];
         const value = VariableService.getDataElementValueForVariable(dataElementValue, dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets);
-        return this.buildVariable(value, allValues, dataElement.valueType, true, variablePrefixes.DATAELEMENT, eventWithValue.eventDate, programVariable.useNameForOptionSet);
+        return this.buildVariable(
+            value,
+            dataElement.valueType, {
+                variablePrefix: variablePrefixes.DATAELEMENT,
+                variableEventDate: eventWithValue.eventDate,
+                useNameForOptionSet: programVariable.useNameForOptionSet,
+                allValues,
+            },
+        );
     }
 
     getVariableForPreviousEventProgram(programVariable: ProgramRuleVariable, sourceData: SourceData): ?Variable {
@@ -383,14 +471,27 @@ export default class VariableService {
 
         const dataElementValue = eventWithValue[dataElementId];
         const value = VariableService.getDataElementValueForVariable(dataElementValue, dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets);
-        return this.buildVariable(value, allValues, dataElement.valueType, true, variablePrefixes.DATAELEMENT, eventWithValue.eventDate, programVariable.useNameForOptionSet);
+        return this.buildVariable(
+            value,
+            dataElement.valueType, {
+                variablePrefix: variablePrefixes.DATAELEMENT,
+                variableEventDate: eventWithValue.eventDate,
+                useNameForOptionSet: programVariable.useNameForOptionSet,
+                allValues,
+            },
+        );
     }
 
     getContextVariables(sourceData: SourceData): { [key: string]: Variable } {
         let variables = {};
 
         // TODO: need to build some kind of date service and change this codeline
-        variables.current_date = this.buildVariable(this.dateUtils.getToday(), null, typeKeys.DATE, true, variablePrefixes.CONTEXT_VARIABLE, null, false);
+        variables.current_date = this.buildVariable(
+            this.dateUtils.getToday(),
+            typeKeys.DATE, {
+                variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+            },
+        );
 
         variables = { ...variables, ...this.getEventContextVariables(sourceData.executingEvent, sourceData.eventsContainer) };
         variables = { ...variables, ...this.getEnrollmentContextVariables(sourceData.selectedEnrollment) };
@@ -403,13 +504,36 @@ export default class VariableService {
         const variables = {};
 
         if (executingEvent) {
-            variables.event_date = this.buildVariable(executingEvent.eventDate, null, typeKeys.DATE, true, variablePrefixes.CONTEXT_VARIABLE, null, false);
-            variables.due_date = this.buildVariable(executingEvent.dueDate, null, typeKeys.DATE, true, variablePrefixes.CONTEXT_VARIABLE, null, false);
-            variables.event_id = this.buildVariable(executingEvent.eventId || EMPTY_STRING, null, typeKeys.TEXT, !!executingEvent, variablePrefixes.CONTEXT_VARIABLE, executingEvent.eventDate, false);
+            variables.event_date = this.buildVariable(
+                executingEvent.eventDate,
+                typeKeys.DATE, {
+                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+                },
+            );
+
+            variables.due_date = this.buildVariable(
+                executingEvent.dueDate,
+                typeKeys.DATE, {
+                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+                },
+            );
+
+            variables.event_id = this.buildVariable(
+                executingEvent.eventId,
+                typeKeys.TEXT, {
+                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+                    variableEventDate: executingEvent.eventDate,
+                },
+            );
         }
 
         if (eventsContainer) {
-            variables.event_count = this.buildVariable((eventsContainer.all && eventsContainer.all.length) || 0, null, typeKeys.INTEGER, true, variablePrefixes.CONTEXT_VARIABLE, null, false);
+            variables.event_count = this.buildVariable(
+                (eventsContainer.all && eventsContainer.all.length) || 0,
+                typeKeys.INTEGER, {
+                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+                },
+            );
         }
 
         return variables;
@@ -419,11 +543,40 @@ export default class VariableService {
         const variables = {};
 
         if (selectedEnrollment) {
-            variables.enrollment_date = this.buildVariable((selectedEnrollment && selectedEnrollment.enrollmentDate) || EMPTY_STRING, null, typeKeys.DATE, !!(selectedEnrollment && selectedEnrollment.enrollmentDate), variablePrefixes.CONTEXT_VARIABLE, null, false);
-            variables.enrollment_id = this.buildVariable((selectedEnrollment && selectedEnrollment.enrollment) || EMPTY_STRING, null, typeKeys.TEXT, !!(selectedEnrollment && selectedEnrollment.enrollmentDate), variablePrefixes.CONTEXT_VARIABLE, null, false);
-            variables.enrollment_count = this.buildVariable(selectedEnrollment ? 1 : 0, null, typeKeys.INTEGER, true, variablePrefixes.CONTEXT_VARIABLE, null, false);
-            variables.tei_count = this.buildVariable(selectedEnrollment ? 1 : 0, null, typeKeys.INTEGER, true, variablePrefixes.CONTEXT_VARIABLE, null, false);
-            variables.incident_date = this.buildVariable((selectedEnrollment && selectedEnrollment.incidentDate) || EMPTY_STRING, null, typeKeys.DATE, !!selectedEnrollment, variablePrefixes.CONTEXT_VARIABLE, null, false);
+            variables.enrollment_date = this.buildVariable(
+                selectedEnrollment.enrollmentDate,
+                typeKeys.DATE, {
+                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+                },
+            );
+
+            variables.enrollment_id = this.buildVariable(
+                selectedEnrollment.enrollmentId,
+                typeKeys.TEXT, {
+                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+                },
+            );
+
+            variables.enrollment_count = this.buildVariable(
+                selectedEnrollment ? 1 : 0,
+                typeKeys.INTEGER, {
+                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+                },
+            );
+
+            variables.tei_count = this.buildVariable(
+                selectedEnrollment ? 1 : 0,
+                typeKeys.INTEGER, {
+                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+                },
+            );
+
+            variables.incident_date = this.buildVariable(
+                selectedEnrollment.incidentDate,
+                typeKeys.DATE, {
+                    variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+                },
+            );
         }
 
         return variables;
@@ -431,13 +584,23 @@ export default class VariableService {
 
     getOrganisationContextVariables(orgUnit: OrgUnit) {
         const variables = {};
-        variables.orgunit_code = this.buildVariable(orgUnit.code, null, typeKeys.TEXT, !!orgUnit.code, variablePrefixes.CONTEXT_VARIABLE, null, false);
+        variables.orgunit_code = this.buildVariable(
+            orgUnit.code,
+            typeKeys.TEXT, {
+                variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
+            },
+        );
         return variables;
     }
 
     getConstantVariables(constants: ?Constants) {
         const constantVariables = constants ? constants.reduce((accConstantVariables, constant) => {
-            accConstantVariables[constant.id] = this.buildVariable(constant.value, null, typeKeys.INTEGER, true, variablePrefixes.CONSTANT_VARIABLE, null, false);
+            accConstantVariables[constant.id] = this.buildVariable(
+                constant.value,
+                typeKeys.INTEGER, {
+                    variablePrefix: variablePrefixes.CONSTANT_VARIABLE,
+                },
+            );
             return accConstantVariables;
         }, {}) : {};
 

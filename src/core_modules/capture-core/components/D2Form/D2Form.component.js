@@ -110,6 +110,7 @@ class D2Form extends React.PureComponent<Props> {
             innerRef={(sectionInstance) => { this.setSectionInstance(sectionInstance, section.id); }}
             sectionMetaData={section}
             customForm={this.props.formFoundation.customForm}
+            validationStrategy={this.props.formFoundation.validationStrategy}
             formId={this.getFormId()}
             formBuilderId={this.getFormBuilderId(section.id)}
             sectionId={section.id}
