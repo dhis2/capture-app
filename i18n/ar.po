@@ -581,7 +581,7 @@ msgid "Add relationship"
 msgstr "اضف علاقة"
 
 msgid "Selected program"
-msgstr ""
+msgstr "البرنامج المحدد"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
