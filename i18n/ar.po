@@ -59,7 +59,7 @@ msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr ""
 
 msgid "No write access"
-msgstr ""
+msgstr "لا توجد صلاحية الوصول للكتابة"
 
 msgid "Save"
 msgstr "حفظ"
@@ -179,7 +179,7 @@ msgid "could not be updated"
 msgstr ""
 
 msgid "Start Again"
-msgstr ""
+msgstr "البدء من جديد"
 
 msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
@@ -203,7 +203,7 @@ msgid "Event could not be loaded"
 msgstr "تعذر تحميل الحدث"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "تعذر تحميل الوحدة التنظيمية"
 
 msgid "Update"
 msgstr "تحديث"
@@ -215,13 +215,13 @@ msgid "More filters"
 msgstr "عوامل تصفية أكثر"
 
 msgid "Rows per page"
-msgstr ""
+msgstr "عدد الصفوف لكل صفحة"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "تعذر جلب الوحدة التنظيمية"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "البرنامج غير موجود"
 
 msgid "Selected program is invalid for registering unit"
 msgstr ""
@@ -242,10 +242,10 @@ msgid "New event"
 msgstr "حدث جديد"
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "التحويل الى العرض كنموذج"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "التحويل إلى العرض كصفوف"
 
 msgid "Saving to"
 msgstr "حفظ إلى"
@@ -271,7 +271,7 @@ msgid "events added"
 msgstr "تمت إضافة الأحداث"
 
 msgid "No events added"
-msgstr ""
+msgstr "لم تتم إضافة أحداث"
 
 msgid "Reset"
 msgstr "إعادة تعيين"
@@ -292,7 +292,7 @@ msgid "Registering Organisation Unit"
 msgstr ""
 
 msgid "Selected Program"
-msgstr ""
+msgstr "البرنامج المحدد"
 
 msgid "Select"
 msgstr "تحديد"
@@ -301,7 +301,7 @@ msgid "Program"
 msgstr "البرنامج"
 
 msgid "No programs available."
-msgstr ""
+msgstr "لا توجد برامج متاحة"
 
 msgid "Show all"
 msgstr "إظهار الكل"
@@ -316,16 +316,16 @@ msgid "An error has occured. See log for details"
 msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "خطأ عند حفظ الحدث"
 
 msgid "Could not save event. See log for details"
 msgstr ""
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "اختر تاريخًا أو أكثر ..."
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "اختر تاريخاً"
 
 msgid "Today"
 msgstr "اليوم"
