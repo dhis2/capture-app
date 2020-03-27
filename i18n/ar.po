@@ -443,7 +443,7 @@ msgid "Relationships"
 msgstr "علاقات"
 
 msgid "Assignee"
-msgstr ""
+msgstr "المحال إليه"
 
 msgid "Saving to"
 msgstr "حفظ إلى"
@@ -455,6 +455,8 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"هذا ليس برنامج تسجيل حدث أو أن بيانات التعريف تالفة. انظر السجل للحصول على "
+"التفاصيل."
 
 msgid "This event"
 msgstr "هذا الحدث"
@@ -528,7 +530,7 @@ msgid "Link"
 msgstr ""
 
 msgid "Metadata error. see log for details"
-msgstr ""
+msgstr "خطأ في بيانات التعريف، للتفاصيل انظر السجل"
 
 msgid "Review duplicates"
 msgstr "مراجعة التكرار"
