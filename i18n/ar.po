@@ -71,7 +71,7 @@ msgid "Please provide a valid phone number"
 msgstr "من فضلك ادخل صيغة رقم تلفون سليمة"
 
 msgid "Please provide a valid organisation unit"
-msgstr ""
+msgstr "من فضلك ادخل وحدة تنظيمية صالحة"
 
 msgid "Please provide valid coordinates"
 msgstr "من فضلك ادخل صيغة احداثيات سليمة"
@@ -120,7 +120,7 @@ msgid "No, stay here"
 msgstr "لا ، ابق هنا"
 
 msgid "validation failed"
-msgstr ""
+msgstr "فشل التحقق من الصحة"
 
 msgid "Errors"
 msgstr "اخطاء"
@@ -156,7 +156,7 @@ msgid "Validation errors and warnings"
 msgstr ""
 
 msgid "Validation errors"
-msgstr ""
+msgstr "أخطاء تحقق من الصحة"
 
 msgid "Validation warnings"
 msgstr "تحذيرات التحقق"
@@ -300,7 +300,7 @@ msgid "Please add or cancel comment before saving the event"
 msgstr "يرجى إضافة أو إلغاء التعليق قبل حفظ الحدث"
 
 msgid "No write access"
-msgstr ""
+msgstr "لا توجد صلاحية الوصول للكتابة"
 
 msgid "Save"
 msgstr "حفظ"
@@ -318,7 +318,7 @@ msgid "Event could not be loaded"
 msgstr "تعذر تحميل الحدث"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "تعذر تحميل الوحدة التنظيمية"
 
 msgid "View event info"
 msgstr "عرض معلومات عن الحدث"
@@ -333,7 +333,7 @@ msgid "More filters"
 msgstr "عوامل تصفية أكثر"
 
 msgid "Rows per page"
-msgstr ""
+msgstr "عدد الصفوف لكل صفحة"
 
 msgid "Active"
 msgstr "فعال"
@@ -342,10 +342,10 @@ msgid "Completed"
 msgstr "مكتمل"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "تعذر جلب الوحدة التنظيمية"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "البرنامج غير موجود"
 
 msgid "Selected program is invalid for registering unit"
 msgstr ""
@@ -360,13 +360,13 @@ msgid "Save and exit"
 msgstr "حفظ وخروج"
 
 msgid "Finish"
-msgstr ""
+msgstr "إنهاء"
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "التحويل الى العرض كنموذج"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "التحويل إلى العرض كصفوف"
 
 msgid "New {{TET}}"
 msgstr ""
@@ -395,9 +395,11 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"هذا ليس برنامج تسجيل حدث أو أن بيانات التعريف تالفة. انظر السجل للحصول على "
+"التفاصيل."
 
 msgid "This event"
-msgstr ""
+msgstr "هذا الحدث"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
@@ -425,7 +427,7 @@ msgid "events added"
 msgstr "تمت إضافة الأحداث"
 
 msgid "No events added"
-msgstr ""
+msgstr "لم تتم إضافة أحداث"
 
 msgid "Select a registering unit and program above to get started"
 msgstr ""
@@ -468,16 +470,16 @@ msgid "Link"
 msgstr ""
 
 msgid "Metadata error. see log for details"
-msgstr ""
+msgstr "خطأ في بيانات التعريف، للتفاصيل انظر السجل"
 
 msgid "Review Duplicates"
-msgstr ""
+msgstr "مراجعة التكرارات"
 
 msgid "Create {{trackedEntityTypeName}} and link"
 msgstr ""
 
 msgid "Possible duplicates found"
-msgstr ""
+msgstr "إحتمال وجود تكرار"
 
 msgid "An error occured loading possible duplicates"
 msgstr ""
@@ -513,10 +515,10 @@ msgid "{{teiCount}} results found for"
 msgstr ""
 
 msgid "New search"
-msgstr ""
+msgstr "بحث جديد"
 
 msgid "Edit search"
-msgstr ""
+msgstr "تعديل البحث"
 
 msgid "Link to an existing {{trackedEntityType}}"
 msgstr ""
@@ -528,7 +530,7 @@ msgid "Register"
 msgstr "تسجيل"
 
 msgid "You dont have access to edit this event"
-msgstr ""
+msgstr "ليس لديك حق الوصول لتعديل هذا الحدث"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
@@ -536,7 +538,7 @@ msgid ""
 msgstr ""
 
 msgid "Feedbacks"
-msgstr ""
+msgstr "تغذيات راجعة"
 
 msgid "New {{typeName}}"
 msgstr ""
@@ -545,7 +547,7 @@ msgid "New"
 msgstr "جديد"
 
 msgid "Start again"
-msgstr ""
+msgstr "البدء من جديد"
 
 msgid "Find"
 msgstr "بحث"
@@ -554,7 +556,7 @@ msgid "Selected registering unit"
 msgstr ""
 
 msgid "Start Again"
-msgstr ""
+msgstr "البدء من جديد"
 
 msgid "Registering Organisation Unit"
 msgstr ""
@@ -563,25 +565,25 @@ msgid "Select"
 msgstr "تحديد"
 
 msgid "Selected Program"
-msgstr ""
+msgstr "البرنامج المحدد"
 
 msgid "Select program"
 msgstr "تحديد البرنامج"
 
 msgid "No programs available."
-msgstr ""
+msgstr "لا توجد برامج متاحة"
 
 msgid "You dont have access to delete this relationship"
-msgstr ""
+msgstr "ليس لديك حق الوصول لحذف هذه العلاقة"
 
 msgid "You dont have access to create any relationships"
-msgstr ""
+msgstr "ليس لديك حق الوصول لإنشاء علاقات"
 
 msgid "Add relationship"
 msgstr "اضف علاقة"
 
 msgid "Selected program"
-msgstr ""
+msgstr "البرنامج المحدد"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
@@ -593,7 +595,7 @@ msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 
 msgid "Program not found"
-msgstr ""
+msgstr "لم يتم ايجاد البرنامج"
 
 msgid "Program is not a tracker program"
 msgstr ""
@@ -602,13 +604,13 @@ msgid "Profile"
 msgstr "ملف التعريف"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "خطأ عند حفظ الحدث"
 
 msgid "Could not save event. See log for details"
 msgstr ""
 
 msgid "Organisation unit search failed. See log for details"
-msgstr ""
+msgstr "فشل البحث عن الوحدة التنظيمية. للحصول على التفاصيل، انظر السجل"
 
 msgid "tracked entity instance"
 msgstr ""
@@ -626,19 +628,19 @@ msgid "From date"
 msgstr "من تاريخ"
 
 msgid "From time"
-msgstr ""
+msgstr "من وقت"
 
 msgid "To date"
 msgstr "حتى تاريخ"
 
 msgid "To time"
-msgstr ""
+msgstr "إلى وقت"
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "حدث خطأ أثناء التحقق من صحة الحقل"
 
 msgid "error"
-msgstr ""
+msgstr "خطأ"
 
 msgid "Delete polygon"
 msgstr ""
@@ -654,10 +656,10 @@ msgid ""
 msgstr ""
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "اختر تاريخًا أو أكثر ..."
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "اختر تاريخاً"
 
 msgid "Today"
 msgstr "اليوم"
