@@ -421,7 +421,7 @@ msgstr "ارجع إلى الحدث بدون حفظ العلاقة"
 msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
-msgstr ""
+msgstr "ستؤدي مغادرة هذه الصفحة إلى تجاهل التحديدات التي أجريتها لعلاقة جديدة"
 
 msgid "events added"
 msgstr "تمت إضافة الأحداث"
@@ -433,7 +433,7 @@ msgid "Select a registering unit and program above to get started"
 msgstr ""
 
 msgid "Select a program to start reporting"
-msgstr ""
+msgstr "حدد برنامجاً لبدء إعداد التقارير"
 
 msgid "Select a registering unit to start reporting"
 msgstr ""
@@ -442,10 +442,11 @@ msgid "Select a category option to start reporting"
 msgstr ""
 
 msgid "You dont have access to create an event in the current selections"
-msgstr ""
+msgstr "ليس لديك حق الوصول لإنشاء حدث في التحديدات الحالية"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
+"يوجد نسخة مكررة (ولكن كانت هناك بعض الأخطاء ، راجع السجل للحصول على التفاصيل"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
@@ -467,7 +468,7 @@ msgid "Registered person"
 msgstr ""
 
 msgid "Link"
-msgstr ""
+msgstr "ربط"
 
 msgid "Metadata error. see log for details"
 msgstr "خطأ في بيانات التعريف، للتفاصيل انظر السجل"
@@ -476,7 +477,7 @@ msgid "Review Duplicates"
 msgstr "مراجعة التكرارات"
 
 msgid "Create {{trackedEntityTypeName}} and link"
-msgstr ""
+msgstr "إنشاء {{trackedEntityTypeName}} وربط"
 
 msgid "Possible duplicates found"
 msgstr "إحتمال وجود تكرار"
@@ -488,7 +489,7 @@ msgid "Hide"
 msgstr "إخفاء"
 
 msgid "Save as new {{tetName}}"
-msgstr ""
+msgstr "حفظ {{tetName}} كجديد"
 
 msgid "Some programs are being filtered."
 msgstr ""
@@ -521,10 +522,10 @@ msgid "Edit search"
 msgstr "تعديل البحث"
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr ""
+msgstr "ربط بـ {{trackedEntityType}} موجود مسبقاً"
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr "إنشاء {{trackedEntityType}} جديد"
 
 msgid "Register"
 msgstr "تسجيل"
@@ -535,13 +536,13 @@ msgstr "ليس لديك حق الوصول لتعديل هذا الحدث"
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
-msgstr ""
+msgstr "ستؤدي مغادرة هذه الصفحة إلى تجاهل التحديدات التي أجريتها لعلاقة جديدة"
 
 msgid "Feedbacks"
 msgstr "تغذيات راجعة"
 
 msgid "New {{typeName}}"
-msgstr ""
+msgstr "{{typeName}} جديد"
 
 msgid "New"
 msgstr "جديد"
@@ -607,7 +608,7 @@ msgid "Error saving event"
 msgstr "خطأ عند حفظ الحدث"
 
 msgid "Could not save event. See log for details"
-msgstr ""
+msgstr "تعذر حفظ الحدث. انظر إلى السجل للحصول على التفاصيل"
 
 msgid "Organisation unit search failed. See log for details"
 msgstr "فشل البحث عن الوحدة التنظيمية. للحصول على التفاصيل، انظر السجل"
