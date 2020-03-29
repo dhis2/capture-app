@@ -292,7 +292,7 @@ msgid "Select a registering unit and program above to get started"
 msgstr ""
 
 msgid "Select a program to start reporting"
-msgstr ""
+msgstr "حدد برنامجاً لبدء إعداد التقارير"
 
 msgid "Select a registering unit to start reporting"
 msgstr ""
@@ -346,7 +346,7 @@ msgid "Error saving event"
 msgstr "خطأ عند حفظ الحدث"
 
 msgid "Could not save event. See log for details"
-msgstr ""
+msgstr "تعذر حفظ الحدث. انظر إلى السجل للحصول على التفاصيل"
 
 msgid "Set coordinate"
 msgstr "ضبط الإحداثية"
