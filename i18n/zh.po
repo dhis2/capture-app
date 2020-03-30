@@ -2,13 +2,14 @@
 # phil_dhis2, 2019
 # Viktor Varland <viktor@dhis2.org>, 2019
 # easylin <lin_xd@126.com>, 2020
+# 晓东 林 <13981924470@126.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2019-11-20T10:50:45.136Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2020\n"
+"Last-Translator: 晓东 林 <13981924470@126.com>, 2020\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -143,7 +144,7 @@ msgid "Warnings found"
 msgstr "发现警告"
 
 msgid "Abort"
-msgstr ""
+msgstr "关于"
 
 msgid "Back to form"
 msgstr "回到表单"
@@ -224,7 +225,7 @@ msgid "Yes"
 msgstr "是"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "mm/dd/yyyy"
 
 msgid "Years"
 msgstr "年"
@@ -353,96 +354,96 @@ msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "在 {{orgUnit}}的 {{program}} 中创建一个新的{{TET}} 实例"
 
 msgid "Save and add another"
-msgstr ""
+msgstr "保存并另外添加"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "保存后退出"
 
 msgid "Finish"
-msgstr ""
+msgstr "结束"
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "切换到表单视图"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "切换到行视图"
 
 msgid "New {{TET}}"
 msgstr ""
 
 msgid "Working Lists"
-msgstr ""
+msgstr "工作列表"
 
 msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
-msgstr ""
+msgstr "项目标识为 {{programId}}的项目不是跟踪随访项目，注册仅仅可能在跟踪随访项目里进行"
 
 msgid "Selected program is invalid for selected registering unit"
-msgstr ""
+msgstr "选择的项目对选择的机构无效"
 
 msgid "Relationships"
 msgstr "关系"
 
 msgid "Saving to"
-msgstr ""
+msgstr "保存到"
 
 msgid "in"
-msgstr ""
+msgstr " 在"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
-msgstr ""
+msgstr "这不是事件项目或者元数据坏了，查看日志详情"
 
 msgid "This event"
-msgstr ""
+msgstr "该事件"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
-msgstr ""
+msgstr "{{entityName}} 的 {{relationshipTypeName}}  关系类型已经存在"
 
 msgid "New event"
 msgstr "新事件"
 
 msgid "New event relationship"
-msgstr ""
+msgstr "新建事件关系"
 
 msgid "Adding relationship to event."
-msgstr ""
+msgstr "添加关系到事件"
 
 msgid "Go back to event without saving relationship"
-msgstr ""
+msgstr "后退到事件不保存关系"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
-msgstr ""
+msgstr "离开本页将丢掉你的新关系的选择"
 
 msgid "events added"
-msgstr ""
+msgstr "事件已经被添加"
 
 msgid "No events added"
-msgstr ""
+msgstr "没有事件被添加"
 
 msgid "Select a registering unit and program above to get started"
-msgstr ""
+msgstr "选择一个注册机构和上面的项目开始"
 
 msgid "Select a program to start reporting"
-msgstr ""
+msgstr "选择一个项目开始上报"
 
 msgid "Select a registering unit to start reporting"
-msgstr ""
+msgstr "选择一个机构开始上报"
 
 msgid "Select a category option to start reporting"
-msgstr ""
+msgstr "选择一个分类选项开始上报"
 
 msgid "You dont have access to create an event in the current selections"
-msgstr ""
+msgstr "你没有在当前选择创建事件的权限"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
-msgstr ""
+msgstr "存在重复，但是有错误，查看日志详情。"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
@@ -461,22 +462,22 @@ msgid "Show registered {{trackedEntityTypeName}}"
 msgstr ""
 
 msgid "Registered person"
-msgstr ""
+msgstr "注册的人"
 
 msgid "Link"
-msgstr ""
+msgstr "链接"
 
 msgid "Metadata error. see log for details"
-msgstr ""
+msgstr "元数据错误"
 
 msgid "Review Duplicates"
-msgstr ""
+msgstr "复查重复"
 
 msgid "Create {{trackedEntityTypeName}} and link"
-msgstr ""
+msgstr "创建 {{trackedEntityTypeName}}  和链接"
 
 msgid "Possible duplicates found"
-msgstr ""
+msgstr "发现可能的重复"
 
 msgid "An error occured loading possible duplicates"
 msgstr ""
@@ -485,10 +486,10 @@ msgid "Hide"
 msgstr "隐藏"
 
 msgid "Save as new {{tetName}}"
-msgstr ""
+msgstr "保存为新的  {{tetName}}"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "有些项目已经被过滤了"
 
 msgid "Show all"
 msgstr "显示全部"
@@ -503,19 +504,19 @@ msgid "Registration"
 msgstr "注册"
 
 msgid "Search results"
-msgstr ""
+msgstr "搜索结果"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
+msgstr "没有发现  {{trackedEntityTypeName}} "
 
 msgid "{{teiCount}} results found for"
-msgstr ""
+msgstr "发现 {{teiCount}} 条结果"
 
 msgid "New search"
-msgstr ""
+msgstr "新搜索"
 
 msgid "Edit search"
-msgstr ""
+msgstr "编辑搜索"
 
 msgid "Link to an existing {{trackedEntityType}}"
 msgstr ""
@@ -538,22 +539,22 @@ msgid "Feedbacks"
 msgstr ""
 
 msgid "New {{typeName}}"
-msgstr ""
+msgstr "新建 {{typeName}}"
 
 msgid "New"
 msgstr "新建"
 
 msgid "Start again"
-msgstr ""
+msgstr "再开始"
 
 msgid "Find"
 msgstr "查询"
 
 msgid "Selected registering unit"
-msgstr ""
+msgstr "选择注册的机构"
 
 msgid "Start Again"
-msgstr ""
+msgstr "再开始"
 
 msgid "Registering Organisation Unit"
 msgstr "在注册的机构"
@@ -583,34 +584,34 @@ msgid "Selected program"
 msgstr "选择的项目"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
+msgstr "搜索 {{uniqueAttrName}}"
 
 msgid "Search by attributes"
-msgstr ""
+msgstr "按属性搜索"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr ""
 
 msgid "Program not found"
-msgstr ""
+msgstr "没有发现项目"
 
 msgid "Program is not a tracker program"
-msgstr ""
+msgstr "项目不是跟踪随访项目"
 
 msgid "Profile"
 msgstr "简历"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "保存时间错误"
 
 msgid "Could not save event. See log for details"
-msgstr ""
+msgstr "不能保存事件，看日志"
 
 msgid "Organisation unit search failed. See log for details"
-msgstr ""
+msgstr "机构搜索失败，查看日志"
 
 msgid "tracked entity instance"
-msgstr ""
+msgstr "跟踪的实体实例"
 
 msgid "Set coordinate"
 msgstr "设置坐标"
@@ -619,31 +620,31 @@ msgid "Date"
 msgstr "日期"
 
 msgid "Time"
-msgstr ""
+msgstr "时间"
 
 msgid "From date"
 msgstr "起始日期"
 
 msgid "From time"
-msgstr ""
+msgstr "从时间"
 
 msgid "To date"
 msgstr "到目前为止"
 
 msgid "To time"
-msgstr ""
+msgstr "到时间"
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "字段验证发生错误。"
 
 msgid "error"
-msgstr ""
+msgstr "错误"
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "删除多边形"
 
 msgid "Set area"
-msgstr ""
+msgstr "设置区域"
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -653,10 +654,10 @@ msgid ""
 msgstr ""
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "选择一个或多个日期"
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "选择日期"
 
 msgid "Today"
 msgstr "今天"
@@ -664,7 +665,7 @@ msgstr "今天"
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
-msgstr ""
+msgstr "将 "
 
 msgid "Compatibility mode"
-msgstr ""
+msgstr "兼容性模式"
