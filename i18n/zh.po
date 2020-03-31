@@ -2,13 +2,14 @@
 # phil_dhis2, 2019
 # Viktor Varland <viktor@dhis2.org>, 2019
 # easylin <lin_xd@126.com>, 2020
+# 晓东 林 <13981924470@126.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2019-11-20T12:27:04.744Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: easylin <lin_xd@126.com>, 2020\n"
+"Last-Translator: 晓东 林 <13981924470@126.com>, 2020\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,7 +63,7 @@ msgid "Warnings found"
 msgstr "发现警告"
 
 msgid "Abort"
-msgstr ""
+msgstr "关于"
 
 msgid "Your data is uploading. Please wait untill this message disappears"
 msgstr ""
@@ -131,7 +132,7 @@ msgid "Yes"
 msgstr "是"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "mm/dd/yyyy"
 
 msgid "Years"
 msgstr "年"
@@ -248,57 +249,57 @@ msgid "Selected program is invalid for registering unit"
 msgstr "选择的项目对注册机构是有效的"
 
 msgid "Saving to"
-msgstr ""
+msgstr "保存到"
 
 msgid "in"
-msgstr ""
+msgstr " 在"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
-msgstr ""
+msgstr "这不是事件项目或者元数据坏了，查看日志详情"
 
 msgid "A value is required"
 msgstr "需要一个值"
 
 msgid "Save and add another"
-msgstr ""
+msgstr "保存并另外添加"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "保存后退出"
 
 msgid "Finish"
-msgstr ""
+msgstr "结束"
 
 msgid "events added"
-msgstr ""
+msgstr "事件已经被添加"
 
 msgid "No events added"
-msgstr ""
+msgstr "没有事件被添加"
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "切换到表单视图"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "切换到行视图"
 
 msgid "New event"
 msgstr "新事件"
 
 msgid "Select a registering unit and program above to get started"
-msgstr ""
+msgstr "选择一个注册机构和上面的项目开始"
 
 msgid "Select a program to start reporting"
-msgstr ""
+msgstr "选择一个项目开始上报"
 
 msgid "Select a registering unit to start reporting"
-msgstr ""
+msgstr "选择一个机构开始上报"
 
 msgid "Select a category option to start reporting"
-msgstr ""
+msgstr "选择一个分类选项开始上报"
 
 msgid "Start again"
-msgstr ""
+msgstr "再开始"
 
 msgid "New"
 msgstr "新建"
@@ -307,10 +308,10 @@ msgid "Find"
 msgstr "查询"
 
 msgid "Selected registering unit"
-msgstr ""
+msgstr "选择注册的机构"
 
 msgid "Start Again"
-msgstr ""
+msgstr "再开始"
 
 msgid "Registering Organisation Unit"
 msgstr "在注册的机构"
@@ -322,7 +323,7 @@ msgid "Selected Program"
 msgstr "选择的项目"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "有些项目已经被过滤了"
 
 msgid "Show all"
 msgstr "显示全部"
@@ -340,19 +341,19 @@ msgid "An error has occured. See log for details"
 msgstr "发生一个错误,看日志"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "保存时间错误"
 
 msgid "Could not save event. See log for details"
-msgstr ""
+msgstr "不能保存事件，看日志"
 
 msgid "Set coordinate"
 msgstr "设置坐标"
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "删除多边形"
 
 msgid "Set area"
-msgstr ""
+msgstr "设置区域"
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -362,10 +363,10 @@ msgid ""
 msgstr ""
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "选择一个或多个日期"
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "选择日期"
 
 msgid "Today"
 msgstr "今天"
