@@ -423,7 +423,7 @@ msgid "Switch to row view"
 msgstr "切换到行视图"
 
 msgid "New {{TET}}"
-msgstr ""
+msgstr "新建 {{TET}}"
 
 msgid "Working Lists"
 msgstr "工作列表"
@@ -508,18 +508,18 @@ msgstr "存在重复，但是有错误，查看日志详情。"
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
-msgstr ""
+msgstr " 具有 {{attributeName}}  属性的条目已经注册 ，但是你不能访问 "
 
 msgid "You have already registered this {{attributeName}}"
-msgstr ""
+msgstr "你已经登记了该属性"
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
-msgstr ""
+msgstr "一个 {{trackedEntityTypeName}} 且具有 {{attributeName}} 已经注册"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "显示登记的 {{attributeName}} "
 
 msgid "Registered person"
 msgstr "注册的人"
@@ -540,7 +540,7 @@ msgid "Possible duplicates found"
 msgstr "发现可能的重复"
 
 msgid "An error occured loading possible duplicates"
-msgstr ""
+msgstr "载入可能的重复发生错误"
 
 msgid "Hide"
 msgstr "隐藏"
@@ -582,33 +582,33 @@ msgid "Edit search"
 msgstr "编辑搜索"
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr ""
+msgstr "链接到存在的 {{trackedEntityType}}"
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr "创建新的{{trackedEntityType}}"
 
 msgid "Register"
 msgstr "注册"
 
 msgid "You dont have access to edit this event"
-msgstr ""
+msgstr "你没有访问该事件的权限"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
-msgstr ""
+msgstr "离开该页将丢失你创建新关系的所有选择"
 
 msgid "No one is assigned to this event"
-msgstr ""
+msgstr "没有人被分配到的该事件"
 
 msgid "Assign"
 msgstr "分配"
 
 msgid "Event assigned to {{name}}"
-msgstr ""
+msgstr "事件被分配到  {{name}}"
 
 msgid "Feedbacks"
-msgstr ""
+msgstr "反馈"
 
 msgid "New {{typeName}}"
 msgstr "新建 {{typeName}}"
@@ -668,10 +668,10 @@ msgid "Search by attributes"
 msgstr "按属性搜索"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr ""
+msgstr "至少填充 {{minAttributesRequired}}  个属性便于搜索"
 
 msgid "To work with the selected program,"
-msgstr ""
+msgstr "基于选择的项目工作"
 
 msgid "open the Tracker Capture app"
 msgstr "打开跟踪随访APP"
