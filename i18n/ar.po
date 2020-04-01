@@ -553,7 +553,7 @@ msgstr ""
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
-msgstr ""
+msgstr "سبق وأن تم تسجيل عنصر بـ {{attributeName}}، ولكن لا يمكنك الوصول إليه"
 
 msgid "You have already registered this {{attributeName}}"
 msgstr ""
@@ -585,7 +585,7 @@ msgid "Possible duplicates found"
 msgstr "إحتمال وجود تكرار"
 
 msgid "An error occured loading possible duplicates"
-msgstr ""
+msgstr "حدث خطأ أثناء تحميل التكرارات المحتملة"
 
 msgid "Hide"
 msgstr "إخفاء"
