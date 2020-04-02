@@ -150,7 +150,7 @@ msgid "Save anyway"
 msgstr "حفظ على اية حال"
 
 msgid "Validation errors and warnings"
-msgstr ""
+msgstr "أخطاء وتحذيرات التحقق من الصحة"
 
 msgid "Validation errors"
 msgstr "أخطاء تحقق من الصحة"
@@ -447,7 +447,7 @@ msgid "Selected program is invalid for registering unit"
 msgstr ""
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr ""
+msgstr "إنشاء {{TET}} جديد في {{program}} في {{orgUnit}}"
 
 msgid "Save and add another"
 msgstr "حفظ واضافة جديد"
@@ -465,7 +465,7 @@ msgid "Switch to row view"
 msgstr "التحويل إلى العرض كصفوف"
 
 msgid "New {{TET}}"
-msgstr ""
+msgstr "{{TET}} جديد"
 
 msgid "Working Lists"
 msgstr ""
@@ -507,6 +507,7 @@ msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
 msgstr ""
+"العلاقة من نوع {{relationshipTypeName}} إلى {{entityName}}  موجودة مسبقاً"
 
 msgid "New event"
 msgstr "حدث جديد"
@@ -556,7 +557,7 @@ msgid ""
 msgstr "سبق وأن تم تسجيل عنصر بـ {{attributeName}}، ولكن لا يمكنك الوصول إليه"
 
 msgid "You have already registered this {{attributeName}}"
-msgstr ""
+msgstr "لقد قمت بتسجيل {{attributeName}} مسبقاً"
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
@@ -564,7 +565,7 @@ msgid ""
 msgstr ""
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "إظهار الـ {{trackedEntityTypeName}} المسجلة"
 
 msgid "Registered person"
 msgstr ""
@@ -707,13 +708,13 @@ msgid "Selected program"
 msgstr "البرنامج المحدد"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
+msgstr "بحث {{uniqueAttrName}}"
 
 msgid "Search by attributes"
-msgstr ""
+msgstr "البحث حسب السمة"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr ""
+msgstr "املأ {{minAttributesRequired}} سمات على الأقل للبحث"
 
 msgid "To work with the selected program,"
 msgstr ""
@@ -782,10 +783,10 @@ msgid "error"
 msgstr "خطأ"
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "حذف المضلع"
 
 msgid "Set area"
-msgstr ""
+msgstr "عين المساحة"
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -793,6 +794,10 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+"لقد فتحت نسخة آخرى من تطبيق الإلتقاط في نفس المجال. حاليًا ، يدعم تطبيق "
+"الإلتقاط فقط تشغيل نسخة واحدة بشكل متزامن (في نفس المجال). يرجى تحديث هذه "
+"الصفحة إذا كنت ترغب في استخدام هذه النسخة، ولكن اعلم أن هذا سيؤدي إلى إغلاق "
+"النسخ الأخرى."
 
 msgid "Choose one or more dates..."
 msgstr "اختر تاريخاً أو أكثر ..."
@@ -804,6 +809,8 @@ msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr ""
+"أحد الأسباب المحتملة لذلك هو أن المتصفح أو الوضع (مثل وضع الخصوصية) غير "
+"مدعوم. انظر السجل للحصول على التفاصيل."
 
 msgid "Compatibility mode"
-msgstr ""
+msgstr "وضع التوافق"
