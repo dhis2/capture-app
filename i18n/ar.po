@@ -173,7 +173,7 @@ msgid "Syncing"
 msgstr "تزامن"
 
 msgid "Field"
-msgstr ""
+msgstr "الحقل"
 
 msgid "could not be updated"
 msgstr ""
