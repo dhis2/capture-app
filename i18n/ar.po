@@ -198,7 +198,7 @@ msgid "Comments"
 msgstr "التعليقات"
 
 msgid "Field"
-msgstr ""
+msgstr "الحقل"
 
 msgid "could not be updated"
 msgstr ""
@@ -352,10 +352,10 @@ msgid "Set coordinate"
 msgstr "ضبط الإحداثية"
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "حذف المضلع"
 
 msgid "Set area"
-msgstr ""
+msgstr "عين المساحة"
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -363,6 +363,10 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+"لقد فتحت نسخة آخرى من تطبيق الإلتقاط في نفس المجال. حاليًا ، يدعم تطبيق "
+"الإلتقاط فقط تشغيل نسخة واحدة بشكل متزامن (في نفس المجال). يرجى تحديث هذه "
+"الصفحة إذا كنت ترغب في استخدام هذه النسخة، ولكن اعلم أن هذا سيؤدي إلى إغلاق "
+"النسخ الأخرى."
 
 msgid "Choose one or more dates..."
 msgstr "اختر تاريخًا أو أكثر ..."
