@@ -246,7 +246,7 @@ msgid "Program doesn't exist"
 msgstr "البرنامج غير موجود"
 
 msgid "Selected program is invalid for registering unit"
-msgstr ""
+msgstr "البرنامج المحدد غير صالح لوحدة التسجيل"
 
 msgid "Saving to"
 msgstr "حفظ إلى"
@@ -289,13 +289,13 @@ msgid "New event"
 msgstr "حدث جديد"
 
 msgid "Select a registering unit and program above to get started"
-msgstr ""
+msgstr "حدد وحدة التسجيل والبرنامج أعلاه للبدء"
 
 msgid "Select a program to start reporting"
 msgstr "حدد برنامجاً لبدء إعداد التقارير"
 
 msgid "Select a registering unit to start reporting"
-msgstr ""
+msgstr "حدد وحدة تنظيمية مسجلة لبدء الإبلاغ"
 
 msgid "Select a category option to start reporting"
 msgstr ""
@@ -325,7 +325,7 @@ msgid "Selected Program"
 msgstr "البرنامج المحدد"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "بعض البرامج يتم تصفيتها"
 
 msgid "Show all"
 msgstr "إظهار الكل"
