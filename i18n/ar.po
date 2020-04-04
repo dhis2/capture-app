@@ -423,10 +423,10 @@ msgid "Show All"
 msgstr "إظهار الكل"
 
 msgid "Working list could not be loaded"
-msgstr ""
+msgstr "تعذر تحميل قائمة العمل"
 
 msgid "an error occurred loading working lists"
-msgstr ""
+msgstr "حدث خطأ اثناء تحميل قوائم العمل"
 
 msgid "Registered events"
 msgstr "الأحداث المسجلة"
@@ -444,7 +444,7 @@ msgid "Program doesn't exist"
 msgstr "البرنامج غير موجود"
 
 msgid "Selected program is invalid for registering unit"
-msgstr ""
+msgstr "البرنامج المحدد غير صالح لوحدة التسجيل"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "إنشاء {{TET}} جديد في {{program}} في {{orgUnit}}"
@@ -468,15 +468,17 @@ msgid "New {{TET}}"
 msgstr "{{TET}} جديد"
 
 msgid "Working Lists"
-msgstr ""
+msgstr "قوائم العمل"
 
 msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
 msgstr ""
+"البرنامج بالرقم المعرف {{programId}} ليس برنامج تتبع. لا يمكن التسجيل إلا في"
+" برامج التتبع."
 
 msgid "Selected program is invalid for selected registering unit"
-msgstr ""
+msgstr "البرنامج المحدد غير صالح لوحدة التسجيل المحددة"
 
 msgid "Assigned user"
 msgstr "المستخدم المعين"
@@ -533,13 +535,13 @@ msgid "No events added"
 msgstr "لم تتم إضافة أحداث"
 
 msgid "Select a registering unit and program above to get started"
-msgstr ""
+msgstr "حدد وحدة التسجيل والبرنامج أعلاه للبدء"
 
 msgid "Select a program to start reporting"
 msgstr "حدد برنامجاً لبدء إعداد التقارير"
 
 msgid "Select a registering unit to start reporting"
-msgstr ""
+msgstr "حدد وحدة تنظيمية مسجلة لبدء الإبلاغ"
 
 msgid "Select a category option to start reporting"
 msgstr ""
@@ -562,13 +564,13 @@ msgstr "لقد قمت بتسجيل {{attributeName}} مسبقاً"
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
-msgstr ""
+msgstr "{{trackedEntityTypeName}} مع  {{attributeName}} مسجلة مسبقاً"
 
 msgid "Show registered {{trackedEntityTypeName}}"
 msgstr "إظهار الـ {{trackedEntityTypeName}} المسجلة"
 
 msgid "Registered person"
-msgstr ""
+msgstr "الشخص المسجل"
 
 msgid "Link"
 msgstr "ربط"
@@ -595,7 +597,7 @@ msgid "Save as new {{tetName}}"
 msgstr "حفظ {{tetName}} كجديد"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "بعض البرامج يتم تصفيتها"
 
 msgid "Show all"
 msgstr "إظهار الكل"
@@ -616,7 +618,7 @@ msgid "Search results"
 msgstr "نتائج البحث"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
+msgstr "لم يتم إيجاد {{trackedEntityTypeName}}"
 
 msgid "{{teiCount}} results found for"
 msgstr ""
@@ -717,16 +719,16 @@ msgid "Fill in at least {{minAttributesRequired}} attributes to search"
 msgstr "املأ {{minAttributesRequired}} سمات على الأقل للبحث"
 
 msgid "To work with the selected program,"
-msgstr ""
+msgstr "للعمل مع البرنامج المحدد"
 
 msgid "open the Tracker Capture app"
-msgstr ""
+msgstr "فتح برنامج التتبع والإلتقاط"
 
 msgid "Program not found"
 msgstr "لم يتم ايجاد البرنامج"
 
 msgid "Program is not a tracker program"
-msgstr ""
+msgstr "البرنامج ليس برنامج تتبع"
 
 msgid "Profile"
 msgstr "ملف التعريف"
@@ -741,13 +743,13 @@ msgid "Could not delete event"
 msgstr "تعذر حذف الحدث"
 
 msgid "Could not save working list"
-msgstr ""
+msgstr "تعذر حفظ قائمة العمل"
 
 msgid "Could not add working list"
-msgstr ""
+msgstr "تعذر إضافة قائمة العمل"
 
 msgid "Could not delete working list"
-msgstr ""
+msgstr "تعذر حذف قائمة العمل"
 
 msgid "Organisation unit search failed. See log for details"
 msgstr "فشل البحث عن الوحدة التنظيمية. للحصول على التفاصيل، انظر السجل"
