@@ -2,13 +2,14 @@
 # phil_dhis2, 2020
 # Viktor Varland <viktor@dhis2.org>, 2020
 # Hamza Assada <7amza.it@gmail.com>, 2020
+# Antonia Bezenchek <antonia@informa.pro>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2020-03-09T19:35:56.143Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
-"Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2020\n"
+"Last-Translator: Antonia Bezenchek <antonia@informa.pro>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -671,7 +672,7 @@ msgid "Find"
 msgstr "بحث"
 
 msgid "Selected registering unit"
-msgstr ""
+msgstr "وحدة التسجيل المختارة"
 
 msgid "Start Again"
 msgstr "البدء من جديد"
@@ -683,7 +684,7 @@ msgid "Accept"
 msgstr "قبول"
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "تسجيل الوحدة التنظيمية"
 
 msgid "Select"
 msgstr "تحديد"
