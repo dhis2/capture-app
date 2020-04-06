@@ -10,7 +10,7 @@ import { setD2 } from 'capture-core/d2/d2Instance';
 import i18n from '@dhis2/d2-i18n';
 import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocaleData';
 
-import { loadMetaDataAsync, loadSystemSettingsAsync } from 'capture-core/metaDataStoreLoaders';
+import { loadMetaData, loadSystemSettings } from 'capture-core/metaDataStoreLoaders';
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
 import { initControllersAsync } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions/DisplayException';
@@ -45,6 +45,7 @@ function setConfig() {
 
     // Temporary setting some old d2 translations for the d2 ui sharing dialog
     config.i18n.sources.add('i18n/i18n_module_en.properties');
+    return baseUrl;
 }
 
 function isLangRTL(code) {
@@ -149,26 +150,32 @@ async function setLocaleDataAsync(uiLocale: string) { //eslint-disable-line
     initI18n(locale);
 }
 
-async function initializeMetaDataAsync(dbLocale: string) {
-    await loadMetaDataAsync();
+async function initializeMetaDataAsync(dbLocale: string, onQueryApi: Function) {
+    await loadMetaData(onQueryApi);
     await buildMetaDataAsync(dbLocale);
 }
 
 async function initializeSystemSettingsAsync() {
-    const systemSettingsCacheData = await loadSystemSettingsAsync();
+    const systemSettingsCacheData = await loadSystemSettings();
     await buildSystemSettingsAsync(systemSettingsCacheData);
 }
 
-function setHeaderBarStrings(d2){
+function setHeaderBarStrings(d2) {
     d2.i18n.addStrings(['app_search_placeholder=search']);
 }
 
-export async function initializeAsync(onCacheExpired: Function) {
+export async function initializeAsync({
+    onCacheExpired,
+    onQueryApi,
+}: {
+    onCacheExpired: Function,
+    onQueryApi: Function,
+}) {
     setLogLevel();
 
     // initialize d2
     setConfig();
-    const d2 = await initAsync();
+    const d2 = await initAsync({ schemas: ['organisationUnit'] });
     const userSettings = await getUserSettingsAsync();
     setD2(d2);
     setHeaderBarStrings(d2);
@@ -176,7 +183,9 @@ export async function initializeAsync(onCacheExpired: Function) {
     try {
         await initControllersAsync(onCacheExpired);
     } catch (error) {
-        throw new DisplayException(i18n.t('A possible reason for this is that the browser or mode (e.g. privacy mode) is not supported. See log for details.'), error);
+        throw new DisplayException(i18n.t(
+            'A possible reason for this is that the browser or mode (e.g. privacy mode) is not supported. See log for details.',
+        ), error);
     }
 
     // set locale data
@@ -188,5 +197,5 @@ export async function initializeAsync(onCacheExpired: Function) {
     await initializeSystemSettingsAsync();
 
     // initialize metadata
-    await initializeMetaDataAsync(dbLocale);
+    await initializeMetaDataAsync(dbLocale, onQueryApi);
 }

@@ -3,30 +3,21 @@
 import React from 'react';
 import { render } from 'react-dom';
 import log from 'loglevel';
-import i18n from '@dhis2/d2-i18n';
 import 'typeface-roboto';
-import { createHashHistory as createHistory } from 'history';
-
-// import D2UIApp from '@dhis2/d2-ui-app';
-import LoadingMask from 'capture-core/components/LoadingMasks/LoadingMaskForPage.component';
-
+import i18n from '@dhis2/d2-i18n';
+import { DataProvider } from '@dhis2/app-runtime';
 import JssProvider from 'react-jss/lib/JssProvider';
 import { create } from 'jss';
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
 
-import environments from 'capture-core/constants/environments';
-import { DisplayException } from 'capture-core/utils/exceptions/DisplayException';
-
 import type { HashHistory } from 'history/createHashHistory';
 
 import './addRxjsOperators';
+import AppLoader from './AppLoader.component';
 import App from '../components/App/App.component';
-import getStore from '../store/getStore';
-import { initializeAsync } from './init';
+
 import { loadApp } from './entry.actions';
 import { addBeforeUnloadEventListener } from '../unload';
-
-const DOM_ID = 'app';
 
 // Change the insertion point for jss styles.
 // For this app the insertion point should be below the css.
@@ -37,6 +28,15 @@ const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());
 jss.options.insertionPoint = insertionPoint;
 
+// DOM element to use as the container for the App
+const DOM_ID = 'app';
+const domElement = document.getElementById(DOM_ID);
+if (!domElement) {
+    const domElementError = `html element with id ${DOM_ID} is missing in index file`;
+    log.error(domElementError);
+    throw domElementError;
+}
+
 function JSSProviderShell(props) {
     return (
         <JssProvider jss={jss} generateClassName={generateClassName}>
@@ -45,21 +45,7 @@ function JSSProviderShell(props) {
     );
 }
 
-function runApp(domElement: HTMLElement, store: ReduxStore, history: HashHistory) {
-    store.dispatch(loadApp());
-    addBeforeUnloadEventListener(store);
-    render(
-        <JSSProviderShell>
-            <App
-                store={store}
-                history={history}
-            />
-        </JSSProviderShell>,
-        domElement,
-    );
-}
-
-function handleCacheExpired(domElement: HTMLElement) {
+function handleCacheExpired() {
     render(
         <div>
             {
@@ -73,50 +59,35 @@ function handleCacheExpired(domElement: HTMLElement) {
     );
 }
 
-function logError(error) {
-    if (error instanceof Error) {
-        log.error(error.toString());
-    } else if (error) {
-        log.error(JSON.stringify(error));
-    }
-}
-
-async function loadAppAsync(domElement: HTMLElement) {
+function runApp(store: ReduxStore, history: HashHistory) {
+    store.dispatch(loadApp());
+    addBeforeUnloadEventListener(store);
     render(
         <JSSProviderShell>
-            <LoadingMask />
+            <App
+                store={store}
+                history={history}
+            />
         </JSSProviderShell>,
         domElement,
     );
-
-    try {
-        await initializeAsync(() => handleCacheExpired(domElement));
-        const history = createHistory();
-        const store = getStore(history, () => runApp(domElement, store, history));
-    } catch (error) {
-        let message = 'The application could not be loaded.';
-        if (error && error instanceof DisplayException) {
-            logError(error.innerError);
-            message += ` ${error.toString()}`;
-        } else {
-            logError(error);
-            if (process.env.NODE_ENV !== environments.prod) {
-                message += ' Please verify that the server is running.';
-            } else {
-                message += ' Please see log for details.';
-            }
-        }
-
-        render(
-            <div>{message}</div>,
-            domElement,
-        );
-    }
 }
 
-const domElement = document.getElementById(DOM_ID);
-if (!domElement) {
-    log.error(`html element with id ${DOM_ID} is missing in index file`);
-} else {
-    loadAppAsync(domElement);
+async function loadAppAsync() {
+    render(
+        <JSSProviderShell>
+            <DataProvider
+                baseUrl={process.env.REACT_APP_DHIS2_BASE_URL}
+                apiVersion=""
+            >
+                <AppLoader
+                    onRunApp={runApp}
+                    onCacheExpired={handleCacheExpired}
+                />
+            </DataProvider>
+        </JSSProviderShell>,
+        domElement,
+    );
 }
+
+loadAppAsync();

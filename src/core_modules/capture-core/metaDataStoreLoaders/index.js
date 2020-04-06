@@ -1,3 +1,3 @@
 // @flow
-export { default as loadMetaDataAsync } from './baseLoader/metaDataLoader';
-export { default as loadSystemSettingsAsync } from './systemSettings/loadSystemSetttings';
+export { loadWithContext as loadMetaData } from './baseLoader';
+export { default as loadSystemSettings } from './systemSettings/loadSystemSetttings';

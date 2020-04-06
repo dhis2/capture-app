@@ -1,42 +1,32 @@
 // @flow
-import StorageController from 'capture-core-utils/storage/StorageController';
-import { metaTrackedEntityTypesApiSpecification, trackedEntityTypesApiSpecification } from '../../api';
-import getTrackedEntityTypesLoadSpecification
-    from '../../apiToStore/loadSpecifications/getTrackedEntityTypesLoadSpecification';
+import { queryTrackedEntityTypesOutline } from './queries';
+import { storeTrackedEntityTypes } from './quickStoreOperations';
 
-function getOptionSetsMeta(trackedEntityTypesMeta) {
-    if (!trackedEntityTypesMeta) {
-        return [];
-    }
-
-    const optionSetsMeta = trackedEntityTypesMeta.reduce((accOptionSetsMeta, type) => {
-        const optionSetsMetaForType = type.trackedEntityTypeAttributes &&
-            type.trackedEntityTypeAttributes.reduce((accOptionSetsMetaForType, TETA) => {
+function getOptionSetsOutline(trackedEntityTypesOutline) {
+    const optionSetsOutline = trackedEntityTypesOutline.reduce((accOptionSets, type) => {
+        const optionSetsForType = type.trackedEntityTypeAttributes &&
+            type.trackedEntityTypeAttributes.reduce((accOptionSetsForType, TETA) => {
                 if (TETA.trackedEntityAttribute && TETA.trackedEntityAttribute.optionSet) {
-                    accOptionSetsMetaForType.push(TETA.trackedEntityAttribute.optionSet);
+                    accOptionSetsForType.push(TETA.trackedEntityAttribute.optionSet);
                 }
-                return accOptionSetsMetaForType;
+                return accOptionSetsForType;
             }, []);
 
-        if (optionSetsMetaForType) {
-            accOptionSetsMeta = [...accOptionSetsMeta, ...optionSetsMetaForType];
+        if (optionSetsForType) {
+            accOptionSets = [...accOptionSets, ...optionSetsForType];
         }
 
-        return accOptionSetsMeta;
+        return optionSetsForType;
     }, []);
-    return optionSetsMeta;
+    return optionSetsOutline;
 }
 
 
-export default async function loadTrackedEntityTypes(
-    storageController: StorageController,
-    storeName: string,
+export async function loadTrackedEntityTypes(
 ) {
-    const trackedEntityTypesMeta = await metaTrackedEntityTypesApiSpecification.get();
-    const optionSetsMeta = getOptionSetsMeta(trackedEntityTypesMeta);
-    const trackedEntityTypesLoadSpecification =
-        getTrackedEntityTypesLoadSpecification(storeName, trackedEntityTypesApiSpecification);
-    const loadedTrackedEntityTypes = await trackedEntityTypesLoadSpecification.load(storageController);
+    const trackedEntityTypesOutline = await queryTrackedEntityTypesOutline();
+    const optionSetsOutline = getOptionSetsOutline(trackedEntityTypesOutline);
+    const { convertedData: loadedTrackedEntityTypes } = await storeTrackedEntityTypes();
 
     let trackedEntityAttributeIds = [];
     if (loadedTrackedEntityTypes) {
@@ -55,6 +45,6 @@ export default async function loadTrackedEntityTypes(
 
     return {
         trackedEntityAttributeIds,
-        optionSetsMeta,
+        optionSetsOutline,
     };
 }
