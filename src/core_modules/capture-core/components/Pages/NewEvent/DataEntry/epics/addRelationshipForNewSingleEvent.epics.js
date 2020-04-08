@@ -36,8 +36,9 @@ const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
 
 export const openRelationshipForNewSingleEventEpic = (action$: InputObservable) =>
     // $FlowSuppress
-    action$.ofType(newEventDataEntryActionTypes.NEW_EVENT_OPEN_NEW_RELATIONSHIP)
-        .map(() => initializeNewRelationship());
+    action$.pipe(
+        ofType(newEventDataEntryActionTypes.NEW_EVENT_OPEN_NEW_RELATIONSHIP),
+        map(() => initializeNewRelationship()));
 
 export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
