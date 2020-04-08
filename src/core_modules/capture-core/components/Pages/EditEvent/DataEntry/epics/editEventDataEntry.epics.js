@@ -1,5 +1,7 @@
 // @flow
 import log from 'loglevel';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { errorCreator } from 'capture-core-utils';
 import { rulesExecutedPostUpdateField } from '../../../../DataEntry/actions/dataEntry.actions';
@@ -22,18 +24,20 @@ import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import type
 { FieldData } from '../../../../../rulesEngineActionsCreator/inputHelpers';
 
+
 const errorMessages = {
     COULD_NOT_GET_EVENT_FROM_STATE: 'Could not get event from state',
 };
 
 export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
     // $FlowSuppress
-    action$.ofType(
-        editEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
-        editEventActionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE,
-        editEventActionTypes.START_OPEN_EVENT_FOR_EDIT,
-    )
-        .map((action) => {
+    action$.pipe(
+        ofType(
+            editEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
+            editEventActionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE,
+            editEventActionTypes.START_OPEN_EVENT_FOR_EDIT,
+        ),
+        map((action) => {
             const eventContainer = action.payload.eventContainer;
             const orgUnit = action.payload.orgUnit;
 
@@ -47,7 +51,7 @@ export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
 
             // $FlowSuppress
             return batchActions(openEventForEditInDataEntry(eventContainer, orgUnit, foundation, program));
-        });
+        }));
 
 
 const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, itemId: string, uid: string, fieldData?: ?FieldData) => {
@@ -102,18 +106,20 @@ const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, item
 
 export const runRulesOnUpdateDataEntryFieldForEditSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
 // $FlowSuppress
-    action$.ofType(editEventDataEntryBatchActionTypes.UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH)
-        .map(actionBatch => actionBatch.payload.find(action => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE))
-        .map((action) => {
+    action$.pipe(
+        ofType(editEventDataEntryBatchActionTypes.UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH),
+        map(actionBatch => actionBatch.payload.find(action => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
+        map((action) => {
             const { dataEntryId, itemId, uid } = action.payload;
             return runRulesForEditSingleEvent(store, dataEntryId, itemId, uid);
-        });
+        }));
 
 export const runRulesOnUpdateFieldForEditSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
 // $FlowSuppress
-    action$.ofType(editEventDataEntryBatchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH)
-        .map(actionBatch => actionBatch.payload.find(action => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE))
-        .map((action) => {
+    action$.pipe(
+        ofType(editEventDataEntryBatchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH),
+        map(actionBatch => actionBatch.payload.find(action => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
+        map((action) => {
             const { elementId, value, uiState, dataEntryId, itemId, uid } = action.payload;
             const fieldData: FieldData = {
                 elementId,
@@ -121,5 +127,5 @@ export const runRulesOnUpdateFieldForEditSingleEventEpic = (action$: InputObserv
                 valid: uiState.valid,
             };
             return runRulesForEditSingleEvent(store, dataEntryId, itemId, uid, fieldData);
-        });
+        }));
 

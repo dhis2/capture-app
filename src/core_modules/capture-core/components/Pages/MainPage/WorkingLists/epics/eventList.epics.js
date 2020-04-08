@@ -1,5 +1,7 @@
 // @flow
-import { fromPromise } from 'rxjs/observable/fromPromise';
+import { from } from 'rxjs';
+import { ofType } from 'redux-observable';
+import { takeUntil, filter, concatMap } from 'rxjs/operators';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import {
@@ -13,10 +15,11 @@ import { updateEventWorkingListAsync } from './updateEventWorkingList';
 import { getApi } from '../../../../../d2';
 
 export const initEventListEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.ofType(
-        actionTypes.EVENT_LIST_INIT,
-    )
-        .concatMap((action) => {
+    action$.pipe(
+        ofType(
+            actionTypes.EVENT_LIST_INIT,
+        ),
+        concatMap((action) => {
             const state = store.getState();
             const { programId, orgUnitId, categories } = state.currentSelections;
             const lastTransaction = state.offline.lastTransaction;
@@ -34,23 +37,27 @@ export const initEventListEpic = (action$: InputObservable, store: ReduxStore) =
                         listId,
                         lastTransaction,
                     });
-            return fromPromise(initialPromise)
-                .takeUntil(
-                    action$
-                        .ofType(actionTypes.EVENT_LIST_INIT_CANCEL)
-                        .filter(cancelAction => cancelAction.payload.listId === listId),
-                );
-        });
+            return from(initialPromise).pipe(
+
+                takeUntil(
+                    action$.pipe(
+                        ofType(actionTypes.EVENT_LIST_INIT_CANCEL),
+                        filter(cancelAction => cancelAction.payload.listId === listId),
+                    ),
+                ),
+            );
+        }));
 
 export const updateEventListEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.ofType(
-        actionTypes.EVENT_LIST_UPDATE,
-    )
-        .concatMap((action) => {
+    action$.pipe(
+        ofType(
+            actionTypes.EVENT_LIST_UPDATE,
+        ),
+        concatMap((action) => {
             const state = store.getState();
             const { listId, queryArgs } = action.payload;
             const updatePromise = updateEventWorkingListAsync(listId, queryArgs, state);
-            return fromPromise(updatePromise)
+            return from(updatePromise)
                 .takeUntil(
                     action$
                         .ofType(actionTypes.EVENT_LIST_UPDATE_CANCEL)
@@ -61,27 +68,28 @@ export const updateEventListEpic = (action$: InputObservable, store: ReduxStore)
                         .ofType(actionTypes.EVENT_LIST_INIT_CANCEL)
                         .filter(cancelAction => cancelAction.payload.listId === listId),
                 );
-        });
+        }));
 
 // TODO: --------------------------------- REFACTOR -----------------------------------
 export const requestDeleteEventEpic = (action$: InputObservable) =>
-    action$.ofType(
-        eventListActionTypes.REQUEST_DELETE_EVENT,
-    ).concatMap((action) => {
-        const eventId = action.payload.eventId;
-        const listId = 'eventList';
-        const deletePromise = getApi()
-            .delete(`events/${eventId}`)
-            .then(() => deleteEventSuccess(eventId, listId))
-            .catch((error) => {
-                log.error(errorCreator('Could not delete event')({ error, eventId }));
-                return deleteEventError();
-            });
+    action$.pipe(
+        ofType(eventListActionTypes.REQUEST_DELETE_EVENT),
+        concatMap((action) => {
+            const eventId = action.payload.eventId;
+            const listId = 'eventList';
+            const deletePromise = getApi()
+                .delete(`events/${eventId}`)
+                .then(() => deleteEventSuccess(eventId, listId))
+                .catch((error) => {
+                    log.error(errorCreator('Could not delete event')({ error, eventId }));
+                    return deleteEventError();
+                });
 
-        return fromPromise(deletePromise)
-            .takeUntil(
-                action$
-                    .ofType(actionTypes.CONTEXT_UNLOADING)
-                    .filter(cancelAction => cancelAction.payload.listId === listId),
-            );
-    });
+            return from(deletePromise).pipe(
+                takeUntil(
+                    action$.pipe(
+                        ofType(actionTypes.CONTEXT_UNLOADING),
+                        filter(cancelAction => cancelAction.payload.listId === listId),
+                    ),
+                ));
+        }));

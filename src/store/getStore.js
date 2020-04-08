@@ -21,7 +21,8 @@ import epics from '../epics/trackerCapture.epics';
 
 
 export default function getStore(history: BrowserHistory | HashHistory, onRehydrated: () => void) {
-    const middleWares = [createEpicMiddleware(epics), routerMiddleware(history)];
+    const middleWares = [routerMiddleware(history)];
+    const epicMiddleware = createEpicMiddleware();
 
     if (process.env.NODE_ENV !== environments.prod) {
         middleWares.push(
@@ -49,15 +50,19 @@ export default function getStore(history: BrowserHistory | HashHistory, onRehydr
         persistOptions: getPersistOptions(),
     });
 
-    return createStore(
-        enableBatching(offlineEnhanceReducer(rootReducer)), composeWithDevTools(
-            compose(
-                offlineEnhanceStore,
-                applyMiddleware(
-                    ...middleWares,
-                    offlineMiddleware,
-                ),
-            ),
+    const store = createStore(
+      enableBatching(offlineEnhanceReducer(rootReducer)), composeWithDevTools(
+        compose(
+          offlineEnhanceStore,
+          applyMiddleware(
+            ...middleWares,
+            offlineMiddleware,
+          ),
         ),
-    );
+      ),
+    )
+
+    epicMiddleware.run(epics)
+
+    return  store;
 }

@@ -1,5 +1,7 @@
 // @flow
 import { push } from 'connected-react-router';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
 import {
     actionTypes as newEventDataEntryActionTypes,
     startSaveNewEventAfterReturnedToMainPage,
@@ -10,8 +12,9 @@ import { getNewEventServerData, getNewEventClientValues } from './getConvertedNe
 
 export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)
-        .map((action) => {
+    action$.pipe(
+        ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
+        map((action) => {
             const state = store.getState();
             const payload = action.payload;
             const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.eventId);
@@ -21,14 +24,15 @@ export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
             const serverData = getNewEventServerData(state, formFoundation, formClientValues, mainDataClientValues);
             const relationshipData = state.dataEntriesRelationships[dataEntryKey];
             return startSaveNewEventAfterReturnedToMainPage(serverData, relationshipData, state.currentSelections);
-        });
+        }));
 
 export const saveNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)
-        .map(() => {
+    action$.pipe(
+        ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
+        map(() => {
             const state = store.getState();
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
             return push(`/programId=${programId}&orgUnitId=${orgUnitId}`);
-        });
+        }));

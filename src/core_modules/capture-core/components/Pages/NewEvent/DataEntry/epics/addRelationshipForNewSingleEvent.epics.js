@@ -1,5 +1,7 @@
 // @flow
 import uuid from 'd2-utilizr/lib/uuid';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
 import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
 
@@ -39,8 +41,9 @@ export const openRelationshipForNewSingleEventEpic = (action$: InputObservable) 
 
 export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(newEventNewRelationshipActionTypes.ADD_NEW_EVENT_RELATIONSHIP)
-        .map((action) => {
+    action$.pipe(
+        ofType(newEventNewRelationshipActionTypes.ADD_NEW_EVENT_RELATIONSHIP),
+        map((action) => {
             const state = store.getState();
             const existingRelationships = state.dataEntriesRelationships[dataEntryKey] || [];
             const payload = action.payload;
@@ -85,7 +88,7 @@ export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, s
                 recentlyAddedRelationship(newRelationship.clientId),
                 addRelationship(dataEntryId, itemId, newRelationship, newToEntity),
             ], newEventNewRelationshipBatchActionTypes.ADD_RELATIONSHIP_BATCH);
-        });
+        }));
 
 const saveNewEventRelationships = (relationshipData, selections, triggerAction) => {
     const relationship = relationshipData.find(rd => rd.to.data);
@@ -104,8 +107,9 @@ const saveNewEventRelationships = (relationshipData, selections, triggerAction) 
 
 export const saveNewEventRelationshipsIfExistsEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(newEventDataEntryActionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS)
-        .map((action) => {
+    action$.pipe(
+        ofType(newEventDataEntryActionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS),
+        map((action) => {
             const meta = action.meta;
             if (meta.relationshipData) {
                 const eventId = action.payload.response.importSummaries[0].reference;
@@ -129,16 +133,17 @@ export const saveNewEventRelationshipsIfExistsEpic = (action$: InputObservable, 
             }
 
             return null;
-        });
+        }));
 
 export const saveNewEventRelationshipFinishedEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(
-        newEventDataEntryActionTypes.NEW_EVENT_RELATIONSHIPS_SAVED,
-        newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_RELATIONSHIPS,
-        newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_RELATIONSHIPS_TEI,
-    )
-        .map((action) => {
+    action$.pipe(
+        ofType(
+            newEventDataEntryActionTypes.NEW_EVENT_RELATIONSHIPS_SAVED,
+            newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_RELATIONSHIPS,
+            newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_RELATIONSHIPS_TEI,
+        ),
+        map((action) => {
             const meta = action.meta;
             if (meta.triggerAction === newEventDataEntryActionTypes.START_SAVE_AFTER_RETURNED_TO_MAIN_PAGE) {
                 return newEventSavedAfterReturnedToMainPage(meta.selections);
@@ -147,18 +152,19 @@ export const saveNewEventRelationshipFinishedEpic = (action$: InputObservable, s
                 return newEventSavedAddAnother(meta.selections);
             }
             return null;
-        });
+        }));
 
 export const teiForNewEventRelationshipSavedEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(
-        newEventDataEntryActionTypes.TEI_FOR_NEW_EVENT_RELATIONSHIPS_SAVED,
-    )
-        .map((action) => {
+    action$.pipe(
+        ofType(
+            newEventDataEntryActionTypes.TEI_FOR_NEW_EVENT_RELATIONSHIPS_SAVED,
+        ),
+        map((action) => {
             const teiId = action.payload.response.importSummaries[0].reference;
             const { relationshipData, relationshipClientId, selections, triggerAction } = action.meta;
             const relationship = relationshipData.find(rd => rd.clientId === relationshipClientId);
             relationship.to.id = teiId;
             relationship.to.data = null;
             return saveNewEventRelationships(relationshipData, selections, triggerAction);
-        });
+        }));

@@ -1,5 +1,7 @@
 // @flow
-import { pipe } from 'capture-core-utils';
+import { pipe as pipeD2 } from 'capture-core-utils';
+import { ofType } from 'redux-observable';
+import { switchMap } from 'rxjs/operators';
 import { getApi } from '../../../../../../../d2/d2Instance';
 import {
     actionTypes,
@@ -42,8 +44,9 @@ const getFormMetadata = (programId: ?string, tetId: string) =>
 
 export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(actionTypes.DUPLICATES_REVIEW, actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE)
-        .switchMap((action) => {
+    action$.pipe(
+        ofType(actionTypes.DUPLICATES_REVIEW, actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE),
+        switchMap((action) => {
             const isChangePage = action.type === actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE;
             const requestPage = isChangePage ? action.payload.page : 1;
 
@@ -69,7 +72,7 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                         return null;
                     }
 
-                    const serverValue = element.convertValue(value, pipe(convertFormToClient, convertClientToServer));
+                    const serverValue = element.convertValue(value, pipeD2(convertFormToClient, convertClientToServer));
                     return `${element.id}:LIKE:${serverValue}`;
                 })
                 .filter(f => f);
@@ -127,4 +130,4 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                 })
                 .catch(() =>
                     duplicatesForReviewRetrievalFailed());
-        });
+        }));

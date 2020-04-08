@@ -1,13 +1,16 @@
 // @flow
 import { getTrackerProgramThrowIfNotFound } from '../../../../../metaData/helpers';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
 import { actionTypes, startSaveNewEnrollmentAfterReturnedToMainPage } from '../actions/dataEntry.actions';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import { buildServerDataForEnrollmentDataEntry } from '../../../../DataEntries';
 
 export const saveNewEnrollmentEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(actionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)
-        .map((action) => {
+    action$.pipe(
+        ofType(actionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
+        map((action) => {
             const state = store.getState();
             const payload = action.payload;
             const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.itemId);
@@ -28,4 +31,4 @@ export const saveNewEnrollmentEpic = (action$: InputObservable, store: ReduxStor
                 {},
             );
             return startSaveNewEnrollmentAfterReturnedToMainPage(serverData, state.currentSelections);
-        });
+        }));

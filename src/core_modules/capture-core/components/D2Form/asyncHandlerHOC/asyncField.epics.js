@@ -1,5 +1,8 @@
 // @flow
 import log from 'loglevel';
+import { concatMap } from 'rxjs/operators';
+import { ofType } from 'redux-observable';
+
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import getErrorMessageAndDetails from '../../../utils/errors/getErrorMessageAndDetails';
@@ -12,8 +15,9 @@ import {
 // epic for handlng async field updates, e.g. file and image
 export const asyncUpdateFieldEpic = (action$: InputObservable) =>
     // $FlowSuppress
-    action$.ofType(actionTypes.START_UPDATE_FIELD_ASYNC)
-        .concatMap((action) => {
+    action$.pipe(
+        ofType(actionTypes.START_UPDATE_FIELD_ASYNC),
+        concatMap((action) => {
             const payload = action.payload;
             const { elementId, formBuilderId, formId, callback, uid, onSuccess, onError } = payload;
 
@@ -43,4 +47,4 @@ export const asyncUpdateFieldEpic = (action$: InputObservable) =>
                         asyncUpdateFieldFailed(errorMessage, uiState, elementId, formBuilderId, formId, uid);
                     return onError ? onError(innerErrorAction) : innerErrorAction;
                 });
-        });
+        }));
