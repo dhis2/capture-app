@@ -503,7 +503,7 @@ msgid "Registration"
 msgstr "登记"
 
 msgid "Search results"
-msgstr ""
+msgstr "搜索结果"
 
 msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
