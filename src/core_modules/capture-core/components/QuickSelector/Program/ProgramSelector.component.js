@@ -1,18 +1,16 @@
 // @flow
 
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
 import Grid from '@material-ui/core/Grid';
 import i18n from '@dhis2/d2-i18n';
-
 import { programCollection } from '../../../metaDataMemoryStores';
 import VirtualizedSelect from '../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import ProgramList from './ProgramList';
 import CategorySelector from './CategorySelector.component';
-
 import { Program } from '../../../metaData';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
 import './programSelector.css';

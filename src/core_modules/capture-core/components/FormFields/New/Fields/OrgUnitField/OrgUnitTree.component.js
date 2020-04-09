@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { OrgUnitTreeMultipleRoots as D2OrgUnitTree } from '@dhis2/d2-ui-org-unit-tree';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
 
 const getStyles = () => ({

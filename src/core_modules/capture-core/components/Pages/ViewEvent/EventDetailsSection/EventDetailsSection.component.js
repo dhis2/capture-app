@@ -1,7 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import { Info as InfoIcon } from '@material-ui/icons';
-import { withStyles, Tooltip } from '@material-ui/core/';
+import { withStyles } from '@material-ui/core';
+import Tooltip from '@material-ui/core/Tooltip';
 import i18n from '@dhis2/d2-i18n';
 import Button from '../../../Buttons/Button.component';
 import ViewEventSection from '../Section/ViewEventSection.component';

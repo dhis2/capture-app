@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from 'react';
 import { DragSource, DropTarget } from 'react-dnd';
-
 import TableCell from '@material-ui/core/TableCell';
 import Checkbox from '@material-ui/core/Checkbox';
 import ReorderIcon from '@material-ui/icons/Reorder';

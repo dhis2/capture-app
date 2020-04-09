@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import log from 'loglevel';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import { errorCreator } from 'capture-core-utils';
 import FilterButton from './FilterButton/FilterButton.container';
 import FilterRestMenu from './FilterRestMenu/FilterRestMenu.component';
@@ -10,9 +10,9 @@ import type { Column } from '../eventList.types';
 
 const getStyles = (theme: Theme) => ({
     filterButtonContainer: {
-        paddingRight: theme.typography.pxToRem(theme.spacing.unit),
-        paddingBottom: theme.typography.pxToRem(theme.spacing.unit / 2),
-        paddingTop: theme.typography.pxToRem(theme.spacing.unit / 2),
+        paddingRight: theme.typography.pxToRem(theme.spacing(1)),
+        paddingBottom: theme.typography.pxToRem(theme.spacing(0.5)),
+        paddingTop: theme.typography.pxToRem(theme.spacing(0.5)),
     },
 });
 

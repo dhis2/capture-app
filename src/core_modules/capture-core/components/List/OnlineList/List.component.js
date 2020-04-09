@@ -37,10 +37,9 @@ const getStyles = (theme: Theme) => ({
     },
 
     cell: {
-        padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit * 7}px ${theme.spacing.unit /
-            2}px ${theme.spacing.unit * 3}px`,
+        padding: `${theme.spacing(0.5)}px ${theme.spacing(7)}px ${theme.spacing(0.5)}px ${theme.spacing(3)}px`,
         '&:last-child': {
-            paddingRight: theme.spacing.unit * 3,
+            paddingRight: theme.spacing(3),
         },
         borderBottomColor: theme.palette.type === 'light'
             ? lighten(fade(theme.palette.divider, 1), 0.88)

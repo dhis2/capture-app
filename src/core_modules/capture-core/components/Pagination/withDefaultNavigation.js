@@ -3,7 +3,7 @@
  * @namespace Pagination
  */
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 
 import IconButton from '@material-ui/core/IconButton';
 import FirstPageIcon from '@material-ui/icons/FirstPage';

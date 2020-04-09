@@ -2,7 +2,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles } from '@material-ui/core';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import { Button } from 'capture-ui';
 import DataEntry from '../DataEntry/DataEntry.container';
@@ -49,7 +49,7 @@ type Props = {
 
 class DataEntryWrapper extends React.Component<Props> {
     handleBackToMainPage() {
-        
+
     }
 
     renderHeaderButtons() {

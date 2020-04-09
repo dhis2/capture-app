@@ -1,7 +1,7 @@
 // @flow
-import CheckIcon from '@material-ui/icons/Check';
-import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core';
+import CheckIcon from '@material-ui/icons/Check';
 import i18n from '@dhis2/d2-i18n';
 import { orientations } from 'capture-ui';
 import Button from '../../Buttons/Button.component';

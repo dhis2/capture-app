@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles } from '@material-ui/core';
 import { CoordinateField as UICoordinateField } from 'capture-ui';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';

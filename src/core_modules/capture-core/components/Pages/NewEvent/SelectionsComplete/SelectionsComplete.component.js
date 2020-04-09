@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import DataEntryWrapper from '../DataEntryWrapper/NewEventDataEntryWrapper.container';
 import NewRelationshipWrapper from '../NewRelationshipWrapper/NewEventNewRelationshipWrapper.container';
 import SelectionsNoAccess from '../SelectionsNoAccess/dataEntrySelectionsNoAccess.container';

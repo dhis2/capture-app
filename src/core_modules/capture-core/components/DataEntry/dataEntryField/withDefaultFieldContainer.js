@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 
 type Props = {
     classes: Object
@@ -8,9 +8,9 @@ type Props = {
 
 const styles = theme => ({
     container: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-        marginBottom: theme.spacing.unit * 2,
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        marginBottom: theme.spacing(2),
     },
 });
 

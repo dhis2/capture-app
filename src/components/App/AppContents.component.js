@@ -1,9 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router'; //eslint-disable-line
-// import HeaderBar from '@dhis2/d2-ui-header-bar';
 import { HeaderBar } from '@dhis2/ui-widgets';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 
 import NetworkStatusBadge from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.component';
 

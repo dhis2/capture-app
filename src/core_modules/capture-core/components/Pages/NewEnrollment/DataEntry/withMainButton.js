@@ -7,7 +7,6 @@ import newEnrollmentSaveTypes from './newEnrollmentSaveTypes';
 import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
 import { Enrollment } from '../../../../metaData';
 import MultiButton from '../../../Buttons/MultiButton.component';
-// import getDataEntryHasChanges from '../getNewEventDataEntryHasChanges';
 
 type Props = {
     onSave: (saveType: $Values<typeof newEnrollmentSaveTypes>) => void,

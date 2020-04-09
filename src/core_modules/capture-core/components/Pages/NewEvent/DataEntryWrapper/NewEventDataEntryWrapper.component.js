@@ -2,9 +2,8 @@
 
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, Paper } from '@material-ui/core';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import Paper from '@material-ui/core/Paper/Paper';
 import Button from '../../../Buttons/Button.component';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import DataEntry from '../DataEntry/DataEntry.container';

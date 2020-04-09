@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 
@@ -34,7 +34,7 @@ const styles = theme => ({
         paddingTop: 12,
     },
     dateContainer: {
-        paddingRight: theme.spacing.unit,
+        paddingRight: theme.spacing(1),
     },
     labelInFocus: {
         color: theme.palette.primary[theme.palette.type === 'light' ? 'dark' : 'light'],

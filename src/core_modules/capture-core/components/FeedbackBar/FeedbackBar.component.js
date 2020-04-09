@@ -1,21 +1,21 @@
 // @flow
 import * as React from 'react';
+import { withStyles } from '@material-ui/core';
 import SnackBar from '@material-ui/core/Snackbar';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { Button } from '../Buttons';
-import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import i18n from '@dhis2/d2-i18n';
 import isDefined from 'd2-utilizr/lib/isDefined';
+import { Button } from '../Buttons';
 
 const styles = theme => ({
     closeButton: {
-        width: theme.spacing.unit * 4,
-        height: theme.spacing.unit * 4,
+        width: theme.spacing(4),
+        height: theme.spacing(4),
     },
     actionContainer: {
         paddingRight: 2,
@@ -97,17 +97,8 @@ class FeedbackBar extends React.Component<Props> {
         const isDialogOpen = isDefined(message) && displayType === 'dialog';
         return (
             <React.Fragment>
-                <SnackBar
-                    open={isSnackBarOpen}
-                    anchorOrigin={FeedbackBar.ANCHOR_ORIGION}
-                    autoHideDuration={5000}
-                    onClose={this.handleClose}
-                    message={<span>{message}</span>}
-                    action={this.getAction()}
-                />
-                <Dialog
-                    open={isDefined(message) && displayType === 'dialog'}
-                >
+
+                <Dialog open={isDefined(message) && displayType === 'dialog'}>
                     <DialogTitle>
                         {isDialogOpen ? message && message.title : ''}
                     </DialogTitle>

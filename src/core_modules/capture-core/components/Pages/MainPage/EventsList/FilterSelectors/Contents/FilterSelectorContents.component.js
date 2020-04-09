@@ -1,12 +1,10 @@
 // @flow
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import { filterTypesObject } from '../filterTypes';
 import { MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS } from '../filterSelector.const';
 import withButtons from './withButtons';
 import withData from './withData';
-// import withRef from './withRef';
-// import withStyleRef from './withStyleRef';
 
 import {
     TextFilter,

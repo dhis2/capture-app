@@ -1,16 +1,14 @@
 // @flow
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import Section from '../Section/Section.component';
 import SectionHeaderSimple from '../Section/SectionHeaderSimple.component';
-
 import D2SectionFields from './D2SectionFields.container';
-
 import MetaDataSection from '../../metaData/RenderFoundation/Section';
 
 const getStyles = (theme: Theme) => ({
     sectionFieldsInSection: {
-        margin: theme.spacing.unit,
+        margin: theme.spacing(1),
     },
     section: {
         backgroundColor: 'white',

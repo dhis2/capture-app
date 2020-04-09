@@ -1,6 +1,8 @@
 // @flow
 import * as React from 'react';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { withTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
+
 import { DateField as UIDateField } from 'capture-ui';
 import withCalendarProps from '../../../HOC/withCalendarProps';
 import { systemSettingsStore } from '../../../../../../metaDataMemoryStores';
@@ -50,4 +52,4 @@ class DateField extends React.Component<Props> {
     }
 }
 
-export default withTheme()(withCalendarProps()(withStyles(getStyles)(DateField)));
+export default withTheme(withCalendarProps()(withStyles(getStyles)(DateField)));

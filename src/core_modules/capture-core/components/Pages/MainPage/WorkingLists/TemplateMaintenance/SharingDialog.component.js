@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import D2UISharingDialog from '@dhis2/d2-ui-sharing-dialog';
 import { getD2 } from '../../../../../d2';
 

@@ -1,11 +1,10 @@
 // @flow
 import * as React from 'react';
-
+import { withStyles } from '@material-ui/core';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUp from '@material-ui/icons/ArrowDropUp';
-import { withStyles } from '@material-ui/core/styles';
 import Button from './ButtonOld.component';
 import ProgressButton from './ProgressButton.component';
 

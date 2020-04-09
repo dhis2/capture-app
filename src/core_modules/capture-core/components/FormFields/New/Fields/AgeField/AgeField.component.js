@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { withTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import { AgeField as UIAgeField } from 'capture-ui';
 import { moment } from 'capture-core-utils/moment';
 import withCalendarProps from '../../HOC/withCalendarProps';
@@ -78,4 +79,4 @@ const AgeField = (props: Props) => {
     );
 };
 
-export default withTheme()(withCalendarProps()(withStyles(getStyles)(AgeField)));
+export default withTheme(withCalendarProps()(withStyles(getStyles)(AgeField)));

@@ -1,10 +1,9 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import Popover from '@material-ui/core/Popover';
 import ArrowDownwardIcon from '@material-ui/icons/KeyboardArrowDown';
 import ArrowUpwardIcon from '@material-ui/icons/KeyboardArrowUp';
-
 import { Button } from '../../../../../Buttons';
 import ActiveFilterButton from './ActiveFilterButton.component';
 import FilterSelectorContents from '../Contents/FilterSelectorContents.component';

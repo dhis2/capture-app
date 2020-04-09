@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import { Pagination } from 'capture-ui';
 import withNavigation from '../../../../../../Pagination/withDefaultNavigation';
 

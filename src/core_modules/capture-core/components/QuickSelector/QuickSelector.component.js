@@ -1,13 +1,11 @@
 // @flow
 
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-
 import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
-
 import ProgramSelector from './Program/ProgramSelector.component';
 import OrgUnitSelector from './OrgUnitSelector.component';
 import ActionButtons from './ActionButtons.component';

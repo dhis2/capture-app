@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import { withLabel as UIWithLabel } from 'capture-ui';
 
 const getStyles = (theme: Theme) => ({

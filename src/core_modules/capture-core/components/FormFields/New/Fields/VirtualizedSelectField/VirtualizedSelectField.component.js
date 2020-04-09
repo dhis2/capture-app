@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import VirtualizedSelect from '../../../Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import withFocusHandler from './withFocusHandler';
 

@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper';
 import Button from '../../../Buttons/Button.component';
@@ -23,7 +23,7 @@ const getStyles = (theme: Theme) => ({
         marginLeft: '-8px',
     },
     buttonContainer: {
-        paddingRight: theme.spacing.unit * 2,
+        paddingRight: theme.spacing(2),
     },
     headerContainer: {
         paddingTop: 9,

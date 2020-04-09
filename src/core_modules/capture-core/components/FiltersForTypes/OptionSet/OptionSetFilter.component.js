@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
 import { orientations } from '../../FormFields/Options/MultiSelectBoxes/multiSelectBoxes.const';
 import OptionSet from '../../../metaData/OptionSet/OptionSet';

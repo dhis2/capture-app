@@ -4,7 +4,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles } from '@material-ui/core';
 import type { SelectedRelationshipType } from '../newRelationship.types';
 import Button from '../../../Buttons/Button.component';
 import TeiSearch from '../../../TeiSearch/TeiSearch.container';

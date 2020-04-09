@@ -2,7 +2,7 @@
 /* eslint-disable react/no-multi-comp */
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import ComposedRegUnitSelector from './ComposedRegUnitSelector.component';
 import { getProgramFromProgramIdThrowIfNotFound } from '../../../../../../metaData';
 

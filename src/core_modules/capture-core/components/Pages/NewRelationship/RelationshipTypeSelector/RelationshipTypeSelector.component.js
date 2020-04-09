@@ -2,7 +2,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import ClearIcon from '@material-ui/icons/Clear';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles } from '@material-ui/core';
 import RelationshipType from '../../../../metaData/RelationshipType/RelationshipType';
 import type { SelectedRelationshipType } from '../newRelationship.types';
 

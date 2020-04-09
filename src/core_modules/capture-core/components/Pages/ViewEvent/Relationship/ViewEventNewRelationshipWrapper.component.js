@@ -2,7 +2,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles } from '@material-ui/core';
 import NewRelatonship from '../../NewRelationship/NewRelationship.container';
 import ConfirmDialog from '../../../Dialogs/ConfirmDialog.component';
 import LinkButton from '../../../Buttons/LinkButton.component';

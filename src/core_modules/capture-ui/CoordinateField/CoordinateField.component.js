@@ -129,7 +129,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
                 >
                     <AddLocationIcon
                         onClick={this.openMap}
-                        
+
                     />
                 </IconButton>
 

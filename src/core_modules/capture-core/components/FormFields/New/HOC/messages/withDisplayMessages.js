@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import classNames from 'classnames';
 import isObject from 'd2-utilizr/lib/isObject';
 import LoadingMask from '../../../../LoadingMasks/LoadingMask.component';

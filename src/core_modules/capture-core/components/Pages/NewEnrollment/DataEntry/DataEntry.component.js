@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { withTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
 import i18n from '@dhis2/d2-i18n';
 
@@ -192,4 +193,4 @@ class NewEnrollmentDataEntry extends Component<Props> {
 }
 
 // $FlowFixMe
-export default withStyles(getStyles)(withTheme()(NewEnrollmentDataEntry));
+export default withStyles(getStyles)(withTheme(NewEnrollmentDataEntry));

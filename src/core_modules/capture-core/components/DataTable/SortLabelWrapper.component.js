@@ -3,9 +3,8 @@ import * as React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import classNames from 'classnames';
-
 import i18n from '@dhis2/d2-i18n';
 import { SortLabel, sortLabelDirections } from 'capture-ui';
 

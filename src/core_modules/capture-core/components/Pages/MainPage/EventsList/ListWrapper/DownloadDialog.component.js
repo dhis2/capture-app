@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import { Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
 import Button from '../../../../Buttons/Button.component';
 import { getApi } from '../../../../../d2/d2Instance';

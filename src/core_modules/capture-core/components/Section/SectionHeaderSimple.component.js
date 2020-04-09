@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 
 import IconButton from '@material-ui/core/IconButton';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
@@ -83,7 +83,7 @@ class SectionHeaderSimple extends Component<Props> {
                                         title={this.props.isCollapsed ? 'Åpne' : 'Lukk'}
                                         onClick={this.handleChangeCollapse}
                                     >
-                                        {this.props.isCollapsed ? <KeyboardArrowDown/> : <KeyboardArrowUp/>}
+                                        {this.props.isCollapsed ? <KeyboardArrowDown /> : <KeyboardArrowUp />}
                                     </IconButton>
                                 );
                             }

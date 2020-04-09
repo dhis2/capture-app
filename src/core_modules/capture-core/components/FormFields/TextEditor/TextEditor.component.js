@@ -3,7 +3,7 @@
 import * as React from 'react';
 import RichTextEditor from 'react-rte';
 import InputLabel from '@material-ui/core/InputLabel';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 
 type Props = {
     label?: ?string,

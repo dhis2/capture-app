@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import type { VirtualizedOptionConfig } from './OptionsSelectVirtualized.component';
 
 const getStyles = () => ({

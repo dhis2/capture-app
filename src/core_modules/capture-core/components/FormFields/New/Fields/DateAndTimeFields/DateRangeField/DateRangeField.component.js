@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { withTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import { DateRangeField as UIDateRangeField } from 'capture-ui';
 import withCalendarProps from '../../../HOC/withCalendarProps';
 
@@ -56,4 +57,4 @@ const DateRangeField = (props: Props) => {
     );
 };
 
-export default withTheme()(withCalendarProps()(withStyles(getStyles)(DateRangeField)));
+export default withTheme(withCalendarProps()(withStyles(getStyles)(DateRangeField)));

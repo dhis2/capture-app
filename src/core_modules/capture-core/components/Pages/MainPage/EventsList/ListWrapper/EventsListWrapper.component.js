@@ -1,19 +1,14 @@
 // @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-
+import { withStyles } from '@material-ui/core';
 import elementTypes from '../../../../../metaData/DataElement/elementTypes';
-
 import withFilterSelectors from '../FilterSelectors/withFilterSelectors';
 import { ListPagination } from '../Pagination';
-
 import ColumnSelector from './ColumnSelector.component';
-
 import OptionSet from '../../../../../metaData/OptionSet/OptionSet';
 import withCustomEndCell from '../withCustomEndCell';
 import eventContentMenuSettings from '../EventContentMenu/eventContentMenuSettings';
 import DialogLoadingMask from '../../../../LoadingMasks/DialogLoadingMask.component';
-
 import List from '../../../../List/OnlineList/List.component';
 import ListWrapperMenu from './ListWrapperMenu.component';
 

@@ -57,4 +57,4 @@ class NewEnrollmentRelationship extends Component<Props> {
 }
 
 // $FlowFixMe
-export default withTheme()(NewEnrollmentRelationship);
+export default withTheme(NewEnrollmentRelationship);

@@ -6,13 +6,10 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { withStyles } from '@material-ui/core/styles';
-
+import { withStyles } from '@material-ui/core';
 import RadioOffIcon from '@material-ui/icons/PanoramaFishEye';
 import RadioOnIcon from '@material-ui/icons/CheckCircle';
-
 import { orientations } from './singleSelectBoxes.const';
-
 import OptionSet from '../../../../metaData/OptionSet/OptionSet';
 import Option from '../../../../metaData/OptionSet/Option';
 

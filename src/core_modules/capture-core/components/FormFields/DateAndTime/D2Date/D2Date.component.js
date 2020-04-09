@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 
 import D2TextField from '../../Generic/D2TextField.component';
 import D2DatePopup from './D2DatePopup.component';

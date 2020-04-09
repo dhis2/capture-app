@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator';
 import i18n from '@dhis2/d2-i18n';
 

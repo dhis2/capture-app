@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper';
 
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import EditEventDataEntry from './DataEntry/EditEventDataEntry.container';
 import Button from '../../Buttons/Button.component';

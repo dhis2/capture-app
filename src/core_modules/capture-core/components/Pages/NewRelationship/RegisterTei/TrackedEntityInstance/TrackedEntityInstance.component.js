@@ -52,4 +52,4 @@ class RelationshipTrackedEntityInstance extends Component<Props> {
 }
 
 // $FlowFixMe
-export default withTheme()(RelationshipTrackedEntityInstance);
+export default withTheme(RelationshipTrackedEntityInstance);

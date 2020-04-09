@@ -2,7 +2,7 @@
 /* eslint-disable class-methods-use-this */
 
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import classNames from 'classnames';
 
 import VirtualizedSelect from 'react-virtualized-select';

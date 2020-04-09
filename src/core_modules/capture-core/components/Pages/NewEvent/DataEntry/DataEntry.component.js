@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { withTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
 import i18n from '@dhis2/d2-i18n';
 import { canViewOtherUsers } from '../../../../d2';
@@ -606,4 +607,4 @@ class NewEventDataEntry extends Component<Props> {
 }
 
 
-export default withStyles(getStyles)(withTheme()(NewEventDataEntry));
+export default withStyles(getStyles)(withTheme(NewEventDataEntry));

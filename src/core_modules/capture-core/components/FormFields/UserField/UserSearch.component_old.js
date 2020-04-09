@@ -6,7 +6,7 @@ import Autosuggest from 'react-autosuggest';
 import parse from 'autosuggest-highlight/parse';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { DebounceField, TextField } from 'capture-ui';
 import { makeCancelablePromise } from 'capture-core-utils';
@@ -21,7 +21,7 @@ const styles = (theme: Theme) => ({
     suggestionsContainerOpen: {
         position: 'absolute',
         zIndex: 1000,
-        marginTop: theme.spacing.unit,
+        marginTop: theme.spacing(1),
         left: 0,
         right: 0,
     },
@@ -188,7 +188,7 @@ class UserSearch extends React.Component<Props, State> {
 
     onBlur = (event) => {
         if (event.relatedTarget && event.relatedTarget.className !== 'Username__listitem') {
-            return;
+
         }
     }
 

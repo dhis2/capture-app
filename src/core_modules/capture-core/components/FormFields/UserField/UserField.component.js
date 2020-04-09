@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import Search from './Search.component';
 import Selected from './Selected.component';
 import type { User } from './types';

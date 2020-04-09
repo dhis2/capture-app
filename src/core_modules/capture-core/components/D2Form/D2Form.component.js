@@ -1,9 +1,8 @@
 // @flow
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-
 import D2SectionContainer from './D2Section.container';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import Section from '../../metaData/RenderFoundation/Section';

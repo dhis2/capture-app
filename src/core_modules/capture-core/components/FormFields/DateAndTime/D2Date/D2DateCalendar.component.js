@@ -1,7 +1,8 @@
 // @flow
 /* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { withTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import InfiniteCalendar from 'react-infinite-calendar';
 import { capitalizeFirstLetter } from 'capture-core-utils/string';
 
@@ -157,4 +158,4 @@ class D2DateCalendar extends Component<Props> {
     }
 }
 
-export default withTheme()(withStyles(styles)(D2DateCalendar));
+export default withTheme(withStyles(styles)(D2DateCalendar));

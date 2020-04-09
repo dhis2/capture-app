@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import getEventDateValidatorContainers from '../../../EditEvent/DataEntry/fieldValidators/eventDate.validatorContainersGetter';
 import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';

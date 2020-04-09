@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import Warning from '@material-ui/icons/Warning';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import getDataEntryKey from '../common/getDataEntryKey';
 import withDataEntryOutput from './withDataEntryOutput';

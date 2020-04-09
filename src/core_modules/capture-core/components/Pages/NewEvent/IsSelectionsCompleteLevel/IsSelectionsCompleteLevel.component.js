@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import DataEntrySelectionsComplete from '../SelectionsComplete/SelectionsComplete.container';
 import DataEntrySelectionsIncomplete from '../SelectionsIncomplete/DataEntrySelectionsIncomplete.container';
 import { TrackerProgramHandler } from '../../../TrackerProgramHandler';

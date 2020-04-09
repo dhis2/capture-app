@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { withTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import { TextRangeField as UITextRangeField } from 'capture-ui';
 
 const getStyles = (theme: Theme) => ({
@@ -55,4 +56,4 @@ const TextRangeField = (props: Props) => {
     );
 };
 
-export default withTheme()(withStyles(getStyles)(TextRangeField));
+export default withTheme(withStyles(getStyles)(TextRangeField));

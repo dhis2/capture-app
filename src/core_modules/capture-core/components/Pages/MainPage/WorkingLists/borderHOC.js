@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import { fade, lighten } from '@material-ui/core/styles/colorManipulator';
 
 const getBorder = (theme: Theme) => {

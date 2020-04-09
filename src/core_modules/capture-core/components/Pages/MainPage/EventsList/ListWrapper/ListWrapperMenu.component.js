@@ -1,8 +1,12 @@
 // @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
-import { IconButton, Paper, MenuList, MenuItem, Divider } from '@material-ui/core';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+import Paper from '@material-ui/core/Paper';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
 import { MoreHoriz } from '@material-ui/icons';
 import Popper from '../../../../Popper/Popper.component';
 import DownloadDialog from './DownloadDialog.container';

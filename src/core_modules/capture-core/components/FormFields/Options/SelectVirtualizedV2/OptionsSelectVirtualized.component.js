@@ -3,7 +3,7 @@
 
 import * as React from 'react';
 import debounce from 'lodash.debounce';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import VirtualizedSelect from 'react-virtualized-select';
 
 import 'react-select/dist/react-select.css';

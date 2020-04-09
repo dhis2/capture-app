@@ -1,18 +1,14 @@
 // @flow
 import React, { Component } from 'react';
-
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import update from 'react-addons-update';
-
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-
 import i18n from '@dhis2/d2-i18n';
-
 import DragDropListItem from './DragDropListItem.component';
 
 type Props = {

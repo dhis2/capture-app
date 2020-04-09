@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import i18n from '@dhis2/d2-i18n';
 import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../metaData';

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import { DividerHorizontal as Divider } from 'capture-ui';
 
 const getStyles = (theme: Theme) => ({

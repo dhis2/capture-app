@@ -4,7 +4,7 @@ import './app.css';
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import { ConnectedRouter } from 'connected-react-router';
 import { withRouter } from 'react-router';
 import type { HashHistory } from 'history/createHashHistory';
@@ -49,20 +49,11 @@ class App extends React.Component<Props> {
         return (
             <React.Fragment>
                 <CssBaseline />
-                <Provider 
-                    store={this.props.store}
-                >
-                    <ConnectedRouter 
-                        history={this.props.history}
-                    >
-                        <MuiThemeProvider
-                            theme={theme}
-                        >
-                            <D2UIApp>
-                                <DataProvider
-                                    baseUrl={process.env.REACT_APP_DHIS2_BASE_URL}
-                                    apiVersion=""
-                                >
+                <Provider store={this.props.store}>
+                    <ConnectedRouter history={this.props.history}>
+                        <MuiThemeProvider theme={theme}>
+                            <D2UIApp >
+                                <DataProvider baseUrl={process.env.REACT_APP_DHIS2_BASE_URL} apiVersion="">
                                     <AppContentsRouterLoader />
                                     <FeedbackBar />
                                 </DataProvider>

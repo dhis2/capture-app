@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import { Button } from '../../../Buttons';
 import i18n from '@dhis2/d2-i18n';
 import DataEntry from './DataEntry/DataEntry.container';

@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable react/no-multi-comp */
 import * as React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 
 import D2Form from '../D2Form/D2Form.component';
 import placements from './constants/placements.const';
@@ -21,7 +21,7 @@ const styles = theme => ({
         paddingTop: theme.typography.pxToRem(10),
     },
     button: {
-        paddingRight: theme.spacing.unit * 2,
+        paddingRight: theme.spacing(2),
     },
     horizontalFormInnerContainer: {
         display: 'flex',

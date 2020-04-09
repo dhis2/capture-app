@@ -10,7 +10,7 @@ import MoreHoriz from '@material-ui/icons/MoreHoriz';
 import IconButton from '@material-ui/core/IconButton';
 import Delete from '@material-ui/icons/Delete';
 import i18n from '@dhis2/d2-i18n';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles } from '@material-ui/core';
 
 type Props = {
     classes: {

@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import elementTypes from '../../../metaData/DataElement/elementTypes';
 import D2TrueFalse from '../../FormFields/Generic/D2TrueFalse.component';
 import { orientations } from '../../FormFields/Options/MultiSelectBoxes/multiSelectBoxes.const';

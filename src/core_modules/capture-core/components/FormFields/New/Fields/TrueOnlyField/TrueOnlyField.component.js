@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { TrueOnlyField as UITrueOnlyField } from 'capture-ui';
 

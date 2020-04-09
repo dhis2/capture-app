@@ -1,15 +1,9 @@
 // @flow
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, ClickAwayListener, Grow, Paper, MenuList, MenuItem } from '@material-ui/core';
 import ArrowDownwardIcon from '@material-ui/icons/KeyboardArrowDown';
 import ArrowUpwardIcon from '@material-ui/icons/KeyboardArrowUp';
-
 import { Manager, Popper, Reference } from 'react-popper';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import MenuList from '@material-ui/core/MenuList';
-import MenuItem from '@material-ui/core/MenuItem';
 import i18n from '@dhis2/d2-i18n';
 import Button from '../../../../../Buttons/Button.component';
 

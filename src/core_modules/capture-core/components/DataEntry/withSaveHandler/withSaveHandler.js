@@ -8,15 +8,12 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { connect } from 'react-redux';
-
 import i18n from '@dhis2/d2-i18n';
-
 import { errorCreator } from 'capture-core-utils';
 import { validationStrategies } from '../../../metaData/RenderFoundation/renderFoundation.const';
 import { saveValidationFailed, saveAbort } from '../actions/dataEntry.actions';
 import getDataEntryKey from '../common/getDataEntryKey';
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
-
 import { MessagesDialogContents } from './MessagesDialogContents';
 import { makeGetWarnings, makeGetErrors } from './withSaveHandler.selectors';
 
