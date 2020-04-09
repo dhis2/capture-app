@@ -108,7 +108,7 @@ import {
 import {
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
-} from 'capture-core/components/QuickSelector';
+} from 'capture-core/components/QuickSelector/epics/orgUnitList.epics';
 import {
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
 } from 'capture-core/components/Pages/epics/resetProgramAfterSettingOrgUnitIfApplicable.epic';
