@@ -57,19 +57,19 @@ export const updateEventListEpic = (action$: InputObservable, store: ReduxStore)
             const state = store.value;
             const { listId, queryArgs } = action.payload;
             const updatePromise = updateEventWorkingListAsync(listId, queryArgs, state);
-            return from(updatePromise)
-                .takeUntil(
+            return from(updatePromise).pipe(
+                takeUntil(
                     action$.pipe(
                         ofType(actionTypes.EVENT_LIST_UPDATE_CANCEL),
                         filter(cancelAction => cancelAction.payload.listId === listId),
                     ),
-                )
-                .takeUntil(
+                ),
+                takeUntil(
                     action$.pipe(
                         ofType(actionTypes.EVENT_LIST_INIT_CANCEL),
                         filter(cancelAction => cancelAction.payload.listId === listId),
                     ),
-                );
+                ));
         }));
 
 // TODO: --------------------------------- REFACTOR -----------------------------------
