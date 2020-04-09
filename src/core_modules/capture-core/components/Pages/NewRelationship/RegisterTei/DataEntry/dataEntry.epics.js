@@ -54,8 +54,9 @@ export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObserv
                     state.generatedUniqueValuesCache[DATA_ENTRY_ID],
                 );
 
-                return from(openEnrollmentPromise)
-                    .takeUntil(action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE));
+                return from(openEnrollmentPromise).pipe(
+                  takeUntil(action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE))
+                )
             }
 
             if (orgUnit) {
