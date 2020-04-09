@@ -24,7 +24,7 @@ export const getEventOpeningFromEventListEpic = (action$: InputObservable, store
         ofType(eventListActionTypes.OPEN_EDIT_EVENT_PAGE),
         map((action) => {
             const eventId = action.payload;
-            const state = store.getState();
+            const state = store.value;
             const event = state.events[eventId];
             const values = state.eventsValues[eventId];
             const eventContainer = {
@@ -42,7 +42,7 @@ export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore)
         ofType(editEventActionTypes.EDIT_EVENT_FROM_URL),
         switchMap((action) => {
             const eventId = action.payload.eventId;
-            const prevProgramId = store.getState().currentSelections.programId; // used to clear columns and filters in eventlist if program id is changed
+            const prevProgramId = store.value.currentSelections.programId; // used to clear columns and filters in eventlist if program id is changed
             return getEvent(eventId)
                 .then((eventContainer) => {
                     if (!eventContainer) {

@@ -70,7 +70,7 @@ export const calculateSelectionsCompletenessEpic = (action$: InputObservable, st
             crossPageActionTypes.AFTER_SETTING_ORG_UNIT_DO_CATEGORIES_RESET,
         ),
         map((action) => {
-            const isComplete = calculateCompleteStatus(store.getState().currentSelections);
+            const isComplete = calculateCompleteStatus(store.value.currentSelections);
             return selectionsCompletenessCalculated(
                 isComplete,
                 (action.payload && action.payload.triggeringActionType) || action.type,

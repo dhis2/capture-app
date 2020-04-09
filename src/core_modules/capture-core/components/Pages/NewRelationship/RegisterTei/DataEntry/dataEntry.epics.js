@@ -29,7 +29,7 @@ export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObserv
             registrationSectionActionTypes.PROGRAM_FILTER_CLEAR,
         ),
         switchMap(() => {
-            const state = store.getState();
+            const state = store.value;
             const { programId, orgUnit } = state.newRelationshipRegisterTei;
             const TETTypeId = state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId;
 

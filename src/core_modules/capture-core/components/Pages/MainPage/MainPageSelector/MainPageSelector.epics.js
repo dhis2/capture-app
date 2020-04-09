@@ -26,7 +26,7 @@ export const mainPageSelectorUpdateURLEpic = (action$: InputObservable, store: R
             mainPageSelectorActionTypes.SET_PROGRAM_ID, mainPageSelectorActionTypes.RESET_PROGRAM_ID,
             mainPageSelectorBatchActionTypes.START_AGAIN, mainPageSelectorBatchActionTypes.RESET_PROGRAM_AND_CATEGORY_OPTION),
         map(() => {
-            const state = store.getState();
+            const state = store.value;
             const { programId, orgUnitId } = state.currentSelections;
             const args = getArguments(programId, orgUnitId);
             return push(`/${args}`);

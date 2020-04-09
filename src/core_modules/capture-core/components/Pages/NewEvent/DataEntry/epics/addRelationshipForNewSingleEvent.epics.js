@@ -45,7 +45,7 @@ export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, s
     action$.pipe(
         ofType(newEventNewRelationshipActionTypes.ADD_NEW_EVENT_RELATIONSHIP),
         map((action) => {
-            const state = store.getState();
+            const state = store.value;
             const existingRelationships = state.dataEntriesRelationships[dataEntryKey] || [];
             const payload = action.payload;
             const entity = payload.entity;

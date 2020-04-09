@@ -20,7 +20,7 @@ export const initEventListEpic = (action$: InputObservable, store: ReduxStore) =
             actionTypes.EVENT_LIST_INIT,
         ),
         concatMap((action) => {
-            const state = store.getState();
+            const state = store.value;
             const { programId, orgUnitId, categories } = state.currentSelections;
             const lastTransaction = state.offline.lastTransaction;
             const { selectedTemplate, defaultConfig, listId } = action.payload;
@@ -54,7 +54,7 @@ export const updateEventListEpic = (action$: InputObservable, store: ReduxStore)
             actionTypes.EVENT_LIST_UPDATE,
         ),
         concatMap((action) => {
-            const state = store.getState();
+            const state = store.value;
             const { listId, queryArgs } = action.payload;
             const updatePromise = updateEventWorkingListAsync(listId, queryArgs, state);
             return from(updatePromise)

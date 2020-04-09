@@ -11,7 +11,7 @@ export default (store: ReduxStore) => (next: Next) => (action: ReduxAction<any, 
             value: action.payload.value,
             valid: action.payload.uiState.valid,
         };
-        const actions = getRulesActionsOnUpdate(action.payload.formId, store.getState(), action.payload.formId, action.payload.dataEntryId, fieldData);
+        const actions = getRulesActionsOnUpdate(action.payload.formId, store.value, action.payload.formId, action.payload.dataEntryId, fieldData);
         next(action);
     } else {
         next(action);

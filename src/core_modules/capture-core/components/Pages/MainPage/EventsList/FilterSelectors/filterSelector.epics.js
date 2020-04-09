@@ -12,7 +12,7 @@ export const includeFiltersWithValueAfterColumnSortingEpic = (action$: InputObse
         ofType(columnSelectorActionTypes.UPDATE_WORKINGLIST_ORDER),
         // eslint-disable-next-line complexity
         map(() => {
-            const state = store.getState();
+            const state = store.value;
             const listId = state.workingListsTemplates.eventList.currentListId;
             const appliedFilters = (
                 state.workingListsMeta &&

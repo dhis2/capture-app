@@ -28,7 +28,7 @@ export const addNoteForEditSingleEventEpic = (action$: InputObservable, store: R
     action$.pipe(
         ofType(editEventDataEntryActionTypes.REQUEST_ADD_NOTE_FOR_EDIT_SINGLE_EVENT),
         map((action) => {
-            const state = store.getState();
+            const state = store.value;
             const payload = action.payload;
             const eventId = state.dataEntries[payload.dataEntryId].eventId;
             const userName = getCurrentUser().username;

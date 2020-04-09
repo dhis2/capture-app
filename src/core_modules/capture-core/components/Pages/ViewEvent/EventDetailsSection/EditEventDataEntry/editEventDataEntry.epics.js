@@ -33,7 +33,7 @@ export const loadEditEventDataEntryEpic = (action$: ActionsObservable, store: Re
     action$.pipe(
         ofType(eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY),
         map(() => {
-            const state = store.getState();
+            const state = store.value;
             const loadedValues = state.viewEventPage.loadedValues;
             const eventContainer = loadedValues.eventContainer;
             const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
@@ -58,7 +58,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
     action$.pipe(
         ofType(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY),
         map((action) => {
-            const state = store.getState();
+            const state = store.value;
             const payload = action.payload;
             const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.itemId);
             const eventId = state.dataEntries[payload.dataEntryId].eventId;
@@ -120,13 +120,13 @@ export const saveEditedEventFailedEpic = (action$: InputObservable, store: Redux
         ofType(actionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED),
         filter((action) => {
             // Check if current view event is failed event
-            const state = store.getState();
+            const state = store.value;
             const viewEventPage = state.viewEventPage || {};
             return viewEventPage.eventId && viewEventPage.eventId === action.meta.eventId;
         }),
         map(() => {
             // Revert event container if previous exists
-            const state = store.getState();
+            const state = store.value;
             const viewEventPage = state.viewEventPage;
             const eventContainer = viewEventPage.loadedValues.eventContainer;
             const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];

@@ -53,7 +53,7 @@ export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxSt
     action$.pipe(
       ofType(viewEventNotesActionTypes.REQUEST_SAVE_EVENT_NOTE),
         map((action) => {
-            const state = store.getState();
+            const state = store.value;
             const payload = action.payload;
 
             const eventId = state.viewEventPage.eventId;

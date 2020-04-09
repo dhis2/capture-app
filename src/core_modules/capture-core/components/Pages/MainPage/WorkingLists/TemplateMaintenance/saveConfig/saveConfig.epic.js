@@ -7,7 +7,7 @@ export const saveConfigEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(requestConfigSave),
         concatMap(() => {
-            const state = store.getState();
+            const state = store.value;
             const programId = state.currentSelections.programId;
             const {
                 currentListId: listId,

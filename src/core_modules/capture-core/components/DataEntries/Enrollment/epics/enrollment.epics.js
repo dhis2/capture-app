@@ -27,7 +27,7 @@ type Context = {
 
 const runRulesOnEnrollmentUpdate =
     (store: ReduxStore, context: Context, fieldData?: ?FieldData, searchActions?: any = []) => {
-        const state = store.getState();
+        const state = store.value;
         const { programId, dataEntryId, itemId, orgUnit, uid } = context;
         const formId = getDataEntryKey(dataEntryId, itemId);
         let trackerProgram: TrackerProgram;

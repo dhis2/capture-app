@@ -93,7 +93,7 @@ export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxSt
     action$.pipe(
         ofType(actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE),
         switchMap((action) => {
-            const state = store.getState();
+            const state = store.value;
             const { pageNumber, searchId } = action.payload;
             const currentTeiSearch = state.teiSearch[searchId];
             const searchTeiPromise = searchTei(
@@ -119,7 +119,7 @@ export const teiSearchEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_SEARCH_TEI),
         switchMap((action) => {
-            const state = store.getState();
+            const state = store.value;
             const { formId, searchGroupId, searchId } = action.payload;
             const searchTeiPromise = searchTei(state, searchId, formId, searchGroupId);
             return from(searchTeiPromise).pipe(
@@ -139,7 +139,7 @@ export const teiSearchSetProgramEpic = (action$: InputObservable, store: ReduxSt
     action$.pipe(
         ofType(programSelectorActionTypes.TEI_SEARCH_START_SET_PROGRAM),
         map((action) => {
-            const state = store.getState();
+            const state = store.value;
             const searchId = action.payload.searchId;
             const programId = action.payload.programId;
             let trackedEntityTypeId = state.teiSearch[searchId].selectedTrackedEntityTypeId;
@@ -169,7 +169,7 @@ export const teiNewSearchEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(actionTypes.TEI_NEW_SEARCH),
         map((action) => {
-            const state = store.getState();
+            const state = store.value;
             const searchId = action.payload.searchId;
             const currentTeiSearch = state.teiSearch[searchId];
 

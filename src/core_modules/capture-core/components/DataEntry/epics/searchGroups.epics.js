@@ -119,7 +119,7 @@ export const getFilterSearchGroupForSearchEpic =
                     const outputActions = potentialSearchActions
                         .map((sa) => {
                             const { dataEntryKey, searchGroup } = sa.payload;
-                            const state = store.getState();
+                            const state = store.value;
                             const formValues = state.formsValues[dataEntryKey] || {};
                             const previousValues = (state.dataEntriesSearchGroupsPreviousValues[dataEntryKey] &&
                                 state.dataEntriesSearchGroupsPreviousValues[dataEntryKey][searchGroup.id]) || {};
@@ -168,7 +168,7 @@ export const getFilterSearchGroupForSearchEpic =
                             }
 
                             const { dataEntryKey, searchGroup, uid, contextProps } = sa.payload;
-                            const state = store.getState();
+                            const state = store.value;
                             const values = state.formsValues[dataEntryKey];
                             return startSearchGroupCountSearch(
                                 searchGroup,
@@ -196,7 +196,7 @@ export const getExecuteSearchForSearchGroupEpic =
                 filter(actions => actions && actions.length > 0),
                 mergeMap(searchActions => searchActions.map((searchAction) => {
                     const { dataEntryKey, contextProps, searchGroup, uid } = searchAction.payload;
-                    const formValues = store.getState().formsValues[dataEntryKey];
+                    const formValues = store.value.formsValues[dataEntryKey];
                     if (!saveWaitUids[dataEntryKey]) {
                         saveWaitUids[dataEntryKey] = {};
                     }

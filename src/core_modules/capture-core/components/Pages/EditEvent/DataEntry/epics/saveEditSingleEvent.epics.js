@@ -19,7 +19,7 @@ export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =
     action$.pipe(
         ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         map((action) => {
-            const state = store.getState();
+            const state = store.value;
             const payload = action.payload;
             const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.itemId);
             const eventId = state.dataEntries[payload.dataEntryId].eventId;
@@ -64,7 +64,7 @@ export const saveEditEventLocationChangeEpic = (action$: InputObservable, store:
     action$.pipe(
         ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {
-            const state = store.getState();
+            const state = store.value;
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
             return push(`/programId=${programId}&orgUnitId=${orgUnitId}`);

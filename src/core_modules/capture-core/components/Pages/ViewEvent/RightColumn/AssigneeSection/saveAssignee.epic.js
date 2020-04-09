@@ -11,7 +11,7 @@ export const saveAssigneeEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(actionTypes.VIEW_EVENT_ASSIGNEE_SET),
         map(() => {
-            const state = store.getState();
+            const state = store.value;
             const eventId = state.viewEventPage.eventId;
             const eventContainer = state.viewEventPage.loadedValues.eventContainer;
             const { event: clientMainValues, values: clientValues } = eventContainer;

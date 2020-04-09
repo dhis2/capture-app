@@ -51,7 +51,7 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
             const requestPage = isChangePage ? action.payload.page : 1;
 
             const dataEntryId = 'relationship';
-            const state = store.getState();
+            const state = store.value;
             const { programId, orgUnit } = state.newRelationshipRegisterTei;
             const tetId = state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId;
             const dataEntryKey = getDataEntryKey(dataEntryId, state.dataEntries[dataEntryId].itemId);

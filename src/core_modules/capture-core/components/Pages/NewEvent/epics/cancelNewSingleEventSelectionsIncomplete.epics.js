@@ -23,7 +23,7 @@ export const cancelNewEventIncompleteSelectionsLocationChangeEpic = (action$: In
     action$.pipe(
         ofType(dataEntrySelectionsIncompleteActionTypes.CANCEL_NEW_EVENT_FROM_INCOMPLETE_SELECTIONS_RETURN_TO_MAIN_PAGE),
         map(() => {
-            const state = store.getState();
+            const state = store.value;
             const { programId, orgUnitId } = state.currentSelections;
             const args = getArguments(programId, orgUnitId);
             return push(`/${args}`);
