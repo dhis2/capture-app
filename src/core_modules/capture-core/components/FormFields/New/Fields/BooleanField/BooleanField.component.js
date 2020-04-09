@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core';
-import { fade } from '@material-ui/core/styles/colorManipulator';
+import { fade } from '@material-ui/core/styles';
 import { BooleanField as UIBooleanField } from 'capture-ui';
 
 const getStyles = (theme: Theme) => ({

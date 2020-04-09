@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router'; //eslint-disable-line
 import { HeaderBar } from '@dhis2/ui-widgets';
 import { withStyles } from '@material-ui/core';
-
 import NetworkStatusBadge from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.component';
-
 import { NewEventPage } from 'capture-core/components/Pages/NewEvent';
 import { NewEnrollmentPage } from 'capture-core/components/Pages/NewEnrollment';
 import MainPageEntry from 'capture-core/components/Pages/MainPage/MainPageEntry/MainPageEntry.container';

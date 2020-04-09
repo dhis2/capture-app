@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { fade, lighten } from '@material-ui/core/styles/colorManipulator';
+import { fade, lighten } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import TemplateSelectorChip from './TemplateSelectorChip.component';

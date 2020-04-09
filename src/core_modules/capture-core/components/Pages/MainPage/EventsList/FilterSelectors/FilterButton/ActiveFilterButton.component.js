@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core';
-import { lighten } from '@material-ui/core/styles/colorManipulator';
+import { lighten } from '@material-ui/core/styles';
 import createSvgIcon from '@material-ui/icons/utils/createSvgIcon';
 import Tooltip from '@material-ui/core/Tooltip';
 import i18n from '@dhis2/d2-i18n';

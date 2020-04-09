@@ -1,5 +1,5 @@
 // @flow
-import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator';
+import { darken, fade, lighten } from '@material-ui/core/styles';
 
 export default (theme: Theme) => ({
     accentColor: theme.palette.secondary.main,
