@@ -27,7 +27,7 @@
     "history": "^4.9.0",
     "leaflet": "^1.5.1",
     "leaflet-draw": "^1.0.4",
-    "lodash.debounce": "^4.0.8",
+    "lodash-es": "^4.17.15",
     "loglevel": "^1.6.3",
     "moment": "^2.22.1",
     "prop-types": "^15.7.2",

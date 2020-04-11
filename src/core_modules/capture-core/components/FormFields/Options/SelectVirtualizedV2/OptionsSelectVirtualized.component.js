@@ -2,7 +2,7 @@
 /* eslint-disable class-methods-use-this */
 
 import * as React from 'react';
-import debounce from 'lodash.debounce';
+import { debounce } from 'lodash-es';
 import { withStyles } from '@material-ui/core';
 import VirtualizedSelect from 'react-virtualized-select';
 
