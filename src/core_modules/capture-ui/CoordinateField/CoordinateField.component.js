@@ -93,8 +93,8 @@ export default class D2Coordinate extends React.Component<Props, State> {
     }
 
     onMapPositionChange = (mapCoordinates: any) => {
-        const latlng = mapCoordinates.latlng;
-        this.setMapPosition([latlng.lat, latlng.lng], mapCoordinates.target.getZoom());
+        const { lat, lng } = mapCoordinates.latlng;
+        this.setMapPosition([this.toSixDecimal(lat), this.toSixDecimal(lng)], mapCoordinates.target.getZoom());
     }
 
     setMapPosition = (position: Array<any>, zoom: number) => {
