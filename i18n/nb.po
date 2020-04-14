@@ -19,7 +19,7 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr ""
+msgstr "Stolpe"
 
 msgid "Cancel"
 msgstr "Avbryt"
@@ -184,7 +184,7 @@ msgid "Syncing"
 msgstr ""
 
 msgid "Area"
-msgstr ""
+msgstr "Areal"
 
 msgid "Basic info"
 msgstr ""
@@ -250,7 +250,7 @@ msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr ""
+msgstr "i"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -330,7 +330,7 @@ msgid "Program"
 msgstr "Program"
 
 msgid "Select program"
-msgstr ""
+msgstr "Valgt program"
 
 msgid "No programs available."
 msgstr ""
