@@ -642,7 +642,7 @@ msgid "Selected Program"
 msgstr ""
 
 msgid "Select program"
-msgstr "Valgt program"
+msgstr "Velg program"
 
 msgid "No programs available."
 msgstr ""
