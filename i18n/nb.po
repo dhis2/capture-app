@@ -19,7 +19,7 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
-msgstr ""
+msgstr "Stolpe"
 
 msgid "This value is validating"
 msgstr ""
@@ -88,7 +88,7 @@ msgid "Checking..."
 msgstr ""
 
 msgid "Area"
-msgstr ""
+msgstr "Areal"
 
 msgid "Coordinate"
 msgstr "Koordinater"
@@ -387,7 +387,7 @@ msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr ""
+msgstr "i"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -564,7 +564,7 @@ msgid "Selected Program"
 msgstr ""
 
 msgid "Select program"
-msgstr ""
+msgstr "Valgt program"
 
 msgid "No programs available."
 msgstr ""
