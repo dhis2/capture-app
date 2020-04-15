@@ -1,6 +1,7 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
 import { moment } from 'capture-core-utils/moment';
+import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { mainOptionKeys, mainOptionTranslatedTexts } from './mainOptions';
 import { dataElementTypes as elementTypes } from '../../../metaData';
 import { convertValue as convertToClientValue } from '../../../converters/formToClient';
@@ -13,7 +14,7 @@ type Value = {
     to?: ?string,
 }
 
-const formatDateForFilterRequest = (dateMoment: moment$Moment) => dateMoment.format('YYYY-MM-DD');
+const formatDateForFilterRequest = (dateMoment: moment$Moment) => getFormattedStringFromMomentUsingEuropeanGlyphs(dateMoment, 'YYYY-MM-DD');
 
 const convertDateFilterValueToClientValue = (formValue: string): string =>
     // $FlowFixMe
