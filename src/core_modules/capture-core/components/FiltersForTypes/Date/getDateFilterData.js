@@ -1,19 +1,17 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
 import { moment } from 'capture-core-utils/moment';
+import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import { mainOptionKeys, mainOptionTranslatedTexts } from './mainOptions';
 import { dataElementTypes as elementTypes } from '../../../metaData';
 import { convertValue as convertToClientValue } from '../../../converters/formToClient';
 import { convertValue as convertToFormValue } from '../../../converters/clientToForm';
-
 
 type Value = {
     main: string,
     from?: ?string,
     to?: ?string,
 }
-
-const formatDateForFilterRequest = (dateMoment: moment$Moment) => dateMoment.format('YYYY-MM-DD');
 
 const convertDateFilterValueToClientValue = (formValue: string): string =>
     // $FlowFixMe
@@ -73,8 +71,8 @@ const mapMainSelectionsToRequests = {
         const endDate = startDate;
 
         return [
-            `ge:${formatDateForFilterRequest(startDate)}`,
-            `le:${formatDateForFilterRequest(endDate)}`,
+            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
+            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
         ];
     },
     [mainOptionKeys.THIS_WEEK]: () => {
@@ -82,8 +80,8 @@ const mapMainSelectionsToRequests = {
         const endDate = moment().endOf('week');
 
         return [
-            `ge:${formatDateForFilterRequest(startDate)}`,
-            `le:${formatDateForFilterRequest(endDate)}`,
+            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
+            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
         ];
     },
     [mainOptionKeys.THIS_MONTH]: () => {
@@ -91,8 +89,8 @@ const mapMainSelectionsToRequests = {
         const endDate = moment().endOf('month');
 
         return [
-            `ge:${formatDateForFilterRequest(startDate)}`,
-            `le:${formatDateForFilterRequest(endDate)}`,
+            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
+            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
         ];
     },
     [mainOptionKeys.THIS_YEAR]: () => {
@@ -100,8 +98,8 @@ const mapMainSelectionsToRequests = {
         const endDate = moment().endOf('year');
 
         return [
-            `ge:${formatDateForFilterRequest(startDate)}`,
-            `le:${formatDateForFilterRequest(endDate)}`,
+            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
+            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
         ];
     },
     [mainOptionKeys.LAST_WEEK]: () => {
@@ -109,8 +107,8 @@ const mapMainSelectionsToRequests = {
         const endDate = moment().subtract(1, 'weeks').endOf('week');
 
         return [
-            `ge:${formatDateForFilterRequest(startDate)}`,
-            `le:${formatDateForFilterRequest(endDate)}`,
+            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
+            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
         ];
     },
     [mainOptionKeys.LAST_MONTH]: () => {
@@ -118,8 +116,8 @@ const mapMainSelectionsToRequests = {
         const endDate = moment().subtract(1, 'months').endOf('month');
 
         return [
-            `ge:${formatDateForFilterRequest(startDate)}`,
-            `le:${formatDateForFilterRequest(endDate)}`,
+            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
+            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
         ];
     },
     [mainOptionKeys.LAST_3_MONTHS]: () => {
@@ -127,20 +125,20 @@ const mapMainSelectionsToRequests = {
         const endDate = moment().subtract(1, 'months').endOf('month');
 
         return [
-            `ge:${formatDateForFilterRequest(startDate)}`,
-            `le:${formatDateForFilterRequest(endDate)}`,
+            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
+            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
         ];
     },
     [mainOptionKeys.CUSTOM_RANGE]: (fromValue: ?string, toValue: ?string) => {
         const requestData = [];
         if (fromValue) {
             const fromClientValue: string = convertDateFilterValueToClientValue(fromValue);
-            const fromFilterRequest = formatDateForFilterRequest(moment(fromClientValue));
+            const fromFilterRequest = getFormattedStringFromMomentUsingEuropeanGlyphs(moment(fromClientValue));
             requestData.push(`ge:${fromFilterRequest}`);
         }
         if (toValue) {
             const toClientValue: string = convertDateFilterValueToClientValue(toValue);
-            const toFilterRequest = formatDateForFilterRequest(moment(toClientValue));
+            const toFilterRequest = getFormattedStringFromMomentUsingEuropeanGlyphs(moment(toClientValue));
             requestData.push(`le:${toFilterRequest}`);
         }
         return requestData;
