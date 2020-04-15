@@ -1,6 +1,7 @@
 // @flow
 import { ActionsObservable } from 'redux-observable';
 import { batchActions } from 'redux-batched-actions';
+import { getFormattedStringFromMomentUsingEuropeanGlyphs } from '../../../../../utils/date';
 import { convertValue as convertToServerValue } from '../../../../../converters/clientToServer';
 import { getProgramAndStageFromEvent } from '../../../../../metaData';
 import { openEventForEditInDataEntry } from '../../../EditEvent/DataEntry/editEventDataEntry.actions';
@@ -74,7 +75,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
             const mainDataServerValues: Object = convertMainEventClientToServerWithKeysMap(mainDataClientValues);
 
             if (mainDataServerValues.status === 'COMPLETED' && !prevEventMainData.completedDate) {
-                mainDataServerValues.completedDate = moment().format('YYYY-MM-DD');
+                mainDataServerValues.completedDate = getFormattedStringFromMomentUsingEuropeanGlyphs(moment());
             }
 
             const prevEventContainer = state.viewEventPage.eventContainer;
