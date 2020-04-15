@@ -24,7 +24,7 @@ You can find a tutorial on how to install `git` on your machine [here](https://w
 
 #### Yarn 
 
-You can find how to install `yarn` on your machine [here](https://classic.yarnpkg.com/en/docs/install/).
+You can install `yarn` on your machine [here](https://classic.yarnpkg.com/en/docs/install/).
 
 ### Installing
 
