@@ -56,7 +56,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
         };
     }
 
-    toSixDecimal = value => parseFloat(value).toFixed(6)
+    toSixDecimal = value => parseFloat(value) && parseFloat(value).toFixed(6)
 
     handleBlur = (key: string, value: any) => {
         const newValue = { ...this.props.value, [key]: this.toSixDecimal(value) };
