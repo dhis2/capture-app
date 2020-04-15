@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
+import { getFormattedStringFromMomentUsingEuropeanGlyphs } from '../../../utils/date';
 import SelectBoxes from '../../FormFields/Options/SingleSelectBoxes/SingleSelectBoxes.component';
 import { orientations } from '../../FormFields/Options/SingleSelectBoxes/singleSelectBoxes.const';
 import OptionSet from '../../../metaData/OptionSet/OptionSet';
@@ -115,7 +116,7 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
     ]);
 
     static formatDateForFilterRequest(dateMoment: moment$Moment) {
-        return dateMoment.format('YYYY-MM-DD');
+        return getFormattedStringFromMomentUsingEuropeanGlyphs(dateMoment, 'YYYY-MM-DD');
     }
 
     static convertDateFilterValueToClientValue(formValue: string): string {

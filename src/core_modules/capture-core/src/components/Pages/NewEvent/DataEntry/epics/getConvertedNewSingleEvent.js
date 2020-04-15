@@ -1,5 +1,6 @@
 // @flow
 import moment from '../../../../../utils/moment/momentResolver';
+import { getFormattedStringFromMomentUsingEuropeanGlyphs } from '../../../../../utils/date';
 import convertDataEntryToClientValues from '../../../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../../../converters/clientToServer';
 import { convertMainEventClientToServerWithKeysMap } from '../../../../../events/mainEventConverter';
@@ -24,7 +25,7 @@ export const getNewEventServerData = (state: ReduxState, formFoundation: RenderF
     const mainDataServerValues: Object = convertMainEventClientToServerWithKeysMap(mainDataClientValues);
 
     if (mainDataServerValues.status === 'COMPLETED') {
-        mainDataServerValues.completedDate = moment().format('YYYY-MM-DD');
+        mainDataServerValues.completedDate = getFormattedStringFromMomentUsingEuropeanGlyphs(moment(), 'YYYY-MM-DD');
     }
 
     return {

@@ -1,6 +1,7 @@
 // @flow
 import { push } from 'react-router-redux';
 import moment from '../../../../../utils/moment/momentResolver';
+import { getFormattedStringFromMomentUsingEuropeanGlyphs } from '../../../../../utils/date';
 import {
     actionTypes as editEventDataEntryActionTypes,
     startSaveEditEventAfterReturnedToMainPage,
@@ -39,7 +40,7 @@ export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =
             const mainDataServerValues: Object = convertMainEventClientToServerWithKeysMap(mainDataClientValues);
 
             if (mainDataServerValues.status === 'COMPLETED' && !prevEventMainData.completedDate) {
-                mainDataServerValues.completedDate = moment().format('YYYY-MM-DD');
+                mainDataServerValues.completedDate = getFormattedStringFromMomentUsingEuropeanGlyphs(moment(), 'YYYY-MM-DD');
             }
 
             const serverData = {
