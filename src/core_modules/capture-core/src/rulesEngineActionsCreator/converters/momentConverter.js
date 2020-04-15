@@ -1,7 +1,8 @@
 // @flow
 /* eslint-disable class-methods-use-this */
 import moment from 'moment';
-import type { IMomentConverter } from '../RulesEngine/rulesEngine.types';
+import type { IMomentConverter } from 'capture-core-utils/RulesEngine/rulesEngine.types';
+import { getFormattedStringFromMomentUsingEuropeanGlyphs } from '../../utils/date';
 
 const momentFormat = 'YYYY-MM-DD';
 
@@ -10,7 +11,7 @@ class RulesMomentConverter implements IMomentConverter {
         return moment(rulesEngineValue, momentFormat);
     }
     momentToRulesDate(momentObject: moment$Moment): string {
-        return momentObject.format(momentFormat);
+        return getFormattedStringFromMomentUsingEuropeanGlyphs(momentObject);
     }
 }
 

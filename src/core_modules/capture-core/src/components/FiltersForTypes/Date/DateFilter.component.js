@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
+import { getFormattedStringFromMomentUsingEuropeanGlyphs } from '../../../utils/date';
 import SelectBoxes from '../../FormFields/Options/SingleSelectBoxes/SingleSelectBoxes.component';
 import { orientations } from '../../FormFields/Options/SingleSelectBoxes/singleSelectBoxes.const';
 import OptionSet from '../../../metaData/OptionSet/OptionSet';
@@ -114,10 +115,6 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
         }),
     ]);
 
-    static formatDateForFilterRequest(dateMoment: moment$Moment) {
-        return dateMoment.format('YYYY-MM-DD');
-    }
-
     static convertDateFilterValueToClientValue(formValue: string): string {
         // $FlowSuppress
         return convertToClientValue(formValue, elementTypes.DATE);
@@ -134,8 +131,8 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
             const endDate = moment().subtract(1, 'weeks').endOf('week');
 
             return [
-                `ge:${DateFilter.formatDateForFilterRequest(startDate)}`,
-                `le:${DateFilter.formatDateForFilterRequest(endDate)}`,
+                `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
+                `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
             ];
         },
         [DateFilter.mainOptionKeys.LAST_MONTH]: () => {
@@ -143,8 +140,8 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
             const endDate = moment().subtract(1, 'months').endOf('month');
 
             return [
-                `ge:${DateFilter.formatDateForFilterRequest(startDate)}`,
-                `le:${DateFilter.formatDateForFilterRequest(endDate)}`,
+                `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
+                `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
             ];
         },
         [DateFilter.mainOptionKeys.LAST_3_MONTHS]: () => {
@@ -152,8 +149,8 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
             const endDate = moment().subtract(1, 'months').endOf('month');
 
             return [
-                `ge:${DateFilter.formatDateForFilterRequest(startDate)}`,
-                `le:${DateFilter.formatDateForFilterRequest(endDate)}`,
+                `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
+                `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
             ];
         },
         [DateFilter.mainOptionKeys.CUSTOM_RANGE]: (fromValue: ?string, toValue: ?string) => {
@@ -161,13 +158,13 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
             if (fromValue) {
                 // $FlowSuppress
                 const fromClientValue: string = DateFilter.convertDateFilterValueToClientValue(fromValue);
-                const fromFilterRequest = DateFilter.formatDateForFilterRequest(moment(fromClientValue));
+                const fromFilterRequest = getFormattedStringFromMomentUsingEuropeanGlyphs(moment(fromClientValue));
                 requestData.push(`ge:${fromFilterRequest}`);
             }
             if (toValue) {
                 // $FlowSuppress
                 const toClientValue: string = DateFilter.convertDateFilterValueToClientValue(toValue);
-                const toFilterRequest = DateFilter.formatDateForFilterRequest(moment(toClientValue));
+                const toFilterRequest = getFormattedStringFromMomentUsingEuropeanGlyphs(moment(toClientValue));
                 requestData.push(`le:${toFilterRequest}`);
             }
             return requestData;
