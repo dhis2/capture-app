@@ -30,7 +30,7 @@ You can install `yarn` on your machine [here](https://classic.yarnpkg.com/en/doc
 
 A step by step series of examples that tell you how to get a development env running.
 
-#### 1. install `d2 cluster` 
+#### 1. Spin up a docker container with a DHIS2 instance 
 
  [`d2 cluster`](https://cli.dhis2.nu/#/getting-started?id=install-the-cli) helps you spin up a DHIS2 instance using docker containers. 
 
