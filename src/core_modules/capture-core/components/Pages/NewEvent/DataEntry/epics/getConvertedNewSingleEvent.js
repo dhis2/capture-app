@@ -1,9 +1,10 @@
 // @flow
-import moment from 'capture-core-utils/moment/momentResolver';
+import { moment } from 'capture-core-utils/moment';
+import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import convertDataEntryToClientValues from '../../../../DataEntry/common/convertDataEntryToClientValues';
 import { convertValue as convertToServerValue } from '../../../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../../../events/mainConverters';
-import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
+import { RenderFoundation } from '../../../../../metaData';
 
 const getApiCategoriesArgument = (categories: ?{ [id: string]: string}) => {
     if (!categories) {
@@ -24,7 +25,7 @@ export const getNewEventServerData = (state: ReduxState, formFoundation: RenderF
     const mainDataServerValues: Object = convertMainEventClientToServer(mainDataClientValues);
 
     if (mainDataServerValues.status === 'COMPLETED') {
-        mainDataServerValues.completedDate = moment().format('YYYY-MM-DD');
+        mainDataServerValues.completedDate = getFormattedStringFromMomentUsingEuropeanGlyphs(moment(), 'YYYY-MM-DD');
     }
 
     return {

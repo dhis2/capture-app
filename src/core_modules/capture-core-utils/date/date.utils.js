@@ -1,5 +1,5 @@
 // @flow
-import moment from '../moment/momentResolver';
+import { moment } from '../moment';
 
 export const displayTypes = {
     SHORT: 'short',
@@ -7,10 +7,18 @@ export const displayTypes = {
     LONG: 'long',
 };
 
-export function getMonthName(monthNumber: number) {
-    const date = moment([0, monthNumber - 1]);
-    return date.format('MMMM');
+/**
+ * Some locales are using numeral glyphs other than european. This method ensures the moment format method returns a value in european glyphs
+ * @param {*} momentDate: the moment instance
+ * @param {string} format: the moment format
+ * @returns {string} A formatted string with european glyphs
+ */
+export function getFormattedStringFromMomentUsingEuropeanGlyphs(momentDate: moment$Moment, format: string) {
+    const europeanMoment = momentDate.clone();
+    europeanMoment.locale('en');
+    return europeanMoment.format(format);
 }
+
 
 export function adjustUtcIsoDateToLocal(utcISO8601: string) {
     const localDate = moment(utcISO8601, 'YYYY-MM-DD');
@@ -67,8 +75,3 @@ export const displayTime = (() => {
         return date.format((displayType && typeToMomentConverter[displayType]) || typeToMomentConverter[displayTypes.MEDIUM]);
     };
 })();
-
-export const RulesEngineDateUtils = {
-    format: (IsoString: string) => moment(IsoString).format('L'),
-    getToday: () => moment().format('L'),
-};

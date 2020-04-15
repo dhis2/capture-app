@@ -1,11 +1,13 @@
 // @flow
 import { createSelector } from 'reselect';
 import { moment } from 'capture-core-utils/moment';
+import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
+
 import type {
     DateFilterData,
     RelativeDateFilterData,
     AbsoluteDateFilterData,
-} from '../../../eventList.types';
+} from '../../../../EventsList/eventList.types';
 
 const periods = {
     TODAY: 'TODAY',
@@ -19,7 +21,7 @@ const periods = {
 };
 
 const selectors = {};
-const formatDateForFilterRequest = (dateMoment: moment$Moment) => dateMoment.format('YYYY-MM-DD');
+const formatDateForFilterRequest = (dateMoment: moment$Moment) => getFormattedStringFromMomentUsingEuropeanGlyphs(dateMoment, 'YYYY-MM-DD');
 const relativeConvertersForPeriods = {
     [periods.TODAY]: () => {
         const startDate = moment();
