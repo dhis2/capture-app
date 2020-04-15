@@ -105,7 +105,7 @@
     "jsdoc": "^3.6.2",
     "jsdoc-babel": "^0.5.0",
     "jsdoc-export-default-interop": "^0.3.1",
-    "mkdirp": "^0.5.1",
+    "mkdirp": "^1.0.4",
     "redux-devtools-extension": "^2.13.2"
   },
   "manifest.webapp": {
