@@ -1,6 +1,7 @@
 # Translators:
 # phil_dhis2, 2020
 # Viktor Varland <viktor@dhis2.org>, 2020
+# Antonia Bezenchek <antonia@informa.pro>, 2020
 # Hamza Assada <7amza.it@gmail.com>, 2020
 # 
 msgid ""
@@ -132,7 +133,7 @@ msgid "Warnings"
 msgstr "اشعارات تحذيرية"
 
 msgid "search group result could not be retrieved"
-msgstr ""
+msgstr "تعذر استرداد نتيجة مجموعة البحث"
 
 msgid "Complete"
 msgstr "مكتمل"
@@ -647,13 +648,13 @@ msgid ""
 msgstr "ستؤدي مغادرة هذه الصفحة إلى تجاهل التحديدات التي أجريتها لعلاقة جديدة"
 
 msgid "No one is assigned to this event"
-msgstr ""
+msgstr "لم يتم تعيين أي شخص لهذا الحدث"
 
 msgid "Assign"
 msgstr "إسناد"
 
 msgid "Event assigned to {{name}}"
-msgstr ""
+msgstr "تم تعيين الحدث إلى {{name}}"
 
 msgid "Feedbacks"
 msgstr "تغذيات راجعة"
@@ -671,7 +672,7 @@ msgid "Find"
 msgstr "بحث"
 
 msgid "Selected registering unit"
-msgstr ""
+msgstr "وحدة التسجيل المختارة"
 
 msgid "Start Again"
 msgstr "البدء من جديد"
@@ -683,7 +684,7 @@ msgid "Accept"
 msgstr "قبول"
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "تسجيل الوحدة التنظيمية"
 
 msgid "Select"
 msgstr "تحديد"
