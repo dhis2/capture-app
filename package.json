@@ -29,7 +29,7 @@
     "leaflet-draw": "^1.0.4",
     "lodash": "^4.17.15",
     "loglevel": "^1.6.3",
-    "moment": "^2.22.1",
+    "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-addons-update": "^15.6.2",
