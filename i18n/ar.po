@@ -1,6 +1,7 @@
 # Translators:
 # phil_dhis2, 2019
 # Viktor Varland <viktor@dhis2.org>, 2019
+# Antonia Bezenchek <antonia@informa.pro>, 2020
 # Hamza Assada <7amza.it@gmail.com>, 2020
 # 
 msgid ""
@@ -135,7 +136,7 @@ msgid "Warnings"
 msgstr "تحذيرات"
 
 msgid "search group result could not be retrieved"
-msgstr ""
+msgstr "تعذر استرداد نتيجة مجموعة البحث"
 
 msgid "Complete"
 msgstr "مكتمل"
@@ -557,13 +558,13 @@ msgid "Find"
 msgstr "بحث"
 
 msgid "Selected registering unit"
-msgstr ""
+msgstr "وحدة التسجيل المختارة"
 
 msgid "Start Again"
 msgstr "البدء من جديد"
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "تسجيل الوحدة التنظيمية"
 
 msgid "Select"
 msgstr "تحديد"
