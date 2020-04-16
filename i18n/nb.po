@@ -1,4 +1,5 @@
 # Translators:
+# phil_dhis2, 2020
 # Caroline Hesthagen Holen <carolinehholen@gmail.com>, 2020
 # Karoline Tufte Lien <karoline@dhis2.org>, 2020
 # 
@@ -441,7 +442,7 @@ msgid "Relationships"
 msgstr "Relasjoner"
 
 msgid "Assignee"
-msgstr ""
+msgstr "Fullmektig"
 
 msgid "Saving to"
 msgstr ""
@@ -565,7 +566,7 @@ msgid "Review Duplicates"
 msgstr ""
 
 msgid "Search results"
-msgstr ""
+msgstr "Søkeresultater"
 
 msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
@@ -681,7 +682,7 @@ msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
-msgstr "profil"
+msgstr "Profil"
 
 msgid "Error saving event"
 msgstr ""
