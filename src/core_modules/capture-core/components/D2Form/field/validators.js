@@ -1,6 +1,6 @@
 // @flow
-import isArray from 'd2-utilizr/src/isArray';
-import isString from 'd2-utilizr/src/isString';
+import isArray from 'd2-utilizr/lib/isArray';
+import isString from 'd2-utilizr/lib/isString';
 import i18n from '@dhis2/d2-i18n';
 import {
     hasValue,
