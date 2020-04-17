@@ -948,10 +948,10 @@
     classnames "^2.2.6"
     styled-jsx "^3.2.2"
 
-"@dhis2/ui-widgets@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@dhis2/ui-widgets/-/ui-widgets-2.0.2.tgz#6c60bd160d4f29d14d39761605e6482e049a836d"
-  integrity sha512-tNp1UpLGAP1vWNkRYMrKl6nYG2YzAUCWDoPGGqaj7upLDZ2TbCzjiqBIWPNO2oLDXpbCG/MnM/JbGmKnPlw6qQ==
+"@dhis2/ui-widgets@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@dhis2/ui-widgets/-/ui-widgets-2.0.3.tgz#cbdb7706ac4e9e17091d87ccd7b13287cb6e01a7"
+  integrity sha512-8Ssso/FQvhOjLOv2omfKBH7dWV9eRzWDOk9Mv7185qIWbUd7sjzfGOPaqZOuRiovh24++wGUjvr5SO6RFyJtcg==
   dependencies:
     "@dhis2/d2-i18n" "1.0.6"
     "@dhis2/ui-core" "3.12.0"
@@ -3356,11 +3356,10 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-create-react-context@<=0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/create-react-context/-/create-react-context-0.2.2.tgz#9836542f9aaa22868cd7d4a6f82667df38019dca"
-  integrity sha512-KkpaLARMhsTsgp0d2NA/R94F/eDLbhXERdIq3LvX2biCAXcDvHYoOqHfWCHf1+OLj+HKBotLG3KqaOOf+C1C+A==
-
+create-react-context@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/create-react-context/-/create-react-context-0.3.0.tgz#546dede9dc422def0d3fc2fe03afe0bc0f4f7d8c"
+  integrity sha512-dNldIoSuNSvlTJ7slIKC/ZFGKexBMBrrcc+TTe1NdmROnaASuLPvqpwj9v4XS4uXZ8+YPu0sNmShX2rXI5LNsw==
   dependencies:
     gud "^1.0.0"
     warning "^4.0.3"
