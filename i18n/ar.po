@@ -3,13 +3,14 @@
 # Viktor Varland <viktor@dhis2.org>, 2019
 # Antonia Bezenchek <antonia@informa.pro>, 2020
 # Hamza Assada <7amza.it@gmail.com>, 2020
+# KRG HIS <antonia.bezenchek@informa.pro>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2019-11-20T10:50:45.136Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2020\n"
+"Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -166,7 +167,7 @@ msgid "Some operations are still runnning. Please wait.."
 msgstr "لا تزال بعض العمليات قيد التشغيل. أرجو الإنتظار.."
 
 msgid "Operations running"
-msgstr ""
+msgstr "العمليات الجارية"
 
 msgid "Sort"
 msgstr "فرز"
@@ -175,7 +176,7 @@ msgid "No events to display"
 msgstr "لايوجد احداث للعرض"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "البيانات لقائمة الغير متصلة غير موجودة"
 
 msgid "Close"
 msgstr "إغلاق"
@@ -190,16 +191,16 @@ msgid "Last 3 months"
 msgstr "آخر 3 أشهر"
 
 msgid "Custom range"
-msgstr ""
+msgstr "نطاق مخصص"
 
 msgid "to"
 msgstr "إلى"
 
 msgid "after or equal to"
-msgstr ""
+msgstr "من بعد أو مساوٍ لـ "
 
 msgid "before or equal to"
-msgstr ""
+msgstr "من قبل أو مساوٍ لـ"
 
 msgid "From"
 msgstr "من"
@@ -226,7 +227,7 @@ msgid "Yes"
 msgstr "نعم"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "شهر / يوم / سنة"
 
 msgid "Years"
 msgstr "السنوات"
@@ -443,7 +444,7 @@ msgid "Select a registering unit to start reporting"
 msgstr "حدد وحدة تنظيمية مسجلة لبدء الإبلاغ"
 
 msgid "Select a category option to start reporting"
-msgstr ""
+msgstr "حدد فئة لبدء إعداد التقارير"
 
 msgid "You dont have access to create an event in the current selections"
 msgstr "ليس لديك حق الوصول لإنشاء حدث في التحديدات الحالية"
@@ -517,7 +518,7 @@ msgid "No {{trackedEntityTypeName}} found."
 msgstr "لم يتم إيجاد {{trackedEntityTypeName}}"
 
 msgid "{{teiCount}} results found for"
-msgstr ""
+msgstr "تم العثور على هذه نتائج لـ {{teiCount}} "
 
 msgid "New search"
 msgstr "بحث جديد"
@@ -618,7 +619,7 @@ msgid "Organisation unit search failed. See log for details"
 msgstr "فشل البحث عن الوحدة التنظيمية. للحصول على التفاصيل، انظر السجل"
 
 msgid "tracked entity instance"
-msgstr ""
+msgstr "نموذج الكيان المتتبع"
 
 msgid "Set coordinate"
 msgstr "ضبط الإحداثية"
