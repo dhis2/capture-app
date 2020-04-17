@@ -1,5 +1,4 @@
 // @flow
-/* eslint-disable class-methods-use-this */
 import moment from 'moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import type { IMomentConverter } from 'capture-core-utils/RulesEngine/rulesEngine.types';
