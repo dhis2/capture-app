@@ -302,10 +302,10 @@ msgid "No items to display"
 msgstr ""
 
 msgid "Online"
-msgstr ""
+msgstr "Påkoblet"
 
 msgid "Offline"
-msgstr ""
+msgstr "Frakoblet"
 
 msgid "Syncing"
 msgstr ""
