@@ -25,6 +25,7 @@ const errorMessages = {
 };
 
 
+// TODO why when in our code at the moment we dont have any trackerPrograms we still keep this code?
 function getTrackerDataElements(trackerProgram: TrackerProgram): Array<DataElement> {
     return Array.from(trackerProgram.stages.values())
         .reduce((accElements, stage) => {
