@@ -2,18 +2,15 @@
 /**
  * @module rulesEngineActionsCreator
  */
-import { RulesEngine } from 'capture-core-utils/RulesEngine';
 import { RenderFoundation, Program, TrackerProgram } from '../metaData';
-import inputValueConverter from './converters/inputValueConverter';
-import outputRulesEffectsValueConverter from './converters/rulesEffectsValueConverter';
 import runRulesForSingleEvent from './runRulesForSingleEvent';
 import runRulesForTEI from './runRulesForTEI';
 import postProcessRulesEffects from './postProcessRulesEffects';
 import { updateRulesEffects } from './rulesEngine.actions';
+import { RulesEngine } from '../../capture-core-utils/RulesEngine';
+import type { OutputEffect, EventData, Enrollment, TEIValues } from '../../capture-core-utils/RulesEngine/rulesEngine.types';
 
-import type { OutputEffect, EventData, Enrollment, TEIValues } from 'capture-core-utils/RulesEngine/rulesEngine.types';
-
-const rulesEngine = new RulesEngine(inputValueConverter, outputRulesEffectsValueConverter);
+const rulesEngine = new RulesEngine();
 
 function getRulesActions(
     rulesEffects: ?Array<OutputEffect>,

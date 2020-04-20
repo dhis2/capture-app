@@ -5,7 +5,7 @@ import OptionSetHelper from '../OptionSetHelper/OptionSetHelper';
 import typeKeys from '../typeKeys.const';
 import variablePrefixes from '../variablePrefixes';
 import getDateUtils from '../dateUtils/dateUtils';
-import momentConverter from '../../../capture-core/rulesEngineActionsCreator/converters/momentConverter';
+import momentConverter from '../converters/momentConverter';
 
 import type {
     ProgramRulesContainer,
