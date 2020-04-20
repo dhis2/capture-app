@@ -55,7 +55,7 @@ function getTrackerDataElements(trackerProgram: TrackerProgram): Array<DataEleme
             const stageElements = Array.from(stage.stageForm.sections.values())
                 .reduce((accStageElements, section) =>
                     [...accStageElements, ...Array.from(section.elements.values())]
-                    , []);
+                , []);
             return [...accElements, ...stageElements];
         }, []);
     return elements;
@@ -94,29 +94,6 @@ function getDataElements(program: Program) {
     return getRulesEngineDataElementsAsObject(dataElements);
 }
 
-function runRulesEngine(
-    rulesEngine: RulesEngine,
-    programRulesContainer: ProgramRulesContainer,
-    dataElementsInProgram: { [elementId: string]: DataElementForRulesEngine },
-    orgUnit: OrgUnit,
-    optionSets: ?OptionSets,
-    currentEventData: ?EventData | {} = {},
-    allEventsData: ?Array<EventData>) {
-    const effects = rulesEngine.executeRules(
-        programRulesContainer,
-        currentEventData,
-        allEventsData,
-        dataElementsInProgram,
-        null,
-        null,
-        null,
-        orgUnit,
-        optionSets,
-        processTypes.EVENT,
-    );
-
-    return effects;
-}
 
 export default function runRulesForSingleEvent(
     rulesEngine: RulesEngine,
@@ -139,19 +116,11 @@ export default function runRulesForSingleEvent(
     if (!programRulesContainer.programRules || programRulesContainer.programRules.length === 0) {
         return null;
     }
-
     const dataElementsInProgram = getDataElements(program);
     const optionSets = optionSetsStore.get();
 
-    const rulesEffects =
-        runRulesEngine(
-            rulesEngine,
-            programRulesContainer,
-            dataElementsInProgram,
-            orgUnit,
-            optionSets,
-            currentEventData,
-            allEventsData,
-        );
+    const rulesEffects = rulesEngine.executeRules(programRulesContainer, currentEventData, allEventsData, dataElementsInProgram, null, null, null, orgUnit, optionSets, processTypes.EVENT);
+    console.log('##');
+    console.log(rulesEffects);
     return rulesEffects;
 }
