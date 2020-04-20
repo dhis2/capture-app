@@ -42,11 +42,11 @@ const programs = [
     },
 ];
 
-programs.forEach(({ program, foundation, formId, orgUnit }) => {
+programs.forEach(({ program, foundation, orgUnit }) => {
     test('Tests on runRulesForSingleEvent function', () => {
         const rulesEngine = new RulesEngine(inputValueConverter, momentConverter, i18n.t, outputRulesEffectsValueConverter);
 
-        const rulesEffects = runRulesForSingleEvent(rulesEngine, program, foundation, formId, orgUnit);
+        const rulesEffects = runRulesForSingleEvent(rulesEngine, program, foundation, orgUnit);
 
         expect(rulesEffects).toMatchSnapshot();
     });
