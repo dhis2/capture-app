@@ -1,4 +1,3 @@
-/* eslint-disable */
 import log from 'loglevel';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import isString from 'd2-utilizr/lib/isString';
@@ -24,11 +23,11 @@ export default function getExecutionService(variableService) {
             variablespresent.forEach((variablepresent) => {
                 // First strip away any prefix and postfix signs from the variable name:
                 variablepresent = variablepresent
-                .replace('#{', '')
-                .replace('A{', '')
-                .replace('C{', '')
-                .replace('V{', '')
-                .replace('}', '');
+                    .replace('#{', '')
+                    .replace('A{', '')
+                    .replace('C{', '')
+                    .replace('V{', '')
+                    .replace('}', '');
 
                 if (isDefined(variablesHash[variablepresent])) {
                     // Replace all occurrences of the variable name(hence using regex replacement):
