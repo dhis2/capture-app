@@ -44,7 +44,7 @@ const programs = [
 
 programs.forEach(({ program, foundation, orgUnit }) => {
     test('Tests on runRulesForSingleEvent function', () => {
-        const rulesEngine = new RulesEngine(inputValueConverter, momentConverter, i18n.t, outputRulesEffectsValueConverter);
+        const rulesEngine = new RulesEngine(inputValueConverter, momentConverter, outputRulesEffectsValueConverter);
 
         const rulesEffects = runRulesForSingleEvent(rulesEngine, program, foundation, orgUnit);
 
