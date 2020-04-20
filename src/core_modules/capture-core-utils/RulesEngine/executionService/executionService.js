@@ -5,6 +5,13 @@ import isString from 'd2-utilizr/lib/isString';
 import getZScoreWFA from './zScoreWFA';
 import trimQuotes from '../commonUtils/trimQuotes';
 import typeKeys from '../typeKeys.const';
+import getDateUtils from '../dateUtils/dateUtils';
+import momentConverter from '../../../capture-core/rulesEngineActionsCreator/converters/momentConverter';
+
+
+export default function getExecutionService(variableService) {
+    const dateUtils = getDateUtils(momentConverter);
+
 
 export default function getExecutionService(variableService, dateUtils) {
     const replaceVariables = (expression, variablesHash) => {

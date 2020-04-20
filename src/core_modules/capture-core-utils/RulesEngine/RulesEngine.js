@@ -2,7 +2,6 @@
 import VariableService from './VariableService/VariableService';
 import ValueProcessor from './ValueProcessor/ValueProcessor';
 import getExecutionService from './executionService/executionService';
-import getDateUtils from './dateUtils/dateUtils';
 import getRulesEffectsProcessor from './rulesEffectsProcessor/rulesEffectsProcessor';
 import processTypes from './rulesEffectsProcessor/processTypes.const';
 
@@ -10,7 +9,6 @@ import type {
     OutputEffect,
     IConvertInputRulesValue,
     IConvertOutputRulesEffectsValue,
-    IMomentConverter,
     ProgramRulesContainer,
     EventData,
     EventsData,
@@ -23,7 +21,6 @@ import type {
     EventsDataContainer,
     TEIValues,
 } from './rulesEngine.types';
-
 
 type ExecutionService = {
     executeRules: (
@@ -51,15 +48,12 @@ export default class RulesEngine {
 
     constructor(
         inputConverterObject: IConvertInputRulesValue,
-        momentConverter: IMomentConverter,
         outputRulesConverterObject: IConvertOutputRulesEffectsValue) {
         const valueProcessor = new ValueProcessor(inputConverterObject);
-        const dateUtils = getDateUtils(momentConverter);
-        const variableService = new VariableService(valueProcessor.processValue, dateUtils);
-        this.executionService = getExecutionService(variableService, dateUtils);
-        this.onProcessRulesEffects = getRulesEffectsProcessor(
-            this.executionService.convertDataToBaseOutputValue,
-            outputRulesConverterObject);
+        const variableService = new VariableService(valueProcessor.processValue);
+
+        this.executionService = getExecutionService(variableService);
+        this.onProcessRulesEffects = getRulesEffectsProcessor(this.executionService.convertDataToBaseOutputValue, outputRulesConverterObject);
     }
 
     executeRules(

@@ -4,6 +4,8 @@ import log from 'loglevel';
 import OptionSetHelper from '../OptionSetHelper/OptionSetHelper';
 import typeKeys from '../typeKeys.const';
 import variablePrefixes from '../variablePrefixes';
+import getDateUtils from '../dateUtils/dateUtils';
+import momentConverter from '../../../capture-core/rulesEngineActionsCreator/converters/momentConverter';
 
 import type {
     ProgramRulesContainer,
@@ -77,18 +79,12 @@ export default class VariableService {
             : value;
     }
 
-    /*
-    static getDataElementValueOrCode(useCodeForOptionSet, event, dataElementId, allDes, optionSets) {
-        return VariableService.getDataElementValueOrCodeForValue(useCodeForOptionSet, event[dataElementId], dataElementId, allDes, optionSets);
-    }
-    */
-
     onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any;
     dateUtils: DateUtils;
     mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?Variable };
-    constructor(onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any, dateUtils: DateUtils) {
+    constructor(onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any) {
         this.onProcessValue = onProcessValue;
-        this.dateUtils = dateUtils;
+        this.dateUtils = getDateUtils(momentConverter);
 
         this.mapSourceTypeToGetterFn = {
             [variableSourceTypes.DATAELEMENT_CURRENT_EVENT]: this.getVariableForCurrentEvent,
@@ -357,7 +353,7 @@ export default class VariableService {
 
         const allValues = stageEvents
             .map(event =>
-                VariableService.getDataElementValueForVariable(event[dataElementId], dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets)
+                VariableService.getDataElementValueForVariable(event[dataElementId], dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets),
             )
             .filter(value => !!value || value === false || value === 0);
 
@@ -399,7 +395,7 @@ export default class VariableService {
 
         const allValues = events
             .map(event =>
-                VariableService.getDataElementValueForVariable(event[dataElementId], dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets)
+                VariableService.getDataElementValueForVariable(event[dataElementId], dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets),
             )
             .filter(value => !!value || value === false || value === 0);
 
