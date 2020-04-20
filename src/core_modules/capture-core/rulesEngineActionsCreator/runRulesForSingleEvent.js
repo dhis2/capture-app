@@ -3,13 +3,9 @@ import log from 'loglevel';
 import { RulesEngine, processTypes } from 'capture-core-utils/RulesEngine';
 import type
 {
-    OptionSets,
     ProgramRulesContainer,
     DataElement as DataElementForRulesEngine,
     EventData,
-    OrgUnit,
-    EventMain,
-    EventValues,
 } from 'capture-core-utils/RulesEngine/rulesEngine.types';
 
 import { errorCreator } from 'capture-core-utils';
@@ -22,11 +18,6 @@ import {
 } from '../metaData';
 import constantsStore from '../metaDataMemoryStores/constants/constants.store';
 import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store';
-
-export type EventContainer = {
-    main: EventMain,
-    values: EventValues
-};
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found in loadAndExecuteRulesForEvent',
@@ -42,6 +33,8 @@ function getProgramRulesContainer(program: Program, foundation: RenderFoundation
     const programRules = [...mainProgramRules, ...foundationProgramRules];
 
     const constants = constantsStore.get();
+
+    console.log(constants);
     return {
         programRulesVariables,
         programRules,
@@ -50,7 +43,7 @@ function getProgramRulesContainer(program: Program, foundation: RenderFoundation
 }
 
 function getTrackerDataElements(trackerProgram: TrackerProgram): Array<DataElement> {
-    const elements = Array.from(trackerProgram.stages.values())
+    return Array.from(trackerProgram.stages.values())
         .reduce((accElements, stage) => {
             const stageElements = Array.from(stage.stageForm.sections.values())
                 .reduce((accStageElements, section) =>
@@ -58,15 +51,13 @@ function getTrackerDataElements(trackerProgram: TrackerProgram): Array<DataEleme
                 , []);
             return [...accElements, ...stageElements];
         }, []);
-    return elements;
 }
 
 function getEventDataElements(eventProgram: EventProgram): Array<DataElement> {
-    const elements = eventProgram.stage ?
+    return eventProgram.stage ?
         Array.from(eventProgram.stage.stageForm.sections.values()).reduce((accElements, section) =>
             [...accElements, ...Array.from(section.elements.values())], []) :
         [];
-    return elements;
 }
 
 function getRulesEngineDataElementsAsObject(
