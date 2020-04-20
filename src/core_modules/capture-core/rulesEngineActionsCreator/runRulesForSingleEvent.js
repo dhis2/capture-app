@@ -80,7 +80,7 @@ function prepare(
     const programRules = [...program.programRules, ...foundation.programRules];
 
     if (!programRules || programRules.length === 0) {
-        return null;
+        return error;
     }
 
     const constants = constantsStore.get();
