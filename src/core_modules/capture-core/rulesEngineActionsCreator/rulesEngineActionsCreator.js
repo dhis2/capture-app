@@ -8,7 +8,7 @@ import runRulesForSingleEvent from './runRulesForSingleEvent';
 import runRulesForTEI from './runRulesForTEI';
 import postProcessRulesEffects from './postProcessRulesEffects';
 import { updateRulesEffects } from './rulesEngine.actions';
-import { RulesEngine } from '../../capture-core-utils/RulesEngine';
+import { RulesEngine, processTypes } from '../../capture-core-utils/RulesEngine';
 import type { OutputEffect, EventData, Enrollment, TEIValues } from '../../capture-core-utils/RulesEngine/rulesEngine.types';
 
 import type {
