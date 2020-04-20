@@ -43,7 +43,6 @@ export function getRulesActionsForEvent(
         rulesEngine,
         program,
         foundation,
-        formId,
         orgUnit,
         currentEventData,
         allEventsData,
