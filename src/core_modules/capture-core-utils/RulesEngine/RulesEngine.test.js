@@ -35,10 +35,15 @@ const programs = [
         foundation: { programRules: [] },
         orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
     },
+    {
+        program: null,
+        foundation: null,
+        orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
+    },
 ];
 
 programs.forEach(({ program, foundation, formId, orgUnit }) => {
-    test('Tests rulesEngine class', () => {
+    test('Tests on runRulesForSingleEvent function', () => {
         const rulesEngine = new RulesEngine(inputValueConverter, momentConverter, i18n.t, outputRulesEffectsValueConverter);
 
         const rulesEffects = runRulesForSingleEvent(rulesEngine, program, foundation, formId, orgUnit);
