@@ -1,6 +1,4 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-
 import RulesEngine from '../RulesEngine/RulesEngine';
 import inputValueConverter from '../../capture-core/rulesEngineActionsCreator/converters/inputValueConverter';
 import momentConverter from '../../capture-core/rulesEngineActionsCreator/converters/momentConverter';
