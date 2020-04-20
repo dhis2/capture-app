@@ -80,12 +80,6 @@ export default class VariableService {
             : value;
     }
 
-    /*
-    static getDataElementValueOrCode(useCodeForOptionSet, event, dataElementId, allDes, optionSets) {
-        return VariableService.getDataElementValueOrCodeForValue(useCodeForOptionSet, event[dataElementId], dataElementId, allDes, optionSets);
-    }
-    */
-
     onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any;
     dateUtils: DateUtils;
     mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?Variable };
@@ -360,7 +354,7 @@ export default class VariableService {
 
         const allValues = stageEvents
             .map(event =>
-                VariableService.getDataElementValueForVariable(event[dataElementId], dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets)
+                VariableService.getDataElementValueForVariable(event[dataElementId], dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets),
             )
             .filter(value => !!value || value === false || value === 0);
 
@@ -402,7 +396,7 @@ export default class VariableService {
 
         const allValues = events
             .map(event =>
-                VariableService.getDataElementValueForVariable(event[dataElementId], dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets)
+                VariableService.getDataElementValueForVariable(event[dataElementId], dataElementId, programVariable.useNameForOptionSet, sourceData.dataElements, sourceData.optionSets),
             )
             .filter(value => !!value || value === false || value === 0);
 
