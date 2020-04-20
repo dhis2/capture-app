@@ -1,4 +1,3 @@
-/* eslint-disable */
 import log from 'loglevel';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import isString from 'd2-utilizr/lib/isString';
