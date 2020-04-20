@@ -99,7 +99,6 @@ export default function runRulesForSingleEvent(
     rulesEngine: RulesEngine,
     program: ?Program,
     foundation: ?RenderFoundation,
-    formId: string,
     orgUnit: Object,
     currentEventData: ?EventData,
     allEventsData: ?Array<EventData>,
