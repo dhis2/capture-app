@@ -93,6 +93,7 @@ export default function runRulesForSingleEvent(
     if (!programRules || programRules.length === 0) {
         return null;
     }
+
     const dataElementsInProgram = getDataElements(program);
 
     const optionSets = optionSetsStore.get();
