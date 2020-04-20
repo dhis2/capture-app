@@ -20,8 +20,7 @@ import runRulesForTEI from './runRulesForTEI';
 import postProcessRulesEffects from './postProcessRulesEffects';
 import { updateRulesEffects } from './rulesEngine.actions';
 
-const rulesEngine =
-    new RulesEngine(inputValueConverter, momentConverter, i18n.t, outputRulesEffectsValueConverter);
+const rulesEngine = new RulesEngine(inputValueConverter, momentConverter, outputRulesEffectsValueConverter);
 
 function getRulesActions(
     rulesEffects: ?Array<OutputEffect>,

@@ -12,7 +12,7 @@ import OptionSetHelper from '../OptionSetHelper/OptionSetHelper';
 import trimQuotes from '../commonUtils/trimQuotes';
 import typeKeys from '../typeKeys.const';
 
-export default function getExecutionService(onTranslate, variableService, dateUtils) {
+export default function getExecutionService(variableService, dateUtils) {
     var NUMBER_OF_EVENTS_IN_SCOPE = 10;
 
     //Variables for storing scope and rules in memory from rules execution to rules execution:
