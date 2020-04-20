@@ -1,22 +1,11 @@
 // @flow
 import log from 'loglevel';
 import { RulesEngine, processTypes } from 'capture-core-utils/RulesEngine';
-import type
-{
-    DataElement as DataElementForRulesEngine,
-    EventData,
-} from 'capture-core-utils/RulesEngine/rulesEngine.types';
-
 import { errorCreator } from 'capture-core-utils';
-import {
-    Program,
-    TrackerProgram,
-    EventProgram,
-    RenderFoundation,
-    DataElement,
-} from '../metaData';
+import { Program, TrackerProgram, EventProgram, RenderFoundation, DataElement } from '../metaData';
 import constantsStore from '../metaDataMemoryStores/constants/constants.store';
 import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store';
+import type { DataElement as DataElementForRulesEngine, EventData } from '../../capture-core-utils/RulesEngine/rulesEngine.types';
 
 const errorMessages = {
     PROGRAM_NOT_FOUND: 'Program not found in loadAndExecuteRulesForEvent',
