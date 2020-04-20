@@ -23,7 +23,7 @@ import type {
 } from './rulesEngine.types';
 
 type ExecutionService = {
-    executeRules: (
+    internalExecuteRules: (
         programRulesContainer: ProgramRulesContainer,
         executingEvent: ?EventData | {},
         events: ?EventsDataContainer,
@@ -85,7 +85,7 @@ export default class RulesEngine {
             eventsContainer = null;
         }
 
-        const effects = this.executionService.executeRules(
+        const effects = this.executionService.internalExecuteRules(
             programRulesContainer,
             executingEvent,
             eventsContainer,
@@ -98,9 +98,7 @@ export default class RulesEngine {
             { debug: true },
         );
 
-        const processedEffects = effects ?
-            this.onProcessRulesEffects(effects, processType, dataElements, trackedEntityAttributes) :
-            null;
+        const processedEffects = effects ? this.onProcessRulesEffects(effects, processType, dataElements, trackedEntityAttributes) : null;
         return processedEffects;
     }
 }

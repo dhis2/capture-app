@@ -656,12 +656,7 @@ export default function getExecutionService(variableService, dateUtils) {
     };
 
     return {
-        executeRules(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, flags) {
-            if (!programRulesContainer.programRules) {
-                return null;
-            }
-            return internalExecuteRules(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, flags);
-        },
+        internalExecuteRules,
         convertDataToBaseOutputValue: convertRuleEffectDataToOutputBaseValue,
     };
 }
