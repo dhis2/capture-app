@@ -606,7 +606,7 @@ export default function getExecutionService(variableService, dateUtils) {
      * @param {*} optionSets all optionsets(matedata)
      * @param {*} flag execution flags
      */
-    const internalExecuteRules = (programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, flag) => {
+    return (programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, processType, flag) => {
         const { programRules } = programRulesContainer;
         if (programRules.length === 0 || !programRules) {
             return null;
@@ -616,7 +616,8 @@ export default function getExecutionService(variableService, dateUtils) {
 
         // console.log(variableHash)
 
-        return programRules.sort((a, b) => {
+        const effects = programRules
+            .sort((a, b) => {
                 if (!a.priority && !b.priority) {
                     return 0;
                 }
@@ -653,10 +654,9 @@ export default function getExecutionService(variableService, dateUtils) {
             })
             .filter(ruleEffectsForRule => ruleEffectsForRule)
             .reduce((accRuleEffects, effectsForRule) => [...accRuleEffects, ...effectsForRule], []);
-    };
 
-    return {
-        internalExecuteRules,
-        convertDataToBaseOutputValue: convertRuleEffectDataToOutputBaseValue,
+        const processRulesEffects = getRulesEffectsProcessor(convertRuleEffectDataToOutputBaseValue, rulesEffectsValueConverter);
+
+        return processRulesEffects(effects, processType, allDataElements, allTrackedEntityAttributes);
     };
 }

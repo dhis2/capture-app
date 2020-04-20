@@ -2,10 +2,8 @@
 import VariableService from './VariableService/VariableService';
 import ValueProcessor from './ValueProcessor/ValueProcessor';
 import getExecutionService from './executionService/executionService';
-import getRulesEffectsProcessor from './rulesEffectsProcessor/rulesEffectsProcessor';
 import processTypes from './rulesEffectsProcessor/processTypes.const';
 import inputValueConverter from './converters/inputValueConverter';
-import rulesEffectsValueConverter from './converters/rulesEffectsValueConverter';
 
 import type {
     OutputEffect,
@@ -33,25 +31,20 @@ type ExecutionService = {
         selectedEnrollment: ?Enrollment,
         selectedOrgUnit: OrgUnit,
         optionSets: ?OptionSets,
+        processType: string,
         flags: Object,
     ) => ?Array<ProgramRuleEffect>,
     convertDataToBaseOutputValue: (data: any, valueType: string) => any,
 };
 
 export default class RulesEngine {
-    executionService: ExecutionService;
-    onProcessRulesEffects: (
-        effects: Array<ProgramRuleEffect>,
-        processType: $Values<typeof processTypes>,
-        dataElements: ?DataElements,
-        trackedEntityAttributes?: ?TrackedEntityAttributes) => ?Array<OutputEffect>;
+    getEffects: ExecutionService;
 
     constructor() {
         const valueProcessor = new ValueProcessor(inputValueConverter);
         const variableService = new VariableService(valueProcessor.processValue);
 
-        this.executionService = getExecutionService(variableService);
-        this.onProcessRulesEffects = getRulesEffectsProcessor(this.executionService.convertDataToBaseOutputValue, rulesEffectsValueConverter);
+        this.getEffects = getExecutionService(variableService);
     }
 
     executeRules(
@@ -85,7 +78,8 @@ export default class RulesEngine {
             eventsContainer = null;
         }
 
-        const effects = this.executionService.internalExecuteRules(
+
+        return this.getEffects(
             programRulesContainer,
             executingEvent,
             eventsContainer,
@@ -95,10 +89,7 @@ export default class RulesEngine {
             enrollmentData,
             selectedOrgUnit,
             optionSets,
-            { debug: true },
-        );
-
-        const processedEffects = effects ? this.onProcessRulesEffects(effects, processType, dataElements, trackedEntityAttributes) : null;
-        return processedEffects;
+            processType,
+            { debug: true });
     }
 }
