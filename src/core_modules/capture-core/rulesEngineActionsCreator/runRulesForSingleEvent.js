@@ -120,7 +120,5 @@ export default function runRulesForSingleEvent(
     const optionSets = optionSetsStore.get();
 
     const rulesEffects = rulesEngine.executeRules(programRulesContainer, currentEventData, allEventsData, dataElementsInProgram, null, null, null, orgUnit, optionSets, processTypes.EVENT);
-    console.log('##');
-    console.log(rulesEffects);
     return rulesEffects;
 }
