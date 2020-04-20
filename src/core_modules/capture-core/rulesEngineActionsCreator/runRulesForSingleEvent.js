@@ -1,15 +1,12 @@
 // @flow
 import log from 'loglevel';
-import { RulesEngine, processTypes } from 'capture-core-utils/RulesEngine';
 import { errorCreator } from 'capture-core-utils';
 import { Program, TrackerProgram, EventProgram, RenderFoundation, DataElement } from '../metaData';
 import constantsStore from '../metaDataMemoryStores/constants/constants.store';
 import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store';
-import type { DataElement as DataElementForRulesEngine, EventData } from '../../capture-core-utils/RulesEngine/rulesEngine.types';
+import type { DataElement as DataElementForRulesEngine } from '../../capture-core-utils/RulesEngine/rulesEngine.types';
 
 const errorMessages = {
-    PROGRAM_NOT_FOUND: 'Program not found in loadAndExecuteRulesForEvent',
-    PROGRAMSTAGE_NOT_FOUND: 'ProgramStage not found',
     PROGRAM_OR_FOUNDATION_MISSING: 'Program or foundation missing',
 };
 
@@ -59,34 +56,24 @@ function getDataElements(program: Program) {
     return getRulesEngineDataElementsAsObject(dataElements);
 }
 
-export default function runRulesForSingleEvent(
-    rulesEngine: RulesEngine,
-    program: ?Program,
-    foundation: ?RenderFoundation,
-    orgUnit: Object,
-    currentEventData: ?EventData,
-    allEventsData: ?Array<EventData>,
-) {
+
+export function prepareForExecution(program: ?Program, foundation: ?RenderFoundation) {
+    const error = { optionSets: null, dataElementsInProgram: null, programRulesVariables: null, programRules: null, constants: null };
     if (!program || !foundation) {
-        log.error(
-            errorCreator(
-                errorMessages.PROGRAM_OR_FOUNDATION_MISSING)(
-                { program, foundation, method: 'getRulesActionsForEvent' }));
-        return null;
+        log.error(errorCreator(errorMessages.PROGRAM_OR_FOUNDATION_MISSING)({ program, foundation, method: 'getRulesActionsForEvent' }));
+        return error;
     }
 
-    const constants = constantsStore.get();
     const { programRuleVariables } = program;
     const programRules = [...program.programRules, ...foundation.programRules];
 
     if (!programRules || programRules.length === 0) {
-        return null;
+        return error;
     }
 
+    const constants = constantsStore.get();
+    const optionSets = optionSetsStore.get();
     const dataElementsInProgram = getDataElements(program);
 
-    const optionSets = optionSetsStore.get();
-
-    // returns an array of effects that need to take place in the UI.
-    return rulesEngine.executeRules({ programRulesVariables: programRuleVariables, programRules, constants }, currentEventData, allEventsData, dataElementsInProgram, null, null, null, orgUnit, optionSets, processTypes.EVENT);
+    return { optionSets, dataElementsInProgram, programRulesVariables: programRuleVariables, programRules, constants };
 }
