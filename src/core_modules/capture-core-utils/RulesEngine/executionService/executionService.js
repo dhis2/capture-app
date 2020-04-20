@@ -1,4 +1,3 @@
-/* eslint-disable */
 import log from 'loglevel';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import isString from 'd2-utilizr/lib/isString';
@@ -6,14 +5,14 @@ import getZScoreWFA from './zScoreWFA';
 import trimQuotes from '../commonUtils/trimQuotes';
 import typeKeys from '../typeKeys.const';
 import getDateUtils from '../dateUtils/dateUtils';
-import momentConverter from '../../../capture-core/rulesEngineActionsCreator/converters/momentConverter';
+import momentConverter from '../converters/momentConverter';
+import getRulesEffectsProcessor from '../rulesEffectsProcessor/rulesEffectsProcessor';
+import rulesEffectsValueConverter from '../converters/rulesEffectsValueConverter';
 
 
 export default function getExecutionService(variableService) {
     const dateUtils = getDateUtils(momentConverter);
 
-
-export default function getExecutionService(variableService, dateUtils) {
     const replaceVariables = (expression, variablesHash) => {
         // replaces the variables in an expression with actual variable values.
 
@@ -25,11 +24,11 @@ export default function getExecutionService(variableService, dateUtils) {
             variablespresent.forEach((variablepresent) => {
                 // First strip away any prefix and postfix signs from the variable name:
                 variablepresent = variablepresent
-                .replace('#{', '')
-                .replace('A{', '')
-                .replace('C{', '')
-                .replace('V{', '')
-                .replace('}', '');
+                    .replace('#{', '')
+                    .replace('A{', '')
+                    .replace('C{', '')
+                    .replace('V{', '')
+                    .replace('}', '');
 
                 if (isDefined(variablesHash[variablepresent])) {
                     // Replace all occurrences of the variable name(hence using regex replacement):
