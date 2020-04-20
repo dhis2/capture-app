@@ -608,13 +608,11 @@ export default function getExecutionService(variableService, dateUtils) {
      */
     return (programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, processType, flag) => {
         const { programRules } = programRulesContainer;
-        if (programRules.length === 0 || !programRules) {
+        if (!programRules) {
             return null;
         }
 
         const variablesHash = variableService.getVariables(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets);
-
-        // console.log(variableHash)
 
         const effects = programRules
             .sort((a, b) => {

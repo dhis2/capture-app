@@ -3,11 +3,11 @@
  * @module rulesEngineActionsCreator
  */
 import { RenderFoundation, Program, TrackerProgram } from '../metaData';
-import runRulesForSingleEvent from './runRulesForSingleEvent';
+import { prepareForExecution } from './runRulesForSingleEvent';
 import runRulesForTEI from './runRulesForTEI';
 import postProcessRulesEffects from './postProcessRulesEffects';
 import { updateRulesEffects } from './rulesEngine.actions';
-import { RulesEngine } from '../../capture-core-utils/RulesEngine';
+import { RulesEngine, processTypes } from '../../capture-core-utils/RulesEngine';
 import type { OutputEffect, EventData, Enrollment, TEIValues } from '../../capture-core-utils/RulesEngine/rulesEngine.types';
 
 const rulesEngine = new RulesEngine();
@@ -29,14 +29,10 @@ export function getRulesActionsForEvent(
     currentEventData: ?EventData  | {} = {},
     allEventsData: ?Array<EventData>,
 ) {
-    const rulesEffects = runRulesForSingleEvent(
-        rulesEngine,
-        program,
-        foundation,
-        orgUnit,
-        currentEventData,
-        allEventsData,
-    );
+    const { optionSets, dataElementsInProgram, programRulesVariables, programRules, constants } = prepareForExecution(program, foundation);
+    // returns an array of effects that need to take place in the UI.
+    const rulesEffects = rulesEngine.executeRules({ programRulesVariables, programRules, constants }, currentEventData, allEventsData, dataElementsInProgram, null, null, null, orgUnit, optionSets, processTypes.EVENT);
+
     return getRulesActions(rulesEffects, foundation, formId);
 }
 
