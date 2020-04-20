@@ -102,14 +102,14 @@ export default function runRulesForSingleEvent(
         return null;
     }
 
-    const programRulesContainer = getProgramRulesContainer(program, foundation);
+    const { programRulesVariables, programRules, constants } = getProgramRulesContainer(program, foundation);
 
-    if (!programRulesContainer.programRules || programRulesContainer.programRules.length === 0) {
+    if (!programRules || programRules.length === 0) {
         return null;
     }
     const dataElementsInProgram = getDataElements(program);
     const optionSets = optionSetsStore.get();
 
     // returns an array of effects that need to take place in the UI.
-    return rulesEngine.executeRules(programRulesContainer, currentEventData, allEventsData, dataElementsInProgram, null, null, null, orgUnit, optionSets, processTypes.EVENT);
+    return rulesEngine.executeRules({ programRulesVariables, programRules, constants }, currentEventData, allEventsData, dataElementsInProgram, null, null, null, orgUnit, optionSets, processTypes.EVENT);
 }
