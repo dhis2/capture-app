@@ -790,6 +790,7 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+"在同一个容器中你打开了其它版本的采集App。当前，该应用仅仅支持同时运行一个版本应用（同一个域中）。请刷新页面，如果你想使用该版本。注意将关闭其它版本。"
 
 msgid "Choose one or more dates..."
 msgstr "选择一个或多个日期"
