@@ -608,7 +608,7 @@ export default function getExecutionService(variableService, dateUtils) {
      */
     const internalExecuteRules = (programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, flag) => {
         const { programRules } = programRulesContainer;
-        if (programRules.length === 0) {
+        if (programRules.length === 0 || !programRules) {
             return null;
         }
 
