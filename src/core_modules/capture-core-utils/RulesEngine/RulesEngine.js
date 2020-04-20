@@ -52,12 +52,16 @@ export default class RulesEngine {
     constructor(
         inputConverterObject: IConvertInputRulesValue,
         momentConverter: IMomentConverter,
-        onTranslate: Translator,
         outputRulesConverterObject: IConvertOutputRulesEffectsValue) {
+        // Convert the input values from a form into values that the rule engine understands
         const valueProcessor = new ValueProcessor(inputConverterObject);
         const dateUtils = getDateUtils(momentConverter);
+
+        // creates the variables for us
         const variableService = new VariableService(valueProcessor.processValue, dateUtils);
         this.executionService = getExecutionService(variableService, dateUtils);
+
+        // processes the effects
         this.onProcessRulesEffects = getRulesEffectsProcessor(this.executionService.convertDataToBaseOutputValue, outputRulesConverterObject);
     }
 
