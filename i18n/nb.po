@@ -1,14 +1,14 @@
 # Translators:
 # phil_dhis2, 2020
-# Caroline Hesthagen Holen <carolinehholen@gmail.com>, 2020
 # Karoline Tufte Lien <karoline@dhis2.org>, 2020
+# Caroline Hesthagen Holen <carolinehholen@gmail.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2020-03-09T19:35:56.143Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
+"Last-Translator: Caroline Hesthagen Holen <carolinehholen@gmail.com>, 2020\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -164,7 +164,7 @@ msgid "Operations running"
 msgstr ""
 
 msgid "Sort"
-msgstr ""
+msgstr "Sorter"
 
 msgid "No events to display"
 msgstr ""
@@ -371,13 +371,13 @@ msgid "Select columns"
 msgstr ""
 
 msgid "Download as JSON"
-msgstr ""
+msgstr "Last ned i JSON format"
 
 msgid "Download as XML"
-msgstr ""
+msgstr "Last ned i XML format"
 
 msgid "Download as CSV"
-msgstr ""
+msgstr "Last ned i CSV format"
 
 msgid "Download with current filters"
 msgstr ""
@@ -413,7 +413,7 @@ msgid "Save As view"
 msgstr ""
 
 msgid "View name"
-msgstr ""
+msgstr "Vis navn"
 
 msgid "Show Less"
 msgstr ""
@@ -643,7 +643,7 @@ msgid "No one is assigned to this event"
 msgstr ""
 
 msgid "Assign"
-msgstr ""
+msgstr "Tildel"
 
 msgid "Event assigned to {{name}}"
 msgstr ""
@@ -757,16 +757,16 @@ msgid "Date"
 msgstr "Dato"
 
 msgid "Time"
-msgstr ""
+msgstr "Klokkeslett"
 
 msgid "From date"
-msgstr ""
+msgstr "Fra dato"
 
 msgid "From time"
 msgstr ""
 
 msgid "To date"
-msgstr ""
+msgstr "Til dato"
 
 msgid "To time"
 msgstr ""
