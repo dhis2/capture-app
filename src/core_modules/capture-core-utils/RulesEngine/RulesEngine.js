@@ -17,7 +17,6 @@ import type {
     DataElements,
     OrgUnit,
     OptionSets,
-    Translator,
     TrackedEntityAttributes,
     Enrollment,
     ProgramRuleEffect,
