@@ -5,7 +5,7 @@ import { errorCreator } from '../../capture-core-utils';
 import { Program, EventProgram, RenderFoundation, DataElement } from '../metaData';
 import constantsStore from '../metaDataMemoryStores/constants/constants.store';
 import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store';
-import type { DataElement as DataElementForRulesEngine, EventData } from '../../capture-core-utils/RulesEngine/rulesEngine.types';
+import type { DataElement as DataElementForRulesEngine } from '../../capture-core-utils/RulesEngine/rulesEngine.types';
 
 import type {
     DataElement as DataElementForRulesEngine,
@@ -71,18 +71,15 @@ function prepare(
     allEventsData: ?EventsData,
 ) {
     if (!program || !foundation) {
-        log.error(
-            errorCreator(
-                errorMessages.PROGRAM_OR_FOUNDATION_MISSING)(
-                { program, foundation, method: 'getRulesActionsForEvent' }));
-        return null;
+        log.error(errorCreator(errorMessages.PROGRAM_OR_FOUNDATION_MISSING)({ program, foundation, method: 'getRulesActionsForEvent' }));
+        return error;
     }
 
     const { programRuleVariables } = program;
     const programRules = [...program.programRules, ...foundation.programRules];
 
     if (!programRules || programRules.length === 0) {
-        return null;
+        return error;
     }
 
     const constants = constantsStore.get();
