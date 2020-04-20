@@ -3,7 +3,6 @@ import log from 'loglevel';
 import { RulesEngine, processTypes } from 'capture-core-utils/RulesEngine';
 import type
 {
-    ProgramRulesContainer,
     DataElement as DataElementForRulesEngine,
     EventData,
 } from 'capture-core-utils/RulesEngine/rulesEngine.types';
@@ -25,22 +24,6 @@ const errorMessages = {
     PROGRAM_OR_FOUNDATION_MISSING: 'Program or foundation missing',
 };
 
-function getProgramRulesContainer(program: Program, foundation: RenderFoundation): ProgramRulesContainer {
-    const programRulesVariables = program.programRuleVariables;
-
-    const mainProgramRules = program.programRules;
-    const foundationProgramRules = foundation.programRules;
-    const programRules = [...mainProgramRules, ...foundationProgramRules];
-
-    const constants = constantsStore.get();
-
-    console.log(constants);
-    return {
-        programRulesVariables,
-        programRules,
-        constants,
-    };
-}
 
 function getTrackerDataElements(trackerProgram: TrackerProgram): Array<DataElement> {
     return Array.from(trackerProgram.stages.values())
@@ -74,6 +57,7 @@ function getRulesEngineDataElementsAsObject(
 
 function getDataElements(program: Program) {
     let dataElements: Array<DataElement> = [];
+
     if (program instanceof TrackerProgram) {
         dataElements = getTrackerDataElements(program);
     }
@@ -102,14 +86,18 @@ export default function runRulesForSingleEvent(
         return null;
     }
 
-    const { programRulesVariables, programRules, constants } = getProgramRulesContainer(program, foundation);
+    const constants = constantsStore.get();
+    const { programRuleVariables } = program;
+    const programRules = [...program.programRules, ...foundation.programRules];
 
     if (!programRules || programRules.length === 0) {
         return null;
     }
+
     const dataElementsInProgram = getDataElements(program);
+
     const optionSets = optionSetsStore.get();
 
     // returns an array of effects that need to take place in the UI.
-    return rulesEngine.executeRules({ programRulesVariables, programRules, constants }, currentEventData, allEventsData, dataElementsInProgram, null, null, null, orgUnit, optionSets, processTypes.EVENT);
+    return rulesEngine.executeRules({ programRulesVariables: programRuleVariables, programRules, constants }, currentEventData, allEventsData, dataElementsInProgram, null, null, null, orgUnit, optionSets, processTypes.EVENT);
 }
