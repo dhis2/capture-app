@@ -62,7 +62,7 @@ msgid "Please provide a valid url"
 msgstr ""
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "有效的邮箱"
 
 msgid "Please provide a valid age"
 msgstr ""
@@ -227,7 +227,7 @@ msgid "Last month"
 msgstr "上月"
 
 msgid "Last 3 months"
-msgstr ""
+msgstr "最近3个月"
 
 msgid "Custom range"
 msgstr ""
@@ -236,7 +236,7 @@ msgid "Max"
 msgstr "最大"
 
 msgid "Min"
-msgstr ""
+msgstr "最小"
 
 msgid "greater than or equal to"
 msgstr ""
@@ -542,7 +542,7 @@ msgid "An error occured loading possible duplicates"
 msgstr ""
 
 msgid "Hide"
-msgstr ""
+msgstr "隐藏"
 
 msgid "Save as new {{tetName}}"
 msgstr ""
@@ -557,7 +557,7 @@ msgid "Program"
 msgstr "项目"
 
 msgid "Organisation Unit"
-msgstr ""
+msgstr "组织机构"
 
 msgid "Registration"
 msgstr "登记"

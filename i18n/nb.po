@@ -1,14 +1,14 @@
 # Translators:
 # phil_dhis2, 2020
-# Karoline Tufte Lien <karoline@dhis2.org>, 2020
 # Caroline Hesthagen Holen <carolinehholen@gmail.com>, 2020
+# Karoline Tufte Lien <karoline@dhis2.org>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2019-11-18T14:43:03.753Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Caroline Hesthagen Holen <carolinehholen@gmail.com>, 2020\n"
+"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,73 +17,73 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "Oppgi en gyldig dato"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Kolonner som skal vises i tabellen"
 
 msgid "Column"
 msgstr "Stolpe"
 
 msgid "This value is validating"
-msgstr ""
+msgstr "Denne verdien validerer"
 
 msgid "Async field update failed"
-msgstr ""
+msgstr "Asynkront feltoppdatering mislyktes"
 
 msgid "A value is required"
-msgstr ""
+msgstr "En verdi kreves"
 
 msgid "Please provide a valid number"
-msgstr ""
+msgstr "Oppgi et gyldig nummer"
 
 msgid "Please provide a valid integer"
-msgstr ""
+msgstr "Oppgi et gyldig heltall"
 
 msgid "Please provide a positive integer"
-msgstr ""
+msgstr "Oppgi et positivt heltall"
 
 msgid "Please provide zero or a positive integer"
-msgstr ""
+msgstr "Oppgi null eller et positivt heltall"
 
 msgid "Please provide a negative integer"
-msgstr ""
+msgstr "Oppgi et negativt heltall"
 
 msgid "Please provide a valid date and time"
-msgstr ""
+msgstr "Oppgi en gyldig dato og tid"
 
 msgid "Please provide a valid time"
-msgstr ""
+msgstr "Oppgi en gyldig tid"
 
 msgid "Please provide a valid percentage"
-msgstr ""
+msgstr "Oppgi en gyldig prosentandel"
 
 msgid "Please provide a valid url"
-msgstr ""
+msgstr "Oppgi en gyldig url"
 
 msgid "Please provide a valid email address"
 msgstr "Vennligst fyll ut en gyldig e-postadresse"
 
 msgid "Please provide a valid age"
-msgstr ""
+msgstr "Oppgi en gyldig alder"
 
 msgid "Please provide a valid phone number"
-msgstr ""
+msgstr "Oppgi et gyldig telefonnummer"
 
 msgid "Please provide a valid organisation unit"
-msgstr ""
+msgstr "Oppgi en gyldig organisasjonsenhet"
 
 msgid "Please provide valid coordinates"
-msgstr ""
+msgstr "Oppgi gyldige koordinater"
 
 msgid "This value already exists"
-msgstr ""
+msgstr "Denne verdien eksisterer allerede"
 
 msgid "\"From\" cannot be greater than \"To\""
-msgstr ""
+msgstr "\"Fra\" kan ikke være større enn \"Til\""
 
 msgid "Checking..."
-msgstr ""
+msgstr "Sjekker..."
 
 msgid "Area"
 msgstr "Areal"
@@ -95,28 +95,30 @@ msgid "Enrollment"
 msgstr "Registrering"
 
 msgid "A future date is not allowed"
-msgstr ""
+msgstr "En fremtidig dato er ikke tillatt"
 
 msgid "An error has occured. See log for details"
-msgstr ""
+msgstr "Det har oppstått en feil. Se logg for detaljer"
 
 msgid "Cancel"
 msgstr "Avbryt"
 
 msgid "Unsaved changes"
-msgstr ""
+msgstr "Ikke lagrede endringer"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
+"Hvis du forlater denne siden, vil du forkaste endringene du har gjort i "
+"denne hendelsen."
 
 msgid "Yes, discard"
-msgstr ""
+msgstr "Ja, kast"
 
 msgid "No, stay here"
-msgstr ""
+msgstr "Nei, bli her"
 
 msgid "validation failed"
-msgstr ""
+msgstr "validering mislyktes"
 
 msgid "Errors"
 msgstr "Feil"
@@ -128,7 +130,7 @@ msgid "Indicators"
 msgstr "Indikatorer"
 
 msgid "Warnings"
-msgstr ""
+msgstr "Advarsler"
 
 msgid "search group result could not be retrieved"
 msgstr ""
@@ -137,64 +139,64 @@ msgid "Complete"
 msgstr "Fullfør"
 
 msgid "Warnings found"
-msgstr ""
+msgstr "Advarsler funnet"
 
 msgid "Abort"
-msgstr ""
+msgstr "Avbryt"
 
 msgid "Back to form"
-msgstr ""
+msgstr "Tilbake til skjemaet"
 
 msgid "Save anyway"
-msgstr ""
+msgstr "Lagre likevel"
 
 msgid "Validation errors and warnings"
-msgstr ""
+msgstr "Valideringsfeil og advarsler"
 
 msgid "Validation errors"
-msgstr ""
+msgstr "Valideringsfeil"
 
 msgid "Validation warnings"
-msgstr ""
+msgstr "Valideringsadvarsler"
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr ""
+msgstr "Noen operasjoner kjører fortsatt. Vennligst vent.."
 
 msgid "Operations running"
-msgstr ""
+msgstr "Operasjoner kjører"
 
 msgid "Sort"
 msgstr "Sorter"
 
 msgid "No events to display"
-msgstr ""
+msgstr "Ingen hendelser å vise"
 
 msgid "Data for offline list not present"
-msgstr ""
+msgstr "Data for frakoblet liste er ikke til stede"
 
 msgid "Close"
 msgstr "Lukk"
 
 msgid "Please select the user"
-msgstr ""
+msgstr "Velg bruker"
 
 msgid "Search for user"
-msgstr ""
+msgstr "Søk etter bruker"
 
 msgid "Me"
-msgstr ""
+msgstr "Meg"
 
 msgid "Anyone"
-msgstr ""
+msgstr "Hvem som helst"
 
 msgid "None"
 msgstr "Ingen"
 
 msgid "Select user"
-msgstr ""
+msgstr "Velg bruker"
 
 msgid "to"
-msgstr ""
+msgstr "til"
 
 msgid "From"
 msgstr "Fra"
@@ -203,10 +205,10 @@ msgid "To"
 msgstr "Til"
 
 msgid "after or equal to"
-msgstr ""
+msgstr "etter eller lik"
 
 msgid "before or equal to"
-msgstr ""
+msgstr "før eller lik"
 
 msgid "Today"
 msgstr "I dag"
@@ -218,7 +220,7 @@ msgid "This month"
 msgstr "Denne måneden"
 
 msgid "This Year"
-msgstr ""
+msgstr "Dette året"
 
 msgid "Last week"
 msgstr "Forrige uke"
@@ -230,7 +232,7 @@ msgid "Last 3 months"
 msgstr "Siste 3 måneder"
 
 msgid "Custom range"
-msgstr ""
+msgstr "Tilpasset utvalg"
 
 msgid "Max"
 msgstr "Max"
@@ -239,19 +241,19 @@ msgid "Min"
 msgstr "Min"
 
 msgid "greater than or equal to"
-msgstr ""
+msgstr "større enn eller lik"
 
 msgid "less than or equal to"
-msgstr ""
+msgstr "mindre enn eller lik"
 
 msgid "Contains text"
-msgstr ""
+msgstr "Inneholder tekst"
 
 msgid "Yes"
 msgstr "Ja"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "mm/dd/yyyy"
 
 msgid "Years"
 msgstr "År"
@@ -263,7 +265,7 @@ msgid "Days"
 msgstr "Dager"
 
 msgid "Uploading file"
-msgstr ""
+msgstr "Laster opp fil"
 
 msgid "selected"
 msgstr "valgt"
@@ -272,16 +274,16 @@ msgid "Delete"
 msgstr "Slett"
 
 msgid "Select file"
-msgstr ""
+msgstr "Velg fil"
 
 msgid "No"
 msgstr "Nei"
 
 msgid "Uploading image"
-msgstr ""
+msgstr "Laster opp bilde"
 
 msgid "Select image"
-msgstr ""
+msgstr "Velg bilde"
 
 msgid "Search"
 msgstr "Søk"
@@ -290,16 +292,16 @@ msgid "Clear"
 msgstr "Fjern"
 
 msgid "No results"
-msgstr ""
+msgstr "Ingen resultater"
 
 msgid "suggestions could not be retrieved"
-msgstr ""
+msgstr "forslag kunne ikke hentes"
 
 msgid "search for username"
-msgstr ""
+msgstr "søk etter brukernavn"
 
 msgid "No items to display"
-msgstr ""
+msgstr "Ingen elementer å vise"
 
 msgid "Online"
 msgstr "Påkoblet"
@@ -308,43 +310,43 @@ msgid "Offline"
 msgstr "Frakoblet"
 
 msgid "Syncing"
-msgstr ""
+msgstr "Synkroniserer"
 
 msgid "Add comment"
-msgstr ""
+msgstr "Legg til en kommentar"
 
 msgid "You dont have access to write comments"
-msgstr ""
+msgstr "Du har ikke tilgang til å skrive kommentarer"
 
 msgid "Write comment"
-msgstr ""
+msgstr "Skriv kommentar"
 
 msgid "Basic info"
-msgstr ""
+msgstr "Grunnleggende informasjon"
 
 msgid "Status"
 msgstr "Status"
 
 msgid "Comments"
-msgstr ""
+msgstr "Kommentarer"
 
 msgid "Please add or cancel comment before saving the event"
-msgstr ""
+msgstr "Legg til eller avbryt kommentar før du lagrer hendelsen"
 
 msgid "No write access"
-msgstr ""
+msgstr "Ingen skrivetilgang"
 
 msgid "Save"
 msgstr "Lagre"
 
 msgid "Show all events"
-msgstr ""
+msgstr "Vis alle hendelser"
 
 msgid "Edit event"
-msgstr ""
+msgstr "Rediger hendelse"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr ""
+msgstr "Hendelsen kunne ikke lastes. Er du sikker på at den eksisterer?"
 
 msgid "Event could not be loaded"
 msgstr ""
@@ -436,7 +438,7 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "Assigned user"
-msgstr "Tildelt bruker"
+msgstr "Tildelt programbruker"
 
 msgid "Relationships"
 msgstr "Relasjoner"

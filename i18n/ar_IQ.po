@@ -202,10 +202,10 @@ msgid "To"
 msgstr "الى"
 
 msgid "after or equal to"
-msgstr ""
+msgstr "من بعد أو مساوٍ لـ"
 
 msgid "before or equal to"
-msgstr ""
+msgstr "من قبل أو مساوٍ لـ"
 
 msgid "Today"
 msgstr "اليوم"
@@ -379,10 +379,10 @@ msgid "Download with current filters"
 msgstr "تنزيل مع اعتماد عوامل التصفية الحالية"
 
 msgid "Save filter as..."
-msgstr ""
+msgstr "حفظ الفلتر باسم..."
 
 msgid "Download as..."
-msgstr ""
+msgstr "تحميل ك..."
 
 msgid "Rows per page"
 msgstr "عدد الصفوف لكل صفحة"
