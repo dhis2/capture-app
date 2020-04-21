@@ -82,7 +82,7 @@ msgid "Last month"
 msgstr "上月"
 
 msgid "Last 3 months"
-msgstr ""
+msgstr "最近3个月"
 
 msgid "Custom range"
 msgstr ""
@@ -106,7 +106,7 @@ msgid "Max"
 msgstr "最大"
 
 msgid "Min"
-msgstr ""
+msgstr "最小"
 
 msgid "greater than or equal to"
 msgstr ""
