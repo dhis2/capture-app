@@ -71,7 +71,9 @@ function prepare(
     allEventsData: ?EventsData,
 ) {
     if (!program || !foundation) {
-        log.error(errorCreator(errorMessages.PROGRAM_OR_FOUNDATION_MISSING)({ program, foundation, method: 'getRulesActionsForEvent' }));
+        log.error(errorCreator(errorMessages.PROGRAM_OR_FOUNDATION_MISSING)(
+            { program, foundation, method: 'getRulesActionsForEvent' }),
+        );
         return error;
     }
 
