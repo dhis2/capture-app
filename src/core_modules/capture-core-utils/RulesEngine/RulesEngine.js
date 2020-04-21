@@ -56,7 +56,7 @@ export default class RulesEngine {
         const valueProcessor = new ValueProcessor(inputConverterObject);
         const dateUtils = getDateUtils(momentConverter);
         const variableService = new VariableService(valueProcessor.processValue, dateUtils);
-        this.executionService = getExecutionService(onTranslate, variableService, dateUtils);
+        this.executionService = getExecutionService(variableService, dateUtils);
         this.onProcessRulesEffects = getRulesEffectsProcessor(
             this.executionService.convertDataToBaseOutputValue,
             outputRulesConverterObject);
