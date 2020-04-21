@@ -100,10 +100,10 @@ msgid "to"
 msgstr "إلى"
 
 msgid "after or equal to"
-msgstr ""
+msgstr "من بعد أو مساوٍ لـ"
 
 msgid "before or equal to"
-msgstr ""
+msgstr "من قبل أو مساوٍ لـ"
 
 msgid "From"
 msgstr "من"
