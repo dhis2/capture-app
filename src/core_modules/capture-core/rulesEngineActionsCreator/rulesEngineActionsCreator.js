@@ -30,7 +30,7 @@ export function getRulesActionsForEvent(
     foundation: ?RenderFoundation,
     formId: string,
     orgUnit: Object,
-    currentEventData: ?EventData,
+    currentEventData: ?EventData  | {} = {},
     allEventsData: ?Array<EventData>,
 ) {
     const rulesEffects = runRulesForSingleEvent(

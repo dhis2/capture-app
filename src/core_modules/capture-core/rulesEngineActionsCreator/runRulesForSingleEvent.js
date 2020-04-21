@@ -70,7 +70,6 @@ function getDataElements(program: Program) {
     return getRulesEngineDataElementsAsObject(dataElements);
 }
 
-
 export default function runRulesForSingleEvent(
     rulesEngine: RulesEngine,
     program: ?Program,
