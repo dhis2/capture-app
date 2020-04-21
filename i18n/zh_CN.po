@@ -1,340 +1,338 @@
 # Translators:
-# phil_dhis2, 2020
-# Caroline Hesthagen Holen <carolinehholen@gmail.com>, 2020
-# Karoline Tufte Lien <karoline@dhis2.org>, 2020
+# Aung Kyi Min <AungKyi.Min@savethechildren.org>, 2019
+# easylin <lin_xd@126.com>, 2020
+# 晓东 林 <13981924470@126.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2020-03-09T19:35:56.143Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
-"Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
+"Last-Translator: 晓东 林 <13981924470@126.com>, 2020\n"
+"Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nb\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Please provide a valid date"
-msgstr "Oppgi en gyldig dato"
+msgstr ""
 
 msgid "Columns to show in table"
-msgstr "Kolonner som skal vises i tabellen"
+msgstr ""
 
 msgid "Column"
-msgstr "Stolpe"
+msgstr ""
 
 msgid "This value is validating"
-msgstr "Denne verdien validerer"
+msgstr ""
 
 msgid "Async field update failed"
-msgstr "Asynkront feltoppdatering mislyktes"
+msgstr ""
 
 msgid "A value is required"
-msgstr "En verdi kreves"
+msgstr ""
 
 msgid "Please provide a valid number"
-msgstr "Oppgi et gyldig nummer"
+msgstr ""
 
 msgid "Please provide a valid integer"
-msgstr "Oppgi et gyldig heltall"
+msgstr ""
 
 msgid "Please provide a positive integer"
-msgstr "Oppgi et positivt heltall"
+msgstr ""
 
 msgid "Please provide zero or a positive integer"
-msgstr "Oppgi null eller et positivt heltall"
+msgstr ""
 
 msgid "Please provide a negative integer"
-msgstr "Oppgi et negativt heltall"
+msgstr ""
 
 msgid "Please provide a valid date and time"
-msgstr "Oppgi en gyldig dato og tid"
+msgstr ""
 
 msgid "Please provide a valid time"
-msgstr "Oppgi en gyldig tid"
+msgstr ""
 
 msgid "Please provide a valid percentage"
-msgstr "Oppgi en gyldig prosentandel"
+msgstr ""
 
 msgid "Please provide a valid url"
-msgstr "Oppgi en gyldig url"
+msgstr ""
 
 msgid "Please provide a valid email address"
-msgstr "Vennligst fyll ut en gyldig e-postadresse"
+msgstr "有效的邮箱"
 
 msgid "Please provide a valid age"
-msgstr "Oppgi en gyldig alder"
+msgstr ""
 
 msgid "Please provide a valid phone number"
-msgstr "Oppgi et gyldig telefonnummer"
+msgstr ""
 
 msgid "Please provide a valid organisation unit"
-msgstr "Oppgi en gyldig organisasjonsenhet"
+msgstr ""
 
 msgid "Please provide valid coordinates"
-msgstr "Oppgi gyldige koordinater"
+msgstr ""
 
 msgid "This value already exists"
-msgstr "Denne verdien eksisterer allerede"
+msgstr ""
 
 msgid "\"From\" cannot be greater than \"To\""
-msgstr "\"Fra\" kan ikke være større enn \"Til\""
+msgstr ""
 
 msgid "Checking..."
-msgstr "Sjekker..."
+msgstr ""
 
 msgid "Area"
-msgstr "Areal"
+msgstr ""
 
 msgid "Coordinate"
-msgstr "Koordinater"
+msgstr "坐标"
 
 msgid "Enrollment"
-msgstr "Registrering"
+msgstr "注册"
 
 msgid "A future date is not allowed"
-msgstr "En fremtidig dato er ikke tillatt"
+msgstr ""
 
 msgid "An error has occured. See log for details"
-msgstr "Det har oppstått en feil. Se logg for detaljer"
+msgstr ""
 
 msgid "Cancel"
-msgstr "Avbryt"
+msgstr "取消"
 
 msgid "Unsaved changes"
-msgstr "Ikke lagrede endringer"
+msgstr ""
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
-"Hvis du forlater denne siden, vil du forkaste endringene du har gjort i "
-"denne hendelsen."
 
 msgid "Yes, discard"
-msgstr "Ja, kast"
+msgstr ""
 
 msgid "No, stay here"
-msgstr "Nei, bli her"
+msgstr ""
 
 msgid "validation failed"
-msgstr "validering mislyktes"
+msgstr ""
 
 msgid "Errors"
-msgstr "Feil"
+msgstr "错误"
 
 msgid "Feedback"
-msgstr "Tilbakemelding"
+msgstr "反馈"
 
 msgid "Indicators"
-msgstr "Indikatorer"
+msgstr "指标"
 
 msgid "Warnings"
-msgstr "Advarsler"
+msgstr ""
 
 msgid "search group result could not be retrieved"
 msgstr ""
 
 msgid "Complete"
-msgstr "Fullfør"
+msgstr "完成"
 
 msgid "Warnings found"
-msgstr "Advarsler funnet"
+msgstr ""
 
 msgid "Abort"
-msgstr "Avbryt"
+msgstr ""
 
 msgid "Back to form"
-msgstr "Tilbake til skjemaet"
+msgstr ""
 
 msgid "Save anyway"
-msgstr "Lagre likevel"
+msgstr ""
 
 msgid "Validation errors and warnings"
-msgstr "Valideringsfeil og advarsler"
+msgstr ""
 
 msgid "Validation errors"
-msgstr "Valideringsfeil"
+msgstr ""
 
 msgid "Validation warnings"
-msgstr "Valideringsadvarsler"
+msgstr ""
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr "Noen operasjoner kjører fortsatt. Vennligst vent.."
+msgstr ""
 
 msgid "Operations running"
-msgstr "Operasjoner kjører"
+msgstr ""
 
 msgid "Sort"
-msgstr "Sorter"
+msgstr ""
 
 msgid "No events to display"
-msgstr "Ingen hendelser å vise"
+msgstr ""
 
 msgid "Data for offline list not present"
-msgstr "Data for frakoblet liste er ikke til stede"
+msgstr ""
 
 msgid "Close"
-msgstr "Lukk"
+msgstr "关闭"
 
 msgid "Please select the user"
-msgstr "Velg bruker"
+msgstr ""
 
 msgid "Search for user"
-msgstr "Søk etter bruker"
+msgstr ""
 
 msgid "Me"
-msgstr "Meg"
+msgstr ""
 
 msgid "Anyone"
-msgstr "Hvem som helst"
+msgstr ""
 
 msgid "None"
-msgstr "Ingen"
+msgstr "没有"
 
 msgid "Select user"
-msgstr "Velg bruker"
+msgstr ""
 
 msgid "to"
-msgstr "til"
+msgstr ""
 
 msgid "From"
-msgstr "Fra"
+msgstr "从"
 
 msgid "To"
-msgstr "Til"
+msgstr "到"
 
 msgid "Today"
-msgstr "I dag"
+msgstr "今天"
 
 msgid "This week"
-msgstr "Denne uken"
+msgstr "本周"
 
 msgid "This month"
-msgstr "Denne måneden"
+msgstr "本月"
 
 msgid "This Year"
-msgstr "Dette året"
+msgstr ""
 
 msgid "Last week"
-msgstr "Forrige uke"
+msgstr "上周"
 
 msgid "Last month"
-msgstr "Forrige måned"
+msgstr "上月"
 
 msgid "Last 3 months"
-msgstr "Siste 3 måneder"
+msgstr "最近3个月"
 
 msgid "Custom range"
-msgstr "Tilpasset utvalg"
+msgstr ""
 
 msgid "Max"
-msgstr "Max"
+msgstr "最大"
 
 msgid "Min"
-msgstr "Min"
+msgstr "最小"
 
 msgid "Contains text"
-msgstr "Inneholder tekst"
+msgstr ""
 
 msgid "Yes"
-msgstr "Ja"
+msgstr "Yes"
 
 msgid "mm/dd/yyyy"
-msgstr "mm/dd/yyyy"
+msgstr ""
 
 msgid "Years"
-msgstr "År"
+msgstr "年"
 
 msgid "Months"
-msgstr "Måneder"
+msgstr "月"
 
 msgid "Days"
-msgstr "Dager"
+msgstr "天数"
 
 msgid "Uploading file"
-msgstr "Laster opp fil"
+msgstr ""
 
 msgid "selected"
-msgstr "valgt"
+msgstr ""
 
 msgid "Delete"
-msgstr "Slett"
+msgstr "删除"
 
 msgid "Select file"
-msgstr "Velg fil"
+msgstr ""
 
 msgid "No"
-msgstr "Nei"
+msgstr "No"
 
 msgid "Uploading image"
-msgstr "Laster opp bilde"
+msgstr ""
 
 msgid "Select image"
-msgstr "Velg bilde"
+msgstr ""
 
 msgid "Search"
-msgstr "Søk"
+msgstr "搜索"
 
 msgid "Clear"
-msgstr "Fjern"
+msgstr "清除"
 
 msgid "No results"
-msgstr "Ingen resultater"
+msgstr ""
 
 msgid "suggestions could not be retrieved"
-msgstr "forslag kunne ikke hentes"
+msgstr ""
 
 msgid "search for username"
-msgstr "søk etter brukernavn"
+msgstr ""
 
 msgid "No items to display"
-msgstr "Ingen elementer å vise"
+msgstr ""
 
 msgid "Online"
-msgstr "Påkoblet"
+msgstr ""
 
 msgid "Offline"
-msgstr "Frakoblet"
+msgstr ""
 
 msgid "Syncing"
-msgstr "Synkroniserer"
+msgstr ""
 
 msgid "Add comment"
-msgstr "Legg til en kommentar"
+msgstr ""
 
 msgid "You dont have access to write comments"
-msgstr "Du har ikke tilgang til å skrive kommentarer"
+msgstr ""
 
 msgid "Write comment"
-msgstr "Skriv kommentar"
+msgstr ""
 
 msgid "Basic info"
-msgstr "Grunnleggende informasjon"
+msgstr ""
 
 msgid "Status"
-msgstr "Status"
+msgstr "状态"
 
 msgid "Comments"
-msgstr "Kommentarer"
+msgstr ""
 
 msgid "Please add or cancel comment before saving the event"
-msgstr "Legg til eller avbryt kommentar før du lagrer hendelsen"
+msgstr ""
 
 msgid "No write access"
-msgstr "Ingen skrivetilgang"
+msgstr ""
 
 msgid "Save"
-msgstr "Lagre"
+msgstr "保存"
 
 msgid "Show all events"
-msgstr "Vis alle hendelser"
+msgstr ""
 
 msgid "Edit event"
-msgstr "Rediger hendelse"
+msgstr ""
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Hendelsen kunne ikke lastes. Er du sikker på at den eksisterer?"
+msgstr ""
 
 msgid "Event could not be loaded"
 msgstr ""
@@ -346,10 +344,10 @@ msgid "View event info"
 msgstr ""
 
 msgid "Delete event"
-msgstr ""
+msgstr "删除事件"
 
 msgid "Update"
-msgstr "Oppdater"
+msgstr "更新"
 
 msgid "{{fromDate}} to {{toDate}}"
 msgstr ""
@@ -361,10 +359,10 @@ msgid "before or equal to {{date}}"
 msgstr ""
 
 msgid "greater than or equal to"
-msgstr "større enn eller lik"
+msgstr ""
 
 msgid "less than or equal to"
-msgstr "mindre enn eller lik"
+msgstr ""
 
 msgid "More filters"
 msgstr ""
@@ -373,13 +371,13 @@ msgid "Select columns"
 msgstr ""
 
 msgid "Download as JSON"
-msgstr "Last ned i JSON format"
+msgstr ""
 
 msgid "Download as XML"
-msgstr "Last ned i XML format"
+msgstr ""
 
 msgid "Download as CSV"
-msgstr "Last ned i CSV format"
+msgstr ""
 
 msgid "Download with current filters"
 msgstr ""
@@ -409,13 +407,13 @@ msgid "Do you really want to delete the '{{templateName}}' view?"
 msgstr ""
 
 msgid "Confirm"
-msgstr "Bekreft"
+msgstr "确认"
 
 msgid "Save As view"
 msgstr ""
 
 msgid "View name"
-msgstr "Vis navn"
+msgstr ""
 
 msgid "Show Less"
 msgstr ""
@@ -433,10 +431,10 @@ msgid "Registered events"
 msgstr ""
 
 msgid "Active"
-msgstr "Aktiv"
+msgstr "活跃的"
 
 msgid "Completed"
-msgstr "Fullført"
+msgstr "已完成"
 
 msgid "Could not get organisation unit"
 msgstr ""
@@ -457,7 +455,7 @@ msgid "Save and exit"
 msgstr ""
 
 msgid "Finish"
-msgstr ""
+msgstr "保存"
 
 msgid "Switch to form view"
 msgstr ""
@@ -480,19 +478,19 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "Assigned user"
-msgstr "Tildelt programbruker"
+msgstr "指派的用户"
 
 msgid "Relationships"
-msgstr "Relasjoner"
+msgstr "关系"
 
 msgid "Assignee"
-msgstr "Fullmektig"
+msgstr ""
 
 msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr "i"
+msgstr ""
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -508,7 +506,7 @@ msgid ""
 msgstr ""
 
 msgid "New event"
-msgstr "Ny hendelse"
+msgstr "新事件"
 
 msgid "New event relationship"
 msgstr ""
@@ -586,7 +584,7 @@ msgid "An error occured loading possible duplicates"
 msgstr ""
 
 msgid "Hide"
-msgstr "Skjul"
+msgstr "隐藏"
 
 msgid "Save as new {{tetName}}"
 msgstr ""
@@ -595,22 +593,22 @@ msgid "Some programs are being filtered."
 msgstr ""
 
 msgid "Show all"
-msgstr "Vis alle"
+msgstr "全部显示"
 
 msgid "Program"
-msgstr "Program"
+msgstr "项目"
 
 msgid "Organisation Unit"
-msgstr "Organisasjonsenhet"
+msgstr "组织机构"
 
 msgid "Registration"
-msgstr "Registrering"
+msgstr "登记"
 
 msgid "Review Duplicates"
 msgstr ""
 
 msgid "Search results"
-msgstr "Søkeresultater"
+msgstr "搜索结果"
 
 msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
@@ -631,7 +629,7 @@ msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Register"
-msgstr "Registrere"
+msgstr "登记"
 
 msgid "You dont have access to edit this event"
 msgstr ""
@@ -645,7 +643,7 @@ msgid "No one is assigned to this event"
 msgstr ""
 
 msgid "Assign"
-msgstr "Tildel"
+msgstr ""
 
 msgid "Event assigned to {{name}}"
 msgstr ""
@@ -657,13 +655,13 @@ msgid "New {{typeName}}"
 msgstr ""
 
 msgid "New"
-msgstr "Ny"
+msgstr "新建"
 
 msgid "Start again"
 msgstr ""
 
 msgid "Find"
-msgstr "Finn"
+msgstr "发现"
 
 msgid "Selected registering unit"
 msgstr ""
@@ -675,19 +673,19 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
 
 msgid "Accept"
-msgstr ""
+msgstr "接受"
 
 msgid "Registering Organisation Unit"
 msgstr ""
 
 msgid "Select"
-msgstr "Velg"
+msgstr "选择"
 
 msgid "Selected Program"
 msgstr ""
 
 msgid "Select program"
-msgstr "Velg program"
+msgstr ""
 
 msgid "No programs available."
 msgstr ""
@@ -699,10 +697,10 @@ msgid "You dont have access to create any relationships"
 msgstr ""
 
 msgid "Add relationship"
-msgstr "Legg til relasjon"
+msgstr "添加关系"
 
 msgid "Selected program"
-msgstr "Valgt program"
+msgstr "选择的项目"
 
 msgid "Search {{uniqueAttrName}}"
 msgstr ""
@@ -726,7 +724,7 @@ msgid "Program is not a tracker program"
 msgstr ""
 
 msgid "Profile"
-msgstr "Profil"
+msgstr "基本信息"
 
 msgid "Error saving event"
 msgstr ""
@@ -753,22 +751,22 @@ msgid "tracked entity instance"
 msgstr ""
 
 msgid "Set coordinate"
-msgstr "Sett koordinater"
+msgstr "设置坐标"
 
 msgid "Date"
-msgstr "Dato"
+msgstr "日期"
 
 msgid "Time"
-msgstr "Klokkeslett"
+msgstr ""
 
 msgid "From date"
-msgstr "Fra dato"
+msgstr ""
 
 msgid "From time"
 msgstr ""
 
 msgid "To date"
-msgstr "Til dato"
+msgstr ""
 
 msgid "To time"
 msgstr ""
