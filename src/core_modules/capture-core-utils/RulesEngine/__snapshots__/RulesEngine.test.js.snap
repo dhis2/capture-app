@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tests on runRulesForSingleEvent function 1`] = `
+exports[`on rulesEngine.executeRules for program  1`] = `null`;
+
+exports[`on rulesEngine.executeRules for program Antenatal care visit 1`] = `
 Array [
   Object {
     "id": "vANAXwtLwcT",
@@ -14,7 +16,7 @@ Array [
 ]
 `;
 
-exports[`Tests on runRulesForSingleEvent function 2`] = `
+exports[`on rulesEngine.executeRules for program Inpatient morbidity and mortality 1`] = `
 Array [
   Object {
     "displayKeyValuePair": Object {
@@ -28,7 +30,7 @@ Array [
 ]
 `;
 
-exports[`Tests on runRulesForSingleEvent function 3`] = `
+exports[`on rulesEngine.executeRules for program XX MAL RDT - Case Registration 1`] = `
 Array [
   Object {
     "id": "PAvRSZQyYjR",
