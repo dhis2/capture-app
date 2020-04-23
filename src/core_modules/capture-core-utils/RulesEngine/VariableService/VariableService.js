@@ -97,7 +97,7 @@ export default class VariableService {
         selectedEntity: ?TEIValues,
         selectedEnrollment: ?Enrollment,
         selectedOrgUnit: OrgUnit,
-        optionSets: OptionSets,
+        optionSets: ?OptionSets,
     ) {
         const programVariables = programRulesContainer.programRulesVariables || [];
         const sourceData = {
