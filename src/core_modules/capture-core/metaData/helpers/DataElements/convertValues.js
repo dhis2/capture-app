@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
-import isArray from 'd2-utilizr/src/isArray';
-import isObject from 'd2-utilizr/src/isObject';
+import isArray from 'd2-utilizr/lib/isArray';
+import isObject from 'd2-utilizr/lib/isObject';
 import { DataElement } from '../../DataElement';
 import { errorCreator } from 'capture-core-utils';
 import type { ConvertFn } from '../../DataElement/DataElement';

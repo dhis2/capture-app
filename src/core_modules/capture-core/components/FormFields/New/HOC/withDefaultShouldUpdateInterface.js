@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import isFunction from 'd2-utilizr/src/isFunction';
+import isFunction from 'd2-utilizr/lib/isFunction';
 
 type Props = {
 };

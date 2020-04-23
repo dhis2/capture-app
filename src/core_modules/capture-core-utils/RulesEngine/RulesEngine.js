@@ -61,8 +61,7 @@ export default class RulesEngine {
         this.executionService = getExecutionService(onTranslate, variableService, dateUtils);
         this.onProcessRulesEffects = getRulesEffectsProcessor(
             this.executionService.convertDataToBaseOutputValue,
-            outputRulesConverterObject,
-        );
+            outputRulesConverterObject);
     }
 
     executeRules(
