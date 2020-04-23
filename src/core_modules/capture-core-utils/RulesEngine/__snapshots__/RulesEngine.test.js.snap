@@ -1,5 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`rules engine area is hidden and given value is {"sWoqcoByYmD":false} 1`] = `
+Array [
+  Object {
+    "id": "vANAXwtLwcT",
+    "message": "Hemoglobin value lower than normal ",
+    "type": "SHOWWARNING",
+  },
+  Object {
+    "id": "Ok9OQpitjQr",
+    "type": "HIDEFIELD",
+  },
+]
+`;
+
+exports[`rules engine area is hidden and given value is {"sWoqcoByYmD":false} 2`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": NaN,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine area is hidden and given value is {"sWoqcoByYmD":true} 1`] = `
+Array [
+  Object {
+    "id": "vANAXwtLwcT",
+    "message": "Hemoglobin value lower than normal ",
+    "type": "SHOWWARNING",
+  },
+]
+`;
+
+exports[`rules engine area is hidden and given value is {"sWoqcoByYmD":true} 2`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": NaN,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
 exports[`rules engine where the default values for the program: Antenatal care visit 1`] = `
 Array [
   Object {
