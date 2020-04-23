@@ -11,11 +11,10 @@ import { updateRulesEffects } from './rulesEngine.actions';
 import { RulesEngine } from '../../capture-core-utils/RulesEngine';
 import type {
     OutputsEffect,
-    EventData,
     Enrollment,
     TEIValues,
-    EventsData,
     OrgUnit,
+    InputEvent,
 } from '../../capture-core-utils/RulesEngine/rulesEngine.types';
 
 import type {
