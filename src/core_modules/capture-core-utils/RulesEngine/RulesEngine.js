@@ -17,7 +17,6 @@ import type {
     DataElements,
     OrgUnit,
     OptionSets,
-    Translator,
     TrackedEntityAttributes,
     Enrollment,
     ProgramRuleEffect,
@@ -53,12 +52,11 @@ export default class RulesEngine {
     constructor(
         inputConverterObject: IConvertInputRulesValue,
         momentConverter: IMomentConverter,
-        onTranslate: Translator,
         outputRulesConverterObject: IConvertOutputRulesEffectsValue) {
         const valueProcessor = new ValueProcessor(inputConverterObject);
         const dateUtils = getDateUtils(momentConverter);
         const variableService = new VariableService(valueProcessor.processValue, dateUtils);
-        this.executionService = getExecutionService(onTranslate, variableService, dateUtils);
+        this.executionService = getExecutionService(variableService, dateUtils);
         this.onProcessRulesEffects = getRulesEffectsProcessor(
             this.executionService.convertDataToBaseOutputValue,
             outputRulesConverterObject);

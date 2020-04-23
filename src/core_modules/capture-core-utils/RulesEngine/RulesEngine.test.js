@@ -1,6 +1,4 @@
 // @flow
-import i18n from '@dhis2/d2-i18n';
-
 import RulesEngine from '../RulesEngine/RulesEngine';
 import inputValueConverter from '../../capture-core/rulesEngineActionsCreator/converters/inputValueConverter';
 import momentConverter from '../../capture-core/rulesEngineActionsCreator/converters/momentConverter';
@@ -35,13 +33,18 @@ const programs = [
         foundation: { programRules: [] },
         orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
     },
+    {
+        program: null,
+        foundation: null,
+        orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
+    },
 ];
 
-programs.forEach(({ program, foundation, formId, orgUnit }) => {
-    test('Tests rulesEngine class', () => {
-        const rulesEngine = new RulesEngine(inputValueConverter, momentConverter, i18n.t, outputRulesEffectsValueConverter);
+programs.forEach(({ program, foundation, orgUnit }) => {
+    test('Tests on runRulesForSingleEvent function', () => {
+        const rulesEngine = new RulesEngine(inputValueConverter, momentConverter, outputRulesEffectsValueConverter);
 
-        const rulesEffects = runRulesForSingleEvent(rulesEngine, program, foundation, formId, orgUnit);
+        const rulesEffects = runRulesForSingleEvent(rulesEngine, program, foundation, orgUnit);
 
         expect(rulesEffects).toMatchSnapshot();
     });

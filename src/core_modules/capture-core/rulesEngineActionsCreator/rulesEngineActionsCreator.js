@@ -2,15 +2,7 @@
 /**
  * @module rulesEngineActionsCreator
  */
-import i18n from '@dhis2/d2-i18n';
 import { RulesEngine } from 'capture-core-utils/RulesEngine';
-import type
-{
-    OutputEffect,
-    EventData,
-    Enrollment,
-    TEIValues,
-} from 'capture-core-utils/RulesEngine/rulesEngine.types';
 import { RenderFoundation, Program, TrackerProgram } from '../metaData';
 import inputValueConverter from './converters/inputValueConverter';
 import outputRulesEffectsValueConverter from './converters/rulesEffectsValueConverter';
@@ -20,8 +12,9 @@ import runRulesForTEI from './runRulesForTEI';
 import postProcessRulesEffects from './postProcessRulesEffects';
 import { updateRulesEffects } from './rulesEngine.actions';
 
-const rulesEngine =
-    new RulesEngine(inputValueConverter, momentConverter, i18n.t, outputRulesEffectsValueConverter);
+import type { OutputEffect, EventData, Enrollment, TEIValues } from 'capture-core-utils/RulesEngine/rulesEngine.types';
+
+const rulesEngine = new RulesEngine(inputValueConverter, momentConverter, outputRulesEffectsValueConverter);
 
 function getRulesActions(
     rulesEffects: ?Array<OutputEffect>,
@@ -37,14 +30,13 @@ export function getRulesActionsForEvent(
     foundation: ?RenderFoundation,
     formId: string,
     orgUnit: Object,
-    currentEventData: ?EventData,
+    currentEventData: ?EventData  | {} = {},
     allEventsData: ?Array<EventData>,
 ) {
     const rulesEffects = runRulesForSingleEvent(
         rulesEngine,
         program,
         foundation,
-        formId,
         orgUnit,
         currentEventData,
         allEventsData,

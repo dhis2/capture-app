@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tests rulesEngine class 1`] = `
+exports[`Tests on runRulesForSingleEvent function 1`] = `
 Array [
   Object {
     "id": "vANAXwtLwcT",
@@ -14,7 +14,7 @@ Array [
 ]
 `;
 
-exports[`Tests rulesEngine class 2`] = `
+exports[`Tests on runRulesForSingleEvent function 2`] = `
 Array [
   Object {
     "displayKeyValuePair": Object {
@@ -28,7 +28,7 @@ Array [
 ]
 `;
 
-exports[`Tests rulesEngine class 3`] = `
+exports[`Tests on runRulesForSingleEvent function 3`] = `
 Array [
   Object {
     "id": "PAvRSZQyYjR",
@@ -44,3 +44,5 @@ Array [
   },
 ]
 `;
+
+exports[`Tests on runRulesForSingleEvent function 4`] = `null`;

@@ -12,8 +12,6 @@ export {
     Option,
     OptionSet,
     inputTypes as optionSetInputTypes,
-    inputTypesAsArray as optionSetInputTypesAsArray,
-    viewTypes as optionSetViewTypes,
 } from './OptionSet';
 export { Program, ProgramStage, EventProgram, TrackerProgram, Enrollment } from './Program';
 export { RelationshipType } from './RelationshipType';
