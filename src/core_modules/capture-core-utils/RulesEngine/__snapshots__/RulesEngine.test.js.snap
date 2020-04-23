@@ -52,6 +52,52 @@ Array [
 ]
 `;
 
+exports[`rules engine field will be hidden and given value is {"oZg33kd9taw":"Female","SWfdB5lX0fk":null} 1`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": NaN,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine field will be hidden and given value is {"oZg33kd9taw":"Male","SWfdB5lX0fk":null} 1`] = `
+Array [
+  Object {
+    "id": "SWfdB5lX0fk",
+    "type": "HIDEFIELD",
+  },
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": NaN,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine field will be hidden and given value is {"oZg33kd9taw":null,"SWfdB5lX0fk":null} 1`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": NaN,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
 exports[`rules engine where the default values for the program: Antenatal care visit 1`] = `
 Array [
   Object {
