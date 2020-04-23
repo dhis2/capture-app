@@ -90,7 +90,7 @@ export default class VariableService {
 
     getVariables(
         programRulesContainer: { constants?: ?Constants, programRulesVariables: ?Array<ProgramRuleVariable>},
-        executingEvent: ?EventData,
+        executingEvent: ?InputEvent,
         eventsContainer: ?EventsDataContainer,
         dataElements: ?DataElements,
         trackedEntityAttributes: ?TrackedEntityAttributes,
