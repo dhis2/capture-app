@@ -98,6 +98,174 @@ Array [
 ]
 `;
 
+exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":40,"GieVkTxp4HH":18,"vV9UWAZohSf":85} 1`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": 2623.456790123457,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":40,"GieVkTxp4HH":180,"vV9UWAZohSf":85} 1`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": 26.234567901234566,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":40,"GieVkTxp4HH":180,"vV9UWAZohSf":85} 2`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": 26.234567901234566,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":40,"GieVkTxp4HH":180,"vV9UWAZohSf":null} 1`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": 0,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":40,"GieVkTxp4HH":null,"vV9UWAZohSf":85} 1`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": Infinity,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":40,"GieVkTxp4HH":null,"vV9UWAZohSf":null} 1`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": NaN,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":null,"GieVkTxp4HH":180,"vV9UWAZohSf":85} 1`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": 26.234567901234566,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":null,"GieVkTxp4HH":180,"vV9UWAZohSf":85} 2`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": 26.234567901234566,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":null,"GieVkTxp4HH":180,"vV9UWAZohSf":null} 1`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": 0,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":null,"GieVkTxp4HH":180,"vV9UWAZohSf":null} 2`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": 0,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":null,"GieVkTxp4HH":null,"vV9UWAZohSf":85} 1`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": Infinity,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":null,"GieVkTxp4HH":null,"vV9UWAZohSf":null} 1`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": NaN,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
 exports[`rules engine where the default values for the program: Antenatal care visit 1`] = `
 Array [
   Object {
