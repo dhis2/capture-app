@@ -7,7 +7,7 @@ import trimQuotes from '../commonUtils/trimQuotes';
 import typeKeys from '../typeKeys.const';
 
 export default function getExecutionService(variableService, dateUtils) {
-    const replaceVariables =  (expression, variablesHash) => {
+    const replaceVariables = (expression, variablesHash) => {
         // replaces the variables in an expression with actual variable values.
 
         // Check if the expression contains program rule variables at all(any curly braces):
@@ -17,16 +17,19 @@ export default function getExecutionService(variableService, dateUtils) {
             // Replace each matched variable:
             variablespresent.forEach((variablepresent) => {
                 // First strip away any prefix and postfix signs from the variable name:
-                variablepresent = variablepresent.replace('#{', '').replace('A{', '').replace('C{', '').replace('V{', '')
-                    .replace('}', '');
+                variablepresent = variablepresent
+                .replace('#{', '')
+                .replace('A{', '')
+                .replace('C{', '')
+                .replace('V{', '')
+                .replace('}', '');
 
                 if (isDefined(variablesHash[variablepresent])) {
                     // Replace all occurrences of the variable name(hence using regex replacement):
                     expression = expression.replace(new RegExp(`${variablesHash[variablepresent].variablePrefix}\\{${variablepresent}\\}`, 'g'),
-                        variablesHash[variablepresent].variableValue);
+                      variablesHash[variablepresent].variableValue);
                 } else {
-                    log.warn(`Expression ${expression} contains variable ${variablepresent
-                    } - but this variable is not defined.`);
+                    log.warn(`Expression ${expression} contains variable ${variablepresent} - but this variable is not defined.`);
                 }
             });
         }
@@ -41,10 +44,10 @@ export default function getExecutionService(variableService, dateUtils) {
                 variablepresent = variablepresent.replace('V{', '').replace('}', '');
 
                 if (isDefined(variablesHash[variablepresent]) &&
-                    variablesHash[variablepresent].variablePrefix === 'V') {
+                  variablesHash[variablepresent].variablePrefix === 'V') {
                     // Replace all occurrences of the variable name(hence using regex replacement):
                     expression = expression.replace(new RegExp(`V{${variablepresent}}`, 'g'),
-                        variablesHash[variablepresent].variableValue);
+                      variablesHash[variablepresent].variableValue);
                 } else {
                     log.warn(`Expression ${expression} conains context variable ${variablepresent
                     } - but this variable is not defined.`);
@@ -62,10 +65,10 @@ export default function getExecutionService(variableService, dateUtils) {
                 variablepresent = variablepresent.replace('A{', '').replace('}', '');
 
                 if (isDefined(variablesHash[variablepresent]) &&
-                    variablesHash[variablepresent].variablePrefix === 'A') {
+                  variablesHash[variablepresent].variablePrefix === 'A') {
                     // Replace all occurrences of the variable name(hence using regex replacement):
                     expression = expression.replace(new RegExp(`A{${variablepresent}}`, 'g'),
-                        variablesHash[variablepresent].variableValue);
+                      variablesHash[variablepresent].variableValue);
                 } else {
                     log.warn(`Expression ${expression} conains attribute ${variablepresent
                     } - but this attribute is not defined.`);
@@ -83,10 +86,10 @@ export default function getExecutionService(variableService, dateUtils) {
                 variablepresent = variablepresent.replace('C{', '').replace('}', '');
 
                 if (isDefined(variablesHash[variablepresent]) &&
-                    variablesHash[variablepresent].variablePrefix === 'C') {
+                  variablesHash[variablepresent].variablePrefix === 'C') {
                     // Replace all occurrences of the variable name(hence using regex replacement):
                     expression = expression.replace(new RegExp(`C{${variablepresent}}`, 'g'),
-                        variablesHash[variablepresent].variableValue);
+                      variablesHash[variablepresent].variableValue);
                 } else {
                     log.warn(`Expression ${expression} conains constant ${variablepresent
                     } - but this constant is not defined.`);
@@ -100,7 +103,8 @@ export default function getExecutionService(variableService, dateUtils) {
     const runDhisFunctions = (expression, variablesHash, flag) => {
         // Called from "runExpression". Only proceed with this logic in case there seems to be dhis function calls: "d2:" is present.
         if (isDefined(expression) && expression.indexOf('d2:') !== -1) {
-            const dhisFunctions = [{ name: 'd2:daysBetween', parameters: 2 },
+            const dhisFunctions = [
+                { name: 'd2:daysBetween', parameters: 2 },
                 { name: 'd2:weeksBetween', parameters: 2 },
                 { name: 'd2:monthsBetween', parameters: 2 },
                 { name: 'd2:yearsBetween', parameters: 2 },
@@ -125,7 +129,8 @@ export default function getExecutionService(variableService, dateUtils) {
                 { name: 'd2:substring', parameters: 3 },
                 { name: 'd2:split', parameters: 3 },
                 { name: 'd2:zScoreWFA', parameters: 3 },
-                { name: 'd2:length', parameters: 1 }];
+                { name: 'd2:length', parameters: 1 },
+            ];
             let continueLooping = true;
             // Safety harness on 10 loops, in case of unanticipated syntax causing unintencontinued looping
             for (let i = 0; i < 10 && continueLooping; i++) {
@@ -133,13 +138,13 @@ export default function getExecutionService(variableService, dateUtils) {
                 let brokenExecution = false;
                 dhisFunctions.forEach((dhisFunction) => {
                     // Select the function call, with any number of parameters inside single quotations, or number parameters witout quotations
-                    const regularExFunctionCall = new RegExp(`${dhisFunction.name}\\( *(([\\d/\\*\\+\\-%\. ]+)|( *'[^']*'))*( *, *(([\\d/\\*\\+\\-%\. ]+)|'[^']*'))* *\\)`, 'g');
+                    const regularExFunctionCall = new RegExp(`${dhisFunction.name}\\( *(([\\d/\\*\\+\\-%. ]+)|( *'[^']*'))*( *, *(([\\d/\\*\\+\\-%. ]+)|'[^']*'))* *\\)`, 'g');
 
                     const callsToThisFunction = expression.match(regularExFunctionCall);
                     if (callsToThisFunction) {
                         callsToThisFunction.forEach((callToThisFunction) => {
                             // Remove the function name and paranthesis:
-                            let justparameters = callToThisFunction.replace(/(^[^\(]+\()|\)$/g, '');
+                            let justparameters = callToThisFunction.replace(/(^[^(]+\()|\)$/g, '');
                             // Remove white spaces before and after parameters:
                             justparameters = justparameters.trim();
                             // Then split into single parameters:
@@ -161,7 +166,8 @@ export default function getExecutionService(variableService, dateUtils) {
 
                             // In case the function call is nested, the parameter itself contains an expression, run the expression.
                             if (!brokenExecution && isDefined(parameters) && parameters !== null) {
-                                for (var i = 0; i < parameters.length; i++) {
+                                for (let i = 0; i < parameters.length; i++) {
+                                    // eslint-disable-next-line no-use-before-define
                                     parameters[i] = runExpression(parameters[i], dhisFunction.name, `parameter:${i}`, flag, variablesHash);
                                 }
                             }
@@ -204,29 +210,23 @@ export default function getExecutionService(variableService, dateUtils) {
                                 expression = expression.replace(callToThisFunction, rest);
                                 expressionUpdated = true;
                             } else if (dhisFunction.name === 'd2:concatenate') {
-                                var returnString = "'";
-                                for (var i = 0; i < parameters.length; i++) {
+                                let returnString = "'";
+                                for (let i = 0; i < parameters.length; i++) {
                                     returnString += parameters[i];
                                 }
                                 returnString += "'";
                                 expression = expression.replace(callToThisFunction, returnString);
                                 expressionUpdated = true;
-                            } else if (dhisFunction.name === 'd2:addDays') {
-                                const newDate = dateUtils.addDays(date, daysToAdd);
-                                // Replace the end evaluation of the dhis function:
-                                expression = expression.replace(callToThisFunction, newDate);
-                                expressionUpdated = true;
                             } else if (dhisFunction.name === 'd2:zing') {
-                                var number = parameters[0];
+                                let number = parameters[0];
                                 if (number < 0) {
                                     number = 0;
                                 }
-
                                 // Replace the end evaluation of the dhis function:
                                 expression = expression.replace(callToThisFunction, number);
                                 expressionUpdated = true;
                             } else if (dhisFunction.name === 'd2:oizp') {
-                                var number = parameters[0];
+                                const number = parameters[0];
                                 let output = 1;
                                 if (number < 0) {
                                     output = 0;
@@ -236,9 +236,9 @@ export default function getExecutionService(variableService, dateUtils) {
                                 expression = expression.replace(callToThisFunction, output);
                                 expressionUpdated = true;
                             } else if (dhisFunction.name === 'd2:count') {
-                                var variableName = parameters[0];
-                                var variableObject = variablesHash[variableName];
-                                var count = 0;
+                                const variableName = parameters[0];
+                                const variableObject = variablesHash[variableName];
+                                let count = 0;
                                 if (variableObject) {
                                     if (variableObject.hasValue) {
                                         if (variableObject.allValues) {
@@ -256,53 +256,23 @@ export default function getExecutionService(variableService, dateUtils) {
                                 // Replace the end evaluation of the dhis function:
                                 expression = expression.replace(callToThisFunction, count);
                                 expressionUpdated = true;
-                            } else if (dhisFunction.name === 'd2:countIfZeroPos') {
-                                var variableName = $filter('trimvariablequalifiers')(parameters[0]);
-                                var variableObject = variablesHash[variableName];
-
-                                var count = 0;
-                                if (variableObject) {
-                                    if (variableObject.hasValue) {
-                                        if (variableObject.allValues && variableObject.allValues.length > 0) {
-                                            for (var i = 0; i < variableObject.allValues.length; i++) {
-                                                if (variableObject.allValues[i] >= 0) {
-                                                    count++;
-                                                }
-                                            }
-                                        } else {
-                                            // The variable has a value, but no list of alternates. This means we only compare the elements real value
-                                            if (variableObject.variableValue >= 0) {
-                                                count = 1;
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    log.warn(`could not find variable to countifzeropos: ${variableName}`);
-                                }
-
-                                // Replace the end evaluation of the dhis function:
-                                expression = expression.replace(callToThisFunction, count);
-                                expressionUpdated = true;
                             } else if (dhisFunction.name === 'd2:countIfValue') {
-                                var variableName = parameters[0];
-                                var variableObject = variablesHash[variableName];
-
+                                const variableName = parameters[0];
+                                const variableObject = variablesHash[variableName];
                                 const valueToCompare = variableService.processValue(parameters[1], variableObject.variableType);
 
-                                var count = 0;
+                                let count = 0;
                                 if (variableObject) {
                                     if (variableObject.hasValue) {
                                         if (variableObject.allValues) {
-                                            for (var i = 0; i < variableObject.allValues.length; i++) {
+                                            for (let i = 0; i < variableObject.allValues.length; i++) {
                                                 if (valueToCompare === variableObject.allValues[i]) {
-                                                    count++;
+                                                    count += 1;
                                                 }
                                             }
-                                        } else {
+                                        } else if (valueToCompare === variableObject.variableValue) {
                                             // The variable has a value, but no list of alternates. This means we compare the standard variablevalue
-                                            if (valueToCompare === variableObject.variableValue) {
-                                                count = 1;
-                                            }
+                                            count = 1;
                                         }
                                     }
                                 } else {
@@ -323,9 +293,9 @@ export default function getExecutionService(variableService, dateUtils) {
                                 expression = expression.replace(callToThisFunction, rounded);
                                 expressionUpdated = true;
                             } else if (dhisFunction.name === 'd2:hasValue') {
-                                var variableName = parameters[0];
-                                var variableObject = variablesHash[variableName];
-                                var valueFound = false;
+                                const variableName = parameters[0];
+                                const variableObject = variablesHash[variableName];
+                                let valueFound = false;
                                 if (variableObject) {
                                     if (variableObject.hasValue) {
                                         valueFound = true;
@@ -338,9 +308,9 @@ export default function getExecutionService(variableService, dateUtils) {
                                 expression = expression.replace(callToThisFunction, valueFound);
                                 expressionUpdated = true;
                             } else if (dhisFunction.name === 'd2:lastEventDate') {
-                                var variableName = parameters[0];
-                                var variableObject = variablesHash[variableName];
-                                var valueFound = "''";
+                                const variableName = parameters[0];
+                                const variableObject = variablesHash[variableName];
+                                let valueFound = "''";
                                 if (variableObject) {
                                     if (variableObject.variableEventDate) {
                                         valueFound = variableService.processValue(variableObject.variableEventDate, 'DATE');
@@ -378,11 +348,11 @@ export default function getExecutionService(variableService, dateUtils) {
 
                                 if (baseDigits && baseDigits.length < 10) {
                                     let firstSum = 0;
-                                    var baseNumberLength = baseDigits.length;
+                                    const baseNumberLength = baseDigits.length;
                                     // weights support up to 9 base digits:
                                     const firstWeights = [3, 7, 6, 1, 8, 9, 4, 5, 2];
-                                    for (var i = 0; i < baseNumberLength && !error; i++) {
-                                        firstSum += parseInt(baseDigits[i]) * firstWeights[i];
+                                    for (let i = 0; i < baseNumberLength && !error; i++) {
+                                        firstSum += parseInt(baseDigits[i], 10) * firstWeights[i];
                                     }
                                     firstDigit = firstSum % 11;
 
@@ -392,8 +362,8 @@ export default function getExecutionService(variableService, dateUtils) {
                                     // Weights support up to 9 base digits plus first control digit:
                                     const secondWeights = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2];
                                     let secondSum = 0;
-                                    for (var i = 0; i < baseNumberLength + 1 && !error; i++) {
-                                        secondSum += parseInt(baseDigits[i]) * secondWeights[i];
+                                    for (let si = 0; si < baseNumberLength + 1 && !error; si++) {
+                                        secondSum += parseInt(baseDigits[si], 10) * secondWeights[si];
                                     }
                                     secondDigit = secondSum % 11;
 
@@ -406,7 +376,7 @@ export default function getExecutionService(variableService, dateUtils) {
                                         secondDigit = 0;
                                     }
                                 } else {
-                                    log.warn(`Base nuber not well formed(${baseNumberLength} digits): ${baseNumber}`);
+                                    log.warn(`Base number not well formed(${baseDigits.length} digits): ${baseNumber}`);
                                 }
 
                                 if (!error) {
@@ -424,34 +394,34 @@ export default function getExecutionService(variableService, dateUtils) {
                                 expression = expression.replace(callToThisFunction, parameters[0]);
                                 expressionUpdated = true;
                             } else if (dhisFunction.name === 'd2:left') {
-                                var string = String(parameters[0]);
-                                var numChars = string.length < parameters[1] ? string.length : parameters[1];
-                                var returnString = string.substring(0, numChars);
+                                const string = String(parameters[0]);
+                                const numChars = string.length < parameters[1] ? string.length : parameters[1];
+                                let returnString = string.substring(0, numChars);
                                 returnString = variableService.processValue(returnString, 'TEXT');
                                 expression = expression.replace(callToThisFunction, returnString);
                                 expressionUpdated = true;
                             } else if (dhisFunction.name === 'd2:right') {
-                                var string = String(parameters[0]);
-                                var numChars = string.length < parameters[1] ? string.length : parameters[1];
-                                var returnString = string.substring(string.length - numChars, string.length);
+                                const string = String(parameters[0]);
+                                const numChars = string.length < parameters[1] ? string.length : parameters[1];
+                                let returnString = string.substring(string.length - numChars, string.length);
                                 returnString = variableService.processValue(returnString, 'TEXT');
                                 expression = expression.replace(callToThisFunction, returnString);
                                 expressionUpdated = true;
                             } else if (dhisFunction.name === 'd2:substring') {
-                                var string = String(parameters[0]);
+                                const string = String(parameters[0]);
                                 const startChar = string.length < parameters[1] - 1 ? -1 : parameters[1];
                                 const endChar = string.length < parameters[2] ? -1 : parameters[2];
                                 if (startChar < 0 || endChar < 0) {
                                     expression = expression.replace(callToThisFunction, "''");
                                     expressionUpdated = true;
                                 } else {
-                                    var returnString = string.substring(startChar, endChar);
+                                    let returnString = string.substring(startChar, endChar);
                                     returnString = variableService.processValue(returnString, 'TEXT');
                                     expression = expression.replace(callToThisFunction, returnString);
                                     expressionUpdated = true;
                                 }
                             } else if (dhisFunction.name === 'd2:split') {
-                                var string = String(parameters[0]);
+                                const string = String(parameters[0]);
                                 const splitArray = string.split(parameters[1]);
                                 let returnPart = '';
                                 if (splitArray.length >= parameters[2]) {
