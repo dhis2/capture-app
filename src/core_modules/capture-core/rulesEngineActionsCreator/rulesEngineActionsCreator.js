@@ -27,7 +27,6 @@ import type {
 
 const rulesEngine = new RulesEngine();
 
-
 function getRulesActions(
     rulesEffects: ?OutputEffects,
     foundation: ?RenderFoundation,
