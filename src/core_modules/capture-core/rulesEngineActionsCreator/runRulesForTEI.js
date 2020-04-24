@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
-import { errorCreator } from '../../capture-core-utils';
-import { RulesEngine, processTypes } from '../../capture-core-utils/RulesEngine';
+import { errorCreator } from 'capture-core-utils';
+import { RulesEngine } from '../../capture-core-utils/RulesEngine';
 import { TrackerProgram, DataElement, RenderFoundation } from '../metaData';
 import constantsStore from '../metaDataMemoryStores/constants/constants.store';
 import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store';
@@ -11,7 +11,7 @@ import type {
     TrackedEntityAttribute as TrackedEntityAttributeForRulesEngine,
     Enrollment,
     TEIValues,
-} from '../../capture-core-utils/RulesEngine/rulesEngine.types';
+} from 'capture-core-utils/RulesEngine/rulesEngine.types';
 
 const errorMessages = {
     PROGRAM_MISSING_OR_INVALID: 'Program is missing or is invalid',
@@ -73,7 +73,7 @@ function getPrerequisitesError(
     return null;
 }
 
-function prepare(
+export function prepare(
     program: ?TrackerProgram,
     foundation: ?RenderFoundation,
 
@@ -123,17 +123,13 @@ export default function runRulesForTEI(
         } = data;
 
         // returns an array of effects that need to take place in the UI.
-        return rulesEngine.executeRules(
+        return rulesEngine.executeTEIRules(
             { programRulesVariables, programRules, constants },
-            {},
-            null,
-            null,
             enrollmentData,
             teiValues,
             trackedEntityAttributes,
             orgUnit,
             optionSets,
-            processTypes.TEI,
         );
     }
     return null;
