@@ -14,40 +14,12 @@ Array [
 ]
 `;
 
-exports[`rules engine area is hidden and given value is {"sWoqcoByYmD":false} 2`] = `
-Array [
-  Object {
-    "displayKeyValuePair": Object {
-      "id": "x7PaHGvgWY2",
-      "key": "BMI",
-      "value": NaN,
-    },
-    "id": "indicators",
-    "type": "DISPLAYKEYVALUEPAIR",
-  },
-]
-`;
-
 exports[`rules engine area is hidden and given value is {"sWoqcoByYmD":true} 1`] = `
 Array [
   Object {
     "id": "vANAXwtLwcT",
     "message": "Hemoglobin value lower than normal ",
     "type": "SHOWWARNING",
-  },
-]
-`;
-
-exports[`rules engine area is hidden and given value is {"sWoqcoByYmD":true} 2`] = `
-Array [
-  Object {
-    "displayKeyValuePair": Object {
-      "id": "x7PaHGvgWY2",
-      "key": "BMI",
-      "value": NaN,
-    },
-    "id": "indicators",
-    "type": "DISPLAYKEYVALUEPAIR",
   },
 ]
 `;
@@ -98,35 +70,7 @@ Array [
 ]
 `;
 
-exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":40,"GieVkTxp4HH":18,"vV9UWAZohSf":85} 1`] = `
-Array [
-  Object {
-    "displayKeyValuePair": Object {
-      "id": "x7PaHGvgWY2",
-      "key": "BMI",
-      "value": 2623.456790123457,
-    },
-    "id": "indicators",
-    "type": "DISPLAYKEYVALUEPAIR",
-  },
-]
-`;
-
 exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":40,"GieVkTxp4HH":180,"vV9UWAZohSf":85} 1`] = `
-Array [
-  Object {
-    "displayKeyValuePair": Object {
-      "id": "x7PaHGvgWY2",
-      "key": "BMI",
-      "value": 26.234567901234566,
-    },
-    "id": "indicators",
-    "type": "DISPLAYKEYVALUEPAIR",
-  },
-]
-`;
-
-exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":40,"GieVkTxp4HH":180,"vV9UWAZohSf":85} 2`] = `
 Array [
   Object {
     "displayKeyValuePair": Object {
@@ -196,35 +140,7 @@ Array [
 ]
 `;
 
-exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":null,"GieVkTxp4HH":180,"vV9UWAZohSf":85} 2`] = `
-Array [
-  Object {
-    "displayKeyValuePair": Object {
-      "id": "x7PaHGvgWY2",
-      "key": "BMI",
-      "value": 26.234567901234566,
-    },
-    "id": "indicators",
-    "type": "DISPLAYKEYVALUEPAIR",
-  },
-]
-`;
-
 exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":null,"GieVkTxp4HH":180,"vV9UWAZohSf":null} 1`] = `
-Array [
-  Object {
-    "displayKeyValuePair": Object {
-      "id": "x7PaHGvgWY2",
-      "key": "BMI",
-      "value": 0,
-    },
-    "id": "indicators",
-    "type": "DISPLAYKEYVALUEPAIR",
-  },
-]
-`;
-
-exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":null,"GieVkTxp4HH":180,"vV9UWAZohSf":null} 2`] = `
 Array [
   Object {
     "displayKeyValuePair": Object {
