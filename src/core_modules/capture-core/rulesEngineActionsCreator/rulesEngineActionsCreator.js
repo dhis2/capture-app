@@ -17,7 +17,16 @@ import type {
     EventsData,
 } from '../../capture-core-utils/RulesEngine/rulesEngine.types';
 
+import type {
+    OutputsEffect,
+    Enrollment,
+    TEIValues,
+    OrgUnit,
+    InputEvent,
+} from '../../capture-core-utils/RulesEngine/rulesEngine.types';
+
 const rulesEngine = new RulesEngine();
+
 
 function getRulesActions(
     rulesEffects: ?OutputEffects,
