@@ -22,21 +22,15 @@ import type {
     TEIValues,
 } from './rulesEngine.types';
 
-
 type ExecutionService = {
-    executeRules: (
-        programRulesContainer: ProgramRulesContainer,
-        executingEvent: ?EventData | {},
-        events: ?EventsDataContainer,
-        dataElements: ?DataElements,
-        trackedEntityAttributes: ?TrackedEntityAttributes,
-        selectedTrackedEntityAttributes: ?TEIValues,
-        selectedEnrollment: ?Enrollment,
-        selectedOrgUnit: OrgUnit,
-        optionSets: ?OptionSets,
-        flags: Object,
-    ) => ?Array<ProgramRuleEffect>,
-    convertDataToBaseOutputValue: (data: any, valueType: string) => any,
+  getEffects: (
+  programRules: ?Array<ProgramRule>,
+  dataElements: ?DataElements,
+  trackedEntityAttributes: ?TrackedEntityAttributes,
+  variablesHash: RuleVariables,
+  processType: string,
+  flag: ?{ debug: boolean },
+) => ?Array<OutputEffect>
 };
 
 export default class RulesEngine {
@@ -49,53 +43,57 @@ export default class RulesEngine {
       this.executionService = getExecutionService(this.variableService);
   }
 
-    executeRules(
-        programRulesContainer: ProgramRulesContainer,
-        executingEvent: ?EventData | {},
-        eventsData: ?EventsData,
-        dataElements: ?DataElements,
-        enrollmentData: ?Enrollment,
-        teiValues: ?TEIValues,
-        trackedEntityAttributes: ?TrackedEntityAttributes,
-        selectedOrgUnit: OrgUnit,
-        optionSets: ?OptionSets,
-        processType: $Values<typeof processTypes>,
-    ): ?Array<OutputEffect> {
-        let eventsContainer;
-        if (eventsData && eventsData.length > 0) {
-            const eventsDataByStage = eventsData.reduce((accEventsByStage, event) => {
-                const hasProgramStage = !!event.programStageId;
-                if (hasProgramStage) {
-                    accEventsByStage[event.programStageId] = accEventsByStage[event.programStageId] || [];
-                    accEventsByStage[event.programStageId].push(event);
-                }
-                return accEventsByStage;
-            }, {});
+  executeTEIRules(
+      programRulesContainer: ProgramRulesContainer,
+      enrollmentData: ?Enrollment,
+      teiValues: ?TEIValues,
+      trackedEntityAttributes: ?TrackedEntityAttributes,
+      selectedOrgUnit: OrgUnit,
+      optionSets: OptionSets,
+  ): ?Array<OutputEffect> {
+      const variablesHash = this.variableService.getVariables(
+          programRulesContainer,
+          null,
+          null,
+          null,
+          trackedEntityAttributes,
+          teiValues,
+          enrollmentData,
+          selectedOrgUnit,
+          optionSets,
+      );
+      const { programRules } = programRulesContainer;
 
-            eventsContainer = {
-                all: eventsData,
-                byStage: eventsDataByStage,
-            };
-        } else {
-            eventsContainer = null;
-        }
+      return this.executionService.getEffects(
+          programRules,
+          null,
+          trackedEntityAttributes,
+          variablesHash,
+          processTypes.TEI,
+      );
+  }
 
-        const effects = this.executionService.executeRules(
-            programRulesContainer,
-            executingEvent,
-            eventsContainer,
-            dataElements,
-            trackedEntityAttributes,
-            teiValues,
-            enrollmentData,
-            selectedOrgUnit,
-            optionSets,
-            { debug: true },
-        );
+  executeEventRules(
+      programRulesContainer: ProgramRulesContainer,
+      events: Events,
+      dataElements: ?DataElements,
+      selectedOrgUnit: OrgUnit,
+      optionSets: OptionSets,
+  ): ?Array<OutputEffect> {
+      const { allEvents, currentEvent } = events;
+      const { programRules, constants, programRulesVariables } = programRulesContainer;
+      const variablesHash = this.variableService.getVariables(
+          { constants, programRulesVariables },
+          currentEvent,
+          allEvents,
+          dataElements,
+          null,
+          null,
+          null,
+          selectedOrgUnit,
+          optionSets,
+      );
 
-        const processedEffects = effects ?
-            this.onProcessRulesEffects(effects, processType, dataElements, trackedEntityAttributes) :
-            null;
-        return processedEffects;
-    }
+      return this.executionService.getEffects(programRules, dataElements, null, variablesHash, processTypes.EVENT);
+  }
 }

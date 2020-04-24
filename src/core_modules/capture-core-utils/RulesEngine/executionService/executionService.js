@@ -1,4 +1,3 @@
-/* eslint-disable */
 import log from 'loglevel';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import isString from 'd2-utilizr/lib/isString';
@@ -594,27 +593,27 @@ export default function getExecutionService(variableService) {
 
     /**
      *
-     * @param {*} programRulesContainer all program rules for the program
-     * @param {*} executingEvent the event context for the program
-     * @param {*} evs all events in the enrollment
-     * @param {*} allDataElements all data elements(metadata)
-     * @param {*} allTrackedEntityAttributes all tracked entity attributes(metadata)
-     * @param {*} selectedEntity the selected tracked entity instance
-     * @param {*} selectedEnrollment the selected enrollment
-     * @param {*} optionSets all optionsets(matedata)
+     * @param {*} programRules all program rules for the program
+     * @param {*} dataElements all data elements(metadata)
+     * @param {*} trackedEntityAttributes all tracked entity attributes(metadata)
+     * @param {*} variablesHash is a table hash with all the variables that have rules attached to it
+     * @param {*} processType is either TEI or EVENT
      * @param {*} flag execution flags
      */
-    const internalExecuteRules = (programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, flag) => {
-        const { programRules } = programRulesContainer;
-        if (programRules.length === 0) {
+    function getEffects(
+        programRules,
+        dataElements,
+        trackedEntityAttributes,
+        variablesHash,
+        processType,
+        flag = { debug: true },
+    ) {
+        if (!programRules) {
             return null;
         }
 
-        const variablesHash = variableService.getVariables(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets);
-
-        // console.log(variableHash)
-
-        return programRules.sort((a, b) => {
+        const effects = programRules
+            .sort((a, b) => {
                 if (!a.priority && !b.priority) {
                     return 0;
                 }
@@ -651,15 +650,11 @@ export default function getExecutionService(variableService) {
             })
             .filter(ruleEffectsForRule => ruleEffectsForRule)
             .reduce((accRuleEffects, effectsForRule) => [...accRuleEffects, ...effectsForRule], []);
-    };
 
-    return {
-        executeRules(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, flags) {
-            if (!programRulesContainer.programRules) {
-                return null;
-            }
-            return internalExecuteRules(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, flags);
-        },
-        convertDataToBaseOutputValue: convertRuleEffectDataToOutputBaseValue,
-    };
+        const processRulesEffects = getRulesEffectsProcessor(convertRuleEffectDataToOutputBaseValue, rulesEffectsValueConverter);
+
+        return processRulesEffects(effects, processType, dataElements, trackedEntityAttributes);
+    }
+
+    return { getEffects };
 }
