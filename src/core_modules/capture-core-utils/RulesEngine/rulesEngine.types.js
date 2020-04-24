@@ -5,6 +5,7 @@ export type OutputEffect = {
     type: $Values<typeof actions>,
     id: string,
 };
+export type OutputsEffect = Array<OutputEffect>;
 
 export type OutputEffects = Array<OutputEffect>;
 
