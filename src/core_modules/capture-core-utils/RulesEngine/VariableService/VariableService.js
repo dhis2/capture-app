@@ -10,7 +10,7 @@ import momentConverter from '../converters/momentConverter';
 
 import type {
     ProgramRuleVariable,
-    EventData,
+    InputEvent,
     EventsDataContainer,
     OptionSets,
     DataElement,
@@ -27,7 +27,7 @@ import type {
 import type { Entity } from '../../../capture-core/components/Relationships/relationships.types';
 
 type SourceData = {
-    executingEvent: ?EventData,
+    executingEvent: ?InputEvent,
     eventsContainer: ?EventsDataContainer,
     dataElements: ?DataElements,
     trackedEntityAttributes: ?TrackedEntityAttributes,
