@@ -1,10 +1,10 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import { RulesEngine } from '../../capture-core-utils/RulesEngine';
 import { TrackerProgram, DataElement, RenderFoundation } from '../metaData';
 import constantsStore from '../metaDataMemoryStores/constants/constants.store';
 import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store';
-import { RulesEngine } from '../../capture-core-utils/RulesEngine';
 
 import type {
     ProgramRulesContainer,
