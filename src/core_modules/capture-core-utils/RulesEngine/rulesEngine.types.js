@@ -139,6 +139,8 @@ export type EventsDataContainer = {
     byStage: { [stageId: string]: EventsData },
 };
 
+export type Events = { currentEvent: ?InputEvent, allEvents: ?EventsDataContainer };
+
 export type DataElement = {
     id: string,
     valueType: string,
