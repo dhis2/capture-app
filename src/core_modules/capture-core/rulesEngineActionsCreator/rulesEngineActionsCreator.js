@@ -19,7 +19,6 @@ import type {
 
 const rulesEngine = new RulesEngine();
 
-
 function getRulesActions(
     rulesEffects: ?OutputsEffect,
     foundation: ?RenderFoundation,
