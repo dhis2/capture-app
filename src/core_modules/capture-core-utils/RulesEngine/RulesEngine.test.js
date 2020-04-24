@@ -1,8 +1,4 @@
-// @flow
 import RulesEngine from '../RulesEngine/RulesEngine';
-import inputValueConverter from '../../capture-core/rulesEngineActionsCreator/converters/inputValueConverter';
-import momentConverter from '../../capture-core/rulesEngineActionsCreator/converters/momentConverter';
-import outputRulesEffectsValueConverter from '../../capture-core/rulesEngineActionsCreator/converters/rulesEffectsValueConverter';
 import runRulesForSingleEvent from '../../capture-core/rulesEngineActionsCreator/runRulesForSingleEvent';
 
 describe('rules engine', () => {
@@ -36,21 +32,16 @@ describe('rules engine', () => {
             foundation: { programRules: [] },
             orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
         },
-        foundation: { programRules: [] },
-        orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
-    },
-    {
-        program: null,
-        foundation: null,
-        orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
-    },
-];
+        {
+            program: null,
+            foundation: null,
+            orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
+        },
+    ])('where the default values', ({ program, foundation, orgUnit }) => {
+        test('Tests on runRulesForSingleEvent function', () => {
+            const rulesEngine = new RulesEngine();
 
-programs.forEach(({ program, foundation, orgUnit }) => {
-    test('Tests on runRulesForSingleEvent function', () => {
-        const rulesEngine = new RulesEngine(inputValueConverter, momentConverter, outputRulesEffectsValueConverter);
-
-        const rulesEffects = runRulesForSingleEvent(rulesEngine, program, foundation, orgUnit);
+            const rulesEffects = runRulesForSingleEvent(rulesEngine, program, foundation, orgUnit, currentEvent, allEventsData);
 
             expect(rulesEffects).toMatchSnapshot();
         });
