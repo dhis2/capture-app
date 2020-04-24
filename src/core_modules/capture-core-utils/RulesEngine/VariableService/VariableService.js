@@ -24,6 +24,7 @@ import type {
     RuleVariable,
     TEIValues,
 } from '../rulesEngine.types';
+import type { Entity } from '../../../capture-core/components/Relationships/relationships.types';
 
 type SourceData = {
     executingEvent: ?EventData,
