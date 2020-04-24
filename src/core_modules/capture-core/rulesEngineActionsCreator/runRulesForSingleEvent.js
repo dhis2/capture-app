@@ -1,4 +1,5 @@
 // @flow
+import log from 'loglevel';
 import { RulesEngine } from '../../capture-core-utils/RulesEngine';
 import log from 'loglevel';
 import { processTypes, RulesEngine } from '../../capture-core-utils/RulesEngine';
