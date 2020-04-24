@@ -1,3 +1,4 @@
+import RulesEngine from '../RulesEngine/RulesEngine';
 import runRulesForSingleEvent from '../../capture-core/rulesEngineActionsCreator/runRulesForSingleEvent';
 
 const programs = [
@@ -38,7 +39,10 @@ const allEventsData = null;
 const currentEvent = null;
 programs.forEach(({ program, foundation, orgUnit }) => {
     test('Tests on runRulesForSingleEvent function', () => {
-        const rulesEffects = runRulesForSingleEvent(program, foundation, orgUnit, currentEvent, allEventsData);
+        const rulesEngine = new RulesEngine();
+
+        const rulesEffects = runRulesForSingleEvent(rulesEngine, program, foundation, orgUnit, currentEvent, allEventsData);
+
         expect(rulesEffects).toMatchSnapshot();
     });
 });
