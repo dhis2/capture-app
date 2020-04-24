@@ -10,7 +10,6 @@ import momentConverter from '../converters/momentConverter';
 import getRulesEffectsProcessor from '../rulesEffectsProcessor/rulesEffectsProcessor';
 import rulesEffectsValueConverter from '../converters/rulesEffectsValueConverter';
 
-
 export default function getExecutionService(variableService) {
     const dateUtils = getDateUtils(momentConverter);
 
@@ -592,7 +591,6 @@ export default function getExecutionService(variableService) {
 
         return effect;
     };
-
 
     /**
      *
