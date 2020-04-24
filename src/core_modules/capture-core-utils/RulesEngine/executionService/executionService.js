@@ -5,8 +5,15 @@ import isString from 'd2-utilizr/lib/isString';
 import getZScoreWFA from './zScoreWFA';
 import trimQuotes from '../commonUtils/trimQuotes';
 import typeKeys from '../typeKeys.const';
+import getDateUtils from '../dateUtils/dateUtils';
+import momentConverter from '../converters/momentConverter';
+import getRulesEffectsProcessor from '../rulesEffectsProcessor/rulesEffectsProcessor';
+import rulesEffectsValueConverter from '../converters/rulesEffectsValueConverter';
 
-export default function getExecutionService(variableService, dateUtils) {
+
+export default function getExecutionService(variableService) {
+    const dateUtils = getDateUtils(momentConverter);
+
     const replaceVariables = (expression, variablesHash) => {
         // replaces the variables in an expression with actual variable values.
 
