@@ -64,7 +64,6 @@ function getEventsData(eventsData: ?EventsData) {
     return null;
 }
 
-
 function prepare(
     program: ?Program,
     foundation: ?RenderFoundation,
