@@ -127,9 +127,9 @@ export type EventValues = {
     [elementId: string]: any,
 };
 
-export type EventData = EventMain & EventValues;
+export type InputEvent = EventValues | {};
 
-export type EventsData = Array<EventData>;
+export type EventsData = Array<InputEvent>;
 
 export type EventsDataContainer = {
     all: EventsData,
