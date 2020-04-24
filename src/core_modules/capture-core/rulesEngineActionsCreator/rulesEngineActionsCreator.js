@@ -2,16 +2,10 @@
 /**
  * @module rulesEngineActionsCreator
  */
+import { RulesEngine } from '../../capture-core-utils/RulesEngine';
 import { Program, RenderFoundation, TrackerProgram } from '../metaData';
-
-
-
-
-
-
 import postProcessRulesEffects from './postProcessRulesEffects';
 import { updateRulesEffects } from './rulesEngine.actions';
-import { RulesEngine } from '../../capture-core-utils/RulesEngine';
 import type { OutputEffect, EventData, Enrollment, TEIValues } from 'capture-core-utils/RulesEngine/rulesEngine.types';
 
 const rulesEngine = new RulesEngine();
@@ -30,7 +24,7 @@ export function getRulesActionsForEvent(
     foundation: ?RenderFoundation,
     formId: string,
     orgUnit: Object,
-    currentEventData: ?EventData  | {} = {},
+    currentEventData: ?EventData | {} = {},
     allEventsData: ?Array<EventData>,
 ) {
     const rulesEffects = runRulesForSingleEvent(
