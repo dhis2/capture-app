@@ -1,5 +1,4 @@
-import RulesEngine from '../RulesEngine/RulesEngine';
-import prepareEventData from '../../capture-core/rulesEngineActionsCreator/prepareEventData';
+import runRulesForSingleEvent from '../../capture-core/rulesEngineActionsCreator/runRulesForSingleEvent';
 
 const programs = [
     {
@@ -39,29 +38,7 @@ const allEventsData = null;
 const currentEvent = null;
 programs.forEach(({ program, foundation, orgUnit }) => {
     test('Tests on runRulesForSingleEvent function', () => {
-        const rulesEngine = new RulesEngine();
-        let rulesEffects = null;
-        const data = prepareEventData(program, foundation, allEventsData);
-        if (data) {
-            const {
-                optionSets,
-                dataElementsInProgram,
-                programRulesVariables,
-                programRules,
-                constants,
-                allEvents,
-            } = data;
-
-            // returns an array of effects that need to take place in the UI.
-            rulesEffects = rulesEngine.executeEventRules(
-                { programRulesVariables, programRules, constants },
-                { currentEvent, allEvents },
-                dataElementsInProgram,
-                orgUnit,
-                optionSets,
-            );
-        }
-
+        const rulesEffects = runRulesForSingleEvent(program, foundation, orgUnit, currentEvent, allEventsData);
         expect(rulesEffects).toMatchSnapshot();
     });
 });
