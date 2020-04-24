@@ -1,9 +1,5 @@
-// @flow
 import RulesEngine from '../RulesEngine/RulesEngine';
-import inputValueConverter from '../../capture-core/rulesEngineActionsCreator/converters/inputValueConverter';
-import momentConverter from '../../capture-core/rulesEngineActionsCreator/converters/momentConverter';
-import outputRulesEffectsValueConverter from '../../capture-core/rulesEngineActionsCreator/converters/rulesEffectsValueConverter';
-import runRulesForSingleEvent from '../../capture-core/rulesEngineActionsCreator/runRulesForSingleEvent';
+import prepareEventData from '../../capture-core/rulesEngineActionsCreator/prepareEventData';
 
 const programs = [
     {
@@ -39,12 +35,32 @@ const programs = [
         orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
     },
 ];
-
+const allEventsData = null;
+const currentEvent = null;
 programs.forEach(({ program, foundation, orgUnit }) => {
     test('Tests on runRulesForSingleEvent function', () => {
-        const rulesEngine = new RulesEngine(inputValueConverter, momentConverter, outputRulesEffectsValueConverter);
+        const rulesEngine = new RulesEngine();
+        let rulesEffects = null;
+        const data = prepareEventData(program, foundation, allEventsData);
+        if (data) {
+            const {
+                optionSets,
+                dataElementsInProgram,
+                programRulesVariables,
+                programRules,
+                constants,
+                allEvents,
+            } = data;
 
-        const rulesEffects = runRulesForSingleEvent(rulesEngine, program, foundation, orgUnit);
+            // returns an array of effects that need to take place in the UI.
+            rulesEffects = rulesEngine.executeEventRules(
+                { programRulesVariables, programRules, constants },
+                { currentEvent, allEvents },
+                dataElementsInProgram,
+                orgUnit,
+                optionSets,
+            );
+        }
 
         expect(rulesEffects).toMatchSnapshot();
     });
