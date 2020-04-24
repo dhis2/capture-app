@@ -18,12 +18,12 @@ import type {
     DataElements,
     TrackedEntityAttribute,
     TrackedEntityAttributes,
-    Entity,
     Enrollment,
     Constants,
     OrgUnit,
     DateUtils,
 } from '../rulesEngine.types';
+import type { Entity } from '../../../capture-core/components/Relationships/relationships.types';
 
 type SourceData = {
     executingEvent: ?EventData,
