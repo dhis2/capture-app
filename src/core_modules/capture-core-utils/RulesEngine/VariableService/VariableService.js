@@ -86,9 +86,9 @@ export default class VariableService {
     onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any;
     dateUtils: DateUtils;
     mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?Variable };
-    constructor(onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any, dateUtils: DateUtils) {
+    constructor(onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any) {
         this.onProcessValue = onProcessValue;
-        this.dateUtils = dateUtils;
+        this.dateUtils = getDateUtils(momentConverter);
 
         this.mapSourceTypeToGetterFn = {
             [variableSourceTypes.DATAELEMENT_CURRENT_EVENT]: this.getVariableForCurrentEvent,
