@@ -1,3 +1,4 @@
+/* eslint-disable */
 import log from 'loglevel';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import isString from 'd2-utilizr/lib/isString';
@@ -8,7 +9,6 @@ import getDateUtils from '../dateUtils/dateUtils';
 import momentConverter from '../converters/momentConverter';
 import getRulesEffectsProcessor from '../rulesEffectsProcessor/rulesEffectsProcessor';
 import rulesEffectsValueConverter from '../converters/rulesEffectsValueConverter';
-
 
 export default function getExecutionService(variableService) {
     const dateUtils = getDateUtils(momentConverter);
@@ -591,7 +591,6 @@ export default function getExecutionService(variableService) {
 
         return effect;
     };
-
 
     /**
      *
