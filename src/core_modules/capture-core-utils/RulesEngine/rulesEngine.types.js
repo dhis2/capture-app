@@ -144,18 +144,6 @@ export type DataElement = {
 
 export type DataElements = { [elementId: string]: DataElement };
 
-export type RuleVariable = {
-    variableValue: any,
-    useCodeForOptionSet: boolean,
-    variableType: string,
-    hasValue: boolean,
-    variableEventDate: ?string,
-    variablePrefix: string,
-    allValues: ?Array<any>,
-};
-
-export type RuleVariables = { [string]: RuleVariable };
-
 export type TrackedEntityAttribute = {
     id: string,
     valueType: string,
