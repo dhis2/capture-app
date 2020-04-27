@@ -455,24 +455,12 @@ export default function getExecutionService(variableService, dateUtils, rulesEff
     };
 
     const runExpression = (expression, beforereplacement, identifier, flag, variablesHash) => {
-        // determine if expression is true, and actions should be effectuated
-        // If DEBUG mode, use try catch and report errors. If not, omit the heavy try-catch loop.:
         let answer = false;
-        if (flag && flag.debug) {
-            try {
-                const dhisfunctionsevaluated = runDhisFunctions(expression, variablesHash, flag);
-                answer = eval(dhisfunctionsevaluated);
-
-                if (flag.verbose) {
-                    log.info(`Expression with id ${identifier} was successfully run. Original condition was: ${beforereplacement} - Evaluation ended up as:${expression} - Result of evaluation was:${answer}`);
-                }
-            } catch (e) {
-                log.warn(`Expression with id ${identifier} could not be run. Original condition was: ${beforereplacement} - Evaluation ended up as:${expression} - error message:${e}`);
-            }
-        } else {
-            // Just run the expression. This is much faster than the debug route: http://jsperf.com/try-catch-block-loop-performance-comparison
+        try {
             const dhisfunctionsevaluated = runDhisFunctions(expression, variablesHash, flag);
-            answer = eval(dhisfunctionsevaluated);
+            answer = execute(dhisfunctionsevaluated);
+        } catch (e) {
+            log.warn(`Expression with id ${identifier} could not be run. Original condition was: ${beforereplacement} - Evaluation ended up as:${expression} - error message:${e}`);
         }
         return answer;
     };
