@@ -76,7 +76,6 @@ export default class RulesEngine {
             eventsContainer = null;
         }
 
-
         return this.executionService.getEffects(
             programRulesContainer,
             executingEvent,
