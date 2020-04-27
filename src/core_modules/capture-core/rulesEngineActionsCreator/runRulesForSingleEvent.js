@@ -74,14 +74,14 @@ function prepare(
         log.error(errorCreator(errorMessages.PROGRAM_OR_FOUNDATION_MISSING)(
             { program, foundation, method: 'getRulesActionsForEvent' }),
         );
-        return error;
+        return null;
     }
 
     const { programRuleVariables } = program;
     const programRules = [...program.programRules, ...foundation.programRules];
 
     if (!programRules || programRules.length === 0) {
-        return error;
+        return null;
     }
 
     const constants = constantsStore.get();
