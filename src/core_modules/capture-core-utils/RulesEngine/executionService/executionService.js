@@ -121,6 +121,10 @@ const replaceVariablesWithValues = (expression, variablesHash) => {
     return expression;
 };
 
+export default function getExecutionService(variableService) {
+    const dateUtils = getDateUtils(momentConverter);
+
+
     const runDhisFunctions = (expression, variablesHash, flag) => {
         // Called from "runExpression". Only proceed with this logic in case there seems to be dhis function calls: "d2:" is present.
         if (isDefined(expression) && expression.indexOf('d2:') !== -1) {
