@@ -8,15 +8,6 @@ import runRulesForSingleEvent from './runRulesForSingleEvent';
 import runRulesForTEI from './runRulesForTEI';
 import postProcessRulesEffects from './postProcessRulesEffects';
 import { updateRulesEffects } from './rulesEngine.actions';
-import { RulesEngine } from '../../capture-core-utils/RulesEngine';
-import type {
-    OutputsEffect,
-    Enrollment,
-    TEIValues,
-    OrgUnit,
-    InputEvent,
-} from '../../capture-core-utils/RulesEngine/rulesEngine.types';
-
 import type {
     OutputsEffect,
     Enrollment,
@@ -53,9 +44,7 @@ export function getRulesActionsForEvent(
         allEventsData,
     );
 
-        return getRulesActions(rulesEffects, foundation, formId);
-    }
-    return null;
+    return getRulesActions(rulesEffects, foundation, formId);
 }
 
 export function getRulesActionsForTEI(

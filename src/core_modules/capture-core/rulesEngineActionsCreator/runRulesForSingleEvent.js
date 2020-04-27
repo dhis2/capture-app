@@ -5,10 +5,6 @@ import { errorCreator } from '../../capture-core-utils';
 import { Program, EventProgram, RenderFoundation, DataElement } from '../metaData';
 import constantsStore from '../metaDataMemoryStores/constants/constants.store';
 import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store';
-import type {
-    DataElement as DataElementForRulesEngine,
-    EventsData,
-} from '../../capture-core-utils/RulesEngine/rulesEngine.types';
 
 import type {
     DataElement as DataElementForRulesEngine,
