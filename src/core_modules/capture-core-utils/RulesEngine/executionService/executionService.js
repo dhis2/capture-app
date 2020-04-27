@@ -11,29 +11,42 @@ export default function getExecutionService(variableService, dateUtils, rulesEff
     const replaceVariables = (expression, variablesHash) => {
         // replaces the variables in an expression with actual variable values.
 
-        // Check if the expression contains program rule variables at all(any curly braces):
-        if (expression.indexOf('{') !== -1) {
-            // Find every variable name in the expression;
-            const variablespresent = expression.match(/[A#CV]\{[\w -_.]+}/g);
-            // Replace each matched variable:
-            variablespresent.forEach((variablepresent) => {
-                // First strip away any prefix and postfix signs from the variable name:
-                variablepresent = variablepresent
-                    .replace('#{', '')
-                    .replace('A{', '')
-                    .replace('C{', '')
-                    .replace('V{', '')
-                    .replace('}', '');
+/**
+ * replaces the variables in an expression with actual variable values.
+ * @param expression
+ * @param variablesHash
+ * @returns {*}
+ */
+const replaceVariablesWithValues = (expression, variablesHash) => {
+    if (expression.includes('{') === false) {
+        return expression;
+    }
+    // Check if the expression contains program rule variables at all(any curly braces):
+    if (expression.indexOf('{') !== -1) {
+        // Find every variable name in the expression;
+        const variablesPresent = expression.match(/[A#CV]\{[\w -_.]+}/g);
+        // Replace each matched variable:
+        variablesPresent.forEach((variablePresent) => {
+            // First strip away any prefix and postfix signs from the variable name:
+            variablePresent = variablePresent
+                .replace('#{', '')
+                .replace('A{', '')
+                .replace('C{', '')
+                .replace('V{', '')
+                .replace('}', '');
 
-                if (isDefined(variablesHash[variablepresent])) {
-                    // Replace all occurrences of the variable name(hence using regex replacement):
-                    expression = expression.replace(new RegExp(`${variablesHash[variablepresent].variablePrefix}\\{${variablepresent}\\}`, 'g'),
-                      variablesHash[variablepresent].variableValue);
-                } else {
-                    log.warn(`Expression ${expression} contains variable ${variablepresent} - but this variable is not defined.`);
-                }
-            });
-        }
+            if (isDefined(variablesHash[variablePresent])) {
+                // Replace all occurrences of the variable name(hence using regex replacement):
+                expression = expression
+                    .replace(
+                        new RegExp(`${variablesHash[variablePresent].variablePrefix}\\{${variablePresent}\\}`, 'g'),
+                        variablesHash[variablePresent].variableValue,
+                    );
+            } else {
+                warnMessage(expression, variablePresent);
+            }
+        });
+    }
 
         // Check if the expression contains environment  variables
         if (expression.indexOf('V{') !== -1) {
@@ -512,7 +525,7 @@ export default function getExecutionService(variableService, dateUtils, rulesEff
             // Since the value couldnt be looked up directly, and contains a curly brace or a dhis function call,
             // the expression was more complex than replacing a single variable value.
             // Now we will have to make a thorough replacement and separate evaluation to find the correct value:
-            ruleEffectData = replaceVariables(actionData, variablesHash);
+            ruleEffectData = replaceVariablesWithValues(actionData, variablesHash);
             // In a scenario where the data contains a complex expression, evaluate the expression to compile(calculate) the result:
             ruleEffectData = runExpression(ruleEffectData, actionData, `action:${action.id}`, flag, variablesHash);
         }
