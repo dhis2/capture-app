@@ -592,8 +592,6 @@ export default function getExecutionService(variableService) {
         return effect;
     };
 
-
-
     /**
      *
      * @param {*} programRules all program rules for the program
@@ -658,6 +656,5 @@ export default function getExecutionService(variableService) {
 
         return processRulesEffects(effects, processType, dataElements, trackedEntityAttributes);
     }
-
     return { getEffects };
 }
