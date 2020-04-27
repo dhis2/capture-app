@@ -639,11 +639,14 @@ export default function getExecutionService(variableService) {
         .map((rule) => {
             let ruleEffects;
 
-            let ruleEffective = false;
-            let expression = rule.condition;
-            if (expression) {
-                if (expression.indexOf('{') !== -1) {
-                    expression = replaceVariables(expression, variablesHash);
+                let ruleEffective = false;
+                const { condition: expression } = rule;
+                if (expression) {
+                    const strippedExpression = replaceVariablesWithValues(expression, variablesHash);
+
+                    ruleEffective = runExpression(strippedExpression, rule.condition, `rule:${rule.id}`, flag, variablesHash);
+                } else {
+                    log.warn(`Rule id:'${rule.id}'' and name:'${rule.name}' had no condition specified. Please check rule configuration.`);
                 }
                 // run expression:
                 ruleEffective = runExpression(expression, rule.condition, `rule:${rule.id}`, flag, variablesHash);
