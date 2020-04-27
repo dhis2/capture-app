@@ -57,26 +57,19 @@ function getDataElements(program: Program) {
 }
 
 
-export function prepareForExecution(program: ?Program, foundation: ?RenderFoundation) {
-    const error = {
-        optionSets: null,
-        dataElementsInProgram: null,
-        programRulesVariables: null,
-        programRules: null,
-        constants: null,
-    };
+export function prepareEventData(program: ?Program, foundation: ?RenderFoundation) {
     if (!program || !foundation) {
         log.error(errorCreator(errorMessages.PROGRAM_OR_FOUNDATION_MISSING)(
             { program, foundation, method: 'getRulesActionsForEvent' }),
         );
-        return error;
+        return null;
     }
 
     const { programRuleVariables } = program;
     const programRules = [...program.programRules, ...foundation.programRules];
 
     if (!programRules || programRules.length === 0) {
-        return error;
+        return null;
     }
 
     const constants = constantsStore.get();
