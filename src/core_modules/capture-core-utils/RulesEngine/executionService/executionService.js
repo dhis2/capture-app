@@ -614,7 +614,7 @@ export default function getExecutionService(variableService) {
         trackedEntityAttributes,
         variablesHash,
         processType,
-        flag = { debug: true },
+        flag = { debug: false },
     ) {
         if (!programRules) {
             return null;
