@@ -48,71 +48,78 @@ const replaceVariablesWithValues = (expression, variablesHash) => {
         });
     }
 
-        // Check if the expression contains environment  variables
-        if (expression.indexOf('V{') !== -1) {
-            // Find every variable name in the expression;
-            const variablespresent = expression.match(/V{\w+.?\w*}/g);
-            // Replace each matched variable:
-            variablespresent.forEach((variablepresent) => {
-                // First strip away any prefix and postfix signs from the variable name:
-                variablepresent = variablepresent.replace('V{', '').replace('}', '');
+    // todo this can an abstraction
 
-                if (isDefined(variablesHash[variablepresent]) &&
-                  variablesHash[variablepresent].variablePrefix === 'V') {
-                    // Replace all occurrences of the variable name(hence using regex replacement):
-                    expression = expression.replace(new RegExp(`V{${variablepresent}}`, 'g'),
-                      variablesHash[variablepresent].variableValue);
-                } else {
-                    log.warn(`Expression ${expression} conains context variable ${variablepresent
-                    } - but this variable is not defined.`);
-                }
-            });
-        }
+    // QUESTION when is it actually coming in this V{ ??
 
-        // Check if the expression contains attribute variables:
-        if (expression.indexOf('A{') !== -1) {
-            // Find every attribute in the expression;
-            const variablespresent = expression.match(/A{\w+.?\w*}/g);
-            // Replace each matched variable:
-            variablespresent.forEach((variablepresent) => {
-                // First strip away any prefix and postfix signs from the variable name:
-                variablepresent = variablepresent.replace('A{', '').replace('}', '');
+    // Check if the expression contains environment  variables
+    if (expression.indexOf('V{') !== -1) {
+        // Find every variable name in the expression;
+        const variablesPresent = expression.match(/V{\w+.?\w*}/g);
+        // Replace each matched variable:
+        variablesPresent.forEach((variablePresent) => {
+            // First strip away any prefix and postfix signs from the variable name:
+            variablePresent = variablePresent.replace('V{', '').replace('}', '');
 
-                if (isDefined(variablesHash[variablepresent]) &&
-                  variablesHash[variablepresent].variablePrefix === 'A') {
-                    // Replace all occurrences of the variable name(hence using regex replacement):
-                    expression = expression.replace(new RegExp(`A{${variablepresent}}`, 'g'),
-                      variablesHash[variablepresent].variableValue);
-                } else {
-                    log.warn(`Expression ${expression} conains attribute ${variablepresent
-                    } - but this attribute is not defined.`);
-                }
-            });
-        }
+            if (isDefined(variablesHash[variablePresent]) && variablesHash[variablePresent].variablePrefix === 'V') {
+                // Replace all occurrences of the variable name(hence using regex replacement):
+                expression = expression
+                    .replace(
+                        new RegExp(`V{${variablePresent}}`, 'g'),
+                        variablesHash[variablePresent].variableValue,
+                    );
+            } else {
+                warnMessage(expression, variablePresent);
+            }
+        });
+    }
 
-        // Check if the expression contains constants
-        if (expression.indexOf('C{') !== -1) {
-            // Find every constant in the expression;
-            const variablespresent = expression.match(/C{\w+.?\w*}/g);
-            // Replace each matched variable:
-            variablespresent.forEach((variablepresent) => {
-                // First strip away any prefix and postfix signs from the variable name:
-                variablepresent = variablepresent.replace('C{', '').replace('}', '');
+    // Check if the expression contains attribute variables:
+    if (expression.indexOf('A{') !== -1) {
+        // Find every attribute in the expression;
+        const variablesPresent = expression.match(/A{\w+.?\w*}/g);
+        // Replace each matched variable:
+        variablesPresent.forEach((variablePresent) => {
+            // First strip away any prefix and postfix signs from the variable name:
+            variablePresent = variablePresent.replace('A{', '').replace('}', '');
 
-                if (isDefined(variablesHash[variablepresent]) &&
-                  variablesHash[variablepresent].variablePrefix === 'C') {
-                    // Replace all occurrences of the variable name(hence using regex replacement):
-                    expression = expression.replace(new RegExp(`C{${variablepresent}}`, 'g'),
-                      variablesHash[variablepresent].variableValue);
-                } else {
-                    log.warn(`Expression ${expression} conains constant ${variablepresent
-                    } - but this constant is not defined.`);
-                }
-            });
-        }
+            if (isDefined(variablesHash[variablePresent]) && variablesHash[variablePresent].variablePrefix === 'A') {
+                // Replace all occurrences of the variable name(hence using regex replacement):
+                expression = expression
+                    .replace(
+                        new RegExp(`A{${variablePresent}}`, 'g'),
+                        variablesHash[variablePresent].variableValue,
+                    );
+            } else {
+                warnMessage(expression, variablePresent);
+            }
+        });
+    }
 
-        return expression;
-    };
+    // Check if the expression contains constants
+    if (expression.indexOf('C{') !== -1) {
+        // Find every constant in the expression;
+        const variablesPresent = expression.match(/C{\w+.?\w*}/g);
+        // Replace each matched variable:
+        variablesPresent.forEach((variablePresent) => {
+            // First strip away any prefix and postfix signs from the variable name:
+            variablePresent = variablePresent.replace('C{', '').replace('}', '');
+
+            if (isDefined(variablesHash[variablePresent]) && variablesHash[variablePresent].variablePrefix === 'C') {
+                // Replace all occurrences of the variable name(hence using regex replacement):
+                expression = expression
+                    .replace(
+                        new RegExp(`C{${variablePresent}}`, 'g'),
+                        variablesHash[variablePresent].variableValue,
+                    );
+            } else {
+                warnMessage(expression, variablePresent);
+            }
+        });
+    }
+
+    return expression;
+};
 
     const runDhisFunctions = (expression, variablesHash, flag) => {
         // Called from "runExpression". Only proceed with this logic in case there seems to be dhis function calls: "d2:" is present.
