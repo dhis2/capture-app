@@ -604,7 +604,7 @@ export default function getExecutionService(variableService) {
      * @param {*} optionSets all optionsets(matedata)
      * @param {*} flag execution flags
      */
-    return (programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, processType, flag) => {
+    function getEffects (programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, processType, flag) {
         const { programRules } = programRulesContainer;
         if (!programRules) {
             return null;
@@ -655,4 +655,5 @@ export default function getExecutionService(variableService) {
 
         return processRulesEffects(effects, processType, allDataElements, allTrackedEntityAttributes);
     };
+    return { getEffects }
 }

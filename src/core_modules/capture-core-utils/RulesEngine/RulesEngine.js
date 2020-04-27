@@ -15,36 +15,34 @@ import type {
     OptionSets,
     TrackedEntityAttributes,
     Enrollment,
-    ProgramRuleEffect,
     EventsDataContainer,
     TEIValues,
 } from './rulesEngine.types';
 
 type ExecutionService = {
-    internalExecuteRules: (
-        programRulesContainer: ProgramRulesContainer,
-        executingEvent: ?EventData | {},
-        events: ?EventsDataContainer,
-        dataElements: ?DataElements,
-        trackedEntityAttributes: ?TrackedEntityAttributes,
-        selectedTrackedEntityAttributes: ?TEIValues,
-        selectedEnrollment: ?Enrollment,
-        selectedOrgUnit: OrgUnit,
-        optionSets: ?OptionSets,
-        processType: string,
-        flags: Object,
-    ) => ?Array<ProgramRuleEffect>,
-    convertDataToBaseOutputValue: (data: any, valueType: string) => any,
+    getEffects: (
+      programRulesContainer: ProgramRulesContainer,
+      executingEvent: ?EventData | {},
+      events: ?EventsDataContainer,
+      dataElements: ?DataElements,
+      trackedEntityAttributes: ?TrackedEntityAttributes,
+      selectedTrackedEntityAttributes: ?TEIValues,
+      selectedEnrollment: ?Enrollment,
+      selectedOrgUnit: OrgUnit,
+      optionSets: ?OptionSets,
+      processType: string,
+      flags: Object,
+    ) => ?Array<OutputEffect>
 };
 
 export default class RulesEngine {
-    getEffects: ExecutionService;
+    executionService: ExecutionService;
 
     constructor() {
         const valueProcessor = new ValueProcessor(inputValueConverter);
         const variableService = new VariableService(valueProcessor.processValue);
 
-        this.getEffects = getExecutionService(variableService);
+        this.executionService = getExecutionService(variableService);
     }
 
     executeRules(
@@ -79,7 +77,7 @@ export default class RulesEngine {
         }
 
 
-        return this.getEffects(
+        return this.executionService.getEffects(
             programRulesContainer,
             executingEvent,
             eventsContainer,
