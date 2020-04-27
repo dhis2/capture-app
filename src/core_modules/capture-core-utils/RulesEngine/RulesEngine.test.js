@@ -74,11 +74,11 @@ describe('rules engine', () => {
 
             // when
             const rulesEffects = rulesEngine.executeEventRules(
-                { programRulesVariables, programRules, constants },
-                { currentEvent, allEvents },
-                dataElementsInProgram,
-                orgUnit,
-                optionSet,
+              { programRulesVariables, programRules, constants },
+              { currentEvent, allEvents },
+              dataElementsInProgram,
+              orgUnit,
+              optionSet,
             );
 
             // then
@@ -100,11 +100,11 @@ describe('rules engine', () => {
 
             // when
             const rulesEffects = rulesEngine.executeEventRules(
-                { programRulesVariables, programRules, constants },
-                { currentEvent, allEvents },
-                dataElementsInProgram,
-                orgUnit,
-                optionSet,
+              { programRulesVariables, programRules, constants },
+              { currentEvent, allEvents },
+              dataElementsInProgram,
+              orgUnit,
+              optionSet,
             );
 
             // then
@@ -137,11 +137,11 @@ describe('rules engine', () => {
 
             // when
             const rulesEffects = rulesEngine.executeEventRules(
-                { programRulesVariables, programRules, constants },
-                { currentEvent, allEvents },
-                dataElementsInProgram,
-                orgUnit,
-                optionSet,
+              { programRulesVariables, programRules, constants },
+              { currentEvent, allEvents },
+              dataElementsInProgram,
+              orgUnit,
+              optionSet,
             );
 
             // then
@@ -169,11 +169,11 @@ describe('rules engine', () => {
 
             // when
             const rulesEffects = rulesEngine.executeEventRules(
-                { programRulesVariables, programRules, constants },
-                { currentEvent, allEvents },
-                dataElementsInProgram,
-                orgUnit,
-                optionSet,
+              { programRulesVariables, programRules, constants },
+              { currentEvent, allEvents },
+              dataElementsInProgram,
+              orgUnit,
+              optionSet,
             );
 
             // then
@@ -244,11 +244,11 @@ describe('rules engine', () => {
 
             // when
             const rulesEffects = rulesEngine.executeEventRules(
-                { programRulesVariables, programRules, constants },
-                { currentEvent, allEvents },
-                dataElementsInProgram,
-                orgUnit,
-                optionSet,
+              { programRulesVariables, programRules, constants },
+              { currentEvent, allEvents },
+              dataElementsInProgram,
+              orgUnit,
+              optionSet,
             );
 
             // then
