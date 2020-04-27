@@ -3,12 +3,17 @@
  * @module rulesEngineActionsCreator
  */
 import { RenderFoundation, Program, TrackerProgram } from '../metaData';
-import { prepareForExecution } from './runRulesForSingleEvent';
+import { prepareEventData } from './runRulesForSingleEvent';
 import runRulesForTEI from './runRulesForTEI';
 import postProcessRulesEffects from './postProcessRulesEffects';
 import { updateRulesEffects } from './rulesEngine.actions';
 import { RulesEngine, processTypes } from '../../capture-core-utils/RulesEngine';
-import type { OutputEffect, EventData, Enrollment, TEIValues } from '../../capture-core-utils/RulesEngine/rulesEngine.types';
+import type {
+    OutputEffect,
+    EventData,
+    Enrollment,
+    TEIValues,
+} from '../../capture-core-utils/RulesEngine/rulesEngine.types';
 
 const rulesEngine = new RulesEngine();
 
@@ -26,14 +31,29 @@ export function getRulesActionsForEvent(
     foundation: ?RenderFoundation,
     formId: string,
     orgUnit: Object,
-    currentEventData: ?EventData  | {} = {},
+    currentEventData: ?EventData | {} = {},
     allEventsData: ?Array<EventData>,
 ) {
-    const { optionSets, dataElementsInProgram, programRulesVariables, programRules, constants } = prepareForExecution(program, foundation);
-    // returns an array of effects that need to take place in the UI.
-    const rulesEffects = rulesEngine.executeRules({ programRulesVariables, programRules, constants }, currentEventData, allEventsData, dataElementsInProgram, null, null, null, orgUnit, optionSets, processTypes.EVENT);
+    const data = prepareEventData(program, foundation);
+    if (data) {
+        const { optionSets, dataElementsInProgram, programRulesVariables, programRules, constants } = data;
+        // returns an array of effects that need to take place in the UI.
+        const rulesEffects = rulesEngine.executeRules(
+            { programRulesVariables, programRules, constants },
+            currentEventData,
+            allEventsData,
+            dataElementsInProgram,
+            null,
+            null,
+            null,
+            orgUnit,
+            optionSets,
+            processTypes.EVENT,
+        );
 
-    return getRulesActions(rulesEffects, foundation, formId);
+        return getRulesActions(rulesEffects, foundation, formId);
+    }
+    return null;
 }
 
 export function getRulesActionsForTEI(
