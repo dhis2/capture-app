@@ -570,14 +570,13 @@ export default function getExecutionService(variableService) {
             }
         }
 
-        return expression;
+        return execute(expression);
     };
 
     const runExpression = (expression, beforereplacement, identifier, flag, variablesHash) => {
         let answer = false;
         try {
-            const dhisfunctionsevaluated = runDhisFunctions(expression, variablesHash, flag);
-            answer = execute(dhisfunctionsevaluated);
+            answer = runDhisFunctions(expression, variablesHash, flag);
         } catch (e) {
             log.warn(`Expression with id ${identifier} could not be run. Original condition was: ${beforereplacement} - Evaluation ended up as:${expression} - error message:${e}`);
         }
