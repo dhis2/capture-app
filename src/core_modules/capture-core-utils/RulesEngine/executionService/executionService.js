@@ -121,6 +121,26 @@ const replaceVariablesWithValues = (expression, variablesHash) => {
     return expression;
 };
 
+/**
+ * Checks whether
+ *  a) no parameters is given when a function requires parameters,
+ *  b) the number of parameters given is not aligned with the function definition.
+ *
+ * @param dhisFunctionParameters
+ * @param parameters
+ * @returns {boolean}
+ */
+const brokenFunctionSignature = (dhisFunctionParameters, parameters) =>{
+    if (dhisFunctionParameters) {
+        // But we are only checking parameters where the dhisFunction actually has
+        // a defined set of parameters(concatenate, for example, does not have a fixed number);
+        const numParameters = parameters.length || 0;
+
+        return numParameters !== dhisFunctionParameters
+    }
+    return false
+}
+
 export default function getExecutionService(variableService) {
     const dateUtils = getDateUtils(momentConverter);
 
@@ -517,19 +537,16 @@ export default function getExecutionService(variableService) {
                                 // Then split into single parameters:
                                 .match(/(('[^']+')|([^,]+))/g);
 
-                            // Show error if no parameters is given and the function requires parameters,
-                            // or if the number of parameters is wrong.
-                            if (isDefined(dhisFunction.parameters)) {
-                                // But we are only checking parameters where the dhisFunction actually has a defined set of parameters(concatenate, for example, does not have a fixed number);
-                                const numParameters = parameters ? parameters.length : 0;
 
-                                if (numParameters !== dhisFunction.parameters) {
-                                    log.warn(`${dhisFunction.name} was called with the incorrect number of parameters`);
+                            brokenExecution = brokenFunctionSignature(dhisFunction.parameters, parameters)
 
-                                    // Mark this function call as broken:
-                                    brokenExecution = true;
-                                }
+
+                            if (brokenExecution) {
+                                // Function call is not possible to evaluate, remove the call:
+                                expression = expression.replace(callToThisFunction, 'false');
+                                expressionUpdated = true;
                             }
+
 
                             // In case the function call is nested, the parameter itself contains an expression, run the expression.
                             if (!brokenExecution && isDefined(parameters) && parameters !== null) {
@@ -539,11 +556,6 @@ export default function getExecutionService(variableService) {
                                 }
                             }
 
-                            if (brokenExecution) {
-                                // Function call is not possible to evaluate, remove the call:
-                                expression = expression.replace(callToThisFunction, 'false');
-                                expressionUpdated = true;
-                            }
 
                             expression = dhisFunction.func(callToThisFunction, expression, parameters)
                             expressionUpdated = true;
