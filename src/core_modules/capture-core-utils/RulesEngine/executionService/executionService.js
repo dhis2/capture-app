@@ -615,80 +615,6 @@ export default function getExecutionService(variableService) {
         return answer;
     };
 
-    const getRuleEffectData = (action, variablesHash, flag) => {
-        const actionData = action.data;
-        let ruleEffectData = actionData;
-
-        const nameWithoutBrackets = actionData.replace('#{', '').replace('}', '');
-        if (variablesHash[nameWithoutBrackets]) {
-            // The variable exists, and is replaced with its corresponding value
-            ruleEffectData = variablesHash[nameWithoutBrackets].variableValue;
-        } else if (actionData.indexOf('{') !== -1 || actionData.indexOf('d2:') !== -1) {
-            // Since the value couldnt be looked up directly, and contains a curly brace or a dhis function call,
-            // the expression was more complex than replacing a single variable value.
-            // Now we will have to make a thorough replacement and separate evaluation to find the correct value:
-            ruleEffectData = replaceVariablesWithValues(actionData, variablesHash);
-            // In a scenario where the data contains a complex expression, evaluate the expression to compile(calculate) the result:
-            ruleEffectData = runExpression(ruleEffectData, actionData, `action:${action.id}`, flag, variablesHash);
-        }
-
-        // trimQuotes if found
-        if (ruleEffectData && isString(ruleEffectData)) {
-            ruleEffectData = trimQuotes(ruleEffectData);
-        }
-
-        return ruleEffectData;
-    };
-
-    const buildAssignVariable = (variableHash, data) => {
-        const { valueType } = variableHash;
-        let variableValue = convertRuleEffectDataToOutputBaseValue(data, valueType);
-        if (isString(variableValue)) {
-            variableValue = `'${variableValue}'`;
-        }
-
-        return {
-            variableValue,
-            variableType: valueType,
-            hasValue: true,
-            variableEventDate: '',
-            variablePrefix: variableHash.variablePrefix ? variableHash.variablePrefix : '#',
-            allValues: [variableValue],
-        };
-    };
-
-    const buildRuleEffect = (action, variablesHash, flag) => {
-        const effect = {
-            id: action.id,
-            location: action.location,
-            action: action.programRuleActionType,
-            dataElementId: action.dataElementId,
-            trackedEntityAttributeId: action.trackedEntityAttributeId,
-            programStageId: action.programStageId,
-            programStageSectionId: action.programStageSectionId,
-            optionGroupId: action.optionGroupId,
-            optionId: action.optionId,
-            content: action.content,
-            data: action.data ? getRuleEffectData(action, variablesHash, flag) : action.data,
-            ineffect: true,
-        };
-
-        if (effect.action === 'ASSIGN' && effect.content) {
-            const variableToAssign = effect.content ?
-                effect.content.replace('#{', '').replace('A{', '').replace('}', '') : null;
-
-            const variableHash = variablesHash[variableToAssign];
-
-            if (!variableHash) {
-                // If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
-                log.warn(`Variable ${variableToAssign} was not defined.`);
-            } else {
-                variablesHash[variableToAssign] = buildAssignVariable(variableHash, effect.data);
-            }
-        }
-
-        return effect;
-    };
 
     /**
      *
@@ -711,8 +637,8 @@ export default function getExecutionService(variableService) {
             return null;
         }
 
-        return programRules
-            .sort((a, b) => {
+        const effects = programRules
+            .sort(function sortRulesByPriority(a, b) {
                 if (!a.priority && !b.priority) {
                     return 0;
                 }
@@ -745,14 +671,87 @@ export default function getExecutionService(variableService) {
                 log.warn(`Rule id:'${rule.id}'' and name:'${rule.name}' had no condition specified. Please check rule configuration.`);
             }
 
-            if (ruleEffective) {
-                ruleEffects = rule.programRuleActions.map(action => buildRuleEffect(action, variablesHash, flag));
-            }
-            return ruleEffects;
-        })
-        .filter(ruleEffectsForRule => ruleEffectsForRule)
-        .reduce((accRuleEffects, effectsForRule) => [...accRuleEffects, ...effectsForRule], []);
-    };
+                if (ruleEffective) {
+                    ruleEffects = rule.programRuleActions.map(action => {
+                        const getRuleEffectData = (action, variablesHash, flag) => {
+                            const actionData = action.data;
+                            let ruleEffectData = actionData;
+
+                            const nameWithoutBrackets = actionData.replace('#{', '').replace('}', '');
+                            if (variablesHash[nameWithoutBrackets]) {
+                                // The variable exists, and is replaced with its corresponding value
+                                ruleEffectData = variablesHash[nameWithoutBrackets].variableValue;
+                            } else if (actionData.indexOf('{') !== -1 || actionData.indexOf('d2:') !== -1) {
+                                // Since the value couldnt be looked up directly, and contains a curly brace or a dhis function call,
+                                // the expression was more complex than replacing a single variable value.
+                                // Now we will have to make a thorough replacement and separate evaluation to find the correct value:
+                                ruleEffectData = replaceVariablesWithValues(actionData, variablesHash);
+                                // In a scenario where the data contains a complex expression, evaluate the expression to compile(calculate) the result:
+                                ruleEffectData = runExpression(ruleEffectData, actionData, `action:${action.id}`, flag, variablesHash);
+                            }
+
+                            // trimQuotes if found
+                            if (ruleEffectData && isString(ruleEffectData)) {
+                                ruleEffectData = trimQuotes(ruleEffectData);
+                            }
+
+                            return ruleEffectData;
+                        };
+
+                        const effect = {
+                            id: action.id,
+                            location: action.location,
+                            action: action.programRuleActionType,
+                            dataElementId: action.dataElementId,
+                            trackedEntityAttributeId: action.trackedEntityAttributeId,
+                            programStageId: action.programStageId,
+                            programStageSectionId: action.programStageSectionId,
+                            optionGroupId: action.optionGroupId,
+                            optionId: action.optionId,
+                            content: action.content,
+                            data: action.data ? getRuleEffectData(action, variablesHash, flag) : action.data,
+                            ineffect: true,
+                        };
+
+                        if (effect.action === 'ASSIGN' && effect.content) {
+                            const variableToAssign = effect.content ?
+                              effect.content.replace('#{', '').replace('A{', '').replace('}', '') : null;
+
+                            const variableHash = variablesHash[variableToAssign];
+
+                            if (!variableHash) {
+                                // If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
+                                log.warn(`Variable ${variableToAssign} was not defined.`);
+                            } else {
+                                const buildAssignVariable = (variableHash, data) => {
+                                    const { valueType } = variableHash;
+                                    let variableValue = convertRuleEffectDataToOutputBaseValue(data, valueType);
+                                    if (isString(variableValue)) {
+                                        variableValue = `'${variableValue}'`;
+                                    }
+
+                                    return {
+                                        variableValue,
+                                        variableType: valueType,
+                                        hasValue: true,
+                                        variableEventDate: '',
+                                        variablePrefix: variableHash.variablePrefix ? variableHash.variablePrefix : '#',
+                                        allValues: [variableValue],
+                                    };
+                                };
+
+                                variablesHash[variableToAssign] = buildAssignVariable(variableHash, effect.data);
+                            }
+                        }
+
+                        return effect;
+                    }
+                    );
+                }
+                return ruleEffects;
+            })
+            .filter(ruleEffectsForRule => ruleEffectsForRule)
+            .reduce((accRuleEffects, effectsForRule) => [...accRuleEffects, ...effectsForRule], []);
 
     return { getEffects,  convertDataToBaseOutputValue: convertRuleEffectDataToOutputBaseValue, }
 }
