@@ -510,7 +510,7 @@ export default function getExecutionService(variableService) {
                         callsToThisFunction.forEach((callToThisFunction) => {
 
                             let parameters = callToThisFunction
-                                // Remove the function name and paranthesis:
+                                // Remove the function name and parenthesis:
                                 .replace(/(^[^(]+\()|\)$/g, '')
                                 // Remove white spaces before and after parameters:
                                 .trim()
