@@ -345,7 +345,7 @@ export default function getExecutionService(variableService) {
                         return exp.replace(callToThisFunction, valueFound);
                     }
                 },
-                'd2:lastEventDate': { 
+                'd2:lastEventDate': {
                     name: 'd2:lastEventDate',
                     parameters: 1,
                     func: (callToThisFunction, exp, params) => {
@@ -485,7 +485,7 @@ export default function getExecutionService(variableService) {
                         }
                     }
                 },
-                'd2:split': { 
+                'd2:split': {
                     name: 'd2:split',
                     parameters: 3,
                     func: (callToThisFunction, exp, params) => {
@@ -545,7 +545,6 @@ export default function getExecutionService(variableService) {
                                 expression = expression.replace(callToThisFunction, 'false');
                             }
 
-
                             // In case the function call is nested, the parameter itself contains an expression, run the expression.
                             if (!brokenExecution && isDefined(parameters) && parameters !== null) {
                                 for (let i = 0; i < parameters.length; i++) {
@@ -553,7 +552,6 @@ export default function getExecutionService(variableService) {
                                     parameters[i] = runExpression(parameters[i], dhisFunction.name, `parameter:${i}`, flag, variablesHash);
                                 }
                             }
-
 
                             expression = dhisFunction.func(callToThisFunction, expression, parameters)
                             expressionUpdated = true;
