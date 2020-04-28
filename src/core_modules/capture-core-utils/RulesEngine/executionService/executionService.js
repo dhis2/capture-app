@@ -539,12 +539,10 @@ export default function getExecutionService(variableService) {
 
 
                             brokenExecution = brokenFunctionSignature(dhisFunction.parameters, parameters)
-
-
                             if (brokenExecution) {
+                                log.warn(`${dhisFunction.name} was called with the incorrect number of parameters`);
                                 // Function call is not possible to evaluate, remove the call:
                                 expression = expression.replace(callToThisFunction, 'false');
-                                expressionUpdated = true;
                             }
 
 
