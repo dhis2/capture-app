@@ -723,24 +723,21 @@ export default function getExecutionService(variableService) {
                                 // If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
                                 log.warn(`Variable ${variableToAssign} was not defined.`);
                             } else {
-                                const buildAssignVariable = (variableHash, data) => {
-                                    const { valueType } = variableHash;
-                                    let variableValue = convertRuleEffectDataToOutputBaseValue(data, valueType);
-                                    if (isString(variableValue)) {
-                                        variableValue = `'${variableValue}'`;
-                                    }
+                                // buildAssignVariable
+                                const { valueType } = variableHash;
+                                let variableValue = convertRuleEffectDataToOutputBaseValue(data, valueType);
+                                if (isString(variableValue)) {
+                                    variableValue = `'${variableValue}'`;
+                                }
 
-                                    return {
-                                        variableValue,
-                                        variableType: valueType,
-                                        hasValue: true,
-                                        variableEventDate: '',
-                                        variablePrefix: variableHash.variablePrefix ? variableHash.variablePrefix : '#',
-                                        allValues: [variableValue],
-                                    };
+                                variablesHash[variableToAssign] = {
+                                    variableValue,
+                                    variableType: valueType,
+                                    hasValue: true,
+                                    variableEventDate: '',
+                                    variablePrefix: variableHash.variablePrefix ? variableHash.variablePrefix : '#',
+                                    allValues: [variableValue],
                                 };
-
-                                variablesHash[variableToAssign] = buildAssignVariable(variableHash, effect.data);
                             }
                         }
 
