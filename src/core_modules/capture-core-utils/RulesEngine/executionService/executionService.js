@@ -128,40 +128,40 @@ export default function getExecutionService(variableService) {
     const runDhisFunctions = (expression, variablesHash, flag) => {
         // Called from "runExpression". Only proceed with this logic in case there seems to be dhis function calls: "d2:" is present.
         if (isDefined(expression) && expression.indexOf('d2:') !== -1) {
-            const dhisFunctions = [
-                { name: 'd2:daysBetween', parameters: 2 },
-                { name: 'd2:weeksBetween', parameters: 2 },
-                { name: 'd2:monthsBetween', parameters: 2 },
-                { name: 'd2:yearsBetween', parameters: 2 },
-                { name: 'd2:floor', parameters: 1 },
-                { name: 'd2:modulus', parameters: 2 },
-                { name: 'd2:concatenate' },
-                { name: 'd2:addDays', parameters: 2 },
-                { name: 'd2:zing', parameters: 1 },
-                { name: 'd2:oizp', parameters: 1 },
-                { name: 'd2:count', parameters: 1 },
-                { name: 'd2:countIfZeroPos', parameters: 1 },
-                { name: 'd2:countIfValue', parameters: 2 },
-                { name: 'd2:ceil', parameters: 1 },
-                { name: 'd2:round', parameters: 1 },
-                { name: 'd2:hasValue', parameters: 1 },
-                { name: 'd2:lastEventDate', parameters: 1 },
-                { name: 'd2:validatePattern', parameters: 2 },
-                { name: 'd2:addControlDigits', parameters: 1 },
-                { name: 'd2:checkControlDigits', parameters: 1 },
-                { name: 'd2:left', parameters: 2 },
-                { name: 'd2:right', parameters: 2 },
-                { name: 'd2:substring', parameters: 3 },
-                { name: 'd2:split', parameters: 3 },
-                { name: 'd2:zScoreWFA', parameters: 3 },
-                { name: 'd2:length', parameters: 1 },
-            ];
+            const dhisFunctions = {
+                "d2:daysBetween": { name: 'd2:daysBetween', parameters: 2 },
+                'd2:weeksBetween' :{ name: 'd2:weeksBetween', parameters: 2 },
+                'd2:monthsBetween':{ name: 'd2:monthsBetween', parameters: 2 },
+                'd2:yearsBetween':{ name: 'd2:yearsBetween', parameters: 2 },
+                'd2:floor':{ name: 'd2:floor', parameters: 1 },
+                'd2:modulus':{ name: 'd2:modulus', parameters: 2 },
+                'd2:concatenate':{ name: 'd2:concatenate' },
+                'd2:addDays':{ name: 'd2:addDays', parameters: 2 },
+                'd2:zing':{ name: 'd2:zing', parameters: 1 },
+                'd2:oizp':{ name: 'd2:oizp', parameters: 1 },
+                'd2:count': { name: 'd2:count', parameters: 1 },
+                'd2:countIfZeroPos': { name: 'd2:countIfZeroPos', parameters: 1 },
+                'd2:countIfValue':{ name: 'd2:countIfValue', parameters: 2 },
+                'd2:ceil': { name: 'd2:ceil', parameters: 1 },
+                'd2:round': { name: 'd2:round', parameters: 1 },
+                'd2:hasValue': { name: 'd2:hasValue', parameters: 1 },
+                'd2:lastEventDate': { name: 'd2:lastEventDate', parameters: 1 },
+                'd2:validatePattern': { name: 'd2:validatePattern', parameters: 2 },
+                'd2:addControlDigits': { name: 'd2:addControlDigits', parameters: 1 },
+                'd2:checkControlDigits': { name: 'd2:checkControlDigits', parameters: 1 },
+                'd2:left': { name: 'd2:left', parameters: 2 },
+                'd2:right':{ name: 'd2:right', parameters: 2 },
+                'd2:substring': { name: 'd2:substring', parameters: 3 },
+                'd2:split': { name: 'd2:split', parameters: 3 },
+                'd2:zScoreWFA': { name: 'd2:zScoreWFA', parameters: 3 },
+                'd2:length': { name: 'd2:length', parameters: 1 },
+            };
             let continueLooping = true;
             // Safety harness on 10 loops, in case of unanticipated syntax causing unintencontinued looping
             for (let i = 0; i < 10 && continueLooping; i++) {
                 let expressionUpdated = false;
                 let brokenExecution = false;
-                dhisFunctions.forEach((dhisFunction) => {
+                Object.values(dhisFunctions).forEach((dhisFunction) => {
                     // Select the function call, with any number of parameters inside single quotations, or number parameters witout quotations
                     const regularExFunctionCall = new RegExp(`${dhisFunction.name}\\( *(([\\d/\\*\\+\\-%. ]+)|( *'[^']*'))*( *, *(([\\d/\\*\\+\\-%. ]+)|'[^']*'))* *\\)`, 'g');
 
