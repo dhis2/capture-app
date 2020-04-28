@@ -141,6 +141,41 @@ const brokenFunctionSignature = (dhisFunctionParameters, parameters) =>{
     return false
 }
 
+const convertRuleEffectDataToOutputBaseValue = (data, valueType) => {
+    const convertNumber = (numberRepresentation) => {
+        if (isString(numberRepresentation)) {
+            if (isNaN(numberRepresentation)) {
+                log.warn(`rule execution service could not convert ${numberRepresentation} to number`);
+                return null;
+            }
+            return Number(numberRepresentation);
+        }
+        return numberRepresentation;
+    };
+
+    const ruleEffectDataConvertersByType = {
+        [typeKeys.BOOLEAN]: (value) => {
+            if (isString(value)) {
+                return value === 'true';
+            }
+            return value;
+        },
+        [typeKeys.INTEGER]: convertNumber,
+        [typeKeys.INTEGER_NEGATIVE]: convertNumber,
+        [typeKeys.INTEGER_POSITIVE]: convertNumber,
+        [typeKeys.INTEGER_ZERO_OR_POSITIVE]: convertNumber,
+        [typeKeys.NUMBER]: convertNumber,
+        [typeKeys.TRUE_ONLY]: () => true,
+    };
+
+    if (!data && data !== 0 && data !== false) {
+        return null;
+    }
+
+    return ruleEffectDataConvertersByType[valueType] ? ruleEffectDataConvertersByType[valueType](data) : data;
+};
+
+
 export default function getExecutionService(variableService) {
     const dateUtils = getDateUtils(momentConverter);
     const runExpression = (expression, beforereplacement, identifier, flag, variablesHash) => {
@@ -578,41 +613,6 @@ export default function getExecutionService(variableService) {
             log.warn(`Expression with id ${identifier} could not be run. Original condition was: ${beforereplacement} - Evaluation ended up as:${expression} - error message:${e}`);
         }
         return answer;
-    };
-
-
-    const convertNumber = (numberRepresentation) => {
-        if (isString(numberRepresentation)) {
-            if (isNaN(numberRepresentation)) {
-                log.warn(`rule execution service could not convert ${numberRepresentation} to number`);
-                return null;
-            }
-            return Number(numberRepresentation);
-        }
-        return numberRepresentation;
-    };
-
-    const ruleEffectDataConvertersByType = {
-        [typeKeys.BOOLEAN]: (value) => {
-            if (isString(value)) {
-                return value === 'true';
-            }
-            return value;
-        },
-        [typeKeys.INTEGER]: convertNumber,
-        [typeKeys.INTEGER_NEGATIVE]: convertNumber,
-        [typeKeys.INTEGER_POSITIVE]: convertNumber,
-        [typeKeys.INTEGER_ZERO_OR_POSITIVE]: convertNumber,
-        [typeKeys.NUMBER]: convertNumber,
-        [typeKeys.TRUE_ONLY]: () => true,
-    };
-
-    const convertRuleEffectDataToOutputBaseValue = (data, valueType) => {
-        if (!data && data !== 0 && data !== false) {
-            return null;
-        }
-
-        return ruleEffectDataConvertersByType[valueType] ? ruleEffectDataConvertersByType[valueType](data) : data;
     };
 
     const getRuleEffectData = (action, variablesHash, flag) => {
