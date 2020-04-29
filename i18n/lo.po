@@ -164,7 +164,7 @@ msgid "Operations running"
 msgstr ""
 
 msgid "Sort"
-msgstr ""
+msgstr "Sort"
 
 msgid "No events to display"
 msgstr ""
@@ -371,10 +371,10 @@ msgid "Select columns"
 msgstr ""
 
 msgid "Download as JSON"
-msgstr ""
+msgstr "Download as JSON"
 
 msgid "Download as XML"
-msgstr ""
+msgstr "Download as XML"
 
 msgid "Download as CSV"
 msgstr "ດາວໂຫຼດເປັນ CSV"
@@ -643,7 +643,7 @@ msgid "No one is assigned to this event"
 msgstr ""
 
 msgid "Assign"
-msgstr ""
+msgstr "Assign"
 
 msgid "Event assigned to {{name}}"
 msgstr ""
@@ -760,7 +760,7 @@ msgid "Time"
 msgstr ""
 
 msgid "From date"
-msgstr ""
+msgstr "From date"
 
 msgid "From time"
 msgstr ""

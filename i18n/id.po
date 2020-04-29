@@ -1,7 +1,7 @@
 # 
 # Translators:
-# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2019
 # phil_dhis2, 2019
+# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2020
 # Viktor Varland <viktor@dhis2.org>, 2020
 # 
 msgid ""
@@ -87,7 +87,7 @@ msgid "Checking..."
 msgstr ""
 
 msgid "Area"
-msgstr ""
+msgstr "Area"
 
 msgid "Coordinate"
 msgstr "Koordinat"
@@ -231,7 +231,7 @@ msgid "Max"
 msgstr "Maks"
 
 msgid "Min"
-msgstr ""
+msgstr "Min"
 
 msgid "Contains text"
 msgstr ""
@@ -312,7 +312,7 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 msgid "Comments"
 msgstr ""
