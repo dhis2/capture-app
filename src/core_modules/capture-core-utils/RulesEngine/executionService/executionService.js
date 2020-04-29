@@ -6,10 +6,15 @@ import getZScoreWFA from './zScoreWFA';
 import trimQuotes from '../commonUtils/trimQuotes';
 import typeKeys from '../typeKeys.const';
 import getRulesEffectsProcessor from '../rulesEffectsProcessor/rulesEffectsProcessor';
-
-export default function getExecutionService(variableService, dateUtils, rulesEffectsValueConverter) {
-    const replaceVariables = (expression, variablesHash) => {
-        // replaces the variables in an expression with actual variable values.
+import effectActions from '../effectActions.const'
+function execute(code) {
+    // eslint-disable-next-line no-new-func
+    const func = new Function(`"use strict";return ${code}`);
+    return func();
+}
+const warnMessage = (expression, variablePresent) =>
+    log.warn(`Expression ${expression} contains context variable ${variablePresent} 
+    - but this variable is not defined.`);
 
 /**
  * replaces the variables in an expression with actual variable values.
@@ -707,7 +712,7 @@ export default function getExecutionService(variableService) {
 
                         const data  = getRuleEffectData(actionData, id, variablesHash)
 
-                        if (action === 'ASSIGN' && content) {
+                      if (action === effectActions.ASSIGN_VALUE && content) {
                             const variableToAssign = content ? content.replace('#{', '').replace('A{', '').replace('}', '') : null;
                             const variableHash = variablesHash[variableToAssign];
 
