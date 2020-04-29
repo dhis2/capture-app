@@ -466,133 +466,143 @@ msgid "Switch to row view"
 msgstr "گۆڕین بۆ پیشاندانی ئاسۆیی"
 
 msgid "New {{TET}}"
-msgstr ""
+msgstr "نوێ{{TET}}"
 
 msgid "Working Lists"
-msgstr ""
+msgstr "لیستی کارەکان"
 
 msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
 msgstr ""
+"پرۆگرم بە پرۆگرام ئایدی{{programId}} پرۆگرامی تراکەر نیە. تۆمارکردن تەنها "
+"دەتواندرێت ئەنجام بدرێت لە پرۆگرامی تراکەر"
 
 msgid "Selected program is invalid for selected registering unit"
-msgstr ""
+msgstr "پرۆگرامی هەلبژێردراو درووست نیە بۆ یەکەی تۆمارکردنی هەڵبژێردراو"
 
 msgid "Assigned user"
-msgstr ""
+msgstr "بەکارهێنەری دەستنیشانکراو"
 
 msgid "Relationships"
-msgstr ""
+msgstr "پەیوەندیەکان"
 
 msgid "Assignee"
-msgstr ""
+msgstr "نوێنەر"
 
 msgid "Saving to"
-msgstr ""
+msgstr "تۆمارکردن بۆ"
 
 msgid "in"
-msgstr ""
+msgstr "لە"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"ئەمە پرۆگرامی حالەت نیە یاخود زانیاریەکە تێکچووە. تکایە سەریری لۆگ فایل بکە "
+"بۆ زانیاری زیاتر"
 
 msgid "This event"
-msgstr ""
+msgstr "ئەم حاڵەتە"
 
 msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
-msgstr ""
+msgstr "پەیوەنی لە جۆری {{relationshipTypeName}} بۆ{{entityName}}پێشتر هەبووە"
 
 msgid "New event"
 msgstr "رووداوي نوي"
 
 msgid "New event relationship"
-msgstr ""
+msgstr "پەوەندی حالەتی نوێ"
 
 msgid "Adding relationship to event."
-msgstr ""
+msgstr "زیادکردنی پەوەندی بۆ حاڵەت"
 
 msgid "Go back to event without saving relationship"
-msgstr ""
+msgstr "بگەڕێەوە بۆ حاڵەتەکە بێئەوەی پەوەندیەکە تۆمار بکەیەت"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
 "relationship"
 msgstr ""
+"بەجێهێشتنی ئەم پەڕەیە هەڵبژاردنەکانت هەڵدەسپێری کە بۆ پەیوەندیە نوێیەکان "
+"کردووتە"
 
 msgid "events added"
-msgstr ""
+msgstr "حاڵەتەکان زیادکران"
 
 msgid "No events added"
-msgstr ""
+msgstr "هیچ حاڵەتێک زیادنەکرا"
 
 msgid "Select a registering unit and program above to get started"
-msgstr ""
+msgstr "یەکەی تۆمارکردن و پرۆگرامێك هەڵبژێرە لە سەرەوە بۆ دەستپێکردن"
 
 msgid "Select a program to start reporting"
-msgstr ""
+msgstr " پرۆگرامێك هەڵبژێرە بۆ دەستپێکردنی راپۆرت"
 
 msgid "Select a registering unit to start reporting"
-msgstr ""
+msgstr " یەکەی تۆمارکردن هەڵبژێرە بۆ دەستپێکردنی راپۆرت"
 
 msgid "Select a category option to start reporting"
-msgstr ""
+msgstr " دەستەیەک هەڵبژێرە بۆ دەستپێکردنی راپۆرت"
 
 msgid "You dont have access to create an event in the current selections"
-msgstr ""
+msgstr "مافی دروستکردنی حاڵەتت نیە لە هەڵژێردراوەکانی ئێستات"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
 msgstr ""
+"دووبارەبوونەوە هەیە(بەڵآم هەندێک هەڵە هەیە، سەریری لۆگ فایل بکە بۆ زانیاری "
+"زیاتر)"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
 "have access to it"
 msgstr ""
+"مادەیەک بە {{attributeName}} پێشووتر تۆمارکراوە، بەڵام تۆ مافی دەستکاری "
+"کردنت نیە"
 
 msgid "You have already registered this {{attributeName}}"
-msgstr ""
+msgstr "تۆ پێشووتر ئەمەت تۆمارکردووە {{attributeName}}"
 
 msgid ""
 "A {{trackedEntityTypeName}} with this {{attributeName}} is already "
 "registered"
-msgstr ""
+msgstr " {{trackedEntityTypeName}} لەگەڵ {{attributeName}} پێشووتر هەبوو"
 
 msgid "Show registered {{trackedEntityTypeName}}"
-msgstr ""
+msgstr "پیشان بدە {{trackedEntityTypeName}}"
 
 msgid "Registered person"
-msgstr ""
+msgstr "کەسی تۆمارکراو"
 
 msgid "Link"
-msgstr ""
+msgstr "لینک"
 
 msgid "Metadata error. see log for details"
-msgstr ""
+msgstr "هەڵەیەک لە مێتا داتا هەیە، سەیری لۆگ فایل بکە بۆ زانیاری زیاتر"
 
 msgid "Review duplicates"
-msgstr ""
+msgstr "دووبارەبووەکان پێشان بدە"
 
 msgid "Create {{trackedEntityTypeName}} and link"
-msgstr ""
+msgstr "{{trackedEntityTypeName}} و لینک دروست بکە"
 
 msgid "Possible duplicates found"
-msgstr ""
+msgstr "ڕەنگە دووبارەبوونەوە دۆزرابێتەوە"
 
 msgid "An error occured loading possible duplicates"
-msgstr ""
+msgstr "هەڵەیەک ڕوویدا لە کاتی هێنانی دووبارەبوەکان"
 
 msgid "Hide"
 msgstr "شاردنةوة"
 
 msgid "Save as new {{tetName}}"
-msgstr ""
+msgstr "وەکو {{tetName}} نوێ تۆمار بکە"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "هەندێک لە پڕۆگرامەکان فیلتەرکراون"
 
 msgid "Show all"
 msgstr "بيشانداني هةمووان"
@@ -601,159 +611,163 @@ msgid "Program"
 msgstr "بةرنامة"
 
 msgid "Organisation Unit"
-msgstr ""
+msgstr "یەکەی ڕێخکڕاو"
 
 msgid "Registration"
-msgstr ""
+msgstr "تۆمارکردن"
 
 msgid "Review Duplicates"
-msgstr ""
+msgstr "پێداچوونەوە بە دووبارەبووەکان"
 
 msgid "Search results"
-msgstr ""
+msgstr "بۆ ئەنجامەکان بگەڕێ"
 
 msgid "No {{trackedEntityTypeName}} found."
-msgstr ""
+msgstr "هیچ نەدۆزرایوە {{trackedEntityTypeName}} ."
 
 msgid "{{teiCount}} results found for"
-msgstr ""
+msgstr "{{teiCount}} دۆزرایەوە بۆ"
 
 msgid "New search"
-msgstr ""
+msgstr "گەڕانی نۆێ"
 
 msgid "Edit search"
-msgstr ""
+msgstr "گەڕان بگۆڕە"
 
 msgid "Link to an existing {{trackedEntityType}}"
-msgstr ""
+msgstr " {{trackedEntityType}}ئێکی هەبوو لینک بکە"
 
 msgid "Create new {{trackedEntityType}}"
-msgstr ""
+msgstr " {{trackedEntityType}}ی نوێ دروست بکە"
 
 msgid "Register"
-msgstr ""
+msgstr "تۆمار بکە"
 
 msgid "You dont have access to edit this event"
-msgstr ""
+msgstr "مافی ئەوەت نیە گۆڕانکاری لەم حاڵەتە بکەیت"
 
 msgid ""
 "Leaving this page will discard any selections you made for a new "
 "relationship"
 msgstr ""
+"بەجێهێشتنی ئەم پەڕەیە هەڵبژاردنەکانت هەڵدەسپێری کە بۆ پەیوەندیە نوێیەکان "
+"کردووتە"
 
 msgid "No one is assigned to this event"
-msgstr ""
+msgstr "هیچ کەسێک بۆ ئەم حاڵەتە رانەسپێردراوە"
 
 msgid "Assign"
-msgstr ""
+msgstr "رابسپێرە"
 
 msgid "Event assigned to {{name}}"
-msgstr ""
+msgstr "حاڵەتەکە ڕاپسێردراوە بە  {{name}}"
 
 msgid "Feedbacks"
-msgstr ""
+msgstr "بۆچوونەکان"
 
 msgid "New {{typeName}}"
-msgstr ""
+msgstr "{{typeName}} ی نوێ"
 
 msgid "New"
-msgstr ""
+msgstr "نوێ"
 
 msgid "Start again"
-msgstr ""
+msgstr "دووبارە دەستپێبکەوە"
 
 msgid "Find"
 msgstr "طةران"
 
 msgid "Selected registering unit"
-msgstr ""
+msgstr "یەکەی تۆمارکردن هەڵبژێرە"
 
 msgid "Start Again"
-msgstr ""
+msgstr "دووبارە دەستبپێبکەوە"
 
 msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
+msgstr "ئایا دڵنیایی؟ هەموو زانیاریە تۆمارەنەکراوەکان دەسڕێتەوە"
 
 msgid "Accept"
-msgstr ""
+msgstr "پەسندکردن"
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "تۆمارکردنی یەکەی رێکخراو"
 
 msgid "Select"
-msgstr ""
+msgstr "هەڵبژاردن"
 
 msgid "Selected Program"
-msgstr ""
+msgstr "پرۆگرامە هەڵبژێردراوەکە"
 
 msgid "Select program"
 msgstr "بةرنامة هةلبزيرة"
 
 msgid "No programs available."
-msgstr ""
+msgstr "هیچ پرۆگرامێک بەردەست نیە"
 
 msgid "You dont have access to delete this relationship"
-msgstr ""
+msgstr "ماگی سڕینەوە ئەم پەیوەندیەت نیە"
 
 msgid "You dont have access to create any relationships"
-msgstr ""
+msgstr "مافی دروستکردنی ئەم پەیوەندیەت نیە"
 
 msgid "Add relationship"
-msgstr ""
+msgstr "پەوەندی درووستبکە"
 
 msgid "Selected program"
-msgstr ""
+msgstr "پرۆگرامە هەڵبژێردراوەکە"
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
+msgstr "بەدوای بگەڕێ {{uniqueAttrName}}"
 
 msgid "Search by attributes"
-msgstr ""
+msgstr "بە پێ ئاتریبیوت بگەڕێ"
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
-msgstr ""
+msgstr "بەلانی کەم ئەتریبیوتی{{minAttributesRequired}} پڕبەکەرەوەبۆ گەڕان"
 
 msgid "To work with the selected program,"
-msgstr ""
+msgstr "بۆ کارکردن لەگەڵ پرۆگرامە هەڵبژێردراوەکان"
 
 msgid "open the Tracker Capture app"
-msgstr ""
+msgstr "پرۆگرامی بەدواداچوونی کاپچەر/ کاپچەر تراکەر بکەرەوە"
 
 msgid "Program not found"
-msgstr ""
+msgstr "پرۆگرام نەدۆزرایەوە"
 
 msgid "Program is not a tracker program"
-msgstr ""
+msgstr "پرۆگرامەکە بریتی نیە لە پرۆگرامی بەدواداچون/تراکەر"
 
 msgid "Profile"
-msgstr ""
+msgstr "پرۆفایل"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "هەڵەیەک ڕوویدا لە تۆمارکردنی حاڵەتەکە"
 
 msgid "Could not save event. See log for details"
-msgstr ""
+msgstr "نەتواندرا حاڵەتەکە تۆماربکرێت. سەیری فایل لۆگ بکە بۆ زانیاری زیاتر"
 
 msgid "Could not delete event"
-msgstr ""
+msgstr "نەتواندرا حاڵەتەکە بسڕێتەوە"
 
 msgid "Could not save working list"
-msgstr ""
+msgstr "نەتواندرا حاڵەتەکە تۆماربکرێت"
 
 msgid "Could not add working list"
-msgstr ""
+msgstr "نەتواندرا حاڵەتەکە زیابکرێت"
 
 msgid "Could not delete working list"
-msgstr ""
+msgstr "نەتواندرا لیسی کارەکان بسڕدرێتەوە"
 
 msgid "Organisation unit search failed. See log for details"
 msgstr ""
+" هەڵە ڕوویدا لە گەڕان بە دوای یەکەی ڕێکخراو، سەیری لۆگەکان بکە بۆ زانیاری "
+"زیاتر"
 
 msgid "tracked entity instance"
-msgstr ""
+msgstr "نمونەی یەکەی بەدواداچوون"
 
 msgid "Set coordinate"
-msgstr ""
+msgstr "هێڵی درێژی و پانی دیاریبکە"
 
 msgid "Date"
 msgstr "داتا"
@@ -762,28 +776,28 @@ msgid "Time"
 msgstr "کات"
 
 msgid "From date"
-msgstr ""
+msgstr "لە"
 
 msgid "From time"
-msgstr ""
+msgstr "لە کاتی"
 
 msgid "To date"
-msgstr ""
+msgstr "بۆ بەرواری"
 
 msgid "To time"
-msgstr ""
+msgstr " کاتی"
 
 msgid "error encountered during field validation"
-msgstr ""
+msgstr "هەڵەیەک ڕوویدا لە کاتی سەلماندی خانەکە"
 
 msgid "error"
-msgstr ""
+msgstr "هەڵە"
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "فرەلاکە بسڕەوە"
 
 msgid "Set area"
-msgstr ""
+msgstr "ناوچە دیاریبکە"
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -791,17 +805,23 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+"وەشانێکی جیاوازت لە پرۆگرامی کاپچەر کردۆتەوە لە هەمان دۆمەین. لە ئێستادا "
+"پرۆگرامی کاپچەر دەتواندرێت تەنها لەسەری یەک وەشان و یەک دۆمەین کار بکات. "
+"تکایە پەیجەکەت ریفرێش بکەوە بۆ ئەوەی ئەم وەشانە بکەیتەوە بەڵام ئاگاداربکە "
+"ئەم کردارە وەشانەکانیتر دادەخات"
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "بەروارێک یان زیاتر هەڵبژێرە"
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "بەروارێک هەڵبژێرە"
 
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
 msgstr ""
+"یەکێک لە هۆکارەکان بریتیە لە تایبەتمەندی بڕاوسەرەکەت پاڵپشتی ئەمە ناکات. "
+"تکایە سەیری لۆگ فایل بکە بۆ زانیار زیاتر"
 
 msgid "Compatibility mode"
-msgstr ""
+msgstr "مۆدی گونجان"
