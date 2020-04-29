@@ -248,15 +248,17 @@ msgid "Selected program is invalid for registering unit"
 msgstr "ئەم پرۆگرامە درووستنیە بۆ تۆمارکردنی یونت"
 
 msgid "Saving to"
-msgstr ""
+msgstr "تۆمارکردن بۆ"
 
 msgid "in"
-msgstr ""
+msgstr "لە"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"ئەمە پرۆگرامی حالەت نیە یاخود زانیاریەکە تێکچووە. تکایە سەریری لۆگ فایل بکە "
+"بۆ زانیاری زیاتر"
 
 msgid "A value is required"
 msgstr "نرخێک پێویستە"
@@ -271,10 +273,10 @@ msgid "Finish"
 msgstr "تەواکردن"
 
 msgid "events added"
-msgstr ""
+msgstr "حاڵەتەکان زیادکران"
 
 msgid "No events added"
-msgstr ""
+msgstr "هیچ حاڵەتێک زیادنەکرا"
 
 msgid "Switch to form view"
 msgstr "گۆڕین بۆ پیشاندانی فۆرم"
@@ -286,43 +288,43 @@ msgid "New event"
 msgstr "رووداوي نوي"
 
 msgid "Select a registering unit and program above to get started"
-msgstr ""
+msgstr "یەکەی تۆمارکردن و پرۆگرامێك هەڵبژێرە لە سەرەوە بۆ دەستپێکردن"
 
 msgid "Select a program to start reporting"
-msgstr ""
+msgstr " پرۆگرامێك هەڵبژێرە بۆ دەستپێکردنی راپۆرت"
 
 msgid "Select a registering unit to start reporting"
-msgstr ""
+msgstr " یەکەی تۆمارکردن هەڵبژێرە بۆ دەستپێکردنی راپۆرت"
 
 msgid "Select a category option to start reporting"
-msgstr ""
+msgstr " دەستەیەک هەڵبژێرە بۆ دەستپێکردنی راپۆرت"
 
 msgid "Start again"
-msgstr ""
+msgstr "دووبارە دەستپێبکەوە"
 
 msgid "New"
-msgstr ""
+msgstr "نوێ"
 
 msgid "Find"
 msgstr "طةران"
 
 msgid "Selected registering unit"
-msgstr ""
+msgstr "یەکەی تۆمارکردن هەڵبژێرە"
 
 msgid "Start Again"
-msgstr ""
+msgstr "دووبارە دەستبپێبکەوە"
 
 msgid "Registering Organisation Unit"
-msgstr ""
+msgstr "تۆمارکردنی یەکەی رێکخراو"
 
 msgid "Select"
-msgstr ""
+msgstr "هەڵبژاردن"
 
 msgid "Selected Program"
-msgstr ""
+msgstr "پرۆگرامە هەڵبژێردراوەکە"
 
 msgid "Some programs are being filtered."
-msgstr ""
+msgstr "هەندێک لە پڕۆگرامەکان فیلتەرکراون"
 
 msgid "Show all"
 msgstr "بيشانداني هةمووان"
@@ -334,25 +336,25 @@ msgid "Select program"
 msgstr "بةرنامة هةلبزيرة"
 
 msgid "No programs available."
-msgstr ""
+msgstr "هیچ پرۆگرامێک بەردەست نیە"
 
 msgid "An error has occured. See log for details"
 msgstr "هەڵەیک ڕوویدا، تکایە سەیری لۆگ فایل بکە بۆ وردەکاری زیاتر"
 
 msgid "Error saving event"
-msgstr ""
+msgstr "هەڵەیەک ڕوویدا لە تۆمارکردنی حاڵەتەکە"
 
 msgid "Could not save event. See log for details"
-msgstr ""
+msgstr "نەتواندرا حاڵەتەکە تۆماربکرێت. سەیری فایل لۆگ بکە بۆ زانیاری زیاتر"
 
 msgid "Set coordinate"
-msgstr ""
+msgstr "هێڵی درێژی و پانی دیاریبکە"
 
 msgid "Delete polygon"
-msgstr ""
+msgstr "فرەلاکە بسڕەوە"
 
 msgid "Set area"
-msgstr ""
+msgstr "ناوچە دیاریبکە"
 
 msgid ""
 "You opened another version of the Capture App in the same domain. Currently,"
@@ -360,12 +362,16 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
+"وەشانێکی جیاوازت لە پرۆگرامی کاپچەر کردۆتەوە لە هەمان دۆمەین. لە ئێستادا "
+"پرۆگرامی کاپچەر دەتواندرێت تەنها لەسەری یەک وەشان و یەک دۆمەین کار بکات. "
+"تکایە پەیجەکەت ریفرێش بکەوە بۆ ئەوەی ئەم وەشانە بکەیتەوە بەڵام ئاگاداربکە "
+"ئەم کردارە وەشانەکانیتر دادەخات"
 
 msgid "Choose one or more dates..."
-msgstr ""
+msgstr "بەروارێک یان زیاتر هەڵبژێرە"
 
 msgid "Choose a date..."
-msgstr ""
+msgstr "بەروارێک هەڵبژێرە"
 
 msgid "Today"
 msgstr "ئەمڕۆ"
