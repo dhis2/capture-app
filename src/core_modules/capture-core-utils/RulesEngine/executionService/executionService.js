@@ -220,426 +220,423 @@ function updateVariableHashWhenActionIsAssignValue(effects, variablesHash) {
 export default function getExecutionService(variableService) {
     const dateUtils = getDateUtils(momentConverter);
     const runExpression = (expression, beforereplacement, identifier, variablesHash) => {
+    const runExpression = (expression, variablesHash) => {
         let answer = false;
-        try {
-            if (isDefined(expression) && expression.indexOf('d2:') !== -1) {
-                const dhisFunctions = {
-                    'd2:concatenate': {
-                        name: 'd2:concatenate',
-                        func: (callToThisFunction, exp, params) => {
-                            let returnString = "'";
-                            for (let i = 0; i < params.length; i++) {
-                                returnString += params[i];
-                            }
-                            returnString += "'";
-                            return exp.replace(callToThisFunction, returnString);
-                        },
+        if (isDefined(expression) && expression.indexOf('d2:') !== -1) {
+            const dhisFunctions = {
+                'd2:concatenate': {
+                    name: 'd2:concatenate',
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        let returnString = "'";
+                        for (let i = 0; i < params.length; i++) {
+                            returnString += params[i];
+                        }
+                        returnString += "'";
+                        return exp.replace(callToThisFunction, returnString);
                     },
-                    'd2:daysBetween': {
-                        name: 'd2:daysBetween',
-                        parameters: 2,
-                        func: (callToThisFunction, exp, params) => {
-                            const daysBetween = dateUtils.daysBetween(params[0], params[1]);
-                            // Replace the end evaluation of the dhis function:
-                            return exp.replace(callToThisFunction, daysBetween);
-                        },
+                },
+                'd2:daysBetween': {
+                    name: 'd2:daysBetween',
+                    parameters: 2,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        const daysBetween = dateUtils.daysBetween(params[0], params[1]);
+                        // Replace the end evaluation of the dhis function:
+                        return exp.replace(callToThisFunction, daysBetween);
                     },
-                    'd2:weeksBetween': {
-                        name: 'd2:weeksBetween',
-                        parameters: 2,
-                        func: (callToThisFunction, exp, params) => {
-                            const weeksBetween = dateUtils.weeksBetween(params[0], params[1]);
-                            // Replace the end evaluation of the dhis function:
-                            return exp.replace(callToThisFunction, weeksBetween);
-                        },
+                },
+                'd2:weeksBetween': {
+                    name: 'd2:weeksBetween',
+                    parameters: 2,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        const weeksBetween = dateUtils.weeksBetween(params[0], params[1]);
+                        // Replace the end evaluation of the dhis function:
+                        return exp.replace(callToThisFunction, weeksBetween);
                     },
-                    'd2:monthsBetween': {
-                        name: 'd2:monthsBetween',
-                        parameters: 2,
-                        func: (callToThisFunction, exp, params) => {
-                            const monthsBetween = dateUtils.monthsBetween(params[0], params[1]);
-                            // Replace the end evaluation of the dhis function:
-                            return exp.replace(callToThisFunction, monthsBetween);
-                        },
+                },
+                'd2:monthsBetween': {
+                    name: 'd2:monthsBetween',
+                    parameters: 2,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        const monthsBetween = dateUtils.monthsBetween(params[0], params[1]);
+                        // Replace the end evaluation of the dhis function:
+                        return exp.replace(callToThisFunction, monthsBetween);
                     },
-                    'd2:yearsBetween': {
-                        name: 'd2:yearsBetween',
-                        parameters: 2,
-                        func: (callToThisFunction, exp, params) => {
-                            const yearsBetween = dateUtils.yearsBetween(params[0], params[1]);
-                            // Replace the end evaluation of the dhis function:
-                            return exp.replace(callToThisFunction, yearsBetween);
-                        },
+                },
+                'd2:yearsBetween': {
+                    name: 'd2:yearsBetween',
+                    parameters: 2,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        const yearsBetween = dateUtils.yearsBetween(params[0], params[1]);
+                        // Replace the end evaluation of the dhis function:
+                        return exp.replace(callToThisFunction, yearsBetween);
                     },
-                    'd2:floor': {
-                        name: 'd2:floor',
-                        parameters: 1,
-                        func: (callToThisFunction, exp, params) => {
-                            const floored = Math.floor(params[0]);
-                            // Replace the end evaluation of the dhis function:
-                            return exp.replace(callToThisFunction, floored);
-                        },
+                },
+                'd2:floor': {
+                    name: 'd2:floor',
+                    parameters: 1,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        const floored = Math.floor(params[0]);
+                        // Replace the end evaluation of the dhis function:
+                        return exp.replace(callToThisFunction, floored);
                     },
-                    'd2:modulus': {
-                        name: 'd2:modulus',
-                        parameters: 2,
-                        func: (callToThisFunction, exp, params) => {
-                            const dividend = Number(params[0]);
-                            const divisor = Number(params[1]);
-                            const rest = dividend % divisor;
-                            // Replace the end evaluation of the dhis function:
-                            return exp.replace(callToThisFunction, rest);
-                        },
+                },
+                'd2:modulus': {
+                    name: 'd2:modulus',
+                    parameters: 2,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        const dividend = Number(params[0]);
+                        const divisor = Number(params[1]);
+                        const rest = dividend % divisor;
+                        // Replace the end evaluation of the dhis function:
+                        return exp.replace(callToThisFunction, rest);
                     },
-                    'd2:addDays': {
-                        name: 'd2:addDays',
-                        parameters: 2,
-                        func: (callToThisFunction, exp, params) => {},
+                },
+                'd2:addDays': {
+                    name: 'd2:addDays',
+                    parameters: 2,
+                    dhisFunction: (callToThisFunction, exp, params) => {},
+                },
+                'd2:zing': {
+                    name: 'd2:zing',
+                    parameters: 1,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        let number = params[0];
+                        if (number < 0) {
+                            number = 0;
+                        }
+                        // Replace the end evaluation of the dhis function:
+                        return exp.replace(callToThisFunction, number);
                     },
-                    'd2:zing': {
-                        name: 'd2:zing',
-                        parameters: 1,
-                        func: (callToThisFunction, exp, params) => {
-                            let number = params[0];
-                            if (number < 0) {
-                                number = 0;
-                            }
-                            // Replace the end evaluation of the dhis function:
-                            return exp.replace(callToThisFunction, number);
-                        },
 
-                    },
-                    'd2:oizp': {
-                        name: 'd2:oizp',
-                        parameters: 1,
-                        func: (callToThisFunction, exp, params) => {
-                            const number = params[0];
-                            let output = 1;
-                            if (number < 0) {
-                                output = 0;
-                            }
+                },
+                'd2:oizp': {
+                    name: 'd2:oizp',
+                    parameters: 1,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        const number = params[0];
+                        let output = 1;
+                        if (number < 0) {
+                            output = 0;
+                        }
 
-                            // Replace the end evaluation of the dhis function:
-                            return exp.replace(callToThisFunction, output);
-                        },
+                        // Replace the end evaluation of the dhis function:
+                        return exp.replace(callToThisFunction, output);
                     },
-                    'd2:count': {
-                        name: 'd2:count',
-                        parameters: 1,
-                        func: (callToThisFunction, exp, params) => {
-                            const variableName = params[0];
-                            const variableObject = variablesHash[variableName];
-                            let count = 0;
-                            if (variableObject) {
-                                if (variableObject.hasValue) {
-                                    if (variableObject.allValues) {
-                                        count = variableObject.allValues.length;
-                                    } else {
-                                        // If there is a value found for the variable, the count is 1 even if there is no list of alternate values
-                                        // This happens for variables of "DATAELEMENT_CURRENT_STAGE" and "TEI_ATTRIBUTE"
-                                        count = 1;
-                                    }
-                                }
-                            } else {
-                                log.warn(`could not find variable to count: ${variableName}`);
-                            }
-
-                            // Replace the end evaluation of the dhis function:
-                            return exp.replace(callToThisFunction, count);
-                        },
-                    },
-                    'd2:countIfZeroPos': {
-                        name: 'd2:countIfZeroPos',
-                        parameters: 1,
-                        func: (callToThisFunction, exp, params) => {},
-                    },
-                    'd2:countIfValue': {
-                        name: 'd2:countIfValue',
-                        parameters: 2,
-                        func: (callToThisFunction, exp, params) => {
-                            const variableName = params[0];
-                            const variableObject = variablesHash[variableName];
-                            const valueToCompare = variableService.processValue(params[1], variableObject.variableType);
-
-                            let count = 0;
-                            if (variableObject) {
-                                if (variableObject.hasValue) {
-                                    if (variableObject.allValues) {
-                                        for (let i = 0; i < variableObject.allValues.length; i++) {
-                                            if (valueToCompare === variableObject.allValues[i]) {
-                                                count += 1;
-                                            }
-                                        }
-                                    } else if (valueToCompare === variableObject.variableValue) {
-                                        // The variable has a value, but no list of alternates. This means we compare the standard variablevalue
-                                        count = 1;
-                                    }
-                                }
-                            } else {
-                                log.warn(`could not find variable to countifvalue: ${variableName}`);
-                            }
-
-                            // Replace the end evaluation of the dhis function:
-                            return exp.replace(callToThisFunction, count);
-                        },
-                    },
-                    'd2:ceil': {
-                        name: 'd2:ceil',
-                        parameters: 1,
-                        func: (callToThisFunction, exp, params) => {
-                            const ceiled = Math.ceil(params[0]);
-                            // Replace the end evaluation of the dhis function:
-                            return exp.replace(callToThisFunction, ceiled);
-                        },
-                    },
-                    'd2:round': {
-                        name: 'd2:round',
-                        parameters: 1,
-                        func: (callToThisFunction, exp, params) => {
-                            const rounded = Math.round(params[0]);
-                            // Replace the end evaluation of the dhis function:
-                            return exp.replace(callToThisFunction, rounded);
-                        },
-                    },
-                    'd2:hasValue': {
-                        name: 'd2:hasValue',
-                        parameters: 1,
-                        func: (callToThisFunction, exp, params) => {
-                            const variableName = params[0];
-                            const variableObject = variablesHash[variableName];
-                            let valueFound = false;
-                            if (variableObject) {
-                                if (variableObject.hasValue) {
-                                    valueFound = true;
-                                }
-                            } else {
-                                log.warn(`could not find variable to check if has value: ${variableName}`);
-                            }
-
-                            // Replace the end evaluation of the dhis function:
-                            return exp.replace(callToThisFunction, valueFound);
-                        },
-                    },
-                    'd2:lastEventDate': {
-                        name: 'd2:lastEventDate',
-                        parameters: 1,
-                        func: (callToThisFunction, exp, params) => {
-                            const variableName = params[0];
-                            const variableObject = variablesHash[variableName];
-                            let valueFound = "''";
-                            if (variableObject) {
-                                if (variableObject.variableEventDate) {
-                                    valueFound = variableService.processValue(variableObject.variableEventDate, 'DATE');
+                },
+                'd2:count': {
+                    name: 'd2:count',
+                    parameters: 1,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        const variableName = params[0];
+                        const variableObject = variablesHash[variableName];
+                        let count = 0;
+                        if (variableObject) {
+                            if (variableObject.hasValue) {
+                                if (variableObject.allValues) {
+                                    count = variableObject.allValues.length;
                                 } else {
-                                    log.warn(`no last event date found for variable: ${variableName}`);
+                                    // If there is a value found for the variable, the count is 1 even if there is no list of alternate values
+                                    // This happens for variables of "DATAELEMENT_CURRENT_STAGE" and "TEI_ATTRIBUTE"
+                                    count = 1;
                                 }
-                            } else {
-                                log.warn(`could not find variable to check last event date: ${variableName}`);
                             }
+                        } else {
+                            log.warn(`could not find variable to count: ${variableName}`);
+                        }
 
-                            // Replace the end evaluation of the dhis function:
-                            return exp.replace(callToThisFunction, valueFound);
-                        },
+                        // Replace the end evaluation of the dhis function:
+                        return exp.replace(callToThisFunction, count);
                     },
-                    'd2:validatePattern': {
-                        name: 'd2:validatePattern',
-                        parameters: 2,
-                        func: (callToThisFunction, exp, params) => {
-                            const inputToValidate = params[0].toString();
-                            const pattern = params[1];
-                            const regEx = new RegExp(pattern, 'g');
-                            const match = inputToValidate.match(regEx);
+                },
+                'd2:countIfZeroPos': {
+                    name: 'd2:countIfZeroPos',
+                    parameters: 1,
+                    dhisFunction: (callToThisFunction, exp, params) => {},
+                },
+                'd2:countIfValue': {
+                    name: 'd2:countIfValue',
+                    parameters: 2,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        const variableName = params[0];
+                        const variableObject = variablesHash[variableName];
+                        const valueToCompare = variableService.processValue(params[1], variableObject.variableType);
 
-                            let matchFound = false;
-                            if (match !== null && inputToValidate === match[0]) {
-                                matchFound = true;
-                            }
-
-                            // Replace the end evaluation of the dhis function:
-                            return exp.replace(callToThisFunction, matchFound);
-                        },
-                    },
-                    'd2:addControlDigits': {
-                        name: 'd2:addControlDigits',
-                        parameters: 1,
-                        func: (callToThisFunction, exp, params) => {
-                            const baseNumber = params[0];
-                            const baseDigits = baseNumber.split('');
-                            const error = false;
-
-                            let firstDigit = 0;
-                            let secondDigit = 0;
-
-                            if (baseDigits && baseDigits.length < 10) {
-                                let firstSum = 0;
-                                const baseNumberLength = baseDigits.length;
-                                // weights support up to 9 base digits:
-                                const firstWeights = [3, 7, 6, 1, 8, 9, 4, 5, 2];
-                                for (let i = 0; i < baseNumberLength && !error; i++) {
-                                    firstSum += parseInt(baseDigits[i], 10) * firstWeights[i];
-                                }
-                                firstDigit = firstSum % 11;
-
-                                // Push the first digit to the array before continuing, as the second digit is a result of the
-                                // base digits and the first control digit.
-                                baseDigits.push(firstDigit);
-                                // Weights support up to 9 base digits plus first control digit:
-                                const secondWeights = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2];
-                                let secondSum = 0;
-                                for (let si = 0; si < baseNumberLength + 1 && !error; si++) {
-                                    secondSum += parseInt(baseDigits[si], 10) * secondWeights[si];
-                                }
-                                secondDigit = secondSum % 11;
-
-                                if (firstDigit === 10) {
-                                    log.warn('First control digit became 10, replacing with 0');
-                                    firstDigit = 0;
-                                }
-                                if (secondDigit === 10) {
-                                    log.warn('Second control digit became 10, replacing with 0');
-                                    secondDigit = 0;
-                                }
-                            } else {
-                                log.warn(`Base number not well formed(${baseDigits.length} digits): ${baseNumber}`);
-                            }
-
-                            if (!error) {
-                                // Replace the end evaluation of the dhis function:
-                                return exp.replace(callToThisFunction, baseNumber + firstDigit + secondDigit);
-                            }
-                            // Replace the end evaluation of the dhis function:
-                            return exp.replace(callToThisFunction, baseNumber);
-                        },
-                    },
-                    'd2:checkControlDigits': {
-                        name: 'd2:checkControlDigits',
-                        parameters: 1,
-                        func: (callToThisFunction, exp, params) => {
-                            log.warn('checkControlDigits not implemented yet');
-
-                            // Replace the end evaluation of the dhis function:
-                            return exp.replace(callToThisFunction, params[0]);
-                        },
-                    },
-                    'd2:left': {
-                        name: 'd2:left',
-                        parameters: 2,
-                        func: (callToThisFunction, exp, params) => {
-                            const string = String(params[0]);
-                            const numChars = string.length < params[1] ? string.length : params[1];
-                            let returnString = string.substring(0, numChars);
-                            returnString = variableService.processValue(returnString, 'TEXT');
-                            return exp.replace(callToThisFunction, returnString);
-                        },
-                    },
-                    'd2:right': {
-                        name: 'd2:right',
-                        parameters: 2,
-                        func: (callToThisFunction, exp, params) => {
-                            const string = String(params[0]);
-                            const numChars = string.length < params[1] ? string.length : params[1];
-                            let returnString = string.substring(string.length - numChars, string.length);
-                            returnString = variableService.processValue(returnString, 'TEXT');
-                            return exp.replace(callToThisFunction, returnString);
-                        },
-                    },
-                    'd2:substring': {
-                        name: 'd2:substring',
-                        parameters: 3,
-                        func: (callToThisFunction, exp, params) => {
-                            const string = String(params[0]);
-                            const startChar = string.length < params[1] - 1 ? -1 : params[1];
-                            const endChar = string.length < params[2] ? -1 : params[2];
-                            if (startChar < 0 || endChar < 0) {
-                                return exp.replace(callToThisFunction, "''");
-                            }
-                            let returnString = string.substring(startChar, endChar);
-                            returnString = variableService.processValue(returnString, 'TEXT');
-                            return exp.replace(callToThisFunction, returnString);
-                        },
-                    },
-                    'd2:split': {
-                        name: 'd2:split',
-                        parameters: 3,
-                        func: (callToThisFunction, exp, params) => {
-                            const string = String(params[0]);
-                            const splitArray = string.split(params[1]);
-                            let returnPart = '';
-                            if (splitArray.length >= params[2]) {
-                                returnPart = splitArray[params[2]];
-                            }
-                            returnPart = variableService.processValue(returnPart, 'TEXT');
-                            return exp.replace(callToThisFunction, returnPart);
-                        },
-                    },
-                    'd2:zScoreWFA': {
-                        name: 'd2:zScoreWFA',
-                        parameters: 3,
-                        func: (callToThisFunction, exp, params) => exp.replace(callToThisFunction, getZScoreWFA(params[0], params[1], params[2])),
-                    },
-                    'd2:length': {
-                        name: 'd2:length',
-                        parameters: 1,
-                        func: (callToThisFunction, exp, params) => exp.replace(callToThisFunction, String(params[0]).length),
-
-                    },
-                };
-                let continueLooping = true;
-
-                // Safety harness on 10 loops, in case of unanticipated syntax causing unintencontinued looping
-                for (let i = 0; i < 10 && continueLooping; i++) {
-                    let expressionUpdated = false;
-                    let brokenExecution = false;
-                    Object.values(dhisFunctions)
-                        .filter(({ name }) => expression.includes(name))
-                        .forEach((dhisFunction) => {
-                        // Select the function call, with any number of parameters inside single quotations, or number parameters witout quotations
-                            const regularExFunctionCall = new RegExp(`${dhisFunction.name}\\( *(([\\d/\\*\\+\\-%. ]+)|( *'[^']*'))*( *, *(([\\d/\\*\\+\\-%. ]+)|'[^']*'))* *\\)`, 'g');
-
-                            const callsToThisFunction = expression.match(regularExFunctionCall);
-
-                            if (callsToThisFunction) {
-                                callsToThisFunction.forEach((callToThisFunction) => {
-                                    const parameters = callToThisFunction
-                                    // Remove the function name and parenthesis:
-                                        .replace(/(^[^(]+\()|\)$/g, '')
-                                    // Remove white spaces before and after parameters:
-                                        .trim()
-                                    // Then split into single parameters:
-                                        .match(/(('[^']+')|([^,]+))/g);
-
-
-                                    brokenExecution = brokenFunctionSignature(dhisFunction.parameters, parameters);
-                                    if (brokenExecution) {
-                                        log.warn(`${dhisFunction.name} was called with the incorrect number of parameters`);
-                                        // Function call is not possible to evaluate, remove the call:
-                                        expression = expression.replace(callToThisFunction, 'false');
-                                    }
-
-                                    // In case the function call is nested, the parameter itself contains an expression, run the expression.
-                                    if (!brokenExecution && isDefined(parameters) && parameters !== null) {
-                                        for (let i = 0; i < parameters.length; i++) {
-                                        // eslint-disable-next-line no-use-before-define
-                                            parameters[i] = runExpression(parameters[i], dhisFunction.name, `parameter:${i}`, variablesHash);
+                        let count = 0;
+                        if (variableObject) {
+                            if (variableObject.hasValue) {
+                                if (variableObject.allValues) {
+                                    for (let i = 0; i < variableObject.allValues.length; i++) {
+                                        if (valueToCompare === variableObject.allValues[i]) {
+                                            count += 1;
                                         }
                                     }
-
-                                    expression = dhisFunction.func(callToThisFunction, expression, parameters);
-                                    expressionUpdated = true;
-                                });
+                                } else if (valueToCompare === variableObject.variableValue) {
+                                    // The variable has a value, but no list of alternates. This means we compare the standard variablevalue
+                                    count = 1;
+                                }
                             }
-                        });
+                        } else {
+                            log.warn(`could not find variable to countifvalue: ${variableName}`);
+                        }
 
-                    // We only want to continue looping until we made a successful replacement,
-                    // and there is still occurrences of "d2:" in the code. In cases where d2: occur outside
-                    // the expected d2: function calls, one unneccesary iteration will be done and the
-                    // successfulExecution will be false coming back here, ending the loop. The last iteration
-                    // should be zero to marginal performancewise.
-                    continueLooping = expressionUpdated && expression.indexOf('d2:') !== -1;
-                }
+                        // Replace the end evaluation of the dhis function:
+                        return exp.replace(callToThisFunction, count);
+                    },
+                },
+                'd2:ceil': {
+                    name: 'd2:ceil',
+                    parameters: 1,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        const ceiled = Math.ceil(params[0]);
+                        // Replace the end evaluation of the dhis function:
+                        return exp.replace(callToThisFunction, ceiled);
+                    },
+                },
+                'd2:round': {
+                    name: 'd2:round',
+                    parameters: 1,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        const rounded = Math.round(params[0]);
+                        // Replace the end evaluation of the dhis function:
+                        return exp.replace(callToThisFunction, rounded);
+                    },
+                },
+                'd2:hasValue': {
+                    name: 'd2:hasValue',
+                    parameters: 1,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        const variableName = params[0];
+                        const variableObject = variablesHash[variableName];
+                        let valueFound = false;
+                        if (variableObject) {
+                            if (variableObject.hasValue) {
+                                valueFound = true;
+                            }
+                        } else {
+                            log.warn(`could not find variable to check if has value: ${variableName}`);
+                        }
+
+                        // Replace the end evaluation of the dhis function:
+                        return exp.replace(callToThisFunction, valueFound);
+                    },
+                },
+                'd2:lastEventDate': {
+                    name: 'd2:lastEventDate',
+                    parameters: 1,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        const variableName = params[0];
+                        const variableObject = variablesHash[variableName];
+                        let valueFound = "''";
+                        if (variableObject) {
+                            if (variableObject.variableEventDate) {
+                                valueFound = variableService.processValue(variableObject.variableEventDate, 'DATE');
+                            } else {
+                                log.warn(`no last event date found for variable: ${variableName}`);
+                            }
+                        } else {
+                            log.warn(`could not find variable to check last event date: ${variableName}`);
+                        }
+
+                        // Replace the end evaluation of the dhis function:
+                        return exp.replace(callToThisFunction, valueFound);
+                    },
+                },
+                'd2:validatePattern': {
+                    name: 'd2:validatePattern',
+                    parameters: 2,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        const inputToValidate = params[0].toString();
+                        const pattern = params[1];
+                        const regEx = new RegExp(pattern, 'g');
+                        const match = inputToValidate.match(regEx);
+
+                        let matchFound = false;
+                        if (match !== null && inputToValidate === match[0]) {
+                            matchFound = true;
+                        }
+
+                        // Replace the end evaluation of the dhis function:
+                        return exp.replace(callToThisFunction, matchFound);
+                    },
+                },
+                'd2:addControlDigits': {
+                    name: 'd2:addControlDigits',
+                    parameters: 1,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        const baseNumber = params[0];
+                        const baseDigits = baseNumber.split('');
+                        const error = false;
+
+                        let firstDigit = 0;
+                        let secondDigit = 0;
+
+                        if (baseDigits && baseDigits.length < 10) {
+                            let firstSum = 0;
+                            const baseNumberLength = baseDigits.length;
+                            // weights support up to 9 base digits:
+                            const firstWeights = [3, 7, 6, 1, 8, 9, 4, 5, 2];
+                            for (let i = 0; i < baseNumberLength && !error; i++) {
+                                firstSum += parseInt(baseDigits[i], 10) * firstWeights[i];
+                            }
+                            firstDigit = firstSum % 11;
+
+                            // Push the first digit to the array before continuing, as the second digit is a result of the
+                            // base digits and the first control digit.
+                            baseDigits.push(firstDigit);
+                            // Weights support up to 9 base digits plus first control digit:
+                            const secondWeights = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2];
+                            let secondSum = 0;
+                            for (let si = 0; si < baseNumberLength + 1 && !error; si++) {
+                                secondSum += parseInt(baseDigits[si], 10) * secondWeights[si];
+                            }
+                            secondDigit = secondSum % 11;
+
+                            if (firstDigit === 10) {
+                                log.warn('First control digit became 10, replacing with 0');
+                                firstDigit = 0;
+                            }
+                            if (secondDigit === 10) {
+                                log.warn('Second control digit became 10, replacing with 0');
+                                secondDigit = 0;
+                            }
+                        } else {
+                            log.warn(`Base number not well formed(${baseDigits.length} digits): ${baseNumber}`);
+                        }
+
+                        if (!error) {
+                            // Replace the end evaluation of the dhis function:
+                            return exp.replace(callToThisFunction, baseNumber + firstDigit + secondDigit);
+                        }
+                        // Replace the end evaluation of the dhis function:
+                        return exp.replace(callToThisFunction, baseNumber);
+                    },
+                },
+                'd2:checkControlDigits': {
+                    name: 'd2:checkControlDigits',
+                    parameters: 1,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        log.warn('checkControlDigits not implemented yet');
+
+                        // Replace the end evaluation of the dhis function:
+                        return exp.replace(callToThisFunction, params[0]);
+                    },
+                },
+                'd2:left': {
+                    name: 'd2:left',
+                    parameters: 2,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        const string = String(params[0]);
+                        const numChars = string.length < params[1] ? string.length : params[1];
+                        let returnString = string.substring(0, numChars);
+                        returnString = variableService.processValue(returnString, 'TEXT');
+                        return exp.replace(callToThisFunction, returnString);
+                    },
+                },
+                'd2:right': {
+                    name: 'd2:right',
+                    parameters: 2,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        const string = String(params[0]);
+                        const numChars = string.length < params[1] ? string.length : params[1];
+                        let returnString = string.substring(string.length - numChars, string.length);
+                        returnString = variableService.processValue(returnString, 'TEXT');
+                        return exp.replace(callToThisFunction, returnString);
+                    },
+                },
+                'd2:substring': {
+                    name: 'd2:substring',
+                    parameters: 3,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        const string = String(params[0]);
+                        const startChar = string.length < params[1] - 1 ? -1 : params[1];
+                        const endChar = string.length < params[2] ? -1 : params[2];
+                        if (startChar < 0 || endChar < 0) {
+                            return exp.replace(callToThisFunction, "''");
+                        }
+                        let returnString = string.substring(startChar, endChar);
+                        returnString = variableService.processValue(returnString, 'TEXT');
+                        return exp.replace(callToThisFunction, returnString);
+                    },
+                },
+                'd2:split': {
+                    name: 'd2:split',
+                    parameters: 3,
+                    dhisFunction: (callToThisFunction, exp, params) => {
+                        const string = String(params[0]);
+                        const splitArray = string.split(params[1]);
+                        let returnPart = '';
+                        if (splitArray.length >= params[2]) {
+                            returnPart = splitArray[params[2]];
+                        }
+                        returnPart = variableService.processValue(returnPart, 'TEXT');
+                        return exp.replace(callToThisFunction, returnPart);
+                    },
+                },
+                'd2:zScoreWFA': {
+                    name: 'd2:zScoreWFA',
+                    parameters: 3,
+                    dhisFunction: (callToThisFunction, exp, params) => exp.replace(callToThisFunction, getZScoreWFA(params[0], params[1], params[2])),
+                },
+                'd2:length': {
+                    name: 'd2:length',
+                    parameters: 1,
+                    dhisFunction: (callToThisFunction, exp, params) => exp.replace(callToThisFunction, String(params[0]).length),
+
+                },
+            };
+            let continueLooping = true;
+
+            // Safety harness on 10 loops, in case of unanticipated syntax causing unintencontinued looping
+            for (let i = 0; i < 10 && continueLooping; i++) {
+                let expressionUpdated = false;
+                let brokenExecution = false;
+                const dhisFunctionsIncludedInTheExpression =
+                  Object.values(dhisFunctions)
+                      .filter(({ name }) => expression.includes(name));
+
+                dhisFunctionsIncludedInTheExpression
+                    .forEach(({ name, dhisFunction, parameters }) => {
+                    // Select the function call, with any number of parameters inside single quotations, or number parameters without quotations
+                        const regularExFunctionCall = new RegExp(`${name}\\( *(([\\d/\\*\\+\\-%. ]+)|( *'[^']*'))*( *, *(([\\d/\\*\\+\\-%. ]+)|'[^']*'))* *\\)`, 'g');
+
+                        const callsToThisFunction = expression.match(regularExFunctionCall);
+
+                        if (callsToThisFunction) {
+                            callsToThisFunction.forEach((callToThisFunction) => {
+                                const evaluatedParameters = callToThisFunction
+                                    // Remove the function name and parenthesis:
+                                    .replace(/(^[^(]+\()|\)$/g, '')
+                                    // Remove white spaces before and after parameters:
+                                    .trim()
+                                    // Then split into single parameters:
+                                    .match(/(('[^']+')|([^,]+))/g)
+                                    // In case the function call is nested, the parameter itself contains an expression, run the expression.
+                                    .map(param => runExpression(param, variablesHash));
+
+                                brokenExecution = brokenFunctionSignature(parameters, evaluatedParameters);
+                                if (brokenExecution) {
+                                    log.warn(`${name} was called with the incorrect number of parameters`);
+                                    // Function call is not possible to evaluate, remove the call:
+                                    expression = expression.replace(callToThisFunction, 'false');
+                                }
+
+                                expression = dhisFunction(callToThisFunction, expression, evaluatedParameters);
+                                expressionUpdated = true;
+                            });
+                        }
+                    });
+
+
+                // We only want to continue looping until we made a successful replacement,
+                // and there is still occurrences of "d2:" in the code. In cases where d2: occur outside
+                // the expected d2: function calls, one unneccesary iteration will be done and the
+                // successfulExecution will be false coming back here, ending the loop. The last iteration
+                // should be zero to marginal performancewise.
+                continueLooping = expressionUpdated && expression.indexOf('d2:') !== -1;
             }
+        }
 
-            answer = execute(expression);
+        answer = evaluate(expression);
         } catch (e) {
             log.warn(`Expression with id ${identifier} could not be run. Original condition was: ${beforereplacement} - Evaluation ended up as:${expression} - error message:${e}`);
         }
@@ -689,8 +686,12 @@ export default function getExecutionService(variableService) {
                 const { condition: expression } = rule;
                 if (expression) {
                     const strippedExpression = replaceVariablesWithValues(expression, variablesHash);
-                    // checks if the rule is effective meaning that the rule results to a truthy expression
-                    isRuleEffective = runExpression(strippedExpression, rule.condition, `rule:${rule.id}`, variablesHash);
+                    try {
+                        // checks if the rule is effective meaning that the rule results to a truthy expression
+                        isRuleEffective = runExpression(strippedExpression, variablesHash);
+                    } catch (e) {
+                        log.warn(`Expression with id rule:${rule.id} could not be run. Original condition was: ${rule.condition} - Evaluation ended up as:${expression} - error message:${e}`);
+                    }
                 } else {
                     log.warn(`Rule id:'${rule.id}'' and name:'${rule.name}' had no condition specified. Please check rule configuration.`);
                 }
@@ -714,8 +715,12 @@ export default function getExecutionService(variableService) {
                 let data;
                 if (actionData) {
                     const strippedExpression = replaceVariablesWithValues(actionData, variablesHash);
-                    const ruleEffectData = runExpression(strippedExpression, actionData, `action:${id}`, variablesHash);
-                    data = trimQuotes(ruleEffectData);
+                    try {
+                        const ruleEffectData = runExpression(strippedExpression, variablesHash);
+                        data = trimQuotes(ruleEffectData);
+                    } catch (e) {
+                        log.warn(`Expression with id rule: action:${id} could not be run. Original condition was: ${rule.condition} - Evaluation ended up as:${strippedExpression} - error message:${e}`);
+                    }
                 }
                 return {
                     id,
