@@ -1,14 +1,14 @@
 # 
 # Translators:
-# Viktor Varland <viktor@dhis2.org>, 2019
 # phil_dhis2, 2019
+# Viktor Varland <viktor@dhis2.org>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2019-11-20T10:50:45.136Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: phil_dhis2, 2019\n"
+"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
 "Language-Team: Lao (https://www.transifex.com/hisp-uio/teams/100509/lo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -167,7 +167,7 @@ msgid "Operations running"
 msgstr ""
 
 msgid "Sort"
-msgstr ""
+msgstr "Sort"
 
 msgid "No events to display"
 msgstr ""
@@ -622,7 +622,7 @@ msgid "Time"
 msgstr ""
 
 msgid "From date"
-msgstr ""
+msgstr "From date"
 
 msgid "From time"
 msgstr ""
