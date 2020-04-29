@@ -225,7 +225,6 @@ function updateVariableHashWhenActionIsAssignValue(effects, variablesHash) {
 
 export default function getExecutionService(variableService) {
     const dateUtils = getDateUtils(momentConverter);
-    const runExpression = (expression, beforereplacement, identifier, variablesHash) => {
     const runExpression = (expression, variablesHash) => {
         let answer = false;
         if (isDefined(expression) && expression.indexOf('d2:') !== -1) {
