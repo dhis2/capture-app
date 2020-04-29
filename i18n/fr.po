@@ -2,15 +2,15 @@
 # Translators:
 # Viktor Varland <viktor@dhis2.org>, 2019
 # phil_dhis2, 2019
-# Bram Piot <bram.piot@gmail.com>, 2019
 # Karoline Tufte Lien <karoline@dhis2.org>, 2020
+# Bram Piot <bram.piot@gmail.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2019-11-18T14:43:03.753Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
+"Last-Translator: Bram Piot <bram.piot@gmail.com>, 2020\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -609,7 +609,7 @@ msgid "Event assigned to {{name}}"
 msgstr ""
 
 msgid "Feedbacks"
-msgstr ""
+msgstr "Feedbacks"
 
 msgid "New {{typeName}}"
 msgstr "Nouveau {{typeName}}"
