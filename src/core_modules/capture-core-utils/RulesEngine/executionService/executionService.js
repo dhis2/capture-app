@@ -671,10 +671,27 @@ export default function getExecutionService(variableService) {
                 log.warn(`Rule id:'${rule.id}'' and name:'${rule.name}' had no condition specified. Please check rule configuration.`);
             }
 
+                let ruleEffects;
                 if (ruleEffective) {
-                    ruleEffects = rule.programRuleActions.map(action => {
-                        const getRuleEffectData = (action, variablesHash, flag) => {
-                            const actionData = action.data;
+                    ruleEffects = rule.programRuleActions.map((
+                      {
+                          id,
+                          location,
+                          programRuleActionType: action,
+                          dataElementId,
+                          trackedEntityAttributeId,
+                          programStageId,
+                          programStageSectionId,
+                          optionGroupId,
+                          optionId,
+                          content,
+                          data: actionData
+                      }) => {
+                        function getRuleEffectData(actionData, id, variablesHash) {
+                            if(!actionData){
+                                return null;
+                            }
+
                             let ruleEffectData = actionData;
 
                             ruleEffectData = replaceVariablesWithValues(actionData, variablesHash);
@@ -688,25 +705,10 @@ export default function getExecutionService(variableService) {
                             return ruleEffectData;
                         };
 
-                        const effect = {
-                            id: action.id,
-                            location: action.location,
-                            action: action.programRuleActionType,
-                            dataElementId: action.dataElementId,
-                            trackedEntityAttributeId: action.trackedEntityAttributeId,
-                            programStageId: action.programStageId,
-                            programStageSectionId: action.programStageSectionId,
-                            optionGroupId: action.optionGroupId,
-                            optionId: action.optionId,
-                            content: action.content,
-                            data: action.data ? getRuleEffectData(action, variablesHash, flag) : action.data,
-                            ineffect: true,
-                        };
+                        const data  = getRuleEffectData(actionData, id, variablesHash)
 
-                        if (effect.action === 'ASSIGN' && effect.content) {
-                            const variableToAssign = effect.content ?
-                              effect.content.replace('#{', '').replace('A{', '').replace('}', '') : null;
-
+                        if (action === 'ASSIGN' && content) {
+                            const variableToAssign = content ? content.replace('#{', '').replace('A{', '').replace('}', '') : null;
                             const variableHash = variablesHash[variableToAssign];
 
                             if (!variableHash) {
@@ -731,7 +733,19 @@ export default function getExecutionService(variableService) {
                             }
                         }
 
-                        return effect;
+                        return {
+                            id,
+                            location,
+                            action,
+                            dataElementId,
+                            trackedEntityAttributeId,
+                            programStageId,
+                            programStageSectionId,
+                            optionGroupId,
+                            optionId,
+                            content,
+                            data
+                        };
                     }
                     );
                 }
