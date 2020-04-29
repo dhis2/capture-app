@@ -5,8 +5,14 @@ import getZScoreWFA from './zScoreWFA';
 import trimQuotes from '../commonUtils/trimQuotes';
 import typeKeys from '../typeKeys.const';
 import getRulesEffectsProcessor from '../rulesEffectsProcessor/rulesEffectsProcessor';
-import effectActions from '../effectActions.const'
-function execute(code) {
+import effectActions from '../effectActions.const';
+
+/**
+ * Creates a function with closed scope where the given string can be executed as javascript
+ * @param code
+ * @returns {*}
+ */
+function evaluate(code) {
     // eslint-disable-next-line no-new-func
     const func = new Function(`"use strict";return ${code}`);
     return func();
@@ -637,9 +643,6 @@ export default function getExecutionService(variableService) {
         }
 
         answer = evaluate(expression);
-        } catch (e) {
-            log.warn(`Expression with id ${identifier} could not be run. Original condition was: ${beforereplacement} - Evaluation ended up as:${expression} - error message:${e}`);
-        }
         return answer;
     };
 
