@@ -677,18 +677,8 @@ export default function getExecutionService(variableService) {
                             const actionData = action.data;
                             let ruleEffectData = actionData;
 
-                            const nameWithoutBrackets = actionData.replace('#{', '').replace('}', '');
-                            if (variablesHash[nameWithoutBrackets]) {
-                                // The variable exists, and is replaced with its corresponding value
-                                ruleEffectData = variablesHash[nameWithoutBrackets].variableValue;
-                            } else if (actionData.indexOf('{') !== -1 || actionData.indexOf('d2:') !== -1) {
-                                // Since the value couldnt be looked up directly, and contains a curly brace or a dhis function call,
-                                // the expression was more complex than replacing a single variable value.
-                                // Now we will have to make a thorough replacement and separate evaluation to find the correct value:
-                                ruleEffectData = replaceVariablesWithValues(actionData, variablesHash);
-                                // In a scenario where the data contains a complex expression, evaluate the expression to compile(calculate) the result:
-                                ruleEffectData = runExpression(ruleEffectData, actionData, `action:${action.id}`, flag, variablesHash);
-                            }
+                            ruleEffectData = replaceVariablesWithValues(actionData, variablesHash);
+                            ruleEffectData = runExpression(ruleEffectData, actionData, `action:${id}`, variablesHash);
 
                             // trimQuotes if found
                             if (ruleEffectData && isString(ruleEffectData)) {
