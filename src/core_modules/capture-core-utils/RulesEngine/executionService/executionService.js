@@ -726,18 +726,12 @@ export default function getExecutionService(variableService) {
                    content,
                    data: actionData
                 }) => {
-                    function getRuleEffectData(actionData, id, variablesHash) {
-                      if(!actionData){
-                          return null;
-                      }
-
-                      const strippedExpression = replaceVariablesWithValues(actionData, variablesHash);
-                      let ruleEffectData = runExpression(strippedExpression, actionData, `action:${id}`, variablesHash)
-                      return trimQuotes(ruleEffectData);
-                    };
-
-                    const data  = getRuleEffectData(actionData, id, variablesHash)
-
+                let data;
+                if (actionData) {
+                    const strippedExpression = replaceVariablesWithValues(actionData, variablesHash);
+                    const ruleEffectData = runExpression(strippedExpression, actionData, `action:${id}`, variablesHash);
+                    data = trimQuotes(ruleEffectData);
+                }
                     return {
                         id,
                         location,
