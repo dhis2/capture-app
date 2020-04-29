@@ -660,7 +660,7 @@ export default function getExecutionService(variableService) {
                 const { condition: expression } = rule;
                 if (expression) {
                     const strippedExpression = replaceVariablesWithValues(expression, variablesHash);
-                    // checks if the rule is effective meaning true
+                    // checks if the rule is effective meaning that the rule results to a truthy expression
                     ruleEffective = runExpression(strippedExpression, rule.condition, `rule:${rule.id}`, flag, variablesHash);
                 } else {
                     log.warn(`Rule id:'${rule.id}'' and name:'${rule.name}' had no condition specified. Please check rule configuration.`);
