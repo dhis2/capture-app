@@ -11,9 +11,6 @@ function execute(code) {
     const func = new Function(`"use strict";return ${code}`);
     return func();
 }
-const warnMessage = (expression, variablePresent) =>
-    log.warn(`Expression ${expression} contains context variable ${variablePresent} 
-    - but this variable is not defined.`);
 
 /**
  * replaces the variables in an expression with actual variable values.
@@ -22,6 +19,12 @@ const warnMessage = (expression, variablePresent) =>
  * @returns {*}
  */
 const replaceVariablesWithValues = (expression, variablesHash) => {
+    const warnMessage = (expr, variablePresent) => {
+        log.warn(`Expression ${expr} contains context variable ${variablePresent} 
+    - but this variable is not defined.`);
+    };
+
+
     if (expression.includes('{') === false) {
         return expression;
     }
