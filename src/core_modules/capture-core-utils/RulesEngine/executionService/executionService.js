@@ -180,6 +180,44 @@ const convertRuleEffectDataToOutputBaseValue = (data, valueType) => {
     return ruleEffectDataConvertersByType[valueType] ? ruleEffectDataConvertersByType[valueType](data) : data;
 };
 
+/**
+ * There are effects that as a result will update an existing program variable.
+ * Updates of that sort in are taking place here.
+ * @param effects
+ * @param variablesHash
+ */
+function updateVariableHashWhenActionIsAssignValue(effects, variablesHash) {
+    effects
+    .filter(function filterForAssignValueAndContent({action, content}){
+        return action === effectActions.ASSIGN_VALUE && content
+    })
+    .forEach(function updateVariableHashValue({ content, data }) {
+        const variableToAssign = content.replace('#{', '').replace('A{', '').replace('}', '');
+        const variableHash = variablesHash[variableToAssign];
+
+        if (!variableHash) {
+            // If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
+            log.warn(`Variable ${variableToAssign} was not defined.`);
+        } else {
+            // buildAssignVariable
+            const { valueType } = variableHash;
+            let variableValue = convertRuleEffectDataToOutputBaseValue(data, valueType);
+            if (isString(variableValue)) {
+                variableValue = `'${variableValue}'`;
+            }
+
+            variablesHash[variableToAssign] = {
+                variableValue,
+                variableType: valueType,
+                hasValue: true,
+                variableEventDate: '',
+                variablePrefix: variableHash.variablePrefix|| "#",
+                allValues: [variableValue],
+            };
+        }
+    })
+
+}
 
 export default function getExecutionService(variableService) {
     const dateUtils = getDateUtils(momentConverter);
@@ -670,77 +708,53 @@ export default function getExecutionService(variableService) {
                 }
                 return { isRuleEffective, rule }
             })
-            .filter(({ isRuleEffective }) => isRuleEffective)
-            .map(({ rule }) => {
-                return rule.programRuleActions.map(({
-                      id,
-                      location,
-                      programRuleActionType: action,
-                      dataElementId,
-                      trackedEntityAttributeId,
-                      programStageId,
-                      programStageSectionId,
-                      optionGroupId,
-                      optionId,
-                      content,
-                      data: actionData
-                  }) => {
-                      function getRuleEffectData(actionData, id, variablesHash) {
-                          if(!actionData){
-                              return null;
-                          }
-
-                          const strippedExpression = replaceVariablesWithValues(actionData, variablesHash);
-                          let ruleEffectData = runExpression(strippedExpression, actionData, `action:${id}`, variablesHash)
-                          return trimQuotes(ruleEffectData);
-                      };
-
-                      const data  = getRuleEffectData(actionData, id, variablesHash)
-
-                      if (action === effectActions.ASSIGN_VALUE && content) {
-                          const variableToAssign = content.replace('#{', '').replace('A{', '').replace('}', '');
-                          const variableHash = variablesHash[variableToAssign];
-
-                          if (!variableHash) {
-                              // If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
-                              log.warn(`Variable ${variableToAssign} was not defined.`);
-                          } else {
-                              // buildAssignVariable
-                              const { valueType } = variableHash;
-                              let variableValue = convertRuleEffectDataToOutputBaseValue(data, valueType);
-                              if (isString(variableValue)) {
-                                  variableValue = `'${variableValue}'`;
-                              }
-
-                              variablesHash[variableToAssign] = {
-                                  variableValue,
-                                  variableType: valueType,
-                                  hasValue: true,
-                                  variableEventDate: '',
-                                  variablePrefix: variableHash.variablePrefix|| "#",
-                                  allValues: [variableValue],
-                              };
-                          }
+            .filter(function keepEffectiveRules({ isRuleEffective }){
+                return isRuleEffective
+            })
+            .flatMap(function fromTheEffectiveRulesEvaluateActions({ rule }){
+                return rule.programRuleActions.map((
+                {
+                   id,
+                   location,
+                   programRuleActionType: action,
+                   dataElementId,
+                   trackedEntityAttributeId,
+                   programStageId,
+                   programStageSectionId,
+                   optionGroupId,
+                   optionId,
+                   content,
+                   data: actionData
+                }) => {
+                    function getRuleEffectData(actionData, id, variablesHash) {
+                      if(!actionData){
+                          return null;
                       }
 
-                      return {
-                          id,
-                          location,
-                          action,
-                          dataElementId,
-                          trackedEntityAttributeId,
-                          programStageId,
-                          programStageSectionId,
-                          optionGroupId,
-                          optionId,
-                          content,
-                          data
-                      };
-                  }
-                );
-            })
-            .filter(ruleEffectsForRule => ruleEffectsForRule)
-            .reduce((accRuleEffects, effectsForRule) => [...accRuleEffects, ...effectsForRule], []);
+                      const strippedExpression = replaceVariablesWithValues(actionData, variablesHash);
+                      let ruleEffectData = runExpression(strippedExpression, actionData, `action:${id}`, variablesHash)
+                      return trimQuotes(ruleEffectData);
+                    };
+
+                    const data  = getRuleEffectData(actionData, id, variablesHash)
+
+                    return {
+                        id,
+                        location,
+                        action,
+                        dataElementId,
+                        trackedEntityAttributeId,
+                        programStageId,
+                        programStageSectionId,
+                        optionGroupId,
+                        optionId,
+                        content,
+                        data
+                    };
+              })
+            });
+
+        updateVariableHashWhenActionIsAssignValue(effects, variablesHash);
 
     return { getEffects,  convertDataToBaseOutputValue: convertRuleEffectDataToOutputBaseValue, }
 }
