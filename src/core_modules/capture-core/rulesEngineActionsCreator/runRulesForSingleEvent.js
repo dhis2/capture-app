@@ -1,10 +1,16 @@
 // @flow
 import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
+import { errorCreator } from '../../capture-core-utils';
+import { RulesEngine, processTypes } from '../../capture-core-utils/RulesEngine';
 import { Program, TrackerProgram, EventProgram, RenderFoundation, DataElement } from '../metaData';
 import constantsStore from '../metaDataMemoryStores/constants/constants.store';
 import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store';
-import type { DataElement as DataElementForRulesEngine } from '../../capture-core-utils/RulesEngine/rulesEngine.types';
+import type {
+    DataElement as DataElementForRulesEngine,
+    EventsData,
+    InputEvent,
+    OrgUnit,
+} from '../../capture-core-utils/RulesEngine/rulesEngine.types';
 
 const errorMessages = {
     PROGRAM_OR_FOUNDATION_MISSING: 'Program or foundation missing',
@@ -55,9 +61,10 @@ function getDataElements(program: Program) {
 
     return getRulesEngineDataElementsAsObject(dataElements);
 }
-
-
-export function prepareEventData(program: ?Program, foundation: ?RenderFoundation) {
+function prepare(
+    program: ?Program,
+    foundation: ?RenderFoundation,
+) {
     if (!program || !foundation) {
         log.error(errorCreator(errorMessages.PROGRAM_OR_FOUNDATION_MISSING)(
             { program, foundation, method: 'getRulesActionsForEvent' }),
@@ -76,5 +83,47 @@ export function prepareEventData(program: ?Program, foundation: ?RenderFoundatio
     const optionSets = optionSetsStore.get();
     const dataElementsInProgram = getDataElements(program);
 
-    return { optionSets, dataElementsInProgram, programRulesVariables: programRuleVariables, programRules, constants };
+    return {
+        optionSets,
+        dataElementsInProgram,
+        programRulesVariables: programRuleVariables,
+        programRules,
+        constants,
+    };
+}
+
+
+export default function runRulesForSingleEvent(
+    rulesEngine: RulesEngine,
+    program: ?Program,
+    foundation: ?RenderFoundation,
+    orgUnit: OrgUnit,
+    currentEvent: ?InputEvent = {},
+    allEventsData: ?EventsData) {
+    const data = prepare(program, foundation);
+
+    if (data) {
+        const {
+            optionSets,
+            programRulesVariables,
+            programRules,
+            constants,
+            dataElementsInProgram,
+        } = data;
+
+        // returns an array of effects that need to take place in the UI.
+        return rulesEngine.executeRules(
+            { programRulesVariables, programRules, constants },
+            currentEvent,
+            allEventsData,
+            dataElementsInProgram,
+            null,
+            null,
+            null,
+            orgUnit,
+            optionSets,
+            processTypes.EVENT,
+        );
+    }
+    return null;
 }

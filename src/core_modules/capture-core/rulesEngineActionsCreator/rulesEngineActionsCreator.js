@@ -2,9 +2,9 @@
 /**
  * @module rulesEngineActionsCreator
  */
-import { RulesEngine, processTypes } from '../../capture-core-utils/RulesEngine';
+import { RulesEngine } from '../../capture-core-utils/RulesEngine';
 import { RenderFoundation, Program, TrackerProgram } from '../metaData';
-import { prepareEventData } from './runRulesForSingleEvent';
+import runRulesForSingleEvent from './runRulesForSingleEvent';
 import runRulesForTEI from './runRulesForTEI';
 import postProcessRulesEffects from './postProcessRulesEffects';
 import { updateRulesEffects } from './rulesEngine.actions';
@@ -34,23 +34,16 @@ export function getRulesActionsForEvent(
     currentEventData: ?EventData | {} = {},
     allEventsData: ?Array<EventData>,
 ) {
-    const data = prepareEventData(program, foundation);
-    if (data) {
-        const { optionSets, dataElementsInProgram, programRulesVariables, programRules, constants } = data;
-        // returns an array of effects that need to take place in the UI.
-        const rulesEffects = rulesEngine.executeRules(
-            { programRulesVariables, programRules, constants },
-            currentEventData,
-            allEventsData,
-            dataElementsInProgram,
-            null,
-            null,
-            null,
-            orgUnit,
-            optionSets,
-            processTypes.EVENT,
-        );
+    const rulesEffects = runRulesForSingleEvent(
+        rulesEngine,
+        program,
+        foundation,
+        orgUnit,
+        currentEventData,
+        allEventsData,
+    );
 
+    if (rulesEffects) {
         return getRulesActions(rulesEffects, foundation, formId);
     }
     return null;
