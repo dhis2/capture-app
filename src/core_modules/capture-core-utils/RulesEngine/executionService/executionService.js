@@ -7,8 +7,6 @@ import trimQuotes from '../commonUtils/trimQuotes';
 import typeKeys from '../typeKeys.const';
 import getDateUtils from '../dateUtils/dateUtils';
 import momentConverter from '../converters/momentConverter';
-import getRulesEffectsProcessor from '../rulesEffectsProcessor/rulesEffectsProcessor';
-import rulesEffectsValueConverter from '../converters/rulesEffectsValueConverter';
 
 export default function getExecutionService(variableService) {
     const dateUtils = getDateUtils(momentConverter);
@@ -612,48 +610,45 @@ export default function getExecutionService(variableService) {
 
         const variablesHash = variableService.getVariables(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets);
 
-        const effects = programRules
-            .sort((a, b) => {
-                if (!a.priority && !b.priority) {
-                    return 0;
+        return programRules
+        .sort((a, b) => {
+            if (!a.priority && !b.priority) {
+                return 0;
+            }
+
+            if (!a.priority) {
+                return 1;
+            }
+
+            if (!b.priority) {
+                return -1;
+            }
+
+            return a.priority - b.priority;
+        })
+        .map((rule) => {
+            let ruleEffects;
+
+            let ruleEffective = false;
+            let expression = rule.condition;
+            if (expression) {
+                if (expression.indexOf('{') !== -1) {
+                    expression = replaceVariables(expression, variablesHash);
                 }
+                // run expression:
+                ruleEffective = runExpression(expression, rule.condition, `rule:${rule.id}`, flag, variablesHash);
+            } else {
+                log.warn(`Rule id:'${rule.id}'' and name:'${rule.name}' had no condition specified. Please check rule configuration.`);
+            }
 
-                if (!a.priority) {
-                    return 1;
-                }
-
-                if (!b.priority) {
-                    return -1;
-                }
-
-                return a.priority - b.priority;
-            })
-            .map((rule) => {
-                let ruleEffects;
-
-                let ruleEffective = false;
-                let expression = rule.condition;
-                if (expression) {
-                    if (expression.indexOf('{') !== -1) {
-                        expression = replaceVariables(expression, variablesHash);
-                    }
-                    // run expression:
-                    ruleEffective = runExpression(expression, rule.condition, `rule:${rule.id}`, flag, variablesHash);
-                } else {
-                    log.warn(`Rule id:'${rule.id}'' and name:'${rule.name}' had no condition specified. Please check rule configuration.`);
-                }
-
-                if (ruleEffective) {
-                    ruleEffects = rule.programRuleActions.map(action => buildRuleEffect(action, variablesHash, flag));
-                }
-                return ruleEffects;
-            })
-            .filter(ruleEffectsForRule => ruleEffectsForRule)
-            .reduce((accRuleEffects, effectsForRule) => [...accRuleEffects, ...effectsForRule], []);
-
-        const processRulesEffects = getRulesEffectsProcessor(convertRuleEffectDataToOutputBaseValue, rulesEffectsValueConverter);
-
-        return processRulesEffects(effects, processType, allDataElements, allTrackedEntityAttributes);
+            if (ruleEffective) {
+                ruleEffects = rule.programRuleActions.map(action => buildRuleEffect(action, variablesHash, flag));
+            }
+            return ruleEffects;
+        })
+        .filter(ruleEffectsForRule => ruleEffectsForRule)
+        .reduce((accRuleEffects, effectsForRule) => [...accRuleEffects, ...effectsForRule], [])
     };
-    return { getEffects }
+
+    return { getEffects,  convertDataToBaseOutputValue: convertRuleEffectDataToOutputBaseValue, }
 }

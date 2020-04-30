@@ -4,9 +4,12 @@ import ValueProcessor from './ValueProcessor/ValueProcessor';
 import getExecutionService from './executionService/executionService';
 import processTypes from './rulesEffectsProcessor/processTypes.const';
 import inputValueConverter from './converters/inputValueConverter';
+import getRulesEffectsProcessor from './rulesEffectsProcessor/rulesEffectsProcessor';
+import rulesEffectsValueConverter from './converters/rulesEffectsValueConverter';
 
 import type {
     OutputEffect,
+    ProgramRuleEffect,
     ProgramRulesContainer,
     EventData,
     EventsData,
@@ -32,17 +35,27 @@ type ExecutionService = {
       optionSets: ?OptionSets,
       processType: string,
       flags: Object,
-    ) => ?Array<OutputEffect>
+    ) => ?Array<ProgramRuleEffect>,
+    convertDataToBaseOutputValue: (data: any, valueType: string) => any,
 };
 
 export default class RulesEngine {
     executionService: ExecutionService;
+    onProcessRulesEffects: (
+      effects: Array<ProgramRuleEffect>,
+      processType: $Values<typeof processTypes>,
+      dataElements: ?DataElements,
+      trackedEntityAttributes?: ?TrackedEntityAttributes) => Array<?OutputEffect>;
 
     constructor() {
         const valueProcessor = new ValueProcessor(inputValueConverter);
         const variableService = new VariableService(valueProcessor.processValue);
 
         this.executionService = getExecutionService(variableService);
+        this.onProcessRulesEffects = getRulesEffectsProcessor(
+            this.executionService.convertDataToBaseOutputValue,
+            rulesEffectsValueConverter,
+        );
     }
 
     executeRules(
@@ -56,7 +69,7 @@ export default class RulesEngine {
         selectedOrgUnit: OrgUnit,
         optionSets: ?OptionSets,
         processType: $Values<typeof processTypes>,
-    ): ?Array<OutputEffect> {
+    ): ?Array<?OutputEffect> {
         let eventsContainer;
         if (eventsData && eventsData.length > 0) {
             const eventsDataByStage = eventsData.reduce((accEventsByStage, event) => {
@@ -76,7 +89,7 @@ export default class RulesEngine {
             eventsContainer = null;
         }
 
-        return this.executionService.getEffects(
+        const effects = this.executionService.getEffects(
             programRulesContainer,
             executingEvent,
             eventsContainer,
@@ -88,5 +101,10 @@ export default class RulesEngine {
             optionSets,
             processType,
             { debug: true });
+
+        if (effects) {
+            return this.onProcessRulesEffects(effects, processType, dataElements, trackedEntityAttributes);
+        }
+        return null;
     }
 }
