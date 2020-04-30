@@ -4,7 +4,7 @@
 import log from 'loglevel';
 import OptionSetHelper from '../OptionSetHelper/OptionSetHelper';
 import typeKeys from '../typeKeys.const';
-import variablePrefixes from '../variablePrefixes';
+import variablePrefixes from './variablePrefixes.const';
 
 import type {
     ProgramRuleVariable,

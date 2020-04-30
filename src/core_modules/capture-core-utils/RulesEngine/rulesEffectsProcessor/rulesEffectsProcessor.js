@@ -13,8 +13,7 @@ import type {
     MessageEffect,
     GeneralErrorEffect,
     GeneralWarningEffect,
-    CompulsoryEffect,
-    OutputEffect,
+    CompulsoryEffect, OutputEffect,
 } from '../rulesEngine.types';
 
 const mapProcessTypeToIdentifierName = {
@@ -274,16 +273,19 @@ export default function getRulesEffectsProcessor(
         const processIdName = mapProcessTypeToIdentifierName[processType];
 
         return effects
-            .filter(({ action }) => mapActionsToProcessor[action])
-            .map(effect => mapActionsToProcessor[effect.action](
-                effect,
-                processIdName,
-                processType,
-                dataElements,
-                trackedEntityAttributes,
-            ))
-            // when mapActionsToProcessor function returns `null` we filter those value out.
-            .filter(keepTruthyValues => keepTruthyValues);
+            .map((effect) => {
+                const action = effect.action;
+                return mapActionsToProcessor[action] ?
+                    mapActionsToProcessor[action](
+                        effect,
+                        processIdName,
+                        processType,
+                        dataElements,
+                        trackedEntityAttributes,
+                        // todo flowjs
+                    ) : null;
+            })
+            .filter(effect => effect);
     }
 
     return processRulesEffects;

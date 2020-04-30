@@ -1,7 +1,7 @@
 import log from 'loglevel';
-import getZScoreWFA from './executionService/zScoreWFA';
+import getZScoreWFA from './zScoreWFA';
 
-export default function dhisFunctions(dateUtils, variableService, variablesHash) {
+export default function d2Functions(dateUtils, variableService, variablesHash) {
     return {
         'd2:concatenate': {
             name: 'd2:concatenate',
