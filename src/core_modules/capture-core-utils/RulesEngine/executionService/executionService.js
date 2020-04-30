@@ -610,8 +610,7 @@ export default function getExecutionService(variableService) {
 
         const variablesHash = variableService.getVariables(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets);
 
-        return programRules
-        .sort((a, b) => {
+        return programRules.sort((a, b) => {
             if (!a.priority && !b.priority) {
                 return 0;
             }
@@ -647,7 +646,7 @@ export default function getExecutionService(variableService) {
             return ruleEffects;
         })
         .filter(ruleEffectsForRule => ruleEffectsForRule)
-        .reduce((accRuleEffects, effectsForRule) => [...accRuleEffects, ...effectsForRule], [])
+        .reduce((accRuleEffects, effectsForRule) => [...accRuleEffects, ...effectsForRule], []);
     };
 
     return { getEffects,  convertDataToBaseOutputValue: convertRuleEffectDataToOutputBaseValue, }

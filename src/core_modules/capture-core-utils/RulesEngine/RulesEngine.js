@@ -45,7 +45,7 @@ export default class RulesEngine {
       effects: Array<ProgramRuleEffect>,
       processType: $Values<typeof processTypes>,
       dataElements: ?DataElements,
-      trackedEntityAttributes?: ?TrackedEntityAttributes) => Array<?OutputEffect>;
+      trackedEntityAttributes?: ?TrackedEntityAttributes) => ?Array<OutputEffect>;
 
     constructor() {
         const valueProcessor = new ValueProcessor(inputValueConverter);
@@ -69,7 +69,7 @@ export default class RulesEngine {
         selectedOrgUnit: OrgUnit,
         optionSets: ?OptionSets,
         processType: $Values<typeof processTypes>,
-    ): ?Array<?OutputEffect> {
+    ): ?Array<OutputEffect> {
         let eventsContainer;
         if (eventsData && eventsData.length > 0) {
             const eventsDataByStage = eventsData.reduce((accEventsByStage, event) => {

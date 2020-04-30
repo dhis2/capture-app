@@ -170,7 +170,7 @@ function filterSectionsHideEffects(
 }
 
 export default function postProcessRulesEffects(
-    rulesEffects: ?Array<OutputEffect>,
+    rulesEffects: Array<OutputEffect>,
     foundation: ?RenderFoundation) {
     if (!rulesEffects || !foundation) {
         return null;

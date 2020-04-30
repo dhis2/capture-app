@@ -14,7 +14,7 @@ import type {
     GeneralErrorEffect,
     GeneralWarningEffect,
     CompulsoryEffect,
-    OutputEffect
+    OutputEffect,
 } from '../rulesEngine.types';
 
 const mapProcessTypeToIdentifierName = {
@@ -260,22 +260,22 @@ export default function getRulesEffectsProcessor(
         effects: Array<ProgramRuleEffect>,
         processType: $Values<typeof processTypes>,
         dataElements: ?DataElements,
-        trackedEntityAttributes: ?TrackedEntityAttributes): Array<?OutputEffect> {
+        trackedEntityAttributes: ?TrackedEntityAttributes): ?Array<OutputEffect> {
         const processIdName = mapProcessTypeToIdentifierName[processType];
 
+        if (!effects) {
+            return null;
+        }
+
         return effects
-            .map((effect) => {
-                const action = effect.action;
-                return mapActionsToProcessor[action] ?
-                    mapActionsToProcessor[action](
-                        effect,
-                        processIdName,
-                        processType,
-                        dataElements,
-                        trackedEntityAttributes,
-                    ) : null;
-            })
-            .filter(effect => effect);
+            .filter(({ action }) => mapActionsToProcessor[action])
+            .map(effect => mapActionsToProcessor[effect.action](
+                effect,
+                processIdName,
+                processType,
+                dataElements,
+                trackedEntityAttributes,
+            ));
     }
 
     return processRulesEffects;

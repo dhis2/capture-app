@@ -13,12 +13,13 @@ import type {
     EventData,
     Enrollment,
     TEIValues,
+    InputEvent,
 } from '../../capture-core-utils/RulesEngine/rulesEngine.types';
 
 const rulesEngine = new RulesEngine();
 
 function getRulesActions(
-    rulesEffects: ?Array<?OutputEffect>,
+    rulesEffects: Array<OutputEffect>,
     foundation: ?RenderFoundation,
     formId: string,
 ) {
@@ -31,7 +32,7 @@ export function getRulesActionsForEvent(
     foundation: ?RenderFoundation,
     formId: string,
     orgUnit: Object,
-    currentEventData: ?EventData | {} = {},
+    currentEventData: ?InputEvent = {},
     allEventsData: ?Array<EventData>,
 ) {
     const rulesEffects = runRulesForSingleEvent(
@@ -42,7 +43,6 @@ export function getRulesActionsForEvent(
         currentEventData,
         allEventsData,
     );
-
     if (rulesEffects) {
         return getRulesActions(rulesEffects, foundation, formId);
     }
@@ -66,5 +66,8 @@ export function getRulesActionsForTEI(
         enrollmentData,
         teiValues,
     );
-    return getRulesActions(rulesEffects, foundation, formId);
+    if (rulesEffects) {
+        return getRulesActions(rulesEffects, foundation, formId);
+    }
+    return null;
 }

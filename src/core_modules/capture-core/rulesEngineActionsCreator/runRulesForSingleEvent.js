@@ -98,7 +98,7 @@ export default function runRulesForSingleEvent(
     program: ?Program,
     foundation: ?RenderFoundation,
     orgUnit: OrgUnit,
-    currentEvent: ?InputEvent = {},
+    currentEvent: ?InputEvent,
     allEventsData: ?EventsData) {
     const data = prepare(program, foundation);
 
