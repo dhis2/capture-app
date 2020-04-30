@@ -90,7 +90,7 @@ msgid "Checking..."
 msgstr ""
 
 msgid "Area"
-msgstr ""
+msgstr "Área"
 
 msgid "Coordinate"
 msgstr "Coordenadas"
