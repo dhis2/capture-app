@@ -524,7 +524,7 @@ describe('rules engine effects with functions', () => {
                 currentEvent: events,
                 allEvents: { all: [events], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
+            const rulesEngine = new RulesEngine(inputValueConverter, momentConverter, rulesEffectsValueConverter);
 
             // when
             const rulesEffects = rulesEngine.executeEventRules(

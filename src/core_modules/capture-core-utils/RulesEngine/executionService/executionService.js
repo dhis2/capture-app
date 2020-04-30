@@ -223,8 +223,7 @@ function updateVariableHashWhenActionIsAssignValue(effects, variablesHash) {
         });
 }
 
-export default function getExecutionService(variableService) {
-    const dateUtils = getDateUtils(momentConverter);
+export default function getExecutionService(variableService, dateUtils, rulesEffectsValueConverter) {
     const runExpression = (expression, variablesHash) => {
         let answer = false;
         if (isDefined(expression) && expression.indexOf('d2:') !== -1) {
