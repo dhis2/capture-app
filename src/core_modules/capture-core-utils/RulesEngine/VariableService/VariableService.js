@@ -5,8 +5,6 @@ import log from 'loglevel';
 import OptionSetHelper from '../OptionSetHelper/OptionSetHelper';
 import typeKeys from '../typeKeys.const';
 import variablePrefixes from '../variablePrefixes';
-import getDateUtils from '../dateUtils/dateUtils';
-import momentConverter from '../converters/momentConverter';
 
 import type {
     ProgramRuleVariable,
@@ -73,10 +71,10 @@ export default class VariableService {
 
     onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any;
     dateUtils: DateUtils;
-    mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?RuleVariable };
-    constructor(onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any) {
+    mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?Variable };
+    constructor(onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any, dateUtils: DateUtils) {
         this.onProcessValue = onProcessValue;
-        this.dateUtils = getDateUtils(momentConverter);
+        this.dateUtils = dateUtils;
 
         this.mapSourceTypeToGetterFn = {
             [variableSourceTypes.DATAELEMENT_CURRENT_EVENT]: this.getVariableForCurrentEvent,
