@@ -263,10 +263,6 @@ export default function getRulesEffectsProcessor(
         trackedEntityAttributes: ?TrackedEntityAttributes): ?Array<OutputEffect> {
         const processIdName = mapProcessTypeToIdentifierName[processType];
 
-        if (!effects) {
-            return null;
-        }
-
         return effects
             .filter(({ action }) => mapActionsToProcessor[action])
             .map(effect => mapActionsToProcessor[effect.action](
