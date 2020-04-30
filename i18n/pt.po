@@ -186,7 +186,7 @@ msgid "Syncing"
 msgstr ""
 
 msgid "Area"
-msgstr ""
+msgstr "Área"
 
 msgid "Basic info"
 msgstr ""
