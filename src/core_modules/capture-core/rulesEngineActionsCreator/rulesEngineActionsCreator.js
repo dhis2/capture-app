@@ -2,12 +2,12 @@
 /**
  * @module rulesEngineActionsCreator
  */
+import { RulesEngine, processTypes } from '../../capture-core-utils/RulesEngine';
 import { RenderFoundation, Program, TrackerProgram } from '../metaData';
 import { prepareEventData } from './runRulesForSingleEvent';
 import runRulesForTEI from './runRulesForTEI';
 import postProcessRulesEffects from './postProcessRulesEffects';
 import { updateRulesEffects } from './rulesEngine.actions';
-import { RulesEngine, processTypes } from '../../capture-core-utils/RulesEngine';
 import type {
     OutputEffect,
     EventData,
