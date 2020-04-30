@@ -35,19 +35,19 @@ msgid "Async field update failed"
 msgstr "فشل تحديث حقل متزامن"
 
 msgid "A value is required"
-msgstr "قيمة مطلوبة"
+msgstr "مطلوب قيمة"
 
 msgid "Please provide a valid number"
 msgstr "يرجى ادخال صيغة رقمية سليمة"
 
 msgid "Please provide a valid integer"
-msgstr "يرجى ادخال احد الأعداد الصحيحة"
+msgstr "يرجى ادخال عدداً صحيحاً"
 
 msgid "Please provide a positive integer"
-msgstr "يرجى ادخال احد الأعداد الصحيحة الموجبة"
+msgstr "يرجى ادخال عدداً صحيحاً موجباً"
 
 msgid "Please provide zero or a positive integer"
-msgstr "يرجى ادخال احد الأعداد الصحيحة الموجبة، او صفر"
+msgstr "يرجى ادخال عدداً صحيحاً موجباً، أو صفر"
 
 msgid "Please provide a negative integer"
 msgstr "يرجى ادخال احد الأعداد الصحيحة السالبة"
