@@ -18,7 +18,7 @@ import type {
 const rulesEngine = new RulesEngine();
 
 function getRulesActions(
-    rulesEffects: ?Array<OutputEffect>,
+    rulesEffects: ?Array<?OutputEffect>,
     foundation: ?RenderFoundation,
     formId: string,
 ) {
