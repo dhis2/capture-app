@@ -36,25 +36,24 @@ type ExecutionService = {
 };
 
 export default class RulesEngine {
-    executionService: ExecutionService;
-    variableService: VariableService;
-    onProcessRulesEffects: (
-      effects: Array<ProgramRuleEffect>,
-      processType: $Values<typeof processTypes>,
-      dataElements: ?DataElements,
-      trackedEntityAttributes?: ?TrackedEntityAttributes) => ?OutputEffects;
+  executionService: ExecutionService;
+  variableService: VariableService;
+  dateUtils: any;
+  outputRulesConverterObject: any;
 
   constructor(
       inputConverterObject: IConvertInputRulesValue,
       momentConverter: IMomentConverter,
       outputRulesConverterObject: IConvertOutputRulesEffectsValue,
   ) {
-      const dateUtils = getDateUtils(momentConverter);
       const valueProcessor = new ValueProcessor(inputConverterObject);
 
-      this.variableService = new VariableService(valueProcessor.processValue, dateUtils);
-      this.executionService = getExecutionService(this.variableService, dateUtils, outputRulesConverterObject);
+      this.dateUtils = getDateUtils(momentConverter);
+      this.outputRulesConverterObject = outputRulesConverterObject;
+
+      this.variableService = new VariableService(valueProcessor.processValue, this.dateUtils);
   }
+
   executeTEIRules(
       programRulesContainer: ProgramRulesContainer,
       enrollmentData: ?Enrollment,
@@ -63,7 +62,6 @@ export default class RulesEngine {
       selectedOrgUnit: OrgUnit,
       optionSets: OptionSets,
   ): ?Array<OutputEffect> {
-
       const variablesHash = this.variableService.getVariables(
           programRulesContainer,
           null,
@@ -77,17 +75,43 @@ export default class RulesEngine {
       );
       const { programRules } = programRulesContainer;
 
-        const effects = this.executionService.getEffects(
-            programRules,
-            dataElements,
-            trackedEntityAttributes,
-            variablesHash,
-            processTypes.TEI,
-        );
+      const dhisUtilities = dhisFunctions(this.dateUtils, this.variableService, variablesHash);
+      const executionService = getExecutionService(this.outputRulesConverterObject, dhisUtilities);
 
-        if (effects) {
-            return this.onProcessRulesEffects(effects, processType, dataElements, trackedEntityAttributes);
-        }
-        return null;
-    }
+      return executionService.getEffects(
+          programRules,
+          null,
+          trackedEntityAttributes,
+          variablesHash,
+          processTypes.TEI,
+      );
+  }
+
+  executeEventRules(
+      programRulesContainer: ProgramRulesContainer,
+      events: Events,
+      dataElements: ?DataElements,
+      selectedOrgUnit: OrgUnit,
+      optionSets: OptionSets,
+  ): ?Array<OutputEffect> {
+      const { allEvents, currentEvent } = events;
+      const { programRules, constants, programRulesVariables } = programRulesContainer;
+      const variablesHash = this.variableService.getVariables(
+          { constants, programRulesVariables },
+          currentEvent,
+          allEvents,
+          dataElements,
+          null,
+          null,
+          null,
+          selectedOrgUnit,
+          optionSets,
+      );
+
+
+      const dhisUtilities = dhisFunctions(this.dateUtils, this.variableService, variablesHash);
+      const executionService = getExecutionService(this.outputRulesConverterObject, dhisUtilities);
+
+      return executionService.getEffects(programRules, dataElements, null, variablesHash, processTypes.EVENT);
+  }
 }
