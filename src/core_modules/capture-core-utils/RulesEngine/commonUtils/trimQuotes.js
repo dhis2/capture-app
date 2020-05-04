@@ -2,7 +2,7 @@
 
 import isString from 'd2-utilizr/lib/isString';
 
-export default function trimQuotes(input: string) {
+export default function trimQuotes(input: any) {
     if (input && isString(input)) {
         let trimmingComplete = false;
         let beingTrimmed = input;

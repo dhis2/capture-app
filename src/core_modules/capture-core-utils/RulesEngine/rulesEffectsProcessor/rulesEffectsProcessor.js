@@ -266,26 +266,28 @@ export default function getRulesEffectsProcessor(
     };
 
     function processRulesEffects(
-        effects: Array<ProgramRuleEffect>,
+        effects: ?Array<ProgramRuleEffect>,
         processType: $Values<typeof processTypes>,
         dataElements: ?DataElements,
         trackedEntityAttributes: ?TrackedEntityAttributes): ?Array<OutputEffect> {
         const processIdName = mapProcessTypeToIdentifierName[processType];
-
-        return effects
-            .map((effect) => {
-                const action = effect.action;
-                return mapActionsToProcessor[action] ?
-                    mapActionsToProcessor[action](
-                        effect,
-                        processIdName,
-                        processType,
-                        dataElements,
-                        trackedEntityAttributes,
+        if (effects) {
+            return effects
+                .map((effect) => {
+                    const action = effect.action;
+                    return mapActionsToProcessor[action] ?
+                        mapActionsToProcessor[action](
+                            effect,
+                            processIdName,
+                            processType,
+                            dataElements,
+                            trackedEntityAttributes,
                         // todo flowjs
-                    ) : null;
-            })
-            .filter(effect => effect);
+                        ) : null;
+                })
+                .filter(effect => effect);
+        }
+        return null;
     }
 
     return processRulesEffects;

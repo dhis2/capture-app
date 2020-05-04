@@ -1,6 +1,7 @@
 // @flow
 import log from 'loglevel';
 import isDefined from 'd2-utilizr/lib/isDefined';
+import type { D2Functions } from '../rulesEngine.types';
 
 /**
  * Creates a function with closed scope where the given string can be executed as javascript
@@ -22,7 +23,7 @@ function evaluate(code) {
  * @param parameters
  * @returns {boolean}
  */
-const isFunctionSignatureBroken = (dhisFunctionParameters, parameters) => {
+const isFunctionSignatureBroken = (dhisFunctionParameters: ?number, parameters: Array<any>) => {
     if (dhisFunctionParameters) {
         // But we are only checking parameters where the dhisFunction actually has
         // a defined set of parameters(concatenate, for example, does not have a fixed number);
@@ -33,7 +34,7 @@ const isFunctionSignatureBroken = (dhisFunctionParameters, parameters) => {
     return false;
 };
 
-const executeExpression = (dhisFunctions, expression, logError) => {
+const executeExpression = (dhisFunctions: D2Functions, expression: string, logError: any): string => {
     const dhisFunctionWhenNameIncludedOnExpression = ({ name }) => expression.includes(name);
     const onExpressionReplaceFunctionCallStringWithEvaluatedString =
           ({ evaluatedExpression, isUpdated }, { name, dhisFunction, parameters }) => {
@@ -41,7 +42,7 @@ const executeExpression = (dhisFunctions, expression, logError) => {
               const regularExFunctionCall = new RegExp(`${name}\\( *(([\\d/\\*\\+\\-%. ]+)|( *'[^']*'))*( *, *(([\\d/\\*\\+\\-%. ]+)|'[^']*'))* *\\)`, 'g');
               const callsToThisFunction = evaluatedExpression.match(regularExFunctionCall);
 
-              if (callsToThisFunction) {
+              if (Array.isArray(callsToThisFunction)) {
                   callsToThisFunction.forEach((callToThisFunction) => {
                       const evaluatedParameters = callToThisFunction
                           // Remove the function name and parenthesis:
@@ -75,12 +76,14 @@ const executeExpression = (dhisFunctions, expression, logError) => {
             let continueLooping = true;
             // Safety harness on 10 loops, in case of unanticipated syntax causing unintencontinued looping
             for (let i = 0; i < 10 && continueLooping; i++) {
-                const { evaluatedExpression, isUpdated } = Object.values(dhisFunctions)
-                    .filter(dhisFunctionWhenNameIncludedOnExpression)
-                    .reduce(
-                        onExpressionReplaceFunctionCallStringWithEvaluatedString,
-                        { evaluatedExpression: expression, isUpdated: false },
-                    );
+                const { evaluatedExpression, isUpdated } =
+                  // https://github.com/facebook/flow/issues/2221
+                  (Object.values(dhisFunctions): any)
+                      .filter(dhisFunctionWhenNameIncludedOnExpression)
+                      .reduce(
+                          onExpressionReplaceFunctionCallStringWithEvaluatedString,
+                          { evaluatedExpression: expression, isUpdated: false },
+                      );
 
                 expression = evaluatedExpression;
                 // We only want to continue looping until we made a successful replacement,

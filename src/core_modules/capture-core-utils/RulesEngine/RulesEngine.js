@@ -24,26 +24,15 @@ import type {
     TEIValues,
     ProgramRule,
     RuleVariables,
-    ProgramRuleEffect,
+    D2Functions,
+    Flag, DateUtils, ProgramRuleEffect,
 } from './rulesEngine.types';
 import getRulesEffectsProcessor from './rulesEffectsProcessor/rulesEffectsProcessor';
 import effectActions from './effectActions.const';
 import typeKeys from './typeKeys.const';
 import trimQuotes from './commonUtils/trimQuotes';
 
-type ExecutionService = {
-    getEffects: (
-      programRules: ?Array<ProgramRule>,
-      dataElements: ?DataElements,
-      trackedEntityAttributes: ?TrackedEntityAttributes,
-      variablesHash: RuleVariables,
-      processType: string,
-      flag: ?{ debug: boolean },
-    ) => ?Array<ProgramRuleEffect>,
-    convertDataToBaseOutputValue: (data: any, valueType: string) => any,
-};
-
-const convertRuleEffectDataToOutputBaseValue = (data, valueType) => {
+const convertRuleEffectDataToOutputBaseValue = (data: string, valueType: string) => {
     const convertNumber = (numberRepresentation) => {
         if (isString(numberRepresentation)) {
             if (isNaN(numberRepresentation)) {
@@ -83,34 +72,38 @@ const convertRuleEffectDataToOutputBaseValue = (data, valueType) => {
  * @param effects
  * @param variablesHash
  */
-function updateVariableHashWhenActionIsAssignValue(effects, variablesHash) {
-    effects
-        .filter(({ action, content }) => action === effectActions.ASSIGN_VALUE && content)
-        .forEach(({ content, data }) => {
-            const variableToAssign = content.replace('#{', '').replace('A{', '').replace('}', '');
-            const variableHash = variablesHash[variableToAssign];
+function updateVariableHashWhenActionIsAssignValue(effects: ?Array<ProgramRuleEffect>, variablesHash: RuleVariables) {
+    if (effects) {
+        effects
+            .filter(({ action, content }) => action === effectActions.ASSIGN_VALUE && content)
+            .forEach(({ content, data }) => {
+                const variableToAssign = content.replace('#{', '').replace('A{', '').replace('}', '');
+                const variableHash = variablesHash[variableToAssign];
 
-            if (!variableHash) {
-                // If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
-                log.warn(`Variable ${variableToAssign} was not defined.`);
-            } else {
-                // buildAssignVariable
-                const { valueType } = variableHash;
-                let variableValue = convertRuleEffectDataToOutputBaseValue(data, valueType);
-                if (isString(variableValue)) {
-                    variableValue = `'${variableValue}'`;
+                if (!variableHash) {
+                    // If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
+                    log.warn(`Variable ${variableToAssign} was not defined.`);
+                } else {
+                    // buildAssignVariable
+                    // todo according to types this must be a bug
+                    const { valueType } = variableHash;
+                    let variableValue = convertRuleEffectDataToOutputBaseValue(data, valueType);
+                    if (variableValue && isString(variableValue)) {
+                        variableValue = `'${variableValue}'`;
+                    }
+
+                    variablesHash[variableToAssign] = {
+                        ...variablesHash[variableToAssign],
+                        variableValue,
+                        variableType: valueType,
+                        hasValue: true,
+                        variableEventDate: '',
+                        variablePrefix: variableHash.variablePrefix || '#',
+                        allValues: [variableValue],
+                    };
                 }
-
-                variablesHash[variableToAssign] = {
-                    variableValue,
-                    variableType: valueType,
-                    hasValue: true,
-                    variableEventDate: '',
-                    variablePrefix: variableHash.variablePrefix || '#',
-                    allValues: [variableValue],
-                };
-            }
-        });
+            });
+    }
 }
 
 /**
@@ -119,7 +112,7 @@ function updateVariableHashWhenActionIsAssignValue(effects, variablesHash) {
  * @param variablesHash
  * @returns {*}
  */
-const replaceVariablesWithValues = (expression, variablesHash) => {
+const replaceVariablesWithValues = (expression: string, variablesHash: RuleVariables) => {
     const warnMessage = (expr, variablePresent) => {
         log.warn(`Expression ${expr} contains context variable ${variablePresent} 
     - but this variable is not defined.`);
@@ -134,7 +127,7 @@ const replaceVariablesWithValues = (expression, variablesHash) => {
         // Find every variable name in the expression;
         const variablesPresent = expression.match(/[A#CV]\{[\w -_.]+}/g);
         // Replace each matched variable:
-        variablesPresent.forEach((variablePresent) => {
+        variablesPresent && variablesPresent.forEach((variablePresent) => {
             // First strip away any prefix and postfix signs from the variable name:
             variablePresent = variablePresent
                 .replace('#{', '')
@@ -156,15 +149,13 @@ const replaceVariablesWithValues = (expression, variablesHash) => {
         });
     }
 
-    // todo this can an abstraction or this is most likely can be removed since the previous if statement is doing what all the rest if statements claim to do.
-    // QUESTION when is it actually coming in this V{ ??
-
+    // todo this can most likely can be removed since the previous if statement is doing what all the rest if statements claim to do.
     // Check if the expression contains environment  variables
     if (expression.indexOf('V{') !== -1) {
         // Find every variable name in the expression;
         const variablesPresent = expression.match(/V{\w+.?\w*}/g);
         // Replace each matched variable:
-        variablesPresent.forEach((variablePresent) => {
+        variablesPresent && variablesPresent.forEach((variablePresent) => {
             // First strip away any prefix and postfix signs from the variable name:
             variablePresent = variablePresent.replace('V{', '').replace('}', '');
 
@@ -186,7 +177,7 @@ const replaceVariablesWithValues = (expression, variablesHash) => {
         // Find every attribute in the expression;
         const variablesPresent = expression.match(/A{\w+.?\w*}/g);
         // Replace each matched variable:
-        variablesPresent.forEach((variablePresent) => {
+        variablesPresent && variablesPresent.forEach((variablePresent) => {
             // First strip away any prefix and postfix signs from the variable name:
             variablePresent = variablePresent.replace('A{', '').replace('}', '');
 
@@ -208,7 +199,7 @@ const replaceVariablesWithValues = (expression, variablesHash) => {
         // Find every constant in the expression;
         const variablesPresent = expression.match(/C{\w+.?\w*}/g);
         // Replace each matched variable:
-        variablesPresent.forEach((variablePresent) => {
+        variablesPresent && variablesPresent.forEach((variablePresent) => {
             // First strip away any prefix and postfix signs from the variable name:
             variablePresent = variablePresent.replace('C{', '').replace('}', '');
 
@@ -228,7 +219,6 @@ const replaceVariablesWithValues = (expression, variablesHash) => {
     return expression;
 };
 
-
 /**
  *
  * @param {*} dhisFunctions all the d2:functions that we provide to the end-users
@@ -240,19 +230,20 @@ const replaceVariablesWithValues = (expression, variablesHash) => {
  * @param {*} flag execution flags
  */
 function getEffects(
-    dhisFunctions,
-    programRules,
-    dataElements,
-    trackedEntityAttributes,
-    variablesHash,
-    processType,
-    flag = { debug: false },
-) {
+    dhisFunctions: D2Functions,
+    programRules: ?Array<ProgramRule>,
+    dataElements: ?DataElements,
+    trackedEntityAttributes: ?TrackedEntityAttributes,
+    variablesHash: RuleVariables,
+    processType?: string,
+    flag?: Flag = { debug: false },
+): ?Array<ProgramRuleEffect> {
     if (!programRules) {
         return null;
     }
 
-    const effects = programRules
+
+    return programRules
         .sort((a, b) => {
             if (!a.priority && !b.priority) {
                 return 0;
@@ -315,17 +306,24 @@ function getEffects(
                 content,
             };
         }));
-
-    return effects;
 }
 
 
 export default class RulesEngine {
-  executionService: ExecutionService;
   variableService: VariableService;
-  dateUtils: any;
-  processRulesEffects: any;
-  generateEffects: any;
+  dateUtils: DateUtils;
+  processRulesEffects: (
+        effects: ?Array<ProgramRuleEffect>,
+        processType: $Values<typeof processTypes>,
+        dataElements: ?DataElements,
+        trackedEntityAttributes: ?TrackedEntityAttributes
+  ) => ?Array<OutputEffect>;
+  generateEffects: (
+    variablesHash: RuleVariables,
+    programRules: ?Array<ProgramRule>,
+    dataElements: ?DataElements,
+    trackedEntityAttributes: ?TrackedEntityAttributes
+  )=> ?Array<OutputEffect>;
 
   constructor(
       inputConverterObject: IConvertInputRulesValue,
@@ -336,7 +334,10 @@ export default class RulesEngine {
 
       this.dateUtils = getDateUtils(momentConverter);
       this.variableService = new VariableService(valueProcessor.processValue, this.dateUtils);
-      this.processRulesEffects = getRulesEffectsProcessor(convertRuleEffectDataToOutputBaseValue, outputRulesConverterObject);
+      this.processRulesEffects = getRulesEffectsProcessor(
+          convertRuleEffectDataToOutputBaseValue,
+          outputRulesConverterObject,
+      );
 
       this.generateEffects = (variablesHash, programRules, dataElements, trackedEntityAttributes) => {
           const dhisFunctions = d2Functions(this.dateUtils, this.variableService, variablesHash);
