@@ -271,7 +271,9 @@ export default function getRulesEffectsProcessor(
                 processType,
                 dataElements,
                 trackedEntityAttributes,
-            ));
+            ))
+            // when mapActionsToProcessor function returns `null` we filter those value out.
+            .filter(keepTruthyValues => keepTruthyValues);
     }
 
     return processRulesEffects;
