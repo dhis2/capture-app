@@ -257,7 +257,7 @@ msgid "Uploading file"
 msgstr ""
 
 msgid "selected"
-msgstr ""
+msgstr "seleccionado"
 
 msgid "Delete"
 msgstr "Borrar"
