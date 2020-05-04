@@ -44,14 +44,14 @@ const executeExpression = (dhisFunctions, expression, logError) => {
               if (callsToThisFunction) {
                   callsToThisFunction.forEach((callToThisFunction) => {
                       const evaluatedParameters = callToThisFunction
-                      // Remove the function name and parenthesis:
+                          // Remove the function name and parenthesis:
                           .replace(/(^[^(]+\()|\)$/g, '')
-                      // Remove white spaces before and after parameters:
+                          // Remove white spaces before and after parameters:
                           .trim()
-                      // Then split into single parameters:
+                          // Then split into single parameters:
                           .match(/(('[^']+')|([^,]+))/g)
-                      // In case the function call is nested, the parameter itself contains an expression, run the expression.
-                      // todo add logError
+                          // In case the function call is nested, the parameter itself contains an expression, run the expression.
+                          // todo add logError
                           .map(param => executeExpression(dhisFunctions, param, logError));
 
                       if (isFunctionSignatureBroken(parameters, evaluatedParameters)) {
