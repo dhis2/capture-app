@@ -36,6 +36,8 @@ export default class ValueProcessor {
             log.warn(errorCreator(ValueProcessor.errorMessages.CONVERTER_NOT_FOUND)({ type }));
             return value;
         }
-        return ValueProcessor.addQuotesToValueIfString(this.converterObject[convertFnName](value));
+        // $FlowSuppress
+        const convertedValue = ValueProcessor.addQuotesToValueIfString(this.converterObject[convertFnName](value));
+        return convertedValue;
     }
 }
