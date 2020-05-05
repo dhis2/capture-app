@@ -9,37 +9,35 @@ import rulesEffectsValueConverter from './converters/rulesEffectsValueConverter'
 
 import type {
     OutputEffects,
-    ProgramRuleEffect,
     ProgramRulesContainer,
     InputEvent,
+    EventsDataContainer,
     DataElements,
     OrgUnit,
     OptionSets,
     TrackedEntityAttributes,
     Enrollment,
-    EventsDataContainer,
     TEIValues,
+    ProgramRule,
+    RuleVariables,
+    ProgramRuleEffect,
 } from './rulesEngine.types';
 
 type ExecutionService = {
     getEffects: (
-      programRulesContainer: ProgramRulesContainer,
-      executingEvent: ?EventData | {},
-      events: ?EventsDataContainer,
+      programRules: ?Array<ProgramRule>,
       dataElements: ?DataElements,
       trackedEntityAttributes: ?TrackedEntityAttributes,
-      selectedTrackedEntityAttributes: ?TEIValues,
-      selectedEnrollment: ?Enrollment,
-      selectedOrgUnit: OrgUnit,
-      optionSets: ?OptionSets,
+      variablesHash: RuleVariables,
       processType: string,
-      flags: Object,
+      flag: ?{ debug: boolean },
     ) => ?Array<ProgramRuleEffect>,
     convertDataToBaseOutputValue: (data: any, valueType: string) => any,
 };
 
 export default class RulesEngine {
     executionService: ExecutionService;
+    variableService: VariableService;
     onProcessRulesEffects: (
       effects: Array<ProgramRuleEffect>,
       processType: $Values<typeof processTypes>,
@@ -48,9 +46,8 @@ export default class RulesEngine {
 
     constructor() {
         const valueProcessor = new ValueProcessor(inputValueConverter);
-        const variableService = new VariableService(valueProcessor.processValue);
-
-        this.executionService = getExecutionService(variableService);
+        this.variableService = new VariableService(valueProcessor.processValue);
+        this.executionService = getExecutionService(this.variableService);
         this.onProcessRulesEffects = getRulesEffectsProcessor(
             this.executionService.convertDataToBaseOutputValue,
             rulesEffectsValueConverter,
@@ -66,10 +63,10 @@ export default class RulesEngine {
         teiValues: ?TEIValues,
         trackedEntityAttributes: ?TrackedEntityAttributes,
         selectedOrgUnit: OrgUnit,
-        optionSets: ?OptionSets,
+        optionSets: OptionSets,
         processType: $Values<typeof processTypes>,
     ): ?OutputEffects {
-        const effects = this.executionService.getEffects(
+        const variablesHash = this.variableService.getVariables(
             programRulesContainer,
             currentEvent,
             allEvents,
@@ -79,8 +76,16 @@ export default class RulesEngine {
             enrollmentData,
             selectedOrgUnit,
             optionSets,
-            processType,
-            { debug: true });
+        );
+        const { programRules } = programRulesContainer;
+
+        const effects = this.executionService.getEffects(
+            programRules,
+            dataElements,
+            trackedEntityAttributes,
+            variablesHash,
+            processTypes.TEI,
+        );
 
         if (effects) {
             return this.onProcessRulesEffects(effects, processType, dataElements, trackedEntityAttributes);

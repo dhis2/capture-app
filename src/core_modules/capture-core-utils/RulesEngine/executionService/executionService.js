@@ -592,28 +592,30 @@ export default function getExecutionService(variableService) {
 
     /**
      *
-     * @param {*} programRulesContainer all program rules for the program
-     * @param {*} executingEvent the event context for the program
-     * @param {*} evs all events in the enrollment
-     * @param {*} allDataElements all data elements(metadata)
-     * @param {*} allTrackedEntityAttributes all tracked entity attributes(metadata)
-     * @param {*} selectedEntity the selected tracked entity instance
-     * @param {*} selectedEnrollment the selected enrollment
-     * @param {*} optionSets all optionsets(matedata)
+     * @param {*} programRules all program rules for the program
+     * @param {*} dataElements all data elements(metadata)
+     * @param {*} trackedEntityAttributes all tracked entity attributes(metadata)
+     * @param {*} variablesHash is a table hash with all the variables that have rules attached to it
+     * @param {*} processType is either TEI or EVENT
      * @param {*} flag execution flags
      */
-    function getEffects (programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, processType, flag) {
-        const { programRules } = programRulesContainer;
+    function getEffects(
+        programRules,
+        dataElements,
+        trackedEntityAttributes,
+        variablesHash,
+        processType,
+        flag = { debug: true },
+    ) {
         if (!programRules) {
             return null;
         }
 
-        const variablesHash = variableService.getVariables(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets);
-
-        return programRules.sort((a, b) => {
-            if (!a.priority && !b.priority) {
-                return 0;
-            }
+        return programRules
+            .sort((a, b) => {
+                if (!a.priority && !b.priority) {
+                    return 0;
+                }
 
             if (!a.priority) {
                 return 1;
