@@ -137,7 +137,7 @@ msgid "Warnings"
 msgstr "Advarsler"
 
 msgid "search group result could not be retrieved"
-msgstr ""
+msgstr "søkegrupperesultat kunne ikke hentes"
 
 msgid "Complete"
 msgstr "Fullfør"
@@ -317,25 +317,25 @@ msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "Hendelsen kunne ikke lastes. Er du sikker på at den eksisterer?"
 
 msgid "Event could not be loaded"
-msgstr ""
+msgstr "Hendelse kunne ikke lastes inn"
 
 msgid "Organisation unit could not be loaded"
-msgstr ""
+msgstr "Organisasjonsenhet kunne ikke lastes inn"
 
 msgid "View event info"
-msgstr ""
+msgstr "Se hendelsesinfo"
 
 msgid "Delete event"
-msgstr ""
+msgstr "Slett hendelse"
 
 msgid "Update"
 msgstr "Oppdater"
 
 msgid "More filters"
-msgstr ""
+msgstr "Flere filtre"
 
 msgid "Rows per page"
-msgstr ""
+msgstr "Rader per side"
 
 msgid "Active"
 msgstr "Aktiv"
@@ -344,51 +344,53 @@ msgid "Completed"
 msgstr "Fullført"
 
 msgid "Could not get organisation unit"
-msgstr ""
+msgstr "Kunne ikke få tak i organisasjonsenhet"
 
 msgid "Program doesn't exist"
-msgstr ""
+msgstr "Programmet eksisterer ikke"
 
 msgid "Selected program is invalid for registering unit"
-msgstr ""
+msgstr "Valgt program er ugyldig for registreringsenhet"
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
-msgstr ""
+msgstr "Oppretter en ny {{TET}} i {{program}} i {{orgUnit}}"
 
 msgid "Save and add another"
-msgstr ""
+msgstr "Lagre og legg til en til"
 
 msgid "Save and exit"
-msgstr ""
+msgstr "Lagre og avslutt"
 
 msgid "Finish"
-msgstr ""
+msgstr "Fullfør"
 
 msgid "Switch to form view"
-msgstr ""
+msgstr "Bytt til skjemavisning"
 
 msgid "Switch to row view"
-msgstr ""
+msgstr "Bytt til radvisning"
 
 msgid "New {{TET}}"
-msgstr ""
+msgstr "Ny {{TET}}"
 
 msgid "Working Lists"
-msgstr ""
+msgstr "Arbeidslister"
 
 msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
 msgstr ""
+"Program med programid {{programId}} er ikke et Tracker-program. "
+"Registreringer kan bare gjøres i Tracker-programmer."
 
 msgid "Selected program is invalid for selected registering unit"
-msgstr ""
+msgstr "Valgt program er ugyldig for registreringsenhet"
 
 msgid "Relationships"
 msgstr "Relasjoner"
 
 msgid "Saving to"
-msgstr ""
+msgstr "Lagrer til"
 
 msgid "in"
 msgstr "i"
@@ -397,6 +399,8 @@ msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
 "details."
 msgstr ""
+"Dette er ikke et hendelsesprogram, eller metadataene er korrupte. Se logg "
+"for detaljer."
 
 msgid "This event"
 msgstr ""
