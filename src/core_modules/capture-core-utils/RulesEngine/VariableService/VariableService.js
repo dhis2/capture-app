@@ -1,14 +1,15 @@
 // @flow
 /* eslint-disable complexity */
-// eslint-disable-next-line import/no-extraneous-dependencies
 import log from 'loglevel';
 import OptionSetHelper from '../OptionSetHelper/OptionSetHelper';
 import typeKeys from '../typeKeys.const';
 import variablePrefixes from './variablePrefixes.const';
+import getDateUtils from '../dateUtils/dateUtils';
+import momentConverter from '../converters/momentConverter';
 
 import type {
     ProgramRuleVariable,
-    InputEvent,
+    EventData,
     EventsDataContainer,
     OptionSets,
     DataElement,
@@ -24,7 +25,7 @@ import type {
 } from '../rulesEngine.types';
 
 type SourceData = {
-    executingEvent: ?InputEvent,
+    executingEvent: ?EventData,
     eventsContainer: ?EventsDataContainer,
     dataElements: ?DataElements,
     trackedEntityAttributes: ?TrackedEntityAttributes,
@@ -70,10 +71,10 @@ export default class VariableService {
 
     onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any;
     dateUtils: DateUtils;
-    mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?Variable };
-    constructor(onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any, dateUtils: DateUtils) {
+    mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?RuleVariable };
+    constructor(onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any) {
         this.onProcessValue = onProcessValue;
-        this.dateUtils = dateUtils;
+        this.dateUtils = getDateUtils(momentConverter);
 
         this.mapSourceTypeToGetterFn = {
             [variableSourceTypes.DATAELEMENT_CURRENT_EVENT]: this.getVariableForCurrentEvent,
@@ -87,14 +88,14 @@ export default class VariableService {
 
     getVariables(
         programRulesContainer: { constants?: ?Constants, programRulesVariables: ?Array<ProgramRuleVariable>},
-        executingEvent: ?InputEvent,
+        executingEvent: ?EventData,
         eventsContainer: ?EventsDataContainer,
         dataElements: ?DataElements,
         trackedEntityAttributes: ?TrackedEntityAttributes,
         selectedEntity: ?TEIValues,
         selectedEnrollment: ?Enrollment,
         selectedOrgUnit: OrgUnit,
-        optionSets: ?OptionSets,
+        optionSets: OptionSets,
     ) {
         const programVariables = programRulesContainer.programRulesVariables || [];
         const sourceData = {
@@ -179,11 +180,11 @@ export default class VariableService {
             variableEventDate,
             useNameForOptionSet = false,
         }: {
-            variablePrefix: string,
-            allValues?: ?Array<any>,
-            variableEventDate?: ?string,
-            useNameForOptionSet?: ?boolean,
-        },
+          variablePrefix: string,
+          allValues?: ?Array<any>,
+          variableEventDate?: ?string,
+          useNameForOptionSet?: ?boolean,
+      },
     ): RuleVariable {
         const processedAllValues = allValues ?
             allValues
