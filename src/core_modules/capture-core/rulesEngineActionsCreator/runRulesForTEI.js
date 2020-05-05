@@ -1,19 +1,17 @@
 // @flow
 import log from 'loglevel';
-import { errorCreator } from 'capture-core-utils';
-import { RulesEngine, processTypes } from 'capture-core-utils/RulesEngine';
-import type {
-    OptionSets,
-    ProgramRulesContainer,
-    TrackedEntityAttribute as TrackedEntityAttributeForRulesEngine,
-    OrgUnit,
-    Enrollment,
-    TEIValues,
-} from 'capture-core-utils/RulesEngine/rulesEngine.types';
-
+import { errorCreator } from '../../capture-core-utils';
+import { RulesEngine, processTypes } from '../../capture-core-utils/RulesEngine';
 import { TrackerProgram, DataElement, RenderFoundation } from '../metaData';
 import constantsStore from '../metaDataMemoryStores/constants/constants.store';
 import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store';
+
+import type {
+    ProgramRulesContainer,
+    TrackedEntityAttribute as TrackedEntityAttributeForRulesEngine,
+    Enrollment,
+    TEIValues,
+} from '../../capture-core-utils/RulesEngine/rulesEngine.types';
 
 const errorMessages = {
     PROGRAM_MISSING_OR_INVALID: 'Program is missing or is invalid',
@@ -60,30 +58,6 @@ function getTrackedEntityAttributes(
     return getRulesEngineTrackedEntityAttributesAsObject(teaAsArray);
 }
 
-function runRulesEngine(
-    rulesEngine: RulesEngine,
-    programRulesContainer: ProgramRulesContainer,
-    trackedEntityAttributes: { [elementId: string]: TrackedEntityAttributeForRulesEngine },
-    orgUnit: OrgUnit,
-    optionSets: ?OptionSets,
-    enrollmentData: ?Enrollment,
-    teiValues: ?TEIValues,
-) {
-    const effects = rulesEngine.executeRules(
-        programRulesContainer,
-        null,
-        null,
-        null,
-        enrollmentData,
-        teiValues,
-        trackedEntityAttributes,
-        orgUnit,
-        optionSets,
-        processTypes.TEI,
-    );
-    return effects;
-}
-
 function getPrerequisitesError(
     foundation: ?RenderFoundation,
     program: ?TrackerProgram,
@@ -99,14 +73,9 @@ function getPrerequisitesError(
     return null;
 }
 
-export default function runRulesForTEI(
-    rulesEngine: RulesEngine,
+export function prepare(
     program: ?TrackerProgram,
     foundation: ?RenderFoundation,
-    formId: string,
-    orgUnit: Object,
-    enrollmentData: ?Enrollment,
-    teiValues: ?TEIValues,
 
 ) {
     const prerequisitesError = getPrerequisitesError(foundation, program);
@@ -118,24 +87,54 @@ export default function runRulesForTEI(
         return null;
     }
 
-    const programRulesContainer = getProgramRulesContainer(program);
-    if (!programRulesContainer.programRules || programRulesContainer.programRules.length === 0) {
-        return null;
+    if (program) {
+        const { programRulesVariables, programRules, constants } = getProgramRulesContainer(program);
+        if (!programRules || programRules.length === 0) {
+            return null;
+        }
+
+        const trackedEntityAttributes = getTrackedEntityAttributes(program);
+        const optionSets = optionSetsStore.get();
+
+
+        return { optionSets, trackedEntityAttributes, programRulesVariables, programRules, constants };
     }
+    return null;
+}
 
-    const trackedEntityAttributes = getTrackedEntityAttributes(program);
-    const optionSets = optionSetsStore.get();
+export default function runRulesForTEI(
+    rulesEngine: RulesEngine,
+    program: ?TrackerProgram,
+    foundation: ?RenderFoundation,
+    orgUnit: Object,
+    enrollmentData: ?Enrollment,
+    teiValues: ?TEIValues,
 
+) {
+    const data = prepare(program, foundation);
 
-    const rulesEffects =
-        runRulesEngine(
-            rulesEngine,
-            programRulesContainer,
+    if (data) {
+        const {
+            optionSets,
+            programRulesVariables,
+            programRules,
+            constants,
+            trackedEntityAttributes,
+        } = data;
+
+        // returns an array of effects that need to take place in the UI.
+        return rulesEngine.executeRules(
+            { programRulesVariables, programRules, constants },
+            {},
+            null,
+            null,
+            enrollmentData,
+            teiValues,
             trackedEntityAttributes,
             orgUnit,
             optionSets,
-            enrollmentData,
-            teiValues,
+            processTypes.TEI,
         );
-    return rulesEffects;
+    }
+    return null;
 }
