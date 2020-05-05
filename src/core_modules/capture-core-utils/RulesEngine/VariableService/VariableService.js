@@ -180,11 +180,11 @@ export default class VariableService {
             variableEventDate,
             useNameForOptionSet = false,
         }: {
-          variablePrefix: string,
-          allValues?: ?Array<any>,
-          variableEventDate?: ?string,
-          useNameForOptionSet?: ?boolean,
-      },
+            variablePrefix: string,
+            allValues?: ?Array<any>,
+            variableEventDate?: ?string,
+            useNameForOptionSet?: ?boolean,
+        },
     ): RuleVariable {
         const processedAllValues = allValues ?
             allValues
