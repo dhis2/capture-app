@@ -6,8 +6,6 @@ export type OutputEffect = {
     id: string,
 };
 
-export type OutputsEffect = Array<OutputEffect>;
-
 export type OutputEffects = Array<OutputEffect>;
 
 export type AssignOutputEffect = OutputEffect & {
@@ -144,8 +142,6 @@ export type EventsDataContainer = {
     all: EventsData,
     byStage: { [stageId: string]: EventsData },
 };
-
-export type Events = { currentEvent: ?InputEvent, allEvents: ?EventsDataContainer };
 
 export type DataElement = {
     id: string,

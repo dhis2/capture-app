@@ -13,7 +13,8 @@ import type {
     MessageEffect,
     GeneralErrorEffect,
     GeneralWarningEffect,
-    CompulsoryEffect, OutputEffect,
+    CompulsoryEffect,
+    OutputEffect,
 } from '../rulesEngine.types';
 
 const mapProcessTypeToIdentifierName = {
