@@ -21,15 +21,15 @@ import type {
     OrgUnit,
     DateUtils,
     RuleVariable,
+    TEIValues,
 } from '../rulesEngine.types';
-import type { Entity } from '../../../capture-core/components/Relationships/relationships.types';
 
 type SourceData = {
     executingEvent: ?EventData,
     eventsContainer: ?EventsDataContainer,
     dataElements: ?DataElements,
     trackedEntityAttributes: ?TrackedEntityAttributes,
-    selectedEntity: ?Entity,
+    selectedEntity: ?TEIValues,
     selectedEnrollment: ?Enrollment,
     optionSets: OptionSets,
     selectedOrgUnit: OrgUnit,
@@ -92,7 +92,7 @@ export default class VariableService {
         eventsContainer: ?EventsDataContainer,
         dataElements: ?DataElements,
         trackedEntityAttributes: ?TrackedEntityAttributes,
-        selectedEntity: ?Entity,
+        selectedEntity: ?TEIValues,
         selectedEnrollment: ?Enrollment,
         selectedOrgUnit: OrgUnit,
         optionSets: OptionSets,
