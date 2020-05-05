@@ -129,14 +129,14 @@ export type EventValues = {
 
 export type InputEvent = EventValues | {};
 
-export type EventData = EventMain & EventValues;
-
-export type EventsData = Array<EventData>;
+export type EventsData = Array<InputEvent>;
 
 export type EventsDataContainer = {
     all: EventsData,
     byStage: { [stageId: string]: EventsData },
 };
+
+export type Events = { currentEvent: ?InputEvent, allEvents: ?EventsDataContainer };
 
 export type DataElement = {
     id: string,
@@ -145,6 +145,18 @@ export type DataElement = {
 };
 
 export type DataElements = { [elementId: string]: DataElement };
+
+export type RuleVariable = {
+    variableValue: any,
+    useCodeForOptionSet: boolean,
+    variableType: string,
+    hasValue: boolean,
+    variableEventDate: ?string,
+    variablePrefix: string,
+    allValues: ?Array<any>,
+};
+
+export type RuleVariables = { [string]: RuleVariable };
 
 export type TrackedEntityAttribute = {
     id: string,
