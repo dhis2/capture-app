@@ -1,8 +1,8 @@
 // @flow
 import log from 'loglevel';
+import { processTypes, RulesEngine } from '../../capture-core-utils/RulesEngine';
 import { errorCreator } from '../../capture-core-utils';
-import { RulesEngine, processTypes } from '../../capture-core-utils/RulesEngine';
-import { Program, TrackerProgram, EventProgram, RenderFoundation, DataElement } from '../metaData';
+import { Program, EventProgram, RenderFoundation, DataElement } from '../metaData';
 import constantsStore from '../metaDataMemoryStores/constants/constants.store';
 import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store';
 import type {
@@ -15,19 +15,6 @@ import type {
 const errorMessages = {
     PROGRAM_OR_FOUNDATION_MISSING: 'Program or foundation missing',
 };
-
-
-// TODO why when in our code at the moment we dont have any trackerPrograms we still keep this code?
-function getTrackerDataElements(trackerProgram: TrackerProgram): Array<DataElement> {
-    return Array.from(trackerProgram.stages.values())
-        .reduce((accElements, stage) => {
-            const stageElements = Array.from(stage.stageForm.sections.values())
-                .reduce((accStageElements, section) =>
-                    [...accStageElements, ...Array.from(section.elements.values())]
-                , []);
-            return [...accElements, ...stageElements];
-        }, []);
-}
 
 function getEventDataElements(eventProgram: EventProgram): Array<DataElement> {
     return eventProgram.stage ?
@@ -51,19 +38,34 @@ function getRulesEngineDataElementsAsObject(
 function getDataElements(program: Program) {
     let dataElements: Array<DataElement> = [];
 
-    if (program instanceof TrackerProgram) {
-        dataElements = getTrackerDataElements(program);
-    }
-
     if (program instanceof EventProgram) {
         dataElements = getEventDataElements(program);
     }
 
     return getRulesEngineDataElementsAsObject(dataElements);
 }
+
+// todo do we need to separate events by stage at this point when we dont have stages in the product?
+function getEventsData(eventsData: ?EventsData) {
+    if (eventsData && eventsData.length > 0) {
+        const eventsDataByStage = eventsData.reduce((accEventsByStage, event) => {
+            const hasProgramStage = !!event.programStageId;
+            if (hasProgramStage) {
+                accEventsByStage[event.programStageId] = accEventsByStage[event.programStageId] || [];
+                accEventsByStage[event.programStageId].push(event);
+            }
+            return accEventsByStage;
+        }, {});
+
+        return { all: eventsData, byStage: eventsDataByStage };
+    }
+    return null;
+}
+
 function prepare(
     program: ?Program,
     foundation: ?RenderFoundation,
+    allEventsData: ?EventsData,
 ) {
     if (!program || !foundation) {
         log.error(errorCreator(errorMessages.PROGRAM_OR_FOUNDATION_MISSING)(
@@ -82,6 +84,7 @@ function prepare(
     const constants = constantsStore.get();
     const optionSets = optionSetsStore.get();
     const dataElementsInProgram = getDataElements(program);
+    const allEvents = getEventsData(allEventsData);
 
     return {
         optionSets,
@@ -89,18 +92,19 @@ function prepare(
         programRulesVariables: programRuleVariables,
         programRules,
         constants,
+        allEvents,
     };
 }
-
 
 export default function runRulesForSingleEvent(
     rulesEngine: RulesEngine,
     program: ?Program,
     foundation: ?RenderFoundation,
     orgUnit: OrgUnit,
-    currentEvent: ?InputEvent,
-    allEventsData: ?EventsData) {
-    const data = prepare(program, foundation);
+    currentEvent: InputEvent,
+    allEventsData: EventsData,
+) {
+    const data = prepare(program, foundation, allEventsData);
 
     if (data) {
         const {
@@ -109,13 +113,14 @@ export default function runRulesForSingleEvent(
             programRules,
             constants,
             dataElementsInProgram,
+            allEvents,
         } = data;
 
         // returns an array of effects that need to take place in the UI.
         return rulesEngine.executeRules(
             { programRulesVariables, programRules, constants },
             currentEvent,
-            allEventsData,
+            allEvents,
             dataElementsInProgram,
             null,
             null,
@@ -127,3 +132,4 @@ export default function runRulesForSingleEvent(
     }
     return null;
 }
+
