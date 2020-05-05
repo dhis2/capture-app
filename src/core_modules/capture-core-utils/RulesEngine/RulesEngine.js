@@ -70,29 +70,10 @@ export default class RulesEngine {
         optionSets: ?OptionSets,
         processType: $Values<typeof processTypes>,
     ): ?Array<OutputEffect> {
-        let eventsContainer;
-        if (eventsData && eventsData.length > 0) {
-            const eventsDataByStage = eventsData.reduce((accEventsByStage, event) => {
-                const hasProgramStage = !!event.programStageId;
-                if (hasProgramStage) {
-                    accEventsByStage[event.programStageId] = accEventsByStage[event.programStageId] || [];
-                    accEventsByStage[event.programStageId].push(event);
-                }
-                return accEventsByStage;
-            }, {});
-
-            eventsContainer = {
-                all: eventsData,
-                byStage: eventsDataByStage,
-            };
-        } else {
-            eventsContainer = null;
-        }
-
         const effects = this.executionService.getEffects(
             programRulesContainer,
-            executingEvent,
-            eventsContainer,
+            currentEvent,
+            allEvents,
             dataElements,
             trackedEntityAttributes,
             teiValues,
