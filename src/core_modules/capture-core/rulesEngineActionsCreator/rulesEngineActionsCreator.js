@@ -9,7 +9,7 @@ import runRulesForTEI from './runRulesForTEI';
 import postProcessRulesEffects from './postProcessRulesEffects';
 import { updateRulesEffects } from './rulesEngine.actions';
 import type {
-    OutputsEffect,
+    OutputEffects,
     Enrollment,
     TEIValues,
     OrgUnit,
@@ -19,7 +19,7 @@ import type {
 const rulesEngine = new RulesEngine();
 
 function getRulesActions(
-    rulesEffects: ?OutputsEffect,
+    rulesEffects: ?OutputEffects,
     foundation: ?RenderFoundation,
     formId: string,
 ) {

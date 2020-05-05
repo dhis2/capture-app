@@ -6,6 +6,8 @@ export type OutputEffect = {
     id: string,
 };
 
+export type OutputEffects = Array<OutputEffect>;
+
 export type AssignOutputEffect = OutputEffect & {
     value: any,
 };
