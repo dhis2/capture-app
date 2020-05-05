@@ -10,13 +10,13 @@ import rulesEffectsValueConverter from './converters/rulesEffectsValueConverter'
 import type {
     OutputEffects,
     ProgramRulesContainer,
-    EventsDataContainer,
     EventData,
     DataElements,
     OrgUnit,
     OptionSets,
     TrackedEntityAttributes,
     Enrollment,
+    EventsDataContainer,
     TEIValues,
     ProgramRule,
     RuleVariables,
@@ -55,9 +55,7 @@ export default class RulesEngine {
     }
 
     executeRules(
-        programRules
-      
-      : ProgramRulesContainer,
+        programRulesContainer: ProgramRulesContainer,
         currentEvent: EventData,
         allEvents: ?EventsDataContainer,
         dataElements: ?DataElements,
