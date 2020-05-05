@@ -11,7 +11,7 @@ import type {
     OutputEffects,
     ProgramRuleEffect,
     ProgramRulesContainer,
-    InputEvent,
+    EventData,
     DataElements,
     OrgUnit,
     OptionSets,
@@ -59,7 +59,7 @@ export default class RulesEngine {
 
     executeRules(
         programRulesContainer: ProgramRulesContainer,
-        currentEvent: InputEvent,
+        currentEvent: EventData,
         allEvents: ?EventsDataContainer,
         dataElements: ?DataElements,
         enrollmentData: ?Enrollment,
