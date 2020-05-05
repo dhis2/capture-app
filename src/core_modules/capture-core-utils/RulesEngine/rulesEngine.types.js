@@ -180,7 +180,7 @@ export type TEIValues = {
 
 export type OrgUnit = {
     id: string,
-    code: string,
+    name: string,
 };
 
 export type DateUtils = {
