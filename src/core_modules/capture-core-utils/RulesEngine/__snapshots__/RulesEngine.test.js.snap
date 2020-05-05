@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tests on runRulesForSingleEvent function 1`] = `
+exports[`rules engine area is hidden and given value is {"sWoqcoByYmD":false} 1`] = `
 Array [
   Object {
     "id": "vANAXwtLwcT",
@@ -14,7 +14,17 @@ Array [
 ]
 `;
 
-exports[`Tests on runRulesForSingleEvent function 2`] = `
+exports[`rules engine area is hidden and given value is {"sWoqcoByYmD":true} 1`] = `
+Array [
+  Object {
+    "id": "vANAXwtLwcT",
+    "message": "Hemoglobin value lower than normal ",
+    "type": "SHOWWARNING",
+  },
+]
+`;
+
+exports[`rules engine field will be hidden and given value is {"oZg33kd9taw":"Female","SWfdB5lX0fk":null} 1`] = `
 Array [
   Object {
     "displayKeyValuePair": Object {
@@ -28,7 +38,179 @@ Array [
 ]
 `;
 
-exports[`Tests on runRulesForSingleEvent function 3`] = `
+exports[`rules engine field will be hidden and given value is {"oZg33kd9taw":"Male","SWfdB5lX0fk":null} 1`] = `
+Array [
+  Object {
+    "id": "SWfdB5lX0fk",
+    "type": "HIDEFIELD",
+  },
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": NaN,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine field will be hidden and given value is {"oZg33kd9taw":null,"SWfdB5lX0fk":null} 1`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": NaN,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":40,"GieVkTxp4HH":180,"vV9UWAZohSf":85} 1`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": 26.234567901234566,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":40,"GieVkTxp4HH":180,"vV9UWAZohSf":null} 1`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": 0,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":40,"GieVkTxp4HH":null,"vV9UWAZohSf":85} 1`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": Infinity,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":40,"GieVkTxp4HH":null,"vV9UWAZohSf":null} 1`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": NaN,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":null,"GieVkTxp4HH":180,"vV9UWAZohSf":85} 1`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": 26.234567901234566,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":null,"GieVkTxp4HH":180,"vV9UWAZohSf":null} 1`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": 0,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":null,"GieVkTxp4HH":null,"vV9UWAZohSf":85} 1`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": Infinity,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where BMI is calculated and given value is {"qrur9Dvnyt5":null,"GieVkTxp4HH":null,"vV9UWAZohSf":null} 1`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": NaN,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where the default values Tests on runRulesForSingleEvent function 1`] = `
+Array [
+  Object {
+    "id": "vANAXwtLwcT",
+    "message": "Hemoglobin value lower than normal ",
+    "type": "SHOWWARNING",
+  },
+  Object {
+    "id": "Ok9OQpitjQr",
+    "type": "HIDEFIELD",
+  },
+]
+`;
+
+exports[`rules engine where the default values Tests on runRulesForSingleEvent function 2`] = `
+Array [
+  Object {
+    "displayKeyValuePair": Object {
+      "id": "x7PaHGvgWY2",
+      "key": "BMI",
+      "value": NaN,
+    },
+    "id": "indicators",
+    "type": "DISPLAYKEYVALUEPAIR",
+  },
+]
+`;
+
+exports[`rules engine where the default values Tests on runRulesForSingleEvent function 3`] = `
 Array [
   Object {
     "id": "PAvRSZQyYjR",
@@ -45,4 +227,50 @@ Array [
 ]
 `;
 
-exports[`Tests on runRulesForSingleEvent function 4`] = `null`;
+exports[`rules engine where the default values Tests on runRulesForSingleEvent function 4`] = `null`;
+
+exports[`rules engine where value needs to >= 9 and <= 99 and given value is {"vANAXwtLwcT":0} 1`] = `
+Array [
+  Object {
+    "id": "vANAXwtLwcT",
+    "message": "Hemoglobin value lower than normal ",
+    "type": "SHOWWARNING",
+  },
+  Object {
+    "id": "Ok9OQpitjQr",
+    "type": "HIDEFIELD",
+  },
+]
+`;
+
+exports[`rules engine where value needs to >= 9 and <= 99 and given value is {"vANAXwtLwcT":9} 1`] = `
+Array [
+  Object {
+    "id": "Ok9OQpitjQr",
+    "type": "HIDEFIELD",
+  },
+]
+`;
+
+exports[`rules engine where value needs to >= 9 and <= 99 and given value is {"vANAXwtLwcT":99} 1`] = `
+Array [
+  Object {
+    "id": "Ok9OQpitjQr",
+    "type": "HIDEFIELD",
+  },
+]
+`;
+
+exports[`rules engine where value needs to >= 9 and <= 99 and given value is {"vANAXwtLwcT":100} 1`] = `
+Array [
+  Object {
+    "id": "vANAXwtLwcT",
+    "message": "The hemoglobin value cannot be above 99 ",
+    "type": "SHOWERROR",
+  },
+  Object {
+    "id": "Ok9OQpitjQr",
+    "type": "HIDEFIELD",
+  },
+]
+`;
