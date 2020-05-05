@@ -111,20 +111,6 @@ export type ProgramRulesContainer = {
     constants?: ?Constants,
 };
 
-export type EventMain = {
-    eventId: string,
-    programId: string,
-    programStageId: string,
-    orgUnitId: string,
-    orgUnitName: string,
-    trackedEntityInstanceId: string,
-    enrollmentId: string,
-    enrollmentStatus: string,
-    status: string,
-    eventDate: string,
-    dueDate: string,
-};
-
 export type EventValues = {
     [elementId: string]: any,
 };
