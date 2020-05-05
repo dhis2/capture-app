@@ -10,8 +10,8 @@ import rulesEffectsValueConverter from './converters/rulesEffectsValueConverter'
 import type {
     OutputEffects,
     ProgramRulesContainer,
-    InputEvent,
     EventsDataContainer,
+    EventData,
     DataElements,
     OrgUnit,
     OptionSets,
@@ -55,8 +55,10 @@ export default class RulesEngine {
     }
 
     executeRules(
-        programRulesContainer: ProgramRulesContainer,
-        currentEvent: InputEvent,
+        programRules
+      
+      : ProgramRulesContainer,
+        currentEvent: EventData,
         allEvents: ?EventsDataContainer,
         dataElements: ?DataElements,
         enrollmentData: ?Enrollment,

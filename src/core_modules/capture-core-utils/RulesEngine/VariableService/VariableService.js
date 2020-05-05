@@ -9,7 +9,7 @@ import momentConverter from '../converters/momentConverter';
 
 import type {
     ProgramRuleVariable,
-    InputEvent,
+    EventData,
     EventsDataContainer,
     OptionSets,
     DataElement,
@@ -21,15 +21,15 @@ import type {
     OrgUnit,
     DateUtils,
     RuleVariable,
+    TEIValues,
 } from '../rulesEngine.types';
-import type { Entity } from '../../../capture-core/components/Relationships/relationships.types';
 
 type SourceData = {
-    executingEvent: ?InputEvent,
+    executingEvent: ?EventData,
     eventsContainer: ?EventsDataContainer,
     dataElements: ?DataElements,
     trackedEntityAttributes: ?TrackedEntityAttributes,
-    selectedEntity: ?Entity,
+    selectedEntity: ?TEIValues,
     selectedEnrollment: ?Enrollment,
     optionSets: OptionSets,
     selectedOrgUnit: OrgUnit,
@@ -88,11 +88,11 @@ export default class VariableService {
 
     getVariables(
         programRulesContainer: { constants?: ?Constants, programRulesVariables: ?Array<ProgramRuleVariable>},
-        executingEvent: ?InputEvent,
+        executingEvent: ?EventData,
         eventsContainer: ?EventsDataContainer,
         dataElements: ?DataElements,
         trackedEntityAttributes: ?TrackedEntityAttributes,
-        selectedEntity: ?Entity,
+        selectedEntity: ?TEIValues,
         selectedEnrollment: ?Enrollment,
         selectedOrgUnit: OrgUnit,
         optionSets: OptionSets,

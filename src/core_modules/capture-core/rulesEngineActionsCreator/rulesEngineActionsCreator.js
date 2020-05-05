@@ -13,7 +13,8 @@ import type {
     Enrollment,
     TEIValues,
     OrgUnit,
-    InputEvent,
+    EventData,
+    EventsData,
 } from '../../capture-core-utils/RulesEngine/rulesEngine.types';
 
 const rulesEngine = new RulesEngine();
@@ -32,8 +33,8 @@ export function getRulesActionsForEvent(
     foundation: ?RenderFoundation,
     formId: string,
     orgUnit: OrgUnit,
-    currentEvent: InputEvent = {},
-    allEventsData: Array<InputEvent> = [],
+    currentEvent: EventData = {},
+    allEventsData: EventsData = [],
 ) {
     const rulesEffects = runRulesForSingleEvent(
         rulesEngine,
