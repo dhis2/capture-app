@@ -12,7 +12,6 @@ import type {
     ProgramRuleEffect,
     ProgramRulesContainer,
     EventData,
-    EventsData,
     DataElements,
     OrgUnit,
     OptionSets,
