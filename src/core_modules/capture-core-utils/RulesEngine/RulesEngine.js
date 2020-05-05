@@ -60,8 +60,8 @@ export default class RulesEngine {
 
     executeRules(
         programRulesContainer: ProgramRulesContainer,
-        executingEvent: ?EventData | {},
-        eventsData: ?EventsData,
+        currentEvent: InputEvent,
+        allEvents: ?EventsDataContainer,
         dataElements: ?DataElements,
         enrollmentData: ?Enrollment,
         teiValues: ?TEIValues,
