@@ -271,21 +271,19 @@ export default function getRulesEffectsProcessor(
         dataElements: ?DataElements,
         trackedEntityAttributes: ?TrackedEntityAttributes): ?Array<OutputEffect> {
         const processIdName = mapProcessTypeToIdentifierName[processType];
+
         if (effects) {
             return effects
-                .map((effect) => {
-                    const action = effect.action;
-                    return mapActionsToProcessor[action] ?
-                        mapActionsToProcessor[action](
-                            effect,
-                            processIdName,
-                            processType,
-                            dataElements,
-                            trackedEntityAttributes,
-                        // todo flowjs
-                        ) : null;
-                })
-                .filter(effect => effect);
+                .filter(({ action }) => mapActionsToProcessor[action])
+                .map(effect => mapActionsToProcessor[effect.action](
+                    effect,
+                    processIdName,
+                    processType,
+                    dataElements,
+                    trackedEntityAttributes,
+                ))
+                // when mapActionsToProcessor function returns `null` we filter those value out.
+                .filter(keepTruthyValues => keepTruthyValues);
         }
         return null;
     }

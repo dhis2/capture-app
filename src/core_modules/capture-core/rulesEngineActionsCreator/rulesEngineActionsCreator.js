@@ -4,9 +4,6 @@
  */
 import { RulesEngine } from '../../capture-core-utils/RulesEngine';
 import { RenderFoundation, Program, TrackerProgram } from '../metaData';
-import inputValueConverter from './converters/inputValueConverter';
-import rulesEffectsValueConverter from './converters/rulesEffectsValueConverter';
-import momentConverter from './converters/momentConverter';
 import runRulesForSingleEvent from './runRulesForSingleEvent';
 import runRulesForTEI from './runRulesForTEI';
 import postProcessRulesEffects from './postProcessRulesEffects';
@@ -20,7 +17,7 @@ import type {
     EventsData,
 } from '../../capture-core-utils/RulesEngine/rulesEngine.types';
 
-const rulesEngine = new RulesEngine(inputValueConverter, momentConverter, rulesEffectsValueConverter);
+const rulesEngine = new RulesEngine();
 
 function getRulesActions(
     rulesEffects: ?OutputEffects,

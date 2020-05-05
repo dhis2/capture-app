@@ -10,9 +10,6 @@ import processTypes from './rulesEffectsProcessor/processTypes.const';
 import d2Functions from './d2Functions';
 import type {
     OutputEffect,
-    IConvertInputRulesValue,
-    IConvertOutputRulesEffectsValue,
-    IMomentConverter,
     ProgramRulesContainer,
     EventData,
     DataElements,
@@ -20,14 +17,16 @@ import type {
     OptionSets,
     TrackedEntityAttributes,
     Enrollment,
-    EventsDataContainer,
     TEIValues,
     ProgramRule,
     RuleVariables,
     D2Functions,
     Flag, DateUtils, ProgramRuleEffect,
 } from './rulesEngine.types';
+import inputValueConverter from './converters/inputValueConverter';
 import getRulesEffectsProcessor from './rulesEffectsProcessor/rulesEffectsProcessor';
+import rulesEffectsValueConverter from './converters/rulesEffectsValueConverter';
+import momentConverter from './converters/momentConverter';
 import effectActions from './effectActions.const';
 import typeKeys from './typeKeys.const';
 import trimQuotes from './commonUtils/trimQuotes';
@@ -325,18 +324,14 @@ export default class RulesEngine {
     trackedEntityAttributes: ?TrackedEntityAttributes
   )=> ?Array<OutputEffect>;
 
-  constructor(
-      inputConverterObject: IConvertInputRulesValue,
-      momentConverter: IMomentConverter,
-      outputRulesConverterObject: IConvertOutputRulesEffectsValue,
-  ) {
-      const valueProcessor = new ValueProcessor(inputConverterObject);
+  constructor() {
+      const valueProcessor = new ValueProcessor(inputValueConverter);
 
       this.dateUtils = getDateUtils(momentConverter);
       this.variableService = new VariableService(valueProcessor.processValue, this.dateUtils);
       this.processRulesEffects = getRulesEffectsProcessor(
           convertRuleEffectDataToOutputBaseValue,
-          outputRulesConverterObject,
+          rulesEffectsValueConverter,
       );
 
       this.generateEffects = (variablesHash, programRules, dataElements, trackedEntityAttributes) => {
@@ -375,7 +370,7 @@ export default class RulesEngine {
 
   executeEventRules(
       programRulesContainer: ProgramRulesContainer,
-      events: Events,
+      events: EventData,
       dataElements: ?DataElements,
       selectedOrgUnit: OrgUnit,
       optionSets: OptionSets,

@@ -1,8 +1,6 @@
 // @flow
 import log from 'loglevel';
 import { RulesEngine } from '../../capture-core-utils/RulesEngine';
-import log from 'loglevel';
-import { processTypes, RulesEngine } from '../../capture-core-utils/RulesEngine';
 import { errorCreator } from '../../capture-core-utils';
 import { Program, EventProgram, RenderFoundation, DataElement } from '../metaData';
 import constantsStore from '../metaDataMemoryStores/constants/constants.store';
@@ -47,19 +45,9 @@ function getDataElements(program: Program) {
     return getRulesEngineDataElementsAsObject(dataElements);
 }
 
-// todo do we need to separate events by stage at this point when we dont have stages in the product?
 function getEventsData(eventsData: ?EventsData) {
     if (eventsData && eventsData.length > 0) {
-        const eventsDataByStage = eventsData.reduce((accEventsByStage, event) => {
-            const hasProgramStage = !!event.programStageId;
-            if (hasProgramStage) {
-                accEventsByStage[event.programStageId] = accEventsByStage[event.programStageId] || [];
-                accEventsByStage[event.programStageId].push(event);
-            }
-            return accEventsByStage;
-        }, {});
-
-        return { all: eventsData, byStage: eventsDataByStage };
+        return { all: eventsData, byStage: {} };
     }
     return null;
 }
@@ -119,17 +107,12 @@ export default function runRulesForSingleEvent(
         } = data;
 
         // returns an array of effects that need to take place in the UI.
-        return rulesEngine.executeRules(
+        return rulesEngine.executeEventRules(
             { programRulesVariables, programRules, constants },
-            currentEvent,
-            allEvents,
+            { currentEvent, allEvents },
             dataElementsInProgram,
-            null,
-            null,
-            null,
             orgUnit,
             optionSets,
-            processTypes.EVENT,
         );
     }
     return null;
