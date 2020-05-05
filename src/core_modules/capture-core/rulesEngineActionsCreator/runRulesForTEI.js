@@ -73,7 +73,7 @@ function getPrerequisitesError(
     return null;
 }
 
-export function prepare(
+function prepare(
     program: ?TrackerProgram,
     foundation: ?RenderFoundation,
 
