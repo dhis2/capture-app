@@ -45,19 +45,11 @@ function getDataElements(program: Program) {
     return getRulesEngineDataElementsAsObject(dataElements);
 }
 
-// todo do we need to separate events by stage at this point when we dont have stages in the product?
+// historically this function used to take care of event by stage and
+// after some refactoring `byStage` is still here to avoid introducing bugs
 function getEventsData(eventsData: ?EventsData) {
     if (eventsData && eventsData.length > 0) {
-        const eventsDataByStage = eventsData.reduce((accEventsByStage, event) => {
-            const hasProgramStage = !!event.programStageId;
-            if (hasProgramStage) {
-                accEventsByStage[event.programStageId] = accEventsByStage[event.programStageId] || [];
-                accEventsByStage[event.programStageId].push(event);
-            }
-            return accEventsByStage;
-        }, {});
-
-        return { all: eventsData, byStage: eventsDataByStage };
+        return { all: eventsData, byStage: {} };
     }
     return null;
 }
