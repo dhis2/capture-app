@@ -74,7 +74,6 @@ export type ProgramRule = {
     programRuleActions: Array<ProgramRuleAction>,
 };
 
-
 export type ProgramRuleVariable = {
     id: string,
     displayName: string,
@@ -160,6 +159,8 @@ export type RuleVariable = {
     variablePrefix: string,
     allValues: ?Array<any>,
 };
+
+export type RuleVariables = { [string]: RuleVariable };
 
 export type TrackedEntityAttribute = {
     id: string,
