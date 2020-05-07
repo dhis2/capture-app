@@ -2,22 +2,24 @@
 /**
  * @module rulesEngineActionsCreator
  */
-import { RulesEngine } from 'capture-core-utils/RulesEngine';
+import { RulesEngine } from '../../capture-core-utils/RulesEngine';
 import { RenderFoundation, Program, TrackerProgram } from '../metaData';
-import inputValueConverter from './converters/inputValueConverter';
-import outputRulesEffectsValueConverter from './converters/rulesEffectsValueConverter';
-import momentConverter from './converters/momentConverter';
 import runRulesForSingleEvent from './runRulesForSingleEvent';
 import runRulesForTEI from './runRulesForTEI';
 import postProcessRulesEffects from './postProcessRulesEffects';
 import { updateRulesEffects } from './rulesEngine.actions';
+import type {
+    OutputEffect,
+    EventData,
+    Enrollment,
+    TEIValues,
+    InputEvent,
+} from '../../capture-core-utils/RulesEngine/rulesEngine.types';
 
-import type { OutputEffect, EventData, Enrollment, TEIValues } from 'capture-core-utils/RulesEngine/rulesEngine.types';
-
-const rulesEngine = new RulesEngine(inputValueConverter, momentConverter, outputRulesEffectsValueConverter);
+const rulesEngine = new RulesEngine();
 
 function getRulesActions(
-    rulesEffects: ?Array<OutputEffect>,
+    rulesEffects: Array<OutputEffect>,
     foundation: ?RenderFoundation,
     formId: string,
 ) {
@@ -30,7 +32,7 @@ export function getRulesActionsForEvent(
     foundation: ?RenderFoundation,
     formId: string,
     orgUnit: Object,
-    currentEventData: ?EventData  | {} = {},
+    currentEventData: ?InputEvent = {},
     allEventsData: ?Array<EventData>,
 ) {
     const rulesEffects = runRulesForSingleEvent(
@@ -41,7 +43,10 @@ export function getRulesActionsForEvent(
         currentEventData,
         allEventsData,
     );
-    return getRulesActions(rulesEffects, foundation, formId);
+    if (rulesEffects) {
+        return getRulesActions(rulesEffects, foundation, formId);
+    }
+    return [];
 }
 
 export function getRulesActionsForTEI(
@@ -61,5 +66,8 @@ export function getRulesActionsForTEI(
         enrollmentData,
         teiValues,
     );
-    return getRulesActions(rulesEffects, foundation, formId);
+    if (rulesEffects) {
+        return getRulesActions(rulesEffects, foundation, formId);
+    }
+    return [];
 }

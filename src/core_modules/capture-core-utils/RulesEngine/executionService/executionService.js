@@ -5,8 +5,12 @@ import isString from 'd2-utilizr/lib/isString';
 import getZScoreWFA from './zScoreWFA';
 import trimQuotes from '../commonUtils/trimQuotes';
 import typeKeys from '../typeKeys.const';
+import getDateUtils from '../dateUtils/dateUtils';
+import momentConverter from '../converters/momentConverter';
 
-export default function getExecutionService(variableService, dateUtils) {
+export default function getExecutionService(variableService) {
+    const dateUtils = getDateUtils(momentConverter);
+
     const replaceVariables = (expression, variablesHash) => {
         // replaces the variables in an expression with actual variable values.
 
@@ -18,11 +22,11 @@ export default function getExecutionService(variableService, dateUtils) {
             variablespresent.forEach((variablepresent) => {
                 // First strip away any prefix and postfix signs from the variable name:
                 variablepresent = variablepresent
-                .replace('#{', '')
-                .replace('A{', '')
-                .replace('C{', '')
-                .replace('V{', '')
-                .replace('}', '');
+                    .replace('#{', '')
+                    .replace('A{', '')
+                    .replace('C{', '')
+                    .replace('V{', '')
+                    .replace('}', '');
 
                 if (isDefined(variablesHash[variablepresent])) {
                     // Replace all occurrences of the variable name(hence using regex replacement):
@@ -586,7 +590,6 @@ export default function getExecutionService(variableService, dateUtils) {
         return effect;
     };
 
-
     /**
      *
      * @param {*} programRulesContainer all program rules for the program
@@ -599,62 +602,52 @@ export default function getExecutionService(variableService, dateUtils) {
      * @param {*} optionSets all optionsets(matedata)
      * @param {*} flag execution flags
      */
-    const internalExecuteRules = (programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, flag) => {
+    function getEffects (programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, processType, flag) {
         const { programRules } = programRulesContainer;
-        if (programRules.length === 0) {
+        if (!programRules) {
             return null;
         }
 
         const variablesHash = variableService.getVariables(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets);
 
-        // console.log(variableHash)
-
         return programRules.sort((a, b) => {
-                if (!a.priority && !b.priority) {
-                    return 0;
-                }
-
-                if (!a.priority) {
-                    return 1;
-                }
-
-                if (!b.priority) {
-                    return -1;
-                }
-
-                return a.priority - b.priority;
-            })
-            .map((rule) => {
-                let ruleEffects;
-
-                let ruleEffective = false;
-                let expression = rule.condition;
-                if (expression) {
-                    if (expression.indexOf('{') !== -1) {
-                        expression = replaceVariables(expression, variablesHash);
-                    }
-                    // run expression:
-                    ruleEffective = runExpression(expression, rule.condition, `rule:${rule.id}`, flag, variablesHash);
-                } else {
-                    log.warn(`Rule id:'${rule.id}'' and name:'${rule.name}' had no condition specified. Please check rule configuration.`);
-                }
-
-                if (ruleEffective) {
-                    ruleEffects = rule.programRuleActions.map(action => buildRuleEffect(action, variablesHash, flag));
-                }
-                return ruleEffects;
-            })
-            .filter(ruleEffectsForRule => ruleEffectsForRule)
-            .reduce((accRuleEffects, effectsForRule) => [...accRuleEffects, ...effectsForRule], []);
-    };
-
-    return {
-        executeRules(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, flags) {
-            if (!programRulesContainer.programRules) {
-                return null;
+            if (!a.priority && !b.priority) {
+                return 0;
             }
-            return internalExecuteRules(programRulesContainer, executingEvent, evs, allDataElements, allTrackedEntityAttributes, selectedEntity, selectedEnrollment, selectedOrgUnit, optionSets, flags);
-        },
-        convertDataToBaseOutputValue: convertRuleEffectDataToOutputBaseValue,
+
+            if (!a.priority) {
+                return 1;
+            }
+
+            if (!b.priority) {
+                return -1;
+            }
+
+            return a.priority - b.priority;
+        })
+        .map((rule) => {
+            let ruleEffects;
+
+            let ruleEffective = false;
+            let expression = rule.condition;
+            if (expression) {
+                if (expression.indexOf('{') !== -1) {
+                    expression = replaceVariables(expression, variablesHash);
+                }
+                // run expression:
+                ruleEffective = runExpression(expression, rule.condition, `rule:${rule.id}`, flag, variablesHash);
+            } else {
+                log.warn(`Rule id:'${rule.id}'' and name:'${rule.name}' had no condition specified. Please check rule configuration.`);
+            }
+
+            if (ruleEffective) {
+                ruleEffects = rule.programRuleActions.map(action => buildRuleEffect(action, variablesHash, flag));
+            }
+            return ruleEffects;
+        })
+        .filter(ruleEffectsForRule => ruleEffectsForRule)
+        .reduce((accRuleEffects, effectsForRule) => [...accRuleEffects, ...effectsForRule], []);
     };
+
+    return { getEffects,  convertDataToBaseOutputValue: convertRuleEffectDataToOutputBaseValue, }
 }

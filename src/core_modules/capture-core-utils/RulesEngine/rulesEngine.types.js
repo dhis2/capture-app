@@ -127,6 +127,8 @@ export type EventValues = {
     [elementId: string]: any,
 };
 
+export type InputEvent = EventValues | {};
+
 export type EventData = EventMain & EventValues;
 
 export type EventsData = Array<EventData>;

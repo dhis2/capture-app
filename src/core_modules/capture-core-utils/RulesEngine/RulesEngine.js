@@ -2,15 +2,14 @@
 import VariableService from './VariableService/VariableService';
 import ValueProcessor from './ValueProcessor/ValueProcessor';
 import getExecutionService from './executionService/executionService';
-import getDateUtils from './dateUtils/dateUtils';
-import getRulesEffectsProcessor from './rulesEffectsProcessor/rulesEffectsProcessor';
 import processTypes from './rulesEffectsProcessor/processTypes.const';
+import inputValueConverter from './converters/inputValueConverter';
+import getRulesEffectsProcessor from './rulesEffectsProcessor/rulesEffectsProcessor';
+import rulesEffectsValueConverter from './converters/rulesEffectsValueConverter';
 
 import type {
     OutputEffect,
-    IConvertInputRulesValue,
-    IConvertOutputRulesEffectsValue,
-    IMomentConverter,
+    ProgramRuleEffect,
     ProgramRulesContainer,
     EventData,
     EventsData,
@@ -19,24 +18,23 @@ import type {
     OptionSets,
     TrackedEntityAttributes,
     Enrollment,
-    ProgramRuleEffect,
     EventsDataContainer,
     TEIValues,
 } from './rulesEngine.types';
 
-
 type ExecutionService = {
-    executeRules: (
-        programRulesContainer: ProgramRulesContainer,
-        executingEvent: ?EventData | {},
-        events: ?EventsDataContainer,
-        dataElements: ?DataElements,
-        trackedEntityAttributes: ?TrackedEntityAttributes,
-        selectedTrackedEntityAttributes: ?TEIValues,
-        selectedEnrollment: ?Enrollment,
-        selectedOrgUnit: OrgUnit,
-        optionSets: ?OptionSets,
-        flags: Object,
+    getEffects: (
+      programRulesContainer: ProgramRulesContainer,
+      executingEvent: ?EventData | {},
+      events: ?EventsDataContainer,
+      dataElements: ?DataElements,
+      trackedEntityAttributes: ?TrackedEntityAttributes,
+      selectedTrackedEntityAttributes: ?TEIValues,
+      selectedEnrollment: ?Enrollment,
+      selectedOrgUnit: OrgUnit,
+      optionSets: ?OptionSets,
+      processType: string,
+      flags: Object,
     ) => ?Array<ProgramRuleEffect>,
     convertDataToBaseOutputValue: (data: any, valueType: string) => any,
 };
@@ -44,22 +42,20 @@ type ExecutionService = {
 export default class RulesEngine {
     executionService: ExecutionService;
     onProcessRulesEffects: (
-        effects: Array<ProgramRuleEffect>,
-        processType: $Values<typeof processTypes>,
-        dataElements: ?DataElements,
-        trackedEntityAttributes?: ?TrackedEntityAttributes) => ?Array<OutputEffect>;
+      effects: Array<ProgramRuleEffect>,
+      processType: $Values<typeof processTypes>,
+      dataElements: ?DataElements,
+      trackedEntityAttributes?: ?TrackedEntityAttributes) => ?Array<OutputEffect>;
 
-    constructor(
-        inputConverterObject: IConvertInputRulesValue,
-        momentConverter: IMomentConverter,
-        outputRulesConverterObject: IConvertOutputRulesEffectsValue) {
-        const valueProcessor = new ValueProcessor(inputConverterObject);
-        const dateUtils = getDateUtils(momentConverter);
-        const variableService = new VariableService(valueProcessor.processValue, dateUtils);
-        this.executionService = getExecutionService(variableService, dateUtils);
+    constructor() {
+        const valueProcessor = new ValueProcessor(inputValueConverter);
+        const variableService = new VariableService(valueProcessor.processValue);
+
+        this.executionService = getExecutionService(variableService);
         this.onProcessRulesEffects = getRulesEffectsProcessor(
             this.executionService.convertDataToBaseOutputValue,
-            outputRulesConverterObject);
+            rulesEffectsValueConverter,
+        );
     }
 
     executeRules(
@@ -93,7 +89,7 @@ export default class RulesEngine {
             eventsContainer = null;
         }
 
-        const effects = this.executionService.executeRules(
+        const effects = this.executionService.getEffects(
             programRulesContainer,
             executingEvent,
             eventsContainer,
@@ -103,12 +99,12 @@ export default class RulesEngine {
             enrollmentData,
             selectedOrgUnit,
             optionSets,
-            { debug: true },
-        );
+            processType,
+            { debug: true });
 
-        const processedEffects = effects ?
-            this.onProcessRulesEffects(effects, processType, dataElements, trackedEntityAttributes) :
-            null;
-        return processedEffects;
+        if (effects) {
+            return this.onProcessRulesEffects(effects, processType, dataElements, trackedEntityAttributes);
+        }
+        return null;
     }
 }
