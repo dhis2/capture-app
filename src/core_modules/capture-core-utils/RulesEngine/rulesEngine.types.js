@@ -156,6 +156,8 @@ export type RuleVariable = {
     allValues: ?Array<any>,
 };
 
+export type RuleVariables = { [string]: RuleVariable };
+
 export type TrackedEntityAttribute = {
     id: string,
     valueType: string,
