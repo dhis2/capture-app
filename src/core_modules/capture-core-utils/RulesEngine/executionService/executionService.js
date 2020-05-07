@@ -39,7 +39,7 @@ const executeExpression = (dhisFunctions: D2Functions, expression: string, logEr
     const onExpressionReplaceFunctionCallStringWithEvaluatedString =
           ({ evaluatedExpression, isUpdated }, { name, dhisFunction, parameters }) => {
               // Select the function call, with any number of parameters inside single quotations, or number parameters without quotations
-              const regularExFunctionCall = new RegExp(`${name}\\( *(([\\d/\\*\\+\\-%. ]+)|( *'[^']*'))*( *, *(([\\d/\\*\\+\\-%. ]+)|'[^']*'))* *\\)`, 'g');
+              const regularExFunctionCall = new RegExp(`${name}\\( *(([falsetru\\d/\\*\\+\\-%. ]+)|( *'[^']*'))*( *, *(([falsetru\\d/\\*\\+\\-%. ]+)|'[^']*'))* *\\)`, 'g');
               const callsToThisFunction = evaluatedExpression.match(regularExFunctionCall);
 
               if (Array.isArray(callsToThisFunction)) {

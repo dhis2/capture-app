@@ -148,15 +148,10 @@ export default function d2Functions(dateUtils, variableService, variablesHash) {
             name: 'd2:hasValue',
             parameters: 1,
             dhisFunction: (params) => {
-                const variableName = params[0];
-                const variableObject = variablesHash[variableName];
                 let valueFound = false;
-                if (variableObject) {
-                    if (variableObject.hasValue) {
-                        valueFound = true;
-                    }
-                } else {
-                    log.warn(`could not find variable to check if has value: ${variableName}`);
+                // when value of a field is equal to 0 we want the function to return true
+                if (params[0] || params[0] === 0) {
+                    valueFound = true;
                 }
                 return valueFound;
             },
