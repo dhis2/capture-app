@@ -1,5 +1,5 @@
 import log from 'loglevel';
-import getZScoreWFA from './zScoreWFA';
+import { getZScoreWFA, getZScoreWFH, getZScoreHFA } from './zScoreFunctions';
 
 export default function d2Functions(dateUtils, variableService, variablesHash) {
     return {
@@ -306,6 +306,16 @@ export default function d2Functions(dateUtils, variableService, variablesHash) {
             name: 'd2:zScoreWFA',
             parameters: 3,
             dhisFunction: params => getZScoreWFA(params[0], params[1], params[2]),
+        },
+        'd2:zScoreWFH': {
+            name: 'd2:zScoreWFH',
+            parameters: 3,
+            dhisFunction: params => getZScoreWFH(params[0], params[1], params[2]),
+        },
+        'd2:zScoreHFA': {
+            name: 'd2:zScoreHFA',
+            parameters: 3,
+            dhisFunction: params => getZScoreHFA(params[0], params[1], params[2]),
         },
         'd2:length': {
             name: 'd2:length',
