@@ -571,7 +571,7 @@ export default class VariableService {
     getOrganisationContextVariables(orgUnit: OrgUnit) {
         const variables = {};
         variables.orgunit_code = this.buildVariable(
-            orgUnit.code,
+            orgUnit.name,
             typeKeys.TEXT, {
                 variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
             },
