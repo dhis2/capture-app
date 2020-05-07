@@ -53,7 +53,7 @@ export function getRulesActionsForTEI(
     program: ?TrackerProgram,
     foundation: ?RenderFoundation,
     formId: string,
-    orgUnit: Object,
+    orgUnit: OrgUnit,
     enrollmentData: ?Enrollment,
     teiValues: ?TEIValues,
 ) {
@@ -61,7 +61,6 @@ export function getRulesActionsForTEI(
         rulesEngine,
         program,
         foundation,
-        formId,
         orgUnit,
         enrollmentData,
         teiValues,
