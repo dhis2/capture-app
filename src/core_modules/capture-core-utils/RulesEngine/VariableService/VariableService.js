@@ -8,7 +8,6 @@ import getDateUtils from '../dateUtils/dateUtils';
 import momentConverter from '../converters/momentConverter';
 
 import type {
-    ProgramRulesContainer,
     ProgramRuleVariable,
     EventData,
     EventsDataContainer,
@@ -17,11 +16,12 @@ import type {
     DataElements,
     TrackedEntityAttribute,
     TrackedEntityAttributes,
-    Entity,
     Enrollment,
     Constants,
     OrgUnit,
     DateUtils,
+    RuleVariable,
+    TEIValues,
 } from '../rulesEngine.types';
 
 type SourceData = {
@@ -29,20 +29,10 @@ type SourceData = {
     eventsContainer: ?EventsDataContainer,
     dataElements: ?DataElements,
     trackedEntityAttributes: ?TrackedEntityAttributes,
-    selectedEntity: ?Entity,
+    selectedEntity: ?TEIValues,
     selectedEnrollment: ?Enrollment,
     optionSets: OptionSets,
     selectedOrgUnit: OrgUnit,
-};
-
-type Variable = {
-    variableValue: any,
-    useCodeForOptionSet: boolean,
-    variableType: string,
-    hasValue: boolean,
-    variableEventDate: ?string,
-    variablePrefix: string,
-    allValues: ?Array<any>,
 };
 
 const variableSourceTypesDataElementSpecific = {
@@ -81,7 +71,7 @@ export default class VariableService {
 
     onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any;
     dateUtils: DateUtils;
-    mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?Variable };
+    mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?RuleVariable };
     constructor(onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any) {
         this.onProcessValue = onProcessValue;
         this.dateUtils = getDateUtils(momentConverter);
@@ -97,12 +87,12 @@ export default class VariableService {
     }
 
     getVariables(
-        programRulesContainer: ProgramRulesContainer,
+        programRulesContainer: { constants?: ?Constants, programRulesVariables: ?Array<ProgramRuleVariable>},
         executingEvent: ?EventData,
         eventsContainer: ?EventsDataContainer,
         dataElements: ?DataElements,
         trackedEntityAttributes: ?TrackedEntityAttributes,
-        selectedEntity: ?Entity,
+        selectedEntity: ?TEIValues,
         selectedEnrollment: ?Enrollment,
         selectedOrgUnit: OrgUnit,
         optionSets: OptionSets,
@@ -195,7 +185,7 @@ export default class VariableService {
             variableEventDate?: ?string,
             useNameForOptionSet?: ?boolean,
         },
-    ): Variable {
+    ): RuleVariable {
         const processedAllValues = allValues ?
             allValues
                 .map(alternateValue => this.onProcessValue(alternateValue, type)) :
@@ -257,7 +247,7 @@ export default class VariableService {
         );
     }
 
-    getVariableForCalculatedValue(programVariable: ProgramRuleVariable): ?Variable {
+    getVariableForCalculatedValue(programVariable: ProgramRuleVariable): ?RuleVariable {
         return this.buildVariable(
             EMPTY_STRING,
             typeKeys.TEXT, {
@@ -267,7 +257,7 @@ export default class VariableService {
         );
     }
 
-    getVariableForSelectedEntityAttributes(programVariable: ProgramRuleVariable, sourceData: SourceData): ?Variable {
+    getVariableForSelectedEntityAttributes(programVariable: ProgramRuleVariable, sourceData: SourceData): ?RuleVariable {
         if (!sourceData.selectedEntity) {
             log.warn(
                 `Variable id:${programVariable.id} name:${programVariable.displayName} has sourcetype${programVariable.programRuleVariableSourceType}, but no selectedEntity was found`,
@@ -308,7 +298,7 @@ export default class VariableService {
         );
     }
 
-    getVariableForCurrentEvent(programVariable: ProgramRuleVariable, sourceData: SourceData): ?Variable {
+    getVariableForCurrentEvent(programVariable: ProgramRuleVariable, sourceData: SourceData): ?RuleVariable {
         // $FlowSuppress: prechecked
         const dataElementId: string = programVariable.dataElementId;
         // $FlowSuppress: prechecked
@@ -334,7 +324,7 @@ export default class VariableService {
         );
     }
 
-    getVariableForNewestEventProgramStage(programVariable: ProgramRuleVariable, sourceData: SourceData): ?Variable {
+    getVariableForNewestEventProgramStage(programVariable: ProgramRuleVariable, sourceData: SourceData): ?RuleVariable {
         const programStageId = programVariable.programStageId;
         if (!programStageId) {
             log.warn(`Variable id:${programVariable.id} name:${programVariable.displayName} does not have a programstage defined, despite that the variable has sourcetype${programVariable.programRuleVariableSourceType}`);
@@ -382,7 +372,7 @@ export default class VariableService {
         );
     }
 
-    getVariableForNewestEventProgram(programVariable: ProgramRuleVariable, sourceData: SourceData): ?Variable {
+    getVariableForNewestEventProgram(programVariable: ProgramRuleVariable, sourceData: SourceData): ?RuleVariable {
         const events = sourceData.eventsContainer && sourceData.eventsContainer.all;
         if (!events || events.length === 0) {
             return null;
@@ -424,7 +414,7 @@ export default class VariableService {
         );
     }
 
-    getVariableForPreviousEventProgram(programVariable: ProgramRuleVariable, sourceData: SourceData): ?Variable {
+    getVariableForPreviousEventProgram(programVariable: ProgramRuleVariable, sourceData: SourceData): ?RuleVariable {
         const events = sourceData.eventsContainer && sourceData.eventsContainer.all;
         if (!events || events.length === 0) {
             return null;
@@ -478,7 +468,7 @@ export default class VariableService {
         );
     }
 
-    getContextVariables(sourceData: SourceData): { [key: string]: Variable } {
+    getContextVariables(sourceData: SourceData): { [key: string]: RuleVariable } {
         let variables = {};
 
         // TODO: need to build some kind of date service and change this codeline

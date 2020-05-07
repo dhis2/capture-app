@@ -6,6 +6,8 @@ export type OutputEffect = {
     id: string,
 };
 
+export type OutputEffects = Array<OutputEffect>;
+
 export type AssignOutputEffect = OutputEffect & {
     value: any,
 };
@@ -109,27 +111,25 @@ export type ProgramRulesContainer = {
     constants?: ?Constants,
 };
 
-export type EventMain = {
-    eventId: string,
-    programId: string,
-    programStageId: string,
-    orgUnitId: string,
-    orgUnitName: string,
-    trackedEntityInstanceId: string,
-    enrollmentId: string,
-    enrollmentStatus: string,
-    status: string,
-    eventDate: string,
-    dueDate: string,
+type EventMain = {
+    eventId?: string,
+    programId?: string,
+    programStageId?: string,
+    orgUnitId?: string,
+    orgUnitName?: string,
+    trackedEntityInstanceId?: string,
+    enrollmentId?: string,
+    enrollmentStatus?: string,
+    status?: string,
+    eventDate?: string,
+    dueDate?: string,
 };
 
 export type EventValues = {
     [elementId: string]: any,
 };
 
-export type InputEvent = EventValues | {};
-
-export type EventData = EventMain & EventValues;
+export type EventData = EventValues & EventMain;
 
 export type EventsData = Array<EventData>;
 
@@ -145,6 +145,16 @@ export type DataElement = {
 };
 
 export type DataElements = { [elementId: string]: DataElement };
+
+export type RuleVariable = {
+    variableValue: any,
+    useCodeForOptionSet: boolean,
+    variableType: string,
+    hasValue: boolean,
+    variableEventDate: ?string,
+    variablePrefix: string,
+    allValues: ?Array<any>,
+};
 
 export type TrackedEntityAttribute = {
     id: string,

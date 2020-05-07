@@ -8,7 +8,7 @@ import getRulesEffectsProcessor from './rulesEffectsProcessor/rulesEffectsProces
 import rulesEffectsValueConverter from './converters/rulesEffectsValueConverter';
 
 import type {
-    OutputEffect,
+    OutputEffects,
     ProgramRuleEffect,
     ProgramRulesContainer,
     EventData,
@@ -44,7 +44,7 @@ export default class RulesEngine {
       effects: Array<ProgramRuleEffect>,
       processType: $Values<typeof processTypes>,
       dataElements: ?DataElements,
-      trackedEntityAttributes?: ?TrackedEntityAttributes) => ?Array<OutputEffect>;
+      trackedEntityAttributes?: ?TrackedEntityAttributes) => ?OutputEffects;
 
     constructor() {
         const valueProcessor = new ValueProcessor(inputValueConverter);
@@ -59,7 +59,7 @@ export default class RulesEngine {
 
     executeRules(
         programRulesContainer: ProgramRulesContainer,
-        currentEvent: InputEvent,
+        currentEvent: EventData,
         allEvents: ?EventsDataContainer,
         dataElements: ?DataElements,
         enrollmentData: ?Enrollment,
@@ -68,7 +68,7 @@ export default class RulesEngine {
         selectedOrgUnit: OrgUnit,
         optionSets: ?OptionSets,
         processType: $Values<typeof processTypes>,
-    ): ?Array<OutputEffect> {
+    ): ?OutputEffects {
         const effects = this.executionService.getEffects(
             programRulesContainer,
             currentEvent,

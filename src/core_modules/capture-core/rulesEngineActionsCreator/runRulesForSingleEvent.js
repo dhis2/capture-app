@@ -8,7 +8,7 @@ import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store
 import type {
     DataElement as DataElementForRulesEngine,
     EventsData,
-    InputEvent,
+    EventData,
     OrgUnit,
 } from '../../capture-core-utils/RulesEngine/rulesEngine.types';
 
@@ -93,7 +93,7 @@ export default function runRulesForSingleEvent(
     program: ?Program,
     foundation: ?RenderFoundation,
     orgUnit: OrgUnit,
-    currentEvent: InputEvent,
+    currentEvent: EventData,
     allEventsData: EventsData,
 ) {
     const data = prepare(program, foundation, allEventsData);
