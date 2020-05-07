@@ -1,6 +1,5 @@
-import RulesEngine from '../RulesEngine/RulesEngine';
-import runRulesForSingleEvent from '../../capture-core/rulesEngineActionsCreator/runRulesForSingleEvent';
-import { processTypes } from './index';
+import runRulesForSingleEvent from '../../../capture-core/rulesEngineActionsCreator/runRulesForSingleEvent';
+import { RulesEngine, processTypes } from '../index';
 
 describe('rules engine', () => {
     const allEventsData = null;
