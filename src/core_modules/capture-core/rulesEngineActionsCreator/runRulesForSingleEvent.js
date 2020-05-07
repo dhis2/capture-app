@@ -47,8 +47,16 @@ function getDataElements(program: Program) {
 
 function getEventsData(eventsData: ?EventsData) {
     if (eventsData && eventsData.length > 0) {
-        return { all: eventsData, byStage: {} };
-    }
+        const eventsDataByStage = eventsData.reduce((accEventsByStage, event) => {
+            const hasProgramStage = !!event.programStageId;
+            if (hasProgramStage) {
+                accEventsByStage[event.programStageId] = accEventsByStage[event.programStageId] || [];
+                accEventsByStage[event.programStageId].push(event);
+            }
+            return accEventsByStage;
+        }, {});
+
+        return { all: eventsData, byStage: eventsDataByStage };}
     return null;
 }
 
