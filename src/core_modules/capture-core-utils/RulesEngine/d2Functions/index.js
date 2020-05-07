@@ -52,7 +52,11 @@ export default function d2Functions(dateUtils, variableService, variablesHash) {
         'd2:addDays': {
             name: 'd2:addDays',
             parameters: 2,
-            dhisFunction: (params) => {},
+            dhisFunction: (params) => {
+                const date = params[0];
+                const daysToAdd = params[1];
+                return dateUtils.addDays(date, daysToAdd);
+            },
         },
         'd2:zing': {
             name: 'd2:zing',
