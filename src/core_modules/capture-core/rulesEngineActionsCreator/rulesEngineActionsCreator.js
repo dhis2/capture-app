@@ -46,7 +46,7 @@ export function getRulesActionsForEvent(
     if (rulesEffects) {
         return getRulesActions(rulesEffects, foundation, formId);
     }
-    return null;
+    return [];
 }
 
 export function getRulesActionsForTEI(
@@ -68,5 +68,5 @@ export function getRulesActionsForTEI(
     if (rulesEffects) {
         return getRulesActions(rulesEffects, foundation, formId);
     }
-    return null;
+    return [];
 }
