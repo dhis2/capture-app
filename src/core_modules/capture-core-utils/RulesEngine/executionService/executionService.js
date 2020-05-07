@@ -37,38 +37,38 @@ const isFunctionSignatureBroken = (dhisFunctionParameters: ?number, parameters: 
 const executeExpression = (dhisFunctions: D2Functions, expression: string, logError: any): string => {
     const dhisFunctionWhenNameIncludedOnExpression = ({ name }) => expression.includes(name);
     const onExpressionReplaceFunctionCallStringWithEvaluatedString =
-          ({ evaluatedExpression, isUpdated }, { name, dhisFunction, parameters }) => {
-              // Select the function call, with any number of parameters inside single quotations, or number parameters without quotations
-              const regularExFunctionCall = new RegExp(`${name}\\( *(([\\d/\\*\\+\\-%. ]+)|( *'[^']*'))*( *, *(([\\d/\\*\\+\\-%. ]+)|'[^']*'))* *\\)`, 'g');
-              const callsToThisFunction = evaluatedExpression.match(regularExFunctionCall);
+      ({ evaluatedExpression, isUpdated }, { name, dhisFunction, parameters }) => {
+          // Select the function call, with any number of parameters inside single quotations, or number parameters without quotations
+          const regularExFunctionCall = new RegExp(`${name}\\( *(([\\d/\\*\\+\\-%. ]+)|( *'[^']*'))*( *, *(([\\d/\\*\\+\\-%. ]+)|'[^']*'))* *\\)`, 'g');
+          const callsToThisFunction = evaluatedExpression.match(regularExFunctionCall);
 
-              if (Array.isArray(callsToThisFunction)) {
-                  callsToThisFunction.forEach((callToThisFunction) => {
-                      const evaluatedParameters = callToThisFunction
-                          // Remove the function name and parenthesis:
-                          .replace(/(^[^(]+\()|\)$/g, '')
-                          // Remove white spaces before and after parameters:
-                          .trim()
-                          // Then split into single parameters:
-                          .match(/(('[^']+')|([^,]+))/g)
-                          // In case the function call is nested, the parameter itself contains an expression, run the expression.
-                          // todo add logError
-                          .map(param => executeExpression(dhisFunctions, param, logError));
+          if (Array.isArray(callsToThisFunction)) {
+              callsToThisFunction.forEach((callToThisFunction) => {
+                  const evaluatedParameters = callToThisFunction
+                  // Remove the function name and parenthesis:
+                      .replace(/(^[^(]+\()|\)$/g, '')
+                  // Remove white spaces before and after parameters:
+                      .trim()
+                  // Then split into single parameters:
+                      .match(/(('[^']+')|([^,]+))/g)
+                  // In case the function call is nested, the parameter itself contains an expression, run the expression.
+                  // todo add logError
+                      .map(param => executeExpression(dhisFunctions, param, logError));
 
-                      if (isFunctionSignatureBroken(parameters, evaluatedParameters)) {
-                          log.warn(`${name} was called with the incorrect number of parameters`);
-                          // Function call is not possible to evaluate, remove the call:
-                          evaluatedExpression = evaluatedExpression.replace(callToThisFunction, 'false');
-                      } else {
-                          const dhisFunctionEvaluation = dhisFunction(evaluatedParameters);
-                          evaluatedExpression = evaluatedExpression.replace(callToThisFunction, dhisFunctionEvaluation);
-                      }
+                  if (isFunctionSignatureBroken(parameters, evaluatedParameters)) {
+                      log.warn(`${name} was called with the incorrect number of parameters`);
+                      // Function call is not possible to evaluate, remove the call:
+                      evaluatedExpression = evaluatedExpression.replace(callToThisFunction, 'false');
+                  } else {
+                      const dhisFunctionEvaluation = dhisFunction(evaluatedParameters);
+                      evaluatedExpression = evaluatedExpression.replace(callToThisFunction, dhisFunctionEvaluation);
+                  }
 
-                      isUpdated = true;
-                  });
-              }
-              return { evaluatedExpression, isUpdated };
-          };
+                  isUpdated = true;
+              });
+          }
+          return { evaluatedExpression, isUpdated };
+      };
 
     let answer = false;
     try {
@@ -93,6 +93,7 @@ const executeExpression = (dhisFunctions: D2Functions, expression: string, logEr
                 // should be zero to marginal performancewise.
                 continueLooping = isUpdated && expression.indexOf('d2:') !== -1;
             }
+        }
 
         answer = evaluate(expression);
     } catch (e) {
