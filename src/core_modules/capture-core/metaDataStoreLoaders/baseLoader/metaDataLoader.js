@@ -27,21 +27,22 @@ export const loadMetaData = async () => {
     const {
         optionSetsOutline: optionSetsOutlineFromPrograms,
         trackedEntityAttributeIds: trackedEntityAttributeIdsFromPrograms,
-        categoryIds,
+        categories,
+        trackedEntityTypeIds,
     } = await loadPrograms();
     await loadCoreMetaData();
 
     const {
         trackedEntityAttributeIds: trackedEntityAttributeIdsFromTrackedEntityTypes,
         optionSetsOutline: optionSetsOutlineFromTrackedEntityTypes,
-    } = await loadTrackedEntityTypes();
+    } = await loadTrackedEntityTypes(trackedEntityTypeIds);
 
     await loadTrackedEntityAttributes([
         ...trackedEntityAttributeIdsFromPrograms,
         ...trackedEntityAttributeIdsFromTrackedEntityTypes,
     ]);
 
-    await loadCategories(categoryIds);
+    await loadCategories(categories);
 
     await loadOptionSets([...optionSetsOutlineFromPrograms, ...optionSetsOutlineFromTrackedEntityTypes]);
 };
