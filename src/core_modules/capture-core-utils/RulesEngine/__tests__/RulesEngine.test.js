@@ -1,19 +1,19 @@
 import runRulesForSingleEvent from '../../../capture-core/rulesEngineActionsCreator/runRulesForSingleEvent';
-import { RulesEngine, processTypes } from '../index';
+import { RulesEngine } from '../index';
 
 describe('rules engine', () => {
-    const allEventsData = null;
-    const currentEvent = null;
+    const currentEvent = {};
+    const allEvents = { all: [], byStage: {} };
+    const orgUnit = { id: 'DiszpKrYNg8', code: 'Ngelehun CHC' };
 
     describe.each([
         {
             program: {
                 programRules: [{ id: 'GC4gpdoSD4r', condition: '#{hemoglobin} < 9', description: 'Show warning if hemoglobin is dangerously low', displayName: 'Hemoglobin warning', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'suS9GnraCx1', content: 'Hemoglobin value lower than normal', dataElementId: 'vANAXwtLwcT', programRuleActionType: 'SHOWWARNING' }] }, { id: 'dahuKlP7jR2', condition: '#{hemoglobin} > 99', description: 'Show error for hemoglobin value higher than 99', displayName: 'Show error for high hemoglobin value', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'UUwZWS8uirn', content: 'The hemoglobin value cannot be above 99', dataElementId: 'vANAXwtLwcT', programRuleActionType: 'SHOWERROR' }] }, { id: 'hk30qiUJYUR', condition: '#{Christos } == true', displayName: 'Christos Rules', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'eotNEY9CWxU', content: 'SAY YES', dataElementId: 'Ok9OQpitjQr', programRuleActionType: 'SHOWERROR' }] }, { id: 'xOe5qCzRS0Y', condition: '!#{womanSmoking} ', description: 'Hide smoking cessation councelling dataelement unless patient is smoking', displayName: 'Hide smoking cessation councelling', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'hwgyO59SSxu', dataElementId: 'Ok9OQpitjQr', programRuleActionType: 'HIDEFIELD' }] }],
-                programRuleVariables: [{ id: 'DINatbKMS71', dataElementId: 'Ok9OQpitjQr', displayName: 'Christos ', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: true }, { id: 'Z92dJO9gIje', dataElementId: 'sWoqcoByYmD', displayName: 'womanSmoking', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'omrL0gtPpDL', dataElementId: 'vANAXwtLwcT', displayName: 'hemoglobin', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }],
+                programRuleVariables: [{ id: 'Z92dJO9gIje', dataElementId: 'sWoqcoByYmD', displayName: 'womanSmoking', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'omrL0gtPpDL', dataElementId: 'vANAXwtLwcT', displayName: 'hemoglobin', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }],
                 id: 'lxAQ7Zs9VYR',
             },
             foundation: { programRules: [] },
-            orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
         },
         {
             program: {
@@ -22,7 +22,6 @@ describe('rules engine', () => {
                 id: 'lxAQ7Zs9VYR',
             },
             foundation: { programRules: [] },
-            orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
         },
         {
             program: {
@@ -31,18 +30,16 @@ describe('rules engine', () => {
                 id: 'MoUd5BTQ3lY',
             },
             foundation: { programRules: [] },
-            orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
         },
         {
             program: null,
             foundation: null,
-            orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
         },
-    ])('where the default values', ({ program, foundation, orgUnit }) => {
+    ])('where the default values', ({ program, foundation }) => {
         test('Tests on runRulesForSingleEvent function', () => {
             const rulesEngine = new RulesEngine();
 
-            const rulesEffects = runRulesForSingleEvent(rulesEngine, program, foundation, orgUnit, currentEvent, allEventsData);
+            const rulesEffects = runRulesForSingleEvent(rulesEngine, program, foundation, orgUnit, currentEvent, allEvents);
 
             expect(rulesEffects).toMatchSnapshot();
         });
@@ -74,15 +71,12 @@ describe('rules engine', () => {
             const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeRules(
+            const rulesEffects = rulesEngine.executeEventRules(
                 { programRulesVariables, programRules, constants },
-                currentEvent,
-                allEvents,
+                { currentEvent, allEvents },
                 dataElementsInProgram,
-                null, null, null,
                 orgUnit,
                 optionSet,
-                processTypes.EVENT,
             );
 
             // then
@@ -103,15 +97,12 @@ describe('rules engine', () => {
             const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeRules(
+            const rulesEffects = rulesEngine.executeEventRules(
                 { programRulesVariables, programRules, constants },
-                currentEvent,
-                allEvents,
+                { currentEvent, allEvents },
                 dataElementsInProgram,
-                null, null, null,
                 orgUnit,
                 optionSet,
-                processTypes.EVENT,
             );
 
             // then
@@ -143,15 +134,12 @@ describe('rules engine', () => {
             const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeRules(
+            const rulesEffects = rulesEngine.executeEventRules(
                 { programRulesVariables, programRules, constants },
-                currentEvent,
-                allEvents,
+                { currentEvent, allEvents },
                 dataElementsInProgram,
-                null, null, null,
                 orgUnit,
                 optionSet,
-                processTypes.EVENT,
             );
 
             // then
@@ -178,15 +166,12 @@ describe('rules engine', () => {
             const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeRules(
+            const rulesEffects = rulesEngine.executeEventRules(
                 { programRulesVariables, programRules, constants },
-                currentEvent,
-                allEvents,
+                { currentEvent, allEvents },
                 dataElementsInProgram,
-                null, null, null,
                 orgUnit,
                 optionSet,
-                processTypes.EVENT,
             );
 
             // then
@@ -401,16 +386,12 @@ describe('rules engine', () => {
             const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeRules(
+            const rulesEffects = rulesEngine.executeEventRules(
                 { programRulesVariables, programRules, constants },
-                currentEvent,
-                allEvents,
+                { currentEvent, allEvents },
                 dataElementsInProgram,
-                null, null, null,
                 orgUnit,
                 optionSet,
-                processTypes.EVENT,
-
             );
 
             // then
@@ -542,15 +523,12 @@ describe('rules engine effects with functions and effects', () => {
             const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeRules(
+            const rulesEffects = rulesEngine.executeEventRules(
                 { programRulesVariables, programRules, constants },
-                currentEvent,
-                allEvents,
+                { currentEvent, allEvents },
                 dataElementsInProgram,
-                null, null, null,
                 orgUnit,
                 optionSet,
-                processTypes.EVENT,
             );
 
             // then
