@@ -150,13 +150,13 @@ export default function d2Functions(dateUtils, variableService, variablesHash) {
             dhisFunction: (params) => {
                 const variableName = params[0];
                 const variableObject = variablesHash[variableName];
-                let valueFound = false;
-                if (variableObject) {
-                    if (variableObject.hasValue) {
-                        valueFound = true;
-                    }
-                } else {
+                if (!variableObject) {
                     log.warn(`could not find variable to check if has value: ${variableName}`);
+                }
+
+                let valueFound = false;
+                if (variableObject && variableObject.hasValue) {
+                    valueFound = true;
                 }
                 return valueFound;
             },
