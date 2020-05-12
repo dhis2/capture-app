@@ -79,7 +79,7 @@ msgid "Please provide valid coordinates"
 msgstr "有效的坐标"
 
 msgid "Please provide a valid username"
-msgstr ""
+msgstr "请提供有效的用户名"
 
 msgid "This value already exists"
 msgstr "值已经存在"

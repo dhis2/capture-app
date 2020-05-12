@@ -1,7 +1,7 @@
 # 
 # Translators:
 # phil_dhis2, 2020
-# Caroline Hesthagen Holen <carolinehholen@gmail.com>, 2020
+# Caroline Hesthagen Holen <caroline@devotta.no>, 2020
 # Karoline Tufte Lien <karoline@dhis2.org>, 2020
 # 
 msgid ""
@@ -21,7 +21,7 @@ msgid "Columns to show in table"
 msgstr "Kolonner som skal vises i tabellen"
 
 msgid "Column"
-msgstr "Stolpe"
+msgstr "Kolonne"
 
 msgid "This value is validating"
 msgstr "Denne verdien validerer"
@@ -81,7 +81,7 @@ msgid "Please provide a valid username"
 msgstr "Oppgi et gyldig brukernavn"
 
 msgid "This value already exists"
-msgstr "Denne verdien eksisterer allerede"
+msgstr "Denne verdien finnes allerede"
 
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "\"Fra\" kan ikke være større enn \"Til\""
@@ -314,7 +314,7 @@ msgid "Edit event"
 msgstr "Rediger hendelse"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Hendelsen kunne ikke lastes. Er du sikker på at den eksisterer?"
+msgstr "Hendelsen kunne ikke lastes. Er du sikker på at den finnes?"
 
 msgid "Event could not be loaded"
 msgstr "Hendelse kunne ikke lastes inn"
@@ -347,7 +347,7 @@ msgid "Could not get organisation unit"
 msgstr "Kunne ikke få tak i organisasjonsenhet"
 
 msgid "Program doesn't exist"
-msgstr "Programmet eksisterer ikke"
+msgstr "Programmet finnes ikke"
 
 msgid "Selected program is invalid for registering unit"
 msgstr "Valgt program er ugyldig for registreringsenhet"
@@ -409,8 +409,7 @@ msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
 msgstr ""
-"Forhold av type {{relationshipTypeName}} til {{entityName}} eksisterer "
-"allerede"
+"Forhold av type {{relationshipTypeName}} til {{entityName}} finnes allerede"
 
 msgid "New event"
 msgstr "Ny hendelse"
@@ -453,7 +452,7 @@ msgid "You dont have access to create an event in the current selections"
 msgstr "Du har ikke tilgang til å opprette en hendelse i de gjeldende valg"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
-msgstr "En duplikat eksisterer (men det var noen feil, se logg for detaljer)"
+msgstr "Et duplikat finnes (men det var noen feil, se logg for detaljer)"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
