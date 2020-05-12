@@ -28,7 +28,7 @@ msgid "Cancel"
 msgstr "取消"
 
 msgid "Discard event?"
-msgstr ""
+msgstr "丢弃事件？"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr "离开将丢失对事件的修改"
@@ -37,7 +37,7 @@ msgid "Discard"
 msgstr "放弃"
 
 msgid "Back to event"
-msgstr ""
+msgstr "回到事件"
 
 msgid "Add comment"
 msgstr "添加备注"
@@ -67,7 +67,7 @@ msgid "Abort"
 msgstr "关于"
 
 msgid "Your data is uploading. Please wait untill this message disappears"
-msgstr ""
+msgstr "你的数据正在上传，请等待直到该信息消失"
 
 msgid "No write access"
 msgstr "无写权限"
@@ -76,7 +76,7 @@ msgid "Save"
 msgstr "保存"
 
 msgid "Uploading data"
-msgstr ""
+msgstr "上传数据"
 
 msgid "Sort"
 msgstr "排序"
@@ -202,7 +202,7 @@ msgid "Field"
 msgstr "区域"
 
 msgid "could not be updated"
-msgstr ""
+msgstr "不能被更新"
 
 msgid "Please provide a valid date"
 msgstr "请提供有效的日期"
