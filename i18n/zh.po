@@ -58,7 +58,7 @@ msgid "Write comment"
 msgstr "写备注"
 
 msgid "Your data is uploading. Please wait untill this message disappears"
-msgstr ""
+msgstr "你的数据正在上传，请等待直到该信息消失"
 
 msgid "No write access"
 msgstr "无写权限"
@@ -67,7 +67,7 @@ msgid "Save"
 msgstr "保存"
 
 msgid "Uploading data"
-msgstr ""
+msgstr "上传数据"
 
 msgid "Sort"
 msgstr "排序"
@@ -178,7 +178,7 @@ msgid "Field"
 msgstr "区域"
 
 msgid "could not be updated"
-msgstr ""
+msgstr "不能被更新"
 
 msgid "Start Again"
 msgstr "再开始"
@@ -187,16 +187,16 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr "你确信？所以未保存的数据将丢失"
 
 msgid "Reset Organisation Unit"
-msgstr ""
+msgstr "复位机构"
 
 msgid "Reset Program"
-msgstr ""
+msgstr "复位项目"
 
 msgid "Reset Category Option"
-msgstr ""
+msgstr "复位分类选项"
 
 msgid "Create New Event"
-msgstr ""
+msgstr "创建新事件"
 
 msgid "Event could not be loaded. Are you sure it exists?"
 msgstr "事件不能载入"
@@ -267,7 +267,7 @@ msgid "Save and exit"
 msgstr "保存后退出"
 
 msgid "Are you sure? All unsaved data will be lost"
-msgstr ""
+msgstr "你确信？所有未保存的数据将丢失"
 
 msgid "events added"
 msgstr "事件已经被添加"
@@ -288,7 +288,7 @@ msgid "Selected registering unit"
 msgstr "选择注册的机构"
 
 msgid "Registering Oraginastion Unit"
-msgstr ""
+msgstr "注册机构"
 
 msgid "Registering Organisation Unit"
 msgstr "在注册的机构"
