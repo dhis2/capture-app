@@ -45,12 +45,20 @@ function getDataElements(program: Program) {
     return getRulesEngineDataElementsAsObject(dataElements);
 }
 
-// historically this function used to take care of event by stage and
-// after some refactoring `byStage` is still here to avoid introducing bugs
 function getEventsData(eventsData: ?EventsData) {
     if (eventsData && eventsData.length > 0) {
-        return { all: eventsData, byStage: {} };
+        const eventsDataByStage = eventsData.reduce((accEventsByStage, event) => {
+            const hasProgramStage = !!event.programStageId;
+            if (hasProgramStage) {
+                accEventsByStage[event.programStageId] = accEventsByStage[event.programStageId] || [];
+                accEventsByStage[event.programStageId].push(event);
+            }
+            return accEventsByStage;
+        }, {});
+
+        return { all: eventsData, byStage: eventsDataByStage };
     }
+
     return null;
 }
 
