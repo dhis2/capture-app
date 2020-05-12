@@ -1,15 +1,15 @@
 # 
 # Translators:
 # phil_dhis2, 2020
+# Caroline Hesthagen Holen <caroline@devotta.no>, 2020
 # Karoline Tufte Lien <karoline@dhis2.org>, 2020
-# Caroline Hesthagen Holen <carolinehholen@gmail.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2020-03-09T19:35:56.143Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Caroline Hesthagen Holen <carolinehholen@gmail.com>, 2020\n"
+"Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +24,7 @@ msgid "Columns to show in table"
 msgstr "Kolonner som skal vises i tabellen"
 
 msgid "Column"
-msgstr "Stolpe"
+msgstr "Kolonne"
 
 msgid "This value is validating"
 msgstr "Denne verdien validerer"
@@ -78,7 +78,7 @@ msgid "Please provide valid coordinates"
 msgstr "Oppgi gyldige koordinater"
 
 msgid "This value already exists"
-msgstr "Denne verdien eksisterer allerede"
+msgstr "Denne verdien finnes allerede"
 
 msgid "\"From\" cannot be greater than \"To\""
 msgstr "\"Fra\" kan ikke være større enn \"Til\""
@@ -335,7 +335,7 @@ msgid "Edit event"
 msgstr "Rediger hendelse"
 
 msgid "Event could not be loaded. Are you sure it exists?"
-msgstr "Hendelsen kunne ikke lastes. Er du sikker på at den eksisterer?"
+msgstr "Hendelsen kunne ikke lastes. Er du sikker på at den finnes?"
 
 msgid "Event could not be loaded"
 msgstr "Hendelse kunne ikke lastes inn"
@@ -443,7 +443,7 @@ msgid "Could not get organisation unit"
 msgstr "Kunne ikke få tak i organisasjonsenhet"
 
 msgid "Program doesn't exist"
-msgstr "Programmet eksisterer ikke"
+msgstr "Programmet finnes ikke"
 
 msgid "Selected program is invalid for registering unit"
 msgstr "Valgt program er ugyldig for registreringsenhet"
@@ -511,8 +511,7 @@ msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
 msgstr ""
-"Relasjon av type {{relationshipTypeName}} til {{entityName}} eksisterer "
-"allerede"
+"Relasjon av type {{relationshipTypeName}} til {{entityName}} finnes allerede"
 
 msgid "New event"
 msgstr "Ny hendelse"
@@ -555,7 +554,7 @@ msgid "You dont have access to create an event in the current selections"
 msgstr "Du har ikke tilgang til å opprette en hendelse i gjeldende valg"
 
 msgid "A duplicate exists (but there were some errors, see log for details"
-msgstr "En duplikat eksisterer (men det var noen feil, se logg for detaljer)"
+msgstr "En duplikat finnes (men det var noen feil, se logg for detaljer)"
 
 msgid ""
 "An item with this {{attributeName}} is already registered, but you don't "
