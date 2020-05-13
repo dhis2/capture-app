@@ -2,7 +2,7 @@
 import { quickStoreRecursively } from '../../IOUtils';
 import { getContext } from '../../context';
 
-const converter = (() => {
+const convert = (() => {
     const getClearProps = () => ({
         dataElement: undefined,
         trackedEntityAttribute: undefined,
@@ -34,13 +34,33 @@ const converter = (() => {
     };
 })();
 
-export const storeProgramRulesVariables = (programIds: Array<string>) => {
+const getFieldsQuery = () => 'id,displayName,programRuleVariableSourceType,' +
+'program[id],programStage[id],dataElement[id],trackedEntityAttribute[id],useCodeForOptionSet';
+
+export const storeProgramRulesVariables = async (programIds: Array<string>) => {
     const query = {
         resource: 'programRuleVariables',
         params: {
-            fields: 'id,displayName,programRuleVariableSourceType,program[id],programStage[id],dataElement[id],trackedEntityAttribute[id],useCodeForOptionSet',
+            fields: getFieldsQuery(),
             filter: `program.id:in:[${programIds.join(',')}]`,
         },
     };
-    return quickStoreRecursively(query, getContext().storeNames.PROGRAM_RULES_VARIABLES, { onConvert: converter });
+
+    let programRuleVariableIds = [];
+    const convertRetainingIds = (response) => {
+        const convertedProgramRuleVariables = convert(response);
+        programRuleVariableIds = programRuleVariableIds.concat(
+            convertedProgramRuleVariables
+                .map(programRuleVariable => programRuleVariable.id),
+        );
+        return convertedProgramRuleVariables;
+    };
+
+    await quickStoreRecursively(
+        query,
+        getContext().storeNames.PROGRAM_RULES_VARIABLES, {
+            onConvert: convertRetainingIds,
+        });
+
+    return programRuleVariableIds;
 };

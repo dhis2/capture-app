@@ -1,13 +1,11 @@
 // @flow
 import { chunk, pipe } from 'capture-core-utils';
+import { getContext } from '../context';
 import { queryProgramsOutline } from './queries';
 import {
     storePrograms,
-    storeProgramRules,
-    storeProgramRulesVariables,
-    storeProgramIndicators,
 } from './quickStoreOperations';
-import { getContext } from '../context';
+import { loadRulesCentricMetadata } from './loadRulesCentricMetadata';
 
 const getCachedProgramsOutline = () => {
     const { storageController, storeNames } = getContext();
@@ -27,13 +25,13 @@ const removeUnavailablePrograms = async (apiPrograms, cachePrograms) => {
             return acc;
         }, {});
 
-    const unavailablePrograms = cachePrograms
-        .filter(cacheProgram => !apiProgramsObject[cacheProgram.id]);
+    const unavailableProgramIds = cachePrograms
+        .filter(cacheProgram => !apiProgramsObject[cacheProgram.id])
+        .map(unavailableProgram => unavailableProgram.id);
 
-    if (unavailablePrograms.length > 0) {
+    if (unavailableProgramIds.length > 0) {
         const { storageController, storeNames } = getContext();
-        await unavailablePrograms
-            .asyncForEach(unavailableProgram => storageController.remove(storeNames.PROGRAMS, unavailableProgram.id));
+        await storageController.remove(storeNames.PROGRAMS, unavailableProgramIds);
     }
 };
 
@@ -54,9 +52,7 @@ const getStaleProgramIds = (apiPrograms, cachePrograms) => {
 
 const loadProgramBatch = async (programIds) => {
     const { convertedData: programs = [] } = await storePrograms(programIds);
-    await storeProgramRules(programIds);
-    await storeProgramRulesVariables(programIds);
-    await storeProgramIndicators(programIds);
+    await loadRulesCentricMetadata(programIds);
     return programs
         .map(program => ({
             programTrackedEntityAttributes: program.programTrackedEntityAttributes,
@@ -132,6 +128,7 @@ const getSideEffects = (() => {
         trackedEntityAttributeIds: getTrackedEntityAttributeIds(stalePrograms),
         categories: getCategories(stalePrograms),
         trackedEntityTypeIds: getTrackedEntityTypes(stalePrograms),
+        changesDetected: stalePrograms.length > 0,
     });
 })();
 
