@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 msgid "Please provide a valid date"
-msgstr "نرجوا ادخال صيغة صحيحة للتاريخ"
+msgstr "يرجى ادخال صيغة سليمة للتاريخ"
 
 msgid "Columns to show in table"
 msgstr "الأعمدة التي سيتم عرضها في الجدول"
@@ -38,25 +38,25 @@ msgid "A value is required"
 msgstr "قيمة مطلوبة"
 
 msgid "Please provide a valid number"
-msgstr "نرجوا ادخال صيغة رقمية صحيحة"
+msgstr "نرجوا ادخال صيغة رقمية سليمة"
 
 msgid "Please provide a valid integer"
-msgstr "من فضلك ادخل رقم صحيح، من غير كسر"
+msgstr "من فضلك ادخل رقماً صحيحاً سليماً، من غير كسر"
 
 msgid "Please provide a positive integer"
-msgstr "من فضلك ادخل رقم صحيح موجب"
+msgstr "من فضلك ادخل رقماً صحيحاً موجباً"
 
 msgid "Please provide zero or a positive integer"
-msgstr "من فضلك ادخل عدد صحيح موجب، أو صفر"
+msgstr "من فضلك ادخل عدداً صحيحاً موجباً، أو صفر"
 
 msgid "Please provide a negative integer"
-msgstr "من فضلك ادخل احد الأعداد الصحيحة السالبة"
+msgstr "من فضلك ادخل عدداً صحيحاً سالباً"
 
 msgid "Please provide a valid date and time"
-msgstr "من فضلك ادخل صيغة صحيحة للتاريخ والوقت"
+msgstr "من فضلك ادخل صيغة سليمة للتاريخ والوقت"
 
 msgid "Please provide a valid time"
-msgstr "من فضلك ادخل صيغة صحيحة للوقت"
+msgstr "من فضلك ادخل صيغة وقت سليمة"
 
 msgid "Please provide a valid percentage"
 msgstr "من فضلك ادخل صيغة نسبة مئوية سليمة"
@@ -86,7 +86,7 @@ msgid "\"From\" cannot be greater than \"To\""
 msgstr "لا يمكن ان تكون \"من\" اكبر من \"إلى\""
 
 msgid "Checking..."
-msgstr "يتم الفحص"
+msgstr "يتم التحقق"
 
 msgid "Area"
 msgstr "مساحة"
@@ -98,7 +98,7 @@ msgid "Enrollment"
 msgstr "التسجيل"
 
 msgid "A future date is not allowed"
-msgstr "غير مسموح تاريخ بالمستقبل"
+msgstr "لا يسمح بإدخال تاريخ في المستقبل"
 
 msgid "An error has occured. See log for details"
 msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
@@ -162,7 +162,7 @@ msgid "Validation warnings"
 msgstr "تحذيرات التحقق"
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr "لا تزال بعض العمليات قيد التشغيل. أرجو الإنتظار.."
+msgstr "لا تزال بعض العمليات قيد التشغيل. يرجى الإنتظار.."
 
 msgid "Operations running"
 msgstr "العمليات الجارية"
@@ -243,7 +243,7 @@ msgid "Yes"
 msgstr "نعم"
 
 msgid "mm/dd/yyyy"
-msgstr "شهر / يوم / سنة"
+msgstr ""
 
 msgid "Years"
 msgstr "السنوات"
@@ -799,8 +799,8 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr ""
-"لقد فتحت نسخة آخرى من تطبيق الإلتقاط في نفس المجال. حاليًا ، يدعم تطبيق "
-"الإلتقاط فقط تشغيل نسخة واحدة بشكل متزامن (في نفس المجال). يرجى تحديث هذه "
+"لقد فتحت نسخة آخرى من تطبيق الإلتقاط في نفس المجال. يدعم تطبيق الإلتقاط "
+"حالياً تشغيل نسخة واحدة فقط بشكل متزامن (في نفس المجال). يرجى تحديث هذه "
 "الصفحة إذا كنت ترغب في استخدام هذه النسخة، ولكن اعلم أن هذا سيؤدي إلى إغلاق "
 "النسخ الأخرى."
 
