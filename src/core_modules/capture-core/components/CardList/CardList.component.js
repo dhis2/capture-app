@@ -42,7 +42,6 @@ class CardList extends React.Component<Props> {
         itemTypeName: 'item',
     }
     getDataElementsContainer: Function;
-    trackedEntityTypeAttibutesSelector: Function;
     constructor(props: Props) {
         super(props);
         this.getDataElementsContainer = makeDataElementsContainerSelector();

@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.component';
 import { orientations } from '../../FormFields/Options/MultiSelectBoxes/multiSelectBoxes.const';
 import OptionSet from '../../../metaData/OptionSet/OptionSet';
-import { getSingleSelectOptionSetFilterData, getMultiSelectOptionSetFilterData } from './optionSetFilterDataGetter';
 import type { UpdatableFilterContent } from '../filters.types';
 
 const getStyles = (theme: Theme) => ({
@@ -14,7 +13,6 @@ const getStyles = (theme: Theme) => ({
         marginRight: theme.typography.pxToRem(-24),
     },
 });
-
 
 type Props = {
     optionSet: OptionSet,
@@ -27,24 +25,6 @@ type Props = {
 };
 // $FlowSuppress
 class OptionSetFilter extends Component<Props> implements UpdatableFilterContent<Value> {
-    onGetUpdateData() {
-        const { value, singleSelect } = this.props;
-
-        if (!value) {
-            return null;
-        }
-
-        if (singleSelect) {
-            return getSingleSelectOptionSetFilterData(value);
-        }
-
-        return getMultiSelectOptionSetFilterData(value);
-    }
-
-    onIsValid() { //eslint-disable-line
-        return true;
-    }
-
     render() {
         const { onCommitValue, optionSet, value, classes, singleSelect } = this.props;
 

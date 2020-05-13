@@ -70,9 +70,6 @@ export default class DataElement {
     set displayInForms(display?: ?boolean) {
         this._displayInForms = display != null ? display : true;
     }
-    get displayInForms(): boolean {
-        return this._displayInForms;
-    }
 
     set displayInReports(display?: ?boolean) {
         this._displayInReports = display != null ? display : true;

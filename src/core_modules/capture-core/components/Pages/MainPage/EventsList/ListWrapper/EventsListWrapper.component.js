@@ -126,7 +126,7 @@ class EventListWrapper extends React.Component<Props> {
     }
 
     render() {
-        const { classes, isUpdatingWithDialog } = this.props; //eslint-disable-line
+        const { classes } = this.props;
 
         return (
             <div

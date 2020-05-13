@@ -1,7 +1,5 @@
 // @flow
-import elementTypes from '../metaData/DataElement/elementTypes';
-import { convertValue as convertToServerValue } from '../converters/clientToServer';
-import { convertValue as convertToClientValue } from '../converters/serverToClient';
+import elementTypes from '../../metaData/DataElement/elementTypes';
 import eventStatusElement from '../eventStatusElement';
 
 type ConverterFn = (type: $Values<typeof elementTypes>, value: any) => any;
@@ -73,18 +71,4 @@ export function convertMainEvent(
             accConvertedEvent[outputKey] = convertedValue;
             return accConvertedEvent;
         }, {});
-}
-
-const mapEventClientKeyToServerKey = {
-    eventId: 'event',
-    programId: 'program',
-    programStageId: 'programStage',
-    orgUnitId: 'orgUnit',
-    trackedEntityInstanceId: 'trackedEntityInstance',
-    enrollmentId: 'enrollment',
-    assignee: 'assignedUser',
-};
-
-export function convertMainEventClientToServerWithKeysMap(event: Object) {
-    return convertMainEvent(event, convertToServerValue, mapEventClientKeyToServerKey);
 }

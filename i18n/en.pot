@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-03-09T19:35:56.143Z\n"
-"PO-Revision-Date: 2020-03-09T19:35:56.143Z\n"
+"POT-Creation-Date: 2020-05-13T09:40:59.218Z\n"
+"PO-Revision-Date: 2020-05-13T09:40:59.218Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -273,9 +273,6 @@ msgid "No results"
 msgstr ""
 
 msgid "suggestions could not be retrieved"
-msgstr ""
-
-msgid "search for username"
 msgstr ""
 
 msgid "No items to display"

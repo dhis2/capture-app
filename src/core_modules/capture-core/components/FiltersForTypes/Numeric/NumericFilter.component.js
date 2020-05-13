@@ -14,7 +14,6 @@ import Min from './Min.component';
 import Max from './Max.component';
 import { dataElementTypes as elementTypes } from '../../../metaData';
 import D2TextField from '../../FormFields/Generic/D2TextField.component';
-import { getNumericFilterData } from './numericFilterDataGetter';
 import type { UpdatableFilterContent } from '../filters.types';
 
 const getStyles = (theme: Theme) => ({
@@ -104,19 +103,6 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
     }
 
     maxD2TextFieldInstance: D2TextField;
-    onGetUpdateData(updatedValues?: Value) {
-        const value = typeof updatedValues !== 'undefined' ? updatedValues : this.props.value;
-
-        if (!value) {
-            return null;
-        }
-        return getNumericFilterData(value);
-    }
-
-    onIsValid() {
-        const values = this.props.value;
-        return !values || NumericFilter.isFilterValid(values.min, values.max, this.props.type);
-    }
 
     getUpdatedValue(valuePart: {[key: string]: string}) {
         const valueObject = {
