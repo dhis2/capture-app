@@ -71,7 +71,7 @@ msgid "Please provide a valid age"
 msgstr "يرجى ادخال صيغة عمرية سليمة"
 
 msgid "Please provide a valid phone number"
-msgstr "يرجى ادخال صيغة رقم تلفون سليمة"
+msgstr "يرجى ادخال صيغة رقم هاتف سليمة"
 
 msgid "Please provide a valid organisation unit"
 msgstr "من فضلك ادخل وحدة تنظيمية صالحة"
@@ -98,7 +98,7 @@ msgid "Enrollment"
 msgstr "التسجيل"
 
 msgid "A future date is not allowed"
-msgstr "غير مسموح تاريخ في المستقبل"
+msgstr "لا يسمح بتاريخ في المستقبل"
 
 msgid "An error has occured. See log for details"
 msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
@@ -162,7 +162,7 @@ msgid "Validation warnings"
 msgstr "تحذيرات التحقق"
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr "لا تزال بعض العمليات قيد التشغيل. أرجو الإنتظار.."
+msgstr "لا تزال بعض العمليات قيد التشغيل. يرجى الإنتظار.."
 
 msgid "Operations running"
 msgstr "العمليات الجارية"
@@ -204,7 +204,7 @@ msgid "From"
 msgstr "من"
 
 msgid "To"
-msgstr "الى"
+msgstr "إلى"
 
 msgid "Today"
 msgstr "اليوم"
@@ -243,7 +243,7 @@ msgid "Yes"
 msgstr "نعم"
 
 msgid "mm/dd/yyyy"
-msgstr "شهر / يوم / سنة"
+msgstr ""
 
 msgid "Years"
 msgstr "السنوات"
@@ -255,7 +255,7 @@ msgid "Days"
 msgstr "‏‏الأيام"
 
 msgid "Uploading file"
-msgstr "تحميل ملف"
+msgstr "رفع ملف"
 
 msgid "selected"
 msgstr "محدد"
@@ -324,7 +324,7 @@ msgid "Please add or cancel comment before saving the event"
 msgstr "يرجى إضافة أو إلغاء التعليق قبل حفظ الحدث"
 
 msgid "No write access"
-msgstr "لا توجد صلاحية الوصول للكتابة"
+msgstr "لا توجد صلاحية وصول للكتابة"
 
 msgid "Save"
 msgstr "حفظ"
@@ -354,13 +354,13 @@ msgid "Update"
 msgstr "تحديث"
 
 msgid "{{fromDate}} to {{toDate}}"
-msgstr "{{من تاريخ}} إلى {{إلى تاريخ}}"
+msgstr "{{fromDate}} إلى {{toDate}}"
 
 msgid "after or equal to {{date}}"
-msgstr "من بعد أو مساوٍ لـ {{تاريخ}}"
+msgstr "من بعد أو مساوٍ لـ {{date}}"
 
 msgid "before or equal to {{date}}"
-msgstr "من قبل أو مساوٍ لـ {{تاريخ}}"
+msgstr "من قبل أو مساوٍ لـ {{date}}"
 
 msgid "greater than or equal to"
 msgstr "أكبر من أو يساوي"
@@ -512,7 +512,7 @@ msgid ""
 "Relationship of type {{relationshipTypeName}} to {{entityName}} already "
 "exists"
 msgstr ""
-"العلاقة من نوع {{relationshipTypeName}} إلى {{entityName}}  موجودة مسبقاً"
+"العلاقة من نوع {{relationshipTypeName}} إلى {{entityName}} موجودة مسبقاً"
 
 msgid "New event"
 msgstr "حدث جديد"
@@ -524,7 +524,7 @@ msgid "Adding relationship to event."
 msgstr "إضافة علاقة للحدث."
 
 msgid "Go back to event without saving relationship"
-msgstr "ارجع إلى الحدث بدون حفظ العلاقة"
+msgstr "الرجوع إلى الحدث من غير حفظ العلاقة"
 
 msgid ""
 "Leaving this page will discard the selections you made for a new "
@@ -579,7 +579,7 @@ msgid "Link"
 msgstr "ربط"
 
 msgid "Metadata error. see log for details"
-msgstr "خطأ في بيانات التعريف، للتفاصيل انظر السجل"
+msgstr "خطأ في البيانات الوصفية، للتفاصيل انظر السجل"
 
 msgid "Review duplicates"
 msgstr "مراجعة التكرارات"
@@ -671,7 +671,7 @@ msgid "Start again"
 msgstr "البدء من جديد"
 
 msgid "Find"
-msgstr "بحث"
+msgstr "إيجاد"
 
 msgid "Selected registering unit"
 msgstr "وحدة التسجيل المختارة"
@@ -737,7 +737,7 @@ msgid "Profile"
 msgstr "ملف التعريف"
 
 msgid "Error saving event"
-msgstr "خطأ عند حفظ الحدث"
+msgstr "خطأ في حفظ الحدث"
 
 msgid "Could not save event. See log for details"
 msgstr "تعذر حفظ الحدث. انظر إلى السجل للحصول على التفاصيل"
