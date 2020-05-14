@@ -2,7 +2,6 @@
 /**
  * @module rulesEngineActionsCreator
  */
-import { RulesEngine } from '../../capture-core-utils/RulesEngine';
 import { Program, RenderFoundation, TrackerProgram } from '../metaData';
 import runRulesForSingleEvent from './runRulesForSingleEvent';
 import runRulesForTEI from './runRulesForTEI';
