@@ -17,7 +17,6 @@ import type {
     EventsData,
 } from '../../capture-core-utils/RulesEngine/rulesEngine.types';
 
-const rulesEngine = new RulesEngine();
 
 function getRulesActions(
     rulesEffects: ?OutputEffects,
@@ -37,7 +36,6 @@ export function getRulesActionsForEvent(
     allEventsData: EventsData = [],
 ) {
     const rulesEffects = runRulesForSingleEvent(
-        rulesEngine,
         program,
         foundation,
         orgUnit,
@@ -59,7 +57,6 @@ export function getRulesActionsForTEI(
     teiValues: ?TEIValues,
 ) {
     const rulesEffects = runRulesForTEI(
-        rulesEngine,
         program,
         foundation,
         orgUnit,

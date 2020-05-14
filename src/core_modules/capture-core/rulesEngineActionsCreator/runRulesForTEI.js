@@ -103,7 +103,6 @@ function prepare(
 }
 
 export default function runRulesForTEI(
-    rulesEngine: RulesEngine,
     program: ?TrackerProgram,
     foundation: ?RenderFoundation,
     orgUnit: Object,
@@ -123,7 +122,7 @@ export default function runRulesForTEI(
         } = data;
 
         // returns an array of effects that need to take place in the UI.
-        return rulesEngine.executeTEIRules(
+        return RulesEngine.executeTEIRules(
             { programRulesVariables, programRules, constants },
             enrollmentData,
             teiValues,

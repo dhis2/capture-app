@@ -22,7 +22,6 @@ import type {
     RuleVariables,
     D2Functions,
     Flag,
-    DateUtils,
     ProgramRuleEffect,
 } from './rulesEngine.types';
 import inputValueConverter from './converters/inputValueConverter';
@@ -309,88 +308,72 @@ function getEffects(
         }));
 }
 
-
 export default class RulesEngine {
-  variableService: VariableService;
-  dateUtils: DateUtils;
-  processRulesEffects: (
-        effects: ?Array<ProgramRuleEffect>,
-        processType: $Values<typeof processTypes>,
+    static dateUtils = getDateUtils(momentConverter)
+
+    static variableService() {
+        const valueProcessor = new ValueProcessor(inputValueConverter);
+        return new VariableService(valueProcessor.processValue);
+    }
+
+    static generateEffects(variablesHash: RuleVariables, programRules: ?Array<ProgramRule>, dataElements: ?DataElements, trackedEntityAttributes: ?TrackedEntityAttributes): ?OutputEffects {
+        const processRulesEffects = getRulesEffectsProcessor(convertRuleEffectDataToOutputBaseValue, rulesEffectsValueConverter);
+        const dhisFunctions = d2Functions(RulesEngine.dateUtils, RulesEngine.variableService(), variablesHash);
+
+        const effects = getEffects(dhisFunctions, programRules, dataElements, trackedEntityAttributes, variablesHash);
+        updateVariableHashWhenActionIsAssignValue(effects, variablesHash);
+
+        return processRulesEffects(effects, processTypes.EVENT, dataElements, null);
+    }
+
+    static executeTEIRules(
+        programRulesContainer: ProgramRulesContainer,
+        enrollmentData: ?Enrollment,
+        teiValues: ?TEIValues,
+        trackedEntityAttributes: ?TrackedEntityAttributes,
+        selectedOrgUnit: OrgUnit,
+        optionSets: OptionSets,
+    ): ?OutputEffects {
+        const { programRules } = programRulesContainer;
+
+
+        const variablesHash = RulesEngine.variableService().getVariables(
+            programRulesContainer,
+            null,
+            null,
+            null,
+            trackedEntityAttributes,
+            teiValues,
+            enrollmentData,
+            selectedOrgUnit,
+            optionSets,
+        );
+
+        return RulesEngine.generateEffects(variablesHash, programRules, null, trackedEntityAttributes);
+    }
+
+    static executeEventRules(
+        programRulesContainer: ProgramRulesContainer,
+        events: EventData,
         dataElements: ?DataElements,
-        trackedEntityAttributes: ?TrackedEntityAttributes
-  ) => ?OutputEffects;
-  generateEffects: (
-    variablesHash: RuleVariables,
-    programRules: ?Array<ProgramRule>,
-    dataElements: ?DataElements,
-    trackedEntityAttributes: ?TrackedEntityAttributes
-  )=> ?OutputEffects;
+        selectedOrgUnit: OrgUnit,
+        optionSets: OptionSets,
+    ): ?OutputEffects {
+        const { allEvents, currentEvent } = events;
+        const { programRules, constants, programRulesVariables } = programRulesContainer;
 
-  constructor() {
-      const valueProcessor = new ValueProcessor(inputValueConverter);
+        const variablesHash = RulesEngine.variableService().getVariables(
+            { constants, programRulesVariables },
+            currentEvent,
+            allEvents,
+            dataElements,
+            null,
+            null,
+            null,
+            selectedOrgUnit,
+            optionSets,
+        );
 
-      this.dateUtils = getDateUtils(momentConverter);
-      this.variableService = new VariableService(valueProcessor.processValue);
-      this.processRulesEffects = getRulesEffectsProcessor(
-          convertRuleEffectDataToOutputBaseValue,
-          rulesEffectsValueConverter,
-      );
-
-      this.generateEffects = (variablesHash, programRules, dataElements, trackedEntityAttributes) => {
-          const dhisFunctions = d2Functions(this.dateUtils, this.variableService, variablesHash);
-          const effects = getEffects(dhisFunctions, programRules, dataElements, trackedEntityAttributes, variablesHash);
-          updateVariableHashWhenActionIsAssignValue(effects, variablesHash);
-
-          return this.processRulesEffects(effects, processTypes.EVENT, dataElements, null);
-      };
-  }
-
-
-  executeTEIRules(
-      programRulesContainer: ProgramRulesContainer,
-      enrollmentData: ?Enrollment,
-      teiValues: ?TEIValues,
-      trackedEntityAttributes: ?TrackedEntityAttributes,
-      selectedOrgUnit: OrgUnit,
-      optionSets: OptionSets,
-  ): ?OutputEffects {
-      const { programRules } = programRulesContainer;
-      const variablesHash = this.variableService.getVariables(
-          programRulesContainer,
-          null,
-          null,
-          null,
-          trackedEntityAttributes,
-          teiValues,
-          enrollmentData,
-          selectedOrgUnit,
-          optionSets,
-      );
-
-      return this.generateEffects(variablesHash, programRules, null, trackedEntityAttributes);
-  }
-
-  executeEventRules(
-      programRulesContainer: ProgramRulesContainer,
-      events: EventData,
-      dataElements: ?DataElements,
-      selectedOrgUnit: OrgUnit,
-      optionSets: OptionSets,
-  ): ?OutputEffects {
-      const { allEvents, currentEvent } = events;
-      const { programRules, constants, programRulesVariables } = programRulesContainer;
-      const variablesHash = this.variableService.getVariables(
-          { constants, programRulesVariables },
-          currentEvent,
-          allEvents,
-          dataElements,
-          null,
-          null,
-          null,
-          selectedOrgUnit,
-          optionSets,
-      );
-
-      return this.generateEffects(variablesHash, programRules, dataElements, null);
-  }
+        return RulesEngine.generateEffects(variablesHash, programRules, dataElements, null);
+    }
 }

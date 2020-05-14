@@ -89,7 +89,6 @@ function prepare(
 }
 
 export default function runRulesForSingleEvent(
-    rulesEngine: RulesEngine,
     program: ?Program,
     foundation: ?RenderFoundation,
     orgUnit: OrgUnit,
@@ -109,7 +108,7 @@ export default function runRulesForSingleEvent(
         } = data;
 
         // returns an array of effects that need to take place in the UI.
-        return rulesEngine.executeEventRules(
+        return RulesEngine.executeEventRules(
             { programRulesVariables, programRules, constants },
             { currentEvent, allEvents },
             dataElementsInProgram,
