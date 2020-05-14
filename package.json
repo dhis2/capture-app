@@ -2,7 +2,7 @@
   "name": "capture-app",
   "homepage": ".",
   "version": "34.1.0",
-  "cacheVersion": "1",
+  "cacheVersion": "2",
   "private": false,
   "dependencies": {
     "@dhis2/app-runtime": "^2.1.2",

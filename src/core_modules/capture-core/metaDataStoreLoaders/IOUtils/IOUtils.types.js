@@ -23,10 +23,12 @@ export type QuickStoreOptions = {
     variables?: Object,
 }
 
-export type GetResultLengthFn = (rawResponse: any) => number;
-
 export interface QuickStoreRecursivelyOptions {
     onConvert?: ConvertFn,
-    onGetResultLength?: GetResultLengthFn,
     iterationSize?: number,
+}
+
+export interface QueryRecursivelyOptions {
+    onConvert?: ConvertFn,
+    pageSize?: number,
 }

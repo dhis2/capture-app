@@ -12,11 +12,6 @@ import { loadCategories } from '../categories';
 import { loadOptionSets } from '../optionSets';
 import { executeUsersCacheMaintenance } from '../maintenance';
 
-function deduplicateArray(array: Array<string>): Array<string> {
-    const uniqueSet = new Set(array);
-    return [...uniqueSet.values()];
-}
-
 const coreStoreOperations = [
     storeConstants,
     storeOrgUnitLevels,
@@ -46,12 +41,10 @@ export const loadMetaData = async () => {
         optionSetsOutline: optionSetsOutlineFromTrackedEntityTypes,
     } = await loadTrackedEntityTypes(trackedEntityTypeIds);
 
-    await loadTrackedEntityAttributes(
-        deduplicateArray([
-            ...trackedEntityAttributeIdsFromPrograms,
-            ...trackedEntityAttributeIdsFromTrackedEntityTypes,
-        ]),
-    );
+    await loadTrackedEntityAttributes([
+        ...trackedEntityAttributeIdsFromPrograms,
+        ...trackedEntityAttributeIdsFromTrackedEntityTypes,
+    ]);
 
     await loadCategories(categories);
     await loadOptionSets([
