@@ -37,9 +37,8 @@ describe('rules engine', () => {
         },
     ])('where the default values', ({ program, foundation }) => {
         test('Tests on runRulesForSingleEvent function', () => {
-            const rulesEngine = new RulesEngine();
 
-            const rulesEffects = runRulesForSingleEvent(rulesEngine, program, foundation, orgUnit, currentEvent, allEvents);
+            const rulesEffects = runRulesForSingleEvent(program, foundation, orgUnit, currentEvent, allEvents);
 
             expect(rulesEffects).toMatchSnapshot();
         });
@@ -68,10 +67,9 @@ describe('rules engine', () => {
                 currentEvent: value,
                 allEvents: { all: [value], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeEventRules(
+            const rulesEffects = RulesEngine.executeEventRules(
                 { programRulesVariables, programRules, constants },
                 { currentEvent, allEvents },
                 dataElementsInProgram,
@@ -94,10 +92,9 @@ describe('rules engine', () => {
                 currentEvent: value,
                 allEvents: { all: [value], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeEventRules(
+            const rulesEffects = RulesEngine.executeEventRules(
                 { programRulesVariables, programRules, constants },
                 { currentEvent, allEvents },
                 dataElementsInProgram,
@@ -131,10 +128,9 @@ describe('rules engine', () => {
                 currentEvent: value,
                 allEvents: { all: [value], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeEventRules(
+            const rulesEffects = RulesEngine.executeEventRules(
                 { programRulesVariables, programRules, constants },
                 { currentEvent, allEvents },
                 dataElementsInProgram,
@@ -163,10 +159,9 @@ describe('rules engine', () => {
                 currentEvent: value,
                 allEvents: { all: [value], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeEventRules(
+            const rulesEffects = RulesEngine.executeEventRules(
                 { programRulesVariables, programRules, constants },
                 { currentEvent, allEvents },
                 dataElementsInProgram,
@@ -383,10 +378,9 @@ describe('rules engine', () => {
                 currentEvent: value,
                 allEvents: { all: [value], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeEventRules(
+            const rulesEffects = RulesEngine.executeEventRules(
                 { programRulesVariables, programRules, constants },
                 { currentEvent, allEvents },
                 dataElementsInProgram,
@@ -520,10 +514,9 @@ describe('rules engine effects with functions and effects', () => {
                 currentEvent: events,
                 allEvents: { all: [events], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeEventRules(
+            const rulesEffects = RulesEngine.executeEventRules(
                 { programRulesVariables, programRules, constants },
                 { currentEvent, allEvents },
                 dataElementsInProgram,
