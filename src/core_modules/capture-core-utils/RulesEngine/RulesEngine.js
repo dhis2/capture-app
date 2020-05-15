@@ -66,42 +66,39 @@ const convertRuleEffectDataToOutputBaseValue = (data: any, valueType: string) =>
 };
 
 /**
- * There are effects that as a result will update an existing program variable.
- * Updates of that sort in are taking place here.
- * @param effects
+ * We update the variables hash so that the next rule can use the updated values.
+ * @param content
+ * @param action
+ * @param data
  * @param variablesHash
  */
-function updateVariableHashWhenActionIsAssignValue(effects: ?Array<ProgramRuleEffect>, variablesHash: RuleVariables) {
-    if (effects) {
-        effects
-            .filter(({ action, content }) => action === effectActions.ASSIGN_VALUE && content)
-            .forEach(({ content, data }) => {
-                const variableToAssign = content.replace('#{', '').replace('A{', '').replace('}', '');
-                const variableHash = variablesHash[variableToAssign];
+function updateVariableHashWhenActionIsAssignValue(content: string, action: string, data: any, variablesHash: RuleVariables) {
+    if (action === effectActions.ASSIGN_VALUE && content) {
+        const variableToAssign = content.replace('#{', '').replace('A{', '').replace('}', '');
+        const variableHash = variablesHash[variableToAssign];
 
-                if (!variableHash) {
-                    // If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
-                    log.warn(`Variable ${variableToAssign} was not defined.`);
-                } else {
-                    // buildAssignVariable
-                    // todo according to types this must be a bug
-                    const { valueType } = variableHash;
-                    let variableValue = convertRuleEffectDataToOutputBaseValue(data, valueType);
-                    if (variableValue && isString(variableValue)) {
-                        variableValue = `'${variableValue}'`;
-                    }
+        if (!variableHash) {
+            // If a variable is mentioned in the content of the rule, but does not exist in the variables hash, show a warning:
+            log.warn(`Variable ${variableToAssign} was not defined.`);
+        } else {
+            // buildAssignVariable
+            // todo according to types this must be a bug
+            const { valueType } = variableHash;
+            let variableValue = convertRuleEffectDataToOutputBaseValue(data, valueType);
+            if (variableValue && isString(variableValue)) {
+                variableValue = `'${variableValue}'`;
+            }
 
-                    variablesHash[variableToAssign] = {
-                        ...variablesHash[variableToAssign],
-                        variableValue,
-                        variableType: valueType,
-                        hasValue: true,
-                        variableEventDate: '',
-                        variablePrefix: variableHash.variablePrefix || '#',
-                        allValues: [variableValue],
-                    };
-                }
-            });
+            variablesHash[variableToAssign] = {
+                ...variablesHash[variableToAssign],
+                variableValue,
+                variableType: valueType,
+                hasValue: true,
+                variableEventDate: '',
+                variablePrefix: variableHash.variablePrefix || '#',
+                allValues: [variableValue],
+            };
+        }
     }
 }
 
@@ -233,13 +230,14 @@ function getProgramRuleEffects(
     dataElements: ?DataElements,
     trackedEntityAttributes: ?TrackedEntityAttributes,
     variablesHash: RuleVariables,
-    processType?: string,
+    processType: string,
 ): ?Array<ProgramRuleEffect> {
     if (!programRules) {
         return null;
     }
+    const processRulesEffects = getRulesEffectsProcessor(convertRuleEffectDataToOutputBaseValue, rulesEffectsValueConverter);
 
-    return programRules
+    const effects = programRules
         .sort((a, b) => {
             if (!a.priority && !b.priority) {
                 return 0;
@@ -255,53 +253,67 @@ function getProgramRuleEffects(
 
             return a.priority - b.priority;
         })
-        .map((rule) => {
-            let isRuleEffective = false;
+        // For every rule there are two bits.
+        // The first bit is the "program rule expression" which signifies whether or not the rule's actions are gonna take place
+        // The second bit is  the "program rule effects" which defines the actions that need to take place.
+        // In the following iteration we first evaluate the "program rule expression" and when this is effective
+        // we generate the program rules effects
+        .flatMap((rule) => {
+            let isProgramRuleExpressionEffective = false;
             const { condition: expression } = rule;
             if (expression) {
                 const strippedExpression = replaceVariablesWithValues(expression, variablesHash);
                 // checks if the rule is effective meaning that the rule results to a truthy expression
-                isRuleEffective = executeExpression(dhisFunctions, strippedExpression, e => log.warn(`Expression with id rule:${rule.id} could not be run. Original condition was: ${rule.condition} - Evaluation ended up as:${expression} - error message:${e}`));
+                isProgramRuleExpressionEffective = executeExpression(dhisFunctions, strippedExpression, e => log.warn(`Expression with id rule:${rule.id} could not be run. Original condition was: ${rule.condition} - Evaluation ended up as:${expression} - error message:${e}`));
             } else {
                 log.warn(`Rule id:'${rule.id}'' and name:'${rule.name}' had no condition specified. Please check rule configuration.`);
             }
-            return { isRuleEffective, rule };
-        })
-        .filter(({ isRuleEffective }) => isRuleEffective)
-        .flatMap(({ rule }) => rule.programRuleActions.map((
-            {
-                data: actionData,
-                programRuleActionType: action,
-                id,
-                location,
-                dataElementId,
-                trackedEntityAttributeId,
-                programStageId,
-                programStageSectionId,
-                optionGroupId,
-                optionId,
-                content,
-            }) => {
-            let ruleEffectData;
-            if (actionData) {
-                const strippedExpression = replaceVariablesWithValues(actionData, variablesHash);
-                const evaluatedRuleEffectData = executeExpression(dhisFunctions, strippedExpression, e => log.warn(`Expression with id rule: action:${id} could not be run. Original condition was: ${rule.condition} - Evaluation ended up as:${strippedExpression} - error message:${e}`));
-                ruleEffectData = trimQuotes(evaluatedRuleEffectData);
+
+            let programRuleEffects;
+            if (isProgramRuleExpressionEffective) {
+                programRuleEffects = rule.programRuleActions.map((
+                    {
+                        data: actionData,
+                        programRuleActionType: action,
+                        id,
+                        location,
+                        dataElementId,
+                        trackedEntityAttributeId,
+                        programStageId,
+                        programStageSectionId,
+                        optionGroupId,
+                        optionId,
+                        content,
+                    }) => {
+                    let ruleEffectData;
+                    if (actionData) {
+                        const strippedExpression = replaceVariablesWithValues(actionData, variablesHash);
+                        const evaluatedRuleEffectData = executeExpression(dhisFunctions, strippedExpression, e => log.warn(`Expression with id rule: action:${id} could not be run. Original condition was: ${rule.condition} - Evaluation ended up as:${strippedExpression} - error message:${e}`));
+                        ruleEffectData = trimQuotes(evaluatedRuleEffectData);
+                    }
+
+                    updateVariableHashWhenActionIsAssignValue(content, action, ruleEffectData, variablesHash);
+
+                    return {
+                        data: ruleEffectData,
+                        id,
+                        location,
+                        action,
+                        dataElementId,
+                        trackedEntityAttributeId,
+                        programStageId,
+                        programStageSectionId,
+                        optionGroupId,
+                        optionId,
+                        content,
+                    };
+                });
             }
-            return {
-                data: ruleEffectData,
-                id,
-                location,
-                action,
-                dataElementId,
-                trackedEntityAttributeId,
-                programStageId,
-                programStageSectionId,
-                optionGroupId,
-                optionId,
-                content,
-            };
-        }));
+            return programRuleEffects;
+        })
+        .filter(ruleEffects => ruleEffects);
+
+    return processRulesEffects(effects, processType, dataElements, trackedEntityAttributes);
 }
 
 export default class RulesEngine {
