@@ -227,7 +227,7 @@ const replaceVariablesWithValues = (expression: string, variablesHash: RuleVaria
  * @param {*} variablesHash is a table hash with all the variables that have rules attached to it
  * @param {*} processType is either TEI or EVENT
  */
-function getEffects(
+function getProgramRuleEffects(
     dhisFunctions: D2Functions,
     programRules: ?Array<ProgramRule>,
     dataElements: ?DataElements,
@@ -238,7 +238,6 @@ function getEffects(
     if (!programRules) {
         return null;
     }
-
 
     return programRules
         .sort((a, b) => {
@@ -313,17 +312,17 @@ export default class RulesEngine {
         return new VariableService(valueProcessor.processValue);
     }
 
-    static generateEffects(variablesHash: RuleVariables, programRules: ?Array<ProgramRule>, dataElements: ?DataElements, trackedEntityAttributes: ?TrackedEntityAttributes): ?OutputEffects {
+    static generateProgramRuleEffects(variablesHash: RuleVariables, programRules: ?Array<ProgramRule>, dataElements: ?DataElements, trackedEntityAttributes: ?TrackedEntityAttributes): ?OutputEffects {
         const processRulesEffects = getRulesEffectsProcessor(convertRuleEffectDataToOutputBaseValue, rulesEffectsValueConverter);
         const dhisFunctions = d2Functions(RulesEngine.dateUtils, RulesEngine.variableService(), variablesHash);
 
-        const effects = getEffects(dhisFunctions, programRules, dataElements, trackedEntityAttributes, variablesHash);
+        const effects = getProgramRuleEffects(dhisFunctions, programRules, dataElements, trackedEntityAttributes, variablesHash);
         updateVariableHashWhenActionIsAssignValue(effects, variablesHash);
 
         return processRulesEffects(effects, processTypes.EVENT, dataElements, null);
     }
 
-    static executeTEIRules(
+    static programRuleEffectsForTEI(
         programRulesContainer: ProgramRulesContainer,
         enrollmentData: ?Enrollment,
         teiValues: ?TEIValues,
@@ -332,7 +331,6 @@ export default class RulesEngine {
         optionSets: OptionSets,
     ): ?OutputEffects {
         const { programRules } = programRulesContainer;
-
 
         const variablesHash = RulesEngine.variableService().getVariables(
             programRulesContainer,
@@ -346,10 +344,10 @@ export default class RulesEngine {
             optionSets,
         );
 
-        return RulesEngine.generateEffects(variablesHash, programRules, null, trackedEntityAttributes);
+        return RulesEngine.generateProgramRuleEffects(variablesHash, programRules, null, trackedEntityAttributes);
     }
 
-    static executeEventRules(
+    static programRuleEffectsForEvent(
         programRulesContainer: ProgramRulesContainer,
         events: EventData,
         dataElements: ?DataElements,
@@ -371,6 +369,6 @@ export default class RulesEngine {
             optionSets,
         );
 
-        return RulesEngine.generateEffects(variablesHash, programRules, dataElements, null);
+        return RulesEngine.generateProgramRuleEffects(variablesHash, programRules, dataElements, null);
     }
 }
