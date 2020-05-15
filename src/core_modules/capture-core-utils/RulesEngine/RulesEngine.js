@@ -226,7 +226,6 @@ const replaceVariablesWithValues = (expression: string, variablesHash: RuleVaria
  * @param {*} trackedEntityAttributes all tracked entity attributes(metadata)
  * @param {*} variablesHash is a table hash with all the variables that have rules attached to it
  * @param {*} processType is either TEI or EVENT
- * @param {*} flag execution flags
  */
 function getEffects(
     dhisFunctions: D2Functions,
