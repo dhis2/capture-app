@@ -174,7 +174,7 @@ msgid "No events to display"
 msgstr "لايوجد احداث للعرض"
 
 msgid "Data for offline list not present"
-msgstr "البيانات لقائمة الغير متصلة غير موجودة"
+msgstr "بيانات القائمة غير المتصلة غير موجودة"
 
 msgid "Close"
 msgstr "إغلاق"
