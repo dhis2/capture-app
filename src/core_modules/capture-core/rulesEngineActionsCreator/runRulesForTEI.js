@@ -122,7 +122,7 @@ export default function runRulesForTEI(
         } = data;
 
         // returns an array of effects that need to take place in the UI.
-        return RulesEngine.executeTEIRules(
+        return RulesEngine.programRuleEffectsForTEI(
             { programRulesVariables, programRules, constants },
             enrollmentData,
             teiValues,

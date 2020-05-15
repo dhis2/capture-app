@@ -69,7 +69,7 @@ describe('rules engine', () => {
             };
 
             // when
-            const rulesEffects = RulesEngine.executeEventRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
                 { currentEvent, allEvents },
                 dataElementsInProgram,
@@ -94,7 +94,7 @@ describe('rules engine', () => {
             };
 
             // when
-            const rulesEffects = RulesEngine.executeEventRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
                 { currentEvent, allEvents },
                 dataElementsInProgram,
@@ -130,7 +130,7 @@ describe('rules engine', () => {
             };
 
             // when
-            const rulesEffects = RulesEngine.executeEventRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
                 { currentEvent, allEvents },
                 dataElementsInProgram,
@@ -161,7 +161,7 @@ describe('rules engine', () => {
             };
 
             // when
-            const rulesEffects = RulesEngine.executeEventRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
                 { currentEvent, allEvents },
                 dataElementsInProgram,
@@ -380,7 +380,7 @@ describe('rules engine', () => {
             };
 
             // when
-            const rulesEffects = RulesEngine.executeEventRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
                 { currentEvent, allEvents },
                 dataElementsInProgram,
@@ -516,7 +516,7 @@ describe('rules engine effects with functions and effects', () => {
             };
 
             // when
-            const rulesEffects = RulesEngine.executeEventRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
                 { currentEvent, allEvents },
                 dataElementsInProgram,

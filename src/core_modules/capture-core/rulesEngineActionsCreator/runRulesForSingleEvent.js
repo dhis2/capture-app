@@ -108,7 +108,7 @@ export default function runRulesForSingleEvent(
         } = data;
 
         // returns an array of effects that need to take place in the UI.
-        return RulesEngine.executeEventRules(
+        return RulesEngine.programRuleEffectsForEvent(
             { programRulesVariables, programRules, constants },
             { currentEvent, allEvents },
             dataElementsInProgram,
