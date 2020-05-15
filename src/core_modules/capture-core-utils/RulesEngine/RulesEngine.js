@@ -21,7 +21,6 @@ import type {
     ProgramRule,
     RuleVariables,
     D2Functions,
-    Flag,
     ProgramRuleEffect,
 } from './rulesEngine.types';
 import inputValueConverter from './converters/inputValueConverter';
@@ -236,7 +235,6 @@ function getEffects(
     trackedEntityAttributes: ?TrackedEntityAttributes,
     variablesHash: RuleVariables,
     processType?: string,
-    flag?: Flag = { debug: false },
 ): ?Array<ProgramRuleEffect> {
     if (!programRules) {
         return null;
