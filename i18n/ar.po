@@ -3,15 +3,15 @@
 # phil_dhis2, 2019
 # Viktor Varland <viktor@dhis2.org>, 2019
 # Antonia Bezenchek <antonia@informa.pro>, 2020
-# Hamza Assada <7amza.it@gmail.com>, 2020
 # KRG HIS <antonia.bezenchek@informa.pro>, 2020
+# Hamza Assada <7amza.it@gmail.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2019-11-18T14:43:03.753Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
+"Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,10 +20,10 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 msgid "Please provide a valid date"
-msgstr "نرجوا ادخال صيغة صحيحة للتاريخ"
+msgstr "يرجى ادخال صيغة تاريخ سليمة"
 
 msgid "Columns to show in table"
-msgstr "الأعمدة التي سيتم عرضها في الجدول"
+msgstr "الأعمدة التي ستعرض في الجدول"
 
 msgid "Column"
 msgstr "العمود"
@@ -35,28 +35,28 @@ msgid "Async field update failed"
 msgstr "فشل تحديث حقل متزامن"
 
 msgid "A value is required"
-msgstr "قيمة مطلوبة"
+msgstr "مطلوب قيمة"
 
 msgid "Please provide a valid number"
-msgstr "نرجوا ادخال صيغة رقمية صحيحة"
+msgstr "يرجى ادخال صيغة رقمية سليمة"
 
 msgid "Please provide a valid integer"
-msgstr "من فضلك ادخل رقم صحيح، من غير كسر"
+msgstr "من فضلك ادخل رقماً صحيحاً"
 
 msgid "Please provide a positive integer"
-msgstr "من فضلك ادخل رقم صحيح موجب"
+msgstr "من فضلك ادخل رقماً صحيحاً موجباً"
 
 msgid "Please provide zero or a positive integer"
-msgstr "من فضلك ادخل عدد صحيح موجب، أو صفر"
+msgstr "من فضلك ادخل عدداً صحيحاً موجباً، أو صفر"
 
 msgid "Please provide a negative integer"
-msgstr "من فضلك ادخل احد الأعداد الصحيحة السالبة"
+msgstr "من فضلك ادخل عدداً صحيحاً سالباً"
 
 msgid "Please provide a valid date and time"
-msgstr "من فضلك ادخل صيغة صحيحة للتاريخ والوقت"
+msgstr "من فضلك ادخل صيغة تاريخ ووقت سليمة"
 
 msgid "Please provide a valid time"
-msgstr "من فضلك ادخل صيغة صحيحة للوقت"
+msgstr "من فضلك ادخل صيغة سليمة للوقت"
 
 msgid "Please provide a valid percentage"
 msgstr "من فضلك ادخل صيغة نسبة مئوية سليمة"
@@ -98,7 +98,7 @@ msgid "Enrollment"
 msgstr "التسجيل"
 
 msgid "A future date is not allowed"
-msgstr "غير مسموح تاريخ بالمستقبل"
+msgstr "لايسمح بتاريخ في المستقبل"
 
 msgid "An error has occured. See log for details"
 msgstr "حدث خطأ. انظر السجل للحصول على التفاصيل"
@@ -162,7 +162,7 @@ msgid "Validation warnings"
 msgstr "تحذيرات التحقق"
 
 msgid "Some operations are still runnning. Please wait.."
-msgstr "لا تزال بعض العمليات قيد التشغيل. أرجو الإنتظار.."
+msgstr "لا تزال بعض العمليات قيد التشغيل. يرجى الإنتظار.."
 
 msgid "Operations running"
 msgstr "العمليات الجارية"
@@ -174,7 +174,7 @@ msgid "No events to display"
 msgstr "لايوجد احداث للعرض"
 
 msgid "Data for offline list not present"
-msgstr "البيانات لقائمة الغير متصلة غير موجودة"
+msgstr "بيانات القائمة غير المتصلة غير موجودة"
 
 msgid "Close"
 msgstr "إغلاق"
@@ -255,7 +255,7 @@ msgid "Yes"
 msgstr "نعم"
 
 msgid "mm/dd/yyyy"
-msgstr "شهر / يوم / سنة"
+msgstr ""
 
 msgid "Years"
 msgstr "السنوات"
