@@ -41,10 +41,7 @@ export function getRulesActionsForEvent(
         currentEvent,
         allEventsData,
     );
-    if (rulesEffects) {
-        return getRulesActions(rulesEffects, foundation, formId);
-    }
-    return [];
+    return getRulesActions(rulesEffects, foundation, formId);
 }
 
 export function getRulesActionsForTEI(
@@ -62,8 +59,5 @@ export function getRulesActionsForTEI(
         enrollmentData,
         teiValues,
     );
-    if (rulesEffects) {
-        return getRulesActions(rulesEffects, foundation, formId);
-    }
-    return [];
+    return getRulesActions(rulesEffects, foundation, formId);
 }
