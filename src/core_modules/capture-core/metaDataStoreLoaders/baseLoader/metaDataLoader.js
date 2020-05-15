@@ -34,7 +34,7 @@ function removeDuplicatesFromStringArray(array: Array<string>) {
     return Array.from(set);
 }
 
-export default async function loadMetaDataAsync() {
+export async function loadMetaData() {
     const storageController = getUserStorageController();
     await executeUsersCacheMaintenance();
     await loadCoreMetaData(storageController);
