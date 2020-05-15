@@ -87,7 +87,7 @@ msgid "No events to display"
 msgstr "لايوجد احداث للعرض"
 
 msgid "Data for offline list not present"
-msgstr "البيانات لقائمة الغير متصلة غير موجودة"
+msgstr "بيانات القائمة غير المتصلة غير موجودة"
 
 msgid "Last week"
 msgstr "الأسبوع الماضي"
@@ -135,7 +135,7 @@ msgid "Yes"
 msgstr "نعم"
 
 msgid "mm/dd/yyyy"
-msgstr "شهر / يوم / سنة"
+msgstr ""
 
 msgid "Years"
 msgstr "السنوات"
