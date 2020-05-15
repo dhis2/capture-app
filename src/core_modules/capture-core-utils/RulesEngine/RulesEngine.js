@@ -324,15 +324,6 @@ export default class RulesEngine {
         return new VariableService(valueProcessor.processValue);
     }
 
-    static generateProgramRuleEffects(variablesHash: RuleVariables, programRules: ?Array<ProgramRule>, dataElements: ?DataElements, trackedEntityAttributes: ?TrackedEntityAttributes): ?OutputEffects {
-        const processRulesEffects = getRulesEffectsProcessor(convertRuleEffectDataToOutputBaseValue, rulesEffectsValueConverter);
-        const dhisFunctions = d2Functions(RulesEngine.dateUtils, RulesEngine.variableService(), variablesHash);
-
-        const effects = getProgramRuleEffects(dhisFunctions, programRules, dataElements, trackedEntityAttributes, variablesHash);
-        updateVariableHashWhenActionIsAssignValue(effects, variablesHash);
-
-        return processRulesEffects(effects, processTypes.EVENT, dataElements, null);
-    }
 
     static programRuleEffectsForTEI(
         programRulesContainer: ProgramRulesContainer,
@@ -356,7 +347,8 @@ export default class RulesEngine {
             optionSets,
         );
 
-        return RulesEngine.generateProgramRuleEffects(variablesHash, programRules, null, trackedEntityAttributes);
+        const dhisFunctions = d2Functions(RulesEngine.dateUtils, RulesEngine.variableService(), variablesHash);
+        return getProgramRuleEffects(dhisFunctions, programRules, null, trackedEntityAttributes, variablesHash, processTypes.TEI);
     }
 
     static programRuleEffectsForEvent(
@@ -381,6 +373,7 @@ export default class RulesEngine {
             optionSets,
         );
 
-        return RulesEngine.generateProgramRuleEffects(variablesHash, programRules, dataElements, null);
+        const dhisFunctions = d2Functions(RulesEngine.dateUtils, RulesEngine.variableService(), variablesHash);
+        return getProgramRuleEffects(dhisFunctions, programRules, dataElements, null, variablesHash, processTypes.EVENT);
     }
 }
