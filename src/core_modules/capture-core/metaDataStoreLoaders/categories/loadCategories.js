@@ -100,7 +100,6 @@ async function loadCategoryOptionsBatchAsync(
     };
 }
 
-// This might look like horrible code!, but there is a reason. Freeing up memory is the most important thing here, ref JIRA-issue DHIS2-7259
 async function loadCategoryOptionsInBatchesAsync(
     categoryIds: Array<string>,
 ) {
@@ -141,14 +140,8 @@ async function setCategoriesAsync(
 }
 
 export async function loadCategories(
-    inputCategories: Array<InputCategory>,
+    uniqueCategories: Array<InputCategory>,
 ) {
-    const uniqueCategories = [
-        ...new Map(
-            inputCategories.map(ic => [ic.id, ic]),
-        ).values(),
-    ];
-
     await setCategoriesAsync(uniqueCategories);
 
     const uniqueCateogryIds = uniqueCategories.map(uc => uc.id);

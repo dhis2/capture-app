@@ -3,6 +3,7 @@ import {
     storeConstants,
     storeOrgUnitLevels,
     storeRelationshipTypes,
+    storeOrgUnitGroups,
 } from './quickStoreOperations';
 import { loadPrograms } from '../programs';
 import { loadTrackedEntityTypes } from '../trackedEntityTypes';
@@ -15,9 +16,10 @@ const coreStoreOperations = [
     storeConstants,
     storeOrgUnitLevels,
     storeRelationshipTypes,
+    storeOrgUnitGroups,
 ];
 
-async function loadCoreMetaData() {
+function loadCoreMetaData() {
     return Promise.all(
         coreStoreOperations.map(operation => operation()),
     );
@@ -27,21 +29,27 @@ export const loadMetaData = async () => {
     const {
         optionSetsOutline: optionSetsOutlineFromPrograms,
         trackedEntityAttributeIds: trackedEntityAttributeIdsFromPrograms,
-        categoryIds,
+        categories,
+        trackedEntityTypeIds,
+        changesDetected,
     } = await loadPrograms();
-    await loadCoreMetaData();
+
+    changesDetected && await loadCoreMetaData();
 
     const {
         trackedEntityAttributeIds: trackedEntityAttributeIdsFromTrackedEntityTypes,
         optionSetsOutline: optionSetsOutlineFromTrackedEntityTypes,
-    } = await loadTrackedEntityTypes();
+    } = await loadTrackedEntityTypes(trackedEntityTypeIds);
 
     await loadTrackedEntityAttributes([
         ...trackedEntityAttributeIdsFromPrograms,
         ...trackedEntityAttributeIdsFromTrackedEntityTypes,
     ]);
 
-    await loadCategories(categoryIds);
-
-    await loadOptionSets([...optionSetsOutlineFromPrograms, ...optionSetsOutlineFromTrackedEntityTypes]);
+    await loadCategories(categories);
+    await loadOptionSets([
+        ...optionSetsOutlineFromPrograms,
+        ...optionSetsOutlineFromTrackedEntityTypes,
+    ],
+    );
 };

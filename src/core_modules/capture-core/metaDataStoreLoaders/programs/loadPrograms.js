@@ -1,110 +1,148 @@
 // @flow
-import { chunk } from 'capture-core-utils';
+import { chunk, pipe } from 'capture-core-utils';
+import { getContext } from '../context';
 import { queryProgramsOutline } from './queries';
 import {
     storePrograms,
-    storeProgramRules,
-    storeProgramRulesVariables,
-    storeProgramIndicators,
 } from './quickStoreOperations';
-import { getContext } from '../context';
+import { loadRulesCentricMetadata } from './loadRulesCentricMetadata';
 
-async function getMissingPrograms(programsOutline) {
-    const cachedPrograms = {};
+const getCachedProgramsOutline = () => {
     const { storageController, storeNames } = getContext();
-    await Promise.all(
-        programsOutline.map(
-            program => storageController
-                .get(storeNames.PROGRAMS, program.id)
-                .then((cachedProgram) => { cachedPrograms[program.id] = cachedProgram; }),
-        ),
-    );
+    return storageController
+        .getAll(storeNames.PROGRAMS, {
+            project: program => ({
+                id: program.id,
+                version: program.version,
+            }),
+        });
+};
 
-    const missingPrograms = programsOutline.filter((program) => {
-        const cachedProgram = cachedPrograms[program.id];
-        return !cachedProgram || cachedProgram.version !== program.version;
-    });
-    return missingPrograms.length > 0 ? missingPrograms : null;
-}
+const removeUnavailablePrograms = async (apiPrograms, cachePrograms) => {
+    const apiProgramsObject = apiPrograms
+        .reduce((acc, apiProgram) => {
+            acc[apiProgram.id] = apiProgram;
+            return acc;
+        }, {});
 
-// Get option set meta information from api even if the program itself isn't missing.
-// Later in the load option set method, the option set version will be used to check if the cache needs updating.
-function getOptionSetsOutline(programsOutline) {
-    const getProgramStageOptionSets = (programStage) => {
-        const programStageDataElements = programStage.programStageDataElements || [];
-        return programStageDataElements.reduce((accProgramStageOptionSets, programStageDataElement) => {
-            const optionSet = programStageDataElement.dataElement && programStageDataElement.dataElement.optionSet;
-            if (optionSet) {
-                accProgramStageOptionSets.push(optionSet);
-            }
-            return accProgramStageOptionSets;
-        }, []);
-    };
+    const unavailableProgramIds = cachePrograms
+        .filter(cacheProgram => !apiProgramsObject[cacheProgram.id])
+        .map(unavailableProgram => unavailableProgram.id);
 
-    const getProgramOptionSets = (program) => {
-        const programStages = program.programStages || [];
-        return programStages.reduce((accProgramStagesOptionSets, programStage) => [
-            ...accProgramStagesOptionSets, ...getProgramStageOptionSets(programStage),
-        ], []);
-    };
+    if (unavailableProgramIds.length > 0) {
+        const { storageController, storeNames } = getContext();
+        await storageController.remove(storeNames.PROGRAMS, unavailableProgramIds);
+    }
+};
 
-    return programsOutline.reduce((accOptionSets, program) => [
-        ...accOptionSets, ...getProgramOptionSets(program),
-    ], []);
-}
+const getStaleProgramIds = (apiPrograms, cachePrograms) => {
+    const cacheProgramsAsObject = cachePrograms
+        .reduce((acc, cacheProgram) => {
+            acc[cacheProgram.id] = cacheProgram;
+            return acc;
+        }, {});
 
-function getTrackedEntityAttributeIds(missingPrograms) {
-    return missingPrograms
-        ? missingPrograms.reduce((accAttributeIds, program) => {
-            if (program.programTrackedEntityAttributes) {
-                const attributeIds =
-                    program.programTrackedEntityAttributes
+    return apiPrograms
+        .filter((program) => {
+            const cachedProgram = cacheProgramsAsObject[program.id];
+            return !cachedProgram || cachedProgram.version !== program.version;
+        })
+        .map(program => program.id);
+};
+
+const loadProgramBatch = async (programIds) => {
+    const { convertedData: programs = [] } = await storePrograms(programIds);
+    await loadRulesCentricMetadata(programIds);
+    return programs
+        .map(program => ({
+            programTrackedEntityAttributes: program.programTrackedEntityAttributes,
+            categoryCombo: program.categoryCombo,
+            trackedEntityTypeId: program.trackedEntityTypeId,
+        }));
+};
+
+const getSideEffects = (() => {
+    const getOptionSetsOutline = (() => {
+        const getDataElementOptionSets = programStageDataElements =>
+            (programStageDataElements || [])
+                .map(psda => psda.dataElement && psda.dataElement.optionSet)
+                .filter(optionSet => optionSet);
+
+        const getTrackedEntityAttributeOptionSets = programTrackedEntityAttributes =>
+            (programTrackedEntityAttributes || [])
+                .map(ptea => ptea.trackedEntityAttribute && ptea.trackedEntityAttribute.optionSet)
+                .filter(optionSet => optionSet);
+
+        const getProgramOptionSets = (program) => {
+            const dataElementOptionSets = (program.programStages || [])
+                .flatMap(programStage => getDataElementOptionSets(programStage.programStageDataElements));
+
+            return [
+                ...dataElementOptionSets,
+                ...getTrackedEntityAttributeOptionSets(program.programTrackedEntityAttributes),
+            ];
+        };
+
+        return (programsOutline): Array<Object> =>
+            programsOutline
+                .flatMap(program => getProgramOptionSets(program));
+    })();
+
+    const getTrackedEntityAttributeIds = stalePrograms =>
+        pipe(
+            () => stalePrograms
+                .flatMap(program =>
+                    (program.programTrackedEntityAttributes || [])
                         .map(programAttribute => programAttribute.trackedEntityAttributeId)
-                        .filter(TEAId => TEAId);
+                        .filter(TEAId => TEAId),
+                ),
+            attributeIds => [...new Set(attributeIds).values()],
+        )();
 
-                return [...accAttributeIds, ...attributeIds];
-            }
-            return accAttributeIds;
-        }, [])
-        : [];
-}
+    const getCategories = stalePrograms =>
+        pipe(
+            () => stalePrograms
+                .flatMap(program =>
+                    ((program.categoryCombo &&
+                    program.categoryCombo.categories) || []),
+                ),
+            categories => [
+                ...new Map(
+                    categories.map(ic => [ic.id, ic]),
+                ).values(),
+            ],
+        )();
 
-function getCategories(missingPrograms) {
-    return missingPrograms
-        ? missingPrograms.reduce((accCategories, program) => {
-            const programCategories = program.categoryCombo &&
-                program.categoryCombo.categories;
-            return programCategories ? [...accCategories, ...programCategories] : [];
-        }, []) : [];
-}
+    const getTrackedEntityTypes = stalePrograms =>
+        pipe(
+            () => stalePrograms
+                .reduce((acc, program) => {
+                    program.trackedEntityTypeId && acc.add(program.trackedEntityTypeId);
+                    return acc;
+                }, new Set()),
+            trackedEntityTypeIdSet => [...trackedEntityTypeIdSet.values()],
+        )();
 
-async function loadProgramBatch(programBatch) {
-    const programIds = programBatch.map(program => program.id);
-    const { convertedData: programs } = await storePrograms(programIds);
-    await storeProgramRules(programIds);
-    await storeProgramRulesVariables(programIds);
-    await storeProgramIndicators(programIds);
-    return programs;
-}
+    return (programsOutline, stalePrograms) => ({
+        optionSetsOutline: getOptionSetsOutline(programsOutline),
+        trackedEntityAttributeIds: getTrackedEntityAttributeIds(stalePrograms),
+        categories: getCategories(stalePrograms),
+        trackedEntityTypeIds: getTrackedEntityTypes(stalePrograms),
+        changesDetected: stalePrograms.length > 0,
+    });
+})();
 
-export async function loadPrograms() {
-    const programsOutline = await queryProgramsOutline();
-    const optionSetsOutline = getOptionSetsOutline(programsOutline);
-    const missingPrograms = await getMissingPrograms(programsOutline);
+export const loadPrograms = async () => {
+    const apiProgramsOutline = await queryProgramsOutline();
+    const cachedProgramsOutline = await getCachedProgramsOutline();
+    await removeUnavailablePrograms(apiProgramsOutline, cachedProgramsOutline);
+    const staleProgramIds = getStaleProgramIds(apiProgramsOutline, cachedProgramsOutline);
 
-    const programBatches = chunk(missingPrograms, 50);
-    const programGroups = await Promise.all(
+    const programBatches = chunk(staleProgramIds, 50);
+    const programsDataForSideEffects: Array<Object> = (await Promise.all(
         programBatches
             .map(loadProgramBatch),
-    );
+    )).flat(1);
 
-    const missingProgramsWithData = programGroups
-        .filter(programs => programs)
-        // $FlowFixMe
-        .reduce((accPrograms, programs) => ([...accPrograms, ...programs]), []);
-    return {
-        optionSetsOutline,
-        trackedEntityAttributeIds: getTrackedEntityAttributeIds(missingProgramsWithData),
-        categoryIds: getCategories(missingProgramsWithData),
-    };
-}
+    return getSideEffects(apiProgramsOutline, programsDataForSideEffects);
+};

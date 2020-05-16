@@ -45,6 +45,7 @@ function setConfig() {
 
     // Temporary setting some old d2 translations for the d2 ui sharing dialog
     config.i18n.sources.add('i18n/i18n_module_en.properties');
+    return baseUrl;
 }
 
 function isLangRTL(code) {

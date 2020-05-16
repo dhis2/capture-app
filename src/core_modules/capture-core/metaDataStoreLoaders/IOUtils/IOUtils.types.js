@@ -26,3 +26,8 @@ export interface QuickStoreRecursivelyOptions {
     onConvert?: ConvertFn,
     iterationSize?: number,
 }
+
+export interface QueryRecursivelyOptions {
+    onConvert?: ConvertFn,
+    pageSize?: number,
+}

@@ -1,7 +1,7 @@
 // @flow
-import { query } from '../../IOUtils';
+import { queryRecursively } from '../../IOUtils';
 
-export const queryTrackedEntityTypesOutline = async () => {
+export const queryTrackedEntityTypesOutline = async (): Promise<Array<Object>> => {
     const specification = {
         resource: 'trackedEntityTypes',
         params: {
@@ -9,6 +9,6 @@ export const queryTrackedEntityTypesOutline = async () => {
         },
     };
 
-    const response = await query(specification);
-    return (response && response.trackedEntityTypes) || [];
+    return (await queryRecursively(specification, { pageSize: 1000 }))
+        .flatMap(responseItem => (responseItem && responseItem.trackedEntityTypes) || []);
 };

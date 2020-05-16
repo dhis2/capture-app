@@ -57,7 +57,7 @@ const getFieldsQuery = () => 'id,displayName,condition,description,program[id],p
 'programRuleActions[id,content,location,data,programRuleActionType,programStageSection[id],dataElement[id],' +
 'trackedEntityAttribute[id],programStage[id],optionGroup[id],option[id]]';
 
-export const storeProgramRules = (programIds: Array<string>) => {
+export const storeProgramRules = async (programIds: Array<string>) => {
     const query = {
         resource: 'programRules',
         params: {
@@ -65,5 +65,17 @@ export const storeProgramRules = (programIds: Array<string>) => {
             filter: `program.id:in:[${programIds.join(',')}]`,
         },
     };
-    return quickStoreRecursively(query, getContext().storeNames.PROGRAM_RULES, { onConvert: convert });
+
+    let programRuleIds = [];
+    const convertRetainingIds = (response) => {
+        const convertedProgramRules = convert(response);
+        programRuleIds = programRuleIds.concat(
+            convertedProgramRules
+                .map(programRule => programRule.id),
+        );
+        return convertedProgramRules;
+    };
+
+    await quickStoreRecursively(query, getContext().storeNames.PROGRAM_RULES, { onConvert: convertRetainingIds });
+    return programRuleIds;
 };
