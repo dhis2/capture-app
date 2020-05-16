@@ -1,12 +1,9 @@
 // @flow
-import StorageController from 'capture-core-utils/storage/StorageController';
-
 import { chunk } from 'capture-core-utils';
-import { getterTypes, ApiSpecification } from '../../api';
+import { getContext } from '../context';
+import { queryOptionSets, queryOptionGroups } from './queries';
 
-const batchSize = 50;
-
-type InputMeta = {
+type InputOutline = {
     id: string,
     version: string,
 };
@@ -39,73 +36,41 @@ type OptionGroupsByOptionSet = {
     [optionSetId: string]: Array<ApiOptionGroup>
 };
 
+function getOptionGroups(optionSetIds: Array<string>) {
+    const pageSize = 10000;
 
-async function request(specification: ApiSpecification, pageNr: number, pageSize: number) {
-    specification.updateQueryParams({ page: pageNr, pageSize });
+    const request = async (page: number = 1) => {
+        const { optionGroups, hasNextPage } = await queryOptionGroups(optionSetIds, page, pageSize);
+        if (hasNextPage) {
+            const optionGroupsFromPageHierarchy = await request(page += 1);
+            return [...optionGroups, ...optionGroupsFromPageHierarchy];
+        }
 
-    const resultsContainer = await specification.get();
-    const results = resultsContainer && [...resultsContainer.values()];
+        return optionGroups || [];
+    };
 
-    if (results && results.length === pageSize) {
-        const resultsFromPageHierarchy = await request(specification, pageNr += 1, pageSize);
-        return [...results, ...resultsFromPageHierarchy];
-    }
-
-    return results || [];
-}
-
-async function getOptionSetsAsync(
-    ids: Array<string>,
-): Promise<Array<ApiOptionSet>> {
-    const optionSetsApiSpec = new ApiSpecification((o) => {
-        o.modelName = 'optionSets';
-        o.modelGetterType = getterTypes.LIST_WITH_PAGER;
-        o.queryParams = {
-            fields: 'id,displayName,version,valueType,options[id,displayName,code,style, translations]',
-            paging: true,
-            totalPages: false,
-        };
-    });
-    optionSetsApiSpec.setFilter(`id:in:[${ids.toString()}]`);
-    const optionSets = await request(optionSetsApiSpec, 1, 10000);
-    return optionSets;
-}
-
-async function getOptionGroupsAsync(
-    optionSetIds: Array<string>,
-): Promise<Array<ApiOptionGroup>> {
-    const optionGroupsApiSpec = new ApiSpecification((o) => {
-        o.modelName = 'optionGroups';
-        o.modelGetterType = getterTypes.LIST_WITH_PAGER;
-        o.queryParams = {
-            fields: 'id,displayName,options[id],optionSet[id]',
-            paging: true,
-            totalPages: false,
-        };
-    });
-    optionGroupsApiSpec.setFilter(`optionSet.id:in:[${optionSetIds.toString()}]`);
-    const optionGroups = await request(optionGroupsApiSpec, 1, 10000);
-    return optionGroups;
+    return request();
 }
 
 async function getIdsToLoad(
-    optionSetsMeta: Array<InputMeta>,
-    storeName: string,
-    storageController: StorageController,
+    optionSetsOutline: Array<InputOutline>,
 ) {
     const idsToLoad = [];
-    await optionSetsMeta.asyncForEach(async (meta) => {
+    const { storageController, storeNames } = getContext();
+    await optionSetsOutline.asyncForEach(async (outline) => {
         const storeOptionSet = await storageController
-            .get(storeName, meta.id);
+            .get(storeNames.OPTION_SETS, outline.id);
 
-        if (!storeOptionSet || storeOptionSet.version !== meta.version) {
-            idsToLoad.push(meta.id);
+        if (!storeOptionSet || storeOptionSet.version !== outline.version) {
+            idsToLoad.push(outline.id);
         }
     });
     return idsToLoad;
 }
 
-const getGroupsByOptionSet = (groupsByOptionSet: {[optionSetId: string]: Array<ApiOptionGroup>}, optionGroups: Array<ApiOptionGroup>) => optionGroups.reduce((accGroupsByOptionSet, optionGroup) => {
+const getGroupsByOptionSet = (
+    groupsByOptionSet: {[optionSetId: string]: Array<ApiOptionGroup>},
+    optionGroups: Array<ApiOptionGroup>) => optionGroups.reduce((accGroupsByOptionSet, optionGroup) => {
     accGroupsByOptionSet[optionGroup.optionSet.id] = [
         ...(accGroupsByOptionSet[optionGroup.optionSet.id] || []),
         optionGroup,
@@ -141,34 +106,34 @@ const getCacheOptionSets = (optionSets: Array<ApiOptionSet>, optionGroupsByOptio
         })),
     }));
 
-export default async function loadOptionSets(
-    storageController: StorageController,
-    store: string,
-    optionSetsMeta: Array<InputMeta>,
+export async function loadOptionSets(
+    optionSetsOutline: Array<InputOutline>,
 ) {
-    const filteredOptionSetsMeta = optionSetsMeta.reduce((accFilteredOptionSetsMeta, optionSetMeta) => {
-        if (!accFilteredOptionSetsMeta.find(om => om.id === optionSetMeta.id)) {
-            accFilteredOptionSetsMeta.push(optionSetMeta);
+    const filteredOptionSetsOutline = optionSetsOutline.reduce((accFilteredOptionSetsOutline, optionSetMeta) => {
+        if (!accFilteredOptionSetsOutline.find(om => om.id === optionSetMeta.id)) {
+            accFilteredOptionSetsOutline.push(optionSetMeta);
         }
-        return accFilteredOptionSetsMeta;
+        return accFilteredOptionSetsOutline;
     }, []);
-    const optionSetsIds = await getIdsToLoad(filteredOptionSetsMeta, store, storageController);
-    const batchedOptionSetIds = chunk(optionSetsIds, batchSize);
+    const optionSetsIds = await getIdsToLoad(filteredOptionSetsOutline);
+    const batchedOptionSetIds = chunk(optionSetsIds, 50);
 
     const optionSetsBatches = await Promise.all(
         batchedOptionSetIds
-            .map(batch => getOptionSetsAsync(batch)),
+            .map(batch => queryOptionSets(batch)),
     );
 
     const optionGroupsBatches = await Promise.all(
         batchedOptionSetIds
-            .map(batch => getOptionGroupsAsync(batch)),
+            .map(batch => getOptionGroups(batch)),
     );
+
     const optionSets = getOptionSets(optionSetsBatches);
 
     const optionGroupsByOptionSet = getGroupsBatchesByOptionSet(optionGroupsBatches);
 
     const optionSetsToStore = getCacheOptionSets(optionSets, optionGroupsByOptionSet);
 
-    await storageController.setAll(store, optionSetsToStore);
+    const { storageController, storeNames } = getContext();
+    await storageController.setAll(storeNames.OPTION_SETS, optionSetsToStore);
 }

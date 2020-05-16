@@ -3,8 +3,7 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils/errorCreator';
 import StorageController from 'capture-core-utils/storage/StorageController';
 import LocalStorageAdapter from 'capture-core-utils/storage/DomLocalStorageAdapter';
-import { getMainStorageController, getUserStorageController } from '../../storageControllers';
-import { mainStores } from '../../storageControllers/stores';
+import { getContext } from '../context';
 
 const ACCESS_HISTORY_KEY = 'accessHistory';
 const cacheKeepCount = {
@@ -19,6 +18,7 @@ async function addUserCacheToHistory(
     mainStorageController: StorageController,
     userStorageController: StorageController,
 ) {
+    const { parentStoreNames: mainStores } = getContext();
     const currentStorageName = userStorageController.name;
     const historyContainer = await mainStorageController.get(mainStores.USER_CACHES, ACCESS_HISTORY_KEY);
     const history = historyContainer && historyContainer.values;
@@ -59,19 +59,16 @@ async function removeCaches(
                 log.warn(errorCreator(errorMessages.DESTROY_FAILED)({ cache, error }));
             }
         });
-        await mainStorageController.set(mainStores.USER_CACHES, {
+        await mainStorageController.set(getContext().parentStoreNames.USER_CACHES, {
             id: ACCESS_HISTORY_KEY,
             values: remainingHistory,
         });
     }
 }
 
-async function executeUsersCacheMaintenance(
+export async function executeUsersCacheMaintenance(
 ) {
-    const mainStorageController = getMainStorageController();
-    const userStorageController = getUserStorageController();
-    const updatedHistory = await addUserCacheToHistory(mainStorageController, userStorageController);
-    await removeCaches(updatedHistory, mainStorageController);
+    const { storageController, parentStorageController } = getContext();
+    const updatedHistory = await addUserCacheToHistory(parentStorageController, storageController);
+    await removeCaches(updatedHistory, parentStorageController);
 }
-
-export default executeUsersCacheMaintenance;

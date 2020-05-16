@@ -174,7 +174,7 @@ export async function initializeAsync({
 
     // initialize d2
     setConfig();
-    const d2 = await initAsync();
+    const d2 = await initAsync({ schemas: ['organisationUnit'] });
     const userSettings = await getUserSettingsAsync();
     setD2(d2);
     setHeaderBarStrings(d2);

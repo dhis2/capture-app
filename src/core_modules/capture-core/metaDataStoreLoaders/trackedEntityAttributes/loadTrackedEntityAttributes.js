@@ -1,29 +1,18 @@
 // @flow
-import StorageController from 'capture-core-utils/storage/StorageController';
-
 import { chunk } from 'capture-core-utils';
-import trackedEntityAttributesSpec from '../../api/apiSpecifications/trackedEntityAttributes.apiSpecification';
-import getTrackedEntityAttributesLoadSpecification
-    from '../../apiToStore/loadSpecifications/getTrackedEntityAttributesLoadSpecification';
+import { storeTrackedEntityAttributes } from './quickStoreOperations';
 
-const batchSize = 50;
-
-function getTrackedEntityAttributes(ids: Array<number>, store: string, storageController: StorageController) {
-    trackedEntityAttributesSpec.updateQueryParams({
-        filter: `id:in:[${ids.toString()}]`,
-    });
-    return getTrackedEntityAttributesLoadSpecification(store, trackedEntityAttributesSpec).load(storageController);
+function dedupeArray(array: Array<string>) {
+    const set = new Set(array);
+    return Array.from(set);
 }
 
-export default async function loadTrackedEntityAttributesData(
-    storageController: StorageController,
-    store: string,
-    trackedEntityAttributeIds?: ?Array<string>) {
-    const attributeIdBatches = chunk(trackedEntityAttributeIds, batchSize);
+export async function loadTrackedEntityAttributes(
+    trackedEntityAttributeIds: Array<string>) {
+    const attributeIdBatches = chunk(dedupeArray(trackedEntityAttributeIds), 100);
     await Promise.all(
         attributeIdBatches.map(
-            batch =>
-                getTrackedEntityAttributes(batch, store, storageController),
+            ids => storeTrackedEntityAttributes(ids),
         ),
     );
 }

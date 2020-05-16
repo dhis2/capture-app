@@ -1,128 +1,56 @@
 // @flow
-import StorageController from 'capture-core-utils/storage/StorageController';
-
 import { chunk } from 'capture-core-utils';
+import { queryProgramsOutline } from './queries';
+import {
+    storePrograms,
+    storeProgramRules,
+    storeProgramRulesVariables,
+    storeProgramIndicators,
+} from './quickStoreOperations';
+import { getContext } from '../context';
 
-import metaProgramsSpec from '../../api/apiSpecifications/metaPrograms.apiSpecification';
-import programsSpec from '../../api/apiSpecifications/programs.apiSpecification';
-import programRulesSpec from '../../api/apiSpecifications/programRules.apiSpecification';
-import programRulesVariablesSpec from '../../api/apiSpecifications/programRulesVariables.apiSpecification';
-import programIndicatorsSpec from '../../api/apiSpecifications/programIndicators.apiSpecification';
-
-import getProgramsLoadSpecification from '../../apiToStore/loadSpecifications/getProgramsLoadSpecification';
-import getProgramRulesLoadSpecification from '../../apiToStore/loadSpecifications/getProgramRulesLoadSpecification';
-import getProgramRulesVariablesLoadSpecification
-    from '../../apiToStore/loadSpecifications/getProgramRulesVariablesLoadSpecification';
-import getProgramIndicatorsLoadSpecification
-    from '../../apiToStore/loadSpecifications/getProgramIndicatorsLoadSpecification';
-
-import programsStoresKeys from './programsStoresKeys';
-
-const batchSize = 50;
-
-async function getMissingPrograms(programs, storageController: StorageController, store: string) {
-    if (!programs) {
-        return null;
-    }
-
-    const storePrograms = {};
+async function getMissingPrograms(programsOutline) {
+    const cachedPrograms = {};
+    const { storageController, storeNames } = getContext();
     await Promise.all(
-        programs.map(
+        programsOutline.map(
             program => storageController
-                .get(store, program.id)
-                .then((storeProgram) => { storePrograms[program.id] = storeProgram; }),
+                .get(storeNames.PROGRAMS, program.id)
+                .then((cachedProgram) => { cachedPrograms[program.id] = cachedProgram; }),
         ),
     );
 
-    const missingPrograms = programs.filter((program) => {
-        const storeProgram = storePrograms[program.id];
-        return !storeProgram || storeProgram.version !== program.version;
+    const missingPrograms = programsOutline.filter((program) => {
+        const cachedProgram = cachedPrograms[program.id];
+        return !cachedProgram || cachedProgram.version !== program.version;
     });
     return missingPrograms.length > 0 ? missingPrograms : null;
 }
 
-function getPrograms(programs, store, storageController) {
-    programsSpec.updateQueryParams({
-        filter: `id:in:[${programs.map(program => program.id).toString()}]`,
-    });
-
-    const programsLoadSpecification = getProgramsLoadSpecification(store, programsSpec);
-    return programsLoadSpecification.load(storageController);
-}
-
-function getProgramIndicators(programs, store, storageController) {
-    programIndicatorsSpec.updateQueryParams({
-        // $FlowSuppress
-        filter: `program.id:in:[${programs.map(program => program.id).toString()}]`,
-    });
-
-    return getProgramIndicatorsLoadSpecification(store, programIndicatorsSpec).load(storageController);
-}
-
-function getProgramRules(programs, store, storageController) {
-    programRulesSpec.updateQueryParams({
-        // $FlowSuppress
-        filter: `program.id:in:[${programs.map(program => program.id).toString()}]`,
-    });
-
-    return getProgramRulesLoadSpecification(store, programRulesSpec).load(storageController);
-}
-
-function getProgramRulesVariables(programs, store, storageController) {
-    programRulesVariablesSpec.updateQueryParams({
-        // $FlowSuppress
-        filter: `program.id:in:[${programs.map(program => program.id).toString()}]`,
-    });
-
-    return getProgramRulesVariablesLoadSpecification(store, programRulesVariablesSpec).load(storageController);
-}
-
 // Get option set meta information from api even if the program itself isn't missing.
 // Later in the load option set method, the option set version will be used to check if the cache needs updating.
-function getOptionSetsMeta(metaPrograms) {
-    if (!metaPrograms) {
-        return [];
-    }
-
-    const getProgramStageOptionsMeta = (programStage) => {
-        const prStDes = programStage.programStageDataElements;
-        if (!prStDes) {
-            return null;
-        }
-        const programStageOptionSetsMeta = prStDes.reduce((accProgramStageOptionSetsMeta, prStDe) => {
-            const optionSet = prStDe.dataElement && prStDe.dataElement.optionSet;
+function getOptionSetsOutline(programsOutline) {
+    const getProgramStageOptionSets = (programStage) => {
+        const programStageDataElements = programStage.programStageDataElements || [];
+        return programStageDataElements.reduce((accProgramStageOptionSets, programStageDataElement) => {
+            const optionSet = programStageDataElement.dataElement && programStageDataElement.dataElement.optionSet;
             if (optionSet) {
-                accProgramStageOptionSetsMeta.push(optionSet);
+                accProgramStageOptionSets.push(optionSet);
             }
-            return accProgramStageOptionSetsMeta;
+            return accProgramStageOptionSets;
         }, []);
-
-        return programStageOptionSetsMeta.length > 0 ? programStageOptionSetsMeta : null;
     };
 
-    const getProgramStagesOptionsMeta = (programStages) => {
-        const programStagesOptionSetsMeta = programStages.reduce((accProgramStagesOptionSetsMeta, programStage) => {
-            const programStageOptionSetsMeta = getProgramStageOptionsMeta(programStage);
-            if (programStageOptionSetsMeta) {
-                accProgramStagesOptionSetsMeta = [...accProgramStagesOptionSetsMeta, ...programStageOptionSetsMeta];
-            }
-            return accProgramStagesOptionSetsMeta;
-        }, []);
-        return programStagesOptionSetsMeta.length > 0 ? programStagesOptionSetsMeta : null;
+    const getProgramOptionSets = (program) => {
+        const programStages = program.programStages || [];
+        return programStages.reduce((accProgramStagesOptionSets, programStage) => [
+            ...accProgramStagesOptionSets, ...getProgramStageOptionSets(programStage),
+        ], []);
     };
 
-    const optionSetsMeta = metaPrograms.reduce((accOptionSetsMeta, program) => {
-        if (program.programStages) {
-            const programStages = [...program.programStages.values()];
-            const programStagesOptionSetsMeta = getProgramStagesOptionsMeta(programStages);
-            if (programStagesOptionSetsMeta) {
-                accOptionSetsMeta = [...accOptionSetsMeta, ...programStagesOptionSetsMeta];
-            }
-        }
-        return accOptionSetsMeta;
-    }, []);
-
-    return optionSetsMeta;
+    return programsOutline.reduce((accOptionSets, program) => [
+        ...accOptionSets, ...getProgramOptionSets(program),
+    ], []);
 }
 
 function getTrackedEntityAttributeIds(missingPrograms) {
@@ -150,36 +78,32 @@ function getCategories(missingPrograms) {
         }, []) : [];
 }
 
-export default async function loadProgramsData(storageController: StorageController, stores: Object) {
-    const metaPrograms = await metaProgramsSpec.get();
-    const optionSetsMeta = getOptionSetsMeta(metaPrograms);
-    const missingPrograms = await getMissingPrograms(
-        metaPrograms,
-        storageController,
-        stores[programsStoresKeys.PROGRAMS],
-    );
+async function loadProgramBatch(programBatch) {
+    const programIds = programBatch.map(program => program.id);
+    const { convertedData: programs } = await storePrograms(programIds);
+    await storeProgramRules(programIds);
+    await storeProgramRulesVariables(programIds);
+    await storeProgramIndicators(programIds);
+    return programs;
+}
 
-    const programBatches = chunk(missingPrograms, batchSize);
+export async function loadPrograms() {
+    const programsOutline = await queryProgramsOutline();
+    const optionSetsOutline = getOptionSetsOutline(programsOutline);
+    const missingPrograms = await getMissingPrograms(programsOutline);
+
+    const programBatches = chunk(missingPrograms, 50);
     const programGroups = await Promise.all(
-        programBatches.map(
-            batch =>
-                getPrograms(batch, stores[programsStoresKeys.PROGRAMS], storageController)
-                    .then(programs =>
-                        getProgramRules(programs, stores[programsStoresKeys.PROGRAM_RULES], storageController)
-                            .then(() => getProgramRulesVariables(programs, stores[programsStoresKeys.PROGRAM_RULES_VARIABLES], storageController))
-                            .then(() => getProgramIndicators(programs, stores[programsStoresKeys.PROGRAM_INDICATORS], storageController))
-                            .then(() => programs),
-                    ),
-        ),
+        programBatches
+            .map(loadProgramBatch),
     );
 
     const missingProgramsWithData = programGroups
         .filter(programs => programs)
         // $FlowFixMe
         .reduce((accPrograms, programs) => ([...accPrograms, ...programs]), []);
-
     return {
-        optionSetsMeta,
+        optionSetsOutline,
         trackedEntityAttributeIds: getTrackedEntityAttributeIds(missingProgramsWithData),
         categoryIds: getCategories(missingProgramsWithData),
     };
