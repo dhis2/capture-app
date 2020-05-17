@@ -135,7 +135,7 @@ msgid "Yes"
 msgstr "نعم"
 
 msgid "mm/dd/yyyy"
-msgstr ""
+msgstr "mm/dd/yyyy"
 
 msgid "Years"
 msgstr "السنوات"
