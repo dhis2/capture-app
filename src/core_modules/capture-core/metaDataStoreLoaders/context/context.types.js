@@ -19,7 +19,7 @@ type StoreNames = {
     REDUX_PERSIST: string,
 };
 
-type ParentStoreNames = {
+type ApplicationStoreNames = {
     USER_CACHES: string,
     STATUS: string,
     SYSTEM_SETTINGS: string,
@@ -28,7 +28,7 @@ type ParentStoreNames = {
 export type ContextInput = {
     onQueryApi: QueryApiFn,
     storageController: StorageController,
-    parentStorageController: StorageController,
+    applicationStorageController: StorageController,
     storeNames: StoreNames,
-    parentStoreNames: ParentStoreNames,
+    applicationStoreNames: ApplicationStoreNames,
 };

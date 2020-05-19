@@ -6,18 +6,18 @@ let context;
 export const provideContext = async ({
     onQueryApi,
     storageController,
-    parentStorageController,
+    applicationStorageController,
     storeNames,
-    parentStoreNames,
+    applicationStoreNames,
 }: ContextInput,
     callback: Function,
 ) => {
     context = {
         onQueryApi,
         storageController,
-        parentStorageController,
+        applicationStorageController,
         storeNames,
-        parentStoreNames,
+        applicationStoreNames,
     };
     await callback();
     context = null;

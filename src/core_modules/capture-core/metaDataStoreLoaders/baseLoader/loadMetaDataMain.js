@@ -9,7 +9,7 @@ export const loadMetaData = (onQueryApi: QueryApiFn) =>
     provideContext({
         onQueryApi,
         storageController: getUserStorageController(),
-        parentStorageController: getMainStorageController(),
+        applicationStorageController: getMainStorageController(),
         storeNames: userStores,
-        parentStoreNames: mainStores,
+        applicationStoreNames: mainStores,
     }, loadMetaDataInternal);

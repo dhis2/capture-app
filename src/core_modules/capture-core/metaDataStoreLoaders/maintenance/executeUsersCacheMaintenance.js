@@ -18,7 +18,7 @@ async function addUserCacheToHistory(
     mainStorageController: StorageController,
     userStorageController: StorageController,
 ) {
-    const { parentStoreNames: mainStores } = getContext();
+    const { applicationStoreNames: mainStores } = getContext();
     const currentStorageName = userStorageController.name;
     const historyContainer = await mainStorageController.get(mainStores.USER_CACHES, ACCESS_HISTORY_KEY);
     const history = historyContainer && historyContainer.values;
@@ -59,7 +59,7 @@ async function removeCaches(
                 log.warn(errorCreator(errorMessages.DESTROY_FAILED)({ cache, error }));
             }
         });
-        await mainStorageController.set(getContext().parentStoreNames.USER_CACHES, {
+        await mainStorageController.set(getContext().applicationStoreNames.USER_CACHES, {
             id: ACCESS_HISTORY_KEY,
             values: remainingHistory,
         });
@@ -68,7 +68,7 @@ async function removeCaches(
 
 export async function executeUsersCacheMaintenance(
 ) {
-    const { storageController, parentStorageController } = getContext();
-    const updatedHistory = await addUserCacheToHistory(parentStorageController, storageController);
-    await removeCaches(updatedHistory, parentStorageController);
+    const { storageController, applicationStorageController } = getContext();
+    const updatedHistory = await addUserCacheToHistory(applicationStorageController, storageController);
+    await removeCaches(updatedHistory, applicationStorageController);
 }
