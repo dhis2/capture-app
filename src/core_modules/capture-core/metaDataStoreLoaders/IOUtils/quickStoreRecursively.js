@@ -3,27 +3,14 @@ import { quickStore } from './quickStore';
 import type {
     ApiQuery,
     StoreName,
-    ConvertFn,
     QuickStoreRecursivelyOptions,
 } from './IOUtils.types';
-
-type ExecuteOptions = {
-    onConvert?: ConvertFn,
-};
-
-type Variables = {
-    iteration: number,
-};
-
-type RecursiveQuery = {
-    ...ApiQuery,
-    params?: (variables: Variables) => Object,
-};
-
-type QuickStoreIterationOptions = {
-    variables: Variables,
-    onConvert?: ConvertFn,
-};
+import type {
+    Variables,
+    RecursiveQuery,
+    QuickStoreIterationOptions,
+    ExecuteOptions,
+} from './quickStoreRecursively.types';
 
 const quickStoreIteration = async (
     recursiveQuery: RecursiveQuery,
