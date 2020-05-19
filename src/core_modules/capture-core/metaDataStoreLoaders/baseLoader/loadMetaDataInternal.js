@@ -11,15 +11,13 @@ import { loadCategories } from '../categories';
 import { loadOptionSets } from '../optionSets';
 import { executeUsersCacheMaintenance } from '../maintenance';
 
-const coreStoreOperations = [
-    storeConstants,
-    storeOrgUnitLevels,
-    storeRelationshipTypes,
-];
-
 async function loadCoreMetaData() {
     return Promise.all(
-        coreStoreOperations.map(operation => operation()),
+        [
+            storeConstants,
+            storeOrgUnitLevels,
+            storeRelationshipTypes,
+        ].map(operation => operation()),
     );
 }
 export const loadMetaDataInternal = async () => {
