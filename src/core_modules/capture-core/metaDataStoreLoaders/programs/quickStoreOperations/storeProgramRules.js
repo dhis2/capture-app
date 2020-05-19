@@ -44,6 +44,7 @@ const convert = (() => {
         return apiProgramRules
             .map(apiProgramRule => ({
                 ...apiProgramRule,
+                // Adding the program id and program stage id directly to the main object instead of using the container object with id as the only property
                 program: undefined,
                 programStage: undefined,
                 programId: apiProgramRule.program && apiProgramRule.program.id,
