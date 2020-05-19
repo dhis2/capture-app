@@ -1,2 +1,2 @@
 // @flow
-export { loadWithContext } from './loadWithContext';
+export { loadMetaData } from './loadMetaDataMain';

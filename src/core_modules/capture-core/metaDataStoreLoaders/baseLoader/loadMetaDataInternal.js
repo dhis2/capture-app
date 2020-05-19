@@ -22,7 +22,7 @@ async function loadCoreMetaData() {
         coreStoreOperations.map(operation => operation()),
     );
 }
-export const loadMetaData = async () => {
+export const loadMetaDataInternal = async () => {
     await executeUsersCacheMaintenance();
     const {
         optionSetsOutline: optionSetsOutlineFromPrograms,
