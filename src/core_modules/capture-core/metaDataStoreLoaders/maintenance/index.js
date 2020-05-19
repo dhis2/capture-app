@@ -1,2 +1,2 @@
 // @flow
-export { executeUsersCacheMaintenance } from './usersCacheMaintenance';
+export { executeUsersCacheMaintenance } from './executeUsersCacheMaintenance';
