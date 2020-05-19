@@ -1,11 +1,11 @@
 // @flow
 import type {
     ApiQuery,
-    ConvertFn,
+    ConvertQueryResponseFn,
 } from './IOUtils.types';
 
 export type ExecuteOptions = {
-    onConvert?: ConvertFn,
+    onConvertQueryResponse?: ConvertQueryResponseFn,
 };
 
 export type Variables = {
@@ -19,5 +19,5 @@ export type RecursiveQuery = {
 
 export type QuickStoreIterationOptions = {
     variables: Variables,
-    onConvert?: ConvertFn,
+    onConvertQueryResponse?: ConvertQueryResponseFn,
 };

@@ -17,11 +17,11 @@ const quickStoreIteration = async (
     storeName: StoreName,
     {
         variables,
-        onConvert,
+        onConvertQueryResponse,
     }: QuickStoreIterationOptions,
 ) => {
     const { rawResponse } = await quickStore(recursiveQuery, storeName, {
-        onConvert,
+        onConvertQueryResponse,
         variables,
     });
 
@@ -32,11 +32,11 @@ const executeRecursiveQuickStore = (
     recursiveQuery: RecursiveQuery,
     storeName: StoreName,
     {
-        onConvert,
+        onConvertQueryResponse,
     }: ExecuteOptions) => {
     const next = async (iteration: number = 1) => {
         const done = await quickStoreIteration(recursiveQuery, storeName, {
-            onConvert,
+            onConvertQueryResponse,
             variables: {
                 iteration,
             },
@@ -64,10 +64,10 @@ export const quickStoreRecursively = async (
     storeName: StoreName,
     {
         iterationSize = 500,
-        onConvert,
+        onConvertQueryResponse,
     }: QuickStoreRecursivelyOptions) => {
     const recursiveQuery = getRecursiveQuery(query, iterationSize);
     await executeRecursiveQuickStore(recursiveQuery, storeName, {
-        onConvert,
+        onConvertQueryResponse,
     });
 };
