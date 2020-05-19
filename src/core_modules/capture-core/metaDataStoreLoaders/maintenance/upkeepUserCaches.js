@@ -66,7 +66,7 @@ async function removeCaches(
     }
 }
 
-export async function executeUsersCacheMaintenance(
+export async function upkeepUserCaches(
 ) {
     const { storageController, applicationStorageController } = getContext();
     const updatedHistory = await addUserCacheToHistory(applicationStorageController, storageController);
