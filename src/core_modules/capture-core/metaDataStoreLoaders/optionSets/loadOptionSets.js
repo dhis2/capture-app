@@ -36,7 +36,7 @@ type OptionGroupsByOptionSet = {
     [optionSetId: string]: Array<ApiOptionGroup>
 };
 
-function getOptionGroups(optionSetIds: Array<string>) {
+const getOptionGroups = (optionSetIds: Array<string>) => {
     const pageSize = 10000;
 
     const request = async (page: number = 1) => {
@@ -50,7 +50,7 @@ function getOptionGroups(optionSetIds: Array<string>) {
     };
 
     return request();
-}
+};
 
 async function getIdsToLoad(
     optionSetsOutline: Array<InputOutline>,
