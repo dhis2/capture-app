@@ -42,5 +42,5 @@ export const storeProgramRulesVariables = (programIds: Array<string>) => {
             filter: `program.id:in:[${programIds.join(',')}]`,
         },
     };
-    return quickStoreRecursively(query, getContext().storeNames.PROGRAM_RULES_VARIABLES, { onConvert: convert });
+    return quickStoreRecursively(query, getContext().storeNames.PROGRAM_RULES_VARIABLES, { onConvertQueryResponse: convert });
 };

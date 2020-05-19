@@ -39,6 +39,6 @@ export const storeTrackedEntityTypes = (() => {
             },
         };
 
-        return quickStore(query, getContext().storeNames.TRACKED_ENTITY_TYPES, { onConvert: convert });
+        return quickStore(query, getContext().storeNames.TRACKED_ENTITY_TYPES, { onConvertQueryResponse: convert });
     };
 })();

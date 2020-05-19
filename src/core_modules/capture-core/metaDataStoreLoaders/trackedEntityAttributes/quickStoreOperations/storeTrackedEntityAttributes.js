@@ -15,5 +15,5 @@ export const storeTrackedEntityAttributes = (ids: Array<string>) => {
 
     const convert = response => response && response.trackedEntityAttributes;
 
-    return quickStore(query, getContext().storeNames.TRACKED_ENTITY_ATTRIBUTES, { onConvert: convert });
+    return quickStore(query, getContext().storeNames.TRACKED_ENTITY_ATTRIBUTES, { onConvertQueryResponse: convert });
 };

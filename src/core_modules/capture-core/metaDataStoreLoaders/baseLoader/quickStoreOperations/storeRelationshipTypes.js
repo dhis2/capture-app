@@ -12,5 +12,5 @@ export const storeRelationshipTypes = () => {
 
     const convert = response => response.relationshipTypes;
 
-    return quickStoreRecursively(query, getContext().storeNames.RELATIONSHIP_TYPES, { onConvert: convert });
+    return quickStoreRecursively(query, getContext().storeNames.RELATIONSHIP_TYPES, { onConvertQueryResponse: convert });
 };
