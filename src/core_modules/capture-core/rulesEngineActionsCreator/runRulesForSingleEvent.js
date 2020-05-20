@@ -1,6 +1,6 @@
 // @flow
 import log from 'loglevel';
-import { processTypes, RulesEngine } from '../../capture-core-utils/RulesEngine';
+import { RulesEngine } from '../../capture-core-utils/RulesEngine';
 import { errorCreator } from '../../capture-core-utils';
 import { Program, EventProgram, RenderFoundation, DataElement } from '../metaData';
 import constantsStore from '../metaDataMemoryStores/constants/constants.store';
@@ -89,7 +89,6 @@ function prepare(
 }
 
 export default function runRulesForSingleEvent(
-    rulesEngine: RulesEngine,
     program: ?Program,
     foundation: ?RenderFoundation,
     orgUnit: OrgUnit,
@@ -109,17 +108,12 @@ export default function runRulesForSingleEvent(
         } = data;
 
         // returns an array of effects that need to take place in the UI.
-        return rulesEngine.executeRules(
+        return RulesEngine.programRuleEffectsForEvent(
             { programRulesVariables, programRules, constants },
-            currentEvent,
-            allEvents,
+            { currentEvent, allEvents },
             dataElementsInProgram,
-            null,
-            null,
-            null,
             orgUnit,
             optionSets,
-            processTypes.EVENT,
         );
     }
     return null;
