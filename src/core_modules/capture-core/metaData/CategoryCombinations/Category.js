@@ -1,6 +1,6 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-import isFunction from 'd2-utilizr/src/isFunction';
+import isFunction from 'd2-utilizr/lib/isFunction';
 
 export default class Category {
     _name: string;

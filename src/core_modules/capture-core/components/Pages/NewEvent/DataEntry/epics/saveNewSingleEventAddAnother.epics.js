@@ -1,6 +1,6 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
-import uuid from 'd2-utilizr/src/uuid';
+import uuid from 'd2-utilizr/lib/uuid';
 import {
     actionTypes as newEventDataEntryActionTypes,
     batchActionTypes as newEventDataEntryBatchActionTypes,

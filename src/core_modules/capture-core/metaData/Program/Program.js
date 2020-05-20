@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-restricted-syntax */
 import { errorCreator } from 'capture-core-utils';
-import isFunction from 'd2-utilizr/src/isFunction';
+import isFunction from 'd2-utilizr/lib/isFunction';
 import type { ProgramRule, ProgramRuleVariable } from 'capture-core-utils/RulesEngine/rulesEngine.types';
 import CategoryCombination from '../CategoryCombinations/CategoryCombination';
 import Icon from '../Icon/Icon';
