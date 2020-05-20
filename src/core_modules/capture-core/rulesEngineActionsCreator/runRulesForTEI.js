@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from '../../capture-core-utils';
-import { RulesEngine, processTypes } from '../../capture-core-utils/RulesEngine';
+import { RulesEngine } from '../../capture-core-utils/RulesEngine';
 import { TrackerProgram, DataElement, RenderFoundation } from '../metaData';
 import constantsStore from '../metaDataMemoryStores/constants/constants.store';
 import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store';
@@ -103,7 +103,6 @@ function prepare(
 }
 
 export default function runRulesForTEI(
-    rulesEngine: RulesEngine,
     program: ?TrackerProgram,
     foundation: ?RenderFoundation,
     orgUnit: Object,
@@ -123,17 +122,13 @@ export default function runRulesForTEI(
         } = data;
 
         // returns an array of effects that need to take place in the UI.
-        return rulesEngine.executeRules(
+        return RulesEngine.programRuleEffectsForTEI(
             { programRulesVariables, programRules, constants },
-            {},
-            null,
-            null,
             enrollmentData,
             teiValues,
             trackedEntityAttributes,
             orgUnit,
             optionSets,
-            processTypes.TEI,
         );
     }
     return null;

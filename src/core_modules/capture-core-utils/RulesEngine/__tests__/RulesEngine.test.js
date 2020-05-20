@@ -1,19 +1,19 @@
 import runRulesForSingleEvent from '../../../capture-core/rulesEngineActionsCreator/runRulesForSingleEvent';
-import { RulesEngine, processTypes } from '../index';
+import { RulesEngine } from '../index';
 
 describe('rules engine', () => {
-    const allEventsData = null;
-    const currentEvent = null;
+    const currentEvent = {};
+    const allEvents = { all: [], byStage: {} };
+    const orgUnit = { id: 'DiszpKrYNg8', code: 'Ngelehun CHC' };
 
     describe.each([
         {
             program: {
                 programRules: [{ id: 'GC4gpdoSD4r', condition: '#{hemoglobin} < 9', description: 'Show warning if hemoglobin is dangerously low', displayName: 'Hemoglobin warning', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'suS9GnraCx1', content: 'Hemoglobin value lower than normal', dataElementId: 'vANAXwtLwcT', programRuleActionType: 'SHOWWARNING' }] }, { id: 'dahuKlP7jR2', condition: '#{hemoglobin} > 99', description: 'Show error for hemoglobin value higher than 99', displayName: 'Show error for high hemoglobin value', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'UUwZWS8uirn', content: 'The hemoglobin value cannot be above 99', dataElementId: 'vANAXwtLwcT', programRuleActionType: 'SHOWERROR' }] }, { id: 'hk30qiUJYUR', condition: '#{Christos } == true', displayName: 'Christos Rules', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'eotNEY9CWxU', content: 'SAY YES', dataElementId: 'Ok9OQpitjQr', programRuleActionType: 'SHOWERROR' }] }, { id: 'xOe5qCzRS0Y', condition: '!#{womanSmoking} ', description: 'Hide smoking cessation councelling dataelement unless patient is smoking', displayName: 'Hide smoking cessation councelling', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'hwgyO59SSxu', dataElementId: 'Ok9OQpitjQr', programRuleActionType: 'HIDEFIELD' }] }],
-                programRuleVariables: [{ id: 'DINatbKMS71', dataElementId: 'Ok9OQpitjQr', displayName: 'Christos ', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: true }, { id: 'Z92dJO9gIje', dataElementId: 'sWoqcoByYmD', displayName: 'womanSmoking', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'omrL0gtPpDL', dataElementId: 'vANAXwtLwcT', displayName: 'hemoglobin', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }],
+                programRuleVariables: [{ id: 'Z92dJO9gIje', dataElementId: 'sWoqcoByYmD', displayName: 'womanSmoking', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'omrL0gtPpDL', dataElementId: 'vANAXwtLwcT', displayName: 'hemoglobin', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }],
                 id: 'lxAQ7Zs9VYR',
             },
             foundation: { programRules: [] },
-            orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
         },
         {
             program: {
@@ -22,7 +22,6 @@ describe('rules engine', () => {
                 id: 'lxAQ7Zs9VYR',
             },
             foundation: { programRules: [] },
-            orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
         },
         {
             program: {
@@ -31,18 +30,14 @@ describe('rules engine', () => {
                 id: 'MoUd5BTQ3lY',
             },
             foundation: { programRules: [] },
-            orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
         },
         {
             program: null,
             foundation: null,
-            orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
         },
-    ])('where the default values', ({ program, foundation, orgUnit }) => {
+    ])('where the default values', ({ program, foundation }) => {
         test('Tests on runRulesForSingleEvent function', () => {
-            const rulesEngine = new RulesEngine();
-
-            const rulesEffects = runRulesForSingleEvent(rulesEngine, program, foundation, orgUnit, currentEvent, allEventsData);
+            const rulesEffects = runRulesForSingleEvent(program, foundation, orgUnit, currentEvent, allEvents);
 
             expect(rulesEffects).toMatchSnapshot();
         });
@@ -65,24 +60,20 @@ describe('rules engine', () => {
         { vANAXwtLwcT: 99 },
         { vANAXwtLwcT: 100 },
     ])('where value needs to >= 9 and <= 99', (value) => {
-        test(`and given value is ${JSON.stringify(value)}`, () => {
+        test(`and given value(s): ${JSON.stringify(value)}`, () => {
             // given
             const { currentEvent, allEvents } = {
                 currentEvent: value,
                 allEvents: { all: [value], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
-                currentEvent,
-                allEvents,
+                { currentEvent, allEvents },
                 dataElementsInProgram,
-                null, null, null,
                 orgUnit,
                 optionSet,
-                processTypes.EVENT,
             );
 
             // then
@@ -93,25 +84,21 @@ describe('rules engine', () => {
     describe.each([
         { sWoqcoByYmD: true },
         { sWoqcoByYmD: false },
-    ])('area is hidden', (value) => {
-        test(`and given value is ${JSON.stringify(value)}`, () => {
+    ])('where field is hidden regarding a boolean value', (value) => {
+        test(`and given value(s): ${JSON.stringify(value)}`, () => {
             // given
             const { currentEvent, allEvents } = {
                 currentEvent: value,
                 allEvents: { all: [value], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
-                currentEvent,
-                allEvents,
+                { currentEvent, allEvents },
                 dataElementsInProgram,
-                null, null, null,
                 orgUnit,
                 optionSet,
-                processTypes.EVENT,
             );
 
             // then
@@ -133,25 +120,21 @@ describe('rules engine', () => {
         { oZg33kd9taw: 'Female', SWfdB5lX0fk: null },
         { oZg33kd9taw: 'Male', SWfdB5lX0fk: null },
         { oZg33kd9taw: null, SWfdB5lX0fk: null },
-    ])('field will be hidden', (value) => {
-        test(`and given value is ${JSON.stringify(value)}`, () => {
+    ])('where field is hidden regarding the gender of the event', (value) => {
+        test(`and given value(s): ${JSON.stringify(value)}`, () => {
             // given
             const { currentEvent, allEvents } = {
                 currentEvent: value,
                 allEvents: { all: [value], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
-                currentEvent,
-                allEvents,
+                { currentEvent, allEvents },
                 dataElementsInProgram,
-                null, null, null,
                 orgUnit,
                 optionSet,
-                processTypes.EVENT,
             );
 
             // then
@@ -169,24 +152,20 @@ describe('rules engine', () => {
         { qrur9Dvnyt5: 40, GieVkTxp4HH: 180, vV9UWAZohSf: null },
         { qrur9Dvnyt5: 40, GieVkTxp4HH: 180, vV9UWAZohSf: 85 },
     ])('where BMI is calculated', (value) => {
-        test(`and given value is ${JSON.stringify(value)}`, () => {
+        test(`and given value(s): ${JSON.stringify(value)}`, () => {
             // given
             const { currentEvent, allEvents } = {
                 currentEvent: value,
                 allEvents: { all: [value], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
-                currentEvent,
-                allEvents,
+                { currentEvent, allEvents },
                 dataElementsInProgram,
-                null, null, null,
                 orgUnit,
                 optionSet,
-                processTypes.EVENT,
             );
 
             // then
@@ -212,59 +191,395 @@ describe('rules engine', () => {
     describe.each([
         [
             { JGnHr6WI3AY: 'Yes' },
-            [{ type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null }, { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'MkeWrqeqZXL' }, { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'fPV0gQ8ds6D' }, { type: 'HIDEOPTION', id: 'JGnHr6WI3AY', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEOPTION', id: 'p8htbyJHydl', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEOPTION', id: 'CUbZcLm9LyN', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEFIELD', id: 'A4Fg6jgWauf' }, { type: 'HIDEFIELD', id: 'jBBkFuPKctq' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'dUeRcF2cApV' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'bYt4why1tL3' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'xBoo6HyaYcd' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'RCT079wdeKT' }, { type: 'HIDEFIELD', id: 'Z5z8vFQy0w0' }, { type: 'HIDEFIELD', id: 'p8htbyJHydl' }, { type: 'HIDEFIELD', id: 'ovY6E8BSdto' }],
+            [
+                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null },
+                { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'MkeWrqeqZXL' },
+                { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'fPV0gQ8ds6D' },
+                { type: 'HIDEOPTION', id: 'JGnHr6WI3AY', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEOPTION', id: 'p8htbyJHydl', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEOPTION', id: 'CUbZcLm9LyN', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEFIELD', id: 'A4Fg6jgWauf' },
+                { type: 'HIDEFIELD', id: 'jBBkFuPKctq' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'dUeRcF2cApV' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'bYt4why1tL3' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'xBoo6HyaYcd' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'RCT079wdeKT' },
+                { type: 'HIDEFIELD', id: 'Z5z8vFQy0w0' },
+                { type: 'HIDEFIELD', id: 'p8htbyJHydl' },
+                { type: 'HIDEFIELD', id: 'ovY6E8BSdto' },
+            ],
         ],
         [
             { QQLXTXVidW2: 'Yes' },
-            [{ type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: null }, { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null }, { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'MkeWrqeqZXL' }, { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'fPV0gQ8ds6D' }, { type: 'HIDEFIELD', id: 's3eoonJ8OJb' }, { type: 'HIDEOPTION', id: 'JGnHr6WI3AY', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEOPTION', id: 'p8htbyJHydl', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEOPTION', id: 'CUbZcLm9LyN', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEFIELD', id: 'A4Fg6jgWauf' }, { type: 'HIDEFIELD', id: 'jBBkFuPKctq' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'dUeRcF2cApV' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'bYt4why1tL3' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'xBoo6HyaYcd' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'RCT079wdeKT' }, { type: 'HIDEFIELD', id: 'p8htbyJHydl' }],
+            [
+                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: null },
+                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null },
+                { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'MkeWrqeqZXL' },
+                { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'fPV0gQ8ds6D' },
+                { type: 'HIDEFIELD', id: 's3eoonJ8OJb' },
+                { type: 'HIDEOPTION', id: 'JGnHr6WI3AY', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEOPTION', id: 'p8htbyJHydl', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEOPTION', id: 'CUbZcLm9LyN', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEFIELD', id: 'A4Fg6jgWauf' },
+                { type: 'HIDEFIELD', id: 'jBBkFuPKctq' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'dUeRcF2cApV' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'bYt4why1tL3' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'xBoo6HyaYcd' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'RCT079wdeKT' },
+                { type: 'HIDEFIELD', id: 'p8htbyJHydl' },
+            ],
         ],
         [
             { QQLXTXVidW2: 'No' },
-            [{ type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null }, { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Probable Case' }, { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'MkeWrqeqZXL' }, { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'fPV0gQ8ds6D' }, { type: 'HIDEFIELD', id: 's3eoonJ8OJb' }, { type: 'HIDEOPTION', id: 'JGnHr6WI3AY', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEOPTION', id: 'p8htbyJHydl', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEOPTION', id: 'CUbZcLm9LyN', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEFIELD', id: 'A4Fg6jgWauf' }, { type: 'HIDEFIELD', id: 'jBBkFuPKctq' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'dUeRcF2cApV' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'bYt4why1tL3' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'xBoo6HyaYcd' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'RCT079wdeKT' }, { type: 'HIDEFIELD', id: 'p8htbyJHydl' }, { type: 'HIDEFIELD', id: 'ovY6E8BSdto' }],
+            [
+                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null },
+                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Probable Case' },
+                { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'MkeWrqeqZXL' },
+                { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'fPV0gQ8ds6D' },
+                { type: 'HIDEFIELD', id: 's3eoonJ8OJb' },
+                { type: 'HIDEOPTION', id: 'JGnHr6WI3AY', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEOPTION', id: 'p8htbyJHydl', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEOPTION', id: 'CUbZcLm9LyN', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEFIELD', id: 'A4Fg6jgWauf' },
+                { type: 'HIDEFIELD', id: 'jBBkFuPKctq' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'dUeRcF2cApV' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'bYt4why1tL3' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'xBoo6HyaYcd' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'RCT079wdeKT' },
+                { type: 'HIDEFIELD', id: 'p8htbyJHydl' },
+                { type: 'HIDEFIELD', id: 'ovY6E8BSdto' },
+            ],
         ],
         [
             { QQLXTXVidW2: 'Unknown' },
-            [{ type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Suspected Case' }, { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null }, { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'MkeWrqeqZXL' }, { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'fPV0gQ8ds6D' }, { type: 'HIDEFIELD', id: 's3eoonJ8OJb' }, { type: 'HIDEOPTION', id: 'JGnHr6WI3AY', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEOPTION', id: 'p8htbyJHydl', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEOPTION', id: 'CUbZcLm9LyN', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEFIELD', id: 'A4Fg6jgWauf' }, { type: 'HIDEFIELD', id: 'jBBkFuPKctq' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'dUeRcF2cApV' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'bYt4why1tL3' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'xBoo6HyaYcd' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'RCT079wdeKT' }, { type: 'HIDEFIELD', id: 'p8htbyJHydl' }, { type: 'HIDEFIELD', id: 'ovY6E8BSdto' }],
+            [
+                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Suspected Case' },
+                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null },
+                { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'MkeWrqeqZXL' },
+                { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'fPV0gQ8ds6D' },
+                { type: 'HIDEFIELD', id: 's3eoonJ8OJb' },
+                { type: 'HIDEOPTION', id: 'JGnHr6WI3AY', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEOPTION', id: 'p8htbyJHydl', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEOPTION', id: 'CUbZcLm9LyN', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEFIELD', id: 'A4Fg6jgWauf' },
+                { type: 'HIDEFIELD', id: 'jBBkFuPKctq' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'dUeRcF2cApV' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'bYt4why1tL3' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'xBoo6HyaYcd' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'RCT079wdeKT' },
+                { type: 'HIDEFIELD', id: 'p8htbyJHydl' },
+                { type: 'HIDEFIELD', id: 'ovY6E8BSdto' },
+            ],
         ],
         [
             { CUbZcLm9LyN: 'Yes' },
-            [{ type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null }, { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'MkeWrqeqZXL' }, { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'fPV0gQ8ds6D' }, { type: 'HIDEFIELD', id: 's3eoonJ8OJb' }, { type: 'HIDEOPTION', id: 'JGnHr6WI3AY', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEOPTION', id: 'p8htbyJHydl', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEOPTION', id: 'CUbZcLm9LyN', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEFIELD', id: 'A4Fg6jgWauf' }, { type: 'HIDEFIELD', id: 'jBBkFuPKctq' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'dUeRcF2cApV' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'bYt4why1tL3' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'xBoo6HyaYcd' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'RCT079wdeKT' }, { type: 'HIDEFIELD', id: 'Z5z8vFQy0w0' }, { type: 'HIDEFIELD', id: 'ovY6E8BSdto' }],
+            [
+                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null },
+                { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'MkeWrqeqZXL' },
+                { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'fPV0gQ8ds6D' },
+                { type: 'HIDEFIELD', id: 's3eoonJ8OJb' },
+                { type: 'HIDEOPTION', id: 'JGnHr6WI3AY', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEOPTION', id: 'p8htbyJHydl', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEOPTION', id: 'CUbZcLm9LyN', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEFIELD', id: 'A4Fg6jgWauf' },
+                { type: 'HIDEFIELD', id: 'jBBkFuPKctq' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'dUeRcF2cApV' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'bYt4why1tL3' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'xBoo6HyaYcd' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'RCT079wdeKT' },
+                { type: 'HIDEFIELD', id: 'Z5z8vFQy0w0' },
+                { type: 'HIDEFIELD', id: 'ovY6E8BSdto' },
+            ],
         ],
         [
             { QQLXTXVidW2: 'Yes', ovY6E8BSdto: 'Inconclusive' },
-            [{ type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null }, { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Probable Case' }, { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'MkeWrqeqZXL' }, { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'fPV0gQ8ds6D' }, { type: 'HIDEFIELD', id: 's3eoonJ8OJb' }, { type: 'HIDEOPTION', id: 'JGnHr6WI3AY', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEOPTION', id: 'p8htbyJHydl', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEOPTION', id: 'CUbZcLm9LyN', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEFIELD', id: 'A4Fg6jgWauf' }, { type: 'HIDEFIELD', id: 'jBBkFuPKctq' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'dUeRcF2cApV' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'bYt4why1tL3' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'xBoo6HyaYcd' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'RCT079wdeKT' }, { type: 'HIDEFIELD', id: 'p8htbyJHydl' }],
+            [
+                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null },
+                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Probable Case' },
+                { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'MkeWrqeqZXL' },
+                { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'fPV0gQ8ds6D' },
+                { type: 'HIDEFIELD', id: 's3eoonJ8OJb' },
+                { type: 'HIDEOPTION', id: 'JGnHr6WI3AY', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEOPTION', id: 'p8htbyJHydl', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEOPTION', id: 'CUbZcLm9LyN', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEFIELD', id: 'A4Fg6jgWauf' },
+                { type: 'HIDEFIELD', id: 'jBBkFuPKctq' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'dUeRcF2cApV' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'bYt4why1tL3' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'xBoo6HyaYcd' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'RCT079wdeKT' },
+                { type: 'HIDEFIELD', id: 'p8htbyJHydl' },
+            ],
         ],
         [
             { QQLXTXVidW2: 'Yes', ovY6E8BSdto: 'Positive' },
-            [{ type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null }, { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Laboratory Confirmed Case' }, { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'MkeWrqeqZXL' }, { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'fPV0gQ8ds6D' }, { type: 'HIDEFIELD', id: 's3eoonJ8OJb' }, { type: 'HIDEOPTION', id: 'JGnHr6WI3AY', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEOPTION', id: 'p8htbyJHydl', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEOPTION', id: 'CUbZcLm9LyN', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEFIELD', id: 'A4Fg6jgWauf' }, { type: 'HIDEFIELD', id: 'jBBkFuPKctq' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'dUeRcF2cApV' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'bYt4why1tL3' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'xBoo6HyaYcd' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'RCT079wdeKT' }, { type: 'HIDEFIELD', id: 'p8htbyJHydl' }],
+            [
+                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null },
+                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Laboratory Confirmed Case' },
+                { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'MkeWrqeqZXL' },
+                { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'fPV0gQ8ds6D' },
+                { type: 'HIDEFIELD', id: 's3eoonJ8OJb' },
+                { type: 'HIDEOPTION', id: 'JGnHr6WI3AY', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEOPTION', id: 'p8htbyJHydl', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEOPTION', id: 'CUbZcLm9LyN', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEFIELD', id: 'A4Fg6jgWauf' },
+                { type: 'HIDEFIELD', id: 'jBBkFuPKctq' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'dUeRcF2cApV' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'bYt4why1tL3' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'xBoo6HyaYcd' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'RCT079wdeKT' },
+                { type: 'HIDEFIELD', id: 'p8htbyJHydl' },
+            ],
         ],
         [
             { QQLXTXVidW2: 'Yes', ovY6E8BSdto: 'Negative' },
-            [{ type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Suspected Case' }, { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null }, { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'MkeWrqeqZXL' }, { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'fPV0gQ8ds6D' }, { type: 'HIDEFIELD', id: 's3eoonJ8OJb' }, { type: 'HIDEOPTION', id: 'JGnHr6WI3AY', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEOPTION', id: 'p8htbyJHydl', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEOPTION', id: 'CUbZcLm9LyN', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEFIELD', id: 'A4Fg6jgWauf' }, { type: 'HIDEFIELD', id: 'jBBkFuPKctq' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'dUeRcF2cApV' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'bYt4why1tL3' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'xBoo6HyaYcd' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'RCT079wdeKT' }, { type: 'HIDEFIELD', id: 'p8htbyJHydl' }],
+            [
+                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Suspected Case' },
+                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null },
+                { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'MkeWrqeqZXL' },
+                { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'fPV0gQ8ds6D' },
+                { type: 'HIDEFIELD', id: 's3eoonJ8OJb' },
+                { type: 'HIDEOPTION', id: 'JGnHr6WI3AY', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEOPTION', id: 'p8htbyJHydl', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEOPTION', id: 'CUbZcLm9LyN', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEFIELD', id: 'A4Fg6jgWauf' },
+                { type: 'HIDEFIELD', id: 'jBBkFuPKctq' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'dUeRcF2cApV' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'bYt4why1tL3' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'xBoo6HyaYcd' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'RCT079wdeKT' },
+                { type: 'HIDEFIELD', id: 'p8htbyJHydl' },
+            ],
         ],
         [
             { QQLXTXVidW2: 'Yes', ovY6E8BSdto: 'Unknown' },
-            [{ type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Suspected Case' }, { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null }, { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'MkeWrqeqZXL' }, { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'fPV0gQ8ds6D' }, { type: 'HIDEFIELD', id: 's3eoonJ8OJb' }, { type: 'HIDEOPTION', id: 'JGnHr6WI3AY', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEOPTION', id: 'p8htbyJHydl', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEOPTION', id: 'CUbZcLm9LyN', optionId: 'pqxvAQU1z9W' }, { type: 'HIDEFIELD', id: 'A4Fg6jgWauf' }, { type: 'HIDEFIELD', id: 'jBBkFuPKctq' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'dUeRcF2cApV' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'bYt4why1tL3' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'xBoo6HyaYcd' }, { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'RCT079wdeKT' }, { type: 'HIDEFIELD', id: 'p8htbyJHydl' }],
+            [
+                { type: 'ASSIGN', id: 'Z5z8vFQy0w0', value: 'Suspected Case' },
+                { type: 'ASSIGN', id: 'PFXeJV8d7ja', value: null },
+                { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'MkeWrqeqZXL' },
+                { type: 'HIDEOPTION', id: 'ovY6E8BSdto', optionId: 'fPV0gQ8ds6D' },
+                { type: 'HIDEFIELD', id: 's3eoonJ8OJb' },
+                { type: 'HIDEOPTION', id: 'JGnHr6WI3AY', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEOPTION', id: 'p8htbyJHydl', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEOPTION', id: 'CUbZcLm9LyN', optionId: 'pqxvAQU1z9W' },
+                { type: 'HIDEFIELD', id: 'A4Fg6jgWauf' },
+                { type: 'HIDEFIELD', id: 'jBBkFuPKctq' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'dUeRcF2cApV' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'bYt4why1tL3' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'xBoo6HyaYcd' },
+                { type: 'HIDEOPTION', id: 'bOYWVEBaWy6', optionId: 'RCT079wdeKT' },
+                { type: 'HIDEFIELD', id: 'p8htbyJHydl' }],
         ],
-    ])('field will be hidden', (value, expected) => {
-        test(`and given value is ${JSON.stringify(value)}`, () => {
+    ])('where different fields are hidden', (value, expected) => {
+        test(`and given value(s): ${JSON.stringify(value)}`, () => {
             // given
             const { currentEvent, allEvents } = {
                 currentEvent: value,
                 allEvents: { all: [value], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
-                currentEvent,
-                allEvents,
+                { currentEvent, allEvents },
                 dataElementsInProgram,
-                null, null, null,
                 orgUnit,
                 optionSet,
-                processTypes.EVENT,
+            );
+
+            // then
+            expect(rulesEffects).toEqual(expected);
+        });
+    });
+});
+
+
+describe('rules engine effects with functions and effects', () => {
+    // these variables are shared between each test
+    const constants = [{ id: 'Gfd3ppDfq8E', displayName: 'Commodity ordering overhead', value: 5 }, { id: 'bCqvfPR02Im', displayName: 'Pi', value: 3.14 }];
+    const dataElementsInProgram = { oZg33kd9taw: { id: 'oZg33kd9taw', valueType: 'TEXT', optionSetId: 'pC3N9N77UmT' }, SWfdB5lX0fk: { id: 'SWfdB5lX0fk', valueType: 'BOOLEAN' }, qrur9Dvnyt5: { id: 'qrur9Dvnyt5', valueType: 'INTEGER' }, GieVkTxp4HH: { id: 'GieVkTxp4HH', valueType: 'NUMBER' }, vV9UWAZohSf: { id: 'vV9UWAZohSf', valueType: 'INTEGER_POSITIVE' }, eMyVanycQSC: { id: 'eMyVanycQSC', valueType: 'DATE' }, K6uUAvq500H: { id: 'K6uUAvq500H', valueType: 'TEXT', optionSetId: 'eUZ79clX7y1' }, msodh3rEMJa: { id: 'msodh3rEMJa', valueType: 'DATE' }, S33cRBsnXPo: { id: 'S33cRBsnXPo', valueType: 'ORGANISATION_UNIT' }, fWIAEtYVEGk: { id: 'fWIAEtYVEGk', valueType: 'TEXT', optionSetId: 'iDFPKpFTiVw' }, ulD2zW0TIy2: { id: 'ulD2zW0TIy2', valueType: 'FILE_RESOURCE' } };
+    const programRules = [{ id: 'CTzRoPyvf8v', condition: 'true', displayName: 'Testing the functions!', programId: 'eBAyeGv0exc', programRuleActions: [{ id: 'isP0uvT24jf', content: "d2:yearsBetween( '2010-01-28', V{event_date}) =", data: "d2:yearsBetween( '2010-01-28', V{event_date})", programRuleActionType: 'DISPLAYTEXT' }, { id: 'vQCRnX6w9pM', content: 'd2:oizp( -10000000 ) =', data: 'd2:oizp( -10000000 )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'SYAL0GIDnxI', content: 'display age = ', data: '#{age}', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'Xa0tKyNk5YE', content: 'org_unit = ', data: 'V{orgunit_code}', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'JXssEpbJdO2', content: 'd2:right(#{age}, 3) = ', data: 'd2:right(#{age}, 3)', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'o0LLNIYsliy', content: "d2:monthsBetween( '2020-01-28', V{event_date}) = ", data: "d2:monthsBetween( '2020-01-28', V{event_date})", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'k07KnI11Sf4', content: 'd2:left(#{age}, 3) = ', data: 'd2:left(#{age}, 3)', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'OITs4nPfMQ3', content: "d2:split('these-are-testing-values', '-', 2) = ", data: "d2:split('these-are-testing-values', '-', 2)", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'EzkFLDtAxCR', content: 'd2:modulus( 12 , 100 ) = ', data: 'd2:modulus( 12 , 100 )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'RCYEyOly0Mi', content: "d2:countIfValue( 'gender', 'Male' ) = ", data: "d2:countIfValue( 'gender', 'Male' )", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'JTXlmy6K6cf', content: "d2:countIfZeroPos( 'age' ) = ", data: "d2:countIfZeroPos( 'age' )", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'bRnjbxIwIRd', content: 'd2:round( 12.5 ) = ', data: 'd2:round( 12.5 )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'BuEcHNoD98P', content: 'd2:ceil(11.3) = ', data: 'd2:ceil(11.3)', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'Foc3PhzoAVr', content: "d2:count('age') = ", data: "d2:count('age')", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'QpeF2WDjwIV', content: 'd2:addDays( V{current_date}, 1000000 ) = ', data: 'd2:addDays( V{current_date}, 1000000 )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'WJTjezLR4cJ', content: "d2:weeksBetween('2020-01-28', V{event_date} ) = ", data: "d2:weeksBetween('2020-01-28', V{event_date} )", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'YnE4dNJVF2P', content: 'd2:zing( -2 ) = ', data: 'd2:zing( -2 )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'bZsv2cUkbB7', content: 'd2:floor( 11.5 ) =', data: 'd2:floor( 11.5 )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'J8RxAbHlnO3', content: 'd2:oizp( 10000000 ) = ', data: 'd2:oizp( 10000000 )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'NT1wojA2RdT', content: "d2:concatenate( 'dh', 'is', 2, 'is', 'rocking') = ", data: "d2:concatenate( 'dh', 'is', 2, 'is', 'rocking')", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'aqfqAMbmWHM', content: "d2:daysBetween( '2020-01-28', V{event_date}) =", data: "d2:daysBetween( '2020-01-28', V{event_date})", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'NUGe7EUVouK', content: "d2:substring('hello dhis 2', 6, 10) = ", data: "d2:substring('hello dhis 2', 6, 10)", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'Ma6nCIGrBrd', content: "d2:length( 'dhis2 rocks' ) = ", data: "d2:length( 'dhis2 rocks' )", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'RRSDsxWiUMc', content: 'd2:round( 0 ) = ', data: 'd2:round( 0 )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'QUe0Pks4ckc', content: "d2:countIfValue( 'age', 1 ) = ", data: "d2:countIfValue( 'age', 1 )", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'sHaE1YI0ur2', content: 'd2:zing( 1000 ) = ', data: 'd2:zing( 1000 )', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'EojHcBMpW7q', content: "d2:hasValue( 'age' ) = ", data: "d2:hasValue( 'age' )", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }] }];
+    const programRulesVariables = [{ id: 'RycV5uDi66i', dataElementId: 'qrur9Dvnyt5', displayName: 'age', programId: 'eBAyeGv0exc', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'zINGRka3g9N', dataElementId: 'oZg33kd9taw', displayName: 'gender', programId: 'eBAyeGv0exc', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'Zj7UnCAulEk.vV9UWAZohSf', displayName: 'Zj7UnCAulEk.vV9UWAZohSf', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', dataElementId: 'vV9UWAZohSf', programId: 'eBAyeGv0exc' }, { id: 'Zj7UnCAulEk.GieVkTxp4HH', displayName: 'Zj7UnCAulEk.GieVkTxp4HH', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', dataElementId: 'GieVkTxp4HH', programId: 'eBAyeGv0exc' }, { id: 'Zj7UnCAulEk.GieVkTxp4HH', displayName: 'Zj7UnCAulEk.GieVkTxp4HH', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', dataElementId: 'GieVkTxp4HH', programId: 'eBAyeGv0exc' }];
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const optionSet = { pC3N9N77UmT: { id: 'pC3N9N77UmT', displayName: 'Gender', version: 0, valueType: 'TEXT', options: [{ id: 'rBvjJYbMCVx', displayName: 'Male', code: 'Male', translations: [] }, { id: 'Mnp3oXrpAbK', displayName: 'Female', code: 'Female', translations: [] }] } };
+
+    // NOTE: in this test we dont use toMatchSnapshot instead we test again hardcoded values. Since the effects are plenty
+    // here each time this way we can avoid mistakes in comparing snapshots
+    describe.each([
+        [
+            {},
+            [
+                { type: 'DISPLAYTEXT', displayText: { id: 'isP0uvT24jf', message: "d2:yearsBetween( '2010-01-28', V{event_date}) = " } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'vQCRnX6w9pM', message: 'd2:oizp( -10000000 ) = 0' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'SYAL0GIDnxI', message: 'display age =  ' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'Xa0tKyNk5YE', message: 'org_unit =  Ngelehun CHC' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'JXssEpbJdO2', message: 'd2:right(#{age}, 3) =  ' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'o0LLNIYsliy', message: "d2:monthsBetween( '2020-01-28', V{event_date}) =  " } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'k07KnI11Sf4', message: 'd2:left(#{age}, 3) =  ' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'OITs4nPfMQ3', message: "d2:split('these-are-testing-values', '-', 2) =  testing" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'EzkFLDtAxCR', message: 'd2:modulus( 12 , 100 ) =  12' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'RCYEyOly0Mi', message: "d2:countIfValue( 'gender', 'Male' ) =  0" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'JTXlmy6K6cf', message: "d2:countIfZeroPos( 'age' ) =  " } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'bRnjbxIwIRd', message: 'd2:round( 12.5 ) =  13' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'BuEcHNoD98P', message: 'd2:ceil(11.3) =  12' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'Foc3PhzoAVr', message: "d2:count('age') =  0" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'QpeF2WDjwIV', message: 'd2:addDays( V{current_date}, 1000000 ) =  ' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'WJTjezLR4cJ', message: "d2:weeksBetween('2020-01-28', V{event_date} ) =  " } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'YnE4dNJVF2P', message: 'd2:zing( -2 ) =  0' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'bZsv2cUkbB7', message: 'd2:floor( 11.5 ) = 11' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'J8RxAbHlnO3', message: 'd2:oizp( 10000000 ) =  1' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'NT1wojA2RdT', message: "d2:concatenate( 'dh', 'is', 2, 'is', 'rocking') =  dhis2isrocking" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'aqfqAMbmWHM', message: "d2:daysBetween( '2020-01-28', V{event_date}) = " } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'NUGe7EUVouK', message: "d2:substring('hello dhis 2', 6, 10) =  dhis" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'Ma6nCIGrBrd', message: "d2:length( 'dhis2 rocks' ) =  11" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'RRSDsxWiUMc', message: 'd2:round( 0 ) =  0' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'QUe0Pks4ckc', message: "d2:countIfValue( 'age', 1 ) =  0" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'sHaE1YI0ur2', message: 'd2:zing( 1000 ) =  1000' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'EojHcBMpW7q', message: "d2:hasValue( 'age' ) =  " } },
+            ],
+        ],
+        [
+            {
+                oZg33kd9taw: 'Male', /* age */qrur9Dvnyt5: 0, eventDate: '2020-04-30T22:00:00.000Z',
+            },
+            [
+                { type: 'DISPLAYTEXT', displayText: { id: 'isP0uvT24jf', message: "d2:yearsBetween( '2010-01-28', V{event_date}) = 10" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'vQCRnX6w9pM', message: 'd2:oizp( -10000000 ) = 0' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'SYAL0GIDnxI', message: 'display age =  0' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'Xa0tKyNk5YE', message: 'org_unit =  Ngelehun CHC' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'JXssEpbJdO2', message: 'd2:right(#{age}, 3) =  0' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'o0LLNIYsliy', message: "d2:monthsBetween( '2020-01-28', V{event_date}) =  3" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'k07KnI11Sf4', message: 'd2:left(#{age}, 3) =  0' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'OITs4nPfMQ3', message: "d2:split('these-are-testing-values', '-', 2) =  testing" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'EzkFLDtAxCR', message: 'd2:modulus( 12 , 100 ) =  12' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'RCYEyOly0Mi', message: "d2:countIfValue( 'gender', 'Male' ) =  1" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'JTXlmy6K6cf', message: "d2:countIfZeroPos( 'age' ) =  " } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'bRnjbxIwIRd', message: 'd2:round( 12.5 ) =  13' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'BuEcHNoD98P', message: 'd2:ceil(11.3) =  12' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'Foc3PhzoAVr', message: "d2:count('age') =  1" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'QpeF2WDjwIV', message: 'd2:addDays( V{current_date}, 1000000 ) =  ' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'WJTjezLR4cJ', message: "d2:weeksBetween('2020-01-28', V{event_date} ) =  13" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'YnE4dNJVF2P', message: 'd2:zing( -2 ) =  0' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'bZsv2cUkbB7', message: 'd2:floor( 11.5 ) = 11' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'J8RxAbHlnO3', message: 'd2:oizp( 10000000 ) =  1' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'NT1wojA2RdT', message: "d2:concatenate( 'dh', 'is', 2, 'is', 'rocking') =  dhis2isrocking" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'aqfqAMbmWHM', message: "d2:daysBetween( '2020-01-28', V{event_date}) = 94" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'NUGe7EUVouK', message: "d2:substring('hello dhis 2', 6, 10) =  dhis" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'Ma6nCIGrBrd', message: "d2:length( 'dhis2 rocks' ) =  11" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'RRSDsxWiUMc', message: 'd2:round( 0 ) =  0' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'QUe0Pks4ckc', message: "d2:countIfValue( 'age', 1 ) =  0" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'sHaE1YI0ur2', message: 'd2:zing( 1000 ) =  1000' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'EojHcBMpW7q', message: "d2:hasValue( 'age' ) =  true" } },
+            ],
+        ],
+        [
+            {
+                oZg33kd9taw: 'Male', /* age */qrur9Dvnyt5: 1000000000, eventDate: '2020-04-30T22:00:00.000Z',
+            },
+            [
+                { type: 'DISPLAYTEXT', displayText: { id: 'isP0uvT24jf', message: "d2:yearsBetween( '2010-01-28', V{event_date}) = 10" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'vQCRnX6w9pM', message: 'd2:oizp( -10000000 ) = 0' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'SYAL0GIDnxI', message: 'display age =  1000000000' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'Xa0tKyNk5YE', message: 'org_unit =  Ngelehun CHC' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'JXssEpbJdO2', message: 'd2:right(#{age}, 3) =  000' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'o0LLNIYsliy', message: "d2:monthsBetween( '2020-01-28', V{event_date}) =  3" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'k07KnI11Sf4', message: 'd2:left(#{age}, 3) =  100' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'OITs4nPfMQ3', message: "d2:split('these-are-testing-values', '-', 2) =  testing" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'EzkFLDtAxCR', message: 'd2:modulus( 12 , 100 ) =  12' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'RCYEyOly0Mi', message: "d2:countIfValue( 'gender', 'Male' ) =  1" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'JTXlmy6K6cf', message: "d2:countIfZeroPos( 'age' ) =  " } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'bRnjbxIwIRd', message: 'd2:round( 12.5 ) =  13' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'BuEcHNoD98P', message: 'd2:ceil(11.3) =  12' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'Foc3PhzoAVr', message: "d2:count('age') =  1" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'QpeF2WDjwIV', message: 'd2:addDays( V{current_date}, 1000000 ) =  ' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'WJTjezLR4cJ', message: "d2:weeksBetween('2020-01-28', V{event_date} ) =  13" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'YnE4dNJVF2P', message: 'd2:zing( -2 ) =  0' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'bZsv2cUkbB7', message: 'd2:floor( 11.5 ) = 11' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'J8RxAbHlnO3', message: 'd2:oizp( 10000000 ) =  1' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'NT1wojA2RdT', message: "d2:concatenate( 'dh', 'is', 2, 'is', 'rocking') =  dhis2isrocking" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'aqfqAMbmWHM', message: "d2:daysBetween( '2020-01-28', V{event_date}) = 94" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'NUGe7EUVouK', message: "d2:substring('hello dhis 2', 6, 10) =  dhis" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'Ma6nCIGrBrd', message: "d2:length( 'dhis2 rocks' ) =  11" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'RRSDsxWiUMc', message: 'd2:round( 0 ) =  0' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'QUe0Pks4ckc', message: "d2:countIfValue( 'age', 1 ) =  0" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'sHaE1YI0ur2', message: 'd2:zing( 1000 ) =  1000' } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'EojHcBMpW7q', message: "d2:hasValue( 'age' ) =  true" } },
+            ],
+        ],
+    ])('where functions take place', (events, expected) => {
+        test(`and given value(s): ${JSON.stringify(events)}`, () => {
+            // given
+            const { currentEvent, allEvents } = {
+                currentEvent: events,
+                allEvents: { all: [events], byStage: {} },
+            };
+
+            // when
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
+                { programRulesVariables, programRules, constants },
+                { currentEvent, allEvents },
+                dataElementsInProgram,
+                orgUnit,
+                optionSet,
+            );
+
+            // then
+            expect(rulesEffects).toEqual(expected);
+        });
+    });
+});
+
+describe('rules engine effects for assigning values', () => {
+    // these variables are shared between each test
+    const constants = [];
+    const dataElementsInProgram = { oZg33kd9taw: { id: 'oZg33kd9taw', valueType: 'TEXT', optionSetId: 'pC3N9N77UmT' }, SWfdB5lX0fk: { id: 'SWfdB5lX0fk', valueType: 'BOOLEAN' }, qrur9Dvnyt5: { id: 'qrur9Dvnyt5', valueType: 'INTEGER' }, GieVkTxp4HH: { id: 'GieVkTxp4HH', valueType: 'NUMBER' }, vV9UWAZohSf: { id: 'vV9UWAZohSf', valueType: 'INTEGER_POSITIVE' }, eMyVanycQSC: { id: 'eMyVanycQSC', valueType: 'DATE' }, K6uUAvq500H: { id: 'K6uUAvq500H', valueType: 'TEXT', optionSetId: 'eUZ79clX7y1' }, msodh3rEMJa: { id: 'msodh3rEMJa', valueType: 'DATE' }, S33cRBsnXPo: { id: 'S33cRBsnXPo', valueType: 'ORGANISATION_UNIT' }, fWIAEtYVEGk: { id: 'fWIAEtYVEGk', valueType: 'TEXT', optionSetId: 'iDFPKpFTiVw' }, ulD2zW0TIy2: { id: 'ulD2zW0TIy2', valueType: 'FILE_RESOURCE' } };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const optionSet = {};
+    const currentEvent = {};
+    const allEvents = { all: [], byStage: {} };
+
+    // NOTE: in this test we dont use toMatchSnapshot instead we test again hardcoded values. Since the effects are plenty
+    // here each time this way we can avoid mistakes in comparing snapshots
+    describe.each([
+        [
+            {
+                programRulesVariables: [
+                    { id: 'RycV5uDi66i', dataElementId: 'qrur9Dvnyt5', displayName: 'age', programId: 'eBAyeGv0exc', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true, },
+                ],
+                programRules: [
+                    { id: 'HE7eHzSb8en', condition: 'true', description: 'Testing the ASSIGN case', displayName: 'Testing the ASSIGN case', programId: 'eBAyeGv0exc', programRuleActions: [{ id: 'Jp96iSWIepU', content: '#{age}', data: '50', location: 'feedback', dataElementId: 'qrur9Dvnyt5', programRuleActionType: 'ASSIGN' }], priority: 1 },
+                    { id: 'oRHDrFX7fgQ', condition: '#{age} == 50', description: 'Testing the ASSIGN case no2', displayName: 'Testing the ASSIGN case no2', programId: 'eBAyeGv0exc', programRuleActions: [{ id: 'Os6HIwInkrJ', content: 'priority rules set #{age} == 50', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }], priority: 2 },
+                ] },
+            [
+                { type: 'ASSIGN', id: 'qrur9Dvnyt5', value: '50' },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'Os6HIwInkrJ', message: 'priority rules set #{age} == 50 ' } },
+            ],
+        ],
+        [
+            {
+                programRulesVariables: [
+                    { id: 'Y2MSzoNdK4v', dataElementId: 'SWfdB5lX0fk', displayName: 'pregnant', programId: 'eBAyeGv0exc', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: true },
+                ],
+                programRules: [
+                    { id: 'yItZC7iOBhC', condition: 'true', displayName: 'Testing 2 ASSIGNs at once ', programId: 'eBAyeGv0exc', programRuleActions: [{ id: 'Y0NNwkkLn5y', content: "single rule sets #{gender} == 'Male'", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'TsgBfZpeo7v', content: '#{gender}', data: "'Male'", dataElementId: 'oZg33kd9taw', programRuleActionType: 'ASSIGN' }] },
+                ],
+            },
+            [
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'Y0NNwkkLn5y', message: "single rule sets #{gender} == 'Male' " } },
+                { type: 'ASSIGN', id: 'oZg33kd9taw', value: 'Male' },
+            ],
+        ],
+    ])('where effects depend on ASSIGNed values', ({ programRulesVariables, programRules }, expected) => {
+        test(`and ${programRules.length} rule(s) take place`, () => {
+            // given
+
+            // when
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
+                { programRulesVariables, programRules, constants },
+                { currentEvent, allEvents },
+                dataElementsInProgram,
+                orgUnit,
+                optionSet,
             );
 
             // then
