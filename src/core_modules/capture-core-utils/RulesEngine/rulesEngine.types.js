@@ -44,7 +44,8 @@ export type ProgramRuleEffect = {
     optionId: ?string,
     content: string,
     data: ?string,
-    ineffect: boolean,
+    // todo this is never used in our codebase, we could possibly remove it
+    ineffect?: boolean,
 };
 
 export type ProgramRuleAction = {
@@ -57,10 +58,14 @@ export type ProgramRuleAction = {
     programStageId?: ?string,
     programStageSectionId?: ?string,
     trackedEntityAttributeId?: ?string,
+    optionGroupId: ?string,
+    optionId: ?string,
 };
 
 export type ProgramRule = {
     id: string,
+    name: string;
+    priority: number;
     condition: string,
     description?: ?string,
     displayName: string,
@@ -68,7 +73,6 @@ export type ProgramRule = {
     programStageId?: ?string,
     programRuleActions: Array<ProgramRuleAction>,
 };
-
 
 export type ProgramRuleVariable = {
     id: string,
@@ -240,4 +244,44 @@ export interface IConvertOutputRulesEffectsValue {
     convertPercentage(value: number): any;
     convertUrl(value: string): any;
     convertAge(value: string): any;
+}
+
+export type D2FunctionParameters = {
+    name: string,
+    parameters?: number,
+    dhisFunction: any
+}
+export type D2Functions = {
+    'd2:concatenate': D2FunctionParameters,
+    'd2:daysBetween': D2FunctionParameters,
+    'd2:weeksBetween': D2FunctionParameters,
+    'd2:monthsBetween': D2FunctionParameters,
+    'd2:yearsBetween': D2FunctionParameters,
+    'd2:floor': D2FunctionParameters,
+    'd2:modulus': D2FunctionParameters,
+    'd2:addDays': D2FunctionParameters,
+    'd2:zing': D2FunctionParameters,
+    'd2:oizp': D2FunctionParameters,
+    'd2:count': D2FunctionParameters,
+    'd2:countIfZeroPos': D2FunctionParameters,
+    'd2:countIfValue': D2FunctionParameters,
+    'd2:ceil': D2FunctionParameters,
+    'd2:round': D2FunctionParameters,
+    'd2:hasValue': D2FunctionParameters,
+    'd2:lastEventDate': D2FunctionParameters,
+    'd2:validatePattern': D2FunctionParameters,
+    'd2:addControlDigits': D2FunctionParameters,
+    'd2:checkControlDigits': D2FunctionParameters,
+    'd2:round': D2FunctionParameters,
+    'd2:lastEventDate': D2FunctionParameters,
+    'd2:left': D2FunctionParameters,
+    'd2:right': D2FunctionParameters,
+    'd2:substring': D2FunctionParameters,
+    'd2:split': D2FunctionParameters,
+    'd2:zScoreWFA': D2FunctionParameters,
+    'd2:length': D2FunctionParameters,
+}
+
+export type Flag = {
+    debug: boolean
 }
