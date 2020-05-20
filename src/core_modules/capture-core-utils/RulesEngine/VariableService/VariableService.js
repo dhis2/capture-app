@@ -1,5 +1,4 @@
 // @flow
-/* eslint-disable complexity */
 import log from 'loglevel';
 import OptionSetHelper from '../OptionSetHelper/OptionSetHelper';
 import typeKeys from '../typeKeys.const';
