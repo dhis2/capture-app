@@ -37,7 +37,6 @@ export function getRulesActionsForEvent(
     const rulesEffects = runRulesForSingleEvent(
         program,
         foundation,
-        formId,
         orgUnit,
         currentEvent,
         allEventsData,
