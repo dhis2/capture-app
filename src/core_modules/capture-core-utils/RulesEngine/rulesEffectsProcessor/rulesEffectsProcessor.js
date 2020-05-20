@@ -24,6 +24,16 @@ const mapProcessTypeToIdentifierName = {
 
 type ConvertDataToBaseOutputValue = (value: any, valueType: string) => any;
 
+const sanitiseFalsy = (value) => {
+    if (value) {
+        return value;
+    }
+    if (value === 0) {
+        return 0;
+    }
+    return '';
+};
+
 export default function getRulesEffectsProcessor(
     onConvertDataToBaseOutputValue: ConvertDataToBaseOutputValue,
     rulesEffectsValueConverters: IConvertOutputRulesEffectsValue,
@@ -87,7 +97,7 @@ export default function getRulesEffectsProcessor(
                 id: 'general',
                 error: {
                     id: effect.id,
-                    message: `${effect.content} ${effect.data ? effect.data : ''}`,
+                    message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
                 },
             };
         }
@@ -95,7 +105,7 @@ export default function getRulesEffectsProcessor(
         return {
             type: actions.SHOW_ERROR,
             id: effect[processIdName],
-            message: `${effect.content} ${effect.data ? effect.data : ''}`,
+            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
         };
     }
 
@@ -105,14 +115,14 @@ export default function getRulesEffectsProcessor(
             return {
                 type: actions.SHOW_WARNING,
                 id: 'general',
-                warning: { id: effect.id, message: `${effect.content} ${effect.data ? effect.data : ''}` },
+                warning: { id: effect.id, message: `${effect.content} ${sanitiseFalsy(effect.data)}` },
             };
         }
 
         return {
             type: actions.SHOW_WARNING,
             id: effect[processIdName],
-            message: `${effect.content} ${effect.data ? effect.data : ''}`,
+            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
         };
     }
 
@@ -124,7 +134,7 @@ export default function getRulesEffectsProcessor(
                 id: 'general',
                 error: {
                     id: effect.id,
-                    message: `${effect.content} ${effect.data ? effect.data : ''}`,
+                    message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
                 },
             };
         }
@@ -132,7 +142,7 @@ export default function getRulesEffectsProcessor(
         return {
             type: actions.SHOW_ERROR_ONCOMPLETE,
             id: effect[processIdName],
-            message: `${effect.content} ${effect.data ? effect.data : ''}`,
+            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
         };
     }
 
@@ -144,7 +154,7 @@ export default function getRulesEffectsProcessor(
                 id: 'general',
                 warning: {
                     id: effect.id,
-                    message: `${effect.content} ${effect.data ? effect.data : ''}`,
+                    message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
                 },
             };
         }
@@ -152,7 +162,7 @@ export default function getRulesEffectsProcessor(
         return {
             type: actions.SHOW_WARNING_ONCOMPLETE,
             id: effect[processIdName],
-            message: `${effect.content} ${effect.data ? effect.data : ''}`,
+            message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
         };
     }
 
@@ -187,7 +197,7 @@ export default function getRulesEffectsProcessor(
             id: effect.location,
             displayText: {
                 id: effect.id,
-                message: `${effect.content} ${effect.data ? effect.data : ''}`,
+                message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
             },
         };
     }
@@ -257,23 +267,26 @@ export default function getRulesEffectsProcessor(
     };
 
     function processRulesEffects(
-        effects: Array<ProgramRuleEffect>,
+        effects: ?Array<ProgramRuleEffect>,
         processType: $Values<typeof processTypes>,
         dataElements: ?DataElements,
         trackedEntityAttributes: ?TrackedEntityAttributes): ?Array<OutputEffect> {
         const processIdName = mapProcessTypeToIdentifierName[processType];
 
-        return effects
-            .filter(({ action }) => mapActionsToProcessor[action])
-            .map(effect => mapActionsToProcessor[effect.action](
-                effect,
-                processIdName,
-                processType,
-                dataElements,
-                trackedEntityAttributes,
-            ))
-            // when mapActionsToProcessor function returns `null` we filter those value out.
-            .filter(keepTruthyValues => keepTruthyValues);
+        if (effects) {
+            return effects
+                .filter(({ action }) => mapActionsToProcessor[action])
+                .map(effect => mapActionsToProcessor[effect.action](
+                    effect,
+                    processIdName,
+                    processType,
+                    dataElements,
+                    trackedEntityAttributes,
+                ))
+                // when mapActionsToProcessor function returns `null` we filter those value out.
+                .filter(keepTruthyValues => keepTruthyValues);
+        }
+        return null;
     }
 
     return processRulesEffects;
