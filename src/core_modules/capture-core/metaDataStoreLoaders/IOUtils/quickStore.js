@@ -15,13 +15,13 @@ export const quickStore = async (
     querySpecification: ApiQueryExtended,
     storeName: StoreName,
     {
-        onConvertQueryResponse,
+        convertQueryResponse,
         variables,
 
     }: QuickStoreOptions) => {
     const { storageController } = getContext();
     const rawResponse = await query(querySpecification, variables);
-    const convertedData = onConvertQueryResponse ? onConvertQueryResponse(rawResponse) : rawResponse;
+    const convertedData = convertQueryResponse ? convertQueryResponse(rawResponse) : rawResponse;
     convertedData && convertedData.length > 0 && await storageController.setAll(storeName, convertedData);
     return { rawResponse, convertedData };
 };
