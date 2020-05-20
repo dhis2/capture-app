@@ -1,41 +1,20 @@
 // @flow
 import log from 'loglevel';
-import { RulesEngine, processTypes } from 'capture-core-utils/RulesEngine';
-import type
-{
-    DataElement as DataElementForRulesEngine,
-    EventData,
-} from 'capture-core-utils/RulesEngine/rulesEngine.types';
-
-import { errorCreator } from 'capture-core-utils';
-import {
-    Program,
-    TrackerProgram,
-    EventProgram,
-    RenderFoundation,
-    DataElement,
-} from '../metaData';
+import { RulesEngine } from '../../capture-core-utils/RulesEngine';
+import { errorCreator } from '../../capture-core-utils';
+import { Program, EventProgram, RenderFoundation, DataElement } from '../metaData';
 import constantsStore from '../metaDataMemoryStores/constants/constants.store';
 import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store';
+import type {
+    DataElement as DataElementForRulesEngine,
+    EventsData,
+    EventData,
+    OrgUnit,
+} from '../../capture-core-utils/RulesEngine/rulesEngine.types';
 
 const errorMessages = {
-    PROGRAM_NOT_FOUND: 'Program not found in loadAndExecuteRulesForEvent',
-    PROGRAMSTAGE_NOT_FOUND: 'ProgramStage not found',
     PROGRAM_OR_FOUNDATION_MISSING: 'Program or foundation missing',
 };
-
-
-// TODO why when in our code at the moment we dont have any trackerPrograms we still keep this code?
-function getTrackerDataElements(trackerProgram: TrackerProgram): Array<DataElement> {
-    return Array.from(trackerProgram.stages.values())
-        .reduce((accElements, stage) => {
-            const stageElements = Array.from(stage.stageForm.sections.values())
-                .reduce((accStageElements, section) =>
-                    [...accStageElements, ...Array.from(section.elements.values())]
-                , []);
-            return [...accElements, ...stageElements];
-        }, []);
-}
 
 function getEventDataElements(eventProgram: EventProgram): Array<DataElement> {
     return eventProgram.stage ?
@@ -59,10 +38,6 @@ function getRulesEngineDataElementsAsObject(
 function getDataElements(program: Program) {
     let dataElements: Array<DataElement> = [];
 
-    if (program instanceof TrackerProgram) {
-        dataElements = getTrackerDataElements(program);
-    }
-
     if (program instanceof EventProgram) {
         dataElements = getEventDataElements(program);
     }
@@ -70,23 +45,35 @@ function getDataElements(program: Program) {
     return getRulesEngineDataElementsAsObject(dataElements);
 }
 
-export default function runRulesForSingleEvent(
-    rulesEngine: RulesEngine,
+function getEventsData(eventsData: ?EventsData) {
+    if (eventsData && eventsData.length > 0) {
+        const eventsDataByStage = eventsData.reduce((accEventsByStage, event) => {
+            const hasProgramStage = !!event.programStageId;
+            if (hasProgramStage) {
+                accEventsByStage[event.programStageId] = accEventsByStage[event.programStageId] || [];
+                accEventsByStage[event.programStageId].push(event);
+            }
+            return accEventsByStage;
+        }, {});
+
+        return { all: eventsData, byStage: eventsDataByStage };
+    }
+
+    return null;
+}
+
+function prepare(
     program: ?Program,
     foundation: ?RenderFoundation,
-    orgUnit: Object,
-    currentEventData: ?EventData,
-    allEventsData: ?Array<EventData>,
+    allEventsData: ?EventsData,
 ) {
     if (!program || !foundation) {
-        log.error(
-            errorCreator(
-                errorMessages.PROGRAM_OR_FOUNDATION_MISSING)(
-                { program, foundation, method: 'getRulesActionsForEvent' }));
+        log.error(errorCreator(errorMessages.PROGRAM_OR_FOUNDATION_MISSING)(
+            { program, foundation, method: 'getRulesActionsForEvent' }),
+        );
         return null;
     }
 
-    const constants = constantsStore.get();
     const { programRuleVariables } = program;
     const programRules = [...program.programRules, ...foundation.programRules];
 
@@ -94,10 +81,49 @@ export default function runRulesForSingleEvent(
         return null;
     }
 
-    const dataElementsInProgram = getDataElements(program);
-
+    const constants = constantsStore.get();
     const optionSets = optionSetsStore.get();
+    const dataElementsInProgram = getDataElements(program);
+    const allEvents = getEventsData(allEventsData);
 
-    // returns an array of effects that need to take place in the UI.
-    return rulesEngine.executeRules({ programRulesVariables: programRuleVariables, programRules, constants }, currentEventData, allEventsData, dataElementsInProgram, null, null, null, orgUnit, optionSets, processTypes.EVENT);
+    return {
+        optionSets,
+        dataElementsInProgram,
+        programRulesVariables: programRuleVariables,
+        programRules,
+        constants,
+        allEvents,
+    };
 }
+
+export default function runRulesForSingleEvent(
+    program: ?Program,
+    foundation: ?RenderFoundation,
+    orgUnit: OrgUnit,
+    currentEvent: EventData,
+    allEventsData: EventsData,
+) {
+    const data = prepare(program, foundation, allEventsData);
+
+    if (data) {
+        const {
+            optionSets,
+            programRulesVariables,
+            programRules,
+            constants,
+            dataElementsInProgram,
+            allEvents,
+        } = data;
+
+        // returns an array of effects that need to take place in the UI.
+        return RulesEngine.programRuleEffectsForEvent(
+            { programRulesVariables, programRules, constants },
+            { currentEvent, allEvents },
+            dataElementsInProgram,
+            orgUnit,
+            optionSets,
+        );
+    }
+    return null;
+}
+
