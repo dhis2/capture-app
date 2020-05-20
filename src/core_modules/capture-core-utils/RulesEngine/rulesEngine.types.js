@@ -6,6 +6,8 @@ export type OutputEffect = {
     id: string,
 };
 
+export type OutputEffects = Array<OutputEffect>;
+
 export type AssignOutputEffect = OutputEffect & {
     value: any,
 };
@@ -42,7 +44,8 @@ export type ProgramRuleEffect = {
     optionId: ?string,
     content: string,
     data: ?string,
-    ineffect: boolean,
+    // todo this is never used in our codebase, we could possibly remove it
+    ineffect?: boolean,
 };
 
 export type ProgramRuleAction = {
@@ -55,10 +58,14 @@ export type ProgramRuleAction = {
     programStageId?: ?string,
     programStageSectionId?: ?string,
     trackedEntityAttributeId?: ?string,
+    optionGroupId: ?string,
+    optionId: ?string,
 };
 
 export type ProgramRule = {
     id: string,
+    name: string;
+    priority: number;
     condition: string,
     description?: ?string,
     displayName: string,
@@ -66,7 +73,6 @@ export type ProgramRule = {
     programStageId?: ?string,
     programRuleActions: Array<ProgramRuleAction>,
 };
-
 
 export type ProgramRuleVariable = {
     id: string,
@@ -109,27 +115,25 @@ export type ProgramRulesContainer = {
     constants?: ?Constants,
 };
 
-export type EventMain = {
-    eventId: string,
-    programId: string,
-    programStageId: string,
-    orgUnitId: string,
-    orgUnitName: string,
-    trackedEntityInstanceId: string,
-    enrollmentId: string,
-    enrollmentStatus: string,
-    status: string,
-    eventDate: string,
-    dueDate: string,
+type EventMain = {
+    eventId?: string,
+    programId?: string,
+    programStageId?: string,
+    orgUnitId?: string,
+    orgUnitName?: string,
+    trackedEntityInstanceId?: string,
+    enrollmentId?: string,
+    enrollmentStatus?: string,
+    status?: string,
+    eventDate?: string,
+    dueDate?: string,
 };
 
 export type EventValues = {
     [elementId: string]: any,
 };
 
-export type InputEvent = EventValues | {};
-
-export type EventData = EventMain & EventValues;
+export type EventData = EventValues & EventMain;
 
 export type EventsData = Array<EventData>;
 
@@ -145,6 +149,18 @@ export type DataElement = {
 };
 
 export type DataElements = { [elementId: string]: DataElement };
+
+export type RuleVariable = {
+    variableValue: any,
+    useCodeForOptionSet: boolean,
+    variableType: string,
+    hasValue: boolean,
+    variableEventDate: ?string,
+    variablePrefix: string,
+    allValues: ?Array<any>,
+};
+
+export type RuleVariables = { [string]: RuleVariable };
 
 export type TrackedEntityAttribute = {
     id: string,
@@ -168,7 +184,7 @@ export type TEIValues = {
 
 export type OrgUnit = {
     id: string,
-    code: string,
+    name: string,
 };
 
 export type DateUtils = {
@@ -228,4 +244,44 @@ export interface IConvertOutputRulesEffectsValue {
     convertPercentage(value: number): any;
     convertUrl(value: string): any;
     convertAge(value: string): any;
+}
+
+export type D2FunctionParameters = {
+    name: string,
+    parameters?: number,
+    dhisFunction: any
+}
+export type D2Functions = {
+    'd2:concatenate': D2FunctionParameters,
+    'd2:daysBetween': D2FunctionParameters,
+    'd2:weeksBetween': D2FunctionParameters,
+    'd2:monthsBetween': D2FunctionParameters,
+    'd2:yearsBetween': D2FunctionParameters,
+    'd2:floor': D2FunctionParameters,
+    'd2:modulus': D2FunctionParameters,
+    'd2:addDays': D2FunctionParameters,
+    'd2:zing': D2FunctionParameters,
+    'd2:oizp': D2FunctionParameters,
+    'd2:count': D2FunctionParameters,
+    'd2:countIfZeroPos': D2FunctionParameters,
+    'd2:countIfValue': D2FunctionParameters,
+    'd2:ceil': D2FunctionParameters,
+    'd2:round': D2FunctionParameters,
+    'd2:hasValue': D2FunctionParameters,
+    'd2:lastEventDate': D2FunctionParameters,
+    'd2:validatePattern': D2FunctionParameters,
+    'd2:addControlDigits': D2FunctionParameters,
+    'd2:checkControlDigits': D2FunctionParameters,
+    'd2:round': D2FunctionParameters,
+    'd2:lastEventDate': D2FunctionParameters,
+    'd2:left': D2FunctionParameters,
+    'd2:right': D2FunctionParameters,
+    'd2:substring': D2FunctionParameters,
+    'd2:split': D2FunctionParameters,
+    'd2:zScoreWFA': D2FunctionParameters,
+    'd2:length': D2FunctionParameters,
+}
+
+export type Flag = {
+    debug: boolean
 }
