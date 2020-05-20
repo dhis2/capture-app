@@ -1,17 +1,22 @@
 // @flow
 
-export default function trimQuotes(input: string) {
-    let trimmingComplete = false;
-    let beingTrimmed = input;
+import isString from 'd2-utilizr/lib/isString';
 
-    while (!trimmingComplete) {
-        const beforeTrimming = beingTrimmed;
-        beingTrimmed = beingTrimmed.replace(/^'/, '').replace(/'$/, '');
-        beingTrimmed = beingTrimmed.replace(/^"/, '').replace(/"$/, '');
+export default function trimQuotes(input: any) {
+    if (input && isString(input)) {
+        let trimmingComplete = false;
+        let beingTrimmed = input;
 
-        if (beforeTrimming.length === beingTrimmed.length) {
-            trimmingComplete = true;
+        while (!trimmingComplete) {
+            const beforeTrimming = beingTrimmed;
+            beingTrimmed = beingTrimmed.replace(/^'/, '').replace(/'$/, '');
+            beingTrimmed = beingTrimmed.replace(/^"/, '').replace(/"$/, '');
+
+            if (beforeTrimming.length === beingTrimmed.length) {
+                trimmingComplete = true;
+            }
         }
+        return beingTrimmed;
     }
-    return beingTrimmed;
+    return input;
 }
