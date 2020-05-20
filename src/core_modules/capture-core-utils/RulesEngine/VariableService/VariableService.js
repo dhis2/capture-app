@@ -3,7 +3,7 @@
 import log from 'loglevel';
 import OptionSetHelper from '../OptionSetHelper/OptionSetHelper';
 import typeKeys from '../typeKeys.const';
-import variablePrefixes from '../variablePrefixes';
+import variablePrefixes from './variablePrefixes.const';
 import getDateUtils from '../dateUtils/dateUtils';
 import momentConverter from '../converters/momentConverter';
 
@@ -19,7 +19,6 @@ import type {
     Enrollment,
     Constants,
     OrgUnit,
-    DateUtils,
     RuleVariable,
     TEIValues,
 } from '../rulesEngine.types';
@@ -68,13 +67,12 @@ export default class VariableService {
             OptionSetHelper.getName(optionSets[trackedEntityAttributes[trackedEntityAttributeId].optionSetId].options, value)
             : value;
     }
+    static dateUtils = getDateUtils(momentConverter);
 
     onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any;
-    dateUtils: DateUtils;
     mapSourceTypeToGetterFn: { [sourceType: string]: (programVariable: ProgramRuleVariable, sourceData: SourceData) => ?RuleVariable };
     constructor(onProcessValue: (value: any, type: $Values<typeof typeKeys>) => any) {
         this.onProcessValue = onProcessValue;
-        this.dateUtils = getDateUtils(momentConverter);
 
         this.mapSourceTypeToGetterFn = {
             [variableSourceTypes.DATAELEMENT_CURRENT_EVENT]: this.getVariableForCurrentEvent,
@@ -473,7 +471,7 @@ export default class VariableService {
 
         // TODO: need to build some kind of date service and change this codeline
         variables.current_date = this.buildVariable(
-            this.dateUtils.getToday(),
+          VariableService.dateUtils.getToday(),
             typeKeys.DATE, {
                 variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
             },

@@ -1,19 +1,19 @@
 import runRulesForSingleEvent from '../../../capture-core/rulesEngineActionsCreator/runRulesForSingleEvent';
-import { RulesEngine, processTypes } from '../index';
+import { RulesEngine } from '../index';
 
 describe('rules engine', () => {
-    const allEventsData = null;
-    const currentEvent = null;
+    const currentEvent = {};
+    const allEvents = { all: [], byStage: {} };
+    const orgUnit = { id: 'DiszpKrYNg8', code: 'Ngelehun CHC' };
 
     describe.each([
         {
             program: {
                 programRules: [{ id: 'GC4gpdoSD4r', condition: '#{hemoglobin} < 9', description: 'Show warning if hemoglobin is dangerously low', displayName: 'Hemoglobin warning', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'suS9GnraCx1', content: 'Hemoglobin value lower than normal', dataElementId: 'vANAXwtLwcT', programRuleActionType: 'SHOWWARNING' }] }, { id: 'dahuKlP7jR2', condition: '#{hemoglobin} > 99', description: 'Show error for hemoglobin value higher than 99', displayName: 'Show error for high hemoglobin value', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'UUwZWS8uirn', content: 'The hemoglobin value cannot be above 99', dataElementId: 'vANAXwtLwcT', programRuleActionType: 'SHOWERROR' }] }, { id: 'hk30qiUJYUR', condition: '#{Christos } == true', displayName: 'Christos Rules', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'eotNEY9CWxU', content: 'SAY YES', dataElementId: 'Ok9OQpitjQr', programRuleActionType: 'SHOWERROR' }] }, { id: 'xOe5qCzRS0Y', condition: '!#{womanSmoking} ', description: 'Hide smoking cessation councelling dataelement unless patient is smoking', displayName: 'Hide smoking cessation councelling', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'hwgyO59SSxu', dataElementId: 'Ok9OQpitjQr', programRuleActionType: 'HIDEFIELD' }] }],
-                programRuleVariables: [{ id: 'DINatbKMS71', dataElementId: 'Ok9OQpitjQr', displayName: 'Christos ', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: true }, { id: 'Z92dJO9gIje', dataElementId: 'sWoqcoByYmD', displayName: 'womanSmoking', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'omrL0gtPpDL', dataElementId: 'vANAXwtLwcT', displayName: 'hemoglobin', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }],
+                programRuleVariables: [{ id: 'Z92dJO9gIje', dataElementId: 'sWoqcoByYmD', displayName: 'womanSmoking', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'omrL0gtPpDL', dataElementId: 'vANAXwtLwcT', displayName: 'hemoglobin', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }],
                 id: 'lxAQ7Zs9VYR',
             },
             foundation: { programRules: [] },
-            orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
         },
         {
             program: {
@@ -22,7 +22,6 @@ describe('rules engine', () => {
                 id: 'lxAQ7Zs9VYR',
             },
             foundation: { programRules: [] },
-            orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
         },
         {
             program: {
@@ -31,18 +30,14 @@ describe('rules engine', () => {
                 id: 'MoUd5BTQ3lY',
             },
             foundation: { programRules: [] },
-            orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
         },
         {
             program: null,
             foundation: null,
-            orgUnit: { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' },
         },
-    ])('where the default values', ({ program, foundation, orgUnit }) => {
+    ])('where the default values', ({ program, foundation }) => {
         test('Tests on runRulesForSingleEvent function', () => {
-            const rulesEngine = new RulesEngine();
-
-            const rulesEffects = runRulesForSingleEvent(rulesEngine, program, foundation, orgUnit, currentEvent, allEventsData);
+            const rulesEffects = runRulesForSingleEvent(program, foundation, orgUnit, currentEvent, allEvents);
 
             expect(rulesEffects).toMatchSnapshot();
         });
@@ -71,18 +66,14 @@ describe('rules engine', () => {
                 currentEvent: value,
                 allEvents: { all: [value], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
-                currentEvent,
-                allEvents,
+                { currentEvent, allEvents },
                 dataElementsInProgram,
-                null, null, null,
                 orgUnit,
                 optionSet,
-                processTypes.EVENT,
             );
 
             // then
@@ -100,18 +91,14 @@ describe('rules engine', () => {
                 currentEvent: value,
                 allEvents: { all: [value], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
-                currentEvent,
-                allEvents,
+                { currentEvent, allEvents },
                 dataElementsInProgram,
-                null, null, null,
                 orgUnit,
                 optionSet,
-                processTypes.EVENT,
             );
 
             // then
@@ -140,18 +127,14 @@ describe('rules engine', () => {
                 currentEvent: value,
                 allEvents: { all: [value], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
-                currentEvent,
-                allEvents,
+                { currentEvent, allEvents },
                 dataElementsInProgram,
-                null, null, null,
                 orgUnit,
                 optionSet,
-                processTypes.EVENT,
             );
 
             // then
@@ -175,18 +158,14 @@ describe('rules engine', () => {
                 currentEvent: value,
                 allEvents: { all: [value], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
-                currentEvent,
-                allEvents,
+                { currentEvent, allEvents },
                 dataElementsInProgram,
-                null, null, null,
                 orgUnit,
                 optionSet,
-                processTypes.EVENT,
             );
 
             // then
@@ -398,19 +377,14 @@ describe('rules engine', () => {
                 currentEvent: value,
                 allEvents: { all: [value], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
-                currentEvent,
-                allEvents,
+                { currentEvent, allEvents },
                 dataElementsInProgram,
-                null, null, null,
                 orgUnit,
                 optionSet,
-                processTypes.EVENT,
-
             );
 
             // then
@@ -539,18 +513,14 @@ describe('rules engine effects with functions and effects', () => {
                 currentEvent: events,
                 allEvents: { all: [events], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
 
             // when
-            const rulesEffects = rulesEngine.executeRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
-                currentEvent,
-                allEvents,
+                { currentEvent, allEvents },
                 dataElementsInProgram,
-                null, null, null,
                 orgUnit,
                 optionSet,
-                processTypes.EVENT,
             );
 
             // then
@@ -558,3 +528,63 @@ describe('rules engine effects with functions and effects', () => {
         });
     });
 });
+
+describe('rules engine effects for assigning values', () => {
+    // these variables are shared between each test
+    const constants = [];
+    const dataElementsInProgram = { oZg33kd9taw: { id: 'oZg33kd9taw', valueType: 'TEXT', optionSetId: 'pC3N9N77UmT' }, SWfdB5lX0fk: { id: 'SWfdB5lX0fk', valueType: 'BOOLEAN' }, qrur9Dvnyt5: { id: 'qrur9Dvnyt5', valueType: 'INTEGER' }, GieVkTxp4HH: { id: 'GieVkTxp4HH', valueType: 'NUMBER' }, vV9UWAZohSf: { id: 'vV9UWAZohSf', valueType: 'INTEGER_POSITIVE' }, eMyVanycQSC: { id: 'eMyVanycQSC', valueType: 'DATE' }, K6uUAvq500H: { id: 'K6uUAvq500H', valueType: 'TEXT', optionSetId: 'eUZ79clX7y1' }, msodh3rEMJa: { id: 'msodh3rEMJa', valueType: 'DATE' }, S33cRBsnXPo: { id: 'S33cRBsnXPo', valueType: 'ORGANISATION_UNIT' }, fWIAEtYVEGk: { id: 'fWIAEtYVEGk', valueType: 'TEXT', optionSetId: 'iDFPKpFTiVw' }, ulD2zW0TIy2: { id: 'ulD2zW0TIy2', valueType: 'FILE_RESOURCE' } };
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const optionSet = {};
+    const currentEvent = {};
+    const allEvents = { all: [], byStage: {} };
+
+    // NOTE: in this test we dont use toMatchSnapshot instead we test again hardcoded values. Since the effects are plenty
+    // here each time this way we can avoid mistakes in comparing snapshots
+    describe.each([
+        [
+            {
+                programRulesVariables: [
+                    { id: 'RycV5uDi66i', dataElementId: 'qrur9Dvnyt5', displayName: 'age', programId: 'eBAyeGv0exc', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true, },
+                ],
+                programRules: [
+                    { id: 'HE7eHzSb8en', condition: 'true', description: 'Testing the ASSIGN case', displayName: 'Testing the ASSIGN case', programId: 'eBAyeGv0exc', programRuleActions: [{ id: 'Jp96iSWIepU', content: '#{age}', data: '50', location: 'feedback', dataElementId: 'qrur9Dvnyt5', programRuleActionType: 'ASSIGN' }], priority: 1 },
+                    { id: 'oRHDrFX7fgQ', condition: '#{age} == 50', description: 'Testing the ASSIGN case no2', displayName: 'Testing the ASSIGN case no2', programId: 'eBAyeGv0exc', programRuleActions: [{ id: 'Os6HIwInkrJ', content: 'priority rules set #{age} == 50', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }], priority: 2 },
+                ] },
+            [
+                { type: 'ASSIGN', id: 'qrur9Dvnyt5', value: '50' },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'Os6HIwInkrJ', message: 'priority rules set #{age} == 50 ' } },
+            ],
+        ],
+        [
+            {
+                programRulesVariables: [
+                    { id: 'Y2MSzoNdK4v', dataElementId: 'SWfdB5lX0fk', displayName: 'pregnant', programId: 'eBAyeGv0exc', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: true },
+                ],
+                programRules: [
+                    { id: 'yItZC7iOBhC', condition: 'true', displayName: 'Testing 2 ASSIGNs at once ', programId: 'eBAyeGv0exc', programRuleActions: [{ id: 'Y0NNwkkLn5y', content: "single rule sets #{gender} == 'Male'", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'TsgBfZpeo7v', content: '#{gender}', data: "'Male'", dataElementId: 'oZg33kd9taw', programRuleActionType: 'ASSIGN' }] },
+                ],
+            },
+            [
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'Y0NNwkkLn5y', message: "single rule sets #{gender} == 'Male' " } },
+                { type: 'ASSIGN', id: 'oZg33kd9taw', value: 'Male' },
+            ],
+        ],
+    ])('where effects depend on ASSIGNed values', ({ programRulesVariables, programRules }, expected) => {
+        test(`and ${programRules.length} rule(s) take place`, () => {
+            // given
+
+            // when
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
+                { programRulesVariables, programRules, constants },
+                { currentEvent, allEvents },
+                dataElementsInProgram,
+                orgUnit,
+                optionSet,
+            );
+
+            // then
+            expect(rulesEffects).toEqual(expected);
+        });
+    });
+});
+
