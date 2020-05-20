@@ -33,10 +33,10 @@ describe('Event Event rules engine', () => {
                 currentEvent: events,
                 allEvents: { all: [events], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
+
 
             // when
-            const rulesEffects = rulesEngine.executeEventRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
                 { currentEvent, allEvents },
                 dataElementsInProgram,
@@ -65,10 +65,10 @@ describe('Event Event rules engine', () => {
                 currentEvent: events,
                 allEvents: { all: [events], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
+
 
             // when
-            const rulesEffects = rulesEngine.executeEventRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
                 { currentEvent, allEvents },
                 dataElementsInProgram,
@@ -111,10 +111,10 @@ describe('Event rules engine', () => {
                 currentEvent: events,
                 allEvents: { all: [events], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
+
 
             // when
-            const rulesEffects = rulesEngine.executeEventRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
                 { currentEvent, allEvents },
                 dataElementsInProgram,
@@ -167,10 +167,10 @@ describe('Event rules engine', () => {
                 currentEvent: events,
                 allEvents: { all: [events], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
+
 
             // when
-            const rulesEffects = rulesEngine.executeEventRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
                 { currentEvent, allEvents },
                 dataElementsInProgram,
@@ -387,10 +387,10 @@ describe('Event rules engine', () => {
                 currentEvent: value,
                 allEvents: { all: [value], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
+
 
             // when
-            const rulesEffects = rulesEngine.executeEventRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
                 { currentEvent, allEvents },
                 dataElementsInProgram,
@@ -521,10 +521,10 @@ describe('Event rules engine effects with functions and effects', () => {
                 currentEvent: events,
                 allEvents: { all: [events], byStage: {} },
             };
-            const rulesEngine = new RulesEngine();
+
 
             // when
-            const rulesEffects = rulesEngine.executeEventRules(
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
                 { currentEvent, allEvents },
                 dataElementsInProgram,

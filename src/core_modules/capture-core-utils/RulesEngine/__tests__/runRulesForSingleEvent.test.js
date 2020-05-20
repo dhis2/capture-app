@@ -1,5 +1,4 @@
 import runRulesForSingleEvent from '../../../capture-core/rulesEngineActionsCreator/runRulesForSingleEvent';
-import { RulesEngine } from '../index';
 
 describe('rules engine', () => {
     const currentEvent = {};
@@ -49,9 +48,7 @@ describe('rules engine', () => {
         ],
     ])('where the default values', ({ program, foundation }, expected) => {
         test('Tests on runRulesForSingleEvent function', () => {
-            const rulesEngine = new RulesEngine();
-
-            const rulesEffects = runRulesForSingleEvent(rulesEngine, program, foundation, orgUnit, currentEvent, allEvents);
+            const rulesEffects = runRulesForSingleEvent(program, foundation, orgUnit, currentEvent, allEvents);
 
             expect(rulesEffects).toEqual(expected);
         });

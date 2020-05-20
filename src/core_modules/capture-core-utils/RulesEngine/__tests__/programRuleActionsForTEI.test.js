@@ -10,10 +10,9 @@ test('TEI rules engine effects with functions and effects', () => {
     const teiValues = {};
     const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
     const enrollmentData = { enrollmentDate: '2020-05-14T22:00:00.000Z' };
-    const rulesEngine = new RulesEngine();
 
     // when
-    const rulesEffects = rulesEngine.executeTEIRules(
+    const rulesEffects = RulesEngine.programRuleEffectsForTEI(
         { programRulesVariables, programRules, constants },
         enrollmentData,
         teiValues,
