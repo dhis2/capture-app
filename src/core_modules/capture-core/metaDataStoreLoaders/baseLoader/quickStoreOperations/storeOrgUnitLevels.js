@@ -11,7 +11,7 @@ export const storeOrgUnitLevels = () => {
         },
     };
 
-    const convert = response => response.organisationUnitLevels;
+    const convert = response => response && response.organisationUnitLevels;
 
     return quickStoreRecursively(query, getContext().storeNames.ORGANISATION_UNIT_LEVELS, { onConvertQueryResponse: convert });
 };
