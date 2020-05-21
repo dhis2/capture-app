@@ -3,13 +3,14 @@
 # phil_dhis2, 2019
 # Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2020
 # Viktor Varland <viktor@dhis2.org>, 2020
+# Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2019-11-20T10:50:45.136Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
+"Last-Translator: Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2020\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -324,7 +325,7 @@ msgid "View event info"
 msgstr ""
 
 msgid "Delete event"
-msgstr ""
+msgstr "Hapus even"
 
 msgid "Update"
 msgstr "perbarui"
