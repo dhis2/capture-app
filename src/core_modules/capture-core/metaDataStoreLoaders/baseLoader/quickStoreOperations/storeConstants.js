@@ -12,5 +12,5 @@ export const storeConstants = () => {
 
     const convert = response => response && response.constants;
 
-    return quickStoreRecursively(query, getContext().storeNames.CONSTANTS, { onConvertQueryResponse: convert });
+    return quickStoreRecursively(query, getContext().storeNames.CONSTANTS, { convertQueryResponse: convert });
 };
