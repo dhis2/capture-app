@@ -16,7 +16,7 @@ function getOptionSetsOutline(trackedEntityTypesOutline) {
             accOptionSets = [...accOptionSets, ...optionSetsForType];
         }
 
-        return optionSetsForType;
+        return accOptionSets;
     }, []);
     return optionSetsOutline;
 }

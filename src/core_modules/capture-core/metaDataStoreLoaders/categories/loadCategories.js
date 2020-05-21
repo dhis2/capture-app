@@ -23,10 +23,10 @@ type ApiCategoryOption = {
 };
 
 async function requestCategoryOptions(querySpec: Object, page: number, pageSize: number) {
-    const response = await (query(querySpec, { page, pageSize }) || {});
+    const response = await query(querySpec, { page, pageSize });
     return {
-        hasNextPage: Boolean(response && response.pager && response.pager.nextPage),
-        categoryOptions: response.categoryOptions || [],
+        hasNextPage: !!(response && response.pager && response.pager.nextPage),
+        categoryOptions: (response && response.categoryOptions) || [],
     };
 }
 
