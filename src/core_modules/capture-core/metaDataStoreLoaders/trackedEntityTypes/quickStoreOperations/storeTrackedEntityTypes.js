@@ -26,19 +26,17 @@ const convert = (() => {
             }));
 })();
 
-export const storeTrackedEntityTypes = (() => {
-    const getFields = () => 'id,displayName,minAttributesRequiredToSearch,featureType,' +
+const fieldsParam = 'id,displayName,minAttributesRequiredToSearch,featureType,' +
     'trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],' +
     'translations[property,locale,value]';
 
-    return () => {
-        const query = {
-            resource: 'trackedEntityTypes',
-            params: {
-                fields: getFields(),
-            },
-        };
-
-        return quickStore(query, getContext().storeNames.TRACKED_ENTITY_TYPES, { convertQueryResponse: convert });
+export const storeTrackedEntityTypes = () => {
+    const query = {
+        resource: 'trackedEntityTypes',
+        params: {
+            fields: fieldsParam,
+        },
     };
-})();
+
+    return quickStore(query, getContext().storeNames.TRACKED_ENTITY_TYPES, { convertQueryResponse: convert });
+};

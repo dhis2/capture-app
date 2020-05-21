@@ -81,7 +81,7 @@ const convert = (() => {
     };
 })();
 
-const getFieldsQuery = () => 'id,version,displayName,displayShortName,description,programType,style,' +
+const fieldsParam = 'id,version,displayName,displayShortName,description,programType,style,' +
 'trackedEntityType[id],minAttributesRequiredToSearch,enrollmentDateLabel,incidentDateLabel,' +
 'featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture,displayIncidentDate,' +
 'dataEntryForm[id,htmlCode],' +
@@ -100,7 +100,7 @@ export const storePrograms = (programIds: Array<string>) => {
     const query = {
         resource: 'programs',
         params: {
-            fields: getFieldsQuery(),
+            fields: fieldsParam,
             filter: `id:in:[${programIds.join(',')}]`,
             pageSize: programIds.length,
         },
