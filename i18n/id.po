@@ -346,7 +346,7 @@ msgid "View event info"
 msgstr ""
 
 msgid "Delete event"
-msgstr ""
+msgstr "Hapus even"
 
 msgid "Update"
 msgstr "perbarui"
