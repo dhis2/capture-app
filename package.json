@@ -59,7 +59,7 @@
     "reselect": "^3.0.1",
     "rxjs": "^5.5.10",
     "typeface-roboto": "^0.0.54",
-    "uuid": "^3.3.2"
+    "uuid": "^8.1.0"
   },
   "scripts": {
     "manualBuild": "node verifyCacheVersion.js && yarn localize && d2-manifest package.json ./public/manifest.webapp && REACT_APP_DHIS2_BASE_URL='../../..' react-scripts build && mkdirp buildzip/ && pushd build && bestzip ../buildzip/NewCaptureApp.zip * && popd",
