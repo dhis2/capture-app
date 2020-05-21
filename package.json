@@ -56,7 +56,7 @@
     "redux-batched-actions": "^0.2.1",
     "redux-logger": "^3.0.6",
     "redux-observable": "^0.18.0",
-    "reselect": "^3.0.1",
+    "reselect": "^4.0.0",
     "rxjs": "^5.5.10",
     "typeface-roboto": "^0.0.54",
     "uuid": "^3.3.2"
