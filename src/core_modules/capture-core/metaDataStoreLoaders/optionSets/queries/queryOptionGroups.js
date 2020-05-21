@@ -16,6 +16,7 @@ const querySpecification = {
         pageSize: attributes.pageSize,
     }),
 };
+
 export const queryOptionGroups = async (ids: Array<string>, page: number, pageSize: number) => {
     const response = await query(querySpecification, { ids, page, pageSize });
     return {

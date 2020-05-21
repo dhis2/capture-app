@@ -9,21 +9,19 @@ import { loadTrackedEntityTypes } from '../trackedEntityTypes';
 import { loadTrackedEntityAttributes } from '../trackedEntityAttributes';
 import { loadCategories } from '../categories';
 import { loadOptionSets } from '../optionSets';
-import { executeUsersCacheMaintenance } from '../maintenance';
-
-const coreStoreOperations = [
-    storeConstants,
-    storeOrgUnitLevels,
-    storeRelationshipTypes,
-];
+import { upkeepUserCaches } from '../maintenance';
 
 async function loadCoreMetaData() {
     return Promise.all(
-        coreStoreOperations.map(operation => operation()),
+        [
+            storeConstants,
+            storeOrgUnitLevels,
+            storeRelationshipTypes,
+        ].map(operation => operation()),
     );
 }
-export const loadMetaData = async () => {
-    await executeUsersCacheMaintenance();
+export const loadMetaDataInternal = async () => {
+    await upkeepUserCaches();
     const {
         optionSetsOutline: optionSetsOutlineFromPrograms,
         trackedEntityAttributeIds: trackedEntityAttributeIdsFromPrograms,

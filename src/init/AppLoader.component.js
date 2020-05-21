@@ -30,10 +30,7 @@ const AppLoader = (props: Props) => {
 
     const load = React.useCallback(async () => {
         try {
-            await initializeAsync({
-                onCacheExpired,
-                onQueryApi: dataEngine.query.bind(dataEngine),
-            });
+            await initializeAsync(onCacheExpired, dataEngine.query.bind(dataEngine));
             const history = createHistory();
             const store = getStore(history, () => onRunApp(store, history));
         } catch (error) {

@@ -23,10 +23,10 @@ type ApiCategoryOption = {
 };
 
 async function requestCategoryOptions(querySpec: Object, page: number, pageSize: number) {
-    const response = await (query(querySpec, { page, pageSize }) || {});
+    const response = await query(querySpec, { page, pageSize });
     return {
         hasNextPage: !!(response && response.pager && response.pager.nextPage),
-        categoryOptions: response.categoryOptions || [],
+        categoryOptions: (response && response.categoryOptions) || [],
     };
 }
 
@@ -101,9 +101,7 @@ async function loadCategoryOptionsBatchAsync(
 }
 
 // This might look like horrible code!, but there is a reason. Freeing up memory is the most important thing here, ref JIRA-issue DHIS2-7259
-async function loadCategoryOptionsInBatchesAsync(
-    categoryIds: Array<string>,
-) {
+async function loadCategoryOptionsInBatchesAsync(categoryIds: Array<string>) {
     const categoryOptionsQuery = getCategoryOptionQuery(categoryIds);
 
     const batchSize = 5000;
