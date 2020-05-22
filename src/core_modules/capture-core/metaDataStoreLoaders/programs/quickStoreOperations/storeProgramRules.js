@@ -4,14 +4,14 @@ import { getContext } from '../../context';
 
 const convert = (() => {
     const getProgramRuleActions = (apiProgramRuleActions) => {
-        const getClearProps = () => ({
+        const resetProps = {
             programStageSection: undefined,
             programStage: undefined,
             dataElement: undefined,
             trackedEntityAttribute: undefined,
             optionGroup: undefined,
             option: undefined,
-        });
+        };
 
         const getProgramStageSectionId = d2ProgramRuleAction =>
             d2ProgramRuleAction.programStageSection && d2ProgramRuleAction.programStageSection.id;
@@ -28,7 +28,7 @@ const convert = (() => {
 
         return apiProgramRuleActions.map(apiProgramRuleAction => ({
             ...apiProgramRuleAction,
-            ...getClearProps(),
+            ...resetProps,
             programStageSectionId: getProgramStageSectionId(apiProgramRuleAction),
             programStageId: getProgramStageId(apiProgramRuleAction),
             dataElementId: getDataElementId(apiProgramRuleAction),
@@ -44,6 +44,7 @@ const convert = (() => {
         return apiProgramRules
             .map(apiProgramRule => ({
                 ...apiProgramRule,
+                // Adding the program id and program stage id directly to the main object instead of using the container object with id as the only property
                 program: undefined,
                 programStage: undefined,
                 programId: apiProgramRule.program && apiProgramRule.program.id,
@@ -53,7 +54,7 @@ const convert = (() => {
     };
 })();
 
-const getFieldsQuery = () => 'id,displayName,condition,description,program[id],programStage[id],priority,' +
+const fieldsParam = 'id,displayName,condition,description,program[id],programStage[id],priority,' +
 'programRuleActions[id,content,location,data,programRuleActionType,programStageSection[id],dataElement[id],' +
 'trackedEntityAttribute[id],programStage[id],optionGroup[id],option[id]]';
 
@@ -61,7 +62,7 @@ export const storeProgramRules = async (programIds: Array<string>) => {
     const query = {
         resource: 'programRules',
         params: {
-            fields: getFieldsQuery(),
+            fields: fieldsParam,
             filter: `program.id:in:[${programIds.join(',')}]`,
         },
     };
@@ -76,6 +77,11 @@ export const storeProgramRules = async (programIds: Array<string>) => {
         return convertedProgramRules;
     };
 
-    await quickStoreRecursively(query, getContext().storeNames.PROGRAM_RULES, { onConvert: convertRetainingIds });
+    await quickStoreRecursively(
+        query,
+        getContext().storeNames.PROGRAM_RULES,
+        { convertQueryResponse: convertRetainingIds },
+    );
+
     return programRuleIds;
 };

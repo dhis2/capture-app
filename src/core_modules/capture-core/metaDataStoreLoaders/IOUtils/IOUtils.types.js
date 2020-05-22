@@ -15,19 +15,19 @@ export type ApiQueryExtended = {
 
 export type StoreName = string;
 
-export type ConvertFn = (apiResponse: any) => any;
+export type ConvertQueryResponseFn = (apiResponse: any) => any;
 
 export type QuickStoreOptions = {
-    onConvert?: ConvertFn,
+    convertQueryResponse?: ConvertQueryResponseFn,
     variables?: Object,
 }
 
 export interface QuickStoreRecursivelyOptions {
-    onConvert?: ConvertFn,
+    convertQueryResponse?: ConvertQueryResponseFn,
     iterationSize?: number,
 }
 
 export interface QueryRecursivelyOptions {
-    onConvert?: ConvertFn,
+    convertQueryResponse?: ConvertQueryResponseFn,
     pageSize?: number,
 }

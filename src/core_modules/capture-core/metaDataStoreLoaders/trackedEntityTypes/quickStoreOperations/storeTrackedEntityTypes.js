@@ -26,7 +26,7 @@ const convert = (() => {
             }));
 })();
 
-const getFields = () => 'id,displayName,minAttributesRequiredToSearch,featureType,' +
+const fieldsParam = 'id,displayName,minAttributesRequiredToSearch,featureType,' +
     'trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],' +
     'translations[property,locale,value]';
 
@@ -34,11 +34,11 @@ export const storeTrackedEntityTypes = (ids: Array<string>) => {
     const query = {
         resource: 'trackedEntityTypes',
         params: {
-            fields: getFields(),
+            fields: fieldsParam,
             filter: `id:in:[${ids.join(',')}]`,
             pageSize: ids.length,
         },
     };
 
-    return quickStore(query, getContext().storeNames.TRACKED_ENTITY_TYPES, { onConvert: convert });
+    return quickStore(query, getContext().storeNames.TRACKED_ENTITY_TYPES, { convertQueryResponse: convert });
 };

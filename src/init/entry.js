@@ -15,7 +15,6 @@ import type { HashHistory } from 'history/createHashHistory';
 import './addRxjsOperators';
 import AppLoader from './AppLoader.component';
 import App from '../components/App/App.component';
-
 import { loadApp } from './entry.actions';
 import { addBeforeUnloadEventListener } from '../unload';
 
@@ -78,7 +77,7 @@ function runApp(store: ReduxStore, history: HashHistory) {
     );
 }
 
-async function loadAppAsync() {
+export function initApp() {
     render(
         <JSSProviderShell>
             <DataProvider
@@ -94,5 +93,3 @@ async function loadAppAsync() {
         domElement,
     );
 }
-
-loadAppAsync();

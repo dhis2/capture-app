@@ -10,22 +10,20 @@ import { loadTrackedEntityTypes } from '../trackedEntityTypes';
 import { loadTrackedEntityAttributes } from '../trackedEntityAttributes';
 import { loadCategories } from '../categories';
 import { loadOptionSets } from '../optionSets';
-import { executeUsersCacheMaintenance } from '../maintenance';
-
-const coreStoreOperations = [
-    storeConstants,
-    storeOrgUnitLevels,
-    storeRelationshipTypes,
-    storeOrgUnitGroups,
-];
+import { upkeepUserCaches } from '../maintenance';
 
 function loadCoreMetaData() {
     return Promise.all(
-        coreStoreOperations.map(operation => operation()),
+        [
+            storeConstants,
+            storeOrgUnitLevels,
+            storeRelationshipTypes,
+            storeOrgUnitGroups,
+        ].map(operation => operation()),
     );
 }
-export const loadMetaData = async () => {
-    await executeUsersCacheMaintenance();
+export const loadMetaDataInternal = async () => {
+    await upkeepUserCaches();
     const {
         optionSetsOutline: optionSetsOutlineFromPrograms,
         trackedEntityAttributeIds: trackedEntityAttributeIdsFromPrograms,

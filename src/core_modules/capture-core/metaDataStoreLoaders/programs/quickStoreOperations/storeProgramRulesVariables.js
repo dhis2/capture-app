@@ -3,13 +3,13 @@ import { quickStoreRecursively } from '../../IOUtils';
 import { getContext } from '../../context';
 
 const convert = (() => {
-    const getClearProps = () => ({
+    const resetProps = {
         dataElement: undefined,
         trackedEntityAttribute: undefined,
         program: undefined,
         programStage: undefined,
         useCodeForOptionSet: undefined,
-    });
+    };
 
     const getIdProps = apiProgramRuleVariable => ({
         dataElementId: apiProgramRuleVariable.dataElement && apiProgramRuleVariable.dataElement.id,
@@ -25,7 +25,7 @@ const convert = (() => {
         return apiProgramRulesVariables
             .map(apiProgramRuleVariable => ({
                 ...apiProgramRuleVariable,
-                ...getClearProps(),
+                ...resetProps,
                 ...getIdProps(apiProgramRuleVariable),
                 useNameForOptionSet: apiProgramRuleVariable.useCodeForOptionSet != null ?
                     !apiProgramRuleVariable.useCodeForOptionSet :
@@ -34,14 +34,12 @@ const convert = (() => {
     };
 })();
 
-const getFieldsQuery = () => 'id,displayName,programRuleVariableSourceType,' +
-'program[id],programStage[id],dataElement[id],trackedEntityAttribute[id],useCodeForOptionSet';
-
 export const storeProgramRulesVariables = async (programIds: Array<string>) => {
     const query = {
         resource: 'programRuleVariables',
         params: {
-            fields: getFieldsQuery(),
+            fields: 'id,displayName,programRuleVariableSourceType,' +
+                'program[id],programStage[id],dataElement[id],trackedEntityAttribute[id],useCodeForOptionSet',
             filter: `program.id:in:[${programIds.join(',')}]`,
         },
     };
@@ -59,7 +57,7 @@ export const storeProgramRulesVariables = async (programIds: Array<string>) => {
     await quickStoreRecursively(
         query,
         getContext().storeNames.PROGRAM_RULES_VARIABLES, {
-            onConvert: convertRetainingIds,
+            convertQueryResponse: convertRetainingIds,
         });
 
     return programRuleVariableIds;

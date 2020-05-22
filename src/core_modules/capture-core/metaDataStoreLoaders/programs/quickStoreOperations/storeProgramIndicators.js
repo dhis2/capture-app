@@ -35,6 +35,11 @@ export const storeProgramIndicators = async (programIds: Array<string>) => {
         return convertedProgramIndicators;
     };
 
-    await quickStoreRecursively(query, getContext().storeNames.PROGRAM_INDICATORS, { onConvert: convertRetainingIds });
+    await quickStoreRecursively(
+        query,
+        getContext().storeNames.PROGRAM_INDICATORS,
+        { convertQueryResponse: convertRetainingIds },
+    );
+
     return programIndicatorsIds;
 };

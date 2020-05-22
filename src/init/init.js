@@ -163,13 +163,10 @@ function setHeaderBarStrings(d2) {
     d2.i18n.addStrings(['app_search_placeholder=search']);
 }
 
-export async function initializeAsync({
-    onCacheExpired,
-    onQueryApi,
-}: {
+export async function initializeAsync(
     onCacheExpired: Function,
     onQueryApi: Function,
-}) {
+) {
     setLogLevel();
 
     // initialize d2
