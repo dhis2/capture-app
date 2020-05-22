@@ -3,25 +3,29 @@ import { quickStore } from './quickStore';
 import type {
     ApiQuery,
     StoreName,
+    QuickStoreRecursivelyMandatory,
     QuickStoreRecursivelyOptions,
+    ConvertQueryResponseFn,
 } from './IOUtils.types';
 import type {
     Variables,
     RecursiveQuery,
     QuickStoreIterationOptions,
-    ExecuteOptions,
 } from './quickStoreRecursively.types';
 
 const quickStoreIteration = async (
     recursiveQuery: RecursiveQuery,
     storeName: StoreName,
     {
-        variables,
         convertQueryResponse,
+        variables,
     }: QuickStoreIterationOptions,
 ) => {
-    const { rawResponse } = await quickStore(recursiveQuery, storeName, {
+    const { rawResponse } = await quickStore({
+        query: recursiveQuery,
+        storeName,
         convertQueryResponse,
+    }, {
         variables,
     });
 
@@ -31,9 +35,8 @@ const quickStoreIteration = async (
 const executeRecursiveQuickStore = (
     recursiveQuery: RecursiveQuery,
     storeName: StoreName,
-    {
-        convertQueryResponse,
-    }: ExecuteOptions) => {
+    convertQueryResponse: ConvertQueryResponseFn,
+) => {
     const next = async (iteration: number = 1) => {
         const done = await quickStoreIteration(recursiveQuery, storeName, {
             convertQueryResponse,
@@ -59,15 +62,13 @@ const getRecursiveQuery = (query: ApiQuery, iterationSize: number) => ({
     }),
 });
 
-export const quickStoreRecursively = async (
-    query: ApiQuery,
-    storeName: StoreName,
-    {
+export const quickStoreRecursively = async ({
+    query,
+    storeName,
+    convertQueryResponse,
+}: QuickStoreRecursivelyMandatory, {
         iterationSize = 500,
-        convertQueryResponse,
     }: QuickStoreRecursivelyOptions) => {
     const recursiveQuery = getRecursiveQuery(query, iterationSize);
-    await executeRecursiveQuickStore(recursiveQuery, storeName, {
-        convertQueryResponse,
-    });
+    await executeRecursiveQuickStore(recursiveQuery, storeName, convertQueryResponse);
 };
