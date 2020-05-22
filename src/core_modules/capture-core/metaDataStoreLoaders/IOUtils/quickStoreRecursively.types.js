@@ -5,7 +5,7 @@ import type {
 } from './IOUtils.types';
 
 export type ExecuteOptions = {
-    convertQueryResponse?: ConvertQueryResponseFn,
+    convertQueryResponse: ConvertQueryResponseFn,
 };
 
 export type Variables = {
@@ -18,6 +18,6 @@ export type RecursiveQuery = {
 };
 
 export type QuickStoreIterationOptions = {
+    convertQueryResponse: ConvertQueryResponseFn,
     variables: Variables,
-    convertQueryResponse?: ConvertQueryResponseFn,
 };
