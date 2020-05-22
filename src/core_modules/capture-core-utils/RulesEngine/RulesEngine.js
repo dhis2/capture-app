@@ -117,6 +117,27 @@ const replaceVariablesWithValues = (expression: string, variablesHash: RuleVaria
     if (expression.includes('{') === false) {
         return expression;
     }
+
+    const avoidReplacementFunctions = ['d2:hasValue', 'd2:lastEventDate', 'd2:count', 'd2:countIfZeroPos', 'd2:countIfValue'];
+    avoidReplacementFunctions.forEach((funcName) => {
+        const rex = new RegExp(`${funcName}\\( *([A#CV]\\{[\\w -_.]+})( *, *(([\\d/\\*\\+\\-%. ]+)|'[^']*'))* *\\)`, 'g');
+
+        const callsToThisFunction = expression.match(rex);
+        if (Array.isArray(callsToThisFunction)) {
+            callsToThisFunction
+                .filter(call => call.includes(funcName))
+                .forEach((call) => {
+                    const newCall = call
+                        .replace('#{', "'")
+                        .replace('A{', "'")
+                        .replace('C{', "'")
+                        .replace('V{', "'")
+                        .replace('}', "'");
+                    expression = expression.replace(call, newCall);
+                });
+        }
+    });
+
     // Check if the expression contains program rule variables at all(any curly braces):
     if (expression.indexOf('{') !== -1) {
         // Find every variable name in the expression;
