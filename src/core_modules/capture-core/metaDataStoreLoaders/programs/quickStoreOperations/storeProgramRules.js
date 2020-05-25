@@ -44,8 +44,8 @@ const convert = (() => {
         return apiProgramRules
             .map(apiProgramRule => ({
                 ...apiProgramRule,
-                // This object is stored in IndexedDB. When a property points to an object containing only an id property, the id property is moved up one level to the parent object.
-                // In this instance, program is replaced by programId and programStage is replaced by programStageId.
+                // Adding the program id and program stage id directly to the main object instead of using the container object with id as the only property
+                // The reason being that we don't want the container object to be stored in IndexedDB.
                 program: undefined,
                 programStage: undefined,
                 programId: apiProgramRule.program && apiProgramRule.program.id,
