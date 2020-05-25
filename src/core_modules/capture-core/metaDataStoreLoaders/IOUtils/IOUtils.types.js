@@ -24,7 +24,7 @@ export type QuickStoreMandatory = {
 };
 export type QuickStoreOptions = {
     queryVariables?: Object,
-}
+};
 
 export type QuickStoreRecursivelyMandatory = {
     query: ApiQuery,
@@ -34,9 +34,9 @@ export type QuickStoreRecursivelyMandatory = {
 
 export type QuickStoreRecursivelyOptions = {
     iterationSize?: number,
-}
+};
 
-export interface QueryRecursivelyOptions {
+export type QueryRecursivelyOptions = {
     convertQueryResponse?: ConvertQueryResponseFn,
     pageSize?: number,
-}
+};
