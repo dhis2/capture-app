@@ -38,5 +38,9 @@ export const storeTrackedEntityTypes = () => {
         },
     };
 
-    return quickStore(query, getContext().storeNames.TRACKED_ENTITY_TYPES, { convertQueryResponse: convert });
+    return quickStore({
+        query,
+        storeName: getContext().storeNames.TRACKED_ENTITY_TYPES,
+        convertQueryResponse: convert,
+    });
 };

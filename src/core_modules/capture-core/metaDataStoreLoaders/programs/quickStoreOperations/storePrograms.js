@@ -105,5 +105,9 @@ export const storePrograms = (programIds: Array<string>) => {
             pageSize: programIds.length,
         },
     };
-    return quickStore(query, getContext().storeNames.PROGRAMS, { convertQueryResponse: convert });
+    return quickStore({
+        query,
+        storeName: getContext().storeNames.PROGRAMS,
+        convertQueryResponse: convert,
+    });
 };

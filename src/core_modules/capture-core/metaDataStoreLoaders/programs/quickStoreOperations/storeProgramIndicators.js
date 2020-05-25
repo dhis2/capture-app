@@ -22,5 +22,9 @@ export const storeProgramIndicators = (programIds: Array<string>) => {
             filter: `program.id:in:[${programIds.join(',')}]`,
         },
     };
-    return quickStoreRecursively(query, getContext().storeNames.PROGRAM_INDICATORS, { convertQueryResponse: convert });
+    return quickStoreRecursively({
+        query,
+        storeName: getContext().storeNames.PROGRAM_INDICATORS,
+        convertQueryResponse: convert,
+    });
 };
