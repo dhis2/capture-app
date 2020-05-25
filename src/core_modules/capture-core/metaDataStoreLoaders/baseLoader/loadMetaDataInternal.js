@@ -10,7 +10,6 @@ import { loadTrackedEntityTypes } from '../trackedEntityTypes';
 import { loadTrackedEntityAttributes } from '../trackedEntityAttributes';
 import { loadCategories } from '../categories';
 import { loadOptionSets } from '../optionSets';
-import { upkeepUserCaches } from '../maintenance';
 
 function loadCoreMetaData() {
     return Promise.all(
@@ -23,7 +22,6 @@ function loadCoreMetaData() {
     );
 }
 export const loadMetaDataInternal = async () => {
-    await upkeepUserCaches();
     const {
         optionSetsOutline: optionSetsOutlineFromPrograms,
         trackedEntityAttributeIds: trackedEntityAttributeIdsFromPrograms,
