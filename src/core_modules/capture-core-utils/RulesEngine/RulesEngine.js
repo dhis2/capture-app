@@ -21,7 +21,6 @@ import type {
     ProgramRule,
     RuleVariables,
     D2Functions,
-    ProgramRuleEffect,
 } from './rulesEngine.types';
 import inputValueConverter from './converters/inputValueConverter';
 import getRulesEffectsProcessor from './rulesEffectsProcessor/rulesEffectsProcessor';
@@ -231,7 +230,7 @@ function getProgramRuleEffects(
     trackedEntityAttributes: ?TrackedEntityAttributes,
     variablesHash: RuleVariables,
     processType: string,
-): ?Array<ProgramRuleEffect> {
+): ?OutputEffects {
     if (!programRules) {
         return null;
     }
@@ -269,7 +268,7 @@ function getProgramRuleEffects(
                 log.warn(`Rule id:'${rule.id}'' and name:'${rule.name}' had no condition specified. Please check rule configuration.`);
             }
 
-            let programRuleEffects;
+            let programRuleEffects = [];
             if (isProgramRuleExpressionEffective) {
                 programRuleEffects = rule.programRuleActions.map((
                     {
