@@ -593,7 +593,7 @@ function findDeviationLimits(weight, sdArray) {
     return { lowerLimitIn, higherLimitIn };
 }
 
-function getZScoreFromMap(key, value, map) {
+const getZScoreFromMap = (key, value, map) => {
     const sdArray = map[Number(key)];
 
     if (value < sdArray[0]) { return -3.5; }
@@ -613,9 +613,9 @@ function getZScoreFromMap(key, value, map) {
     const decimalSubtraction = distance > 0 ? gap / distance : 0;
 
     return (higherLimitIn - 3 - decimalSubtraction).toFixed(2);
-}
+};
 
-export function getZScoreWFA(ageInMonths, weight, gender) {
+export const getZScoreWFA = (ageInMonths, weight, gender) => {
     let map = femaleMapWFA;
 
     if (maleCodes[gender] === 1) {
@@ -623,9 +623,9 @@ export function getZScoreWFA(ageInMonths, weight, gender) {
     }
 
     return getZScoreFromMap(Math.round(ageInMonths), weight, map);
-}
+};
 
-export function getZScoreHFA(ageInMonths, heightInCm, gender) {
+export const getZScoreHFA = (ageInMonths, heightInCm, gender) => {
     let map = femaleMapHFA;
 
     if (maleCodes[gender] === 1) {
@@ -633,9 +633,9 @@ export function getZScoreHFA(ageInMonths, heightInCm, gender) {
     }
 
     return getZScoreFromMap(Math.round(ageInMonths), heightInCm, map);
-}
+};
 
-export function getZScoreWFH(heightInCm, weight, gender) {
+export const getZScoreWFH = (heightInCm, weight, gender) => {
     let map = femaleMapWFH;
 
     if (maleCodes[gender] === 1) {
