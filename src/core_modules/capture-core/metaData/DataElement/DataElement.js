@@ -3,8 +3,8 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-restricted-syntax */
 import log from 'loglevel';
-import isFunction from 'd2-utilizr/src/isFunction';
-import isArray from 'd2-utilizr/src/isArray';
+import isFunction from 'd2-utilizr/lib/isFunction';
+import isArray from 'd2-utilizr/lib/isArray';
 
 import Icon from '../Icon/Icon';
 import OptionSet from '../OptionSet/OptionSet';

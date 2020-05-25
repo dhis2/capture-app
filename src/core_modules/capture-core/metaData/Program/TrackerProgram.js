@@ -1,6 +1,6 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-import isFunction from 'd2-utilizr/src/isFunction';
+import isFunction from 'd2-utilizr/lib/isFunction';
 import Program from './Program';
 import { TrackedEntityType } from '../TrackedEntityType';
 import { SearchGroup } from '../SearchGroup';

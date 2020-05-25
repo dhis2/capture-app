@@ -2,7 +2,7 @@
 import { batchActions } from 'redux-batched-actions';
 import i18n from '@dhis2/d2-i18n';
 import { ActionsObservable } from 'redux-observable';
-import uuid from 'd2-utilizr/src/uuid';
+import uuid from 'd2-utilizr/lib/uuid';
 import {
     addRelationship,
     removeRelationship,
