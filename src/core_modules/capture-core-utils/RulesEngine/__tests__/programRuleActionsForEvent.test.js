@@ -537,3 +537,38 @@ describe('Event rules engine effects with functions and effects', () => {
         });
     });
 });
+
+describe('Event rules engine effects with functions and effects', () => {
+    // these variables are shared between each test
+    const constants = [];
+    const dataElementsInProgram = { oZg33kd9taw: { id: 'oZg33kd9taw', valueType: 'TEXT', optionSetId: 'pC3N9N77UmT' }, SWfdB5lX0fk: { id: 'SWfdB5lX0fk', valueType: 'BOOLEAN' }, qrur9Dvnyt5: { id: 'qrur9Dvnyt5', valueType: 'INTEGER' }, GieVkTxp4HH: { id: 'GieVkTxp4HH', valueType: 'NUMBER' }, vV9UWAZohSf: { id: 'vV9UWAZohSf', valueType: 'INTEGER_POSITIVE' }, eMyVanycQSC: { id: 'eMyVanycQSC', valueType: 'DATE' }, K6uUAvq500H: { id: 'K6uUAvq500H', valueType: 'TEXT', optionSetId: 'eUZ79clX7y1' }, msodh3rEMJa: { id: 'msodh3rEMJa', valueType: 'DATE' }, S33cRBsnXPo: { id: 'S33cRBsnXPo', valueType: 'ORGANISATION_UNIT' }, fWIAEtYVEGk: { id: 'fWIAEtYVEGk', valueType: 'TEXT', optionSetId: 'iDFPKpFTiVw' }, ulD2zW0TIy2: { id: 'ulD2zW0TIy2', valueType: 'FILE_RESOURCE' } };
+    const programRules = [{ id: 'cq1dwUY4lVU', condition: 'true', displayName: 'testing the z-scores', programId: 'eBAyeGv0exc', programRuleActions: [{ id: 'I6pDcSm2m0g', content: "d2:zScoreWFA( 20, 15, 'M' ) = ", data: "d2:zScoreWFA( 20, 15, 'M' )", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'No0T9TgN1Px', content: "d2:zScoreWFH( 100, 20, 'M' ) = ", data: "d2:zScoreWFH( 100, 20, 'M' )", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'n1GUxR8fShY', content: "d2:zScoreHFA( 15, 20, 'F' )  =", data: "d2:zScoreHFA( 15, 20, 'F' ) ", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'QJlZHo0GoVK', content: "d2:zScoreWFH( 100, 20, 'F' )  = ", data: "d2:zScoreWFH( 100, 20, 'F' ) ", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'ItuKGBUuJgK', content: "d2:zScoreWFA( 20, 15, 'F' ) = ", data: "d2:zScoreWFA( 20, 15, 'F' )", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'uhyaCDzzivm', content: "d2:zScoreHFA( 15, 20, 'M' ) =", data: "d2:zScoreHFA( 15, 20, 'M' )", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }] }];
+    const programRulesVariables = [];
+    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
+    const optionSet = {};
+    const currentEvent = {};
+    const allEvents = { all: [], byStage: {} };
+
+    describe('where z-score take place', () => {
+        test('with given values', () => {
+        // when
+            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
+                { programRulesVariables, programRules, constants },
+                { currentEvent, allEvents },
+                dataElementsInProgram,
+                orgUnit,
+                optionSet,
+            );
+
+            // then
+            expect(rulesEffects).toEqual([
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'I6pDcSm2m0g', message: "d2:zScoreWFA( 20, 15, 'M' ) =  2.47" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'No0T9TgN1Px', message: "d2:zScoreWFH( 100, 20, 'M' ) =  3.5" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'n1GUxR8fShY', message: "d2:zScoreHFA( 15, 20, 'F' )  = -3.5" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'QJlZHo0GoVK', message: "d2:zScoreWFH( 100, 20, 'F' )  =  2.84" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'ItuKGBUuJgK', message: "d2:zScoreWFA( 20, 15, 'F' ) =  2.65" } },
+                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'uhyaCDzzivm', message: "d2:zScoreHFA( 15, 20, 'M' ) = -3.5" } },
+            ]);
+        });
+    });
+});
