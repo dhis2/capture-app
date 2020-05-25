@@ -39,21 +39,21 @@ export const loadRulesCentricMetadata = (programIds: Array<string>) => {
         unavailableIds.length > 0 && await storageController.remove(storeName, unavailableIds);
     };
 
-    const load = async ({ storeName, onStore }) => {
-        const loadedIds = await onStore(programIds);
+    const load = async ({ storeName, storeFn }) => {
+        const loadedIds = await storeFn(programIds);
         const cachedIds = await getCachedIds(storeName);
         await removeUnavailableRecords(loadedIds, cachedIds, storeName);
     };
 
     const loaderSpecs = [{
         storeName: storeNames.PROGRAM_RULES_VARIABLES,
-        onStore: storeProgramRulesVariables,
+        storeFn: storeProgramRulesVariables,
     }, {
         storeName: storeNames.PROGRAM_RULES,
-        onStore: storeProgramRules,
+        storeFn: storeProgramRules,
     }, {
         storeName: storeNames.PROGRAM_INDICATORS,
-        onStore: storeProgramIndicators,
+        storeFn: storeProgramIndicators,
     }];
 
     return Promise.all(
