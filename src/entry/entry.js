@@ -13,8 +13,8 @@ import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
 import type { HashHistory } from 'history/createHashHistory';
 
 import './addRxjsOperators';
-import AppLoader from './AppLoader.component';
-import App from '../components/App/App.component';
+import { AppLoader } from '../components/AppLoader';
+import { App } from '../components/App';
 import { loadApp } from './entry.actions';
 import { addBeforeUnloadEventListener } from '../unload';
 
