@@ -40,5 +40,9 @@ export const storeTrackedEntityTypes = (ids: Array<string>) => {
         },
     };
 
-    return quickStore(query, getContext().storeNames.TRACKED_ENTITY_TYPES, { convertQueryResponse: convert });
+    return quickStore({
+        query,
+        storeName: getContext().storeNames.TRACKED_ENTITY_TYPES,
+        convertQueryResponse: convert,
+    });
 };

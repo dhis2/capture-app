@@ -54,11 +54,11 @@ export const storeProgramRulesVariables = async (programIds: Array<string>) => {
         return convertedProgramRuleVariables;
     };
 
-    await quickStoreRecursively(
+    await quickStoreRecursively({
         query,
-        getContext().storeNames.PROGRAM_RULES_VARIABLES, {
-            convertQueryResponse: convertRetainingIds,
-        });
+        storeName: getContext().storeNames.PROGRAM_RULES_VARIABLES,
+        convertQueryResponse: convertRetainingIds,
+    });
 
     return programRuleVariableIds;
 };

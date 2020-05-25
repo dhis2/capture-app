@@ -17,13 +17,22 @@ export type StoreName = string;
 
 export type ConvertQueryResponseFn = (apiResponse: any) => any;
 
+export type QuickStoreMandatory = {
+    query: ApiQueryExtended,
+    storeName: StoreName,
+    convertQueryResponse: ConvertQueryResponseFn,
+};
 export type QuickStoreOptions = {
-    convertQueryResponse?: ConvertQueryResponseFn,
-    variables?: Object,
+    queryVariables?: Object,
 }
 
-export interface QuickStoreRecursivelyOptions {
-    convertQueryResponse?: ConvertQueryResponseFn,
+export type QuickStoreRecursivelyMandatory = {
+    query: ApiQuery,
+    storeName: StoreName,
+    convertQueryResponse: ConvertQueryResponseFn,
+};
+
+export type QuickStoreRecursivelyOptions = {
     iterationSize?: number,
 }
 

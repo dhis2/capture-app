@@ -2,7 +2,7 @@
 import { quickStoreRecursively } from '../../IOUtils';
 import { getContext } from '../../context';
 
-export const storeConstants = () => {
+export const storeConstants = (): Promise<void> => {
     const query = {
         resource: 'constants',
         params: {
@@ -12,5 +12,9 @@ export const storeConstants = () => {
 
     const convert = response => response && response.constants;
 
-    return quickStoreRecursively(query, getContext().storeNames.CONSTANTS, { convertQueryResponse: convert });
+    return quickStoreRecursively({
+        query,
+        storeName: getContext().storeNames.CONSTANTS,
+        convertQueryResponse: convert,
+    });
 };
