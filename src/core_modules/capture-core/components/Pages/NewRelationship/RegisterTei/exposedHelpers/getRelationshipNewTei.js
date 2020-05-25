@@ -1,5 +1,5 @@
 // @flow
-import uuid from 'd2-utilizr/src/uuid';
+import uuid from 'd2-utilizr/lib/uuid';
 import { moment } from 'capture-core-utils/moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import {

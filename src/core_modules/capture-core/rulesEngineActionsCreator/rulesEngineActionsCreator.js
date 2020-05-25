@@ -2,29 +2,23 @@
 /**
  * @module rulesEngineActionsCreator
  */
-import i18n from '@dhis2/d2-i18n';
-import { RulesEngine } from 'capture-core-utils/RulesEngine';
-import type
-{
-    OutputEffect,
-    EventData,
-    Enrollment,
-    TEIValues,
-} from 'capture-core-utils/RulesEngine/rulesEngine.types';
-import { RenderFoundation, Program, TrackerProgram } from '../metaData';
-import inputValueConverter from './converters/inputValueConverter';
-import outputRulesEffectsValueConverter from './converters/rulesEffectsValueConverter';
-import momentConverter from './converters/momentConverter';
+import { Program, RenderFoundation, TrackerProgram } from '../metaData';
 import runRulesForSingleEvent from './runRulesForSingleEvent';
 import runRulesForTEI from './runRulesForTEI';
 import postProcessRulesEffects from './postProcessRulesEffects';
 import { updateRulesEffects } from './rulesEngine.actions';
+import type {
+    OutputEffects,
+    Enrollment,
+    TEIValues,
+    OrgUnit,
+    EventData,
+    EventsData,
+} from '../../capture-core-utils/RulesEngine/rulesEngine.types';
 
-const rulesEngine =
-    new RulesEngine(inputValueConverter, momentConverter, i18n.t, outputRulesEffectsValueConverter);
 
 function getRulesActions(
-    rulesEffects: ?Array<OutputEffect>,
+    rulesEffects: ?OutputEffects,
     foundation: ?RenderFoundation,
     formId: string,
 ) {
@@ -36,17 +30,15 @@ export function getRulesActionsForEvent(
     program: ?Program,
     foundation: ?RenderFoundation,
     formId: string,
-    orgUnit: Object,
-    currentEventData: ?EventData,
-    allEventsData: ?Array<EventData>,
+    orgUnit: OrgUnit,
+    currentEvent: EventData = {},
+    allEventsData: EventsData = [],
 ) {
     const rulesEffects = runRulesForSingleEvent(
-        rulesEngine,
         program,
         foundation,
-        formId,
         orgUnit,
-        currentEventData,
+        currentEvent,
         allEventsData,
     );
     return getRulesActions(rulesEffects, foundation, formId);
@@ -56,15 +48,13 @@ export function getRulesActionsForTEI(
     program: ?TrackerProgram,
     foundation: ?RenderFoundation,
     formId: string,
-    orgUnit: Object,
+    orgUnit: OrgUnit,
     enrollmentData: ?Enrollment,
     teiValues: ?TEIValues,
 ) {
     const rulesEffects = runRulesForTEI(
-        rulesEngine,
         program,
         foundation,
-        formId,
         orgUnit,
         enrollmentData,
         teiValues,

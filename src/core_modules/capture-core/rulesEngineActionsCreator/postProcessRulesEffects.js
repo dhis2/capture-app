@@ -7,6 +7,7 @@ import type
     AssignOutputEffect,
 } from 'capture-core-utils/RulesEngine/rulesEngine.types';
 import { RenderFoundation } from '../metaData';
+import type { OutputEffects } from "../../capture-core-utils/RulesEngine/rulesEngine.types";
 
 function getAssignEffects(assignEffects: ?{ [elementId: string]: Array<AssignOutputEffect> }) {
     if (!assignEffects) {
@@ -170,7 +171,7 @@ function filterSectionsHideEffects(
 }
 
 export default function postProcessRulesEffects(
-    rulesEffects: ?Array<OutputEffect>,
+    rulesEffects: ?OutputEffects,
     foundation: ?RenderFoundation) {
     if (!rulesEffects || !foundation) {
         return null;

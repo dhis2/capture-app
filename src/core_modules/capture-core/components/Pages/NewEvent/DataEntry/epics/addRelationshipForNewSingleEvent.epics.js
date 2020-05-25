@@ -1,5 +1,5 @@
 // @flow
-import uuid from 'd2-utilizr/src/uuid';
+import uuid from 'd2-utilizr/lib/uuid';
 import i18n from '@dhis2/d2-i18n';
 import { batchActions } from 'redux-batched-actions';
 
