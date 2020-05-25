@@ -2,7 +2,7 @@
 import { query } from './query';
 import type {
     ApiQuery,
-    ConvertFn,
+    ConvertQueryResponseFn,
     QueryRecursivelyOptions,
 } from './IOUtils.types';
 
@@ -17,11 +17,11 @@ type RecursiveQuery = {
 
 const executeRecursiveQuery = (
     recursiveQuery: RecursiveQuery,
-    onConvert?: ConvertFn,
+    convertQueryResponse?: ConvertQueryResponseFn,
 ) => {
     const next = async (page: number = 1) => {
         const response = await query(recursiveQuery, { page });
-        const convertedData = onConvert ? onConvert(response) : response;
+        const convertedData = convertQueryResponse ? convertQueryResponse(response) : response;
         const done = !(response && response.pager && response.pager.nextPage);
 
         if (!done) {
@@ -46,8 +46,8 @@ const getRecursiveQuery = (querySpec: ApiQuery, pageSize: number) => ({
 export const queryRecursively = (
     querySpec: ApiQuery, {
         pageSize = 500,
-        onConvert,
+        convertQueryResponse,
     }: QueryRecursivelyOptions = {}) => {
     const recursiveQuery = getRecursiveQuery(querySpec, pageSize);
-    return executeRecursiveQuery(recursiveQuery, onConvert);
+    return executeRecursiveQuery(recursiveQuery, convertQueryResponse);
 };

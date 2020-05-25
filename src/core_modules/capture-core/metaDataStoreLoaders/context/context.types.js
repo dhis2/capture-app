@@ -5,6 +5,7 @@ import type { QueryApiFn } from '../loader.types';
 type StoreNames = {
     CONSTANTS: string,
     ORGANISATION_UNIT_LEVELS: string,
+    ORGANISATION_UNIT_GROUPS: string,
     RELATIONSHIP_TYPES: string,
     TRACKED_ENTITY_TYPES: string,
     PROGRAMS: string,

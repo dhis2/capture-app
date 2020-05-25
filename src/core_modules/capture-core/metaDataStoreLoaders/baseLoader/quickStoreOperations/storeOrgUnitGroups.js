@@ -19,5 +19,11 @@ export const storeOrgUnitGroups = () => {
         },
     };
 
-    return quickStoreRecursively(query, getContext().storeNames.ORGANISATION_UNIT_GROUPS, { onConvert: convert, iterationSize: 100 });
+    return quickStoreRecursively({
+        query,
+        storeName: getContext().storeNames.ORGANISATION_UNIT_GROUPS,
+        convertQueryResponse: convert,
+    }, {
+        iterationSize: 100,
+    });
 };
