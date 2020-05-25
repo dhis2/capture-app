@@ -573,7 +573,7 @@ const maleMapHFA = {
     60: [96.1, 100.7, 105.3, 110.0, 114.6, 119.2, 123.9],
 };
 
-function findDeviationLimits(weight, sdArray) {
+const findDeviationLimits = (weight, sdArray) => {
     let lowerLimitIn;
     let higherLimitIn;
     // find the standard deviation interval
@@ -591,7 +591,7 @@ function findDeviationLimits(weight, sdArray) {
         break;
     }
     return { lowerLimitIn, higherLimitIn };
-}
+};
 
 const getZScoreFromMap = (key, value, map) => {
     const sdArray = map[Number(key)];
@@ -643,4 +643,4 @@ export const getZScoreWFH = (heightInCm, weight, gender) => {
     }
 
     return getZScoreFromMap(Math.round(heightInCm * 2) / 2, weight, map);
-}
+};
