@@ -7,7 +7,7 @@ import ValueProcessor from './ValueProcessor/ValueProcessor';
 import executeExpression from './executionService/executionService';
 import getDateUtils from './dateUtils/dateUtils';
 import processTypes from './rulesEffectsProcessor/processTypes.const';
-import d2Functions from './d2Functions';
+import { d2Functions } from './d2Functions';
 import type {
     OutputEffects,
     ProgramRulesContainer,
