@@ -1,63 +1,6 @@
-import runRulesForSingleEvent from '../../../capture-core/rulesEngineActionsCreator/runRulesForSingleEvent';
 import { RulesEngine } from '../index';
 
-describe('rules engine', () => {
-    const currentEvent = {};
-    const allEvents = { all: [], byStage: {} };
-    const orgUnit = { id: 'DiszpKrYNg8', code: 'Ngelehun CHC' };
-
-    describe.each([
-        [
-            {
-                program: {
-                    programRules: [{ id: 'GC4gpdoSD4r', condition: '#{hemoglobin} < 9', description: 'Show warning if hemoglobin is dangerously low', displayName: 'Hemoglobin warning', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'suS9GnraCx1', content: 'Hemoglobin value lower than normal', dataElementId: 'vANAXwtLwcT', programRuleActionType: 'SHOWWARNING' }] }, { id: 'dahuKlP7jR2', condition: '#{hemoglobin} > 99', description: 'Show error for hemoglobin value higher than 99', displayName: 'Show error for high hemoglobin value', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'UUwZWS8uirn', content: 'The hemoglobin value cannot be above 99', dataElementId: 'vANAXwtLwcT', programRuleActionType: 'SHOWERROR' }] }, { id: 'xOe5qCzRS0Y', condition: '!#{womanSmoking} ', description: 'Hide smoking cessation councelling dataelement unless patient is smoking', displayName: 'Hide smoking cessation councelling', programId: 'lxAQ7Zs9VYR', programRuleActions: [{ id: 'hwgyO59SSxu', dataElementId: 'Ok9OQpitjQr', programRuleActionType: 'HIDEFIELD' }] }],
-                    programRuleVariables: [{ id: 'Z92dJO9gIje', dataElementId: 'sWoqcoByYmD', displayName: 'womanSmoking', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'omrL0gtPpDL', dataElementId: 'vANAXwtLwcT', displayName: 'hemoglobin', programId: 'lxAQ7Zs9VYR', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }],
-                    id: 'lxAQ7Zs9VYR',
-                },
-                foundation: { programRules: [] },
-            },
-            [{ id: 'vANAXwtLwcT', message: 'Hemoglobin value lower than normal ', type: 'SHOWWARNING' }, { id: 'Ok9OQpitjQr', type: 'HIDEFIELD' }],
-        ],
-        [
-            {
-                program: {
-                    programRules: [{ id: 'fd3wL1quxGb', condition: "#{gender} == 'Male'", description: 'Hide pregnant if gender is male', displayName: 'Hide pregnant if gender is male', programId: 'eBAyeGv0exc', programRuleActions: [{ id: 'IrmpncBsypT', dataElementId: 'SWfdB5lX0fk', programRuleActionType: 'HIDEFIELD', programStageSectionId: 'd7ZILSbPgYh' }] }, { id: 'x7PaHGvgWY2', condition: 'true', description: 'Body Mass Index. Weight in kg / height in m square.', displayName: 'BMI', programId: 'eBAyeGv0exc', programRuleActions: [{ id: 'x7PaHGvgWY2', content: 'BMI', data: '#{Zj7UnCAulEk.vV9UWAZohSf}/((#{Zj7UnCAulEk.GieVkTxp4HH}/100)*(#{Zj7UnCAulEk.GieVkTxp4HH}/100))', programRuleActionType: 'DISPLAYKEYVALUEPAIR', location: 'indicators' }] }],
-                    programRuleVariables: [{ id: 'RycV5uDi66i', dataElementId: 'qrur9Dvnyt5', displayName: 'age', programId: 'eBAyeGv0exc', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'zINGRka3g9N', dataElementId: 'oZg33kd9taw', displayName: 'gender', programId: 'eBAyeGv0exc', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true }, { id: 'Zj7UnCAulEk.vV9UWAZohSf', displayName: 'Zj7UnCAulEk.vV9UWAZohSf', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', dataElementId: 'vV9UWAZohSf', programId: 'eBAyeGv0exc' }, { id: 'Zj7UnCAulEk.GieVkTxp4HH', displayName: 'Zj7UnCAulEk.GieVkTxp4HH', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', dataElementId: 'GieVkTxp4HH', programId: 'eBAyeGv0exc' }, { id: 'Zj7UnCAulEk.GieVkTxp4HH', displayName: 'Zj7UnCAulEk.GieVkTxp4HH', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', dataElementId: 'GieVkTxp4HH', programId: 'eBAyeGv0exc' }],
-                    id: 'lxAQ7Zs9VYR',
-                },
-                foundation: { programRules: [] },
-            },
-            [{ displayKeyValuePair: { id: 'x7PaHGvgWY2', key: 'BMI', value: NaN }, id: 'indicators', type: 'DISPLAYKEYVALUEPAIR' }],
-        ],
-        [
-            {
-                program: {
-                    programRules: [{ id: 'OIaW5H2KNNp', condition: "#{Diagnosis_Method}!='Microscope'", description: 'If Diagnosis Method == Microscope or Null —> hide section “RDT                Results”', displayName: 'XX MAL RDT - DIAGNOSIS METHOD - Microscopy', programId: 'MoUd5BTQ3lY', programRuleActions: [{ id: 'JkIaHCPIYHO', programRuleActionType: 'HIDESECTION', programStageSectionId: 'PAvRSZQyYjR' }], priority: 1 }, { id: 'V2rfYrFFDAn', condition: "(#{Diagnosis_Method}=='Microscopy' && #{Diagnosis_M_Result}!= 'Pv')                || (#{Diagnosis_Method}=='RDT' && #{Diagnosis_RDT_Result} !=                'Pv')", description: 'If Diagnosis Result == Pv or Negative or Null —> hide sections Treatment                Pf, Mixed', displayName: 'XX MAL RDT - DIAGNOSIS RESULT - Pv', programId: 'MoUd5BTQ3lY', programRuleActions: [{ id: 'x8WTOVMnE0g', programRuleActionType: 'HIDESECTION', programStageSectionId: 'yEPpF2nQ2bZ' }] }, { id: 'WMsEkeKwb18', condition: "(#{Diagnosis_Method}=='Microscopy' && #{Diagnosis_M_Result}!=                'Mixed') || (#{Diagnosis_Method}=='RDT' && #{Diagnosis_RDT_Result}!=                'Mixed')", description: 'If Diagnosis Result == Mixed or Negative or Null —> hide sections Treatment                Pf, Pv', displayName: 'XX MAL RDT - DIAGNOSIS RESULT - Mixed', programId: 'MoUd5BTQ3lY', programRuleActions: [{ id: 'ZxA4tbBK7y6', programRuleActionType: 'HIDESECTION', programStageSectionId: 'OzoUDRCtylB' }], priority: 2 }, { id: 'glMKQLqV6hN', condition: "(#{Diagnosis_Method} =='Microscopy' && #{Diagnosis_M_Result} != 'Pf')                || (#{Diagnosis_Method} == 'RDT' && #{Diagnosis_RDT_Result} !=                'Pf')", description: 'f Diagnosis Result == Pf or or Negative or Null —> hide sections Treatment                Pv, Mixed', displayName: 'XX MAL RDT - DIAGNOSIS RESULT - Pf', programId: 'MoUd5BTQ3lY', programRuleActions: [{ id: 'd9dB4tQWZka', programRuleActionType: 'HIDESECTION', programStageSectionId: 'PYgwzV0eQWs' }], priority: 2 }, { id: 'tQP5ArcLjXP', condition: "#{Diagnosis_Method} !='RDT'", description: 'If Diagnosis Method == RDT or Null —> hide section                “Microscopy”', displayName: 'XX MAL RDT - DIAGNOSIS METHOD - RDT', programId: 'MoUd5BTQ3lY', programRuleActions: [{ id: 'aSKg6HVXBMP', programRuleActionType: 'HIDESECTION', programStageSectionId: 'TIpDZhpNkmS' }], priority: 1 }, { id: 'zgwtr9dSVRA', condition: "#{Diagnosis_Method} !='Not Tested'", description: 'If Diagnosis Method == Not Tested or Null —> hide section “Reason for not                testing”', displayName: 'XX MAL RDT - DIAGNOSIS METHOD - Not Tested', programId: 'MoUd5BTQ3lY', programRuleActions: [{ id: 'TNL5nLGT2Jv', programRuleActionType: 'HIDESECTION', programStageSectionId: 'YpzV7H2BA6C' }] }],
-                    programRuleVariables: [{ id: 'Bn9GkaU8ayh', dataElementId: 'lWLkpWMHqEq', displayName: 'Diagnosis_Method', programId: 'MoUd5BTQ3lY', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: false }, { id: 'Q2zYkzn2fu7', dataElementId: 'XEuy83qbOvM', displayName: 'Diagnosis_M_Result', programId: 'MoUd5BTQ3lY', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: false }, { id: 'i47jDXmfVOC', dataElementId: 'diH9IbKTpHj', displayName: 'Diagnosis_RDT_Result', programId: 'MoUd5BTQ3lY', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: false }],
-                    id: 'MoUd5BTQ3lY',
-                },
-                foundation: { programRules: [] },
-            },
-            [{ id: 'PAvRSZQyYjR', type: 'HIDESECTION' }, { id: 'TIpDZhpNkmS', type: 'HIDESECTION' }, { id: 'YpzV7H2BA6C', type: 'HIDESECTION' }],
-        ],
-        [
-            {
-                program: null,
-                foundation: null,
-            },
-            null,
-        ],
-    ])('where the default values', ({ program, foundation }, expected) => {
-        test('Tests on runRulesForSingleEvent function', () => {
-            const rulesEffects = runRulesForSingleEvent(program, foundation, orgUnit, currentEvent, allEvents);
-
-            expect(rulesEffects).toEqual(expected);
-        });
-    });
-});
-
-
-describe('rules engine', () => {
+describe('Event Event rules engine', () => {
     // these variables are shared between each test
     const constants = [{ id: 'Gfd3ppDfq8E', displayName: 'Commodity ordering overhead', value: 5 }, { id: 'bCqvfPR02Im', displayName: 'Pi', value: 3.14 }];
     const dataElementsInProgram = { sWoqcoByYmD: { id: 'sWoqcoByYmD', valueType: 'BOOLEAN' }, Ok9OQpitjQr: { id: 'Ok9OQpitjQr', valueType: 'BOOLEAN' }, vANAXwtLwcT: { id: 'vANAXwtLwcT', valueType: 'NUMBER' } };
@@ -91,6 +34,7 @@ describe('rules engine', () => {
                 allEvents: { all: [events], byStage: {} },
             };
 
+
             // when
             const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
@@ -122,6 +66,7 @@ describe('rules engine', () => {
                 allEvents: { all: [events], byStage: {} },
             };
 
+
             // when
             const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
@@ -137,7 +82,7 @@ describe('rules engine', () => {
     });
 });
 
-describe('rules engine', () => {
+describe('Event rules engine', () => {
     // these variables are shared between each test
     const constants = [{ id: 'Gfd3ppDfq8E', displayName: 'Commodity ordering overhead', value: 5 }, { id: 'bCqvfPR02Im', displayName: 'Pi', value: 3.14 }];
     const dataElementsInProgram = { oZg33kd9taw: { id: 'oZg33kd9taw', valueType: 'TEXT', optionSetId: 'pC3N9N77UmT' }, SWfdB5lX0fk: { id: 'SWfdB5lX0fk', valueType: 'BOOLEAN', optionSetId: undefined }, qrur9Dvnyt5: { id: 'qrur9Dvnyt5', valueType: 'INTEGER', optionSetId: undefined }, GieVkTxp4HH: { id: 'GieVkTxp4HH', valueType: 'NUMBER', optionSetId: undefined }, vV9UWAZohSf: { id: 'vV9UWAZohSf', valueType: 'INTEGER_POSITIVE', optionSetId: undefined }, eMyVanycQSC: { id: 'eMyVanycQSC', valueType: 'DATE', optionSetId: undefined }, K6uUAvq500H: { id: 'K6uUAvq500H', valueType: 'TEXT', optionSetId: 'eUZ79clX7y1' }, msodh3rEMJa: { id: 'msodh3rEMJa', valueType: 'DATE', optionSetId: undefined }, S33cRBsnXPo: { id: 'S33cRBsnXPo', valueType: 'ORGANISATION_UNIT', optionSetId: undefined }, fWIAEtYVEGk: { id: 'fWIAEtYVEGk', valueType: 'TEXT', optionSetId: 'iDFPKpFTiVw' }, ulD2zW0TIy2: { id: 'ulD2zW0TIy2', valueType: 'FILE_RESOURCE' } };
@@ -166,6 +111,7 @@ describe('rules engine', () => {
                 currentEvent: events,
                 allEvents: { all: [events], byStage: {} },
             };
+
 
             // when
             const rulesEffects = RulesEngine.programRuleEffectsForEvent(
@@ -222,6 +168,7 @@ describe('rules engine', () => {
                 allEvents: { all: [events], byStage: {} },
             };
 
+
             // when
             const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
@@ -237,7 +184,7 @@ describe('rules engine', () => {
     });
 });
 
-describe('rules engine', () => {
+describe('Event rules engine', () => {
     // these variables are shared between each test
     const constants = [{ id: 'Gfd3ppDfq8E', displayName: 'Commodity ordering overhead', value: 5 }, { id: 'bCqvfPR02Im', displayName: 'Pi', value: 3.14 }];
     const dataElementsInProgram = { dyfYIsTFTjG: { id: 'dyfYIsTFTjG', valueType: 'TEXT' }, XOaXLWuhKzV: { id: 'XOaXLWuhKzV', valueType: 'TEXT', optionSetId: 'WDUwjiW2rGH' }, AtFlciXnstG: { id: 'AtFlciXnstG', valueType: 'INTEGER_ZERO_OR_POSITIVE' }, JGnHr6WI3AY: { id: 'JGnHr6WI3AY', valueType: 'TEXT', optionSetId: 'L6eMZDJkCwX' }, s3eoonJ8OJb: { id: 's3eoonJ8OJb', valueType: 'DATE' }, gktroFPckdr: { id: 'gktroFPckdr', valueType: 'TEXT', optionSetId: 'UYDsNdpo2BU' }, QQLXTXVidW2: { id: 'QQLXTXVidW2', valueType: 'TEXT', optionSetId: 'L6eMZDJkCwX' }, ovY6E8BSdto: { id: 'ovY6E8BSdto', valueType: 'TEXT', optionSetId: 'dsgBmIZ0Yrq' }, Z5z8vFQy0w0: { id: 'Z5z8vFQy0w0', valueType: 'TEXT' }, TzqawmlPkI5: { id: 'TzqawmlPkI5', valueType: 'TEXT', optionSetId: 'L6eMZDJkCwX' }, f8j4XDEozvj: { id: 'f8j4XDEozvj', valueType: 'TEXT', optionSetId: 'xD9QOIvNAjw' }, jBBkFuPKctq: { id: 'jBBkFuPKctq', valueType: 'TEXT', optionSetId: 'T9zjyaIkRqH' }, A4Fg6jgWauf: { id: 'A4Fg6jgWauf', valueType: 'TEXT', optionSetId: 'w1vUkxq8IOl' }, CUbZcLm9LyN: { id: 'CUbZcLm9LyN', valueType: 'TEXT', optionSetId: 'L6eMZDJkCwX' }, p8htbyJHydl: { id: 'p8htbyJHydl', valueType: 'TEXT', optionSetId: 'L6eMZDJkCwX' }, SbXES4EPgqP: { id: 'SbXES4EPgqP', valueType: 'NUMBER' }, bOYWVEBaWy6: { id: 'bOYWVEBaWy6', valueType: 'TEXT', optionSetId: 'qI4cs9ocBwn' }, PFXeJV8d7ja: { id: 'PFXeJV8d7ja', valueType: 'DATE' } };
@@ -441,6 +388,7 @@ describe('rules engine', () => {
                 allEvents: { all: [value], byStage: {} },
             };
 
+
             // when
             const rulesEffects = RulesEngine.programRuleEffectsForEvent(
                 { programRulesVariables, programRules, constants },
@@ -457,7 +405,7 @@ describe('rules engine', () => {
 });
 
 
-describe('rules engine effects with functions and effects', () => {
+describe('Event rules engine effects with functions and effects', () => {
     // these variables are shared between each test
     const constants = [{ id: 'Gfd3ppDfq8E', displayName: 'Commodity ordering overhead', value: 5 }, { id: 'bCqvfPR02Im', displayName: 'Pi', value: 3.14 }];
     const dataElementsInProgram = { oZg33kd9taw: { id: 'oZg33kd9taw', valueType: 'TEXT', optionSetId: 'pC3N9N77UmT' }, SWfdB5lX0fk: { id: 'SWfdB5lX0fk', valueType: 'BOOLEAN' }, qrur9Dvnyt5: { id: 'qrur9Dvnyt5', valueType: 'INTEGER' }, GieVkTxp4HH: { id: 'GieVkTxp4HH', valueType: 'NUMBER' }, vV9UWAZohSf: { id: 'vV9UWAZohSf', valueType: 'INTEGER_POSITIVE' }, eMyVanycQSC: { id: 'eMyVanycQSC', valueType: 'DATE' }, K6uUAvq500H: { id: 'K6uUAvq500H', valueType: 'TEXT', optionSetId: 'eUZ79clX7y1' }, msodh3rEMJa: { id: 'msodh3rEMJa', valueType: 'DATE' }, S33cRBsnXPo: { id: 'S33cRBsnXPo', valueType: 'ORGANISATION_UNIT' }, fWIAEtYVEGk: { id: 'fWIAEtYVEGk', valueType: 'TEXT', optionSetId: 'iDFPKpFTiVw' }, ulD2zW0TIy2: { id: 'ulD2zW0TIy2', valueType: 'FILE_RESOURCE' } };
@@ -574,64 +522,6 @@ describe('rules engine effects with functions and effects', () => {
                 allEvents: { all: [events], byStage: {} },
             };
 
-            // when
-            const rulesEffects = RulesEngine.programRuleEffectsForEvent(
-                { programRulesVariables, programRules, constants },
-                { currentEvent, allEvents },
-                dataElementsInProgram,
-                orgUnit,
-                optionSet,
-            );
-
-            // then
-            expect(rulesEffects).toEqual(expected);
-        });
-    });
-});
-
-describe('rules engine effects for assigning values', () => {
-    // these variables are shared between each test
-    const constants = [];
-    const dataElementsInProgram = { oZg33kd9taw: { id: 'oZg33kd9taw', valueType: 'TEXT', optionSetId: 'pC3N9N77UmT' }, SWfdB5lX0fk: { id: 'SWfdB5lX0fk', valueType: 'BOOLEAN' }, qrur9Dvnyt5: { id: 'qrur9Dvnyt5', valueType: 'INTEGER' }, GieVkTxp4HH: { id: 'GieVkTxp4HH', valueType: 'NUMBER' }, vV9UWAZohSf: { id: 'vV9UWAZohSf', valueType: 'INTEGER_POSITIVE' }, eMyVanycQSC: { id: 'eMyVanycQSC', valueType: 'DATE' }, K6uUAvq500H: { id: 'K6uUAvq500H', valueType: 'TEXT', optionSetId: 'eUZ79clX7y1' }, msodh3rEMJa: { id: 'msodh3rEMJa', valueType: 'DATE' }, S33cRBsnXPo: { id: 'S33cRBsnXPo', valueType: 'ORGANISATION_UNIT' }, fWIAEtYVEGk: { id: 'fWIAEtYVEGk', valueType: 'TEXT', optionSetId: 'iDFPKpFTiVw' }, ulD2zW0TIy2: { id: 'ulD2zW0TIy2', valueType: 'FILE_RESOURCE' } };
-    const orgUnit = { id: 'DiszpKrYNg8', name: 'Ngelehun CHC' };
-    const optionSet = {};
-    const currentEvent = {};
-    const allEvents = { all: [], byStage: {} };
-
-    // NOTE: in this test we dont use toMatchSnapshot instead we test again hardcoded values. Since the effects are plenty
-    // here each time this way we can avoid mistakes in comparing snapshots
-    describe.each([
-        [
-            {
-                programRulesVariables: [
-                    { id: 'RycV5uDi66i', dataElementId: 'qrur9Dvnyt5', displayName: 'age', programId: 'eBAyeGv0exc', programRuleVariableSourceType: 'DATAELEMENT_NEWEST_EVENT_PROGRAM', useNameForOptionSet: true, },
-                ],
-                programRules: [
-                    { id: 'HE7eHzSb8en', condition: 'true', description: 'Testing the ASSIGN case', displayName: 'Testing the ASSIGN case', programId: 'eBAyeGv0exc', programRuleActions: [{ id: 'Jp96iSWIepU', content: '#{age}', data: '50', location: 'feedback', dataElementId: 'qrur9Dvnyt5', programRuleActionType: 'ASSIGN' }], priority: 1 },
-                    { id: 'oRHDrFX7fgQ', condition: '#{age} == 50', description: 'Testing the ASSIGN case no2', displayName: 'Testing the ASSIGN case no2', programId: 'eBAyeGv0exc', programRuleActions: [{ id: 'Os6HIwInkrJ', content: 'priority rules set #{age} == 50', location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }], priority: 2 },
-                ] },
-            [
-                { type: 'ASSIGN', id: 'qrur9Dvnyt5', value: '50' },
-                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'Os6HIwInkrJ', message: 'priority rules set #{age} == 50 ' } },
-            ],
-        ],
-        [
-            {
-                programRulesVariables: [
-                    { id: 'Y2MSzoNdK4v', dataElementId: 'SWfdB5lX0fk', displayName: 'pregnant', programId: 'eBAyeGv0exc', programRuleVariableSourceType: 'DATAELEMENT_CURRENT_EVENT', useNameForOptionSet: true },
-                ],
-                programRules: [
-                    { id: 'yItZC7iOBhC', condition: 'true', displayName: 'Testing 2 ASSIGNs at once ', programId: 'eBAyeGv0exc', programRuleActions: [{ id: 'Y0NNwkkLn5y', content: "single rule sets #{gender} == 'Male'", location: 'feedback', programRuleActionType: 'DISPLAYTEXT' }, { id: 'TsgBfZpeo7v', content: '#{gender}', data: "'Male'", dataElementId: 'oZg33kd9taw', programRuleActionType: 'ASSIGN' }] },
-                ],
-            },
-            [
-                { type: 'DISPLAYTEXT', id: 'feedback', displayText: { id: 'Y0NNwkkLn5y', message: "single rule sets #{gender} == 'Male' " } },
-                { type: 'ASSIGN', id: 'oZg33kd9taw', value: 'Male' },
-            ],
-        ],
-    ])('where effects depend on ASSIGNed values', ({ programRulesVariables, programRules }, expected) => {
-        test(`and ${programRules.length} rule(s) take place`, () => {
-            // given
 
             // when
             const rulesEffects = RulesEngine.programRuleEffectsForEvent(
@@ -647,4 +537,3 @@ describe('rules engine effects for assigning values', () => {
         });
     });
 });
-
