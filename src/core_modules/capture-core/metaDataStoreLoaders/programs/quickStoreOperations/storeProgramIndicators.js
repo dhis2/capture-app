@@ -13,22 +13,22 @@ const convert = (response) => {
         }));
 };
 
-const getFieldsQuery = () => 'id,displayName,code,shortName,displayInForm,expression,' +
+const fieldsParam = 'id,displayName,code,shortName,displayInForm,expression,' +
 'displayDescription,description,filter,program[id]';
 
 export const storeProgramIndicators = async (programIds: Array<string>) => {
     const query = {
         resource: 'programIndicators',
         params: {
-            fields: getFieldsQuery(),
+            fields: fieldsParam,
             filter: `program.id:in:[${programIds.join(',')}]`,
         },
     };
 
-    let programIndicatorsIds = [];
+    let programIndicatorIds = [];
     const convertRetainingIds = (response) => {
         const convertedProgramIndicators = convert(response);
-        programIndicatorsIds = programIndicatorsIds.concat(
+        programIndicatorIds = programIndicatorIds.concat(
             convertedProgramIndicators
                 .map(programIndicator => programIndicator.id),
         );
@@ -41,5 +41,5 @@ export const storeProgramIndicators = async (programIds: Array<string>) => {
         convertQueryResponse: convertRetainingIds,
     });
 
-    return programIndicatorsIds;
+    return programIndicatorIds;
 };
