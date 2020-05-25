@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import LoadingMask from '../components/LoadingMasks/LoadingMaskForPage.component';
+import { LoadingMaskForPage } from '../components/LoadingMasks';
 import LoadingMaskElementCenter from '../components/LoadingMasks/LoadingMaskElementCenter.component';
 
 type Props = {
@@ -16,7 +16,7 @@ const getLoadingIndicator = (getContainerStylesFn?: ?(props: any) => Object, ful
     if (!ready) {
         if (fullPage) {
             return (
-                <LoadingMask />
+                <LoadingMaskForPage />
             );
         }
 

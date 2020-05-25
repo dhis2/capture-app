@@ -3,7 +3,7 @@ import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import isObject from 'd2-utilizr/lib/isObject';
-import LoadingMask from '../../../../LoadingMasks/LoadingMask.component';
+import { LoadingMask } from '../../../../LoadingMasks';
 
 const styles = (theme: Theme) => ({
     base: {
