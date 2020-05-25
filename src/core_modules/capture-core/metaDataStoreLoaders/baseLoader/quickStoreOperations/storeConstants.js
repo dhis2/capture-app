@@ -2,7 +2,7 @@
 import { quickStoreRecursively } from '../../IOUtils';
 import { getContext } from '../../context';
 
-export const storeConstants = (): Promise<void> => {
+export const storeConstants = () => {
     const query = {
         resource: 'constants',
         params: {
