@@ -1,11 +1,6 @@
 // @flow
-import { effectActions } from '../engine/effectActions.const';
-import type
-{
-    OutputEffect,
-    HideOutputEffect,
-    AssignOutputEffect,
-    OutputEffects } from '../engine/rulesEngine.types';
+import { effectActions } from '../engine';
+import type { OutputEffect, HideOutputEffect, AssignOutputEffect, OutputEffects } from '../engine';
 import { RenderFoundation } from '../../metaData';
 
 

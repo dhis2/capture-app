@@ -11,7 +11,7 @@ import type {
     TrackedEntityAttribute as TrackedEntityAttributeForRulesEngine,
     Enrollment,
     TEIValues,
-} from '../engine/rulesEngine.types';
+} from '../engine';
 
 const errorMessages = {
     PROGRAM_MISSING_OR_INVALID: 'Program is missing or is invalid',

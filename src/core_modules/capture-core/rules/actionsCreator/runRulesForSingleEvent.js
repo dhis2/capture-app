@@ -10,7 +10,7 @@ import type {
     EventsData,
     EventData,
     OrgUnit,
-} from '../engine/rulesEngine.types';
+} from '../engine';
 
 const errorMessages = {
     PROGRAM_OR_FOUNDATION_MISSING: 'Program or foundation missing',
