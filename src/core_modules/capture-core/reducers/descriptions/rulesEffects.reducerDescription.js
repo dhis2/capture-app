@@ -6,7 +6,7 @@ import type {
     GeneralWarningEffect,
 } from '../../rules/engine';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { actionTypes } from '../../rules/actionsCreator/rulesEngine.actions';
+import { actionTypes } from '../../rules/actionsCreator';
 
 export const messageStateKeys = {
     ERROR: 'error',

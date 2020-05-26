@@ -13,14 +13,14 @@ import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../editEventDataEntry.actions';
 import { getProgramAndStageFromEvent } from '../../../../../metaData';
-import { getRulesActionsForEvent } from '../../../../../rules/actionsCreator';
 import {
+    getRulesActionsForEvent,
     getCurrentClientValues,
     getCurrentClientMainData,
-} from '../../../../../rules/actionsCreator/inputHelpers';
+
+} from '../../../../../rules/actionsCreator';
+import type { FieldData } from '../../../../../rules/actionsCreator';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
-import type
-{ FieldData } from '../../../../../rules/actionsCreator/inputHelpers';
 
 const errorMessages = {
     COULD_NOT_GET_EVENT_FROM_STATE: 'Could not get event from state',

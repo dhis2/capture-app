@@ -3,9 +3,7 @@ import { actionCreator } from '../../../../../actions/actions.utils';
 import { actionTypes } from './dataEntry.actions';
 import { loadNewDataEntry } from '../../../../DataEntry/actions/dataEntryLoadNew.actions';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
-import {
-    getRulesActionsForEvent,
-} from '../../../../../rules/actionsCreator';
+import { getRulesActionsForEvent, } from '../../../../../rules/actionsCreator';
 import RenderFoundation from '../../../../../metaData/RenderFoundation/RenderFoundation';
 import EventProgram from '../../../../../metaData/Program/EventProgram';
 import getEventDateValidatorContainers from '../fieldValidators/eventDate.validatorContainersGetter';

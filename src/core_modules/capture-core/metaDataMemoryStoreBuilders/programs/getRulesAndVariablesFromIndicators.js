@@ -1,7 +1,7 @@
 // @flow
 import isString from 'd2-utilizr/lib/isString';
 
-import type { ProgramRule, ProgramRuleAction, ProgramRuleVariable } from '../../rules/engine/rulesEngine.types';
+import type { ProgramRule, ProgramRuleAction, ProgramRuleVariable } from '../../rules/engine';
 
 export type CachedProgramIndicator = {
     id: string,

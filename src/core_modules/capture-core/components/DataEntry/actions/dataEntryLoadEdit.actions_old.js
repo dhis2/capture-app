@@ -8,7 +8,7 @@ import { convertValue } from '../../../converters/clientToForm';
 import { errorCreator } from 'capture-core-utils';
 import { actionCreator } from '../../../actions/actions.utils';
 import { addFormData } from '../../D2Form/actions/form.actions';
-import { getRulesActionsOnLoad, getRulesActionsOnLoadForSingleNewEvent } from '../../../rules/actionsCreator/rulesEngineActionsCreatorForEvent';
+import { getRulesActionsOnLoad, getRulesActionsOnLoadForSingleNewEvent } from '../../../rules/actionsCreator';
 
 export const actionTypes = {
     START_LOAD_DATA_ENTRY_EVENT: 'StartLoadDataEntryEvent',

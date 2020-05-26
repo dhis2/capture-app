@@ -8,7 +8,7 @@ import { actionTypes as loaderActionTypes } from '../../components/D2Form/action
 import { actionTypes as formAsyncActionTypes } from '../../components/D2Form/asyncHandlerHOC/actions';
 import { actionTypes as formBuilderActionTypes } from '../../components/D2Form/formBuilder.actions';
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
-import { actionTypes as rulesEffectsActionTypes } from '../../rules/actionsCreator/rulesEngine.actions';
+import { actionTypes as rulesEffectsActionTypes } from '../../rules/actionsCreator';
 import { actionTypes as orgUnitFormFieldActionTypes } from '../../components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.actions';
 import getOrgUnitRootsKey from '../../components/D2Form/field/Components/OrgUnitField/getOrgUnitRootsKey';
 import {

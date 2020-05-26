@@ -2,7 +2,7 @@
 import ApiSpecification from '../ApiSpecificationDefinition/ApiSpecification';
 import getterTypes from '../fetcher/getterTypes.const';
 
-import type { ProgramRuleAction, ProgramRule } from '../../rules/engine/rulesEngine.types';
+import type { ProgramRuleAction, ProgramRule } from '../../rules/engine';
 
 function convertFromCollectionToArray(collection) {
     if (!collection || collection.size === 0) {
