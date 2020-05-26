@@ -24,7 +24,7 @@ import {
 } from '../actions/dataEntryLoad.actionBatchs';
 import {
     getRulesActionsForEvent,
-} from '../../../../../rulesEngineActionsCreator';
+} from '../../../../../rules/actionsCreator';
 import {
     actionTypes as newEventSelectionTypes,
 } from '../actions/dataEntryUrl.actions';
@@ -34,7 +34,7 @@ import {
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
-} from '../../../../../rulesEngineActionsCreator/inputHelpers';
+} from '../../../../../rules/actionsCreator/inputHelpers';
 import getProgramAndStageFromProgramId from
     '../../../../../metaData/helpers/EventProgram/getProgramAndStageFromProgramId';
 import {
@@ -46,7 +46,7 @@ import {
 } from '../../../../List/list.actions';
 import type {
     FieldData,
-} from '../../../../../rulesEngineActionsCreator/inputHelpers';
+} from '../../../../../rules/actionsCreator/inputHelpers';
 import {
     listId,
 } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';

@@ -2,7 +2,7 @@
 /**
  * @module rulesEngineActionsCreator
  */
-import { Program, RenderFoundation, TrackerProgram } from '../metaData';
+import { Program, RenderFoundation, TrackerProgram } from '../../metaData';
 import runRulesForSingleEvent from './runRulesForSingleEvent';
 import runRulesForTEI from './runRulesForTEI';
 import postProcessRulesEffects from './postProcessRulesEffects';
@@ -14,7 +14,7 @@ import type {
     OrgUnit,
     EventData,
     EventsData,
-} from '../RulesEngine/rulesEngine.types';
+} from '../engine/rulesEngine.types';
 
 
 function getRulesActions(

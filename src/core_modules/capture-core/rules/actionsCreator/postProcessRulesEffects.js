@@ -1,13 +1,13 @@
 // @flow
-import { effectActions } from 'capture-core-utils/RulesEngine';
+import { effectActionsConstants } from '../engine/effectActions.const';
 import type
 {
     OutputEffect,
     HideOutputEffect,
     AssignOutputEffect,
-} from 'capture-core-utils/RulesEngine/rulesEngine.types';
-import { RenderFoundation } from '../metaData';
-import type { OutputEffects } from "../RulesEngine/rulesEngine.types";
+    OutputEffects } from '../engine/rulesEngine.types';
+import { RenderFoundation } from '../../metaData';
+
 
 function getAssignEffects(assignEffects: ?{ [elementId: string]: Array<AssignOutputEffect> }) {
     if (!assignEffects) {
@@ -179,24 +179,24 @@ export default function postProcessRulesEffects(
 
     const effectsHierarchy = buildEffectsHierarchy(rulesEffects);
 
-    effectsHierarchy[effectActions.HIDE_FIELD] =
+    effectsHierarchy[effectActionsConstants.HIDE_FIELD] =
         filterFieldsHideEffects(
-            effectsHierarchy[effectActions.HIDE_FIELD],
-            effectsHierarchy[effectActions.MAKE_COMPULSORY],
+            effectsHierarchy[effectActionsConstants.HIDE_FIELD],
+            effectsHierarchy[effectActionsConstants.MAKE_COMPULSORY],
             foundation,
         );
-    effectsHierarchy[effectActions.HIDE_SECTION] =
+    effectsHierarchy[effectActionsConstants.HIDE_SECTION] =
         filterSectionsHideEffects(
-            effectsHierarchy[effectActions.HIDE_SECTION],
-            effectsHierarchy[effectActions.MAKE_COMPULSORY],
+            effectsHierarchy[effectActionsConstants.HIDE_SECTION],
+            effectsHierarchy[effectActionsConstants.MAKE_COMPULSORY],
             foundation,
         );
 
-    effectsHierarchy[effectActions.ASSIGN_VALUE] =
+    effectsHierarchy[effectActionsConstants.ASSIGN_VALUE] =
         postProcessAssignEffects(
-            effectsHierarchy[effectActions.ASSIGN_VALUE],
-            effectsHierarchy[effectActions.HIDE_FIELD],
-            effectsHierarchy[effectActions.HIDE_SECTION],
+            effectsHierarchy[effectActionsConstants.ASSIGN_VALUE],
+            effectsHierarchy[effectActionsConstants.HIDE_FIELD],
+            effectsHierarchy[effectActionsConstants.HIDE_SECTION],
             foundation,
         );
 

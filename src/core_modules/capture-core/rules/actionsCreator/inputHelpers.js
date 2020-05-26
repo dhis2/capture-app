@@ -1,7 +1,7 @@
 // @flow
-import { convertFormValuesToClient } from '../converters/helpers/formToClient';
-import RenderFoundation from '../metaData/RenderFoundation/RenderFoundation';
-import convertDataEntryValuesToClientValues from '../components/DataEntry/common/convertDataEntryValuesToClientValues';
+import { convertFormValuesToClient } from '../../converters/helpers/formToClient';
+import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
+import convertDataEntryValuesToClientValues from '../../components/DataEntry/common/convertDataEntryValuesToClientValues';
 
 export type FieldData = {
     elementId: string,

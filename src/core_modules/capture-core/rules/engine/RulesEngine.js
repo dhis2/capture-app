@@ -26,7 +26,7 @@ import inputValueConverter from './converters/inputValueConverter';
 import getRulesEffectsProcessor from './rulesEffectsProcessor/rulesEffectsProcessor';
 import rulesEffectsValueConverter from './converters/rulesEffectsValueConverter';
 import momentConverter from './converters/momentConverter';
-import effectActions from './effectActions.const';
+import { effectActionsConstants } from './effectActions.const';
 import typeKeys from './typeKeys.const';
 import trimQuotes from './commonUtils/trimQuotes';
 
@@ -72,7 +72,7 @@ const convertRuleEffectDataToOutputBaseValue = (data: any, valueType: string) =>
  * @param variablesHash
  */
 function updateVariableHashWhenActionIsAssignValue(content: string, action: string, data: any, variablesHash: RuleVariables) {
-    if (action === effectActions.ASSIGN_VALUE && content) {
+    if (action === effectActionsConstants.ASSIGN_VALUE && content) {
         const variableToAssign = content.replace('#{', '').replace('A{', '').replace('}', '');
         const variableHash = variablesHash[variableToAssign];
 

@@ -3,7 +3,7 @@ import { actionCreator, actionPayloadAppender } from '../../../../actions/action
 import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
 import {
     getRulesActionsForEvent,
-} from '../../../../rulesEngineActionsCreator';
+} from '../../../../rules/actionsCreator';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import Program from '../../../../metaData/Program/Program';
 import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';

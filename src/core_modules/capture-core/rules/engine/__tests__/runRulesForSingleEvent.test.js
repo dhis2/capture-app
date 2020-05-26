@@ -1,4 +1,4 @@
-import runRulesForSingleEvent from '../../rulesEngineActionsCreator/runRulesForSingleEvent';
+import runRulesForSingleEvent from '../../actionsCreator/runRulesForSingleEvent';
 
 describe('rules engine', () => {
     const currentEvent = {};

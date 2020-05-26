@@ -1,6 +1,6 @@
 // @flow
-import { effectActions } from 'capture-core-utils/RulesEngine';
-import type { OutputEffect } from 'capture-core-utils/RulesEngine/rulesEngine.types';
+import { effectActionsConstants } from '../../rules/engine';
+import type { OutputEffect } from '../../rules/engine';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { asyncHandlerActionTypes } from '../../components/D2Form';
 import { actionTypes as fieldActionTypes } from '../../components/D2Form/D2SectionFields.actions';
@@ -8,7 +8,7 @@ import { actionTypes as loaderActionTypes } from '../../components/D2Form/action
 import { actionTypes as formAsyncActionTypes } from '../../components/D2Form/asyncHandlerHOC/actions';
 import { actionTypes as formBuilderActionTypes } from '../../components/D2Form/formBuilder.actions';
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
-import { actionTypes as rulesEffectsActionTypes } from '../../rulesEngineActionsCreator/rulesEngine.actions';
+import { actionTypes as rulesEffectsActionTypes } from '../../rules/actionsCreator/rulesEngine.actions';
 import { actionTypes as orgUnitFormFieldActionTypes } from '../../components/D2Form/field/Components/OrgUnitField/orgUnitFieldForForms.actions';
 import getOrgUnitRootsKey from '../../components/D2Form/field/Components/OrgUnitField/getOrgUnitRootsKey';
 import {
@@ -55,7 +55,7 @@ export const formsValuesDesc = createReducerDescription({
     },
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const assignEffects: { [id: string]: Array<OutputEffect> } =
-            action.payload.rulesEffects && action.payload.rulesEffects[effectActions.ASSIGN_VALUE];
+            action.payload.rulesEffects && action.payload.rulesEffects[effectActionsConstants.ASSIGN_VALUE];
         if (!assignEffects) {
             return state;
         }
