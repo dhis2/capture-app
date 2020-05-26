@@ -1,5 +1,5 @@
 // @flow
-import { effectActionsConstants } from '../engine/effectActions.const';
+import { effectActions } from '../engine/effectActions.const';
 import type
 {
     OutputEffect,
@@ -179,24 +179,24 @@ export default function postProcessRulesEffects(
 
     const effectsHierarchy = buildEffectsHierarchy(rulesEffects);
 
-    effectsHierarchy[effectActionsConstants.HIDE_FIELD] =
+    effectsHierarchy[effectActions.HIDE_FIELD] =
         filterFieldsHideEffects(
-            effectsHierarchy[effectActionsConstants.HIDE_FIELD],
-            effectsHierarchy[effectActionsConstants.MAKE_COMPULSORY],
+            effectsHierarchy[effectActions.HIDE_FIELD],
+            effectsHierarchy[effectActions.MAKE_COMPULSORY],
             foundation,
         );
-    effectsHierarchy[effectActionsConstants.HIDE_SECTION] =
+    effectsHierarchy[effectActions.HIDE_SECTION] =
         filterSectionsHideEffects(
-            effectsHierarchy[effectActionsConstants.HIDE_SECTION],
-            effectsHierarchy[effectActionsConstants.MAKE_COMPULSORY],
+            effectsHierarchy[effectActions.HIDE_SECTION],
+            effectsHierarchy[effectActions.MAKE_COMPULSORY],
             foundation,
         );
 
-    effectsHierarchy[effectActionsConstants.ASSIGN_VALUE] =
+    effectsHierarchy[effectActions.ASSIGN_VALUE] =
         postProcessAssignEffects(
-            effectsHierarchy[effectActionsConstants.ASSIGN_VALUE],
-            effectsHierarchy[effectActionsConstants.HIDE_FIELD],
-            effectsHierarchy[effectActionsConstants.HIDE_SECTION],
+            effectsHierarchy[effectActions.ASSIGN_VALUE],
+            effectsHierarchy[effectActions.HIDE_FIELD],
+            effectsHierarchy[effectActions.HIDE_SECTION],
             foundation,
         );
 

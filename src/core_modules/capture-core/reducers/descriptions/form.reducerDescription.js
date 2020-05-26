@@ -1,5 +1,5 @@
 // @flow
-import { effectActionsConstants } from '../../rules/engine';
+import { effectActions } from '../../rules/engine';
 import type { OutputEffect } from '../../rules/engine';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { asyncHandlerActionTypes } from '../../components/D2Form';
@@ -55,7 +55,7 @@ export const formsValuesDesc = createReducerDescription({
     },
     [rulesEffectsActionTypes.UPDATE_RULES_EFFECTS]: (state, action) => {
         const assignEffects: { [id: string]: Array<OutputEffect> } =
-            action.payload.rulesEffects && action.payload.rulesEffects[effectActionsConstants.ASSIGN_VALUE];
+            action.payload.rulesEffects && action.payload.rulesEffects[effectActions.ASSIGN_VALUE];
         if (!assignEffects) {
             return state;
         }
