@@ -7,6 +7,10 @@ function deduplicateArray(array: Array<string>): Array<string> {
     return [...uniqueSet.values()];
 }
 
+/**
+ * Retrieve and store tracked entity attributes based on the trackedEntityAttributeIds argument.
+ * @param {string[]} trackedEntityAttributeIds: attributes to load
+ */
 export async function loadTrackedEntityAttributes(
     trackedEntityAttributeIds: Array<string>) {
     const attributeIdBatches = chunk(deduplicateArray(trackedEntityAttributeIds), 100);

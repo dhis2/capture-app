@@ -11,8 +11,8 @@ import { loadTrackedEntityAttributes } from '../trackedEntityAttributes';
 import { loadCategories } from '../categories';
 import { loadOptionSets } from '../optionSets';
 
-function loadCoreMetaData() {
-    return Promise.all(
+const loadCoreMetaData = () =>
+    Promise.all(
         [
             storeConstants,
             storeOrgUnitLevels,
@@ -20,7 +20,10 @@ function loadCoreMetaData() {
             storeOrgUnitGroups,
         ].map(operation => operation()),
     );
-}
+
+/**
+ * Retrieves metadata from the api and stores it in IndexedDB. Some load functions returns side effects used by other functions.
+ */
 export const loadMetaDataInternal = async () => {
     const {
         optionSetsOutline: optionSetsOutlineFromPrograms,

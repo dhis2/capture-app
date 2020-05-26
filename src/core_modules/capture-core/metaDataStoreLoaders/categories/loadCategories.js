@@ -137,6 +137,10 @@ async function setCategoriesAsync(
     return storageController.setAll(storeNames.CATEGORIES, categories);
 }
 
+/**
+ * Retrieve and store categories (and the underlying category options) based on the uniqueCategories argument.
+ * @param {Object[]} uniqueCategories: categories to load
+ */
 export async function loadCategories(
     uniqueCategories: Array<InputCategory>,
 ) {

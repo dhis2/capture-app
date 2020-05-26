@@ -18,6 +18,11 @@ const getCachedProgramsOutline = () => {
         });
 };
 
+/**
+ * Remove programs from the cache that wasn't retrieved from the api
+ * @param {Object[]} apiPrograms: programs from the api
+ * @param {Object[]} cachePrograms: programs from the cache
+ */
 const removeUnavailablePrograms = async (apiPrograms, cachePrograms) => {
     const apiProgramsObject = apiPrograms
         .reduce((acc, apiProgram) => {
@@ -35,6 +40,11 @@ const removeUnavailablePrograms = async (apiPrograms, cachePrograms) => {
     }
 };
 
+/**
+ * Retrieve the program ids for the programs we would like to update in the cache
+ * @param {Object[]} apiPrograms: programs from the api
+ * @param {Object[]} cachePrograms: programs from the cache
+ */
 const getStaleProgramIds = (apiPrograms, cachePrograms) => {
     const cacheProgramsAsObject = cachePrograms
         .reduce((acc, cacheProgram) => {
@@ -50,6 +60,11 @@ const getStaleProgramIds = (apiPrograms, cachePrograms) => {
         .map(program => program.id);
 };
 
+/**
+ * Update the cache for the program ids passed in.
+ * @param {string[]} programIds: the program ids with stale data in the cache
+ * @returns programs data that is needed for the side effects.
+ */
 const loadProgramBatch = async (programIds) => {
     const { convertedData: programs = [] } = await storePrograms(programIds);
     await loadRulesCentricMetadata(programIds);
@@ -61,6 +76,9 @@ const loadProgramBatch = async (programIds) => {
         }));
 };
 
+/**
+ * Self executing function to scope the side effect helper functions
+ */
 const getSideEffects = (() => {
     const getOptionSetsOutline = (() => {
         const getDataElementOptionSets = programStageDataElements =>
@@ -122,7 +140,12 @@ const getSideEffects = (() => {
                 }, new Set()),
             trackedEntityTypeIdSet => [...trackedEntityTypeIdSet.values()],
         )();
-
+    /**
+     * Builds the side effects based on the programsOutline and the stale programs
+     * @param {Object[]} programsOutline: Contains some data for all programs. Used for option sets.
+     * @param {Object[]} stalePrograms: Contains needed data for the stale programs.
+     * @returns side effects data
+     */
     return (programsOutline, stalePrograms) => ({
         optionSetsOutline: getOptionSetsOutline(programsOutline),
         trackedEntityAttributeIds: getTrackedEntityAttributeIds(stalePrograms),

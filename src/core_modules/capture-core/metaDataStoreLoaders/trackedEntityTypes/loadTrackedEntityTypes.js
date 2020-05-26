@@ -40,6 +40,11 @@ const getSideEffects = (() => {
     };
 })();
 
+/**
+ * Retrieve and store tracked entity types based on the trackedEntityTypeIds argument.
+ * @param {string[]} trackedEntityTypeIds: types to load
+ * @returns side effects used by other load functions
+ */
 export const loadTrackedEntityTypes = async (
     trackedEntityTypeIds: Array<string>,
 ) => {
