@@ -4,7 +4,7 @@ import isDefined from 'd2-utilizr/lib/isDefined';
 import ApiSpecification from '../ApiSpecificationDefinition/ApiSpecification';
 import getterTypes from '../fetcher/getterTypes.const';
 
-import type { ProgramRuleVariable } from '../../rules/engine/rulesEngine.types';
+import type { ProgramRuleVariable } from '../../rules/engine';
 
 export default new ApiSpecification((o) => {
     o.modelName = 'programRuleVariables';
