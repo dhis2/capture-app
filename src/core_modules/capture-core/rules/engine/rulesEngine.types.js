@@ -1,8 +1,8 @@
 // @flow
-import actions from './effectActions.const';
+import { effectActionsConstants } from './effectActions.const';
 
 export type OutputEffect = {
-    type: $Values<typeof actions>,
+    type: $Values<typeof effectActionsConstants>,
     id: string,
 };
 

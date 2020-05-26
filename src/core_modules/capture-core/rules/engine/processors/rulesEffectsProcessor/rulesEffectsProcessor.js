@@ -1,7 +1,7 @@
 // @flow
-import mapTypeToInterfaceFnName from '../typeToInterfaceFnName.const';
+import mapTypeToInterfaceFnName from '../../typeToInterfaceFnName.const';
 import processTypes from './processTypes.const';
-import { effectActionsConstants } from '../effectActions.const';
+import { effectActionsConstants } from '../../effectActions.const';
 
 import type {
     ProgramRuleEffect,
@@ -15,7 +15,7 @@ import type {
     GeneralWarningEffect,
     CompulsoryEffect,
     OutputEffect,
-} from '../rulesEngine.types';
+} from '../../rulesEngine.types';
 
 const mapProcessTypeToIdentifierName = {
     [processTypes.EVENT]: 'dataElementId',

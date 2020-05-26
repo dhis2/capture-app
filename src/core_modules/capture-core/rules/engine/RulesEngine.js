@@ -2,11 +2,11 @@
 import log from 'loglevel';
 import isString from 'd2-utilizr/lib/isString';
 import isDefined from 'd2-utilizr/lib/isDefined';
-import VariableService from './VariableService/VariableService';
-import ValueProcessor from './ValueProcessor/ValueProcessor';
-import executeExpression from './executionService/executionService';
-import getDateUtils from './dateUtils/dateUtils';
-import processTypes from './rulesEffectsProcessor/processTypes.const';
+import VariableService from './services/VariableService/VariableService';
+import ValueProcessor from './processors/ValueProcessor';
+import executeExpression from './services/executionService';
+import getDateUtils from './commonUtils/dateUtils';
+import processTypes from './processors/rulesEffectsProcessor/processTypes.const';
 import { d2Functions } from './d2Functions';
 import type {
     OutputEffects,
@@ -23,7 +23,7 @@ import type {
     D2Functions,
 } from './rulesEngine.types';
 import inputValueConverter from './converters/inputValueConverter';
-import getRulesEffectsProcessor from './rulesEffectsProcessor/rulesEffectsProcessor';
+import getRulesEffectsProcessor from './processors/rulesEffectsProcessor/rulesEffectsProcessor';
 import rulesEffectsValueConverter from './converters/rulesEffectsValueConverter';
 import momentConverter from './converters/momentConverter';
 import { effectActionsConstants } from './effectActions.const';
