@@ -7,7 +7,7 @@ import type
     AssignOutputEffect,
 } from 'capture-core-utils/RulesEngine/rulesEngine.types';
 import { RenderFoundation } from '../metaData';
-import type { OutputEffects } from "../../capture-core-utils/RulesEngine/rulesEngine.types";
+import type { OutputEffects } from "../RulesEngine/rulesEngine.types";
 
 function getAssignEffects(assignEffects: ?{ [elementId: string]: Array<AssignOutputEffect> }) {
     if (!assignEffects) {

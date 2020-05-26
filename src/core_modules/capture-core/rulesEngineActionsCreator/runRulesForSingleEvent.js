@@ -1,6 +1,6 @@
 // @flow
 import log from 'loglevel';
-import { RulesEngine } from '../../capture-core-utils/RulesEngine';
+import { RulesEngine } from '../RulesEngine';
 import { errorCreator } from '../../capture-core-utils';
 import { Program, EventProgram, RenderFoundation, DataElement } from '../metaData';
 import constantsStore from '../metaDataMemoryStores/constants/constants.store';
@@ -10,7 +10,7 @@ import type {
     EventsData,
     EventData,
     OrgUnit,
-} from '../../capture-core-utils/RulesEngine/rulesEngine.types';
+} from '../RulesEngine/rulesEngine.types';
 
 const errorMessages = {
     PROGRAM_OR_FOUNDATION_MISSING: 'Program or foundation missing',
