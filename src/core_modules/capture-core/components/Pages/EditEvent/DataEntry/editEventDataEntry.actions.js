@@ -1,9 +1,7 @@
 // @flow
 import { actionCreator, actionPayloadAppender } from '../../../../actions/actions.utils';
 import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
-import {
-    getRulesActionsForEvent,
-} from '../../../../rulesEngineActionsCreator';
+import { getRulesActionsForEvent } from '../../../../rules/actionsCreator';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import Program from '../../../../metaData/Program/Program';
 import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
