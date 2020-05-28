@@ -3,6 +3,7 @@ import { quickStoreRecursively } from '../../IOUtils';
 import { getContext } from '../../context';
 
 const convert = response =>
+    response &&
     response.organisationUnitGroups &&
     response.organisationUnitGroups
         .map(group => ({
