@@ -15,8 +15,7 @@ const getSideEffects = (() => {
     const getOptionSetsOutline = (trackedEntityTypesOutline): Array<Object> =>
         trackedEntityTypesOutline
             .flatMap(trackedEntityTypeOutline =>
-                trackedEntityTypeOutline
-                    .trackedEntityTypeAttributes
+                trackedEntityTypeOutline.trackedEntityTypeAttributes
                     .map(trackedEntityTypeAttribute =>
                         trackedEntityTypeAttribute.trackedEntityAttribute &&
                         trackedEntityTypeAttribute.trackedEntityAttribute.optionSet)
