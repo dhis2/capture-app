@@ -1,7 +1,7 @@
 // @flow
-import mapTypeToInterfaceFnName from '../typeToInterfaceFnName.const';
+import mapTypeToInterfaceFnName from '../../typeToInterfaceFnName.const';
 import processTypes from './processTypes.const';
-import actions from '../effectActions.const';
+import { effectActions } from '../../effectActions.const';
 
 import type {
     ProgramRuleEffect,
@@ -15,7 +15,7 @@ import type {
     GeneralWarningEffect,
     CompulsoryEffect,
     OutputEffect,
-} from '../rulesEngine.types';
+} from '../../rulesEngine.types';
 
 const mapProcessTypeToIdentifierName = {
     [processTypes.EVENT]: 'dataElementId',
@@ -73,7 +73,7 @@ export default function getRulesEffectsProcessor(
         const outputValue = convertBaseValueToOutputValue(baseValue, valueType);
 
         return {
-            type: actions.ASSIGN_VALUE,
+            type: effectActions.ASSIGN_VALUE,
             id: effect[processIdName],
             value: outputValue,
         };
@@ -85,7 +85,7 @@ export default function getRulesEffectsProcessor(
         }
 
         return {
-            type: actions.HIDE_FIELD,
+            type: effectActions.HIDE_FIELD,
             id: effect[processIdName],
         };
     }
@@ -93,7 +93,7 @@ export default function getRulesEffectsProcessor(
     function processShowError(effect: ProgramRuleEffect, processIdName: string): MessageEffect | GeneralErrorEffect {
         if (!effect[processIdName]) {
             return {
-                type: actions.SHOW_ERROR,
+                type: effectActions.SHOW_ERROR,
                 id: 'general',
                 error: {
                     id: effect.id,
@@ -103,7 +103,7 @@ export default function getRulesEffectsProcessor(
         }
 
         return {
-            type: actions.SHOW_ERROR,
+            type: effectActions.SHOW_ERROR,
             id: effect[processIdName],
             message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
         };
@@ -113,14 +113,14 @@ export default function getRulesEffectsProcessor(
         effect: ProgramRuleEffect, processIdName: string): MessageEffect | GeneralWarningEffect {
         if (!effect[processIdName]) {
             return {
-                type: actions.SHOW_WARNING,
+                type: effectActions.SHOW_WARNING,
                 id: 'general',
                 warning: { id: effect.id, message: `${effect.content} ${sanitiseFalsy(effect.data)}` },
             };
         }
 
         return {
-            type: actions.SHOW_WARNING,
+            type: effectActions.SHOW_WARNING,
             id: effect[processIdName],
             message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
         };
@@ -130,7 +130,7 @@ export default function getRulesEffectsProcessor(
         effect: ProgramRuleEffect, processIdName: string): MessageEffect | GeneralErrorEffect {
         if (!effect[processIdName]) {
             return {
-                type: actions.SHOW_ERROR_ONCOMPLETE,
+                type: effectActions.SHOW_ERROR_ONCOMPLETE,
                 id: 'general',
                 error: {
                     id: effect.id,
@@ -140,7 +140,7 @@ export default function getRulesEffectsProcessor(
         }
 
         return {
-            type: actions.SHOW_ERROR_ONCOMPLETE,
+            type: effectActions.SHOW_ERROR_ONCOMPLETE,
             id: effect[processIdName],
             message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
         };
@@ -150,7 +150,7 @@ export default function getRulesEffectsProcessor(
         effect: ProgramRuleEffect, processIdName: string): MessageEffect | GeneralWarningEffect {
         if (!effect[processIdName]) {
             return {
-                type: actions.SHOW_WARNING_ONCOMPLETE,
+                type: effectActions.SHOW_WARNING_ONCOMPLETE,
                 id: 'general',
                 warning: {
                     id: effect.id,
@@ -160,7 +160,7 @@ export default function getRulesEffectsProcessor(
         }
 
         return {
-            type: actions.SHOW_WARNING_ONCOMPLETE,
+            type: effectActions.SHOW_WARNING_ONCOMPLETE,
             id: effect[processIdName],
             message: `${effect.content} ${sanitiseFalsy(effect.data)}`,
         };
@@ -175,7 +175,7 @@ export default function getRulesEffectsProcessor(
         }
 
         return {
-            type: actions.HIDE_SECTION,
+            type: effectActions.HIDE_SECTION,
             id: effect.programStageSectionId,
         };
     }
@@ -186,14 +186,14 @@ export default function getRulesEffectsProcessor(
         }
 
         return {
-            type: actions.MAKE_COMPULSORY,
+            type: effectActions.MAKE_COMPULSORY,
             id: effect[processIdName],
         };
     }
 
     function processDisplayText(effect: ProgramRuleEffect): ?any {
         return {
-            type: actions.DISPLAY_TEXT,
+            type: effectActions.DISPLAY_TEXT,
             id: effect.location,
             displayText: {
                 id: effect.id,
@@ -204,7 +204,7 @@ export default function getRulesEffectsProcessor(
 
     function processDisplayKeyValuePair(effect: ProgramRuleEffect): ?any {
         return {
-            type: actions.DISPLAY_KEY_VALUE_PAIR,
+            type: effectActions.DISPLAY_KEY_VALUE_PAIR,
             id: effect.location,
             displayKeyValuePair: {
                 id: effect.id,
@@ -220,7 +220,7 @@ export default function getRulesEffectsProcessor(
         }
 
         return {
-            type: actions.HIDE_OPTION_GROUP,
+            type: effectActions.HIDE_OPTION_GROUP,
             id: effect[processIdName],
             optionGroupId: effect.optionGroupId,
         };
@@ -232,7 +232,7 @@ export default function getRulesEffectsProcessor(
         }
 
         return {
-            type: actions.HIDE_OPTION,
+            type: effectActions.HIDE_OPTION,
             id: effect[processIdName],
             optionId: effect.optionId,
         };
@@ -244,26 +244,26 @@ export default function getRulesEffectsProcessor(
         }
 
         return {
-            type: actions.SHOW_OPTION_GROUP,
+            type: effectActions.SHOW_OPTION_GROUP,
             id: effect[processIdName],
             optionGroupId: effect.optionGroupId,
         };
     }
 
     const mapActionsToProcessor = {
-        [actions.ASSIGN_VALUE]: processAssignValue,
-        [actions.HIDE_FIELD]: processHideField,
-        [actions.SHOW_ERROR]: processShowError,
-        [actions.SHOW_WARNING]: processShowWarning,
-        [actions.SHOW_ERROR_ONCOMPLETE]: processShowErrorOnComplete,
-        [actions.SHOW_WARNING_ONCOMPLETE]: processShowWarningOnComplete,
-        [actions.HIDE_SECTION]: processHideSection,
-        [actions.MAKE_COMPULSORY]: processMakeCompulsory,
-        [actions.DISPLAY_TEXT]: processDisplayText,
-        [actions.DISPLAY_KEY_VALUE_PAIR]: processDisplayKeyValuePair,
-        [actions.HIDE_OPTION_GROUP]: processHideOptionGroup,
-        [actions.HIDE_OPTION]: processHideOption,
-        [actions.SHOW_OPTION_GROUP]: processShowOptionGroup,
+        [effectActions.ASSIGN_VALUE]: processAssignValue,
+        [effectActions.HIDE_FIELD]: processHideField,
+        [effectActions.SHOW_ERROR]: processShowError,
+        [effectActions.SHOW_WARNING]: processShowWarning,
+        [effectActions.SHOW_ERROR_ONCOMPLETE]: processShowErrorOnComplete,
+        [effectActions.SHOW_WARNING_ONCOMPLETE]: processShowWarningOnComplete,
+        [effectActions.HIDE_SECTION]: processHideSection,
+        [effectActions.MAKE_COMPULSORY]: processMakeCompulsory,
+        [effectActions.DISPLAY_TEXT]: processDisplayText,
+        [effectActions.DISPLAY_KEY_VALUE_PAIR]: processDisplayKeyValuePair,
+        [effectActions.HIDE_OPTION_GROUP]: processHideOptionGroup,
+        [effectActions.HIDE_OPTION]: processHideOption,
+        [effectActions.SHOW_OPTION_GROUP]: processShowOptionGroup,
     };
 
     function processRulesEffects(

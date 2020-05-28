@@ -1,17 +1,17 @@
 // @flow
 import log from 'loglevel';
-import { errorCreator } from '../../capture-core-utils';
-import { RulesEngine } from '../../capture-core-utils/RulesEngine';
-import { TrackerProgram, DataElement, RenderFoundation } from '../metaData';
-import constantsStore from '../metaDataMemoryStores/constants/constants.store';
-import optionSetsStore from '../metaDataMemoryStores/optionSets/optionSets.store';
+import { errorCreator } from '../../../capture-core-utils';
+import { RulesEngine } from '../engine';
+import { TrackerProgram, DataElement, RenderFoundation } from '../../metaData';
+import constantsStore from '../../metaDataMemoryStores/constants/constants.store';
+import optionSetsStore from '../../metaDataMemoryStores/optionSets/optionSets.store';
 
 import type {
     ProgramRulesContainer,
     TrackedEntityAttribute as TrackedEntityAttributeForRulesEngine,
     Enrollment,
     TEIValues,
-} from '../../capture-core-utils/RulesEngine/rulesEngine.types';
+} from '../engine';
 
 const errorMessages = {
     PROGRAM_MISSING_OR_INVALID: 'Program is missing or is invalid',

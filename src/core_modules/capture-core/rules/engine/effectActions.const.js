@@ -1,6 +1,6 @@
 // @flow
 
-export default {
+export const effectActions = {
     ASSIGN_VALUE: 'ASSIGN',
     HIDE_FIELD: 'HIDEFIELD',
     SHOW_ERROR: 'SHOWERROR',

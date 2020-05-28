@@ -1,4 +1,4 @@
-import runRulesForSingleEvent from '../../../capture-core/rulesEngineActionsCreator/runRulesForSingleEvent';
+import runRulesForSingleEvent from '../../actionsCreator/runRulesForSingleEvent';
 
 describe('rules engine', () => {
     const currentEvent = {};

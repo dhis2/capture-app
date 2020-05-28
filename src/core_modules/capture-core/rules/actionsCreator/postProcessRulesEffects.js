@@ -1,13 +1,8 @@
 // @flow
-import { effectActions } from 'capture-core-utils/RulesEngine';
-import type
-{
-    OutputEffect,
-    HideOutputEffect,
-    AssignOutputEffect,
-} from 'capture-core-utils/RulesEngine/rulesEngine.types';
-import { RenderFoundation } from '../metaData';
-import type { OutputEffects } from "../../capture-core-utils/RulesEngine/rulesEngine.types";
+import { effectActions } from '../engine';
+import type { OutputEffect, HideOutputEffect, AssignOutputEffect, OutputEffects } from '../engine';
+import { RenderFoundation } from '../../metaData';
+
 
 function getAssignEffects(assignEffects: ?{ [elementId: string]: Array<AssignOutputEffect> }) {
     if (!assignEffects) {

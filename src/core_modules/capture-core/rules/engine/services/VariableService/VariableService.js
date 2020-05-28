@@ -1,10 +1,10 @@
 // @flow
 import log from 'loglevel';
-import OptionSetHelper from '../OptionSetHelper/OptionSetHelper';
-import typeKeys from '../typeKeys.const';
+import OptionSetHelper from '../../helpers/OptionSetHelper';
+import typeKeys from '../../typeKeys.const';
 import variablePrefixes from './variablePrefixes.const';
-import getDateUtils from '../dateUtils/dateUtils';
-import momentConverter from '../converters/momentConverter';
+import getDateUtils from '../../commonUtils/dateUtils';
+import momentConverter from '../../converters/momentConverter';
 
 import type {
     ProgramRuleVariable,
@@ -20,7 +20,7 @@ import type {
     OrgUnit,
     RuleVariable,
     TEIValues,
-} from '../rulesEngine.types';
+} from '../../rulesEngine.types';
 
 type SourceData = {
     executingEvent: ?EventData,
