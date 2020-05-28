@@ -3,7 +3,7 @@
 /* eslint-disable no-restricted-syntax */
 import { errorCreator } from 'capture-core-utils';
 import isFunction from 'd2-utilizr/lib/isFunction';
-import type { ProgramRule, ProgramRuleVariable } from 'capture-core-utils/RulesEngine/rulesEngine.types';
+import type { ProgramRule, ProgramRuleVariable } from '../../rules/engine';
 import CategoryCombination from '../CategoryCombinations/CategoryCombination';
 import Icon from '../Icon/Icon';
 import type { Access } from '../Access/Access';
