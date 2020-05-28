@@ -52,6 +52,5 @@ export const loadMetaDataInternal = async () => {
     await loadOptionSets([
         ...optionSetsOutlineFromPrograms,
         ...optionSetsOutlineFromTrackedEntityTypes,
-    ],
-    );
+    ]);
 };
