@@ -148,8 +148,8 @@ export async function loadCategories(
 ) {
     await setCategoriesAsync(uniqueCategories);
 
-    const uniqueCateogryIds = uniqueCategories.map(uc => uc.id);
-    const categoryIdBatches = chunk(uniqueCateogryIds, 50);
+    const uniqueCategoryIds = uniqueCategories.map(uc => uc.id);
+    const categoryIdBatches = chunk(uniqueCategoryIds, 50);
     await categoryIdBatches
         .asyncForEach(idBatch => loadCategoryOptionsInBatchesAsync(idBatch));
 }
