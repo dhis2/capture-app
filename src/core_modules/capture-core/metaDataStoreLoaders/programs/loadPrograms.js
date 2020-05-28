@@ -24,14 +24,14 @@ const getCachedProgramsOutline = () => {
  * therefore programs in the cache that wasn't retrieved are programs the user don't have access to any more.
  */
 const removeUnavailablePrograms = async (apiPrograms, cachePrograms) => {
-    const apiProgramsObject = apiPrograms
+    const apiProgramsAsObject = apiPrograms
         .reduce((acc, apiProgram) => {
             acc[apiProgram.id] = apiProgram;
             return acc;
         }, {});
 
     const unavailableProgramIds = cachePrograms
-        .filter(cacheProgram => !apiProgramsObject[cacheProgram.id])
+        .filter(cacheProgram => !apiProgramsAsObject[cacheProgram.id])
         .map(unavailableProgram => unavailableProgram.id);
 
     if (unavailableProgramIds.length > 0) {
