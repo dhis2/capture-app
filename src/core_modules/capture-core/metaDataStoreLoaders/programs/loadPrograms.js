@@ -23,15 +23,15 @@ const getCachedProgramsOutline = () => {
  * The reason for doing this is that every program that is available to the user is retrieved from the api and
  * therefore programs in the cache that wasn't retrieved are programs the user don't have access to any more.
  */
-const removeUnavailablePrograms = async (apiPrograms, cachePrograms) => {
+const removeUnavailablePrograms = async (apiPrograms, cachedPrograms) => {
     const apiProgramsAsObject = apiPrograms
         .reduce((acc, apiProgram) => {
             acc[apiProgram.id] = apiProgram;
             return acc;
         }, {});
 
-    const unavailableProgramIds = cachePrograms
-        .filter(cacheProgram => !apiProgramsAsObject[cacheProgram.id])
+    const unavailableProgramIds = cachedPrograms
+        .filter(cachedProgram => !apiProgramsAsObject[cachedProgram.id])
         .map(unavailableProgram => unavailableProgram.id);
 
     if (unavailableProgramIds.length > 0) {
@@ -44,16 +44,16 @@ const removeUnavailablePrograms = async (apiPrograms, cachePrograms) => {
  * Retrieve the program ids for the programs that have an updated program version
  * If the program has an updated version we would like to update the program in the cache
  */
-const getStaleProgramIds = (apiPrograms, cachePrograms) => {
-    const cacheProgramsAsObject = cachePrograms
-        .reduce((acc, cacheProgram) => {
-            acc[cacheProgram.id] = cacheProgram;
+const getStaleProgramIds = (apiPrograms, cachedPrograms) => {
+    const cachedProgramsAsObject = cachedPrograms
+        .reduce((acc, cachedProgram) => {
+            acc[cachedProgram.id] = cachedProgram;
             return acc;
         }, {});
 
     return apiPrograms
         .filter((program) => {
-            const cachedProgram = cacheProgramsAsObject[program.id];
+            const cachedProgram = cachedProgramsAsObject[program.id];
             return !cachedProgram || cachedProgram.version !== program.version;
         })
         .map(program => program.id);
