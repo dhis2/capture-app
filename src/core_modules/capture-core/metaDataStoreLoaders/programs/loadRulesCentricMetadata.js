@@ -32,8 +32,7 @@ export const loadRulesCentricMetadata = (programIds: Array<string>) => {
                         },
                     ),
                 ),
-        ))
-            .flat(1);
+        )).flat(1);
 
     /**
      * Compares the ids that were retrieved from the api (and stored) to the ones in the cache.
