@@ -61,7 +61,9 @@ const getStaleProgramIds = (apiPrograms, cachedPrograms) => {
 
 /**
  * Update the cache for the program ids passed in.
- * The program ids that are passed in are updated (meaning the version retrieved from the api is different from the one in the cache)
+ * The program ids that are passed in are ids of programs that needs updating (meaning the version retrieved from the api is different from the one in the cache)
+ * The returned data is needed for building the side effects of trackedEntityAttributeIds, categories and trackedEntityTypeIds.
+ * The side effects data is consequently used later when determining what other metadata to load.
  */
 const loadProgramBatch = async (programIds) => {
     const { convertedData: programs = [] } = await storePrograms(programIds);
