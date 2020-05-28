@@ -8,16 +8,16 @@ export type ExecuteOptions = {
     convertQueryResponse: ConvertQueryResponseFn,
 };
 
-export type Variables = {
+export type QueryVariables = {
     iteration: number,
 };
 
 export type RecursiveQuery = {
     ...ApiQuery,
-    params?: (variables: Variables) => Object,
+    params?: (queryVariables: QueryVariables) => Object,
 };
 
 export type QuickStoreIterationOptions = {
     convertQueryResponse: ConvertQueryResponseFn,
-    variables: Variables,
+    queryVariables: QueryVariables,
 };
