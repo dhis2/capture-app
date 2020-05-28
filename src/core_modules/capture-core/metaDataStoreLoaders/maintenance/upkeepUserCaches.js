@@ -18,7 +18,7 @@ const errorMessages = {
 async function addUserCacheToHistory(
     mainStorageController: StorageController,
 ) {
-    const currentStorageName = getUserStorageController().name;
+    const { name: currentStorageName } = getUserStorageController();
     const historyContainer = await mainStorageController.get(mainStores.USER_CACHES, ACCESS_HISTORY_KEY);
     const history = historyContainer && historyContainer.values;
     let cleanedHistory;

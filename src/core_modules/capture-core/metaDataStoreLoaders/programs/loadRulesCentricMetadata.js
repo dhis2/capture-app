@@ -30,8 +30,7 @@ export const loadRulesCentricMetadata = (programIds: Array<string>) => {
                         },
                     ),
                 ),
-        ))
-            .flat(1);
+        )).flat(1);
 
     /**
      * Removes records (program rules, program rules variables, program indicators) from the cache that aren't available to the user anymore.
