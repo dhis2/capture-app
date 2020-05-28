@@ -43,6 +43,8 @@ const getSideEffects = (() => {
 /**
  * Retrieve and store tracked entity types based on the tracked entity type ids argument.
  * The tracked entity type ids input is determined from the stale programs (programs where the program version has changed).
+ * We chunk the tracked entity type ids in chunks of smaller sizes in order to comply with a potential url path limit and
+ * to improve performance, mainly by reducing memory consumption on both the client and the server.
  */
 export const loadTrackedEntityTypes = async (
     trackedEntityTypeIds: Array<string>,
