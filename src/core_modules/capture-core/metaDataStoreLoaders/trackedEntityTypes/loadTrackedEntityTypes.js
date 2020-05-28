@@ -41,9 +41,8 @@ const getSideEffects = (() => {
 })();
 
 /**
- * Retrieve and store tracked entity types based on the trackedEntityTypeIds argument.
- * @param {string[]} trackedEntityTypeIds: types to load
- * @returns side effects used by other load functions
+ * Retrieve and store tracked entity types based on the tracked entity type ids argument.
+ * The tracked entity type ids input is determined from the stale programs (programs where the program version has changed).
  */
 export const loadTrackedEntityTypes = async (
     trackedEntityTypeIds: Array<string>,

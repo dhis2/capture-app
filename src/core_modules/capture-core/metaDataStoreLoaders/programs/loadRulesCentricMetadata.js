@@ -8,7 +8,6 @@ import {
 
 /**
  * Load program rules, program rules variables and program indicators
- * @param {string[]} programIds: ids for programs to load
  */
 export const loadRulesCentricMetadata = (programIds: Array<string>) => {
     const { storageController, storeNames } = getContext();
@@ -16,7 +15,6 @@ export const loadRulesCentricMetadata = (programIds: Array<string>) => {
     /**
      * Gets the ids from IndexedDB for the specified programs
      * (ids being program rule ids, program variable ids or program indicator ids)
-     * @param {string} storeName: name of the store
      */
     const getCachedIds = async (storeName): Promise<Array<string>> =>
         // $FlowFixMe
@@ -36,11 +34,8 @@ export const loadRulesCentricMetadata = (programIds: Array<string>) => {
             .flat(1);
 
     /**
-     * Compares the ids that were retrieved from the api (and stored) to the ones in the cache.
-     * Removes cache records that weren't retrieved from the api
-     * @param {string[]} loadedIds: retrieved and stored ids
-     * @param {string[]} cachedIds: ids in the cache
-     * @param {string} storeName: name of the store
+     * Removes records (program rules, program rules variables, program indicators) from the cache that aren't available to the user anymore.
+     * A record could be unavailable because the access rights have changed or the record is deleted.
      */
     const removeUnavailableRecords = async (loadedIds, cachedIds, storeName) => {
         const loadedIdsAsObject = loadedIds
@@ -56,9 +51,8 @@ export const loadRulesCentricMetadata = (programIds: Array<string>) => {
     };
 
     /**
-     * Retrieves data from the api and stores it in IndexedDB. Removes cached programs that is no longer available.
-     * @param {string} storeName: The name of the store
-     * @param {function} storeFn: The callback function that executes the storing
+     * Retrieves data from the api and stores it in IndexedDB.
+     * Removes cached programs no longer available to the user.
      */
     const load = async ({ storeName, storeFn }) => {
         const loadedIds = await storeFn(programIds);

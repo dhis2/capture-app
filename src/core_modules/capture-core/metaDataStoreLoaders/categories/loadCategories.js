@@ -138,8 +138,8 @@ async function setCategoriesAsync(
 }
 
 /**
- * Retrieve and store categories (and the underlying category options) based on the uniqueCategories argument.
- * @param {Object[]} uniqueCategories: categories to load
+ * Retrieve and store categories and the underlying category options based on the unique categories argument.
+ * The unique categories input is determined from the stale programs (programs where the program version has changed).
  */
 export async function loadCategories(
     uniqueCategories: Array<InputCategory>,

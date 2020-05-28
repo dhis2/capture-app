@@ -19,9 +19,9 @@ const getCachedProgramsOutline = () => {
 };
 
 /**
- * Remove programs from the cache that wasn't retrieved from the api
- * @param {Object[]} apiPrograms: programs from the api
- * @param {Object[]} cachePrograms: programs from the cache
+ * Remove programs from the cache that wasn't retrieved from the api.
+ * The reason for doing this is that every program that is available to the user is retrieved from the api and
+ * therefore programs in the cache that wasn't retrieved are programs the user don't have access to any more.
  */
 const removeUnavailablePrograms = async (apiPrograms, cachePrograms) => {
     const apiProgramsObject = apiPrograms
@@ -41,9 +41,8 @@ const removeUnavailablePrograms = async (apiPrograms, cachePrograms) => {
 };
 
 /**
- * Retrieve the program ids for the programs we would like to update in the cache
- * @param {Object[]} apiPrograms: programs from the api
- * @param {Object[]} cachePrograms: programs from the cache
+ * Retrieve the program ids for the programs that have an updated program version
+ * If the program has an updated version we would like to update the program in the cache
  */
 const getStaleProgramIds = (apiPrograms, cachePrograms) => {
     const cacheProgramsAsObject = cachePrograms
@@ -62,8 +61,7 @@ const getStaleProgramIds = (apiPrograms, cachePrograms) => {
 
 /**
  * Update the cache for the program ids passed in.
- * @param {string[]} programIds: the program ids with stale data in the cache
- * @returns programs data that is needed for the side effects.
+ * The program ids that are passed in are updated (meaning the version retrieved from the api is different from the one in the cache)
  */
 const loadProgramBatch = async (programIds) => {
     const { convertedData: programs = [] } = await storePrograms(programIds);
@@ -78,6 +76,7 @@ const loadProgramBatch = async (programIds) => {
 
 /**
  * Self executing function to scope the side effect helper functions
+ * We're scoping these because they don't directly relate to the actual program loading
  */
 const getSideEffects = (() => {
     const getOptionSetsOutline = (() => {
@@ -141,10 +140,8 @@ const getSideEffects = (() => {
             trackedEntityTypeIdSet => [...trackedEntityTypeIdSet.values()],
         )();
     /**
-     * Builds the side effects based on the programsOutline and the stale programs
-     * @param {Object[]} programsOutline: Contains some data for all programs. Used for option sets.
-     * @param {Object[]} stalePrograms: Contains needed data for the stale programs.
-     * @returns side effects data
+     * Builds the side effects based on the programsOutline (contains some data for all programs) and the stale programs (the programs where the version has changed).
+     * The side effects are used later to determine what other metadata to load.
      */
     return (programsOutline, stalePrograms) => ({
         optionSetsOutline: getOptionSetsOutline(programsOutline),

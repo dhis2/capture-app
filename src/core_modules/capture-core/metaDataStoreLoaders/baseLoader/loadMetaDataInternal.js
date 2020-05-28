@@ -22,7 +22,10 @@ const loadCoreMetaData = () =>
     );
 
 /**
- * Retrieves metadata from the api and stores it in IndexedDB. Some load functions returns side effects used by other functions.
+ * Retrieves metadata from the api and stores it in IndexedDB.
+ * This way we don't have to redownload all the metadata every time, but only the parts that have changed.
+ * Most metadata is redownloaded based on a program version change.
+ * The option sets have their own version and are redonloaded based on that.
  */
 export const loadMetaDataInternal = async () => {
     const {
