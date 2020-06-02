@@ -59,7 +59,7 @@ export const loadRulesCentricMetadata = (programIds: Array<string>) => {
         await removeUnavailableRecords(loadedIds, cachedIds, storeName);
     };
 
-    const loaderSpecs = [{
+    return Promise.all([{
         storeName: storeNames.PROGRAM_RULES_VARIABLES,
         storeFn: storeProgramRulesVariables,
     }, {
@@ -68,9 +68,6 @@ export const loadRulesCentricMetadata = (programIds: Array<string>) => {
     }, {
         storeName: storeNames.PROGRAM_INDICATORS,
         storeFn: storeProgramIndicators,
-    }];
-
-    return Promise.all(
-        loaderSpecs.map(spec => load(spec)),
+    }].map(spec => load(spec)),
     );
 };
