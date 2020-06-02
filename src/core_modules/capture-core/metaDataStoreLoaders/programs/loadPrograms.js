@@ -69,10 +69,10 @@ const loadProgramBatch = async (programIds) => {
     const { convertedData: programs = [] } = await storePrograms(programIds);
     await loadRulesCentricMetadata(programIds);
     return programs
-        .map(program => ({
-            programTrackedEntityAttributes: program.programTrackedEntityAttributes,
-            categoryCombo: program.categoryCombo,
-            trackedEntityTypeId: program.trackedEntityTypeId,
+        .map(({ programTrackedEntityAttributes, categoryCombo, trackedEntityTypeId }) => ({
+            programTrackedEntityAttributes,
+            categoryCombo,
+            trackedEntityTypeId,
         }));
 };
 
