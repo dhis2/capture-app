@@ -1,12 +1,12 @@
 // @flow
-import { effectActions } from 'capture-core-utils/RulesEngine';
+import { effectActions } from '../../rules/engine';
 import type {
     OutputEffect,
     GeneralErrorEffect,
     GeneralWarningEffect,
-} from 'capture-core-utils/RulesEngine/rulesEngine.types';
+} from '../../rules/engine';
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { actionTypes } from '../../rulesEngineActionsCreator/rulesEngine.actions';
+import { actionTypes } from '../../rules/actionsCreator';
 
 export const messageStateKeys = {
     ERROR: 'error',
