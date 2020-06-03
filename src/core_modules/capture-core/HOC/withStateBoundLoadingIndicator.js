@@ -2,8 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { LoadingMaskForPage } from '../components/LoadingMasks';
-import LoadingMaskElementCenter from '../components/LoadingMasks/LoadingMaskElementCenter.component';
+import { LoadingMaskForPage, LoadingMaskElementCenter } from '../components/LoadingMasks';
 
 type Props = {
     ready: boolean,
