@@ -300,7 +300,19 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     },
     [searchPageSelectorActonTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
         const { nextProps: selections } = action.payload;
-        const newState = { ...state, ...selections, categories: undefined, categoriesMeta: undefined, complete: false };
+        const newState = {
+            ...state,
+            ...selections,
+            categories: undefined,
+            categoriesMeta: undefined,
+            complete: false,
+        };
+        return newState;
+    },
+    [searchPageSelectorActonTypes.SET_PROGRAM_ID]: (state, action) => {
+        const programId = action.payload;
+        const newState = { ...state, programId };
+        newState.complete = false;
         return newState;
     },
     [newEventSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {

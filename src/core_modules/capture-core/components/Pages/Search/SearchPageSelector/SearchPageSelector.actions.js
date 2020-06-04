@@ -31,7 +31,7 @@ export const resetOrgUnitIdFromSearchPage =
     () => actionCreator(searchPageSelectorActonTypes.RESET_ORG_UNIT_ID)();
 
 export const setProgramIdFromSearchPage =
-    (id: string) => actionCreator(searchPageSelectorActonTypes.SET_PROGRAM_ID)({ programId: id });
+    (id: string) => actionCreator(searchPageSelectorActonTypes.SET_PROGRAM_ID)(id);
 
 export const resetProgramIdFromSearchPage =
     () => actionCreator(searchPageSelectorActonTypes.RESET_PROGRAM_ID)();
