@@ -30,6 +30,9 @@ import {
 import {
     urlActionTypes as newEnrollmentUrlActionTypes,
 } from '../../components/Pages/NewEnrollment';
+import {
+    searchPageSelectorActonTypes,
+} from '../../components/Pages/Search/SearchPageSelector/SearchPageSelector.actions';
 
 const setOrgUnit = (state, action) => {
     const orgUnitId = action.payload.id;
@@ -284,6 +287,22 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         return newState;
     },
     [newEventSelectorActionTypes.SET_ORG_UNIT]: setOrgUnit,
+    [searchPageSelectorActonTypes.SET_ORG_UNIT]: (state, action) => {
+        const newState = {
+            ...state,
+            orgUnitId: action.payload.id,
+        };
+        return newState;
+    },
+    [searchPageSelectorActonTypes.RESET_ORG_UNIT_ID]: (state) => {
+        const newState = { ...state, orgUnitId: null, complete: false };
+        return newState;
+    },
+    [searchPageSelectorActonTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
+        const { nextProps: selections } = action.payload;
+        const newState = { ...state, ...selections, categories: undefined, categoriesMeta: undefined, complete: false };
+        return newState;
+    },
     [newEventSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
         const programId = action.payload;
         const newState = { ...state, programId };

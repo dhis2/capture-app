@@ -214,6 +214,14 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         };
         return newState;
     },
+    [searchPageSelectorActonTypes.RESET_ORG_UNIT_ID]: (state) => {
+        const newState = {
+            ...state,
+            page: null,
+            locationSwitchInProgress: true,
+        };
+        return newState;
+    },
     [editEventPageSelectorActionTypes.SET_ORG_UNIT]: (state) => {
         const newState = { ...state };
         newState.locationSwitchInProgress = true;
@@ -262,6 +270,11 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
     [newEventPageSelectorActionTypes.SET_ORG_UNIT]: (state) => {
+        const newState = { ...state };
+        newState.locationSwitchInProgress = true;
+        return newState;
+    },
+    [searchPageSelectorActonTypes.SET_ORG_UNIT]: (state) => {
         const newState = { ...state };
         newState.locationSwitchInProgress = true;
         return newState;

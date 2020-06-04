@@ -27,8 +27,9 @@ export const searchPageSelectorUpdateURLEpic = (action$: InputObservable, store:
         mainPageSelectorBatchActionTypes.START_AGAIN,
         mainPageSelectorBatchActionTypes.RESET_PROGRAM_AND_CATEGORY_OPTION,
     )
-        .map(({ payload }) => {
-            const { programId, orgUnitId } = payload;
+        .map(() => {
+            const state = store.getState();
+            const { programId, orgUnitId } = state.currentSelections;
             const args = getArguments(programId, orgUnitId);
             return push(`/search/${args}`);
         });

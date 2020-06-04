@@ -20,6 +20,9 @@ import {
 import {
     actionTypes as viewEventPageSelectorActionTypes,
 } from '../../components/Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
+import {
+    searchPageSelectorActonTypes,
+} from '../../components/Pages/Search/SearchPageSelector/SearchPageSelector.actions';
 import { orgUnitListActionTypes } from '../../components/QuickSelector';
 import { set as setStoreRoots } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import { actionTypes as initActionTypes } from '../../init/init.actions';
@@ -58,6 +61,13 @@ export const organisationUnitDesc = createReducerDescription({
         };
         return newState;
     },
+    [searchPageSelectorActonTypes.SET_ORG_UNIT_BASED_ON_URL]: (state, action) => {
+        const newState = {
+            ...state,
+            [action.payload.id]: action.payload,
+        };
+        return newState;
+    },
     [newEnrollmentUrlActionTypes.SET_ORG_UNIT_BASED_ON_URL]: (state, action) => ({
         ...state,
         [action.payload.orgUnit.id]: action.payload.orgUnit,
@@ -78,6 +88,10 @@ export const organisationUnitDesc = createReducerDescription({
         const newState = { ...state };
         const orgUnit = action.payload.orgUnit;
         newState[orgUnit.id] = orgUnit;
+        return newState;
+    },
+    [searchPageSelectorActonTypes.SET_ORG_UNIT]: (state, action) => {
+        const newState = { ...state, [action.payload.orgUnit.id]: action.payload.orgUnit };
         return newState;
     },
 }, 'organisationUnits');

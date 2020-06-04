@@ -25,7 +25,7 @@ export const batchActionTypes = {
 };
 
 export const setOrgUnitFromSearchPage =
-    (id: string, orgUnit: Object) => actionCreator(searchPageSelectorActonTypes.SET_ORG_UNIT)({ orgUnitId: id, orgUnit });
+    (id: string, orgUnit: Object) => actionCreator(searchPageSelectorActonTypes.SET_ORG_UNIT)({ id, orgUnit });
 
 export const resetOrgUnitIdFromSearchPage =
     () => actionCreator(searchPageSelectorActonTypes.RESET_ORG_UNIT_ID)();
@@ -62,7 +62,7 @@ export const invalidSelectionsFromUrl =
 
 export const setCurrentOrgUnitBasedOnUrl =
   (orgUnit: Object) =>
-      actionCreator(searchPageSelectorActonTypes.SET_ORG_UNIT_BASED_ON_URL)({ orgUnit });
+      actionCreator(searchPageSelectorActonTypes.SET_ORG_UNIT_BASED_ON_URL)(orgUnit);
 
 export const errorRetrievingOrgUnitBasedOnUrl =
   (error: string) => actionCreator(searchPageSelectorActonTypes.ERROR_RETRIEVING_ORG_UNIT_BASED_ON_URL)({ error });
