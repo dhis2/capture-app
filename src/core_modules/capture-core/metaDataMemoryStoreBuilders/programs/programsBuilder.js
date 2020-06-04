@@ -1,6 +1,6 @@
 // @flow
 import StorageController from 'capture-core-utils/storage/StorageController';
-import type { ProgramRule, ProgramRuleVariable } from 'capture-core-utils/RulesEngine/rulesEngine.types';
+import type { ProgramRule, ProgramRuleVariable } from '../../rules/engine';
 import { ProgramFactory } from './factory';
 import {
     Program,
