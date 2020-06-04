@@ -15,7 +15,7 @@ import {
 } from '../../../utils/validators/form';
 import { parseDate } from '../../../utils/converters/date';
 import { dataElementTypes as elementTypes } from '../../../metaData';
-import type { UpdatableFilterContent } from '../filters.types';
+import type { UpdatableFilterContent } from '../types';
 import './calendarFilterStyles.css';
 import { mainOptionKeys, mainOptionTranslatedTexts } from './mainOptions';
 import { getDateFilterData } from './dateFilterDataGetter';

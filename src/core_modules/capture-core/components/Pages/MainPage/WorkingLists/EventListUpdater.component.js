@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { EventList } from '../EventsList';
+import { EventList } from '../../../ListView';
 import { filtersAreEqual } from './utils';
 
 function useUpdateListMemoize(value) {

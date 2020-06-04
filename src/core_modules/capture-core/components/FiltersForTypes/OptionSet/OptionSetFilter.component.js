@@ -5,7 +5,7 @@ import SelectBoxes from '../../FormFields/Options/SelectBoxes/SelectBoxes.compon
 import { orientations } from '../../FormFields/Options/MultiSelectBoxes/multiSelectBoxes.const';
 import OptionSet from '../../../metaData/OptionSet/OptionSet';
 import { getSingleSelectOptionSetFilterData, getMultiSelectOptionSetFilterData } from './optionSetFilterDataGetter';
-import type { UpdatableFilterContent } from '../filters.types';
+import type { UpdatableFilterContent } from '../types';
 
 const getStyles = (theme: Theme) => ({
     selectBoxesContainer: {

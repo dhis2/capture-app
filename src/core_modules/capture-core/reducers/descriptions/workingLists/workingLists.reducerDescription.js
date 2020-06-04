@@ -3,11 +3,11 @@ import { moment } from 'capture-core-utils/moment';
 import { createReducerDescription } from '../../../trackerRedux/trackerReducer';
 import {
     actionTypes as columnSelectorActionTypes,
-} from '../../../components/Pages/MainPage/EventsList/ListWrapper/actions/columnSelectorDialog.actions';
+} from '../../../components/ListView/ListWrapper/actions/columnSelectorDialog.actions';
 import {
     actionTypes as filterSelectorActionTypes,
-} from '../../../components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.actions';
-import { actionTypes as eventListActionTypes } from '../../../components/Pages/MainPage/EventsList/eventsList.actions';
+} from '../../../components/ListView/FilterSelectors/filterSelector.actions';
+import { actionTypes as eventListActionTypes } from '../../../components/ListView/listView.actions';
 import {
     actionTypes as listActionTypes,
 } from '../../../components/List/list.actions';

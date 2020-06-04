@@ -126,7 +126,7 @@ import {
 } from 'capture-core/components/Pages/EditEvent/EditEventSelector/EditEventSelector.epics';
 import {
     includeFiltersWithValueAfterColumnSortingEpic,
-} from 'capture-core/components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.epics';
+} from 'capture-core/components/ListView/FilterSelectors/filterSelector.epics';
 import {
     openRelationshipTeiSearchEpic,
     requestRelationshipTeiSearchEpic,

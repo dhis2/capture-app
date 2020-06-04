@@ -1,6 +1,6 @@
 // @flow
 import { pipe } from 'capture-core-utils';
-import type { BooleanFilterData } from '../../../eventList.types';
+import type { BooleanFilterData } from '../../../../../../ListView';
 
 export function convertBoolean(filter: BooleanFilterData) {
     return pipe(

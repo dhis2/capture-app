@@ -1,5 +1,5 @@
 // @flow
-import type { TrueOnlyFilterData } from '../../../eventList.types';
+import type { TrueOnlyFilterData } from '../../../../../../ListView';
 
 export function convertTrueOnly(filter: TrueOnlyFilterData) {
     return `eq:${filter.value}`;

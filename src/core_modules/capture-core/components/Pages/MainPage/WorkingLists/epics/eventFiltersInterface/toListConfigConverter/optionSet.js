@@ -10,7 +10,7 @@ import type {
 } from '../../../workingLists.types';
 import type {
     OptionSetFilterData,
-} from '../../../../EventsList/eventList.types';
+} from '../../../../../../ListView';
 
 
 const converterByType = {

@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import D2TrueOnly from '../../FormFields/Generic/D2TrueOnly.component';
 import { orientations } from '../../FormFields/Options/MultiSelectBoxes/multiSelectBoxes.const';
 import { getTrueOnlyFilterData } from './trueOnlyFilterDataGetter';
-import type { UpdatableFilterContent } from '../filters.types';
+import type { UpdatableFilterContent } from '../types';
 
 const getStyles = (theme: Theme) => ({
     selectBoxesContainer: {

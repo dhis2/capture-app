@@ -2,13 +2,13 @@
 import { createReducerDescription } from '../../../../trackerRedux/trackerReducer';
 import {
     actionTypes as eventsListActionTypes,
-} from '../../../../components/Pages/MainPage/EventsList/eventsList.actions';
+} from '../../../../components/ListView/listView.actions';
 import {
     actionTypes as paginationActionTypes,
-} from '../../../../components/Pages/MainPage/EventsList/Pagination/pagination.actions';
+} from '../../../../components/ListView/Pagination/pagination.actions';
 import {
     actionTypes as filterSelectorActionTypes,
-} from '../../../../components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.actions';
+} from '../../../../components/ListView/FilterSelectors/filterSelector.actions';
 import {
     actionTypes as listActionTypes,
 } from '../../../../components/List/list.actions';

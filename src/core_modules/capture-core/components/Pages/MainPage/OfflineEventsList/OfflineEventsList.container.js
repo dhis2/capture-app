@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import OfflineEventsList from '../../../EventsList/OfflineEventsList/OfflineEventsList.component';
-import { openEditEventPage } from '../EventsList/eventsList.actions';
+import { openEditEventPage } from '../../../ListView/listView.actions';
 
 const mapStateToProps = (state: ReduxState) => ({
     events: state.events,

@@ -19,7 +19,7 @@ import {
     type TrueOnlyFilterData,
     type TextFilterData,
     type NumericFilterData,
-} from '../../../../EventsList/eventList.types';
+} from '../../../../../../ListView';
 import type {
     ApiDataFilter,
     ApiDataFilterNumeric,

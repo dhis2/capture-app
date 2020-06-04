@@ -14,7 +14,7 @@ import {
     type BooleanFilterData,
     type TextFilterData,
     type NumericFilterData,
-} from '../../../../EventsList/eventList.types';
+} from '../../../../../../ListView';
 import type {
     ColumnConfig,
     ApiDataFilterNumeric,

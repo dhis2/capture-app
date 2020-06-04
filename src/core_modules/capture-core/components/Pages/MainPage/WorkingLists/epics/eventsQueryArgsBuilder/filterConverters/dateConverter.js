@@ -7,7 +7,7 @@ import type {
     DateFilterData,
     RelativeDateFilterData,
     AbsoluteDateFilterData,
-} from '../../../../EventsList/eventList.types';
+} from '../../../../../../ListView';
 
 const periods = {
     TODAY: 'TODAY',

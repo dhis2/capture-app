@@ -19,7 +19,7 @@ import {
     openViewEventPageFailed,
     initializeWorkingListsOnBackToMainPage,
 } from '../viewEvent.actions';
-import { actionTypes as eventListActionTypes } from '../../MainPage/EventsList/eventsList.actions';
+import { actionTypes as eventListActionTypes } from '../../../ListView/listView.actions';
 import { getEvent } from '../../../../events/eventRequests';
 import {
     initializeNewRelationship,

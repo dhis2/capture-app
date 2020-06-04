@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import Input from './Input.component';
 import { getTextFilterData } from './textFilterDataGetter';
-import type { UpdatableFilterContent } from '../filters.types';
+import type { UpdatableFilterContent } from '../types';
 
 type Value = ?string;
 
