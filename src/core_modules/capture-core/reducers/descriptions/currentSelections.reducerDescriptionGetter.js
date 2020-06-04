@@ -315,6 +315,19 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         newState.complete = false;
         return newState;
     },
+    [searchPageSelectorActonTypes.SET_CATEGORY_OPTION]: (state, action) => {
+        const { categoryId, categoryOption } = action.payload;
+        return setCategoryOption(state, categoryId, categoryOption);
+    },
+    [searchPageSelectorActonTypes.RESET_CATEGORY_OPTION]: (state, action) => {
+        const { categoryId } = action.payload;
+        return resetCategoryOption(state, categoryId);
+    },
+    [searchPageSelectorActonTypes.RESET_ALL_CATEGORY_OPTIONS]: state => ({
+        ...state,
+        categories: undefined,
+        categoriesMeta: undefined,
+    }),
     [newEventSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
         const programId = action.payload;
         const newState = { ...state, programId };
