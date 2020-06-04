@@ -4,15 +4,11 @@ import { searchPageSelectorActonTypes } from './SearchPageSelector.actions';
 
 export const searchPageDesc = createReducerDescription({
     [searchPageSelectorActonTypes.UPDATE_SELECTIONS_FROM_URL]: (state) => {
-        const newState = { ...state };
-        newState.isLoading = true;
+        const newState = { ...state, isLoading: true };
         return newState;
     },
     [searchPageSelectorActonTypes.VALID_SELECTIONS_FROM_URL]: (state) => {
-        const newState = { ...state };
-        newState.isLoading = false;
-        newState.selectionsError = null;
-        newState.dataEntryIsLoading = false;
+        const newState = { ...state, isLoading: false };
         return newState;
     },
 }, 'searchPage');
