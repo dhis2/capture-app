@@ -31,9 +31,6 @@ export const updateMainSelectionsFromUrl =
 export const setCurrentOrgUnitBasedOnUrl =
     (orgUnit: Object) => actionCreator(actionTypes.SET_ORG_UNIT_BASED_ON_URL)(orgUnit);
 
-export const invalidOrgUnitFromUrl =
-    (error: string) => actionCreator(actionTypes.INVALID_ORG_UNIT_FROM_URL)(error);
-
 export const errorRetrievingOrgUnitBasedOnUrl =
     (error: string) => actionCreator(actionTypes.ERROR_RETRIEVING_ORG_UNIT_BASED_ON_URL)(error);
 

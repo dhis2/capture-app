@@ -15,6 +15,10 @@ import {
 import {
     viewEventFromUrl,
 } from '../Pages/ViewEvent/viewEvent.actions';
+import {
+    updateSearchSelectionsFromUrl,
+} from '../Pages/Search/SearchPageSelector/SearchPageSelector.actions';
+
 import { reservedUrlKeys } from '../UrlSync/withUrlSync';
 import type { UpdateDataContainer } from '../UrlSync/withUrlSync';
 
@@ -33,6 +37,7 @@ const pageKeys = {
     NEW_EVENT: 'newEvent',
     VIEW_EVENT: 'viewEvent',
     NEW_ENROLLMENT: 'newEnrollment',
+    SEARCH: 'search',
 };
 
 const specificationForPages = {
@@ -72,6 +77,16 @@ const specificationForPages = {
             propKey: 'orgUnitId',
         },
     ],
+    [pageKeys.SEARCH]: [
+        {
+            urlKey: 'programId',
+            propKey: 'programId',
+        },
+        {
+            urlKey: 'orgUnitId',
+            propKey: 'orgUnitId',
+        },
+    ],
 };
 
 const updaterForPages = {
@@ -79,6 +94,7 @@ const updaterForPages = {
     [pageKeys.NEW_EVENT]: updateSelectionsFromUrlForNewEvent,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
     [pageKeys.NEW_ENROLLMENT]: updateSelectionsFromUrlForNewEnrollment,
+    [pageKeys.SEARCH]: updateSearchSelectionsFromUrl,
 };
 
 const getUrlParts = (pathName: string) => {

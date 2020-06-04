@@ -72,6 +72,7 @@ import {
 import { appReducerDesc } from './app.reducerDescription';
 import { currentSelectionsReducerDesc } from './currentSelections.reducerDescription';
 import { feedbackDesc } from './feedback.reducerDescription';
+import { searchPageDesc } from "../../core_modules/capture-core/components/Pages/Search/SearchPageSelector/search.reducerDescription";
 
 export default [
     appReducerDesc,
@@ -115,6 +116,7 @@ export default [
     editEventPageDesc,
     viewEventPageDesc,
     newEnrollmentPageDesc,
+    searchPageDesc,
     newRelationshipDesc,
     newRelationshipRegisterTeiDesc,
     newRelationshipRegisterTeiDuplicatesReviewDesc,

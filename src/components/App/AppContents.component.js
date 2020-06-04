@@ -11,6 +11,7 @@ import { NewEventPage } from 'capture-core/components/Pages/NewEvent';
 import { NewEnrollmentPage } from 'capture-core/components/Pages/NewEnrollment';
 import MainPageEntry from 'capture-core/components/Pages/MainPage/MainPageEntry/MainPageEntry.container';
 import ViewEventEntry from 'capture-core/components/Pages/ViewEvent/ViewEventEntry/ViewEventEntry.container';
+import SearchPage from "../../core_modules/capture-core/components/Pages/Search/Page";
 
 const styles = theme => ({
     app: {
@@ -58,6 +59,7 @@ class AppContents extends Component<Props> {
                         <Route path="/newEvent" component={NewEventPage} />
                         <Route path="/viewEvent" component={ViewEventEntry} />
                         <Route path="/newEnrollment" component={NewEnrollmentPage} />
+                        <Route path="/search" component={SearchPage} />
                         <Route path="/:keys" component={MainPageEntry} />
                         <Route path="/" component={MainPageEntry} />
                     </Switch>

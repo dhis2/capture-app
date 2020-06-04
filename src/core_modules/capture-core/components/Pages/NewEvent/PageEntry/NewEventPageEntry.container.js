@@ -15,4 +15,3 @@ export default connect(mapStateToProps, () => ({}))(
         withErrorMessageHandler()(SelectorLevel),
     ),
 );
-

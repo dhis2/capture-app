@@ -31,6 +31,9 @@ import {
 import {
     urlActionTypes as newEnrollmentUrlActionTypes,
 } from '../../components/Pages/NewEnrollment';
+import {
+    searchPageSelectorActonTypes,
+} from '../../components/Pages/Search/SearchPageSelector/SearchPageSelector.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
@@ -42,6 +45,10 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
     [newEventDataEntryUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
+        const newState = { ...state, page: action.payload.nextPage };
+        return newState;
+    },
+    [searchPageSelectorActonTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
         const newState = { ...state, page: action.payload.nextPage };
         return newState;
     },

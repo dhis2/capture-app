@@ -45,6 +45,7 @@ class QuickSelector extends Component<Props> {
     handleClickProgram: (programId: string) => void;
     handleSetCatergoryCombo: (selectedCategoryOption: string, categoryId: string) => void;
     handleClickOrgUnit: (orgUnit: Object) => void;
+
     constructor(props) {
         super(props);
 
