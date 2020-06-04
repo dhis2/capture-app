@@ -6,7 +6,6 @@ import { actionTypes as mainPageSelectionsActionTypes } from '../../components/P
 import { actionTypes as setOrgUnitActionTypes } from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
 import {
     dataEntryUrlActionTypes as newEventDataEntryUrlActionTypes,
-    selectorActionTypes as newEventSelectorActionTypes,
 } from '../../components/Pages/NewEvent';
 import {
     urlActionTypes as newEnrollmentUrlActionTypes,
@@ -161,7 +160,6 @@ export const registeringUnitListDesc = createReducerDescription({
     }),
     [mainPageSelectorActionTypes.RESET_ORG_UNIT_ID]: removeSearchDataOnResetRegUnit,
     [mainPageSelectionsActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: removeSearchDataOnResetRegUnit,
-    [newEventSelectorActionTypes.RESET_ORG_UNIT_ID]: removeSearchDataOnResetRegUnit,
     [newEventDataEntryUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: removeSearchDataOnResetRegUnit,
     [editEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: removeSearchDataOnResetRegUnit,
     [viewEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: removeSearchDataOnResetRegUnit,

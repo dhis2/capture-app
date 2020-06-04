@@ -6,10 +6,6 @@ import {
     actionTypes as quickSelectorActionTypes,
 } from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
 import {
-    dataEntryUrlActionTypes as newEventDataEntryUrlActionTypes,
-    selectorActionTypes as newEventSelectorActionTypes,
-} from '../../components/Pages/NewEvent';
-import {
     actionTypes as editEventActionTypes,
 } from '../../components/Pages/EditEvent/editEvent.actions';
 import {
@@ -118,18 +114,6 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         return newState;
     },
     [mainSelectionsActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: (state) => {
-        const newState = {
-            ...state,
-            orgUnitId: null,
-        };
-        return newState;
-    },
-    [newEventDataEntryUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
-        const { nextProps: selections } = action.payload;
-        const newState = { ...state, ...selections, categories: undefined, categoriesMeta: undefined, complete: false };
-        return newState;
-    },
-    [newEventDataEntryUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: (state) => {
         const newState = {
             ...state,
             orgUnitId: null,

@@ -252,12 +252,12 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         };
         return newState;
     },
-    [newEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
-        const newState = { ...state };
-        newState.locationSwitchInProgress = true;
+
+    [lockedSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
+        const newState = { ...state, page: action.payload.nextPage };
         return newState;
     },
-    [newEventPageSelectorActionTypes.SET_ORG_UNIT]: (state) => {
+    [lockedSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
         const newState = { ...state };
         newState.locationSwitchInProgress = true;
         return newState;
@@ -267,7 +267,7 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         newState.locationSwitchInProgress = true;
         return newState;
     },
-    [newEventPageSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
+    [lockedSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
         const newState = { ...state };
         newState.locationSwitchInProgress = true;
         return newState;

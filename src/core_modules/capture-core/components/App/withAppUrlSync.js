@@ -190,7 +190,10 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
     });
 
     const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-        onUpdateFromUrl: (page: ?string, updateData: UpdateDataContainer) => dispatch(updaterForPages[page](updateData)),
+        onUpdateFromUrl: (page: ?string, updateData: UpdateDataContainer) => {
+            let l;
+            return dispatch(updaterForPages[page](updateData));
+        },
     });
 
     return connect(mapStateToProps, mapDispatchToProps)(AppUrlSyncer);

@@ -4,7 +4,6 @@ import programs from 'capture-core/metaDataMemoryStores/programCollection/progra
 import { actionTypes as mainSelections } from '../MainPage/mainSelections.actions';
 import {
     dataEntryUrlActionTypes as newEventDataEntryUrlActionTypes,
-    selectorActionTypes as newEventSelectorActionTypes,
 } from '../NewEvent';
 import {
     actionTypes as mainPageSelectorActionTypes,
@@ -65,8 +64,8 @@ export const calculateSelectionsCompletenessEpic = (action$: InputObservable, st
         editEventPageSelectorActionTypes.SET_CATEGORY_OPTION,
         viewEventPageSelectorActionTypes.SET_PROGRAM_ID,
         viewEventPageSelectorActionTypes.SET_CATEGORY_OPTION,
-        newEventSelectorActionTypes.SET_PROGRAM_ID,
-        newEventSelectorActionTypes.SET_CATEGORY_OPTION,
+        lockedSelectorActionTypes.SET_PROGRAM_ID,
+        lockedSelectorActionTypes.SET_CATEGORY_OPTION,
         newEnrollmentUrlActionTypes.VALID_SELECTIONS_FROM_URL,
         crossPageActionTypes.AFTER_SETTING_ORG_UNIT_SKIP_CATEGORIES_RESET,
         crossPageActionTypes.AFTER_SETTING_ORG_UNIT_DO_CATEGORIES_RESET,

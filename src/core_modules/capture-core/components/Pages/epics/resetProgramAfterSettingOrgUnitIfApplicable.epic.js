@@ -9,9 +9,7 @@ import {
 import {
     actionTypes as viewEventSelectorActionTypes,
 } from '../../Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
-import {
-    actionTypes as newEventSelectorActionTypes,
-} from '../../Pages/NewEvent/SelectorLevel/selectorLevel.actions';
+
 
 import {
     resetProgramIdBase,
@@ -44,7 +42,7 @@ export const resetProgramAfterSettingOrgUnitIfApplicableEpic = (action$: InputOb
             mainPageSelectorActionTypes.SET_ORG_UNIT,
             editEventSelectorActionTypes.SET_ORG_UNIT,
             viewEventSelectorActionTypes.SET_ORG_UNIT,
-            newEventSelectorActionTypes.SET_ORG_UNIT,
+            lockedSelectorActionTypes.SET_ORG_UNIT,
         )
         .filter((action) => {
             const orgUnitId = action.payload.id;

@@ -57,7 +57,7 @@ class AppContents extends Component<Props> {
                     className={classes.pageContainer}
                 >
                     <Switch>
-                        <Route path="/newEvent" component={NewEventPage} />
+                        <Route path="/newEvent" component={NewEventFullPage} />
                         <Route path="/viewEvent" component={ViewEventEntry} />
                         <Route path="/newEnrollment" component={NewEnrollmentPage} />
                         <Route path="/search" component={SearchPage} />

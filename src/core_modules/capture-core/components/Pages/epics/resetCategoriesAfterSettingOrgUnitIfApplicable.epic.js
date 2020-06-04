@@ -9,10 +9,6 @@ import {
     actionTypes as viewEventSelectorActionTypes,
 } from '../../Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
 import {
-    actionTypes as newEventSelectorActionTypes,
-} from '../../Pages/NewEvent/SelectorLevel/selectorLevel.actions';
-
-import {
     resetCategoriesAfterSettingOrgUnit,
     skipCategoriesResetAfterSettingOrgUnit,
 } from '../actions/crossPage.actions';
@@ -40,7 +36,7 @@ export const resetCategoriesAfterSettingOrgUnitIfApplicableEpic = (action$: Inpu
             mainPageSelectorActionTypes.SET_ORG_UNIT,
             editEventSelectorActionTypes.SET_ORG_UNIT,
             viewEventSelectorActionTypes.SET_ORG_UNIT,
-            newEventSelectorActionTypes.SET_ORG_UNIT,
+            lockedSelectorActionTypes.SET_ORG_UNIT,
         )
         .switchMap((action) => {
             const orgUnitId = action.payload.id;

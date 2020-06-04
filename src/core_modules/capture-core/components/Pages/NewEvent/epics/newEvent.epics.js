@@ -7,6 +7,7 @@ import {
     actionTypes as viewEventSelectorActionTypes,
 } from '../../ViewEvent/ViewEventSelector/ViewEventSelector.actions';
 import { actionTypes as mainPageSelectorActionTypes } from '../../MainPage/MainPageSelector/MainPageSelector.actions';
+import { lockedSelectorActionTypes } from "../../components/LockedSelector/actions";
 
 const getArguments = (programId: string, orgUnitId: string) => {
     const argArray = [];
@@ -26,6 +27,7 @@ export const openNewEventPageLocationChangeEpic = (action$: InputObservable, sto
         editEventSelectorActionTypes.OPEN_NEW_EVENT,
         viewEventSelectorActionTypes.OPEN_NEW_EVENT,
         mainPageSelectorActionTypes.OPEN_NEW_EVENT,
+        lockedSelectorActionTypes.OPEN_NEW_EVENT,
     )
         .map(() => {
             const state = store.getState();

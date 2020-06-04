@@ -26,9 +26,6 @@ import {
     actionTypes as newEventSelectionTypes,
 } from '../actions/dataEntryUrl.actions';
 import {
-    actionTypes as newEventSelectorTypes,
-} from '../../SelectorLevel/selectorLevel.actions';
-import {
     getCurrentClientValues,
     getCurrentClientMainData,
     getRulesActionsForEvent,
@@ -52,6 +49,7 @@ import getStageForEventProgram from '../../../../../metaData/helpers/EventProgra
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import { getProgramFromProgramIdThrowIfNotFound, TrackerProgram } from '../../../../../metaData';
 import { actionTypes as crossPageActionTypes } from '../../../actions/crossPage.actions';
+import { lockedSelectorActionTypes } from '../../../components/LockedSelector/actions';
 
 const errorMessages = {
     PROGRAM_OR_STAGE_NOT_FOUND: 'Program or stage not found',
@@ -61,7 +59,7 @@ const errorMessages = {
 export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
     action$.ofType(
-        newEventSelectorTypes.OPEN_NEW_EVENT_FROM_NEW_EVENT_PAGE,
+        lockedSelectorActionTypes.OPEN_NEW_EVENT_FROM_NEW_EVENT_PAGE,
         newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH,
     )
         .map(() => {
@@ -101,8 +99,8 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
         viewEventSelectorActionTypes.OPEN_NEW_EVENT,
         mainPageSelectorActionTypes.OPEN_NEW_EVENT,
         newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
-        newEventSelectorTypes.SET_PROGRAM_ID,
-        newEventSelectorTypes.SET_CATEGORY_OPTION,
+        lockedSelectorActionTypes.SET_PROGRAM_ID,
+        lockedSelectorActionTypes.SET_CATEGORY_OPTION,
         crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
     )
         .filter((action) => {
@@ -110,7 +108,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
             const triggeringActionType = action.payload && action.payload.triggeringActionType;
             if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED) {
                 return (!!triggeringActionType) && [
-                    newEventSelectorTypes.SET_ORG_UNIT,
+                    lockedSelectorActionTypes.SET_ORG_UNIT,
                 ].includes(triggeringActionType);
             }
             return true;
@@ -153,8 +151,8 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
         viewEventSelectorActionTypes.OPEN_NEW_EVENT,
         mainPageSelectorActionTypes.OPEN_NEW_EVENT,
         newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
-        newEventSelectorTypes.SET_CATEGORY_OPTION,
-        newEventSelectorTypes.SET_PROGRAM_ID,
+        lockedSelectorActionTypes.SET_CATEGORY_OPTION,
+        lockedSelectorActionTypes.SET_PROGRAM_ID,
         crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
     )
         .filter((action) => {
@@ -162,7 +160,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
             const type = action.type;
             if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED) {
                 const triggeringActionType = action.payload && action.payload.triggeringActionType;
-                if (triggeringActionType !== newEventSelectorTypes.SET_ORG_UNIT) {
+                if (triggeringActionType !== lockedSelectorActionTypes.SET_ORG_UNIT) {
                     return false;
                 }
             }

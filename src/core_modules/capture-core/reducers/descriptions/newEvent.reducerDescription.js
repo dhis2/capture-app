@@ -3,9 +3,7 @@ import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as selectorActionTypes } from '../../components/Pages/MainPage/tempSelector.actions';
 import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
-    dataEntryUrlActionTypes as newEventdataEntryUrlActionTypes,
     dataEntryWrapperActionTypes as newEventDataEntryWrapperActionTypes,
-    selectorActionTypes as newEventSelectorActionTypes,
     newRelationshipActionTypes as newEventNewRelationshipActionTypes,
 } from '../../components/Pages/NewEvent';
 import {
@@ -19,34 +17,6 @@ import {
 } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
 
 export const newEventPageDesc = createReducerDescription({
-    [newEventdataEntryUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: () => ({
-        isLoading: true,
-    }),
-    [newEventdataEntryUrlActionTypes.ERROR_RETRIEVING_ORG_UNIT_BASED_ON_URL]: (state, action) => {
-        const newState = { ...state };
-        newState.isLoading = false;
-        newState.selectionsError = action.payload;
-        return newState;
-    },
-    [newEventdataEntryUrlActionTypes.INVALID_ORG_UNIT_FROM_URL]: (state, action) => {
-        const newState = { ...state };
-        newState.isLoading = false;
-        newState.selectionsError = action.payload;
-        return newState;
-    },
-    [newEventdataEntryUrlActionTypes.INVALID_SELECTIONS_FROM_URL]: (state, action) => {
-        const newState = { ...state };
-        newState.isLoading = false;
-        newState.selectionsError = action.payload;
-        return newState;
-    },
-    [newEventdataEntryUrlActionTypes.VALID_SELECTIONS_FROM_URL]: (state) => {
-        const newState = { ...state };
-        newState.isLoading = false;
-        newState.selectionsError = null;
-        newState.dataEntryIsLoading = true;
-        return newState;
-    },
     [selectorActionTypes.OPEN_NEW_EVENT_PAGE]: (state) => {
         const newState = { ...state };
         newState.dataEntryIsLoading = true;
@@ -114,8 +84,4 @@ export const newEventPageDesc = createReducerDescription({
         newState.saveTypes = action.payload.saveTypes;
         return newState;
     },
-    [newEventSelectorActionTypes.SET_ORG_UNIT]: state => ({
-        ...state,
-        dataEntryIsLoading: true,
-    }),
 }, 'newEventPage');
