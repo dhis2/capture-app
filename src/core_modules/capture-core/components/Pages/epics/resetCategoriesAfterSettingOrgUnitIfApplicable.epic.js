@@ -1,8 +1,5 @@
 // @flow
 import {
-    actionTypes as editEventSelectorActionTypes,
-} from '../../Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
-import {
     actionTypes as viewEventSelectorActionTypes,
 } from '../../Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
 import {
@@ -28,7 +25,6 @@ export const resetCategoriesAfterSettingOrgUnitIfApplicableEpic = (action$: Inpu
     // $FlowSuppress
     action$
         .ofType(
-            editEventSelectorActionTypes.SET_ORG_UNIT,
             viewEventSelectorActionTypes.SET_ORG_UNIT,
             lockedSelectorActionTypes.SET_ORG_UNIT,
         )

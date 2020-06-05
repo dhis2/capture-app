@@ -88,7 +88,7 @@ const specificationForPages = {
 
 const updaterForPages = {
     [pageKeys.MAIN]: updateSearchSelectionsFromUrl,
-    [pageKeys.NEW_EVENT]: updateSelectionsFromUrlForNewEvent,
+    [pageKeys.NEW_EVENT]: updateSearchSelectionsFromUrl,
     [pageKeys.SEARCH]: updateSearchSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
     [pageKeys.NEW_ENROLLMENT]: updateSelectionsFromUrlForNewEnrollment,

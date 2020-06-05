@@ -110,9 +110,6 @@ import {
     calculateSelectionsCompletenessEpic,
 } from 'capture-core/components/Pages/epics/calculateSelectionsCompleteness.epic';
 import {
-    editEventPageSelectorUpdateURLEpic,
-} from 'capture-core/components/Pages/EditEvent/EditEventSelector/EditEventSelector.epics';
-import {
     includeFiltersWithValueAfterColumnSortingEpic,
 } from 'capture-core/components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.epics';
 import {
@@ -232,7 +229,6 @@ export default combineEpics(
     setOrgUnit,
     setProgram,
     goBackToListContext,
-    editEventPageSelectorUpdateURLEpic,
     includeFiltersWithValueAfterColumnSortingEpic,
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,

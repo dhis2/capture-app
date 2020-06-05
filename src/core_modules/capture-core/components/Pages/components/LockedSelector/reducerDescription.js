@@ -12,7 +12,10 @@ export const searchPageDesc = createReducerDescription({
         return newState;
     },
     [lockedSelectorActionTypes.VALID_SELECTIONS_FROM_URL]: (state) => {
-        const newState = { ...state, isLoading: false };
+        const newState = { ...state };
+        newState.isLoading = false;
+        newState.selectionsError = null;
+        newState.dataEntryIsLoading = true;
         return newState;
     },
     // todo still need those 4
@@ -35,15 +38,4 @@ export const searchPageDesc = createReducerDescription({
     //     return newState;
     // },
 
-    // this is done
-    // [newEventdataEntryUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: () => ({
-    //     isLoading: true,
-    // }),
-    // [newEventdataEntryUrlActionTypes.VALID_SELECTIONS_FROM_URL]: (state) => {
-    //     const newState = { ...state };
-    //     newState.isLoading = false;
-    //     newState.selectionsError = null;
-    //     newState.dataEntryIsLoading = true;
-    //     return newState;
-    // },
 }, 'activePage');

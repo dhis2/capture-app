@@ -11,9 +11,6 @@ import {
     actionTypes as viewEventActionTypes,
 } from '../../components/Pages/ViewEvent/viewEvent.actions';
 import {
-    actionTypes as editEventPageSelectorActionTypes,
-} from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
-import {
     actionTypes as viewEventPageSelectorActionTypes,
 } from '../../components/Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
 import {
@@ -203,32 +200,32 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
     //     categories: undefined,
     //     categoriesMeta: undefined,
     // }),
-    [editEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
-        const orgUnitId = null;
-        const newState = { ...state, orgUnitId };
-        newState.complete = false;
-        return newState;
-    },
-    [editEventPageSelectorActionTypes.SET_ORG_UNIT]: setOrgUnit,
-    [editEventPageSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
-        const programId = action.payload;
-        const newState = { ...state, programId };
-        newState.complete = false;
-        return newState;
-    },
-    [editEventPageSelectorActionTypes.SET_CATEGORY_OPTION]: (state, action) => {
-        const { categoryId, categoryOption } = action.payload;
-        return setCategoryOption(state, categoryId, categoryOption);
-    },
-    [editEventPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state, action) => {
-        const { categoryId } = action.payload;
-        return resetCategoryOption(state, categoryId);
-    },
-    [editEventPageSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: state => ({
-        ...state,
-        categories: undefined,
-        categoriesMeta: undefined,
-    }),
+    // [editEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
+    //     const orgUnitId = null;
+    //     const newState = { ...state, orgUnitId };
+    //     newState.complete = false;
+    //     return newState;
+    // },
+    // [editEventPageSelectorActionTypes.SET_ORG_UNIT]: setOrgUnit,
+    // [editEventPageSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
+    //     const programId = action.payload;
+    //     const newState = { ...state, programId };
+    //     newState.complete = false;
+    //     return newState;
+    // },
+    // [editEventPageSelectorActionTypes.SET_CATEGORY_OPTION]: (state, action) => {
+    //     const { categoryId, categoryOption } = action.payload;
+    //     return setCategoryOption(state, categoryId, categoryOption);
+    // },
+    // [editEventPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state, action) => {
+    //     const { categoryId } = action.payload;
+    //     return resetCategoryOption(state, categoryId);
+    // },
+    // [editEventPageSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: state => ({
+    //     ...state,
+    //     categories: undefined,
+    //     categoriesMeta: undefined,
+    // }),
     [viewEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
         const orgUnitId = null;
         const newState = { ...state, orgUnitId };

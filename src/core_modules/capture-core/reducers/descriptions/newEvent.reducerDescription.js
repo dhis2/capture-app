@@ -6,9 +6,7 @@ import {
     dataEntryWrapperActionTypes as newEventDataEntryWrapperActionTypes,
     newRelationshipActionTypes as newEventNewRelationshipActionTypes,
 } from '../../components/Pages/NewEvent';
-import {
-    actionTypes as editEventPageActionTypes,
-} from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
+import { lockedSelectorActionTypes } from "../../components/Pages/components/LockedSelector/actions";
 import {
     actionTypes as viewEventPageActionTypes,
 } from '../../components/Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
@@ -21,12 +19,12 @@ export const newEventPageDesc = createReducerDescription({
         newState.showAddRelationship = false;
         return newState;
     },
-    [editEventPageActionTypes.OPEN_NEW_EVENT]: (state) => {
-        const newState = { ...state };
-        newState.dataEntryIsLoading = true;
-        newState.showAddRelationship = false;
-        return newState;
-    },
+    // [editEventPageActionTypes.OPEN_NEW_EVENT]: (state) => {
+    //     const newState = { ...state };
+    //     newState.dataEntryIsLoading = true;
+    //     newState.showAddRelationship = false;
+    //     return newState;
+    // },
     [viewEventPageActionTypes.OPEN_NEW_EVENT]: (state) => {
         const newState = { ...state };
         newState.dataEntryIsLoading = true;
