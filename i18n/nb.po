@@ -489,7 +489,7 @@ msgid "Relationships"
 msgstr "Relasjoner"
 
 msgid "Assignee"
-msgstr "Fullmektig"
+msgstr "Tildelt programbruker"
 
 msgid "Saving to"
 msgstr "Lagrer til"
@@ -517,7 +517,7 @@ msgid "New event"
 msgstr "Ny hendelse"
 
 msgid "New event relationship"
-msgstr "Ny relasjonshendelse"
+msgstr "Ny hendelsesrelasjon"
 
 msgid "Adding relationship to event."
 msgstr "Legger til relasjon til hendelsen."
@@ -731,7 +731,7 @@ msgid "To work with the selected program,"
 msgstr "For å jobbe med det valgte programmet,"
 
 msgid "open the Tracker Capture app"
-msgstr "Åpne Tracker Capture app"
+msgstr "åpne Tracker Capture app"
 
 msgid "Program not found"
 msgstr "Program ble ikke funnet"
