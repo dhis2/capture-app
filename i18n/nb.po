@@ -415,7 +415,7 @@ msgid "New event"
 msgstr "Ny hendelse"
 
 msgid "New event relationship"
-msgstr "Ny relasjonshendelse"
+msgstr "Ny hendelsesrelasjon"
 
 msgid "Adding relationship to event."
 msgstr "Legger til relasjon til hendelsen."
