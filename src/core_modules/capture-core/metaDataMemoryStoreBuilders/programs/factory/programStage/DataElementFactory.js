@@ -10,7 +10,7 @@ import type {
 
 } from '../../../../storageControllers/cache.types';
 import getDhisIconAsync from '../../../common/getDhisIcon';
-import { DataElement, Icon } from '../../../../metaData';
+import { DataElement, DateDataElement, Icon, dataElementTypes } from '../../../../metaData';
 import { OptionSetFactory } from '../../../common/factory';
 
 class DataElementFactory {
@@ -69,35 +69,28 @@ class DataElementFactory {
             cachedDataElement.translations[this.locale][property];
     }
 
-    async build(
+    // eslint-disable-next-line complexity
+    async _setBaseProperties(
+        dataElement: DataElement,
         cachedProgramStageDataElement: CachedProgramStageDataElement,
     ) {
-        if (!cachedProgramStageDataElement.dataElement) {
-            log.error(
-                errorCreator('programStageDataElement does not contain a dataElement')(
-                    { programStageDataElement: cachedProgramStageDataElement }));
-            return null;
-        }
-
         const cachedDataElement = cachedProgramStageDataElement.dataElement;
-
-        const dataElement = new DataElement((o) => {
-            o.id = cachedDataElement.id;
-            o.name = this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.NAME) ||
-                cachedDataElement.displayName;
-            o.shortName = this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.SHORT_NAME) ||
-                cachedDataElement.displayShortName;
-            o.formName = this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.FORM_NAME) ||
-                cachedDataElement.displayFormName;
-            o.description = this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.DESCRIPTION) ||
-                cachedDataElement.description;
-            o.displayInForms = true;
-            o.displayInReports = cachedProgramStageDataElement.displayInReports;
-            o.compulsory = cachedProgramStageDataElement.compulsory;
-            o.disabled = false;
-            o.type = DataElementFactory._getDataElementType(cachedDataElement.valueType);
-        });
-
+        dataElement.id = cachedDataElement.id;
+        dataElement.name = this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.NAME) ||
+            cachedDataElement.displayName;
+        dataElement.shortName =
+            this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.SHORT_NAME) ||
+            cachedDataElement.displayShortName;
+        dataElement.formName =
+            this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.FORM_NAME) ||
+            cachedDataElement.displayFormName;
+        dataElement.description =
+            this._getDataElementTranslation(cachedDataElement, DataElementFactory.propertyNames.DESCRIPTION) ||
+            cachedDataElement.description;
+        dataElement.displayInForms = true;
+        dataElement.displayInReports = cachedProgramStageDataElement.displayInReports;
+        dataElement.compulsory = cachedProgramStageDataElement.compulsory;
+        dataElement.disabled = false;
         dataElement.icon = await DataElementFactory._buildDataElementIconAsync(cachedDataElement.style);
 
         if (cachedDataElement.optionSet && cachedDataElement.optionSet.id) {
@@ -111,7 +104,42 @@ class DataElementFactory {
                 DataElementFactory._getDataElementType,
             );
         }
+    }
+
+    async _buildBaseDataElement(
+        cachedProgramStageDataElement: CachedProgramStageDataElement,
+        dataElementType: $Values<typeof dataElementTypes>,
+    ) {
+        const dataElement = new DataElement();
+        dataElement.type = dataElementType;
+        await this._setBaseProperties(dataElement, cachedProgramStageDataElement);
         return dataElement;
+    }
+
+    async _buildDateDataElement(cachedProgramStageDataElement: CachedProgramStageDataElement) {
+        const dateDataElement = new DateDataElement();
+        dateDataElement.type = dataElementTypes.DATE;
+        dateDataElement.allowFutureDate = cachedProgramStageDataElement.allowFutureDate;
+        await this._setBaseProperties(dateDataElement, cachedProgramStageDataElement);
+        return dateDataElement;
+    }
+
+    build(
+        cachedProgramStageDataElement: CachedProgramStageDataElement,
+    ): ?Promise<DataElement> {
+        if (!cachedProgramStageDataElement.dataElement) {
+            log.error(
+                errorCreator('programStageDataElement does not contain a dataElement')(
+                    { programStageDataElement: cachedProgramStageDataElement }));
+            return null;
+        }
+
+        const dataElementType =
+            DataElementFactory._getDataElementType(cachedProgramStageDataElement.dataElement.valueType);
+
+        return dataElementType === dataElementTypes.DATE ?
+            this._buildDateDataElement(cachedProgramStageDataElement) :
+            this._buildBaseDataElement(cachedProgramStageDataElement, dataElementType);
     }
 }
 
