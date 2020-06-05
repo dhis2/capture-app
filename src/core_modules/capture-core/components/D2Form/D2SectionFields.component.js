@@ -15,6 +15,7 @@ import { validationStrategies } from '../../metaData/RenderFoundation/renderFoun
 import MetaDataElement from '../../metaData/DataElement/DataElement';
 import MetadataCustomForm from '../../metaData/RenderFoundation/CustomForm';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
+import { validatorTypes } from './field/validators/constants';
 
 const CustomFormHOC = withCustomForm()(withDivider()(withAlternateBackgroundColors()(FormBuilderContainer)));
 type FormsValues = {
@@ -82,9 +83,8 @@ class D2SectionFields extends Component<Props> {
             .filter(field => field);
     }
 
-    static validateDataTypeOnly(formBuilderInstance: FormBuilder) {
-        const dataTypeIsValid = formBuilderInstance.isValid(['dataType']);
-        return dataTypeIsValid;
+    static validateBaseOnly(formBuilderInstance: FormBuilder) {
+        return formBuilderInstance.isValid([validatorTypes.TYPE_BASE]);
     }
 
     handleUpdateField: (elementId: string, value: any) => void;
@@ -144,13 +144,13 @@ class D2SectionFields extends Component<Props> {
     validateBasedOnStrategy(options?: ?{ isCompleting: boolean }, formBuilderInstance: FormBuilder) {
         const validationStrategy = this.props.validationStrategy;
         if (validationStrategy === validationStrategies.NONE) {
-            return D2SectionFields.validateDataTypeOnly(formBuilderInstance);
+            return D2SectionFields.validateBaseOnly(formBuilderInstance);
         } else if (validationStrategy === validationStrategies.ON_COMPLETE) {
             const isCompleting = options && options.isCompleting;
             if (isCompleting) {
                 return this.validateFull(formBuilderInstance);
             }
-            return D2SectionFields.validateDataTypeOnly(formBuilderInstance);
+            return D2SectionFields.validateBaseOnly(formBuilderInstance);
         }
         return this.validateFull(formBuilderInstance);
     }
