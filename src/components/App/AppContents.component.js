@@ -40,9 +40,11 @@ class AppContents extends Component<Props> {
             <div
                 className={classes.app}
             >
-                <HeaderBar d2={d2}>
-                    <NetworkStatusBadge />
-                </HeaderBar>
+                <div dir="ltr">
+                    <HeaderBar d2={d2}>
+                        <NetworkStatusBadge />
+                    </HeaderBar>
+                </div>
                 <div
                     className={classes.pageContainer}
                 >
