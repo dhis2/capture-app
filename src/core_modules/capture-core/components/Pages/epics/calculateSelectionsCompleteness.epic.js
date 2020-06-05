@@ -1,13 +1,5 @@
 // @flow
 import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
-
-import { actionTypes as mainSelections } from '../MainPage/mainSelections.actions';
-import {
-    dataEntryUrlActionTypes as newEventDataEntryUrlActionTypes,
-} from '../NewEvent';
-import {
-    actionTypes as mainPageSelectorActionTypes,
-} from '../MainPage/MainPageSelector/MainPageSelector.actions';
 import {
     actionTypes as editEventPageSelectorActionTypes,
 } from '../EditEvent/EditEventSelector/EditEventSelector.actions';
@@ -54,18 +46,10 @@ export const calculateSelectionsCompletenessEpic = (action$: InputObservable, st
         lockedSelectorActionTypes.SET_PROGRAM_ID,
         lockedSelectorActionTypes.SET_CATEGORY_OPTION,
         lockedSelectorActionTypes.VALID_SELECTIONS_FROM_URL,
-
-        mainSelections.UPDATE_MAIN_SELECTIONS,
-        mainSelections.VALID_SELECTIONS_FROM_URL,
-        newEventDataEntryUrlActionTypes.VALID_SELECTIONS_FROM_URL,
-        mainPageSelectorActionTypes.SET_PROGRAM_ID,
-        mainPageSelectorActionTypes.SET_CATEGORY_OPTION,
         editEventPageSelectorActionTypes.SET_PROGRAM_ID,
         editEventPageSelectorActionTypes.SET_CATEGORY_OPTION,
         viewEventPageSelectorActionTypes.SET_PROGRAM_ID,
         viewEventPageSelectorActionTypes.SET_CATEGORY_OPTION,
-        lockedSelectorActionTypes.SET_PROGRAM_ID,
-        lockedSelectorActionTypes.SET_CATEGORY_OPTION,
         newEnrollmentUrlActionTypes.VALID_SELECTIONS_FROM_URL,
         crossPageActionTypes.AFTER_SETTING_ORG_UNIT_SKIP_CATEGORIES_RESET,
         crossPageActionTypes.AFTER_SETTING_ORG_UNIT_DO_CATEGORIES_RESET,

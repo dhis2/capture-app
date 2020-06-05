@@ -21,13 +21,6 @@ import {
     teiForNewEventRelationshipSavedEpic,
 } from 'capture-core/components/Pages/NewEvent';
 import {
-    mainSelectionsCompletedEpic,
-    orgUnitDataRetrivedEpic,
-    mainSelectionsFromUrlGetOrgUnitDataEpic,
-    mainSelectionsFromUrlEmptyOrgUnitEpic,
-    mainSelectionsFromUrlValidationEpic,
-} from 'capture-core/components/Pages/MainPage/mainSelections.epics';
-import {
     selectionsFromUrlGetOrgUnitDataForNewEventEpic,
     selectionsFromUrlEmptyOrgUnitForNewEventEpic,
     selectionsFromUrlValidationForNewEventEpic,
@@ -117,9 +110,6 @@ import {
     calculateSelectionsCompletenessEpic,
 } from 'capture-core/components/Pages/epics/calculateSelectionsCompleteness.epic';
 import {
-    mainPageSelectorUpdateURLEpic,
-} from 'capture-core/components/Pages/MainPage/MainPageSelector/MainPageSelector.epics';
-import {
     editEventPageSelectorUpdateURLEpic,
 } from 'capture-core/components/Pages/EditEvent/EditEventSelector/EditEventSelector.epics';
 import {
@@ -202,8 +192,6 @@ export default combineEpics(
     loadCoreEpic,
     loadAppEpic,
     loadCoreFailedEpic,
-    mainSelectionsCompletedEpic,
-    orgUnitDataRetrivedEpic,
     initEventListEpic,
     updateEventListEpic,
     retrieveTemplatesEpic,
@@ -211,9 +199,6 @@ export default combineEpics(
     addTemplateEpic,
     deleteTemplateEpic,
     requestDeleteEventEpic,
-    mainSelectionsFromUrlGetOrgUnitDataEpic,
-    mainSelectionsFromUrlEmptyOrgUnitEpic,
-    mainSelectionsFromUrlValidationEpic,
     selectionsFromUrlGetOrgUnitDataForNewEventEpic,
     selectionsFromUrlEmptyOrgUnitForNewEventEpic,
     selectionsFromUrlValidationForNewEventEpic,
@@ -247,7 +232,6 @@ export default combineEpics(
     setOrgUnit,
     setProgram,
     goBackToListContext,
-    mainPageSelectorUpdateURLEpic,
     editEventPageSelectorUpdateURLEpic,
     includeFiltersWithValueAfterColumnSortingEpic,
     saveNewEventAddAnotherEpic,

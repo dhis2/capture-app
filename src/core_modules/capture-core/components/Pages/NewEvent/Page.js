@@ -33,7 +33,7 @@ type State = {
     openNewEventWarning: boolean;
 };
 
-class NewEventPage extends Component<Props, State> {
+class Page extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
 
@@ -97,6 +97,6 @@ class NewEventPage extends Component<Props, State> {
     }
 }
 
-export const NewEventFullPage = () => (
-    <LockedSelector render={props => <NewEventPage {...props} />} />
+export const NewEventPage = () => (
+    <LockedSelector render={props => <Page {...props} />} />
 );

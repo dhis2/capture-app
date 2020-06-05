@@ -14,7 +14,7 @@ import { getApi } from '../../../../d2';
 import { push } from 'connected-react-router';
 
 
-const getArguments = (programId: string, orgUnitId: string) => {
+const exactUrl = (page: string, programId: string, orgUnitId: string) => {
     const argArray = [];
     if (programId) {
         argArray.push(`programId=${programId}`);
@@ -23,7 +23,10 @@ const getArguments = (programId: string, orgUnitId: string) => {
         argArray.push(`orgUnitId=${orgUnitId}`);
     }
 
-    return argArray.join('&');
+    if (page) {
+        return `/${page}/${argArray.join('&')}`;
+    }
+    return `/${argArray.join('&')}`;
 };
 
 export const searchPageSelectorUpdateURLEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -40,8 +43,7 @@ export const searchPageSelectorUpdateURLEpic = (action$: InputObservable, store:
                 currentSelections: { programId, orgUnitId },
                 app: { page },
             } = store.getState();
-            const args = getArguments(programId, orgUnitId);
-            return push(`/${page}/${args}`);
+            return push(exactUrl(page, programId, orgUnitId));
         });
 
 

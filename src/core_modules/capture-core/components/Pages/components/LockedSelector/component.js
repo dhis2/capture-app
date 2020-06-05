@@ -61,7 +61,7 @@ class SearchPageSelector extends Component<Props> {
                     onClickNew={this.handleClickNew}
                 />
 
-                {this.props.render({ onSetOrgUnit, onResetOrgUnitId, onSetProgramId, onResetProgramId, onSetCategoryOption, onResetCategoryOption, onResetAllCategoryOptions })}
+                {this.props.render && this.props.render({ onSetOrgUnit, onResetOrgUnitId, onSetProgramId, onResetProgramId, onSetCategoryOption, onResetCategoryOption, onResetAllCategoryOptions })}
 
             </div>
         );

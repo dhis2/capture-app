@@ -512,6 +512,12 @@ msgstr ""
 msgid "Working Lists"
 msgstr ""
 
+msgid "Could not get organisation unit"
+msgstr ""
+
+msgid "Program doesn't exist"
+msgstr ""
+
 msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
@@ -581,6 +587,9 @@ msgid "Select a category option to start reporting"
 msgstr ""
 
 msgid "You dont have access to create an event in the current selections"
+msgstr ""
+
+msgid "Selected program is invalid for registering unit"
 msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"

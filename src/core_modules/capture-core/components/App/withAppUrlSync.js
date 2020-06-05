@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 import { paramsSelector } from './appSync.selectors';
 import LoadingMaskForPage from '../LoadingMasks/LoadingMaskForPage.component';
 import {
-    updateMainSelectionsFromUrl as updateMainSelectionsFromUrlForMainPage,
-} from '../Pages/MainPage/mainSelections.actions';
-import {
     updateSelectionsFromUrl as updateSelectionsFromUrlForNewEvent,
 } from '../Pages/NewEvent';
 import {
@@ -33,7 +30,7 @@ type Props = {
 };
 
 const pageKeys = {
-    MAIN: 'main',
+    MAIN: '',
     NEW_EVENT: 'newEvent',
     VIEW_EVENT: 'viewEvent',
     NEW_ENROLLMENT: 'newEnrollment',
@@ -90,7 +87,7 @@ const specificationForPages = {
 };
 
 const updaterForPages = {
-    [pageKeys.MAIN]: updateMainSelectionsFromUrlForMainPage,
+    [pageKeys.MAIN]: updateSearchSelectionsFromUrl,
     [pageKeys.NEW_EVENT]: updateSelectionsFromUrlForNewEvent,
     [pageKeys.SEARCH]: updateSearchSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,

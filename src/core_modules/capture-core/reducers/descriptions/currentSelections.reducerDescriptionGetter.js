@@ -1,7 +1,6 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
-import { actionTypes as mainSelectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
 import {
     actionTypes as quickSelectorActionTypes,
 } from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
@@ -11,9 +10,6 @@ import {
 import {
     actionTypes as viewEventActionTypes,
 } from '../../components/Pages/ViewEvent/viewEvent.actions';
-import {
-    actionTypes as mainPageSelectorActionTypes,
-} from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
 import {
     actionTypes as editEventPageSelectorActionTypes,
 } from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
@@ -104,22 +100,6 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         };
         return newState;
     },
-    [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS]: (state, action) => {
-        const newState = { ...state, ...action.payload, complete: false };
-        return newState;
-    },
-    [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: (state, action) => {
-        const { nextProps: selections } = action.payload;
-        const newState = { ...state, ...selections, categories: undefined, categoriesMeta: undefined, complete: false };
-        return newState;
-    },
-    [mainSelectionsActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: (state) => {
-        const newState = {
-            ...state,
-            orgUnitId: null,
-        };
-        return newState;
-    },
     [newEnrollmentUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
         const { nextProps: selections } = action.payload;
         const newState = { ...state, ...selections, categories: undefined, categoriesMeta: undefined, complete: false };
@@ -189,40 +169,40 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
 
         return newState;
     },
-    [mainPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
-        const orgUnitId = null;
-        const newState = { ...state, orgUnitId };
-        newState.complete = false;
-        return newState;
-    },
-    [mainPageSelectorActionTypes.SET_ORG_UNIT]: (state, action) => {
-        const orgUnitId = action.payload.id;
-        return {
-            ...state,
-            orgUnitId,
-            complete: false,
-            categoryCheckInProgress: true,
-        };
-    },
-    [mainPageSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
-        const programId = action.payload;
-        const newState = { ...state, programId };
-        newState.complete = false;
-        return newState;
-    },
-    [mainPageSelectorActionTypes.SET_CATEGORY_OPTION]: (state, action) => {
-        const { categoryId, categoryOption } = action.payload;
-        return setCategoryOption(state, categoryId, categoryOption);
-    },
-    [mainPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state, action) => {
-        const { categoryId } = action.payload;
-        return resetCategoryOption(state, categoryId);
-    },
-    [mainPageSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: state => ({
-        ...state,
-        categories: undefined,
-        categoriesMeta: undefined,
-    }),
+    // [mainPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
+    //     const orgUnitId = null;
+    //     const newState = { ...state, orgUnitId };
+    //     newState.complete = false;
+    //     return newState;
+    // },
+    // [mainPageSelectorActionTypes.SET_ORG_UNIT]: (state, action) => {
+    //     const orgUnitId = action.payload.id;
+    //     return {
+    //         ...state,
+    //         orgUnitId,
+    //         complete: false,
+    //         categoryCheckInProgress: true,
+    //     };
+    // },
+    // [mainPageSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
+    //     const programId = action.payload;
+    //     const newState = { ...state, programId };
+    //     newState.complete = false;
+    //     return newState;
+    // },
+    // [mainPageSelectorActionTypes.SET_CATEGORY_OPTION]: (state, action) => {
+    //     const { categoryId, categoryOption } = action.payload;
+    //     return setCategoryOption(state, categoryId, categoryOption);
+    // },
+    // [mainPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state, action) => {
+    //     const { categoryId } = action.payload;
+    //     return resetCategoryOption(state, categoryId);
+    // },
+    // [mainPageSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: state => ({
+    //     ...state,
+    //     categories: undefined,
+    //     categoriesMeta: undefined,
+    // }),
     [editEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
         const orgUnitId = null;
         const newState = { ...state, orgUnitId };

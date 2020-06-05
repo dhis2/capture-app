@@ -1,9 +1,6 @@
 // @flow
 import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import {
-    actionTypes as mainPageSelectorActionTypes,
-} from '../../Pages/MainPage/MainPageSelector/MainPageSelector.actions';
-import {
     actionTypes as editEventSelectorActionTypes,
 } from '../../Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
 import {
@@ -37,9 +34,6 @@ export const resetProgramAfterSettingOrgUnitIfApplicableEpic = (action$: InputOb
     // $FlowSuppress
     action$
         .ofType(
-            lockedSelectorActionTypes.SET_ORG_UNIT,
-
-            mainPageSelectorActionTypes.SET_ORG_UNIT,
             editEventSelectorActionTypes.SET_ORG_UNIT,
             viewEventSelectorActionTypes.SET_ORG_UNIT,
             lockedSelectorActionTypes.SET_ORG_UNIT,

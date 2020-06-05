@@ -10,9 +10,6 @@ import {
     actionTypes as viewEventSelectorActionTypes,
 } from '../../../ViewEvent/ViewEventSelector/ViewEventSelector.actions';
 import {
-    actionTypes as mainPageSelectorActionTypes,
-} from '../../../MainPage/MainPageSelector/MainPageSelector.actions';
-import {
     actionTypes as newEventDataEntryActionTypes,
     batchActionTypes as newEventDataEntryBatchActionTypes,
     cancelOpenNewEventInDataEntry,
@@ -59,7 +56,7 @@ const errorMessages = {
 export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
     action$.ofType(
-        lockedSelectorActionTypes.OPEN_NEW_EVENT_FROM_NEW_EVENT_PAGE,
+        lockedSelectorActionTypes.OPEN_NEW_EVENT,
         newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH,
     )
         .map(() => {
@@ -95,12 +92,12 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
 export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
     action$.ofType(
-        editEventSelectorActionTypes.OPEN_NEW_EVENT,
-        viewEventSelectorActionTypes.OPEN_NEW_EVENT,
-        mainPageSelectorActionTypes.OPEN_NEW_EVENT,
-        newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
+        lockedSelectorActionTypes.OPEN_NEW_EVENT,
         lockedSelectorActionTypes.SET_PROGRAM_ID,
         lockedSelectorActionTypes.SET_CATEGORY_OPTION,
+        editEventSelectorActionTypes.OPEN_NEW_EVENT,
+        viewEventSelectorActionTypes.OPEN_NEW_EVENT,
+        newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
         crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
     )
         .filter((action) => {
@@ -149,8 +146,8 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
     action$.ofType(
         editEventSelectorActionTypes.OPEN_NEW_EVENT,
         viewEventSelectorActionTypes.OPEN_NEW_EVENT,
-        mainPageSelectorActionTypes.OPEN_NEW_EVENT,
         newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
+        lockedSelectorActionTypes.OPEN_NEW_EVENT,
         lockedSelectorActionTypes.SET_CATEGORY_OPTION,
         lockedSelectorActionTypes.SET_PROGRAM_ID,
         crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,

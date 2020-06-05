@@ -1,4 +1,6 @@
 // @flow
+
+export { NewEventPage } from './Page';
 // actions
 export {
     actionTypes as dataEntryActionTypes,
