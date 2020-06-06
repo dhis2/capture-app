@@ -122,6 +122,7 @@ class SelectorLevel extends Component<Props, State> {
         this.setState({ openNewEventWarning: true });
         this.props.onOpenNewEventPage(this.props.selectedProgramId, this.props.selectedOrgUnitId);
     }
+
     handleAcceptNew =() => {
         this.props.onResetDataEntry();
         this.handleClose();
@@ -129,7 +130,8 @@ class SelectorLevel extends Component<Props, State> {
 
 
     render() {
-        const { onSetOrgUnit, onResetOrgUnitId, onSetProgramId, onResetProgramId, onSetCategoryOption, onResetCategoryOption, onResetAllCategoryOptions } = this.props;
+        const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
+
         return (
             <div>
                 <QuickSelector
@@ -143,11 +145,36 @@ class SelectorLevel extends Component<Props, State> {
                     onStartAgain={this.handleOpenStartAgainWarning}
                     onClickNew={this.handleClickNew}
                 />
-                <ConfirmDialog onConfirm={this.handleAcceptStartAgain} open={this.state.openStartAgainWarning} onCancel={this.handleClose} {...defaultDialogProps} />
-                <ConfirmDialog onConfirm={this.handleAcceptOrgUnit} open={this.state.openOrgUnitWarning} onCancel={this.handleClose} {...defaultDialogProps} />
-                <ConfirmDialog onConfirm={this.handleAcceptProgram} open={!!this.state.openProgramWarning} onCancel={this.handleClose} {...defaultDialogProps} />
-                <ConfirmDialog onConfirm={this.handleAcceptCatCombo} open={this.state.openCatComboWarning} onCancel={this.handleClose} {...defaultDialogProps} />
-                <ConfirmDialog onConfirm={this.handleAcceptNew} open={this.state.openNewEventWarning} onCancel={this.handleClose} {...defaultDialogProps} />
+                <ConfirmDialog
+                    onConfirm={this.handleAcceptStartAgain}
+                    open={this.state.openStartAgainWarning}
+                    onCancel={this.handleClose}
+                    {...defaultDialogProps}
+                />
+                <ConfirmDialog
+                    onConfirm={this.handleAcceptOrgUnit}
+                    open={this.state.openOrgUnitWarning}
+                    onCancel={this.handleClose}
+                    {...defaultDialogProps}
+                />
+                <ConfirmDialog
+                    onConfirm={this.handleAcceptProgram}
+                    open={!!this.state.openProgramWarning}
+                    onCancel={this.handleClose}
+                    {...defaultDialogProps}
+                />
+                <ConfirmDialog
+                    onConfirm={this.handleAcceptCatCombo}
+                    open={this.state.openCatComboWarning}
+                    onCancel={this.handleClose}
+                    {...defaultDialogProps}
+                />
+                <ConfirmDialog
+                    onConfirm={this.handleAcceptNew}
+                    open={this.state.openNewEventWarning}
+                    onCancel={this.handleClose}
+                    {...defaultDialogProps}
+                />
             </div>
         );
     }

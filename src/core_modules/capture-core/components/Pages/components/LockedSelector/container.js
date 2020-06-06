@@ -17,6 +17,7 @@ import { resetProgramIdBase } from '../../../QuickSelector/actions/QuickSelector
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
 
+
 const mapStateToProps = (state: ReduxState) => ({
     selectedProgramId: state.currentSelections.programId,
     selectedOrgUnitId: state.currentSelections.orgUnitId,
