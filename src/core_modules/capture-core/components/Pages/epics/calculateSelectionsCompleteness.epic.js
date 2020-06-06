@@ -1,9 +1,6 @@
 // @flow
 import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import {
-    actionTypes as viewEventPageSelectorActionTypes,
-} from '../ViewEvent/ViewEventSelector/ViewEventSelector.actions';
-import {
     urlActionTypes as newEnrollmentUrlActionTypes,
 } from '../NewEnrollment';
 import {
@@ -43,8 +40,6 @@ export const calculateSelectionsCompletenessEpic = (action$: InputObservable, st
         lockedSelectorActionTypes.SET_PROGRAM_ID,
         lockedSelectorActionTypes.SET_CATEGORY_OPTION,
         lockedSelectorActionTypes.VALID_SELECTIONS_FROM_URL,
-        viewEventPageSelectorActionTypes.SET_PROGRAM_ID,
-        viewEventPageSelectorActionTypes.SET_CATEGORY_OPTION,
         newEnrollmentUrlActionTypes.VALID_SELECTIONS_FROM_URL,
         crossPageActionTypes.AFTER_SETTING_ORG_UNIT_SKIP_CATEGORIES_RESET,
         crossPageActionTypes.AFTER_SETTING_ORG_UNIT_DO_CATEGORIES_RESET,

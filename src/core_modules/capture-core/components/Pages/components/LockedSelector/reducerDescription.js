@@ -1,6 +1,7 @@
 // @flow
 import { createReducerDescription } from '../../../../trackerRedux';
 import { lockedSelectorActionTypes } from './actions';
+import { actionTypes } from '../../ViewEvent/viewEvent.actions';
 
 export const searchPageDesc = createReducerDescription({
     [lockedSelectorActionTypes.SET_ORG_UNIT]: state => ({
@@ -9,6 +10,14 @@ export const searchPageDesc = createReducerDescription({
     }),
     [lockedSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state) => {
         const newState = { ...state, isLoading: true };
+        return newState;
+    },
+    [actionTypes.VIEW_EVENT_FROM_URL]: (state) => {
+        const newState = { ...state, isLoading: true };
+        return newState;
+    },
+    [actionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE]: (state) => {
+        const newState = { ...state, isLoading: false };
         return newState;
     },
     [lockedSelectorActionTypes.VALID_SELECTIONS_FROM_URL]: (state) => {

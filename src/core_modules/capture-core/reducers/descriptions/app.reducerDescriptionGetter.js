@@ -18,9 +18,6 @@ import {
     actionTypes as setCurrentSelectionsActionTypes,
 } from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
 import {
-    actionTypes as viewEventPageSelectorActionTypes,
-} from '../../components/Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
-import {
     urlActionTypes as newEnrollmentUrlActionTypes,
 } from '../../components/Pages/NewEnrollment';
 import {
@@ -55,12 +52,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
 
-    [viewEventPageSelectorActionTypes.OPEN_NEW_EVENT]: (state) => {
-        const newState = { ...state };
-        newState.page = 'newEvent';
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
     [newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;
@@ -159,14 +150,7 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     //     return newState;
     // },
     // [editEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
-    [viewEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
-        const newState = {
-            ...state,
-            page: null,
-            locationSwitchInProgress: true,
-        };
-        return newState;
-    },
+
 
     // [editEventPageSelectorActionTypes.SET_ORG_UNIT]: (state) => {
     //     const newState = { ...state };
@@ -194,22 +178,37 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     //     };
     //     return newState;
     // },
-    [viewEventPageSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
-        const newState = {
-            ...state,
-            page: null,
-            locationSwitchInProgress: true,
-        };
-        return newState;
-    },
-    [viewEventPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state) => {
-        const newState = {
-            ...state,
-            page: null,
-            locationSwitchInProgress: true,
-        };
-        return newState;
-    },
+
+    // [viewEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
+    //     const newState = {
+    //         ...state,
+    //         page: null,
+    //         locationSwitchInProgress: true,
+    //     };
+    //     return newState;
+    // },
+    // [viewEventPageSelectorActionTypes.OPEN_NEW_EVENT]: (state) => {
+    //     const newState = { ...state };
+    //     newState.page = 'newEvent';
+    //     newState.locationSwitchInProgress = true;
+    //     return newState;
+    // },
+    // [viewEventPageSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
+    //     const newState = {
+    //         ...state,
+    //         page: null,
+    //         locationSwitchInProgress: true,
+    //     };
+    //     return newState;
+    // },
+    // [viewEventPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state) => {
+    //     const newState = {
+    //         ...state,
+    //         page: null,
+    //         locationSwitchInProgress: true,
+    //     };
+    //     return newState;
+    // },
 
 
     [lockedSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {

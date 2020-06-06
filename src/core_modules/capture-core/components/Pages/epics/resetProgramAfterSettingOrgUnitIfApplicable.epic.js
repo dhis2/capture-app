@@ -1,11 +1,6 @@
 // @flow
 import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
 import {
-    actionTypes as viewEventSelectorActionTypes,
-} from '../../Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
-
-
-import {
     resetProgramIdBase,
 } from '../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
 import { lockedSelectorActionTypes } from '../../LockedSelector';
@@ -30,10 +25,7 @@ const programShouldReset = (orgUnitId, currentlySelectedProgramId) => {
 export const resetProgramAfterSettingOrgUnitIfApplicableEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
     action$
-        .ofType(
-            viewEventSelectorActionTypes.SET_ORG_UNIT,
-            lockedSelectorActionTypes.SET_ORG_UNIT,
-        )
+        .ofType(lockedSelectorActionTypes.SET_ORG_UNIT,)
         .filter((action) => {
             const orgUnitId = action.payload.id;
             const currentlySelectedProgramId = store.getState().currentSelections.programId;

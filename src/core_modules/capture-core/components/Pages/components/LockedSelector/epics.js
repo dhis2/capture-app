@@ -23,7 +23,7 @@ const exactUrl = (page: string, programId: string, orgUnitId: string) => {
         argArray.push(`orgUnitId=${orgUnitId}`);
     }
 
-    if (page) {
+    if (page && page !== 'viewEvent') {
         return `/${page}/${argArray.join('&')}`;
     }
     return `/${argArray.join('&')}`;

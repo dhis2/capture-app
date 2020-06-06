@@ -1,8 +1,5 @@
 // @flow
 import {
-    actionTypes as viewEventSelectorActionTypes,
-} from '../../Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
-import {
     resetCategoriesAfterSettingOrgUnit,
     skipCategoriesResetAfterSettingOrgUnit,
 } from '../actions/crossPage.actions';
@@ -24,10 +21,7 @@ async function isOptionAssociatedWithOrganisationUnit(categoryOptionId: string, 
 export const resetCategoriesAfterSettingOrgUnitIfApplicableEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
     action$
-        .ofType(
-            viewEventSelectorActionTypes.SET_ORG_UNIT,
-            lockedSelectorActionTypes.SET_ORG_UNIT,
-        )
+        .ofType(lockedSelectorActionTypes.SET_ORG_UNIT,)
         .switchMap((action) => {
             const orgUnitId = action.payload.id;
             const selectedCategories = store.getState().currentSelections.categories;

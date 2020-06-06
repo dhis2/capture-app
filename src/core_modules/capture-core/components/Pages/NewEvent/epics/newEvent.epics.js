@@ -1,8 +1,5 @@
 // @flow
 import { push } from 'connected-react-router';
-import {
-    actionTypes as viewEventSelectorActionTypes,
-} from '../../ViewEvent/ViewEventSelector/ViewEventSelector.actions';
 import { lockedSelectorActionTypes } from "../../components/LockedSelector/actions";
 
 const getArguments = (programId: string, orgUnitId: string) => {
@@ -19,10 +16,7 @@ const getArguments = (programId: string, orgUnitId: string) => {
 
 export const openNewEventPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(
-        viewEventSelectorActionTypes.OPEN_NEW_EVENT,
-        lockedSelectorActionTypes.OPEN_NEW_EVENT,
-    )
+    action$.ofType(lockedSelectorActionTypes.OPEN_NEW_EVENT,)
         .map(() => {
             const state = store.getState();
             const { programId, orgUnitId } = state.currentSelections;

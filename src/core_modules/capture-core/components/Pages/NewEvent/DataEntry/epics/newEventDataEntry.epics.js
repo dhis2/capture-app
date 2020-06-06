@@ -4,9 +4,6 @@ import { batchActions } from 'redux-batched-actions';
 import { errorCreator } from 'capture-core-utils';
 import { rulesExecutedPostUpdateField } from '../../../../DataEntry/actions/dataEntry.actions';
 import {
-    actionTypes as viewEventSelectorActionTypes,
-} from '../../../ViewEvent/ViewEventSelector/ViewEventSelector.actions';
-import {
     actionTypes as newEventDataEntryActionTypes,
     batchActionTypes as newEventDataEntryBatchActionTypes,
     cancelOpenNewEventInDataEntry,
@@ -92,7 +89,6 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
         lockedSelectorActionTypes.OPEN_NEW_EVENT,
         lockedSelectorActionTypes.SET_PROGRAM_ID,
         lockedSelectorActionTypes.SET_CATEGORY_OPTION,
-        viewEventSelectorActionTypes.OPEN_NEW_EVENT,
         newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
         crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
     )
@@ -140,7 +136,6 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
 export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
 // $FlowSuppress
     action$.ofType(
-        viewEventSelectorActionTypes.OPEN_NEW_EVENT,
         newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
         lockedSelectorActionTypes.OPEN_NEW_EVENT,
         lockedSelectorActionTypes.SET_CATEGORY_OPTION,

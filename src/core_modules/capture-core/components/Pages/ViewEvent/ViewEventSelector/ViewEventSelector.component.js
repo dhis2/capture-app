@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import QuickSelector from '../../../LockedSelector/QuickSelector/QuickSelector.container';
 import ViewEvent from '../ViewEvent.container';
 import ConfirmDialog from '../../../Dialogs/ConfirmDialog.component';
 import ViewEventNewRelationshipWrapper from '../Relationship/ViewEventNewRelationshipWrapper.container';
@@ -39,18 +38,6 @@ const defaultDialogProps = {
 };
 
 class ViewEventSelector extends Component<Props, State> {
-    handleOpenStartAgainWarning: () => void;
-    handleOpenOrgUnitWarning: () => void;
-    handleOpenProgramWarning: () => void;
-    handleOpenCatComboWarning: (categoryId: string) => void;
-    handleClose: () => void;
-    handleAcceptStartAgain: () => void;
-    handleAcceptOrgUnit: () => void;
-    handleAcceptProgram: () => void;
-    handleAcceptCatCombo: () => void;
-    handleClickNew: () => void;
-    handleAcceptNew: () => void;
-
     constructor(props: Props) {
         super(props);
 
@@ -62,54 +49,10 @@ class ViewEventSelector extends Component<Props, State> {
             categoryIdToReset: '',
             openNewWarning: false,
         };
-
-        this.handleOpenStartAgainWarning = this.handleOpenStartAgainWarning.bind(this);
-        this.handleOpenOrgUnitWarning = this.handleOpenOrgUnitWarning.bind(this);
-        this.handleOpenProgramWarning = this.handleOpenProgramWarning.bind(this);
-        this.handleOpenCatComboWarning = this.handleOpenCatComboWarning.bind(this);
-        this.handleClose = this.handleClose.bind(this);
-        this.handleAcceptStartAgain = this.handleAcceptStartAgain.bind(this);
-        this.handleAcceptOrgUnit = this.handleAcceptOrgUnit.bind(this);
-        this.handleAcceptProgram = this.handleAcceptProgram.bind(this);
-        this.handleAcceptCatCombo = this.handleAcceptCatCombo.bind(this);
-        this.handleClickNew = this.handleClickNew.bind(this);
-        this.handleAcceptNew = this.handleAcceptNew.bind(this);
-    }
-
-    handleOpenStartAgainWarning() {
-        if (!this.props.formInputInProgress) {
-            this.props.onStartAgain();
-            return;
-        }
-        this.setState({ openStartAgainWarning: true });
-    }
-
-    handleOpenOrgUnitWarning() {
-        if (!this.props.formInputInProgress) {
-            this.props.onResetOrgUnitId();
-            return;
-        }
-        this.setState({ openOrgUnitWarning: true });
-    }
-
-    handleOpenProgramWarning(baseAction: ReduxAction<any, any>) {
-        if (!this.props.formInputInProgress) {
-            this.props.onResetProgramId(baseAction);
-            return;
-        }
-        this.setState({ openProgramWarning: baseAction });
-    }
-
-    handleOpenCatComboWarning(categoryId: string) {
-        if (!this.props.formInputInProgress) {
-            this.props.onResetCategoryOption(categoryId);
-            return;
-        }
-        this.setState({ openCatComboWarning: true, categoryIdToReset: categoryId });
     }
 
 
-    handleClose() {
+    handleClose=() => {
         this.setState({
             openStartAgainWarning: false,
             openOrgUnitWarning: false,
@@ -118,34 +61,27 @@ class ViewEventSelector extends Component<Props, State> {
             openNewWarning: false });
     }
 
-    handleAcceptStartAgain() {
+    handleAcceptStartAgain = () => {
         this.props.onStartAgain();
         this.handleClose();
     }
 
-    handleAcceptOrgUnit() {
+    handleAcceptOrgUnit = () => {
         this.props.onResetOrgUnitId();
         this.handleClose();
     }
 
-    handleAcceptProgram() {
+    handleAcceptProgram=() => {
         this.props.onResetProgramId(this.state.openProgramWarning);
         this.handleClose();
     }
 
-    handleAcceptCatCombo() {
+    handleAcceptCatCombo=() => {
         this.props.onResetCategoryOption(this.state.categoryIdToReset);
         this.handleClose();
     }
 
-    handleClickNew() {
-        if (!this.props.formInputInProgress) {
-            this.props.onOpenNewEventPage(this.props.selectedProgramId, this.props.selectedOrgUnitId);
-        }
-        this.setState({ openNewWarning: true });
-    }
-
-    handleAcceptNew() {
+    handleAcceptNew=() => {
         this.props.onOpenNewEventPage(this.props.selectedProgramId, this.props.selectedOrgUnitId);
         this.handleClose();
     }
@@ -153,17 +89,6 @@ class ViewEventSelector extends Component<Props, State> {
     render() {
         return (
             <div>
-                <QuickSelector
-                    onSetOrgUnit={this.props.onSetOrgUnit}
-                    onResetOrgUnitId={this.handleOpenOrgUnitWarning}
-                    onSetProgramId={this.props.onSetProgramId}
-                    onResetProgramId={this.handleOpenProgramWarning}
-                    onSetCategoryOption={this.props.onSetCategoryOption}
-                    onResetCategoryOption={this.handleOpenCatComboWarning}
-                    onResetAllCategoryOptions={this.props.onResetAllCategoryOptions}
-                    onStartAgain={this.handleOpenStartAgainWarning}
-                    onClickNew={this.handleClickNew}
-                />
                 {this.props.showAddRelationship ?
                     <ViewEventNewRelationshipWrapper /> :
                     <ViewEvent />
@@ -178,4 +103,4 @@ class ViewEventSelector extends Component<Props, State> {
     }
 }
 
-export default (ViewEventSelector);
+export default ViewEventSelector;

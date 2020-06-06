@@ -70,10 +70,6 @@ import {
 } from 'capture-core/components/Pages/ViewEvent/epics/viewEvent.epics';
 
 import {
-    viewEventPageSelectorUpdateURLEpic,
-} from 'capture-core/components/Pages/ViewEvent/ViewEventSelector/ViewEventSelector.epics';
-
-import {
     saveEditEventEpic,
     saveEditEventLocationChangeEpic,
 } from 'capture-core/components/Pages/EditEvent/DataEntry/epics/saveEditSingleEvent.epics';
@@ -259,7 +255,6 @@ export default combineEpics(
     getViewEventFromUrlEpic,
     getViewEventOrgUnitOnUrlUpdateEpic,
     openViewPageLocationChangeEpic,
-    viewEventPageSelectorUpdateURLEpic,
     backToMainPageEpic,
     backToMainPageLocationChangeEpic,
     openAddRelationshipForViewEventEpic,

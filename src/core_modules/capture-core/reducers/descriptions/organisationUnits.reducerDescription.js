@@ -4,7 +4,6 @@ import { actionTypes as editEventActionTypes } from '../../components/Pages/Edit
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/viewEvent.actions';
 import { actionTypes as setOrgUnitActionTypes } from '../../components/QuickSelector/actions/QuickSelector.actions';
 import { urlActionTypes as newEnrollmentUrlActionTypes } from '../../components/Pages/NewEnrollment';
-import { actionTypes as viewEventPageSelectorActionTypes } from '../../components/Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
 import { lockedSelectorActionTypes } from '../../components/Pages/components/LockedSelector/actions';
 import { orgUnitListActionTypes } from '../../components/QuickSelector';
 import { set as setStoreRoots } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
@@ -147,6 +146,5 @@ export const registeringUnitListDesc = createReducerDescription({
     }),
     [lockedSelectorActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: removeSearchDataOnResetRegUnit,
     [lockedSelectorActionTypes.RESET_ORG_UNIT_ID]: removeSearchDataOnResetRegUnit,
-    [viewEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: removeSearchDataOnResetRegUnit,
     [newEnrollmentUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: removeSearchDataOnResetRegUnit,
 }, 'registeringUnitList');
