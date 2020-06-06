@@ -18,21 +18,11 @@ type Props = {
 };
 
 class SearchPageSelector extends Component<Props> {
-    handleStartAgain: () => void;
-    handleClickNew: () => void;
-
-    constructor(props: Props) {
-        super(props);
-
-        this.handleStartAgain = this.handleStartAgain.bind(this);
-        this.handleClickNew = this.handleClickNew.bind(this);
-    }
-
-    handleStartAgain() {
+    handleStartAgain = () => {
         this.props.onStartAgain();
     }
 
-    handleClickNew() {
+    handleClickNew = () => {
         this.props.onOpenNewEventPage(this.props.selectedProgramId, this.props.selectedOrgUnitId);
     }
 
