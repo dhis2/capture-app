@@ -116,15 +116,17 @@ class SelectorLevel extends Component<Props, State> {
         this.props.onResetCategoryOption(this.state.categoryIdToReset);
         this.handleClose();
     }
-
-
-    handleClickNew = () => {
-        this.setState({ openNewEventWarning: true });
+    
+    handleClickNew=() => {
+        if (this.props.formInputInProgess) {
+            this.setState({ openNewEventWarning: true });
+            return;
+        }
         this.props.onOpenNewEventPage(this.props.selectedProgramId, this.props.selectedOrgUnitId);
     }
 
     handleAcceptNew =() => {
-        this.props.onResetDataEntry();
+        this.props.onOpenNewEventPage(this.props.selectedProgramId, this.props.selectedOrgUnitId);
         this.handleClose();
     }
 
