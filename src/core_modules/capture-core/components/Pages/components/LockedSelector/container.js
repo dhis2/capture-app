@@ -43,8 +43,8 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onResetAllCategoryOptions: () => {
         dispatch(resetAllCategoryOptionsFromSearchPage());
     },
-    onOpenNewEventPage: () => {
-        dispatch(openNewEventPage());
+    onOpenNewEventPage: (selectedProgramId, selectedOrgUnitId) => {
+        dispatch(openNewEventPage(selectedProgramId, selectedOrgUnitId));
     },
     onStartAgain: () => {
         dispatch(batchActions([
