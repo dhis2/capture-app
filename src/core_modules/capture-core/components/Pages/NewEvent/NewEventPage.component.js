@@ -1,9 +1,10 @@
 // @flow
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import DataEntrySelectionsComplete from '../SelectionsComplete/SelectionsComplete.container';
-import DataEntrySelectionsIncomplete from '../SelectionsIncomplete/DataEntrySelectionsIncomplete.container';
-import { TrackerProgramHandler } from '../../../TrackerProgramHandler';
+import DataEntrySelectionsComplete from './SelectionsComplete/SelectionsComplete.container';
+import DataEntrySelectionsIncomplete from './SelectionsIncomplete/DataEntrySelectionsIncomplete.container';
+import { TrackerProgramHandler } from '../../TrackerProgramHandler';
+import { LockedSelector } from '../components/LockedSelector/container';
 
 const getStyles = () => ({
 
@@ -11,6 +12,8 @@ const getStyles = () => ({
 
 type Props = {
     isSelectionsComplete: boolean,
+    formInputInProgess: boolean,
+    inAddRelationship: boolean,
 };
 
 class IsSelectionsCompleteLevel extends React.Component<Props> {
@@ -29,8 +32,10 @@ class IsSelectionsCompleteLevel extends React.Component<Props> {
         );
     }
     render() {
+        const { inAddRelationship, formInputInProgess } = this.props;
         return (
             <div>
+                <LockedSelector formInputInProgess={formInputInProgess} inAddRelationship={inAddRelationship} />
                 {this.renderContents()}
             </div>
         );
