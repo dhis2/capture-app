@@ -64,7 +64,7 @@ msgid "Please provide a valid url"
 msgstr ""
 
 msgid "Please provide a valid email address"
-msgstr ""
+msgstr "Por favor ingrese una dirección de correo electrónico válida"
 
 msgid "Please provide a valid age"
 msgstr ""
