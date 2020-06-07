@@ -14,7 +14,6 @@ export const newEventPageDesc = createReducerDescription({
     },
     [newEventDataEntryActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY]: (state) => {
         const newState = { ...state };
-        newState.dataEntryIsLoading = false;
         newState.showAddRelationship = false;
         return newState;
     },

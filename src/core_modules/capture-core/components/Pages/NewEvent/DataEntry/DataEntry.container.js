@@ -30,7 +30,7 @@ const makeMapStateToProps = () => {
 
     const mapStateToProps = (state: ReduxState, props: Object) => ({
         recentlyAddedRelationshipId: state.newEventPage.recentlyAddedRelationshipId,
-        ready: !state.newEventPage.dataEntryIsLoading,
+        ready: !state.activePage.dataEntryIsLoading,
         error: !props.formFoundation ?
             i18n.t('This is not an event program or the metadata is corrupt. See log for details.') : null,
         programName: programNameSelector(state),

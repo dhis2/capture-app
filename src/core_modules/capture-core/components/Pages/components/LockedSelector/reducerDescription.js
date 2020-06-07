@@ -2,6 +2,7 @@
 import { createReducerDescription } from '../../../../trackerRedux';
 import { lockedSelectorActionTypes } from './actions';
 import { actionTypes } from '../../ViewEvent/viewEvent.actions';
+import { dataEntryActionTypes as newEventDataEntryActionTypes } from "../../NewEvent";
 
 export const searchPageDesc = createReducerDescription({
     [lockedSelectorActionTypes.SET_ORG_UNIT]: state => ({
@@ -12,6 +13,13 @@ export const searchPageDesc = createReducerDescription({
         const newState = { ...state, isLoading: true };
         return newState;
     },
+    [lockedSelectorActionTypes.VALID_SELECTIONS_FROM_URL]: (state) => {
+        const newState = { ...state };
+        newState.isLoading = false;
+        newState.selectionsError = null;
+        newState.dataEntryIsLoading = true;
+        return newState;
+    },
     [actionTypes.VIEW_EVENT_FROM_URL]: (state) => {
         const newState = { ...state, isLoading: true };
         return newState;
@@ -20,11 +28,9 @@ export const searchPageDesc = createReducerDescription({
         const newState = { ...state, isLoading: false };
         return newState;
     },
-    [lockedSelectorActionTypes.VALID_SELECTIONS_FROM_URL]: (state) => {
+    [newEventDataEntryActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY]: (state) => {
         const newState = { ...state };
-        newState.isLoading = false;
-        newState.selectionsError = null;
-        newState.dataEntryIsLoading = true;
+        newState.dataEntryIsLoading = false;
         return newState;
     },
     // todo still need those 4
