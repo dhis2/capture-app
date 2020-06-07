@@ -1,9 +1,8 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import ViewEventSelector from './ViewEventSelector/ViewEventSelector.component';
-import dataEntryHasChanges from '../../DataEntry/common/dataEntryHasChanges';
-import { LockedSelector } from '../components/LockedSelector/container';
+import ViewEventSelector from './ViewEventPage.component';
+import dataEntryHasChanges from '../../../DataEntry/common/dataEntryHasChanges';
 
 const mapStateToProps = (state: ReduxState) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
@@ -12,12 +11,10 @@ const mapStateToProps = (state: ReduxState) => {
         eventDetailsSection.showEditEvent &&
         dataEntryHasChanges(state, 'singleEvent-editEvent');
     return {
-        formInputInProgress: formHasChanges,
+        formInputInProgess: formHasChanges,
         showAddRelationship: state.viewEventPage.showAddRelationship,
     };
 };
 
-const Page = connect(mapStateToProps)(ViewEventSelector);
+export const ViewEventPageContainer = connect(mapStateToProps)(ViewEventSelector);
 
-
-export const ViewEventPage = () => <LockedSelector render={() => <Page />} />;
