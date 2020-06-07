@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 import { paramsSelector } from './appSync.selectors';
 import LoadingMaskForPage from '../LoadingMasks/LoadingMaskForPage.component';
 import {
-    updateSelectionsFromUrl as updateSelectionsFromUrlForNewEvent,
-} from '../Pages/NewEvent';
-import {
     updateSelectionsFromUrl as updateSelectionsFromUrlForNewEnrollment,
 } from '../Pages/NewEnrollment';
 import {

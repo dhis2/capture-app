@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-06-08T11:20:17.500Z\n"
-"PO-Revision-Date: 2020-06-08T11:20:17.500Z\n"
+"POT-Creation-Date: 2020-06-07T16:22:33.850Z\n"
+"PO-Revision-Date: 2020-06-07T16:22:33.850Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -587,9 +587,6 @@ msgid "Select a category option to start reporting"
 msgstr ""
 
 msgid "You dont have access to create an event in the current selections"
-msgstr ""
-
-msgid "Selected program is invalid for registering unit"
 msgstr ""
 
 msgid "A duplicate exists (but there were some errors, see log for details"

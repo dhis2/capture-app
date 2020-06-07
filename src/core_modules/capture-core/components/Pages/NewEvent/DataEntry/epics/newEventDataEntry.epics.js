@@ -14,9 +14,6 @@ import {
     resetDataEntry,
 } from '../actions/dataEntryLoad.actionBatchs';
 import {
-    actionTypes as newEventSelectionTypes,
-} from '../actions/dataEntryUrl.actions';
-import {
     getCurrentClientValues,
     getCurrentClientMainData,
     getRulesActionsForEvent,
@@ -49,7 +46,7 @@ const errorMessages = {
 
 export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH,)
+    action$.ofType(newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH)
         .map(() => {
             const state = store.getState();
             const programId = state.currentSelections.programId;
@@ -86,7 +83,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
         lockedSelectorActionTypes.OPEN_NEW_EVENT,
         lockedSelectorActionTypes.SET_PROGRAM_ID,
         lockedSelectorActionTypes.SET_CATEGORY_OPTION,
-        newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
+        lockedSelectorActionTypes.VALID_SELECTIONS_FROM_URL,
         crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
     )
         .filter((action) => {
@@ -133,7 +130,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
 export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
 // $FlowSuppress
     action$.ofType(
-        newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
+      lockedSelectorActionTypes.VALID_SELECTIONS_FROM_URL,
         lockedSelectorActionTypes.OPEN_NEW_EVENT,
         lockedSelectorActionTypes.SET_CATEGORY_OPTION,
         lockedSelectorActionTypes.SET_PROGRAM_ID,

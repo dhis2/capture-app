@@ -21,15 +21,6 @@ import {
     teiForNewEventRelationshipSavedEpic,
 } from 'capture-core/components/Pages/NewEvent';
 import {
-    selectionsFromUrlGetOrgUnitDataForNewEventEpic,
-    selectionsFromUrlEmptyOrgUnitForNewEventEpic,
-    selectionsFromUrlValidationForNewEventEpic,
-} from 'capture-core/components/Pages/NewEvent/epics/newEventSelections.epics';
-import {
-    openNewEventPageLocationChangeEpic,
-} from 'capture-core/components/Pages/NewEvent/epics/newEvent.epics';
-
-import {
     initEventListEpic,
     updateEventListEpic,
     retrieveTemplatesEpic,
@@ -192,10 +183,6 @@ export default combineEpics(
     addTemplateEpic,
     deleteTemplateEpic,
     requestDeleteEventEpic,
-    selectionsFromUrlGetOrgUnitDataForNewEventEpic,
-    selectionsFromUrlEmptyOrgUnitForNewEventEpic,
-    selectionsFromUrlValidationForNewEventEpic,
-    openNewEventPageLocationChangeEpic,
     openNewEventInDataEntryEpic,
     resetDataEntryForNewEventEpic,
     resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,

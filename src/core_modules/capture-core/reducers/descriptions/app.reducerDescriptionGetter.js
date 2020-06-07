@@ -2,7 +2,6 @@
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
 import {
-    dataEntryUrlActionTypes as newEventDataEntryUrlActionTypes,
     dataEntryActionTypes as newEventDataEntryActionTypes,
     selectionsIncompleteActionTypes as newEventPageSelectionsIncompleteActionTypes,
 } from '../../components/Pages/NewEvent';
@@ -28,10 +27,6 @@ const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
 
 export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescription({
     ...appUpdaters,
-    [newEventDataEntryUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
-        const newState = { ...state, page: action.payload.nextPage };
-        return newState;
-    },
     [editEventActionTypes.EDIT_EVENT_FROM_URL]: (state, action) => {
         const newState = { ...state, page: action.payload.page };
         return newState;

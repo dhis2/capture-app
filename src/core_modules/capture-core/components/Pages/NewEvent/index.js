@@ -6,11 +6,6 @@ export {
     actionTypes as dataEntryActionTypes,
 } from './DataEntry/actions/dataEntry.actions';
 export {
-    actionTypes as dataEntryUrlActionTypes,
-    updateSelectionsFromUrl,
-} from './DataEntry/actions/dataEntryUrl.actions';
-
-export {
     actionTypes as dataEntryWrapperActionTypes,
 } from './DataEntryWrapper/newEventDataEntryWrapper.actions';
 export {
