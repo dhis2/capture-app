@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
-import ViewEvent from '../ViewEvent.container';
-import ViewEventNewRelationshipWrapper from '../Relationship/ViewEventNewRelationshipWrapper.container';
-import { LockedSelector } from '../../components/LockedSelector/container';
+import ViewEvent from './ViewEventComponent/ViewEvent.container';
+import ViewEventNewRelationshipWrapper from './Relationship/ViewEventNewRelationshipWrapper.container';
+import { LockedSelector } from '../components/LockedSelector/container';
 
 type Props = {
   formInputInProgess: boolean,

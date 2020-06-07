@@ -1,7 +1,7 @@
 // @flow
 import { createReducerDescription } from '../../../../trackerRedux';
 import { lockedSelectorActionTypes } from './actions';
-import { actionTypes } from '../../ViewEvent/viewEvent.actions';
+import { actionTypes } from '../../ViewEvent/ViewEventComponent/viewEvent.actions';
 import { dataEntryActionTypes as newEventDataEntryActionTypes } from "../../NewEvent";
 
 export const searchPageDesc = createReducerDescription({

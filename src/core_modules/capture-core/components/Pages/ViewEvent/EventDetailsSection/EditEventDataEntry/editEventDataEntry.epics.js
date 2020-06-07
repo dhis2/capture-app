@@ -24,7 +24,7 @@ import {
 
 import {
     updateEventContainer,
-} from '../../viewEvent.actions';
+} from '../../ViewEventComponent/viewEvent.actions';
 
 
 export const loadEditEventDataEntryEpic = (action$: ActionsObservable, store: ReduxStore) =>

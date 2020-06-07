@@ -4,10 +4,10 @@ import {
     startGoBackToMainPage,
 } from './viewEvent.actions';
 import ViewEvent from './ViewEvent.component';
-import getDataEntryKey from '../../DataEntry/common/getDataEntryKey';
-import { editEventIds } from '../EditEvent/DataEntry/editEventDataEntry.actions';
-import { viewEventIds } from './EventDetailsSection/eventDetails.actions';
-import withErrorMessageHandler from '../../../HOC/withErrorMessageHandler';
+import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
+import { editEventIds } from '../../EditEvent/DataEntry/editEventDataEntry.actions';
+import { viewEventIds } from '../EventDetailsSection/eventDetails.actions';
+import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
 import { makeProgramStageSelector, makeEventAccessSelector } from './viewEvent.selectors';
 
 

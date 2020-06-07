@@ -8,7 +8,7 @@ import {
 } from '../Pages/NewEnrollment';
 import {
     viewEventFromUrl,
-} from '../Pages/ViewEvent/viewEvent.actions';
+} from '../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import {
     updateSearchSelectionsFromUrl,
 } from '../LockedSelector';

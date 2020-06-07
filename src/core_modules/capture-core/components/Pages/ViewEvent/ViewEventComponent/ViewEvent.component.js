@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { withStyles } from '@material-ui/core';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import EventDetails from './EventDetailsSection/EventDetailsSection.container';
-import Button from '../../Buttons/Button.component';
-import RightColumnWrapper from './RightColumn/RightColumnWrapper.component';
-import { ProgramStage } from '../../../metaData';
+import EventDetails from '../EventDetailsSection/EventDetailsSection.container';
+import Button from '../../../Buttons/Button.component';
+import RightColumnWrapper from '../RightColumn/RightColumnWrapper.component';
+import { ProgramStage } from '../../../../metaData';
 
 
 const getStyles = (theme: Theme) => ({

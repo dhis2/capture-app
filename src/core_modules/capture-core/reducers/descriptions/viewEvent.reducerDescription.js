@@ -1,6 +1,6 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/viewEvent.actions';
+import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { actionTypes as viewEventRelationshipsActionTypes } from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
 import {
     actionTypes as viewEventDetailsActionTypes,

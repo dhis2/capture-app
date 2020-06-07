@@ -9,7 +9,7 @@ import {
 } from '../../components/Pages/EditEvent/editEvent.actions';
 import {
     actionTypes as viewEventActionTypes,
-} from '../../components/Pages/ViewEvent/viewEvent.actions';
+} from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import {
     actionTypes as crossPageActionTypes,
 } from '../../components/Pages/actions/crossPage.actions';
