@@ -1,6 +1,5 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { actionTypes as selectorActionTypes } from '../../components/Pages/MainPage/tempSelector.actions';
 import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
     dataEntryWrapperActionTypes as newEventDataEntryWrapperActionTypes,
@@ -8,19 +7,6 @@ import {
 } from '../../components/Pages/NewEvent';
 
 export const newEventPageDesc = createReducerDescription({
-    [selectorActionTypes.OPEN_NEW_EVENT_PAGE]: (state) => {
-        const newState = { ...state };
-        newState.dataEntryIsLoading = true;
-        newState.selectionsError = null;
-        newState.showAddRelationship = false;
-        return newState;
-    },
-    // [editEventPageActionTypes.OPEN_NEW_EVENT]: (state) => {
-    //     const newState = { ...state };
-    //     newState.dataEntryIsLoading = true;
-    //     newState.showAddRelationship = false;
-    //     return newState;
-    // },
     [newEventDataEntryActionTypes.NEW_EVENT_IN_DATAENTRY_OPENING_CANCEL]: (state) => {
         const newState = { ...state };
         newState.dataEntryIsLoading = false;

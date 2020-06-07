@@ -6,7 +6,6 @@ import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
     selectionsIncompleteActionTypes as newEventPageSelectionsIncompleteActionTypes,
 } from '../../components/Pages/NewEvent';
-import { actionTypes as tempSelectorActionTypes } from '../../components/Pages/MainPage/tempSelector.actions';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/viewEvent.actions';
 import {
@@ -45,13 +44,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         ...state,
         page: action.payload.nextPage,
     }),
-    [tempSelectorActionTypes.OPEN_NEW_EVENT_PAGE]: (state) => {
-        const newState = { ...state };
-        newState.page = 'newEvent';
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-
     [newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;
