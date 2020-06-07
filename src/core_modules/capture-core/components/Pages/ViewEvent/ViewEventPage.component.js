@@ -9,8 +9,8 @@ type Props = {
   showAddRelationship: boolean,
 };
 
-const ViewEventSelector = ({ formInputInProgess, showAddRelationship }: Props) => {
-    return (<div>
+const ViewEventSelector = ({ formInputInProgess, showAddRelationship }: Props) => (
+    <div>
         <LockedSelector formInputInProgess={formInputInProgess} />
 
         {
@@ -19,6 +19,5 @@ const ViewEventSelector = ({ formInputInProgess, showAddRelationship }: Props) =
                 <ViewEvent />
         }
     </div>);
-};
 
 export default ViewEventSelector;
