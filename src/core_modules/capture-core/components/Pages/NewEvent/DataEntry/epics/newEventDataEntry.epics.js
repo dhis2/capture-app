@@ -49,10 +49,7 @@ const errorMessages = {
 
 export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(
-        lockedSelectorActionTypes.OPEN_NEW_EVENT,
-        newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH,
-    )
+    action$.ofType(newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH,)
         .map(() => {
             const state = store.getState();
             const programId = state.currentSelections.programId;
