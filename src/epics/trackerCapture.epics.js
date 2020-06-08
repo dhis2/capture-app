@@ -21,6 +21,10 @@ import {
     teiForNewEventRelationshipSavedEpic,
 } from 'capture-core/components/Pages/NewEvent';
 import {
+    openNewEventPageLocationChangeEpic,
+} from 'capture-core/components/Pages/NewEvent/epics/newEvent.epics';
+
+import {
     initEventListEpic,
     updateEventListEpic,
     retrieveTemplatesEpic,
@@ -183,6 +187,7 @@ export default combineEpics(
     addTemplateEpic,
     deleteTemplateEpic,
     requestDeleteEventEpic,
+    openNewEventPageLocationChangeEpic,
     openNewEventInDataEntryEpic,
     resetDataEntryForNewEventEpic,
     resetRecentlyAddedEventsWhenNewEventInDataEntryEpic,
