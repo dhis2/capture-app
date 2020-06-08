@@ -52,6 +52,10 @@ const calculateCompleteStatus = (state: CurrentSelectionsState) => {
 export const calculateSelectionsCompletenessEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
     action$.ofType(
+        lockedSelectorActionTypes.SET_PROGRAM_ID,
+        lockedSelectorActionTypes.SET_CATEGORY_OPTION,
+        lockedSelectorActionTypes.VALID_SELECTIONS_FROM_URL,
+
         mainSelections.UPDATE_MAIN_SELECTIONS,
         mainSelections.VALID_SELECTIONS_FROM_URL,
         newEventDataEntryUrlActionTypes.VALID_SELECTIONS_FROM_URL,

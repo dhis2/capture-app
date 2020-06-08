@@ -367,4 +367,47 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         ...state,
         categoryCheckInProgress: false,
     }),
+
+    [lockedSelectorActionTypes.SET_ORG_UNIT]: (state, action) => {
+        const newState = {
+            ...state,
+            orgUnitId: action.payload.id,
+        };
+        return newState;
+    },
+    [lockedSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
+        const newState = { ...state, orgUnitId: null, complete: false };
+        return newState;
+    },
+    [lockedSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
+        const { nextProps: selections } = action.payload;
+        const newState = {
+            ...state,
+            ...selections,
+            categories: undefined,
+            categoriesMeta: undefined,
+            complete: false,
+        };
+        return newState;
+    },
+    [lockedSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
+        const programId = action.payload;
+        const newState = { ...state, programId };
+        newState.complete = false;
+        return newState;
+    },
+    [lockedSelectorActionTypes.SET_CATEGORY_OPTION]: (state, action) => {
+        const { categoryId, categoryOption } = action.payload;
+        return setCategoryOption(state, categoryId, categoryOption);
+    },
+    [lockedSelectorActionTypes.RESET_CATEGORY_OPTION]: (state, action) => {
+        const { categoryId } = action.payload;
+        return resetCategoryOption(state, categoryId);
+    },
+    [lockedSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: state => ({
+        ...state,
+        categories: undefined,
+        categoriesMeta: undefined,
+    }),
+
 }, 'currentSelections');

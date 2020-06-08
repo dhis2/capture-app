@@ -11,6 +11,9 @@ import {
 import {
     urlActionTypes as newEnrollmentUrlActionTypes,
 } from '../../components/Pages/NewEnrollment';
+
+import { lockedSelectorActionTypes } from "../../components/LockedSelector/actions";
+
 import {
     actionTypes as mainPageSelectorActionTypes,
 } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
@@ -94,6 +97,18 @@ export const organisationUnitDesc = createReducerDescription({
         const newState = { ...state, [action.payload.orgUnit.id]: action.payload.orgUnit };
         return newState;
     },
+
+    [lockedSelectorActionTypes.SET_ORG_UNIT_BASED_ON_URL]: (state, action) => {
+        const newState = {
+            ...state,
+            [action.payload.id]: action.payload,
+        };
+        return newState;
+    },
+    [lockedSelectorActionTypes.SET_ORG_UNIT]: (state, action) => {
+        const newState = { ...state, [action.payload.orgUnit.id]: action.payload.orgUnit };
+        return newState;
+    },
 }, 'organisationUnits');
 
 export const organisationUnitRootsDesc = createReducerDescription({
@@ -170,4 +185,7 @@ export const registeringUnitListDesc = createReducerDescription({
     [editEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: removeSearchDataOnResetRegUnit,
     [viewEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: removeSearchDataOnResetRegUnit,
     [newEnrollmentUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: removeSearchDataOnResetRegUnit,
+
+    [lockedSelectorActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: removeSearchDataOnResetRegUnit,
+    [lockedSelectorActionTypes.RESET_ORG_UNIT_ID]: removeSearchDataOnResetRegUnit,
 }, 'registeringUnitList');

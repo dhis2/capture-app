@@ -16,7 +16,7 @@ import {
 import {
     resetProgramIdBase,
 } from '../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
-import { lockedSelectorActionTypes } from "../../LockedSelector/actions";
+import { lockedSelectorActionTypes } from '../../LockedSelector/actions';
 
 const programShouldReset = (orgUnitId, currentlySelectedProgramId) => {
     if (!currentlySelectedProgramId) {
@@ -39,6 +39,8 @@ export const resetProgramAfterSettingOrgUnitIfApplicableEpic = (action$: InputOb
     // $FlowSuppress
     action$
         .ofType(
+            lockedSelectorActionTypes.SET_ORG_UNIT,
+
             mainPageSelectorActionTypes.SET_ORG_UNIT,
             editEventSelectorActionTypes.SET_ORG_UNIT,
             viewEventSelectorActionTypes.SET_ORG_UNIT,
