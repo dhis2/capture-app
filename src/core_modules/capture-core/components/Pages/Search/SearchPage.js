@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { LockedSelector } from '../../LockedSelector/container';
+import { LockedSelector } from '../../LockedSelector';
 
 const SearchPage = () => (
     <div>

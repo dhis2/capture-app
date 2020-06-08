@@ -16,7 +16,7 @@ import {
 import {
     resetProgramIdBase,
 } from '../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
-import { lockedSelectorActionTypes } from '../../LockedSelector/actions';
+import { lockedSelectorActionTypes } from '../../LockedSelector';
 
 const programShouldReset = (orgUnitId, currentlySelectedProgramId) => {
     if (!currentlySelectedProgramId) {

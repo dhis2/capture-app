@@ -1,6 +1,6 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux';
-import { lockedSelectorActionTypes } from '../../components/LockedSelector/actions';
+import { lockedSelectorActionTypes } from '../../components/LockedSelector';
 
 export const searchPageDesc = createReducerDescription({
     [lockedSelectorActionTypes.SET_ORG_UNIT]: state => ({

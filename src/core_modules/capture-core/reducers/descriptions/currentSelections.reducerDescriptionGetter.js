@@ -32,7 +32,7 @@ import {
 } from '../../components/Pages/NewEnrollment';
 import {
     lockedSelectorActionTypes,
-} from '../../components/LockedSelector/actions';
+} from '../../components/LockedSelector';
 
 const setOrgUnit = (state, action) => {
     const orgUnitId = action.payload.id;

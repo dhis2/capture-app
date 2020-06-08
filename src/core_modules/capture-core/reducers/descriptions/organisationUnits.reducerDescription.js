@@ -11,7 +11,7 @@ import {
 import {
     urlActionTypes as newEnrollmentUrlActionTypes,
 } from '../../components/Pages/NewEnrollment';
-import { lockedSelectorActionTypes } from '../../components/LockedSelector/actions';
+import { lockedSelectorActionTypes } from '../../components/LockedSelector';
 import {
     actionTypes as mainPageSelectorActionTypes,
 } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';

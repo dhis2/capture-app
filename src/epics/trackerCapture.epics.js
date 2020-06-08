@@ -194,7 +194,7 @@ import {
     validationForSearchUrlUpdateEpic,
     getOrgUnitDataForSearchUrlUpdateEpic,
     selectionsFromUrlEmptyOrgUnitForSearchEpic,
-} from '../core_modules/capture-core/components/LockedSelector/epics';
+} from '../core_modules/capture-core/components/LockedSelector';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,

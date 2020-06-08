@@ -17,7 +17,7 @@ import {
 } from '../Pages/ViewEvent/viewEvent.actions';
 import {
     updateSearchSelectionsFromUrl,
-} from '../LockedSelector/actions';
+} from '../LockedSelector';
 
 import { reservedUrlKeys } from '../UrlSync/withUrlSync';
 import type { UpdateDataContainer } from '../UrlSync/withUrlSync';

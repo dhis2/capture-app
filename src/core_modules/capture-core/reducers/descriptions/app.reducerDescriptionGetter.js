@@ -33,7 +33,7 @@ import {
 } from '../../components/Pages/NewEnrollment';
 import {
     lockedSelectorActionTypes,
-} from '../../components/LockedSelector/actions';
+} from '../../components/LockedSelector';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
