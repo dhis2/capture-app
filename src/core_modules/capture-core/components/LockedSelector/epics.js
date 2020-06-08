@@ -65,7 +65,6 @@ export const selectionsFromUrlEmptyOrgUnitForSearchEpic = (action$: InputObserva
         .map(() => setEmptyOrgUnitBasedOnUrl());
 
 export const validationForSearchUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.ofType(
         lockedSelectorActionTypes.SET_ORG_UNIT_BASED_ON_URL,
         lockedSelectorActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL)
