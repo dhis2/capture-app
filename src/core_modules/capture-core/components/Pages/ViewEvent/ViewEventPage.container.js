@@ -13,7 +13,8 @@ const mapStateToProps = (state: ReduxState) => {
         eventDetailsSection.showEditEvent &&
         dataEntryHasChanges(state, 'singleEvent-editEvent');
     return {
-        error: state.activePage.selectionsError,
+        error: (state.activePage.selectionsError && state.activePage.selectionsError.error)
+          || (state.activePage.viewEventLoadError && state.activePage.viewEventLoadError.error),
         ready: !state.activePage.isLoading,
         formInputInProgess: formHasChanges,
         showAddRelationship: state.viewEventPage.showAddRelationship,
