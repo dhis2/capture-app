@@ -11,7 +11,7 @@ import {
     resetCategoryOptionFromSearchPage,
     resetAllCategoryOptionsFromSearchPage,
     openNewEventPage,
-    searchPageSelectorBatchActionTypes,
+    lockedSelectorBatchActionTypes,
 } from './actions';
 import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
 import withLoadingIndicator from '../../HOC/withLoadingIndicator';
@@ -53,14 +53,14 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
             resetProgramIdFromSearchPage(),
             resetAllCategoryOptionsFromSearchPage(),
             resetProgramIdBase(),
-        ], searchPageSelectorBatchActionTypes.START_AGAIN));
+        ], lockedSelectorBatchActionTypes.START_AGAIN));
     },
     onResetProgramId: (baseAction: ReduxAction<any, any>) => {
         dispatch(batchActions([
             resetProgramIdFromSearchPage(),
             resetAllCategoryOptionsFromSearchPage(),
             baseAction,
-        ], searchPageSelectorBatchActionTypes.RESET_PROGRAM_AND_CATEGORY_OPTION));
+        ], lockedSelectorBatchActionTypes.RESET_PROGRAM_AND_CATEGORY_OPTION));
     },
 });
 

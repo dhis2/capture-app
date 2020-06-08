@@ -20,7 +20,7 @@ export const lockedSelectorActionTypes = {
     OPEN_NEW_EVENT: 'OPEN_NEW_EVENT_PAGE',
 };
 
-export const searchPageSelectorBatchActionTypes = {
+export const lockedSelectorBatchActionTypes = {
     START_AGAIN: 'BATCH_START_AGAIN_FROM_PAGE_USING_THE_SELECTOR',
     RESET_PROGRAM_AND_CATEGORY_OPTION: 'BATCH_RESET_PROGRAM_AND_CATEGORY_OPTION_FROM_PAGE_USING_THE_SELECTOR',
 };
@@ -39,7 +39,7 @@ export const openNewEventPage = (programId: string, orgUnitId: string) => action
 
 
 // url specific
-export const updateSearchSelectionsFromUrl = (data: Object) => actionCreator(lockedSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL)(data);
+export const updateSelectionsFromUrl = (data: Object) => actionCreator(lockedSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL)(data);
 export const validSelectionsFromUrl = () => actionCreator(lockedSelectorActionTypes.VALID_SELECTIONS_FROM_URL)();
 export const invalidSelectionsFromUrl = (error: string) => actionCreator(lockedSelectorActionTypes.INVALID_SELECTIONS_FROM_URL)({ error });
 export const setCurrentOrgUnitBasedOnUrl = (orgUnit: Object) => actionCreator(lockedSelectorActionTypes.SET_ORG_UNIT_BASED_ON_URL)(orgUnit);

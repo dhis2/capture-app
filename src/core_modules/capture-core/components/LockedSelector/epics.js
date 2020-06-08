@@ -2,7 +2,7 @@
 import i18n from '@dhis2/d2-i18n';
 import {
     lockedSelectorActionTypes,
-    searchPageSelectorBatchActionTypes,
+    lockedSelectorBatchActionTypes,
     invalidSelectionsFromUrl,
     validSelectionsFromUrl,
     setCurrentOrgUnitBasedOnUrl,
@@ -35,8 +35,8 @@ export const searchPageSelectorUpdateURLEpic = (action$: InputObservable, store:
         lockedSelectorActionTypes.SET_ORG_UNIT,
         lockedSelectorActionTypes.SET_PROGRAM_ID,
         lockedSelectorActionTypes.RESET_PROGRAM_ID,
-        searchPageSelectorBatchActionTypes.START_AGAIN,
-        searchPageSelectorBatchActionTypes.RESET_PROGRAM_AND_CATEGORY_OPTION,
+        lockedSelectorBatchActionTypes.START_AGAIN,
+        lockedSelectorBatchActionTypes.RESET_PROGRAM_AND_CATEGORY_OPTION,
     )
         .map(() => {
             const {
@@ -68,7 +68,6 @@ export const selectionsFromUrlEmptyOrgUnitForSearchEpic = (action$: InputObserva
         .map(() => setEmptyOrgUnitBasedOnUrl());
 
 export const validationForSearchUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.ofType(
         lockedSelectorActionTypes.SET_ORG_UNIT_BASED_ON_URL,
         lockedSelectorActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL)

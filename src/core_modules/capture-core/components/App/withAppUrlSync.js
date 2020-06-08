@@ -3,15 +3,9 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { paramsSelector } from './appSync.selectors';
 import LoadingMaskForPage from '../LoadingMasks/LoadingMaskForPage.component';
-import {
-    updateSelectionsFromUrl as updateSelectionsFromUrlForNewEnrollment,
-} from '../Pages/NewEnrollment';
-import {
-    viewEventFromUrl,
-} from '../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
-import {
-    updateSearchSelectionsFromUrl,
-} from '../LockedSelector';
+import { updateSelectionsFromUrl as updateSelectionsFromUrlForNewEnrollment } from '../Pages/NewEnrollment';
+import { viewEventFromUrl } from '../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { updateSelectionsFromUrl } from '../LockedSelector';
 
 import { reservedUrlKeys } from '../UrlSync/withUrlSync';
 import type { UpdateDataContainer } from '../UrlSync/withUrlSync';
@@ -84,9 +78,9 @@ const specificationForPages = {
 };
 
 const updaterForPages = {
-    [pageKeys.MAIN]: updateSearchSelectionsFromUrl,
-    [pageKeys.NEW_EVENT]: updateSearchSelectionsFromUrl,
-    [pageKeys.SEARCH]: updateSearchSelectionsFromUrl,
+    [pageKeys.MAIN]: updateSelectionsFromUrl,
+    [pageKeys.NEW_EVENT]: updateSelectionsFromUrl,
+    [pageKeys.SEARCH]: updateSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
     [pageKeys.NEW_ENROLLMENT]: updateSelectionsFromUrlForNewEnrollment,
 };
@@ -184,10 +178,8 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
     });
 
     const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-        onUpdateFromUrl: (page: ?string, updateData: UpdateDataContainer) => {
-            let l;
-            return dispatch(updaterForPages[page](updateData));
-        },
+        onUpdateFromUrl: (page: ?string, updateData: UpdateDataContainer) =>
+            dispatch(updaterForPages[page](updateData)),
     });
 
     return connect(mapStateToProps, mapDispatchToProps)(AppUrlSyncer);

@@ -32,7 +32,7 @@ type Props = {
 type State = {
     openStartAgainWarning: boolean;
     openOrgUnitWarning: boolean;
-    openProgramWarning: ?Object; // uses the base action as open state for now
+    openProgramWarning: ?Object;
     openCatComboWarning: boolean;
     categoryIdToReset: string;
     openNewEventWarning: boolean;
@@ -107,8 +107,9 @@ class SelectorLevel extends Component<Props, State> {
     }
 
     handleAcceptProgram=() => {
-        // $FlowFixMe
-        this.props.onResetProgramId(this.state.openProgramWarning);
+        if (this.state.openProgramWarning) {
+            this.props.onResetProgramId(this.state.openProgramWarning);
+        }
         this.handleClose();
     }
 

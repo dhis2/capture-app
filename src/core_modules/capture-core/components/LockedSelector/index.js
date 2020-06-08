@@ -1,7 +1,7 @@
 export {
-    searchPageSelectorBatchActionTypes,
+    lockedSelectorBatchActionTypes,
     lockedSelectorActionTypes,
-    updateSearchSelectionsFromUrl,
+    updateSelectionsFromUrl,
     resetOrgUnitIdFromSearchPage,
     setOrgUnitFromSearchPage,
     setProgramIdFromSearchPage,
