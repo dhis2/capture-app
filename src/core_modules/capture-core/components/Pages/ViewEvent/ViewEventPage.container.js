@@ -1,5 +1,4 @@
 // @flow
-import React from 'react';
 import { connect } from 'react-redux';
 import ViewEventSelector from './ViewEventPage.component';
 import dataEntryHasChanges from '../../DataEntry/common/dataEntryHasChanges';
@@ -13,8 +12,7 @@ const mapStateToProps = (state: ReduxState) => {
         eventDetailsSection.showEditEvent &&
         dataEntryHasChanges(state, 'singleEvent-editEvent');
     return {
-        error: (state.activePage.selectionsError && state.activePage.selectionsError.error)
-          || (state.activePage.viewEventLoadError && state.activePage.viewEventLoadError.error),
+        error: state.activePage.viewEventLoadError && state.activePage.viewEventLoadError.error,
         ready: !state.activePage.isLoading,
         isUserInteractionInProgress,
         showAddRelationship: state.viewEventPage.showAddRelationship,
