@@ -16,7 +16,7 @@ import CategorySelector from './CategorySelector.component';
 import { Program } from '../../../../metaData';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
 import './programSelector.css';
-import LinkButton from '../../../Buttons/LinkButton.component';
+import LinkButton from '../../Buttons/LinkButton.component';
 
 const styles = (theme: Theme) => ({
     paper: {

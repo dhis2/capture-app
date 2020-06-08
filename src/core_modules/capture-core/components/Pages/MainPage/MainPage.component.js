@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import EventsListConnectivityWrapper from './EventsListConnectivityWrapper/EventsListConnectivityWrapper.container';
 import { TrackerProgramHandler } from '../../TrackerProgramHandler';
-import { LockedSelector } from '../components/LockedSelector/container';
+import { LockedSelector } from '../../LockedSelector/container';
 
 const getStyles = () => ({
     listContainer: {

@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import DataEntrySelectionsComplete from './SelectionsComplete/SelectionsComplete.container';
 import DataEntrySelectionsIncomplete from './SelectionsIncomplete/DataEntrySelectionsIncomplete.container';
 import { TrackerProgramHandler } from '../../TrackerProgramHandler';
-import { LockedSelector } from '../components/LockedSelector/container';
+import { LockedSelector } from '../../LockedSelector/container';
 
 const getStyles = () => ({
 
