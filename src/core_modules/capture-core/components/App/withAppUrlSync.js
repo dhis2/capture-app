@@ -95,7 +95,6 @@ const updaterForPages = {
     [pageKeys.SEARCH]: updateSearchSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
     [pageKeys.NEW_ENROLLMENT]: updateSelectionsFromUrlForNewEnrollment,
-    [pageKeys.SEARCH]: updateSearchSelectionsFromUrl,
 };
 
 const getUrlParts = (pathName: string) => {
