@@ -130,7 +130,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
 export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
 // $FlowSuppress
     action$.ofType(
-      lockedSelectorActionTypes.VALID_SELECTIONS_FROM_URL,
+        lockedSelectorActionTypes.VALID_SELECTIONS_FROM_URL,
         lockedSelectorActionTypes.OPEN_NEW_EVENT,
         lockedSelectorActionTypes.SET_CATEGORY_OPTION,
         lockedSelectorActionTypes.SET_PROGRAM_ID,

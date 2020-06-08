@@ -5,13 +5,13 @@ import ViewEventNewRelationshipWrapper from './Relationship/ViewEventNewRelation
 import { LockedSelector } from '../../LockedSelector/container';
 
 type Props = {
-  formInputInProgess: boolean,
+  isUserInteractionInProgress: boolean,
   showAddRelationship: boolean,
 };
 
-const ViewEventSelector = ({ formInputInProgess, showAddRelationship }: Props) => (
+const ViewEventSelector = ({ isUserInteractionInProgress, showAddRelationship }: Props) => (
     <div>
-        <LockedSelector formInputInProgess={formInputInProgess} />
+        <LockedSelector isUserInteractionInProgress={isUserInteractionInProgress} />
 
         {
             showAddRelationship ?

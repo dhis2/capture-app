@@ -2,7 +2,7 @@
 import { createReducerDescription } from '../../trackerRedux';
 import { lockedSelectorActionTypes } from '../../components/LockedSelector/actions';
 import {
-    actionTypes as viewEventPageActionTypes
+    actionTypes as viewEventPageActionTypes,
 } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../components/Pages/NewEvent';
 
@@ -51,6 +51,10 @@ export const searchPageDesc = createReducerDescription({
     }),
 
     [newEventDataEntryActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY]: state => ({
+        ...state,
+        dataEntryIsLoading: false,
+    }),
+    [newEventDataEntryActionTypes.NEW_EVENT_IN_DATAENTRY_OPENING_CANCEL]: state => ({
         ...state,
         dataEntryIsLoading: false,
     }),

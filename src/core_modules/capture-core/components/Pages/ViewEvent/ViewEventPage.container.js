@@ -8,7 +8,7 @@ import withErrorMessageHandler from '../../../HOC/withErrorMessageHandler';
 
 const mapStateToProps = (state: ReduxState) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
-    const formHasChanges =
+    const isUserInteractionInProgress =
         state.currentSelections.complete &&
         eventDetailsSection.showEditEvent &&
         dataEntryHasChanges(state, 'singleEvent-editEvent');
@@ -16,7 +16,7 @@ const mapStateToProps = (state: ReduxState) => {
         error: (state.activePage.selectionsError && state.activePage.selectionsError.error)
           || (state.activePage.viewEventLoadError && state.activePage.viewEventLoadError.error),
         ready: !state.activePage.isLoading,
-        formInputInProgess: formHasChanges,
+        isUserInteractionInProgress,
         showAddRelationship: state.viewEventPage.showAddRelationship,
     };
 };

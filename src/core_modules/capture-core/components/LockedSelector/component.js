@@ -21,7 +21,7 @@ type Props = {
     onResetAllCategoryOptions: () => void,
     onStartAgain: () => void,
     onResetProgramId: (baseAction: ReduxAction<any, any>) => void,
-    formInputInProgess: boolean,
+    isUserInteractionInProgress: boolean,
     onResetDataEntry: () => void,
     inAddRelationship: boolean,
     selectedOrgUnitId: string,
@@ -52,7 +52,7 @@ class SelectorLevel extends Component<Props, State> {
         };
     }
 
-    dontShowWarning = () => !this.props.formInputInProgess && !this.props.inAddRelationship;
+    dontShowWarning = () => !this.props.isUserInteractionInProgress;
 
     handleOpenStartAgainWarning=() => {
         if (this.dontShowWarning()) {
@@ -119,7 +119,7 @@ class SelectorLevel extends Component<Props, State> {
     }
 
     handleClickNew=() => {
-        if (this.props.formInputInProgess) {
+        if (this.props.isUserInteractionInProgress) {
             this.setState({ openNewEventWarning: true });
             return;
         }
