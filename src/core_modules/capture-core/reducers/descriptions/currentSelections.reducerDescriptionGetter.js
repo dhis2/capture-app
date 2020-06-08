@@ -4,7 +4,7 @@ import type { Updaters } from '../../trackerRedux/trackerReducer';
 import { actionTypes as mainSelectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
 import {
     actionTypes as quickSelectorActionTypes,
-} from '../../components/QuickSelector/actions/QuickSelector.actions';
+} from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
 import {
     dataEntryUrlActionTypes as newEventDataEntryUrlActionTypes,
     selectorActionTypes as newEventSelectorActionTypes,

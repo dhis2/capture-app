@@ -13,7 +13,7 @@ import {
     openNewEventPageFromViewEventPage,
     batchActionTypes,
 } from './ViewEventSelector.actions';
-import { resetProgramIdBase } from '../../../QuickSelector/actions/QuickSelector.actions';
+import { resetProgramIdBase } from '../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
 import dataEntryHasChanges from '../../../DataEntry/common/dataEntryHasChanges';
 
 

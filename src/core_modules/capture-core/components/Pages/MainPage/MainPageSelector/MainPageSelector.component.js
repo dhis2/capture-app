@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import QuickSelector from '../../../QuickSelector/QuickSelector.container';
+import QuickSelector from '../../../LockedSelector/QuickSelector/QuickSelector.container';
 import MainPage from '../MainPage.container';
 
 type Props = {

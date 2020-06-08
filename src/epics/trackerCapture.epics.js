@@ -189,8 +189,12 @@ import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../init/en
 
 import getDataEntryEpics from './getDataEntryEpics';
 
-import { searchPageSelectorUpdateURLEpic } from '../core_modules/capture-core/components/Pages/Search/SearchPageSelector/SearchPageSelector.epics';
-import { validationForSearchUrlUpdateEpic, getOrgUnitDataForSearchUrlUpdateEpic, selectionsFromUrlEmptyOrgUnitForSearchEpic } from "../core_modules/capture-core/components/Pages/Search/SearchPageSelector/urlSelections.epics";
+import {
+    searchPageSelectorUpdateURLEpic,
+    validationForSearchUrlUpdateEpic,
+    getOrgUnitDataForSearchUrlUpdateEpic,
+    selectionsFromUrlEmptyOrgUnitForSearchEpic,
+} from '../core_modules/capture-core/components/LockedSelector/epics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,

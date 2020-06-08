@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import QuickSelector from '../../../QuickSelector/QuickSelector.container';
+import QuickSelector from '../../../LockedSelector/QuickSelector/QuickSelector.container';
 import IsSelectionsCompleteLevel from '../IsSelectionsCompleteLevel/IsSelectionsCompleteLevel.container';
 import ConfirmDialog from '../../../Dialogs/ConfirmDialog.component';
 

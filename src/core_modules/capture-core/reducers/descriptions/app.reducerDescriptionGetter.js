@@ -18,7 +18,7 @@ import { actionTypes as eventListActionTypes } from '../../components/Pages/Main
 import { actionTypes as connectivityActionTypes } from '../../components/Connectivity/connectivity.actions';
 import {
     actionTypes as setCurrentSelectionsActionTypes,
-} from '../../components/QuickSelector/actions/QuickSelector.actions';
+} from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
 import {
     actionTypes as mainPageSelectorActionTypes,
 } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';

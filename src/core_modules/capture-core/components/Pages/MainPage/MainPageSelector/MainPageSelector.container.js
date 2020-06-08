@@ -13,7 +13,7 @@ import {
     openNewEventPageFromMainPage,
     batchActionTypes,
 } from './MainPageSelector.actions';
-import { resetProgramIdBase } from '../../../QuickSelector/actions/QuickSelector.actions';
+import { resetProgramIdBase } from '../../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
 
 const mapStateToProps = (state: ReduxState) => ({
     selectedProgramId: state.currentSelections.programId,

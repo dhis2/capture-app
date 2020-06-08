@@ -3,7 +3,7 @@ import { createReducerDescription } from '../../trackerRedux';
 import { lockedSelectorActionTypes } from '../../components/LockedSelector/actions';
 import {
     actionTypes as viewEventPageActionTypes
-} from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+} from '../../components/Pages/ViewEvent/viewEvent.actions';
 import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../components/Pages/NewEvent';
 
 export const searchPageDesc = createReducerDescription({
