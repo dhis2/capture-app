@@ -48,10 +48,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         const newState = { ...state, page: action.payload.nextPage };
         return newState;
     },
-    [searchPageSelectorActonTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
-        const newState = { ...state, page: action.payload.nextPage };
-        return newState;
-    },
     [editEventActionTypes.EDIT_EVENT_FROM_URL]: (state, action) => {
         const newState = { ...state, page: action.payload.page };
         return newState;
@@ -214,14 +210,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         };
         return newState;
     },
-    [searchPageSelectorActonTypes.RESET_ORG_UNIT_ID]: (state) => {
-        const newState = {
-            ...state,
-            page: null,
-            locationSwitchInProgress: true,
-        };
-        return newState;
-    },
     [editEventPageSelectorActionTypes.SET_ORG_UNIT]: (state) => {
         const newState = { ...state };
         newState.locationSwitchInProgress = true;
@@ -270,11 +258,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
     [newEventPageSelectorActionTypes.SET_ORG_UNIT]: (state) => {
-        const newState = { ...state };
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [searchPageSelectorActonTypes.SET_ORG_UNIT]: (state) => {
         const newState = { ...state };
         newState.locationSwitchInProgress = true;
         return newState;

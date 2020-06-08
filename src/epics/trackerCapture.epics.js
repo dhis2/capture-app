@@ -53,7 +53,7 @@ import {
     getOrgUnitOnUrlUpdateEpic,
     openEditPageLocationChangeEpic,
     getEventOpeningFromEventListEpic,
-} from 'capture-core/components/Pages/EditEvent/epics/editEvent.epics';
+} from 'capture-core/components/Pages/EditEvent/editEvent.epics';
 import {
     openEditEventInDataEntryEpic,
     runRulesOnUpdateDataEntryFieldForEditSingleEventEpic,
