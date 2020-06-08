@@ -273,38 +273,33 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
 
-    [lockedSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
-        const newState = { ...state, page: action.payload.nextPage };
-        return newState;
-    },
-    [lockedSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
-        const newState = { ...state };
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [lockedSelectorActionTypes.SET_ORG_UNIT]: (state) => {
-        const newState = { ...state };
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [lockedSelectorActionTypes.SET_PROGRAM_ID]: (state) => {
-        const newState = { ...state };
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [lockedSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
-        const newState = { ...state };
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [lockedSelectorActionTypes.OPEN_NEW_EVENT]: (state) => {
-        const newState = { ...state };
-        newState.page = 'newEvent';
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [lockedSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
-        const newState = { ...state, page: action.payload.nextPage };
-        return newState;
-    },
+    [lockedSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => ({
+        ...state,
+        page: action.payload.nextPage,
+    }),
+    [lockedSelectorActionTypes.RESET_ORG_UNIT_ID]: state => ({
+        ...state,
+        locationSwitchInProgress: true,
+    }),
+    [lockedSelectorActionTypes.SET_ORG_UNIT]: state => ({
+        ...state,
+        locationSwitchInProgress: true,
+    }),
+    [lockedSelectorActionTypes.SET_PROGRAM_ID]: state => ({
+        ...state,
+        locationSwitchInProgress: true,
+    }),
+    [lockedSelectorActionTypes.RESET_PROGRAM_ID]: state => ({
+        ...state,
+        locationSwitchInProgress: true,
+    }),
+    [lockedSelectorActionTypes.OPEN_NEW_EVENT]: state => ({
+        ...state,
+        page: 'newEvent',
+        locationSwitchInProgress: true,
+    }),
+    [lockedSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => ({
+        ...state,
+        page: action.payload.nextPage,
+    }),
 }, 'app');

@@ -11,9 +11,7 @@ import {
 import {
     urlActionTypes as newEnrollmentUrlActionTypes,
 } from '../../components/Pages/NewEnrollment';
-
-import { lockedSelectorActionTypes } from "../../components/LockedSelector/actions";
-
+import { lockedSelectorActionTypes } from '../../components/LockedSelector/actions';
 import {
     actionTypes as mainPageSelectorActionTypes,
 } from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
@@ -84,17 +82,14 @@ export const organisationUnitDesc = createReducerDescription({
         return newState;
     },
 
-    [lockedSelectorActionTypes.SET_ORG_UNIT_BASED_ON_URL]: (state, action) => {
-        const newState = {
-            ...state,
-            [action.payload.id]: action.payload,
-        };
-        return newState;
-    },
-    [lockedSelectorActionTypes.SET_ORG_UNIT]: (state, action) => {
-        const newState = { ...state, [action.payload.orgUnit.id]: action.payload.orgUnit };
-        return newState;
-    },
+    [lockedSelectorActionTypes.SET_ORG_UNIT_BASED_ON_URL]: (state, action) => ({
+        ...state,
+        [action.payload.id]: action.payload,
+    }),
+    [lockedSelectorActionTypes.SET_ORG_UNIT]: (state, action) => ({
+        ...state,
+        [action.payload.orgUnit.id]: action.payload.orgUnit,
+    }),
 }, 'organisationUnits');
 
 export const organisationUnitRootsDesc = createReducerDescription({
