@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-06-08T08:49:45.695Z\n"
-"PO-Revision-Date: 2020-06-08T08:49:45.695Z\n"
+"POT-Creation-Date: 2020-06-08T15:30:55.012Z\n"
+"PO-Revision-Date: 2020-06-08T15:30:55.012Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -483,9 +483,6 @@ msgid "Active"
 msgstr ""
 
 msgid "Completed"
-msgstr ""
-
-msgid "Selected program is invalid for registering unit"
 msgstr ""
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"

@@ -22,27 +22,6 @@ export const organisationUnitDesc = createReducerDescription({
         newState[orgUnit.id] = orgUnit;
         return newState;
     },
-    // [mainPageSelectionsActionTypes.ORG_UNIT_DATA_RETRIVED]: (state, action) => {
-    //     const newState = {
-    //         ...state,
-    //         [action.payload.id]: action.payload,
-    //     };
-    //     return newState;
-    // },
-    // [mainPageSelectionsActionTypes.SET_ORG_UNIT_BASED_ON_URL]: (state, action) => {
-    //     const newState = {
-    //         ...state,
-    //         [action.payload.id]: action.payload,
-    //     };
-    //     return newState;
-    // },
-    // [newEventDataEntryUrlActionTypes.SET_ORG_UNIT_BASED_ON_URL]: (state, action) => {
-    //     const newState = {
-    //         ...state,
-    //         [action.payload.id]: action.payload,
-    //     };
-    //     return newState;
-    // },
     [newEnrollmentUrlActionTypes.SET_ORG_UNIT_BASED_ON_URL]: (state, action) => ({
         ...state,
         [action.payload.orgUnit.id]: action.payload.orgUnit,
@@ -50,19 +29,6 @@ export const organisationUnitDesc = createReducerDescription({
     [setOrgUnitActionTypes.STORE_ORG_UNIT_OBJECT]: (state, action) => {
         const newState = { ...state };
         const orgUnit = action.payload;
-        newState[orgUnit.id] = orgUnit;
-        return newState;
-    },
-    [lockedSelectorActionTypes.SET_ORG_UNIT_BASED_ON_URL]: (state, action) => {
-        const newState = {
-            ...state,
-            [action.payload.id]: action.payload,
-        };
-        return newState;
-    },
-    [newEventSelectorActionTypes.SET_ORG_UNIT]: (state, action) => {
-        const newState = { ...state };
-        const orgUnit = action.payload.orgUnit;
         newState[orgUnit.id] = orgUnit;
         return newState;
     },
