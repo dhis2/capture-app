@@ -3,13 +3,14 @@
 # Viktor Varland <viktor@dhis2.org>, 2019
 # phil_dhis2, 2019
 # Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2020
+# Ge Joao <gsimango@saudigitus.org>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
 "POT-Creation-Date: 2019-11-18T14:43:03.753Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
-"Last-Translator: Gabriela Rodriguez <grodriguezcoronado@gmail.com>, 2020\n"
+"Last-Translator: Ge Joao <gsimango@saudigitus.org>, 2020\n"
 "Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -105,7 +106,7 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 msgid "Unsaved changes"
-msgstr ""
+msgstr "Alterações não salvas"
 
 msgid "Leaving this page will discard the changes you made to this event."
 msgstr ""
@@ -437,7 +438,7 @@ msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "Assigned user"
-msgstr ""
+msgstr "Usuário designado"
 
 msgid "Relationships"
 msgstr "Relacionamentos"
@@ -567,7 +568,7 @@ msgid "Review Duplicates"
 msgstr ""
 
 msgid "Search results"
-msgstr ""
+msgstr "Procurar Resultados"
 
 msgid "No {{trackedEntityTypeName}} found."
 msgstr ""
