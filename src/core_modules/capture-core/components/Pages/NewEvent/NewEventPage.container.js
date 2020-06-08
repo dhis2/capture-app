@@ -2,6 +2,7 @@
 import { connect } from 'react-redux';
 import NewEventPage from './NewEventPage.component';
 import dataEntryHasChanges from '../../DataEntry/common/dataEntryHasChanges';
+import withLoadingIndicator from "../../../HOC/withLoadingIndicator";
 
 const mapStateToProps = (state: ReduxState) => {
     const isUserInteractionInProgress =
@@ -9,9 +10,10 @@ const mapStateToProps = (state: ReduxState) => {
       dataEntryHasChanges(state, 'singleEvent-newEvent')) ||
       state.newEventPage.showAddRelationship;
     return {
+        ready: !state.activePage.isLoading,
         isSelectionsComplete: !!state.currentSelections.complete,
         isUserInteractionInProgress,
     };
 };
 
-export default connect(mapStateToProps)(NewEventPage);
+export default connect(mapStateToProps)(withLoadingIndicator()(NewEventPage));
