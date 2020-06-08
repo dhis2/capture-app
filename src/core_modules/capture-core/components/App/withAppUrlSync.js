@@ -17,7 +17,7 @@ import {
 } from '../Pages/ViewEvent/viewEvent.actions';
 import {
     updateSearchSelectionsFromUrl,
-} from '../Pages/Search/SearchPageSelector/SearchPageSelector.actions';
+} from '../LockedSelector/actions';
 
 import { reservedUrlKeys } from '../UrlSync/withUrlSync';
 import type { UpdateDataContainer } from '../UrlSync/withUrlSync';
@@ -92,6 +92,7 @@ const specificationForPages = {
 const updaterForPages = {
     [pageKeys.MAIN]: updateMainSelectionsFromUrlForMainPage,
     [pageKeys.NEW_EVENT]: updateSelectionsFromUrlForNewEvent,
+    [pageKeys.SEARCH]: updateSearchSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
     [pageKeys.NEW_ENROLLMENT]: updateSelectionsFromUrlForNewEnrollment,
     [pageKeys.SEARCH]: updateSearchSelectionsFromUrl,

@@ -104,11 +104,11 @@ import {
     setOrgUnit,
     setProgram,
     goBackToListContext,
-} from 'capture-core/components/QuickSelector/epics/setSelection.epics';
+} from 'capture-core/components/LockedSelector/QuickSelector/epics/setSelection.epics';
 import {
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
-} from 'capture-core/components/QuickSelector';
+} from 'capture-core/components/LockedSelector/QuickSelector';
 import {
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
 } from 'capture-core/components/Pages/epics/resetProgramAfterSettingOrgUnitIfApplicable.epic';

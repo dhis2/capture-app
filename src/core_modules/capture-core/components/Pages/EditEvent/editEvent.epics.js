@@ -3,8 +3,8 @@ import log from 'loglevel';
 import { push } from 'connected-react-router';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
-import getErrorMessageAndDetails from '../../../../utils/errors/getErrorMessageAndDetails';
-import getOrganisationUnitApiSpec from '../../../../api/apiSpecifications/organisationUnit.apiSpecificationGetter';
+import getErrorMessageAndDetails from '../../../utils/errors/getErrorMessageAndDetails';
+import getOrganisationUnitApiSpec from '../../../api/apiSpecifications/organisationUnit.apiSpecificationGetter';
 import {
     actionTypes as editEventActionTypes,
     eventFromUrlCouldNotBeRetrieved,
@@ -12,9 +12,9 @@ import {
     orgUnitRetrievedOnUrlUpdate,
     orgUnitCouldNotBeRetrievedOnUrlUpdate,
     startOpenEventForEditInDataEntry,
-} from '../editEvent.actions';
-import { actionTypes as eventListActionTypes } from '../../MainPage/EventsList/eventsList.actions';
-import { getEvent } from '../../../../events/eventRequests';
+} from './editEvent.actions';
+import { actionTypes as eventListActionTypes } from '../MainPage/EventsList/eventsList.actions';
+import { getEvent } from '../../../events/eventRequests';
 
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress

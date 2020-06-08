@@ -1,9 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import QuickSelector from '../../../QuickSelector/QuickSelector.container';
-import IsSelectionsCompleteLevel from '../IsSelectionsCompleteLevel/IsSelectionsCompleteLevel.container';
-import ConfirmDialog from '../../../Dialogs/ConfirmDialog.component';
+import QuickSelector from './QuickSelector/QuickSelector.container';
+import ConfirmDialog from '../Dialogs/ConfirmDialog.component';
 
 const defaultDialogProps = {
     header: i18n.t('Unsaved changes'),
@@ -13,6 +12,7 @@ const defaultDialogProps = {
 };
 
 type Props = {
+    onOpenNewEventPage: (selectedProgramId: string, selectedOrgUnitId: string) => void,
     onSetOrgUnit: (id: string, orgUnit: Object) => void,
     onResetOrgUnitId: () => void,
     onSetProgramId: (id: string) => void,
@@ -24,6 +24,9 @@ type Props = {
     formInputInProgess: boolean,
     onResetDataEntry: () => void,
     inAddRelationship: boolean,
+    selectedOrgUnitId: string,
+    selectedProgramId: string,
+    render: (one: Object) => void
 };
 
 type State = {
@@ -36,18 +39,6 @@ type State = {
 };
 
 class SelectorLevel extends Component<Props, State> {
-    handleOpenStartAgainWarning: () => void;
-    handleOpenOrgUnitWarning: () => void;
-    handleOpenProgramWarning: () => void;
-    handleOpenCatComboWarning: (categoryId: string) => void;
-    handleClose: () => void;
-    handleAcceptStartAgain: () => void;
-    handleAcceptOrgUnit: () => void;
-    handleAcceptProgram: () => void;
-    handleAcceptCatCombo: () => void;
-    handleClickNew: () => void;
-    handleAcceptNew: () => void;
-
     constructor(props: Props) {
         super(props);
 
@@ -59,23 +50,11 @@ class SelectorLevel extends Component<Props, State> {
             categoryIdToReset: '',
             openNewEventWarning: false,
         };
-
-        this.handleOpenStartAgainWarning = this.handleOpenStartAgainWarning.bind(this);
-        this.handleOpenOrgUnitWarning = this.handleOpenOrgUnitWarning.bind(this);
-        this.handleOpenProgramWarning = this.handleOpenProgramWarning.bind(this);
-        this.handleOpenCatComboWarning = this.handleOpenCatComboWarning.bind(this);
-        this.handleClose = this.handleClose.bind(this);
-        this.handleAcceptStartAgain = this.handleAcceptStartAgain.bind(this);
-        this.handleAcceptOrgUnit = this.handleAcceptOrgUnit.bind(this);
-        this.handleAcceptProgram = this.handleAcceptProgram.bind(this);
-        this.handleAcceptCatCombo = this.handleAcceptCatCombo.bind(this);
-        this.handleClickNew = this.handleClickNew.bind(this);
-        this.handleAcceptNew = this.handleAcceptNew.bind(this);
     }
 
     dontShowWarning = () => !this.props.formInputInProgess && !this.props.inAddRelationship;
 
-    handleOpenStartAgainWarning() {
+    handleOpenStartAgainWarning=() => {
         if (this.dontShowWarning()) {
             this.props.onStartAgain();
             return;
@@ -83,7 +62,7 @@ class SelectorLevel extends Component<Props, State> {
         this.setState({ openStartAgainWarning: true });
     }
 
-    handleOpenOrgUnitWarning() {
+    handleOpenOrgUnitWarning=() => {
         if (this.dontShowWarning()) {
             this.props.onResetOrgUnitId();
             return;
@@ -91,7 +70,7 @@ class SelectorLevel extends Component<Props, State> {
         this.setState({ openOrgUnitWarning: true });
     }
 
-    handleOpenProgramWarning(baseAction: ReduxAction<any, any>) {
+    handleOpenProgramWarning=(baseAction: ReduxAction<any, any>) => {
         if (this.dontShowWarning()) {
             this.props.onResetProgramId(baseAction);
             return;
@@ -99,7 +78,7 @@ class SelectorLevel extends Component<Props, State> {
         this.setState({ openProgramWarning: baseAction });
     }
 
-    handleOpenCatComboWarning(categoryId: string) {
+    handleOpenCatComboWarning=(categoryId: string) => {
         if (this.dontShowWarning()) {
             this.props.onResetCategoryOption(categoryId);
             return;
@@ -107,7 +86,7 @@ class SelectorLevel extends Component<Props, State> {
         this.setState({ openCatComboWarning: true, categoryIdToReset: categoryId });
     }
 
-    handleClose() {
+    handleClose=() => {
         this.setState({
             openStartAgainWarning: false,
             openOrgUnitWarning: false,
@@ -117,59 +96,87 @@ class SelectorLevel extends Component<Props, State> {
         });
     }
 
-    handleAcceptStartAgain() {
+    handleAcceptStartAgain=() => {
         this.props.onStartAgain();
         this.handleClose();
     }
 
-    handleAcceptOrgUnit() {
+    handleAcceptOrgUnit=() => {
         this.props.onResetOrgUnitId();
         this.handleClose();
     }
 
-    handleAcceptProgram() {
+    handleAcceptProgram=() => {
         // $FlowFixMe
         this.props.onResetProgramId(this.state.openProgramWarning);
         this.handleClose();
     }
 
-    handleAcceptCatCombo() {
+    handleAcceptCatCombo = () => {
         this.props.onResetCategoryOption(this.state.categoryIdToReset);
         this.handleClose();
     }
 
-    handleClickNew() {
-        if (this.dontShowWarning()) {
+    handleClickNew=() => {
+        if (this.props.formInputInProgess) {
+            this.setState({ openNewEventWarning: true });
             return;
         }
-        this.setState({ openNewEventWarning: true });
+        this.props.onOpenNewEventPage(this.props.selectedProgramId, this.props.selectedOrgUnitId);
     }
 
-    handleAcceptNew() {
-        this.props.onResetDataEntry();
+    handleAcceptNew =() => {
+        this.props.onOpenNewEventPage(this.props.selectedProgramId, this.props.selectedOrgUnitId);
         this.handleClose();
     }
 
+
     render() {
+        const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
+
         return (
             <div>
                 <QuickSelector
-                    onSetOrgUnit={this.props.onSetOrgUnit}
+                    onSetOrgUnit={onSetOrgUnit}
+                    onSetProgramId={onSetProgramId}
+                    onSetCategoryOption={onSetCategoryOption}
+                    onResetAllCategoryOptions={onResetAllCategoryOptions}
                     onResetOrgUnitId={this.handleOpenOrgUnitWarning}
-                    onSetProgramId={this.props.onSetProgramId}
                     onResetProgramId={this.handleOpenProgramWarning}
-                    onSetCategoryOption={this.props.onSetCategoryOption}
                     onResetCategoryOption={this.handleOpenCatComboWarning}
-                    onResetAllCategoryOptions={this.props.onResetAllCategoryOptions}
                     onStartAgain={this.handleOpenStartAgainWarning}
                     onClickNew={this.handleClickNew}
                 />
-                <IsSelectionsCompleteLevel />
-                <ConfirmDialog onConfirm={this.handleAcceptStartAgain} open={this.state.openStartAgainWarning} onCancel={this.handleClose} {...defaultDialogProps} />
-                <ConfirmDialog onConfirm={this.handleAcceptOrgUnit} open={this.state.openOrgUnitWarning} onCancel={this.handleClose} {...defaultDialogProps} />
-                <ConfirmDialog onConfirm={this.handleAcceptProgram} open={!!this.state.openProgramWarning} onCancel={this.handleClose} {...defaultDialogProps} />
-                <ConfirmDialog onConfirm={this.handleAcceptCatCombo} open={this.state.openCatComboWarning} onCancel={this.handleClose} {...defaultDialogProps} />
-                <ConfirmDialog onConfirm={this.handleAcceptNew} open={this.state.openNewEventWarning} onCancel={this.handleClose} {...defaultDialogProps} />
+                <ConfirmDialog
+                    onConfirm={this.handleAcceptStartAgain}
+                    open={this.state.openStartAgainWarning}
+                    onCancel={this.handleClose}
+                    {...defaultDialogProps}
+                />
+                <ConfirmDialog
+                    onConfirm={this.handleAcceptOrgUnit}
+                    open={this.state.openOrgUnitWarning}
+                    onCancel={this.handleClose}
+                    {...defaultDialogProps}
+                />
+                <ConfirmDialog
+                    onConfirm={this.handleAcceptProgram}
+                    open={!!this.state.openProgramWarning}
+                    onCancel={this.handleClose}
+                    {...defaultDialogProps}
+                />
+                <ConfirmDialog
+                    onConfirm={this.handleAcceptCatCombo}
+                    open={this.state.openCatComboWarning}
+                    onCancel={this.handleClose}
+                    {...defaultDialogProps}
+                />
+                <ConfirmDialog
+                    onConfirm={this.handleAcceptNew}
+                    open={this.state.openNewEventWarning}
+                    onCancel={this.handleClose}
+                    {...defaultDialogProps}
+                />
             </div>
         );
     }

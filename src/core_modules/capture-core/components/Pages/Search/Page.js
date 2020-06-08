@@ -1,19 +1,12 @@
 // @flow
-import { connect } from 'react-redux';
-import SearchPageSelector from './SearchPageSelector/SearchPageSelector.container';
-import withErrorMessageHandler from '../../../HOC/withErrorMessageHandler';
-import withLoadingIndicator from '../../../HOC/withLoadingIndicator';
+import React from 'react';
+import { LockedSelector } from '../../LockedSelector/container';
 
-const mapStateToProps = (state: ReduxState) => ({
-    error: state.searchPage.selectionsError,
-    ready: !state.searchPage.isLoading,
-});
-
-
-const SearchPage = connect(mapStateToProps, () => ({}))(
-    withLoadingIndicator()(
-        withErrorMessageHandler()(SearchPageSelector),
-    ));
-
+const SearchPage = () => (
+    <div>
+        <LockedSelector />
+        <div>hello from the Search Page</div>
+    </div>
+);
 
 export default SearchPage;

@@ -9,7 +9,7 @@ import NetworkStatusBadge from 'capture-core/components/NetworkStatusBadge/Netwo
 
 import { NewEventPage } from 'capture-core/components/Pages/NewEvent';
 import { NewEnrollmentPage } from 'capture-core/components/Pages/NewEnrollment';
-import MainPageEntry from 'capture-core/components/Pages/MainPage/MainPageEntry/MainPageEntry.container';
+import SearchPage from '../../core_modules/capture-core/components/Pages/Search/Page';
 import ViewEventEntry from 'capture-core/components/Pages/ViewEvent/ViewEventEntry/ViewEventEntry.container';
 import SearchPage from "../../core_modules/capture-core/components/Pages/Search/Page";
 

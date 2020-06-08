@@ -9,8 +9,8 @@ import {
     setSearchRootsFailed,
     showLoadingIndicator,
 } from '../actions/orgUnitList.actions';
-import { set as setStoreRoots } from '../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
-import { LOADING_INDICATOR_TIMEOUT } from '../../../constants';
+import { set as setStoreRoots } from '../../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
+import { LOADING_INDICATOR_TIMEOUT } from '../../../../constants';
 
 const RETRIEVE_ERROR = 'Could not retrieve registering unit list';
 

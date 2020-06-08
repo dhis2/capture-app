@@ -32,8 +32,8 @@ import {
     urlActionTypes as newEnrollmentUrlActionTypes,
 } from '../../components/Pages/NewEnrollment';
 import {
-    searchPageSelectorActonTypes,
-} from '../../components/Pages/Search/SearchPageSelector/SearchPageSelector.actions';
+    lockedSelectorActionTypes,
+} from '../../components/LockedSelector/actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';

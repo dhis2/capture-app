@@ -1,5 +1,5 @@
 // @flow
-import { actionCreator } from '../../../actions/actions.utils';
+import { actionCreator } from '../../../../actions/actions.utils';
 
 export const actionTypes = {
     SET_ORG_UNIT_ID: 'setOrgUnitId',

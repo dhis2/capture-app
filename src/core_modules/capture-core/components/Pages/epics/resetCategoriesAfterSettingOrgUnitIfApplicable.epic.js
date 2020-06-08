@@ -19,6 +19,7 @@ import {
 
 import { getUserStorageController } from '../../../storageControllers';
 import { userStores } from '../../../storageControllers/stores';
+import { lockedSelectorActionTypes } from '../../LockedSelector/actions';
 
 
 async function isOptionAssociatedWithOrganisationUnit(categoryOptionId: string, orgUnitId: string) {

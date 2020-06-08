@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
-import SearchPageSelector from './SearchPageSelector.component';
+import SearchPageSelector from './component';
 import {
     resetOrgUnitIdFromSearchPage,
     setOrgUnitFromSearchPage,
@@ -10,14 +10,19 @@ import {
     setCategoryOptionFromSearchPage,
     resetCategoryOptionFromSearchPage,
     resetAllCategoryOptionsFromSearchPage,
-    openNewEventPageFromSearchPage,
-    batchActionTypes,
-} from './SearchPageSelector.actions';
-import { resetProgramIdBase } from '../../../QuickSelector/actions/QuickSelector.actions';
+    openNewEventPage,
+    searchPageSelectorBatchActionTypes,
+} from './actions';
+import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
+import withLoadingIndicator from '../../HOC/withLoadingIndicator';
+import withErrorMessageHandler from '../../HOC/withErrorMessageHandler';
+
 
 const mapStateToProps = (state: ReduxState) => ({
     selectedProgramId: state.currentSelections.programId,
     selectedOrgUnitId: state.currentSelections.orgUnitId,
+    error: state.activePage.selectionsError && state.activePage.selectionsError.error,
+    ready: !state.activePage.isLoading,
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
@@ -39,8 +44,8 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onResetAllCategoryOptions: () => {
         dispatch(resetAllCategoryOptionsFromSearchPage());
     },
-    onOpenNewEventPage: (programId: string, orgUnitId: string) => {
-        dispatch(openNewEventPageFromSearchPage(programId, orgUnitId));
+    onOpenNewEventPage: (selectedProgramId, selectedOrgUnitId) => {
+        dispatch(openNewEventPage(selectedProgramId, selectedOrgUnitId));
     },
     onStartAgain: () => {
         dispatch(batchActions([
@@ -48,16 +53,17 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
             resetProgramIdFromSearchPage(),
             resetAllCategoryOptionsFromSearchPage(),
             resetProgramIdBase(),
-        ], batchActionTypes.START_AGAIN));
+        ], searchPageSelectorBatchActionTypes.START_AGAIN));
     },
     onResetProgramId: (baseAction: ReduxAction<any, any>) => {
         dispatch(batchActions([
             resetProgramIdFromSearchPage(),
             resetAllCategoryOptionsFromSearchPage(),
             baseAction,
-        ], batchActionTypes.RESET_PROGRAM_AND_CATEGORY_OPTION));
+        ], searchPageSelectorBatchActionTypes.RESET_PROGRAM_AND_CATEGORY_OPTION));
     },
 });
 
-// $FlowSuppress
-export default connect(mapStateToProps, mapDispatchToProps)(SearchPageSelector);
+const SelectorWithLoadingAndErrorMessages = withLoadingIndicator()(withErrorMessageHandler()(SearchPageSelector));
+
+export const LockedSelector = connect(mapStateToProps, mapDispatchToProps)(SelectorWithLoadingAndErrorMessages);

@@ -1,8 +1,8 @@
 // @flow
 import { connect } from 'react-redux';
-import { OrgUnitField } from '../FormFields/New';
+import { OrgUnitField } from '../../FormFields/New';
 import { searchOrgUnits, clearOrgUnitsSearch } from './actions/orgUnitList.actions';
-import { get as getOrgUnitRoots } from '../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
+import { get as getOrgUnitRoots } from '../../FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 
 const mapStateToProps = (state: ReduxState) => {
     const regUnitRootsState = getOrgUnitRoots('regUnit') || getOrgUnitRoots('captureRoots');

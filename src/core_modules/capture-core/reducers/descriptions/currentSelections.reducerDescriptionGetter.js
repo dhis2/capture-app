@@ -31,8 +31,8 @@ import {
     urlActionTypes as newEnrollmentUrlActionTypes,
 } from '../../components/Pages/NewEnrollment';
 import {
-    searchPageSelectorActonTypes,
-} from '../../components/Pages/Search/SearchPageSelector/SearchPageSelector.actions';
+    lockedSelectorActionTypes,
+} from '../../components/LockedSelector/actions';
 
 const setOrgUnit = (state, action) => {
     const orgUnitId = action.payload.id;
@@ -294,11 +294,11 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         };
         return newState;
     },
-    [searchPageSelectorActonTypes.RESET_ORG_UNIT_ID]: (state) => {
+    [lockedSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
         const newState = { ...state, orgUnitId: null, complete: false };
         return newState;
     },
-    [searchPageSelectorActonTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
+    [lockedSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
         const { nextProps: selections } = action.payload;
         const newState = {
             ...state,

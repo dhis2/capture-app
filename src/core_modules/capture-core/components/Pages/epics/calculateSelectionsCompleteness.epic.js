@@ -22,6 +22,7 @@ import {
     selectionsCompletenessCalculated,
     actionTypes as crossPageActionTypes,
 } from '../actions/crossPage.actions';
+import { lockedSelectorActionTypes } from '../../LockedSelector/actions';
 
 type CurrentSelectionsState = {
     programId?: ?string,
