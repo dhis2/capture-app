@@ -10,6 +10,10 @@ import { actionTypes as viewEventDataEntryActionTypes } from '../../components/P
 import { actionTypes as eventListActionTypes } from '../../components/Pages/MainPage/EventsList';
 
 export const searchPageDesc = createReducerDescription({
+    [lockedSelectorActionTypes.SET_ORG_UNIT]: state => ({
+        ...state,
+        isPageContentLoading: true,
+    }),
     [lockedSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: state => ({
         ...state,
         isLoading: true,
