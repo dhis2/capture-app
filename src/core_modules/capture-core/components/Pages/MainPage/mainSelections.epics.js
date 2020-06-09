@@ -4,7 +4,6 @@ import i18n from '@dhis2/d2-i18n';
 import {
     actionTypes,
     mainSelectionCompleted,
-    orgUnitDataRetrived,
     setCurrentOrgUnitBasedOnUrl,
     errorRetrievingOrgUnitBasedOnUrl,
     setEmptyOrgUnitBasedOnUrl,
