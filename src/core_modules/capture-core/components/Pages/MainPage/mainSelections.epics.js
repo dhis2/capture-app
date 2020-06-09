@@ -47,7 +47,9 @@ export const orgUnitDataRetrivedEpic = (action$: InputObservable) =>
         })
         .switchMap(action => getApi()
             .get(`organisationUnits/${action.payload.orgUnitId}`)
-            .then(response => orgUnitDataRetrived({ id: response.id, name: response.displayName })));
+            .then(({ id, displayName: name, code }) =>
+                setCurrentOrgUnitBasedOnUrl({ id, name, code }),
+            ));
 
 // Url-Specific
 
@@ -57,8 +59,8 @@ export const mainSelectionsFromUrlGetOrgUnitDataEpic = (action$: InputObservable
         .filter(action => action.payload.nextProps.orgUnitId)
         .switchMap(action => getApi()
             .get(`organisationUnits/${action.payload.nextProps.orgUnitId}`)
-            .then(response =>
-                setCurrentOrgUnitBasedOnUrl({ id: response.id, name: response.displayName }),
+            .then(({ id, displayName: name, code }) =>
+                setCurrentOrgUnitBasedOnUrl({ id, name, code }),
             )
             .catch(() =>
                 errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')),
