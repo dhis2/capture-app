@@ -7,11 +7,6 @@ import {
 } from '../../components/Pages/NewEvent';
 
 export const newEventPageDesc = createReducerDescription({
-    [newEventDataEntryActionTypes.NEW_EVENT_IN_DATAENTRY_OPENING_CANCEL]: (state) => {
-        const newState = { ...state };
-        newState.dataEntryIsLoading = false;
-        return newState;
-    },
     [newEventDataEntryActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY]: (state) => {
         const newState = { ...state };
         newState.showAddRelationship = false;

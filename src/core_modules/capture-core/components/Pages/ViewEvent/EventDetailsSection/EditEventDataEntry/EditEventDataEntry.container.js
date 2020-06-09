@@ -28,7 +28,7 @@ import {
 const mapStateToProps = (state: ReduxState) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
     return {
-        ready: !state.activePage.dataEntryIsLoading && !eventDetailsSection.loading,
+        ready: !state.activePage.isPageContentLoading && !eventDetailsSection.loading,
     };
 };
 
