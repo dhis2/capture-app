@@ -20,17 +20,6 @@ import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
 
-const setOrgUnit = (state, action) => {
-    const orgUnitId = action.payload.id;
-    const newState = {
-        ...state,
-        orgUnitId,
-        complete: false,
-        categoryCheckInProgress: true,
-    };
-    return newState;
-};
-
 const setCategoryOption = (
     state: Object,
     categoryId: string,
