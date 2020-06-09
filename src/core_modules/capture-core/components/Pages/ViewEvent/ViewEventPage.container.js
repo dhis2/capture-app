@@ -2,8 +2,7 @@
 import { connect } from 'react-redux';
 import ViewEventSelector from './ViewEventPage.component';
 import dataEntryHasChanges from '../../DataEntry/common/dataEntryHasChanges';
-import withLoadingIndicator from '../../../HOC/withLoadingIndicator';
-import withErrorMessageHandler from '../../../HOC/withErrorMessageHandler';
+import { withLoadingIndicator, withErrorMessageHandler } from '../../../HOC';
 
 const mapStateToProps = (state: ReduxState) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};

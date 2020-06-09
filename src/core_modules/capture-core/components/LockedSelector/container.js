@@ -15,13 +15,11 @@ import {
 } from './actions';
 import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
 import withLoadingIndicator from '../../HOC/withLoadingIndicator';
-import withErrorMessageHandler from '../../HOC/withErrorMessageHandler';
 
 
 const mapStateToProps = (state: ReduxState) => ({
     selectedProgramId: state.currentSelections.programId,
     selectedOrgUnitId: state.currentSelections.orgUnitId,
-    error: state.activePage.selectionsError && state.activePage.selectionsError.error,
     ready: !state.activePage.isLoading,
 });
 
@@ -64,6 +62,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-const SelectorWithLoadingAndErrorMessages = withLoadingIndicator()(withErrorMessageHandler()(SearchPageSelector));
-
-export const LockedSelector = connect(mapStateToProps, mapDispatchToProps)(SelectorWithLoadingAndErrorMessages);
+export const LockedSelector = connect(mapStateToProps, mapDispatchToProps)(withLoadingIndicator()(SearchPageSelector));
