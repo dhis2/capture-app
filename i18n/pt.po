@@ -274,7 +274,7 @@ msgid "Delete"
 msgstr "Apagar"
 
 msgid "Select file"
-msgstr ""
+msgstr "Selecionar o ficheiro"
 
 msgid "No"
 msgstr "Não"
