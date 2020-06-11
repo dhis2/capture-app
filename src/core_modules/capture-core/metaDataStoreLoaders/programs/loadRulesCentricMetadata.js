@@ -26,7 +26,7 @@ export const loadRulesCentricMetadata = (programIds: Array<string>) => {
                             project: item => item.id,
                             onIDBGetRequest: source => source
                                 .index('programId')
-                                .openCursor(IDBKeyRange.only(programId)),
+                                .openCursor(window.IDBKeyRange.only(programId)),
                         },
                     ),
                 ),
