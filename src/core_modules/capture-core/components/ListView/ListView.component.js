@@ -1,23 +1,16 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import { dataElementTypes, OptionSet } from '../../metaData';
+import { withFilterSelectors } from './FilterSelectors/withFilterSelectors';
+import { ListPagination } from './Pagination';
+import { ColumnSelector } from './ColumnSelector';
+import { withEndColumnMenu } from './withEndColumnMenu';
+import DialogLoadingMask from '../LoadingMasks/DialogLoadingMask.component';
+import { OnlineList } from '../List';
+import { MoreMenu } from './MoreMenu';
 
-import elementTypes from '../../../metaData/DataElement/elementTypes';
-
-import withFilterSelectors from '../FilterSelectors/withFilterSelectors';
-import { ListPagination } from '../Pagination';
-
-import ColumnSelector from './ColumnSelector.component';
-
-import OptionSet from '../../../metaData/OptionSet/OptionSet';
-import withCustomEndCell from '../withCustomEndCell';
-import eventContentMenuSettings from '../EventContentMenu/eventContentMenuSettings';
-import DialogLoadingMask from '../../LoadingMasks/DialogLoadingMask.component';
-
-import List from '../../List/OnlineList/List.component';
-import ListWrapperMenu from './ListWrapperMenu.component';
-
-const EventList = withCustomEndCell(eventContentMenuSettings)(List);
+const ListWithEndColumnMenu = withEndColumnMenu()(OnlineList);
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -50,7 +43,7 @@ export type Column = {
     id: string,
     header: string,
     visible: boolean,
-    type: $Values<typeof elementTypes>,
+    type: $Values<typeof dataElementTypes>,
     optionSet?: ?OptionSet,
 };
 
@@ -66,7 +59,7 @@ type Props = {
     customMenuContents?: ?Array<Object>,
 };
 
-class EventListWrapper extends React.Component<Props> {
+class Index extends React.Component<Props> {
     handleSaveColumnOrder = (columnOrder: Array<Object>) => {
         this.props.onSaveColumnOrder(this.props.listId, columnOrder);
     }
@@ -89,7 +82,7 @@ class EventListWrapper extends React.Component<Props> {
                         onSave={this.handleSaveColumnOrder}
                         columns={columns}
                     />
-                    <ListWrapperMenu
+                    <MoreMenu
                         listId={listId}
                         customMenuContents={customMenuContents}
                     />
@@ -119,7 +112,7 @@ class EventListWrapper extends React.Component<Props> {
             ...passOnProps
         } = this.props;
         return (
-            <EventList
+            <ListWithEndColumnMenu
                 {...passOnProps}
             />
         );
@@ -140,8 +133,5 @@ class EventListWrapper extends React.Component<Props> {
         );
     }
 }
-/**
- * Create the event list for a event capture program
- * @namespace EventsList
- */
-export default withFilterSelectors()(withStyles(getStyles)(EventListWrapper));
+
+export const ListView = withFilterSelectors()(withStyles(getStyles)(Index));

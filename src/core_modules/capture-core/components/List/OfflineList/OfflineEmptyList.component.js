@@ -24,7 +24,7 @@ type Props = {
     }
 };
 
-const OfflineEmptyList = (props: Props) => (
+const Index = (props: Props) => (
     <div
         className={props.classes.container}
     >
@@ -32,4 +32,4 @@ const OfflineEmptyList = (props: Props) => (
     </div>
 );
 
-export default withStyles(getStyles)(OfflineEmptyList);
+export const OfflineEmptyList = withStyles(getStyles)(Index);

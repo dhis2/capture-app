@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import { getMenuColumnSettings } from './getMenuColumnSettings';
 
 type Props = {
 
@@ -12,21 +13,21 @@ type Settings = {
     bodyCellStyle?: ?Object,
 }
 
-export default (settingsFn: () => Settings) =>
+export const withEndColumnMenu = () =>
     (InnerComponent: React.ComponentType<any>) =>
         class CustomEndCellHOC extends React.Component<Props> {
             getCustomEndCellBody = (row: {eventId: string, [elementId: string]: any}, props: Object) => {
-                const settings = settingsFn();
+                const settings: Settings = getMenuColumnSettings();
                 return settings.getCellBody(row, props);
             }
 
             getCustomEndCellHeader = (row: string, props: Object) => {
-                const settings = settingsFn();
+                const settings: Settings = getMenuColumnSettings();
                 return settings.getCellHeader && settings.getCellHeader(props);
             }
 
             render() {
-                const settings = settingsFn();
+                const settings: Settings = getMenuColumnSettings();
                 return (
                     <InnerComponent
                         getCustomEndCellHeader={this.getCustomEndCellHeader}

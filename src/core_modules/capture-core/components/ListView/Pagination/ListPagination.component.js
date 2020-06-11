@@ -16,7 +16,7 @@ type Props = {
     onChangeRowsPerPage: Function,
 };
 
-class ListPagination extends React.Component<Props> {
+class Index extends React.Component<Props> {
     getPaginationLabelDisplayedRows =
         (fromToLabel: string, totalLabel: string) => `${fromToLabel} of ${totalLabel}`;
 
@@ -42,4 +42,4 @@ class ListPagination extends React.Component<Props> {
     }
 }
 
-export default withData()(ListPagination);
+export const ListPagination = withData()(Index);

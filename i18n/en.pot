@@ -5,16 +5,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-06-04T09:06:32.154Z\n"
-"PO-Revision-Date: 2020-06-04T09:06:32.154Z\n"
+"POT-Creation-Date: 2020-06-10T13:02:35.753Z\n"
+"PO-Revision-Date: 2020-06-10T13:02:35.753Z\n"
 
 msgid "Please provide a valid date"
-msgstr ""
-
-msgid "Columns to show in table"
-msgstr ""
-
-msgid "Column"
 msgstr ""
 
 msgid "This value is validating"
@@ -281,10 +275,25 @@ msgstr ""
 msgid "No items to display"
 msgstr ""
 
-msgid "View event info"
+msgid "Select columns"
 msgstr ""
 
-msgid "Delete event"
+msgid "Columns to show in table"
+msgstr ""
+
+msgid "Column"
+msgstr ""
+
+msgid "Download as JSON"
+msgstr ""
+
+msgid "Download as XML"
+msgstr ""
+
+msgid "Download as CSV"
+msgstr ""
+
+msgid "Download with current filters"
 msgstr ""
 
 msgid "Update"
@@ -308,25 +317,16 @@ msgstr ""
 msgid "More filters"
 msgstr ""
 
-msgid "Select columns"
-msgstr ""
-
-msgid "Download as JSON"
-msgstr ""
-
-msgid "Download as XML"
-msgstr ""
-
-msgid "Download as CSV"
-msgstr ""
-
-msgid "Download with current filters"
-msgstr ""
-
 msgid "Download data..."
 msgstr ""
 
 msgid "Rows per page"
+msgstr ""
+
+msgid "View event info"
+msgstr ""
+
+msgid "Delete event"
 msgstr ""
 
 msgid "Online"

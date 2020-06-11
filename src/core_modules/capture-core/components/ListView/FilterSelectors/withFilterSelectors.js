@@ -8,7 +8,7 @@ type Props = {
     listId: string,
 };
 
-export default () => (InnerComponent: React.ComponentType<any>) =>
+export const withFilterSelectors = () => (InnerComponent: React.ComponentType<any>) =>
     (props: Props) => {
         const { columns, listId } = props;
         return (

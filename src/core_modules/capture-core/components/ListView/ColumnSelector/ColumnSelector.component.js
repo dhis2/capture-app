@@ -3,7 +3,7 @@ import * as React from 'react';
 import { IconButton, Tooltip } from '@material-ui/core';
 import { Settings as SettingsIcon } from '@material-ui/icons';
 import i18n from '@dhis2/d2-i18n';
-import ColumnSelectorDialog from '../../ColumnSelectorDialog/ColumnSelectorDialog.component';
+import ColumnSelectorDialog from './ColumnSelectorDialog.component';
 
 type Props = {
     onSave: Function,
@@ -14,7 +14,7 @@ type State = {
     dialogOpen: boolean,
 };
 
-class ColumnSelector extends React.Component<Props, State> {
+export class ColumnSelector extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -65,5 +65,3 @@ class ColumnSelector extends React.Component<Props, State> {
         );
     }
 }
-
-export default ColumnSelector;

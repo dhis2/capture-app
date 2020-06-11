@@ -13,7 +13,7 @@ import TableRow from '@material-ui/core/TableRow';
 
 import i18n from '@dhis2/d2-i18n';
 
-import DragDropListItem from './DragDropListItem.component';
+import { DragDropListItem } from './DragDropListItem.component';
 
 type Props = {
     listItems: Array<Object>,
@@ -21,7 +21,7 @@ type Props = {
     handleToggle: (id: string) => void,
 };
 
-class Container extends Component<Props> {
+class Index extends Component<Props> {
     moveListItem: (dragIndex: any, hoverIndex: any) => void;
     constructor(props) {
         super(props);
@@ -70,4 +70,4 @@ class Container extends Component<Props> {
     }
 }
 
-export default DragDropContext(HTML5Backend)(Container);
+export const DragDropList = DragDropContext(HTML5Backend)(Index);

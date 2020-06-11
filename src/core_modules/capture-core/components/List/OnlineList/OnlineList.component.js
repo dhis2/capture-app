@@ -102,7 +102,7 @@ type Props = {
 }
 
 
-class List extends React.Component<Props> {
+class Index extends React.Component<Props> {
     static typesWithAscendingInitialDirection = [
         elementTypes.TEXT,
         elementTypes.LONG_TEXT,
@@ -177,12 +177,12 @@ class List extends React.Component<Props> {
                     <SortLabelWrapper
                         isActive={column.id === sortById}
                         initialDirection={
-                            List.typesWithAscendingInitialDirection.includes(column.type)
+                            Index.typesWithAscendingInitialDirection.includes(column.type)
                                 ? sortLabelDirections.ASC
                                 : sortLabelDirections.DESC
                         }
                         placement={
-                            List.typesWithRightPlacement.includes(column.type)
+                            Index.typesWithRightPlacement.includes(column.type)
                                 ? sorLabelPlacements.RIGHT
                                 : sorLabelPlacements.LEFT
                         }
@@ -254,7 +254,7 @@ class List extends React.Component<Props> {
                                         className={classNames(classes.cell, classes.bodyCell)}
                                     >
                                         <div
-                                            style={List.typesWithRightPlacement.includes(column.type) ? { textAlign: 'right' } : null}
+                                            style={Index.typesWithRightPlacement.includes(column.type) ? { textAlign: 'right' } : null}
                                         >
                                             {row[column.id]}
                                         </div>
@@ -298,5 +298,4 @@ class List extends React.Component<Props> {
     }
 }
 
-
-export default withStyles(getStyles)(List);
+export const OnlineList = withStyles(getStyles)(Index);

@@ -8,10 +8,10 @@ import {
     Option,
     DataElement,
     dataElementTypes,
-} from '../../../metaData';
-import getStageFromEvent from '../../../metaData/helpers/getStageFromEvent';
-import { convertValue } from '../../../converters/clientToList';
-import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
+} from '../../../../metaData';
+import getStageFromEvent from '../../../../metaData/helpers/getStageFromEvent';
+import { convertValue } from '../../../../converters/clientToList';
+import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 
 type EventContainer = {
     event: CaptureClientEvent,

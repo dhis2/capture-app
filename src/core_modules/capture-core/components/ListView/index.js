@@ -1,6 +1,7 @@
 // @flow
-export { default as EventList } from './ListWrapper/EventsListWrapper.container';
-export { actionTypes as paginationActionTypes } from './Pagination';
+export { ListView } from './ListView.component';
+export { paginationActionTypes } from './Pagination';
+export { columnSelectorActionTypes } from './ColumnSelector/actions';
 export { actionTypes } from './listView.actions';
 
 export { dateFilterTypes, assigneeFilterModes } from '../FiltersForTypes';

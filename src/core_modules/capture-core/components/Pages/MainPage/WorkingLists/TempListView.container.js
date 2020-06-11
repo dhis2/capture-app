@@ -1,23 +1,42 @@
 // @flow
 import { connect } from 'react-redux';
-import EventsListWrapper from './EventsListWrapper.component';
-import { makeColumnsSelector, makeCreateEventsContainer, makeCreateWorkingListData } from './eventsList.selector';
-import { sortWorkingList, openViewEventPage, requestDeleteEvent } from '../listView.actions';
-import { updateWorkinglistOrder } from './actions/columnSelectorDialog.actions';
+import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
+import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
+import { ListView } from '../../../ListView';
+import { makeColumnsSelector, makeCreateEventsContainer, makeCreateWorkingListData } from './tempListView.selector';
+import { sortWorkingList, openViewEventPage, requestDeleteEvent } from '../../../ListView/listView.actions';
+import { updateWorkinglistOrder } from '../../../ListView/ColumnSelector/actions/columnSelectorDialog.actions';
 
 const makeMapStateToProps = () => {
     const columnsSelector = makeColumnsSelector();
     const createEventsContainer = makeCreateEventsContainer();
     const createWorkingListData = makeCreateWorkingListData();
 
+    /* eslint-disable complexity */
     const mapStateToProps = (state: ReduxState, props: { listId: string }) => {
         const listId = props.listId;
-        const isLoading = !!state.workingListsUI[listId].isLoading;
-        const columns = !isLoading ? columnsSelector(state, props) : null;
+        const { isLoading, dataLoadingError } = state.workingListsUI[listId];
+
+        if (isLoading) {
+            return {
+                ready: !isLoading,
+            };
+        }
+
+        if (dataLoadingError) {
+            return {
+                ready: !isLoading,
+                error: dataLoadingError,
+            };
+        }
+
+        const columns = columnsSelector(state, props);
         const eventsContainer = !isLoading ? createEventsContainer(state, props) : [];
         const sortById = !isLoading ? state.workingListsMeta[listId].sortById : null;
         const sortByDirection = !isLoading ? state.workingListsMeta[listId].sortByDirection : null;
         return {
+            ready: !isLoading,
+            error: dataLoadingError,
             isUpdating: !!state.workingListsUI[listId].isUpdating,
             isUpdatingWithDialog: !!state.workingListsUI[listId].isUpdatingWithDialog,
             columns,
@@ -27,6 +46,7 @@ const makeMapStateToProps = () => {
             rowIdKey: 'eventId',
         };
     };
+
     return mapStateToProps;
 };
 
@@ -50,4 +70,10 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-export default connect(makeMapStateToProps, mapDispatchToProps)(EventsListWrapper);
+export const TempListView = connect(makeMapStateToProps, mapDispatchToProps)(
+    withLoadingIndicator(() => ({ padding: 10 }))(
+        withErrorMessageHandler()(
+            ListView,
+        ),
+    ),
+);

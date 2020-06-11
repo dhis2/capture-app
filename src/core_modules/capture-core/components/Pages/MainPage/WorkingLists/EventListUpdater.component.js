@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { EventList } from '../../../ListView';
+import { TempListView } from './TempListView.container';
 import { filtersAreEqual } from './utils';
 
 function useUpdateListMemoize(value) {
@@ -67,7 +67,7 @@ const EventListUpdater = (props: Props) => {
     ]);
 
     return (
-        <EventList
+        <TempListView
             listId={listId}
             customMenuContents={customMenuContents}
         />

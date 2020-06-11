@@ -55,7 +55,7 @@ const cardTarget = {
     },
 };
 
-class DragDropListItem extends Component<Props> {
+class Index extends Component<Props> {
     render() {
         const { text, isDragging, connectDragSource, connectDropTarget } = this.props;
         const opacity = isDragging ? 0 : 1;
@@ -80,4 +80,13 @@ class DragDropListItem extends Component<Props> {
     }
 }
 
-export default DragSource(ItemTypes.LISTITEM, cardSource, (connect, monitor) => ({ connectDragSource: connect.dragSource(), isDragging: monitor.isDragging() }))(DropTarget(ItemTypes.LISTITEM, cardTarget, connect => ({ connectDropTarget: connect.dropTarget() }))(DragDropListItem));
+export const DragDropListItem =
+    DragSource(
+        ItemTypes.LISTITEM,
+        cardSource,
+        (connect, monitor) => ({ connectDragSource: connect.dragSource(), isDragging: monitor.isDragging() }),
+    )(DropTarget(
+        ItemTypes.LISTITEM,
+        cardTarget,
+        connect => ({ connectDropTarget: connect.dropTarget() }),
+    )(Index));

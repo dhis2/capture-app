@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import { IconButton, Paper, MenuList, MenuItem, Divider } from '@material-ui/core';
 import { MoreHoriz } from '@material-ui/icons';
 import Popper from '../../Popper/Popper.component';
-import DownloadDialog from './DownloadDialog.container';
+import { DownloadDialog } from '../DownloadDialog';
 
 const getStyles = () => ({
     subHeader: {
@@ -56,7 +56,7 @@ type State = {
     dialogOpen: ?$Values<typeof dialogKeys>,
 }
 
-class ListWrapperMenu extends React.Component<Props, State> {
+class Index extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -162,4 +162,4 @@ class ListWrapperMenu extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(getStyles)(ListWrapperMenu);
+export const MoreMenu = withStyles(getStyles)(Index);

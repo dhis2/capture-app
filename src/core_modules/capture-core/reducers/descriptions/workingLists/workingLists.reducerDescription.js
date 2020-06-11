@@ -2,8 +2,8 @@
 import { moment } from 'capture-core-utils/moment';
 import { createReducerDescription } from '../../../trackerRedux/trackerReducer';
 import {
-    actionTypes as columnSelectorActionTypes,
-} from '../../../components/ListView/ListWrapper/actions/columnSelectorDialog.actions';
+    columnSelectorActionTypes,
+} from '../../../components/ListView';
 import {
     actionTypes as filterSelectorActionTypes,
 } from '../../../components/ListView/FilterSelectors/filterSelector.actions';

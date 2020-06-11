@@ -97,7 +97,7 @@ type Props = {
     noItemsText: ?string,
 };
 
-class OfflineList extends Component<Props> {
+class Index extends Component<Props> {
     static defaultProps = {
         rowIdKey: 'id',
     };
@@ -127,12 +127,12 @@ class OfflineList extends Component<Props> {
                     <SortLabelWrapper
                         isActive={column.id === sortById}
                         initialDirection={
-                            OfflineList.typesWithAscendingInitialDirection.includes(column.type)
+                            Index.typesWithAscendingInitialDirection.includes(column.type)
                                 ? sortLabelDirections.ASC
                                 : sortLabelDirections.DESC
                         }
                         placement={
-                            OfflineList.typesWithRightPlacement.includes(column.type)
+                            Index.typesWithRightPlacement.includes(column.type)
                                 ? sorLabelPlacements.RIGHT
                                 : sorLabelPlacements.LEFT
                         }
@@ -183,7 +183,7 @@ class OfflineList extends Component<Props> {
                         >
                             <div
                                 style={
-                                    OfflineList.typesWithRightPlacement.includes(column.type) ?
+                                    Index.typesWithRightPlacement.includes(column.type) ?
                                         { textAlign: 'right' } :
                                         null
                                 }
@@ -245,4 +245,4 @@ class OfflineList extends Component<Props> {
  * Create the offline list
  * @namespace OfflineList
  */
-export default withStyles(styles)(OfflineList);
+export const OfflineList = withStyles(styles)(Index);

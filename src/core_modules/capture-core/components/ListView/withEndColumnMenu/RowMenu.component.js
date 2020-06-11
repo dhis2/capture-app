@@ -40,7 +40,7 @@ const styles = theme => ({
     },
 });
 
-class EventContentMenu extends React.Component<Props, State> {
+class Index extends React.Component<Props, State> {
     managerRef: (instance: any) => void;
     menuReferenceInstance: ?HTMLDivElement;
 
@@ -156,4 +156,4 @@ class EventContentMenu extends React.Component<Props, State> {
     }
 }
 
-export default withStyles(styles)(EventContentMenu);
+export const RowMenu = withStyles(styles)(Index);

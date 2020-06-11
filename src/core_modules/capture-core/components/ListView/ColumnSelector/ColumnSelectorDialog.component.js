@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 
 import i18n from '@dhis2/d2-i18n';
 
-import DragDropList from './DragDropSort/DragDropList.component';
+import { DragDropList } from './DragDropList';
 
 type Props = {
     open: ?boolean,

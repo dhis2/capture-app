@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import DownloadDialog from './DownloadDialog.component';
+import { DownloadDialog as DownloadDialogComponent } from './DownloadDialog.component';
 import { makeProgramStageIdSelector } from './downloadDialog.selectors';
 
 const mapStateToProps = () => {
@@ -13,4 +13,4 @@ const mapStateToProps = () => {
 };
 
 // $FlowSuppress
-export default connect(mapStateToProps)(DownloadDialog);
+export const DownloadDialog = connect(mapStateToProps)(DownloadDialogComponent);

@@ -30,13 +30,13 @@ type Props = {
 }
 
 
-class DownloadDialog extends React.Component<Props> {
+class Index extends React.Component<Props> {
     static getUrlEncodedParamsString(params: Object) {
         const { filter, ...restParams } = params;
         const searchParams = new URLSearchParams(restParams);
 
         if (filter) {
-            filter.forEach(filterItem => {
+            filter.forEach((filterItem) => {
                 searchParams.append('filter', filterItem);
             });
         }
@@ -46,20 +46,20 @@ class DownloadDialog extends React.Component<Props> {
 
     static getUrl() {
         const baseUrl = getApi().baseUrl;
-        return baseUrl + '/events/query';
+        return `${baseUrl}/events/query`;
     }
 
     renderButtons() {
         const { request, programStageId, classes } = this.props;
-        const url = DownloadDialog.getUrl();
+        const url = Index.getUrl();
         const { pageSize, page, totalPages, ...paramsFromRequest } = request.queryParams || {};
         const paramsObject = {
             ...paramsFromRequest,
             programStage: programStageId,
             skipPaging: 'true',
         };
-        const searchParamsString = DownloadDialog.getUrlEncodedParamsString(paramsObject);
-        
+        const searchParamsString = Index.getUrlEncodedParamsString(paramsObject);
+
         return (
             <div
                 className={classes.downloadContainer}
@@ -128,4 +128,4 @@ class DownloadDialog extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(DownloadDialog);
+export const DownloadDialog = withStyles(getStyles)(Index);
