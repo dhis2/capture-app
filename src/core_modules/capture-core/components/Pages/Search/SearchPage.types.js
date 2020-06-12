@@ -11,7 +11,6 @@ export type PropsFromRedux = {
       +programs: Array<{
         +programName: string,
         +programId: string,
-        +programIcon: Object
       }>
     }
   }

@@ -15,7 +15,6 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
           .reduce((acc, {
               _id: programId,
               _name: programName,
-              _icon: programIcon,
               _trackedEntityType: { _id: trackedEntityTypeId, _name: trackedEntityTypeName },
           }) => {
               const accumulatedProgramsOfTrackedEntityType =
@@ -27,7 +26,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
                       trackedEntityTypeId,
                       trackedEntityTypeName,
                       programs: [
-                          ...accumulatedProgramsOfTrackedEntityType, { programId, programIcon, programName },
+                          ...accumulatedProgramsOfTrackedEntityType, { programId, programName },
                       ],
                   },
               };
