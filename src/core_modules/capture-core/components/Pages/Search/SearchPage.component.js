@@ -50,6 +50,7 @@ const getStyles = (theme: Theme) => ({
     },
     searchRowSelectElement: {
         width: '100%',
+        marginRight: 8,
     },
 });
 
