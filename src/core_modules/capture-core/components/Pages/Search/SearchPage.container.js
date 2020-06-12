@@ -4,27 +4,12 @@ import { SearchPage as SearchPageComponent } from './SearchPage.component';
 import { programCollection } from '../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../../metaData/Program';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
+import type { PropsFromRedux } from './SearchPage.types';
 
-export type TrackedEntityTypesWithCorrelatedPrograms = {
-    [elementId: string]: {
-        trackedEntityTypeId: string,
-        trackedEntityTypeName: string,
-        programs: $ReadOnlyArray<{programName: string, programId: string, programIcon: Object}>
-    }
-}
-
-export type SearchPageComponentProps = {
-    preselectedProgram: {
-        value: ?string,
-        label: ?string
-    },
-    trackedEntityTypesWithCorrelatedPrograms: TrackedEntityTypesWithCorrelatedPrograms,
-}
-
-const mapStateToProps = (state: ReduxState): SearchPageComponentProps => {
+const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const { currentSelections, activePage } = state;
 
-    const trackedEntityTypesWithCorrelatedPrograms: TrackedEntityTypesWithCorrelatedPrograms =
+    const trackedEntityTypesWithCorrelatedPrograms =
       Array.from(programCollection.values())
           .filter(program => program instanceof TrackerProgram)
           .reduce((acc, {

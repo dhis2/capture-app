@@ -1,11 +1,11 @@
 // @flow
 import React, { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { LockedSelector } from '../../LockedSelector';
 import Paper from '@material-ui/core/Paper/Paper';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { SingleSelect, SingleSelectOption } from '@dhis2/ui-core';
-import type { SearchPageComponentProps } from './SearchPage.container';
+import { LockedSelector } from '../../LockedSelector';
+import type { Props } from './SearchPage.types';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -35,16 +35,6 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-type Props =
-    SearchPageComponentProps & {
-    classes: {
-        container: string,
-        header: string,
-        dataEntryPaper: string,
-        customEmpty: string,
-        groupTitle: string,
-    },
-  }
 
 const Index = ({ classes, trackedEntityTypesWithCorrelatedPrograms, preselectedProgram }: Props) => {
     const [selectedOption, choseSelected] = useState(preselectedProgram);
