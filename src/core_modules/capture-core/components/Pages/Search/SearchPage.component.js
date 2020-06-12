@@ -12,13 +12,6 @@ const getStyles = (theme: Theme) => ({
     container: {
         padding: '10px 24px 24px 24px',
     },
-    header: {
-        flexGrow: 1,
-        fontSize: 18,
-        fontWeight: 500,
-        paddingLeft: 8,
-        paddingBottom: 12,
-    },
     paper: {
         // marginBottom: theme.typography.pxToRem(10),
         padding: theme.typography.pxToRem(10),
@@ -46,7 +39,7 @@ const getStyles = (theme: Theme) => ({
     },
     searchRowTitle: {
         flexBasis: 200,
-        marginLeft: 8,
+        marginLeft: 16,
     },
     searchRowSelectElement: {
         width: '100%',
@@ -66,7 +59,7 @@ const Index = ({ classes, trackedEntityTypesWithCorrelatedPrograms, preselectedP
                     className={classes.searchDomainSelectorSection}
                     header={
                         <SectionHeaderSimple
-                            containerStyle={{ borderBottom: '1px solid #ECEFF1' }}
+                            containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
                             title={i18n.t('Search')}
                         />
                     }
