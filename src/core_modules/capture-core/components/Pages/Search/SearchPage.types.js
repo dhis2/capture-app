@@ -21,8 +21,12 @@ export type Props =
   +classes: {
     +container: string,
     +header: string,
-    +dataEntryPaper: string,
+    +paper: string,
     +customEmpty: string,
     +groupTitle: string,
+    +searchDomainSelectorSection: string,
+    +searchRow: string,
+    +searchRowTitle: string,
+    +searchRowSelectElement: string,
   },
 }
