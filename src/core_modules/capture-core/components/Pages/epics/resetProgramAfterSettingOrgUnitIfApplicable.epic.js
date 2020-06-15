@@ -23,9 +23,9 @@ const programShouldReset = (orgUnitId, currentlySelectedProgramId) => {
 };
 
 export const resetProgramAfterSettingOrgUnitIfApplicableEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$
-        .ofType(lockedSelectorActionTypes.SET_ORG_UNIT)
+        // $FlowSuppress
+        .ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET)
         .filter((action) => {
             const orgUnitId = action.payload.id;
             const currentlySelectedProgramId = store.getState().currentSelections.programId;

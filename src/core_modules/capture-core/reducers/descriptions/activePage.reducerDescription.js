@@ -10,26 +10,26 @@ import { actionTypes as viewEventDataEntryActionTypes } from '../../components/P
 import { actionTypes as eventListActionTypes } from '../../components/Pages/MainPage/EventsList';
 
 export const searchPageDesc = createReducerDescription({
-    [lockedSelectorActionTypes.SET_ORG_UNIT]: state => ({
+    [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: state => ({
         ...state,
         isPageContentLoading: true,
     }),
-    [lockedSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: state => ({
+    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: state => ({
         ...state,
         isLoading: true,
     }),
-    [lockedSelectorActionTypes.VALID_SELECTIONS_FROM_URL]: state => ({
+    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID]: state => ({
         ...state,
         selectionsError: null,
         isLoading: false,
         isPageContentLoading: true,
     }),
-    [lockedSelectorActionTypes.INVALID_SELECTIONS_FROM_URL]: (state, action) => ({
+    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_INVALID]: (state, action) => ({
         ...state,
         isLoading: false,
         selectionsError: action.payload,
     }),
-    [lockedSelectorActionTypes.ERROR_RETRIEVING_ORG_UNIT_BASED_ON_URL]: (state, action) => ({
+    [lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_ERROR_RETRIEVING]: (state, action) => ({
         ...state,
         isLoading: false,
         selectionsError: action.payload,

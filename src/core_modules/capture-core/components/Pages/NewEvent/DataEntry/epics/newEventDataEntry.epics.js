@@ -80,10 +80,10 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
 export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
     action$.ofType(
-        lockedSelectorActionTypes.OPEN_NEW_EVENT,
-        lockedSelectorActionTypes.SET_PROGRAM_ID,
-        lockedSelectorActionTypes.SET_CATEGORY_OPTION,
-        lockedSelectorActionTypes.VALID_SELECTIONS_FROM_URL,
+        lockedSelectorActionTypes.NEW_EVENT_OPEN,
+        lockedSelectorActionTypes.PROGRAM_ID_SET,
+        lockedSelectorActionTypes.CATEGORY_OPTION_SET,
+        lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID,
         crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
     )
         .filter((action) => {
@@ -91,7 +91,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
             const triggeringActionType = action.payload && action.payload.triggeringActionType;
             if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED) {
                 return (!!triggeringActionType) && [
-                    lockedSelectorActionTypes.SET_ORG_UNIT,
+                    lockedSelectorActionTypes.ORG_UNIT_ID_SET,
                 ].includes(triggeringActionType);
             }
             return true;
@@ -130,10 +130,10 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
 export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
 // $FlowSuppress
     action$.ofType(
-        lockedSelectorActionTypes.VALID_SELECTIONS_FROM_URL,
-        lockedSelectorActionTypes.OPEN_NEW_EVENT,
-        lockedSelectorActionTypes.SET_CATEGORY_OPTION,
-        lockedSelectorActionTypes.SET_PROGRAM_ID,
+        lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID,
+        lockedSelectorActionTypes.NEW_EVENT_OPEN,
+        lockedSelectorActionTypes.CATEGORY_OPTION_SET,
+        lockedSelectorActionTypes.PROGRAM_ID_SET,
         crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
     )
         .filter((action) => {
@@ -141,7 +141,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
             const type = action.type;
             if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED) {
                 const triggeringActionType = action.payload && action.payload.triggeringActionType;
-                if (triggeringActionType !== lockedSelectorActionTypes.SET_ORG_UNIT) {
+                if (triggeringActionType !== lockedSelectorActionTypes.ORG_UNIT_ID_SET) {
                     return false;
                 }
             }

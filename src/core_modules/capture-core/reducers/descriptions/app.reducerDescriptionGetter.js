@@ -134,28 +134,28 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         ...state,
         page: action.payload.nextPage,
     }),
-    [lockedSelectorActionTypes.RESET_ORG_UNIT_ID]: state => ({
+    [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({
         ...state,
         locationSwitchInProgress: true,
     }),
-    [lockedSelectorActionTypes.SET_ORG_UNIT]: state => ({
+    [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: state => ({
         ...state,
         locationSwitchInProgress: true,
     }),
-    [lockedSelectorActionTypes.SET_PROGRAM_ID]: state => ({
+    [lockedSelectorActionTypes.PROGRAM_ID_SET]: state => ({
         ...state,
         locationSwitchInProgress: true,
     }),
-    [lockedSelectorActionTypes.RESET_PROGRAM_ID]: state => ({
+    [lockedSelectorActionTypes.PROGRAM_ID_RESET]: state => ({
         ...state,
         locationSwitchInProgress: true,
     }),
-    [lockedSelectorActionTypes.OPEN_NEW_EVENT]: state => ({
+    [lockedSelectorActionTypes.NEW_EVENT_OPEN]: state => ({
         ...state,
         page: 'newEvent',
         locationSwitchInProgress: true,
     }),
-    [lockedSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => ({
+    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: (state, action) => ({
         ...state,
         page: action.payload.nextPage,
     }),

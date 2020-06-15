@@ -19,9 +19,9 @@ async function isOptionAssociatedWithOrganisationUnit(categoryOptionId: string, 
 }
 
 export const resetCategoriesAfterSettingOrgUnitIfApplicableEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$
-        .ofType(lockedSelectorActionTypes.SET_ORG_UNIT)
+        // $FlowSuppress
+        .ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET)
         .switchMap((action) => {
             const orgUnitId = action.payload.id;
             const selectedCategories = store.getState().currentSelections.categories;

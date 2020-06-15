@@ -15,8 +15,8 @@ const getArguments = (programId: string, orgUnitId: string) => {
 };
 
 export const openNewEventPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
-// $FlowSuppress
-    action$.ofType(lockedSelectorActionTypes.OPEN_NEW_EVENT)
+    // $FlowSuppress
+    action$.ofType(lockedSelectorActionTypes.NEW_EVENT_OPEN)
         .map(() => {
             const state = store.getState();
             const { programId, orgUnitId } = state.currentSelections;
