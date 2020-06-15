@@ -82,11 +82,11 @@ export const organisationUnitDesc = createReducerDescription({
         return newState;
     },
 
-    [lockedSelectorActionTypes.SET_ORG_UNIT_BASED_ON_URL]: (state, action) => ({
+    [lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_SET]: (state, action) => ({
         ...state,
         [action.payload.id]: action.payload,
     }),
-    [lockedSelectorActionTypes.SET_ORG_UNIT]: (state, action) => ({
+    [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: (state, action) => ({
         ...state,
         [action.payload.orgUnit.id]: action.payload.orgUnit,
     }),
@@ -167,6 +167,6 @@ export const registeringUnitListDesc = createReducerDescription({
     [viewEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: removeSearchDataOnResetRegUnit,
     [newEnrollmentUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: removeSearchDataOnResetRegUnit,
 
-    [lockedSelectorActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: removeSearchDataOnResetRegUnit,
-    [lockedSelectorActionTypes.RESET_ORG_UNIT_ID]: removeSearchDataOnResetRegUnit,
+    [lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_EMPTY_SET]: removeSearchDataOnResetRegUnit,
+    [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: removeSearchDataOnResetRegUnit,
 }, 'registeringUnitList');

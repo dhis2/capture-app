@@ -53,14 +53,14 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
             resetProgramIdFromSearchPage(),
             resetAllCategoryOptionsFromSearchPage(),
             resetProgramIdBase(),
-        ], searchPageSelectorBatchActionTypes.START_AGAIN));
+        ], searchPageSelectorBatchActionTypes.AGAIN_START));
     },
     onResetProgramId: (baseAction: ReduxAction<any, any>) => {
         dispatch(batchActions([
             resetProgramIdFromSearchPage(),
             resetAllCategoryOptionsFromSearchPage(),
             baseAction,
-        ], searchPageSelectorBatchActionTypes.RESET_PROGRAM_AND_CATEGORY_OPTION));
+        ], searchPageSelectorBatchActionTypes.PROGRAM_AND_CATEGORY_OPTION_RESET));
     },
 });
 

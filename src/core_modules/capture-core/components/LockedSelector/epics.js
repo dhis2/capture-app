@@ -28,12 +28,12 @@ const exactUrl = (page: string, programId: string, orgUnitId: string) => {
 
 export const searchPageSelectorUpdateURLEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.ofType(
-        lockedSelectorActionTypes.RESET_ORG_UNIT_ID,
-        lockedSelectorActionTypes.SET_ORG_UNIT,
-        lockedSelectorActionTypes.SET_PROGRAM_ID,
-        lockedSelectorActionTypes.RESET_PROGRAM_ID,
-        searchPageSelectorBatchActionTypes.START_AGAIN,
-        searchPageSelectorBatchActionTypes.RESET_PROGRAM_AND_CATEGORY_OPTION,
+        lockedSelectorActionTypes.ORG_UNIT_ID_RESET,
+        lockedSelectorActionTypes.ORG_UNIT_ID_SET,
+        lockedSelectorActionTypes.PROGRAM_ID_SET,
+        lockedSelectorActionTypes.PROGRAM_ID_RESET,
+        searchPageSelectorBatchActionTypes.AGAIN_START,
+        searchPageSelectorBatchActionTypes.PROGRAM_AND_CATEGORY_OPTION_RESET,
     )
         .map(() => {
             const {
@@ -45,7 +45,7 @@ export const searchPageSelectorUpdateURLEpic = (action$: InputObservable, store:
 
 
 export const getOrgUnitDataForSearchUrlUpdateEpic = (action$: InputObservable) =>
-    action$.ofType(lockedSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL)
+    action$.ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE)
         .filter(action => action.payload.nextProps.orgUnitId)
         .switchMap(action => getApi()
             .get(`organisationUnits/${action.payload.nextProps.orgUnitId}`)
@@ -60,14 +60,14 @@ export const getOrgUnitDataForSearchUrlUpdateEpic = (action$: InputObservable) =
         );
 
 export const selectionsFromUrlEmptyOrgUnitForSearchEpic = (action$: InputObservable) =>
-    action$.ofType(lockedSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL)
+    action$.ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE)
         .filter(action => !action.payload.nextProps.orgUnitId)
         .map(() => setEmptyOrgUnitBasedOnUrl());
 
 export const validationForSearchUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.ofType(
-        lockedSelectorActionTypes.SET_ORG_UNIT_BASED_ON_URL,
-        lockedSelectorActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL)
+        lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_SET,
+        lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_EMPTY_SET)
         .map(() => {
             const { programId, orgUnitId } = store.getState().currentSelections;
 

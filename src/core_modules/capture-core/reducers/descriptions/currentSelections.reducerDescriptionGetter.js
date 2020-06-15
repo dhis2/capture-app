@@ -327,16 +327,16 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
         categoryCheckInProgress: false,
     }),
 
-    [lockedSelectorActionTypes.SET_ORG_UNIT]: (state, action) => ({
+    [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: (state, action) => ({
         ...state,
         orgUnitId: action.payload.id,
     }),
-    [lockedSelectorActionTypes.RESET_ORG_UNIT_ID]: state => ({
+    [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({
         ...state,
         orgUnitId: null,
         complete: false,
     }),
-    [lockedSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
+    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: (state, action) => {
         const { nextProps: selections } = action.payload;
         return {
             ...state,
@@ -346,7 +346,7 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             complete: false,
         };
     },
-    [lockedSelectorActionTypes.SET_PROGRAM_ID]: (state, action) => {
+    [lockedSelectorActionTypes.PROGRAM_ID_SET]: (state, action) => {
         const programId = action.payload;
         return {
             ...state,
@@ -354,15 +354,15 @@ export const getCurrentSelectionsReducerDesc = (appUpdaters: Updaters) => create
             complete: false,
         };
     },
-    [lockedSelectorActionTypes.SET_CATEGORY_OPTION]: (state, action) => {
+    [lockedSelectorActionTypes.CATEGORY_OPTION_SET]: (state, action) => {
         const { categoryId, categoryOption } = action.payload;
         return setCategoryOption(state, categoryId, categoryOption);
     },
-    [lockedSelectorActionTypes.RESET_CATEGORY_OPTION]: (state, action) => {
+    [lockedSelectorActionTypes.CATEGORY_OPTION_RESET]: (state, action) => {
         const { categoryId } = action.payload;
         return resetCategoryOption(state, categoryId);
     },
-    [lockedSelectorActionTypes.RESET_ALL_CATEGORY_OPTIONS]: state => ({
+    [lockedSelectorActionTypes.ALL_CATEGORY_OPTIONS_RESET]: state => ({
         ...state,
         categories: undefined,
         categoriesMeta: undefined,
