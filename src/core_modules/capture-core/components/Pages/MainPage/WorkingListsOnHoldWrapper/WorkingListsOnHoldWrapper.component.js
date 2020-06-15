@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
 import { withLoadingIndicator } from '../../../../HOC';
-import { WorkingListsSetup } from '../WorkingListsSetup';
+import { EventWorkingLists } from '../EventWorkingLists';
 
-const WorkingListsSetupWithLoadingIndicator = withLoadingIndicator()(WorkingListsSetup);
+const EventWorkingListsSetupWithLoadingIndicator = withLoadingIndicator()(EventWorkingLists);
 
 type Props = {
     onHold: boolean,
@@ -12,7 +12,7 @@ type Props = {
 const WorkingListsOnHoldWrapper = (props: Props) => {
     const { onHold } = props;
     return (
-        <WorkingListsSetupWithLoadingIndicator
+        <EventWorkingListsSetupWithLoadingIndicator
             ready={!onHold}
         />
     );

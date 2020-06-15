@@ -1,12 +1,18 @@
 // @flow
-export { default as WorkingLists } from './WorkingLists.container';
-export { actionTypes } from './workingLists.actions';
+export { default as WorkingLists } from './WorkingListsContextBuilder.component';
 export {
-    initEventListEpic,
-    updateEventListEpic,
-    retrieveTemplatesEpic,
-    requestDeleteEventEpic,
-    updateTemplateEpic,
-    addTemplateEpic,
-    deleteTemplateEpic,
-} from './epics';
+    dateFilterTypes,
+} from '../../../ListView';
+export type {
+    AssigneeFilterData,
+    DateFilterData,
+    BooleanFilterData,
+    TextFilterData,
+    NumericFilterData,
+    OptionSetFilterData,
+} from '../../../ListView';
+export type {
+    GetMainColumnMetadataHeaderFn,
+    GetOrdinaryColumnMetadataFn,
+    ColumnConfig,
+} from './workingLists.types';

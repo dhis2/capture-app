@@ -46,7 +46,7 @@ import {
     updateTemplateEpic,
     addTemplateEpic,
     deleteTemplateEpic,
-} from 'capture-core/components/Pages/MainPage/WorkingLists';
+} from 'capture-core/components/Pages/MainPage/EventWorkingLists';
 
 import {
     getEventFromUrlEpic,

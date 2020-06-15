@@ -12,17 +12,17 @@ import {
 import {
     actionTypes as listActionTypes,
 } from '../../../../components/List/list.actions';
-import { actionTypes as workingListsActionTypes } from '../../../../components/Pages/MainPage/WorkingLists';
+import { eventWorkingListsActionTypes } from '../../../../components/Pages/MainPage/EventWorkingLists';
 
 export const workingListsMetaDesc = createReducerDescription({
-    [workingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
+    [eventWorkingListsActionTypes.EVENT_LIST_INIT]: (state, action) => {
         const { listId } = action.payload;
         return {
             ...state,
             [listId]: undefined,
         };
     },
-    [workingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
+    [eventWorkingListsActionTypes.EVENT_LIST_INIT_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const { listId, config, pagingData } = action.payload;
         const {
@@ -57,7 +57,7 @@ export const workingListsMetaDesc = createReducerDescription({
 
         return newState;
     },
-    [workingListsActionTypes.EVENT_LIST_UPDATE_SUCCESS]: (state, action) => {
+    [eventWorkingListsActionTypes.EVENT_LIST_UPDATE_SUCCESS]: (state, action) => {
         const newState = { ...state };
         const { listId, pagingData } = action.payload;
         const next = newState[listId].next;
@@ -73,7 +73,7 @@ export const workingListsMetaDesc = createReducerDescription({
         };
         return newState;
     },
-    [workingListsActionTypes.EVENT_LIST_UPDATE_ERROR]: (state, action) => {
+    [eventWorkingListsActionTypes.EVENT_LIST_UPDATE_ERROR]: (state, action) => {
         const newState = { ...state };
         const listId = action.payload.listId;
         newState[listId] = {
@@ -82,7 +82,7 @@ export const workingListsMetaDesc = createReducerDescription({
         };
         return newState;
     },
-    [workingListsActionTypes.TEMPLATE_UPDATE]: (state, action) => {
+    [eventWorkingListsActionTypes.TEMPLATE_UPDATE]: (state, action) => {
         const { columnOrder, filters, sortById, sortByDirection, listId } = action.payload;
 
         const nextInitial = {
@@ -102,7 +102,7 @@ export const workingListsMetaDesc = createReducerDescription({
             },
         };
     },
-    [workingListsActionTypes.TEMPLATE_UPDATE_SUCCESS]: (state, action) => {
+    [eventWorkingListsActionTypes.TEMPLATE_UPDATE_SUCCESS]: (state, action) => {
         const { isActiveTemplate, listId } = action.payload;
 
         if (!isActiveTemplate) {
@@ -118,7 +118,7 @@ export const workingListsMetaDesc = createReducerDescription({
             },
         };
     },
-    [workingListsActionTypes.TEMPLATE_UPDATE_ERROR]: (state, action) => {
+    [eventWorkingListsActionTypes.TEMPLATE_UPDATE_ERROR]: (state, action) => {
         const { isActiveTemplate, listId } = action.payload;
 
         if (!isActiveTemplate) {
@@ -133,7 +133,7 @@ export const workingListsMetaDesc = createReducerDescription({
             },
         };
     },
-    [workingListsActionTypes.TEMPLATE_ADD]: (state, action) => {
+    [eventWorkingListsActionTypes.TEMPLATE_ADD]: (state, action) => {
         const { columnOrder, filters, sortById, sortByDirection, listId } = action.payload;
 
         const nextInitial = {
@@ -153,7 +153,7 @@ export const workingListsMetaDesc = createReducerDescription({
             },
         };
     },
-    [workingListsActionTypes.TEMPLATE_ADD_SUCCESS]: (state, action) => {
+    [eventWorkingListsActionTypes.TEMPLATE_ADD_SUCCESS]: (state, action) => {
         const { isActiveTemplate, listId } = action.payload;
 
         if (!isActiveTemplate) {
@@ -169,7 +169,7 @@ export const workingListsMetaDesc = createReducerDescription({
             },
         };
     },
-    [workingListsActionTypes.TEMPLATE_ADD_ERROR]: (state, action) => {
+    [eventWorkingListsActionTypes.TEMPLATE_ADD_ERROR]: (state, action) => {
         const { isActiveTemplate, listId } = action.payload;
 
         if (!isActiveTemplate) {

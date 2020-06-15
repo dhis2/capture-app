@@ -81,7 +81,6 @@ type Props = {
     sortByDirection: string,
     onSort: (listId: string, id: string, direction: string) => void,
     isUpdating?: ?boolean,
-    isUpdatingWithDialog?: ?boolean,
     getCustomEndCellHeader: (props: Props) => React.Node,
     onRowClick: (rowData: Object) => void,
     getCustomEndCellBody: (row: Object, props: Props) => React.Node,

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-06-10T13:02:35.753Z\n"
-"PO-Revision-Date: 2020-06-10T13:02:35.753Z\n"
+"POT-Creation-Date: 2020-06-15T18:38:49.731Z\n"
+"PO-Revision-Date: 2020-06-15T18:38:49.731Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -380,6 +380,18 @@ msgstr ""
 msgid "Organisation unit could not be loaded"
 msgstr ""
 
+msgid "Active"
+msgstr ""
+
+msgid "Completed"
+msgstr ""
+
+msgid "Working list could not be loaded"
+msgstr ""
+
+msgid "an error occurred loading working lists"
+msgstr ""
+
 msgid "Update view"
 msgstr ""
 
@@ -413,19 +425,7 @@ msgstr ""
 msgid "Show All"
 msgstr ""
 
-msgid "Working list could not be loaded"
-msgstr ""
-
-msgid "an error occurred loading working lists"
-msgstr ""
-
 msgid "Registered events"
-msgstr ""
-
-msgid "Active"
-msgstr ""
-
-msgid "Completed"
 msgstr ""
 
 msgid "Could not get organisation unit"

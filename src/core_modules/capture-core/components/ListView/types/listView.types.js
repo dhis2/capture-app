@@ -1,18 +1,17 @@
 // @flow
-import { dataElementTypes } from '../../../metaData';
+import { dataElementTypes, OptionSet } from '../../../metaData';
 
 export type CommonQueryData = {
     programId: string,
     orgUnitId: string,
     categories: ?Object,
-}
+};
 
 export type Column = {
     id: string,
     header: string,
     visible: boolean,
     type: $Values<typeof dataElementTypes>,
-    optionSet?: Object,
-    options?: Object,
+    optionSet?: OptionSet,
     singleSelect?: ?boolean,
 };

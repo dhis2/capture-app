@@ -1,4 +1,6 @@
 // @flow
+import { OptionSet } from '../../../../metaData';
+
 export type WorkingListTemplate = {
     id: string,
     isDefault?: ?boolean,
@@ -13,81 +15,6 @@ export type WorkingListTemplate = {
         manage: boolean,
     },
     notPreserved?: ?boolean,
-}
-
-export type ApiDataFilter = {
-    dataItem: string,
-    ge?: any,
-    le?: any,
-    in?: any,
-    like?: any,
-    eq?: any,
-    period?: any,
-}
-
-export type ApiDataFilterCommon = {|
-    dataItem: string,
-|}
-
-export type ApiDataFilterText = {
-    like: string,
-}
-
-export type ApiDataFilterNumeric = {
-    ge?: ?string,
-    le?: ?string,
-}
-
-export type ApiDataFilterBoolean = {
-    in: Array<string>,
-}
-
-export type ApiDataFilterTrueOnly = {
-    eq: string,
-}
-
-export const dateFilterTypes = Object.freeze({
-    ABSOLUTE: 'ABSOLUTE',
-    RELATIVE: 'RELATIVE',
-});
-
-export type ApiDataFilterDateAbsolute = {|
-    type: 'ABSOLUTE',
-    startDate?: ?string,
-    endDate?: ?string,
-|}
-
-export type ApiDataFilterDateRelative = {|
-    type: 'RELATIVE',
-    period: string,
-|}
-
-export type ApiDataFilterDate = ApiDataFilterDateAbsolute | ApiDataFilterDateRelative;
-
-export const assigneeFilterModes = Object.freeze({
-    PROVIDED: 'PROVIDED',
-    CURRENT: 'CURRENT',
-    ANY: 'ANY',
-    NONE: 'NONE',
-});
-
-export type ApiDataFilterAssignee = {|
-    assignedUserMode: $Values<typeof assigneeFilterModes>,
-    assignedUsers: ?Array<string>,
-|};
-
-export type ApiDataFilterOptionSet = {|
-    in: Array<string>,
-|};
-
-export type ApiEventQueryCriteria = {
-    dataFilters?: ?Array<ApiDataFilter>,
-    order?: ?string,
-    eventDate?: ?Object,
-    status?: ?string,
-    displayColumnOrder?: ?Array<string>,
-    assignedUserMode?: 'CURRENT' | 'PROVIDED' | 'NONE' | 'ANY',
-    assignedUsers?: Array<string>,
 }
 
 export type ListConfig = {
@@ -114,6 +41,13 @@ export type CommonQueryData = {|
 export type ColumnConfig = {
     id: string,
     visible: boolean,
+    type: string,
     isMainProperty?: ?boolean,
     apiName?: ?string,
+    header?: ?string,
+    options?: ?Array<{text: string, value: any}>,
 };
+
+export type GetOrdinaryColumnMetadataFn = (id: string) => { header: string, optionSet: ?OptionSet };
+export type GetMainColumnMetadataHeaderFn = (id: string) => string;
+export type DataSource = { [id: string]: Object };

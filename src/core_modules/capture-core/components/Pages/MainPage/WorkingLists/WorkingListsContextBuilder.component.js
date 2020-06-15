@@ -2,10 +2,12 @@
 import * as React from 'react';
 import {
     ManagerContext,
-    EventListConfigContext,
-    EventListLoaderContext,
+    ListViewConfigContext,
+    ListViewLoaderContext,
+    ListViewBuilderContext,
 } from './workingLists.context';
 import TemplatesLoader from './TemplatesLoader.component';
+import type { DataSource } from './workingLists.types';
 
 type PassOnProps = {|
     onLoadTemplates: Function,
@@ -28,13 +30,13 @@ type Props = {
     onCancelUpdateEventList: Function,
     listMeta: ?Object,
     columnOrder: ?Array<Object>,
-    eventsData: ?Object,
-    eventListIsLoading: boolean,
-    eventListIsUpdating: boolean,
-    eventListIsUpdatingWithDialog: boolean,
+    isLoading: boolean,
+    isUpdating: boolean,
+    isUpdatingWithDialog: boolean,
     onAddTemplate: Function,
     onUpdateTemplate: Function,
     onDeleteTemplate: Function,
+    convertToTemplateQueryCriteria: Function,
     onCleanSkipInitAddingTemplate: Function,
     onUnloadingContext: Function,
     orgUnitId: string,
@@ -43,6 +45,8 @@ type Props = {
     listContext: ?Object,
     onCheckSkipReload: Function,
     lastEventIdDeleted: ?string,
+    dataSource: DataSource,
+    recordsOrder: Array<string>,
     ...PassOnProps,
 };
 
@@ -59,13 +63,13 @@ const WorkingListsContextBuilder = (props: Props) => {
         onCancelUpdateEventList,
         listMeta,
         columnOrder,
-        eventsData,
-        eventListIsLoading,
-        eventListIsUpdating,
-        eventListIsUpdatingWithDialog,
+        isLoading,
+        isUpdating,
+        isUpdatingWithDialog,
         onAddTemplate,
         onUpdateTemplate,
         onDeleteTemplate,
+        convertToTemplateQueryCriteria,
         onCleanSkipInitAddingTemplate,
         onUnloadingContext,
         orgUnitId,
@@ -74,6 +78,8 @@ const WorkingListsContextBuilder = (props: Props) => {
         listContext,
         onCheckSkipReload,
         lastEventIdDeleted,
+        dataSource,
+        recordsOrder,
         ...passOnProps
     } = props;
 
@@ -98,16 +104,16 @@ const WorkingListsContextBuilder = (props: Props) => {
             return;
         }
 
-        if (eventListIsLoading || eventListIsUpdating || eventListIsUpdatingWithDialog) {
+        if (isLoading || isUpdating || isUpdatingWithDialog) {
             dirtyEventListStateFirstRunRef.current = true;
             return;
         }
 
         dirtyEventListStateFirstRunRef.current = false;
     }, [
-        eventListIsLoading,
-        eventListIsUpdating,
-        eventListIsUpdatingWithDialog,
+        isLoading,
+        isUpdating,
+        isUpdatingWithDialog,
     ]);
 
     const managerData = React.useMemo(() => ({
@@ -115,23 +121,24 @@ const WorkingListsContextBuilder = (props: Props) => {
         onSelectTemplate,
     }), [currentTemplate, onSelectTemplate]);
 
-    const eventListConfig = React.useMemo(() => ({
+    const listViewConfigContextData = React.useMemo(() => ({
         listMeta,
         columnOrder,
         onAddTemplate,
         onUpdateTemplate,
         onDeleteTemplate,
+        convertToTemplateQueryCriteria,
     }), [
         listMeta,
         columnOrder,
         onAddTemplate,
         onUpdateTemplate,
         onDeleteTemplate,
+        convertToTemplateQueryCriteria,
     ]);
 
-    const eventListData = React.useMemo(() => ({
-        eventsData,
-        eventListIsLoading,
+    const listViewLoaderContextData = React.useMemo(() => ({
+        isLoading,
         onLoadEventList,
         loadEventListError,
         onUpdateEventList,
@@ -146,8 +153,7 @@ const WorkingListsContextBuilder = (props: Props) => {
         lastEventIdDeleted,
         dirtyEventList: dirtyTemplatesStateFirstRunRef.current || dirtyEventListStateFirstRunRef.current,
     }), [
-        eventsData,
-        eventListIsLoading,
+        isLoading,
         onLoadEventList,
         loadEventListError,
         onUpdateEventList,
@@ -160,6 +166,18 @@ const WorkingListsContextBuilder = (props: Props) => {
         listContext,
         onCheckSkipReload,
         lastEventIdDeleted,
+    ]);
+
+    const listViewBuilderContextData = React.useMemo(() => ({
+        isUpdating,
+        columnOrder,
+        dataSource,
+        recordsOrder,
+    }), [
+        isUpdating,
+        columnOrder,
+        dataSource,
+        recordsOrder,
     ]);
 
     const templates = React.useMemo(() =>
@@ -178,20 +196,24 @@ const WorkingListsContextBuilder = (props: Props) => {
         <ManagerContext.Provider
             value={managerData}
         >
-            <EventListLoaderContext.Provider
-                value={eventListData}
+            <ListViewConfigContext.Provider
+                value={listViewConfigContextData}
             >
-                <EventListConfigContext.Provider
-                    value={eventListConfig}
+                <ListViewLoaderContext.Provider
+                    value={listViewLoaderContextData}
                 >
-                    <TemplatesLoader
-                        {...passOnProps}
-                        templates={templates}
-                        listId={listId}
-                        dirtyTemplates={!!dirtyTemplatesStateFirstRunRef.current}
-                    />
-                </EventListConfigContext.Provider>
-            </EventListLoaderContext.Provider>
+                    <ListViewBuilderContext.Provider
+                        value={listViewBuilderContextData}
+                    >
+                        <TemplatesLoader
+                            {...passOnProps}
+                            templates={templates}
+                            listId={listId}
+                            dirtyTemplates={!!dirtyTemplatesStateFirstRunRef.current}
+                        />
+                    </ListViewBuilderContext.Provider>
+                </ListViewLoaderContext.Provider>
+            </ListViewConfigContext.Provider>
         </ManagerContext.Provider>
     );
 };

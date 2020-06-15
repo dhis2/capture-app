@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { dataElementTypes, OptionSet } from '../../metaData';
 import { withFilterSelectors } from './FilterSelectors/withFilterSelectors';
 import { ListPagination } from './Pagination';
 import { ColumnSelector } from './ColumnSelector';
@@ -9,6 +8,8 @@ import { withEndColumnMenu } from './withEndColumnMenu';
 import DialogLoadingMask from '../LoadingMasks/DialogLoadingMask.component';
 import { OnlineList } from '../List';
 import { MoreMenu } from './MoreMenu';
+
+import type { Column } from './types';
 
 const ListWithEndColumnMenu = withEndColumnMenu()(OnlineList);
 
@@ -38,14 +39,6 @@ const getStyles = (theme: Theme) => ({
         justifyContent: 'flex-end',
     },
 });
-
-export type Column = {
-    id: string,
-    header: string,
-    visible: boolean,
-    type: $Values<typeof dataElementTypes>,
-    optionSet?: ?OptionSet,
-};
 
 type Props = {
     listId: string,

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import EventListConfig from './EventListConfig.component';
+import { ListViewConfig } from './ListViewConfig.component';
 import TemplateSelector from './TemplateSelector.component';
 import { ManagerContext } from './workingLists.context';
 import { withBorder } from './borderHOC';
@@ -10,7 +10,6 @@ import type {
 
 type PassOnProps = {|
     defaultConfig: Map<string, Object>,
-    eventsData: ?Object,
 |};
 
 type Props = {
@@ -42,7 +41,7 @@ const TemplatesManager = (props: Props) => {
     ]);
 
     return (
-        <EventListConfig
+        <ListViewConfig
             {...passOnProps}
             listId={listId}
             currentTemplate={currentTemplate}
@@ -57,7 +56,7 @@ const TemplatesManager = (props: Props) => {
                     />
                 )
             }
-        </EventListConfig>
+        </ListViewConfig>
     );
 };
 
