@@ -51,6 +51,9 @@ msgstr "Veuillez saisir un zéro ou nombre entier positif valide"
 msgid "Please provide a negative integer"
 msgstr "Veuillez saisir un nombre entier négatif valide"
 
+msgid "A date in the future is not allowed"
+msgstr ""
+
 msgid "Please provide a valid date and time"
 msgstr "Veuillez saisir une date et heure valide"
 
