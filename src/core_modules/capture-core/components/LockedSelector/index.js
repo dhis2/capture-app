@@ -4,9 +4,9 @@ export {
     updateSelectionsFromUrl,
 } from './LockedSelector.actions';
 export {
-    validateUrlUpdateEpic,
-    setOrgUnitDataEmptyBasedUrlUpdateEpic,
-    getOrgUnitDataBasedUrlUpdateEpic,
-    updateUrlViaSearchSelectorEpic,
+    validateSelectionsBasedOnUrlUpdateEpic,
+    setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
+    getOrgUnitDataBasedOnUrlUpdateEpic,
+    updateUrlViaLockedSelectorEpic,
 } from './LockedSelector.epics';
 export { LockedSelector } from './LockedSelector.container';
