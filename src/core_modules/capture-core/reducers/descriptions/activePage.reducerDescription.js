@@ -12,46 +12,46 @@ import { actionTypes as eventListActionTypes } from '../../components/Pages/Main
 export const searchPageDesc = createReducerDescription({
     [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: state => ({
         ...state,
-        isPageContentLoading: true,
+        isDataEntryLoading: true,
     }),
     [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: state => ({
         ...state,
-        isLoading: true,
+        isPageLoading: true,
     }),
     [lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID]: state => ({
         ...state,
         selectionsError: null,
-        isLoading: false,
-        isPageContentLoading: true,
+        isPageLoading: false,
+        isDataEntryLoading: true,
     }),
     [lockedSelectorActionTypes.SELECTIONS_FROM_URL_INVALID]: (state, action) => ({
         ...state,
-        isLoading: false,
+        isPageLoading: false,
         selectionsError: action.payload,
     }),
     [lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_ERROR_RETRIEVING]: (state, action) => ({
         ...state,
-        isLoading: false,
+        isPageLoading: false,
         selectionsError: action.payload,
     }),
 
     [viewEventPageActionTypes.VIEW_EVENT_FROM_URL]: state => ({
         ...state,
-        isPageContentLoading: true,
-        isLoading: true,
+        isDataEntryLoading: true,
+        isPageLoading: true,
     }),
     [viewEventDataEntryActionTypes.PREREQUISITES_ERROR_LOADING_VIEW_EVENT_DATA_ENTRY]: (state, action) => ({
         ...state,
-        isPageContentLoading: false,
+        isDataEntryLoading: false,
         viewEventLoadError: action.payload,
     }),
     [viewEventDataEntryActionTypes.VIEW_EVENT_DATA_ENTRY_LOADED]: state => ({
         ...state,
-        isPageContentLoading: false,
+        isDataEntryLoading: false,
     }),
     [eventListActionTypes.OPEN_VIEW_EVENT_PAGE]: state => ({
         ...state,
-        isPageContentLoading: true,
+        isDataEntryLoading: true,
     }),
     [viewEventPageActionTypes.OPEN_VIEW_EVENT_PAGE_FAILED]: (state, action) => ({
         ...state,
@@ -59,26 +59,26 @@ export const searchPageDesc = createReducerDescription({
     }),
     [viewEventPageActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE]: state => ({
         ...state,
-        isPageContentLoading: true,
-        isLoading: false,
+        isDataEntryLoading: true,
+        isPageLoading: false,
     }),
     [viewEventActionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE]: state => ({
         ...state,
-        isPageContentLoading: true,
-        isLoading: false,
+        isDataEntryLoading: true,
+        isPageLoading: false,
     }),
     [viewEventPageActionTypes.EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED]: (state, action) => ({
         ...state,
         viewEventLoadError: action.payload,
-        isLoading: false,
+        isPageLoading: false,
     }),
 
     [newEventDataEntryActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY]: state => ({
         ...state,
-        isPageContentLoading: false,
+        isDataEntryLoading: false,
     }),
     [newEventDataEntryActionTypes.NEW_EVENT_IN_DATAENTRY_OPENING_CANCEL]: state => ({
         ...state,
-        isPageContentLoading: false,
+        isDataEntryLoading: false,
     }),
 }, 'activePage');

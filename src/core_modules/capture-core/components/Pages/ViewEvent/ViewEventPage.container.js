@@ -12,7 +12,7 @@ const mapStateToProps = (state: ReduxState) => {
         dataEntryHasChanges(state, 'singleEvent-editEvent');
     return {
         error: state.activePage.viewEventLoadError && state.activePage.viewEventLoadError.error,
-        ready: !state.activePage.isLoading,
+        ready: !state.activePage.isPageLoading,
         isUserInteractionInProgress,
         showAddRelationship: state.viewEventPage.showAddRelationship,
     };

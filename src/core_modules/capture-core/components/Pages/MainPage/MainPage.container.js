@@ -6,7 +6,7 @@ import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 const mapStateToProps = (state: ReduxState) => ({
     currentSelectionsComplete: !!state.currentSelections.complete,
     error: state.activePage.selectionsError && state.activePage.selectionsError.error,
-    ready: !state.activePage.isLoading,
+    ready: !state.activePage.isPageLoading,
 });
 
 export const MainPage = connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(MainPageComponent)));

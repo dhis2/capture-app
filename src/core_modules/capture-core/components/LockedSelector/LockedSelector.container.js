@@ -20,7 +20,7 @@ import withLoadingIndicator from '../../HOC/withLoadingIndicator';
 const mapStateToProps = (state: ReduxState) => ({
     selectedProgramId: state.currentSelections.programId,
     selectedOrgUnitId: state.currentSelections.orgUnitId,
-    ready: !state.activePage.isLoading,
+    ready: !state.activePage.isPageLoading,
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
