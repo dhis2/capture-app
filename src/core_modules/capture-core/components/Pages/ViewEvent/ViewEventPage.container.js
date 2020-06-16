@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import ViewEventSelector from './ViewEventPage.component';
+import { ViewEventPageComponent } from './ViewEventPage.component';
 import dataEntryHasChanges from '../../DataEntry/common/dataEntryHasChanges';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../HOC';
 
@@ -18,5 +18,5 @@ const mapStateToProps = (state: ReduxState) => {
     };
 };
 
-export const ViewEventPageContainer = connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(ViewEventSelector)));
+export const ViewEventPage = connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(ViewEventPageComponent)));
 

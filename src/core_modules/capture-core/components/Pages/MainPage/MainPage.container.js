@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import MainPage from './MainPage.component';
+import { MainPageComponent } from './MainPage.component';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 
 const mapStateToProps = (state: ReduxState) => ({
@@ -9,4 +9,4 @@ const mapStateToProps = (state: ReduxState) => ({
     ready: !state.activePage.isLoading,
 });
 
-export default connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(MainPage)));
+export const MainPage = connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(MainPageComponent)));

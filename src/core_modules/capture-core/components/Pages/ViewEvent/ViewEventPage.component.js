@@ -9,7 +9,7 @@ type Props = {
   showAddRelationship: boolean,
 };
 
-const ViewEventSelector = ({ isUserInteractionInProgress, showAddRelationship }: Props) => (
+export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRelationship }: Props) => (
     <div>
         <LockedSelector isUserInteractionInProgress={isUserInteractionInProgress} />
 
@@ -20,4 +20,3 @@ const ViewEventSelector = ({ isUserInteractionInProgress, showAddRelationship }:
         }
     </div>);
 
-export default ViewEventSelector;

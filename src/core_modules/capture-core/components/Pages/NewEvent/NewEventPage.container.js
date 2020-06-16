@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import NewEventPage from './NewEventPage.component';
+import { NewEventPageComponent } from './NewEventPage.component';
 import dataEntryHasChanges from '../../DataEntry/common/dataEntryHasChanges';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../HOC';
 
@@ -17,4 +17,4 @@ const mapStateToProps = (state: ReduxState) => {
     };
 };
 
-export default connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(NewEventPage)));
+export const NewEventPage = connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(NewEventPageComponent)));
