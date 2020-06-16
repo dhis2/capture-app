@@ -2,6 +2,7 @@
 export { isValidDate } from './dateValidator';
 export { isValidDateTime } from './dateTimeValidator';
 export { isValidAge } from './ageValidator';
+export { isValidNonFutureDate } from './isValidNonFutureDate';
 export { getNumberRangeValidator } from './getNumberRangeValidator';
 export { getDateRangeValidator } from './getDateRangeValidator';
 export { getDateTimeRangeValidator } from './getDateTimeRangeValidator';

@@ -1,6 +1,6 @@
 // @flow
 import type { ValidatorContainer } from 'capture-ui/FormBuilder/FormBuilder.component';
-import getValidators from '../../validators';
+import { getValidators } from '../../validators';
 import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
 
 export type FieldConfigForType = {
