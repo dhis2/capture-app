@@ -32,7 +32,8 @@ export type CachedProgramTrackedEntityAttribute = {
     searchable: boolean,
     mandatory: boolean,
     renderOptionsAsRadio: ?boolean,
-}
+    allowFutureDate?: ?boolean,
+};
 
 export type CachedDataElementTranslation = {
     property: string,
@@ -60,6 +61,7 @@ export type CachedDataElement = {
 
 export type CachedProgramStageDataElement = {
     compulsory: boolean,
+    allowFutureDate?: ?boolean,
     displayInReports: boolean,
     renderOptionsAsRadio?: ?boolean,
     renderType: {
