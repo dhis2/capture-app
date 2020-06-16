@@ -2,11 +2,11 @@ export {
     lockedSelectorBatchActionTypes,
     lockedSelectorActionTypes,
     updateSelectionsFromUrl,
-} from './actions';
+} from './LockedSelector.actions';
 export {
-    validationForSearchUrlUpdateEpic,
-    selectionsFromUrlEmptyOrgUnitForSearchEpic,
-    getOrgUnitDataForSearchUrlUpdateEpic,
-    searchPageSelectorUpdateURLEpic,
-} from './epics';
-export { LockedSelector } from './container';
+    validateUrlUpdateEpic,
+    setOrgUnitDataEmptyBasedUrlUpdateEpic,
+    getOrgUnitDataBasedUrlUpdateEpic,
+    updateUrlViaSearchSelectorEpic,
+} from './LockedSelector.epics';
+export { LockedSelector } from './LockedSelector.container';

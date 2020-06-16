@@ -1,6 +1,6 @@
 // @flow
 import { push } from 'connected-react-router';
-import { lockedSelectorActionTypes } from '../../../LockedSelector/actions';
+import { lockedSelectorActionTypes } from '../../../LockedSelector/LockedSelector.actions';
 
 const getArguments = (programId: string, orgUnitId: string) => {
     const argArray = [];

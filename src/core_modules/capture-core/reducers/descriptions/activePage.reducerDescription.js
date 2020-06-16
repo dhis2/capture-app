@@ -1,6 +1,6 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux';
-import { lockedSelectorActionTypes } from '../../components/LockedSelector/actions';
+import { lockedSelectorActionTypes } from '../../components/LockedSelector/LockedSelector.actions';
 import {
     actionTypes as viewEventActionTypes,
     actionTypes as viewEventPageActionTypes,

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-06-08T15:30:55.012Z\n"
-"PO-Revision-Date: 2020-06-08T15:30:55.012Z\n"
+"POT-Creation-Date: 2020-06-16T08:38:45.915Z\n"
+"PO-Revision-Date: 2020-06-16T08:38:45.915Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -281,6 +281,15 @@ msgstr ""
 msgid "No items to display"
 msgstr ""
 
+msgid "Could not get organisation unit"
+msgstr ""
+
+msgid "Program doesn't exist"
+msgstr ""
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr ""
+
 msgid "New {{typeName}}"
 msgstr ""
 
@@ -327,15 +336,6 @@ msgid "Select program"
 msgstr ""
 
 msgid "No programs available."
-msgstr ""
-
-msgid "Could not get organisation unit"
-msgstr ""
-
-msgid "Program doesn't exist"
-msgstr ""
-
-msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "Online"

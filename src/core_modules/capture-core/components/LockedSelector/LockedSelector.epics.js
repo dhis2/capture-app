@@ -1,5 +1,6 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
+import { push } from 'connected-react-router';
 import {
     lockedSelectorActionTypes,
     lockedSelectorBatchActionTypes,
@@ -8,10 +9,9 @@ import {
     setCurrentOrgUnitBasedOnUrl,
     errorRetrievingOrgUnitBasedOnUrl,
     setEmptyOrgUnitBasedOnUrl,
-} from './actions';
+} from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
 import { getApi } from '../../d2';
-import { push } from 'connected-react-router';
 
 
 const exactUrl = (page: string, programId: string, orgUnitId: string) => {
@@ -29,7 +29,7 @@ const exactUrl = (page: string, programId: string, orgUnitId: string) => {
     return `/${argArray.join('&')}`;
 };
 
-export const searchPageSelectorUpdateURLEpic = (action$: InputObservable, store: ReduxStore) =>
+export const updateUrlViaLockedSelectorEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.ofType(
         lockedSelectorActionTypes.ORG_UNIT_ID_RESET,
         lockedSelectorActionTypes.ORG_UNIT_ID_SET,
@@ -47,7 +47,7 @@ export const searchPageSelectorUpdateURLEpic = (action$: InputObservable, store:
         });
 
 
-export const getOrgUnitDataForSearchUrlUpdateEpic = (action$: InputObservable) =>
+export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE)
         .filter(action => action.payload.nextProps.orgUnitId)
         .switchMap(action => getApi()
@@ -62,12 +62,12 @@ export const getOrgUnitDataForSearchUrlUpdateEpic = (action$: InputObservable) =
             ),
         );
 
-export const selectionsFromUrlEmptyOrgUnitForSearchEpic = (action$: InputObservable) =>
+export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE)
         .filter(action => !action.payload.nextProps.orgUnitId)
         .map(() => setEmptyOrgUnitBasedOnUrl());
 
-export const validationForSearchUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
+export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.ofType(
         lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_SET,
         lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_EMPTY_SET)

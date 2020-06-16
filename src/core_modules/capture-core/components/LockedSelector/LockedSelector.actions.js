@@ -26,17 +26,17 @@ export const lockedSelectorBatchActionTypes = {
     PROGRAM_AND_CATEGORY_OPTION_RESET: 'BatchProgramAndCategoryOptionResetFromPageUsingTheSelector',
 };
 
-export const setOrgUnitFromSearchPage = (id: string, orgUnit: Object) => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_SET)({ id, orgUnit });
-export const setProgramIdFromSearchPage = (id: string) => actionCreator(lockedSelectorActionTypes.PROGRAM_ID_SET)(id);
-export const setCategoryOptionFromSearchPage = (categoryId: string, categoryOption: Object) => actionCreator(lockedSelectorActionTypes.CATEGORY_OPTION_SET)({ categoryId, categoryOption });
+export const setOrgUnitFromLockedSelector = (id: string, orgUnit: Object) => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_SET)({ id, orgUnit });
+export const setProgramIdFromLockedSelector = (id: string) => actionCreator(lockedSelectorActionTypes.PROGRAM_ID_SET)(id);
+export const setCategoryOptionFromLockedSelector = (categoryId: string, categoryOption: Object) => actionCreator(lockedSelectorActionTypes.CATEGORY_OPTION_SET)({ categoryId, categoryOption });
 
 
-export const resetOrgUnitIdFromSearchPage = () => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_RESET)();
-export const resetProgramIdFromSearchPage = () => actionCreator(lockedSelectorActionTypes.PROGRAM_ID_RESET)();
-export const resetCategoryOptionFromSearchPage = (categoryId: string) => actionCreator(lockedSelectorActionTypes.CATEGORY_OPTION_RESET)({ categoryId });
-export const resetAllCategoryOptionsFromSearchPage = () => actionCreator(lockedSelectorActionTypes.ALL_CATEGORY_OPTIONS_RESET)();
+export const resetOrgUnitIdFromLockedSelector = () => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_RESET)();
+export const resetProgramIdFromLockedSelector = () => actionCreator(lockedSelectorActionTypes.PROGRAM_ID_RESET)();
+export const resetCategoryOptionFromLockedSelector = (categoryId: string) => actionCreator(lockedSelectorActionTypes.CATEGORY_OPTION_RESET)({ categoryId });
+export const resetAllCategoryOptionsFromLockedSelector = () => actionCreator(lockedSelectorActionTypes.ALL_CATEGORY_OPTIONS_RESET)();
 
-export const openNewEventPage = (programId: string, orgUnitId: string) => actionCreator(lockedSelectorActionTypes.NEW_EVENT_OPEN)({ programId, orgUnitId });
+export const openNewEventPageFromLockedSelector = (programId: string, orgUnitId: string) => actionCreator(lockedSelectorActionTypes.NEW_EVENT_OPEN)({ programId, orgUnitId });
 
 
 // url specific

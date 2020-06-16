@@ -4,7 +4,7 @@ import { actionTypes as editEventActionTypes } from '../../components/Pages/Edit
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { actionTypes as setOrgUnitActionTypes } from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
 import { urlActionTypes as newEnrollmentUrlActionTypes } from '../../components/Pages/NewEnrollment';
-import { lockedSelectorActionTypes } from '../../components/LockedSelector/actions';
+import { lockedSelectorActionTypes } from '../../components/LockedSelector/LockedSelector.actions';
 import { orgUnitListActionTypes } from '../../components/LockedSelector/QuickSelector';
 import { set as setStoreRoots } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import { actionTypes as initActionTypes } from '../../init/init.actions';

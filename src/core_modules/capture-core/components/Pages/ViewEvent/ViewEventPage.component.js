@@ -2,7 +2,7 @@
 import React from 'react';
 import ViewEvent from './ViewEventComponent/ViewEvent.container';
 import ViewEventNewRelationshipWrapper from './Relationship/ViewEventNewRelationshipWrapper.container';
-import { LockedSelector } from '../../LockedSelector/container';
+import { LockedSelector } from '../../LockedSelector/LockedSelector.container';
 
 type Props = {
   isUserInteractionInProgress: boolean,
