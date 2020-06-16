@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import ViewEventSelector from './ViewEventPage.component';
+import { ViewEventPageComponent } from './ViewEventPage.component';
 import dataEntryHasChanges from '../../DataEntry/common/dataEntryHasChanges';
 import { withLoadingIndicator, withErrorMessageHandler } from '../../../HOC';
 
@@ -12,11 +12,11 @@ const mapStateToProps = (state: ReduxState) => {
         dataEntryHasChanges(state, 'singleEvent-editEvent');
     return {
         error: state.activePage.viewEventLoadError && state.activePage.viewEventLoadError.error,
-        ready: !state.activePage.isLoading,
+        ready: !state.activePage.isPageLoading,
         isUserInteractionInProgress,
         showAddRelationship: state.viewEventPage.showAddRelationship,
     };
 };
 
-export const ViewEventPageContainer = connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(ViewEventSelector)));
+export const ViewEventPage = connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(ViewEventPageComponent)));
 

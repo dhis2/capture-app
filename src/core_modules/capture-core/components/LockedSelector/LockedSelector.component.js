@@ -38,7 +38,7 @@ type State = {
     openNewEventWarning: boolean;
 };
 
-class SelectorLevel extends Component<Props, State> {
+export class LockedSelectorComponent extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
 
@@ -182,5 +182,3 @@ class SelectorLevel extends Component<Props, State> {
         );
     }
 }
-
-export default SelectorLevel;

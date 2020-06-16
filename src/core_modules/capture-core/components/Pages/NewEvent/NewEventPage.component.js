@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import DataEntrySelectionsComplete from './SelectionsComplete/SelectionsComplete.container';
 import DataEntrySelectionsIncomplete from './SelectionsIncomplete/DataEntrySelectionsIncomplete.container';
 import { TrackerProgramHandler } from '../../TrackerProgramHandler';
-import { LockedSelector } from '../../LockedSelector/container';
+import { LockedSelector } from '../../LockedSelector/LockedSelector.container';
 
 const getStyles = () => ({
 
@@ -15,7 +15,7 @@ type Props = {
     isUserInteractionInProgress: boolean,
 };
 
-class IsSelectionsCompleteLevel extends React.Component<Props> {
+class Index extends React.Component<Props> {
     renderContents() {
         const { isSelectionsComplete } = this.props;
         if (!isSelectionsComplete) {
@@ -41,4 +41,4 @@ class IsSelectionsCompleteLevel extends React.Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(IsSelectionsCompleteLevel);
+export const NewEventPageComponent = withStyles(getStyles)(Index);

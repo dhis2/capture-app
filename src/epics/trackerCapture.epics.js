@@ -166,10 +166,10 @@ import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../init/en
 import getDataEntryEpics from './getDataEntryEpics';
 
 import {
-    searchPageSelectorUpdateURLEpic,
-    validationForSearchUrlUpdateEpic,
-    getOrgUnitDataForSearchUrlUpdateEpic,
-    selectionsFromUrlEmptyOrgUnitForSearchEpic,
+    updateUrlViaLockedSelectorEpic,
+    validateSelectionsBasedOnUrlUpdateEpic,
+    getOrgUnitDataBasedOnUrlUpdateEpic,
+    setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
 
 export default combineEpics(
@@ -269,9 +269,9 @@ export default combineEpics(
     loadSearchGroupDuplicatesForReviewEpic,
     teiForNewEventRelationshipSavedEpic,
     saveAssigneeEpic,
-    searchPageSelectorUpdateURLEpic,
-    validationForSearchUrlUpdateEpic,
-    getOrgUnitDataForSearchUrlUpdateEpic,
-    selectionsFromUrlEmptyOrgUnitForSearchEpic,
+    updateUrlViaLockedSelectorEpic,
+    validateSelectionsBasedOnUrlUpdateEpic,
+    getOrgUnitDataBasedOnUrlUpdateEpic,
+    setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
     ...getDataEntryEpics(),
 );

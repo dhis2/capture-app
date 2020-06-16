@@ -2,19 +2,11 @@ export {
     lockedSelectorBatchActionTypes,
     lockedSelectorActionTypes,
     updateSelectionsFromUrl,
-    resetOrgUnitIdFromSearchPage,
-    setOrgUnitFromSearchPage,
-    setProgramIdFromSearchPage,
-    resetProgramIdFromSearchPage,
-    setCategoryOptionFromSearchPage,
-    resetCategoryOptionFromSearchPage,
-    resetAllCategoryOptionsFromSearchPage,
-    openNewEventPage,
-} from './actions';
+} from './LockedSelector.actions';
 export {
-    validationForSearchUrlUpdateEpic,
-    selectionsFromUrlEmptyOrgUnitForSearchEpic,
-    getOrgUnitDataForSearchUrlUpdateEpic,
-    searchPageSelectorUpdateURLEpic,
-} from './epics';
-export { LockedSelector } from './container';
+    validateSelectionsBasedOnUrlUpdateEpic,
+    setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
+    getOrgUnitDataBasedOnUrlUpdateEpic,
+    updateUrlViaLockedSelectorEpic,
+} from './LockedSelector.epics';
+export { LockedSelector } from './LockedSelector.container';

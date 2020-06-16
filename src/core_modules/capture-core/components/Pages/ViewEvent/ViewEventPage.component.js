@@ -2,14 +2,14 @@
 import React from 'react';
 import ViewEvent from './ViewEventComponent/ViewEvent.container';
 import ViewEventNewRelationshipWrapper from './Relationship/ViewEventNewRelationshipWrapper.container';
-import { LockedSelector } from '../../LockedSelector/container';
+import { LockedSelector } from '../../LockedSelector/LockedSelector.container';
 
 type Props = {
   isUserInteractionInProgress: boolean,
   showAddRelationship: boolean,
 };
 
-const ViewEventSelector = ({ isUserInteractionInProgress, showAddRelationship }: Props) => (
+export const ViewEventPageComponent = ({ isUserInteractionInProgress, showAddRelationship }: Props) => (
     <div>
         <LockedSelector isUserInteractionInProgress={isUserInteractionInProgress} />
 
@@ -20,4 +20,3 @@ const ViewEventSelector = ({ isUserInteractionInProgress, showAddRelationship }:
         }
     </div>);
 
-export default ViewEventSelector;

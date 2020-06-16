@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import EventsListConnectivityWrapper from './EventsListConnectivityWrapper/EventsListConnectivityWrapper.container';
 import { TrackerProgramHandler } from '../../TrackerProgramHandler';
-import { LockedSelector } from '../../LockedSelector/container';
+import { LockedSelector } from '../../LockedSelector/LockedSelector.container';
 
 const getStyles = () => ({
     listContainer: {
@@ -21,7 +21,7 @@ type Props = {
     },
 };
 
-class MainPage extends Component<Props> {
+class Index extends Component<Props> {
     render() {
         const { currentSelectionsComplete, classes } = this.props;
 
@@ -52,4 +52,4 @@ class MainPage extends Component<Props> {
     }
 }
 
-export default withStyles(getStyles)(MainPage);
+export const MainPageComponent = withStyles(getStyles)(Index);

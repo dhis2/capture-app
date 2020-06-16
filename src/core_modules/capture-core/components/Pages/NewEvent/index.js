@@ -1,6 +1,6 @@
 // @flow
 
-export { default as NewEventPage } from './NewEventPage.container';
+export { NewEventPage } from './NewEventPage.container';
 // actions
 export {
     actionTypes as dataEntryActionTypes,
