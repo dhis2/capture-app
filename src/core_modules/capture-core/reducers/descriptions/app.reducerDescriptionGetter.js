@@ -130,7 +130,7 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         return newState;
     },
 
-    [lockedSelectorActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => ({
+    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: (state, action) => ({
         ...state,
         page: action.payload.nextPage,
     }),
