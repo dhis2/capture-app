@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-03-09T19:35:56.143Z\n"
+"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -49,6 +49,9 @@ msgstr "Oppgi null eller et positivt heltall"
 
 msgid "Please provide a negative integer"
 msgstr "Oppgi et negativt heltall"
+
+msgid "A date in the future is not allowed"
+msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr "Oppgi en gyldig dato og tid"

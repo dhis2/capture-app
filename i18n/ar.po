@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-03-09T19:35:56.143Z\n"
+"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -51,6 +51,9 @@ msgstr "من فضلك ادخل عدداً صحيحاً موجباً، أو صف�
 
 msgid "Please provide a negative integer"
 msgstr "من فضلك ادخل عدداً صحيحاً سالباً"
+
+msgid "A date in the future is not allowed"
+msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr "من فضلك ادخل صيغة سليمة للتاريخ والوقت"
