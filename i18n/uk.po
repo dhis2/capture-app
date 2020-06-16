@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2019-11-20T10:50:45.136Z\n"
+"POT-Creation-Date: 2020-06-16T15:06:59.453Z\n"
 "PO-Revision-Date: 2019-08-29 11:02+0000\n"
 "Last-Translator: phil_dhis2, 2019\n"
 "Language-Team: Ukrainian (https://www.transifex.com/hisp-uio/teams/100509/uk/)\n"
@@ -47,6 +47,9 @@ msgid "Please provide a negative integer"
 msgstr ""
 
 msgid "Please provide a valid date"
+msgstr ""
+
+msgid "A date in the future is not allowed"
 msgstr ""
 
 msgid "Please provide a valid date and time"
