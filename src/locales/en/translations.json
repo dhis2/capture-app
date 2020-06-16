@@ -10,6 +10,7 @@
     "Please provide a positive integer": "",
     "Please provide zero or a positive integer": "",
     "Please provide a negative integer": "",
+    "A date in the future is not allowed": "",
     "Please provide a valid date and time": "",
     "Please provide a valid time": "",
     "Please provide a valid percentage": "",
