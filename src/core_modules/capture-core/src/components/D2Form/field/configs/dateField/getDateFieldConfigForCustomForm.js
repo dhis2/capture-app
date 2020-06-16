@@ -1,13 +1,15 @@
 // @flow
+import moment from '../../../../../utils/moment/momentResolver';
 import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 import { DateFieldForCustomForm } from '../../Components';
-import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
+import { DateDataElement } from '../../../../../metaData';
 
-const getDateFieldConfig = (metaData: MetaDataElement) => {
+const getDateFieldConfig = (metaData: DateDataElement) => {
     const props = createProps({
         width: 350,
         maxWidth: 350,
         calendarWidth: 350,
+        calendarMaxMoment: !metaData.allowFutureDate ? moment() : undefined,
     }, metaData);
 
     return createFieldConfig({

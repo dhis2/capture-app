@@ -19,16 +19,18 @@ import {
     isValidUsername,
     isValidAge,
     isValidDate,
+    isValidNonFutureDate,
     isValidDateTime,
     getNumberRangeValidator,
     getDateRangeValidator,
     getDateTimeRangeValidator,
     getTimeRangeValidator,
-} from '../../../utils/validators/form';
-import { DataElement as MetaDataElement } from '../../../metaData';
-import elementTypes from '../../../metaData/DataElement/elementTypes';
+} from '../../../../utils/validators/form';
+import { DataElement as MetaDataElement, DateDataElement } from '../../../../metaData';
+import elementTypes from '../../../../metaData/DataElement/elementTypes';
+import { validatorTypes } from './constants';
 
-type Validator = (value: any) => boolean;
+type Validator = (value: any) => Promise<boolean> | boolean;
 
 type ValidatorContainer = {
     validator: Validator,
@@ -49,6 +51,7 @@ const errorMessages = {
     ZERO_OR_POSITIVE_INTEGER: i18n.t('Please provide zero or a positive integer'),
     NEGATIVE_INTEGER: i18n.t('Please provide a negative integer'),
     DATE: i18n.t('Please provide a valid date'),
+    DATE_FUTURE_NOT_ALLOWED: i18n.t('A date in the future is not allowed'),
     DATETIME: i18n.t('Please provide a valid date and time'),
     TIME: i18n.t('Please provide a valid time'),
     PERCENTAGE: i18n.t('Please provide a valid percentage'),
@@ -109,10 +112,15 @@ const validatorsForTypes = {
         validator: isValidTime,
         message: errorMessages.TIME,
     }),
-    [elementTypes.DATE]: () => ({
+    [elementTypes.DATE]: (dateDataElement: DateDataElement) => [{
         validator: isValidDate,
         message: errorMessages.DATE,
-    }),
+    }, {
+        validator: (value: string) =>
+            (dateDataElement.allowFutureDate ? true : isValidNonFutureDate(value)),
+        type: validatorTypes.TYPE_EXTENDED,
+        message: errorMessages.DATE_FUTURE_NOT_ALLOWED,
+    }],
     [elementTypes.DATETIME]: () => ({
         validator: isValidDateTime,
         message: errorMessages.DATETIME,
@@ -200,7 +208,7 @@ function buildTypeValidators(metaData: MetaDataElement): Array<ValidatorContaine
     validatorContainersForType = validatorContainersForType
         .map(validatorContainer => ({
             ...validatorContainer,
-            type: 'dataType',
+            type: validatorTypes.TYPE_BASE,
         }));
 
     // $FlowSuppress
@@ -241,7 +249,7 @@ function buildUniqueValidator(metaData: MetaDataElement) {
             },
             message: errorMessages.UNIQUENESS,
             validatingMessage: validationMessages.UNIQUENESS,
-            type: 'unique',
+            type: validatorTypes.UNIQUE,
         },
     ] : [];
 }
@@ -253,7 +261,7 @@ function compose(validatorBuilders: Array<ValidatorBuilder>, metaData: MetaDataE
     return validators;
 }
 
-export default function getValidators(metaData: MetaDataElement) {
+export function getValidators(metaData: MetaDataElement) {
     const builders = [buildCompulsoryValidator, buildTypeValidators, buildUniqueValidator];
     return compose(builders, metaData);
 }

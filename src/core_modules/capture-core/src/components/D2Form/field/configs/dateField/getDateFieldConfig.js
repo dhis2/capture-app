@@ -1,11 +1,12 @@
 // @flow
+import moment from '../../../../../utils/moment/momentResolver';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { DateFieldForForm } from '../../Components';
-import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
+import { DateDataElement } from '../../../../../metaData';
 
 const getCalendarAnchorPosition = (formHorizontal: ?boolean) => (formHorizontal ? 'center' : 'left');
 
-const getDateFieldConfig = (metaData: MetaDataElement, options: Object) => {
+const getDateFieldConfig = (metaData: DateDataElement, options: Object) => {
     const props = createProps({
         formHorizontal: options.formHorizontal,
         fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
@@ -13,6 +14,7 @@ const getDateFieldConfig = (metaData: MetaDataElement, options: Object) => {
         maxWidth: options.formHorizontal ? 150 : 350,
         calendarWidth: options.formHorizontal ? 250 : 350,
         popupAnchorPosition: getCalendarAnchorPosition(options.formHorizontal),
+        calendarMaxMoment: !metaData.allowFutureDate ? moment() : undefined,
     }, options, metaData);
 
     return createFieldConfig({

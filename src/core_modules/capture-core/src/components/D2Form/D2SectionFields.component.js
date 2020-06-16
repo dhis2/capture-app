@@ -13,6 +13,7 @@ import { validationStrategies } from '../../metaData/RenderFoundation/renderFoun
 import MetaDataElement from '../../metaData/DataElement/DataElement';
 import MetadataCustomForm from '../../metaData/RenderFoundation/CustomForm';
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
+import { validatorTypes } from './field/validators/constants';
 
 const CustomFormHOC = withCustomForm()(withDivider()(withAlternateBackgroundColors()(FormBuilderContainer)));
 type FormsValues = {
@@ -116,21 +117,20 @@ class D2SectionFields extends Component<Props> {
         return false;
     }
 
-    validateDataTypeOnly() {
-        const dataTypeIsValid = this.formBuilderInstance ? this.formBuilderInstance.isValid(['dataType']) : false;
-        return dataTypeIsValid;
+    validateBaseOnly() {
+        return this.formBuilderInstance ? this.formBuilderInstance.isValid([validatorTypes.TYPE_BASE]) : false;
     }
 
     isValid(options?: ?{ isCompleting: boolean }) {
         const validationStrategy = this.props.validationStrategy;
         if (validationStrategy === validationStrategies.NONE) {
-            return this.validateDataTypeOnly();
+            return D2SectionFields.validateBaseOnly();
         } else if (validationStrategy === validationStrategies.ON_COMPLETE) {
             const isCompleting = options && options.isCompleting;
             if (isCompleting) {
                 return this.validateFull();
             }
-            return this.validateDataTypeOnly();
+            return D2SectionFields.validateBaseOnly();
         }
         return this.validateFull();
     }

@@ -21,6 +21,8 @@ import 'moment/locale/vi';
 import 'moment/locale/zh-cn';
 
 import arTranslations from './ar/translations.json';
+import ar_IQTranslations from './ar_IQ/translations.json';
+import ckbTranslations from './ckb/translations.json';
 import enTranslations from './en/translations.json';
 import esTranslations from './es/translations.json';
 import frTranslations from './fr/translations.json';
@@ -41,6 +43,8 @@ const namespace = 'NAMESPACE';
 moment.locale('en');
 
 i18n.addResources('ar', namespace, arTranslations);
+i18n.addResources('ar_IQ', namespace, ar_IQTranslations);
+i18n.addResources('ckb', namespace, ckbTranslations);
 i18n.addResources('en', namespace, enTranslations);
 i18n.addResources('es', namespace, esTranslations);
 i18n.addResources('fr', namespace, frTranslations);
