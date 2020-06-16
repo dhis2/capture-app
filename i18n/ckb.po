@@ -49,6 +49,9 @@ msgstr "تکایە ژمارەیەکی پۆسەتیڤ یاخود سفر بنوو�
 msgid "Please provide a negative integer"
 msgstr "تکایە ژمارەیەکی نێگەتیڤ بنووسە"
 
+msgid "A date in the future is not allowed"
+msgstr ""
+
 msgid "Please provide a valid date and time"
 msgstr "تکایە بەروارو کاتێکی درووست بنووسە"
 

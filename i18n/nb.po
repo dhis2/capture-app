@@ -50,6 +50,9 @@ msgstr "Oppgi null eller et positivt heltall"
 msgid "Please provide a negative integer"
 msgstr "Oppgi et negativt heltall"
 
+msgid "A date in the future is not allowed"
+msgstr ""
+
 msgid "Please provide a valid date and time"
 msgstr "Oppgi en gyldig dato og tid"
 

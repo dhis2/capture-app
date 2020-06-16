@@ -50,6 +50,9 @@ msgstr ""
 msgid "Please provide a negative integer"
 msgstr ""
 
+msgid "A date in the future is not allowed"
+msgstr ""
+
 msgid "Please provide a valid date and time"
 msgstr ""
 

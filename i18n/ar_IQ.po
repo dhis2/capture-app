@@ -48,6 +48,9 @@ msgstr "من فضلك ادخل عدد صحيح موجب، أو صفر"
 msgid "Please provide a negative integer"
 msgstr "من فضلك ادخل احد الأعداد الصحيحة السالبة"
 
+msgid "A date in the future is not allowed"
+msgstr ""
+
 msgid "Please provide a valid date and time"
 msgstr "من فضلك ادخل صيغة صحيحة للتاريخ والوقت"
 
