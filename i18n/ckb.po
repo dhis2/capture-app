@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-03-09T19:35:56.143Z\n"
+"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
 "PO-Revision-Date: 2020-02-28 15:06+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -48,6 +48,9 @@ msgstr "تکایە ژمارەیەکی پۆسەتیڤ یاخود سفر بنوو�
 
 msgid "Please provide a negative integer"
 msgstr "تکایە ژمارەیەکی نێگەتیڤ بنووسە"
+
+msgid "A date in the future is not allowed"
+msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr "تکایە بەروارو کاتێکی درووست بنووسە"
