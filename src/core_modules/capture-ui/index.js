@@ -16,7 +16,6 @@ export { default as TextRangeField } from './TextField/TextRangeField.component'
 export { default as orientations } from './constants/orientations.const';
 
 // Field HOCs
-export { default as withFocusHandler } from './internal/TextInput/withFocusHandler';
 export { default as withFocusSaver } from './HOC/withFocusSaver';
 export { default as withInternalChangeHandler } from './HOC/withInternalChangeHandler';
 export { default as withLabel } from './HOC/withLabel';

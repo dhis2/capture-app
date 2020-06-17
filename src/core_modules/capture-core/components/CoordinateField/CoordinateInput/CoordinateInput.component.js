@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { TextInput, withShrinkLabel, withFocusSaver, withFocusHandler } from 'capture-ui';
+import { TextInput, withShrinkLabel, withFocusSaver, withTextFieldFocusHandler } from 'capture-ui';
 
 
 type Props = {
@@ -34,4 +34,4 @@ class CoordinateInput extends Component<Props> {
     }
 }
 
-export default withFocusSaver()(withShrinkLabel()(withFocusHandler()(CoordinateInput)));
+export default withFocusSaver()(withShrinkLabel()(withTextFieldFocusHandler()(CoordinateInput)));
