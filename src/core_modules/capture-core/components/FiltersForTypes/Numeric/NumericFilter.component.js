@@ -96,7 +96,7 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
     }
 
     static isFilterValid(minValue?: ?string, maxValue?: ?string, type: $Values<typeof elementTypes>) {
-        if (!NumericFilter.validateField(minValue, type).isValid) {
+        if (!NumericFilter.validateField(minValue, type).isValid) || !NumericFilter.validateField(maxValue, type).isValid {
             return false;
         }
 
