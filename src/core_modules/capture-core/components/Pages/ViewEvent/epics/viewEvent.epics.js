@@ -1,5 +1,7 @@
 // @flow
 import log from 'loglevel';
+import { ofType } from 'redux-observable';
+import { map, switchMap } from 'rxjs/operators';
 import { push } from 'connected-react-router';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
@@ -29,8 +31,9 @@ import { getCategoriesDataFromEventAsync } from './getCategoriesDataFromEvent';
 
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(eventListActionTypes.OPEN_VIEW_EVENT_PAGE)
-        .switchMap((action) => {
+    action$.pipe(
+        ofType(eventListActionTypes.OPEN_VIEW_EVENT_PAGE),
+        switchMap((action) => {
             const state = store.getState();
             const eventId = action.payload;
             return getEvent(eventId)
@@ -51,12 +54,13 @@ export const getEventOpeningFromEventListEpic = (action$: InputObservable, store
                     return openViewEventPageFailed(
                         i18n.t('Event could not be loaded. Are you sure it exists?'));
                 });
-        });
+        }));
 
 export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(viewEventActionTypes.VIEW_EVENT_FROM_URL)
-        .switchMap((action) => {
+    action$.pipe(
+        ofType(viewEventActionTypes.VIEW_EVENT_FROM_URL),
+        switchMap((action) => {
             const eventId = action.payload.eventId;
             const prevProgramId = store.getState().currentSelections.programId; // used to clear columns and filters in eventlist if program id is changed
             return getEvent(eventId)
@@ -78,12 +82,13 @@ export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore)
                     return eventFromUrlCouldNotBeRetrieved(
                         i18n.t('Event could not be loaded. Are you sure it exists?'));
                 });
-        });
+        }));
 
 export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
     // $FlowSuppress
-    action$.ofType(viewEventActionTypes.EVENT_FROM_URL_RETRIEVED)
-        .switchMap((action) => {
+    action$.pipe(
+        ofType(viewEventActionTypes.EVENT_FROM_URL_RETRIEVED),
+        switchMap((action) => {
             const eventContainer = action.payload.eventContainer;
             return getOrganisationUnitApiSpec(eventContainer.event.orgUnitId)
                 .get()
@@ -96,20 +101,20 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
                         i18n.t('Organisation unit could not be loaded'))(details));
                     return orgUnitCouldNotBeRetrievedOnUrlUpdate(eventContainer);
                 });
-        });
+        }));
 
 export const openViewPageLocationChangeEpic = (action$: InputObservable) =>
     // $FlowSuppress
-    action$.ofType(eventListActionTypes.OPEN_VIEW_EVENT_PAGE)
-        .map(action =>
-            push(`/viewEvent/${action.payload}`),
-        );
+    action$.pipe(
+        ofType(eventListActionTypes.OPEN_VIEW_EVENT_PAGE),
+        map(action => push(`/viewEvent/${action.payload}`)));
 
 export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE)
+    action$.pipe(
+        ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE),
         // eslint-disable-next-line complexity
-        .map(() => {
+        map(() => {
             const state = store.getState();
 
             if (!state.offline.online) {
@@ -134,19 +139,21 @@ export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) 
             }
 
             return noWorkingListUpdateNeededOnBackToMainPage();
-        });
+        }));
 
 export const backToMainPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE)
-        .map(() => {
+    action$.pipe(
+        ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE),
+        map(() => {
             const state = store.getState();
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
             return push(`/programId=${programId}&orgUnitId=${orgUnitId}`);
-        });
+        }));
 
 export const openAddRelationshipForViewEventEpic = (action$: InputObservable) =>
     // $FlowSuppress
-    action$.ofType(viewEventActionTypes.VIEW_EVENT_OPEN_NEW_RELATIONSHIP)
-        .map(() => initializeNewRelationship());
+    action$.pipe(
+        ofType(viewEventActionTypes.VIEW_EVENT_OPEN_NEW_RELATIONSHIP),
+        map(() => initializeNewRelationship()));

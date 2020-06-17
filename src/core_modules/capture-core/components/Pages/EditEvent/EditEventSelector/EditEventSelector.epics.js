@@ -1,5 +1,7 @@
 // @flow
 import { push } from 'connected-react-router';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
 import {
     actionTypes as editEventPageSelectorActionTypes,
     batchActionTypes as editEventPageSelectorBatchActionTypes,
@@ -19,13 +21,14 @@ const getArguments = (programId: string, orgUnitId: string) => {
 
 export const editEventPageSelectorUpdateURLEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(editEventPageSelectorActionTypes.RESET_ORG_UNIT_ID,
-        editEventPageSelectorActionTypes.SET_ORG_UNIT, editEventPageSelectorActionTypes.SET_PROGRAM_ID,
-        editEventPageSelectorActionTypes.RESET_PROGRAM_ID, editEventPageSelectorActionTypes.RESET_CATEGORY_OPTION,
-        editEventPageSelectorBatchActionTypes.START_AGAIN, editEventPageSelectorBatchActionTypes.RESET_PROGRAM_AND_CATEGORY_OPTION)
-        .map(() => {
+    action$.pipe(
+        ofType(editEventPageSelectorActionTypes.RESET_ORG_UNIT_ID,
+            editEventPageSelectorActionTypes.SET_ORG_UNIT, editEventPageSelectorActionTypes.SET_PROGRAM_ID,
+            editEventPageSelectorActionTypes.RESET_PROGRAM_ID, editEventPageSelectorActionTypes.RESET_CATEGORY_OPTION,
+            editEventPageSelectorBatchActionTypes.START_AGAIN, editEventPageSelectorBatchActionTypes.RESET_PROGRAM_AND_CATEGORY_OPTION),
+        map(() => {
             const state = store.getState();
             const { programId, orgUnitId } = state.currentSelections;
             const args = getArguments(programId, orgUnitId);
             return push(`/${args}`);
-        });
+        }));

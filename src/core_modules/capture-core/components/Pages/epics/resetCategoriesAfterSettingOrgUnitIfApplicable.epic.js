@@ -1,4 +1,6 @@
 // @flow
+import { ofType } from 'redux-observable';
+import { switchMap } from 'rxjs/operators';
 import {
     actionTypes as mainPageSelectorActionTypes,
 } from '../../Pages/MainPage/MainPageSelector/MainPageSelector.actions';
@@ -32,14 +34,14 @@ async function isOptionAssociatedWithOrganisationUnit(categoryOptionId: string, 
 
 export const resetCategoriesAfterSettingOrgUnitIfApplicableEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$
-        .ofType(
+    action$.pipe(
+        ofType(
             mainPageSelectorActionTypes.SET_ORG_UNIT,
             editEventSelectorActionTypes.SET_ORG_UNIT,
             viewEventSelectorActionTypes.SET_ORG_UNIT,
             newEventSelectorActionTypes.SET_ORG_UNIT,
-        )
-        .switchMap((action) => {
+        ),
+        switchMap((action) => {
             const orgUnitId = action.payload.id;
             const selectedCategories = store.getState().currentSelections.categories;
             if (!selectedCategories) {
@@ -47,13 +49,13 @@ export const resetCategoriesAfterSettingOrgUnitIfApplicableEpic = (action$: Inpu
             }
 
             const categoriesWithValue = Object
-            .keys(selectedCategories)
-            .reduce((acc, categoryId) => {
-                if (selectedCategories[categoryId]) {
-                    acc[categoryId] = selectedCategories[categoryId];
-                }
-                return acc;
-            }, {});
+                .keys(selectedCategories)
+                .reduce((acc, categoryId) => {
+                    if (selectedCategories[categoryId]) {
+                        acc[categoryId] = selectedCategories[categoryId];
+                    }
+                    return acc;
+                }, {});
 
             const isAssociatedPromises = Object
                 .keys(categoriesWithValue)
@@ -79,5 +81,5 @@ export const resetCategoriesAfterSettingOrgUnitIfApplicableEpic = (action$: Inpu
 
                     return resetCategoriesAfterSettingOrgUnit(notAssociated, action.type);
                 });
-        });
+        }));
 

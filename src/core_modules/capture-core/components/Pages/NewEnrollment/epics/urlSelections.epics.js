@@ -1,5 +1,7 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
+import { ofType } from 'redux-observable';
+import { map, filter, switchMap } from 'rxjs/operators';
 import { getApi } from '../../../../d2/d2Instance';
 import {
     actionTypes,
@@ -14,27 +16,30 @@ import { TrackerProgram } from '../../../../metaData';
 
 export const getOrgUnitDataForNewEnrollmentUrlUpdateEpic = (action$: InputObservable) =>
     // $FlowSuppress
-    action$.ofType(actionTypes.UPDATE_SELECTIONS_FROM_URL)
-        .filter(action => action.payload.nextProps.orgUnitId)
-        .switchMap(action => getApi()
+    action$.pipe(
+        ofType(actionTypes.UPDATE_SELECTIONS_FROM_URL),
+        filter(action => action.payload.nextProps.orgUnitId),
+        switchMap(action => getApi()
             .get(`organisationUnits/${action.payload.nextProps.orgUnitId}`)
             .then(response => setCurrentOrgUnitBasedOnUrl({ id: response.id, name: response.displayName }),
             )
             .catch(() =>
                 errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')),
             ),
-        );
+        ));
 
 export const emptyOrgUnitForNewEnrollmentUrlUpdateEpic = (action$: InputObservable) =>
     // $FlowSuppress
-    action$.ofType(actionTypes.UPDATE_SELECTIONS_FROM_URL)
-        .filter(action => !action.payload.nextProps.orgUnitId)
-        .map(() => setEmptyOrgUnitBasedOnUrl());
+    action$.pipe(
+        ofType(actionTypes.UPDATE_SELECTIONS_FROM_URL),
+        filter(action => !action.payload.nextProps.orgUnitId),
+        map(() => setEmptyOrgUnitBasedOnUrl()));
 
 export const validationForNewEnrollmentUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(actionTypes.SET_ORG_UNIT_BASED_ON_URL, actionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL)
-        .map(() => {
+    action$.pipe(
+        ofType(actionTypes.SET_ORG_UNIT_BASED_ON_URL, actionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL),
+        map(() => {
             const { programId, orgUnitId } = store.getState().currentSelections;
 
             if (programId) {
@@ -55,4 +60,4 @@ export const validationForNewEnrollmentUrlUpdateEpic = (action$: InputObservable
             }
 
             return validSelectionsFromUrl();
-        });
+        }));

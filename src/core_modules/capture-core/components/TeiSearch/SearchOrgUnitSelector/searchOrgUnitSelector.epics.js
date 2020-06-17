@@ -1,10 +1,11 @@
 // @flow
 import log from 'loglevel';
 import isArray from 'd2-utilizr/lib/isArray';
-import { fromPromise } from 'rxjs/observable/fromPromise';
+import { from } from 'rxjs';
 import getD2 from 'capture-core/d2/d2Instance';
 import { errorCreator } from 'capture-core-utils';
-
+import { ofType } from 'redux-observable';
+import { map, concatMap } from 'rxjs/operators';
 import {
     actionTypes as teiSearchActionTypes,
 } from '../actions/teiSearch.actions';
@@ -22,11 +23,11 @@ const RETRIEVE_ERROR = 'Could not retrieve registering unit list';
 
 const isInitializeTeiSearch = (action: Object, searchId: string) =>
     action.type === teiSearchActionTypes.INITIALIZE_TEI_SEARCH &&
-    action.payload.searchId === searchId;
+  action.payload.searchId === searchId;
 
 const isRequestFilterOrgUnits = (action: Object, searchId: string) =>
     action.type === searchOrgUnitActionTypes.TEI_SEARCH_REQUEST_FILTER_ORG_UNITS &&
-    action.payload.searchId === searchId;
+  action.payload.searchId === searchId;
 
 
 const cancelActionFilter = (action: Object, searchId: string) => {
@@ -38,13 +39,14 @@ const cancelActionFilter = (action: Object, searchId: string) => {
 
 // get organisation units based on search criteria
 export const teiSearchFilterOrgUnitsEpic = (action$: InputObservable) =>
-    // $FlowFixMe
-    action$.ofType(searchOrgUnitActionTypes.TEI_SEARCH_REQUEST_FILTER_ORG_UNITS)
-        .concatMap((action) => {
+// $FlowFixMe
+    action$.pipe(
+        ofType(searchOrgUnitActionTypes.TEI_SEARCH_REQUEST_FILTER_ORG_UNITS),
+        concatMap((action) => {
             const searchText = action.payload.searchText;
             const searchId = action.payload.searchId;
-            
-            return fromPromise(getD2()
+
+            return from(getD2()
                 .models
                 .organisationUnits
                 .list({
@@ -61,8 +63,8 @@ export const teiSearchFilterOrgUnitsEpic = (action$: InputObservable) =>
                 .catch(error => ({ error, searchId })),
             )
                 .takeUntil(action$.filter(a => cancelActionFilter(a, searchId)));
-        })
-        .map((resultContainer) => {
+        }),
+        map((resultContainer) => {
             if (resultContainer.error) {
                 log.error(errorCreator(RETRIEVE_ERROR)(
                     { error: resultContainer.error, method: 'searchRegisteringUnitListEpic' }),
@@ -79,4 +81,4 @@ export const teiSearchFilterOrgUnitsEpic = (action$: InputObservable) =>
                     displayName: unit.displayName,
                 }));
             return filteredOrgUnitsRetrieved(resultContainer.searchId, regUnits, resultContainer.searchText);
-        });
+        }));

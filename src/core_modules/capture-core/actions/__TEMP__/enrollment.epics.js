@@ -1,6 +1,8 @@
 // @flow
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import { concatMap, map } from 'rxjs/operators';
+import { ofType } from 'redux-observable';
 
 import getEnrollmentEvents from '../../events/getEnrollmentEvents';
 import { loadDataEntryEvent } from '../../components/DataEntry/actions/dataEntryLoadEdit.actions';
@@ -28,8 +30,9 @@ function convertStatusOut(dataEntryValue: string, prevValue: string) {
 }
 
 export const loadEnrollmentData = (action$: InputObservable) =>
-    action$.ofType(actionTypes.START_ENROLLMENT_LOAD)
-        .concatMap(() =>
+    action$.pipe(
+        ofType(actionTypes.START_ENROLLMENT_LOAD),
+        concatMap(() =>
             getEnrollmentEvents()
                 .then(events =>
                     enrollmentLoaded(events))
@@ -37,11 +40,12 @@ export const loadEnrollmentData = (action$: InputObservable) =>
                     log.error(errorCreator(errorMessages.EVENTS_LOG)({ error }));
                     return enrollmentLoadFailed(errorMessages.EVENTS_SCREEN);
                 }),
-        );
+        ));
 
 export const loadDataEntryData = (action$: InputObservable, store: ReduxStore) =>
-    action$.ofType(actionTypes.ENROLLMENT_LOADED)
-        .map(() => {
+    action$.pipe(
+        ofType(actionTypes.ENROLLMENT_LOADED),
+        map(() => {
             const events = store.getState().events;
             const firstEventKey = Object.keys(events)[0];
 
@@ -60,4 +64,4 @@ export const loadDataEntryData = (action$: InputObservable, store: ReduxStore) =
                         onConvertOut: convertStatusOut,
                     },
                 ], 'main');
-        });
+        }));

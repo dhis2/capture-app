@@ -1,5 +1,7 @@
 // @flow
 import { push } from 'connected-react-router';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
 import {
     actionTypes as editEventSelectorActionTypes,
 } from '../../EditEvent/EditEventSelector/EditEventSelector.actions';
@@ -22,14 +24,15 @@ const getArguments = (programId: string, orgUnitId: string) => {
 
 export const openNewEventPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(
-        editEventSelectorActionTypes.OPEN_NEW_EVENT,
-        viewEventSelectorActionTypes.OPEN_NEW_EVENT,
-        mainPageSelectorActionTypes.OPEN_NEW_EVENT,
-    )
-        .map(() => {
+    action$.pipe(
+        ofType(
+            editEventSelectorActionTypes.OPEN_NEW_EVENT,
+            viewEventSelectorActionTypes.OPEN_NEW_EVENT,
+            mainPageSelectorActionTypes.OPEN_NEW_EVENT,
+        ),
+        map(() => {
             const state = store.getState();
             const { programId, orgUnitId } = state.currentSelections;
             const args = getArguments(programId, orgUnitId);
             return push(`/newEvent/${args}`);
-        });
+        }));

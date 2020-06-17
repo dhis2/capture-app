@@ -1,7 +1,9 @@
 // @flow
 import log from 'loglevel';
 import getD2 from 'capture-core/d2/d2Instance';
-import { fromPromise } from 'rxjs/observable/fromPromise';
+import { from } from 'rxjs';
+import { map, concatMap } from 'rxjs/operators';
+import { ofType } from 'redux-observable';
 import isArray from 'd2-utilizr/lib/isArray';
 import { errorCreator } from 'capture-core-utils';
 import getOrgUnitRootsKey from './getOrgUnitRootsKey';
@@ -35,15 +37,16 @@ const cancelActionFilter = (action: Object, formId: string, elementId: string) =
 };
 
 export const filterFormFieldOrgUnitsEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.ofType(actionTypes.REQUEST_FILTER_FORM_FIELD_ORG_UNITS)
-        .concatMap((action) => {
+    action$.pipe(
+        ofType(actionTypes.REQUEST_FILTER_FORM_FIELD_ORG_UNITS),
+        concatMap((action) => {
             const { formId, elementId, searchText } = action.payload;
-            return fromPromise(getD2()
+            return from(getD2()
                 .models
                 .organisationUnits
                 .list({
                     fields: [
-                        'id,displayName,path,publicAccess,access,lastUpdated', 
+                        'id,displayName,path,publicAccess,access,lastUpdated',
                         'children[id,displayName,publicAccess,access,path,children::isNotEmpty]',
                     ].join(','),
                     paging: false,
@@ -52,8 +55,8 @@ export const filterFormFieldOrgUnitsEpic = (action$: InputObservable, store: Red
                 })
                 .then(orgUnitCollection => ({ orgUnitArray: orgUnitCollection.toArray(), searchText, formId, elementId }))
                 .catch(error => ({ error, formId, elementId }))).takeUntil(action$.filter(a => cancelActionFilter(a, formId, elementId)));
-        })
-        .map((resultContainer) => {
+        }),
+        map((resultContainer) => {
             if (resultContainer.error) {
                 log.error(errorCreator(FILTER_RETRIEVE_ERROR)(
                     { error: resultContainer.error, method: 'FilterOrgUnitRootsEpic' }),
@@ -70,4 +73,4 @@ export const filterFormFieldOrgUnitsEpic = (action$: InputObservable, store: Red
                     displayName: unit.displayName,
                 }));
             return filteredFormFieldOrgUnitsRetrieved(formId, elementId, orgUnits);
-        });
+        }));

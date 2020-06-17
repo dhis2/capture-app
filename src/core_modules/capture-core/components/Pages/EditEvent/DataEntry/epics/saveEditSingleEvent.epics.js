@@ -1,5 +1,7 @@
 // @flow
 import { push } from 'connected-react-router';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
 import { moment } from 'capture-core-utils/moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import {
@@ -14,8 +16,9 @@ import { convertMainEventClientToServer } from '../../../../../events/mainConver
 
 export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)
-        .map((action) => {
+    action$.pipe(
+        ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
+        map((action) => {
             const state = store.getState();
             const payload = action.payload;
             const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.itemId);
@@ -54,14 +57,15 @@ export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =
             };
 
             return startSaveEditEventAfterReturnedToMainPage(eventId, serverData, state.currentSelections);
-        });
+        }));
 
 export const saveEditEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)
-        .map(() => {
+    action$.pipe(
+        ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
+        map(() => {
             const state = store.getState();
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
             return push(`/programId=${programId}&orgUnitId=${orgUnitId}`);
-        });
+        }));

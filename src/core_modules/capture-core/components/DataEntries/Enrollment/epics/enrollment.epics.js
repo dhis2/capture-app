@@ -1,5 +1,8 @@
 // @flow
 import log from 'loglevel';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
+
 import { errorCreator } from 'capture-core-utils';
 import { batchActionTypes, runRulesOnUpdateFieldBatch } from '../actions/enrollment.actionBatchs';
 import { actionTypes } from '../actions/enrollment.actions';
@@ -83,10 +86,11 @@ const runRulesOnEnrollmentUpdate =
 
 export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
 // $FlowSuppress
-    action$.ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_ENROLLMENT_ACTION_BATCH)
-        .map(actionBatch =>
-            actionBatch.payload.find(action => action.type === actionTypes.START_RUN_RULES_ON_UPDATE))
-        .map((action) => {
+    action$.pipe(
+        ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_ENROLLMENT_ACTION_BATCH),
+        map(actionBatch =>
+            actionBatch.payload.find(action => action.type === actionTypes.START_RUN_RULES_ON_UPDATE)),
+        map((action) => {
             const {
                 uid,
                 programId,
@@ -106,14 +110,15 @@ export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (action$: InputObser
                 programId,
                 orgUnit,
             });
-        });
+        }));
 
 export const runRulesOnEnrollmentFieldUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH)
-        .map(actionBatch =>
-            actionBatch.payload.find(action => action.type === actionTypes.START_RUN_RULES_ON_UPDATE))
-        .map((action) => {
+    action$.pipe(
+        ofType(batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH),
+        map(actionBatch =>
+            actionBatch.payload.find(action => action.type === actionTypes.START_RUN_RULES_ON_UPDATE)),
+        map((action) => {
             const { innerPayload: payload, searchActions, uid, programId, orgUnit } = action.payload;
             const { dataEntryId, itemId, elementId, value, uiState } = payload;
 
@@ -130,4 +135,4 @@ export const runRulesOnEnrollmentFieldUpdateEpic = (action$: InputObservable, st
                 itemId,
                 uid,
             }, fieldData, searchActions);
-        });
+        }));

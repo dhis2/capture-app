@@ -1,17 +1,21 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
+import { ofType } from 'redux-observable';
+import { map, filter } from 'rxjs/operators';
+
 import { getEventListOnReconnect, goingOnlineExecuted, batchActionTypes } from './connectivity.actions';
 
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
 
 export const goingOnlineEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(OFFLINE_STATUS_CHANGED)
-        .filter((action) => {
+    action$.pipe(
+        ofType(OFFLINE_STATUS_CHANGED),
+        filter((action) => {
             const online = !!action.payload.online;
             return online;
-        })
-        .map(() => {
+        }),
+        map(() => {
             let actions = [
                 goingOnlineExecuted(),
             ];
@@ -26,4 +30,4 @@ export const goingOnlineEpic = (action$: InputObservable, store: ReduxStore) =>
             }
 
             return batchActions(actions, batchActionTypes.GOING_ONLINE_EXECUTED_BATCH);
-        });
+        }));

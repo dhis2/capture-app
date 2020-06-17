@@ -11,8 +11,8 @@ const mapStateToProps = (state: ReduxState) => ({
 
 
 export default connect(mapStateToProps, () => ({}))(
-    withLoadingIndicator()(
-        withErrorMessageHandler()(SelectorLevel),
-    ),
+  withLoadingIndicator()(
+    withErrorMessageHandler()(SelectorLevel),
+  ),
 );
 

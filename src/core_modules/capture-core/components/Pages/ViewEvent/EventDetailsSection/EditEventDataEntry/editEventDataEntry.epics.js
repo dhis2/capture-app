@@ -1,5 +1,7 @@
 // @flow
 import { ActionsObservable } from 'redux-observable';
+import { ofType } from 'redux-observable';
+import { map, filter } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { moment } from 'capture-core-utils/moment';
 import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
@@ -28,8 +30,9 @@ import {
 
 
 export const loadEditEventDataEntryEpic = (action$: ActionsObservable, store: ReduxStore) =>
-    action$.ofType(eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY)
-        .map(() => {
+    action$.pipe(
+        ofType(eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY),
+        map(() => {
             const state = store.getState();
             const loadedValues = state.viewEventPage.loadedValues;
             const eventContainer = loadedValues.eventContainer;
@@ -48,12 +51,13 @@ export const loadEditEventDataEntryEpic = (action$: ActionsObservable, store: Re
                 // $FlowFixMe
                 ...openEventForEditInDataEntry(loadedValues, orgUnit, foundation, program),
             ]);
-        });
+        }));
 
 export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY)
-        .map((action) => {
+    action$.pipe(
+        ofType(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY),
+        map((action) => {
             const state = store.getState();
             const payload = action.payload;
             const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.itemId);
@@ -108,22 +112,23 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
                 updateEventContainer(eventContainer, orgUnit),
                 startSaveEditEventDataEntry(eventId, serverData, state.currentSelections),
             ], batchActionTypes.START_SAVE_EDIT_EVENT_DATA_ENTRY_BATCH);
-        });
+        }));
 
 export const saveEditedEventFailedEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(actionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED)
-        .filter((action) => {
+    action$.pipe(
+        ofType(actionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED),
+        filter((action) => {
             // Check if current view event is failed event
             const state = store.getState();
             const viewEventPage = state.viewEventPage || {};
             return viewEventPage.eventId && viewEventPage.eventId === action.meta.eventId;
-        })
-        .map(() => {
+        }),
+        map(() => {
             // Revert event container if previous exists
             const state = store.getState();
             const viewEventPage = state.viewEventPage;
             const eventContainer = viewEventPage.loadedValues.eventContainer;
             const orgUnit = state.organisationUnits[eventContainer.event.orgUnitId];
             return updateEventContainer(eventContainer, orgUnit);
-        });
+        }));

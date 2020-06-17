@@ -1,5 +1,7 @@
 // @flow
 import log from 'loglevel';
+import { ofType } from 'redux-observable';
+import { map, filter } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { errorCreator } from 'capture-core-utils';
 import { rulesExecutedPostUpdateField } from '../../../../DataEntry/actions/dataEntry.actions';
@@ -60,11 +62,12 @@ const errorMessages = {
 
 export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(
-        newEventSelectorTypes.OPEN_NEW_EVENT_FROM_NEW_EVENT_PAGE,
-        newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH,
-    )
-        .map(() => {
+    action$.pipe(
+        ofType(
+            newEventSelectorTypes.OPEN_NEW_EVENT_FROM_NEW_EVENT_PAGE,
+            newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH,
+        ),
+        map(() => {
             const state = store.getState();
             const programId = state.currentSelections.programId;
 
@@ -91,21 +94,22 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
                 [...resetDataEntry(metadataContainer.program, foundation, orgUnit)],
                 batchActionTypes.RESET_DATA_ENTRY_ACTIONS_BATCH,
             );
-        });
+        }));
 
 
 export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(
-        editEventSelectorActionTypes.OPEN_NEW_EVENT,
-        viewEventSelectorActionTypes.OPEN_NEW_EVENT,
-        mainPageSelectorActionTypes.OPEN_NEW_EVENT,
-        newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
-        newEventSelectorTypes.SET_PROGRAM_ID,
-        newEventSelectorTypes.SET_CATEGORY_OPTION,
-        crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
-    )
-        .filter((action) => {
+    action$.pipe(
+        ofType(
+            editEventSelectorActionTypes.OPEN_NEW_EVENT,
+            viewEventSelectorActionTypes.OPEN_NEW_EVENT,
+            mainPageSelectorActionTypes.OPEN_NEW_EVENT,
+            newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
+            newEventSelectorTypes.SET_PROGRAM_ID,
+            newEventSelectorTypes.SET_CATEGORY_OPTION,
+            crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
+        ),
+        filter((action) => {
             const type = action.type;
             const triggeringActionType = action.payload && action.payload.triggeringActionType;
             if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED) {
@@ -114,8 +118,8 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
                 ].includes(triggeringActionType);
             }
             return true;
-        })
-        .map(() => {
+        }),
+        map(() => {
             const state = store.getState();
             const selectionsComplete = state.currentSelections.complete;
             if (!selectionsComplete) {
@@ -144,20 +148,21 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
                 [...openNewEventInDataEntry(metadataContainer.program, foundation, orgUnit)],
                 batchActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH,
             );
-        });
+        }));
 
 export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
 // $FlowSuppress
-    action$.ofType(
-        editEventSelectorActionTypes.OPEN_NEW_EVENT,
-        viewEventSelectorActionTypes.OPEN_NEW_EVENT,
-        mainPageSelectorActionTypes.OPEN_NEW_EVENT,
-        newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
-        newEventSelectorTypes.SET_CATEGORY_OPTION,
-        newEventSelectorTypes.SET_PROGRAM_ID,
-        crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
-    )
-        .filter((action) => {
+    action$.pipe(
+        ofType(
+            editEventSelectorActionTypes.OPEN_NEW_EVENT,
+            viewEventSelectorActionTypes.OPEN_NEW_EVENT,
+            mainPageSelectorActionTypes.OPEN_NEW_EVENT,
+            newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
+            newEventSelectorTypes.SET_CATEGORY_OPTION,
+            newEventSelectorTypes.SET_PROGRAM_ID,
+            crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
+        ),
+        filter((action) => {
             // cancel if triggered by SELECTIONS_COMPLETENESS_CALCULATED and the underlying action is not SET_ORG_UNIT
             const type = action.type;
             if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED) {
@@ -177,14 +182,14 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
             const programId = state.currentSelections.programId;
             const program = getProgramFromProgramIdThrowIfNotFound(programId);
             return !(program instanceof TrackerProgram);
-        })
-        .map(() => {
+        }),
+        map(() => {
             const state = store.getState();
             const newEventsMeta = { sortById: 'created', sortByDirection: 'desc' };
             const stageContainer = getStageForEventProgram(state.currentSelections.programId);
             const columnConfig = [...getDefaultMainColumnConfig(stageContainer.stage), ...getColumnMetaDataConfig(stageContainer.stage.stageForm)];
             return resetList(listId, columnConfig, newEventsMeta, state.currentSelections);
-        });
+        }));
 
 
 const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemId: string, uid: string, fieldData?: ?FieldData) => {
@@ -233,20 +238,22 @@ const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemI
 
 export const runRulesOnUpdateDataEntryFieldForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH)
-        .map(actionBatch =>
-            actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE))
-        .map((action) => {
+    action$.pipe(
+        ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH),
+        map(actionBatch =>
+            actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
+        map((action) => {
             const { dataEntryId, itemId, uid } = action.payload;
             return runRulesForNewSingleEvent(store, dataEntryId, itemId, uid);
-        });
+        }));
 
 export const runRulesOnUpdateFieldForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH)
-        .map(actionBatch =>
-            actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE))
-        .map((action) => {
+    action$.pipe(
+        ofType(batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH),
+        map(actionBatch =>
+            actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE)),
+        map((action) => {
             const { dataEntryId, itemId, uid, elementId, value, uiState } = action.payload;
             const fieldData: FieldData = {
                 elementId,
@@ -254,4 +261,4 @@ export const runRulesOnUpdateFieldForSingleEventEpic = (action$: InputObservable
                 valid: uiState.valid,
             };
             return runRulesForNewSingleEvent(store, dataEntryId, itemId, uid, fieldData);
-        });
+        }));

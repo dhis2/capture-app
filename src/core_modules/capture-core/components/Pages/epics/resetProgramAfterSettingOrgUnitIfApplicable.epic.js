@@ -1,5 +1,7 @@
 // @flow
 import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
+import { ofType } from 'redux-observable';
+import { map, filter } from 'rxjs/operators';
 import {
     actionTypes as mainPageSelectorActionTypes,
 } from '../../Pages/MainPage/MainPageSelector/MainPageSelector.actions';
@@ -36,17 +38,17 @@ const programShouldReset = (orgUnitId, currentlySelectedProgramId) => {
 
 export const resetProgramAfterSettingOrgUnitIfApplicableEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$
-        .ofType(
+    action$.pipe(
+        ofType(
             mainPageSelectorActionTypes.SET_ORG_UNIT,
             editEventSelectorActionTypes.SET_ORG_UNIT,
             viewEventSelectorActionTypes.SET_ORG_UNIT,
             newEventSelectorActionTypes.SET_ORG_UNIT,
-        )
-        .filter((action) => {
+        ),
+        filter((action) => {
             const orgUnitId = action.payload.id;
             const currentlySelectedProgramId = store.getState().currentSelections.programId;
             return programShouldReset(orgUnitId, currentlySelectedProgramId);
-        })
-        .map(() => resetProgramIdBase());
+        }),
+        map(() => resetProgramIdBase()));
 
