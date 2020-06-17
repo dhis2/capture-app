@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Colunas a serem mostradas na tabela"
 
 msgid "Column"
 msgstr "Coluna"
@@ -205,7 +205,7 @@ msgid "could not be updated"
 msgstr ""
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "Por favor forneça data valida "
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
@@ -261,7 +261,7 @@ msgid ""
 msgstr ""
 
 msgid "A value is required"
-msgstr ""
+msgstr "É necessário um valor"
 
 msgid "Save and add another"
 msgstr ""
