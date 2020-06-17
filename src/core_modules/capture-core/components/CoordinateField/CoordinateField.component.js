@@ -6,11 +6,9 @@ import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import ClearIcon from '@material-ui/icons/Clear';
 import IconButton from '@material-ui/core/IconButton';
-import AddLocationIcon from '../Icons/AddLocationIcon.component';
-import CoordinateInput from '../internal/CoordinateInput/CoordinateInput.component';
+import { AddLocationIcon, orientations, Button } from 'capture-ui';
+import CoordinateInput from './CoordinateInput/CoordinateInput.component';
 import defaultClasses from './coordinateField.module.css';
-import orientations from '../constants/orientations.const';
-import Button from '../Buttons/Button.component';
 
 const WrappedLeafletSearch = withLeaflet(ReactLeafletSearch);
 
@@ -129,7 +127,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
                 >
                     <AddLocationIcon
                         onClick={this.openMap}
-                        
+
                     />
                 </IconButton>
 
@@ -251,43 +249,39 @@ export default class D2Coordinate extends React.Component<Props, State> {
     }
 
 
-    renderVertical = () => {
-        return (
-            <div>
-                <div className={defaultClasses.coordinateFieldsVertical}>
-                    {this.renderMapDialog()}
-                    <div className={defaultClasses.buttonsContainerVertical}>
-                        {this.renderMapIcon()}
-                        {this.renderClearButton()}
-                    </div>
-                    <div className={defaultClasses.inputContainer}>
-                        {this.renderLongitude()}
-                    </div>
-                    <div className={defaultClasses.inputContainer}>
-                        {this.renderLatitude()}
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
-    renderHorizontal = () => {
-        return (
-            <div>
-                <div className={defaultClasses.coordinateFieldsHorizontal}>
-                    {this.renderMapDialog()}
+    renderVertical = () => (
+        <div>
+            <div className={defaultClasses.coordinateFieldsVertical}>
+                {this.renderMapDialog()}
+                <div className={defaultClasses.buttonsContainerVertical}>
                     {this.renderMapIcon()}
-                    <div className={defaultClasses.inputContainer}>
-                        {this.renderLongitude()}
-                    </div>
-                    <div className={defaultClasses.inputContainer}>
-                        {this.renderLatitude()}
-                    </div>
                     {this.renderClearButton()}
                 </div>
+                <div className={defaultClasses.inputContainer}>
+                    {this.renderLongitude()}
+                </div>
+                <div className={defaultClasses.inputContainer}>
+                    {this.renderLatitude()}
+                </div>
             </div>
-        );
-    }
+        </div>
+    )
+
+    renderHorizontal = () => (
+        <div>
+            <div className={defaultClasses.coordinateFieldsHorizontal}>
+                {this.renderMapDialog()}
+                {this.renderMapIcon()}
+                <div className={defaultClasses.inputContainer}>
+                    {this.renderLongitude()}
+                </div>
+                <div className={defaultClasses.inputContainer}>
+                    {this.renderLatitude()}
+                </div>
+                {this.renderClearButton()}
+            </div>
+        </div>
+    )
 
     render() {
         return this.props.orientation === orientations.VERTICAL ? this.renderVertical() : this.renderHorizontal();

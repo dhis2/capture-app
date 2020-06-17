@@ -1,9 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import moment from 'moment';
-import UIDate from '../../DateAndTimeFields/DateField/Date.component';
-import orientations from '../../constants/orientations.const';
-import withFocusSaver from '../../HOC/withFocusSaver';
+import { DateField as UIDate, orientations, withFocusSaver } from 'capture-ui';
 
 type Props = {
     value: ?string,

@@ -5,11 +5,10 @@ import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import IconButton from '@material-ui/core/IconButton';
 import ClearIcon from '@material-ui/icons/Clear';
-import AgeNumberInput from '../internal/AgeInput/AgeNumberInput.component';
-import AgeDateInput from '../internal/AgeInput/AgeDateInput.component';
+import { orientations, withInternalChangeHandler } from 'capture-ui';
+import AgeNumberInput from './AgeInput/AgeNumberInput.component';
+import AgeDateInput from './AgeInput/AgeDateInput.component';
 import defaultClasses from './ageField.module.css';
-import orientations from '../constants/orientations.const';
-import withInternalChangeHandler from '../HOC/withInternalChangeHandler';
 
 type AgeValues = {
     date?: ?string,

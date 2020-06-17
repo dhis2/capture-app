@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
-"PO-Revision-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2020-06-17T07:07:51.810Z\n"
+"PO-Revision-Date: 2020-06-17T07:07:51.810Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -15,6 +15,12 @@ msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Set coordinate"
 msgstr ""
 
 msgid "This value is validating"
@@ -93,9 +99,6 @@ msgid "A future date is not allowed"
 msgstr ""
 
 msgid "An error has occured. See log for details"
-msgstr ""
-
-msgid "Cancel"
 msgstr ""
 
 msgid "Unsaved changes"
@@ -233,6 +236,12 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
+msgid "error encountered during field validation"
+msgstr ""
+
+msgid "error"
+msgstr ""
+
 msgid "mm/dd/yyyy"
 msgstr ""
 
@@ -269,6 +278,12 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+msgid "Delete polygon"
+msgstr ""
+
+msgid "Set area"
+msgstr ""
+
 msgid "Clear"
 msgstr ""
 
@@ -276,9 +291,6 @@ msgid "No results"
 msgstr ""
 
 msgid "suggestions could not be retrieved"
-msgstr ""
-
-msgid "search for username"
 msgstr ""
 
 msgid "No items to display"
@@ -745,9 +757,6 @@ msgstr ""
 msgid "tracked entity instance"
 msgstr ""
 
-msgid "Set coordinate"
-msgstr ""
-
 msgid "Date"
 msgstr ""
 
@@ -764,18 +773,6 @@ msgid "To date"
 msgstr ""
 
 msgid "To time"
-msgstr ""
-
-msgid "error encountered during field validation"
-msgstr ""
-
-msgid "error"
-msgstr ""
-
-msgid "Delete polygon"
-msgstr ""
-
-msgid "Set area"
 msgstr ""
 
 msgid ""

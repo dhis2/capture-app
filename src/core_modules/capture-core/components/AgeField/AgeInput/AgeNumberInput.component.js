@@ -1,10 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import TextInput from '../TextInput/TextInput.component';
-import withShrinkLabel from '../../HOC/withShrinkLabel';
-import withFocusSaver from '../../HOC/withFocusSaver';
-import withFocusHandler from '../../internal/TextInput/withFocusHandler';
-
+import { TextInput, withShrinkLabel, withFocusSaver, withFocusHandler } from 'capture-ui';
 
 type Props = {
     label: string,
