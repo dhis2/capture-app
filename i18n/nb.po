@@ -51,7 +51,7 @@ msgid "Please provide a valid date"
 msgstr "Oppgi en gyldig dato"
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "En dato i fremtiden er ikke tillatt"
 
 msgid "Please provide a valid date and time"
 msgstr "Oppgi en gyldig dato og tid"
