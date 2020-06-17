@@ -19,40 +19,40 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Please provide a valid date"
-msgstr ""
+msgstr "Por favor forneça data valida "
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Colunas a serem mostradas na tabela"
 
 msgid "Column"
 msgstr "Coluna"
 
 msgid "This value is validating"
-msgstr ""
+msgstr "Este valor está validando"
 
 msgid "Async field update failed"
-msgstr ""
+msgstr "Falha na atualização do campo sincronização "
 
 msgid "A value is required"
-msgstr ""
+msgstr "É necessário um valor"
 
 msgid "Please provide a valid number"
-msgstr ""
+msgstr "Forneça um numero valido "
 
 msgid "Please provide a valid integer"
-msgstr ""
+msgstr "Forneça um número inteiro válido"
 
 msgid "Please provide a positive integer"
-msgstr ""
+msgstr "Forneça um número inteiro positivo"
 
 msgid "Please provide zero or a positive integer"
-msgstr ""
+msgstr "Forneça zero ou um número inteiro positivo"
 
 msgid "Please provide a negative integer"
-msgstr ""
+msgstr "Forneça um número inteiro negativo"
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "Uma data no futuro não é permitida"
 
 msgid "Please provide a valid date and time"
 msgstr ""
