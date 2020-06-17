@@ -4,11 +4,9 @@ import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { ofType, ActionsObservable } from 'redux-observable';
 import { map, filter, takeUntil, catchError, mergeMap, mergeAll } from 'rxjs/operators';
-import { race, from, of } from 'rxjs';
-
-
+import { race, of } from 'rxjs';
+import { from } from 'rxjs/observable/from';
 import { pipe as pipeD2, errorCreator } from 'capture-core-utils';
-
 import { InputSearchGroup, RenderFoundation } from '../../../metaData';
 import { convertFormToClient, convertClientToServer } from '../../../converters';
 import {

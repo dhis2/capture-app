@@ -1,5 +1,5 @@
 // @flow
-import { from } from 'rxjs';
+import { from } from 'rxjs/observable/from';
 import { ofType } from 'redux-observable';
 import { takeUntil, switchMap } from 'rxjs/operators';
 import log from 'loglevel';

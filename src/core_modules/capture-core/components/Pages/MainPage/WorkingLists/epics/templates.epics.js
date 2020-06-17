@@ -2,7 +2,7 @@
 import { batchActions } from 'redux-batched-actions';
 import { ofType } from 'redux-observable';
 import { takeUntil, filter, concatMap } from 'rxjs/operators';
-import { from } from 'rxjs';
+import { from } from 'rxjs/observable/from';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
