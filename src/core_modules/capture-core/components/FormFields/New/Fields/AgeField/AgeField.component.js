@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import { AgeField as UIAgeField } from 'capture-ui';
 import { moment } from 'capture-core-utils/moment';
+import UIAgeField from '../../../AgeField/AgeField.component';
 import withCalendarProps from '../../HOC/withCalendarProps';
 import { parseDate, convertMomentToDateFormatString } from '../../../../../utils/converters/date';
 import { systemSettingsStore } from '../../../../../metaDataMemoryStores';

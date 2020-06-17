@@ -2,9 +2,8 @@
 import React, { Component } from 'react';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
-import FormBuilder from 'capture-ui/FormBuilder/FormBuilder.component';
-import type { FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
-
+import FormBuilder from '../FormBuilder/FormBuilder.component';
+import type { FieldConfig } from '../FormBuilder/FormBuilder.component';
 import FormBuilderContainer from './FormBuilder.container';
 import withDivider from './FieldDivider/withDivider';
 import withAlternateBackgroundColors from './FieldAlternateBackgroundColors/withAlternateBackgroundColors';
