@@ -4,9 +4,8 @@ import { networkStatusChange } from './NetworkStatusBadge.actions.js';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 
-type InputObservable = rxjs$Observable<ReduxAction<any, any>>;
 
-export const networkMonitorStatusEpic = (action$: InputObservable) =>
+export const networkMonitorStatusEpic = (action$) =>
     // $FlowSuppress
     action$.pipe(
         ofType(OFFLINE_STATUS_CHANGED),
