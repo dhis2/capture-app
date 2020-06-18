@@ -6,6 +6,7 @@
   "private": false,
   "dependencies": {
     "@dhis2/app-runtime": "^2.0.4",
+    "@dhis2/cli-utils-cypress": "^2.2.1",
     "@dhis2/d2-i18n": "^1.0.6",
     "@dhis2/d2-icons": "^1.0.1",
     "@dhis2/d2-ui-app": "^2.0.0",
@@ -72,7 +73,10 @@
     "extract-pot": "d2-i18n-extract -p src/ -o i18n/",
     "localize": "yarn extract-pot && d2-i18n-generate -n default -p ./i18n/ -o ./src/locales/",
     "prestart": "node verifyCacheVersion.js && yarn localize && d2-manifest package.json ./public/manifest.webapp",
-    "docs": "NODE_ENV=development jsdoc -c jsdoc-conf.json"
+    "docs": "NODE_ENV=development jsdoc -c jsdoc-conf.json",
+    "cypress:start": "BROWSER=none yarn start",
+    "cy:open": "d2-utils-cypress open --appStart 'yarn cypress:start'",
+    "cy:run": "d2-utils-cypress run --appStart 'yarn cypress:start'"
   },
   "husky": {
     "hooks": {
