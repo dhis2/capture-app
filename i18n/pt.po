@@ -55,7 +55,7 @@ msgid "A date in the future is not allowed"
 msgstr "Uma data no futuro não é permitida"
 
 msgid "Please provide a valid date and time"
-msgstr ""
+msgstr "Forneça uma data e hora válidas"
 
 msgid "Please provide a valid time"
 msgstr ""
