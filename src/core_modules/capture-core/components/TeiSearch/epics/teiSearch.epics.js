@@ -1,6 +1,6 @@
 // @flow
 import isArray from 'd2-utilizr/src/isArray';
-import { from } from 'rxjs/observable/from';
+import { from } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { map, takeUntil, switchMap, filter } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';

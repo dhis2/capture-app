@@ -1,5 +1,5 @@
 // @flow
-import { from } from 'rxjs/observable/from';
+import { from } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { takeUntil, filter, concatMap } from 'rxjs/operators';
 import log from 'loglevel';
