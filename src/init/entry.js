@@ -13,13 +13,9 @@ import LoadingMask from 'capture-core/components/LoadingMasks/LoadingMaskForPage
 import JssProvider from 'react-jss/lib/JssProvider';
 import { create } from 'jss';
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
-
 import environments from 'capture-core/constants/environments';
 import { DisplayException } from 'capture-core/utils/exceptions/DisplayException';
-
 import type { HashHistory } from 'history/createHashHistory';
-
-import './addRxjsOperators';
 import App from '../components/App/App.component';
 import getStore from '../store/getStore';
 import { initializeAsync } from './init';
