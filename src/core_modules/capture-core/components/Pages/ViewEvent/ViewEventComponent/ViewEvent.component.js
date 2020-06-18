@@ -44,6 +44,7 @@ type Props = {
     onBackToAllEvents: () => void,
     currentDataEntryKey: string,
     programStage: ProgramStage,
+    eventAccess: { read: boolean, write: boolean },
     classes: {
         container: string,
         contentContainer: string,
@@ -53,16 +54,8 @@ type Props = {
     },
 };
 
-type State = {
-    discardWarningOpen: boolean,
-}
 
-class ViewEvent extends Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-        this.state = { discardWarningOpen: false };
-    }
-
+class ViewEvent extends Component<Props> {
     handleGoBackToAllEvents = () => {
         this.props.onBackToAllEvents();
     }

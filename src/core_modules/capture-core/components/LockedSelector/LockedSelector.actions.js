@@ -10,9 +10,9 @@ export const lockedSelectorActionTypes = {
     CATEGORY_OPTION_RESET: 'CategoryOptionReset',
     ALL_CATEGORY_OPTIONS_RESET: 'AllCategoryOptionsReset',
 
-    SELECTIONS_FROM_URL_UPDATE: 'SectionsFromUrlUpdate',
-    SELECTIONS_FROM_URL_VALID: 'SectionsFromUrlValid',
-    SELECTIONS_FROM_URL_INVALID: 'SectionsFromUrlInvalid',
+    SELECTIONS_FROM_URL_UPDATE: 'SelectionsFromUrlUpdate',
+    SELECTIONS_FROM_URL_VALID: 'SelectionsFromUrlValid',
+    SELECTIONS_FROM_URL_INVALID: 'SelectionsFromUrlInvalid',
 
     BASED_ON_URL_ORG_UNIT_SET: 'BasedOnUrlOrgUnitSet',
     BASED_ON_URL_ORG_UNIT_ERROR_RETRIEVING: 'BasedOnUrlOrgUnitErrorRetrieving',

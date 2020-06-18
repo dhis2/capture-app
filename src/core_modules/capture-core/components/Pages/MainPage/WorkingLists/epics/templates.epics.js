@@ -29,7 +29,7 @@ export const retrieveTemplatesEpic = (action$: InputObservable, store: ReduxStor
             const programId = store.getState().currentSelections.programId;
             const promise = getTemplatesAsync(store.getState())
                 .then(container => batchActions([
-                    selectTemplate(container.default.id, listId, container.default),
+                    selectTemplate(container.default.id, listId),
                     fetchTemplatesSuccess(container.workingListConfigs, programId, listId),
                 ], batchActionTypes.TEMPLATES_FETCH_SUCCESS_BATCH))
                 .catch((error) => {
