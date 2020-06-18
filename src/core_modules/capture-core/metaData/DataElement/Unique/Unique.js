@@ -9,7 +9,7 @@ type Validator = (value: any, contextProps: any) => Promise<any> | any;
 export default class Unique {
     _generatable: boolean;
     _scope: $Values<typeof scopes>;
-    _onValidate: ?Validator;
+    _onValidate: Validator;
 
     constructor(initFn: ?(_this: Unique) => void) {
         this._scope = scopes.ENTIRE_SYSTEM;
@@ -34,7 +34,7 @@ export default class Unique {
     set onValidate(validator: Validator) {
         this._onValidate = validator;
     }
-    get onValidate(): ?Validator {
+    get onValidate(): Validator {
         return this._onValidate;
     }
 }
