@@ -54,7 +54,7 @@ function getCalculatedCompareKeys(compareKeysMapFromDefault: InputCompareKeys) {
         status: compareKeysMapFromDefault.status || 'status',
         assignee: compareKeysMapFromDefault.assignee || 'assignee',
     };
-};
+}
 
 export function convertMainEvent(
     event: Object,
