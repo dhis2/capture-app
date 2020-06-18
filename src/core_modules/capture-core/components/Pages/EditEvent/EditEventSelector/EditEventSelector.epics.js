@@ -27,7 +27,7 @@ export const editEventPageSelectorUpdateURLEpic = (action$: InputObservable, sto
             editEventPageSelectorActionTypes.RESET_PROGRAM_ID, editEventPageSelectorActionTypes.RESET_CATEGORY_OPTION,
             editEventPageSelectorBatchActionTypes.START_AGAIN, editEventPageSelectorBatchActionTypes.RESET_PROGRAM_AND_CATEGORY_OPTION),
         map(() => {
-            const state = store.getState();
+            const state = store.value;
             const { programId, orgUnitId } = state.currentSelections;
             const args = getArguments(programId, orgUnitId);
             return push(`/${args}`);

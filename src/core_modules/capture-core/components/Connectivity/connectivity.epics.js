@@ -20,7 +20,7 @@ export const goingOnlineEpic = (action$: InputObservable, store: ReduxStore) =>
                 goingOnlineExecuted(),
             ];
 
-            const state = store.getState();
+            const state = store.value;
             const isSelectionsComplete = !!state.currentSelections.complete;
             if (isSelectionsComplete) {
                 actions = [

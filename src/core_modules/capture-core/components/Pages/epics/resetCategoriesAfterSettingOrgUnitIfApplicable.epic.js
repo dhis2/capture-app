@@ -43,7 +43,7 @@ export const resetCategoriesAfterSettingOrgUnitIfApplicableEpic = (action$: Inpu
         ),
         switchMap((action) => {
             const orgUnitId = action.payload.id;
-            const selectedCategories = store.getState().currentSelections.categories;
+            const selectedCategories = store.value.currentSelections.categories;
             if (!selectedCategories) {
                 return Promise.resolve(skipCategoriesResetAfterSettingOrgUnit(action.type));
             }

@@ -34,7 +34,7 @@ export const getEventOpeningFromEventListEpic = (action$: InputObservable, store
     action$.pipe(
         ofType(eventListActionTypes.OPEN_VIEW_EVENT_PAGE),
         switchMap((action) => {
-            const state = store.getState();
+            const state = store.value;
             const eventId = action.payload;
             return getEvent(eventId)
                 .then((eventContainer) => {
@@ -62,7 +62,7 @@ export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore)
         ofType(viewEventActionTypes.VIEW_EVENT_FROM_URL),
         switchMap((action) => {
             const eventId = action.payload.eventId;
-            const prevProgramId = store.getState().currentSelections.programId; // used to clear columns and filters in eventlist if program id is changed
+            const prevProgramId = store.value.currentSelections.programId; // used to clear columns and filters in eventlist if program id is changed
             return getEvent(eventId)
                 .then((eventContainer) => {
                     if (!eventContainer) {
@@ -115,7 +115,7 @@ export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) 
         ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE),
         // eslint-disable-next-line complexity
         map(() => {
-            const state = store.getState();
+            const state = store.value;
 
             if (!state.offline.online) {
                 return noWorkingListUpdateNeededOnBackToMainPage();
@@ -146,7 +146,7 @@ export const backToMainPageLocationChangeEpic = (action$: InputObservable, store
     action$.pipe(
         ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE),
         map(() => {
-            const state = store.getState();
+            const state = store.value;
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
             return push(`/programId=${programId}&orgUnitId=${orgUnitId}`);

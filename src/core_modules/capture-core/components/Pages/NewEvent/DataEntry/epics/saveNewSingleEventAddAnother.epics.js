@@ -28,7 +28,7 @@ export const saveNewEventAddAnotherEpic = (action$: InputObservable, store: Redu
     action$.pipe(
         ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER),
         map((action) => {
-            const state = store.getState();
+            const state = store.value;
             const payload = action.payload;
             const formFoundation = payload.formFoundation;
             const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.eventId);

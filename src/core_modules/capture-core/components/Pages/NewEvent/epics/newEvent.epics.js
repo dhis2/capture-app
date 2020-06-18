@@ -31,7 +31,7 @@ export const openNewEventPageLocationChangeEpic = (action$: InputObservable, sto
             mainPageSelectorActionTypes.OPEN_NEW_EVENT,
         ),
         map(() => {
-            const state = store.getState();
+            const state = store.value;
             const { programId, orgUnitId } = state.currentSelections;
             const args = getArguments(programId, orgUnitId);
             return push(`/newEvent/${args}`);

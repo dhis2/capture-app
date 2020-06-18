@@ -55,7 +55,7 @@ export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
 
 
 const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, itemId: string, uid: string, fieldData?: ?FieldData) => {
-    const state = store.getState();
+    const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const eventId = state.dataEntries[dataEntryId].eventId;
     const event = state.events[eventId];

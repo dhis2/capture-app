@@ -25,7 +25,7 @@ export const openNewEnrollmentInDataEntryEpic = (action$: InputObservable, store
             urlActionTypes.VALID_SELECTIONS_FROM_URL,
         ),
         switchMap(() => {
-            const state = store.getState();
+            const state = store.value;
             const selectionsComplete = state.currentSelections.complete;
             if (!selectionsComplete) {
                 return selectionsNotCompleteOpeningNewEnrollment();

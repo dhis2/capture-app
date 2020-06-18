@@ -36,7 +36,7 @@ export const mainSelectionsCompletedEpic = (action$: InputObservable, store: Red
             ].includes(triggeringActionType);
         }),
         filter(() => {
-            const currentSelectionsComplete = !!store.getState().currentSelections.complete;
+            const currentSelectionsComplete = !!store.value.currentSelections.complete;
             return currentSelectionsComplete;
         }),
         map(() => mainSelectionCompleted()));
@@ -82,7 +82,7 @@ export const mainSelectionsFromUrlValidationEpic = (action$: InputObservable, st
     action$.pipe(
         ofType(actionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL, actionTypes.SET_ORG_UNIT_BASED_ON_URL),
         map(() => {
-            const { programId, orgUnitId } = store.getState().currentSelections;
+            const { programId, orgUnitId } = store.value.currentSelections;
             if (programId) {
                 const program = programCollection.get(programId);
                 if (!program) {

@@ -47,7 +47,7 @@ export const loadViewEventDataEntryEpic = (action$: InputObservable, store: Redu
         filter((action) => {
             // Check if current view event is container event. Also check if in view mode.
             const eventId = action.payload.eventContainer.id;
-            const state = store.getState();
+            const state = store.value;
             const viewEventPage = state.viewEventPage || {};
             return viewEventPage.eventId === eventId && !viewEventPage.showEditEvent;
         }),

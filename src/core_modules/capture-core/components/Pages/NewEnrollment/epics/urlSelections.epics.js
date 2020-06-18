@@ -40,7 +40,7 @@ export const validationForNewEnrollmentUrlUpdateEpic = (action$: InputObservable
     action$.pipe(
         ofType(actionTypes.SET_ORG_UNIT_BASED_ON_URL, actionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL),
         map(() => {
-            const { programId, orgUnitId } = store.getState().currentSelections;
+            const { programId, orgUnitId } = store.value.currentSelections;
 
             if (programId) {
                 const program = programCollection.get(programId);

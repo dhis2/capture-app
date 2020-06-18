@@ -29,8 +29,8 @@ export const retrieveTemplatesEpic = (action$: InputObservable, store: ReduxStor
         ),
         concatMap((action) => {
             const listId = action.payload.listId;
-            const programId = store.getState().currentSelections.programId;
-            const promise = getTemplatesAsync(store.getState())
+            const programId = store.value.currentSelections.programId;
+            const promise = getTemplatesAsync(store.value)
                 .then(container => batchActions([
                     selectTemplate(container.default.id, listId, container.default),
                     fetchTemplatesSuccess(container.workingListConfigs, programId, listId),
@@ -91,7 +91,7 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) 
                 }))
             .then(() => {
                 const isActiveTemplate =
-                        store.getState().workingListsTemplates[listId].selectedTemplateId === template.id;
+                        store.value.workingListsTemplates[listId].selectedTemplateId === template.id;
                 return updateTemplateSuccess(
                     template.id,
                     eventQueryCriteria, {
@@ -107,7 +107,7 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) 
                     }),
                 );
                 const isActiveTemplate =
-                        store.getState().workingListsTemplates[listId].selectedTemplateId === template.id;
+                        store.value.workingListsTemplates[listId].selectedTemplateId === template.id;
                 return updateTemplateError(
                     template.id,
                     eventQueryCriteria, {
@@ -176,7 +176,7 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
                         })
                         .then(() => {
                             const isActiveTemplate =
-                                store.getState().workingListsTemplates[listId].selectedTemplateId === clientId;
+                                store.value.workingListsTemplates[listId].selectedTemplateId === clientId;
                             return addTemplateSuccess(result.response.uid, clientId, { listId, isActiveTemplate });
                         });
                 })
@@ -188,7 +188,7 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
                         }),
                     );
                     const isActiveTemplate =
-                        store.getState().workingListsTemplates[listId].selectedTemplateId === clientId;
+                        store.value.workingListsTemplates[listId].selectedTemplateId === clientId;
                     return addTemplateError(clientId, { listId, isActiveTemplate });
                 });
 

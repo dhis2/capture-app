@@ -47,7 +47,7 @@ export const resetProgramAfterSettingOrgUnitIfApplicableEpic = (action$: InputOb
         ),
         filter((action) => {
             const orgUnitId = action.payload.id;
-            const currentlySelectedProgramId = store.getState().currentSelections.programId;
+            const currentlySelectedProgramId = store.value.currentSelections.programId;
             return programShouldReset(orgUnitId, currentlySelectedProgramId);
         }),
         map(() => resetProgramIdBase()));

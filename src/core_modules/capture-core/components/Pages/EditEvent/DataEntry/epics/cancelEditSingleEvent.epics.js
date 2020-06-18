@@ -16,7 +16,7 @@ export const cancelEditEventEpic = (action$: InputObservable, store: ReduxStore)
     action$.pipe(
         ofType(editEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {
-            const state = store.getState();
+            const state = store.value;
 
             if (!state.offline.online) {
                 return noWorkingListUpdateNeededAfterUpdateCancelled();
@@ -38,7 +38,7 @@ export const cancelEditEventLocationChangeEpic = (action$: InputObservable, stor
     action$.pipe(
         ofType(editEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {
-            const state = store.getState();
+            const state = store.value;
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
             return push(`/programId=${programId}&orgUnitId=${orgUnitId}`);

@@ -68,7 +68,7 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
             newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH,
         ),
         map(() => {
-            const state = store.getState();
+            const state = store.value;
             const programId = state.currentSelections.programId;
 
             // cancel if tracker program
@@ -120,7 +120,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
             return true;
         }),
         map(() => {
-            const state = store.getState();
+            const state = store.value;
             const selectionsComplete = state.currentSelections.complete;
             if (!selectionsComplete) {
                 return cancelOpenNewEventInDataEntry();
@@ -173,7 +173,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
             }
 
             // cancel if selections are incomplete
-            const state = store.getState();
+            const state = store.value;
             if (!state.currentSelections.complete) {
                 return false;
             }
@@ -184,7 +184,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
             return !(program instanceof TrackerProgram);
         }),
         map(() => {
-            const state = store.getState();
+            const state = store.value;
             const newEventsMeta = { sortById: 'created', sortByDirection: 'desc' };
             const stageContainer = getStageForEventProgram(state.currentSelections.programId);
             const columnConfig = [...getDefaultMainColumnConfig(stageContainer.stage), ...getColumnMetaDataConfig(stageContainer.stage.stageForm)];
@@ -193,7 +193,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
 
 
 const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemId: string, uid: string, fieldData?: ?FieldData) => {
-    const state = store.getState();
+    const state = store.value;
     const formId = getDataEntryKey(dataEntryId, itemId);
     const programId = state.currentSelections.programId;
     const metadataContainer = getProgramAndStageFromProgramId(programId);

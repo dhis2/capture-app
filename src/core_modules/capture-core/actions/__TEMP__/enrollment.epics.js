@@ -46,12 +46,12 @@ export const loadDataEntryData = (action$: InputObservable, store: ReduxStore) =
     action$.pipe(
         ofType(actionTypes.ENROLLMENT_LOADED),
         map(() => {
-            const events = store.getState().events;
+            const events = store.value.events;
             const firstEventKey = Object.keys(events)[0];
 
             return loadDataEntryEvent(
                 firstEventKey,
-                store.getState(),
+                store.value,
                 [
                     {
                         id: 'eventDate',

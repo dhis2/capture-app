@@ -55,7 +55,7 @@ export const deleteRelationshipForViewEventEpic = (action$: ActionsObservable, s
         ),
         map((action) => {
             const clientId = action.payload.clientId;
-            const state = store.getState();
+            const state = store.value;
             const relationship = state.relationships.viewEvent.find(r => r.clientId === clientId);
 
             return batchActions([
@@ -69,7 +69,7 @@ export const addRelationshipForViewEventEpic = (action$: ActionsObservable, stor
     action$.pipe(
         ofType(viewEventRelationshipsActionTypes.REQUEST_ADD_EVENT_RELATIONSHIP),
         map((action) => {
-            const state = store.getState();
+            const state = store.value;
             const eventId = state.viewEventPage.eventId;
             const existingRelationships = state.dataEntriesRelationships[relationshipKey] || [];
             const payload = action.payload;
@@ -154,7 +154,7 @@ export const relationshipSavedForViewEventEpic = (action$: ActionsObservable, st
     action$.pipe(
         ofType(viewEventRelationshipsActionTypes.EVENT_RELATIONSHIP_SAVED),
         map((action) => {
-            const state = store.getState();
+            const state = store.value;
             const relationship = state.relationships[relationshipKey].find(r => r.clientId === action.meta.clientId);
 
             const relationshipId = action.payload.response.importSummaries[0].reference;

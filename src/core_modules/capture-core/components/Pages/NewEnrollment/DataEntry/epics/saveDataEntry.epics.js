@@ -11,7 +11,7 @@ export const saveNewEnrollmentEpic = (action$: InputObservable, store: ReduxStor
     action$.pipe(
         ofType(actionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         map((action) => {
-            const state = store.getState();
+            const state = store.value;
             const payload = action.payload;
             const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.itemId);
             const programId = state.currentSelections.programId;

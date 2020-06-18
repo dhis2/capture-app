@@ -6,10 +6,7 @@ import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import 'typeface-roboto';
 import { createHashHistory as createHistory } from 'history';
-
-// import D2UIApp from '@dhis2/d2-ui-app';
 import LoadingMask from 'capture-core/components/LoadingMasks/LoadingMaskForPage.component';
-
 import JssProvider from 'react-jss/lib/JssProvider';
 import { create } from 'jss';
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
@@ -17,7 +14,7 @@ import environments from 'capture-core/constants/environments';
 import { DisplayException } from 'capture-core/utils/exceptions/DisplayException';
 import type { HashHistory } from 'history/createHashHistory';
 import App from '../components/App/App.component';
-import getStore from '../store/getStore';
+import { getStore } from '../store/getStore';
 import { initializeAsync } from './init';
 import { loadApp } from './entry.actions';
 import { addBeforeUnloadEventListener } from '../unload';
