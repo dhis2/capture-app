@@ -84,6 +84,7 @@ export default class OrgUnitTree extends React.Component {
 
                   const items = [];
                   /* eslint-disable no-unused-vars */
+                  // todo this would need to be taked care of (report lgtm)
                   for (const [k, v] of units.entries()) {
                       const { value: selectedPath } = this.props;
                       const children = v.children.valuesContainerMap.size > 0 ? [] : null;
