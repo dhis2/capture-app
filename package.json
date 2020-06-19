@@ -36,7 +36,7 @@
     "react-autosuggest": "^9.4.3",
     "react-dnd": "^8.0.2",
     "react-dnd-html5-backend": "^8.0.2",
-    "react-dom": "^16.8.6",
+    "react-dom": "^16.13.0",
     "react-html-parser-ultimate": "^1.0.7",
     "react-infinite-calendar": "^2.3.1",
     "react-jss": "^8.6.1",
