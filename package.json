@@ -58,7 +58,6 @@
     "redux-observable": "^1.2.0",
     "reselect": "^3.0.1",
     "rxjs": "^6.5.5",
-    "rxjs-compat": "^6.5.5",
     "typeface-roboto": "^0.0.54",
     "uuid": "^3.3.2"
   },
