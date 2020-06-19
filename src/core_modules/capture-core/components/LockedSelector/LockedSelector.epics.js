@@ -77,10 +77,17 @@ export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable, sto
                 );
         });
 
-export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: InputObservable) =>
+export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE)
         .filter(action => !action.payload.nextProps.orgUnitId)
-        .map(() => setEmptyOrgUnitBasedOnUrl());
+        .map(() => {
+            const { registeringUnitList: { searchRoots } } = store.getState();
+            if (!searchRoots) {
+                return stopPageLoading();
+            }
+
+            return setEmptyOrgUnitBasedOnUrl();
+        });
 
 export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.ofType(
