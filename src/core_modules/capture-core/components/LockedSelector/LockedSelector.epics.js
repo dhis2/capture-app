@@ -1,6 +1,7 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
 import { push } from 'connected-react-router';
+import { of } from 'rxjs/observable/of';
 import {
     lockedSelectorActionTypes,
     lockedSelectorBatchActionTypes,
@@ -13,7 +14,6 @@ import {
 } from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
 import { getApi } from '../../d2';
-import { of } from 'rxjs/observable/of';
 
 const exactUrl = (page: string, programId: string, orgUnitId: string) => {
     const argArray = [];
@@ -36,7 +36,6 @@ export const updateUrlViaLockedSelectorEpic = (action$: InputObservable, store: 
         lockedSelectorActionTypes.ORG_UNIT_ID_SET,
         lockedSelectorActionTypes.PROGRAM_ID_SET,
         lockedSelectorActionTypes.PROGRAM_ID_RESET,
-        lockedSelectorBatchActionTypes.AGAIN_START,
         lockedSelectorBatchActionTypes.PROGRAM_AND_CATEGORY_OPTION_RESET,
     )
         .map(() => {
@@ -47,9 +46,14 @@ export const updateUrlViaLockedSelectorEpic = (action$: InputObservable, store: 
             return push(exactUrl(page, programId, orgUnitId));
         });
 
+export const startAgainEpic = (action$: InputObservable) =>
+    action$.ofType(lockedSelectorBatchActionTypes.AGAIN_START)
+        .map(() => push('/'));
+
 
 export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE)
+        .filter(action => action.payload.nextProps.orgUnitId)
         .switchMap(({ payload: { nextProps: { orgUnitId: nextOrgUnitId } } }) => {
             const { organisationUnits, currentSelections: { orgUnitId: currentOrgUnitId } } = store.getState();
 
