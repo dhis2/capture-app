@@ -86,6 +86,10 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
         lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID,
         crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
     )
+        .filter(() => {
+            const { app: { page } } = store.getState();
+            return page === 'newEvent';
+        })
         .filter((action) => {
             const type = action.type;
             const triggeringActionType = action.payload && action.payload.triggeringActionType;
