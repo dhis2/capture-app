@@ -19,6 +19,7 @@ export const lockedSelectorActionTypes = {
     BASED_ON_URL_ORG_UNIT_EMPTY_SET: 'BasedOnUrlOrgUnitEmptySet',
 
     NEW_EVENT_OPEN: 'NewEventPageOpen',
+    PAGE_LOADING_STOP: 'PageLoadingStop',
 };
 
 export const lockedSelectorBatchActionTypes = {
@@ -41,6 +42,7 @@ export const openNewEventPageFromLockedSelector = (programId: string, orgUnitId:
 
 // url specific
 export const updateSelectionsFromUrl = (data: Object) => actionCreator(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE)(data);
+export const stopPageLoading = () => actionCreator(lockedSelectorActionTypes.PAGE_LOADING_STOP)();
 export const validSelectionsFromUrl = () => actionCreator(lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID)();
 export const invalidSelectionsFromUrl = (error: string) => actionCreator(lockedSelectorActionTypes.SELECTIONS_FROM_URL_INVALID)({ error });
 export const setCurrentOrgUnitBasedOnUrl = (orgUnit: Object) => actionCreator(lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_SET)(orgUnit);
