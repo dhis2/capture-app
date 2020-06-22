@@ -7,19 +7,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
 import { connect } from 'react-redux';
-
+import { errorCreator } from 'capture-core-utils';
 import Button from '../Buttons/Button.component';
 import ProgressButton from '../Buttons/ProgressButton.component';
 import DataEntry from './DataEntry.component';
-import { errorCreator } from 'capture-core-utils';
-
 import { startCompleteEvent, completeValidationFailed, completeAbort } from './actions/dataEntry.actions';
 import getDataEntryKey from './common/getDataEntryKey';
-
 import getStageFromEvent from '../../metaData/helpers/getStageFromEvent';
-
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 
 type Props = {

@@ -1,6 +1,6 @@
 // @flow
-import { getApi } from '../../../../d2/d2Instance';
 import i18n from '@dhis2/d2-i18n';
+import { getApi } from '../../../../d2/d2Instance';
 import {
     actionTypes,
     setCurrentOrgUnitBasedOnUrl,

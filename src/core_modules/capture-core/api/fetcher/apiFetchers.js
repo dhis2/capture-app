@@ -1,11 +1,10 @@
 // @flow
 import log from 'loglevel';
 import Model from 'd2/lib/model/Model';
-
+import { errorCreator } from 'capture-core-utils';
 import commonQueryParams from './commonQueryParams';
 import getterTypes from './getterTypes.const';
 import getD2 from '../../d2/d2Instance';
-import { errorCreator } from 'capture-core-utils';
 
 export type Converter = (d2Model: Model) => any;
 

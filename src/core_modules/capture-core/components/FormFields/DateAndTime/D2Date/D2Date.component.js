@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import lowerCaseFirstLetter from 'capture-core-utils/string/lowerCaseFirstLetter';
 import D2TextField from '../../Generic/D2TextField.component';
 import D2DatePopup from './D2DatePopup.component';
 import D2DateCalendar from './D2DateCalendar.component';
-import lowerCaseFirstLetter from 'capture-core-utils/string/lowerCaseFirstLetter';
 
 type Props = {
     label: string,

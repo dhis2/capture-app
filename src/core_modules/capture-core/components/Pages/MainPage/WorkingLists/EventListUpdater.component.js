@@ -24,7 +24,7 @@ function useUpdateListEffect(callback, dependencies) {
             return undefined;
         }
         return callback();
-    }, useUpdateListMemoize(dependencies)); // eslint-disable-line react-hooks/exhaustive-deps
+    }, useUpdateListMemoize(dependencies));
 }
 
 type Props = {

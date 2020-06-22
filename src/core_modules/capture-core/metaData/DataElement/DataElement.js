@@ -5,10 +5,9 @@
 import log from 'loglevel';
 import isFunction from 'd2-utilizr/lib/isFunction';
 import isArray from 'd2-utilizr/lib/isArray';
-
+import { errorCreator } from 'capture-core-utils';
 import Icon from '../Icon/Icon';
 import OptionSet from '../OptionSet/OptionSet';
-import { errorCreator } from 'capture-core-utils';
 import elementTypes from './elementTypes';
 import { Unique } from './Unique';
 

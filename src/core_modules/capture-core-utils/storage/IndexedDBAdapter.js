@@ -254,6 +254,7 @@ class IndexedDBAdapter {
                         }),
                     )
                     .then(() => {
+                        // eslint-disable-next-line no-underscore-dangle
                         this._upgrade(onCreateObjectStore);
                         return Promise.resolve();
                     })
@@ -412,7 +413,7 @@ class IndexedDBAdapter {
                     let lastId;
                     if (count > 0) {
                         values.forEach((value) => {
-                            // value[this.keyPath] = cursor.primaryKey || cursor.key;
+                            // eslint-disable-next-line no-underscore-dangle
                             this._processGetAllItem(value, predicate, project, records);
                         });
                         lastId = values[count - 1].id;
@@ -449,6 +450,7 @@ class IndexedDBAdapter {
                 if (cursor) {
                     cursor.value[this.keyPath] = cursor.primaryKey || cursor.key;
                     const dbValue = cursor.value;
+                    // eslint-disable-next-line no-underscore-dangle
                     this._processGetAllItem(dbValue, predicate, project, records);
                     cursor.continue();
                 }
@@ -479,7 +481,9 @@ class IndexedDBAdapter {
                 tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
                 const objectStore = tx.objectStore(store);
                 batchSize ?
+                    // eslint-disable-next-line no-underscore-dangle
                     this._getAllInBatches(objectStore, options, records, abortTx) :
+                    // eslint-disable-next-line no-underscore-dangle
                     this._getAllWithCursor(objectStore, options, records, abortTx);
 
                 tx.oncomplete = () => {

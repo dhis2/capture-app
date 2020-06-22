@@ -46,8 +46,8 @@ function setConfig() {
 
 function isLangRTL(code) {
     const langs = ['ar', 'fa', 'ur'];
-    const prefixed = langs.map((c) => `${c}-`);
-    return langs.includes(code) || prefixed.filter((c) => code.startsWith(c)).length > 0;
+    const prefixed = langs.map(c => `${c}-`);
+    return langs.includes(code) || prefixed.filter(c => code.startsWith(c)).length > 0;
 }
 
 function setMomentLocaleAsync(locale: string) {

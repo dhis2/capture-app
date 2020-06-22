@@ -65,6 +65,7 @@ class CardList extends React.Component<Props> {
 
         return items.map((item, index) => (
             <CardListItem
+                /* eslint-disable-next-line react/no-array-index-key */
                 key={index}
                 item={item}
                 getCustomTopElements={getCustomItemTopElements}

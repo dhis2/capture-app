@@ -20,7 +20,7 @@ const CaptureScrollHeight = (props: Props) => {
         window.addEventListener('resize', updateHeight);
         return () =>
             window.removeEventListener('resize', updateHeight);
-    }, [...extraTriggers, updateHeight]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [...extraTriggers, updateHeight]);
 
     return props.children(height);
 };
