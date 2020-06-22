@@ -61,6 +61,11 @@
     "typeface-roboto": "^0.0.54",
     "uuid": "^3.3.2"
   },
+  "_comment": "resolutions should be reoved after the https://github.com/babel/babel-eslint/issues/681 is resolved.",
+  "resolutions": {
+    "babel-eslint": "^10.0.1",
+    "@babel/parser": "^7.0.0"
+  },
   "scripts": {
     "manualBuild": "node verifyCacheVersion.js && yarn localize && d2-manifest package.json ./public/manifest.webapp && REACT_APP_DHIS2_BASE_URL='../../..' react-scripts build && mkdirp buildzip/ && pushd build && bestzip ../buildzip/NewCaptureApp.zip * && popd",
     "start": "react-scripts start",
@@ -73,7 +78,7 @@
     "localize": "yarn extract-pot && d2-i18n-generate -n default -p ./i18n/ -o ./src/locales/",
     "prestart": "node verifyCacheVersion.js && yarn localize && d2-manifest package.json ./public/manifest.webapp",
     "docs": "NODE_ENV=development jsdoc -c jsdoc-conf.json",
-    "linter:check": "eslint -c .eslintrc src/**"
+    "linter:check": "eslint -c .eslintrc src/**/*.js --quiet"
   },
   "husky": {
     "hooks": {
@@ -87,8 +92,16 @@
     "docdash": "^1.1.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
+    "eslint": "6.8.0",
+    "eslint-config-airbnb": "18.1.0",
     "eslint-config-dhis2": "^3.0.7",
     "eslint-import-resolver-webpack": "^0.12.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "2.5.0",
     "fake-indexeddb": "^2.1.1",
     "flow-bin": "^0.125.1",
     "husky": "^4.2.5",
@@ -97,7 +110,7 @@
     "jsdoc-babel": "^0.5.0",
     "jsdoc-export-default-interop": "^0.3.1",
     "mkdirp": "^0.5.1",
-    "redux-devtools-extension": "^2.13.8"
+    "redux-devtools-extension": "^2.13.2"
   },
   "manifest.webapp": {
     "version": "1.0.5",
