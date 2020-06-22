@@ -1,24 +1,33 @@
 // @flow
+import { SearchGroup } from '../../../metaData/SearchGroup';
+
 export type PropsFromRedux = {
-  +preselectedProgram: {
+  +preselectedProgram: {|
     value: ?string,
     label: ?string
-  },
+  |},
   +trackedEntityTypesWithCorrelatedPrograms: {
-    [elementId: string]: {
+    [elementId: string]: {|
       +trackedEntityTypeId: string,
       +trackedEntityTypeName: string,
-      +programs: Array<{
+      +programs: Array<{|
         +programName: string,
         +programId: string,
-      }>
-    }
+      |}>
+    |}
+  },
+  programs: {
+    [elementId: string]: {|
+      +programId: string,
+      +programName: string,
+      +searchGroups: Array<SearchGroup>
+    |}
   }
 }
 
 export type Props =
   PropsFromRedux & {
-  +classes: {
+  +classes: {|
     +container: string,
     +header: string,
     +paper: string,
@@ -28,5 +37,6 @@ export type Props =
     +searchRow: string,
     +searchRowTitle: string,
     +searchRowSelectElement: string,
-  },
+    +searchButtonContainer: string,
+  |},
 }

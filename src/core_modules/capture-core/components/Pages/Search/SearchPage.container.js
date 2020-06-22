@@ -16,18 +16,20 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
               _id: programId,
               _name: programName,
               _trackedEntityType: { _id: trackedEntityTypeId, _name: trackedEntityTypeName },
+              _searchGroups: searchGroups,
           }) => {
               const accumulatedProgramsOfTrackedEntityType =
                 acc[trackedEntityTypeId] ? acc[trackedEntityTypeId].programs : [];
-
               return {
                   ...acc,
                   [trackedEntityTypeId]: {
                       trackedEntityTypeId,
                       trackedEntityTypeName,
                       programs: [
-                          ...accumulatedProgramsOfTrackedEntityType, { programId, programName },
+                          ...accumulatedProgramsOfTrackedEntityType,
+                          { programId, programName, searchGroups },
                       ],
+
                   },
               };
           }, {});
@@ -38,11 +40,19 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
             programs.find(({ programId }) => programId === currentSelections.programId))
         .filter(program => program)[0];
 
+    const programs = Object.values(trackedEntityTypesWithCorrelatedPrograms)
+        .flatMap(({ programs }) => programs)
+        .reduce((acc, { programId, programName, searchGroups }) => ({
+            ...acc,
+            [programId]: { programId, programName, searchGroups },
+        }), {});
+
     return {
         preselectedProgram: {
             value: preselectedProgram && preselectedProgram.programId,
             label: preselectedProgram && preselectedProgram.programName,
         },
+        programs,
         trackedEntityTypesWithCorrelatedPrograms,
         error: activePage.selectionsError && activePage.selectionsError.error,
         ready: !activePage.isLoading,

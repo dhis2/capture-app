@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
-"PO-Revision-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2020-06-22T15:47:33.873Z\n"
+"PO-Revision-Date: 2020-06-22T15:47:33.873Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -660,6 +660,9 @@ msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Register"
+msgstr ""
+
+msgid "Search {{name}}"
 msgstr ""
 
 msgid "You dont have access to edit this event"

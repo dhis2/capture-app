@@ -7,6 +7,7 @@ import { SingleSelect, SingleSelectOption } from '@dhis2/ui-core';
 import { LockedSelector } from '../../LockedSelector';
 import type { Props } from './SearchPage.types';
 import { Section, SectionHeaderSimple } from '../../Section';
+import Button from '../../Buttons/Button.component';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -45,10 +46,15 @@ const getStyles = (theme: Theme) => ({
         width: '100%',
         marginRight: 8,
     },
+    searchButtonContainer: {
+        padding: theme.typography.pxToRem(10),
+        display: 'flex',
+        alignItems: 'center',
+    },
 });
 
 
-const Index = ({ classes, trackedEntityTypesWithCorrelatedPrograms, preselectedProgram }: Props) => {
+const Index = ({ classes, trackedEntityTypesWithCorrelatedPrograms, preselectedProgram, programs }: Props) => {
     const [selectedOption, choseSelected] = useState(preselectedProgram);
 
     return (<>
@@ -95,6 +101,37 @@ const Index = ({ classes, trackedEntityTypesWithCorrelatedPrograms, preselectedP
                         </div>
                     </div>
                 </Section>
+
+                {
+                    selectedOption.value && programs[selectedOption.value].searchGroups
+                        .filter(sg => sg.unique)
+                        .map((sg) => {
+                            const name = sg.searchForm.getElements()[0].formName;
+                            return (
+                                <Section
+                                    className={classes.searchDomainSelectorSection}
+                                    header={
+                                        <SectionHeaderSimple
+                                            containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
+                                            title={i18n.t('Search {{name}}', { name })}
+                                        />
+                                    }
+                                >
+                                    <div className={classes.searchRow}>
+                                        <div className={classes.searchRowTitle}>Search for</div>
+                                        <div className={classes.searchRowSelectElement}>
+                                            FORM GOES HERE
+                                        </div>
+                                    </div>
+                                    <div className={classes.searchButtonContainer}>
+                                        <Button onClick={() => {}}>
+                                            Find by {name}
+                                        </Button>
+                                    </div>
+                                </Section>
+                            );
+                        })
+                }
             </Paper>
         </div>
     </>);
