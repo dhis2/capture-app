@@ -78,12 +78,15 @@
     "localize": "yarn extract-pot && d2-i18n-generate -n default -p ./i18n/ -o ./src/locales/",
     "prestart": "node verifyCacheVersion.js && yarn localize && d2-manifest package.json ./public/manifest.webapp",
     "docs": "NODE_ENV=development jsdoc -c jsdoc-conf.json",
-    "linter:check": "eslint -c .eslintrc src/**/*.js --quiet"
+    "linter:check": "eslint -c .eslintrc . --quiet"
   },
   "husky": {
     "hooks": {
       "pre-commit": "yarn extract-pot && git add ./i18n/"
     }
+  },
+  "resolutions": {
+    "@babel/parser": "7.7.5"
   },
   "devDependencies": {
     "@dhis2/d2-i18n-extract": "^1.0.8",
