@@ -82,25 +82,22 @@ const loadProgramBatch = async (programIds) => {
  */
 const getSideEffects = (() => {
     const getOptionSetsOutline = (() => {
-        const getDataElementOptionSets = programStageDataElements =>
-            (programStageDataElements || [])
-                .map(psda => psda.dataElement && psda.dataElement.optionSet)
-                .filter(optionSet => optionSet);
+        const getDataElementOptionSets = programStages =>
+            (programStages || [])
+                .flatMap(programStage => (programStage.programStageDataElements || [])
+                    .map(psda => psda.dataElement && psda.dataElement.optionSet)
+                    .filter(optionSet => optionSet),
+                );
 
         const getTrackedEntityAttributeOptionSets = programTrackedEntityAttributes =>
             (programTrackedEntityAttributes || [])
                 .map(ptea => ptea.trackedEntityAttribute && ptea.trackedEntityAttribute.optionSet)
                 .filter(optionSet => optionSet);
 
-        const getProgramOptionSets = (program) => {
-            const dataElementOptionSets = (program.programStages || [])
-                .flatMap(programStage => getDataElementOptionSets(programStage.programStageDataElements));
-
-            return [
-                ...dataElementOptionSets,
-                ...getTrackedEntityAttributeOptionSets(program.programTrackedEntityAttributes),
-            ];
-        };
+        const getProgramOptionSets = program => [
+            ...getDataElementOptionSets(program.programStages),
+            ...getTrackedEntityAttributeOptionSets(program.programTrackedEntityAttributes),
+        ];
 
         return (programsOutline): Array<Object> =>
             programsOutline

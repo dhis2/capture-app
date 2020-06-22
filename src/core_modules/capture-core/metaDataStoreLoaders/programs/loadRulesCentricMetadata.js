@@ -49,16 +49,6 @@ export const loadRulesCentricMetadata = (programIds: Array<string>) => {
         unavailableIds.length > 0 && await storageController.remove(storeName, unavailableIds);
     };
 
-    /**
-     * Retrieves data from the api and stores it in IndexedDB.
-     * Removes cached programs no longer available to the user.
-     */
-    const load = async ({ storeName, storeFn }) => {
-        const loadedIds = await storeFn(programIds);
-        const cachedIds = await getCachedIds(storeName);
-        await removeUnavailableRecords(loadedIds, cachedIds, storeName);
-    };
-
     return Promise.all([{
         storeName: storeNames.PROGRAM_RULES_VARIABLES,
         storeFn: storeProgramRulesVariables,
@@ -68,6 +58,9 @@ export const loadRulesCentricMetadata = (programIds: Array<string>) => {
     }, {
         storeName: storeNames.PROGRAM_INDICATORS,
         storeFn: storeProgramIndicators,
-    }].map(spec => load(spec)),
-    );
+    }].map(async ({ storeName, storeFn }) => {
+        const loadedIds = await storeFn(programIds);
+        const cachedIds = await getCachedIds(storeName);
+        await removeUnavailableRecords(loadedIds, cachedIds, storeName);
+    }));
 };
