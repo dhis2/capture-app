@@ -10,15 +10,16 @@ export const lockedSelectorActionTypes = {
     CATEGORY_OPTION_RESET: 'CategoryOptionReset',
     ALL_CATEGORY_OPTIONS_RESET: 'AllCategoryOptionsReset',
 
-    SELECTIONS_FROM_URL_UPDATE: 'SectionsFromUrlUpdate',
-    SELECTIONS_FROM_URL_VALID: 'SectionsFromUrlValid',
-    SELECTIONS_FROM_URL_INVALID: 'SectionsFromUrlInvalid',
+    SELECTIONS_FROM_URL_UPDATE: 'SelectionsFromUrlUpdate',
+    SELECTIONS_FROM_URL_VALID: 'SelectionsFromUrlValid',
+    SELECTIONS_FROM_URL_INVALID: 'SelectionsFromUrlInvalid',
 
     BASED_ON_URL_ORG_UNIT_SET: 'BasedOnUrlOrgUnitSet',
     BASED_ON_URL_ORG_UNIT_ERROR_RETRIEVING: 'BasedOnUrlOrgUnitErrorRetrieving',
     BASED_ON_URL_ORG_UNIT_EMPTY_SET: 'BasedOnUrlOrgUnitEmptySet',
 
     NEW_EVENT_OPEN: 'NewEventPageOpen',
+    PAGE_LOADING_STOP: 'PageLoadingStop',
 };
 
 export const lockedSelectorBatchActionTypes = {
@@ -41,6 +42,7 @@ export const openNewEventPageFromLockedSelector = (programId: string, orgUnitId:
 
 // url specific
 export const updateSelectionsFromUrl = (data: Object) => actionCreator(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE)(data);
+export const stopPageLoading = () => actionCreator(lockedSelectorActionTypes.PAGE_LOADING_STOP)();
 export const validSelectionsFromUrl = () => actionCreator(lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID)();
 export const invalidSelectionsFromUrl = (error: string) => actionCreator(lockedSelectorActionTypes.SELECTIONS_FROM_URL_INVALID)({ error });
 export const setCurrentOrgUnitBasedOnUrl = (orgUnit: Object) => actionCreator(lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_SET)(orgUnit);

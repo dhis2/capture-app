@@ -47,17 +47,9 @@ type Props = {
     stage: ?ProgramStage,
 }
 
-type State = {
-    discardWarningOpen: boolean,
-}
 
-class NewEventDataEntryWrapper extends React.Component<Props, State> {
+class NewEventDataEntryWrapper extends React.Component<Props> {
     cancelButtonInstance: ?any;
-
-    constructor(props: Props) {
-        super(props);
-        this.state = { discardWarningOpen: false };
-    }
 
     handleGoBackToAllEvents = () => {
         this.cancelButtonInstance && this.cancelButtonInstance.handleCancel();

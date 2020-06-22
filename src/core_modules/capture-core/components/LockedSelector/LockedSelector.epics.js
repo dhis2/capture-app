@@ -1,6 +1,7 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
 import { push } from 'connected-react-router';
+import { of } from 'rxjs/observable/of';
 import {
     lockedSelectorActionTypes,
     lockedSelectorBatchActionTypes,
@@ -9,10 +10,10 @@ import {
     setCurrentOrgUnitBasedOnUrl,
     errorRetrievingOrgUnitBasedOnUrl,
     setEmptyOrgUnitBasedOnUrl,
+    stopPageLoading,
 } from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
 import { getApi } from '../../d2';
-
 
 const exactUrl = (page: string, programId: string, orgUnitId: string) => {
     const argArray = [];
@@ -35,7 +36,6 @@ export const updateUrlViaLockedSelectorEpic = (action$: InputObservable, store: 
         lockedSelectorActionTypes.ORG_UNIT_ID_SET,
         lockedSelectorActionTypes.PROGRAM_ID_SET,
         lockedSelectorActionTypes.PROGRAM_ID_RESET,
-        lockedSelectorBatchActionTypes.AGAIN_START,
         lockedSelectorBatchActionTypes.PROGRAM_AND_CATEGORY_OPTION_RESET,
     )
         .map(() => {
@@ -46,26 +46,48 @@ export const updateUrlViaLockedSelectorEpic = (action$: InputObservable, store: 
             return push(exactUrl(page, programId, orgUnitId));
         });
 
+export const startAgainEpic = (action$: InputObservable) =>
+    action$.ofType(lockedSelectorBatchActionTypes.AGAIN_START)
+        .map(() => push('/'));
 
-export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable) =>
+
+export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE)
         .filter(action => action.payload.nextProps.orgUnitId)
-        .switchMap(action => getApi()
-            .get(`organisationUnits/${action.payload.nextProps.orgUnitId}`)
-            .then(response => setCurrentOrgUnitBasedOnUrl({
-                id: response.id,
-                name: response.displayName,
-            }),
-            )
-            .catch(() =>
-                errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')),
-            ),
-        );
+        .switchMap(({ payload: { nextProps: { orgUnitId: nextOrgUnitId } } }) => {
+            const { organisationUnits, currentSelections: { orgUnitId: currentOrgUnitId } } = store.getState();
 
-export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: InputObservable) =>
+            const isOrgUnitAlreadyStored = organisationUnits[nextOrgUnitId];
+            // when an action of the user is changing the url but we have already stored the
+            // organisation unit in memory we dont want to fetch again.
+            // eg. when you are in viewEvent/{eventId} and you deselect the program
+            if (isOrgUnitAlreadyStored && currentOrgUnitId === nextOrgUnitId) {
+                return of(stopPageLoading());
+            }
+
+            return getApi()
+                .get(`organisationUnits/${nextOrgUnitId}`)
+                .then(response => setCurrentOrgUnitBasedOnUrl({
+                    id: response.id,
+                    name: response.displayName,
+                }),
+                )
+                .catch(() =>
+                    errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')),
+                );
+        });
+
+export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE)
         .filter(action => !action.payload.nextProps.orgUnitId)
-        .map(() => setEmptyOrgUnitBasedOnUrl());
+        .map(() => {
+            const { registeringUnitList: { searchRoots } } = store.getState();
+            if (!searchRoots) {
+                return stopPageLoading();
+            }
+
+            return setEmptyOrgUnitBasedOnUrl();
+        });
 
 export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.ofType(

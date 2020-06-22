@@ -82,6 +82,7 @@ class CategorySelector extends React.Component<Props, State> {
             prevOrgUnitId: null,
         };
         this.onSelectSelector = makeOnSelectSelector();
+        // todo you cannot setState from this component (lgtm report)
         this.loadCagoryOptions(this.props);
     }
 

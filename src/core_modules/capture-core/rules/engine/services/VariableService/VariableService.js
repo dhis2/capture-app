@@ -541,14 +541,14 @@ export default class VariableService {
             );
 
             variables.enrollment_count = this.buildVariable(
-                selectedEnrollment ? 1 : 0,
+                1,
                 typeKeys.INTEGER, {
                     variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
                 },
             );
 
             variables.tei_count = this.buildVariable(
-                selectedEnrollment ? 1 : 0,
+                1,
                 typeKeys.INTEGER, {
                     variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
                 },

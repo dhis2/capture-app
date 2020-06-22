@@ -18,6 +18,10 @@ export const searchPageDesc = createReducerDescription({
         ...state,
         isPageLoading: true,
     }),
+    [lockedSelectorActionTypes.PAGE_LOADING_STOP]: state => ({
+        ...state,
+        isPageLoading: false,
+    }),
     [lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID]: state => ({
         ...state,
         selectionsError: null,

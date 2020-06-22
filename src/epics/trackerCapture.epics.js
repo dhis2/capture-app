@@ -170,6 +170,7 @@ import {
     validateSelectionsBasedOnUrlUpdateEpic,
     getOrgUnitDataBasedOnUrlUpdateEpic,
     setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
+    startAgainEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
 
 export default combineEpics(
@@ -273,5 +274,6 @@ export default combineEpics(
     validateSelectionsBasedOnUrlUpdateEpic,
     getOrgUnitDataBasedOnUrlUpdateEpic,
     setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
+    startAgainEpic,
     ...getDataEntryEpics(),
 );

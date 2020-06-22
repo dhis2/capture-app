@@ -23,6 +23,7 @@ export const updateFieldBatch = (
         innerAction,
         ...filterActionsToBeExecuted,
         startRunRulesPostUpdateField(dataEntryId, itemId, uid),
+        // todo this is undefined (lgtm)
         startRunRulesOnUpdateForNewEnrollment(innerAction.payload, filterActions, uid),
     ], batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH);
 };
@@ -43,6 +44,7 @@ export const asyncUpdateSuccessBatch = (
         innerAction,
         ...filterActionsToBeExecuted,
         startRunRulesPostUpdateField(dataEntryId, itemId, uid),
+        // todo this is undefined (lgtm)
         startRunRulesOnUpdateForNewEnrollment({ ...innerAction.payload, dataEntryId, itemId }, filterActions, uid),
     ], batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH);
 };
