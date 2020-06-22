@@ -83,7 +83,7 @@
     "@dhis2/d2-i18n-extract": "^1.0.8",
     "@dhis2/d2-i18n-generate": "^1.1.1",
     "bestzip": "^2.1.4",
-    "docdash": "^1.1.1",
+    "docdash": "^1.2.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "eslint-config-dhis2": "^3.0.7",
