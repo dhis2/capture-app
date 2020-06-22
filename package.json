@@ -5,6 +5,7 @@
   "cacheVersion": "1",
   "private": false,
   "dependencies": {
+    "@babel/preset-flow": "^7.10.1",
     "@dhis2/app-runtime": "^2.0.4",
     "@dhis2/d2-i18n": "^1.0.6",
     "@dhis2/d2-icons": "^1.0.1",
@@ -47,7 +48,6 @@
     "react-redux": "6",
     "react-router": "^5.0.1",
     "react-rte": "^0.16.1",
-    "react-scripts": "3.4.1",
     "react-select": "^1.2.1",
     "react-transform-tree": "^1.0.35",
     "react-virtualized": "^9.18.5",
@@ -63,7 +63,7 @@
   },
   "scripts": {
     "manualBuild": "node verifyCacheVersion.js && yarn localize && d2-manifest package.json ./public/manifest.webapp && REACT_APP_DHIS2_BASE_URL='../../..' react-scripts build && mkdirp buildzip/ && pushd build && bestzip ../buildzip/NewCaptureApp.zip * && popd",
-    "start": "react-scripts start",
+    "start": "d2-app-scripts start",
     "build": "node verifyCacheVersion.js && yarn localize && d2-manifest package.json ./public/manifest.webapp && GENERATE_SOURCEMAP=false react-scripts build && cp ./package.json ./build/package.json",
     "test": "react-scripts test",
     "test:debug": "react-scripts --inspect-brk test --runInBand",
@@ -71,7 +71,7 @@
     "add-flow-types": "flow-typed install",
     "extract-pot": "d2-i18n-extract -p src/ -o i18n/",
     "localize": "yarn extract-pot && d2-i18n-generate -n default -p ./i18n/ -o ./src/locales/",
-    "prestart": "node verifyCacheVersion.js && yarn localize && d2-manifest package.json ./public/manifest.webapp",
+    "prestart": "node verifyCacheVersion.js && d2-manifest package.json ./public/manifest.webapp",
     "docs": "NODE_ENV=development jsdoc -c jsdoc-conf.json"
   },
   "husky": {
@@ -80,6 +80,7 @@
     }
   },
   "devDependencies": {
+    "@dhis2/cli-app-scripts": "^4.0.8",
     "@dhis2/d2-i18n-extract": "^1.0.8",
     "@dhis2/d2-i18n-generate": "^1.1.1",
     "bestzip": "^2.1.4",

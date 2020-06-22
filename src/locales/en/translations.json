@@ -1,4 +1,6 @@
 {
+    "Hello {{name}}": "",
+    "Welcome to DHIS2!": "",
     "Please provide a valid date": "",
     "Columns to show in table": "",
     "Column": "",
