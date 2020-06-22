@@ -1,5 +1,3 @@
-/* eslint-disable complexity */
-/* eslint-disable no-underscore-dangle */
 import isDefined from 'd2-utilizr/lib/isDefined';
 import log from 'loglevel';
 import { errorCreator } from '../errorCreator';
@@ -408,7 +406,7 @@ class IndexedDBAdapter {
                     onIDBGetRequest(objectStore, IndexedDBAdapter) :
                     objectStore.getAll(keyRange, batchSize);
 
-                request.onsuccess = (e) => {
+                request.onsuccess = () => {
                     const values = request.result;
                     const count = values ? values.length : 0;
                     let lastId;

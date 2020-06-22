@@ -69,17 +69,6 @@ type OptionContainer = {
 }
 
 class OptionsSelectVirtualized extends React.Component<Props, State> {
-    static defaultSelectStyle = {
-    };
-    static defaultMenuContainerStyle = {
-    }
-
-    static defaultProps = {
-        translations: {
-            clearText: '',
-            noResults: '',
-        },
-    };
     static getFilteredOptions(options: Array<VirtualizedOptionConfig>, filterValue: any): Array<VirtualizedOptionConfig> {
         const filterValueLC = filterValue.toLowerCase();
         return (options && options.filter(o => o.label.toLowerCase().indexOf(filterValueLC) > -1)) || [];
@@ -93,6 +82,12 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
     prevFilteredOptions: Array<VirtualizedOptionConfig>;
     isUnmounted: boolean;
 
+    static defaultProps = {
+        translations: {
+            clearText: '',
+            noResults: '',
+        },
+    };
 
     constructor(props: Props) {
         super(props);
@@ -113,6 +108,11 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
 
     componentWillUnmount() {
         this.isUnmounted = true;
+    }
+
+    static defaultSelectStyle = {
+    };
+    static defaultMenuContainerStyle = {
     }
 
     filterOptions = () => {

@@ -5,7 +5,7 @@ import {
     cancelNewEventAndReturnToMainPage,
 } from '../DataEntry/actions/dataEntry.actions';
 
-const mapStateToProps = (state: ReduxState) => ({
+const mapStateToProps = () => ({
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({

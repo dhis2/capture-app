@@ -1,6 +1,7 @@
 // @flow
 import { actionCreator } from 'capture-core/actions/actions.utils';
 
+// todo not used!
 export const actionTypes = {
     VIEW_EVENT_FROM_URL: 'ViewEventFromUrl',
     EVENT_FROM_URL_RETRIEVED: 'EventFromUrlRetrievedForViewEvent',

@@ -12,6 +12,9 @@ import { errorCreator } from 'capture-core-utils';
 import elementTypes from './elementTypes';
 import { Unique } from './Unique';
 
+// eslint-disable-next-line no-use-before-define
+export type ConvertFn = (value: any, type: $Values<typeof elementTypes>, element: DataElement) => any;
+
 export default class DataElement {
     static errorMessages = {
         TYPE_NOT_FOUND: 'type not supported',
@@ -169,4 +172,3 @@ export default class DataElement {
     }
 }
 
-export type ConvertFn = (value: any, type: $Values<typeof elementTypes>, element: DataElement) => any;

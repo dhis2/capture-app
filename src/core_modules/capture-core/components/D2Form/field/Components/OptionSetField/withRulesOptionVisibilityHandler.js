@@ -1,5 +1,4 @@
 // @flow
-
 import * as React from 'react';
 import { connect } from 'react-redux';
 import OptionGroup from '../../../../../metaData/OptionSet/OptionGroup';
@@ -82,7 +81,6 @@ const getCreateRulesOptionsVisibilityHandlerHOC =
         };
 
 const makeMapStateToProps = () => {
-
     const getOptionsVisibility = makeGetOptionsVisibility();
 
     const mapStateToProps = (state: ReduxState, props: Object) => ({

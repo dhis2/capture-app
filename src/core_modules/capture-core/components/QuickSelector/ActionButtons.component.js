@@ -1,10 +1,10 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import AddIcon from '@material-ui/icons/AddCircleOutline';
 import i18n from '@dhis2/d2-i18n';
 
 import { Button } from '../Buttons';
-import AddIcon from '@material-ui/icons/AddCircleOutline';
 import { TrackerProgram } from '../../metaData';
 
 // Find button to be included when find(tracked entity instance) is supported
@@ -33,7 +33,6 @@ type Props = {
 };
 
 class ActionButtons extends Component<Props> {
-    handleClick: () => void;
     handleNewClick: () => void;
     constructor(props) {
         super(props);
@@ -47,10 +46,6 @@ class ActionButtons extends Component<Props> {
 
     handleNewClick = () => {
         this.props.onClickNew();
-    }
-
-    handleFindClick = () => {
-        alert('Not implemented yet.');
     }
 
     getButtonText = () => {
@@ -89,15 +84,6 @@ class ActionButtons extends Component<Props> {
                     <AddIcon className={classes.icon} />
                     {this.getButtonText()}
                 </Button>
-                {/* Find button to be included when find(tracked entity instance)
-                is supported:
-                <Button
-                    onClick={this.handleFindClick}
-                    color="primary"
-                >
-                    <SearchIcon className={classes.rightButton} />
-                    { i18n.t('Find') }
-                </Button> */}
             </div>
         );
     }

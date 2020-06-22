@@ -23,7 +23,7 @@ import {
 
 const noteKey = 'viewEvent';
 
-export const loadNotesForViewEventEpic = (action$: InputObservable, store: ReduxStore) =>
+export const loadNotesForViewEventEpic = (action$: InputObservable) =>
     // $FlowSuppress
     action$.ofType(
         viewEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,

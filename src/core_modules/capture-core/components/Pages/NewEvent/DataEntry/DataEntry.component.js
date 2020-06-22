@@ -347,7 +347,7 @@ const buildAssigneeSettingsFn = () => {
             return !!enableUserAssignment && canViewOtherUsers();
         },
         getComponent: () => assigneeComponent,
-        getComponentProps: (props: Object) => ({
+        getComponentProps: () => ({
         }),
         getPropName: () => 'assignee',
         getValidatorContainers: () => [],

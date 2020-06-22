@@ -470,7 +470,7 @@ export default class VariableService {
 
         // TODO: need to build some kind of date service and change this codeline
         variables.current_date = this.buildVariable(
-          VariableService.dateUtils.getToday(),
+            VariableService.dateUtils.getToday(),
             typeKeys.DATE, {
                 variablePrefix: variablePrefixes.CONTEXT_VARIABLE,
             },

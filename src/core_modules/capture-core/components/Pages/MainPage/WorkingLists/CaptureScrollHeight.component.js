@@ -17,9 +17,9 @@ const CaptureScrollHeight = (props: Props) => {
 
     React.useLayoutEffect(() => {
         updateHeight();
-        window.addEventListener("resize", updateHeight);
+        window.addEventListener('resize', updateHeight);
         return () =>
-            window.removeEventListener("resize", updateHeight);
+            window.removeEventListener('resize', updateHeight);
     }, [...extraTriggers, updateHeight]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return props.children(height);

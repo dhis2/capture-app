@@ -14,7 +14,7 @@ export const makeProgramNameSelector = () => createSelector(
     },
 );
 
-const stageSelector = (props) => props.stage;
+const stageSelector = props => props.stage;
 
 export const makeWritableRelationshipTypesSelector = () => createSelector(
     stageSelector,

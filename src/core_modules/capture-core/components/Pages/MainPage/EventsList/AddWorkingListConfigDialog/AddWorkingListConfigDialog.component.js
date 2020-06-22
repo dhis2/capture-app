@@ -19,9 +19,7 @@ const TextFieldWithContainer = withFocusSaver()(
     ),
 );
 
-type Props = {
-    onClose: Function,
-}
+type Props = {}
 
 type State = {
     dialogOpen: boolean,

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import AssigneeSection from './AssigneeSection.component';
 import { setAssignee } from './assigneeSection.actions';
 
-const mapStateToProps = (state: ReduxState, props: Object) => {
+const mapStateToProps = (state: ReduxState) => {
     const assigneeSection = state.viewEventPage.assigneeSection || {};
 
     return {

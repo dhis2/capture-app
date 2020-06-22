@@ -8,14 +8,14 @@ type Props = {
 };
 
 class D2PhoneNumber extends Component<Props> {
-  static defaultProps = {
-      value: '',
-  };
-
   materialUIInstance: any;
   materialUIContainerInstance: any;
   handleChange: (event: UiEventData) => void;
   handleBlur: (event: UiEventData) => void;
+
+  static defaultProps = {
+      value: '',
+  };
 
   constructor(props: Props) {
       super(props);

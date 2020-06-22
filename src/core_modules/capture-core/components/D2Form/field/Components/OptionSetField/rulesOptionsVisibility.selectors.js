@@ -1,4 +1,4 @@
-import { defaultMemoize, createSelectorCreator } from "reselect";
+import { defaultMemoize, createSelectorCreator } from 'reselect';
 
 
 const createDeepEqualOptionsVisibilitySelector = createSelectorCreator(

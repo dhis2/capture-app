@@ -9,12 +9,11 @@ type Props = {
 };
 
 class D2TextField extends Component<Props> {
+    materialUIInstance: ?HTMLInputElement;
+    materialUIContainerInstance: ?HTMLDivElement;
     static defaultProps = {
         value: '',
     };
-
-    materialUIInstance: ?HTMLInputElement;
-    materialUIContainerInstance: ?HTMLDivElement;
 
     constructor(props: Props) {
         super(props);

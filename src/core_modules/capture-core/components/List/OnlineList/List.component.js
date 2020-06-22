@@ -4,7 +4,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator';
-import { withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import {
     Table,
     Head,
@@ -103,6 +103,11 @@ type Props = {
 
 
 class List extends React.Component<Props> {
+    columnHeaderInstances: Array<HTMLElement>;
+    constructor(props: Props) {
+        super(props);
+        this.columnHeaderInstances = [];
+    }
     static typesWithAscendingInitialDirection = [
         elementTypes.TEXT,
         elementTypes.LONG_TEXT,
@@ -117,11 +122,6 @@ class List extends React.Component<Props> {
         elementTypes.INTEGER_NEGATIVE,
         elementTypes.INTEGER_ZERO_OR_POSITIVE,
     ];
-    columnHeaderInstances: Array<HTMLElement>;
-    constructor(props: Props) {
-        super(props);
-        this.columnHeaderInstances = [];
-    }
     getSortHandler = (id: string) => (direction: string) => {
         this.props.onSort(this.props.listId, id, direction);
     }

@@ -24,7 +24,7 @@ const makeMapStateToProps = () => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    onCancel: (formHorizontal: boolean) => {
+    onCancel: () => {
         dispatch(newEventCancelNewRelationship());
     },
     onAddRelationship: (relationshipType: { id: string, name: string}, entity: Object, entityType: string) => {

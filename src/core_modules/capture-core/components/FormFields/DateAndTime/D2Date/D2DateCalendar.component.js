@@ -4,15 +4,11 @@ import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import InfiniteCalendar from 'react-infinite-calendar';
 import { capitalizeFirstLetter } from 'capture-core-utils/string';
-
 import 'react-infinite-calendar/styles.css';
 import './customStyles.css';
-
 import { parseDate, convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
 import CurrentLocaleData from '../../../../utils/localeData/CurrentLocaleData';
 import getTheme from './getTheme';
-
-// import makeMaxWidthContainer from 'abaris-ui/src/HOC/makeMaxWidthContainer';
 
 type Props = {
     onDateSelected: (value: any) => void,
@@ -31,10 +27,6 @@ const styles = () => ({
 });
 
 class D2DateCalendar extends Component<Props> {
-    static displayOptions = {
-        showHeader: false,
-    };
-
     handleChange: (e: any, dates: ?Array<Date>) => void;
     calendarLocaleData: Object;
     theme: Object;
@@ -83,6 +75,10 @@ class D2DateCalendar extends Component<Props> {
         }
         return false;
     }
+
+    static displayOptions = {
+        showHeader: false,
+    };
 
     handleChange(changeDate: Date) {
         const dateFormatString = convertDateObjectToDateFormatString(changeDate);

@@ -10,20 +10,6 @@ import { DataElement } from '../metaData';
 const GET_SUBVALUE_ERROR = 'Could not get subvalue';
 
 const subValueGetterByElementType = {
-    /* [elementTypeKeys.FILE_RESOURCE]: (value: any, teiId: string, metaElementId: string) => {
-        const baseUrl = config.baseUrl;
-        return getApi().get(`fileResources/${value}`)
-            .then(res =>
-                ({
-                    name: res.name,
-                    value: res.id,
-                    url: `${baseUrl}/trackedEntityInstances/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
-                }))
-            .catch((error) => {
-                log.warn(errorCreator(GET_SUBVALUE_ERROR)({ value, eventId, metaElementId, error }));
-                return null;
-            });
-    }, */
     [elementTypeKeys.IMAGE]: (value: any, teiId: string, attributeId: string) => {
         const baseUrl = config.baseUrl;
         return getApi().get(`fileResources/${value}`)

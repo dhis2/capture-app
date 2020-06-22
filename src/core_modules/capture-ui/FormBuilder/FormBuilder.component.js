@@ -3,12 +3,12 @@
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import uuid from 'uuid/v4';
-import { makeCancelablePromise } from 'capture-core-utils';
-import type { CancelablePromise } from 'capture-core-utils/cancelablePromise/makeCancelable';
 import * as React from 'react';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import isObject from 'd2-utilizr/lib/isObject';
 import defaultClasses from './formBuilder.module.css';
+import { makeCancelablePromise } from "capture-core-utils";
+import type { CancelablePromise } from 'capture-core-utils/cancelablePromise/makeCancelable';
 
 export type ValidatorContainer = {
     validator: (value: any, validationContext: ?Object) => boolean,

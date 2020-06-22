@@ -14,6 +14,7 @@ export const actionTypes = {
     VALID_SELECTIONS_FROM_URL: 'ValidSelectionsFromUrl',
 };
 
+// todo not used!
 export const updateMainSelections =
     (selections: Object) => actionCreator(actionTypes.UPDATE_MAIN_SELECTIONS)(selections);
 
@@ -31,6 +32,7 @@ export const updateMainSelectionsFromUrl =
 export const setCurrentOrgUnitBasedOnUrl =
     (orgUnit: Object) => actionCreator(actionTypes.SET_ORG_UNIT_BASED_ON_URL)(orgUnit);
 
+// todo not used!
 export const invalidOrgUnitFromUrl =
     (error: string) => actionCreator(actionTypes.INVALID_ORG_UNIT_FROM_URL)(error);
 

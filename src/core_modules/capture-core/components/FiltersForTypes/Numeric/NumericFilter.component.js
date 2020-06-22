@@ -60,23 +60,6 @@ type Props = {
 
 // $FlowSuppress
 class NumericFilter extends Component<Props> implements UpdatableFilterContent<Value> {
-    static errorMessages = {
-        MIN_GREATER_THAN_MAX: 'Minimum value cannot be greater than maximum value',
-        [elementTypes.NUMBER]: 'Please provide a valid number',
-        [elementTypes.INTEGER]: 'Please provide a valid integer',
-        [elementTypes.INTEGER_POSITIVE]: 'Please provide a positive integer',
-        [elementTypes.INTEGER_NEGATIVE]: 'Please provide a negative integer',
-        [elementTypes.INTEGER_ZERO_OR_POSITIVE]: 'Please provide zero or a positive integer',
-    };
-
-    static validatorForTypes = {
-        [elementTypes.NUMBER]: isValidNumber,
-        [elementTypes.INTEGER]: isValidInteger,
-        [elementTypes.INTEGER_POSITIVE]: isValidPositiveInteger,
-        [elementTypes.INTEGER_NEGATIVE]: isValidNegativeInteger,
-        [elementTypes.INTEGER_ZERO_OR_POSITIVE]: isValidZeroOrPositiveInteger,
-    };
-
     static validateField(value: ?string, type: $Values<typeof elementTypes>) {
         if (!value) {
             return {
@@ -103,6 +86,23 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
     }
 
     maxD2TextFieldInstance: D2TextField;
+
+    static errorMessages = {
+        MIN_GREATER_THAN_MAX: 'Minimum value cannot be greater than maximum value',
+        [elementTypes.NUMBER]: 'Please provide a valid number',
+        [elementTypes.INTEGER]: 'Please provide a valid integer',
+        [elementTypes.INTEGER_POSITIVE]: 'Please provide a positive integer',
+        [elementTypes.INTEGER_NEGATIVE]: 'Please provide a negative integer',
+        [elementTypes.INTEGER_ZERO_OR_POSITIVE]: 'Please provide zero or a positive integer',
+    };
+
+    static validatorForTypes = {
+        [elementTypes.NUMBER]: isValidNumber,
+        [elementTypes.INTEGER]: isValidInteger,
+        [elementTypes.INTEGER_POSITIVE]: isValidPositiveInteger,
+        [elementTypes.INTEGER_NEGATIVE]: isValidNegativeInteger,
+        [elementTypes.INTEGER_ZERO_OR_POSITIVE]: isValidZeroOrPositiveInteger,
+    };
 
     getUpdatedValue(valuePart: {[key: string]: string}) {
         const valueObject = {

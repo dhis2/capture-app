@@ -47,13 +47,13 @@ export const resetCategoriesAfterSettingOrgUnitIfApplicableEpic = (action$: Inpu
             }
 
             const categoriesWithValue = Object
-            .keys(selectedCategories)
-            .reduce((acc, categoryId) => {
-                if (selectedCategories[categoryId]) {
-                    acc[categoryId] = selectedCategories[categoryId];
-                }
-                return acc;
-            }, {});
+                .keys(selectedCategories)
+                .reduce((acc, categoryId) => {
+                    if (selectedCategories[categoryId]) {
+                        acc[categoryId] = selectedCategories[categoryId];
+                    }
+                    return acc;
+                }, {});
 
             const isAssociatedPromises = Object
                 .keys(categoriesWithValue)

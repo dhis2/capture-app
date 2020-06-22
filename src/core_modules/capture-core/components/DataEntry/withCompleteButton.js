@@ -48,11 +48,6 @@ type State = {
 
 const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?OptionFn) =>
     class CompleteButtonBuilder extends React.Component<Props, State> {
-        static errorMessages = {
-            INNER_INSTANCE_NOT_FOUND: 'Inner instance not found',
-            FORM_INSTANCE_NOT_FOUND: 'Form instance not found',
-        };
-
         innerInstance: any;
         handleCompletionAttempt: () => void;
         handleCloseDialog: () => void;
@@ -67,6 +62,11 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
                 warningDialogOpen: false,
             };
         }
+
+        static errorMessages = {
+            INNER_INSTANCE_NOT_FOUND: 'Inner instance not found',
+            FORM_INSTANCE_NOT_FOUND: 'Form instance not found',
+        };
 
         getWrappedInstance() {
             return this.innerInstance;

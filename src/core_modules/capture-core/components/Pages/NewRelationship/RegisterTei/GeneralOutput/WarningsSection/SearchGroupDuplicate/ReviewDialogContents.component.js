@@ -2,9 +2,9 @@
 import React from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { Button } from '../../../../../../Buttons';
-import { withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
+import { Button } from '../../../../../../Buttons';
 import CardList from '../../../../../../CardList/CardList.component';
 import { DataElement } from '../../../../../../../metaData';
 import ReviewDialogContentsPager from './ReviewDialogContentsPager.container';

@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-
 import D2TextField from '../../Generic/D2TextField.component';
 import D2DatePopup from './D2DatePopup.component';
 import D2DateCalendar from './D2DateCalendar.component';
@@ -32,12 +31,6 @@ const styles = () => ({
 });
 
 class D2Date extends React.Component<Props, State> {
-    static propContainers = {
-        CALENDAR: 'calendar',
-        POPUP: 'popup',
-        INPUT: 'input',
-    };
-
     static splitPassOnProps(passOnProps: ?Object) {
         const splittedProps = {
             input: {},
@@ -93,6 +86,12 @@ class D2Date extends React.Component<Props, State> {
         // $FlowSuppress
         document.removeEventListener('click', this.handleDocumentClick);
     }
+
+    static propContainers = {
+        CALENDAR: 'calendar',
+        POPUP: 'popup',
+        INPUT: 'input',
+    };
 
     handleTextFieldFocus() {
         // $FlowSuppress

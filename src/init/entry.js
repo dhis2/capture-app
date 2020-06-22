@@ -4,21 +4,16 @@ import React from 'react';
 import { render } from 'react-dom';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import 'typeface-roboto';
-import { createHashHistory as createHistory } from 'history';
-
-// import D2UIApp from '@dhis2/d2-ui-app';
-import LoadingMask from 'capture-core/components/LoadingMasks/LoadingMaskForPage.component';
-
-import JssProvider from 'react-jss/lib/JssProvider';
-import { create } from 'jss';
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
-
+import JssProvider from 'react-jss/lib/JssProvider';
+import 'typeface-roboto';
+import type { HashHistory } from 'history/createHashHistory';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { create } from 'jss';
+import { createHashHistory as createHistory } from 'history';
+import LoadingMask from 'capture-core/components/LoadingMasks/LoadingMaskForPage.component';
 import environments from 'capture-core/constants/environments';
 import { DisplayException } from 'capture-core/utils/exceptions/DisplayException';
-
-import type { HashHistory } from 'history/createHashHistory';
-
 import './addRxjsOperators';
 import App from '../components/App/App.component';
 import getStore from '../store/getStore';

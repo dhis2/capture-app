@@ -191,7 +191,7 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
                 );
         });
 
-export const deleteTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
+export const deleteTemplateEpic = (action$: InputObservable) =>
     action$.ofType(
         actionTypes.TEMPLATE_DELETE,
     )

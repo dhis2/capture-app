@@ -1,15 +1,12 @@
 // @flow
-/* eslint-disable import/prefer-default-export */
 import log from 'loglevel';
 import { init as initAsync, config, getUserSettings as getUserSettingsAsync } from 'd2/lib/d2';
-import environments from 'capture-core/constants/environments';
-// import moment from 'capture-core/utils/moment/momentResolver';
 import moment from 'moment';
+import i18n from '@dhis2/d2-i18n';
+import environments from 'capture-core/constants/environments';
 import CurrentLocaleData from 'capture-core/utils/localeData/CurrentLocaleData';
 import { setD2 } from 'capture-core/d2/d2Instance';
-import i18n from '@dhis2/d2-i18n';
 import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocaleData';
-
 import { loadMetaDataAsync, loadSystemSettingsAsync } from 'capture-core/metaDataStoreLoaders';
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
 import { initControllersAsync } from 'capture-core/storageControllers';
@@ -49,8 +46,8 @@ function setConfig() {
 
 function isLangRTL(code) {
     const langs = ['ar', 'fa', 'ur'];
-    const prefixed = langs.map(c => `${c}-`);
-    return langs.includes(code) || prefixed.filter(c => code.startsWith(c)).length > 0;
+    const prefixed = langs.map((c) => `${c}-`);
+    return langs.includes(code) || prefixed.filter((c) => code.startsWith(c)).length > 0;
 }
 
 function setMomentLocaleAsync(locale: string) {
@@ -159,7 +156,7 @@ async function initializeSystemSettingsAsync() {
     await buildSystemSettingsAsync(systemSettingsCacheData);
 }
 
-function setHeaderBarStrings(d2){
+function setHeaderBarStrings(d2) {
     d2.i18n.addStrings(['app_search_placeholder=search']);
 }
 

@@ -15,7 +15,7 @@ type Props = {
     selectedRelationshipType: ?SelectedRelationshipType,
 }
 
-const getStyles = theme => ({
+const getStyles = () => ({
     container: {
 
     },

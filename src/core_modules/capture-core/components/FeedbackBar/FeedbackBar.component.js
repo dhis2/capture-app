@@ -35,13 +35,6 @@ type Props = {
 };
 
 class FeedbackBar extends React.Component<Props> {
-    static CLICKAWAY_KEY = 'clickaway';
-
-    static ANCHOR_ORIGION = {
-        vertical: 'bottom',
-        horizontal: 'center',
-    };
-
     static defaultProps = {
         feedback: {},
     };
@@ -50,6 +43,12 @@ class FeedbackBar extends React.Component<Props> {
         super(props);
         this.handleClose = this.handleClose.bind(this);
     }
+    static CLICKAWAY_KEY = 'clickaway';
+
+    static ANCHOR_ORIGION = {
+        vertical: 'bottom',
+        horizontal: 'center',
+    };
 
     handleClose = (event?: ?Object, reason?: ?string) => {
         if (reason !== FeedbackBar.CLICKAWAY_KEY) {

@@ -26,9 +26,6 @@ type EventListenerSpec = {
  * @extends {React.Component<Props>}
  */
 class D2CustomForm extends React.Component<Props> {
-    static errorMessages = {
-        PRE_PROCESS_FAILED: 'Could not pre process custom form source tree',
-    };
     static getEventListenersForCurrentNode(nodeProps: Object): Array<string> {
         const eventListeners =
             Object
@@ -83,6 +80,10 @@ class D2CustomForm extends React.Component<Props> {
     componentWillUnmount() {
         this.removeEventListeners();
     }
+
+    static errorMessages = {
+        PRE_PROCESS_FAILED: 'Could not pre process custom form source tree',
+    };
 
     /**
      * Pre process the tree, extracting all event listeners. Event listeners will be added after the component is mounted.
