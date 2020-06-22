@@ -15,6 +15,7 @@
         "flowtype"
     ],
     "env": {
+        "browser": true,
         "jest": true
     },
     "globals": {
