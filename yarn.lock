@@ -4599,10 +4599,10 @@ docdash@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/docdash/-/docdash-0.4.0.tgz#05c3a50d83189981699ee0c076d3a3950db7ec00"
 
-docdash@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/docdash/-/docdash-1.1.1.tgz#89924e57938388fc3d1fa900927acfced7f3b24f"
-  integrity sha512-WQkkr01zL6kcIfq9YCSXtqqevM6NYoTXLdl+Td0OYCEcX0RgsuEMeqHXQaXFt+p6Lo15RIgA5XhLAn7RL+erhA==
+docdash@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/docdash/-/docdash-1.2.0.tgz#f99dde5b8a89aa4ed083a3150383e042d06c7f49"
+  integrity sha512-IYZbgYthPTspgqYeciRJNPhSwL51yer7HAwDXhF5p+H7mTDbPvY3PCk/QDjNxdPCpWkaJVFC4t7iCNB/t9E5Kw==
 
 doctrine@1.5.0:
   version "1.5.0"
