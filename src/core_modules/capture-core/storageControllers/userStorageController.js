@@ -31,6 +31,21 @@ function createStorageController(
     return storageController;
 }
 
+const storeSpecificCreateActions = {
+    [userStores.CATEGORY_OPTIONS]: (objectStore) => {
+        objectStore.createIndex('categoryId', 'categories', { multiEntry: true });
+    },
+    [userStores.PROGRAM_RULES]: (objectStore) => {
+        objectStore.createIndex('programId', 'programId');
+    },
+    [userStores.PROGRAM_RULES_VARIABLES]: (objectStore) => {
+        objectStore.createIndex('programId', 'programId');
+    },
+    [userStores.PROGRAM_INDICATORS]: (objectStore) => {
+        objectStore.createIndex('programId', 'programId');
+    },
+};
+
 async function initUserControllerAsync(mainStorageController: StorageController) {
     const userStorageController =
         createStorageController(mainStorageController);
@@ -52,9 +67,8 @@ async function initUserControllerAsync(mainStorageController: StorageController)
             },
             (objectStore, adapter) => {
                 if (adapter === IndexedDBAdapter) {
-                    if (objectStore.name === userStores.CATEGORY_OPTIONS) {
-                        objectStore.createIndex('category', 'categories', { multiEntry: true });
-                    }
+                    storeSpecificCreateActions[objectStore.name] &&
+                    storeSpecificCreateActions[objectStore.name](objectStore);
                 }
             },
         );

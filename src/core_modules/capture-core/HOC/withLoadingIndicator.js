@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 
-import LoadingMaskElementCenter from '../components/LoadingMasks/LoadingMaskElementCenter.component';
+import { LoadingMaskElementCenter } from '../components/LoadingMasks';
 
 type Props = {
     ready?: ?boolean,
