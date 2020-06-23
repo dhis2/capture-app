@@ -7,7 +7,7 @@ import { orientations } from 'capture-ui';
 import Button from '../../Buttons/Button.component';
 import LinkButton from '../../Buttons/LinkButton.component';
 import { getApi } from '../../../d2/d2Instance';
-import LoadingMask from '../../LoadingMasks/LoadingMask.component';
+import { LoadingMask } from '../../LoadingMasks';
 import inMemoryFileStore from '../../DataEntry/file/inMemoryFileStore';
 
 

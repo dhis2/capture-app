@@ -17,7 +17,7 @@ import {
 } from 'capture-ui';
 import SortLabelWrapper from '../../DataTable/SortLabelWrapper.component';
 import { dataElementTypes as elementTypes, OptionSet } from '../../../metaData';
-import LoadingMask from '../../LoadingMasks/LoadingMask.component';
+import { LoadingMask } from '../../LoadingMasks';
 
 
 const getStyles = (theme: Theme) => ({
