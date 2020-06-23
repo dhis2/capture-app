@@ -1,8 +1,8 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
-import isFunction from 'd2-utilizr/src/isFunction';
-import type { ProgramRule } from 'capture-core-utils/RulesEngine/rulesEngine.types';
+import isFunction from 'd2-utilizr/lib/isFunction';
+import type { ProgramRule } from '../../rules/engine';
 
 import { validationStrategies, validationStrategiesAsArray } from './renderFoundation.const';
 import Section from './Section';

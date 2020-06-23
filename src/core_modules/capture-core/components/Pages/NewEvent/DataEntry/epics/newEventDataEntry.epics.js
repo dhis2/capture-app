@@ -23,9 +23,6 @@ import {
     resetDataEntry,
 } from '../actions/dataEntryLoad.actionBatchs';
 import {
-    getRulesActionsForEvent,
-} from '../../../../../rulesEngineActionsCreator';
-import {
     actionTypes as newEventSelectionTypes,
 } from '../actions/dataEntryUrl.actions';
 import {
@@ -34,7 +31,8 @@ import {
 import {
     getCurrentClientValues,
     getCurrentClientMainData,
-} from '../../../../../rulesEngineActionsCreator/inputHelpers';
+    getRulesActionsForEvent,
+} from '../../../../../rules/actionsCreator';
 import getProgramAndStageFromProgramId from
     '../../../../../metaData/helpers/EventProgram/getProgramAndStageFromProgramId';
 import {
@@ -46,7 +44,7 @@ import {
 } from '../../../../List/list.actions';
 import type {
     FieldData,
-} from '../../../../../rulesEngineActionsCreator/inputHelpers';
+} from '../../../../../rules/actionsCreator';
 import {
     listId,
 } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
@@ -156,9 +154,30 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
         mainPageSelectorActionTypes.OPEN_NEW_EVENT,
         newEventSelectionTypes.VALID_SELECTIONS_FROM_URL,
         newEventSelectorTypes.SET_CATEGORY_OPTION,
-        newEventSelectorTypes.SET_ORG_UNIT,
-        newEventSelectorTypes.SET_PROGRAM_ID)
-        .filter(() => store.getState().currentSelections.complete)
+        newEventSelectorTypes.SET_PROGRAM_ID,
+        crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
+    )
+        .filter((action) => {
+            // cancel if triggered by SELECTIONS_COMPLETENESS_CALCULATED and the underlying action is not SET_ORG_UNIT
+            const type = action.type;
+            if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED) {
+                const triggeringActionType = action.payload && action.payload.triggeringActionType;
+                if (triggeringActionType !== newEventSelectorTypes.SET_ORG_UNIT) {
+                    return false;
+                }
+            }
+
+            // cancel if selections are incomplete
+            const state = store.getState();
+            if (!state.currentSelections.complete) {
+                return false;
+            }
+
+            // cancel if tracker program
+            const programId = state.currentSelections.programId;
+            const program = getProgramFromProgramIdThrowIfNotFound(programId);
+            return !(program instanceof TrackerProgram);
+        })
         .map(() => {
             const state = store.getState();
             const newEventsMeta = { sortById: 'created', sortByDirection: 'desc' };

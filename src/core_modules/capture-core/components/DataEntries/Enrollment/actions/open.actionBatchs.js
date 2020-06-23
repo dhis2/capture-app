@@ -1,8 +1,6 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
-import {
-    getRulesActionsForTEI,
-} from '../../../../rulesEngineActionsCreator';
+import { getRulesActionsForTEI } from '../../../../rules/actionsCreator';
 import { RenderFoundation, TrackerProgram } from '../../../../metaData';
 import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
 import { loadNewDataEntry } from '../../../DataEntry/actions/dataEntryLoadNew.actions';
@@ -49,7 +47,7 @@ export const openDataEntryForNewEnrollmentBatchAsync = async (
     const formId = getDataEntryKey(dataEntryId, itemId);
 
     const generatedItemContainers = await
-        getGeneratedUniqueValuesAsync(foundation, generatedUniqueValuesCache, { orgUnitCode: orgUnit.code });
+    getGeneratedUniqueValuesAsync(foundation, generatedUniqueValuesCache, { orgUnitCode: orgUnit.code });
     const dataEntryActions =
             loadNewDataEntry(
                 dataEntryId,

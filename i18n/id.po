@@ -1,14 +1,17 @@
+# 
 # Translators:
-# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2019
 # phil_dhis2, 2019
+# Aprisa Chrysantina <aprisa.chrysantina@gmail.com>, 2020
 # Viktor Varland <viktor@dhis2.org>, 2020
+# Guardian Sanjaya <gysanjaya@ugm.ac.id>, 2020
+# Carwoto Sa'an <carwoto@gmail.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-03-09T19:35:56.143Z\n"
+"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
-"Last-Translator: Viktor Varland <viktor@dhis2.org>, 2020\n"
+"Last-Translator: Carwoto Sa'an <carwoto@gmail.com>, 2020\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,6 +52,9 @@ msgstr ""
 msgid "Please provide a negative integer"
 msgstr ""
 
+msgid "A date in the future is not allowed"
+msgstr ""
+
 msgid "Please provide a valid date and time"
 msgstr ""
 
@@ -86,7 +92,7 @@ msgid "Checking..."
 msgstr ""
 
 msgid "Area"
-msgstr ""
+msgstr "Area"
 
 msgid "Coordinate"
 msgstr "Koordinat"
@@ -230,7 +236,7 @@ msgid "Max"
 msgstr "Maks"
 
 msgid "Min"
-msgstr ""
+msgstr "Min"
 
 msgid "Contains text"
 msgstr ""
@@ -311,7 +317,7 @@ msgid "Basic info"
 msgstr ""
 
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 msgid "Comments"
 msgstr ""
@@ -344,7 +350,7 @@ msgid "View event info"
 msgstr ""
 
 msgid "Delete event"
-msgstr ""
+msgstr "Hapus even"
 
 msgid "Update"
 msgstr "perbarui"
@@ -431,7 +437,7 @@ msgid "Registered events"
 msgstr ""
 
 msgid "Active"
-msgstr ""
+msgstr "Aktif"
 
 msgid "Completed"
 msgstr "Selesai"
@@ -673,7 +679,7 @@ msgid "Are you sure? All unsaved data will be lost."
 msgstr ""
 
 msgid "Accept"
-msgstr ""
+msgstr "Terima"
 
 msgid "Registering Organisation Unit"
 msgstr ""

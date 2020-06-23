@@ -18,6 +18,6 @@ export const makeTeiRegistrationMetadataSelector = () => createSelector(
             return null;
         }
 
-        return TEType && TEType.teiRegistration;
+        return TEType.teiRegistration;
     },
 );

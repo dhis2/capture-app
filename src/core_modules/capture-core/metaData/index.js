@@ -3,6 +3,7 @@ export { Access } from './Access';
 export { Category, CategoryCombination } from './CategoryCombinations';
 export {
     DataElement,
+    DateDataElement,
     elementTypes as dataElementTypes,
     Unique as DataElementUnique,
     uniqueScope as dataElementUniqueScope,
@@ -12,8 +13,6 @@ export {
     Option,
     OptionSet,
     inputTypes as optionSetInputTypes,
-    inputTypesAsArray as optionSetInputTypesAsArray,
-    viewTypes as optionSetViewTypes,
 } from './OptionSet';
 export { Program, ProgramStage, EventProgram, TrackerProgram, Enrollment } from './Program';
 export { RelationshipType } from './RelationshipType';
