@@ -17,7 +17,7 @@ export const quickStore = async ({
     convertQueryResponse,
 }: QuickStoreMandatory, {
         queryVariables,
-    }: QuickStoreOptions) => {
+    }: QuickStoreOptions = {}) => {
     const { storageController } = getContext();
     const rawResponse = await query(querySpecification, queryVariables);
     const convertedData = convertQueryResponse(rawResponse);

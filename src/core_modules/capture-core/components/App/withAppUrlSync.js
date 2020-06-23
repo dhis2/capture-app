@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { paramsSelector } from './appSync.selectors';
-import LoadingMaskForPage from '../LoadingMasks/LoadingMaskForPage.component';
+import { LoadingMaskForPage } from '../LoadingMasks';
 import {
     updateMainSelectionsFromUrl as updateMainSelectionsFromUrlForMainPage,
 } from '../Pages/MainPage/mainSelections.actions';
