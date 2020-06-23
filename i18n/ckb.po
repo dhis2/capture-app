@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -16,8 +16,21 @@ msgstr ""
 "Language: ckb\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Please provide a valid date"
-msgstr "تکایە بەروارێکی درووست بنووسە"
+msgid "Choose one or more dates..."
+msgstr "بەروارێک یان زیاتر هەڵبژێرە"
+
+msgid "Choose a date..."
+msgstr "بەروارێک هەڵبژێرە"
+
+msgid "Today"
+msgstr "ئەمڕۆ"
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
+msgstr ""
+"یەکێک لە هۆکارەکان بریتیە لە تایبەتمەندی بڕاوسەرەکەت پاڵپشتی ئەمە ناکات. "
+"تکایە سەیری لۆگ فایل بکە بۆ زانیار زیاتر"
 
 msgid "Columns to show in table"
 msgstr "ستونەکانی دەتەوێ دەربکەوێ لە خشتەکە"
@@ -48,6 +61,9 @@ msgstr "تکایە ژمارەیەکی پۆسەتیڤ یاخود سفر بنوو�
 
 msgid "Please provide a negative integer"
 msgstr "تکایە ژمارەیەکی نێگەتیڤ بنووسە"
+
+msgid "Please provide a valid date"
+msgstr "تکایە بەروارێکی درووست بنووسە"
 
 msgid "A date in the future is not allowed"
 msgstr ""
@@ -206,9 +222,6 @@ msgstr "لە"
 
 msgid "To"
 msgstr "لە"
-
-msgid "Today"
-msgstr "ئەمڕۆ"
 
 msgid "This week"
 msgstr "ئەم هەفتەیە"
@@ -812,19 +825,6 @@ msgstr ""
 "پرۆگرامی کاپچەر دەتواندرێت تەنها لەسەری یەک وەشان و یەک دۆمەین کار بکات. "
 "تکایە پەیجەکەت ریفرێش بکەوە بۆ ئەوەی ئەم وەشانە بکەیتەوە بەڵام ئاگاداربکە "
 "ئەم کردارە وەشانەکانیتر دادەخات"
-
-msgid "Choose one or more dates..."
-msgstr "بەروارێک یان زیاتر هەڵبژێرە"
-
-msgid "Choose a date..."
-msgstr "بەروارێک هەڵبژێرە"
-
-msgid ""
-"A possible reason for this is that the browser or mode (e.g. privacy mode) "
-"is not supported. See log for details."
-msgstr ""
-"یەکێک لە هۆکارەکان بریتیە لە تایبەتمەندی بڕاوسەرەکەت پاڵپشتی ئەمە ناکات. "
-"تکایە سەیری لۆگ فایل بکە بۆ زانیار زیاتر"
 
 msgid "Compatibility mode"
 msgstr "مۆدی گونجان"

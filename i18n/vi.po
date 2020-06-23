@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Mai Nguyen <thanhmai.jica@gmail.com>, 2020\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -17,8 +17,19 @@ msgstr ""
 "Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid "Please provide a valid date"
-msgstr "Xin vui lòng cung cấp ngày đúng"
+msgid "Choose one or more dates..."
+msgstr "Chọn một hoặc nhiều ngày..."
+
+msgid "Choose a date..."
+msgstr "Chọn một ngày..."
+
+msgid "Today"
+msgstr "Hôm Nay"
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
+msgstr ""
 
 msgid "Columns to show in table"
 msgstr "Cột hiển thị trong bảng"
@@ -49,6 +60,9 @@ msgstr ""
 
 msgid "Please provide a negative integer"
 msgstr ""
+
+msgid "Please provide a valid date"
+msgstr "Xin vui lòng cung cấp ngày đúng"
 
 msgid "A date in the future is not allowed"
 msgstr ""
@@ -206,9 +220,6 @@ msgstr "Từ"
 
 msgid "To"
 msgstr "Đến"
-
-msgid "Today"
-msgstr "Hôm Nay"
 
 msgid "This week"
 msgstr "Tuần này"
@@ -795,17 +806,6 @@ msgid ""
 " the Capture App only supports running one version concurrently (in the same"
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
-msgstr ""
-
-msgid "Choose one or more dates..."
-msgstr "Chọn một hoặc nhiều ngày..."
-
-msgid "Choose a date..."
-msgstr "Chọn một ngày..."
-
-msgid ""
-"A possible reason for this is that the browser or mode (e.g. privacy mode) "
-"is not supported. See log for details."
 msgstr ""
 
 msgid "Compatibility mode"
