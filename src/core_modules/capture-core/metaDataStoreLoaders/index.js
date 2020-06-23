@@ -1,3 +1,3 @@
 // @flow
-export { loadMetaData } from './baseLoader/loadMetaData';
+export { loadMetaData } from './baseLoader';
 export { loadSystemSettings } from './systemSettings/loadSystemSetttings';

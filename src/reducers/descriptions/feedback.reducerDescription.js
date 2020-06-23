@@ -2,7 +2,7 @@
 import i18n from '@dhis2/d2-i18n';
 import { getFeedbackDesc } from 'capture-core/reducers/descriptions/feedback.reducerDescriptionGetter';
 import { getMainStorageController } from 'capture-core/storageControllers';
-import { actionTypes } from '../../init/entry.actions';
+import { actionTypes } from '../../entry';
 
 export const feedbackDesc = getFeedbackDesc({
     [actionTypes.APP_LOAD_SUCESS]: (state) => {
