@@ -1,2 +1,2 @@
 // @flow
-export { loadMetaData } from './loadMetaDataMain';
+export { loadMetaData } from './loadMetaData';

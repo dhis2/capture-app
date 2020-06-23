@@ -1,74 +1,56 @@
 // @flow
-import StorageController from 'capture-core-utils/storage/StorageController';
-import programStoresKeys from '../programs/programsStoresKeys';
+import {
+    storeConstants,
+    storeOrgUnitLevels,
+    storeRelationshipTypes,
+    storeOrgUnitGroups,
+} from './quickStoreOperations';
+import { loadPrograms } from '../programs';
+import { loadTrackedEntityTypes } from '../trackedEntityTypes';
+import { loadTrackedEntityAttributes } from '../trackedEntityAttributes';
+import { loadCategories } from '../categories';
+import { loadOptionSets } from '../optionSets';
 
-import LoadSpecification from '../../apiToStore/LoadSpecificationDefinition/LoadSpecification';
-import getConstantsLoadSpecification from '../../apiToStore/loadSpecifications/getConstantsLoadSpecification';
-import getOrgUnitLevelsLoadSpecification from '../../apiToStore/loadSpecifications/getOrgUnitLevelsLoadSpecification';
-import getRelationshipsLoadSpecification from '../../apiToStore/loadSpecifications/getRelationshipsLoadSpecification';
+const loadCoreMetaData = () =>
+    Promise.all(
+        [
+            storeConstants,
+            storeOrgUnitLevels,
+            storeRelationshipTypes,
+            storeOrgUnitGroups,
+        ].map(operation => operation()),
+    );
 
-import loadPrograms from '../programs/loadPrograms';
-import loadTrackedEntityAttributes from '../trackedEntityAttributes/loadTrackedEntityAttributes';
-import loadCategories from '../categories/loadCategories';
-import loadOptionSets from '../optionSets/loadOptionSets';
-import loadTrackedEntityTypes from '../trackedEntityTypes/loadTrackedEntityTypes';
-import executeUsersCacheMaintenance from '../maintenance/usersCacheMaintenance';
-
-import { userStores as objectStores } from '../../storageControllers/stores';
-import { getUserStorageController } from '../../storageControllers';
-
-const coreLoadSpecifications: Array<LoadSpecification> = [
-    getConstantsLoadSpecification(objectStores.CONSTANTS),
-    getOrgUnitLevelsLoadSpecification(objectStores.ORGANISATION_UNIT_LEVELS),
-    getRelationshipsLoadSpecification(objectStores.RELATIONSHIP_TYPES),
-];
-
-async function loadCoreMetaData(storageController: StorageController) {
-    // uses asyncForEach instead of Promise.all to make sure indexedDB is not blocked if fallback to memory storage is needed
-    // $FlowFixMe
-    await coreLoadSpecifications.asyncForEach(loadSpecification => loadSpecification.load(storageController));
-}
-
-function removeDuplicatesFromStringArray(array: Array<string>) {
-    const set = new Set(array);
-    return Array.from(set);
-}
-
-export async function loadMetaDataInternal() {
-    const storageController = getUserStorageController();
-    await executeUsersCacheMaintenance();
-    await loadCoreMetaData(storageController);
-
+/**
+ * Retrieves metadata from the api and stores it in IndexedDB.
+ * This way we don't have to redownload all the metadata every time, but only the parts that have changed.
+ * Most metadata is redownloaded based on a program version change.
+ * The option sets have their own version and are redonloaded based on that.
+ */
+export const loadMetaDataInternal = async () => {
     const {
-        optionSetsMeta: optionSetsMetaFromPrograms,
+        optionSetsOutline: optionSetsOutlineFromPrograms,
         trackedEntityAttributeIds: trackedEntityAttributeIdsFromPrograms,
-        categoryIds,
-    } = await loadPrograms(storageController, {
-        [programStoresKeys.PROGRAMS]: objectStores.PROGRAMS,
-        [programStoresKeys.PROGRAM_RULES]: objectStores.PROGRAM_RULES,
-        [programStoresKeys.PROGRAM_RULES_VARIABLES]: objectStores.PROGRAM_RULES_VARIABLES,
-        [programStoresKeys.PROGRAM_INDICATORS]: objectStores.PROGRAM_INDICATORS,
-        [programStoresKeys.OPTION_SETS]: objectStores.OPTION_SETS,
-    });
+        categories,
+        trackedEntityTypeIds,
+        changesDetected,
+    } = await loadPrograms();
+
+    changesDetected && await loadCoreMetaData();
 
     const {
         trackedEntityAttributeIds: trackedEntityAttributeIdsFromTrackedEntityTypes,
-        optionSetsMeta: optionSetsMetaFromTrackedEntityTypes,
-    } = await loadTrackedEntityTypes(storageController, objectStores.TRACKED_ENTITY_TYPES);
+        optionSetsOutline: optionSetsOutlineFromTrackedEntityTypes,
+    } = await loadTrackedEntityTypes(trackedEntityTypeIds);
 
-    await loadTrackedEntityAttributes(
-        storageController,
-        objectStores.TRACKED_ENTITY_ATTRIBUTES,
-        removeDuplicatesFromStringArray([
-            ...trackedEntityAttributeIdsFromPrograms,
-            ...trackedEntityAttributeIdsFromTrackedEntityTypes,
-        ]),
-    );
+    await loadTrackedEntityAttributes([
+        ...trackedEntityAttributeIdsFromPrograms,
+        ...trackedEntityAttributeIdsFromTrackedEntityTypes,
+    ]);
 
-    await loadCategories(storageController, categoryIds, {
-        categories: objectStores.CATEGORIES,
-        categoryOptionsByCategory: objectStores.CATEGORY_OPTIONS_BY_CATEGORY,
-        categoryOptions: objectStores.CATEGORY_OPTIONS,
-    });
-    await loadOptionSets(storageController, objectStores.OPTION_SETS, [...optionSetsMetaFromPrograms, ...optionSetsMetaFromTrackedEntityTypes]);
-}
+    await loadCategories(categories);
+    await loadOptionSets([
+        ...optionSetsOutlineFromPrograms,
+        ...optionSetsOutlineFromTrackedEntityTypes,
+    ]);
+};
