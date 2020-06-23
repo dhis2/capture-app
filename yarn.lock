@@ -818,10 +818,23 @@
   version "9.0.1"
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-9.0.1.tgz#c27b391d8457d1e893f1eddeaf5e5412d12ffbb5"
 
-"@dhis2/app-runtime@^2.0.4":
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/@dhis2/app-runtime/-/app-runtime-2.0.4.tgz#9ae202fef3313094aef33a3e38d2c6c5d799c808"
-  integrity sha512-w5+C/fHSsuF0am5Tpvz53+tigEZzfz9ahkjXH3BiWxGVxwZGtdHjWfso1T5bJRiKhDTgf76TxIsQiC11W20WyA==
+"@dhis2/app-runtime@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-runtime/-/app-runtime-2.2.1.tgz#9c2192c247bbca44e721c2ece1a0d6f8bcdf00d6"
+  integrity sha512-rX4+Dz31zov0OZNKxcOBbVdXwac5nxX0a4e6G0MKE2OCuHZtvASNbahl86IAasCjuNOclUSgLmIJpEhqlnUxpw==
+  dependencies:
+    "@dhis2/app-service-config" "2.2.1"
+    "@dhis2/app-service-data" "2.2.1"
+
+"@dhis2/app-service-config@2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-service-config/-/app-service-config-2.2.1.tgz#5417b6ec266fa0e3d84a9405010cee43ed6a0027"
+  integrity sha512-o841GSzjg/VaucWN/9Axo42Dv6CS4Wra3BAw+qFsMtZ7agFKbSssbxyloDiB0/TDv9moR8xivfAHn8kfcVwuNQ==
+
+"@dhis2/app-service-data@2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@dhis2/app-service-data/-/app-service-data-2.2.1.tgz#b418a9624761cedded3ebddc3459db90bdaa3c16"
+  integrity sha512-XeAmjjt8sL1sbu8rsEEQDBQyc//cHww79kCGXpuFHR5tytzhT31cQ457/zNqU3DW61xKgv+bCWk845kuD26UbQ==
 
 "@dhis2/d2-i18n-extract@^1.0.8":
   version "1.0.8"

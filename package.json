@@ -1,11 +1,11 @@
 {
   "name": "capture-app",
   "homepage": ".",
-  "version": "34.1.0",
+  "version": "35.0.0",
   "cacheVersion": "1",
   "private": false,
   "dependencies": {
-    "@dhis2/app-runtime": "^2.0.4",
+    "@dhis2/app-runtime": "^2.2.1",
     "@dhis2/d2-i18n": "^1.0.6",
     "@dhis2/d2-icons": "^1.0.1",
     "@dhis2/d2-ui-app": "^2.0.0",
