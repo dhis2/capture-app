@@ -1,6 +1,7 @@
 // @flow
 import uuid from 'd2-utilizr/src/uuid';
-import moment from 'capture-core-utils/moment/momentResolver';
+import { moment } from 'capture-core-utils/moment';
+import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
 import {
     getTrackerProgramThrowIfNotFound,
     getTrackedEntityTypeThrowIfNotFound,
@@ -103,7 +104,7 @@ export default function getRelationshipNewTei(dataEntryId: string, itemId: strin
         program: programId,
         status: 'ACTIVE',
         orgUnit: orgUnit.id,
-        incidentDate: moment().format('YYYY-MM-DD'),
+        incidentDate: getFormattedStringFromMomentUsingEuropeanGlyphs(moment()),
         ...serverValuesForMainValues,
     } : null;
 

@@ -43,7 +43,7 @@ export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObserv
 
                 const openEnrollmentPromise = openDataEntryForNewEnrollmentBatchAsync(
                     trackerProgram,
-                    trackerProgram && trackerProgram.enrollment.enrollmentForm,
+                    trackerProgram.enrollment.enrollmentForm,
                     orgUnit,
                     DATA_ENTRY_ID,
                     [openDataEntry()],

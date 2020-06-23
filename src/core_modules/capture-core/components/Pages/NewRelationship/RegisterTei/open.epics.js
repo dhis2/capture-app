@@ -80,7 +80,7 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
             if (trackerProgram) { // enrollment form
                 const openEnrollmentPromise = openDataEntryForNewEnrollmentBatchAsync(
                     trackerProgram,
-                    trackerProgram && trackerProgram.enrollment.enrollmentForm,
+                    trackerProgram.enrollment.enrollmentForm,
                     orgUnit,
                     DATA_ENTRY_ID,
                     [initializeRegisterTei(trackerProgram.id, orgUnit)],

@@ -1,11 +1,13 @@
 // @flow
 import { createSelector } from 'reselect';
 import { moment } from 'capture-core-utils/moment';
+import { getFormattedStringFromMomentUsingEuropeanGlyphs } from 'capture-core-utils/date';
+
 import type {
     DateFilterData,
     RelativeDateFilterData,
     AbsoluteDateFilterData,
-} from '../../../eventList.types';
+} from '../../../../EventsList/eventList.types';
 
 const periods = {
     TODAY: 'TODAY',
@@ -19,15 +21,14 @@ const periods = {
 };
 
 const selectors = {};
-const formatDateForFilterRequest = (dateMoment: moment$Moment) => dateMoment.format('YYYY-MM-DD');
 const relativeConvertersForPeriods = {
     [periods.TODAY]: () => {
         const startDate = moment();
         const endDate = startDate;
 
         return [
-            `ge:${formatDateForFilterRequest(startDate)}`,
-            `le:${formatDateForFilterRequest(endDate)}`,
+            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
+            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
         ];
     },
     [periods.THIS_WEEK]: () => {
@@ -35,8 +36,8 @@ const relativeConvertersForPeriods = {
         const endDate = moment().endOf('week');
 
         return [
-            `ge:${formatDateForFilterRequest(startDate)}`,
-            `le:${formatDateForFilterRequest(endDate)}`,
+            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
+            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
         ];
     },
     [periods.THIS_MONTH]: () => {
@@ -44,8 +45,8 @@ const relativeConvertersForPeriods = {
         const endDate = moment().endOf('month');
 
         return [
-            `ge:${formatDateForFilterRequest(startDate)}`,
-            `le:${formatDateForFilterRequest(endDate)}`,
+            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
+            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
         ];
     },
     [periods.THIS_YEAR]: () => {
@@ -53,8 +54,8 @@ const relativeConvertersForPeriods = {
         const endDate = moment().endOf('year');
 
         return [
-            `ge:${formatDateForFilterRequest(startDate)}`,
-            `le:${formatDateForFilterRequest(endDate)}`,
+            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
+            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
         ];
     },
     [periods.LAST_WEEK]: () => {
@@ -62,8 +63,8 @@ const relativeConvertersForPeriods = {
         const endDate = moment().subtract(1, 'weeks').endOf('week');
 
         return [
-            `ge:${formatDateForFilterRequest(startDate)}`,
-            `le:${formatDateForFilterRequest(endDate)}`,
+            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
+            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
         ];
     },
     [periods.LAST_MONTH]: () => {
@@ -71,8 +72,8 @@ const relativeConvertersForPeriods = {
         const endDate = moment().subtract(1, 'months').endOf('month');
 
         return [
-            `ge:${formatDateForFilterRequest(startDate)}`,
-            `le:${formatDateForFilterRequest(endDate)}`,
+            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
+            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
         ];
     },
     [periods.LAST_3_MONTHS]: () => {
@@ -80,8 +81,8 @@ const relativeConvertersForPeriods = {
         const endDate = moment().subtract(1, 'months').endOf('month');
 
         return [
-            `ge:${formatDateForFilterRequest(startDate)}`,
-            `le:${formatDateForFilterRequest(endDate)}`,
+            `ge:${getFormattedStringFromMomentUsingEuropeanGlyphs(startDate)}`,
+            `le:${getFormattedStringFromMomentUsingEuropeanGlyphs(endDate)}`,
         ];
     },
 };
@@ -117,12 +118,12 @@ function convertRelativeDate(
 function convertAbsoluteDate(sourceValue: AbsoluteDateFilterData) {
     const requestData = [];
     if (sourceValue.ge) {
-        const fromFilterRequest = formatDateForFilterRequest(moment(sourceValue.ge));
+        const fromFilterRequest = getFormattedStringFromMomentUsingEuropeanGlyphs(moment(sourceValue.ge));
         requestData.push(`ge:${fromFilterRequest}`);
     }
 
     if (sourceValue.le) {
-        const toFilterRequest = formatDateForFilterRequest(moment(sourceValue.le));
+        const toFilterRequest = getFormattedStringFromMomentUsingEuropeanGlyphs(moment(sourceValue.le));
         requestData.push(`le:${toFilterRequest}`);
     }
     return requestData;

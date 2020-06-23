@@ -2,8 +2,8 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-restricted-syntax */
-import isFunction from 'd2-utilizr/src/isFunction';
-import isDefined from 'd2-utilizr/src/isDefined';
+import isFunction from 'd2-utilizr/lib/isFunction';
+import isDefined from 'd2-utilizr/lib/isDefined';
 
 import { errorCreator } from 'capture-core-utils';
 import DataElement from '../DataElement/DataElement';

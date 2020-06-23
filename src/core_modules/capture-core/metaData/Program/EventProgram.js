@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-restricted-syntax */
-import isFunction from 'd2-utilizr/src/isFunction';
+import isFunction from 'd2-utilizr/lib/isFunction';
 import Program from './Program';
 import ProgramStage from './ProgramStage';
 

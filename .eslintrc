@@ -14,6 +14,9 @@
     "plugins": [
         "flowtype"
     ],
+    "env": {
+        "jest": true
+    },
     "globals": {
         "document": true,
         "window": true,

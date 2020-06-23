@@ -37,7 +37,7 @@ export default class StorageController {
             throw new Error(StorageController.errorMessages.INVALID_NAME);
         }
 
-        if (!Adapters || !isArray(Adapters || Adapters.length === 0)) {
+        if (!Adapters || !isArray(Adapters) || Adapters.length === 0) {
             throw new Error(StorageController.errorMessages.NO_ADAPTERS_DEFINED);
         }
 

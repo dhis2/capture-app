@@ -7,7 +7,7 @@ import { viewEventIds } from '../eventDetails.actions';
 import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../../../DataEntries';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import { loadEditDataEntryAsync } from '../../../../DataEntry/templates/dataEntryLoadEdit.template';
-import { getRulesActionsForEvent } from '../../../../../rulesEngineActionsCreator';
+import { getRulesActionsForEvent } from '../../../../../rules/actionsCreator';
 import elementTypeKeys from '../../../../../metaData/DataElement/elementTypes';
 import { getApi } from '../../../../../d2/d2Instance';
 import { convertClientToForm } from '../../../../../converters';

@@ -1,0 +1,830 @@
+# 
+# Translators:
+# Viktor Varland <viktor@dhis2.org>, 2019
+# KRG HIS <antonia.bezenchek@informa.pro>, 2020
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
+"PO-Revision-Date: 2019-06-27 07:31+0000\n"
+"Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
+"Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ckb\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Please provide a valid date"
+msgstr "تکایە بەروارێکی درووست بنووسە"
+
+msgid "Columns to show in table"
+msgstr "ستونەکانی دەتەوێ دەربکەوێ لە خشتەکە"
+
+msgid "Column"
+msgstr "ستوون"
+
+msgid "This value is validating"
+msgstr "ئەم نرخە دەسەلمێندرێت"
+
+msgid "Async field update failed"
+msgstr "ئەبدەیتکردنی خانەکە سەرکەوتوو نەبوو. "
+
+msgid "A value is required"
+msgstr "نرخێک پێویستە"
+
+msgid "Please provide a valid number"
+msgstr "تکایە ژمارەیەکی درووست بنووسە"
+
+msgid "Please provide a valid integer"
+msgstr "تکایە ژمارەیەکی درووست بنووسە"
+
+msgid "Please provide a positive integer"
+msgstr "تکایە ژمارەیەکی پۆسەتیڤ بنووسە"
+
+msgid "Please provide zero or a positive integer"
+msgstr "تکایە ژمارەیەکی پۆسەتیڤ یاخود سفر بنووسە"
+
+msgid "Please provide a negative integer"
+msgstr "تکایە ژمارەیەکی نێگەتیڤ بنووسە"
+
+msgid "A date in the future is not allowed"
+msgstr ""
+
+msgid "Please provide a valid date and time"
+msgstr "تکایە بەروارو کاتێکی درووست بنووسە"
+
+msgid "Please provide a valid time"
+msgstr "تکایە کاتێکی درووست بنووسە"
+
+msgid "Please provide a valid percentage"
+msgstr "تکایە ڕێژەیەکی سەدی درووست بنووسە"
+
+msgid "Please provide a valid url"
+msgstr "تکایە یو URLێکی درووست بنووسە"
+
+msgid "Please provide a valid email address"
+msgstr "تکایە ئیمەیڵێکی درووست بنووسە"
+
+msgid "Please provide a valid age"
+msgstr "تکایە تەمەنێکی درووست بنووسە"
+
+msgid "Please provide a valid phone number"
+msgstr "تکایە ژمارە مۆبایلێکی درووست بنووسە"
+
+msgid "Please provide a valid organisation unit"
+msgstr "تکایە ئۆرگانیزەیشن یونتێکی درووست بنووسە"
+
+msgid "Please provide valid coordinates"
+msgstr "تکایە کۆردینەیتی درووستی سەر نەخشە بنووسە"
+
+msgid "This value already exists"
+msgstr "ئەم نرخە پێشوتر هەبووە"
+
+msgid "\"From\" cannot be greater than \"To\""
+msgstr "\"From\"ناکرێت گەورەتربێت لە \"To\""
+
+msgid "Checking..."
+msgstr "پشکنین..."
+
+msgid "Area"
+msgstr "ناوچە"
+
+msgid "Coordinate"
+msgstr "هیڵی ستوونی و ئاسۆیی زەوی"
+
+msgid "Enrollment"
+msgstr "تۆمارکردن"
+
+msgid "A future date is not allowed"
+msgstr "بەرواری داهاتوو ناکرێت تۆماربکرێت"
+
+msgid "An error has occured. See log for details"
+msgstr "هەڵەیک ڕوویدا، تکایە سەیری لۆگ فایل بکە بۆ وردەکاری زیاتر"
+
+msgid "Cancel"
+msgstr "لابردن"
+
+msgid "Unsaved changes"
+msgstr "گۆڕانکاریە تۆمارنەکراوەکان"
+
+msgid "Leaving this page will discard the changes you made to this event."
+msgstr "بەجێهێشنتی ئەم پەڕەیە هەموو چاڵآکیەکانت دەسرێتەوە کە کردووتە"
+
+msgid "Yes, discard"
+msgstr "بەڵێ، لایببە"
+
+msgid "No, stay here"
+msgstr "نەخێر، بمێنەوە"
+
+msgid "validation failed"
+msgstr "سەلماندنەکە سەرکەوتوونەبوو"
+
+msgid "Errors"
+msgstr "هەڵەکان"
+
+msgid "Feedback"
+msgstr "ڕاووبۆچون"
+
+msgid "Indicators"
+msgstr "نیشاندەر"
+
+msgid "Warnings"
+msgstr "ئاگادارکردنەوەکان"
+
+msgid "search group result could not be retrieved"
+msgstr "گەڕان بە دواای گروپەکە هیچ ئەنجامێکی نەبوو"
+
+msgid "Complete"
+msgstr "تەواوبکە"
+
+msgid "Warnings found"
+msgstr "ئاگادارکردنەوە دۆزرایەوە"
+
+msgid "Abort"
+msgstr "دەرچوون"
+
+msgid "Back to form"
+msgstr "گەڕانەوە بۆ فۆرمەکە"
+
+msgid "Save anyway"
+msgstr "بەهەرحاڵ تۆماری بکە"
+
+msgid "Validation errors and warnings"
+msgstr "گونچاندنی هەڵەو ئاگادارکردنەوە"
+
+msgid "Validation errors"
+msgstr "هەڵەی نەگونجان"
+
+msgid "Validation warnings"
+msgstr "ئاگادارکردنەوەی نەگونجان"
+
+msgid "Some operations are still runnning. Please wait.."
+msgstr ""
+"هەندێک کردار هێشتا بەردەوامە \n"
+"تکایە چاوەڕوان بە..."
+
+msgid "Operations running"
+msgstr "کردارەکان کاردەکەن"
+
+msgid "Sort"
+msgstr "پۆلینکردن"
+
+msgid "No events to display"
+msgstr "هیچ ئیڤێنتێک نیە بۆ پشاندان"
+
+msgid "Data for offline list not present"
+msgstr "زانیاریەکان بۆ لیستی ئۆفڵاین بەردەست نیە"
+
+msgid "Close"
+msgstr "داخستن"
+
+msgid "Please select the user"
+msgstr "تکایە بەکاربەرەکە هەڵبژێرە"
+
+msgid "Search for user"
+msgstr "بۆ بەکاربەرەکە بگەرێ"
+
+msgid "Me"
+msgstr "من"
+
+msgid "Anyone"
+msgstr "هەرکەسێک"
+
+msgid "None"
+msgstr "هیچیان"
+
+msgid "Select user"
+msgstr "بەکاربەرەکە هەڵبژێرە"
+
+msgid "to"
+msgstr "بۆ "
+
+msgid "From"
+msgstr "لە"
+
+msgid "To"
+msgstr "لە"
+
+msgid "Today"
+msgstr "ئەمڕۆ"
+
+msgid "This week"
+msgstr "ئەم هەفتەیە"
+
+msgid "This month"
+msgstr "ئەم مانگە"
+
+msgid "This Year"
+msgstr "ئەم ساڵە"
+
+msgid "Last week"
+msgstr "هەفتەی ڕابردوو"
+
+msgid "Last month"
+msgstr "مانگی ڕابردوو"
+
+msgid "Last 3 months"
+msgstr "٣ مانگ پێشووتر"
+
+msgid "Custom range"
+msgstr "مەودایەکی ئارەزوومەندانە"
+
+msgid "Max"
+msgstr "زیاترین"
+
+msgid "Min"
+msgstr "کەمترین"
+
+msgid "Contains text"
+msgstr "نووسینی تێدایە"
+
+msgid "Yes"
+msgstr "بەڵێ"
+
+msgid "mm/dd/yyyy"
+msgstr "مانگ/رۆژ/ساڵ"
+
+msgid "Years"
+msgstr "ساڵەکان"
+
+msgid "Months"
+msgstr "مانگەکان"
+
+msgid "Days"
+msgstr "رۆژەکان"
+
+msgid "Uploading file"
+msgstr "سەرخستنی فایل"
+
+msgid "selected"
+msgstr "هەڵبژێردرا"
+
+msgid "Delete"
+msgstr "سڕینەوە"
+
+msgid "Select file"
+msgstr "فایل هەڵبژێرە"
+
+msgid "No"
+msgstr "نەخێر"
+
+msgid "Uploading image"
+msgstr "سەرخستنی وێنە"
+
+msgid "Select image"
+msgstr "وێنە هەڵبژێرە"
+
+msgid "Search"
+msgstr "گەڕان"
+
+msgid "Clear"
+msgstr "پاککردنەوە"
+
+msgid "No results"
+msgstr "هیچ ئەنجامێک بەردەست نیە"
+
+msgid "suggestions could not be retrieved"
+msgstr "پێشنیارەکان نەتواندرا بهێندرێت"
+
+msgid "search for username"
+msgstr "بۆ ناوی بەکاربەر بگەڕێ"
+
+msgid "No items to display"
+msgstr "هیچ شتێک بەردەست نیە بۆ پیشاندان"
+
+msgid "Online"
+msgstr "ئۆنڵاین"
+
+msgid "Offline"
+msgstr "ئۆفڵاین"
+
+msgid "Syncing"
+msgstr "هاوتاکردن"
+
+msgid "Add comment"
+msgstr "کۆمێنت زیادبکە"
+
+msgid "You dont have access to write comments"
+msgstr "مافی ئەوەت نیە کە کۆمێنت بنووسیت"
+
+msgid "Write comment"
+msgstr "کۆمێنت بنووسە"
+
+msgid "Basic info"
+msgstr "زانیاریە سەرەتاییەکان"
+
+msgid "Status"
+msgstr "پێگە"
+
+msgid "Comments"
+msgstr "کۆمێنتەکان"
+
+msgid "Please add or cancel comment before saving the event"
+msgstr "تکایە کۆمێنت زیاد بکە یاخود لاییببە پێش تۆمارکردن"
+
+msgid "No write access"
+msgstr "مافی نوسینت نیە"
+
+msgid "Save"
+msgstr "تۆمارکردن"
+
+msgid "Show all events"
+msgstr "هەموو حاڵەتەکان پیشان بدە"
+
+msgid "Edit event"
+msgstr "حاڵەتەکە دەستکاری بکە"
+
+msgid "Event could not be loaded. Are you sure it exists?"
+msgstr "حاڵەتەکە نەتواندرا پیشان بدرێت، ئایا دڵنیای کە بوونی هەیە؟"
+
+msgid "Event could not be loaded"
+msgstr "حاڵەتەکە نەتواندرا بهێندرێت"
+
+msgid "Organisation unit could not be loaded"
+msgstr "ئۆرگانیزەیشن یونتەکە نەتواندرا بهێندرێت"
+
+msgid "View event info"
+msgstr "زانیاری حاڵەتەکە پیشان بدە"
+
+msgid "Delete event"
+msgstr "حاڵەتەکە بسڕەوە"
+
+msgid "Update"
+msgstr "نوێ کردنەوە"
+
+msgid "{{fromDate}} to {{toDate}}"
+msgstr "{{fromDate}} to {{toDate}}"
+
+msgid "after or equal to {{date}}"
+msgstr " {{date}}دواتر یاخود یەکسانە بە"
+
+msgid "before or equal to {{date}}"
+msgstr " {{date}}پێشووتر یاخود یەکسانە بە"
+
+msgid "greater than or equal to"
+msgstr "گەورەتر لە یاخود یەکسان بە"
+
+msgid "less than or equal to"
+msgstr "بچووکتر لە یاخود یەکسان بە"
+
+msgid "More filters"
+msgstr "فلتەری زیاتر"
+
+msgid "Select columns"
+msgstr "ستوونەکان هەڵبژێرە"
+
+msgid "Download as JSON"
+msgstr "دایبەزێنە وەکو JSON"
+
+msgid "Download as XML"
+msgstr "دایبەزێنە وەکو XML"
+
+msgid "Download as CSV"
+msgstr "دایبەزێنە وەکو CSV"
+
+msgid "Download with current filters"
+msgstr "دایبەزێنە لەگەڵ فیلتەرەکان"
+
+msgid "Download data..."
+msgstr "زانیاریەکان دابەزێنە"
+
+msgid "Rows per page"
+msgstr "زانیارەکان بۆ هەر ڵاپەڕەیەک"
+
+msgid "Update view"
+msgstr "پیشاندان نوێبکەوە"
+
+msgid "Save current view..."
+msgstr "پیشاندانەکەی ئێستا تۆمار بکە"
+
+msgid "Save current view as..."
+msgstr "پیشاندانەکەی ئێستا تۆمار بکە وەکو"
+
+msgid "Delete view"
+msgstr "پیشاندانەکە بسڕەوە"
+
+msgid "Share view..."
+msgstr "پیشاندانەکە شەیر بکە"
+
+msgid "Do you really want to delete the '{{templateName}}' view?"
+msgstr "دەتەوێ پیشاندانی '{{templateName}}'  بسڕیتەوە"
+
+msgid "Confirm"
+msgstr "دووپاتکردنەوە"
+
+msgid "Save As view"
+msgstr "پیشاندانەکە تۆماربکە"
+
+msgid "View name"
+msgstr "ناو پیشان بدە"
+
+msgid "Show Less"
+msgstr "کەمتر پیشان بدە"
+
+msgid "Show All"
+msgstr "هەموو پیشان بدە"
+
+msgid "Working list could not be loaded"
+msgstr "لیستی کارکردن نەتواندرا بهێندرێت"
+
+msgid "an error occurred loading working lists"
+msgstr "هەڵەیەک ڕوویدا لە هێنانی  لیستی کارکردن"
+
+msgid "Registered events"
+msgstr "حالەتە تۆمارکراوەکان"
+
+msgid "Active"
+msgstr "چاڵاک"
+
+msgid "Completed"
+msgstr "تەواوبوو"
+
+msgid "Could not get organisation unit"
+msgstr "نەتواندرا ئۆرگانیزەیشن یونیتەکە بهێندرێت"
+
+msgid "Program doesn't exist"
+msgstr "پرۆگرامەکە بوونی نیە"
+
+msgid "Selected program is invalid for registering unit"
+msgstr "ئەم پرۆگرامە درووستنیە بۆ تۆمارکردنی یونت"
+
+msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
+msgstr " {{TET}} نوێ دروستبکە لە {{program}} لە {{orgUnit}}"
+
+msgid "Save and add another"
+msgstr "تۆمار بکە و دانەیەکی دیکە زیاد بکە"
+
+msgid "Save and exit"
+msgstr "تۆمارکردن و دەرچوون"
+
+msgid "Finish"
+msgstr "تەواکردن"
+
+msgid "Switch to form view"
+msgstr "گۆڕین بۆ پیشاندانی فۆرم"
+
+msgid "Switch to row view"
+msgstr "گۆڕین بۆ پیشاندانی ئاسۆیی"
+
+msgid "New {{TET}}"
+msgstr "نوێ{{TET}}"
+
+msgid "Working Lists"
+msgstr "لیستی کارەکان"
+
+msgid ""
+"Program with programid {{programId}} isn't a tracker program. Enrollments "
+"can only be done in tracker programs."
+msgstr ""
+"پرۆگرم بە پرۆگرام ئایدی{{programId}} پرۆگرامی تراکەر نیە. تۆمارکردن تەنها "
+"دەتواندرێت ئەنجام بدرێت لە پرۆگرامی تراکەر"
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr "پرۆگرامی هەلبژێردراو درووست نیە بۆ یەکەی تۆمارکردنی هەڵبژێردراو"
+
+msgid "Assigned user"
+msgstr "بەکارهێنەری دەستنیشانکراو"
+
+msgid "Relationships"
+msgstr "پەیوەندیەکان"
+
+msgid "Assignee"
+msgstr "نوێنەر"
+
+msgid "Saving to"
+msgstr "تۆمارکردن بۆ"
+
+msgid "in"
+msgstr "لە"
+
+msgid ""
+"This is not an event program or the metadata is corrupt. See log for "
+"details."
+msgstr ""
+"ئەمە پرۆگرامی حالەت نیە یاخود زانیاریەکە تێکچووە. تکایە سەریری لۆگ فایل بکە "
+"بۆ زانیاری زیاتر"
+
+msgid "This event"
+msgstr "ئەم حاڵەتە"
+
+msgid ""
+"Relationship of type {{relationshipTypeName}} to {{entityName}} already "
+"exists"
+msgstr "پەیوەنی لە جۆری {{relationshipTypeName}} بۆ{{entityName}}پێشتر هەبووە"
+
+msgid "New event"
+msgstr "رووداوي نوي"
+
+msgid "New event relationship"
+msgstr "پەوەندی حالەتی نوێ"
+
+msgid "Adding relationship to event."
+msgstr "زیادکردنی پەوەندی بۆ حاڵەت"
+
+msgid "Go back to event without saving relationship"
+msgstr "بگەڕێەوە بۆ حاڵەتەکە بێئەوەی پەوەندیەکە تۆمار بکەیت"
+
+msgid ""
+"Leaving this page will discard the selections you made for a new "
+"relationship"
+msgstr ""
+"بەجێهێشتنی ئەم پەڕەیە هەڵبژاردنەکانت هەڵدەسپێری کە بۆ پەیوەندیە نوێیەکان "
+"کردووتە"
+
+msgid "events added"
+msgstr "حاڵەتەکان زیادکران"
+
+msgid "No events added"
+msgstr "هیچ حاڵەتێک زیادنەکرا"
+
+msgid "Select a registering unit and program above to get started"
+msgstr "یەکەی تۆمارکردن و پرۆگرامێك هەڵبژێرە لە سەرەوە بۆ دەستپێکردن"
+
+msgid "Select a program to start reporting"
+msgstr " پرۆگرامێك هەڵبژێرە بۆ دەستپێکردنی راپۆرت"
+
+msgid "Select a registering unit to start reporting"
+msgstr " یەکەی تۆمارکردن هەڵبژێرە بۆ دەستپێکردنی راپۆرت"
+
+msgid "Select a category option to start reporting"
+msgstr " دەستەیەک هەڵبژێرە بۆ دەستپێکردنی راپۆرت"
+
+msgid "You dont have access to create an event in the current selections"
+msgstr "مافی دروستکردنی حاڵەتت نیە لە هەڵژێردراوەکانی ئێستات"
+
+msgid "A duplicate exists (but there were some errors, see log for details"
+msgstr ""
+"دووبارەبوونەوە هەیە(بەڵآم هەندێک هەڵە هەیە، سەریری لۆگ فایل بکە بۆ زانیاری "
+"زیاتر)"
+
+msgid ""
+"An item with this {{attributeName}} is already registered, but you don't "
+"have access to it"
+msgstr ""
+"مادەیەک بە {{attributeName}} پێشووتر تۆمارکراوە، بەڵام تۆ مافی دەستکاری "
+"کردنت نیە"
+
+msgid "You have already registered this {{attributeName}}"
+msgstr "تۆ پێشووتر ئەمەت تۆمارکردووە {{attributeName}}"
+
+msgid ""
+"A {{trackedEntityTypeName}} with this {{attributeName}} is already "
+"registered"
+msgstr " {{trackedEntityTypeName}} لەگەڵ {{attributeName}} پێشووتر هەبوو"
+
+msgid "Show registered {{trackedEntityTypeName}}"
+msgstr "پیشان بدە {{trackedEntityTypeName}}"
+
+msgid "Registered person"
+msgstr "کەسی تۆمارکراو"
+
+msgid "Link"
+msgstr "لینک"
+
+msgid "Metadata error. see log for details"
+msgstr "هەڵەیەک لە مێتا داتا هەیە، سەیری لۆگ فایل بکە بۆ زانیاری زیاتر"
+
+msgid "Review duplicates"
+msgstr " بە دووبارەبووەکان دابچۆرەوە"
+
+msgid "Create {{trackedEntityTypeName}} and link"
+msgstr "{{trackedEntityTypeName}} و لینک دروست بکە"
+
+msgid "Possible duplicates found"
+msgstr "ڕەنگە دووبارەبوونەوە دۆزرابێتەوە"
+
+msgid "An error occured loading possible duplicates"
+msgstr "هەڵەیەک ڕوویدا لە کاتی هێنانی دووبارەبوەکان"
+
+msgid "Hide"
+msgstr "شاردنەوە"
+
+msgid "Save as new {{tetName}}"
+msgstr "وەکو {{tetName}} نوێ تۆمار بکە"
+
+msgid "Some programs are being filtered."
+msgstr "هەندێک لە پڕۆگرامەکان فیلتەرکراون"
+
+msgid "Show all"
+msgstr "پێشاندانی هەمووان"
+
+msgid "Program"
+msgstr "پرۆگرام"
+
+msgid "Organisation Unit"
+msgstr "یەکەی ڕێخکڕاو"
+
+msgid "Registration"
+msgstr "تۆمارکردن"
+
+msgid "Review Duplicates"
+msgstr "پێداچوونەوە بە دووبارەبووەکان"
+
+msgid "Search results"
+msgstr "بۆ ئەنجامەکان بگەڕێ"
+
+msgid "No {{trackedEntityTypeName}} found."
+msgstr "هیچ نەدۆزرایوە {{trackedEntityTypeName}} ."
+
+msgid "{{teiCount}} results found for"
+msgstr "{{teiCount}} دۆزرایەوە بۆ"
+
+msgid "New search"
+msgstr "گەڕانی نۆێ"
+
+msgid "Edit search"
+msgstr "گەڕان بگۆڕە"
+
+msgid "Link to an existing {{trackedEntityType}}"
+msgstr " {{trackedEntityType}}ئێکی هەبوو لینک بکە"
+
+msgid "Create new {{trackedEntityType}}"
+msgstr " {{trackedEntityType}}ی نوێ دروست بکە"
+
+msgid "Register"
+msgstr "تۆمار بکە"
+
+msgid "You dont have access to edit this event"
+msgstr "مافی ئەوەت نیە گۆڕانکاری لەم حاڵەتە بکەیت"
+
+msgid ""
+"Leaving this page will discard any selections you made for a new "
+"relationship"
+msgstr ""
+"بەجێهێشتنی ئەم پەڕەیە هەڵبژاردنەکانت هەڵدەسپێری کە بۆ پەیوەندیە نوێیەکان "
+"کردووتە"
+
+msgid "No one is assigned to this event"
+msgstr "هیچ کەسێک بۆ ئەم حاڵەتە رانەسپێردراوە"
+
+msgid "Assign"
+msgstr "رابسپێرە"
+
+msgid "Event assigned to {{name}}"
+msgstr "حاڵەتەکە ڕاپسێردراوە بە  {{name}}"
+
+msgid "Feedbacks"
+msgstr "بۆچوونەکان"
+
+msgid "New {{typeName}}"
+msgstr "{{typeName}} ی نوێ"
+
+msgid "New"
+msgstr "نوێ"
+
+msgid "Start again"
+msgstr "دووبارە دەستپێبکەوە"
+
+msgid "Find"
+msgstr "بدۆزەوە"
+
+msgid "Selected registering unit"
+msgstr "یەکەی تۆمارکردن هەڵبژێرە"
+
+msgid "Start Again"
+msgstr "دووبارە دەستبپێبکەوە"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "ئایا دڵنیایی؟ هەموو زانیاریە تۆمارەنەکراوەکان دەسڕێتەوە"
+
+msgid "Accept"
+msgstr "پەسندکردن"
+
+msgid "Registering Organisation Unit"
+msgstr "تۆمارکردنی یەکەی رێکخراو"
+
+msgid "Select"
+msgstr "هەڵبژاردن"
+
+msgid "Selected Program"
+msgstr "پرۆگرامە هەڵبژێردراوەکە"
+
+msgid "Select program"
+msgstr "پرۆگرام هەڵبژێرە"
+
+msgid "No programs available."
+msgstr "هیچ پرۆگرامێک بەردەست نیە"
+
+msgid "You dont have access to delete this relationship"
+msgstr "مافی سڕینەوە ئەم پەیوەندیەت نیە"
+
+msgid "You dont have access to create any relationships"
+msgstr "مافی دروستکردنی ئەم پەیوەندیەت نیە"
+
+msgid "Add relationship"
+msgstr "پەوەندی درووستبکە"
+
+msgid "Selected program"
+msgstr "پرۆگرامە هەڵبژێردراوەکە"
+
+msgid "Search {{uniqueAttrName}}"
+msgstr "بەدوای بگەڕێ {{uniqueAttrName}}"
+
+msgid "Search by attributes"
+msgstr "بە پێ ئاتریبیوت بگەڕێ"
+
+msgid "Fill in at least {{minAttributesRequired}} attributes to search"
+msgstr "بەلانی کەم ئەتریبیوتی{{minAttributesRequired}} پڕبەکەرەوەبۆ گەڕان"
+
+msgid "To work with the selected program,"
+msgstr "بۆ کارکردن لەگەڵ پرۆگرامە هەڵبژێردراوەکان"
+
+msgid "open the Tracker Capture app"
+msgstr "پرۆگرامی بەدواداچوونی کاپچەر/ کاپچەر تراکەر بکەرەوە"
+
+msgid "Program not found"
+msgstr "پرۆگرام نەدۆزرایەوە"
+
+msgid "Program is not a tracker program"
+msgstr "پرۆگرامەکە بریتی نیە لە پرۆگرامی بەدواداچون/تراکەر"
+
+msgid "Profile"
+msgstr "پرۆفایل"
+
+msgid "Error saving event"
+msgstr "هەڵەیەک ڕوویدا لە تۆمارکردنی حاڵەتەکە"
+
+msgid "Could not save event. See log for details"
+msgstr "نەتواندرا حاڵەتەکە تۆماربکرێت. سەیری فایل لۆگ بکە بۆ زانیاری زیاتر"
+
+msgid "Could not delete event"
+msgstr "نەتواندرا حاڵەتەکە بسڕدرێتەوە"
+
+msgid "Could not save working list"
+msgstr "نەتواندرا لیسی کارەکان تۆماربکرێت"
+
+msgid "Could not add working list"
+msgstr "نەتواندرا لیسی کارەکان زیادبکرێت"
+
+msgid "Could not delete working list"
+msgstr "نەتواندرا لیسی کارەکان بسڕدرێتەوە"
+
+msgid "Organisation unit search failed. See log for details"
+msgstr ""
+" هەڵە ڕوویدا لە گەڕان بە دوای یەکەی ڕێکخراو، سەیری لۆگەکان بکە بۆ زانیاری "
+"زیاتر"
+
+msgid "tracked entity instance"
+msgstr "نمونەی یەکەی بەدواداچوون"
+
+msgid "Set coordinate"
+msgstr "هێڵی درێژی و پانی دیاریبکە"
+
+msgid "Date"
+msgstr "بەروار"
+
+msgid "Time"
+msgstr "کات"
+
+msgid "From date"
+msgstr "لە بەرواری"
+
+msgid "From time"
+msgstr "لە کاتی"
+
+msgid "To date"
+msgstr "بۆ بەرواری"
+
+msgid "To time"
+msgstr " کاتی"
+
+msgid "error encountered during field validation"
+msgstr "هەڵەیەک ڕوویدا لە کاتی سەلماندی خانەکە"
+
+msgid "error"
+msgstr "هەڵە"
+
+msgid "Delete polygon"
+msgstr "فرەلاکە بسڕەوە"
+
+msgid "Set area"
+msgstr "ناوچە دیاریبکە"
+
+msgid ""
+"You opened another version of the Capture App in the same domain. Currently,"
+" the Capture App only supports running one version concurrently (in the same"
+" domain). Please refresh this page if you would like to use this version "
+"again, but be aware that this will close other versions."
+msgstr ""
+"وەشانێکی جیاوازت لە پرۆگرامی کاپچەر کردۆتەوە لە هەمان دۆمەین. لە ئێستادا "
+"پرۆگرامی کاپچەر دەتواندرێت تەنها لەسەری یەک وەشان و یەک دۆمەین کار بکات. "
+"تکایە پەیجەکەت ریفرێش بکەوە بۆ ئەوەی ئەم وەشانە بکەیتەوە بەڵام ئاگاداربکە "
+"ئەم کردارە وەشانەکانیتر دادەخات"
+
+msgid "Choose one or more dates..."
+msgstr "بەروارێک یان زیاتر هەڵبژێرە"
+
+msgid "Choose a date..."
+msgstr "بەروارێک هەڵبژێرە"
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
+msgstr ""
+"یەکێک لە هۆکارەکان بریتیە لە تایبەتمەندی بڕاوسەرەکەت پاڵپشتی ئەمە ناکات. "
+"تکایە سەیری لۆگ فایل بکە بۆ زانیار زیاتر"
+
+msgid "Compatibility mode"
+msgstr "مۆدی گونجان"

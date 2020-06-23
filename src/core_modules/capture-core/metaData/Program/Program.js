@@ -1,13 +1,11 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-restricted-syntax */
-import { errorCreator } from 'capture-core-utils';
-import isFunction from 'd2-utilizr/src/isFunction';
-import type { ProgramRule, ProgramRuleVariable } from 'capture-core-utils/RulesEngine/rulesEngine.types';
+import isFunction from 'd2-utilizr/lib/isFunction';
+import type { ProgramRule, ProgramRuleVariable } from '../../rules/engine';
 import CategoryCombination from '../CategoryCombinations/CategoryCombination';
 import Icon from '../Icon/Icon';
 import type { Access } from '../Access/Access';
-// import ProgramStage from './ProgramStage';
 
 export default class Program {
     static errorMessages = {
@@ -21,7 +19,6 @@ export default class Program {
     _shortName: string;
     _stages: Map<string, ProgramStage>;
     _organisationUnits: Object;
-    _version: string | number;
     _categoryCombination: ?CategoryCombination;
     _programRules: Array<ProgramRule>;
     _programRuleVariables: Array<ProgramRuleVariable>;
@@ -115,35 +112,6 @@ export default class Program {
 
     getStage(id: string): ?ProgramStage {
         return this.stages.get(id);
-    }
-
-    getStageThrowIfNotFound(id: string): ProgramStage {
-        const stage = this.stages.get(id);
-        if (!stage) {
-            throw new Error(
-                errorCreator(Program.errorMessages.STAGE_NOT_FOUND)({ program: this, stageId: id }),
-            );
-        }
-        return stage;
-    }
-
-    getStageFromIndex(index: number): ProgramStage {
-        const stages = [...this.stages.entries()];
-        if (stages.length <= index) {
-            throw new Error(
-                errorCreator(Program.errorMessages.STAGE_INDEX_NOT_FOUND)({ program: this, stageIndex: index }),
-            );
-        }
-        return stages[index][1];
-    }
-
-
-    addProgramRuleVariable(programRuleVariable: ProgramRuleVariable) {
-        this.programRuleVariables.push(programRuleVariable);
-    }
-
-    addProgramRule(programRule: ProgramRule) {
-        this.programRules.push(programRule);
     }
 
     addProgramRuleVariables(programRuleVariables: Array<ProgramRuleVariable>) {

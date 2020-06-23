@@ -56,8 +56,10 @@ export default class D2Coordinate extends React.Component<Props, State> {
         };
     }
 
+    toSixDecimal = (value: string) => (parseFloat(value) ? parseFloat(value).toFixed(6) : null)
+
     handleBlur = (key: string, value: any) => {
-        const newValue = { ...this.props.value, [key]: value };
+        const newValue = { ...this.props.value, [key]: this.toSixDecimal(value) };
         if (!newValue.latitude && !newValue.longitude) {
             this.props.onBlur(null);
             return;
@@ -91,8 +93,8 @@ export default class D2Coordinate extends React.Component<Props, State> {
     }
 
     onMapPositionChange = (mapCoordinates: any) => {
-        const latlng = mapCoordinates.latlng;
-        this.setMapPosition([latlng.lat, latlng.lng], mapCoordinates.target.getZoom());
+        const { lat, lng } = mapCoordinates.latlng;
+        this.setMapPosition([this.toSixDecimal(lat), this.toSixDecimal(lng)], mapCoordinates.target.getZoom());
     }
 
     setMapPosition = (position: Array<any>, zoom: number) => {
@@ -259,10 +261,10 @@ export default class D2Coordinate extends React.Component<Props, State> {
                         {this.renderClearButton()}
                     </div>
                     <div className={defaultClasses.inputContainer}>
-                        {this.renderLatitude()}
+                        {this.renderLongitude()}
                     </div>
                     <div className={defaultClasses.inputContainer}>
-                        {this.renderLongitude()}
+                        {this.renderLatitude()}
                     </div>
                 </div>
             </div>
@@ -276,10 +278,10 @@ export default class D2Coordinate extends React.Component<Props, State> {
                     {this.renderMapDialog()}
                     {this.renderMapIcon()}
                     <div className={defaultClasses.inputContainer}>
-                        {this.renderLatitude()}
+                        {this.renderLongitude()}
                     </div>
                     <div className={defaultClasses.inputContainer}>
-                        {this.renderLongitude()}
+                        {this.renderLatitude()}
                     </div>
                     {this.renderClearButton()}
                 </div>

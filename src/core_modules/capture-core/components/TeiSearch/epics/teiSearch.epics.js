@@ -1,5 +1,5 @@
 // @flow
-import isArray from 'd2-utilizr/src/isArray';
+import isArray from 'd2-utilizr/lib/isArray';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { batchActions } from 'redux-batched-actions';
 import { convertValue as convertToClient } from '../../../converters/formToClient';

@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
-import isFunction from 'd2-utilizr/src/isFunction';
+import isFunction from 'd2-utilizr/lib/isFunction';
 
 export type Value = string | number | boolean | {};
 
