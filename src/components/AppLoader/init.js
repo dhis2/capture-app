@@ -13,7 +13,7 @@ import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocale
 import { loadMetaData, loadSystemSettings } from 'capture-core/metaDataStoreLoaders';
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
 import { initControllersAsync } from 'capture-core/storageControllers';
-import { DisplayException } from 'capture-core/utils/exceptions/DisplayException';
+import { DisplayException } from 'capture-core/utils/exceptions';
 
 function setLogLevel() {
     const levels = {

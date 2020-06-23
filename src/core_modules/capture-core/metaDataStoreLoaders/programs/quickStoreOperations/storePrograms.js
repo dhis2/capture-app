@@ -1,6 +1,7 @@
 // @flow
 import { quickStore } from '../../IOUtils';
 import { getContext } from '../../context';
+import type { apiProgramsResponse } from './types';
 
 const convert = (() => {
     const sort = (arr: Array<any>, sortBy: string = 'sortOrder') => {
@@ -65,7 +66,7 @@ const convert = (() => {
         (programAttributes || [])
             .map(pa => getProgramTrackedEntityAttribute(pa));
 
-    return (response) => {
+    return (response: apiProgramsResponse) => {
         const apiPrograms = (response && response.programs) || [];
 
         return apiPrograms
@@ -86,7 +87,6 @@ const fieldsParam = 'id,version,displayName,displayShortName,description,program
 'featureType,selectEnrollmentDatesInFuture,selectIncidentDatesInFuture,displayIncidentDate,' +
 'dataEntryForm[id,htmlCode],' +
 'access[*],' +
-'relationshipType[id,displayName],' +
 'trackedEntityType[id],' +
 'categoryCombo[id,displayName,isDefault,categories[id,displayName]],' +
 'organisationUnits[id,displayName],' +

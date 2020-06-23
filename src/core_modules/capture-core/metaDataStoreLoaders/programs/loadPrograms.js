@@ -1,110 +1,167 @@
 // @flow
-import { chunk } from 'capture-core-utils';
+import { chunk, pipe } from 'capture-core-utils';
+import { getContext } from '../context';
 import { queryProgramsOutline } from './queries';
 import {
     storePrograms,
-    storeProgramRules,
-    storeProgramRulesVariables,
-    storeProgramIndicators,
 } from './quickStoreOperations';
-import { getContext } from '../context';
+import { loadRulesCentricMetadata } from './loadRulesCentricMetadata';
 
-async function getMissingPrograms(programsOutline) {
-    const cachedPrograms = {};
+const getCachedProgramsOutline = () => {
     const { storageController, storeNames } = getContext();
-    await Promise.all(
-        programsOutline.map(
-            program => storageController
-                .get(storeNames.PROGRAMS, program.id)
-                .then((cachedProgram) => { cachedPrograms[program.id] = cachedProgram; }),
-        ),
-    );
+    return storageController
+        .getAll(storeNames.PROGRAMS, {
+            project: program => ({
+                id: program.id,
+                version: program.version,
+            }),
+        });
+};
 
-    const missingPrograms = programsOutline.filter((program) => {
-        const cachedProgram = cachedPrograms[program.id];
-        return !cachedProgram || cachedProgram.version !== program.version;
-    });
-    return missingPrograms.length > 0 ? missingPrograms : null;
-}
+/**
+ * Remove programs from the cache that wasn't retrieved from the api.
+ * The reason for doing this is that every program that is available to the user is retrieved from the api and
+ * therefore programs in the cache that wasn't retrieved are programs the user don't have access to any more.
+ */
+const removeUnavailablePrograms = async (apiPrograms, cachedPrograms) => {
+    const apiProgramsAsObject = apiPrograms
+        .reduce((acc, apiProgram) => {
+            acc[apiProgram.id] = apiProgram;
+            return acc;
+        }, {});
 
-// Get option set meta information from api even if the program itself isn't missing.
-// Later in the load option set method, the option set version will be used to check if the cache needs updating.
-function getOptionSetsOutline(programsOutline) {
-    const getProgramStageOptionSets = (programStage) => {
-        const programStageDataElements = programStage.programStageDataElements || [];
-        return programStageDataElements.reduce((accProgramStageOptionSets, programStageDataElement) => {
-            const optionSet = programStageDataElement.dataElement && programStageDataElement.dataElement.optionSet;
-            if (optionSet) {
-                accProgramStageOptionSets.push(optionSet);
-            }
-            return accProgramStageOptionSets;
-        }, []);
-    };
+    const unavailableProgramIds = cachedPrograms
+        .filter(cachedProgram => !apiProgramsAsObject[cachedProgram.id])
+        .map(unavailableProgram => unavailableProgram.id);
 
-    const getProgramOptionSets = (program) => {
-        const programStages = program.programStages || [];
-        return programStages.reduce((accProgramStagesOptionSets, programStage) => [
-            ...accProgramStagesOptionSets, ...getProgramStageOptionSets(programStage),
-        ], []);
-    };
+    if (unavailableProgramIds.length > 0) {
+        const { storageController, storeNames } = getContext();
+        await storageController.remove(storeNames.PROGRAMS, unavailableProgramIds);
+    }
+};
 
-    return programsOutline.reduce((accOptionSets, program) => [
-        ...accOptionSets, ...getProgramOptionSets(program),
-    ], []);
-}
+/**
+ * Retrieve the program ids for the programs that have an updated program version
+ * If the program has an updated version we would like to update the program in the cache
+ */
+const getStaleProgramIds = (apiPrograms, cachedPrograms) => {
+    const cachedProgramsAsObject = cachedPrograms
+        .reduce((acc, cachedProgram) => {
+            acc[cachedProgram.id] = cachedProgram;
+            return acc;
+        }, {});
 
-function getTrackedEntityAttributeIds(missingPrograms) {
-    return missingPrograms
-        ? missingPrograms.reduce((accAttributeIds, program) => {
-            if (program.programTrackedEntityAttributes) {
-                const attributeIds =
-                    program.programTrackedEntityAttributes
+    return apiPrograms
+        .filter((program) => {
+            const cachedProgram = cachedProgramsAsObject[program.id];
+            return !cachedProgram || cachedProgram.version !== program.version;
+        })
+        .map(program => program.id);
+};
+
+/**
+ * Update the cache for the program ids passed in.
+ * The program ids that are passed in are ids of programs that needs updating (meaning the version retrieved from the api is different from the one in the cache)
+ * The returned data is needed for building the side effects of trackedEntityAttributeIds, categories and trackedEntityTypeIds.
+ * The side effects data is used later when determining what other metadata to load.
+ */
+const loadProgramBatch = async (programIds) => {
+    const { convertedData: programs = [] } = await storePrograms(programIds);
+    await loadRulesCentricMetadata(programIds);
+    return programs
+        .map(({ programTrackedEntityAttributes, categoryCombo, trackedEntityTypeId }) => ({
+            programTrackedEntityAttributes,
+            categoryCombo,
+            trackedEntityTypeId,
+        }));
+};
+
+/**
+ * Self executing function to scope the side effect helper functions
+ * We're scoping these because they don't directly relate to the actual program loading
+ */
+const getSideEffects = (() => {
+    const getOptionSetsOutline = (() => {
+        const getDataElementOptionSets = programStages =>
+            (programStages || [])
+                .flatMap(programStage => (programStage.programStageDataElements || [])
+                    .map(psda => psda.dataElement && psda.dataElement.optionSet)
+                    .filter(optionSet => optionSet),
+                );
+
+        const getTrackedEntityAttributeOptionSets = programTrackedEntityAttributes =>
+            (programTrackedEntityAttributes || [])
+                .map(ptea => ptea.trackedEntityAttribute && ptea.trackedEntityAttribute.optionSet)
+                .filter(optionSet => optionSet);
+
+        const getProgramOptionSets = program => [
+            ...getDataElementOptionSets(program.programStages),
+            ...getTrackedEntityAttributeOptionSets(program.programTrackedEntityAttributes),
+        ];
+
+        return (programsOutline): Array<Object> =>
+            programsOutline
+                .flatMap(program => getProgramOptionSets(program));
+    })();
+
+    const getTrackedEntityAttributeIds = stalePrograms =>
+        pipe(
+            () => stalePrograms
+                .flatMap(program =>
+                    (program.programTrackedEntityAttributes || [])
                         .map(programAttribute => programAttribute.trackedEntityAttributeId)
-                        .filter(TEAId => TEAId);
+                        .filter(TEAId => TEAId),
+                ),
+            attributeIds => [...new Set(attributeIds).values()],
+        )();
 
-                return [...accAttributeIds, ...attributeIds];
-            }
-            return accAttributeIds;
-        }, [])
-        : [];
-}
+    const getCategories = stalePrograms =>
+        pipe(
+            () => stalePrograms
+                .flatMap(program =>
+                    ((program.categoryCombo &&
+                    program.categoryCombo.categories) || []),
+                ),
+            categories => [
+                ...new Map(
+                    categories.map(ic => [ic.id, ic]),
+                ).values(),
+            ],
+        )();
 
-function getCategories(missingPrograms) {
-    return missingPrograms
-        ? missingPrograms.reduce((accCategories, program) => {
-            const programCategories = program.categoryCombo &&
-                program.categoryCombo.categories;
-            return programCategories ? [...accCategories, ...programCategories] : [];
-        }, []) : [];
-}
+    const getTrackedEntityTypes = stalePrograms =>
+        pipe(
+            () => stalePrograms
+                .reduce((acc, program) => {
+                    program.trackedEntityTypeId && acc.add(program.trackedEntityTypeId);
+                    return acc;
+                }, new Set()),
+            trackedEntityTypeIdSet => [...trackedEntityTypeIdSet.values()],
+        )();
+    /**
+     * Builds the side effects based on the programsOutline (contains some data for all programs) and the stale programs (the programs where the version has changed).
+     * The side effects are used later to determine what other metadata to load.
+     */
+    return (programsOutline, stalePrograms) => ({
+        optionSetsOutline: getOptionSetsOutline(programsOutline),
+        trackedEntityAttributeIds: getTrackedEntityAttributeIds(stalePrograms),
+        categories: getCategories(stalePrograms),
+        trackedEntityTypeIds: getTrackedEntityTypes(stalePrograms),
+        changesDetected: stalePrograms.length > 0,
+    });
+})();
 
-async function loadProgramBatch(programBatch) {
-    const programIds = programBatch.map(program => program.id);
-    const { convertedData: programs } = await storePrograms(programIds);
-    await storeProgramRules(programIds);
-    await storeProgramRulesVariables(programIds);
-    await storeProgramIndicators(programIds);
-    return programs;
-}
+export const loadPrograms = async () => {
+    const apiProgramsOutline = await queryProgramsOutline();
+    const cachedProgramsOutline = await getCachedProgramsOutline();
+    await removeUnavailablePrograms(apiProgramsOutline, cachedProgramsOutline);
+    const staleProgramIds = getStaleProgramIds(apiProgramsOutline, cachedProgramsOutline);
 
-export async function loadPrograms() {
-    const programsOutline = await queryProgramsOutline();
-    const optionSetsOutline = getOptionSetsOutline(programsOutline);
-    const missingPrograms = await getMissingPrograms(programsOutline);
-
-    const programBatches = chunk(missingPrograms, 50);
-    const programGroups = await Promise.all(
+    const programBatches = chunk(staleProgramIds, 50);
+    const programsDataForSideEffects: Array<Object> = (await Promise.all(
         programBatches
             .map(loadProgramBatch),
-    );
+    )).flat(1);
 
-    const missingProgramsWithData = programGroups
-        .filter(programs => programs)
-        // $FlowFixMe
-        .reduce((accPrograms, programs) => ([...accPrograms, ...programs]), []);
-    return {
-        optionSetsOutline,
-        trackedEntityAttributeIds: getTrackedEntityAttributeIds(missingProgramsWithData),
-        categoryIds: getCategories(missingProgramsWithData),
-    };
-}
+    return getSideEffects(apiProgramsOutline, programsDataForSideEffects);
+};

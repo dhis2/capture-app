@@ -3,7 +3,8 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils/errorCreator';
 import StorageController from 'capture-core-utils/storage/StorageController';
 import LocalStorageAdapter from 'capture-core-utils/storage/DomLocalStorageAdapter';
-import { getContext } from '../context';
+import { getMainStorageController, getUserStorageController } from '../../storageControllers';
+import { mainStores } from '../../storageControllers/stores';
 
 const ACCESS_HISTORY_KEY = 'accessHistory';
 const cacheKeepCount = {
@@ -16,10 +17,8 @@ const errorMessages = {
 
 async function addUserCacheToHistory(
     mainStorageController: StorageController,
-    userStorageController: StorageController,
 ) {
-    const { applicationStoreNames: mainStores } = getContext();
-    const currentStorageName = userStorageController.name;
+    const { name: currentStorageName } = getUserStorageController();
     const historyContainer = await mainStorageController.get(mainStores.USER_CACHES, ACCESS_HISTORY_KEY);
     const history = historyContainer && historyContainer.values;
     let cleanedHistory;
@@ -59,7 +58,7 @@ async function removeCaches(
                 log.warn(errorCreator(errorMessages.DESTROY_FAILED)({ cache, error }));
             }
         });
-        await mainStorageController.set(getContext().applicationStoreNames.USER_CACHES, {
+        await mainStorageController.set(mainStores.USER_CACHES, {
             id: ACCESS_HISTORY_KEY,
             values: remainingHistory,
         });
@@ -68,7 +67,7 @@ async function removeCaches(
 
 export async function upkeepUserCaches(
 ) {
-    const { storageController, applicationStorageController } = getContext();
-    const updatedHistory = await addUserCacheToHistory(applicationStorageController, storageController);
-    await removeCaches(updatedHistory, applicationStorageController);
+    const mainStorageController = getMainStorageController();
+    const updatedHistory = await addUserCacheToHistory(mainStorageController);
+    await removeCaches(updatedHistory, mainStorageController);
 }

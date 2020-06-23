@@ -5,6 +5,7 @@ import type { QueryApiFn } from '../loader.types';
 type StoreNames = {
     CONSTANTS: string,
     ORGANISATION_UNIT_LEVELS: string,
+    ORGANISATION_UNIT_GROUPS: string,
     RELATIONSHIP_TYPES: string,
     TRACKED_ENTITY_TYPES: string,
     PROGRAMS: string,
@@ -19,16 +20,8 @@ type StoreNames = {
     REDUX_PERSIST: string,
 };
 
-type ApplicationStoreNames = {
-    USER_CACHES: string,
-    STATUS: string,
-    SYSTEM_SETTINGS: string,
-};
-
 export type ContextInput = {
     onQueryApi: QueryApiFn,
     storageController: StorageController,
-    applicationStorageController: StorageController,
     storeNames: StoreNames,
-    applicationStoreNames: ApplicationStoreNames,
 };

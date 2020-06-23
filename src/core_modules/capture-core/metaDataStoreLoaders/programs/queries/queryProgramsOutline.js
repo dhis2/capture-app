@@ -1,7 +1,7 @@
 // @flow
-import { query } from '../../IOUtils';
+import { queryRecursively } from '../../IOUtils';
 
-export const queryProgramsOutline = async () => {
+export const queryProgramsOutline = async (): Promise<Array<Object>> => {
     const specification = {
         resource: 'programs',
         params: {
@@ -10,6 +10,6 @@ export const queryProgramsOutline = async () => {
         },
     };
 
-    const response = await query(specification);
-    return (response && response.programs) || [];
+    return (await queryRecursively(specification, { pageSize: 1000 }))
+        .flatMap(responseItem => (responseItem && responseItem.programs) || []);
 };

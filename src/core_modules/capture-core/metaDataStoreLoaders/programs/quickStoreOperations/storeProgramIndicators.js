@@ -13,18 +13,33 @@ const convert = (response) => {
         }));
 };
 
-export const storeProgramIndicators = (programIds: Array<string>) => {
+const fieldsParam = 'id,displayName,code,shortName,displayInForm,expression,' +
+'displayDescription,description,filter,program[id]';
+
+export const storeProgramIndicators = async (programIds: Array<string>) => {
     const query = {
         resource: 'programIndicators',
         params: {
-            fields: 'id,displayName,code,shortName,displayInForm,expression,' +
-                'displayDescription,description,filter,program[id]',
+            fields: fieldsParam,
             filter: `program.id:in:[${programIds.join(',')}]`,
         },
     };
-    return quickStoreRecursively({
+
+    let programIndicatorIds = [];
+    const convertRetainingIds = (response) => {
+        const convertedProgramIndicators = convert(response);
+        programIndicatorIds = programIndicatorIds.concat(
+            convertedProgramIndicators
+                .map(programIndicator => programIndicator.id),
+        );
+        return convertedProgramIndicators;
+    };
+
+    await quickStoreRecursively({
         query,
         storeName: getContext().storeNames.PROGRAM_INDICATORS,
-        convertQueryResponse: convert,
+        convertQueryResponse: convertRetainingIds,
     });
+
+    return programIndicatorIds;
 };

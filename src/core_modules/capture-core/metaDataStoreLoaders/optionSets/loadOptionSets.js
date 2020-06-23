@@ -37,7 +37,7 @@ type OptionGroupsByOptionSet = {
 };
 
 const getOptionGroups = (optionSetIds: Array<string>) => {
-    const pageSize = 10000;
+    const pageSize = 1000;
 
     const request = async (page: number = 1) => {
         const { optionGroups, hasNextPage } = await queryOptionGroups(optionSetIds, page, pageSize);
@@ -116,7 +116,7 @@ export async function loadOptionSets(
         return accFilteredOptionSetsOutline;
     }, []);
     const optionSetsIds = await getIdsToLoad(filteredOptionSetsOutline);
-    const batchedOptionSetIds = chunk(optionSetsIds, 50);
+    const batchedOptionSetIds = chunk(optionSetsIds, 100);
 
     const optionSetsBatches = await Promise.all(
         batchedOptionSetIds
