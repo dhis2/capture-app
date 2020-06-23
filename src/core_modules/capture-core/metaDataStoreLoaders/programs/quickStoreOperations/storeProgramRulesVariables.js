@@ -34,7 +34,7 @@ const convert = (() => {
     };
 })();
 
-export const storeProgramRulesVariables = (programIds: Array<string>) => {
+export const storeProgramRulesVariables = async (programIds: Array<string>) => {
     const query = {
         resource: 'programRuleVariables',
         params: {
@@ -43,9 +43,22 @@ export const storeProgramRulesVariables = (programIds: Array<string>) => {
             filter: `program.id:in:[${programIds.join(',')}]`,
         },
     };
-    return quickStoreRecursively({
+
+    let programRuleVariableIds = [];
+    const convertRetainingIds = (response) => {
+        const convertedProgramRuleVariables = convert(response);
+        programRuleVariableIds = programRuleVariableIds.concat(
+            convertedProgramRuleVariables
+                .map(programRuleVariable => programRuleVariable.id),
+        );
+        return convertedProgramRuleVariables;
+    };
+
+    await quickStoreRecursively({
         query,
         storeName: getContext().storeNames.PROGRAM_RULES_VARIABLES,
-        convertQueryResponse: convert,
+        convertQueryResponse: convertRetainingIds,
     });
+
+    return programRuleVariableIds;
 };

@@ -30,11 +30,13 @@ const fieldsParam = 'id,displayName,minAttributesRequiredToSearch,featureType,' 
     'trackedEntityTypeAttributes[trackedEntityAttribute[id],displayInList,mandatory,searchable],' +
     'translations[property,locale,value]';
 
-export const storeTrackedEntityTypes = () => {
+export const storeTrackedEntityTypes = (ids: Array<string>) => {
     const query = {
         resource: 'trackedEntityTypes',
         params: {
             fields: fieldsParam,
+            filter: `id:in:[${ids.join(',')}]`,
+            pageSize: ids.length,
         },
     };
 

@@ -2,7 +2,8 @@
 
 export default {
     CONSTANTS: 'constants',
-    ORGANISATION_UNIT_LEVELS: 'ouLevels',
+    ORGANISATION_UNIT_LEVELS: 'organisationUnitLevels',
+    ORGANISATION_UNIT_GROUPS: 'organisationUnitGroups',
     RELATIONSHIP_TYPES: 'relationshipTypes',
     TRACKED_ENTITY_TYPES: 'trackedEntityTypes',
     PROGRAMS: 'programs',

@@ -59,7 +59,7 @@ const fieldsParam = 'id,displayName,condition,description,program[id],programSta
 'programRuleActions[id,content,location,data,programRuleActionType,programStageSection[id],dataElement[id],' +
 'trackedEntityAttribute[id],programStage[id],optionGroup[id],option[id]]';
 
-export const storeProgramRules = (programIds: Array<string>) => {
+export const storeProgramRules = async (programIds: Array<string>) => {
     const query = {
         resource: 'programRules',
         params: {
@@ -67,9 +67,22 @@ export const storeProgramRules = (programIds: Array<string>) => {
             filter: `program.id:in:[${programIds.join(',')}]`,
         },
     };
-    return quickStoreRecursively({
+
+    let programRuleIds = [];
+    const convertRetainingIds = (response) => {
+        const convertedProgramRules = convert(response);
+        programRuleIds = programRuleIds.concat(
+            convertedProgramRules
+                .map(programRule => programRule.id),
+        );
+        return convertedProgramRules;
+    };
+
+    await quickStoreRecursively({
         query,
         storeName: getContext().storeNames.PROGRAM_RULES,
-        convertQueryResponse: convert,
+        convertQueryResponse: convertRetainingIds,
     });
+
+    return programRuleIds;
 };

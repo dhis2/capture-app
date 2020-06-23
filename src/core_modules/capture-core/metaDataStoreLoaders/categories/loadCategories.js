@@ -100,7 +100,6 @@ async function loadCategoryOptionsBatchAsync(
     };
 }
 
-// This might look like horrible code!, but there is a reason. Freeing up memory is the most important thing here, ref JIRA-issue DHIS2-7259
 async function loadCategoryOptionsInBatchesAsync(categoryIds: Array<string>) {
     const categoryOptionsQuery = getCategoryOptionQuery(categoryIds);
 
@@ -138,19 +137,19 @@ async function setCategoriesAsync(
     return storageController.setAll(storeNames.CATEGORIES, categories);
 }
 
+/**
+ * Retrieve and store categories and the underlying category options based on the unique categories argument.
+ * The unique categories input is determined from the stale programs (programs where the program version has changed).
+ * We chunk the categories in chunks of smaller sizes in order to comply with a potential url path limit and
+ * to improve performance, mainly by reducing memory consumption on both the client and the server.
+ */
 export async function loadCategories(
-    inputCategories: Array<InputCategory>,
+    uniqueCategories: Array<InputCategory>,
 ) {
-    const uniqueCategories = [
-        ...new Map(
-            inputCategories.map(ic => [ic.id, ic]),
-        ).values(),
-    ];
-
     await setCategoriesAsync(uniqueCategories);
 
-    const uniqueCateogryIds = uniqueCategories.map(uc => uc.id);
-    const categoryIdBatches = chunk(uniqueCateogryIds, 50);
+    const uniqueCategoryIds = uniqueCategories.map(uc => uc.id);
+    const categoryIdBatches = chunk(uniqueCategoryIds, 50);
     await categoryIdBatches
         .asyncForEach(idBatch => loadCategoryOptionsInBatchesAsync(idBatch));
 }
