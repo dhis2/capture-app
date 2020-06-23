@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -17,8 +17,21 @@ msgstr ""
 "Language: nb\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Please provide a valid date"
-msgstr "Oppgi en gyldig dato"
+msgid "Choose one or more dates..."
+msgstr "Velg en eller flere datoer"
+
+msgid "Choose a date..."
+msgstr "Velg en dato"
+
+msgid "Today"
+msgstr "I dag"
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
+msgstr ""
+"En mulig årsak til dette er at nettleseren eller modusen (f.eks. "
+"Personvernmodus) ikke støttes. Se logg for detaljer."
 
 msgid "Columns to show in table"
 msgstr "Kolonner som skal vises i tabellen"
@@ -49,6 +62,9 @@ msgstr "Oppgi null eller et positivt heltall"
 
 msgid "Please provide a negative integer"
 msgstr "Oppgi et negativt heltall"
+
+msgid "Please provide a valid date"
+msgstr "Oppgi en gyldig dato"
 
 msgid "A date in the future is not allowed"
 msgstr "En dato i fremtiden er ikke tillatt"
@@ -207,9 +223,6 @@ msgstr "Fra"
 
 msgid "To"
 msgstr "Til"
-
-msgid "Today"
-msgstr "I dag"
 
 msgid "This week"
 msgstr "Denne uken"
@@ -812,19 +825,6 @@ msgstr ""
 " Capture App bare å kjøre en versjon samtidig (i samme domene). Oppdater "
 "denne siden hvis du vil bruke denne versjonen igjen, men vær oppmerksom på "
 "at dette vil lukke andre versjoner."
-
-msgid "Choose one or more dates..."
-msgstr "Velg en eller flere datoer"
-
-msgid "Choose a date..."
-msgstr "Velg en dato"
-
-msgid ""
-"A possible reason for this is that the browser or mode (e.g. privacy mode) "
-"is not supported. See log for details."
-msgstr ""
-"En mulig årsak til dette er at nettleseren eller modusen (f.eks. "
-"Personvernmodus) ikke støttes. Se logg for detaljer."
 
 msgid "Compatibility mode"
 msgstr "Kompabilitetsmodus"

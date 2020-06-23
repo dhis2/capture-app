@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Hamza Assada <7amza.it@gmail.com>, 2020\n"
 "Language-Team: Arabic (https://www.transifex.com/hisp-uio/teams/100509/ar/)\n"
@@ -19,8 +19,21 @@ msgstr ""
 "Language: ar\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-msgid "Please provide a valid date"
-msgstr "يرجى ادخال صيغة سليمة للتاريخ"
+msgid "Choose one or more dates..."
+msgstr "اختر تاريخًا أو أكثر ..."
+
+msgid "Choose a date..."
+msgstr "اختر تاريخاً"
+
+msgid "Today"
+msgstr "اليوم"
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
+msgstr ""
+"أحد الأسباب المحتملة لذلك هو أن المتصفح أو الوضع (مثل وضع الخصوصية) غير "
+"مدعوم. انظر السجل للحصول على التفاصيل."
 
 msgid "Columns to show in table"
 msgstr "الأعمدة التي سيتم عرضها في الجدول"
@@ -51,6 +64,9 @@ msgstr "من فضلك ادخل عدداً صحيحاً موجباً، أو صف�
 
 msgid "Please provide a negative integer"
 msgstr "من فضلك ادخل عدداً صحيحاً سالباً"
+
+msgid "Please provide a valid date"
+msgstr "يرجى ادخال صيغة سليمة للتاريخ"
 
 msgid "A date in the future is not allowed"
 msgstr ""
@@ -208,9 +224,6 @@ msgstr "من"
 
 msgid "To"
 msgstr "الى"
-
-msgid "Today"
-msgstr "اليوم"
 
 msgid "This week"
 msgstr "الأسبوع الحالي"
@@ -806,19 +819,6 @@ msgstr ""
 "حالياً تشغيل نسخة واحدة فقط بشكل متزامن (في نفس المجال). يرجى تحديث هذه "
 "الصفحة إذا كنت ترغب في استخدام هذه النسخة، ولكن اعلم أن هذا سيؤدي إلى إغلاق "
 "النسخ الأخرى."
-
-msgid "Choose one or more dates..."
-msgstr "اختر تاريخًا أو أكثر ..."
-
-msgid "Choose a date..."
-msgstr "اختر تاريخاً"
-
-msgid ""
-"A possible reason for this is that the browser or mode (e.g. privacy mode) "
-"is not supported. See log for details."
-msgstr ""
-"أحد الأسباب المحتملة لذلك هو أن المتصفح أو الوضع (مثل وضع الخصوصية) غير "
-"مدعوم. انظر السجل للحصول على التفاصيل."
 
 msgid "Compatibility mode"
 msgstr "وضع التوافق"
