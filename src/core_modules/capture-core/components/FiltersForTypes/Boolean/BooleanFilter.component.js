@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import D2TrueFalse from '../../FormFields/Generic/D2TrueFalse.component';
 import { orientations } from '../../FormFields/Options/MultiSelectBoxes/multiSelectBoxes.const';
+import { getBooleanFilterData } from './booleanFilterDataGetter';
 import type { UpdatableFilterContent } from '../filters.types';
 
 const getStyles = (theme: Theme) => ({
@@ -26,6 +27,20 @@ class BooleanFilter extends Component<Props> implements UpdatableFilterContent<V
 
     setBooleanFieldInstance = (instance: ?D2TrueFalse) => {
         this.booleanFieldInstance = instance;
+    }
+
+    onGetUpdateData() {
+        const value = this.props.value;
+
+        if (!value) {
+            return null;
+        }
+
+        return getBooleanFilterData(value);
+    }
+
+    onIsValid() { //eslint-disable-line
+        return true;
     }
 
     render() {
