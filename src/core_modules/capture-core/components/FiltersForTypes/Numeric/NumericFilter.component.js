@@ -113,6 +113,11 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
         return getNumericFilterData(value);
     }
 
+    onIsValid() {
+        const values = this.props.value;
+        return !values || NumericFilter.isFilterValid(values.min, values.max, this.props.type);
+    }
+
     getUpdatedValue(valuePart: {[key: string]: string}) {
         const valueObject = {
             ...this.props.value,

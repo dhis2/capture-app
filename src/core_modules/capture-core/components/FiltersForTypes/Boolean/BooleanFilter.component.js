@@ -25,10 +25,6 @@ type Props = {
 class BooleanFilter extends Component<Props> implements UpdatableFilterContent<Value> {
     booleanFieldInstance: ?D2TrueFalse;
 
-    setBooleanFieldInstance = (instance: ?D2TrueFalse) => {
-        this.booleanFieldInstance = instance;
-    }
-
     onGetUpdateData() {
         const value = this.props.value;
 
@@ -41,6 +37,10 @@ class BooleanFilter extends Component<Props> implements UpdatableFilterContent<V
 
     onIsValid() { //eslint-disable-line
         return true;
+    }
+
+    setBooleanFieldInstance = (instance: ?D2TrueFalse) => {
+        this.booleanFieldInstance = instance;
     }
 
     render() {
