@@ -23,13 +23,12 @@ export type PropsFromRedux = {
       +searchGroups: Array<{|searchForm: RenderFoundation, unique: boolean, formId: string|}>
     |}
   },
-  dispatch: ReduxDispatch,
   +forms: {
     [elementId: string]: {
       loadNr: number
     }
-  }
-
+  },
+  ...ReduxDispatch
 }
 
 export type Props =

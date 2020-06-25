@@ -52,7 +52,14 @@ const getStyles = (theme: Theme) => ({
 });
 
 
-const Index = ({ classes, trackedEntityTypesWithCorrelatedPrograms, preselectedProgram, programs, dispatch, forms }: Props) => {
+const Index = ({
+    classes,
+    trackedEntityTypesWithCorrelatedPrograms,
+    preselectedProgram,
+    programs,
+    dispatch,
+    forms,
+}: Props) => {
     const [selectedOption, choseSelected] = useState(preselectedProgram);
 
     useEffect(() => {
