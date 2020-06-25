@@ -94,7 +94,7 @@ const Index = ({
                                 {
                                     Object.values(trackedEntityTypesWithCorrelatedPrograms)
                                         // $FlowSuppress https://github.com/facebook/flow/issues/2221
-                                        .map(({ trackedEntityTypeName, trackedEntityTypeId, programs }) =>
+                                        .map(({ trackedEntityTypeName, trackedEntityTypeId, programs: tePrograms }) =>
                                             // SingleSelect component wont allow us to wrap the SingleSelectOption
                                             // in any other element and still make use of the default behaviour.
                                             // Therefore we are returning the group title and the
@@ -106,8 +106,12 @@ const Index = ({
                                                 >
                                                     {trackedEntityTypeName}
                                                 </div>,
-                                                programs.map(({ programName, programId }) =>
-                                                    (<SingleSelectOption style={{ marginRight: 0 }}value={programId} label={programName} />)),
+                                                tePrograms.map(({ programName, programId }) =>
+                                                    (<SingleSelectOption
+                                                        style={{ marginRight: 0 }}
+                                                        value={programId}
+                                                        label={programName}
+                                                    />)),
                                             ])
                                 }
                             </SingleSelect>
