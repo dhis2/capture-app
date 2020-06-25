@@ -16,13 +16,20 @@ export type PropsFromRedux = {
       |}>
     |}
   },
-  programs: {
+  +programs: {
     [elementId: string]: {|
       +programId: string,
       +programName: string,
       +searchGroups: Array<{|searchForm: RenderFoundation, unique: boolean, formId: string|}>
     |}
+  },
+  dispatch: ReduxDispatch,
+  +forms: {
+    [elementId: string]: {
+      loadNr: number
+    }
   }
+
 }
 
 export type Props =

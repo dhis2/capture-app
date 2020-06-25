@@ -58,7 +58,7 @@ const Index = ({ classes, trackedEntityTypesWithCorrelatedPrograms, preselectedP
     useEffect(() => {
         selectedOption.value &&
           programs[selectedOption.value].searchGroups
-              .forEach(({ formId }, index) => {
+              .forEach(({ formId }) => {
                   dispatch(addFormData(formId, {}));
               });
     }, [selectedOption.value]);
