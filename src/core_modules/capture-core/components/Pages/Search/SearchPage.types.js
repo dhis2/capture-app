@@ -1,5 +1,5 @@
 // @flow
-import { SearchGroup } from '../../../metaData/SearchGroup';
+import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 
 export type PropsFromRedux = {
   +preselectedProgram: {|
@@ -20,7 +20,7 @@ export type PropsFromRedux = {
     [elementId: string]: {|
       +programId: string,
       +programName: string,
-      +searchGroups: Array<SearchGroup>
+      +searchGroups: Array<{|searchForm: RenderFoundation, unique: boolean, formId: string|}>
     |}
   }
 }

@@ -10,13 +10,13 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const { currentSelections, activePage } = state;
 
     const trackedEntityTypesWithCorrelatedPrograms =
-      Array.from(programCollection.values())
+      [...programCollection.values()]
           .filter(program => program instanceof TrackerProgram)
           .reduce((acc, {
-              _id: programId,
-              _name: programName,
-              _trackedEntityType: { _id: trackedEntityTypeId, _name: trackedEntityTypeName },
-              _searchGroups: searchGroups,
+              id: programId,
+              name: programName,
+              trackedEntityType: { id: trackedEntityTypeId, name: trackedEntityTypeName },
+              searchGroups,
           }) => {
               const accumulatedProgramsOfTrackedEntityType =
                 acc[trackedEntityTypeId] ? acc[trackedEntityTypeId].programs : [];
@@ -41,10 +41,21 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         .filter(program => program)[0];
 
     const programs = Object.values(trackedEntityTypesWithCorrelatedPrograms)
-        .flatMap(({ programs }) => programs)
+        // $FlowSuppress https://github.com/facebook/flow/issues/2221
+        .flatMap(({ programs: tePrograms }) => tePrograms)
         .reduce((acc, { programId, programName, searchGroups }) => ({
             ...acc,
-            [programId]: { programId, programName, searchGroups },
+            [programId]: {
+                programId,
+                programName,
+                // TODO add comment we want the forms to have an id so that it can be used
+                searchGroups: [...searchGroups.values()]
+                    .map(({ unique, searchForm }, index) => ({
+                        unique,
+                        searchForm,
+                        formId: `searchPageForm-${programId}-${index}`,
+                    })),
+            },
         }), {});
 
     return {
@@ -53,6 +64,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
             label: preselectedProgram && preselectedProgram.programName,
         },
         programs,
+        forms: state.forms,
         trackedEntityTypesWithCorrelatedPrograms,
         error: activePage.selectionsError && activePage.selectionsError.error,
         ready: !activePage.isLoading,
