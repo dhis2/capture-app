@@ -299,9 +299,6 @@ msgstr "Không có kết quả"
 msgid "suggestions could not be retrieved"
 msgstr ""
 
-msgid "search for username"
-msgstr ""
-
 msgid "No items to display"
 msgstr "Không có mục để hiển thị"
 

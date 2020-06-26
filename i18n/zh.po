@@ -299,9 +299,6 @@ msgstr "无结果"
 msgid "suggestions could not be retrieved"
 msgstr "建议不能提取"
 
-msgid "search for username"
-msgstr "搜索用户"
-
 msgid "No items to display"
 msgstr "无条目可显示"
 
