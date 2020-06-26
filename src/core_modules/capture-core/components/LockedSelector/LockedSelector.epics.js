@@ -1,7 +1,6 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
 import { push } from 'connected-react-router';
-import { of } from 'rxjs/observable/of';
 import {
     lockedSelectorActionTypes,
     lockedSelectorBatchActionTypes,
@@ -10,7 +9,6 @@ import {
     setCurrentOrgUnitBasedOnUrl,
     errorRetrievingOrgUnitBasedOnUrl,
     setEmptyOrgUnitBasedOnUrl,
-    stopPageLoading,
 } from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
 import { getApi } from '../../d2';
