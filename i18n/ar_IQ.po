@@ -299,9 +299,6 @@ msgstr "لا توجد نتائج"
 msgid "suggestions could not be retrieved"
 msgstr "تعذر استرداد الاقتراحات"
 
-msgid "search for username"
-msgstr "البحث عن اسم مستخدم"
-
 msgid "No items to display"
 msgstr "لا توجد عناصر للعرض"
 

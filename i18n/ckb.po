@@ -301,9 +301,6 @@ msgstr "هیچ ئەنجامێک بەردەست نیە"
 msgid "suggestions could not be retrieved"
 msgstr "پێشنیارەکان نەتواندرا بهێندرێت"
 
-msgid "search for username"
-msgstr "بۆ ناوی بەکاربەر بگەڕێ"
-
 msgid "No items to display"
 msgstr "هیچ شتێک بەردەست نیە بۆ پیشاندان"
 

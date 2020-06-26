@@ -298,9 +298,6 @@ msgstr ""
 msgid "suggestions could not be retrieved"
 msgstr ""
 
-msgid "search for username"
-msgstr ""
-
 msgid "No items to display"
 msgstr ""
 

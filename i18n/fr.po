@@ -299,9 +299,6 @@ msgstr "Aucun résultat"
 msgid "suggestions could not be retrieved"
 msgstr ""
 
-msgid "search for username"
-msgstr ""
-
 msgid "No items to display"
 msgstr "Aucun élément à afficher"
 

@@ -302,9 +302,6 @@ msgstr "Ingen resultater"
 msgid "suggestions could not be retrieved"
 msgstr "forslag kunne ikke hentes"
 
-msgid "search for username"
-msgstr "søk etter brukernavn"
-
 msgid "No items to display"
 msgstr "Ingen elementer å vise"
 
