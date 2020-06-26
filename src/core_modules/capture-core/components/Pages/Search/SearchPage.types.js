@@ -28,7 +28,6 @@ export type PropsFromRedux = {
       loadNr: number
     }
   },
-  ...ReduxDispatch
 }
 
 export type Props =

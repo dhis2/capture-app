@@ -8,7 +8,6 @@ import { LockedSelector } from '../../LockedSelector';
 import type { Props } from './SearchPage.types';
 import { Section, SectionHeaderSimple } from '../../Section';
 import Button from '../../Buttons/Button.component';
-import { addFormData } from '../../D2Form/actions/form.actions';
 import Form from '../../D2Form/D2Form.component';
 
 const getStyles = (theme: Theme) => ({
@@ -149,7 +148,10 @@ const Index = ({
                                         </div>
                                     </div>
                                     <div className={classes.searchButtonContainer}>
-                                        <Button onClick={() => onSearch({ selectedProgramId: selectedOption.value, formId })}>
+                                        <Button
+                                            onClick={() =>
+                                                onSearch({ selectedProgramId: selectedOption.value, formId })}
+                                        >
                                             Find by {name}.
                                         </Button>
                                     </div>
