@@ -30,11 +30,10 @@ const exactUrl = (page: string, programId: string, orgUnitId: string) => {
 
 export const updateUrlViaLockedSelectorEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.ofType(
-        lockedSelectorActionTypes.ORG_UNIT_ID_RESET,
         lockedSelectorActionTypes.ORG_UNIT_ID_SET,
         lockedSelectorActionTypes.PROGRAM_ID_SET,
-        lockedSelectorActionTypes.PROGRAM_ID_RESET,
-        lockedSelectorBatchActionTypes.PROGRAM_AND_CATEGORY_OPTION_RESET,
+        lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH,
+        lockedSelectorBatchActionTypes.ORG_UNIT_ID_RESET_BATCH,
     )
         .map(() => {
             const {

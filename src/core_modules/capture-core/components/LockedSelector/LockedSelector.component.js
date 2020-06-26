@@ -12,6 +12,8 @@ const defaultDialogProps = {
 };
 
 type Props = {
+    customActionsOnOrgUnitIdReset: Array<()=>void>,
+    customActionOnProgramIdReset: Array<()=>void>,
     onOpenNewEventPage: (selectedProgramId: string, selectedOrgUnitId: string) => void,
     onSetOrgUnit: (id: string, orgUnit: Object) => void,
     onResetOrgUnitId: () => void,

@@ -21,6 +21,7 @@ import {
 import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
+import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewEventPage.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
@@ -134,11 +135,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         ...state,
         page: action.payload.nextPage,
     }),
-    [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({
-        ...state,
-        page: null,
-        locationSwitchInProgress: true,
-    }),
     [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: state => ({
         ...state,
         locationSwitchInProgress: true,
@@ -147,18 +143,29 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         ...state,
         locationSwitchInProgress: true,
     }),
-    [lockedSelectorActionTypes.PROGRAM_ID_RESET]: state => ({
+    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: (state, action) => ({
         ...state,
-        page: null,
-        locationSwitchInProgress: true,
+        page: action.payload.nextPage,
     }),
     [lockedSelectorActionTypes.NEW_EVENT_OPEN]: state => ({
         ...state,
         page: 'newEvent',
         locationSwitchInProgress: true,
     }),
-    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: (state, action) => ({
+    [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({
         ...state,
-        page: action.payload.nextPage,
+        locationSwitchInProgress: true,
+    }),
+    [lockedSelectorActionTypes.PROGRAM_ID_RESET]: state => ({
+        ...state,
+        locationSwitchInProgress: true,
+    }),
+    [viewEventPageActionTypes.ORG_UNIT_ID_CUSTOM_RESET]: state => ({
+        ...state,
+        page: null,
+    }),
+    [viewEventPageActionTypes.PROGRAM_ID_CUSTOM_RESET]: state => ({
+        ...state,
+        page: null,
     }),
 }, 'app');

@@ -22,8 +22,9 @@ export const lockedSelectorActionTypes = {
 };
 
 export const lockedSelectorBatchActionTypes = {
-    AGAIN_START: 'BatchAgainStartFromPageUsingTheSelector',
-    PROGRAM_AND_CATEGORY_OPTION_RESET: 'BatchProgramAndCategoryOptionResetFromPageUsingTheSelector',
+    AGAIN_START: 'BatchAgainStart',
+    PROGRAM_ID_RESET_BATCH: 'BatchProgramIdReset',
+    ORG_UNIT_ID_RESET_BATCH: 'BatchOrgUnitIdReset',
 };
 
 export const setOrgUnitFromLockedSelector = (id: string, orgUnit: Object) => actionCreator(lockedSelectorActionTypes.ORG_UNIT_ID_SET)({ id, orgUnit });
