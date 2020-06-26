@@ -57,17 +57,20 @@ const Index = ({
     trackedEntityTypesWithCorrelatedPrograms,
     preselectedProgram,
     programs,
-    dispatch,
     forms,
+    onSearch,
+    addFormId,
 }: Props) => {
     const [selectedOption, choseSelected] = useState(preselectedProgram);
 
     useEffect(() => {
+        // in order for the Form component to render
+        // need to add a formId under the `forms` reducer
         selectedOption.value &&
-          programs[selectedOption.value].searchGroups
-              .forEach(({ formId }) => {
-                  dispatch(addFormData(formId, {}));
-              });
+        programs[selectedOption.value].searchGroups
+            .forEach(({ formId }) => {
+                addFormId(formId);
+            });
     }, [selectedOption.value]);
 
     return (<>
@@ -95,10 +98,10 @@ const Index = ({
                                     Object.values(trackedEntityTypesWithCorrelatedPrograms)
                                         // $FlowSuppress https://github.com/facebook/flow/issues/2221
                                         .map(({ trackedEntityTypeName, trackedEntityTypeId, programs: tePrograms }) =>
-                                            // SingleSelect component wont allow us to wrap the SingleSelectOption
-                                            // in any other element and still make use of the default behaviour.
-                                            // Therefore we are returning the group title and the
-                                            // SingleSelectOption in an array.
+                                        // SingleSelect component wont allow us to wrap the SingleSelectOption
+                                        // in any other element and still make use of the default behaviour.
+                                        // Therefore we are returning the group title and the
+                                        // SingleSelectOption in an array.
                                             [
                                                 <div
                                                     className={classes.groupTitle}
@@ -146,8 +149,8 @@ const Index = ({
                                         </div>
                                     </div>
                                     <div className={classes.searchButtonContainer}>
-                                        <Button onClick={() => {}}>
-                                            Find by {name}
+                                        <Button onClick={() => onSearch({ selectedProgramId: selectedOption.value, formId })}>
+                                            Find by {name}.
                                         </Button>
                                     </div>
                                 </Section>

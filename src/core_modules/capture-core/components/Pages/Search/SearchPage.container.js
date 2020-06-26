@@ -5,6 +5,13 @@ import { programCollection } from '../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../../metaData/Program';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import type { PropsFromRedux } from './SearchPage.types';
+import { actionCreator } from '../../../actions/actions.utils';
+import { addFormData } from '../../D2Form/actions/form.actions';
+
+
+export const searchPageActionTypes = {
+    ON_SEARCH: 'OnSearch',
+};
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const { currentSelections, activePage } = state;
@@ -58,6 +65,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
             },
         }), {});
 
+
     return {
         preselectedProgram: {
             value: preselectedProgram && preselectedProgram.programId,
@@ -71,4 +79,10 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     };
 };
 
-export const SearchPage = connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(SearchPageComponent)));
+const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+    onSearch: ({ selectedProgramId, formId }) => dispatch(actionCreator(searchPageActionTypes.ON_SEARCH)({ formId, selectedProgramId })),
+    addFormId: formId => dispatch(addFormData(formId, {})),
+});
+
+
+export const SearchPage = connect(mapStateToProps, mapDispatchToProps)(withLoadingIndicator()(withErrorMessageHandler()(SearchPageComponent)));

@@ -172,6 +172,9 @@ import {
     setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
     startAgainEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
+import {
+    trackedEntitySearchUsingUniqueIdentifierEpic,
+} from '../core_modules/capture-core/components/Pages/Search/SearchPage.epics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -275,5 +278,6 @@ export default combineEpics(
     getOrgUnitDataBasedOnUrlUpdateEpic,
     setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
     startAgainEpic,
+    trackedEntitySearchUsingUniqueIdentifierEpic,
     ...getDataEntryEpics(),
 );
