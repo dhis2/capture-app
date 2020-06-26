@@ -24,6 +24,7 @@ type Props = {
 // $FlowSuppress
 class BooleanFilter extends Component<Props> implements UpdatableFilterContent<Value> {
     booleanFieldInstance: ?D2TrueFalse;
+
     onGetUpdateData() {
         const value = this.props.value;
 

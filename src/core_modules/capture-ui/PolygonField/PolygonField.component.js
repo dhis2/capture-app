@@ -68,7 +68,6 @@ export default class D2Polygon extends React.Component<Props, State> {
         mapCenter: [51.505, -0.09],
     }
 
-    mapInstance: ?HTMLElement;
     constructor(props: Props) {
         super(props);
 

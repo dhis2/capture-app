@@ -72,7 +72,8 @@
     "extract-pot": "d2-i18n-extract -p src/ -o i18n/",
     "localize": "yarn extract-pot && d2-i18n-generate -n default -p ./i18n/ -o ./src/locales/",
     "prestart": "node verifyCacheVersion.js && yarn localize && d2-manifest package.json ./public/manifest.webapp",
-    "docs": "NODE_ENV=development jsdoc -c jsdoc-conf.json"
+    "docs": "NODE_ENV=development jsdoc -c jsdoc-conf.json",
+    "linter:check": "eslint -c .eslintrc src/**"
   },
   "husky": {
     "hooks": {

@@ -64,8 +64,6 @@ class D2DatePopup extends React.Component<Props> {
         const {
             open,
             mode,
-            anchorPosition, // eslint-disable-line
-            absoluteDirection, // eslint-disable-line
             classes,
             children,
         } = this.props;

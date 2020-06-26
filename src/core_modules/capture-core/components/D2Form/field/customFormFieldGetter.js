@@ -24,6 +24,7 @@ const errorMessages = {
     NO_FORMFIELD_FOR_TYPE: 'Formfield component not specified for type',
 };
 
+// todo report (lgmt)
 const fieldForTypes = {
     [elementTypes.EMAIL]: getTextFieldConfig,
     [elementTypes.TEXT]: getTextFieldConfig,

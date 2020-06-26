@@ -71,14 +71,12 @@ class OrgUnitField extends React.Component<Props> {
             roots,
             onSelectClick,
             searchText,
-            onSearch,
             ready,
             treeKey,
             classes,
             selected,
             maxTreeHeight,
             disabled,
-            ...passOnProps // eslint-disable-line
         } = this.props;
         const styles = maxTreeHeight ? { maxHeight: maxTreeHeight, overflowY: 'auto' } : null;
         return (

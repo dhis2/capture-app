@@ -3,8 +3,6 @@ import { pipe } from 'capture-core-utils';
 import { Enrollment, RenderFoundation } from '../../../../metaData';
 import { convertValue as convertFormToClient } from '../../../../converters/formToClient';
 import { convertValue as convertClientToServer } from '../../../../converters/clientToServer';
-// import convertDataEntryValuesToClientValues from '../../../DataEntry/common/convertDataEntryValuesToClientValues';
-// import { convertEnrollmentClientToServerWithKeysMap } from '../../../../enrollment';
 
 type Selections = {
     programId: string,
@@ -25,26 +23,6 @@ function getFormServerValues(
     return formServerValues;
 }
 
-/*
-function getEnrollmentServerValues(
-    dataEntryKey: string,
-    dataEntryValues: Object,
-    dataEntryValuesMeta: Object,
-    prevEnrollmentData: Object,
-    formFoundation: RenderFoundation,
-) {
-    const enrollmentClientValues = convertDataEntryValuesToClientValues(
-        dataEntryValues,
-        dataEntryValuesMeta,
-        prevEnrollmentData,
-        formFoundation,
-    ) || {};
-
-    const enrollmentServerValues =
-        enrollmentClientValues && convertEnrollmentClientToServerWithKeysMap(enrollmentClientValues);
-    return enrollmentServerValues;
-}
-*/
 
 function getTEIServerData(
     enrollment: Enrollment,
@@ -65,20 +43,7 @@ function getTEIServerData(
     };
 }
 
-/*
-function getEnrollmentServerData(
-    selections: Selections,
-    enrollmentServerValues: Object,
-) {
-    return {
-        orgUnit: selections.orgUnitId,
-        program: selections.programId,
-        status: 'ACTIVE',
-        ...enrollmentServerValues,
-    };
-}
-*/
-
+// todo (report lgtm) this function is used. when its used 6 elements are being passed in but here the last four are not being used.
 export default function buildServerData(
     dataEntryKey: string,
     selections: Selections,
@@ -91,15 +56,6 @@ export default function buildServerData(
     const formFoundation = enrollment.enrollmentForm;
     const formServerValues = getFormServerValues(formValues, formFoundation);
 
-    /*
-    const enrollmentServerValues = getEnrollmentServerValues(
-        dataEntryKey,
-        dataEntryValues,
-        dataEntryValuesMeta,
-        prevEnrollmentData,
-        formFoundation,
-    );
-    */
 
     const teiServerData = getTEIServerData(
         enrollment,
@@ -107,17 +63,6 @@ export default function buildServerData(
         formServerValues,
     );
 
-    /*
-    const enrollmentServerData = getEnrollmentServerData(
-        selections,
-        enrollmentServerValues,
-    );
-    */
 
-    return {
-        ...teiServerData,
-        //enrollments: [
-        //    enrollmentServerData,
-        //],
-    };
+    return { ...teiServerData };
 }

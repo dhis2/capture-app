@@ -15,7 +15,6 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-
 type Props = {
     optionSet: OptionSet,
     value: any,

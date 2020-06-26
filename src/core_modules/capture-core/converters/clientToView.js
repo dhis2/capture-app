@@ -51,6 +51,7 @@ function convertResourceForView(clientValue: FileClientValue) {
     );
 }
 
+// todo report (lgmt)
 const valueConvertersForType = {
     [elementTypes.NUMBER]: stringifyNumber,
     [elementTypes.INTEGER]: stringifyNumber,
