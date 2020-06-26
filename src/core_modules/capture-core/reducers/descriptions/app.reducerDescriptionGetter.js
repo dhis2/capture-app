@@ -149,6 +149,7 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     }),
     [lockedSelectorActionTypes.PROGRAM_ID_RESET]: state => ({
         ...state,
+        page: null,
         locationSwitchInProgress: true,
     }),
     [lockedSelectorActionTypes.NEW_EVENT_OPEN]: state => ({
