@@ -26,10 +26,11 @@ export const trackedEntitySearchUsingUniqueIdentifierEpic = (action$: InputObser
                     const searchResults = trackedEntityInstanceContainers;
                     if (searchResults.length > 0) {
                         const { id: trackedEntityInstanceId, tei: { orgUnit: orgUnitId } } = searchResults[0];
-                        const baseUrl = `${(process.env.REACT_APP_TRACKER_CAPTURE_APP_PATH || '..').replace(/\/$/, '')}/#/dashboard?`;
-                        const baseParams = `tei=${trackedEntityInstanceId}&ou=${orgUnitId}&program=${selectedProgramId}`;
-                        const trackedEntityInstanceUrlToOldTrackerApp = `${baseUrl}${baseParams}`;
-                        window.location.href = trackedEntityInstanceUrlToOldTrackerApp;
+                        const oldTrackerCaptureAppUrl =
+                          (process.env.REACT_APP_TRACKER_CAPTURE_APP_PATH || '..').replace(/\/$/, '');
+                        const urlParameters =
+                          `/#/dashboard?tei=${trackedEntityInstanceId}&ou=${orgUnitId}&program=${selectedProgramId}`;
+                        window.location.href = `${oldTrackerCaptureAppUrl}${urlParameters}`;
                         return {};
                     }
                     // trigger action that will display modal to inform user that results are empty.
