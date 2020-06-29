@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: 晓东 林 <13981924470@126.com>, 2020\n"
 "Language-Team: Chinese (https://www.transifex.com/hisp-uio/teams/100509/zh/)\n"
@@ -18,8 +18,19 @@ msgstr ""
 "Language: zh\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid "Please provide a valid date"
-msgstr "请提供有效的日期"
+msgid "Choose one or more dates..."
+msgstr "选择一个或多个日期"
+
+msgid "Choose a date..."
+msgstr "选择日期"
+
+msgid "Today"
+msgstr "今天"
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
+msgstr "将 "
 
 msgid "Columns to show in table"
 msgstr "表中显示的列"
@@ -50,6 +61,9 @@ msgstr "0或负整数"
 
 msgid "Please provide a negative integer"
 msgstr "负整数"
+
+msgid "Please provide a valid date"
+msgstr "请提供有效的日期"
 
 msgid "A date in the future is not allowed"
 msgstr ""
@@ -207,9 +221,6 @@ msgstr "从"
 msgid "To"
 msgstr "至"
 
-msgid "Today"
-msgstr "今天"
-
 msgid "This week"
 msgstr "本周"
 
@@ -287,9 +298,6 @@ msgstr "无结果"
 
 msgid "suggestions could not be retrieved"
 msgstr "建议不能提取"
-
-msgid "search for username"
-msgstr "搜索用户"
 
 msgid "No items to display"
 msgstr "无条目可显示"
@@ -794,17 +802,6 @@ msgid ""
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
 msgstr "在同一个容器中你打开了其它版本的采集App。当前，该应用仅仅支持同时运行一个版本应用。请刷新页面，如果你想使用该版本。注意将关闭其它版本。"
-
-msgid "Choose one or more dates..."
-msgstr "选择一个或多个日期"
-
-msgid "Choose a date..."
-msgstr "选择日期"
-
-msgid ""
-"A possible reason for this is that the browser or mode (e.g. privacy mode) "
-"is not supported. See log for details."
-msgstr "将 "
 
 msgid "Compatibility mode"
 msgstr "兼容性模式"

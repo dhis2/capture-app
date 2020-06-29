@@ -1,6 +1,6 @@
 // @flow
 /* eslint-disable */
-import type { Store } from 'redux';
+import { methods } from '../../capture-core/trackerOffline/trackerOfflineConfig.const';
 
 declare type D2 = {
     models: Object,
