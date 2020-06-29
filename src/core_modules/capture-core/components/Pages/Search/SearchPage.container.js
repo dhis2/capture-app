@@ -4,7 +4,7 @@ import { SearchPage as SearchPageComponent } from './SearchPage.component';
 import { programCollection } from '../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../../metaData/Program';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
-import type { ActionsFromRedux, PropsFromRedux } from './SearchPage.types';
+import type { DispatcherFromRedux, PropsFromRedux } from './SearchPage.types';
 import { addFormData } from '../../D2Form/actions/form.actions';
 import { actionCreator } from '../../../actions/actions.utils';
 
@@ -82,7 +82,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     };
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch): ActionsFromRedux => ({
+const mapDispatchToProps = (dispatch: ReduxDispatch): DispatcherFromRedux => ({
     handleOnSearch: ({ selectedProgramId, formId }) => {
         dispatch(actionCreator(searchPageActionTypes.ON_SEARCH)({ selectedProgramId, formId }));
     },

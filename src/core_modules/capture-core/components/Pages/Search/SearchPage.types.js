@@ -30,15 +30,15 @@ export type PropsFromRedux = {
   },
 }
 
-export type ActionsFromRedux = {|
+export type DispatcherFromRedux = {|
   handleOnSearch: ({| selectedProgramId: string, formId: string |}) => void,
   addFormIdToReduxStore: (formId: string) => void,
   closeModal: () => void
 |}
 
 export type Props =
-  ActionsFromRedux & PropsFromRedux & {
-  searchStatus: "RESULTS_EMPTY" | "SEARCHING" | "",
+  DispatcherFromRedux & PropsFromRedux & {
+  +searchStatus: "RESULTS_EMPTY" | "SEARCHING" | "",
   +classes: {|
     +container: string,
     +header: string,
