@@ -10,12 +10,12 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const { currentSelections, activePage } = state;
 
     const trackedEntityTypesWithCorrelatedPrograms =
-      Array.from(programCollection.values())
+      [...programCollection.values()]
           .filter(program => program instanceof TrackerProgram)
           .reduce((acc, {
-              _id: programId,
-              _name: programName,
-              _trackedEntityType: { _id: trackedEntityTypeId, _name: trackedEntityTypeName },
+              id: programId,
+              name: programName,
+              trackedEntityType: { id: trackedEntityTypeId, name: trackedEntityTypeName },
           }) => {
               const accumulatedProgramsOfTrackedEntityType =
                 acc[trackedEntityTypeId] ? acc[trackedEntityTypeId].programs : [];
@@ -26,7 +26,8 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
                       trackedEntityTypeId,
                       trackedEntityTypeName,
                       programs: [
-                          ...accumulatedProgramsOfTrackedEntityType, { programId, programName },
+                          ...accumulatedProgramsOfTrackedEntityType,
+                          { programId, programName },
                       ],
                   },
               };
