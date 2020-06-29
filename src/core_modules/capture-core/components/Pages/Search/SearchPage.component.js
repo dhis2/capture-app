@@ -18,6 +18,7 @@ import type { Props } from './SearchPage.types';
 import { Section, SectionHeaderSimple } from '../../Section';
 import Button from '../../Buttons/Button.component';
 import Form from '../../D2Form/D2Form.component';
+import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -172,7 +173,7 @@ const Index = ({
                         })
                 }
                 {
-                    searchStatus === 'RESULTS_EMPTY' &&
+                    searchStatus === searchPageStatus.NO_RESULTS &&
                     <Modal position="middle">
                         <ModalTitle>Empty results</ModalTitle>
                         <ModalContent>There was no item found</ModalContent>

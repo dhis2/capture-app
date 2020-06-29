@@ -2,13 +2,19 @@
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.container';
 
+export const searchPageStatus = {
+    INITIAL: 'INITIAL',
+    NO_RESULTS: 'NO_RESULTS',
+};
+
+
 export const searchPageDesc = createReducerDescription({
     [searchPageActionTypes.SEARCH_RESULTS_EMPTY]: state => ({
         ...state,
-        searchStatus: 'RESULTS_EMPTY',
+        searchStatus: searchPageStatus.NO_RESULTS,
     }),
     [searchPageActionTypes.MODAL_CLOSE]: state => ({
         ...state,
-        searchStatus: 'SEARCHING',
+        searchStatus: searchPageStatus.INITIAL,
     }),
-}, 'searchPage', { searchStatus: '' });
+}, 'searchPage', { searchStatus: searchPageStatus.INITIAL });
