@@ -7,4 +7,4 @@ export const viewEventPageActionTypes = {
 };
 
 export const customProgramIdReset = () => actionCreator(viewEventPageActionTypes.PROGRAM_ID_CUSTOM_RESET)();
-export const customOrgUnitIdIdReset = () => actionCreator(viewEventPageActionTypes.PROGRAM_ID_CUSTOM_RESET)();
+export const customOrgUnitIdIdReset = () => actionCreator(viewEventPageActionTypes.ORG_UNIT_ID_CUSTOM_RESET)();
