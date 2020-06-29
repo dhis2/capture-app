@@ -27,7 +27,7 @@ export const viewEventFromUrl = (data: Object) =>
     });
 
 export const eventFromUrlCouldNotBeRetrieved = (message: string) =>
-    actionCreator(actionTypes.EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED)(message);
+    actionCreator(actionTypes.EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED)({ error: message });
 
 export const eventFromUrlRetrieved = (eventContainer: Object, prevProgramId: ?string, categoriesData: ?Array<Object>) =>
     actionCreator(actionTypes.EVENT_FROM_URL_RETRIEVED)({ eventContainer, prevProgramId, categoriesData });

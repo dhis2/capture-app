@@ -1,18 +1,17 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
+import { push } from 'connected-react-router';
 import {
     lockedSelectorActionTypes,
-    searchPageSelectorBatchActionTypes,
+    lockedSelectorBatchActionTypes,
     invalidSelectionsFromUrl,
     validSelectionsFromUrl,
     setCurrentOrgUnitBasedOnUrl,
     errorRetrievingOrgUnitBasedOnUrl,
     setEmptyOrgUnitBasedOnUrl,
-} from './actions';
+} from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
 import { getApi } from '../../d2';
-import { push } from 'connected-react-router';
-
 
 const exactUrl = (page: string, programId: string, orgUnitId: string) => {
     const argArray = [];
@@ -23,17 +22,18 @@ const exactUrl = (page: string, programId: string, orgUnitId: string) => {
         argArray.push(`orgUnitId=${orgUnitId}`);
     }
 
-    return argArray.join('&');
+    if (page && page !== 'viewEvent') {
+        return `/${page}/${argArray.join('&')}`;
+    }
+    return `/${argArray.join('&')}`;
 };
 
-export const searchPageSelectorUpdateURLEpic = (action$: InputObservable, store: ReduxStore) =>
+export const updateUrlViaLockedSelectorEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.ofType(
-        lockedSelectorActionTypes.ORG_UNIT_ID_RESET,
         lockedSelectorActionTypes.ORG_UNIT_ID_SET,
         lockedSelectorActionTypes.PROGRAM_ID_SET,
-        lockedSelectorActionTypes.PROGRAM_ID_RESET,
-        searchPageSelectorBatchActionTypes.AGAIN_START,
-        searchPageSelectorBatchActionTypes.PROGRAM_AND_CATEGORY_OPTION_RESET,
+        lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH,
+        lockedSelectorBatchActionTypes.ORG_UNIT_ID_RESET_BATCH,
     )
         .map(() => {
             const {
@@ -43,8 +43,11 @@ export const searchPageSelectorUpdateURLEpic = (action$: InputObservable, store:
             return push(exactUrl(page, programId, orgUnitId));
         });
 
+export const startAgainEpic = (action$: InputObservable) =>
+    action$.ofType(lockedSelectorBatchActionTypes.AGAIN_START)
+        .map(() => push('/'));
 
-export const getOrgUnitDataForSearchUrlUpdateEpic = (action$: InputObservable) =>
+export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE)
         .filter(action => action.payload.nextProps.orgUnitId)
         .switchMap(action => getApi()
@@ -59,12 +62,12 @@ export const getOrgUnitDataForSearchUrlUpdateEpic = (action$: InputObservable) =
             ),
         );
 
-export const selectionsFromUrlEmptyOrgUnitForSearchEpic = (action$: InputObservable) =>
+export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE)
         .filter(action => !action.payload.nextProps.orgUnitId)
         .map(() => setEmptyOrgUnitBasedOnUrl());
 
-export const validationForSearchUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
+export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.ofType(
         lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_SET,
         lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_EMPTY_SET)

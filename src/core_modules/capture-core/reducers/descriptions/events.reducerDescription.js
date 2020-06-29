@@ -4,7 +4,7 @@ import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as dataEntryActionTypes } from '../../components/DataEntry/actions/dataEntry.actions';
 import { actionTypes as enrollmentActionTypes } from '../../actions/__TEMP__/enrollment.actions';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
-import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/viewEvent.actions';
+import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { actionTypes as workingListsActionTypes } from '../../components/Pages/MainPage/WorkingLists';
 
 const getFromWorkingListRetrieval = (eventContainers, containerProperty) => {

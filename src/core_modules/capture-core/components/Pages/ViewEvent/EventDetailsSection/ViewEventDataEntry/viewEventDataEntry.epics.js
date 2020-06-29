@@ -15,7 +15,7 @@ import {
 
 import {
     actionTypes as viewEventPageActionTypes,
-} from '../../viewEvent.actions';
+} from '../../ViewEventComponent/viewEvent.actions';
 import { getProgramAndStageFromEvent } from '../../../../../metaData';
 
 export const loadViewEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>

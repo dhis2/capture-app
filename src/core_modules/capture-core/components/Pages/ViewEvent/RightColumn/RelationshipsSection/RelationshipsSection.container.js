@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import RelationshipsSection from './RelationshipsSection.component';
 
-import { openAddRelationship } from '../../viewEvent.actions';
+import { openAddRelationship } from '../../ViewEventComponent/viewEvent.actions';
 
 import {
     requestDeleteEventRelationship,

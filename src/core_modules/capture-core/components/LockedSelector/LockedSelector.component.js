@@ -12,6 +12,8 @@ const defaultDialogProps = {
 };
 
 type Props = {
+    customActionsOnOrgUnitIdReset: Array<()=>void>,
+    customActionOnProgramIdReset: Array<()=>void>,
     onOpenNewEventPage: (selectedProgramId: string, selectedOrgUnitId: string) => void,
     onSetOrgUnit: (id: string, orgUnit: Object) => void,
     onResetOrgUnitId: () => void,
@@ -21,7 +23,7 @@ type Props = {
     onResetAllCategoryOptions: () => void,
     onStartAgain: () => void,
     onResetProgramId: (baseAction: ReduxAction<any, any>) => void,
-    formInputInProgess: boolean,
+    isUserInteractionInProgress: boolean,
     onResetDataEntry: () => void,
     inAddRelationship: boolean,
     selectedOrgUnitId: string,
@@ -38,7 +40,7 @@ type State = {
     openNewEventWarning: boolean;
 };
 
-class SelectorLevel extends Component<Props, State> {
+export class LockedSelectorComponent extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
 
@@ -52,7 +54,7 @@ class SelectorLevel extends Component<Props, State> {
         };
     }
 
-    dontShowWarning = () => !this.props.formInputInProgess && !this.props.inAddRelationship;
+    dontShowWarning = () => !this.props.isUserInteractionInProgress;
 
     handleOpenStartAgainWarning=() => {
         if (this.dontShowWarning()) {
@@ -119,7 +121,7 @@ class SelectorLevel extends Component<Props, State> {
     }
 
     handleClickNew=() => {
-        if (this.props.formInputInProgess) {
+        if (this.props.isUserInteractionInProgress) {
             this.setState({ openNewEventWarning: true });
             return;
         }
@@ -134,7 +136,6 @@ class SelectorLevel extends Component<Props, State> {
 
     render() {
         const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
-
         return (
             <div>
                 <QuickSelector
@@ -182,5 +183,3 @@ class SelectorLevel extends Component<Props, State> {
         );
     }
 }
-
-export default SelectorLevel;

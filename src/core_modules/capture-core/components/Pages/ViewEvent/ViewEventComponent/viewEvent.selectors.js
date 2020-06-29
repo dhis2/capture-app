@@ -1,7 +1,7 @@
 // @flow
 
 import { createSelector } from 'reselect';
-import { getEventProgramEventAccess, getEventProgramThrowIfNotFound } from '../../../metaData';
+import { getEventProgramEventAccess, getEventProgramThrowIfNotFound } from '../../../../metaData';
 
 
 const programIdSelector = state => state.currentSelections.programId;

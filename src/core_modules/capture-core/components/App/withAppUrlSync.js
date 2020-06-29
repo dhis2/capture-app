@@ -3,21 +3,9 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { paramsSelector } from './appSync.selectors';
 import LoadingMaskForPage from '../LoadingMasks/LoadingMaskForPage.component';
-import {
-    updateMainSelectionsFromUrl as updateMainSelectionsFromUrlForMainPage,
-} from '../Pages/MainPage/mainSelections.actions';
-import {
-    updateSelectionsFromUrl as updateSelectionsFromUrlForNewEvent,
-} from '../Pages/NewEvent';
-import {
-    updateSelectionsFromUrl as updateSelectionsFromUrlForNewEnrollment,
-} from '../Pages/NewEnrollment';
-import {
-    viewEventFromUrl,
-} from '../Pages/ViewEvent/viewEvent.actions';
-import {
-    updateSearchSelectionsFromUrl,
-} from '../LockedSelector';
+import { updateSelectionsFromUrl as updateSelectionsFromUrlForNewEnrollment } from '../Pages/NewEnrollment';
+import { viewEventFromUrl } from '../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { updateSelectionsFromUrl } from '../LockedSelector';
 
 import { reservedUrlKeys } from '../UrlSync/withUrlSync';
 import type { UpdateDataContainer } from '../UrlSync/withUrlSync';
@@ -33,7 +21,7 @@ type Props = {
 };
 
 const pageKeys = {
-    MAIN: 'main',
+    MAIN: '',
     NEW_EVENT: 'newEvent',
     VIEW_EVENT: 'viewEvent',
     NEW_ENROLLMENT: 'newEnrollment',
@@ -90,9 +78,9 @@ const specificationForPages = {
 };
 
 const updaterForPages = {
-    [pageKeys.MAIN]: updateMainSelectionsFromUrlForMainPage,
-    [pageKeys.NEW_EVENT]: updateSelectionsFromUrlForNewEvent,
-    [pageKeys.SEARCH]: updateSearchSelectionsFromUrl,
+    [pageKeys.MAIN]: updateSelectionsFromUrl,
+    [pageKeys.NEW_EVENT]: updateSelectionsFromUrl,
+    [pageKeys.SEARCH]: updateSelectionsFromUrl,
     [pageKeys.VIEW_EVENT]: viewEventFromUrl,
     [pageKeys.NEW_ENROLLMENT]: updateSelectionsFromUrlForNewEnrollment,
 };
@@ -190,7 +178,8 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
     });
 
     const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-        onUpdateFromUrl: (page: ?string, updateData: UpdateDataContainer) => dispatch(updaterForPages[page](updateData)),
+        onUpdateFromUrl: (page: ?string, updateData: UpdateDataContainer) =>
+            dispatch(updaterForPages[page](updateData)),
     });
 
     return connect(mapStateToProps, mapDispatchToProps)(AppUrlSyncer);

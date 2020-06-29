@@ -284,6 +284,15 @@ msgstr ""
 msgid "No items to display"
 msgstr ""
 
+msgid "Could not get organisation unit"
+msgstr ""
+
+msgid "Program doesn't exist"
+msgstr ""
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr ""
+
 msgid "New {{typeName}}"
 msgstr ""
 
@@ -330,15 +339,6 @@ msgid "Select program"
 msgstr ""
 
 msgid "No programs available."
-msgstr ""
-
-msgid "Could not get organisation unit"
-msgstr ""
-
-msgid "Program doesn't exist"
-msgstr ""
-
-msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "Online"
@@ -486,9 +486,6 @@ msgid "Active"
 msgstr ""
 
 msgid "Completed"
-msgstr ""
-
-msgid "Selected program is invalid for registering unit"
 msgstr ""
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
