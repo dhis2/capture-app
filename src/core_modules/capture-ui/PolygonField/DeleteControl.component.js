@@ -18,8 +18,9 @@ class DeleteControl extends MapControl<any, Props> {
         const text = i18n.t('Delete polygon');
         const jsx = (
             <div className="leaflet-draw-toolbar leaflet-bar">
-                {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
-                <a
+                {
+                // eslint-disable-next-line jsx-a11y/anchor-has-content
+                }<a
                     className={classNames('leaflet-draw-edit-remove', { 'leaflet-disabled': this.props.disabled })}
                     onClick={this.onClick}
                     title={text}
