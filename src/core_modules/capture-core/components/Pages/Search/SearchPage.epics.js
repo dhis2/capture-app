@@ -6,6 +6,7 @@ import { getTrackedEntityInstances } from '../../../trackedEntityInstances/track
 import {
     getTrackerProgramThrowIfNotFound as getTrackerProgram,
 } from '../../../metaData';
+import { actionCreator } from '../../../actions/actions.utils';
 
 export const trackedEntitySearchUsingUniqueIdentifierEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.ofType(searchPageActionTypes.ON_SEARCH).pipe(
@@ -34,7 +35,7 @@ export const trackedEntitySearchUsingUniqueIdentifierEpic = (action$: InputObser
                         return {};
                     }
                     // trigger action that will display modal to inform user that results are empty.
-                    return {};
+                    return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
                 }),
             );
         }),

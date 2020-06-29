@@ -11,10 +11,12 @@ import { actionCreator } from '../../../actions/actions.utils';
 
 export const searchPageActionTypes = {
     ON_SEARCH: 'OnSearch',
+    SEARCH_RESULTS_EMPTY: 'SearchResultsEmpty',
+    MODAL_CLOSE: 'CloseModal',
 };
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
-    const { currentSelections, activePage } = state;
+    const { currentSelections, activePage, searchPage: { searchStatus } } = state;
 
     const trackedEntityTypesWithCorrelatedPrograms =
       [...programCollection.values()]
@@ -76,6 +78,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         trackedEntityTypesWithCorrelatedPrograms,
         error: activePage.selectionsError && activePage.selectionsError.error,
         ready: !activePage.isLoading,
+        searchStatus,
     };
 };
 
@@ -84,6 +87,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): ActionsFromRedux => ({
         dispatch(actionCreator(searchPageActionTypes.ON_SEARCH)({ selectedProgramId, formId }));
     },
     addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
+    closeModal: () => { dispatch(actionCreator(searchPageActionTypes.MODAL_CLOSE)()); },
 });
 
 

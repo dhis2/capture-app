@@ -3,7 +3,16 @@ import React, { useState, useEffect } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper/Paper';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { SingleSelect, SingleSelectOption } from '@dhis2/ui-core';
+import {
+    SingleSelect,
+    SingleSelectOption,
+    Modal,
+    ModalTitle,
+    ModalContent,
+    ModalActions,
+    ButtonStrip,
+    Button as ButtonUi,
+} from '@dhis2/ui-core';
 import { LockedSelector } from '../../LockedSelector';
 import type { Props } from './SearchPage.types';
 import { Section, SectionHeaderSimple } from '../../Section';
@@ -57,8 +66,10 @@ const Index = ({
     preselectedProgram,
     programs,
     forms,
+    searchStatus,
     handleOnSearch,
     addFormIdToReduxStore,
+    closeModal,
 }: Props) => {
     const [selectedOption, choseSelected] = useState(preselectedProgram);
 
@@ -159,6 +170,22 @@ const Index = ({
                                 </Section>
                             );
                         })
+                }
+                {
+                    searchStatus === 'RESULTS_EMPTY' &&
+                    <Modal position="middle">
+                        <ModalTitle>Empty results</ModalTitle>
+                        <ModalContent>There was no item found</ModalContent>
+                        <ModalActions>
+                            <ButtonStrip end>
+                                <ButtonUi
+                                    onClick={closeModal}
+                                    primary
+                                    type="button"
+                                >Search Again</ButtonUi>
+                            </ButtonStrip>
+                        </ModalActions>
+                    </Modal>
                 }
             </Paper>
         </div>
