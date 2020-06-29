@@ -24,6 +24,8 @@ function useUpdateListEffect(callback, dependencies) {
             return undefined;
         }
         return callback();
+    // https://github.com/facebook/create-react-app/issues/6880
+    // eslint-disable-next-line
     }, useUpdateListMemoize(dependencies));
 }
 

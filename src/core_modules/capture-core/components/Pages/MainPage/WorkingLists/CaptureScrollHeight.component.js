@@ -20,6 +20,8 @@ const CaptureScrollHeight = (props: Props) => {
         window.addEventListener('resize', updateHeight);
         return () =>
             window.removeEventListener('resize', updateHeight);
+        // https://github.com/facebook/create-react-app/issues/6880
+        // eslint-disable-next-line
     }, [...extraTriggers, updateHeight]);
 
     return props.children(height);
