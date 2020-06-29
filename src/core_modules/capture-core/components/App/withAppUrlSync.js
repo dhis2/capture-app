@@ -2,11 +2,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { paramsSelector } from './appSync.selectors';
-import LoadingMaskForPage from '../LoadingMasks/LoadingMaskForPage.component';
+import { LoadingMaskForPage } from '../LoadingMasks';
 import { updateSelectionsFromUrl as updateSelectionsFromUrlForNewEnrollment } from '../Pages/NewEnrollment';
 import { viewEventFromUrl } from '../Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { updateSelectionsFromUrl } from '../LockedSelector';
-
 import { reservedUrlKeys } from '../UrlSync/withUrlSync';
 import type { UpdateDataContainer } from '../UrlSync/withUrlSync';
 

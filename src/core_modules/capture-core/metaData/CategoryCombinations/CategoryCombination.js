@@ -3,7 +3,6 @@
 /* eslint-disable no-restricted-syntax */
 import isFunction from 'd2-utilizr/lib/isFunction';
 import Category from './Category';
-import { errorCreator } from 'capture-core-utils';
 
 export default class CategoryCombination {
     _name: string;
@@ -43,19 +42,5 @@ export default class CategoryCombination {
 
     set categories(categories: Map<string, Category>) {
         this._categories = categories;
-    }
-
-    getCategoryThrowIfNotFound(id: string): Category {
-        const category = this.categories.get(id);
-        if (!category) {
-            throw new Error(
-                errorCreator(CategoryCombination.errorMessages.CATEGORY_NOT_FOUND)({ categoryCombination: this, categoryId: id }),
-            );
-        }
-        return category;
-    }
-
-    getCategoryForOptionId(optionId: string) {
-        return Array.from(this.categories.values()).find(category => !!category.getOption(optionId));
     }
 }

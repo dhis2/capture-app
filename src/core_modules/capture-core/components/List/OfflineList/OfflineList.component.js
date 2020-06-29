@@ -102,6 +102,7 @@ class OfflineList extends Component<Props> {
         rowIdKey: 'id',
     };
     static typesWithAscendingInitialDirection = [
+        // todo (report lgmt)
         elementTypes.TEXT,
         elementTypes.LONG_TEXT,
     ];
@@ -204,9 +205,6 @@ class OfflineList extends Component<Props> {
                 );
             });
     }
-
-    getPaginationLabelDisplayedRows =
-        (fromToLabel: string, totalLabel: string) => `${fromToLabel} of ${totalLabel}`
 
     render() {
         const { dataSource, columns, classes } = this.props; //eslint-disable-line

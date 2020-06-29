@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: easylin <lin_xd@126.com>, 2020\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/hisp-uio/teams/100509/zh_CN/)\n"
@@ -17,7 +17,18 @@ msgstr ""
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid "Please provide a valid date"
+msgid "Choose one or more dates..."
+msgstr ""
+
+msgid "Choose a date..."
+msgstr ""
+
+msgid "Today"
+msgstr "今天"
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
 msgstr ""
 
 msgid "Columns to show in table"
@@ -48,6 +59,9 @@ msgid "Please provide zero or a positive integer"
 msgstr ""
 
 msgid "Please provide a negative integer"
+msgstr ""
+
+msgid "Please provide a valid date"
 msgstr ""
 
 msgid "A date in the future is not allowed"
@@ -206,9 +220,6 @@ msgstr "从"
 msgid "To"
 msgstr "到"
 
-msgid "Today"
-msgstr "今天"
-
 msgid "This week"
 msgstr "本周"
 
@@ -285,9 +296,6 @@ msgid "No results"
 msgstr ""
 
 msgid "suggestions could not be retrieved"
-msgstr ""
-
-msgid "search for username"
 msgstr ""
 
 msgid "No items to display"
@@ -792,17 +800,6 @@ msgid ""
 " the Capture App only supports running one version concurrently (in the same"
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
-msgstr ""
-
-msgid "Choose one or more dates..."
-msgstr ""
-
-msgid "Choose a date..."
-msgstr ""
-
-msgid ""
-"A possible reason for this is that the browser or mode (e.g. privacy mode) "
-"is not supported. See log for details."
 msgstr ""
 
 msgid "Compatibility mode"

@@ -8,7 +8,7 @@ import D2SectionFields from './D2SectionFields.container';
 
 import MetaDataSection from '../../metaData/RenderFoundation/Section';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = theme => ({
     sectionFieldsInSection: {
         margin: theme.spacing.unit,
     },
@@ -75,7 +75,8 @@ class D2Section extends React.PureComponent<Props> {
                     >
                         <D2SectionFields
                             ref={(instance) => {
-                                this.sectionFieldsInstance = instance; }}
+                                this.sectionFieldsInstance = instance;
+                            }}
                             fieldsMetaData={sectionMetaData.elements}
                             {...passOnProps}
                         />

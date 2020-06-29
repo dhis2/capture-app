@@ -11,6 +11,7 @@ import {
 import { isEqual } from '../../../../../../../utils/valueEqualityChecker';
 import type { OptionSetFilterData } from '../../../eventList.types';
 
+// todo (report lgmt)
 const convertersForTypes = {
     [dataElementTypes.TEXT]: convertText,
     [dataElementTypes.NUMBER]: convertNumeric,
