@@ -57,7 +57,7 @@ const Index = ({
     preselectedProgram,
     programs,
     forms,
-    onSearch,
+    handleOnSearch,
     addFormId,
 }: Props) => {
     const [selectedOption, choseSelected] = useState(preselectedProgram);
@@ -150,7 +150,8 @@ const Index = ({
                                     <div className={classes.searchButtonContainer}>
                                         <Button
                                             onClick={() =>
-                                                onSearch({ selectedProgramId: selectedOption.value, formId })}
+                                                selectedOption.value &&
+                                                handleOnSearch({ selectedProgramId: selectedOption.value, formId, searchForm })}
                                         >
                                             Find by {name}.
                                         </Button>

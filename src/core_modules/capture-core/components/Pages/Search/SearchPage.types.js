@@ -30,8 +30,13 @@ export type PropsFromRedux = {
   },
 }
 
+export type ActionsFromRedux = {|
+  handleOnSearch: ({| selectedProgramId: string, formId: string |}) => void,
+  addFormId: (formId: string) => void
+|}
+
 export type Props =
-  PropsFromRedux & {
+  ActionsFromRedux & PropsFromRedux & {
   +classes: {|
     +container: string,
     +header: string,
