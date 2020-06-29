@@ -12,6 +12,8 @@ const defaultDialogProps = {
 };
 
 type Props = {
+    customActionsOnOrgUnitIdReset: Array<()=>void>,
+    customActionOnProgramIdReset: Array<()=>void>,
     onOpenNewEventPage: (selectedProgramId: string, selectedOrgUnitId: string) => void,
     onSetOrgUnit: (id: string, orgUnit: Object) => void,
     onResetOrgUnitId: () => void,
@@ -134,7 +136,6 @@ export class LockedSelectorComponent extends Component<Props, State> {
 
     render() {
         const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
-
         return (
             <div>
                 <QuickSelector

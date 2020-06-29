@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { withStyles } from '@material-ui/core';
-import LoadingMask from '../LoadingMasks/LoadingMaskElementCenter.component';
+import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { DataElement } from '../../metaData';
 import CardListItem from './CardListItem.component';
 import makeDataElementsContainerSelector from './CardList.selectors';
@@ -42,7 +42,6 @@ class CardList extends React.Component<Props> {
         itemTypeName: 'item',
     }
     getDataElementsContainer: Function;
-    trackedEntityTypeAttibutesSelector: Function;
     constructor(props: Props) {
         super(props);
         this.getDataElementsContainer = makeDataElementsContainerSelector();
@@ -50,7 +49,7 @@ class CardList extends React.Component<Props> {
 
     renderLoading = () => (
         <div className={this.props.classes.loadingContainer}>
-            <LoadingMask />
+            <LoadingMaskElementCenter />
         </div>
     );
 

@@ -32,7 +32,7 @@ async function getCategoryOptionsThroughCursor(
         project,
         onIsAborted,
         onIDBGetRequest: source => source
-            .index('category')
+            .index('categoryId')
             .openCursor(IDBKeyRange.only(categoryId)),
     });
     return mappedOptions;

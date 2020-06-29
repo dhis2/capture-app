@@ -9,7 +9,7 @@ import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../comp
 import { actionTypes as viewEventDataEntryActionTypes } from '../../components/Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/viewEventDataEntry.actions';
 import { actionTypes as eventListActionTypes } from '../../components/Pages/MainPage/EventsList';
 
-export const searchPageDesc = createReducerDescription({
+export const activePageDesc = createReducerDescription({
     [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: state => ({
         ...state,
         isDataEntryLoading: true,

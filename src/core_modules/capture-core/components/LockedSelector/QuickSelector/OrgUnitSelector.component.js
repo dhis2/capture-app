@@ -114,7 +114,7 @@ class OrgUnitSelector extends Component<Props, State> {
     }
 
     handleClick(event, selectedOu) {
-        const orgUnitObject = { id: selectedOu.id, name: selectedOu.displayName };
+        const orgUnitObject = { id: selectedOu.id, name: selectedOu.displayName, code: selectedOu.code };
         this.props.handleClickOrgUnit(selectedOu.id, orgUnitObject);
     }
 

@@ -132,7 +132,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
         });
 
 export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
-// $FlowSuppress
+    // $FlowSuppress
     action$.ofType(
         lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID,
         lockedSelectorActionTypes.NEW_EVENT_OPEN,
@@ -140,6 +140,10 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
         lockedSelectorActionTypes.PROGRAM_ID_SET,
         crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
     )
+        .filter(() => {
+            const { app: { page } } = store.getState();
+            return page === 'newEvent';
+        })
         .filter((action) => {
             // cancel if triggered by SELECTIONS_COMPLETENESS_CALCULATED and the underlying action is not SET_ORG_UNIT
             const type = action.type;

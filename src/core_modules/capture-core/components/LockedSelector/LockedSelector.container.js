@@ -23,12 +23,9 @@ const mapStateToProps = (state: ReduxState) => ({
     ready: !state.activePage.isPageLoading,
 });
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+const mapDispatchToProps = (dispatch: ReduxDispatch, { customActionsOnProgramIdReset = [], customActionsOnOrgUnitIdReset = [] }) => ({
     onSetOrgUnit: (id: string, orgUnit: Object) => {
         dispatch(setOrgUnitFromLockedSelector(id, orgUnit));
-    },
-    onResetOrgUnitId: () => {
-        dispatch(resetOrgUnitIdFromLockedSelector());
     },
     onSetProgramId: (id: string) => {
         dispatch(setProgramIdFromLockedSelector(id));
@@ -53,12 +50,19 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
             resetProgramIdBase(),
         ], lockedSelectorBatchActionTypes.AGAIN_START));
     },
+    onResetOrgUnitId: () => {
+        dispatch(batchActions([
+            resetOrgUnitIdFromLockedSelector(),
+            ...customActionsOnOrgUnitIdReset,
+        ], lockedSelectorBatchActionTypes.ORG_UNIT_ID_RESET_BATCH));
+    },
     onResetProgramId: (baseAction: ReduxAction<any, any>) => {
         dispatch(batchActions([
             resetProgramIdFromLockedSelector(),
             resetAllCategoryOptionsFromLockedSelector(),
             baseAction,
-        ], lockedSelectorBatchActionTypes.PROGRAM_AND_CATEGORY_OPTION_RESET));
+            ...customActionsOnProgramIdReset,
+        ], lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH));
     },
 });
 

@@ -286,6 +286,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
+// todo is this being used  (report lgmt)
 export default (optionFn?: ?OptionFn) =>
     (InnerComponent: React.ComponentType<any>) =>
         connect(

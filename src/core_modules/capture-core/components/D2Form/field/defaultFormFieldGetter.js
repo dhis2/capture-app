@@ -31,6 +31,7 @@ type FieldForTypes = {
     [type: $Values<typeof elementTypes>]: (metaData: MetaDataElement, options: Object, context: Object) => any,
 }
 
+// todo report (lgmt)
 const fieldForTypes: FieldForTypes = {
     [elementTypes.EMAIL]: getTextFieldConfig,
     [elementTypes.TEXT]: getTextFieldConfig,
