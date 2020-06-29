@@ -58,7 +58,7 @@ const Index = ({
     programs,
     forms,
     handleOnSearch,
-    addFormId,
+    addFormIdToReduxStore,
 }: Props) => {
     const [selectedOption, choseSelected] = useState(preselectedProgram);
 
@@ -68,7 +68,7 @@ const Index = ({
         selectedOption.value &&
         programs[selectedOption.value].searchGroups
             .forEach(({ formId }) => {
-                addFormId(formId);
+                addFormIdToReduxStore(formId);
             });
     }, [selectedOption.value]);
 
@@ -151,7 +151,7 @@ const Index = ({
                                         <Button
                                             onClick={() =>
                                                 selectedOption.value &&
-                                                handleOnSearch({ selectedProgramId: selectedOption.value, formId, searchForm })}
+                                                handleOnSearch({ selectedProgramId: selectedOption.value, formId })}
                                         >
                                             Find by {name}.
                                         </Button>

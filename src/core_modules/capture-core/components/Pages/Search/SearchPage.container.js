@@ -80,10 +80,10 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): ActionsFromRedux => ({
-    handleOnSearch: ({ selectedProgramId, formId, searchForm }) => {
-        dispatch(actionCreator(searchPageActionTypes.ON_SEARCH)({ selectedProgramId, formId, searchForm }));
+    handleOnSearch: ({ selectedProgramId, formId }) => {
+        dispatch(actionCreator(searchPageActionTypes.ON_SEARCH)({ selectedProgramId, formId }));
     },
-    addFormId: (formId) => { dispatch(addFormData(formId, {})); },
+    addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
 });
 
 
