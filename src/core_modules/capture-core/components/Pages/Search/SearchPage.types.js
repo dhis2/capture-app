@@ -1,24 +1,24 @@
 // @flow
 export type PropsFromRedux = {
-  +preselectedProgram: {
+  +preselectedProgram: {|
     value: ?string,
     label: ?string
-  },
+  |},
   +trackedEntityTypesWithCorrelatedPrograms: {
-    [elementId: string]: {
+    [elementId: string]: {|
       +trackedEntityTypeId: string,
       +trackedEntityTypeName: string,
-      +programs: Array<{
+      +programs: Array<{|
         +programName: string,
         +programId: string,
-      }>
-    }
+      |}>
+    |}
   }
 }
 
 export type Props =
   PropsFromRedux & {
-  +classes: {
+  +classes: {|
     +container: string,
     +header: string,
     +paper: string,
@@ -29,4 +29,5 @@ export type Props =
     +searchRowTitle: string,
     +searchRowSelectElement: string,
   },
+  |},
 }
