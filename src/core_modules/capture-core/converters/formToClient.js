@@ -51,6 +51,7 @@ function convertRange(parser: Function, value: RangeValue) {
     };
 }
 
+// todo report (lgmt)
 const valueConvertersForType = {
     [elementTypes.NUMBER]: parseNumber,
     [elementTypes.NUMBER_RANGE]: (value: RangeValue) => convertRange(parseNumber, value),

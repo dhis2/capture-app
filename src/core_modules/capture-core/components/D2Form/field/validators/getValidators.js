@@ -95,6 +95,7 @@ const validatorForNumber = () => ({
     message: errorMessages.NUMBER,
 });
 
+// todo (report lgtm)
 const validatorsForTypes = {
     [elementTypes.NUMBER]: validatorForNumber,
     [elementTypes.INTEGER]: validatorForInteger,

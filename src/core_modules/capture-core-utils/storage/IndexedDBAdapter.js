@@ -557,7 +557,7 @@ class IndexedDBAdapter {
         });
     }
 
-    remove(store, key) {
+    remove(store, keys) {
         return new Promise((resolve, reject) => {
             let tx;
             let catchError;
@@ -579,7 +579,14 @@ class IndexedDBAdapter {
                 };
 
                 const objectStore = tx.objectStore(store);
-                objectStore.delete(key);
+
+                if (Array.isArray(keys)) {
+                    keys.forEach((key) => {
+                        objectStore.delete(key);
+                    });
+                } else {
+                    objectStore.delete(keys);
+                }
             } catch (error) {
                 if (tx) {
                     abortTx(error);

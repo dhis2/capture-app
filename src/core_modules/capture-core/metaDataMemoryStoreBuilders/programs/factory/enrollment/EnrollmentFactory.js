@@ -237,7 +237,6 @@ class EnrollmentFactory {
                                 totalPages: true,
                             },
                         );
-                    // trackedEntityInstances/count.json?ou=DiszpKrYNg8&ouMode=ACCESSIBLE&trackedEntityType=nEenWmSyUEp&filter=w75KJ2mc4zz:LIKE:kjell&filter=zDhUuAYrxNC:LIKE:haugen&pageSize=1&page=1&totalPages=true
                 };
             }));
         return inputSearchGroups;

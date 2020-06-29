@@ -185,7 +185,7 @@ import {
 import { saveAssigneeEpic } from 'capture-core/components/Pages/ViewEvent/RightColumn/AssigneeSection';
 
 import { loadCoreEpic } from 'capture-core/init';
-import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../init/entry.epics';
+import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../entry';
 
 import getDataEntryEpics from './getDataEntryEpics';
 
