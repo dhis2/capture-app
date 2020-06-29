@@ -10,6 +10,7 @@ import elementTypeKeys from '../metaData/DataElement/elementTypes';
 const GET_SUBVALUE_ERROR = 'Could not get subvalue';
 
 const subValueGetterByElementType = {
+    // todo (report lgmt)
     [elementTypeKeys.FILE_RESOURCE]: (value: any, eventId: string, metaElementId: string) => {
         const baseUrl = config.baseUrl;
         return getApi().get(`fileResources/${value}`)

@@ -5,10 +5,21 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
-"PO-Revision-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
+"PO-Revision-Date: 2020-06-23T10:34:34.303Z\n"
 
-msgid "Please provide a valid date"
+msgid "Choose one or more dates..."
+msgstr ""
+
+msgid "Choose a date..."
+msgstr ""
+
+msgid "Today"
+msgstr ""
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
 msgstr ""
 
 msgid "Columns to show in table"
@@ -39,6 +50,9 @@ msgid "Please provide zero or a positive integer"
 msgstr ""
 
 msgid "Please provide a negative integer"
+msgstr ""
+
+msgid "Please provide a valid date"
 msgstr ""
 
 msgid "A date in the future is not allowed"
@@ -197,9 +211,6 @@ msgstr ""
 msgid "To"
 msgstr ""
 
-msgid "Today"
-msgstr ""
-
 msgid "This week"
 msgstr ""
 
@@ -276,9 +287,6 @@ msgid "No results"
 msgstr ""
 
 msgid "suggestions could not be retrieved"
-msgstr ""
-
-msgid "search for username"
 msgstr ""
 
 msgid "No items to display"
@@ -780,17 +788,6 @@ msgid ""
 "Currently, the Capture App only supports running one version concurrently "
 "(in the same domain). Please refresh this page if you would like to use "
 "this version again, but be aware that this will close other versions."
-msgstr ""
-
-msgid "Choose one or more dates..."
-msgstr ""
-
-msgid "Choose a date..."
-msgstr ""
-
-msgid ""
-"A possible reason for this is that the browser or mode (e.g. privacy mode) "
-"is not supported. See log for details."
 msgstr ""
 
 msgid "Compatibility mode"

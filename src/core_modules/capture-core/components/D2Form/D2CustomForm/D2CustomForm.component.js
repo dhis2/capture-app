@@ -4,7 +4,7 @@ import log from 'loglevel';
 import { walk, kinds } from 'react-transform-tree';
 import { errorCreator } from 'capture-core-utils';
 import MetadataCustomForm from '../../../metaData/RenderFoundation/CustomForm';
-import type { FieldConfig } from '../../../__TEMP__/FormBuilderExternalState.component';
+import type { FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
 
 type Props = {
     fields: Array<FieldConfig>,

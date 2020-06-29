@@ -138,10 +138,6 @@ export default class RenderFoundation {
         return elements[id];
     }
 
-    addProgramRule(programRule: ProgramRule) {
-        this.programRules.push(programRule);
-    }
-
     addProgramRules(programRules: Array<ProgramRule>) {
         this.programRules = [...this.programRules, ...programRules];
     }
