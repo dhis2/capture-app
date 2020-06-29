@@ -1,17 +1,16 @@
 // @flow
-/* eslint-disable import/extensions */
 import React from 'react';
 import { render } from 'react-dom';
 import log from 'loglevel';
+// eslint-disable-next-line import/extensions
 import 'typeface-roboto';
 import i18n from '@dhis2/d2-i18n';
 import { DataProvider } from '@dhis2/app-runtime';
 import JssProvider from 'react-jss/lib/JssProvider';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { create } from 'jss';
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
-
 import type { HashHistory } from 'history/createHashHistory';
-
 import './addRxjsOperators';
 import { AppLoader } from '../components/AppLoader';
 import { App } from '../components/App';
