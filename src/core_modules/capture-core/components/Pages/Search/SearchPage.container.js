@@ -10,13 +10,17 @@ import { actionCreator } from '../../../actions/actions.utils';
 
 
 export const searchPageActionTypes = {
-    ON_SEARCH: 'OnSearch',
+    VIA_UNIQUE_ID_SEARCH: 'ViaUniqueIdSearch',
+    VIA_ATTRIBUTES_SEARCH: 'ViaAttributesSearch',
+    SEARCH_RESULTS_LOADING: 'SearchResultsLoading',
     SEARCH_RESULTS_EMPTY: 'SearchResultsEmpty',
+    SEARCH_RESULTS_SUCCESS: 'SearchResultsSuccess',
+    SEARCH_RESULTS_ERROR: 'SearchResultsError',
     MODAL_CLOSE: 'CloseModal',
 };
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
-    const { currentSelections, activePage, searchPage: { searchStatus } } = state;
+    const { currentSelections, activePage, searchPage: { searchStatus, searchResults, errorMessage } } = state;
 
     const trackedEntityTypesWithCorrelatedPrograms =
       [...programCollection.values()]
@@ -79,12 +83,17 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         error: activePage.selectionsError && activePage.selectionsError.error,
         ready: !activePage.isLoading,
         searchStatus,
+        searchResults,
+        searchResultsErrorMessage: errorMessage,
     };
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): DispatcherFromRedux => ({
-    handleOnSearch: ({ selectedProgramId, formId }) => {
-        dispatch(actionCreator(searchPageActionTypes.ON_SEARCH)({ selectedProgramId, formId }));
+    searchViaUniqueId: ({ selectedProgramId, formId }) => {
+        dispatch(actionCreator(searchPageActionTypes.VIA_UNIQUE_ID_SEARCH)({ selectedProgramId, formId }));
+    },
+    searchViaAttributes: ({ selectedProgramId, formId }) => {
+        dispatch(actionCreator(searchPageActionTypes.VIA_ATTRIBUTES_SEARCH)({ selectedProgramId, formId }));
     },
     addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
     closeModal: () => { dispatch(actionCreator(searchPageActionTypes.MODAL_CLOSE)()); },

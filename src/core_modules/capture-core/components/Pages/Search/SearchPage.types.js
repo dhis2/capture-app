@@ -1,7 +1,7 @@
 // @flow
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 
-export type PropsFromRedux = {
+export type PropsFromRedux = {|
   +preselectedProgram: {|
     value: ?string,
     label: ?string
@@ -28,10 +28,16 @@ export type PropsFromRedux = {
       loadNr: number
     }
   },
-}
+  error: boolean,
+  ready: boolean,
+  searchResults: Object,
+  searchStatus: string,
+  searchResultsErrorMessage: string,
+|}
 
 export type DispatcherFromRedux = {|
-  handleOnSearch: ({| selectedProgramId: string, formId: string |}) => void,
+  searchViaUniqueId: ({| selectedProgramId: string, formId: string |}) => void,
+  searchViaAttributes: ({| selectedProgramId: string, formId: string |}) => void,
   addFormIdToReduxStore: (formId: string) => void,
   closeModal: () => void
 |}

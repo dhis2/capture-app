@@ -84,9 +84,7 @@ const searchTei = (state: ReduxState, searchId: string, formId: string, searchGr
             searchId,
         ),
     )
-        .catch((error) => {
-            return searchTeiFailed(formId, searchGroupId, searchId);
-        });
+        .catch(() => searchTeiFailed(formId, searchGroupId, searchId));
 };
 
 export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxStore) =>

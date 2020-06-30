@@ -16,7 +16,6 @@ import {
 import { LockedSelector } from '../../LockedSelector';
 import type { Props } from './SearchPage.types';
 import { Section, SectionHeaderSimple } from '../../Section';
-import Button from '../../Buttons/Button.component';
 import Form from '../../D2Form/D2Form.component';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 
@@ -68,7 +67,10 @@ const Index = ({
     programs,
     forms,
     searchStatus,
-    handleOnSearch,
+    searchResults,
+    searchResultsErrorMessage,
+    searchViaUniqueId,
+    searchViaAttributes,
     addFormIdToReduxStore,
     closeModal,
 }: Props) => {
@@ -160,18 +162,61 @@ const Index = ({
                                         </div>
                                     </div>
                                     <div className={classes.searchButtonContainer}>
-                                        <Button
+                                        <ButtonUi
+                                            disabled={searchStatus === searchPageStatus.LOADING}
                                             onClick={() =>
                                                 selectedOption.value &&
-                                                handleOnSearch({ selectedProgramId: selectedOption.value, formId })}
+                                                searchViaUniqueId({ selectedProgramId: selectedOption.value, formId })}
                                         >
-                                            Find by {name}.
-                                        </Button>
+                                            Find by {name}
+                                        </ButtonUi>
                                     </div>
                                 </Section>
                             );
                         })
                 }
+
+                {
+                    selectedOption.value && programs[selectedOption.value].searchGroups
+                        .filter(searchGroup => !searchGroup.unique)
+                        .map(({ searchForm, formId }) => {
+                            const name = searchForm.getElements()[0].formName;
+                            return (
+                                <Section
+                                    className={classes.searchDomainSelectorSection}
+                                    header={
+                                        <SectionHeaderSimple
+                                            containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
+                                            title={i18n.t('Search {{name}}', { name })}
+                                        />
+                                    }
+                                >
+                                    <div className={classes.searchRow}>
+                                        <div className={classes.searchRowSelectElement}>
+                                            {
+                                                forms[formId] &&
+                                                <Form
+                                                    formFoundation={searchForm}
+                                                    id={formId}
+                                                />
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className={classes.searchButtonContainer}>
+                                        <ButtonUi
+                                            disabled={searchStatus === searchPageStatus.LOADING}
+                                            onClick={() =>
+                                                selectedOption.value &&
+                                                searchViaAttributes({ selectedProgramId: selectedOption.value, formId })}
+                                        >
+                                            Search by {name}
+                                        </ButtonUi>
+                                    </div>
+                                </Section>
+                            );
+                        })
+                }
+
                 {
                     searchStatus === searchPageStatus.NO_RESULTS &&
                     <Modal position="middle">
@@ -180,6 +225,7 @@ const Index = ({
                         <ModalActions>
                             <ButtonStrip end>
                                 <ButtonUi
+                                    disabled={searchStatus === searchPageStatus.LOADING}
                                     onClick={closeModal}
                                     primary
                                     type="button"
@@ -188,6 +234,19 @@ const Index = ({
                         </ModalActions>
                     </Modal>
                 }
+
+                {
+                    searchStatus === searchPageStatus.SHOW_RESULTS && <h1> there are results!
+                        {searchResults && <div>{searchResults.length}</div>}
+                    </h1>
+
+                }
+
+                {
+                    searchStatus === searchPageStatus.ERROR &&
+                    <h1 style={{ color: 'red' }}>{searchResultsErrorMessage}</h1>
+                }
+
             </Paper>
         </div>
     </>);

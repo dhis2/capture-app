@@ -1,5 +1,6 @@
 // @flow
-import { flatMap, map } from 'rxjs/operators';
+import { catchError, flatMap, map, startWith } from 'rxjs/operators';
+import { of } from 'rxjs/observable/of';
 import { from } from 'rxjs/observable/from';
 import { searchPageActionTypes } from './SearchPage.container';
 import { getTrackedEntityInstances } from '../../../trackedEntityInstances/trackedEntityInstanceRequests';
@@ -9,7 +10,7 @@ import {
 import { actionCreator } from '../../../actions/actions.utils';
 
 export const trackedEntitySearchUsingUniqueIdentifierEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.ofType(searchPageActionTypes.ON_SEARCH).pipe(
+    action$.ofType(searchPageActionTypes.VIA_UNIQUE_ID_SEARCH).pipe(
         flatMap(({ payload: { formId, selectedProgramId } }) => {
             const { formsValues } = store.getState();
             const searchTerm = formsValues[formId];
@@ -37,6 +38,40 @@ export const trackedEntitySearchUsingUniqueIdentifierEpic = (action$: InputObser
                     // trigger action that will display modal to inform user that results are empty.
                     return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
                 }),
+                startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
             );
         }),
+        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
+    );
+
+export const trackedEntitySearchUsingAttributesEpic = (action$: InputObservable, store: ReduxStore) =>
+    action$.ofType(searchPageActionTypes.VIA_ATTRIBUTES_SEARCH).pipe(
+        flatMap(({ payload: { formId, selectedProgramId } }) => {
+            const { formsValues } = store.getState();
+            const formValues = formsValues[formId];
+            const searchQueryFilters = Object.keys(formValues)
+                .filter(fieldId => formValues[fieldId])
+                .map(fieldId => `${fieldId}:like:${formValues[fieldId]}`);
+
+            const queryArgs = {
+                filter: searchQueryFilters,
+                program: selectedProgramId,
+                pageNumber: 1,
+                ouMode: 'ACCESSIBLE',
+            };
+            const attributes = getTrackerProgram(selectedProgramId).attributes;
+
+            return from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
+                map(({ trackedEntityInstanceContainers }) => {
+                    const searchResults = trackedEntityInstanceContainers;
+                    if (searchResults.length > 0) {
+                        return actionCreator(searchPageActionTypes.SEARCH_RESULTS_SUCCESS)({ searchResults });
+                    }
+                    // trigger action that will display modal to inform user that results are empty.
+                    return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
+                }),
+                startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
+            );
+        }),
+        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
     );
