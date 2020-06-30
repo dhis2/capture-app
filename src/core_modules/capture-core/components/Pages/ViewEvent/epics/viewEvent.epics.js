@@ -19,7 +19,7 @@ import {
     updateWorkingListPendingOnBackToMainPage,
     openViewEventPageFailed,
     initializeWorkingListsOnBackToMainPage,
-} from '../viewEvent.actions';
+} from '../ViewEventComponent/viewEvent.actions';
 import { actionTypes as eventListActionTypes } from '../../MainPage/EventsList/eventsList.actions';
 import { getEvent } from '../../../../events/eventRequests';
 import {

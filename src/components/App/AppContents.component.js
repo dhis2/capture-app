@@ -4,13 +4,14 @@ import { Route, Switch } from 'react-router'; //eslint-disable-line
 // import HeaderBar from '@dhis2/d2-ui-header-bar';
 import { HeaderBar } from '@dhis2/ui-widgets';
 import { withStyles } from '@material-ui/core/styles';
-
 import NetworkStatusBadge from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.component';
 
 import { NewEventPage } from 'capture-core/components/Pages/NewEvent';
+import { ViewEventPage } from 'capture-core/components/Pages/ViewEvent';
 import { NewEnrollmentPage } from 'capture-core/components/Pages/NewEnrollment';
-import MainPageEntry from 'capture-core/components/Pages/MainPage/MainPageEntry/MainPageEntry.container';
-import ViewEventEntry from 'capture-core/components/Pages/ViewEvent/ViewEventEntry/ViewEventEntry.container';
+import { SearchPage } from '../../core_modules/capture-core/components/Pages/Search';
+import { MainPage } from 'capture-core/components/Pages/MainPage';
+
 
 const styles = theme => ({
     app: {
@@ -58,10 +59,11 @@ class AppContents extends Component<Props> {
                 >
                     <Switch>
                         <Route path="/newEvent" component={NewEventPage} />
-                        <Route path="/viewEvent" component={ViewEventEntry} />
+                        <Route path="/viewEvent" component={ViewEventPage} />
                         <Route path="/newEnrollment" component={NewEnrollmentPage} />
-                        <Route path="/:keys" component={MainPageEntry} />
-                        <Route path="/" component={MainPageEntry} />
+                        <Route path="/search" component={SearchPage} />
+                        <Route path="/:keys" component={MainPage} />
+                        <Route path="/" component={MainPage} />
                     </Switch>
                 </div>
             </div>

@@ -1,16 +1,12 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import type { Updaters } from '../../trackerRedux/trackerReducer';
-import { actionTypes as mainSelectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
 import {
-    dataEntryUrlActionTypes as newEventDataEntryUrlActionTypes,
     dataEntryActionTypes as newEventDataEntryActionTypes,
-    selectorActionTypes as newEventPageSelectorActionTypes,
     selectionsIncompleteActionTypes as newEventPageSelectionsIncompleteActionTypes,
 } from '../../components/Pages/NewEvent';
-import { actionTypes as tempSelectorActionTypes } from '../../components/Pages/MainPage/tempSelector.actions';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
-import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/viewEvent.actions';
+import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
@@ -18,33 +14,20 @@ import { actionTypes as eventListActionTypes } from '../../components/Pages/Main
 import { actionTypes as connectivityActionTypes } from '../../components/Connectivity/connectivity.actions';
 import {
     actionTypes as setCurrentSelectionsActionTypes,
-} from '../../components/QuickSelector/actions/QuickSelector.actions';
-import {
-    actionTypes as mainPageSelectorActionTypes,
-} from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
-import {
-    actionTypes as editEventPageSelectorActionTypes,
-} from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
-import {
-    actionTypes as viewEventPageSelectorActionTypes,
-} from '../../components/Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
+} from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
 import {
     urlActionTypes as newEnrollmentUrlActionTypes,
 } from '../../components/Pages/NewEnrollment';
+import {
+    lockedSelectorActionTypes,
+} from '../../components/LockedSelector';
+import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewEventPage.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
 
 export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescription({
     ...appUpdaters,
-    [mainSelectionsActionTypes.UPDATE_MAIN_SELECTIONS_FROM_URL]: (state, action) => {
-        const newState = { ...state, page: action.payload.nextPage };
-        return newState;
-    },
-    [newEventDataEntryUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: (state, action) => {
-        const newState = { ...state, page: action.payload.nextPage };
-        return newState;
-    },
     [editEventActionTypes.EDIT_EVENT_FROM_URL]: (state, action) => {
         const newState = { ...state, page: action.payload.page };
         return newState;
@@ -57,30 +40,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         ...state,
         page: action.payload.nextPage,
     }),
-    [tempSelectorActionTypes.OPEN_NEW_EVENT_PAGE]: (state) => {
-        const newState = { ...state };
-        newState.page = 'newEvent';
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [mainPageSelectorActionTypes.OPEN_NEW_EVENT]: (state) => {
-        const newState = { ...state };
-        newState.page = 'newEvent';
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [editEventPageSelectorActionTypes.OPEN_NEW_EVENT]: (state) => {
-        const newState = { ...state };
-        newState.page = 'newEvent';
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [viewEventPageSelectorActionTypes.OPEN_NEW_EVENT]: (state) => {
-        const newState = { ...state };
-        newState.page = 'newEvent';
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
     [newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE]: (state) => {
         const newState = { ...state };
         newState.page = null;
@@ -171,102 +130,42 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         };
         return newState;
     },
-    [mainPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
-        const newState = { ...state };
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [mainPageSelectorActionTypes.SET_ORG_UNIT]: (state) => {
-        const newState = { ...state };
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [mainPageSelectorActionTypes.SET_PROGRAM_ID]: (state) => {
-        const newState = { ...state };
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [mainPageSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
-        const newState = { ...state };
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [editEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
-        const newState = {
-            ...state,
-            page: null,
-            locationSwitchInProgress: true,
-        };
-        return newState;
-    },
-    [viewEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
-        const newState = {
-            ...state,
-            page: null,
-            locationSwitchInProgress: true,
-        };
-        return newState;
-    },
-    [editEventPageSelectorActionTypes.SET_ORG_UNIT]: (state) => {
-        const newState = { ...state };
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [editEventPageSelectorActionTypes.SET_PROGRAM_ID]: (state) => {
-        const newState = { ...state };
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [editEventPageSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
-        const newState = {
-            ...state,
-            page: null,
-            locationSwitchInProgress: true,
-        };
-        return newState;
-    },
-    [editEventPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state) => {
-        const newState = {
-            ...state,
-            page: null,
-            locationSwitchInProgress: true,
-        };
-        return newState;
-    },
-    [viewEventPageSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
-        const newState = {
-            ...state,
-            page: null,
-            locationSwitchInProgress: true,
-        };
-        return newState;
-    },
-    [viewEventPageSelectorActionTypes.RESET_CATEGORY_OPTION]: (state) => {
-        const newState = {
-            ...state,
-            page: null,
-            locationSwitchInProgress: true,
-        };
-        return newState;
-    },
-    [newEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: (state) => {
-        const newState = { ...state };
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [newEventPageSelectorActionTypes.SET_ORG_UNIT]: (state) => {
-        const newState = { ...state };
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [newEventPageSelectorActionTypes.SET_PROGRAM_ID]: (state) => {
-        const newState = { ...state };
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [newEventPageSelectorActionTypes.RESET_PROGRAM_ID]: (state) => {
-        const newState = { ...state };
-        newState.locationSwitchInProgress = true;
-        return newState;
-    },
+
+    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: (state, action) => ({
+        ...state,
+        page: action.payload.nextPage,
+    }),
+    [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: state => ({
+        ...state,
+        locationSwitchInProgress: true,
+    }),
+    [lockedSelectorActionTypes.PROGRAM_ID_SET]: state => ({
+        ...state,
+        locationSwitchInProgress: true,
+    }),
+    [lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE]: (state, action) => ({
+        ...state,
+        page: action.payload.nextPage,
+    }),
+    [lockedSelectorActionTypes.NEW_EVENT_OPEN]: state => ({
+        ...state,
+        page: 'newEvent',
+        locationSwitchInProgress: true,
+    }),
+    [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({
+        ...state,
+        locationSwitchInProgress: true,
+    }),
+    [lockedSelectorActionTypes.PROGRAM_ID_RESET]: state => ({
+        ...state,
+        locationSwitchInProgress: true,
+    }),
+    [viewEventPageActionTypes.ORG_UNIT_ID_CUSTOM_RESET]: state => ({
+        ...state,
+        page: null,
+    }),
+    [viewEventPageActionTypes.PROGRAM_ID_CUSTOM_RESET]: state => ({
+        ...state,
+        page: null,
+    }),
 }, 'app');

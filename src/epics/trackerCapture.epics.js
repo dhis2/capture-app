@@ -13,8 +13,6 @@ import {
     saveNewEventLocationChangeEpic,
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,
-    newEventPageSelectorUpdateURLEpic,
-    newEventPageSelectorResetURLEpic,
     addNoteForNewSingleEventEpic,
     openRelationshipForNewSingleEventEpic,
     addRelationshipForNewSingleEventEpic,
@@ -22,18 +20,6 @@ import {
     saveNewEventRelationshipFinishedEpic,
     teiForNewEventRelationshipSavedEpic,
 } from 'capture-core/components/Pages/NewEvent';
-import {
-    mainSelectionsCompletedEpic,
-    orgUnitDataRetrivedEpic,
-    mainSelectionsFromUrlGetOrgUnitDataEpic,
-    mainSelectionsFromUrlEmptyOrgUnitEpic,
-    mainSelectionsFromUrlValidationEpic,
-} from 'capture-core/components/Pages/MainPage/mainSelections.epics';
-import {
-    selectionsFromUrlGetOrgUnitDataForNewEventEpic,
-    selectionsFromUrlEmptyOrgUnitForNewEventEpic,
-    selectionsFromUrlValidationForNewEventEpic,
-} from 'capture-core/components/Pages/NewEvent/epics/newEventSelections.epics';
 import {
     openNewEventPageLocationChangeEpic,
 } from 'capture-core/components/Pages/NewEvent/epics/newEvent.epics';
@@ -53,7 +39,7 @@ import {
     getOrgUnitOnUrlUpdateEpic,
     openEditPageLocationChangeEpic,
     getEventOpeningFromEventListEpic,
-} from 'capture-core/components/Pages/EditEvent/epics/editEvent.epics';
+} from 'capture-core/components/Pages/EditEvent/editEvent.epics';
 import {
     openEditEventInDataEntryEpic,
     runRulesOnUpdateDataEntryFieldForEditSingleEventEpic,
@@ -79,10 +65,6 @@ import {
 } from 'capture-core/components/Pages/ViewEvent/epics/viewEvent.epics';
 
 import {
-    viewEventPageSelectorUpdateURLEpic,
-} from 'capture-core/components/Pages/ViewEvent/ViewEventSelector/ViewEventSelector.epics';
-
-import {
     saveEditEventEpic,
     saveEditEventLocationChangeEpic,
 } from 'capture-core/components/Pages/EditEvent/DataEntry/epics/saveEditSingleEvent.epics';
@@ -104,11 +86,11 @@ import {
     setOrgUnit,
     setProgram,
     goBackToListContext,
-} from 'capture-core/components/QuickSelector/epics/setSelection.epics';
+} from 'capture-core/components/LockedSelector/QuickSelector/epics/setSelection.epics';
 import {
     searchRegisteringUnitListEpic,
     showRegisteringUnitListIndicatorEpic,
-} from 'capture-core/components/QuickSelector';
+} from 'capture-core/components/LockedSelector/QuickSelector';
 import {
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
 } from 'capture-core/components/Pages/epics/resetProgramAfterSettingOrgUnitIfApplicable.epic';
@@ -118,12 +100,6 @@ import {
 import {
     calculateSelectionsCompletenessEpic,
 } from 'capture-core/components/Pages/epics/calculateSelectionsCompleteness.epic';
-import {
-    mainPageSelectorUpdateURLEpic,
-} from 'capture-core/components/Pages/MainPage/MainPageSelector/MainPageSelector.epics';
-import {
-    editEventPageSelectorUpdateURLEpic,
-} from 'capture-core/components/Pages/EditEvent/EditEventSelector/EditEventSelector.epics';
 import {
     includeFiltersWithValueAfterColumnSortingEpic,
 } from 'capture-core/components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.epics';
@@ -189,6 +165,14 @@ import { triggerLoadCoreEpic, loadAppEpic, loadCoreFailedEpic } from '../entry';
 
 import getDataEntryEpics from './getDataEntryEpics';
 
+import {
+    updateUrlViaLockedSelectorEpic,
+    validateSelectionsBasedOnUrlUpdateEpic,
+    getOrgUnitDataBasedOnUrlUpdateEpic,
+    setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
+    startAgainEpic,
+} from '../core_modules/capture-core/components/LockedSelector';
+
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
     resetCategoriesAfterSettingOrgUnitIfApplicableEpic,
@@ -197,8 +181,6 @@ export default combineEpics(
     loadCoreEpic,
     loadAppEpic,
     loadCoreFailedEpic,
-    mainSelectionsCompletedEpic,
-    orgUnitDataRetrivedEpic,
     initEventListEpic,
     updateEventListEpic,
     retrieveTemplatesEpic,
@@ -206,12 +188,6 @@ export default combineEpics(
     addTemplateEpic,
     deleteTemplateEpic,
     requestDeleteEventEpic,
-    mainSelectionsFromUrlGetOrgUnitDataEpic,
-    mainSelectionsFromUrlEmptyOrgUnitEpic,
-    mainSelectionsFromUrlValidationEpic,
-    selectionsFromUrlGetOrgUnitDataForNewEventEpic,
-    selectionsFromUrlEmptyOrgUnitForNewEventEpic,
-    selectionsFromUrlValidationForNewEventEpic,
     openNewEventPageLocationChangeEpic,
     openNewEventInDataEntryEpic,
     resetDataEntryForNewEventEpic,
@@ -242,10 +218,6 @@ export default combineEpics(
     setOrgUnit,
     setProgram,
     goBackToListContext,
-    mainPageSelectorUpdateURLEpic,
-    editEventPageSelectorUpdateURLEpic,
-    newEventPageSelectorUpdateURLEpic,
-    newEventPageSelectorResetURLEpic,
     includeFiltersWithValueAfterColumnSortingEpic,
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,
@@ -276,7 +248,6 @@ export default combineEpics(
     getViewEventFromUrlEpic,
     getViewEventOrgUnitOnUrlUpdateEpic,
     openViewPageLocationChangeEpic,
-    viewEventPageSelectorUpdateURLEpic,
     backToMainPageEpic,
     backToMainPageLocationChangeEpic,
     openAddRelationshipForViewEventEpic,
@@ -299,5 +270,10 @@ export default combineEpics(
     loadSearchGroupDuplicatesForReviewEpic,
     teiForNewEventRelationshipSavedEpic,
     saveAssigneeEpic,
+    updateUrlViaLockedSelectorEpic,
+    validateSelectionsBasedOnUrlUpdateEpic,
+    getOrgUnitDataBasedOnUrlUpdateEpic,
+    setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
+    startAgainEpic,
     ...getDataEntryEpics(),
 );

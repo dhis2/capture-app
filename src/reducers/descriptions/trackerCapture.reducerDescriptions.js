@@ -72,8 +72,10 @@ import {
 import { appReducerDesc } from './app.reducerDescription';
 import { currentSelectionsReducerDesc } from './currentSelections.reducerDescription';
 import { feedbackDesc } from './feedback.reducerDescription';
+import { activePageDesc } from "../../core_modules/capture-core/reducers/descriptions/activePage.reducerDescription";
 
 export default [
+    activePageDesc,
     appReducerDesc,
     currentSelectionsReducerDesc,
     formsValuesDesc,
