@@ -35,7 +35,6 @@ export const trackedEntitySearchUsingUniqueIdentifierEpic = (action$: InputObser
                         window.location.href = `${oldTrackerCaptureAppUrl}${urlParameters}`;
                         return {};
                     }
-                    // trigger action that will display modal to inform user that results are empty.
                     return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
                 }),
                 startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
@@ -67,7 +66,6 @@ export const trackedEntitySearchUsingAttributesEpic = (action$: InputObservable,
                     if (searchResults.length > 0) {
                         return actionCreator(searchPageActionTypes.SEARCH_RESULTS_SUCCESS)({ searchResults });
                     }
-                    // trigger action that will display modal to inform user that results are empty.
                     return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
                 }),
                 startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
