@@ -86,9 +86,8 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.ofType(viewEventActionTypes.EVENT_FROM_URL_RETRIEVED)
         .switchMap((action) => {
             const eventContainer = action.payload.eventContainer;
-            return getApi().get(`organisationUnits/${eventContainer.event.orgUnitId}`)
-                .get()
-                // $FlowSuppress
+            return getApi()
+                .get(`organisationUnits/${eventContainer.event.orgUnitId}`)
                 .then(orgUnit => orgUnitRetrievedOnUrlUpdate(orgUnit, eventContainer))
                 .catch((error) => {
                     const { message, details } = getErrorMessageAndDetails(error);
