@@ -49,7 +49,7 @@ export const trackedEntitySearchUsingAttributesEpic = (action$: InputObservable,
             const { formsValues } = store.getState();
             const formValues = formsValues[formId];
             const searchQueryFilters = Object.keys(formValues)
-                .filter(fieldId => formValues[fieldId])
+                .filter(fieldId => formValues[fieldId].replace(/\s/g, '').length)
                 .map(fieldId => `${fieldId}:like:${formValues[fieldId]}`);
 
             const queryArgs = {
