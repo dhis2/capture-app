@@ -82,7 +82,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn extract-pot && git add -A ."
+      "pre-commit": "yarn extract-pot && git add ./i18n/"
     }
   },
   "devDependencies": {
