@@ -26,27 +26,16 @@ You can find a tutorial on how to install `git` on your machine [here](https://w
 
 You can install `yarn` on your machine [here](https://classic.yarnpkg.com/en/docs/install/).
 
+#### Have a backend instance running
+
+A quick and esy way to spin up a DHIS2 backend instance is by using Docker.
+[`d2 cluster`](https://cli.dhis2.nu/#/getting-started?id=install-the-cli) helps you spin up a DHIS2 instance using docker containers. 
+
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running.
 
-#### 1. Spin up a docker container with a DHIS2 instance 
-
- [`d2 cluster`](https://cli.dhis2.nu/#/getting-started?id=install-the-cli) helps you spin up a DHIS2 instance using docker containers. 
-
-To install the `d2` CLI run: 
-```
-yarn global add @dhis2/cli
-```
-
-To spin up a docker container with development version run: 
-```
-d2 cluster up 2.32 --channel dev --seed
-```
-
-Now you will be having a development instance running in your machine. Visit `http://localhost:8080/` to verify you followed the steps correctly. This instance will be serving our backend API calls while we are developing locally. 
-
-#### 2. Clone the repository
+#### 1. Clone the repository
 
 Clone with SSH
 ```
@@ -58,7 +47,7 @@ Clone with HTTPS
 git clone https://github.com/dhis2/capture-app.git
 ```
 
-#### 3. Install project dependencies
+#### 2. Install project dependencies
 
 To install the dependencies you will have to be at the source folder of the cloned repository. Then run:
 
@@ -66,7 +55,7 @@ To install the dependencies you will have to be at the source folder of the clon
 yarn 
 ```
 
-#### 4. Set up the API base url
+#### 3. Set up the API base url
 
 For the application to fetch data from the backend we need to set up a base url. Make sure in your `.env.development` file the following is included:
 
