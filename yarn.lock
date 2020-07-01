@@ -1301,14 +1301,14 @@
     recompose "^0.26.0"
     rxjs "^5.5.7"
 
-"@dhis2/prop-types@^1.1.1":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@dhis2/prop-types/-/prop-types-1.4.0.tgz#921e733bf55a03617414f60d303fa7eacee3ac52"
-  integrity sha512-vQomZH0sBLNrTVRMlwQ6HM8rn0kFiw6zt/Z8d6flTAuDuZrwD0Wi505dvbqbf7/bHDwpMnp4xz6v6ky1l+jfeg==
+"@dhis2/prop-types@^1.1.1", "@dhis2/prop-types@^1.5.0":
+  version "1.6.4"
+  resolved "https://registry.yarnpkg.com/@dhis2/prop-types/-/prop-types-1.6.4.tgz#ec4d256c9440d4d00071524422a727c61ddaa6f6"
+  integrity sha512-qkVj8OuyjDmSxzYDlCWZllvC9hIbrIImMp79/U5CVsIRbjUF0zA/tfbv4rWnsWALmwEHOQFbzl5GnO5D8RNneA==
   dependencies:
     prop-types "^15"
 
-"@dhis2/ui-core@3.12.0", "@dhis2/ui-core@^3.12.0":
+"@dhis2/ui-core@3.12.0":
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/@dhis2/ui-core/-/ui-core-3.12.0.tgz#6216868b1bd76b816df8c3272c2b9200972f0858"
   integrity sha512-9JYl0TP6Wkb2yD5OkiN4juHYxW37UYZF1egbCAxuUCx7Uox5HqUkzxaKw25bQKN+4684vDnIJgh0Z2qSTszg1g==
@@ -1316,6 +1316,15 @@
     "@dhis2/prop-types" "^1.1.1"
     classnames "^2.2.6"
     styled-jsx "^3.2.2"
+
+"@dhis2/ui-core@^4.1.2":
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/@dhis2/ui-core/-/ui-core-4.1.2.tgz#4ba3194fc5db3db6eea67ccdb1751eb189ca6ca0"
+  integrity sha512-mUWB8qNMa41ZDCkACfWljvGjOrXQxAcw7H0QchIEoixxnBjLZ2aGQbJUEjoeeKCKcrM3SaoC24a+OmoWQhIk4Q==
+  dependencies:
+    "@dhis2/prop-types" "^1.5.0"
+    classnames "^2.2.6"
+    styled-jsx "^3.2.4"
 
 "@dhis2/ui-widgets@^2.0.3":
   version "2.0.3"
