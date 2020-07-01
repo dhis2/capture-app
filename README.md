@@ -10,10 +10,6 @@ These instructions will get you a copy of the project up and running on your loc
 
 What things you need to install and how to install them.
 
-#### Docker 
-
-You can download and install Docker on your machine from [here](https://docs.docker.com/get-docker/).
-
 #### Node 
 
 You can download and install Node on your machine from [here](https://nodejs.org/en/download/).
@@ -26,10 +22,6 @@ You can find a tutorial on how to install `git` on your machine [here](https://w
 
 You can install `yarn` on your machine [here](https://classic.yarnpkg.com/en/docs/install/).
 
-#### Have a backend instance running
-
-A quick and esy way to spin up a DHIS2 backend instance is by using Docker.
-[`d2 cluster`](https://cli.dhis2.nu/#/getting-started?id=install-the-cli) helps you spin up a DHIS2 instance using docker containers. 
 
 ### Installing
 
@@ -60,7 +52,8 @@ yarn
 For the application to fetch data from the backend we need to set up a base url. Make sure in your `.env.development` file the following is included:
 
 ```
-REACT_APP_DHIS2_BASE_URL="http://localhost:8080"
+REACT_APP_DHIS2_BASE_URL="https://debug.dhis2.org/2.34dev/"
+REACT_APP_TRACKER_CAPTURE_APP_PATH="https://debug.dhis2.org/2.34dev/dhis-web-tracker-capture"
 ```
 
 #### 4. Run the application
