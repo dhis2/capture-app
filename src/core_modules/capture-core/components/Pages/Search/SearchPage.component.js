@@ -19,6 +19,16 @@ const getStyles = (theme: Theme) => ({
         marginBottom: theme.typography.pxToRem(10),
         padding: theme.typography.pxToRem(10),
     },
+    emptySelectionPaperContent: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingTop: 50,
+        paddingBottom: 50,
+    },
+    emptySelectionPaperContainer: {
+        padding: 24,
+    },
     customEmpty: {
         textAlign: 'center',
         padding: '8px 24px',
@@ -119,6 +129,7 @@ const Index = ({
                     </div>
                 </Section>
 
+
                 {
                     selectedOption.value && programs[selectedOption.value].searchGroups
                         .filter(searchGroup => searchGroup.unique)
@@ -155,6 +166,15 @@ const Index = ({
                         })
                 }
             </Paper>
+            {
+                !selectedOption.value &&
+                    <Paper elevation={0}>
+                        <div className={classes.emptySelectionPaperContent}>
+                            {i18n.t('Make a selection to start searching')}
+                        </div>
+                    </Paper>
+            }
+
         </div>
     </>);
 };

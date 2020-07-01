@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
-"PO-Revision-Date: 2020-06-23T10:34:34.303Z\n"
+"POT-Creation-Date: 2020-07-01T09:08:50.063Z\n"
+"PO-Revision-Date: 2020-07-01T09:08:50.063Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -290,15 +290,6 @@ msgid "suggestions could not be retrieved"
 msgstr ""
 
 msgid "No items to display"
-msgstr ""
-
-msgid "Could not get organisation unit"
-msgstr ""
-
-msgid "Program doesn't exist"
-msgstr ""
-
-msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "Could not get organisation unit"
@@ -680,6 +671,9 @@ msgid "Register"
 msgstr ""
 
 msgid "Search {{name}}"
+msgstr ""
+
+msgid "Make a selection to start searching"
 msgstr ""
 
 msgid "You dont have access to edit this event"
