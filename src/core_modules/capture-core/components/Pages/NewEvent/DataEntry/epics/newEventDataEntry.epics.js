@@ -205,10 +205,10 @@ const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemI
     } else {
         // $FlowSuppress
         const foundation: RenderFoundation = metadataContainer.stage.stageForm;
-
+        const programStageId = foundation.id
         const currentEventValues = getCurrentClientValues(state, foundation, formId, fieldData);
         const currentEventMainData = getCurrentClientMainData(state, itemId, dataEntryId, {}, foundation);
-        const currentEventData = { ...currentEventValues, ...currentEventMainData };
+        const currentEventData = { ...currentEventValues, ...currentEventMainData, programStageId };
 
         rulesActions = getRulesActionsForEvent(
             metadataContainer.program,
