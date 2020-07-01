@@ -73,7 +73,10 @@
     "localize": "yarn extract-pot && d2-i18n-generate -n default -p ./i18n/ -o ./src/locales/",
     "prestart": "node verifyCacheVersion.js && yarn localize && d2-manifest package.json ./public/manifest.webapp",
     "docs": "NODE_ENV=development jsdoc -c jsdoc-conf.json",
-    "linter:check": "eslint -c .eslintrc src/**"
+    "linter:check": "eslint -c .eslintrc src/**",
+    "cypress:start": "BROWSER=none REACT_APP_DHIS2_BASE_URL=https://play.dhis2.org/dev yarn start",
+    "cy:open": "d2-utils-cypress open --appStart 'yarn cypress:start'",
+    "cy:run": "d2-utils-cypress run --appStart 'yarn cypress:start'"
   },
   "husky": {
     "hooks": {

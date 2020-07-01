@@ -37,3 +37,5 @@ src/locales/
 public/manifest.webapp
 
 .idea
+
+cypress.env.json
