@@ -52,7 +52,6 @@
             2,
             {
                 "order": [
-                    "static-variables",
                     "static-methods",
                     "type-annotations",
                     "lifecycle",
