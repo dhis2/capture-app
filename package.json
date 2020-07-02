@@ -5,8 +5,8 @@
   "cacheVersion": "2",
   "private": false,
   "dependencies": {
-    "@babel/preset-flow": "^7.10.1",    
-    "@dhis2/app-runtime": "^2.2.2",
+    "@babel/preset-flow": "^7.10.1",
+    "@dhis2/app-runtime": "2.2.2",
     "@dhis2/cli-utils-cypress": "^2.2.1",
     "@dhis2/d2-i18n": "^1.0.6",
     "@dhis2/d2-icons": "^1.0.1",
@@ -62,10 +62,6 @@
     "typeface-roboto": "^0.0.54",
     "uuid": "^3.3.2"
   },
-  "_comment": "resolutions should be reoved after the https://github.com/babel/babel-eslint/issues/681 is resolved.",
-  "resolutions": {
-    "@babel/parser": "7.7.5"
-  },
   "scripts": {
     "manualBuild": "node verifyCacheVersion.js && yarn localize && d2-manifest package.json ./public/manifest.webapp && REACT_APP_DHIS2_BASE_URL='../../..' react-scripts build && mkdirp buildzip/ && pushd build && bestzip ../buildzip/NewCaptureApp.zip * && popd",
     "start": "d2-app-scripts start",
@@ -89,7 +85,7 @@
     }
   },
   "devDependencies": {
-    "@dhis2/cli-app-scripts": "^4.0.8",
+    "@dhis2/cli-app-scripts": "^4.0.9",
     "@dhis2/d2-i18n-extract": "^1.0.8",
     "@dhis2/d2-i18n-generate": "^1.1.1",
     "bestzip": "^2.1.4",
