@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import SearchUser from '../../../../FormFields/UserField/Search.component';
 import { Button } from '../../../../Buttons';
 
@@ -55,6 +55,6 @@ const EditMode = (props: Props) => {
             </div>
         </div>
     );
-}
+};
 
 export default withStyles(getStyles)(EditMode);

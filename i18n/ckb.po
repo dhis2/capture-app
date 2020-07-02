@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
 "Language-Team: Central Kurdish (https://www.transifex.com/hisp-uio/teams/100509/ckb/)\n"
@@ -16,8 +16,21 @@ msgstr ""
 "Language: ckb\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Please provide a valid date"
-msgstr "تکایە بەروارێکی درووست بنووسە"
+msgid "Choose one or more dates..."
+msgstr "بەروارێک یان زیاتر هەڵبژێرە"
+
+msgid "Choose a date..."
+msgstr "بەروارێک هەڵبژێرە"
+
+msgid "Today"
+msgstr "ئەمڕۆ"
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
+msgstr ""
+"یەکێک لە هۆکارەکان بریتیە لە تایبەتمەندی بڕاوسەرەکەت پاڵپشتی ئەمە ناکات. "
+"تکایە سەیری لۆگ فایل بکە بۆ زانیار زیاتر"
 
 msgid "Columns to show in table"
 msgstr "ستونەکانی دەتەوێ دەربکەوێ لە خشتەکە"
@@ -48,6 +61,9 @@ msgstr "تکایە ژمارەیەکی پۆسەتیڤ یاخود سفر بنوو�
 
 msgid "Please provide a negative integer"
 msgstr "تکایە ژمارەیەکی نێگەتیڤ بنووسە"
+
+msgid "Please provide a valid date"
+msgstr "تکایە بەروارێکی درووست بنووسە"
 
 msgid "A date in the future is not allowed"
 msgstr ""
@@ -207,9 +223,6 @@ msgstr "لە"
 msgid "To"
 msgstr "لە"
 
-msgid "Today"
-msgstr "ئەمڕۆ"
-
 msgid "This week"
 msgstr "ئەم هەفتەیە"
 
@@ -288,11 +301,65 @@ msgstr "هیچ ئەنجامێک بەردەست نیە"
 msgid "suggestions could not be retrieved"
 msgstr "پێشنیارەکان نەتواندرا بهێندرێت"
 
-msgid "search for username"
-msgstr "بۆ ناوی بەکاربەر بگەڕێ"
-
 msgid "No items to display"
 msgstr "هیچ شتێک بەردەست نیە بۆ پیشاندان"
+
+msgid "Could not get organisation unit"
+msgstr "نەتواندرا ئۆرگانیزەیشن یونیتەکە بهێندرێت"
+
+msgid "Program doesn't exist"
+msgstr "پرۆگرامەکە بوونی نیە"
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr "پرۆگرامی هەلبژێردراو درووست نیە بۆ یەکەی تۆمارکردنی هەڵبژێردراو"
+
+msgid "New {{typeName}}"
+msgstr "{{typeName}} ی نوێ"
+
+msgid "New"
+msgstr "نوێ"
+
+msgid "Start again"
+msgstr "دووبارە دەستپێبکەوە"
+
+msgid "Find"
+msgstr "بدۆزەوە"
+
+msgid "Selected registering unit"
+msgstr "یەکەی تۆمارکردن هەڵبژێرە"
+
+msgid "Start Again"
+msgstr "دووبارە دەستبپێبکەوە"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "ئایا دڵنیایی؟ هەموو زانیاریە تۆمارەنەکراوەکان دەسڕێتەوە"
+
+msgid "Accept"
+msgstr "پەسندکردن"
+
+msgid "Registering Organisation Unit"
+msgstr "تۆمارکردنی یەکەی رێکخراو"
+
+msgid "Select"
+msgstr "هەڵبژاردن"
+
+msgid "Selected Program"
+msgstr "پرۆگرامە هەڵبژێردراوەکە"
+
+msgid "Some programs are being filtered."
+msgstr "هەندێک لە پڕۆگرامەکان فیلتەرکراون"
+
+msgid "Show all"
+msgstr "پێشاندانی هەمووان"
+
+msgid "Program"
+msgstr "پرۆگرام"
+
+msgid "Select program"
+msgstr "پرۆگرام هەڵبژێرە"
+
+msgid "No programs available."
+msgstr "هیچ پرۆگرامێک بەردەست نیە"
 
 msgid "Online"
 msgstr "ئۆنڵاین"
@@ -441,15 +508,6 @@ msgstr "چاڵاک"
 msgid "Completed"
 msgstr "تەواوبوو"
 
-msgid "Could not get organisation unit"
-msgstr "نەتواندرا ئۆرگانیزەیشن یونیتەکە بهێندرێت"
-
-msgid "Program doesn't exist"
-msgstr "پرۆگرامەکە بوونی نیە"
-
-msgid "Selected program is invalid for registering unit"
-msgstr "ئەم پرۆگرامە درووستنیە بۆ تۆمارکردنی یونت"
-
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr " {{TET}} نوێ دروستبکە لە {{program}} لە {{orgUnit}}"
 
@@ -480,9 +538,6 @@ msgid ""
 msgstr ""
 "پرۆگرم بە پرۆگرام ئایدی{{programId}} پرۆگرامی تراکەر نیە. تۆمارکردن تەنها "
 "دەتواندرێت ئەنجام بدرێت لە پرۆگرامی تراکەر"
-
-msgid "Selected program is invalid for selected registering unit"
-msgstr "پرۆگرامی هەلبژێردراو درووست نیە بۆ یەکەی تۆمارکردنی هەڵبژێردراو"
 
 msgid "Assigned user"
 msgstr "بەکارهێنەری دەستنیشانکراو"
@@ -604,15 +659,6 @@ msgstr "شاردنەوە"
 msgid "Save as new {{tetName}}"
 msgstr "وەکو {{tetName}} نوێ تۆمار بکە"
 
-msgid "Some programs are being filtered."
-msgstr "هەندێک لە پڕۆگرامەکان فیلتەرکراون"
-
-msgid "Show all"
-msgstr "پێشاندانی هەمووان"
-
-msgid "Program"
-msgstr "پرۆگرام"
-
 msgid "Organisation Unit"
 msgstr "یەکەی ڕێخکڕاو"
 
@@ -667,45 +713,6 @@ msgstr "حاڵەتەکە ڕاپسێردراوە بە  {{name}}"
 
 msgid "Feedbacks"
 msgstr "بۆچوونەکان"
-
-msgid "New {{typeName}}"
-msgstr "{{typeName}} ی نوێ"
-
-msgid "New"
-msgstr "نوێ"
-
-msgid "Start again"
-msgstr "دووبارە دەستپێبکەوە"
-
-msgid "Find"
-msgstr "بدۆزەوە"
-
-msgid "Selected registering unit"
-msgstr "یەکەی تۆمارکردن هەڵبژێرە"
-
-msgid "Start Again"
-msgstr "دووبارە دەستبپێبکەوە"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "ئایا دڵنیایی؟ هەموو زانیاریە تۆمارەنەکراوەکان دەسڕێتەوە"
-
-msgid "Accept"
-msgstr "پەسندکردن"
-
-msgid "Registering Organisation Unit"
-msgstr "تۆمارکردنی یەکەی رێکخراو"
-
-msgid "Select"
-msgstr "هەڵبژاردن"
-
-msgid "Selected Program"
-msgstr "پرۆگرامە هەڵبژێردراوەکە"
-
-msgid "Select program"
-msgstr "پرۆگرام هەڵبژێرە"
-
-msgid "No programs available."
-msgstr "هیچ پرۆگرامێک بەردەست نیە"
 
 msgid "You dont have access to delete this relationship"
 msgstr "مافی سڕینەوە ئەم پەیوەندیەت نیە"
@@ -812,19 +819,6 @@ msgstr ""
 "پرۆگرامی کاپچەر دەتواندرێت تەنها لەسەری یەک وەشان و یەک دۆمەین کار بکات. "
 "تکایە پەیجەکەت ریفرێش بکەوە بۆ ئەوەی ئەم وەشانە بکەیتەوە بەڵام ئاگاداربکە "
 "ئەم کردارە وەشانەکانیتر دادەخات"
-
-msgid "Choose one or more dates..."
-msgstr "بەروارێک یان زیاتر هەڵبژێرە"
-
-msgid "Choose a date..."
-msgstr "بەروارێک هەڵبژێرە"
-
-msgid ""
-"A possible reason for this is that the browser or mode (e.g. privacy mode) "
-"is not supported. See log for details."
-msgstr ""
-"یەکێک لە هۆکارەکان بریتیە لە تایبەتمەندی بڕاوسەرەکەت پاڵپشتی ئەمە ناکات. "
-"تکایە سەیری لۆگ فایل بکە بۆ زانیار زیاتر"
 
 msgid "Compatibility mode"
 msgstr "مۆدی گونجان"

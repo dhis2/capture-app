@@ -20,7 +20,7 @@ const mapStateToProps = (state: ReduxState, props: { listId: string, id: string 
     };
 };
 
-const dispatchToProps = (dispatch: ReduxDispatch) => ({
+const dispatchToProps = () => ({
 
 });
 

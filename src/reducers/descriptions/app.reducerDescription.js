@@ -1,11 +1,12 @@
 // @flow
 import { getAppReducerDesc } from 'capture-core/reducers/descriptions/app.reducerDescriptionGetter';
-import { actionTypes as entryActionTypes } from '../../init/entry.actions';
+import { actionTypes as entryActionTypes } from '../../entry';
 
 export const appReducerDesc = getAppReducerDesc({
     [entryActionTypes.APP_LOAD]: state => ({
         ...state,
         initDone: false,
+        page: '',
     }),
     [entryActionTypes.APP_LOAD_SUCESS]: (state, action) => {
         const newState = { ...state };

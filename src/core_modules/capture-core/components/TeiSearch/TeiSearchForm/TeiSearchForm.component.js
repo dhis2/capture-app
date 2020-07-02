@@ -54,13 +54,13 @@ type Props = {
 };
 
 class SearchForm extends React.Component<Props> {
+    formInstance: any;
+    orgUnitSelectorInstance: SearchOrgUnitSelector;
+
     static errorMessages = {
         NO_ITEM_SELECTED: 'No item selected',
         SEARCH_FORM_MISSING: 'search form is missing. see log for details',
     };
-    formInstance: any;
-    orgUnitSelectorInstance: SearchOrgUnitSelector;
-
 
     validNumberOfAttributes = () => {
         const attributesWithValuesCount = this.props.attributesWithValuesCount;

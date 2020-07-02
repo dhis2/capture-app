@@ -7,19 +7,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
 import { connect } from 'react-redux';
-
+import { errorCreator } from 'capture-core-utils';
 import Button from '../Buttons/Button.component';
 import ProgressButton from '../Buttons/ProgressButton.component';
 import DataEntry from './DataEntry.component';
-import { errorCreator } from 'capture-core-utils';
-
 import { startCompleteEvent, completeValidationFailed, completeAbort } from './actions/dataEntry.actions';
 import getDataEntryKey from './common/getDataEntryKey';
-
 import getStageFromEvent from '../../metaData/helpers/getStageFromEvent';
-
 import { messageStateKeys } from '../../reducers/descriptions/rulesEffects.reducerDescription';
 
 type Props = {
@@ -48,11 +43,6 @@ type State = {
 
 const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: ?OptionFn) =>
     class CompleteButtonBuilder extends React.Component<Props, State> {
-        static errorMessages = {
-            INNER_INSTANCE_NOT_FOUND: 'Inner instance not found',
-            FORM_INSTANCE_NOT_FOUND: 'Form instance not found',
-        };
-
         innerInstance: any;
         handleCompletionAttempt: () => void;
         handleCloseDialog: () => void;
@@ -67,6 +57,11 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
                 warningDialogOpen: false,
             };
         }
+
+        static errorMessages = {
+            INNER_INSTANCE_NOT_FOUND: 'Inner instance not found',
+            FORM_INSTANCE_NOT_FOUND: 'Form instance not found',
+        };
 
         getWrappedInstance() {
             return this.innerInstance;
@@ -286,6 +281,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
+// todo is this being used  (report lgmt)
 export default (optionFn?: ?OptionFn) =>
     (InnerComponent: React.ComponentType<any>) =>
         connect(

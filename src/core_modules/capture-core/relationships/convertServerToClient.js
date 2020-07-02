@@ -4,7 +4,7 @@ import { programCollection } from '../metaDataMemoryStores';
 import getTeiDisplayName from '../trackedEntityInstances/getDisplayName';
 
 const getClientConstraintByType = {
-    TRACKED_ENTITY_INSTANCE: (constraint,relationshipConstraint) => {
+    TRACKED_ENTITY_INSTANCE: (constraint, relationshipConstraint) => {
         const tei = constraint.trackedEntityInstance;
         const trackedEntityType = getTrackedEntityTypeThrowIfNotFound(tei.trackedEntityType);
         const values = tei.attributes.reduce((accValues, attr) => {

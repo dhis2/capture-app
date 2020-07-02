@@ -23,14 +23,12 @@ const loadingIndicatorStyle = {
 };
 
 class AssigneeSection extends React.Component<Props> {
-    renderHeader = () => {
-        return (
-            <ViewEventSectionHeader
-                icon={AssignmentIcon}
-                text={i18n.t('Assignee')}
-            />
-        );
-    }
+    renderHeader = () => (
+        <ViewEventSectionHeader
+            icon={AssignmentIcon}
+            text={i18n.t('Assignee')}
+        />
+    )
 
     render() {
         const { programStage, ...passOnProps } = this.props;

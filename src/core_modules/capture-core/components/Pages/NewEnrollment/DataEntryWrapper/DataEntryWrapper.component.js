@@ -48,10 +48,6 @@ type Props = {
 };
 
 class DataEntryWrapper extends React.Component<Props> {
-    handleBackToMainPage() {
-        
-    }
-
     renderHeaderButtons() {
         const { enrollmentMetadata } = this.props;
         const form = enrollmentMetadata.enrollmentForm;

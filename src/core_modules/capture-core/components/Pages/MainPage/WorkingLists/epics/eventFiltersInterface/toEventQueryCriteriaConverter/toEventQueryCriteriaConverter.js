@@ -27,11 +27,9 @@ import type {
 } from '../../../workingLists.types';
 
 
-const getTextFilter = (filter: TextFilterData ): ApiDataFilterText => {
-    return {
-        like: filter.value,
-    };
-};
+const getTextFilter = (filter: TextFilterData): ApiDataFilterText => ({
+    like: filter.value,
+});
 
 const getNumericFilter = (filter: NumericFilterData): ApiDataFilterNumeric => ({
     ge: filter.ge ? filter.ge.toString() : undefined,
@@ -143,26 +141,24 @@ const getMainFilter = (filter: Object): Object => {
     return mainValue;
 };
 
-const buildMainAndDataFilters = (apiFilters: Array<Object>, defaultSpecs: Map<string, Object>) => {
-    return apiFilters
-        .reduce((acc, filter) => {
-            const element = defaultSpecs.get(filter.dataItem);
-            // $FlowSuppress
-            if (element.isMainProperty) {
-                const mainFilter = getMainFilter(filter);
-                const filters = {
-                    ...acc,
-                    ...mainFilter,
-                };
-                return filters;
-            }
+const buildMainAndDataFilters = (apiFilters: Array<Object>, defaultSpecs: Map<string, Object>) => apiFilters
+    .reduce((acc, filter) => {
+        const element = defaultSpecs.get(filter.dataItem);
+        // $FlowSuppress
+        if (element.isMainProperty) {
+            const mainFilter = getMainFilter(filter);
+            const filters = {
+                ...acc,
+                ...mainFilter,
+            };
+            return filters;
+        }
 
-            acc.dataFilters.push(filter);
-            return acc;
-        }, {
-            dataFilters: [],
-        });
-};
+        acc.dataFilters.push(filter);
+        return acc;
+    }, {
+        dataFilters: [],
+    });
 
 const getOrder = (sortById: string, sortByDirection: string) => `${sortById}:${sortByDirection}`;
 

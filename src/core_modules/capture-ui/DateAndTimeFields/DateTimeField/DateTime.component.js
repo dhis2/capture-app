@@ -32,17 +32,16 @@ type Props = {
 };
 
 class D2DateTime extends Component<Props> {
-    static defaultProps = {
-        dateLabel: i18n.t('Date'),
-        timeLabel: i18n.t('Time'),
-    };
-
     handleTimeChange: (timeValue: string) => void;
     handleDateChange: (dateValue: string) => void;
     handleTimeBlur: (timeValue: string) => void;
     handleDateBlur: (dateValue: string) => void;
     touchedFields: Set<string>;
-    inFocusLabelClasses: Object;
+
+    static defaultProps = {
+        dateLabel: i18n.t('Date'),
+        timeLabel: i18n.t('Time'),
+    };
 
     constructor(props: Props) {
         super(props);

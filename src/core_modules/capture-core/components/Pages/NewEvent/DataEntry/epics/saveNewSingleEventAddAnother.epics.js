@@ -1,6 +1,7 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
 import uuid from 'd2-utilizr/lib/uuid';
+import moment from 'capture-core-utils/moment/momentResolver';
 import {
     actionTypes as newEventDataEntryActionTypes,
     batchActionTypes as newEventDataEntryBatchActionTypes,
@@ -18,7 +19,6 @@ import {
 
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
-import moment from 'capture-core-utils/moment/momentResolver';
 import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
 
 export const saveNewEventAddAnotherEpic = (action$: InputObservable, store: ReduxStore) =>

@@ -1,5 +1,4 @@
 // @flow
-/* eslint-disable complexity */
 import moment from 'capture-core-utils/moment/momentResolver';
 
 const getReturnObject = (momentDate: ?moment$Moment) => ({
@@ -67,64 +66,9 @@ function parseWithSeparator(dateString: string, localeFormat: string, separatorP
     return parseData;
 }
 
-function manipulateDayOrMonthInFormat(format: string, key: string) { // eslint-disable-line
-    const stringPattern = `${key}+`;
-    const matchPattern = new RegExp(stringPattern);
-    const partMatches = format.match(matchPattern);
-    const part = partMatches && partMatches[0];
-
-    let manipulatedFormat = format;
-    if (part) {
-        let newPart;
-        switch (part.length) {
-        case 1:
-            newPart = key + key;
-            break;
-        case 2:
-            newPart = key;
-            break;
-        default:
-            break;
-        }
-        if (newPart) {
-            manipulatedFormat = format.replace(part, newPart);
-        }
-    }
-    return manipulatedFormat;
-}
-
-function manipulateFormatAndParseWithoutSeparator(dateString: string, localeFormat: string) { // eslint-disable-line
+function manipulateFormatAndParseWithoutSeparator() {
     // rejecting this for now, didn't work as expected. Need to look into it more.
     return getReturnObject(null);
-
-    /*
-    this didn't work as expected
-    const manipulatedDayFormat = manipulateDayOrMonthInFormat(localeFormat, 'D');
-    if (manipulatedDayFormat !== localeFormat) {
-        const dateDayManipulated = moment(dateString, manipulatedDayFormat, true);
-        if (dateDayManipulated.isValid()) {
-            return getReturnObject(dateDayManipulated);
-        }
-    }
-
-    const manipulatedMonthFormat = manipulateDayOrMonthInFormat(localeFormat, 'M');
-    if (manipulatedMonthFormat !== localeFormat) {
-        const dateMonthManipulated = moment(dateString, manipulatedMonthFormat, true);
-        if (dateMonthManipulated.isValid()) {
-            return getReturnObject(dateMonthManipulated);
-        }
-    }
-
-    if (manipulatedDayFormat !== localeFormat && manipulatedMonthFormat !== localeFormat) {
-        const manipulatedFormat = manipulateDayOrMonthInFormat(manipulatedDayFormat, 'M');
-        const dateManipulated = moment(dateString, manipulatedFormat, true);
-        if (dateManipulated.isValid()) {
-            return getReturnObject(dateManipulated);
-        }
-    }
-
-    return getReturnObject(null);
-    */
 }
 
 function parseWithoutSeparator(dateString: string, localeFormat: string, separatorPattern: RegExp) {

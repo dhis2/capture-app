@@ -14,7 +14,7 @@ import {
 const makeMapStateToProps = () => {
     const programNameSelector = makeProgramNameSelector();
 
-    const mapStateToProps = (state: ReduxState, props: Object) => ({
+    const mapStateToProps = (state: ReduxState) => ({
         ready: !state.newEnrollmentPage.dataEntryIsLoading,
         error: state.newEnrollmentPage.dataEntryError,
         programName: programNameSelector(state),

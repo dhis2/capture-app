@@ -1,24 +1,12 @@
 // @flow
 import {
-    actionTypes as mainPageSelectorActionTypes,
-} from '../../Pages/MainPage/MainPageSelector/MainPageSelector.actions';
-import {
-    actionTypes as editEventSelectorActionTypes,
-} from '../../Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
-import {
-    actionTypes as viewEventSelectorActionTypes,
-} from '../../Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
-import {
-    actionTypes as newEventSelectorActionTypes,
-} from '../../Pages/NewEvent/SelectorLevel/selectorLevel.actions';
-
-import {
     resetCategoriesAfterSettingOrgUnit,
     skipCategoriesResetAfterSettingOrgUnit,
 } from '../actions/crossPage.actions';
 
 import { getUserStorageController } from '../../../storageControllers';
 import { userStores } from '../../../storageControllers/stores';
+import { lockedSelectorActionTypes } from '../../LockedSelector';
 
 
 async function isOptionAssociatedWithOrganisationUnit(categoryOptionId: string, orgUnitId: string) {
@@ -31,14 +19,9 @@ async function isOptionAssociatedWithOrganisationUnit(categoryOptionId: string, 
 }
 
 export const resetCategoriesAfterSettingOrgUnitIfApplicableEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$
-        .ofType(
-            mainPageSelectorActionTypes.SET_ORG_UNIT,
-            editEventSelectorActionTypes.SET_ORG_UNIT,
-            viewEventSelectorActionTypes.SET_ORG_UNIT,
-            newEventSelectorActionTypes.SET_ORG_UNIT,
-        )
+        // $FlowSuppress
+        .ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET)
         .switchMap((action) => {
             const orgUnitId = action.payload.id;
             const selectedCategories = store.getState().currentSelections.categories;
@@ -47,13 +30,13 @@ export const resetCategoriesAfterSettingOrgUnitIfApplicableEpic = (action$: Inpu
             }
 
             const categoriesWithValue = Object
-            .keys(selectedCategories)
-            .reduce((acc, categoryId) => {
-                if (selectedCategories[categoryId]) {
-                    acc[categoryId] = selectedCategories[categoryId];
-                }
-                return acc;
-            }, {});
+                .keys(selectedCategories)
+                .reduce((acc, categoryId) => {
+                    if (selectedCategories[categoryId]) {
+                        acc[categoryId] = selectedCategories[categoryId];
+                    }
+                    return acc;
+                }, {});
 
             const isAssociatedPromises = Object
                 .keys(categoriesWithValue)

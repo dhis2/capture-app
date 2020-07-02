@@ -3,8 +3,9 @@
 
 # testing
 /coverage
+cypress.env.json
 
-# production
+# build folders
 /build
 /buildzip
 
@@ -27,11 +28,11 @@ yarn-error.log*
 .DS_Store
 npm-debug.log
 /public/manifest.webapp
+.idea
+public/manifest.webapp
 
 # generated localization files
 src/locales/
-public/manifest.webapp
-.idea
 
 # DHIS2 Platform
 .d2

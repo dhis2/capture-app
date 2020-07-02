@@ -70,7 +70,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
                 [this.getButtonDefinition(buttonTypes.FINISH), ...buttons];
         }
 
-        renderMultiButton = (buttons: any, hasWriteAccess: ?boolean, finalInProgress: ?boolean) => {
+        renderMultiButton = (buttons: any, hasWriteAccess: ?boolean) => {
             const primary = buttons[0];
             const secondaries = buttons.slice(1);
             return (

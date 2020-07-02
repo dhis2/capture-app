@@ -1,26 +1,11 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
-import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/viewEvent.actions';
-import { actionTypes as mainPageSelectionsActionTypes } from '../../components/Pages/MainPage/mainSelections.actions';
-import { actionTypes as setOrgUnitActionTypes } from '../../components/QuickSelector/actions/QuickSelector.actions';
-import {
-    dataEntryUrlActionTypes as newEventDataEntryUrlActionTypes,
-    selectorActionTypes as newEventSelectorActionTypes,
-} from '../../components/Pages/NewEvent';
-import {
-    urlActionTypes as newEnrollmentUrlActionTypes,
-} from '../../components/Pages/NewEnrollment';
-import {
-    actionTypes as mainPageSelectorActionTypes,
-} from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
-import {
-    actionTypes as editEventPageSelectorActionTypes,
-} from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
-import {
-    actionTypes as viewEventPageSelectorActionTypes,
-} from '../../components/Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
-import { orgUnitListActionTypes } from '../../components/QuickSelector';
+import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
+import { actionTypes as setOrgUnitActionTypes } from '../../components/LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { urlActionTypes as newEnrollmentUrlActionTypes } from '../../components/Pages/NewEnrollment';
+import { lockedSelectorActionTypes } from '../../components/LockedSelector/LockedSelector.actions';
+import { orgUnitListActionTypes } from '../../components/LockedSelector/QuickSelector';
 import { set as setStoreRoots } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 import { actionTypes as initActionTypes } from '../../init/init.actions';
 
@@ -37,27 +22,6 @@ export const organisationUnitDesc = createReducerDescription({
         newState[orgUnit.id] = orgUnit;
         return newState;
     },
-    [mainPageSelectionsActionTypes.ORG_UNIT_DATA_RETRIVED]: (state, action) => {
-        const newState = {
-            ...state,
-            [action.payload.id]: action.payload,
-        };
-        return newState;
-    },
-    [mainPageSelectionsActionTypes.SET_ORG_UNIT_BASED_ON_URL]: (state, action) => {
-        const newState = {
-            ...state,
-            [action.payload.id]: action.payload,
-        };
-        return newState;
-    },
-    [newEventDataEntryUrlActionTypes.SET_ORG_UNIT_BASED_ON_URL]: (state, action) => {
-        const newState = {
-            ...state,
-            [action.payload.id]: action.payload,
-        };
-        return newState;
-    },
     [newEnrollmentUrlActionTypes.SET_ORG_UNIT_BASED_ON_URL]: (state, action) => ({
         ...state,
         [action.payload.orgUnit.id]: action.payload.orgUnit,
@@ -68,18 +32,15 @@ export const organisationUnitDesc = createReducerDescription({
         newState[orgUnit.id] = orgUnit;
         return newState;
     },
-    [mainPageSelectorActionTypes.SET_ORG_UNIT]: (state, action) => {
-        const newState = { ...state };
-        const orgUnit = action.payload.orgUnit;
-        newState[orgUnit.id] = orgUnit;
-        return newState;
-    },
-    [newEventSelectorActionTypes.SET_ORG_UNIT]: (state, action) => {
-        const newState = { ...state };
-        const orgUnit = action.payload.orgUnit;
-        newState[orgUnit.id] = orgUnit;
-        return newState;
-    },
+
+    [lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_SET]: (state, action) => ({
+        ...state,
+        [action.payload.id]: action.payload,
+    }),
+    [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: (state, action) => ({
+        ...state,
+        [action.payload.orgUnit.id]: action.payload.orgUnit,
+    }),
 }, 'organisationUnits');
 
 export const organisationUnitRootsDesc = createReducerDescription({
@@ -149,11 +110,7 @@ export const registeringUnitListDesc = createReducerDescription({
         ...state,
         isLoading: true,
     }),
-    [mainPageSelectorActionTypes.RESET_ORG_UNIT_ID]: removeSearchDataOnResetRegUnit,
-    [mainPageSelectionsActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: removeSearchDataOnResetRegUnit,
-    [newEventSelectorActionTypes.RESET_ORG_UNIT_ID]: removeSearchDataOnResetRegUnit,
-    [newEventDataEntryUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: removeSearchDataOnResetRegUnit,
-    [editEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: removeSearchDataOnResetRegUnit,
-    [viewEventPageSelectorActionTypes.RESET_ORG_UNIT_ID]: removeSearchDataOnResetRegUnit,
+    [lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_EMPTY_SET]: removeSearchDataOnResetRegUnit,
+    [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: removeSearchDataOnResetRegUnit,
     [newEnrollmentUrlActionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL]: removeSearchDataOnResetRegUnit,
 }, 'registeringUnitList');

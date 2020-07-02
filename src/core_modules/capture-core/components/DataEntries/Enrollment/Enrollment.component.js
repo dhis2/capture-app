@@ -261,15 +261,16 @@ type FinalTeiDataEntryProps = {
 };
 // final step before the generic dataEntry is inserted
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
+    componentWillUnmount() {
+        inMemoryFileStore.clear();
+    }
+
     static dataEntrySectionDefinitions = {
         [dataEntrySectionKeys.ENROLLMENT]: {
             placement: placements.TOP,
             name: i18n.t('Enrollment'),
         },
     };
-    componentWillUnmount() {
-        inMemoryFileStore.clear();
-    }
 
     render() {
         const { enrollmentMetadata, programId, ...passOnProps } = this.props;
@@ -284,12 +285,6 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
 }
 
 const SearchGroupsHOC = withSearchGroups(getSearchGroups, getSearchContext)(FinalEnrollmentDataEntry);
-/*
-const FeedbackOutput = withFeedbackOutput()(SearchGroupsHOC);
-const IndicatorOutput = withIndicatorOutput()(FeedbackOutput);
-const WarningOutput = withWarningOutput()(IndicatorOutput);
-const ErrorOutput = withErrorOutput()(WarningOutput);
-*/
 const LocationHOC = withDataEntryFieldIfApplicable(getGeometrySettings())(SearchGroupsHOC);
 const IncidentDateFieldHOC = withDataEntryFieldIfApplicable(getIncidentDateSettings())(LocationHOC);
 const EnrollmentDateFieldHOC = withDataEntryField(getEnrollmentDateSettings())(IncidentDateFieldHOC);

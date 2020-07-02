@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import LoadingMask from '../../LoadingMasks/LoadingMask.component';
+import { LoadingMask } from '../../LoadingMasks';
 
 type Props = {
     results: Array<any>,

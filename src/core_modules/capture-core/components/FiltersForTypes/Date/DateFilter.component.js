@@ -71,51 +71,6 @@ type State = {
 
 // $FlowSuppress
 class DateFilter extends Component<Props, State> implements UpdatableFilterContent<Value> {
-    static errorMessages = {
-        CUSTOM_RANGE_WITHOUT_VALUES: 'Please specify a range',
-        FROM_GREATER_THAN_TO: 'The From date can\'t be after the To date',
-        [elementTypes.DATE]: 'Please provide a valid date',
-    };
-
-    static validatorForTypes = {
-        [elementTypes.DATE]: isValidDate,
-    };
-
-    static mainOptionSet = new OptionSet('mainOptions', [
-        new Option((_this) => {
-            _this.text = mainOptionTranslatedTexts[mainOptionKeys.TODAY];
-            _this.value = mainOptionKeys.TODAY;
-        }),
-        new Option((_this) => {
-            _this.text = mainOptionTranslatedTexts[mainOptionKeys.THIS_WEEK];
-            _this.value = mainOptionKeys.THIS_WEEK;
-        }),
-        new Option((_this) => {
-            _this.text = mainOptionTranslatedTexts[mainOptionKeys.THIS_MONTH];
-            _this.value = mainOptionKeys.THIS_MONTH;
-        }),
-        new Option((_this) => {
-            _this.text = mainOptionTranslatedTexts[mainOptionKeys.THIS_YEAR];
-            _this.value = mainOptionKeys.THIS_YEAR;
-        }),
-        new Option((_this) => {
-            _this.text = mainOptionTranslatedTexts[mainOptionKeys.LAST_WEEK];
-            _this.value = mainOptionKeys.LAST_WEEK;
-        }),
-        new Option((_this) => {
-            _this.text = mainOptionTranslatedTexts[mainOptionKeys.LAST_MONTH];
-            _this.value = mainOptionKeys.LAST_MONTH;
-        }),
-        new Option((_this) => {
-            _this.text = mainOptionTranslatedTexts[mainOptionKeys.LAST_3_MONTHS];
-            _this.value = mainOptionKeys.LAST_3_MONTHS;
-        }),
-        new Option((_this) => {
-            _this.text = mainOptionTranslatedTexts[mainOptionKeys.CUSTOM_RANGE];
-            _this.value = mainOptionKeys.CUSTOM_RANGE;
-        }),
-    ]);
-
     static validateField(value: ?string, type: $Values<typeof elementTypes>) {
         if (!value) {
             return {
@@ -173,6 +128,50 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
         super(props);
         this.state = { submitAttempted: false };
     }
+    static errorMessages = {
+        CUSTOM_RANGE_WITHOUT_VALUES: 'Please specify a range',
+        FROM_GREATER_THAN_TO: 'The From date can\'t be after the To date',
+        [elementTypes.DATE]: 'Please provide a valid date',
+    };
+
+    static validatorForTypes = {
+        [elementTypes.DATE]: isValidDate,
+    };
+
+    static mainOptionSet = new OptionSet('mainOptions', [
+        new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.TODAY];
+            _this.value = mainOptionKeys.TODAY;
+        }),
+        new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.THIS_WEEK];
+            _this.value = mainOptionKeys.THIS_WEEK;
+        }),
+        new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.THIS_MONTH];
+            _this.value = mainOptionKeys.THIS_MONTH;
+        }),
+        new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.THIS_YEAR];
+            _this.value = mainOptionKeys.THIS_YEAR;
+        }),
+        new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.LAST_WEEK];
+            _this.value = mainOptionKeys.LAST_WEEK;
+        }),
+        new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.LAST_MONTH];
+            _this.value = mainOptionKeys.LAST_MONTH;
+        }),
+        new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.LAST_3_MONTHS];
+            _this.value = mainOptionKeys.LAST_3_MONTHS;
+        }),
+        new Option((_this) => {
+            _this.text = mainOptionTranslatedTexts[mainOptionKeys.CUSTOM_RANGE];
+            _this.value = mainOptionKeys.CUSTOM_RANGE;
+        }),
+    ]);
     onGetUpdateData(updatedValues?: Value) {
         const value = typeof updatedValues !== 'undefined' ? updatedValues : this.props.value;
 

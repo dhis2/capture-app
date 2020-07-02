@@ -83,9 +83,9 @@ class NewEventNewRelationshipWrapper extends React.Component<Props, State> {
     );
 
     onGetUnsavedAttributeValues = (id: string) => {
-        const { unsavedRelationships } = this.props;
-        return unsavedRelationships 
-            .map(r => {
+        const { unsavedRelationships } = this.props;
+        return unsavedRelationships
+            .map((r) => {
                 if (!r.to.data || !r.to.data.attributes) {
                     return null;
                 }

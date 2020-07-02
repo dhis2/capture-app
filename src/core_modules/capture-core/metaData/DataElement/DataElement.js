@@ -5,12 +5,14 @@
 import log from 'loglevel';
 import isFunction from 'd2-utilizr/lib/isFunction';
 import isArray from 'd2-utilizr/lib/isArray';
-
+import { errorCreator } from 'capture-core-utils';
 import Icon from '../Icon/Icon';
 import OptionSet from '../OptionSet/OptionSet';
-import { errorCreator } from 'capture-core-utils';
 import elementTypes from './elementTypes';
 import { Unique } from './Unique';
+
+// eslint-disable-next-line no-use-before-define
+export type ConvertFn = (value: any, type: $Values<typeof elementTypes>, element: DataElement) => any;
 
 export default class DataElement {
     static errorMessages = {
@@ -69,9 +71,6 @@ export default class DataElement {
 
     set displayInForms(display?: ?boolean) {
         this._displayInForms = display != null ? display : true;
-    }
-    get displayInForms(): boolean {
-        return this._displayInForms;
     }
 
     set displayInReports(display?: ?boolean) {
@@ -172,4 +171,3 @@ export default class DataElement {
     }
 }
 
-export type ConvertFn = (value: any, type: $Values<typeof elementTypes>, element: DataElement) => any;

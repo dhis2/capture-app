@@ -4,7 +4,7 @@ import React from 'react';
 import GeneralOutput from './GeneralOutput.component';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 
-const mapStateToProps = (state: ReduxState, props: Object) => {
+const mapStateToProps = (state: ReduxState) => {
     const registerTeiContainer = state.newRelationshipRegisterTei;
     const ready = !registerTeiContainer.loading && !registerTeiContainer.dataEntryIsLoading;
 

@@ -30,7 +30,7 @@ export const openRelationshipTeiSearchEpic = (action$: InputObservable, store: R
     // $FlowSuppress
     action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE)
         .filter(action => action.payload.findMode && action.payload.findMode === 'TEI_SEARCH')
-        .map((action) => {
+        .map(() => {
             const state = store.getState();
             const selectedRelationshipType = state.newRelationship.selectedRelationshipType;
 

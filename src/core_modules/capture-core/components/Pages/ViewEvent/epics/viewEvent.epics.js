@@ -3,9 +3,10 @@ import log from 'loglevel';
 import { push } from 'connected-react-router';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
+import { getApi } from '../../../../d2';
 import isSelectionsEqual from '../../../App/isSelectionsEqual';
 import getErrorMessageAndDetails from '../../../../utils/errors/getErrorMessageAndDetails';
-import getOrganisationUnitApiSpec from '../../../../api/apiSpecifications/organisationUnit.apiSpecificationGetter';
+
 import {
     actionTypes as viewEventActionTypes,
     eventFromUrlCouldNotBeRetrieved,
@@ -18,7 +19,7 @@ import {
     updateWorkingListPendingOnBackToMainPage,
     openViewEventPageFailed,
     initializeWorkingListsOnBackToMainPage,
-} from '../viewEvent.actions';
+} from '../ViewEventComponent/viewEvent.actions';
 import { actionTypes as eventListActionTypes } from '../../MainPage/EventsList/eventsList.actions';
 import { getEvent } from '../../../../events/eventRequests';
 import {
@@ -85,9 +86,8 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
     action$.ofType(viewEventActionTypes.EVENT_FROM_URL_RETRIEVED)
         .switchMap((action) => {
             const eventContainer = action.payload.eventContainer;
-            return getOrganisationUnitApiSpec(eventContainer.event.orgUnitId)
-                .get()
-                // $FlowSuppress
+            return getApi()
+                .get(`organisationUnits/${eventContainer.event.orgUnitId}`)
                 .then(orgUnit => orgUnitRetrievedOnUrlUpdate(orgUnit, eventContainer))
                 .catch((error) => {
                     const { message, details } = getErrorMessageAndDetails(error);

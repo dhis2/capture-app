@@ -1,7 +1,7 @@
 
 // @flow
 import * as React from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import StickyOnScroll from '../../../../Sticky/StickyOnScroll.component';
 import ErrorsSection from './ErrorsSection/ErrorsSection.container';
 import WarningsSection from './WarningsSection/WaningsSection.container';

@@ -102,7 +102,7 @@ const saveNewEventRelationships = (relationshipData, selections, triggerAction) 
 };
 
 
-export const saveNewEventRelationshipsIfExistsEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveNewEventRelationshipsIfExistsEpic = (action$: InputObservable) =>
     // $FlowSuppress
     action$.ofType(newEventDataEntryActionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS)
         .map((action) => {
@@ -131,7 +131,7 @@ export const saveNewEventRelationshipsIfExistsEpic = (action$: InputObservable, 
             return null;
         });
 
-export const saveNewEventRelationshipFinishedEpic = (action$: InputObservable, store: ReduxStore) =>
+export const saveNewEventRelationshipFinishedEpic = (action$: InputObservable) =>
     // $FlowSuppress
     action$.ofType(
         newEventDataEntryActionTypes.NEW_EVENT_RELATIONSHIPS_SAVED,
@@ -149,7 +149,7 @@ export const saveNewEventRelationshipFinishedEpic = (action$: InputObservable, s
             return null;
         });
 
-export const teiForNewEventRelationshipSavedEpic = (action$: InputObservable, store: ReduxStore) =>
+export const teiForNewEventRelationshipSavedEpic = (action$: InputObservable) =>
     // $FlowSuppress
     action$.ofType(
         newEventDataEntryActionTypes.TEI_FOR_NEW_EVENT_RELATIONSHIPS_SAVED,
