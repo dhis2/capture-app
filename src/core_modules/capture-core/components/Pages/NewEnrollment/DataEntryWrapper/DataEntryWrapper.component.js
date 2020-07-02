@@ -62,8 +62,8 @@ class DataEntryWrapper extends React.Component<Props> {
                 // onClick={() => this.props.onFormLayoutDirectionChange(!this.props.formHorizontal)}
             >
                 {
-                  // $FlowFixMe[prop-missing] automated comment
-                  this.props.formHorizontal ? i18n.t('Switch to form view') : i18n.t('Switch to row view')}
+                    // $FlowFixMe[prop-missing] automated comment
+                    this.props.formHorizontal ? i18n.t('Switch to form view') : i18n.t('Switch to row view')}
             </Button>
         );
     }

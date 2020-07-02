@@ -29,9 +29,9 @@ const OfflineEmptyList = (props: Props) => (
         className={props.classes.container}
     >
         {
-          // $FlowFixMe[incompatible-type] automated comment
-          // $FlowFixMe[prop-missing] automated comment
-          props.emptyListText || i18n.t('Data for offline list not present')}
+            // $FlowFixMe[incompatible-type] automated comment
+            // $FlowFixMe[prop-missing] automated comment
+            props.emptyListText || i18n.t('Data for offline list not present')}
     </div>
 );
 

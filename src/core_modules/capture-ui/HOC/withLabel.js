@@ -88,8 +88,9 @@ export default (hocParams: ?HOCParamsContainer) =>
                         useVerticalOrientation={useVerticalOrientation}
                     >
                         {
-                          // $FlowFixMe[incompatible-type] automated comment
-                          label}
+                            // $FlowFixMe[incompatible-type] automated comment
+                            label
+                        }
                     </Label>
                 );
             }

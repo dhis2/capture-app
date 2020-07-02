@@ -121,8 +121,8 @@ class ListWrapperMenu extends React.Component<Props, State> {
                             disabled={!content.clickHandler}
                         >
                             {
-                              // $FlowFixMe[prop-missing] automated comment
-                              content.element}
+                                // $FlowFixMe[prop-missing] automated comment
+                                content.element}
                         </MenuItem>
                     );
                 })

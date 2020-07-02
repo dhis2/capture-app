@@ -110,13 +110,13 @@ class FeedbackBar extends React.Component<Props> {
                 >
                     <DialogTitle>
                         {
-                          // $FlowFixMe[prop-missing] automated comment
-                          isDialogOpen ? message && message.title : ''}
+                            // $FlowFixMe[prop-missing] automated comment
+                            isDialogOpen ? message && message.title : ''}
                     </DialogTitle>
                     <DialogContent>
                         {
-                          // $FlowFixMe[prop-missing] automated comment
-                          isDialogOpen ? message && message.content : ''}
+                            // $FlowFixMe[prop-missing] automated comment
+                            isDialogOpen ? message && message.content : ''}
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose} primary>

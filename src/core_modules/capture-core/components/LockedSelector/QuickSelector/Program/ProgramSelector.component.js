@@ -257,7 +257,7 @@ class ProgramSelector extends Component<Props> {
                                                 return (
                                                     <CategorySelector
                                                         category={category}
-    // $FlowFixMe[incompatible-call] automated comment
+                                                        // $FlowFixMe[incompatible-call] automated comment
                                                         onSelect={(option) => { this.handleClickCategoryOption(option, category.id); }}
                                                         selectedOrgUnitId={selectedOrgUnitId}
                                                     />
