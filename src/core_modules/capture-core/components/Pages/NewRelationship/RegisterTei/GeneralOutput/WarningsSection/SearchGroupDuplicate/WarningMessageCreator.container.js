@@ -4,10 +4,6 @@ import WarningMessageCreator from './WarningMessageCreator.component';
 import { reviewDuplicates } from './searchGroupDuplicate.actions';
 
 
-const mapStateToProps = (state: ReduxState, props: Object) => {
-    return {};
-};
-
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onReviewDuplicates: (onOpenReviewDialog: Function) => {
         dispatch(reviewDuplicates());
@@ -16,4 +12,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowSuppress
-export default connect(mapStateToProps, mapDispatchToProps)(WarningMessageCreator);
+export default connect(null, mapDispatchToProps)(WarningMessageCreator);

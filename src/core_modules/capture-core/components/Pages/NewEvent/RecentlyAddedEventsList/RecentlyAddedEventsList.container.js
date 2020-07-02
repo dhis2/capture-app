@@ -7,7 +7,7 @@ const mapStateToProps = (state: ReduxState) => ({
     eventsValues: state.recentlyAddedEventsValues,
 });
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+const mapDispatchToProps = () => ({
     onRowClick: () => {
     },
 });

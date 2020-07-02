@@ -16,23 +16,20 @@ class DeleteControl extends MapControl<any, Props> {
     componentWillMount() {
         const deleteControl = L.control({ position: 'topright' });
         const text = i18n.t('Delete polygon');
-        // eslint-disable-next-line
         const jsx = (
-            <div className="leaflet-draw-toolbar leaflet-bar">{
-                // eslint-disable-next-line
-                }<a
+            <div className="leaflet-draw-toolbar leaflet-bar">
+                {/* eslint-disable-next-line */}
+                <a
                     className={classNames('leaflet-draw-edit-remove', { 'leaflet-disabled': this.props.disabled })}
                     onClick={this.onClick}
                     title={text}
                     role="button"
                     tabIndex="0"
-                >
-                    
-                </a>
+                />
             </div>
         );
 
-        deleteControl.onAdd = (map) => {
+        deleteControl.onAdd = () => {
             const div = L.DomUtil.create('div', '');
             ReactDOM.render(jsx, div);
             return div;
@@ -46,7 +43,7 @@ class DeleteControl extends MapControl<any, Props> {
         }
     }
 
-    createLeafletElement () {
+    createLeafletElement() {
         return this.leafletElement;
     }
 

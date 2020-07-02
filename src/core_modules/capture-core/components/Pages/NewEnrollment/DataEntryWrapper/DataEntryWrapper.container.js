@@ -1,15 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import DataEntryWrapper from './DataEntryWrapper.component';
-/*
-import {
-    setNewEventFormLayoutDirection,
-} from './newEventDataEntryWrapper.actions';
-*/
-import {
-    makeEnrollmentMetadataSelector,
-} from './dataEntryWrapper.selectors';
-// import getDataEntryHasChanges from '../getNewEventDataEntryHasChanges';
+import { makeEnrollmentMetadataSelector } from './dataEntryWrapper.selectors';
 
 
 const makeMapStateToProps = () => {
@@ -20,8 +12,6 @@ const makeMapStateToProps = () => {
 
         return {
             enrollmentMetadata,
-            // dataEntryHasChanges: getDataEntryHasChanges(state),
-            // formHorizontal: (formFoundation && formFoundation.customForm ? false : !!state.newEventPage.formHorizontal),
         };
     };
 
@@ -29,12 +19,7 @@ const makeMapStateToProps = () => {
     return mapStateToProps;
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
-    /*
-    onFormLayoutDirectionChange: (formHorizontal: boolean) => {
-        dispatch(setNewEventFormLayoutDirection(formHorizontal));
-    },
-    */
+const mapDispatchToProps = () => ({
 });
 
 // $FlowSuppress

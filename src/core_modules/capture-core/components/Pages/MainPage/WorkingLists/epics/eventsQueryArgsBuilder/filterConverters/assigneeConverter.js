@@ -1,5 +1,5 @@
 // @flow
-import { type AssigneeFilterData } from '../../../eventList.types';
+import type { AssigneeFilterData } from '../../../../../../FiltersForTypes/filters.types';
 
 export function convertAssignee(
     sourceValue: AssigneeFilterData,

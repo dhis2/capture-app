@@ -1,20 +1,15 @@
 // @flow
 /* eslint-disable class-methods-use-this */
-
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-
 import VirtualizedSelect from 'react-virtualized-select';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-
 import 'react-select/dist/react-select.css';
 import 'react-virtualized/styles.css';
 import 'react-virtualized-select/styles.css';
-
 import VirtualizedOption from './OptionsSelectVirtualizedOption.component';
-
 import OptionSet from '../../../../metaData/OptionSet/OptionSet';
 import Option from '../../../../metaData/OptionSet/Option';
 
@@ -126,21 +121,6 @@ type State = {
 };
 
 class OptionsSelectVirtualized extends Component<Props, State> {
-    static defaultSelectStyle = {
-        border: 'none',
-        outline: 'none',
-        borderRadius: 0,
-    };
-    static defaultMenuContainerStyle = {
-    }
-
-    static defaultProps = {
-        translations: {
-            clearText: '',
-            noResults: '',
-        },
-    };
-
     handleChange: (e: Object, index: number, value: any) => void;
     handleFocus: () => void;
     handleBlur: () => void;
@@ -150,6 +130,12 @@ class OptionsSelectVirtualized extends Component<Props, State> {
     inFocusLabelClasses: Object;
     yourSelect: any;
 
+    static defaultProps = {
+        translations: {
+            clearText: '',
+            noResults: '',
+        },
+    };
     constructor(props: Props) {
         super(props);
         this.state = { inFocus: false };
@@ -169,6 +155,14 @@ class OptionsSelectVirtualized extends Component<Props, State> {
         if (nextProps.optionSet !== this.props.optionSet) {
             this.options = this.buildOptions(nextProps.optionSet);
         }
+    }
+
+    static defaultSelectStyle = {
+        border: 'none',
+        outline: 'none',
+        borderRadius: 0,
+    };
+    static defaultMenuContainerStyle = {
     }
 
     buildOptions(optionSet: OptionSet) {

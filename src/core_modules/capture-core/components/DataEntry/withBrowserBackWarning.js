@@ -2,7 +2,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router'; //eslint-disable-line
+import { withRouter } from 'react-router';
 
 import ConfirmDialog from '../Dialogs/ConfirmDialog.component';
 import getDataEntryKey from './common/getDataEntryKey';
@@ -50,7 +50,7 @@ const getEventListener = (InnerComponent: React.ComponentType<any>) =>
                 dialogOpen: false,
             });
             this.unblock();
-            //this.props.history.goBack();
+            // this.props.history.goBack();
         }
 
         handleDialogCancel = () => {

@@ -2,13 +2,9 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
-
-import { Button } from '../../Buttons';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
+import { Button } from '../../Buttons';
 import { TrackerProgram } from '../../../metaData';
-
-// Find button to be included when find(tracked entity instance) is supported
-// import SearchIcon from '@material-ui/icons/Search';
 
 const styles = () => ({
     container: {

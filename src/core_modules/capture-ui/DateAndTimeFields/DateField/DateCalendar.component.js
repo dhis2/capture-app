@@ -20,11 +20,6 @@ type Props = {
 };
 
 class DateCalendar extends Component<Props> {
-    static displayOptions = {
-        showHeader: true,
-        showMonthsForYears: false,
-    };
-
     handleChange: (e: any, dates: ?Array<Date>) => void;
     displayOptions: Object;
 
@@ -41,6 +36,11 @@ class DateCalendar extends Component<Props> {
     shouldComponentUpdate() {
         return false;
     }
+
+    static displayOptions = {
+        showHeader: true,
+        showMonthsForYears: false,
+    };
 
     handleChange(changeDate: Date) {
         const changeDateInLocalFormat = this.props.onConvertValueOut(changeDate);

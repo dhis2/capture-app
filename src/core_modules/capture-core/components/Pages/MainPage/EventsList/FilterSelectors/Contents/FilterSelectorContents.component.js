@@ -5,8 +5,6 @@ import { filterTypesObject } from '../filterTypes';
 import { MAX_OPTIONS_COUNT_FOR_OPTION_SET_CONTENTS } from '../filterSelector.const';
 import withButtons from './withButtons';
 import withData from './withData';
-// import withRef from './withRef';
-// import withStyleRef from './withStyleRef';
 
 import {
     TextFilter,
@@ -33,6 +31,14 @@ type Props = {
 };
 
 class FilterSelectorContents extends React.PureComponent<Props> {
+    static getOptionSetComponent() {
+        return withButtons()(
+            withData()(
+                OptionSetFilter,
+            ),
+        );
+    }
+
     static selectorContentsForTypes = {
         [filterTypesObject.TEXT]: TextFilter,
         [filterTypesObject.NUMBER]: NumericFilter,
@@ -57,14 +63,6 @@ class FilterSelectorContents extends React.PureComponent<Props> {
         filterTypesObject.TRUE_ONLY,
         filterTypesObject.ASSIGNEE,
     ];
-
-    static getOptionSetComponent() {
-        return withButtons()(
-            withData()(
-                OptionSetFilter,
-            ),
-        );
-    }
 
     getContentsComponent() {
         const { type, optionSet } = this.props;

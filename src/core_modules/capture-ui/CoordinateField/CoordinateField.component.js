@@ -42,10 +42,11 @@ const coordinateKeys = {
 };
 
 export default class D2Coordinate extends React.Component<Props, State> {
+    mapInstance: ?any;
+
     static defaultProps = {
         mapCenter: [51.505, -0.09],
     };
-    mapInstance: ?any;
 
     constructor(props: Props) {
         super(props);
@@ -129,7 +130,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
                 >
                     <AddLocationIcon
                         onClick={this.openMap}
-                        
+
                     />
                 </IconButton>
 
@@ -251,43 +252,39 @@ export default class D2Coordinate extends React.Component<Props, State> {
     }
 
 
-    renderVertical = () => {
-        return (
-            <div>
-                <div className={defaultClasses.coordinateFieldsVertical}>
-                    {this.renderMapDialog()}
-                    <div className={defaultClasses.buttonsContainerVertical}>
-                        {this.renderMapIcon()}
-                        {this.renderClearButton()}
-                    </div>
-                    <div className={defaultClasses.inputContainer}>
-                        {this.renderLongitude()}
-                    </div>
-                    <div className={defaultClasses.inputContainer}>
-                        {this.renderLatitude()}
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
-    renderHorizontal = () => {
-        return (
-            <div>
-                <div className={defaultClasses.coordinateFieldsHorizontal}>
-                    {this.renderMapDialog()}
+    renderVertical = () => (
+        <div>
+            <div className={defaultClasses.coordinateFieldsVertical}>
+                {this.renderMapDialog()}
+                <div className={defaultClasses.buttonsContainerVertical}>
                     {this.renderMapIcon()}
-                    <div className={defaultClasses.inputContainer}>
-                        {this.renderLongitude()}
-                    </div>
-                    <div className={defaultClasses.inputContainer}>
-                        {this.renderLatitude()}
-                    </div>
                     {this.renderClearButton()}
                 </div>
+                <div className={defaultClasses.inputContainer}>
+                    {this.renderLongitude()}
+                </div>
+                <div className={defaultClasses.inputContainer}>
+                    {this.renderLatitude()}
+                </div>
             </div>
-        );
-    }
+        </div>
+    )
+
+    renderHorizontal = () => (
+        <div>
+            <div className={defaultClasses.coordinateFieldsHorizontal}>
+                {this.renderMapDialog()}
+                {this.renderMapIcon()}
+                <div className={defaultClasses.inputContainer}>
+                    {this.renderLongitude()}
+                </div>
+                <div className={defaultClasses.inputContainer}>
+                    {this.renderLatitude()}
+                </div>
+                {this.renderClearButton()}
+            </div>
+        </div>
+    )
 
     render() {
         return this.props.orientation === orientations.VERTICAL ? this.renderVertical() : this.renderHorizontal();

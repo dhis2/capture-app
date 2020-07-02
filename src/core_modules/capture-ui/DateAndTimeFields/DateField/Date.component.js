@@ -22,12 +22,6 @@ type State = {
 };
 
 class UIDate extends React.Component<Props, State> {
-    static propContainers = {
-        CALENDAR: 'calendar',
-        POPUP: 'popup',
-        INPUT: 'input',
-    };
-
     static splitPassOnProps(passOnProps: ?Object) {
         const splittedProps = {
             input: {},
@@ -84,6 +78,12 @@ class UIDate extends React.Component<Props, State> {
     componentWillUnmount() {
         document.removeEventListener('click', this.handleDocumentClick);
     }
+
+    static propContainers = {
+        CALENDAR: 'calendar',
+        POPUP: 'popup',
+        INPUT: 'input',
+    };
 
     handleTextFieldFocus() {
         document.removeEventListener('click', this.handleDocumentClick);

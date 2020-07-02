@@ -49,9 +49,6 @@ export default function buildServerData(
     selections: Selections,
     enrollment: Enrollment,
     formValues: Object = {},
-    dataEntryValues: Object = {},
-    dataEntryValuesMeta: Object = {},
-    prevEnrollmentData: Object = {},
 ) {
     const formFoundation = enrollment.enrollmentForm;
     const formServerValues = getFormServerValues(formValues, formFoundation);

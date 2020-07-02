@@ -1,4 +1,4 @@
-/* eslint-disable */
-declare module "date-fns/locale/nb" {
+// @flow
+declare module 'date-fns/locale/nb' {
     declare module.exports: any;
 }

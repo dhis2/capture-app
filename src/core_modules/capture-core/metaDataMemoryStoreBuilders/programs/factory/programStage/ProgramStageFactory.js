@@ -3,6 +3,8 @@
 
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
+import capitalizeFirstLetter from 'capture-core-utils/string/capitalizeFirstLetter';
+import getCamelCaseUppercaseString from 'capture-core-utils/string/getCamelCaseFromUppercase';
 import type {
     CachedProgramStageDataElement,
     CachedSectionDataElements,
@@ -15,10 +17,8 @@ import type {
 import Section from '../../../../metaData/RenderFoundation/Section';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import CustomForm from '../../../../metaData/RenderFoundation/CustomForm';
-import capitalizeFirstLetter from 'capture-core-utils/string/capitalizeFirstLetter';
 import isNonEmptyArray from '../../../../utils/isNonEmptyArray';
 import ProgramStage from '../../../../metaData/Program/ProgramStage';
-import getCamelCaseUppercaseString from 'capture-core-utils/string/getCamelCaseFromUppercase';
 import DataElementFactory from './DataElementFactory';
 import RelationshipTypesFactory from './RelationshipTypesFactory';
 

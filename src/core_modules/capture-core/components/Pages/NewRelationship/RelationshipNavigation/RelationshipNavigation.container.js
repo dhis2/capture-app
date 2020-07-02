@@ -7,7 +7,7 @@ const mapStateToProps = (state: ReduxState) => ({
     searching: state.newRelationship.searching,
 });
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+const mapDispatchToProps = () => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RelationshipNavigation);

@@ -1,6 +1,6 @@
 // @flow
 import { getEvents } from '../../../../../events/eventRequests';
-import type { ColumnConfig } from './getColumnsConfiguration';
+import type { ColumnConfig } from '../workingLists.types';
 import programCollection from '../../../../../metaDataMemoryStores/programCollection/programCollection';
 
 type InputQueryArgs = {

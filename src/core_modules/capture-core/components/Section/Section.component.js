@@ -22,7 +22,6 @@ type Props = {
     children?: ?React$Element<any>,
     style?: ?Object,
     contentStyle?: ?Object,
-    elevation?: ?number,
     mainActionButton?: ?React$Element<any>,
     header?: ?React$Element<any>,
     isCollapsed?: ?boolean,

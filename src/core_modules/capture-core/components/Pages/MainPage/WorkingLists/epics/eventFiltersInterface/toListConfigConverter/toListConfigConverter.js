@@ -64,21 +64,19 @@ const getDateFilter = (filter: ApiDataFilterDate): DateFilterData => {
     };
 };
 
-const getUser = (userId: string) => {
-    return getApi()
-        .get(`users/${userId}`, { fields: 'id,name,userCredentials[username]' })
-        .then((user: Object) => ({
-            id: user.id,
-            name: user.name,
-            username: user.userCredentials.username,
-        }))
-        .catch((error) => {
-            log.error(
-                errorCreator('An error occured retrieving assignee user')({ error, userId }),
-            );
-            return null;
-        });
-};
+const getUser = (userId: string) => getApi()
+    .get(`users/${userId}`, { fields: 'id,name,userCredentials[username]' })
+    .then((user: Object) => ({
+        id: user.id,
+        name: user.name,
+        username: user.userCredentials.username,
+    }))
+    .catch((error) => {
+        log.error(
+            errorCreator('An error occured retrieving assignee user')({ error, userId }),
+        );
+        return null;
+    });
 
 // eslint-disable-next-line complexity
 const getAssigneeFilter = async (

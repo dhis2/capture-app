@@ -15,7 +15,7 @@ function getMinorCacheVersion() {
     const appCacheVersionAsString = process.env.REACT_APP_CACHE_VERSION;
     const appCacheVersion = Number(appCacheVersionAsString);
     return appCacheVersion;
-}   
+}
 
 function getCacheVersion() {
     const majorCacheVersion = getMajorCacheVersion();
