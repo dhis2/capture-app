@@ -1,9 +1,8 @@
 // @flow
 /* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
-import InfiniteCalendar from 'react-infinite-calendar';
-
-import 'react-infinite-calendar/styles.css';
+import InfiniteCalendar from '@joakim_sm/react-infinite-calendar';
+import '@joakim_sm/react-infinite-calendar/styles.css';
 import './customStyles.css';
 
 type Props = {
@@ -22,7 +21,8 @@ type Props = {
 
 class DateCalendar extends Component<Props> {
     static displayOptions = {
-        showHeader: false,
+        showHeader: true,
+        showMonthsForYears: false,
     };
 
     handleChange: (e: any, dates: ?Array<Date>) => void;
@@ -86,6 +86,7 @@ class DateCalendar extends Component<Props> {
 
         return (
             <div>
+                { /* $FlowFixMe */}
                 <InfiniteCalendar
                     {...this.getMinMaxProps()}
                     selected={this.getValue((value))}
