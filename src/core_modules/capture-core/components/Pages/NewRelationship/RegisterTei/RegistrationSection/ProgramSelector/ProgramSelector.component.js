@@ -30,6 +30,7 @@ class ProgramSelector extends React.Component<Props> {
     render() {
         const { classes, ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <ComposedProgramSelector
                 styles={ProgramSelector.baseComponentStyles}
                 programLabelClass={classes.programLabel}

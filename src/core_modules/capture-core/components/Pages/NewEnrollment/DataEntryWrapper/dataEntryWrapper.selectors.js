@@ -13,11 +13,13 @@ export const makeEnrollmentMetadataSelector = () => createSelector(
         let program: TrackerProgram;
         try {
             // $FlowSuppress Prechecked that program is a tracker program
+            // $FlowFixMe[incompatible-type] automated comment
             program = getProgramFromProgramIdThrowIfNotFound(programId);
         } catch (error) {
             return null;
         }
 
+        // $FlowFixMe[prop-missing] automated comment
         if (!program.enrollment) {
             log.error(
                 errorCreator(`could not find enrollment specification for ${programId}`)({ program }),

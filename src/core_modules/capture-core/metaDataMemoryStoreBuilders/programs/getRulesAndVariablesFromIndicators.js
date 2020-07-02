@@ -70,6 +70,7 @@ function getDirectAddressedVariable(variableWithCurls, programId) {
 
 function getVariables(action, rule, programId) {
     const variablesInCondition = getVariablesFromExpression(rule.condition);
+    // $FlowFixMe[incompatible-call] automated comment
     const variablesInData = getVariablesFromExpression(action.data);
 
     const directAddressedVariablesFromConditions = variablesInCondition.map(variableInCondition => getDirectAddressedVariable(variableInCondition, programId));
@@ -83,6 +84,7 @@ function getVariables(action, rule, programId) {
 }
 
 function isValueCountPresent(rule, action) {
+    // $FlowFixMe[incompatible-use] automated comment
     return rule.condition.indexOf('V{value_count}') >= 0 || action.data.indexOf('V{value_count}') >= 0;
 }
 
@@ -97,6 +99,7 @@ function replaceValueCount(rule, action, variableObjectsCurrentExpression) {
 
     // Replace all occurrences of value counts in both the data and expression
     rule.condition = rule.condition.replace(new RegExp('V{value_count}', 'g'), valueCountText);
+    // $FlowFixMe[incompatible-use] automated comment
     action.data = action.data.replace(new RegExp('V{value_count}', 'g'), valueCountText);
 
     return { rule, action };
@@ -110,6 +113,7 @@ function replaceValueCountIfPresent(rule, action, variableObjectsCurrentExpressi
 }
 
 function isPositiveValueCountPresent(rule, action) {
+    // $FlowFixMe[incompatible-use] automated comment
     return rule.condition.indexOf('V{zero_pos_value_count}') >= 0 || action.data.indexOf('V{zero_pos_value_count}') >= 0;
 }
 
@@ -124,6 +128,7 @@ function replacePositiveValueCount(rule, action, variableObjectsCurrentExpressio
 
     // Replace all occurrences of value counts in both the data and expression
     rule.condition = rule.condition.replace(new RegExp('V{zero_pos_value_count}', 'g'), positiveValueCountText);
+    // $FlowFixMe[incompatible-use] automated comment
     action.data = action.data.replace(new RegExp('V{zero_pos_value_count}', 'g'), positiveValueCountText);
 }
 
@@ -139,6 +144,7 @@ function buildIndicatorRuleAndVariables(programIndicator: CachedProgramIndicator
         return null;
     }
 
+    // $FlowFixMe[prop-missing] automated comment
     const newAction: ProgramRuleAction = {
         id: programIndicator.id,
         content: programIndicator.shortName || programIndicator.displayName,
@@ -147,6 +153,7 @@ function buildIndicatorRuleAndVariables(programIndicator: CachedProgramIndicator
         location: 'indicators',
     };
 
+    // $FlowFixMe[prop-missing] automated comment
     const newRule: ProgramRule = {
         id: programIndicator.id,
         condition: programIndicator.filter ? programIndicator.filter : 'true',
@@ -162,6 +169,7 @@ function buildIndicatorRuleAndVariables(programIndicator: CachedProgramIndicator
     replaceValueCountIfPresent(newRule, newAction, variableObjectsCurrentExpression);
     replacePositiveValueCountIfPresent(newRule, newAction, variableObjectsCurrentExpression);
 
+    // $FlowFixMe[incompatible-call] automated comment
     newAction.data = performStaticReplacements(newAction.data);
     newRule.condition = performStaticReplacements(newRule.condition);
 
@@ -178,9 +186,13 @@ export default function getRulesAndVariablesFromProgramIndicators(
         .map(programIndicator => buildIndicatorRuleAndVariables(programIndicator, programId))
         .filter(container => container)
         .reduce((accOneLevelContainer, container) => {
+            // $FlowFixMe[incompatible-type] automated comment
             accOneLevelContainer.rules = accOneLevelContainer.rules || [];
+            // $FlowFixMe[incompatible-use] automated comment
             accOneLevelContainer.rules.push(container.rule);
 
+            // $FlowFixMe[incompatible-type] automated comment
+            // $FlowFixMe[incompatible-use] automated comment
             accOneLevelContainer.variables = accOneLevelContainer.variables ? [...accOneLevelContainer.variables, ...container.variables] : container.variables;
             return accOneLevelContainer;
         }, { rules: null, variables: null });

@@ -16,6 +16,7 @@ const makeMapStateToProps = () => {
     };
 
     // $FlowSuppress
+    // $FlowFixMe[not-an-object] automated comment
     return mapStateToProps;
 };
 
@@ -23,4 +24,5 @@ const mapDispatchToProps = () => ({
 });
 
 // $FlowSuppress
+// $FlowFixMe[missing-annot] automated comment
 export default connect(makeMapStateToProps, mapDispatchToProps)(DataEntryWrapper);

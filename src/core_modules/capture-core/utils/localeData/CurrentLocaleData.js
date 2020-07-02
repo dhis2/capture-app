@@ -13,6 +13,7 @@ export type LocaleDataType = {
 }
 
 export default class CurrentLocaleData {
+    // $FlowFixMe[missing-annot] automated comment
     static currentData;
 
     static set(data: LocaleDataType) {

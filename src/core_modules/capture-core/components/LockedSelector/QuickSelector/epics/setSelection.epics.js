@@ -18,6 +18,7 @@ const getArguments = (programId: string, orgUnitId: string) => {
 
 export const setOrgUnit = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(selectionActionTypes.SET_ORG_UNIT_ID)
         .map(() => {
             const state = store.getState();
@@ -28,6 +29,7 @@ export const setOrgUnit = (action$: InputObservable, store: ReduxStore) =>
 
 export const setProgram = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(selectionActionTypes.SET_PROGRAM_ID)
         .map(() => {
             const state = store.getState();
@@ -38,6 +40,7 @@ export const setProgram = (action$: InputObservable, store: ReduxStore) =>
 
 export const goBackToListContext = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(selectionActionTypes.GO_BACK_TO_LIST_CONTEXT)
         .map(() => {
             const state = store.getState();

@@ -34,6 +34,7 @@ class TrueOnlyFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <TrueOnlyFilter
                 value={this.state.value}
                 innerRef={filterTypeRef}

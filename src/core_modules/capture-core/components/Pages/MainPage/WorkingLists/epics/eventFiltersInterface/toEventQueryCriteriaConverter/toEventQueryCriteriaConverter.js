@@ -71,15 +71,25 @@ const getAssigneeFilter = (filter: AssigneeFilterData): ApiDataFilterAssignee =>
 });
 
 const getFilterByType = {
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.TEXT]: getTextFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.NUMBER]: getNumericFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER]: getNumericFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_POSITIVE]: getNumericFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_NEGATIVE]: getNumericFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATE]: getDateFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.BOOLEAN]: getBooleanFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.TRUE_ONLY]: getTrueOnlyFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.ASSIGNEE]: getAssigneeFilter,
 };
 
@@ -145,6 +155,7 @@ const buildMainAndDataFilters = (apiFilters: Array<Object>, defaultSpecs: Map<st
     .reduce((acc, filter) => {
         const element = defaultSpecs.get(filter.dataItem);
         // $FlowSuppress
+        // $FlowFixMe[incompatible-type] automated comment
         if (element.isMainProperty) {
             const mainFilter = getMainFilter(filter);
             const filters = {
@@ -168,9 +179,13 @@ const getColumnsOrder = (columns: Array<ColumnConfig>) =>
         .map(column => column.apiName || column.id);
 
 export function convertToEventQueryCriteria({
+    // $FlowFixMe[prop-missing] automated comment
     filters: listFilters,
+    // $FlowFixMe[prop-missing] automated comment
     sortById: listSortById,
+    // $FlowFixMe[prop-missing] automated comment
     sortByDirection: listSortByDirection,
+    // $FlowFixMe[prop-missing] automated comment
     columnOrder: listColumns,
     defaultConfig,
 }: {

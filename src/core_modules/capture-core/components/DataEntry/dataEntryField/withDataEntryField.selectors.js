@@ -25,6 +25,7 @@ const createDeepEqualSelector = createSelectorCreator(
 
 const componentPropsSelector = (componentProps: ?Object) => componentProps || {};
 
+// $FlowFixMe[missing-annot] automated comment
 export const makeReselectComponentProps = () => createDeepEqualSelector(
     componentPropsSelector,
     componentProps => componentProps,

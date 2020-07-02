@@ -19,6 +19,7 @@ export default function getStageForEventProgram(programId: string) {
     }
 
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     const stage = program.stage;
     if (!stage) {
         log.error(errorCreator(errorMessages.STAGE_NOT_FOUND)({ programId }));

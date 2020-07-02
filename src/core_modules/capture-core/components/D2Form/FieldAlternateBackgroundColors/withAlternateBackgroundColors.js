@@ -47,6 +47,7 @@ export default () => (InnerComponent: React.ComponentType<any>) => withStyles(ge
             const calculatedProps = !formHorizontal ? { onGetContainerProps: this.getContainerProps } : null;
 
             return (
+                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     {...calculatedProps}
                     {...passOnProps}

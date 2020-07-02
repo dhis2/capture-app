@@ -34,6 +34,7 @@ class TextFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <TextFilter
                 value={this.state.value}
                 ref={filterTypeRef}

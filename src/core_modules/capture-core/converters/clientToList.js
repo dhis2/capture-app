@@ -60,22 +60,39 @@ function convertRangeForDisplay(parser: any, clientValue: any) {
 }
 
 const valueConvertersForType = {
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.NUMBER]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_POSITIVE]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_NEGATIVE]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATE]: convertDateForListDisplay,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATE_RANGE]: value => convertRangeForDisplay(convertDateForListDisplay, value),
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATETIME]: convertDateTimeForListDisplay,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.TIME]: convertTimeForListDisplay,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.TRUE_ONLY]: () => 'Yes',
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'Yes' : 'No'),
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.COORDINATE]: convertCoordinateForDisplay,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.AGE]: convertDateForListDisplay,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.FILE_RESOURCE]: convertResourceForDisplay,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.IMAGE]: convertResourceForDisplay,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.name,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.ASSIGNEE]: (rawValue: Object) => `${rawValue.name} (${rawValue.username})`,
 };
 

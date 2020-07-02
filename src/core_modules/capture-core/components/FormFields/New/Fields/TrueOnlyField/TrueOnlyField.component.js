@@ -27,6 +27,7 @@ class TrueOnlyField extends React.Component<Props> {
     render() {
         const { onBlur, ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <UITrueOnlyField
                 onSelect={onBlur}
                 {...passOnProps}

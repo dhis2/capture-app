@@ -190,11 +190,13 @@ export default class D2Coordinate extends React.Component<Props, State> {
     renderDialogActions = () => (
         <div className={defaultClasses.dialogActionOuterContainer}>
             <div className={defaultClasses.dialogActionInnerContainer}>
+                {/* $FlowFixMe[prop-missing] automated comment */}
                 <Button kind="basic" onClick={this.closeMap}>
                     {i18n.t('Cancel')}
                 </Button>
             </div>
             <div className={defaultClasses.dialogActionInnerContainer}>
+                {/* $FlowFixMe[prop-missing] automated comment */}
                 <Button kind="primary" onClick={this.onSetCoordinate}>
                     {i18n.t('Set coordinate')}
                 </Button>
@@ -206,6 +208,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
         const { mapCenter, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
         const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes || {};
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <CoordinateInput
                 shrinkDisabled={shrinkDisabled}
                 label="Latitude"
@@ -224,6 +227,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
         const { mapCenter, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
         const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes || {};
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <CoordinateInput
                 shrinkDisabled={shrinkDisabled}
                 label="Longitude"

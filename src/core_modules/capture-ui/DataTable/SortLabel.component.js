@@ -38,6 +38,7 @@ class SortLabel extends React.Component<Props> {
         return (
             <div
                 // $FlowSuppress
+                // $FlowFixMe[incompatible-call] automated comment
                 className={classNames(childrenDefaultClasses, this.props.childrenClass, classes)}
                 onClick={this.handleSort}
                 role="button"

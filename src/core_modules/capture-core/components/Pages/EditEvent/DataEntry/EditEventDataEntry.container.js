@@ -28,6 +28,7 @@ const getFormFoundation = (state: ReduxState) => {
     }
 
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     const stage = program.stage;
     if (!stage) {
         log.error(errorCreator('stage not found for program')({ method: 'getFormFoundation' }));
@@ -95,6 +96,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
 });
 
 // $FlowSuppress
+// $FlowFixMe[missing-annot] automated comment
 export default connect(mapStateToProps, mapDispatchToProps)(
     withLoadingIndicator()(withErrorMessageHandler()(EditEventDataEntry)),
 );

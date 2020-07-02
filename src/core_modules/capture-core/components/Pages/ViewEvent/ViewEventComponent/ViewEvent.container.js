@@ -15,6 +15,7 @@ const makeMapStateToProps = () => {
     const programStageSelector = makeProgramStageSelector();
     const eventAccessSelector = makeEventAccessSelector();
 
+    // $FlowFixMe[not-an-object] automated comment
     return (state: ReduxState) => {
         const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
         return {
@@ -33,4 +34,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowSuppress
+// $FlowFixMe[missing-annot] automated comment
 export default connect(makeMapStateToProps, mapDispatchToProps)(withErrorMessageHandler()(ViewEvent));

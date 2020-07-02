@@ -119,6 +119,7 @@ class ProgramFactory {
 
     async _buildProgramAttributes(cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>) {
         const attributePromises = cachedProgramTrackedEntityAttributes.map(async (ptea) => {
+            // $FlowFixMe[incompatible-call] automated comment
             const dataElement = await this.dataElementFactory.build(ptea);
             return dataElement;
         });

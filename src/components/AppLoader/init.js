@@ -23,6 +23,7 @@ function setLogLevel() {
         [environments.prod]: log.levels.ERROR,
     };
     // $FlowSuppress
+    // $FlowFixMe[invalid-computed-prop] automated comment
     let level = levels[process.env.NODE_ENV];
     if (!level && level !== 0) {
         level = log.levels.ERROR;
@@ -61,6 +62,7 @@ function setMomentLocaleAsync(locale: string) {
 
     return new Promise((resolve) => {
         // $FlowSuppress
+        // $FlowFixMe[unsupported-syntax] automated comment
         import(`moment/locale/${locale}`)
             .then(() => {
                 moment.locale(locale);
@@ -79,6 +81,7 @@ function setMomentLocaleAsync(locale: string) {
 function setDateFnLocaleAsync(locale: string, weekdays: any, weekdaysShort: any, firstDayOfWeek: number) {
     return new Promise((resolve, reject) => {
         // $FlowSuppress
+        // $FlowFixMe[unsupported-syntax] automated comment
         import(`date-fns/locale/${locale}`)
             .then((dateFnLocale) => {
                 const localeData: LocaleDataType = {
@@ -129,6 +132,7 @@ function setDateFnLocaleAsync(locale: string, weekdays: any, weekdaysShort: any,
 function changeI18nLocale(locale) {
     i18n.changeLanguage(locale);
     // $FlowSuppress
+    // $FlowFixMe[incompatible-use] automated comment
     document.body.setAttribute('dir', isLangRTL(locale) ? 'rtl' : 'ltr');
 }
 
@@ -143,6 +147,7 @@ async function setLocaleDataAsync(uiLocale: string) { //eslint-disable-line
     const weekdays = moment.weekdays();
     const weekdaysShort = moment.weekdaysShort();
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     const firstDayOfWeek = moment.localeData()._week.dow; //eslint-disable-line
 
     await setDateFnLocaleAsync(locale, weekdays, weekdaysShort, firstDayOfWeek);

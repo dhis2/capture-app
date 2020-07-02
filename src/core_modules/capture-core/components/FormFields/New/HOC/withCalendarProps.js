@@ -23,6 +23,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
                 return new Date();
             }
             // $FlowSuppress
+            // $FlowFixMe[incompatible-use] automated comment
             return parseData.momentDate.toDate();
         }
 

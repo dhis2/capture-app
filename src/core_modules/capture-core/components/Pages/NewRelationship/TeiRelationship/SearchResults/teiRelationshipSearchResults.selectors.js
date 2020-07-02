@@ -5,6 +5,7 @@ import { getTrackerProgramThrowIfNotFound, getTrackedEntityTypeThrowIfNotFound }
 const trackedEntityTypeIdSelector = props => props.selectedTrackedEntityTypeId;
 const programIdSelector = props => props.selectedProgramId;
 
+// $FlowFixMe[missing-annot] automated comment
 const makeAttributesSelector = () => createSelector(
     programIdSelector,
     trackedEntityTypeIdSelector,

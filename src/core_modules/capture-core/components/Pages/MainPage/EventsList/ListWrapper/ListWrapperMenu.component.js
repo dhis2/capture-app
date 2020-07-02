@@ -105,6 +105,7 @@ class ListWrapperMenu extends React.Component<Props, State> {
                     }
 
                     return (
+                        // $FlowFixMe[incompatible-type] automated comment
                         <MenuItem
                             key={content.key}
                             data-test={`menu-item-${content.key}`}
@@ -113,11 +114,15 @@ class ListWrapperMenu extends React.Component<Props, State> {
                                     return;
                                 }
                                 togglePopper();
+                                // $FlowFixMe[not-a-function] automated comment
                                 content.clickHandler();
                             }}
+                            // $FlowFixMe[prop-missing] automated comment
                             disabled={!content.clickHandler}
                         >
-                            {content.element}
+                            {
+                              // $FlowFixMe[prop-missing] automated comment
+                              content.element}
                         </MenuItem>
                     );
                 })

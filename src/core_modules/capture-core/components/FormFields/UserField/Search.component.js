@@ -211,6 +211,7 @@ class UserSearch extends React.Component<Props, State> {
         switch (exitBehaviour) {
         case exitBehaviours.SELECT_BEST_CHOICE:
             // $FlowSuppress
+            // $FlowFixMe[incompatible-call] automated comment
             this.props.onSet(highlightedSuggestion);
             break;
         case exitBehaviours.CLEAR:
@@ -252,6 +253,7 @@ class UserSearch extends React.Component<Props, State> {
     }
 
     handleInputDomRef = (element: ?HTMLElement) => {
+        // $FlowFixMe[incompatible-type] automated comment
         this.inputDomElement = element;
     }
 

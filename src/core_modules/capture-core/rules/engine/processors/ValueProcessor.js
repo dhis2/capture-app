@@ -31,12 +31,14 @@ export default class ValueProcessor {
             value = trimQuotes(value);
         }
 
+        // $FlowFixMe[prop-missing] automated comment
         const convertFnName = mapTypeToInterfaceFnName[type];
         if (!convertFnName) {
             log.warn(errorCreator(ValueProcessor.errorMessages.CONVERTER_NOT_FOUND)({ type }));
             return value;
         }
         // $FlowSuppress
+        // $FlowFixMe[incompatible-use] automated comment
         const convertedValue = ValueProcessor.addQuotesToValueIfString(this.converterObject[convertFnName](value));
         return convertedValue;
     }

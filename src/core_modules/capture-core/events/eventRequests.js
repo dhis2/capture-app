@@ -65,6 +65,7 @@ const mapEventInputKeyToOutputKey = {
 function getConvertedValue(valueToConvert: any, inputKey: string) {
     let convertedValue;
     if (inputKey === 'eventDate' || inputKey === 'dueDate' || inputKey === 'completedDate') {
+        // $FlowFixMe[prop-missing] automated comment
         convertedValue = convertValue(valueToConvert, elementTypes.DATE);
     } else {
         convertedValue = valueToConvert;
@@ -79,8 +80,10 @@ function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
                 const valueToConvert = apiEvent[inputKey];
                 const convertedValue = getConvertedValue(valueToConvert, inputKey);
                 // $FlowSuppress
+                // $FlowFixMe[prop-missing] automated comment
                 const outputKey = mapEventInputKeyToOutputKey[inputKey] || inputKey;
                 // $FlowSuppress
+                // $FlowFixMe[incompatible-return] automated comment
                 accEvent[outputKey] = convertedValue;
             }
             return accEvent;

@@ -70,6 +70,7 @@ type State = {
 };
 
 // $FlowSuppress
+// $FlowFixMe[incompatible-variance] automated comment
 class DateFilter extends Component<Props, State> implements UpdatableFilterContent<Value> {
     static validateField(value: ?string, type: $Values<typeof elementTypes>) {
         if (!value) {
@@ -120,6 +121,8 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
         const momentFrom = parseDate(valueFrom).momentDate;
         const momentTo = parseDate(valueTo).momentDate;
         // $FlowSuppress: Prechecked
+        // $FlowFixMe[incompatible-use] automated comment
+        // $FlowFixMe[incompatible-call] automated comment
         return momentFrom.isAfter(momentTo);
     }
 
@@ -131,10 +134,12 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
     static errorMessages = {
         CUSTOM_RANGE_WITHOUT_VALUES: 'Please specify a range',
         FROM_GREATER_THAN_TO: 'The From date can\'t be after the To date',
+        // $FlowFixMe[prop-missing] automated comment
         [elementTypes.DATE]: 'Please provide a valid date',
     };
 
     static validatorForTypes = {
+        // $FlowFixMe[prop-missing] automated comment
         [elementTypes.DATE]: isValidDate,
     };
 
@@ -189,6 +194,7 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
     }
 
     getUpdatedValue(valuePart: {[key: string]: string}) {
+        // $FlowFixMe[cannot-spread-indexer] automated comment
         const valueObject = {
             ...this.props.value,
             ...valuePart,
@@ -197,6 +203,7 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
         if (valueObject.from || valueObject.to) {
             valueObject.main = mainOptionKeys.CUSTOM_RANGE;
         } else if (valueObject.main === mainOptionKeys.CUSTOM_RANGE) {
+            // $FlowFixMe[incompatible-type] automated comment
             valueObject.main = null;
         }
 
@@ -292,6 +299,7 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
                         className={classes.inputContainer}
                     >
                         { /* $FlowSuppress: Flow not working 100% with HOCs */ }
+                        {/* $FlowFixMe[prop-missing] automated comment */}
                         <From
                             value={value && value.from}
                             error={minValueError}
@@ -310,6 +318,7 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
                         className={classes.inputContainer}
                     >
                         { /* $FlowSuppress: Flow not working 100% with HOCs */ }
+                        {/* $FlowFixMe[prop-missing] automated comment */}
                         <To
                             value={value && value.to}
                             error={maxValueError}

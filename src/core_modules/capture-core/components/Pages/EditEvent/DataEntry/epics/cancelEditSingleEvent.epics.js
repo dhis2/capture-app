@@ -10,6 +10,7 @@ import isSelectionsEqual from '../../../../App/isSelectionsEqual';
 
 export const cancelEditEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(editEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE)
         .map(() => {
             const state = store.getState();
@@ -31,6 +32,7 @@ export const cancelEditEventEpic = (action$: InputObservable, store: ReduxStore)
 
 export const cancelEditEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(editEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE)
         .map(() => {
             const state = store.getState();

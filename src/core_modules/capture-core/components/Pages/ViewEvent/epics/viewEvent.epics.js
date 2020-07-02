@@ -30,6 +30,7 @@ import { getCategoriesDataFromEventAsync } from './getCategoriesDataFromEvent';
 
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(eventListActionTypes.OPEN_VIEW_EVENT_PAGE)
         .switchMap((action) => {
             const state = store.getState();
@@ -56,6 +57,7 @@ export const getEventOpeningFromEventListEpic = (action$: InputObservable, store
 
 export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(viewEventActionTypes.VIEW_EVENT_FROM_URL)
         .switchMap((action) => {
             const eventId = action.payload.eventId;
@@ -83,6 +85,7 @@ export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore)
 
 export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(viewEventActionTypes.EVENT_FROM_URL_RETRIEVED)
         .switchMap((action) => {
             const eventContainer = action.payload.eventContainer;
@@ -100,6 +103,7 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
 
 export const openViewPageLocationChangeEpic = (action$: InputObservable) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(eventListActionTypes.OPEN_VIEW_EVENT_PAGE)
         .map(action =>
             push(`/viewEvent/${action.payload}`),
@@ -107,6 +111,7 @@ export const openViewPageLocationChangeEpic = (action$: InputObservable) =>
 
 export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE)
         // eslint-disable-next-line complexity
         .map(() => {
@@ -138,6 +143,7 @@ export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) 
 
 export const backToMainPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE)
         .map(() => {
             const state = store.getState();
@@ -148,5 +154,6 @@ export const backToMainPageLocationChangeEpic = (action$: InputObservable, store
 
 export const openAddRelationshipForViewEventEpic = (action$: InputObservable) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(viewEventActionTypes.VIEW_EVENT_OPEN_NEW_RELATIONSHIP)
         .map(() => initializeNewRelationship());

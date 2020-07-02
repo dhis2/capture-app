@@ -348,6 +348,7 @@ class FormBuilder extends React.Component<Props> {
     */
     getFieldProp(fieldId: string): FieldConfig {
         // $FlowSuppress
+        // $FlowFixMe[incompatible-return] automated comment
         return this.props.fields.find(f => f.id === fieldId);
     }
 
@@ -411,6 +412,7 @@ class FormBuilder extends React.Component<Props> {
             onGetValidationContext && onGetValidationContext(),
             handleIsValidatingInternal,
         )
+            // $FlowFixMe[prop-missing] automated comment
             .then(({ valid, errorMessage, errorType, errorData }) => {
                 onUpdateField(
                     value,
@@ -567,6 +569,7 @@ class FormBuilder extends React.Component<Props> {
                 <div
                     {...onGetContainerProps && onGetContainerProps(index, fields.length, field)}
                 >
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <field.component
                         ref={(fieldInstance) => { this.setFieldInstance(fieldInstance, field.id); }}
                         value={value}

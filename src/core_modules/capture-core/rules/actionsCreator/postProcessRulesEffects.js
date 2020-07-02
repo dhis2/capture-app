@@ -65,6 +65,7 @@ function getAssignEffectsBasedOnHideSection(
         })
         .filter(sectionEffects => sectionEffects)
         // $FlowSuppress
+        // $FlowFixMe[prop-missing] automated comment
         .reduce((accEffects, sectionEffects) => [...accEffects, ...sectionEffects], []);
 }
 
@@ -97,8 +98,10 @@ function buildEffectsHierarchy(effects: Array<OutputEffect>) {
 
         const id = effect.id;
         // $FlowSuppress
+        // $FlowFixMe[incompatible-use] automated comment
         accEffectsObject[actionType][id] = accEffectsObject[actionType][id] || [];
         // $FlowSuppress
+        // $FlowFixMe[incompatible-use] automated comment
         accEffectsObject[actionType][id].push(effect);
         return accEffectsObject;
     }, {});

@@ -19,4 +19,5 @@ const mapStateToProps = (state: ReduxState, props: Object) => {
 };
 
 // $FlowSuppress
+// $FlowFixMe[missing-annot] automated comment
 export default connect(mapStateToProps, () => ({}))(TeiSearchForm);

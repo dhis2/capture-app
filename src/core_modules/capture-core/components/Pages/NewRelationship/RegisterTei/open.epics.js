@@ -51,6 +51,7 @@ function getOrgUnitId(suggestedOrgUnitId: string, trackerProgram: ?TrackerProgra
 
 export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE)
         .filter(action => action.payload.findMode && action.payload.findMode === findModes.TEI_REGISTER)
         .switchMap((action) => { // eslint-disable-line
@@ -89,6 +90,7 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
                 );
 
                 return fromPromise(openEnrollmentPromise)
+                    // $FlowFixMe[prop-missing] automated comment
                     .takeUntil(action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE));
             }
 
@@ -112,5 +114,6 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
             );
 
             return fromPromise(openTeiPromise)
+                // $FlowFixMe[prop-missing] automated comment
                 .takeUntil(action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE));
         });

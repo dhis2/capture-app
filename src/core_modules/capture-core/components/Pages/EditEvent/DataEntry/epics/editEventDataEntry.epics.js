@@ -28,6 +28,7 @@ const errorMessages = {
 
 export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         editEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
         editEventActionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE,
@@ -100,6 +101,7 @@ const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, item
 
 export const runRulesOnUpdateDataEntryFieldForEditSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
 // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(editEventDataEntryBatchActionTypes.UPDATE_DATA_ENTRY_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH)
         .map(actionBatch => actionBatch.payload.find(action => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE))
         .map((action) => {
@@ -109,6 +111,7 @@ export const runRulesOnUpdateDataEntryFieldForEditSingleEventEpic = (action$: In
 
 export const runRulesOnUpdateFieldForEditSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
 // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(editEventDataEntryBatchActionTypes.UPDATE_FIELD_EDIT_SINGLE_EVENT_ACTION_BATCH)
         .map(actionBatch => actionBatch.payload.find(action => action.type === editEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE))
         .map((action) => {

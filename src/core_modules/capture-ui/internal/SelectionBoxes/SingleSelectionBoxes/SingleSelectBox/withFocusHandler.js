@@ -71,6 +71,7 @@ const getFocusHandler = () => (InnerComponent: React.ComponentType<any>) =>
         render() {
             const { onSetFocus, onRemoveFocus, inFocus, ...passOnProps } = this.props;
             return (
+                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     inputRef={this.setInputInstance}
                     inFocus={this.state.inFocus}

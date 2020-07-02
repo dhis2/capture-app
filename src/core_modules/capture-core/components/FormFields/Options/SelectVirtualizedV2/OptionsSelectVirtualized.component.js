@@ -229,6 +229,7 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
                 ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}
             >
                 <div>
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <VirtualizedSelect
                         disabled={disabled}
                         options={options}

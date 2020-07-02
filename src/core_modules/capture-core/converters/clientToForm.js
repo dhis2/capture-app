@@ -58,16 +58,27 @@ function convertAgeForEdit(rawValue: string): AgeFormValue {
 }
 
 const valueConvertersForType = {
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.NUMBER]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_POSITIVE]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_NEGATIVE]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATE]: convertDateForEdit,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATETIME]: convertDateTimeForEdit,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.TIME]: convertTimeForEdit,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.TRUE_ONLY]: () => 'true',
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'true' : 'false'),
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.AGE]: convertAgeForEdit,
 };
 

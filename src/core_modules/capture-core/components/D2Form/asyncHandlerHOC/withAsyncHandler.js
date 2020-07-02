@@ -16,21 +16,25 @@ type Props = {
 // HOC wrapped around D2Form handling callbacks for async functionality
 const getAsyncHandler = (InnerComponent: React.ComponentType<any>) =>
     class AsyncHandlerHOC extends React.Component<Props> {
+        // $FlowFixMe[missing-annot] automated comment
         handleIsValidating = (...args) => {
             const { id } = this.props;
             this.props.onIsValidating(...args, id);
         }
 
+        // $FlowFixMe[missing-annot] automated comment
         handleFieldsValidated = (...args) => {
             const { id } = this.props;
             this.props.onFieldsValidated(...args, id);
         }
 
+        // $FlowFixMe[missing-annot] automated comment
         handleCleanUp = (...args) => {
             const { id } = this.props;
             this.props.onCleanUp(...args, id);
         }
 
+        // $FlowFixMe[missing-annot] automated comment
         handleUpdateFieldAsyncInner = (...args) => {
             const { onUpdateFieldAsyncInner, onUpdateFieldAsync } = this.props;
             onUpdateFieldAsyncInner(...args, onUpdateFieldAsync);
@@ -45,6 +49,7 @@ const getAsyncHandler = (InnerComponent: React.ComponentType<any>) =>
                 onUpdateFieldAsync,
                 ...passOnProps } = this.props;
             return (
+                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     onIsValidating={this.handleIsValidating}
                     onFieldsValidated={this.handleFieldsValidated}
@@ -114,5 +119,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         // $FlowSuppress
+        // $FlowFixMe[missing-annot] automated comment
         connect(
             mapStateToProps, mapDispatchToProps)((getAsyncHandler(InnerComponent)));

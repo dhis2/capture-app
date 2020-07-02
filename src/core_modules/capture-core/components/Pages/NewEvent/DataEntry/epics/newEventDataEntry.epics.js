@@ -46,6 +46,7 @@ const errorMessages = {
 
 export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH)
         .map(() => {
             const state = store.getState();
@@ -71,6 +72,7 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
             const foundation = metadataContainer.stage && metadataContainer.stage.stageForm;
             return batchActions(
                 // $FlowSuppress
+                // $FlowFixMe[incompatible-call] automated comment
                 [...resetDataEntry(metadataContainer.program, foundation, orgUnit)],
                 batchActionTypes.RESET_DATA_ENTRY_ACTIONS_BATCH,
             );
@@ -79,6 +81,7 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
 
 export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         lockedSelectorActionTypes.NEW_EVENT_OPEN,
         lockedSelectorActionTypes.PROGRAM_ID_SET,
@@ -126,6 +129,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
             const foundation = metadataContainer.stage && metadataContainer.stage.stageForm;
             return batchActions(
                 // $FlowSuppress
+                // $FlowFixMe[incompatible-call] automated comment
                 [...openNewEventInDataEntry(metadataContainer.program, foundation, orgUnit)],
                 batchActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH,
             );
@@ -133,6 +137,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
 
 export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID,
         lockedSelectorActionTypes.NEW_EVENT_OPEN,
@@ -169,6 +174,8 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
             const state = store.getState();
             const newEventsMeta = { sortById: 'created', sortByDirection: 'desc' };
             const stageContainer = getStageForEventProgram(state.currentSelections.programId);
+            // $FlowFixMe[incompatible-call] automated comment
+            // $FlowFixMe[incompatible-use] automated comment
             const columnConfig = [...getDefaultMainColumnConfig(stageContainer.stage), ...getColumnMetaDataConfig(stageContainer.stage.stageForm)];
             return resetList(listId, columnConfig, newEventsMeta, state.currentSelections);
         });
@@ -194,6 +201,7 @@ const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemI
         );
     } else {
         // $FlowSuppress
+        // $FlowFixMe[cannot-resolve-name] automated comment
         const foundation: RenderFoundation = metadataContainer.stage.stageForm;
         const programStageId = foundation.id;
         const currentEventValues = getCurrentClientValues(state, foundation, formId, fieldData);
@@ -220,6 +228,7 @@ const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemI
 
 export const runRulesOnUpdateDataEntryFieldForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH)
         .map(actionBatch =>
             actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE))
@@ -230,6 +239,7 @@ export const runRulesOnUpdateDataEntryFieldForSingleEventEpic = (action$: InputO
 
 export const runRulesOnUpdateFieldForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH)
         .map(actionBatch =>
             actionBatch.payload.find(action => action.type === newEventDataEntryActionTypes.START_RUN_RULES_ON_UPDATE))

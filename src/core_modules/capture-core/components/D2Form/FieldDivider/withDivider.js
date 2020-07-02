@@ -51,6 +51,7 @@ export default () => (InnerComponent: React.ComponentType<any>) => withStyles(ge
             const calculatedProps = !formHorizontal ? { onRenderDivider: this.renderDivider } : null;
 
             return (
+                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     {...calculatedProps}
                     {...passOnProps}

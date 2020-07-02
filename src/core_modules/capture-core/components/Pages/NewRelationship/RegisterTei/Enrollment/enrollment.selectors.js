@@ -11,6 +11,7 @@ export const makeEnrollmentMetadataSelector = () => createSelector(
         let program: TrackerProgram;
         try {
             // $FlowSuppress Prechecked that program is a tracker program
+            // $FlowFixMe[incompatible-type] automated comment
             program = getProgramFromProgramIdThrowIfNotFound(programId);
         } catch (error) {
             return null;

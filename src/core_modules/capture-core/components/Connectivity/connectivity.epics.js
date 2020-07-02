@@ -6,6 +6,7 @@ const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
 
 export const goingOnlineEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(OFFLINE_STATUS_CHANGED)
         .filter((action) => {
             const online = !!action.payload.online;

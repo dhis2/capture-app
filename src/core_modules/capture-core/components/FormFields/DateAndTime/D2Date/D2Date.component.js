@@ -84,6 +84,7 @@ class D2Date extends React.Component<Props, State> {
 
     componentWillUnmount() {
         // $FlowSuppress
+        // $FlowFixMe[incompatible-call] automated comment
         document.removeEventListener('click', this.handleDocumentClick);
     }
 
@@ -95,6 +96,7 @@ class D2Date extends React.Component<Props, State> {
 
     handleTextFieldFocus() {
         // $FlowSuppress
+        // $FlowFixMe[incompatible-call] automated comment
         document.removeEventListener('click', this.handleDocumentClick);
 
         this.setState({
@@ -109,6 +111,7 @@ class D2Date extends React.Component<Props, State> {
         this.hidePopover();
         this.props.onDateSelectedFromCalendar && this.props.onDateSelectedFromCalendar();
         // $FlowSuppress
+        // $FlowFixMe[incompatible-call] automated comment
         document.removeEventListener('click', this.handleDocumentClick);
     }
 
@@ -123,6 +126,7 @@ class D2Date extends React.Component<Props, State> {
 
         this.hidePopover();
         // $FlowSuppress
+        // $FlowFixMe[incompatible-call] automated comment
         document.removeEventListener('click', this.handleDocumentClick);
     }
 
@@ -133,6 +137,7 @@ class D2Date extends React.Component<Props, State> {
             this.hidePopover();
         } else {
             // $FlowSuppress
+            // $FlowFixMe[incompatible-call] automated comment
             document.addEventListener('click', this.handleDocumentClick);
         }
     }
@@ -172,6 +177,7 @@ class D2Date extends React.Component<Props, State> {
                 }}
             >
                 { /* // $FlowSuppress */}
+                {/* $FlowFixMe[incompatible-type] automated comment */}
                 <D2TextField
                     {...textFieldRefPropObject}
                     onFocus={this.handleTextFieldFocus}

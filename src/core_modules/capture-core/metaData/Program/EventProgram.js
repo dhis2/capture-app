@@ -18,11 +18,13 @@ export default class EventProgram extends Program {
     }
     get stage(): ProgramStage {
         // $FlowSuppress
+        // $FlowFixMe[incompatible-return] automated comment
         return this._stages.get(EventProgram.EVENT_PROGRAM_STAGE_KEY);
     }
 
     getStage(): ProgramStage {
         // $FlowSuppress
+        // $FlowFixMe[incompatible-return] automated comment
         return this._stages.get(EventProgram.EVENT_PROGRAM_STAGE_KEY);
     }
 }

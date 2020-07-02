@@ -38,6 +38,7 @@ class D2TextField extends Component<Props> {
 
         return (
             <div ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}>
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <TextField
                     inputRef={(inst) => { this.materialUIInstance = inst; }}
                     value={value || ''}

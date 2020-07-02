@@ -50,6 +50,7 @@ export default class CustomForm {
      * @memberof CustomForm
      */
     // $FlowSuppress
+    // $FlowFixMe[missing-annot] automated comment
     transformNode = (node: Object, index: number, nodeToElementFn) => {
         if (node.name === 'input') {
             const htmlElementId = node.attribs && node.attribs.id;

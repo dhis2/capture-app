@@ -11,6 +11,7 @@ type InputObservable = rxjs$Observable<ReduxAction<any, any>>;
 export const networkMonitorStatusEpic = (action$: InputObservable) =>
     // $FlowSuppress
     action$
+        // $FlowFixMe[prop-missing] automated comment
         .ofType(OFFLINE_STATUS_CHANGED)
         .map(action => networkStatusChange(action.payload.online));
 

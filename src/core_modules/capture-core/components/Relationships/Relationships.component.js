@@ -173,6 +173,7 @@ class Relationships extends React.Component<Props> {
     }
 
     render() {
+        // $FlowFixMe[prop-missing] automated comment
         const { classes, onOpenAddRelationship, entityAccess, writableRelationshipTypes, relationshipsRef, smallMainButton } = this.props;
         const canCreate = entityAccess.write && writableRelationshipTypes.length > 0;
         return (

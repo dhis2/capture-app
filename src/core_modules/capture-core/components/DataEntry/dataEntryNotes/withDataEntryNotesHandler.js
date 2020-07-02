@@ -38,4 +38,5 @@ const mapStateToProps = (state: ReduxState, props: { dataEntryId: string }) => {
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         // $FlowSuppress
+        // $FlowFixMe[missing-annot] automated comment
         connect(mapStateToProps, () => ({}))(getDataEntryNotesHandler(InnerComponent));

@@ -42,6 +42,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
             } = this.props;
             const mainButton = this.renderButton();
             return (
+                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     mainButton={mainButton}
                     {...passOnProps}
@@ -66,5 +67,6 @@ const mapDispatchToProps = () => ({});
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
         // $FlowSuppress
+        // $FlowFixMe[missing-annot] automated comment
         connect(
             mapStateToProps, mapDispatchToProps)(getMainButton(InnerComponent));

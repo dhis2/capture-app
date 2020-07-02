@@ -35,6 +35,7 @@ const EditMode = (props: Props) => {
             <div
                 className={classes.searchContainer}
             >
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <SearchUser
                     inputWrapperClasses={{}}
                     focusInputOnMount

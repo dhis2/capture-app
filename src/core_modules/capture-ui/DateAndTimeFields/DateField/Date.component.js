@@ -167,6 +167,7 @@ class UIDate extends React.Component<Props, State> {
                 }}
             >
                 { /* // $FlowFixMe */}
+                {/* $FlowFixMe[prop-missing] automated comment */}
                 <DateInput
                     onFocus={this.handleTextFieldFocus}
                     onBlur={this.handleTextFieldBlur}
@@ -178,6 +179,7 @@ class UIDate extends React.Component<Props, State> {
                     ref={this.calendarWrapperDOMElementRef}
                 >
                     { /* // $FlowFixMe */}
+                    {/* $FlowFixMe[prop-missing] automated comment */}
                     <DatePopup
                         open={popoverOpen}
                         onClose={this.hidePopover}
@@ -188,6 +190,7 @@ class UIDate extends React.Component<Props, State> {
                         {...splittedPassOnProps.popup}
                     >
                         { /* // $FlowFixMe */}
+                        {/* $FlowFixMe[prop-missing] automated comment */}
                         <DateCalendar
                             onDateSelected={this.handleDateSelected}
                             value={this.props.value}

@@ -77,6 +77,7 @@ class SingleOrgUnitSelectField extends React.Component<Props> {
     renderOrgUnitField = () => {
         const { classes, ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <OrgUnitField
                 onSelectClick={this.onSelectOrgUnit}
                 {...passOnProps}

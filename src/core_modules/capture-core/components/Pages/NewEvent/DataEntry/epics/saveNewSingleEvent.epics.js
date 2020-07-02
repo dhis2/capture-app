@@ -10,6 +10,7 @@ import { getNewEventServerData, getNewEventClientValues } from './getConvertedNe
 
 export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)
         .map((action) => {
             const state = store.getState();
@@ -25,6 +26,7 @@ export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
 
 export const saveNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)
         .map(() => {
             const state = store.getState();

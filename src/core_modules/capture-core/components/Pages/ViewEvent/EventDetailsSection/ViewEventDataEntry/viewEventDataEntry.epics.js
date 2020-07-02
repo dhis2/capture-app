@@ -20,6 +20,7 @@ import { getProgramAndStageFromEvent } from '../../../../../metaData';
 
 export const loadViewEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         viewEventPageActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
         viewEventPageActionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE,

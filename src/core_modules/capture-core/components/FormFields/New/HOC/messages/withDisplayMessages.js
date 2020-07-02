@@ -157,6 +157,7 @@ const getDisplayMessagesHOC = (InnerComponent: React.ComponentType<any>) =>
             const calculatedMessageProps = message.innerMessage ? { innerMessage: message.innerMessage } : null;
             return (
                 <div>
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <InnerComponent
                         {...calculatedMessageProps}
                         {...passOnProps}

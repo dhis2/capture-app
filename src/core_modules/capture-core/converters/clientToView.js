@@ -53,20 +53,35 @@ function convertResourceForView(clientValue: FileClientValue) {
 
 // todo report (lgmt)
 const valueConvertersForType = {
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.NUMBER]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_POSITIVE]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_NEGATIVE]: stringifyNumber,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATE]: convertDateForView,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATETIME]: convertDateTimeForView,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.TIME]: convertTimeForView,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.TRUE_ONLY]: () => 'Yes',
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'Yes' : 'No'),
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.COORDINATE]: convertCoordinateForView,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.AGE]: convertDateForView,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.FILE_RESOURCE]: convertResourceForView,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.IMAGE]: convertResourceForView,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.ORGANISATION_UNIT]: (rawValue: Object) => rawValue.name,
 };
 

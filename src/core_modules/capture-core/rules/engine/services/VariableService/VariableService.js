@@ -144,6 +144,7 @@ export default class VariableService {
                 // run post getter
                 if (variableSourceTypesDataElementSpecific[sourceType]) {
                     // $FlowSuppress preChecked
+                    // $FlowFixMe[incompatible-call] automated comment
                     variable = this.postGetVariableForDataElementSpecificSourceType(programVariable, dataElements);
                 }
             }
@@ -234,6 +235,7 @@ export default class VariableService {
     postGetVariableForDataElementSpecificSourceType(programVariable: ProgramRuleVariable, dataElements: DataElements) {
         const dataElementId = programVariable.dataElementId;
         // $FlowSuppress: based on precheck over, dataElement should be found
+        // $FlowFixMe[incompatible-type] automated comment
         const dataElement: DataElement = dataElements[dataElementId];
         return this.buildVariable(
             EMPTY_STRING,
@@ -269,8 +271,10 @@ export default class VariableService {
         }
 
         // $FlowSuppress preChecked
+        // $FlowFixMe[incompatible-type] automated comment
         const trackedEntityAttributeId: string = programVariable.trackedEntityAttributeId;
         // $FlowSuppress preChecked
+        // $FlowFixMe[incompatible-use] automated comment
         const attribute: TrackedEntityAttribute = sourceData.trackedEntityAttributes[trackedEntityAttributeId];
         const attributeValue = sourceData.selectedEntity[trackedEntityAttributeId];
 
@@ -297,8 +301,10 @@ export default class VariableService {
 
     getVariableForCurrentEvent(programVariable: ProgramRuleVariable, sourceData: SourceData): ?RuleVariable {
         // $FlowSuppress: prechecked
+        // $FlowFixMe[incompatible-type] automated comment
         const dataElementId: string = programVariable.dataElementId;
         // $FlowSuppress: prechecked
+        // $FlowFixMe[incompatible-use] automated comment
         const dataElement: DataElement = sourceData.dataElements[dataElementId];
         const executingEvent = sourceData.executingEvent;
         if (!executingEvent) {
@@ -334,8 +340,10 @@ export default class VariableService {
         }
 
         // $FlowSuppress: prechecked
+        // $FlowFixMe[incompatible-type] automated comment
         const dataElementId: string = programVariable.dataElementId;
         // $FlowSuppress: prechecked
+        // $FlowFixMe[incompatible-use] automated comment
         const dataElement: DataElement = sourceData.dataElements[dataElementId];
 
         const allValues = stageEvents
@@ -376,8 +384,10 @@ export default class VariableService {
         }
 
         // $FlowSuppress: prechecked
+        // $FlowFixMe[incompatible-type] automated comment
         const dataElementId: string = programVariable.dataElementId;
         // $FlowSuppress: prechecked
+        // $FlowFixMe[incompatible-use] automated comment
         const dataElement: DataElement = sourceData.dataElements[dataElementId];
 
         const allValues = events
@@ -429,8 +439,10 @@ export default class VariableService {
         }
 
         // $FlowSuppress: prechecked
+        // $FlowFixMe[incompatible-type] automated comment
         const dataElementId: string = programVariable.dataElementId;
         // $FlowSuppress: prechecked
+        // $FlowFixMe[incompatible-use] automated comment
         const dataElement: DataElement = sourceData.dataElements[dataElementId];
 
         const previousEvents = events.slice(0, currentEventIndex);
@@ -568,6 +580,7 @@ export default class VariableService {
     getOrganisationContextVariables(orgUnit: OrgUnit) {
         const variables = {};
         variables.orgunit_code = this.buildVariable(
+            // $FlowFixMe[prop-missing] automated comment
             orgUnit.code,
             typeKeys.TEXT, {
                 variablePrefix: variablePrefixes.CONTEXT_VARIABLE,

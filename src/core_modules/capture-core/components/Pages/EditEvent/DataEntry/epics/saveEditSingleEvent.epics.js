@@ -14,6 +14,7 @@ import { convertMainEventClientToServer } from '../../../../../events/mainConver
 
 export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)
         .map((action) => {
             const state = store.getState();
@@ -58,6 +59,7 @@ export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =
 
 export const saveEditEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)
         .map(() => {
             const state = store.getState();

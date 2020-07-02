@@ -17,6 +17,7 @@ export default class Program {
     _access: Access;
     _name: string;
     _shortName: string;
+    // $FlowFixMe[cannot-resolve-name] automated comment
     _stages: Map<string, ProgramStage>;
     _organisationUnits: Object;
     _categoryCombination: ?CategoryCombination;
@@ -33,6 +34,7 @@ export default class Program {
     }
 
     // $FlowSuppress
+    // $FlowFixMe[unsupported-syntax] automated comment
     * [Symbol.iterator](): Iterator<ProgramStage> {
         for (const stage of this._stages.values()) {
             yield stage;

@@ -23,6 +23,7 @@ const makeMapStateToProps = () => {
     });
 
     // $FlowSuppress
+    // $FlowFixMe[not-an-object] automated comment
     return mapStateToProps;
 };
 
@@ -33,6 +34,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
+// $FlowFixMe[missing-annot] automated comment
 export default connect(makeMapStateToProps, mapDispatchToProps)(
     withLoadingIndicator(() => ({ margin: 4 }))(
         withErrorMessageHandler()(DataEntry),
