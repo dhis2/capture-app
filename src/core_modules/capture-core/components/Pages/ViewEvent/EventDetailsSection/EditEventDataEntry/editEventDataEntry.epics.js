@@ -40,12 +40,10 @@ export const loadEditEventDataEntryEpic = (action$: ActionsObservable, store: Re
             }
 
             const program = metadataContainer.program;
-            // $FlowFixMe
             const foundation = metadataContainer.stage.stageForm;
 
             return batchActions([
                 showEditEventDataEntry(),
-                // $FlowFixMe
                 ...openEventForEditInDataEntry(loadedValues, orgUnit, foundation, program),
             ]);
         });

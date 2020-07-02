@@ -89,5 +89,4 @@ class SingleOrgUnitSelectField extends React.Component<Props> {
         return value ? this.renderSelectedOrgUnit(value) : this.renderOrgUnitField();
     }
 }
-// $FlowFixMe
 export default withStyles(getStyles)(SingleOrgUnitSelectField);

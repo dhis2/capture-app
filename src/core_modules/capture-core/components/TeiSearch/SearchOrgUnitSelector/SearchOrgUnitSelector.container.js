@@ -25,7 +25,6 @@ const mapStateToProps = (state: ReduxState, props: Object) => {
     };
 };
 
-// $FlowFixMe
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onFilterOrgUnits: (searchId: string, searchText: string) => {
         const action = searchText ?

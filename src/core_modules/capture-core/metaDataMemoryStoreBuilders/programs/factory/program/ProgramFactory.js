@@ -102,9 +102,7 @@ class ProgramFactory {
         }
 
         return new CategoryCombination((o) => {
-            // $FlowFixMe
             o.name = cachedCategoryCombination.displayName;
-            // $FlowFixMe
             o.id = cachedCategoryCombination.id;
             o.categories =
             // $FlowFixMe
@@ -169,7 +167,6 @@ class ProgramFactory {
 
             // $FlowFixMe
             await cachedProgram.programStages.asyncForEach(async (cachedProgramStage: CachedProgramStage) => {
-                // $FlowFixMe
                 program.addStage(
                     await this.programStageFactory.build(
                         cachedProgramStage,

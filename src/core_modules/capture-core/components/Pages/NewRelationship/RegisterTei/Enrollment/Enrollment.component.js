@@ -56,5 +56,4 @@ class NewEnrollmentRelationship extends Component<Props> {
     }
 }
 
-// $FlowFixMe
 export default withTheme()(NewEnrollmentRelationship);

@@ -55,7 +55,6 @@ export const loadViewEventDataEntryEpic = (action$: InputObservable, store: Redu
             if (metadataContainer.error) {
                 return prerequisitesErrorLoadingViewEventDataEntry(metadataContainer.error);
             }
-            // $FlowFixMe
             const foundation = metadataContainer.stage.stageForm;
             const program = metadataContainer.program;
             // $FlowSuppress

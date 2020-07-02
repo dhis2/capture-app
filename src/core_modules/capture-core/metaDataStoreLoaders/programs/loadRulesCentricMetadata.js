@@ -17,7 +17,6 @@ export const loadRulesCentricMetadata = (programIds: Array<string>) => {
      * (ids being program rule ids, program variable ids or program indicator ids)
      */
     const getCachedIds = async (storeName): Promise<Array<string>> =>
-        // $FlowFixMe
         (await Promise.all(
             programIds
                 .map(programId =>

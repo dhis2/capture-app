@@ -76,7 +76,6 @@ export function convertValue(value: any, type: $Values<typeof elementTypes>) {
         return value;
     }
     return (valueConvertersForType[type] ?
-        // $FlowFixMe
         valueConvertersForType[type](value) :
         value);
 }

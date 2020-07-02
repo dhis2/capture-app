@@ -401,7 +401,6 @@ class FormBuilder extends React.Component<Props> {
                     touched: true,
                 },
             );
-            // $FlowFixMe
             return fieldValidatingPromiseContainer.cancelableValidatingPromise.promise;
         };
 

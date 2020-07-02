@@ -63,5 +63,4 @@ class RegUnitSelector extends React.Component<Props> {
         );
     }
 }
-// $FlowFixMe
 export default withStyles(getStyles)(RegUnitSelector);

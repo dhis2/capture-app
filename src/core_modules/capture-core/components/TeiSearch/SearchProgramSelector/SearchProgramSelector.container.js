@@ -13,7 +13,6 @@ const makeMapStateToProps = () => {
     return mapStateToProps;
 };
 
-// $FlowFixMe
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onSetProgram: (searchId: string, programId: ?string) => {
         dispatch(startSetProgram(searchId, programId));

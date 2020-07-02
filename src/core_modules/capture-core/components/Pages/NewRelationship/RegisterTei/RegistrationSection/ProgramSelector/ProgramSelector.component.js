@@ -39,5 +39,4 @@ class ProgramSelector extends React.Component<Props> {
         );
     }
 }
-// $FlowFixMe
 export default withStyles(getStyles)(ProgramSelector);

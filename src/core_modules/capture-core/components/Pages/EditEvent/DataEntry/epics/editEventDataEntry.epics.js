@@ -41,7 +41,6 @@ export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
             if (metadataContainer.error) {
                 return prerequisitesErrorOpeningEventForEditInDataEntry(metadataContainer.error);
             }
-            // $FlowFixMe
             const foundation = metadataContainer.stage.stageForm;
             const program = metadataContainer.program;
 
@@ -74,7 +73,6 @@ const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, item
             orgUnit,
         );
     } else {
-        // $FlowFixMe
         const foundation = metadataContainer.stage.stageForm;
 
         const currentEventValues = getCurrentClientValues(state, foundation, formId, fieldData);

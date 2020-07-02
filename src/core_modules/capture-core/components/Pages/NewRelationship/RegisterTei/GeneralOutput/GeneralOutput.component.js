@@ -57,6 +57,5 @@ class GeneralOutput extends React.Component<Props> {
     }
 }
 
-// $FlowFixMe
 export default withStyles(getStyles)(GeneralOutput);
 

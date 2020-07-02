@@ -191,5 +191,4 @@ class NewEnrollmentDataEntry extends Component<Props> {
     }
 }
 
-// $FlowFixMe
 export default withStyles(getStyles)(withTheme()(NewEnrollmentDataEntry));

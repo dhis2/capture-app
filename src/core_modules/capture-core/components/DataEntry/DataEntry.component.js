@@ -362,5 +362,4 @@ class DataEntry extends React.Component<Props> {
     }
 }
 
-// $FlowFixMe
 export default withStyles(styles)(DataEntry);
