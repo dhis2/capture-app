@@ -16,9 +16,10 @@
     ],
     "env": {
         "browser": true,
-        "jest": true
+        "jest": true,
     },
     "globals": {
+        "cy": true,
         "document": true,
         "window": true,
         "it": true,

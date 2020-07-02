@@ -8,8 +8,8 @@ import NetworkStatusBadge from 'capture-core/components/NetworkStatusBadge/Netwo
 import { NewEventPage } from 'capture-core/components/Pages/NewEvent';
 import { ViewEventPage } from 'capture-core/components/Pages/ViewEvent';
 import { NewEnrollmentPage } from 'capture-core/components/Pages/NewEnrollment';
-import { SearchPage } from '../../core_modules/capture-core/components/Pages/Search';
 import { MainPage } from 'capture-core/components/Pages/MainPage';
+import { SearchPage } from 'capture-core/components/Pages/Search';
 
 
 const styles = theme => ({
