@@ -22,7 +22,7 @@ import {
 import { getCurrentUser } from '../../../../../d2/d2Instance';
 
 export const addNoteForEditSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+   
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(editEventDataEntryActionTypes.REQUEST_ADD_NOTE_FOR_EDIT_SINGLE_EVENT)
         .map((action) => {
@@ -55,7 +55,7 @@ export const addNoteForEditSingleEventEpic = (action$: InputObservable, store: R
         });
 
 export const removeNoteForEditSingleEventEpic = (action$: InputObservable) =>
-    // $FlowSuppress
+   
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(editEventDataEntryActionTypes.ADD_NOTE_FAILED_FOR_EDIT_SINGLE_EVENT)
         .map((action) => {

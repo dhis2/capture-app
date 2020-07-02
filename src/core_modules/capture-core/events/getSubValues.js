@@ -72,7 +72,7 @@ export async function getSubValues(eventId: string, programStage: RenderFoundati
 
     return Object.keys(values).reduce(async (accValuesPromise, metaElementId) => {
         const accValues = await accValuesPromise;
-        // $FlowSuppress
+       
         const value = values[metaElementId];
         const metaElement = elementsById[metaElementId];
         if (isDefined(value) && value !== null && metaElement) {

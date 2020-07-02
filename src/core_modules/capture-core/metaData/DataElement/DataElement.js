@@ -147,7 +147,7 @@ export default class DataElement {
 
     copyPropertiesTo(object: {}) {
         for (const propName of this.getPropertyNames()) {
-            // $FlowSuppress
+           
             // $FlowFixMe[prop-missing] automated comment
             object[propName] = this[propName];
         }

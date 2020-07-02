@@ -45,7 +45,7 @@ const errorMessages = {
 
 
 export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+   
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH)
         .map(() => {
@@ -71,7 +71,7 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
 
             const foundation = metadataContainer.stage && metadataContainer.stage.stageForm;
             return batchActions(
-                // $FlowSuppress
+               
                 // $FlowFixMe[incompatible-call] automated comment
                 [...resetDataEntry(metadataContainer.program, foundation, orgUnit)],
                 batchActionTypes.RESET_DATA_ENTRY_ACTIONS_BATCH,
@@ -80,7 +80,7 @@ export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: R
 
 
 export const openNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+   
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         lockedSelectorActionTypes.NEW_EVENT_OPEN,
@@ -128,7 +128,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
             }
             const foundation = metadataContainer.stage && metadataContainer.stage.stageForm;
             return batchActions(
-                // $FlowSuppress
+               
                 // $FlowFixMe[incompatible-call] automated comment
                 [...openNewEventInDataEntry(metadataContainer.program, foundation, orgUnit)],
                 batchActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY_ACTIONS_BATCH,
@@ -136,7 +136,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
         });
 
 export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+   
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID,
@@ -200,7 +200,7 @@ const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemI
             orgUnit,
         );
     } else {
-        // $FlowSuppress
+       
         // $FlowFixMe[cannot-resolve-name] automated comment
         const foundation: RenderFoundation = metadataContainer.stage.stageForm;
         const programStageId = foundation.id;
@@ -227,7 +227,7 @@ const runRulesForNewSingleEvent = (store: ReduxStore, dataEntryId: string, itemI
 };
 
 export const runRulesOnUpdateDataEntryFieldForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+   
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH)
         .map(actionBatch =>
@@ -238,7 +238,7 @@ export const runRulesOnUpdateDataEntryFieldForSingleEventEpic = (action$: InputO
         });
 
 export const runRulesOnUpdateFieldForSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+   
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(batchActionTypes.UPDATE_FIELD_NEW_SINGLE_EVENT_ACTION_BATCH)
         .map(actionBatch =>

@@ -35,13 +35,13 @@ function updateStatePartInProduction<T>(
     }
 
     if (updatersForActionTypes[action.type]) {
-        // $FlowSuppress
+
         // $FlowFixMe[extra-arg] automated comment
         const newState = updatersForActionTypes[action.type](state, action);
         return newState;
     }
 
-    // $FlowSuppress
+
     // $FlowFixMe[incompatible-return] automated comment
     return state;
 }
@@ -59,14 +59,14 @@ function updateStatePartInDevelopment<T>(
 
     if (updatersForActionTypes[action.type]) {
         onUpdaterFound(state, action);
-        // $FlowSuppress
+
         // $FlowFixMe[extra-arg] automated comment
         const newState = updatersForActionTypes[action.type](state, action);
         onUpdaterExecuted(state, action);
         return newState;
     }
 
-    // $FlowSuppress
+
     // $FlowFixMe[incompatible-return] automated comment
     return state;
 }
@@ -129,7 +129,7 @@ function wrapReducers(reducer: Reducer<any, Action>, reducerWrappers: ReducerWra
         return reducerWrappers.reduceRight((prevReducer, currentReducer) => currentReducer(prevReducer), reducer);
     }
 
-    // $FlowSuppress
+
     // $FlowFixMe[not-a-function] automated comment
     return reducerWrappers(reducer);
 }
@@ -149,9 +149,9 @@ function buildReducer(reducerDescription: ReducerDescription) {
 }
 
 export function buildReducersFromDescriptions(reducerDescriptions: Array<ReducerDescription>) {
-    // $FlowSuppress
+
     const reducers = reducerDescriptions
-        // $FlowSuppress
+
         .reduce((accReducers: {[reducerName: string]: Reducer<any, Action>}, description: ReducerDescription) => {
             accReducers[description.name] = buildReducer(description);
             return accReducers;

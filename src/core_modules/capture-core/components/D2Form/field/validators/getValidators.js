@@ -206,7 +206,7 @@ const validatorsForTypes = {
 };
 
 function buildTypeValidators(metaData: DataElement): Array<ValidatorContainer> {
-    // $FlowSuppress
+   
     let validatorContainersForType = validatorsForTypes[metaData.type] && validatorsForTypes[metaData.type](metaData);
 
     if (!validatorContainersForType) {
@@ -224,7 +224,7 @@ function buildTypeValidators(metaData: DataElement): Array<ValidatorContainer> {
             ...validatorContainer,
         }));
 
-    // $FlowSuppress
+   
     validatorContainersForType = validatorContainersForType.map(validatorContainer => ({
         ...validatorContainer,
         validator: (value: any) => {

@@ -120,7 +120,6 @@ class DateFilter extends Component<Props, State> implements UpdatableFilterConte
     static isFromAfterTo(valueFrom: string, valueTo: string) {
         const momentFrom = parseDate(valueFrom).momentDate;
         const momentTo = parseDate(valueTo).momentDate;
-        // $FlowSuppress: Prechecked
         // $FlowFixMe[incompatible-use] automated comment
         // $FlowFixMe[incompatible-call] automated comment
         return momentFrom.isAfter(momentTo);

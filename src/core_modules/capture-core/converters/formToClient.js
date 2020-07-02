@@ -22,7 +22,6 @@ function convertDateTime(formValue: DateTimeValue): string {
     const hours = momentTime.hour();
     const minutes = momentTime.minute();
 
-    // $FlowSuppress: Prechecked
     // $FlowFixMe[incompatible-type] automated comment
     const momentDateTime: moment$Moment = parseDate(editedDate).momentDate;
     momentDateTime.hour(hours);
@@ -31,7 +30,6 @@ function convertDateTime(formValue: DateTimeValue): string {
 }
 
 function convertDate(dateValue: string) {
-    // $FlowSuppress: Prechecked
     // $FlowFixMe[incompatible-use] automated comment
     return parseDate(dateValue).momentDate.toISOString();
 }

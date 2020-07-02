@@ -62,7 +62,6 @@ class D2SectionFields extends Component<Props> {
     static buildFormFields(props: Props): Array<FieldConfig> {
         const { fieldsMetaData, customForm, fieldOptions } = props;
 
-        // $FlowSuppress :does not recognize filter removing nulls
         return Array.from(fieldsMetaData.entries())
             .map(entry => entry[1])
             // $FlowFixMe[incompatible-return] automated comment

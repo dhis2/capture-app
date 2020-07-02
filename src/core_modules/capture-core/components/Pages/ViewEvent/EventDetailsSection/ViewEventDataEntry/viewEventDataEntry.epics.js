@@ -19,7 +19,7 @@ import {
 import { getProgramAndStageFromEvent } from '../../../../../metaData';
 
 export const loadViewEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+   
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         viewEventPageActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
@@ -58,6 +58,6 @@ export const loadViewEventDataEntryEpic = (action$: InputObservable, store: Redu
             }
             const foundation = metadataContainer.stage.stageForm;
             const program = metadataContainer.program;
-            // $FlowSuppress
+           
             return batchActions((await loadViewEventDataEntry(eventContainer, orgUnit, foundation, program)));
         });

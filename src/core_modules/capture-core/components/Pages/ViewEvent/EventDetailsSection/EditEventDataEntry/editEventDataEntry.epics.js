@@ -49,7 +49,7 @@ export const loadEditEventDataEntryEpic = (action$: ActionsObservable, store: Re
         });
 
 export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY)
         .map((action) => {
@@ -110,7 +110,7 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
         });
 
 export const saveEditedEventFailedEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(actionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED)
         .filter((action) => {

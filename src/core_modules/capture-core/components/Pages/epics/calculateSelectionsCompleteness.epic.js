@@ -35,7 +35,7 @@ const calculateCompleteStatus = (state: CurrentSelectionsState) => {
 
 // todo file not used!
 export const calculateSelectionsCompletenessEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+   
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         lockedSelectorActionTypes.PROGRAM_ID_SET,

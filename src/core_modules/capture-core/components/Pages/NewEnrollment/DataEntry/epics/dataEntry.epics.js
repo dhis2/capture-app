@@ -17,7 +17,7 @@ const errorMessages = {
 };
 
 export const openNewEnrollmentInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+   
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         urlActionTypes.VALID_SELECTIONS_FROM_URL,

@@ -10,7 +10,7 @@ import {
 import isSelectionsEqual from '../../../../App/isSelectionsEqual';
 
 export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+   
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE)
         .map(() => {
@@ -39,7 +39,7 @@ export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) 
         });
 
 export const cancelNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+   
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE)
         .map(() => {

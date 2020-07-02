@@ -94,6 +94,6 @@ export function convertValue(value: any, type: $Values<typeof elementTypes>, dat
         return dataElement.optionSet.getOptionText(value);
     }
 
-    // $FlowSuppress
+   
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }

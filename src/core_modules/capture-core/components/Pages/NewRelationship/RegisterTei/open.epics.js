@@ -50,7 +50,7 @@ function getOrgUnitId(suggestedOrgUnitId: string, trackerProgram: ?TrackerProgra
 }
 
 export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE)
         .filter(action => action.payload.findMode && action.payload.findMode === findModes.TEI_REGISTER)

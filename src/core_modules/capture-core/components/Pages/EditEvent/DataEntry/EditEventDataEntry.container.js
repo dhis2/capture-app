@@ -27,7 +27,7 @@ const getFormFoundation = (state: ReduxState) => {
         return null;
     }
 
-    // $FlowSuppress
+
     // $FlowFixMe[prop-missing] automated comment
     const stage = program.stage;
     if (!stage) {

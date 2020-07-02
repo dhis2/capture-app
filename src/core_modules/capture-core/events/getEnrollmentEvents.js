@@ -62,10 +62,10 @@ function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
                     convertedValue = valueToConvert;
                 }
 
-                // $FlowSuppress
+
                 // $FlowFixMe[prop-missing] automated comment
                 const outputKey = mapEventInputKeyToOutputKey[inputKey] || inputKey;
-                // $FlowSuppress
+
                 // $FlowFixMe[incompatible-return] automated comment
                 accEvent[outputKey] = convertedValue;
             }
