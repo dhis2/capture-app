@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import indexedDB from 'fake-indexeddb';
 import IndexedDBAdapter from '../IndexedDBAdapter';
 

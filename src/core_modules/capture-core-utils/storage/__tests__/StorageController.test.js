@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import indexedDB from 'fake-indexeddb';
 import StorageController from '../StorageController';
 import availableAdapters from '../availableAdapters';
