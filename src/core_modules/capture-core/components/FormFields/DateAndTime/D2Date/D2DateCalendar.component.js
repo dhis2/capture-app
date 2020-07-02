@@ -2,9 +2,9 @@
 /* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import InfiniteCalendar from 'react-infinite-calendar';
+import InfiniteCalendar from '@joakim_sm/react-infinite-calendar';
 import { capitalizeFirstLetter } from 'capture-core-utils/string';
-import 'react-infinite-calendar/styles.css';
+import '@joakim_sm/react-infinite-calendar/styles.css';
 import './customStyles.css';
 import { parseDate, convertDateObjectToDateFormatString } from '../../../../utils/converters/date';
 import CurrentLocaleData from '../../../../utils/localeData/CurrentLocaleData';
@@ -136,6 +136,7 @@ class D2DateCalendar extends Component<Props> {
             <div
                 className={classes.container}
             >
+                { /* $FlowFixMe */ }
                 <InfiniteCalendar
                     {...this.getMinMaxProps()}
                     selected={this.getValue((value))}

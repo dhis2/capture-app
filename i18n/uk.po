@@ -301,6 +301,63 @@ msgstr ""
 msgid "No items to display"
 msgstr ""
 
+msgid "Could not get organisation unit"
+msgstr ""
+
+msgid "Program doesn't exist"
+msgstr ""
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr ""
+
+msgid "New {{typeName}}"
+msgstr ""
+
+msgid "New"
+msgstr "Нове"
+
+msgid "Start again"
+msgstr ""
+
+msgid "Find"
+msgstr "Знайти"
+
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Accept"
+msgstr ""
+
+msgid "Registering Organisation Unit"
+msgstr ""
+
+msgid "Select"
+msgstr "Обрати"
+
+msgid "Selected Program"
+msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Show all"
+msgstr "Показати все"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "Select program"
+msgstr "Обрати програму"
+
+msgid "No programs available."
+msgstr ""
+
 msgid "Online"
 msgstr "Онлайн"
 
@@ -448,15 +505,6 @@ msgstr "Активне"
 msgid "Completed"
 msgstr "Завершено"
 
-msgid "Could not get organisation unit"
-msgstr ""
-
-msgid "Program doesn't exist"
-msgstr ""
-
-msgid "Selected program is invalid for registering unit"
-msgstr ""
-
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
@@ -484,9 +532,6 @@ msgstr ""
 msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
-msgstr ""
-
-msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "Assigned user"
@@ -601,15 +646,6 @@ msgstr "Сховати"
 msgid "Save as new {{tetName}}"
 msgstr ""
 
-msgid "Some programs are being filtered."
-msgstr ""
-
-msgid "Show all"
-msgstr "Показати все"
-
-msgid "Program"
-msgstr "Program"
-
 msgid "Organisation Unit"
 msgstr "Організаційний підрозділ"
 
@@ -661,45 +697,6 @@ msgid "Event assigned to {{name}}"
 msgstr ""
 
 msgid "Feedbacks"
-msgstr ""
-
-msgid "New {{typeName}}"
-msgstr ""
-
-msgid "New"
-msgstr "Нове"
-
-msgid "Start again"
-msgstr ""
-
-msgid "Find"
-msgstr "Знайти"
-
-msgid "Selected registering unit"
-msgstr ""
-
-msgid "Start Again"
-msgstr ""
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
-
-msgid "Accept"
-msgstr ""
-
-msgid "Registering Organisation Unit"
-msgstr ""
-
-msgid "Select"
-msgstr "Обрати"
-
-msgid "Selected Program"
-msgstr ""
-
-msgid "Select program"
-msgstr "Обрати програму"
-
-msgid "No programs available."
 msgstr ""
 
 msgid "You dont have access to delete this relationship"

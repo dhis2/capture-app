@@ -1,7 +1,5 @@
 // @flow
-import * as React from 'react';
-
-import TextInput from '../../internal/TextInput/TextInput.component';
+import React, { createRef } from 'react';
 import DatePopup from './DatePopup.component';
 import DateCalendar from './DateCalendar.component';
 import lowerCaseFirstLetter from '../../internal/utils/string/lowerCaseFirstLetter';
@@ -10,13 +8,13 @@ import DateInput from '../../internal/DateInput/DateInput.component';
 type Props = {
     value: ?string,
     width: number,
+    maxWidth?: ?number,
     calendarWidth?: ?number,
     calendarHeight?: ?number,
     inputWidth?: ?number,
     onBlur: (value: string) => void,
     onFocus?: ?() => void,
     onDateSelectedFromCalendar?: () => void,
-    textFieldRef?: (instance: TextInput) => void,
 };
 
 type State = {
@@ -48,7 +46,6 @@ class UIDate extends React.Component<Props, State> {
                 }
 
                 const outputKey = lowerCaseFirstLetter(propKey.replace(propContainer, ''));
-                // $FlowSuppress
                 accSplittedProps[propContainer][outputKey] = passOnProps[propKey];
                 return accSplittedProps;
             }, splittedProps);
@@ -57,9 +54,10 @@ class UIDate extends React.Component<Props, State> {
     containerInstance: ?HTMLElement;
     handleTextFieldFocus: () => void;
     handleDateSelected: (value: string) => void;
-    handleTextFieldBlur: (value: string) => void;
+    handleTextFieldBlur: (event: SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     hidePopover: () => void;
-    handleDocumentClick: (event: SyntheticEvent<any>) => void;
+    handleDocumentClick: (event: MouseEvent) => void;
+    calendarWrapperDOMElementRef: { current: ?HTMLDivElement };
 
     constructor(props: Props) {
         super(props);
@@ -73,10 +71,11 @@ class UIDate extends React.Component<Props, State> {
         this.handleTextFieldBlur = this.handleTextFieldBlur.bind(this);
         this.hidePopover = this.hidePopover.bind(this);
         this.handleDocumentClick = this.handleDocumentClick.bind(this);
+
+        this.calendarWrapperDOMElementRef = createRef();
     }
 
     componentWillUnmount() {
-        // $FlowSuppress
         document.removeEventListener('click', this.handleDocumentClick);
     }
 
@@ -87,7 +86,6 @@ class UIDate extends React.Component<Props, State> {
     };
 
     handleTextFieldFocus() {
-        // $FlowSuppress
         document.removeEventListener('click', this.handleDocumentClick);
 
         this.setState({
@@ -101,32 +99,38 @@ class UIDate extends React.Component<Props, State> {
         this.props.onBlur(value);
         this.hidePopover();
         this.props.onDateSelectedFromCalendar && this.props.onDateSelectedFromCalendar();
-        // $FlowSuppress
         document.removeEventListener('click', this.handleDocumentClick);
     }
 
-    handleDocumentClick(event) {
-        if ((event.target && event.target.className &&
-            event.target.className.startsWith &&
-            event.target.className.startsWith('Cal__')) ||
-            (event.target && event.target.className &&
-            event.target.className.baseVal && event.target.className.baseVal.startsWith('Cal__'))) {
+    handleDocumentClick({ target }: MouseEvent) {
+        const calendarWrapperDOMElement = this.calendarWrapperDOMElementRef.current;
+
+        if (!calendarWrapperDOMElement) {
+            throw Error('calendar wrapper DOM element not found');
+        }
+
+        if (target === calendarWrapperDOMElement ||
+            (target instanceof Node && calendarWrapperDOMElement.contains(target))) {
             return;
         }
 
         this.hidePopover();
-        // $FlowSuppress
         document.removeEventListener('click', this.handleDocumentClick);
     }
 
-    handleTextFieldBlur(event) {
-        this.props.onBlur(event.currentTarget.value);
+    handleTextFieldBlur({ relatedTarget, currentTarget }: SyntheticFocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
+        const calendarWrapperDOMElement = this.calendarWrapperDOMElementRef.current;
 
-        if (!event.relatedTarget || event.relatedTarget.className !== 'Cal__Container__root') {
-            this.hidePopover();
-        } else {
-            // $FlowSuppress
+        if (!calendarWrapperDOMElement) {
+            throw Error('calendar wrapper DOM element not found');
+        }
+
+        if (relatedTarget === calendarWrapperDOMElement ||
+            (relatedTarget instanceof Node && calendarWrapperDOMElement.contains(relatedTarget))) {
             document.addEventListener('click', this.handleDocumentClick);
+        } else {
+            this.props.onBlur(currentTarget.value);
+            this.hidePopover();
         }
     }
 
@@ -146,12 +150,9 @@ class UIDate extends React.Component<Props, State> {
             onBlur,
             onFocus,
             onDateSelectedFromCalendar,
-            textFieldRef,
             ...passOnProps
         } = this.props;
         const { popoverOpen } = this.state;
-
-        const textFieldRefPropObject = textFieldRef ? { ref: textFieldRef } : null;
         const calculatedInputWidth = inputWidth || width;
         const calculatedCalendarWidth = calendarWidth || width;
         const splittedPassOnProps = UIDate.splitPassOnProps(passOnProps);
@@ -165,32 +166,37 @@ class UIDate extends React.Component<Props, State> {
                     maxWidth,
                 }}
             >
-                { /* // $FlowSuppress */}
+                { /* // $FlowFixMe */}
                 <DateInput
-                    {...textFieldRefPropObject}
                     onFocus={this.handleTextFieldFocus}
                     onBlur={this.handleTextFieldBlur}
-                    classes={{}}
                     width={calculatedInputWidth}
                     {...splittedPassOnProps.input}
                 />
-                <DatePopup
-                    open={popoverOpen}
-                    onClose={this.hidePopover}
-                    width={calculatedCalendarWidth}
-                    height={calculatedCalendarHeight}
-                    inputWidth={calculatedInputWidth}
-                    inputUsesFloatingLabel={!!splittedPassOnProps.input.label}
-                    {...splittedPassOnProps.popup}
+                <div
+                    data-test={'date-calendar-wrapper'}
+                    ref={this.calendarWrapperDOMElementRef}
                 >
-                    <DateCalendar
-                        onDateSelected={this.handleDateSelected}
-                        value={this.props.value}
-                        currentWidth={calculatedCalendarWidth}
+                    { /* // $FlowFixMe */}
+                    <DatePopup
+                        open={popoverOpen}
+                        onClose={this.hidePopover}
+                        width={calculatedCalendarWidth}
                         height={calculatedCalendarHeight}
-                        {...splittedPassOnProps.calendar}
-                    />
-                </DatePopup>
+                        inputWidth={calculatedInputWidth}
+                        inputUsesFloatingLabel={!!splittedPassOnProps.input.label}
+                        {...splittedPassOnProps.popup}
+                    >
+                        { /* // $FlowFixMe */}
+                        <DateCalendar
+                            onDateSelected={this.handleDateSelected}
+                            value={this.props.value}
+                            currentWidth={calculatedCalendarWidth}
+                            height={calculatedCalendarHeight}
+                            {...splittedPassOnProps.calendar}
+                        />
+                    </DatePopup>
+                </div>
             </div>
         );
     }

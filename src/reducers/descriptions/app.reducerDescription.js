@@ -6,6 +6,7 @@ export const appReducerDesc = getAppReducerDesc({
     [entryActionTypes.APP_LOAD]: state => ({
         ...state,
         initDone: false,
+        page: '',
     }),
     [entryActionTypes.APP_LOAD_SUCESS]: (state, action) => {
         const newState = { ...state };

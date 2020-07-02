@@ -305,6 +305,63 @@ msgstr "forslag kunne ikke hentes"
 msgid "No items to display"
 msgstr "Ingen elementer å vise"
 
+msgid "Could not get organisation unit"
+msgstr "Kunne ikke få tak i organisasjonsenhet"
+
+msgid "Program doesn't exist"
+msgstr "Programmet finnes ikke"
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr "Valgt program er ugyldig for registreringsenhet"
+
+msgid "New {{typeName}}"
+msgstr "Ny {{typeName}}"
+
+msgid "New"
+msgstr "Ny"
+
+msgid "Start again"
+msgstr "Start på nytt"
+
+msgid "Find"
+msgstr "Finn"
+
+msgid "Selected registering unit"
+msgstr "Valgt registreringsenhet"
+
+msgid "Start Again"
+msgstr "Start på nytt"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "Er du sikker? All data som ikke er lagret vil bli borte."
+
+msgid "Accept"
+msgstr "Aksepter"
+
+msgid "Registering Organisation Unit"
+msgstr "Registrering av organisasjonsenhet"
+
+msgid "Select"
+msgstr "Velg"
+
+msgid "Selected Program"
+msgstr "Valgt program"
+
+msgid "Some programs are being filtered."
+msgstr "Noen programmer blir filtrert."
+
+msgid "Show all"
+msgstr "Vis alle"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "Select program"
+msgstr "Velg program"
+
+msgid "No programs available."
+msgstr "Ingen programmer tilgjengelig."
+
 msgid "Online"
 msgstr "Påkoblet"
 
@@ -452,15 +509,6 @@ msgstr "Aktiv"
 msgid "Completed"
 msgstr "Fullført"
 
-msgid "Could not get organisation unit"
-msgstr "Kunne ikke få tak i organisasjonsenhet"
-
-msgid "Program doesn't exist"
-msgstr "Programmet finnes ikke"
-
-msgid "Selected program is invalid for registering unit"
-msgstr "Valgt program er ugyldig for registreringsenhet"
-
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "Oppretter en ny {{TET}} i {{program}} i {{orgUnit}}"
 
@@ -491,9 +539,6 @@ msgid ""
 msgstr ""
 "Program med programid {{programId}} er ikke et Tracker-program. "
 "Registreringer kan bare gjøres i Tracker-programmer."
-
-msgid "Selected program is invalid for selected registering unit"
-msgstr "Valgt program er ugyldig for registreringsenhet"
 
 msgid "Assigned user"
 msgstr "Tildelt programbruker"
@@ -616,15 +661,6 @@ msgstr "Skjul"
 msgid "Save as new {{tetName}}"
 msgstr "Lagre som ny {{tetName}}"
 
-msgid "Some programs are being filtered."
-msgstr "Noen programmer blir filtrert."
-
-msgid "Show all"
-msgstr "Vis alle"
-
-msgid "Program"
-msgstr "Program"
-
 msgid "Organisation Unit"
 msgstr "Organisasjonsenhet"
 
@@ -679,45 +715,6 @@ msgstr "Hendelse er tildelt til {{name}}"
 
 msgid "Feedbacks"
 msgstr "Tilbakemeldinger"
-
-msgid "New {{typeName}}"
-msgstr "Ny {{typeName}}"
-
-msgid "New"
-msgstr "Ny"
-
-msgid "Start again"
-msgstr "Start på nytt"
-
-msgid "Find"
-msgstr "Finn"
-
-msgid "Selected registering unit"
-msgstr "Valgt registreringsenhet"
-
-msgid "Start Again"
-msgstr "Start på nytt"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Er du sikker? All data som ikke er lagret vil bli borte."
-
-msgid "Accept"
-msgstr "Aksepter"
-
-msgid "Registering Organisation Unit"
-msgstr "Registrering av organisasjonsenhet"
-
-msgid "Select"
-msgstr "Velg"
-
-msgid "Selected Program"
-msgstr "Valgt program"
-
-msgid "Select program"
-msgstr "Velg program"
-
-msgid "No programs available."
-msgstr "Ingen programmer tilgjengelig."
 
 msgid "You dont have access to delete this relationship"
 msgstr "Du har ikke tilgang til å slette denne relasjonen"

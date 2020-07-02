@@ -300,6 +300,63 @@ msgstr ""
 msgid "No items to display"
 msgstr ""
 
+msgid "Could not get organisation unit"
+msgstr ""
+
+msgid "Program doesn't exist"
+msgstr ""
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr ""
+
+msgid "New {{typeName}}"
+msgstr ""
+
+msgid "New"
+msgstr "نیا"
+
+msgid "Start again"
+msgstr ""
+
+msgid "Find"
+msgstr "تلاش"
+
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Accept"
+msgstr ""
+
+msgid "Registering Organisation Unit"
+msgstr ""
+
+msgid "Select"
+msgstr "منتخب کریں"
+
+msgid "Selected Program"
+msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Show all"
+msgstr "سارے دکھاو"
+
+msgid "Program"
+msgstr "پروگرام"
+
+msgid "Select program"
+msgstr "پروگرام منتخب کریں"
+
+msgid "No programs available."
+msgstr ""
+
 msgid "Online"
 msgstr "آن لائن"
 
@@ -447,15 +504,6 @@ msgstr "فعال"
 msgid "Completed"
 msgstr "مکمل"
 
-msgid "Could not get organisation unit"
-msgstr ""
-
-msgid "Program doesn't exist"
-msgstr ""
-
-msgid "Selected program is invalid for registering unit"
-msgstr ""
-
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
@@ -483,9 +531,6 @@ msgstr ""
 msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
-msgstr ""
-
-msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "Assigned user"
@@ -600,15 +645,6 @@ msgstr "چھپائیں"
 msgid "Save as new {{tetName}}"
 msgstr ""
 
-msgid "Some programs are being filtered."
-msgstr ""
-
-msgid "Show all"
-msgstr "سارے دکھاو"
-
-msgid "Program"
-msgstr "پروگرام"
-
 msgid "Organisation Unit"
 msgstr ""
 
@@ -660,45 +696,6 @@ msgid "Event assigned to {{name}}"
 msgstr ""
 
 msgid "Feedbacks"
-msgstr ""
-
-msgid "New {{typeName}}"
-msgstr ""
-
-msgid "New"
-msgstr "نیا"
-
-msgid "Start again"
-msgstr ""
-
-msgid "Find"
-msgstr "تلاش"
-
-msgid "Selected registering unit"
-msgstr ""
-
-msgid "Start Again"
-msgstr ""
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
-
-msgid "Accept"
-msgstr ""
-
-msgid "Registering Organisation Unit"
-msgstr ""
-
-msgid "Select"
-msgstr "منتخب کریں"
-
-msgid "Selected Program"
-msgstr ""
-
-msgid "Select program"
-msgstr "پروگرام منتخب کریں"
-
-msgid "No programs available."
 msgstr ""
 
 msgid "You dont have access to delete this relationship"
