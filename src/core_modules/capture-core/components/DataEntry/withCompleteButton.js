@@ -169,6 +169,7 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
                 const warnings = this.props.warnings;
 
                 return warnings ?
+                    // $FlowFixMe[missing-annot] automated comment
                     warnings
                         .map((warningData) => {
                             const element = foundation.getElement(warningData.id);
@@ -200,6 +201,7 @@ const getCompleteButton = (InnerComponent: React.ComponentType<any>, optionFn?: 
 
             return (
                 <div>
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <InnerComponent
                         ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                         completeButton={
@@ -284,5 +286,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 // todo is this being used  (report lgmt)
 export default (optionFn?: ?OptionFn) =>
     (InnerComponent: React.ComponentType<any>) =>
+        // $FlowFixMe[missing-annot] automated comment
         connect(
             mapStateToProps, mapDispatchToProps)(getCompleteButton(InnerComponent, optionFn));

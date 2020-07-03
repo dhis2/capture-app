@@ -29,6 +29,7 @@ const exactUrl = (page: string, programId: string, orgUnitId: string) => {
 };
 
 export const updateUrlViaLockedSelectorEpic = (action$: InputObservable, store: ReduxStore) =>
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         lockedSelectorActionTypes.ORG_UNIT_ID_SET,
         lockedSelectorActionTypes.PROGRAM_ID_SET,
@@ -44,10 +45,12 @@ export const updateUrlViaLockedSelectorEpic = (action$: InputObservable, store: 
         });
 
 export const startAgainEpic = (action$: InputObservable) =>
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(lockedSelectorBatchActionTypes.AGAIN_START)
         .map(() => push('/'));
 
 export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable) =>
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE)
         .filter(action => action.payload.nextProps.orgUnitId)
         .switchMap(action => getApi()
@@ -63,11 +66,13 @@ export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable) =>
         );
 
 export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: InputObservable) =>
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE)
         .filter(action => !action.payload.nextProps.orgUnitId)
         .map(() => setEmptyOrgUnitBasedOnUrl());
 
 export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_SET,
         lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_EMPTY_SET)

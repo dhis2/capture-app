@@ -11,6 +11,7 @@ const defaultFields = 'id,displayName,path,publicAccess,access,lastUpdated,child
 function loadCaptureOrgUnitRootsAsync() {
     const currentUser = getCurrentUser();
     return currentUser
+        // $FlowFixMe[prop-missing] automated comment
         .getOrganisationUnits({
             defaultFields,
             paging: false,
@@ -20,10 +21,13 @@ function loadCaptureOrgUnitRootsAsync() {
 
 function loadSearchOrgUnitRootsAsync() {
     const currentUser = getCurrentUser();
+    // $FlowFixMe[prop-missing] automated comment
     if (!currentUser.teiSearchOrganisationUnits || currentUser.teiSearchOrganisationUnits.length === 0) {
-        // $FlowSuppress
+       
+        // $FlowFixMe[incompatible-call] automated comment
         return Promise.resolve(getStoreRoots('captureRoots'));
     }
+    // $FlowFixMe[incompatible-use] automated comment
     const filterIds = currentUser.teiSearchOrganisationUnits.map(o => o.id).join(',');
     return getD2()
         .models

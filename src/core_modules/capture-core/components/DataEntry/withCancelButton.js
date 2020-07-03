@@ -30,6 +30,7 @@ const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: ?
             const options = (optionsFn && optionsFn(this.props)) || {};
 
             return (
+                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                     cancelButton={
@@ -49,5 +50,5 @@ const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: ?
 
 export default (optionsFn?: ?OptionsFn) =>
     (InnerComponent: React.ComponentType<any>) =>
-        // $FlowSuppress
+       
         getCancelButton(InnerComponent, optionsFn);

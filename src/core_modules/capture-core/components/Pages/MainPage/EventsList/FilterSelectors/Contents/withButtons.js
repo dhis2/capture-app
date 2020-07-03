@@ -70,6 +70,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
 
             return (
                 <React.Fragment>
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <InnerComponent
                         filterTypeRef={this.setFilterTypeInstance}
                         onUpdate={this.update}

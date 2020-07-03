@@ -50,7 +50,8 @@ function translateAbsoluteDate(filter: AbsoluteDateFilterData) {
         const appliedTextFrom = convertToViewValue(fromValue);
         appliedText = i18n.t('after or equal to {{date}}', { date: appliedTextFrom });
     } else {
-        // $FlowSuppress
+       
+        // $FlowFixMe[incompatible-call] automated comment
         const appliedTextTo = convertToViewValue(toValue);
         appliedText = i18n.t('before or equal to {{date}}', { date: appliedTextTo });
     }

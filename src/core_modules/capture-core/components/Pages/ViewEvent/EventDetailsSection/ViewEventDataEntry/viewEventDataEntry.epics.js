@@ -19,7 +19,8 @@ import {
 import { getProgramAndStageFromEvent } from '../../../../../metaData';
 
 export const loadViewEventDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+   
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         viewEventPageActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
         viewEventPageActionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE,
@@ -55,9 +56,8 @@ export const loadViewEventDataEntryEpic = (action$: InputObservable, store: Redu
             if (metadataContainer.error) {
                 return prerequisitesErrorLoadingViewEventDataEntry(metadataContainer.error);
             }
-            // $FlowFixMe
             const foundation = metadataContainer.stage.stageForm;
             const program = metadataContainer.program;
-            // $FlowSuppress
+           
             return batchActions((await loadViewEventDataEntry(eventContainer, orgUnit, foundation, program)));
         });

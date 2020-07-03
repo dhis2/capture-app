@@ -15,6 +15,7 @@ export default () =>
             formOptionSet: OptionSet;
             constructor(props: Props) {
                 super(props);
+                // $FlowFixMe[incompatible-type] automated comment
                 this.formOptionSet = this.buildFormOptionSet();
             }
             static errorMessages = {

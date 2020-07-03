@@ -25,6 +25,7 @@ export const getNumberRangeValidator = (validatorContainer: Object) =>
         if (errorResult.length > 0) {
             return {
                 valid: false,
+                // $FlowFixMe[exponential-spread] automated comment
                 errorMessage: errorResult.reduce((map, error) => ({ ...map, ...error }), {}),
             };
         }

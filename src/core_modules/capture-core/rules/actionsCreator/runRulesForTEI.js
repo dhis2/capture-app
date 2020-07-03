@@ -128,6 +128,7 @@ export default function runRulesForTEI(
             teiValues,
             trackedEntityAttributes,
             orgUnit,
+            // $FlowFixMe[prop-missing] automated comment
             optionSets,
         );
     }

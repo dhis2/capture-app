@@ -35,8 +35,10 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
             const { onSave, ...passOnProps } = this.props;
             const hasWriteAccess = this.props.formFoundation.access.data.write;
             return (
+                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     ref={(innerInstance) => { this.innerInstance = innerInstance; }}
+                    // $FlowFixMe[extra-arg] automated comment
                     mainButton={this.renderMainButton(hasWriteAccess)}
                     {...passOnProps}
                 />
@@ -48,5 +50,6 @@ const mapDispatchToProps = () => ({});
 
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
-        // $FlowSuppress
+       
+        // $FlowFixMe[missing-annot] automated comment
         connect(null, mapDispatchToProps)(getMainButton(InnerComponent));

@@ -77,6 +77,7 @@ class RelationshipsSection extends React.Component<Props> {
     renderConnectedEntity = (entity: Entity) => {
         const { orgUnitId } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <ConnectedEntity
                 orgUnitId={orgUnitId}
                 {...entity}

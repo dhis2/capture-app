@@ -34,6 +34,7 @@ class D2BooleanField extends Component<Props> {
 
         return (
             <div>
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <SelectBoxes
                     options={this.options}
                     {...passOnProps}

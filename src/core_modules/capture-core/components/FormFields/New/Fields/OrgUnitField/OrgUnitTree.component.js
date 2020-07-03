@@ -40,6 +40,7 @@ class OrgUnitTree extends React.Component<Props> {
 
         return (
             <div className={classes.orgunitTree}>
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <D2OrgUnitTree
                     key={treeKey}
                     roots={roots}

@@ -47,6 +47,7 @@ export default function getStore(history: BrowserHistory | HashHistory, onRehydr
         persistOptions: getPersistOptions(),
     });
 
+    // $FlowFixMe[missing-annot] automated comment
     return createStore(
         enableBatching(offlineEnhanceReducer(rootReducer)), composeWithDevTools(
             compose(

@@ -62,7 +62,7 @@ export const makeColumnsSelector = () => createSelector(
             return columnsOrderFromState;
         }
 
-        // $FlowSuppress
+       
         const stageForm: RenderFoundation = stageContainer.stage.stageForm;
 
         return columnsOrderFromState

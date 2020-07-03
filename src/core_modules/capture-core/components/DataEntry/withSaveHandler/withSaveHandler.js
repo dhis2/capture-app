@@ -78,6 +78,7 @@ const getSaveHandler = (
         };
 
         getDataEntryFieldInstances() {
+            // $FlowFixMe[missing-annot] automated comment
             return Array.from(this.dataEntryFieldInstances.entries()).map(entry => entry[1]);
         }
 
@@ -193,10 +194,12 @@ const getSaveHandler = (
             </div>
         );
 
+        // $FlowFixMe[missing-annot] automated comment
         setFormInstance = (formInstance) => {
             this.formInstance = formInstance;
         }
 
+        // $FlowFixMe[missing-annot] automated comment
         setDataEntryFieldInstance = (dataEntryFieldInstance, id) => {
             this.dataEntryFieldInstances.set(id, dataEntryFieldInstance);
         }
@@ -285,6 +288,7 @@ const getSaveHandler = (
             };
         };
 
+        // $FlowFixMe[not-an-object] automated comment
         return mapStateToProps;
     };
 

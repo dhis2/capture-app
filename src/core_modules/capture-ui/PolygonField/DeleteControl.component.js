@@ -12,6 +12,7 @@ type Props = {
     disabled?: ?boolean,
 }
 
+// $FlowFixMe[prop-missing] automated comment
 class DeleteControl extends MapControl<any, Props> {
     componentWillMount() {
         const deleteControl = L.control({ position: 'topright' });
@@ -60,4 +61,5 @@ class DeleteControl extends MapControl<any, Props> {
     }
 }
 
+// $FlowFixMe[incompatible-call] automated comment
 export default withLeaflet(DeleteControl);

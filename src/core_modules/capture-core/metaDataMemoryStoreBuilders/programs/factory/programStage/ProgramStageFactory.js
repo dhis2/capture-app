@@ -164,7 +164,9 @@ class ProgramStageFactory {
                 ProgramStageFactory._convertProgramStageDataElementsToObject(
                     cachedProgramStage.programStageDataElements,
                 );
-            // $FlowSuppress
+           
+            // $FlowFixMe[prop-missing] automated comment
+            // $FlowFixMe[incompatible-use] automated comment
             await cachedProgramStage.programStageSections.asyncForEach(async (section: CachedProgramStageSection) => {
                 stageForm.addSection(await this._buildSection(cachedProgramStageDataElementsAsObject, {
                     id: section.id,

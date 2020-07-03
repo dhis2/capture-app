@@ -92,6 +92,7 @@ const SearchSuggestion = (props: Props) => {
 
     const handleBlur = React.useCallback((event) => {
         if (!event.relatedTarget || !isInternalTarget(event.relatedTarget, suggestionName, inputName)) {
+            // $FlowFixMe[incompatible-call] automated comment
             onExitSearch();
         }
     }, [onExitSearch, suggestionName, inputName]);

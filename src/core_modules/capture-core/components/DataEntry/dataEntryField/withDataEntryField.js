@@ -44,6 +44,7 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
             super(props);
             this.reselectComponentProps = makeReselectComponentProps();
         }
+        // $FlowFixMe[speculation-ambiguous] automated comment
         handleRef = (instance: DataEntryField) => {
             if (this.props.dataEntryFieldRef) {
                 const { getPropName } = settings;
@@ -107,6 +108,7 @@ const getDataEntryField = (settings: Settings, InnerComponent: React.ComponentTy
 
             return (
                 <div>
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <InnerComponent
                         fields={this.getFields()}
                         {...passOnProps}

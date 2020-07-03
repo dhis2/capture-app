@@ -19,7 +19,8 @@ import {
 } from '../../../../../metaData';
 
 export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+   
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         registrationSectionActionTypes.PROGRAM_CHANGE,
         registrationSectionActionTypes.ORG_UNIT_CHANGE,
@@ -52,6 +53,7 @@ export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObserv
                 );
 
                 return fromPromise(openEnrollmentPromise)
+                    // $FlowFixMe[prop-missing] automated comment
                     .takeUntil(action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE));
             }
 
@@ -75,6 +77,7 @@ export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObserv
                 );
 
                 return fromPromise(openTeiPromise)
+                    // $FlowFixMe[prop-missing] automated comment
                     .takeUntil(action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE));
             }
 

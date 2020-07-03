@@ -28,6 +28,7 @@ export default (settingsFn: () => Settings) =>
             render() {
                 const settings = settingsFn();
                 return (
+                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <InnerComponent
                         getCustomEndCellHeader={this.getCustomEndCellHeader}
                         getCustomEndCellBody={this.getCustomEndCellBody}

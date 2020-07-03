@@ -17,6 +17,7 @@ const makeMapStateToProps = () => {
             orgUnit: state.newRelationshipRegisterTei.orgUnit,
         };
     };
+    // $FlowFixMe[not-an-object] automated comment
     return mapStateToProps;
 };
 

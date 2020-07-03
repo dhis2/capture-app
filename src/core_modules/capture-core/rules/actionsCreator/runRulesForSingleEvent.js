@@ -121,6 +121,7 @@ export default function runRulesForSingleEvent(
             { currentEvent, allEvents },
             dataElementsInProgram,
             orgUnit,
+            // $FlowFixMe[prop-missing] automated comment
             optionSets,
         );
     }

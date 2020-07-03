@@ -34,6 +34,7 @@ const convert = (() => {
             .filter(programStageDataElement => programStageDataElement.dataElement)
             .map((programStageDataElement) => {
                 programStageDataElement.dataElement.translations =
+                    // $FlowFixMe[incompatible-type] automated comment
                     convertTranslationsToObject(programStageDataElement.dataElement.translations);
                 return programStageDataElement;
             });

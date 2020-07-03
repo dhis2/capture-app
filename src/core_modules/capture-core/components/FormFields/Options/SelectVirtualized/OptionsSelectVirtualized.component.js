@@ -121,6 +121,7 @@ type State = {
 };
 
 class OptionsSelectVirtualized extends Component<Props, State> {
+    // $FlowFixMe[incompatible-type] automated comment
     handleChange: (e: Object, index: number, value: any) => void;
     handleFocus: () => void;
     handleBlur: () => void;
@@ -213,8 +214,10 @@ class OptionsSelectVirtualized extends Component<Props, State> {
     }
 
     render() {
+        // $FlowFixMe[prop-missing] automated comment
         const { optionSet, label, value, nullable, style, menuStyle, maxHeight, disabled, required, useHintLabel, onChange, onBlur, classes, translations, withoutUnderline, ...toSelect } = this.props;
         const { inFocus } = this.state;
+        // $FlowFixMe[prop-missing] automated comment
         const calculatedValue = toSelect.multi ? value : this.getValue();
         const labelIsShrinked = !!calculatedValue || this.state.inFocus;
 
@@ -251,6 +254,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
                 <div
                     className={selectRootClasses}
                 >
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <VirtualizedSelect
                         ref={(select) => { this.yourSelect = select; }}
                         disabled={disabled}
