@@ -11,12 +11,11 @@ import {
     ModalContent,
     ModalActions,
     ButtonStrip,
-    Button as ButtonUi,
+    Button,
 } from '@dhis2/ui-core';
 import { LockedSelector } from '../../LockedSelector';
 import type { Props } from './SearchPage.types';
 import { Section, SectionHeaderSimple } from '../../Section';
-import Button from '../../Buttons/Button.component';
 import Form from '../../D2Form/D2Form.component';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 
@@ -202,6 +201,7 @@ const Index = ({
                             );
                         })
                 }
+
                 {
                     searchStatus === searchPageStatus.NO_RESULTS &&
                     <Modal position="middle">
@@ -209,11 +209,13 @@ const Index = ({
                         <ModalContent>There was no item found</ModalContent>
                         <ModalActions>
                             <ButtonStrip end>
-                                <ButtonUi
+                                <Button
                                     onClick={closeModal}
                                     primary
                                     type="button"
-                                >Search Again</ButtonUi>
+                                >
+                                    Search Again
+                                </Button>
                             </ButtonStrip>
                         </ModalActions>
                     </Modal>
