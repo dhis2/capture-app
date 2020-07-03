@@ -28,7 +28,7 @@ export type PropsFromRedux = {
       loadNr: number
     }
   },
-  ...ReduxDispatch
+  dispatch: ReduxDispatch,
 }
 
 export type Props =
@@ -44,5 +44,7 @@ export type Props =
     +searchRowTitle: string,
     +searchRowSelectElement: string,
     +searchButtonContainer: string,
+    +emptySelectionPaperContainer: string,
+    +emptySelectionPaperContent: string,
   |},
   }
