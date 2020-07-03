@@ -69,7 +69,6 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-
 const Index = ({
     classes,
     trackedEntityTypesWithCorrelatedPrograms,
@@ -85,15 +84,18 @@ const Index = ({
 
     const formReference = {};
 
+    const stringifyPrograms = JSON.stringify(programs);
     useEffect(() => {
         // in order for the Form component to render
         // need to add a formId under the `forms` reducer
         selectedOption.value &&
-          programs[selectedOption.value].searchGroups
-              .forEach(({ formId }) => {
-                  addFormIdToReduxStore(formId);
-              });
-    }, [
+        JSON.parse(stringifyPrograms)[selectedOption.value].searchGroups
+            .forEach(({ formId }) => {
+                addFormIdToReduxStore(formId);
+            });
+    },
+    [
+        stringifyPrograms,
         selectedOption.value,
         addFormIdToReduxStore,
     ]);
