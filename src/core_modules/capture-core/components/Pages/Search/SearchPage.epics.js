@@ -9,7 +9,7 @@ import {
 import { actionCreator } from '../../../actions/actions.utils';
 
 export const trackedEntitySearchUsingUniqueIdentifierEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.ofType(searchPageActionTypes.ON_SEARCH).pipe(
+    action$.ofType(searchPageActionTypes.USING_UNIQUE_IDENTIFIER_FIND).pipe(
         flatMap(({ payload: { formId, selectedProgramId } }) => {
             const { formsValues } = store.getState();
             const searchTerm = formsValues[formId];

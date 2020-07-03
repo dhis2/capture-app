@@ -31,7 +31,7 @@ export type PropsFromRedux = {
 }
 
 export type DispatchersFromRedux = {|
-  handleOnSearch: ({| selectedProgramId: string, formId: string |}) => void,
+  findUsingUniqueIdentifier: ({| selectedProgramId: string, formId: string |}) => void,
   addFormIdToReduxStore: (formId: string) => void,
   closeModal: () => void
 |}

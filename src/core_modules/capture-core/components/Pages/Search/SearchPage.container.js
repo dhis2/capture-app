@@ -4,13 +4,13 @@ import { SearchPage as SearchPageComponent } from './SearchPage.component';
 import { programCollection } from '../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../../metaData/Program';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
-import type { DispatcherFromRedux, PropsFromRedux } from './SearchPage.types';
+import type { DispatchersFromRedux, PropsFromRedux } from './SearchPage.types';
 import { addFormData } from '../../D2Form/actions/form.actions';
 import { actionCreator } from '../../../actions/actions.utils';
 
 
 export const searchPageActionTypes = {
-    ON_SEARCH: 'OnSearch',
+    USING_UNIQUE_IDENTIFIER_FIND: 'FindUsingUniqueIdentifier',
     SEARCH_RESULTS_EMPTY: 'SearchResultsEmpty',
     MODAL_CLOSE: 'CloseModal',
 };
@@ -86,9 +86,9 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     };
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch): DispatcherFromRedux => ({
-    handleOnSearch: ({ selectedProgramId, formId }) => {
-        dispatch(actionCreator(searchPageActionTypes.ON_SEARCH)({ selectedProgramId, formId }));
+const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
+    findUsingUniqueIdentifier: ({ selectedProgramId, formId }) => {
+        dispatch(actionCreator(searchPageActionTypes.USING_UNIQUE_IDENTIFIER_FIND)({ selectedProgramId, formId }));
     },
     addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
     closeModal: () => { dispatch(actionCreator(searchPageActionTypes.MODAL_CLOSE)()); },

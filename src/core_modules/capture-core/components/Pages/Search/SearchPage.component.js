@@ -78,11 +78,13 @@ const Index = ({
     programs,
     forms,
     searchStatus,
-    handleOnSearch,
+    findUsingUniqueIdentifier,
     addFormIdToReduxStore,
     closeModal,
 }: Props) => {
     const [selectedOption, setSelected] = useState(preselectedProgram);
+
+    const formReference = {};
 
     useEffect(() => {
         // in order for the Form component to render
@@ -94,8 +96,16 @@ const Index = ({
               });
     }, [
         selectedOption.value,
-        dispatch,
+        addFormIdToReduxStore,
     ]);
+
+    const handleOnFindUsingUniqueIdentifier = (selectedProgramId, formId) => {
+        const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
+
+        if (isValid) {
+            findUsingUniqueIdentifier({ selectedProgramId, formId });
+        }
+    };
 
     return (<>
         <LockedSelector />
@@ -172,6 +182,7 @@ const Index = ({
                                             {
                                                 forms[formId] &&
                                                 <Form
+                                                    formRef={(formInstance) => { formReference[formId] = formInstance; }}
                                                     formFoundation={searchForm}
                                                     id={formId}
                                                 />
@@ -182,7 +193,7 @@ const Index = ({
                                         <Button
                                             onClick={() =>
                                                 selectedOption.value &&
-                                                handleOnSearch({ selectedProgramId: selectedOption.value, formId })}
+                                                handleOnFindUsingUniqueIdentifier(selectedOption.value, formId)}
                                         >
                                             Find by {name}.
                                         </Button>
