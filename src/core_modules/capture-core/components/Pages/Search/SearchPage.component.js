@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper/Paper';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -49,7 +49,7 @@ const getStyles = (theme: Theme) => ({
 
 
 const Index = ({ classes, trackedEntityTypesWithCorrelatedPrograms, preselectedProgram }: Props) => {
-    const [selectedOption, choseSelected] = useState(preselectedProgram);
+    const [selectedOption, setSelected] = useState(preselectedProgram);
 
     return (<>
         <LockedSelector />
@@ -68,13 +68,13 @@ const Index = ({ classes, trackedEntityTypesWithCorrelatedPrograms, preselectedP
                         <div className={classes.searchRowTitle}>Search for</div>
                         <div className={classes.searchRowSelectElement}>
                             <SingleSelect
-                                onChange={({ selected }) => { choseSelected(selected); }}
+                                onChange={({ selected }) => { setSelected(selected); }}
                                 selected={selectedOption}
                                 empty={<div className={classes.customEmpty}>Custom empty component</div>}
                             >
                                 {
-                                    Object.values(trackedEntityTypesWithCorrelatedPrograms)
-                                        // $FlowSuppress https://github.com/facebook/flow/issues/2221
+                                    useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
+                                        // $FlowFixMe https://github.com/facebook/flow/issues/2221
                                         .map(({ trackedEntityTypeName, trackedEntityTypeId, programs }) =>
                                             // SingleSelect component wont allow us to wrap the SingleSelectOption
                                             // in any other element and still make use of the default behaviour.
@@ -89,7 +89,8 @@ const Index = ({ classes, trackedEntityTypesWithCorrelatedPrograms, preselectedP
                                                 </div>,
                                                 programs.map(({ programName, programId }) =>
                                                     (<SingleSelectOption value={programId} label={programName} />)),
-                                            ])
+                                            ]),
+                                    )
                                 }
                             </SingleSelect>
                         </div>
