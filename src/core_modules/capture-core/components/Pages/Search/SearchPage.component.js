@@ -195,7 +195,7 @@ const Index = ({
                                             <Button
                                                 onClick={() =>
                                                     selectedOption.value &&
-                                        handleOnFindUsingUniqueIdentifier(selectedOption.value, formId)}
+                                                    handleOnFindUsingUniqueIdentifier(selectedOption.value, formId)}
                                             >
                                                 Find by {name}.
                                             </Button>
