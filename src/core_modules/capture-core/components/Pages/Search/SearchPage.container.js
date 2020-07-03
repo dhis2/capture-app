@@ -4,7 +4,7 @@ import { SearchPage as SearchPageComponent } from './SearchPage.component';
 import { programCollection } from '../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../../metaData/Program';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
-import type { PropsFromRedux } from './SearchPage.types';
+import type { OwnProps, Props, PropsFromRedux } from './SearchPage.types';
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const { currentSelections, activePage } = state;
@@ -51,4 +51,4 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     };
 };
 
-export const SearchPage = connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(SearchPageComponent)));
+export const SearchPage = connect<Props, OwnProps, _, _, _, _>(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(SearchPageComponent)));

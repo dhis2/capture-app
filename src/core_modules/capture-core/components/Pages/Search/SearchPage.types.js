@@ -1,5 +1,5 @@
 // @flow
-export type PropsFromRedux = {
+export type PropsFromRedux = {|
   +preselectedProgram: {|
     value: ?string,
     label: ?string
@@ -13,11 +13,12 @@ export type PropsFromRedux = {
         +programId: string,
       |}>
     |}
-  }
-}
+  },
+  +error: boolean,
+  +ready: boolean,
+|}
 
-export type Props =
-  PropsFromRedux & {
+export type OwnProps = {|
   +classes: {|
     +container: string,
     +header: string,
@@ -29,4 +30,6 @@ export type Props =
     +searchRowTitle: string,
     +searchRowSelectElement: string,
   |},
-  }
+|}
+
+export type Props = PropsFromRedux & OwnProps
