@@ -78,7 +78,11 @@ const Index = ({
               .forEach(({ formId }) => {
                   dispatch(addFormData(formId, {}));
               });
-    }, [selectedOption.value]);
+    }, [
+        selectedOption.value,
+        programs,
+        dispatch,
+    ]);
 
     return (<>
         <LockedSelector />
@@ -104,7 +108,7 @@ const Index = ({
                                 {
                                     useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
                                         // $FlowFixMe https://github.com/facebook/flow/issues/2221
-                                        .map(({ trackedEntityTypeName, trackedEntityTypeId, programs }) =>
+                                        .map(({ trackedEntityTypeName, trackedEntityTypeId, tePrograms }) =>
                                             // SingleSelect component wont allow us to wrap the SingleSelectOption
                                             // in any other element and still make use of the default behaviour.
                                             // Therefore we are returning the group title and the
@@ -114,7 +118,7 @@ const Index = ({
                                                     value={trackedEntityTypeId}
                                                     label={trackedEntityTypeName}
                                                 />,
-                                                programs.map(({ programName, programId }) =>
+                                                tePrograms.map(({ programName, programId }) =>
                                                     (<SingleSelectOption value={programId} label={programName} />)),
                                                 <div
                                                     className={classes.groupTitle}
