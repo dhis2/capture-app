@@ -35,7 +35,6 @@ function updateStatePartInProduction<T>(
     }
 
     if (updatersForActionTypes[action.type]) {
-
         // $FlowFixMe[extra-arg] automated comment
         const newState = updatersForActionTypes[action.type](state, action);
         return newState;
@@ -149,7 +148,6 @@ function buildReducer(reducerDescription: ReducerDescription) {
 }
 
 export function buildReducersFromDescriptions(reducerDescriptions: Array<ReducerDescription>) {
-
     const reducers = reducerDescriptions
 
         .reduce((accReducers: {[reducerName: string]: Reducer<any, Action>}, description: ReducerDescription) => {

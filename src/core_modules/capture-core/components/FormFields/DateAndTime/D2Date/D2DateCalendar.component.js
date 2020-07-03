@@ -94,7 +94,7 @@ class D2DateCalendar extends Component<Props> {
         if (!parseData.isValid) {
             return null;
         }
-       
+
         // $FlowFixMe[incompatible-use] automated comment
         return parseData.momentDate.toDate();
     }

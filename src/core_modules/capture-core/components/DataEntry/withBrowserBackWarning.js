@@ -94,7 +94,7 @@ const mapDispatchToProps = () => ({});
 
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
-       
+
         // $FlowFixMe[missing-annot] automated comment
         connect(
             // $FlowFixMe[missing-annot] automated comment

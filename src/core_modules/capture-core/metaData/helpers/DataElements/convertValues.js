@@ -31,7 +31,6 @@ function convertArrayValues(
     elementsById: { [id: string]: DataElement },
     onConvert: ConvertFn,
 ) {
-   
     // $FlowFixMe[prop-missing] automated comment
     return arrayOfValues.map((values: ValuesType) => this.convertObjectValues(values, elementsById, onConvert));
 }
@@ -44,12 +43,10 @@ export default function convertValues<T: ?ValuesType | Array<ValuesType>>(
     if (values) {
         const elementsById = getElementsById(dataElements);
         if (isArray(values)) {
-           
             // $FlowFixMe[incompatible-return] automated comment
             // $FlowFixMe[incompatible-call] automated comment
             return convertArrayValues(values, elementsById, onConvert);
         } else if (isObject(values)) {
-           
             // $FlowFixMe[incompatible-return] automated comment
             // $FlowFixMe[incompatible-call] automated comment
             return convertObjectValues(values, elementsById, onConvert);

@@ -24,7 +24,7 @@ const programShouldReset = (orgUnitId, currentlySelectedProgramId) => {
 
 export const resetProgramAfterSettingOrgUnitIfApplicableEpic = (action$: InputObservable, store: ReduxStore) =>
     action$
-       
+
         // $FlowFixMe[prop-missing] automated comment
         .ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET)
         .filter((action) => {

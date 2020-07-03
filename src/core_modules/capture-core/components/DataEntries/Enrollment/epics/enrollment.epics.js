@@ -110,7 +110,7 @@ export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (action$: InputObser
         });
 
 export const runRulesOnEnrollmentFieldUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
-   
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH)
         .map(actionBatch =>

@@ -43,7 +43,7 @@ const getFormMetadata = (programId: ?string, tetId: string) =>
     (programId ? getEnrollmentForm(programId) : getTETForm(tetId));
 
 export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable, store: ReduxStore) =>
-   
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(actionTypes.DUPLICATES_REVIEW, actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE)
         .switchMap((action) => {

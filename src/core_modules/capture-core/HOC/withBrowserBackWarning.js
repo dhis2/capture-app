@@ -102,7 +102,7 @@ const mapDispatchToProps = () => ({});
 
 export default (dialogConfig: DialogConfig, inEffect: InEffectFn) =>
     (InnerComponent: React.ComponentType<any>) =>
-       
+
         // $FlowFixMe[missing-annot] automated comment
         connect(
             // $FlowFixMe[missing-annot] automated comment

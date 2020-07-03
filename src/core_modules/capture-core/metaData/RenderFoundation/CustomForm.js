@@ -49,7 +49,7 @@ export default class CustomForm {
      *
      * @memberof CustomForm
      */
-   
+
     // $FlowFixMe[missing-annot] automated comment
     transformNode = (node: Object, index: number, nodeToElementFn) => {
         if (node.name === 'input') {

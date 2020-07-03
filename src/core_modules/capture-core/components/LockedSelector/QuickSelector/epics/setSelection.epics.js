@@ -17,7 +17,7 @@ const getArguments = (programId: string, orgUnitId: string) => {
 };
 
 export const setOrgUnit = (action$: InputObservable, store: ReduxStore) =>
-   
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(selectionActionTypes.SET_ORG_UNIT_ID)
         .map(() => {
@@ -28,7 +28,7 @@ export const setOrgUnit = (action$: InputObservable, store: ReduxStore) =>
         });
 
 export const setProgram = (action$: InputObservable, store: ReduxStore) =>
-   
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(selectionActionTypes.SET_PROGRAM_ID)
         .map(() => {
@@ -39,7 +39,7 @@ export const setProgram = (action$: InputObservable, store: ReduxStore) =>
         });
 
 export const goBackToListContext = (action$: InputObservable, store: ReduxStore) =>
-   
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(selectionActionTypes.GO_BACK_TO_LIST_CONTEXT)
         .map(() => {

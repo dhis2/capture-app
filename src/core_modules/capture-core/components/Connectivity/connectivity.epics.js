@@ -5,7 +5,7 @@ import { getEventListOnReconnect, goingOnlineExecuted, batchActionTypes } from '
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
 
 export const goingOnlineEpic = (action$: InputObservable, store: ReduxStore) =>
-   
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(OFFLINE_STATUS_CHANGED)
         .filter((action) => {

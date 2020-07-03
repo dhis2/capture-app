@@ -5,7 +5,7 @@ import {
 import { updateIncludedFiltersAfterColumnSorting } from './filterSelector.actions';
 
 export const includeFiltersWithValueAfterColumnSortingEpic = (action$: InputObservable, store: ReduxStore) =>
-   
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(columnSelectorActionTypes.UPDATE_WORKINGLIST_ORDER)
         // eslint-disable-next-line complexity

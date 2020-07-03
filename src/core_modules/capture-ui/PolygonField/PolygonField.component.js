@@ -138,11 +138,11 @@ export default class D2Polygon extends React.Component<Props, State> {
 
     renderMapDialog = () => {
         const clonedDialog = React.cloneElement(
-           
+
             // $FlowFixMe[incompatible-type] automated comment
             this.props.mapDialog,
             { open: this.state.showMap, onClose: this.closeMap },
-           
+
             // $FlowFixMe[incompatible-use] automated comment
             [...React.Children.toArray(this.props.mapDialog.props.children), (
                 <div className={defaultClasses.dialogContent} key="dialogContent">

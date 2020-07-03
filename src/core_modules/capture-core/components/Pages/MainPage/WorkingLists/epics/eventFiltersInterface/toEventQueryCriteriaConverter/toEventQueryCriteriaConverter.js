@@ -154,7 +154,7 @@ const getMainFilter = (filter: Object): Object => {
 const buildMainAndDataFilters = (apiFilters: Array<Object>, defaultSpecs: Map<string, Object>) => apiFilters
     .reduce((acc, filter) => {
         const element = defaultSpecs.get(filter.dataItem);
-       
+
         // $FlowFixMe[incompatible-type] automated comment
         if (element.isMainProperty) {
             const mainFilter = getMainFilter(filter);

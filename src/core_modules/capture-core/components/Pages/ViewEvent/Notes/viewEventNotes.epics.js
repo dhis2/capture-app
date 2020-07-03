@@ -24,7 +24,7 @@ import {
 const noteKey = 'viewEvent';
 
 export const loadNotesForViewEventEpic = (action$: InputObservable) =>
-   
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         viewEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
@@ -48,7 +48,7 @@ export const loadNotesForViewEventEpic = (action$: InputObservable) =>
         });
 
 export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxStore) =>
-   
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(viewEventNotesActionTypes.REQUEST_SAVE_EVENT_NOTE)
         .map((action) => {
@@ -79,7 +79,7 @@ export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxSt
         });
 
 export const saveNoteForViewEventFailedEpic = (action$: InputObservable) =>
-   
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(viewEventNotesActionTypes.SAVE_EVENT_NOTE_FAILED)
         .map(action => removeNote(noteKey, action.meta.clientId));
