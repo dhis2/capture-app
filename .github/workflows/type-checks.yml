@@ -1,0 +1,22 @@
+name: 'dhis2: '
+
+on: push
+
+jobs:
+    type-checks:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: 12.x
+
+            - name: Install
+              run: yarn install --frozen-lockfile
+
+            - name: Lint
+              run: |
+                  yarn flow:check
+                  yarn linter:check
+        env:
+            CI: true
