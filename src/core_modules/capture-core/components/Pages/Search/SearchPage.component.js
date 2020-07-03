@@ -81,7 +81,10 @@ const Index = ({ classes, trackedEntityTypesWithCorrelatedPrograms, preselectedP
                                             // Therefore we are returning the group title and the
                                             // SingleSelectOption in an array.
                                             [
-                                                <SingleSelectOption value={trackedEntityTypeId} label={trackedEntityTypeName} />,
+                                                <SingleSelectOption
+                                                    value={trackedEntityTypeId}
+                                                    label={trackedEntityTypeName}
+                                                />,
                                                 programs.map(({ programName, programId }) =>
                                                     (<SingleSelectOption value={programId} label={programName} />)),
                                                 <div
@@ -92,6 +95,7 @@ const Index = ({ classes, trackedEntityTypesWithCorrelatedPrograms, preselectedP
                                                 </div>,
                                             ],
                                         ),
+                                    [trackedEntityTypesWithCorrelatedPrograms],
                                     )
                                 }
                             </SingleSelect>
