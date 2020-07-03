@@ -21,12 +21,13 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const trackedEntityTypesWithCorrelatedPrograms =
       [...programCollection.values()]
           .filter(program => program instanceof TrackerProgram)
+          // $FlowFixMe
           .reduce((acc, {
               id: programId,
               name: programName,
               trackedEntityType: { id: trackedEntityTypeId, name: trackedEntityTypeName },
               searchGroups,
-          }) => {
+          }: TrackerProgram) => {
               const accumulatedProgramsOfTrackedEntityType =
                 acc[trackedEntityTypeId] ? acc[trackedEntityTypeId].programs : [];
               return {
@@ -44,7 +45,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
           }, {});
 
     const preselectedProgram = Object.values(trackedEntityTypesWithCorrelatedPrograms)
-        // $FlowSuppress https://github.com/facebook/flow/issues/2221
+        // $FlowFixMe https://github.com/facebook/flow/issues/2221
         .map(({ programs }) =>
             programs.find(({ programId }) => programId === currentSelections.programId))
         .filter(program => program)[0];
@@ -57,7 +58,10 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
             [programId]: {
                 programId,
                 programName,
-                // TODO add comment we want the forms to have an id so that it can be used
+                // We adding the `formId` here for the reason that we will use it in the SearchPage component.
+                // Specifically the function `addFormData` will add an object for each input field to the store.
+                // Also the formId is passed in the `Form` component and needs to be identical with the one in
+                // the store in order for the `Form` to function. For these reasons we generate it once here.
                 searchGroups: [...searchGroups.values()]
                     .map(({ unique, searchForm }, index) => ({
                         unique,

@@ -38,6 +38,7 @@ export type DispatcherFromRedux = {|
 
 export type Props =
   DispatcherFromRedux & PropsFromRedux & {
+  dispatch: ReduxDispatch,
   +searchStatus: "RESULTS_EMPTY" | "SEARCHING" | "",
   +classes: {|
     +container: string,
@@ -50,5 +51,7 @@ export type Props =
     +searchRowTitle: string,
     +searchRowSelectElement: string,
     +searchButtonContainer: string,
+    +emptySelectionPaperContainer: string,
+    +emptySelectionPaperContent: string,
   |},
-}
+  }

@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper/Paper';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -27,6 +27,16 @@ const getStyles = (theme: Theme) => ({
     paper: {
         marginBottom: theme.typography.pxToRem(10),
         padding: theme.typography.pxToRem(10),
+    },
+    emptySelectionPaperContent: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingTop: 50,
+        paddingBottom: 50,
+    },
+    emptySelectionPaperContainer: {
+        padding: 24,
     },
     customEmpty: {
         textAlign: 'center',
@@ -72,17 +82,21 @@ const Index = ({
     addFormIdToReduxStore,
     closeModal,
 }: Props) => {
-    const [selectedOption, choseSelected] = useState(preselectedProgram);
+    const [selectedOption, setSelected] = useState(preselectedProgram);
 
     useEffect(() => {
         // in order for the Form component to render
         // need to add a formId under the `forms` reducer
         selectedOption.value &&
-        programs[selectedOption.value].searchGroups
-            .forEach(({ formId }) => {
+          programs[selectedOption.value].searchGroups
+              .forEach(({ formId }) => {
                 addFormIdToReduxStore(formId);
-            });
-    }, [selectedOption.value]);
+              });
+    }, [
+        selectedOption.value,
+        programs,
+        dispatch,
+    ]);
 
     return (<>
         <LockedSelector />
@@ -101,37 +115,43 @@ const Index = ({
                         <div className={classes.searchRowTitle}>Search for</div>
                         <div className={classes.searchRowSelectElement} style={{ marginRight: 8 }}>
                             <SingleSelect
-                                onChange={({ selected }) => { choseSelected(selected); }}
+                                onChange={({ selected }) => { setSelected(selected); }}
                                 selected={selectedOption}
                                 empty={<div className={classes.customEmpty}>Custom empty component</div>}
                             >
                                 {
-                                    Object.values(trackedEntityTypesWithCorrelatedPrograms)
-                                        // $FlowSuppress https://github.com/facebook/flow/issues/2221
-                                        .map(({ trackedEntityTypeName, trackedEntityTypeId, programs: tePrograms }) =>
-                                        // SingleSelect component wont allow us to wrap the SingleSelectOption
-                                        // in any other element and still make use of the default behaviour.
-                                        // Therefore we are returning the group title and the
-                                        // SingleSelectOption in an array.
+                                    useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
+                                        // $FlowFixMe https://github.com/facebook/flow/issues/2221
+                                        .map(({ trackedEntityTypeName, trackedEntityTypeId, tePrograms }) =>
+                                            // SingleSelect component wont allow us to wrap the SingleSelectOption
+                                            // in any other element and still make use of the default behaviour.
+                                            // Therefore we are returning the group title and the
+                                            // SingleSelectOption in an array.
                                             [
+                                                <SingleSelectOption
+                                                    value={trackedEntityTypeId}
+                                                    label={trackedEntityTypeName}
+                                                />,
+                                                tePrograms.map(({ programName, programId }) =>
+                                                    (<SingleSelectOption value={programId} label={programName} />)),
                                                 <div
                                                     className={classes.groupTitle}
                                                     key={trackedEntityTypeId}
                                                 >
-                                                    {trackedEntityTypeName}
+                                                    --------------------------
                                                 </div>,
-                                                tePrograms.map(({ programName, programId }) =>
-                                                    (<SingleSelectOption
-                                                        style={{ marginRight: 0 }}
-                                                        value={programId}
-                                                        label={programName}
-                                                    />)),
-                                            ])
+                                            ],
+                                        ),
+                                    [
+                                        trackedEntityTypesWithCorrelatedPrograms,
+                                        classes.groupTitle,
+                                    ])
                                 }
                             </SingleSelect>
                         </div>
                     </div>
                 </Section>
+
 
                 {
                     selectedOption.value && programs[selectedOption.value].searchGroups
@@ -189,6 +209,16 @@ const Index = ({
                     </Modal>
                 }
             </Paper>
+
+            {
+                !selectedOption.value &&
+                    <Paper elevation={0}>
+                        <div className={classes.emptySelectionPaperContent}>
+                            {i18n.t('Make a selection to start searching')}
+                        </div>
+                    </Paper>
+            }
+
         </div>
     </>);
 };
