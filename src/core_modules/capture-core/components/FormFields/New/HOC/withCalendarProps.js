@@ -22,7 +22,8 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
             if (!parseData.isValid) {
                 return new Date();
             }
-            // $FlowSuppress
+
+            // $FlowFixMe[incompatible-use] automated comment
             return parseData.momentDate.toDate();
         }
 

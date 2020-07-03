@@ -25,7 +25,6 @@ const getClientConstraintByType = {
             return null;
         }
 
-        // $FlowFixMe
         const stage = program.getStage(event.programStage);
         if (!stage) {
             return null;

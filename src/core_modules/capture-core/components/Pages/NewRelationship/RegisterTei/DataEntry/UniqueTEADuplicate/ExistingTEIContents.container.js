@@ -14,7 +14,6 @@ const makeMapStateToProps = () => {
             attributeValues,
         };
     };
-    // $FlowFixMe
     return mapStateToProps;
 };
 

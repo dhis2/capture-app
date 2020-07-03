@@ -13,7 +13,8 @@ import { programCollection } from '../../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../../../metaData';
 
 export const getOrgUnitDataForNewEnrollmentUrlUpdateEpic = (action$: InputObservable) =>
-    // $FlowSuppress
+
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(actionTypes.UPDATE_SELECTIONS_FROM_URL)
         .filter(action => action.payload.nextProps.orgUnitId)
         .switchMap(action => getApi()
@@ -27,13 +28,15 @@ export const getOrgUnitDataForNewEnrollmentUrlUpdateEpic = (action$: InputObserv
         );
 
 export const emptyOrgUnitForNewEnrollmentUrlUpdateEpic = (action$: InputObservable) =>
-    // $FlowSuppress
+
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(actionTypes.UPDATE_SELECTIONS_FROM_URL)
         .filter(action => !action.payload.nextProps.orgUnitId)
         .map(() => setEmptyOrgUnitBasedOnUrl());
 
 export const validationForNewEnrollmentUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(actionTypes.SET_ORG_UNIT_BASED_ON_URL, actionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL)
         .map(() => {
             const { programId, orgUnitId } = store.getState().currentSelections;

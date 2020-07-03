@@ -48,7 +48,7 @@ function manipulateFormatAndParseWithSeparator(dateString: string, inputFormat: 
 
 function parseWithSeparator(dateString: string, localeFormat: string, separatorPattern: RegExp) {
     const specialCharactersInLocaleFormat = localeFormat.match(separatorPattern);
-    // $FlowSuppress prechecked
+    // $FlowFixMe[incompatible-type] automated comment
     const separator: string = specialCharactersInLocaleFormat && specialCharactersInLocaleFormat[0];
     const dateStringWithLocaleSeparator = dateString.replace(separatorPattern, separator);
     const localeFormatSameSeparator = localeFormat.replace(separatorPattern, separator);
@@ -80,6 +80,7 @@ function parseWithoutSeparator(dateString: string, localeFormat: string, separat
         return getReturnObject(momentDate);
     }
 
+    // $FlowFixMe[extra-arg] automated comment
     return manipulateFormatAndParseWithoutSeparator(dateStringWithoutSeparator, localeFormatWithoutSeparator);
 }
 

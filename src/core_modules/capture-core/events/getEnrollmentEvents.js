@@ -52,17 +52,21 @@ function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
         .keys(apiEvent)
         .reduce((accEvent, inputKey) => {
             if (inputKey !== 'dataValues') {
+                // $FlowFixMe[prop-missing] automated comment
                 const valueToConvert = apiEvent[inputKey];
                 let convertedValue;
                 if (inputKey === 'eventDate' || inputKey === 'dueDate' || inputKey === 'completedDate') {
+                    // $FlowFixMe[prop-missing] automated comment
                     convertedValue = convertValue(valueToConvert, elementTypes.DATE);
                 } else {
                     convertedValue = valueToConvert;
                 }
 
-                // $FlowSuppress
+
+                // $FlowFixMe[prop-missing] automated comment
                 const outputKey = mapEventInputKeyToOutputKey[inputKey] || inputKey;
-                // $FlowSuppress
+
+                // $FlowFixMe[incompatible-return] automated comment
                 accEvent[outputKey] = convertedValue;
             }
             return accEvent;

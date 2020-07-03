@@ -83,5 +83,4 @@ class ReviewDialogContents extends React.Component<Props> {
     }
 }
 
-// $FlowFixMe
 export default withStyles(getStyles)(ReviewDialogContents);

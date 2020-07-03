@@ -55,7 +55,7 @@ class D2Date extends React.Component<Props, State> {
                 }
 
                 const outputKey = lowerCaseFirstLetter(propKey.replace(propContainer, ''));
-                // $FlowSuppress
+
                 accSplittedProps[propContainer][outputKey] = passOnProps[propKey];
                 return accSplittedProps;
             }, splittedProps);
@@ -83,7 +83,7 @@ class D2Date extends React.Component<Props, State> {
     }
 
     componentWillUnmount() {
-        // $FlowSuppress
+        // $FlowFixMe[incompatible-call] automated comment
         document.removeEventListener('click', this.handleDocumentClick);
     }
 
@@ -94,7 +94,7 @@ class D2Date extends React.Component<Props, State> {
     };
 
     handleTextFieldFocus() {
-        // $FlowSuppress
+        // $FlowFixMe[incompatible-call] automated comment
         document.removeEventListener('click', this.handleDocumentClick);
 
         this.setState({
@@ -108,7 +108,8 @@ class D2Date extends React.Component<Props, State> {
         this.props.onBlur(value);
         this.hidePopover();
         this.props.onDateSelectedFromCalendar && this.props.onDateSelectedFromCalendar();
-        // $FlowSuppress
+
+        // $FlowFixMe[incompatible-call] automated comment
         document.removeEventListener('click', this.handleDocumentClick);
     }
 
@@ -122,7 +123,8 @@ class D2Date extends React.Component<Props, State> {
         }
 
         this.hidePopover();
-        // $FlowSuppress
+
+        // $FlowFixMe[incompatible-call] automated comment
         document.removeEventListener('click', this.handleDocumentClick);
     }
 
@@ -132,7 +134,7 @@ class D2Date extends React.Component<Props, State> {
         if (!event.relatedTarget || event.relatedTarget.className !== 'Cal__Container__root') {
             this.hidePopover();
         } else {
-            // $FlowSuppress
+            // $FlowFixMe[incompatible-call] automated comment
             document.addEventListener('click', this.handleDocumentClick);
         }
     }
@@ -171,7 +173,7 @@ class D2Date extends React.Component<Props, State> {
                     width,
                 }}
             >
-                { /* // $FlowSuppress */}
+                {/* $FlowFixMe[incompatible-type] automated comment */}
                 <D2TextField
                     {...textFieldRefPropObject}
                     onFocus={this.handleTextFieldFocus}

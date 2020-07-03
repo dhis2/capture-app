@@ -14,6 +14,7 @@ const getStyles = (theme: Theme) => ({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
+    // $FlowFixMe[cannot-spread-inexact] automated comment
     header: {
         flexGrow: 1,
         ...theme.typography.title,
@@ -60,7 +61,9 @@ class DataEntryWrapper extends React.Component<Props> {
                 color="primary"
                 // onClick={() => this.props.onFormLayoutDirectionChange(!this.props.formHorizontal)}
             >
-                {this.props.formHorizontal ? i18n.t('Switch to form view') : i18n.t('Switch to row view')}
+                {
+                    // $FlowFixMe[prop-missing] automated comment
+                    this.props.formHorizontal ? i18n.t('Switch to form view') : i18n.t('Switch to row view')}
             </Button>
         );
     }
@@ -87,6 +90,7 @@ class DataEntryWrapper extends React.Component<Props> {
         const { classes, ...passOnProps } = this.props;
         return (
             <div>
+                {/* $FlowFixMe[prop-missing] automated comment */}
                 <Button className={classes.backButton} variant="raised" onClick={this.handleBackToMainPage}>
                     <ChevronLeft />
                     {i18n.t('Working Lists')}

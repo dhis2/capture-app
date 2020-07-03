@@ -139,5 +139,4 @@ class UniqueTEADuplicateErrorMessageCreator extends React.Component<Props> {
     }
 }
 
-// $FlowFixMe
 export default withStyles(getStyles)(UniqueTEADuplicateErrorMessageCreator);

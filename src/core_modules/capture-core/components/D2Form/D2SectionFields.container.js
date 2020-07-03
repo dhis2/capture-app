@@ -40,4 +40,5 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     return mergedProps;
 };
 
+// $FlowFixMe[missing-annot] automated comment
 export default connect(makeMapStateToProps, mapDispatchToProps, mergeProps, { forwardRef: true })(D2SectionFields);

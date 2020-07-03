@@ -36,6 +36,7 @@ const ProgressButton = (props: Props) => {
             <div
                 className={classes.wrapper}
             >
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <Button
                     disabled
                     {...buttonProps}

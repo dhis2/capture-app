@@ -87,7 +87,10 @@ export default (hocParams: ?HOCParamsContainer) =>
                         classes={this.labelClasses || {}}
                         useVerticalOrientation={useVerticalOrientation}
                     >
-                        {label}
+                        {
+                            // $FlowFixMe[incompatible-type] automated comment
+                            label
+                        }
                     </Label>
                 );
             }

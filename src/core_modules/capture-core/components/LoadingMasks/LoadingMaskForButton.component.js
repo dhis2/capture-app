@@ -7,6 +7,7 @@ type Props = {
 };
 
 const LoadingMaskForButton = (props: Props) => (
+    // $FlowFixMe[cannot-spread-inexact] automated comment
     <LoadingMask
         size={24}
         {...props}

@@ -275,6 +275,7 @@ class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
     render() {
         const { enrollmentMetadata, programId, ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntry
                 dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
                 {...passOnProps}
@@ -342,6 +343,7 @@ class PreEnrollmentDataEntry extends React.Component<PreEnrollmentDataEntryProps
             onGetUnsavedAttributeValues,
             ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <PreEnrollmentDataEntryPure
                 onGetValidationContext={this.getValidationContext}
                 onUpdateFormField={this.handleUpdateField}

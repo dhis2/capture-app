@@ -57,6 +57,7 @@ async function getIdsToLoad(
 ) {
     const idsToLoad = [];
     const { storageController, storeNames } = getContext();
+    // $FlowFixMe[prop-missing] automated comment
     await optionSetsOutline.asyncForEach(async (outline) => {
         const storeOptionSet = await storageController
             .get(storeNames.OPTION_SETS, outline.id);

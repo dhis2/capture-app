@@ -134,6 +134,8 @@ class D2DateTime extends Component<Props> {
                     className={classNames(defaultClasses.fieldsContainer, { [defaultClasses.fieldsContainerVertical]: isVertical })}
                 >
                     <div style={dateStyle}>
+                        {/* $FlowFixMe[cannot-spread-inexact] automated comment
+                          */}
                         <DateTimeDate
                             value={dateValue}
                             maxWidth={dateMaxWidth}
@@ -152,6 +154,7 @@ class D2DateTime extends Component<Props> {
                         />
                     </div>
 
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <DateTimeTime
                         value={timeValue}
                         onChange={this.handleTimeChange}
