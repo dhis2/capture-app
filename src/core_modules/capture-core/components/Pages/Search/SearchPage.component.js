@@ -80,7 +80,6 @@ const Index = ({
               });
     }, [
         selectedOption.value,
-        programs,
         dispatch,
     ]);
 
