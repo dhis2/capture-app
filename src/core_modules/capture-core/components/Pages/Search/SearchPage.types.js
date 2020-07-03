@@ -28,11 +28,11 @@ export type PropsFromRedux = {
       loadNr: number
     }
   },
-  dispatch: ReduxDispatch,
 }
 
 export type Props =
   PropsFromRedux & {
+  dispatch: ReduxDispatch,
   +classes: {|
     +container: string,
     +header: string,
