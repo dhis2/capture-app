@@ -14,4 +14,5 @@ const mapStateToProps = (state: ReduxState) => {
 const mapDispatchToProps = (): any => ({});
 
 // $FlowSuppress
+// $FlowFixMe[missing-annot] automated comment
 export default connect(mapStateToProps, mapDispatchToProps)(withLoadingIndicator()(ViewEventDataEntry));

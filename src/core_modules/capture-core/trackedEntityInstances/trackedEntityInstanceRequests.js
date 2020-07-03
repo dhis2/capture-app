@@ -28,6 +28,7 @@ function getValuesById(apiAttributeValues: Array<ApiTeiAttribute>) {
     }, {});
 }
 
+// $FlowFixMe[cannot-resolve-name] automated comment
 async function convertToClientTei(apiTei: ApiTrackedEntityInstance, attributes: Array<DataElments>) {
     const attributeValuesById = getValuesById(apiTei.attributes);
     const convertedAttributeValues = convertDataElementsValues(attributeValuesById, attributes, convertValue);

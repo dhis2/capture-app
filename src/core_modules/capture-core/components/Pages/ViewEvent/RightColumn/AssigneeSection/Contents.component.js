@@ -31,6 +31,7 @@ const Contents = (props: Props) => {
     }
 
     return (
+        // $FlowFixMe[cannot-spread-inexact] automated comment
         <DisplayMode
             onEdit={() => { setEditMode(true); }}
             {...passOnProps}

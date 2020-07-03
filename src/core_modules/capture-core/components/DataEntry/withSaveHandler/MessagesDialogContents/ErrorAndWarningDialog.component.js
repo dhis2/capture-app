@@ -142,5 +142,4 @@ class ErrorAndWarningDialog extends React.Component<Props> {
     }
 }
 
-// $FlowFixMe
 export default withStyles(getStyles)(ErrorAndWarningDialog);

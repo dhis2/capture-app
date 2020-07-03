@@ -34,6 +34,7 @@ type State = {
     error: string,
 };
 // $FlowSuppress
+// $FlowFixMe[incompatible-variance] automated comment
 class AssigneeFilter extends Component<Props, State> implements UpdatableFilterContent<Value> {
     modeOptions: Array<Object>;
     constructor(props: Props) {

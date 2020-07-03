@@ -21,6 +21,7 @@ import { addBeforeUnloadEventListener } from '../unload';
 // For this app the insertion point should be below the css.
 const insertionPoint = document.createElement('noscript');
 insertionPoint.setAttribute('id', 'jss-insertion-point');
+// $FlowFixMe[incompatible-use] automated comment
 document.head.appendChild(insertionPoint);
 const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());

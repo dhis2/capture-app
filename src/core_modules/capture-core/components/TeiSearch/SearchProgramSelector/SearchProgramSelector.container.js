@@ -10,14 +10,15 @@ const makeMapStateToProps = () => {
         selectedProgramId: state.teiSearch[props.searchId].selectedProgramId,
         programOptions: getProgramOptions(state, props),
     });
+    // $FlowFixMe[not-an-object] automated comment
     return mapStateToProps;
 };
 
-// $FlowFixMe
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onSetProgram: (searchId: string, programId: ?string) => {
         dispatch(startSetProgram(searchId, programId));
     },
 });
 
+// $FlowFixMe[missing-annot] automated comment
 export default connect(makeMapStateToProps, mapDispatchToProps)(SearchProgramSelector);

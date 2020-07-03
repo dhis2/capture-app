@@ -97,15 +97,22 @@ const validatorForNumber = () => ({
 
 // todo (report lgtm)
 const validatorsForTypes = {
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.NUMBER]: validatorForNumber,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER]: validatorForInteger,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_POSITIVE]: validatorForPositiveInteger,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: validatorForZeroOrPositiveInteger,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_NEGATIVE]: validatorForNegativeInteger,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.TIME]: () => ({
         validator: isValidTime,
         message: errorMessages.TIME,
     }),
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATE]: (dateDataElement: DateDataElement) => [{
         validator: isValidDate,
         message: errorMessages.DATE,
@@ -115,67 +122,83 @@ const validatorsForTypes = {
         type: validatorTypes.TYPE_EXTENDED,
         message: errorMessages.DATE_FUTURE_NOT_ALLOWED,
     }],
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATETIME]: () => ({
         validator: isValidDateTime,
         message: errorMessages.DATETIME,
     }),
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.EMAIL]: () => ({
         validator: isValidEmail,
         message: errorMessages.EMAIL,
     }),
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.PERCENTAGE]: () => ({
         validator: isValidPercentage,
         message: errorMessages.PERCENTAGE,
     }),
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.URL]: () => ({
         validator: isValidUrl,
         message: errorMessages.URL,
     }),
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.AGE]: () => ({
         validator: isValidAge,
         message: errorMessages.AGE,
     }),
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.PHONE_NUMBER]: () => ({
         validator: isValidPhoneNumber,
         message: errorMessages.PHONE_NUMBER,
     }),
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.ORGANISATION_UNIT]: () => ({
         validator: isValidOrgUnit,
         message: errorMessages.ORGANISATION_UNIT,
     }),
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.COORDINATE]: () => ({
         validator: isValidCoordinate,
         message: errorMessages.COORDINATE,
     }),
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATE_RANGE]: () => ({
         validator: getDateRangeValidator(errorMessages.DATE),
         message: errorMessages.RANGE,
     }),
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATETIME_RANGE]: () => ({
         validator: getDateTimeRangeValidator(errorMessages.DATETIME),
         message: errorMessages.RANGE,
     }),
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.TIME_RANGE]: () => ({
         validator: getTimeRangeValidator(errorMessages.TIME),
         message: errorMessages.RANGE,
     }),
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.NUMBER_RANGE]: () => ({
         validator: getNumberRangeValidator(validatorForNumber()),
         message: errorMessages.RANGE,
     }),
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_RANGE]: () => ({
         validator: getNumberRangeValidator(validatorForInteger()),
         message: errorMessages.RANGE,
     }),
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_POSITIVE_RANGE]: () => ({
         validator: getNumberRangeValidator(validatorForPositiveInteger()),
         message: errorMessages.RANGE,
     }),
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_ZERO_OR_POSITIVE_RANGE]: () => ({
         validator: getNumberRangeValidator(validatorForZeroOrPositiveInteger()),
         message: errorMessages.RANGE,
     }),
 
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_NEGATIVE_RANGE]: () => ({
         validator: getNumberRangeValidator(validatorForNegativeInteger()),
         message: errorMessages.RANGE,
@@ -183,7 +206,7 @@ const validatorsForTypes = {
 };
 
 function buildTypeValidators(metaData: DataElement): Array<ValidatorContainer> {
-    // $FlowSuppress
+   
     let validatorContainersForType = validatorsForTypes[metaData.type] && validatorsForTypes[metaData.type](metaData);
 
     if (!validatorContainersForType) {
@@ -201,7 +224,7 @@ function buildTypeValidators(metaData: DataElement): Array<ValidatorContainer> {
             ...validatorContainer,
         }));
 
-    // $FlowSuppress
+   
     validatorContainersForType = validatorContainersForType.map(validatorContainer => ({
         ...validatorContainer,
         validator: (value: any) => {

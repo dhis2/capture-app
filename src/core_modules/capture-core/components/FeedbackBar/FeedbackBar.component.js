@@ -101,6 +101,7 @@ class FeedbackBar extends React.Component<Props> {
                     anchorOrigin={FeedbackBar.ANCHOR_ORIGION}
                     autoHideDuration={5000}
                     onClose={this.handleClose}
+                    // $FlowFixMe[incompatible-type] automated comment
                     message={<span>{message}</span>}
                     action={this.getAction()}
                 />
@@ -108,10 +109,14 @@ class FeedbackBar extends React.Component<Props> {
                     open={isDefined(message) && displayType === 'dialog'}
                 >
                     <DialogTitle>
-                        {isDialogOpen ? message && message.title : ''}
+                        {
+                            // $FlowFixMe[prop-missing] automated comment
+                            isDialogOpen ? message && message.title : ''}
                     </DialogTitle>
                     <DialogContent>
-                        {isDialogOpen ? message && message.content : ''}
+                        {
+                            // $FlowFixMe[prop-missing] automated comment
+                            isDialogOpen ? message && message.content : ''}
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose} primary>

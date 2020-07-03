@@ -27,6 +27,7 @@ class BooleanField extends React.Component<Props> {
     render() {
         const { onBlur, ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <UIBooleanField
                 onSelect={onBlur}
                 {...passOnProps}

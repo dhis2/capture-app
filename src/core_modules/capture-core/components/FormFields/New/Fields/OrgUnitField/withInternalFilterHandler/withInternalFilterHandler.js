@@ -110,6 +110,7 @@ export default () =>
                 const { defaultRoots, onSearchError, onSelect, scope, ...passOnProps } = this.props;
                 const { filteredRoots, filterText, treeKey, inProgress } = this.state;
                 return (
+                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <InnerComponent
                         roots={filteredRoots || defaultRoots}
                         treeKey={treeKey}

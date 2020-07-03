@@ -32,6 +32,7 @@ type Props = {
 
 class ViewEventSectionHeader extends React.Component<Props> {
     render() {
+        // $FlowFixMe[prop-missing] automated comment
         const { icon: Icon, text, badgeCount, classes, badgeClass } = this.props;
         const shouldRenderBadge = !!badgeCount || badgeCount === 0;
         return (

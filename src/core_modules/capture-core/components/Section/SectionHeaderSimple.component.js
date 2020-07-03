@@ -48,7 +48,8 @@ class SectionHeaderSimple extends Component<Props> {
     }
 
     handleChangeCollapse() {
-        // $FlowSuppress
+       
+        // $FlowFixMe[not-a-function] automated comment
         this.props.onChangeCollapseState();
     }
 

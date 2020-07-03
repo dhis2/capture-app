@@ -9,4 +9,5 @@ const mapStateToProps = (state: ReduxState) => ({
     ready: !state.activePage.isPageLoading,
 });
 
+// $FlowFixMe[missing-annot] automated comment
 export const MainPage = connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(MainPageComponent)));

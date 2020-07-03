@@ -12,7 +12,7 @@ function getAssignEffects(assignEffects: ?{ [elementId: string]: Array<AssignOut
     return Object
         .keys(assignEffects)
         .map((elementId: string) => {
-            // $FlowSuppress
+           
             const effectsForId = assignEffects[elementId];
             const applicableEffectForId = effectsForId[effectsForId.length - 1];
             return {
@@ -64,7 +64,8 @@ function getAssignEffectsBasedOnHideSection(
                 }));
         })
         .filter(sectionEffects => sectionEffects)
-        // $FlowSuppress
+       
+        // $FlowFixMe[prop-missing] automated comment
         .reduce((accEffects, sectionEffects) => [...accEffects, ...sectionEffects], []);
 }
 
@@ -96,9 +97,11 @@ function buildEffectsHierarchy(effects: Array<OutputEffect>) {
         accEffectsObject[actionType] = accEffectsObject[actionType] || {};
 
         const id = effect.id;
-        // $FlowSuppress
+       
+        // $FlowFixMe[incompatible-use] automated comment
         accEffectsObject[actionType][id] = accEffectsObject[actionType][id] || [];
-        // $FlowSuppress
+       
+        // $FlowFixMe[incompatible-use] automated comment
         accEffectsObject[actionType][id].push(effect);
         return accEffectsObject;
     }, {});
@@ -123,7 +126,7 @@ function filterFieldsHideEffects(
             return !(dataCompulsory || compulsoryEffect);
         })
         .reduce((accFilteredEffects, elementId) => {
-            // $FlowSuppress
+           
             accFilteredEffects[elementId] = hideEffects[elementId];
             return accFilteredEffects;
         }, {});
@@ -159,7 +162,7 @@ function filterSectionsHideEffects(
             return !compulsoryFieldFound;
         })
         .reduce((accFilteredEffects, sectionId) => {
-            // $FlowSuppress
+           
             accFilteredEffects[sectionId] = hideEffects[sectionId];
             return accFilteredEffects;
         }, {});

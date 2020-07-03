@@ -11,5 +11,6 @@ export const makeOnItemSelectedSelector = () => createSelector(
         listId: string,
         onItemSelected: (id: string, listId: string) => void,
     ) =>
+        // $FlowFixMe[incompatible-call] automated comment
         (id: string) => dispatch(onItemSelected(id, listId)),
 );

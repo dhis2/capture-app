@@ -40,18 +40,17 @@ export const loadEditEventDataEntryEpic = (action$: ActionsObservable, store: Re
             }
 
             const program = metadataContainer.program;
-            // $FlowFixMe
             const foundation = metadataContainer.stage.stageForm;
 
             return batchActions([
                 showEditEventDataEntry(),
-                // $FlowFixMe
                 ...openEventForEditInDataEntry(loadedValues, orgUnit, foundation, program),
             ]);
         });
 
 export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY)
         .map((action) => {
             const state = store.getState();
@@ -111,7 +110,8 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
         });
 
 export const saveEditedEventFailedEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(actionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED)
         .filter((action) => {
             // Check if current view event is failed event

@@ -68,6 +68,7 @@ const searchTei = (state: ReduxState, searchId: string, formId: string, searchGr
     const queryArgs = {
         filter: filters,
         ...getOuQueryArgs(selectedOrgUnit, selectedOrgUnitScope),
+        // $FlowFixMe[exponential-spread] automated comment
         ...getContextQueryArgs(selectedProgramId, selectedTrackedEntityTypeId),
         ...getPagingQueryArgs(pageNumber),
 
@@ -88,6 +89,7 @@ const searchTei = (state: ReduxState, searchId: string, formId: string, searchGr
 };
 
 export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxStore) =>
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE)
         .switchMap((action) => {
             const state = store.getState();
@@ -101,6 +103,7 @@ export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxSt
                 pageNumber,
             );
             return fromPromise(searchTeiPromise)
+                // $FlowFixMe[prop-missing] automated comment
                 .takeUntil(action$.ofType(
                     actionTypes.REQUEST_SEARCH_TEI,
                     actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE,
@@ -111,13 +114,15 @@ export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxSt
         });
 
 export const teiSearchEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+   
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(actionTypes.REQUEST_SEARCH_TEI)
         .switchMap((action) => {
             const state = store.getState();
             const { formId, searchGroupId, searchId } = action.payload;
             const searchTeiPromise = searchTei(state, searchId, formId, searchGroupId);
             return fromPromise(searchTeiPromise)
+                // $FlowFixMe[prop-missing] automated comment
                 .takeUntil(action$.ofType(
                     actionTypes.REQUEST_SEARCH_TEI,
                     actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE,
@@ -128,7 +133,8 @@ export const teiSearchEpic = (action$: InputObservable, store: ReduxStore) =>
         });
 
 export const teiSearchSetProgramEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+   
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(programSelectorActionTypes.TEI_SEARCH_START_SET_PROGRAM)
         .map((action) => {
             const state = store.getState();
@@ -157,7 +163,8 @@ export const teiSearchSetProgramEpic = (action$: InputObservable, store: ReduxSt
         });
 
 export const teiNewSearchEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+   
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(actionTypes.TEI_NEW_SEARCH)
         .map((action) => {
             const state = store.getState();

@@ -10,6 +10,7 @@ import { DataElement } from '../metaData';
 const GET_SUBVALUE_ERROR = 'Could not get subvalue';
 
 const subValueGetterByElementType = {
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypeKeys.IMAGE]: (value: any, teiId: string, attributeId: string) => {
         const baseUrl = config.baseUrl;
         return getApi().get(`fileResources/${value}`)
@@ -36,7 +37,7 @@ export async function getSubValues(teiId: string, attributes: Array<DataElement>
 
     return Object.keys(values).reduce(async (accValuesPromise, attributeId) => {
         const accValues = await accValuesPromise;
-        // $FlowSuppress
+       
         const value = values[attributeId];
         const metaElement = attributesById[attributeId];
         if (isDefined(value) && metaElement) {

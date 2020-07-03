@@ -35,6 +35,7 @@ export default () => (InnerCompnent: React.ComponentType<any>) =>
                 <div
                     className={classNames(defaultClasses.inputWrapper, inputWrapper)}
                 >
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <InnerCompnent
                         onFocus={this.handleFocus}
                         onBlur={this.handleBlur}

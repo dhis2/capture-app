@@ -10,6 +10,7 @@ type Props = {
 const SvgIcon = (props: Props) => {
     const { className, ...passOnProps } = props;
     return (
+        // $FlowFixMe[cannot-spread-inexact] automated comment
         <svg
             className={classNames(defaultClasses.icon, props.className)}
             {...passOnProps}

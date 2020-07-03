@@ -13,6 +13,7 @@ type Props = {
 };
 
 // $FlowSuppress
+// $FlowFixMe[incompatible-variance] automated comment
 class TextFilter extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData(updatedValue?: Value) {
         const value = typeof updatedValue !== 'undefined' ? updatedValue : this.props.value;
@@ -36,6 +37,7 @@ class TextFilter extends Component<Props> implements UpdatableFilterContent<Valu
         const { value } = this.props;
         return (
             /* $FlowSuppress: Flow not working 100% with HOCs */
+            // $FlowFixMe[prop-missing] automated comment
             <Input
                 onBlur={this.handleBlur}
                 onEnterKey={this.handleEnterKey}

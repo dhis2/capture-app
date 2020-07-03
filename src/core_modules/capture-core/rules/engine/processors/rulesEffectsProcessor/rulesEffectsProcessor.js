@@ -42,9 +42,11 @@ export default function getRulesEffectsProcessor(
         let outputValue;
         if (baseValue || baseValue === 0 || baseValue === false) {
             const converterName = mapTypeToInterfaceFnName[valueType];
-            // $FlowSuppress
+           
+            // $FlowFixMe[prop-missing] automated comment
             outputValue = rulesEffectsValueConverters[converterName] ?
-                // $FlowSuppress
+               
+                // $FlowFixMe[incompatible-use] automated comment
                 rulesEffectsValueConverters[converterName](baseValue) :
                 baseValue;
         } else {
@@ -63,9 +65,11 @@ export default function getRulesEffectsProcessor(
             return null;
         }
         const element = processType === processTypes.EVENT ?
-            // $FlowSuppress
+           
+            // $FlowFixMe[incompatible-use] automated comment
             dataElements[effect[processIdName]] :
-            // $FlowSuppress
+           
+            // $FlowFixMe[incompatible-use] automated comment
             trackedEntityAttributes[effect[processIdName]];
 
         const valueType = element.valueType;
