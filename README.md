@@ -49,7 +49,7 @@ yarn
 
 #### 3. Set environment variables for backend communication
 
-For the application to fetch data from the backend we need to set up a base url. Make sure in your `.env.development` file the following is included:
+The application needs to communicate with a DHIS2 backend instance. The `.env.development` file contains default configuration, but you can override it by supplying a `.env.development.local` file in the root folder of the project.
 
 ```
 REACT_APP_DHIS2_BASE_URL="https://debug.dhis2.org/2.34dev/"
