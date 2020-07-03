@@ -34,7 +34,7 @@ export const makeDataElementsSelector = () => createSelector(
 
         let program: TrackerProgram;
         try {
-            // $FlowSuppress
+           
             // $FlowFixMe[incompatible-call] automated comment
             program = getTrackerProgramThrowIfNotFound(programId);
         } catch (error) {

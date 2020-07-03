@@ -347,7 +347,7 @@ class FormBuilder extends React.Component<Props> {
      * @returns {}
     */
     getFieldProp(fieldId: string): FieldConfig {
-        // $FlowSuppress
+       
         // $FlowFixMe[incompatible-return] automated comment
         return this.props.fields.find(f => f.id === fieldId);
     }

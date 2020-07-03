@@ -18,7 +18,7 @@ export default function getStageForEventProgram(programId: string) {
         return { error: i18n.t(errorMessages.GENERIC_ERROR), stage: null };
     }
 
-    // $FlowSuppress
+   
     // $FlowFixMe[prop-missing] automated comment
     const stage = program.stage;
     if (!stage) {

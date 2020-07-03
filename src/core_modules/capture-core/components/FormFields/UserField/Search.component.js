@@ -210,7 +210,7 @@ class UserSearch extends React.Component<Props, State> {
 
         switch (exitBehaviour) {
         case exitBehaviours.SELECT_BEST_CHOICE:
-            // $FlowSuppress
+           
             // $FlowFixMe[incompatible-call] automated comment
             this.props.onSet(highlightedSuggestion);
             break;

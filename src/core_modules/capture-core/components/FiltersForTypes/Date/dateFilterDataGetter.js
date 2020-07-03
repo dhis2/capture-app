@@ -15,14 +15,12 @@ function convertAbsoluteDate(fromValue: ?string, toValue: ?string) {
     };
 
     if (fromValue) {
-        // $FlowSuppress Prechecked
         // $FlowFixMe[incompatible-type] automated comment
         const fromClientValue: string = parseDate(fromValue).momentDate;
         rangeData.ge = fromClientValue;
     }
 
     if (toValue) {
-        // $FlowSuppress Prechecked
         // $FlowFixMe[incompatible-type] automated comment
         const toClientValue: string = parseDate(toValue).momentDate;
         rangeData.le = toClientValue;

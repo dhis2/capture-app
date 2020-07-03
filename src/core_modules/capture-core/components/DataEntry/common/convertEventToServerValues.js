@@ -24,7 +24,7 @@ export default function getServerValuesToSaveFromMainEvent(event: CaptureClientE
                 convertedValue = valueToConvert;
             }
 
-            // $FlowSuppress
+           
             // $FlowFixMe[prop-missing] automated comment
             const outputKey = mapEventClientKeyToServerKey[inputKey] || inputKey;
             accServerEvent[outputKey] = convertedValue;

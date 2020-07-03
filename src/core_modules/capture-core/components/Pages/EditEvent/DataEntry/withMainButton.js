@@ -50,6 +50,6 @@ const mapDispatchToProps = () => ({});
 
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
-        // $FlowSuppress
+       
         // $FlowFixMe[missing-annot] automated comment
         connect(null, mapDispatchToProps)(getMainButton(InnerComponent));

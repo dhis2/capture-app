@@ -79,10 +79,10 @@ function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
             if (inputKey !== 'dataValues' && inputKey !== 'assignedUserUsername') {
                 const valueToConvert = apiEvent[inputKey];
                 const convertedValue = getConvertedValue(valueToConvert, inputKey);
-                // $FlowSuppress
+               
                 // $FlowFixMe[prop-missing] automated comment
                 const outputKey = mapEventInputKeyToOutputKey[inputKey] || inputKey;
-                // $FlowSuppress
+               
                 // $FlowFixMe[incompatible-return] automated comment
                 accEvent[outputKey] = convertedValue;
             }

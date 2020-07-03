@@ -15,7 +15,7 @@ const makeMapStateToProps = () => {
         };
     };
 
-    // $FlowSuppress
+   
     // $FlowFixMe[not-an-object] automated comment
     return mapStateToProps;
 };

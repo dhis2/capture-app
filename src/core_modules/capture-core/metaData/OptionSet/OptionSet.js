@@ -182,11 +182,11 @@ export default class OptionSet {
 
     resolveTextsAsString(values: Value | Array<Value>): ?string {
         if (isArray(values)) {
-            // $FlowSuppress
+           
             // $FlowFixMe[incompatible-call] automated comment
             return this.getOptionsTextAsString(values);
         }
-        // $FlowSuppress
+       
         // $FlowFixMe[incompatible-call] automated comment
         return this.getOptionText(values);
     }

@@ -9,7 +9,7 @@ import OptionSet from '../../../../../metaData/OptionSet/OptionSet';
 
 const mapInputTypeToPropsGetterFn = {
     [inputTypes.DROPDOWN]: (metaData: MetaDataElement) => ({
-        // $FlowSuppress
+       
         // $FlowFixMe[incompatible-call] automated comment
         options: getOptionsForSelect(metaData.optionSet),
         nullable: !metaData.compulsory,
@@ -18,13 +18,13 @@ const mapInputTypeToPropsGetterFn = {
         },
     }),
     [inputTypes.HORIZONTAL_RADIOBUTTONS]: (metaData: MetaDataElement) => ({
-        // $FlowSuppress
+       
         // $FlowFixMe[incompatible-call] automated comment
         options: getOptionsForRadioButtons(metaData.optionSet),
     }),
     [inputTypes.VERTICAL_RADIOBUTTONS]: (metaData: MetaDataElement) => ({
         orientation: orientations.VERTICAL,
-        // $FlowSuppress
+       
         // $FlowFixMe[incompatible-call] automated comment
         options: getOptionsForRadioButtons(metaData.optionSet),
     }),
@@ -38,7 +38,7 @@ const mapInputTypeToComponent = {
 
 
 const getOptionSetFieldConfig = (metaData: MetaDataElement, options: Object) => {
-    // $FlowSuppress
+   
     // $FlowFixMe[incompatible-type] automated comment
     const optionSet: OptionSet = metaData.optionSet;
     const inputType = optionSet.inputType;

@@ -13,7 +13,7 @@ import {
 import { getCurrentUser } from '../../../../../d2/d2Instance';
 
 export const addNoteForNewSingleEventEpic = (action$: InputObservable) =>
-    // $FlowSuppress
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(newEventDataEntryActionTypes.ADD_NEW_EVENT_NOTE)
         .map((action) => {

@@ -107,7 +107,7 @@ const mapDispatchToProps = () => ({});
 
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
-        // $FlowSuppress
+       
         withDataEntryOutput()(
             InnerComponent,
             withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(getIndicatorOutput())));

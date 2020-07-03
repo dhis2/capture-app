@@ -14,7 +14,7 @@ export default async function buildSystemSettingsAsync(cacheData?: ?Array<Object
 
     const systemSettings = new SystemSettings();
     loadedCacheData.forEach((setting) => {
-        // $FlowSuppress
+
         // $FlowFixMe[prop-missing] automated comment
         systemSettings[setting.id] = setting.value;
     });

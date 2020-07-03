@@ -140,10 +140,10 @@ export default class D2Coordinate extends React.Component<Props, State> {
 
     renderMapDialog = () => {
         const clonedDialog = React.cloneElement(
-            // $FlowSuppress
+           
             this.props.mapDialog,
             { open: this.state.showMap, onClose: this.closeMap },
-            // $FlowSuppress
+           
             [...React.Children.toArray(this.props.mapDialog.props.children), (
                 <div className={defaultClasses.dialogContent} key="dialogContent">
                     {this.renderMap()}

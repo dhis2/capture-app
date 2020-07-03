@@ -27,7 +27,7 @@ const errorMessages = {
 };
 
 export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
-    // $FlowSuppress
+   
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         editEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
@@ -45,7 +45,7 @@ export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
             const foundation = metadataContainer.stage.stageForm;
             const program = metadataContainer.program;
 
-            // $FlowSuppress
+           
             return batchActions(openEventForEditInDataEntry(eventContainer, orgUnit, foundation, program));
         });
 

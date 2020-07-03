@@ -138,7 +138,7 @@ const getCalculateMessagesHOC = (InnerComponent: React.ComponentType<any>, overr
 
             const passOnMessage =
                 messageContainer.message ? {
-                    // $FlowSuppress
+                   
                     // $FlowFixMe[invalid-computed-prop] automated comment
                     [messageContainer.typeKey]: messageContainer.message,
                 } : null;

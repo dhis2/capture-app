@@ -183,7 +183,6 @@ export default (
     onGetSearchContext?: ?SearchContextGetter,
 ) =>
     (InnerComponent: React.ComponentType<any>) =>
-        // $FlowSuppress
         // $FlowFixMe[missing-annot] automated comment
         connect(
             mapStateToProps, mapDispatchToProps)(
