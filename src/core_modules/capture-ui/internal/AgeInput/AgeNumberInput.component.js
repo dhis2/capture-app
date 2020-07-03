@@ -36,6 +36,7 @@ class AgeNumberInput extends Component<Props, State> {
     render() {
         const { onBlur, onChange, value, classes, ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <TextInput
                 classes={{}}
                 onBlur={this.handleBlur}

@@ -157,6 +157,7 @@ class CategorySelector extends React.Component<Props, State> {
         const handleSelect = this.onSelectSelector({ options, onSelect });
 
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <VirtualizedSelectLoadingIndicatorHOC
                 options={options}
                 value={''}

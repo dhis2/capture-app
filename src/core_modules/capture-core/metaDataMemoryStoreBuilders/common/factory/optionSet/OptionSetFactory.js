@@ -1,6 +1,8 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
+import getCamelCaseUppercaseString from 'capture-core-utils/string/getCamelCaseFromUppercase';
+import { errorCreator } from 'capture-core-utils';
 import type {
     CachedStyle,
     CachedOptionSet,
@@ -9,10 +11,8 @@ import type {
     CachedOptionTranslation,
 } from '../../../../storageControllers/cache.types';
 import { DataElement, OptionSet, Option, optionSetInputTypes as inputTypes, Icon } from '../../../../metaData';
-import getCamelCaseUppercaseString from 'capture-core-utils/string/getCamelCaseFromUppercase';
 import { convertOptionSetValue } from '../../../../converters/serverToClient';
 import getDhisIconAsync from '../../getDhisIcon';
-import { errorCreator } from 'capture-core-utils';
 import OptionGroup from '../../../../metaData/OptionSet/OptionGroup';
 
 class OptionSetFactory {

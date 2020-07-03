@@ -15,7 +15,8 @@ const getArguments = (programId: string, orgUnitId: string) => {
 };
 
 export const openNewEventPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(lockedSelectorActionTypes.NEW_EVENT_OPEN)
         .map(() => {
             const state = store.getState();

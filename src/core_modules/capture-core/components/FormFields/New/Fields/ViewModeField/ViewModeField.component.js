@@ -1,8 +1,7 @@
 
 // @flow
-
 import * as React from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 type Props = {
     value?: ?any,
@@ -12,7 +11,7 @@ type Props = {
     },
 }
 
-const getStyles = (theme: Theme) => ({
+const getStyles = () => ({
     container: {
         width: '100%',
         fontWeight: 500,

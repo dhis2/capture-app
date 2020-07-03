@@ -39,6 +39,7 @@ class UniqueTEADuplicate extends React.Component<Props, State> {
             existingTeiDialogOpen: false,
         });
         const teiId = this.props.errorData.id;
+        // $FlowFixMe[incompatible-call] automated comment
         this.props.onLink(teiId, values);
     }
 
@@ -48,11 +49,13 @@ class UniqueTEADuplicate extends React.Component<Props, State> {
 
         return (
             <React.Fragment>
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <ErrorMessageCreator
                     onShowExisting={this.handleShowExisting}
                     id={id}
                     {...passOnProps}
                 />
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <ExistingTEIDialog
                     open={existingTeiDialogOpen}
                     onCancel={this.handleCancelLink}

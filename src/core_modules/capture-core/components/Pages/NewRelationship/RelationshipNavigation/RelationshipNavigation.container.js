@@ -7,7 +7,8 @@ const mapStateToProps = (state: ReduxState) => ({
     searching: state.newRelationship.searching,
 });
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+const mapDispatchToProps = () => ({
 });
 
+// $FlowFixMe[missing-annot] automated comment
 export default connect(mapStateToProps, mapDispatchToProps)(RelationshipNavigation);

@@ -307,6 +307,7 @@ class EditEventDataEntry extends Component<Props> {
             ...passOnProps
         } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntryWrapper
                 id={'singleEvent'}
                 onUpdateFormField={onUpdateField}

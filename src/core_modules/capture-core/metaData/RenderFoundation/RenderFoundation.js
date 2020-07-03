@@ -1,14 +1,13 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import isFunction from 'd2-utilizr/lib/isFunction';
 import type { ProgramRule } from '../../rules/engine';
-
 import { validationStrategies, validationStrategiesAsArray } from './renderFoundation.const';
 import Section from './Section';
 import CustomForm from './CustomForm';
 import DataElement from '../DataElement/DataElement';
-import { errorCreator } from 'capture-core-utils';
 import type { ConvertFn } from '../DataElement/DataElement';
 import type { Access } from '../Access/Access';
 import { convertDataElementsValues } from '../helpers';

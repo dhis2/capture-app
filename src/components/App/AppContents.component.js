@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router'; //eslint-disable-line
-// import HeaderBar from '@dhis2/d2-ui-header-bar';
+import { Route, Switch } from 'react-router';
 import { HeaderBar } from '@dhis2/ui-widgets';
 import { withStyles } from '@material-ui/core/styles';
 import NetworkStatusBadge from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.component';
@@ -9,8 +8,8 @@ import NetworkStatusBadge from 'capture-core/components/NetworkStatusBadge/Netwo
 import { NewEventPage } from 'capture-core/components/Pages/NewEvent';
 import { ViewEventPage } from 'capture-core/components/Pages/ViewEvent';
 import { NewEnrollmentPage } from 'capture-core/components/Pages/NewEnrollment';
-import { SearchPage } from '../../core_modules/capture-core/components/Pages/Search';
 import { MainPage } from 'capture-core/components/Pages/MainPage';
+import { SearchPage } from 'capture-core/components/Pages/Search';
 
 
 const styles = theme => ({

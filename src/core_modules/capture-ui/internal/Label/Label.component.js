@@ -21,6 +21,7 @@ class Label extends React.PureComponent<Props> {
             useVerticalOrientation ? defaultClasses.labelContainerVertical : defaultClasses.labelContainer;
 
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <div
                 ref={labelRef}
                 className={classNames(labelContainerDefault, classes.label)}

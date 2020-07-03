@@ -42,6 +42,7 @@ class DateField extends React.Component<Props> {
     render() {
         const { ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <UIDateField
                 placeholder={systemSettingsStore.get().dateFormat.toLowerCase()}
                 {...passOnProps}

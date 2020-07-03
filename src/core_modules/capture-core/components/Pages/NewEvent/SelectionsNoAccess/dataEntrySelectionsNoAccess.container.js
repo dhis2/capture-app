@@ -5,7 +5,7 @@ import {
     cancelNewEventAndReturnToMainPage,
 } from '../DataEntry/actions/dataEntry.actions';
 
-const mapStateToProps = (state: ReduxState) => ({
+const mapStateToProps = () => ({
 });
 
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
@@ -15,4 +15,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowSuppress
+// $FlowFixMe[missing-annot] automated comment
 export default connect(mapStateToProps, mapDispatchToProps)(DataEntrySelectionsNoAccess);

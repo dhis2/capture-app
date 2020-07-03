@@ -23,6 +23,7 @@ const Cell = (props: Props, context: { table?: ?{ head: boolean, footer: boolean
         className,
     );
     return (
+        // $FlowFixMe[cannot-spread-inexact] automated comment
         <td
             className={classes}
             {...passOnProps}

@@ -14,6 +14,7 @@ export const getDefaultMainConfig = (stage: ProgramStage) => {
             id: mainPropertyNames.EVENT_DATE,
             visible: true,
             isMainProperty: true,
+            // $FlowFixMe[prop-missing] automated comment
             type: elementTypeKeys.DATE,
         },
         {
@@ -21,6 +22,7 @@ export const getDefaultMainConfig = (stage: ProgramStage) => {
             header: 'Status',
             visible: true,
             isMainProperty: true,
+            // $FlowFixMe[prop-missing] automated comment
             type: elementTypeKeys.TEXT,
             singleSelect: true,
             options: [

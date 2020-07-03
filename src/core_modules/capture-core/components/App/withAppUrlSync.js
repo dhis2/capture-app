@@ -157,6 +157,7 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
             this.setPageAndParams();
 
             return (
+                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     statePage={page || pageKeys.MAIN}
                     urlPage={this.page}
@@ -178,9 +179,11 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
 
     const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         onUpdateFromUrl: (page: ?string, updateData: UpdateDataContainer) =>
+            // $FlowFixMe[invalid-computed-prop] automated comment
             dispatch(updaterForPages[page](updateData)),
     });
 
+    // $FlowFixMe[missing-annot] automated comment
     return connect(mapStateToProps, mapDispatchToProps)(AppUrlSyncer);
 };
 

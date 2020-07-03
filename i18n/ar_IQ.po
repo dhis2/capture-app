@@ -302,6 +302,63 @@ msgstr "تعذر استرداد الاقتراحات"
 msgid "No items to display"
 msgstr "لا توجد عناصر للعرض"
 
+msgid "Could not get organisation unit"
+msgstr "تعذر جلب الوحدة التنظيمية"
+
+msgid "Program doesn't exist"
+msgstr "البرنامج غير موجود"
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr "البرنامج المحدد غير صالح لوحدة التسجيل المحددة"
+
+msgid "New {{typeName}}"
+msgstr "{{typeName}} جديد"
+
+msgid "New"
+msgstr "جديد"
+
+msgid "Start again"
+msgstr "البدء من جديد"
+
+msgid "Find"
+msgstr "بحث"
+
+msgid "Selected registering unit"
+msgstr "وحدة التسجيل المختارة"
+
+msgid "Start Again"
+msgstr "البدء من جديد"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "هل أنت متأكد؟ سيتم فقدان جميع البيانات التي لم يتم حفظها."
+
+msgid "Accept"
+msgstr "قبول"
+
+msgid "Registering Organisation Unit"
+msgstr "تسجيل الوحدة التنظيمية"
+
+msgid "Select"
+msgstr "تحديد"
+
+msgid "Selected Program"
+msgstr "البرنامج المحدد"
+
+msgid "Some programs are being filtered."
+msgstr "بعض البرامج يتم تصفيتها"
+
+msgid "Show all"
+msgstr "إظهار الكل"
+
+msgid "Program"
+msgstr "البرنامج"
+
+msgid "Select program"
+msgstr "تحديد البرنامج"
+
+msgid "No programs available."
+msgstr "لا توجد برامج متاحة"
+
 msgid "Online"
 msgstr "متصل"
 
@@ -449,15 +506,6 @@ msgstr "فعال"
 msgid "Completed"
 msgstr "مكتمل"
 
-msgid "Could not get organisation unit"
-msgstr "تعذر جلب الوحدة التنظيمية"
-
-msgid "Program doesn't exist"
-msgstr "البرنامج غير موجود"
-
-msgid "Selected program is invalid for registering unit"
-msgstr "البرنامج المحدد غير صالح لوحدة التسجيل"
-
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "إنشاء {{TET}} جديد في {{program}} في {{orgUnit}}"
 
@@ -488,9 +536,6 @@ msgid ""
 msgstr ""
 "البرنامج بالرقم المعرف {{programId}} ليس برنامج تتبع. لا يمكن التسجيل إلا في"
 " برامج التتبع."
-
-msgid "Selected program is invalid for selected registering unit"
-msgstr "البرنامج المحدد غير صالح لوحدة التسجيل المحددة"
 
 msgid "Assigned user"
 msgstr "المستخدم المعين"
@@ -608,15 +653,6 @@ msgstr "إخفاء"
 msgid "Save as new {{tetName}}"
 msgstr "حفظ {{tetName}} كجديد"
 
-msgid "Some programs are being filtered."
-msgstr "بعض البرامج يتم تصفيتها"
-
-msgid "Show all"
-msgstr "إظهار الكل"
-
-msgid "Program"
-msgstr "البرنامج"
-
 msgid "Organisation Unit"
 msgstr "الوحدة التنظيمية"
 
@@ -669,45 +705,6 @@ msgstr "تم تعيين الحدث إلى {{name}}"
 
 msgid "Feedbacks"
 msgstr "تغذيات راجعة"
-
-msgid "New {{typeName}}"
-msgstr "{{typeName}} جديد"
-
-msgid "New"
-msgstr "جديد"
-
-msgid "Start again"
-msgstr "البدء من جديد"
-
-msgid "Find"
-msgstr "بحث"
-
-msgid "Selected registering unit"
-msgstr "وحدة التسجيل المختارة"
-
-msgid "Start Again"
-msgstr "البدء من جديد"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "هل أنت متأكد؟ سيتم فقدان جميع البيانات التي لم يتم حفظها."
-
-msgid "Accept"
-msgstr "قبول"
-
-msgid "Registering Organisation Unit"
-msgstr "تسجيل الوحدة التنظيمية"
-
-msgid "Select"
-msgstr "تحديد"
-
-msgid "Selected Program"
-msgstr "البرنامج المحدد"
-
-msgid "Select program"
-msgstr "تحديد البرنامج"
-
-msgid "No programs available."
-msgstr "لا توجد برامج متاحة"
 
 msgid "You dont have access to delete this relationship"
 msgstr "ليس لديك حق الوصول لحذف هذه العلاقة"

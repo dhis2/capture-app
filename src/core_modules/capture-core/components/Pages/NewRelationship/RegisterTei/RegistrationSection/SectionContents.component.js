@@ -24,5 +24,4 @@ const SectionContents = (props: Props) => {
         </div>
     );
 };
-// $FlowFixMe
 export default withStyles(getStyles)(SectionContents);

@@ -18,6 +18,7 @@ type CompareKeys = {
 function getConvertedValue(valueToConvert: any, key: string, onConvertValue: ConverterFn, compareKeys: CompareKeys) {
     let convertedValue;
     if (key === compareKeys.enrollmentDate || key === compareKeys.incidentDate) {
+        // $FlowFixMe[prop-missing] automated comment
         convertedValue = onConvertValue(valueToConvert, elementTypes.DATE);
     } else {
         convertedValue = valueToConvert;

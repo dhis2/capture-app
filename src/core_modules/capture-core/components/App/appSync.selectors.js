@@ -6,6 +6,7 @@ const orgUnitIdSelector = state => state.currentSelections.orgUnitId;
 const viewEventIdSelector = state => state.viewEventPage.eventId;
 const eventIdSelector = state => state.editEventPage.eventId;
 
+// $FlowFixMe[missing-annot] automated comment
 export const paramsSelector = createSelector(
     programIdSelector,
     orgUnitIdSelector,

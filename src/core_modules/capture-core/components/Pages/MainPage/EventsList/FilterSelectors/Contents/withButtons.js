@@ -1,4 +1,4 @@
-
+// @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
@@ -70,6 +70,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
 
             return (
                 <React.Fragment>
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <InnerComponent
                         filterTypeRef={this.setFilterTypeInstance}
                         onUpdate={this.update}
