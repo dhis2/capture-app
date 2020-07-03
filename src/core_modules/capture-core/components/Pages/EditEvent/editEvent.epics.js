@@ -17,7 +17,7 @@ import { actionTypes as eventListActionTypes } from '../MainPage/EventsList/even
 import { getEvent } from '../../../events/eventRequests';
 
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
-   
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(eventListActionTypes.OPEN_EDIT_EVENT_PAGE)
         .map((action) => {
@@ -35,7 +35,7 @@ export const getEventOpeningFromEventListEpic = (action$: InputObservable, store
         });
 
 export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
-   
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(editEventActionTypes.EDIT_EVENT_FROM_URL)
         .switchMap((action) => {
@@ -61,7 +61,7 @@ export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore)
         });
 
 export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
-   
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(editEventActionTypes.EVENT_FROM_URL_RETRIEVED)
         .switchMap((action) => {
@@ -78,7 +78,7 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
         });
 
 export const openEditPageLocationChangeEpic = (action$: InputObservable) =>
-   
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(eventListActionTypes.OPEN_EDIT_EVENT_PAGE)
         .map(action =>

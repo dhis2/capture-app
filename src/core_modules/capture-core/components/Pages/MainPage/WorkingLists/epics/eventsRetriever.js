@@ -29,10 +29,9 @@ const getApiFilterQueryArgument = (filters: ?{ [id: string]: string}, mainColumn
         filters ?
             Object
                 .keys(filters)
-               
+
                 .filter(key => filters[key] != null && !mainColumns[key])
                 .reduce((accFilterQueries, filterKey) => {
-                   
                     const filter = getFilter(filters[filterKey]);
                     if (Array.isArray(filter)) {
                         const filtersFromArray = filter
@@ -81,10 +80,9 @@ const getMainApiFilterQueryArguments = (filters: ?{ [id: string]: string}, mainC
         filters ?
             Object
                 .keys(filters)
-               
+
                 .filter(key => mainColumns[key] && filters[key] != null)
                 .reduce((accMainQueryArgs, key) => {
-                   
                     const filter = getFilter(filters[key]);
                     let queryArgsForCurrentMain = {};
                     if (key === 'eventDate') {
@@ -123,7 +121,7 @@ const getApiCategoriesQueryArgument = (categories: ?{ [id: string]: string}, pro
         attributeCc: categoryCombination.id,
         attributeCos: Object
             .keys(categories)
-           
+
             .map(key => categories[key])
             .join(';'),
     };

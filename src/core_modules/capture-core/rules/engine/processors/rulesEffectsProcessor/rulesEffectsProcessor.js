@@ -42,10 +42,10 @@ export default function getRulesEffectsProcessor(
         let outputValue;
         if (baseValue || baseValue === 0 || baseValue === false) {
             const converterName = mapTypeToInterfaceFnName[valueType];
-           
+
             // $FlowFixMe[prop-missing] automated comment
             outputValue = rulesEffectsValueConverters[converterName] ?
-               
+
                 // $FlowFixMe[incompatible-use] automated comment
                 rulesEffectsValueConverters[converterName](baseValue) :
                 baseValue;
@@ -65,10 +65,10 @@ export default function getRulesEffectsProcessor(
             return null;
         }
         const element = processType === processTypes.EVENT ?
-           
+
             // $FlowFixMe[incompatible-use] automated comment
             dataElements[effect[processIdName]] :
-           
+
             // $FlowFixMe[incompatible-use] automated comment
             trackedEntityAttributes[effect[processIdName]];
 
