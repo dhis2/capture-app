@@ -94,8 +94,7 @@ const Index = ({
               });
     }, [
         selectedOption.value,
-        programs,
-        addFormIdToReduxStore,
+        dispatch,
     ]);
 
     return (<>
