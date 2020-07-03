@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useEffect } from 'react';
+import React, { useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper/Paper';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -70,7 +70,7 @@ const Index = ({
     dispatch,
     forms,
 }: Props) => {
-    const [selectedOption, choseSelected] = useState(preselectedProgram);
+    const [selectedOption, setSelected] = useState(preselectedProgram);
 
     useEffect(() => {
         selectedOption.value &&
@@ -97,32 +97,38 @@ const Index = ({
                         <div className={classes.searchRowTitle}>Search for</div>
                         <div className={classes.searchRowSelectElement} style={{ marginRight: 8 }}>
                             <SingleSelect
-                                onChange={({ selected }) => { choseSelected(selected); }}
+                                onChange={({ selected }) => { setSelected(selected); }}
                                 selected={selectedOption}
                                 empty={<div className={classes.customEmpty}>Custom empty component</div>}
                             >
                                 {
-                                    Object.values(trackedEntityTypesWithCorrelatedPrograms)
-                                        // $FlowSuppress https://github.com/facebook/flow/issues/2221
-                                        .map(({ trackedEntityTypeName, trackedEntityTypeId, programs: tePrograms }) =>
+                                    useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
+                                        // $FlowFixMe https://github.com/facebook/flow/issues/2221
+                                        .map(({ trackedEntityTypeName, trackedEntityTypeId, programs }) =>
                                             // SingleSelect component wont allow us to wrap the SingleSelectOption
                                             // in any other element and still make use of the default behaviour.
                                             // Therefore we are returning the group title and the
                                             // SingleSelectOption in an array.
                                             [
+                                                <SingleSelectOption
+                                                    value={trackedEntityTypeId}
+                                                    label={trackedEntityTypeName}
+                                                />,
+                                                programs.map(({ programName, programId }) =>
+                                                    (<SingleSelectOption value={programId} label={programName} />)),
                                                 <div
                                                     className={classes.groupTitle}
                                                     key={trackedEntityTypeId}
                                                 >
-                                                    {trackedEntityTypeName}
+                                                    --------------------------
                                                 </div>,
-                                                tePrograms.map(({ programName, programId }) =>
-                                                    (<SingleSelectOption
-                                                        style={{ marginRight: 0 }}
-                                                        value={programId}
-                                                        label={programName}
-                                                    />)),
-                                            ])
+                                            ],
+                                        ),
+                                    [
+                                        trackedEntityTypesWithCorrelatedPrograms,
+                                        classes.groupTitle,
+                                    ],
+                                    )
                                 }
                             </SingleSelect>
                         </div>

@@ -12,12 +12,13 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const trackedEntityTypesWithCorrelatedPrograms =
       [...programCollection.values()]
           .filter(program => program instanceof TrackerProgram)
+          // $FlowFixMe
           .reduce((acc, {
               id: programId,
               name: programName,
               trackedEntityType: { id: trackedEntityTypeId, name: trackedEntityTypeName },
               searchGroups,
-          }) => {
+          }: TrackerProgram) => {
               const accumulatedProgramsOfTrackedEntityType =
                 acc[trackedEntityTypeId] ? acc[trackedEntityTypeId].programs : [];
               return {
@@ -35,7 +36,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
           }, {});
 
     const preselectedProgram = Object.values(trackedEntityTypesWithCorrelatedPrograms)
-        // $FlowSuppress https://github.com/facebook/flow/issues/2221
+        // $FlowFixMe https://github.com/facebook/flow/issues/2221
         .map(({ programs }) =>
             programs.find(({ programId }) => programId === currentSelections.programId))
         .filter(program => program)[0];

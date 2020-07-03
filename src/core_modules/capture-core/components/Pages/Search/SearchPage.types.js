@@ -45,4 +45,4 @@ export type Props =
     +searchRowSelectElement: string,
     +searchButtonContainer: string,
   |},
-}
+  }
