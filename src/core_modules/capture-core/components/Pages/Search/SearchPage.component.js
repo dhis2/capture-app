@@ -100,14 +100,6 @@ const Index = ({
         addFormIdToReduxStore,
     ]);
 
-    const handleOnFindUsingUniqueIdentifier = (selectedProgramId, formId) => {
-        const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
-
-        if (isValid) {
-            findUsingUniqueIdentifier({ selectedProgramId, formId });
-        }
-    };
-
     return (<>
         <LockedSelector />
         <div className={classes.container}>
@@ -164,44 +156,65 @@ const Index = ({
 
 
                 {
-                    selectedOption.value && programs[selectedOption.value].searchGroups
-                        .filter(searchGroup => searchGroup.unique)
-                        .map(({ searchForm, formId }) => {
-                            const name = searchForm.getElements()[0].formName;
-                            return (
-                                <Section
-                                    className={classes.searchDomainSelectorSection}
-                                    header={
-                                        <SectionHeaderSimple
-                                            containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
-                                            title={i18n.t('Search {{name}}', { name })}
-                                        />
-                                    }
-                                >
-                                    <div className={classes.searchRow}>
-                                        <div className={classes.searchRowSelectElement}>
-                                            {
-                                                forms[formId] &&
-                                                <Form
-                                                    formRef={(formInstance) => { formReference[formId] = formInstance; }}
-                                                    formFoundation={searchForm}
-                                                    id={formId}
-                                                />
-                                            }
+                    useMemo(() => {
+                        const handleOnFindUsingUniqueIdentifier = (selectedProgramId, formId) => {
+                            const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
+
+                            if (isValid) {
+                                findUsingUniqueIdentifier({ selectedProgramId, formId });
+                            }
+                        };
+
+                        return selectedOption.value && programs[selectedOption.value].searchGroups
+                            .filter(searchGroup => searchGroup.unique)
+                            .map(({ searchForm, formId }) => {
+                                const name = searchForm.getElements()[0].formName;
+                                return (
+                                    <Section
+                                        className={classes.searchDomainSelectorSection}
+                                        header={
+                                            <SectionHeaderSimple
+                                                containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
+                                                title={i18n.t('Search {{name}}', { name })}
+                                            />
+                                        }
+                                    >
+                                        <div className={classes.searchRow}>
+                                            <div className={classes.searchRowSelectElement}>
+                                                {
+                                                    forms[formId] &&
+                                                    <Form
+                                                        formRef={(formInstance) => { formReference[formId] = formInstance; }}
+                                                        formFoundation={searchForm}
+                                                        id={formId}
+                                                    />
+                                                }
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className={classes.searchButtonContainer}>
-                                        <Button
-                                            onClick={() =>
-                                                selectedOption.value &&
-                                                handleOnFindUsingUniqueIdentifier(selectedOption.value, formId)}
-                                        >
-                                            Find by {name}.
-                                        </Button>
-                                    </div>
-                                </Section>
-                            );
-                        })
+                                        <div className={classes.searchButtonContainer}>
+                                            <Button
+                                                onClick={() =>
+                                                    selectedOption.value &&
+                                        handleOnFindUsingUniqueIdentifier(selectedOption.value, formId)}
+                                            >
+                                                Find by {name}.
+                                            </Button>
+                                        </div>
+                                    </Section>
+                                );
+                            });
+                    },
+                    [
+                        classes.searchButtonContainer,
+                        classes.searchDomainSelectorSection,
+                        classes.searchRowSelectElement,
+                        classes.searchRow,
+                        formReference,
+                        forms,
+                        programs,
+                        selectedOption.value,
+                        findUsingUniqueIdentifier,
+                    ])
                 }
 
                 {
