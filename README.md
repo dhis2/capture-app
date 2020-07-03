@@ -61,9 +61,6 @@ An example of `.env.development`:
 REACT_APP_DHIS2_BASE_URL="https://debug.dhis2.org/2.34dev/"
 REACT_APP_DHIS2_AUTHORIZATION="Basic c3lzdGVtOlN5c3RlbTEyMw=="
 REACT_APP_TRACKER_CAPTURE_APP_PATH="https://debug.dhis2.org/2.34dev/dhis-web-tracker-capture"
-#admin: YWRtaW46ZGlzdHJpY3Q=   
-#system: c3lzdGVtOlN5c3RlbTEyMw==
-#tracker: dHJhY2tlcjpUcmFja2VyMTIz
 ```
 
 #### 4. Run the application
