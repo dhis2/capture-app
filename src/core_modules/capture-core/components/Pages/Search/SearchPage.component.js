@@ -131,8 +131,7 @@ const Index = ({
                                     [
                                         trackedEntityTypesWithCorrelatedPrograms,
                                         classes.groupTitle,
-                                    ],
-                                    )
+                                    ])
                                 }
                             </SingleSelect>
                         </div>
@@ -176,6 +175,7 @@ const Index = ({
                         })
                 }
             </Paper>
+
             {
                 !selectedOption.value &&
                     <Paper elevation={0}>
