@@ -22,6 +22,7 @@ const getDataEntryOutput = (InnerComponent: React.ComponentType<any>, Output: Re
         };
         getOutput = (key: any) => (
             <div style={{ marginTop: 10 }} key={key}>
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <Output
                     key={key}
                     {...this.props}
@@ -34,6 +35,7 @@ const getDataEntryOutput = (InnerComponent: React.ComponentType<any>, Output: Re
 
             return (
                 <div>
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <InnerComponent
                         ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                         dataEntryOutputs={this.getDataEntryOutputs()}

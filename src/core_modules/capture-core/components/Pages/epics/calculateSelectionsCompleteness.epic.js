@@ -16,7 +16,6 @@ type CurrentSelectionsState = {
     categoryCheckInProgress?: ?boolean,
 };
 
-// eslint-disable-next-line complexity
 const calculateCompleteStatus = (state: CurrentSelectionsState) => {
     if (!state.orgUnitId || !state.programId || state.categoryCheckInProgress) {
         return false;
@@ -34,8 +33,10 @@ const calculateCompleteStatus = (state: CurrentSelectionsState) => {
     return true;
 };
 
+// todo file not used!
 export const calculateSelectionsCompletenessEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         lockedSelectorActionTypes.PROGRAM_ID_SET,
         lockedSelectorActionTypes.CATEGORY_OPTION_SET,

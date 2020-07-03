@@ -13,6 +13,7 @@ export default () =>
                 const { metaDisabled, rulesDisabled, ...passOnProps } = this.props;
 
                 return (
+                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <InnerComponent
                         disabled={!!(metaDisabled || rulesDisabled)}
                         {...passOnProps}

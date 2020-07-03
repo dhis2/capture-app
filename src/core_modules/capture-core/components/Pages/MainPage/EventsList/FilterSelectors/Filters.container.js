@@ -11,6 +11,7 @@ const mapStateToProps = (state: ReduxState, props: Object) => ({
 const mapDispatchToProps = () => {
     const onItemSelectedMemoized = makeOnItemSelectedSelector();
 
+    // $FlowFixMe[not-an-object] automated comment
     return (dispatch: ReduxDispatch, props: Object) => ({
         onRestMenuItemSelected: onItemSelectedMemoized({
             dispatch,
@@ -20,4 +21,5 @@ const mapDispatchToProps = () => {
     });
 };
 
+// $FlowFixMe[missing-annot] automated comment
 export default connect(mapStateToProps, mapDispatchToProps)(Filters);

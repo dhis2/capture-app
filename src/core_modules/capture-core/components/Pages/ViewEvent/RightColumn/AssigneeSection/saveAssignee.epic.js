@@ -5,7 +5,8 @@ import { convertValue as convertToServerValue } from '../../../../../converters/
 import { convertMainEventClientToServer } from '../../../../../events/mainConverters';
 
 export const saveAssigneeEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(actionTypes.VIEW_EVENT_ASSIGNEE_SET)
         .map(() => {
             const state = store.getState();

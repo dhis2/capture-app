@@ -14,7 +14,7 @@ const getApiCategoriesArgument = (categories: ?{ [id: string]: string}) => {
     return {
         attributeCategoryOptions: Object
             .keys(categories)
-            // $FlowSuppress
+
             .map(key => categories[key])
             .join(';'),
     };

@@ -19,9 +19,7 @@ const TextFieldWithContainer = withFocusSaver()(
     ),
 );
 
-type Props = {
-    onClose: Function,
-}
+type Props = {}
 
 type State = {
     dialogOpen: boolean,
@@ -48,6 +46,8 @@ class SaveWorkingListConfigDialog extends React.Component<Props, State> {
                                 <TextFieldWithContainer label="Description" />
                             </Section>
                             <div>
+                                {/* $FlowFixMe[prop-missing] automated comment
+                                  */}
                                 <Button onClick={() => { this.props.onAddWorkingListConfig('Test working list', 'desc'); }}>Save</Button>
                                 <Button>Cancel</Button>
                             </div>

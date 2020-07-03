@@ -60,6 +60,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
 
         getFormVerticalButtons = (dataEntryHasChanges: ?boolean, hasRecentlyAddedEvents: ?boolean, saveTypes: ?Array<string>) => {
             const buttons = saveTypes ?
+                // $FlowFixMe[missing-annot] automated comment
                 saveTypes.map(saveType => this.getButtonDefinition(saveType)) :
                 [
                     this.getButtonDefinition(buttonTypes.SAVEANDEXIT),
@@ -70,7 +71,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
                 [this.getButtonDefinition(buttonTypes.FINISH), ...buttons];
         }
 
-        renderMultiButton = (buttons: any, hasWriteAccess: ?boolean, finalInProgress: ?boolean) => {
+        renderMultiButton = (buttons: any, hasWriteAccess: ?boolean) => {
             const primary = buttons[0];
             const secondaries = buttons.slice(1);
             return (
@@ -96,9 +97,12 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
                 this.getFormHorizontalButtons(dataEntryHasChanges, hasRecentlyAddedEvents) :
                 this.getFormVerticalButtons(dataEntryHasChanges, hasRecentlyAddedEvents, saveTypes);
 
+            // $FlowFixMe[extra-arg] automated comment
             const mainButton = this.renderMultiButton(buttons, hasWriteAccess, finalInProgress);
             return (
+                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
+                    // $FlowFixMe[prop-missing] automated comment
                     ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                     mainButton={mainButton}
                     {...passOnProps}
@@ -124,6 +128,7 @@ const mapDispatchToProps = () => ({});
 
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
-        // $FlowSuppress
+
+        // $FlowFixMe[missing-annot] automated comment
         connect(
             mapStateToProps, mapDispatchToProps)(getMainButton(InnerComponent));

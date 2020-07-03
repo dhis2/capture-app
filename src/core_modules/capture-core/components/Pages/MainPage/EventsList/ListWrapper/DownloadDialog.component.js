@@ -36,7 +36,7 @@ class DownloadDialog extends React.Component<Props> {
         const searchParams = new URLSearchParams(restParams);
 
         if (filter) {
-            filter.forEach(filterItem => {
+            filter.forEach((filterItem) => {
                 searchParams.append('filter', filterItem);
             });
         }
@@ -46,7 +46,7 @@ class DownloadDialog extends React.Component<Props> {
 
     static getUrl() {
         const baseUrl = getApi().baseUrl;
-        return baseUrl + '/events/query';
+        return `${baseUrl}/events/query`;
     }
 
     renderButtons() {
@@ -59,7 +59,7 @@ class DownloadDialog extends React.Component<Props> {
             skipPaging: 'true',
         };
         const searchParamsString = DownloadDialog.getUrlEncodedParamsString(paramsObject);
-        
+
         return (
             <div
                 className={classes.downloadContainer}

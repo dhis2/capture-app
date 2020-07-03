@@ -48,7 +48,7 @@ class SectionHeaderSimple extends Component<Props> {
     }
 
     handleChangeCollapse() {
-        // $FlowSuppress
+        // $FlowFixMe[not-a-function] automated comment
         this.props.onChangeCollapseState();
     }
 
@@ -83,7 +83,7 @@ class SectionHeaderSimple extends Component<Props> {
                                         title={this.props.isCollapsed ? 'Åpne' : 'Lukk'}
                                         onClick={this.handleChangeCollapse}
                                     >
-                                        {this.props.isCollapsed ? <KeyboardArrowDown/> : <KeyboardArrowUp/>}
+                                        {this.props.isCollapsed ? <KeyboardArrowDown /> : <KeyboardArrowUp />}
                                     </IconButton>
                                 );
                             }

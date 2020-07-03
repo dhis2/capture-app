@@ -14,11 +14,6 @@ export default () =>
         const InternalFilterHandlerHOC = withInternalFilterHandler()(InnerComponent);
 
         class OrgUnitImplicitInternalFilterHandlerHOC extends React.Component<Props> {
-            static DEFAULT_ROOTS_DATA = {
-                [scopes.USER_CAPTURE]: 'captureRoots',
-                [scopes.USER_SEARCH]: 'search',
-            };
-
             defaultRoots: Array<any>;
             constructor(props: Props) {
                 super(props);
@@ -26,6 +21,10 @@ export default () =>
                 this.defaultRoots =
                     getOrgUnitRoots(OrgUnitImplicitInternalFilterHandlerHOC.DEFAULT_ROOTS_DATA[scope]) || [];
             }
+            static DEFAULT_ROOTS_DATA = {
+                [scopes.USER_CAPTURE]: 'captureRoots',
+                [scopes.USER_SEARCH]: 'search',
+            };
 
             render() {
                 const { ...passOnProps } = this.props;

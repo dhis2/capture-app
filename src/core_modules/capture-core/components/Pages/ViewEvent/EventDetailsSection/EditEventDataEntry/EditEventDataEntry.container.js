@@ -85,6 +85,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
     },
 });
 
+// $FlowFixMe[missing-annot] automated comment
 export default connect(mapStateToProps, mapDispatchToProps)(
     withLoadingIndicator()(EditEventDataEntry),
 );

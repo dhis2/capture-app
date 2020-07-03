@@ -2,6 +2,8 @@
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
+import capitalizeFirstLetter from 'capture-core-utils/string/capitalizeFirstLetter';
+import { errorCreator } from 'capture-core-utils';
 import type {
     CachedProgram,
     CachedProgramTrackedEntityAttribute,
@@ -18,9 +20,7 @@ import {
     SearchGroup,
     InputSearchGroup,
 } from '../../../../metaData';
-import capitalizeFirstLetter from 'capture-core-utils/string/capitalizeFirstLetter';
 import DataElementFactory from './DataElementFactory';
-import { errorCreator } from 'capture-core-utils';
 import { getApi } from '../../../../d2/d2Instance';
 import { DataElement } from '../../../../metaData/DataElement';
 

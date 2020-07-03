@@ -304,6 +304,63 @@ msgstr "پێشنیارەکان نەتواندرا بهێندرێت"
 msgid "No items to display"
 msgstr "هیچ شتێک بەردەست نیە بۆ پیشاندان"
 
+msgid "Could not get organisation unit"
+msgstr "نەتواندرا ئۆرگانیزەیشن یونیتەکە بهێندرێت"
+
+msgid "Program doesn't exist"
+msgstr "پرۆگرامەکە بوونی نیە"
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr "پرۆگرامی هەلبژێردراو درووست نیە بۆ یەکەی تۆمارکردنی هەڵبژێردراو"
+
+msgid "New {{typeName}}"
+msgstr "{{typeName}} ی نوێ"
+
+msgid "New"
+msgstr "نوێ"
+
+msgid "Start again"
+msgstr "دووبارە دەستپێبکەوە"
+
+msgid "Find"
+msgstr "بدۆزەوە"
+
+msgid "Selected registering unit"
+msgstr "یەکەی تۆمارکردن هەڵبژێرە"
+
+msgid "Start Again"
+msgstr "دووبارە دەستبپێبکەوە"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "ئایا دڵنیایی؟ هەموو زانیاریە تۆمارەنەکراوەکان دەسڕێتەوە"
+
+msgid "Accept"
+msgstr "پەسندکردن"
+
+msgid "Registering Organisation Unit"
+msgstr "تۆمارکردنی یەکەی رێکخراو"
+
+msgid "Select"
+msgstr "هەڵبژاردن"
+
+msgid "Selected Program"
+msgstr "پرۆگرامە هەڵبژێردراوەکە"
+
+msgid "Some programs are being filtered."
+msgstr "هەندێک لە پڕۆگرامەکان فیلتەرکراون"
+
+msgid "Show all"
+msgstr "پێشاندانی هەمووان"
+
+msgid "Program"
+msgstr "پرۆگرام"
+
+msgid "Select program"
+msgstr "پرۆگرام هەڵبژێرە"
+
+msgid "No programs available."
+msgstr "هیچ پرۆگرامێک بەردەست نیە"
+
 msgid "Online"
 msgstr "ئۆنڵاین"
 
@@ -451,15 +508,6 @@ msgstr "چاڵاک"
 msgid "Completed"
 msgstr "تەواوبوو"
 
-msgid "Could not get organisation unit"
-msgstr "نەتواندرا ئۆرگانیزەیشن یونیتەکە بهێندرێت"
-
-msgid "Program doesn't exist"
-msgstr "پرۆگرامەکە بوونی نیە"
-
-msgid "Selected program is invalid for registering unit"
-msgstr "ئەم پرۆگرامە درووستنیە بۆ تۆمارکردنی یونت"
-
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr " {{TET}} نوێ دروستبکە لە {{program}} لە {{orgUnit}}"
 
@@ -490,9 +538,6 @@ msgid ""
 msgstr ""
 "پرۆگرم بە پرۆگرام ئایدی{{programId}} پرۆگرامی تراکەر نیە. تۆمارکردن تەنها "
 "دەتواندرێت ئەنجام بدرێت لە پرۆگرامی تراکەر"
-
-msgid "Selected program is invalid for selected registering unit"
-msgstr "پرۆگرامی هەلبژێردراو درووست نیە بۆ یەکەی تۆمارکردنی هەڵبژێردراو"
 
 msgid "Assigned user"
 msgstr "بەکارهێنەری دەستنیشانکراو"
@@ -614,15 +659,6 @@ msgstr "شاردنەوە"
 msgid "Save as new {{tetName}}"
 msgstr "وەکو {{tetName}} نوێ تۆمار بکە"
 
-msgid "Some programs are being filtered."
-msgstr "هەندێک لە پڕۆگرامەکان فیلتەرکراون"
-
-msgid "Show all"
-msgstr "پێشاندانی هەمووان"
-
-msgid "Program"
-msgstr "پرۆگرام"
-
 msgid "Organisation Unit"
 msgstr "یەکەی ڕێخکڕاو"
 
@@ -677,45 +713,6 @@ msgstr "حاڵەتەکە ڕاپسێردراوە بە  {{name}}"
 
 msgid "Feedbacks"
 msgstr "بۆچوونەکان"
-
-msgid "New {{typeName}}"
-msgstr "{{typeName}} ی نوێ"
-
-msgid "New"
-msgstr "نوێ"
-
-msgid "Start again"
-msgstr "دووبارە دەستپێبکەوە"
-
-msgid "Find"
-msgstr "بدۆزەوە"
-
-msgid "Selected registering unit"
-msgstr "یەکەی تۆمارکردن هەڵبژێرە"
-
-msgid "Start Again"
-msgstr "دووبارە دەستبپێبکەوە"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "ئایا دڵنیایی؟ هەموو زانیاریە تۆمارەنەکراوەکان دەسڕێتەوە"
-
-msgid "Accept"
-msgstr "پەسندکردن"
-
-msgid "Registering Organisation Unit"
-msgstr "تۆمارکردنی یەکەی رێکخراو"
-
-msgid "Select"
-msgstr "هەڵبژاردن"
-
-msgid "Selected Program"
-msgstr "پرۆگرامە هەڵبژێردراوەکە"
-
-msgid "Select program"
-msgstr "پرۆگرام هەڵبژێرە"
-
-msgid "No programs available."
-msgstr "هیچ پرۆگرامێک بەردەست نیە"
 
 msgid "You dont have access to delete this relationship"
 msgstr "مافی سڕینەوە ئەم پەیوەندیەت نیە"

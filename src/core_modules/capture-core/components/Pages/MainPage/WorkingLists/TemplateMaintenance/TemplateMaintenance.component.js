@@ -121,4 +121,5 @@ const TemplateMaintenance = (props: Props, ref) => {
     );
 };
 
+// $FlowFixMe[missing-annot] automated comment
 export default React.forwardRef(TemplateMaintenance);

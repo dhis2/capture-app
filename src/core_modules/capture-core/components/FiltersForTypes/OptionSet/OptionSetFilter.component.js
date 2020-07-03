@@ -25,6 +25,8 @@ type Props = {
     singleSelect?: ?boolean,
 };
 // $FlowSuppress
+// $FlowFixMe[incompatible-variance] automated comment
+// $FlowFixMe[cannot-resolve-name] automated comment
 class OptionSetFilter extends Component<Props> implements UpdatableFilterContent<Value> {
     onGetUpdateData() {
         const { value, singleSelect } = this.props;

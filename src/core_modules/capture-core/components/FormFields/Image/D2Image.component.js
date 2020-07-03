@@ -122,7 +122,9 @@ class D2Image extends Component<Props> {
         const isVertical = orientation === orientations.VERTICAL;
         const isUploading = asyncUIState && asyncUIState.loading;
         const imageUrl = this.getimageUrl();
+        // $FlowFixMe[prop-missing] automated comment
         const containerClass = isVertical ? classes.verticalContainer : classes.horizontalContainer;
+        // $FlowFixMe[prop-missing] automated comment
         const selectedImageTextContainerClass = isVertical ? classes.verticalSelectedImageTextContainer : classes.horizontalSelectedImageTextContainer;
         return (
             <div>

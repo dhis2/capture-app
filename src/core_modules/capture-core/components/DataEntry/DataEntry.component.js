@@ -239,6 +239,7 @@ class DataEntry extends React.Component<Props> {
         } = this.props;
 
         const d2Form = (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <D2Form
                 id={getDataEntryKey(id, itemId)}
                 validationAttempted={completionAttempted || saveAttempted}
@@ -283,6 +284,7 @@ class DataEntry extends React.Component<Props> {
             <div className={directionClasses.container}>
                 <div className={directionClasses.dataEntryContainer}>
                     <div className={directionClasses.formContainer}>
+                        {/* $FlowFixMe[prop-missing] automated comment */}
                         <div className={directionClasses.formInnerContainer}>
                             {this.renderDataEntryFieldsByPlacement(placements.TOP)}
                             {this.renderD2Form()}
@@ -362,5 +364,4 @@ class DataEntry extends React.Component<Props> {
     }
 }
 
-// $FlowFixMe
 export default withStyles(styles)(DataEntry);

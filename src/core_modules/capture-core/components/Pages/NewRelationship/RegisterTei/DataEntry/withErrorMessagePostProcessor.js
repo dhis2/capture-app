@@ -57,6 +57,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
             const { onLink, ...passOnProps } = this.props;
 
             return (
+                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     onPostProcessErrorMessage={this.postProcessErrorMessage}
                     {...passOnProps}

@@ -13,6 +13,7 @@ export default () =>
                 const { metaCompulsory, rulesCompulsory, ...passOnProps } = this.props;
 
                 return (
+                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <InnerComponent
                         required={!!(metaCompulsory || rulesCompulsory)}
                         {...passOnProps}

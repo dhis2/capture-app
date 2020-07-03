@@ -12,6 +12,7 @@ const mapStateToProps = (state: ReduxState, props: {listId: ?string}) => {
     };
 };
 
+// $FlowFixMe[missing-annot] automated comment
 export default connect(mapStateToProps, {})(
     withLoadingIndicator(() => ({ padding: 10 }))(
         withErrorMessageHandler()(
