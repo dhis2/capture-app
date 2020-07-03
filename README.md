@@ -47,7 +47,7 @@ To install the dependencies you will have to be at the source folder of the clon
 yarn 
 ```
 
-#### 3. Set up the API base url
+#### 3. Set environment variables for backend communication
 
 For the application to fetch data from the backend we need to set up a base url. Make sure in your `.env.development` file the following is included:
 
