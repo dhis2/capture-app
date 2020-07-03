@@ -28,6 +28,5 @@ export type Props =
     +searchRow: string,
     +searchRowTitle: string,
     +searchRowSelectElement: string,
-  },
   |},
-}
+  }
