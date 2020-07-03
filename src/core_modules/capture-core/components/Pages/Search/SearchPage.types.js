@@ -30,9 +30,13 @@ export type PropsFromRedux = {
   },
 }
 
+export type DispatchersFromRedux = {|
+  addFormIdToReduxStore: (formId: string) => void,
+|}
+
+
 export type Props =
-  PropsFromRedux & {
-  dispatch: ReduxDispatch,
+  DispatchersFromRedux & PropsFromRedux & {|
   +classes: {|
     +container: string,
     +header: string,
@@ -47,4 +51,4 @@ export type Props =
     +emptySelectionPaperContainer: string,
     +emptySelectionPaperContent: string,
   |},
-  }
+|}

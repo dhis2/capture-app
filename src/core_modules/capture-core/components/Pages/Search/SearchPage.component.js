@@ -8,7 +8,6 @@ import { LockedSelector } from '../../LockedSelector';
 import type { Props } from './SearchPage.types';
 import { Section, SectionHeaderSimple } from '../../Section';
 import Button from '../../Buttons/Button.component';
-import { addFormData } from '../../D2Form/actions/form.actions';
 import Form from '../../D2Form/D2Form.component';
 
 const getStyles = (theme: Theme) => ({
@@ -67,21 +66,28 @@ const Index = ({
     trackedEntityTypesWithCorrelatedPrograms,
     preselectedProgram,
     programs,
-    dispatch,
+    addFormIdToReduxStore,
     forms,
 }: Props) => {
     const [selectedOption, setSelected] = useState(preselectedProgram);
 
+    // dan abramov suggest to stringify https://twitter.com/dan_abramov/status/1104414469629898754?lang=en
+    const stringifyPrograms = JSON.stringify(programs);
     useEffect(() => {
+        // in order for the Form component to render
+        // need to add a formId under the `forms` reducer
         selectedOption.value &&
-          programs[selectedOption.value].searchGroups
+          JSON.parse(stringifyPrograms)[selectedOption.value].searchGroups
               .forEach(({ formId }) => {
-                  dispatch(addFormData(formId, {}));
+                  addFormIdToReduxStore(formId);
               });
-    }, [
+    },
+    [
+        stringifyPrograms,
         selectedOption.value,
-        dispatch,
+        addFormIdToReduxStore,
     ]);
+
 
     return (<>
         <LockedSelector />

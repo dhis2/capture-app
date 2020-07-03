@@ -4,7 +4,8 @@ import { SearchPage as SearchPageComponent } from './SearchPage.component';
 import { programCollection } from '../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../../metaData/Program';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
-import type { PropsFromRedux } from './SearchPage.types';
+import type { DispatchersFromRedux, PropsFromRedux } from "./SearchPage.types";
+import { addFormData } from '../../D2Form/actions/form.actions';
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const { currentSelections, activePage } = state;
@@ -75,4 +76,8 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     };
 };
 
-export const SearchPage = connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(SearchPageComponent)));
+const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
+    addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
+});
+
+export const SearchPage = connect(mapStateToProps, mapDispatchToProps)(withLoadingIndicator()(withErrorMessageHandler()(SearchPageComponent)));
