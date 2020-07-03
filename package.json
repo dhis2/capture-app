@@ -56,7 +56,7 @@
     "react-redux": "6",
     "react-router": "^5.0.1",
     "react-rte": "^0.16.1",
-    "react-scripts": "3.0.1",
+    "react-scripts": "3.4.1",
     "react-select": "^1.2.1",
     "react-select-fast-filter-options": "^0.2.3",
     "react-transform-tree": "^1.0.35",
