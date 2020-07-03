@@ -1,7 +1,11 @@
 # Capture app
 
-The Capture app allows you capture, modify and list tracked entity instances with its enrollments and events. The Tracker Capture app works with multiple event-based programs in DHIS2, which handles events linked to registered entities. These programs are suitable for handling disease programmes where multiple visits is required. The Capture app can be used for disease programmes such as tubercolosis and malaria. However the app is not tied to any specific domain and can potentially be utilized for any scenario of multiple event-based information.
+The Capture app serves as a replacement for the Event Capture app. In the future, the intention is to incorporate the Tracker Capture app and the Data Entry app into the Capture app.
 
+In the Capture app you register events that occurred at a particular time and place. An event can happen at any given point in time. This stands in contrast to routine data, which can be captured for predefined, regular intervals. Events are sometimes called cases or records. In DHIS2, events are linked to a program. The Capture app lets you select the organisation unit and program and specify a date when a event happened, before entering information for the event.
+
+Find the official documentation of the Capture app [here](https://docs.dhis2.org/master/en/dhis2_user_manual_en/using-the-capture-app.html).
+ 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
