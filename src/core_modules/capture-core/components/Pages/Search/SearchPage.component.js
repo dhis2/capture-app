@@ -95,7 +95,10 @@ const Index = ({ classes, trackedEntityTypesWithCorrelatedPrograms, preselectedP
                                                 </div>,
                                             ],
                                         ),
-                                    [trackedEntityTypesWithCorrelatedPrograms],
+                                    [
+                                        trackedEntityTypesWithCorrelatedPrograms,
+                                        classes.groupTitle,
+                                    ],
                                     )
                                 }
                             </SingleSelect>
