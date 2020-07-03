@@ -32,14 +32,13 @@ function setLogLevel() {
 }
 
 function setConfig() {
-    const { REACT_APP_DHIS2_BASE_URL, REACT_APP_DHIS2_AUTHORIZATION, NODE_ENV } = process.env;
+    const { REACT_APP_DHIS2_BASE_URL, NODE_ENV } = process.env;
     const baseUrl = REACT_APP_DHIS2_BASE_URL || '';
     config.baseUrl = `${baseUrl}/api`;
 
     if (NODE_ENV !== environments.prod) {
         config.headers = {
             'X-Requested-With': 'XMLHttpRequest',
-            Authorization: REACT_APP_DHIS2_AUTHORIZATION,
         };
     }
 

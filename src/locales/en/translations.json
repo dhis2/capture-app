@@ -5,6 +5,7 @@
     "Choose a date...": "",
     "Today": "",
     "A possible reason for this is that the browser or mode (e.g. privacy mode) is not supported. See log for details.": "",
+    "You opened another version of the Capture App in the same domain. Currently, the Capture App only supports running one version concurrently (in the same domain). Please refresh this page if you would like to use this version again, but be aware that this will close other versions.": "",
     "Columns to show in table": "",
     "Column": "",
     "This value is validating": "",
@@ -254,6 +255,5 @@
     "error": "",
     "Delete polygon": "",
     "Set area": "",
-    "You opened another version of the Capture App in the same domain. Currently, the Capture App only supports running one version concurrently (in the same domain). Please refresh this page if you would like to use this version again, but be aware that this will close other versions.": "",
     "Compatibility mode": ""
 }

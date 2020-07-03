@@ -2,7 +2,7 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { loadCore, actionTypes as coreActionTypes, batchActionTypes as coreBatchActionTypes } from 'capture-core/init';
-import { loadAppSuccess, loadAppFailed, actionTypes } from './entry.actions';
+import { loadAppSuccess, loadAppFailed, actionTypes } from './appStart.actions';
 
 export const triggerLoadCoreEpic = (action$: ActionsObservable) =>
     action$.ofType(actionTypes.APP_LOAD)

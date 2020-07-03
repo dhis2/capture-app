@@ -2,8 +2,8 @@ const config = {
     type: 'app',
 
     entryPoints: {
-        app: './src/App',
+        app: './src/index',
     },
-}
+};
 
-module.exports = config
+module.exports = config;
