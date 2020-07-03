@@ -114,7 +114,7 @@ export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxSt
         });
 
 export const teiSearchEpic = (action$: InputObservable, store: ReduxStore) =>
-   
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(actionTypes.REQUEST_SEARCH_TEI)
         .switchMap((action) => {
@@ -133,7 +133,7 @@ export const teiSearchEpic = (action$: InputObservable, store: ReduxStore) =>
         });
 
 export const teiSearchSetProgramEpic = (action$: InputObservable, store: ReduxStore) =>
-   
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(programSelectorActionTypes.TEI_SEARCH_START_SET_PROGRAM)
         .map((action) => {
@@ -163,7 +163,7 @@ export const teiSearchSetProgramEpic = (action$: InputObservable, store: ReduxSt
         });
 
 export const teiNewSearchEpic = (action$: InputObservable, store: ReduxStore) =>
-   
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(actionTypes.TEI_NEW_SEARCH)
         .map((action) => {

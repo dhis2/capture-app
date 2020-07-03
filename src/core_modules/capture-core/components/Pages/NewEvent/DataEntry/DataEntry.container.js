@@ -38,7 +38,7 @@ const makeMapStateToProps = () => {
             state.organisationUnits[state.currentSelections.orgUnitId].name,
     });
 
-   
+
     // $FlowFixMe[not-an-object] automated comment
     return mapStateToProps;
 };

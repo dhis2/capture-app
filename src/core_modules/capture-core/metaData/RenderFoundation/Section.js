@@ -46,7 +46,6 @@ export default class Section {
     }
 
     set open(open: ?boolean) {
-       
         // $FlowFixMe[incompatible-type] automated comment
         this._open = isDefined(open) ? open : true;
     }
@@ -55,7 +54,6 @@ export default class Section {
     }
 
     set visible(visible: ?boolean) {
-       
         // $FlowFixMe[incompatible-type] automated comment
         this._visible = isDefined(visible) ? visible : true;
     }
@@ -64,7 +62,6 @@ export default class Section {
     }
 
     set showContainer(showContainer: ?boolean) {
-       
         // $FlowFixMe[incompatible-type] automated comment
         this._showContainer = isDefined(showContainer) ? showContainer : true;
     }
@@ -84,7 +81,7 @@ export default class Section {
 
     * getPropertyNames(): Generator<string, void, void> {
         const excluded = ['getPropertyNames', 'constructor', 'copyPropertiesTo'];
-       
+
         for (const name of Object.getOwnPropertyNames(Object.getPrototypeOf(this))) {
             if (!excluded.includes(name)) {
                 yield name;
@@ -94,7 +91,6 @@ export default class Section {
 
     copyPropertiesTo(object: {}) {
         for (const propName of this.getPropertyNames()) {
-           
             // $FlowFixMe[prop-missing] automated comment
             object[propName] = this[propName];
         }

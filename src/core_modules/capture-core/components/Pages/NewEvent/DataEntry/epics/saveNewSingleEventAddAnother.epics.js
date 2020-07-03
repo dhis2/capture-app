@@ -22,7 +22,7 @@ import { getNewEventServerData, getNewEventClientValues } from './getConvertedNe
 import { listId } from '../../RecentlyAddedEventsList/RecentlyAddedEventsList.const';
 
 export const saveNewEventAddAnotherEpic = (action$: InputObservable, store: ReduxStore) =>
-   
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(newEventDataEntryActionTypes.REQUEST_SAVE_NEW_EVENT_ADD_ANOTHER)
         .map((action) => {
@@ -51,7 +51,7 @@ export const saveNewEventAddAnotherEpic = (action$: InputObservable, store: Redu
         });
 
 export const saveNewEventAddAnotherFailedEpic = (action$: InputObservable) =>
-   
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_ADD_ANOTHER)
         .map((action) => {

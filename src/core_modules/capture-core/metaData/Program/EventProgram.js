@@ -17,13 +17,11 @@ export default class EventProgram extends Program {
         this._stages.set(EventProgram.EVENT_PROGRAM_STAGE_KEY, stage);
     }
     get stage(): ProgramStage {
-       
         // $FlowFixMe[incompatible-return] automated comment
         return this._stages.get(EventProgram.EVENT_PROGRAM_STAGE_KEY);
     }
 
     getStage(): ProgramStage {
-       
         // $FlowFixMe[incompatible-return] automated comment
         return this._stages.get(EventProgram.EVENT_PROGRAM_STAGE_KEY);
     }

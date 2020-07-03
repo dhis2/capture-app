@@ -23,7 +23,6 @@ function loadSearchOrgUnitRootsAsync() {
     const currentUser = getCurrentUser();
     // $FlowFixMe[prop-missing] automated comment
     if (!currentUser.teiSearchOrganisationUnits || currentUser.teiSearchOrganisationUnits.length === 0) {
-       
         // $FlowFixMe[incompatible-call] automated comment
         return Promise.resolve(getStoreRoots('captureRoots'));
     }

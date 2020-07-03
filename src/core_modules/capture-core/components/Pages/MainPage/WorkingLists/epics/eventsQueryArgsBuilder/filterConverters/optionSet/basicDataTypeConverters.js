@@ -40,6 +40,5 @@ const valueConvertersForType = {
 };
 
 export function convertDataTypeValueToRequest(value: any, type: $Values<typeof elementTypes>) {
-   
     return valueConvertersForType[type] ? valueConvertersForType[type](value) : value;
 }

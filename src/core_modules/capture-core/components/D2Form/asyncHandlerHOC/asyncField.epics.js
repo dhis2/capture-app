@@ -11,7 +11,7 @@ import {
 
 // epic for handlng async field updates, e.g. file and image
 export const asyncUpdateFieldEpic = (action$: InputObservable) =>
-   
+
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(actionTypes.START_UPDATE_FIELD_ASYNC)
         .concatMap((action) => {

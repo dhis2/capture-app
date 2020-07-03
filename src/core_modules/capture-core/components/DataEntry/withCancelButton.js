@@ -50,5 +50,5 @@ const getCancelButton = (InnerComponent: React.ComponentType<any>, optionsFn?: ?
 
 export default (optionsFn?: ?OptionsFn) =>
     (InnerComponent: React.ComponentType<any>) =>
-       
+
         getCancelButton(InnerComponent, optionsFn);

@@ -20,7 +20,7 @@ async function isOptionAssociatedWithOrganisationUnit(categoryOptionId: string, 
 
 export const resetCategoriesAfterSettingOrgUnitIfApplicableEpic = (action$: InputObservable, store: ReduxStore) =>
     action$
-       
+
         // $FlowFixMe[prop-missing] automated comment
         .ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET)
         .switchMap((action) => {

@@ -37,7 +37,7 @@ export async function getSubValues(teiId: string, attributes: Array<DataElement>
 
     return Object.keys(values).reduce(async (accValuesPromise, attributeId) => {
         const accValues = await accValuesPromise;
-       
+
         const value = values[attributeId];
         const metaElement = attributesById[attributeId];
         if (isDefined(value) && metaElement) {

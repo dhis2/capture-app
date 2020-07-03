@@ -55,7 +55,7 @@ class D2Date extends React.Component<Props, State> {
                 }
 
                 const outputKey = lowerCaseFirstLetter(propKey.replace(propContainer, ''));
-               
+
                 accSplittedProps[propContainer][outputKey] = passOnProps[propKey];
                 return accSplittedProps;
             }, splittedProps);
@@ -83,7 +83,6 @@ class D2Date extends React.Component<Props, State> {
     }
 
     componentWillUnmount() {
-       
         // $FlowFixMe[incompatible-call] automated comment
         document.removeEventListener('click', this.handleDocumentClick);
     }
@@ -95,7 +94,6 @@ class D2Date extends React.Component<Props, State> {
     };
 
     handleTextFieldFocus() {
-       
         // $FlowFixMe[incompatible-call] automated comment
         document.removeEventListener('click', this.handleDocumentClick);
 
@@ -110,7 +108,7 @@ class D2Date extends React.Component<Props, State> {
         this.props.onBlur(value);
         this.hidePopover();
         this.props.onDateSelectedFromCalendar && this.props.onDateSelectedFromCalendar();
-       
+
         // $FlowFixMe[incompatible-call] automated comment
         document.removeEventListener('click', this.handleDocumentClick);
     }
@@ -125,7 +123,7 @@ class D2Date extends React.Component<Props, State> {
         }
 
         this.hidePopover();
-       
+
         // $FlowFixMe[incompatible-call] automated comment
         document.removeEventListener('click', this.handleDocumentClick);
     }
@@ -136,7 +134,6 @@ class D2Date extends React.Component<Props, State> {
         if (!event.relatedTarget || event.relatedTarget.className !== 'Cal__Container__root') {
             this.hidePopover();
         } else {
-           
             // $FlowFixMe[incompatible-call] automated comment
             document.addEventListener('click', this.handleDocumentClick);
         }

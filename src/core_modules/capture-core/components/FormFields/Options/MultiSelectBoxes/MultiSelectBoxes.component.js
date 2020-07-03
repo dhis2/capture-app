@@ -82,7 +82,7 @@ class MultiSelectBoxes extends Component<Props> {
         if (isChecked) {
             if (this.checkedValues) {
                 this.checkedValues.add(value);
-               
+
                 // $FlowFixMe[incompatible-call] automated comment
                 emitValues = Array.from(this.checkedValues);
             } else {
@@ -90,10 +90,9 @@ class MultiSelectBoxes extends Component<Props> {
             }
         } else if (this.checkedValues) {
             this.checkedValues.delete(value);
-           
+
             // $FlowFixMe[incompatible-use] automated comment
             if (this.checkedValues.size > 0) {
-               
                 // $FlowFixMe[incompatible-call] automated comment
                 emitValues = Array.from(this.checkedValues);
             } else {

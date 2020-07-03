@@ -105,7 +105,6 @@ export function validateDataEntryValues(
 ) {
     return dataEntryPropsToInclude
         .reduce((accValidations, propToInclude) => {
-           
             // $FlowFixMe[prop-missing] automated comment
             const id = propToInclude.dataEntryId || propToInclude.id;
             const value = values[id];

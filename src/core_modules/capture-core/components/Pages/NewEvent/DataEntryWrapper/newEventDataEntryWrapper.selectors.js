@@ -16,7 +16,7 @@ export const makeFormFoundationSelector = () => createSelector(
             return null;
         }
 
-       
+
         // $FlowFixMe[prop-missing] automated comment
         const stage = program.stage;
         if (!stage) {
@@ -38,7 +38,7 @@ export const makeStageSelector = () => createSelector(
             return null;
         }
 
-       
+
         // $FlowFixMe[prop-missing] automated comment
         const stage = program.stage;
         if (!stage) {
