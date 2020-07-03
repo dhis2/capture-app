@@ -113,7 +113,7 @@ const Index = ({
                                 {
                                     useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
                                         // $FlowFixMe https://github.com/facebook/flow/issues/2221
-                                        .map(({ trackedEntityTypeName, trackedEntityTypeId, tePrograms }) =>
+                                        .map(({ trackedEntityTypeName, trackedEntityTypeId, programs: tePrograms }) =>
                                             // SingleSelect component wont allow us to wrap the SingleSelectOption
                                             // in any other element and still make use of the default behaviour.
                                             // Therefore we are returning the group title and the
