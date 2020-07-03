@@ -44,6 +44,7 @@ class NewEnrollmentRelationship extends Component<Props> {
         } = this.props;
         return (
             <div>
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <ConfiguredEnrollment
                     id={DATA_ENTRY_ID}
                     onSave={this.handleSave}
@@ -56,5 +57,4 @@ class NewEnrollmentRelationship extends Component<Props> {
     }
 }
 
-// $FlowFixMe
 export default withTheme()(NewEnrollmentRelationship);

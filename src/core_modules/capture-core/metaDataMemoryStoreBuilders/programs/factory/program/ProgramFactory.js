@@ -102,9 +102,7 @@ class ProgramFactory {
         }
 
         return new CategoryCombination((o) => {
-            // $FlowFixMe
             o.name = cachedCategoryCombination.displayName;
-            // $FlowFixMe
             o.id = cachedCategoryCombination.id;
             o.categories =
             // $FlowFixMe
@@ -121,6 +119,7 @@ class ProgramFactory {
 
     async _buildProgramAttributes(cachedProgramTrackedEntityAttributes: Array<CachedProgramTrackedEntityAttribute>) {
         const attributePromises = cachedProgramTrackedEntityAttributes.map(async (ptea) => {
+            // $FlowFixMe[incompatible-call] automated comment
             const dataElement = await this.dataElementFactory.build(ptea);
             return dataElement;
         });
@@ -169,7 +168,6 @@ class ProgramFactory {
 
             // $FlowFixMe
             await cachedProgram.programStages.asyncForEach(async (cachedProgramStage: CachedProgramStage) => {
-                // $FlowFixMe
                 program.addStage(
                     await this.programStageFactory.build(
                         cachedProgramStage,

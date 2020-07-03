@@ -16,7 +16,9 @@ const makeStateToProps = () => {
             }),
         };
     };
+    // $FlowFixMe[not-an-object] automated comment
     return mapStateToProps;
 };
 // $FlowSuppress
+// $FlowFixMe[missing-annot] automated comment
 export default connect(makeStateToProps, () => ({}))(ErrorsSection);

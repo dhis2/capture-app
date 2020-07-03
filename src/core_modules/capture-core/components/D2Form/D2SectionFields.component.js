@@ -4,7 +4,6 @@ import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import FormBuilder from 'capture-ui/FormBuilder/FormBuilder.component';
 import type { FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
-
 import FormBuilderContainer from './FormBuilder.container';
 import withDivider from './FieldDivider/withDivider';
 import withAlternateBackgroundColors from './FieldAlternateBackgroundColors/withAlternateBackgroundColors';
@@ -60,16 +59,12 @@ type Props = {
 };
 
 class D2SectionFields extends Component<Props> {
-    static defaultProps = {
-        values: {},
-    };
-
     static buildFormFields(props: Props): Array<FieldConfig> {
         const { fieldsMetaData, customForm, fieldOptions } = props;
 
-        // $FlowSuppress :does not recognize filter removing nulls
         return Array.from(fieldsMetaData.entries())
             .map(entry => entry[1])
+            // $FlowFixMe[incompatible-return] automated comment
             .map(metaDataElement => buildField(
                 metaDataElement,
                 {
@@ -91,6 +86,10 @@ class D2SectionFields extends Component<Props> {
     formBuilderInstance: ?FormBuilder;
     formFields: Array<FieldConfig>;
     rulesCompulsoryErrors: { [elementId: string]: boolean };
+
+    static defaultProps = {
+        values: {},
+    };
 
     constructor(props: Props) {
         super(props);
@@ -254,6 +253,7 @@ class D2SectionFields extends Component<Props> {
         this.buildRulesCompulsoryErrors();
 
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <CustomFormHOC
                 formBuilderRef={(instance) => { this.formBuilderInstance = instance; }}
                 id={formBuilderId}

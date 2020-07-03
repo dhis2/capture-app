@@ -43,7 +43,7 @@ export const teiSearchFilterOrgUnitsEpic = (action$: InputObservable) =>
         .concatMap((action) => {
             const searchText = action.payload.searchText;
             const searchId = action.payload.searchId;
-            
+
             return fromPromise(getD2()
                 .models
                 .organisationUnits

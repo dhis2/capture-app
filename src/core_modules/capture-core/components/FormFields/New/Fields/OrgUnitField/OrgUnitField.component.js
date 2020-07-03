@@ -52,10 +52,10 @@ type Props = {
 };
 
 class OrgUnitField extends React.Component<Props> {
+    classes: Object;
     static defaultProps = {
         roots: [],
     }
-    classes: Object;
     constructor(props: Props) {
         super(props);
         this.classes = {

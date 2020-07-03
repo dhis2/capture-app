@@ -10,9 +10,11 @@ type Props = {
 
 class OfflineEventsList extends React.Component<Props> {
     render() {
+        // $FlowFixMe[prop-missing] automated comment
         const { listId, noItemsText, emptyListText, ...passOnProps } = this.props;
 
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <OfflineListWrapper
                 listId={listId}
                 noItemsText={noItemsText || i18n.t('No events to display')}

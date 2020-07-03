@@ -134,6 +134,7 @@ class DateTimeRangeField extends React.Component<Props> {
         return (
             <div className={defaultClasses.container}>
                 <div className={defaultClasses.inputContainer}>
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <RangeInputField
                         dateLabel={i18n.t('From date')}
                         timeLabel={i18n.t('From time')}
@@ -145,6 +146,7 @@ class DateTimeRangeField extends React.Component<Props> {
                     {this.getInnerMessage(inputKeys.FROM)}
                 </div>
                 <div className={defaultClasses.inputContainer}>
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <RangeInputField
                         dateLabel={i18n.t('To date')}
                         timeLabel={i18n.t('To time')}

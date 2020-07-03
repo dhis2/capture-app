@@ -6,7 +6,7 @@ const MAIN_STORAGE_KEY = 'dhis2ca';
 
 function getMajorCacheVersion() {
     const appVersion = process.env.REACT_APP_VERSION;
-    // $FlowSuppress: Prechecked
+    // $FlowFixMe[incompatible-use] automated comment
     const appMajorVersion = Number(appVersion.split('.')[0]);
     return (appMajorVersion - 30) * 1000;
 }
@@ -15,7 +15,7 @@ function getMinorCacheVersion() {
     const appCacheVersionAsString = process.env.REACT_APP_CACHE_VERSION;
     const appCacheVersion = Number(appCacheVersionAsString);
     return appCacheVersion;
-}   
+}
 
 function getCacheVersion() {
     const majorCacheVersion = getMajorCacheVersion();

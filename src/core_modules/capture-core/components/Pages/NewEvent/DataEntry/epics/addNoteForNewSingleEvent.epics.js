@@ -13,16 +13,19 @@ import {
 import { getCurrentUser } from '../../../../../d2/d2Instance';
 
 export const addNoteForNewSingleEventEpic = (action$: InputObservable) =>
-    // $FlowSuppress
+
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(newEventDataEntryActionTypes.ADD_NEW_EVENT_NOTE)
         .map((action) => {
             const payload = action.payload;
+            // $FlowFixMe[prop-missing] automated comment
             const userName = getCurrentUser().username;
 
             const storedDate = moment().toISOString();
             const note = {
                 value: payload.note,
                 storedBy: userName,
+                // $FlowFixMe[prop-missing] automated comment
                 storedDate: convertListValue(storedDate, elementTypes.DATETIME),
                 clientId: uuid(),
             };

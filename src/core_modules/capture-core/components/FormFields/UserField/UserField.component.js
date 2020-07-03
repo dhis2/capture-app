@@ -63,6 +63,7 @@ const UserField = (props: Props) => {
             <Selected
                 user={value}
                 onClear={handleClear}
+                // $FlowFixMe[incompatible-type] automated comment
                 focusInputOnMount={focusSelectedInput.current}
             />
         );
@@ -73,6 +74,7 @@ const UserField = (props: Props) => {
             <Search
                 onSet={handleSet}
                 inputWrapperClasses={classes}
+                // $FlowFixMe[incompatible-type] automated comment
                 focusInputOnMount={focusSearchInput.current}
                 useUpwardList={useUpwardSuggestions}
                 inputPlaceholderText={inputPlaceholderText}

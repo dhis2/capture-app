@@ -60,6 +60,7 @@ class DragDropListItem extends Component<Props> {
         const { text, isDragging, connectDragSource, connectDropTarget } = this.props;
         const opacity = isDragging ? 0 : 1;
 
+        // $FlowFixMe[incompatible-extend] automated comment
         return connectDropTarget(connectDragSource(
             <tr key={this.props.id} tabIndex={-1} style={{ ...style, opacity }}>
                 <TableCell component="th" scope="row">

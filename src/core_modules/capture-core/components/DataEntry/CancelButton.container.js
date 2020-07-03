@@ -15,4 +15,5 @@ const mapStateToProps = (state: ReduxState, props: {id: string}) => {
 const mapDispatchToProps = () => ({
 });
 
+// $FlowFixMe[missing-annot] automated comment
 export default connect(mapStateToProps, mapDispatchToProps, null, { forwardRef: true })(CancelButton);

@@ -66,6 +66,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
 
         getFormVerticalButtons = (dataEntryHasChanges: ?boolean, hasRecentlyAddedEvents: ?boolean, saveTypes: ?Array<string>) => {
             const buttons = saveTypes ?
+                // $FlowFixMe[missing-annot] automated comment
                 saveTypes.map(saveType => this.getButtonDefinition(saveType)) :
                 [
                     this.getButtonDefinition(buttonTypes.SAVEANDEXIT),
@@ -114,6 +115,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
 
             const mainButton = this.renderMultiButton(buttons, hasWriteAccess, finalInProgress);
             return (
+                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     ref={(innerInstance) => { this.innerInstance = innerInstance; }}
                     mainButton={mainButton}
@@ -140,6 +142,7 @@ const mapDispatchToProps = () => ({});
 
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
-        // $FlowSuppress
+
+        // $FlowFixMe[missing-annot] automated comment
         connect(
             mapStateToProps, mapDispatchToProps)(getMainButton(InnerComponent));

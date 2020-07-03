@@ -54,6 +54,7 @@ class RelationshipTypesFactory {
         return new RelationshipType((o) => {
             o.id = cachedRelationshipType.id;
             o.name = cachedRelationshipType.displayName;
+            // $FlowFixMe[incompatible-type] automated comment
             o.from = this._convertConstraint(cachedRelationshipType.fromConstraint);
             o.to = this._convertConstraint(cachedRelationshipType.toConstraint);
             o.access = cachedRelationshipType.access;

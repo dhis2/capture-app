@@ -46,9 +46,7 @@ const EventListLoader = (props: Props) => {
         dirtyEventList,
     } = React.useContext(EventListLoaderContext);
 
-    const hasContextChanged = React.useMemo(() => {
-        return !onCheckSkipReload(programId, orgUnitId, categories, lastTransaction, listContext);
-    }, [
+    const hasContextChanged = React.useMemo(() => !onCheckSkipReload(programId, orgUnitId, categories, lastTransaction, listContext), [
         onCheckSkipReload,
         programId,
         orgUnitId,

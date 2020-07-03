@@ -4,6 +4,7 @@ import { errorCreator } from 'capture-core-utils';
 import { loadCore, actionTypes as coreActionTypes, batchActionTypes as coreBatchActionTypes } from 'capture-core/init';
 import { loadAppSuccess, loadAppFailed, actionTypes } from './entry.actions';
 
+// $FlowFixMe[cannot-resolve-name] automated comment
 export const triggerLoadCoreEpic = (action$: ActionsObservable) =>
     action$.ofType(actionTypes.APP_LOAD)
         .map(() => loadCore());

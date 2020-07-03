@@ -25,6 +25,8 @@ export const formsValuesDesc = createReducerDescription({
     [fieldActionTypes.UPDATE_FIELD]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
+        // todo (eslint)
+        // eslint-disable-next-line no-multi-assign
         const formValues = newState[payload.formId] = { ...newState[payload.formId] };
         formValues[payload.elementId] = payload.value;
         return newState;
@@ -42,6 +44,8 @@ export const formsValuesDesc = createReducerDescription({
     [dataEntryActionTypes.UPDATE_FORM_FIELD]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
+        // todo (eslint)
+        // eslint-disable-next-line no-multi-assign
         const formValues = newState[payload.formId] = { ...newState[payload.formId] };
         formValues[payload.elementId] = payload.value;
         return newState;
@@ -49,6 +53,8 @@ export const formsValuesDesc = createReducerDescription({
     [rulesEffectsActionTypes.UPDATE_FIELD_FROM_RULE_EFFECT]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
+        // todo (eslint)
+        // eslint-disable-next-line no-multi-assign
         const formValues = newState[payload.formId] = { ...newState[payload.formId] };
         formValues[payload.elementId] = payload.value;
         return newState;

@@ -302,6 +302,63 @@ msgstr "建议不能提取"
 msgid "No items to display"
 msgstr "无条目可显示"
 
+msgid "Could not get organisation unit"
+msgstr "不能获取机构"
+
+msgid "Program doesn't exist"
+msgstr "项目不存在"
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr "选择的项目对选择的机构无效"
+
+msgid "New {{typeName}}"
+msgstr "新建 {{typeName}}"
+
+msgid "New"
+msgstr "新建"
+
+msgid "Start again"
+msgstr "再开始"
+
+msgid "Find"
+msgstr "查询"
+
+msgid "Selected registering unit"
+msgstr "选择注册的机构"
+
+msgid "Start Again"
+msgstr "再开始"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "你确信？所以未保存的数据将丢失"
+
+msgid "Accept"
+msgstr "接受<br>"
+
+msgid "Registering Organisation Unit"
+msgstr "在注册的机构"
+
+msgid "Select"
+msgstr "选择"
+
+msgid "Selected Program"
+msgstr "选择的项目"
+
+msgid "Some programs are being filtered."
+msgstr "有些项目已经被过滤了"
+
+msgid "Show all"
+msgstr "显示全部"
+
+msgid "Program"
+msgstr "项目"
+
+msgid "Select program"
+msgstr "选择项目"
+
+msgid "No programs available."
+msgstr "无可用项目"
+
 msgid "Online"
 msgstr "在线"
 
@@ -449,15 +506,6 @@ msgstr "活动的"
 msgid "Completed"
 msgstr "已完成"
 
-msgid "Could not get organisation unit"
-msgstr "不能获取机构"
-
-msgid "Program doesn't exist"
-msgstr "项目不存在"
-
-msgid "Selected program is invalid for registering unit"
-msgstr "选择的项目对注册机构是有效的"
-
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "在 {{orgUnit}}的 {{program}} 中创建一个新的{{TET}} 实例"
 
@@ -486,9 +534,6 @@ msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
 msgstr "项目标识为 {{programId}}的项目不是跟踪随访项目，注册仅仅可能在跟踪随访项目里进行"
-
-msgid "Selected program is invalid for selected registering unit"
-msgstr "选择的项目对选择的机构无效"
 
 msgid "Assigned user"
 msgstr "分配的用户"
@@ -602,15 +647,6 @@ msgstr "隐藏"
 msgid "Save as new {{tetName}}"
 msgstr "保存为新的  {{tetName}}"
 
-msgid "Some programs are being filtered."
-msgstr "有些项目已经被过滤了"
-
-msgid "Show all"
-msgstr "显示全部"
-
-msgid "Program"
-msgstr "项目"
-
 msgid "Organisation Unit"
 msgstr "组织机构"
 
@@ -663,45 +699,6 @@ msgstr "事件被分配到  {{name}}"
 
 msgid "Feedbacks"
 msgstr "反馈"
-
-msgid "New {{typeName}}"
-msgstr "新建 {{typeName}}"
-
-msgid "New"
-msgstr "新建"
-
-msgid "Start again"
-msgstr "再开始"
-
-msgid "Find"
-msgstr "查询"
-
-msgid "Selected registering unit"
-msgstr "选择注册的机构"
-
-msgid "Start Again"
-msgstr "再开始"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "你确信？所以未保存的数据将丢失"
-
-msgid "Accept"
-msgstr "接受<br>"
-
-msgid "Registering Organisation Unit"
-msgstr "在注册的机构"
-
-msgid "Select"
-msgstr "选择"
-
-msgid "Selected Program"
-msgstr "选择的项目"
-
-msgid "Select program"
-msgstr "选择项目"
-
-msgid "No programs available."
-msgstr "无可用项目"
 
 msgid "You dont have access to delete this relationship"
 msgstr "你v不能访问删除的关系"

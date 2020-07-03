@@ -302,6 +302,63 @@ msgstr ""
 msgid "No items to display"
 msgstr ""
 
+msgid "Could not get organisation unit"
+msgstr ""
+
+msgid "Program doesn't exist"
+msgstr ""
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr ""
+
+msgid "New {{typeName}}"
+msgstr ""
+
+msgid "New"
+msgstr "Nuevo"
+
+msgid "Start again"
+msgstr ""
+
+msgid "Find"
+msgstr "Encontrar"
+
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Accept"
+msgstr "Aceptar"
+
+msgid "Registering Organisation Unit"
+msgstr ""
+
+msgid "Select"
+msgstr "Seleccionar"
+
+msgid "Selected Program"
+msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Show all"
+msgstr "Mostrar todo"
+
+msgid "Program"
+msgstr "Programa"
+
+msgid "Select program"
+msgstr "Seleccionar programa"
+
+msgid "No programs available."
+msgstr ""
+
 msgid "Online"
 msgstr "Conectado"
 
@@ -449,15 +506,6 @@ msgstr "Activo"
 msgid "Completed"
 msgstr "Completado"
 
-msgid "Could not get organisation unit"
-msgstr ""
-
-msgid "Program doesn't exist"
-msgstr ""
-
-msgid "Selected program is invalid for registering unit"
-msgstr ""
-
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
@@ -485,9 +533,6 @@ msgstr ""
 msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
-msgstr ""
-
-msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "Assigned user"
@@ -602,15 +647,6 @@ msgstr "Ocultar"
 msgid "Save as new {{tetName}}"
 msgstr ""
 
-msgid "Some programs are being filtered."
-msgstr ""
-
-msgid "Show all"
-msgstr "Mostrar todo"
-
-msgid "Program"
-msgstr "Programa"
-
 msgid "Organisation Unit"
 msgstr "Unidad Organizativa"
 
@@ -662,45 +698,6 @@ msgid "Event assigned to {{name}}"
 msgstr ""
 
 msgid "Feedbacks"
-msgstr ""
-
-msgid "New {{typeName}}"
-msgstr ""
-
-msgid "New"
-msgstr "Nuevo"
-
-msgid "Start again"
-msgstr ""
-
-msgid "Find"
-msgstr "Encontrar"
-
-msgid "Selected registering unit"
-msgstr ""
-
-msgid "Start Again"
-msgstr ""
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
-
-msgid "Accept"
-msgstr "Aceptar"
-
-msgid "Registering Organisation Unit"
-msgstr ""
-
-msgid "Select"
-msgstr "Seleccionar"
-
-msgid "Selected Program"
-msgstr ""
-
-msgid "Select program"
-msgstr "Seleccionar programa"
-
-msgid "No programs available."
 msgstr ""
 
 msgid "You dont have access to delete this relationship"

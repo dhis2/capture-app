@@ -18,6 +18,7 @@ const getStyles = (theme: Theme) => ({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
+    // $FlowFixMe[cannot-spread-inexact] automated comment
     header: {
         flexGrow: 1,
         ...theme.typography.title,

@@ -99,6 +99,7 @@ class ViewEventNewRelationshipWrapper extends React.Component<Props, State> {
                     </LinkButton>
                 </div>
                 <Paper className={classes.newRelationshipPaper}>
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <NewRelatonship
                         header={i18n.t('New event relationship')}
                         {...passOnProps}

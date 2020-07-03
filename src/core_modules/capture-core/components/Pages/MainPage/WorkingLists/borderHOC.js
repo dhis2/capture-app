@@ -21,7 +21,6 @@ type Props = {
 };
 
 export const withBorder = () => (InnerComponent: React.ComponentType<any>) =>
-    // $FlowFixMe
     withStyles(getStyles)(class BorderHOC extends React.Component<Props> {
         render() {
             const { classes, ...passOnProps } = this.props;

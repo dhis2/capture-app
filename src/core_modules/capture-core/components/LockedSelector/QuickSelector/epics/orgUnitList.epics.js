@@ -16,6 +16,7 @@ const RETRIEVE_ERROR = 'Could not retrieve registering unit list';
 
 // get organisation units based on search criteria
 export const searchRegisteringUnitListEpic = (action$: InputObservable) =>
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(orgUnitListActions.SEARCH_ORG_UNITS)
         .switchMap((action) => {
             const searchText = action.payload.searchText;
@@ -56,11 +57,13 @@ export const searchRegisteringUnitListEpic = (action$: InputObservable) =>
 
 // show loading indicator if api-request is not resolved when timeout expires
 export const showRegisteringUnitListIndicatorEpic = (action$: InputObservable) =>
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(orgUnitListActions.SEARCH_ORG_UNITS)
         .switchMap(() =>
             fromPromise(new Promise((resolve) => {
                 setTimeout(() => resolve(), LOADING_INDICATOR_TIMEOUT);
             }))
+                // $FlowFixMe[prop-missing] automated comment
                 .takeUntil(action$.ofType(
                     orgUnitListActions.SET_SEARCH_ROOTS,
                     orgUnitListActions.SET_SEARCH_ROOTS_FAILED)),
