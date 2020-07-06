@@ -6,7 +6,13 @@ export type AvailableSearchOptions = {
   [elementId: string]: {|
     +searchOptionId: string,
     +searchOptionName: string,
-    +searchGroups: Array<{|searchForm: RenderFoundation, unique: boolean, formId: string, searchScope: string|}>
+    +searchGroups: Array<{|
+      searchForm: RenderFoundation,
+      unique: boolean,
+      formId: string,
+      searchScope: string,
+      minAttributesRequiredToSearch: number
+    |}>
   |}
 }
 export type OwnProps = {|

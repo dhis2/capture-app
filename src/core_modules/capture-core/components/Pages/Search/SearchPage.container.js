@@ -14,7 +14,7 @@ const buildSearchOption = (id, name, searchGroups, searchScope) => ({
     searchOptionId: id,
     searchOptionName: name,
     searchGroups: [...searchGroups.values()]
-        .map(({ unique, searchForm }, index) => ({
+        .map(({ unique, searchForm, minAttributesRequiredToSearch }, index) => ({
             unique,
             searchForm,
             // We adding the `formId` here for the reason that we will use it in the SearchPage component.
@@ -23,6 +23,7 @@ const buildSearchOption = (id, name, searchGroups, searchScope) => ({
             // the store in order for the `Form` to function. For these reasons we generate it once here.
             formId: `searchPageForm-${id}-${index}`,
             searchScope,
+            minAttributesRequiredToSearch,
         })),
 });
 

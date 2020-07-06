@@ -27,6 +27,11 @@ const getStyles = (theme: Theme) => ({
         display: 'flex',
         alignItems: 'center',
     },
+    textWarning: {
+        textAlign: 'right',
+        fontSize: '14px',
+        flexGrow: 1,
+    },
 });
 
 const Index = ({
@@ -38,6 +43,7 @@ const Index = ({
     classes,
     availableSearchOptions,
     forms,
+    formsValues,
     searchStatus,
 }: Props) =>
     (useMemo(() => {
@@ -60,8 +66,18 @@ const Index = ({
             }
         };
 
-        const handleSearchViaAttributes = (selectedId, formId, searchScope) => {
-            const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
+        const isSearchViaAttributesValid = (minAttributesRequiredToSearch, formId) => {
+            const formValues = formsValues[formId] || {};
+            const numberOfAttributeSearchInputsWithValues =
+              Object.keys(formValues)
+                  .filter(key => formValues[key])
+                  .length;
+
+            return numberOfAttributeSearchInputsWithValues >= minAttributesRequiredToSearch;
+        };
+
+        const handleSearchViaAttributes = (selectedId, formId, searchScope, minAttributesRequiredToSearch) => {
+            const isValid = isSearchViaAttributesValid(minAttributesRequiredToSearch, formId);
 
             if (isValid) {
                 switch (searchScope) {
@@ -121,10 +137,11 @@ const Index = ({
                         );
                     })
             }
+
             {
                 selectedOptionId && availableSearchOptions[selectedOptionId].searchGroups
                     .filter(searchGroup => !searchGroup.unique)
-                    .map(({ searchForm, formId, searchScope }) => {
+                    .map(({ searchForm, formId, searchScope, minAttributesRequiredToSearch }) => {
                         const name = searchForm.getElements()[0].formName;
                         return (
                             <Section
@@ -155,10 +172,13 @@ const Index = ({
                                         disabled={searchStatus === searchPageStatus.LOADING}
                                         onClick={() =>
                                             selectedOptionId &&
-                                            handleSearchViaAttributes(selectedOptionId, formId, searchScope)}
+                                            handleSearchViaAttributes(selectedOptionId, formId, searchScope, minAttributesRequiredToSearch)}
                                     >
                                         Search by {name}
                                     </Button>
+                                    <div className={classes.textWarning}>
+                                        Fill in at least {minAttributesRequiredToSearch}  attributes to search
+                                    </div>
                                 </div>
                             </Section>
                         );
@@ -172,7 +192,9 @@ const Index = ({
         classes.searchDomainSelectorSection,
         classes.searchRowSelectElement,
         classes.searchRow,
+        classes.textWarning,
         forms,
+        formsValues,
         availableSearchOptions,
         selectedOptionId,
         searchStatus,

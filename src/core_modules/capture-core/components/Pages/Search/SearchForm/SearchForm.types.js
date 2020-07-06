@@ -9,6 +9,7 @@ export type OwnProps = {|
     +searchButtonContainer: string,
     +searchRow: string,
     +searchRowSelectElement: string,
+    +textWarning: string,
   |},
 |}
 
@@ -18,6 +19,9 @@ export type PropsFromRedux ={|
     [elementId: string]: {
       loadNr: number
     }
+  },
+  +formsValues: {
+    [elementId: string]: any
   },
   +searchStatus: string,
 |}
