@@ -6,7 +6,6 @@ export const searchPageStatus = {
     INITIAL: 'INITIAL',
     LOADING: 'LOADING',
     NO_RESULTS: 'NO_RESULTS',
-    SHOW_RESULTS: 'SHOW_RESULTS',
     ERROR: 'ERROR',
 };
 

@@ -89,7 +89,6 @@ const Index = ({
                         <div className={classes.searchButtonContainer}>
                             <Button
                                 disabled={searchStatus === searchPageStatus.LOADING}
-
                                 onClick={() =>
                                     selectedOptionId &&
                                     handleOnFindUsingUniqueIdentifier(selectedOptionId, formId, searchScope)}
