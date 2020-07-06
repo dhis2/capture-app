@@ -1,5 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { SearchPage as SearchPageComponent } from './SearchPage.component';
 import { programCollection } from '../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../../metaData/Program';
@@ -105,5 +106,10 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
     closeModal: () => { dispatch(actionCreator(searchPageActionTypes.MODAL_CLOSE)()); },
 });
 
-export const SearchPage = connect<Props, OwnProps, _, _, _, _>(mapStateToProps, mapDispatchToProps)(withLoadingIndicator()(withErrorMessageHandler()(SearchPageComponent)));
+export const SearchPage =
+  compose(
+      connect<Props, OwnProps, _, _, _, _>(mapStateToProps, mapDispatchToProps),
+      withLoadingIndicator(),
+      withErrorMessageHandler(),
+  )(SearchPageComponent);
 
