@@ -11,6 +11,9 @@ import Button from '../../Buttons/Button.component';
 import Form from '../../D2Form/D2Form.component';
 
 const getStyles = (theme: Theme) => ({
+    divider: {
+        padding: '8px',
+    },
     container: {
         padding: '10px 24px 24px 24px',
     },
@@ -120,10 +123,13 @@ const Index = ({
                                                 />,
                                                 tePrograms.map(({ programName, programId }) =>
                                                     (<SingleSelectOption value={programId} label={programName} />)),
-                                                <hr key={trackedEntityTypeId} />,
+                                                <div className={classes.divider} key={trackedEntityTypeId}>
+                                                    <hr />
+                                                </div>,
                                             ],
                                         ),
                                     [
+                                        classes.divider,
                                         trackedEntityTypesWithCorrelatedPrograms,
                                     ])
                                 }

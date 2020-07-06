@@ -15,6 +15,7 @@ export type OwnProps = {|
     +searchButtonContainer: string,
     +emptySelectionPaperContainer: string,
     +emptySelectionPaperContent: string,
+    +divider: string,
   |},
 |}
 
