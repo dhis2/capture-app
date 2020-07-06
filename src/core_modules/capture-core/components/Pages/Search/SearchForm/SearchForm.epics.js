@@ -12,6 +12,11 @@ import { actionCreator } from '../../../../actions/actions.utils';
 
 const trackerCaptureAppUrl = () => (process.env.REACT_APP_TRACKER_CAPTURE_APP_PATH || '..').replace(/\/$/, '');
 
+const searchQueryFiltersForUniqueId = (searchTerm) => {
+    const fieldId = Object.keys(searchTerm)[0];
+    return [`${fieldId}:eq:${searchTerm[fieldId]}`];
+};
+
 const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
     from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
         map(({ trackedEntityInstanceContainers }) => {
@@ -23,12 +28,16 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
                 window.location.href = `${oldTrackerCaptureAppUrl}${urlParameters}`;
                 return {};
             }
-            // trigger action that will display modal to inform user that results are empty.
             return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
         }),
         startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
         catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
     );
+
+const searchQueryFiltersForAttributes = formValues => Object.keys(formValues)
+    .filter(fieldId => formValues[fieldId].replace(/\s/g, '').length)
+    .map(fieldId => `${fieldId}:like:${formValues[fieldId]}`);
+
 
 const searchViaAttributesStream = (queryArgs, attributes) =>
     from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
@@ -43,16 +52,13 @@ const searchViaAttributesStream = (queryArgs, attributes) =>
         catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
     );
 
-
 export const searchViaUniqueIdOnScopeProgramEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH).pipe(
         flatMap(({ payload: { formId, programId } }) => {
             const { formsValues } = store.getState();
-            const searchTerm = formsValues[formId];
-            const fieldId = Object.keys(searchTerm)[0];
             const queryArgs = {
-                filter: [`${fieldId}:eq:${searchTerm[fieldId]}`],
+                filter: searchQueryFiltersForUniqueId(formsValues[formId]),
                 program: programId,
                 pageNumber: 1,
                 ouMode: 'ACCESSIBLE',
@@ -70,10 +76,8 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (action$: InputObse
     action$.ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH).pipe(
         flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
             const { formsValues } = store.getState();
-            const searchTerm = formsValues[formId];
-            const fieldId = Object.keys(searchTerm)[0];
             const queryArgs = {
-                filter: [`${fieldId}:eq:${searchTerm[fieldId]}`],
+                filter: searchQueryFiltersForUniqueId(formsValues[formId]),
                 trackedEntityType: trackedEntityTypeId,
                 pageNumber: 1,
                 ouMode: 'ACCESSIBLE',
@@ -90,13 +94,9 @@ export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, 
     action$.ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH).pipe(
         flatMap(({ payload: { formId, programId } }) => {
             const { formsValues } = store.getState();
-            const formValues = formsValues[formId];
-            const searchQueryFilters = Object.keys(formValues)
-                .filter(fieldId => formValues[fieldId].replace(/\s/g, '').length)
-                .map(fieldId => `${fieldId}:like:${formValues[fieldId]}`);
 
             const queryArgs = {
-                filter: searchQueryFilters,
+                filter: searchQueryFiltersForAttributes(formsValues[formId]),
                 program: programId,
                 pageNumber: 1,
                 ouMode: 'ACCESSIBLE',
@@ -112,13 +112,9 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (action$: InputOb
     action$.ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH).pipe(
         flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
             const { formsValues } = store.getState();
-            const formValues = formsValues[formId];
-            const searchQueryFilters = Object.keys(formValues)
-                .filter(fieldId => formValues[fieldId].replace(/\s/g, '').length)
-                .map(fieldId => `${fieldId}:like:${formValues[fieldId]}`);
 
             const queryArgs = {
-                filter: searchQueryFilters,
+                filter: searchQueryFiltersForAttributes(formsValues[formId]),
                 trackedEntityType: trackedEntityTypeId,
                 pageNumber: 1,
                 ouMode: 'ACCESSIBLE',
