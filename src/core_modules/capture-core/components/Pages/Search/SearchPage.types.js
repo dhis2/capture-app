@@ -19,11 +19,6 @@ export type OwnProps = {|
   |},
 |}
 
-export type DispatchersFromRedux = {|
-  addFormIdToReduxStore: (formId: string) => void,
-|}
-
-
 export type PropsFromRedux ={|
   +preselectedProgram: {|
     value: ?string,
@@ -43,7 +38,7 @@ export type PropsFromRedux ={|
     [elementId: string]: {|
       +searchOptionId: string,
       +searchOptionName: string,
-      +searchGroups: Array<{|searchForm: RenderFoundation, unique: boolean, formId: string|}>
+      +searchGroups: Array<{|searchForm: RenderFoundation, unique: boolean, formId: string, searchScope: string|}>
     |}
   },
   +forms: {
@@ -53,12 +48,16 @@ export type PropsFromRedux ={|
   },
   +error: boolean,
   +ready: boolean,
+  +searchStatus: string,
 |}
 
 export type DispatchersFromRedux = {|
-  findUsingUniqueIdentifier: ({| selectedProgramId: string, formId: string |}) => void,
+  onScopeProgramFindUsingUniqueIdentifier: ({| programId: string, formId: string |}) => void,
+  onScopeTrackedEntityTypeFindUsingUniqueIdentifier: ({| trackedEntityTypeId: string, formId: string |}) => void,
   addFormIdToReduxStore: (formId: string) => void,
   closeModal: () => void
+|}
+
 export type Props = {|
   ...OwnProps,
   ...DispatchersFromRedux,

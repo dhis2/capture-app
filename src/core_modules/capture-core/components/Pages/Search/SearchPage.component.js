@@ -18,6 +18,7 @@ import type { Props } from './SearchPage.types';
 import { Section, SectionHeaderSimple } from '../../Section';
 import Form from '../../D2Form/D2Form.component';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
+import { searchScopes } from './SearchPage.container';
 
 const getStyles = (theme: Theme) => ({
     divider: {
@@ -117,21 +118,37 @@ const SearchSelection =
       </Section>));
 
 const SearchInputFields =
-  withStyles(getStyles)(({ findUsingUniqueIdentifier, selectedOption, classes, availableSearchOptions, forms }) =>
+  withStyles(getStyles)(({
+      onScopeTrackedEntityTypeFindUsingUniqueIdentifier,
+      onScopeProgramFindUsingUniqueIdentifier,
+      selectedOption,
+      classes,
+      availableSearchOptions,
+      forms,
+  }) =>
       (useMemo(() => {
           const formReference = {};
 
-          const handleOnFindUsingUniqueIdentifier = (selectedProgramId, formId) => {
+          const handleOnFindUsingUniqueIdentifier = (selectedId, formId, searchScope) => {
               const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
 
               if (isValid) {
-                  findUsingUniqueIdentifier({ selectedProgramId, formId });
+                  switch (searchScope) {
+                  case searchScopes.PROGRAM:
+                      onScopeProgramFindUsingUniqueIdentifier({ programId: selectedId, formId });
+                      break;
+                  case searchScopes.TRACKED_ENTITY_TYPE:
+                      onScopeTrackedEntityTypeFindUsingUniqueIdentifier({ trackedEntityTypeId: selectedId, formId });
+                      break;
+                  default:
+                      break;
+                  }
               }
           };
 
           return selectedOption.value && availableSearchOptions[selectedOption.value].searchGroups
               .filter(searchGroup => searchGroup.unique)
-              .map(({ searchForm, formId }) => {
+              .map(({ searchForm, formId, searchScope }) => {
                   const name = searchForm.getElements()[0].formName;
                   return (
                       <Section
@@ -161,7 +178,7 @@ const SearchInputFields =
                               <Button
                                   onClick={() =>
                                       selectedOption.value &&
-                                        handleOnFindUsingUniqueIdentifier(selectedOption.value, formId)}
+                                        handleOnFindUsingUniqueIdentifier(selectedOption.value, formId, searchScope)}
                               >
                                   Find by {name}.
                               </Button>
@@ -178,7 +195,8 @@ const SearchInputFields =
           forms,
           availableSearchOptions,
           selectedOption.value,
-          findUsingUniqueIdentifier,
+          onScopeTrackedEntityTypeFindUsingUniqueIdentifier,
+          onScopeProgramFindUsingUniqueIdentifier,
       ])));
 
 
@@ -189,8 +207,9 @@ const Index = ({
     availableSearchOptions,
     forms,
     searchStatus,
-    findUsingUniqueIdentifier,
     addFormIdToReduxStore,
+    onScopeTrackedEntityTypeFindUsingUniqueIdentifier,
+    onScopeProgramFindUsingUniqueIdentifier,
     closeModal,
 }: Props) => {
     const [selectedOption, setSelected] = useState(preselectedProgram);
@@ -226,8 +245,10 @@ const Index = ({
                     selectedOption={selectedOption}
                 />
 
+                {/* TODO REFACTOR THIS WITH ITS OWN CONNECT ??? */}
                 <SearchInputFields
-                    findUsingUniqueIdentifier={findUsingUniqueIdentifier}
+                    onScopeTrackedEntityTypeFindUsingUniqueIdentifier={onScopeTrackedEntityTypeFindUsingUniqueIdentifier}
+                    onScopeProgramFindUsingUniqueIdentifier={onScopeProgramFindUsingUniqueIdentifier}
                     selectedOption={selectedOption}
                     availableSearchOptions={availableSearchOptions}
                     forms={forms}

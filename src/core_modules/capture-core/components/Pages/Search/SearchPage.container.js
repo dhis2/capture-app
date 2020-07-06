@@ -10,7 +10,7 @@ import { addFormData } from '../../D2Form/actions/form.actions';
 import { actionCreator } from '../../../actions/actions.utils';
 
 
-const buildSearchOption = (id, name, searchGroups) => ({
+const buildSearchOption = (id, name, searchGroups, searchScope) => ({
     searchOptionId: id,
     searchOptionName: name,
     searchGroups: [...searchGroups.values()]
@@ -22,14 +22,21 @@ const buildSearchOption = (id, name, searchGroups) => ({
             // Also the formId is passed in the `Form` component and needs to be identical with the one in
             // the store in order for the `Form` to function. For these reasons we generate it once here.
             formId: `searchPageForm-${id}-${index}`,
+            searchScope,
         })),
 });
 
 
 export const searchPageActionTypes = {
-    USING_UNIQUE_IDENTIFIER_FIND: 'FindUsingUniqueIdentifier',
+    SCOPE_PROGRAM_USING_UNIQUE_IDENTIFIER_FIND: 'ScopeProgramFindUsingUniqueIdentifier',
+    SCOPE_TRACKED_ENTITY_TYPE_USING_UNIQUE_IDENTIFIER_FIND: 'ScopeTrackedEntityTypeFindUsingUniqueIdentifier',
     SEARCH_RESULTS_EMPTY: 'SearchResultsEmpty',
     MODAL_CLOSE: 'CloseModal',
+};
+
+export const searchScopes = {
+    PROGRAM: 'PROGRAM',
+    TRACKED_ENTITY_TYPE: 'TRACKED_ENTITY_TYPE',
 };
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
@@ -76,10 +83,10 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         // $FlowFixMe https://github.com/facebook/flow/issues/2221
         .reduce((acc, { trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeSearchGroups, programs }) => ({
             ...acc,
-            [trackedEntityTypeId]: buildSearchOption(trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeSearchGroups),
+            [trackedEntityTypeId]: buildSearchOption(trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeSearchGroups, searchScopes.TRACKED_ENTITY_TYPE),
             ...programs.reduce((accumulated, { programId, programName, searchGroups }) => ({
                 ...accumulated,
-                [programId]: buildSearchOption(programId, programName, searchGroups),
+                [programId]: buildSearchOption(programId, programName, searchGroups, searchScopes.PROGRAM),
             }), {}),
         }), {});
 
@@ -99,8 +106,11 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
-    findUsingUniqueIdentifier: ({ selectedProgramId, formId }) => {
-        dispatch(actionCreator(searchPageActionTypes.USING_UNIQUE_IDENTIFIER_FIND)({ selectedProgramId, formId }));
+    onScopeTrackedEntityTypeFindUsingUniqueIdentifier: ({ trackedEntityTypeId, formId }) => {
+        dispatch(actionCreator(searchPageActionTypes.SCOPE_TRACKED_ENTITY_TYPE_USING_UNIQUE_IDENTIFIER_FIND)({ trackedEntityTypeId, formId }));
+    },
+    onScopeProgramFindUsingUniqueIdentifier: ({ programId, formId }) => {
+        dispatch(actionCreator(searchPageActionTypes.SCOPE_PROGRAM_USING_UNIQUE_IDENTIFIER_FIND)({ programId, formId }));
     },
     addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
     closeModal: () => { dispatch(actionCreator(searchPageActionTypes.MODAL_CLOSE)()); },
