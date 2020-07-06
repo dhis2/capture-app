@@ -63,14 +63,14 @@ const Index = ({
     classes,
     trackedEntityTypesWithCorrelatedPrograms,
     preselectedProgram,
-    programs,
+    availableSearchOptions,
     addFormIdToReduxStore,
     forms,
 }: Props) => {
     const [selectedOption, setSelected] = useState(preselectedProgram);
 
     // dan abramov suggest to stringify https://twitter.com/dan_abramov/status/1104414469629898754?lang=en
-    const stringifyPrograms = JSON.stringify(programs);
+    const stringifyPrograms = JSON.stringify(availableSearchOptions);
     useEffect(() => {
         // in order for the Form component to render
         // need to add a formId under the `forms` reducer
@@ -138,9 +138,8 @@ const Index = ({
                     </div>
                 </Section>
 
-
                 {
-                    selectedOption.value && programs[selectedOption.value].searchGroups
+                    selectedOption.value && availableSearchOptions[selectedOption.value].searchGroups
                         .filter(searchGroup => searchGroup.unique)
                         .map(({ searchForm, formId }) => {
                             const name = searchForm.getElements()[0].formName;

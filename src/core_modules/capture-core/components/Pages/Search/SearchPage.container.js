@@ -7,6 +7,22 @@ import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import type { DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './SearchPage.types';
 import { addFormData } from '../../D2Form/actions/form.actions';
 
+
+const buildSearchOption = (id, name, searchGroups) => ({
+    searchOptionId: id,
+    searchOptionName: name,
+    searchGroups: [...searchGroups.values()]
+        .map(({ unique, searchForm }, index) => ({
+            unique,
+            searchForm,
+            // We adding the `formId` here for the reason that we will use it in the SearchPage component.
+            // Specifically the function `addFormData` will add an object for each input field to the store.
+            // Also the formId is passed in the `Form` component and needs to be identical with the one in
+            // the store in order for the `Form` to function. For these reasons we generate it once here.
+            formId: `searchPageForm-${id}-${index}`,
+        })),
+});
+
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const { currentSelections, activePage } = state;
 
@@ -17,7 +33,11 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
           .reduce((acc, {
               id: programId,
               name: programName,
-              trackedEntityType: { id: trackedEntityTypeId, name: trackedEntityTypeName },
+              trackedEntityType: {
+                  id: trackedEntityTypeId,
+                  name: trackedEntityTypeName,
+                  searchGroups: trackedEntityTypeSearchGroups,
+              },
               searchGroups,
           }: TrackerProgram) => {
               const accumulatedProgramsOfTrackedEntityType =
@@ -27,6 +47,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
                   [trackedEntityTypeId]: {
                       trackedEntityTypeId,
                       trackedEntityTypeName,
+                      trackedEntityTypeSearchGroups,
                       programs: [
                           ...accumulatedProgramsOfTrackedEntityType,
                           { programId, programName, searchGroups },
@@ -42,25 +63,15 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
             programs.find(({ programId }) => programId === currentSelections.programId))
         .filter(program => program)[0];
 
-    const programs = Object.values(trackedEntityTypesWithCorrelatedPrograms)
+    const availableSearchOptions = Object.values(trackedEntityTypesWithCorrelatedPrograms)
         // $FlowFixMe https://github.com/facebook/flow/issues/2221
-        .flatMap(({ programs: tePrograms }) => tePrograms)
-        .reduce((acc, { programId, programName, searchGroups }) => ({
+        .reduce((acc, { trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeSearchGroups, programs }) => ({
             ...acc,
-            [programId]: {
-                programId,
-                programName,
-                // We adding the `formId` here for the reason that we will use it in the SearchPage component.
-                // Specifically the function `addFormData` will add an object for each input field to the store.
-                // Also the formId is passed in the `Form` component and needs to be identical with the one in
-                // the store in order for the `Form` to function. For these reasons we generate it once here.
-                searchGroups: [...searchGroups.values()]
-                    .map(({ unique, searchForm }, index) => ({
-                        unique,
-                        searchForm,
-                        formId: `searchPageForm-${programId}-${index}`,
-                    })),
-            },
+            [trackedEntityTypeId]: buildSearchOption(trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeSearchGroups),
+            ...programs.reduce((accumulated, { programId, programName, searchGroups }) => ({
+                ...accumulated,
+                [programId]: buildSearchOption(programId, programName, searchGroups),
+            }), {}),
         }), {});
 
     return {
@@ -68,7 +79,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
             value: preselectedProgram && preselectedProgram.programId,
             label: preselectedProgram && preselectedProgram.programName,
         },
-        programs,
+        availableSearchOptions,
         forms: state.forms,
         trackedEntityTypesWithCorrelatedPrograms,
         error: activePage.selectionsError && activePage.selectionsError.error,

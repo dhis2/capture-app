@@ -39,10 +39,10 @@ export type PropsFromRedux ={|
       |}>
     |}
   },
-  +programs: {
+  +availableSearchOptions: {
     [elementId: string]: {|
-      +programId: string,
-      +programName: string,
+      +searchOptionId: string,
+      +searchOptionName: string,
       +searchGroups: Array<{|searchForm: RenderFoundation, unique: boolean, formId: string|}>
     |}
   },
