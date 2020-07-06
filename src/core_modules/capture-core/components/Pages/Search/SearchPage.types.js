@@ -1,5 +1,22 @@
 // @flow
-export type PropsFromRedux = {|
+
+export type OwnProps = {|
+  +classes: {|
+    +container: string,
+    +header: string,
+    +paper: string,
+    +customEmpty: string,
+    +searchDomainSelectorSection: string,
+    +searchRow: string,
+    +searchRowTitle: string,
+    +searchRowSelectElement: string,
+  |},
+|}
+
+
+export type Props = {|
+  ...OwnProps,
+  dispatch: ReduxDispatch,
   +preselectedProgram: {|
     value: ?string,
     label: ?string
@@ -18,18 +35,3 @@ export type PropsFromRedux = {|
   +ready: boolean,
 |}
 
-export type OwnProps = {|
-  +classes: {|
-    +container: string,
-    +header: string,
-    +paper: string,
-    +customEmpty: string,
-    +groupTitle: string,
-    +searchDomainSelectorSection: string,
-    +searchRow: string,
-    +searchRowTitle: string,
-    +searchRowSelectElement: string,
-  |},
-|}
-
-export type Props = PropsFromRedux & OwnProps

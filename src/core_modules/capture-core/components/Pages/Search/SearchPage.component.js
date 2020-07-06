@@ -22,11 +22,6 @@ const getStyles = (theme: Theme) => ({
         textAlign: 'center',
         padding: '8px 24px',
     },
-    groupTitle: {
-        padding: '16px 12px',
-        fontWeight: 500,
-        fontSize: 16,
-    },
     searchDomainSelectorSection: {
         maxWidth: theme.typography.pxToRem(900),
         marginBottom: theme.typography.pxToRem(20),
@@ -87,19 +82,12 @@ const Index = ({ classes, trackedEntityTypesWithCorrelatedPrograms, preselectedP
                                                 />,
                                                 programs.map(({ programName, programId }) =>
                                                     (<SingleSelectOption value={programId} label={programName} />)),
-                                                <div
-                                                    className={classes.groupTitle}
-                                                    key={trackedEntityTypeId}
-                                                >
-                                                    --------------------------
-                                                </div>,
+                                                <hr key={trackedEntityTypeId} />,
                                             ],
                                         ),
                                     [
                                         trackedEntityTypesWithCorrelatedPrograms,
-                                        classes.groupTitle,
-                                    ],
-                                    )
+                                    ])
                                 }
                             </SingleSelect>
                         </div>
