@@ -31,6 +31,11 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => {
                 actionCreator(VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH)({ programId, formId }),
             );
         },
+        searchViaAttributesOnScopeTrackedEntityType: ({ trackedEntityTypeId, formId }) => {
+            dispatch(
+                actionCreator(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH)({ trackedEntityTypeId, formId }),
+            );
+        },
         searchViaAttributesOnScopeProgram: ({ programId, formId }) => {
             dispatch(
                 actionCreator(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH)({ programId, formId }),

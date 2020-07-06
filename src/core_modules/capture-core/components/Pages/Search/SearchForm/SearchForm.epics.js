@@ -12,7 +12,39 @@ import { actionCreator } from '../../../../actions/actions.utils';
 
 const trackerCaptureAppUrl = () => (process.env.REACT_APP_TRACKER_CAPTURE_APP_PATH || '..').replace(/\/$/, '');
 
-export const onScopeProgramFindUsingUniqueIdentifierEpic = (action$: InputObservable, store: ReduxStore) =>
+const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
+    from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
+        map(({ trackedEntityInstanceContainers }) => {
+            const searchResults = trackedEntityInstanceContainers;
+            if (searchResults.length > 0) {
+                const { id, tei: { orgUnit: orgUnitId } } = searchResults[0];
+                const oldTrackerCaptureAppUrl = trackerCaptureAppUrl();
+                const urlParameters = `/#/dashboard?tei=${id}&ou=${orgUnitId}&${scopeSearchParam}`;
+                window.location.href = `${oldTrackerCaptureAppUrl}${urlParameters}`;
+                return {};
+            }
+            // trigger action that will display modal to inform user that results are empty.
+            return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
+        }),
+        startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
+        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
+    );
+
+const searchViaAttributesStream = (queryArgs, attributes) =>
+    from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
+        map(({ trackedEntityInstanceContainers }) => {
+            const searchResults = trackedEntityInstanceContainers;
+            if (searchResults.length > 0) {
+                return actionCreator(searchPageActionTypes.SEARCH_RESULTS_SUCCESS)({ searchResults });
+            }
+            return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
+        }),
+        startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
+        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
+    );
+
+
+export const searchViaUniqueIdOnScopeProgramEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH).pipe(
         flatMap(({ payload: { formId, programId } }) => {
@@ -28,28 +60,12 @@ export const onScopeProgramFindUsingUniqueIdentifierEpic = (action$: InputObserv
 
             const attributes = getTrackerProgramThrowIfNotFound(programId).attributes;
 
-            return from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
-                map(({ trackedEntityInstanceContainers }) => {
-                    const searchResults = trackedEntityInstanceContainers;
-                    if (searchResults.length > 0) {
-                        const { id: trackedEntityInstanceId, tei: { orgUnit: orgUnitId } } = searchResults[0];
-                        const oldTrackerCaptureAppUrl = trackerCaptureAppUrl();
-                        const urlParameters =
-                          `/#/dashboard?tei=${trackedEntityInstanceId}&ou=${orgUnitId}&program=${programId}`;
-                        window.location.href = `${oldTrackerCaptureAppUrl}${urlParameters}`;
-                        return {};
-                    }
-                    // trigger action that will display modal to inform user that results are empty.
-                    return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
-                }),
-                startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
-                catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)(null, null, true))),
-            );
+            return searchViaUniqueIdStream(queryArgs, attributes, `program=${programId}`);
         }),
     );
 
 
-export const onScopeTrackedEntityTypeFindUsingUniqueIdentifierEpic = (action$: InputObservable, store: ReduxStore) =>
+export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH).pipe(
         flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
@@ -65,27 +81,11 @@ export const onScopeTrackedEntityTypeFindUsingUniqueIdentifierEpic = (action$: I
 
             const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
 
-            return from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
-                map(({ trackedEntityInstanceContainers }) => {
-                    const searchResults = trackedEntityInstanceContainers;
-                    if (searchResults.length > 0) {
-                        const { id: trackedEntityInstanceId, tei: { orgUnit: orgUnitId } } = searchResults[0];
-                        const oldTrackerCaptureAppUrl = trackerCaptureAppUrl();
-                        const urlParameters =
-                          `/#/dashboard?tei=${trackedEntityInstanceId}&ou=${orgUnitId}&trackedEntityType=${trackedEntityTypeId}`;
-                        window.location.href = `${oldTrackerCaptureAppUrl}${urlParameters}`;
-                        return {};
-                    }
-                    // trigger action that will display modal to inform user that results are empty.
-                    return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
-                }),
-                startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
-                catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)(null, null, true))),
-            );
+            return searchViaUniqueIdStream(queryArgs, attributes, `trackedEntityType=${trackedEntityTypeId}`);
         }),
     );
 
-export const trackedEntitySearchUsingAttributesEpic = (action$: InputObservable, store: ReduxStore) =>
+export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH).pipe(
         flatMap(({ payload: { formId, programId } }) => {
@@ -103,16 +103,29 @@ export const trackedEntitySearchUsingAttributesEpic = (action$: InputObservable,
             };
             const attributes = getTrackerProgramThrowIfNotFound(programId).attributes;
 
-            return from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
-                map(({ trackedEntityInstanceContainers }) => {
-                    const searchResults = trackedEntityInstanceContainers;
-                    if (searchResults.length > 0) {
-                        return actionCreator(searchPageActionTypes.SEARCH_RESULTS_SUCCESS)({ searchResults });
-                    }
-                    return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
-                }),
-                startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
-                catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)(null, null, true))),
-            );
+            return searchViaAttributesStream(queryArgs, attributes);
+        }),
+    );
+
+export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (action$: InputObservable, store: ReduxStore) =>
+    // $FlowFixMe[prop-missing] automated comment
+    action$.ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH).pipe(
+        flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
+            const { formsValues } = store.getState();
+            const formValues = formsValues[formId];
+            const searchQueryFilters = Object.keys(formValues)
+                .filter(fieldId => formValues[fieldId].replace(/\s/g, '').length)
+                .map(fieldId => `${fieldId}:like:${formValues[fieldId]}`);
+
+            const queryArgs = {
+                filter: searchQueryFilters,
+                trackedEntityType: trackedEntityTypeId,
+                pageNumber: 1,
+                ouMode: 'ACCESSIBLE',
+            };
+
+            const attributes = getTrackedEntityTypeThrowIfNotFound(trackedEntityTypeId).attributes;
+
+            return searchViaAttributesStream(queryArgs, attributes);
         }),
     );

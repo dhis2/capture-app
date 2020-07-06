@@ -33,6 +33,7 @@ const Index = ({
     searchViaUniqueIdOnScopeTrackedEntityType,
     searchViaUniqueIdOnScopeProgram,
     searchViaAttributesOnScopeProgram,
+    searchViaAttributesOnScopeTrackedEntityType,
     selectedOptionId,
     classes,
     availableSearchOptions,
@@ -42,7 +43,7 @@ const Index = ({
     (useMemo(() => {
         const formReference = {};
 
-        const handleOnFindUsingUniqueIdentifier = (selectedId, formId, searchScope) => {
+        const handleSearchViaUniqueId = (selectedId, formId, searchScope) => {
             const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
 
             if (isValid) {
@@ -52,6 +53,23 @@ const Index = ({
                     break;
                 case searchScopes.TRACKED_ENTITY_TYPE:
                     searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: selectedId, formId });
+                    break;
+                default:
+                    break;
+                }
+            }
+        };
+
+        const handleSearchViaAttributes = (selectedId, formId, searchScope) => {
+            const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
+
+            if (isValid) {
+                switch (searchScope) {
+                case searchScopes.PROGRAM:
+                    searchViaAttributesOnScopeProgram({ programId: selectedId, formId });
+                    break;
+                case searchScopes.TRACKED_ENTITY_TYPE:
+                    searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: selectedId, formId });
                     break;
                 default:
                     break;
@@ -94,7 +112,7 @@ const Index = ({
                                         disabled={searchStatus === searchPageStatus.LOADING}
                                         onClick={() =>
                                             selectedOptionId &&
-                                            handleOnFindUsingUniqueIdentifier(selectedOptionId, formId, searchScope)}
+                                            handleSearchViaUniqueId(selectedOptionId, formId, searchScope)}
                                     >
                                         Find by {name}.
                                     </Button>
@@ -106,7 +124,7 @@ const Index = ({
             {
                 selectedOptionId && availableSearchOptions[selectedOptionId].searchGroups
                     .filter(searchGroup => !searchGroup.unique)
-                    .map(({ searchForm, formId }) => {
+                    .map(({ searchForm, formId, searchScope }) => {
                         const name = searchForm.getElements()[0].formName;
                         return (
                             <Section
@@ -137,7 +155,7 @@ const Index = ({
                                         disabled={searchStatus === searchPageStatus.LOADING}
                                         onClick={() =>
                                             selectedOptionId &&
-                                            searchViaAttributesOnScopeProgram({ programId: selectedOptionId, formId })}
+                                            handleSearchViaAttributes(selectedOptionId, formId, searchScope)}
                                     >
                                         Search by {name}
                                     </Button>
@@ -161,6 +179,7 @@ const Index = ({
         searchViaUniqueIdOnScopeTrackedEntityType,
         searchViaUniqueIdOnScopeProgram,
         searchViaAttributesOnScopeProgram,
+        searchViaAttributesOnScopeTrackedEntityType,
     ]));
 
 

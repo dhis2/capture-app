@@ -30,6 +30,7 @@ export const searchPageActionTypes = {
     VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH: 'SearchViaUniqueIdOnScopeProgram',
     VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH: 'SearchViaUniqueIdOnScopeTrackedEntityType',
     VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH: 'SearchViaAttributesOnScopeProgram',
+    VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH: 'SearchViaAttributesOnScopeTrackedEntityType',
     SEARCH_RESULTS_LOADING: 'SearchResultsLoading',
     SEARCH_RESULTS_EMPTY: 'SearchResultsEmpty',
     SEARCH_RESULTS_SUCCESS: 'SearchResultsSuccess',
