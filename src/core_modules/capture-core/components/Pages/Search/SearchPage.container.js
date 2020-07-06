@@ -4,7 +4,7 @@ import { SearchPage as SearchPageComponent } from './SearchPage.component';
 import { programCollection } from '../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../../metaData/Program';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
-import type { DispatchersFromRedux, PropsFromRedux } from "./SearchPage.types";
+import type { DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './SearchPage.types';
 import { addFormData } from '../../D2Form/actions/form.actions';
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
@@ -43,7 +43,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         .filter(program => program)[0];
 
     const programs = Object.values(trackedEntityTypesWithCorrelatedPrograms)
-        // $FlowSuppress https://github.com/facebook/flow/issues/2221
+        // $FlowFixMe https://github.com/facebook/flow/issues/2221
         .flatMap(({ programs: tePrograms }) => tePrograms)
         .reduce((acc, { programId, programName, searchGroups }) => ({
             ...acc,
@@ -80,4 +80,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
     addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
 });
 
-export const SearchPage = connect(mapStateToProps, mapDispatchToProps)(withLoadingIndicator()(withErrorMessageHandler()(SearchPageComponent)));
+export const SearchPage = connect<Props, OwnProps, _, _, _, _>(mapStateToProps, mapDispatchToProps)(withLoadingIndicator()(withErrorMessageHandler()(SearchPageComponent)));
+

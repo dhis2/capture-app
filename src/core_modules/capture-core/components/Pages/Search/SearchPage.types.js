@@ -1,7 +1,29 @@
 // @flow
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 
-export type PropsFromRedux = {
+export type OwnProps = {|
+  +classes: {|
+    +container: string,
+    +header: string,
+    +paper: string,
+    +customEmpty: string,
+    +groupTitle: string,
+    +searchDomainSelectorSection: string,
+    +searchRow: string,
+    +searchRowTitle: string,
+    +searchRowSelectElement: string,
+    +searchButtonContainer: string,
+    +emptySelectionPaperContainer: string,
+    +emptySelectionPaperContent: string,
+  |},
+|}
+
+export type DispatchersFromRedux = {|
+  addFormIdToReduxStore: (formId: string) => void,
+|}
+
+
+export type PropsFromRedux ={|
   +preselectedProgram: {|
     value: ?string,
     label: ?string
@@ -28,27 +50,13 @@ export type PropsFromRedux = {
       loadNr: number
     }
   },
-}
-
-export type DispatchersFromRedux = {|
-  addFormIdToReduxStore: (formId: string) => void,
+  +error: boolean,
+  +ready: boolean,
 |}
 
-
-export type Props =
-  DispatchersFromRedux & PropsFromRedux & {|
-  +classes: {|
-    +container: string,
-    +header: string,
-    +paper: string,
-    +customEmpty: string,
-    +groupTitle: string,
-    +searchDomainSelectorSection: string,
-    +searchRow: string,
-    +searchRowTitle: string,
-    +searchRowSelectElement: string,
-    +searchButtonContainer: string,
-    +emptySelectionPaperContainer: string,
-    +emptySelectionPaperContent: string,
-  |},
+export type Props = {|
+  ...OwnProps,
+  ...DispatchersFromRedux,
+  ...PropsFromRedux
 |}
+

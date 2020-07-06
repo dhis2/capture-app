@@ -87,6 +87,7 @@ function convertToClientEvent(event: ApiTEIEvent) {
     }
 
     const dataValuesById = getValuesById(event.dataValues);
+    // $FlowFixMe[prop-missing] automated comment
     const convertedDataValues = stageMetaData.convertValues(dataValuesById, convertValue);
 
     const convertedMainProperties = convertMainProperties(event);
