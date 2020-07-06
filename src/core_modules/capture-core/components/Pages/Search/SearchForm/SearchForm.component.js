@@ -29,8 +29,8 @@ const getStyles = (theme: Theme) => ({
 });
 
 const Index = ({
-    onScopeTrackedEntityTypeFindUsingUniqueIdentifier,
-    onScopeProgramFindUsingUniqueIdentifier,
+    searchViaUniqueIdOnScopeTrackedEntityType,
+    searchViaUniqueIdOnScopeProgram,
     selectedOptionId,
     classes,
     availableSearchOptions,
@@ -45,10 +45,10 @@ const Index = ({
             if (isValid) {
                 switch (searchScope) {
                 case searchScopes.PROGRAM:
-                    onScopeProgramFindUsingUniqueIdentifier({ programId: selectedId, formId });
+                    searchViaUniqueIdOnScopeProgram({ programId: selectedId, formId });
                     break;
                 case searchScopes.TRACKED_ENTITY_TYPE:
-                    onScopeTrackedEntityTypeFindUsingUniqueIdentifier({ trackedEntityTypeId: selectedId, formId });
+                    searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: selectedId, formId });
                     break;
                 default:
                     break;
@@ -105,8 +105,8 @@ const Index = ({
         forms,
         availableSearchOptions,
         selectedOptionId,
-        onScopeTrackedEntityTypeFindUsingUniqueIdentifier,
-        onScopeProgramFindUsingUniqueIdentifier,
+        searchViaUniqueIdOnScopeTrackedEntityType,
+        searchViaUniqueIdOnScopeProgram,
     ]));
 
 

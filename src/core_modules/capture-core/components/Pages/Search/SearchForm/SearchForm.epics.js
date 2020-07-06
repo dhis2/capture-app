@@ -14,7 +14,7 @@ const trackerCaptureAppUrl = () => (process.env.REACT_APP_TRACKER_CAPTURE_APP_PA
 
 export const onScopeProgramFindUsingUniqueIdentifierEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(searchPageActionTypes.SCOPE_PROGRAM_USING_UNIQUE_IDENTIFIER_FIND).pipe(
+    action$.ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH).pipe(
         flatMap(({ payload: { formId, programId } }) => {
             const { formsValues } = store.getState();
             const searchTerm = formsValues[formId];
@@ -49,7 +49,7 @@ export const onScopeProgramFindUsingUniqueIdentifierEpic = (action$: InputObserv
 
 export const onScopeTrackedEntityTypeFindUsingUniqueIdentifierEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(searchPageActionTypes.SCOPE_TRACKED_ENTITY_TYPE_USING_UNIQUE_IDENTIFIER_FIND).pipe(
+    action$.ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH).pipe(
         flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
             const { formsValues } = store.getState();
             const searchTerm = formsValues[formId];

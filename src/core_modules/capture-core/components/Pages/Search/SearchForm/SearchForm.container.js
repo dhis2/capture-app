@@ -15,19 +15,19 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => {
     const {
-        SCOPE_TRACKED_ENTITY_TYPE_USING_UNIQUE_IDENTIFIER_FIND,
-        SCOPE_PROGRAM_USING_UNIQUE_IDENTIFIER_FIND,
+        VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH,
+        VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH,
     } = searchPageActionTypes;
 
     return {
-        onScopeTrackedEntityTypeFindUsingUniqueIdentifier: ({ trackedEntityTypeId, formId }) => {
+        searchViaUniqueIdOnScopeTrackedEntityType: ({ trackedEntityTypeId, formId }) => {
             dispatch(
-                actionCreator(SCOPE_TRACKED_ENTITY_TYPE_USING_UNIQUE_IDENTIFIER_FIND)({ trackedEntityTypeId, formId }),
+                actionCreator(VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH)({ trackedEntityTypeId, formId }),
             );
         },
-        onScopeProgramFindUsingUniqueIdentifier: ({ programId, formId }) => {
+        searchViaUniqueIdOnScopeProgram: ({ programId, formId }) => {
             dispatch(
-                actionCreator(SCOPE_PROGRAM_USING_UNIQUE_IDENTIFIER_FIND)({ programId, formId }),
+                actionCreator(VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH)({ programId, formId }),
             );
         },
     };
