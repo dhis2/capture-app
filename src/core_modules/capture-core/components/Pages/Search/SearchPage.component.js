@@ -67,6 +67,121 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
+const SearchSelection =
+  withStyles(getStyles)(({ trackedEntityTypesWithCorrelatedPrograms, classes, setSelected, selectedOption }) =>
+      (<Section
+          className={classes.searchDomainSelectorSection}
+          header={
+              <SectionHeaderSimple
+                  containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
+                  title={i18n.t('Search')}
+              />
+          }
+      >
+          <div className={classes.searchRow} style={{ padding: '8px 0' }}>
+              <div className={classes.searchRowTitle}>Search for</div>
+              <div className={classes.searchRowSelectElement} style={{ marginRight: 8 }}>
+                  <SingleSelect
+                      onChange={({ selected }) => { setSelected(selected); }}
+                      selected={selectedOption}
+                      empty={<div className={classes.customEmpty}>Custom empty component</div>}
+                  >
+                      {
+                          useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
+                          // $FlowFixMe https://github.com/facebook/flow/issues/2221
+                              .map(({ trackedEntityTypeName, trackedEntityTypeId, programs: tePrograms }) =>
+                              // SingleSelect component wont allow us to wrap the SingleSelectOption
+                              // in any other element and still make use of the default behaviour.
+                              // Therefore we are returning the group title and the
+                              // SingleSelectOption in an array.
+                                  [
+                                      <SingleSelectOption
+                                          value={trackedEntityTypeId}
+                                          label={trackedEntityTypeName}
+                                      />,
+                                      tePrograms.map(({ programName, programId }) =>
+                                          (<SingleSelectOption value={programId} label={programName} />)),
+                                      <div className={classes.divider} key={trackedEntityTypeId}>
+                                          <hr />
+                                      </div>,
+                                  ],
+                              ),
+                          [
+                              classes.divider,
+                              trackedEntityTypesWithCorrelatedPrograms,
+                          ])
+                      }
+                  </SingleSelect>
+              </div>
+          </div>
+      </Section>));
+
+const SearchInputFields =
+  withStyles(getStyles)(({ findUsingUniqueIdentifier, selectedOption, classes, availableSearchOptions, forms }) =>
+      (useMemo(() => {
+          const formReference = {};
+
+          const handleOnFindUsingUniqueIdentifier = (selectedProgramId, formId) => {
+              const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
+
+              if (isValid) {
+                  findUsingUniqueIdentifier({ selectedProgramId, formId });
+              }
+          };
+
+          return selectedOption.value && availableSearchOptions[selectedOption.value].searchGroups
+              .filter(searchGroup => searchGroup.unique)
+              .map(({ searchForm, formId }) => {
+                  const name = searchForm.getElements()[0].formName;
+                  return (
+                      <Section
+                          className={classes.searchDomainSelectorSection}
+                          header={
+                              <SectionHeaderSimple
+                                  containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
+                                  title={i18n.t('Search {{name}}', { name })}
+                              />
+                          }
+                      >
+                          <div className={classes.searchRow}>
+                              <div className={classes.searchRowSelectElement}>
+                                  {
+                                      forms[formId] &&
+                                      <Form
+                                          formRef={
+                                              (formInstance) => { formReference[formId] = formInstance; }
+                                          }
+                                          formFoundation={searchForm}
+                                          id={formId}
+                                      />
+                                  }
+                              </div>
+                          </div>
+                          <div className={classes.searchButtonContainer}>
+                              <Button
+                                  onClick={() =>
+                                      selectedOption.value &&
+                                        handleOnFindUsingUniqueIdentifier(selectedOption.value, formId)}
+                              >
+                                  Find by {name}.
+                              </Button>
+                          </div>
+                      </Section>
+                  );
+              });
+      },
+      [
+          classes.searchButtonContainer,
+          classes.searchDomainSelectorSection,
+          classes.searchRowSelectElement,
+          classes.searchRow,
+          forms,
+          availableSearchOptions,
+          selectedOption.value,
+          findUsingUniqueIdentifier,
+      ])));
+
+
 const Index = ({
     classes,
     trackedEntityTypesWithCorrelatedPrograms,
@@ -80,7 +195,6 @@ const Index = ({
 }: Props) => {
     const [selectedOption, setSelected] = useState(preselectedProgram);
 
-    const formReference = {};
 
     // dan abramov suggest to stringify https://twitter.com/dan_abramov/status/1104414469629898754?lang=en
     // so that useEffect can do the comparison
@@ -105,114 +219,19 @@ const Index = ({
         <LockedSelector />
         <div className={classes.container}>
             <Paper className={classes.paper}>
-                <Section
-                    className={classes.searchDomainSelectorSection}
-                    header={
-                        <SectionHeaderSimple
-                            containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
-                            title={i18n.t('Search')}
-                        />
-                    }
-                >
-                    <div className={classes.searchRow} style={{ padding: '8px 0' }}>
-                        <div className={classes.searchRowTitle}>Search for</div>
-                        <div className={classes.searchRowSelectElement} style={{ marginRight: 8 }}>
-                            <SingleSelect
-                                onChange={({ selected }) => { setSelected(selected); }}
-                                selected={selectedOption}
-                                empty={<div className={classes.customEmpty}>Custom empty component</div>}
-                            >
-                                {
-                                    useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
-                                        // $FlowFixMe https://github.com/facebook/flow/issues/2221
-                                        .map(({ trackedEntityTypeName, trackedEntityTypeId, programs: tePrograms }) =>
-                                            // SingleSelect component wont allow us to wrap the SingleSelectOption
-                                            // in any other element and still make use of the default behaviour.
-                                            // Therefore we are returning the group title and the
-                                            // SingleSelectOption in an array.
-                                            [
-                                                <SingleSelectOption
-                                                    value={trackedEntityTypeId}
-                                                    label={trackedEntityTypeName}
-                                                />,
-                                                tePrograms.map(({ programName, programId }) =>
-                                                    (<SingleSelectOption value={programId} label={programName} />)),
-                                                <div className={classes.divider} key={trackedEntityTypeId}>
-                                                    <hr />
-                                                </div>,
-                                            ],
-                                        ),
-                                    [
-                                        classes.divider,
-                                        trackedEntityTypesWithCorrelatedPrograms,
-                                    ])
-                                }
-                            </SingleSelect>
-                        </div>
-                    </div>
-                </Section>
 
-                {
-                    useMemo(() => {
-                        const handleOnFindUsingUniqueIdentifier = (selectedProgramId, formId) => {
-                            const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
+                <SearchSelection
+                    trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
+                    setSelected={setSelected}
+                    selectedOption={selectedOption}
+                />
 
-                            if (isValid) {
-                                findUsingUniqueIdentifier({ selectedProgramId, formId });
-                            }
-                        };
-
-                        return selectedOption.value && programs[selectedOption.value].searchGroups
-                            .filter(searchGroup => searchGroup.unique)
-                            .map(({ searchForm, formId }) => {
-                                const name = searchForm.getElements()[0].formName;
-                                return (
-                                    <Section
-                                        className={classes.searchDomainSelectorSection}
-                                        header={
-                                            <SectionHeaderSimple
-                                                containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
-                                                title={i18n.t('Search {{name}}', { name })}
-                                            />
-                                        }
-                                    >
-                                        <div className={classes.searchRow}>
-                                            <div className={classes.searchRowSelectElement}>
-                                                {
-                                                    forms[formId] &&
-                                                    <Form
-                                                        formRef={(formInstance) => { formReference[formId] = formInstance; }}
-                                                        formFoundation={searchForm}
-                                                        id={formId}
-                                                    />
-                                                }
-                                            </div>
-                                        </div>
-                                        <div className={classes.searchButtonContainer}>
-                                            <Button
-                                                onClick={() =>
-                                                    selectedOption.value &&
-                                                    handleOnFindUsingUniqueIdentifier(selectedOption.value, formId)}
-                                            >
-                                                Find by {name}.
-                                            </Button>
-                                        </div>
-                                    </Section>
-                                );
-                            });
-                    },
-                    [
-                        classes.searchButtonContainer,
-                        classes.searchDomainSelectorSection,
-                        classes.searchRowSelectElement,
-                        classes.searchRow,
-                        formReference,
-                        forms,
-                        programs,
-                        selectedOption.value,
-                        findUsingUniqueIdentifier,
-                    ])
-                }
+                <SearchInputFields
+                    findUsingUniqueIdentifier={findUsingUniqueIdentifier}
+                    selectedOption={selectedOption}
+                    availableSearchOptions={availableSearchOptions}
+                    forms={forms}
+                />
 
                 {
                     searchStatus === searchPageStatus.NO_RESULTS &&
