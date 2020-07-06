@@ -20,6 +20,9 @@ import Form from '../../D2Form/D2Form.component';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 
 const getStyles = (theme: Theme) => ({
+    divider: {
+        padding: '8px',
+    },
     container: {
         padding: '10px 24px 24px 24px',
     },
@@ -40,11 +43,6 @@ const getStyles = (theme: Theme) => ({
     customEmpty: {
         textAlign: 'center',
         padding: '8px 24px',
-    },
-    groupTitle: {
-        padding: '16px 12px',
-        fontWeight: 500,
-        fontSize: 16,
     },
     searchDomainSelectorSection: {
         maxWidth: theme.typography.pxToRem(900),
@@ -73,7 +71,7 @@ const Index = ({
     classes,
     trackedEntityTypesWithCorrelatedPrograms,
     preselectedProgram,
-    programs,
+    availableSearchOptions,
     forms,
     searchStatus,
     findUsingUniqueIdentifier,
@@ -84,7 +82,9 @@ const Index = ({
 
     const formReference = {};
 
-    const stringifyPrograms = JSON.stringify(programs);
+    // dan abramov suggest to stringify https://twitter.com/dan_abramov/status/1104414469629898754?lang=en
+    // so that useEffect can do the comparison
+    const stringifyPrograms = JSON.stringify(availableSearchOptions);
     useEffect(() => {
         // in order for the Form component to render
         // need to add a formId under the `forms` reducer
@@ -137,24 +137,20 @@ const Index = ({
                                                 />,
                                                 tePrograms.map(({ programName, programId }) =>
                                                     (<SingleSelectOption value={programId} label={programName} />)),
-                                                <div
-                                                    className={classes.groupTitle}
-                                                    key={trackedEntityTypeId}
-                                                >
-                                                    --------------------------
+                                                <div className={classes.divider} key={trackedEntityTypeId}>
+                                                    <hr />
                                                 </div>,
                                             ],
                                         ),
                                     [
+                                        classes.divider,
                                         trackedEntityTypesWithCorrelatedPrograms,
-                                        classes.groupTitle,
                                     ])
                                 }
                             </SingleSelect>
                         </div>
                     </div>
                 </Section>
-
 
                 {
                     useMemo(() => {

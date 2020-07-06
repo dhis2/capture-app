@@ -1,7 +1,30 @@
 // @flow
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 
-export type PropsFromRedux = {
+export type OwnProps = {|
+  +classes: {|
+    +container: string,
+    +header: string,
+    +paper: string,
+    +customEmpty: string,
+    +groupTitle: string,
+    +searchDomainSelectorSection: string,
+    +searchRow: string,
+    +searchRowTitle: string,
+    +searchRowSelectElement: string,
+    +searchButtonContainer: string,
+    +emptySelectionPaperContainer: string,
+    +emptySelectionPaperContent: string,
+    +divider: string,
+  |},
+|}
+
+export type DispatchersFromRedux = {|
+  addFormIdToReduxStore: (formId: string) => void,
+|}
+
+
+export type PropsFromRedux ={|
   +preselectedProgram: {|
     value: ?string,
     label: ?string
@@ -16,10 +39,10 @@ export type PropsFromRedux = {
       |}>
     |}
   },
-  +programs: {
+  +availableSearchOptions: {
     [elementId: string]: {|
-      +programId: string,
-      +programName: string,
+      +searchOptionId: string,
+      +searchOptionName: string,
       +searchGroups: Array<{|searchForm: RenderFoundation, unique: boolean, formId: string|}>
     |}
   },
@@ -28,28 +51,17 @@ export type PropsFromRedux = {
       loadNr: number
     }
   },
-}
+  +error: boolean,
+  +ready: boolean,
+|}
 
 export type DispatchersFromRedux = {|
   findUsingUniqueIdentifier: ({| selectedProgramId: string, formId: string |}) => void,
   addFormIdToReduxStore: (formId: string) => void,
   closeModal: () => void
+export type Props = {|
+  ...OwnProps,
+  ...DispatchersFromRedux,
+  ...PropsFromRedux
 |}
 
-export type Props =
-  DispatchersFromRedux & PropsFromRedux & {|
-  +classes: {|
-    +container: string,
-    +header: string,
-    +paper: string,
-    +customEmpty: string,
-    +groupTitle: string,
-    +searchDomainSelectorSection: string,
-    +searchRow: string,
-    +searchRowTitle: string,
-    +searchRowSelectElement: string,
-    +searchButtonContainer: string,
-    +emptySelectionPaperContainer: string,
-    +emptySelectionPaperContent: string,
-  |},
-|}
