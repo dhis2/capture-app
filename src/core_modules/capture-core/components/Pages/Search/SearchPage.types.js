@@ -41,19 +41,12 @@ export type PropsFromRedux ={|
       +searchGroups: Array<{|searchForm: RenderFoundation, unique: boolean, formId: string, searchScope: string|}>
     |}
   },
-  +forms: {
-    [elementId: string]: {
-      loadNr: number
-    }
-  },
   +error: boolean,
   +ready: boolean,
   +searchStatus: string,
 |}
 
 export type DispatchersFromRedux = {|
-  onScopeProgramFindUsingUniqueIdentifier: ({| programId: string, formId: string |}) => void,
-  onScopeTrackedEntityTypeFindUsingUniqueIdentifier: ({| trackedEntityTypeId: string, formId: string |}) => void,
   addFormIdToReduxStore: (formId: string) => void,
   closeModal: () => void
 |}

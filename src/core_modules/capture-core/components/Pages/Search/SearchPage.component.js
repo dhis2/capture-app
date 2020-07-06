@@ -16,9 +16,8 @@ import {
 import { LockedSelector } from '../../LockedSelector';
 import type { Props } from './SearchPage.types';
 import { Section, SectionHeaderSimple } from '../../Section';
-import Form from '../../D2Form/D2Form.component';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
-import { searchScopes } from './SearchPage.container';
+import { SearchForm } from './SearchForm';
 
 const getStyles = (theme: Theme) => ({
     divider: {
@@ -117,99 +116,14 @@ const SearchSelection =
           </div>
       </Section>));
 
-const SearchInputFields =
-  withStyles(getStyles)(({
-      onScopeTrackedEntityTypeFindUsingUniqueIdentifier,
-      onScopeProgramFindUsingUniqueIdentifier,
-      selectedOption,
-      classes,
-      availableSearchOptions,
-      forms,
-  }) =>
-      (useMemo(() => {
-          const formReference = {};
-
-          const handleOnFindUsingUniqueIdentifier = (selectedId, formId, searchScope) => {
-              const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
-
-              if (isValid) {
-                  switch (searchScope) {
-                  case searchScopes.PROGRAM:
-                      onScopeProgramFindUsingUniqueIdentifier({ programId: selectedId, formId });
-                      break;
-                  case searchScopes.TRACKED_ENTITY_TYPE:
-                      onScopeTrackedEntityTypeFindUsingUniqueIdentifier({ trackedEntityTypeId: selectedId, formId });
-                      break;
-                  default:
-                      break;
-                  }
-              }
-          };
-
-          return selectedOption.value && availableSearchOptions[selectedOption.value].searchGroups
-              .filter(searchGroup => searchGroup.unique)
-              .map(({ searchForm, formId, searchScope }) => {
-                  const name = searchForm.getElements()[0].formName;
-                  return (
-                      <Section
-                          className={classes.searchDomainSelectorSection}
-                          header={
-                              <SectionHeaderSimple
-                                  containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
-                                  title={i18n.t('Search {{name}}', { name })}
-                              />
-                          }
-                      >
-                          <div className={classes.searchRow}>
-                              <div className={classes.searchRowSelectElement}>
-                                  {
-                                      forms[formId] &&
-                                      <Form
-                                          formRef={
-                                              (formInstance) => { formReference[formId] = formInstance; }
-                                          }
-                                          formFoundation={searchForm}
-                                          id={formId}
-                                      />
-                                  }
-                              </div>
-                          </div>
-                          <div className={classes.searchButtonContainer}>
-                              <Button
-                                  onClick={() =>
-                                      selectedOption.value &&
-                                        handleOnFindUsingUniqueIdentifier(selectedOption.value, formId, searchScope)}
-                              >
-                                  Find by {name}.
-                              </Button>
-                          </div>
-                      </Section>
-                  );
-              });
-      },
-      [
-          classes.searchButtonContainer,
-          classes.searchDomainSelectorSection,
-          classes.searchRowSelectElement,
-          classes.searchRow,
-          forms,
-          availableSearchOptions,
-          selectedOption.value,
-          onScopeTrackedEntityTypeFindUsingUniqueIdentifier,
-          onScopeProgramFindUsingUniqueIdentifier,
-      ])));
-
 
 const Index = ({
     classes,
     trackedEntityTypesWithCorrelatedPrograms,
     preselectedProgram,
     availableSearchOptions,
-    forms,
     searchStatus,
     addFormIdToReduxStore,
-    onScopeTrackedEntityTypeFindUsingUniqueIdentifier,
-    onScopeProgramFindUsingUniqueIdentifier,
     closeModal,
 }: Props) => {
     const [selectedOption, setSelected] = useState(preselectedProgram);
@@ -245,13 +159,9 @@ const Index = ({
                     selectedOption={selectedOption}
                 />
 
-                {/* TODO REFACTOR THIS WITH ITS OWN CONNECT ??? */}
-                <SearchInputFields
-                    onScopeTrackedEntityTypeFindUsingUniqueIdentifier={onScopeTrackedEntityTypeFindUsingUniqueIdentifier}
-                    onScopeProgramFindUsingUniqueIdentifier={onScopeProgramFindUsingUniqueIdentifier}
-                    selectedOption={selectedOption}
+                <SearchForm
+                    selectedOptionId={selectedOption.value}
                     availableSearchOptions={availableSearchOptions}
-                    forms={forms}
                 />
 
                 {

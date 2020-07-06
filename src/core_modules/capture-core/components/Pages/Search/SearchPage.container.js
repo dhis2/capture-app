@@ -97,7 +97,6 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
             label: preselectedProgram && preselectedProgram.programName,
         },
         availableSearchOptions,
-        forms: state.forms,
         trackedEntityTypesWithCorrelatedPrograms,
         error: activePage.selectionsError && activePage.selectionsError.error,
         ready: !activePage.isLoading,
@@ -106,12 +105,6 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
-    onScopeTrackedEntityTypeFindUsingUniqueIdentifier: ({ trackedEntityTypeId, formId }) => {
-        dispatch(actionCreator(searchPageActionTypes.SCOPE_TRACKED_ENTITY_TYPE_USING_UNIQUE_IDENTIFIER_FIND)({ trackedEntityTypeId, formId }));
-    },
-    onScopeProgramFindUsingUniqueIdentifier: ({ programId, formId }) => {
-        dispatch(actionCreator(searchPageActionTypes.SCOPE_PROGRAM_USING_UNIQUE_IDENTIFIER_FIND)({ programId, formId }));
-    },
     addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
     closeModal: () => { dispatch(actionCreator(searchPageActionTypes.MODAL_CLOSE)()); },
 });

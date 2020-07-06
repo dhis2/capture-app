@@ -1,13 +1,13 @@
 // @flow
 import { flatMap, map } from 'rxjs/operators';
 import { from } from 'rxjs/observable/from';
-import { searchPageActionTypes } from './SearchPage.container';
-import { getTrackedEntityInstances } from '../../../trackedEntityInstances/trackedEntityInstanceRequests';
+import { searchPageActionTypes } from '../SearchPage.container';
+import { getTrackedEntityInstances } from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import {
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
-} from '../../../metaData';
-import { actionCreator } from '../../../actions/actions.utils';
+} from '../../../../metaData';
+import { actionCreator } from '../../../../actions/actions.utils';
 
 
 const trackerCaptureAppUrl = () => (process.env.REACT_APP_TRACKER_CAPTURE_APP_PATH || '..').replace(/\/$/, '');
@@ -80,7 +80,3 @@ export const onScopeTrackedEntityTypeFindUsingUniqueIdentifierEpic = (action$: I
             );
         }),
     );
-
-
-// https://debug.dhis2.org/2.34dev/api/trackedEntityInstances?filter=lZGmxYbs97q:eq:123&ouMode=ACCESSIBLE&trackedEntityType=nEenWmSyUEp&pageSize=5&totalPages=true
-// https://debug.dhis2.org/2.34dev/api/trackedEntityInstances?filter=lZGmxYbs97q:eq:123&ouMode=ACCESSIBLE&program=IpHINAT79UW&pageSize=5&totalPages=true

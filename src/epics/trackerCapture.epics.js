@@ -175,7 +175,7 @@ import {
 import {
     onScopeProgramFindUsingUniqueIdentifierEpic,
     onScopeTrackedEntityTypeFindUsingUniqueIdentifierEpic,
-} from '../core_modules/capture-core/components/Pages/Search/SearchPage.epics';
+} from '../core_modules/capture-core/components/Pages/Search/SearchForm/SearchForm.epics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
