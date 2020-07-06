@@ -13,6 +13,7 @@ export type OwnProps = {|
 |}
 
 export type PropsFromRedux ={|
+  +searchStatus: string,
   +forms: {
     [elementId: string]: {
       loadNr: number
@@ -23,6 +24,7 @@ export type PropsFromRedux ={|
 export type DispatchersFromRedux = {|
   searchViaUniqueIdOnScopeProgram: ({| programId: string, formId: string |}) => void,
   searchViaUniqueIdOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string |}) => void,
+  searchViaAttributesOnScopeProgram: ({| programId: string, formId: string |}) => void,
 |}
 
 export type Props = {|

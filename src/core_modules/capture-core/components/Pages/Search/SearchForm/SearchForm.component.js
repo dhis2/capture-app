@@ -7,6 +7,7 @@ import Form from '../../../D2Form/D2Form.component';
 import { searchScopes } from '../SearchPage.container';
 import { Section, SectionHeaderSimple } from '../../../Section';
 import type { Props } from './SearchForm.types';
+import { searchPageStatus } from '../../../../reducers/descriptions/searchPage.reducerDescription';
 
 const getStyles = (theme: Theme) => ({
     searchDomainSelectorSection: {
@@ -31,10 +32,12 @@ const getStyles = (theme: Theme) => ({
 const Index = ({
     searchViaUniqueIdOnScopeTrackedEntityType,
     searchViaUniqueIdOnScopeProgram,
+    searchViaAttributesOnScopeProgram,
     selectedOptionId,
     classes,
     availableSearchOptions,
     forms,
+    searchStatus,
 }: Props) =>
     (useMemo(() => {
         const formReference = {};
@@ -56,46 +59,95 @@ const Index = ({
             }
         };
 
-        return selectedOptionId && availableSearchOptions[selectedOptionId].searchGroups
-            .filter(searchGroup => searchGroup.unique)
-            .map(({ searchForm, formId, searchScope }) => {
-                const name = searchForm.getElements()[0].formName;
-                return (
-                    <Section
-                        className={classes.searchDomainSelectorSection}
-                        header={
-                            <SectionHeaderSimple
-                                containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
-                                title={i18n.t('Search {{name}}', { name })}
-                            />
-                        }
-                    >
-                        <div className={classes.searchRow}>
-                            <div className={classes.searchRowSelectElement}>
-                                {
-                                    forms[formId] &&
-                                    <Form
-                                        formRef={
-                                            (formInstance) => { formReference[formId] = formInstance; }
-                                        }
-                                        formFoundation={searchForm}
-                                        id={formId}
+        return (<>
+            {
+                selectedOptionId && availableSearchOptions[selectedOptionId].searchGroups
+                    .filter(searchGroup => searchGroup.unique)
+                    .map(({ searchForm, formId, searchScope }) => {
+                        const name = searchForm.getElements()[0].formName;
+                        return (
+                            <Section
+                                className={classes.searchDomainSelectorSection}
+                                header={
+                                    <SectionHeaderSimple
+                                        containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
+                                        title={i18n.t('Search {{name}}', { name })}
                                     />
                                 }
-                            </div>
-                        </div>
-                        <div className={classes.searchButtonContainer}>
-                            <Button
-                                onClick={() =>
-                                    selectedOptionId &&
-                  handleOnFindUsingUniqueIdentifier(selectedOptionId, formId, searchScope)}
                             >
-                                Find by {name}.
-                            </Button>
-                        </div>
-                    </Section>
-                );
-            });
+                                <div className={classes.searchRow}>
+                                    <div className={classes.searchRowSelectElement}>
+                                        {
+                                            forms[formId] &&
+                                            <Form
+                                                formRef={
+                                                    (formInstance) => { formReference[formId] = formInstance; }
+                                                }
+                                                formFoundation={searchForm}
+                                                id={formId}
+                                            />
+                                        }
+                                    </div>
+                                </div>
+                                <div className={classes.searchButtonContainer}>
+                                    <Button
+                                        disabled={searchStatus === searchPageStatus.LOADING}
+                                        onClick={() =>
+                                            selectedOptionId &&
+                                            handleOnFindUsingUniqueIdentifier(selectedOptionId, formId, searchScope)}
+                                    >
+                                        Find by {name}.
+                                    </Button>
+                                </div>
+                            </Section>
+                        );
+                    })
+            }
+            {
+                selectedOptionId && availableSearchOptions[selectedOptionId].searchGroups
+                    .filter(searchGroup => !searchGroup.unique)
+                    .map(({ searchForm, formId }) => {
+                        const name = searchForm.getElements()[0].formName;
+                        return (
+                            <Section
+                                className={classes.searchDomainSelectorSection}
+                                header={
+                                    <SectionHeaderSimple
+                                        containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
+                                        title={i18n.t('Search {{name}}', { name })}
+                                    />
+                                }
+                            >
+                                <div className={classes.searchRow}>
+                                    <div className={classes.searchRowSelectElement}>
+                                        {
+                                            forms[formId] &&
+                                            <Form
+                                                formRef={
+                                                    (formInstance) => { formReference[formId] = formInstance; }
+                                                }
+                                                formFoundation={searchForm}
+                                                id={formId}
+                                            />
+                                        }
+                                    </div>
+                                </div>
+                                <div className={classes.searchButtonContainer}>
+                                    <Button
+                                        disabled={searchStatus === searchPageStatus.LOADING}
+                                        onClick={() =>
+                                            selectedOptionId &&
+                                            searchViaAttributesOnScopeProgram({ programId: selectedOptionId, formId })}
+                                    >
+                                        Search by {name}
+                                    </Button>
+                                </div>
+                            </Section>
+                        );
+                    })
+            }
+
+        </>);
     },
     [
         classes.searchButtonContainer,
@@ -105,8 +157,10 @@ const Index = ({
         forms,
         availableSearchOptions,
         selectedOptionId,
+        searchStatus,
         searchViaUniqueIdOnScopeTrackedEntityType,
         searchViaUniqueIdOnScopeProgram,
+        searchViaAttributesOnScopeProgram,
     ]));
 
 

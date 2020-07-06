@@ -7,9 +7,10 @@ import type { DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './Se
 
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
-    const { forms } = state;
+    const { forms, searchPage: { searchStatus } } = state;
     return {
         forms,
+        searchStatus,
     };
 };
 
@@ -28,6 +29,11 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => {
         searchViaUniqueIdOnScopeProgram: ({ programId, formId }) => {
             dispatch(
                 actionCreator(VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH)({ programId, formId }),
+            );
+        },
+        searchViaAttributesOnScopeProgram: ({ programId, formId }) => {
+            dispatch(
+                actionCreator(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH)({ programId, formId }),
             );
         },
     };

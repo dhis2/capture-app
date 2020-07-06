@@ -10,7 +10,6 @@ export const searchPageStatus = {
     ERROR: 'ERROR',
 };
 
-
 export const searchPageDesc = createReducerDescription({
     [searchPageActionTypes.MODAL_CLOSE]: state => ({
         ...state,

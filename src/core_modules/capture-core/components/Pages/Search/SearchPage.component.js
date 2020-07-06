@@ -125,6 +125,8 @@ const Index = ({
     searchStatus,
     addFormIdToReduxStore,
     closeModal,
+    searchResults,
+    searchResultsErrorMessage,
 }: Props) => {
     const [selectedOption, setSelected] = useState(preselectedProgram);
 
@@ -164,87 +166,6 @@ const Index = ({
                     availableSearchOptions={availableSearchOptions}
                 />
 
-                {
-                    selectedOption.value && programs[selectedOption.value].searchGroups
-                        .filter(searchGroup => searchGroup.unique)
-                        .map(({ searchForm, formId }) => {
-                            const name = searchForm.getElements()[0].formName;
-                            return (
-                                <Section
-                                    className={classes.searchDomainSelectorSection}
-                                    header={
-                                        <SectionHeaderSimple
-                                            containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
-                                            title={i18n.t('Search {{name}}', { name })}
-                                        />
-                                    }
-                                >
-                                    <div className={classes.searchRow}>
-                                        <div className={classes.searchRowSelectElement}>
-                                            {
-                                                forms[formId] &&
-                                                <Form
-                                                    formFoundation={searchForm}
-                                                    id={formId}
-                                                />
-                                            }
-                                        </div>
-                                    </div>
-                                    <div className={classes.searchButtonContainer}>
-                                        <ButtonUi
-                                            disabled={searchStatus === searchPageStatus.LOADING}
-                                            onClick={() =>
-                                                selectedOption.value &&
-                                                searchViaUniqueId({ selectedProgramId: selectedOption.value, formId })}
-                                        >
-                                            Find by {name}
-                                        </ButtonUi>
-                                    </div>
-                                </Section>
-                            );
-                        })
-                }
-
-                {
-                    selectedOption.value && programs[selectedOption.value].searchGroups
-                        .filter(searchGroup => !searchGroup.unique)
-                        .map(({ searchForm, formId }) => {
-                            const name = searchForm.getElements()[0].formName;
-                            return (
-                                <Section
-                                    className={classes.searchDomainSelectorSection}
-                                    header={
-                                        <SectionHeaderSimple
-                                            containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
-                                            title={i18n.t('Search {{name}}', { name })}
-                                        />
-                                    }
-                                >
-                                    <div className={classes.searchRow}>
-                                        <div className={classes.searchRowSelectElement}>
-                                            {
-                                                forms[formId] &&
-                                                <Form
-                                                    formFoundation={searchForm}
-                                                    id={formId}
-                                                />
-                                            }
-                                        </div>
-                                    </div>
-                                    <div className={classes.searchButtonContainer}>
-                                        <ButtonUi
-                                            disabled={searchStatus === searchPageStatus.LOADING}
-                                            onClick={() =>
-                                                selectedOption.value &&
-                                                searchViaAttributes({ selectedProgramId: selectedOption.value, formId })}
-                                        >
-                                            Search by {name}
-                                        </ButtonUi>
-                                    </div>
-                                </Section>
-                            );
-                        })
-                }
 
                 {
                     searchStatus === searchPageStatus.NO_RESULTS &&
