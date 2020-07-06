@@ -13,6 +13,7 @@ import {
     ButtonStrip,
     Button,
 } from '@dhis2/ui-core';
+
 import { LockedSelector } from '../../LockedSelector';
 import type { Props } from './SearchPage.types';
 import { Section, SectionHeaderSimple } from '../../Section';
@@ -64,6 +65,9 @@ const getStyles = (theme: Theme) => ({
         padding: theme.typography.pxToRem(10),
         display: 'flex',
         alignItems: 'center',
+    },
+    errorMessage: {
+        color: 'rgb(211, 47, 47)',
     },
 });
 
@@ -196,7 +200,8 @@ const Index = ({
 
                 {
                     searchStatus === searchPageStatus.ERROR &&
-                    <h1 style={{ color: 'red' }}>{searchResultsErrorMessage}</h1>
+                    <div className={classes.errorMessage}>{searchResultsErrorMessage}</div>
+
                 }
 
             </Paper>

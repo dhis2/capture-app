@@ -24,6 +24,7 @@ export type OwnProps = {|
     +emptySelectionPaperContainer: string,
     +emptySelectionPaperContent: string,
     +divider: string,
+    +errorMessage: string,
   |},
 |}
 
