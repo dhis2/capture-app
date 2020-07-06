@@ -32,6 +32,7 @@ export function convertStateFormValuesToClient(eventId: string, state: Object) {
         return { error: i18n.t('An error has occured. See log for details'), values: null, stage: null };
     }
 
+    // $FlowFixMe[incompatible-call] automated comment
     const convertedValues = convertFormValuesToClient(formValues, stage);
 
     return { values: convertedValues, error: null, stage };
