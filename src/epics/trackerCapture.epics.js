@@ -173,9 +173,10 @@ import {
     startAgainEpic,
 } from '../core_modules/capture-core/components/LockedSelector';
 import {
-    trackedEntitySearchUsingUniqueIdentifierEpic,
+    onScopeProgramFindUsingUniqueIdentifierEpic,
+    onScopeTrackedEntityTypeFindUsingUniqueIdentifierEpic,
     trackedEntitySearchUsingAttributesEpic,
-} from '../core_modules/capture-core/components/Pages/Search/SearchPage.epics';
+} from '../core_modules/capture-core/components/Pages/Search/SearchForm/SearchForm.epics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -279,7 +280,8 @@ export default combineEpics(
     getOrgUnitDataBasedOnUrlUpdateEpic,
     setOrgUnitDataEmptyBasedOnUrlUpdateEpic,
     startAgainEpic,
-    trackedEntitySearchUsingUniqueIdentifierEpic,
+    onScopeProgramFindUsingUniqueIdentifierEpic,
+    onScopeTrackedEntityTypeFindUsingUniqueIdentifierEpic,
     trackedEntitySearchUsingAttributesEpic,
     ...getDataEntryEpics(),
 );

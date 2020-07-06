@@ -37,5 +37,4 @@ const RegistrationSection = (props: Props) => {
         </Section>
     );
 };
-// $FlowFixMe
 export default withStyles(getStyles)(RegistrationSection);

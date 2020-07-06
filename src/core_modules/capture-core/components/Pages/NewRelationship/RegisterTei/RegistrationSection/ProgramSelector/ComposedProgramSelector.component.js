@@ -113,6 +113,8 @@ class ProgramSelector extends React.Component<Props> {
                 {
                     (programs, isFiltered) => (
                         <div>
+                            {/* $FlowFixMe[cannot-spread-inexact] automated
+                              * comment */}
                             <VirtualizedSelectField
                                 options={this.getOptionsFromPrograms(programs)}
                                 required={false}

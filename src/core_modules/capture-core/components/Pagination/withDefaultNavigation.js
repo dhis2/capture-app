@@ -89,6 +89,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
         render() {
             const { classes, theme, ...passOnProps } = this.props;
             return (
+                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     navigationElements={this.renderNavigationElement()}
                     {...passOnProps}

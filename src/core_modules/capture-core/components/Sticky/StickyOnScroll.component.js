@@ -1,5 +1,4 @@
 // @flow
-
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -33,13 +32,14 @@ const styles = () => ({
 });
 
 class StickyOnScroll extends React.Component<Props> {
+    stickyContainer: any;
+    scrollTimer: any;
+    resizeTimer: any;
+
     static defaultProps = {
         offsetTop: 0,
         minViewpointWidth: 0,
     }
-    stickyContainer: any;
-    scrollTimer: any;
-    resizeTimer: any;
 
     componentDidMount() {
         window.addEventListener('resize', this.onResize);

@@ -54,13 +54,13 @@ type Props = {
 };
 
 class SearchForm extends React.Component<Props> {
+    formInstance: any;
+    orgUnitSelectorInstance: SearchOrgUnitSelector;
+
     static errorMessages = {
         NO_ITEM_SELECTED: 'No item selected',
         SEARCH_FORM_MISSING: 'search form is missing. see log for details',
     };
-    formInstance: any;
-    orgUnitSelectorInstance: SearchOrgUnitSelector;
-
 
     validNumberOfAttributes = () => {
         const attributesWithValuesCount = this.props.attributesWithValuesCount;
@@ -82,6 +82,7 @@ class SearchForm extends React.Component<Props> {
 
         let isValid = this.formInstance.validateFormScrollToFirstFailedField({});
 
+        // $FlowFixMe[prop-missing] automated comment
         if (isValid && !this.props.searchGroup.unique) isValid = this.orgUnitSelectorInstance.validateAndScrollToIfFailed();
 
         if (isValid && !this.props.searchGroup.unique) isValid = this.validNumberOfAttributes();
@@ -160,6 +161,7 @@ class SearchForm extends React.Component<Props> {
         const searchButtonText = searchGroup.unique ? this.getUniqueSearchButtonText(searchForm) : i18n.t('Search by attributes');
         return (
             <div className={classes.container}>
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <Form
                     formRef={(formInstance) => { this.formInstance = formInstance; }}
                     formFoundation={searchGroup.searchForm}

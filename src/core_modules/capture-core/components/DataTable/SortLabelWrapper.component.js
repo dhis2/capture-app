@@ -93,6 +93,7 @@ class SortLabelWrapper extends React.Component<Props> {
 
     render() {
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <SortLabel
                 onGetIcons={this.getIcons}
                 {...this.props}

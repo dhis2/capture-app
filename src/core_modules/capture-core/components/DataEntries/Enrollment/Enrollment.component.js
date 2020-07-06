@@ -261,19 +261,21 @@ type FinalTeiDataEntryProps = {
 };
 // final step before the generic dataEntry is inserted
 class FinalEnrollmentDataEntry extends React.Component<FinalTeiDataEntryProps> {
+    componentWillUnmount() {
+        inMemoryFileStore.clear();
+    }
+
     static dataEntrySectionDefinitions = {
         [dataEntrySectionKeys.ENROLLMENT]: {
             placement: placements.TOP,
             name: i18n.t('Enrollment'),
         },
     };
-    componentWillUnmount() {
-        inMemoryFileStore.clear();
-    }
 
     render() {
         const { enrollmentMetadata, programId, ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <DataEntry
                 dataEntrySections={FinalEnrollmentDataEntry.dataEntrySectionDefinitions}
                 {...passOnProps}
@@ -341,6 +343,7 @@ class PreEnrollmentDataEntry extends React.Component<PreEnrollmentDataEntryProps
             onGetUnsavedAttributeValues,
             ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <PreEnrollmentDataEntryPure
                 onGetValidationContext={this.getValidationContext}
                 onUpdateFormField={this.handleUpdateField}

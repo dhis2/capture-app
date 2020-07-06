@@ -3,7 +3,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Link as LinkIcon } from '@material-ui/icons';
-import { withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import ViewEventSection from '../../Section/ViewEventSection.component';
 import ViewEventSectionHeader from '../../Section/ViewEventSectionHeader.component';
 import Relationships from '../../../../Relationships/Relationships.component';
@@ -77,6 +77,7 @@ class RelationshipsSection extends React.Component<Props> {
     renderConnectedEntity = (entity: Entity) => {
         const { orgUnitId } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <ConnectedEntity
                 orgUnitId={orgUnitId}
                 {...entity}

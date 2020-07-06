@@ -28,9 +28,12 @@ function getConvertedValue(valueToConvert: any, key: string, onConvertValue: Con
     case compareKeys.eventDate:
     case compareKeys.dueDate:
     case compareKeys.completedDate:
+        // $FlowFixMe[prop-missing] automated comment
         convertedValue = onConvertValue(valueToConvert, elementTypes.DATE);
         break;
     case compareKeys.status:
+        // $FlowFixMe[extra-arg] automated comment
+        // $FlowFixMe[prop-missing] automated comment
         convertedValue = onConvertValue(valueToConvert, elementTypes.TEXT, eventStatusElement);
         break;
     case compareKeys.assignee:

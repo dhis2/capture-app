@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import React, { PureComponent } from 'react';
 
 import Sync from '@material-ui/icons/Sync';
-import Grow from '@material-ui/core/Grow'
+import Grow from '@material-ui/core/Grow';
 import { withStyles } from '@material-ui/core/styles';
 import moment from 'capture-core-utils/moment/momentResolver';
 import i18n from '@dhis2/d2-i18n';
 
-const styles = theme => ({
+const styles = () => ({
     offlineIcon: {
         backgroundColor: '#9e9e9e',
         width: '8px',
@@ -61,62 +61,62 @@ const styles = theme => ({
     },
     '@keyframes Sync-spin': {
         from: { transform: 'rotate(0deg)' },
-        to: { transform: 'rotate(360deg)' }
+        to: { transform: 'rotate(360deg)' },
     },
 });
 
-const RightSection = (props) =>
-    <div className={`${props.classes.flex} ${props.classes.badgeSection}`}>
-        <OnlineIcon status={props.status ? props.classes.onlineIcon : props.classes.offlineIcon } />
+const RightSection = props =>
+    (<div className={`${props.classes.flex} ${props.classes.badgeSection}`}>
+        <OnlineIcon status={props.status ? props.classes.onlineIcon : props.classes.offlineIcon} />
         <p className={props.classes.text}>{ props.status ? i18n.t('Online') : i18n.t('Offline') }</p>
-    </div>
+    </div>);
 
 class LeftSection extends PureComponent {
-
     constructor(props) {
-        super(props)
-        this.state = {offlineTimer: moment(Date.now()).fromNow()}
+        super(props);
+        this.state = { offlineTimer: moment(Date.now()).fromNow() };
     }
 
-    componentDidUpdate (prevProps, prevState) {
+    componentDidUpdate() {
         if (this.props.statusTimer === 0) {
-            clearInterval(this.timer)
-            this.timer = null
-            this.setState({offlineTimer: moment(Date.now()).fromNow()})
-            return
+            clearInterval(this.timer);
+            this.timer = null;
+            // todo (eslint)
+            // eslint-disable-next-line react/no-did-update-set-state
+            this.setState({ offlineTimer: moment(Date.now()).fromNow() });
+            return;
         }
-        
+
         if (this.props.statusTimer > 0 && !this.timer) {
             this.timer = setInterval(() => {
-                const t1 = moment(this.props.statusTimer).fromNow()
-                this.setState({offlineTimer: t1})
-            }, 60*1000)
-            return
+                const t1 = moment(this.props.statusTimer).fromNow();
+                this.setState({ offlineTimer: t1 });
+            }, 60 * 1000);
         }
     }
 
-    render () {
-        let props = this.props
-        let content
+    render() {
+        const props = this.props;
+        let content;
 
         if (props.status && props.syncList.length === 0) {
-            return null
+            return null;
         }
 
         if (props.status && props.syncList.length > 0) {
             content = (
                 <div className={props.classes.flex}>
-                    <Sync className={props.classes.icon}/>
+                    <Sync className={props.classes.icon} />
                     <p className={props.classes.text}>{i18n.t('Syncing')}</p>
                 </div>
-            )
+            );
         }
 
         if (!props.status) {
-            content = <span>{props.syncList.length} {i18n.t('offline events. Last synced:')} {this.state.offlineTimer}</span>
+            content = <span>{props.syncList.length} {i18n.t('offline events. Last synced:')} {this.state.offlineTimer}</span>;
         }
 
-        const show = !!content
+        const show = !!content;
 
         return (
             <Grow in={show} style={{ transformOrigin: 'right 50%' }}>
@@ -124,14 +124,15 @@ class LeftSection extends PureComponent {
                     {content}
                 </div>
             </Grow>
-        )
+        );
     }
 }
 
-const OnlineIcon = (props) => <span className={props.status}></span>
+const OnlineIcon = props => <span className={props.status} />;
 
+// eslint-disable-next-line react/no-multi-comp
 class NetworkStatusBadge extends PureComponent {
-    render () {
+    render() {
         const status = this.props.offline || {};
         const classes = this.props.classes;
 
@@ -139,14 +140,14 @@ class NetworkStatusBadge extends PureComponent {
 
         return (
             <div className={`${classes.flex} ${classes.badgeContainer}`}>
-                <LeftSection status={status.online} syncList={itemsToSync} classes={classes} statusTimer={this.props.networkStatus.offlineSince}/>
-                <RightSection status={status.online} syncList={itemsToSync} classes={classes}/>
+                <LeftSection status={status.online} syncList={itemsToSync} classes={classes} statusTimer={this.props.networkStatus.offlineSince} />
+                <RightSection status={status.online} syncList={itemsToSync} classes={classes} />
             </div>
-        )
-    }                           
+        );
+    }
 }
 
-const mapStateToProps = (state: ReduxState) => ({
+const mapStateToProps = state => ({
     offline: state.offline,
     networkStatus: state.networkStatus,
 });

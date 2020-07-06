@@ -1,9 +1,8 @@
 // @flow
 import log from 'loglevel';
-
+import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import programCollection from '../../metaDataMemoryStores/programCollection/programCollection';
-import i18n from '@dhis2/d2-i18n';
 import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
 import { convertValue } from '../formToClient';
 
@@ -33,6 +32,7 @@ export function convertStateFormValuesToClient(eventId: string, state: Object) {
         return { error: i18n.t('An error has occured. See log for details'), values: null, stage: null };
     }
 
+    // $FlowFixMe[incompatible-call] automated comment
     const convertedValues = convertFormValuesToClient(formValues, stage);
 
     return { values: convertedValues, error: null, stage };

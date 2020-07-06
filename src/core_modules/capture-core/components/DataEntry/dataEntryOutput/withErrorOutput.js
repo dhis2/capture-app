@@ -14,7 +14,6 @@ type Props = {
     errorItems: ?Array<any>,
     errorOnCompleteItems: ?Array<any>,
     saveAttempted: boolean,
-    outputRef: (any) => void,
     classes: {
         list: string,
         listItem: string,

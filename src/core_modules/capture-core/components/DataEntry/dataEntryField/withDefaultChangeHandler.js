@@ -41,6 +41,7 @@ export default () =>
                 const stateValue = this.state.value;
 
                 return (
+                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <InnerComponent
                         onChange={this.handleChange}
                         value={stateValue}

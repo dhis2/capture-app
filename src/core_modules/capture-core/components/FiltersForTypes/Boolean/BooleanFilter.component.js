@@ -22,6 +22,7 @@ type Props = {
     },
 };
 // $FlowSuppress
+// $FlowFixMe[incompatible-variance] automated comment
 class BooleanFilter extends Component<Props> implements UpdatableFilterContent<Value> {
     booleanFieldInstance: ?D2TrueFalse;
 

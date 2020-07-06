@@ -9,12 +9,11 @@ type Props = {
 };
 
 class D2TextField extends Component<Props> {
+    materialUIInstance: ?HTMLInputElement;
+    materialUIContainerInstance: ?HTMLDivElement;
     static defaultProps = {
         value: '',
     };
-
-    materialUIInstance: ?HTMLInputElement;
-    materialUIContainerInstance: ?HTMLDivElement;
 
     constructor(props: Props) {
         super(props);
@@ -39,6 +38,7 @@ class D2TextField extends Component<Props> {
 
         return (
             <div ref={(containerInstance) => { this.materialUIContainerInstance = containerInstance; }}>
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <TextField
                     inputRef={(inst) => { this.materialUIInstance = inst; }}
                     value={value || ''}

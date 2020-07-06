@@ -138,10 +138,12 @@ export default class D2Polygon extends React.Component<Props, State> {
 
     renderMapDialog = () => {
         const clonedDialog = React.cloneElement(
-            // $FlowSuppress
+
+            // $FlowFixMe[incompatible-type] automated comment
             this.props.mapDialog,
             { open: this.state.showMap, onClose: this.closeMap },
-            // $FlowSuppress
+
+            // $FlowFixMe[incompatible-use] automated comment
             [...React.Children.toArray(this.props.mapDialog.props.children), (
                 <div className={defaultClasses.dialogContent} key="dialogContent">
                     {this.renderMap()}
@@ -192,11 +194,13 @@ export default class D2Polygon extends React.Component<Props, State> {
     renderDialogActions = () => (
         <div className={defaultClasses.dialogActionOuterContainer}>
             <div className={defaultClasses.dialogActionInnerContainer}>
+                {/* $FlowFixMe[prop-missing] automated comment */}
                 <Button kind="basic" onClick={this.closeMap}>
                     {i18n.t('Cancel')}
                 </Button>
             </div>
             <div className={defaultClasses.dialogActionInnerContainer}>
+                {/* $FlowFixMe[prop-missing] automated comment */}
                 <Button kind="primary" onClick={this.onSetPolygon}>
                     {i18n.t('Set area')}
                 </Button>

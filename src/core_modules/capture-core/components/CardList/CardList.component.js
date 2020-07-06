@@ -1,12 +1,10 @@
 // @flow
-
 import * as React from 'react';
 import { withStyles } from '@material-ui/core';
 import { LoadingMaskElementCenter } from '../LoadingMasks';
 import { DataElement } from '../../metaData';
 import CardListItem from './CardListItem.component';
 import makeDataElementsContainerSelector from './CardList.selectors';
-
 
 export type ItemValues = {
     [elementId: string]: any,
@@ -38,10 +36,10 @@ const getStyles = (theme: Theme) => ({
 });
 
 class CardList extends React.Component<Props> {
+    getDataElementsContainer: Function;
     static defaultProps = {
         itemTypeName: 'item',
     }
-    getDataElementsContainer: Function;
     constructor(props: Props) {
         super(props);
         this.getDataElementsContainer = makeDataElementsContainerSelector();
@@ -67,6 +65,7 @@ class CardList extends React.Component<Props> {
 
         return items.map((item, index) => (
             <CardListItem
+                /* eslint-disable-next-line react/no-array-index-key */
                 key={index}
                 item={item}
                 getCustomTopElements={getCustomItemTopElements}

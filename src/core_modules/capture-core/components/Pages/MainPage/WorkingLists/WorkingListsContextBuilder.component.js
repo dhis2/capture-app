@@ -167,9 +167,7 @@ const WorkingListsContextBuilder = (props: Props) => {
         allTemplates,
     ]);
 
-    React.useEffect(() => {
-        return () => onUnloadingContext(listId);
-    }, [
+    React.useEffect(() => () => onUnloadingContext(listId), [
         onUnloadingContext,
         listId,
     ]);

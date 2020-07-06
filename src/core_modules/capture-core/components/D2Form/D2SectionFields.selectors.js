@@ -22,6 +22,7 @@ const sectionValuesSelector = (state, props) => {
         }, {});
     return sectionValues;
 };
+// $FlowFixMe[missing-annot] automated comment
 export const makeGetSectionValues = () => createDeepEqualSelector(
     sectionValuesSelector,
     sectionValues => sectionValues,
@@ -38,6 +39,7 @@ const sectionIsCompulsorySelector = (state, props) => {
         }, {});
     return sectionCompulsoryFields;
 };
+// $FlowFixMe[missing-annot] automated comment
 export const makeGetCompulsory = () => createDeepEqualSelector(
     sectionIsCompulsorySelector,
     sectionCompulsoryFields => sectionCompulsoryFields,
@@ -54,6 +56,7 @@ const sectionIsDisabledSelector = (state, props) => {
         }, {});
     return sectionDisabledFields;
 };
+// $FlowFixMe[missing-annot] automated comment
 export const makeGetDisabled = () => createDeepEqualSelector(
     sectionIsDisabledSelector,
     sectionDisabledFields => sectionDisabledFields,
@@ -70,6 +73,7 @@ const sectionHiddenFieldsSelector = (state, props) => {
         }, {});
     return sectionHiddenFields;
 };
+// $FlowFixMe[missing-annot] automated comment
 export const makeGetHiddenFieldsValues = () => createDeepEqualSelector(
     sectionHiddenFieldsSelector,
     sectionHiddenFields => sectionHiddenFields,
@@ -96,6 +100,7 @@ const sectionRulesMessagesSelector = (state, props) => {
         }, {});
     return sectionErrorMessages;
 };
+// $FlowFixMe[missing-annot] automated comment
 export const makeGetMessages = () => createMessagesDeepEqualSelector(
     sectionRulesMessagesSelector,
     sectionMessages => sectionMessages,

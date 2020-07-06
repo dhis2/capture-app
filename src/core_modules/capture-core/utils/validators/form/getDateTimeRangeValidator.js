@@ -20,7 +20,9 @@ const convertDateTimeToMoment = (value: Object) => {
         minutes = time.substring(3, 4);
     }
     const momentDateTime = parseDate(date).momentDate;
+    // $FlowFixMe[incompatible-use] automated comment
     momentDateTime.hour(hour);
+    // $FlowFixMe[incompatible-use] automated comment
     momentDateTime.minute(minutes);
     return momentDateTime;
 };
@@ -39,11 +41,13 @@ export const getDateTimeRangeValidator = (invalidDateTimeMessage: string) =>
         if (errorResult.length > 0) {
             return {
                 valid: false,
+                // $FlowFixMe[exponential-spread] automated comment
                 errorMessage: errorResult.reduce((map, error) => ({ ...map, ...error }), {}),
             };
         }
 
         const fromDateTime = convertDateTimeToMoment(value.from);
         const toDateTime = convertDateTimeToMoment(value.to);
+        // $FlowFixMe[invalid-compare] automated comment
         return fromDateTime <= toDateTime;
     };

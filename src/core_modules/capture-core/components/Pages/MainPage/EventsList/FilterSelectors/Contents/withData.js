@@ -20,8 +20,9 @@ const mapStateToProps = (state: ReduxState, props: { listId: string, id: string 
     };
 };
 
-const dispatchToProps = (dispatch: ReduxDispatch) => ({
+const dispatchToProps = () => ({
 
 });
 
+// $FlowFixMe[missing-annot] automated comment
 export default () => (InnerComponent: React.ComponentType<any>) => connect(mapStateToProps, dispatchToProps)(InnerComponent);

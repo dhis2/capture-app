@@ -3,7 +3,7 @@
  * Validate the version and cacheVersion specified in package.json
  * The version and cacheVersion compose the actual storage version.
  */
-var packageDesc = require('./package.json');
+const packageDesc = require('./package.json');
 
 function verifyMajorCacheVersion(appVersion) {
     if (!appVersion) {
@@ -11,7 +11,7 @@ function verifyMajorCacheVersion(appVersion) {
         process.exit(1);
     }
 
-    var appMajorVersion = Number(appVersion.split('.')[0]);
+    const appMajorVersion = Number(appVersion.split('.')[0]);
     if (Number.isNaN(appMajorVersion) || !Number.isSafeInteger(appMajorVersion) || appMajorVersion <= 30) {
         console.log('Invalid app version');
         process.exit(1);
@@ -24,14 +24,14 @@ function verifyMinorCacheVersion(appCacheVersionAsString) {
         process.exit(1);
     }
 
-    var appCacheVersion = Number(appCacheVersionAsString);
+    const appCacheVersion = Number(appCacheVersionAsString);
     if (Number.isNaN(appCacheVersion) || !Number.isSafeInteger(appCacheVersion) || appCacheVersion >= 1000) {
         console.log('Invalid cache version');
         process.exit(1);
     }
 }
 
-var appVersion = packageDesc.version;
-var cacheVersion = packageDesc.cacheVersion;
+const appVersion = packageDesc.version;
+const cacheVersion = packageDesc.cacheVersion;
 verifyMajorCacheVersion(appVersion);
 verifyMinorCacheVersion(cacheVersion);

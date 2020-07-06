@@ -2,7 +2,7 @@
 import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router'; //eslint-disable-line
+import { withRouter } from 'react-router';
 
 import ConfirmDialog from '../Dialogs/ConfirmDialog.component';
 import getDataEntryKey from './common/getDataEntryKey';
@@ -50,7 +50,7 @@ const getEventListener = (InnerComponent: React.ComponentType<any>) =>
                 dialogOpen: false,
             });
             this.unblock();
-            //this.props.history.goBack();
+            // this.props.history.goBack();
         }
 
         handleDialogCancel = () => {
@@ -60,6 +60,7 @@ const getEventListener = (InnerComponent: React.ComponentType<any>) =>
         }
 
         render() {
+            // $FlowFixMe[prop-missing] automated comment
             const { dataEntryHasChanges, history, location, match, staticContext, ...passOnProps } = this.props;
             return (
                 <React.Fragment>
@@ -93,6 +94,8 @@ const mapDispatchToProps = () => ({});
 
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
-        // $FlowSuppress
+
+        // $FlowFixMe[missing-annot] automated comment
         connect(
+            // $FlowFixMe[missing-annot] automated comment
             mapStateToProps, mapDispatchToProps)(withRouter(getEventListener(InnerComponent)));

@@ -42,10 +42,11 @@ const coordinateKeys = {
 };
 
 export default class D2Coordinate extends React.Component<Props, State> {
+    mapInstance: ?any;
+
     static defaultProps = {
         mapCenter: [51.505, -0.09],
     };
-    mapInstance: ?any;
 
     constructor(props: Props) {
         super(props);
@@ -129,7 +130,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
                 >
                     <AddLocationIcon
                         onClick={this.openMap}
-                        
+
                     />
                 </IconButton>
 
@@ -139,10 +140,10 @@ export default class D2Coordinate extends React.Component<Props, State> {
 
     renderMapDialog = () => {
         const clonedDialog = React.cloneElement(
-            // $FlowSuppress
+
             this.props.mapDialog,
             { open: this.state.showMap, onClose: this.closeMap },
-            // $FlowSuppress
+
             [...React.Children.toArray(this.props.mapDialog.props.children), (
                 <div className={defaultClasses.dialogContent} key="dialogContent">
                     {this.renderMap()}
@@ -189,11 +190,13 @@ export default class D2Coordinate extends React.Component<Props, State> {
     renderDialogActions = () => (
         <div className={defaultClasses.dialogActionOuterContainer}>
             <div className={defaultClasses.dialogActionInnerContainer}>
+                {/* $FlowFixMe[prop-missing] automated comment */}
                 <Button kind="basic" onClick={this.closeMap}>
                     {i18n.t('Cancel')}
                 </Button>
             </div>
             <div className={defaultClasses.dialogActionInnerContainer}>
+                {/* $FlowFixMe[prop-missing] automated comment */}
                 <Button kind="primary" onClick={this.onSetCoordinate}>
                     {i18n.t('Set coordinate')}
                 </Button>
@@ -205,6 +208,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
         const { mapCenter, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
         const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes || {};
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <CoordinateInput
                 shrinkDisabled={shrinkDisabled}
                 label="Latitude"
@@ -223,6 +227,7 @@ export default class D2Coordinate extends React.Component<Props, State> {
         const { mapCenter, onBlur, onChange, value, orientation, shrinkDisabled, classes, mapDialog, disabled, ...passOnProps } = this.props;
         const { mapIconContainer: mapIconContainerCustomClass, mapIcon: mapIconCustomClass, ...passOnClasses } = classes || {};
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <CoordinateInput
                 shrinkDisabled={shrinkDisabled}
                 label="Longitude"
@@ -251,43 +256,39 @@ export default class D2Coordinate extends React.Component<Props, State> {
     }
 
 
-    renderVertical = () => {
-        return (
-            <div>
-                <div className={defaultClasses.coordinateFieldsVertical}>
-                    {this.renderMapDialog()}
-                    <div className={defaultClasses.buttonsContainerVertical}>
-                        {this.renderMapIcon()}
-                        {this.renderClearButton()}
-                    </div>
-                    <div className={defaultClasses.inputContainer}>
-                        {this.renderLongitude()}
-                    </div>
-                    <div className={defaultClasses.inputContainer}>
-                        {this.renderLatitude()}
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
-    renderHorizontal = () => {
-        return (
-            <div>
-                <div className={defaultClasses.coordinateFieldsHorizontal}>
-                    {this.renderMapDialog()}
+    renderVertical = () => (
+        <div>
+            <div className={defaultClasses.coordinateFieldsVertical}>
+                {this.renderMapDialog()}
+                <div className={defaultClasses.buttonsContainerVertical}>
                     {this.renderMapIcon()}
-                    <div className={defaultClasses.inputContainer}>
-                        {this.renderLongitude()}
-                    </div>
-                    <div className={defaultClasses.inputContainer}>
-                        {this.renderLatitude()}
-                    </div>
                     {this.renderClearButton()}
                 </div>
+                <div className={defaultClasses.inputContainer}>
+                    {this.renderLongitude()}
+                </div>
+                <div className={defaultClasses.inputContainer}>
+                    {this.renderLatitude()}
+                </div>
             </div>
-        );
-    }
+        </div>
+    )
+
+    renderHorizontal = () => (
+        <div>
+            <div className={defaultClasses.coordinateFieldsHorizontal}>
+                {this.renderMapDialog()}
+                {this.renderMapIcon()}
+                <div className={defaultClasses.inputContainer}>
+                    {this.renderLongitude()}
+                </div>
+                <div className={defaultClasses.inputContainer}>
+                    {this.renderLatitude()}
+                </div>
+                {this.renderClearButton()}
+            </div>
+        </div>
+    )
 
     render() {
         return this.props.orientation === orientations.VERTICAL ? this.renderVertical() : this.renderHorizontal();

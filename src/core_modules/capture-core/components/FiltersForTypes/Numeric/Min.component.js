@@ -31,6 +31,7 @@ class MinNumericFilter extends Component<Props> {
         const { error, errorClass, onBlur, onEnterKey, ...passOnProps } = this.props;
         return (
             <div>
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <TextField
                     onKeyPress={this.handleKeyPress}
                     onBlur={this.handleBlur}
