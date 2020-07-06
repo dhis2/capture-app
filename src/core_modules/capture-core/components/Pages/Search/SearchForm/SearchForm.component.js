@@ -35,7 +35,7 @@ const Index = ({
     classes,
     availableSearchOptions,
     forms,
-}): Props =>
+}: Props) =>
     (useMemo(() => {
         const formReference = {};
 

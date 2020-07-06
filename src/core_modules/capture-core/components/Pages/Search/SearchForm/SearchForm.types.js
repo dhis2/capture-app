@@ -1,5 +1,9 @@
 // @flow
+import type { AvailableSearchOptions } from '../SearchPage.types';
+
 export type OwnProps = {|
+  +availableSearchOptions: AvailableSearchOptions,
+  +selectedOptionId?: string,
   +classes: {|
     +searchDomainSelectorSection: string,
     +searchButtonContainer: string,

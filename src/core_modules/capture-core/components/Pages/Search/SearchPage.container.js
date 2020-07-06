@@ -26,7 +26,6 @@ const buildSearchOption = (id, name, searchGroups, searchScope) => ({
         })),
 });
 
-
 export const searchPageActionTypes = {
     SCOPE_PROGRAM_USING_UNIQUE_IDENTIFIER_FIND: 'ScopeProgramFindUsingUniqueIdentifier',
     SCOPE_TRACKED_ENTITY_TYPE_USING_UNIQUE_IDENTIFIER_FIND: 'ScopeTrackedEntityTypeFindUsingUniqueIdentifier',

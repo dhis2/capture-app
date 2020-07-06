@@ -1,6 +1,14 @@
 // @flow
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 
+
+export type AvailableSearchOptions = {
+  [elementId: string]: {|
+    +searchOptionId: string,
+    +searchOptionName: string,
+    +searchGroups: Array<{|searchForm: RenderFoundation, unique: boolean, formId: string, searchScope: string|}>
+  |}
+}
 export type OwnProps = {|
   +classes: {|
     +container: string,
@@ -34,13 +42,7 @@ export type PropsFromRedux ={|
       |}>
     |}
   },
-  +availableSearchOptions: {
-    [elementId: string]: {|
-      +searchOptionId: string,
-      +searchOptionName: string,
-      +searchGroups: Array<{|searchForm: RenderFoundation, unique: boolean, formId: string, searchScope: string|}>
-    |}
-  },
+  +availableSearchOptions: AvailableSearchOptions,
   +error: boolean,
   +ready: boolean,
   +searchStatus: string,
