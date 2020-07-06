@@ -10,7 +10,6 @@ import {
 } from '../../../../metaData';
 import { actionCreator } from '../../../../actions/actions.utils';
 
-
 const trackerCaptureAppUrl = () => (process.env.REACT_APP_TRACKER_CAPTURE_APP_PATH || '..').replace(/\/$/, '');
 
 export const onScopeProgramFindUsingUniqueIdentifierEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -46,6 +45,7 @@ export const onScopeProgramFindUsingUniqueIdentifierEpic = (action$: InputObserv
                 startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
             );
         }),
+        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
     );
 
 
@@ -82,6 +82,7 @@ export const onScopeTrackedEntityTypeFindUsingUniqueIdentifierEpic = (action$: I
                 startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
             );
         }),
+        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
     );
 
 export const trackedEntitySearchUsingAttributesEpic = (action$: InputObservable, store: ReduxStore) =>

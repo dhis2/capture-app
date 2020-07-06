@@ -19,6 +19,7 @@ export type PropsFromRedux ={|
       loadNr: number
     }
   },
+  +searchStatus: string,
 |}
 
 export type DispatchersFromRedux = {|
