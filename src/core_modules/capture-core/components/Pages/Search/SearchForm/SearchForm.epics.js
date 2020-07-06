@@ -43,9 +43,9 @@ export const onScopeProgramFindUsingUniqueIdentifierEpic = (action$: InputObserv
                     return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
                 }),
                 startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
+                catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)(null, null, true))),
             );
         }),
-        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
     );
 
 
@@ -80,9 +80,9 @@ export const onScopeTrackedEntityTypeFindUsingUniqueIdentifierEpic = (action$: I
                     return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
                 }),
                 startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
+                catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)(null, null, true))),
             );
         }),
-        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
     );
 
 export const trackedEntitySearchUsingAttributesEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -112,7 +112,7 @@ export const trackedEntitySearchUsingAttributesEpic = (action$: InputObservable,
                     return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
                 }),
                 startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
+                catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)(null, null, true))),
             );
         }),
-        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
     );
