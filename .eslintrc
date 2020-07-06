@@ -9,7 +9,8 @@
     },
     "extends": [
         "airbnb",
-        "plugin:flowtype/recommended"
+        "plugin:flowtype/recommended",
+        "plugin:react-hooks/recommended"
     ],
     "plugins": [
         "flowtype"
