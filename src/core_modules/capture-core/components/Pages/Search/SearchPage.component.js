@@ -70,6 +70,7 @@ const Index = ({
     const [selectedOption, setSelected] = useState(preselectedProgram);
 
     // dan abramov suggest to stringify https://twitter.com/dan_abramov/status/1104414469629898754?lang=en
+    // so that useEffect can do the comparison
     const stringifyPrograms = JSON.stringify(availableSearchOptions);
     useEffect(() => {
         // in order for the Form component to render
