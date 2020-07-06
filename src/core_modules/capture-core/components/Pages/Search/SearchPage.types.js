@@ -46,6 +46,7 @@ export type PropsFromRedux ={|
   +error: boolean,
   +ready: boolean,
   +searchStatus: string,
+  +searchResultsErrorMessage: string
 |}
 
 export type DispatchersFromRedux = {|

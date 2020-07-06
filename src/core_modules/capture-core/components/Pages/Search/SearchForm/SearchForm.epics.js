@@ -1,6 +1,7 @@
 // @flow
-import { flatMap, map } from 'rxjs/operators';
+import { catchError, flatMap, map, startWith } from 'rxjs/operators';
 import { from } from 'rxjs/observable/from';
+import { of } from 'rxjs/observable/of';
 import { searchPageActionTypes } from '../SearchPage.container';
 import { getTrackedEntityInstances } from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import {
@@ -8,7 +9,6 @@ import {
     getTrackerProgramThrowIfNotFound,
 } from '../../../../metaData';
 import { actionCreator } from '../../../../actions/actions.utils';
-
 
 const trackerCaptureAppUrl = () => (process.env.REACT_APP_TRACKER_CAPTURE_APP_PATH || '..').replace(/\/$/, '');
 
@@ -42,8 +42,10 @@ export const onScopeProgramFindUsingUniqueIdentifierEpic = (action$: InputObserv
                     // trigger action that will display modal to inform user that results are empty.
                     return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
                 }),
+                startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
             );
         }),
+        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
     );
 
 
@@ -77,6 +79,8 @@ export const onScopeTrackedEntityTypeFindUsingUniqueIdentifierEpic = (action$: I
                     // trigger action that will display modal to inform user that results are empty.
                     return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
                 }),
+                startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
             );
         }),
+        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
     );

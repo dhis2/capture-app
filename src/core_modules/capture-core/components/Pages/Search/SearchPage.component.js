@@ -125,6 +125,7 @@ const Index = ({
     searchStatus,
     addFormIdToReduxStore,
     closeModal,
+    searchResultsErrorMessage,
 }: Props) => {
     const [selectedOption, setSelected] = useState(preselectedProgram);
 
@@ -182,6 +183,12 @@ const Index = ({
                         </ModalActions>
                     </Modal>
                 }
+
+                {
+                    searchStatus === searchPageStatus.ERROR &&
+                    <h1 style={{ color: 'red' }}>{searchResultsErrorMessage}</h1>
+                }
+
             </Paper>
 
             {

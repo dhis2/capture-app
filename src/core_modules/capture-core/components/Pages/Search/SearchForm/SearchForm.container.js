@@ -7,9 +7,10 @@ import type { DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './Se
 
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
-    const { forms } = state;
+    const { forms, searchPage: { searchStatus } } = state;
     return {
         forms,
+        searchStatus,
     };
 };
 

@@ -7,6 +7,7 @@ import Form from '../../../D2Form/D2Form.component';
 import { searchScopes } from '../SearchPage.container';
 import { Section, SectionHeaderSimple } from '../../../Section';
 import type { Props } from './SearchForm.types';
+import { searchPageStatus } from '../../../../reducers/descriptions/searchPage.reducerDescription';
 
 const getStyles = (theme: Theme) => ({
     searchDomainSelectorSection: {
@@ -35,6 +36,7 @@ const Index = ({
     classes,
     availableSearchOptions,
     forms,
+    searchStatus,
 }: Props) =>
     (useMemo(() => {
         const formReference = {};
@@ -86,9 +88,11 @@ const Index = ({
                         </div>
                         <div className={classes.searchButtonContainer}>
                             <Button
+                                disabled={searchStatus === searchPageStatus.LOADING}
+
                                 onClick={() =>
                                     selectedOptionId &&
-                  handleOnFindUsingUniqueIdentifier(selectedOptionId, formId, searchScope)}
+                                    handleOnFindUsingUniqueIdentifier(selectedOptionId, formId, searchScope)}
                             >
                                 Find by {name}.
                             </Button>
@@ -107,6 +111,7 @@ const Index = ({
         selectedOptionId,
         searchViaUniqueIdOnScopeTrackedEntityType,
         searchViaUniqueIdOnScopeProgram,
+        searchStatus,
     ]));
 
 

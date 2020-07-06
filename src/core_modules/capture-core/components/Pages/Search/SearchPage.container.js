@@ -30,6 +30,8 @@ export const searchPageActionTypes = {
     VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH: 'SearchViaUniqueIdOnScopeProgram',
     VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH: 'SearchViaUniqueIdOnScopeTrackedEntityType',
     SEARCH_RESULTS_EMPTY: 'SearchResultsEmpty',
+    SEARCH_RESULTS_LOADING: 'SearchResultsLoading',
+    SEARCH_RESULTS_ERROR: 'SearchResultsError',
     MODAL_CLOSE: 'CloseModal',
 };
 
@@ -39,7 +41,7 @@ export const searchScopes = {
 };
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
-    const { currentSelections, activePage, searchPage: { searchStatus } } = state;
+    const { currentSelections, activePage, searchPage: { searchStatus, searchResultsErrorMessage } } = state;
 
     const trackedEntityTypesWithCorrelatedPrograms =
       [...programCollection.values()]
@@ -100,6 +102,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         error: activePage.selectionsError && activePage.selectionsError.error,
         ready: !activePage.isLoading,
         searchStatus,
+        searchResultsErrorMessage,
     };
 };
 
