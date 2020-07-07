@@ -9,7 +9,7 @@ Given('click the "New" button to add a new event', () => {
     cy.get('[data-test="dhis2-uicore-button"]').click();
 });
 Then('you should see text with info', () => {
-    cy.get('[data-test="paper"]')
+    cy.get('[data-test="dhis2-capture-paper"]')
         .contains('Select a registering unit and program above to get started')
         .should('exist');
 });

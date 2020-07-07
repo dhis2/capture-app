@@ -2,5 +2,6 @@
     "baseUrl": "http://localhost:3000",
     "video": false,
     "testFiles": "**/*.feature",
-    "dhis2_datatest_prefix": "dhis2-capture"
+    "dhis2_datatest_prefix": "dhis2-capture",
+    "defaultCommandTimeout": 10000
 }
