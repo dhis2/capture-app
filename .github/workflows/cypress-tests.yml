@@ -14,6 +14,5 @@ jobs:
           start: 'yarn start'
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 60
-          group: 'e2e'
     env:
       CI: true
