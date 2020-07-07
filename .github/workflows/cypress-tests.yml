@@ -9,22 +9,22 @@ jobs:
       runs-on: ubuntu-16.04
 
       steps:
-          - name: Checkout
-              uses: actions/checkout@v1
+        - name: Checkout
+            uses: actions/checkout@v1
 
-          - name: Cypress run
-              uses: cypress-io/github-action@v2
-              with:
-                record: true
-                start: 'yarn start'
-                wait-on: 'http://localhost:3000'
-                wait-on-timeout: 60
-                group: 'e2e'
+        - name: Cypress run
+            uses: cypress-io/github-action@v2
+            with:
+              record: true
+              start: 'yarn start'
+              wait-on: 'http://localhost:3000'
+              wait-on-timeout: 60
+              group: 'e2e'
 
-          - name: Upload screenshots
-              uses: actions/upload-artifact@v1
-              with:
-                name: failed-tests.csv
-                path: cypress/screenshots
+        - name: Upload screenshots
+            uses: actions/upload-artifact@v1
+            with:
+              name: failed-tests.csv
+              path: cypress/screenshots
       env:
         CI: true
