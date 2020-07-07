@@ -88,6 +88,7 @@ class DataEntrySelectionsIncomplete extends Component<Props> {
                 {this.renderHeader()}
                 <Paper
                     elevation={0}
+                    data-test="dhis2-capture-paper"
                 >
                     <div
                         className={classes.contents}
