@@ -1,4 +1,4 @@
-name: 'dhis2: '
+name: 'dhis2: tests'
 
 on: push
 
@@ -15,8 +15,8 @@ jobs:
               run: yarn install --frozen-lockfile
 
             - name: Test
-              run: |
-                  yarn cy:run
+              run: yarn cy:run
+
             - name: Upload screenshots
               uses: actions/upload-artifact@v1
               with:
