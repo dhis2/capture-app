@@ -19,6 +19,7 @@ import type { Props } from './SearchPage.types';
 import { Section, SectionHeaderSimple } from '../../Section';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
 
 const getStyles = (theme: Theme) => ({
     divider: {
@@ -65,6 +66,9 @@ const getStyles = (theme: Theme) => ({
         padding: theme.typography.pxToRem(10),
         display: 'flex',
         alignItems: 'center',
+    },
+    backButton: {
+        marginBottom: 10,
     },
     errorMessage: {
         color: 'rgb(211, 47, 47)',
@@ -129,6 +133,7 @@ const Index = ({
     searchStatus,
     addFormIdToReduxStore,
     closeModal,
+    navigateToMainPage,
     searchResults,
     searchResultsErrorMessage,
 }: Props) => {
@@ -157,6 +162,11 @@ const Index = ({
     return (<>
         <LockedSelector />
         <div className={classes.container}>
+            <Button className={classes.backButton} onClick={navigateToMainPage}>
+                <ChevronLeft />
+                {i18n.t('Show all events')}
+            </Button>
+
             <Paper className={classes.paper}>
 
                 <SearchSelection

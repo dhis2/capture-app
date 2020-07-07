@@ -59,7 +59,8 @@ export type PropsFromRedux ={|
 
 export type DispatchersFromRedux = {|
   addFormIdToReduxStore: (formId: string) => void,
-  closeModal: () => void
+  closeModal: () => void,
+  navigateToMainPage: () => void
 |}
 
 export type Props = {|

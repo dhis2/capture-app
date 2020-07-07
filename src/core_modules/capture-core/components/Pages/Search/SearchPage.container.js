@@ -37,6 +37,7 @@ export const searchPageActionTypes = {
     SEARCH_RESULTS_SUCCESS: 'SearchResultsSuccess',
     SEARCH_RESULTS_ERROR: 'SearchResultsError',
     MODAL_CLOSE: 'CloseModal',
+    TO_MAIN_PAGE_NAVIGATE: 'NavigateToMainPage',
 };
 
 export const searchScopes = {
@@ -114,6 +115,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
 const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
     addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
     closeModal: () => { dispatch(actionCreator(searchPageActionTypes.MODAL_CLOSE)()); },
+    navigateToMainPage: () => { dispatch(actionCreator(searchPageActionTypes.TO_MAIN_PAGE_NAVIGATE)()); },
 });
 
 export const SearchPage =
