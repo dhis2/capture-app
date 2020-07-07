@@ -31,6 +31,7 @@ export type OwnProps = {|
     +emptySelectionPaperContent: string,
     +divider: string,
     +generalPurposeErrorMessage: string,
+    +backButton: string,
   |},
 |}
 
