@@ -31,6 +31,6 @@ export const searchPageDesc = createReducerDescription({
     [searchPageActionTypes.SEARCH_RESULTS_ERROR]: state => ({
         ...state,
         searchStatus: searchPageStatus.ERROR,
-        errorMessage: 'There is an error please be aware.',
+        generalPurposeErrorMessage: 'This is a general purpose error. This text needs to be defined',
     }),
 }, 'searchPage', { searchStatus: searchPageStatus.INITIAL });

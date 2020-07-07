@@ -12,7 +12,7 @@ import { actionCreator } from '../../../../actions/actions.utils';
 
 const trackerCaptureAppUrl = () => (process.env.REACT_APP_TRACKER_CAPTURE_APP_PATH || '..').replace(/\/$/, '');
 
-const searchQueryFiltersForUniqueId = (searchTerm) => {
+const filtersForUniqueIdSearchQuery = (searchTerm) => {
     const fieldId = Object.keys(searchTerm)[0];
     return [`${fieldId}:eq:${searchTerm[fieldId]}`];
 };
@@ -34,7 +34,7 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
         catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
     );
 
-const searchQueryFiltersForAttributes = formValues => Object.keys(formValues)
+const filtersForAttributesSearchQuery = formValues => Object.keys(formValues)
     .filter(fieldId => formValues[fieldId].replace(/\s/g, '').length)
     .map(fieldId => `${fieldId}:like:${formValues[fieldId]}`);
 
@@ -58,7 +58,7 @@ export const searchViaUniqueIdOnScopeProgramEpic = (action$: InputObservable, st
         flatMap(({ payload: { formId, programId } }) => {
             const { formsValues } = store.getState();
             const queryArgs = {
-                filter: searchQueryFiltersForUniqueId(formsValues[formId]),
+                filter: filtersForUniqueIdSearchQuery(formsValues[formId]),
                 program: programId,
                 pageNumber: 1,
                 ouMode: 'ACCESSIBLE',
@@ -77,7 +77,7 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (action$: InputObse
         flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
             const { formsValues } = store.getState();
             const queryArgs = {
-                filter: searchQueryFiltersForUniqueId(formsValues[formId]),
+                filter: filtersForUniqueIdSearchQuery(formsValues[formId]),
                 trackedEntityType: trackedEntityTypeId,
                 pageNumber: 1,
                 ouMode: 'ACCESSIBLE',
@@ -96,7 +96,7 @@ export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, 
             const { formsValues } = store.getState();
 
             const queryArgs = {
-                filter: searchQueryFiltersForAttributes(formsValues[formId]),
+                filter: filtersForAttributesSearchQuery(formsValues[formId]),
                 program: programId,
                 pageNumber: 1,
                 ouMode: 'ACCESSIBLE',
@@ -114,7 +114,7 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (action$: InputOb
             const { formsValues } = store.getState();
 
             const queryArgs = {
-                filter: searchQueryFiltersForAttributes(formsValues[formId]),
+                filter: filtersForAttributesSearchQuery(formsValues[formId]),
                 trackedEntityType: trackedEntityTypeId,
                 pageNumber: 1,
                 ouMode: 'ACCESSIBLE',

@@ -15,7 +15,6 @@ export type OwnProps = {|
 |}
 
 export type PropsFromRedux ={|
-  +searchStatus: string,
   +forms: {
     [elementId: string]: {
       loadNr: number

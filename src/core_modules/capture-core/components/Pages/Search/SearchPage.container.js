@@ -46,7 +46,7 @@ export const searchScopes = {
 };
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
-    const { currentSelections, activePage, searchPage: { searchStatus, searchResults, errorMessage } } = state;
+    const { currentSelections, activePage, searchPage: { searchStatus, searchResults, generalPurposeErrorMessage } } = state;
 
     const trackedEntityTypesWithCorrelatedPrograms =
       [...programCollection.values()]
@@ -108,7 +108,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         ready: !activePage.isLoading,
         searchStatus,
         searchResults,
-        searchResultsErrorMessage: errorMessage,
+        generalPurposeErrorMessage,
     };
 };
 
