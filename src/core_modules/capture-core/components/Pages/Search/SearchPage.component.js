@@ -3,6 +3,7 @@ import React, { useMemo, useState, useEffect } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper/Paper';
 import withStyles from '@material-ui/core/styles/withStyles';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import {
     SingleSelect,
     SingleSelectOption,
@@ -18,7 +19,6 @@ import type { Props } from './SearchPage.types';
 import { Section, SectionHeaderSimple } from '../../Section';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
 
 const getStyles = (theme: Theme) => ({
     divider: {
