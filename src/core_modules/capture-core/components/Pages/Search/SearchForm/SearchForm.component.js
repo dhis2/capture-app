@@ -129,7 +129,11 @@ const Index = ({
                                         disabled={searchStatus === searchPageStatus.LOADING}
                                         onClick={() =>
                                             selectedOptionId &&
-                                    handleSearchViaUniqueId(selectedOptionId, formId, searchScope)}
+                                            handleSearchViaUniqueId(
+                                                selectedOptionId,
+                                                formId,
+                                                searchScope,
+                                            )}
                                     >
                                         Find by {name}.
                                     </Button>

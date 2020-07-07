@@ -13,7 +13,6 @@ import {
     ButtonStrip,
     Button,
 } from '@dhis2/ui-core';
-
 import { LockedSelector } from '../../LockedSelector';
 import type { Props } from './SearchPage.types';
 import { Section, SectionHeaderSimple } from '../../Section';
@@ -66,8 +65,8 @@ const getStyles = (theme: Theme) => ({
         display: 'flex',
         alignItems: 'center',
     },
-    errorMessage: {
-        color: 'rgb(211, 47, 47)',
+    generalPurposeErrorMessage: {
+        color: theme.palette.error.main,
     },
 });
 
@@ -130,7 +129,7 @@ const Index = ({
     addFormIdToReduxStore,
     closeModal,
     searchResults,
-    searchResultsErrorMessage,
+    generalPurposeErrorMessage,
 }: Props) => {
     const [selectedOption, setSelected] = useState(preselectedProgram);
 
@@ -170,7 +169,6 @@ const Index = ({
                     availableSearchOptions={availableSearchOptions}
                 />
 
-
                 {
                     searchStatus === searchPageStatus.NO_RESULTS &&
                     <Modal position="middle">
@@ -192,18 +190,20 @@ const Index = ({
                 }
 
                 {
-                    searchStatus === searchPageStatus.SHOW_RESULTS && <h1> there are results!
-                        {searchResults && <div>{searchResults.length}</div>}
-                    </h1>
+                    searchStatus === searchPageStatus.SHOW_RESULTS &&
+                    <h3>
+                        Your search has given results. At this point the results are stored.
+                        Number of results: {searchResults && searchResults.length}
+                    </h3>
 
                 }
 
                 {
                     searchStatus === searchPageStatus.ERROR &&
-                    <div className={classes.errorMessage}>{searchResultsErrorMessage}</div>
-
+                    <div className={classes.generalPurposeErrorMessage}>
+                        {generalPurposeErrorMessage}
+                    </div>
                 }
-
             </Paper>
 
             {
@@ -214,7 +214,6 @@ const Index = ({
                         </div>
                     </Paper>
             }
-
         </div>
     </>);
 };

@@ -30,7 +30,7 @@ export type OwnProps = {|
     +emptySelectionPaperContainer: string,
     +emptySelectionPaperContent: string,
     +divider: string,
-    +errorMessage: string,
+    +generalPurposeErrorMessage: string,
   |},
 |}
 
@@ -53,8 +53,12 @@ export type PropsFromRedux ={|
   +error: boolean,
   +ready: boolean,
   +searchStatus: string,
-  +searchResultsErrorMessage: string,
-  +searchResults: Object,
+  +generalPurposeErrorMessage: string,
+  +searchResults: Array<{|
+    +id: string,
+    +tei: Object,
+    +values: Object
+  |}>,
 |}
 
 export type DispatchersFromRedux = {|
