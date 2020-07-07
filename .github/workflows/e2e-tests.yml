@@ -14,8 +14,13 @@ jobs:
             - name: Install
               run: yarn install --frozen-lockfile
 
-            - name: TEst
+            - name: Test
               run: |
                   yarn cy:run
+            - name: Upload screenshots
+              uses: actions/upload-artifact@v1
+              with:
+                name: failed-tests.csv
+                path: cypress/screenshots
         env:
             CI: true
