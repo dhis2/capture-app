@@ -23,7 +23,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     };
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch, state: ReduxState): DispatchersFromRedux => {
+const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => {
     const {
         VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH,
         VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH,
