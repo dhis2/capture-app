@@ -19,7 +19,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v1
         with:
-          name: failed-tests.csv
+          name: failed-tests
           path: cypress/screenshots
 
     env:
