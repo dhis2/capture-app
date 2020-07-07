@@ -16,9 +16,9 @@ jobs:
           wait-on-timeout: 60
 
       - name: Upload screenshots
-          uses: actions/upload-artifact@v1
-          with:
-            name: failed-tests.csv
-            path: cypress/screenshots
+        uses: actions/upload-artifact@v1
+        with:
+          name: failed-tests.csv
+          path: cypress/screenshots
     env:
       CI: true
