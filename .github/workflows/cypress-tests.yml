@@ -9,16 +9,18 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Cypress run
-        uses: cypress-io/github-action@v1
+        uses: cypress-io/github-action@v2
         with:
           start: 'yarn start'
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 60
 
-      - name: Upload screenshots
+      - name: Upload artifacts
+        if: failure()
         uses: actions/upload-artifact@v1
         with:
           name: failed-tests.csv
           path: cypress/screenshots
+
     env:
       CI: true
