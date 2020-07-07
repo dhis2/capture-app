@@ -170,7 +170,13 @@ const Index = ({
                                         disabled={searchStatus === searchPageStatus.LOADING}
                                         onClick={() =>
                                             selectedOptionId &&
-                                    handleSearchViaAttributes(selectedOptionId, formId, searchScope, minAttributesRequiredToSearch)}
+                                            handleSearchViaAttributes(
+                                                selectedOptionId,
+                                                formId,
+                                                searchScope,
+                                                minAttributesRequiredToSearch,
+                                            )
+                                        }
                                     >
                                         Search by {name}
                                     </Button>
