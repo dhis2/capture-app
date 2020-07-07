@@ -3,7 +3,7 @@ import { Given, Then } from 'cypress-cucumber-preprocessor/steps';
 
 Given('click the "New" button to add a new event', () => {
     cy.visit('/');
-    cy.get('[data-test="dhis2-uicore-button"]', { timeout: 20000 })
+    cy.get('[data-test="dhis2-uicore-button"]')
         .contains('New')
         .should('exist');
     cy.get('[data-test="dhis2-uicore-button"]').click();
