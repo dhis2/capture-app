@@ -11,7 +11,6 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v1
         with:
-          record: true
           start: 'yarn start'
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 60
