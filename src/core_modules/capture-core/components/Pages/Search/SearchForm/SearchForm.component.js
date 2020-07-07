@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui-core';
@@ -27,10 +27,16 @@ const getStyles = (theme: Theme) => ({
         display: 'flex',
         alignItems: 'center',
     },
-    textWarning: {
+    textInfo: {
         textAlign: 'right',
         fontSize: '14px',
         flexGrow: 1,
+    },
+    textError: {
+        textAlign: 'right',
+        fontSize: theme.typography.pxToRem(14),
+        flexGrow: 1,
+        color: theme.palette.error.main,
     },
 });
 
@@ -43,10 +49,12 @@ const Index = ({
     classes,
     availableSearchOptions,
     forms,
-    formsValues,
     searchStatus,
-}: Props) =>
-    (useMemo(() => {
+    isSearchViaAttributesValid,
+}: Props) => {
+    const [error, setError] = useState(false);
+
+    return useMemo(() => {
         const formReference = {};
 
         const handleSearchViaUniqueId = (selectedId, formId, searchScope) => {
@@ -66,20 +74,11 @@ const Index = ({
             }
         };
 
-        const isSearchViaAttributesValid = (minAttributesRequiredToSearch, formId) => {
-            const formValues = formsValues[formId] || {};
-            const numberOfAttributeSearchInputsWithValues =
-              Object.keys(formValues)
-                  .filter(key => formValues[key])
-                  .length;
-
-            return numberOfAttributeSearchInputsWithValues >= minAttributesRequiredToSearch;
-        };
-
         const handleSearchViaAttributes = (selectedId, formId, searchScope, minAttributesRequiredToSearch) => {
             const isValid = isSearchViaAttributesValid(minAttributesRequiredToSearch, formId);
 
             if (isValid) {
+                setError(false);
                 switch (searchScope) {
                 case searchScopes.PROGRAM:
                     searchViaAttributesOnScopeProgram({ programId: selectedId, formId });
@@ -90,6 +89,8 @@ const Index = ({
                 default:
                     break;
                 }
+            } else {
+                setError(true);
             }
         };
 
@@ -128,7 +129,7 @@ const Index = ({
                                         disabled={searchStatus === searchPageStatus.LOADING}
                                         onClick={() =>
                                             selectedOptionId &&
-                                            handleSearchViaUniqueId(selectedOptionId, formId, searchScope)}
+                                    handleSearchViaUniqueId(selectedOptionId, formId, searchScope)}
                                     >
                                         Find by {name}.
                                     </Button>
@@ -158,9 +159,6 @@ const Index = ({
                                         {
                                             forms[formId] &&
                                             <Form
-                                                formRef={
-                                                    (formInstance) => { formReference[formId] = formInstance; }
-                                                }
                                                 formFoundation={searchForm}
                                                 id={formId}
                                             />
@@ -172,11 +170,11 @@ const Index = ({
                                         disabled={searchStatus === searchPageStatus.LOADING}
                                         onClick={() =>
                                             selectedOptionId &&
-                                            handleSearchViaAttributes(selectedOptionId, formId, searchScope, minAttributesRequiredToSearch)}
+                                    handleSearchViaAttributes(selectedOptionId, formId, searchScope, minAttributesRequiredToSearch)}
                                     >
                                         Search by {name}
                                     </Button>
-                                    <div className={classes.textWarning}>
+                                    <div className={error ? classes.textError : classes.textInfo}>
                                         Fill in at least {minAttributesRequiredToSearch}  attributes to search
                                     </div>
                                 </div>
@@ -192,9 +190,9 @@ const Index = ({
         classes.searchDomainSelectorSection,
         classes.searchRowSelectElement,
         classes.searchRow,
-        classes.textWarning,
+        classes.textInfo,
+        classes.textError,
         forms,
-        formsValues,
         availableSearchOptions,
         selectedOptionId,
         searchStatus,
@@ -202,7 +200,10 @@ const Index = ({
         searchViaUniqueIdOnScopeProgram,
         searchViaAttributesOnScopeProgram,
         searchViaAttributesOnScopeTrackedEntityType,
-    ]));
+        isSearchViaAttributesValid,
+        error,
+    ]);
+};
 
 
 export const SearchFormComponent = withStyles(getStyles)(Index);

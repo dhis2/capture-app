@@ -11,11 +11,19 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     return {
         forms,
         searchStatus,
-        formsValues,
+        isSearchViaAttributesValid: (minAttributesRequiredToSearch, formId) => {
+            const formValues = formsValues[formId] || {};
+            const currentNumberOfFilledInputValues =
+              Object.keys(formValues)
+                  .filter(key => formValues[key])
+                  .length;
+
+            return currentNumberOfFilledInputValues >= minAttributesRequiredToSearch;
+        },
     };
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => {
+const mapDispatchToProps = (dispatch: ReduxDispatch, state: ReduxState): DispatchersFromRedux => {
     const {
         VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH,
         VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH,
@@ -44,6 +52,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => {
                 actionCreator(VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH)({ programId, formId }),
             );
         },
+
     };
 };
 

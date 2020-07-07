@@ -9,7 +9,8 @@ export type OwnProps = {|
     +searchButtonContainer: string,
     +searchRow: string,
     +searchRowSelectElement: string,
-    +textWarning: string,
+    +textInfo: string,
+    +textError: string,
   |},
 |}
 
@@ -20,10 +21,8 @@ export type PropsFromRedux ={|
       loadNr: number
     }
   },
-  +formsValues: {
-    [elementId: string]: any
-  },
   +searchStatus: string,
+  +isSearchViaAttributesValid: (minAttributesRequiredToSearch: number, formId: string)=> boolean,
 |}
 
 export type DispatchersFromRedux = {|
