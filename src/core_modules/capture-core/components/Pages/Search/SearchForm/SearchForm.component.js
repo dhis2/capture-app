@@ -101,44 +101,46 @@ const Index = ({
                     .map(({ searchForm, formId, searchScope }) => {
                         const name = searchForm.getElements()[0].formName;
                         return (
-                            <Section
-                                className={classes.searchDomainSelectorSection}
-                                header={
-                                    <SectionHeaderSimple
-                                        containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
-                                        title={i18n.t('Search {{name}}', { name })}
-                                    />
-                                }
-                            >
-                                <div className={classes.searchRow}>
-                                    <div className={classes.searchRowSelectElement}>
-                                        {
-                                            forms[formId] &&
-                                            <Form
-                                                formRef={
-                                                    (formInstance) => { formReference[formId] = formInstance; }
-                                                }
-                                                formFoundation={searchForm}
-                                                id={formId}
-                                            />
-                                        }
+                            <div data-test="dhis2-capture-form-unique">
+                                <Section
+                                    className={classes.searchDomainSelectorSection}
+                                    header={
+                                        <SectionHeaderSimple
+                                            containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
+                                            title={i18n.t('Search {{name}}', { name })}
+                                        />
+                                    }
+                                >
+                                    <div className={classes.searchRow}>
+                                        <div className={classes.searchRowSelectElement}>
+                                            {
+                                                forms[formId] &&
+                                                <Form
+                                                    formRef={
+                                                        (formInstance) => { formReference[formId] = formInstance; }
+                                                    }
+                                                    formFoundation={searchForm}
+                                                    id={formId}
+                                                />
+                                            }
+                                        </div>
                                     </div>
-                                </div>
-                                <div className={classes.searchButtonContainer}>
-                                    <Button
-                                        disabled={searchStatus === searchPageStatus.LOADING}
-                                        onClick={() =>
-                                            selectedOptionId &&
+                                    <div className={classes.searchButtonContainer}>
+                                        <Button
+                                            disabled={searchStatus === searchPageStatus.LOADING}
+                                            onClick={() =>
+                                                selectedOptionId &&
                                             handleSearchViaUniqueId(
                                                 selectedOptionId,
                                                 formId,
                                                 searchScope,
                                             )}
-                                    >
-                                        Find by {name}.
-                                    </Button>
-                                </div>
-                            </Section>
+                                        >
+                                            Find by {name}.
+                                        </Button>
+                                    </div>
+                                </Section>
+                            </div>
                         );
                     })
             }
@@ -149,46 +151,49 @@ const Index = ({
                     .map(({ searchForm, formId, searchScope, minAttributesRequiredToSearch }) => {
                         const name = searchForm.getElements()[0].formName;
                         return (
-                            <Section
-                                className={classes.searchDomainSelectorSection}
-                                header={
-                                    <SectionHeaderSimple
-                                        containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
-                                        title={i18n.t('Search {{name}}', { name })}
-                                    />
-                                }
-                            >
-                                <div className={classes.searchRow}>
-                                    <div className={classes.searchRowSelectElement}>
-                                        {
-                                            forms[formId] &&
-                                            <Form
-                                                formFoundation={searchForm}
-                                                id={formId}
-                                            />
-                                        }
+                            <div data-test="dhis2-capture-form-attributes">
+                                <Section
+                                    className={classes.searchDomainSelectorSection}
+                                    header={
+                                        <SectionHeaderSimple
+                                            containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
+                                            title={i18n.t('Search {{name}}', { name })}
+                                        />
+                                    }
+                                >
+                                    <div className={classes.searchRow}>
+                                        <div className={classes.searchRowSelectElement}>
+                                            {
+                                                forms[formId] &&
+                                                <Form
+                                                    formFoundation={searchForm}
+                                                    id={formId}
+                                                />
+                                            }
+                                        </div>
                                     </div>
-                                </div>
-                                <div className={classes.searchButtonContainer}>
-                                    <Button
-                                        disabled={searchStatus === searchPageStatus.LOADING}
-                                        onClick={() =>
-                                            selectedOptionId &&
+                                    <div className={classes.searchButtonContainer}>
+                                        <Button
+                                            disabled={searchStatus === searchPageStatus.LOADING}
+                                            onClick={() =>
+                                                selectedOptionId &&
                                             handleSearchViaAttributes(
                                                 selectedOptionId,
                                                 formId,
                                                 searchScope,
                                                 minAttributesRequiredToSearch,
                                             )
-                                        }
-                                    >
-                                        Search by {name}
-                                    </Button>
-                                    <div className={error ? classes.textError : classes.textInfo}>
-                                        Fill in at least {minAttributesRequiredToSearch}  attributes to search
+                                            }
+                                        >
+                                            Search by {name}
+                                        </Button>
+                                        <div className={error ? classes.textError : classes.textInfo}>
+                                            Fill in at least {minAttributesRequiredToSearch}  attributes to search
+                                        </div>
                                     </div>
-                                </div>
-                            </Section>
+                                </Section>
+                            </div>
+
                         );
                     })
             }

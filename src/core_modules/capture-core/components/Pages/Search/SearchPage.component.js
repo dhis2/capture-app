@@ -160,7 +160,7 @@ const Index = ({
 
     return (<>
         <LockedSelector />
-        <div className={classes.container}>
+        <div data-test="dhis2-capture-search-page-content" className={classes.container}>
             <Button className={classes.backButton} onClick={navigateToMainPage}>
                 <ChevronLeft />
                 {i18n.t('Show all events')}
@@ -210,7 +210,10 @@ const Index = ({
 
                 {
                     searchStatus === searchPageStatus.ERROR &&
-                    <div className={classes.generalPurposeErrorMessage}>
+                    <div
+                        data-test="dhis2-capture-general-purpose-error-mesage"
+                        className={classes.generalPurposeErrorMessage}
+                    >
                         {generalPurposeErrorMessage}
                     </div>
                 }
@@ -218,7 +221,7 @@ const Index = ({
 
             {
                 !selectedOption.value &&
-                    <Paper elevation={0}>
+                    <Paper elevation={0} data-test={'dhis2-capture-informative-paper'}>
                         <div className={classes.emptySelectionPaperContent}>
                             {i18n.t('Make a selection to start searching')}
                         </div>
