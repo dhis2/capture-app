@@ -376,10 +376,10 @@ msgid "Select columns"
 msgstr ""
 
 msgid "Download as JSON"
-msgstr ""
+msgstr "Transferir como JSON"
 
 msgid "Download as XML"
-msgstr ""
+msgstr "Transferir como XML"
 
 msgid "Download as CSV"
 msgstr "Exportar como CSV"
@@ -418,7 +418,7 @@ msgid "Save As view"
 msgstr ""
 
 msgid "View name"
-msgstr ""
+msgstr "Visualizar o nome "
 
 msgid "Show Less"
 msgstr ""
@@ -762,7 +762,7 @@ msgid "Date"
 msgstr "Data"
 
 msgid "Time"
-msgstr ""
+msgstr "Tempo "
 
 msgid "From date"
 msgstr "Data de inicio"
