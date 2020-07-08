@@ -77,7 +77,7 @@
     "linter:check": "eslint -c .eslintrc . --quiet",
     "flow:check": "./node_modules/.bin/flow check ./src",
     "lint": "npm run flow:check && npm run linter:check",
-    "cypress:start": "BROWSER=none REACT_APP_DHIS2_BASE_URL=\"https://debug.dhis2.org/2.34dev/\" REACT_APP_DHIS2_AUTHORIZATION=\"Basic c3lzdGVtOlN5c3RlbTEyMw==\" REACT_APP_TRACKER_CAPTURE_APP_PATH=\"https://debug.dhis2.org/2.34dev/dhis-web-tracker-capture\" yarn start",
+    "cypress:start": "BROWSER=none yarn start",
     "cy:open": "d2-utils-cypress open --appStart 'yarn cypress:start'",
     "cy:run": "d2-utils-cypress run --appStart 'yarn cypress:start'"
   },
