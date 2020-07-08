@@ -2,9 +2,6 @@ name: "dhis2: cypress tests"
 
 on: [push]
 
-env:
-  CI: true
-
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
@@ -18,10 +15,6 @@ jobs:
           start: 'yarn start'
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 60
-          env:
-            REACT_APP_DHIS2_BASE_URL: 'https://debug.dhis2.org/2.34dev/'
-            REACT_APP_DHIS2_AUTHORIZATION: 'Basic c3lzdGVtOlN5c3RlbTEyMw=='
-            REACT_APP_TRACKER_CAPTURE_APP_PATH: 'https://debug.dhis2.org/2.34dev/dhis-web-tracker-capture'
 
       - name: Upload artifacts
         if: failure()
@@ -29,5 +22,8 @@ jobs:
         with:
           name: failed-screenshots
           path: cypress/screenshots
-
-
+    env:
+      CI: true
+      REACT_APP_DHIS2_BASE_URL: 'https://debug.dhis2.org/2.34dev/'
+      REACT_APP_DHIS2_AUTHORIZATION: 'Basic c3lzdGVtOlN5c3RlbTEyMw=='
+      REACT_APP_TRACKER_CAPTURE_APP_PATH: 'https://debug.dhis2.org/2.34dev/dhis-web-tracker-capture'
