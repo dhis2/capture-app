@@ -140,3 +140,17 @@ Then('there should be a validation error message', () => {
         .includesClass('textError')
         .should('exist');
 });
+
+Given('you are on the search page with preselected program and org unit', () => {
+    cy.visit('/#/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
+});
+
+When('when you click the back button', () => {
+    cy.get('[data-test="dhis2-capture-back-button"]')
+        .click();
+});
+
+Then('you should be taken to the main page', () => {
+    cy.isOnMainPage();
+});
+

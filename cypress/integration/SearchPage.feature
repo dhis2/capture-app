@@ -55,10 +55,14 @@ Feature: User interacts with Search page
   Scenario: Searching using attributes is invalid
     Given you are on the default search page
     And you select the search domain Child Programme
-    When you fill in the first name with values that will return no results
     When you dont fill in any of the values
     And you click search
     Then there should be a validation error message
+
+  Scenario: Clicking the back button takes you to main page
+    Given you are on the search page with preselected program and org unit
+    When when you click the back button
+    Then you should be taken to the main page
 
 
 

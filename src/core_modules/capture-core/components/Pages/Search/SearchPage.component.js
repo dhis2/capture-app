@@ -161,7 +161,7 @@ const Index = ({
     return (<>
         <LockedSelector />
         <div data-test="dhis2-capture-search-page-content" className={classes.container}>
-            <Button className={classes.backButton} onClick={navigateToMainPage}>
+            <Button dataTest="dhis2-capture-back-button" className={classes.backButton} onClick={navigateToMainPage}>
                 <ChevronLeft />
                 {i18n.t('Show all events')}
             </Button>

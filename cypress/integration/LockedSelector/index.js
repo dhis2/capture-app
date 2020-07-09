@@ -53,7 +53,7 @@ When('you click the "Start again" button', () => {
 });
 
 Then('you should be taken to the main page', () => {
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/`);
+    cy.isOnMainPage();
 });
 
 Then('you should see the table', () => {
