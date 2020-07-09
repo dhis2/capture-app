@@ -69,7 +69,7 @@ Then('you can see the new event page', () => {
         .should('exist');
 });
 
-Given('you select the first entity from the table', () => {
+When('you select the first entity from the table', () => {
     cy.get('tbody')
         .find('tr')
         .first()

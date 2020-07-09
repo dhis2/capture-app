@@ -35,7 +35,7 @@ Feature: using the LockedSelector to navigate
   Scenario: Landing on the view event page
     Given you are in the main page with no selections made
     And you select both org unit and program
-    And you select the first entity from the table
+    When you select the first entity from the table
     Then you can see the view event page
     When you click the "Start again" button
     Then you should be taken to the main page
