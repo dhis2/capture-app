@@ -10,7 +10,7 @@ Feature: using the LockedSelector to navigate
     When you click the "New" button to add a new event
     Then text should inform you to select program
 
-  Scenario: Notifying that you need to select a org unit to get started
+  Scenario: Notifying that you need to select an org unit to get started
     Given you are in the main page with program unit pre-selected
     When you click the "New" button to add a new event
     Then text should inform you to select program
@@ -26,7 +26,16 @@ Feature: using the LockedSelector to navigate
     When you select both org unit and program
     Then you should see the table
 
-  Scenario: Notifying that you need to select a org unit to get started
+  Scenario: Landing on the new event page
     Given you are in the main page with no selections made
     When you select both org unit and program
     And you click the "New" button to add a new event
+    Then you can see the new event page
+
+  Scenario: Landing on the view event page
+    Given you are in the main page with no selections made
+    And you select both org unit and program
+    And you select the first entity from the table
+    Then you can see the view event page
+    When you click the "Start again" button
+    Then you should be taken to the main page

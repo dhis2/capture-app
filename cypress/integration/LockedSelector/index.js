@@ -41,10 +41,10 @@ Given('you select both org unit and program', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/orgUnitId=DiszpKrYNg8`);
 
     cy.get('.Select')
-        .type('Inpatient');
-    cy.contains('Inpatient morbidity')
+        .type('Malaria case re');
+    cy.contains('Malaria case registration')
         .click();
-    cy.url().should('eq', `${Cypress.config().baseUrl}/#/programId=eBAyeGv0exc&orgUnitId=DiszpKrYNg8`);
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8`);
 });
 
 When('you click the "Start again" button', () => {
@@ -62,4 +62,20 @@ Then('you should see the table', () => {
         .should('exist')
         .its('length')
         .should('eq', 15);
+});
+
+Then('you can see the new event page', () => {
+    cy.get('[data-test="dhis2-capture-start-again-button"]')
+        .should('exist');
+});
+
+Given('you select the first entity from the table', () => {
+    cy.get('tbody')
+        .find('tr')
+        .first()
+        .click();
+});
+
+Then('you can see the view event page', () => {
+    cy.url().should('include', 'viewEvent/');
 });
