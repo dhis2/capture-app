@@ -10,3 +10,10 @@ Cypress.Commands.add(
     { prevSubject: true },
     includesClass,
 );
+const isOnMainPage = () =>
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/`);
+
+Cypress.Commands.add(
+    'isOnMainPage',
+    isOnMainPage,
+);
