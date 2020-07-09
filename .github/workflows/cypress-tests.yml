@@ -20,6 +20,7 @@ jobs:
           group: e2e-chrome-parallel
           start: 'yarn start'
           wait-on: 'http://localhost:3000'
+          # wait for 200 secs for the server to respond
           wait-on-timeout: 200
 
       - name: Upload artifacts
