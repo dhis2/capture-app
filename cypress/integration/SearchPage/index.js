@@ -40,10 +40,10 @@ And('there should be Child Programme domain forms visible to search with', () =>
     ;
 });
 
-And('you select the search domain Child Programme', () => {
+And('you select the search domain Malaria Case diagnosis', () => {
     cy.get('[data-test="dhis2-uicore-select-input"]')
-        .click();
-    cy.contains('Child Programme')
+        .type('Malaria case diagn');
+    cy.contains('Malaria case diagnosis')
         .click();
 });
 
@@ -79,7 +79,7 @@ When('you fill in the unique identifier field with values that will return a tra
         .find('[data-test="capture-ui-input"]')
         .first()
         .clear()
-        .type('4870055');
+        .type('ZRP792320');
 });
 
 Then('you are navigated to the Tracker Capture', () => {
@@ -96,8 +96,8 @@ When('you fill in the first name with values that will return no results', () =>
 When('you fill in the first name with values that will return results', () => {
     cy.get('[data-test="dhis2-capture-form-attributes"]')
         .find('[data-test="capture-ui-input"]')
-        .first()
-        .type('Christos');
+        .eq(2)
+        .type('Lauren');
 });
 
 And('you click search', () => {
@@ -142,7 +142,7 @@ Then('there should be a validation error message', () => {
 });
 
 Given('you are on the search page with preselected program and org unit', () => {
-    cy.visit('/#/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
+    cy.visit('/#/search/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8');
 });
 
 When('when you click the back button', () => {
@@ -150,7 +150,8 @@ When('when you click the back button', () => {
         .click();
 });
 
-Then('you should be taken to the main page', () => {
-    cy.isOnMainPage();
+Then('you should be taken to the main page with program and org unit preselected', () => {
+    cy.url()
+        .should('eq', `${Cypress.config().baseUrl}/#/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8`);
 });
 
