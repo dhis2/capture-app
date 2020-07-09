@@ -5,6 +5,9 @@ on: [push]
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        containers: [1, 2, 3]
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -12,6 +15,9 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
+          record: true
+          parallel: true
+          group: GH Action parallel
           start: 'yarn start'
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 60
@@ -24,6 +30,7 @@ jobs:
           path: cypress/screenshots
     env:
       CI: true
+      CYPRESS_RECORD_KEY: '6b0bce0d-a4e8-417b-bbee-9157cbe9a999'
       REACT_APP_DHIS2_BASE_URL: 'https://debug.dhis2.org/2.34dev/'
       REACT_APP_DHIS2_AUTHORIZATION: 'Basic c3lzdGVtOlN5c3RlbTEyMw=='
       REACT_APP_TRACKER_CAPTURE_APP_PATH: 'https://debug.dhis2.org/2.34dev/dhis-web-tracker-capture'
