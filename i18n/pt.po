@@ -453,7 +453,7 @@ msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr ""
+msgstr "no"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
