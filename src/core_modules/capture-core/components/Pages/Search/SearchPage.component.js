@@ -163,7 +163,7 @@ const Index = ({
         <div className={classes.container}>
             <Button className={classes.backButton} onClick={navigateToMainPage}>
                 <ChevronLeft />
-                {i18n.t('Show all events')}
+                {i18n.t('Back')}
             </Button>
 
             <Paper className={classes.paper}>
