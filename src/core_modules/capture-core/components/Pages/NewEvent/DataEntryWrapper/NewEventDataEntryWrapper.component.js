@@ -101,7 +101,7 @@ class NewEventDataEntryWrapper extends React.Component<Props> {
                     <ChevronLeft />
                     {i18n.t('Show all events')}
                 </Button>
-                <Paper className={classes.dataEntryPaper}>
+                <Paper className={classes.dataEntryPaper} data-test="dhis2-capture-new-event-page">
                     {this.renderHeader()}
                     <DataEntry
                         stage={stage}

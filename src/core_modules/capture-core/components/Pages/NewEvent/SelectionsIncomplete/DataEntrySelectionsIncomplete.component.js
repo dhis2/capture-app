@@ -91,6 +91,7 @@ class DataEntrySelectionsIncomplete extends Component<Props> {
                     data-test="dhis2-capture-paper"
                 >
                     <div
+                        data-test="dhis2-capture-paper-text"
                         className={classes.contents}
                     >
                         {this.getText()}

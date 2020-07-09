@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
-import { Button } from '../../Buttons';
+import { Button } from '@dhis2/ui-core';
 import { TrackerProgram } from '../../../metaData';
 
 const styles = () => ({
@@ -69,6 +69,7 @@ class ActionButtons extends Component<Props> {
                     showResetButton ?
                         <div className={classes.startAgainContainer}>
                             <Button
+                                dataTest="dhis2-capture-start-again-button"
                                 onClick={this.handleStartAgainClick}
                                 small
                                 secondary
@@ -80,6 +81,7 @@ class ActionButtons extends Component<Props> {
                         null
                 }
                 <Button
+                    dataTest="dhis2-capture-new-button"
                     onClick={this.handleNewClick}
                 >
                     <AddIcon className={classes.icon} />
