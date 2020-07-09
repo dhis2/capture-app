@@ -1,27 +1,65 @@
 Given('you are in the main page with no selections made', () => {
     cy.visit('/');
-    cy.get('[data-test="dhis2-uicore-button"]')
-        .contains('New')
+    cy.get('[data-test="dhis2-capture-new-button"]')
         .should('exist');
 });
+
 When('you click the "New" button to add a new event', () => {
-    cy.get('[data-test="dhis2-uicore-button"]').contains('New').click();
+    cy.get('[data-test="dhis2-capture-new-button"]')
+        .click();
 });
+
 Then('text should inform you to select both organisation unit and program', () => {
     cy.get('[data-test="dhis2-capture-paper"]')
-        .contains('Select a registering unit and program above to get started')
+        .find('[data-test="dhis2-capture-paper-text"]')
         .should('exist');
 });
 
-
-Given('you are in the main page with organisation unit selected', () => {
+Given('you are in the main page with organisation unit pre-selected', () => {
     cy.visit('/#/orgUnitId=DiszpKrYNg8');
-    cy.get('[data-test="dhis2-uicore-button"]')
-        .contains('New')
+    cy.get('[data-test="dhis2-capture-new-button"]')
         .should('exist');
 });
+
 Then('text should inform you to select program', () => {
     cy.get('[data-test="dhis2-capture-paper"]')
-        .contains('Select a program to start reporting')
+        .find('[data-test="dhis2-capture-paper-text"]')
         .should('exist');
+});
+
+Given('you are in the main page with program unit pre-selected', () => {
+    cy.visit('/#/orgUnitId=DiszpKrYNg8');
+    cy.get('[data-test="dhis2-capture-new-button"]')
+        .should('exist');
+});
+
+Given('you select both org unit and program', () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .type('Ngelehun C');
+    cy.contains('Ngelehun CHC')
+        .click();
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/orgUnitId=DiszpKrYNg8`);
+
+    cy.get('.Select')
+        .type('Inpatient');
+    cy.contains('Inpatient morbidity')
+        .click();
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/programId=eBAyeGv0exc&orgUnitId=DiszpKrYNg8`);
+});
+
+When('you click the "Start again" button', () => {
+    cy.get('[data-test="dhis2-capture-start-again-button"]')
+        .click();
+});
+
+Then('you should be taken to the main page', () => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/`);
+});
+
+Then('you should see the table', () => {
+    cy.get('tbody')
+        .find('tr')
+        .should('exist')
+        .its('length')
+        .should('eq', 15);
 });
