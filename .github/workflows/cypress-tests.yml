@@ -15,9 +15,10 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
+          browser: chrome
           record: true
           parallel: true
-          group: GH Action parallel
+          group: e2e-chrome-parallel
           start: 'yarn start'
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 60
