@@ -36,6 +36,7 @@ type Props = {
     onChangeCollapseState?: ?() => void,
     isCollapsed?: ?boolean,
     extendedCollapsibility?: boolean,
+    isCollapseButtonEnabled?: boolean,
     classes: Object
 };
 
@@ -80,6 +81,7 @@ class SectionHeaderSimple extends Component<Props> {
                             if (onChangeCollapseState) {
                                 return (
                                     <IconButton
+                                        disabled={!this.props.isCollapseButtonEnabled}
                                         title={this.props.isCollapsed ? 'Åpne' : 'Lukk'}
                                         onClick={this.handleChangeCollapse}
                                     >

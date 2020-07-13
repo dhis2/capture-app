@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui-core';
@@ -55,6 +55,12 @@ const Index = ({
     const [error, setError] = useState(false);
     const [expandedFormId, setExpandedFormId] = useState(null);
 
+    useEffect(() => {
+        setExpandedFormId(null);
+    },
+    [selectedOptionId],
+    );
+
     return useMemo(() => {
         const formReference = {};
 
@@ -103,11 +109,14 @@ const Index = ({
             {
                 selectedOptionId && availableSearchOptions[selectedOptionId].searchGroups
                     .filter(searchGroup => searchGroup.unique)
-                    .map(({ searchForm, formId, searchScope }) => {
+                    .map(({ searchForm, formId, searchScope }, index) => {
                         const isCollapsed = !(expandedFormId === formId);
                         const name = searchForm.getElements()[0].formName;
+                        if (!expandedFormId && index === 0) {
+                            setExpandedFormId(formId);
+                        }
                         return (
-                            <div data-test="dhis2-capture-form-unique">
+                            <div key={formId} data-test="dhis2-capture-form-unique">
                                 <Section
                                     isCollapsed={isCollapsed}
                                     className={classes.searchDomainSelectorSection}
@@ -115,10 +124,8 @@ const Index = ({
                                         <SectionHeaderSimple
                                             containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
                                             title={i18n.t('Search {{name}}', { name })}
-                                            onChangeCollapseState={
-                                                isCollapsed &&
-                                                (() => { setExpandedFormId(formId); })
-                                            }
+                                            onChangeCollapseState={() => { setExpandedFormId(formId); }}
+                                            isCollapseButtonEnabled={isCollapsed}
                                             isCollapsed={isCollapsed}
                                         />
                                     }
@@ -164,7 +171,7 @@ const Index = ({
                         const name = searchForm.getElements()[0].formName;
                         const isCollapsed = !(expandedFormId === formId);
                         return (
-                            <div data-test="dhis2-capture-form-attributes">
+                            <div key={formId} data-test="dhis2-capture-form-attributes">
                                 <Section
                                     isCollapsed={isCollapsed}
                                     className={classes.searchDomainSelectorSection}
@@ -172,10 +179,8 @@ const Index = ({
                                         <SectionHeaderSimple
                                             containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
                                             title={i18n.t('Search {{name}}', { name })}
-                                            onChangeCollapseState={
-                                                isCollapsed &&
-                                                (() => { setExpandedFormId(formId); })
-                                            }
+                                            onChangeCollapseState={() => { setExpandedFormId(formId); }}
+                                            isCollapseButtonEnabled={isCollapsed}
                                             isCollapsed={isCollapsed}
                                         />
                                     }
