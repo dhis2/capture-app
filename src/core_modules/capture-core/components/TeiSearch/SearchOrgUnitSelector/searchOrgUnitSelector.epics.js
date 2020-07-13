@@ -5,7 +5,7 @@ import { from } from 'rxjs';
 import getD2 from 'capture-core/d2/d2Instance';
 import { errorCreator } from 'capture-core-utils';
 import { ofType } from 'redux-observable';
-import { map, concatMap, takeUntil } from 'rxjs/operators';
+import { map, concatMap, takeUntil, filter } from 'rxjs/operators';
 import {
     actionTypes as teiSearchActionTypes,
 } from '../actions/teiSearch.actions';
@@ -61,7 +61,7 @@ export const teiSearchFilterOrgUnitsEpic = (action$: InputObservable) =>
                 })
                 .then(orgUnitCollection => ({ regUnitArray: orgUnitCollection.toArray(), searchText, searchId }))
                 .catch(error => ({ error, searchId })),
-        ).pipe(takeUntil(action$.filter(a => cancelActionFilter(a, searchId))))
+            ).pipe(takeUntil(action$.pipe(filter(a => cancelActionFilter(a, searchId)))));
         }),
         map((resultContainer) => {
             if (resultContainer.error) {

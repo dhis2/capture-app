@@ -111,8 +111,9 @@ export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxSt
                         actionTypes.TEI_SEARCH_RESULTS_CHANGE_PAGE,
                     ))),
                 takeUntil(
-                    action$.filter(ab =>
-                        isArray(ab.payload) && ab.payload.some(a => a.type === actionTypes.INITIALIZE_TEI_SEARCH))),
+                    action$.pipe(
+                        filter(ab =>
+                            isArray(ab.payload) && ab.payload.some(a => a.type === actionTypes.INITIALIZE_TEI_SEARCH)))),
             );
         }));
 

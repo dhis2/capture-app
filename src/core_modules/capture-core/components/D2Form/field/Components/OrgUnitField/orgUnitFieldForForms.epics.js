@@ -2,7 +2,7 @@
 import log from 'loglevel';
 import getD2 from 'capture-core/d2/d2Instance';
 import { from } from 'rxjs';
-import { map, concatMap } from 'rxjs/operators';
+import { map, concatMap, takeUntil, filter } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 import isArray from 'd2-utilizr/lib/isArray';
 import { errorCreator } from 'capture-core-utils';
@@ -54,7 +54,9 @@ export const filterFormFieldOrgUnitsEpic = (action$: InputObservable) =>
                     withinUserSearchHierarchy: true,
                 })
                 .then(orgUnitCollection => ({ orgUnitArray: orgUnitCollection.toArray(), searchText, formId, elementId }))
-                .catch(error => ({ error, formId, elementId }))).takeUntil(action$.filter(a => cancelActionFilter(a, formId, elementId)));
+                .catch(error => ({ error, formId, elementId }))).pipe(
+                takeUntil(action$.pipe(filter(a => cancelActionFilter(a, formId, elementId)))),
+            );
         }),
         map((resultContainer) => {
             if (resultContainer.error) {
