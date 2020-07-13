@@ -53,6 +53,7 @@ const Index = ({
     isSearchViaAttributesValid,
 }: Props) => {
     const [error, setError] = useState(false);
+    const [expandedFormId, setExpandedFormId] = useState(null);
 
     return useMemo(() => {
         const formReference = {};
@@ -94,20 +95,31 @@ const Index = ({
             }
         };
 
+        const FormInformativeMessage = ({ minAttributesRequiredToSearch }) =>
+            (<div className={error ? classes.textError : classes.textInfo}>
+                Fill in at least {minAttributesRequiredToSearch}  attributes to search
+            </div>);
         return (<>
             {
                 selectedOptionId && availableSearchOptions[selectedOptionId].searchGroups
                     .filter(searchGroup => searchGroup.unique)
-                    .map(({ searchForm, formId, searchScope }) => {
+                    .map(({ searchForm, formId, searchScope }, index) => {
+                        const isCollapsed = !(expandedFormId === formId);
                         const name = searchForm.getElements()[0].formName;
                         return (
                             <div data-test="dhis2-capture-form-unique">
                                 <Section
+                                    isCollapsed={isCollapsed}
                                     className={classes.searchDomainSelectorSection}
                                     header={
                                         <SectionHeaderSimple
                                             containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
                                             title={i18n.t('Search {{name}}', { name })}
+                                            onChangeCollapseState={
+                                                isCollapsed &&
+                                                (() => { setExpandedFormId(formId); })
+                                            }
+                                            isCollapsed={isCollapsed}
                                         />
                                     }
                                 >
@@ -148,16 +160,23 @@ const Index = ({
             {
                 selectedOptionId && availableSearchOptions[selectedOptionId].searchGroups
                     .filter(searchGroup => !searchGroup.unique)
-                    .map(({ searchForm, formId, searchScope, minAttributesRequiredToSearch }) => {
+                    .map(({ searchForm, formId, searchScope, minAttributesRequiredToSearch }, index) => {
                         const name = searchForm.getElements()[0].formName;
+                        const isCollapsed = !(expandedFormId === formId);
                         return (
                             <div data-test="dhis2-capture-form-attributes">
                                 <Section
+                                    isCollapsed={isCollapsed}
                                     className={classes.searchDomainSelectorSection}
                                     header={
                                         <SectionHeaderSimple
                                             containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
                                             title={i18n.t('Search {{name}}', { name })}
+                                            onChangeCollapseState={
+                                                isCollapsed &&
+                                                (() => { setExpandedFormId(formId); })
+                                            }
+                                            isCollapsed={isCollapsed}
                                         />
                                     }
                                 >
@@ -187,9 +206,9 @@ const Index = ({
                                         >
                                             Search by {name}
                                         </Button>
-                                        <div className={error ? classes.textError : classes.textInfo}>
-                                            Fill in at least {minAttributesRequiredToSearch}  attributes to search
-                                        </div>
+                                        <FormInformativeMessage
+                                            minAttributesRequiredToSearch={minAttributesRequiredToSearch}
+                                        />
                                     </div>
                                 </Section>
                             </div>
@@ -217,6 +236,7 @@ const Index = ({
         searchViaAttributesOnScopeTrackedEntityType,
         isSearchViaAttributesValid,
         error,
+        expandedFormId,
     ]);
 };
 
