@@ -32,7 +32,7 @@ const AppLoader = (props: Props) => {
         try {
             await initializeAsync(onCacheExpired, dataEngine.query.bind(dataEngine));
             const history = createHistory();
-            // $FlowFixMe[incompatible-variance] automated comment
+            // $FlowFixMe[prop-missing] automated comment
             const store = getStore(history, () => onRunApp(store, history));
         } catch (error) {
             let message = 'The application could not be loaded.';

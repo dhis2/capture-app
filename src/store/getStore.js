@@ -50,6 +50,7 @@ export function getStore(history: BrowserHistory | HashHistory, onRehydrated: ()
         middleware.push(createLogger({}));
     }
 
+    // $FlowFixMe[missing-annot] automated comment
     const store = createStore(
         enableBatching(offlineEnhanceReducer(rootReducer)),
         composeWithDevTools(

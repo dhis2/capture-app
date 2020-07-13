@@ -1,6 +1,5 @@
 // @flow
-import { ActionsObservable } from 'redux-observable';
-import { ofType } from 'redux-observable';
+import { ActionsObservable, ofType } from 'redux-observable';
 import { map, filter } from 'rxjs/operators';
 import { batchActions } from 'redux-batched-actions';
 import { moment } from 'capture-core-utils/moment';

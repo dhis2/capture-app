@@ -5,9 +5,8 @@ import { OFFLINE_STATUS_CHANGED } from '@redux-offline/redux-offline/lib/constan
 import { networkStatusChange } from './NetworkStatusBadge.actions';
 
 
-export const networkMonitorStatusEpic = action$ =>
+export const networkMonitorStatusEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(OFFLINE_STATUS_CHANGED),
         map(action => networkStatusChange(action.payload.online)),
     );
-
