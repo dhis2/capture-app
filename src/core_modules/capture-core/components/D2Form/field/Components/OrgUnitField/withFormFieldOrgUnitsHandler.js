@@ -36,6 +36,7 @@ const getFormFieldOrgUnitsHandler = (InnerComponent: React.ComponentType<any>) =
         render() {
             const { formId, elementId, filterOrgUnits, resetOrgUnits, ...passOnProps } = this.props;
             return (
+                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     onSearch={this.handleFilterOrgUnits}
                     {...passOnProps}
@@ -67,4 +68,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
+        // $FlowFixMe[missing-annot] automated comment
         connect(mapStateToProps, mapDispatchToProps)(getFormFieldOrgUnitsHandler(InnerComponent));

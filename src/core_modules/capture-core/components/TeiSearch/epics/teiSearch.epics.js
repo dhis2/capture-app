@@ -70,6 +70,7 @@ const searchTei = (state: ReduxState, searchId: string, formId: string, searchGr
     const queryArgs = {
         filter: filters,
         ...getOuQueryArgs(selectedOrgUnit, selectedOrgUnitScope),
+        // $FlowFixMe[exponential-spread] automated comment
         ...getContextQueryArgs(selectedProgramId, selectedTrackedEntityTypeId),
         ...getPagingQueryArgs(pageNumber),
 
@@ -86,7 +87,7 @@ const searchTei = (state: ReduxState, searchId: string, formId: string, searchGr
             searchId,
         ),
     )
-        .catch(error => searchTeiFailed(formId, searchGroupId, searchId));
+        .catch(() => searchTeiFailed(formId, searchGroupId, searchId));
 };
 
 export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -115,7 +116,6 @@ export const teiSearchChangePageEpic = (action$: InputObservable, store: ReduxSt
         }));
 
 export const teiSearchEpic = (action$: InputObservable, store: ReduxStore) =>
-// $FlowSuppress
     action$.pipe(
         ofType(actionTypes.REQUEST_SEARCH_TEI),
         switchMap((action) => {
@@ -135,7 +135,6 @@ export const teiSearchEpic = (action$: InputObservable, store: ReduxStore) =>
         }));
 
 export const teiSearchSetProgramEpic = (action$: InputObservable, store: ReduxStore) =>
-// $FlowSuppress
     action$.pipe(
         ofType(programSelectorActionTypes.TEI_SEARCH_START_SET_PROGRAM),
         map((action) => {
@@ -165,7 +164,6 @@ export const teiSearchSetProgramEpic = (action$: InputObservable, store: ReduxSt
         }));
 
 export const teiNewSearchEpic = (action$: InputObservable, store: ReduxStore) =>
-// $FlowSuppress
     action$.pipe(
         ofType(actionTypes.TEI_NEW_SEARCH),
         map((action) => {

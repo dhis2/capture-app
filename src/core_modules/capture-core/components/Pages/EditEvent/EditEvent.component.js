@@ -47,16 +47,9 @@ type Props = {
     },
 };
 
-type State = {
-    discardWarningOpen: boolean,
-}
 
-class EditEvent extends Component<Props, State> {
+class EditEvent extends Component<Props> {
     cancelButtonInstance: ?CancelButton;
-    constructor(props: Props) {
-        super(props);
-        this.state = { discardWarningOpen: false };
-    }
 
     handleGoBackToAllEvents = () => {
         this.cancelButtonInstance && this.cancelButtonInstance.handleCancel();

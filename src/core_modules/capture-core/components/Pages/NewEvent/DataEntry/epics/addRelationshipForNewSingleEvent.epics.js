@@ -35,13 +35,11 @@ const itemId = 'newEvent';
 const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
 
 export const openRelationshipForNewSingleEventEpic = (action$: InputObservable) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(newEventDataEntryActionTypes.NEW_EVENT_OPEN_NEW_RELATIONSHIP),
         map(() => initializeNewRelationship()));
 
 export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(newEventNewRelationshipActionTypes.ADD_NEW_EVENT_RELATIONSHIP),
         map((action) => {
@@ -106,8 +104,7 @@ const saveNewEventRelationships = (relationshipData, selections, triggerAction) 
 };
 
 
-export const saveNewEventRelationshipsIfExistsEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+export const saveNewEventRelationshipsIfExistsEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(newEventDataEntryActionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS),
         map((action) => {
@@ -136,8 +133,7 @@ export const saveNewEventRelationshipsIfExistsEpic = (action$: InputObservable, 
             return null;
         }));
 
-export const saveNewEventRelationshipFinishedEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+export const saveNewEventRelationshipFinishedEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(
             newEventDataEntryActionTypes.NEW_EVENT_RELATIONSHIPS_SAVED,
@@ -155,8 +151,7 @@ export const saveNewEventRelationshipFinishedEpic = (action$: InputObservable, s
             return null;
         }));
 
-export const teiForNewEventRelationshipSavedEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+export const teiForNewEventRelationshipSavedEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(
             newEventDataEntryActionTypes.TEI_FOR_NEW_EVENT_RELATIONSHIPS_SAVED,

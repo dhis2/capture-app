@@ -52,7 +52,6 @@ function getOrgUnitId(suggestedOrgUnitId: string, trackerProgram: ?TrackerProgra
 }
 
 export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(newRelationshipActionTypes.SELECT_FIND_MODE),
         filter(action => action.payload.findMode && action.payload.findMode === findModes.TEI_REGISTER),
@@ -83,7 +82,7 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
             if (trackerProgram) { // enrollment form
                 const openEnrollmentPromise = openDataEntryForNewEnrollmentBatchAsync(
                     trackerProgram,
-                    trackerProgram && trackerProgram.enrollment.enrollmentForm,
+                    trackerProgram.enrollment.enrollmentForm,
                     orgUnit,
                     DATA_ENTRY_ID,
                     [initializeRegisterTei(trackerProgram.id, orgUnit)],

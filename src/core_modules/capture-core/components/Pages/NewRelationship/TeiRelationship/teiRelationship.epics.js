@@ -29,7 +29,6 @@ import getSearchGroups from '../../../TeiSearch/getSearchGroups';
 const searchId = 'relationshipTeiSearch';
 
 export const openRelationshipTeiSearchEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(newRelationshipActionTypes.SELECT_FIND_MODE),
         filter(action => action.payload.findMode && action.payload.findMode === 'TEI_SEARCH'),
@@ -55,14 +54,12 @@ export const openRelationshipTeiSearchEpic = (action$: InputObservable, store: R
         }));
 
 export const requestRelationshipTeiSearchEpic = (action$: InputObservable) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(teiSearchActionTypes.REQUEST_SEARCH_TEI),
         filter(action => action.payload.searchId && action.payload.searchId === searchId),
         map(() => setSearching()));
 
 export const TeiRelationshipNewOrEditSearchEpic = (action$: InputObservable) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(
             teiSearchActionTypes.TEI_NEW_SEARCH,

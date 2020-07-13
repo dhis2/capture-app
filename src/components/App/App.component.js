@@ -1,5 +1,5 @@
 // @flow
-/* eslint-disable */
+/* eslint-disable import/first */
 import './app.css';
 import * as React from 'react';
 import { Provider } from 'react-redux';
@@ -17,26 +17,26 @@ import withAppUrlSync from 'capture-core/components/App/withAppUrlSync';
 import withUrlSync from 'capture-core/components/UrlSync/withUrlSync';
 
 // d2
-import { DataProvider } from '@dhis2/app-runtime';
 import D2UIApp from '@dhis2/d2-ui-app';
 
-//HOCs
+// HOCs
 import withD2InContext from 'capture-core/HOC/withD2InContext';
 import withStateBoundLoadingIndicator from 'capture-core/HOC/withStateBoundLoadingIndicator';
 
 import theme from '../../styles/uiTheme';
 
 
-const AppGoingOnlineLoadingIndicator = withStateBoundLoadingIndicator((state: ReduxState) => !state.app.goingOnline, null, true)(AppContents);
+const AppGoingOnlineLoadingIndicator =
+    withStateBoundLoadingIndicator((state: ReduxState) => !state.app.goingOnline, null, true)(AppContents);
 const AppContentsOutOfSyncLoadingIndicator = withStateBoundLoadingIndicator(
     (state: ReduxState, props: any) => !props.urlOutOfSync, null, true)(AppGoingOnlineLoadingIndicator);
 const AppContentsUrlParamSync = withUrlSync(
-    (props: Object) => props.syncSpecification
+    (props: Object) => props.syncSpecification,
 )(AppContentsOutOfSyncLoadingIndicator);
 const AppContentsUrlParam = withAppUrlSync()(AppContentsUrlParamSync);
 const AppContentsD2Context = withD2InContext()(AppContentsUrlParam);
 const AppContentsInitLoadingIndicator = withStateBoundLoadingIndicator(
-    (state: ReduxState, props: any) => state.app.initDone, null, true)(AppContentsD2Context);
+    (state: ReduxState) => state.app.initDone, null, true)(AppContentsD2Context);
 const AppContentsRouterLoader = withRouter(AppContentsInitLoadingIndicator);
 
 type Props = {
@@ -45,38 +45,28 @@ type Props = {
 };
 
 class App extends React.Component<Props> {
-    renderContents() {
+    render() {
         return (
             <React.Fragment>
                 <CssBaseline />
-                <Provider 
+                <Provider
                     store={this.props.store}
                 >
-                    <ConnectedRouter 
+                    <ConnectedRouter
                         history={this.props.history}
                     >
                         <MuiThemeProvider
                             theme={theme}
                         >
                             <D2UIApp>
-                                <DataProvider
-                                    baseUrl={process.env.REACT_APP_DHIS2_BASE_URL}
-                                    apiVersion=""
-                                >
-                                    <AppContentsRouterLoader />
-                                    <FeedbackBar />
-                                </DataProvider>
+                                <AppContentsRouterLoader />
+                                <FeedbackBar />
                             </D2UIApp>
                         </MuiThemeProvider>
                     </ConnectedRouter>
                 </Provider>
             </React.Fragment>
         );
-    }
-
-    render() {
-        const {store, history} = this.props;
-        return this.renderContents();
     }
 }
 

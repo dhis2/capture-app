@@ -30,7 +30,7 @@ const makeMapStateToProps = () => {
 
     const mapStateToProps = (state: ReduxState, props: Object) => ({
         recentlyAddedRelationshipId: state.newEventPage.recentlyAddedRelationshipId,
-        ready: !state.newEventPage.dataEntryIsLoading,
+        ready: !state.activePage.isDataEntryLoading,
         error: !props.formFoundation ?
             i18n.t('This is not an event program or the metadata is corrupt. See log for details.') : null,
         programName: programNameSelector(state),
@@ -38,7 +38,8 @@ const makeMapStateToProps = () => {
             state.organisationUnits[state.currentSelections.orgUnitId].name,
     });
 
-    // $FlowSuppress
+
+    // $FlowFixMe[not-an-object] automated comment
     return mapStateToProps;
 };
 
@@ -106,6 +107,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 });
 
 // $FlowSuppress
+// $FlowFixMe[missing-annot] automated comment
 export default connect(makeMapStateToProps, mapDispatchToProps)(
     withLoadingIndicator()(withErrorMessageHandler()(DataEntry)),
 );

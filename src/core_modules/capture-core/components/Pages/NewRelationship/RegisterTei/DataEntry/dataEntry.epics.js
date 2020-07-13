@@ -21,7 +21,6 @@ import {
 } from '../../../../../metaData';
 
 export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(
             registrationSectionActionTypes.PROGRAM_CHANGE,
@@ -46,7 +45,7 @@ export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObserv
 
                 const openEnrollmentPromise = openDataEntryForNewEnrollmentBatchAsync(
                     trackerProgram,
-                    trackerProgram && trackerProgram.enrollment.enrollmentForm,
+                    trackerProgram.enrollment.enrollmentForm,
                     orgUnit,
                     DATA_ENTRY_ID,
                     [openDataEntry()],

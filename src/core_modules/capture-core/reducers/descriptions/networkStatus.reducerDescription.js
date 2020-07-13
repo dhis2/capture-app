@@ -1,6 +1,6 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { actionTypes } from '../../components/NetworkStatusBadge/NetworkStatusBadge.actions.js';
+import { actionTypes } from '../../components/NetworkStatusBadge/NetworkStatusBadge.actions';
 
 export const networkStatusDesc = createReducerDescription({
     [actionTypes.NETWORK_STATUS_CHANGE]: (state, action) => {

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Ge Joao <gsimango@saudigitus.org>, 2020\n"
 "Language-Team: Portuguese (https://www.transifex.com/hisp-uio/teams/100509/pt/)\n"
@@ -18,44 +18,58 @@ msgstr ""
 "Language: pt\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Please provide a valid date"
+msgid "Choose one or more dates..."
+msgstr ""
+
+msgid "Choose a date..."
+msgstr ""
+
+msgid "Today"
+msgstr "Hoje"
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
 msgstr ""
 
 msgid "Columns to show in table"
-msgstr ""
+msgstr "Colunas a serem mostradas na tabela"
 
 msgid "Column"
 msgstr "Coluna"
 
 msgid "This value is validating"
-msgstr ""
+msgstr "Este valor está validando"
 
 msgid "Async field update failed"
-msgstr ""
+msgstr "Falha na atualização do campo sincronização "
 
 msgid "A value is required"
-msgstr ""
+msgstr "É necessário um valor"
 
 msgid "Please provide a valid number"
-msgstr ""
+msgstr "Forneça um numero valido "
 
 msgid "Please provide a valid integer"
-msgstr ""
+msgstr "Forneça um número inteiro válido"
 
 msgid "Please provide a positive integer"
-msgstr ""
+msgstr "Forneça um número inteiro positivo"
 
 msgid "Please provide zero or a positive integer"
-msgstr ""
+msgstr "Forneça zero ou um número inteiro positivo"
 
 msgid "Please provide a negative integer"
-msgstr ""
+msgstr "Forneça um número inteiro negativo"
+
+msgid "Please provide a valid date"
+msgstr "Por favor forneça data valida "
 
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "Uma data no futuro não é permitida"
 
 msgid "Please provide a valid date and time"
-msgstr ""
+msgstr "Forneça uma data e hora válidas"
 
 msgid "Please provide a valid time"
 msgstr ""
@@ -207,9 +221,6 @@ msgstr "A partir de"
 msgid "To"
 msgstr "Até"
 
-msgid "Today"
-msgstr "Hoje"
-
 msgid "This week"
 msgstr "Esta semana"
 
@@ -288,10 +299,64 @@ msgstr ""
 msgid "suggestions could not be retrieved"
 msgstr ""
 
-msgid "search for username"
+msgid "No items to display"
 msgstr ""
 
-msgid "No items to display"
+msgid "Could not get organisation unit"
+msgstr ""
+
+msgid "Program doesn't exist"
+msgstr ""
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr ""
+
+msgid "New {{typeName}}"
+msgstr ""
+
+msgid "New"
+msgstr "Novo"
+
+msgid "Start again"
+msgstr ""
+
+msgid "Find"
+msgstr "Encontrar"
+
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Accept"
+msgstr "Aceitar"
+
+msgid "Registering Organisation Unit"
+msgstr ""
+
+msgid "Select"
+msgstr "Seleccione"
+
+msgid "Selected Program"
+msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Show all"
+msgstr "Mostrar tudo"
+
+msgid "Program"
+msgstr "Programa"
+
+msgid "Select program"
+msgstr "Selecionar o programa"
+
+msgid "No programs available."
 msgstr ""
 
 msgid "Online"
@@ -376,10 +441,10 @@ msgid "Select columns"
 msgstr ""
 
 msgid "Download as JSON"
-msgstr ""
+msgstr "Transferir como JSON"
 
 msgid "Download as XML"
-msgstr ""
+msgstr "Transferir como XML"
 
 msgid "Download as CSV"
 msgstr "Exportar como CSV"
@@ -418,7 +483,7 @@ msgid "Save As view"
 msgstr ""
 
 msgid "View name"
-msgstr ""
+msgstr "Visualizar o nome "
 
 msgid "Show Less"
 msgstr ""
@@ -440,15 +505,6 @@ msgstr "Activo"
 
 msgid "Completed"
 msgstr "Completo"
-
-msgid "Could not get organisation unit"
-msgstr ""
-
-msgid "Program doesn't exist"
-msgstr ""
-
-msgid "Selected program is invalid for registering unit"
-msgstr ""
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
@@ -479,9 +535,6 @@ msgid ""
 "can only be done in tracker programs."
 msgstr ""
 
-msgid "Selected program is invalid for selected registering unit"
-msgstr ""
-
 msgid "Assigned user"
 msgstr "Usuário designado"
 
@@ -495,7 +548,7 @@ msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr ""
+msgstr "no"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -594,15 +647,6 @@ msgstr "Esconder"
 msgid "Save as new {{tetName}}"
 msgstr ""
 
-msgid "Some programs are being filtered."
-msgstr ""
-
-msgid "Show all"
-msgstr "Mostrar tudo"
-
-msgid "Program"
-msgstr "Programa"
-
 msgid "Organisation Unit"
 msgstr "Unidade organizacional"
 
@@ -654,45 +698,6 @@ msgid "Event assigned to {{name}}"
 msgstr ""
 
 msgid "Feedbacks"
-msgstr ""
-
-msgid "New {{typeName}}"
-msgstr ""
-
-msgid "New"
-msgstr "Novo"
-
-msgid "Start again"
-msgstr ""
-
-msgid "Find"
-msgstr "Encontrar"
-
-msgid "Selected registering unit"
-msgstr ""
-
-msgid "Start Again"
-msgstr ""
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
-
-msgid "Accept"
-msgstr "Aceitar"
-
-msgid "Registering Organisation Unit"
-msgstr ""
-
-msgid "Select"
-msgstr "Seleccione"
-
-msgid "Selected Program"
-msgstr ""
-
-msgid "Select program"
-msgstr "Selecionar o programa"
-
-msgid "No programs available."
 msgstr ""
 
 msgid "You dont have access to delete this relationship"
@@ -762,7 +767,7 @@ msgid "Date"
 msgstr "Data"
 
 msgid "Time"
-msgstr ""
+msgstr "Tempo "
 
 msgid "From date"
 msgstr "Data de inicio"
@@ -793,17 +798,6 @@ msgid ""
 " the Capture App only supports running one version concurrently (in the same"
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
-msgstr ""
-
-msgid "Choose one or more dates..."
-msgstr ""
-
-msgid "Choose a date..."
-msgstr ""
-
-msgid ""
-"A possible reason for this is that the browser or mode (e.g. privacy mode) "
-"is not supported. See log for details."
 msgstr ""
 
 msgid "Compatibility mode"

@@ -8,7 +8,7 @@ import D2SectionFields from './D2SectionFields.container';
 
 import MetaDataSection from '../../metaData/RenderFoundation/Section';
 
-const getStyles = (theme: Theme) => ({
+const getStyles = theme => ({
     sectionFieldsInSection: {
         margin: theme.spacing.unit,
     },
@@ -32,6 +32,7 @@ type Props = {
 };
 
 class D2Section extends React.PureComponent<Props> {
+    // $FlowFixMe[speculation-ambiguous] automated comment
     sectionFieldsInstance: ?D2SectionFields;
     renderSectionHeader() {
         const title = this.props.sectionMetaData.name;
@@ -56,6 +57,7 @@ class D2Section extends React.PureComponent<Props> {
 
         if (!sectionMetaData.showContainer || this.props.formHorizontal) {
             return (
+                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <D2SectionFields
                     ref={(instance) => { this.sectionFieldsInstance = instance; }}
                     fieldsMetaData={sectionMetaData.elements}
@@ -73,9 +75,12 @@ class D2Section extends React.PureComponent<Props> {
                     <div
                         className={classes.sectionFieldsInSection}
                     >
+                        {/* $FlowFixMe[cannot-spread-inexact] automated comment
+                          */}
                         <D2SectionFields
                             ref={(instance) => {
-                                this.sectionFieldsInstance = instance; }}
+                                this.sectionFieldsInstance = instance;
+                            }}
                             fieldsMetaData={sectionMetaData.elements}
                             {...passOnProps}
                         />

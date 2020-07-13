@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
 
 import Button from './ButtonOld.component';
-import LoadingMaskForButton from '../LoadingMasks/LoadingMaskForButton.component';
+import { LoadingMaskForButton } from '../LoadingMasks';
 
 const styles = () => ({
     wrapper: {
@@ -36,6 +36,7 @@ const ProgressButton = (props: Props) => {
             <div
                 className={classes.wrapper}
             >
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <Button
                     disabled
                     {...buttonProps}

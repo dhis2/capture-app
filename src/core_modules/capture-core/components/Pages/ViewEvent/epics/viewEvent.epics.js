@@ -5,9 +5,10 @@ import { map, switchMap } from 'rxjs/operators';
 import { push } from 'connected-react-router';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
+import { getApi } from '../../../../d2';
 import isSelectionsEqual from '../../../App/isSelectionsEqual';
 import getErrorMessageAndDetails from '../../../../utils/errors/getErrorMessageAndDetails';
-import getOrganisationUnitApiSpec from '../../../../api/apiSpecifications/organisationUnit.apiSpecificationGetter';
+
 import {
     actionTypes as viewEventActionTypes,
     eventFromUrlCouldNotBeRetrieved,
@@ -20,7 +21,7 @@ import {
     updateWorkingListPendingOnBackToMainPage,
     openViewEventPageFailed,
     initializeWorkingListsOnBackToMainPage,
-} from '../viewEvent.actions';
+} from '../ViewEventComponent/viewEvent.actions';
 import { actionTypes as eventListActionTypes } from '../../MainPage/EventsList/eventsList.actions';
 import { getEvent } from '../../../../events/eventRequests';
 import {
@@ -57,7 +58,6 @@ export const getEventOpeningFromEventListEpic = (action$: InputObservable, store
         }));
 
 export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(viewEventActionTypes.VIEW_EVENT_FROM_URL),
         switchMap((action) => {
@@ -85,14 +85,12 @@ export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore)
         }));
 
 export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(viewEventActionTypes.EVENT_FROM_URL_RETRIEVED),
         switchMap((action) => {
             const eventContainer = action.payload.eventContainer;
-            return getOrganisationUnitApiSpec(eventContainer.event.orgUnitId)
-                .get()
-                // $FlowSuppress
+            return getApi()
+                .get(`organisationUnits/${eventContainer.event.orgUnitId}`)
                 .then(orgUnit => orgUnitRetrievedOnUrlUpdate(orgUnit, eventContainer))
                 .catch((error) => {
                     const { message, details } = getErrorMessageAndDetails(error);
@@ -104,13 +102,11 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
         }));
 
 export const openViewPageLocationChangeEpic = (action$: InputObservable) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(eventListActionTypes.OPEN_VIEW_EVENT_PAGE),
         map(action => push(`/viewEvent/${action.payload}`)));
 
 export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE),
         // eslint-disable-next-line complexity
@@ -142,7 +138,6 @@ export const backToMainPageEpic = (action$: InputObservable, store: ReduxStore) 
         }));
 
 export const backToMainPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(viewEventActionTypes.START_GO_BACK_TO_MAIN_PAGE),
         map(() => {
@@ -153,7 +148,6 @@ export const backToMainPageLocationChangeEpic = (action$: InputObservable, store
         }));
 
 export const openAddRelationshipForViewEventEpic = (action$: InputObservable) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(viewEventActionTypes.VIEW_EVENT_OPEN_NEW_RELATIONSHIP),
         map(() => initializeNewRelationship()));

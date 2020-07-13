@@ -15,7 +15,6 @@ import { convertValue as convertToServerValue } from '../../../../../converters/
 import { convertMainEventClientToServer } from '../../../../../events/mainConverters';
 
 export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         map((action) => {
@@ -60,7 +59,6 @@ export const saveEditEventEpic = (action$: InputObservable, store: ReduxStore) =
         }));
 
 export const saveEditEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(editEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
         map(() => {

@@ -30,7 +30,6 @@ const errorMessages = {
 };
 
 export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(
             editEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
@@ -45,11 +44,10 @@ export const openEditEventInDataEntryEpic = (action$: InputObservable) =>
             if (metadataContainer.error) {
                 return prerequisitesErrorOpeningEventForEditInDataEntry(metadataContainer.error);
             }
-            // $FlowFixMe
             const foundation = metadataContainer.stage.stageForm;
             const program = metadataContainer.program;
 
-            // $FlowSuppress
+
             return batchActions(openEventForEditInDataEntry(eventContainer, orgUnit, foundation, program));
         }));
 
@@ -78,7 +76,6 @@ const runRulesForEditSingleEvent = (store: ReduxStore, dataEntryId: string, item
             orgUnit,
         );
     } else {
-        // $FlowFixMe
         const foundation = metadataContainer.stage.stageForm;
 
         const currentEventValues = getCurrentClientValues(state, foundation, formId, fieldData);

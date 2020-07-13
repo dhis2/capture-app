@@ -7,7 +7,6 @@ import { convertValue as convertToServerValue } from '../../../../../converters/
 import { convertMainEventClientToServer } from '../../../../../events/mainConverters';
 
 export const saveAssigneeEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(actionTypes.VIEW_EVENT_ASSIGNEE_SET),
         map(() => {

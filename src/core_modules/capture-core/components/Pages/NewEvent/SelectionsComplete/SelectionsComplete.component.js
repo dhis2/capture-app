@@ -6,7 +6,7 @@ import NewRelationshipWrapper from '../NewRelationshipWrapper/NewEventNewRelatio
 import SelectionsNoAccess from '../SelectionsNoAccess/dataEntrySelectionsNoAccess.container';
 
 
-const getStyles = (theme: Theme) => ({
+const getStyles = () => ({
     container: {
         padding: '10px 24px 24px 24px',
     },
@@ -23,17 +23,7 @@ type Props = {
     },
 };
 
-type State = {
-    discardWarningOpen: boolean,
-}
-
-class SelectionsComplete extends Component<Props, State> {
-    cancelButtonInstance: ?any;
-
-    constructor(props: Props) {
-        super(props);
-        this.state = { discardWarningOpen: false };
-    }
+class SelectionsComplete extends Component<Props> {
     render() {
         const { classes, showAddRelationship, eventAccess } = this.props;
         if (!eventAccess.write) {

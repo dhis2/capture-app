@@ -1,21 +1,10 @@
 // @flow
-export { default as NewEventPage } from './PageEntry/NewEventPageEntry.container';
 
+export { NewEventPage } from './NewEventPage.container';
 // actions
 export {
     actionTypes as dataEntryActionTypes,
-    batchActionTypes as dataEntryBatchActionTypes,
 } from './DataEntry/actions/dataEntry.actions';
-export {
-    actionTypes as dataEntryUrlActionTypes,
-    updateSelectionsFromUrl,
-} from './DataEntry/actions/dataEntryUrl.actions';
-export {
-    actionTypes as recentlyAddedEventsListActionTypes,
-} from './RecentlyAddedEventsList/recentlyAddedEventsList.actions';
-export {
-    actionTypes as selectorActionTypes,
-} from './SelectorLevel/selectorLevel.actions';
 export {
     actionTypes as dataEntryWrapperActionTypes,
 } from './DataEntryWrapper/newEventDataEntryWrapper.actions';
@@ -46,10 +35,7 @@ export {
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,
 } from './DataEntry/epics/saveNewSingleEventAddAnother.epics';
-export {
-    newEventPageSelectorUpdateURLEpic,
-    newEventPageSelectorResetURLEpic,
-} from './SelectorLevel/selectorLevel.epics';
+
 export {
     addNoteForNewSingleEventEpic,
 } from './DataEntry/epics/addNoteForNewSingleEvent.epics';

@@ -60,24 +60,8 @@ type Props = {
 };
 
 // $FlowSuppress
+// $FlowFixMe[incompatible-variance] automated comment
 class NumericFilter extends Component<Props> implements UpdatableFilterContent<Value> {
-    static errorMessages = {
-        MIN_GREATER_THAN_MAX: 'Minimum value cannot be greater than maximum value',
-        [elementTypes.NUMBER]: 'Please provide a valid number',
-        [elementTypes.INTEGER]: 'Please provide a valid integer',
-        [elementTypes.INTEGER_POSITIVE]: 'Please provide a positive integer',
-        [elementTypes.INTEGER_NEGATIVE]: 'Please provide a negative integer',
-        [elementTypes.INTEGER_ZERO_OR_POSITIVE]: 'Please provide zero or a positive integer',
-    };
-
-    static validatorForTypes = {
-        [elementTypes.NUMBER]: isValidNumber,
-        [elementTypes.INTEGER]: isValidInteger,
-        [elementTypes.INTEGER_POSITIVE]: isValidPositiveInteger,
-        [elementTypes.INTEGER_NEGATIVE]: isValidNegativeInteger,
-        [elementTypes.INTEGER_ZERO_OR_POSITIVE]: isValidZeroOrPositiveInteger,
-    };
-
     static validateField(value: ?string, type: $Values<typeof elementTypes>) {
         if (!value) {
             return {
@@ -96,8 +80,7 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
     }
 
     static isFilterValid(minValue?: ?string, maxValue?: ?string, type: $Values<typeof elementTypes>) {
-        if (!(NumericFilter.validateField(minValue, type).isValid &&
-            NumericFilter.validateField(minValue, type).isValid)) {
+        if (!NumericFilter.validateField(minValue, type).isValid || !NumericFilter.validateField(maxValue, type).isValid) {
             return false;
         }
 
@@ -119,7 +102,35 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
         return !values || NumericFilter.isFilterValid(values.min, values.max, this.props.type);
     }
 
+    static errorMessages = {
+        MIN_GREATER_THAN_MAX: 'Minimum value cannot be greater than maximum value',
+        // $FlowFixMe[prop-missing] automated comment
+        [elementTypes.NUMBER]: 'Please provide a valid number',
+        // $FlowFixMe[prop-missing] automated comment
+        [elementTypes.INTEGER]: 'Please provide a valid integer',
+        // $FlowFixMe[prop-missing] automated comment
+        [elementTypes.INTEGER_POSITIVE]: 'Please provide a positive integer',
+        // $FlowFixMe[prop-missing] automated comment
+        [elementTypes.INTEGER_NEGATIVE]: 'Please provide a negative integer',
+        // $FlowFixMe[prop-missing] automated comment
+        [elementTypes.INTEGER_ZERO_OR_POSITIVE]: 'Please provide zero or a positive integer',
+    };
+
+    static validatorForTypes = {
+        // $FlowFixMe[prop-missing] automated comment
+        [elementTypes.NUMBER]: isValidNumber,
+        // $FlowFixMe[prop-missing] automated comment
+        [elementTypes.INTEGER]: isValidInteger,
+        // $FlowFixMe[prop-missing] automated comment
+        [elementTypes.INTEGER_POSITIVE]: isValidPositiveInteger,
+        // $FlowFixMe[prop-missing] automated comment
+        [elementTypes.INTEGER_NEGATIVE]: isValidNegativeInteger,
+        // $FlowFixMe[prop-missing] automated comment
+        [elementTypes.INTEGER_ZERO_OR_POSITIVE]: isValidZeroOrPositiveInteger,
+    };
+
     getUpdatedValue(valuePart: {[key: string]: string}) {
+        // $FlowFixMe[cannot-spread-indexer] automated comment
         const valueObject = {
             ...this.props.value,
             ...valuePart,
@@ -186,6 +197,7 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
                         className={classes.inputContainer}
                     >
                         { /* $FlowSuppress: Flow not working 100% with HOCs */ }
+                        {/* $FlowFixMe[prop-missing] automated comment */}
                         <Min
                             value={value && value.min}
                             error={minValueError}
@@ -203,6 +215,7 @@ class NumericFilter extends Component<Props> implements UpdatableFilterContent<V
                         className={classes.inputContainer}
                     >
                         { /* $FlowSuppress: Flow not working 100% with HOCs */ }
+                        {/* $FlowFixMe[prop-missing] automated comment */}
                         <Max
                             value={value && value.max}
                             error={maxValueError}

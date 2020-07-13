@@ -18,11 +18,13 @@ import { convertFormToClient, convertClientToServer, convertServerToClient } fro
 
 const getProgramSearchGroup = (programId: string) => {
     const program = getTrackerProgramThrowIfNotFound(programId);
+    // $FlowFixMe[incompatible-use] automated comment
     return program.enrollment.inputSearchGroups[0];
 };
 
 const getTETSearchGroup = (tetId: string) => {
     const tet = getTrackedEntityTypeThrowIfNotFound(tetId);
+    // $FlowFixMe[incompatible-use] automated comment
     return tet.teiRegistration.inputSearchGroups[0];
 };
 
@@ -43,7 +45,6 @@ const getFormMetadata = (programId: ?string, tetId: string) =>
     (programId ? getEnrollmentForm(programId) : getTETForm(tetId));
 
 export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(actionTypes.DUPLICATES_REVIEW, actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE),
         switchMap((action) => {
@@ -116,8 +117,14 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                                 id: instance.trackedEntityInstance,
                                 values: {
                                     ...convertedValues,
+                                    /* $FlowFixMe[prop-missing] automated
+                                     * comment */
                                     registrationDate: convertServerToClient(instance.created, dataElementTypes.DATETIME),
+                                    /* $FlowFixMe[prop-missing] automated
+                                     * comment */
                                     registrationUnit: convertServerToClient(instance.orgUnit, dataElementTypes.TEXT),
+                                    /* $FlowFixMe[prop-missing] automated
+                                     * comment */
                                     inactive: convertServerToClient(instance.inactive, dataElementTypes.BOOLEAN),
                                 },
                             };

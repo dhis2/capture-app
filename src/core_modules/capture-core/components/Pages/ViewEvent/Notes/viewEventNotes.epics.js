@@ -15,7 +15,7 @@ import {
 } from './viewEventNotes.actions';
 import {
     actionTypes as viewEventActionTypes,
-} from '../viewEvent.actions';
+} from '../ViewEventComponent/viewEvent.actions';
 import {
     addNote,
     removeNote,
@@ -25,8 +25,7 @@ import {
 
 const noteKey = 'viewEvent';
 
-export const loadNotesForViewEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+export const loadNotesForViewEventEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(
             viewEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE,
@@ -38,6 +37,7 @@ export const loadNotesForViewEventEpic = (action$: InputObservable, store: Redux
             const notes = (eventContainer && eventContainer.event && eventContainer.event.notes) || [];
             const convertedNotes = notes.map(note => ({
                 ...note,
+                // $FlowFixMe[prop-missing] automated comment
                 storedDate: convertListValue(note.storedDate, elementTypes.DATETIME),
             }));
             // Load event relationships
@@ -49,7 +49,6 @@ export const loadNotesForViewEventEpic = (action$: InputObservable, store: Redux
         }));
 
 export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.pipe(
       ofType(viewEventNotesActionTypes.REQUEST_SAVE_EVENT_NOTE),
         map((action) => {
@@ -57,6 +56,7 @@ export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxSt
             const payload = action.payload;
 
             const eventId = state.viewEventPage.eventId;
+            // $FlowFixMe[prop-missing] automated comment
             const userName = getCurrentUser().username;
 
             const serverData = {
@@ -67,17 +67,18 @@ export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxSt
             const clientNote = {
                 value: payload.note,
                 storedBy: userName,
+                // $FlowFixMe[prop-missing] automated comment
                 storedDate: convertListValue(moment().toISOString(), elementTypes.DATETIME),
                 clientId: uuid(),
             };
             return batchActions([
                 startSaveEventNote(eventId, serverData, state.currentSelections, clientNote.clientId),
+                // $FlowFixMe[incompatible-call] automated comment
                 addNote(noteKey, clientNote),
             ], viewEventNotesBatchActionTypes.SAVE_EVENT_NOTE_BATCH);
         }));
 
 export const saveNoteForViewEventFailedEpic = (action$: InputObservable) =>
-    // $FlowSuppress
     action$.pipe(
       ofType(viewEventNotesActionTypes.SAVE_EVENT_NOTE_FAILED),
         map(action => removeNote(noteKey, action.meta.clientId)));

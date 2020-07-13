@@ -89,7 +89,9 @@ export const rulesEffectsErrorMessagesDesc = createReducerDescription({
                 accMessagesByIdInCurrentEffects[key] = accMessagesByIdInCurrentEffects[key] || {};
 
                 const effect = effects[key][0];
+                // $FlowFixMe[prop-missing] automated comment
                 const typeKey = mapMessageEffectTypeToStateKey[effect.type];
+                // $FlowFixMe[prop-missing] automated comment
                 accMessagesByIdInCurrentEffects[key][typeKey] = effect.message;
                 return accMessagesByIdInCurrentEffects;
             }, accMessagesById);
@@ -106,7 +108,9 @@ export const rulesEffectsFeedbackDesc = createReducerDescription({
         const displayTextEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_TEXT];
         const displayKeyValuePairEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_KEY_VALUE_PAIR];
         newState[action.payload.formId] = {
+            // $FlowFixMe[prop-missing] automated comment
             displayTexts: displayTextEffects && displayTextEffects.feedback ? displayTextEffects.feedback.map(e => e.displayText) : null,
+            // $FlowFixMe[prop-missing] automated comment
             displayKeyValuePairs: displayKeyValuePairEffects && displayKeyValuePairEffects.feedback ? displayKeyValuePairEffects.feedback.map(e => e.displayKeyValuePair) : null,
         };
 
@@ -121,7 +125,9 @@ export const rulesEffectsIndicatorsDesc = createReducerDescription({
         const displayTextEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_TEXT];
         const displayKeyValuePairEffects: { [id: string]: Array<OutputEffect> } = action.payload.rulesEffects && action.payload.rulesEffects[effectActions.DISPLAY_KEY_VALUE_PAIR];
         newState[action.payload.formId] = {
+            // $FlowFixMe[prop-missing] automated comment
             displayTexts: displayTextEffects && displayTextEffects.indicators ? displayTextEffects.indicators.map(e => e.displayText) : null,
+            // $FlowFixMe[prop-missing] automated comment
             displayKeyValuePairs: displayKeyValuePairEffects && displayKeyValuePairEffects.indicators ? displayKeyValuePairEffects.indicators.map(e => e.displayKeyValuePair) : null,
         };
 

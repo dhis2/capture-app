@@ -9,7 +9,7 @@ import withNavigation from '../../../../Pagination/withDefaultNavigation';
 import Button from '../../../../Buttons/Button.component';
 import makeAttributesSelector from './teiRelationshipSearchResults.selectors';
 import CardList from '../../../../CardList/CardList.component';
-import LoadingMask from '../../../../LoadingMasks/LoadingMask.component';
+import { LoadingMask } from '../../../../LoadingMasks';
 import {
     convertFormToClient,
     convertClientToList,
@@ -184,5 +184,4 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
         );
     }
 }
-// $FlowFixMe
 export default withStyles(getStyles)(TeiRelationshipSearchResults);

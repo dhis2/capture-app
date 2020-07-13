@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -17,8 +17,21 @@ msgstr ""
 "Language: nb\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Please provide a valid date"
-msgstr "Oppgi en gyldig dato"
+msgid "Choose one or more dates..."
+msgstr "Velg en eller flere datoer"
+
+msgid "Choose a date..."
+msgstr "Velg en dato"
+
+msgid "Today"
+msgstr "I dag"
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
+msgstr ""
+"En mulig årsak til dette er at nettleseren eller modusen (f.eks. "
+"Personvernmodus) ikke støttes. Se logg for detaljer."
 
 msgid "Columns to show in table"
 msgstr "Kolonner som skal vises i tabellen"
@@ -50,8 +63,11 @@ msgstr "Oppgi null eller et positivt heltall"
 msgid "Please provide a negative integer"
 msgstr "Oppgi et negativt heltall"
 
+msgid "Please provide a valid date"
+msgstr "Oppgi en gyldig dato"
+
 msgid "A date in the future is not allowed"
-msgstr ""
+msgstr "En dato i fremtiden er ikke tillatt"
 
 msgid "Please provide a valid date and time"
 msgstr "Oppgi en gyldig dato og tid"
@@ -208,9 +224,6 @@ msgstr "Fra"
 msgid "To"
 msgstr "Til"
 
-msgid "Today"
-msgstr "I dag"
-
 msgid "This week"
 msgstr "Denne uken"
 
@@ -289,11 +302,65 @@ msgstr "Ingen resultater"
 msgid "suggestions could not be retrieved"
 msgstr "forslag kunne ikke hentes"
 
-msgid "search for username"
-msgstr "søk etter brukernavn"
-
 msgid "No items to display"
 msgstr "Ingen elementer å vise"
+
+msgid "Could not get organisation unit"
+msgstr "Kunne ikke få tak i organisasjonsenhet"
+
+msgid "Program doesn't exist"
+msgstr "Programmet finnes ikke"
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr "Valgt program er ugyldig for registreringsenhet"
+
+msgid "New {{typeName}}"
+msgstr "Ny {{typeName}}"
+
+msgid "New"
+msgstr "Ny"
+
+msgid "Start again"
+msgstr "Start på nytt"
+
+msgid "Find"
+msgstr "Finn"
+
+msgid "Selected registering unit"
+msgstr "Valgt registreringsenhet"
+
+msgid "Start Again"
+msgstr "Start på nytt"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "Er du sikker? All data som ikke er lagret vil bli borte."
+
+msgid "Accept"
+msgstr "Aksepter"
+
+msgid "Registering Organisation Unit"
+msgstr "Registrering av organisasjonsenhet"
+
+msgid "Select"
+msgstr "Velg"
+
+msgid "Selected Program"
+msgstr "Valgt program"
+
+msgid "Some programs are being filtered."
+msgstr "Noen programmer blir filtrert."
+
+msgid "Show all"
+msgstr "Vis alle"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "Select program"
+msgstr "Velg program"
+
+msgid "No programs available."
+msgstr "Ingen programmer tilgjengelig."
 
 msgid "Online"
 msgstr "Påkoblet"
@@ -442,15 +509,6 @@ msgstr "Aktiv"
 msgid "Completed"
 msgstr "Fullført"
 
-msgid "Could not get organisation unit"
-msgstr "Kunne ikke få tak i organisasjonsenhet"
-
-msgid "Program doesn't exist"
-msgstr "Programmet finnes ikke"
-
-msgid "Selected program is invalid for registering unit"
-msgstr "Valgt program er ugyldig for registreringsenhet"
-
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "Oppretter en ny {{TET}} i {{program}} i {{orgUnit}}"
 
@@ -481,9 +539,6 @@ msgid ""
 msgstr ""
 "Program med programid {{programId}} er ikke et Tracker-program. "
 "Registreringer kan bare gjøres i Tracker-programmer."
-
-msgid "Selected program is invalid for selected registering unit"
-msgstr "Valgt program er ugyldig for registreringsenhet"
 
 msgid "Assigned user"
 msgstr "Tildelt programbruker"
@@ -606,15 +661,6 @@ msgstr "Skjul"
 msgid "Save as new {{tetName}}"
 msgstr "Lagre som ny {{tetName}}"
 
-msgid "Some programs are being filtered."
-msgstr "Noen programmer blir filtrert."
-
-msgid "Show all"
-msgstr "Vis alle"
-
-msgid "Program"
-msgstr "Program"
-
 msgid "Organisation Unit"
 msgstr "Organisasjonsenhet"
 
@@ -669,45 +715,6 @@ msgstr "Hendelse er tildelt til {{name}}"
 
 msgid "Feedbacks"
 msgstr "Tilbakemeldinger"
-
-msgid "New {{typeName}}"
-msgstr "Ny {{typeName}}"
-
-msgid "New"
-msgstr "Ny"
-
-msgid "Start again"
-msgstr "Start på nytt"
-
-msgid "Find"
-msgstr "Finn"
-
-msgid "Selected registering unit"
-msgstr "Valgt registreringsenhet"
-
-msgid "Start Again"
-msgstr "Start på nytt"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "Er du sikker? All data som ikke er lagret vil bli borte."
-
-msgid "Accept"
-msgstr "Aksepter"
-
-msgid "Registering Organisation Unit"
-msgstr "Registrering av organisasjonsenhet"
-
-msgid "Select"
-msgstr "Velg"
-
-msgid "Selected Program"
-msgstr "Valgt program"
-
-msgid "Select program"
-msgstr "Velg program"
-
-msgid "No programs available."
-msgstr "Ingen programmer tilgjengelig."
 
 msgid "You dont have access to delete this relationship"
 msgstr "Du har ikke tilgang til å slette denne relasjonen"
@@ -812,19 +819,6 @@ msgstr ""
 " Capture App bare å kjøre en versjon samtidig (i samme domene). Oppdater "
 "denne siden hvis du vil bruke denne versjonen igjen, men vær oppmerksom på "
 "at dette vil lukke andre versjoner."
-
-msgid "Choose one or more dates..."
-msgstr "Velg en eller flere datoer"
-
-msgid "Choose a date..."
-msgstr "Velg en dato"
-
-msgid ""
-"A possible reason for this is that the browser or mode (e.g. privacy mode) "
-"is not supported. See log for details."
-msgstr ""
-"En mulig årsak til dette er at nettleseren eller modusen (f.eks. "
-"Personvernmodus) ikke støttes. Se logg for detaljer."
 
 msgid "Compatibility mode"
 msgstr "Kompabilitetsmodus"

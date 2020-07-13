@@ -5,7 +5,8 @@ import { concatMap } from 'rxjs/operators';
 import getOrgUnitRootsActions from './getOrgUnitRootsActions';
 import { loadCoreSuccessBatch } from './init.actionBatches';
 
-export const loadCoreEpic = (action$: ActionsObservable, store: ReduxStore) =>
+// $FlowFixMe[cannot-resolve-name] automated comment
+export const loadCoreEpic = (action$: ActionsObservable) =>
     action$.pipe(
         ofType(actionTypes.CORE_LOAD),
         concatMap(() => getOrgUnitRootsActions()

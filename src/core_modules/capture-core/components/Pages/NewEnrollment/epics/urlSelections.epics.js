@@ -15,13 +15,13 @@ import { programCollection } from '../../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../../../metaData';
 
 export const getOrgUnitDataForNewEnrollmentUrlUpdateEpic = (action$: InputObservable) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(actionTypes.UPDATE_SELECTIONS_FROM_URL),
         filter(action => action.payload.nextProps.orgUnitId),
         switchMap(action => getApi()
             .get(`organisationUnits/${action.payload.nextProps.orgUnitId}`)
-            .then(response => setCurrentOrgUnitBasedOnUrl({ id: response.id, name: response.displayName }),
+            .then(({ id, displayName: name, code }) =>
+                setCurrentOrgUnitBasedOnUrl({ id, name, code }),
             )
             .catch(() =>
                 errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')),
@@ -29,14 +29,12 @@ export const getOrgUnitDataForNewEnrollmentUrlUpdateEpic = (action$: InputObserv
         ));
 
 export const emptyOrgUnitForNewEnrollmentUrlUpdateEpic = (action$: InputObservable) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(actionTypes.UPDATE_SELECTIONS_FROM_URL),
         filter(action => !action.payload.nextProps.orgUnitId),
         map(() => setEmptyOrgUnitBasedOnUrl()));
 
 export const validationForNewEnrollmentUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(actionTypes.SET_ORG_UNIT_BASED_ON_URL, actionTypes.SET_EMPTY_ORG_UNIT_BASED_ON_URL),
         map(() => {

@@ -7,11 +7,12 @@ import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
 const mapStateToProps = (state: ReduxState) => {
     const eventDetailsSection = state.viewEventPage.eventDetailsSection || {};
     return {
-        ready: !state.viewEventPage.dataEntryIsLoading && !eventDetailsSection.loading,
+        ready: !state.activePage.isDataEntryLoading && !eventDetailsSection.loading,
     };
 };
 
 const mapDispatchToProps = (): any => ({});
 
 // $FlowSuppress
+// $FlowFixMe[missing-annot] automated comment
 export default connect(mapStateToProps, mapDispatchToProps)(withLoadingIndicator()(ViewEventDataEntry));

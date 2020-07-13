@@ -39,6 +39,7 @@ class OptionSetFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <OptionSetFilter
                 value={this.state.value}
                 innerRef={filterTypeRef}

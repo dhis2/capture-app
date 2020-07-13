@@ -28,11 +28,16 @@ export const retrieveTemplatesEpic = (action$: InputObservable, store: ReduxStor
             actionTypes.TEMPLATES_FETCH,
         ),
         concatMap((action) => {
+    // $FlowFixMe[prop-missing] automated comment
+    action$.ofType(
+        actionTypes.TEMPLATES_FETCH,
+    )
+        .concatMap((action) => {
             const listId = action.payload.listId;
             const programId = store.value.currentSelections.programId;
             const promise = getTemplatesAsync(store.value)
                 .then(container => batchActions([
-                    selectTemplate(container.default.id, listId, container.default),
+                    selectTemplate(container.default.id, listId),
                     fetchTemplatesSuccess(container.workingListConfigs, programId, listId),
                 ], batchActionTypes.TEMPLATES_FETCH_SUCCESS_BATCH))
                 .catch((error) => {
@@ -50,9 +55,18 @@ export const retrieveTemplatesEpic = (action$: InputObservable, store: ReduxStor
                 ),
             );
         }));
+            return fromPromise(promise)
+                .takeUntil(
+                    // $FlowFixMe[prop-missing] automated comment
+                    action$.ofType(actionTypes.TEMPLATES_FETCH_CANCEL)
+                        .filter(cancelAction => cancelAction.payload.listId === listId),
+                );
+        });
 
 export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(ofType(
+    // $FlowFixMe[prop-missing] automated comment
+    action$.ofType(
         actionTypes.TEMPLATE_UPDATE,
     ),
     concatMap((action) => {
@@ -88,23 +102,28 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) 
                             templateId: template.id,
                         }),
                     );
-                }))
-            .then(() => {
-                const isActiveTemplate =
-                        store.value.workingListsTemplates[listId].selectedTemplateId === template.id;
-                return updateTemplateSuccess(
-                    template.id,
-                    eventQueryCriteria, {
-                        listId,
-                        isActiveTemplate,
-                    });
-            })
-            .catch((error) => {
-                log.error(
-                    errorCreator('could not update template')({
-                        error,
-                        eventFilterData,
-                    }),
+                    const isActiveTemplate =
+                        store.getState().workingListsTemplates[listId].selectedTemplateId === template.id;
+                    return updateTemplateError(
+                        template.id,
+                        eventQueryCriteria, {
+                            listId,
+                            isActiveTemplate,
+                        });
+                });
+
+            return fromPromise(requestPromise)
+                .takeUntil(
+                    action$
+                        // $FlowFixMe[prop-missing] automated comment
+                        .ofType(actionTypes.TEMPLATE_UPDATE)
+                        .filter(cancelAction => cancelAction.payload.template.id === template.id),
+                )
+                .takeUntil(
+                    action$
+                        // $FlowFixMe[prop-missing] automated comment
+                        .ofType(actionTypes.CONTEXT_UNLOADING)
+                        .filter(cancelAction => cancelAction.payload.listId === listId),
                 );
                 const isActiveTemplate =
                         store.value.workingListsTemplates[listId].selectedTemplateId === template.id;
@@ -132,12 +151,11 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) 
     }));
 
 export const addTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.pipe(
-        ofType(
-            actionTypes.TEMPLATE_ADD,
-        ),
-
-        concatMap((action) => {
+    // $FlowFixMe[prop-missing] automated comment
+    action$.ofType(
+        actionTypes.TEMPLATE_ADD,
+    )
+        .concatMap((action) => {
             const {
                 name,
                 eventQueryCriteria,
@@ -192,22 +210,21 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
                     return addTemplateError(clientId, { listId, isActiveTemplate });
                 });
 
-            return from(requestPromise).pipe(
-                takeUntil(
-                    action$.pipe(
-                        ofType(actionTypes.CONTEXT_UNLOADING),
-                        filter(cancelAction => cancelAction.payload.listId === listId),
-                    ),
-                ),
-            );
-        }));
+            return fromPromise(requestPromise)
+                .takeUntil(
+                    action$
+                        // $FlowFixMe[prop-missing] automated comment
+                        .ofType(actionTypes.CONTEXT_UNLOADING)
+                        .filter(cancelAction => cancelAction.payload.listId === listId),
+                );
+        });
 
-export const deleteTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.pipe(
-        ofType(
-            actionTypes.TEMPLATE_DELETE,
-        ),
-        concatMap((action) => {
+export const deleteTemplateEpic = (action$: InputObservable) =>
+    // $FlowFixMe[prop-missing] automated comment
+    action$.ofType(
+        actionTypes.TEMPLATE_DELETE,
+    )
+        .concatMap((action) => {
             const {
                 template,
                 listId,
@@ -226,7 +243,20 @@ export const deleteTemplateEpic = (action$: InputObservable, store: ReduxStore) 
                     return deleteTemplateError(template, listId);
                 });
 
-            return from(requestPromise).pipe(
+            return fromPromise(requestPromise)
+                .takeUntil(
+                    action$
+                        // $FlowFixMe[prop-missing] automated comment
+                        .ofType(actionTypes.TEMPLATE_DELETE)
+                        .filter(cancelAction => cancelAction.payload.template.id === template.id),
+                )
+                .takeUntil(
+                    action$
+                        // $FlowFixMe[prop-missing] automated comment
+                        .ofType(actionTypes.CONTEXT_UNLOADING)
+                        .filter(cancelAction => cancelAction.payload.listId === listId),
+                );
+        });
 
                 takeUntil(
                     action$.pipe(

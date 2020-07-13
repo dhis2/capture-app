@@ -44,6 +44,7 @@ class VirtualizedSelectField extends Component<Props> {
         } = this.props;
 
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <VirtualizedSelectComponent
                 value={value || ''}
                 onSelect={this.handleSelect}

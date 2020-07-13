@@ -26,7 +26,7 @@ import {
 
 import {
     updateEventContainer,
-} from '../../viewEvent.actions';
+} from '../../ViewEventComponent/viewEvent.actions';
 
 
 export const loadEditEventDataEntryEpic = (action$: ActionsObservable, store: ReduxStore) =>
@@ -43,18 +43,15 @@ export const loadEditEventDataEntryEpic = (action$: ActionsObservable, store: Re
             }
 
             const program = metadataContainer.program;
-            // $FlowFixMe
             const foundation = metadataContainer.stage.stageForm;
 
             return batchActions([
                 showEditEventDataEntry(),
-                // $FlowFixMe
                 ...openEventForEditInDataEntry(loadedValues, orgUnit, foundation, program),
             ]);
         }));
 
 export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(actionTypes.REQUEST_SAVE_EDIT_EVENT_DATA_ENTRY),
         map((action) => {
@@ -115,7 +112,6 @@ export const saveEditedEventEpic = (action$: InputObservable, store: ReduxStore)
         }));
 
 export const saveEditedEventFailedEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(actionTypes.SAVE_EDIT_EVENT_DATA_ENTRY_FAILED),
         filter((action) => {

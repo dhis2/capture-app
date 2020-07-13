@@ -36,7 +36,7 @@ const cancelActionFilter = (action: Object, formId: string, elementId: string) =
     return isAddFormData(action, formId) || isRequestFilterFormFieldOrgUnits(action, formId, elementId);
 };
 
-export const filterFormFieldOrgUnitsEpic = (action$: InputObservable, store: ReduxStore) =>
+export const filterFormFieldOrgUnitsEpic = (action$: InputObservable) =>
     action$.pipe(
         ofType(actionTypes.REQUEST_FILTER_FORM_FIELD_ORG_UNITS),
         concatMap((action) => {

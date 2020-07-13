@@ -1,22 +1,17 @@
 // @flow
 import * as React from 'react';
 import log from 'loglevel';
-
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
 import { connect } from 'react-redux';
-
 import i18n from '@dhis2/d2-i18n';
-
 import { errorCreator } from 'capture-core-utils';
 import { validationStrategies } from '../../../metaData/RenderFoundation/renderFoundation.const';
 import { saveValidationFailed, saveAbort } from '../actions/dataEntry.actions';
 import getDataEntryKey from '../common/getDataEntryKey';
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
-
 import { MessagesDialogContents } from './MessagesDialogContents';
 import { makeGetWarnings, makeGetErrors } from './withSaveHandler.selectors';
 
@@ -52,11 +47,6 @@ const getSaveHandler = (
     onFilterProps?: FilterPropsFn,
     onGetFormFoundation?: GetFormFoundationFn) => {
     class SaveHandlerHOC extends React.Component<Props, State> {
-        static errorMessages = {
-            INNER_INSTANCE_NOT_FOUND: 'Inner instance not found',
-            FORM_INSTANCE_NOT_FOUND: 'Form instance not found',
-        };
-
         formInstance: any;
         dataEntryFieldInstances: Map<string, any>;
         isCompleting: boolean;
@@ -76,11 +66,19 @@ const getSaveHandler = (
                 prevProps.inProgressList.length > 0
             ) {
                 this.validateAndSave(this.state.saveType);
+                // todo (eslint)
+                // eslint-disable-next-line react/no-did-update-set-state
                 this.setState({ waitForPromisesDialogOpen: false, saveType: null });
             }
         }
 
+        static errorMessages = {
+            INNER_INSTANCE_NOT_FOUND: 'Inner instance not found',
+            FORM_INSTANCE_NOT_FOUND: 'Form instance not found',
+        };
+
         getDataEntryFieldInstances() {
+            // $FlowFixMe[missing-annot] automated comment
             return Array.from(this.dataEntryFieldInstances.entries()).map(entry => entry[1]);
         }
 
@@ -196,10 +194,12 @@ const getSaveHandler = (
             </div>
         );
 
+        // $FlowFixMe[missing-annot] automated comment
         setFormInstance = (formInstance) => {
             this.formInstance = formInstance;
         }
 
+        // $FlowFixMe[missing-annot] automated comment
         setDataEntryFieldInstance = (dataEntryFieldInstance, id) => {
             this.dataEntryFieldInstances.set(id, dataEntryFieldInstance);
         }
@@ -288,6 +288,7 @@ const getSaveHandler = (
             };
         };
 
+        // $FlowFixMe[not-an-object] automated comment
         return mapStateToProps;
     };
 

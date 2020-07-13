@@ -8,7 +8,6 @@ import { getEventListOnReconnect, goingOnlineExecuted, batchActionTypes } from '
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
 
 export const goingOnlineEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(OFFLINE_STATUS_CHANGED),
         filter((action) => {

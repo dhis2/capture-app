@@ -40,6 +40,7 @@ class BooleanFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <BooleanFilter
                 value={this.state.value}
                 innerRef={filterTypeRef}

@@ -85,7 +85,10 @@ const runRulesOnEnrollmentUpdate =
 
 
 export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
-// $FlowSuppress
+    action$.ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_ENROLLMENT_ACTION_BATCH)
+        .map(actionBatch =>
+            actionBatch.payload.find(action => action.type === actionTypes.START_RUN_RULES_ON_UPDATE))
+        .map((action) => {
     action$.pipe(
         ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_ENROLLMENT_ACTION_BATCH),
         map(actionBatch =>
@@ -113,7 +116,6 @@ export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (action$: InputObser
         }));
 
 export const runRulesOnEnrollmentFieldUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH),
         map(actionBatch =>

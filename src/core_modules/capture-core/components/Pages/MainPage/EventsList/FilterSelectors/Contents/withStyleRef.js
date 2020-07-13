@@ -6,6 +6,7 @@ type Props = {
 };
 
 export default () => (InnerComponent: React.ComponentType<any>) => (props: Props) => (
+    // $FlowFixMe[cannot-spread-inexact] automated comment
     <InnerComponent
         innerRef={props.filterTypeRef}
         {...props}
