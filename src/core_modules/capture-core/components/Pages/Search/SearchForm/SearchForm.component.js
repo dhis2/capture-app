@@ -103,7 +103,7 @@ const Index = ({
             {
                 selectedOptionId && availableSearchOptions[selectedOptionId].searchGroups
                     .filter(searchGroup => searchGroup.unique)
-                    .map(({ searchForm, formId, searchScope }, index) => {
+                    .map(({ searchForm, formId, searchScope }) => {
                         const isCollapsed = !(expandedFormId === formId);
                         const name = searchForm.getElements()[0].formName;
                         return (
@@ -160,7 +160,7 @@ const Index = ({
             {
                 selectedOptionId && availableSearchOptions[selectedOptionId].searchGroups
                     .filter(searchGroup => !searchGroup.unique)
-                    .map(({ searchForm, formId, searchScope, minAttributesRequiredToSearch }, index) => {
+                    .map(({ searchForm, formId, searchScope, minAttributesRequiredToSearch }) => {
                         const name = searchForm.getElements()[0].formName;
                         const isCollapsed = !(expandedFormId === formId);
                         return (
