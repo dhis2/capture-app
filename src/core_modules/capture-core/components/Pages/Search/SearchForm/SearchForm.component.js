@@ -182,7 +182,7 @@ const Index = ({
                                             )
                                         }
                                     >
-                                        Search by {name}
+                                        Search by attributes
                                     </Button>
                                     <div className={error ? classes.textError : classes.textInfo}>
                                         Fill in at least {minAttributesRequiredToSearch}  attributes to search
