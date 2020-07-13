@@ -1,7 +1,7 @@
 // @flow
-import { actionTypes, saveAssignee } from './assigneeSection.actions';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
+import { actionTypes, saveAssignee } from './assigneeSection.actions';
 import { getEventProgramThrowIfNotFound } from '../../../../../metaData';
 import { convertValue as convertToServerValue } from '../../../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../../../events/mainConverters';

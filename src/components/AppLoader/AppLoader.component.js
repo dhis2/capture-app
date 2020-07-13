@@ -8,7 +8,7 @@ import { DisplayException } from 'capture-core/utils/exceptions';
 import { environments } from 'capture-core/constants';
 import type { HashHistory } from 'history/createHashHistory';
 import { initializeAsync } from './init';
-import {getStore} from '../../store/getStore';
+import { getStore } from '../../store/getStore';
 
 type Props = {
     onRunApp: (store: ReduxStore, history: HashHistory) => void,

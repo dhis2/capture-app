@@ -50,7 +50,7 @@ export const loadNotesForViewEventEpic = (action$: InputObservable) =>
 
 export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-      ofType(viewEventNotesActionTypes.REQUEST_SAVE_EVENT_NOTE),
+        ofType(viewEventNotesActionTypes.REQUEST_SAVE_EVENT_NOTE),
         map((action) => {
             const state = store.value;
             const payload = action.payload;
@@ -80,5 +80,5 @@ export const addNoteForViewEventEpic = (action$: InputObservable, store: ReduxSt
 
 export const saveNoteForViewEventFailedEpic = (action$: InputObservable) =>
     action$.pipe(
-      ofType(viewEventNotesActionTypes.SAVE_EVENT_NOTE_FAILED),
+        ofType(viewEventNotesActionTypes.SAVE_EVENT_NOTE_FAILED),
         map(action => removeNote(noteKey, action.meta.clientId)));

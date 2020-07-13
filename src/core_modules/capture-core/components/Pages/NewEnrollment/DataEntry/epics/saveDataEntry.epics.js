@@ -1,7 +1,7 @@
 // @flow
-import { getTrackerProgramThrowIfNotFound } from '../../../../../metaData/helpers';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
+import { getTrackerProgramThrowIfNotFound } from '../../../../../metaData/helpers';
 import { actionTypes, startSaveNewEnrollmentAfterReturnedToMainPage } from '../actions/dataEntry.actions';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import { buildServerDataForEnrollmentDataEntry } from '../../../../DataEntries';
