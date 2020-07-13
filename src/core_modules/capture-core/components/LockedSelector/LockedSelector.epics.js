@@ -1,6 +1,8 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
 import { push } from 'connected-react-router';
+import { ofType } from 'redux-observable';
+import { filter, map, switchMap } from 'rxjs/operators';
 import {
     lockedSelectorActionTypes,
     lockedSelectorBatchActionTypes,
@@ -12,8 +14,6 @@ import {
 } from './LockedSelector.actions';
 import { programCollection } from '../../metaDataMemoryStores';
 import { getApi } from '../../d2';
-import { ofType } from 'redux-observable';
-import { filter, map, switchMap } from 'rxjs/operators';
 
 const exactUrl = (page: string, programId: string, orgUnitId: string) => {
     const argArray = [];
