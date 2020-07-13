@@ -54,7 +54,7 @@ export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObserv
                 );
 
                 return from(openEnrollmentPromise).pipe(
-                    takeUntil(action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE)),
+                    takeUntil(action$.pipe(ofType(newRelationshipActionTypes.SELECT_FIND_MODE))),
                 );
             }
 
@@ -78,7 +78,7 @@ export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObserv
                 );
 
                 return from(openTeiPromise).pipe(
-                    takeUntil(action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE)),
+                    takeUntil(action$.pipe(ofType(newRelationshipActionTypes.SELECT_FIND_MODE))),
                 );
             }
 

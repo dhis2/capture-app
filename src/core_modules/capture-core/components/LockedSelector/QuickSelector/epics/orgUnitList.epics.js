@@ -1,6 +1,8 @@
 // @flow
 import log from 'loglevel';
-import { fromPromise } from 'rxjs/observable/fromPromise';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
+import { ofType } from 'redux-observable';
+import { from } from 'rxjs';
 import getD2 from 'capture-core/d2/d2Instance';
 import { errorCreator } from 'capture-core-utils';
 import {
@@ -17,8 +19,9 @@ const RETRIEVE_ERROR = 'Could not retrieve registering unit list';
 // get organisation units based on search criteria
 export const searchRegisteringUnitListEpic = (action$: InputObservable) =>
     // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(orgUnitListActions.SEARCH_ORG_UNITS)
-        .switchMap((action) => {
+    action$.pipe(
+        ofType(orgUnitListActions.SEARCH_ORG_UNITS),
+        switchMap((action) => {
             const searchText = action.payload.searchText;
             return getD2()
                 .models
@@ -35,8 +38,8 @@ export const searchRegisteringUnitListEpic = (action$: InputObservable) =>
                 })
                 .then(orgUnitCollection => ({ regUnitArray: orgUnitCollection.toArray(), searchText }))
                 .catch(error => ({ error }));
-        })
-        .map((resultContainer) => {
+        }),
+        map((resultContainer) => {
             if (resultContainer.error) {
                 log.error(errorCreator(RETRIEVE_ERROR)(
                     { error: resultContainer.error, method: 'searchRegisteringUnitListEpic' }),
@@ -53,19 +56,24 @@ export const searchRegisteringUnitListEpic = (action$: InputObservable) =>
                     displayName: unit.displayName,
                 }));
             return setSearchRoots(regUnits, resultContainer.searchText);
-        });
+        }));
 
 // show loading indicator if api-request is not resolved when timeout expires
 export const showRegisteringUnitListIndicatorEpic = (action$: InputObservable) =>
     // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(orgUnitListActions.SEARCH_ORG_UNITS)
-        .switchMap(() =>
-            fromPromise(new Promise((resolve) => {
+    action$.pipe(
+        ofType(orgUnitListActions.SEARCH_ORG_UNITS),
+        switchMap(() =>
+            from(new Promise((resolve) => {
                 setTimeout(() => resolve(), LOADING_INDICATOR_TIMEOUT);
             }))
                 // $FlowFixMe[prop-missing] automated comment
-                .takeUntil(action$.ofType(
-                    orgUnitListActions.SET_SEARCH_ROOTS,
-                    orgUnitListActions.SET_SEARCH_ROOTS_FAILED)),
-        )
-        .map(() => showLoadingIndicator());
+                .pipe(
+                    takeUntil(action$.pipe(
+                        ofType(
+                            orgUnitListActions.SET_SEARCH_ROOTS,
+                            orgUnitListActions.SET_SEARCH_ROOTS_FAILED)),
+                    ),
+                ),
+        ),
+        map(() => showLoadingIndicator()));

@@ -12,8 +12,6 @@ import type { BrowserHistory } from 'history/createBrowserHistory';
 import type { HashHistory } from 'history/createHashHistory';
 import { createOffline } from '@redux-offline/redux-offline';
 import offlineConfig from '@redux-offline/redux-offline/lib/defaults';
-import { buildReducersFromDescriptions } from 'capture-core/trackerRedux/trackerReducer';
-import environments from 'capture-core/constants/environments';
 import { effectConfig, discardConfig, queueConfig } from 'capture-core/trackerOffline/trackerOfflineConfig';
 import getPersistOptions from './persist/persistOptionsGetter';
 import reducerDescriptions from '../reducers/descriptions/trackerCapture.reducerDescriptions';

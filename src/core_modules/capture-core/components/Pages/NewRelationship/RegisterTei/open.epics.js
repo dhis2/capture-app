@@ -1,7 +1,7 @@
 // @flow
 import { from } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { filter, switchMap, takeUntil } from "rxjs/operators";
+import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
@@ -91,7 +91,7 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
                 );
 
                 return from(openEnrollmentPromise)
-                    .takeUntil(action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE));
+                    .takeUntil(action$.pipe(ofType(newRelationshipActionTypes.SELECT_FIND_MODE)));
             }
 
             // tei (tet attribues) form

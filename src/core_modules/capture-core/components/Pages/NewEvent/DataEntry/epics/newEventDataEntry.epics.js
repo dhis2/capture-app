@@ -48,10 +48,7 @@ const errorMessages = {
 
 export const resetDataEntryForNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
-        ofType(
-            newEventSelectorTypes.OPEN_NEW_EVENT_FROM_NEW_EVENT_PAGE,
-            newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH,
-        ),
+        ofType(newEventDataEntryBatchActionTypes.SAVE_NEW_EVENT_ADD_ANOTHER_BATCH),
         map(() => {
             const state = store.value;
             const programId = state.currentSelections.programId;
@@ -93,7 +90,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
             crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
         ),
         filter(() => {
-            const { app: { page } } = store.getState();
+            const { app: { page } } = store.value;
             return page === 'newEvent';
         }),
         filter((action) => {
@@ -141,14 +138,14 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
 export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
-        lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID,
-        lockedSelectorActionTypes.NEW_EVENT_OPEN,
-        lockedSelectorActionTypes.CATEGORY_OPTION_SET,
-        lockedSelectorActionTypes.PROGRAM_ID_SET,
-        crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
+            lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID,
+            lockedSelectorActionTypes.NEW_EVENT_OPEN,
+            lockedSelectorActionTypes.CATEGORY_OPTION_SET,
+            lockedSelectorActionTypes.PROGRAM_ID_SET,
+            crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
         ),
         filter(() => {
-            const { app: { page } } = store.getState();
+            const { app: { page } } = store.value;
             return page === 'newEvent';
         }),
         filter((action) => {

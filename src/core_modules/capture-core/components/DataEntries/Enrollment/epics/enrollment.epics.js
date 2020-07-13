@@ -2,7 +2,6 @@
 import log from 'loglevel';
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
-
 import { errorCreator } from 'capture-core-utils';
 import { batchActionTypes, runRulesOnUpdateFieldBatch } from '../actions/enrollment.actionBatchs';
 import { actionTypes } from '../actions/enrollment.actions';
@@ -85,10 +84,6 @@ const runRulesOnEnrollmentUpdate =
 
 
 export const runRulesOnEnrollmentDataEntryFieldUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_ENROLLMENT_ACTION_BATCH)
-        .map(actionBatch =>
-            actionBatch.payload.find(action => action.type === actionTypes.START_RUN_RULES_ON_UPDATE))
-        .map((action) => {
     action$.pipe(
         ofType(batchActionTypes.UPDATE_DATA_ENTRY_FIELD_NEW_ENROLLMENT_ACTION_BATCH),
         map(actionBatch =>
@@ -137,4 +132,5 @@ export const runRulesOnEnrollmentFieldUpdateEpic = (action$: InputObservable, st
                 itemId,
                 uid,
             }, fieldData, searchActions);
-        }));
+        }),
+    );

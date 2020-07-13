@@ -1,5 +1,7 @@
 // @flow
 import { push } from 'connected-react-router';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
 import { lockedSelectorActionTypes } from '../../../LockedSelector/LockedSelector.actions';
 
 const getArguments = (programId: string, orgUnitId: string) => {
