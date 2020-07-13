@@ -135,7 +135,7 @@ const Index = ({
                                                 searchScope,
                                             )}
                                     >
-                                        Find by {name}.
+                                        Find by {name}
                                     </Button>
                                 </div>
                             </Section>
