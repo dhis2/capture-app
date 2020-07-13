@@ -39,7 +39,6 @@ const cancelActionFilter = (action: Object, searchId: string) => {
 
 // get organisation units based on search criteria
 export const teiSearchFilterOrgUnitsEpic = (action$: InputObservable) =>
-// $FlowFixMe
     action$.pipe(
         ofType(searchOrgUnitActionTypes.TEI_SEARCH_REQUEST_FILTER_ORG_UNITS),
         concatMap((action) => {

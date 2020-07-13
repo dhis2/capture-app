@@ -20,7 +20,6 @@ const getArguments = (programId: string, orgUnitId: string) => {
 
 export const setOrgUnit = (action$: InputObservable, store: ReduxStore) =>
 
-    // $FlowFixMe[prop-missing] automated comment
     action$.pipe(
         ofType(selectionActionTypes.SET_ORG_UNIT_ID),
         map(() => {

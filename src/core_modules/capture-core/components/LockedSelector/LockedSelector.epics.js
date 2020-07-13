@@ -31,7 +31,6 @@ const exactUrl = (page: string, programId: string, orgUnitId: string) => {
 };
 
 export const updateUrlViaLockedSelectorEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowFixMe[prop-missing] automated comment
     action$.pipe(
         ofType(
             lockedSelectorActionTypes.ORG_UNIT_ID_SET,
@@ -48,13 +47,11 @@ export const updateUrlViaLockedSelectorEpic = (action$: InputObservable, store: 
         }));
 
 export const startAgainEpic = (action$: InputObservable) =>
-    // $FlowFixMe[prop-missing] automated comment
     action$.pipe(
         ofType(lockedSelectorBatchActionTypes.AGAIN_START),
         map(() => push('/')));
 
 export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable) =>
-    // $FlowFixMe[prop-missing] automated comment
     action$.pipe(
         ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE),
         filter(action => action.payload.nextProps.orgUnitId),
@@ -71,7 +68,6 @@ export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable) =>
         ));
 
 export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: InputObservable) =>
-    // $FlowFixMe[prop-missing] automated comment
     action$.pipe(
         ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE),
         filter(action => !action.payload.nextProps.orgUnitId),
