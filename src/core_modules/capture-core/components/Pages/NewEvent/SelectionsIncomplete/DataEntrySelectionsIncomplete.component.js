@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper';
-import Button from '../../../Buttons/Button.component';
+import { Button } from '@dhis2/ui-core';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -115,6 +115,7 @@ class DataEntrySelectionsIncomplete extends Component<Props> {
                         className={classes.buttonContainer}
                     >
                         <Button
+                            dataTest="dhis2-capture-new-page-cancel-button"
                             variant="text"
                             color="primary"
                             onClick={onCancel}
