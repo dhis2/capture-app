@@ -19,7 +19,6 @@ const errorMessages = {
 };
 
 export const openNewEnrollmentInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(
             urlActionTypes.VALID_SELECTIONS_FROM_URL,

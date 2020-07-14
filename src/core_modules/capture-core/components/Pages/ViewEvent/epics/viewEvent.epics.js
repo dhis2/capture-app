@@ -31,7 +31,6 @@ import { getCategoriesDataFromEventAsync } from './getCategoriesDataFromEvent';
 
 
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
     action$.pipe(
         ofType(eventListActionTypes.OPEN_VIEW_EVENT_PAGE),
         switchMap((action) => {
