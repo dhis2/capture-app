@@ -181,3 +181,7 @@ Then('you should be taken to the main page with only org unit selected', () => {
 Then('you should be taken to the main page with only program selected', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/programId=VBqh0ynB2wv`);
 });
+
+Given('you land on a view event page with an invalid id', () => {
+    cy.visit('/#/viewEvent/invalid');
+});

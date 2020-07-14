@@ -1,5 +1,7 @@
 Feature: In the main page, use the LockedSelector to navigate
 
+  # Main page
+
   Scenario: Notifying that you need to select org unit and program to get started
     Given you are in the main page with no selections made
     When you click the "New" button to add a new event
@@ -46,7 +48,7 @@ Feature: In the main page, use the LockedSelector to navigate
     Then main page page url is valid
     And you can see the new event page
 
-  ######################################
+  # New Event page
 
   Scenario: Landing on the new event page
     Given you are in the main page with no selections made
@@ -79,6 +81,8 @@ Feature: In the main page, use the LockedSelector to navigate
     Given you land on a new event page with an invalid org unit id
     Then you should see error message
 
+  # View Event page
+
   Scenario: Landing on the view event page
     Given you land on a view event page from the url
     Then you can see the view event page
@@ -109,3 +113,7 @@ Feature: In the main page, use the LockedSelector to navigate
     And you select the first entity from the table
     When you remove the org unit selection
     Then you should be taken to the main page with only program selected
+
+  Scenario: Landing on view event page with invalid id
+    Given you land on a view event page with an invalid id
+    Then you should see error message
