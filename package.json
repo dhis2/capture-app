@@ -29,7 +29,7 @@
     "history": "^4.10.1",
     "leaflet": "^1.6.0",
     "leaflet-draw": "^1.0.4",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "loglevel": "^1.6.3",
     "moment": "^2.27.0",
     "prop-types": "^15.7.2",
