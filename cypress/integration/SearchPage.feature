@@ -26,10 +26,8 @@ Feature: User interacts with Search page
     Given you are on the default search page
     And you select the search domain Malaria Case diagnosis
     When you fill in the unique identifier field with values that will return a tracked entity instance
-    # navigating to a different url throws an error in cypress
-    # issue https://github.com/cypress-io/cypress/issues/4220
-    # And you click find
-    # Then you are navigated to the Tracker Capture
+    And you click find
+    Then you are navigated to the Tracker Capture
 
   Scenario: Searching using attributes returns no results
     Given you are on the default search page
