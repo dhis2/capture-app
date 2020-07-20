@@ -1,3 +1,4 @@
+/* eslint-disable */
 const HEADERS_TO_STRIP_LOWERCASE = [
     'content-security-policy',
     'x-frame-options',
