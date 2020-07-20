@@ -26,9 +26,10 @@ Feature: User interacts with Search page
     Given you are on the default search page
     And you select the search domain Malaria Case diagnosis
     When you fill in the unique identifier field with values that will return a tracked entity instance
-  #  todo this throws an error
-  #  And you click find
-  #  Then you are navigated to the Tracker Capture
+    # navigating to a different url throws an error in cypress
+    # issue https://github.com/cypress-io/cypress/issues/4220
+    And you click find
+    Then you are navigated to the Tracker Capture
 
   Scenario: Searching using attributes returns no results
     Given you are on the default search page
@@ -63,6 +64,3 @@ Feature: User interacts with Search page
     Given you are on the search page with preselected program and org unit
     When when you click the back button
     Then you should be taken to the main page with program and org unit preselected
-
-
-
