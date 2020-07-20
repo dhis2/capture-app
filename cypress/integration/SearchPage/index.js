@@ -19,7 +19,7 @@ When('you select the search domain Person', () => {
 Then('there should be Person domain forms available to search with', () => {
     cy.get('[data-test="dhis2-capture-search-page-content"]')
         .find('[data-test="capture-ui-input"]')
-        .should('have.length', 3);
+        .should('have.length', 1);
 });
 
 Given('you are in the search page with the Child Programme being pre-selected from the url', () => {
@@ -36,7 +36,7 @@ Then('there should be search domain Child Programme being pre-selected', () => {
 And('there should be Child Programme domain forms visible to search with', () => {
     cy.get('[data-test="dhis2-capture-search-page-content"]')
         .find('[data-test="capture-ui-input"]')
-        .should('have.length', 4)
+        .should('have.length', 1)
     ;
 });
 
