@@ -215,6 +215,8 @@
     "Link to an existing {{trackedEntityType}}": "",
     "Create new {{trackedEntityType}}": "",
     "Register": "",
+    "Search {{name}}": "",
+    "Make a selection to start searching": "",
     "You dont have access to edit this event": "",
     "Leaving this page will discard any selections you made for a new relationship": "",
     "No one is assigned to this event": "",

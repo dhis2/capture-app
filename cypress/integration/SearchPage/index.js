@@ -137,8 +137,7 @@ When('you dont fill in any of the values', () => {
 Then('there should be a validation error message', () => {
     cy.get('[data-test="dhis2-capture-form-attributes"]')
         .contains('Fill in at least 1 attributes to search')
-        .includesClass('textError')
-        .should('exist');
+        .shouldIncludeClass('textError');
 });
 
 Given('you are on the search page with preselected program and org unit', () => {
