@@ -33,6 +33,7 @@ Feature: User interacts with Search page
   Scenario: Searching using attributes returns no results
     Given you are on the default search page
     And you select the search domain Malaria Case diagnosis
+    And you expand the attributes search area
     When you fill in the first name with values that will return no results
     And you click search
     Then there should be a modal popping up
@@ -41,6 +42,7 @@ Feature: User interacts with Search page
   Scenario: Searching using attributes returns results
     Given you are on the default search page
     And you select the search domain Malaria Case diagnosis
+    And you expand the attributes search area
     When you fill in the first name with values that will return results
     And you click search
     Then there should be a success message
@@ -48,6 +50,7 @@ Feature: User interacts with Search page
   Scenario: Searching using attributes throws error
     Given you are on the default search page
     And you select the search domain Malaria Case diagnosis
+    And you expand the attributes search area
     When you fill in the first name with values that will return an error
     And you click search
     Then there should be an generic error message
@@ -55,6 +58,7 @@ Feature: User interacts with Search page
   Scenario: Searching using attributes is invalid
     Given you are on the default search page
     And you select the search domain Malaria Case diagnosis
+    And you expand the attributes search area
     When you dont fill in any of the values
     And you click search
     Then there should be a validation error message

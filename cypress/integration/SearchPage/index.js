@@ -93,6 +93,13 @@ When('you fill in the first name with values that will return no results', () =>
         .type('user non existing');
 });
 
+And('you expand the attributes search area', () => {
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('button')
+        .first()
+        .click();
+});
+
 When('you fill in the first name with values that will return results', () => {
     cy.get('[data-test="dhis2-capture-form-attributes"]')
         .find('[data-test="capture-ui-input"]')
