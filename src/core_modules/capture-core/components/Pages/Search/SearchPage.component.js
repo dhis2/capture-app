@@ -176,7 +176,7 @@ const Index = ({
 
                 <SearchForm
                     selectedSearchScopeId={selectedOption.value}
-                    availableSearchOptions={availableSearchOptions}
+                    searchGroupForSelectedScope={selectedOption.value ? availableSearchOptions[selectedOption.value].searchGroups : []}
                 />
 
                 {

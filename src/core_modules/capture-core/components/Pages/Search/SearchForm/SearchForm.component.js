@@ -47,7 +47,7 @@ const Index = ({
     searchViaAttributesOnScopeTrackedEntityType,
     selectedSearchScopeId,
     classes,
-    availableSearchOptions,
+    searchGroupForSelectedScope,
     forms,
     searchStatus,
     isSearchViaAttributesValid,
@@ -62,28 +62,14 @@ const Index = ({
     [selectedSearchScopeId],
     );
 
-    const sortedSearchGroup =
-      selectedSearchScopeId ?
-          availableSearchOptions[selectedSearchScopeId].searchGroups
-              .sort(({ unique: xBoolean }, { unique: yBoolean }) => {
-                  if (xBoolean === yBoolean) {
-                      return 0;
-                  }
-                  if (xBoolean) {
-                      return -1;
-                  }
-                  return 1;
-              })
-          :
-          [];
     useEffect(() => {
-        sortedSearchGroup
+        searchGroupForSelectedScope
             .forEach(({ formId }, index) => {
                 if (!expandedFormId && index === 0) {
                     setExpandedFormId(formId);
                 }
             });
-    }, [sortedSearchGroup, expandedFormId]);
+    }, [searchGroupForSelectedScope, expandedFormId]);
 
     return useMemo(() => {
         const formReference = {};
@@ -131,7 +117,7 @@ const Index = ({
             </div>);
         return (<>
             {
-                sortedSearchGroup
+                searchGroupForSelectedScope
                     .filter(searchGroup => searchGroup.unique)
                     .map(({ searchForm, formId, searchScope }) => {
                         const isSearchSectionCollapsed = !(expandedFormId === formId);
@@ -187,7 +173,7 @@ const Index = ({
             }
 
             {
-                sortedSearchGroup
+                searchGroupForSelectedScope
                     .filter(searchGroup => !searchGroup.unique)
                     .map(({ searchForm, formId, searchScope, minAttributesRequiredToSearch }) => {
                         const name = searchForm.getElements()[0].formName;
@@ -255,7 +241,7 @@ const Index = ({
         classes.textInfo,
         classes.textError,
         forms,
-        sortedSearchGroup,
+        searchGroupForSelectedScope,
         selectedSearchScopeId,
         searchStatus,
         searchViaUniqueIdOnScopeTrackedEntityType,

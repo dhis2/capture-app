@@ -1,8 +1,8 @@
 // @flow
-import type { AvailableSearchOptions } from '../SearchPage.types';
+import type { SearchGroup } from '../SearchPage.types';
 
 export type OwnProps = {|
-  +availableSearchOptions: AvailableSearchOptions,
+  +searchGroupForSelectedScope: SearchGroup,
   +selectedSearchScopeId?: string,
   +classes: {|
     +searchDomainSelectorSection: string,
@@ -15,6 +15,7 @@ export type OwnProps = {|
 |}
 
 export type PropsFromRedux ={|
+  +searchGroupForSelectedScope: SearchGroup,
   +forms: {
     [elementId: string]: {
       loadNr: number

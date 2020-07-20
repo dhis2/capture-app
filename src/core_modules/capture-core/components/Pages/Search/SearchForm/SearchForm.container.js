@@ -6,9 +6,21 @@ import { actionCreator } from '../../../../actions/actions.utils';
 import type { DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './SearchForm.types';
 
 
-const mapStateToProps = (state: ReduxState): PropsFromRedux => {
+const mapStateToProps = (state: ReduxState, { searchGroupForSelectedScope }): PropsFromRedux => {
     const { forms, searchPage: { searchStatus }, formsValues } = state;
+
     return {
+        // We use the sorted array to always have expanded the first search group section.
+        searchGroupForSelectedScope: searchGroupForSelectedScope
+            .sort(({ unique: xBoolean }, { unique: yBoolean }) => {
+                if (xBoolean === yBoolean) {
+                    return 0;
+                }
+                if (xBoolean) {
+                    return -1;
+                }
+                return 1;
+            }),
         forms,
         searchStatus,
         isSearchViaAttributesValid: (minAttributesRequiredToSearch, formId) => {
