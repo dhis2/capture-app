@@ -45,7 +45,7 @@ const Index = ({
     searchViaUniqueIdOnScopeProgram,
     searchViaAttributesOnScopeProgram,
     searchViaAttributesOnScopeTrackedEntityType,
-    selectedOptionId,
+    selectedSearchScopeId,
     classes,
     availableSearchOptions,
     forms,
@@ -55,11 +55,35 @@ const Index = ({
     const [error, setError] = useState(false);
     const [expandedFormId, setExpandedFormId] = useState(null);
 
+    // each time the user selects new search scope we want the expanded form id to be initialised
     useEffect(() => {
         setExpandedFormId(null);
     },
-    [selectedOptionId],
+    [selectedSearchScopeId],
     );
+
+    const sortedSearchGroup =
+      selectedSearchScopeId ?
+          availableSearchOptions[selectedSearchScopeId].searchGroups
+              .sort(({ unique: xBoolean }, { unique: yBoolean }) => {
+                  if (xBoolean === yBoolean) {
+                      return 0;
+                  }
+                  if (xBoolean) {
+                      return -1;
+                  }
+                  return 1;
+              })
+          :
+          [];
+    useEffect(() => {
+        sortedSearchGroup
+            .forEach(({ formId }, index) => {
+                if (!expandedFormId && index === 0) {
+                    setExpandedFormId(formId);
+                }
+            });
+    }, [sortedSearchGroup, expandedFormId]);
 
     return useMemo(() => {
         const formReference = {};
@@ -107,26 +131,24 @@ const Index = ({
             </div>);
         return (<>
             {
-                selectedOptionId && availableSearchOptions[selectedOptionId].searchGroups
+                sortedSearchGroup
                     .filter(searchGroup => searchGroup.unique)
-                    .map(({ searchForm, formId, searchScope }, index) => {
-                        const isCollapsed = !(expandedFormId === formId);
+                    .map(({ searchForm, formId, searchScope }) => {
+                        const isSearchSectionCollapsed = !(expandedFormId === formId);
                         const name = searchForm.getElements()[0].formName;
-                        if (!expandedFormId && index === 0) {
-                            setExpandedFormId(formId);
-                        }
+
                         return (
                             <div key={formId} data-test="dhis2-capture-form-unique">
                                 <Section
-                                    isCollapsed={isCollapsed}
+                                    isCollapsed={isSearchSectionCollapsed}
                                     className={classes.searchDomainSelectorSection}
                                     header={
                                         <SectionHeaderSimple
                                             containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
                                             title={i18n.t('Search {{name}}', { name })}
                                             onChangeCollapseState={() => { setExpandedFormId(formId); }}
-                                            isCollapseButtonEnabled={isCollapsed}
-                                            isCollapsed={isCollapsed}
+                                            isCollapseButtonEnabled={isSearchSectionCollapsed}
+                                            isCollapsed={isSearchSectionCollapsed}
                                         />
                                     }
                                 >
@@ -148,9 +170,9 @@ const Index = ({
                                         <Button
                                             disabled={searchStatus === searchPageStatus.LOADING}
                                             onClick={() =>
-                                                selectedOptionId &&
+                                                selectedSearchScopeId &&
                                             handleSearchViaUniqueId(
-                                                selectedOptionId,
+                                                selectedSearchScopeId,
                                                 formId,
                                                 searchScope,
                                             )}
@@ -165,23 +187,24 @@ const Index = ({
             }
 
             {
-                selectedOptionId && availableSearchOptions[selectedOptionId].searchGroups
+                sortedSearchGroup
                     .filter(searchGroup => !searchGroup.unique)
                     .map(({ searchForm, formId, searchScope, minAttributesRequiredToSearch }) => {
                         const name = searchForm.getElements()[0].formName;
-                        const isCollapsed = !(expandedFormId === formId);
+                        const isSearchSectionCollapsed = !(expandedFormId === formId);
+
                         return (
                             <div key={formId} data-test="dhis2-capture-form-attributes">
                                 <Section
-                                    isCollapsed={isCollapsed}
+                                    isCollapsed={isSearchSectionCollapsed}
                                     className={classes.searchDomainSelectorSection}
                                     header={
                                         <SectionHeaderSimple
                                             containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
                                             title={i18n.t('Search {{name}}', { name })}
                                             onChangeCollapseState={() => { setExpandedFormId(formId); }}
-                                            isCollapseButtonEnabled={isCollapsed}
-                                            isCollapsed={isCollapsed}
+                                            isCollapseButtonEnabled={isSearchSectionCollapsed}
+                                            isCollapsed={isSearchSectionCollapsed}
                                         />
                                     }
                                 >
@@ -200,9 +223,9 @@ const Index = ({
                                         <Button
                                             disabled={searchStatus === searchPageStatus.LOADING}
                                             onClick={() =>
-                                                selectedOptionId &&
+                                                selectedSearchScopeId &&
                                             handleSearchViaAttributes(
-                                                selectedOptionId,
+                                                selectedSearchScopeId,
                                                 formId,
                                                 searchScope,
                                                 minAttributesRequiredToSearch,
@@ -232,8 +255,8 @@ const Index = ({
         classes.textInfo,
         classes.textError,
         forms,
-        availableSearchOptions,
-        selectedOptionId,
+        sortedSearchGroup,
+        selectedSearchScopeId,
         searchStatus,
         searchViaUniqueIdOnScopeTrackedEntityType,
         searchViaUniqueIdOnScopeProgram,

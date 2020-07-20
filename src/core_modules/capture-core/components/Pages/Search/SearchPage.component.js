@@ -175,7 +175,7 @@ const Index = ({
                 />
 
                 <SearchForm
-                    selectedOptionId={selectedOption.value}
+                    selectedSearchScopeId={selectedOption.value}
                     availableSearchOptions={availableSearchOptions}
                 />
 
