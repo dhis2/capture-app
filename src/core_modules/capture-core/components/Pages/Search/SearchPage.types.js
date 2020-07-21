@@ -26,6 +26,7 @@ export type OwnProps = {|
     +divider: string,
     +generalPurposeErrorMessage: string,
     +backButton: string,
+    +pagination: string,
   |},
 |}
 
@@ -59,11 +60,16 @@ export type PropsFromRedux ={|
     +tei: Object,
     +values: Object
   |}>,
+  +searchResultsPaginationInfo: {|
+    +rowsCount: number,
+    +rowsPerPage: number,
+    +currentPage: number,
+  |}
 |}
 
 export type DispatchersFromRedux = {|
   addFormIdToReduxStore: (formId: string) => void,
-  closeModal: () => void,
+  showInitialSearchPage: () => void,
   navigateToMainPage: () => void
 |}
 

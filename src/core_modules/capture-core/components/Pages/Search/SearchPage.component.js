@@ -14,11 +14,14 @@ import {
     ButtonStrip,
     Button,
 } from '@dhis2/ui-core';
+import { Pagination } from 'capture-ui';
 import { LockedSelector } from '../../LockedSelector';
 import type { Props } from './SearchPage.types';
 import { Section, SectionHeaderSimple } from '../../Section';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
+import withNavigation from '../../Pagination/withDefaultNavigation';
+import CardList from '../../CardList/CardList.component';
 
 const getStyles = (theme: Theme) => ({
     divider: {
@@ -72,10 +75,14 @@ const getStyles = (theme: Theme) => ({
     generalPurposeErrorMessage: {
         color: theme.palette.error.main,
     },
+    pagination: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+    },
 });
 
 const SearchSelection =
-  withStyles(getStyles)(({ trackedEntityTypesWithCorrelatedPrograms, classes, setSelected, selectedOption }) =>
+  withStyles(getStyles)(({ trackedEntityTypesWithCorrelatedPrograms, classes, onSelect, selectedProgram }) =>
       (<Section
           className={classes.searchDomainSelectorSection}
           header={
@@ -89,8 +96,8 @@ const SearchSelection =
               <div className={classes.searchRowTitle}>Search for</div>
               <div className={classes.searchRowSelectElement} style={{ marginRight: 8 }}>
                   <SingleSelect
-                      onChange={({ selected }) => { setSelected(selected); }}
-                      selected={selectedOption}
+                      onChange={({ selected }) => { onSelect(selected); }}
+                      selected={selectedProgram}
                       empty={<div className={classes.customEmpty}>Custom empty component</div>}
                   >
                       {
@@ -123,6 +130,7 @@ const SearchSelection =
           </div>
       </Section>));
 
+const SearchPagination = withNavigation()(Pagination);
 
 const Index = ({
     classes,
@@ -131,32 +139,48 @@ const Index = ({
     availableSearchOptions,
     searchStatus,
     addFormIdToReduxStore,
-    closeModal,
+    showInitialSearchPage,
     navigateToMainPage,
     searchResults,
+    searchResultsPaginationInfo: { rowsCount, rowsPerPage, currentPage },
     generalPurposeErrorMessage,
 }: Props) => {
-    const [selectedOption, setSelected] = useState(preselectedProgram);
+    const [selectedProgram, setSelectedProgram] = useState(preselectedProgram);
 
+    const handleProgramSelection = (program) => {
+        showInitialSearchPage();
+        setSelectedProgram(program);
+    };
 
     // dan abramov suggest to stringify https://twitter.com/dan_abramov/status/1104414469629898754?lang=en
     // so that useEffect can do the comparison
     const stringifyPrograms = JSON.stringify(availableSearchOptions);
     useEffect(() => {
         // in order for the Form component to render
-        // need to add a formId under the `forms` reducer
-        selectedOption.value &&
-        JSON.parse(stringifyPrograms)[selectedOption.value].searchGroups
+        // a formId under the `forms` reducer needs to be added.
+        selectedProgram.value &&
+        JSON.parse(stringifyPrograms)[selectedProgram.value].searchGroups
             .forEach(({ formId }) => {
                 addFormIdToReduxStore(formId);
             });
     },
     [
         stringifyPrograms,
-        selectedOption.value,
+        selectedProgram.value,
         addFormIdToReduxStore,
     ]);
 
+    const searchGroupForSelectedScope =
+      selectedProgram.value ? availableSearchOptions[selectedProgram.value].searchGroups : [];
+
+
+    const collectFormDataElements = searchGroups =>
+        searchGroups
+            .filter(searchGroup => !searchGroup.unique)
+            .flatMap(({ searchForm: { sections } }) => {
+                const elementsMap = [...sections.values()].map(section => section.elements)[0];
+                return [...elementsMap.values()];
+            });
 
     return (<>
         <LockedSelector />
@@ -170,13 +194,13 @@ const Index = ({
 
                 <SearchSelection
                     trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
-                    setSelected={setSelected}
-                    selectedOption={selectedOption}
+                    onSelect={handleProgramSelection}
+                    selectedProgram={selectedProgram}
                 />
 
                 <SearchForm
-                    selectedSearchScopeId={selectedOption.value}
-                    searchGroupForSelectedScope={selectedOption.value ? availableSearchOptions[selectedOption.value].searchGroups : []}
+                    selectedSearchScopeId={selectedProgram.value}
+                    searchGroupForSelectedScope={searchGroupForSelectedScope}
                 />
 
                 {
@@ -188,7 +212,7 @@ const Index = ({
                             <ButtonStrip end>
                                 <Button
                                     disabled={searchStatus === searchPageStatus.LOADING}
-                                    onClick={closeModal}
+                                    onClick={showInitialSearchPage}
                                     primary
                                     type="button"
                                 >
@@ -201,10 +225,19 @@ const Index = ({
 
                 {
                     searchStatus === searchPageStatus.SHOW_RESULTS &&
-                    <h3>
-                        Your search has given results. At this point the results are stored.
-                        Number of results: {searchResults && searchResults.length}
-                    </h3>
+                    <>
+                        <CardList
+                            items={searchResults}
+                            dataElements={collectFormDataElements(searchGroupForSelectedScope)}
+                        />
+                        <div className={classes.pagination}>
+                            <SearchPagination
+                                rowsCount={rowsCount}
+                                rowsPerPage={rowsPerPage}
+                                currentPage={currentPage}
+                            />
+                        </div>
+                    </>
 
                 }
 
@@ -220,7 +253,7 @@ const Index = ({
             </Paper>
 
             {
-                !selectedOption.value &&
+                !selectedProgram.value &&
                     <Paper elevation={0} data-test={'dhis2-capture-informative-paper'}>
                         <div className={classes.emptySelectionPaperContent}>
                             {i18n.t('Make a selection to start searching')}

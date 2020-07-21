@@ -32,11 +32,11 @@ export const searchPageActionTypes = {
     VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH: 'SearchViaUniqueIdOnScopeTrackedEntityType',
     VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH: 'SearchViaAttributesOnScopeProgram',
     VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH: 'SearchViaAttributesOnScopeTrackedEntityType',
-    SEARCH_RESULTS_LOADING: 'SearchResultsLoading',
-    SEARCH_RESULTS_EMPTY: 'SearchResultsEmpty',
-    SEARCH_RESULTS_SUCCESS: 'SearchResultsSuccess',
-    SEARCH_RESULTS_ERROR: 'SearchResultsError',
-    MODAL_CLOSE: 'CloseModal',
+    SEARCH_RESULTS_LOADING_VIEW: 'SearchResultsLoadingView',
+    SEARCH_RESULTS_EMPTY_VIEW: 'SearchResultsEmptyView',
+    SEARCH_RESULTS_SUCCESS_VIEW: 'SearchResultsSuccessView',
+    SEARCH_RESULTS_ERROR_VIEW: 'SearchResultsErrorView',
+    SEARCH_RESULTS_INITIAL_VIEW: 'SearchResultsInitialView',
     TO_MAIN_PAGE_NAVIGATE: 'NavigateToMainPage',
 };
 
@@ -46,7 +46,7 @@ export const searchScopes = {
 };
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
-    const { currentSelections, activePage, searchPage: { searchStatus, searchResults, generalPurposeErrorMessage } } = state;
+    const { currentSelections, activePage, searchPage: { searchStatus, searchResults, searchResultsPaginationInfo, generalPurposeErrorMessage } } = state;
 
     const trackedEntityTypesWithCorrelatedPrograms =
       [...programCollection.values()]
@@ -108,13 +108,14 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         ready: !activePage.isLoading,
         searchStatus,
         searchResults,
+        searchResultsPaginationInfo,
         generalPurposeErrorMessage,
     };
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
     addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
-    closeModal: () => { dispatch(actionCreator(searchPageActionTypes.MODAL_CLOSE)()); },
+    showInitialSearchPage: () => { dispatch(actionCreator(searchPageActionTypes.SEARCH_RESULTS_INITIAL_VIEW)()); },
     navigateToMainPage: () => { dispatch(actionCreator(searchPageActionTypes.TO_MAIN_PAGE_NAVIGATE)()); },
 });
 

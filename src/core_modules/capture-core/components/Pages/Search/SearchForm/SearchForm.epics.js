@@ -28,10 +28,10 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
                 window.location.href = `${oldTrackerCaptureAppUrl}${urlParameters}`;
                 return {};
             }
-            return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
+            return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY_VIEW)();
         }),
-        startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
-        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
+        startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING_VIEW)()),
+        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR_VIEW)())),
     );
 
 const filtersForAttributesSearchQuery = formValues => Object.keys(formValues)
@@ -41,15 +41,15 @@ const filtersForAttributesSearchQuery = formValues => Object.keys(formValues)
 
 const searchViaAttributesStream = (queryArgs, attributes) =>
     from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
-        map(({ trackedEntityInstanceContainers }) => {
+        map(({ trackedEntityInstanceContainers, pagingData }) => {
             const searchResults = trackedEntityInstanceContainers;
             if (searchResults.length > 0) {
-                return actionCreator(searchPageActionTypes.SEARCH_RESULTS_SUCCESS)({ searchResults });
+                return actionCreator(searchPageActionTypes.SEARCH_RESULTS_SUCCESS_VIEW)({ searchResults, searchResultsPaginationInfo: pagingData });
             }
-            return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
+            return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY_VIEW)();
         }),
-        startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
-        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
+        startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING_VIEW)()),
+        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR_VIEW)())),
     );
 
 export const searchViaUniqueIdOnScopeProgramEpic = (action$: InputObservable, store: ReduxStore) =>
