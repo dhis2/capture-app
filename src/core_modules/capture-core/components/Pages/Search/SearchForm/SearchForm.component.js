@@ -147,14 +147,14 @@ const Index = ({
                 selectedOptionId && availableSearchOptions[selectedOptionId].searchGroups
                     .filter(searchGroup => !searchGroup.unique)
                     .map(({ searchForm, formId, searchScope, minAttributesRequiredToSearch }) => {
-                        const name = searchForm.getElements()[0].formName;
+                        const searchByText = i18n.t('Search by attributes');
                         return (
                             <Section
                                 className={classes.searchDomainSelectorSection}
                                 header={
                                     <SectionHeaderSimple
                                         containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
-                                        title={i18n.t('Search {{name}}', { name })}
+                                        title={searchByText}
                                     />
                                 }
                             >
@@ -182,7 +182,7 @@ const Index = ({
                                             )
                                         }
                                     >
-                                        Search by attributes
+                                        {searchByText}
                                     </Button>
                                     <div className={error ? classes.textError : classes.textInfo}>
                                         Fill in at least {minAttributesRequiredToSearch}  attributes to search
