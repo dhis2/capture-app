@@ -27,6 +27,8 @@ export type OwnProps = {|
     +generalPurposeErrorMessage: string,
     +backButton: string,
     +pagination: string,
+    +loadingMask: string,
+    +topSection: string,
   |},
 |}
 

@@ -22,6 +22,7 @@ import { searchPageStatus } from '../../../reducers/descriptions/searchPage.redu
 import { SearchForm } from './SearchForm';
 import withNavigation from '../../Pagination/withDefaultNavigation';
 import CardList from '../../CardList/CardList.component';
+import { LoadingMask } from '../../LoadingMasks';
 
 const getStyles = (theme: Theme) => ({
     divider: {
@@ -78,6 +79,17 @@ const getStyles = (theme: Theme) => ({
     pagination: {
         display: 'flex',
         justifyContent: 'flex-end',
+    },
+    loadingMask: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
+    topSection: {
+        display: 'flex',
+        flexDirection: 'column',
+        margin: theme.typography.pxToRem(10),
+        padding: theme.typography.pxToRem(10),
+        backgroundColor: theme.palette.grey.lighter,
     },
 });
 
@@ -223,9 +235,20 @@ const Index = ({
                     </Modal>
                 }
 
+
+                {
+                    searchStatus === searchPageStatus.LOADING &&
+                        <div className={classes.loadingMask}>
+                            <LoadingMask />
+                        </div>
+                }
+
                 {
                     searchStatus === searchPageStatus.SHOW_RESULTS &&
                     <>
+                        <div className={classes.topSection} >
+                            { i18n.t('{{totalResults}} results found', { totalResults: rowsCount })}
+                        </div>
                         <CardList
                             items={searchResults}
                             dataElements={collectFormDataElements(searchGroupForSelectedScope)}
