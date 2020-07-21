@@ -43,6 +43,10 @@ type Props = {
 class SectionHeaderSimple extends Component<Props> {
     handleChangeCollapse: () => void;
 
+    static defaultProps = {
+        isCollapseButtonEnabled: true,
+    };
+
     constructor(props: Props) {
         super(props);
         this.handleChangeCollapse = this.handleChangeCollapse.bind(this);
