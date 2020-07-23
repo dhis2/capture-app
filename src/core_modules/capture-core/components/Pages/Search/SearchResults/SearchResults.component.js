@@ -81,15 +81,12 @@ export const Index = ({
         <div className={classes.topSection} >
             <b>{rowsCount}</b>
             &nbsp;{i18n.t('results found for')}
-            &nbsp;{searchValues.map(({ name, value, id }, index, rest) => {
-                let le;
-                return (
-                    <div key={id}>
-                        <i>{name}</i>: <b>{value}</b>
-                        {index !== rest.length - 1 && <span>,</span>}
+            &nbsp;{searchValues.map(({ name, value, id }, index, rest) => (
+                <div key={id}>
+                    <i>{name}</i>: <b>{value}</b>
+                    {index !== rest.length - 1 && <span>,</span>}
                     &nbsp;
-                    </div>);
-            })}
+                </div>))}
         </div>
         <CardList
             items={searchResults}
