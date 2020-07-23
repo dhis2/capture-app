@@ -150,7 +150,6 @@ const Index = ({
     preselectedProgram,
     availableSearchOptions,
     searchStatus,
-    searchResults,
     generalPurposeErrorMessage,
 }: Props) => {
     const [selectedProgram, setSelectedProgram] = useState(preselectedProgram);
