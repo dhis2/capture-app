@@ -14,14 +14,11 @@ import {
     ButtonStrip,
     Button,
 } from '@dhis2/ui-core';
-import { Pagination } from 'capture-ui';
 import { LockedSelector } from '../../LockedSelector';
 import type { Props } from './SearchPage.types';
 import { Section, SectionHeaderSimple } from '../../Section';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
-import withNavigation from '../../Pagination/withDefaultNavigation';
-import CardList from '../../CardList/CardList.component';
 import { LoadingMask } from '../../LoadingMasks';
 
 const getStyles = (theme: Theme) => ({
@@ -76,13 +73,13 @@ const getStyles = (theme: Theme) => ({
     generalPurposeErrorMessage: {
         color: theme.palette.error.main,
     },
-    pagination: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-    },
     loadingMask: {
         display: 'flex',
         justifyContent: 'center',
+    },
+    pagination: {
+        display: 'flex',
+        justifyContent: 'flex-end',
     },
     topSection: {
         display: 'flex',
@@ -142,19 +139,19 @@ const SearchSelection =
           </div>
       </Section>));
 
-const SearchPagination = withNavigation()(Pagination);
 
 const Index = ({
+    addFormIdToReduxStore,
+    navigateToMainPage,
+    showInitialSearchPage,
+    paginationChange,
     classes,
     trackedEntityTypesWithCorrelatedPrograms,
     preselectedProgram,
     availableSearchOptions,
     searchStatus,
-    addFormIdToReduxStore,
-    showInitialSearchPage,
-    navigateToMainPage,
     searchResults,
-    searchResultsPaginationInfo: { rowsCount, rowsPerPage, currentPage },
+    searchResultsPaginationInfo,
     generalPurposeErrorMessage,
 }: Props) => {
     const [selectedProgram, setSelectedProgram] = useState(preselectedProgram);
@@ -186,14 +183,6 @@ const Index = ({
       selectedProgram.value ? availableSearchOptions[selectedProgram.value].searchGroups : [];
 
 
-    const collectFormDataElements = searchGroups =>
-        searchGroups
-            .filter(searchGroup => !searchGroup.unique)
-            .flatMap(({ searchForm: { sections } }) => {
-                const elementsMap = [...sections.values()].map(section => section.elements)[0];
-                return [...elementsMap.values()];
-            });
-
     return (<>
         <LockedSelector />
         <div data-test="dhis2-capture-search-page-content" className={classes.container}>
@@ -213,6 +202,10 @@ const Index = ({
                 <SearchForm
                     selectedSearchScopeId={selectedProgram.value}
                     searchGroupForSelectedScope={searchGroupForSelectedScope}
+                    searchStatus={searchStatus}
+                    searchResultsPaginationInfo={searchResultsPaginationInfo}
+                    searchResults={searchResults}
+                    paginationChange={paginationChange}
                 />
 
                 {
@@ -241,27 +234,6 @@ const Index = ({
                         <div className={classes.loadingMask}>
                             <LoadingMask />
                         </div>
-                }
-
-                {
-                    searchStatus === searchPageStatus.SHOW_RESULTS &&
-                    <>
-                        <div className={classes.topSection} >
-                            { i18n.t('{{totalResults}} results found', { totalResults: rowsCount })}
-                        </div>
-                        <CardList
-                            items={searchResults}
-                            dataElements={collectFormDataElements(searchGroupForSelectedScope)}
-                        />
-                        <div className={classes.pagination}>
-                            <SearchPagination
-                                rowsCount={rowsCount}
-                                rowsPerPage={rowsPerPage}
-                                currentPage={currentPage}
-                            />
-                        </div>
-                    </>
-
                 }
 
                 {

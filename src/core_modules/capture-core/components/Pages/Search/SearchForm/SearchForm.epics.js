@@ -41,8 +41,7 @@ const filtersForAttributesSearchQuery = formValues => Object.keys(formValues)
 
 const searchViaAttributesStream = (queryArgs, attributes) =>
     from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
-        map(({ trackedEntityInstanceContainers, pagingData }) => {
-            const searchResults = trackedEntityInstanceContainers;
+        map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
             if (searchResults.length > 0) {
                 return actionCreator(searchPageActionTypes.SEARCH_RESULTS_SUCCESS_VIEW)({ searchResults, searchResultsPaginationInfo: pagingData });
             }
@@ -92,13 +91,15 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (action$: InputObse
 export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH).pipe(
-        flatMap(({ payload: { formId, programId } }) => {
+        flatMap(({ payload: { formId, programId, page } }) => {
             const { formsValues } = store.getState();
 
+            const f = formsValues[formId]
             const queryArgs = {
-                filter: filtersForAttributesSearchQuery(formsValues[formId]),
+                filter: filtersForAttributesSearchQuery(f),
                 program: programId,
-                pageNumber: 1,
+                page,
+                pageSize: 5,
                 ouMode: 'ACCESSIBLE',
             };
             const attributes = getTrackerProgramThrowIfNotFound(programId).attributes;
@@ -125,3 +126,24 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (action$: InputOb
             return searchViaAttributesStream(queryArgs, attributes);
         }),
     );
+
+
+export const paginationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
+// $FlowFixMe[prop-missing] automated comment
+    action$.ofType(searchPageActionTypes.PAGINATION_CHANGE).pipe(
+        flatMap(({ payload: { formId, programId, newPage } }) => {
+            const { formsValues } = store.getState();
+
+            const queryArgs = {
+                filter: filtersForAttributesSearchQuery(formsValues[formId]),
+                program: programId,
+                page: newPage,
+                pageSize: 10,
+                ouMode: 'ACCESSIBLE',
+            };
+            const attributes = getTrackerProgramThrowIfNotFound(programId).attributes;
+
+            return searchViaAttributesStream(queryArgs, attributes);
+        }),
+    );
+

@@ -8,6 +8,12 @@ import { searchScopes } from '../SearchPage.container';
 import { Section, SectionHeaderSimple } from '../../../Section';
 import type { Props } from './SearchForm.types';
 import { searchPageStatus } from '../../../../reducers/descriptions/searchPage.reducerDescription';
+import CardList from '../../../CardList/CardList.component';
+import withNavigation from '../../../Pagination/withDefaultNavigation';
+import { Pagination } from 'capture-ui';
+
+const SearchPagination = withNavigation()(Pagination);
+
 
 const getStyles = (theme: Theme) => ({
     searchDomainSelectorSection: {
@@ -38,6 +44,17 @@ const getStyles = (theme: Theme) => ({
         flexGrow: 1,
         color: theme.palette.error.main,
     },
+    pagination: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+    },
+    topSection: {
+        display: 'flex',
+        flexDirection: 'column',
+        margin: theme.typography.pxToRem(10),
+        padding: theme.typography.pxToRem(10),
+        backgroundColor: theme.palette.grey.lighter,
+    },
 });
 
 const Index = ({
@@ -51,9 +68,15 @@ const Index = ({
     forms,
     searchStatus,
     isSearchViaAttributesValid,
+    searchResults,
+    searchResultsPaginationInfo: { rowsCount, rowsPerPage, currentPage },
+    paginationChange,
 }: Props) => {
     const [error, setError] = useState(false);
     const [expandedFormId, setExpandedFormId] = useState(null);
+    const [currentSearchScopeType, setSearchScopeType] = useState('');
+    const [currentFormId, setFormId] = useState('');
+    const [currentSearchScopeId, setSearchScopeId] = useState('');
 
     // each time the user selects new search scope we want the expanded form id to be initialised
     useEffect(() => {
@@ -71,19 +94,20 @@ const Index = ({
             });
     }, [searchGroupForSelectedScope, expandedFormId]);
 
+
     return useMemo(() => {
         const formReference = {};
 
-        const handleSearchViaUniqueId = (selectedId, formId, searchScope) => {
+        const handleSearchViaUniqueId = (searchScopeType, searchScopeId, formId) => {
             const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
 
             if (isValid) {
-                switch (searchScope) {
+                switch (searchScopeType) {
                 case searchScopes.PROGRAM:
-                    searchViaUniqueIdOnScopeProgram({ programId: selectedId, formId });
+                    searchViaUniqueIdOnScopeProgram({ programId: searchScopeId, formId });
                     break;
                 case searchScopes.TRACKED_ENTITY_TYPE:
-                    searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: selectedId, formId });
+                    searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: searchScopeId, formId });
                     break;
                 default:
                     break;
@@ -91,17 +115,20 @@ const Index = ({
             }
         };
 
-        const handleSearchViaAttributes = (selectedId, formId, searchScope, minAttributesRequiredToSearch) => {
+        const handleSearchViaAttributes = (searchScopeType, searchScopeId, formId, minAttributesRequiredToSearch) => {
             const isValid = isSearchViaAttributesValid(minAttributesRequiredToSearch, formId);
 
             if (isValid) {
                 setError(false);
-                switch (searchScope) {
+                setSearchScopeType(searchScopeType);
+                setFormId(formId);
+                setSearchScopeId(searchScopeId);
+                switch (searchScopeType) {
                 case searchScopes.PROGRAM:
-                    searchViaAttributesOnScopeProgram({ programId: selectedId, formId });
+                    searchViaAttributesOnScopeProgram({ programId: searchScopeId, formId });
                     break;
                 case searchScopes.TRACKED_ENTITY_TYPE:
-                    searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: selectedId, formId });
+                    searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: searchScopeId, formId });
                     break;
                 default:
                     break;
@@ -110,6 +137,29 @@ const Index = ({
                 setError(true);
             }
         };
+
+        const handlePaginationChange = (newPage) => {
+            paginationChange(newPage);
+
+            switch (currentSearchScopeType) {
+            case searchScopes.PROGRAM:
+                searchViaAttributesOnScopeProgram({ programId: currentSearchScopeId, formId: currentFormId, page:newPage });
+                break;
+            case searchScopes.TRACKED_ENTITY_TYPE:
+                searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: currentSearchScopeId, formId: currentFormId });
+                break;
+            default:
+                break;
+            }
+        };
+
+        const collectFormDataElements = searchGroups =>
+            searchGroups
+                .filter(searchGroup => !searchGroup.unique)
+                .flatMap(({ searchForm: { sections } }) => {
+                    const elementsMap = [...sections.values()].map(section => section.elements)[0];
+                    return [...elementsMap.values()];
+                });
 
         const FormInformativeMessage = ({ minAttributesRequiredToSearch }) =>
             (<div className={error ? classes.textError : classes.textInfo}>
@@ -158,9 +208,9 @@ const Index = ({
                                             onClick={() =>
                                                 selectedSearchScopeId &&
                                             handleSearchViaUniqueId(
+                                                searchScope,
                                                 selectedSearchScopeId,
                                                 formId,
-                                                searchScope,
                                             )}
                                         >
                                             Find by {name}.
@@ -211,9 +261,9 @@ const Index = ({
                                             onClick={() =>
                                                 selectedSearchScopeId &&
                                             handleSearchViaAttributes(
+                                                searchScope,
                                                 selectedSearchScopeId,
                                                 formId,
-                                                searchScope,
                                                 minAttributesRequiredToSearch,
                                             )
                                             }
@@ -229,6 +279,27 @@ const Index = ({
 
                         );
                     })
+            }
+
+            {
+                searchStatus === searchPageStatus.SHOW_RESULTS &&
+                <>
+                    <div className={classes.topSection} >
+                        { i18n.t('{{totalResults}} results found', { totalResults: rowsCount })}
+                    </div>
+                    <CardList
+                        items={searchResults}
+                        dataElements={collectFormDataElements(searchGroupForSelectedScope)}
+                    />
+                    <div className={classes.pagination}>
+                        <SearchPagination
+                            onChangePage={handlePaginationChange}
+                            rowsCount={rowsCount}
+                            rowsPerPage={rowsPerPage}
+                            currentPage={currentPage}
+                        />
+                    </div>
+                </>
             }
 
         </>);

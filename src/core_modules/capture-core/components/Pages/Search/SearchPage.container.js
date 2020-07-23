@@ -38,6 +38,7 @@ export const searchPageActionTypes = {
     SEARCH_RESULTS_ERROR_VIEW: 'SearchResultsErrorView',
     SEARCH_RESULTS_INITIAL_VIEW: 'SearchResultsInitialView',
     TO_MAIN_PAGE_NAVIGATE: 'NavigateToMainPage',
+    PAGINATION_CHANGE: 'ChangePagination',
 };
 
 export const searchScopes = {
@@ -96,7 +97,6 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
             }), {}),
         }), {});
 
-
     return {
         preselectedProgram: {
             value: preselectedProgram && preselectedProgram.programId,
@@ -117,6 +117,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
     addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
     showInitialSearchPage: () => { dispatch(actionCreator(searchPageActionTypes.SEARCH_RESULTS_INITIAL_VIEW)()); },
     navigateToMainPage: () => { dispatch(actionCreator(searchPageActionTypes.TO_MAIN_PAGE_NAVIGATE)()); },
+    paginationChange: (newPage) => { dispatch(actionCreator(searchPageActionTypes.PAGINATION_CHANGE)({ newPage })); },
 });
 
 export const SearchPage =
