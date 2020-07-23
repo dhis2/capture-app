@@ -64,6 +64,10 @@ export const Index = ({
         <div className={classes.topSection} >
             { i18n.t('{{totalResults}} results found', { totalResults: rowsCount })}
         </div>
+        <CardList
+            items={searchResults}
+            dataElements={collectFormDataElements(searchGroupForSelectedScope)}
+        />
         <div className={classes.pagination}>
             <SearchPagination
                 onChangePage={newPage => handlePaginationChange(currentSearchScopeType, currentSearchScopeId, currentFormId, newPage)}
@@ -72,10 +76,6 @@ export const Index = ({
                 currentPage={currentPage}
             />
         </div>
-        <CardList
-            items={searchResults}
-            dataElements={collectFormDataElements(searchGroupForSelectedScope)}
-        />
     </>);
 };
 

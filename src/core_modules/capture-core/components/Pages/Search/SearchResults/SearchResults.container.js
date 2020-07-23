@@ -27,8 +27,8 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
 
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
-    searchViaAttributesOnScopeTrackedEntityType: ({ trackedEntityTypeId, formId }) => {
-        dispatch(searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId, formId }));
+    searchViaAttributesOnScopeTrackedEntityType: ({ trackedEntityTypeId, formId, page = 1 }) => {
+        dispatch(searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId, formId, page }));
     },
     searchViaAttributesOnScopeProgram: ({ programId, formId, page = 1 }) => {
         dispatch(searchViaAttributesOnScopeProgram({ programId, formId, page }));

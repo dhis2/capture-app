@@ -111,13 +111,14 @@ export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, 
 export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH).pipe(
-        flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
+        flatMap(({ payload: { formId, trackedEntityTypeId, page } }) => {
             const { formsValues } = store.getState();
 
             const queryArgs = {
                 filter: filtersForAttributesSearchQuery(formsValues[formId]),
                 trackedEntityType: trackedEntityTypeId,
-                pageNumber: 1,
+                page,
+                pageSize: 5,
                 ouMode: 'ACCESSIBLE',
             };
 
