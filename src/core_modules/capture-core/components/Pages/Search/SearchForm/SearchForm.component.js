@@ -262,6 +262,7 @@ const Index = ({
         searchViaAttributesOnScopeProgram,
         searchViaAttributesOnScopeTrackedEntityType,
         isSearchViaAttributesValid,
+        saveCurrentFormData,
         error,
         expandedFormId,
     ]);
