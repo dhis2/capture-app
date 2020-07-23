@@ -8,12 +8,6 @@ import { searchScopes } from '../SearchPage.container';
 import { Section, SectionHeaderSimple } from '../../../Section';
 import type { Props } from './SearchForm.types';
 import { searchPageStatus } from '../../../../reducers/descriptions/searchPage.reducerDescription';
-import CardList from '../../../CardList/CardList.component';
-import withNavigation from '../../../Pagination/withDefaultNavigation';
-import { Pagination } from 'capture-ui';
-
-const SearchPagination = withNavigation()(Pagination);
-
 
 const getStyles = (theme: Theme) => ({
     searchDomainSelectorSection: {
@@ -62,21 +56,16 @@ const Index = ({
     searchViaUniqueIdOnScopeProgram,
     searchViaAttributesOnScopeProgram,
     searchViaAttributesOnScopeTrackedEntityType,
+    saveCurrentFormData,
     selectedSearchScopeId,
     classes,
     searchGroupForSelectedScope,
     forms,
     searchStatus,
     isSearchViaAttributesValid,
-    searchResults,
-    searchResultsPaginationInfo: { rowsCount, rowsPerPage, currentPage },
-    paginationChange,
 }: Props) => {
     const [error, setError] = useState(false);
     const [expandedFormId, setExpandedFormId] = useState(null);
-    const [currentSearchScopeType, setSearchScopeType] = useState('');
-    const [currentFormId, setFormId] = useState('');
-    const [currentSearchScopeId, setSearchScopeId] = useState('');
 
     // each time the user selects new search scope we want the expanded form id to be initialised
     useEffect(() => {
@@ -120,9 +109,7 @@ const Index = ({
 
             if (isValid) {
                 setError(false);
-                setSearchScopeType(searchScopeType);
-                setFormId(formId);
-                setSearchScopeId(searchScopeId);
+                saveCurrentFormData(searchScopeType, searchScopeId, formId);
                 switch (searchScopeType) {
                 case searchScopes.PROGRAM:
                     searchViaAttributesOnScopeProgram({ programId: searchScopeId, formId });
@@ -137,29 +124,6 @@ const Index = ({
                 setError(true);
             }
         };
-
-        const handlePaginationChange = (newPage) => {
-            paginationChange(newPage);
-
-            switch (currentSearchScopeType) {
-            case searchScopes.PROGRAM:
-                searchViaAttributesOnScopeProgram({ programId: currentSearchScopeId, formId: currentFormId, page:newPage });
-                break;
-            case searchScopes.TRACKED_ENTITY_TYPE:
-                searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: currentSearchScopeId, formId: currentFormId });
-                break;
-            default:
-                break;
-            }
-        };
-
-        const collectFormDataElements = searchGroups =>
-            searchGroups
-                .filter(searchGroup => !searchGroup.unique)
-                .flatMap(({ searchForm: { sections } }) => {
-                    const elementsMap = [...sections.values()].map(section => section.elements)[0];
-                    return [...elementsMap.values()];
-                });
 
         const FormInformativeMessage = ({ minAttributesRequiredToSearch }) =>
             (<div className={error ? classes.textError : classes.textInfo}>
@@ -280,28 +244,6 @@ const Index = ({
                         );
                     })
             }
-
-            {
-                searchStatus === searchPageStatus.SHOW_RESULTS &&
-                <>
-                    <div className={classes.topSection} >
-                        { i18n.t('{{totalResults}} results found', { totalResults: rowsCount })}
-                    </div>
-                    <CardList
-                        items={searchResults}
-                        dataElements={collectFormDataElements(searchGroupForSelectedScope)}
-                    />
-                    <div className={classes.pagination}>
-                        <SearchPagination
-                            onChangePage={handlePaginationChange}
-                            rowsCount={rowsCount}
-                            rowsPerPage={rowsPerPage}
-                            currentPage={currentPage}
-                        />
-                    </div>
-                </>
-            }
-
         </>);
     },
     [

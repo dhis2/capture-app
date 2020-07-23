@@ -15,7 +15,6 @@ export type OwnProps = {|
 |}
 
 export type PropsFromRedux ={|
-  +searchGroupForSelectedScope: SearchGroup,
   +forms: {
     [elementId: string]: {
       loadNr: number
@@ -30,6 +29,7 @@ export type DispatchersFromRedux = {|
   searchViaUniqueIdOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string |}) => void,
   searchViaAttributesOnScopeProgram: ({| programId: string, formId: string, page?: string |}) => void,
   searchViaAttributesOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string |}) => void,
+  saveCurrentFormData: (searchScopeType: string, searchScopeId: string, formId: string) => void,
 |}
 
 export type Props = {|

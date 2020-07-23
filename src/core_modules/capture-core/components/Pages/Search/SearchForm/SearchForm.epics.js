@@ -2,7 +2,7 @@
 import { catchError, flatMap, map, startWith } from 'rxjs/operators';
 import { from } from 'rxjs/observable/from';
 import { of } from 'rxjs/observable/of';
-import { searchPageActionTypes } from '../SearchPage.container';
+import { searchPageActionTypes } from '../SearchPage.actions';
 import { getTrackedEntityInstances } from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import {
     getTrackedEntityTypeThrowIfNotFound,
@@ -94,7 +94,7 @@ export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, 
         flatMap(({ payload: { formId, programId, page } }) => {
             const { formsValues } = store.getState();
 
-            const f = formsValues[formId]
+            const f = formsValues[formId];
             const queryArgs = {
                 filter: filtersForAttributesSearchQuery(f),
                 program: programId,

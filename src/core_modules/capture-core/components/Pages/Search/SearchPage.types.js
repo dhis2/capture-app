@@ -57,16 +57,6 @@ export type PropsFromRedux ={|
   +ready: boolean,
   +searchStatus: string,
   +generalPurposeErrorMessage: string,
-  +searchResults: Array<{|
-    +id: string,
-    +tei: Object,
-    +values: Object
-  |}>,
-  +searchResultsPaginationInfo: {|
-    +rowsCount: number,
-    +rowsPerPage: number,
-    +currentPage: number,
-  |}
 |}
 
 export type DispatchersFromRedux = {|

@@ -1,6 +1,6 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.container';
+import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
 
 export const searchPageStatus = {
     INITIAL: 'INITIAL',
@@ -40,6 +40,10 @@ export const searchPageDesc = createReducerDescription({
             ...state.searchResultsPaginationInfo,
             currentPage: newPage,
         },
+    }),
+    [searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE]: (state, { payload: { searchScopeType, searchScopeId, formId } }) => ({
+        ...state,
+        currentSearchInfo: { searchScopeType, searchScopeId, formId },
     }),
 }, 'searchPage', {
     searchStatus: searchPageStatus.INITIAL,

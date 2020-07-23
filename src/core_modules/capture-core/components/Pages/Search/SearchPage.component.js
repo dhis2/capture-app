@@ -20,6 +20,7 @@ import { Section, SectionHeaderSimple } from '../../Section';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
 import { LoadingMask } from '../../LoadingMasks';
+import { SearchResults } from './SearchResults/SearchResults.container';
 
 const getStyles = (theme: Theme) => ({
     divider: {
@@ -144,14 +145,12 @@ const Index = ({
     addFormIdToReduxStore,
     navigateToMainPage,
     showInitialSearchPage,
-    paginationChange,
     classes,
     trackedEntityTypesWithCorrelatedPrograms,
     preselectedProgram,
     availableSearchOptions,
     searchStatus,
     searchResults,
-    searchResultsPaginationInfo,
     generalPurposeErrorMessage,
 }: Props) => {
     const [selectedProgram, setSelectedProgram] = useState(preselectedProgram);
@@ -180,7 +179,17 @@ const Index = ({
     ]);
 
     const searchGroupForSelectedScope =
-      selectedProgram.value ? availableSearchOptions[selectedProgram.value].searchGroups : [];
+      (selectedProgram.value ? availableSearchOptions[selectedProgram.value].searchGroups : [])
+          // We use the sorted array to always have expanded the first search group section.
+          .sort(({ unique: xBoolean }, { unique: yBoolean }) => {
+              if (xBoolean === yBoolean) {
+                  return 0;
+              }
+              if (xBoolean) {
+                  return -1;
+              }
+              return 1;
+          });
 
 
     return (<>
@@ -202,11 +211,12 @@ const Index = ({
                 <SearchForm
                     selectedSearchScopeId={selectedProgram.value}
                     searchGroupForSelectedScope={searchGroupForSelectedScope}
-                    searchStatus={searchStatus}
-                    searchResultsPaginationInfo={searchResultsPaginationInfo}
-                    searchResults={searchResults}
-                    paginationChange={paginationChange}
                 />
+
+                {
+                    searchStatus === searchPageStatus.SHOW_RESULTS &&
+                    <SearchResults searchGroupForSelectedScope={searchGroupForSelectedScope} />
+                }
 
                 {
                     searchStatus === searchPageStatus.NO_RESULTS &&
@@ -227,7 +237,6 @@ const Index = ({
                         </ModalActions>
                     </Modal>
                 }
-
 
                 {
                     searchStatus === searchPageStatus.LOADING &&
