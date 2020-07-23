@@ -1,7 +1,6 @@
 // @flow
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 
-
 export type AvailableSearchOptions = {
   [elementId: string]: {|
     +searchOptionId: string,
