@@ -3,10 +3,12 @@ import React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Pagination } from 'capture-ui';
+import { Button } from '@dhis2/ui-core';
 import CardList from '../../../CardList/CardList.component';
 import withNavigation from '../../../Pagination/withDefaultNavigation';
 import { searchScopes } from '../SearchPage.container';
 import type { Props } from './SearchResults.types';
+import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 
 const SearchPagination = withNavigation()(Pagination);
 
@@ -22,6 +24,9 @@ const getStyles = (theme: Theme) => ({
         margin: theme.typography.pxToRem(10),
         padding: theme.typography.pxToRem(10),
         backgroundColor: theme.palette.grey.lighter,
+    },
+    openDashboardButton: {
+        marginTop: 10,
     },
 });
 
@@ -52,6 +57,17 @@ export const Index = ({
         }
     };
 
+    const viewTrackedEntityDashboard = ({ item: { id, tei: { orgUnit: orgUnitId } } }) => {
+        const scopeSearchParam = `${currentSearchScopeType.toLowerCase()}=${currentSearchScopeId}`;
+        return (
+            <div className={classes.openDashboardButton}>
+                <Button primary onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam)}>
+                    {i18n.t('View dashboard')}
+                </Button>
+            </div>
+        );
+    };
+
     const collectFormDataElements = searchGroups =>
         searchGroups
             .filter(searchGroup => !searchGroup.unique)
@@ -67,6 +83,7 @@ export const Index = ({
         <CardList
             items={searchResults}
             dataElements={collectFormDataElements(searchGroupForSelectedScope)}
+            getCustomItemBottomElements={item => viewTrackedEntityDashboard(item)}
         />
         <div className={classes.pagination}>
             <SearchPagination

@@ -41,7 +41,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
     searchViaAttributesOnScopeTrackedEntityType: ({ trackedEntityTypeId, formId }) => {
         dispatch(searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId, formId }));
     },
-    searchViaAttributesOnScopeProgram: ({ programId, formId, page = 1 }) => {
+    searchViaAttributesOnScopeProgram: ({ programId, formId, page }) => {
         dispatch(searchViaAttributesOnScopeProgram({ programId, formId, page }));
     },
     saveCurrentFormData: (searchScopeType, searchScopeId, formId) => {

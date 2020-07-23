@@ -15,14 +15,14 @@ export const searchPageActionTypes = {
     CURRENT_SEARCH_INFO_SAVE: 'SaveCurrentSearchInfo',
 };
 
-export const searchViaAttributesOnScopeTrackedEntityType = ({ trackedEntityTypeId, formId }) =>
-    actionCreator(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH)({ trackedEntityTypeId, formId });
-
-export const searchViaAttributesOnScopeProgram = ({ programId, formId, page = 1 }) =>
-    actionCreator(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH)({ programId, formId, page });
-
 export const searchViaUniqueIdOnScopeTrackedEntityType = ({ trackedEntityTypeId, formId }) =>
     actionCreator(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH)({ trackedEntityTypeId, formId });
 
 export const searchViaUniqueIdOnScopeProgram = ({ programId, formId }) =>
     actionCreator(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH)({ programId, formId });
+
+export const searchViaAttributesOnScopeTrackedEntityType = ({ trackedEntityTypeId, formId, page = 1 }) =>
+    actionCreator(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH)({ trackedEntityTypeId, formId, page });
+
+export const searchViaAttributesOnScopeProgram = ({ programId, formId, page = 1 }) =>
+    actionCreator(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH)({ programId, formId, page });

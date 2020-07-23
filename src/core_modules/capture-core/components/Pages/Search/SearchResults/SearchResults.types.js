@@ -9,6 +9,7 @@ export type OwnProps = {|
   +classes: {|
     +topSection: string,
     +pagination: string,
+    +openDashboardButton: string,
   |},
 |}
 
