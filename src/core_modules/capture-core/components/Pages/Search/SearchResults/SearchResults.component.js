@@ -20,7 +20,7 @@ const getStyles = (theme: Theme) => ({
     },
     topSection: {
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'row',
         margin: theme.typography.pxToRem(10),
         padding: theme.typography.pxToRem(10),
         backgroundColor: theme.palette.grey.lighter,
@@ -43,6 +43,7 @@ export const Index = ({
     currentSearchScopeType,
     currentSearchScopeId,
     currentFormId,
+    searchValues,
 }: Props) => {
     const handlePaginationChange = (searchScopeType, searchScopeId, formId, newPage) => {
         switch (searchScopeType) {
@@ -78,7 +79,17 @@ export const Index = ({
 
     return (<>
         <div className={classes.topSection} >
-            { i18n.t('{{totalResults}} results found', { totalResults: rowsCount })}
+            <b>{rowsCount}</b>
+            &nbsp;{i18n.t('results found for')}
+            &nbsp;{searchValues.map(({ name, value, id }, index, rest) => {
+                let le;
+                return (
+                    <div key={id}>
+                        <i>{name}</i>: <b>{value}</b>
+                        {index !== rest.length - 1 && <span>,</span>}
+                    &nbsp;
+                    </div>);
+            })}
         </div>
         <CardList
             items={searchResults}

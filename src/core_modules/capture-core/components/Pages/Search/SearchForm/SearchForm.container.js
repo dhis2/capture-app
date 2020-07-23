@@ -12,11 +12,32 @@ import {
 import { actionCreator } from '../../../../actions/actions.utils';
 
 
-const mapStateToProps = (state: ReduxState): PropsFromRedux => {
-    const { forms, searchPage: { searchStatus }, formsValues } = state;
+const mapStateToProps = (state: ReduxState, { searchGroupForSelectedScope }): PropsFromRedux => {
+    const {
+        forms,
+        formsValues,
+        searchPage: {
+            searchStatus,
+        },
+    } = state;
+
+    const { searchForm: attributeSearchForm, formId } = searchGroupForSelectedScope
+        .filter(searchGroup => !searchGroup.unique)[0];
+
+    const searchTerms = formsValues[formId];
+    let searchValues = [];
+    if (searchTerms) {
+        searchValues = Object.keys(searchTerms)
+            .map((attributeValueKey) => {
+                const { name, id } = attributeSearchForm.getElement(attributeValueKey);
+                const value = searchTerms[attributeValueKey];
+                return { name, value, id };
+            });
+    }
 
     return {
         forms,
+        searchValues,
         searchStatus,
         isSearchViaAttributesValid: (minAttributesRequiredToSearch, formId) => {
             const formValues = formsValues[formId] || {};
@@ -44,8 +65,8 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
     searchViaAttributesOnScopeProgram: ({ programId, formId, page }) => {
         dispatch(searchViaAttributesOnScopeProgram({ programId, formId, page }));
     },
-    saveCurrentFormData: (searchScopeType, searchScopeId, formId) => {
-        dispatch(actionCreator(searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE)({ searchScopeType, searchScopeId, formId }));
+    saveCurrentFormData: (searchScopeType, searchScopeId, formId, searchValues) => {
+        dispatch(actionCreator(searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE)({ searchScopeType, searchScopeId, formId, searchValues }));
     },
 });
 

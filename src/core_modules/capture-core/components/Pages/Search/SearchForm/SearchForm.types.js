@@ -1,6 +1,12 @@
 // @flow
 import type { SearchGroup } from '../SearchPage.types';
 
+export type SearchValues = Array<{|
+  +name: string,
+  +value: string,
+  +id: string,
+|}>
+
 export type OwnProps = {|
   +searchGroupForSelectedScope: SearchGroup,
   +selectedSearchScopeId?: string,
@@ -22,6 +28,7 @@ export type PropsFromRedux ={|
   },
   +searchStatus: string,
   +isSearchViaAttributesValid: (minAttributesRequiredToSearch: number, formId: string)=> boolean,
+  +searchValues: SearchValues
 |}
 
 export type DispatchersFromRedux = {|
@@ -29,7 +36,7 @@ export type DispatchersFromRedux = {|
   searchViaUniqueIdOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string |}) => void,
   searchViaAttributesOnScopeProgram: ({| programId: string, formId: string, page?: string |}) => void,
   searchViaAttributesOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string |}) => void,
-  saveCurrentFormData: (searchScopeType: string, searchScopeId: string, formId: string) => void,
+  saveCurrentFormData: (searchScopeType: string, searchScopeId: string, formId: string, searchValues: SearchValues) => void,
 |}
 
 export type Props = {|

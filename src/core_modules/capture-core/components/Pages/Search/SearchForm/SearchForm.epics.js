@@ -92,9 +92,8 @@ export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, 
         flatMap(({ payload: { formId, programId, page } }) => {
             const { formsValues } = store.getState();
 
-            const f = formsValues[formId];
             const queryArgs = {
-                filter: filtersForAttributesSearchQuery(f),
+                filter: filtersForAttributesSearchQuery(formsValues[formId]),
                 program: programId,
                 page,
                 pageSize: 5,

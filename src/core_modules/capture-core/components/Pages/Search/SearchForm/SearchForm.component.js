@@ -63,6 +63,7 @@ const Index = ({
     forms,
     searchStatus,
     isSearchViaAttributesValid,
+    searchValues,
 }: Props) => {
     const [error, setError] = useState(false);
     const [expandedFormId, setExpandedFormId] = useState(null);
@@ -109,7 +110,7 @@ const Index = ({
 
             if (isValid) {
                 setError(false);
-                saveCurrentFormData(searchScopeType, searchScopeId, formId);
+                saveCurrentFormData(searchScopeType, searchScopeId, formId, searchValues);
                 switch (searchScopeType) {
                 case searchScopes.PROGRAM:
                     searchViaAttributesOnScopeProgram({ programId: searchScopeId, formId });
@@ -156,13 +157,13 @@ const Index = ({
                                         <div className={classes.searchRowSelectElement}>
                                             {
                                                 forms[formId] &&
-                                                <Form
-                                                    formRef={
-                                                        (formInstance) => { formReference[formId] = formInstance; }
-                                                    }
-                                                    formFoundation={searchForm}
-                                                    id={formId}
-                                                />
+                                                    <Form
+                                                        formRef={
+                                                            (formInstance) => { formReference[formId] = formInstance; }
+                                                        }
+                                                        formFoundation={searchForm}
+                                                        id={formId}
+                                                    />
                                             }
                                         </div>
                                     </div>

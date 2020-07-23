@@ -5,12 +5,14 @@ import type { OwnProps, Props, PropsFromRedux, DispatchersFromRedux } from './Se
 import { searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScopeProgram } from '../SearchPage.actions';
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
-    const { searchResults,
+    const {
+        searchResults,
         searchResultsPaginationInfo: { rowsCount, currentPage, rowsPerPage },
         currentSearchInfo: {
             searchScopeType: currentSearchScopeType,
             searchScopeId: currentSearchScopeId,
             formId: currentFormId,
+            searchValues,
         },
     } = state.searchPage;
 
@@ -22,6 +24,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         currentSearchScopeType,
         currentSearchScopeId,
         currentFormId,
+        searchValues,
     };
 };
 
