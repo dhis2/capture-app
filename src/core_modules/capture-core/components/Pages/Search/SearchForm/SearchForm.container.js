@@ -11,6 +11,8 @@ import {
 } from '../SearchPage.actions';
 import { actionCreator } from '../../../../actions/actions.utils';
 
+const isValueContainingCharacter = string => string.replace(/\s/g, '').length;
+
 const collectCurrentSearchTerms = (searchGroupForSelectedScope, formsValues) => {
     const { searchForm: attributeSearchForm, formId } = searchGroupForSelectedScope
         .reduce((accumulated, searchGroup) => {
@@ -19,12 +21,16 @@ const collectCurrentSearchTerms = (searchGroupForSelectedScope, formsValues) => 
             }
             return accumulated;
         }, {});
+
     const searchTerms = formsValues[formId] || {};
     return Object.keys(searchTerms)
         .reduce((accumulated, attributeValueKey) => {
             const { name, id } = attributeSearchForm.getElement(attributeValueKey);
             const value = searchTerms[attributeValueKey];
-            return [...accumulated, { name, value, id }];
+            if (isValueContainingCharacter(value)) {
+                return [...accumulated, { name, value, id }];
+            }
+            return accumulated;
         }, []);
 };
 
@@ -38,15 +44,19 @@ const mapStateToProps = (state: ReduxState, { searchGroupForSelectedScope }): Pr
     } = state;
 
 
+    const currentSearchTerms = collectCurrentSearchTerms(searchGroupForSelectedScope, formsValues);
     return {
         forms,
-        currentSearchTerms: collectCurrentSearchTerms(searchGroupForSelectedScope, formsValues),
         searchStatus,
+        currentSearchTerms,
         isSearchViaAttributesValid: (minAttributesRequiredToSearch, formId) => {
             const formValues = formsValues[formId] || {};
             const currentNumberOfFilledInputValues =
               Object.keys(formValues)
-                  .filter(key => formValues[key])
+                  .filter((key) => {
+                      const value = formValues[key];
+                      return value && isValueContainingCharacter(value);
+                  })
                   .length;
 
             return currentNumberOfFilledInputValues >= minAttributesRequiredToSearch;
