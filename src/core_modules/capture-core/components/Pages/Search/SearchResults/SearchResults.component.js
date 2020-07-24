@@ -80,7 +80,7 @@ export const Index = ({
     return (<>
         <div className={classes.topSection} >
             <b>{rowsCount}</b>
-            &nbsp;{i18n.t('results found for')}
+            &nbsp;{i18n.t('result(s) found for term(s)')}
             &nbsp;{currentSearchTerms.map(({ name, value, id }, index, rest) => (
                 <div key={id}>
                     <i>{name}</i>: <b>{value}</b>
