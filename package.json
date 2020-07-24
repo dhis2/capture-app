@@ -79,7 +79,7 @@
     "lint": "npm run flow:check && npm run linter:check",
     "cypress:start": "BROWSER=none yarn start",
     "cy:open": "d2-utils-cypress open --appStart 'yarn cypress:start'",
-    "cy:run": "d2-utils-cypress run --appStart 'yarn cypress:start'"
+    "cy:run": "d2-utils-cypress run --appStart --browser chrome --headless 'yarn cypress:start'"
   },
   "husky": {
     "hooks": {

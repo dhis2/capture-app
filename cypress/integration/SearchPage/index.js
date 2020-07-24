@@ -83,7 +83,7 @@ When('you fill in the unique identifier field with values that will return a tra
 });
 
 Then('you are navigated to the Tracker Capture', () => {
-    cy.wait(4000);
+    cy.url().should('include', 'dashboard?tei=QGyxOe1zewj&ou=DiszpKrYNg8&program=qDkgAbB5Jlk');
 });
 
 When('you fill in the first name with values that will return no results', () => {

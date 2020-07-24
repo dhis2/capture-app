@@ -18,6 +18,7 @@ jobs:
           record: true
           parallel: true
           group: e2e-chrome-parallel
+          browser: chrome
           start: 'yarn start'
           wait-on: 'http://localhost:3000'
           # wait for 200 secs for the server to respond
