@@ -36,8 +36,7 @@ Then('there should be search domain Child Programme being pre-selected', () => {
 And('there should be Child Programme domain forms visible to search with', () => {
     cy.get('[data-test="dhis2-capture-search-page-content"]')
         .find('[data-test="capture-ui-input"]')
-        .should('have.length', 1)
-    ;
+        .should('have.length', 1);
 });
 
 And('you select the search domain Malaria Case diagnosis', () => {
@@ -55,11 +54,12 @@ When('you fill in the unique identifier field with values that will not return a
 });
 
 And('you click find', () => {
+    // click outside of the input for the values to be updated
+    cy.get('[data-test="dhis2-capture-search-page-content"]').click();
+
     cy.get('[data-test="dhis2-capture-form-unique"]')
         .find('[data-test="dhis2-uicore-button"]')
         .first()
-        .click()
-        .wait(20)
         .click();
 });
 
@@ -109,11 +109,12 @@ When('you fill in the last name with values that will return results', () => {
 });
 
 And('you click search', () => {
+    // click outside of the input for the values to be updated
+    cy.get('[data-test="dhis2-capture-form-attributes"]').click();
+
     cy.get('[data-test="dhis2-capture-form-attributes"]')
         .find('[data-test="dhis2-uicore-button"]')
         .first()
-        .click()
-        .wait(20)
         .click();
 });
 
@@ -175,6 +176,44 @@ When('you dont fill in any of the values', () => {
         .find('[data-test="capture-ui-input"]')
         .first()
         .clear();
+});
+
+When('you fill the values with nothing but spaces', () => {
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .first()
+        .type('      ');
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(1)
+        .type('      ');
+});
+
+When('you fills in the the form with values', () => {
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(0)
+        .type('Smith');
+
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(1)
+        .type('Smith');
+});
+
+When('you clear the values', () => {
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .first()
+        .clear();
+    cy.get('[data-test="dhis2-capture-form-attributes"]').click();
+
+
+    cy.get('[data-test="dhis2-capture-form-attributes"]')
+        .find('[data-test="capture-ui-input"]')
+        .eq(1)
+        .clear();
+    cy.get('[data-test="dhis2-capture-form-attributes"]').click();
 });
 
 Then('there should be a validation error message', () => {
