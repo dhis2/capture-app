@@ -11,7 +11,7 @@ import {
 } from '../SearchPage.actions';
 import { actionCreator } from '../../../../actions/actions.utils';
 
-const currentSearchTerms = (searchGroupForSelectedScope, formsValues) => {
+const collectCurrentSearchTerms = (searchGroupForSelectedScope, formsValues) => {
     const { searchForm: attributeSearchForm, formId } = searchGroupForSelectedScope
         .reduce((accumulated, searchGroup) => {
             if (!searchGroup.unique) {
@@ -40,7 +40,7 @@ const mapStateToProps = (state: ReduxState, { searchGroupForSelectedScope }): Pr
 
     return {
         forms,
-        currentSearchTerms: currentSearchTerms(searchGroupForSelectedScope, formsValues),
+        currentSearchTerms: collectCurrentSearchTerms(searchGroupForSelectedScope, formsValues),
         searchStatus,
         isSearchViaAttributesValid: (minAttributesRequiredToSearch, formId) => {
             const formValues = formsValues[formId] || {};

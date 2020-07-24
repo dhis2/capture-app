@@ -41,9 +41,9 @@ export const searchPageDesc = createReducerDescription({
             currentPage: newPage,
         },
     }),
-    [searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE]: (state, { payload: { searchScopeType, searchScopeId, formId, searchValues } }) => ({
+    [searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE]: (state, { payload: { searchScopeType, searchScopeId, formId, currentSearchTerms } }) => ({
         ...state,
-        currentSearchInfo: { searchScopeType, searchScopeId, formId, searchValues },
+        currentSearchInfo: { searchScopeType, searchScopeId, formId, currentSearchTerms },
     }),
 }, 'searchPage', {
     searchStatus: searchPageStatus.INITIAL,
