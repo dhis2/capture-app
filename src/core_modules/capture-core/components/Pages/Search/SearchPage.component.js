@@ -159,6 +159,16 @@ const Index = ({
         setSelectedProgram(program);
     };
 
+    useEffect(() => {
+        if (!preselectedProgram.value) {
+            showInitialSearchPage();
+        }
+    },
+    [
+        preselectedProgram.value,
+        showInitialSearchPage,
+    ]);
+
     // dan abramov suggest to stringify https://twitter.com/dan_abramov/status/1104414469629898754?lang=en
     // so that useEffect can do the comparison
     const stringifyPrograms = JSON.stringify(availableSearchOptions);

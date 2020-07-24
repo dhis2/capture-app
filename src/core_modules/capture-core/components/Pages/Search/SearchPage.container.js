@@ -27,7 +27,6 @@ const buildSearchOption = (id, name, searchGroups, searchScope) => ({
         })),
 });
 
-
 export const searchScopes = {
     PROGRAM: 'PROGRAM',
     TRACKED_ENTITY_TYPE: 'TRACKED_ENTITY_TYPE',
