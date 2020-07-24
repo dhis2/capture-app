@@ -62,7 +62,11 @@ export const Index = ({
         const scopeSearchParam = `${currentSearchScopeType.toLowerCase()}=${currentSearchScopeId}`;
         return (
             <div className={classes.openDashboardButton}>
-                <Button primary onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam)}>
+                <Button
+                    dataTest="dhis2-capture-view-dashboard-button"
+                    primary
+                    onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam)}
+                >
                     {i18n.t('View dashboard')}
                 </Button>
             </div>
@@ -78,7 +82,7 @@ export const Index = ({
             });
 
     return (<>
-        <div className={classes.topSection} >
+        <div data-test="dhis2-capture-search-results-top" className={classes.topSection} >
             <b>{rowsCount}</b>
             &nbsp;{i18n.t('result(s) found for term(s)')}
             &nbsp;{currentSearchTerms.map(({ name, value, id }, index, rest) => (
@@ -88,12 +92,14 @@ export const Index = ({
                     &nbsp;
                 </div>))}
         </div>
-        <CardList
-            items={searchResults}
-            dataElements={collectFormDataElements(searchGroupForSelectedScope)}
-            getCustomItemBottomElements={item => viewTrackedEntityDashboard(item)}
-        />
-        <div className={classes.pagination}>
+        <div data-test="dhis2-capture-search-results-list">
+            <CardList
+                items={searchResults}
+                dataElements={collectFormDataElements(searchGroupForSelectedScope)}
+                getCustomItemBottomElements={item => viewTrackedEntityDashboard(item)}
+            />
+        </div>
+        <div data-test="dhis2-capture-search-results-pagination" className={classes.pagination}>
             <SearchPagination
                 onChangePage={newPage => handlePaginationChange(currentSearchScopeType, currentSearchScopeId, currentFormId, newPage)}
                 rowsCount={rowsCount}

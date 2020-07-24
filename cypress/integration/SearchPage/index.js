@@ -83,7 +83,8 @@ When('you fill in the unique identifier field with values that will return a tra
 });
 
 Then('you are navigated to the Tracker Capture', () => {
-    cy.url().should('include', 'dashboard?tei=QGyxOe1zewj&ou=DiszpKrYNg8&program=qDkgAbB5Jlk');
+    cy.url().should('include', 'dashboard?tei=');
+    cy.url().should('include', 'ou=DiszpKrYNg8&program=qDkgAbB5Jlk');
 });
 
 When('you fill in the first name with values that will return no results', () => {
@@ -100,11 +101,11 @@ And('you expand the attributes search area', () => {
         .click();
 });
 
-When('you fill in the first name with values that will return results', () => {
+When('you fill in the last name with values that will return results', () => {
     cy.get('[data-test="dhis2-capture-form-attributes"]')
         .find('[data-test="capture-ui-input"]')
-        .eq(2)
-        .type('Lauren');
+        .eq(1)
+        .type('Smith');
 });
 
 And('you click search', () => {
@@ -116,10 +117,45 @@ And('you click search', () => {
         .click();
 });
 
-Then('there should be a success message', () => {
-    cy.get('h3')
-        .contains('Your search has given results.')
+Then('you can see the first page of the results', () => {
+    cy.get('[data-test="dhis2-capture-search-results-top"]')
         .should('exist');
+    cy.get('[data-test="dhis2-capture-search-results-list"]')
+        .should('exist');
+    cy.get('[data-test="dhis2-capture-card-list-item"]')
+        .should('have.length', 5);
+    cy.get('[data-test="dhis2-capture-search-results-pagination"]')
+        .contains('1-')
+        .should('exist');
+});
+
+
+When('you click the next page button', () => {
+    cy.get('[data-test="dhis2-capture-search-pagination-next-page"]')
+        .click();
+});
+
+When('you click the view dashboard button', () => {
+    cy.get('[data-test="dhis2-capture-view-dashboard-button"]')
+        .first()
+        .click();
+});
+
+Then('you can see the second page of the results', () => {
+    cy.get('[data-test="dhis2-capture-search-results-top"]')
+        .should('exist');
+    cy.get('[data-test="dhis2-capture-search-results-list"]')
+        .should('exist');
+    cy.get('[data-test="dhis2-capture-card-list-item"]')
+        .should('have.length', 4);
+    cy.get('[data-test="dhis2-capture-search-results-pagination"]')
+        .contains('6-')
+        .should('exist');
+});
+
+When('you click the previous page button', () => {
+    cy.get('[data-test="dhis2-capture-search-pagination-previous-page"]')
+        .click();
 });
 
 When('you fill in the first name with values that will return an error', () => {
