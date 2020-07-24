@@ -1,6 +1,6 @@
 // @flow
 import type { SearchGroup } from '../SearchPage.types';
-import type { SearchValues } from '../SearchForm/SearchForm.types';
+import type { CurrentSearchTerms } from '../SearchForm/SearchForm.types';
 
 export type OwnProps = {|
   searchViaAttributesOnScopeProgram: ({| programId: string, formId: string, page?: string |}) => void,
@@ -26,7 +26,7 @@ export type PropsFromRedux ={|
     +tei: Object,
     +values: Object
   |}>,
-  +searchValues: SearchValues
+  +currentSearchTerms: CurrentSearchTerms
 |}
 
 export type DispatchersFromRedux = {|

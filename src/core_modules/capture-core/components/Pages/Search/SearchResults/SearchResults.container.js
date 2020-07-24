@@ -12,7 +12,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
             searchScopeType: currentSearchScopeType,
             searchScopeId: currentSearchScopeId,
             formId: currentFormId,
-            searchValues,
+            currentSearchTerms,
         },
     } = state.searchPage;
 
@@ -24,7 +24,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         currentSearchScopeType,
         currentSearchScopeId,
         currentFormId,
-        searchValues,
+        currentSearchTerms,
     };
 };
 

@@ -63,7 +63,7 @@ const Index = ({
     forms,
     searchStatus,
     isSearchViaAttributesValid,
-    searchValues,
+    currentSearchTerms,
 }: Props) => {
     const [error, setError] = useState(false);
     const [expandedFormId, setExpandedFormId] = useState(null);
@@ -110,7 +110,7 @@ const Index = ({
 
             if (isValid) {
                 setError(false);
-                saveCurrentFormData(searchScopeType, searchScopeId, formId, searchValues);
+                saveCurrentFormData(searchScopeType, searchScopeId, formId, currentSearchTerms);
                 switch (searchScopeType) {
                 case searchScopes.PROGRAM:
                     searchViaAttributesOnScopeProgram({ programId: searchScopeId, formId });
@@ -264,7 +264,7 @@ const Index = ({
         searchViaAttributesOnScopeTrackedEntityType,
         isSearchViaAttributesValid,
         saveCurrentFormData,
-        searchValues,
+        currentSearchTerms,
         error,
         expandedFormId,
     ]);

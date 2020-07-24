@@ -43,7 +43,7 @@ export const Index = ({
     currentSearchScopeType,
     currentSearchScopeId,
     currentFormId,
-    searchValues,
+    currentSearchTerms,
 }: Props) => {
     const handlePaginationChange = (searchScopeType, searchScopeId, formId, newPage) => {
         switch (searchScopeType) {
@@ -81,7 +81,7 @@ export const Index = ({
         <div className={classes.topSection} >
             <b>{rowsCount}</b>
             &nbsp;{i18n.t('results found for')}
-            &nbsp;{searchValues.map(({ name, value, id }, index, rest) => (
+            &nbsp;{currentSearchTerms.map(({ name, value, id }, index, rest) => (
                 <div key={id}>
                     <i>{name}</i>: <b>{value}</b>
                     {index !== rest.length - 1 && <span>,</span>}
