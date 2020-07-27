@@ -6,7 +6,8 @@ import { Map, TileLayer, Marker, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import ClearIcon from '@material-ui/icons/Clear';
 import IconButton from '@material-ui/core/IconButton';
-import { AddLocationIcon, orientations, Button } from 'capture-ui';
+import { AddLocationIcon, orientations } from 'capture-ui';
+import { Button } from '@dhis2/ui-core';
 import CoordinateInput from './CoordinateInput/CoordinateInput.component';
 import defaultClasses from './coordinateField.module.css';
 
@@ -188,14 +189,12 @@ export default class D2Coordinate extends React.Component<Props, State> {
     renderDialogActions = () => (
         <div className={defaultClasses.dialogActionOuterContainer}>
             <div className={defaultClasses.dialogActionInnerContainer}>
-                {/* $FlowFixMe[prop-missing] automated comment */}
-                <Button kind="basic" onClick={this.closeMap}>
+                <Button onClick={this.closeMap}>
                     {i18n.t('Cancel')}
                 </Button>
             </div>
             <div className={defaultClasses.dialogActionInnerContainer}>
-                {/* $FlowFixMe[prop-missing] automated comment */}
-                <Button kind="primary" onClick={this.onSetCoordinate}>
+                <Button primary onClick={this.onSetCoordinate}>
                     {i18n.t('Set coordinate')}
                 </Button>
             </div>

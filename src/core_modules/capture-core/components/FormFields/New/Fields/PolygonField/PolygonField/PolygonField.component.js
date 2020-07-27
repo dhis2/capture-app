@@ -7,7 +7,7 @@ import L from 'leaflet';
 import { Map, TileLayer, FeatureGroup, withLeaflet } from 'react-leaflet';
 import { ReactLeafletSearch } from 'react-leaflet-search-unpolyfilled';
 import { EditControl } from 'react-leaflet-draw';
-import { Button } from 'capture-ui';
+import { Button } from '@dhis2/ui-core';
 import defaultClasses from './polygonField.module.css';
 import './styles.css';
 import DeleteControl from './DeleteControl.component';
@@ -194,14 +194,12 @@ export default class D2Polygon extends React.Component<Props, State> {
     renderDialogActions = () => (
         <div className={defaultClasses.dialogActionOuterContainer}>
             <div className={defaultClasses.dialogActionInnerContainer}>
-                {/* $FlowFixMe[prop-missing] automated comment */}
-                <Button kind="basic" onClick={this.closeMap}>
+                <Button onClick={this.closeMap}>
                     {i18n.t('Cancel')}
                 </Button>
             </div>
             <div className={defaultClasses.dialogActionInnerContainer}>
-                {/* $FlowFixMe[prop-missing] automated comment */}
-                <Button kind="primary" onClick={this.onSetPolygon}>
+                <Button primary onClick={this.onSetPolygon}>
                     {i18n.t('Set area')}
                 </Button>
             </div>

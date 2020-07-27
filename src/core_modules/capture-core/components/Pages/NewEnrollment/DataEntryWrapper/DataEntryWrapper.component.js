@@ -4,7 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper';
 import withStyles from '@material-ui/core/styles/withStyles';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import { Button } from 'capture-ui';
+import { Button } from '@dhis2/ui-core';
 import DataEntry from '../DataEntry/DataEntry.container';
 import { Enrollment } from '../../../../metaData';
 
@@ -57,10 +57,7 @@ class DataEntryWrapper extends React.Component<Props> {
         }
 
         return (
-            <Button
-                color="primary"
-                // onClick={() => this.props.onFormLayoutDirectionChange(!this.props.formHorizontal)}
-            >
+            <Button primary>
                 {
                     // $FlowFixMe[prop-missing] automated comment
                     this.props.formHorizontal ? i18n.t('Switch to form view') : i18n.t('Switch to row view')}
@@ -91,7 +88,7 @@ class DataEntryWrapper extends React.Component<Props> {
         return (
             <div>
                 {/* $FlowFixMe[prop-missing] automated comment */}
-                <Button className={classes.backButton} variant="raised" onClick={this.handleBackToMainPage}>
+                <Button className={classes.backButton} onClick={this.handleBackToMainPage}>
                     <ChevronLeft />
                     {i18n.t('Working Lists')}
                 </Button>
