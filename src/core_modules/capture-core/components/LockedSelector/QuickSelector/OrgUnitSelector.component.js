@@ -174,7 +174,7 @@ class OrgUnitSelector extends Component<Props, State> {
                     <div>
                         <OrgUnitField
                             data-test="org-unit-field"
-                            onSelectClick={this.handleClick}     
+                            onSelectClick={this.handleClick}
                         />
                     </div>
                 </Paper>

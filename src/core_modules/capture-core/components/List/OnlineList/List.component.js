@@ -299,7 +299,8 @@ class List extends React.Component<Props> {
                         {this.renderHeaderRow(visibleColumns)}
                     </Head>
                     <Body
-                      data-test="event-list-body">
+                        data-test="event-list-body"
+                    >
                         {this.renderBody(visibleColumns)}
                     </Body>
                 </Table>

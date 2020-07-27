@@ -113,7 +113,7 @@ class EventContentMenu extends React.Component<Props, State> {
                                 <div
                                     ref={this.handleReferenceInstanceRetrieved}
                                 >
-                                    <IconButton 
+                                    <IconButton
                                         data-test="event-content-menu"
                                         onClick={this.toggleMenu}
                                     >
