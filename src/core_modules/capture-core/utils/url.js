@@ -1,4 +1,5 @@
-export const urlArguments = (programId: string, orgUnitId: string) => {
+// @flow
+export const urlArguments = (programId: string, orgUnitId: string): string => {
     const argArray = [];
     if (programId) {
         argArray.push(`programId=${programId}`);
