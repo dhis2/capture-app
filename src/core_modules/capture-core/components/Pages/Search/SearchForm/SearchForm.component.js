@@ -163,7 +163,7 @@ const Index = ({
                                                 searchScope,
                                             )}
                                         >
-                                            Find by {name}.
+                                            Find by {name}
                                         </Button>
                                     </div>
                                 </Section>
@@ -176,9 +176,8 @@ const Index = ({
                 searchGroupForSelectedScope
                     .filter(searchGroup => !searchGroup.unique)
                     .map(({ searchForm, formId, searchScope, minAttributesRequiredToSearch }) => {
-                        const name = searchForm.getElements()[0].formName;
+                        const searchByText = i18n.t('Search by attributes');
                         const isSearchSectionCollapsed = !(expandedFormId === formId);
-
                         return (
                             <div key={formId} data-test="dhis2-capture-form-attributes">
                                 <Section
@@ -187,7 +186,7 @@ const Index = ({
                                     header={
                                         <SectionHeaderSimple
                                             containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
-                                            title={i18n.t('Search {{name}}', { name })}
+                                            title={searchByText}
                                             onChangeCollapseState={() => { setExpandedFormId(formId); }}
                                             isCollapseButtonEnabled={isSearchSectionCollapsed}
                                             isCollapsed={isSearchSectionCollapsed}
@@ -218,7 +217,7 @@ const Index = ({
                                             )
                                             }
                                         >
-                                            Search by {name}
+                                            {searchByText}
                                         </Button>
                                         <FormInformativeMessage
                                             minAttributesRequiredToSearch={minAttributesRequiredToSearch}
