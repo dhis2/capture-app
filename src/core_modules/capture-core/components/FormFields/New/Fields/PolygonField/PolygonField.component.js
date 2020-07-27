@@ -3,7 +3,7 @@ import * as React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Dialog, DialogTitle } from '@material-ui/core';
 import { orientations } from '../../../New';
-import UIPolygonField from './PolygonField/PolygonField.component';
+import UIPolygonField from './Field/PolygonField.component';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
