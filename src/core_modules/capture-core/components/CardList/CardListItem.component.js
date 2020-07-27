@@ -97,6 +97,7 @@ class CardListItem extends React.Component<Props> {
         } = this.props;
         return (
             <div
+                data-test={'dhis2-capture-card-list-item'}
                 key={item.id}
                 className={classes.itemContainer}
             >

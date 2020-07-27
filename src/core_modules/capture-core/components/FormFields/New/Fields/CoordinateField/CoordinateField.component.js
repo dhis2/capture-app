@@ -82,6 +82,7 @@ class CoordinateField extends React.Component<Props> {
         const { classes, dialogLabel, ...passOnProps } = this.props;
 
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <UICoordinateField
                 mapDialog={
                     <Dialog

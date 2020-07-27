@@ -17,6 +17,7 @@ const inEffect = (state: ReduxState) => dataEntryHasChanges(state, 'singleEvent-
 
 const makeMapStateToProps = () => {
     const eventAccessSelector = makeEventAccessSelector();
+    // $FlowFixMe[not-an-object] automated comment
     return (state: ReduxState) => ({
         showAddRelationship: !!state.newEventPage.showAddRelationship,
         eventAccess: eventAccessSelector(state),
@@ -27,4 +28,5 @@ const mapDispatchToProps = () => ({
 });
 
 // $FlowSuppress
+// $FlowFixMe[missing-annot] automated comment
 export default connect(makeMapStateToProps, mapDispatchToProps)(withBrowserBackWarning(dialogConfig, inEffect)(SelectionsComplete));

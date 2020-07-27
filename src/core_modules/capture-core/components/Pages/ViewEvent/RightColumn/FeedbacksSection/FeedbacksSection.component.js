@@ -4,7 +4,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 import i18n from '@dhis2/d2-i18n';
 import { Adjust as AdjustIcon } from '@material-ui/icons';
-import { withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import ViewEventSection from '../../Section/ViewEventSection.component';
 import ViewEventSectionHeader from '../../Section/ViewEventSectionHeader.component';
 

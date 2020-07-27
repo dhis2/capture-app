@@ -46,6 +46,7 @@ export const getTimeRangeValidator = (invalidTimeMessage: string) =>
         if (errorResult.length > 0) {
             return {
                 valid: false,
+                // $FlowFixMe[exponential-spread] automated comment
                 errorMessage: errorResult.reduce((map, error) => ({ ...map, ...error }), {}),
             };
         }

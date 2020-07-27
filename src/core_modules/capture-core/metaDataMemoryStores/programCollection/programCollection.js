@@ -1,5 +1,5 @@
 // @flow
-import Program from '../../metaData/Program/Program';
+import { Program } from '../../metaData';
 
 const collection: Map<string, Program> = new Map();
 

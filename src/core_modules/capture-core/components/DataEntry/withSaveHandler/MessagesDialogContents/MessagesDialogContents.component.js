@@ -34,6 +34,7 @@ const MessagesDialogContents = (props: Props) => {
 
     if (warnings && warnings.length > 0 && errors && errors.length > 0) {
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <ErrorAndWarningDialog
                 errors={errors}
                 warnings={warnings}

@@ -3,9 +3,9 @@
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import uuid from 'uuid/v4';
+import * as React from 'react';
 import { makeCancelablePromise } from 'capture-core-utils';
 import type { CancelablePromise } from 'capture-core-utils/cancelablePromise/makeCancelable';
-import * as React from 'react';
 import isDefined from 'd2-utilizr/lib/isDefined';
 import isObject from 'd2-utilizr/lib/isObject';
 import defaultClasses from './formBuilder.module.css';
@@ -347,7 +347,7 @@ class FormBuilder extends React.Component<Props> {
      * @returns {}
     */
     getFieldProp(fieldId: string): FieldConfig {
-        // $FlowSuppress
+        // $FlowFixMe[incompatible-return] automated comment
         return this.props.fields.find(f => f.id === fieldId);
     }
 
@@ -401,7 +401,6 @@ class FormBuilder extends React.Component<Props> {
                     touched: true,
                 },
             );
-            // $FlowFixMe
             return fieldValidatingPromiseContainer.cancelableValidatingPromise.promise;
         };
 
@@ -412,6 +411,7 @@ class FormBuilder extends React.Component<Props> {
             onGetValidationContext && onGetValidationContext(),
             handleIsValidatingInternal,
         )
+            // $FlowFixMe[prop-missing] automated comment
             .then(({ valid, errorMessage, errorType, errorData }) => {
                 onUpdateField(
                     value,
@@ -568,6 +568,7 @@ class FormBuilder extends React.Component<Props> {
                 <div
                     {...onGetContainerProps && onGetContainerProps(index, fields.length, field)}
                 >
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <field.component
                         ref={(fieldInstance) => { this.setFieldInstance(fieldInstance, field.id); }}
                         value={value}

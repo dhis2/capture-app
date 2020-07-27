@@ -55,6 +55,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                     className={classes.root}
                 >
                     <IconButton
+                        data-test={'dhis2-capture-search-pagination-first-page'}
                         onClick={this.handleFirstPageButtonClick}
                         disabled={currentPage <= 1}
                         aria-label="First Page"
@@ -62,6 +63,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                         {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
                     </IconButton>
                     <IconButton
+                        data-test={'dhis2-capture-search-pagination-previous-page'}
                         onClick={this.handleBackButtonClick}
                         disabled={currentPage <= 1}
                         aria-label="Previous Page"
@@ -69,6 +71,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                         {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
                     </IconButton>
                     <IconButton
+                        data-test={'dhis2-capture-search-pagination-next-page'}
                         onClick={this.handleNextButtonClick}
                         disabled={currentPage >= Math.ceil(rowsCount / rowsPerPage)}
                         aria-label="Next Page"
@@ -76,6 +79,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
                         {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
                     </IconButton>
                     <IconButton
+                        data-test={'dhis2-capture-search-pagination-last-page'}
                         onClick={this.handleLastPageButtonClick}
                         disabled={currentPage >= Math.ceil(rowsCount / rowsPerPage)}
                         aria-label="Last Page"
@@ -89,6 +93,7 @@ const getNavigation = (InnerComponent: React.ComponentType<any>) =>
         render() {
             const { classes, theme, ...passOnProps } = this.props;
             return (
+                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     navigationElements={this.renderNavigationElement()}
                     {...passOnProps}

@@ -14,6 +14,7 @@ class AgeDateInput extends Component<Props> {
     render() {
         const { value, orientation, ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <UIDate
                 value={value || ''}
                 calendarMaxMoment={moment()}

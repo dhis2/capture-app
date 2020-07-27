@@ -1,5 +1,3 @@
-/* eslint-disable complexity */
-/* eslint-disable no-underscore-dangle */
 import isDefined from 'd2-utilizr/lib/isDefined';
 import log from 'loglevel';
 import { errorCreator } from '../errorCreator';
@@ -256,6 +254,7 @@ class IndexedDBAdapter {
                         }),
                     )
                     .then(() => {
+                        // eslint-disable-next-line no-underscore-dangle
                         this._upgrade(onCreateObjectStore);
                         return Promise.resolve();
                     })
@@ -408,13 +407,13 @@ class IndexedDBAdapter {
                     onIDBGetRequest(objectStore, IndexedDBAdapter) :
                     objectStore.getAll(keyRange, batchSize);
 
-                request.onsuccess = (e) => {
+                request.onsuccess = () => {
                     const values = request.result;
                     const count = values ? values.length : 0;
                     let lastId;
                     if (count > 0) {
                         values.forEach((value) => {
-                            // value[this.keyPath] = cursor.primaryKey || cursor.key;
+                            // eslint-disable-next-line no-underscore-dangle
                             this._processGetAllItem(value, predicate, project, records);
                         });
                         lastId = values[count - 1].id;
@@ -451,6 +450,7 @@ class IndexedDBAdapter {
                 if (cursor) {
                     cursor.value[this.keyPath] = cursor.primaryKey || cursor.key;
                     const dbValue = cursor.value;
+                    // eslint-disable-next-line no-underscore-dangle
                     this._processGetAllItem(dbValue, predicate, project, records);
                     cursor.continue();
                 }
@@ -481,7 +481,9 @@ class IndexedDBAdapter {
                 tx = this.db.transaction([store], IndexedDBAdapter.transactionMode.READ_ONLY);
                 const objectStore = tx.objectStore(store);
                 batchSize ?
+                    // eslint-disable-next-line no-underscore-dangle
                     this._getAllInBatches(objectStore, options, records, abortTx) :
+                    // eslint-disable-next-line no-underscore-dangle
                     this._getAllWithCursor(objectStore, options, records, abortTx);
 
                 tx.oncomplete = () => {
@@ -557,7 +559,7 @@ class IndexedDBAdapter {
         });
     }
 
-    remove(store, key) {
+    remove(store, keys) {
         return new Promise((resolve, reject) => {
             let tx;
             let catchError;
@@ -579,7 +581,14 @@ class IndexedDBAdapter {
                 };
 
                 const objectStore = tx.objectStore(store);
-                objectStore.delete(key);
+
+                if (Array.isArray(keys)) {
+                    keys.forEach((key) => {
+                        objectStore.delete(key);
+                    });
+                } else {
+                    objectStore.delete(keys);
+                }
             } catch (error) {
                 if (tx) {
                     abortTx(error);

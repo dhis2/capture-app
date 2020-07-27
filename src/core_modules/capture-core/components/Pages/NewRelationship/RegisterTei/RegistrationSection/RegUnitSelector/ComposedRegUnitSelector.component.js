@@ -23,6 +23,7 @@ class OrgUnitFieldWrapper extends React.Component<Props> {
     render() {
         const { onUpdateSelectedOrgUnit, ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <OrgUnitFieldImplicitRootsFilterHandlerHOC
                 onSelect={onUpdateSelectedOrgUnit}
                 scope={orgUnitFieldScopes.USER_CAPTURE}

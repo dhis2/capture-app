@@ -459,7 +459,7 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
 
         const currentColumnOrder = state[listId];
         const newColumnOrder = columnOrder
-            .map(co => {
+            .map((co) => {
                 const stateElement = currentColumnOrder.find(cco => cco.id === co.id);
                 const newOrderELement = {
                     ...stateElement,

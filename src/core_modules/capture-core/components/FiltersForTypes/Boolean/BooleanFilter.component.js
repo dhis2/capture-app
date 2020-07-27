@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import elementTypes from '../../../metaData/DataElement/elementTypes';
 import D2TrueFalse from '../../FormFields/Generic/D2TrueFalse.component';
 import { orientations } from '../../FormFields/Options/MultiSelectBoxes/multiSelectBoxes.const';
 import { getBooleanFilterData } from './booleanFilterDataGetter';
@@ -16,7 +15,6 @@ const getStyles = (theme: Theme) => ({
 type Value = ?Array<any>;
 
 type Props = {
-    type: $Values<typeof elementTypes>,
     value: Value,
     onCommitValue: (value: Value) => void,
     classes: {
@@ -24,16 +22,18 @@ type Props = {
     },
 };
 // $FlowSuppress
+// $FlowFixMe[incompatible-variance] automated comment
 class BooleanFilter extends Component<Props> implements UpdatableFilterContent<Value> {
     booleanFieldInstance: ?D2TrueFalse;
+
     onGetUpdateData() {
         const value = this.props.value;
 
         if (!value) {
             return null;
         }
-        const optionSet = this.booleanFieldInstance && this.booleanFieldInstance.optionSet;
-        return getBooleanFilterData(value, this.props.type, optionSet);
+
+        return getBooleanFilterData(value);
     }
 
     onIsValid() { //eslint-disable-line

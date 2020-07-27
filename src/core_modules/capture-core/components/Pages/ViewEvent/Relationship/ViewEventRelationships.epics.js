@@ -11,7 +11,7 @@ import {
 } from '../../../Relationships/relationships.actions';
 import {
     actionTypes as viewEventActionTypes,
-} from '../viewEvent.actions';
+} from '../ViewEventComponent/viewEvent.actions';
 
 import {
     actionTypes as viewEventRelationshipsActionTypes,

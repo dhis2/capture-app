@@ -179,6 +179,7 @@ class D2AgeField extends Component<Props> {
             ...passOnProps } = this.props;
         return (
             <div className={defaultClasses.ageNumberInputContainer}>
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <AgeNumberInput
                     label={i18n.t(label)}
                     value={currentValues[key]}
@@ -214,6 +215,7 @@ class D2AgeField extends Component<Props> {
         );
         return (
             <div className={dateInputContainerClass}>
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <AgeDateInput
                     onBlur={this.handleDateBlur}
                     value={currentValues.date}

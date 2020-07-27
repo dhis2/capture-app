@@ -72,6 +72,7 @@ class SingleSelectBox extends React.Component<Props> {
                     htmlFor={id}
                     className={classNames(defaultClasses.label, { [defaultClasses.labelDisabled]: disabled })}
                 >
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <input
                         ref={inputRef}
                         type="radio"

@@ -5,7 +5,8 @@ import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import { buildServerDataForEnrollmentDataEntry } from '../../../../DataEntries';
 
 export const saveNewEnrollmentEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(actionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)
         .map((action) => {
             const state = store.getState();
@@ -23,6 +24,7 @@ export const saveNewEnrollmentEpic = (action$: InputObservable, store: ReduxStor
                 selections,
                 trackerProgram.enrollment,
                 state.formsValues[dataEntryKey],
+                // $FlowFixMe[extra-arg] automated comment
                 state.dataEntriesFieldsValue[dataEntryKey],
                 state.dataEntriesFieldsMeta[dataEntryKey],
                 {},

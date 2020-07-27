@@ -5,6 +5,7 @@ import { ProgramStage } from '../../../../metaData';
 
 const programIdSelector = state => state.currentSelections.programId;
 
+// $FlowFixMe[missing-annot] automated comment
 export const makeProgramNameSelector = () => createSelector(
     programIdSelector,
     (programId: string) => {
@@ -14,8 +15,9 @@ export const makeProgramNameSelector = () => createSelector(
     },
 );
 
-const stageSelector = (props) => props.stage;
+const stageSelector = props => props.stage;
 
+// $FlowFixMe[missing-annot] automated comment
 export const makeWritableRelationshipTypesSelector = () => createSelector(
     stageSelector,
     (stage: ?ProgramStage) => (stage ? stage.relationshipTypesWhereStageIsFrom.filter(r => r.access.data.write) : []),

@@ -1,6 +1,6 @@
 // @flow
 import { getEvents } from '../../../../../events/eventRequests';
-import type { ColumnConfig } from './getColumnsConfiguration';
+import type { ColumnConfig } from '../workingLists.types';
 import programCollection from '../../../../../metaDataMemoryStores/programCollection/programCollection';
 
 type InputQueryArgs = {
@@ -29,10 +29,9 @@ const getApiFilterQueryArgument = (filters: ?{ [id: string]: string}, mainColumn
         filters ?
             Object
                 .keys(filters)
-                // $FlowSuppress
+
                 .filter(key => filters[key] != null && !mainColumns[key])
                 .reduce((accFilterQueries, filterKey) => {
-                    // $FlowSuppress
                     const filter = getFilter(filters[filterKey]);
                     if (Array.isArray(filter)) {
                         const filtersFromArray = filter
@@ -81,10 +80,9 @@ const getMainApiFilterQueryArguments = (filters: ?{ [id: string]: string}, mainC
         filters ?
             Object
                 .keys(filters)
-                // $FlowSuppress
+
                 .filter(key => mainColumns[key] && filters[key] != null)
                 .reduce((accMainQueryArgs, key) => {
-                    // $FlowSuppress
                     const filter = getFilter(filters[key]);
                     let queryArgsForCurrentMain = {};
                     if (key === 'eventDate') {
@@ -95,6 +93,7 @@ const getMainApiFilterQueryArguments = (filters: ?{ [id: string]: string}, mainC
                         queryArgsForCurrentMain = filter;
                     }
                     return {
+                        // $FlowFixMe[exponential-spread] automated comment
                         ...accMainQueryArgs,
                         ...queryArgsForCurrentMain,
                     };
@@ -122,7 +121,7 @@ const getApiCategoriesQueryArgument = (categories: ?{ [id: string]: string}, pro
         attributeCc: categoryCombination.id,
         attributeCos: Object
             .keys(categories)
-            // $FlowSuppress
+
             .map(key => categories[key])
             .join(';'),
     };
@@ -149,6 +148,7 @@ const createApiQueryArgs = (queryArgs: Object, mainColumns: Object) => {
         ...queryArgs,
         order: getApiOrderByQueryArgument(queryArgs.sortById, queryArgs.sortByDirection, mainColumns),
         ...getApiFilterQueryArgument(queryArgs.filters, mainColumns),
+        // $FlowFixMe[exponential-spread] automated comment
         ...getMainApiFilterQueryArguments(queryArgs.filters, mainColumns),
         ...getApiCategoriesQueryArgument(queryArgs.categories, queryArgs.programId),
     };

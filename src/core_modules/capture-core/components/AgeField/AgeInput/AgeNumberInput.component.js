@@ -12,13 +12,12 @@ type Props = {
 
 type State = {
     focus?: ?boolean,
-    hasValue?: ?boolean,
 }
 
 class AgeNumberInput extends Component<Props, State> {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = { focus: false };
     }
     handleBlur = (event) => {
         this.props.onBlur(event.currentTarget.value);
@@ -33,6 +32,7 @@ class AgeNumberInput extends Component<Props, State> {
     render() {
         const { onBlur, onChange, value, classes, ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <TextInput
                 classes={{}}
                 onBlur={this.handleBlur}

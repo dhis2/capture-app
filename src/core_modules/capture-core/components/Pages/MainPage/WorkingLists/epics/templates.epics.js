@@ -21,6 +21,7 @@ import { getTemplatesAsync } from './templatesFetcher';
 import { getApi } from '../../../../../d2';
 
 export const retrieveTemplatesEpic = (action$: InputObservable, store: ReduxStore) =>
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         actionTypes.TEMPLATES_FETCH,
     )
@@ -29,7 +30,7 @@ export const retrieveTemplatesEpic = (action$: InputObservable, store: ReduxStor
             const programId = store.getState().currentSelections.programId;
             const promise = getTemplatesAsync(store.getState())
                 .then(container => batchActions([
-                    selectTemplate(container.default.id, listId, container.default),
+                    selectTemplate(container.default.id, listId),
                     fetchTemplatesSuccess(container.workingListConfigs, programId, listId),
                 ], batchActionTypes.TEMPLATES_FETCH_SUCCESS_BATCH))
                 .catch((error) => {
@@ -41,12 +42,14 @@ export const retrieveTemplatesEpic = (action$: InputObservable, store: ReduxStor
 
             return fromPromise(promise)
                 .takeUntil(
+                    // $FlowFixMe[prop-missing] automated comment
                     action$.ofType(actionTypes.TEMPLATES_FETCH_CANCEL)
                         .filter(cancelAction => cancelAction.payload.listId === listId),
                 );
         });
 
 export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         actionTypes.TEMPLATE_UPDATE,
     )
@@ -114,17 +117,20 @@ export const updateTemplateEpic = (action$: InputObservable, store: ReduxStore) 
             return fromPromise(requestPromise)
                 .takeUntil(
                     action$
+                        // $FlowFixMe[prop-missing] automated comment
                         .ofType(actionTypes.TEMPLATE_UPDATE)
                         .filter(cancelAction => cancelAction.payload.template.id === template.id),
                 )
                 .takeUntil(
                     action$
+                        // $FlowFixMe[prop-missing] automated comment
                         .ofType(actionTypes.CONTEXT_UNLOADING)
                         .filter(cancelAction => cancelAction.payload.listId === listId),
                 );
         });
 
 export const addTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         actionTypes.TEMPLATE_ADD,
     )
@@ -186,12 +192,14 @@ export const addTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
             return fromPromise(requestPromise)
                 .takeUntil(
                     action$
+                        // $FlowFixMe[prop-missing] automated comment
                         .ofType(actionTypes.CONTEXT_UNLOADING)
                         .filter(cancelAction => cancelAction.payload.listId === listId),
                 );
         });
 
-export const deleteTemplateEpic = (action$: InputObservable, store: ReduxStore) =>
+export const deleteTemplateEpic = (action$: InputObservable) =>
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         actionTypes.TEMPLATE_DELETE,
     )
@@ -217,11 +225,13 @@ export const deleteTemplateEpic = (action$: InputObservable, store: ReduxStore) 
             return fromPromise(requestPromise)
                 .takeUntil(
                     action$
+                        // $FlowFixMe[prop-missing] automated comment
                         .ofType(actionTypes.TEMPLATE_DELETE)
                         .filter(cancelAction => cancelAction.payload.template.id === template.id),
                 )
                 .takeUntil(
                     action$
+                        // $FlowFixMe[prop-missing] automated comment
                         .ofType(actionTypes.CONTEXT_UNLOADING)
                         .filter(cancelAction => cancelAction.payload.listId === listId),
                 );

@@ -48,6 +48,7 @@ class PolygonField extends React.Component<Props> {
     render() {
         const { classes, dialogLabel, ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <UIPolygonField
                 mapDialog={
                     <Dialog

@@ -100,7 +100,6 @@ class Notes extends React.Component<Props, State> {
     static defaultProps = {
         entityAccess: { read: true, write: true },
     }
-    innerInstance: ?any;
     constructor(props: Props) {
         super(props);
         this.state = {

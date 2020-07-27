@@ -23,6 +23,7 @@ class CoordinateInput extends Component<Props> {
     render() {
         const { onBlur, onChange, value, classes, className, ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <TextInput
                 classes={{ input: className }}
                 onBlur={this.handleBlur}

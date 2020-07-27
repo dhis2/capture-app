@@ -13,6 +13,7 @@ import { updateEventWorkingListAsync } from './updateEventWorkingList';
 import { getApi } from '../../../../../d2';
 
 export const initEventListEpic = (action$: InputObservable, store: ReduxStore) =>
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         actionTypes.EVENT_LIST_INIT,
     )
@@ -37,12 +38,14 @@ export const initEventListEpic = (action$: InputObservable, store: ReduxStore) =
             return fromPromise(initialPromise)
                 .takeUntil(
                     action$
+                        // $FlowFixMe[prop-missing] automated comment
                         .ofType(actionTypes.EVENT_LIST_INIT_CANCEL)
                         .filter(cancelAction => cancelAction.payload.listId === listId),
                 );
         });
 
 export const updateEventListEpic = (action$: InputObservable, store: ReduxStore) =>
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         actionTypes.EVENT_LIST_UPDATE,
     )
@@ -53,11 +56,13 @@ export const updateEventListEpic = (action$: InputObservable, store: ReduxStore)
             return fromPromise(updatePromise)
                 .takeUntil(
                     action$
+                        // $FlowFixMe[prop-missing] automated comment
                         .ofType(actionTypes.EVENT_LIST_UPDATE_CANCEL)
                         .filter(cancelAction => cancelAction.payload.listId === listId),
                 )
                 .takeUntil(
                     action$
+                        // $FlowFixMe[prop-missing] automated comment
                         .ofType(actionTypes.EVENT_LIST_INIT_CANCEL)
                         .filter(cancelAction => cancelAction.payload.listId === listId),
                 );
@@ -65,6 +70,7 @@ export const updateEventListEpic = (action$: InputObservable, store: ReduxStore)
 
 // TODO: --------------------------------- REFACTOR -----------------------------------
 export const requestDeleteEventEpic = (action$: InputObservable) =>
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         eventListActionTypes.REQUEST_DELETE_EVENT,
     ).concatMap((action) => {
@@ -81,6 +87,7 @@ export const requestDeleteEventEpic = (action$: InputObservable) =>
         return fromPromise(deletePromise)
             .takeUntil(
                 action$
+                    // $FlowFixMe[prop-missing] automated comment
                     .ofType(actionTypes.CONTEXT_UNLOADING)
                     .filter(cancelAction => cancelAction.payload.listId === listId),
             );

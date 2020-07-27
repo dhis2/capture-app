@@ -43,5 +43,4 @@ class WarningMessageCreator extends React.Component<Props> {
     }
 }
 
-// $FlowFixMe
 export default withStyles(getStyles)(WarningMessageCreator);

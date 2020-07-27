@@ -1,5 +1,3 @@
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-underscore-dangle */
 import { errorCreator } from '../errorCreator';
 
 class Indexer {
@@ -103,6 +101,7 @@ class DomLocalStorageAdapter {
                     }),
                 )
                 .then(() => {
+                    // eslint-disable-next-line no-underscore-dangle
                     this._executeDestroy();
                     DomLocalStorageAdapter.storage.setItem(versionKey, JSON.stringify(this.version));
                     return Promise.resolve();
@@ -130,6 +129,7 @@ class DomLocalStorageAdapter {
     set(store, dataObject) {
         return new Promise((resolve, reject) => {
             try {
+                // eslint-disable-next-line no-underscore-dangle
                 this._executeSet(store, dataObject);
                 resolve();
             } catch (error) {
@@ -141,6 +141,7 @@ class DomLocalStorageAdapter {
     setAll(store, dataArray) {
         try {
             dataArray.forEach((dataObject) => {
+                // eslint-disable-next-line no-underscore-dangle
                 this._executeSet(store, dataObject);
             });
             return Promise.resolve();
@@ -190,6 +191,7 @@ class DomLocalStorageAdapter {
     }
 
     getKeys(store) {
+        // eslint-disable-next-line no-underscore-dangle
         return Promise.resolve(this._executeGetKeys(store));
     }
 
@@ -200,18 +202,22 @@ class DomLocalStorageAdapter {
     }
 
     remove(store, key) {
+        // eslint-disable-next-line no-underscore-dangle
         this._executeRemove(store, key);
         return Promise.resolve();
     }
 
     _executeRemoveAll(store) {
+        // eslint-disable-next-line no-underscore-dangle
         const keys = this._executeGetKeys(store);
         keys.forEach((key) => {
+            // eslint-disable-next-line no-underscore-dangle
             this._executeRemove(store, key);
         });
     }
 
     removeAll(store) {
+        // eslint-disable-next-line no-underscore-dangle
         return Promise.resolve(this._executeRemoveAll(store));
     }
 
@@ -236,12 +242,14 @@ class DomLocalStorageAdapter {
 
     _executeDestroy() {
         this.objectStoreNames.forEach((store) => {
+            // eslint-disable-next-line no-underscore-dangle
             this._executeRemoveAll(store);
             this.indexer[store].destroy();
         });
     }
     destroy() {
         this.opened = false;
+        // eslint-disable-next-line no-underscore-dangle
         this._executeDestroy();
         return Promise.resolve();
     }

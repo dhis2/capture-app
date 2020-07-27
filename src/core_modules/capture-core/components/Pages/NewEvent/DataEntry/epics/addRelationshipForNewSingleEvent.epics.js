@@ -33,12 +33,14 @@ const itemId = 'newEvent';
 const dataEntryKey = getDataEntryKey(dataEntryId, itemId);
 
 export const openRelationshipForNewSingleEventEpic = (action$: InputObservable) =>
-    // $FlowSuppress
+
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(newEventDataEntryActionTypes.NEW_EVENT_OPEN_NEW_RELATIONSHIP)
         .map(() => initializeNewRelationship());
 
 export const addRelationshipForNewSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(newEventNewRelationshipActionTypes.ADD_NEW_EVENT_RELATIONSHIP)
         .map((action) => {
             const state = store.getState();
@@ -102,8 +104,9 @@ const saveNewEventRelationships = (relationshipData, selections, triggerAction) 
 };
 
 
-export const saveNewEventRelationshipsIfExistsEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+export const saveNewEventRelationshipsIfExistsEpic = (action$: InputObservable) =>
+
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(newEventDataEntryActionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS)
         .map((action) => {
             const meta = action.meta;
@@ -131,8 +134,9 @@ export const saveNewEventRelationshipsIfExistsEpic = (action$: InputObservable, 
             return null;
         });
 
-export const saveNewEventRelationshipFinishedEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+export const saveNewEventRelationshipFinishedEpic = (action$: InputObservable) =>
+
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         newEventDataEntryActionTypes.NEW_EVENT_RELATIONSHIPS_SAVED,
         newEventDataEntryActionTypes.SAVE_FAILED_FOR_NEW_EVENT_RELATIONSHIPS,
@@ -149,8 +153,9 @@ export const saveNewEventRelationshipFinishedEpic = (action$: InputObservable, s
             return null;
         });
 
-export const teiForNewEventRelationshipSavedEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+export const teiForNewEventRelationshipSavedEpic = (action$: InputObservable) =>
+
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         newEventDataEntryActionTypes.TEI_FOR_NEW_EVENT_RELATIONSHIPS_SAVED,
     )

@@ -18,6 +18,7 @@ const getStyles = (theme: Theme) => ({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
+    // $FlowFixMe[cannot-spread-inexact] automated comment
     header: {
         flexGrow: 1,
         ...theme.typography.title,
@@ -47,17 +48,9 @@ type Props = {
     stage: ?ProgramStage,
 }
 
-type State = {
-    discardWarningOpen: boolean,
-}
 
-class NewEventDataEntryWrapper extends React.Component<Props, State> {
+class NewEventDataEntryWrapper extends React.Component<Props> {
     cancelButtonInstance: ?any;
-
-    constructor(props: Props) {
-        super(props);
-        this.state = { discardWarningOpen: false };
-    }
 
     handleGoBackToAllEvents = () => {
         this.cancelButtonInstance && this.cancelButtonInstance.handleCancel();
@@ -108,7 +101,7 @@ class NewEventDataEntryWrapper extends React.Component<Props, State> {
                     <ChevronLeft />
                     {i18n.t('Show all events')}
                 </Button>
-                <Paper className={classes.dataEntryPaper}>
+                <Paper className={classes.dataEntryPaper} data-test="dhis2-capture-new-event-page">
                     {this.renderHeader()}
                     <DataEntry
                         stage={stage}

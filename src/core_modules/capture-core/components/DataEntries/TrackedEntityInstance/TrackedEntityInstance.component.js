@@ -84,6 +84,7 @@ class PreTeiDataEntry extends React.Component<PreTeiDataEntryProps> {
         }
 
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <PreTeiDataEntryPure
                 onGetValidationContext={this.getValidationContext}
                 onUpdateFormField={onUpdateField}

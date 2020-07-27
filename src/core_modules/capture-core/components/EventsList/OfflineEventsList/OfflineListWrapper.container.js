@@ -11,4 +11,5 @@ const mapStateToProps = (state: ReduxState, props: Object) => {
     };
 };
 
+// $FlowFixMe[missing-annot] automated comment
 export default connect(mapStateToProps, {})(createOfflineListWrapper(OfflineListContainerCreator));

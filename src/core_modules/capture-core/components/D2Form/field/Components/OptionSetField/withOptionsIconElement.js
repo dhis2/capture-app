@@ -75,6 +75,7 @@ export default () =>
                 const { options, classes, ...passOnProps } = this.props;
 
                 return (
+                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <InnerComponent
                         options={this.options}
                         {...passOnProps}
