@@ -168,7 +168,7 @@ class OrgUnitSelector extends Component<Props, State> {
         }
 
         return (
-            <div data-test="dhis2-capture-org-unit-selector-container"t>
+            <div data-test="dhis2-capture-org-unit-selector-container">
                 <Paper elevation={0} className={this.props.classes.paper}>
                     <h4 className={this.props.classes.title}>{ i18n.t('Registering Organisation Unit') }</h4>
                     <div>
