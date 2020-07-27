@@ -82,7 +82,9 @@ class ActionButtons extends Component<Props> {
                 <Button
                     onClick={this.handleNewClick}
                 >
-                    <AddIcon className={classes.icon} />
+                    <AddIcon                     
+                      data-test="new-event-button"
+                      className={classes.icon} />
                     {this.getButtonText()}
                 </Button>
                 {/* Find button to be included when find(tracked entity instance)

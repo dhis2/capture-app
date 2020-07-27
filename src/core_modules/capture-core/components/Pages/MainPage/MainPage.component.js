@@ -38,6 +38,7 @@ class Index extends Component<Props> {
                             <TrackerProgramHandler>
                                 <div
                                     className={classes.listContainer}
+                                    data-test={'event-list-container'}
                                 >
                                     <EventsListConnectivityWrapper
                                         listId={'eventList'}

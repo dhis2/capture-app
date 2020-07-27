@@ -89,11 +89,11 @@ class EventContentMenu extends React.Component<Props, State> {
     renderMenuItems = () => {
         const { classes } = this.props;
         return (
-            <MenuList role="menu" className={classes.menuList}>
+            <MenuList role="menu" className={classes.menuList} data-test="view-event-button">
                 <MenuItem onClick={this.handleView}>
                     {i18n.t('View event info')}
                 </MenuItem>
-                <MenuItem onClick={this.handleDelete}>
+                <MenuItem onClick={this.handleDelete} data-test="delete-event-button">
                     <Delete className={classes.deleteIcon} />
                     {i18n.t('Delete event')}
                 </MenuItem>
@@ -113,7 +113,8 @@ class EventContentMenu extends React.Component<Props, State> {
                                 <div
                                     ref={this.handleReferenceInstanceRetrieved}
                                 >
-                                    <IconButton
+                                    <IconButton 
+                                        data-test="event-content-menu"
                                         onClick={this.toggleMenu}
                                     >
                                         <MoreHoriz />

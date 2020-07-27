@@ -293,11 +293,13 @@ class List extends React.Component<Props> {
             >
                 <Table
                     className={classes.table}
+                    data-test="event-list-table"
                 >
                     <Head>
                         {this.renderHeaderRow(visibleColumns)}
                     </Head>
-                    <Body>
+                    <Body
+                      data-test="event-list-body">
                         {this.renderBody(visibleColumns)}
                     </Body>
                 </Table>
