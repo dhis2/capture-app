@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import type { ValidatorContainer } from '../../../../FormBuilder/FormBuilder.component';
+import type { ValidatorContainer } from '../../../FormBuilder.component';
 import { getValidators } from '../../validators';
 import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
 

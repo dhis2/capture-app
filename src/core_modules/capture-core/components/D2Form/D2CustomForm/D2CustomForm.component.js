@@ -3,7 +3,7 @@ import * as React from 'react';
 import log from 'loglevel';
 import { walk, kinds } from 'react-transform-tree';
 import { errorCreator } from 'capture-core-utils';
-import type { FieldConfig } from '../../FormBuilder/FormBuilder.component';
+import type { FieldConfig } from '../FormBuilder.component';
 import MetadataCustomForm from '../../../metaData/RenderFoundation/CustomForm';
 
 type Props = {

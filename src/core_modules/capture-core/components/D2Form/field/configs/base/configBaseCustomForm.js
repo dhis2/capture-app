@@ -1,5 +1,5 @@
 // @flow
-import type { FieldConfig } from '../../../../FormBuilder/FormBuilder.component';
+import type { FieldConfig } from '../../../FormBuilder.component';
 import { getBaseConfigForField } from './configBase';
 import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
 import type { FieldConfigForType } from './configBase';
