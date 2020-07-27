@@ -673,6 +673,12 @@ msgstr ""
 msgid "Search {{name}}"
 msgstr ""
 
+msgid "Search by attributes"
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
 msgid "Make a selection to start searching"
 msgstr ""
 
@@ -715,9 +721,6 @@ msgid "Selected program"
 msgstr ""
 
 msgid "Search {{uniqueAttrName}}"
-msgstr ""
-
-msgid "Search by attributes"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequired}} attributes to search"
