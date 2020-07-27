@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import LoadingMaskForPage from '../components/LoadingMasks/LoadingMaskForPage.component';
+import { LoadingMaskForPage } from '../components/LoadingMasks';
 
 type Props = {
     ready: boolean,

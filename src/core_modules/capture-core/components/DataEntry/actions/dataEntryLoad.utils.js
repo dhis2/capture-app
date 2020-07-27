@@ -37,8 +37,10 @@ export function getDataEntryMeta(dataEntryPropsToInclude: Array<DataEntryPropToI
                 propMeta = {};
             }
 
+            // $FlowFixMe[prop-missing] automated comment
             propMeta.clientIgnore = propToInclude.clientIgnore;
 
+            // $FlowFixMe[prop-missing] automated comment
             accMeta[propToInclude.id || propToInclude.dataEntryId] = propMeta;
             return accMeta;
         }, {});
@@ -49,9 +51,9 @@ export function getDataEntryValues(
     clientValuesForDataEntry: Object,
 ) {
     const standardValuesArray = dataEntryPropsToInclude
-        // $FlowSuppress :flow filter problem
+        // $FlowFixMe[prop-missing] automated comment
         .filter(propToInclude => propToInclude.type)
-        // $FlowSuppress :flow filter problem
+        // $FlowFixMe[prop-missing] automated comment
         .map((propToInclude: DataEntryPropToIncludeStandard) => new DataElement((o) => {
             o.id = propToInclude.id;
             o.type = propToInclude.type;
@@ -62,9 +64,9 @@ export function getDataEntryValues(
         }));
 
     const specialValuesArray = dataEntryPropsToInclude
-        // $FlowSuppress :flow filter problem
+        // $FlowFixMe[prop-missing] automated comment
         .filter(propToInclude => propToInclude.onConvertIn)
-        // $FlowSuppress :flow filter problem
+        // $FlowFixMe[prop-missing] automated comment
         .map((propToInclude: DataEntryPropToIncludeSpecial) => ({
             id: propToInclude.dataEntryId,
             value: propToInclude.onConvertIn(clientValuesForDataEntry[propToInclude.clientId]),
@@ -83,6 +85,7 @@ export function getDataEntryNotes(
     const notes = clientValuesForDataEntry.notes || [];
     return notes.map((note, index) => ({
         ...note,
+        // $FlowFixMe[prop-missing] automated comment
         storedDate: convertListValue(note.storedDate, elementTypes.DATETIME),
         key: index,
     }));
@@ -102,7 +105,7 @@ export function validateDataEntryValues(
 ) {
     return dataEntryPropsToInclude
         .reduce((accValidations, propToInclude) => {
-            // $FlowSuppress
+            // $FlowFixMe[prop-missing] automated comment
             const id = propToInclude.dataEntryId || propToInclude.id;
             const value = values[id];
             const validatorContainers = propToInclude.validatorContainers;

@@ -1,5 +1,5 @@
 // @flow
-import type { NumericFilterData } from '../../../eventList.types';
+import type { NumericFilterData } from '../../../../../../FiltersForTypes/filters.types';
 
 export function convertNumeric(filter: NumericFilterData) {
     const requestData = [];

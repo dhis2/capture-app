@@ -1,8 +1,8 @@
 // @flow
 import log from 'loglevel';
+import { errorCreator } from 'capture-core-utils';
 import { getApi } from '../d2/d2Instance';
 import programCollection from '../metaDataMemoryStores/programCollection/programCollection';
-import { errorCreator } from 'capture-core-utils';
 import { convertValue } from '../converters/serverToClient';
 import elementTypes from '../metaData/DataElement/elementTypes';
 import { getSubValues } from './getSubValues';
@@ -65,6 +65,7 @@ const mapEventInputKeyToOutputKey = {
 function getConvertedValue(valueToConvert: any, inputKey: string) {
     let convertedValue;
     if (inputKey === 'eventDate' || inputKey === 'dueDate' || inputKey === 'completedDate') {
+        // $FlowFixMe[prop-missing] automated comment
         convertedValue = convertValue(valueToConvert, elementTypes.DATE);
     } else {
         convertedValue = valueToConvert;
@@ -78,9 +79,11 @@ function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
             if (inputKey !== 'dataValues' && inputKey !== 'assignedUserUsername') {
                 const valueToConvert = apiEvent[inputKey];
                 const convertedValue = getConvertedValue(valueToConvert, inputKey);
-                // $FlowSuppress
+
+                // $FlowFixMe[prop-missing] automated comment
                 const outputKey = mapEventInputKeyToOutputKey[inputKey] || inputKey;
-                // $FlowSuppress
+
+                // $FlowFixMe[incompatible-return] automated comment
                 accEvent[outputKey] = convertedValue;
             }
             return accEvent;

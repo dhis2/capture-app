@@ -16,12 +16,12 @@ type State = {
 }
 
 class MenuPopper extends React.Component<Props, State> {
+    managerRef: (instance: any) => void;
+    menuReferenceInstance: ?HTMLDivElement;
+
     static defaultProps = {
         placement: 'bottom-end',
     }
-
-    managerRef: (instance: any) => void;
-    menuReferenceInstance: ?HTMLDivElement;
 
     constructor(props: Props) {
         super(props);

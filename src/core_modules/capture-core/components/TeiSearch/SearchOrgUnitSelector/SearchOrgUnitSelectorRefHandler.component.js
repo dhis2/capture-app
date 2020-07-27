@@ -9,6 +9,7 @@ type Props = {
 const SearchOrgUnitSelectorRefHandler = (props: Props) => {
     const { innerRef, ...passOnProps } = props;
     return (
+        // $FlowFixMe[cannot-spread-inexact] automated comment
         <SearchOrgUnitSelector
             ref={innerRef}
             {...passOnProps}

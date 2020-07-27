@@ -1,18 +1,16 @@
 // Fields
-export { default as AgeField } from './AgeField/AgeField.component';
 export { default as BooleanField } from './BooleanField/BooleanField.component';
-export { default as CoordinateField } from './CoordinateField/CoordinateField.component';
 export { default as DateField } from './DateAndTimeFields/DateField/Date.component';
+export { default as DateRangeField } from './DateAndTimeFields/DateRangeField/DateRangeField.component';
 export { default as DateTimeField } from './DateAndTimeFields/DateTimeField/DateTime.component';
-export { default as PolygonField } from './PolygonField/PolygonField.component';
+export { default as DateTimeRangeField } from './DateAndTimeFields/DateTimeRangeField/DateTimeRange.component';
 export { default as SelectionBoxes } from './SelectionBoxes/SelectionBoxes.component';
 export { default as TextField } from './TextField/TextField.component';
+export { default as TextInput } from './internal/TextInput/TextInput.component';
 export { default as TextFieldPlain } from './internal/TextInput/TextInput.component';
 export { default as TrueOnlyField } from './TrueOnlyField/TrueOnlyField.component';
 export { default as DebounceField } from './DebounceField/DebounceField.component';
 export { default as TextRangeField } from './TextField/TextRangeField.component';
-export { default as DateRangeField } from './DateAndTimeFields/DateRangeField/DateRangeField.component';
-export { default as DateTimeRangeField } from './DateAndTimeFields/DateTimeRangeField/DateTimeRange.component';
 
 // Field constants
 export { default as orientations } from './constants/orientations.const';
@@ -27,7 +25,6 @@ export { default as withTextFieldFocusHandler } from './internal/TextInput/withF
 // Datatable
 export { default as Body } from './DataTable/Body.component';
 export { default as Cell } from './DataTable/Cell.component';
-export { default as Footer } from './DataTable/Footer.component';
 export { default as Head } from './DataTable/Head.component';
 export { default as HeaderCell } from './DataTable/HeaderCell.component';
 export { default as Pagination } from './DataTable/Pagination.component';
@@ -44,6 +41,7 @@ export { default as DividerHorizontal } from './Divider/DividerHorizontal.compon
 export { default as Button } from './Buttons/Button.component';
 
 // Icons
+export { default as AddLocationIcon } from './Icons/AddLocationIcon.component';
 export { default as MultiSelectionCheckedIcon } from './Icons/MultiSelectionCheckedIcon.component';
 export { default as MultiSelectionUncheckedIcon } from './Icons/MultiSelectionUncheckedIcon.component';
 export { default as SingleSelectionCheckedIcon } from './Icons/SingleSelectionCheckedIcon.component';

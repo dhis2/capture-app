@@ -63,6 +63,7 @@ const Input = (props: Props) => {
     }, [onExitSearch, suggestionName]);
 
     return (
+        // $FlowFixMe[cannot-spread-inexact] automated comment
         <FocusableDebounceField
             name={inputName}
             inputRef={inputDomRef}

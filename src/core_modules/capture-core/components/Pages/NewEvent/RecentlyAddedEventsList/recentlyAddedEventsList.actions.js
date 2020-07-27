@@ -6,5 +6,6 @@ export const actionTypes = {
         'newRecentlyAddedEvent',
 };
 
+// $FlowFixMe[missing-annot] automated comment
 export const newRecentlyAddedEvent = (event, eventValues) =>
     actionCreator(actionTypes.NEW_RECENTLY_ADDED_EVENT)({ event, eventValues });

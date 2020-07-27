@@ -9,5 +9,5 @@ export const makeProgramStageIdSelector = () => createSelector(
     (programId) => {
         const eventProgram = getEventProgramThrowIfNotFound(programId);
         return eventProgram.stage.id;
-    }
+    },
 );

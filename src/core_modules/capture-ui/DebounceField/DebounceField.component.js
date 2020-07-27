@@ -54,6 +54,7 @@ class DebounceField extends React.Component<Props, State> {
         const { onDebounced, value, ...passOnProps } = this.props;
         const { value: stateValue } = this.state;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <TextInput
                 onChange={this.handleChange}
                 value={stateValue}

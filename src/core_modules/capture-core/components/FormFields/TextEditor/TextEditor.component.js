@@ -1,5 +1,4 @@
 // @flow
-
 import * as React from 'react';
 import RichTextEditor from 'react-rte';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -12,7 +11,6 @@ type Props = {
     onChange?: ?(value: string) => void,
     onBlur?: ?(value: ?string) => void,
     format: string,
-    value?: ?string,
     containerClassName?: ?string,
     classes: {
         textEditor: string,
@@ -59,6 +57,7 @@ class TextEditor extends React.Component<Props, State> {
 
     updateStateFromProps = (props) => {
         const editorStringValue = this.getStringValue();
+        // $FlowFixMe[prop-missing] automated comment
         const { value, format } = props;
         const formattedValue = value || '';
         const editorValue = this.state.editorValue;

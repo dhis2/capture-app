@@ -36,11 +36,16 @@ type Props = {
     onChangeCollapseState?: ?() => void,
     isCollapsed?: ?boolean,
     extendedCollapsibility?: boolean,
+    isCollapseButtonEnabled?: boolean,
     classes: Object
 };
 
 class SectionHeaderSimple extends Component<Props> {
     handleChangeCollapse: () => void;
+
+    static defaultProps = {
+        isCollapseButtonEnabled: true,
+    };
 
     constructor(props: Props) {
         super(props);
@@ -48,7 +53,7 @@ class SectionHeaderSimple extends Component<Props> {
     }
 
     handleChangeCollapse() {
-        // $FlowSuppress
+        // $FlowFixMe[not-a-function] automated comment
         this.props.onChangeCollapseState();
     }
 
@@ -80,10 +85,11 @@ class SectionHeaderSimple extends Component<Props> {
                             if (onChangeCollapseState) {
                                 return (
                                     <IconButton
+                                        disabled={!this.props.isCollapseButtonEnabled}
                                         title={this.props.isCollapsed ? 'Åpne' : 'Lukk'}
                                         onClick={this.handleChangeCollapse}
                                     >
-                                        {this.props.isCollapsed ? <KeyboardArrowDown/> : <KeyboardArrowUp/>}
+                                        {this.props.isCollapsed ? <KeyboardArrowDown /> : <KeyboardArrowUp />}
                                     </IconButton>
                                 );
                             }

@@ -15,14 +15,15 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
     class CalendarPropsHOC extends React.Component<Props> {
         static convertValueIntoCalendar(inputValue: ?string) {
             if (!inputValue) {
-                return null;
+                return new Date();
             }
 
             const parseData = parseDate(inputValue);
             if (!parseData.isValid) {
-                return null;
+                return new Date();
             }
-            // $FlowSuppress
+
+            // $FlowFixMe[incompatible-use] automated comment
             return parseData.momentDate.toDate();
         }
 
@@ -55,6 +56,7 @@ export default () => (InnerComponent: React.ComponentType<any>) =>
         render() {
             const { theme, ...passOnProps } = this.props;
             return (
+                // $FlowFixMe
                 <InnerComponent
                     calendarTheme={this.calendarTheme}
                     calendarLocale={this.calendarLocaleData}

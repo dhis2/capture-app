@@ -5,16 +5,33 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-06-08T15:14:01.107Z\n"
-"PO-Revision-Date: 2020-06-08T15:14:01.107Z\n"
+"POT-Creation-Date: 2020-07-24T09:29:42.067Z\n"
+"PO-Revision-Date: 2020-07-24T09:29:42.067Z\n"
 
-msgid "Please provide a valid date"
+msgid "Choose one or more dates..."
+msgstr ""
+
+msgid "Choose a date..."
+msgstr ""
+
+msgid "Today"
+msgstr ""
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
 msgstr ""
 
 msgid "Columns to show in table"
 msgstr ""
 
 msgid "Column"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Set coordinate"
 msgstr ""
 
 msgid "This value is validating"
@@ -39,6 +56,9 @@ msgid "Please provide zero or a positive integer"
 msgstr ""
 
 msgid "Please provide a negative integer"
+msgstr ""
+
+msgid "Please provide a valid date"
 msgstr ""
 
 msgid "A date in the future is not allowed"
@@ -93,9 +113,6 @@ msgid "A future date is not allowed"
 msgstr ""
 
 msgid "An error has occured. See log for details"
-msgstr ""
-
-msgid "Cancel"
 msgstr ""
 
 msgid "Unsaved changes"
@@ -197,9 +214,6 @@ msgstr ""
 msgid "To"
 msgstr ""
 
-msgid "Today"
-msgstr ""
-
 msgid "This week"
 msgstr ""
 
@@ -231,6 +245,12 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
+msgstr ""
+
+msgid "error encountered during field validation"
+msgstr ""
+
+msgid "error"
 msgstr ""
 
 msgid "mm/dd/yyyy"
@@ -269,6 +289,12 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+msgid "Delete polygon"
+msgstr ""
+
+msgid "Set area"
+msgstr ""
+
 msgid "Clear"
 msgstr ""
 
@@ -278,10 +304,64 @@ msgstr ""
 msgid "suggestions could not be retrieved"
 msgstr ""
 
-msgid "search for username"
+msgid "No items to display"
 msgstr ""
 
-msgid "No items to display"
+msgid "Could not get organisation unit"
+msgstr ""
+
+msgid "Program doesn't exist"
+msgstr ""
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr ""
+
+msgid "New {{typeName}}"
+msgstr ""
+
+msgid "New"
+msgstr ""
+
+msgid "Start again"
+msgstr ""
+
+msgid "Find"
+msgstr ""
+
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Accept"
+msgstr ""
+
+msgid "Registering Organisation Unit"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Selected Program"
+msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Show all"
+msgstr ""
+
+msgid "Program"
+msgstr ""
+
+msgid "Select program"
+msgstr ""
+
+msgid "No programs available."
 msgstr ""
 
 msgid "Online"
@@ -431,15 +511,6 @@ msgstr ""
 msgid "Completed"
 msgstr ""
 
-msgid "Could not get organisation unit"
-msgstr ""
-
-msgid "Program doesn't exist"
-msgstr ""
-
-msgid "Selected program is invalid for registering unit"
-msgstr ""
-
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
@@ -467,9 +538,6 @@ msgstr ""
 msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
-msgstr ""
-
-msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "Assigned user"
@@ -584,15 +652,6 @@ msgstr ""
 msgid "Save as new {{tetName}}"
 msgstr ""
 
-msgid "Some programs are being filtered."
-msgstr ""
-
-msgid "Show all"
-msgstr ""
-
-msgid "Program"
-msgstr ""
-
 msgid "Organisation Unit"
 msgstr ""
 
@@ -626,6 +685,18 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
+msgid "Search {{name}}"
+msgstr ""
+
+msgid "Make a selection to start searching"
+msgstr ""
+
+msgid "View dashboard"
+msgstr ""
+
+msgid "result(s) found for term(s)"
+msgstr ""
+
 msgid "You dont have access to edit this event"
 msgstr ""
 
@@ -644,45 +715,6 @@ msgid "Event assigned to {{name}}"
 msgstr ""
 
 msgid "Feedbacks"
-msgstr ""
-
-msgid "New {{typeName}}"
-msgstr ""
-
-msgid "New"
-msgstr ""
-
-msgid "Start again"
-msgstr ""
-
-msgid "Find"
-msgstr ""
-
-msgid "Selected registering unit"
-msgstr ""
-
-msgid "Start Again"
-msgstr ""
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
-
-msgid "Accept"
-msgstr ""
-
-msgid "Registering Organisation Unit"
-msgstr ""
-
-msgid "Select"
-msgstr ""
-
-msgid "Selected Program"
-msgstr ""
-
-msgid "Select program"
-msgstr ""
-
-msgid "No programs available."
 msgstr ""
 
 msgid "You dont have access to delete this relationship"
@@ -745,9 +777,6 @@ msgstr ""
 msgid "tracked entity instance"
 msgstr ""
 
-msgid "Set coordinate"
-msgstr ""
-
 msgid "Date"
 msgstr ""
 
@@ -766,34 +795,11 @@ msgstr ""
 msgid "To time"
 msgstr ""
 
-msgid "error encountered during field validation"
-msgstr ""
-
-msgid "error"
-msgstr ""
-
-msgid "Delete polygon"
-msgstr ""
-
-msgid "Set area"
-msgstr ""
-
 msgid ""
 "You opened another version of the Capture App in the same domain. "
 "Currently, the Capture App only supports running one version concurrently "
 "(in the same domain). Please refresh this page if you would like to use "
 "this version again, but be aware that this will close other versions."
-msgstr ""
-
-msgid "Choose one or more dates..."
-msgstr ""
-
-msgid "Choose a date..."
-msgstr ""
-
-msgid ""
-"A possible reason for this is that the browser or mode (e.g. privacy mode) "
-"is not supported. See log for details."
 msgstr ""
 
 msgid "Compatibility mode"

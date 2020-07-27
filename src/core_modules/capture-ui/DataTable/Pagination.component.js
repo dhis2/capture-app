@@ -53,6 +53,10 @@ class Pagination extends React.Component<Props> {
         );
     }
 
+    static defaultProps = {
+        onGetLabelDisplayedRows: (a: number, b: number) => `${a} of ${b}`,
+    };
+
     render() {
         const {
             rowsCount,

@@ -23,6 +23,7 @@ export const sortWorkingList =
     (listId: string, id: string, direction: string) => actionCreator(actionTypes.SORT_WORKING_LIST)({ listId, id, direction });
 
 export const workingListUpdating = (listId: string) => actionCreator(actionTypes.WORKING_LIST_UPDATING)({ listId });
+// todo not used!
 export const workingListUpdatingWithDialog =
     (listId: string) => actionCreator(actionTypes.WORKING_LIST_UPDATING_WITH_DIALOG)({ listId });
 
@@ -33,7 +34,7 @@ export const openViewEventPage =
     (eventId: string) => actionCreator(actionTypes.OPEN_VIEW_EVENT_PAGE)(eventId);
 
 export const requestDeleteEvent = (eventId: string) => actionCreator(actionTypes.REQUEST_DELETE_EVENT)({ eventId });
-
+// todo not used!
 export const startDeleteEvent = (eventId: string) =>
     actionCreator(actionTypes.START_DELETE_EVENT)({}, {
         offline: {

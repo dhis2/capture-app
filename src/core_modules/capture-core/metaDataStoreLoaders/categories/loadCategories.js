@@ -1,8 +1,13 @@
 /* eslint-disable no-await-in-loop */
 // @flow
-import StorageController from 'capture-core-utils/storage/StorageController';
 import { chunk } from 'capture-core-utils';
-import { getApi } from '../../d2/d2Instance';
+import { getContext } from '../context';
+import { query } from '../IOUtils';
+
+type QueryVariables = {
+    page: number,
+    pageSize: number,
+};
 
 type InputCategory = {
     id: string,
@@ -17,21 +22,12 @@ type ApiCategoryOption = {
     access: Object,
 };
 
-type Specification = {
-    modelName: string,
-    queryParams: Object,
-};
-
-async function requestCategoryOptions(specification: Specification, pageNr: number, pageSize: number) {
-    specification.queryParams = {
-        ...specification.queryParams,
-        page: pageNr,
-        pageSize,
+async function requestCategoryOptions(querySpec: Object, page: number, pageSize: number) {
+    const response = await query(querySpec, { page, pageSize });
+    return {
+        hasNextPage: !!(response && response.pager && response.pager.nextPage),
+        categoryOptions: (response && response.categoryOptions) || [],
     };
-
-    const categoryOptions = await getApi().get(specification.modelName, { ...specification.queryParams })
-        .then(response => response && response.categoryOptions);
-    return categoryOptions || [];
 }
 
 function addOptionsByCategory(
@@ -54,18 +50,18 @@ function addOptionsByCategory(
     }, prevOptionsByCategory);
 }
 
-function getCategoryOptionSpec(ids: Array<string>) {
+function getCategoryOptionQuery(categoryIds: Array<string>) {
     return {
-        modelName: 'categoryOptions',
-        queryParams: {
+        resource: 'categoryOptions',
+        params: (variables: QueryVariables) => ({
             fields: 'id,displayName,categories~pluck, organisationUnits~pluck, access[*]',
             filter: [
-                `categories.id:in:[${ids.toString()}]`,
+                `categories.id:in:[${categoryIds.join(',')}]`,
                 'access.data.read:in:[true]',
             ],
-            paging: true,
-            totalPages: false,
-        },
+            page: variables.page,
+            pageSize: variables.pageSize,
+        }),
     };
 }
 
@@ -86,94 +82,75 @@ function buildCacheCategoryOptions(
 
 async function loadCategoryOptionsBatchAsync(
     page: number,
-    categoryOptionsSpec: Object,
+    categoryOptionsQuery: Object,
     categoryIds: Array<string>,
-    bachSize: number,
-    storageController: StorageController,
-    storeName: string,
+    batchSize: number,
     prevOptionsByCategory: Object,
 ) {
-    const categoryOptions = await requestCategoryOptions(categoryOptionsSpec, page, bachSize);
+    const { categoryOptions, hasNextPage } = await requestCategoryOptions(categoryOptionsQuery, page, batchSize);
     const optionsByCategory = addOptionsByCategory(categoryOptions, categoryIds, prevOptionsByCategory);
     const categoryOptionsToStore = buildCacheCategoryOptions(categoryOptions);
-    await storageController.setAll(storeName, categoryOptionsToStore);
+
+    const { storageController, storeNames } = getContext();
+    await storageController.setAll(storeNames.CATEGORY_OPTIONS, categoryOptionsToStore);
 
     return {
-        retrievedCount: categoryOptions.length,
+        hasNextPage,
         optionsByCategory,
     };
 }
 
-// This might look like horrible code!, but there is a reason. Freeing up memory is the most important thing here, ref JIRA-issue DHIS2-7259
-async function loadCategoryOptionsInBatchesAsync(
-    categoryIds: Array<string>,
-    storageController: StorageController,
-    stores: {
-        categoryOptionsByCategory: string,
-        categoryOptions: string,
-    },
-) {
-    const categoryOptionsSpec = getCategoryOptionSpec(categoryIds);
+async function loadCategoryOptionsInBatchesAsync(categoryIds: Array<string>) {
+    const categoryOptionsQuery = getCategoryOptionQuery(categoryIds);
 
     const batchSize = 5000;
     let page = 0;
-    let retrievedCount;
+    let hasNextPage;
     let optionsByCategory = {};
     do {
         page += 1;
-        ({ retrievedCount, optionsByCategory } =
+        ({ hasNextPage, optionsByCategory } =
             await loadCategoryOptionsBatchAsync(
                 page,
-                categoryOptionsSpec,
+                categoryOptionsQuery,
                 categoryIds,
                 batchSize,
-                storageController,
-                stores.categoryOptions,
                 optionsByCategory,
             ));
-    } while (batchSize === retrievedCount);
+    } while (hasNextPage);
 
     // save optionsByCategory
+    const { storageController, storeNames } = getContext();
     const optionsByCategoryToStore = Object
         .keys(optionsByCategory)
         .map(cId => ({
             id: cId,
             options: optionsByCategory[cId],
         }));
-    await storageController.setAll(stores.categoryOptionsByCategory, optionsByCategoryToStore);
+    await storageController.setAll(storeNames.CATEGORY_OPTIONS_BY_CATEGORY, optionsByCategoryToStore);
 }
 
 async function setCategoriesAsync(
     categories: Array<Object>,
-    storageController: StorageController,
-    storeName: string,
 ) {
-    return storageController.setAll(storeName, categories);
+    const { storageController, storeNames } = getContext();
+    return storageController.setAll(storeNames.CATEGORIES, categories);
 }
 
-export default async function loadCategories(
-    storageController: StorageController,
-    inputCategories: Array<InputCategory>,
-    stores: {
-        categories: string,
-        categoryOptionsByCategory: string,
-        categoryOptions: string,
-    },
+/**
+ * Retrieve and store categories and the underlying category options based on the unique categories argument.
+ * The unique categories input is determined from the stale programs (programs where the program version has changed).
+ * We chunk the categories in chunks of smaller sizes in order to comply with a potential url path limit and
+ * to improve performance, mainly by reducing memory consumption on both the client and the server.
+ */
+export async function loadCategories(
+    uniqueCategories: Array<InputCategory>,
 ) {
-    const uniqueCategories = [
-        ...new Map(
-            inputCategories.map(ic => [ic.id, ic]),
-        ).values(),
-    ];
+    await setCategoriesAsync(uniqueCategories);
 
-    await setCategoriesAsync(uniqueCategories, storageController, stores.categories);
-
-    const uniqueCateogryIds = uniqueCategories.map(uc => uc.id);
-    const categoryIdBatches = chunk(uniqueCateogryIds, 50);
+    const uniqueCategoryIds = uniqueCategories.map(uc => uc.id);
+    const categoryIdBatches = chunk(uniqueCategoryIds, 50);
     await categoryIdBatches
-        .asyncForEach(idBatch =>
-            loadCategoryOptionsInBatchesAsync(idBatch, storageController, {
-                categoryOptionsByCategory: stores.categoryOptionsByCategory,
-                categoryOptions: stores.categoryOptions,
-            }));
+        // $FlowFixMe[prop-missing] automated comment
+        .asyncForEach(idBatch => loadCategoryOptionsInBatchesAsync(idBatch));
 }

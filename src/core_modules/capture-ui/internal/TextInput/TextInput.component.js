@@ -21,12 +21,14 @@ const TextInput = (props: Props) => {
         <React.Fragment>
             {
                 multiLine ?
+                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <textarea
                         data-test="capture-ui-textarea"
                         ref={inputRef}
                         className={classNames(defaultClasses.textArea, classes.input)}
                         {...passOnProps}
                     /> :
+                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <input
                         data-test="capture-ui-input"
                         ref={inputRef}

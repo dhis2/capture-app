@@ -19,7 +19,7 @@ export const openDataEntryForNewTeiBatchAsync = async (
     generatedUniqueValuesCache: Object = {},
 ) => {
     const generatedItemContainers = await
-        getGeneratedUniqueValuesAsync(foundation, generatedUniqueValuesCache, { orgUnitCode: orgUnit.code });
+    getGeneratedUniqueValuesAsync(foundation, generatedUniqueValuesCache, { orgUnitCode: orgUnit.code });
     const dataEntryActions = loadNewDataEntry(
         dataEntryId,
         itemId,

@@ -64,10 +64,12 @@ class EventDetailsSection extends Component<Props> {
         return (
             <div className={classes.dataEntryContainer}>
                 {showEditEvent ?
+                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <EditEventDataEntry
                         formFoundation={formFoundation}
                         {...passOnProps}
                     /> :
+                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <ViewEventDataEntry
                         formFoundation={formFoundation}
                         {...passOnProps}

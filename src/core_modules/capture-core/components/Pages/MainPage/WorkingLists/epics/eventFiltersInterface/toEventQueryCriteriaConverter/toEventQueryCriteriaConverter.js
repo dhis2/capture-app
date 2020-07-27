@@ -27,11 +27,9 @@ import type {
 } from '../../../workingLists.types';
 
 
-const getTextFilter = (filter: TextFilterData ): ApiDataFilterText => {
-    return {
-        like: filter.value,
-    };
-};
+const getTextFilter = (filter: TextFilterData): ApiDataFilterText => ({
+    like: filter.value,
+});
 
 const getNumericFilter = (filter: NumericFilterData): ApiDataFilterNumeric => ({
     ge: filter.ge ? filter.ge.toString() : undefined,
@@ -73,15 +71,25 @@ const getAssigneeFilter = (filter: AssigneeFilterData): ApiDataFilterAssignee =>
 });
 
 const getFilterByType = {
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.TEXT]: getTextFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.NUMBER]: getNumericFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER]: getNumericFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_POSITIVE]: getNumericFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_NEGATIVE]: getNumericFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATE]: getDateFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.BOOLEAN]: getBooleanFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.TRUE_ONLY]: getTrueOnlyFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.ASSIGNEE]: getAssigneeFilter,
 };
 
@@ -143,26 +151,25 @@ const getMainFilter = (filter: Object): Object => {
     return mainValue;
 };
 
-const buildMainAndDataFilters = (apiFilters: Array<Object>, defaultSpecs: Map<string, Object>) => {
-    return apiFilters
-        .reduce((acc, filter) => {
-            const element = defaultSpecs.get(filter.dataItem);
-            // $FlowSuppress
-            if (element.isMainProperty) {
-                const mainFilter = getMainFilter(filter);
-                const filters = {
-                    ...acc,
-                    ...mainFilter,
-                };
-                return filters;
-            }
+const buildMainAndDataFilters = (apiFilters: Array<Object>, defaultSpecs: Map<string, Object>) => apiFilters
+    .reduce((acc, filter) => {
+        const element = defaultSpecs.get(filter.dataItem);
 
-            acc.dataFilters.push(filter);
-            return acc;
-        }, {
-            dataFilters: [],
-        });
-};
+        // $FlowFixMe[incompatible-type] automated comment
+        if (element.isMainProperty) {
+            const mainFilter = getMainFilter(filter);
+            const filters = {
+                ...acc,
+                ...mainFilter,
+            };
+            return filters;
+        }
+
+        acc.dataFilters.push(filter);
+        return acc;
+    }, {
+        dataFilters: [],
+    });
 
 const getOrder = (sortById: string, sortByDirection: string) => `${sortById}:${sortByDirection}`;
 
@@ -172,9 +179,13 @@ const getColumnsOrder = (columns: Array<ColumnConfig>) =>
         .map(column => column.apiName || column.id);
 
 export function convertToEventQueryCriteria({
+    // $FlowFixMe[prop-missing] automated comment
     filters: listFilters,
+    // $FlowFixMe[prop-missing] automated comment
     sortById: listSortById,
+    // $FlowFixMe[prop-missing] automated comment
     sortByDirection: listSortByDirection,
+    // $FlowFixMe[prop-missing] automated comment
     columnOrder: listColumns,
     defaultConfig,
 }: {

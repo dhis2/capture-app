@@ -102,15 +102,23 @@ class OfflineList extends Component<Props> {
         rowIdKey: 'id',
     };
     static typesWithAscendingInitialDirection = [
+        // todo (report lgmt)
+        // $FlowFixMe[prop-missing] automated comment
         elementTypes.TEXT,
+        // $FlowFixMe[prop-missing] automated comment
         elementTypes.LONG_TEXT,
     ];
 
     static typesWithRightPlacement = [
+        // $FlowFixMe[prop-missing] automated comment
         elementTypes.NUMBER,
+        // $FlowFixMe[prop-missing] automated comment
         elementTypes.INTEGER,
+        // $FlowFixMe[prop-missing] automated comment
         elementTypes.INTEGER_POSITIVE,
+        // $FlowFixMe[prop-missing] automated comment
         elementTypes.INTEGER_NEGATIVE,
+        // $FlowFixMe[prop-missing] automated comment
         elementTypes.INTEGER_ZERO_OR_POSITIVE,
     ];
 
@@ -204,9 +212,6 @@ class OfflineList extends Component<Props> {
                 );
             });
     }
-
-    getPaginationLabelDisplayedRows =
-        (fromToLabel: string, totalLabel: string) => `${fromToLabel} of ${totalLabel}`
 
     render() {
         const { dataSource, columns, classes } = this.props; //eslint-disable-line

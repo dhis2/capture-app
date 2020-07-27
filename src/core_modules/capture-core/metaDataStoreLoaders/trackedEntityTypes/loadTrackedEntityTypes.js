@@ -1,60 +1,58 @@
 // @flow
-import StorageController from 'capture-core-utils/storage/StorageController';
-import { metaTrackedEntityTypesApiSpecification, trackedEntityTypesApiSpecification } from '../../api';
-import getTrackedEntityTypesLoadSpecification
-    from '../../apiToStore/loadSpecifications/getTrackedEntityTypesLoadSpecification';
+import { chunk } from 'capture-core-utils';
+import { queryTrackedEntityTypesOutline } from './queries';
+import { storeTrackedEntityTypes } from './quickStoreOperations';
 
-function getOptionSetsMeta(trackedEntityTypesMeta) {
-    if (!trackedEntityTypesMeta) {
-        return [];
-    }
+const loadTrackedEntityTypesBatch = async (idBatch: Array<string>) => {
+    const { convertedData: loadedTrackedEntityTypes = [] } = await storeTrackedEntityTypes(idBatch);
+    return loadedTrackedEntityTypes
+        .map(trackedEntityType => ({
+            trackedEntityTypeAttributes: trackedEntityType.trackedEntityTypeAttributes,
+        }));
+};
 
-    const optionSetsMeta = trackedEntityTypesMeta.reduce((accOptionSetsMeta, type) => {
-        const optionSetsMetaForType = type.trackedEntityTypeAttributes &&
-            type.trackedEntityTypeAttributes.reduce((accOptionSetsMetaForType, TETA) => {
-                if (TETA.trackedEntityAttribute && TETA.trackedEntityAttribute.optionSet) {
-                    accOptionSetsMetaForType.push(TETA.trackedEntityAttribute.optionSet);
-                }
-                return accOptionSetsMetaForType;
-            }, []);
+const getSideEffects = (() => {
+    const getOptionSetsOutline = (trackedEntityTypesOutline): Array<Object> =>
+        trackedEntityTypesOutline
+            .flatMap(trackedEntityTypeOutline =>
+                trackedEntityTypeOutline.trackedEntityTypeAttributes
+                    .map(trackedEntityTypeAttribute =>
+                        trackedEntityTypeAttribute.trackedEntityAttribute &&
+                        trackedEntityTypeAttribute.trackedEntityAttribute.optionSet)
+                    .filter(optionSet => optionSet),
+            );
 
-        if (optionSetsMetaForType) {
-            accOptionSetsMeta = [...accOptionSetsMeta, ...optionSetsMetaForType];
-        }
+    const getTrackedEntityAttributeIds = (trackedEntityTypes: Array<Object>): Array<Object> =>
+        trackedEntityTypes
+            .flatMap(trackedEntityType =>
+                (trackedEntityType.trackedEntityTypeAttributes || [])
+                    .map(trackedEntityTypeAttribute => trackedEntityTypeAttribute.trackedEntityAttributeId)
+                    .filter(trackedEntityAttributeId => trackedEntityAttributeId),
+            );
 
-        return accOptionSetsMeta;
-    }, []);
-    return optionSetsMeta;
-}
-
-
-export default async function loadTrackedEntityTypes(
-    storageController: StorageController,
-    storeName: string,
-) {
-    const trackedEntityTypesMeta = await metaTrackedEntityTypesApiSpecification.get();
-    const optionSetsMeta = getOptionSetsMeta(trackedEntityTypesMeta);
-    const trackedEntityTypesLoadSpecification =
-        getTrackedEntityTypesLoadSpecification(storeName, trackedEntityTypesApiSpecification);
-    const loadedTrackedEntityTypes = await trackedEntityTypesLoadSpecification.load(storageController);
-
-    let trackedEntityAttributeIds = [];
-    if (loadedTrackedEntityTypes) {
-        trackedEntityAttributeIds = loadedTrackedEntityTypes.reduce((accAttributeIds, TET) => {
-            if (TET.trackedEntityTypeAttributes) {
-                const attributeIds = TET
-                    .trackedEntityTypeAttributes
-                    .map(TETA => TETA.trackedEntityAttributeId)
-                    .filter(TEAId => TEAId);
-
-                return [...accAttributeIds, ...attributeIds];
-            }
-            return accAttributeIds;
-        }, trackedEntityAttributeIds);
-    }
-
-    return {
-        trackedEntityAttributeIds,
-        optionSetsMeta,
+    return async (trackedEntityTypes) => {
+        const trackedEntityTypesOutline = await queryTrackedEntityTypesOutline();
+        return {
+            trackedEntityAttributeIds: getTrackedEntityAttributeIds(trackedEntityTypes),
+            optionSetsOutline: getOptionSetsOutline(trackedEntityTypesOutline),
+        };
     };
-}
+})();
+
+/**
+ * Retrieve and store tracked entity types based on the tracked entity type ids argument.
+ * The tracked entity type ids input is determined from the stale programs (programs where the program version has changed).
+ * We chunk the tracked entity type ids in chunks of smaller sizes in order to comply with a potential url path limit and
+ * to improve performance, mainly by reducing memory consumption on both the client and the server.
+ */
+export const loadTrackedEntityTypes = async (
+    trackedEntityTypeIds: Array<string>,
+) => {
+    const idBatches = chunk(trackedEntityTypeIds, 150);
+    const trackedEntityTypesDataForSideEffects = (await Promise.all(
+        idBatches
+            .map(loadTrackedEntityTypesBatch),
+    )).flat(1);
+
+    return getSideEffects(trackedEntityTypesDataForSideEffects);
+};

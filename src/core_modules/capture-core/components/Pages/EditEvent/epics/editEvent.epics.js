@@ -4,7 +4,7 @@ import { push } from 'connected-react-router';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import getErrorMessageAndDetails from '../../../../utils/errors/getErrorMessageAndDetails';
-import getOrganisationUnitApiSpec from '../../../../api/apiSpecifications/organisationUnit.apiSpecificationGetter';
+import { getApi } from '../../../../d2';
 import {
     actionTypes as editEventActionTypes,
     eventFromUrlCouldNotBeRetrieved,
@@ -17,7 +17,8 @@ import { actionTypes as eventListActionTypes } from '../../MainPage/EventsList/e
 import { getEvent } from '../../../../events/eventRequests';
 
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(eventListActionTypes.OPEN_EDIT_EVENT_PAGE)
         .map((action) => {
             const eventId = action.payload;
@@ -34,7 +35,8 @@ export const getEventOpeningFromEventListEpic = (action$: InputObservable, store
         });
 
 export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
+
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(editEventActionTypes.EDIT_EVENT_FROM_URL)
         .switchMap((action) => {
             const eventId = action.payload.eventId;
@@ -59,13 +61,12 @@ export const getEventFromUrlEpic = (action$: InputObservable, store: ReduxStore)
         });
 
 export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
-    // $FlowSuppress
+
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(editEventActionTypes.EVENT_FROM_URL_RETRIEVED)
         .switchMap((action) => {
             const eventContainer = action.payload.eventContainer;
-            return getOrganisationUnitApiSpec(eventContainer.event.orgUnitId)
-                .get()
-                // $FlowSuppress
+            return getApi().get(`organisationUnits/${eventContainer.event.orgUnitId}`)
                 .then(orgUnit => orgUnitRetrievedOnUrlUpdate(orgUnit, eventContainer))
                 .catch((error) => {
                     const { message, details } = getErrorMessageAndDetails(error);
@@ -77,7 +78,8 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
         });
 
 export const openEditPageLocationChangeEpic = (action$: InputObservable) =>
-    // $FlowSuppress
+
+    // $FlowFixMe[prop-missing] automated comment
     action$.ofType(eventListActionTypes.OPEN_EDIT_EVENT_PAGE)
         .map(action =>
             push(`/editEvent/${action.payload}`),

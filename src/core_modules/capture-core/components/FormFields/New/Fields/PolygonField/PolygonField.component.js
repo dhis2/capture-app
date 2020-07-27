@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { PolygonField as UIPolygonField } from 'capture-ui';
 import { Dialog, DialogTitle } from '@material-ui/core';
 import { orientations } from '../../../New';
+import UIPolygonField from './PolygonField/PolygonField.component';
 
 const getStyles = (theme: Theme) => ({
     inputWrapperFocused: {
@@ -48,6 +48,7 @@ class PolygonField extends React.Component<Props> {
     render() {
         const { classes, dialogLabel, ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <UIPolygonField
                 mapDialog={
                     <Dialog

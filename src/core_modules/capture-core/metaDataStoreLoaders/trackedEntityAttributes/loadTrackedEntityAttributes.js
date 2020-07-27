@@ -1,29 +1,25 @@
 // @flow
-import StorageController from 'capture-core-utils/storage/StorageController';
-
 import { chunk } from 'capture-core-utils';
-import trackedEntityAttributesSpec from '../../api/apiSpecifications/trackedEntityAttributes.apiSpecification';
-import getTrackedEntityAttributesLoadSpecification
-    from '../../apiToStore/loadSpecifications/getTrackedEntityAttributesLoadSpecification';
+import { storeTrackedEntityAttributes } from './quickStoreOperations';
 
-const batchSize = 50;
-
-function getTrackedEntityAttributes(ids: Array<number>, store: string, storageController: StorageController) {
-    trackedEntityAttributesSpec.updateQueryParams({
-        filter: `id:in:[${ids.toString()}]`,
-    });
-    return getTrackedEntityAttributesLoadSpecification(store, trackedEntityAttributesSpec).load(storageController);
+function deduplicateArray(array: Array<string>): Array<string> {
+    const uniqueSet = new Set(array);
+    return [...uniqueSet.values()];
 }
 
-export default async function loadTrackedEntityAttributesData(
-    storageController: StorageController,
-    store: string,
-    trackedEntityAttributeIds?: ?Array<string>) {
-    const attributeIdBatches = chunk(trackedEntityAttributeIds, batchSize);
+/**
+ * Retrieve and store tracked entity attributes based on the tracked entity attribute ids argument.
+ * The tracked entity attribute ids input is determined from the stale programs (programs where the program version has changed) and
+ * the stale tracked entity types (tracked entity types based on programs where the program version has changed)
+ * We chunk the tracked entity type attribute ids in chunks of smaller sizes in order to comply with a potential url path limit and
+ * to improve performance, mainly by reducing memory consumption on both the client and the server.
+ */
+export async function loadTrackedEntityAttributes(
+    trackedEntityAttributeIds: Array<string>) {
+    const attributeIdBatches = chunk(deduplicateArray(trackedEntityAttributeIds), 100);
     await Promise.all(
         attributeIdBatches.map(
-            batch =>
-                getTrackedEntityAttributes(batch, store, storageController),
+            ids => storeTrackedEntityAttributes(ids),
         ),
     );
 }

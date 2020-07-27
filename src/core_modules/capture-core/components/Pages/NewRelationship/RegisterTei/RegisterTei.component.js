@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Button } from '../../../Buttons';
 import i18n from '@dhis2/d2-i18n';
+import { Button } from '../../../Buttons';
 import DataEntry from './DataEntry/DataEntry.container';
 import { RegistrationSection } from './RegistrationSection';
 import GeneralOutput from './GeneralOutput/GeneralOutput.container';

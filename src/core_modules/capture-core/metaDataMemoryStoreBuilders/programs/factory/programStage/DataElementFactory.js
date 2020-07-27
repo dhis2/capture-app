@@ -118,6 +118,7 @@ class DataElementFactory {
 
     async _buildDateDataElement(cachedProgramStageDataElement: CachedProgramStageDataElement) {
         const dateDataElement = new DateDataElement();
+        // $FlowFixMe[prop-missing] automated comment
         dateDataElement.type = dataElementTypes.DATE;
         dateDataElement.allowFutureDate = cachedProgramStageDataElement.allowFutureDate;
         await this._setBaseProperties(dateDataElement, cachedProgramStageDataElement);
@@ -137,6 +138,7 @@ class DataElementFactory {
         const dataElementType =
             DataElementFactory._getDataElementType(cachedProgramStageDataElement.dataElement.valueType);
 
+        // $FlowFixMe[prop-missing] automated comment
         return dataElementType === dataElementTypes.DATE ?
             this._buildDateDataElement(cachedProgramStageDataElement) :
             this._buildBaseDataElement(cachedProgramStageDataElement, dataElementType);

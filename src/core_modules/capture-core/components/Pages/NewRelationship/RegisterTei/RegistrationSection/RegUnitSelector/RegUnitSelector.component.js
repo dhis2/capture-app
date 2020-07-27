@@ -53,6 +53,7 @@ class RegUnitSelector extends React.Component<Props> {
     render() {
         const { classes, onUpdateSelectedOrgUnit, programId, ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <ComposedRegUnitSelector
                 labelClass={classes.label}
                 label={i18n.t('Organisation Unit')}
@@ -63,5 +64,4 @@ class RegUnitSelector extends React.Component<Props> {
         );
     }
 }
-// $FlowFixMe
 export default withStyles(getStyles)(RegUnitSelector);

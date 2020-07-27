@@ -17,7 +17,7 @@ const ClearIcon = createSvgIcon(
 
 const getStyles = (theme: Theme) => ({
     button: {
-        backgroundColor: lighten(theme.palette.primary.light, 0.7) + '!important',
+        backgroundColor: `${lighten(theme.palette.primary.light, 0.7)}!important`,
     },
     hovered: {
         backgroundColor: `${lighten(theme.palette.primary.light, 0.4)} !important`,
@@ -91,7 +91,7 @@ class ActiveFilterButton extends React.Component<Props, State> {
     }
 
     render() {
-        const { onChange, onClear, classes, iconClass, title, arrowIconElement, filterValue } = this.props; //eslint-disable-line
+        const { onChange, classes, iconClass, title, arrowIconElement, filterValue } = this.props;
         const isHovered = this.state.isHovered;
         const buttonClasses = classNames(classes.button, { [classes.hovered]: isHovered });
 

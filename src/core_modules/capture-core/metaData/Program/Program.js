@@ -6,6 +6,7 @@ import type { ProgramRule, ProgramRuleVariable } from '../../rules/engine';
 import CategoryCombination from '../CategoryCombinations/CategoryCombination';
 import Icon from '../Icon/Icon';
 import type { Access } from '../Access/Access';
+import ProgramStage from './ProgramStage';
 
 export default class Program {
     static errorMessages = {
@@ -17,6 +18,7 @@ export default class Program {
     _access: Access;
     _name: string;
     _shortName: string;
+    // $FlowFixMe[cannot-resolve-name] automated comment
     _stages: Map<string, ProgramStage>;
     _organisationUnits: Object;
     _categoryCombination: ?CategoryCombination;
@@ -32,7 +34,8 @@ export default class Program {
         initFn && isFunction(initFn) && initFn(this);
     }
 
-    // $FlowSuppress
+
+    // $FlowFixMe[unsupported-syntax] automated comment
     * [Symbol.iterator](): Iterator<ProgramStage> {
         for (const stage of this._stages.values()) {
             yield stage;

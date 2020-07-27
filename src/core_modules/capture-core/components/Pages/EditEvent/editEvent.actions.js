@@ -12,12 +12,6 @@ export const actionTypes = {
     REMOVE_EVENT_NOTE: 'RemoveEventNote',
 };
 
-export const editEventFromUrl = (data: Object) =>
-    actionCreator(actionTypes.EDIT_EVENT_FROM_URL)({
-        eventId: data.nextProps.eventId,
-        page: data.nextPage,
-    });
-
 export const eventFromUrlCouldNotBeRetrieved = (message: string) =>
     actionCreator(actionTypes.EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED)(message);
 

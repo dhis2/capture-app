@@ -26,6 +26,7 @@ export const ConnectedEntity = (props: Props) => {
         );
     }
     return (
+        // $FlowFixMe[prop-missing] automated comment
         <TrackedEntityInstance
             {...passOnProps}
         />

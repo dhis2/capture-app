@@ -77,6 +77,7 @@ class SingleOrgUnitSelectField extends React.Component<Props> {
     renderOrgUnitField = () => {
         const { classes, ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <OrgUnitField
                 onSelectClick={this.onSelectOrgUnit}
                 {...passOnProps}
@@ -89,5 +90,4 @@ class SingleOrgUnitSelectField extends React.Component<Props> {
         return value ? this.renderSelectedOrgUnit(value) : this.renderOrgUnitField();
     }
 }
-// $FlowFixMe
 export default withStyles(getStyles)(SingleOrgUnitSelectField);

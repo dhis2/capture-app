@@ -40,6 +40,7 @@ class RelationshipTrackedEntityInstance extends Component<Props> {
         } = this.props;
         return (
             <div>
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <ConfiguredTei
                     id={DATA_ENTRY_ID}
                     onSave={this.handleSave}
@@ -51,5 +52,4 @@ class RelationshipTrackedEntityInstance extends Component<Props> {
     }
 }
 
-// $FlowFixMe
 export default withTheme()(RelationshipTrackedEntityInstance);

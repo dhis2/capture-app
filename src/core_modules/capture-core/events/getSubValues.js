@@ -10,6 +10,8 @@ import elementTypeKeys from '../metaData/DataElement/elementTypes';
 const GET_SUBVALUE_ERROR = 'Could not get subvalue';
 
 const subValueGetterByElementType = {
+    // todo (report lgmt)
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypeKeys.FILE_RESOURCE]: (value: any, eventId: string, metaElementId: string) => {
         const baseUrl = config.baseUrl;
         return getApi().get(`fileResources/${value}`)
@@ -24,6 +26,7 @@ const subValueGetterByElementType = {
                 return null;
             });
     },
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypeKeys.IMAGE]: (value: any, eventId: string, metaElementId: string) => {
         const baseUrl = config.baseUrl;
         return getApi().get(`fileResources/${value}`)
@@ -38,6 +41,7 @@ const subValueGetterByElementType = {
                 return null;
             });
     },
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypeKeys.ORGANISATION_UNIT]: (value: any, eventId: string, metaElementId: string) => {
         const ouIds = value.split('/');
         const id = ouIds[ouIds.length - 1];
@@ -68,7 +72,7 @@ export async function getSubValues(eventId: string, programStage: RenderFoundati
 
     return Object.keys(values).reduce(async (accValuesPromise, metaElementId) => {
         const accValues = await accValuesPromise;
-        // $FlowSuppress
+
         const value = values[metaElementId];
         const metaElement = elementsById[metaElementId];
         if (isDefined(value) && value !== null && metaElement) {
