@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-07-24T09:29:42.067Z\n"
-"PO-Revision-Date: 2020-07-24T09:29:42.067Z\n"
+"POT-Creation-Date: 2020-07-27T07:26:18.623Z\n"
+"PO-Revision-Date: 2020-07-27T07:26:18.623Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -32,6 +32,12 @@ msgid "Cancel"
 msgstr ""
 
 msgid "Set coordinate"
+msgstr ""
+
+msgid "error encountered during field validation"
+msgstr ""
+
+msgid "error"
 msgstr ""
 
 msgid "This value is validating"
@@ -245,12 +251,6 @@ msgid "Contains text"
 msgstr ""
 
 msgid "Yes"
-msgstr ""
-
-msgid "error encountered during field validation"
-msgstr ""
-
-msgid "error"
 msgstr ""
 
 msgid "mm/dd/yyyy"
