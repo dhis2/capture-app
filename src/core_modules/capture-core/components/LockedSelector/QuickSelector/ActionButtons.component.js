@@ -83,7 +83,7 @@ class ActionButtons extends Component<Props> {
                     onClick={this.handleNewClick}
                 >
                     <AddIcon
-                        data-test="new-event-button"
+                        data-test="dhis2-capture-new-event-button"
                         className={classes.icon}
                     />
                     {this.getButtonText()}

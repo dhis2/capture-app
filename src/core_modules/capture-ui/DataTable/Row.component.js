@@ -27,7 +27,7 @@ const Row = (props: Props, context: { table?: ?{ head: boolean, footer: boolean 
         // $FlowFixMe[cannot-spread-inexact] automated comment
         <tr
             className={classes}
-            data-test="table-row"
+            data-test="dhis2-capture-table-row"
             {...passOnProps}
         >
             {props.children}
