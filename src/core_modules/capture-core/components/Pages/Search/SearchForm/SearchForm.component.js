@@ -136,7 +136,7 @@ const Index = ({
                                                 searchScope,
                                             )}
                                         >
-                                        Find by {name}
+                                            Find by {name}
                                         </Button>
                                     </div>
                                 </Section>
@@ -152,24 +152,24 @@ const Index = ({
                         const searchByText = i18n.t('Search by attributes');
                         return (
                             <div data-test="dhis2-capture-form-attributes">
-                            <Section
-                                className={classes.searchDomainSelectorSection}
-                                header={
-                                    <SectionHeaderSimple
-                                        containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
-                                        title={searchByText}
-                                    />
-                                }
-                            >
-                                <div className={classes.searchRow}>
-                                    <div className={classes.searchRowSelectElement}>
-                                        {
-                                            forms[formId] &&
-                                            <Form
-                                                formFoundation={searchForm}
-                                                id={formId}
-                                            />
-                                        }
+                                <Section
+                                    className={classes.searchDomainSelectorSection}
+                                    header={
+                                        <SectionHeaderSimple
+                                            containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
+                                            title={searchByText}
+                                        />
+                                    }
+                                >
+                                    <div className={classes.searchRow}>
+                                        <div className={classes.searchRowSelectElement}>
+                                            {
+                                                forms[formId] &&
+                                                <Form
+                                                    formFoundation={searchForm}
+                                                    id={formId}
+                                                />
+                                            }
                                         </div>
                                     </div>
                                     <div className={classes.searchButtonContainer}>
@@ -183,10 +183,10 @@ const Index = ({
                                                 searchScope,
                                                 minAttributesRequiredToSearch,
                                             )
-                                        }
-                                    >
-                                        {searchByText}
-                                    </Button>
+                                            }
+                                        >
+                                            {searchByText}
+                                        </Button>
                                         <div className={error ? classes.textError : classes.textInfo}>
                                             Fill in at least {minAttributesRequiredToSearch}  attributes to search
                                         </div>
