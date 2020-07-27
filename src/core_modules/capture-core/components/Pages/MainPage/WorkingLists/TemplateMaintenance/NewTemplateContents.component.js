@@ -54,7 +54,7 @@ const NewTemplateContents = (props: Props) => {
                     className={classes.input}
                     label={i18n.t('View name')}
                     error={!!error}
-                    dataTest={'view-name'}
+                    dataTest="view-name"
                     initialFocus
                     required
                     name="viewName"
