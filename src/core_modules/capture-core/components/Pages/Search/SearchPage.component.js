@@ -4,7 +4,8 @@ import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper/Paper';
 import withStyles from '@material-ui/core/styles/withStyles';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import { useSelector, shallowEqual } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { isEqual } from 'lodash';
 import {
     SingleSelect,
     SingleSelectOption,
@@ -16,7 +17,12 @@ import {
     Button,
 } from '@dhis2/ui-core';
 import { LockedSelector } from '../../LockedSelector';
-import type { AvailableSearchOptions, PreselectedProgram, Props, TrackedEntityTypesWithCorrelatedPrograms } from './SearchPage.types';
+import type {
+    AvailableSearchOptions,
+    PreselectedProgram,
+    Props,
+    TrackedEntityTypesWithCorrelatedPrograms,
+} from './SearchPage.types';
 import { Section, SectionHeaderSimple } from '../../Section';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
@@ -235,8 +241,8 @@ const Index = ({
       );
 
 
-    const searchStatus: string = useSelector(({ searchPage }): string => searchPage.searchStatus);
-    const generalPurposeErrorMessage: string = useSelector(({ searchPage }): string => searchPage.generalPurposeErrorMessage);
+    const searchStatus: string = useSelector(({ searchPage }): string => searchPage.searchStatus, isEqual);
+    const generalPurposeErrorMessage: string = useSelector(({ searchPage }): string => searchPage.generalPurposeErrorMessage, isEqual);
     const preselectedProgram: PreselectedProgram = useSelector(({ currentSelections }) => {
         const preselected = Object.values(trackedEntityTypesWithCorrelatedPrograms)
             // $FlowFixMe https://github.com/facebook/flow/issues/2221
@@ -246,7 +252,7 @@ const Index = ({
             value: preselected && preselected.programId,
             label: preselected && preselected.programName,
         };
-    });
+    }, isEqual);
 
     const [selectedSearchScope, setSelectedSearchScope] = useState(preselectedProgram);
 
