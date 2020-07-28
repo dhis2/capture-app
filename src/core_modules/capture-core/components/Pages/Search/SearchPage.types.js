@@ -1,5 +1,5 @@
 // @flow
-import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
+import { RenderFoundation } from '../../../metaData';
 
 export type SearchGroup = Array<{|
   +searchForm: RenderFoundation,
