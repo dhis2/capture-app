@@ -74,8 +74,13 @@ const Index = ({
             }
         };
 
+        const isSearchViaAttributesFormValid = (formId, minAttributesRequiredToSearch) => {
+            const isFormValid = formReference[formId].validateFormScrollToFirstFailedField({});
+            const isLengthValid = isSearchViaAttributesValid(minAttributesRequiredToSearch, formId);
+            return isFormValid && isLengthValid;
+        };
         const handleSearchViaAttributes = (selectedId, formId, searchScope, minAttributesRequiredToSearch) => {
-            const isValid = isSearchViaAttributesValid(minAttributesRequiredToSearch, formId);
+            const isValid = isSearchViaAttributesFormValid(formId, minAttributesRequiredToSearch);
 
             if (isValid) {
                 setError(false);
@@ -115,9 +120,7 @@ const Index = ({
                                         {
                                             forms[formId] &&
                                             <Form
-                                                formRef={
-                                                    (formInstance) => { formReference[formId] = formInstance; }
-                                                }
+                                                formRef={(formInstance) => { formReference[formId] = formInstance; }}
                                                 formFoundation={searchForm}
                                                 id={formId}
                                             />
@@ -163,6 +166,7 @@ const Index = ({
                                         {
                                             forms[formId] &&
                                             <Form
+                                                formRef={(formInstance) => { formReference[formId] = formInstance; }}
                                                 formFoundation={searchForm}
                                                 id={formId}
                                             />
