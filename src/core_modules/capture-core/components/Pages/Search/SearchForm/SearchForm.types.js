@@ -8,7 +8,7 @@ export type CurrentSearchTerms = Array<{|
 |}>
 
 export type OwnProps = {|
-  +searchGroupForSelectedScope: SearchGroup,
+  +searchGroupOfSelectedScope: SearchGroup,
   +selectedSearchScopeId?: string,
   +classes: {|
     +searchDomainSelectorSection: string,

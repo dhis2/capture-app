@@ -5,7 +5,7 @@ import type { CurrentSearchTerms } from '../SearchForm/SearchForm.types';
 export type OwnProps = {|
   searchViaAttributesOnScopeProgram: ({| programId: string, formId: string, page?: string |}) => void,
   searchViaAttributesOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string |}) => void,
-  +searchGroupForSelectedScope: SearchGroup,
+  +searchGroupOfSelectedScope: SearchGroup,
   +selectedSearchScopeId: string,
   +classes: {|
     +topSection: string,

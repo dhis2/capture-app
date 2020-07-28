@@ -36,7 +36,7 @@ export const Index = ({
     searchViaAttributesOnScopeTrackedEntityType,
     classes,
     searchResults,
-    searchGroupForSelectedScope,
+    searchGroupOfSelectedScope,
     rowsCount,
     rowsPerPage,
     currentPage,
@@ -95,7 +95,7 @@ export const Index = ({
         <div data-test="dhis2-capture-search-results-list">
             <CardList
                 items={searchResults}
-                dataElements={collectFormDataElements(searchGroupForSelectedScope)}
+                dataElements={collectFormDataElements(searchGroupOfSelectedScope)}
                 getCustomItemBottomElements={item => viewTrackedEntityDashboard(item)}
             />
         </div>

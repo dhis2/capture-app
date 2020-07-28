@@ -13,8 +13,8 @@ import { actionCreator } from '../../../../actions/actions.utils';
 
 const isValueContainingCharacter = string => string.replace(/\s/g, '').length;
 
-const collectCurrentSearchTerms = (searchGroupForSelectedScope, formsValues) => {
-    const { searchForm: attributeSearchForm, formId } = searchGroupForSelectedScope
+const collectCurrentSearchTerms = (searchGroupOfSelectedScope, formsValues) => {
+    const { searchForm: attributeSearchForm, formId } = searchGroupOfSelectedScope
         .reduce((accumulated, searchGroup) => {
             if (!searchGroup.unique) {
                 return { accumulated, ...searchGroup };
@@ -34,7 +34,7 @@ const collectCurrentSearchTerms = (searchGroupForSelectedScope, formsValues) => 
         }, []);
 };
 
-const mapStateToProps = (state: ReduxState, { searchGroupForSelectedScope }): PropsFromRedux => {
+const mapStateToProps = (state: ReduxState, { searchGroupOfSelectedScope }): PropsFromRedux => {
     const {
         forms,
         formsValues,
@@ -44,7 +44,7 @@ const mapStateToProps = (state: ReduxState, { searchGroupForSelectedScope }): Pr
     } = state;
 
 
-    const currentSearchTerms = collectCurrentSearchTerms(searchGroupForSelectedScope, formsValues);
+    const currentSearchTerms = collectCurrentSearchTerms(searchGroupOfSelectedScope, formsValues);
     return {
         forms,
         searchStatus,

@@ -59,7 +59,7 @@ const Index = ({
     saveCurrentFormData,
     selectedSearchScopeId,
     classes,
-    searchGroupForSelectedScope,
+    searchGroupOfSelectedScope,
     forms,
     searchStatus,
     isSearchViaAttributesValid,
@@ -76,13 +76,13 @@ const Index = ({
     );
 
     useEffect(() => {
-        searchGroupForSelectedScope
+        searchGroupOfSelectedScope
             .forEach(({ formId }, index) => {
                 if (!expandedFormId && index === 0) {
                     setExpandedFormId(formId);
                 }
             });
-    }, [searchGroupForSelectedScope, expandedFormId]);
+    }, [searchGroupOfSelectedScope, expandedFormId]);
 
 
     return useMemo(() => {
@@ -132,7 +132,7 @@ const Index = ({
             </div>);
         return (<>
             {
-                searchGroupForSelectedScope
+                searchGroupOfSelectedScope
                     .filter(searchGroup => searchGroup.unique)
                     .map(({ searchForm, formId, searchScope }) => {
                         const isSearchSectionCollapsed = !(expandedFormId === formId);
@@ -188,7 +188,7 @@ const Index = ({
             }
 
             {
-                searchGroupForSelectedScope
+                searchGroupOfSelectedScope
                     .filter(searchGroup => !searchGroup.unique)
                     .map(({ searchForm, formId, searchScope, minAttributesRequiredToSearch }) => {
                         const searchByText = i18n.t('Search by attributes');
@@ -254,7 +254,7 @@ const Index = ({
         classes.textInfo,
         classes.textError,
         forms,
-        searchGroupForSelectedScope,
+        searchGroupOfSelectedScope,
         selectedSearchScopeId,
         searchStatus,
         searchViaUniqueIdOnScopeTrackedEntityType,

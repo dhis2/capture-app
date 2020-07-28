@@ -250,7 +250,8 @@ const Index = ({
 
     const [selectedSearchScope, setSelectedSearchScope] = useState(preselectedProgram);
 
-    const searchGroupForSelectedScope = (selectedSearchScope.value ? searchOptions[selectedSearchScope.value].searchGroups : []);
+    const searchGroupOfSelectedScope =
+      (selectedSearchScope.value ? searchOptions[selectedSearchScope.value].searchGroups : []);
 
     useEffect(() => {
         if (!preselectedProgram.value) {
@@ -262,21 +263,25 @@ const Index = ({
         showInitialSearchPage,
     ]);
 
-    // dan abramov suggest to stringify https://twitter.com/dan_abramov/status/1104414469629898754?lang=en
-    // so that useEffect can do the comparison
+    // dan abramov suggest to stringify
+    // https://twitter.com/dan_abramov/status/1104414469629898754?lang=en
+    // so that useEffect can do the comparison efficiently
+    const stringifyScopes = JSON.stringify(searchOptions);
     useEffect(() => {
         // in order for the Form component to render
         // a formId under the `forms` reducer needs to be added.
         selectedSearchScope.value &&
-        searchOptions[selectedSearchScope.value].searchGroups
-            .forEach(({ formId }) => {
-                addFormIdToReduxStore(formId);
-            });
+          JSON.parse(stringifyScopes)[selectedSearchScope.value].searchGroups
+              .forEach(({ formId }) => {
+                  addFormIdToReduxStore(formId);
+              });
     },
     [
+        stringifyScopes,
         selectedSearchScope.value,
         addFormIdToReduxStore,
     ]);
+
 
     const handleProgramSelection = (program) => {
         showInitialSearchPage();
@@ -301,12 +306,12 @@ const Index = ({
 
                 <SearchForm
                     selectedSearchScopeId={selectedSearchScope.value}
-                    searchGroupForSelectedScope={searchGroupForSelectedScope}
+                    searchGroupOfSelectedScope={searchGroupOfSelectedScope}
                 />
 
                 {
                     searchStatus === searchPageStatus.SHOW_RESULTS &&
-                    <SearchResults searchGroupForSelectedScope={searchGroupForSelectedScope} />
+                    <SearchResults searchGroupOfSelectedScope={searchGroupOfSelectedScope} />
                 }
 
                 {
