@@ -10,29 +10,10 @@ export type SearchGroup = Array<{|
 |}>
 
 export type OwnProps = {|
-  +classes: {|
-    +container: string,
-    +header: string,
-    +paper: string,
-    +customEmpty: string,
-    +groupTitle: string,
-    +searchDomainSelectorSection: string,
-    +searchRow: string,
-    +searchRowTitle: string,
-    +searchRowSelectElement: string,
-    +searchButtonContainer: string,
-    +emptySelectionPaperContainer: string,
-    +emptySelectionPaperContent: string,
-    +divider: string,
-    +generalPurposeErrorMessage: string,
-    +backButton: string,
-    +pagination: string,
-    +loadingMask: string,
-    +topSection: string,
-  |},
+  +classes: Object,
 |}
 
-export type PreselectedProgram = $ReadOnly<{|
+export type SelectedSearchScope = $ReadOnly<{|
   value: ?string,
   label: ?string
 |}>

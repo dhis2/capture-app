@@ -38,17 +38,6 @@ const getStyles = (theme: Theme) => ({
         flexGrow: 1,
         color: theme.palette.error.main,
     },
-    pagination: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-    },
-    topSection: {
-        display: 'flex',
-        flexDirection: 'column',
-        margin: theme.typography.pxToRem(10),
-        padding: theme.typography.pxToRem(10),
-        backgroundColor: theme.palette.grey.lighter,
-    },
 });
 
 const Index = ({

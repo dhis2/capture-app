@@ -7,8 +7,6 @@ import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import { useSelector } from 'react-redux';
 import { isEqual } from 'lodash';
 import {
-    SingleSelect,
-    SingleSelectOption,
     Modal,
     ModalTitle,
     ModalContent,
@@ -19,11 +17,10 @@ import {
 import { LockedSelector } from '../../LockedSelector';
 import type {
     AvailableSearchOptions,
-    PreselectedProgram,
+    SelectedSearchScope,
     Props,
     TrackedEntityTypesWithCorrelatedPrograms,
 } from './SearchPage.types';
-import { Section, SectionHeaderSimple } from '../../Section';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
 import { LoadingMask } from '../../LoadingMasks';
@@ -31,11 +28,9 @@ import { SearchResults } from './SearchResults/SearchResults.container';
 import { programCollection } from '../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../../metaData/Program';
 import { searchScopes } from './SearchPage.container';
+import { SearchDomainSelector } from './SearchDomainSelector';
 
 const getStyles = (theme: Theme) => ({
-    divider: {
-        padding: '8px',
-    },
     container: {
         padding: '10px 24px 24px 24px',
     },
@@ -50,34 +45,6 @@ const getStyles = (theme: Theme) => ({
         paddingTop: 50,
         paddingBottom: 50,
     },
-    emptySelectionPaperContainer: {
-        padding: 24,
-    },
-    customEmpty: {
-        textAlign: 'center',
-        padding: '8px 24px',
-    },
-    searchDomainSelectorSection: {
-        maxWidth: theme.typography.pxToRem(900),
-        marginBottom: theme.typography.pxToRem(20),
-    },
-    searchRow: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    searchRowTitle: {
-        flexBasis: 200,
-        marginLeft: 8,
-    },
-    searchRowSelectElement: {
-        width: '100%',
-    },
-    searchButtonContainer: {
-        padding: theme.typography.pxToRem(10),
-        display: 'flex',
-        alignItems: 'center',
-    },
     backButton: {
         marginBottom: 10,
     },
@@ -88,67 +55,8 @@ const getStyles = (theme: Theme) => ({
         display: 'flex',
         justifyContent: 'center',
     },
-    pagination: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-    },
-    topSection: {
-        display: 'flex',
-        flexDirection: 'column',
-        margin: theme.typography.pxToRem(10),
-        padding: theme.typography.pxToRem(10),
-        backgroundColor: theme.palette.grey.lighter,
-    },
 });
 
-const SearchSelection =
-  withStyles(getStyles)(({ trackedEntityTypesWithCorrelatedPrograms, classes, onSelect, selectedProgram }) =>
-      (<Section
-          className={classes.searchDomainSelectorSection}
-          header={
-              <SectionHeaderSimple
-                  containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
-                  title={i18n.t('Search')}
-              />
-          }
-      >
-          <div className={classes.searchRow} style={{ padding: '8px 0' }}>
-              <div className={classes.searchRowTitle}>Search for</div>
-              <div className={classes.searchRowSelectElement} style={{ marginRight: 8 }}>
-                  <SingleSelect
-                      onChange={({ selected }) => { onSelect(selected); }}
-                      selected={selectedProgram}
-                      empty={<div className={classes.customEmpty}>Custom empty component</div>}
-                  >
-                      {
-                          useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
-                          // $FlowFixMe https://github.com/facebook/flow/issues/2221
-                              .map(({ trackedEntityTypeName, trackedEntityTypeId, programs: tePrograms }) =>
-                              // SingleSelect component wont allow us to wrap the SingleSelectOption
-                              // in any other element and still make use of the default behaviour.
-                              // Therefore we are returning the group title and the
-                              // SingleSelectOption in an array.
-                                  [
-                                      <SingleSelectOption
-                                          value={trackedEntityTypeId}
-                                          label={trackedEntityTypeName}
-                                      />,
-                                      tePrograms.map(({ programName, programId }) =>
-                                          (<SingleSelectOption value={programId} label={programName} />)),
-                                      <div className={classes.divider} key={trackedEntityTypeId}>
-                                          <hr />
-                                      </div>,
-                                  ],
-                              ),
-                          [
-                              classes.divider,
-                              trackedEntityTypesWithCorrelatedPrograms,
-                          ])
-                      }
-                  </SingleSelect>
-              </div>
-          </div>
-      </Section>));
 
 const buildSearchOption = (id, name, searchGroups, searchScope) => ({
     searchOptionId: id,
@@ -176,7 +84,6 @@ const buildSearchOption = (id, name, searchGroups, searchScope) => ({
             minAttributesRequiredToSearch,
         })),
 });
-
 
 const Index = ({
     addFormIdToReduxStore,
@@ -243,7 +150,7 @@ const Index = ({
 
     const searchStatus: string = useSelector(({ searchPage }): string => searchPage.searchStatus, isEqual);
     const generalPurposeErrorMessage: string = useSelector(({ searchPage }): string => searchPage.generalPurposeErrorMessage, isEqual);
-    const preselectedProgram: PreselectedProgram = useSelector(({ currentSelections }) => {
+    const preselectedProgram: SelectedSearchScope = useSelector(({ currentSelections }) => {
         const preselected = Object.values(trackedEntityTypesWithCorrelatedPrograms)
             // $FlowFixMe https://github.com/facebook/flow/issues/2221
             .map(({ programs }) => programs.find(({ programId }) => programId === currentSelections.programId))
@@ -289,9 +196,9 @@ const Index = ({
     ]);
 
 
-    const handleProgramSelection = (program) => {
+    const handleProgramSelection = (searchScope) => {
         showInitialSearchPage();
-        setSelectedSearchScope(program);
+        setSelectedSearchScope(searchScope);
     };
 
     return (<>
@@ -304,7 +211,7 @@ const Index = ({
 
             <Paper className={classes.paper}>
 
-                <SearchSelection
+                <SearchDomainSelector
                     trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
                     onSelect={handleProgramSelection}
                     selectedProgram={selectedSearchScope}
