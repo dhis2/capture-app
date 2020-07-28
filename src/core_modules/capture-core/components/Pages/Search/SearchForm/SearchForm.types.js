@@ -22,8 +22,8 @@ export type PropsFromRedux ={|
 |}
 
 export type DispatchersFromRedux = {|
-  searchViaUniqueIdOnScopeProgram: ({| programId: string, formId: string |}) => void,
-  searchViaUniqueIdOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string |}) => void,
+  onSearchViaUniqueIdOnScopeProgram: ({| programId: string, formId: string |}) => void,
+  onSearchViaUniqueIdOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string |}) => void,
 |}
 
 export type Props = {|
