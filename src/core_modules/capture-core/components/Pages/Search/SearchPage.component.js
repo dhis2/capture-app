@@ -148,6 +148,16 @@ const buildSearchOption = (id, name, searchGroups, searchScope) => ({
     searchOptionId: id,
     searchOptionName: name,
     searchGroups: [...searchGroups.values()]
+        // We sort so that we always have expanded the first search group section.
+        .sort(({ unique: xBoolean }, { unique: yBoolean }) => {
+            if (xBoolean === yBoolean) {
+                return 0;
+            }
+            if (xBoolean) {
+                return -1;
+            }
+            return 1;
+        })
         .map(({ unique, searchForm, minAttributesRequiredToSearch }, index) => ({
             unique,
             searchForm,
@@ -240,17 +250,7 @@ const Index = ({
     const [selectedProgram, setSelectedProgram] = useState(preselectedProgram);
 
     const searchGroupForSelectedScope =
-      (selectedProgram.value ? flattenedSearchOptions[selectedProgram.value].searchGroups : [])
-          // We use the sorted array to always have expanded the first search group section.
-          .sort(({ unique: xBoolean }, { unique: yBoolean }) => {
-              if (xBoolean === yBoolean) {
-                  return 0;
-              }
-              if (xBoolean) {
-                  return -1;
-              }
-              return 1;
-          });
+      (selectedProgram.value ? flattenedSearchOptions[selectedProgram.value].searchGroups : []);
 
     useEffect(() => {
         if (!preselectedProgram.value) {
