@@ -569,7 +569,7 @@ class NewEventDataEntry extends Component<Props> {
         } = this.props;
         return (
             <div>
-                <div>
+                <div data-test="dhis2-capture-data-entry-container">
                     <WrappedDataEntry
                         id={'singleEvent'}
                         onUpdateFormField={onUpdateField}
