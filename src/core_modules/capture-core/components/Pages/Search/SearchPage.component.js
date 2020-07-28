@@ -212,24 +212,25 @@ const Index = ({
       [],
       );
 
-    const flattenedSearchOptions: AvailableSearchOptions =
+    const searchOptions: AvailableSearchOptions =
       useMemo(() =>
           Object.values(trackedEntityTypesWithCorrelatedPrograms)
               // $FlowFixMe https://github.com/facebook/flow/issues/2221
-              .reduce((acc, { trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeSearchGroups, programs }) => ({
-                  ...acc,
-                  [trackedEntityTypeId]:
-                     buildSearchOption(
-                         trackedEntityTypeId,
-                         trackedEntityTypeName,
-                         trackedEntityTypeSearchGroups,
-                         searchScopes.TRACKED_ENTITY_TYPE,
-                     ),
-                  ...programs.reduce((acc2, { programId, programName, searchGroups }) => ({
-                      ...acc2,
-                      [programId]: buildSearchOption(programId, programName, searchGroups, searchScopes.PROGRAM),
+              .reduce((acc, { trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeSearchGroups, programs }) =>
+                  ({
+                      ...acc,
+                      [trackedEntityTypeId]:
+                         buildSearchOption(
+                             trackedEntityTypeId,
+                             trackedEntityTypeName,
+                             trackedEntityTypeSearchGroups,
+                             searchScopes.TRACKED_ENTITY_TYPE,
+                         ),
+                      ...programs.reduce((acc2, { programId, programName, searchGroups }) => ({
+                          ...acc2,
+                          [programId]: buildSearchOption(programId, programName, searchGroups, searchScopes.PROGRAM),
+                      }), {}),
                   }), {}),
-              }), {}),
       [trackedEntityTypesWithCorrelatedPrograms],
       );
 
@@ -247,10 +248,9 @@ const Index = ({
         };
     });
 
-    const [selectedProgram, setSelectedProgram] = useState(preselectedProgram);
+    const [selectedSearchScope, setSelectedSearchScope] = useState(preselectedProgram);
 
-    const searchGroupForSelectedScope =
-      (selectedProgram.value ? flattenedSearchOptions[selectedProgram.value].searchGroups : []);
+    const searchGroupForSelectedScope = (selectedSearchScope.value ? searchOptions[selectedSearchScope.value].searchGroups : []);
 
     useEffect(() => {
         if (!preselectedProgram.value) {
@@ -264,25 +264,23 @@ const Index = ({
 
     // dan abramov suggest to stringify https://twitter.com/dan_abramov/status/1104414469629898754?lang=en
     // so that useEffect can do the comparison
-    const stringifyPrograms = JSON.stringify(flattenedSearchOptions);
     useEffect(() => {
         // in order for the Form component to render
         // a formId under the `forms` reducer needs to be added.
-        selectedProgram.value &&
-        JSON.parse(stringifyPrograms)[selectedProgram.value].searchGroups
+        selectedSearchScope.value &&
+        searchOptions[selectedSearchScope.value].searchGroups
             .forEach(({ formId }) => {
                 addFormIdToReduxStore(formId);
             });
     },
     [
-        stringifyPrograms,
-        selectedProgram.value,
+        selectedSearchScope.value,
         addFormIdToReduxStore,
     ]);
 
     const handleProgramSelection = (program) => {
         showInitialSearchPage();
-        setSelectedProgram(program);
+        setSelectedSearchScope(program);
     };
 
     return (<>
@@ -298,11 +296,11 @@ const Index = ({
                 <SearchSelection
                     trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
                     onSelect={handleProgramSelection}
-                    selectedProgram={selectedProgram}
+                    selectedProgram={selectedSearchScope}
                 />
 
                 <SearchForm
-                    selectedSearchScopeId={selectedProgram.value}
+                    selectedSearchScopeId={selectedSearchScope.value}
                     searchGroupForSelectedScope={searchGroupForSelectedScope}
                 />
 
@@ -350,7 +348,7 @@ const Index = ({
             </Paper>
 
             {
-                searchStatus === searchPageStatus.INITIAL && !selectedProgram.value &&
+                searchStatus === searchPageStatus.INITIAL && !selectedSearchScope.value &&
                     <Paper elevation={0} data-test={'dhis2-capture-informative-paper'}>
                         <div className={classes.emptySelectionPaperContent}>
                             {i18n.t('Make a selection to start searching')}
