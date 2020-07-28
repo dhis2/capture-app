@@ -33,67 +33,12 @@ export const searchScopes = {
 };
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
-    const { currentSelections, activePage, searchPage: { searchStatus, generalPurposeErrorMessage } } = state;
+    const { activePage } = state;
 
-    const trackedEntityTypesWithCorrelatedPrograms =
-      [...programCollection.values()]
-          .filter(program => program instanceof TrackerProgram)
-          // $FlowFixMe
-          .reduce((acc, {
-              id: programId,
-              name: programName,
-              trackedEntityType: {
-                  id: trackedEntityTypeId,
-                  name: trackedEntityTypeName,
-                  searchGroups: trackedEntityTypeSearchGroups,
-              },
-              searchGroups,
-          }: TrackerProgram) => {
-              const accumulatedProgramsOfTrackedEntityType =
-                acc[trackedEntityTypeId] ? acc[trackedEntityTypeId].programs : [];
-              return {
-                  ...acc,
-                  [trackedEntityTypeId]: {
-                      trackedEntityTypeId,
-                      trackedEntityTypeName,
-                      trackedEntityTypeSearchGroups,
-                      programs: [
-                          ...accumulatedProgramsOfTrackedEntityType,
-                          { programId, programName, searchGroups },
-                      ],
-
-                  },
-              };
-          }, {});
-
-    const preselectedProgram = Object.values(trackedEntityTypesWithCorrelatedPrograms)
-        // $FlowFixMe https://github.com/facebook/flow/issues/2221
-        .map(({ programs }) =>
-            programs.find(({ programId }) => programId === currentSelections.programId))
-        .filter(program => program)[0];
-
-    const availableSearchOptions = Object.values(trackedEntityTypesWithCorrelatedPrograms)
-        // $FlowFixMe https://github.com/facebook/flow/issues/2221
-        .reduce((acc, { trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeSearchGroups, programs }) => ({
-            ...acc,
-            [trackedEntityTypeId]: buildSearchOption(trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeSearchGroups, searchScopes.TRACKED_ENTITY_TYPE),
-            ...programs.reduce((accumulated, { programId, programName, searchGroups }) => ({
-                ...accumulated,
-                [programId]: buildSearchOption(programId, programName, searchGroups, searchScopes.PROGRAM),
-            }), {}),
-        }), {});
 
     return {
-        preselectedProgram: {
-            value: preselectedProgram && preselectedProgram.programId,
-            label: preselectedProgram && preselectedProgram.programName,
-        },
-        availableSearchOptions,
-        trackedEntityTypesWithCorrelatedPrograms,
         error: activePage.selectionsError && activePage.selectionsError.error,
         ready: !activePage.isLoading,
-        searchStatus,
-        generalPurposeErrorMessage,
     };
 };
 

@@ -32,31 +32,32 @@ export type OwnProps = {|
   |},
 |}
 
-export type PropsFromRedux ={|
-  +preselectedProgram: {|
-    value: ?string,
-    label: ?string
-  |},
-  +trackedEntityTypesWithCorrelatedPrograms: {
-    [elementId: string]: {|
-      +trackedEntityTypeId: string,
-      +trackedEntityTypeName: string,
-      +programs: Array<{|
-        +programName: string,
-        +programId: string,
-      |}>
-    |}
-  },
-  +availableSearchOptions: {
+export type PreselectedProgram = $ReadOnly<{|
+  value: ?string,
+  label: ?string
+|}>
+
+export type AvailableSearchOptions = $ReadOnly<{
     [elementId: string]: {|
       +searchOptionId: string,
       +searchOptionName: string,
       +searchGroups: SearchGroup |}
-  },
+  }>
+
+export type TrackedEntityTypesWithCorrelatedPrograms = $ReadOnly<{
+  [elementId: string]: {|
+    +trackedEntityTypeId: string,
+    +trackedEntityTypeName: string,
+    +programs: Array<{|
+      +programName: string,
+      +programId: string,
+    |}>
+  |}
+}>
+
+export type PropsFromRedux ={|
   +error: boolean,
   +ready: boolean,
-  +searchStatus: string,
-  +generalPurposeErrorMessage: string,
 |}
 
 export type DispatchersFromRedux = {|

@@ -4,6 +4,7 @@ import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper/Paper';
 import withStyles from '@material-ui/core/styles/withStyles';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import { useSelector, shallowEqual } from 'react-redux';
 import {
     SingleSelect,
     SingleSelectOption,
@@ -15,12 +16,15 @@ import {
     Button,
 } from '@dhis2/ui-core';
 import { LockedSelector } from '../../LockedSelector';
-import type { Props } from './SearchPage.types';
+import type { AvailableSearchOptions, PreselectedProgram, Props, TrackedEntityTypesWithCorrelatedPrograms } from './SearchPage.types';
 import { Section, SectionHeaderSimple } from '../../Section';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
 import { LoadingMask } from '../../LoadingMasks';
 import { SearchResults } from './SearchResults/SearchResults.container';
+import { programCollection } from '../../../metaDataMemoryStores';
+import { TrackerProgram } from '../../../metaData/Program';
+import { searchScopes } from './SearchPage.container';
 
 const getStyles = (theme: Theme) => ({
     divider: {
@@ -140,24 +144,113 @@ const SearchSelection =
           </div>
       </Section>));
 
+const buildSearchOption = (id, name, searchGroups, searchScope) => ({
+    searchOptionId: id,
+    searchOptionName: name,
+    searchGroups: [...searchGroups.values()]
+        .map(({ unique, searchForm, minAttributesRequiredToSearch }, index) => ({
+            unique,
+            searchForm,
+            // We adding the `formId` here for the reason that we will use it in the SearchPage component.
+            // Specifically the function `addFormData` will add an object for each input field to the store.
+            // Also the formId is passed in the `Form` component and needs to be identical with the one in
+            // the store in order for the `Form` to function. For these reasons we generate it once here.
+            formId: `searchPageForm-${id}-${index}`,
+            searchScope,
+            minAttributesRequiredToSearch,
+        })),
+});
+
 
 const Index = ({
     addFormIdToReduxStore,
     navigateToMainPage,
     showInitialSearchPage,
     classes,
-    trackedEntityTypesWithCorrelatedPrograms,
-    preselectedProgram,
-    availableSearchOptions,
-    searchStatus,
-    generalPurposeErrorMessage,
 }: Props) => {
+    const trackedEntityTypesWithCorrelatedPrograms: TrackedEntityTypesWithCorrelatedPrograms =
+      useMemo(() =>
+          [...programCollection.values()]
+              .filter(program => program instanceof TrackerProgram)
+              // $FlowFixMe
+              .reduce((acc, {
+                  id: programId,
+                  name: programName,
+                  trackedEntityType: {
+                      id: trackedEntityTypeId,
+                      name: trackedEntityTypeName,
+                      searchGroups: trackedEntityTypeSearchGroups,
+                  },
+                  searchGroups,
+              }: TrackerProgram) => {
+                  const accumulatedProgramsOfTrackedEntityType =
+                    acc[trackedEntityTypeId] ? acc[trackedEntityTypeId].programs : [];
+                  return {
+                      ...acc,
+                      [trackedEntityTypeId]: {
+                          trackedEntityTypeId,
+                          trackedEntityTypeName,
+                          trackedEntityTypeSearchGroups,
+                          programs: [
+                              ...accumulatedProgramsOfTrackedEntityType,
+                              { programId, programName, searchGroups },
+                          ],
+
+                      },
+                  };
+              }, {}),
+      [],
+      );
+
+    const flattenedSearchOptions: AvailableSearchOptions =
+      useMemo(() =>
+          Object.values(trackedEntityTypesWithCorrelatedPrograms)
+              // $FlowFixMe https://github.com/facebook/flow/issues/2221
+              .reduce((acc, { trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeSearchGroups, programs }) => ({
+                  ...acc,
+                  [trackedEntityTypeId]:
+                     buildSearchOption(
+                         trackedEntityTypeId,
+                         trackedEntityTypeName,
+                         trackedEntityTypeSearchGroups,
+                         searchScopes.TRACKED_ENTITY_TYPE,
+                     ),
+                  ...programs.reduce((acc2, { programId, programName, searchGroups }) => ({
+                      ...acc2,
+                      [programId]: buildSearchOption(programId, programName, searchGroups, searchScopes.PROGRAM),
+                  }), {}),
+              }), {}),
+      [trackedEntityTypesWithCorrelatedPrograms],
+      );
+
+
+    const searchStatus: string = useSelector(({ searchPage }): string => searchPage.searchStatus);
+    const generalPurposeErrorMessage: string = useSelector(({ searchPage }): string => searchPage.generalPurposeErrorMessage);
+    const preselectedProgram: PreselectedProgram = useSelector(({ currentSelections }) => {
+        const preselected = Object.values(trackedEntityTypesWithCorrelatedPrograms)
+            // $FlowFixMe https://github.com/facebook/flow/issues/2221
+            .map(({ programs }) => programs.find(({ programId }) => programId === currentSelections.programId))
+            .filter(program => program)[0];
+        return {
+            value: preselected && preselected.programId,
+            label: preselected && preselected.programName,
+        };
+    });
+
     const [selectedProgram, setSelectedProgram] = useState(preselectedProgram);
 
-    const handleProgramSelection = (program) => {
-        showInitialSearchPage();
-        setSelectedProgram(program);
-    };
+    const searchGroupForSelectedScope =
+      (selectedProgram.value ? flattenedSearchOptions[selectedProgram.value].searchGroups : [])
+          // We use the sorted array to always have expanded the first search group section.
+          .sort(({ unique: xBoolean }, { unique: yBoolean }) => {
+              if (xBoolean === yBoolean) {
+                  return 0;
+              }
+              if (xBoolean) {
+                  return -1;
+              }
+              return 1;
+          });
 
     useEffect(() => {
         if (!preselectedProgram.value) {
@@ -171,7 +264,7 @@ const Index = ({
 
     // dan abramov suggest to stringify https://twitter.com/dan_abramov/status/1104414469629898754?lang=en
     // so that useEffect can do the comparison
-    const stringifyPrograms = JSON.stringify(availableSearchOptions);
+    const stringifyPrograms = JSON.stringify(flattenedSearchOptions);
     useEffect(() => {
         // in order for the Form component to render
         // a formId under the `forms` reducer needs to be added.
@@ -187,19 +280,10 @@ const Index = ({
         addFormIdToReduxStore,
     ]);
 
-    const searchGroupForSelectedScope =
-      (selectedProgram.value ? availableSearchOptions[selectedProgram.value].searchGroups : [])
-          // We use the sorted array to always have expanded the first search group section.
-          .sort(({ unique: xBoolean }, { unique: yBoolean }) => {
-              if (xBoolean === yBoolean) {
-                  return 0;
-              }
-              if (xBoolean) {
-                  return -1;
-              }
-              return 1;
-          });
-
+    const handleProgramSelection = (program) => {
+        showInitialSearchPage();
+        setSelectedProgram(program);
+    };
 
     return (<>
         <LockedSelector />
@@ -266,7 +350,7 @@ const Index = ({
             </Paper>
 
             {
-                !selectedProgram.value &&
+                searchStatus === searchPageStatus.INITIAL && !selectedProgram.value &&
                     <Paper elevation={0} data-test={'dhis2-capture-informative-paper'}>
                         <div className={classes.emptySelectionPaperContent}>
                             {i18n.t('Make a selection to start searching')}
