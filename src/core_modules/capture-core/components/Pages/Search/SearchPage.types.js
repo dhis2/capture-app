@@ -9,10 +9,6 @@ export type SearchGroup = Array<{|
   +minAttributesRequiredToSearch: number
 |}>
 
-export type OwnProps = {|
-  +classes: Object,
-|}
-
 export type SelectedSearchScope = $ReadOnly<{|
   value: ?string,
   label: ?string
@@ -36,21 +32,17 @@ export type TrackedEntityTypesWithCorrelatedPrograms = $ReadOnly<{
   |}
 }>
 
+export type OwnProps = {|
+  +classes: Object,
+|}
+
 export type PropsFromRedux ={|
   +error: boolean,
   +ready: boolean,
 |}
 
-export type DispatchersFromRedux = {|
-  addFormIdToReduxStore: (formId: string) => void,
-  showInitialSearchPage: () => void,
-  navigateToMainPage: () => void,
-  paginationChange: (newPage: number) => void
-|}
-
 export type Props = {|
   ...OwnProps,
-  ...DispatchersFromRedux,
   ...PropsFromRedux
 |}
 

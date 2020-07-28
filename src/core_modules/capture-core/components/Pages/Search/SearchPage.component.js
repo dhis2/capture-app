@@ -1,10 +1,10 @@
 // @flow
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper/Paper';
 import withStyles from '@material-ui/core/styles/withStyles';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { isEqual } from 'lodash';
 import {
     Modal,
@@ -29,6 +29,8 @@ import { programCollection } from '../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../../metaData/Program';
 import { searchScopes } from './SearchPage.container';
 import { SearchDomainSelector } from './SearchDomainSelector';
+import { addFormData } from '../../D2Form/actions/form.actions';
+import { navigateToMainPage, showInitialSearchPage } from './SearchPage.actions';
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -85,12 +87,15 @@ const buildSearchOption = (id, name, searchGroups, searchScope) => ({
         })),
 });
 
-const Index = ({
-    addFormIdToReduxStore,
-    navigateToMainPage,
-    showInitialSearchPage,
-    classes,
-}: Props) => {
+const Index = ({ classes }: Props) => {
+    const dispatch = useDispatch();
+
+    const dispatchShowInitialSearchPage = useCallback(
+        () => { dispatch(showInitialSearchPage()); },
+        [dispatch]);
+
+    const dispatchNavigateToMainPage = () => { dispatch(navigateToMainPage()); };
+
     const trackedEntityTypesWithCorrelatedPrograms: TrackedEntityTypesWithCorrelatedPrograms =
       useMemo(() =>
           [...programCollection.values()]
@@ -147,19 +152,23 @@ const Index = ({
       [trackedEntityTypesWithCorrelatedPrograms],
       );
 
+    const searchStatus: string =
+      useSelector(({ searchPage }) => searchPage.searchStatus, isEqual);
 
-    const searchStatus: string = useSelector(({ searchPage }): string => searchPage.searchStatus, isEqual);
-    const generalPurposeErrorMessage: string = useSelector(({ searchPage }): string => searchPage.generalPurposeErrorMessage, isEqual);
-    const preselectedProgram: SelectedSearchScope = useSelector(({ currentSelections }) => {
-        const preselected = Object.values(trackedEntityTypesWithCorrelatedPrograms)
-            // $FlowFixMe https://github.com/facebook/flow/issues/2221
-            .map(({ programs }) => programs.find(({ programId }) => programId === currentSelections.programId))
-            .filter(program => program)[0];
-        return {
-            value: preselected && preselected.programId,
-            label: preselected && preselected.programName,
-        };
-    }, isEqual);
+    const generalPurposeErrorMessage: string =
+      useSelector(({ searchPage }) => searchPage.generalPurposeErrorMessage, isEqual);
+
+    const preselectedProgram: SelectedSearchScope =
+      useSelector(({ currentSelections }) => {
+          const preselected = Object.values(trackedEntityTypesWithCorrelatedPrograms)
+              // $FlowFixMe https://github.com/facebook/flow/issues/2221
+              .map(({ programs }) => programs.find(({ programId }) => programId === currentSelections.programId))
+              .filter(program => program)[0];
+          return {
+              value: preselected && preselected.programId,
+              label: preselected && preselected.programName,
+          };
+      }, isEqual);
 
     const [selectedSearchScope, setSelectedSearchScope] = useState(preselectedProgram);
 
@@ -168,12 +177,12 @@ const Index = ({
 
     useEffect(() => {
         if (!preselectedProgram.value) {
-            showInitialSearchPage();
+            dispatchShowInitialSearchPage();
         }
     },
     [
         preselectedProgram.value,
-        showInitialSearchPage,
+        dispatchShowInitialSearchPage,
     ]);
 
     // dan abramov suggest to stringify
@@ -181,30 +190,36 @@ const Index = ({
     // so that useEffect can do the comparison efficiently
     const stringifyScopes = JSON.stringify(searchOptions);
     useEffect(() => {
+        const dispatchAddFormIdToReduxStore = (formId) => { dispatch(addFormData(formId)); };
+
         // in order for the Form component to render
         // a formId under the `forms` reducer needs to be added.
         selectedSearchScope.value &&
           JSON.parse(stringifyScopes)[selectedSearchScope.value].searchGroups
               .forEach(({ formId }) => {
-                  addFormIdToReduxStore(formId);
+                  dispatchAddFormIdToReduxStore(formId);
               });
     },
     [
+        dispatch,
         stringifyScopes,
         selectedSearchScope.value,
-        addFormIdToReduxStore,
     ]);
 
 
     const handleProgramSelection = (searchScope) => {
-        showInitialSearchPage();
+        dispatchShowInitialSearchPage();
         setSelectedSearchScope(searchScope);
     };
 
     return (<>
         <LockedSelector />
         <div data-test="dhis2-capture-search-page-content" className={classes.container}>
-            <Button dataTest="dhis2-capture-back-button" className={classes.backButton} onClick={navigateToMainPage}>
+            <Button
+                dataTest="dhis2-capture-back-button"
+                className={classes.backButton}
+                onClick={dispatchNavigateToMainPage}
+            >
                 <ChevronLeft />
                 {i18n.t('Back')}
             </Button>
