@@ -36,6 +36,7 @@ class MainPage extends Component<Props> {
                             <TrackerProgramHandler>
                                 <div
                                     className={classes.listContainer}
+                                    data-test="dhis2-capture-event-list-container"
                                 >
                                     <EventsListConnectivityWrapper />
                                 </div>
