@@ -43,8 +43,8 @@ const getStyles = (theme: Theme) => ({
 const Index = ({
     onSearchViaUniqueIdOnScopeTrackedEntityType,
     onSearchViaUniqueIdOnScopeProgram,
-    searchViaAttributesOnScopeProgram,
-    searchViaAttributesOnScopeTrackedEntityType,
+    onSearchViaAttributesOnScopeProgram,
+    onSearchViaAttributesOnScopeTrackedEntityType,
     selectedOptionId,
     classes,
     availableSearchOptions,
@@ -86,10 +86,10 @@ const Index = ({
                 setError(false);
                 switch (searchScope) {
                 case searchScopes.PROGRAM:
-                    searchViaAttributesOnScopeProgram({ programId: selectedId, formId });
+                    onSearchViaAttributesOnScopeProgram({ programId: selectedId, formId });
                     break;
                 case searchScopes.TRACKED_ENTITY_TYPE:
-                    searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: selectedId, formId });
+                    onSearchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: selectedId, formId });
                     break;
                 default:
                     break;
@@ -211,11 +211,12 @@ const Index = ({
         selectedOptionId,
         onSearchViaUniqueIdOnScopeTrackedEntityType,
         onSearchViaUniqueIdOnScopeProgram,
+        onSearchViaAttributesOnScopeProgram,
+        onSearchViaAttributesOnScopeTrackedEntityType,
         searchStatus,
-        searchViaAttributesOnScopeProgram,
-        searchViaAttributesOnScopeTrackedEntityType,
         isSearchViaAttributesValid,
         error,
-
+    ]);
+};
 
 export const SearchFormComponent = withStyles(getStyles)(Index);
