@@ -215,27 +215,27 @@ export const getExecuteSearchForSearchGroupEpic =
                                                     searchActionTypes.ABORT_SEARCH_GROUP_COUNT_SEARCH,
                                                 ].includes(a.type) &&
                                             a.payload.searchGroup === searchGroup)),
-                                    ),
-                                    map((count) => {
-                                        const currentlyActiveUids = saveWaitUids[dataEntryKey][searchGroup.id];
-                                        cleanUpUidsAfterSearch(dataEntryKey, searchGroup.id);
-                                        return searchGroupResultCountRetrieved(
-                                            count, dataEntryKey, searchGroup.id, currentlyActiveUids,
-                                        );
-                                    }),
-                                    catchError((error) => {
-                                        log.error(errorCreator(error)({ dataEntryKey, searchGroupId: searchGroup.id }));
-                                        const currentlyActiveUids = saveWaitUids[dataEntryKey][searchGroup.id];
-                                        cleanUpUidsAfterSearch(dataEntryKey, searchGroup.id);
-                                        return of(
-                                            searchGroupResultCountRetrievalFailed(
-                                                i18n.t('search group result could not be retrieved'),
-                                                dataEntryKey,
-                                                searchGroup.id,
-                                                currentlyActiveUids,
-                                            ),
-                                        );
-                                    }))),
+                                    )),
+                                map((count) => {
+                                    const currentlyActiveUids = saveWaitUids[dataEntryKey][searchGroup.id];
+                                    cleanUpUidsAfterSearch(dataEntryKey, searchGroup.id);
+                                    return searchGroupResultCountRetrieved(
+                                        count, dataEntryKey, searchGroup.id, currentlyActiveUids,
+                                    );
+                                }),
+                                catchError((error) => {
+                                    log.error(errorCreator(error)({ dataEntryKey, searchGroupId: searchGroup.id }));
+                                    const currentlyActiveUids = saveWaitUids[dataEntryKey][searchGroup.id];
+                                    cleanUpUidsAfterSearch(dataEntryKey, searchGroup.id);
+                                    return of(
+                                        searchGroupResultCountRetrievalFailed(
+                                            i18n.t('search group result could not be retrieved'),
+                                            dataEntryKey,
+                                            searchGroup.id,
+                                            currentlyActiveUids,
+                                        ),
+                                    );
+                                })),
                         action$.pipe(
                             ofType(...cancelBatches),
                             filter(ab =>
