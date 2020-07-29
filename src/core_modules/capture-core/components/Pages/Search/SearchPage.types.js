@@ -1,5 +1,5 @@
 // @flow
-import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
+import { RenderFoundation } from '../../../metaData';
 
 export type SearchGroup = Array<{|
   +searchForm: RenderFoundation,
@@ -9,63 +9,40 @@ export type SearchGroup = Array<{|
   +minAttributesRequiredToSearch: number
 |}>
 
-export type OwnProps = {|
-  +classes: {|
-    +container: string,
-    +header: string,
-    +paper: string,
-    +customEmpty: string,
-    +groupTitle: string,
-    +searchDomainSelectorSection: string,
-    +searchRow: string,
-    +searchRowTitle: string,
-    +searchRowSelectElement: string,
-    +searchButtonContainer: string,
-    +emptySelectionPaperContainer: string,
-    +emptySelectionPaperContent: string,
-    +divider: string,
-    +generalPurposeErrorMessage: string,
-    +backButton: string,
-    +loadingMask: string,
-  |},
-|}
+export type SelectedSearchScope = $ReadOnly<{|
+  value: ?string,
+  label: ?string
+|}>
 
-export type PropsFromRedux ={|
-  +preselectedProgram: {|
-    value: ?string,
-    label: ?string
-  |},
-  +trackedEntityTypesWithCorrelatedPrograms: {
-    [elementId: string]: {|
-      +trackedEntityTypeId: string,
-      +trackedEntityTypeName: string,
-      +programs: Array<{|
-        +programName: string,
-        +programId: string,
-      |}>
-    |}
-  },
-  +availableSearchOptions: {
+export type AvailableSearchOptions = $ReadOnly<{
     [elementId: string]: {|
       +searchOptionId: string,
       +searchOptionName: string,
       +searchGroups: SearchGroup |}
-  },
-  +error: boolean,
-  +ready: boolean,
-  +searchStatus: string,
-  +generalPurposeErrorMessage: string,
+  }>
+
+export type TrackedEntityTypesWithCorrelatedPrograms = $ReadOnly<{
+  [elementId: string]: {|
+    +trackedEntityTypeId: string,
+    +trackedEntityTypeName: string,
+    +programs: Array<{|
+      +programName: string,
+      +programId: string,
+    |}>
+  |}
+}>
+
+export type OwnProps = {|
+  +classes: Object,
 |}
 
-export type DispatchersFromRedux = {|
-  addFormIdToReduxStore: (formId: string) => void,
-  showInitialSearchPage: () => void,
-  navigateToMainPage: () => void,
+export type PropsFromRedux ={|
+  +error: boolean,
+  +ready: boolean,
 |}
 
 export type Props = {|
   ...OwnProps,
-  ...DispatchersFromRedux,
   ...PropsFromRedux
 |}
 

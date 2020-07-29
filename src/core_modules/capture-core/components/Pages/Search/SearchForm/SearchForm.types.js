@@ -10,14 +10,7 @@ export type CurrentSearchTerms = Array<{|
 export type OwnProps = {|
   +searchGroupForSelectedScope: SearchGroup,
   +selectedSearchScopeId?: string,
-  +classes: {|
-    +searchDomainSelectorSection: string,
-    +searchButtonContainer: string,
-    +searchRow: string,
-    +searchRowSelectElement: string,
-    +textInfo: string,
-    +textError: string,
-  |},
+  +classes: Object,
 |}
 
 export type PropsFromRedux ={|
