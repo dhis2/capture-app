@@ -26,6 +26,7 @@ export type OwnProps = {|
     +divider: string,
     +generalPurposeErrorMessage: string,
     +backButton: string,
+    +loadingMask: string,
   |},
 |}
 
@@ -54,16 +55,11 @@ export type PropsFromRedux ={|
   +ready: boolean,
   +searchStatus: string,
   +generalPurposeErrorMessage: string,
-  +searchResults: Array<{|
-    +id: string,
-    +tei: Object,
-    +values: Object
-  |}>,
 |}
 
 export type DispatchersFromRedux = {|
   addFormIdToReduxStore: (formId: string) => void,
-  closeModal: () => void,
+  showInitialSearchPage: () => void,
   navigateToMainPage: () => void
 |}
 

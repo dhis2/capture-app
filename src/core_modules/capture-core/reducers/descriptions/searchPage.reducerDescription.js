@@ -1,6 +1,6 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.container';
+import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
 
 export const searchPageStatus = {
     INITIAL: 'INITIAL',
@@ -11,26 +11,35 @@ export const searchPageStatus = {
 };
 
 export const searchPageDesc = createReducerDescription({
-    [searchPageActionTypes.MODAL_CLOSE]: state => ({
+    [searchPageActionTypes.SEARCH_RESULTS_INITIAL_VIEW]: state => ({
         ...state,
         searchStatus: searchPageStatus.INITIAL,
     }),
-    [searchPageActionTypes.SEARCH_RESULTS_SUCCESS]: (state, { payload: { searchResults } }) => ({
+    [searchPageActionTypes.SEARCH_RESULTS_SUCCESS_VIEW]: (state, { payload: { searchResults, searchResultsPaginationInfo } }) => ({
         ...state,
         searchStatus: searchPageStatus.SHOW_RESULTS,
         searchResults,
+        searchResultsPaginationInfo,
     }),
-    [searchPageActionTypes.SEARCH_RESULTS_LOADING]: state => ({
+    [searchPageActionTypes.SEARCH_RESULTS_LOADING_VIEW]: state => ({
         ...state,
         searchStatus: searchPageStatus.LOADING,
     }),
-    [searchPageActionTypes.SEARCH_RESULTS_EMPTY]: state => ({
+    [searchPageActionTypes.SEARCH_RESULTS_EMPTY_VIEW]: state => ({
         ...state,
         searchStatus: searchPageStatus.NO_RESULTS,
     }),
-    [searchPageActionTypes.SEARCH_RESULTS_ERROR]: state => ({
+    [searchPageActionTypes.SEARCH_RESULTS_ERROR_VIEW]: state => ({
         ...state,
         searchStatus: searchPageStatus.ERROR,
         generalPurposeErrorMessage: 'This is a general purpose error. This text needs to be defined',
     }),
-}, 'searchPage', { searchStatus: searchPageStatus.INITIAL });
+    [searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE]: (state, { payload: { searchScopeType, searchScopeId, formId, currentSearchTerms } }) => ({
+        ...state,
+        currentSearchInfo: { searchScopeType, searchScopeId, formId, currentSearchTerms },
+    }),
+}, 'searchPage', {
+    searchStatus: searchPageStatus.INITIAL,
+    searchResults: [],
+    currentSearchInfo: [],
+});

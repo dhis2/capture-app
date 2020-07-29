@@ -38,14 +38,6 @@ Feature: User interacts with Search page
     Then there should be a modal popping up
     And you can close the modal
 
-  Scenario: Searching using attributes returns results
-    Given you are on the default search page
-    And you select the search domain Malaria Case diagnosis
-    And you expand the attributes search area
-    When you fill in the first name with values that will return results
-    And you click search
-    Then there should be a success message
-
   Scenario: Searching using attributes throws error
     Given you are on the default search page
     And you select the search domain Malaria Case diagnosis
@@ -54,11 +46,28 @@ Feature: User interacts with Search page
     And you click search
     Then there should be an generic error message
 
-  Scenario: Searching using attributes is invalid
+  Scenario: Searching using attributes is invalid because no terms typed
     Given you are on the default search page
     And you select the search domain Malaria Case diagnosis
     And you expand the attributes search area
     When you dont fill in any of the values
+    And you click search
+    Then there should be a validation error message
+
+  Scenario: Searching using attributes is invalid because terms typed contain nothing but spaces
+    Given you are on the default search page
+    And you select the search domain Malaria Case diagnosis
+    And you expand the attributes search area
+    When you fill the values with nothing but spaces
+    And you click search
+    Then there should be a validation error message
+
+  Scenario: Searching using attributes is invalid after clearing all search terms
+    Given you are on the default search page
+    And you select the search domain Malaria Case diagnosis
+    And you expand the attributes search area
+    When you fill in the the form with values
+    When you clear the values
     And you click search
     Then there should be a validation error message
 

@@ -2,15 +2,15 @@
 import { catchError, flatMap, map, startWith } from 'rxjs/operators';
 import { from } from 'rxjs/observable/from';
 import { of } from 'rxjs/observable/of';
-import { searchPageActionTypes } from '../SearchPage.container';
+import { searchPageActionTypes } from '../SearchPage.actions';
 import { getTrackedEntityInstances } from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import {
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
 } from '../../../../metaData';
 import { actionCreator } from '../../../../actions/actions.utils';
+import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 
-const trackerCaptureAppUrl = () => (process.env.REACT_APP_TRACKER_CAPTURE_APP_PATH || '..').replace(/\/$/, '');
 
 const filtersForUniqueIdSearchQuery = (searchTerm) => {
     const fieldId = Object.keys(searchTerm)[0];
@@ -23,15 +23,13 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
             const searchResults = trackedEntityInstanceContainers;
             if (searchResults.length > 0) {
                 const { id, tei: { orgUnit: orgUnitId } } = searchResults[0];
-                const oldTrackerCaptureAppUrl = trackerCaptureAppUrl();
-                const urlParameters = `/#/dashboard?tei=${id}&ou=${orgUnitId}&${scopeSearchParam}`;
-                window.location.href = `${oldTrackerCaptureAppUrl}${urlParameters}`;
+                navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam);
                 return {};
             }
-            return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
+            return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY_VIEW)();
         }),
-        startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
-        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
+        startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING_VIEW)()),
+        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR_VIEW)())),
     );
 
 const filtersForAttributesSearchQuery = formValues => Object.keys(formValues)
@@ -41,15 +39,14 @@ const filtersForAttributesSearchQuery = formValues => Object.keys(formValues)
 
 const searchViaAttributesStream = (queryArgs, attributes) =>
     from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
-        map(({ trackedEntityInstanceContainers }) => {
-            const searchResults = trackedEntityInstanceContainers;
+        map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
             if (searchResults.length > 0) {
-                return actionCreator(searchPageActionTypes.SEARCH_RESULTS_SUCCESS)({ searchResults });
+                return actionCreator(searchPageActionTypes.SEARCH_RESULTS_SUCCESS_VIEW)({ searchResults, searchResultsPaginationInfo: pagingData });
             }
-            return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
+            return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY_VIEW)();
         }),
-        startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
-        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
+        startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING_VIEW)()),
+        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR_VIEW)())),
     );
 
 export const searchViaUniqueIdOnScopeProgramEpic = (action$: InputObservable, store: ReduxStore) =>
@@ -92,13 +89,14 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (action$: InputObse
 export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH).pipe(
-        flatMap(({ payload: { formId, programId } }) => {
+        flatMap(({ payload: { formId, programId, page } }) => {
             const { formsValues } = store.getState();
 
             const queryArgs = {
                 filter: filtersForAttributesSearchQuery(formsValues[formId]),
                 program: programId,
-                pageNumber: 1,
+                page,
+                pageSize: 5,
                 ouMode: 'ACCESSIBLE',
             };
             const attributes = getTrackerProgramThrowIfNotFound(programId).attributes;
@@ -110,13 +108,14 @@ export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, 
 export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH).pipe(
-        flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
+        flatMap(({ payload: { formId, trackedEntityTypeId, page } }) => {
             const { formsValues } = store.getState();
 
             const queryArgs = {
                 filter: filtersForAttributesSearchQuery(formsValues[formId]),
                 trackedEntityType: trackedEntityTypeId,
-                pageNumber: 1,
+                page,
+                pageSize: 5,
                 ouMode: 'ACCESSIBLE',
             };
 
@@ -125,3 +124,24 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (action$: InputOb
             return searchViaAttributesStream(queryArgs, attributes);
         }),
     );
+
+
+export const paginationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
+// $FlowFixMe[prop-missing] automated comment
+    action$.ofType(searchPageActionTypes.PAGINATION_CHANGE).pipe(
+        flatMap(({ payload: { formId, programId, newPage } }) => {
+            const { formsValues } = store.getState();
+
+            const queryArgs = {
+                filter: filtersForAttributesSearchQuery(formsValues[formId]),
+                program: programId,
+                page: newPage,
+                pageSize: 10,
+                ouMode: 'ACCESSIBLE',
+            };
+            const attributes = getTrackerProgramThrowIfNotFound(programId).attributes;
+
+            return searchViaAttributesStream(queryArgs, attributes);
+        }),
+    );
+

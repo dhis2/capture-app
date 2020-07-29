@@ -19,6 +19,7 @@ import type { Props } from './SearchPage.types';
 import { Section, SectionHeaderSimple } from '../../Section';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
+import { LoadingMask } from '../../LoadingMasks';
 
 const getStyles = (theme: Theme) => ({
     divider: {
@@ -72,10 +73,14 @@ const getStyles = (theme: Theme) => ({
     generalPurposeErrorMessage: {
         color: theme.palette.error.main,
     },
+    loadingMask: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
 });
 
 const SearchSelection =
-  withStyles(getStyles)(({ trackedEntityTypesWithCorrelatedPrograms, classes, setSelected, selectedOption }) =>
+  withStyles(getStyles)(({ trackedEntityTypesWithCorrelatedPrograms, classes, onSelect, selectedSearchScope }) =>
       (<Section
           className={classes.searchDomainSelectorSection}
           header={
@@ -89,8 +94,8 @@ const SearchSelection =
               <div className={classes.searchRowTitle}>Search for</div>
               <div className={classes.searchRowSelectElement} style={{ marginRight: 8 }}>
                   <SingleSelect
-                      onChange={({ selected }) => { setSelected(selected); }}
-                      selected={selectedOption}
+                      onChange={({ selected }) => { onSelect(selected); }}
+                      selected={selectedSearchScope}
                       empty={<div className={classes.customEmpty}>Custom empty component</div>}
                   >
                       {
@@ -125,38 +130,53 @@ const SearchSelection =
 
 
 const Index = ({
+    addFormIdToReduxStore,
+    navigateToMainPage,
+    showInitialSearchPage,
     classes,
     trackedEntityTypesWithCorrelatedPrograms,
     preselectedProgram,
     availableSearchOptions,
     searchStatus,
-    addFormIdToReduxStore,
-    closeModal,
-    navigateToMainPage,
-    searchResults,
     generalPurposeErrorMessage,
 }: Props) => {
-    const [selectedOption, setSelected] = useState(preselectedProgram);
+    const [selectedSearchScope, setSelectedSearchScope] = useState(preselectedProgram);
 
+    const handleSearchScopeSelection = (program) => {
+        showInitialSearchPage();
+        setSelectedSearchScope(program);
+    };
+
+    useEffect(() => {
+        if (!preselectedProgram.value) {
+            showInitialSearchPage();
+        }
+    },
+    [
+        preselectedProgram.value,
+        showInitialSearchPage,
+    ]);
 
     // dan abramov suggest to stringify https://twitter.com/dan_abramov/status/1104414469629898754?lang=en
     // so that useEffect can do the comparison
     const stringifyPrograms = JSON.stringify(availableSearchOptions);
     useEffect(() => {
         // in order for the Form component to render
-        // need to add a formId under the `forms` reducer
-        selectedOption.value &&
-        JSON.parse(stringifyPrograms)[selectedOption.value].searchGroups
+        // a formId under the `forms` reducer needs to be added.
+        selectedSearchScope.value &&
+        JSON.parse(stringifyPrograms)[selectedSearchScope.value].searchGroups
             .forEach(({ formId }) => {
                 addFormIdToReduxStore(formId);
             });
     },
     [
         stringifyPrograms,
-        selectedOption.value,
+        selectedSearchScope.value,
         addFormIdToReduxStore,
     ]);
 
+    const searchGroupForSelectedScope =
+      (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
 
     return (<>
         <LockedSelector />
@@ -170,13 +190,13 @@ const Index = ({
 
                 <SearchSelection
                     trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
-                    setSelected={setSelected}
-                    selectedOption={selectedOption}
+                    onSelect={handleSearchScopeSelection}
+                    selectedSearchScope={selectedSearchScope}
                 />
 
                 <SearchForm
-                    selectedSearchScopeId={selectedOption.value}
-                    searchGroupForSelectedScope={selectedOption.value ? availableSearchOptions[selectedOption.value].searchGroups : []}
+                    selectedSearchScopeId={selectedSearchScope.value}
+                    searchGroupForSelectedScope={searchGroupForSelectedScope}
                 />
 
                 {
@@ -188,7 +208,7 @@ const Index = ({
                             <ButtonStrip end>
                                 <Button
                                     disabled={searchStatus === searchPageStatus.LOADING}
-                                    onClick={closeModal}
+                                    onClick={showInitialSearchPage}
                                     primary
                                     type="button"
                                 >
@@ -203,9 +223,14 @@ const Index = ({
                     searchStatus === searchPageStatus.SHOW_RESULTS &&
                     <h3>
                         Your search has given results. At this point the results are stored.
-                        Number of results: {searchResults && searchResults.length}
                     </h3>
+                }
 
+                {
+                    searchStatus === searchPageStatus.LOADING &&
+                        <div className={classes.loadingMask}>
+                            <LoadingMask />
+                        </div>
                 }
 
                 {
@@ -220,7 +245,7 @@ const Index = ({
             </Paper>
 
             {
-                !selectedOption.value &&
+                searchStatus === searchPageStatus.INITIAL && !selectedSearchScope.value &&
                     <Paper elevation={0} data-test={'dhis2-capture-informative-paper'}>
                         <div className={classes.emptySelectionPaperContent}>
                             {i18n.t('Make a selection to start searching')}
