@@ -75,3 +75,33 @@ Feature: User interacts with Search page
     Given you are on the search page with preselected program and org unit
     When when you click the back button
     Then you should be taken to the main page with program and org unit preselected
+
+  Scenario: Searching using attributes returns results
+    Given you are on the default search page
+    And you select the search domain Malaria Case diagnosis
+    And you expand the attributes search area
+    When you fill in the last name with values that will return results
+    And you click search
+    Then you can see the first page of the results
+
+  Scenario: Searching using attributes has a working pagination
+    Given you are on the default search page
+    And you select the search domain Malaria Case diagnosis
+    And you expand the attributes search area
+    And you fill in the last name with values that will return results
+    When you click search
+    Then you can see the first page of the results
+    When you click the next page button
+    Then you can see the second page of the results
+    When you click the previous page button
+    Then you can see the first page of the results
+
+  Scenario: Searching using attributes navigates user to the dashboard view
+    Given you are on the default search page
+    And you select the search domain Malaria Case diagnosis
+    And you expand the attributes search area
+    And you fill in the last name with values that will return results
+    And you click search
+    And you can see the first page of the results
+    When you click the view dashboard button
+    Then you are navigated to the Tracker Capture

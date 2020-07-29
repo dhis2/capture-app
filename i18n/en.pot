@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-07-29T06:13:47.620Z\n"
-"PO-Revision-Date: 2020-07-29T06:13:47.620Z\n"
+"POT-Creation-Date: 2020-07-29T06:15:14.037Z\n"
+"PO-Revision-Date: 2020-07-29T06:15:14.037Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -680,6 +680,12 @@ msgid "Back"
 msgstr ""
 
 msgid "Make a selection to start searching"
+msgstr ""
+
+msgid "View dashboard"
+msgstr ""
+
+msgid "result(s) found for term(s)"
 msgstr ""
 
 msgid "You dont have access to edit this event"

@@ -20,6 +20,7 @@ import { Section, SectionHeaderSimple } from '../../Section';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
 import { LoadingMask } from '../../LoadingMasks';
+import { SearchResults } from './SearchResults/SearchResults.container';
 
 const getStyles = (theme: Theme) => ({
     divider: {
@@ -221,9 +222,7 @@ const Index = ({
 
                 {
                     searchStatus === searchPageStatus.SHOW_RESULTS &&
-                    <h3>
-                        Your search has given results. At this point the results are stored.
-                    </h3>
+                    <SearchResults searchGroupForSelectedScope={searchGroupForSelectedScope} />
                 }
 
                 {
