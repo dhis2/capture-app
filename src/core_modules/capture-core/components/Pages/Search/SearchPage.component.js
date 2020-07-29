@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper/Paper';
 import withStyles from '@material-ui/core/styles/withStyles';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import { useSelector, useDispatch } from 'react-redux';
+import { compose } from 'redux';
 import { isEqual } from 'lodash';
 import {
     Modal,
@@ -27,10 +28,15 @@ import { LoadingMask } from '../../LoadingMasks';
 import { SearchResults } from './SearchResults/SearchResults.container';
 import { programCollection } from '../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../../metaData/Program';
-import { searchScopes } from './SearchPage.container';
 import { SearchDomainSelector } from './SearchDomainSelector';
 import { addFormData } from '../../D2Form/actions/form.actions';
 import { navigateToMainPage, showInitialSearchPage } from './SearchPage.actions';
+import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
+
+export const searchScopes = {
+    PROGRAM: 'PROGRAM',
+    TRACKED_ENTITY_TYPE: 'TRACKED_ENTITY_TYPE',
+};
 
 const getStyles = (theme: Theme) => ({
     container: {
@@ -291,4 +297,15 @@ const Index = ({ classes }: Props) => {
     </>);
 };
 
-export const SearchPage = withStyles(getStyles)(Index);
+export const SearchPage = ({ ...props }: Props) => {
+    const Composed = compose(
+        withLoadingIndicator(),
+        withErrorMessageHandler(),
+        withStyles(getStyles),
+    )(Index);
+
+    const error: boolean = useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error, isEqual);
+    const ready: boolean = useSelector(({ activePage }) => !activePage.isLoading, isEqual);
+
+    return <Composed {...props} error={error} ready={ready} />;
+};

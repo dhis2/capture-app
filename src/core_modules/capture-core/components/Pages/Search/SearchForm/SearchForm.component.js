@@ -4,7 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui-core';
 import Form from '../../../D2Form/D2Form.component';
-import { searchScopes } from '../SearchPage.container';
+import { searchScopes } from '../SearchPage.component';
 import { Section, SectionHeaderSimple } from '../../../Section';
 import type { Props } from './SearchForm.types';
 import { searchPageStatus } from '../../../../reducers/descriptions/searchPage.reducerDescription';
