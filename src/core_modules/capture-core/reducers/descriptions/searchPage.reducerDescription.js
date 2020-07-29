@@ -34,16 +34,16 @@ export const searchPageDesc = createReducerDescription({
         searchStatus: searchPageStatus.ERROR,
         generalPurposeErrorMessage: 'This is a general purpose error. This text needs to be defined',
     }),
+    [searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE]: (state, { payload: { searchScopeType, searchScopeId, formId, currentSearchTerms } }) => ({
+        ...state,
+        currentSearchInfo: { searchScopeType, searchScopeId, formId, currentSearchTerms },
+    }),
     [searchPageActionTypes.PAGINATION_CHANGE]: (state, { payload: { newPage } }) => ({
         ...state,
         searchResultsPaginationInfo: {
             ...state.searchResultsPaginationInfo,
             currentPage: newPage,
         },
-    }),
-    [searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE]: (state, { payload: { searchScopeType, searchScopeId, formId, currentSearchTerms } }) => ({
-        ...state,
-        currentSearchInfo: { searchScopeType, searchScopeId, formId, currentSearchTerms },
     }),
 }, 'searchPage', {
     searchStatus: searchPageStatus.INITIAL,
