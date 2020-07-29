@@ -116,7 +116,12 @@ const Index = ({
 
         const FormInformativeMessage = ({ minAttributesRequiredToSearch }) =>
             (<div className={error ? classes.textError : classes.textInfo}>
-                Fill in at least {minAttributesRequiredToSearch}  attributes to search
+                {
+                    i18n.t(
+                        'Fill in at least {{minAttributesRequiredToSearch}}  attributes to search',
+                        { minAttributesRequiredToSearch },
+                    )
+                }
             </div>);
         return (<>
             {
@@ -166,7 +171,7 @@ const Index = ({
                                                 formId,
                                             )}
                                         >
-                                            Find by {name}
+                                            {i18n.t('Find by {{name}}', { name })}
                                         </Button>
                                     </div>
                                 </Section>

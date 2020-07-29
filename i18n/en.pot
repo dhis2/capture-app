@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-07-24T09:29:42.067Z\n"
-"PO-Revision-Date: 2020-07-24T09:29:42.067Z\n"
+"POT-Creation-Date: 2020-07-29T12:48:56.453Z\n"
+"PO-Revision-Date: 2020-07-29T12:48:56.453Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -670,13 +670,30 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
+msgid "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
+msgstr ""
+
 msgid "Search {{name}}"
+msgstr ""
+
+msgid "Find by {{name}}"
 msgstr ""
 
 msgid "Search by attributes"
 msgstr ""
 
 msgid "Back"
+msgstr ""
+
+msgid "No results found"
+msgstr ""
+
+msgid ""
+"You can change your search terms and search again to find what you are "
+"looking for."
+msgstr ""
+
+msgid "Back to search"
 msgstr ""
 
 msgid "Make a selection to start searching"

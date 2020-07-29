@@ -250,17 +250,18 @@ const Index = ({ classes }: Props) => {
                 {
                     searchStatus === searchPageStatus.NO_RESULTS &&
                     <Modal position="middle">
-                        <ModalTitle>Empty results</ModalTitle>
-                        <ModalContent>There was no item found</ModalContent>
+                        <ModalTitle>{i18n.t('No results found')}</ModalTitle>
+                        <ModalContent>
+                            {i18n.t('You can change your search terms and search again to find what you are looking for.')}
+                        </ModalContent>
                         <ModalActions>
                             <ButtonStrip end>
                                 <Button
                                     disabled={searchStatus === searchPageStatus.LOADING}
                                     onClick={showInitialSearchPage}
-                                    primary
                                     type="button"
                                 >
-                                    Search Again
+                                    {i18n.t('Back to search')}
                                 </Button>
                             </ButtonStrip>
                         </ModalActions>
@@ -280,7 +281,7 @@ const Index = ({ classes }: Props) => {
                         data-test="dhis2-capture-general-purpose-error-mesage"
                         className={classes.generalPurposeErrorMessage}
                     >
-                        {generalPurposeErrorMessage}
+                        {i18n.t(generalPurposeErrorMessage)}
                     </div>
                 }
             </Paper>
