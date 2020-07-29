@@ -124,24 +124,3 @@ export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (action$: InputOb
             return searchViaAttributesStream(queryArgs, attributes);
         }),
     );
-
-
-export const paginationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
-// $FlowFixMe[prop-missing] automated comment
-    action$.ofType(searchPageActionTypes.PAGINATION_CHANGE).pipe(
-        flatMap(({ payload: { formId, programId, newPage } }) => {
-            const { formsValues } = store.getState();
-
-            const queryArgs = {
-                filter: filtersForAttributesSearchQuery(formsValues[formId]),
-                program: programId,
-                page: newPage,
-                pageSize: 10,
-                ouMode: 'ACCESSIBLE',
-            };
-            const attributes = getTrackerProgramThrowIfNotFound(programId).attributes;
-
-            return searchViaAttributesStream(queryArgs, attributes);
-        }),
-    );
-
