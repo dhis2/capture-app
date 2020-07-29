@@ -256,8 +256,7 @@ const Index = ({ classes }: Props) => {
                             <ButtonStrip end>
                                 <Button
                                     disabled={searchStatus === searchPageStatus.LOADING}
-                                    onClick={showInitialSearchPage}
-                                    primary
+                                    onClick={dispatchShowInitialSearchPage}
                                     type="button"
                                 >
                                     Search Again
