@@ -253,6 +253,7 @@ const Index = ({
         saveCurrentFormData,
         error,
         expandedFormId,
+        formsValues,
     ]);
 };
 
