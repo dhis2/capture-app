@@ -111,6 +111,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
     addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
     showInitialSearchPage: () => { dispatch(actionCreator(searchPageActionTypes.SEARCH_RESULTS_INITIAL_VIEW)()); },
     navigateToMainPage: () => { dispatch(actionCreator(searchPageActionTypes.TO_MAIN_PAGE_NAVIGATE)()); },
+    paginationChange: (newPage) => { dispatch(actionCreator(searchPageActionTypes.PAGINATION_CHANGE)({ newPage })); },
 });
 
 export const SearchPage =
