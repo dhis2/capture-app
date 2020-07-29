@@ -38,13 +38,6 @@ export const searchPageDesc = createReducerDescription({
         ...state,
         currentSearchInfo: { searchScopeType, searchScopeId, formId, currentSearchTerms },
     }),
-    [searchPageActionTypes.PAGINATION_CHANGE]: (state, { payload: { newPage } }) => ({
-        ...state,
-        searchResultsPaginationInfo: {
-            ...state.searchResultsPaginationInfo,
-            currentPage: newPage,
-        },
-    }),
 }, 'searchPage', {
     searchStatus: searchPageStatus.INITIAL,
     searchResults: [],
