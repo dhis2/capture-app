@@ -61,7 +61,6 @@ export type DispatchersFromRedux = {|
   addFormIdToReduxStore: (formId: string) => void,
   showInitialSearchPage: () => void,
   navigateToMainPage: () => void,
-  paginationChange: (newPage: number) => void
 |}
 
 export type Props = {|

@@ -11,7 +11,6 @@ export const searchPageActionTypes = {
     SEARCH_RESULTS_ERROR_VIEW: 'SearchResultsErrorView',
     SEARCH_RESULTS_INITIAL_VIEW: 'SearchResultsInitialView',
     TO_MAIN_PAGE_NAVIGATE: 'NavigateToMainPage',
-    PAGINATION_CHANGE: 'ChangePagination',
     CURRENT_SEARCH_INFO_SAVE: 'SaveCurrentSearchInfo',
 };
 
