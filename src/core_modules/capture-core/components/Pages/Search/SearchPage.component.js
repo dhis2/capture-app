@@ -206,9 +206,6 @@ const Index = ({ classes }: Props) => {
         selectedSearchScope.value,
     ]);
 
-    const searchGroupForSelectedScope =
-      (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
-
     const handleProgramSelection = (searchScope) => {
         dispatchShowInitialSearchPage();
         setSelectedSearchScope(searchScope);
