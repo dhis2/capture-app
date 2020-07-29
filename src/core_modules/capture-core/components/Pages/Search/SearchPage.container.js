@@ -8,12 +8,22 @@ import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import type { DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './SearchPage.types';
 import { addFormData } from '../../D2Form/actions/form.actions';
 import { actionCreator } from '../../../actions/actions.utils';
-
+import { searchPageActionTypes } from './SearchPage.actions';
 
 const buildSearchOption = (id, name, searchGroups, searchScope) => ({
     searchOptionId: id,
     searchOptionName: name,
     searchGroups: [...searchGroups.values()]
+        // We use the sorted array to always have expanded the first search group section.
+        .sort(({ unique: xBoolean }, { unique: yBoolean }) => {
+            if (xBoolean === yBoolean) {
+                return 0;
+            }
+            if (xBoolean) {
+                return -1;
+            }
+            return 1;
+        })
         .map(({ unique, searchForm, minAttributesRequiredToSearch }, index) => ({
             unique,
             searchForm,
@@ -27,26 +37,13 @@ const buildSearchOption = (id, name, searchGroups, searchScope) => ({
         })),
 });
 
-export const searchPageActionTypes = {
-    VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH: 'SearchViaUniqueIdOnScopeProgram',
-    VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH: 'SearchViaUniqueIdOnScopeTrackedEntityType',
-    VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH: 'SearchViaAttributesOnScopeProgram',
-    VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH: 'SearchViaAttributesOnScopeTrackedEntityType',
-    SEARCH_RESULTS_LOADING: 'SearchResultsLoading',
-    SEARCH_RESULTS_EMPTY: 'SearchResultsEmpty',
-    SEARCH_RESULTS_SUCCESS: 'SearchResultsSuccess',
-    SEARCH_RESULTS_ERROR: 'SearchResultsError',
-    MODAL_CLOSE: 'CloseModal',
-    TO_MAIN_PAGE_NAVIGATE: 'NavigateToMainPage',
-};
-
 export const searchScopes = {
     PROGRAM: 'PROGRAM',
     TRACKED_ENTITY_TYPE: 'TRACKED_ENTITY_TYPE',
 };
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
-    const { currentSelections, activePage, searchPage: { searchStatus, searchResults, generalPurposeErrorMessage } } = state;
+    const { currentSelections, activePage, searchPage: { searchStatus, generalPurposeErrorMessage } } = state;
 
     const trackedEntityTypesWithCorrelatedPrograms =
       [...programCollection.values()]
@@ -96,7 +93,6 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
             }), {}),
         }), {});
 
-
     return {
         preselectedProgram: {
             value: preselectedProgram && preselectedProgram.programId,
@@ -107,14 +103,13 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         error: activePage.selectionsError && activePage.selectionsError.error,
         ready: !activePage.isLoading,
         searchStatus,
-        searchResults,
         generalPurposeErrorMessage,
     };
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
     addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
-    closeModal: () => { dispatch(actionCreator(searchPageActionTypes.MODAL_CLOSE)()); },
+    showInitialSearchPage: () => { dispatch(actionCreator(searchPageActionTypes.SEARCH_RESULTS_INITIAL_VIEW)()); },
     navigateToMainPage: () => { dispatch(actionCreator(searchPageActionTypes.TO_MAIN_PAGE_NAVIGATE)()); },
 });
 

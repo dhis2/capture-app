@@ -45,12 +45,14 @@ const Index = ({
     searchViaUniqueIdOnScopeProgram,
     searchViaAttributesOnScopeProgram,
     searchViaAttributesOnScopeTrackedEntityType,
+    saveCurrentFormData,
     selectedSearchScopeId,
     classes,
     searchGroupForSelectedScope,
     forms,
     searchStatus,
     isSearchViaAttributesValid,
+    currentSearchTerms,
 }: Props) => {
     const [error, setError] = useState(false);
     const [expandedFormId, setExpandedFormId] = useState(null);
@@ -74,16 +76,16 @@ const Index = ({
     return useMemo(() => {
         const formReference = {};
 
-        const handleSearchViaUniqueId = (selectedId, formId, searchScope) => {
+        const handleSearchViaUniqueId = (searchScopeType, searchScopeId, formId) => {
             const isValid = formReference[formId].validateFormScrollToFirstFailedField({});
 
             if (isValid) {
-                switch (searchScope) {
+                switch (searchScopeType) {
                 case searchScopes.PROGRAM:
-                    searchViaUniqueIdOnScopeProgram({ programId: selectedId, formId });
+                    searchViaUniqueIdOnScopeProgram({ programId: searchScopeId, formId });
                     break;
                 case searchScopes.TRACKED_ENTITY_TYPE:
-                    searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: selectedId, formId });
+                    searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: searchScopeId, formId });
                     break;
                 default:
                     break;
@@ -91,17 +93,18 @@ const Index = ({
             }
         };
 
-        const handleSearchViaAttributes = (selectedId, formId, searchScope, minAttributesRequiredToSearch) => {
+        const handleSearchViaAttributes = (searchScopeType, searchScopeId, formId, minAttributesRequiredToSearch) => {
             const isValid = isSearchViaAttributesValid(minAttributesRequiredToSearch, formId);
 
             if (isValid) {
                 setError(false);
-                switch (searchScope) {
+                saveCurrentFormData(searchScopeType, searchScopeId, formId, currentSearchTerms);
+                switch (searchScopeType) {
                 case searchScopes.PROGRAM:
-                    searchViaAttributesOnScopeProgram({ programId: selectedId, formId });
+                    searchViaAttributesOnScopeProgram({ programId: searchScopeId, formId });
                     break;
                 case searchScopes.TRACKED_ENTITY_TYPE:
-                    searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: selectedId, formId });
+                    searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: searchScopeId, formId });
                     break;
                 default:
                     break;
@@ -158,9 +161,9 @@ const Index = ({
                                             onClick={() =>
                                                 selectedSearchScopeId &&
                                             handleSearchViaUniqueId(
+                                                searchScope,
                                                 selectedSearchScopeId,
                                                 formId,
-                                                searchScope,
                                             )}
                                         >
                                             Find by {name}
@@ -210,9 +213,9 @@ const Index = ({
                                             onClick={() =>
                                                 selectedSearchScopeId &&
                                             handleSearchViaAttributes(
+                                                searchScope,
                                                 selectedSearchScopeId,
                                                 formId,
-                                                searchScope,
                                                 minAttributesRequiredToSearch,
                                             )
                                             }
@@ -229,7 +232,6 @@ const Index = ({
                         );
                     })
             }
-
         </>);
     },
     [
@@ -248,6 +250,8 @@ const Index = ({
         searchViaAttributesOnScopeProgram,
         searchViaAttributesOnScopeTrackedEntityType,
         isSearchViaAttributesValid,
+        saveCurrentFormData,
+        currentSearchTerms,
         error,
         expandedFormId,
     ]);

@@ -1,7 +1,7 @@
 // @flow
 import { map } from 'rxjs/operators';
 import { push } from 'connected-react-router';
-import { searchPageActionTypes } from './SearchPage.container';
+import { searchPageActionTypes } from './SearchPage.actions';
 
 const url = (programId: string, orgUnitId: string) => {
     const argArray = [];
