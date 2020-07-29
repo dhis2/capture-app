@@ -48,11 +48,11 @@ const Index = ({
     saveCurrentFormData,
     selectedSearchScopeId,
     classes,
-    searchGroupForSelectedScope,
+    searchGroupsForSelectedScope,
     forms,
+    formsValues,
     searchStatus,
     isSearchViaAttributesValid,
-    currentSearchTerms,
 }: Props) => {
     const [error, setError] = useState(false);
     const [expandedFormId, setExpandedFormId] = useState(null);
@@ -65,13 +65,13 @@ const Index = ({
     );
 
     useEffect(() => {
-        searchGroupForSelectedScope
+        searchGroupsForSelectedScope
             .forEach(({ formId }, index) => {
                 if (!expandedFormId && index === 0) {
                     setExpandedFormId(formId);
                 }
             });
-    }, [searchGroupForSelectedScope, expandedFormId]);
+    }, [searchGroupsForSelectedScope, expandedFormId]);
 
     return useMemo(() => {
         const formReference = {};
@@ -98,7 +98,7 @@ const Index = ({
 
             if (isValid) {
                 setError(false);
-                saveCurrentFormData(searchScopeType, searchScopeId, formId, currentSearchTerms);
+                saveCurrentFormData(searchScopeType, searchScopeId, formId, formsValues);
                 switch (searchScopeType) {
                 case searchScopes.PROGRAM:
                     searchViaAttributesOnScopeProgram({ programId: searchScopeId, formId });
@@ -120,7 +120,7 @@ const Index = ({
             </div>);
         return (<>
             {
-                searchGroupForSelectedScope
+                searchGroupsForSelectedScope
                     .filter(searchGroup => searchGroup.unique)
                     .map(({ searchForm, formId, searchScope }) => {
                         const isSearchSectionCollapsed = !(expandedFormId === formId);
@@ -176,7 +176,7 @@ const Index = ({
             }
 
             {
-                searchGroupForSelectedScope
+                searchGroupsForSelectedScope
                     .filter(searchGroup => !searchGroup.unique)
                     .map(({ searchForm, formId, searchScope, minAttributesRequiredToSearch }) => {
                         const searchByText = i18n.t('Search by attributes');
@@ -242,7 +242,7 @@ const Index = ({
         classes.textInfo,
         classes.textError,
         forms,
-        searchGroupForSelectedScope,
+        searchGroupsForSelectedScope,
         selectedSearchScopeId,
         searchStatus,
         searchViaUniqueIdOnScopeTrackedEntityType,
@@ -251,7 +251,6 @@ const Index = ({
         searchViaAttributesOnScopeTrackedEntityType,
         isSearchViaAttributesValid,
         saveCurrentFormData,
-        currentSearchTerms,
         error,
         expandedFormId,
     ]);
