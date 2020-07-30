@@ -51,10 +51,7 @@ export const Index =
               <div className={classes.searchRowTitle}>Search for</div>
               <div className={classes.searchRowSelectElement} style={{ marginRight: 8 }}>
                   <SingleSelect
-                      onChange={({ selected }) => {
-
-                          onSelect(selected);
-                      }}
+                      onChange={({ selected }) => { onSelect(selected); }}
                       selected={selectedProgram}
                       empty={<div className={classes.customEmpty}>Custom empty component</div>}
                   >
