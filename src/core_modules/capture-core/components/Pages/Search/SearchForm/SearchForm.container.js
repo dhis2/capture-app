@@ -1,5 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
+import type { ComponentType } from 'react';
 import { SearchFormComponent } from './SearchForm.component';
 import type { DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './SearchForm.types';
 import {
@@ -84,5 +85,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
 });
 
 
-export const SearchForm =
+export const SearchForm: ComponentType<OwnProps> =
   connect<Props, OwnProps, _, _, _, _>(mapStateToProps, mapDispatchToProps)(SearchFormComponent);

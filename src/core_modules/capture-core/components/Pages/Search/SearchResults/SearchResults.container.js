@@ -1,4 +1,5 @@
 // @flow
+import type { ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { SearchResultsComponent } from './SearchResults.component';
 import type { OwnProps, Props, PropsFromRedux, DispatchersFromRedux } from './SearchResults.types';
@@ -39,5 +40,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
 });
 
 
-export const SearchResults =
+export const SearchResults: ComponentType<OwnProps> =
   connect<Props, OwnProps, _, _, _, _>(mapStateToProps, mapDispatchToProps)(SearchResultsComponent);

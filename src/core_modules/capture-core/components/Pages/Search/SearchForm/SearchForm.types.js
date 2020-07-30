@@ -9,8 +9,7 @@ export type CurrentSearchTerms = Array<{|
 
 export type OwnProps = {|
   +searchGroupForSelectedScope: SearchGroup,
-  +selectedSearchScopeId?: string,
-  +classes: Object,
+  +selectedSearchScopeId: ?string,
 |}
 
 export type PropsFromRedux ={|
@@ -33,6 +32,7 @@ export type DispatchersFromRedux = {|
 |}
 
 export type Props = {|
+  +classes: Object,
   ...OwnProps,
   ...DispatchersFromRedux,
   ...PropsFromRedux

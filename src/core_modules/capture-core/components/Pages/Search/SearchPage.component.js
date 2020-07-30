@@ -212,9 +212,9 @@ const Index = ({ classes }: Props) => {
         selectedSearchScope.value,
     ]);
 
-    const handleProgramSelection = (searchScope) => {
+    const handleProgramSelection = ({ value, label }) => {
         dispatchShowInitialSearchPage();
-        setSelectedSearchScope(searchScope);
+        setSelectedSearchScope({ value, label });
     };
 
     return (<>
