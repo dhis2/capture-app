@@ -32,17 +32,13 @@ export type TrackedEntityTypesWithCorrelatedPrograms = $ReadOnly<{
   |}
 }>
 
-export type OwnProps = {|
-  +classes: Object,
-|}
-
 export type PropsFromRedux ={|
   +error: boolean,
   +ready: boolean,
 |}
 
 export type Props = {|
-  ...OwnProps,
+  ...CssClasses,
   ...PropsFromRedux
 |}
 

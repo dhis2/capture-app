@@ -8,7 +8,7 @@ export type OwnProps = $ReadOnly<{|
 |}>
 
 export type Props = {|
-  classes: Object,
+  ...CssClasses,
   ...OwnProps,
 |}
 

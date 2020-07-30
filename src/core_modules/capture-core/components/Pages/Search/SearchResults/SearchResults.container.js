@@ -1,7 +1,9 @@
 // @flow
 import type { ComponentType } from 'react';
 import { connect } from 'react-redux';
-import { SearchResultsComponent } from './SearchResults.component';
+import { compose } from 'redux';
+import { withStyles } from '@material-ui/core';
+import { getStyles, SearchResultsComponent } from './SearchResults.component';
 import type { OwnProps, Props, PropsFromRedux, DispatchersFromRedux } from './SearchResults.types';
 import { searchViaAttributesOnScopeTrackedEntityType, searchViaAttributesOnScopeProgram } from '../SearchPage.actions';
 
@@ -41,4 +43,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
 
 
 export const SearchResults: ComponentType<OwnProps> =
-  connect<Props, OwnProps, _, _, _, _>(mapStateToProps, mapDispatchToProps)(SearchResultsComponent);
+  compose(
+      connect<Props, OwnProps & CssClasses, _, _, _, _>(mapStateToProps, mapDispatchToProps),
+      withStyles(getStyles),
+  )(SearchResultsComponent);

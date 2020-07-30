@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import i18n from '@dhis2/d2-i18n';
-import withStyles from '@material-ui/core/styles/withStyles';
 import { Pagination } from 'capture-ui';
 import { Button } from '@dhis2/ui-core';
 import CardList from '../../../CardList/CardList.component';
@@ -12,7 +11,7 @@ import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 
 const SearchPagination = withNavigation()(Pagination);
 
-const getStyles = (theme: Theme) => ({
+export const getStyles = (theme: Theme) => ({
     pagination: {
         display: 'flex',
         justifyContent: 'flex-end',
@@ -31,7 +30,7 @@ const getStyles = (theme: Theme) => ({
 });
 
 
-export const Index = ({
+export const SearchResultsComponent = ({
     searchViaAttributesOnScopeProgram,
     searchViaAttributesOnScopeTrackedEntityType,
     classes,
@@ -109,5 +108,3 @@ export const Index = ({
         </div>
     </>);
 };
-
-export const SearchResultsComponent = withStyles(getStyles)(Index);

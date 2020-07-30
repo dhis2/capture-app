@@ -32,7 +32,7 @@ export type DispatchersFromRedux = {|
 |}
 
 export type Props = {|
-  +classes: Object,
+  ...CssClasses,
   ...OwnProps,
   ...DispatchersFromRedux,
   ...PropsFromRedux
