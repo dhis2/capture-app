@@ -63,15 +63,13 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "manualBuild": "node verifyCacheVersion.js && yarn localize && d2-manifest package.json ./public/manifest.webapp && REACT_APP_DHIS2_BASE_URL='../../..' react-scripts build && mkdirp buildzip/ && pushd build && bestzip ../buildzip/NewCaptureApp.zip * && popd",
+    "manualBuild": "node verifyCacheVersion.js && REACT_APP_DHIS2_BASE_URL='../../..' d2-app-scripts build",
     "start": "d2-app-scripts start",
-    "build": "node verifyCacheVersion.js && yarn localize && d2-manifest package.json ./public/manifest.webapp && GENERATE_SOURCEMAP=false react-scripts build && cp ./package.json ./build/package.json",
+    "build": "node verifyCacheVersion.js && GENERATE_SOURCEMAP=false d2-app-scripts build",
     "test": "react-scripts test",
     "test:debug": "react-scripts --inspect-brk test --runInBand",
     "eject": "react-scripts eject",
     "add-flow-types": "flow-typed install",
-    "extract-pot": "d2-i18n-extract -p src/ -o i18n/",
-    "localize": "yarn extract-pot && d2-i18n-generate -n default -p ./i18n/ -o ./src/locales/",
     "prestart": "node verifyCacheVersion.js && d2-manifest package.json ./public/manifest.webapp",
     "docs": "NODE_ENV=development jsdoc -c jsdoc-conf.json",
     "linter:check": "eslint -c .eslintrc . --quiet",
