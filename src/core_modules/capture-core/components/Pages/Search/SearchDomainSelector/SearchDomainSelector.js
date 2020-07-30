@@ -36,7 +36,7 @@ const styles = (theme: Theme) => ({
     },
 });
 
-export const Index =
+const Index =
   ({ trackedEntityTypesWithCorrelatedPrograms, classes, onSelect, selectedProgram }: Props) =>
       (<Section
           className={classes.searchDomainSelectorSection}
