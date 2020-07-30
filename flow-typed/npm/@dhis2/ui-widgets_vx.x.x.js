@@ -1,4 +1,4 @@
-// flow-typed signature: 591553bf8aad49d4d9911513100f03ea
+// flow-typed signature: 1bea3f59a710f19b7854040438211809
 // flow-typed version: <<STUB>>/@dhis2/ui-widgets_v^2.0.3/flow_v0.127.0
 
 /**
@@ -22,23 +22,103 @@ declare module '@dhis2/ui-widgets' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module '@dhis2/ui-widgets/build/cjs/lib' {
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar' {
   declare module.exports: any;
 }
 
-declare module '@dhis2/ui-widgets/build/docs/main.16c27494b5840c9e457b.bundle' {
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/Apps' {
   declare module.exports: any;
 }
 
-declare module '@dhis2/ui-widgets/build/docs/main.1e11b83ef734cf811c21.bundle' {
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/ImageIcon' {
   declare module.exports: any;
 }
 
-declare module '@dhis2/ui-widgets/build/docs/precache-manifest.292cca89d870e936e99a7f6e74f915ba' {
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/Logo' {
   declare module.exports: any;
 }
 
-declare module '@dhis2/ui-widgets/build/docs/runtime~main.1e11b83ef734cf811c21.bundle' {
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/LogoImage' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/NotificationIcon' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/Notifications' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/Profile' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/Profile/ProfileHeader' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/Profile/ProfileMenu' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/TextIcon' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/Title' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/cjs/icons/Account' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/cjs/icons/Apps' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/cjs/icons/Cancel' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/cjs/icons/Email' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/cjs/icons/Exit' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/cjs/icons/Help' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/cjs/icons/Info' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/cjs/icons/Message' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/cjs/icons/Settings' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/cjs' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/cjs/locales' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/docs/main.7c4f2415070fdb7a2c2e.bundle' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/docs/main.ef6876ec1eae4a6e1fbf.bundle' {
   declare module.exports: any;
 }
 
@@ -46,57 +126,283 @@ declare module '@dhis2/ui-widgets/build/docs/runtime~main.3e80324d580cf3681712.b
   declare module.exports: any;
 }
 
+declare module '@dhis2/ui-widgets/build/docs/runtime~main.ef6876ec1eae4a6e1fbf.bundle' {
+  declare module.exports: any;
+}
+
 declare module '@dhis2/ui-widgets/build/docs/sb_dll/storybook_ui_dll' {
   declare module.exports: any;
 }
 
-declare module '@dhis2/ui-widgets/build/docs/service-worker' {
+declare module '@dhis2/ui-widgets/build/docs/vendors~main.b29c49ca2442945bba0e.bundle' {
   declare module.exports: any;
 }
 
-declare module '@dhis2/ui-widgets/build/docs/vendors~main.1e11b83ef734cf811c21.bundle' {
+declare module '@dhis2/ui-widgets/build/docs/vendors~main.ef6876ec1eae4a6e1fbf.bundle' {
   declare module.exports: any;
 }
 
-declare module '@dhis2/ui-widgets/build/docs/vendors~main.a23e29d582cdff4715fe.bundle' {
+declare module '@dhis2/ui-widgets/build/es/HeaderBar' {
   declare module.exports: any;
 }
 
-declare module '@dhis2/ui-widgets/build/es/lib' {
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/Apps' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/ImageIcon' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/Logo' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/LogoImage' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/NotificationIcon' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/Notifications' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/Profile' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/Profile/ProfileHeader' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/Profile/ProfileMenu' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/TextIcon' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/Title' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es/icons/Account' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es/icons/Apps' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es/icons/Cancel' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es/icons/Email' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es/icons/Exit' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es/icons/Help' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es/icons/Info' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es/icons/Message' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es/icons/Settings' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es' {
+  declare module.exports: any;
+}
+
+declare module '@dhis2/ui-widgets/build/es/locales' {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module '@dhis2/ui-widgets/build/cjs/lib.js' {
-  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/lib'>;
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/HeaderBar'>;
 }
-declare module '@dhis2/ui-widgets/build/docs/main.16c27494b5840c9e457b.bundle.js' {
-  declare module.exports: $Exports<'@dhis2/ui-widgets/build/docs/main.16c27494b5840c9e457b.bundle'>;
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/Apps.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/HeaderBar/Apps'>;
 }
-declare module '@dhis2/ui-widgets/build/docs/main.1e11b83ef734cf811c21.bundle.js' {
-  declare module.exports: $Exports<'@dhis2/ui-widgets/build/docs/main.1e11b83ef734cf811c21.bundle'>;
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/ImageIcon.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/HeaderBar/ImageIcon'>;
 }
-declare module '@dhis2/ui-widgets/build/docs/precache-manifest.292cca89d870e936e99a7f6e74f915ba.js' {
-  declare module.exports: $Exports<'@dhis2/ui-widgets/build/docs/precache-manifest.292cca89d870e936e99a7f6e74f915ba'>;
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/Logo.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/HeaderBar/Logo'>;
 }
-declare module '@dhis2/ui-widgets/build/docs/runtime~main.1e11b83ef734cf811c21.bundle.js' {
-  declare module.exports: $Exports<'@dhis2/ui-widgets/build/docs/runtime~main.1e11b83ef734cf811c21.bundle'>;
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/LogoImage.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/HeaderBar/LogoImage'>;
+}
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/NotificationIcon.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/HeaderBar/NotificationIcon'>;
+}
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/Notifications.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/HeaderBar/Notifications'>;
+}
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/Profile.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/HeaderBar/Profile'>;
+}
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/Profile/ProfileHeader.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/HeaderBar/Profile/ProfileHeader'>;
+}
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/Profile/ProfileMenu.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/HeaderBar/Profile/ProfileMenu'>;
+}
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/TextIcon.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/HeaderBar/TextIcon'>;
+}
+declare module '@dhis2/ui-widgets/build/cjs/HeaderBar/Title.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/HeaderBar/Title'>;
+}
+declare module '@dhis2/ui-widgets/build/cjs/icons/Account.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/icons/Account'>;
+}
+declare module '@dhis2/ui-widgets/build/cjs/icons/Apps.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/icons/Apps'>;
+}
+declare module '@dhis2/ui-widgets/build/cjs/icons/Cancel.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/icons/Cancel'>;
+}
+declare module '@dhis2/ui-widgets/build/cjs/icons/Email.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/icons/Email'>;
+}
+declare module '@dhis2/ui-widgets/build/cjs/icons/Exit.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/icons/Exit'>;
+}
+declare module '@dhis2/ui-widgets/build/cjs/icons/Help.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/icons/Help'>;
+}
+declare module '@dhis2/ui-widgets/build/cjs/icons/Info.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/icons/Info'>;
+}
+declare module '@dhis2/ui-widgets/build/cjs/icons/Message.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/icons/Message'>;
+}
+declare module '@dhis2/ui-widgets/build/cjs/icons/Settings.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/icons/Settings'>;
+}
+declare module '@dhis2/ui-widgets/build/cjs/index' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs'>;
+}
+declare module '@dhis2/ui-widgets/build/cjs/index.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs'>;
+}
+declare module '@dhis2/ui-widgets/build/cjs/locales/index' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/locales'>;
+}
+declare module '@dhis2/ui-widgets/build/cjs/locales/index.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/cjs/locales'>;
+}
+declare module '@dhis2/ui-widgets/build/docs/main.7c4f2415070fdb7a2c2e.bundle.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/docs/main.7c4f2415070fdb7a2c2e.bundle'>;
+}
+declare module '@dhis2/ui-widgets/build/docs/main.ef6876ec1eae4a6e1fbf.bundle.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/docs/main.ef6876ec1eae4a6e1fbf.bundle'>;
 }
 declare module '@dhis2/ui-widgets/build/docs/runtime~main.3e80324d580cf3681712.bundle.js' {
   declare module.exports: $Exports<'@dhis2/ui-widgets/build/docs/runtime~main.3e80324d580cf3681712.bundle'>;
 }
+declare module '@dhis2/ui-widgets/build/docs/runtime~main.ef6876ec1eae4a6e1fbf.bundle.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/docs/runtime~main.ef6876ec1eae4a6e1fbf.bundle'>;
+}
 declare module '@dhis2/ui-widgets/build/docs/sb_dll/storybook_ui_dll.js' {
   declare module.exports: $Exports<'@dhis2/ui-widgets/build/docs/sb_dll/storybook_ui_dll'>;
 }
-declare module '@dhis2/ui-widgets/build/docs/service-worker.js' {
-  declare module.exports: $Exports<'@dhis2/ui-widgets/build/docs/service-worker'>;
+declare module '@dhis2/ui-widgets/build/docs/vendors~main.b29c49ca2442945bba0e.bundle.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/docs/vendors~main.b29c49ca2442945bba0e.bundle'>;
 }
-declare module '@dhis2/ui-widgets/build/docs/vendors~main.1e11b83ef734cf811c21.bundle.js' {
-  declare module.exports: $Exports<'@dhis2/ui-widgets/build/docs/vendors~main.1e11b83ef734cf811c21.bundle'>;
+declare module '@dhis2/ui-widgets/build/docs/vendors~main.ef6876ec1eae4a6e1fbf.bundle.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/docs/vendors~main.ef6876ec1eae4a6e1fbf.bundle'>;
 }
-declare module '@dhis2/ui-widgets/build/docs/vendors~main.a23e29d582cdff4715fe.bundle.js' {
-  declare module.exports: $Exports<'@dhis2/ui-widgets/build/docs/vendors~main.a23e29d582cdff4715fe.bundle'>;
+declare module '@dhis2/ui-widgets/build/es/HeaderBar.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/HeaderBar'>;
 }
-declare module '@dhis2/ui-widgets/build/es/lib.js' {
-  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/lib'>;
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/Apps.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/HeaderBar/Apps'>;
+}
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/ImageIcon.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/HeaderBar/ImageIcon'>;
+}
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/Logo.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/HeaderBar/Logo'>;
+}
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/LogoImage.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/HeaderBar/LogoImage'>;
+}
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/NotificationIcon.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/HeaderBar/NotificationIcon'>;
+}
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/Notifications.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/HeaderBar/Notifications'>;
+}
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/Profile.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/HeaderBar/Profile'>;
+}
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/Profile/ProfileHeader.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/HeaderBar/Profile/ProfileHeader'>;
+}
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/Profile/ProfileMenu.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/HeaderBar/Profile/ProfileMenu'>;
+}
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/TextIcon.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/HeaderBar/TextIcon'>;
+}
+declare module '@dhis2/ui-widgets/build/es/HeaderBar/Title.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/HeaderBar/Title'>;
+}
+declare module '@dhis2/ui-widgets/build/es/icons/Account.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/icons/Account'>;
+}
+declare module '@dhis2/ui-widgets/build/es/icons/Apps.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/icons/Apps'>;
+}
+declare module '@dhis2/ui-widgets/build/es/icons/Cancel.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/icons/Cancel'>;
+}
+declare module '@dhis2/ui-widgets/build/es/icons/Email.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/icons/Email'>;
+}
+declare module '@dhis2/ui-widgets/build/es/icons/Exit.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/icons/Exit'>;
+}
+declare module '@dhis2/ui-widgets/build/es/icons/Help.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/icons/Help'>;
+}
+declare module '@dhis2/ui-widgets/build/es/icons/Info.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/icons/Info'>;
+}
+declare module '@dhis2/ui-widgets/build/es/icons/Message.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/icons/Message'>;
+}
+declare module '@dhis2/ui-widgets/build/es/icons/Settings.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/icons/Settings'>;
+}
+declare module '@dhis2/ui-widgets/build/es/index' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es'>;
+}
+declare module '@dhis2/ui-widgets/build/es/index.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es'>;
+}
+declare module '@dhis2/ui-widgets/build/es/locales/index' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/locales'>;
+}
+declare module '@dhis2/ui-widgets/build/es/locales/index.js' {
+  declare module.exports: $Exports<'@dhis2/ui-widgets/build/es/locales'>;
 }

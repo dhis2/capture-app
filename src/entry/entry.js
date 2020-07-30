@@ -11,7 +11,6 @@ import JssProvider from 'react-jss/lib/JssProvider';
 import { create } from 'jss';
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
 import type { HashHistory } from 'history/createHashHistory';
-import './addRxjsOperators';
 import { AppLoader } from '../components/AppLoader';
 import { App } from '../components/App';
 import { loadApp } from './entry.actions';

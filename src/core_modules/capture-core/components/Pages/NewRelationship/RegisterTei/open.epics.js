@@ -1,5 +1,7 @@
 // @flow
-import { fromPromise } from 'rxjs/observable/fromPromise';
+import { from } from 'rxjs';
+import { ofType } from 'redux-observable';
+import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
@@ -50,12 +52,11 @@ function getOrgUnitId(suggestedOrgUnitId: string, trackerProgram: ?TrackerProgra
 }
 
 export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, store: ReduxStore) =>
-
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE)
-        .filter(action => action.payload.findMode && action.payload.findMode === findModes.TEI_REGISTER)
-        .switchMap((action) => { // eslint-disable-line
-            const state = store.getState();
+    action$.pipe(
+        ofType(newRelationshipActionTypes.SELECT_FIND_MODE),
+        filter(action => action.payload.findMode && action.payload.findMode === findModes.TEI_REGISTER),
+        switchMap((action) => { // eslint-disable-line
+            const state = store.value;
             const selectedRelationshipType = state.newRelationship.selectedRelationshipType;
             const { programId: suggestedProgramId, trackedEntityTypeId } = selectedRelationshipType.to;
             const { orgUnitId: suggestedOrgUnitId } = state.currentSelections;
@@ -89,9 +90,8 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
                     state.generatedUniqueValuesCache[DATA_ENTRY_ID],
                 );
 
-                return fromPromise(openEnrollmentPromise)
-                    // $FlowFixMe[prop-missing] automated comment
-                    .takeUntil(action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE));
+                return from(openEnrollmentPromise)
+                    .takeUntil(action$.pipe(ofType(newRelationshipActionTypes.SELECT_FIND_MODE)));
             }
 
             // tei (tet attribues) form
@@ -113,7 +113,7 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
                 state.generatedUniqueValuesCache[DATA_ENTRY_ID],
             );
 
-            return fromPromise(openTeiPromise)
-                // $FlowFixMe[prop-missing] automated comment
-                .takeUntil(action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE));
-        });
+            return from(openTeiPromise).pipe(
+                takeUntil(action$.pipe(ofType(newRelationshipActionTypes.SELECT_FIND_MODE))),
+            );
+        }));
