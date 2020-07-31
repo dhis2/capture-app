@@ -88,7 +88,7 @@
   },
   "devDependencies": {
     "@dhis2/d2-i18n-extract": "^1.0.8",
-    "@dhis2/d2-i18n-generate": "^1.1.1",
+    "@dhis2/d2-i18n-generate": "^1.2.0",
     "bestzip": "^2.1.4",
     "docdash": "^1.2.0",
     "enzyme": "^3.10.0",
