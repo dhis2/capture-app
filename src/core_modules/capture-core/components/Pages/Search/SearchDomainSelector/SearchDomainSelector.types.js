@@ -4,7 +4,7 @@ import type { SelectedSearchScope, TrackedEntityTypesWithCorrelatedPrograms } fr
 export type OwnProps = $ReadOnly<{|
   trackedEntityTypesWithCorrelatedPrograms: TrackedEntityTypesWithCorrelatedPrograms,
   onSelect: ({value: string, label: string}) => void,
-  selectedProgram: SelectedSearchScope
+  selectedSearchScope: SelectedSearchScope
 |}>
 
 export type Props = {|
