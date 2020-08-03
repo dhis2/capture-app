@@ -1,10 +1,11 @@
 // @flow
+import type { ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { getStyles, SearchPageComponent } from './SearchPage.component';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
-import type { OwnProps, Props, PropsFromRedux } from './SearchPage.types';
+import type { Props, PropsFromRedux } from './SearchPage.types';
 
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const { activePage } = state;
@@ -15,9 +16,9 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     };
 };
 
-export const SearchPage =
+export const SearchPage: ComponentType<{||}> =
   compose(
-      connect<Props, OwnProps, _, _, _, _>(mapStateToProps, () => {}),
+      connect<Props, CssClasses, _, _, _, _>(mapStateToProps, () => {}),
       withLoadingIndicator(),
       withErrorMessageHandler(),
       withStyles(getStyles),
