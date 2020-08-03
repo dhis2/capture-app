@@ -16,6 +16,7 @@ import {
 import { LockedSelector } from '../../LockedSelector';
 import type {
     AvailableSearchOptions,
+    SelectedSearchScope,
     Props,
     TrackedEntityTypesWithCorrelatedPrograms,
 } from './SearchPage.types';
@@ -149,7 +150,7 @@ const useSearchOptions = (trackedEntityTypesWithCorrelatedPrograms): AvailableSe
     [trackedEntityTypesWithCorrelatedPrograms],
     );
 
-const usePreselectedProgram = (trackedEntityTypesWithCorrelatedPrograms) => {
+const usePreselectedSearchScope = (trackedEntityTypesWithCorrelatedPrograms): SelectedSearchScope => {
     const currentSelectionsId =
       useSelector(({ currentSelections }) => currentSelections.programId, isEqual);
 
@@ -176,7 +177,7 @@ export const SearchPageComponent = ({ classes }: Props) => {
 
     const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
     const availableSearchOptions = useSearchOptions(trackedEntityTypesWithCorrelatedPrograms);
-    const preselectedProgram = usePreselectedProgram(trackedEntityTypesWithCorrelatedPrograms);
+    const preselectedProgram = usePreselectedSearchScope(trackedEntityTypesWithCorrelatedPrograms);
 
     const searchStatus: string =
       useSelector(({ searchPage }) => searchPage.searchStatus, isEqual);
@@ -216,9 +217,9 @@ export const SearchPageComponent = ({ classes }: Props) => {
     const searchGroupForSelectedScope =
       (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
 
-    const handleSearchScopeSelection = (program) => {
+    const handleSearchScopeSelection = ({ value, label }) => {
         dispatchShowInitialSearchPage();
-        setSelectedSearchScope(program);
+        setSelectedSearchScope({ value, label });
     };
 
     return (<>
