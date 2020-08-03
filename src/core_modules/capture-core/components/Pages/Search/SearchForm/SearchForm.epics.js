@@ -2,13 +2,18 @@
 import { catchError, flatMap, map, startWith } from 'rxjs/operators';
 import { from } from 'rxjs/observable/from';
 import { of } from 'rxjs/observable/of';
-import { searchPageActionTypes } from '../SearchPage.actions';
+import {
+    searchPageActionTypes,
+    showEmptyResultsViewOnSearchPage,
+    showErrorViewOnSearchPage,
+    showLoadingViewOnSearchPage,
+    showSuccessResultsViewOnSearchPage,
+} from '../SearchPage.actions';
 import { getTrackedEntityInstances } from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import {
     getTrackedEntityTypeThrowIfNotFound,
     getTrackerProgramThrowIfNotFound,
 } from '../../../../metaData';
-import { actionCreator } from '../../../../actions/actions.utils';
 import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 
 
@@ -26,10 +31,10 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
                 navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam);
                 return {};
             }
-            return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY_VIEW)();
+            return showEmptyResultsViewOnSearchPage();
         }),
-        startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING_VIEW)()),
-        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR_VIEW)())),
+        startWith(showLoadingViewOnSearchPage()),
+        catchError(() => of(showErrorViewOnSearchPage())),
     );
 
 const filtersForAttributesSearchQuery = formValues => Object.keys(formValues)
@@ -41,12 +46,12 @@ const searchViaAttributesStream = (queryArgs, attributes) =>
     from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
         map(({ trackedEntityInstanceContainers: searchResults, pagingData }) => {
             if (searchResults.length > 0) {
-                return actionCreator(searchPageActionTypes.SEARCH_RESULTS_SUCCESS_VIEW)({ searchResults, searchResultsPaginationInfo: pagingData });
+                return showSuccessResultsViewOnSearchPage(searchResults, pagingData);
             }
-            return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY_VIEW)();
+            return showEmptyResultsViewOnSearchPage();
         }),
-        startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING_VIEW)()),
-        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR_VIEW)())),
+        startWith(showLoadingViewOnSearchPage()),
+        catchError(() => of(showErrorViewOnSearchPage())),
     );
 
 export const searchViaUniqueIdOnScopeProgramEpic = (action$: InputObservable, store: ReduxStore) =>

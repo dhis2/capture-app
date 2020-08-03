@@ -105,3 +105,10 @@ Feature: User interacts with Search page
     And you can see the first page of the results
     When you click the view dashboard button
     Then you are navigated to the Tracker Capture
+
+  Scenario: Changing the program from the LockedSelector wont change the search scope
+    Given you are in the search page with the Child Programme being pre-selected from the url
+    And you select the search domain Malaria Case diagnosis
+    When you remove the Child Programme selection
+    Then you still can see the Malaria case diagnosis being selected
+
