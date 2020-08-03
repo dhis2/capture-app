@@ -213,10 +213,8 @@ export const SearchPageComponent = ({ classes }: Props) => {
         dispatch,
     ]);
 
-    const handleProgramSelection = (searchScope) => {
-        dispatchShowInitialSearchPage();
-        setSelectedSearchScope(searchScope);
-    };
+    const searchGroupForSelectedScope =
+      (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
 
     const handleSearchScopeSelection = (program) => {
         dispatchShowInitialSearchPage();
@@ -302,11 +300,4 @@ export const SearchPageComponent = ({ classes }: Props) => {
             }
         </div>
     </>);
-};
-
-
-    const error: boolean = useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error, isEqual);
-    const ready: boolean = useSelector(({ activePage }) => !activePage.isLoading, isEqual);
-
-    return <Composed {...props} error={error} ready={ready} />;
 };
