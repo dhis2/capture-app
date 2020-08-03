@@ -237,3 +237,14 @@ When('you click the previous page button', () => {
     cy.get('[data-test="dhis2-capture-search-pagination-previous-page"]')
         .click();
 });
+
+When('you remove the Child Programme selection', () => {
+    cy.get('button')
+        .find('[class*=ProgramSelector]')
+        .click();
+});
+
+Then('you still can see the Malaria case diagnosis being selected', () => {
+    cy.get('[data-test="dhis2-capture-search-page-content"]')
+        .contains('Malaria case diagnosis');
+});
