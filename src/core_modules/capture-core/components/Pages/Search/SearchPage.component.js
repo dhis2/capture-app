@@ -22,10 +22,11 @@ import { SearchForm } from './SearchForm';
 import { LoadingMask } from '../../LoadingMasks';
 import { SearchResults } from './SearchResults/SearchResults.container';
 
-const getStyles = (theme: Theme) => ({
-    divider: {
-        padding: '8px',
-    },
+export const searchScopes = {
+    PROGRAM: 'PROGRAM',
+    TRACKED_ENTITY_TYPE: 'TRACKED_ENTITY_TYPE',
+};
+
     container: {
         padding: '10px 24px 24px 24px',
     },
