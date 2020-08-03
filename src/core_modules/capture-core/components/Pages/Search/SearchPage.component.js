@@ -238,7 +238,7 @@ export const SearchPageComponent = ({ classes }: Props) => {
                 <SearchDomainSelector
                     trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
                     onSelect={handleSearchScopeSelection}
-                    selectedProgram={selectedSearchScope}
+                    selectedSearchScope={selectedSearchScope}
                 />
 
                 <SearchForm
