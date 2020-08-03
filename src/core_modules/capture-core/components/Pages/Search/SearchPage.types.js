@@ -42,6 +42,7 @@ export type PropsFromRedux ={|
 |}
 
 export type Props = {|
+  +dispatch: ReduxDispatch,
   ...OwnProps,
   ...PropsFromRedux
 |}

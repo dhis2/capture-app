@@ -3,7 +3,7 @@ import React, { useMemo, useState, useEffect, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper/Paper';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { isEqual } from 'lodash';
 import {
     Modal,
@@ -167,8 +167,7 @@ const usePreselectedProgram = (trackedEntityTypesWithCorrelatedPrograms) => {
     );
 };
 
-export const SearchPageComponent = ({ classes }: Props) => {
-    const dispatch = useDispatch();
+export const SearchPageComponent = ({ classes, dispatch }: Props) => {
     const dispatchShowInitialSearchPage = useCallback(
         () => { dispatch(showInitialViewOnSearchPage()); },
         [dispatch]);
