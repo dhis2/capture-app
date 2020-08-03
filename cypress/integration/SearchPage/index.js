@@ -72,6 +72,8 @@ When('you can close the modal', () => {
     cy.get('[data-test="dhis2-uicore-modal"]')
         .find('[data-test="dhis2-uicore-button"]')
         .click();
+    cy.get('[data-test="dhis2-uicore-modal"]')
+        .should('not.exist');
 });
 
 When('you fill in the unique identifier field with values that will return a tracked entity instance', () => {
