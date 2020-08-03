@@ -7,11 +7,7 @@ export type OwnProps = {|
   searchViaAttributesOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string |}) => void,
   +searchGroupForSelectedScope: SearchGroup,
   +selectedSearchScopeId: string,
-  +classes: {|
-    +topSection: string,
-    +pagination: string,
-    +openDashboardButton: string,
-  |},
+  +classes: Object,
 |}
 
 export type PropsFromRedux ={|

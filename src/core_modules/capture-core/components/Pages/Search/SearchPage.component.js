@@ -1,12 +1,11 @@
 // @flow
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper/Paper';
-import withStyles from '@material-ui/core/styles/withStyles';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import { useSelector, useDispatch } from 'react-redux';
+import { isEqual } from 'lodash';
 import {
-    SingleSelect,
-    SingleSelectOption,
     Modal,
     ModalTitle,
     ModalContent,
@@ -15,18 +14,27 @@ import {
     Button,
 } from '@dhis2/ui-core';
 import { LockedSelector } from '../../LockedSelector';
-import type { Props } from './SearchPage.types';
-import { Section, SectionHeaderSimple } from '../../Section';
+import type {
+    AvailableSearchOptions,
+    Props,
+    TrackedEntityTypesWithCorrelatedPrograms,
+} from './SearchPage.types';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
 import { LoadingMask } from '../../LoadingMasks';
 import { SearchResults } from './SearchResults/SearchResults.container';
+import { programCollection } from '../../../metaDataMemoryStores';
+import { TrackerProgram } from '../../../metaData/Program';
+import { SearchDomainSelector } from './SearchDomainSelector';
+import { addFormData } from '../../D2Form/actions/form.actions';
+import { navigateToMainPage, showInitialViewOnSearchPage } from './SearchPage.actions';
 
 export const searchScopes = {
     PROGRAM: 'PROGRAM',
     TRACKED_ENTITY_TYPE: 'TRACKED_ENTITY_TYPE',
 };
 
+export const getStyles = (theme: Theme) => ({
     container: {
         padding: '10px 24px 24px 24px',
     },
@@ -41,34 +49,6 @@ export const searchScopes = {
         paddingTop: 50,
         paddingBottom: 50,
     },
-    emptySelectionPaperContainer: {
-        padding: 24,
-    },
-    customEmpty: {
-        textAlign: 'center',
-        padding: '8px 24px',
-    },
-    searchDomainSelectorSection: {
-        maxWidth: theme.typography.pxToRem(900),
-        marginBottom: theme.typography.pxToRem(20),
-    },
-    searchRow: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    searchRowTitle: {
-        flexBasis: 200,
-        marginLeft: 8,
-    },
-    searchRowSelectElement: {
-        width: '100%',
-    },
-    searchButtonContainer: {
-        padding: theme.typography.pxToRem(10),
-        display: 'flex',
-        alignItems: 'center',
-    },
     backButton: {
         marginBottom: 10,
     },
@@ -81,125 +61,195 @@ export const searchScopes = {
     },
 });
 
-const SearchSelection =
-  withStyles(getStyles)(({ trackedEntityTypesWithCorrelatedPrograms, classes, onSelect, selectedSearchScope }) =>
-      (<Section
-          className={classes.searchDomainSelectorSection}
-          header={
-              <SectionHeaderSimple
-                  containerStyle={{ paddingLeft: 8, borderBottom: '1px solid #ECEFF1' }}
-                  title={i18n.t('Search')}
-              />
-          }
-      >
-          <div className={classes.searchRow} style={{ padding: '8px 0' }}>
-              <div className={classes.searchRowTitle}>Search for</div>
-              <div className={classes.searchRowSelectElement} style={{ marginRight: 8 }}>
-                  <SingleSelect
-                      onChange={({ selected }) => { onSelect(selected); }}
-                      selected={selectedSearchScope}
-                      empty={<div className={classes.customEmpty}>Custom empty component</div>}
-                  >
-                      {
-                          useMemo(() => Object.values(trackedEntityTypesWithCorrelatedPrograms)
-                          // $FlowFixMe https://github.com/facebook/flow/issues/2221
-                              .map(({ trackedEntityTypeName, trackedEntityTypeId, programs: tePrograms }) =>
-                              // SingleSelect component wont allow us to wrap the SingleSelectOption
-                              // in any other element and still make use of the default behaviour.
-                              // Therefore we are returning the group title and the
-                              // SingleSelectOption in an array.
-                                  [
-                                      <SingleSelectOption
-                                          value={trackedEntityTypeId}
-                                          label={trackedEntityTypeName}
-                                      />,
-                                      tePrograms.map(({ programName, programId }) =>
-                                          (<SingleSelectOption value={programId} label={programName} />)),
-                                      <div className={classes.divider} key={trackedEntityTypeId}>
-                                          <hr />
-                                      </div>,
-                                  ],
-                              ),
-                          [
-                              classes.divider,
-                              trackedEntityTypesWithCorrelatedPrograms,
-                          ])
-                      }
-                  </SingleSelect>
-              </div>
-          </div>
-      </Section>));
+const buildSearchOption = (id, name, searchGroups, searchScope) => ({
+    searchOptionId: id,
+    searchOptionName: name,
+    searchGroups: [...searchGroups.values()]
+        // We sort so that we always have expanded the first search group section.
+        .sort(({ unique: xBoolean }, { unique: yBoolean }) => {
+            if (xBoolean === yBoolean) {
+                return 0;
+            }
+            if (xBoolean) {
+                return -1;
+            }
+            return 1;
+        })
+        .map(({ unique, searchForm, minAttributesRequiredToSearch }, index) => ({
+            unique,
+            searchForm,
+            // We adding the `formId` here for the reason that we will use it in the SearchPage component.
+            // Specifically the function `addFormData` will add an object for each input field to the store.
+            // Also the formId is passed in the `Form` component and needs to be identical with the one in
+            // the store in order for the `Form` to function. For these reasons we generate it once here.
+            formId: `searchPageForm-${id}-${index}`,
+            searchScope,
+            minAttributesRequiredToSearch,
+        })),
+});
 
+const useTrackedEntityTypesWithCorrelatedPrograms = (): TrackedEntityTypesWithCorrelatedPrograms =>
+    useMemo(() =>
+        [...programCollection.values()]
+            .filter(program => program instanceof TrackerProgram)
+            // $FlowFixMe
+            .reduce((acc, {
+                id: programId,
+                name: programName,
+                trackedEntityType: {
+                    id: trackedEntityTypeId,
+                    name: trackedEntityTypeName,
+                    searchGroups: trackedEntityTypeSearchGroups,
+                },
+                searchGroups,
+            }: TrackerProgram) => {
+                const accumulatedProgramsOfTrackedEntityType =
+            acc[trackedEntityTypeId] ? acc[trackedEntityTypeId].programs : [];
+                return {
+                    ...acc,
+                    [trackedEntityTypeId]: {
+                        trackedEntityTypeId,
+                        trackedEntityTypeName,
+                        trackedEntityTypeSearchGroups,
+                        programs: [
+                            ...accumulatedProgramsOfTrackedEntityType,
+                            { programId, programName, searchGroups },
+                        ],
 
-const Index = ({
-    addFormIdToReduxStore,
-    navigateToMainPage,
-    showInitialSearchPage,
-    classes,
-    trackedEntityTypesWithCorrelatedPrograms,
-    preselectedProgram,
-    availableSearchOptions,
-    searchStatus,
-    generalPurposeErrorMessage,
-}: Props) => {
-    const [selectedSearchScope, setSelectedSearchScope] = useState(preselectedProgram);
+                    },
+                };
+            }, {}),
+    [],
+    );
 
-    const handleSearchScopeSelection = (program) => {
-        showInitialSearchPage();
-        setSelectedSearchScope(program);
-    };
+const useSearchOptions = (trackedEntityTypesWithCorrelatedPrograms): AvailableSearchOptions =>
+    useMemo(() =>
+        Object.values(trackedEntityTypesWithCorrelatedPrograms)
+            // $FlowFixMe https://github.com/facebook/flow/issues/2221
+            .reduce((acc, { trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeSearchGroups, programs }) => ({
+                ...acc,
+                [trackedEntityTypeId]:
+                  buildSearchOption(
+                      trackedEntityTypeId,
+                      trackedEntityTypeName,
+                      trackedEntityTypeSearchGroups,
+                      searchScopes.TRACKED_ENTITY_TYPE,
+                  ),
+                ...programs.reduce((accumulated, { programId, programName, searchGroups }) => ({
+                    ...accumulated,
+                    [programId]:
+                      buildSearchOption(
+                          programId,
+                          programName,
+                          searchGroups,
+                          searchScopes.PROGRAM,
+                      ),
+                }), {}),
+            }), {}),
+    [trackedEntityTypesWithCorrelatedPrograms],
+    );
+
+const usePreselectedProgram = (trackedEntityTypesWithCorrelatedPrograms) => {
+    const currentSelectionsId =
+      useSelector(({ currentSelections }) => currentSelections.programId, isEqual);
+
+    return useMemo(() => {
+        const preselection = Object.values(trackedEntityTypesWithCorrelatedPrograms)
+            // $FlowFixMe https://github.com/facebook/flow/issues/2221
+            .map(({ programs }) =>
+                programs.find(({ programId }) => programId === currentSelectionsId))
+            .filter(program => program)[0];
+        return {
+            value: preselection && preselection.programId,
+            label: preselection && preselection.programName,
+        };
+    }, [currentSelectionsId, trackedEntityTypesWithCorrelatedPrograms],
+    );
+};
+
+export const SearchPageComponent = ({ classes }: Props) => {
+    const dispatch = useDispatch();
+    const dispatchShowInitialSearchPage = useCallback(
+        () => { dispatch(showInitialViewOnSearchPage()); },
+        [dispatch]);
+    const dispatchNavigateToMainPage = () => { dispatch(navigateToMainPage()); };
+
+    const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
+    const availableSearchOptions = useSearchOptions(trackedEntityTypesWithCorrelatedPrograms);
+    const preselectedProgram = usePreselectedProgram(trackedEntityTypesWithCorrelatedPrograms);
+
+    const searchStatus: string =
+      useSelector(({ searchPage }) => searchPage.searchStatus, isEqual);
+
+    const generalPurposeErrorMessage: string =
+      useSelector(({ searchPage }) => searchPage.generalPurposeErrorMessage, isEqual);
+    const [selectedSearchScope, setSelectedSearchScope] = useState(() => preselectedProgram);
+
 
     useEffect(() => {
         if (!preselectedProgram.value) {
-            showInitialSearchPage();
+            dispatchShowInitialSearchPage();
         }
     },
     [
         preselectedProgram.value,
-        showInitialSearchPage,
+        dispatchShowInitialSearchPage,
     ]);
 
-    // dan abramov suggest to stringify https://twitter.com/dan_abramov/status/1104414469629898754?lang=en
-    // so that useEffect can do the comparison
-    const stringifyPrograms = JSON.stringify(availableSearchOptions);
     useEffect(() => {
+        const dispatchAddFormIdToReduxStore = (formId) => { dispatch(addFormData(formId)); };
+
         // in order for the Form component to render
         // a formId under the `forms` reducer needs to be added.
         selectedSearchScope.value &&
-        JSON.parse(stringifyPrograms)[selectedSearchScope.value].searchGroups
+        availableSearchOptions[selectedSearchScope.value].searchGroups
             .forEach(({ formId }) => {
-                addFormIdToReduxStore(formId);
+                dispatchAddFormIdToReduxStore(formId);
             });
     },
     [
-        stringifyPrograms,
+        availableSearchOptions,
         selectedSearchScope.value,
-        addFormIdToReduxStore,
+        dispatch,
     ]);
 
     const searchGroupForSelectedScope =
       (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
 
+    const handleSearchScopeSelection = (program) => {
+        dispatchShowInitialSearchPage();
+        setSelectedSearchScope(program);
+    };
+
     return (<>
         <LockedSelector />
         <div data-test="dhis2-capture-search-page-content" className={classes.container}>
-            <Button dataTest="dhis2-capture-back-button" className={classes.backButton} onClick={navigateToMainPage}>
+            <Button
+                dataTest="dhis2-capture-back-button"
+                className={classes.backButton}
+                onClick={dispatchNavigateToMainPage}
+            >
                 <ChevronLeft />
                 {i18n.t('Back')}
             </Button>
 
             <Paper className={classes.paper}>
 
-                <SearchSelection
+                <SearchDomainSelector
                     trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
                     onSelect={handleSearchScopeSelection}
-                    selectedSearchScope={selectedSearchScope}
+                    selectedProgram={selectedSearchScope}
                 />
 
                 <SearchForm
                     selectedSearchScopeId={selectedSearchScope.value}
                     searchGroupForSelectedScope={searchGroupForSelectedScope}
                 />
+
+                {
+                    searchStatus === searchPageStatus.SHOW_RESULTS &&
+                    <SearchResults searchGroupForSelectedScope={searchGroupForSelectedScope} />
+                }
 
                 {
                     searchStatus === searchPageStatus.NO_RESULTS &&
@@ -210,8 +260,7 @@ const Index = ({
                             <ButtonStrip end>
                                 <Button
                                     disabled={searchStatus === searchPageStatus.LOADING}
-                                    onClick={showInitialSearchPage}
-                                    primary
+                                    onClick={dispatchShowInitialSearchPage}
                                     type="button"
                                 >
                                     Search Again
@@ -219,11 +268,6 @@ const Index = ({
                             </ButtonStrip>
                         </ModalActions>
                     </Modal>
-                }
-
-                {
-                    searchStatus === searchPageStatus.SHOW_RESULTS &&
-                    <SearchResults searchGroupForSelectedScope={searchGroupForSelectedScope} />
                 }
 
                 {
@@ -256,4 +300,3 @@ const Index = ({
     </>);
 };
 
-export const SearchPage = withStyles(getStyles)(Index);
