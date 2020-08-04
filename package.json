@@ -5,7 +5,7 @@
   "cacheVersion": "2",
   "private": false,
   "dependencies": {
-    "@babel/preset-flow": "^7.10.1",
+    "@babel/plugin-transform-flow-strip-types": "^7.10.4",
     "@dhis2/app-runtime": "2.2.2",
     "@dhis2/cli-utils-cypress": "^2.2.1",
     "@dhis2/d2-i18n": "^1.0.6",
@@ -64,13 +64,11 @@
   },
   "scripts": {
     "manualBuild": "node verifyCacheVersion.js && REACT_APP_DHIS2_BASE_URL='../../..' d2-app-scripts build",
-    "start": "d2-app-scripts start",
-    "build": "node verifyCacheVersion.js && GENERATE_SOURCEMAP=false d2-app-scripts build",
-    "test": "react-scripts test",
+    "start": "node verifyCacheVersion.js && d2-app-scripts start",
+    "build": "node verifyCacheVersion.js && GENERATE_SOURCEMAP=false d2-app-scripts build && cp ./package.json ./build/app/package.json",
+    "test": "NODE_PATH=src/core_modules d2-app-scripts test",
     "test:debug": "react-scripts --inspect-brk test --runInBand",
-    "eject": "react-scripts eject",
     "add-flow-types": "flow-typed install",
-    "prestart": "node verifyCacheVersion.js && d2-manifest package.json ./public/manifest.webapp",
     "docs": "NODE_ENV=development jsdoc -c jsdoc-conf.json",
     "linter:check": "eslint -c .eslintrc . --quiet",
     "cypress:start": "BROWSER=none REACT_APP_DHIS2_BASE_URL=https://play.dhis2.org/dev yarn start",
@@ -79,14 +77,11 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn extract-pot && git add ./i18n/"
+      "pre-commit": "d2-app-scripts i18n extract && git add ./i18n/"
     }
   },
   "devDependencies": {
     "@dhis2/cli-app-scripts": "^4.0.9",
-    "@dhis2/d2-i18n-extract": "^1.0.8",
-    "@dhis2/d2-i18n-generate": "^1.1.1",
-    "bestzip": "^2.1.4",
     "docdash": "^1.2.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
@@ -107,29 +102,7 @@
     "jsdoc": "^3.6.4",
     "jsdoc-babel": "^0.5.0",
     "jsdoc-export-default-interop": "^0.3.1",
-    "mkdirp": "^0.5.1",
     "redux-devtools-extension": "^2.13.2"
-  },
-  "manifest.webapp": {
-    "version": "1.0.5",
-    "name": "Capture",
-    "description": "Capture App",
-    "launch_path": "index.html",
-    "icons": {
-      "16": "assets/icons/track16.png",
-      "48": "assets/icons/track48.png",
-      "128": "assets/icons/track128.png"
-    },
-    "developer": {
-      "name": "HISP",
-      "url": "http://dhis2.org"
-    },
-    "default_locale": "en",
-    "activities": {
-      "dhis": {
-        "href": ".."
-      }
-    }
   },
   "browserslist": {
     "production": [
