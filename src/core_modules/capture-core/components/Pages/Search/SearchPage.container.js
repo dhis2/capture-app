@@ -17,7 +17,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
 
 export const SearchPage =
   compose(
-      connect<Props, OwnProps, _, _, _, _>(mapStateToProps, () => {}),
+      connect<Props, OwnProps, _, _, _, _>(mapStateToProps),
       withLoadingIndicator(),
       withErrorMessageHandler(),
       withStyles(getStyles),
