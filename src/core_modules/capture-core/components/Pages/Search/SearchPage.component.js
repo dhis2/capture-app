@@ -195,25 +195,23 @@ export const SearchPageComponent = ({ classes, dispatch }: Props) => {
         dispatchShowInitialSearchPage,
     ]);
 
+    const searchGroupForSelectedScope =
+      (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
+
     useEffect(() => {
         const dispatchAddFormIdToReduxStore = (formId) => { dispatch(addFormData(formId)); };
 
         // in order for the Form component to render
         // a formId under the `forms` reducer needs to be added.
-        selectedSearchScope.value &&
-        availableSearchOptions[selectedSearchScope.value].searchGroups
+        searchGroupForSelectedScope
             .forEach(({ formId }) => {
                 dispatchAddFormIdToReduxStore(formId);
             });
     },
     [
-        availableSearchOptions,
-        selectedSearchScope.value,
+        searchGroupForSelectedScope,
         dispatch,
     ]);
-
-    const searchGroupForSelectedScope =
-      (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
 
     const handleSearchScopeSelection = (program) => {
         dispatchShowInitialSearchPage();
