@@ -194,7 +194,19 @@ class SearchGroupFactory {
                     attributesBySearchGroup[attrByGroupKey],
                     minAttributesRequiredToSearch,
                 ));
-        return Promise.all(searchGroupPromises);
+        return Promise.all(searchGroupPromises).then(
+            searchGroups =>
+                searchGroups.sort(({ unique: xBoolean }, { unique: yBoolean }) => {
+                    if (xBoolean === yBoolean) {
+                        return 0;
+                    }
+                    if (xBoolean) {
+                        return -1;
+                    }
+                    return 1;
+                },
+                ),
+        );
     }
 }
 
