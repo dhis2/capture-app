@@ -3,7 +3,7 @@ import React, { useMemo, useState, useEffect, useCallback } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import Paper from '@material-ui/core/Paper/Paper';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { isEqual } from 'lodash';
 import {
     Modal,
@@ -168,8 +168,7 @@ const usePreselectedSearchScope = (trackedEntityTypesWithCorrelatedPrograms): Se
     );
 };
 
-export const SearchPageComponent = ({ classes }: Props) => {
-    const dispatch = useDispatch();
+export const SearchPageComponent = ({ classes, dispatch }: Props) => {
     const dispatchShowInitialSearchPage = useCallback(
         () => { dispatch(showInitialViewOnSearchPage()); },
         [dispatch]);
@@ -197,25 +196,23 @@ export const SearchPageComponent = ({ classes }: Props) => {
         dispatchShowInitialSearchPage,
     ]);
 
+    const searchGroupForSelectedScope =
+      (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
+
     useEffect(() => {
         const dispatchAddFormIdToReduxStore = (formId) => { dispatch(addFormData(formId)); };
 
         // in order for the Form component to render
         // a formId under the `forms` reducer needs to be added.
-        selectedSearchScope.value &&
-        availableSearchOptions[selectedSearchScope.value].searchGroups
+        searchGroupForSelectedScope
             .forEach(({ formId }) => {
                 dispatchAddFormIdToReduxStore(formId);
             });
     },
     [
-        availableSearchOptions,
-        selectedSearchScope.value,
+        searchGroupForSelectedScope,
         dispatch,
     ]);
-
-    const searchGroupForSelectedScope =
-      (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
 
     const handleSearchScopeSelection = ({ value, label }) => {
         dispatchShowInitialSearchPage();
