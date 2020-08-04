@@ -168,7 +168,7 @@ class SearchGroupFactory {
         return trackedEntityAttribute;
     }
 
-    build(searchAttributes: $ReadOnlyArray<InputSearchAttribute>, minAttributesRequiredToSearch: number) {
+    build(searchAttributes: $ReadOnlyArray<InputSearchAttribute>, minAttributesRequiredToSearch: number): Promise<Array<SearchGroup>> {
         const attributesBySearchGroup = searchAttributes
             .map(attribute => ({
                 ...attribute,
@@ -195,17 +195,16 @@ class SearchGroupFactory {
                     minAttributesRequiredToSearch,
                 ));
         return Promise.all(searchGroupPromises).then(
-            searchGroups =>
-                searchGroups.sort(({ unique: xBoolean }, { unique: yBoolean }) => {
-                    if (xBoolean === yBoolean) {
-                        return 0;
-                    }
-                    if (xBoolean) {
-                        return -1;
-                    }
-                    return 1;
-                },
-                ),
+            searchGroups => searchGroups.sort(({ unique: xBoolean }, { unique: yBoolean }) => {
+                if (xBoolean === yBoolean) {
+                    return 0;
+                }
+                if (xBoolean) {
+                    return -1;
+                }
+                return 1;
+            },
+            ),
         );
     }
 }
