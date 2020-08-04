@@ -14,20 +14,17 @@ const buildSearchOption = (id, name, searchGroups, searchScope) => ({
     searchOptionId: id,
     searchOptionName: name,
     searchGroups: [...searchGroups.values()]
-        .map(({ unique, searchForm, minAttributesRequiredToSearch }, index) => {
-            let latLng;
-            return {
-                unique,
-                searchForm,
-                // We adding the `formId` here for the reason that we will use it in the SearchPage component.
-                // Specifically the function `addFormData` will add an object for each input field to the store.
-                // Also the formId is passed in the `Form` component and needs to be identical with the one in
-                // the store in order for the `Form` to function. For these reasons we generate it once here.
-                formId: `searchPageForm-${id}-${index}`,
-                searchScope,
-                minAttributesRequiredToSearch,
-            };
-        }),
+        .map(({ unique, searchForm, minAttributesRequiredToSearch }, index) => ({
+            unique,
+            searchForm,
+            // We adding the `formId` here for the reason that we will use it in the SearchPage component.
+            // Specifically the function `addFormData` will add an object for each input field to the store.
+            // Also the formId is passed in the `Form` component and needs to be identical with the one in
+            // the store in order for the `Form` to function. For these reasons we generate it once here.
+            formId: `searchPageForm-${id}-${index}`,
+            searchScope,
+            minAttributesRequiredToSearch,
+        })),
 });
 
 export const searchScopes = {
