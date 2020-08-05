@@ -35,6 +35,9 @@ export const searchScopes = {
 };
 
 export const getStyles = (theme: Theme) => ({
+    maxWidth: {
+        maxWidth: theme.typography.pxToRem(900),
+    },
     container: {
         padding: '10px 24px 24px 24px',
     },
@@ -220,7 +223,7 @@ export const SearchPageComponent = ({ classes, dispatch }: Props) => {
 
     return (<>
         <LockedSelector />
-        <div data-test="dhis2-capture-search-page-content" className={classes.container}>
+        <div data-test="dhis2-capture-search-page-content" className={classes.container} >
             <Button
                 dataTest="dhis2-capture-back-button"
                 className={classes.backButton}
@@ -231,58 +234,60 @@ export const SearchPageComponent = ({ classes, dispatch }: Props) => {
             </Button>
 
             <Paper className={classes.paper}>
+                <div className={classes.maxWidth} >
 
-                <SearchDomainSelector
-                    trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
-                    onSelect={handleSearchScopeSelection}
-                    selectedSearchScope={selectedSearchScope}
-                />
+                    <SearchDomainSelector
+                        trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
+                        onSelect={handleSearchScopeSelection}
+                        selectedSearchScope={selectedSearchScope}
+                    />
 
-                <SearchForm
-                    selectedSearchScopeId={selectedSearchScope.value}
-                    searchGroupForSelectedScope={searchGroupForSelectedScope}
-                />
+                    <SearchForm
+                        selectedSearchScopeId={selectedSearchScope.value}
+                        searchGroupForSelectedScope={searchGroupForSelectedScope}
+                    />
 
-                {
-                    searchStatus === searchPageStatus.SHOW_RESULTS &&
-                    <SearchResults searchGroupForSelectedScope={searchGroupForSelectedScope} />
-                }
+                    {
+                        searchStatus === searchPageStatus.SHOW_RESULTS &&
+                        <SearchResults searchGroupForSelectedScope={searchGroupForSelectedScope} />
+                    }
 
-                {
-                    searchStatus === searchPageStatus.NO_RESULTS &&
-                    <Modal position="middle">
-                        <ModalTitle>Empty results</ModalTitle>
-                        <ModalContent>There was no item found</ModalContent>
-                        <ModalActions>
-                            <ButtonStrip end>
-                                <Button
-                                    disabled={searchStatus === searchPageStatus.LOADING}
-                                    onClick={dispatchShowInitialSearchPage}
-                                    type="button"
-                                >
-                                    Search Again
-                                </Button>
-                            </ButtonStrip>
-                        </ModalActions>
-                    </Modal>
-                }
+                    {
+                        searchStatus === searchPageStatus.NO_RESULTS &&
+                        <Modal position="middle">
+                            <ModalTitle>Empty results</ModalTitle>
+                            <ModalContent>There was no item found</ModalContent>
+                            <ModalActions>
+                                <ButtonStrip end>
+                                    <Button
+                                        disabled={searchStatus === searchPageStatus.LOADING}
+                                        onClick={dispatchShowInitialSearchPage}
+                                        type="button"
+                                    >
+                                        Search Again
+                                    </Button>
+                                </ButtonStrip>
+                            </ModalActions>
+                        </Modal>
+                    }
 
-                {
-                    searchStatus === searchPageStatus.LOADING &&
+                    {
+                        searchStatus === searchPageStatus.LOADING &&
                         <div className={classes.loadingMask}>
                             <LoadingMask />
                         </div>
-                }
+                    }
 
-                {
-                    searchStatus === searchPageStatus.ERROR &&
-                    <div
-                        data-test="dhis2-capture-general-purpose-error-mesage"
-                        className={classes.generalPurposeErrorMessage}
-                    >
-                        {generalPurposeErrorMessage}
-                    </div>
-                }
+                    {
+                        searchStatus === searchPageStatus.ERROR &&
+                        <div
+                            data-test="dhis2-capture-general-purpose-error-mesage"
+                            className={classes.generalPurposeErrorMessage}
+                        >
+                            {generalPurposeErrorMessage}
+                        </div>
+                    }
+                </div>
             </Paper>
 
             {

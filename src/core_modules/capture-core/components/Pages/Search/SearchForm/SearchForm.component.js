@@ -11,7 +11,6 @@ import { searchPageStatus } from '../../../../reducers/descriptions/searchPage.r
 
 const getStyles = (theme: Theme) => ({
     searchDomainSelectorSection: {
-        maxWidth: theme.typography.pxToRem(900),
         marginBottom: theme.typography.pxToRem(20),
     },
     searchRow: {
