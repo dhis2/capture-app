@@ -9,9 +9,9 @@ Feature: User interacts with Search page
     When you select the search domain Person
     Then there should be Person domain forms available to search with
 
-  Scenario: Search domain is pre-selected. User lands on the search page with search domain Child Programme pre-selected
-    Given you are in the search page with the Child Programme being pre-selected from the url
-    Then there should be search domain Child Programme being pre-selected
+  Scenario: Search domain is preselected. User lands on the search page with search domain Child Programme preselected
+    Given you are in the search page with the Child Programme being preselected from the url
+    Then there should be search domain Child Programme being preselected
     And there should be Child Programme domain forms visible to search with
 
   Scenario: Searching using unique identifier returns no results
@@ -107,7 +107,7 @@ Feature: User interacts with Search page
     Then you are navigated to the Tracker Capture
 
   Scenario: Changing the program from the LockedSelector wont change the search scope
-    Given you are in the search page with the Child Programme being pre-selected from the url
+    Given you are in the search page with the Child Programme being preselected from the url
     And you select the search domain Malaria Case diagnosis
     When you remove the Child Programme selection
     Then you still can see the Malaria case diagnosis being selected

@@ -15,13 +15,13 @@ Then('you should see informative text saying you should do finish your selection
         .should('exist');
 });
 
-Given('you are in the main page with organisation unit pre-selected', () => {
+Given('you are in the main page with organisation unit preselected', () => {
     cy.visit('/#/orgUnitId=DiszpKrYNg8');
     cy.get('[data-test="dhis2-capture-new-button"]')
         .should('exist');
 });
 
-Given('you are in the main page with program unit pre-selected', () => {
+Given('you are in the main page with program unit preselected', () => {
     cy.visit('/#/orgUnitId=DiszpKrYNg8');
     cy.get('[data-test="dhis2-capture-new-button"]')
         .should('exist');
@@ -125,7 +125,7 @@ Given('you land on a new event page with an invalid org unit id', () => {
     cy.visit('/#/newEvent/programId=invalid');
 });
 
-Given('you land on a new event page with pre-selected org unit', () => {
+Given('you land on a new event page with preselected org unit', () => {
     cy.visit('/#/newEvent/orgUnitId=DiszpKrYNg8');
 });
 
@@ -136,7 +136,7 @@ When('you select program', () => {
         .click();
 });
 
-Given('you land on a new event page with pre-selected program', () => {
+Given('you land on a new event page with preselected program', () => {
     cy.visit('/#/newEvent/programId=VBqh0ynB2wv');
 });
 
@@ -151,7 +151,7 @@ Then('new event page url is valid', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/newEvent/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8`);
 });
 
-Given('you land on a main event page with pre-selected org unit', () => {
+Given('you land on a main event page with preselected org unit', () => {
     cy.visit('/#/orgUnitId=DiszpKrYNg8');
 });
 
@@ -162,7 +162,7 @@ When('you select program', () => {
         .click();
 });
 
-Given('you land on a main event page with pre-selected program', () => {
+Given('you land on a main event page with preselected program', () => {
     cy.visit('/#/programId=VBqh0ynB2wv');
 });
 
@@ -213,7 +213,7 @@ Then('you are navigated to the search page with the same org unit and program Ch
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/search/programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8`);
 });
 
-And('there should be search domain Child Programme being pre-selected', () => {
+And('there should be search domain Child Programme being preselected', () => {
     cy.get('[data-test="dhis2-capture-search-page-content"]')
         .find('[data-test="dhis2-uicore-select-input"]')
         .contains('Child Programme')
@@ -224,4 +224,11 @@ And('there should be Child Programme domain forms visible to search with', () =>
     cy.get('[data-test="dhis2-capture-search-page-content"]')
         .find('[data-test="capture-ui-input"]')
         .should('have.length', 1);
+});
+
+Then('there should be no search domain preselected', () => {
+    cy.get('[data-test="dhis2-uicore-select-input"]')
+        .should('exist');
+    cy.get('[data-test="dhis2-capture-informative-paper"]')
+        .should('exist');
 });

@@ -8,12 +8,12 @@ Feature: In the main page, use the LockedSelector to navigate
     Then you should see informative text saying you should do finish your selections
 
   Scenario: Notifying that you need to select a program to get started
-    Given you are in the main page with organisation unit pre-selected
+    Given you are in the main page with organisation unit preselected
     When you click the "New" button to add a new event
     Then you should see informative text saying you should do finish your selections
 
   Scenario: Notifying that you need to select an org unit to get started
-    Given you are in the main page with program unit pre-selected
+    Given you are in the main page with program unit preselected
     When you click the "New" button to add a new event
     Then you should see informative text saying you should do finish your selections
 
@@ -36,14 +36,14 @@ Feature: In the main page, use the LockedSelector to navigate
     Given you land on a main page with an invalid org unit id
     Then you should see error message
 
-  Scenario: Selecting program on main event page with pre-selected org unit
-    Given you land on a main event page with pre-selected org unit
+  Scenario: Selecting program on main event page with preselected org unit
+    Given you land on a main event page with preselected org unit
     When you select program
     Then main page page url is valid
     And you can see the new event page
 
-  Scenario: Selecting org unit on main event page with pre-selected program
-    Given you land on a main event page with pre-selected program
+  Scenario: Selecting org unit on main event page with preselected program
+    Given you land on a main event page with preselected program
     When you select org unit
     Then main page page url is valid
     And you can see the new event page
@@ -61,14 +61,14 @@ Feature: In the main page, use the LockedSelector to navigate
     When you click the cancel button
     Then you should be taken to the main page
 
-  Scenario: Selecting program on new event page with pre-selected org unit
-    Given you land on a new event page with pre-selected org unit
+  Scenario: Selecting program on new event page with preselected org unit
+    Given you land on a new event page with preselected org unit
     When you select program
     Then new event page url is valid
     And you can see the new event page
 
-  Scenario: Selecting org unit on new event page with pre-selected program
-    Given you land on a new event page with pre-selected program
+  Scenario: Selecting org unit on new event page with preselected program
+    Given you land on a new event page with preselected program
     When you select org unit
     Then new event page url is valid
     And you can see the new event page
@@ -118,17 +118,17 @@ Feature: In the main page, use the LockedSelector to navigate
     Given you land on a view event page with an invalid id
     Then you should see error message
 
-  Scenario: Clicking the find button when the pre-selected program is not an available search domain
+  Scenario: Clicking the find button when the preselected program is not an available search domain
     Given you are in the main page with no selections made
     And you select both org unit and program Malaria case registration
     When you click the find button
     Then you are navigated to the search page with the same org unit and program Malaria case registration
     And there should be no search domain preselected
 
-  Scenario: Clicking the find button when the pre-selected program can be a search domain
+  Scenario: Clicking the find button when the preselected program can be a search domain
     Given you are in the main page with no selections made
     And you select both org unit and program Child Programme
     When you click the find button
     Then you are navigated to the search page with the same org unit and program Child Programme
-    And there should be search domain Child Programme being pre-selected
+    And there should be search domain Child Programme being preselected
     And there should be Child Programme domain forms visible to search with
