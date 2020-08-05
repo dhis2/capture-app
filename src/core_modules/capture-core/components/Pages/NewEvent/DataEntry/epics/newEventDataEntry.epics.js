@@ -83,7 +83,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
 
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
-        lockedSelectorActionTypes.NEW_EVENT_OPEN,
+        lockedSelectorActionTypes.NEW_EVENT_PAGE_OPRN,
         lockedSelectorActionTypes.PROGRAM_ID_SET,
         lockedSelectorActionTypes.CATEGORY_OPTION_SET,
         lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID,
@@ -140,7 +140,7 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
     // $FlowFixMe[prop-missing] automated comment
     action$.ofType(
         lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID,
-        lockedSelectorActionTypes.NEW_EVENT_OPEN,
+        lockedSelectorActionTypes.NEW_EVENT_PAGE_OPRN,
         lockedSelectorActionTypes.CATEGORY_OPTION_SET,
         lockedSelectorActionTypes.PROGRAM_ID_SET,
         crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,

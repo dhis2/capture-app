@@ -3,10 +3,11 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
+import SearchIcon from '@material-ui/icons/Search';
 import { Button } from '@dhis2/ui-core';
 import { TrackerProgram } from '../../../metaData';
 
-const styles = () => ({
+export const styles = () => ({
     container: {
         display: 'flex',
         justifyContent: 'flex-end',
@@ -18,87 +19,74 @@ const styles = () => ({
     icon: {
         paddingRight: 5,
     },
+    rightButton: {
+        marginLeft: 12,
+    },
 });
 
-type Props = {
-    classes: Object,
-    selectedProgram: string,
-    onStartAgain: () => void,
-    onClickNew: () => void,
+type Props = {|
+    programId: string,
+    dispatchStartAgainClick: () => void,
+    dispatchNewClick: () => void,
+    dispatchFindClick: () => void,
     showResetButton: boolean,
-};
+    ...CssClasses
+|};
 
-class ActionButtons extends Component<Props> {
-    handleClick: () => void;
-    handleNewClick: () => void;
-    constructor(props) {
-        super(props);
-        this.handleStartAgainClick = this.handleStartAgainClick.bind(this);
-        this.handleNewClick = this.handleNewClick.bind(this);
-    }
-
-    handleStartAgainClick = () => {
-        this.props.onStartAgain();
-    }
-
-    handleNewClick = () => {
-        this.props.onClickNew();
-    }
-
-    handleFindClick = () => {
-        alert('Not implemented yet.');
-    }
-
-    getButtonText = () => {
-        if (this.props.selectedProgram) {
-            const typeName = this.props.selectedProgram instanceof TrackerProgram ?
-                this.props.selectedProgram.trackedEntityType.name :
+const Index = ({
+    dispatchStartAgainClick,
+    dispatchNewClick,
+    dispatchFindClick,
+    programId,
+    classes,
+    showResetButton,
+}: Props) => {
+    const getButtonText = () => {
+        if (programId) {
+            const typeName = programId instanceof TrackerProgram ?
+                programId.trackedEntityType.name :
                 'Event';
 
             return i18n.t('New {{typeName}}', { typeName });
         }
         return i18n.t('New');
-    }
+    };
 
-    render() {
-        const { classes, showResetButton } = this.props;
 
-        return (
-            <div className={classes.container}>
-                {
-                    showResetButton ?
-                        <div className={classes.startAgainContainer}>
-                            <Button
-                                dataTest="dhis2-capture-start-again-button"
-                                onClick={this.handleStartAgainClick}
-                                small
-                                secondary
-                            >
-                                { i18n.t('Start again') }
-                            </Button>
-                        </div>
-                        :
-                        null
-                }
-                <Button
-                    dataTest="dhis2-capture-new-button"
-                    onClick={this.handleNewClick}
-                >
-                    <AddIcon className={classes.icon} />
-                    {this.getButtonText()}
-                </Button>
-                {/* Find button to be included when find(tracked entity instance)
-                is supported:
-                <Button
-                    onClick={this.handleFindClick}
-                    color="primary"
-                >
-                    <SearchIcon className={classes.rightButton} />
-                    { i18n.t('Find') }
-                </Button> */}
-            </div>
-        );
-    }
-}
+    return (
+        <div className={classes.container}>
+            {
+                showResetButton ?
+                    <div className={classes.startAgainContainer}>
+                        <Button
+                            dataTest="dhis2-capture-start-again-button"
+                            onClick={dispatchStartAgainClick}
+                            small
+                            secondary
+                        >
+                            { i18n.t('Start again') }
+                        </Button>
+                    </div>
+                    :
+                    null
+            }
+            <Button
+                dataTest="dhis2-capture-new-button"
+                onClick={dispatchNewClick}
+            >
+                <AddIcon className={classes.icon} />
+                {getButtonText()}
+            </Button>
+            <Button
+                className={classes.rightButton}
+                onClick={dispatchFindClick}
+                color="primary"
+            >
+                <SearchIcon />
+                { i18n.t('Find') }
+            </Button>
+        </div>
+    );
+};
 
-export default withStyles(styles)(ActionButtons);
+export const ActionButtons = withStyles(styles)(Index);

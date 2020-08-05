@@ -10,7 +10,7 @@ import programs from 'capture-core/metaDataMemoryStores/programCollection/progra
 
 import ProgramSelector from './Program/ProgramSelector.component';
 import OrgUnitSelector from './OrgUnitSelector.component';
-import ActionButtons from './ActionButtons.component';
+import { ActionButtons } from './ActionButtons.component';
 
 const styles = () => ({
     paper: {
@@ -23,7 +23,6 @@ type Props = {
     selectedOrgUnitId: string,
     selectedProgramId: string,
     selectedCategories: Object,
-    selectionComplete: boolean,
     selectedOrgUnit: Object,
     classes: Object,
     onSetOrgUnit: (orgUnitId: string, orgUnitObject: Object) => void,
@@ -35,6 +34,7 @@ type Props = {
     onResetAllCategoryOptions: () => void,
     onStartAgain: () => void,
     onClickNew: () => void,
+    onClickFind: () => void,
 };
 
 class QuickSelector extends Component<Props> {
@@ -117,10 +117,10 @@ class QuickSelector extends Component<Props> {
                     </Grid>
                     <Grid item xs={12} sm={actionButtonsWidth}>
                         <ActionButtons
-                            selectedProgram={this.props.selectedProgramId}
-                            onStartAgain={this.props.onStartAgain}
-                            onClickNew={this.props.onClickNew}
-                            selectionComplete={this.props.selectionComplete}
+                            programId={this.props.selectedProgramId}
+                            dispatchStartAgainClick={this.props.onStartAgain}
+                            dispatchFindClick={this.props.onClickFind}
+                            dispatchNewClick={this.props.onClickNew}
                             showResetButton={!!(this.props.selectedProgramId || this.props.selectedOrgUnitId)}
                         />
                     </Grid>

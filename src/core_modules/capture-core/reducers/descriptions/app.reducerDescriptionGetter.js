@@ -147,7 +147,7 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         ...state,
         page: action.payload.nextPage,
     }),
-    [lockedSelectorActionTypes.NEW_EVENT_OPEN]: state => ({
+    [lockedSelectorActionTypes.NEW_EVENT_PAGE_OPRN]: state => ({
         ...state,
         page: 'newEvent',
         locationSwitchInProgress: true,

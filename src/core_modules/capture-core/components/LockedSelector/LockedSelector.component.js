@@ -15,6 +15,7 @@ type Props = {
     customActionsOnOrgUnitIdReset: Array<()=>void>,
     customActionOnProgramIdReset: Array<()=>void>,
     onOpenNewEventPage: (selectedProgramId: string, selectedOrgUnitId: string) => void,
+    onOpenSearchPage: (selectedProgramId: string, selectedOrgUnitId: string) => void,
     onSetOrgUnit: (id: string, orgUnit: Object) => void,
     onResetOrgUnitId: () => void,
     onSetProgramId: (id: string) => void,
@@ -133,6 +134,10 @@ export class LockedSelectorComponent extends Component<Props, State> {
         this.handleClose();
     }
 
+    handleOpenSearchPage = () => {
+        this.props.onOpenSearchPage(this.props.selectedProgramId, this.props.selectedOrgUnitId);
+    }
+
 
     render() {
         const { onSetOrgUnit, onSetProgramId, onSetCategoryOption, onResetAllCategoryOptions } = this.props;
@@ -148,6 +153,7 @@ export class LockedSelectorComponent extends Component<Props, State> {
                     onResetCategoryOption={this.handleOpenCatComboWarning}
                     onStartAgain={this.handleOpenStartAgainWarning}
                     onClickNew={this.handleClickNew}
+                    onClickFind={this.handleOpenSearchPage}
                 />
                 <ConfirmDialog
                     onConfirm={this.handleAcceptStartAgain}

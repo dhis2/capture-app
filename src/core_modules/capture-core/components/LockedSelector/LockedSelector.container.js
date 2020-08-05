@@ -11,7 +11,7 @@ import {
     resetCategoryOptionFromLockedSelector,
     resetAllCategoryOptionsFromLockedSelector,
     openNewEventPageFromLockedSelector,
-    lockedSelectorBatchActionTypes,
+    lockedSelectorBatchActionTypes, openSearchPageFromLockedSelector,
 } from './LockedSelector.actions';
 import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
 import withLoadingIndicator from '../../HOC/withLoadingIndicator';
@@ -41,6 +41,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, { customActionsOnProgramIdR
     },
     onOpenNewEventPage: (selectedProgramId, selectedOrgUnitId) => {
         dispatch(openNewEventPageFromLockedSelector(selectedProgramId, selectedOrgUnitId));
+    },
+    onOpenSearchPage: (selectedProgramId, selectedOrgUnitId) => {
+        dispatch(openSearchPageFromLockedSelector(selectedProgramId, selectedOrgUnitId));
     },
     onStartAgain: () => {
         dispatch(batchActions([
