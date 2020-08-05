@@ -41,16 +41,12 @@ const Index = ({
     classes,
     showResetButton,
 }: Props) => {
-    const getButtonText = () => {
-        if (selectedProgramId) {
-            const typeName = selectedProgramId instanceof TrackerProgram ?
-                selectedProgramId.trackedEntityType.name :
-                'Event';
-
-            return i18n.t('New {{typeName}}', { typeName });
-        }
-        return i18n.t('New');
-    };
+    const typeName =
+      selectedProgramId instanceof TrackerProgram
+          ?
+          selectedProgramId.trackedEntityType.name
+          :
+          'Event';
 
 
     return (
@@ -75,7 +71,12 @@ const Index = ({
                 onClick={dispatchNewClick}
             >
                 <AddIcon className={classes.icon} />
-                {getButtonText()}
+                {
+                    selectedProgramId ?
+                        i18n.t('New {{typeName}}', { typeName })
+                        :
+                        i18n.t('New')
+                }
             </Button>
             <Button
                 className={classes.rightButton}
