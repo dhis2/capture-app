@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
@@ -25,7 +25,7 @@ export const styles = () => ({
 });
 
 type Props = {|
-    programId: string,
+    selectedProgramId: string,
     dispatchStartAgainClick: () => void,
     dispatchNewClick: () => void,
     dispatchFindClick: () => void,
@@ -37,14 +37,14 @@ const Index = ({
     dispatchStartAgainClick,
     dispatchNewClick,
     dispatchFindClick,
-    programId,
+    selectedProgramId,
     classes,
     showResetButton,
 }: Props) => {
     const getButtonText = () => {
-        if (programId) {
-            const typeName = programId instanceof TrackerProgram ?
-                programId.trackedEntityType.name :
+        if (selectedProgramId) {
+            const typeName = selectedProgramId instanceof TrackerProgram ?
+                selectedProgramId.trackedEntityType.name :
                 'Event';
 
             return i18n.t('New {{typeName}}', { typeName });

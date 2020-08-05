@@ -7,7 +7,6 @@ const mapStateToProps = (state: Object) => ({
     selectedProgramId: state.currentSelections.programId,
     selectedCategories: state.currentSelections.categoriesMeta,
     selectedOrgUnitId: state.currentSelections.orgUnitId,
-    selectionComplete: state.currentSelections.complete,
     selectedOrgUnit: state.currentSelections.orgUnitId ? state.organisationUnits[state.currentSelections.orgUnitId] : null,
 });
 

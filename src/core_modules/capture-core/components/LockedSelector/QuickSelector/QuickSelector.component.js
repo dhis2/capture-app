@@ -117,7 +117,7 @@ class QuickSelector extends Component<Props> {
                     </Grid>
                     <Grid item xs={12} sm={actionButtonsWidth}>
                         <ActionButtons
-                            programId={this.props.selectedProgramId}
+                            selectedProgramId={this.props.selectedProgramId}
                             dispatchStartAgainClick={this.props.onStartAgain}
                             dispatchFindClick={this.props.onClickFind}
                             dispatchNewClick={this.props.onClickNew}
