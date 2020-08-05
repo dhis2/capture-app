@@ -17,7 +17,10 @@ const styles = () => ({
         flexGrow: 1,
     },
     icon: {
-        paddingRight: 5,
+        fontSize: 20,
+    },
+    buttonMargin: {
+        marginLeft: 8,
     },
     rightButton: {
         marginLeft: 12,
@@ -71,12 +74,14 @@ const Index = ({
                 onClick={dispatchNewClick}
             >
                 <AddIcon className={classes.icon} />
-                {
-                    selectedProgramId ?
-                        i18n.t('New {{typeName}}', { typeName })
-                        :
-                        i18n.t('New')
-                }
+                <span className={classes.buttonMargin}>
+                    {
+                        selectedProgramId ?
+                            i18n.t('New {{typeName}}', { typeName })
+                            :
+                            i18n.t('New')
+                    }
+                </span>
             </Button>
             <Button
                 dataTest="dhis2-capture-find-button"
@@ -84,8 +89,11 @@ const Index = ({
                 onClick={dispatchFindClick}
                 color="primary"
             >
-                <SearchIcon />
-                { i18n.t('Find') }
+                <SearchIcon className={classes.icon}/>
+                <span className={classes.buttonMargin}>
+                    { i18n.t('Find') }
+                </span>
+
             </Button>
         </div>
     );
