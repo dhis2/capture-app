@@ -64,7 +64,6 @@ export const Index = ({
             <div className={classes.openDashboardButton}>
                 <Button
                     dataTest="dhis2-capture-view-dashboard-button"
-                    primary
                     onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam)}
                 >
                     {i18n.t('View dashboard')}
