@@ -1,6 +1,8 @@
 // @flow
+import type { ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { batchActions } from 'redux-batched-actions';
+import { compose } from 'redux';
 import { LockedSelectorComponent } from './LockedSelector.component';
 import {
     resetOrgUnitIdFromLockedSelector,
@@ -16,7 +18,7 @@ import {
 } from './LockedSelector.actions';
 import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
 import withLoadingIndicator from '../../HOC/withLoadingIndicator';
-
+import type { Props, DispatchersFromRedux, OwnProps } from './LockedSelector.types';
 
 const mapStateToProps = (state: ReduxState) => ({
     selectedProgramId: state.currentSelections.programId,
@@ -24,7 +26,13 @@ const mapStateToProps = (state: ReduxState) => ({
     ready: !state.activePage.isPageLoading,
 });
 
-const mapDispatchToProps = (dispatch: ReduxDispatch, { customActionsOnProgramIdReset = [], customActionsOnOrgUnitIdReset = [] }) => ({
+const mapDispatchToProps = (
+    dispatch: ReduxDispatch,
+    {
+        customActionsOnProgramIdReset = [],
+        customActionsOnOrgUnitIdReset = [],
+    }: OwnProps,
+): DispatchersFromRedux => ({
     onSetOrgUnit: (id: string, orgUnit: Object) => {
         dispatch(setOrgUnitFromLockedSelector(id, orgUnit));
     },
@@ -70,5 +78,9 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, { customActionsOnProgramIdR
     },
 });
 
-// $FlowFixMe[missing-annot] automated comment
-export const LockedSelector = connect(mapStateToProps, mapDispatchToProps)(withLoadingIndicator()(LockedSelectorComponent));
+export const LockedSelector: ComponentType<OwnProps> =
+  compose(
+      connect<Props, OwnProps & CssClasses, _, _, _, _>(mapStateToProps, mapDispatchToProps),
+      withLoadingIndicator(),
+  )(LockedSelectorComponent);
+
