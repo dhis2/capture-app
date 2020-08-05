@@ -178,7 +178,10 @@ import {
     searchViaAttributesOnScopeProgramEpic,
     searchViaAttributesOnScopeTrackedEntityTypeEpic,
 } from '../core_modules/capture-core/components/Pages/Search/SearchForm/SearchForm.epics';
-import { navigateBackToMainPageEpic } from '../core_modules/capture-core/components/Pages/Search/SearchPage.epics';
+import {
+    navigateBackToMainPageEpic,
+    openSearchPageLocationChangeEpic,
+} from '../core_modules/capture-core/components/Pages/Search/SearchPage.epics';
 
 export default combineEpics(
     resetProgramAfterSettingOrgUnitIfApplicableEpic,
@@ -287,5 +290,6 @@ export default combineEpics(
     searchViaAttributesOnScopeProgramEpic,
     searchViaAttributesOnScopeTrackedEntityTypeEpic,
     navigateBackToMainPageEpic,
+    openSearchPageLocationChangeEpic,
     ...getDataEntryEpics(),
 );

@@ -2,6 +2,7 @@
 import { map } from 'rxjs/operators';
 import { push } from 'connected-react-router';
 import { searchPageActionTypes } from './SearchPage.actions';
+import { lockedSelectorActionTypes } from '../../LockedSelector';
 
 const url = (programId: string, orgUnitId: string) => {
     const argArray = [];
@@ -23,3 +24,13 @@ export const navigateBackToMainPageEpic = (action$: InputObservable, store: Redu
             return push(url(programId, orgUnitId));
         }),
     );
+
+export const openSearchPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
+    // $FlowFixMe[prop-missing] automated comment
+    action$.ofType(lockedSelectorActionTypes.SEARCH_PAGE_OPEN)
+        .map(() => {
+            const state = store.getState();
+            const { programId, orgUnitId } = state.currentSelections;
+            const args = url(programId, orgUnitId);
+            return push(`/search${args}`);
+        });
