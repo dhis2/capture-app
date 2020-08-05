@@ -35,11 +35,9 @@ export const searchScopes = {
 };
 
 export const getStyles = (theme: Theme) => ({
-    maxWidth: {
-        maxWidth: theme.typography.pxToRem(900),
-    },
     container: {
         padding: '10px 24px 24px 24px',
+        maxWidth: theme.typography.pxToRem(950),
     },
     paper: {
         marginBottom: theme.typography.pxToRem(10),
@@ -234,26 +232,24 @@ export const SearchPageComponent = ({ classes, dispatch }: Props) => {
             </Button>
 
             <Paper className={classes.paper}>
-                <div className={classes.maxWidth} >
+                <SearchDomainSelector
+                    trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
+                    onSelect={handleSearchScopeSelection}
+                    selectedSearchScope={selectedSearchScope}
+                />
 
-                    <SearchDomainSelector
-                        trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
-                        onSelect={handleSearchScopeSelection}
-                        selectedSearchScope={selectedSearchScope}
-                    />
+                <SearchForm
+                    selectedSearchScopeId={selectedSearchScope.value}
+                    searchGroupForSelectedScope={searchGroupForSelectedScope}
+                />
 
-                    <SearchForm
-                        selectedSearchScopeId={selectedSearchScope.value}
-                        searchGroupForSelectedScope={searchGroupForSelectedScope}
-                    />
-
-                    {
-                        searchStatus === searchPageStatus.SHOW_RESULTS &&
+                {
+                    searchStatus === searchPageStatus.SHOW_RESULTS &&
                         <SearchResults searchGroupForSelectedScope={searchGroupForSelectedScope} />
-                    }
+                }
 
-                    {
-                        searchStatus === searchPageStatus.NO_RESULTS &&
+                {
+                    searchStatus === searchPageStatus.NO_RESULTS &&
                         <Modal position="middle">
                             <ModalTitle>Empty results</ModalTitle>
                             <ModalContent>There was no item found</ModalContent>
@@ -269,25 +265,24 @@ export const SearchPageComponent = ({ classes, dispatch }: Props) => {
                                 </ButtonStrip>
                             </ModalActions>
                         </Modal>
-                    }
+                }
 
-                    {
-                        searchStatus === searchPageStatus.LOADING &&
+                {
+                    searchStatus === searchPageStatus.LOADING &&
                         <div className={classes.loadingMask}>
                             <LoadingMask />
                         </div>
-                    }
+                }
 
-                    {
-                        searchStatus === searchPageStatus.ERROR &&
+                {
+                    searchStatus === searchPageStatus.ERROR &&
                         <div
                             data-test="dhis2-capture-general-purpose-error-mesage"
                             className={classes.generalPurposeErrorMessage}
                         >
                             {generalPurposeErrorMessage}
                         </div>
-                    }
-                </div>
+                }
             </Paper>
 
             {
