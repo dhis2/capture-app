@@ -122,13 +122,13 @@ Feature: In the main page, use the LockedSelector to navigate
     Given you are in the main page with no selections made
     And you select both org unit and program Malaria case registration
     When you click the find button
-    Then you are navigated to the search page with the same org unit and program
+    Then you are navigated to the search page with the same org unit and program Malaria case registration
     And there should be no search domain preselected
 
   Scenario: Clicking the find button when the pre-selected program can be a search domain
     Given you are in the main page with no selections made
     And you select both org unit and program Child Programme
     When you click the find button
-    Then you are navigated to the search page with the same org unit and program
+    Then you are navigated to the search page with the same org unit and program Child Programme
     And there should be search domain Child Programme being pre-selected
     And there should be Child Programme domain forms visible to search with
