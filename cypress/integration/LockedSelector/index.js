@@ -27,7 +27,7 @@ Given('you are in the main page with program unit pre-selected', () => {
         .should('exist');
 });
 
-Given('you select both org unit and program', () => {
+Given('you select both org unit and program Malaria case registration', () => {
     cy.get('[data-test="capture-ui-input"]')
         .type('Ngelehun C');
     cy.contains('Ngelehun CHC')
@@ -39,6 +39,20 @@ Given('you select both org unit and program', () => {
     cy.contains('Malaria case registration')
         .click();
     cy.url().should('eq', `${Cypress.config().baseUrl}/#/programId=VBqh0ynB2wv&orgUnitId=DiszpKrYNg8`);
+});
+
+Given('you select both org unit and program Child Programme', () => {
+    cy.get('[data-test="capture-ui-input"]')
+        .type('Ngelehun C');
+    cy.contains('Ngelehun CHC')
+        .click();
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/orgUnitId=DiszpKrYNg8`);
+
+    cy.get('.Select')
+        .type('Child Program');
+    cy.contains('Child Programme')
+        .click();
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8`);
 });
 
 When('you click the "Start again" button', () => {
@@ -184,4 +198,13 @@ Then('you should be taken to the main page with only program selected', () => {
 
 Given('you land on a view event page with an invalid id', () => {
     cy.visit('/#/viewEvent/invalid');
+});
+
+When('you click the find button', () => {
+    cy.get('[data-test="dhis2-capture-find-button"]')
+        .click();
+});
+
+Then('you are navigated to the search page with the same org unit and program', () => {
+    cy.url().should('eq', `${Cypress.config().baseUrl}/#/search/programId=IpHINAT79UW&orgUnitId=DiszpKrYNg8`);
 });

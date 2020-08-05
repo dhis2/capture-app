@@ -79,6 +79,7 @@ const Index = ({
                 }
             </Button>
             <Button
+                dataTest="dhis2-capture-find-button"
                 className={classes.rightButton}
                 onClick={dispatchFindClick}
                 color="primary"
