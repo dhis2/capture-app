@@ -11,7 +11,8 @@ import {
     resetCategoryOptionFromLockedSelector,
     resetAllCategoryOptionsFromLockedSelector,
     openNewEventPageFromLockedSelector,
-    lockedSelectorBatchActionTypes, openSearchPageFromLockedSelector,
+    openSearchPageFromLockedSelector,
+    lockedSelectorBatchActionTypes,
 } from './LockedSelector.actions';
 import { resetProgramIdBase } from './QuickSelector/actions/QuickSelector.actions';
 import withLoadingIndicator from '../../HOC/withLoadingIndicator';

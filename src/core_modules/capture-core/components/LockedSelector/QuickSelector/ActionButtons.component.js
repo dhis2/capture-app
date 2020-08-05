@@ -7,7 +7,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import { Button } from '@dhis2/ui-core';
 import { TrackerProgram } from '../../../metaData';
 
-export const styles = () => ({
+const styles = () => ({
     container: {
         display: 'flex',
         justifyContent: 'flex-end',
