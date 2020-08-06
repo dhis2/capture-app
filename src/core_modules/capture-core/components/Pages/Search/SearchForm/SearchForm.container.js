@@ -40,7 +40,6 @@ const collectCurrentSearchTerms = (searchGroupForSelectedScope, formsValues) => 
 
 const mapStateToProps = (state: ReduxState, { searchGroupForSelectedScope }): PropsFromRedux => {
     const {
-        forms,
         formsValues,
         searchPage: {
             searchStatus,
@@ -50,7 +49,6 @@ const mapStateToProps = (state: ReduxState, { searchGroupForSelectedScope }): Pr
 
     const currentSearchTerms = collectCurrentSearchTerms(searchGroupForSelectedScope, formsValues);
     return {
-        forms,
         searchStatus,
         currentSearchTerms,
         isSearchViaAttributesValid: (minAttributesRequiredToSearch, formId) => {

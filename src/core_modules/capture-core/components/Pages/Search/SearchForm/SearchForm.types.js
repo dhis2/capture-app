@@ -13,11 +13,6 @@ export type OwnProps = {|
 |}
 
 export type PropsFromRedux ={|
-  +forms: {
-    [elementId: string]: {
-      loadNr: number
-    }
-  },
   +searchStatus: string,
   +isSearchViaAttributesValid: (minAttributesRequiredToSearch: number, formId: string)=> boolean,
   +currentSearchTerms: CurrentSearchTerms
@@ -30,6 +25,7 @@ export type DispatchersFromRedux = {|
   searchViaAttributesOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string |}) => void,
   saveCurrentFormData: (searchScopeType: string, searchScopeId: string, formId: string, currentSearchTerms: CurrentSearchTerms) => void,
   addFormIdToReduxStore: (formId: string) => void,
+  removeFormDataFromReduxStore: (formId: string) => void,
 |}
 
 export type Props = {|
