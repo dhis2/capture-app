@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui-core';
-import Form from '../../../D2Form/D2Form.component';
+import { D2Form } from '../../../D2Form';
 import { searchScopes } from '../SearchPage.component';
 import { Section, SectionHeaderSimple } from '../../../Section';
 import type { Props } from './SearchForm.types';
@@ -38,6 +38,36 @@ export const getStyles = (theme: Theme) => ({
     },
 });
 
+const useFormDataLifecycle = (
+    searchGroupForSelectedScope,
+    addFormIdToReduxStore,
+    removeFormDataFromReduxStore,
+) =>
+    useEffect(() => {
+        // in order for the Form component to render
+        // a formId under the `forms` reducer needs to be added.
+        searchGroupForSelectedScope
+            .forEach(({ formId }) => {
+                addFormIdToReduxStore(formId);
+            });
+        // we remove the data on unmount
+        return () => searchGroupForSelectedScope
+            .forEach(({ formId, searchForm }) => {
+                removeFormDataFromReduxStore(formId);
+
+                Array.from(searchForm.sections.entries())
+                    .map(entry => entry[1])
+                    .forEach(({ id }) => {
+                        removeFormDataFromReduxStore(`${formId}-${id}`);
+                    });
+            });
+    },
+    [
+        searchGroupForSelectedScope,
+        addFormIdToReduxStore,
+        removeFormDataFromReduxStore,
+    ]);
+
 export const SearchFormComponent = ({
     searchViaUniqueIdOnScopeTrackedEntityType,
     searchViaUniqueIdOnScopeProgram,
@@ -45,14 +75,16 @@ export const SearchFormComponent = ({
     searchViaAttributesOnScopeTrackedEntityType,
     saveCurrentFormData,
     addFormIdToReduxStore,
+    removeFormDataFromReduxStore,
     selectedSearchScopeId,
     classes,
     searchGroupForSelectedScope,
-    forms,
     searchStatus,
     isSearchViaAttributesValid,
     currentSearchTerms,
 }: Props) => {
+    useFormDataLifecycle(searchGroupForSelectedScope, addFormIdToReduxStore, removeFormDataFromReduxStore);
+
     const [error, setError] = useState(false);
     const [expandedFormId, setExpandedFormId] = useState(null);
 
@@ -62,19 +94,6 @@ export const SearchFormComponent = ({
     },
     [selectedSearchScopeId],
     );
-
-    useEffect(() => {
-        // in order for the Form component to render
-        // a formId under the `forms` reducer needs to be added.
-        searchGroupForSelectedScope
-            .forEach(({ formId }) => {
-                addFormIdToReduxStore(formId);
-            });
-    },
-    [
-        searchGroupForSelectedScope,
-        addFormIdToReduxStore,
-    ]);
 
     useEffect(() => {
         searchGroupForSelectedScope
@@ -160,16 +179,13 @@ export const SearchFormComponent = ({
                                 >
                                     <div className={classes.searchRow}>
                                         <div className={classes.searchRowSelectElement}>
-                                            {
-                                                forms[formId] &&
-                                                <Form
-                                                    formRef={
-                                                        (formInstance) => { formReference[formId] = formInstance; }
-                                                    }
-                                                    formFoundation={searchForm}
-                                                    id={formId}
-                                                />
-                                            }
+                                            <D2Form
+                                                formRef={
+                                                    (formInstance) => { formReference[formId] = formInstance; }
+                                                }
+                                                formFoundation={searchForm}
+                                                id={formId}
+                                            />
                                         </div>
                                     </div>
                                     <div className={classes.searchButtonContainer}>
@@ -215,13 +231,10 @@ export const SearchFormComponent = ({
                                 >
                                     <div className={classes.searchRow}>
                                         <div className={classes.searchRowSelectElement}>
-                                            {
-                                                forms[formId] &&
-                                                <Form
-                                                    formFoundation={searchForm}
-                                                    id={formId}
-                                                />
-                                            }
+                                            <D2Form
+                                                formFoundation={searchForm}
+                                                id={formId}
+                                            />
                                         </div>
                                     </div>
                                     <div className={classes.searchButtonContainer}>
@@ -258,7 +271,6 @@ export const SearchFormComponent = ({
         classes.searchRow,
         classes.textInfo,
         classes.textError,
-        forms,
         searchGroupForSelectedScope,
         selectedSearchScopeId,
         searchStatus,

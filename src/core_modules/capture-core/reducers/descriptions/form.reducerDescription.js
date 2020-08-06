@@ -15,8 +15,13 @@ import {
     set as setStoreRoots,
 } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 
+const removeFormData = (state, { payload: { formId } }) => {
+    const { [formId]: deleted, ...stateWithoutDeletedProp } = state;
+    return stateWithoutDeletedProp;
+};
+
 export const formsValuesDesc = createReducerDescription({
-    [loaderActionTypes.ADD_FORM_DATA]: (state, action) => {
+    [loaderActionTypes.FORM_DATA_ADD]: (state, action) => {
         const newState = { ...state };
         const payload = action.payload;
         newState[payload.formId] = payload.formValues;
@@ -75,11 +80,11 @@ export const formsValuesDesc = createReducerDescription({
         };
         return newState;
     },
-
+    [loaderActionTypes.FORM_DATA_REMOVE]: removeFormData,
 }, 'formsValues');
 
 export const formsSectionsFieldsUIDesc = createReducerDescription({
-    [loaderActionTypes.ADD_FORM_DATA]: (state, action) => {
+    [loaderActionTypes.FORM_DATA_ADD]: (state, action) => {
         const newState = { ...state };
         const formId = action.payload.formId;
 
@@ -196,10 +201,11 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
             },
         };
     },
+    [loaderActionTypes.FORM_DATA_REMOVE]: removeFormData,
 }, 'formsSectionsFieldsUI');
 
 export const formsDesc = createReducerDescription({
-    [loaderActionTypes.ADD_FORM_DATA]: (state, action) => {
+    [loaderActionTypes.FORM_DATA_ADD]: (state, action) => {
         const payload = action.payload;
 
         const prevLoadNr = state[payload.formId] && state[payload.formId].loadNr;
@@ -218,10 +224,11 @@ export const formsDesc = createReducerDescription({
             },
         };
     },
+    [loaderActionTypes.FORM_DATA_REMOVE]: removeFormData,
 }, 'forms');
 
 export const formsFieldsMiscDesc = createReducerDescription({
-    [loaderActionTypes.ADD_FORM_DATA]: (state, action) => ({
+    [loaderActionTypes.FORM_DATA_ADD]: (state, action) => ({
         ...state,
         [action.payload.formId]: {},
     }),
@@ -282,4 +289,5 @@ export const formsFieldsMiscDesc = createReducerDescription({
             },
         };
     },
+    [loaderActionTypes.FORM_DATA_REMOVE]: removeFormData,
 }, 'formsFieldsMisc');
