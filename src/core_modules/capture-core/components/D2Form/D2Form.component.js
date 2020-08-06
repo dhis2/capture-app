@@ -1,37 +1,23 @@
 // @flow
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import D2SectionContainer from './D2Section.container';
-import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
+import type { Props, PropsForPureComponent } from './D2Form.types';
 import Section from '../../metaData/RenderFoundation/Section';
-import { withAsyncHandler } from './asyncHandlerHOC';
 
-const styles = () => ({
-    container: {
-    },
+export const styles = () => ({
     containerCustomForm: {
         paddingTop: 10,
         paddingBottom: 10,
     },
 });
 
-type Props = {
-    formFoundation: RenderFoundation,
-    id: string,
-    classes: {
-        container: string,
-        containerCustomForm: string,
-    },
-    formHorizontal: boolean,
-};
-
-class D2Form extends React.PureComponent<Props> {
+class D2Form extends React.PureComponent<PropsForPureComponent> {
     name: string;
     sectionInstances: Map<string, Object>;
 
-    constructor(props: Props) {
+    constructor(props: PropsForPureComponent) {
         super(props);
         this.name = 'D2Form';
         this.sectionInstances = new Map();
@@ -118,7 +104,7 @@ class D2Form extends React.PureComponent<Props> {
     )
     renderVertical = (section: Section, passOnProps: any, classes: Object) => (
         <div
-            className={this.props.formFoundation.customForm ? classes.containerCustomForm : classes.container}
+            className={classes.containerCustomForm}
             key={section.id}
         >
             <D2SectionContainer
@@ -135,21 +121,41 @@ class D2Form extends React.PureComponent<Props> {
     )
 
     render() {
-        const { formFoundation, id, classes, ...passOnProps } = this.props;
-        const formHorizontal = this.props.formHorizontal;
+        const {
+            formFoundation,
+            id,
+            classes,
+            isFormInReduxStore,
+            formHorizontal,
+            ...passOnProps
+        } = this.props;
         const metaDataSectionsAsArray = Array.from(formFoundation.sections.entries()).map(entry => entry[1]);
 
         const sections = metaDataSectionsAsArray.map(section => (formHorizontal ? this.renderHorizontal(section, passOnProps) : this.renderVertical(section, passOnProps, classes)));
 
         return (
             <React.Fragment>
-                {sections}
+                {
+                    isFormInReduxStore
+                        ?
+                        sections
+                        :
+                        log.error(
+                            errorCreator(
+                                'In order for the component to render you must to add a form id in the redux store. ' +
+                                'The right reducer to do this is called "forms".')(
+                                {
+                                    method: 'D2Form.component',
+                                },
+                            ),
+                        )
+                }
             </React.Fragment>
         );
     }
 }
 
-const D2FormWithRef = (props: Object) => {
+export const D2FormComponent = (props: Props) => {
     const { formRef, ...passOnProps } = props;
 
     const handleRef = (instance) => {
@@ -165,5 +171,3 @@ const D2FormWithRef = (props: Object) => {
         />
     );
 };
-
-export default withAsyncHandler()(withStyles(styles)(D2FormWithRef));
