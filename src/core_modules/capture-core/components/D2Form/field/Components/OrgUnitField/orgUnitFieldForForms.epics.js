@@ -19,7 +19,7 @@ import { set as setStoreRoots } from '../../../../FormFields/New/Fields/OrgUnitF
 const FILTER_RETRIEVE_ERROR = 'Filter form field org units failed';
 
 const isAddFormData = (action: Object, formId: string) =>
-    action.type === formActionTypes.ADD_FORM_DATA && action.payload.formId === formId;
+    action.type === formActionTypes.FORM_DATA_ADD && action.payload.formId === formId;
 
 const isRequestFilterFormFieldOrgUnits = (action: Object, formId: string, elementId: string) =>
     action.type === actionTypes.REQUEST_FILTER_FORM_FIELD_ORG_UNITS &&
