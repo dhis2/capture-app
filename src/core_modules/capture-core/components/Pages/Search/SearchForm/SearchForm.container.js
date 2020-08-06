@@ -10,6 +10,7 @@ import {
     searchViaUniqueIdOnScopeTrackedEntityType,
 } from '../SearchPage.actions';
 import { actionCreator } from '../../../../actions/actions.utils';
+import { addFormData } from '../../../D2Form/actions/form.actions';
 
 const isValueContainingCharacter = string => string.replace(/\s/g, '').length;
 
@@ -81,6 +82,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
     saveCurrentFormData: (searchScopeType, searchScopeId, formId, currentSearchTerms) => {
         dispatch(actionCreator(searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE)({ searchScopeType, searchScopeId, formId, currentSearchTerms }));
     },
+    addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
 });
 
 

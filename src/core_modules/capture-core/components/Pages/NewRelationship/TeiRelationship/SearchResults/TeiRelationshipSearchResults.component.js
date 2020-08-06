@@ -36,7 +36,6 @@ type Props = {
         addRelationshipButton: string,
         pagination: string,
         topSection: string,
-        topSectionActionsContainer: string,
         actionButton: string,
         topSectionValuesContainer: string,
     },
@@ -46,7 +45,7 @@ type Props = {
 
 const getStyles = (theme: Theme) => ({
     itemActionsContainer: {
-        padding: theme.typography.pxToRem(10),
+        paddingTop: theme.typography.pxToRem(10),
     },
     pagination: {
         display: 'flex',
@@ -60,8 +59,6 @@ const getStyles = (theme: Theme) => ({
     },
     topSectionValuesContainer: {
         padding: theme.typography.pxToRem(10),
-    },
-    topSectionActionsContainer: {
     },
     actionButton: {
         margin: theme.typography.pxToRem(10),
@@ -149,7 +146,7 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
         return (
             <div className={classes.topSection}>
                 {this.getSearchValues()}
-                <div className={classes.topSectionActionsContainer}>
+                <div>
                     <Button className={classes.actionButton} onClick={onNewSearch}>
                         {i18n.t('New search')}
                     </Button>

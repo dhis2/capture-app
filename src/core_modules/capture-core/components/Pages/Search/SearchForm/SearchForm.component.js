@@ -11,8 +11,7 @@ import { searchPageStatus } from '../../../../reducers/descriptions/searchPage.r
 
 const getStyles = (theme: Theme) => ({
     searchDomainSelectorSection: {
-        maxWidth: theme.typography.pxToRem(900),
-        marginBottom: theme.typography.pxToRem(20),
+        margin: theme.typography.pxToRem(10),
     },
     searchRow: {
         display: 'flex',
@@ -46,6 +45,7 @@ const Index = ({
     searchViaAttributesOnScopeProgram,
     searchViaAttributesOnScopeTrackedEntityType,
     saveCurrentFormData,
+    addFormIdToReduxStore,
     selectedSearchScopeId,
     classes,
     searchGroupForSelectedScope,
@@ -63,6 +63,19 @@ const Index = ({
     },
     [selectedSearchScopeId],
     );
+
+    useEffect(() => {
+        // in order for the Form component to render
+        // a formId under the `forms` reducer needs to be added.
+        searchGroupForSelectedScope
+            .forEach(({ formId }) => {
+                addFormIdToReduxStore(formId);
+            });
+    },
+    [
+        searchGroupForSelectedScope,
+        addFormIdToReduxStore,
+    ]);
 
     useEffect(() => {
         searchGroupForSelectedScope
