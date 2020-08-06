@@ -32,10 +32,10 @@ type Props = {
     onAddRelationship: (id: string, values: Object) => void,
     trackedEntityTypeName: string,
     classes: {
+        itemActionsContainer: string,
         addRelationshipButton: string,
         pagination: string,
         topSection: string,
-        topSectionActionsContainer: string,
         actionButton: string,
         topSectionValuesContainer: string,
     },
