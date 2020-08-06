@@ -34,9 +34,11 @@ export const searchScopes = {
 };
 
 export const getStyles = (theme: Theme) => ({
+    maxWidth: {
+        maxWidth: theme.typography.pxToRem(950),
+    },
     container: {
         padding: '10px 24px 24px 24px',
-        maxWidth: theme.typography.pxToRem(950),
     },
     paper: {
         marginBottom: theme.typography.pxToRem(10),
@@ -216,21 +218,22 @@ export const SearchPageComponent = ({ classes, dispatch }: Props) => {
             </Button>
 
             <Paper className={classes.paper}>
-                <SearchDomainSelector
-                    trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
-                    onSelect={handleSearchScopeSelection}
-                    selectedSearchScope={selectedSearchScope}
-                />
+                <div className={classes.maxWidth}>
+                    <SearchDomainSelector
+                        trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
+                        onSelect={handleSearchScopeSelection}
+                        selectedSearchScope={selectedSearchScope}
+                    />
 
-                <SearchForm
-                    selectedSearchScopeId={selectedSearchScope.value}
-                    searchGroupForSelectedScope={searchGroupForSelectedScope}
-                />
+                    <SearchForm
+                        selectedSearchScopeId={selectedSearchScope.value}
+                        searchGroupForSelectedScope={searchGroupForSelectedScope}
+                    />
 
-                {
-                    searchStatus === searchPageStatus.SHOW_RESULTS &&
+                    {
+                        searchStatus === searchPageStatus.SHOW_RESULTS &&
                         <SearchResults searchGroupForSelectedScope={searchGroupForSelectedScope} />
-                }
+                    }
 
                 {
                     searchStatus === searchPageStatus.NO_RESULTS &&
@@ -253,12 +256,12 @@ export const SearchPageComponent = ({ classes, dispatch }: Props) => {
                     </Modal>
                 }
 
-                {
-                    searchStatus === searchPageStatus.LOADING &&
+                    {
+                        searchStatus === searchPageStatus.LOADING &&
                         <div className={classes.loadingMask}>
                             <LoadingMask />
                         </div>
-                }
+                    }
 
                 {
                     searchStatus === searchPageStatus.ERROR &&
