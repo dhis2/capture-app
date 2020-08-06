@@ -30,7 +30,7 @@ type Props = {
 }
 
 const getStyles = (theme: Theme) => ({
-    container:{
+    container: {
         margin: theme.typography.pxToRem(10),
     },
     programSection: {
