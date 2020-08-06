@@ -84,6 +84,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
         dispatch(actionCreator(searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE)({ searchScopeType, searchScopeId, formId, currentSearchTerms }));
     },
     addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
+    removeFormDataFromReduxStore: (formId) => { dispatch(addFormData(formId)); },
 });
 
 
