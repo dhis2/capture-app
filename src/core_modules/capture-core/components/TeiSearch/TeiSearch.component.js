@@ -22,6 +22,7 @@ type Props = {
     onNewSearch: (searchId: string) => void,
     onEditSearch: (searchId: string) => void,
     classes: {
+        container: string,
         section: string,
         formContainerSection: string,
         programSection: string,
