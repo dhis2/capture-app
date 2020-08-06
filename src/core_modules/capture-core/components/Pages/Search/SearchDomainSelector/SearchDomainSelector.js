@@ -11,7 +11,6 @@ import type { Props } from './SearchDomainSelector.types';
 
 const styles = (theme: Theme) => ({
     searchDomainSelectorSection: {
-        maxWidth: theme.typography.pxToRem(900),
         margin: theme.typography.pxToRem(10),
     },
     searchRow: {
