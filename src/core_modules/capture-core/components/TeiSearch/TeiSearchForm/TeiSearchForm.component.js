@@ -137,16 +137,7 @@ class SearchForm extends React.Component<Props> {
     }
 
     render() {
-        const {
-            searchGroup,
-            classes,
-            searchGroupId,
-            onSearch,
-            searchId,
-            onSearchValidationFailed,
-            searchAttempted,
-            attributesWithValuesCount,
-            ...passOnProps } = this.props;
+        const { searchGroup, classes, id } = this.props;
 
         const searchForm = searchGroup && searchGroup.searchForm;
 
@@ -160,11 +151,10 @@ class SearchForm extends React.Component<Props> {
         const searchButtonText = searchGroup.unique ? this.getUniqueSearchButtonText(searchForm) : i18n.t('Search by attributes');
         return (
             <div className={classes.container}>
-                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
-                <Form
+                <D2Form
                     formRef={(formInstance) => { this.formInstance = formInstance; }}
                     formFoundation={searchGroup.searchForm}
-                    {...passOnProps}
+                    id={id}
                 />
                 {!searchGroup.unique && this.renderOrgUnitSelector()}
                 <div
