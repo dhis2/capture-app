@@ -236,26 +236,26 @@ export const SearchPageComponent = ({ classes, dispatch }: Props) => {
                         <SearchResults searchGroupForSelectedScope={searchGroupForSelectedScope} />
                     }
 
-                {
-                    searchStatus === searchPageStatus.NO_RESULTS &&
-                    <Modal position="middle">
-                        <ModalTitle>{i18n.t('No results found')}</ModalTitle>
-                        <ModalContent>
-                            {i18n.t('You can change your search terms and search again to find what you are looking for.')}
-                        </ModalContent>
-                        <ModalActions>
-                            <ButtonStrip end>
-                                <Button
-                                    disabled={searchStatus === searchPageStatus.LOADING}
-                                    onClick={dispatchShowInitialSearchPage}
-                                    type="button"
-                                >
-                                    {i18n.t('Back to search')}
-                                </Button>
-                            </ButtonStrip>
-                        </ModalActions>
-                    </Modal>
-                }
+                    {
+                        searchStatus === searchPageStatus.NO_RESULTS &&
+                        <Modal position="middle">
+                            <ModalTitle>{i18n.t('No results found')}</ModalTitle>
+                            <ModalContent>
+                                {i18n.t('You can change your search terms and search again to find what you are looking for.')}
+                            </ModalContent>
+                            <ModalActions>
+                                <ButtonStrip end>
+                                    <Button
+                                        disabled={searchStatus === searchPageStatus.LOADING}
+                                        onClick={dispatchShowInitialSearchPage}
+                                        type="button"
+                                    >
+                                        {i18n.t('Back to search')}
+                                    </Button>
+                                </ButtonStrip>
+                            </ModalActions>
+                        </Modal>
+                    }
 
                     {
                         searchStatus === searchPageStatus.LOADING &&
@@ -264,15 +264,16 @@ export const SearchPageComponent = ({ classes, dispatch }: Props) => {
                         </div>
                     }
 
-                {
-                    searchStatus === searchPageStatus.ERROR &&
-                    <div
-                        data-test="dhis2-capture-general-purpose-error-mesage"
-                        className={classes.generalPurposeErrorMessage}
-                    >
-                        {i18n.t(generalPurposeErrorMessage)}
-                    </div>
-                }
+                    {
+                        searchStatus === searchPageStatus.ERROR &&
+                        <div
+                            data-test="dhis2-capture-general-purpose-error-mesage"
+                            className={classes.generalPurposeErrorMessage}
+                        >
+                            {i18n.t(generalPurposeErrorMessage)}
+                        </div>
+                    }
+                </div>
             </Paper>
 
             {
