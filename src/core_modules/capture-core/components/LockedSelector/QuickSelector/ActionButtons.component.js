@@ -89,7 +89,7 @@ const Index = ({
                 onClick={dispatchFindClick}
                 color="primary"
             >
-                <SearchIcon className={classes.icon}/>
+                <SearchIcon className={classes.icon} />
                 <span className={classes.buttonMargin}>
                     { i18n.t('Find') }
                 </span>
