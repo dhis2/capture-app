@@ -16,27 +16,23 @@ type Props = {
     history: HashHistory,
 };
 
-export class App extends React.Component<Props> {
-    render() {
-        return (
-            <React.Fragment>
-                <CssBaseline />
-                <Provider
-                    store={this.props.store}
+export const App = ({ store, history }: Props) => (
+    <React.Fragment>
+        <CssBaseline />
+        <Provider
+            store={store}
+        >
+            <ConnectedRouter
+                history={history}
+            >
+                <MuiThemeProvider
+                    theme={theme}
                 >
-                    <ConnectedRouter
-                        history={this.props.history}
-                    >
-                        <MuiThemeProvider
-                            theme={theme}
-                        >
-                            <D2UIApp>
-                                <AppContents />
-                            </D2UIApp>
-                        </MuiThemeProvider>
-                    </ConnectedRouter>
-                </Provider>
-            </React.Fragment>
-        );
-    }
-}
+                    <D2UIApp>
+                        <AppContents />
+                    </D2UIApp>
+                </MuiThemeProvider>
+            </ConnectedRouter>
+        </Provider>
+    </React.Fragment>
+);

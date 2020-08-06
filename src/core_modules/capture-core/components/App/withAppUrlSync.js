@@ -95,7 +95,13 @@ const getUrlParts = (pathName: string) => {
         .map(part => part.substring(1));
 };
 
-const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
+/**
+ * Provides data for withUrlSync and calls an update action if not in sync (based on the page)
+ * @alias withAppUrlSync
+ * @memberof UrlSync
+ * @function
+ */
+export const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
     class AppUrlSyncer extends React.Component<Props> {
         params: ?string;
         page: string;
@@ -183,12 +189,3 @@ const withAppUrlSync = () => (InnerComponent: React.ComponentType<any>) => {
 
     return connect(mapStateToProps, mapDispatchToProps)(AppUrlSyncer);
 };
-
-/**
- * Provides data for withUrlSync and calls an update action if not in sync (based on the page)
- * @alias withAppUrlSync
- * @memberof UrlSync
- * @function
- */
-
-export default withAppUrlSync;

@@ -1,10 +1,9 @@
 // @flow
 import { compose } from 'redux';
 import { withRouter } from 'react-router';
-import withAppUrlSync from 'capture-core/components/App/withAppUrlSync';
-import withUrlSync from 'capture-core/components/UrlSync/withUrlSync';
-import withD2InContext from 'capture-core/HOC/withD2InContext';
-import withStateBoundLoadingIndicator from 'capture-core/HOC/withStateBoundLoadingIndicator';
+import { withAppUrlSync } from 'capture-core/components/App';
+import { withUrlSync } from 'capture-core/components/UrlSync';
+import { withD2InContext, withStateBoundLoadingIndicator } from 'capture-core/HOC';
 import { AppPages } from './AppPages.component';
 
 export const AppPagesLoader = compose(
