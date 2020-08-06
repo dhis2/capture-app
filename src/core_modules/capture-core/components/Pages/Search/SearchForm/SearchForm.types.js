@@ -30,6 +30,7 @@ export type DispatchersFromRedux = {|
   searchViaAttributesOnScopeProgram: ({| programId: string, formId: string, page?: string |}) => void,
   searchViaAttributesOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string |}) => void,
   saveCurrentFormData: (searchScopeType: string, searchScopeId: string, formId: string, currentSearchTerms: CurrentSearchTerms) => void,
+  addFormIdToReduxStore: (formId: string) => void,
 |}
 
 export type Props = {|

@@ -45,6 +45,7 @@ const Index = ({
     searchViaAttributesOnScopeProgram,
     searchViaAttributesOnScopeTrackedEntityType,
     saveCurrentFormData,
+    addFormIdToReduxStore,
     selectedSearchScopeId,
     classes,
     searchGroupForSelectedScope,
@@ -62,6 +63,19 @@ const Index = ({
     },
     [selectedSearchScopeId],
     );
+
+    useEffect(() => {
+        // in order for the Form component to render
+        // a formId under the `forms` reducer needs to be added.
+        searchGroupForSelectedScope
+            .forEach(({ formId }) => {
+                addFormIdToReduxStore(formId);
+            });
+    },
+    [
+        searchGroupForSelectedScope,
+        addFormIdToReduxStore,
+    ]);
 
     useEffect(() => {
         searchGroupForSelectedScope

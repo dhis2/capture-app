@@ -26,7 +26,6 @@ import { SearchResults } from './SearchResults/SearchResults.container';
 import { programCollection } from '../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../../metaData/Program';
 import { SearchDomainSelector } from './SearchDomainSelector';
-import { addFormData } from '../../D2Form/actions/form.actions';
 import { navigateToMainPage, showInitialViewOnSearchPage } from './SearchPage.actions';
 
 export const searchScopes = {
@@ -198,21 +197,6 @@ export const SearchPageComponent = ({ classes, dispatch }: Props) => {
 
     const searchGroupForSelectedScope =
       (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
-
-    useEffect(() => {
-        const dispatchAddFormIdToReduxStore = (formId) => { dispatch(addFormData(formId)); };
-
-        // in order for the Form component to render
-        // a formId under the `forms` reducer needs to be added.
-        searchGroupForSelectedScope
-            .forEach(({ formId }) => {
-                dispatchAddFormIdToReduxStore(formId);
-            });
-    },
-    [
-        searchGroupForSelectedScope,
-        dispatch,
-    ]);
 
     const handleSearchScopeSelection = (program) => {
         dispatchShowInitialSearchPage();
