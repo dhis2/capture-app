@@ -15,6 +15,11 @@ import {
     set as setStoreRoots,
 } from '../../components/FormFields/New/Fields/OrgUnitField/orgUnitRoots.store';
 
+const removeFormData = (state, { payload: { formId } }) => {
+    const { [formId]: deleted, ...stateWithoutDeletedProp } = state;
+    return stateWithoutDeletedProp;
+};
+
 export const formsValuesDesc = createReducerDescription({
     [loaderActionTypes.FORM_DATA_ADD]: (state, action) => {
         const newState = { ...state };
@@ -75,7 +80,7 @@ export const formsValuesDesc = createReducerDescription({
         };
         return newState;
     },
-
+    [loaderActionTypes.FORM_DATA_REMOVE]: removeFormData,
 }, 'formsValues');
 
 export const formsSectionsFieldsUIDesc = createReducerDescription({
@@ -196,6 +201,7 @@ export const formsSectionsFieldsUIDesc = createReducerDescription({
             },
         };
     },
+    [loaderActionTypes.FORM_DATA_REMOVE]: removeFormData,
 }, 'formsSectionsFieldsUI');
 
 export const formsDesc = createReducerDescription({
@@ -218,6 +224,7 @@ export const formsDesc = createReducerDescription({
             },
         };
     },
+    [loaderActionTypes.FORM_DATA_REMOVE]: removeFormData,
 }, 'forms');
 
 export const formsFieldsMiscDesc = createReducerDescription({
@@ -282,4 +289,5 @@ export const formsFieldsMiscDesc = createReducerDescription({
             },
         };
     },
+    [loaderActionTypes.FORM_DATA_REMOVE]: removeFormData,
 }, 'formsFieldsMisc');
