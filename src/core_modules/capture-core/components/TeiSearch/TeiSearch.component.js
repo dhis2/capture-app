@@ -22,6 +22,7 @@ type Props = {
     onNewSearch: (searchId: string) => void,
     onEditSearch: (searchId: string) => void,
     classes: {
+        container: string,
         section: string,
         formContainerSection: string,
         programSection: string,
@@ -29,6 +30,9 @@ type Props = {
 }
 
 const getStyles = (theme: Theme) => ({
+    container:{
+        margin: theme.typography.pxToRem(10),
+    },
     programSection: {
         backgroundColor: 'white',
         maxWidth: theme.typography.pxToRem(900),
@@ -79,7 +83,7 @@ class TeiSearch extends React.Component<Props, State> {
     }
 
     renderSearchForms = (searchGroups: Array<SearchGroup>) => (
-        <div>
+        <div className={this.props.classes.container}>
             {this.renderProgramSection()}
             {this.renderSearchGroups(searchGroups)}
         </div>

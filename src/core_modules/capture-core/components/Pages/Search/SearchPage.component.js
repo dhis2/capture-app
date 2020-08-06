@@ -27,7 +27,6 @@ import { SearchResults } from './SearchResults/SearchResults.container';
 import { programCollection } from '../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../../metaData/Program';
 import { SearchDomainSelector } from './SearchDomainSelector';
-import { addFormData } from '../../D2Form/actions/form.actions';
 import { navigateToMainPage, showInitialViewOnSearchPage } from './SearchPage.actions';
 
 export const searchScopes = {
@@ -38,6 +37,7 @@ export const searchScopes = {
 export const getStyles = (theme: Theme) => ({
     container: {
         padding: '10px 24px 24px 24px',
+        maxWidth: theme.typography.pxToRem(950),
     },
     paper: {
         marginBottom: theme.typography.pxToRem(10),
@@ -199,21 +199,6 @@ export const SearchPageComponent = ({ classes, dispatch }: Props) => {
     const searchGroupForSelectedScope =
       (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
 
-    useEffect(() => {
-        const dispatchAddFormIdToReduxStore = (formId) => { dispatch(addFormData(formId)); };
-
-        // in order for the Form component to render
-        // a formId under the `forms` reducer needs to be added.
-        searchGroupForSelectedScope
-            .forEach(({ formId }) => {
-                dispatchAddFormIdToReduxStore(formId);
-            });
-    },
-    [
-        searchGroupForSelectedScope,
-        dispatch,
-    ]);
-
     const handleSearchScopeSelection = ({ value, label }) => {
         dispatchShowInitialSearchPage();
         setSelectedSearchScope({ value, label });
@@ -221,7 +206,7 @@ export const SearchPageComponent = ({ classes, dispatch }: Props) => {
 
     return (<>
         <LockedSelector />
-        <div data-test="dhis2-capture-search-page-content" className={classes.container}>
+        <div data-test="dhis2-capture-search-page-content" className={classes.container} >
             <Button
                 dataTest="dhis2-capture-back-button"
                 className={classes.backButton}
@@ -232,7 +217,6 @@ export const SearchPageComponent = ({ classes, dispatch }: Props) => {
             </Button>
 
             <Paper className={classes.paper}>
-
                 <SearchDomainSelector
                     trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
                     onSelect={handleSearchScopeSelection}
@@ -246,7 +230,7 @@ export const SearchPageComponent = ({ classes, dispatch }: Props) => {
 
                 {
                     searchStatus === searchPageStatus.SHOW_RESULTS &&
-                    <SearchResults searchGroupForSelectedScope={searchGroupForSelectedScope} />
+                        <SearchResults searchGroupForSelectedScope={searchGroupForSelectedScope} />
                 }
 
                 {

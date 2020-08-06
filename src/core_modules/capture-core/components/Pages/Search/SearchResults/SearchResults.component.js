@@ -20,7 +20,10 @@ export const getStyles = (theme: Theme) => ({
     topSection: {
         display: 'flex',
         flexDirection: 'row',
-        margin: theme.typography.pxToRem(10),
+        marginTop: theme.typography.pxToRem(20),
+        marginLeft: theme.typography.pxToRem(10),
+        marginRight: theme.typography.pxToRem(10),
+        marginBottom: theme.typography.pxToRem(10),
         padding: theme.typography.pxToRem(10),
         backgroundColor: theme.palette.grey.lighter,
     },
