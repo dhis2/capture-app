@@ -34,7 +34,7 @@ type Props = {
     classes: Object,
 };
 
-class FeedbackBar extends React.Component<Props> {
+class Index extends React.Component<Props> {
     static defaultProps = {
         feedback: {},
     };
@@ -124,4 +124,4 @@ class FeedbackBar extends React.Component<Props> {
     }
 }
 
-export default withStyles(styles)(FeedbackBar);
+export const FeedbackBar = withStyles(styles)(Index);

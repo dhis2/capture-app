@@ -10,7 +10,7 @@ import { setD2 } from 'capture-core/d2/d2Instance';
 import i18n from '@dhis2/d2-i18n';
 import type { LocaleDataType } from 'capture-core/utils/localeData/CurrentLocaleData';
 
-import { loadMetaData, loadSystemSettings } from 'capture-core/metaDataStoreLoaders';
+import { loadMetaData, cacheSystemSettings } from 'capture-core/metaDataStoreLoaders';
 import { buildMetaDataAsync, buildSystemSettingsAsync } from 'capture-core/metaDataMemoryStoreBuilders';
 import { initControllersAsync } from 'capture-core/storageControllers';
 import { DisplayException } from 'capture-core/utils/exceptions';
@@ -44,12 +44,6 @@ function setConfig() {
 
     // Temporary setting some old d2 translations for the d2 ui sharing dialog
     config.i18n.sources.add('i18n/i18n_module_en.properties');
-}
-
-function isLangRTL(code) {
-    const langs = ['ar', 'fa', 'ur'];
-    const prefixed = langs.map(c => `${c}-`);
-    return langs.includes(code) || prefixed.filter(c => code.startsWith(c)).length > 0;
 }
 
 function setMomentLocaleAsync(locale: string) {
@@ -127,8 +121,6 @@ function setDateFnLocaleAsync(locale: string, weekdays: any, weekdaysShort: any,
 
 function changeI18nLocale(locale) {
     i18n.changeLanguage(locale);
-    // $FlowSuppress
-    document.body.setAttribute('dir', isLangRTL(locale) ? 'rtl' : 'ltr');
 }
 
 function initI18n(locale) {
@@ -153,8 +145,8 @@ async function initializeMetaDataAsync(dbLocale: string, onQueryApi: Function) {
     await buildMetaDataAsync(dbLocale);
 }
 
-async function initializeSystemSettingsAsync() {
-    const systemSettingsCacheData = await loadSystemSettings();
+async function initializeSystemSettingsAsync(uiLocale: string) {
+    const systemSettingsCacheData = await cacheSystemSettings(uiLocale);
     await buildSystemSettingsAsync(systemSettingsCacheData);
 }
 
@@ -189,7 +181,7 @@ export async function initializeAsync(
     await setLocaleDataAsync(uiLocale);
 
     // initialize system settings
-    await initializeSystemSettingsAsync();
+    await initializeSystemSettingsAsync(uiLocale);
 
     // initialize metadata
     await initializeMetaDataAsync(dbLocale, onQueryApi);

@@ -51,5 +51,6 @@ export default (
 
         // $FlowSuppress
         const LoadingIndicatorContainer = connect(mapStateToProps, null, mergeProps)(getLoadingIndicator(getContainerStylesFn, fullPage));
+        LoadingIndicatorContainer.displayName = "StateBoundLoadingIndicator";
         return LoadingIndicatorContainer;
     };

@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import FeedbackBar from './FeedbackBar.component';
+import { FeedbackBar as FeedbackBarComponent } from './FeedbackBar.component';
 import { closeFeedback } from './actions/feedback.actions';
 
 const mapStateToProps = (state: ReduxState) => ({
@@ -13,4 +13,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FeedbackBar);
+export const FeedbackBar = connect(mapStateToProps, mapDispatchToProps)(FeedbackBarComponent);
