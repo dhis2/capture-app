@@ -1,5 +1,7 @@
 // @flow
 import React, { useState, useRef, useCallback } from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 // eslint-disable-next-line import/extensions
 import 'typeface-roboto';
 import type { HashHistory } from 'history/createHashHistory';
@@ -10,6 +12,7 @@ import { loadApp } from './appStart.actions';
 import { addBeforeUnloadEventListener } from './unload';
 import { CacheExpired } from './CacheExpired.component';
 import { JSSProviderShell } from './JSSProviderShell.component';
+import theme from '../../styles/uiTheme';
 
 export const AppStart = () => {
     const [ready, setReadyStatus] = useState(false);
@@ -41,18 +44,25 @@ export const AppStart = () => {
     }
 
     return (
-        <JSSProviderShell>
-            {
-                ready ?
-                    <App
-                        store={store.current}
-                        history={history.current}
-                    /> :
-                    <AppLoader
-                        onRunApp={handleRunApp}
-                        onCacheExpired={handleCacheExpired}
-                    />
-            }
-        </JSSProviderShell>
+        <React.Fragment>
+            <CssBaseline />
+            <JSSProviderShell>
+                <MuiThemeProvider
+                    theme={theme}
+                >
+                    {
+                        ready ?
+                            <App
+                                store={store.current}
+                                history={history.current}
+                            /> :
+                            <AppLoader
+                                onRunApp={handleRunApp}
+                                onCacheExpired={handleCacheExpired}
+                            />
+                    }
+                </MuiThemeProvider>
+            </JSSProviderShell>
+        </React.Fragment>
     );
 };
