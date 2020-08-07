@@ -5,7 +5,6 @@
   "cacheVersion": "2",
   "private": false,
   "dependencies": {
-    "@babel/plugin-transform-flow-strip-types": "^7.10.4",
     "@dhis2/app-runtime": "2.2.2",
     "@dhis2/cli-utils-cypress": "^2.2.1",
     "@dhis2/d2-i18n": "^1.0.6",
@@ -83,6 +82,7 @@
     }
   },
   "devDependencies": {
+    "@babel/plugin-transform-flow-strip-types": "^7.10.4",
     "@dhis2/cli-app-scripts": "^4.0.9",
     "docdash": "^1.2.0",
     "enzyme": "^3.10.0",
