@@ -13,7 +13,7 @@ const buildSearchOption = (id, name, searchGroups, searchScope) => ({
     searchOptionId: id,
     searchOptionName: name,
     searchGroups: [...searchGroups.values()]
-    // We sort so that we always have expanded the first search group section.
+        // We use the sorted array to always have expanded the first search group section.
         .sort(({ unique: xBoolean }, { unique: yBoolean }) => {
             if (xBoolean === yBoolean) {
                 return 0;
@@ -40,7 +40,7 @@ const useTrackedEntityTypesWithCorrelatedPrograms = (): TrackedEntityTypesWithCo
     useMemo(() =>
         [...programCollection.values()]
             .filter(program => program instanceof TrackerProgram)
-        // $FlowFixMe
+            // $FlowFixMe
             .reduce((acc, {
                 id: programId,
                 name: programName,
@@ -73,7 +73,7 @@ const useTrackedEntityTypesWithCorrelatedPrograms = (): TrackedEntityTypesWithCo
 const useSearchOptions = (trackedEntityTypesWithCorrelatedPrograms): AvailableSearchOptions =>
     useMemo(() =>
         Object.values(trackedEntityTypesWithCorrelatedPrograms)
-        // $FlowFixMe https://github.com/facebook/flow/issues/2221
+            // $FlowFixMe https://github.com/facebook/flow/issues/2221
             .reduce((acc, { trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeSearchGroups, programs }) => ({
                 ...acc,
                 [trackedEntityTypeId]:
@@ -130,10 +130,14 @@ export const SearchPage: ComponentType<{||}> = () => {
     const availableSearchOptions = useSearchOptions(trackedEntityTypesWithCorrelatedPrograms);
     const preselectedProgram = usePreselectedProgram(trackedEntityTypesWithCorrelatedPrograms);
 
-    const searchStatus: string = useSelector(({ searchPage }) => searchPage.searchStatus, isEqual);
-    const generalPurposeErrorMessage: string = useSelector(({ searchPage }) => searchPage.generalPurposeErrorMessage, isEqual);
-    const error: boolean = useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error, isEqual);
-    const ready: boolean = useSelector(({ activePage }) => !activePage.isLoading, isEqual);
+    const searchStatus: string =
+      useSelector(({ searchPage }) => searchPage.searchStatus, isEqual);
+    const generalPurposeErrorMessage: string =
+      useSelector(({ searchPage }) => searchPage.generalPurposeErrorMessage, isEqual);
+    const error: boolean =
+      useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error, isEqual);
+    const ready: boolean =
+      useSelector(({ activePage }) => !activePage.isLoading, isEqual);
 
 
     return (
