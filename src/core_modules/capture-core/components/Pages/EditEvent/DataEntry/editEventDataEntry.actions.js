@@ -2,8 +2,7 @@
 import { actionCreator, actionPayloadAppender } from '../../../../actions/actions.utils';
 import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
 import { getRulesActionsForEvent } from '../../../../rules/actionsCreator';
-import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
-import Program from '../../../../metaData/Program/Program';
+import type { RenderFoundation, Program } from '../../../../metaData';
 import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import {

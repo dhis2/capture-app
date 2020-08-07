@@ -10,7 +10,7 @@ import Button from '../../../Buttons/Button.component';
 import TeiSearch from '../../../TeiSearch/TeiSearch.container';
 import TeiRelationshipSearchResults from './SearchResults/TeiRelationshipSearchResults.component';
 import { makeTrackedEntityTypeSelector } from './teiRelationship.selectors';
-import { TrackedEntityType } from '../../../../metaData';
+import type { TrackedEntityType } from '../../../../metaData';
 import { findModes } from '../findModes';
 import withDefaultNavigation from '../../../Pagination/withDefaultNavigation';
 import withPaginationData from './SearchResults/withPaginationData';

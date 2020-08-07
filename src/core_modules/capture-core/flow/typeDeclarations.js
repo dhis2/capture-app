@@ -1,6 +1,5 @@
 // @flow
-/* eslint-disable */
-import { methods } from '../../capture-core/trackerOffline/trackerOfflineConfig.const';
+import type { methods } from '../../capture-core/trackerOffline/trackerOfflineConfig.const';
 
 declare type D2 = {
     models: Object,

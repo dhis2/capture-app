@@ -10,7 +10,8 @@ import type {
     CachedOptionSetTranslation,
     CachedOptionTranslation,
 } from '../../../../storageControllers/cache.types';
-import { DataElement, OptionSet, Option, optionSetInputTypes as inputTypes, Icon } from '../../../../metaData';
+import { OptionSet, Option, optionSetInputTypes as inputTypes, Icon } from '../../../../metaData';
+import type { DataElement } from '../../../../metaData';
 import { convertOptionSetValue } from '../../../../converters/serverToClient';
 import getDhisIconAsync from '../../getDhisIcon';
 import OptionGroup from '../../../../metaData/OptionSet/OptionGroup';

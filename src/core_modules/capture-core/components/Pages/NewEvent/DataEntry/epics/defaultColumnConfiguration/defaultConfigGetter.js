@@ -2,9 +2,11 @@
 import i18n from '@dhis2/d2-i18n';
 import { canViewOtherUsers } from '../../../../../../d2';
 import {
+    dataElementTypes as elementTypeKeys,
+} from '../../../../../../metaData';
+import type {
     RenderFoundation,
     ProgramStage,
-    dataElementTypes as elementTypeKeys,
 } from '../../../../../../metaData';
 import mainPropertyNames from '../../../../../../events/mainPropertyNames.const';
 

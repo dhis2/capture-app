@@ -2,10 +2,10 @@
 import i18n from '@dhis2/d2-i18n';
 import { canViewOtherUsers } from '../../../../../d2';
 import {
-    ProgramStage,
     dataElementTypes as elementTypeKeys,
     getEventProgramThrowIfNotFound,
 } from '../../../../../metaData';
+import type { ProgramStage } from '../../../../../metaData';
 import mainPropertyNames from '../../../../../events/mainPropertyNames.const';
 
 const getDefaultMainConfig = (stage: ProgramStage) => {

@@ -1,5 +1,5 @@
 // @flow
-import StorageContainer from 'capture-core-utils/storage/StorageController';
+import type StorageContainer from 'capture-core-utils/storage/StorageController';
 
 let currentStorageContainer;
 
