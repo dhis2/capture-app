@@ -1,5 +1,5 @@
 // @flow
-import type { methods } from '../../capture-core/trackerOffline/trackerOfflineConfig.const';
+import { methods } from '../../capture-core/trackerOffline/trackerOfflineConfig.const';
 
 declare type D2 = {
     models: Object,

@@ -4,8 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import LinkButton from '../../../../../Buttons/LinkButton.component';
 import { ProgramFilterer } from '../../../../../ProgramFilterer';
-import { Program } from '../../../../../../metaData';
-import type { TrackerProgram } from '../../../../../../metaData';
+import type { Program } from '../../../../../../metaData';
+import { TrackerProgram } from '../../../../../../metaData';
 import {
     VirtualizedSelectField,
     withSelectTranslations,
