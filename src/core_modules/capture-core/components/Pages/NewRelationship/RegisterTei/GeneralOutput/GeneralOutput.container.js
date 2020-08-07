@@ -17,6 +17,7 @@ const mapStateToProps = (state: ReduxState) => {
 };
 
 // $FlowSuppress
+// $FlowFixMe[missing-annot] automated comment
 export default connect(mapStateToProps, () => ({}))(
     (props: Object) => (props.ready ? <GeneralOutput {...props} /> : null),
 );

@@ -51,5 +51,6 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
 
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
-        // $FlowSuppress
+
+        // $FlowFixMe[missing-annot] automated comment
         connect(mapStateToProps, mapDispatchToProps)(getDataEntryRelationshipsHandler(InnerComponent));

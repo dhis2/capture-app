@@ -66,4 +66,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, { customActionsOnProgramIdR
     },
 });
 
+// $FlowFixMe[missing-annot] automated comment
 export const LockedSelector = connect(mapStateToProps, mapDispatchToProps)(withLoadingIndicator()(LockedSelectorComponent));

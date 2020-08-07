@@ -18,5 +18,6 @@ const mapStateToProps = (state: ReduxState) => {
     };
 };
 
+// $FlowFixMe[missing-annot] automated comment
 export const ViewEventPage = connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(ViewEventPageComponent)));
 

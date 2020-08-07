@@ -441,10 +441,10 @@ msgid "Select columns"
 msgstr ""
 
 msgid "Download as JSON"
-msgstr ""
+msgstr "Transferir como JSON"
 
 msgid "Download as XML"
-msgstr ""
+msgstr "Transferir como XML"
 
 msgid "Download as CSV"
 msgstr "Exportar como CSV"
@@ -483,7 +483,7 @@ msgid "Save As view"
 msgstr ""
 
 msgid "View name"
-msgstr ""
+msgstr "Visualizar o nome "
 
 msgid "Show Less"
 msgstr ""
@@ -548,7 +548,7 @@ msgid "Saving to"
 msgstr ""
 
 msgid "in"
-msgstr ""
+msgstr "no"
 
 msgid ""
 "This is not an event program or the metadata is corrupt. See log for "
@@ -767,7 +767,7 @@ msgid "Date"
 msgstr "Data"
 
 msgid "Time"
-msgstr ""
+msgstr "Tempo "
 
 msgid "From date"
 msgstr "Data de inicio"

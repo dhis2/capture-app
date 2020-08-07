@@ -1,5 +1,7 @@
 // @flow
 import { push } from 'connected-react-router';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
 import {
     actionTypes as newEventDataEntryActionTypes,
     startSaveNewEventAfterReturnedToMainPage,
@@ -9,10 +11,10 @@ import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
 import { getNewEventServerData, getNewEventClientValues } from './getConvertedNewSingleEvent';
 
 export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
-    action$.ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)
-        .map((action) => {
-            const state = store.getState();
+    action$.pipe(
+        ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
+        map((action) => {
+            const state = store.value;
             const payload = action.payload;
             const dataEntryKey = getDataEntryKey(payload.dataEntryId, payload.eventId);
             const formFoundation = payload.formFoundation;
@@ -21,14 +23,14 @@ export const saveNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
             const serverData = getNewEventServerData(state, formFoundation, formClientValues, mainDataClientValues);
             const relationshipData = state.dataEntriesRelationships[dataEntryKey];
             return startSaveNewEventAfterReturnedToMainPage(serverData, relationshipData, state.currentSelections);
-        });
+        }));
 
 export const saveNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
-    action$.ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE)
-        .map(() => {
-            const state = store.getState();
+    action$.pipe(
+        ofType(newEventDataEntryActionTypes.REQUEST_SAVE_RETURN_TO_MAIN_PAGE),
+        map(() => {
+            const state = store.value;
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
             return push(`/programId=${programId}&orgUnitId=${orgUnitId}`);
-        });
+        }));

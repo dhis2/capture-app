@@ -496,6 +496,7 @@ class NewEventDataEntry extends Component<Props> {
     componentDidMount() {
         if (this.relationshipsInstance && this.props.recentlyAddedRelationshipId) {
             this.relationshipsInstance.scrollIntoView();
+            // $FlowFixMe[prop-missing] automated comment
             this.props.onScrollToRelationships();
         }
     }
@@ -569,7 +570,8 @@ class NewEventDataEntry extends Component<Props> {
         } = this.props;
         return (
             <div>
-                <div>
+                <div data-test="dhis2-capture-data-entry-container">
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <WrappedDataEntry
                         id={'singleEvent'}
                         onUpdateFormField={onUpdateField}

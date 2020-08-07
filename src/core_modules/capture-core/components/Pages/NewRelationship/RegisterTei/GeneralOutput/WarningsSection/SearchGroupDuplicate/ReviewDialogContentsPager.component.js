@@ -34,5 +34,4 @@ const ReviewDialogContentsPager = (props: Props) => {
     );
 };
 
-// $FlowFixMe
 export default withStyles(getStyles)(ReviewDialogContentsPager);

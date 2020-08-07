@@ -1,6 +1,8 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
 import { push } from 'connected-react-router';
+import { ofType } from 'redux-observable';
+import { filter, map, switchMap } from 'rxjs/operators';
 import {
     lockedSelectorActionTypes,
     lockedSelectorBatchActionTypes,
@@ -29,28 +31,31 @@ const exactUrl = (page: string, programId: string, orgUnitId: string) => {
 };
 
 export const updateUrlViaLockedSelectorEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.ofType(
-        lockedSelectorActionTypes.ORG_UNIT_ID_SET,
-        lockedSelectorActionTypes.PROGRAM_ID_SET,
-        lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH,
-        lockedSelectorBatchActionTypes.ORG_UNIT_ID_RESET_BATCH,
-    )
-        .map(() => {
+    action$.pipe(
+        ofType(
+            lockedSelectorActionTypes.ORG_UNIT_ID_SET,
+            lockedSelectorActionTypes.PROGRAM_ID_SET,
+            lockedSelectorBatchActionTypes.PROGRAM_ID_RESET_BATCH,
+            lockedSelectorBatchActionTypes.ORG_UNIT_ID_RESET_BATCH,
+        ),
+        map(() => {
             const {
                 currentSelections: { programId, orgUnitId },
                 app: { page },
-            } = store.getState();
+            } = store.value;
             return push(exactUrl(page, programId, orgUnitId));
-        });
+        }));
 
 export const startAgainEpic = (action$: InputObservable) =>
-    action$.ofType(lockedSelectorBatchActionTypes.AGAIN_START)
-        .map(() => push('/'));
+    action$.pipe(
+        ofType(lockedSelectorBatchActionTypes.AGAIN_START),
+        map(() => push('/')));
 
 export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable) =>
-    action$.ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE)
-        .filter(action => action.payload.nextProps.orgUnitId)
-        .switchMap(action => getApi()
+    action$.pipe(
+        ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE),
+        filter(action => action.payload.nextProps.orgUnitId),
+        switchMap(action => getApi()
             .get(`organisationUnits/${action.payload.nextProps.orgUnitId}`)
             .then(response => setCurrentOrgUnitBasedOnUrl({
                 id: response.id,
@@ -60,19 +65,23 @@ export const getOrgUnitDataBasedOnUrlUpdateEpic = (action$: InputObservable) =>
             .catch(() =>
                 errorRetrievingOrgUnitBasedOnUrl(i18n.t('Could not get organisation unit')),
             ),
-        );
+        ));
 
 export const setOrgUnitDataEmptyBasedOnUrlUpdateEpic = (action$: InputObservable) =>
-    action$.ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE)
-        .filter(action => !action.payload.nextProps.orgUnitId)
-        .map(() => setEmptyOrgUnitBasedOnUrl());
+    action$.pipe(
+        ofType(lockedSelectorActionTypes.SELECTIONS_FROM_URL_UPDATE),
+        filter(action => !action.payload.nextProps.orgUnitId),
+        map(() => setEmptyOrgUnitBasedOnUrl()));
 
 export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$.ofType(
-        lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_SET,
-        lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_EMPTY_SET)
-        .map(() => {
-            const { programId, orgUnitId } = store.getState().currentSelections;
+
+    action$.pipe(
+        ofType(
+            lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_SET,
+            lockedSelectorActionTypes.BASED_ON_URL_ORG_UNIT_EMPTY_SET,
+        ),
+        map(() => {
+            const { programId, orgUnitId } = store.value.currentSelections;
 
             if (programId) {
                 const program = programCollection.get(programId);
@@ -86,4 +95,4 @@ export const validateSelectionsBasedOnUrlUpdateEpic = (action$: InputObservable,
             }
 
             return validSelectionsFromUrl();
-        });
+        }));

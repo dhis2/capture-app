@@ -10,4 +10,5 @@ const mapStateToProps = (state: ReduxState) => ({
 const mapDispatchToProps = () => ({
 });
 
+// $FlowFixMe[missing-annot] automated comment
 export default connect(mapStateToProps, mapDispatchToProps)(RelationshipNavigation);

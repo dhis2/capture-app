@@ -145,6 +145,7 @@ class TeiSearch extends React.Component<Props, State> {
     renderSearchResult = () => {
         const { onSearch, showResults, onNewSearch, onEditSearch, onSearchResultsChangePage, classes, ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <TeiSearchResults
                 onChangePage={this.handleSearchResultsChangePage}
                 onNewSearch={this.handleNewSearch}

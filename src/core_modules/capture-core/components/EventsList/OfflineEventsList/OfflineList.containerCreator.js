@@ -28,4 +28,5 @@ const makeMapStateToProps = () => {
     return mapStateToProps;
 };
 
+// $FlowFixMe[missing-annot] automated comment
 export default connect(makeMapStateToProps, {});

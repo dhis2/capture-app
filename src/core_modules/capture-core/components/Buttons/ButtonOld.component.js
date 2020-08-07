@@ -28,6 +28,7 @@ const Button = (props: Props) => {
     const buttonRefPropObject = muiButtonRef ? { buttonRef: muiButtonRef } : null;
 
     return (
+        // $FlowFixMe[cannot-spread-inexact] automated comment
         <MuiButton
             {...buttonRefPropObject}
             className={classes.button}

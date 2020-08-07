@@ -109,17 +109,25 @@ class List extends React.Component<Props> {
         this.columnHeaderInstances = [];
     }
     static typesWithAscendingInitialDirection = [
+        // $FlowFixMe[prop-missing] automated comment
         elementTypes.TEXT,
+        // $FlowFixMe[prop-missing] automated comment
         elementTypes.LONG_TEXT,
+        // $FlowFixMe[prop-missing] automated comment
         elementTypes.USERNAME,
         'ASSIGNEE',
     ];
 
     static typesWithRightPlacement = [
+        // $FlowFixMe[prop-missing] automated comment
         elementTypes.NUMBER,
+        // $FlowFixMe[prop-missing] automated comment
         elementTypes.INTEGER,
+        // $FlowFixMe[prop-missing] automated comment
         elementTypes.INTEGER_POSITIVE,
+        // $FlowFixMe[prop-missing] automated comment
         elementTypes.INTEGER_NEGATIVE,
+        // $FlowFixMe[prop-missing] automated comment
         elementTypes.INTEGER_ZERO_OR_POSITIVE,
     ];
     getSortHandler = (id: string) => (direction: string) => {
@@ -285,11 +293,14 @@ class List extends React.Component<Props> {
             >
                 <Table
                     className={classes.table}
+                    data-test="dhis2-capture-event-list-table"
                 >
                     <Head>
                         {this.renderHeaderRow(visibleColumns)}
                     </Head>
-                    <Body>
+                    <Body
+                        data-test="dhis2-capture-event-list-body"
+                    >
                         {this.renderBody(visibleColumns)}
                     </Body>
                 </Table>

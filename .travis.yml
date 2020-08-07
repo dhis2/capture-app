@@ -1,23 +1,26 @@
 language: node_js
 node_js:
-- '10'
+  - '10'
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+    - $HOME/.cache
+
 env:
   global:
-  - CC_TEST_REPORTER_ID=99c53e7494b352df65334376e53eeb1cfa022afca8f90fefa15da1e59efa4879
-  - secure: gRMnUgo6ludTP1BfUycfvdknIAt1jDh5MqZEPp3HvU6+QDda8PU0t0XS5qg9fbYiZ6vr8Aj2fDGXqg+VnLJiQmG13wb0mwrHJ7mf3tt2x0ezUuOt7mzQRTGbmXSH+z2c3w8oGB/Qj8J6ci10S4fINsp+IHtmUxvAmZplm7crqDfDTlOVm/7AhgK5QJxe3Dgu6bKWWBxvGAAjc4I2W3ZuY88mq0G3xKh+I6fBq5yVUmLyKIh/5kyPFwI3eM0DygQuremN5Y5SqXs/2yexNoLqJySYJV7HyPKlzushvlwMIsj40XDiqahffU2u+B1xvybMCDycml88sSoPSuu4QozvwmfNmIIr93hBL1yZI2FhIDl+gG+fcYC8jPtlgMP7Dqb/CXmXrqYMdQCjBUeNjP5n0p+jl+sjWFLehoGZwzI/y77COc8ZJqi96NCEp/qrkdabWJMqgIQIuYK3pP08+o3diz70HXjTiWSR0C1hvDOql3YlgmMw+aw+T0z/itQ65hJvmHZ1Ui8GJxnZoihl5ZzboMoYzBPPK2bEXEqLEromycaXYzDNVhorjkJcZGXSjZc6k5mtz0EbFTILv0upZPFCoLqY3z3x5vOXx/uMQLHC6ZWsCIkMjy05y6nndAMFAj/V6/ue4v4o+HpjMJFgVi/GjFCXp8u9c+mkG/qU6WG7+DE=
-before_script:
-- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
-  > ./cc-test-reporter
-- chmod +x ./cc-test-reporter
-- "./cc-test-reporter before-build"
-- npm install --global @dhis2/deploy-build
-script:
-- npm run build
-after_script:
-- "./cc-test-reporter after-build -d --exit-code $TRAVIS_TEST_RESULT"
-deploy:
-- provider: script
-  script: deploy-build
-  skip_cleanup: true
-  on:
-    all_branches: true
+    secure: gRMnUgo6ludTP1BfUycfvdknIAt1jDh5MqZEPp3HvU6+QDda8PU0t0XS5qg9fbYiZ6vr8Aj2fDGXqg+VnLJiQmG13wb0mwrHJ7mf3tt2x0ezUuOt7mzQRTGbmXSH+z2c3w8oGB/Qj8J6ci10S4fINsp+IHtmUxvAmZplm7crqDfDTlOVm/7AhgK5QJxe3Dgu6bKWWBxvGAAjc4I2W3ZuY88mq0G3xKh+I6fBq5yVUmLyKIh/5kyPFwI3eM0DygQuremN5Y5SqXs/2yexNoLqJySYJV7HyPKlzushvlwMIsj40XDiqahffU2u+B1xvybMCDycml88sSoPSuu4QozvwmfNmIIr93hBL1yZI2FhIDl+gG+fcYC8jPtlgMP7Dqb/CXmXrqYMdQCjBUeNjP5n0p+jl+sjWFLehoGZwzI/y77COc8ZJqi96NCEp/qrkdabWJMqgIQIuYK3pP08+o3diz70HXjTiWSR0C1hvDOql3YlgmMw+aw+T0z/itQ65hJvmHZ1Ui8GJxnZoihl5ZzboMoYzBPPK2bEXEqLEromycaXYzDNVhorjkJcZGXSjZc6k5mtz0EbFTILv0upZPFCoLqY3z3x5vOXx/uMQLHC6ZWsCIkMjy05y6nndAMFAj/V6/ue4v4o+HpjMJFgVi/GjFCXp8u9c+mkG/qU6WG7+DE=
+
+install:
+  - yarn install --frozen-lockfile
+
+jobs:
+  include:
+    - stage: deploy
+      script:
+        - yarn build
+        - npx --package @dhis2/deploy-build deploy-build
+      skip_cleanup: true
+      on:
+        all_branches: true

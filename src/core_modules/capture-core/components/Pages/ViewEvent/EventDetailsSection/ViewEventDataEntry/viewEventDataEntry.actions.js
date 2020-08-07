@@ -21,6 +21,7 @@ export const actionTypes = {
 async function addSubValues(preDataEntryValues, preFormValues, formFoundation: RenderFoundation) {
     const formElements = formFoundation.getElements();
     const usernames = formElements.reduce((acc, dataElement) => {
+        // $FlowFixMe[prop-missing] automated comment
         if (dataElement.type === elementTypeKeys.USERNAME && preFormValues[dataElement.id]) {
             acc.add(preFormValues[dataElement.id]);
         }
@@ -58,6 +59,7 @@ async function addSubValues(preDataEntryValues, preFormValues, formFoundation: R
 
     const formValues = formElements
         .reduce((accFormValues, dataElement) => {
+            // $FlowFixMe[prop-missing] automated comment
             if (dataElement.type === elementTypeKeys.USERNAME && accFormValues[dataElement.id]) {
                 const user = users[accFormValues[dataElement.id]];
                 if (!user) {
@@ -81,6 +83,7 @@ async function addSubValues(preDataEntryValues, preFormValues, formFoundation: R
 }
 
 function getAssignee(clientAssignee: ?Object) {
+    // $FlowFixMe[prop-missing] automated comment
     return clientAssignee ? convertClientToForm(clientAssignee, elementTypeKeys.USERNAME) : clientAssignee;
 }
 
@@ -122,6 +125,7 @@ export const loadViewEventDataEntry =
             addSubValues,
         );
 
+        // $FlowFixMe[cannot-spread-indexer] automated comment
         const eventDataForRulesEngine = { ...eventContainer.event, ...eventContainer.values };
         return [
             ...dataEntryActions,
@@ -135,6 +139,7 @@ export const loadViewEventDataEntry =
             ),
             actionCreator(actionTypes.VIEW_EVENT_DATA_ENTRY_LOADED)({
                 loadedValues: { dataEntryValues, formValues, eventContainer },
+                // $FlowFixMe[prop-missing] automated comment
                 assignee: getAssignee(eventContainer.event.assignee),
             }),
         ];

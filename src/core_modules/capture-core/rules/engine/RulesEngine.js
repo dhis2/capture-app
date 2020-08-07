@@ -82,6 +82,7 @@ function updateVariableHashWhenActionIsAssignValue(content: string, action: stri
         } else {
             // buildAssignVariable
             // todo according to types this must be a bug
+            // $FlowFixMe[prop-missing] automated comment
             const { valueType } = variableHash;
             let variableValue = convertRuleEffectDataToOutputBaseValue(data, valueType);
             if (variableValue && isString(variableValue)) {

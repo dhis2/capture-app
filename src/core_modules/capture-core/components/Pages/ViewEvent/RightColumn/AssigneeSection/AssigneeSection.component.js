@@ -42,6 +42,7 @@ class AssigneeSection extends React.Component<Props> {
                 collapsable
                 header={this.renderHeader()}
             >
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <LoadingContents
                     loadingIndicatorStyle={loadingIndicatorStyle}
                     {...passOnProps}

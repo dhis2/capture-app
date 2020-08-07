@@ -49,7 +49,8 @@ export const withStateBoundLoadingIndicator = (
                 InnerComponent,
             });
 
-        // $FlowSuppress
+
+        // $FlowFixMe[speculation-ambiguous] automated comment
         const LoadingIndicatorContainer = connect(mapStateToProps, null, mergeProps)(getLoadingIndicator(getContainerStylesFn, fullPage));
         return LoadingIndicatorContainer;
     };

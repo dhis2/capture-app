@@ -257,6 +257,7 @@ class ProgramSelector extends Component<Props> {
                                                 return (
                                                     <CategorySelector
                                                         category={category}
+                                                        // $FlowFixMe[incompatible-call] automated comment
                                                         onSelect={(option) => { this.handleClickCategoryOption(option, category.id); }}
                                                         selectedOrgUnitId={selectedOrgUnitId}
                                                     />
@@ -300,7 +301,7 @@ class ProgramSelector extends Component<Props> {
             : null;
 
         return (
-            <Paper elevation={0} className={classes.paper}>
+            <Paper elevation={0} className={classes.paper} data-test="dhis2-capture-program-selector-container">
                 <h4 className={classes.title}>
                     { i18n.t('Program') }
                 </h4>

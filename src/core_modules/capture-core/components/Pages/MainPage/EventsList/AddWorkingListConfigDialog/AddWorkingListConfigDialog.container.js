@@ -1,6 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import AddWorkingListConfigDialog from './AddWorkingListConfigDialog.component';
+// $FlowFixMe[missing-export] automated comment
 import { addWorkingListConfig } from '../eventsList.actions';
 
 const mapStateToProps = () => ({});
@@ -12,4 +13,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
+// $FlowFixMe[missing-annot] automated comment
 export default connect(mapStateToProps, mapDispatchToProps)(AddWorkingListConfigDialog);

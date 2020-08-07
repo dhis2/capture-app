@@ -184,5 +184,4 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
         );
     }
 }
-// $FlowFixMe
 export default withStyles(getStyles)(TeiRelationshipSearchResults);

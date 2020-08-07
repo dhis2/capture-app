@@ -1,5 +1,7 @@
 // @flow
 import { push } from 'connected-react-router';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
 import { lockedSelectorActionTypes } from '../../../LockedSelector/LockedSelector.actions';
 
 const getArguments = (programId: string, orgUnitId: string) => {
@@ -15,11 +17,11 @@ const getArguments = (programId: string, orgUnitId: string) => {
 };
 
 export const openNewEventPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
-    action$.ofType(lockedSelectorActionTypes.NEW_EVENT_OPEN)
-        .map(() => {
-            const state = store.getState();
+    action$.pipe(
+        ofType(lockedSelectorActionTypes.NEW_EVENT_OPEN),
+        map(() => {
+            const state = store.value;
             const { programId, orgUnitId } = state.currentSelections;
             const args = getArguments(programId, orgUnitId);
             return push(`/newEvent/${args}`);
-        });
+        }));

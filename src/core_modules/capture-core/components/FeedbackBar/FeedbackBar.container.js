@@ -12,5 +12,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         dispatch(closeFeedback());
     },
 });
-
+// $FlowFixMe[missing-annot] automated comment
 export const FeedbackBar = connect(mapStateToProps, mapDispatchToProps)(FeedbackBarComponent);

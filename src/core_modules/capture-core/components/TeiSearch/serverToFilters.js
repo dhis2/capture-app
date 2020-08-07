@@ -17,10 +17,15 @@ function convertRange(value: RangeValue, elementId: string) {
 
 // todo report (lgmt)
 const valueConvertersForType = {
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.TEXT]: like,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.NUMBER_RANGE]: convertRange,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATE_RANGE]: convertRange,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATETIME_RANGE]: convertRange,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.TIME_RANGE]: convertRange,
 };
 

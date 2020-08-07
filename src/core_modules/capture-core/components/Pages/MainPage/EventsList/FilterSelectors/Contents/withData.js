@@ -24,4 +24,5 @@ const dispatchToProps = () => ({
 
 });
 
+// $FlowFixMe[missing-annot] automated comment
 export default () => (InnerComponent: React.ComponentType<any>) => connect(mapStateToProps, dispatchToProps)(InnerComponent);
