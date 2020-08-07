@@ -1,10 +1,11 @@
 // @flow
-import React, { useMemo, useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
+import { compose } from 'redux';
+import type { ComponentType } from 'react';
 import i18n from '@dhis2/d2-i18n';
+import withStyles from '@material-ui/core/styles/withStyles';
 import Paper from '@material-ui/core/Paper/Paper';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import { useSelector } from 'react-redux';
-import { isEqual } from 'lodash';
 import {
     Modal,
     ModalTitle,
@@ -14,26 +15,20 @@ import {
     Button,
 } from '@dhis2/ui-core';
 import { LockedSelector } from '../../LockedSelector';
-import type {
-    AvailableSearchOptions,
-    Props,
-    TrackedEntityTypesWithCorrelatedPrograms,
-} from './SearchPage.types';
+import type { ContainerProps, Props } from './SearchPage.types';
 import { searchPageStatus } from '../../../reducers/descriptions/searchPage.reducerDescription';
 import { SearchForm } from './SearchForm';
 import { LoadingMask } from '../../LoadingMasks';
 import { SearchResults } from './SearchResults/SearchResults.container';
-import { programCollection } from '../../../metaDataMemoryStores';
-import { TrackerProgram } from '../../../metaData/Program';
 import { SearchDomainSelector } from './SearchDomainSelector';
-import { navigateToMainPage, showInitialViewOnSearchPage } from './SearchPage.actions';
+import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 
 export const searchScopes = {
     PROGRAM: 'PROGRAM',
     TRACKED_ENTITY_TYPE: 'TRACKED_ENTITY_TYPE',
 };
 
-export const getStyles = (theme: Theme) => ({
+const getStyles = (theme: Theme) => ({
     maxWidth: {
         maxWidth: theme.typography.pxToRem(950),
     },
@@ -63,129 +58,17 @@ export const getStyles = (theme: Theme) => ({
     },
 });
 
-const buildSearchOption = (id, name, searchGroups, searchScope) => ({
-    searchOptionId: id,
-    searchOptionName: name,
-    searchGroups: [...searchGroups.values()]
-        // We sort so that we always have expanded the first search group section.
-        .sort(({ unique: xBoolean }, { unique: yBoolean }) => {
-            if (xBoolean === yBoolean) {
-                return 0;
-            }
-            if (xBoolean) {
-                return -1;
-            }
-            return 1;
-        })
-        .map(({ unique, searchForm, minAttributesRequiredToSearch }, index) => ({
-            unique,
-            searchForm,
-            // We adding the `formId` here for the reason that we will use it in the SearchPage component.
-            // Specifically the function `addFormData` will add an object for each input field to the store.
-            // Also the formId is passed in the `Form` component and needs to be identical with the one in
-            // the store in order for the `Form` to function. For these reasons we generate it once here.
-            formId: `searchPageForm-${id}-${index}`,
-            searchScope,
-            minAttributesRequiredToSearch,
-        })),
-});
-
-const useTrackedEntityTypesWithCorrelatedPrograms = (): TrackedEntityTypesWithCorrelatedPrograms =>
-    useMemo(() =>
-        [...programCollection.values()]
-            .filter(program => program instanceof TrackerProgram)
-            // $FlowFixMe
-            .reduce((acc, {
-                id: programId,
-                name: programName,
-                trackedEntityType: {
-                    id: trackedEntityTypeId,
-                    name: trackedEntityTypeName,
-                    searchGroups: trackedEntityTypeSearchGroups,
-                },
-                searchGroups,
-            }: TrackerProgram) => {
-                const accumulatedProgramsOfTrackedEntityType =
-            acc[trackedEntityTypeId] ? acc[trackedEntityTypeId].programs : [];
-                return {
-                    ...acc,
-                    [trackedEntityTypeId]: {
-                        trackedEntityTypeId,
-                        trackedEntityTypeName,
-                        trackedEntityTypeSearchGroups,
-                        programs: [
-                            ...accumulatedProgramsOfTrackedEntityType,
-                            { programId, programName, searchGroups },
-                        ],
-
-                    },
-                };
-            }, {}),
-    [],
-    );
-
-const useSearchOptions = (trackedEntityTypesWithCorrelatedPrograms): AvailableSearchOptions =>
-    useMemo(() =>
-        Object.values(trackedEntityTypesWithCorrelatedPrograms)
-            // $FlowFixMe https://github.com/facebook/flow/issues/2221
-            .reduce((acc, { trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeSearchGroups, programs }) => ({
-                ...acc,
-                [trackedEntityTypeId]:
-                  buildSearchOption(
-                      trackedEntityTypeId,
-                      trackedEntityTypeName,
-                      trackedEntityTypeSearchGroups,
-                      searchScopes.TRACKED_ENTITY_TYPE,
-                  ),
-                ...programs.reduce((accumulated, { programId, programName, searchGroups }) => ({
-                    ...accumulated,
-                    [programId]:
-                      buildSearchOption(
-                          programId,
-                          programName,
-                          searchGroups,
-                          searchScopes.PROGRAM,
-                      ),
-                }), {}),
-            }), {}),
-    [trackedEntityTypesWithCorrelatedPrograms],
-    );
-
-const usePreselectedProgram = (trackedEntityTypesWithCorrelatedPrograms) => {
-    const currentSelectionsId =
-      useSelector(({ currentSelections }) => currentSelections.programId, isEqual);
-
-    return useMemo(() => {
-        const preselection = Object.values(trackedEntityTypesWithCorrelatedPrograms)
-            // $FlowFixMe https://github.com/facebook/flow/issues/2221
-            .map(({ programs }) =>
-                programs.find(({ programId }) => programId === currentSelectionsId))
-            .filter(program => program)[0];
-        return {
-            value: preselection && preselection.programId,
-            label: preselection && preselection.programName,
-        };
-    }, [currentSelectionsId, trackedEntityTypesWithCorrelatedPrograms],
-    );
-};
-
-export const SearchPageComponent = ({ classes, dispatch }: Props) => {
-    const dispatchShowInitialSearchPage = useCallback(
-        () => { dispatch(showInitialViewOnSearchPage()); },
-        [dispatch]);
-    const dispatchNavigateToMainPage = () => { dispatch(navigateToMainPage()); };
-
-    const trackedEntityTypesWithCorrelatedPrograms = useTrackedEntityTypesWithCorrelatedPrograms();
-    const availableSearchOptions = useSearchOptions(trackedEntityTypesWithCorrelatedPrograms);
-    const preselectedProgram = usePreselectedProgram(trackedEntityTypesWithCorrelatedPrograms);
-
-    const searchStatus: string =
-      useSelector(({ searchPage }) => searchPage.searchStatus, isEqual);
-
-    const generalPurposeErrorMessage: string =
-      useSelector(({ searchPage }) => searchPage.generalPurposeErrorMessage, isEqual);
+const Index = ({
+    dispatchShowInitialSearchPage,
+    dispatchNavigateToMainPage,
+    classes,
+    trackedEntityTypesWithCorrelatedPrograms,
+    availableSearchOptions,
+    preselectedProgram,
+    searchStatus,
+    generalPurposeErrorMessage,
+}: Props) => {
     const [selectedSearchScope, setSelectedSearchScope] = useState(() => preselectedProgram);
-
 
     useEffect(() => {
         if (!preselectedProgram.value) {
@@ -285,3 +168,9 @@ export const SearchPageComponent = ({ classes, dispatch }: Props) => {
     </>);
 };
 
+export const SearchPageComponent: ComponentType<ContainerProps> =
+  compose(
+      withLoadingIndicator(),
+      withErrorMessageHandler(),
+      withStyles(getStyles),
+  )(Index);

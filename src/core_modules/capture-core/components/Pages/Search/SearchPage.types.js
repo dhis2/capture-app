@@ -1,5 +1,5 @@
 // @flow
-import { RenderFoundation } from '../../../metaData';
+import type { RenderFoundation } from '../../../metaData';
 
 export type SearchGroup = Array<{|
   +searchForm: RenderFoundation,
@@ -32,18 +32,21 @@ export type TrackedEntityTypesWithCorrelatedPrograms = $ReadOnly<{
   |}
 }>
 
-export type OwnProps = {|
-  +classes: Object,
+export type ContainerProps = $ReadOnly<{|
+  dispatchNavigateToMainPage: ()=>void,
+  dispatchShowInitialSearchPage: ()=>void,
+  trackedEntityTypesWithCorrelatedPrograms: TrackedEntityTypesWithCorrelatedPrograms,
+  availableSearchOptions: AvailableSearchOptions,
+  preselectedProgram: SelectedSearchScope,
+  searchStatus: string,
+  generalPurposeErrorMessage: string,
+  error: boolean,
+  ready: boolean,
 |}
-
-export type PropsFromRedux ={|
-  +error: boolean,
-  +ready: boolean,
-|}
+>
 
 export type Props = {|
-  +dispatch: ReduxDispatch,
-  ...OwnProps,
-  ...PropsFromRedux
+  +classes: Object,
+  ...ContainerProps
 |}
 
