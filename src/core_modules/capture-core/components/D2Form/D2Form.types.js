@@ -2,24 +2,25 @@
 
 import type { RenderFoundation } from '../../metaData';
 
-export type FormRef = {|
+export type FormRef = $ReadOnly<{|
   formRef?: (instance: any) => void
-|}
+|}>
 
-export type OwnProps = {|
+export type OwnProps = $ReadOnly<{|
   formFoundation: RenderFoundation,
   id: string,
   formHorizontal?: boolean,
   ...FormRef
-|};
+|}>
 
-export type PropsFromRedux = {|
+export type PropsFromRedux = $ReadOnly<{|
   isFormInReduxStore: boolean,
-|}
-export type DispatchersFromRedux = {|
+|}>
+
+export type DispatchersFromRedux = $ReadOnly<{|
   dispatchRemoveFormData: () => void,
   dispatchRemoveSectionFormData: (formSectionId: string) => void,
-|}
+|}>
 
 export type Props = {|
   ...CssClasses,

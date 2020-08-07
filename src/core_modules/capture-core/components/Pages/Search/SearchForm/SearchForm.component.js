@@ -50,7 +50,7 @@ const useFormDataLifecycle = (
             .forEach(({ formId }) => {
                 addFormIdToReduxStore(formId);
             });
-        // we remove the data on unmount
+        // we remove the data on unmount to clean the store
         return () => searchGroupForSelectedScope
             .forEach(({ formId, searchForm }) => {
                 removeFormDataFromReduxStore(formId);
