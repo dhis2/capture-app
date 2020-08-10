@@ -17,7 +17,7 @@ export const AppStart = () => {
     const [ready, setReadyStatus] = useState(false);
     const [cacheExpired, setCacheExpired] = useState(false);
 
-    const store = useRef();
+    const store: {current: Object} = useRef();
     const history = useRef();
 
     const handleRunApp = useCallback((storeArg: ReduxStore, historyArg: HashHistory) => {

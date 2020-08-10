@@ -7,6 +7,7 @@ import { withD2InContext, withStateBoundLoadingIndicator } from 'capture-core/HO
 import { AppPages } from './AppPages.component';
 
 export const AppPagesLoader = compose(
+    // $FlowFixMe
     withRouter,
     withStateBoundLoadingIndicator((state: ReduxState) => state.app.initDone, null, true),
     withD2InContext(),

@@ -9,12 +9,18 @@ import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
 // For this app the insertion point should be below the css.
 const insertionPoint = document.createElement('noscript');
 insertionPoint.setAttribute('id', 'jss-insertion-point');
+// $FlowFixMe
 document.head.appendChild(insertionPoint);
 const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());
 jss.options.insertionPoint = insertionPoint;
-export const JSSProviderShell = props => (
+
+type Props = {
+    children: React$Node,
+};
+
+export const JSSProviderShell = ({ children }: Props) => (
     <JssProvider jss={jss} generateClassName={generateClassName}>
-        {props.children}
+        {children}
     </JssProvider>
 );
