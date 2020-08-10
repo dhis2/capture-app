@@ -20,7 +20,7 @@ type InputSearchAttribute = {
     trackedEntityAttributeId: ?string,
     searchable: boolean,
     displayInList: boolean,
-    renderOptionsAsRadio: boolean,
+    renderOptionsAsRadio: ?boolean,
 }
 
 type SearchAttribute = InputSearchAttribute & {
