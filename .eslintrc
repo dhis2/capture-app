@@ -9,7 +9,8 @@
     },
     "extends": [
         "airbnb",
-        "plugin:flowtype/recommended"
+        "plugin:flowtype/recommended",
+        "react-app"
     ],
     "plugins": [
         "flowtype"
@@ -110,7 +111,8 @@
                     ]
                 }
             }
-        ]
+        ],
+        "react-hooks/exhaustive-deps": "error"
     },
     "settings": {
         "import/resolver": {
