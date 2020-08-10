@@ -51,7 +51,7 @@ class Index extends React.Component<Props> {
     };
 
     handleClose = (event?: ?Object, reason?: ?string) => {
-        if (reason !== FeedbackBar.CLICKAWAY_KEY) {
+        if (reason !== Index.CLICKAWAY_KEY) {
             this.props.onClose();
         }
     }
@@ -98,7 +98,7 @@ class Index extends React.Component<Props> {
             <React.Fragment>
                 <SnackBar
                     open={isSnackBarOpen}
-                    anchorOrigin={FeedbackBar.ANCHOR_ORIGION}
+                    anchorOrigin={Index.ANCHOR_ORIGION}
                     autoHideDuration={5000}
                     onClose={this.handleClose}
                     // $FlowFixMe[incompatible-type] automated comment
@@ -128,5 +128,6 @@ class Index extends React.Component<Props> {
         );
     }
 }
+Index.displayName = 'FeedbackBar';
 
 export const FeedbackBar = withStyles(styles)(Index);
