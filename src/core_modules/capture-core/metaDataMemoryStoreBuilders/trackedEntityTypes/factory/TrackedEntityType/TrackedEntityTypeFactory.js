@@ -41,6 +41,7 @@ class TrackedEntityTypeFactory {
         );
         this.searchGroupFactory = new SearchGroupFactory(
             cachedTrackedEntityAttributes,
+            cachedOptionSets,
             locale,
         );
 
