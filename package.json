@@ -62,19 +62,20 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "manualBuild": "node verifyCacheVersion.js && REACT_APP_DHIS2_BASE_URL='../../..' d2-app-scripts build",
-    "start": "node verifyCacheVersion.js && d2-app-scripts start",
-    "build": "node verifyCacheVersion.js && GENERATE_SOURCEMAP=false d2-app-scripts build && cp ./package.json ./build/app/package.json",
+    "start": "yarn verifyCacheVersion && d2-app-scripts start",
+    "start:forCypress": "node scripts/startAppForCypress.js",
+    "build": "yarn verifyCacheVersion && GENERATE_SOURCEMAP=false d2-app-scripts build && cp ./package.json ./build/app/package.json",
+    "build:manual": "yarn verifyCacheVersion && REACT_APP_DHIS2_BASE_URL='../../..' d2-app-scripts build",
     "test": "NODE_PATH=src/core_modules d2-app-scripts test",
     "test:debug": "react-scripts --inspect-brk test --runInBand",
-    "add-flow-types": "flow-typed install",
+    "addFlowTypes": "flow-typed install",
     "docs": "NODE_ENV=development jsdoc -c jsdoc-conf.json",
     "linter:check": "eslint -c .eslintrc . --quiet",
     "flow:check": "./node_modules/.bin/flow check ./src",
     "lint": "npm run flow:check && npm run linter:check",
-    "cypress:start": "BROWSER=none REACT_APP_DHIS2_BASE_URL=http://localhost:8080/dhis yarn start",
-    "cy:open": "CYPRESS_dhis2_base_url=http://localhost:8080/dhis CYPRESS_dhis2_username=admin CYPRESS_dhis2_password=district d2-utils-cypress open --appStart 'yarn cypress:start'",
-    "cy:run": "CYPRESS_dhis2_base_url=http://localhost:8080/dhis CYPRESS_dhis2_username=admin CYPRESS_dhis2_password=district d2-utils-cypress run --appStart 'yarn cypress:start'"
+    "cy:open": "d2-utils-cypress open --appStart 'yarn start:forCypress'",
+    "cy:run": "d2-utils-cypress run --appStart 'yarn start:forCypress'",
+    "verifyCacheVersion": "node scripts/verifyCacheVersion.js"
   },
   "husky": {
     "hooks": {
@@ -84,7 +85,9 @@
   "devDependencies": {
     "@babel/plugin-transform-flow-strip-types": "^7.10.4",
     "@dhis2/cli-app-scripts": "^4.0.9",
+    "@dhis2/cli-helpers-engine": "^1.5.0",
     "docdash": "^1.2.0",
+    "dotenv": "^8.2.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "6.8.0",

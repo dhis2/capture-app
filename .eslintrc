@@ -72,7 +72,11 @@
         "import/no-extraneous-dependencies": [
             "error",
             {
-                "devDependencies": ["**/*.test.js"],
+                "devDependencies": [
+                    "**/*.test.js",
+                    "/cypress/**",
+                    "**/startAppForCypress.js"
+                ],
                 "optionalDependencies": false,
                 "peerDependencies": true
             }
