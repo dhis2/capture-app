@@ -28,7 +28,7 @@ export const getStyles = (theme: Theme) => ({
         backgroundColor: theme.palette.grey.lighter,
     },
     openDashboardButton: {
-        marginTop: 10,
+        marginTop: 8,
     },
 });
 
@@ -66,7 +66,6 @@ export const SearchResultsComponent = ({
             <div className={classes.openDashboardButton}>
                 <Button
                     dataTest="dhis2-capture-view-dashboard-button"
-                    primary
                     onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam)}
                 >
                     {i18n.t('View dashboard')}
@@ -79,8 +78,10 @@ export const SearchResultsComponent = ({
         searchGroups
             .filter(searchGroup => !searchGroup.unique)
             .flatMap(({ searchForm: { sections } }) => {
-                const elementsMap = [...sections.values()].map(section => section.elements)[0];
-                return [...elementsMap.values()];
+                const elementsMap = [...sections.values()]
+                    .map(section => section.elements)[0];
+                return [...elementsMap.values()]
+                    .map(({ id, name, convertValue }) => ({ id, name, convertValue }));
             });
 
     return (<>

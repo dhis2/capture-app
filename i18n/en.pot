@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-08-05T07:43:59.153Z\n"
-"PO-Revision-Date: 2020-08-05T07:43:59.153Z\n"
+"POT-Creation-Date: 2020-08-11T12:50:14.823Z\n"
+"PO-Revision-Date: 2020-08-11T12:50:14.823Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -20,6 +20,12 @@ msgstr ""
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
+msgstr ""
+
+msgid "Enrolled"
+msgstr ""
+
+msgid "Not Enrolled"
 msgstr ""
 
 msgid "Columns to show in table"

@@ -16,7 +16,7 @@ type Tei = $ReadOnly<{
   deleted: boolean,
   featureType: string,
   programOwners: Array<any>,
-  enrollments: ?Array<any>,
+  enrollments: Array<any>,
   relationships: ?Array<any>,
   attributes: Array<{
     lastUpdated: string,
@@ -31,10 +31,10 @@ type Tei = $ReadOnly<{
 
 export type SearchResultItem = {|
   +id: string,
-  +tei: Tei,
   +values: {
     [elementId: string]: any,
-  }
+  },
+  +tei?: Tei,
 |}
 
 

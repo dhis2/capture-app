@@ -2,20 +2,12 @@
 import React from 'react';
 import type { ComponentType, Element } from 'react';
 import { withStyles } from '@material-ui/core';
-import { DataElement } from '../../metaData';
-import CardListItem from './CardListItem.component';
+import { CardListItem } from './CardListItem.component';
 import makeDataElementsContainerSelector from './CardList.selectors';
-import type { SearchResultItem } from "../Pages/Search/SearchResults/SearchResults.types";
-
-export type Item = {|
-    id: string,
-    values: {
-        [elementId: string]: any,
-    }
-|}
+import type { SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 
 type Props = $ReadOnly<{|
-    dataElements: Array<DataElement>,
+    dataElements: Array<{ id: string, name: string, convertValue: any }>,
     items: Array<SearchResultItem>,
     noItemsText?: string,
     itemsLoading?: ?boolean,
@@ -37,6 +29,7 @@ const Index = (props: Props & CssClasses) => {
         items,
         getCustomItemBottomElements,
         getCustomItemTopElements,
+        dataElements,
     } = props;
 
     if (!items || items.length === 0) {
@@ -47,10 +40,10 @@ const Index = (props: Props & CssClasses) => {
         );
     }
 
-    const dataElementsContainer = makeDataElementsContainerSelector()(props);
+    const { imageDataElement, dataElementChunks } = makeDataElementsContainerSelector()(dataElements);
 
     return (
-        <div>
+        <>
             {
                 items.map(item => (
                     <CardListItem
@@ -58,11 +51,12 @@ const Index = (props: Props & CssClasses) => {
                         item={item}
                         getCustomTopElements={getCustomItemTopElements}
                         getCustomBottomElements={getCustomItemBottomElements}
-                        {...dataElementsContainer}
+                        imageDataElement={imageDataElement}
+                        dataElementChunks={dataElementChunks}
                     />
                 ))
             }
-        </div>
+        </>
     );
 };
 
