@@ -25,7 +25,11 @@
         "window": true,
         "it": true,
         "expect": true,
-        "appPackage": true
+        "appPackage": true,
+        "Given": true,
+        "When": true,
+        "Then": true,
+        "Cypress": true
     },
     "rules": {
         "indent": [2, 4],
