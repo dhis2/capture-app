@@ -6,6 +6,38 @@ export type OwnProps = {|
   +searchGroupForSelectedScope: SearchGroup,
 |}
 
+
+type Tei = $ReadOnly<{
+  created: string,
+  orgUnit: string,
+  trackedEntityInstance: string,
+  lastUpdated: string,
+  trackedEntityType: string,
+  deleted: boolean,
+  featureType: string,
+  programOwners: Array<any>,
+  enrollments: ?Array<any>,
+  relationships: ?Array<any>,
+  attributes: Array<{
+    lastUpdated: string,
+    code: string,
+    displayName: string,
+    created: string,
+    valueType: string,
+    attribute: string,
+    value: string
+  }>
+}>
+
+export type SearchResultItem = {|
+  +id: string,
+  +tei: Tei,
+  +values: {
+    [elementId: string]: any,
+  }
+|}
+
+
 export type PropsFromRedux ={|
   +rowsCount: number,
   +currentPage: number,
@@ -13,11 +45,7 @@ export type PropsFromRedux ={|
   +currentSearchScopeType: string,
   +currentSearchScopeId: string,
   +currentFormId: string,
-  +searchResults: Array<{|
-    +id: string,
-    +tei: Object,
-    +values: Object
-  |}>,
+  +searchResults: Array<SearchResultItem>,
   +currentSearchTerms: CurrentSearchTerms
 |}
 

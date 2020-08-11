@@ -3,12 +3,12 @@
 import * as React from 'react';
 import { Avatar, Grid, withStyles } from '@material-ui/core';
 import { DataElement } from '../../metaData';
-import type { Item } from './CardList.component';
 import { convertValue } from '../../converters/clientToList';
+import type { SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 
 
 type Props = {
-    item: Item,
+    item: SearchResultItem,
     getCustomTopElements?: ?(props: Object) => React.Element<any>,
     getCustomBottomElements?: ?(props: Object) => React.Element<any>,
     imageDataElement: DataElement,

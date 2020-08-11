@@ -10,7 +10,7 @@ export const actionTypes = {
 
 export const reviewDuplicates = () => actionCreator(actionTypes.DUPLICATES_REVIEW)();
 export const duplicatesForReviewRetrievalSuccess =
-    (teis: Array<Object>, paginationData: ?Object) =>
+    (teis: Array<Object> = [], paginationData: ?Object) =>
         actionCreator(actionTypes.DUPLICATES_REVIEW_RETRIEVAL_SUCCESS)({ teis, paginationData });
 export const duplicatesForReviewRetrievalFailed = () => actionCreator(actionTypes.DUPLICATES_REVIEW_RETRIEVAL_FAILED)();
 export const changePage = (page: number) => actionCreator(actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE)({ page });

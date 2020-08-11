@@ -8,7 +8,7 @@ import { Pagination } from 'capture-ui';
 import withNavigation from '../../../../Pagination/withDefaultNavigation';
 import Button from '../../../../Buttons/Button.component';
 import makeAttributesSelector from './teiRelationshipSearchResults.selectors';
-import CardList from '../../../../CardList/CardList.component';
+import { CardList } from '../../../../CardList';
 import { LoadingMask } from '../../../../LoadingMasks';
 import {
     convertFormToClient,
