@@ -7,7 +7,7 @@ import { Avatar, Grid, withStyles } from '@material-ui/core';
 import { colors, Tag } from '@dhis2/ui-core';
 import { DataElement } from '../../metaData';
 import type { SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
-import type { DataElementsInformation } from '../Pages/Search/SearchResults/SearchResults.component';
+import type { CardDataElementsInformation } from '../Pages/Search/SearchResults/SearchResults.component';
 
 type OwnProps = $ReadOnly<{|
     item: SearchResultItem,
@@ -16,7 +16,7 @@ type OwnProps = $ReadOnly<{|
     getCustomTopElements?: ?(props: Object) => Element<any>,
     getCustomBottomElements?: ?(props: Object) => Element<any>,
     imageDataElement: DataElement,
-    dataElements: DataElementsInformation,
+    dataElements: CardDataElementsInformation,
 |}>;
 
 const getStyles = (theme: Theme) => ({
