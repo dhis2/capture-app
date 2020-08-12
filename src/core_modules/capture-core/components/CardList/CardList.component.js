@@ -6,7 +6,7 @@ import { CardListItem } from './CardListItem.component';
 import makeDataElementsContainerSelector from './CardList.selectors';
 import type { SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 
-type Props = $ReadOnly<{|
+type OwnProps = $ReadOnly<{|
     dataElements: Array<{ id: string, name: string }>,
     items: Array<SearchResultItem>,
     noItemsText?: string,
@@ -22,7 +22,7 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const Index = (props: Props & CssClasses) => {
+const Index = (props: OwnProps & CssClasses) => {
     const {
         classes,
         noItemsText,
@@ -64,4 +64,4 @@ Index.defaultProps = {
     itemTypeName: 'item',
 };
 
-export const CardList: ComponentType<Props> = withStyles(getStyles)(Index);
+export const CardList: ComponentType<OwnProps> = withStyles(getStyles)(Index);

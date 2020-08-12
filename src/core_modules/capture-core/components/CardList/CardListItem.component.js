@@ -8,7 +8,7 @@ import { colors, Tag } from '@dhis2/ui-core';
 import { DataElement } from '../../metaData';
 import type { SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 
-type Props = {
+type OwnProps = {
     item: SearchResultItem,
     // todo
     isEnrolled?: boolean,
@@ -69,7 +69,7 @@ const getStyles = (theme: Theme) => ({
     },
 });
 
-const Index = (props: Props & CssClasses) => {
+const Index = (props: OwnProps & CssClasses) => {
     const renderImageDataElement = (imageDataElement: DataElement) => {
         const { item, classes } = props;
         const imageValue = item.values[imageDataElement.id];
@@ -155,4 +155,4 @@ Index.defaultProps = {
     isEnrolled: true,
 };
 
-export const CardListItem: ComponentType<Props> = withStyles(getStyles)(Index);
+export const CardListItem: ComponentType<OwnProps> = withStyles(getStyles)(Index);
