@@ -25,10 +25,10 @@ const getStyles = (theme: Theme) => ({
         display: 'flex',
         flexDirection: 'column',
         margin: theme.typography.pxToRem(8),
-        padding: theme.typography.pxToRem(10),
+        padding: theme.typography.pxToRem(8),
         borderRadius: theme.typography.pxToRem(5),
-        border: `2px solid ${theme.palette.grey.light}`,
-        backgroundColor: theme.palette.grey.lighter,
+        border: `1px solid ${colors.grey400}`,
+        backgroundColor: colors.grey050,
     },
     itemDataContainer: {
         display: 'flex',
