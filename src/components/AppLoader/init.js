@@ -32,10 +32,9 @@ function setLogLevel() {
     log.setLevel(level);
 }
 
-function setConfig() {
-    const { REACT_APP_DHIS2_BASE_URL, NODE_ENV } = process.env;
-    const baseUrl = REACT_APP_DHIS2_BASE_URL || '';
-    config.baseUrl = `${baseUrl}/api`;
+function setConfig(apiPath: string) {
+    const { NODE_ENV } = process.env;
+    config.baseUrl = apiPath;
 
     if (NODE_ENV !== environments.prod) {
         config.headers = {
@@ -159,11 +158,12 @@ function setHeaderBarStrings(d2) {
 export async function initializeAsync(
     onCacheExpired: Function,
     onQueryApi: Function,
+    apiPath: string,
 ) {
     setLogLevel();
 
     // initialize d2
-    setConfig();
+    setConfig(apiPath);
     const d2 = await initAsync({ schemas: ['organisationUnit'] });
     const userSettings = await getUserSettingsAsync();
     setD2(d2);
