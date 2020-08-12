@@ -6,10 +6,12 @@ import withNavigation from '../../../../../../Pagination/withDefaultNavigation';
 
 const Pager = withNavigation()(Pagination);
 
-const getStyles = () => ({
+const getStyles = (theme: Theme) => ({
     container: {
         display: 'flex',
         justifyContent: 'flex-end',
+        marginLeft: theme.typography.pxToRem(8),
+        maxWidth: theme.typography.pxToRem(600),
     },
 });
 

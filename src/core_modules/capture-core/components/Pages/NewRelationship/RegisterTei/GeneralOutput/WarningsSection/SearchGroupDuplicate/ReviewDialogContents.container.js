@@ -25,7 +25,7 @@ const mapDispatchToProps = () => ({
 
 // $FlowFixMe
 export default connect(makeMapStateToProps, mapDispatchToProps)(
-    withLoadingIndicator(() => ({ padding: 5 }))(
+    withLoadingIndicator(() => ({ padding: 5, width: 640, height: 500 }))(
         withErrorMessageHandler()(
             ReviewDialogContents,
         ),

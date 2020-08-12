@@ -13,8 +13,11 @@ import withLoadingIndicator from '../../../../../../../HOC/withLoadingIndicator'
 const CardListWithLoadingIndicator = withLoadingIndicator(null, null, props => !props.isUpdating)(CardList);
 
 const getStyles = (theme: Theme) => ({
-    linkButtonCotainer: {
-        padding: theme.typography.pxToRem(10),
+    linkButtonContainer: {
+        paddingTop: theme.typography.pxToRem(10),
+    },
+    title: {
+        paddingLeft: theme.typography.pxToRem(10),
     },
 });
 
@@ -40,11 +43,10 @@ class ReviewDialogContents extends React.Component<Props> {
         const { id, values } = itemProps.item;
         return (
             <div
-                className={classes.linkButtonCotainer}
+                className={classes.linkButtonContainer}
             >
                 <Button
                     onClick={() => { onLink(id, values); }}
-                    primary
                 >
                     {i18n.t('Link')}
                 </Button>
@@ -53,7 +55,7 @@ class ReviewDialogContents extends React.Component<Props> {
     }
 
     render() {
-        const { dataElements, teis, isUpdating } = this.props;
+        const { dataElements, teis, isUpdating, classes } = this.props;
 
         const divStyle = this.height ? {
             height: this.height,
@@ -62,7 +64,7 @@ class ReviewDialogContents extends React.Component<Props> {
         return (
             <React.Fragment>
                 <DialogContent>
-                    <DialogTitle>
+                    <DialogTitle className={classes.title}>
                         {i18n.t('Possible duplicates found')}
                     </DialogTitle>
                     <div
@@ -76,8 +78,8 @@ class ReviewDialogContents extends React.Component<Props> {
                             getCustomItemBottomElements={this.getLinkButton}
                         />
                     </div>
+                    <ReviewDialogContentsPager />
                 </DialogContent>
-                <ReviewDialogContentsPager />
             </React.Fragment>
         );
     }

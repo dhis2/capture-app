@@ -50,12 +50,16 @@ const getStyles = (theme: Theme) => ({
     pagination: {
         display: 'flex',
         justifyContent: 'flex-end',
+        marginLeft: theme.typography.pxToRem(8),
+        maxWidth: theme.typography.pxToRem(600),
     },
     topSection: {
         display: 'flex',
         flexDirection: 'column',
-        margin: theme.typography.pxToRem(10),
+        margin: theme.typography.pxToRem(8),
+        marginRight: 0,
         backgroundColor: theme.palette.grey.lighter,
+        maxWidth: theme.typography.pxToRem(600),
     },
     topSectionValuesContainer: {
         padding: theme.typography.pxToRem(10),
