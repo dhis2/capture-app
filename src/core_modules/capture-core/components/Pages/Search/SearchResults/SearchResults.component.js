@@ -51,7 +51,7 @@ export const Index = ({
             searchViaAttributesOnScopeProgram({ programId: searchScopeId, formId, page: newPage });
             break;
         case searchScopes.TRACKED_ENTITY_TYPE:
-            searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: searchScopeId, formId });
+            searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: searchScopeId, formId, page: newPage });
             break;
         default:
             break;
@@ -64,7 +64,6 @@ export const Index = ({
             <div className={classes.openDashboardButton}>
                 <Button
                     dataTest="dhis2-capture-view-dashboard-button"
-                    primary
                     onClick={() => navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam)}
                 >
                     {i18n.t('View dashboard')}
