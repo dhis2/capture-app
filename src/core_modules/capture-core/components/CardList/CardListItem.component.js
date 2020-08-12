@@ -20,6 +20,7 @@ type Props = {
 
 const getStyles = (theme: Theme) => ({
     itemContainer: {
+        width: theme.typography.pxToRem(600),
         display: 'flex',
         flexDirection: 'column',
         margin: theme.typography.pxToRem(8),

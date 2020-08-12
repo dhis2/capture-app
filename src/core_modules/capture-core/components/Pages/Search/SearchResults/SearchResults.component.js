@@ -15,7 +15,8 @@ export const getStyles = (theme: Theme) => ({
     pagination: {
         display: 'flex',
         justifyContent: 'flex-end',
-        marginRight: 10,
+        marginLeft: theme.typography.pxToRem(8),
+        width: theme.typography.pxToRem(600),
     },
     topSection: {
         display: 'flex',
@@ -24,8 +25,6 @@ export const getStyles = (theme: Theme) => ({
         marginLeft: theme.typography.pxToRem(10),
         marginRight: theme.typography.pxToRem(10),
         marginBottom: theme.typography.pxToRem(10),
-        padding: theme.typography.pxToRem(10),
-        backgroundColor: theme.palette.grey.lighter,
     },
     openDashboardButton: {
         marginTop: 8,
