@@ -17,7 +17,7 @@
     ],
     "env": {
         "browser": true,
-        "jest": true,
+        "jest": true
     },
     "globals": {
         "cy": true,
