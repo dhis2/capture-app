@@ -26,7 +26,7 @@ const getStyles = (theme: Theme) => ({
         flexDirection: 'column',
         margin: theme.typography.pxToRem(8),
         padding: theme.typography.pxToRem(10),
-        borderRadius: theme.typography.pxToRem(4),
+        borderRadius: theme.typography.pxToRem(5),
         border: `2px solid ${theme.palette.grey.light}`,
         backgroundColor: theme.palette.grey.lighter,
     },
