@@ -15,7 +15,8 @@ type OwnProps = $ReadOnly<{|
     getCustomTopElements?: ?(props: Object) => Element<any>,
     getCustomBottomElements?: ?(props: Object) => Element<any>,
     imageDataElement: DataElement,
-    dataElements: Array<{ id: string, name: string }>,
+    // todo extract dataElements to a type.
+    dataElements: Array<{| id: string, name: string |}>,
 |}>;
 
 const getStyles = (theme: Theme) => ({

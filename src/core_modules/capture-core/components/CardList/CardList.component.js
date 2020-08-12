@@ -7,7 +7,7 @@ import makeDataElementsContainerSelector from './CardList.selectors';
 import type { SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 
 type OwnProps = $ReadOnly<{|
-    dataElements: Array<{ id: string, name: string }>,
+    dataElements: Array<{| id: string, name: string |}>,
     items: Array<SearchResultItem>,
     noItemsText?: string,
     itemsLoading?: ?boolean,
