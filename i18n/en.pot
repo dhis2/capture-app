@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-07-29T12:48:56.453Z\n"
-"PO-Revision-Date: 2020-07-29T12:48:56.453Z\n"
+"POT-Creation-Date: 2020-08-12T05:55:42.067Z\n"
+"PO-Revision-Date: 2020-08-12T05:55:42.067Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -668,6 +668,12 @@ msgid "Create new {{trackedEntityType}}"
 msgstr ""
 
 msgid "Register"
+msgstr ""
+
+msgid "Search scope"
+msgstr ""
+
+msgid "Find results from"
 msgstr ""
 
 msgid "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
