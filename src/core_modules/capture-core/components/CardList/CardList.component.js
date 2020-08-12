@@ -5,9 +5,10 @@ import { withStyles } from '@material-ui/core';
 import { CardListItem } from './CardListItem.component';
 import makeDataElementsContainerSelector from './CardList.selectors';
 import type { SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
+import type { DataElementsInformation } from '../Pages/Search/SearchResults/SearchResults.component';
 
 type OwnProps = $ReadOnly<{|
-    dataElements: Array<{| id: string, name: string |}>,
+    dataElements: DataElementsInformation,
     items: Array<SearchResultItem>,
     noItemsText?: string,
     itemsLoading?: ?boolean,

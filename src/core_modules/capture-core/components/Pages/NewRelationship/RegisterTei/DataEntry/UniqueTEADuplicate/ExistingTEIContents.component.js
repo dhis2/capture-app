@@ -6,11 +6,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 import { Button } from '../../../../../Buttons';
 import { CardList } from '../../../../../CardList';
-import { DataElement } from '../../../../../../metaData';
+import type { DataElementsInformation } from '../../../../Search/SearchResults/SearchResults.component';
 
 type Props = {
     attributeValues: {[id: string]: any},
-    dataElements: Array<DataElement>,
+    dataElements: DataElementsInformation,
     onLink: (values: Object) => void,
     onCancel: Function,
 };

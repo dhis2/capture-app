@@ -31,6 +31,7 @@ export const getStyles = (theme: Theme) => ({
     },
 });
 
+export type DataElementsInformation = Array<{| id: string, name: string |}>
 
 export const SearchResultsComponent = ({
     searchViaAttributesOnScopeProgram,
@@ -73,14 +74,14 @@ export const SearchResultsComponent = ({
         );
     };
 
-    const collectFormDataElements = searchGroups =>
+    const collectFormDataElements = (searchGroups): DataElementsInformation =>
         searchGroups
             .filter(searchGroup => !searchGroup.unique)
             .flatMap(({ searchForm: { sections } }) => {
                 const elementsMap = [...sections.values()]
                     .map(section => section.elements)[0];
                 return [...elementsMap.values()]
-                    .map(({ id, name, convertValue }) => ({ id, name, convertValue }));
+                    .map(({ id, name }) => ({ id, name }));
             });
 
     return (<>
