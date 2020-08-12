@@ -7,7 +7,7 @@ import makeDataElementsContainerSelector from './CardList.selectors';
 import type { SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 
 type Props = $ReadOnly<{|
-    dataElements: Array<{ id: string, name: string, convertValue: any }>,
+    dataElements: Array<{ id: string, name: string }>,
     items: Array<SearchResultItem>,
     noItemsText?: string,
     itemsLoading?: ?boolean,
@@ -40,7 +40,7 @@ const Index = (props: Props & CssClasses) => {
         );
     }
 
-    const { imageDataElement, dataElementChunks } = makeDataElementsContainerSelector()(dataElements);
+    const { imageDataElement } = makeDataElementsContainerSelector()(dataElements);
 
     return (
         <>
@@ -52,7 +52,7 @@ const Index = (props: Props & CssClasses) => {
                         getCustomTopElements={getCustomItemTopElements}
                         getCustomBottomElements={getCustomItemBottomElements}
                         imageDataElement={imageDataElement}
-                        dataElementChunks={dataElementChunks}
+                        dataElements={dataElements}
                     />
                 ))
             }

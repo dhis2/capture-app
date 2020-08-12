@@ -15,7 +15,7 @@ type Props = {
     getCustomTopElements?: ?(props: Object) => Element<any>,
     getCustomBottomElements?: ?(props: Object) => Element<any>,
     imageDataElement: DataElement,
-    dataElementChunks: Array<{ id: string, name: string, convertValue: any }>,
+    dataElements: Array<{ id: string, name: string }>,
 };
 
 const getStyles = (theme: Theme) => ({
@@ -86,7 +86,7 @@ const Index = (props: Props & CssClasses) => {
         getCustomTopElements,
         getCustomBottomElements,
         isEnrolled,
-        dataElementChunks,
+        dataElements,
     } = props;
 
     return (
@@ -105,7 +105,7 @@ const Index = (props: Props & CssClasses) => {
                         <Grid item xs={12} sm container>
                             <Grid item xs container direction="column" spacing={2}>
                                 {
-                                    dataElementChunks.map(element => (
+                                    dataElements.map(element => (
                                         <Grid item xs>
                                             <div key={element.id} className={classes.value}>
                                                 <span className={classes.elementName}>

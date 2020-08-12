@@ -17,7 +17,7 @@ const makeElementsContainerSelector = () => createSelector(
         }
 
         return {
-            dataElementChunks: elements,
+            dataElements: elements,
             imageDataElement,
         };
     });
