@@ -27,14 +27,14 @@ const styles = () => ({
     },
 });
 
-type Props = {|
+type Props = $ReadOnly<{|
     selectedProgramId: string,
     dispatchStartAgainClick: () => void,
     dispatchNewClick: () => void,
     dispatchFindClick: () => void,
     showResetButton: boolean,
     ...CssClasses
-|};
+|}>;
 
 const Index = ({
     dispatchStartAgainClick,

@@ -670,6 +670,12 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
+msgid "Search scope"
+msgstr ""
+
+msgid "Find results from"
+msgstr ""
+
 msgid "Fill in at least {{minAttributesRequiredToSearch}}  attributes to search"
 msgstr ""
 
