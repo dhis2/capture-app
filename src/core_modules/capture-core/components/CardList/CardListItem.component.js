@@ -8,7 +8,7 @@ import { colors, Tag } from '@dhis2/ui-core';
 import { DataElement } from '../../metaData';
 import type { SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 
-type OwnProps = {
+type OwnProps = $ReadOnly<{|
     item: SearchResultItem,
     // todo
     isEnrolled?: boolean,
@@ -16,7 +16,7 @@ type OwnProps = {
     getCustomBottomElements?: ?(props: Object) => Element<any>,
     imageDataElement: DataElement,
     dataElements: Array<{ id: string, name: string }>,
-};
+|}>;
 
 const getStyles = (theme: Theme) => ({
     itemContainer: {
