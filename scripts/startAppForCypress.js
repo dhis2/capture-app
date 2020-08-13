@@ -33,7 +33,7 @@ const env = Object
     .reduce((acc, key) => {
         if (key.startsWith('REACT')) {
             acc[key] = envFromCypressFiles[key];
-        } else if (key === 'dhis2_base_url') {
+        } else if (key === 'DHIS2_BASE_URL') {
             acc.REACT_APP_DHIS2_BASE_URL = envFromCypressFiles[key];
         }
         return acc;

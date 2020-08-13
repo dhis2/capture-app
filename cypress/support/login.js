@@ -7,9 +7,9 @@ const loginEndPoint = 'dhis-web-commons/security/login.action';
  */
 Cypress.Commands.add('login', () => {
     // AuthBoundary
-    const username = Cypress.env('dhis2_username');
-    const password = Cypress.env('dhis2_password');
-    const loginUrl = Cypress.env('dhis2_base_url');
+    const username = Cypress.env('DHIS2_USERNAME');
+    const password = Cypress.env('DHIS2_PASSWORD');
+    const loginUrl = Cypress.env('DHIS2_BASE_URL');
     const loginAuth = `Basic ${btoa(`${username}:${password}`)}`;
 
     return cy.request({
