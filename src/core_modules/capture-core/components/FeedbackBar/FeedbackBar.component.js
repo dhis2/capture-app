@@ -130,4 +130,4 @@ class Index extends React.Component<Props> {
 }
 Index.displayName = 'FeedbackBar';
 
-export const FeedbackBar = withStyles(styles)(Index);
+export const FeedbackBarComponent = withStyles(styles)(Index);
