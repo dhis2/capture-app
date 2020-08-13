@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-08-11T12:50:14.823Z\n"
-"PO-Revision-Date: 2020-08-11T12:50:14.823Z\n"
+"POT-Creation-Date: 2020-08-13T07:42:43.745Z\n"
+"PO-Revision-Date: 2020-08-13T07:42:43.745Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -706,6 +706,9 @@ msgid ""
 msgstr ""
 
 msgid "Back to search"
+msgstr ""
+
+msgid "An error has occurred"
 msgstr ""
 
 msgid "Make a selection to start searching"
