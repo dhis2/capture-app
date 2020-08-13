@@ -5,7 +5,7 @@
   "cacheVersion": "2",
   "private": false,
   "dependencies": {
-    "@dhis2/app-runtime": "2.2.2",
+    "@dhis2/app-runtime": "^2.2.2",
     "@dhis2/cli-utils-cypress": "^2.2.1",
     "@dhis2/d2-i18n": "^1.0.6",
     "@dhis2/d2-icons": "^1.0.1",
