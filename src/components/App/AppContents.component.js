@@ -19,7 +19,7 @@ type Props = {
     },
 };
 
-export const Index = ({ classes }: Props) => (
+const Index = ({ classes }: Props) => (
     <div
         className={classes.app}
         dir={systemSettingsStore.get().dir}
