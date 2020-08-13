@@ -31,7 +31,7 @@ type Props = {
     children: React$Node,
 };
 
-export const TrackerProgramHandler = ({ programId, orgUnitId, classes, children }: Props) => {
+const TrackerProgramHandler = ({ programId, orgUnitId, classes, children }: Props) => {
     const { baseUrl } = useConfig();
     const getUrl = useCallback(() => {
         const trackerBaseUrl = buildUrl(baseUrl, systemSettingsStore.get().trackerAppRelativePath, '/#/?');
@@ -74,4 +74,4 @@ export const TrackerProgramHandler = ({ programId, orgUnitId, classes, children 
     return children;
 };
 
-export default withStyles(getStyles)(TrackerProgramHandler);
+export const TrackerProgramHandlerComponent = withStyles(getStyles)(TrackerProgramHandler);
