@@ -1,3 +1,7 @@
+/*
+Retrieves Cypress environment variables from .env.cypress / .env.cypress.local
+*/
+
 const fs = require('fs');
 const path = require('path');
 const dotenv = require('dotenv');
