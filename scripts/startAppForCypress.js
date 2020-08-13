@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+/*
+Starts the app using environment variables from .env.cypress / .env.cypress.local
+*/
 
 const fs = require('fs');
 const path = require('path');
