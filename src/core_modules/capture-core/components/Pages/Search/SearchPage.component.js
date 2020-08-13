@@ -57,6 +57,7 @@ const getStyles = (theme: Theme) => ({
     generalPurposeErrorMessage: {
         marginLeft: theme.typography.pxToRem(12),
         marginTop: theme.typography.pxToRem(10),
+        marginBottom: theme.typography.pxToRem(20),
         color: theme.palette.error.main,
     },
     loadingMask: {
