@@ -45,7 +45,7 @@ class Index extends React.Component<Props> {
     }
     static CLICKAWAY_KEY = 'clickaway';
 
-    static ANCHOR_ORIGION = {
+    static ANCHOR_ORIGIN = {
         vertical: 'bottom',
         horizontal: 'center',
     };
@@ -98,7 +98,7 @@ class Index extends React.Component<Props> {
             <React.Fragment>
                 <SnackBar
                     open={isSnackBarOpen}
-                    anchorOrigin={Index.ANCHOR_ORIGION}
+                    anchorOrigin={Index.ANCHOR_ORIGIN}
                     autoHideDuration={5000}
                     onClose={this.handleClose}
                     // $FlowFixMe[incompatible-type] automated comment
