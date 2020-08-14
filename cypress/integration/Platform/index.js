@@ -1,5 +1,4 @@
 Given('you open the App without auth cookie', () => {
-    // cy.clearCookie('JSESSIONID');
     cy.visit('/');
 });
 
