@@ -1,11 +1,11 @@
 // @flow
 import { createReducerDescription } from '../../../../trackerRedux/trackerReducer';
 import {
-    actionTypes as eventsListActionTypes,
-} from '../../../../components/ListView/listView.actions';
+    listViewActionTypes as eventsListActionTypes,
+} from '../../../../components/ListView';
 import {
-    actionTypes as paginationActionTypes,
-} from '../../../../components/ListView/Pagination/pagination.actions';
+    paginationActionTypes,
+} from '../../../../components/ListView';
 import {
     actionTypes as filterSelectorActionTypes,
 } from '../../../../components/ListView/FilterSelectors/filterSelector.actions';

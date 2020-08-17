@@ -13,7 +13,7 @@ import {
     orgUnitCouldNotBeRetrievedOnUrlUpdate,
     startOpenEventForEditInDataEntry,
 } from '../editEvent.actions';
-import { actionTypes as eventListActionTypes } from '../../../ListView/listView.actions';
+import { listViewActionTypes as eventListActionTypes } from '../../../ListView';
 import { getEvent } from '../../../../events/eventRequests';
 
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
