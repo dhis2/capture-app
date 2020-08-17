@@ -23,7 +23,7 @@ type State = {
     columnList: Array<Object>,
 };
 
-class ColumnSelectorDialog extends Component<Props, State> {
+export class ColumnSelectorDialog extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -77,5 +77,3 @@ class ColumnSelectorDialog extends Component<Props, State> {
         );
     }
 }
-
-export default ColumnSelectorDialog;
