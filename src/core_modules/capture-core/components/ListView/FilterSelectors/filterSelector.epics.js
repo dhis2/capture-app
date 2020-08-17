@@ -6,7 +6,7 @@ import { updateIncludedFiltersAfterColumnSorting } from './filterSelector.action
 
 export const includeFiltersWithValueAfterColumnSortingEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(columnSelectorActionTypes.UPDATE_WORKINGLIST_ORDER)
+    action$.ofType(columnSelectorActionTypes.WORKING_LIST_ORDER_UPDATE)
         // eslint-disable-next-line complexity
         .map(() => {
             const state = store.getState();

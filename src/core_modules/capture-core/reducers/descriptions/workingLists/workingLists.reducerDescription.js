@@ -7,7 +7,7 @@ import {
 import {
     actionTypes as filterSelectorActionTypes,
 } from '../../../components/ListView/FilterSelectors/filterSelector.actions';
-import { actionTypes as eventListActionTypes } from '../../../components/ListView/listView.actions';
+import { listViewActionTypes as eventListActionTypes } from '../../../components/ListView';
 import {
     actionTypes as listActionTypes,
 } from '../../../components/List/list.actions';
@@ -454,7 +454,7 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
             [listId]: columnOrder,
         };
     },
-    [columnSelectorActionTypes.UPDATE_WORKINGLIST_ORDER]: (state, action) => {
+    [columnSelectorActionTypes.WORKING_LIST_ORDER_UPDATE]: (state, action) => {
         const { columnOrder, listId } = action.payload;
 
         const currentColumnOrder = state[listId];

@@ -7,7 +7,7 @@ import {
     deleteEventError,
     deleteEventSuccess,
 } from '../eventWorkingLists.actions';
-import { actionTypes as eventListActionTypes } from '../../../../ListView';
+import { listViewActionTypes as eventListActionTypes } from '../../../../ListView';
 import { initEventWorkingListAsync } from './initEventWorkingList';
 import { updateEventWorkingListAsync } from './updateEventWorkingList';
 import { getApi } from '../../../../../d2';

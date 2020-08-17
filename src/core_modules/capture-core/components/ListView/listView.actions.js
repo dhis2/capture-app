@@ -2,7 +2,7 @@
 import { actionCreator } from 'capture-core/actions/actions.utils';
 import { methods } from '../../trackerOffline/trackerOfflineConfig.const';
 
-export const actionTypes = {
+export const listViewActionTypes = {
     SORT_WORKING_LIST: 'SortWorkingList',
     OPEN_EDIT_EVENT_PAGE: 'OpenEditEventPage',
     OPEN_VIEW_EVENT_PAGE: 'OpenViewEventPage',
@@ -20,28 +20,28 @@ export const batchActionTypes = {
 };
 
 export const sortWorkingList =
-    (listId: string, id: string, direction: string) => actionCreator(actionTypes.SORT_WORKING_LIST)({ listId, id, direction });
+    (listId: string, id: string, direction: string) => actionCreator(listViewActionTypes.SORT_WORKING_LIST)({ listId, id, direction });
 
-export const workingListUpdating = (listId: string) => actionCreator(actionTypes.WORKING_LIST_UPDATING)({ listId });
+export const workingListUpdating = (listId: string) => actionCreator(listViewActionTypes.WORKING_LIST_UPDATING)({ listId });
 export const workingListUpdatingWithDialog =
-    (listId: string) => actionCreator(actionTypes.WORKING_LIST_UPDATING_WITH_DIALOG)({ listId });
+    (listId: string) => actionCreator(listViewActionTypes.WORKING_LIST_UPDATING_WITH_DIALOG)({ listId });
 
 export const openEditEventPage =
-    (eventId: string) => actionCreator(actionTypes.OPEN_EDIT_EVENT_PAGE)(eventId);
+    (eventId: string) => actionCreator(listViewActionTypes.OPEN_EDIT_EVENT_PAGE)(eventId);
 
 export const openViewEventPage =
-    (eventId: string) => actionCreator(actionTypes.OPEN_VIEW_EVENT_PAGE)(eventId);
+    (eventId: string) => actionCreator(listViewActionTypes.OPEN_VIEW_EVENT_PAGE)(eventId);
 
-export const requestDeleteEvent = (eventId: string) => actionCreator(actionTypes.REQUEST_DELETE_EVENT)({ eventId });
+export const requestDeleteEvent = (eventId: string) => actionCreator(listViewActionTypes.REQUEST_DELETE_EVENT)({ eventId });
 
 export const startDeleteEvent = (eventId: string) =>
-    actionCreator(actionTypes.START_DELETE_EVENT)({}, {
+    actionCreator(listViewActionTypes.START_DELETE_EVENT)({}, {
         offline: {
             effect: {
                 url: `events/${eventId}`,
                 method: methods.DELETE,
             },
-            commit: { type: actionTypes.EVENT_DELETED },
-            rollback: { type: actionTypes.DELETE_EVENT_FAILED },
+            commit: { type: listViewActionTypes.EVENT_DELETED },
+            rollback: { type: listViewActionTypes.DELETE_EVENT_FAILED },
         },
     });
