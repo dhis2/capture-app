@@ -12,7 +12,7 @@ import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/Pages/ViewEvent/EventDetailsSection/EditEventDataEntry/editEventDataEntry.actions';
 
-import { actionTypes as eventListActionTypes } from '../../components/ListView/listView.actions';
+import { listViewActionTypes as eventListActionTypes } from '../../components/ListView';
 import { actionTypes as viewEventNotesActionTypes } from '../../components/Pages/ViewEvent/Notes/viewEventNotes.actions';
 import { assigneeSectionActionTypes } from '../../components/Pages/ViewEvent/RightColumn/AssigneeSection';
 
