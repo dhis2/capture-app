@@ -5,7 +5,7 @@ import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
 import { ListView } from '../../../ListView';
 import { makeColumnsSelector, makeCreateEventsContainer, makeCreateWorkingListData } from './tempListView.selector';
 import { sortWorkingList, openViewEventPage, requestDeleteEvent } from '../../../ListView/listView.actions';
-import { updateWorkinglistOrder } from '../../../ListView/ColumnSelector/actions/columnSelectorDialog.actions';
+import { updateWorkingListOrder } from '../../../ListView/ColumnSelector/actions/columnSelectorDialog.actions';
 
 const makeMapStateToProps = () => {
     const columnsSelector = makeColumnsSelector();
@@ -66,7 +66,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         dispatch(requestDeleteEvent(eventId));
     },
     onSaveColumnOrder: (listId: string, columnOrder: Array<Object>): void => {
-        dispatch(updateWorkinglistOrder(listId, columnOrder));
+        dispatch(updateWorkingListOrder(listId, columnOrder));
     },
 });
 

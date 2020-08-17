@@ -2,8 +2,8 @@
 import { actionCreator } from '../../../../actions/actions.utils';
 
 export const actionTypes = {
-    UPDATE_WORKINGLIST_ORDER: 'updateWorkinglistOrder',
+    WORKING_LIST_ORDER_UPDATE: 'WorkinglistOrderUpdate',
 };
 
-export const updateWorkinglistOrder =
-    (listId: string, columnOrder: Array<Object>) => actionCreator(actionTypes.UPDATE_WORKINGLIST_ORDER)({ listId, columnOrder }, { skipLogging: ['columnOrder'] });
+export const updateWorkingListOrder =
+    (listId: string, columnOrder: Array<Object>) => actionCreator(actionTypes.WORKING_LIST_ORDER_UPDATE)({ listId, columnOrder }, { skipLogging: ['columnOrder'] });
