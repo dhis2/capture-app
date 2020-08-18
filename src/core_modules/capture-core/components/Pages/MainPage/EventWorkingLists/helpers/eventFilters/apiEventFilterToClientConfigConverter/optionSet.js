@@ -7,7 +7,7 @@ import {
 
 import type {
     ApiDataFilterOptionSet,
-} from '../../../workingLists.types';
+} from '../../../types';
 import type {
     OptionSetFilterData,
 } from '../../../../../../ListView';

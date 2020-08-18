@@ -1,5 +1,5 @@
 // @flow
-export const assigneeFilterModes = Object.freeze({
+export const apiAssigneeFilterModes = Object.freeze({
     PROVIDED: 'PROVIDED',
     CURRENT: 'CURRENT',
     ANY: 'ANY',

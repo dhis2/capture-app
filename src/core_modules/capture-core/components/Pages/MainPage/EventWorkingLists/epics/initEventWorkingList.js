@@ -2,14 +2,14 @@
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator, pipe } from 'capture-core-utils';
-import { convertToListConfig } from './eventFiltersInterface';
+import { convertToClientConfig } from '../helpers/eventFilters';
 import { getEventWorkingListDataAsync } from './eventsRetriever';
 import {
     initEventListSuccess,
     initEventListError,
 } from '../eventWorkingLists.actions';
-import { buildQueryArgs } from './eventsQueryArgsBuilder';
-import type { ApiEventQueryCriteria, CommonQueryData, ListConfig } from '../workingLists.types';
+import { buildQueryArgs } from '../helpers/eventsQueryArgsBuilder';
+import type { ApiEventQueryCriteria, CommonQueryData, ClientConfig } from '../types';
 
 const errorMessages = {
     WORKING_LIST_RETRIEVE_ERROR: 'Working list could not be loaded',
@@ -25,8 +25,8 @@ export const initEventWorkingListAsync = async (
     },
 ): Promise<ReduxAction<any, any>> => {
     const { commonQueryData, defaultSpecification, listId, lastTransaction } = meta;
-    const listConfig: ListConfig = await convertToListConfig(config, defaultSpecification);
-    const { columnOrder, ...queryArgsPart } = listConfig;
+    const clientConfig: ClientConfig = await convertToClientConfig(config, defaultSpecification);
+    const { columnOrder, ...queryArgsPart } = clientConfig;
     const queryArgsSource = {
         ...queryArgsPart,
         ...commonQueryData,
@@ -52,7 +52,7 @@ export const initEventWorkingListAsync = async (
             initEventListSuccess(listId, {
                 ...data,
                 config: {
-                    ...listConfig,
+                    ...clientConfig,
                     selections: {
                         ...commonQueryData,
                         lastTransaction,

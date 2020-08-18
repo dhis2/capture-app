@@ -4,7 +4,7 @@ import { errorCreator, pipe } from 'capture-core-utils';
 import { moment } from 'capture-core-utils/moment';
 import {
     dataElementTypes as elementTypes,
-} from '../../../../../../metaData';
+} from '../../../../../../../metaData';
 import { getApiOptionSetFilter } from './optionSet';
 
 import {
@@ -14,8 +14,8 @@ import {
     type BooleanFilterData,
     type TextFilterData,
     type NumericFilterData,
-} from '../../../WorkingLists';
-import type { ColumnConfig } from '../../../WorkingLists';
+} from '../../../../WorkingLists';
+import type { ColumnConfig } from '../../../../WorkingLists';
 import type {
     ApiDataFilterNumeric,
     ApiDataFilterText,
@@ -24,7 +24,7 @@ import type {
     ApiDataFilterDate,
     ApiDataFilterAssignee,
     ApiEventQueryCriteria,
-} from '../../types';
+} from '../../../types';
 
 
 const getTextFilter = (filter: TextFilterData): ApiDataFilterText => ({
@@ -169,17 +169,17 @@ const getColumnsOrder = (columns: Array<ColumnConfig>) =>
         .filter(column => column.visible)
         .map(column => column.apiName || column.id);
 
-export function convertToTemplateQueryCriteria({
+export function convertToEventFilterQueryCriteria({
     filters: listFilters,
     sortById: listSortById,
     sortByDirection: listSortByDirection,
     columnOrder: listColumns,
     defaultConfig,
 }: {
-    listFilters: Object,
-    listSortById: string,
-    listSortByDirection: string,
-    listColumns: Array<Object>,
+    filters: Object,
+    sortById: string,
+    sortByDirection: string,
+    columnOrder: Array<Object>,
     defaultConfig: Map<string, Object>,
 }): ApiEventQueryCriteria {
     const order = getOrder(listSortById, listSortByDirection);

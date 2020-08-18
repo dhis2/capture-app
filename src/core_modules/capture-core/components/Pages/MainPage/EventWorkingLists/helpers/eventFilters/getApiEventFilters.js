@@ -1,13 +1,11 @@
 // @flow
 import { getApi } from '../../../../../../d2/d2Instance';
-// import convertToServerEventWorkingListConfig from './convertToServerEventWorkingListConfig';
-
 type ApiConfig = {
     eventFilters: Array<Object>,
     pager: Object,
 };
 
-export const getEventFilters = async (programId: string) => {
+export const getApiEventFilters = async (programId: string) => {
     const api = getApi();
     const apiRes: ApiConfig = await api.get(
         'eventFilters',
@@ -25,15 +23,3 @@ export const getEventFilters = async (programId: string) => {
 
     return processedConfigs;
 };
-
-/*
-export const addEventFilters = async (workingListConfigData: any) => {
-    const api = getApi();
-    const program = getEventProgramThrowIfNotFound(workingListConfigData.programId);
-    const stage = program.stage;
-    const serverData = convertToServerEventWorkingListConfig(workingListConfigData, stage.stageForm);
-
-    const apiRes = await api.post('eventFilters', serverData);
-    return apiRes;
-};
-*/

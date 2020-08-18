@@ -9,17 +9,16 @@ import {
 import { getColumnsConfiguration } from '../columnsConfigurationGetter';
 import { getApi } from '../../../../../../../d2/d2Instance';
 import { getOptionSetFilter } from './optionSet';
+import { apiAssigneeFilterModes, apiDateFilterTypes } from '../../../constants';
 
 import {
-    assigneeFilterModes,
-    dateFilterTypes,
     type AssigneeFilterData,
     type DateFilterData,
     type BooleanFilterData,
     type TrueOnlyFilterData,
     type TextFilterData,
     type NumericFilterData,
-} from '../../../../../../ListView';
+} from '../../../../WorkingLists';
 import type {
     ApiDataFilter,
     ApiDataFilterNumeric,
@@ -27,7 +26,7 @@ import type {
     ApiDataFilterBoolean,
     ApiDataFilterDate,
     ApiEventQueryCriteria,
-} from '../../../workingLists.types';
+} from '../../../types';
 
 const getTextFilter = (filter: ApiDataFilterText): TextFilterData => {
     const value = filter.like;
@@ -52,13 +51,13 @@ const getTrueOnlyFilter = (/* filter: ApiDataFilterTrueOnly */): TrueOnlyFilterD
 const getDateFilter = (filter: ApiDataFilterDate): DateFilterData => {
     if (filter.period) {
         return {
-            type: dateFilterTypes.RELATIVE,
+            type: apiDateFilterTypes.RELATIVE,
             period: filter.period,
         };
     }
 
     return {
-        type: dateFilterTypes.ABSOLUTE,
+        type: apiDateFilterTypes.ABSOLUTE,
         startDate: filter.startDate ? moment(filter.startDate, 'YYYY-MM-DD').toISOString() : undefined,
         endDate: filter.endDate ? moment(filter.endDate, 'YYYY-MM-DD').toISOString() : undefined,
     };
@@ -82,10 +81,10 @@ const getUser = (userId: string) => {
 
 // eslint-disable-next-line complexity
 const getAssigneeFilter = async (
-    assignedUserMode: $Values<typeof assigneeFilterModes>,
+    assignedUserMode: $Values<typeof apiAssigneeFilterModes>,
     assignedUsers: ?Array<string>,
 ): Promise<?AssigneeFilterData> => {
-    if (assignedUserMode === assigneeFilterModes.PROVIDED) {
+    if (assignedUserMode === apiAssigneeFilterModes.PROVIDED) {
         const assignedUserId = assignedUsers && assignedUsers.length > 0 && assignedUsers[0];
         if (!assignedUserId) {
             return undefined;
@@ -202,7 +201,7 @@ const listConfigDefaults = {
     rowsPerPage: 15,
 };
 
-export async function convertToListConfig(
+export async function convertToClientConfig(
     eventQueryCriteria: ?ApiEventQueryCriteria,
     defaultSpecs: Map<string, Object>,
 ) {

@@ -63,7 +63,7 @@ export const ListViewConfig = (props: Props) => {
         onAddTemplate,
         onUpdateTemplate,
         onDeleteTemplate,
-        convertToTemplateQueryCriteria,
+        convertToEventFilterQueryCriteria,
     } = React.useContext(ListViewConfigContext);
     const {
         next: nextMeta = {},
@@ -115,24 +115,24 @@ export const ListViewConfig = (props: Props) => {
 
     const updateTemplateHandler = React.useCallback((template, listConfig) => {
         const templateQueryCriteria =
-        convertToTemplateQueryCriteria(listConfig);
+        convertToEventFilterQueryCriteria(listConfig);
 
         onUpdateTemplate(template, templateQueryCriteria, {
             ...listConfig,
             programId,
         });
-    }, [onUpdateTemplate, programId, convertToTemplateQueryCriteria]);
+    }, [onUpdateTemplate, programId, convertToEventFilterQueryCriteria]);
 
     const addTemplateHandler = React.useCallback((name, listConfig) => {
         const templateQueryCriteria =
-        convertToTemplateQueryCriteria(listConfig);
+        convertToEventFilterQueryCriteria(listConfig);
         onAddTemplate(name, templateQueryCriteria, {
             ...listConfig,
             template: listConfig.currentTemplate,
             clientId: uuid(),
             programId,
         });
-    }, [onAddTemplate, programId, convertToTemplateQueryCriteria]);
+    }, [onAddTemplate, programId, convertToEventFilterQueryCriteria]);
 
     const deleteTemplateHandler = React.useCallback((template, listId) =>
         onDeleteTemplate(template, programId, listId), [onDeleteTemplate, programId]);

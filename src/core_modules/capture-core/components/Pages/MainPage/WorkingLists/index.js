@@ -4,12 +4,13 @@ export {
     dateFilterTypes,
 } from '../../../ListView';
 export type {
-    AssigneeFilterData,
     DateFilterData,
     BooleanFilterData,
     TextFilterData,
     NumericFilterData,
+    TrueOnlyFilterData,
     OptionSetFilterData,
+    AssigneeFilterData,
 } from '../../../ListView';
 export type {
     GetMainColumnMetadataHeaderFn,

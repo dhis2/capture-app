@@ -1,9 +1,9 @@
 // @flow
-import { getEventFilters } from './eventFiltersInterface';
+import { getApiEventFilters } from '../helpers/eventFilters';
 
 export const getTemplatesAsync = (state: ReduxState) => {
     const programId = state.currentSelections.programId;
-    return getEventFilters(programId).then((workingListConfigs) => {
+    return getApiEventFilters(programId).then((workingListConfigs) => {
         const defaultWorkingListConfig = {
             id: `${programId}-default`,
             isDefault: true,

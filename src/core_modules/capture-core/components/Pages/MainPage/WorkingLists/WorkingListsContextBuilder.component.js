@@ -36,7 +36,7 @@ type Props = {
     onAddTemplate: Function,
     onUpdateTemplate: Function,
     onDeleteTemplate: Function,
-    convertToTemplateQueryCriteria: Function,
+    convertToEventFilterQueryCriteria: Function,
     onCleanSkipInitAddingTemplate: Function,
     onUnloadingContext: Function,
     orgUnitId: string,
@@ -69,7 +69,7 @@ const WorkingListsContextBuilder = (props: Props) => {
         onAddTemplate,
         onUpdateTemplate,
         onDeleteTemplate,
-        convertToTemplateQueryCriteria,
+        convertToEventFilterQueryCriteria,
         onCleanSkipInitAddingTemplate,
         onUnloadingContext,
         orgUnitId,
@@ -127,14 +127,14 @@ const WorkingListsContextBuilder = (props: Props) => {
         onAddTemplate,
         onUpdateTemplate,
         onDeleteTemplate,
-        convertToTemplateQueryCriteria,
+        convertToEventFilterQueryCriteria,
     }), [
         listMeta,
         columnOrder,
         onAddTemplate,
         onUpdateTemplate,
         onDeleteTemplate,
-        convertToTemplateQueryCriteria,
+        convertToEventFilterQueryCriteria,
     ]);
 
     const listViewLoaderContextData = React.useMemo(() => ({

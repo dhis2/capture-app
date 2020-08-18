@@ -6,7 +6,7 @@ import {
     updateEventListSuccess,
     updateEventListError,
 } from '../eventWorkingLists.actions';
-import { buildQueryArgs } from './eventsQueryArgsBuilder';
+import { buildQueryArgs } from '../helpers/eventsQueryArgsBuilder';
 
 
 const errorMessages = {

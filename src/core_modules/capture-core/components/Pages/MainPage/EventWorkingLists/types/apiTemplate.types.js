@@ -1,5 +1,5 @@
 // @flow
-import { assigneeFilterModes } from '../constants';
+import { apiAssigneeFilterModes } from '../constants';
 
 export type ApiDataFilter = {
     dataItem: string,
@@ -46,7 +46,7 @@ export type ApiDataFilterDateRelative = {|
 export type ApiDataFilterDate = ApiDataFilterDateAbsolute | ApiDataFilterDateRelative;
 
 export type ApiDataFilterAssignee = {|
-    assignedUserMode: $Values<typeof assigneeFilterModes>,
+    assignedUserMode: $Values<typeof apiAssigneeFilterModes>,
     assignedUsers: ?Array<string>,
 |};
 
@@ -63,3 +63,9 @@ export type ApiEventQueryCriteria = {
     assignedUserMode?: 'CURRENT' | 'PROVIDED' | 'NONE' | 'ANY',
     assignedUsers?: Array<string>,
 };
+
+export type CommonQueryData = {|
+    programId: string,
+    orgUnitId: string,
+    categories: ?Object,
+|};

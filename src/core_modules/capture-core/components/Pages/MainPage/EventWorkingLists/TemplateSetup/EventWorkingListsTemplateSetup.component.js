@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { convertToTemplateQueryCriteria } from './toTemplateQueryCriteriaConverter';
+import { convertToEventFilterQueryCriteria } from '../helpers/eventFilters';
 import { WorkingLists } from '../../WorkingLists';
 
 type Props = {
@@ -13,7 +13,7 @@ export const EventWorkingListsTemplateSetup = (props: Props) => {
     return (
         <WorkingLists
             {...passOnProps}
-            convertToTemplateQueryCriteria={convertToTemplateQueryCriteria}
+            convertToEventFilterQueryCriteria={convertToEventFilterQueryCriteria}
         />
     );
 };
