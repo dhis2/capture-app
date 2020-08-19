@@ -25,11 +25,11 @@ import {
     initializeNewRelationship,
 } from '../../NewRelationship/newRelationship.actions';
 import { getCategoriesDataFromEventAsync } from './getCategoriesDataFromEvent';
-
+import { eventWorkingListsActionTypes } from '../../../Pages/MainPage/EventWorkingLists';
 
 export const getEventOpeningFromEventListEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(eventListActionTypes.OPEN_VIEW_EVENT_PAGE)
+    action$.ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN)
         .switchMap((action) => {
             const state = store.getState();
             const eventId = action.payload;
@@ -100,7 +100,7 @@ export const getOrgUnitOnUrlUpdateEpic = (action$: InputObservable) =>
 
 export const openViewPageLocationChangeEpic = (action$: InputObservable) =>
     // $FlowSuppress
-    action$.ofType(eventListActionTypes.OPEN_VIEW_EVENT_PAGE)
+    action$.ofType(eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN)
         .map(action =>
             push(`/viewEvent/${action.payload}`),
         );

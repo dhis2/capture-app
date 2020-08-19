@@ -47,14 +47,14 @@ type Props = {
     classes: Object,
     filterButtons: React.Node,
     isUpdatingWithDialog?: ?boolean,
-    onSaveColumnOrder: Function,
+    onSetColumnOrder: Function,
     rowIdKey: string,
     customMenuContents?: ?Array<Object>,
 };
 
 class Index extends React.Component<Props> {
     handleSaveColumnOrder = (columnOrder: Array<Object>) => {
-        this.props.onSaveColumnOrder(this.props.listId, columnOrder);
+        this.props.onSetColumnOrder(this.props.listId, columnOrder);
     }
 
     renderTopBar = () => {

@@ -15,7 +15,7 @@ import {
 import { listViewActionTypes as eventListActionTypes } from '../../components/ListView';
 import { actionTypes as viewEventNotesActionTypes } from '../../components/Pages/ViewEvent/Notes/viewEventNotes.actions';
 import { assigneeSectionActionTypes } from '../../components/Pages/ViewEvent/RightColumn/AssigneeSection';
-
+import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
 
 export const viewEventPageDesc = createReducerDescription({
     [viewEventActionTypes.VIEW_EVENT_FROM_URL]: (state, action) => {
@@ -71,7 +71,7 @@ export const viewEventPageDesc = createReducerDescription({
         newState.dataEntryLoadError = action.payload;
         return newState;
     },
-    [eventListActionTypes.OPEN_VIEW_EVENT_PAGE]: (state, action) => {
+    [eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN]: (state, action) => {
         const newState = {
             eventDetailsSection: {},
             notesSection: { isLoading: true },

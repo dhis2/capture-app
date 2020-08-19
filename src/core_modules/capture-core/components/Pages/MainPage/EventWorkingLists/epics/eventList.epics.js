@@ -7,7 +7,6 @@ import {
     deleteEventError,
     deleteEventSuccess,
 } from '../eventWorkingLists.actions';
-import { listViewActionTypes as eventListActionTypes } from '../../../../ListView';
 import { initEventWorkingListAsync } from './initEventWorkingList';
 import { updateEventWorkingListAsync } from './updateEventWorkingList';
 import { getApi } from '../../../../../d2';
@@ -66,7 +65,7 @@ export const updateEventListEpic = (action$: InputObservable, store: ReduxStore)
 // TODO: --------------------------------- REFACTOR -----------------------------------
 export const requestDeleteEventEpic = (action$: InputObservable) =>
     action$.ofType(
-        eventListActionTypes.REQUEST_DELETE_EVENT,
+        actionTypes.EVENT_REQUEST_DELETE,
     ).concatMap((action) => {
         const eventId = action.payload.eventId;
         const listId = 'eventList';

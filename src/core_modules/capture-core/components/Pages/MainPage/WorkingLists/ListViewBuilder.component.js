@@ -27,7 +27,16 @@ type ColumnConfigWithOptions = {
 export const ListViewBuilder = (props: Props) => {
     const { getOrdinaryColumnMetadata, getMainColumnMetadataHeader, ...passOnProps } = props;
 
-    const { isUpdating, columnOrder, dataSource, recordsOrder } = useContext(ListViewBuilderContext);
+    const {
+        isUpdating,
+        columnOrder,
+        dataSource,
+        recordsOrder,
+        onListRowSelect,
+        onSortList,
+        onSetListColumnOrder,
+        customRowMenuContents,
+    } = useContext(ListViewBuilderContext);
 
     const listViewColumns = useMemo(() => {
         const createMainPropertyOptionSet = (column: ColumnConfigWithOptions) => {
@@ -84,6 +93,10 @@ export const ListViewBuilder = (props: Props) => {
             isUpdating={isUpdating}
             columns={listViewColumns}
             dataSource={listViewDataSource}
+            onRowClick={onListRowSelect}
+            onSort={onSortList}
+            onSetColumnOrder={onSetListColumnOrder}
+            customRowMenuContents={customRowMenuContents}
         />
     );
 };

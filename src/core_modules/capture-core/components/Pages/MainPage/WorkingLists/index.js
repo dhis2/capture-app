@@ -11,6 +11,7 @@ export type {
     TrueOnlyFilterData,
     OptionSetFilterData,
     AssigneeFilterData,
+    RowMenuContents,
 } from '../../../ListView';
 export type {
     GetMainColumnMetadataHeaderFn,

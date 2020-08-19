@@ -9,6 +9,7 @@ import {
     selectionsIncompleteActionTypes as newEventPageSelectionsIncompleteActionTypes,
 } from '../../components/Pages/NewEvent';
 import { actionTypes as tempSelectorActionTypes } from '../../components/Pages/MainPage/tempSelector.actions';
+import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
 import { actionTypes as editEventActionTypes } from '../../components/Pages/EditEvent/editEvent.actions';
 import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/viewEvent.actions';
 import {
@@ -125,7 +126,7 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         };
         return newState;
     },
-    [eventListActionTypes.OPEN_VIEW_EVENT_PAGE]: (state) => {
+    [eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN]: (state) => {
         const newState = {
             ...state,
             page: 'viewEvent',

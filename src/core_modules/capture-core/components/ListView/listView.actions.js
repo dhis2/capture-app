@@ -5,7 +5,6 @@ import { methods } from '../../trackerOffline/trackerOfflineConfig.const';
 export const listViewActionTypes = {
     SORT_WORKING_LIST: 'SortWorkingList',
     OPEN_EDIT_EVENT_PAGE: 'OpenEditEventPage',
-    OPEN_VIEW_EVENT_PAGE: 'OpenViewEventPage',
     REQUEST_DELETE_EVENT: 'RequestDeleteEvent',
     START_DELETE_EVENT: 'StartDeleteEvent',
     DELETE_EVENT_FAILED: 'DeleteEventFailed',
@@ -19,9 +18,6 @@ export const batchActionTypes = {
     START_DELETE_EVENT_UPDATE_WORKING_LIST: 'StartDeleteEventUpdateWorkingList',
 };
 
-export const sortWorkingList =
-    (listId: string, id: string, direction: string) => actionCreator(listViewActionTypes.SORT_WORKING_LIST)({ listId, id, direction });
-
 export const workingListUpdating = (listId: string) => actionCreator(listViewActionTypes.WORKING_LIST_UPDATING)({ listId });
 export const workingListUpdatingWithDialog =
     (listId: string) => actionCreator(listViewActionTypes.WORKING_LIST_UPDATING_WITH_DIALOG)({ listId });
@@ -29,11 +25,9 @@ export const workingListUpdatingWithDialog =
 export const openEditEventPage =
     (eventId: string) => actionCreator(listViewActionTypes.OPEN_EDIT_EVENT_PAGE)(eventId);
 
-export const openViewEventPage =
-    (eventId: string) => actionCreator(listViewActionTypes.OPEN_VIEW_EVENT_PAGE)(eventId);
-
 export const requestDeleteEvent = (eventId: string) => actionCreator(listViewActionTypes.REQUEST_DELETE_EVENT)({ eventId });
 
+/*
 export const startDeleteEvent = (eventId: string) =>
     actionCreator(listViewActionTypes.START_DELETE_EVENT)({}, {
         offline: {
@@ -45,3 +39,4 @@ export const startDeleteEvent = (eventId: string) =>
             rollback: { type: listViewActionTypes.DELETE_EVENT_FAILED },
         },
     });
+*/

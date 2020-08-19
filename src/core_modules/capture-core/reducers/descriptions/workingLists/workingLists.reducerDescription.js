@@ -2,15 +2,13 @@
 import { moment } from 'capture-core-utils/moment';
 import { createReducerDescription } from '../../../trackerRedux/trackerReducer';
 import {
-    columnSelectorActionTypes,
-} from '../../../components/ListView';
-import {
     actionTypes as filterSelectorActionTypes,
 } from '../../../components/ListView/FilterSelectors/filterSelector.actions';
 import { listViewActionTypes as eventListActionTypes } from '../../../components/ListView';
 import {
     actionTypes as listActionTypes,
 } from '../../../components/List/list.actions';
+import { workingListsCommonActionTypes } from '../../../components/Pages/MainPage/WorkingListsCommonRedux';
 import { eventWorkingListsActionTypes } from '../../../components/Pages/MainPage/EventWorkingLists';
 
 export const workingListsTemplatesDesc = createReducerDescription({
@@ -416,7 +414,8 @@ export const workingListsUIDesc = createReducerDescription({
         });
         return newState;
     },
-    [eventListActionTypes.REQUEST_DELETE_EVENT]: (state, action) => {
+    [eventWorkingListsActionTypes.EVENT_REQUEST_DELETE]: (state, action) => {
+        debugger;
         const listId = action.payload.listId;
         return {
             ...state,
@@ -454,7 +453,8 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
             [listId]: columnOrder,
         };
     },
-    [columnSelectorActionTypes.WORKING_LIST_ORDER_UPDATE]: (state, action) => {
+    [workingListsCommonActionTypes.LIST_COLUMN_ORDER_SET]: (state, action) => {
+        debugger;
         const { columnOrder, listId } = action.payload;
 
         const currentColumnOrder = state[listId];

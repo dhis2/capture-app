@@ -1,12 +1,10 @@
 // @flow
-import {
-    columnSelectorActionTypes,
-} from '../ColumnSelector/actions';
+import { workingListsCommonActionTypes } from '../../../components/Pages/MainPage/WorkingListsCommonRedux';
 import { updateIncludedFiltersAfterColumnSorting } from './filterSelector.actions';
 
 export const includeFiltersWithValueAfterColumnSortingEpic = (action$: InputObservable, store: ReduxStore) =>
     // $FlowSuppress
-    action$.ofType(columnSelectorActionTypes.WORKING_LIST_ORDER_UPDATE)
+    action$.ofType(workingListsCommonActionTypes.LIST_COLUMN_ORDER_SET)
         // eslint-disable-next-line complexity
         .map(() => {
             const state = store.getState();

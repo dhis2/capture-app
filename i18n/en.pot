@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-06-15T18:38:49.731Z\n"
-"PO-Revision-Date: 2020-06-15T18:38:49.731Z\n"
+"POT-Creation-Date: 2020-08-19T14:13:54.485Z\n"
+"PO-Revision-Date: 2020-08-19T14:13:54.485Z\n"
 
 msgid "Please provide a valid date"
 msgstr ""
@@ -323,12 +323,6 @@ msgstr ""
 msgid "Rows per page"
 msgstr ""
 
-msgid "View event info"
-msgstr ""
-
-msgid "Delete event"
-msgstr ""
-
 msgid "Online"
 msgstr ""
 
@@ -384,6 +378,9 @@ msgid "Active"
 msgstr ""
 
 msgid "Completed"
+msgstr ""
+
+msgid "Delete event"
 msgstr ""
 
 msgid "Working list could not be loaded"

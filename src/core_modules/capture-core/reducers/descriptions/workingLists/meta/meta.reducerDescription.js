@@ -12,6 +12,7 @@ import {
 import {
     actionTypes as listActionTypes,
 } from '../../../../components/List/list.actions';
+import { workingListsCommonActionTypes } from '../../../../components/Pages/MainPage/WorkingListsCommonRedux';
 import { eventWorkingListsActionTypes } from '../../../../components/Pages/MainPage/EventWorkingLists';
 
 export const workingListsMetaDesc = createReducerDescription({
@@ -196,7 +197,7 @@ export const workingListsMetaDesc = createReducerDescription({
         };
         return newState;
     },
-    [eventsListActionTypes.SORT_WORKING_LIST]: (state, action) => {
+    [workingListsCommonActionTypes.LIST_SORT]: (state, action) => {
         const newState = { ...state };
         const { listId, id, direction } = action.payload;
         newState[listId] = {

@@ -30,6 +30,8 @@ export const actionTypes = {
     EVENT_DELETE_SUCCESS: 'EventWorkingListsEventListEventDeleteSuccess',
     EVENT_DELETE_ERROR: 'EventWorkingListsEventListEventDeleteError',
     CONTEXT_UNLOADING: 'EventWorkingListsContextUnloading',
+    VIEW_EVENT_PAGE_OPEN: 'ViewEventPageOpen',
+    EVENT_REQUEST_DELETE: 'EventWorkingListsEventDelete',
 };
 
 export const batchActionTypes = {
@@ -119,3 +121,8 @@ export const deleteEventError =
     () => actionCreator(actionTypes.EVENT_DELETE_ERROR)();
 
 export const unloadingContext = (listId: string) => actionCreator(actionTypes.CONTEXT_UNLOADING)({ listId });
+
+export const openViewEventPage =
+    (eventId: string) => actionCreator(actionTypes.VIEW_EVENT_PAGE_OPEN)(eventId);
+
+export const requestDeleteEvent = (eventId: string) => actionCreator(actionTypes.EVENT_REQUEST_DELETE)({ eventId });

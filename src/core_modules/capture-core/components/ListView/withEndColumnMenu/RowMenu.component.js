@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Delete from '@material-ui/icons/Delete';
 import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
+import type { RowMenuContents } from '../types';
 
 type Props = {
     classes: {
@@ -22,6 +23,7 @@ type Props = {
     onDelete: (eventId: string) => void,
     onView: (eventId: string) => void,
     row: Object,
+    customRowMenuContents?: RowMenuContents,
 }
 
 type State = {
@@ -57,7 +59,7 @@ class Index extends React.Component<Props, State> {
 
     handleView = (event: SyntheticEvent<any>) => {
         this.closeMenu();
-        this.props.onView(this.props.row.eventId);
+        this.props.onView(this.props.row);
         event.stopPropagation();
     }
 
@@ -87,16 +89,31 @@ class Index extends React.Component<Props, State> {
     }
 
     renderMenuItems = () => {
-        const { classes } = this.props;
+        const { customRowMenuContents = [], row, classes } = this.props;
+
+        const menuItems = customRowMenuContents
+                .map((content) => (
+                        <MenuItem
+                            key={content.key}
+                            data-test={`menu-item-${content.key}`}
+                            onClick={(event: SyntheticEvent<any>) => {
+                                if (!content.clickHandler) {
+                                    return;
+                                }
+                                this.closeMenu();
+                                // $FlowFixMe common flow, I checked this 4 lines up
+                                content.clickHandler(row);
+                                event.stopPropagation();                                
+                            }}
+                            disabled={!content.clickHandler}
+                        >
+                            {content.element}
+                        </MenuItem>
+                    ));
+
         return (
             <MenuList role="menu" className={classes.menuList}>
-                <MenuItem onClick={this.handleView}>
-                    {i18n.t('View event info')}
-                </MenuItem>
-                <MenuItem onClick={this.handleDelete}>
-                    <Delete className={classes.deleteIcon} />
-                    {i18n.t('Delete event')}
-                </MenuItem>
+                {menuItems}
             </MenuList>
         );
     }

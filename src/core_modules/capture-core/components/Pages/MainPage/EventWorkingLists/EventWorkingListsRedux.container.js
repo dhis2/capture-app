@@ -14,6 +14,8 @@ import {
     updateEventListCancel,
     cleanSkipInitAddingTemplate,
     unloadingContext,
+    openViewEventPage,
+    requestDeleteEvent,
 } from './eventWorkingLists.actions';
 import type { EventsMainProperties, EventsDataElementValues } from './types';
 
@@ -57,6 +59,8 @@ type DispatchProps = {|
     onDeleteTemplate: Function,
     onCleanSkipInitAddingTemplate: Function,
     onUnloadingContext: Function,
+    onListRowSelect: Function,
+    onDeleteEvent: Function,
 |};
 
 type Props = {|
@@ -112,6 +116,11 @@ const mapDispatchToProps: MapDispatchToPropsFactory = (dispatch: ReduxDispatch) 
         onDeleteTemplate: basicDispatcher(deleteTemplate),
         onCleanSkipInitAddingTemplate: basicDispatcher(cleanSkipInitAddingTemplate),
         onUnloadingContext: basicDispatcher(unloadingContext),
+        onListRowSelect: (rowData: {eventId: string}) => {
+            window.scrollTo(0, 0);
+            dispatch(openViewEventPage(rowData.eventId));
+        },
+        onDeleteEvent: basicDispatcher(requestDeleteEvent),
     };
 };
 

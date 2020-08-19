@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import { dataElementTypes, OptionSet } from '../../../metaData';
 
 export type Column = {
@@ -9,3 +10,11 @@ export type Column = {
     optionSet?: OptionSet,
     singleSelect?: ?boolean,
 };
+
+type RowMenuContent = {|
+    key: string,
+    clickHandler?: ?(rowData: Object) => any,
+    element: React$Node,
+|};
+
+export type RowMenuContents = Array<RowMenuContent>;

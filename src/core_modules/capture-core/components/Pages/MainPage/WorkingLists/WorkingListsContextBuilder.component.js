@@ -47,6 +47,10 @@ type Props = {
     lastEventIdDeleted: ?string,
     dataSource: DataSource,
     recordsOrder: Array<string>,
+    onListRowSelect: Function,
+    onSortList: Function,
+    onSetListColumnOrder: Function,
+    customRowMenuContents: Object,
     ...PassOnProps,
 };
 
@@ -80,6 +84,10 @@ const WorkingListsContextBuilder = (props: Props) => {
         lastEventIdDeleted,
         dataSource,
         recordsOrder,
+        onListRowSelect,
+        onSortList,
+        customRowMenuContents,
+        onSetListColumnOrder,
         ...passOnProps
     } = props;
 
@@ -173,11 +181,19 @@ const WorkingListsContextBuilder = (props: Props) => {
         columnOrder,
         dataSource,
         recordsOrder,
+        onListRowSelect,
+        onSortList,
+        onSetListColumnOrder,
+        customRowMenuContents,
     }), [
         isUpdating,
         columnOrder,
         dataSource,
         recordsOrder,
+        onListRowSelect,
+        onSortList,
+        onSetListColumnOrder,
+        customRowMenuContents,
     ]);
 
     const templates = React.useMemo(() =>
