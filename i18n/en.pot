@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
-"PO-Revision-Date: 2020-06-23T10:34:34.303Z\n"
+"POT-Creation-Date: 2020-08-20T09:38:04.039Z\n"
+"PO-Revision-Date: 2020-08-20T09:38:04.039Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -292,6 +292,54 @@ msgstr ""
 msgid "No items to display"
 msgstr ""
 
+msgid "View event info"
+msgstr ""
+
+msgid "Delete event"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "{{fromDate}} to {{toDate}}"
+msgstr ""
+
+msgid "after or equal to {{date}}"
+msgstr ""
+
+msgid "before or equal to {{date}}"
+msgstr ""
+
+msgid "greater than or equal to"
+msgstr ""
+
+msgid "less than or equal to"
+msgstr ""
+
+msgid "More filters"
+msgstr ""
+
+msgid "Select columns"
+msgstr ""
+
+msgid "Download as JSON"
+msgstr ""
+
+msgid "Download as XML"
+msgstr ""
+
+msgid "Download as CSV"
+msgstr ""
+
+msgid "Download with current filters"
+msgstr ""
+
+msgid "Download data..."
+msgstr ""
+
+msgid "Rows per page"
+msgstr ""
+
 msgid "Could not get organisation unit"
 msgstr ""
 
@@ -347,54 +395,6 @@ msgid "Select program"
 msgstr ""
 
 msgid "No programs available."
-msgstr ""
-
-msgid "View event info"
-msgstr ""
-
-msgid "Delete event"
-msgstr ""
-
-msgid "Update"
-msgstr ""
-
-msgid "{{fromDate}} to {{toDate}}"
-msgstr ""
-
-msgid "after or equal to {{date}}"
-msgstr ""
-
-msgid "before or equal to {{date}}"
-msgstr ""
-
-msgid "greater than or equal to"
-msgstr ""
-
-msgid "less than or equal to"
-msgstr ""
-
-msgid "More filters"
-msgstr ""
-
-msgid "Select columns"
-msgstr ""
-
-msgid "Download as JSON"
-msgstr ""
-
-msgid "Download as XML"
-msgstr ""
-
-msgid "Download as CSV"
-msgstr ""
-
-msgid "Download with current filters"
-msgstr ""
-
-msgid "Download data..."
-msgstr ""
-
-msgid "Rows per page"
 msgstr ""
 
 msgid "Online"

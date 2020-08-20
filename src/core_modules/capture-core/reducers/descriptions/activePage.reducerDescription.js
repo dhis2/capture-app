@@ -7,7 +7,7 @@ import {
 } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../components/Pages/NewEvent';
 import { actionTypes as viewEventDataEntryActionTypes } from '../../components/Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/viewEventDataEntry.actions';
-import { actionTypes as eventListActionTypes } from '../../components/Pages/MainPage/EventsList';
+import { listViewActionTypes as eventListActionTypes } from '../../components/ListView';
 
 export const activePageDesc = createReducerDescription({
     [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: state => ({
