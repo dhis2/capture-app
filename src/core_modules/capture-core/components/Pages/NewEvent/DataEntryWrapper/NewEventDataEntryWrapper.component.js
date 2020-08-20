@@ -18,6 +18,7 @@ const getStyles = (theme: Theme) => ({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
+    // $FlowFixMe[cannot-spread-inexact] automated comment
     header: {
         flexGrow: 1,
         ...theme.typography.title,
@@ -47,17 +48,9 @@ type Props = {
     stage: ?ProgramStage,
 }
 
-type State = {
-    discardWarningOpen: boolean,
-}
 
-class NewEventDataEntryWrapper extends React.Component<Props, State> {
+class NewEventDataEntryWrapper extends React.Component<Props> {
     cancelButtonInstance: ?any;
-
-    constructor(props: Props) {
-        super(props);
-        this.state = { discardWarningOpen: false };
-    }
 
     handleGoBackToAllEvents = () => {
         this.cancelButtonInstance && this.cancelButtonInstance.handleCancel();

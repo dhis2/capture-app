@@ -1,10 +1,13 @@
 // @flow
 import { connect } from 'react-redux';
-import MainPage from './MainPage.component';
+import { MainPageComponent } from './MainPage.component';
+import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 
 const mapStateToProps = (state: ReduxState) => ({
     currentSelectionsComplete: !!state.currentSelections.complete,
+    error: state.activePage.selectionsError && state.activePage.selectionsError.error,
+    ready: !state.activePage.isPageLoading,
 });
 
-// $FlowSuppress
-export default connect(mapStateToProps)(MainPage);
+// $FlowFixMe[missing-annot] automated comment
+export const MainPage = connect(mapStateToProps)(withLoadingIndicator()(withErrorMessageHandler()(MainPageComponent)));

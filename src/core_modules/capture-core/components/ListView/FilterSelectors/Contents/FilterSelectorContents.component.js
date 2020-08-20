@@ -24,6 +24,7 @@ const getStyles = (theme: Theme) => ({
 
 type Props = {
     type: $Values<typeof filterTypesObject>,
+    // $FlowFixMe[cannot-resolve-name] automated comment
     optionSet: ?OptionSet,
     classes: {
         container: string,
@@ -31,31 +32,6 @@ type Props = {
 };
 
 class FilterSelectorContents extends React.PureComponent<Props> {
-    static selectorContentsForTypes = {
-        [filterTypesObject.TEXT]: TextFilter,
-        [filterTypesObject.NUMBER]: NumericFilter,
-        [filterTypesObject.INTEGER]: NumericFilter,
-        [filterTypesObject.INTEGER_POSITIVE]: NumericFilter,
-        [filterTypesObject.INTEGER_NEGATIVE]: NumericFilter,
-        [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: NumericFilter,
-        [filterTypesObject.DATE]: DateFilter,
-        [filterTypesObject.BOOLEAN]: BooleanFilter,
-        [filterTypesObject.TRUE_ONLY]: TrueOnlyFilter,
-        [filterTypesObject.ASSIGNEE]: AssigneeFilter,
-    };
-
-    static hasStylesHOC = [
-        filterTypesObject.NUMBER,
-        filterTypesObject.INTEGER,
-        filterTypesObject.INTEGER_POSITIVE,
-        filterTypesObject.INTEGER_NEGATIVE,
-        filterTypesObject.INTEGER_ZERO_OR_POSITIVE,
-        filterTypesObject.DATE,
-        filterTypesObject.BOOLEAN,
-        filterTypesObject.TRUE_ONLY,
-        filterTypesObject.ASSIGNEE,
-    ];
-
     static getOptionSetComponent() {
         return withButtons()(
             withData()(
@@ -63,6 +39,49 @@ class FilterSelectorContents extends React.PureComponent<Props> {
             ),
         );
     }
+
+    static selectorContentsForTypes = {
+        // $FlowFixMe[prop-missing] automated comment
+        [filterTypesObject.TEXT]: TextFilter,
+        // $FlowFixMe[prop-missing] automated comment
+        [filterTypesObject.NUMBER]: NumericFilter,
+        // $FlowFixMe[prop-missing] automated comment
+        [filterTypesObject.INTEGER]: NumericFilter,
+        // $FlowFixMe[prop-missing] automated comment
+        [filterTypesObject.INTEGER_POSITIVE]: NumericFilter,
+        // $FlowFixMe[prop-missing] automated comment
+        [filterTypesObject.INTEGER_NEGATIVE]: NumericFilter,
+        // $FlowFixMe[prop-missing] automated comment
+        [filterTypesObject.INTEGER_ZERO_OR_POSITIVE]: NumericFilter,
+        // $FlowFixMe[prop-missing] automated comment
+        [filterTypesObject.DATE]: DateFilter,
+        // $FlowFixMe[prop-missing] automated comment
+        [filterTypesObject.BOOLEAN]: BooleanFilter,
+        // $FlowFixMe[prop-missing] automated comment
+        [filterTypesObject.TRUE_ONLY]: TrueOnlyFilter,
+        // $FlowFixMe[invalid-computed-prop] automated comment
+        [filterTypesObject.ASSIGNEE]: AssigneeFilter,
+    };
+
+    static hasStylesHOC = [
+        // $FlowFixMe[prop-missing] automated comment
+        filterTypesObject.NUMBER,
+        // $FlowFixMe[prop-missing] automated comment
+        filterTypesObject.INTEGER,
+        // $FlowFixMe[prop-missing] automated comment
+        filterTypesObject.INTEGER_POSITIVE,
+        // $FlowFixMe[prop-missing] automated comment
+        filterTypesObject.INTEGER_NEGATIVE,
+        // $FlowFixMe[prop-missing] automated comment
+        filterTypesObject.INTEGER_ZERO_OR_POSITIVE,
+        // $FlowFixMe[prop-missing] automated comment
+        filterTypesObject.DATE,
+        // $FlowFixMe[prop-missing] automated comment
+        filterTypesObject.BOOLEAN,
+        // $FlowFixMe[prop-missing] automated comment
+        filterTypesObject.TRUE_ONLY,
+        filterTypesObject.ASSIGNEE,
+    ];
 
     getContentsComponent() {
         const { type, optionSet } = this.props;

@@ -15,6 +15,7 @@ const SelectBoxes = (props: Props) => {
 
     if (multiSelect) {
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <MultiSelectBoxes
                 orientation={orientations.HORIZONTAL}
                 {...passOnProps}
@@ -23,6 +24,7 @@ const SelectBoxes = (props: Props) => {
     }
 
     return (
+        // $FlowFixMe[cannot-spread-inexact] automated comment
         <SingleSelectBoxes
             orientation={orientations.HORIZONTAL}
             {...passOnProps}

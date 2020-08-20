@@ -1,5 +1,7 @@
 // @flow
-import { pipe } from 'capture-core-utils';
+import { pipe as pipeD2 } from 'capture-core-utils';
+import { ofType } from 'redux-observable';
+import { switchMap } from 'rxjs/operators';
 import { getApi } from '../../../../../../../d2/d2Instance';
 import {
     actionTypes,
@@ -16,11 +18,13 @@ import { convertFormToClient, convertClientToServer, convertServerToClient } fro
 
 const getProgramSearchGroup = (programId: string) => {
     const program = getTrackerProgramThrowIfNotFound(programId);
+    // $FlowFixMe[incompatible-use] automated comment
     return program.enrollment.inputSearchGroups[0];
 };
 
 const getTETSearchGroup = (tetId: string) => {
     const tet = getTrackedEntityTypeThrowIfNotFound(tetId);
+    // $FlowFixMe[incompatible-use] automated comment
     return tet.teiRegistration.inputSearchGroups[0];
 };
 
@@ -41,14 +45,14 @@ const getFormMetadata = (programId: ?string, tetId: string) =>
     (programId ? getEnrollmentForm(programId) : getTETForm(tetId));
 
 export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
-    action$.ofType(actionTypes.DUPLICATES_REVIEW, actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE)
-        .switchMap((action) => {
+    action$.pipe(
+        ofType(actionTypes.DUPLICATES_REVIEW, actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE),
+        switchMap((action) => {
             const isChangePage = action.type === actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE;
             const requestPage = isChangePage ? action.payload.page : 1;
 
             const dataEntryId = 'relationship';
-            const state = store.getState();
+            const state = store.value;
             const { programId, orgUnit } = state.newRelationshipRegisterTei;
             const tetId = state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId;
             const dataEntryKey = getDataEntryKey(dataEntryId, state.dataEntries[dataEntryId].itemId);
@@ -69,7 +73,7 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                         return null;
                     }
 
-                    const serverValue = element.convertValue(value, pipe(convertFormToClient, convertClientToServer));
+                    const serverValue = element.convertValue(value, pipeD2(convertFormToClient, convertClientToServer));
                     return `${element.id}:LIKE:${serverValue}`;
                 })
                 .filter(f => f);
@@ -113,8 +117,14 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                                 id: instance.trackedEntityInstance,
                                 values: {
                                     ...convertedValues,
+                                    /* $FlowFixMe[prop-missing] automated
+                                     * comment */
                                     registrationDate: convertServerToClient(instance.created, dataElementTypes.DATETIME),
+                                    /* $FlowFixMe[prop-missing] automated
+                                     * comment */
                                     registrationUnit: convertServerToClient(instance.orgUnit, dataElementTypes.TEXT),
+                                    /* $FlowFixMe[prop-missing] automated
+                                     * comment */
                                     inactive: convertServerToClient(instance.inactive, dataElementTypes.BOOLEAN),
                                 },
                             };
@@ -127,4 +137,4 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                 })
                 .catch(() =>
                     duplicatesForReviewRetrievalFailed());
-        });
+        }));

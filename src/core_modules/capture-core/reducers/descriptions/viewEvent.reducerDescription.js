@@ -1,6 +1,6 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/viewEvent.actions';
+import { actionTypes as viewEventActionTypes } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { actionTypes as viewEventRelationshipsActionTypes } from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';
 import {
     actionTypes as viewEventDetailsActionTypes,
@@ -25,36 +25,11 @@ export const viewEventPageDesc = createReducerDescription({
             relationshipsSection: { isLoading: true },
             assigneeSection: { isLoading: true },
             eventId: action.payload.eventId,
-            dataEntryIsLoading: true,
-            isLoading: true,
         };
-        return newState;
-    },
-    [viewEventActionTypes.OPEN_VIEW_EVENT_PAGE_FAILED]: (state, action) => ({
-        ...state,
-        loadError: action.payload.error,
-    }),
-    [viewEventActionTypes.EVENT_FROM_URL_COULD_NOT_BE_RETRIEVED]: (state, action) => {
-        const newState = { ...state };
-        newState.isLoading = false;
-        newState.loadError = action.payload;
-        return newState;
-    },
-    [viewEventActionTypes.ORG_UNIT_RETRIEVED_ON_URL_UPDATE]: (state) => {
-        const newState = { ...state };
-        newState.isLoading = false;
-        newState.dataEntryIsLoading = true;
-        return newState;
-    },
-    [viewEventActionTypes.ORG_UNIT_RETRIEVAL_FAILED_ON_URL_UPDATE]: (state) => {
-        const newState = { ...state };
-        newState.isLoading = false;
-        newState.dataEntryIsLoading = true;
         return newState;
     },
     [viewEventDataEntryActionTypes.VIEW_EVENT_DATA_ENTRY_LOADED]: (state, action) => {
         const newState = { ...state };
-        newState.dataEntryIsLoading = false;
         newState.eventDetailsSection = {
             ...newState.eventDetailsSection,
         };
@@ -65,12 +40,6 @@ export const viewEventPageDesc = createReducerDescription({
         };
         return newState;
     },
-    [viewEventDataEntryActionTypes.PREREQUISITES_ERROR_LOADING_VIEW_EVENT_DATA_ENTRY]: (state, action) => {
-        const newState = { ...state };
-        newState.dataEntryIsLoading = false;
-        newState.dataEntryLoadError = action.payload;
-        return newState;
-    },
     [eventListActionTypes.OPEN_VIEW_EVENT_PAGE]: (state, action) => {
         const newState = {
             eventDetailsSection: {},
@@ -78,7 +47,6 @@ export const viewEventPageDesc = createReducerDescription({
             relationshipsSection: { isLoading: true },
             assigneeSection: { isLoading: true },
             eventId: action.payload,
-            dataEntryIsLoading: true,
         };
         return newState;
     },

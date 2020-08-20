@@ -12,7 +12,7 @@ import ColumnSelector from './ColumnSelector.component';
 import OptionSet from '../../../metaData/OptionSet/OptionSet';
 import withCustomEndCell from '../withCustomEndCell';
 import eventContentMenuSettings from '../EventContentMenu/eventContentMenuSettings';
-import DialogLoadingMask from '../../LoadingMasks/DialogLoadingMask.component';
+import { DialogLoadingMask } from '../../LoadingMasks';
 
 import List from '../../List/OnlineList/List.component';
 import ListWrapperMenu from './ListWrapperMenu.component';
@@ -126,7 +126,7 @@ class EventListWrapper extends React.Component<Props> {
     }
 
     render() {
-        const { classes, isUpdatingWithDialog } = this.props; //eslint-disable-line
+        const { classes } = this.props;
 
         return (
             <div

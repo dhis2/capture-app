@@ -5,12 +5,12 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { Button } from '../Buttons';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import i18n from '@dhis2/d2-i18n';
 import isDefined from 'd2-utilizr/lib/isDefined';
+import { Button } from '../Buttons';
 
 const styles = theme => ({
     closeButton: {
@@ -35,13 +35,6 @@ type Props = {
 };
 
 class FeedbackBar extends React.Component<Props> {
-    static CLICKAWAY_KEY = 'clickaway';
-
-    static ANCHOR_ORIGION = {
-        vertical: 'bottom',
-        horizontal: 'center',
-    };
-
     static defaultProps = {
         feedback: {},
     };
@@ -50,6 +43,12 @@ class FeedbackBar extends React.Component<Props> {
         super(props);
         this.handleClose = this.handleClose.bind(this);
     }
+    static CLICKAWAY_KEY = 'clickaway';
+
+    static ANCHOR_ORIGION = {
+        vertical: 'bottom',
+        horizontal: 'center',
+    };
 
     handleClose = (event?: ?Object, reason?: ?string) => {
         if (reason !== FeedbackBar.CLICKAWAY_KEY) {
@@ -102,6 +101,7 @@ class FeedbackBar extends React.Component<Props> {
                     anchorOrigin={FeedbackBar.ANCHOR_ORIGION}
                     autoHideDuration={5000}
                     onClose={this.handleClose}
+                    // $FlowFixMe[incompatible-type] automated comment
                     message={<span>{message}</span>}
                     action={this.getAction()}
                 />
@@ -109,10 +109,14 @@ class FeedbackBar extends React.Component<Props> {
                     open={isDefined(message) && displayType === 'dialog'}
                 >
                     <DialogTitle>
-                        {isDialogOpen ? message && message.title : ''}
+                        {
+                            // $FlowFixMe[prop-missing] automated comment
+                            isDialogOpen ? message && message.title : ''}
                     </DialogTitle>
                     <DialogContent>
-                        {isDialogOpen ? message && message.content : ''}
+                        {
+                            // $FlowFixMe[prop-missing] automated comment
+                            isDialogOpen ? message && message.content : ''}
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose} primary>

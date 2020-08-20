@@ -23,6 +23,7 @@ export function convertMainEventClientToServer(event: Object) {
         case 'eventDate':
         case 'dueDate':
         case 'completedDate':
+            // $FlowFixMe[prop-missing] automated comment
             convertedValue = convertClientToServer(value, elementTypeKeys.DATE);
             break;
         case 'assignee':

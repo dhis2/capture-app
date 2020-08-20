@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { fade, lighten } from '@material-ui/core/styles/colorManipulator';
-import { withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import i18n from '@dhis2/d2-i18n';
 import TemplateSelectorChip from './TemplateSelectorChip.component';
 import CaptureScrollHeight from './CaptureScrollHeight.component';
@@ -19,7 +19,7 @@ const getStyles = (theme: Theme) => ({
     container: {
         borderBottom: getBorder(theme),
     },
-    configsContainer: {        
+    configsContainer: {
         display: 'flex',
         flexWrap: 'wrap',
         padding: `${theme.typography.pxToRem(3)} 0rem`,
@@ -75,15 +75,14 @@ const TemplateSelector = (props: Props) => {
         templates,
     ]);
 
-    const getHeightModifierButton = React.useCallback(() => {
-        return (
-            <LinkButton
-                className={classes.linkButton}
-                onClick={() => { setExpandedStatus(!isExpanded); }}>
-                {isExpanded ? i18n.t('Show Less') : i18n.t('Show All')}
-            </LinkButton>
-        );
-    }, [isExpanded, classes.linkButton]);
+    const getHeightModifierButton = React.useCallback(() => (
+        <LinkButton
+            className={classes.linkButton}
+            onClick={() => { setExpandedStatus(!isExpanded); }}
+        >
+            {isExpanded ? i18n.t('Show Less') : i18n.t('Show All')}
+        </LinkButton>
+    ), [isExpanded, classes.linkButton]);
 
     if (customTemplates.length <= 0) {
         return null;

@@ -31,7 +31,6 @@ type Props = {
 };
 
 const withWorkingListsHeader = () => (InnerComponent: React.ComponentType<any>) =>
-    // $FlowFixMe
     withStyles(getStyles)(class WorkingListsHeaderHOC extends React.Component<Props> {
         render() {
             const { classes, ...passOnProps } = this.props;

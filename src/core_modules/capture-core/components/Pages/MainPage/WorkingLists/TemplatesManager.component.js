@@ -42,6 +42,7 @@ const TemplatesManager = (props: Props) => {
     ]);
 
     return (
+        // $FlowFixMe[prop-missing] automated comment
         <EventListConfig
             {...passOnProps}
             listId={listId}

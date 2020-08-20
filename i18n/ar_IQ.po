@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-03-09T19:35:56.143Z\n"
+"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: KRG HIS <antonia.bezenchek@informa.pro>, 2020\n"
 "Language-Team: Arabic (Iraq) (https://www.transifex.com/hisp-uio/teams/100509/ar_IQ/)\n"
@@ -15,8 +15,21 @@ msgstr ""
 "Language: ar_IQ\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-msgid "Please provide a valid date"
-msgstr "نرجوا ادخال صيغة صحيحة للتاريخ"
+msgid "Choose one or more dates..."
+msgstr "اختر تاريخًا أو أكثر ..."
+
+msgid "Choose a date..."
+msgstr "اختر تاريخاً"
+
+msgid "Today"
+msgstr "اليوم"
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
+msgstr ""
+"أحد الأسباب المحتملة لذلك هو أن المتصفح أو الوضع (مثل وضع الخصوصية) غير "
+"مدعوم. انظر السجل للحصول على التفاصيل."
 
 msgid "Columns to show in table"
 msgstr "الأعمدة التي سيتم عرضها في الجدول"
@@ -47,6 +60,12 @@ msgstr "من فضلك ادخل عدد صحيح موجب، أو صفر"
 
 msgid "Please provide a negative integer"
 msgstr "من فضلك ادخل احد الأعداد الصحيحة السالبة"
+
+msgid "Please provide a valid date"
+msgstr "نرجوا ادخال صيغة صحيحة للتاريخ"
+
+msgid "A date in the future is not allowed"
+msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr "من فضلك ادخل صيغة صحيحة للتاريخ والوقت"
@@ -202,9 +221,6 @@ msgstr "من"
 msgid "To"
 msgstr "الى"
 
-msgid "Today"
-msgstr "اليوم"
-
 msgid "This week"
 msgstr "الأسبوع الحالي"
 
@@ -283,11 +299,65 @@ msgstr "لا توجد نتائج"
 msgid "suggestions could not be retrieved"
 msgstr "تعذر استرداد الاقتراحات"
 
-msgid "search for username"
-msgstr "البحث عن اسم مستخدم"
-
 msgid "No items to display"
 msgstr "لا توجد عناصر للعرض"
+
+msgid "Could not get organisation unit"
+msgstr "تعذر جلب الوحدة التنظيمية"
+
+msgid "Program doesn't exist"
+msgstr "البرنامج غير موجود"
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr "البرنامج المحدد غير صالح لوحدة التسجيل المحددة"
+
+msgid "New {{typeName}}"
+msgstr "{{typeName}} جديد"
+
+msgid "New"
+msgstr "جديد"
+
+msgid "Start again"
+msgstr "البدء من جديد"
+
+msgid "Find"
+msgstr "بحث"
+
+msgid "Selected registering unit"
+msgstr "وحدة التسجيل المختارة"
+
+msgid "Start Again"
+msgstr "البدء من جديد"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr "هل أنت متأكد؟ سيتم فقدان جميع البيانات التي لم يتم حفظها."
+
+msgid "Accept"
+msgstr "قبول"
+
+msgid "Registering Organisation Unit"
+msgstr "تسجيل الوحدة التنظيمية"
+
+msgid "Select"
+msgstr "تحديد"
+
+msgid "Selected Program"
+msgstr "البرنامج المحدد"
+
+msgid "Some programs are being filtered."
+msgstr "بعض البرامج يتم تصفيتها"
+
+msgid "Show all"
+msgstr "إظهار الكل"
+
+msgid "Program"
+msgstr "البرنامج"
+
+msgid "Select program"
+msgstr "تحديد البرنامج"
+
+msgid "No programs available."
+msgstr "لا توجد برامج متاحة"
 
 msgid "Online"
 msgstr "متصل"
@@ -436,15 +506,6 @@ msgstr "فعال"
 msgid "Completed"
 msgstr "مكتمل"
 
-msgid "Could not get organisation unit"
-msgstr "تعذر جلب الوحدة التنظيمية"
-
-msgid "Program doesn't exist"
-msgstr "البرنامج غير موجود"
-
-msgid "Selected program is invalid for registering unit"
-msgstr "البرنامج المحدد غير صالح لوحدة التسجيل"
-
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr "إنشاء {{TET}} جديد في {{program}} في {{orgUnit}}"
 
@@ -475,9 +536,6 @@ msgid ""
 msgstr ""
 "البرنامج بالرقم المعرف {{programId}} ليس برنامج تتبع. لا يمكن التسجيل إلا في"
 " برامج التتبع."
-
-msgid "Selected program is invalid for selected registering unit"
-msgstr "البرنامج المحدد غير صالح لوحدة التسجيل المحددة"
 
 msgid "Assigned user"
 msgstr "المستخدم المعين"
@@ -595,15 +653,6 @@ msgstr "إخفاء"
 msgid "Save as new {{tetName}}"
 msgstr "حفظ {{tetName}} كجديد"
 
-msgid "Some programs are being filtered."
-msgstr "بعض البرامج يتم تصفيتها"
-
-msgid "Show all"
-msgstr "إظهار الكل"
-
-msgid "Program"
-msgstr "البرنامج"
-
 msgid "Organisation Unit"
 msgstr "الوحدة التنظيمية"
 
@@ -656,45 +705,6 @@ msgstr "تم تعيين الحدث إلى {{name}}"
 
 msgid "Feedbacks"
 msgstr "تغذيات راجعة"
-
-msgid "New {{typeName}}"
-msgstr "{{typeName}} جديد"
-
-msgid "New"
-msgstr "جديد"
-
-msgid "Start again"
-msgstr "البدء من جديد"
-
-msgid "Find"
-msgstr "بحث"
-
-msgid "Selected registering unit"
-msgstr "وحدة التسجيل المختارة"
-
-msgid "Start Again"
-msgstr "البدء من جديد"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr "هل أنت متأكد؟ سيتم فقدان جميع البيانات التي لم يتم حفظها."
-
-msgid "Accept"
-msgstr "قبول"
-
-msgid "Registering Organisation Unit"
-msgstr "تسجيل الوحدة التنظيمية"
-
-msgid "Select"
-msgstr "تحديد"
-
-msgid "Selected Program"
-msgstr "البرنامج المحدد"
-
-msgid "Select program"
-msgstr "تحديد البرنامج"
-
-msgid "No programs available."
-msgstr "لا توجد برامج متاحة"
 
 msgid "You dont have access to delete this relationship"
 msgstr "ليس لديك حق الوصول لحذف هذه العلاقة"
@@ -799,19 +809,6 @@ msgstr ""
 "الإلتقاط فقط تشغيل نسخة واحدة بشكل متزامن (في نفس المجال). يرجى تحديث هذه "
 "الصفحة إذا كنت ترغب في استخدام هذه النسخة، ولكن اعلم أن هذا سيؤدي إلى إغلاق "
 "النسخ الأخرى."
-
-msgid "Choose one or more dates..."
-msgstr "اختر تاريخًا أو أكثر ..."
-
-msgid "Choose a date..."
-msgstr "اختر تاريخاً"
-
-msgid ""
-"A possible reason for this is that the browser or mode (e.g. privacy mode) "
-"is not supported. See log for details."
-msgstr ""
-"أحد الأسباب المحتملة لذلك هو أن المتصفح أو الوضع (مثل وضع الخصوصية) غير "
-"مدعوم. انظر السجل للحصول على التفاصيل."
 
 msgid "Compatibility mode"
 msgstr "وضع التوافق"

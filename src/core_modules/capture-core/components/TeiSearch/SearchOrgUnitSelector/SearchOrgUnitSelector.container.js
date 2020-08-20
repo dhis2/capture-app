@@ -25,7 +25,6 @@ const mapStateToProps = (state: ReduxState, props: Object) => {
     };
 };
 
-// $FlowFixMe
 const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     onFilterOrgUnits: (searchId: string, searchText: string) => {
         const action = searchText ?
@@ -41,4 +40,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
+// $FlowFixMe[missing-annot] automated comment
 export default connect(mapStateToProps, mapDispatchToProps)(SearchOrgUnitSelectorRefHandler);

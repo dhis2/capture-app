@@ -1,12 +1,8 @@
 // @flow
 import { push } from 'connected-react-router';
-import {
-    actionTypes as editEventSelectorActionTypes,
-} from '../../EditEvent/EditEventSelector/EditEventSelector.actions';
-import {
-    actionTypes as viewEventSelectorActionTypes,
-} from '../../ViewEvent/ViewEventSelector/ViewEventSelector.actions';
-import { actionTypes as mainPageSelectorActionTypes } from '../../MainPage/MainPageSelector/MainPageSelector.actions';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
+import { lockedSelectorActionTypes } from '../../../LockedSelector/LockedSelector.actions';
 
 const getArguments = (programId: string, orgUnitId: string) => {
     const argArray = [];
@@ -21,15 +17,11 @@ const getArguments = (programId: string, orgUnitId: string) => {
 };
 
 export const openNewEventPageLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
-    action$.ofType(
-        editEventSelectorActionTypes.OPEN_NEW_EVENT,
-        viewEventSelectorActionTypes.OPEN_NEW_EVENT,
-        mainPageSelectorActionTypes.OPEN_NEW_EVENT,
-    )
-        .map(() => {
-            const state = store.getState();
+    action$.pipe(
+        ofType(lockedSelectorActionTypes.NEW_EVENT_OPEN),
+        map(() => {
+            const state = store.value;
             const { programId, orgUnitId } = state.currentSelections;
             const args = getArguments(programId, orgUnitId);
             return push(`/newEvent/${args}`);
-        });
+        }));

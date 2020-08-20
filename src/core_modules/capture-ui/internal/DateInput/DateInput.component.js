@@ -18,8 +18,10 @@ class DateInput extends React.Component<Props> {
     }
 
     render() {
+        // $FlowFixMe[prop-missing] automated comment
         const { onBlur, onChange, value, ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <TextInput
                 value={value || ''}
                 onBlur={this.handleBlur}

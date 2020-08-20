@@ -37,6 +37,7 @@ class D2BooleanField extends Component<Props> {
         const { allowMultiple, useRealBooleanValues, ...passOnProps } = this.props;
         return (
             <div>
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <SelectBoxes
                     options={this.options}
                     multiSelect={allowMultiple}

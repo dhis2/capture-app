@@ -39,6 +39,7 @@ export default () =>
                 const { inFocus } = this.state;
                 const { inFocus: inFocusProp, onSetFocus, onRemoveFocus, ...passOnProps } = this.props;
                 return (
+                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <InnerComponent
                         inFocus={inFocus}
                         onSetFocus={this.setFocus}

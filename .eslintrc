@@ -8,16 +8,18 @@
         }
     },
     "extends": [
-        "dhis2",
+        "airbnb",
         "plugin:flowtype/recommended"
     ],
     "plugins": [
         "flowtype"
     ],
     "env": {
-        "jest": true
+        "browser": true,
+        "jest": true,
     },
     "globals": {
+        "cy": true,
         "document": true,
         "window": true,
         "it": true,
@@ -25,13 +27,39 @@
         "appPackage": true
     },
     "rules": {
+        "indent": [2, 4],
+        "max-len": [
+            1, 120, 4, {
+                "ignoreComments": true,
+                "ignoreUrls": true,
+                "ignorePattern": "^\\s*var\\s.+=\\s*require\\s*\\("
+            }
+        ],
+        "complexity": [1, 5],
+        "no-prototype-builtins": "off",
+        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+        "comma-dangle": ["error", {
+            "arrays": "always-multiline",
+            "objects": "always-multiline",
+            "imports": "always-multiline",
+            "exports": "always-multiline",
+            "functions": "always-multiline"
+        }],
+        "no-multi-spaces": ["error", {"ignoreEOLComments": true}],
+        "no-return-assign": ["error", "except-parens"],
+        "react/jsx-indent": [2, 4],
+        "react/jsx-indent-props": [2, 4],
+        "react/prefer-es6-class": [1, "always"],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/no-unused-prop-types": [2, { "skipShapeProps": true }],
+        "react/forbid-prop-types": [0],
         "no-param-reassign": 0,
         "react/prop-types": 0,
         "import/prefer-default-export": 0,
         "react/prefer-stateless-function": 0,
         "no-unused-expressions": 0,
         "no-unused-vars": [
-            "warn",
+            "error",
             {
                 "vars": "all",
                 "args": "after-used",
@@ -43,7 +71,7 @@
         "import/no-extraneous-dependencies": [
             "error",
             {
-                "devDependencies": false,
+                "devDependencies": ["**/*.test.js"],
                 "optionalDependencies": false,
                 "peerDependencies": true
             }
@@ -85,7 +113,8 @@
         ]
     },
     "settings": {
-         "import/resolver": {
+        "import/resolver": {
+            "node": { "extensions": [".js", ".mjs"] },
             "webpack": {
                 "config": "config/eslint/webpack.config.js"
             }

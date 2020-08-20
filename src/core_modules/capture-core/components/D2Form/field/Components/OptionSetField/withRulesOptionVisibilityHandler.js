@@ -1,5 +1,4 @@
 // @flow
-
 import * as React from 'react';
 import { connect } from 'react-redux';
 import OptionGroup from '../../../../../metaData/OptionSet/OptionGroup';
@@ -51,6 +50,7 @@ const getCreateRulesOptionsVisibilityHandlerHOC =
                     // $FlowFixMe
                     .map(f => f.createFilter(rulesOptionsVisibility[f.key], optionGroups));
 
+                // $FlowFixMe[missing-annot] automated comment
                 return options.filter(option => filters.every(f => f(option)));
             }
 
@@ -73,6 +73,7 @@ const getCreateRulesOptionsVisibilityHandlerHOC =
                 const { options, ...passOnProps } = this.props;
 
                 return (
+                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <InnerComponent
                         options={this.filteredOptions}
                         {...passOnProps}
@@ -82,15 +83,16 @@ const getCreateRulesOptionsVisibilityHandlerHOC =
         };
 
 const makeMapStateToProps = () => {
-
     const getOptionsVisibility = makeGetOptionsVisibility();
 
     const mapStateToProps = (state: ReduxState, props: Object) => ({
         rulesOptionsVisibility: getOptionsVisibility(state, props),
     });
+    // $FlowFixMe[not-an-object] automated comment
     return mapStateToProps;
 };
 
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
+        // $FlowFixMe[missing-annot] automated comment
         connect(makeMapStateToProps, () => ({}))(getCreateRulesOptionsVisibilityHandlerHOC(InnerComponent));

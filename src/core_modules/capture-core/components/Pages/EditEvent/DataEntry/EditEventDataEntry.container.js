@@ -1,13 +1,13 @@
 // @flow
 import uuid from 'uuid/v4';
 import { connect } from 'react-redux';
+import { errorCreator } from 'capture-core-utils';
 import log from 'loglevel';
 import { batchActions } from 'redux-batched-actions';
 import EditEventDataEntry from './EditEventDataEntry.component';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
 import programCollection from '../../../../metaDataMemoryStores/programCollection/programCollection';
-import { errorCreator } from 'capture-core-utils';
 import {
     startAsyncUpdateFieldForEditEvent,
     startRunRulesOnUpdateForEditSingleEvent,
@@ -27,7 +27,8 @@ const getFormFoundation = (state: ReduxState) => {
         return null;
     }
 
-    // $FlowSuppress
+
+    // $FlowFixMe[prop-missing] automated comment
     const stage = program.stage;
     if (!stage) {
         log.error(errorCreator('stage not found for program')({ method: 'getFormFoundation' }));
@@ -95,6 +96,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): any => ({
 });
 
 // $FlowSuppress
+// $FlowFixMe[missing-annot] automated comment
 export default connect(mapStateToProps, mapDispatchToProps)(
     withLoadingIndicator()(withErrorMessageHandler()(EditEventDataEntry)),
 );

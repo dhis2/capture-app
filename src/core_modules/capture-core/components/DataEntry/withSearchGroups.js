@@ -58,6 +58,7 @@ const getSearchGroupsHOC = (
             const searchUids = searchGroups
                 .map(() => uuid());
 
+            // $FlowFixMe[missing-annot] automated comment
             const filterActions = searchGroups
                 .map((sg, index) => filterSearchGroupForCountSearch(
                     sg,
@@ -66,6 +67,7 @@ const getSearchGroupsHOC = (
                     searchContext,
                 ));
 
+            // $FlowFixMe[missing-annot] automated comment
             const filterActionsToBeExecuted = filterActions.map(fa => filterSearchGroupForCountSearchToBeExecuted(fa));
 
             return {
@@ -86,6 +88,7 @@ const getSearchGroupsHOC = (
             );
         }
 
+        // $FlowFixMe[missing-annot] automated comment
         handleAsyncFieldUpdate = (...args) => {
             const { onUpdateFormFieldAsync, onUpdateFormFieldInnerAsync } = this.props;
             onUpdateFormFieldInnerAsync(
@@ -106,6 +109,7 @@ const getSearchGroupsHOC = (
             } = this.props;
 
             return (
+                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <SearchGroupPostHOC
                     onUpdateFormField={this.handleFieldUpdate}
                     onUpdateFormFieldAsync={this.handleAsyncFieldUpdate}
@@ -179,7 +183,7 @@ export default (
     onGetSearchContext?: ?SearchContextGetter,
 ) =>
     (InnerComponent: React.ComponentType<any>) =>
-        // $FlowSuppress
+        // $FlowFixMe[missing-annot] automated comment
         connect(
             mapStateToProps, mapDispatchToProps)(
             getSearchGroupsHOC(InnerComponent, onGetSearchGroups, onGetSearchContext));
