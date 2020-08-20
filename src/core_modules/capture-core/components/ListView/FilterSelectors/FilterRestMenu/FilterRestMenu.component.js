@@ -13,7 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import i18n from '@dhis2/d2-i18n';
 import Button from '../../../Buttons/Button.component';
 
-import type { Column } from '../../ListWrapper/EventsListWrapper.component';
+import type { Column } from '../../types';
 
 const getStyles = (theme: Theme) => ({
     icon: {

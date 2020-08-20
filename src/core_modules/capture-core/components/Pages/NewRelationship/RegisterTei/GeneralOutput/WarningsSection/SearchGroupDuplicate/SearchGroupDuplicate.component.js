@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { Button } from '../../../../../../Buttons';
 import i18n from '@dhis2/d2-i18n';
+import { Button } from '../../../../../../Buttons';
 import WarningMessageCreator from './WarningMessageCreator.container';
 import ReviewDialog from './ReviewDialog.component';
 

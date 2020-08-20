@@ -1,7 +1,5 @@
 // @flow
-import elementTypes from '../metaData/DataElement/elementTypes';
-import { convertValue as convertToServerValue } from '../converters/clientToServer';
-import { convertValue as convertToClientValue } from '../converters/serverToClient';
+import elementTypes from '../../metaData/DataElement/elementTypes';
 import eventStatusElement from '../eventStatusElement';
 
 type ConverterFn = (type: $Values<typeof elementTypes>, value: any) => any;
@@ -30,9 +28,12 @@ function getConvertedValue(valueToConvert: any, key: string, onConvertValue: Con
     case compareKeys.eventDate:
     case compareKeys.dueDate:
     case compareKeys.completedDate:
+        // $FlowFixMe[prop-missing] automated comment
         convertedValue = onConvertValue(valueToConvert, elementTypes.DATE);
         break;
     case compareKeys.status:
+        // $FlowFixMe[extra-arg] automated comment
+        // $FlowFixMe[prop-missing] automated comment
         convertedValue = onConvertValue(valueToConvert, elementTypes.TEXT, eventStatusElement);
         break;
     case compareKeys.assignee:
@@ -56,7 +57,7 @@ function getCalculatedCompareKeys(compareKeysMapFromDefault: InputCompareKeys) {
         status: compareKeysMapFromDefault.status || 'status',
         assignee: compareKeysMapFromDefault.assignee || 'assignee',
     };
-};
+}
 
 export function convertMainEvent(
     event: Object,
@@ -73,18 +74,4 @@ export function convertMainEvent(
             accConvertedEvent[outputKey] = convertedValue;
             return accConvertedEvent;
         }, {});
-}
-
-const mapEventClientKeyToServerKey = {
-    eventId: 'event',
-    programId: 'program',
-    programStageId: 'programStage',
-    orgUnitId: 'orgUnit',
-    trackedEntityInstanceId: 'trackedEntityInstance',
-    enrollmentId: 'enrollment',
-    assignee: 'assignedUser',
-};
-
-export function convertMainEventClientToServerWithKeysMap(event: Object) {
-    return convertMainEvent(event, convertToServerValue, mapEventClientKeyToServerKey);
 }

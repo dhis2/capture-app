@@ -38,6 +38,7 @@ const Assignee = (props: Props) => {
             <div
                 className={classes.field}
             >
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <Username
                     inputPlaceholderText={i18n.t('Search for user')}
                     {...passOnProps}

@@ -17,6 +17,7 @@ export function convertAssignee(filter: AssigneeFilterData) {
     return (
         filter.assignedUserMode !== assigneeFilterModes.PROVIDED ?
             getText(filter.assignedUserMode) :
+            // $FlowFixMe[incompatible-use] automated comment
             filter.assignedUser.name
     );
 }

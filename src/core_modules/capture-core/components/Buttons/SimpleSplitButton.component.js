@@ -15,6 +15,7 @@ type Props = {
 const SimpleSplitButton = (props: Props) => {
     const { dropDownItems, ...passOnProps } = props;
     return (
+        // $FlowFixMe[cannot-spread-inexact] automated comment
         <SplitButton
             component={SimpleSplitButton.getComponent(dropDownItems)}
             {...passOnProps}

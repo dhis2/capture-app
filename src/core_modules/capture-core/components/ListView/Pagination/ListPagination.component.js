@@ -31,6 +31,7 @@ class Index extends React.Component<Props> {
     render() {
         const { ...passOnProps } = this.props;
         return (
+            // $FlowFixMe[prop-missing] automated comment
             <PaginationWrapped
                 {...passOnProps}
                 onChangePage={this.handleChangePage}

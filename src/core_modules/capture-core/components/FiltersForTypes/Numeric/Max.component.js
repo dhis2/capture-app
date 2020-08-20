@@ -32,6 +32,7 @@ class MaxNumericFilter extends Component<Props> {
         const { error, onBlur, onEnterKey, textFieldRef, errorClass, ...passOnProps } = this.props;
         return (
             <div>
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <TextField
                     ref={textFieldRef}
                     onKeyPress={this.handleKeyPress}

@@ -1,85 +1,14 @@
 // @flow
 import { createReducerDescription } from '../../trackerRedux/trackerReducer';
-import { actionTypes as selectorActionTypes } from '../../components/Pages/MainPage/tempSelector.actions';
 import {
     dataEntryActionTypes as newEventDataEntryActionTypes,
-    dataEntryUrlActionTypes as newEventdataEntryUrlActionTypes,
     dataEntryWrapperActionTypes as newEventDataEntryWrapperActionTypes,
-    selectorActionTypes as newEventSelectorActionTypes,
     newRelationshipActionTypes as newEventNewRelationshipActionTypes,
 } from '../../components/Pages/NewEvent';
-import {
-    actionTypes as editEventPageActionTypes,
-} from '../../components/Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
-import {
-    actionTypes as viewEventPageActionTypes,
-} from '../../components/Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
-import {
-    actionTypes as mainPageSelectorActionTypes,
-} from '../../components/Pages/MainPage/MainPageSelector/MainPageSelector.actions';
 
 export const newEventPageDesc = createReducerDescription({
-    [newEventdataEntryUrlActionTypes.UPDATE_SELECTIONS_FROM_URL]: () => ({
-        isLoading: true,
-    }),
-    [newEventdataEntryUrlActionTypes.ERROR_RETRIEVING_ORG_UNIT_BASED_ON_URL]: (state, action) => {
-        const newState = { ...state };
-        newState.isLoading = false;
-        newState.selectionsError = action.payload;
-        return newState;
-    },
-    [newEventdataEntryUrlActionTypes.INVALID_ORG_UNIT_FROM_URL]: (state, action) => {
-        const newState = { ...state };
-        newState.isLoading = false;
-        newState.selectionsError = action.payload;
-        return newState;
-    },
-    [newEventdataEntryUrlActionTypes.INVALID_SELECTIONS_FROM_URL]: (state, action) => {
-        const newState = { ...state };
-        newState.isLoading = false;
-        newState.selectionsError = action.payload;
-        return newState;
-    },
-    [newEventdataEntryUrlActionTypes.VALID_SELECTIONS_FROM_URL]: (state) => {
-        const newState = { ...state };
-        newState.isLoading = false;
-        newState.selectionsError = null;
-        newState.dataEntryIsLoading = true;
-        return newState;
-    },
-    [selectorActionTypes.OPEN_NEW_EVENT_PAGE]: (state) => {
-        const newState = { ...state };
-        newState.dataEntryIsLoading = true;
-        newState.selectionsError = null;
-        newState.showAddRelationship = false;
-        return newState;
-    },
-    [editEventPageActionTypes.OPEN_NEW_EVENT]: (state) => {
-        const newState = { ...state };
-        newState.dataEntryIsLoading = true;
-        newState.showAddRelationship = false;
-        return newState;
-    },
-    [viewEventPageActionTypes.OPEN_NEW_EVENT]: (state) => {
-        const newState = { ...state };
-        newState.dataEntryIsLoading = true;
-        newState.showAddRelationship = false;
-        return newState;
-    },
-    [mainPageSelectorActionTypes.OPEN_NEW_EVENT]: (state) => {
-        const newState = { ...state };
-        newState.dataEntryIsLoading = true;
-        newState.showAddRelationship = false;
-        return newState;
-    },
-    [newEventDataEntryActionTypes.NEW_EVENT_IN_DATAENTRY_OPENING_CANCEL]: (state) => {
-        const newState = { ...state };
-        newState.dataEntryIsLoading = false;
-        return newState;
-    },
     [newEventDataEntryActionTypes.OPEN_NEW_EVENT_IN_DATA_ENTRY]: (state) => {
         const newState = { ...state };
-        newState.dataEntryIsLoading = false;
         newState.showAddRelationship = false;
         return newState;
     },
@@ -114,8 +43,4 @@ export const newEventPageDesc = createReducerDescription({
         newState.saveTypes = action.payload.saveTypes;
         return newState;
     },
-    [newEventSelectorActionTypes.SET_ORG_UNIT]: state => ({
-        ...state,
-        dataEntryIsLoading: true,
-    }),
 }, 'newEventPage');

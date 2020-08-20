@@ -56,6 +56,7 @@ const getRowsPerPageSelector = (InnerComponent: React.ComponentType<any>) =>
         render = () => {
             const { ...passOnProps } = this.props;
             return (
+                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     rowsCountSelector={this.renderSelectorElement()}
                     {...passOnProps}

@@ -46,7 +46,7 @@ const makeMapStateToProps = () => {
             rowIdKey: 'eventId',
         };
     };
-
+    // $FlowFixMe
     return mapStateToProps;
 };
 
@@ -70,6 +70,7 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
     },
 });
 
+// $FlowFixMe[missing-annot] automated comment
 export const TempListView = connect(makeMapStateToProps, mapDispatchToProps)(
     withLoadingIndicator(() => ({ padding: 10 }))(
         withErrorMessageHandler()(

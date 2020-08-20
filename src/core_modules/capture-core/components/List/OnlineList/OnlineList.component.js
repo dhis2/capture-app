@@ -4,7 +4,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import classNames from 'classnames';
 import { darken, fade, lighten } from '@material-ui/core/styles/colorManipulator';
-import { withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import {
     Table,
     Head,
@@ -17,7 +17,7 @@ import {
 } from 'capture-ui';
 import SortLabelWrapper from '../../DataTable/SortLabelWrapper.component';
 import { dataElementTypes as elementTypes, OptionSet } from '../../../metaData';
-import LoadingMask from '../../LoadingMasks/LoadingMask.component';
+import { LoadingMask } from '../../LoadingMasks';
 
 
 const getStyles = (theme: Theme) => ({
@@ -103,25 +103,33 @@ type Props = {
 
 
 class Index extends React.Component<Props> {
-    static typesWithAscendingInitialDirection = [
-        elementTypes.TEXT,
-        elementTypes.LONG_TEXT,
-        elementTypes.USERNAME,
-        'ASSIGNEE',
-    ];
-
-    static typesWithRightPlacement = [
-        elementTypes.NUMBER,
-        elementTypes.INTEGER,
-        elementTypes.INTEGER_POSITIVE,
-        elementTypes.INTEGER_NEGATIVE,
-        elementTypes.INTEGER_ZERO_OR_POSITIVE,
-    ];
     columnHeaderInstances: Array<HTMLElement>;
     constructor(props: Props) {
         super(props);
         this.columnHeaderInstances = [];
     }
+    static typesWithAscendingInitialDirection = [
+        // $FlowFixMe[prop-missing] automated comment
+        elementTypes.TEXT,
+        // $FlowFixMe[prop-missing] automated comment
+        elementTypes.LONG_TEXT,
+        // $FlowFixMe[prop-missing] automated comment
+        elementTypes.USERNAME,
+        'ASSIGNEE',
+    ];
+
+    static typesWithRightPlacement = [
+        // $FlowFixMe[prop-missing] automated comment
+        elementTypes.NUMBER,
+        // $FlowFixMe[prop-missing] automated comment
+        elementTypes.INTEGER,
+        // $FlowFixMe[prop-missing] automated comment
+        elementTypes.INTEGER_POSITIVE,
+        // $FlowFixMe[prop-missing] automated comment
+        elementTypes.INTEGER_NEGATIVE,
+        // $FlowFixMe[prop-missing] automated comment
+        elementTypes.INTEGER_ZERO_OR_POSITIVE,
+    ];
     getSortHandler = (id: string) => (direction: string) => {
         this.props.onSort(this.props.listId, id, direction);
     }
@@ -285,11 +293,14 @@ class Index extends React.Component<Props> {
             >
                 <Table
                     className={classes.table}
+                    data-test="dhis2-capture-event-list-table"
                 >
                     <Head>
                         {this.renderHeaderRow(visibleColumns)}
                     </Head>
-                    <Body>
+                    <Body
+                        data-test="dhis2-capture-event-list-body"
+                    >
                         {this.renderBody(visibleColumns)}
                     </Body>
                 </Table>

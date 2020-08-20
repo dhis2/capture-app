@@ -43,7 +43,7 @@ export function convertStatusOut(dataEntryValue: string, prevValue: string) {
     return prevValue;
 }
 
-export function convertNoteOut(dataEntryValue: string, prevValue: string) {
+export function convertNoteOut(dataEntryValue: string) {
     return dataEntryValue ? [{ value: dataEntryValue }] : [];
 }
 

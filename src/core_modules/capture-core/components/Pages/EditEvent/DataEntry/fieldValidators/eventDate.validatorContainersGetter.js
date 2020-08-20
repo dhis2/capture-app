@@ -15,7 +15,7 @@ const getValidatorContainers = () => {
     const validatorContainers = [
         {
             validator: hasValue,
-            message: i18n.t('A value is required'), 
+            message: i18n.t('A value is required'),
         },
         {
             validator: preValidateDate,

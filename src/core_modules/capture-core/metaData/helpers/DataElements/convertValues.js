@@ -2,8 +2,8 @@
 import log from 'loglevel';
 import isArray from 'd2-utilizr/lib/isArray';
 import isObject from 'd2-utilizr/lib/isObject';
-import { DataElement } from '../../DataElement';
 import { errorCreator } from 'capture-core-utils';
+import { DataElement } from '../../DataElement';
 import type { ConvertFn } from '../../DataElement/DataElement';
 
 export type ValuesType = { [key: string]: any };
@@ -31,7 +31,7 @@ function convertArrayValues(
     elementsById: { [id: string]: DataElement },
     onConvert: ConvertFn,
 ) {
-    // $FlowSuppress
+    // $FlowFixMe[prop-missing] automated comment
     return arrayOfValues.map((values: ValuesType) => this.convertObjectValues(values, elementsById, onConvert));
 }
 
@@ -43,10 +43,12 @@ export default function convertValues<T: ?ValuesType | Array<ValuesType>>(
     if (values) {
         const elementsById = getElementsById(dataElements);
         if (isArray(values)) {
-            // $FlowSuppress
+            // $FlowFixMe[incompatible-return] automated comment
+            // $FlowFixMe[incompatible-call] automated comment
             return convertArrayValues(values, elementsById, onConvert);
         } else if (isObject(values)) {
-            // $FlowSuppress
+            // $FlowFixMe[incompatible-return] automated comment
+            // $FlowFixMe[incompatible-call] automated comment
             return convertObjectValues(values, elementsById, onConvert);
         }
 

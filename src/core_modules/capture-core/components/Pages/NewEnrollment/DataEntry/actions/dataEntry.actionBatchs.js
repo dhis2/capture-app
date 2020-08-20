@@ -2,6 +2,7 @@
 import uuid from 'uuid/v4';
 import { batchActions } from 'redux-batched-actions';
 import { startRunRulesPostUpdateField } from '../../../../DataEntry';
+// $FlowFixMe[missing-export] automated comment
 import { startRunRulesOnUpdateForNewEnrollment } from './dataEntry.actions';
 
 
@@ -23,6 +24,7 @@ export const updateFieldBatch = (
         innerAction,
         ...filterActionsToBeExecuted,
         startRunRulesPostUpdateField(dataEntryId, itemId, uid),
+        // todo this is undefined (lgtm)
         startRunRulesOnUpdateForNewEnrollment(innerAction.payload, filterActions, uid),
     ], batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH);
 };
@@ -43,6 +45,7 @@ export const asyncUpdateSuccessBatch = (
         innerAction,
         ...filterActionsToBeExecuted,
         startRunRulesPostUpdateField(dataEntryId, itemId, uid),
+        // todo this is undefined (lgtm)
         startRunRulesOnUpdateForNewEnrollment({ ...innerAction.payload, dataEntryId, itemId }, filterActions, uid),
     ], batchActionTypes.UPDATE_FIELD_NEW_ENROLLMENT_ACTION_BATCH);
 };

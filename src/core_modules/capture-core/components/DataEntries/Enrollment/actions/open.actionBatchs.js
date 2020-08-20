@@ -17,11 +17,13 @@ const dataEntryPropsToInclude: DataEntryPropsToInclude = [
     {
         id: 'enrollmentDate',
         type: 'DATE',
+        // $FlowFixMe[incompatible-call] automated comment
         validatorContainers: getEnrollmentDateValidatorContainer(),
     },
     {
         id: 'incidentDate',
         type: 'DATE',
+        // $FlowFixMe[incompatible-call] automated comment
         validatorContainers: getIncidentDateValidatorContainer(),
     },
     {

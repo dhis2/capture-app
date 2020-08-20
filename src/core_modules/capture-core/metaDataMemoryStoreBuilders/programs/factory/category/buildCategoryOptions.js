@@ -32,7 +32,8 @@ async function getCategoryOptionsThroughCursor(
         project,
         onIsAborted,
         onIDBGetRequest: source => source
-            .index('category')
+            .index('categoryId')
+            // $FlowFixMe[prop-missing] automated comment
             .openCursor(IDBKeyRange.only(categoryId)),
     });
     return mappedOptions;

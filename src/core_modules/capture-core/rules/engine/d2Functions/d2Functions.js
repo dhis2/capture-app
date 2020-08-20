@@ -107,7 +107,7 @@ export const d2Functions = (dateUtils, variableService, variablesHash) => ({
     'd2:countIfZeroPos': {
         name: 'd2:countIfZeroPos',
         parameters: 1,
-        dhisFunction: (params) => {},
+        dhisFunction: () => {},
     },
     'd2:countIfValue': {
         name: 'd2:countIfValue',

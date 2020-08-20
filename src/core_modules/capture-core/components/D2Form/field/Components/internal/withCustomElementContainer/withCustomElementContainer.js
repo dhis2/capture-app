@@ -12,6 +12,7 @@ type Props = {|
 type OnGetContainerClass = (props: Props) => ?string;
 
 export default (onGetContainerClass?: OnGetContainerClass) =>
+    // $FlowFixMe[prop-missing] automated comment
     (InnerComponent: React.ComponentType<any>) =>
         class CustomElementContainerHOC extends React.Component<Props> {
             defaultClass: ?string;

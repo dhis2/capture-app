@@ -76,6 +76,7 @@ const EventListConfigMenuContent = (props: Props) => {
     const getSaveItem = React.useCallback(() => ({
         key: 'save',
         clickHandler: () => {
+            // $FlowFixMe[incompatible-use] automated comment
             templateMaintenanceInstance.current.updateTemplateHandler();
         },
         element: i18n.t('Update view'),
@@ -177,6 +178,7 @@ const EventListConfigMenuContent = (props: Props) => {
                 customMenuContents={customMenuContents}
             />
             <TemplateMaintenance
+                // $FlowFixMe[incompatible-type] automated comment
                 ref={templateMaintenanceInstance}
                 listId={listId}
                 onClose={closeHandler}

@@ -158,6 +158,7 @@ export default (hocParams?: ?HOCParams) => (InnerComponent: React.ComponentType<
         const { label, required, icon, ...passOnProps } = props;
         const { classes, ...propsWithoutClasses } = props;
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <LabelHOCWithStyles
                 label={(<LabelWithStyles {...propsWithoutClasses} />)}
                 {...passOnProps}

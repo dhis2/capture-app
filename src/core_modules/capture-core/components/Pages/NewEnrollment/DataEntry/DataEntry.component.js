@@ -156,6 +156,7 @@ class NewEnrollmentDataEntry extends Component<Props> {
         return (
             <div>
                 <div>
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <ConfiguredDataEntry
                         id={'enrollment'}
                         onUpdateFormField={onUpdateField}
@@ -191,5 +192,4 @@ class NewEnrollmentDataEntry extends Component<Props> {
     }
 }
 
-// $FlowFixMe
 export default withStyles(getStyles)(withTheme()(NewEnrollmentDataEntry));

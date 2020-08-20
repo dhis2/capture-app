@@ -6,6 +6,7 @@ import programCollection from '../../../../metaDataMemoryStores/programCollectio
 
 const programIdSelector = state => state.currentSelections.programId;
 
+// $FlowFixMe[missing-annot] automated comment
 export const makeFormFoundationSelector = () => createSelector(
     programIdSelector,
     (programId: string) => {
@@ -15,7 +16,8 @@ export const makeFormFoundationSelector = () => createSelector(
             return null;
         }
 
-        // $FlowSuppress
+
+        // $FlowFixMe[prop-missing] automated comment
         const stage = program.stage;
         if (!stage) {
             log.error(errorCreator('stage not found for program')({ method: 'getFormFoundation' }));
@@ -26,6 +28,7 @@ export const makeFormFoundationSelector = () => createSelector(
     },
 );
 
+// $FlowFixMe[missing-annot] automated comment
 export const makeStageSelector = () => createSelector(
     programIdSelector,
     (programId: string) => {
@@ -35,7 +38,8 @@ export const makeStageSelector = () => createSelector(
             return null;
         }
 
-        // $FlowSuppress
+
+        // $FlowFixMe[prop-missing] automated comment
         const stage = program.stage;
         if (!stage) {
             log.error(errorCreator('stage not found for program')({ method: 'getFormFoundation' }));

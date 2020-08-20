@@ -36,6 +36,7 @@ const NewEventsList = (props: Props) => {
             >
                 {`${eventsAdded} ${i18n.t('events added')}`}
             </div>
+            {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
             <OfflineEventsList
                 listId={listId}
                 noItemsText={i18n.t('No events added')}

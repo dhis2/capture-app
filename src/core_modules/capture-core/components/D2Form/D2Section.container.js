@@ -13,4 +13,5 @@ const mapStateToProps = (state: Object, props: { sectionMetaData: MetaDataSectio
 const mapDispatchToProps = () => ({});
 
 // $FlowSuppress
+// $FlowFixMe[missing-annot] automated comment
 export default connect(mapStateToProps, mapDispatchToProps)(D2Section);

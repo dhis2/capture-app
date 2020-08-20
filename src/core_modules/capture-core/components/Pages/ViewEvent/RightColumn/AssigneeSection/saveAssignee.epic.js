@@ -1,14 +1,16 @@
 // @flow
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
 import { actionTypes, saveAssignee } from './assigneeSection.actions';
 import { getEventProgramThrowIfNotFound } from '../../../../../metaData';
 import { convertValue as convertToServerValue } from '../../../../../converters/clientToServer';
 import { convertMainEventClientToServer } from '../../../../../events/mainConverters';
 
 export const saveAssigneeEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
-    action$.ofType(actionTypes.VIEW_EVENT_ASSIGNEE_SET)
-        .map(() => {
-            const state = store.getState();
+    action$.pipe(
+        ofType(actionTypes.VIEW_EVENT_ASSIGNEE_SET),
+        map(() => {
+            const state = store.value;
             const eventId = state.viewEventPage.eventId;
             const eventContainer = state.viewEventPage.loadedValues.eventContainer;
             const { event: clientMainValues, values: clientValues } = eventContainer;
@@ -30,4 +32,4 @@ export const saveAssigneeEpic = (action$: InputObservable, store: ReduxStore) =>
             const currentSelectionSet = state.currentSelections;
 
             return saveAssignee(eventId, serverData, currentSelectionSet);
-        });
+        }));

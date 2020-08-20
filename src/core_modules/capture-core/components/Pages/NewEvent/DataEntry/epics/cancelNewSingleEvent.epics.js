@@ -1,5 +1,7 @@
 // @flow
 import { push } from 'connected-react-router';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
 import {
     actionTypes as newEventDataEntryActionTypes,
     cancelNewEventNoWorkingListUpdateNeeded,
@@ -10,10 +12,10 @@ import {
 import isSelectionsEqual from '../../../../App/isSelectionsEqual';
 
 export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
-    action$.ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE)
-        .map(() => {
-            const state = store.getState();
+    action$.pipe(
+        ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
+        map(() => {
+            const state = store.value;
             if (!state.offline.online) {
                 return cancelNewEventNoWorkingListUpdateNeeded();
             }
@@ -35,14 +37,14 @@ export const cancelNewEventEpic = (action$: InputObservable, store: ReduxStore) 
                 return cancelNewEventUpdateWorkingList();
             }
             return cancelNewEventNoWorkingListUpdateNeeded();
-        });
+        }));
 
 export const cancelNewEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
-    action$.ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE)
-        .map(() => {
-            const state = store.getState();
+    action$.pipe(
+        ofType(newEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
+        map(() => {
+            const state = store.value;
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
             return push(`/programId=${programId}&orgUnitId=${orgUnitId}`);
-        });
+        }));

@@ -1,5 +1,5 @@
 // @flow
-import { type AssigneeFilterData } from '../../../../../../ListView';
+import type { AssigneeFilterData } from '../../../../../../ListView';
 
 export function convertAssignee(
     sourceValue: AssigneeFilterData,

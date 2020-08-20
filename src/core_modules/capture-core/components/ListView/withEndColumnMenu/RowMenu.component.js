@@ -89,11 +89,11 @@ class Index extends React.Component<Props, State> {
     renderMenuItems = () => {
         const { classes } = this.props;
         return (
-            <MenuList role="menu" className={classes.menuList}>
+            <MenuList role="menu" className={classes.menuList} data-test="dhis2-capture-view-event-button">
                 <MenuItem onClick={this.handleView}>
                     {i18n.t('View event info')}
                 </MenuItem>
-                <MenuItem onClick={this.handleDelete}>
+                <MenuItem onClick={this.handleDelete} data-test="dhis2-capture-delete-event-button">
                     <Delete className={classes.deleteIcon} />
                     {i18n.t('Delete event')}
                 </MenuItem>
@@ -114,6 +114,7 @@ class Index extends React.Component<Props, State> {
                                     ref={this.handleReferenceInstanceRetrieved}
                                 >
                                     <IconButton
+                                        data-test="dhis2-capture-event-content-menu"
                                         onClick={this.toggleMenu}
                                     >
                                         <MoreHoriz />

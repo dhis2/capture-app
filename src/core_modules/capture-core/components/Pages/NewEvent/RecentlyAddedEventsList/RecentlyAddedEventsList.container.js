@@ -7,9 +7,10 @@ const mapStateToProps = (state: ReduxState) => ({
     eventsValues: state.recentlyAddedEventsValues,
 });
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+const mapDispatchToProps = () => ({
     onRowClick: () => {
     },
 });
 
+// $FlowFixMe[missing-annot] automated comment
 export default connect(mapStateToProps, mapDispatchToProps)(NewEventsList);

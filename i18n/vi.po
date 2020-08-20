@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-03-09T19:35:56.143Z\n"
+"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Mai Nguyen <thanhmai.jica@gmail.com>, 2020\n"
 "Language-Team: Vietnamese (https://www.transifex.com/hisp-uio/teams/100509/vi/)\n"
@@ -17,8 +17,19 @@ msgstr ""
 "Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid "Please provide a valid date"
-msgstr "Xin vui lòng cung cấp ngày đúng"
+msgid "Choose one or more dates..."
+msgstr "Chọn một hoặc nhiều ngày..."
+
+msgid "Choose a date..."
+msgstr "Chọn một ngày..."
+
+msgid "Today"
+msgstr "Hôm Nay"
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
+msgstr ""
 
 msgid "Columns to show in table"
 msgstr "Cột hiển thị trong bảng"
@@ -48,6 +59,12 @@ msgid "Please provide zero or a positive integer"
 msgstr ""
 
 msgid "Please provide a negative integer"
+msgstr ""
+
+msgid "Please provide a valid date"
+msgstr "Xin vui lòng cung cấp ngày đúng"
+
+msgid "A date in the future is not allowed"
 msgstr ""
 
 msgid "Please provide a valid date and time"
@@ -204,9 +221,6 @@ msgstr "Từ"
 msgid "To"
 msgstr "Đến"
 
-msgid "Today"
-msgstr "Hôm Nay"
-
 msgid "This week"
 msgstr "Tuần này"
 
@@ -285,11 +299,65 @@ msgstr "Không có kết quả"
 msgid "suggestions could not be retrieved"
 msgstr ""
 
-msgid "search for username"
-msgstr ""
-
 msgid "No items to display"
 msgstr "Không có mục để hiển thị"
+
+msgid "Could not get organisation unit"
+msgstr "Không thể lấy đơn vị"
+
+msgid "Program doesn't exist"
+msgstr "Chương trình không tồn tại"
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr ""
+
+msgid "New {{typeName}}"
+msgstr ""
+
+msgid "New"
+msgstr "Mới"
+
+msgid "Start again"
+msgstr "Khởi đầu lại"
+
+msgid "Find"
+msgstr "Tìm kiếm"
+
+msgid "Selected registering unit"
+msgstr "Đơn vị đăng ký đã chọn"
+
+msgid "Start Again"
+msgstr "Khởi Đầu Lại"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Accept"
+msgstr "Chấp nhận"
+
+msgid "Registering Organisation Unit"
+msgstr "Đơn Vị Đăng Ký"
+
+msgid "Select"
+msgstr "Chọn"
+
+msgid "Selected Program"
+msgstr "Chương Trình Đã Chọn"
+
+msgid "Some programs are being filtered."
+msgstr "Chương trình đang được lọc"
+
+msgid "Show all"
+msgstr "Hiển thị tất cả"
+
+msgid "Program"
+msgstr "Chương trình"
+
+msgid "Select program"
+msgstr "Chọn Chương Trình"
+
+msgid "No programs available."
+msgstr "Không có chương trình"
 
 msgid "Online"
 msgstr "Trực tuyến"
@@ -438,15 +506,6 @@ msgstr "Hoạt động"
 msgid "Completed"
 msgstr "Hoàn tất"
 
-msgid "Could not get organisation unit"
-msgstr "Không thể lấy đơn vị"
-
-msgid "Program doesn't exist"
-msgstr "Chương trình không tồn tại"
-
-msgid "Selected program is invalid for registering unit"
-msgstr "Chương trình đã chọn không đúng để đăng ký đơn vị"
-
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
@@ -474,9 +533,6 @@ msgstr ""
 msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
-msgstr ""
-
-msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "Assigned user"
@@ -593,15 +649,6 @@ msgstr "Ẩn"
 msgid "Save as new {{tetName}}"
 msgstr ""
 
-msgid "Some programs are being filtered."
-msgstr "Chương trình đang được lọc"
-
-msgid "Show all"
-msgstr "Hiển thị tất cả"
-
-msgid "Program"
-msgstr "Chương trình"
-
 msgid "Organisation Unit"
 msgstr "Đơn vị"
 
@@ -654,45 +701,6 @@ msgstr ""
 
 msgid "Feedbacks"
 msgstr ""
-
-msgid "New {{typeName}}"
-msgstr ""
-
-msgid "New"
-msgstr "Mới"
-
-msgid "Start again"
-msgstr "Khởi đầu lại"
-
-msgid "Find"
-msgstr "Tìm kiếm"
-
-msgid "Selected registering unit"
-msgstr "Đơn vị đăng ký đã chọn"
-
-msgid "Start Again"
-msgstr "Khởi Đầu Lại"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
-
-msgid "Accept"
-msgstr "Chấp nhận"
-
-msgid "Registering Organisation Unit"
-msgstr "Đơn Vị Đăng Ký"
-
-msgid "Select"
-msgstr "Chọn"
-
-msgid "Selected Program"
-msgstr "Chương Trình Đã Chọn"
-
-msgid "Select program"
-msgstr "Chọn Chương Trình"
-
-msgid "No programs available."
-msgstr "Không có chương trình"
 
 msgid "You dont have access to delete this relationship"
 msgstr ""
@@ -792,17 +800,6 @@ msgid ""
 " the Capture App only supports running one version concurrently (in the same"
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
-msgstr ""
-
-msgid "Choose one or more dates..."
-msgstr "Chọn một hoặc nhiều ngày..."
-
-msgid "Choose a date..."
-msgstr "Chọn một ngày..."
-
-msgid ""
-"A possible reason for this is that the browser or mode (e.g. privacy mode) "
-"is not supported. See log for details."
 msgstr ""
 
 msgid "Compatibility mode"

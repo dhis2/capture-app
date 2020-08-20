@@ -10,20 +10,7 @@ import { DataElement } from '../metaData';
 const GET_SUBVALUE_ERROR = 'Could not get subvalue';
 
 const subValueGetterByElementType = {
-    /* [elementTypeKeys.FILE_RESOURCE]: (value: any, teiId: string, metaElementId: string) => {
-        const baseUrl = config.baseUrl;
-        return getApi().get(`fileResources/${value}`)
-            .then(res =>
-                ({
-                    name: res.name,
-                    value: res.id,
-                    url: `${baseUrl}/trackedEntityInstances/files?dataElementUid=${metaElementId}&eventUid=${eventId}`,
-                }))
-            .catch((error) => {
-                log.warn(errorCreator(GET_SUBVALUE_ERROR)({ value, eventId, metaElementId, error }));
-                return null;
-            });
-    }, */
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypeKeys.IMAGE]: (value: any, teiId: string, attributeId: string) => {
         const baseUrl = config.baseUrl;
         return getApi().get(`fileResources/${value}`)
@@ -50,7 +37,7 @@ export async function getSubValues(teiId: string, attributes: Array<DataElement>
 
     return Object.keys(values).reduce(async (accValuesPromise, attributeId) => {
         const accValues = await accValuesPromise;
-        // $FlowSuppress
+
         const value = values[attributeId];
         const metaElement = attributesById[attributeId];
         if (isDefined(value) && metaElement) {

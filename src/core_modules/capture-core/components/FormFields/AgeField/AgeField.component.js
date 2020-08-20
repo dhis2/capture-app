@@ -94,14 +94,18 @@ class D2AgeField extends Component<Props> {
       let years = '';
       let months = '';
       let days = '';
+      // $FlowFixMe[prop-missing] automated comment
       if (props.value) {
+          // $FlowFixMe[incompatible-call] automated comment
           const v = calculatedValues(new Date(props.value));
           years = v.years;
           months = v.months;
           days = v.days;
       }
 
+      // $FlowFixMe[incompatible-type] automated comment
       this.state = {
+          // $FlowFixMe[prop-missing] automated comment
           date: props.value,
           years,
           months,
@@ -110,10 +114,13 @@ class D2AgeField extends Component<Props> {
   }
 
   emitChange = () => {
+      // $FlowFixMe[incompatible-call] automated comment
+      // $FlowFixMe[incompatible-use] automated comment
       this.props.onBlur(this.state.date);
   }
 
   updateDate = () => {
+      // $FlowFixMe[incompatible-use] automated comment
       let { years, months, days } = this.state;
 
       years = years === '' ? 0 : years;
@@ -129,21 +136,30 @@ class D2AgeField extends Component<Props> {
       d.subtract(months, 'months');
       d.subtract(days, 'days');
 
+      // $FlowFixMe[incompatible-call] automated comment
       this.setState({
           ...calculatedValues(d.toDate()),
           date: d.format('MM/DD/YYYY'),
       }, this.emitChange);
   }
 
+  // $FlowFixMe[missing-annot] automated comment
+  // $FlowFixMe[incompatible-call] automated comment
   onYearsChange = evt => this.setState({ years: evt.target.value })
+  // $FlowFixMe[missing-annot] automated comment
+  // $FlowFixMe[incompatible-call] automated comment
   onMonthsChange = evt => this.setState({ months: evt.target.value })
+  // $FlowFixMe[missing-annot] automated comment
+  // $FlowFixMe[incompatible-call] automated comment
   onDaysChange = evt => this.setState({ days: evt.target.value })
 
+  // $FlowFixMe[missing-annot] automated comment
   handleCalendarBlur = (date) => {
       if (!date) {
           return;
       }
 
+      // $FlowFixMe[incompatible-call] automated comment
       this.setState({
           date,
           ...calculatedValues(new Date(date)),
@@ -151,6 +167,7 @@ class D2AgeField extends Component<Props> {
   }
 
   onClear = () => {
+      // $FlowFixMe[incompatible-call] automated comment
       this.setState({
           date: '',
           years: '',
@@ -162,10 +179,12 @@ class D2AgeField extends Component<Props> {
   render() {
       return (
           <div>
+              {/* $FlowFixMe[prop-missing] automated comment */}
               <div style={labelStyle}>{this.props.label}</div>
               <div style={containerStyle}>
                   <div style={datePickerStyle}>
                       <D2Date
+                          // $FlowFixMe[incompatible-use] automated comment
                           value={this.state.date}
                           onBlur={this.handleCalendarBlur}
                           placeholder={i18n.t('mm/dd/yyyy')}
@@ -177,6 +196,7 @@ class D2AgeField extends Component<Props> {
                       style={textFieldStyle}
                       type="text"
                       label={i18n.t('Years')}
+                      // $FlowFixMe[incompatible-use] automated comment
                       value={this.state.years}
                       onBlur={this.updateDate}
                       onChange={this.onYearsChange}
@@ -185,6 +205,7 @@ class D2AgeField extends Component<Props> {
                       style={textFieldStyle}
                       type="text"
                       label={i18n.t('Months')}
+                      // $FlowFixMe[incompatible-use] automated comment
                       value={this.state.months}
                       onBlur={this.updateDate}
                       onChange={this.onMonthsChange}
@@ -193,6 +214,7 @@ class D2AgeField extends Component<Props> {
                       style={textFieldStyle}
                       type="text"
                       label={i18n.t('Days')}
+                      // $FlowFixMe[incompatible-use] automated comment
                       value={this.state.days}
                       onBlur={this.updateDate}
                       onChange={this.onDaysChange}
