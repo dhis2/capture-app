@@ -1,11 +1,10 @@
 // @flow
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-
+import lowerCaseFirstLetter from 'capture-core-utils/string/lowerCaseFirstLetter';
 import D2TextField from '../../Generic/D2TextField.component';
 import D2DatePopup from './D2DatePopup.component';
 import D2DateCalendar from './D2DateCalendar.component';
-import lowerCaseFirstLetter from 'capture-core-utils/string/lowerCaseFirstLetter';
 
 type Props = {
     label: string,
@@ -32,12 +31,6 @@ const styles = () => ({
 });
 
 class D2Date extends React.Component<Props, State> {
-    static propContainers = {
-        CALENDAR: 'calendar',
-        POPUP: 'popup',
-        INPUT: 'input',
-    };
-
     static splitPassOnProps(passOnProps: ?Object) {
         const splittedProps = {
             input: {},
@@ -62,7 +55,7 @@ class D2Date extends React.Component<Props, State> {
                 }
 
                 const outputKey = lowerCaseFirstLetter(propKey.replace(propContainer, ''));
-                // $FlowSuppress
+
                 accSplittedProps[propContainer][outputKey] = passOnProps[propKey];
                 return accSplittedProps;
             }, splittedProps);
@@ -90,12 +83,18 @@ class D2Date extends React.Component<Props, State> {
     }
 
     componentWillUnmount() {
-        // $FlowSuppress
+        // $FlowFixMe[incompatible-call] automated comment
         document.removeEventListener('click', this.handleDocumentClick);
     }
 
+    static propContainers = {
+        CALENDAR: 'calendar',
+        POPUP: 'popup',
+        INPUT: 'input',
+    };
+
     handleTextFieldFocus() {
-        // $FlowSuppress
+        // $FlowFixMe[incompatible-call] automated comment
         document.removeEventListener('click', this.handleDocumentClick);
 
         this.setState({
@@ -109,7 +108,8 @@ class D2Date extends React.Component<Props, State> {
         this.props.onBlur(value);
         this.hidePopover();
         this.props.onDateSelectedFromCalendar && this.props.onDateSelectedFromCalendar();
-        // $FlowSuppress
+
+        // $FlowFixMe[incompatible-call] automated comment
         document.removeEventListener('click', this.handleDocumentClick);
     }
 
@@ -123,7 +123,8 @@ class D2Date extends React.Component<Props, State> {
         }
 
         this.hidePopover();
-        // $FlowSuppress
+
+        // $FlowFixMe[incompatible-call] automated comment
         document.removeEventListener('click', this.handleDocumentClick);
     }
 
@@ -133,7 +134,7 @@ class D2Date extends React.Component<Props, State> {
         if (!event.relatedTarget || event.relatedTarget.className !== 'Cal__Container__root') {
             this.hidePopover();
         } else {
-            // $FlowSuppress
+            // $FlowFixMe[incompatible-call] automated comment
             document.addEventListener('click', this.handleDocumentClick);
         }
     }
@@ -172,7 +173,7 @@ class D2Date extends React.Component<Props, State> {
                     width,
                 }}
             >
-                { /* // $FlowSuppress */}
+                {/* $FlowFixMe[incompatible-type] automated comment */}
                 <D2TextField
                     {...textFieldRefPropObject}
                     onFocus={this.handleTextFieldFocus}

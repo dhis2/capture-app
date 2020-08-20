@@ -9,7 +9,7 @@ const mapStateToProps = (state: ReduxState) => ({
     ready: !state.newEnrollmentPage.isLoading,
 });
 
-const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
+const mapDispatchToProps = () => ({
 
 });
 // $FlowFixMe

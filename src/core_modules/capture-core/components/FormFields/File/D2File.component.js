@@ -6,7 +6,7 @@ import i18n from '@dhis2/d2-i18n';
 import { orientations } from 'capture-ui';
 import Button from '../../Buttons/Button.component';
 import { getApi } from '../../../d2/d2Instance';
-import LoadingMask from '../../LoadingMasks/LoadingMask.component';
+import { LoadingMask } from '../../LoadingMasks';
 import inMemoryFileStore from '../../DataEntry/file/inMemoryFileStore';
 import LinkButton from '../../Buttons/LinkButton.component';
 

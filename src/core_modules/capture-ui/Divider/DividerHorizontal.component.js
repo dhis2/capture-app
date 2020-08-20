@@ -12,6 +12,7 @@ const DividerHorizontal = (props: Props) => {
     const calculatedClassNames = classNames(defaultClasses.horizontal, props.className);
 
     return (
+        // $FlowFixMe[cannot-spread-inexact] automated comment
         <div
             className={calculatedClassNames}
             {...passOnProps}

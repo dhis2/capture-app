@@ -1,5 +1,5 @@
 // @flow
-export { 
+export {
     convertGeometryOut,
     convertNoteIn,
     convertNoteOut,

@@ -1,14 +1,11 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import log from 'loglevel';
-// import React from 'react';
-// import FontIcon from '@material-ui/core/FontIcon';
 import isArray from 'd2-utilizr/lib/isArray';
-
+import { errorCreator } from 'capture-core-utils';
 import Option from './Option';
 import OptionGroup from './OptionGroup';
 import { viewTypes, inputTypes, inputTypesAsArray } from './optionSet.const';
-import { errorCreator } from 'capture-core-utils';
 import DataElement from '../DataElement/DataElement';
 
 import type { ConvertFn } from '../DataElement/DataElement';
@@ -185,10 +182,11 @@ export default class OptionSet {
 
     resolveTextsAsString(values: Value | Array<Value>): ?string {
         if (isArray(values)) {
-            // $FlowSuppress
+            // $FlowFixMe[incompatible-call] automated comment
             return this.getOptionsTextAsString(values);
         }
-        // $FlowSuppress
+
+        // $FlowFixMe[incompatible-call] automated comment
         return this.getOptionText(values);
     }
 }

@@ -12,5 +12,5 @@ const mapStateToProps = () => {
     });
 };
 
-// $FlowSuppress
+// $FlowFixMe[missing-annot] automated comment
 export const DownloadDialog = connect(mapStateToProps)(DownloadDialogComponent);

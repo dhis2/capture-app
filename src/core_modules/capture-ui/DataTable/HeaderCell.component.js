@@ -13,6 +13,7 @@ const HeaderCell = (props: Props) => {
     const { children, className, innerRef, ...passOnProps } = props;
     const classes = classNames(defaultClasses.tableCell, defaultClasses.tableCellHeader, className);
     return (
+        // $FlowFixMe[cannot-spread-inexact] automated comment
         <td
             ref={innerRef}
             className={classes}

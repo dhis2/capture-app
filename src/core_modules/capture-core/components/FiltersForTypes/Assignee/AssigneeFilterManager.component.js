@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import AssigneeFilter from './AssigneeFilter.component';
-import type { AssigneeFilterData } from '../filters.types';
+import type { AssigneeFilterData } from './types';
 
 type Props = {
     filter: ?AssigneeFilterData,
@@ -44,6 +44,7 @@ class AssigneeFilterManager extends React.Component<Props, State> {
         const { filter, filterTypeRef, ...passOnProps } = this.props;
 
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <AssigneeFilter
                 value={this.state.value}
                 innerRef={filterTypeRef}

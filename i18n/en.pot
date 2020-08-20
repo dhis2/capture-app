@@ -5,10 +5,21 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-08-19T14:13:54.485Z\n"
-"PO-Revision-Date: 2020-08-19T14:13:54.485Z\n"
+"POT-Creation-Date: 2020-08-20T09:38:04.039Z\n"
+"PO-Revision-Date: 2020-08-20T09:38:04.039Z\n"
 
-msgid "Please provide a valid date"
+msgid "Choose one or more dates..."
+msgstr ""
+
+msgid "Choose a date..."
+msgstr ""
+
+msgid "Today"
+msgstr ""
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
 msgstr ""
 
 msgid "This value is validating"
@@ -33,6 +44,12 @@ msgid "Please provide zero or a positive integer"
 msgstr ""
 
 msgid "Please provide a negative integer"
+msgstr ""
+
+msgid "Please provide a valid date"
+msgstr ""
+
+msgid "A date in the future is not allowed"
 msgstr ""
 
 msgid "Please provide a valid date and time"
@@ -188,9 +205,6 @@ msgstr ""
 msgid "To"
 msgstr ""
 
-msgid "Today"
-msgstr ""
-
 msgid "This week"
 msgstr ""
 
@@ -269,9 +283,6 @@ msgstr ""
 msgid "suggestions could not be retrieved"
 msgstr ""
 
-msgid "search for username"
-msgstr ""
-
 msgid "No items to display"
 msgstr ""
 
@@ -321,6 +332,69 @@ msgid "Download data..."
 msgstr ""
 
 msgid "Rows per page"
+msgstr ""
+
+msgid "View event info"
+msgstr ""
+
+msgid "Delete event"
+msgstr ""
+
+msgid "Could not get organisation unit"
+msgstr ""
+
+msgid "Program doesn't exist"
+msgstr ""
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr ""
+
+msgid "New {{typeName}}"
+msgstr ""
+
+msgid "New"
+msgstr ""
+
+msgid "Start again"
+msgstr ""
+
+msgid "Find"
+msgstr ""
+
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
+msgstr ""
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Accept"
+msgstr ""
+
+msgid "Registering Organisation Unit"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Selected Program"
+msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Show all"
+msgstr ""
+
+msgid "Program"
+msgstr ""
+
+msgid "Select program"
+msgstr ""
+
+msgid "No programs available."
 msgstr ""
 
 msgid "Online"
@@ -434,6 +508,12 @@ msgstr ""
 msgid "Selected program is invalid for registering unit"
 msgstr ""
 
+msgid "Active"
+msgstr ""
+
+msgid "Completed"
+msgstr ""
+
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
@@ -461,9 +541,6 @@ msgstr ""
 msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
-msgstr ""
-
-msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "Assigned user"
@@ -578,15 +655,6 @@ msgstr ""
 msgid "Save as new {{tetName}}"
 msgstr ""
 
-msgid "Some programs are being filtered."
-msgstr ""
-
-msgid "Show all"
-msgstr ""
-
-msgid "Program"
-msgstr ""
-
 msgid "Organisation Unit"
 msgstr ""
 
@@ -638,45 +706,6 @@ msgid "Event assigned to {{name}}"
 msgstr ""
 
 msgid "Feedbacks"
-msgstr ""
-
-msgid "New {{typeName}}"
-msgstr ""
-
-msgid "New"
-msgstr ""
-
-msgid "Start again"
-msgstr ""
-
-msgid "Find"
-msgstr ""
-
-msgid "Selected registering unit"
-msgstr ""
-
-msgid "Start Again"
-msgstr ""
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
-
-msgid "Accept"
-msgstr ""
-
-msgid "Registering Organisation Unit"
-msgstr ""
-
-msgid "Select"
-msgstr ""
-
-msgid "Selected Program"
-msgstr ""
-
-msgid "Select program"
-msgstr ""
-
-msgid "No programs available."
 msgstr ""
 
 msgid "You dont have access to delete this relationship"
@@ -777,17 +806,6 @@ msgid ""
 "Currently, the Capture App only supports running one version concurrently "
 "(in the same domain). Please refresh this page if you would like to use "
 "this version again, but be aware that this will close other versions."
-msgstr ""
-
-msgid "Choose one or more dates..."
-msgstr ""
-
-msgid "Choose a date..."
-msgstr ""
-
-msgid ""
-"A possible reason for this is that the browser or mode (e.g. privacy mode) "
-"is not supported. See log for details."
 msgstr ""
 
 msgid "Compatibility mode"

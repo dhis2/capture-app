@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-03-09T19:35:56.143Z\n"
+"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Bram Piot <bram.piot@gmail.com>, 2020\n"
 "Language-Team: French (https://www.transifex.com/hisp-uio/teams/100509/fr/)\n"
@@ -18,8 +18,19 @@ msgstr ""
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-msgid "Please provide a valid date"
-msgstr "Veuillez spécifier une date valide"
+msgid "Choose one or more dates..."
+msgstr "Choisir une ou plusieurs dates..."
+
+msgid "Choose a date..."
+msgstr "Choisir une date..."
+
+msgid "Today"
+msgstr "Aujourd'hui"
+
+msgid ""
+"A possible reason for this is that the browser or mode (e.g. privacy mode) "
+"is not supported. See log for details."
+msgstr ""
 
 msgid "Columns to show in table"
 msgstr "Colonnes à afficher dans ce tableau"
@@ -50,6 +61,12 @@ msgstr "Veuillez saisir un zéro ou nombre entier positif valide"
 
 msgid "Please provide a negative integer"
 msgstr "Veuillez saisir un nombre entier négatif valide"
+
+msgid "Please provide a valid date"
+msgstr "Veuillez spécifier une date valide"
+
+msgid "A date in the future is not allowed"
+msgstr ""
 
 msgid "Please provide a valid date and time"
 msgstr "Veuillez saisir une date et heure valide"
@@ -204,9 +221,6 @@ msgstr "A partir de"
 msgid "To"
 msgstr "A"
 
-msgid "Today"
-msgstr "Aujourd'hui"
-
 msgid "This week"
 msgstr "Cette semaine"
 
@@ -285,11 +299,65 @@ msgstr "Aucun résultat"
 msgid "suggestions could not be retrieved"
 msgstr ""
 
-msgid "search for username"
-msgstr ""
-
 msgid "No items to display"
 msgstr "Aucun élément à afficher"
+
+msgid "Could not get organisation unit"
+msgstr ""
+
+msgid "Program doesn't exist"
+msgstr "Le programme n'existe pas"
+
+msgid "Selected program is invalid for selected registering unit"
+msgstr ""
+
+msgid "New {{typeName}}"
+msgstr "Nouveau {{typeName}}"
+
+msgid "New"
+msgstr "Nouveau"
+
+msgid "Start again"
+msgstr "Recommencer"
+
+msgid "Find"
+msgstr "Trouver"
+
+msgid "Selected registering unit"
+msgstr ""
+
+msgid "Start Again"
+msgstr "Recommencer"
+
+msgid "Are you sure? All unsaved data will be lost."
+msgstr ""
+
+msgid "Accept"
+msgstr "Accepter"
+
+msgid "Registering Organisation Unit"
+msgstr ""
+
+msgid "Select"
+msgstr "Sélectionner"
+
+msgid "Selected Program"
+msgstr ""
+
+msgid "Some programs are being filtered."
+msgstr ""
+
+msgid "Show all"
+msgstr "Tout afficher"
+
+msgid "Program"
+msgstr "Programme"
+
+msgid "Select program"
+msgstr "Sélectionner le programme"
+
+msgid "No programs available."
+msgstr "Aucun programme disponible"
 
 msgid "Online"
 msgstr "En ligne"
@@ -438,15 +506,6 @@ msgstr "Actif"
 msgid "Completed"
 msgstr "Terminé"
 
-msgid "Could not get organisation unit"
-msgstr ""
-
-msgid "Program doesn't exist"
-msgstr "Le programme n'existe pas"
-
-msgid "Selected program is invalid for registering unit"
-msgstr ""
-
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"
 msgstr ""
 
@@ -474,9 +533,6 @@ msgstr ""
 msgid ""
 "Program with programid {{programId}} isn't a tracker program. Enrollments "
 "can only be done in tracker programs."
-msgstr ""
-
-msgid "Selected program is invalid for selected registering unit"
 msgstr ""
 
 msgid "Assigned user"
@@ -591,15 +647,6 @@ msgstr "Masquer"
 msgid "Save as new {{tetName}}"
 msgstr "Enregister sous {{tetName}}"
 
-msgid "Some programs are being filtered."
-msgstr ""
-
-msgid "Show all"
-msgstr "Tout afficher"
-
-msgid "Program"
-msgstr "Programme"
-
 msgid "Organisation Unit"
 msgstr "Unité d'organisation"
 
@@ -652,45 +699,6 @@ msgstr ""
 
 msgid "Feedbacks"
 msgstr "Feedbacks"
-
-msgid "New {{typeName}}"
-msgstr "Nouveau {{typeName}}"
-
-msgid "New"
-msgstr "Nouveau"
-
-msgid "Start again"
-msgstr "Recommencer"
-
-msgid "Find"
-msgstr "Trouver"
-
-msgid "Selected registering unit"
-msgstr ""
-
-msgid "Start Again"
-msgstr "Recommencer"
-
-msgid "Are you sure? All unsaved data will be lost."
-msgstr ""
-
-msgid "Accept"
-msgstr "Accepter"
-
-msgid "Registering Organisation Unit"
-msgstr ""
-
-msgid "Select"
-msgstr "Sélectionner"
-
-msgid "Selected Program"
-msgstr ""
-
-msgid "Select program"
-msgstr "Sélectionner le programme"
-
-msgid "No programs available."
-msgstr "Aucun programme disponible"
 
 msgid "You dont have access to delete this relationship"
 msgstr ""
@@ -790,17 +798,6 @@ msgid ""
 " the Capture App only supports running one version concurrently (in the same"
 " domain). Please refresh this page if you would like to use this version "
 "again, but be aware that this will close other versions."
-msgstr ""
-
-msgid "Choose one or more dates..."
-msgstr "Choisir une ou plusieurs dates..."
-
-msgid "Choose a date..."
-msgstr "Choisir une date..."
-
-msgid ""
-"A possible reason for this is that the browser or mode (e.g. privacy mode) "
-"is not supported. See log for details."
 msgstr ""
 
 msgid "Compatibility mode"

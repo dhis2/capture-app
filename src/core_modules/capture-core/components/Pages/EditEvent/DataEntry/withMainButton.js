@@ -19,7 +19,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
         getWrappedInstance() {
             return this.innerInstance;
         }
-        renderMainButton = (hasWriteAccess: ?boolean) => (
+        renderMainButton = () => (
             <Tooltip title={!this.props.formFoundation.access.data.write ? i18n.t('No write access') : ''}>
                 <Button
                     onClick={() => { this.props.onSave(); }}
@@ -35,8 +35,10 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
             const { onSave, ...passOnProps } = this.props;
             const hasWriteAccess = this.props.formFoundation.access.data.write;
             return (
+                // $FlowFixMe[cannot-spread-inexact] automated comment
                 <InnerComponent
                     ref={(innerInstance) => { this.innerInstance = innerInstance; }}
+                    // $FlowFixMe[extra-arg] automated comment
                     mainButton={this.renderMainButton(hasWriteAccess)}
                     {...passOnProps}
                 />
@@ -44,14 +46,10 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
         }
     };
 
-const mapStateToProps = (state: ReduxState, props: { id: string }) => {
-    return {};
-};
-
 const mapDispatchToProps = () => ({});
 
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
-        // $FlowSuppress
-        connect(
-            mapStateToProps, mapDispatchToProps)(getMainButton(InnerComponent));
+
+        // $FlowFixMe[missing-annot] automated comment
+        connect(null, mapDispatchToProps)(getMainButton(InnerComponent));

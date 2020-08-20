@@ -8,8 +8,6 @@ import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreHoriz from '@material-ui/icons/MoreHoriz';
 import IconButton from '@material-ui/core/IconButton';
-import Delete from '@material-ui/icons/Delete';
-import i18n from '@dhis2/d2-i18n';
 import withStyles from '@material-ui/core/styles/withStyles';
 import type { RowMenuContents } from '../types';
 
@@ -92,24 +90,24 @@ class Index extends React.Component<Props, State> {
         const { customRowMenuContents = [], row, classes } = this.props;
 
         const menuItems = customRowMenuContents
-                .map((content) => (
-                        <MenuItem
-                            key={content.key}
-                            data-test={`menu-item-${content.key}`}
-                            onClick={(event: SyntheticEvent<any>) => {
-                                if (!content.clickHandler) {
-                                    return;
-                                }
-                                this.closeMenu();
-                                // $FlowFixMe common flow, I checked this 4 lines up
-                                content.clickHandler(row);
-                                event.stopPropagation();                                
-                            }}
-                            disabled={!content.clickHandler}
-                        >
-                            {content.element}
-                        </MenuItem>
-                    ));
+            .map(content => (
+                <MenuItem
+                    key={content.key}
+                    data-test={`menu-item-${content.key}`}
+                    onClick={(event: SyntheticEvent<any>) => {
+                        if (!content.clickHandler) {
+                            return;
+                        }
+                        this.closeMenu();
+                        // $FlowFixMe common flow, I checked this 4 lines up
+                        content.clickHandler(row);
+                        event.stopPropagation();
+                    }}
+                    disabled={!content.clickHandler}
+                >
+                    {content.element}
+                </MenuItem>
+            ));
 
         return (
             <MenuList role="menu" className={classes.menuList}>
@@ -131,6 +129,7 @@ class Index extends React.Component<Props, State> {
                                     ref={this.handleReferenceInstanceRetrieved}
                                 >
                                     <IconButton
+                                        data-test="dhis2-capture-event-content-menu"
                                         onClick={this.toggleMenu}
                                     >
                                         <MoreHoriz />

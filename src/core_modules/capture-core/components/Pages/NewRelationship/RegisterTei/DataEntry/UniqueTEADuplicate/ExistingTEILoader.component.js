@@ -41,6 +41,7 @@ class ExistingTEILoader extends React.Component<Props, State> {
         const cancelablePromise = makeCancelablePromise(
             getApi()
                 .get(
+                    // $FlowFixMe[incompatible-type] automated comment
                     `trackedEntityInstances/${id}`,
                     {
                     },
@@ -82,6 +83,7 @@ class ExistingTEILoader extends React.Component<Props, State> {
         const cancelablePromise = makeCancelablePromise(
             getApi()
                 .get(
+                    // $FlowFixMe[incompatible-type] automated comment
                     `trackedEntityInstances/${id}`,
                     {
                         program: programId,
@@ -129,6 +131,7 @@ class ExistingTEILoader extends React.Component<Props, State> {
         const { ...passOnProps } = this.props;
 
         return (
+            // $FlowFixMe[cannot-spread-inexact] automated comment
             <LoadingInddicatorWrappedContents
                 {...this.state}
                 {...passOnProps}

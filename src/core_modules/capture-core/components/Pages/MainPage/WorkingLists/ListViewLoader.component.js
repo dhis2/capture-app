@@ -46,9 +46,7 @@ export const ListViewLoader = (props: Props) => {
         dirtyEventList,
     } = React.useContext(ListViewLoaderContext);
 
-    const hasContextChanged = React.useMemo(() => {
-        return !onCheckSkipReload(programId, orgUnitId, categories, lastTransaction, listContext);
-    }, [
+    const hasContextChanged = React.useMemo(() => !onCheckSkipReload(programId, orgUnitId, categories, lastTransaction, listContext), [
         onCheckSkipReload,
         programId,
         orgUnitId,

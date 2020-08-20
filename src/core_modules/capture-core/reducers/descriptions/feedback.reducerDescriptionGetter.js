@@ -15,7 +15,7 @@ import {
 import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
-import { orgUnitListActionTypes } from '../../components/QuickSelector';
+import { orgUnitListActionTypes } from '../../components/LockedSelector/QuickSelector';
 import {
     actionTypes as viewEventNewRelationshipActionTypes,
 } from '../../components/Pages/ViewEvent/Relationship/ViewEventRelationships.actions';

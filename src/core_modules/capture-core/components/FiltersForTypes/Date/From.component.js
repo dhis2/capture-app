@@ -40,6 +40,7 @@ class FromDateFilter extends Component<Props> {
         const { error, errorClass, onBlur, onEnterKey, ...passOnProps } = this.props;
         return (
             <div>
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <D2Date
                     onKeyPress={this.handleKeyPress}
                     onBlur={this.handleBlur}

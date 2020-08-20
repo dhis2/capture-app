@@ -5,12 +5,14 @@
 import log from 'loglevel';
 import isFunction from 'd2-utilizr/lib/isFunction';
 import isArray from 'd2-utilizr/lib/isArray';
-
+import { errorCreator } from 'capture-core-utils';
 import Icon from '../Icon/Icon';
 import OptionSet from '../OptionSet/OptionSet';
-import { errorCreator } from 'capture-core-utils';
 import elementTypes from './elementTypes';
 import { Unique } from './Unique';
+
+// eslint-disable-next-line no-use-before-define
+export type ConvertFn = (value: any, type: $Values<typeof elementTypes>, element: DataElement) => any;
 
 export default class DataElement {
     static errorMessages = {
@@ -70,9 +72,6 @@ export default class DataElement {
     set displayInForms(display?: ?boolean) {
         this._displayInForms = display != null ? display : true;
     }
-    get displayInForms(): boolean {
-        return this._displayInForms;
-    }
 
     set displayInReports(display?: ?boolean) {
         this._displayInReports = display != null ? display : true;
@@ -105,8 +104,10 @@ export default class DataElement {
     set type(type: string) {
         if (!elementTypes[type]) {
             log.warn(errorCreator(DataElement.errorMessages.TYPE_NOT_FOUND)({ dataElement: this, type }));
+            // $FlowFixMe[prop-missing] automated comment
             this._type = elementTypes.UNKNOWN;
         } else {
+            // $FlowFixMe[incompatible-type] automated comment
             this._type = type;
         }
     }
@@ -146,7 +147,7 @@ export default class DataElement {
 
     copyPropertiesTo(object: {}) {
         for (const propName of this.getPropertyNames()) {
-            // $FlowSuppress
+            // $FlowFixMe[prop-missing] automated comment
             object[propName] = this[propName];
         }
         return object;
@@ -155,9 +156,13 @@ export default class DataElement {
     getConvertedOptionSet(onConvert: ?ConvertFn): ?OptionSet {
         if (this.optionSet) {
             const currentOptions = this.optionSet.options.map(option => option.clone());
+            // $FlowFixMe[incompatible-use] automated comment
             const convertedOptionSet = new OptionSet(this.optionSet.id, currentOptions, null, this, onConvert);
+            // $FlowFixMe[incompatible-use] automated comment
             convertedOptionSet.inputType = this.optionSet.inputType;
+            // $FlowFixMe[incompatible-use] automated comment
             convertedOptionSet.viewType = this.optionSet.viewType;
+            // $FlowFixMe[incompatible-use] automated comment
             convertedOptionSet.emptyText = this.optionSet.emptyText;
 
             return convertedOptionSet;
@@ -172,4 +177,3 @@ export default class DataElement {
     }
 }
 
-export type ConvertFn = (value: any, type: $Values<typeof elementTypes>, element: DataElement) => any;

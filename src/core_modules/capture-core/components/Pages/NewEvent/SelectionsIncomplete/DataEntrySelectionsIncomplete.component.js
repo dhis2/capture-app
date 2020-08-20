@@ -29,6 +29,7 @@ const getStyles = (theme: Theme) => ({
         paddingTop: 9,
         paddingBottom: 20,
     },
+    // $FlowFixMe[cannot-spread-inexact] automated comment
     header: {
         flexGrow: 1,
         ...theme.typography.title,

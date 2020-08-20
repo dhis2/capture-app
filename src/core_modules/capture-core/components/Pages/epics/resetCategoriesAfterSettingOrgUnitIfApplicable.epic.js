@@ -1,17 +1,6 @@
 // @flow
-import {
-    actionTypes as mainPageSelectorActionTypes,
-} from '../../Pages/MainPage/MainPageSelector/MainPageSelector.actions';
-import {
-    actionTypes as editEventSelectorActionTypes,
-} from '../../Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
-import {
-    actionTypes as viewEventSelectorActionTypes,
-} from '../../Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
-import {
-    actionTypes as newEventSelectorActionTypes,
-} from '../../Pages/NewEvent/SelectorLevel/selectorLevel.actions';
-
+import { ofType } from 'redux-observable';
+import { switchMap } from 'rxjs/operators';
 import {
     resetCategoriesAfterSettingOrgUnit,
     skipCategoriesResetAfterSettingOrgUnit,
@@ -19,6 +8,7 @@ import {
 
 import { getUserStorageController } from '../../../storageControllers';
 import { userStores } from '../../../storageControllers/stores';
+import { lockedSelectorActionTypes } from '../../LockedSelector';
 
 
 async function isOptionAssociatedWithOrganisationUnit(categoryOptionId: string, orgUnitId: string) {
@@ -31,29 +21,23 @@ async function isOptionAssociatedWithOrganisationUnit(categoryOptionId: string, 
 }
 
 export const resetCategoriesAfterSettingOrgUnitIfApplicableEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
-    action$
-        .ofType(
-            mainPageSelectorActionTypes.SET_ORG_UNIT,
-            editEventSelectorActionTypes.SET_ORG_UNIT,
-            viewEventSelectorActionTypes.SET_ORG_UNIT,
-            newEventSelectorActionTypes.SET_ORG_UNIT,
-        )
-        .switchMap((action) => {
+    action$.pipe(
+        ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET),
+        switchMap((action) => {
             const orgUnitId = action.payload.id;
-            const selectedCategories = store.getState().currentSelections.categories;
+            const selectedCategories = store.value.currentSelections.categories;
             if (!selectedCategories) {
                 return Promise.resolve(skipCategoriesResetAfterSettingOrgUnit(action.type));
             }
 
             const categoriesWithValue = Object
-            .keys(selectedCategories)
-            .reduce((acc, categoryId) => {
-                if (selectedCategories[categoryId]) {
-                    acc[categoryId] = selectedCategories[categoryId];
-                }
-                return acc;
-            }, {});
+                .keys(selectedCategories)
+                .reduce((acc, categoryId) => {
+                    if (selectedCategories[categoryId]) {
+                        acc[categoryId] = selectedCategories[categoryId];
+                    }
+                    return acc;
+                }, {});
 
             const isAssociatedPromises = Object
                 .keys(categoriesWithValue)
@@ -79,5 +63,5 @@ export const resetCategoriesAfterSettingOrgUnitIfApplicableEpic = (action$: Inpu
 
                     return resetCategoriesAfterSettingOrgUnit(notAssociated, action.type);
                 });
-        });
+        }));
 

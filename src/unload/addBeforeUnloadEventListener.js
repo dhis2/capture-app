@@ -7,7 +7,7 @@ export default function addBeforeUnloadEventListener(store: ReduxStore) {
         cleanUpCommon(store);
         // cleanUp(store); // should move clean up from core to app!
 
-        if (store.getState().offline.outbox.length > 0) {
+        if (store.value.offline.outbox.length > 0) {
             const msg = 'Unsaved events!';
             e.returnValue = msg;
             return msg;

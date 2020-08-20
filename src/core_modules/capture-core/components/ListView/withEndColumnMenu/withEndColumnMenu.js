@@ -29,6 +29,7 @@ export const withEndColumnMenu = () =>
             render() {
                 const settings: Settings = getMenuColumnSettings();
                 return (
+                    // $FlowFixMe[cannot-spread-inexact] automated comment
                     <InnerComponent
                         getCustomEndCellHeader={this.getCustomEndCellHeader}
                         getCustomEndCellBody={this.getCustomEndCellBody}

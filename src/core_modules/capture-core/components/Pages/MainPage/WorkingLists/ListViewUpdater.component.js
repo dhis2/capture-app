@@ -24,7 +24,9 @@ function useUpdateListEffect(callback, dependencies) {
             return undefined;
         }
         return callback();
-    }, useUpdateListMemoize(dependencies)); // eslint-disable-line react-hooks/exhaustive-deps
+    // https://github.com/facebook/create-react-app/issues/6880
+    // eslint-disable-next-line
+    }, useUpdateListMemoize(dependencies));
 }
 
 type Props = {

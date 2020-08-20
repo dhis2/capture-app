@@ -98,6 +98,7 @@ class SingleSelectionBoxes extends React.Component<Props> {
                 key={optionData.id || optionData.name}
             >
                 { /* $FlowSuppress */ }
+                {/* $FlowFixMe[prop-missing] automated comment */}
                 <SingleSelectBoxWrapped
                     optionData={optionData}
                     isSelected={isSelected}
@@ -118,6 +119,7 @@ class SingleSelectionBoxes extends React.Component<Props> {
 
     getSelectionOptions() {
         const { options, onGetOptionData, value } = this.props;
+        // $FlowFixMe[missing-annot] automated comment
         return options
             .map((option, index) => {
                 const optionData = onGetOptionData ? onGetOptionData(option) : option;

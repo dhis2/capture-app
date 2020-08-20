@@ -1,21 +1,11 @@
 // @flow
 import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
-import {
-    actionTypes as mainPageSelectorActionTypes,
-} from '../../Pages/MainPage/MainPageSelector/MainPageSelector.actions';
-import {
-    actionTypes as editEventSelectorActionTypes,
-} from '../../Pages/EditEvent/EditEventSelector/EditEventSelector.actions';
-import {
-    actionTypes as viewEventSelectorActionTypes,
-} from '../../Pages/ViewEvent/ViewEventSelector/ViewEventSelector.actions';
-import {
-    actionTypes as newEventSelectorActionTypes,
-} from '../../Pages/NewEvent/SelectorLevel/selectorLevel.actions';
-
+import { ofType } from 'redux-observable';
+import { map, filter } from 'rxjs/operators';
 import {
     resetProgramIdBase,
-} from '../../QuickSelector/actions/QuickSelector.actions';
+} from '../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
+import { lockedSelectorActionTypes } from '../../LockedSelector';
 
 const programShouldReset = (orgUnitId, currentlySelectedProgramId) => {
     if (!currentlySelectedProgramId) {
@@ -35,18 +25,12 @@ const programShouldReset = (orgUnitId, currentlySelectedProgramId) => {
 };
 
 export const resetProgramAfterSettingOrgUnitIfApplicableEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
-    action$
-        .ofType(
-            mainPageSelectorActionTypes.SET_ORG_UNIT,
-            editEventSelectorActionTypes.SET_ORG_UNIT,
-            viewEventSelectorActionTypes.SET_ORG_UNIT,
-            newEventSelectorActionTypes.SET_ORG_UNIT,
-        )
-        .filter((action) => {
+    action$.pipe(
+        ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET),
+        filter((action) => {
             const orgUnitId = action.payload.id;
-            const currentlySelectedProgramId = store.getState().currentSelections.programId;
+            const currentlySelectedProgramId = store.value.currentSelections.programId;
             return programShouldReset(orgUnitId, currentlySelectedProgramId);
-        })
-        .map(() => resetProgramIdBase());
+        }),
+        map(() => resetProgramIdBase()));
 

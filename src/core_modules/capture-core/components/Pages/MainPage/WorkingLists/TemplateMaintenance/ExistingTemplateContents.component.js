@@ -23,8 +23,7 @@ const ExistingTemplateContents = (props: Props) => {
     return (
         <React.Fragment>
             <DialogTitle>{i18n.t('Save')}</DialogTitle>
-            <DialogContent>
-            </DialogContent>
+            <DialogContent />
             <DialogActions
                 className={classes.buttonContainer}
             >

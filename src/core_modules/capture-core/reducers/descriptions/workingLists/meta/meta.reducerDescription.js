@@ -2,8 +2,6 @@
 import { createReducerDescription } from '../../../../trackerRedux/trackerReducer';
 import {
     listViewActionTypes as eventsListActionTypes,
-} from '../../../../components/ListView';
-import {
     paginationActionTypes,
 } from '../../../../components/ListView';
 import {

@@ -63,21 +63,19 @@ const getDateFilter = (filter: ApiDataFilterDate): DateFilterData => {
     };
 };
 
-const getUser = (userId: string) => {
-    return getApi()
-        .get(`users/${userId}`, { fields: 'id,name,userCredentials[username]' })
-        .then((user: Object) => ({
-            id: user.id,
-            name: user.name,
-            username: user.userCredentials.username,
-        }))
-        .catch((error) => {
-            log.error(
-                errorCreator('An error occured retrieving assignee user')({ error, userId }),
-            );
-            return null;
-        });
-};
+const getUser = (userId: string) => getApi()
+    .get(`users/${userId}`, { fields: 'id,name,userCredentials[username]' })
+    .then((user: Object) => ({
+        id: user.id,
+        name: user.name,
+        username: user.userCredentials.username,
+    }))
+    .catch((error) => {
+        log.error(
+            errorCreator('An error occured retrieving assignee user')({ error, userId }),
+        );
+        return null;
+    });
 
 // eslint-disable-next-line complexity
 const getAssigneeFilter = async (
@@ -107,19 +105,29 @@ const getAssigneeFilter = async (
 };
 
 const getFilterByType = {
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.TEXT]: getTextFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.NUMBER]: getNumericFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER]: getNumericFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_POSITIVE]: getNumericFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_NEGATIVE]: getNumericFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.INTEGER_ZERO_OR_POSITIVE]: getNumericFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.DATE]: getDateFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.BOOLEAN]: getBooleanFilter,
+    // $FlowFixMe[prop-missing] automated comment
     [elementTypes.TRUE_ONLY]: getTrueOnlyFilter,
 };
 
 const isOptionSetFilter = (type: $Values<typeof elementTypes>, filter: any) => {
     if ([
+        // $FlowFixMe[prop-missing] automated comment
         elementTypes.BOOLEAN,
     ].includes(type)) {
         const validBooleanValues = ['true', 'false'];

@@ -83,9 +83,9 @@ class NewEventNewRelationshipWrapper extends React.Component<Props, State> {
     );
 
     onGetUnsavedAttributeValues = (id: string) => {
-        const { unsavedRelationships } = this.props;
-        return unsavedRelationships 
-            .map(r => {
+        const { unsavedRelationships } = this.props;
+        return unsavedRelationships
+            .map((r) => {
                 if (!r.to.data || !r.to.data.attributes) {
                     return null;
                 }
@@ -110,6 +110,7 @@ class NewEventNewRelationshipWrapper extends React.Component<Props, State> {
                     </LinkButton>
                 </div>
                 <Paper className={classes.newRelationshipPaper}>
+                    {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                     <NewRelatonship
                         header={i18n.t('New event relationship')}
                         onGetUnsavedAttributeValues={this.onGetUnsavedAttributeValues}

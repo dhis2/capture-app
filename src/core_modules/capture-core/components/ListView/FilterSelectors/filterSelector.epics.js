@@ -1,13 +1,15 @@
 // @flow
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
 import { workingListsCommonActionTypes } from '../../../components/Pages/MainPage/WorkingListsCommonRedux';
 import { updateIncludedFiltersAfterColumnSorting } from './filterSelector.actions';
 
 export const includeFiltersWithValueAfterColumnSortingEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowSuppress
-    action$.ofType(workingListsCommonActionTypes.LIST_COLUMN_ORDER_SET)
+    action$.pipe(
+        ofType(workingListsCommonActionTypes.LIST_COLUMN_ORDER_SET),
         // eslint-disable-next-line complexity
-        .map(() => {
-            const state = store.getState();
+        map(() => {
+            const state = store.value;
             const listId = state.workingListsTemplates.eventList.currentListId;
             const appliedFilters = (
                 state.workingListsMeta &&
@@ -45,4 +47,4 @@ export const includeFiltersWithValueAfterColumnSortingEpic = (action$: InputObse
                     }, {});
 
             return updateIncludedFiltersAfterColumnSorting(filtersToInclude, listId);
-        });
+        }));

@@ -1,7 +1,6 @@
 // @flow
 /* eslint-disable */
-import type { Store } from 'redux';
-import { methods } from '../src/trackerOffline/trackerOfflineConfig.const';
+import { methods } from '../../capture-core/trackerOffline/trackerOfflineConfig.const';
 
 declare type D2 = {
     models: Object,
@@ -31,13 +30,14 @@ declare type ReduxAction<Payload, Meta> = {
 };
 
 declare type ReduxState = Object;
+
 declare type ReduxDispatch = (action: {
     type: string,
     [props: string]: any,
 }) => void;
 
 declare type ReduxStore = {
-    getState: () => ReduxState,
+    value: ReduxState,
     dispatch: ReduxDispatch
 }
 
