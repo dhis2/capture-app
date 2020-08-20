@@ -29,7 +29,13 @@ function useUpdateListEffect(callback, dependencies) {
     }, useUpdateListMemoize(dependencies));
 }
 
+type PassOnProps = {
+    getMainColumnMetadataHeader: any,
+    getOrdinaryColumnMetadata: any,
+};
+
 type Props = {
+    ...PassOnProps,
     listId: string,
     filters: Object,
     sortById: ?string,
@@ -71,12 +77,12 @@ export const ListViewUpdater = (props: Props) => {
 
     return (
         <ListViewBuilder
+            {...passOnProps}
             listId={listId}
             filters={filters}
             sortById={sortById}
             sortByDirection={sortByDirection}
             customMenuContents={customMenuContents}
-            {...passOnProps}
         />
     );
 };

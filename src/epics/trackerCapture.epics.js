@@ -37,8 +37,6 @@ import {
 import {
     getEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic,
-    openEditPageLocationChangeEpic,
-    getEventOpeningFromEventListEpic,
 } from 'capture-core/components/Pages/EditEvent/editEvent.epics';
 import {
     openEditEventInDataEntryEpic,
@@ -55,7 +53,7 @@ import {
     loadViewEventDataEntryEpic,
 } from 'capture-core/components/Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/viewEventDataEntry.epics';
 import {
-    getEventOpeningFromEventListEpic as getViewEventOpeningFromEventListEpic,
+    getEventOpeningFromEventListEpic,
     getEventFromUrlEpic as getViewEventFromUrlEpic,
     getOrgUnitOnUrlUpdateEpic as getViewEventOrgUnitOnUrlUpdateEpic,
     openViewPageLocationChangeEpic,
@@ -211,7 +209,6 @@ export default combineEpics(
     addNoteForEditSingleEventEpic,
     addNoteForNewSingleEventEpic,
     removeNoteForEditSingleEventEpic,
-    openEditPageLocationChangeEpic,
     getEventOpeningFromEventListEpic,
     networkMonitorStatusEpic,
     goingOnlineEpic,
@@ -244,7 +241,6 @@ export default combineEpics(
     filterFormFieldOrgUnitsEpic,
     asyncUpdateFieldEpic,
     teiSearchFilterOrgUnitsEpic,
-    getViewEventOpeningFromEventListEpic,
     getViewEventFromUrlEpic,
     getViewEventOrgUnitOnUrlUpdateEpic,
     openViewPageLocationChangeEpic,

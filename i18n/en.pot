@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-08-20T09:38:04.039Z\n"
-"PO-Revision-Date: 2020-08-20T09:38:04.039Z\n"
+"POT-Creation-Date: 2020-08-20T14:17:59.235Z\n"
+"PO-Revision-Date: 2020-08-20T14:17:59.235Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -334,12 +334,6 @@ msgstr ""
 msgid "Rows per page"
 msgstr ""
 
-msgid "View event info"
-msgstr ""
-
-msgid "Delete event"
-msgstr ""
-
 msgid "Could not get organisation unit"
 msgstr ""
 
@@ -497,21 +491,6 @@ msgid "Show All"
 msgstr ""
 
 msgid "Registered events"
-msgstr ""
-
-msgid "Could not get organisation unit"
-msgstr ""
-
-msgid "Program doesn't exist"
-msgstr ""
-
-msgid "Selected program is invalid for registering unit"
-msgstr ""
-
-msgid "Active"
-msgstr ""
-
-msgid "Completed"
 msgstr ""
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"

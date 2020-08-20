@@ -4,7 +4,11 @@ import { useDispatch } from 'react-redux';
 import { WorkingLists } from '../WorkingLists';
 import { sortList, setListColumnOrder } from './workingListsCommon.actions';
 
-type Props = {};
+type PassOnProps = Object;
+
+type Props = {
+    ...PassOnProps,
+};
 
 export const WorkingListsCommonRedux = (props: Props) => {
     const dispatch = useDispatch();

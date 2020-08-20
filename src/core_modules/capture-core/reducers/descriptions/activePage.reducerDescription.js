@@ -7,7 +7,7 @@ import {
 } from '../../components/Pages/ViewEvent/ViewEventComponent/viewEvent.actions';
 import { dataEntryActionTypes as newEventDataEntryActionTypes } from '../../components/Pages/NewEvent';
 import { actionTypes as viewEventDataEntryActionTypes } from '../../components/Pages/ViewEvent/EventDetailsSection/ViewEventDataEntry/viewEventDataEntry.actions';
-import { listViewActionTypes as eventListActionTypes } from '../../components/ListView';
+import { eventWorkingListsActionTypes } from '../../components/Pages/MainPage/EventWorkingLists';
 
 export const activePageDesc = createReducerDescription({
     [lockedSelectorActionTypes.ORG_UNIT_ID_SET]: state => ({
@@ -49,7 +49,7 @@ export const activePageDesc = createReducerDescription({
         ...state,
         isDataEntryLoading: false,
     }),
-    [eventListActionTypes.OPEN_VIEW_EVENT_PAGE]: state => ({
+    [eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN]: state => ({
         ...state,
         isDataEntryLoading: true,
     }),

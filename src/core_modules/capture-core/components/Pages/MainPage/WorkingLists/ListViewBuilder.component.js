@@ -10,7 +10,7 @@ import { ListViewBuilderContext } from './workingLists.context';
 import type { ColumnConfig, GetOrdinaryColumnMetadataFn, GetMainColumnMetadataHeaderFn } from './workingLists.types';
 
 type PassOnProps = {
-
+    listId: string,
 };
 
 type Props = {

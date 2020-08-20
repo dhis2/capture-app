@@ -11,7 +11,6 @@ import { actionTypes as viewEventActionTypes } from '../../components/Pages/View
 import {
     actionTypes as editEventDataEntryActionTypes,
 } from '../../components/Pages/EditEvent/DataEntry/editEventDataEntry.actions';
-import { listViewActionTypes as eventListActionTypes } from '../../components/ListView';
 import { actionTypes as connectivityActionTypes } from '../../components/Connectivity/connectivity.actions';
 import {
     actionTypes as setCurrentSelectionsActionTypes,
@@ -75,14 +74,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         const newState = { ...state };
         newState.page = null;
         newState.locationSwitchInProgress = true;
-        return newState;
-    },
-    [eventListActionTypes.OPEN_EDIT_EVENT_PAGE]: (state) => {
-        const newState = {
-            ...state,
-            page: 'editEvent',
-            locationSwitchInProgress: true,
-        };
         return newState;
     },
     [eventWorkingListsActionTypes.VIEW_EVENT_PAGE_OPEN]: (state) => {

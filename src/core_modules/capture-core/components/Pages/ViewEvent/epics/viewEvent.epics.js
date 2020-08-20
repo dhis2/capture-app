@@ -22,7 +22,6 @@ import {
     openViewEventPageFailed,
     initializeWorkingListsOnBackToMainPage,
 } from '../ViewEventComponent/viewEvent.actions';
-import { listViewActionTypes as eventListActionTypes } from '../../../ListView';
 import { getEvent } from '../../../../events/eventRequests';
 import {
     initializeNewRelationship,

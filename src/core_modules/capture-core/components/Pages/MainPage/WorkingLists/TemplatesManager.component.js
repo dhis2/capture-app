@@ -8,14 +8,15 @@ import type {
     WorkingListTemplate,
 } from './workingLists.types';
 
-type PassOnProps = {|
+type PassOnProps = {
     defaultConfig: Map<string, Object>,
-|};
+    programId: string,
+};
 
 type Props = {
+    ...PassOnProps,
     templates: Array<WorkingListTemplate>,
     listId: string,
-    ...PassOnProps,
 };
 
 const TemplatesManager = (props: Props) => {

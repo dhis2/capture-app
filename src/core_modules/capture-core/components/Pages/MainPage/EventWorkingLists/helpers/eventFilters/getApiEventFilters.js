@@ -1,5 +1,6 @@
 // @flow
 import { getApi } from '../../../../../../d2/d2Instance';
+
 type ApiConfig = {
     eventFilters: Array<Object>,
     pager: Object,

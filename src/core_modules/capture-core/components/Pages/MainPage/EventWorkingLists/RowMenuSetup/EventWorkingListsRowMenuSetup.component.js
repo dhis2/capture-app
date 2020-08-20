@@ -20,17 +20,17 @@ type Props = {
 export const Index = (props: Props) => {
     const { onDeleteEvent, classes, ...passOnProps } = props;
     const customRowMenuContents: RowMenuContents = useMemo(() => [{
-        key: "deleteEventItem",
-        clickHandler: (rowData) => onDeleteEvent(rowData.eventId),
+        key: 'deleteEventItem',
+        clickHandler: rowData => onDeleteEvent(rowData.eventId),
         element: (
             <React.Fragment>
                 <Delete className={classes.deleteIcon} />
                 {i18n.t('Delete event')}
             </React.Fragment>
         ),
-    }], [onDeleteEvent]);
+    }], [onDeleteEvent, classes.deleteIcon]);
 
-    return(
+    return (
         <WorkingListsCommonRedux
             {...passOnProps}
             customRowMenuContents={customRowMenuContents}

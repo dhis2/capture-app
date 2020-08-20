@@ -1,5 +1,6 @@
 // @flow
-import { OptionSet } from '../../../../metaData';
+import { OptionSet, dataElementTypes } from '../../../../metaData';
+
 
 export type WorkingListTemplate = {
     id: string,
@@ -20,7 +21,7 @@ export type WorkingListTemplate = {
 export type ColumnConfig = {
     id: string,
     visible: boolean,
-    type: string,
+    type: $Values<typeof dataElementTypes>,
     isMainProperty?: ?boolean,
     apiName?: ?string,
     header?: ?string,

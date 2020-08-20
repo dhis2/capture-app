@@ -1,5 +1,5 @@
 // @flow
-import type { ColumnConfig } from '../../workingLists.types';
+import type { ColumnConfig } from '../../../WorkingLists';
 
 const getCustomConfig = (
     customOrder: Array<string>,

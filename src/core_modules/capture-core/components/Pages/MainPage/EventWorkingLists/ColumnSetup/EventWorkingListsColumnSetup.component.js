@@ -8,14 +8,16 @@ import {
 } from '../../../../../metaData';
 import type { GetOrdinaryColumnMetadataFn, GetMainColumnMetadataHeaderFn } from '../../WorkingLists';
 
-type PassOnProps = {|
+type PassOnProps = {
     listId: string,
-|};
+    eventsDataElementValues: Object,
+    eventsMainProperties: Object,
+};
 
-type Props = {|
-    programId: string,
+type Props = {
     ...PassOnProps,
-|};
+    programId: string,
+};
 
 export const EventWorkingListsColumnSetup = (props: Props) => {
     const {
@@ -48,6 +50,7 @@ export const EventWorkingListsColumnSetup = (props: Props) => {
     return (
         <EventWorkingListsDataSourceSetup
             {...passOnProps}
+            listId={props.listId}
             programId={programId}
             defaultConfig={defaultConfig}
             onCheckSkipReload={shouldSkipReload}

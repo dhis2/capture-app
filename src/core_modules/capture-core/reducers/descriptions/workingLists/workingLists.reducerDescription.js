@@ -414,7 +414,6 @@ export const workingListsUIDesc = createReducerDescription({
         return newState;
     },
     [eventWorkingListsActionTypes.EVENT_REQUEST_DELETE]: (state, action) => {
-        debugger;
         const listId = action.payload.listId;
         return {
             ...state,
@@ -453,7 +452,6 @@ export const workingListsColumnsOrderDesc = createReducerDescription({
         };
     },
     [workingListsCommonActionTypes.LIST_COLUMN_ORDER_SET]: (state, action) => {
-        debugger;
         const { columnOrder, listId } = action.payload;
 
         const currentColumnOrder = state[listId];
