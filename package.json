@@ -65,7 +65,6 @@
     "start": "yarn verifyCacheVersion && d2-app-scripts start",
     "start:forCypress": "node scripts/startAppForCypress.js",
     "build": "yarn verifyCacheVersion && GENERATE_SOURCEMAP=false d2-app-scripts build && cp ./package.json ./build/app/package.json",
-    "build:manual": "yarn verifyCacheVersion && REACT_APP_DHIS2_BASE_URL='../../..' d2-app-scripts build",
     "test": "d2-app-scripts test",
     "test:debug": "react-scripts --inspect-brk test --runInBand",
     "docs": "NODE_ENV=development jsdoc -c jsdoc-conf.json",
