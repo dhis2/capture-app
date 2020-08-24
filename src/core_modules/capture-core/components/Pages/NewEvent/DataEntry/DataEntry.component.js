@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import InfoIcon from '@material-ui/icons/Info';
 import i18n from '@dhis2/d2-i18n';
-import { canViewOtherUsers } from '../../../../d2';
 import DataEntry from '../../../../components/DataEntry/DataEntry.container';
 import withCancelButton from '../../../../components/DataEntry/withCancelButton';
 import withDataEntryField from '../../../../components/DataEntry/dataEntryField/withDataEntryField';
@@ -344,7 +343,7 @@ const buildAssigneeSettingsFn = () => {
     return {
         isApplicable: (props: Object) => {
             const enableUserAssignment = props.stage && props.stage.enableUserAssignment;
-            return !!enableUserAssignment && canViewOtherUsers();
+            return !!enableUserAssignment;
         },
         getComponent: () => assigneeComponent,
         getComponentProps: () => ({
