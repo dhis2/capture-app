@@ -100,7 +100,7 @@ class OptionsSelectVirtualized extends React.Component<Props, State> {
         this.isUnmounted = false;
     }
 
-    componentWillReceiveProps(newProps: Props) {
+    UNSAFE_componentWillReceiveProps(newProps: Props) {
         if (newProps.options !== this.props.options) {
             this.prevFilterValue = null;
         }

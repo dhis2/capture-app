@@ -108,7 +108,7 @@ class Notes extends React.Component<Props, State> {
         };
     }
 
-    componentWillReceiveProps(nextProps: Props) {
+    UNSAFE_componentWillReceiveProps(nextProps: Props) {
         if (nextProps.value !== this.props.value
             || this.props.value !== this.state.value) {
             this.setState({
