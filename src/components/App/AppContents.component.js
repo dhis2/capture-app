@@ -1,75 +1,33 @@
+
 // @flow
-import React, { Component } from 'react';
-import { Route, Switch } from 'react-router';
-import { HeaderBar } from '@dhis2/ui-widgets';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import NetworkStatusBadge from 'capture-core/components/NetworkStatusBadge/NetworkStatusBadge.component';
+import { systemSettingsStore } from 'capture-core/metaDataMemoryStores';
+import { FeedbackBar } from 'capture-core/components/FeedbackBar';
+import { AppPagesLoader } from './AppPagesLoader.component';
 
-import { NewEventPage } from 'capture-core/components/Pages/NewEvent';
-import { ViewEventPage } from 'capture-core/components/Pages/ViewEvent';
-import { NewEnrollmentPage } from 'capture-core/components/Pages/NewEnrollment';
-import { MainPage } from 'capture-core/components/Pages/MainPage';
-import { SearchPage } from 'capture-core/components/Pages/Search';
-
-
-const styles = theme => ({
+const getStyles = theme => ({
     app: {
         fontFamily: theme.typography.fontFamily,
         fontSize: theme.typography.pxToRem(16),
-    },
-    pageContainer: {
-        paddingTop: 48,
-    },
-    headerBar: {
-        left: 0,
-        position: 'fixed',
-        top: 0,
-        width: '100%',
-        zIndex: 1000,
     },
 });
 
 type Props = {
     classes: {
         app: string,
-        pageContainer: string,
-        headerBar: string,
     },
 };
 
-class AppContents extends Component<Props> {
-    render() {
-        const { classes } = this.props;
+const Index = ({ classes }: Props) => (
+    <div
+        className={classes.app}
+        dir={systemSettingsStore.get().dir}
+    >
+        <AppPagesLoader />
+        <FeedbackBar />
+    </div>
+);
+Index.displayName = 'AppContents';
 
-        return (
-            <div
-                className={classes.app}
-            >
-                <div dir="ltr">
-                    <HeaderBar
-                        appName={'Capture App'}
-                        className={classes.headerBar}
-                    >
-                        <NetworkStatusBadge />
-                    </HeaderBar>
-                </div>
-                <div
-                    className={classes.pageContainer}
-                >
-                    <Switch>
-                        <Route path="/newEvent" component={NewEventPage} />
-                        <Route path="/viewEvent" component={ViewEventPage} />
-                        <Route path="/newEnrollment" component={NewEnrollmentPage} />
-                        <Route path="/search" component={SearchPage} />
-                        <Route path="/:keys" component={MainPage} />
-                        <Route path="/" component={MainPage} />
-                    </Switch>
-                </div>
-            </div>
-        );
-    }
-}
-
-const AppContentsWithStyles = withStyles(styles)(AppContents);
-
-export default AppContentsWithStyles;
+export const AppContents = withStyles(getStyles)(Index);

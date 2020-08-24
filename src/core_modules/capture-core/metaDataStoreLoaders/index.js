@@ -1,3 +1,3 @@
 // @flow
 export { loadMetaData } from './baseLoader';
-export { loadSystemSettings } from './systemSettings/loadSystemSetttings';
+export { cacheSystemSettings } from './systemSettings/cacheSystemSetttings';

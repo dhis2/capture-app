@@ -488,7 +488,7 @@ class NewEventDataEntry extends Component<Props> {
         this.dataEntrySections = dataEntrySectionDefinitions;
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.props.onSetSaveTypes(null);
     }
 
