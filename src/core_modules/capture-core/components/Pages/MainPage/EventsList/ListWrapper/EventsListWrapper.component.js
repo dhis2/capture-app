@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 
 import elementTypes from '../../../../../metaData/DataElement/elementTypes';
 
-import withFilterSelectors from '../FilterSelectors/withFilterSelectors';
 import { ListPagination } from '../Pagination';
 
 import ColumnSelector from './ColumnSelector.component';
@@ -144,4 +143,4 @@ class EventListWrapper extends React.Component<Props> {
  * Create the event list for a event capture program
  * @namespace EventsList
  */
-export default withFilterSelectors()(withStyles(getStyles)(EventListWrapper));
+export default withStyles(getStyles)(EventListWrapper);

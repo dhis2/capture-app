@@ -1,10 +1,7 @@
 // @flow
 import React from 'react';
 import OfflineEventsList from '../OfflineEventsList/OfflineEventsList.container';
-import { withWorkingListsHeader } from '../WorkingListsHeaderHOC';
-import { WorkingListsOnHoldWrapper } from '../WorkingListsOnHoldWrapper';
-
-const WorkingListsWithHeader = withWorkingListsHeader()(WorkingListsOnHoldWrapper);
+import { SelectorsBuilder } from '../Selectors';
 
 type Props = {
     isOnline: boolean,
@@ -13,6 +10,7 @@ type Props = {
 
 const EventsListConnectivityWrapper = (props: Props) => {
     const { isOnline, ...passOnProps } = props;
+
     return (
         <div>
             {
@@ -26,7 +24,7 @@ const EventsListConnectivityWrapper = (props: Props) => {
                     }
                     return (
                         <React.Fragment>
-                            <WorkingListsWithHeader />
+                            <SelectorsBuilder />
                         </React.Fragment>
                     );
                 })()

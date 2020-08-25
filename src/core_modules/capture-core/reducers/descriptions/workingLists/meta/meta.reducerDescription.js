@@ -7,9 +7,6 @@ import {
     actionTypes as paginationActionTypes,
 } from '../../../../components/Pages/MainPage/EventsList/Pagination/pagination.actions';
 import {
-    actionTypes as filterSelectorActionTypes,
-} from '../../../../components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.actions';
-import {
     actionTypes as listActionTypes,
 } from '../../../../components/List/list.actions';
 import { actionTypes as workingListsActionTypes } from '../../../../components/Pages/MainPage/WorkingLists';
@@ -221,41 +218,6 @@ export const workingListsMetaDesc = createReducerDescription({
                 currentPage: 1,
             },
         };
-        return newState;
-    },
-    [filterSelectorActionTypes.SET_FILTER]: (state, action) => {
-        const newState = { ...state };
-        const payload = action.payload;
-        const { listId, itemId } = action.meta;
-        newState[listId] = {
-            ...newState[listId],
-            next: {
-                ...newState[listId].next,
-                filters: {
-                    ...(newState[listId].next ? newState[listId].next.filters : null),
-                    [itemId]: payload,
-                },
-            },
-        };
-        return newState;
-    },
-    [filterSelectorActionTypes.CLEAR_FILTER]: (state, action) => {
-        const newState = { ...state };
-        const { itemId, listId } = action.payload;
-
-        const nextMainStateFilters = {
-            ...(newState[listId].next ? newState[listId].next.filters : null),
-            [itemId]: null,
-        };
-
-        newState[listId] = {
-            ...newState[listId],
-            next: {
-                ...newState[listId].next,
-                filters: nextMainStateFilters,
-            },
-        };
-
         return newState;
     },
     [listActionTypes.RESET_LIST]: (state, action) => {

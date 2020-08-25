@@ -4,9 +4,6 @@ import { createReducerDescription } from '../../../trackerRedux/trackerReducer';
 import {
     actionTypes as columnSelectorActionTypes,
 } from '../../../components/Pages/MainPage/EventsList/ListWrapper/actions/columnSelectorDialog.actions';
-import {
-    actionTypes as filterSelectorActionTypes,
-} from '../../../components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.actions';
 import { actionTypes as eventListActionTypes } from '../../../components/Pages/MainPage/EventsList/eventsList.actions';
 import {
     actionTypes as listActionTypes,
@@ -519,31 +516,6 @@ export const workingListsStickyFiltersDesc = createReducerDescription({
             [key]: true,
         }), {}) : undefined;
 
-        return {
-            ...state,
-            [listId]: {
-                filtersWithValueOnInit,
-                userSelectedFilters: undefined,
-            },
-        };
-    },
-    [filterSelectorActionTypes.REST_MENU_ITEM_SELECTED]: (state, action) => {
-        const { id, listId } = action.payload;
-        const currentListState = {
-            ...state[listId],
-            userSelectedFilters: {
-                ...state[listId].userSelectedFilters,
-                [id]: true,
-            },
-        };
-
-        return {
-            ...state,
-            [listId]: currentListState,
-        };
-    },
-    [filterSelectorActionTypes.UPDATE_INCLUDED_FILTERS_AFTER_COLUMN_SORTING]: (state, action) => {
-        const { listId, includeFilters: filtersWithValueOnInit } = action.payload;
         return {
             ...state,
             [listId]: {

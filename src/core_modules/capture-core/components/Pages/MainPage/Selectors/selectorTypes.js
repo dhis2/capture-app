@@ -1,7 +1,7 @@
 // @flow
-import elementTypes from '../../../../../metaData/DataElement/elementTypes';
+import elementTypes from '../../../../metaData/DataElement/elementTypes';
 
-export const filterTypesArray = [
+export const selectorTypesArray = [
     // $FlowFixMe[prop-missing] automated comment
     elementTypes.TEXT,
     // $FlowFixMe[prop-missing] automated comment
@@ -23,7 +23,7 @@ export const filterTypesArray = [
     'ASSIGNEE',
 ];
 
-export const filterTypesObject = filterTypesArray.reduce((accFilterTypesObject, type) => {
+export const selectorTypesObject = selectorTypesArray.reduce((accFilterTypesObject, type) => {
     accFilterTypesObject[type] = type;
     return accFilterTypesObject;
 }, {});

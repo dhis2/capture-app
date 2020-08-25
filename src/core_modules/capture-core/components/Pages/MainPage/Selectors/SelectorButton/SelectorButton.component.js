@@ -5,10 +5,10 @@ import Popover from '@material-ui/core/Popover';
 import ArrowDownwardIcon from '@material-ui/icons/KeyboardArrowDown';
 import ArrowUpwardIcon from '@material-ui/icons/KeyboardArrowUp';
 
-import { Button } from '../../../../../Buttons';
-import ActiveFilterButton from './ActiveFilterButton.component';
-import FilterSelectorContents from '../Contents/FilterSelectorContents.component';
-import OptionSet from '../../../../../../metaData/OptionSet/OptionSet';
+import { Button } from '../../../../Buttons';
+import ActiveFilterButton from './ActiveSelectorButton.component';
+import SelectorContents from '../Contents/SelectorContents.component';
+import OptionSet from '../../../../../metaData/OptionSet/OptionSet';
 
 const getStyles = (theme: Theme) => ({
     icon: {
@@ -47,44 +47,31 @@ type Props = {
     filterValue: ?string,
     onFilterUpdate: (listId: string, data: ?Object, itemId: string, commitValue?: any) => void,
     onClearFilter: (listId: string, itemId: string) => void,
-    onSetVisibleSelector: Function,
-    isSelectorVisible: boolean,
 };
 
 type State = {
-    isMounted: boolean,
+    open: boolean,
 };
 
-class FilterButton extends Component<Props, State> {
+class SelectorButton extends Component<Props, State> {
     activeFilterButtonInstance: ?any;
-    anchorRef: { current: null | HTMLDivElement };
     constructor(props: Props) {
         super(props);
         this.state = {
-            isMounted: false,
+            open: false,
         };
-        this.anchorRef = React.createRef();
-    }
-
-    componentDidMount() {
-        this.setState({  // eslint-disable-line
-            isMounted: true,
-        });
     }
 
     openFilterSelector = () => {
-        const { itemId, onSetVisibleSelector } = this.props;
-        onSetVisibleSelector(itemId);
-
-        // onmouseleave is sometimes triggered when the popover opens, and sometimes not triggered at all (not even when the mouse actually leaves the button). Clears the hover here to avoid it remaining hovered.
-        if (this.props.filterValue) {
-            this.activeFilterButtonInstance && this.activeFilterButtonInstance.clearIsHovered();
-        }
+        this.setState({
+            open: true,
+        });
     }
 
     closeFilterSelector = () => {
-        const { onSetVisibleSelector } = this.props;
-        onSetVisibleSelector(undefined);
+        this.setState({
+            open: false,
+        });
     }
 
     handleFilterUpdate = (data: ?Object, commitValue?: any) => {
@@ -102,7 +89,7 @@ class FilterButton extends Component<Props, State> {
         const { itemId: id, type, optionSet, singleSelect, listId } = this.props;
 
         return (
-            <FilterSelectorContents
+            <SelectorContents
                 listId={listId}
                 type={type}
                 optionSet={optionSet}
@@ -119,9 +106,9 @@ class FilterButton extends Component<Props, State> {
     }
 
     renderWithAppliedFilter() {
-        const { isSelectorVisible, classes, title, filterValue, listId } = this.props;
+        const { classes, title, filterValue, listId } = this.props;
 
-        const arrowIconElement = isSelectorVisible ?
+        const arrowIconElement = this.state.open ?
             <ArrowUpwardIcon className={classes.icon} /> :
             <ArrowDownwardIcon className={classes.icon} />;
 
@@ -140,14 +127,14 @@ class FilterButton extends Component<Props, State> {
     }
 
     renderWithoutAppliedFilter() {
-        const { isSelectorVisible, classes, title } = this.props;
+        const { classes, title } = this.props;
 
         return (
             <Button
                 onClick={this.openFilterSelector}
             >
                 {title}
-                {isSelectorVisible ?
+                {this.state.open ?
                     <ArrowUpwardIcon className={classes.icon} /> :
                     <ArrowDownwardIcon className={classes.icon} />
                 }
@@ -156,29 +143,23 @@ class FilterButton extends Component<Props, State> {
     }
 
     render() {
-        const { filterValue, isSelectorVisible } = this.props;
-        const { isMounted } = this.state;
+        const { filterValue } = this.props;
+        const { open } = this.state;
 
         const button = filterValue ? this.renderWithAppliedFilter() : this.renderWithoutAppliedFilter();
 
         return (
             <React.Fragment>
-                <div
-                    data-test={'filter-button-popover-anchor'}
-                    ref={this.anchorRef}
-                >
-                    {button}
-                </div>
+                {button}
                 <Popover
-                    open={isSelectorVisible && isMounted}
-                    anchorEl={this.anchorRef.current}
+                    open={open}
                     onClose={this.closeFilterSelector}
                     anchorOrigin={POPOVER_ANCHOR_ORIGIN}
                     transformOrigin={POPOVER_TRANSFORM_ORIGIN}
                 >
                     {
                         (() => {
-                            if (isSelectorVisible) {
+                            if (open) {
                                 return this.renderSelectorContents();
                             }
                             return null;
@@ -190,4 +171,4 @@ class FilterButton extends Component<Props, State> {
     }
 }
 
-export default withStyles(getStyles)(FilterButton);
+export default withStyles(getStyles)(SelectorButton);

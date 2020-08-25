@@ -1,5 +1,5 @@
 // @flow
-import { dataElementTypes, OptionSet } from '../../../../../../../metaData';
+import { dataElementTypes, OptionSet } from '../../../../../../metaData';
 import {
     convertText,
     convertDate,
@@ -8,8 +8,8 @@ import {
     convertNumeric,
     convertTrueOnly,
 } from './converters';
-import { isEqual } from '../../../../../../../utils/valueEqualityChecker';
-import type { OptionSetFilterData } from '../../../eventList.types';
+import { isEqual } from '../../../../../../utils/valueEqualityChecker';
+import type { OptionSetFilterData } from '../../../EventsList/eventList.types';
 
 // todo (report lgmt)
 const convertersForTypes = {

@@ -11,9 +11,9 @@ import Paper from '@material-ui/core/Paper';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import i18n from '@dhis2/d2-i18n';
-import Button from '../../../../../Buttons/Button.component';
+import Button from '../../../../Buttons/Button.component';
 
-import type { Column } from '../../ListWrapper/EventsListWrapper.component';
+import type { Column } from '../selectors.types';
 
 const getStyles = (theme: Theme) => ({
     icon: {
@@ -45,7 +45,7 @@ const getStyles = (theme: Theme) => ({
 
 type Props = {
     columns: Array<Column>,
-    onItemSelected: (id: string) => void,
+    onItemSelected?: (id: string) => void,
     classes: {
         icon: string,
         restMenuButton: string,
@@ -60,7 +60,7 @@ type State = {
     filterSelectorOpen: boolean,
 };
 
-class FilterRestMenu extends React.Component<Props, State> {
+class Index extends React.Component<Props, State> {
     menuClasses: Object;
     menuItemClasses: Object;
     managerRef: (instance: any) => void;
@@ -108,7 +108,7 @@ class FilterRestMenu extends React.Component<Props, State> {
 
     handleItemSelected = (id: string) => {
         this.closeMenu();
-        this.props.onItemSelected(id);
+        this.props.onItemSelected && this.props.onItemSelected(id);
     }
 
     renderMenuItems() {
@@ -195,5 +195,6 @@ class FilterRestMenu extends React.Component<Props, State> {
         );
     }
 }
+Index.displayName = 'RestMenu';
 
-export default withStyles(getStyles)(FilterRestMenu);
+export const RestMenu = withStyles(getStyles)(Index);

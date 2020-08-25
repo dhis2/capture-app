@@ -101,9 +101,6 @@ import {
     calculateSelectionsCompletenessEpic,
 } from 'capture-core/components/Pages/epics/calculateSelectionsCompleteness.epic';
 import {
-    includeFiltersWithValueAfterColumnSortingEpic,
-} from 'capture-core/components/Pages/MainPage/EventsList/FilterSelectors/filterSelector.epics';
-import {
     openRelationshipTeiSearchEpic,
     requestRelationshipTeiSearchEpic,
     TeiRelationshipNewOrEditSearchEpic,
@@ -218,7 +215,6 @@ export default combineEpics(
     setOrgUnit,
     setProgram,
     goBackToListContext,
-    includeFiltersWithValueAfterColumnSortingEpic,
     saveNewEventAddAnotherEpic,
     saveNewEventAddAnotherFailedEpic,
     searchRegisteringUnitListEpic,

@@ -1,6 +1,6 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import type { NumericFilterData } from '../../../../eventList.types';
+import type { NumericFilterData } from '../../../../EventsList/eventList.types';
 
 // eslint-disable-next-line complexity
 export function convertNumeric(filter: NumericFilterData) {

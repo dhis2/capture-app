@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-08-07T12:44:32.955Z\n"
-"PO-Revision-Date: 2020-08-07T12:44:32.955Z\n"
+"POT-Creation-Date: 2020-08-25T12:55:18.264Z\n"
+"PO-Revision-Date: 2020-08-25T12:55:18.264Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -413,27 +413,6 @@ msgstr ""
 msgid "Delete event"
 msgstr ""
 
-msgid "Update"
-msgstr ""
-
-msgid "{{fromDate}} to {{toDate}}"
-msgstr ""
-
-msgid "after or equal to {{date}}"
-msgstr ""
-
-msgid "before or equal to {{date}}"
-msgstr ""
-
-msgid "greater than or equal to"
-msgstr ""
-
-msgid "less than or equal to"
-msgstr ""
-
-msgid "More filters"
-msgstr ""
-
 msgid "Select columns"
 msgstr ""
 
@@ -453,6 +432,33 @@ msgid "Download data..."
 msgstr ""
 
 msgid "Rows per page"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "More filters"
+msgstr ""
+
+msgid "{{fromDate}} to {{toDate}}"
+msgstr ""
+
+msgid "after or equal to {{date}}"
+msgstr ""
+
+msgid "before or equal to {{date}}"
+msgstr ""
+
+msgid "greater than or equal to"
+msgstr ""
+
+msgid "less than or equal to"
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid "Completed"
 msgstr ""
 
 msgid "Update view"
@@ -495,12 +501,6 @@ msgid "an error occurred loading working lists"
 msgstr ""
 
 msgid "Registered events"
-msgstr ""
-
-msgid "Active"
-msgstr ""
-
-msgid "Completed"
 msgstr ""
 
 msgid "Creating a new {{TET}} in {{program}} in {{orgUnit}}"

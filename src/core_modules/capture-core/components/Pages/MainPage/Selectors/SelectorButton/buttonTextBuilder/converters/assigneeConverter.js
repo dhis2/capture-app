@@ -1,6 +1,6 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { type AssigneeFilterData, assigneeFilterModes } from '../../../../eventList.types';
+import { type AssigneeFilterData, assigneeFilterModes } from '../../../../EventsList/eventList.types';
 
 const getText = (key) => {
     const keyToText = {

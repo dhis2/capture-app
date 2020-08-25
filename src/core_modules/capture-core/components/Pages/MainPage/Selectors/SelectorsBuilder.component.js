@@ -3,10 +3,9 @@ import * as React from 'react';
 import log from 'loglevel';
 import { withStyles } from '@material-ui/core/styles';
 import { errorCreator } from 'capture-core-utils';
-import FilterButton from './FilterButton/FilterButton.container';
-import FilterRestMenu from './FilterRestMenu/FilterRestMenu.component';
-import { filterTypesArray } from './filterTypes';
-import type { Column } from '../eventList.types';
+import { Selectors } from './Selectors.component';
+import { selectorTypesArray } from './selectorTypes';
+import type { Column } from './selectors.types';
 
 const getStyles = (theme: Theme) => ({
     filterButtonContainer: {
@@ -19,15 +18,12 @@ const getStyles = (theme: Theme) => ({
 type Props = {
     columns: ?Array<Column>,
     stickyFilters: { userSelectedFilters: ?Object, filtersWithValueOnInit: ?Object },
-    listId: string,
-    onRestMenuItemSelected: Function,
-    classes: Object,
 };
 
 const getValidElementConfigsVisiblePrioritized = (columns: Array<Column>) =>
     new Map(
         columns
-            .filter(col => filterTypesArray.includes(col.type))
+            .filter(col => selectorTypesArray.includes(col.type))
             .map((element, index) => ({
                 element,
                 index,
@@ -143,60 +139,12 @@ const getIndividualElementsArray = (
     })
     .filter(element => element);
 
-const renderIndividualFilterButtons = (
-    individualElementsArray: Array<Column>,
-    visibleSelectorId: ?string,
-    onSetVisibleSelector: Function,
-    listId: string,
-    classes: Object,
-) => individualElementsArray
-    .map(
-        element => (
-            <div
-                key={element.id}
-                data-test={`filter-button-container-${element.id}`}
-                className={classes.filterButtonContainer}
-            >
-                <FilterButton
-                    data-test={`filter-button-${element.id}`}
-                    listId={listId}
-                    itemId={element.id}
-                    type={element.type}
-                    title={element.header}
-                    optionSet={element.optionSet}
-                    singleSelect={element.singleSelect}
-                    onSetVisibleSelector={onSetVisibleSelector}
-                    isSelectorVisible={element.id === visibleSelectorId}
-                />
-            </div>
-        ),
-    );
 
-const renderRestButton = (
-    restElementsArray: Array<Column>,
-    listId: string,
-    onRestMenuItemSelected: Function,
-) => (restElementsArray.length > 0 ? (
-    <FilterRestMenu
-        key={'restMenu'}
-        data-test={'filter-rest-menu'}
-        listId={listId}
-        columns={restElementsArray}
-        onItemSelected={onRestMenuItemSelected}
-    />
-) : null);
-
-
-const Filters = (props: Props) => {
+const Index = (props: Props) => {
     const {
         columns,
-        stickyFilters,
-        listId,
-        onRestMenuItemSelected,
-        classes,
+        stickyFilters = {},
     } = props;
-
-    const [visibleSelectorId, setVisibleSelector] = React.useState(undefined);
 
     const elementsContainer = React.useMemo(() => {
         const notEmptyColumns = columns || [];
@@ -233,47 +181,13 @@ const Filters = (props: Props) => {
         stickyFilters,
     ]);
 
-    const handleRestMenuItemSelected = React.useCallback((id: string) => {
-        setVisibleSelector(id);
-        onRestMenuItemSelected(id);
-    }, [
-        setVisibleSelector,
-        onRestMenuItemSelected,
-    ]);
-
-    const filterButtons = React.useMemo(() => {
-        const { individualElementsArray, restElementsArray } = elementsContainer;
-        const individualFilterButtons = renderIndividualFilterButtons(
-            individualElementsArray,
-            visibleSelectorId,
-            setVisibleSelector,
-            listId,
-            classes,
-        );
-        const restButton = renderRestButton(
-            restElementsArray,
-            listId,
-            handleRestMenuItemSelected,
-        );
-
-        return [
-            [...individualFilterButtons],
-            restButton,
-        ];
-    }, [
-        elementsContainer,
-        visibleSelectorId,
-        setVisibleSelector,
-        listId,
-        classes,
-        handleRestMenuItemSelected,
-    ]);
-
     return (
-        <React.Fragment>
-            {filterButtons}
-        </React.Fragment>
+        <Selectors
+            individualElementsArray={elementsContainer.individualElementsArray}
+            restElementsArray={elementsContainer.restElementsArray}
+        />
     );
 };
+Index.displayName = 'SelectorsBuilder';
 
-export default withStyles(getStyles)(Filters);
+export const SelectorsBuilder = withStyles(getStyles)(Index);
