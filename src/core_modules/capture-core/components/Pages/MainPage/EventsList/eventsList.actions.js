@@ -1,6 +1,6 @@
 // @flow
 import { actionCreator } from 'capture-core/actions/actions.utils';
-import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
+import { effectMethods } from '../../../../trackerOffline';
 
 export const actionTypes = {
     SORT_WORKING_LIST: 'SortWorkingList',
@@ -40,7 +40,7 @@ export const startDeleteEvent = (eventId: string) =>
         offline: {
             effect: {
                 url: `events/${eventId}`,
-                method: methods.DELETE,
+                method: effectMethods.DELETE,
             },
             commit: { type: actionTypes.EVENT_DELETED },
             rollback: { type: actionTypes.DELETE_EVENT_FAILED },

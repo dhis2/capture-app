@@ -5,7 +5,7 @@ const loginEndPoint = 'dhis-web-commons/security/login.action';
  * because Cypress doesn't allow multiple domains per test:
  * https://docs.cypress.io/guides/guides/web-security.html#One-Superdomain-per-Test
  */
-Cypress.Commands.add('login', () => {
+Cypress.Commands.add('loginBasicAuth', () => {
     // AuthBoundary
     const username = Cypress.env('dhis2_username');
     const password = Cypress.env('dhis2_password');
@@ -21,5 +21,15 @@ Cypress.Commands.add('login', () => {
             '2fa_code': '',
         },
         headers: { Authorization: loginAuth },
+    });
+});
+
+Cypress.Commands.add('loginThroughForm', () => {
+    const username = Cypress.env('dhis2_username');
+    const password = Cypress.env('dhis2_password');
+    return cy.visit('/').then(() => {
+        cy.get('#j_username').type(username);
+        cy.get('#j_password').type(password);
+        cy.get('form').submit();
     });
 });

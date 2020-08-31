@@ -4,7 +4,7 @@ import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
 import { getRulesActionsForEvent } from '../../../../rules/actionsCreator';
 import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
 import Program from '../../../../metaData/Program/Program';
-import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
+import { effectMethods } from '../../../../trackerOffline';
 import getEventDateValidatorContainers from './fieldValidators/eventDate.validatorContainersGetter';
 import {
     getConvertGeometryIn,
@@ -148,7 +148,7 @@ export const startSaveEditEventAfterReturnedToMainPage = (eventId: string, serve
         offline: {
             effect: {
                 url: `events/${eventId}`,
-                method: methods.UPDATE,
+                method: effectMethods.UPDATE,
                 data: serverData,
             },
             commit: { type: actionTypes.EVENT_UPDATED_AFTER_RETURN_TO_MAIN_PAGE, meta: { selections } },
@@ -180,7 +180,7 @@ export const startAddNoteForEditSingleEvent = (eventId: string, serverData: Obje
         offline: {
             effect: {
                 url: `events/${eventId}/note`,
-                method: methods.POST,
+                method: effectMethods.POST,
                 data: serverData,
             },
             commit: { type: actionTypes.NOTE_ADDED_FOR_EDIT_SINGLE_EVENT, meta: { selections, context } },

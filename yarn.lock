@@ -6235,22 +6235,22 @@ d2-utilizr@^0.2.15:
     lodash.isset "^4.3.0"
     lodash.isstring "^4.0.1"
 
-d2@29.1.5:
-  version "29.1.5"
-  resolved "https://registry.yarnpkg.com/d2/-/d2-29.1.5.tgz#49007b31475be25486d38791534250735f64b1db"
-  dependencies:
-    docdash "^0.4.0"
-    jsdoc "^3.5.5"
-    whatwg-fetch "^2.0.3"
-
 d2@31.1.1:
   version "31.1.1"
   resolved "https://registry.yarnpkg.com/d2/-/d2-31.1.1.tgz#8c551077c27031de8ad2d8df0b575242a3080917"
+  integrity sha512-Qk1Y0nr6DNCyyJ/jhJQuf5oECB1V0uCaDWLG9akjfy2HzSIueqaO3nuX++lPMTJez9Bb6j1FOjB6Cxxu5/wZ/g==
   dependencies:
     babel-jest "^22.4.3"
     docdash "^0.4.0"
     jsdoc "^3.5.5"
     whatwg-fetch "^2.0.3"
+
+d2@^31:
+  version "31.8.2"
+  resolved "https://registry.yarnpkg.com/d2/-/d2-31.8.2.tgz#1b0f47a3686c01ecaa805d3dc44f056626d9baaf"
+  integrity sha512-eRmEf7+OslcdVSF4oFCBFBOwd2FEB8829xNqCz79PK49WkhYIy5c/cwEkwZd2sD5bJyeCyNoi3p4/42wC0AZ1Q==
+  dependencies:
+    isomorphic-fetch "^2.2.1"
 
 d2@~31.7:
   version "31.7.0"
