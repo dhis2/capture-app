@@ -346,7 +346,7 @@ const buildAssigneeSettingsFn = () => {
             return !!enableUserAssignment;
         },
         getComponent: () => assigneeComponent,
-        getComponentProps: (props: Object) => createComponentProps(props, {
+        getComponentProps: (props: Object) => createComponentProps({}, {
             orientation: getOrientation(props.formHorizontal),
         }),
         getPropName: () => 'assignee',
