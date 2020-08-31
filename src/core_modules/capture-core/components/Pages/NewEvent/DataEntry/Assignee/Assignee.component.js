@@ -11,8 +11,9 @@ const getStyles = () => ({
         alignItems: 'center',
         padding: 8,
     },
-    containerHorizontal: {
+    containerVertical: {
         display: 'flex',
+        flexDirection: 'column',
         margin: 8,
     },
     label: {
@@ -44,8 +45,7 @@ const Assignee = (props: Props) => {
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <Username inputPlaceholderText={i18n.t('Search for user')} {...passOnProps} />
             </div>
-        </div>
-    );
+        </div>);
 };
 
 export default withStyles(getStyles)(Assignee);
