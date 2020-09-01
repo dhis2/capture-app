@@ -1,5 +1,4 @@
 // @flow
-import React from 'react';
 import { moment } from 'capture-core-utils/moment';
 import { dataElementTypes as elementTypes } from '../../../../../../../../metaData';
 import { displayCoordinates } from '../../../../../../../../converters/utils';
