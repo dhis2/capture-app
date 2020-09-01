@@ -6,8 +6,11 @@ type Coordinates = $ReadOnly<{|
   longitude: number,
 |}>;
 
+const toSixDecimal = (value: number) => (value ? value.toFixed(6) : null);
+
 export const displayCoordinates = ({ latitude, longitude }: Coordinates) =>
     (<div>
-        lat: {latitude} <br />
-        long: {longitude}
+        lat: {toSixDecimal(latitude)} <br />
+        long: {toSixDecimal(longitude)}
     </div>);
+
