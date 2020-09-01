@@ -1,6 +1,8 @@
 // @flow
+import React from 'react';
 import { moment } from 'capture-core-utils/moment';
 import { dataElementTypes as elementTypes } from '../../../../../../../../metaData';
+import { displayCoordinates } from '../../../../../../../../converters/utils';
 
 const stringifyNumber = (rawValue: number) => rawValue.toString();
 
@@ -32,7 +34,7 @@ const valueConvertersForType = {
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.IMAGE]: (rawValue: Object) => rawValue.value,
     // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.COORDINATE]: (rawValue: Object) => `lat: ${rawValue.latitude}, long: ${rawValue.longitude}`,
+    [elementTypes.COORDINATE]: (rawValue: Object) => displayCoordinates(rawValue),
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.PERCENTAGE]: (rawValue: Object) => rawValue.replace('%', ''),
     // $FlowFixMe[prop-missing] automated comment
