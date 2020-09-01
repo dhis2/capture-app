@@ -2,7 +2,7 @@
 // epics for handling search group searches
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
-import { ofType, ActionsObservable } from 'redux-observable';
+import { ofType } from 'redux-observable';
 import { map, filter, takeUntil, catchError, mergeMap, mergeAll } from 'rxjs/operators';
 import { race, of, from } from 'rxjs';
 import { pipe as pipeD2, errorCreator } from 'capture-core-utils';
@@ -101,7 +101,7 @@ function searchHasUpdatedValues(searchGroup: InputSearchGroup, values: Object, p
 
 export const getFilterSearchGroupForSearchEpic =
     (triggerBatches: Array<string>) =>
-        (action$: typeof ActionsObservable, store: ReduxStore) =>
+        (action$: InputObservable, store: ReduxStore) =>
             action$.pipe(
                 ofType(...triggerBatches),
                 map((actionBatch) => {
@@ -183,7 +183,7 @@ export const getFilterSearchGroupForSearchEpic =
 
 export const getExecuteSearchForSearchGroupEpic =
     (cancelBatches: Array<string>) =>
-        (action$: typeof ActionsObservable, store: ReduxStore) =>
+        (action$: InputObservable, store: ReduxStore) =>
             action$.pipe(
                 ofType(searchBatchActionTypes.FILTERED_SEARCH_ACTIONS_FOR_SEARCH_BATCH),
                 map((actionBatch) => {
