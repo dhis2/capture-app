@@ -28,7 +28,7 @@ import {
 } from '../../ViewEventComponent/viewEvent.actions';
 
 
-export const loadEditEventDataEntryEpic = (action$: ActionsObservable, store: ReduxStore) =>
+export const loadEditEventDataEntryEpic = (action$: typeof ActionsObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(eventDetailsActionTypes.START_SHOW_EDIT_EVENT_DATA_ENTRY),
         map(() => {

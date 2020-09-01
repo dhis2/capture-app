@@ -1,12 +1,11 @@
 // @flow
-import StorageContainer from 'capture-core-utils/storage/StorageController';
-import LocalStorageAdapter from 'capture-core-utils/storage/DomLocalStorageAdapter';
+import { StorageController, DomLocalStorageAdapter } from 'capture-core-utils/storage';
 import getD2 from 'capture-core/d2/d2Instance';
 
 import objectStores from './sessionCacheObjectStores.const';
 import { set as setStorageContainer } from './sessionCacheStorageContainer';
 
-async function loadSystemSettings(storageContainer: StorageContainer, d2: D2) {
+async function loadSystemSettings(storageContainer: typeof StorageController, d2: D2) {
     const currentStoreContents = await storageContainer.getAll(objectStores.SYSTEM_SETTINGS);
     if (!currentStoreContents || currentStoreContents.length === 0) {
         const systemSettings = await d2.system.settings.all();
@@ -19,7 +18,7 @@ async function loadSystemSettings(storageContainer: StorageContainer, d2: D2) {
 
 async function openStorageContainer() {
     const objectStoreList = Object.keys(objectStores).map(key => objectStores[key]);
-    const storageContainer = new StorageContainer('sessionCache', [LocalStorageAdapter], objectStoreList);
+    const storageContainer = new StorageController('sessionCache', [DomLocalStorageAdapter], objectStoreList);
     setStorageContainer(storageContainer);
     await storageContainer.open();
     return storageContainer;

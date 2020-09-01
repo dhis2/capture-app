@@ -1,5 +1,5 @@
 // @flow
-import StorageController from 'capture-core-utils/storage/StorageController';
+import { StorageController } from 'capture-core-utils/storage';
 import type { ProgramRule, ProgramRuleVariable } from '../../rules/engine';
 import { ProgramFactory } from './factory';
 import {
@@ -22,28 +22,28 @@ import type {
 import type { CachedProgramIndicator } from './getRulesAndVariablesFromIndicators';
 
 
-function getPrograms(storageController: StorageController, storeName: string): Promise<Array<Object>> {
+function getPrograms(storageController: typeof StorageController, storeName: string): Promise<Array<Object>> {
     return storageController.getAll(storeName);
 }
 
-function getProgramRulesVariables(storageController: StorageController, storeName: string): Promise<Array<Object>> {
+function getProgramRulesVariables(storageController: typeof StorageController, storeName: string): Promise<Array<Object>> {
     return storageController.getAll(storeName);
 }
 
-function getProgramRules(storageController: StorageController, storeName: string): Promise<Array<Object>> {
+function getProgramRules(storageController: typeof StorageController, storeName: string): Promise<Array<Object>> {
     return storageController.getAll(storeName);
 }
 
-function getProgramIndicators(storageController: StorageController, storeName: string): Promise<Array<Object>> {
+function getProgramIndicators(storageController: typeof StorageController, storeName: string): Promise<Array<Object>> {
     return storageController.getAll(storeName);
 }
 
-function getRelationshipTypes(storageController: StorageController, storeName: string): Promise<Array<Object>> {
+function getRelationshipTypes(storageController: typeof StorageController, storeName: string): Promise<Array<Object>> {
     return storageController.getAll(storeName);
 }
 
 function getCategories(
-    storageController: StorageController,
+    storageController: typeof StorageController,
     storeName: string,
 ): Promise<{[categoryId: string]: CachedCategory}> {
     return storageController.getAll(storeName)

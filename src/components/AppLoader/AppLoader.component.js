@@ -1,13 +1,12 @@
 // @flow
 import * as React from 'react';
 import log from 'loglevel';
-import { createHashHistory as createHistory } from 'history';
+import { createHashHistory as createHistory, type HashHistory } from 'history';
 import { useDataEngine } from '@dhis2/app-runtime';
 import { LoadingMaskForPage } from 'capture-core/components/LoadingMasks';
 import { DisplayException } from 'capture-core/utils/exceptions';
 import { environments } from 'capture-core/constants';
 import { buildUrl } from 'capture-core-utils';
-import type { HashHistory } from 'history/createHashHistory';
 import { initializeAsync } from './init';
 import { getStore } from '../../store/getStore';
 

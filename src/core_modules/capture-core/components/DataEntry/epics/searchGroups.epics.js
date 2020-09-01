@@ -101,7 +101,7 @@ function searchHasUpdatedValues(searchGroup: InputSearchGroup, values: Object, p
 
 export const getFilterSearchGroupForSearchEpic =
     (triggerBatches: Array<string>) =>
-        (action$: ActionsObservable, store: ReduxStore) =>
+        (action$: typeof ActionsObservable, store: ReduxStore) =>
             action$.pipe(
                 ofType(...triggerBatches),
                 map((actionBatch) => {
@@ -183,7 +183,7 @@ export const getFilterSearchGroupForSearchEpic =
 
 export const getExecuteSearchForSearchGroupEpic =
     (cancelBatches: Array<string>) =>
-        (action$: ActionsObservable, store: ReduxStore) =>
+        (action$: typeof ActionsObservable, store: ReduxStore) =>
             action$.pipe(
                 ofType(searchBatchActionTypes.FILTERED_SEARCH_ACTIONS_FOR_SEARCH_BATCH),
                 map((actionBatch) => {

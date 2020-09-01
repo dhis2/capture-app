@@ -1,25 +1,24 @@
 // @flow
 import log from 'loglevel';
-import { ofType } from 'redux-observable';
+import { ofType, ActionsObservable } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { errorCreator } from 'capture-core-utils';
 import { loadCore, actionTypes as coreActionTypes, batchActionTypes as coreBatchActionTypes } from 'capture-core/init';
 import { loadAppSuccess, loadAppFailed, appStartActionTypes } from './appStart.actions';
 
-// $FlowFixMe[cannot-resolve-name] automated comment
-export const triggerLoadCoreEpic = (action$: ActionsObservable) =>
+export const triggerLoadCoreEpic = (action$: typeof ActionsObservable) =>
     action$.pipe(
         ofType(appStartActionTypes.APP_LOAD),
         map(() => loadCore()));
 
-export const loadAppEpic = (action$: ActionsObservable) =>
+export const loadAppEpic = (action$: typeof ActionsObservable) =>
     action$.pipe(
         ofType(coreBatchActionTypes.CORE_LOAD_SUCCESS_BATCH),
         map(() => loadAppSuccess({
             headerBarHeight: 48,
         })));
 
-export const loadCoreFailedEpic = (action$: ActionsObservable) =>
+export const loadCoreFailedEpic = (action$: typeof ActionsObservable) =>
     action$.pipe(
         ofType(coreActionTypes.CORE_LOAD_FAILED),
         map((action) => {

@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 // eslint-disable-next-line import/extensions
 import 'typeface-roboto';
-import type { HashHistory } from 'history/createHashHistory';
+import { HashHistory } from 'history/createHashHistory';
 import { AppLoader } from '../AppLoader';
 import { App } from '../App';
 import { loadApp } from './appStart.actions';
@@ -20,7 +20,7 @@ export const AppStart = () => {
     const store: {current: Object} = useRef();
     const history = useRef();
 
-    const handleRunApp = useCallback((storeArg: ReduxStore, historyArg: HashHistory) => {
+    const handleRunApp = useCallback((storeArg: ReduxStore, historyArg: typeof HashHistory) => {
         store.current = storeArg;
         history.current = historyArg;
         setReadyStatus(true);

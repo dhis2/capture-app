@@ -1,12 +1,11 @@
 // @flow
-import { ofType } from 'redux-observable';
+import { ofType, ActionsObservable } from 'redux-observable';
 import { concatMap } from 'rxjs/operators';
 import { actionTypes, loadCoreFailed } from './init.actions';
 import getOrgUnitRootsActions from './getOrgUnitRootsActions';
 import { loadCoreSuccessBatch } from './init.actionBatches';
 
-// $FlowFixMe[cannot-resolve-name] automated comment
-export const loadCoreEpic = (action$: ActionsObservable) =>
+export const loadCoreEpic = (action$: typeof ActionsObservable) =>
     action$.pipe(
         ofType(actionTypes.CORE_LOAD),
         concatMap(() => getOrgUnitRootsActions()

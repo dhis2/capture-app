@@ -22,6 +22,6 @@ type StoreNames = {
 
 export type ContextInput = {
     onQueryApi: QueryApiFn,
-    storageController: StorageController,
+    storageController: typeof StorageController,
     storeNames: StoreNames,
 };
