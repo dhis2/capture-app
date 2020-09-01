@@ -10,7 +10,7 @@ import { AppContents } from './AppContents.component';
 
 type Props = {
     store: ReduxStore,
-    history: HashHistory,
+    history: ?HashHistory,
 };
 
 export const App = ({ store, history }: Props) => (
