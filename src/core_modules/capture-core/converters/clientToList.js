@@ -5,7 +5,7 @@ import elementTypes from '../metaData/DataElement/elementTypes';
 import DataElement from '../metaData/DataElement/DataElement';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
 import stringifyNumber from './common/stringifyNumber';
-import { displayCoordinates } from './utils';
+import { MinimalCoordinates } from '../components/MinimalCoordinates';
 
 function convertDateForListDisplay(rawValue: string): string {
     const momentDate = moment(rawValue);
@@ -75,7 +75,7 @@ const valueConvertersForType = {
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'Yes' : 'No'),
     // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.COORDINATE]: displayCoordinates,
+    [elementTypes.COORDINATE]: MinimalCoordinates,
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.AGE]: convertDateForListDisplay,
     // $FlowFixMe[prop-missing] automated comment
