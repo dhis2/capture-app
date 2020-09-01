@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
 
-type Coordinates = {
+type Coordinates = $ReadOnly<{|
   latitude: number,
   longitude: number,
-};
+|}>;
 
 export const displayCoordinates = ({ latitude, longitude }: Coordinates) =>
     (<div>
