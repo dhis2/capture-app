@@ -32,7 +32,7 @@ const valueConvertersForType = {
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.IMAGE]: (rawValue: Object) => rawValue.value,
     // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.COORDINATE]: (rawValue: Object) => `[${rawValue.longitude},${rawValue.latitude}]`,
+    [elementTypes.COORDINATE]: (rawValue: Object) => `lat: ${rawValue.latitude}, long: ${rawValue.longitude}`,
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.PERCENTAGE]: (rawValue: Object) => rawValue.replace('%', ''),
     // $FlowFixMe[prop-missing] automated comment

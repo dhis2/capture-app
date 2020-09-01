@@ -29,7 +29,7 @@ type CoordinateClientValue = {
 };
 
 function convertCoordinateForDisplay(clientValue: CoordinateClientValue) {
-    return `[ ${clientValue.longitude}, ${clientValue.latitude} ]`;
+    return `lat: ${clientValue.latitude}, long: ${clientValue.longitude}`;
 }
 
 type FileClientValue = {
