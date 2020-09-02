@@ -297,7 +297,7 @@ msgid "Status"
 msgstr "状态"
 
 msgid "Comments"
-msgstr ""
+msgstr "评论"
 
 msgid "Please add or cancel comment before saving the event"
 msgstr ""
