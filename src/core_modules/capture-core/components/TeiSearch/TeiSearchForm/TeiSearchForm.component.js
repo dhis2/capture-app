@@ -147,6 +147,7 @@ class SearchForm extends React.Component<Props> {
             onSearchValidationFailed,
             searchAttempted,
             attributesWithValuesCount,
+            id,
             ...passOnProps } = this.props;
 
         const searchForm = searchGroup && searchGroup.searchForm;
@@ -165,13 +166,17 @@ class SearchForm extends React.Component<Props> {
                 <Form
                     formRef={(formInstance) => { this.formInstance = formInstance; }}
                     formFoundation={searchGroup.searchForm}
+                    id={id}
                     {...passOnProps}
                 />
                 {!searchGroup.unique && this.renderOrgUnitSelector()}
                 <div
                     className={classes.searchButtonContainer}
                 >
-                    <Button onClick={this.handleSearchAttempt}>
+                    <Button
+                        dataTest={`dhis2-capture-relationship-tei-search-button-${id}`}
+                        onClick={this.handleSearchAttempt}
+                    >
                         {searchButtonText}
                     </Button>
                     {!searchGroup.unique && this.renderMinAttributesRequired()}
