@@ -68,6 +68,16 @@ const getStyles = (theme: Theme) => ({
     imageContainer: {
         marginRight: theme.typography.pxToRem(8),
     },
+    iconBaseline: {
+        display: 'inline-flex',
+        alignSelf: 'center',
+        top: '.125em',
+        position: 'relative',
+        marginRight: theme.typography.pxToRem(4),
+    },
+    pad: {
+        paddingTop: 3,
+    },
 });
 
 const Index = (props: OwnProps & CssClasses) => {
@@ -125,14 +135,27 @@ const Index = (props: OwnProps & CssClasses) => {
                                 {
                                     item.tei && item.tei.lastUpdated &&
                                     <div className={classes.lastUpdated}>
-                                        Last updated {moment(item.tei.lastUpdated).fromNow()}
+                                        { i18n.t('Last updated') } {moment(item.tei.lastUpdated).fromNow()}
                                     </div>
                                 }
                                 <div className={classes.enrolled}>
                                     {
                                         isEnrolled ?
-                                            <Tag dataTest="dhis2-uicore-tag" positive>
-                                                { i18n.t('Enrolled') }
+                                            <Tag
+                                                dataTest="dhis2-uicore-tag"
+                                                positive
+                                                icon={
+                                                    <DoneIcon
+                                                        style={{
+                                                            transformBox: 'view-box',
+                                                            fontSize: 14,
+                                                            position: 'relative',
+                                                            top: '-1px',
+                                                        }}
+                                                    />
+                                                }
+                                            >
+                                                { i18n.t('Enrolled: Active') }
                                             </Tag>
                                             :
                                             <Tag dataTest="dhis2-uicore-tag">
