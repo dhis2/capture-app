@@ -4,6 +4,7 @@ import React from 'react';
 import moment from 'moment';
 import type { ComponentType, Element } from 'react';
 import { Avatar, Grid, withStyles } from '@material-ui/core';
+import DoneIcon from '@material-ui/icons/Done';
 import { colors, Tag } from '@dhis2/ui-core';
 import { DataElement } from '../../metaData';
 import type { SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
@@ -11,7 +12,7 @@ import type { CardDataElementsInformation } from '../Pages/Search/SearchResults/
 
 type OwnProps = $ReadOnly<{|
     item: SearchResultItem,
-    // todo
+    // todo there needs to be an indicator for this coming from the API.
     isEnrolled?: boolean,
     getCustomTopElements?: ?(props: Object) => Element<any>,
     getCustomBottomElements?: ?(props: Object) => Element<any>,
