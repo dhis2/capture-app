@@ -69,16 +69,6 @@ const getStyles = (theme: Theme) => ({
     imageContainer: {
         marginRight: theme.typography.pxToRem(8),
     },
-    iconBaseline: {
-        display: 'inline-flex',
-        alignSelf: 'center',
-        top: '.125em',
-        position: 'relative',
-        marginRight: theme.typography.pxToRem(4),
-    },
-    pad: {
-        paddingTop: 3,
-    },
 });
 
 const Index = (props: OwnProps & CssClasses) => {
