@@ -86,7 +86,6 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
             lockedSelectorActionTypes.NEW_EVENT_OPEN,
             lockedSelectorActionTypes.PROGRAM_ID_SET,
             lockedSelectorActionTypes.CATEGORY_OPTION_SET,
-            lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID,
             crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED,
         ),
         filter(() => {
@@ -99,6 +98,7 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
             if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED) {
                 return (!!triggeringActionType) && [
                     lockedSelectorActionTypes.ORG_UNIT_ID_SET,
+                    lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID,
                 ].includes(triggeringActionType);
             }
             return true;
@@ -138,7 +138,6 @@ export const openNewEventInDataEntryEpic = (action$: InputObservable, store: Red
 export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
         ofType(
-            lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID,
             lockedSelectorActionTypes.NEW_EVENT_OPEN,
             lockedSelectorActionTypes.CATEGORY_OPTION_SET,
             lockedSelectorActionTypes.PROGRAM_ID_SET,
@@ -149,11 +148,12 @@ export const resetRecentlyAddedEventsWhenNewEventInDataEntryEpic = (action$: Inp
             return page === 'newEvent';
         }),
         filter((action) => {
-            // cancel if triggered by SELECTIONS_COMPLETENESS_CALCULATED and the underlying action is not SET_ORG_UNIT
+            // cancel if triggered by SELECTIONS_COMPLETENESS_CALCULATED and the underlying action is not SET_ORG_UNIT or SELECTIONS_FROM_URL_VALID
             const type = action.type;
             if (type === crossPageActionTypes.SELECTIONS_COMPLETENESS_CALCULATED) {
                 const triggeringActionType = action.payload && action.payload.triggeringActionType;
-                if (triggeringActionType !== lockedSelectorActionTypes.ORG_UNIT_ID_SET) {
+                if (![lockedSelectorActionTypes.SELECTIONS_FROM_URL_VALID, lockedSelectorActionTypes.ORG_UNIT_ID_SET]
+                    .includes(triggeringActionType)) {
                     return false;
                 }
             }
