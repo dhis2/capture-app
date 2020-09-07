@@ -26,6 +26,7 @@ const Row = (props: Props, context: { table?: ?{ head: boolean, footer: boolean 
     return (
         <tr
             className={classes}
+            data-test="dhis2-capture-table-row"
             {...passOnProps}
         >
             {props.children}

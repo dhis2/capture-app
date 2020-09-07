@@ -285,11 +285,14 @@ class List extends React.Component<Props> {
             >
                 <Table
                     className={classes.table}
+                    data-test="dhis2-capture-event-list-table"
                 >
                     <Head>
                         {this.renderHeaderRow(visibleColumns)}
                     </Head>
-                    <Body>
+                    <Body
+                        data-test="dhis2-capture-event-list-body"
+                    >
                         {this.renderBody(visibleColumns)}
                     </Body>
                 </Table>
