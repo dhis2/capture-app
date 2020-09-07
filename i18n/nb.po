@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-08-07T12:44:32.955Z\n"
+"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Karoline Tufte Lien <karoline@dhis2.org>, 2020\n"
 "Language-Team: Norwegian Bokmål (https://www.transifex.com/hisp-uio/teams/100509/nb/)\n"
@@ -309,6 +309,9 @@ msgstr "Fjern"
 
 msgid "No results"
 msgstr "Ingen resultater"
+
+msgid "start typing to search"
+msgstr ""
 
 msgid "suggestions could not be retrieved"
 msgstr "forslag kunne ikke hentes"
