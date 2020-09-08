@@ -564,6 +564,7 @@ class FormBuilder extends React.Component<Props> {
             <div
                 key={field.id}
                 className={defaultClasses.fieldOuterContainer}
+                data-test={`dhis2-capture-form-field-${field.id}`}
             >
                 <div
                     {...onGetContainerProps && onGetContainerProps(index, fields.length, field)}

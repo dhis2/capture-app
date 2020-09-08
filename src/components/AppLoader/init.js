@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable import/prefer-default-export */
 import log from 'loglevel';
-import { init as initAsync, config, getUserSettings as getUserSettingsAsync } from 'd2/lib/d2';
+import { init as initAsync, config, getUserSettings as getUserSettingsAsync } from 'd2';
 import environments from 'capture-core/constants/environments';
 // import moment from 'capture-core/utils/moment/momentResolver';
 import moment from 'moment';
