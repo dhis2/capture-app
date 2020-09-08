@@ -284,8 +284,8 @@ export default class D2Coordinate extends React.Component<Props, State> {
                 </div>
                 {this.renderClearButton()}
             </div>
-        );
-    }
+        </div>
+        )
 
     render() {
         return this.props.orientation === orientations.VERTICAL ? this.renderVertical() : this.renderHorizontal();
