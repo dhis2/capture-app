@@ -1,6 +1,6 @@
 // @flow
 import { actionCreator, actionPayloadAppender } from '../../../../../actions/actions.utils';
-import { methods } from '../../../../../trackerOffline/trackerOfflineConfig.const';
+import { effectMethods } from '../../../../../trackerOffline';
 import saveTypes from '../newEventSaveTypes';
 
 export const batchActionTypes = {
@@ -60,7 +60,7 @@ export const startSaveNewEventAfterReturnedToMainPage = (serverData: Object, rel
         offline: {
             effect: {
                 url: 'events',
-                method: methods.POST,
+                method: effectMethods.POST,
                 data: serverData,
             },
             commit: { type: actionTypes.SAVE_NEW_EVENT_RELATIONSHIPS_IF_EXISTS, meta: { selections, relationshipData, triggerAction: actionType } },
@@ -75,7 +75,7 @@ export const startSaveNewEventRelationships = (serverData: Object, selections: O
         offline: {
             effect: {
                 url: 'relationships',
-                method: methods.POST,
+                method: effectMethods.POST,
                 data: serverData,
             },
             commit: { type: actionTypes.NEW_EVENT_RELATIONSHIPS_SAVED, meta: { selections, triggerAction } },
@@ -88,7 +88,7 @@ export const startSaveTeiForNewEventRelationship = (teiPayload: Object, selectio
         offline: {
             effect: {
                 url: 'trackedEntityInstances',
-                method: methods.POST,
+                method: effectMethods.POST,
                 data: teiPayload,
             },
             commit: { type: actionTypes.TEI_FOR_NEW_EVENT_RELATIONSHIPS_SAVED, meta: { selections, triggerAction, relationshipData, relationshipClientId } },
@@ -137,7 +137,7 @@ export const startSaveNewEventAddAnother =
         offline: {
             effect: {
                 url: 'events',
-                method: methods.POST,
+                method: effectMethods.POST,
                 data: serverData,
                 clientId,
             },

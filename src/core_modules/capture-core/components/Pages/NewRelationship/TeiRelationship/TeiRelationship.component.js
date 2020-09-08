@@ -98,6 +98,7 @@ class TeiRelationship extends React.Component<Props> {
                 <div className={classes.button}>
                     <SearchIcon fontSize="large" className={classes.buttonIcon} />
                     <Button
+                        dataTest="dhis2-capture-find-relationship-button"
                         color="primary"
                         onClick={() => this.props.onSelectFindMode(findModes.TEI_SEARCH)}
                     >
@@ -110,6 +111,7 @@ class TeiRelationship extends React.Component<Props> {
                 <div className={classes.button}>
                     <AddIcon className={classes.buttonIcon} />
                     <Button
+                        dataTest="dhis2-capture-create-relationship-button"
                         color="primary"
                         onClick={() => this.props.onSelectFindMode(findModes.TEI_REGISTER)}
                     >

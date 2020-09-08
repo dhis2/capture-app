@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2020-06-23T10:34:34.303Z\n"
+"POT-Creation-Date: 2020-08-26T13:05:11.412Z\n"
 "PO-Revision-Date: 2019-06-27 07:31+0000\n"
 "Last-Translator: Carwoto Sa'an <carwoto@gmail.com>, 2020\n"
 "Language-Team: Indonesian (https://www.transifex.com/hisp-uio/teams/100509/id/)\n"
@@ -31,6 +31,13 @@ msgstr "Hari ini"
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
+msgstr ""
+
+msgid ""
+"You opened another version of the Capture App in the same domain. Currently,"
+" the Capture App only supports running one version concurrently (in the same"
+" domain). Please refresh this page if you would like to use this version "
+"again, but be aware that this will close other versions."
 msgstr ""
 
 msgid "Columns to show in table"
@@ -295,6 +302,9 @@ msgid "Clear"
 msgstr "Hapus"
 
 msgid "No results"
+msgstr ""
+
+msgid "start typing to search"
 msgstr ""
 
 msgid "suggestions could not be retrieved"
@@ -792,13 +802,6 @@ msgid "Delete polygon"
 msgstr ""
 
 msgid "Set area"
-msgstr ""
-
-msgid ""
-"You opened another version of the Capture App in the same domain. Currently,"
-" the Capture App only supports running one version concurrently (in the same"
-" domain). Please refresh this page if you would like to use this version "
-"again, but be aware that this will close other versions."
 msgstr ""
 
 msgid "Compatibility mode"

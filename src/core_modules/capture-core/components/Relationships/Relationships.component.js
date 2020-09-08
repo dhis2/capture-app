@@ -188,6 +188,7 @@ class Relationships extends React.Component<Props> {
                                 onClick={onOpenAddRelationship}
                                 disabled={!canCreate}
                                 small={smallMainButton}
+                                dataTest="dhis2-capture-add-relationship-button"
                             >
                                 {i18n.t('Add relationship')}
                             </Button>

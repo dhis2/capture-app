@@ -33,17 +33,6 @@ const exitBehaviours = {
 };
 
 class UserSearch extends React.Component<Props, State> {
-    static getSearchQueryParams(value: string) {
-        return {
-            fields: 'displayName,id,userCredentials[username]',
-            paging: true,
-            pageSize: 10,
-            page: 1,
-            query: value,
-            totalPages: false,
-        };
-    }
-
     cancelablePromise: ?{cancel: () => void, promise: Promise<any>};
     suggestionElements: Map<string, HTMLElement>;
     inputDomElement: ?HTMLInputElement;
@@ -130,15 +119,15 @@ class UserSearch extends React.Component<Props, State> {
         });
     }
 
-    search = (value: string) => getApi()
-        .get('users', UserSearch.getSearchQueryParams(value))
+    search = (query: string) => getApi()
+        .get('userLookup', { query })
         .then((response) => {
             const apiUsers = (response && response.users) || [];
             return apiUsers
                 .map(au => ({
                     id: au.id,
-                    username: au.userCredentials.username,
                     name: au.displayName,
+                    username: au.username,
                 }));
         });
 
