@@ -8,11 +8,11 @@ export default class OrgUnitTree extends React.Component {
       selected: this.props.value,
   }
 
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
       await this.fetchRoot();
   }
 
-  componentWillReceiveProps({ value }) {
+  UNSAFE_componentWillReceiveProps({ value }) {
       this.setState({ selected: value });
   }
 

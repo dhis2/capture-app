@@ -1,12 +1,11 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
 
 # testing
 /coverage
+cypress.env.json
 
-# production
+# build folders
 /build
 /buildzip
 
@@ -19,20 +18,19 @@
 .env.development.local
 .env.test.local
 .env.production.local
-
+.env.cypress.local
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
 .vscode/
 .DS_Store
 npm-debug.log
 /public/manifest.webapp
+.idea
+public/manifest.webapp
 
 # generated localization files
 src/locales/
-public/manifest.webapp
 
-.idea
-
-cypress.env.json
+# DHIS2 Platform
+.d2

@@ -256,7 +256,7 @@ class FormBuilder extends React.Component<Props> {
         }
     }
 
-    componentWillReceiveProps(newProps: Props) {
+    UNSAFE_componentWillReceiveProps(newProps: Props) {
         if (newProps.id !== this.props.id || newProps.loadNr !== this.props.loadNr) {
             this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
             this.commitUpdateTriggeredForFields = {};
