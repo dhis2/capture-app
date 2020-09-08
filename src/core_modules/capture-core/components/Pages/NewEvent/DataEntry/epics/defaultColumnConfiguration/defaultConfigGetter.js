@@ -1,6 +1,5 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { canViewOtherUsers } from '../../../../../../d2';
 import {
     RenderFoundation,
     ProgramStage,
@@ -33,7 +32,7 @@ export const getDefaultMainConfig = (stage: ProgramStage) => {
     ];
 
     const extraFields = [];
-    if (stage.enableUserAssignment && canViewOtherUsers()) {
+    if (stage.enableUserAssignment) {
         const assigneeField = {
             id: mainPropertyNames.ASSIGNEE,
             type: 'ASSIGNEE',

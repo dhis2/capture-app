@@ -2,7 +2,6 @@
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import { moment } from 'capture-core-utils/moment';
-import { canViewOtherUsers } from '../../../../../../../d2';
 import {
     dataElementTypes as elementTypes,
 } from '../../../../../../../metaData';
@@ -199,7 +198,7 @@ const getMainDataFilters = async (
     if (eventDate) {
         filters.push({ ...getDateFilter(eventDate), id: 'eventDate' });
     }
-    if (assignedUserMode && canViewOtherUsers()) {
+    if (assignedUserMode) {
         filters.push({ ...(await getAssigneeFilter(assignedUserMode, assignedUsers)), id: 'assignee' });
     }
     return filters;

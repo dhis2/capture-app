@@ -39,7 +39,7 @@ type HOCParamsContainer = {
 
 export default (hocParams: ?HOCParamsContainer) =>
     (InnerComponent: React.ComponentType<any>) =>
-        class LabelHOC extends React.Component<Props> {
+        (class LabelHOC extends React.Component<Props> {
             labelContainerClass: ?string;
             labelClasses: ?LabelClasses;
             passOnClasses: ?Object;
@@ -49,7 +49,7 @@ export default (hocParams: ?HOCParamsContainer) =>
                 this.setClasses(props.classes);
             }
 
-            componentWillReceiveProps(newProps: Props) {
+            UNSAFE_componentWillReceiveProps(newProps: Props) {
                 const nextClasses = newProps.classes || {};
                 const prevClasses = this.props.classes || {};
 
@@ -133,4 +133,4 @@ export default (hocParams: ?HOCParamsContainer) =>
                     </div>
                 );
             }
-        };
+        });
