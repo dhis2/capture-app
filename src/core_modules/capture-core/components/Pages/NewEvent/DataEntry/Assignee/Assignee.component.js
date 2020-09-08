@@ -10,6 +10,11 @@ const getStyles = () => ({
         alignItems: 'center',
         padding: 8,
     },
+    containerVertical: {
+        display: 'flex',
+        flexDirection: 'column',
+        margin: 8,
+    },
     label: {
         flexBasis: 200,
     },
@@ -21,30 +26,21 @@ const getStyles = () => ({
 
 type Props = {
     classes: Object,
+    orientation: string
 };
 
 const Assignee = (props: Props) => {
-    const { classes, ...passOnProps } = props;
-
+    const { classes, orientation, ...passOnProps } = props;
     return (
-        <div
-            className={classes.container}
-        >
-            <div
-                className={classes.label}
-            >
+        <div className={orientation === 'horizontal' ? classes.container : classes.containerVertical}>
+            <div className={orientation === 'horizontal' && classes.label}>
                 {i18n.t('Assigned user')}
             </div>
-            <div
-                className={classes.field}
-            >
-                <Username
-                    inputPlaceholderText={i18n.t('Search for user')}
-                    {...passOnProps}
-                />
+            <div className={orientation === 'horizontal' && classes.field}>
+                {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
+                <Username inputPlaceholderText={i18n.t('Search for user')} {...passOnProps} />
             </div>
-        </div>
-    );
+        </div>);
 };
 
 export default withStyles(getStyles)(Assignee);
