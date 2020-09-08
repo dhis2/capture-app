@@ -1,5 +1,7 @@
 // @flow
 import programs from 'capture-core/metaDataMemoryStores/programCollection/programCollection';
+import { ofType } from 'redux-observable';
+import { map, filter } from 'rxjs/operators';
 import {
     resetProgramIdBase,
 } from '../../LockedSelector/QuickSelector/actions/QuickSelector.actions';
@@ -23,14 +25,12 @@ const programShouldReset = (orgUnitId, currentlySelectedProgramId) => {
 };
 
 export const resetProgramAfterSettingOrgUnitIfApplicableEpic = (action$: InputObservable, store: ReduxStore) =>
-    action$
-
-        // $FlowFixMe[prop-missing] automated comment
-        .ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET)
-        .filter((action) => {
+    action$.pipe(
+        ofType(lockedSelectorActionTypes.ORG_UNIT_ID_SET),
+        filter((action) => {
             const orgUnitId = action.payload.id;
-            const currentlySelectedProgramId = store.getState().currentSelections.programId;
+            const currentlySelectedProgramId = store.value.currentSelections.programId;
             return programShouldReset(orgUnitId, currentlySelectedProgramId);
-        })
-        .map(() => resetProgramIdBase());
+        }),
+        map(() => resetProgramIdBase()));
 

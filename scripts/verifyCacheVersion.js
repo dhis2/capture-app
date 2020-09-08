@@ -3,7 +3,7 @@
  * Validate the version and cacheVersion specified in package.json
  * The version and cacheVersion compose the actual storage version.
  */
-const packageDesc = require('./package.json');
+const packageDesc = require('../package.json');
 
 function verifyMajorCacheVersion(appVersion) {
     if (!appVersion) {

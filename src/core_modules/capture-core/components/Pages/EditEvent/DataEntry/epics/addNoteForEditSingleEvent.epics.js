@@ -1,5 +1,7 @@
 // @flow
 import { batchActions } from 'redux-batched-actions';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
 import uuid from 'd2-utilizr/lib/uuid';
 import moment from 'capture-core-utils/moment/momentResolver';
 import { convertValue as convertListValue } from '../../../../../converters/clientToList';
@@ -22,11 +24,10 @@ import {
 import { getCurrentUser } from '../../../../../d2/d2Instance';
 
 export const addNoteForEditSingleEventEpic = (action$: InputObservable, store: ReduxStore) =>
-
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(editEventDataEntryActionTypes.REQUEST_ADD_NOTE_FOR_EDIT_SINGLE_EVENT)
-        .map((action) => {
-            const state = store.getState();
+    action$.pipe(
+        ofType(editEventDataEntryActionTypes.REQUEST_ADD_NOTE_FOR_EDIT_SINGLE_EVENT),
+        map((action) => {
+            const state = store.value;
             const payload = action.payload;
             const eventId = state.dataEntries[payload.dataEntryId].eventId;
             // $FlowFixMe[prop-missing] automated comment
@@ -52,16 +53,15 @@ export const addNoteForEditSingleEventEpic = (action$: InputObservable, store: R
                 addNote(payload.dataEntryId, payload.itemId, formNote),
                 addEventNote(eventId, clientNote),
             ], editEventDataEntryBatchActionTypes.ADD_NOTE_FOR_EDIT_SINGLE_EVENT_BATCH);
-        });
+        }));
 
 export const removeNoteForEditSingleEventEpic = (action$: InputObservable) =>
-
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(editEventDataEntryActionTypes.ADD_NOTE_FAILED_FOR_EDIT_SINGLE_EVENT)
-        .map((action) => {
+    action$.pipe(
+        ofType(editEventDataEntryActionTypes.ADD_NOTE_FAILED_FOR_EDIT_SINGLE_EVENT),
+        map((action) => {
             const context = action.meta.context;
             return batchActions([
                 removeNote(context.dataEntryId, context.itemId, context.noteClientId),
                 removeEventNote(context.eventId, context.noteClientId),
             ], editEventDataEntryBatchActionTypes.REMOVE_NOTE_FOR_EDIT_SINGLE_EVENT_BATCH);
-        });
+        }));
