@@ -41,10 +41,10 @@ const getStyles = (theme: Theme) => ({
 });
 
 const Index = ({
-    searchViaUniqueIdOnScopeTrackedEntityType,
-    searchViaUniqueIdOnScopeProgram,
-    searchViaAttributesOnScopeProgram,
-    searchViaAttributesOnScopeTrackedEntityType,
+    onSearchViaUniqueIdOnScopeTrackedEntityType,
+    onSearchViaUniqueIdOnScopeProgram,
+    onSearchViaAttributesOnScopeProgram,
+    onSearchViaAttributesOnScopeTrackedEntityType,
     selectedOptionId,
     classes,
     availableSearchOptions,
@@ -63,10 +63,10 @@ const Index = ({
             if (isValid) {
                 switch (searchScope) {
                 case searchScopes.PROGRAM:
-                    searchViaUniqueIdOnScopeProgram({ programId: selectedId, formId });
+                    onSearchViaUniqueIdOnScopeProgram({ programId: selectedId, formId });
                     break;
                 case searchScopes.TRACKED_ENTITY_TYPE:
-                    searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: selectedId, formId });
+                    onSearchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId: selectedId, formId });
                     break;
                 default:
                     break;
@@ -74,17 +74,22 @@ const Index = ({
             }
         };
 
+        const isSearchViaAttributesFormValid = (formId, minAttributesRequiredToSearch) => {
+            const isFormValid = formReference[formId].validateFormScrollToFirstFailedField({});
+            const isLengthValid = isSearchViaAttributesValid(minAttributesRequiredToSearch, formId);
+            return isFormValid && isLengthValid;
+        };
         const handleSearchViaAttributes = (selectedId, formId, searchScope, minAttributesRequiredToSearch) => {
-            const isValid = isSearchViaAttributesValid(minAttributesRequiredToSearch, formId);
+            const isValid = isSearchViaAttributesFormValid(formId, minAttributesRequiredToSearch);
 
             if (isValid) {
                 setError(false);
                 switch (searchScope) {
                 case searchScopes.PROGRAM:
-                    searchViaAttributesOnScopeProgram({ programId: selectedId, formId });
+                    onSearchViaAttributesOnScopeProgram({ programId: selectedId, formId });
                     break;
                 case searchScopes.TRACKED_ENTITY_TYPE:
-                    searchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: selectedId, formId });
+                    onSearchViaAttributesOnScopeTrackedEntityType({ trackedEntityTypeId: selectedId, formId });
                     break;
                 default:
                     break;
@@ -210,15 +215,14 @@ const Index = ({
         forms,
         availableSearchOptions,
         selectedOptionId,
+        onSearchViaUniqueIdOnScopeTrackedEntityType,
+        onSearchViaUniqueIdOnScopeProgram,
+        onSearchViaAttributesOnScopeProgram,
+        onSearchViaAttributesOnScopeTrackedEntityType,
         searchStatus,
-        searchViaUniqueIdOnScopeTrackedEntityType,
-        searchViaUniqueIdOnScopeProgram,
-        searchViaAttributesOnScopeProgram,
-        searchViaAttributesOnScopeTrackedEntityType,
         isSearchViaAttributesValid,
         error,
     ]);
 };
-
 
 export const SearchFormComponent = withStyles(getStyles)(Index);

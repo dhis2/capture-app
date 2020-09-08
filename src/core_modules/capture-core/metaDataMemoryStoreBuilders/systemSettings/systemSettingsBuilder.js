@@ -18,5 +18,7 @@ export default async function buildSystemSettingsAsync(cacheData?: ?Array<Object
         systemSettings[setting.id] = setting.value;
     });
 
+    systemSettings.trackerAppRelativePath = 'dhis-web-tracker-capture';
+
     systemSettingsStore.set(systemSettings);
 }

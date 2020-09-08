@@ -14,7 +14,7 @@ type Props = {
 
 // $FlowFixMe[prop-missing] automated comment
 class DeleteControl extends MapControl<any, Props> {
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         const deleteControl = L.control({ position: 'topright' });
         const text = i18n.t('Delete polygon');
         const jsx = (

@@ -10,14 +10,15 @@
     "extends": [
         "airbnb",
         "plugin:flowtype/recommended",
-        "plugin:react-hooks/recommended"
+        "plugin:react-hooks/recommended",
+        "react-app"
     ],
     "plugins": [
         "flowtype"
     ],
     "env": {
         "browser": true,
-        "jest": true,
+        "jest": true
     },
     "globals": {
         "cy": true,
@@ -30,7 +31,11 @@
         "window": true,
         "it": true,
         "expect": true,
-        "appPackage": true
+        "appPackage": true,
+        "Given": true,
+        "When": true,
+        "Then": true,
+        "Cypress": true
     },
     "rules": {
         "indent": [2, 4],
@@ -77,7 +82,11 @@
         "import/no-extraneous-dependencies": [
             "error",
             {
-                "devDependencies": ["**/*.test.js"],
+                "devDependencies": [
+                    "**/*.test.js",
+                    "/cypress/**",
+                    "**/startAppForCypress.js"
+                ],
                 "optionalDependencies": false,
                 "peerDependencies": true
             }
@@ -106,17 +115,26 @@
                         "getInitialState",
                         "state",
                         "getChildContext",
-                        "componentWillMount",
+                        "UNSAFE_componentWillMount",
                         "componentDidMount",
-                        "componentWillReceiveProps",
+                        "UNSAFE_componentWillReceiveProps",
                         "shouldComponentUpdate",
-                        "componentWillUpdate",
+                        "UNSAFE_componentWillUpdate",
                         "componentDidUpdate",
                         "componentWillUnmount"
                     ]
                 }
             }
-        ]
+        ],
+        "react-hooks/exhaustive-deps": "error",
+        "camelcase": ["error", {
+            "properties": "never",
+            "allow": [
+              "UNSAFE_componentWillMount",
+              "UNSAFE_componentWillReceiveProps",
+              "UNSAFE_componentWillUpdate"
+            ]
+          }]
     },
     "settings": {
         "import/resolver": {
