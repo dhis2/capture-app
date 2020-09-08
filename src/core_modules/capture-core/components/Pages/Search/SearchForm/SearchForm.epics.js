@@ -1,7 +1,7 @@
 // @flow
+import { ofType } from 'redux-observable';
 import { catchError, flatMap, map, startWith } from 'rxjs/operators';
-import { from } from 'rxjs/observable/from';
-import { of } from 'rxjs/observable/of';
+import { of, from } from 'rxjs';
 import { searchPageActionTypes } from '../SearchPage.container';
 import { getTrackedEntityInstances } from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import {
@@ -54,10 +54,10 @@ const searchViaAttributesStream = (queryArgs, attributes) =>
     );
 
 export const searchViaUniqueIdOnScopeProgramEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH).pipe(
+    action$.pipe(
+        ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH),
         flatMap(({ payload: { formId, programId } }) => {
-            const { formsValues } = store.getState();
+            const { formsValues } = store.value;
             const queryArgs = {
                 filter: getFiltersForUniqueIdSearchQuery(formsValues[formId]),
                 program: programId,
@@ -73,10 +73,10 @@ export const searchViaUniqueIdOnScopeProgramEpic = (action$: InputObservable, st
 
 
 export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH).pipe(
+    action$.pipe(
+        ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
         flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
-            const { formsValues } = store.getState();
+            const { formsValues } = store.value;
             const queryArgs = {
                 filter: getFiltersForUniqueIdSearchQuery(formsValues[formId]),
                 trackedEntityType: trackedEntityTypeId,
@@ -91,10 +91,10 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (action$: InputObse
     );
 
 export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH).pipe(
+    action$.pipe(
+        ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH),
         flatMap(({ payload: { formId, programId } }) => {
-            const { formsValues } = store.getState();
+            const { formsValues } = store.value;
 
             const queryArgs = {
                 filter: getFiltersForAttributesSearchQuery(formsValues[formId]),
@@ -109,10 +109,10 @@ export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, 
     );
 
 export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH).pipe(
+    action$.pipe(
+        ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
         flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
-            const { formsValues } = store.getState();
+            const { formsValues } = store.value;
 
             const queryArgs = {
                 filter: getFiltersForAttributesSearchQuery(formsValues[formId]),
