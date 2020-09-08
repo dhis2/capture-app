@@ -16,7 +16,7 @@ export const onScopeProgramFindUsingUniqueIdentifierEpic = (action$: InputObserv
     action$.pipe(
         ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH),
         flatMap(({ payload: { formId, programId } }) => {
-            const { formsValues } = store.getState();
+            const { formsValues } = store.value;
             const searchTerm = formsValues[formId];
             const fieldId = Object.keys(searchTerm)[0];
             const queryArgs = {
@@ -53,7 +53,7 @@ export const onScopeTrackedEntityTypeFindUsingUniqueIdentifierEpic = (action$: I
     action$.pipe(
         ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
         flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
-            const { formsValues } = store.getState();
+            const { formsValues } = store.value;
             const searchTerm = formsValues[formId];
             const fieldId = Object.keys(searchTerm)[0];
             const queryArgs = {
