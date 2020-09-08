@@ -2516,7 +2516,7 @@
   dependencies:
     prop-types "^15"
 
-"@dhis2/ui-core@3.12.0", "@dhis2/ui-core@^3.12.0":
+"@dhis2/ui-core@3.12.0":
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/@dhis2/ui-core/-/ui-core-3.12.0.tgz#6216868b1bd76b816df8c3272c2b9200972f0858"
   integrity sha512-9JYl0TP6Wkb2yD5OkiN4juHYxW37UYZF1egbCAxuUCx7Uox5HqUkzxaKw25bQKN+4684vDnIJgh0Z2qSTszg1g==
@@ -2525,7 +2525,7 @@
     classnames "^2.2.6"
     styled-jsx "^3.2.2"
 
-"@dhis2/ui-core@^4.6.1":
+"@dhis2/ui-core@^4.21.1", "@dhis2/ui-core@^4.6.1":
   version "4.21.1"
   resolved "https://registry.yarnpkg.com/@dhis2/ui-core/-/ui-core-4.21.1.tgz#2b5518f6bd5de75404df3eefa83452e0c40852aa"
   integrity sha512-dpK4UwktLw9qcRkDe5wU76j35ntoulqKpcaBoxXZ1+/rzR2FeaJ+w4l+I+bg45jcK9WjLLsFClc1zi+O/MG1MA==
@@ -6227,22 +6227,22 @@ d2-utilizr@^0.2.15:
     lodash.isset "^4.3.0"
     lodash.isstring "^4.0.1"
 
-d2@29.1.5:
-  version "29.1.5"
-  resolved "https://registry.yarnpkg.com/d2/-/d2-29.1.5.tgz#49007b31475be25486d38791534250735f64b1db"
-  dependencies:
-    docdash "^0.4.0"
-    jsdoc "^3.5.5"
-    whatwg-fetch "^2.0.3"
-
 d2@31.1.1:
   version "31.1.1"
   resolved "https://registry.yarnpkg.com/d2/-/d2-31.1.1.tgz#8c551077c27031de8ad2d8df0b575242a3080917"
+  integrity sha512-Qk1Y0nr6DNCyyJ/jhJQuf5oECB1V0uCaDWLG9akjfy2HzSIueqaO3nuX++lPMTJez9Bb6j1FOjB6Cxxu5/wZ/g==
   dependencies:
     babel-jest "^22.4.3"
     docdash "^0.4.0"
     jsdoc "^3.5.5"
     whatwg-fetch "^2.0.3"
+
+d2@^31:
+  version "31.8.2"
+  resolved "https://registry.yarnpkg.com/d2/-/d2-31.8.2.tgz#1b0f47a3686c01ecaa805d3dc44f056626d9baaf"
+  integrity sha512-eRmEf7+OslcdVSF4oFCBFBOwd2FEB8829xNqCz79PK49WkhYIy5c/cwEkwZd2sD5bJyeCyNoi3p4/42wC0AZ1Q==
+  dependencies:
+    isomorphic-fetch "^2.2.1"
 
 d2@~31.7:
   version "31.7.0"
