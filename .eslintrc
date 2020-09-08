@@ -29,6 +29,7 @@
         "Given": true,
         "When": true,
         "Then": true,
+        "And": true,
         "Cypress": true
     },
     "rules": {
