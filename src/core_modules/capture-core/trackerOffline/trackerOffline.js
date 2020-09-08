@@ -1,12 +1,21 @@
 // @flow
 import defaultQueue from '@redux-offline/redux-offline/lib/defaults/queue';
-import { getApi } from '../d2/d2Instance';
-import { methods } from './trackerOfflineConfig.const';
+import { effectMethods } from './trackerOffline.const';
+import type { OfflineEffect } from './trackerOffline.types';
 
-export const effectConfig = (effect: OfflineEffect) => {
-    const { url, method, data } = effect;
-    return getApi()[method](url, data);
-};
+export const getEffectReconciler = (() => {
+    const mutateTypeForMethods = {
+        [effectMethods.POST]: 'create',
+        [effectMethods.UPDATE]: 'replace',
+        [effectMethods.DELETE]: 'delete',
+    };
+
+    return (onApiMutate: Function) => ({ url: resource, method, data }: OfflineEffect) => {
+        const type = mutateTypeForMethods[method];
+        return onApiMutate({ resource, type, data });
+    };
+})();
+
 /* eslint-disable no-new-func */
 // $FlowFixMe
 const getFunctionFromString = (functionAsString: string) => Function(`return ${functionAsString}`)();
@@ -32,7 +41,7 @@ export const queueConfig = {
     dequeue(array, responseAction) {
         const [triggerAction, ...rest] = array;
         const currentItemEffect = getEffect(triggerAction);
-        if (currentItemEffect.method === methods.POST) {
+        if (currentItemEffect.method === effectMethods.POST) {
             return rest.map((action) => {
                 const itemEffect = getEffect(action);
                 if (itemEffect.clientId === currentItemEffect.clientId && itemEffect.updateOnDequeueCallback) {
@@ -47,7 +56,7 @@ export const queueConfig = {
     },
 };
 
-export const discardConfig = (error: ?{httpStatusCode?: number}) => {
+export const shouldDiscard = (error: ?{httpStatusCode?: number}) => {
     const statusCode = error && error.httpStatusCode;
     if (!statusCode) {
         return false;

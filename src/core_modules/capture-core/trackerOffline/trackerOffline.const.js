@@ -1,8 +1,7 @@
 // @flow
 
-export const methods = {
+export const effectMethods = {
     POST: 'post',
     UPDATE: 'update',
-    GET: 'get',
     DELETE: 'delete',
 };
