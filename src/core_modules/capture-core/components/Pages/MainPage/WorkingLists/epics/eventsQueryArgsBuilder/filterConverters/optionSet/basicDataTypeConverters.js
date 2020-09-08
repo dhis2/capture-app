@@ -1,7 +1,6 @@
 // @flow
 import { moment } from 'capture-core-utils/moment';
 import { dataElementTypes as elementTypes } from '../../../../../../../../metaData';
-import { MinimalCoordinates } from '../../../../../../../MinimalCoordinates';
 
 const stringifyNumber = (rawValue: number) => rawValue.toString();
 
