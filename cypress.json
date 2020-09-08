@@ -6,5 +6,6 @@
   "chromeWebSecurityComment": "chromeWebSecurity should removed once https://github.com/cypress-io/cypress/issues/4220 is fixed",
   "chromeWebSecurity": false,
   "defaultCommandTimeout": 12500,
-  "projectId": "322xnh"
+  "projectId": "322xnh",
+  "experimentalFetchPolyfill": true
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { getInstance } from 'd2/lib/d2';
+import { getInstance } from 'd2';
 import Tree from './Tree';
 
 export default class OrgUnitTree extends React.Component {
