@@ -8,7 +8,6 @@ import ViewEventSectionHeader from '../../Section/ViewEventSectionHeader.compone
 import Contents from './Contents.component';
 import withLoadingIndicator from '../../../../../HOC/withLoadingIndicator';
 import { ProgramStage } from '../../../../../metaData';
-import { canViewOtherUsers } from '../../../../../d2';
 
 const LoadingContents = withLoadingIndicator(null, props => ({ style: props.loadingIndicatorStyle }))(Contents);
 
@@ -33,7 +32,7 @@ class AssigneeSection extends React.Component<Props> {
     render() {
         const { programStage, ...passOnProps } = this.props;
 
-        if (!programStage.enableUserAssignment || !canViewOtherUsers()) {
+        if (!programStage.enableUserAssignment) {
             return null;
         }
 
