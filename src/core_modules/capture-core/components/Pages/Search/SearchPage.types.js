@@ -1,6 +1,14 @@
 // @flow
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 
+
+export type AvailableSearchOptions = {
+  [elementId: string]: {|
+    +searchOptionId: string,
+    +searchOptionName: string,
+    +searchGroups: Array<{|searchForm: RenderFoundation, unique: boolean, formId: string, searchScope: string|}>
+  |}
+}
 export type OwnProps = {|
   +classes: {|
     +container: string,
@@ -19,11 +27,6 @@ export type OwnProps = {|
   |},
 |}
 
-export type DispatchersFromRedux = {|
-  addFormIdToReduxStore: (formId: string) => void,
-|}
-
-
 export type PropsFromRedux ={|
   +preselectedProgram: {|
     value: ?string,
@@ -39,20 +42,16 @@ export type PropsFromRedux ={|
       |}>
     |}
   },
-  +availableSearchOptions: {
-    [elementId: string]: {|
-      +searchOptionId: string,
-      +searchOptionName: string,
-      +searchGroups: Array<{|searchForm: RenderFoundation, unique: boolean, formId: string|}>
-    |}
-  },
-  +forms: {
-    [elementId: string]: {
-      loadNr: number
-    }
-  },
+  +availableSearchOptions: AvailableSearchOptions,
   +error: boolean,
   +ready: boolean,
+  +searchStatus: string,
+  +searchResultsErrorMessage: string
+|}
+
+export type DispatchersFromRedux = {|
+  addFormIdToReduxStore: (formId: string) => void,
+  closeModal: () => void
 |}
 
 export type Props = {|

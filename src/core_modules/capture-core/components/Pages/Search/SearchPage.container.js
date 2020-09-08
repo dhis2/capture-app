@@ -1,14 +1,16 @@
 // @flow
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { SearchPage as SearchPageComponent } from './SearchPage.component';
 import { programCollection } from '../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../../metaData/Program';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 import type { DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './SearchPage.types';
 import { addFormData } from '../../D2Form/actions/form.actions';
+import { actionCreator } from '../../../actions/actions.utils';
 
 
-const buildSearchOption = (id, name, searchGroups) => ({
+const buildSearchOption = (id, name, searchGroups, searchScope) => ({
     searchOptionId: id,
     searchOptionName: name,
     searchGroups: [...searchGroups.values()]
@@ -20,11 +22,26 @@ const buildSearchOption = (id, name, searchGroups) => ({
             // Also the formId is passed in the `Form` component and needs to be identical with the one in
             // the store in order for the `Form` to function. For these reasons we generate it once here.
             formId: `searchPageForm-${id}-${index}`,
+            searchScope,
         })),
 });
 
+export const searchPageActionTypes = {
+    VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH: 'SearchViaUniqueIdOnScopeProgram',
+    VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH: 'SearchViaUniqueIdOnScopeTrackedEntityType',
+    SEARCH_RESULTS_EMPTY: 'SearchResultsEmpty',
+    SEARCH_RESULTS_LOADING: 'SearchResultsLoading',
+    SEARCH_RESULTS_ERROR: 'SearchResultsError',
+    MODAL_CLOSE: 'CloseModal',
+};
+
+export const searchScopes = {
+    PROGRAM: 'PROGRAM',
+    TRACKED_ENTITY_TYPE: 'TRACKED_ENTITY_TYPE',
+};
+
 const mapStateToProps = (state: ReduxState): PropsFromRedux => {
-    const { currentSelections, activePage } = state;
+    const { currentSelections, activePage, searchPage: { searchStatus, searchResultsErrorMessage } } = state;
 
     const trackedEntityTypesWithCorrelatedPrograms =
       [...programCollection.values()]
@@ -67,12 +84,13 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
         // $FlowFixMe https://github.com/facebook/flow/issues/2221
         .reduce((acc, { trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeSearchGroups, programs }) => ({
             ...acc,
-            [trackedEntityTypeId]: buildSearchOption(trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeSearchGroups),
+            [trackedEntityTypeId]: buildSearchOption(trackedEntityTypeId, trackedEntityTypeName, trackedEntityTypeSearchGroups, searchScopes.TRACKED_ENTITY_TYPE),
             ...programs.reduce((accumulated, { programId, programName, searchGroups }) => ({
                 ...accumulated,
-                [programId]: buildSearchOption(programId, programName, searchGroups),
+                [programId]: buildSearchOption(programId, programName, searchGroups, searchScopes.PROGRAM),
             }), {}),
         }), {});
+
 
     return {
         preselectedProgram: {
@@ -80,16 +98,23 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
             label: preselectedProgram && preselectedProgram.programName,
         },
         availableSearchOptions,
-        forms: state.forms,
         trackedEntityTypesWithCorrelatedPrograms,
         error: activePage.selectionsError && activePage.selectionsError.error,
         ready: !activePage.isLoading,
+        searchStatus,
+        searchResultsErrorMessage,
     };
 };
 
 const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
     addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
+    closeModal: () => { dispatch(actionCreator(searchPageActionTypes.MODAL_CLOSE)()); },
 });
 
-export const SearchPage = connect<Props, OwnProps, _, _, _, _>(mapStateToProps, mapDispatchToProps)(withLoadingIndicator()(withErrorMessageHandler()(SearchPageComponent)));
+export const SearchPage =
+  compose(
+      connect<Props, OwnProps, _, _, _, _>(mapStateToProps, mapDispatchToProps),
+      withLoadingIndicator(),
+      withErrorMessageHandler(),
+  )(SearchPageComponent);
 
