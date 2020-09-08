@@ -6,7 +6,7 @@ import type { ProgramRule, ProgramRuleVariable } from '../../rules/engine';
 import CategoryCombination from '../CategoryCombinations/CategoryCombination';
 import Icon from '../Icon/Icon';
 import type { Access } from '../Access/Access';
-import ProgramStage from './ProgramStage';
+import type ProgramStage from './ProgramStage';
 
 export default class Program {
     static errorMessages = {
