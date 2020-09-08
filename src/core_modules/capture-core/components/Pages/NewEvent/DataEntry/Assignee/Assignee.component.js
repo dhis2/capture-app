@@ -33,15 +33,11 @@ type Props = {
 const Assignee = (props: Props) => {
     const { classes, orientation, ...passOnProps } = props;
     return (
-        <div className={classes[classNames({
-            container: orientation === 'horizontal',
-            containerVertical: orientation === 'vertical',
-        })]}
-        >
-            <div className={classes[classNames({ label: orientation === 'horizontal' })]}>
+        <div className={orientation === 'horizontal' ? classes.container : classes.containerVertical}>
+            <div className={orientation === 'horizontal' && classes.label}>
                 {i18n.t('Assigned user')}
             </div>
-            <div className={classes[classNames({ field: orientation === 'horizontal' })]}>
+            <div className={orientation === 'horizontal' && classes.field}>
                 {/* $FlowFixMe[cannot-spread-inexact] automated comment */}
                 <Username inputPlaceholderText={i18n.t('Search for user')} {...passOnProps} />
             </div>
