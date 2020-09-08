@@ -1,7 +1,7 @@
 // @flow
 import { ofType } from 'redux-observable';
 import { catchError, flatMap, map, startWith } from 'rxjs/operators';
-import { of, from, empty } from 'rxjs';
+import { of, from } from 'rxjs';
 import { searchPageActionTypes } from '../SearchPage.container';
 import { getTrackedEntityInstances } from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import {
@@ -37,7 +37,7 @@ export const onScopeProgramFindUsingUniqueIdentifierEpic = (action$: InputObserv
                         const urlParameters =
                           `/#/dashboard?tei=${trackedEntityInstanceId}&ou=${orgUnitId}&program=${programId}`;
                         window.location.href = `${oldTrackerCaptureAppUrl}${urlParameters}`;
-                        return empty();
+                        return {};
                     }
                     // trigger action that will display modal to inform user that results are empty.
                     return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
@@ -74,7 +74,7 @@ export const onScopeTrackedEntityTypeFindUsingUniqueIdentifierEpic = (action$: I
                         const urlParameters =
                           `/#/dashboard?tei=${trackedEntityInstanceId}&ou=${orgUnitId}&trackedEntityType=${trackedEntityTypeId}`;
                         window.location.href = `${oldTrackerCaptureAppUrl}${urlParameters}`;
-                        return empty();
+                        return {};
                     }
                     // trigger action that will display modal to inform user that results are empty.
                     return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
