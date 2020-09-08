@@ -171,6 +171,7 @@ const Index = ({
                                             {
                                                 forms[formId] &&
                                                 <Form
+                                                    formRef={(formInstance) => { formReference[formId] = formInstance; }}
                                                     formFoundation={searchForm}
                                                     id={formId}
                                                 />
