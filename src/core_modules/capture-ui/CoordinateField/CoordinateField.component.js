@@ -261,30 +261,28 @@ export default class D2Coordinate extends React.Component<Props, State> {
                         {this.renderClearButton()}
                     </div>
                     <div className={defaultClasses.inputContainer}>
-                        {this.renderLongitude()}
+                        {this.renderLatitude()}
                     </div>
                     <div className={defaultClasses.inputContainer}>
-                        {this.renderLatitude()}
+                        {this.renderLongitude()}
                     </div>
                 </div>
             </div>
         );
     }
 
-    renderHorizontal = () => {
-        return (
-            <div>
-                <div className={defaultClasses.coordinateFieldsHorizontal}>
-                    {this.renderMapDialog()}
-                    {this.renderMapIcon()}
-                    <div className={defaultClasses.inputContainer}>
-                        {this.renderLongitude()}
-                    </div>
-                    <div className={defaultClasses.inputContainer}>
-                        {this.renderLatitude()}
-                    </div>
-                    {this.renderClearButton()}
+    renderHorizontal = () => (
+        <div>
+            <div className={defaultClasses.coordinateFieldsHorizontal}>
+                {this.renderMapDialog()}
+                {this.renderMapIcon()}
+                <div className={defaultClasses.inputContainer}>
+                    {this.renderLatitude()}
                 </div>
+                <div className={defaultClasses.inputContainer}>
+                    {this.renderLongitude()}
+                </div>
+                {this.renderClearButton()}
             </div>
         );
     }
