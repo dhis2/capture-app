@@ -58,6 +58,8 @@ export const searchViaUniqueIdOnScopeProgramEpic = (action$: InputObservable, st
         ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH),
         flatMap(({ payload: { formId, programId } }) => {
             const { formsValues } = store.value;
+            const searchTerm = formsValues[formId];
+            const fieldId = Object.keys(searchTerm)[0];
             const queryArgs = {
                 filter: getFiltersForUniqueIdSearchQuery(formsValues[formId]),
                 program: programId,
@@ -77,6 +79,8 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (action$: InputObse
         ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
         flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
             const { formsValues } = store.value;
+            const searchTerm = formsValues[formId];
+            const fieldId = Object.keys(searchTerm)[0];
             const queryArgs = {
                 filter: getFiltersForUniqueIdSearchQuery(formsValues[formId]),
                 trackedEntityType: trackedEntityTypeId,
