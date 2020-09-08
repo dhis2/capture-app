@@ -260,10 +260,10 @@ export default class D2Coordinate extends React.Component<Props, State> {
                         {this.renderClearButton()}
                     </div>
                     <div className={defaultClasses.inputContainer}>
-                        {this.renderLongitude()}
+                        {this.renderLatitude()}
                     </div>
                     <div className={defaultClasses.inputContainer}>
-                        {this.renderLatitude()}
+                        {this.renderLongitude()}
                     </div>
                 </div>
             </div>
@@ -277,10 +277,10 @@ export default class D2Coordinate extends React.Component<Props, State> {
                     {this.renderMapDialog()}
                     {this.renderMapIcon()}
                     <div className={defaultClasses.inputContainer}>
-                        {this.renderLongitude()}
+                        {this.renderLatitude()}
                     </div>
                     <div className={defaultClasses.inputContainer}>
-                        {this.renderLatitude()}
+                        {this.renderLongitude()}
                     </div>
                     {this.renderClearButton()}
                 </div>

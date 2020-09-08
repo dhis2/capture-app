@@ -5,6 +5,7 @@ import elementTypes from '../metaData/DataElement/elementTypes';
 import DataElement from '../metaData/DataElement/DataElement';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
 import stringifyNumber from './common/stringifyNumber';
+import { MinimalCoordinates } from "../../components/MinimalCoordinates";
 
 function convertDateForListDisplay(rawValue: string): string {
     const momentDate = moment(rawValue);
@@ -21,15 +22,6 @@ function convertDateTimeForListDisplay(rawValue: string): string {
 function convertTimeForListDisplay(rawValue: string): string {
     const momentDate = moment(rawValue, 'HH:mm', true);
     return momentDate.format('HH:mm');
-}
-
-type CoordinateClientValue = {
-    latitude: number,
-    longitude: number,
-};
-
-function convertCoordinateForDisplay(clientValue: CoordinateClientValue) {
-    return `[ ${clientValue.longitude}, ${clientValue.latitude} ]`;
 }
 
 type FileClientValue = {
@@ -70,7 +62,7 @@ const valueConvertersForType = {
     [elementTypes.TIME]: convertTimeForListDisplay,
     [elementTypes.TRUE_ONLY]: () => 'Yes',
     [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'Yes' : 'No'),
-    [elementTypes.COORDINATE]: convertCoordinateForDisplay,
+    [elementTypes.COORDINATE]: MinimalCoordinates,
     [elementTypes.AGE]: convertDateForListDisplay,
     [elementTypes.FILE_RESOURCE]: convertResourceForDisplay,
     [elementTypes.IMAGE]: convertResourceForDisplay,
