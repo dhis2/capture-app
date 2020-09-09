@@ -8,7 +8,7 @@ import {
     placements,
     inMemoryFileStore,
 } from '../../../DataEntry';
-import { Enrollment, RenderFoundation } from '../../../../metaData';
+import type { Enrollment, RenderFoundation } from '../../../../metaData';
 import {
     sectionKeysForEnrollmentDataEntry as dataEntrySectionKeys,
 } from '../../../DataEntries';
