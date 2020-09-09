@@ -1,13 +1,5 @@
 
 beforeEach(() => {
-    /*
-        Cypress automatically clears all cookies between tests except cross domain cookies.
-        When we are working with a remote instance, we need to clear the login cookie associated with the remote domain.
-        Currently, calling clearCookies with domain:null is a workaround to get rid of the cross domain cookies.
-        Related Cypress issue https://github.com/cypress-io/cypress/issues/408
-    */
-    cy.clearCookies({ domain: null });
-
     cy.loginThroughForm();
 });
 
@@ -41,7 +33,7 @@ Then('the event should be sent to the server successfully', () => {
             expect(result.status).to.equal(200);
             // clean up
             const id = result.response.body.response.importSummaries[0].reference;
-            cy.buildUrl(Cypress.env('dhis2_base_url'), `api/events/${id}`)
+            cy.buildApiUrl('events', id)
                 .then((eventUrl) => {
                     cy.request('DELETE', eventUrl);
                 });
@@ -102,21 +94,21 @@ Then('the data should be sent to the server successfully', () => {
     // clean up
     cy.get('@postRelationship').then((result) => {
         const id = result.response.body.response.importSummaries[0].reference;
-        cy.buildUrl(Cypress.env('dhis2_base_url'), `api/relationships/${id}`)
+        cy.buildApiUrl('relationships', id)
             .then((relationshipUrl) => {
                 cy.request('DELETE', relationshipUrl);
             });
     });
     cy.get('@postTrackedEntityInstance').then((result) => {
         const id = result.response.body.response.importSummaries[0].reference;
-        cy.buildUrl(Cypress.env('dhis2_base_url'), `api/trackedEntityInstances/${id}`)
+        cy.buildApiUrl('trackedEntityInstances', id)
             .then((trackedEntityInstanceUrl) => {
                 cy.request('DELETE', trackedEntityInstanceUrl);
             });
     });
     cy.get('@postEvent').then((result) => {
         const id = result.response.body.response.importSummaries[0].reference;
-        cy.buildUrl(Cypress.env('dhis2_base_url'), `api/events/${id}`)
+        cy.buildApiUrl('events', id)
             .then((eventUrl) => {
                 cy.request('DELETE', eventUrl);
             });
@@ -162,14 +154,14 @@ Then('the event and relationship should be sent to the server successfully', () 
     // clean up
     cy.get('@postRelationship').then((result) => {
         const id = result.response.body.response.importSummaries[0].reference;
-        cy.buildUrl(Cypress.env('dhis2_base_url'), `api/relationships/${id}`)
+        cy.buildApiUrl('relationships', id)
             .then((relationshipUrl) => {
                 cy.request('DELETE', relationshipUrl);
             });
     });
     cy.get('@postEvent').then((result) => {
         const id = result.response.body.response.importSummaries[0].reference;
-        cy.buildUrl(Cypress.env('dhis2_base_url'), `api/events/${id}`)
+        cy.buildApiUrl('events', id)
             .then((eventUrl) => {
                 cy.request('DELETE', eventUrl);
             });

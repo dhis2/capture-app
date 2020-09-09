@@ -1,10 +1,11 @@
+
 // @flow
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-restricted-syntax */
 
 import isFunction from 'd2-utilizr/lib/isFunction';
-import RenderFoundation from '../RenderFoundation/RenderFoundation';
-import RelationshipType from '../RelationshipType/RelationshipType';
+import type { RenderFoundation } from '../RenderFoundation';
+import type { RelationshipType } from '../RelationshipType';
 
 export default class ProgramStage {
     _id: string;
