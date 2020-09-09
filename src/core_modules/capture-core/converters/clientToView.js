@@ -5,6 +5,7 @@ import elementTypes from '../metaData/DataElement/elementTypes';
 import DataElement from '../metaData/DataElement/DataElement';
 import { convertMomentToDateFormatString } from '../utils/converters/date';
 import stringifyNumber from './common/stringifyNumber';
+import { MinimalCoordinates } from '../components/MinimalCoordinates';
 
 function convertDateForView(rawValue: string): string {
     const momentDate = moment(rawValue);
@@ -21,15 +22,6 @@ function convertDateTimeForView(rawValue: string): string {
 function convertTimeForView(rawValue: string): string {
     const momentDate = moment(rawValue, 'HH:mm', true);
     return momentDate.format('HH:mm');
-}
-
-type CoordinateClientValue = {
-    latitude: number,
-    longitude: number,
-};
-
-function convertCoordinateForView(clientValue: CoordinateClientValue) {
-    return `[ ${clientValue.longitude}, ${clientValue.latitude} ]`;
 }
 
 type FileClientValue = {
@@ -74,7 +66,7 @@ const valueConvertersForType = {
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.BOOLEAN]: (rawValue: boolean) => (rawValue ? 'Yes' : 'No'),
     // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.COORDINATE]: convertCoordinateForView,
+    [elementTypes.COORDINATE]: MinimalCoordinates,
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.AGE]: convertDateForView,
     // $FlowFixMe[prop-missing] automated comment

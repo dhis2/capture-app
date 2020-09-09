@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import EditEventDataEntry from './DataEntry/EditEventDataEntry.container';
 import Button from '../../Buttons/Button.component';
-import CancelButton from '../../DataEntry/CancelButton.component';
+import type CancelButton from '../../DataEntry/CancelButton.component';
 
 const getStyles = (theme: Theme) => ({
     container: {

@@ -2,10 +2,10 @@
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/lib/isFunction';
 import Program from './Program';
-import { TrackedEntityType } from '../TrackedEntityType';
-import { SearchGroup } from '../SearchGroup';
-import { Enrollment } from './Enrollment';
-import { DataElement } from '../DataElement';
+import type { TrackedEntityType } from '../TrackedEntityType';
+import type { SearchGroup } from '../SearchGroup';
+import type { Enrollment } from './Enrollment';
+import type { DataElement } from '../DataElement';
 
 export default class TrackerProgram extends Program {
     _searchGroups: Array<SearchGroup>;

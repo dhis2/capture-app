@@ -3,7 +3,7 @@ import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import programCollection from '../../metaDataMemoryStores/programCollection/programCollection';
-import RenderFoundation from '../../metaData/RenderFoundation/RenderFoundation';
+import type { RenderFoundation } from '../../metaData';
 import { convertValue } from '../formToClient';
 
 const errorMessages = {

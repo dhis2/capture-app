@@ -8,7 +8,7 @@ import {
     withSearchGroups,
     inMemoryFileStore,
 } from '../../DataEntry';
-import { TeiRegistration } from '../../../metaData';
+import type { TeiRegistration } from '../../../metaData';
 
 const getSearchGroups = (props: Object) => props.teiRegistrationMetadata.inputSearchGroups;
 const getSearchContext = (props: Object) => ({
