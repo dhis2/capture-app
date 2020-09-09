@@ -8,7 +8,7 @@ import ArrowUpwardIcon from '@material-ui/icons/KeyboardArrowUp';
 import { Button } from '../../../../../Buttons';
 import ActiveFilterButton from './ActiveFilterButton.component';
 import FilterSelectorContents from '../Contents/FilterSelectorContents.component';
-import OptionSet from '../../../../../../metaData/OptionSet/OptionSet';
+import type { OptionSet } from '../../../../../../metaData';
 
 const getStyles = (theme: Theme) => ({
     icon: {
