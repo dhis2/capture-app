@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Avatar, Grid, withStyles } from '@material-ui/core';
-import { DataElement } from '../../metaData';
+import type { DataElement } from '../../metaData';
 import type { Item } from './CardList.component';
 import { convertValue } from '../../converters/clientToList';
 

@@ -1,6 +1,6 @@
 // @flow
 import { actionCreator } from '../../../../../actions/actions.utils';
-import { RenderFoundation, Program } from '../../../../../metaData';
+import type { RenderFoundation, Program } from '../../../../../metaData';
 import { viewEventIds } from '../eventDetails.actions';
 import { getConvertGeometryIn, convertGeometryOut, convertStatusOut } from '../../../../DataEntries';
 import getDataEntryKey from '../../../../DataEntry/common/getDataEntryKey';
