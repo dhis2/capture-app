@@ -2450,10 +2450,10 @@
     lodash "^4.17.10"
     material-ui "^0.20.0"
 
-"@dhis2/d2-ui-core@6.5.10":
-  version "6.5.10"
-  resolved "https://registry.yarnpkg.com/@dhis2/d2-ui-core/-/d2-ui-core-6.5.10.tgz#cbe1f1a9edcfa1e7cc7c482b1f2197280e545bac"
-  integrity sha512-mAsO91UjW0zdSOntz0/YnbjmUlHSAhwJMqMoKZMhsKDsJeeeZly18NYLjqztQH6uBRgBFFaHcMROsPAlSI0XUQ==
+"@dhis2/d2-ui-core@7.0.7":
+  version "7.0.7"
+  resolved "https://registry.yarnpkg.com/@dhis2/d2-ui-core/-/d2-ui-core-7.0.7.tgz#2d8b504916b3283e54d59c0ef17a76a94468a9de"
+  integrity sha512-C4UmZrJar+xwhNjCj9SbwoU0tBCxOBphcvn2PjK4z8+tJrG9qTqpJNOw33VZgI6jOxlW1CCh7SPiP5phDUufJw==
   dependencies:
     babel-runtime "^6.26.0"
     d2 "~31.7"
@@ -2488,12 +2488,12 @@
     markdown-it "^8.4.2"
     prop-types "^15.6.2"
 
-"@dhis2/d2-ui-sharing-dialog@^6.5.10":
-  version "6.5.10"
-  resolved "https://registry.yarnpkg.com/@dhis2/d2-ui-sharing-dialog/-/d2-ui-sharing-dialog-6.5.10.tgz#836095669abb65e44cc0401b36e8fda4906879d8"
-  integrity sha512-WBrVwgRRU8H3nMrU8Vs//l7LEqUAaCImccVbmRlGUBY5GjauDhMrBUct1hPNl9tUW9hPjEWjQSbI62BYgs2Erw==
+"@dhis2/d2-ui-sharing-dialog@^7.0.7":
+  version "7.0.7"
+  resolved "https://registry.yarnpkg.com/@dhis2/d2-ui-sharing-dialog/-/d2-ui-sharing-dialog-7.0.7.tgz#efadb2256116cf171487e565c43410e51efb8af9"
+  integrity sha512-iPsSIMhRVqTMXCC8N1ypGZRXzki4i1/Lsn5jVyOfM8IwNUG3X5FKbb56MjM8uU4G/q/p0n7/6M3CITmtGUzezg==
   dependencies:
-    "@dhis2/d2-ui-core" "6.5.10"
+    "@dhis2/d2-ui-core" "7.0.7"
     "@material-ui/core" "^3.3.1"
     "@material-ui/icons" "^3.0.1"
     babel-runtime "^6.26.0"
@@ -14768,24 +14768,10 @@ rxjs@^5.5.7:
   dependencies:
     symbol-observable "1.0.1"
 
-rxjs@^6.3.3, rxjs@^6.5.5, rxjs@^6.6.0:
+rxjs@^6.3.3, rxjs@^6.5.2, rxjs@^6.5.3, rxjs@^6.5.5, rxjs@^6.6.0:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.6.0.tgz#af2901eedf02e3a83ffa7f886240ff9018bbec84"
   integrity sha512-3HMA8z/Oz61DUHe+SdOiQyzIf4tOx5oQHmMir7IZEu6TMqCLHT4LRcmNaUS0NwOz8VLvmmBduMsoaUvMaIiqzg==
-  dependencies:
-    tslib "^1.9.0"
-
-rxjs@^6.5.2:
-  version "6.5.3"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.3.tgz#510e26317f4db91a7eb1de77d9dd9ba0a4899a3a"
-  integrity sha512-wuYsAYYFdWTAnAaPoKGNhfpWwKZbJW+HgAJ+mImp+Epl7BG8oNWBCTyRM8gba9k4lk8BgWdoYm21Mo/RYhhbgA==
-  dependencies:
-    tslib "^1.9.0"
-
-rxjs@^6.5.3:
-  version "6.5.5"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.5.tgz#c5c884e3094c8cfee31bf27eb87e54ccfc87f9ec"
-  integrity sha512-WfQI+1gohdf0Dai/Bbmk5L5ItH5tYqm3ki2c5GdWhKjalzjg93N3avFjVStyZZz+A2Em+ZxKH5bNghw9UeylGQ==
   dependencies:
     tslib "^1.9.0"
 
