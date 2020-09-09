@@ -4,7 +4,7 @@ import { OptionSetSelectFieldForForm, OptionSetBoxesFieldForForm } from '../../C
 import { getOptionsForRadioButtons, getOptionsForSelect } from './optionSetHelpers';
 import { orientations } from '../../../../FormFields/New';
 import { inputTypes } from '../../../../../metaData/OptionSet/optionSet.const';
-import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
+import type { DataElement as MetaDataElement } from '../../../../../metaData';
 import OptionSet from '../../../../../metaData/OptionSet/OptionSet';
 
 const mapInputTypeToPropsGetterFn = {
