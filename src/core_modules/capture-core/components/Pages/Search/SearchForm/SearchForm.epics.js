@@ -9,8 +9,7 @@ import {
     getTrackerProgramThrowIfNotFound,
 } from '../../../../metaData';
 import { actionCreator } from '../../../../actions/actions.utils';
-
-const trackerCaptureAppUrl = () => (process.env.REACT_APP_TRACKER_CAPTURE_APP_PATH || '..').replace(/\/$/, '');
+import { getApi } from '../../../../d2';
 
 const getFiltersForUniqueIdSearchQuery = (formValues) => {
     const fieldId = Object.keys(formValues)[0];
@@ -23,9 +22,11 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
             const searchResults = trackedEntityInstanceContainers;
             if (searchResults.length > 0) {
                 const { id, tei: { orgUnit: orgUnitId } } = searchResults[0];
-                const oldTrackerCaptureAppUrl = trackerCaptureAppUrl();
-                const urlParameters = `/#/dashboard?tei=${id}&ou=${orgUnitId}&${scopeSearchParam}`;
-                window.location.href = `${oldTrackerCaptureAppUrl}${urlParameters}`;
+                getApi().get('system/info')
+                    .then(({ instanceBaseUrl }) => {
+                        window.location.href =
+                          `${instanceBaseUrl}/dhis-web-tracker-capture/#/dashboard?tei=${id}&ou=${orgUnitId}&${scopeSearchParam}`;
+                    });
                 return {};
             }
             return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();

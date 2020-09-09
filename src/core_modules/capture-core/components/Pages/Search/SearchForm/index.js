@@ -1,1 +1,1 @@
-export { SearchForm } from './SearchForm.container.js';
+export { SearchForm } from './SearchForm.container';
