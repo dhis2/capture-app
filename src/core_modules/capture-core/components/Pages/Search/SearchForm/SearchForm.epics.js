@@ -9,8 +9,9 @@ import {
     getTrackerProgramThrowIfNotFound,
 } from '../../../../metaData';
 import { actionCreator } from '../../../../actions/actions.utils';
+import { getApi } from '../../../../d2';
 
-const trackerCaptureAppUrl = () => (process.env.REACT_APP_TRACKER_CAPTURE_APP_PATH || '..').replace(/\/$/, '');
+const trackerCaptureAppUrl = instanceBaseUrl => `${instanceBaseUrl}/dhis-web-tracker-capture`;
 
 export const onScopeProgramFindUsingUniqueIdentifierEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
@@ -33,10 +34,12 @@ export const onScopeProgramFindUsingUniqueIdentifierEpic = (action$: InputObserv
                     const searchResults = trackedEntityInstanceContainers;
                     if (searchResults.length > 0) {
                         const { id: trackedEntityInstanceId, tei: { orgUnit: orgUnitId } } = searchResults[0];
-                        const oldTrackerCaptureAppUrl = trackerCaptureAppUrl();
-                        const urlParameters =
-                          `/#/dashboard?tei=${trackedEntityInstanceId}&ou=${orgUnitId}&program=${programId}`;
-                        window.location.href = `${oldTrackerCaptureAppUrl}${urlParameters}`;
+                        getApi().get('system/info')
+                            .then(({ instanceBaseUrl }) => {
+                                const oldTrackerCaptureAppUrl = trackerCaptureAppUrl(instanceBaseUrl);
+                                const urlParameters = `/#/dashboard?tei=${trackedEntityInstanceId}&ou=${orgUnitId}&program=${programId}`;
+                                window.location.href = `${oldTrackerCaptureAppUrl}${urlParameters}`;
+                            });
                         return {};
                     }
                     // trigger action that will display modal to inform user that results are empty.
@@ -70,10 +73,12 @@ export const onScopeTrackedEntityTypeFindUsingUniqueIdentifierEpic = (action$: I
                     const searchResults = trackedEntityInstanceContainers;
                     if (searchResults.length > 0) {
                         const { id: trackedEntityInstanceId, tei: { orgUnit: orgUnitId } } = searchResults[0];
-                        const oldTrackerCaptureAppUrl = trackerCaptureAppUrl();
-                        const urlParameters =
-                          `/#/dashboard?tei=${trackedEntityInstanceId}&ou=${orgUnitId}&trackedEntityType=${trackedEntityTypeId}`;
-                        window.location.href = `${oldTrackerCaptureAppUrl}${urlParameters}`;
+                        getApi().get('system/info')
+                            .then(({ instanceBaseUrl }) => {
+                                const oldTrackerCaptureAppUrl = trackerCaptureAppUrl(instanceBaseUrl);
+                                const urlParameters = `/#/dashboard?tei=${trackedEntityInstanceId}&ou=${orgUnitId}&trackedEntityType=${trackedEntityTypeId}`;
+                                window.location.href = `${oldTrackerCaptureAppUrl}${urlParameters}`;
+                            });
                         return {};
                     }
                     // trigger action that will display modal to inform user that results are empty.
