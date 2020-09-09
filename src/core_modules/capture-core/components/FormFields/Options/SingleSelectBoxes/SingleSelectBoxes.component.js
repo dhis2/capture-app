@@ -13,8 +13,7 @@ import RadioOnIcon from '@material-ui/icons/CheckCircle';
 
 import { orientations } from './singleSelectBoxes.const';
 
-import OptionSet from '../../../../metaData/OptionSet/OptionSet';
-import Option from '../../../../metaData/OptionSet/Option';
+import type { OptionSet, Option } from '../../../../metaData';
 
 const styles = theme => ({
     label: theme.typography.formFieldTitle,

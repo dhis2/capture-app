@@ -1,7 +1,7 @@
 // @flow
 import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 import { OrgUnitFieldForCustomForm } from '../../Components';
-import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
+import type { DataElement as MetaDataElement } from '../../../../../metaData';
 
 const getOrgUnitField = (metaData: MetaDataElement) => {
     const props = createProps({

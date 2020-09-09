@@ -6,10 +6,10 @@ import log from 'loglevel';
 import isFunction from 'd2-utilizr/lib/isFunction';
 import isArray from 'd2-utilizr/lib/isArray';
 import { errorCreator } from 'capture-core-utils';
-import Icon from '../Icon/Icon';
+import type Icon from '../Icon/Icon';
 import OptionSet from '../OptionSet/OptionSet';
 import elementTypes from './elementTypes';
-import { Unique } from './Unique';
+import type { Unique } from './Unique';
 
 // eslint-disable-next-line no-use-before-define
 export type ConvertFn = (value: any, type: $Values<typeof elementTypes>, element: DataElement) => any;

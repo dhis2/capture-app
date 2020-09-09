@@ -1,8 +1,8 @@
 // @flow
-import StorageController from 'capture-core-utils/storage/StorageController';
+import type StorageController from 'capture-core-utils/storage/StorageController';
 import type { ProgramRule, ProgramRuleVariable } from '../../rules/engine';
 import { ProgramFactory } from './factory';
-import {
+import type {
     Program,
     TrackedEntityType,
 } from '../../metaData';

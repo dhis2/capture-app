@@ -4,8 +4,7 @@
 /* eslint-disable no-restricted-syntax */
 import isFunction from 'd2-utilizr/lib/isFunction';
 import isDefined from 'd2-utilizr/lib/isDefined';
-
-import DataElement from '../DataElement/DataElement';
+import type { DataElement } from '../DataElement';
 
 export default class Section {
     static MAIN_SECTION_ID = '#MAIN#';
