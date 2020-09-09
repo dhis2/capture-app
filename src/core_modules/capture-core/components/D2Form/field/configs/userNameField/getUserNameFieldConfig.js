@@ -7,6 +7,7 @@ const getUsernameField = (metaData: MetaDataElement, options: Object) => {
     const props = createProps({
         formHorizontal: options.formHorizontal,
         fieldLabelMediaBasedClass: options.fieldLabelMediaBasedClass,
+        usernameOnlyMode: true,
     }, options, metaData);
 
     return createFieldConfig({

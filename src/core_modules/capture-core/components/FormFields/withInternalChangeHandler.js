@@ -12,7 +12,7 @@ type State = {
 
 export default () =>
     (InnerComponent: React.ComponentType<any>) =>
-        class DefaultFieldChangeHandler extends React.Component<Props, State> {
+        (class DefaultFieldChangeHandler extends React.Component<Props, State> {
             handleChange: (value: any) => void;
 
             constructor(props: Props) {
@@ -22,7 +22,7 @@ export default () =>
                 this.state = { value };
             }
 
-            componentWillReceiveProps(nextProps: Props) {
+            UNSAFE_componentWillReceiveProps(nextProps: Props) {
                 if (nextProps.value !== this.props.value) {
                     this.setState({
                         value: nextProps.value,
@@ -49,4 +49,4 @@ export default () =>
                     />
                 );
             }
-        };
+        });

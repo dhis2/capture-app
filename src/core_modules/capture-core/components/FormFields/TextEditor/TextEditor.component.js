@@ -47,11 +47,11 @@ class TextEditor extends React.Component<Props, State> {
         };
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.updateStateFromProps(this.props);
     }
 
-    componentWillReceiveProps(newProps) {
+    UNSAFE_componentWillReceiveProps(newProps) {
         this.updateStateFromProps(newProps);
     }
 

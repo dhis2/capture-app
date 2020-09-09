@@ -90,8 +90,9 @@ export const openNewRelationshipRegisterTeiEpic = (action$: InputObservable, sto
                     state.generatedUniqueValuesCache[DATA_ENTRY_ID],
                 );
 
-                return from(openEnrollmentPromise)
-                    .takeUntil(action$.pipe(ofType(newRelationshipActionTypes.SELECT_FIND_MODE)));
+                return from(openEnrollmentPromise).pipe(
+                    takeUntil(action$.pipe(ofType(newRelationshipActionTypes.SELECT_FIND_MODE))),
+                );
             }
 
             // tei (tet attribues) form

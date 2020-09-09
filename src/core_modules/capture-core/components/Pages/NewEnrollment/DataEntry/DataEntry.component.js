@@ -93,10 +93,6 @@ class NewEnrollmentDataEntry extends Component<Props> {
         this.dataEntrySections = dataEntrySectionDefinitions;
     }
 
-    componentWillMount() {
-        // this.props.onSetSaveTypes(null);
-    }
-
     componentWillUnmount() {
         inMemoryFileStore.clear();
     }

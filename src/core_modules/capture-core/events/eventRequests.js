@@ -6,7 +6,6 @@ import programCollection from '../metaDataMemoryStores/programCollection/program
 import { convertValue } from '../converters/serverToClient';
 import elementTypes from '../metaData/DataElement/elementTypes';
 import { getSubValues } from './getSubValues';
-import { addPostSubValues } from './postSubValues';
 
 type ApiDataValue = {
     dataElement: string,
@@ -28,6 +27,8 @@ type ApiTEIEvent = {
     completedDate: string,
     dataValues: Array<ApiDataValue>,
     assignedUser?: ?string,
+    assignedUserUsername?: ?string,
+    assignedUserDisplayName?: ?string,
 };
 
 export type ClientEventContainer = {
@@ -59,7 +60,6 @@ const mapEventInputKeyToOutputKey = {
     orgUnit: 'orgUnitId',
     trackedEntityInstance: 'trackedEntityInstanceId',
     enrollment: 'enrollmentId',
-    assignedUser: 'assignee',
 };
 
 function getConvertedValue(valueToConvert: any, inputKey: string) {
@@ -72,11 +72,30 @@ function getConvertedValue(valueToConvert: any, inputKey: string) {
     }
     return convertedValue;
 }
+
+function getAssignee(apiEvent: ApiTEIEvent) {
+    if (!(apiEvent.assignedUserUsername && apiEvent.assignedUser)) {
+        return undefined;
+    }
+
+    return {
+        id: apiEvent.assignedUser,
+        username: apiEvent.assignedUserUsername,
+        name: apiEvent.assignedUserDisplayName,
+    };
+}
 function convertMainProperties(apiEvent: ApiTEIEvent): CaptureClientEvent {
+    const skipProps = ['dataValues', 'assignedUserUsername', 'assignedUser', 'assignedUserDisplayName'];
+
     return Object
         .keys(apiEvent)
         .reduce((accEvent, inputKey) => {
-            if (inputKey !== 'dataValues' && inputKey !== 'assignedUserUsername') {
+            if (inputKey === 'assignedUser') {
+                const assignee = getAssignee(apiEvent);
+                if (assignee) {
+                    accEvent.assignee = assignee;
+                }
+            } else if (!skipProps.includes(inputKey)) {
                 const valueToConvert = apiEvent[inputKey];
                 const convertedValue = getConvertedValue(valueToConvert, inputKey);
 
@@ -123,8 +142,7 @@ export async function getEvent(eventId: string): Promise<?ClientEventContainer> 
         .get(`events/${eventId}`);
 
     const eventContainer = await convertToClientEvent(apiRes);
-    const eventContainerWithSubValues = eventContainer ? (await addPostSubValues([eventContainer]))[0] : eventContainer;
-    return eventContainerWithSubValues;
+    return eventContainer;
 }
 
 export async function getEvents(queryParams: ?Object) {
@@ -148,8 +166,6 @@ export async function getEvents(queryParams: ?Object) {
         return accEvents;
     }, Promise.resolve([])) : null;
 
-    const eventContainersWithSubValues = eventContainers ? (await addPostSubValues(eventContainers)) : null;
-
     const pagingData = {
         rowsCount: apiRes.pager.total,
         rowsPerPage: apiRes.pager.pageSize,
@@ -157,7 +173,7 @@ export async function getEvents(queryParams: ?Object) {
     };
 
     return {
-        eventContainers: eventContainersWithSubValues,
+        eventContainers,
         pagingData,
         request: req,
     };
