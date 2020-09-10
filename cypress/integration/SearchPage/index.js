@@ -1,3 +1,7 @@
+beforeEach(() => {
+    cy.loginThroughForm();
+});
+
 Given('you are on the default search page', () => {
     cy.visit('/#/search');
 });
