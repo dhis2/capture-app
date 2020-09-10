@@ -22,11 +22,7 @@
     },
     "globals": {
         "cy": true,
-        "Cypress": true,
-        "Given": true,
-        "And": true,
-        "Then": true,
-        "When": true,
+        "before": true,
         "document": true,
         "window": true,
         "it": true,

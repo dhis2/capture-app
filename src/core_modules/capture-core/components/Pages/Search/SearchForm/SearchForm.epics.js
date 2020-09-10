@@ -1,6 +1,6 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { catchError, flatMap, map, startWith } from 'rxjs/operators';
+import { catchError, flatMap, ignoreElements, map, startWith } from 'rxjs/operators';
 import { of, from } from 'rxjs';
 import { searchPageActionTypes } from '../SearchPage.container';
 import { getTrackedEntityInstances } from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
@@ -10,6 +10,11 @@ import {
 } from '../../../../metaData';
 import { actionCreator } from '../../../../actions/actions.utils';
 import { getApi } from '../../../../d2';
+
+const withoutAction = () => from({})
+    .pipe(
+        ignoreElements(),
+    );
 
 const getFiltersForUniqueIdSearchQuery = (formValues) => {
     const fieldId = Object.keys(formValues)[0];
@@ -27,7 +32,7 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
                         window.location.href =
                           `${instanceBaseUrl}/dhis-web-tracker-capture/#/dashboard?tei=${id}&ou=${orgUnitId}&${scopeSearchParam}`;
                     });
-                return {};
+                return withoutAction();
             }
             return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
         }),
