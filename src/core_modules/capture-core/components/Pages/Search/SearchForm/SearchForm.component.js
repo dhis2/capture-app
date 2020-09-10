@@ -201,6 +201,7 @@ const Index = ({
                                             {
                                                 forms[formId] &&
                                                 <Form
+                                                    formRef={(formInstance) => { formReference[formId] = formInstance; }}
                                                     formFoundation={searchForm}
                                                     id={formId}
                                                 />
@@ -245,10 +246,6 @@ const Index = ({
         searchGroupsForSelectedScope,
         selectedSearchScopeId,
         searchStatus,
-        searchViaUniqueIdOnScopeTrackedEntityType,
-        searchViaUniqueIdOnScopeProgram,
-        searchViaAttributesOnScopeProgram,
-        searchViaAttributesOnScopeTrackedEntityType,
         isSearchViaAttributesValid,
         saveCurrentFormData,
         error,
@@ -256,6 +253,5 @@ const Index = ({
         formsValues,
     ]);
 };
-
 
 export const SearchFormComponent = withStyles(getStyles)(Index);

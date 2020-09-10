@@ -1,7 +1,7 @@
 // @flow
 import log from 'loglevel';
 import { pipe, errorCreator } from 'capture-core-utils';
-import OptionSet from '../../../../../metaData/OptionSet/OptionSet';
+import type { OptionSet } from '../../../../../metaData';
 import { convertValue } from '../../../../../converters/clientToForm';
 
 const errorMessages = {

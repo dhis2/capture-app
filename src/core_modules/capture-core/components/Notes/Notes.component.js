@@ -108,7 +108,7 @@ class Notes extends React.Component<Props, State> {
         };
     }
 
-    componentWillReceiveProps(nextProps: Props) {
+    UNSAFE_componentWillReceiveProps(nextProps: Props) {
         if (nextProps.value !== this.props.value
             || this.props.value !== this.state.value) {
             this.setState({
@@ -155,9 +155,10 @@ class Notes extends React.Component<Props, State> {
                         onChange={this.handleChange}
                         value={this.state.value}
                         multiLine
+                        data-test="dhis2-capture-comment-textfield"
                     />
                 </Editor>
-                <div className={classes.newCommentButtonContainer}>
+                <div className={classes.newCommentButtonContainer} data-test="dhis2-capture-comment-buttons-container">
                     <Button
                         onClick={this.handleAddNote}
                         className={classes.addCommentContainer}
@@ -180,7 +181,7 @@ class Notes extends React.Component<Props, State> {
         const { smallMainButton, classes } = this.props;
         return (
             <Tooltip title={canAddComment ? '' : i18n.t('You dont have access to write comments')}>
-                <div className={classes.newNoteButtonContainer}>
+                <div className={classes.newNoteButtonContainer} data-test="dhis2-capture-new-comment-button">
                     <Button
                         onClick={this.toggleIsOpen}
                         disabled={!canAddComment}
@@ -197,25 +198,25 @@ class Notes extends React.Component<Props, State> {
         const { notes, classes, entityAccess } = this.props;
         return (
             <div className={classes.notesContainer}>
-                <List dense className={classes.notesList}>
+                <List dense className={classes.notesList} data-test="dhis2-capture-comments-list">
                     {notes.map(n => (
-                        <ListItem className={classes.noteItem} key={n.clientId}>
+                        <ListItem className={classes.noteItem} key={n.clientId} data-test="dhis2-capture-comment">
                             <div className={classes.noteItemHeader}>
-                                <div className={classes.noteItemUser}>
+                                <div className={classes.noteItemUser} data-test="dhis2-capture-comment-user">
                                     {n.storedBy}
                                 </div>
-                                <div className={classes.noteItemDate}>
+                                <div className={classes.noteItemDate} data-test="dhis2-capture-comment-date">
                                     {n.storedDate}
                                 </div>
                             </div>
-                            <div>
+                            <div data-test="dhis2-capture-comment-text">
                                 <Parser>{n.value}</Parser>
                             </div>
                         </ListItem>
                     ))}
                 </List>
                 {
-                    <div className={classes.newNoteContainer}>
+                    <div className={classes.newNoteContainer} data-test="dhis2-capture-new-comment-container">
                         { this.state.addIsOpen ? this.renderInput() : this.renderButton(entityAccess.write) }
                     </div>
                 }

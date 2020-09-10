@@ -256,7 +256,7 @@ class FormBuilder extends React.Component<Props> {
         }
     }
 
-    componentWillReceiveProps(newProps: Props) {
+    UNSAFE_componentWillReceiveProps(newProps: Props) {
         if (newProps.id !== this.props.id || newProps.loadNr !== this.props.loadNr) {
             this.asyncUIState = FormBuilder.getAsyncUIState(this.props.fieldsUI);
             this.commitUpdateTriggeredForFields = {};
@@ -564,6 +564,7 @@ class FormBuilder extends React.Component<Props> {
             <div
                 key={field.id}
                 className={defaultClasses.fieldOuterContainer}
+                data-test={`dhis2-capture-form-field-${field.id}`}
             >
                 <div
                     {...onGetContainerProps && onGetContainerProps(index, fields.length, field)}
