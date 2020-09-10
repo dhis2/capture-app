@@ -41,10 +41,10 @@ const getStyles = (theme: Theme) => ({
 });
 
 const Index = ({
-    searchViaUniqueIdOnScopeTrackedEntityType,
-    searchViaUniqueIdOnScopeProgram,
-    searchViaAttributesOnScopeProgram,
-    searchViaAttributesOnScopeTrackedEntityType,
+    onSearchViaUniqueIdOnScopeTrackedEntityType,
+    onSearchViaUniqueIdOnScopeProgram,
+    onSearchViaAttributesOnScopeProgram,
+    onSearchViaAttributesOnScopeTrackedEntityType,
     selectedSearchScopeId,
     classes,
     availableSearchOptions,
@@ -266,6 +266,10 @@ const Index = ({
         isSearchViaAttributesValid,
         error,
         expandedFormId,
+        onSearchViaUniqueIdOnScopeTrackedEntityType,
+        onSearchViaUniqueIdOnScopeProgram,
+        onSearchViaAttributesOnScopeProgram,
+        onSearchViaAttributesOnScopeTrackedEntityType,
     ]);
 };
 
