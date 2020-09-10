@@ -5,7 +5,7 @@ import i18n from '@dhis2/d2-i18n';
 import Tooltip from '@material-ui/core/Tooltip';
 import newEventSaveTypes from './newEventSaveTypes';
 import getDataEntryKey from '../../../DataEntry/common/getDataEntryKey';
-import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
+import { RenderFoundation } from '../../../../metaData';
 import { SimpleSplitButton } from '../../../Buttons';
 import getDataEntryHasChanges from '../getNewEventDataEntryHasChanges';
 
@@ -76,7 +76,7 @@ const getMainButton = (InnerComponent: React.ComponentType<any>) =>
             const secondaries = buttons.slice(1);
             return (
                 <Tooltip title={!hasWriteAccess ? i18n.t('No write access') : ''}>
-                    <div>
+                    <div data-test="dhis2-capture-main-button">
                         <SimpleSplitButton
                             primary
                             disabled={!hasWriteAccess}

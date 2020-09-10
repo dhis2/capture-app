@@ -1,7 +1,7 @@
 // @flow
 import { convertValue } from '../../../converters/formToClient';
 import convertDataEntryValuesToClientValues from './convertDataEntryValuesToClientValues';
-import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
+import type { RenderFoundation } from '../../../metaData';
 
 export default function convertDataEntryToClientValues(
     formFoundation: RenderFoundation,

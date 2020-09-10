@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import FeedbackBar from './FeedbackBar.component';
+import { FeedbackBarComponent } from './FeedbackBar.component';
 import { closeFeedback } from './actions/feedback.actions';
 
 const mapStateToProps = (state: ReduxState) => ({
@@ -12,6 +12,5 @@ const mapDispatchToProps = (dispatch: ReduxDispatch) => ({
         dispatch(closeFeedback());
     },
 });
-
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, mapDispatchToProps)(FeedbackBar);
+export const FeedbackBar = connect(mapStateToProps, mapDispatchToProps)(FeedbackBarComponent);

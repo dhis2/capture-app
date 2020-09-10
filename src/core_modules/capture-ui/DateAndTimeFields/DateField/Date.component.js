@@ -175,7 +175,7 @@ class UIDate extends React.Component<Props, State> {
                     {...splittedPassOnProps.input}
                 />
                 <div
-                    data-test={'date-calendar-wrapper'}
+                    data-test="dhis2-capture-date-calendar-wrapper"
                     ref={this.calendarWrapperDOMElementRef}
                 >
                     { /* // $FlowFixMe */}

@@ -1,3 +1,7 @@
+beforeEach(() => {
+    cy.loginThroughForm();
+});
+
 Given('you are on the default search page', () => {
     cy.visit('/#/search');
 });
@@ -51,15 +55,14 @@ When('you fill in the unique identifier field with values that will not return a
     cy.get('[data-test="dhis2-capture-form-unique"]')
         .find('[data-test="capture-ui-input"]')
         .first()
-        .type('123');
+        .type('123')
+        .blur();
 });
 
 And('you click find', () => {
     cy.get('[data-test="dhis2-capture-form-unique"]')
         .find('[data-test="dhis2-uicore-button"]')
         .first()
-        .click()
-        .wait(20)
         .click();
 });
 
@@ -79,7 +82,8 @@ When('you fill in the unique identifier field with values that will return a tra
         .find('[data-test="capture-ui-input"]')
         .first()
         .clear()
-        .type('ZRP792320');
+        .type('ZRP792320')
+        .blur();
 });
 
 Then('you are navigated to the Tracker Capture', () => {
@@ -90,7 +94,8 @@ When('you fill in the first name with values that will return no results', () =>
     cy.get('[data-test="dhis2-capture-form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .first()
-        .type('user non existing');
+        .type('user non existing')
+        .blur();
 });
 
 And('you expand the attributes search area', () => {
@@ -104,15 +109,14 @@ When('you fill in the first name with values that will return results', () => {
     cy.get('[data-test="dhis2-capture-form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .eq(2)
-        .type('Lauren');
+        .type('Lauren')
+        .blur();
 });
 
 And('you click search', () => {
     cy.get('[data-test="dhis2-capture-form-attributes"]')
         .find('[data-test="dhis2-uicore-button"]')
         .first()
-        .click()
-        .wait(20)
         .click();
 });
 
@@ -126,7 +130,8 @@ When('you fill in the first name with values that will return an error', () => {
     cy.get('[data-test="dhis2-capture-form-attributes"]')
         .find('[data-test="capture-ui-input"]')
         .first()
-        .type(',,,,');
+        .type(',,,,')
+        .blur();
 });
 
 Then('there should be an generic error message', () => {

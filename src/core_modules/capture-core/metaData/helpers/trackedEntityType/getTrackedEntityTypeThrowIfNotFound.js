@@ -3,7 +3,7 @@ import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
 import { trackedEntityTypesCollection } from '../../../metaDataMemoryStores';
-import { TrackedEntityType } from '../../TrackedEntityType';
+import type { TrackedEntityType } from '../../TrackedEntityType';
 
 const errorMessages = {
     TRACKED_ENTITY_TYPE_NOT_FOUND: 'Tracked entity type not found',

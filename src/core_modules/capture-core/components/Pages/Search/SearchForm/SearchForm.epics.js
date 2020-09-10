@@ -1,7 +1,7 @@
 // @flow
-import { catchError, flatMap, map, startWith } from 'rxjs/operators';
-import { from } from 'rxjs/observable/from';
-import { of } from 'rxjs/observable/of';
+import { ofType } from 'redux-observable';
+import { catchError, flatMap, ignoreElements, map, startWith } from 'rxjs/operators';
+import { of, from } from 'rxjs';
 import { searchPageActionTypes } from '../SearchPage.container';
 import { getTrackedEntityInstances } from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import {
@@ -9,12 +9,16 @@ import {
     getTrackerProgramThrowIfNotFound,
 } from '../../../../metaData';
 import { actionCreator } from '../../../../actions/actions.utils';
+import { getApi } from '../../../../d2';
 
-const trackerCaptureAppUrl = () => (process.env.REACT_APP_TRACKER_CAPTURE_APP_PATH || '..').replace(/\/$/, '');
+const withoutAction = () => from({})
+    .pipe(
+        ignoreElements(),
+    );
 
-const filtersForUniqueIdSearchQuery = (searchTerm) => {
-    const fieldId = Object.keys(searchTerm)[0];
-    return [`${fieldId}:eq:${searchTerm[fieldId]}`];
+const getFiltersForUniqueIdSearchQuery = (formValues) => {
+    const fieldId = Object.keys(formValues)[0];
+    return [`${fieldId}:eq:${formValues[fieldId]}`];
 };
 
 const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
@@ -23,10 +27,12 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
             const searchResults = trackedEntityInstanceContainers;
             if (searchResults.length > 0) {
                 const { id, tei: { orgUnit: orgUnitId } } = searchResults[0];
-                const oldTrackerCaptureAppUrl = trackerCaptureAppUrl();
-                const urlParameters = `/#/dashboard?tei=${id}&ou=${orgUnitId}&${scopeSearchParam}`;
-                window.location.href = `${oldTrackerCaptureAppUrl}${urlParameters}`;
-                return {};
+                getApi().get('system/info')
+                    .then(({ instanceBaseUrl }) => {
+                        window.location.href =
+                          `${instanceBaseUrl}/dhis-web-tracker-capture/#/dashboard?tei=${id}&ou=${orgUnitId}&${scopeSearchParam}`;
+                    });
+                return withoutAction();
             }
             return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)();
         }),
@@ -34,9 +40,10 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
         catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
     );
 
-const filtersForAttributesSearchQuery = formValues => Object.keys(formValues)
-    .filter(fieldId => formValues[fieldId].replace(/\s/g, '').length)
-    .map(fieldId => `${fieldId}:like:${formValues[fieldId]}`);
+const getFiltersForAttributesSearchQuery = formValues =>
+    Object.keys(formValues)
+        .filter(fieldId => formValues[fieldId].replace(/\s/g, '').length)
+        .map(fieldId => `${fieldId}:like:${formValues[fieldId]}`);
 
 
 const searchViaAttributesStream = (queryArgs, attributes) =>
@@ -53,12 +60,12 @@ const searchViaAttributesStream = (queryArgs, attributes) =>
     );
 
 export const searchViaUniqueIdOnScopeProgramEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH).pipe(
+    action$.pipe(
+        ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_PROGRAM_SEARCH),
         flatMap(({ payload: { formId, programId } }) => {
-            const { formsValues } = store.getState();
+            const { formsValues } = store.value;
             const queryArgs = {
-                filter: filtersForUniqueIdSearchQuery(formsValues[formId]),
+                filter: getFiltersForUniqueIdSearchQuery(formsValues[formId]),
                 program: programId,
                 pageNumber: 1,
                 ouMode: 'ACCESSIBLE',
@@ -72,12 +79,12 @@ export const searchViaUniqueIdOnScopeProgramEpic = (action$: InputObservable, st
 
 
 export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH).pipe(
+    action$.pipe(
+        ofType(searchPageActionTypes.VIA_UNIQUE_ID_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
         flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
-            const { formsValues } = store.getState();
+            const { formsValues } = store.value;
             const queryArgs = {
-                filter: filtersForUniqueIdSearchQuery(formsValues[formId]),
+                filter: getFiltersForUniqueIdSearchQuery(formsValues[formId]),
                 trackedEntityType: trackedEntityTypeId,
                 pageNumber: 1,
                 ouMode: 'ACCESSIBLE',
@@ -90,13 +97,13 @@ export const searchViaUniqueIdOnScopeTrackedEntityTypeEpic = (action$: InputObse
     );
 
 export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH).pipe(
+    action$.pipe(
+        ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_PROGRAM_SEARCH),
         flatMap(({ payload: { formId, programId } }) => {
-            const { formsValues } = store.getState();
+            const { formsValues } = store.value;
 
             const queryArgs = {
-                filter: filtersForAttributesSearchQuery(formsValues[formId]),
+                filter: getFiltersForAttributesSearchQuery(formsValues[formId]),
                 program: programId,
                 pageNumber: 1,
                 ouMode: 'ACCESSIBLE',
@@ -108,13 +115,13 @@ export const searchViaAttributesOnScopeProgramEpic = (action$: InputObservable, 
     );
 
 export const searchViaAttributesOnScopeTrackedEntityTypeEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH).pipe(
+    action$.pipe(
+        ofType(searchPageActionTypes.VIA_ATTRIBUTES_ON_SCOPE_TRACKED_ENTITY_TYPE_SEARCH),
         flatMap(({ payload: { formId, trackedEntityTypeId } }) => {
-            const { formsValues } = store.getState();
+            const { formsValues } = store.value;
 
             const queryArgs = {
-                filter: filtersForAttributesSearchQuery(formsValues[formId]),
+                filter: getFiltersForAttributesSearchQuery(formsValues[formId]),
                 trackedEntityType: trackedEntityTypeId,
                 pageNumber: 1,
                 ouMode: 'ACCESSIBLE',

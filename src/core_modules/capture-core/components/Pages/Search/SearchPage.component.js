@@ -221,7 +221,7 @@ const Index = ({
 
             {
                 !selectedOption.value &&
-                    <Paper elevation={0} data-test={'dhis2-capture-informative-paper'}>
+                    <Paper elevation={0} data-test="dhis2-capture-informative-paper">
                         <div className={classes.emptySelectionPaperContent}>
                             {i18n.t('Make a selection to start searching')}
                         </div>

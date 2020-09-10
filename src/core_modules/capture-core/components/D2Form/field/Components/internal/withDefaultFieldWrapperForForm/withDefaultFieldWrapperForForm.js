@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import type { ComponentType } from 'react';
 import {
     withGotoInterface,
     withHideCompatibility,
@@ -24,7 +24,7 @@ const getFilteredProps = (props: Object) => {
 };
 
 export default () =>
-    (InnerComponent: React.ComponentType<any>) =>
+    (InnerComponent: ComponentType<any>) =>
         withGotoInterface()(
             withHideCompatibility()(
                 withDefaultShouldUpdateInterface()(

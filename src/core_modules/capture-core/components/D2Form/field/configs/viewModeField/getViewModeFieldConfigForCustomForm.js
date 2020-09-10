@@ -1,6 +1,6 @@
 // @flow
 import { pipe } from 'capture-core-utils';
-import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
+import type { DataElement as MetaDataElement } from '../../../../../metaData';
 import { ViewModeFieldForCustomForm } from '../../Components';
 import { convertFormToClient, convertClientToView } from '../../../../../converters';
 
