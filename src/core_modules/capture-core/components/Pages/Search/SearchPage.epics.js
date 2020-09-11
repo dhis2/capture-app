@@ -2,7 +2,8 @@
 import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { push } from 'connected-react-router';
-import { searchPageActionTypes, lockedSelectorActionTypes } from './SearchPage.actions';
+import { searchPageActionTypes } from './SearchPage.actions';
+import { lockedSelectorActionTypes } from '../../LockedSelector';
 import { urlArguments } from '../../../utils/url';
 
 export const navigateBackToMainPageEpic = (action$: InputObservable, store: ReduxStore) =>

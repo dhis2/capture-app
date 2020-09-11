@@ -29,8 +29,6 @@ export const searchViaAttributesOnScopeProgram = ({ programId, formId, page = 1 
 
 export const navigateToMainPage = () => actionCreator(searchPageActionTypes.TO_MAIN_PAGE_NAVIGATE)();
 
-export const storeInitialProgramId = programId => actionCreator(searchPageActionTypes.INITIAL_PROGRAM_ID_STORE)({ programId });
-
 export const showInitialViewOnSearchPage = () =>
     actionCreator(searchPageActionTypes.SEARCH_RESULTS_INITIAL_VIEW)();
 
