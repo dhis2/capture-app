@@ -19,6 +19,7 @@ export type OwnProps = {|
 |}
 
 export type PropsFromRedux ={|
+  +formsValues: FormsValues,
   +searchStatus: string,
   +isSearchViaAttributesValid: (minAttributesRequiredToSearch: number, formId: string)=> boolean,
 |}

@@ -46,6 +46,7 @@ const mapStateToProps = (state: ReduxState): PropsFromRedux => {
 
 
     return {
+        formsValues,
         searchStatus,
         isSearchViaAttributesValid: (minAttributesRequiredToSearch, formId) => {
             const formValues = formsValues[formId] || {};

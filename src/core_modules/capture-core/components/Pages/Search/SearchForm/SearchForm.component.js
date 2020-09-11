@@ -40,19 +40,19 @@ const getStyles = (theme: Theme) => ({
 });
 
 const useFormDataLifecycle = (
-    searchGroupForSelectedScope,
+    searchGroupsForSelectedScope,
     addFormIdToReduxStore,
     removeFormDataFromReduxStore,
 ) =>
     useEffect(() => {
         // in order for the Form component to render
         // a formId under the `forms` reducer needs to be added.
-        searchGroupForSelectedScope
+        searchGroupsForSelectedScope
             .forEach(({ formId }) => {
                 addFormIdToReduxStore(formId);
             });
         // we remove the data on unmount to clean the store
-        return () => searchGroupForSelectedScope
+        return () => searchGroupsForSelectedScope
             .forEach(({ formId, searchForm }) => {
                 removeFormDataFromReduxStore(formId);
 
@@ -64,7 +64,7 @@ const useFormDataLifecycle = (
             });
     },
     [
-        searchGroupForSelectedScope,
+        searchGroupsForSelectedScope,
         addFormIdToReduxStore,
         removeFormDataFromReduxStore,
     ]);
@@ -79,11 +79,12 @@ const SearchFormIndex = ({
     removeFormDataFromReduxStore,
     selectedSearchScopeId,
     classes,
-    searchGroupForSelectedScope,
+    searchGroupsForSelectedScope,
+    formsValues,
     searchStatus,
     isSearchViaAttributesValid,
 }: Props & CssClasses) => {
-    useFormDataLifecycle(searchGroupForSelectedScope, addFormIdToReduxStore, removeFormDataFromReduxStore);
+    useFormDataLifecycle(searchGroupsForSelectedScope, addFormIdToReduxStore, removeFormDataFromReduxStore);
 
     const [error, setError] = useState(false);
     const [expandedFormId, setExpandedFormId] = useState(null);
@@ -96,7 +97,7 @@ const SearchFormIndex = ({
     );
 
     useEffect(() => {
-        searchGroupForSelectedScope
+        searchGroupsForSelectedScope
             .forEach(({ formId }, index) => {
                 if (!expandedFormId && index === 0) {
                     setExpandedFormId(formId);
@@ -272,7 +273,6 @@ const SearchFormIndex = ({
         classes.searchRow,
         classes.textInfo,
         classes.textError,
-        searchGroupsForSelectedScope,
         selectedSearchScopeId,
         searchStatus,
         searchViaUniqueIdOnScopeTrackedEntityType,
@@ -280,13 +280,10 @@ const SearchFormIndex = ({
         searchViaAttributesOnScopeProgram,
         searchViaAttributesOnScopeTrackedEntityType,
         searchGroupsForSelectedScope,
-        selectedSearchScopeId,
-        searchStatus,
         isSearchViaAttributesValid,
         saveCurrentFormData,
         error,
         expandedFormId,
-        formsValues,
     ]);
 };
 
