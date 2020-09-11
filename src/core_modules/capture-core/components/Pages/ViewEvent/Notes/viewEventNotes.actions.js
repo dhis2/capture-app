@@ -1,6 +1,6 @@
 // @flow
 import { actionCreator } from '../../../../actions/actions.utils';
-import { methods } from '../../../../trackerOffline/trackerOfflineConfig.const';
+import { effectMethods } from '../../../../trackerOffline';
 
 export const batchActionTypes = {
     LOAD_EVENT_NOTES_BATCH: 'LoadEventNotesBatch',
@@ -30,7 +30,7 @@ export const startSaveEventNote = (eventId: string, serverData: Object, selectio
         offline: {
             effect: {
                 url: `events/${eventId}/note`,
-                method: methods.POST,
+                method: effectMethods.POST,
                 data: serverData,
             },
             commit: { type: actionTypes.EVENT_NOTE_SAVED, meta: { selections, clientId } },

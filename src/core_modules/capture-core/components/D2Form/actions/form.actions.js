@@ -6,7 +6,7 @@ export const actionTypes = {
     FORM_DATA_REMOVE: 'RemoveFormData',
 };
 
-export function addFormData(formId: string, formValues: $Shape<{||}> = {}) {
+export function addFormData(formId: string, formValues: Object = {}) {
     return actionCreator(actionTypes.FORM_DATA_ADD)({ formValues, formId });
 }
 

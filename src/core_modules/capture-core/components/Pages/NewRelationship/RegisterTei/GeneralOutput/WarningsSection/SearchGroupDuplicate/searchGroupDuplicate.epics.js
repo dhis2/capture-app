@@ -1,7 +1,8 @@
 // @flow
-import { pipe } from 'capture-core-utils';
-import { from } from 'rxjs/observable/from';
+import { pipe as pipeD2 } from 'capture-core-utils';
+import { ofType } from 'redux-observable';
 import { catchError, map } from 'rxjs/operators';
+import { from } from 'rxjs/observable/from';
 import { of } from 'rxjs/observable/of';
 import {
     actionTypes,
@@ -32,14 +33,14 @@ const getSearchGroup = (programId: ?string, tetId: string) =>
     (programId ? getProgramSearchGroup(programId) : getTETSearchGroup(tetId));
 
 export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable, store: ReduxStore) =>
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(actionTypes.DUPLICATES_REVIEW, actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE)
-        .switchMap((action) => {
+    action$.pipe(
+        ofType(actionTypes.DUPLICATES_REVIEW, actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE),
+        switchMap((action) => {
             const isChangePage = action.type === actionTypes.DUPLICATES_REVIEW_CHANGE_PAGE;
             const requestPage = isChangePage ? action.payload.page : 1;
 
             const dataEntryId = 'relationship';
-            const state = store.getState();
+            const state = store.value;
             const { programId, orgUnit } = state.newRelationshipRegisterTei;
             const tetId = state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId;
             const dataEntryKey = getDataEntryKey(dataEntryId, state.dataEntries[dataEntryId].itemId);
@@ -60,7 +61,7 @@ export const loadSearchGroupDuplicatesForReviewEpic = (action$: InputObservable,
                         return null;
                     }
 
-                    const serverValue = element.convertValue(value, pipe(convertFormToClient, convertClientToServer));
+                    const serverValue = element.convertValue(value, pipeD2(convertFormToClient, convertClientToServer));
                     return `${element.id}:LIKE:${serverValue}`;
                 })
                 .filter(f => f);

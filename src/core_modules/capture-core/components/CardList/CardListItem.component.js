@@ -6,9 +6,9 @@ import type { ComponentType, Element } from 'react';
 import { Avatar, Grid, withStyles } from '@material-ui/core';
 import DoneIcon from '@material-ui/icons/Done';
 import { colors, Tag } from '@dhis2/ui-core';
-import { DataElement } from '../../metaData';
 import type { SearchResultItem } from '../Pages/Search/SearchResults/SearchResults.types';
 import type { CardDataElementsInformation } from '../Pages/Search/SearchResults/SearchResults.component';
+import type { DataElement } from '../../metaData';
 
 type OwnProps = $ReadOnly<{|
     item: SearchResultItem,

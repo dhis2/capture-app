@@ -83,13 +83,14 @@ class TeiRelationshipSearchResults extends React.Component<Props> {
         this.props.onAddRelationship(item.id, item.values);
     }
 
-    getItemActions = (itemProps: Object) => {
+    getItemActions = ({ item }: Object) => {
         const classes = this.props.classes;
         return (
             <div className={classes.itemActionsContainer}>
                 <Button
+                    dataTest={`dhis2-capture-relationship-tei-link-${item.id}`}
                     color="primary"
-                    onClick={() => this.onAddRelationship(itemProps.item)}
+                    onClick={() => this.onAddRelationship(item)}
                 >
                     {i18n.t('Link')}
                 </Button>

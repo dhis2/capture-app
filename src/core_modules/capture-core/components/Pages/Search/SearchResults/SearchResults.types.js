@@ -1,9 +1,9 @@
 // @flow
-import type { SearchGroup } from '../SearchPage.types';
+import type { SearchGroups } from '../SearchPage.types';
 import type { CurrentSearchTerms } from '../SearchForm/SearchForm.types';
 
 export type OwnProps = {|
-  +searchGroupForSelectedScope: SearchGroup,
+  +searchGroupsForSelectedScope: SearchGroups,
 |}
 
 

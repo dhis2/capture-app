@@ -1,5 +1,7 @@
 // @flow
 import log from 'loglevel';
+import { ofType } from 'redux-observable';
+import { switchMap } from 'rxjs/operators';
 import { errorCreator } from 'capture-core-utils';
 import { actionTypes as urlActionTypes } from '../../actions/url.actions';
 import {
@@ -17,13 +19,12 @@ const errorMessages = {
 };
 
 export const openNewEnrollmentInDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
-
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(
-        urlActionTypes.VALID_SELECTIONS_FROM_URL,
-    )
-        .switchMap(() => {
-            const state = store.getState();
+    action$.pipe(
+        ofType(
+            urlActionTypes.VALID_SELECTIONS_FROM_URL,
+        ),
+        switchMap(() => {
+            const state = store.value;
             const selectionsComplete = state.currentSelections.complete;
             if (!selectionsComplete) {
                 return selectionsNotCompleteOpeningNewEnrollment();
@@ -63,4 +64,4 @@ export const openNewEnrollmentInDataEntryEpic = (action$: InputObservable, store
                 [],
                 state.generatedUniqueValuesCache[dataEntryId],
             );
-        });
+        }));

@@ -2,7 +2,7 @@
 import type { FieldConfig } from 'capture-ui/FormBuilder/FormBuilder.component';
 
 import { convertPx, getBaseConfigForField } from './configBase';
-import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
+import type { DataElement as MetaDataElement } from '../../../../../metaData';
 import type { FieldConfigForType } from './configBase';
 
 const baseComponentStyles = {

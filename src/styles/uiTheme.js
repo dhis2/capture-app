@@ -34,6 +34,11 @@ const theme = createMuiTheme({
                 color: '#494949',
             },
         },
+        MuiCircularProgress: {
+            colorPrimary: {
+                color: '#147cd7',
+            },
+        },
     },
     typography: {
         useNextVariants: true,

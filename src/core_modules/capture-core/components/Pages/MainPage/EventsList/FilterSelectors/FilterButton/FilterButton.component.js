@@ -8,7 +8,7 @@ import ArrowUpwardIcon from '@material-ui/icons/KeyboardArrowUp';
 import { Button } from '../../../../../Buttons';
 import ActiveFilterButton from './ActiveFilterButton.component';
 import FilterSelectorContents from '../Contents/FilterSelectorContents.component';
-import OptionSet from '../../../../../../metaData/OptionSet/OptionSet';
+import type { OptionSet } from '../../../../../../metaData';
 
 const getStyles = (theme: Theme) => ({
     icon: {
@@ -164,7 +164,7 @@ class FilterButton extends Component<Props, State> {
         return (
             <React.Fragment>
                 <div
-                    data-test={'filter-button-popover-anchor'}
+                    data-test="filter-button-popover-anchor"
                     ref={this.anchorRef}
                 >
                     {button}

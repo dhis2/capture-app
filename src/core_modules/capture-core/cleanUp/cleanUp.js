@@ -11,7 +11,7 @@ function getActionToCleanUpInLoadingList(state: ReduxState) {
 
 export default function cleanUp(store: ReduxStore) {
     const cleanUpActions = [
-        getActionToCleanUpInLoadingList(store.getState()),
+        getActionToCleanUpInLoadingList(store.value),
     ]
         .filter(value => value);
 

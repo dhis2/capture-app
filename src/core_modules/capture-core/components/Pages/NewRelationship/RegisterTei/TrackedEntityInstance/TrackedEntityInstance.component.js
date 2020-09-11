@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { withTheme } from '@material-ui/core/styles';
-import { RenderFoundation, TeiRegistration } from '../../../../../metaData';
+import type { RenderFoundation, TeiRegistration } from '../../../../../metaData';
 import ConfiguredTei from './ConfiguredTei.component';
 import { DATA_ENTRY_ID } from '../registerTei.const';
 import teiClasses from './trackedEntityInstance.module.css';
