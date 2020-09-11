@@ -53,7 +53,7 @@ const SearchFormIndex = ({
     formsValues,
     searchStatus,
     isSearchViaAttributesValid,
-}: Props) => {
+}: Props & CssClasses) => {
     const [error, setError] = useState(false);
     const [expandedFormId, setExpandedFormId] = useState(null);
 
