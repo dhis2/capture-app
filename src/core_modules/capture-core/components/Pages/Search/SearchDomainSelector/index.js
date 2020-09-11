@@ -1,1 +1,1 @@
-export { SearchDomainSelector } from './SearchDomainSelector';
+export { SearchDomainSelectorComponent } from './SearchDomainSelector.component';

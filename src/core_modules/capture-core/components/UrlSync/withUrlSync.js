@@ -163,6 +163,6 @@ const getUrlSyncer = (
  * @memberof UrlSync
  * @example withUrlSync(props => [{ urlKey: 'programId', propKey: 'programId' }])([InnerComponent])
  */
-export default (onGetSyncSpecification: SyncSpecificationGetter) =>
+export const withUrlSync = (onGetSyncSpecification: SyncSpecificationGetter) =>
     (InnerComponent: React.ComponentType<any>) =>
         getUrlSyncer(InnerComponent, onGetSyncSpecification);

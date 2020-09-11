@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/lib/isFunction';
-import Icon from '../Icon/Icon';
+import type Icon from '../Icon/Icon';
 
 export type Value = string | number | boolean | {};
 

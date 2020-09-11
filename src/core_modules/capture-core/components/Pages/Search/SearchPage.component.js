@@ -20,13 +20,8 @@ import { searchPageStatus } from '../../../reducers/descriptions/searchPage.redu
 import { SearchForm } from './SearchForm';
 import { LoadingMask } from '../../LoadingMasks';
 import { SearchResults } from './SearchResults/SearchResults.container';
-import { SearchDomainSelector } from './SearchDomainSelector';
+import { SearchDomainSelectorComponent } from './SearchDomainSelector';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
-
-export const searchScopes = {
-    PROGRAM: 'PROGRAM',
-    TRACKED_ENTITY_TYPE: 'TRACKED_ENTITY_TYPE',
-};
 
 const getStyles = (theme: Theme) => ({
     maxWidth: {
@@ -80,7 +75,7 @@ const Index = ({
         dispatchShowInitialSearchPage,
     ]);
 
-    const searchGroupForSelectedScope =
+    const searchGroupsForSelectedScope =
       (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
 
     const handleSearchScopeSelection = (program) => {
@@ -102,7 +97,7 @@ const Index = ({
 
             <Paper className={classes.paper}>
                 <div className={classes.maxWidth}>
-                    <SearchDomainSelector
+                    <SearchDomainSelectorComponent
                         trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
                         onSelect={handleSearchScopeSelection}
                         selectedSearchScope={selectedSearchScope}
@@ -110,12 +105,12 @@ const Index = ({
 
                     <SearchForm
                         selectedSearchScopeId={selectedSearchScope.value}
-                        searchGroupForSelectedScope={searchGroupForSelectedScope}
+                        searchGroupsForSelectedScope={searchGroupsForSelectedScope}
                     />
 
                     {
                         searchStatus === searchPageStatus.SHOW_RESULTS &&
-                        <SearchResults searchGroupForSelectedScope={searchGroupForSelectedScope} />
+                        <SearchResults searchGroupsForSelectedScope={searchGroupsForSelectedScope} />
                     }
 
                     {

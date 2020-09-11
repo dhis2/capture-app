@@ -10,7 +10,7 @@ import Button from '../../../Buttons/Button.component';
 import TeiSearch from '../../../TeiSearch/TeiSearch.container';
 import TeiRelationshipSearchResults from './SearchResults/TeiRelationshipSearchResults.component';
 import { makeTrackedEntityTypeSelector } from './teiRelationship.selectors';
-import { TrackedEntityType } from '../../../../metaData';
+import type { TrackedEntityType } from '../../../../metaData';
 import { findModes } from '../findModes';
 import withDefaultNavigation from '../../../Pagination/withDefaultNavigation';
 import withPaginationData from './SearchResults/withPaginationData';
@@ -98,6 +98,7 @@ class TeiRelationship extends React.Component<Props> {
                 <div className={classes.button}>
                     <SearchIcon fontSize="large" className={classes.buttonIcon} />
                     <Button
+                        dataTest="dhis2-capture-find-relationship-button"
                         color="primary"
                         onClick={() => this.props.onSelectFindMode(findModes.TEI_SEARCH)}
                     >
@@ -110,6 +111,7 @@ class TeiRelationship extends React.Component<Props> {
                 <div className={classes.button}>
                     <AddIcon className={classes.buttonIcon} />
                     <Button
+                        dataTest="dhis2-capture-create-relationship-button"
                         color="primary"
                         onClick={() => this.props.onSelectFindMode(findModes.TEI_REGISTER)}
                     >

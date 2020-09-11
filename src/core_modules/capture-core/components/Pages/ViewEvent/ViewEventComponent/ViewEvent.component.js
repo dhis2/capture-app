@@ -6,7 +6,7 @@ import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import EventDetails from '../EventDetailsSection/EventDetailsSection.container';
 import Button from '../../../Buttons/Button.component';
 import RightColumnWrapper from '../RightColumn/RightColumnWrapper.component';
-import { ProgramStage } from '../../../../metaData';
+import type { ProgramStage } from '../../../../metaData';
 
 
 const getStyles = (theme: Theme) => ({

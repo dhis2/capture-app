@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import { SearchFormComponent } from './SearchForm.component';
-import type { DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './SearchForm.types';
+import type { CurrentSearchTerms, DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './SearchForm.types';
 import {
     searchPageActionTypes,
     searchViaAttributesOnScopeProgram,
@@ -14,8 +14,8 @@ import { addFormData } from '../../../D2Form/actions/form.actions';
 
 const isValueContainingCharacter = string => string.replace(/\s/g, '').length;
 
-const collectCurrentSearchTerms = (searchGroupForSelectedScope, formsValues) => {
-    const { searchForm: attributeSearchForm, formId } = searchGroupForSelectedScope
+const collectCurrentSearchTerms = (searchGroupsForSelectedScope, formsValues): CurrentSearchTerms => {
+    const { searchForm: attributeSearchForm, formId } = searchGroupsForSelectedScope
         .reduce((accumulated, searchGroup) => {
             if (!searchGroup.unique) {
                 return { accumulated, ...searchGroup };
@@ -35,7 +35,7 @@ const collectCurrentSearchTerms = (searchGroupForSelectedScope, formsValues) => 
         }, []);
 };
 
-const mapStateToProps = (state: ReduxState, { searchGroupForSelectedScope }): PropsFromRedux => {
+const mapStateToProps = (state: ReduxState): PropsFromRedux => {
     const {
         forms,
         formsValues,
@@ -45,11 +45,10 @@ const mapStateToProps = (state: ReduxState, { searchGroupForSelectedScope }): Pr
     } = state;
 
 
-    const currentSearchTerms = collectCurrentSearchTerms(searchGroupForSelectedScope, formsValues);
     return {
         forms,
+        formsValues,
         searchStatus,
-        currentSearchTerms,
         isSearchViaAttributesValid: (minAttributesRequiredToSearch, formId) => {
             const formValues = formsValues[formId] || {};
             const currentNumberOfFilledInputValues =
@@ -65,7 +64,7 @@ const mapStateToProps = (state: ReduxState, { searchGroupForSelectedScope }): Pr
     };
 };
 
-const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
+const mapDispatchToProps = (dispatch: ReduxDispatch, ownProps: OwnProps): DispatchersFromRedux => ({
     searchViaUniqueIdOnScopeTrackedEntityType: ({ trackedEntityTypeId, formId }) => {
         dispatch(searchViaUniqueIdOnScopeTrackedEntityType({ trackedEntityTypeId, formId }));
     },
@@ -79,8 +78,16 @@ const mapDispatchToProps = (dispatch: ReduxDispatch): DispatchersFromRedux => ({
     searchViaAttributesOnScopeProgram: ({ programId, formId, page }) => {
         dispatch(searchViaAttributesOnScopeProgram({ programId, formId, page }));
     },
-    saveCurrentFormData: (searchScopeType, searchScopeId, formId, currentSearchTerms) => {
-        dispatch(actionCreator(searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE)({ searchScopeType, searchScopeId, formId, currentSearchTerms }));
+    saveCurrentFormData: (searchScopeType, searchScopeId, formId, formsValues) => {
+        const currentSearchTerms =
+          collectCurrentSearchTerms(ownProps.searchGroupsForSelectedScope, formsValues);
+
+        dispatch(actionCreator(searchPageActionTypes.CURRENT_SEARCH_INFO_SAVE)(
+            { searchScopeType,
+                searchScopeId,
+                formId,
+                currentSearchTerms,
+            }));
     },
     addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
 });

@@ -1,6 +1,4 @@
 // @flow
-/* eslint-disable */
-import { methods } from '../../capture-core/trackerOffline/trackerOfflineConfig.const';
 
 declare type D2 = {
     models: Object,
@@ -37,7 +35,7 @@ declare type ReduxDispatch = (action: {
 }) => void;
 
 declare type ReduxStore = {
-    getState: () => ReduxState,
+    value: ReduxState,
     dispatch: ReduxDispatch
 }
 
@@ -183,9 +181,12 @@ declare type Theme = {
 
 declare type InputObservable = rxjs$Observable<ReduxAction<any, any>>;
 
-// Redux Offline
-declare type OfflineEffect = {
-    url: string,
-    data: any,
-    method: $Values<typeof methods>,
-};
+declare class process {
+    static env: {
+        NODE_ENV: string,
+        NODE_PATH: string,
+        REACT_APP_CACHE_VERSION: string,
+        REACT_APP_VERSION: string,
+        REACT_APP_DHIS2_API_VERSION: string,
+    }
+}
