@@ -3,7 +3,7 @@ import type { SearchGroups } from '../SearchPage.types';
 import type { CurrentSearchTerms } from '../SearchForm/SearchForm.types';
 
 export type OwnProps = {|
-  +searchGroupsForSelectedScope: SearchGroup,
+  +searchGroupsForSelectedScope: SearchGroups,
 |}
 
 export type PropsFromRedux ={|
