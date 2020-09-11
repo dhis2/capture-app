@@ -1,5 +1,8 @@
 // @flow
 import { push } from 'connected-react-router';
+import { ofType } from 'redux-observable';
+import { map } from 'rxjs/operators';
+
 import {
     actionTypes as editEventDataEntryActionTypes,
     noWorkingListUpdateNeededAfterUpdateCancelled,
@@ -9,11 +12,10 @@ import {
 import isSelectionsEqual from '../../../../App/isSelectionsEqual';
 
 export const cancelEditEventEpic = (action$: InputObservable, store: ReduxStore) =>
-
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(editEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE)
-        .map(() => {
-            const state = store.getState();
+    action$.pipe(
+        ofType(editEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
+        map(() => {
+            const state = store.value;
 
             if (!state.offline.online) {
                 return noWorkingListUpdateNeededAfterUpdateCancelled();
@@ -28,15 +30,14 @@ export const cancelEditEventEpic = (action$: InputObservable, store: ReduxStore)
                 return updateWorkingListAfterUpdateCancelled();
             }
             return noWorkingListUpdateNeededAfterUpdateCancelled();
-        });
+        }));
 
 export const cancelEditEventLocationChangeEpic = (action$: InputObservable, store: ReduxStore) =>
-
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(editEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE)
-        .map(() => {
-            const state = store.getState();
+    action$.pipe(
+        ofType(editEventDataEntryActionTypes.START_CANCEL_SAVE_RETURN_TO_MAIN_PAGE),
+        map(() => {
+            const state = store.value;
             const programId = state.currentSelections.programId;
             const orgUnitId = state.currentSelections.orgUnitId;
             return push(`/programId=${programId}&orgUnitId=${orgUnitId}`);
-        });
+        }));

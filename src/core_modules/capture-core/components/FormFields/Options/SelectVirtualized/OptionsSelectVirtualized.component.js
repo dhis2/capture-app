@@ -152,7 +152,7 @@ class OptionsSelectVirtualized extends Component<Props, State> {
         };
     }
 
-    componentWillReceiveProps(nextProps: Props) {
+    UNSAFE_componentWillReceiveProps(nextProps: Props) {
         if (nextProps.optionSet !== this.props.optionSet) {
             this.options = this.buildOptions(nextProps.optionSet);
         }
