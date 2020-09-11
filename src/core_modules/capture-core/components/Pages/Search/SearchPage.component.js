@@ -176,7 +176,7 @@ const Index = ({
         addFormIdToReduxStore,
     ]);
 
-    const searchGroupForSelectedScope =
+    const searchGroupsForSelectedScope =
       (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
 
     return (<>
@@ -197,7 +197,7 @@ const Index = ({
 
                 <SearchForm
                     selectedSearchScopeId={selectedSearchScope.value}
-                    searchGroupForSelectedScope={searchGroupForSelectedScope}
+                    searchGroupsForSelectedScope={searchGroupsForSelectedScope}
                 />
 
                 {
@@ -222,7 +222,7 @@ const Index = ({
 
                 {
                     searchStatus === searchPageStatus.SHOW_RESULTS &&
-                    <SearchResults searchGroupForSelectedScope={searchGroupForSelectedScope} />
+                    <SearchResults searchGroupsForSelectedScope={searchGroupsForSelectedScope} />
                 }
 
                 {

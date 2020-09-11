@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
 import isFunction from 'd2-utilizr/lib/isFunction';
-import RenderFoundation from '../RenderFoundation/RenderFoundation';
+import type { RenderFoundation } from '../RenderFoundation';
 
 type Searcher = (values: Object, contextProps: Object) => Promise<any>;
 

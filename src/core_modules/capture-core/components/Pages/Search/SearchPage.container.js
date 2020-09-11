@@ -14,16 +14,6 @@ const buildSearchOption = (id, name, searchGroups, searchScope) => ({
     searchOptionId: id,
     searchOptionName: name,
     searchGroups: [...searchGroups.values()]
-        // We use the sorted array to always have expanded the first search group section.
-        .sort(({ unique: xBoolean }, { unique: yBoolean }) => {
-            if (xBoolean === yBoolean) {
-                return 0;
-            }
-            if (xBoolean) {
-                return -1;
-            }
-            return 1;
-        })
         .map(({ unique, searchForm, minAttributesRequiredToSearch }, index) => ({
             unique,
             searchForm,

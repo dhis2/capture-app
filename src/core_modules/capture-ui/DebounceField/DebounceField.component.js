@@ -27,7 +27,7 @@ class DebounceField extends React.Component<Props, State> {
         this.debouncer = debounce(this.handleDebounced, 500);
     }
 
-    componentWillReceiveProps(nextProps: Props) {
+    UNSAFE_componentWillReceiveProps(nextProps: Props) {
         if (nextProps.value !== this.props.value) {
             this.setState({
                 value: nextProps.value || '',

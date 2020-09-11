@@ -1,5 +1,6 @@
 // @flow
-import { RelationshipType, getTrackedEntityTypeThrowIfNotFound } from '../metaData';
+import type { RelationshipType } from '../metaData';
+import { getTrackedEntityTypeThrowIfNotFound } from '../metaData';
 import { programCollection } from '../metaDataMemoryStores';
 import getTeiDisplayName from '../trackedEntityInstances/getDisplayName';
 

@@ -13,7 +13,7 @@ import VirtualizedSelect from '../../../FormFields/Options/SelectVirtualizedV2/O
 import ProgramList from './ProgramList';
 import CategorySelector from './CategorySelector.component';
 
-import { Program } from '../../../../metaData';
+import type { Program } from '../../../../metaData';
 import { resetProgramIdBase } from '../actions/QuickSelector.actions';
 import './programSelector.css';
 import LinkButton from '../../../Buttons/LinkButton.component';
@@ -301,7 +301,7 @@ class ProgramSelector extends Component<Props> {
             : null;
 
         return (
-            <Paper elevation={0} className={classes.paper}>
+            <Paper elevation={0} className={classes.paper} data-test="dhis2-capture-program-selector-container">
                 <h4 className={classes.title}>
                     { i18n.t('Program') }
                 </h4>
