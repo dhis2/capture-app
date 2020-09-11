@@ -1,5 +1,5 @@
 // @flow
-import type { SearchGroup } from '../SearchPage.types';
+import type { SearchGroups } from '../SearchPage.types';
 
 export type CurrentSearchTerms = Array<{|
   +name: string,
@@ -7,8 +7,14 @@ export type CurrentSearchTerms = Array<{|
   +id: string,
 |}>
 
+export type FormsValues = {
+    [formIdentifier: string]: {
+      [formElement: string]: Object
+    }
+  }
+
 export type OwnProps = {|
-  +searchGroupForSelectedScope: SearchGroup,
+  +searchGroupsForSelectedScope: SearchGroup,
   +selectedSearchScopeId: ?string,
 |}
 
@@ -18,9 +24,9 @@ export type PropsFromRedux ={|
       loadNr: number
     }
   },
+  +formsValues: FormsValues,
   +searchStatus: string,
   +isSearchViaAttributesValid: (minAttributesRequiredToSearch: number, formId: string)=> boolean,
-  +currentSearchTerms: CurrentSearchTerms
 |}
 
 export type DispatchersFromRedux = {|
@@ -28,7 +34,7 @@ export type DispatchersFromRedux = {|
   searchViaUniqueIdOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string |}) => void,
   searchViaAttributesOnScopeProgram: ({| programId: string, formId: string, page?: string |}) => void,
   searchViaAttributesOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string |}) => void,
-  saveCurrentFormData: (searchScopeType: string, searchScopeId: string, formId: string, currentSearchTerms: CurrentSearchTerms) => void,
+  saveCurrentFormData: (searchScopeType: string, searchScopeId: string, formId: string, formsValues: FormsValues) => void,
   addFormIdToReduxStore: (formId: string) => void,
 |}
 

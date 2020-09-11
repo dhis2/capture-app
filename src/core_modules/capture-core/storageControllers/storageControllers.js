@@ -1,5 +1,5 @@
 // @flow
-import StorageController from 'capture-core-utils/storage/StorageController';
+import type { StorageController } from 'capture-core-utils/storage/StorageController';
 import availableAdapters from 'capture-core-utils/storage/availableAdapters';
 import initUserControllerAsync from './userStorageController';
 import initMainControllerAsync from './mainStorageController';

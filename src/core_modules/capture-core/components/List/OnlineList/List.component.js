@@ -16,7 +16,8 @@ import {
     sorLabelPlacements,
 } from 'capture-ui';
 import SortLabelWrapper from '../../DataTable/SortLabelWrapper.component';
-import { dataElementTypes as elementTypes, OptionSet } from '../../../metaData';
+import { dataElementTypes as elementTypes } from '../../../metaData';
+import type { OptionSet } from '../../../metaData';
 import { LoadingMask } from '../../LoadingMasks';
 
 
@@ -293,11 +294,14 @@ class List extends React.Component<Props> {
             >
                 <Table
                     className={classes.table}
+                    data-test="dhis2-capture-event-list-table"
                 >
                     <Head>
                         {this.renderHeaderRow(visibleColumns)}
                     </Head>
-                    <Body>
+                    <Body
+                        data-test="dhis2-capture-event-list-body"
+                    >
                         {this.renderBody(visibleColumns)}
                     </Body>
                 </Table>

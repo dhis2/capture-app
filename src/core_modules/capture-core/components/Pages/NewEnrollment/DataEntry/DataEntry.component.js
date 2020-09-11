@@ -8,7 +8,7 @@ import {
     placements,
     inMemoryFileStore,
 } from '../../../DataEntry';
-import { Enrollment, RenderFoundation } from '../../../../metaData';
+import type { Enrollment, RenderFoundation } from '../../../../metaData';
 import {
     sectionKeysForEnrollmentDataEntry as dataEntrySectionKeys,
 } from '../../../DataEntries';
@@ -91,10 +91,6 @@ class NewEnrollmentDataEntry extends Component<Props> {
             fieldLabelMediaBasedClass: props.classes.fieldLabelMediaBased,
         };
         this.dataEntrySections = dataEntrySectionDefinitions;
-    }
-
-    componentWillMount() {
-        // this.props.onSetSaveTypes(null);
     }
 
     componentWillUnmount() {

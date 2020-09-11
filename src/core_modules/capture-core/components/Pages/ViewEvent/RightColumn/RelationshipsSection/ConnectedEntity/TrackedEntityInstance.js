@@ -1,5 +1,8 @@
 // @flow
-import * as React from 'react';
+import React, { useCallback } from 'react';
+import { useConfig } from '@dhis2/app-runtime';
+import { buildUrl } from 'capture-core-utils';
+import { systemSettingsStore } from '../../../../../../metaDataMemoryStores';
 
 type Props = {
     name: string,
@@ -8,25 +11,28 @@ type Props = {
     linkProgramId?: ?string,
 };
 
-export class TrackedEntityInstance extends React.Component<Props> {
-    getUrl() {
-        const { id, orgUnitId, linkProgramId } = this.props;
-        const baseUrl = `${(process.env.REACT_APP_TRACKER_CAPTURE_APP_PATH || '..').replace(/\/$/, '')}/#/dashboard?`;
+export const TrackedEntityInstance = ({ name, id, orgUnitId, linkProgramId }: Props) => {
+    const { baseUrl } = useConfig();
+    const getUrl = useCallback(() => {
+        const trackerBaseUrl = buildUrl(baseUrl, systemSettingsStore.get().trackerAppRelativePath, '/#/dashboard?');
         const baseParams = `tei=${id}&ou=${orgUnitId}`;
         const params = linkProgramId ? `${baseParams}&program=${linkProgramId}` : baseParams;
-        return baseUrl + params;
-    }
-    render() {
-        const { name } = this.props;
-        return (
-            <a
-                href={this.getUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                {name}
-            </a>
-        );
-    }
-}
+        return trackerBaseUrl + params;
+    }, [
+        baseUrl,
+        id,
+        orgUnitId,
+        linkProgramId,
+    ]);
+
+    return (
+        <a
+            href={getUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            {name}
+        </a>
+    );
+};
 

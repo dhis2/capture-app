@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2020-08-12T05:55:42.067Z\n"
-"PO-Revision-Date: 2020-08-12T05:55:42.067Z\n"
+"POT-Creation-Date: 2020-09-11T09:42:36.300Z\n"
+"PO-Revision-Date: 2020-09-11T09:42:36.300Z\n"
 
 msgid "Choose one or more dates..."
 msgstr ""
@@ -20,6 +20,13 @@ msgstr ""
 msgid ""
 "A possible reason for this is that the browser or mode (e.g. privacy mode) "
 "is not supported. See log for details."
+msgstr ""
+
+msgid ""
+"You opened another version of the Capture App in the same domain. "
+"Currently, the Capture App only supports running one version concurrently "
+"(in the same domain). Please refresh this page if you would like to use "
+"this version again, but be aware that this will close other versions."
 msgstr ""
 
 msgid "Columns to show in table"
@@ -284,6 +291,9 @@ msgid "Clear"
 msgstr ""
 
 msgid "No results"
+msgstr ""
+
+msgid "start typing to search"
 msgstr ""
 
 msgid "suggestions could not be retrieved"
@@ -702,6 +712,11 @@ msgstr ""
 msgid "Back to search"
 msgstr ""
 
+msgid ""
+"There is a problem with this search, please change the search terms or try "
+"again later. For more details open the Console tab of the Developer tools"
+msgstr ""
+
 msgid "Make a selection to start searching"
 msgstr ""
 
@@ -819,13 +834,6 @@ msgid "Delete polygon"
 msgstr ""
 
 msgid "Set area"
-msgstr ""
-
-msgid ""
-"You opened another version of the Capture App in the same domain. "
-"Currently, the Capture App only supports running one version concurrently "
-"(in the same domain). Please refresh this page if you would like to use "
-"this version again, but be aware that this will close other versions."
 msgstr ""
 
 msgid "Compatibility mode"

@@ -6,9 +6,10 @@ import { useDataEngine } from '@dhis2/app-runtime';
 import { LoadingMaskForPage } from 'capture-core/components/LoadingMasks';
 import { DisplayException } from 'capture-core/utils/exceptions';
 import { environments } from 'capture-core/constants';
+import { buildUrl } from 'capture-core-utils';
 import type { HashHistory } from 'history/createHashHistory';
 import { initializeAsync } from './init';
-import getStore from '../../store/getStore';
+import { getStore } from '../../store/getStore';
 
 type Props = {
     onRunApp: (store: ReduxStore, history: HashHistory) => void,
@@ -30,10 +31,17 @@ const AppLoader = (props: Props) => {
 
     const load = React.useCallback(async () => {
         try {
-            await initializeAsync(onCacheExpired, dataEngine.query.bind(dataEngine));
+            await initializeAsync(
+                onCacheExpired,
+                dataEngine.query.bind(dataEngine),
+                buildUrl(dataEngine.link.baseUrl, dataEngine.link.apiPath),
+            );
             const history = createHistory();
-            // $FlowFixMe[incompatible-variance] automated comment
-            const store = getStore(history, () => onRunApp(store, history));
+            const store = getStore(
+                history,
+                dataEngine.mutate.bind(dataEngine),
+                // $FlowFixMe[prop-missing] automated comment
+                () => onRunApp(store, history));
         } catch (error) {
             let message = 'The application could not be loaded.';
             if (error && error instanceof DisplayException) {

@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-restricted-syntax */
 import isFunction from 'd2-utilizr/lib/isFunction';
-import Category from './Category';
+import type Category from './Category';
 
 export default class CategoryCombination {
     _name: string;
