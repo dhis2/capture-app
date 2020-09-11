@@ -1,6 +1,6 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { catchError, flatMap, ignoreElements, map, startWith } from 'rxjs/operators';
+import { catchError, flatMap, map, startWith, tap } from 'rxjs/operators';
 import { of, from } from 'rxjs';
 import { searchPageActionTypes } from '../SearchPage.actions';
 import { getTrackedEntityInstances } from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
@@ -12,11 +12,6 @@ import { actionCreator } from '../../../../actions/actions.utils';
 import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 import { getApi } from '../../../../d2';
 
-const withoutAction = () => from({})
-    .pipe(
-        ignoreElements(),
-    );
-
 const getFiltersForUniqueIdSearchQuery = (formValues) => {
     const fieldId = Object.keys(formValues)[0];
     return [`${fieldId}:eq:${formValues[fieldId]}`];
@@ -24,21 +19,20 @@ const getFiltersForUniqueIdSearchQuery = (formValues) => {
 
 const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
     from(getTrackedEntityInstances(queryArgs, attributes)).pipe(
-        map(({ trackedEntityInstanceContainers }) => {
+        flatMap(({ trackedEntityInstanceContainers }) => {
             const searchResults = trackedEntityInstanceContainers;
             if (searchResults.length > 0) {
                 const { id, tei: { orgUnit: orgUnitId } } = searchResults[0];
-                getApi().get('system/info')
-                    .then(({ instanceBaseUrl }) => {
-                        window.location.href =
-                          `${instanceBaseUrl}/dhis-web-tracker-capture/#/dashboard?tei=${id}&ou=${orgUnitId}&${scopeSearchParam}`;
-                    });
-                return withoutAction();
+                return from(getApi().get('system/info')).pipe(
+                    map(({ instanceBaseUrl }) =>
+                        `${instanceBaseUrl}/dhis-web-tracker-capture/#/dashboard?tei=${id}&ou=${orgUnitId}&${scopeSearchParam}`),
+                );
             }
-            return actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY_VIEW)();
+            return of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)());
         }),
-        startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING_VIEW)()),
-        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR_VIEW)())),
+        tap((teiDashBoardUrl) => { window.location.href = teiDashBoardUrl; }),
+        startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
+        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
     );
 
 const getFiltersForAttributesSearchQuery = formValues =>
