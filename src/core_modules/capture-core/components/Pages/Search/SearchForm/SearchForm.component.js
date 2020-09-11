@@ -52,16 +52,7 @@ const useFormDataLifecycle = (
                 addFormIdToReduxStore(formId);
             });
         // we remove the data on unmount to clean the store
-        return () => searchGroupsForSelectedScope
-            .forEach(({ formId, searchForm }) => {
-                removeFormDataFromReduxStore(formId);
-
-                Array.from(searchForm.sections.entries())
-                    .map(entry => entry[1])
-                    .forEach(({ id }) => {
-                        removeFormDataFromReduxStore(`${formId}-${id}`);
-                    });
-            });
+        return () => removeFormDataFromReduxStore();
     },
     [
         searchGroupsForSelectedScope,
@@ -78,8 +69,8 @@ const SearchFormIndex = ({
     addFormIdToReduxStore,
     removeFormDataFromReduxStore,
     selectedSearchScopeId,
-    classes,
     searchGroupsForSelectedScope,
+    classes,
     formsValues,
     searchStatus,
     isSearchViaAttributesValid,

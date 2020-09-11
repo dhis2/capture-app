@@ -11,7 +11,7 @@ import {
     searchViaUniqueIdOnScopeTrackedEntityType,
 } from '../SearchPage.actions';
 import { actionCreator } from '../../../../actions/actions.utils';
-import { addFormData } from '../../../D2Form/actions/form.actions';
+import { addFormData, removeFormData } from '../../../D2Form/actions/form.actions';
 
 const isValueContainingCharacter = string => string.replace(/\s/g, '').length;
 
@@ -89,7 +89,18 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, ownProps: OwnProps): Dispat
             }));
     },
     addFormIdToReduxStore: (formId) => { dispatch(addFormData(formId)); },
-    removeFormDataFromReduxStore: (formId) => { dispatch(addFormData(formId)); },
+    removeFormDataFromReduxStore: () => {
+        ownProps.searchGroupsForSelectedScope
+            .forEach(({ formId, searchForm }) => {
+                dispatch(removeFormData(formId));
+
+                Array.from(searchForm.sections.entries())
+                    .map(entry => entry[1])
+                    .forEach(({ id }) => {
+                        dispatch(removeFormData(`${formId}-${id}`));
+                    });
+            });
+    },
 });
 
 
