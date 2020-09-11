@@ -1,7 +1,7 @@
 // @flow
 import { ofType } from 'redux-observable';
-import { catchError, flatMap, ignoreElements, map, startWith, tap } from 'rxjs/operators';
-import { of, from } from 'rxjs';
+import { catchError, flatMap, map, startWith } from 'rxjs/operators';
+import { of, from, empty } from 'rxjs';
 import { searchPageActionTypes } from '../SearchPage.container';
 import { getTrackedEntityInstances } from '../../../../trackedEntityInstances/trackedEntityInstanceRequests';
 import {
@@ -9,7 +9,7 @@ import {
     getTrackerProgramThrowIfNotFound,
 } from '../../../../metaData';
 import { actionCreator } from '../../../../actions/actions.utils';
-import { getApi } from '../../../../d2';
+import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 
 const getFiltersForUniqueIdSearchQuery = (formValues) => {
     const fieldId = Object.keys(formValues)[0];
@@ -22,12 +22,8 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
             const searchResults = trackedEntityInstanceContainers;
             if (searchResults.length > 0) {
                 const { id, tei: { orgUnit: orgUnitId } } = searchResults[0];
-                return from(getApi().get('system/info')).pipe(
-                    map(({ instanceBaseUrl }) =>
-                        `${instanceBaseUrl}/dhis-web-tracker-capture/#/dashboard?tei=${id}&ou=${orgUnitId}&${scopeSearchParam}`),
-                    tap((teiDashBoardUrl) => { window.location.href = teiDashBoardUrl; }),
-                    ignoreElements(),
-                );
+                navigateToTrackedEntityDashboard(id, orgUnitId, scopeSearchParam);
+                return empty();
             }
             return of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)());
         }),
