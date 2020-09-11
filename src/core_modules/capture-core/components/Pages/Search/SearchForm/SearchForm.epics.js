@@ -29,10 +29,10 @@ const searchViaUniqueIdStream = (queryArgs, attributes, scopeSearchParam) =>
                     ignoreElements(),
                 );
             }
-            return of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY)());
+            return of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_EMPTY_VIEW)());
         }),
-        startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING)()),
-        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR)())),
+        startWith(actionCreator(searchPageActionTypes.SEARCH_RESULTS_LOADING_VIEW)()),
+        catchError(() => of(actionCreator(searchPageActionTypes.SEARCH_RESULTS_ERROR_VIEW)())),
     );
 
 const getFiltersForAttributesSearchQuery = formValues =>
