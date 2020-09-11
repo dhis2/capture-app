@@ -152,6 +152,11 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         page: 'newEvent',
         locationSwitchInProgress: true,
     }),
+    [lockedSelectorActionTypes.SEARCH_PAGE_OPEN]: state => ({
+        ...state,
+        page: 'search',
+        locationSwitchInProgress: true,
+    }),
     [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({
         ...state,
         locationSwitchInProgress: true,
