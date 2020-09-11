@@ -1,5 +1,5 @@
 // @flow
-import type { SearchGroup } from '../SearchPage.types';
+import type { SearchGroups } from '../SearchPage.types';
 
 export type CurrentSearchTerms = Array<{|
   +name: string,
@@ -14,7 +14,7 @@ export type FormsValues = {
   }
 
 export type OwnProps = {|
-  +searchGroupsForSelectedScope: SearchGroup,
+  +searchGroupsForSelectedScope: SearchGroups,
   +selectedSearchScopeId?: string,
   +classes: {|
     +searchDomainSelectorSection: string,

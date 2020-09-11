@@ -222,7 +222,7 @@ const Index = ({
 
                 {
                     searchStatus === searchPageStatus.SHOW_RESULTS &&
-                    <SearchResults searchGroupForSelectedScope={searchGroupForSelectedScope} />
+                    <SearchResults searchGroupsForSelectedScope={searchGroupsForSelectedScope} />
                 }
 
                 {

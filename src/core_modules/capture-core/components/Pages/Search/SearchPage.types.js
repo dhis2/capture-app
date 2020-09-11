@@ -1,7 +1,7 @@
 // @flow
 import RenderFoundation from '../../../metaData/RenderFoundation/RenderFoundation';
 
-export type SearchGroup = Array<{|
+export type SearchGroups = Array<{|
   +searchForm: RenderFoundation,
   +unique: boolean,
   +formId: string,
@@ -49,7 +49,7 @@ export type PropsFromRedux ={|
     [elementId: string]: {|
       +searchOptionId: string,
       +searchOptionName: string,
-      +searchGroups: SearchGroup |}
+      +searchGroups: SearchGroups |}
   },
   +error: boolean,
   +ready: boolean,

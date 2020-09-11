@@ -1,11 +1,11 @@
 // @flow
-import type { SearchGroup } from '../SearchPage.types';
+import type { SearchGroups } from '../SearchPage.types';
 import type { CurrentSearchTerms } from '../SearchForm/SearchForm.types';
 
 export type OwnProps = {|
   searchViaAttributesOnScopeProgram: ({| programId: string, formId: string, page?: string |}) => void,
   searchViaAttributesOnScopeTrackedEntityType: ({| trackedEntityTypeId: string, formId: string |}) => void,
-  +searchGroupForSelectedScope: SearchGroup,
+  +searchGroupsForSelectedScope: SearchGroups,
   +selectedSearchScopeId: string,
   +classes: {|
     +topSection: string,
