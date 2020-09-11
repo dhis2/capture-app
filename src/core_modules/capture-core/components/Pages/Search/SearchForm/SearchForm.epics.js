@@ -9,7 +9,6 @@ import {
     getTrackerProgramThrowIfNotFound,
 } from '../../../../metaData';
 import { actionCreator } from '../../../../actions/actions.utils';
-import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 import { getApi } from '../../../../d2';
 
 const getFiltersForUniqueIdSearchQuery = (formValues) => {
