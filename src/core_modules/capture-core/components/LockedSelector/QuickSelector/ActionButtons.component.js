@@ -29,17 +29,17 @@ const styles = () => ({
 
 type Props = $ReadOnly<{|
     selectedProgramId: string,
-    dispatchStartAgainClick: () => void,
-    dispatchNewClick: () => void,
-    dispatchFindClick: () => void,
+    onClickStartAgain: () => void,
+    onNewClick: () => void,
+    onFindClick: () => void,
     showResetButton: boolean,
     ...CssClasses
 |}>;
 
 const Index = ({
-    dispatchStartAgainClick,
-    dispatchNewClick,
-    dispatchFindClick,
+    onClickStartAgain,
+    onNewClick,
+    onFindClick,
     selectedProgramId,
     classes,
     showResetButton,
@@ -59,7 +59,7 @@ const Index = ({
                     <div className={classes.startAgainContainer}>
                         <Button
                             dataTest="dhis2-capture-start-again-button"
-                            onClick={dispatchStartAgainClick}
+                            onClick={onClickStartAgain}
                             small
                             secondary
                         >
@@ -71,7 +71,7 @@ const Index = ({
             }
             <Button
                 dataTest="dhis2-capture-new-button"
-                onClick={dispatchNewClick}
+                onClick={onNewClick}
             >
                 <AddIcon className={classes.icon} />
                 <span className={classes.buttonMargin}>
@@ -86,7 +86,7 @@ const Index = ({
             <Button
                 dataTest="dhis2-capture-find-button"
                 className={classes.rightButton}
-                onClick={dispatchFindClick}
+                onClick={onFindClick}
                 color="primary"
             >
                 <SearchIcon className={classes.icon} />
