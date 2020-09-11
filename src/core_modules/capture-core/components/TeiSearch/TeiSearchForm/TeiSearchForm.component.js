@@ -160,7 +160,10 @@ class SearchForm extends React.Component<Props> {
                 <div
                     className={classes.searchButtonContainer}
                 >
-                    <Button onClick={this.handleSearchAttempt}>
+                    <Button
+                        dataTest={`dhis2-capture-relationship-tei-search-button-${id}`}
+                        onClick={this.handleSearchAttempt}
+                    >
                         {searchButtonText}
                     </Button>
                     {!searchGroup.unique && this.renderMinAttributesRequired()}

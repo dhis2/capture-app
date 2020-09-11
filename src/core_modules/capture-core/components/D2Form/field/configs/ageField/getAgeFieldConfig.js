@@ -2,7 +2,7 @@
 import { orientations } from '../../../../FormFields/New';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { AgeFieldForForm } from '../../Components';
-import MetaDataElement from '../../../../../metaData/DataElement/DataElement';
+import { DataElement as MetaDataElement } from '../../../../../metaData';
 
 const getCalendarAnchorPosition = (formHorizontal: ?boolean) => (formHorizontal ? 'center' : 'left');
 

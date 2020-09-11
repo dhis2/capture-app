@@ -1,2 +1,2 @@
 // @flow
-export { default as App } from './App.component';
+export { App } from './App.component';

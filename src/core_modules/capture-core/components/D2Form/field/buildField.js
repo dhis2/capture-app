@@ -1,7 +1,7 @@
 // @flow
 import getDefaultFormField from './defaultFormFieldGetter';
 import getCustomFormField from './customFormFieldGetter';
-import MetaDataElement from '../../../metaData/DataElement/DataElement';
+import { DataElement as MetaDataElement } from '../../../metaData';
 
 // $FlowFixMe[cannot-resolve-name] automated comment
 export default function buildField(metaData: MetaDataElement, options: Object, useCustomFormFields: boolean): ?Field {

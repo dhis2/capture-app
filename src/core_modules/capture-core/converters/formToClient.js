@@ -91,8 +91,6 @@ const valueConvertersForType = {
     [elementTypes.BOOLEAN]: (d2Value: string) => (d2Value === 'true'),
     // $FlowFixMe[prop-missing] automated comment
     [elementTypes.AGE]: convertAge,
-    // $FlowFixMe[prop-missing] automated comment
-    [elementTypes.USERNAME]: (user: UserFormValue) => user.username,
 };
 
 export function convertValue(value: any, type: $Values<typeof elementTypes>) {
