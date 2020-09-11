@@ -34,7 +34,7 @@ type Props = {
     classes: Object,
 };
 
-class FeedbackBar extends React.Component<Props> {
+class Index extends React.Component<Props> {
     static defaultProps = {
         feedback: {},
     };
@@ -45,13 +45,13 @@ class FeedbackBar extends React.Component<Props> {
     }
     static CLICKAWAY_KEY = 'clickaway';
 
-    static ANCHOR_ORIGION = {
+    static ANCHOR_ORIGIN = {
         vertical: 'bottom',
         horizontal: 'center',
     };
 
     handleClose = (event?: ?Object, reason?: ?string) => {
-        if (reason !== FeedbackBar.CLICKAWAY_KEY) {
+        if (reason !== Index.CLICKAWAY_KEY) {
             this.props.onClose();
         }
     }
@@ -98,7 +98,7 @@ class FeedbackBar extends React.Component<Props> {
             <React.Fragment>
                 <SnackBar
                     open={isSnackBarOpen}
-                    anchorOrigin={FeedbackBar.ANCHOR_ORIGION}
+                    anchorOrigin={Index.ANCHOR_ORIGIN}
                     autoHideDuration={5000}
                     onClose={this.handleClose}
                     // $FlowFixMe[incompatible-type] automated comment
@@ -128,5 +128,6 @@ class FeedbackBar extends React.Component<Props> {
         );
     }
 }
+Index.displayName = 'FeedbackBar';
 
-export default withStyles(styles)(FeedbackBar);
+export const FeedbackBarComponent = withStyles(styles)(Index);

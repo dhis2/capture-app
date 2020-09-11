@@ -2,7 +2,7 @@
 import { moment } from 'capture-core-utils/moment';
 import { createFieldConfig, createProps } from '../base/configBaseDefaultForm';
 import { DateFieldForForm } from '../../Components';
-import { DateDataElement } from '../../../../../metaData';
+import type { DateDataElement } from '../../../../../metaData';
 
 const getCalendarAnchorPosition = (formHorizontal: ?boolean) => (formHorizontal ? 'center' : 'left');
 

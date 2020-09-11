@@ -6,7 +6,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 import { Button } from '../../../../../Buttons';
 import CardList from '../../../../../CardList/CardList.component';
-import { DataElement } from '../../../../../../metaData';
+import type { DataElement } from '../../../../../../metaData';
 
 type Props = {
     attributeValues: {[id: string]: any},

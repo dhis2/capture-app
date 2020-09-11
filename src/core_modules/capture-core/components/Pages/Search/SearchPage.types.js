@@ -1,7 +1,7 @@
 // @flow
 import type { RenderFoundation } from '../../../metaData';
 
-export type SearchGroup = Array<{|
+export type SearchGroups = Array<{|
   +searchForm: RenderFoundation,
   +unique: boolean,
   +formId: string,
@@ -18,7 +18,7 @@ export type AvailableSearchOptions = $ReadOnly<{
     [elementId: string]: {|
       +searchOptionId: string,
       +searchOptionName: string,
-      +searchGroups: SearchGroup |}
+      +searchGroups: SearchGroups |}
   }>
 
 export type TrackedEntityTypesWithCorrelatedPrograms = $ReadOnly<{

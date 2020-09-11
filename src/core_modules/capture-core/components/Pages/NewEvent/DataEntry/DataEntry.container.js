@@ -20,7 +20,7 @@ import {
 import {
     makeProgramNameSelector,
 } from './dataEntry.selectors';
-import RenderFoundation from '../../../../metaData/RenderFoundation/RenderFoundation';
+import { RenderFoundation } from '../../../../metaData';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';
 import withErrorMessageHandler from '../../../../HOC/withErrorMessageHandler';
 import saveTypes from './newEventSaveTypes';

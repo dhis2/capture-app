@@ -1,2 +1,2 @@
 // @flow
-export { default as TrackerProgramHandler } from './TrackerProgramHandler.container';
+export { TrackerProgramHandler } from './TrackerProgramHandler.container';

@@ -1,5 +1,5 @@
 // @flow
-import type { SearchGroup } from '../SearchPage.types';
+import type { SearchGroups } from '../SearchPage.types';
 
 export type CurrentSearchTerms = Array<{|
   +name: string,
@@ -7,8 +7,14 @@ export type CurrentSearchTerms = Array<{|
   +id: string,
 |}>
 
+export type FormsValues = {
+    [formIdentifier: string]: {
+      [formElement: string]: Object
+    }
+  }
+
 export type OwnProps = {|
-  +searchGroupForSelectedScope: SearchGroup,
+  +searchGroupsForSelectedScope: SearchGroups,
   +selectedSearchScopeId?: string,
   +classes: Object,
 |}
@@ -19,9 +25,9 @@ export type PropsFromRedux ={|
       loadNr: number
     }
   },
+  +formsValues: FormsValues,
   +searchStatus: string,
   +isSearchViaAttributesValid: (minAttributesRequiredToSearch: number, formId: string)=> boolean,
-  +currentSearchTerms: CurrentSearchTerms
 |}
 
 export type DispatchersFromRedux = {|

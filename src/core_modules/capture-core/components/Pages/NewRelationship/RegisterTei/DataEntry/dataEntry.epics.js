@@ -1,5 +1,7 @@
 // @flow
-import { fromPromise } from 'rxjs/observable/fromPromise';
+import { from } from 'rxjs';
+import { ofType } from 'redux-observable';
+import { takeUntil, switchMap } from 'rxjs/operators';
 import log from 'loglevel';
 import i18n from '@dhis2/d2-i18n';
 import { errorCreator } from 'capture-core-utils';
@@ -19,15 +21,14 @@ import {
 } from '../../../../../metaData';
 
 export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObservable, store: ReduxStore) =>
-
-    // $FlowFixMe[prop-missing] automated comment
-    action$.ofType(
-        registrationSectionActionTypes.PROGRAM_CHANGE,
-        registrationSectionActionTypes.ORG_UNIT_CHANGE,
-        registrationSectionActionTypes.PROGRAM_FILTER_CLEAR,
-    )
-        .switchMap(() => {
-            const state = store.getState();
+    action$.pipe(
+        ofType(
+            registrationSectionActionTypes.PROGRAM_CHANGE,
+            registrationSectionActionTypes.ORG_UNIT_CHANGE,
+            registrationSectionActionTypes.PROGRAM_FILTER_CLEAR,
+        ),
+        switchMap(() => {
+            const state = store.value;
             const { programId, orgUnit } = state.newRelationshipRegisterTei;
             const TETTypeId = state.newRelationship.selectedRelationshipType.to.trackedEntityTypeId;
 
@@ -52,9 +53,9 @@ export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObserv
                     state.generatedUniqueValuesCache[DATA_ENTRY_ID],
                 );
 
-                return fromPromise(openEnrollmentPromise)
-                    // $FlowFixMe[prop-missing] automated comment
-                    .takeUntil(action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE));
+                return from(openEnrollmentPromise).pipe(
+                    takeUntil(action$.pipe(ofType(newRelationshipActionTypes.SELECT_FIND_MODE))),
+                );
             }
 
             if (orgUnit) {
@@ -76,10 +77,10 @@ export const openNewRelationshipRegisterTeiDataEntryEpic = (action$: InputObserv
                     state.generatedUniqueValuesCache[DATA_ENTRY_ID],
                 );
 
-                return fromPromise(openTeiPromise)
-                    // $FlowFixMe[prop-missing] automated comment
-                    .takeUntil(action$.ofType(newRelationshipActionTypes.SELECT_FIND_MODE));
+                return from(openTeiPromise).pipe(
+                    takeUntil(action$.pipe(ofType(newRelationshipActionTypes.SELECT_FIND_MODE))),
+                );
             }
 
             return Promise.resolve(openDataEntryCancelled());
-        });
+        }));

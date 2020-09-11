@@ -84,7 +84,10 @@ class ActionButtons extends Component<Props> {
                     dataTest="dhis2-capture-new-button"
                     onClick={this.handleNewClick}
                 >
-                    <AddIcon className={classes.icon} />
+                    <AddIcon
+                        data-test="dhis2-capture-new-event-button"
+                        className={classes.icon}
+                    />
                     {this.getButtonText()}
                 </Button>
                 {/* Find button to be included when find(tracked entity instance)

@@ -1,6 +1,6 @@
 // @flow
 /* eslint-disable no-underscore-dangle */
-import { SystemSettings } from '../../metaData';
+import type { SystemSettings } from '../../metaData';
 
 class SystemSettingsStore {
     _systemSettings: SystemSettings;

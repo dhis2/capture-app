@@ -48,11 +48,11 @@ const Index = ({
     addFormIdToReduxStore,
     selectedSearchScopeId,
     classes,
-    searchGroupForSelectedScope,
+    searchGroupsForSelectedScope,
     forms,
+    formsValues,
     searchStatus,
     isSearchViaAttributesValid,
-    currentSearchTerms,
 }: Props) => {
     const [error, setError] = useState(false);
     const [expandedFormId, setExpandedFormId] = useState(null);
@@ -84,7 +84,7 @@ const Index = ({
                     setExpandedFormId(formId);
                 }
             });
-    }, [searchGroupForSelectedScope, expandedFormId]);
+    }, [searchGroupsForSelectedScope, expandedFormId]);
 
     return useMemo(() => {
         const formReference = {};
@@ -111,7 +111,7 @@ const Index = ({
 
             if (isValid) {
                 setError(false);
-                saveCurrentFormData(searchScopeType, searchScopeId, formId, currentSearchTerms);
+                saveCurrentFormData(searchScopeType, searchScopeId, formId, formsValues);
                 switch (searchScopeType) {
                 case searchScopes.PROGRAM:
                     searchViaAttributesOnScopeProgram({ programId: searchScopeId, formId });
@@ -133,7 +133,7 @@ const Index = ({
             </div>);
         return (<>
             {
-                searchGroupForSelectedScope
+                searchGroupsForSelectedScope
                     .filter(searchGroup => searchGroup.unique)
                     .map(({ searchForm, formId, searchScope }) => {
                         const isSearchSectionCollapsed = !(expandedFormId === formId);
@@ -189,7 +189,7 @@ const Index = ({
             }
 
             {
-                searchGroupForSelectedScope
+                searchGroupsForSelectedScope
                     .filter(searchGroup => !searchGroup.unique)
                     .map(({ searchForm, formId, searchScope, minAttributesRequiredToSearch }) => {
                         const searchByText = i18n.t('Search by attributes');
@@ -214,6 +214,7 @@ const Index = ({
                                             {
                                                 forms[formId] &&
                                                 <Form
+                                                    formRef={(formInstance) => { formReference[formId] = formInstance; }}
                                                     formFoundation={searchForm}
                                                     id={formId}
                                                 />
@@ -255,20 +256,19 @@ const Index = ({
         classes.textInfo,
         classes.textError,
         forms,
-        searchGroupForSelectedScope,
-        selectedSearchScopeId,
-        searchStatus,
         searchViaUniqueIdOnScopeTrackedEntityType,
         searchViaUniqueIdOnScopeProgram,
         searchViaAttributesOnScopeProgram,
         searchViaAttributesOnScopeTrackedEntityType,
+        searchGroupsForSelectedScope,
+        selectedSearchScopeId,
+        searchStatus,
         isSearchViaAttributesValid,
         saveCurrentFormData,
-        currentSearchTerms,
         error,
         expandedFormId,
+        formsValues,
     ]);
 };
-
 
 export const SearchFormComponent = withStyles(getStyles)(Index);

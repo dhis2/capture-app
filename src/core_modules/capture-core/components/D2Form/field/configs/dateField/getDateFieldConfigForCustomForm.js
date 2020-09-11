@@ -2,7 +2,7 @@
 import { moment } from 'capture-core-utils/moment';
 import { createFieldConfig, createProps } from '../base/configBaseCustomForm';
 import { DateFieldForCustomForm } from '../../Components';
-import { DateDataElement } from '../../../../../metaData';
+import type { DateDataElement } from '../../../../../metaData';
 
 const getDateFieldConfig = (metaData: DateDataElement) => {
     const props = createProps({

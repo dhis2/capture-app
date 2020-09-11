@@ -1,6 +1,6 @@
 // @flow
 import i18n from '@dhis2/d2-i18n';
-import { DataElement } from '../metaData';
+import type { DataElement } from '../metaData';
 import { convertClientToView } from '../converters';
 
 const DEFAULT_NAME = i18n.t('tracked entity instance');
