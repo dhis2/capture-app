@@ -61,7 +61,6 @@ const Index = ({
     availableSearchOptions,
     preselectedProgram,
     searchStatus,
-    generalPurposeErrorMessage,
 }: Props) => {
     const [selectedSearchScope, setSelectedSearchScope] = useState(() => preselectedProgram);
 
@@ -147,7 +146,7 @@ const Index = ({
                             data-test="dhis2-capture-general-purpose-error-mesage"
                             className={classes.generalPurposeErrorMessage}
                         >
-                            {i18n.t(generalPurposeErrorMessage)}
+                            {i18n.t('There is a problem with this search, please change the search terms or try again later. For more details open the Console tab of the Developer tools')}
                         </div>
                     }
                 </div>

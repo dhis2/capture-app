@@ -122,8 +122,6 @@ export const SearchPage: ComponentType<{||}> = () => {
 
     const searchStatus: string =
       useSelector(({ searchPage }) => searchPage.searchStatus);
-    const generalPurposeErrorMessage: string =
-      useSelector(({ searchPage }) => searchPage.generalPurposeErrorMessage);
     const error: boolean =
       useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
     const ready: boolean =
@@ -138,7 +136,6 @@ export const SearchPage: ComponentType<{||}> = () => {
             availableSearchOptions={availableSearchOptions}
             preselectedProgram={preselectedProgram}
             searchStatus={searchStatus}
-            generalPurposeErrorMessage={generalPurposeErrorMessage}
             error={error}
             ready={ready}
         />);
