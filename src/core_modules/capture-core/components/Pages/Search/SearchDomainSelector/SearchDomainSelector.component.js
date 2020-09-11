@@ -84,4 +84,4 @@ export const Index =
       </Section>
       );
 
-export const SearchDomainSelector = withStyles(styles)(Index);
+export const SearchDomainSelectorComponent = withStyles(styles)(Index);

@@ -20,7 +20,7 @@ import { searchPageStatus } from '../../../reducers/descriptions/searchPage.redu
 import { SearchForm } from './SearchForm';
 import { LoadingMask } from '../../LoadingMasks';
 import { SearchResults } from './SearchResults/SearchResults.container';
-import { SearchDomainSelector } from './SearchDomainSelector';
+import { SearchDomainSelectorComponent } from './SearchDomainSelector';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 
 export const searchScopes = {
@@ -102,7 +102,7 @@ const Index = ({
 
             <Paper className={classes.paper}>
                 <div className={classes.maxWidth}>
-                    <SearchDomainSelector
+                    <SearchDomainSelectorComponent
                         trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
                         onSelect={handleSearchScopeSelection}
                         selectedSearchScope={selectedSearchScope}
