@@ -137,8 +137,6 @@ class SearchGroupFactory {
             );
         }
 
-        await Promise.resolve();
-
         return element;
     }
 
