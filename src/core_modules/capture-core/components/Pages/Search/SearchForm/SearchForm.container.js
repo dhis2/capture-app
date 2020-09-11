@@ -1,9 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 import type { ComponentType } from 'react';
-import { compose } from 'redux';
-import { withStyles } from '@material-ui/core';
-import { getStyles, SearchFormComponent } from './SearchForm.component';
+import { SearchFormComponent } from './SearchForm.component';
 import type { CurrentSearchTerms, DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './SearchForm.types';
 import {
     searchPageActionTypes,
@@ -97,7 +95,4 @@ const mapDispatchToProps = (dispatch: ReduxDispatch, ownProps: OwnProps): Dispat
 
 
 export const SearchForm: ComponentType<OwnProps> =
-  compose(
-      connect<Props, OwnProps & CssClasses, _, _, _, _>(mapStateToProps, mapDispatchToProps),
-      withStyles(getStyles),
-  )(SearchFormComponent);
+  connect<Props, OwnProps, _, _, _, _>(mapStateToProps, mapDispatchToProps)(SearchFormComponent);

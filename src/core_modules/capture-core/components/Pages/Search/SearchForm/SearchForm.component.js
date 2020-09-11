@@ -1,5 +1,6 @@
 // @flow
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { type ComponentType, useEffect, useMemo, useState } from 'react';
+import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui-core';
 import Form from '../../../D2Form/D2Form.component';
@@ -8,7 +9,7 @@ import { Section, SectionHeaderSimple } from '../../../Section';
 import type { Props } from './SearchForm.types';
 import { searchPageStatus } from '../../../../reducers/descriptions/searchPage.reducerDescription';
 
-export const getStyles = (theme: Theme) => ({
+const getStyles = (theme: Theme) => ({
     searchDomainSelectorSection: {
         margin: theme.typography.pxToRem(10),
     },
@@ -38,7 +39,7 @@ export const getStyles = (theme: Theme) => ({
     },
 });
 
-export const SearchFormComponent = ({
+const SearchFormIndex = ({
     searchViaUniqueIdOnScopeTrackedEntityType,
     searchViaUniqueIdOnScopeProgram,
     searchViaAttributesOnScopeProgram,
@@ -274,3 +275,5 @@ export const SearchFormComponent = ({
         formsValues,
     ]);
 };
+
+export const SearchFormComponent: ComponentType<Props> = withStyles(getStyles)(SearchFormIndex);
