@@ -1,6 +1,6 @@
 // @flow
 import { connect } from 'react-redux';
-import TrackerProgramHandler from './TrackerProgramHandler.component';
+import { TrackerProgramHandlerComponent } from './TrackerProgramHandler.component';
 
 const mapStateToProps = (state: ReduxState) => ({
     programId: state.currentSelections.programId,
@@ -9,4 +9,4 @@ const mapStateToProps = (state: ReduxState) => ({
 
 // $FlowSuppress
 // $FlowFixMe[missing-annot] automated comment
-export default connect(mapStateToProps, () => ({}))(TrackerProgramHandler);
+export const TrackerProgramHandler = connect(mapStateToProps, () => ({}))(TrackerProgramHandlerComponent);

@@ -16,9 +16,11 @@ import {
     Section,
     Enrollment,
     CustomForm,
+    InputSearchGroup,
+} from '../../../../metaData';
+import type {
     TrackedEntityType,
     SearchGroup,
-    InputSearchGroup,
 } from '../../../../metaData';
 import DataElementFactory from './DataElementFactory';
 import { getApi } from '../../../../d2/d2Instance';

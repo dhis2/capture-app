@@ -1,14 +1,15 @@
 // @flow
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { type ComponentType, useEffect, useMemo, useState } from 'react';
+import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui-core';
 import Form from '../../../D2Form/D2Form.component';
-import { searchScopes } from '../SearchPage.component';
+import { searchScopes } from '../SearchPage.constants';
 import { Section, SectionHeaderSimple } from '../../../Section';
 import type { Props } from './SearchForm.types';
 import { searchPageStatus } from '../../../../reducers/descriptions/searchPage.reducerDescription';
 
-export const getStyles = (theme: Theme) => ({
+const getStyles = (theme: Theme) => ({
     searchDomainSelectorSection: {
         margin: theme.typography.pxToRem(10),
     },
@@ -38,7 +39,7 @@ export const getStyles = (theme: Theme) => ({
     },
 });
 
-export const SearchFormComponent = ({
+const SearchFormIndex = ({
     searchViaUniqueIdOnScopeTrackedEntityType,
     searchViaUniqueIdOnScopeProgram,
     searchViaAttributesOnScopeProgram,
@@ -47,12 +48,12 @@ export const SearchFormComponent = ({
     addFormIdToReduxStore,
     selectedSearchScopeId,
     classes,
-    searchGroupForSelectedScope,
+    searchGroupsForSelectedScope,
     forms,
+    formsValues,
     searchStatus,
     isSearchViaAttributesValid,
-    currentSearchTerms,
-}: Props) => {
+}: Props & CssClasses) => {
     const [error, setError] = useState(false);
     const [expandedFormId, setExpandedFormId] = useState(null);
 
@@ -66,24 +67,24 @@ export const SearchFormComponent = ({
     useEffect(() => {
         // in order for the Form component to render
         // a formId under the `forms` reducer needs to be added.
-        searchGroupForSelectedScope
+        searchGroupsForSelectedScope
             .forEach(({ formId }) => {
                 addFormIdToReduxStore(formId);
             });
     },
     [
-        searchGroupForSelectedScope,
+        searchGroupsForSelectedScope,
         addFormIdToReduxStore,
     ]);
 
     useEffect(() => {
-        searchGroupForSelectedScope
+        searchGroupsForSelectedScope
             .forEach(({ formId }, index) => {
                 if (!expandedFormId && index === 0) {
                     setExpandedFormId(formId);
                 }
             });
-    }, [searchGroupForSelectedScope, expandedFormId]);
+    }, [searchGroupsForSelectedScope, expandedFormId]);
 
     return useMemo(() => {
         const formReference = {};
@@ -110,7 +111,7 @@ export const SearchFormComponent = ({
 
             if (isValid) {
                 setError(false);
-                saveCurrentFormData(searchScopeType, searchScopeId, formId, currentSearchTerms);
+                saveCurrentFormData(searchScopeType, searchScopeId, formId, formsValues);
                 switch (searchScopeType) {
                 case searchScopes.PROGRAM:
                     searchViaAttributesOnScopeProgram({ programId: searchScopeId, formId });
@@ -137,7 +138,7 @@ export const SearchFormComponent = ({
             </div>);
         return (<>
             {
-                searchGroupForSelectedScope
+                searchGroupsForSelectedScope
                     .filter(searchGroup => searchGroup.unique)
                     .map(({ searchForm, formId, searchScope }) => {
                         const isSearchSectionCollapsed = !(expandedFormId === formId);
@@ -193,7 +194,7 @@ export const SearchFormComponent = ({
             }
 
             {
-                searchGroupForSelectedScope
+                searchGroupsForSelectedScope
                     .filter(searchGroup => !searchGroup.unique)
                     .map(({ searchForm, formId, searchScope, minAttributesRequiredToSearch }) => {
                         const searchByText = i18n.t('Search by attributes');
@@ -218,6 +219,7 @@ export const SearchFormComponent = ({
                                             {
                                                 forms[formId] &&
                                                 <Form
+                                                    formRef={(formInstance) => { formReference[formId] = formInstance; }}
                                                     formFoundation={searchForm}
                                                     id={formId}
                                                 />
@@ -259,17 +261,19 @@ export const SearchFormComponent = ({
         classes.textInfo,
         classes.textError,
         forms,
-        searchGroupForSelectedScope,
-        selectedSearchScopeId,
-        searchStatus,
         searchViaUniqueIdOnScopeTrackedEntityType,
         searchViaUniqueIdOnScopeProgram,
         searchViaAttributesOnScopeProgram,
         searchViaAttributesOnScopeTrackedEntityType,
+        searchGroupsForSelectedScope,
+        selectedSearchScopeId,
+        searchStatus,
         isSearchViaAttributesValid,
         saveCurrentFormData,
-        currentSearchTerms,
         error,
         expandedFormId,
+        formsValues,
     ]);
 };
+
+export const SearchFormComponent: ComponentType<Props> = withStyles(getStyles)(SearchFormIndex);

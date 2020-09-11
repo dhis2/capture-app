@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { withTheme } from '@material-ui/core/styles';
-import { Enrollment, RenderFoundation } from '../../../../../metaData';
+import type { Enrollment, RenderFoundation } from '../../../../../metaData';
 import ConfiguredEnrollment from './ConfiguredEnrollment.component';
 import { DATA_ENTRY_ID } from '../registerTei.const';
 import enrollmentClasses from './enrollment.module.css';

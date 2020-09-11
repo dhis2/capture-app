@@ -3,7 +3,7 @@ import * as React from 'react';
 import i18n from '@dhis2/d2-i18n';
 import log from 'loglevel';
 import { errorCreator, makeCancelablePromise } from 'capture-core-utils';
-import { Category as CategoryMetadata } from '../../../../metaData';
+import type { Category as CategoryMetadata } from '../../../../metaData';
 import VirtualizedSelect from '../../../FormFields/Options/SelectVirtualizedV2/OptionsSelectVirtualized.component';
 import { buildCategoryOptionsAsync } from '../../../../metaDataMemoryStoreBuilders';
 import withLoadingIndicator from '../../../../HOC/withLoadingIndicator';

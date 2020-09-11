@@ -1,5 +1,5 @@
 import React from 'react';
-import { getInstance } from 'd2/lib/d2';
+import { getInstance } from 'd2';
 import Tree from './Tree';
 
 export default class OrgUnitTree extends React.Component {
@@ -8,11 +8,11 @@ export default class OrgUnitTree extends React.Component {
       selected: this.props.value,
   }
 
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
       await this.fetchRoot();
   }
 
-  componentWillReceiveProps({ value }) {
+  UNSAFE_componentWillReceiveProps({ value }) {
       this.setState({ selected: value });
   }
 
