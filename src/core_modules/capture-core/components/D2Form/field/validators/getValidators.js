@@ -27,7 +27,8 @@ import {
     getDateTimeRangeValidator,
     getTimeRangeValidator,
 } from '../../../../utils/validators/form';
-import { DataElement, DateDataElement, dataElementTypes as elementTypes } from '../../../../metaData';
+import type { DataElement, DateDataElement } from '../../../../metaData';
+import { dataElementTypes as elementTypes } from '../../../../metaData';
 import { validatorTypes } from './constants';
 
 type Validator = (value: any) => Promise<boolean> | boolean;

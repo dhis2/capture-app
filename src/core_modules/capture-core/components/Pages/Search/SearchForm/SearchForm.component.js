@@ -1,14 +1,15 @@
 // @flow
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { type ComponentType, useEffect, useMemo, useState } from 'react';
+import { withStyles } from '@material-ui/core';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui-core';
 import { D2Form } from '../../../D2Form';
-import { searchScopes } from '../SearchPage.component';
+import { searchScopes } from '../SearchPage.constants';
 import { Section, SectionHeaderSimple } from '../../../Section';
 import type { Props } from './SearchForm.types';
 import { searchPageStatus } from '../../../../reducers/descriptions/searchPage.reducerDescription';
 
-export const getStyles = (theme: Theme) => ({
+const getStyles = (theme: Theme) => ({
     searchDomainSelectorSection: {
         margin: theme.typography.pxToRem(10),
     },
@@ -68,7 +69,7 @@ const useFormDataLifecycle = (
         removeFormDataFromReduxStore,
     ]);
 
-export const SearchFormComponent = ({
+const SearchFormIndex = ({
     searchViaUniqueIdOnScopeTrackedEntityType,
     searchViaUniqueIdOnScopeProgram,
     searchViaAttributesOnScopeProgram,
@@ -81,8 +82,7 @@ export const SearchFormComponent = ({
     searchGroupForSelectedScope,
     searchStatus,
     isSearchViaAttributesValid,
-    currentSearchTerms,
-}: Props) => {
+}: Props & CssClasses) => {
     useFormDataLifecycle(searchGroupForSelectedScope, addFormIdToReduxStore, removeFormDataFromReduxStore);
 
     const [error, setError] = useState(false);
@@ -102,7 +102,7 @@ export const SearchFormComponent = ({
                     setExpandedFormId(formId);
                 }
             });
-    }, [searchGroupForSelectedScope, expandedFormId]);
+    }, [searchGroupsForSelectedScope, expandedFormId]);
 
     return useMemo(() => {
         const formReference = {};
@@ -129,7 +129,7 @@ export const SearchFormComponent = ({
 
             if (isValid) {
                 setError(false);
-                saveCurrentFormData(searchScopeType, searchScopeId, formId, currentSearchTerms);
+                saveCurrentFormData(searchScopeType, searchScopeId, formId, formsValues);
                 switch (searchScopeType) {
                 case searchScopes.PROGRAM:
                     searchViaAttributesOnScopeProgram({ programId: searchScopeId, formId });
@@ -156,7 +156,7 @@ export const SearchFormComponent = ({
             </div>);
         return (<>
             {
-                searchGroupForSelectedScope
+                searchGroupsForSelectedScope
                     .filter(searchGroup => searchGroup.unique)
                     .map(({ searchForm, formId, searchScope }) => {
                         const isSearchSectionCollapsed = !(expandedFormId === formId);
@@ -209,7 +209,7 @@ export const SearchFormComponent = ({
             }
 
             {
-                searchGroupForSelectedScope
+                searchGroupsForSelectedScope
                     .filter(searchGroup => !searchGroup.unique)
                     .map(({ searchForm, formId, searchScope, minAttributesRequiredToSearch }) => {
                         const searchByText = i18n.t('Search by attributes');
@@ -232,6 +232,7 @@ export const SearchFormComponent = ({
                                     <div className={classes.searchRow}>
                                         <div className={classes.searchRowSelectElement}>
                                             <D2Form
+                                                formRef={(formInstance) => { formReference[formId] = formInstance; }}
                                                 formFoundation={searchForm}
                                                 id={formId}
                                             />
@@ -271,17 +272,22 @@ export const SearchFormComponent = ({
         classes.searchRow,
         classes.textInfo,
         classes.textError,
-        searchGroupForSelectedScope,
+        searchGroupsForSelectedScope,
         selectedSearchScopeId,
         searchStatus,
         searchViaUniqueIdOnScopeTrackedEntityType,
         searchViaUniqueIdOnScopeProgram,
         searchViaAttributesOnScopeProgram,
         searchViaAttributesOnScopeTrackedEntityType,
+        searchGroupsForSelectedScope,
+        selectedSearchScopeId,
+        searchStatus,
         isSearchViaAttributesValid,
         saveCurrentFormData,
-        currentSearchTerms,
         error,
         expandedFormId,
+        formsValues,
     ]);
 };
+
+export const SearchFormComponent: ComponentType<Props> = withStyles(getStyles)(SearchFormIndex);

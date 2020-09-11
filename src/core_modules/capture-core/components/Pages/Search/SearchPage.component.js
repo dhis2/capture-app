@@ -23,11 +23,6 @@ import { SearchResults } from './SearchResults/SearchResults.container';
 import { SearchDomainSelector } from './SearchDomainSelector';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 
-export const searchScopes = {
-    PROGRAM: 'PROGRAM',
-    TRACKED_ENTITY_TYPE: 'TRACKED_ENTITY_TYPE',
-};
-
 const getStyles = (theme: Theme) => ({
     maxWidth: {
         maxWidth: theme.typography.pxToRem(950),
@@ -66,7 +61,6 @@ const Index = ({
     availableSearchOptions,
     preselectedProgram,
     searchStatus,
-    generalPurposeErrorMessage,
 }: Props) => {
     const [selectedSearchScope, setSelectedSearchScope] = useState(() => preselectedProgram);
 
@@ -80,7 +74,7 @@ const Index = ({
         dispatchShowInitialSearchPage,
     ]);
 
-    const searchGroupForSelectedScope =
+    const searchGroupsForSelectedScope =
       (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
 
     const handleSearchScopeSelection = ({ value, label }) => {
@@ -110,12 +104,12 @@ const Index = ({
 
                     <SearchForm
                         selectedSearchScopeId={selectedSearchScope.value}
-                        searchGroupForSelectedScope={searchGroupForSelectedScope}
+                        searchGroupsForSelectedScope={searchGroupsForSelectedScope}
                     />
 
                     {
                         searchStatus === searchPageStatus.SHOW_RESULTS &&
-                        <SearchResults searchGroupForSelectedScope={searchGroupForSelectedScope} />
+                        <SearchResults searchGroupsForSelectedScope={searchGroupsForSelectedScope} />
                     }
 
                     {
@@ -152,7 +146,7 @@ const Index = ({
                             data-test="dhis2-capture-general-purpose-error-mesage"
                             className={classes.generalPurposeErrorMessage}
                         >
-                            {i18n.t(generalPurposeErrorMessage)}
+                            {i18n.t('There is a problem with this search, please change the search terms or try again later. For more details open the Console tab of the Developer tools')}
                         </div>
                     }
                 </div>

@@ -34,7 +34,7 @@ const getLoadingIndicator = (getContainerStylesFn?: ?(props: any) => Object, ful
     );
 };
 
-export default (
+export const withStateBoundLoadingIndicator = (
     isReadyFn: (state: ReduxState, props: any) => boolean,
     getContainerStylesFn?: ?(props: any) => Object,
     fullPage?: ?boolean,
