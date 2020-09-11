@@ -282,6 +282,7 @@ const SearchFormIndex = ({
         searchGroupsForSelectedScope,
         isSearchViaAttributesValid,
         saveCurrentFormData,
+        formsValues,
         error,
         expandedFormId,
     ]);
