@@ -22,6 +22,7 @@ import {
     lockedSelectorActionTypes,
 } from '../../components/LockedSelector';
 import { viewEventPageActionTypes } from '../../components/Pages/ViewEvent/ViewEventPage.actions';
+import { searchPageActionTypes } from '../../components/Pages/Search/SearchPage.actions';
 
 const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 const OFFLINE_STATUS_CHANGED = 'Offline/STATUS_CHANGED';
@@ -152,11 +153,6 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
         page: 'newEvent',
         locationSwitchInProgress: true,
     }),
-    [lockedSelectorActionTypes.SEARCH_PAGE_OPEN]: state => ({
-        ...state,
-        page: 'search',
-        locationSwitchInProgress: true,
-    }),
     [lockedSelectorActionTypes.ORG_UNIT_ID_RESET]: state => ({
         ...state,
         locationSwitchInProgress: true,
@@ -172,5 +168,15 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     [viewEventPageActionTypes.PROGRAM_ID_CUSTOM_RESET]: state => ({
         ...state,
         page: null,
+    }),
+    [searchPageActionTypes.TO_MAIN_PAGE_NAVIGATE]: state => ({
+        ...state,
+        page: 'search',
+        locationSwitchInProgress: true,
+    }),
+    [lockedSelectorActionTypes.SEARCH_PAGE_OPEN]: state => ({
+        ...state,
+        page: 'search',
+        locationSwitchInProgress: true,
     }),
 }, 'app');
