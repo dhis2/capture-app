@@ -171,7 +171,7 @@ export const getAppReducerDesc = (appUpdaters: Updaters) => createReducerDescrip
     }),
     [searchPageActionTypes.TO_MAIN_PAGE_NAVIGATE]: state => ({
         ...state,
-        page: 'search',
+        page: null,
         locationSwitchInProgress: true,
     }),
     [lockedSelectorActionTypes.SEARCH_PAGE_OPEN]: state => ({
