@@ -4,7 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import i18n from '@dhis2/d2-i18n';
 import { Button } from '@dhis2/ui-core';
 import Form from '../../../D2Form/D2Form.component';
-import { searchScopes } from '../SearchPage.component';
+import { searchScopes } from '../SearchPage.constants';
 import { Section, SectionHeaderSimple } from '../../../Section';
 import type { Props } from './SearchForm.types';
 import { searchPageStatus } from '../../../../reducers/descriptions/searchPage.reducerDescription';
@@ -67,18 +67,18 @@ const Index = ({
     useEffect(() => {
         // in order for the Form component to render
         // a formId under the `forms` reducer needs to be added.
-        searchGroupForSelectedScope
+        searchGroupsForSelectedScope
             .forEach(({ formId }) => {
                 addFormIdToReduxStore(formId);
             });
     },
     [
-        searchGroupForSelectedScope,
+        searchGroupsForSelectedScope,
         addFormIdToReduxStore,
     ]);
 
     useEffect(() => {
-        searchGroupForSelectedScope
+        searchGroupsForSelectedScope
             .forEach(({ formId }, index) => {
                 if (!expandedFormId && index === 0) {
                     setExpandedFormId(formId);

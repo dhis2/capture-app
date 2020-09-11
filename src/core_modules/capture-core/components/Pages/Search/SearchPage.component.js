@@ -23,11 +23,6 @@ import { SearchResults } from './SearchResults/SearchResults.container';
 import { SearchDomainSelectorComponent } from './SearchDomainSelector';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 
-export const searchScopes = {
-    PROGRAM: 'PROGRAM',
-    TRACKED_ENTITY_TYPE: 'TRACKED_ENTITY_TYPE',
-};
-
 const getStyles = (theme: Theme) => ({
     maxWidth: {
         maxWidth: theme.typography.pxToRem(950),

@@ -6,7 +6,7 @@ import { Pagination } from 'capture-ui';
 import { Button } from '@dhis2/ui-core';
 import CardList from '../../../CardList/CardList.component';
 import withNavigation from '../../../Pagination/withDefaultNavigation';
-import { searchScopes } from '../SearchPage.component';
+import { searchScopes } from '../SearchPage.constants';
 import type { Props } from './SearchResults.types';
 import { navigateToTrackedEntityDashboard } from '../sharedUtils';
 

@@ -2,12 +2,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useCallback, useMemo } from 'react';
 import type { ComponentType } from 'react';
-import { isEqual } from 'lodash';
-import { SearchPageComponent, searchScopes } from './SearchPage.component';
+import { SearchPageComponent } from './SearchPage.component';
 import type { AvailableSearchOptions, TrackedEntityTypesWithCorrelatedPrograms } from './SearchPage.types';
 import { navigateToMainPage, showInitialViewOnSearchPage } from './SearchPage.actions';
 import { programCollection } from '../../../metaDataMemoryStores';
 import { TrackerProgram } from '../../../metaData';
+import { searchScopes } from './SearchPage.constants';
 
 const buildSearchOption = (id, name, searchGroups, searchScope) => ({
     searchOptionId: id,
@@ -89,7 +89,7 @@ const useSearchOptions = (trackedEntityTypesWithCorrelatedPrograms): AvailableSe
 
 const usePreselectedProgram = (trackedEntityTypesWithCorrelatedPrograms) => {
     const currentSelectionsId =
-      useSelector(({ currentSelections }) => currentSelections.programId, isEqual);
+      useSelector(({ currentSelections }) => currentSelections.programId);
 
     return useMemo(() => {
         const preselection =
@@ -121,13 +121,13 @@ export const SearchPage: ComponentType<{||}> = () => {
     const preselectedProgram = usePreselectedProgram(trackedEntityTypesWithCorrelatedPrograms);
 
     const searchStatus: string =
-      useSelector(({ searchPage }) => searchPage.searchStatus, isEqual);
+      useSelector(({ searchPage }) => searchPage.searchStatus);
     const generalPurposeErrorMessage: string =
-      useSelector(({ searchPage }) => searchPage.generalPurposeErrorMessage, isEqual);
+      useSelector(({ searchPage }) => searchPage.generalPurposeErrorMessage);
     const error: boolean =
-      useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error, isEqual);
+      useSelector(({ activePage }) => activePage.selectionsError && activePage.selectionsError.error);
     const ready: boolean =
-      useSelector(({ activePage }) => !activePage.isLoading, isEqual);
+      useSelector(({ activePage }) => !activePage.isLoading);
 
 
     return (
