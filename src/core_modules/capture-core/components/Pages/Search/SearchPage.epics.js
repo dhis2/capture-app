@@ -3,6 +3,7 @@ import { ofType } from 'redux-observable';
 import { map } from 'rxjs/operators';
 import { push } from 'connected-react-router';
 import { searchPageActionTypes } from './SearchPage.actions';
+import { urlArguments } from '../../../utils/url';
 
 export const navigateBackToMainPageEpic = (action$: InputObservable, store: ReduxStore) =>
     action$.pipe(
