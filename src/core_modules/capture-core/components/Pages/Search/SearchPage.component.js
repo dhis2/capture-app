@@ -75,7 +75,7 @@ const Index = ({
         dispatchShowInitialSearchPage,
     ]);
 
-    const searchGroupForSelectedScope =
+    const searchGroupsForSelectedScope =
       (selectedSearchScope.value ? availableSearchOptions[selectedSearchScope.value].searchGroups : []);
 
     const handleSearchScopeSelection = (program) => {
@@ -105,12 +105,12 @@ const Index = ({
 
                     <SearchForm
                         selectedSearchScopeId={selectedSearchScope.value}
-                        searchGroupForSelectedScope={searchGroupForSelectedScope}
+                        searchGroupsForSelectedScope={searchGroupsForSelectedScope}
                     />
 
                     {
                         searchStatus === searchPageStatus.SHOW_RESULTS &&
-                        <SearchResults searchGroupForSelectedScope={searchGroupForSelectedScope} />
+                        <SearchResults searchGroupsForSelectedScope={searchGroupsForSelectedScope} />
                     }
 
                     {
