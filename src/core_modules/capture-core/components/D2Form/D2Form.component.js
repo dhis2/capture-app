@@ -1,5 +1,6 @@
 // @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
+import { withStyles } from '@material-ui/core';
 import log from 'loglevel';
 import { errorCreator } from 'capture-core-utils';
 import D2SectionContainer from './D2Section.container';
@@ -104,7 +105,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
     )
     renderVertical = (section: Section, passOnProps: any, classes: Object) => (
         <div
-            className={classes.containerCustomForm}
+            className={this.props.formFoundation.customForm ? classes.containerCustomForm : ''}
             key={section.id}
         >
             <D2SectionContainer
@@ -155,7 +156,7 @@ class D2Form extends React.PureComponent<PropsForPureComponent> {
     }
 }
 
-export const D2FormComponent = (props: Props) => {
+const D2FormWithRef = (props: Props) => {
     const { formRef, ...passOnProps } = props;
 
     const handleRef = (instance) => {
@@ -171,3 +172,5 @@ export const D2FormComponent = (props: Props) => {
         />
     );
 };
+
+export const D2FormComponent: ComponentType<Props> = withStyles(styles)(D2FormWithRef);
