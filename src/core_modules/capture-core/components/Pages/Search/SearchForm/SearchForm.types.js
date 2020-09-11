@@ -14,7 +14,7 @@ export type FormsValues = {
   }
 
 export type OwnProps = {|
-  +searchGroupsForSelectedScope: SearchGroup,
+  +searchGroupsForSelectedScope: SearchGroups,
   +selectedSearchScopeId: ?string,
 |}
 

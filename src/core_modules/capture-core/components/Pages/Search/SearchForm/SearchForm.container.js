@@ -4,7 +4,7 @@ import type { ComponentType } from 'react';
 import { compose } from 'redux';
 import { withStyles } from '@material-ui/core';
 import { getStyles, SearchFormComponent } from './SearchForm.component';
-import type { DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './SearchForm.types';
+import type { CurrentSearchTerms, DispatchersFromRedux, OwnProps, Props, PropsFromRedux } from './SearchForm.types';
 import {
     searchPageActionTypes,
     searchViaAttributesOnScopeProgram,

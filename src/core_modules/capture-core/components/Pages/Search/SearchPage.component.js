@@ -20,7 +20,7 @@ import { searchPageStatus } from '../../../reducers/descriptions/searchPage.redu
 import { SearchForm } from './SearchForm';
 import { LoadingMask } from '../../LoadingMasks';
 import { SearchResults } from './SearchResults/SearchResults.container';
-import { SearchDomainSelectorComponent } from './SearchDomainSelector';
+import { SearchDomainSelector } from './SearchDomainSelector';
 import { withErrorMessageHandler, withLoadingIndicator } from '../../../HOC';
 
 const getStyles = (theme: Theme) => ({
@@ -96,7 +96,7 @@ const Index = ({
 
             <Paper className={classes.paper}>
                 <div className={classes.maxWidth}>
-                    <SearchDomainSelectorComponent
+                    <SearchDomainSelector
                         trackedEntityTypesWithCorrelatedPrograms={trackedEntityTypesWithCorrelatedPrograms}
                         onSelect={handleSearchScopeSelection}
                         selectedSearchScope={selectedSearchScope}
